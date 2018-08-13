@@ -191,19 +191,19 @@ equation
   connect(openPlanOffice.Air_out, Air_out_Openplanoffice) annotation (Line(
         points={{54,5.76},{80,5.76},{80,6},{80,6},{80,80},{-80,80},{-80,40},{
           -100,40}}, color={0,127,255}));
-  connect(openPlanOffice.Air_in, Air_in_Openplanoffice) annotation (Line(points
-        ={{54,2.02},{68,2.02},{68,2},{80,2},{80,80},{-80,80},{-80,20},{-100,20}},
+  connect(openPlanOffice.Air_in, Air_in_Openplanoffice) annotation (Line(points=
+         {{54,2.02},{68,2.02},{68,2},{80,2},{80,80},{-80,80},{-80,20},{-100,20}},
         color={0,127,255}));
   connect(conferenceRoom.Air_out, Air_out_Conferenceroom) annotation (Line(
         points={{-16,-28.24},{-14,-28.24},{-14,-28},{0,-28},{0,0},{-100,0}},
         color={0,127,255}));
-  connect(conferenceRoom.Air_in, Air_in_Conferenceroom) annotation (Line(points
-        ={{-16,-31.98},{-12,-31.98},{-12,-32},{0,-32},{0,0},{-80,0},{-80,-20},{
+  connect(conferenceRoom.Air_in, Air_in_Conferenceroom) annotation (Line(points=
+         {{-16,-31.98},{-12,-31.98},{-12,-32},{0,-32},{0,0},{-80,0},{-80,-20},{
           -100,-20}}, color={0,127,255}));
-  connect(openPlanOffice.Heatport_TBA, Heatport_TBA_Openplanoffice) annotation
-    (Line(points={{54,9.16},{80,9.16},{80,-20},{100,-20}}, color={191,0,0}));
-  connect(conferenceRoom.Heatport_TBA, Heatport_TBA_ConferenceRoom) annotation
-    (Line(points={{-16,-24.84},{0,-24.84},{0,-26},{0,-26},{0,-80},{80,-80},{80,
+  connect(openPlanOffice.Heatport_TBA, Heatport_TBA_Openplanoffice) annotation (
+     Line(points={{54,9.16},{80,9.16},{80,-20},{100,-20}}, color={191,0,0}));
+  connect(conferenceRoom.Heatport_TBA, Heatport_TBA_ConferenceRoom) annotation (
+     Line(points={{-16,-24.84},{0,-24.84},{0,-26},{0,-26},{0,-80},{80,-80},{80,
           -40},{100,-40}}, color={191,0,0}));
   connect(multiPersonOffice.Heatport_TBA, Heatport_TBA_Multipersonoffice)
     annotation (Line(points={{-16.36,42.9},{0,42.9},{0,-80},{80,-80},{80,-60},{

@@ -28,9 +28,7 @@ model Full_Transfer_RLT
     pipe_insulation_thickness_cold=0.02,
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
-    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
     dpValve_nominal_hot=7000,
-    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
     dpValve_nominal_cold=10000)
                annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -81,8 +79,6 @@ model Full_Transfer_RLT
     pipe_insulation_thickness_cold=0.02,
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
-    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
-    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000)
               annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
@@ -108,9 +104,7 @@ model Full_Transfer_RLT
     V_mixing_cold=0.0001,
     v_nominal_hot=1.26,
     m_flow_nominal_hot=0.152,
-    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
     dpValve_nominal_hot=7000,
-    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
     dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
   RLT ConferenceRoom(
@@ -135,9 +129,7 @@ model Full_Transfer_RLT
     v_nominal_cold=1.542,
     m_flow_nominal_cold=0.192,
     pipe_wall_thickness_cold=0.0023,
-    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
     dpValve_nominal_hot=7000,
-    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
     dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
   RLT OpenPlanOffice(
@@ -162,8 +154,6 @@ model Full_Transfer_RLT
     pipe_insulation_thickness_cold=0.02,
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
-    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to8(),
-    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
@@ -189,9 +179,7 @@ model Full_Transfer_RLT
     pipe_insulation_thickness_cold=0.02,
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
-    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12(),
     dpValve_nominal_hot=7000,
-    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12(),
     dpValve_nominal_cold=10000)
               annotation (Placement(transformation(extent={{-66,72},{-46,52}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[5]
@@ -199,26 +187,26 @@ model Full_Transfer_RLT
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{82,-50},{122,-10}})));
 equation
-  connect(Air_in, Central.Air_in) annotation (Line(points={{-40,100},{-40,80},{
-          -74,80},{-74,80},{-74,68},{-66,68},{-66,68},{-66,68},{-65.8,68},{
-          -65.8,68.6}},            color={0,127,255}));
+  connect(Air_in, Central.Air_in) annotation (Line(points={{-40,100},{-40,80},{-74,
+          80},{-74,80},{-74,68},{-66,68},{-66,68},{-66,68},{-69,68},{-69,68.6}},
+                                   color={0,127,255}));
   connect(Central.Air_out, OpenPlanOffice.Air_in) annotation (Line(points={{-46,
-          68.6},{-9.8,68.6}},                        color={0,127,255}));
-  connect(ConferenceRoom.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{46.2,
-          68.6},{40,68.6},{40,74},{-16,74},{-16,68.6},{-9.8,68.6}},
+          68.6},{-13,68.6}},                         color={0,127,255}));
+  connect(ConferenceRoom.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{43,68.6},
+          {40,68.6},{40,74},{-16,74},{-16,68.6},{-13,68.6}},
         color={0,127,255}));
   connect(MultiPersonOffice.Air_in, OpenPlanOffice.Air_in) annotation (Line(
-        points={{-65.8,-69.4},{-65.8,-70},{-70,-70},{-70,-60},{-70,-60},{-16,
-          -60},{-16,68},{-16,68},{-16,68},{-16,68},{-16,68},{-16,68},{-16,68},{
-          -16,68},{-16,68},{-16,68.6},{-12,68.6},{-9.8,68.6}},
+        points={{-69,-69.4},{-69,-70},{-70,-70},{-70,-60},{-70,-60},{-16,-60},{-16,
+          68},{-16,68},{-16,68},{-16,68},{-16,68},{-16,68},{-16,68},{-16,68},{-16,
+          68},{-16,68.6},{-13,68.6},{-13,68.6}},
         color={0,127,255}));
-  connect(Canteen.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{-9.8,
-          -69.4},{-16,-69.4},{-16,-70},{-16,-70},{-16,68},{-16,68},{-16,68},{
-          -16,68},{-16,68.6},{-9.8,68.6}},                           color={0,
+  connect(Canteen.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{-13,-69.4},
+          {-16,-69.4},{-16,-70},{-16,-70},{-16,68},{-16,68},{-16,68},{-16,68},{-16,
+          68.6},{-13,68.6}},                                         color={0,
           127,255}));
-  connect(Workshop.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{44.2,
-          -69.4},{36,-69.4},{36,-70},{36,-70},{36,-60},{-16,-60},{-16,68},{-9.8,
-          68},{-9.8,68.6}},                                               color=
+  connect(Workshop.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{41,-69.4},
+          {36,-69.4},{36,-70},{36,-70},{36,-60},{-16,-60},{-16,68},{-13,68},{-13,
+          68.6}},                                                         color=
          {0,127,255}));
   connect(OpenPlanOffice.Air_out, Air_out[1]) annotation (Line(points={{10,68.6},
           {10,68},{16,68},{16,80},{40,80},{40,92}},

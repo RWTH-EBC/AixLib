@@ -413,8 +413,8 @@ equation
     annotation (Line(points={{43.2,-2},{44,-2},{44,40.1},{100.1,40.1}}, color={
           0,0,127}));
   connect(Valve_WarmCold_Workshop_2.y, controlBus.Valve_TBA_WarmCold_workshop_1)
-    annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}}, color
-        ={0,0,127}));
+    annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}}, color=
+         {0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Full_Transfer_TBA;

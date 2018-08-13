@@ -30,8 +30,8 @@ model GroundFloor
       Medium = Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Air_in_Canteen(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in_Canteen(redeclare package Medium =
+        Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out_Workshop(redeclare package
@@ -75,8 +75,8 @@ equation
       thickness=0.5));
   connect(canteen.Heatport_TBA, Heatport_TBA_Canteen) annotation (Line(points={
           {60,9.6},{80,9.6},{80,10},{80,10},{80,-40},{100,-40}}, color={191,0,0}));
-  connect(workshop.Heatport_TBA, Heatport_TBA_Workshop) annotation (Line(points
-        ={{-20,9.6},{0,9.6},{0,-80},{100,-80}}, color={191,0,0}));
+  connect(workshop.Heatport_TBA, Heatport_TBA_Workshop) annotation (Line(points=
+         {{-20,9.6},{0,9.6},{0,-80},{100,-80}}, color={191,0,0}));
   connect(canteen.WindSpeedPort_EastWall, internalBus.InternalLoads_Wind_Speed_East)
     annotation (Line(points={{60.8,-3.6},{80,-3.6},{80,60.1},{100.1,60.1}},
         color={0,0,127}));
@@ -130,8 +130,8 @@ equation
     annotation (Line(points={{62,-10},{80,-10},{80,80},{-80,80},{-80,70},{-92,
           70}}, color={255,128,0}));
   connect(canteen.SolarRadiationPort_NorthWall, SolarRadiationPort[2])
-    annotation (Line(points={{42,22},{42,80},{-80,80},{-80,66},{-92,66}}, color
-        ={255,128,0}));
+    annotation (Line(points={{42,22},{42,80},{-80,80},{-80,66},{-92,66}}, color=
+         {255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GroundFloor;

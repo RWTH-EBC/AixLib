@@ -134,7 +134,7 @@ model RLT
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      per=pump_model_cold)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
@@ -195,7 +195,7 @@ model RLT
         rotation=-90,
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      per=pump_model_hot)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));

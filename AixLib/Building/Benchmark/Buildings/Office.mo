@@ -115,8 +115,8 @@ equation
       thickness=0.5));
   connect(groundFloor.Air_out_Canteen, vol1.ports[5]) annotation (Line(points={
           {-20,-32},{-60,-32},{-60,-67.6}}, color={0,127,255}));
-  connect(groundFloor.Air_out_Workshop, vol1.ports[6]) annotation (Line(points=
-          {{-20,-40},{-60,-40},{-60,-66.6667}}, color={0,127,255}));
+  connect(groundFloor.Air_out_Workshop, vol1.ports[6]) annotation (Line(points={{-20,-40},
+          {-60,-40},{-60,-66.6667}},            color={0,127,255}));
   connect(groundFloor.Air_in_Workshop, Air_in[5]) annotation (Line(points={{-20,
           -44},{-40,-44},{-40,-92}}, color={0,127,255}));
   connect(groundFloor.Air_in_Canteen, Air_in[4]) annotation (Line(points={{-20,

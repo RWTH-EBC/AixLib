@@ -14,9 +14,9 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,-92},{-60,-72}})));
   Modelica.Blocks.Sources.RealExpression TSet_CHP(y=273.15 + 80)
     annotation (Placement(transformation(extent={{-40,-106},{-60,-86}})));
-  Modelica.Blocks.Sources.RealExpression Pumps(y=0)
+  Modelica.Blocks.Sources.RealExpression Pumps(y=1)
     annotation (Placement(transformation(extent={{24,-78},{4,-58}})));
-  Modelica.Blocks.Sources.RealExpression Fan_RLT(y=0)
+  Modelica.Blocks.Sources.RealExpression Fan_RLT(y=100)
     annotation (Placement(transformation(extent={{20,-106},{40,-86}})));
   Modelica.Blocks.Sources.RealExpression Fan_Aircooler(y=0)
     annotation (Placement(transformation(extent={{80,-106},{60,-86}})));
@@ -60,7 +60,7 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,44},{-20,64}})));
   Modelica.Blocks.Sources.RealExpression Valve_WarmCold_W
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
-  Modelica.Blocks.Sources.RealExpression Valve_Temp
+  Modelica.Blocks.Sources.RealExpression Valve_Temp(y=1)
     annotation (Placement(transformation(extent={{-40,2},{-20,22}})));
   Modelica.Blocks.Sources.BooleanExpression Heatpump_big(y=false)
     annotation (Placement(transformation(extent={{-100,-64},{-80,-44}})));
@@ -147,8 +147,8 @@ equation
       Line(points={{-19,12},{100.1,12},{100.1,-19.9}}, color={0,0,127}));
   connect(Valve_Temp.y, controlBus.Valve_RLT_Hot_ConferenceRoom) annotation (
       Line(points={{-19,12},{100.1,12},{100.1,-19.9}}, color={0,0,127}));
-  connect(Valve_Temp.y, controlBus.Valve_RLT_Hot_MultiPersonOffice) annotation
-    (Line(points={{-19,12},{100.1,12},{100.1,-19.9}}, color={0,0,127}));
+  connect(Valve_Temp.y, controlBus.Valve_RLT_Hot_MultiPersonOffice) annotation (
+     Line(points={{-19,12},{100.1,12},{100.1,-19.9}}, color={0,0,127}));
   connect(Valve_Temp.y, controlBus.Valve_RLT_Hot_Canteen) annotation (Line(
         points={{-19,12},{100.1,12},{100.1,-19.9}}, color={0,0,127}));
   connect(Valve_Temp.y, controlBus.Valve_RLT_Hot_Workshop) annotation (Line(
@@ -215,8 +215,8 @@ equation
       Line(points={{3,-68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
   connect(Pumps.y, controlBus.Pump_RLT_Canteen_cold_y) annotation (Line(points=
           {{3,-68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
-  connect(Pumps.y, controlBus.Pump_RLT_Workshop_cold_y) annotation (Line(points
-        ={{3,-68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(Pumps.y, controlBus.Pump_RLT_Workshop_cold_y) annotation (Line(points=
+         {{3,-68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
   connect(Pumps.y, controlBus.Pump_TBA_OpenPlanOffice_y) annotation (Line(
         points={{3,-68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
   connect(Pumps.y, controlBus.Pump_TBA_ConferenceRoom_y) annotation (Line(
