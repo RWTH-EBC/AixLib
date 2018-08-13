@@ -22,9 +22,7 @@ model CHPCombined
   Modelica.Blocks.Sources.Constant T_source1(k=1)
     annotation (Placement(transformation(extent={{-44,0},{-24,20}})));
   Components.HeatGenerators.CHP.CHPCombined cHPCombined(
-    withController=true,
-    CHPType=2,
-    paramPEM=Data.CHP.FuelcellPEM.MorrisonPEMFC())
+    paramPEM=Data.CHP.FuelcellPEM.MorrisonPEMFC(), CHPType=2)
     annotation (Placement(transformation(extent={{-18,-66},{38,-32}})));
 equation
   connect(fluidSource.enthalpyPort_b, temperatureSensor_before.enthalpyPort_a)

@@ -4,18 +4,17 @@ model CHPCombined
 
 //    parameter Integer CHPType "CHP Type"
 //     annotation(Dialog(group = "General", compact = true, descriptionLabel = true), choices(choice=1
-//         "Combustion",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",
+//         "ICE",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",
 //                               radioButtons = true));
    parameter Integer CHPType "CHP Type"
     annotation(Dialog(group = "General", compact = true, descriptionLabel = true), choices(choice=1
-        "Combustion",choice = 2 "PEM Fuel Cell",radioButtons = true));
+        "ICE",choice = 2 "PEM Fuel Cell",radioButtons = true));
   /* *******************************************************************
   Medium
   ******************************************************************* */
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
   AixLib.FastHVAC.Media.WaterSimple()
   "Standard flow charastics for water (heat capacity, density, thermal conductivity)"    annotation (choicesAllMatching);
-  parameter Real LHV(unit="J/kg")= if CHPType == 1 then 47300000 else 119972000 "Lower heating value [J/kg]";
   constant Modelica.SIunits.MolarMass molarMassH2 = 2.01588 "Molar Mass of H2 [kg/mol]";
   /* *******************************************************************
   BHKW Parameters
@@ -26,8 +25,7 @@ model CHPCombined
       AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
     "Record for IFC Parametrization"
     annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1));
-  parameter Real LimiterPelPos = if CHPType == 1 then 760 else 0.61;
-  parameter Real LimiterPelNeg = if CHPType == 1 then 760 else 0.60;
+
   parameter
     Data.CHP.FuelcellPEM.BaseDataDefinition paramPEM=
       AixLib.FastHVAC.Data.CHP.FuelcellPEM.MorrisonPEMFC()
@@ -98,7 +96,9 @@ protected
   paramIFC.tauP_el else tauP_el_prescribed
     "time constant electrical power start behavior (unit=sec)";
   parameter Modelica.SIunits.Volume V_water = 3e-3;
-
+  parameter Real LimiterPelPos = if CHPType == 1 then 760 else 0.61;
+  parameter Real LimiterPelNeg = if CHPType == 1 then 760 else 0.60;
+  parameter Real LHV(unit="J/kg")= if CHPType == 1 then 47300000 else 119972000 "Lower heating value [J/kg]";
 //tauQ in PARAMETER !!!!
 public
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20);
