@@ -5,12 +5,8 @@ model Generation_Hot
 
     parameter Modelica.SIunits.Time riseTime_valve = 0 annotation(Dialog(tab = "General"));
 
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_hot annotation(Dialog(tab = "General"), choicesAllMatching = true);
     parameter Real m_flow_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
-
-    parameter AixLib.DataBase.CHP.CHPBaseDataDefinition CHP_model_generation_hot annotation(Dialog(tab = "General"), choicesAllMatching = true);
-    parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition boiler_model_generation_hot annotation(Dialog(tab = "General"), choicesAllMatching = true);
 
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
         Medium_Water)
@@ -26,7 +22,7 @@ model Generation_Hot
     m_flow_nominal=m_flow_nominal_generation_hot,
     transferHeat=true,
     TAmb=298.15,
-    paramBoiler=boiler_model_generation_hot)
+    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW())
     annotation (Placement(transformation(extent={{10,46},{30,66}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve6(
@@ -47,7 +43,7 @@ model Generation_Hot
     m_flow_nominal=m_flow_nominal_generation_hot,
     transferHeat=true,
     TAmb=298.15,
-    param=CHP_model_generation_hot)
+    param=DataBase.CHP.CHP_FMB_31_GSK())
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
 
   Fluid.Sources.Boundary_pT bou3(
@@ -61,7 +57,7 @@ model Generation_Hot
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
             {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      per=pump_model_generation_hot)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-38,16})));
@@ -128,8 +124,5 @@ equation
   connect(cHP.electricalPower, measureBus.Electrical_power_CHP) annotation (
       Line(points={{-81,25},{-81,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{28,80},{90,60}},
-          lineColor={28,108,200},
-          textString="Parameter passen nicht")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end Generation_Hot;

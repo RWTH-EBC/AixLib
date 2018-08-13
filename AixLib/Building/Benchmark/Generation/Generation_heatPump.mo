@@ -3,10 +3,7 @@ model Generation_heatPump
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
 
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_warmwater annotation(Dialog(tab = "General"), choicesAllMatching = true);
-    parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition heatpump_model_small annotation(Dialog(tab = "General"), choicesAllMatching = true);
     parameter Real factor_heatpump_model_small = 3 annotation(Dialog(tab = "General"));
-    parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition heatpump_model_big annotation(Dialog(tab = "General"), choicesAllMatching = true);
     parameter Real factor_heatpump_model_big = 6 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K T_conMax_big = 328.15 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K T_conMax_small = 328.15 annotation(Dialog(tab = "General"));
@@ -38,7 +35,6 @@ model Generation_heatPump
     CoP_output=true,
     redeclare package Medium_con = Medium_Water,
     redeclare package Medium_eva = Medium_Water,
-    dataTable=heatpump_model_big,
     T_conMax=T_conMax_big,
     volume_eva=vol_big,
     volume_con=vol_big,
@@ -47,6 +43,7 @@ model Generation_heatPump
     R_loss=R_loss_small,
     dp_conNominal=dpHeatexchanger_nominal,
     dp_evaNominal=dpHeatexchanger_nominal,
+    dataTable=DataBase.HeatPump.EN14511.Ochsner_GMSW_15plus(),
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,18},{16,38}})));
@@ -61,7 +58,7 @@ model Generation_heatPump
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
             {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      per=pump_model_generation_warmwater)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={42,60})));
@@ -71,7 +68,6 @@ model Generation_heatPump
     CoP_output=true,
     redeclare package Medium_con = Medium_Water,
     redeclare package Medium_eva = Medium_Water,
-    dataTable=heatpump_model_small,
     T_conMax=T_conMax_small,
     volume_eva=vol_small,
     volume_con=vol_small,
@@ -80,6 +76,7 @@ model Generation_heatPump
     R_loss=R_loss_small,
     dp_conNominal=dpHeatexchanger_nominal,
     dp_evaNominal=dpHeatexchanger_nominal,
+    dataTable=DataBase.HeatPump.EN14511.Ochsner_GMSW_15plus(),
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-38},{16,-18}})));
@@ -140,16 +137,14 @@ equation
   connect(heatPumpDetailed_small.P_eleOut, measureBus.Heatpump_small_power)
     annotation (Line(points={{-4,-37},{-4,-44},{30.1,-44},{30.1,90.1}}, color={0,
           0,127}));
-  connect(heatPumpDetailed_small.port_evaOut, senTem.port) annotation (Line(
-        points={{-12,-35},{-12,-60},{-58,-60}}, color={0,127,255}));
   connect(senTem2.port, fan4.port_a) annotation (Line(points={{16,48},{16,44},{
           30,44},{30,60},{34,60}}, color={0,127,255}));
   connect(heatPumpDetailed_small.port_conIn, senTem3.port) annotation (Line(
         points={{14,-35},{41,-35},{41,-18},{40,-18}}, color={0,127,255}));
   connect(senTem1.T, measureBus.Heatpump_cold_big_in) annotation (Line(points={
           {-53,70},{-40,70},{-40,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
-  connect(senTem.T, measureBus.Heatpump_cold_small_out) annotation (Line(points=
-         {{-51,-50},{-40,-50},{-40,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
+  connect(senTem.T, measureBus.Heatpump_cold_small_out) annotation (Line(points={{-51,-50},
+          {-40,-50},{-40,80},{30.1,80},{30.1,90.1}},           color={0,0,127}));
   connect(senTem2.T, measureBus.Heatpump_warm_big_out)
     annotation (Line(points={{23,58},{30.1,58},{30.1,90.1}}, color={0,0,127}));
   connect(senTem3.T, measureBus.Heatpump_warm_small_in) annotation (Line(points=
@@ -168,6 +163,10 @@ equation
         points={{-78,71},{-78,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
   connect(senMasFlo1.m_flow, measureBus.heatpump_warm_massflow) annotation (
       Line(points={{74,-49},{74,14},{30.1,14},{30.1,90.1}}, color={0,0,127}));
+  connect(senTem.port, Fluid_out_cold)
+    annotation (Line(points={{-58,-60},{-100,-60}}, color={0,127,255}));
+  connect(heatPumpDetailed_small.port_evaOut, senTem.port) annotation (Line(
+        points={{-12,-35},{-12,-60},{-58,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_heatPump;

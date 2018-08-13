@@ -73,7 +73,7 @@ model RLT
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
         Medium_Air)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
-    annotation (Placement(transformation(extent={{-108,-76},{-88,-56}})));
+    annotation (Placement(transformation(extent={{-140,-76},{-120,-56}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
@@ -258,20 +258,6 @@ model RLT
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-100,-40})));
-  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe4(
-    cPip=500,
-    rhoPip=8000,
-    v_nominal=RLT_v_nominal,
-    length=RLT_pipe_length,
-    m_flow_nominal=RLT_m_flow_nominal,
-    dIns=RLT_pipe_insulation_thickness,
-    kIns=RLT_pipe_insulation_conductivity,
-    thickness=RLT_pipe_wall_thickness,
-    nPorts=1,
-    redeclare package Medium = Medium_Air)
-    annotation (Placement(transformation(extent={{-9,-8},{9,8}},
-        rotation=0,
-        origin={-78,-67})));
 equation
   connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
     annotation (Line(points={{-42,-66},{14,-66}},color={0,127,255}));
@@ -365,13 +351,8 @@ equation
           {20,40},{20,80},{-100,80}}, color={0,0,127}));
   connect(senTem4.T, cold_in) annotation (Line(points={{77,60},{78,60},{78,40},
           {-100,40}}, color={0,0,127}));
-  connect(plugFlowPipe4.heatPort, plugFlowPipe3.heatPort) annotation (Line(
-        points={{-78,-59},{-78,-50},{-60,-50},{-60,-40},{60,-40},{60,21},{72,21}},
-        color={191,0,0}));
-  connect(Air_in, plugFlowPipe4.port_a) annotation (Line(points={{-98,-66},{-92,
-          -66},{-92,-67},{-87,-67}}, color={0,127,255}));
-  connect(plugFlowPipe4.ports_b[1], Ext_Warm.port_a2) annotation (Line(points={
-          {-69,-67},{-65.5,-67},{-65.5,-66},{-62,-66}}, color={0,127,255}));
+  connect(Air_in, Ext_Warm.port_a2)
+    annotation (Line(points={{-130,-66},{-62,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},

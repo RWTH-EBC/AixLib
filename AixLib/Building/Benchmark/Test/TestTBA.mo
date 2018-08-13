@@ -74,9 +74,9 @@ equation
   connect(pipe.port_b, boundary1.ports[1]) annotation (Line(points={{48,50},{56,
           50},{56,48},{66,48}}, color={0,127,255}));
   connect(pipe.port_a, activeWall.Heatport_TBA) annotation (Line(points={{28,50},
-          {18,50},{18,40.3333},{-18.35,40.3333}}, color={0,127,255}));
-  connect(temperature.port, activeWall.Heatport_TBA) annotation (Line(points={{
-          24,68},{24,50},{18,50},{18,40.3333},{-18.35,40.3333}}, color={0,127,
+          {18,50},{18,35.3333},{-17.65,35.3333}}, color={0,127,255}));
+  connect(temperature.port, activeWall.Heatport_TBA) annotation (Line(points={{24,68},
+          {24,50},{18,50},{18,35.3333},{-17.65,35.3333}},        color={0,127,
           255}));
   connect(temperature.T, boundary1.T_in) annotation (Line(points={{31,78},{68,
           78},{68,76},{88,76},{88,52}}, color={0,0,127}));

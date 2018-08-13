@@ -83,7 +83,7 @@ model TBA_Pipe
         rotation=90,
         origin={66,-40})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      per=pump_model)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=-90,
         origin={-60,28})));

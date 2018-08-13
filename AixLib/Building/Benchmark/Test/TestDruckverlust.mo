@@ -9,15 +9,6 @@ model TestDruckverlust
     T=293.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{62,8},{42,28}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=7.774)
-    annotation (Placement(transformation(extent={{-136,20},{-116,40}})));
-  Fluid.Sources.MassFlowSource_T boundary(
-    redeclare package Medium = Medium_Water,
-    use_m_flow_in=true,
-    use_T_in=true,
-    nPorts=1) annotation (Placement(transformation(extent={{-86,8},{-66,28}})));
-  Modelica.Blocks.Sources.RealExpression realExpression3(y=273.15 + 55)
-    annotation (Placement(transformation(extent={{-136,0},{-116,20}})));
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
                                                    redeclare package Medium =
         Medium_Water,
@@ -32,14 +23,25 @@ model TestDruckverlust
     m_flow_nominal=7.819)
     annotation (Placement(transformation(extent={{7.5,-7.5},{-7.5,7.5}},
         rotation=180,
-        origin={-12.5,18.5})));
+        origin={11.5,16.5})));
+  Fluid.Sources.Boundary_pT bou2(
+    redeclare package Medium = Medium_Water,
+    p=100000,
+    T=328.15,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-96,6},{-76,26}})));
+  Fluid.Movers.SpeedControlled_y fan(redeclare package Medium = Medium_Water,
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+    annotation (Placement(transformation(extent={{-54,6},{-34,26}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=1)
+    annotation (Placement(transformation(extent={{-84,46},{-64,66}})));
 equation
-  connect(realExpression.y, boundary.m_flow_in) annotation (Line(points={{-115,
-          30},{-100,30},{-100,26},{-86,26}}, color={0,0,127}));
-  connect(realExpression3.y, boundary.T_in) annotation (Line(points={{-115,10},
-          {-102,10},{-102,22},{-88,22}}, color={0,0,127}));
-  connect(boundary.ports[1], plugFlowPipe1.port_a) annotation (Line(points={{
-          -66,18},{-44,18},{-44,18.5},{-20,18.5}}, color={0,127,255}));
-  connect(plugFlowPipe1.ports_b[1], bou1.ports[1]) annotation (Line(points={{-5,
-          18.5},{17.5,18.5},{17.5,18},{42,18}}, color={0,127,255}));
+  connect(plugFlowPipe1.ports_b[1], bou1.ports[1]) annotation (Line(points={{19,16.5},
+          {17.5,16.5},{17.5,18},{42,18}},       color={0,127,255}));
+  connect(bou2.ports[1], fan.port_a)
+    annotation (Line(points={{-76,16},{-54,16}}, color={0,127,255}));
+  connect(fan.port_b, plugFlowPipe1.port_a) annotation (Line(points={{-34,16},{
+          -16,16},{-16,16.5},{4,16.5}}, color={0,127,255}));
+  connect(realExpression.y, fan.y)
+    annotation (Line(points={{-63,56},{-44,56},{-44,28}}, color={0,0,127}));
 end TestDruckverlust;

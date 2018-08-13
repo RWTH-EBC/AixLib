@@ -7,7 +7,6 @@ model Generation
     parameter Modelica.SIunits.Pressure dpHeatexchanger_nominal = 0 annotation(Dialog(tab = "General"));
 
     // Hotwater
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_hotwater annotation(Dialog(tab = "hotwater"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_hotwater = 0 annotation(Dialog(tab = "hotwater"));
     parameter Real m_flow_nominal_hotwater = 0 annotation(Dialog(tab = "hotwater"));
     parameter Modelica.SIunits.Length pipe_length_hotwater = 0 annotation(Dialog(tab = "hotwater"));
@@ -16,7 +15,6 @@ model Generation
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_hotwater = 0  annotation(Dialog(tab = "hotwater"));
 
     //Warmwater
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_warmwater annotation(Dialog(tab = "warmwater"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_warmwater = 0 annotation(Dialog(tab = "warmwater"));
     parameter Real m_flow_nominal_warmwater = 0 annotation(Dialog(tab = "warmwater"));
     parameter Modelica.SIunits.Length pipe_length_warmwater = 0 annotation(Dialog(tab = "warmwater"));
@@ -25,7 +23,6 @@ model Generation
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_warmwater = 0  annotation(Dialog(tab = "warmwater"));
 
     //ColdWater
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_coldwater annotation(Dialog(tab = "coldwater"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_coldwater = 0 annotation(Dialog(tab = "coldwater"));
     parameter Real m_flow_nominal_coldwater = 0 annotation(Dialog(tab = "coldwater"));
     parameter Modelica.SIunits.Length pipe_length_coldwater = 0 annotation(Dialog(tab = "coldwater"));
@@ -34,16 +31,11 @@ model Generation
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_coldwater = 0  annotation(Dialog(tab = "coldwater"));
 
     //Generation Hot
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_hot annotation(Dialog(tab = "generation_hot"), choicesAllMatching = true);
-    parameter AixLib.DataBase.CHP.CHPBaseDataDefinition CHP_model_generation_hot annotation(Dialog(tab = "generation_hot"), choicesAllMatching = true);
-    parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition boiler_model_generation_hot annotation(Dialog(tab = "generation_hot"), choicesAllMatching = true);
     parameter Real m_flow_nominal_generation_hot = 0 annotation(Dialog(tab = "generation_hot"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "generation_hot"));
 
     //Heatpump
-    parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition heatpump_model_small annotation(Dialog(tab = "Heatpump"), choicesAllMatching = true);
     parameter Real factor_heatpump_model_small = 3 annotation(Dialog(tab = "Heatpump"));
-    parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition heatpump_model_big annotation(Dialog(tab = "Heatpump"), choicesAllMatching = true);
     parameter Real factor_heatpump_model_big = 6 annotation(Dialog(tab = "Heatpump"));
     parameter Modelica.SIunits.Temp_K T_conMax_big = 328.15 annotation(Dialog(tab = "Heatpump"));
     parameter Modelica.SIunits.Temp_K T_conMax_small = 328.15 annotation(Dialog(tab = "Heatpump"));
@@ -53,17 +45,14 @@ model Generation
     parameter Modelica.SIunits.ThermalConductance R_loss_big = 0 annotation(Dialog(tab = "Heatpump"));
 
     //Generation Warm
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_warmwater annotation(Dialog(tab = "generation_warmwater"), choicesAllMatching = true);
     parameter Real m_flow_nominal_generation_warmwater = 0 annotation(Dialog(tab = "generation_warmwater"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_warmwater = 0 annotation(Dialog(tab = "generation_warmwater"));
 
     //Generation Cold
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_coldwater annotation(Dialog(tab = "generation_coldwater"), choicesAllMatching = true);
     parameter Real m_flow_nominal_generation_coldwater = 0 annotation(Dialog(tab = "generation_coldwater"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_coldwater = 0 annotation(Dialog(tab = "generation_coldwater"));
 
     //Generation Aircooler
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_aircooler annotation(Dialog(tab = "generation_aircooler"), choicesAllMatching = true);
     parameter Real m_flow_nominal_generation_aircooler = 0 annotation(Dialog(tab = "generation_aircooler"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_aircooler = 0 annotation(Dialog(tab = "generation_aircooler"));
     parameter Real m_flow_nominal_generation_air_max annotation(Dialog(tab = "generation_aircooler"));
@@ -78,18 +67,12 @@ model Generation
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC1_warm = 0 annotation(Dialog(tab = "Storage"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC2_warm = 0 annotation(Dialog(tab = "Storage"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC1_cold = 0 annotation(Dialog(tab = "Storage"));
-    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition storage_model_hot annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
-    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition storage_model_warm annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
-    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition storage_model_cold annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
 
 
-  Generation_Hot generation_Hot(pump_model_generation_hot=
-        pump_model_generation_hot, m_flow_nominal_generation_hot=
+  Generation_Hot generation_Hot(m_flow_nominal_generation_hot=
         m_flow_nominal_generation_hot,
     redeclare package Medium_Water = Medium_Water,
     riseTime_valve=riseTime_valve,
-    CHP_model_generation_hot=CHP_model_generation_hot,
-    boiler_model_generation_hot=boiler_model_generation_hot,
     dpValve_nominal_generation_hot=dpValve_nominal_generation_hot)
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Fluid.Storage.BufferStorage HotWater(
@@ -103,7 +86,7 @@ model Generation
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_warm,
     alphaHC2=alphaHC2_warm,
-    data=storage_model_hot)
+    data=DataBase.Storage.Benchmark_7500l())
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
@@ -115,11 +98,8 @@ model Generation
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
 
-  Generation_heatPump generation_heatPump1(pump_model_generation_warmwater=
-        pump_model_generation_warmwater,
-    heatpump_model_small=heatpump_model_small,
+  Generation_heatPump generation_heatPump1(
     factor_heatpump_model_small=factor_heatpump_model_small,
-    heatpump_model_big=heatpump_model_big,
     factor_heatpump_model_big=factor_heatpump_model_big,
     T_conMax_big=T_conMax_big,
     T_conMax_small=T_conMax_small,
@@ -143,7 +123,7 @@ model Generation
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_cold,
-    data=storage_model_cold)
+    data=DataBase.Storage.Benchmark_12000l())
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
         Medium_Water)
@@ -156,7 +136,6 @@ model Generation
   Generation_AirCooling generation_AirCooling(
     m_flow_nominal_generation_warmwater=m_flow_nominal_generation_warmwater,
     m_flow_nominal_generation_coldwater=m_flow_nominal_generation_coldwater,
-    pump_model_generation_aircooler=pump_model_generation_aircooler,
     m_flow_nominal_generation_aircooler=m_flow_nominal_generation_aircooler,
     m_flow_nominal_generation_air_max=m_flow_nominal_generation_air_max,
     m_flow_nominal_generation_air_min=m_flow_nominal_generation_air_min,
@@ -235,7 +214,7 @@ model Generation
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_warm,
     alphaHC2=alphaHC2_warm,
-    data=storage_model_warm)
+    data=DataBase.Storage.Benchmark_7500l())
     annotation (Placement(transformation(extent={{16,-18},{46,20}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
         Medium_Water)
@@ -270,11 +249,6 @@ model Generation
     annotation (Placement(transformation(extent={{2,8},{-14,24}})));
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
             {-16,80},{24,120}}), iconTransformation(extent={{30,90},{50,110}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_pumpsAndPipes[5]
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={100,0})));
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
                                                    redeclare package Medium =
         Medium_Water,
@@ -291,7 +265,7 @@ model Generation
         rotation=180,
         origin={81.5,94.5})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      per=pump_model_hotwater)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={60,94})));
@@ -326,23 +300,29 @@ model Generation
         rotation=180,
         origin={81.5,-97.5})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      per=pump_model_warmwater)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={48,28})));
   Fluid.Movers.SpeedControlled_y fan3(redeclare package Medium = Medium_Water,
-      per=pump_model_coldwater)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=180,
         origin={56,-96})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      per=pump_model_generation_coldwater)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-68,-58})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{-70,70},{-30,110}}),
         iconTransformation(extent={{-50,90},{-30,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_workshop
+    "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
+    annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_Canteen
+    "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
+    annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
 equation
   connect(generation_Hot.Fluid_in_Hot, HotWater.portHC1Out) annotation (Line(
         points={{-60,68},{-32,68},{-32,67.94},{17.8125,67.94}},color={0,127,255}));
@@ -424,13 +404,6 @@ equation
   connect(Valve1.port_3, generation_geothermalProbe.Fluid_in_Geothermal)
     annotation (Line(points={{-78,-67},{-74,-67},{-74,-80},{-56,-80}}, color={0,
           127,255}));
-  connect(HotWater.heatportOutside, HeatPort_pumpsAndPipes[4]) annotation (Line(
-        points={{47.625,64.14},{80,64.14},{80,4},{100,4}}, color={191,0,0}));
-  connect(WarmWater.heatportOutside, HeatPort_pumpsAndPipes[4]) annotation (
-      Line(points={{45.625,2.14},{62,2.14},{62,2},{80,2},{80,4},{100,4}}, color=
-         {191,0,0}));
-  connect(ColdWater.heatportOutside, HeatPort_pumpsAndPipes[5]) annotation (
-      Line(points={{47.625,-67.86},{80,-67.86},{80,8},{100,8}}, color={191,0,0}));
   connect(HotWater.fluidportTop2, bou4.ports[1]) annotation (Line(points={{37.6875,
           82.19},{37.6875,94},{42.8,94}}, color={0,127,255}));
   connect(Fluid_out_hot, Fluid_out_hot) annotation (Line(points={{100,80},{94,80},
@@ -444,10 +417,6 @@ equation
   connect(fan2.y, controlBus.Pump_Hotwater_y) annotation (Line(points={{60,103.6},
           {60,108},{20,108},{20,100},{12,100},{12,100.1},{4.1,100.1}}, color={0,
           0,127}));
-  connect(fan2.heatPort, HeatPort_pumpsAndPipes[4]) annotation (Line(points={{60,
-          88.56},{60,64},{80,64},{80,4},{100,4}}, color={191,0,0}));
-  connect(plugFlowPipe1.heatPort, HeatPort_pumpsAndPipes[4]) annotation (Line(
-        points={{81.5,87},{81.5,64},{80,64},{80,4},{100,4}}, color={191,0,0}));
   connect(fan3.port_b, plugFlowPipe3.port_a) annotation (Line(points={{64,-96},{
           70,-96},{70,-97.5},{74,-97.5}}, color={0,127,255}));
   connect(plugFlowPipe3.ports_b[1], Fluid_out_cold) annotation (Line(points={{89,
@@ -460,15 +429,6 @@ equation
           28},{60,28.5},{62,28.5}}, color={0,127,255}));
   connect(plugFlowPipe2.ports_b[1], Fluid_out_warm) annotation (Line(points={{77,
           28.5},{84.5,28.5},{84.5,20},{100,20}}, color={0,127,255}));
-  connect(plugFlowPipe2.heatPort, HeatPort_pumpsAndPipes[4]) annotation (Line(
-        points={{69.5,21},{69.5,2},{70,2},{70,2},{80,2},{80,4},{100,4}}, color={
-          191,0,0}));
-  connect(fan1.heatPort, HeatPort_pumpsAndPipes[4]) annotation (Line(points={{48,
-          22.56},{48,12},{48,12},{48,2},{80,2},{80,4},{100,4}}, color={191,0,0}));
-  connect(fan3.heatPort, HeatPort_pumpsAndPipes[5]) annotation (Line(points={{56,
-          -90.56},{56,-68},{80,-68},{80,8},{100,8}}, color={191,0,0}));
-  connect(plugFlowPipe3.heatPort, HeatPort_pumpsAndPipes[5]) annotation (Line(
-        points={{81.5,-90},{80,-90},{80,8},{100,8}}, color={191,0,0}));
   connect(fan3.y, controlBus.Pump_Coldwater_y) annotation (Line(points={{56,-105.6},
           {56,-110},{4.1,-110},{4.1,100.1}}, color={0,0,127}));
   connect(fan1.y, controlBus.Pump_Warmwater_y) annotation (Line(points={{48,37.6},
@@ -528,6 +488,29 @@ equation
       points={{-46,20},{-46,34},{-98,34},{-98,88},{-50,88},{-50,90}},
       color={255,204,51},
       thickness=0.5));
+  connect(plugFlowPipe3.heatPort, heatPort_workshop) annotation (Line(points={{81.5,
+          -90},{82,-90},{82,-80},{66,-80},{66,-120},{-100,-120},{-100,20}},
+        color={191,0,0}));
+  connect(fan3.heatPort, heatPort_workshop) annotation (Line(points={{56,-90.56},
+          {56,-80},{66,-80},{66,-120},{-100,-120},{-100,20}}, color={191,0,0}));
+  connect(ColdWater.heatportOutside, heatPort_workshop) annotation (Line(points=
+         {{47.625,-67.86},{66,-67.86},{66,-120},{-100,-120},{-100,20}}, color={191,
+          0,0}));
+  connect(plugFlowPipe2.heatPort, heatPort_Canteen) annotation (Line(points={{69.5,
+          21},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
+  connect(plugFlowPipe1.heatPort, heatPort_Canteen) annotation (Line(points={{81.5,
+          87},{81.5,64},{120,64},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
+  connect(fan2.heatPort, heatPort_Canteen) annotation (Line(points={{60,88.56},{
+          60,64},{120,64},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
+  connect(HotWater.heatportOutside, heatPort_Canteen) annotation (Line(points={{
+          47.625,64.14},{60,64},{120,64},{120,120},{-100,120},{-100,60}}, color=
+         {191,0,0}));
+  connect(WarmWater.heatportOutside, heatPort_Canteen) annotation (Line(points={
+          {45.625,2.14},{70,2},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
+        color={191,0,0}));
+  connect(fan1.heatPort, heatPort_Canteen) annotation (Line(points={{48,22.56},{
+          48,12},{70,12},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
+        color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation;

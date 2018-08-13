@@ -61,15 +61,10 @@ expandable connector ControlBus
   Real Valve_RLT_Cold_Workshop "Valveposition to control the coldwater-temperatur to the workshop";
 
   Real Valve_TBA_WarmCold_OpenPlanOffice_1 "Valveposition of Valve 1 for warm or cold of the openplanoffice";
-  Real Valve_TBA_WarmCold_OpenPlanOffice_2 "Valveposition of Valve 2 for warm or cold of the openplanoffice";
   Real Valve_TBA_WarmCold_conferenceroom_1 "Valveposition of Valve 1 for warm or cold of the conferenceroom";
-  Real Valve_TBA_WarmCold_conferenceroom_2 "Valveposition of Valve 2 for warm or cold of the conferenceroom";
   Real Valve_TBA_WarmCold_multipersonoffice_1 "Valveposition of Valve 1 for warm or cold of the multipersonoffice";
-  Real Valve_TBA_WarmCold_multipersonoffice_2 "Valveposition of Valve 2 for warm or cold of the multipersonoffice";
   Real Valve_TBA_WarmCold_canteen_1 "Valveposition of Valve 1 for warm or cold of the canteen";
-  Real Valve_TBA_WarmCold_canteen_2 "Valveposition of Valve 2 for warm or cold of the canteen";
   Real Valve_TBA_WarmCold_workshop_1 "Valveposition of Valve 1 for warm or cold of the workshop";
-  Real Valve_TBA_WarmCold_workshop_2 "Valveposition of Valve 2 for warm or cold of the workshop";
 
   Real Valve_TBA_Cold_OpenPlanOffice_Temp "Valveposition to control the temperatur to the OpenPlanOffice";
   Real Valve_TBA_Cold_ConferenceRoom_Temp "Valveposition to control the temperatur to the ConferenceRoom";

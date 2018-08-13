@@ -13,14 +13,6 @@ model Weather
     Mass_frac=true,
     Air_press=false)
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
-  Modelica.Blocks.Interfaces.RealOutput WindSpeed_East "in m/s"
-    annotation (Placement(transformation(extent={{90,30},{110,50}})));
-  Modelica.Blocks.Interfaces.RealOutput WindSpeed_South "in m/s"
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  Modelica.Blocks.Interfaces.RealOutput WindSpeed_West "in m/s"
-    annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput WindSpeed_North "in m/s"
-    annotation (Placement(transformation(extent={{90,70},{110,90}})));
   Modelica.Blocks.Math.Gain gain(k=1/360)
     annotation (Placement(transformation(extent={{10,36},{20,46}})));
   Modelica.Blocks.Math.Product product
@@ -43,8 +35,6 @@ model Weather
   Modelica.Blocks.Tables.CombiTable1D combiTable1D3(table=[0,1; 0.01,0; 0.49,0;
         0.5,1; 1,1])
     annotation (Placement(transformation(extent={{46,-58},{56,-48}})));
-  Modelica.Blocks.Interfaces.RealOutput WindSpeed_Hor "in m/s"
-    annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Blocks.Math.Gain gain1(k=0)
     annotation (Placement(transformation(extent={{52,-86},{64,-74}})));
   Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces1[size(
@@ -77,17 +67,14 @@ model Weather
     annotation (Placement(transformation(extent={{-14,-30},{-34,-50}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
     annotation (Placement(transformation(extent={{22,-48},{10,-32}})));
-  Modelica.Blocks.Interfaces.RealOutput Airtemp "in K" annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={0,-100})));
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-90,
             -120},{-50,-80}}),      iconTransformation(extent={{-70,-110},{-50,
             -90}})));
   BusSystem.measureBus measureBus annotation (Placement(transformation(extent={
             {-52,-120},{-12,-80}}), iconTransformation(extent={{50,-110},{70,
             -90}})));
+  BusSystem.InternalBus internalBus
+    annotation (Placement(transformation(extent={{80,-20},{120,20}})));
 equation
   connect(weather.WindDirection, gain.u)
     annotation (Line(points={{-19,33},{0,33},{0,41},{9,41}}, color={0,0,127}));
@@ -115,16 +102,6 @@ equation
           {62,-13},{62,-2.4},{67.2,-2.4}},   color={0,0,127}));
   connect(combiTable1D3.y[1], product3.u2) annotation (Line(points={{56.5,-53},
           {62,-53},{62,-42.4},{67.2,-42.4}}, color={0,0,127}));
-  connect(product1.y, WindSpeed_East)
-    annotation (Line(points={{76.4,40},{100,40}}, color={0,0,127}));
-  connect(product2.y, WindSpeed_South)
-    annotation (Line(points={{76.4,0},{100,0}},     color={0,0,127}));
-  connect(product3.y, WindSpeed_West)
-    annotation (Line(points={{76.4,-40},{100,-40}}, color={0,0,127}));
-  connect(product.y, WindSpeed_North)
-    annotation (Line(points={{76.4,80},{100,80}}, color={0,0,127}));
-  connect(gain1.y, WindSpeed_Hor)
-    annotation (Line(points={{64.6,-80},{100,-80}}, color={0,0,127}));
   connect(gain1.u, product1.u1) annotation (Line(points={{50.8,-80},{40,-80},{
           40,42.4},{67.2,42.4}}, color={0,0,127}));
   connect(weather.SolarRadiation_OrientedSurfaces,
@@ -140,8 +117,6 @@ equation
           -40},{-36,-24},{-42,-24}}, color={0,0,127}));
   connect(realExpression.y, feedback.u1)
     annotation (Line(points={{9.4,-40},{-16,-40}}, color={0,0,127}));
-  connect(Airtemp, weather.AirTemp)
-    annotation (Line(points={{0,-100},{0,27},{-19,27}}, color={0,0,127}));
   connect(boundary.T_in, weather.AirTemp) annotation (Line(points={{-42,-16},{0,
           -16},{0,27},{-19,27}}, color={0,0,127}));
   connect(boundary.m_flow_in, controlBus.Fan_RLT) annotation (Line(points={{-44,-12},
@@ -152,6 +127,16 @@ equation
           {0,27},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
   connect(weather.WaterInAir, measureBus.WaterInAir) annotation (Line(points={{
           -19,21},{0,21},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
+  connect(product.y, internalBus.InternalLoads_Wind_Speed_North) annotation (
+      Line(points={{76.4,80},{86,80},{86,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(product1.y, internalBus.InternalLoads_Wind_Speed_East) annotation (
+      Line(points={{76.4,40},{86,40},{86,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(product2.y, internalBus.InternalLoads_Wind_Speed_South) annotation (
+      Line(points={{76.4,0},{88,0},{88,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(product3.y, internalBus.InternalLoads_Wind_Speed_West) annotation (
+      Line(points={{76.4,-40},{86,-40},{86,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(gain1.y, internalBus.InternalLoads_Wind_Speed_Hor) annotation (Line(
+        points={{64.6,-80},{86,-80},{86,0.1},{100.1,0.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

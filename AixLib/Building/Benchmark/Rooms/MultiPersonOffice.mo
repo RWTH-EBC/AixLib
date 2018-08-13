@@ -68,7 +68,7 @@ model MultiPersonOffice
       Placement(transformation(
         extent={{12,-12},{-12,12}},
         rotation=180,
-        origin={-116,0})));
+        origin={-104,0})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_NorthWall annotation (
       Placement(transformation(
         extent={{-12,-12},{12,12}},
@@ -95,7 +95,7 @@ model MultiPersonOffice
         rotation=-90,
         origin={70,110})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
-    annotation (Placement(transformation(extent={{90,38},{110,58}})));
+    annotation (Placement(transformation(extent={{88,60},{108,80}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
         Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -159,7 +159,7 @@ model MultiPersonOffice
         rotation=0,
         origin={70,-6})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenPlanOffice
-    annotation (Placement(transformation(extent={{90,-16},{110,4}})));
+    annotation (Placement(transformation(extent={{90,-52},{110,-32}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{8,12},{28,32}})));
   BusSystem.measureBus measureBus
@@ -192,7 +192,8 @@ equation
     annotation (Line(points={{42,65.2},{42,70},{70,70},{70,110}}, color={255,
           128,0}));
   connect(activeWallPipeBased.Heatport_TBA,Heatport_TBA)  annotation (Line(
-        points={{37.6,55.8},{37.6,48},{100,48}}, color={191,0,0}));
+        points={{37.6,55.8},{37.6,48},{38,48},{38,48},{70,48},{70,70},{98,70}},
+                                                 color={191,0,0}));
   connect(Air_in,vol. ports[1]) annotation (Line(points={{100,6},{80,6},{80,28},
           {40,28},{40,-20},{14,-20},{14,-12}}, color={0,127,255}));
   connect(Air_out,vol. ports[2]) annotation (Line(points={{100,28},{40,28},{40,
@@ -209,7 +210,8 @@ equation
     annotation (Line(points={{26,-58},{26,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
   connect(EastWallToOpenPlanOffice.port_outside, HeatPort_ToOpenPlanOffice)
-    annotation (Line(points={{74.2,-6},{100,-6}}, color={191,0,0}));
+    annotation (Line(points={{74.2,-6},{80,-6},{80,-42},{100,-42}},
+                                                  color={191,0,0}));
   connect(EastWallToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{66,-6},{64,-6},{64,-8},{60,-8},{60,-52},{-20.1,
           -52},{-20.1,-35.4}}, color={191,0,0}));
@@ -220,7 +222,7 @@ equation
     annotation (Line(points={{-72,0},{-60,0},{-60,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
   connect(WestWall.WindSpeedPort, WindSpeedPort_WestWall) annotation (Line(
-        points={{-80.2,-17.6},{-90,-17.6},{-90,0},{-116,0}}, color={0,0,127}));
+        points={{-80.2,-17.6},{-90,-17.6},{-90,0},{-104,0}}, color={0,0,127}));
   connect(WestWall.SolarRadiationPort, SolarRadiationPort_WestWall) annotation (
      Line(points={{-81.2,-22},{-90,-22},{-90,-32},{-110,-32}}, color={255,128,0}));
   connect(temperatureSensor.T, measureBus.RoomTemp_Multipersonoffice)

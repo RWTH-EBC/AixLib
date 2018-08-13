@@ -268,42 +268,22 @@ equation
     annotation (Line(points={{69.2,26},{86,26},{86,40.1},{100.1,40.1}},
                                                                       color={0,
           0,127}));
-  connect(Valve_WarmCold_Workshop_2.y, controlBus.Valve_TBA_WarmCold_workshop_2)
-    annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}},
-                                                                        color={
-          0,0,127}));
   connect(Valve_WarmCold_Canteen_1.y, controlBus.Valve_TBA_WarmCold_canteen_1)
     annotation (Line(points={{31.2,18},{44,18},{44,40},{86,40},{86,0},{86,0},{86,
-          40},{100.1,40},{100.1,40.1}},
-                                 color={0,0,127}));
-  connect(Valve_WarmCold_Canteen_2.y, controlBus.Valve_TBA_WarmCold_canteen_2)
-    annotation (Line(points={{43.2,-2},{44,-2},{44,40},{86,40},{86,0},{86,0},{86,
           40},{100.1,40},{100.1,40.1}},
                                  color={0,0,127}));
   connect(Valve_WarmCold_MultiPersonOffice_1.y, controlBus.Valve_TBA_WarmCold_multipersonoffice_1)
     annotation (Line(points={{-4.8,18},{10,18},{10,40},{86,40},{86,0},{86,0},{86,
           40.1},{100.1,40.1}},
                              color={0,0,127}));
-  connect(Valve_WarmCold_MultiPersonOffice_2.y, controlBus.Valve_TBA_WarmCold_multipersonoffice_2)
-    annotation (Line(points={{7.2,-2},{10,-2},{10,40},{86,40},{86,0},{86,0},{86,
-          40.1},{100.1,40.1}},
-                 color={0,0,127}));
   connect(Valve_WarmCold_ConferenceRoom_1.y, controlBus.Valve_TBA_WarmCold_conferenceroom_1)
     annotation (Line(points={{-38.8,18},{-24,18},{-24,40},{86,40},{86,0},{86,0},
-          {86,40.1},{100.1,40.1}},
-                       color={0,0,127}));
-  connect(Valve_WarmCold_ConferenceRoom_2.y, controlBus.Valve_TBA_WarmCold_conferenceroom_2)
-    annotation (Line(points={{-26.8,-2},{-24,-2},{-24,40},{86,40},{86,0},{86,0},
           {86,40.1},{100.1,40.1}},
                        color={0,0,127}));
   connect(Valve_WarmCold_OpenPlanOffice_1.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
     annotation (Line(points={{-74.8,18},{-60,18},{-60,40},{86,40},{86,0},{86,0},
           {86,40.1},{100.1,40.1}},
                        color={0,0,127}));
-  connect(Valve_WarmCold_OpenPlanOffice_2.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_2)
-    annotation (Line(points={{-62.8,-2},{-60,-2},{-60,40},{86,40},{86,0},{86,0},
-          {86,40.1},{100.1,40.1}},                                 color={0,0,
-          127}));
   connect(Workshop.HeatPort_TBA, HeatPort_TBA[5]) annotation (Line(points={{64,80},
           {64,90},{40,90},{40,108}},     color={191,0,0}));
   connect(Canteen.HeatPort_TBA, HeatPort_TBA[4]) annotation (Line(points={{26,
@@ -420,6 +400,21 @@ equation
         color={0,0,127}));
   connect(Workshop.Power_pump, measureBus.Pump_TBA_workshop) annotation (Line(
         points={{78,76},{86,76},{86,-39.9},{100.1,-39.9}}, color={0,0,127}));
+  connect(Valve_WarmCold_OpenPlanOffice_2.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
+    annotation (Line(points={{-62.8,-2},{-62,-2},{-62,0},{-60,0},{-60,40.1},{
+          100.1,40.1}}, color={0,0,127}));
+  connect(Valve_WarmCold_ConferenceRoom_2.y, controlBus.Valve_TBA_WarmCold_conferenceroom_1)
+    annotation (Line(points={{-26.8,-2},{-24,-2},{-24,40.1},{100.1,40.1}},
+        color={0,0,127}));
+  connect(Valve_WarmCold_MultiPersonOffice_2.y, controlBus.Valve_TBA_WarmCold_multipersonoffice_1)
+    annotation (Line(points={{7.2,-2},{10,-2},{10,40.1},{100.1,40.1}}, color={0,
+          0,127}));
+  connect(Valve_WarmCold_Canteen_2.y, controlBus.Valve_TBA_WarmCold_canteen_1)
+    annotation (Line(points={{43.2,-2},{44,-2},{44,40.1},{100.1,40.1}}, color={
+          0,0,127}));
+  connect(Valve_WarmCold_Workshop_2.y, controlBus.Valve_TBA_WarmCold_workshop_1)
+    annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}}, color
+        ={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Full_Transfer_TBA;
