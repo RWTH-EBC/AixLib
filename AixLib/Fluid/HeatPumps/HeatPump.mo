@@ -188,7 +188,7 @@ model HeatPump "Base model of realistic heat pump"
     final mFlowIns_nominal=mFlow_conNominal,
     final kAOutNat_nominal=GCon) if             use_ConCap
     "Model calculating the heat losses to the ambient based on current parameters"
-    annotation (Placement(transformation(extent={{-98,98},{-70,124}})));
+    annotation (Placement(transformation(extent={{-100,94},{-72,120}})));
   BaseClasses.CapacityWithLosses EvaCapacity(
     final C=CEva,
     final scalingFactor=scalingFactor,
@@ -196,7 +196,7 @@ model HeatPump "Base model of realistic heat pump"
     final mFlowIns_nominal=mFlow_evaNominal,
     kAOutNat_nominal=GEva) if                   use_EvaCap
     "Model calculating the heat losses to the ambient based on current parameters"
-    annotation (Placement(transformation(extent={{-92,-124},{-64,-98}})));
+    annotation (Placement(transformation(extent={{-100,-120},{-72,-94}})));
   parameter Real scalingFactor "Scaling-factor of HP";
 
 equation
@@ -336,16 +336,16 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(mFlow_a1.m_flow, ConCapacity.mFlowIns) annotation (Line(
-      points={{-62,69},{-62,118.8},{-67.2,118.8}},
+      points={{-62,69},{-62,114.8},{-69.2,114.8}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(Condenser.heatPort, ConCapacity.fluidPort) annotation (Line(
-      points={{-6,76},{-14,76},{-14,101.64},{-69.44,101.64}},
+      points={{-6,76},{-14,76},{-14,97.64},{-71.44,97.64}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(sigBusHP.T_amb_con, ConCapacity.T_amb) annotation (Line(
-      points={{-116.925,-30.915},{-116.925,102},{-108,102},{-100,102},{-100,101.64},
-          {-100.8,101.64}},
+      points={{-116.925,-30.915},{-116.925,34},{-116,34},{-116,98},{-100,98},{
+          -100,97.64},{-102.8,97.64}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash), Text(
@@ -353,16 +353,16 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(mFlow_a2.m_flow, EvaCapacity.mFlowIns) annotation (Line(
-      points={{66,-63},{66,-103.2},{-61.2,-103.2}},
+      points={{66,-63},{66,-99.2},{-69.2,-99.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(Evaporator.heatPort, EvaCapacity.fluidPort) annotation (Line(
-      points={{-8,-74},{-18,-74},{-18,-120.36},{-63.44,-120.36}},
+      points={{-8,-74},{-18,-74},{-18,-116.36},{-71.44,-116.36}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(sigBusHP.T_amb_eva, EvaCapacity.T_amb) annotation (Line(
-      points={{-116.925,-30.915},{-116.925,-120},{-110,-120},{-94,-120},{-94,-120.36},
-          {-94.8,-120.36}},
+      points={{-116.925,-30.915},{-116.925,-116},{-108,-116},{-108,-116.36},{
+          -102.8,-116.36}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash), Text(

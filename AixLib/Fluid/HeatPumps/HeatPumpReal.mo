@@ -18,7 +18,7 @@ model HeatPumpReal
     final GEva=GEva,
     final CCon=CCon,
     final GCon=GCon,
-    final useComIne=useComIne,
+    final use_ComIne=useComIne,
     redeclare final model PerfData = PerfData)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
@@ -293,7 +293,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(realPasThrDef.y, securityControl.nSet) annotation (Line(
-      points={{-67.2,-62},{-18,-62},{-18,3.55271e-15},{-14.2667,3.55271e-15}},
+      points={{-67.2,-62},{-18,-62},{-18,3.55271e-015},{-14.2667,3.55271e-015}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(
