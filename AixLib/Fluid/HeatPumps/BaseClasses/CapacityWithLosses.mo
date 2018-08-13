@@ -38,11 +38,13 @@ model CapacityWithLosses
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={28,-2})));
-  PortTToRealT portTToRealT if not use_ForConv annotation (Placement(
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTSurf if
+                               not use_ForConv
+    "Sensor for surface temperature of device" annotation (Placement(
         transformation(
-        extent={{-8,-8},{8,8}},
+        extent={{8,8},{-8,-8}},
         rotation=180,
-        origin={-92,-14})));
+        origin={-94,-16})));
   HeatCoeffNat calcHeatCoeffNat(
     final scalingFactor=scalingFactor,
     final wukExp=wukExpOutNat,
@@ -119,12 +121,12 @@ equation
     annotation (Line(points={{-77.6,-72},{-120,-72}}, color={0,0,127}));
   connect(convectionIns.fluid, fluidPort)
     annotation (Line(points={{50,-72},{104,-72}}, color={191,0,0}));
-  connect(convectionOut.solid, portTToRealT.port) annotation (Line(
-      points={{-26,-72},{-18,-72},{-18,-56},{-100,-56},{-100,-14}},
+  connect(convectionOut.solid, senTSurf.port) annotation (Line(
+      points={{-26,-72},{-18,-72},{-18,-56},{-102,-56},{-102,-16}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(portTToRealT.T, calcHeatCoeffNat.u[3]) annotation (Line(
-      points={{-82.4,-14},{-74,-14},{-74,-15},{-65.4,-15}},
+  connect(senTSurf.T, calcHeatCoeffNat.u[3]) annotation (Line(
+      points={{-86,-16},{-74,-16},{-74,-15},{-65.4,-15}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(calcHeatCoeffNat.u[2], varTempCon.T) annotation (Line(
@@ -162,6 +164,53 @@ equation
       points={{-49.3,-15},{-49.3,-42.5},{-34,-42.5},{-34,-64}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-32,80},{20,-80}},
+          lineColor={0,0,0},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Backward),
+        Line(points={{20,20},{76,20}},  color={191,0,0}),
+        Line(points={{22,-20},{76,-20}},  color={191,0,0}),
+        Line(points={{40,80},{40,-80}}, color={0,127,255}),
+        Line(points={{76,80},{76,-80}}, color={0,127,255}),
+        Line(points={{40,-80},{30,-60}}, color={0,127,255}),
+        Line(points={{40,-80},{50,-60}}, color={0,127,255}),
+        Line(points={{76,-80},{66,-60}}, color={0,127,255}),
+        Line(points={{76,-80},{86,-60}}, color={0,127,255}),
+        Line(points={{40,-30},{20,-20}}, color={191,0,0}),
+        Line(points={{40,-10},{20,-20}}, color={191,0,0}),
+        Line(points={{40,10},{20,20}}, color={191,0,0}),
+        Line(points={{40,30},{20,20}}, color={191,0,0}),
+        Line(points={{-100,20},{-44,20}},
+                                        color={191,0,0}),
+        Line(points={{-98,-20},{-44,-20}},color={191,0,0}),
+        Line(points={{-80,80},{-80,-80}},
+                                        color={0,127,255}),
+        Line(points={{-44,80},{-44,-80}},
+                                        color={0,127,255}),
+        Line(points={{-80,-80},{-90,-60}},
+                                         color={0,127,255}),
+        Line(points={{-80,-80},{-70,-60}},
+                                         color={0,127,255}),
+        Line(points={{-44,-80},{-54,-60}},
+                                         color={0,127,255}),
+        Line(points={{-44,-80},{-34,-60}},
+                                         color={0,127,255}),
+        Line(points={{-80,-30},{-100,-20}},
+                                         color={191,0,0}),
+        Line(points={{-80,-10},{-100,-20}},
+                                         color={191,0,0}),
+        Line(points={{-80,10},{-100,20}},
+                                       color={191,0,0}),
+        Line(points={{-80,30},{-100,20}},
+                                       color={191,0,0}),
+        Text(
+          extent={{-72,42},{62,-38}},
+          lineColor={0,0,0},
+          pattern=LinePattern.Dash,
+          fillColor={159,159,223},
+          fillPattern=FillPattern.Backward,
+          textString="C")}),                                     Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CapacityWithLosses;
