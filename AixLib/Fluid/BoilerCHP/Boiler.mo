@@ -60,9 +60,9 @@ model Boiler "Boiler with internal and external control"
   replaceable model ExtControl =
     AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC
      constrainedby
-     AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
-    "ExternalControl"
-    annotation (Dialog(tab="External Control"),choicesAllMatching=true);
+    AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
+      "External control"
+      annotation (Dialog(tab="External Control"),choicesAllMatching=true);
   BaseClasses.Controllers.InternalControl internalControl(
     final paramBoiler=paramBoiler,
     final KR=KR,
@@ -127,11 +127,10 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>A boiler model consisting of the internal boiler controler and a replaceable
-outer controler.
-This controler can be chosen to provide the boiler temperature setpoint based on
-the chosen conditions
-such as ambient air temperature, etc.
+<p>A boiler model consisting of the internal boiler controller and a replaceable
+outer controller.
+This controller can be chosen to provide the boiler temperature setpoint based
+on the chosen conditions such as ambient air temperature, etc.
 </p>
 </html>",
         revisions="<html>
@@ -148,7 +147,7 @@ equations for boolean inputs</li>
 added.</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
 appropriately</li>
-<li><i>April 20, 2012&nbsp;</i> by Ana Constanting:<br/>Implemented</li>
+<li><i>April 20, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented</li>
 </ul>
 </html>"));
 end Boiler;

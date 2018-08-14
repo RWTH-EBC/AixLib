@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow1IwL2IwS1Gr1Uf1
   "1 outer wall, 2 inner walls load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
   import AixLib;
@@ -85,6 +85,19 @@ model Ow1IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor1));
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -120,6 +133,10 @@ model Ow1IwL2IwS1Gr1Uf1
     withDoor=withDoor1,
     WallType=Type_OW,
     WindowType=Type_Win,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
     eps_door=eps_door_OD1)
     annotation (Placement(transformation(extent={{-64,-14},{-54,42}})));
@@ -130,6 +147,10 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={23,59},
         extent={{-5.00018,-29},{5.00003,29}},
@@ -141,6 +162,10 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,23},
         extent={{-3,-15},{3,15}},
@@ -152,6 +177,10 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={25,-59},
         extent={{-5.00002,-29},{5.00001,29}},
@@ -165,6 +194,10 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={-31,60},
@@ -177,6 +210,10 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -212,6 +249,10 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,-17},
         extent={{-3,-15},{3,15}},
@@ -241,8 +282,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
   AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
-    h=room_width,
-    l=room_length,
+    A=room_width*room_length,
     n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
@@ -333,7 +373,9 @@ protected
        else AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to ground type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
+   if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating4Layers()
+  else if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else
       if TIR == 2 then
       AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR
@@ -341,7 +383,9 @@ protected
        else AixLib.DataBase.Walls.WSchV1984.Floor.FLground_WSchV1984_SML()
     annotation (Dialog(tab="Types"));
   // Ceiling to upper floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
+   if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers()
+  else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf()
        else
@@ -430,11 +474,11 @@ equation
   connect(thermCeiling, thermCeiling) annotation (Line(points={{90,70},{85,70},
           {85,70},{90,70}}, color={191,0,0}));
   connect(ground, floor_FH.port_b) annotation (Line(
-      points={{-6,-94},{-32,-94},{-32,-89.7},{-31.6,-89.7}},
+      points={{-6,-94},{-32,-94},{-32,-90},{-30,-90}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
-      points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-84.2999}},
+      points={{-77,-79},{-77,-80},{-30,-80},{-30,-83.9999}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(ground, floor.port_outside) annotation (Line(

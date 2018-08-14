@@ -1,0 +1,7 @@
+﻿convertClass("AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis", "AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis", {"Floorheatingtype","Floor","Dis","c_top_ratio","C_Floorheating","C_top","C_down","Tubelength","Watervolume","k_nom_top","k_nom_down","StarTop","ThermTop","t_flow","t_return","fH_Segment"}, {"floorHeatingType","isFloor","dis","cTopRatio","cFloorHeating","cTop","cDown","tubeLength","VWater","kTop_nominal","kDown_nominal","starRad","thermConv","TFlow","TReturn","panelHeatingSegment"});
+convertClass("AixLib.Fluid.HeatExchangers.ActiveWalls.Contributor", "AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor");
+convertClass("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PH_Segment", "AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PanelHeatingSegment");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PH_Segment", {"Floor","Watervolume","k_top","k_down","C_top","C_down","Volume","t_flow","t_return","StarTop","ThermTop","ThermDown"},  {"isFloor","VWater","kTop","kDown","cTop","cDown","vol","TFlow","TReturn","starRad","thermConvRoom","thermConvWall"});
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PressureDropPH", {"Tubelength"},{"tubeLength"});
+convertClass("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.Panel_Segment", "AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.HeatConductionSegment");

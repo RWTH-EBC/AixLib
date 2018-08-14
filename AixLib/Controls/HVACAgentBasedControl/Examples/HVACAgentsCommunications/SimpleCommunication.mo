@@ -33,11 +33,11 @@ model SimpleCommunication
     annotation (Placement(transformation(extent={{-92,-42},{-72,-22}})));
   inner Agents.MessageNotification messageNotification
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  CostFunctions.Economic.ConstantFactor constantFactor(p=1, eta=1)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor(p=1, eta=1)
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
-  CostFunctions.Economic.ConstantFactor constantFactor1(eta=1, p=2)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor1(eta=1, p=2)
     annotation (Placement(transformation(extent={{60,80},{80,100}})));
-  CostFunctions.Economic.ConstantFactor constantFactor2(eta=1, p=0.5)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor2(eta=1, p=0.5)
     annotation (Placement(transformation(extent={{60,2},{80,22}})));
 equation
   connect(onOff.y, heatProducerAgent.OnOff_external) annotation (Line(points={{-69,30},
@@ -174,7 +174,7 @@ Low Temp Circuit"),
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
 <li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
 </ul>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></b></p>

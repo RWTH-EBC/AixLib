@@ -2,7 +2,7 @@ within AixLib.Building.HighOrder.Examples.Validation.ASHRAE140;
 model Case950FF
   extends Modelica.Icons.Example;
 
-  parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition AERProfile = AixLib.DataBase.Profiles.ASHRAE140.Ventilation_caseX50();
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition AERProfile = AixLib.DataBase.Profiles.ASHRAE140.Ventilation_caseX50();
   Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,

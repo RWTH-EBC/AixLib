@@ -1,5 +1,3 @@
-IdealSinks
-IdealSinksDynamicDemand
-OpenLoopCooling
-OpenLoopCoolingDp
-OpenLoopHeatPumpCarnot
+ClosedLoop
+OpenLoop
+NoReturn

@@ -72,9 +72,9 @@ model BuildingHeating
     setCapacity(start=1),
     currentCapacityDiscrete(start=1))
     annotation (Placement(transformation(extent={{-20,-138},{0,-118}})));
-  CostFunctions.Economic.ConstantFactor constantFactor(eta=1)
+  CostFunctions.Economic.Constant_Economic_Cost constantFactor(eta=1)
     annotation (Placement(transformation(extent={{-100,-112},{-80,-92}})));
-  CostFunctions.Economic.ConstantFactor constantFactor1(p=0.60, eta=1)
+  CostFunctions.Economic.Constant_Economic_Cost constantFactor1(p=0.60, eta=1)
     annotation (Placement(transformation(extent={{-20,-112},{0,-92}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
     annotation (Placement(transformation(extent={{-140,-142},{-120,-122}})));
@@ -144,7 +144,7 @@ model BuildingHeating
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-122,92},{-102,112}})));
   inner Modelica.Fluid.System system
