@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
-model LookUpTableND "n-dimensional table with data for heat pump"
+model LookUpTableND "N-dimensional table with data for heat pump"
   extends BaseClasses.PartialPerformanceData;
   Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-96,48},

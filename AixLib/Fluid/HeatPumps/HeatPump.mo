@@ -21,7 +21,7 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Placement(transformation(extent={{-8,-84},{12,-64}})));
   Sensors.MassFlowRate mFlow_a1(redeclare final package Medium = Medium_con,
       final allowFlowReversal=allowFlowReversalCon)
-    "mass flow rate at source inlet"
+    "Mass flow rate at source inlet"
     annotation (Placement(transformation(extent={{-72,90},{-52,70}})));
   Sensors.TemperatureTwoPort senT_b2(
     final transferHeat=true,
@@ -57,22 +57,22 @@ model HeatPump "Base model of realistic heat pump"
                     "Temperature at source inlet"
     annotation (Placement(transformation(extent={{-44,90},{-24,70}})));
   Sensors.MassFlowRate mFlow_a2(redeclare package Medium = Medium_eva, final
-      allowFlowReversal=allowFlowReversalEva) "mass flow rate at sink inlet"
+      allowFlowReversal=allowFlowReversalEva) "Mass flow rate at sink inlet"
     annotation (Placement(transformation(extent={{76,-84},{56,-64}})));
   FixedResistances.PressureDrop preDro_2(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
-    final dp_nominal=dpEva_nominal) "pressure drop at sink side"
+    final dp_nominal=dpEva_nominal) "Pressure drop at sink side"
     annotation (Placement(transformation(extent={{-60,-84},{-80,-64}})));
   FixedResistances.PressureDrop preDro_1(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
-    final dp_nominal=dpCon_nominal) "pressure drop at sink side"
+    final dp_nominal=dpCon_nominal) "Pressure drop at sink side"
     annotation (Placement(transformation(extent={{66,70},{86,90}})));
   Modelica.Blocks.Interfaces.RealInput nSet
-    "input signal speed for compressor relative between 0 and 1" annotation (Placement(
+    "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-136,-16},{-104,16}})));
   Controls.Interfaces.HeatPumpControlBus
                            sigBusHP
@@ -95,9 +95,9 @@ model HeatPump "Base model of realistic heat pump"
         rotation=270,
         origin={-16,54})));
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
   parameter Boolean allowFlowReversalEva=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Evaporator", tab="Assumptions"));

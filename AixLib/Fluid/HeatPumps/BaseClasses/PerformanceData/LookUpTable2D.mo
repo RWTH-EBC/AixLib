@@ -25,7 +25,7 @@ model LookUpTable2D "Performance data coming from manufacturer"
   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
         -76,50], Placement(transformation(extent={{-90,-34},{-78,-22}})));
   parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable= AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()
-    "data Table of HP" annotation(choicesAllMatching = true);
+    "Data Table of HP" annotation(choicesAllMatching = true);
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
                     "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{52,70},
             {72,90}})));

@@ -124,9 +124,9 @@ model HeatPumpReal
         rotation=90,
         origin={160,-60})));
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate, used for regularization near zero flow"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
@@ -208,7 +208,7 @@ model HeatPumpReal
     useSec
     "No 2. Layer"
     annotation (Placement(transformation(extent={{-84,-70},{-68,-54}})),
-      __Dymola_choicesAllMatching=true);
+      choicesAllMatching=true);
   Interfaces.PassThroughMedium mediumPassThroughSin(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
@@ -293,7 +293,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(realPasThrDef.y, securityControl.nSet) annotation (Line(
-      points={{-67.2,-62},{-18,-62},{-18,3.55271e-015},{-14.2667,3.55271e-015}},
+      points={{-67.2,-62},{-18,-62},{-18,3.55271e-15},{-14.2667,3.55271e-15}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(

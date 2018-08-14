@@ -2,7 +2,7 @@
 model CapacityWithLosses
   "Base model for heat capacity with heat losses depending on ambient conditions"
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCap(final C=C)
-    "heat Capacity"
+    "Heat Capacity"
     annotation (Placement(transformation(extent={{-16,-72},{16,-40}})));
   Modelica.Thermal.HeatTransfer.Components.Convection convectionIns
     "Convection between fluid and solid"
