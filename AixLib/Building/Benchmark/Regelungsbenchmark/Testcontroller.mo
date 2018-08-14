@@ -16,8 +16,6 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,-106},{-60,-86}})));
   Modelica.Blocks.Sources.RealExpression Pumps(y=1)
     annotation (Placement(transformation(extent={{24,-78},{4,-58}})));
-  Modelica.Blocks.Sources.RealExpression Fan_RLT(y=100)
-    annotation (Placement(transformation(extent={{20,-106},{40,-86}})));
   Modelica.Blocks.Sources.RealExpression Fan_Aircooler(y=0)
     annotation (Placement(transformation(extent={{80,-106},{60,-86}})));
   Modelica.Blocks.Sources.RealExpression Valve1(y=1)
@@ -38,20 +36,8 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,44},{-60,64}})));
   Modelica.Blocks.Sources.RealExpression Valve_WarmCold_OPO
     annotation (Placement(transformation(extent={{-40,86},{-20,106}})));
-  Modelica.Blocks.Sources.RealExpression X_OPO(y=0.01)
-    annotation (Placement(transformation(extent={{20,86},{40,106}})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{80,0},{120,40}})));
-  Modelica.Blocks.Sources.RealExpression X_CR(y=0.01)
-    annotation (Placement(transformation(extent={{20,72},{40,92}})));
-  Modelica.Blocks.Sources.RealExpression X_MPO(y=0.01)
-    annotation (Placement(transformation(extent={{20,58},{40,78}})));
-  Modelica.Blocks.Sources.RealExpression X_C(y=0.01)
-    annotation (Placement(transformation(extent={{20,44},{40,64}})));
-  Modelica.Blocks.Sources.RealExpression X_W(y=0.01)
-    annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Modelica.Blocks.Sources.RealExpression X_Central(y=0.01)
-    annotation (Placement(transformation(extent={{20,16},{40,36}})));
   Modelica.Blocks.Sources.RealExpression Valve_WarmCold_CR
     annotation (Placement(transformation(extent={{-40,72},{-20,92}})));
   Modelica.Blocks.Sources.RealExpression Valve_WarmCold_MPO
@@ -64,6 +50,10 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,2},{-20,22}})));
   Modelica.Blocks.Sources.BooleanExpression Heatpump_big(y=false)
     annotation (Placement(transformation(extent={{-100,-64},{-80,-44}})));
+  Modelica.Blocks.Sources.Step step(height=100, startTime=1000)
+    annotation (Placement(transformation(extent={{2,-104},{22,-84}})));
+  Modelica.Blocks.Math.Gain gain(k=1)
+    annotation (Placement(transformation(extent={{52,34},{32,54}})));
 equation
   connect(Boiler.y, controlBus.OnOff_boiler) annotation (Line(points={{-79,-68},
           {-70,-68},{-70,-19.9},{100.1,-19.9}},
@@ -78,9 +68,6 @@ equation
   connect(TSet_CHP.y, controlBus.TSet_CHP) annotation (Line(points={{-61,-96},{
           -70,-96},{-70,-19.9},{100.1,-19.9}},
                                            color={0,0,127}));
-  connect(Fan_RLT.y, controlBus.Fan_RLT) annotation (Line(points={{41,-96},{50,
-          -96},{50,-19.9},{100.1,-19.9}},
-                                      color={0,0,127}));
   connect(Fan_Aircooler.y, controlBus.Fan_Aircooler) annotation (Line(points={{59,-96},
           {50,-96},{50,-19.9},{100.1,-19.9}},     color={0,0,127}));
   connect(Valve4.y, controlBus.Valve4) annotation (Line(points={{-79,54},{-70,
@@ -107,22 +94,9 @@ equation
   connect(Valve5.y, controlBus.Valve5) annotation (Line(points={{-61,96},{-70,
           96},{-70,-19.9},{100.1,-19.9}},
                                       color={0,0,127}));
-  connect(X_OPO.y, controlBus.X_OpenPlanOffice) annotation (Line(points={{41,96},
-          {50,96},{50,-19.9},{100.1,-19.9}},
-                                         color={0,0,127}));
   connect(CHP.y, controlBus.OnOff_CHP) annotation (Line(points={{-79,-82},{-70,
           -82},{-70,-19.9},{100.1,-19.9}},
                                        color={255,0,255}));
-  connect(X_CR.y, controlBus.X_ConfernceRoom) annotation (Line(points={{41,82},
-          {50,82},{50,-19.9},{100.1,-19.9}}, color={0,0,127}));
-  connect(X_MPO.y, controlBus.X_MultiPersonRoom) annotation (Line(points={{41,
-          68},{50,68},{50,-19.9},{100.1,-19.9}}, color={0,0,127}));
-  connect(X_C.y, controlBus.X_Canteen) annotation (Line(points={{41,54},{50,54},
-          {50,-19.9},{100.1,-19.9}}, color={0,0,127}));
-  connect(X_W.y, controlBus.X_Workshop) annotation (Line(points={{41,40},{50,40},
-          {50,-19.9},{100.1,-19.9}}, color={0,0,127}));
-  connect(X_Central.y, controlBus.X_Central) annotation (Line(points={{41,26},{
-          50,26},{50,-19.9},{100.1,-19.9}}, color={0,0,127}));
   connect(Valve_WarmCold_OPO.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
     annotation (Line(points={{-19,96},{-10,96},{-10,-19.9},{100.1,-19.9}},
         color={0,0,127}));
@@ -228,6 +202,28 @@ equation
           -68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
   connect(Pumps.y, controlBus.Pump_TBA_Workshop_y) annotation (Line(points={{3,
           -68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(step.y, controlBus.Fan_RLT) annotation (Line(points={{23,-94},{36,-94},
+          {36,-92},{50,-92},{50,-19.9},{100.1,-19.9}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(gain.u, measureBus.WaterInAir) annotation (Line(points={{54,44},{78,
+          44},{78,20.1},{100.1,20.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(gain.y, controlBus.X_OpenPlanOffice) annotation (Line(points={{31,44},
+          {14,44},{14,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(gain.y, controlBus.X_ConfernceRoom) annotation (Line(points={{31,44},
+          {14,44},{14,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(gain.y, controlBus.X_MultiPersonRoom) annotation (Line(points={{31,44},
+          {14,44},{14,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(gain.y, controlBus.X_Canteen) annotation (Line(points={{31,44},{14,44},
+          {14,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(gain.y, controlBus.X_Workshop) annotation (Line(points={{31,44},{14,
+          44},{14,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(gain.y, controlBus.X_Central) annotation (Line(points={{31,44},{14,44},
+          {14,-19.9},{100.1,-19.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Testcontroller;

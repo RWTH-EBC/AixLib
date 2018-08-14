@@ -22,38 +22,92 @@ replaceable package Medium_Water =
         origin={11,58})));
   Regelungsbenchmark.Testcontroller testcontroller
     annotation (Placement(transformation(extent={{-98,74},{-78,94}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature[5](T=293.15)
-    annotation (Placement(transformation(extent={{56,-40},{76,-20}})));
-  Fluid.Sources.Boundary_pT bou2(
-    redeclare package Medium = Medium_Water,
-    p=100000,
-    nPorts=1) annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=-90,
-        origin={16,-80})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1
                                                                          [5](T=293.15)
     annotation (Placement(transformation(extent={{-92,-34},{-72,-14}})));
   Fluid.Sources.Boundary_pT bou1(
     redeclare package Medium = Medium_Water,
     p=100000,
-    nPorts=1) annotation (Placement(transformation(
+    nPorts=2) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
-        origin={-2,-62})));
-  Fluid.Sources.MassFlowSource_T boundary(
-    redeclare package Medium = Medium_Water,
-    m_flow=1,
-    nPorts=1,
-    T=313.15) annotation (Placement(transformation(extent={{-52,-64},{-32,-44}})));
-  Fluid.Sources.MassFlowSource_T boundary1(
-    redeclare package Medium = Medium_Water,
-    m_flow=1,
-    nPorts=1,
-    T=313.15)
-    annotation (Placement(transformation(extent={{-58,-106},{-38,-86}})));
+        origin={-14,-72})));
   Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT(riseTime_valve=1)
     annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
+  Fluid.Sources.Boundary_pT bou4(
+    redeclare package Medium = Medium_Water,
+    p=100000,
+    nPorts=2) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-36,-70})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2
+                                                                         [5](T=293.15)
+    annotation (Placement(transformation(extent={{-22,-28},{-2,-8}})));
+  Generation.Generation generation(
+    v_nominal_hotwater=1.692,
+    m_flow_nominal_hotwater=6.307,
+    v_nominal_warmwater=1.543,
+    m_flow_nominal_warmwater=7.819,
+    v_nominal_coldwater=1.567,
+    m_flow_nominal_coldwater=7.774,
+    m_flow_nominal_generation_hot=3.805,
+    factor_heatpump_model_small=3,
+    factor_heatpump_model_big=6,
+    vol_small=0.012,
+    vol_big=0.024,
+    m_flow_nominal_generation_warmwater=4.951,
+    m_flow_nominal_generation_coldwater=3.914,
+    m_flow_nominal_generation_aircooler=4.951,
+    Probe_depth=120,
+    n_probes=1,
+    pipe_length_hotwater=25,
+    pipe_length_warmwater=25,
+    pipe_length_coldwater=25,
+    riseTime_valve=2,
+    pipe_wall_thickness_hotwater=0.004,
+    pipe_insulation_thickness_hotwater=0.02,
+    pipe_insulation_conductivity_hotwater=0.05,
+    pipe_wall_thickness_warmwater=0.004,
+    pipe_insulation_thickness_warmwater=0.02,
+    pipe_insulation_conductivity_warmwater=0.05,
+    pipe_wall_thickness_coldwater=0.0036,
+    pipe_insulation_thickness_coldwater=0.02,
+    pipe_insulation_conductivity_coldwater=0.05,
+    m_flow_nominal_generation_air_max=100,
+    m_flow_nominal_generation_air_min=10,
+    alphaHC1_warm=500,
+    alphaHC2_warm=500,
+    alphaHC1_cold=500,
+    R_loss_small=50,
+    R_loss_big=100,
+    dpHeatexchanger_nominal=20000,
+    dpValve_nominal_generation_hot=227000,
+    T_conMax_big=328.15,
+    T_conMax_small=328.15,
+    dpValve_nominal_warmwater=285000,
+    dpValve_nominal_coldwater=200000,
+    dpValve_nominal_generation_aircooler=60000,
+    Earthtemperature_start=283.15)
+    annotation (Placement(transformation(extent={{-78,-82},{-58,-62}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature3(T=293.15)
+    annotation (Placement(transformation(extent={{-132,-64},{-112,-44}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature4(T=293.15)
+    annotation (Placement(transformation(extent={{-134,-94},{-114,-74}})));
+  Fluid.Sources.Boundary_pT bou2(
+    redeclare package Medium = Medium_Water,
+    p=100000,
+    nPorts=2) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={10,-42})));
+  Fluid.Sources.Boundary_pT bou3(
+    redeclare package Medium = Medium_Water,
+    p=100000,
+    nPorts=2) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={2,-62})));
 equation
   connect(weather.SolarRadiation_OrientedSurfaces1,office. SolarRadiationPort)
     annotation (Line(points={{51,99},{22,99},{22,54},{30,54}}, color={255,128,0}));
@@ -84,20 +138,6 @@ equation
       points={{54,82},{-78,82}},
       color={255,204,51},
       thickness=0.5));
-  connect(fixedTemperature.port, office.Heatport_TBA)
-    annotation (Line(points={{76,-30},{79.6,-30},{79.6,0}}, color={191,0,0}));
-  connect(boundary.ports[1],full_Transfer_RLT. Fluid_in_hot) annotation (Line(
-        points={{-32,-54},{0,-54},{0,-52},{30,-52}},
-                                                   color={0,127,255}));
-  connect(bou1.ports[1],full_Transfer_RLT. Fluid_out_hot) annotation (Line(
-        points={{-2,-66},{14,-66},{14,-56},{30,-56}},
-                                                color={0,127,255}));
-  connect(boundary1.ports[1],full_Transfer_RLT. Fluid_in_cold) annotation (Line(
-        points={{-38,-96},{-4,-96},{-4,-64},{30,-64}},
-                                                   color={0,127,255}));
-  connect(full_Transfer_RLT.Fluid_out_cold,bou2. ports[1]) annotation (Line(
-        points={{30,-68},{24,-68},{24,-84},{16,-84}},
-                                                    color={0,127,255}));
   connect(fixedTemperature1.port, full_Transfer_RLT.heatPort)
     annotation (Line(points={{-72,-24},{40,-24},{40,-50}}, color={191,0,0}));
   connect(full_Transfer_RLT.Air_out, office.Air_in) annotation (Line(points={{
@@ -113,6 +153,40 @@ equation
       points={{50.2,-63},{50.2,9.5},{66,9.5},{66,82}},
       color={255,204,51},
       thickness=0.5));
+  connect(testcontroller.measureBus, weather.measureBus) annotation (Line(
+      points={{-78,86},{-50,86},{-50,88},{66,88},{66,82}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(fixedTemperature2.port, office.Heatport_TBA)
+    annotation (Line(points={{-2,-18},{79.6,-18},{79.6,0}}, color={191,0,0}));
+  connect(generation.Fluid_out_warm, bou4.ports[1]) annotation (Line(points={{
+          -58,-70},{-26,-70},{-26,-74},{-35.2,-74}}, color={0,127,255}));
+  connect(bou4.ports[2], generation.Fluid_in_warm)
+    annotation (Line(points={{-36.8,-74},{-58,-74}}, color={0,127,255}));
+  connect(bou1.ports[1], generation.Fluid_out_cold) annotation (Line(points={{
+          -13.2,-76},{-13.2,-80},{-58,-80}}, color={0,127,255}));
+  connect(generation.controlBus, testcontroller.controlBus) annotation (Line(
+      points={{-64,-62},{-64,82},{-78,82}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(generation.measureBus, weather.measureBus) annotation (Line(
+      points={{-72,-62},{-74,-62},{-74,86},{-50,86},{-50,88},{66,88},{66,82}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(fixedTemperature4.port, generation.heatPort_workshop) annotation (
+      Line(points={{-114,-84},{-96,-84},{-96,-70},{-78,-70}}, color={191,0,0}));
+  connect(generation.heatPort_Canteen, fixedTemperature3.port) annotation (Line(
+        points={{-78,-66},{-96,-66},{-96,-54},{-112,-54}}, color={191,0,0}));
+  connect(bou2.ports[1], full_Transfer_RLT.Fluid_in_hot) annotation (Line(
+        points={{10.8,-46},{20,-46},{20,-52},{30,-52}}, color={0,127,255}));
+  connect(full_Transfer_RLT.Fluid_out_hot, bou2.ports[2]) annotation (Line(
+        points={{30,-56},{9.2,-56},{9.2,-46}}, color={0,127,255}));
+  connect(generation.Fluid_in_cold, bou1.ports[2])
+    annotation (Line(points={{-58,-76},{-14.8,-76}}, color={0,127,255}));
+  connect(bou3.ports[1], full_Transfer_RLT.Fluid_in_cold) annotation (Line(
+        points={{2.8,-66},{16,-66},{16,-64},{30,-64}}, color={0,127,255}));
+  connect(bou3.ports[2], full_Transfer_RLT.Fluid_out_cold) annotation (Line(
+        points={{1.2,-66},{1.2,-68},{30,-68}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office_Test;

@@ -14,9 +14,10 @@ model InternalLoads_Water
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Sources.RealExpression FixWater_OpenPlanOffice(y=1.125/3600)
     annotation (Placement(transformation(extent={{-64,48},{-44,68}})));
-  Modelica.Blocks.Sources.RealExpression FixWater_MultiPersonOffice(y=0.075)
+  Modelica.Blocks.Sources.RealExpression FixWater_MultiPersonOffice(y=0.075/
+        3600)
     annotation (Placement(transformation(extent={{-64,10},{-44,30}})));
-  Modelica.Blocks.Sources.RealExpression FixWater_Canteen(y=1.25)
+  Modelica.Blocks.Sources.RealExpression FixWater_Canteen(y=1.25/3600)
     annotation (Placement(transformation(extent={{-64,-70},{-44,-50}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{20,64},{32,76}})));
