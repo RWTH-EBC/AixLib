@@ -29,7 +29,8 @@ model Full_Transfer_RLT
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
                annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
         Medium_Air)
@@ -80,7 +81,8 @@ model Full_Transfer_RLT
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
               annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
   RLT MultiPersonOffice(
     riseTime_valve=riseTime_valve,
@@ -105,7 +107,8 @@ model Full_Transfer_RLT
     v_nominal_hot=1.26,
     m_flow_nominal_hot=0.152,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
   RLT ConferenceRoom(
     riseTime_valve=riseTime_valve,
@@ -130,7 +133,8 @@ model Full_Transfer_RLT
     m_flow_nominal_cold=0.192,
     pipe_wall_thickness_cold=0.0023,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
   RLT OpenPlanOffice(
     riseTime_valve=riseTime_valve,
@@ -155,7 +159,8 @@ model Full_Transfer_RLT
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
   RLT Central(
     riseTime_valve=riseTime_valve,
@@ -180,7 +185,8 @@ model Full_Transfer_RLT
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12()))
               annotation (Placement(transformation(extent={{-66,72},{-46,52}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[5]
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));

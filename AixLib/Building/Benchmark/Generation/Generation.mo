@@ -325,7 +325,8 @@ model Generation
     annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
 equation
   connect(generation_Hot.Fluid_in_Hot, HotWater.portHC1Out) annotation (Line(
-        points={{-60,68},{-32,68},{-32,67.94},{17.8125,67.94}},color={0,127,255}));
+        points={{-60.4,66.2},{-32,66.2},{-32,67.94},{17.8125,67.94}},
+                                                               color={0,127,255}));
   connect(HotWater.fluidportBottom2, Fluid_in_hot) annotation (Line(points={{37.3125,
           43.81},{37.3125,40},{100,40}},       color={0,127,255}));
   connect(HotWater.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation (

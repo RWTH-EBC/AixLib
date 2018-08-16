@@ -1,5 +1,6 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_Hot
+//  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
 
@@ -15,14 +16,14 @@ model Generation_Hot
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
         Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
+    annotation (Placement(transformation(extent={{86,-48},{106,-28}})));
 
   Test.Boiler_Benchmark boiler_Benchmark(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_generation_hot,
     transferHeat=true,
-    TAmb=298.15,
-    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW())
+    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(),
+    TAmb=298.15)
     annotation (Placement(transformation(extent={{10,46},{30,66}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve6(
@@ -77,7 +78,7 @@ equation
   connect(boiler_Benchmark.port_b, Fluid_out_Hot) annotation (Line(points={{30,
           56},{70,56},{70,38},{100,38}}, color={0,127,255}));
   connect(bou3.ports[1], Fluid_in_Hot)
-    annotation (Line(points={{26.8,-12},{26.8,-20},{100,-20}},
+    annotation (Line(points={{26.8,-12},{26.8,-38},{96,-38}},
                                                            color={0,127,255}));
   connect(boiler_Benchmark.isOn, controlBus.OnOff_boiler) annotation (Line(
         points={{25,47},{25,40},{-39.9,40},{-39.9,100.1}},

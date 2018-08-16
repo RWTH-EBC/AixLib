@@ -135,7 +135,7 @@ model RLT
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+    annotation (Dialog(enable = true), Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
   Modelica.Blocks.Interfaces.RealInput pump_cold
@@ -195,7 +195,8 @@ model RLT
         rotation=-90,
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4
+      per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));
