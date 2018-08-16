@@ -1,3 +1,4 @@
+within AixLib.Building.HighOrder.Rooms.OFD;
 model Attic_Ro2Lf5
   "Attic with 2 saddle roofs and a floor toward 5 rooms on the lower floor, with all other walls towards the outside"
   import AixLib;

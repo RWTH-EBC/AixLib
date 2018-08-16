@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Components.Walls.BaseClasses;
+within AixLib.Building.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));

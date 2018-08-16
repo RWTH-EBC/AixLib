@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.Examples;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.Examples;
 model PanelHeating
   extends Modelica.Icons.Example;
       replaceable package Medium =
