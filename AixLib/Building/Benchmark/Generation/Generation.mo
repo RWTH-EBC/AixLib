@@ -265,12 +265,14 @@ model Generation
     dIns=pipe_insulation_thickness_hotwater,
     kIns=pipe_insulation_conductivity_hotwater,
     thickness=pipe_wall_thickness_hotwater,
-    m_flow_nominal=m_flow_nominal_hotwater)
+    m_flow_nominal=m_flow_nominal_hotwater,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{7.5,-7.5},{-7.5,7.5}},
         rotation=180,
         origin={81.5,94.5})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={60,94})));
@@ -285,7 +287,8 @@ model Generation
     dIns=pipe_insulation_thickness_warmwater,
     kIns=pipe_insulation_conductivity_warmwater,
     thickness=pipe_wall_thickness_warmwater,
-    m_flow_nominal=m_flow_nominal_warmwater)
+    m_flow_nominal=m_flow_nominal_warmwater,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{7.5,-7.5},{-7.5,7.5}},
         rotation=180,
         origin={69.5,28.5})));
@@ -300,22 +303,26 @@ model Generation
     dIns=pipe_insulation_thickness_coldwater,
     kIns=pipe_insulation_conductivity_coldwater,
     thickness=pipe_wall_thickness_coldwater,
-    m_flow_nominal=m_flow_nominal_coldwater)
+    m_flow_nominal=m_flow_nominal_coldwater,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{7.5,7.5},{-7.5,-7.5}},
         rotation=180,
         origin={81.5,-97.5})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={48,28})));
   Fluid.Movers.SpeedControlled_y fan3(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=180,
         origin={56,-96})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-68,-58})));

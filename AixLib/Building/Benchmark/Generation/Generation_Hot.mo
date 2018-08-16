@@ -59,11 +59,13 @@ model Generation_Hot
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
             {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-38,16})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water,
+      allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-10,-30},{-30,-10}})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-52,-20},{-32,0}})));

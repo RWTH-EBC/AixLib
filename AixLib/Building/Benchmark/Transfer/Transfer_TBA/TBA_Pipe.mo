@@ -44,8 +44,9 @@ model TBA_Pipe
     dIns=pipe_insulation_thickness,
     kIns=pipe_insulation_conductivity,
     thickness=pipe_wall_thickness,
-    nPorts=1,
-    length=pipe_length + 50)
+    length=pipe_length + 50,
+    allowFlowReversal=true,
+    nPorts=1)
     annotation (Placement(transformation(extent={{9,8},{-9,-8}},
         rotation=-90,
         origin={60,-9})));
@@ -70,7 +71,8 @@ model TBA_Pipe
     dIns=pipe_insulation_thickness,
     kIns=pipe_insulation_conductivity,
     thickness=pipe_wall_thickness,
-    length=pipe_length + 50)
+    length=pipe_length + 50,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{9,-8},{-9,8}},
         rotation=-90,
         origin={-60,-9})));
@@ -84,7 +86,8 @@ model TBA_Pipe
         rotation=90,
         origin={66,-40})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=-90,
         origin={-60,28})));
@@ -98,8 +101,9 @@ model TBA_Pipe
     annotation (Placement(transformation(extent={{-112,16},{-88,40}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-42,-30},{-22,-10}})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water,
+      allowFlowReversal=false)
+    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
         rotation=90,
         origin={60,26})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
@@ -146,10 +150,6 @@ equation
           {-60,-30},{-60,-18}}, color={0,127,255}));
   connect(senTem1.port, vol1.ports[4]) annotation (Line(points={{32,-30},{60,-30},
           {60,-38.2}}, color={0,127,255}));
-  connect(vol.ports[2], senMasFlo.port_b)
-    annotation (Line(points={{4,46},{60,46},{60,36}}, color={0,127,255}));
-  connect(senMasFlo.port_a, plugFlowPipe.ports_b[1])
-    annotation (Line(points={{60,16},{60,0}}, color={0,127,255}));
   connect(senMasFlo.m_flow, m_flow) annotation (Line(points={{71,26},{80,26},{80,
           20},{100,20}}, color={0,0,127}));
   connect(fan2.P, Power_pump) annotation (Line(points={{-67.2,36.8},{-67.2,80},{
@@ -158,6 +158,10 @@ equation
     annotation (Line(points={{39,-20},{100,-20}}, color={0,0,127}));
   connect(senTem2.T, Temp_in) annotation (Line(points={{-25,-20},{0,-20},{0,-60},
           {100,-60}}, color={0,0,127}));
+  connect(vol.ports[2], senMasFlo.port_a)
+    annotation (Line(points={{4,46},{60,46},{60,36}}, color={0,127,255}));
+  connect(senMasFlo.port_b, plugFlowPipe.ports_b[1])
+    annotation (Line(points={{60,16},{60,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end TBA_Pipe;

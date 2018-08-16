@@ -40,7 +40,8 @@ model Generation_heatPump
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
             {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={42,60})));
@@ -56,9 +57,11 @@ model Generation_heatPump
     annotation (Placement(transformation(extent={{6,48},{26,68}})));
   Fluid.Sensors.Temperature senTem3(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{30,-18},{50,2}})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water,
+      allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-88,50},{-68,70}})));
-  Fluid.Sensors.MassFlowRate senMasFlo1(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo1(redeclare package Medium = Medium_Water,
+      allowFlowReversal=false)
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
   Fluid.HeatPumps.HeatPumpSimple heatPumpSimple(
     redeclare package Medium = Medium_Water,

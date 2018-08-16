@@ -52,7 +52,8 @@ model RLT
   Fluid.Humidifiers.SprayAirWasher_X hum(
     m_flow_nominal=20,
     dp_nominal=20,
-    redeclare package Medium = Medium_Air)
+    redeclare package Medium = Medium_Air,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{66,-76},{86,-56}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
         Medium_Water)
@@ -94,7 +95,8 @@ model RLT
     kIns=pipe_insulation_conductivity_hot,
     thickness=pipe_wall_thickness_hot,
     nPorts=1,
-    length=pipe_length_hot*2)
+    length=pipe_length_hot*2,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-9,8},{9,-8}},
         rotation=-90,
         origin={-40,11})));
@@ -120,7 +122,8 @@ model RLT
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per,
+    allowFlowReversal=false)
     annotation (Dialog(enable = true), Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
@@ -162,13 +165,15 @@ model RLT
     dIns=pipe_insulation_thickness_cold,
     kIns=pipe_insulation_conductivity_cold,
     thickness=pipe_wall_thickness_cold,
-    length=pipe_length_cold*2)
+    length=pipe_length_cold*2,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-9,8},{9,-8}},
         rotation=-90,
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4
-      per)
+      per,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));
@@ -176,7 +181,8 @@ model RLT
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-82,26},{-62,46}})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water,
+      allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-80,-34})));
@@ -187,7 +193,8 @@ model RLT
   Fluid.Sensors.Temperature senTem4(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{60,50},{80,70}})));
   Fluid.Sensors.MassFlowRate senMasFlo1(
-                                       redeclare package Medium = Medium_Water)
+                                       redeclare package Medium = Medium_Water,
+      allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,-14})));
