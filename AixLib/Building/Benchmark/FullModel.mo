@@ -86,6 +86,21 @@ model FullModel
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+  Fluid.MixingVolumes.MixingVolume vol1(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=30,
+    V=0.1) annotation (Placement(transformation(extent={{-4,-8},{6,2}})));
+  Fluid.MixingVolumes.MixingVolume vol2(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=30,
+    V=0.1) annotation (Placement(transformation(extent={{0,90},{10,100}})));
+  Fluid.MixingVolumes.MixingVolume vol3(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=30,
+    V=0.1) annotation (Placement(transformation(extent={{24,84},{34,94}})));
 equation
   connect(generation.Fluid_out_hot, full_Transfer_RLT.Fluid_in_hot) annotation (
      Line(points={{-60,-42},{-6,-42},{-6,-42},{0,-42}}, color={0,127,255}));
@@ -103,15 +118,6 @@ equation
     annotation (Line(points={{51,99},{22,99},{22,54},{30,54}}, color={255,128,0}));
   connect(office.Air_in, full_Transfer_RLT.Air_out) annotation (Line(points={{48.6,0},
           {48.6,-20},{14,-20},{14,-40}},         color={0,127,255}));
-  connect(weather.Air_out, Ext_Warm.port_a2)
-    annotation (Line(points={{50,90},{5.6,90},{5.6,66}},
-                                                     color={0,127,255}));
-  connect(Ext_Warm.port_b2, full_Transfer_RLT.Air_in)
-    annotation (Line(points={{5.6,50},{6,50},{6,-40}},
-                                              color={0,127,255}));
-  connect(weather.Air_in, Ext_Warm.port_b1)
-    annotation (Line(points={{50,86},{16.4,86},{16.4,66}},
-                                                       color={0,127,255}));
   connect(Ext_Warm.port_a1, office.Air_out) annotation (Line(points={{16.4,50},
           {16,50},{16,-10},{36.2,-10},{36.2,0}},
                                              color={0,127,255}));
@@ -189,6 +195,18 @@ equation
   connect(full_Transfer_TBA.Fluid_out_cold, generation.Fluid_in_cold)
     annotation (Line(points={{60,-58},{40,-58},{40,-80},{-40,-80},{-40,-54},{-60,
           -54}}, color={0,127,255}));
+  connect(Ext_Warm.port_b1, vol3.ports[1]) annotation (Line(points={{16.4,66},{
+          16,66},{16,84},{28,84}}, color={0,127,255}));
+  connect(vol3.ports[2], weather.Air_in) annotation (Line(points={{30,84},{40,
+          84},{40,86},{50,86}}, color={0,127,255}));
+  connect(weather.Air_out, vol2.ports[1])
+    annotation (Line(points={{50,90},{4,90}}, color={0,127,255}));
+  connect(vol2.ports[2], Ext_Warm.port_a2)
+    annotation (Line(points={{6,90},{6,66},{5.6,66}}, color={0,127,255}));
+  connect(Ext_Warm.port_b2, vol1.ports[1]) annotation (Line(points={{5.6,50},{4,
+          50},{4,-8},{0,-8}}, color={0,127,255}));
+  connect(vol1.ports[2], full_Transfer_RLT.Air_in) annotation (Line(points={{2,
+          -8},{4,-8},{4,-40},{6,-40}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5000, Interval=1));

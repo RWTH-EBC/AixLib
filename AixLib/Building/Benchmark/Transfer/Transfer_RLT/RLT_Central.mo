@@ -240,9 +240,23 @@ model RLT_Central
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={70,-60})));
+  Fluid.MixingVolumes.MixingVolume vol3(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=10,
+    V=1)      annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-18,-60})));
+  Fluid.MixingVolumes.MixingVolume vol4(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=10,
+    V=1)      annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-90,-60})));
 equation
-  connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
-    annotation (Line(points={{-42,-66},{14,-66}},color={0,127,255}));
   connect(val1.port_3, vol.ports[1]) annotation (Line(points={{-46,60},{-64,60},
           {-64,58.2},{-80,58.2}},
                               color={0,127,255}));
@@ -323,8 +337,14 @@ equation
     annotation (Line(points={{34,-66},{68.8,-66}}, color={0,127,255}));
   connect(vol2.ports[2], Air_out)
     annotation (Line(points={{71.2,-66},{100,-66}}, color={0,127,255}));
-  connect(Air_in, Ext_Warm.port_a2)
-    annotation (Line(points={{-130,-66},{-62,-66}}, color={0,127,255}));
+  connect(Air_in, vol4.ports[1])
+    annotation (Line(points={{-130,-66},{-91.2,-66}}, color={0,127,255}));
+  connect(vol4.ports[2], Ext_Warm.port_a2)
+    annotation (Line(points={{-88.8,-66},{-62,-66}}, color={0,127,255}));
+  connect(Ext_Warm.port_b2, vol3.ports[1])
+    annotation (Line(points={{-42,-66},{-19.2,-66}}, color={0,127,255}));
+  connect(vol3.ports[2], Ext_Cold.port_a2)
+    annotation (Line(points={{-16.8,-66},{14,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},

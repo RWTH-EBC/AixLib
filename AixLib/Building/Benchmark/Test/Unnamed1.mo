@@ -8,59 +8,53 @@ model Unnamed1
     use_m_flow_in=true,
     use_X_in=false,
     use_T_in=false,
-    redeclare package Medium = Medium_Water,
-    nPorts=1) annotation (Placement(transformation(extent={{-46,-108},{-26,-88}})));
+    nPorts=1,
+    redeclare package Medium = Medium_Air)
+              annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
   Fluid.Sources.Boundary_pT bou(
     use_p_in=false,
     use_T_in=false,
-    redeclare package Medium = Medium_Water,
-    nPorts=1)                                                 annotation (
+    nPorts=2,
+    redeclare package Medium = Medium_Air)                    annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={50,-98})));
-  Fluid.HeatExchangers.ConstantEffectiveness hex(
-    redeclare package Medium1 = Medium_Water,
-    m1_flow_nominal=1,
-    m2_flow_nominal=1,
-    dp1_nominal=1,
-    dp2_nominal=1,
-    allowFlowReversal1=true,
-    allowFlowReversal2=true,
-    redeclare package Medium2 = Medium_Water)
-    annotation (Placement(transformation(extent={{14,-102},{-6,-82}})));
-  Fluid.Sources.Boundary_pT bou3(
-    redeclare package Medium = Medium_Water,
-    nPorts=2,
-    p=100000) annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=-90,
-        origin={36,-66})));
-  Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
-    annotation (Placement(transformation(extent={{8,8},{-8,-8}},
-        rotation=90,
-        origin={18,-46})));
-  Modelica.Blocks.Sources.RealExpression realExpression3(y=1)
-    annotation (Placement(transformation(extent={{-102,-96},{-82,-76}})));
-  Modelica.Blocks.Sources.RealExpression realExpression4(y=1)
-    annotation (Placement(transformation(extent={{48,-90},{68,-70}})));
+        origin={74,-10})));
+  Modelica.Blocks.Sources.RealExpression realExpression3(y=10)
+    annotation (Placement(transformation(extent={{-78,-8},{-58,12}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
+    redeclare package Medium = Medium_Air,
+    from_dp=true,
+    zeta=2,
+    diameter=10,
+    m_flow_nominal=10)
+    annotation (Placement(transformation(extent={{18,6},{38,26}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance1(
+    redeclare package Medium = Medium_Air,
+    from_dp=true,
+    zeta=1,
+    diameter=10,
+    m_flow_nominal=10)
+    annotation (Placement(transformation(extent={{18,-22},{38,-2}})));
+  Fluid.MixingVolumes.MixingVolume vol(
+    nPorts=3,
+    redeclare package Medium = Medium_Air,
+    V=1,
+    m_flow_nominal=10)
+    annotation (Placement(transformation(extent={{-12,14},{8,34}})));
 equation
-  connect(bou3.ports[1],hex. port_a1) annotation (Line(points={{36.8,-70},{18,
-          -70},{18,-86},{14,-86}},
-                             color={0,127,255}));
-  connect(realExpression3.y, boundary.m_flow_in) annotation (Line(points={{-81,
-          -86},{-56,-86},{-56,-90},{-46,-90}}, color={0,0,127}));
-  connect(realExpression4.y, fan4.y) annotation (Line(points={{69,-80},{82,-80},
-          {82,-46},{27.6,-46}}, color={0,0,127}));
-  connect(fan4.port_b, bou3.ports[2]) annotation (Line(points={{18,-54},{26,-54},
-          {26,-70},{35.2,-70}}, color={0,127,255}));
-  connect(hex.port_b1, fan4.port_a) annotation (Line(points={{-6,-86},{-18,-86},
-          {-18,-24},{18,-24},{18,-38}}, color={0,127,255}));
-  connect(hex.port_b2, bou.ports[1])
-    annotation (Line(points={{14,-98},{40,-98}}, color={0,127,255}));
-  connect(boundary.ports[1], hex.port_a2)
-    annotation (Line(points={{-26,-98},{-6,-98}}, color={0,127,255}));
+  connect(realExpression3.y, boundary.m_flow_in) annotation (Line(points={{-57,2},
+          {-32,2},{-32,0},{-46,0}},            color={0,0,127}));
+  connect(boundary.ports[1], vol.ports[1]) annotation (Line(points={{-26,-8},{
+          -16,-8},{-16,14},{-4.66667,14}}, color={0,127,255}));
+  connect(vol.ports[2], hydraulicResistance.port_a) annotation (Line(points={{
+          -2,14},{8,14},{8,16},{18,16}}, color={0,127,255}));
+  connect(vol.ports[3], hydraulicResistance1.port_a) annotation (Line(points={{
+          0.66667,14},{8,14},{8,-12},{18,-12}}, color={0,127,255}));
+  connect(hydraulicResistance.port_b, bou.ports[1]) annotation (Line(points={{
+          38,16},{52,16},{52,-8},{64,-8}}, color={0,127,255}));
+  connect(hydraulicResistance1.port_b, bou.ports[2])
+    annotation (Line(points={{38,-12},{64,-12}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Unnamed1;

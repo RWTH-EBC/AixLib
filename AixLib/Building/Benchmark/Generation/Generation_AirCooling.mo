@@ -135,25 +135,51 @@ model Generation_AirCooling
     redeclare package Medium = Medium_Air,
     m_flow_nominal=30,
     V=0.1) annotation (Placement(transformation(extent={{-12,-42},{-2,-32}})));
+  Fluid.MixingVolumes.MixingVolume vol3(
+    nPorts=2,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{-40,88},{-30,98}})));
+  Fluid.MixingVolumes.MixingVolume vol4(
+    nPorts=2,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{28,88},{38,98}})));
+  Fluid.MixingVolumes.MixingVolume vol5(
+    nPorts=2,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{-32,68},{-22,78}})));
+  Fluid.MixingVolumes.MixingVolume vol6(
+    nPorts=3,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{16,26},{26,36}})));
+  Fluid.MixingVolumes.MixingVolume vol7(
+    nPorts=2,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{62,22},{72,32}})));
+  Fluid.MixingVolumes.MixingVolume vol8(
+    nPorts=2,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{90,28},{100,38}})));
+  Fluid.MixingVolumes.MixingVolume vol9(
+    nPorts=2,
+    m_flow_nominal=30,
+    V=0.1,
+    redeclare package Medium = Medium_Water)
+           annotation (Placement(transformation(extent={{98,-36},{108,-26}})));
 equation
-  connect(Fluid_in_cool_airCooler, hex1.port_a1)
-    annotation (Line(points={{-60,100},{-60,88},{-12,88}}, color={0,127,255}));
-  connect(hex1.port_b1, Fluid_out_cool_airCooler)
-    annotation (Line(points={{8,88},{60,88},{60,100}}, color={0,127,255}));
-  connect(Fluid_in_warm_airCooler, hex2.port_a1)
-    annotation (Line(points={{100,60},{82,60},{82,14}}, color={0,127,255}));
-  connect(hex2.port_b1, Fluid_out_warm_airCooler) annotation (Line(points={{82,
-          -6},{82,-6},{82,-60},{100,-60}}, color={0,127,255}));
-  connect(Valve8.port_1, hex1.port_a2) annotation (Line(points={{-16,54},{-16,58},
-          {8,58},{8,76}},     color={0,127,255}));
-  connect(Valve8.port_3, hex2.port_a2) annotation (Line(points={{-6,44},{52,44},
-          {52,-6},{70,-6}}, color={0,127,255}));
-  connect(hex2.port_b2, hex1.port_b2) annotation (Line(points={{70,14},{70,42},
-          {18,42},{18,64},{-22,64},{-22,76},{-12,76}}, color={0,127,255}));
   connect(Valve8.y, controlBus.Valve8) annotation (Line(points={{-28,44},{-64,44},
           {-64,0.1},{-99.9,0.1}},     color={0,0,127}));
-  connect(fan4.port_a, hex1.port_b2) annotation (Line(points={{18,18},{18,64},{-22,
-          64},{-22,76},{-12,76}}, color={0,127,255}));
   connect(fan4.port_b, hex.port_a1)
     annotation (Line(points={{18,2},{18,-30},{20,-30}},color={0,127,255}));
   connect(bou1.ports[1], hex.port_a1) annotation (Line(points={{36,-14},{18,-14},
@@ -200,6 +226,36 @@ equation
     annotation (Line(points={{-14,-42},{-8,-42}}, color={0,127,255}));
   connect(vol2.ports[2], hex.port_a2)
     annotation (Line(points={{-6,-42},{0,-42}}, color={0,127,255}));
+  connect(Fluid_in_cool_airCooler, vol3.ports[1]) annotation (Line(points={{-60,
+          100},{-48,100},{-48,88},{-36,88}}, color={0,127,255}));
+  connect(vol3.ports[2], hex1.port_a1)
+    annotation (Line(points={{-34,88},{-12,88}}, color={0,127,255}));
+  connect(hex1.port_b1, vol4.ports[1])
+    annotation (Line(points={{8,88},{32,88}}, color={0,127,255}));
+  connect(vol4.ports[2], Fluid_out_cool_airCooler) annotation (Line(points={{34,
+          88},{46,88},{46,100},{60,100}}, color={0,127,255}));
+  connect(Valve8.port_1, vol5.ports[1]) annotation (Line(points={{-16,54},{-22,
+          54},{-22,68},{-28,68}}, color={0,127,255}));
+  connect(vol5.ports[2], hex1.port_b2) annotation (Line(points={{-26,68},{-20,
+          68},{-20,76},{-12,76}}, color={0,127,255}));
+  connect(hex1.port_a2, vol6.ports[1]) annotation (Line(points={{8,76},{14,76},
+          {14,26},{19.6667,26}}, color={0,127,255}));
+  connect(vol6.ports[2], fan4.port_a) annotation (Line(points={{21,26},{20,26},
+          {20,18},{18,18}}, color={0,127,255}));
+  connect(Valve8.port_3, vol7.ports[1]) annotation (Line(points={{-6,44},{28,44},
+          {28,42},{66,42},{66,22}}, color={0,127,255}));
+  connect(vol7.ports[2], hex2.port_b2) annotation (Line(points={{68,22},{68,22},
+          {68,14},{70,14}}, color={0,127,255}));
+  connect(hex2.port_a2, vol6.ports[3]) annotation (Line(points={{70,-6},{46,-6},
+          {46,26},{22.3333,26}}, color={0,127,255}));
+  connect(hex2.port_a1, vol8.ports[1]) annotation (Line(points={{82,14},{90,14},
+          {90,28},{94,28}}, color={0,127,255}));
+  connect(vol8.ports[2], Fluid_in_warm_airCooler) annotation (Line(points={{96,
+          28},{98,28},{98,60},{100,60}}, color={0,127,255}));
+  connect(hex2.port_b1, vol9.ports[1]) annotation (Line(points={{82,-6},{94,-6},
+          {94,-36},{102,-36}}, color={0,127,255}));
+  connect(vol9.ports[2], Fluid_out_warm_airCooler) annotation (Line(points={{
+          104,-36},{100,-36},{100,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_AirCooling;
