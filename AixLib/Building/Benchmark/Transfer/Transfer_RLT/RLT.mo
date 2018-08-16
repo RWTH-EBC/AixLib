@@ -89,12 +89,12 @@ model RLT
     cPip=500,
     rhoPip=8000,
     v_nominal=v_nominal_hot,
-    length=pipe_length_hot,
     m_flow_nominal=m_flow_nominal_hot,
     dIns=pipe_insulation_thickness_hot,
     kIns=pipe_insulation_conductivity_hot,
     thickness=pipe_wall_thickness_hot,
-    nPorts=1)
+    nPorts=1,
+    length=pipe_length_hot*2)
     annotation (Placement(transformation(extent={{-9,8},{9,-8}},
         rotation=-90,
         origin={-40,11})));
@@ -107,21 +107,6 @@ model RLT
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-40,60})));
-  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
-                                                   redeclare package Medium =
-        Medium_Water,
-    cPip=500,
-    rhoPip=8000,
-    v_nominal=v_nominal_hot,
-    length=pipe_length_hot,
-    m_flow_nominal=m_flow_nominal_hot,
-    dIns=pipe_insulation_thickness_hot,
-    kIns=pipe_insulation_conductivity_hot,
-    thickness=pipe_wall_thickness_hot,
-    nPorts=1)
-    annotation (Placement(transformation(extent={{-9,-8},{9,8}},
-        rotation=-90,
-        origin={-80,11})));
   Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_hot,
@@ -164,21 +149,6 @@ model RLT
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={34,80})));
-  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe2(
-                                                   redeclare package Medium =
-        Medium_Water,
-    cPip=500,
-    rhoPip=8000,
-    v_nominal=v_nominal_cold,
-    length=pipe_length_cold,
-    m_flow_nominal=m_flow_nominal_cold,
-    dIns=pipe_insulation_thickness_cold,
-    kIns=pipe_insulation_conductivity_cold,
-    thickness=pipe_wall_thickness_cold,
-    nPorts=1)
-    annotation (Placement(transformation(extent={{-9,-8},{9,8}},
-        rotation=-90,
-        origin={40,21})));
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe3(
                                                    redeclare package Medium =
         Medium_Water,
@@ -186,11 +156,11 @@ model RLT
     rhoPip=8000,
     nPorts=1,
     v_nominal=v_nominal_cold,
-    length=pipe_length_cold,
     m_flow_nominal=m_flow_nominal_cold,
     dIns=pipe_insulation_thickness_cold,
     kIns=pipe_insulation_conductivity_cold,
-    thickness=pipe_wall_thickness_cold)
+    thickness=pipe_wall_thickness_cold,
+    length=pipe_length_cold*2)
     annotation (Placement(transformation(extent={{-9,8},{9,-8}},
         rotation=-90,
         origin={80,21})));
@@ -268,13 +238,11 @@ equation
     annotation (Line(points={{86,-66},{100,-66}}, color={0,127,255}));
   connect(hum.X_w, X_w) annotation (Line(points={{64,-60},{40,-60},{40,-40},{0,-40},
           {0,100}},      color={0,0,127}));
-  connect(plugFlowPipe1.port_a, vol.ports[1])
-    annotation (Line(points={{-80,20},{-80,58.2}}, color={0,127,255}));
-  connect(val1.port_3, vol.ports[2]) annotation (Line(points={{-46,60},{-64,60},
-          {-64,59.4},{-80,59.4}},
+  connect(val1.port_3, vol.ports[1]) annotation (Line(points={{-46,60},{-64,60},
+          {-64,58.2},{-80,58.2}},
                               color={0,127,255}));
-  connect(Fluid_out_hot, vol.ports[3])
-    annotation (Line(points={{-80,100},{-80,60.6}}, color={0,127,255}));
+  connect(Fluid_out_hot, vol.ports[2])
+    annotation (Line(points={{-80,100},{-80,59.4}}, color={0,127,255}));
   connect(val1.port_2, plugFlowPipe.port_a)
     annotation (Line(points={{-40,54},{-40,20}}, color={0,127,255}));
   connect(Fluid_in_hot, val1.port_1)
@@ -289,13 +257,11 @@ equation
     annotation (Line(points={{80,12},{80,8}}, color={0,127,255}));
   connect(plugFlowPipe3.port_a, val2.port_2)
     annotation (Line(points={{80,30},{80,74}}, color={0,127,255}));
-  connect(plugFlowPipe2.port_a, vol1.ports[1])
-    annotation (Line(points={{40,30},{40,78.2}}, color={0,127,255}));
-  connect(val2.port_3, vol1.ports[2]) annotation (Line(points={{74,80},{58,80},
-          {58,79.4},{40,79.4}},
+  connect(val2.port_3, vol1.ports[1]) annotation (Line(points={{74,80},{58,80},
+          {58,78.2},{40,78.2}},
                            color={0,127,255}));
-  connect(Fluid_out_cold, vol1.ports[3])
-    annotation (Line(points={{40,100},{40,80.6},{40,80.6}},color={0,127,255}));
+  connect(Fluid_out_cold, vol1.ports[2])
+    annotation (Line(points={{40,100},{40,79.4},{40,79.4}},color={0,127,255}));
   connect(Fluid_in_cold, val2.port_1)
     annotation (Line(points={{80,100},{80,86},{80,86}}, color={0,127,255}));
   connect(Ext_Cold.port_a1, fan1.port_b) annotation (Line(points={{34,-54},{60,-54},
@@ -306,12 +272,8 @@ equation
           -54},{-42,-54}},           color={0,127,255}));
   connect(fan2.y, pump_hot) annotation (Line(points={{-30.4,-20},{-20,-20},{-20,
           -40},{100,-40}}, color={0,0,127}));
-  connect(plugFlowPipe1.heatPort, plugFlowPipe.heatPort) annotation (Line(
-        points={{-72,11},{-60,11},{-60,11},{-48,11}}, color={191,0,0}));
   connect(fan2.heatPort, plugFlowPipe.heatPort) annotation (Line(points={{
           -45.44,-20},{-60,-20},{-60,11},{-48,11}}, color={191,0,0}));
-  connect(plugFlowPipe2.heatPort, plugFlowPipe3.heatPort) annotation (Line(
-        points={{48,21},{60,21},{60,21},{72,21}}, color={191,0,0}));
   connect(fan1.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
           74.56,0},{60,0},{60,21},{72,21}}, color={191,0,0}));
   connect(fan2.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
@@ -319,22 +281,18 @@ equation
           0,0}));
   connect(heatPort_pumpsAndPipes, plugFlowPipe3.heatPort) annotation (Line(
         points={{0,-100},{0,-40},{60,-40},{60,21},{72,21}}, color={191,0,0}));
-  connect(senTem2.port, vol.ports[4]) annotation (Line(points={{-72,26},{-80,26},
-          {-80,61.8}}, color={0,127,255}));
+  connect(senTem2.port, vol.ports[3]) annotation (Line(points={{-72,26},{-80,26},
+          {-80,60.6}}, color={0,127,255}));
   connect(senTem1.port, plugFlowPipe.port_a)
     annotation (Line(points={{-50,26},{-40,26},{-40,20}}, color={0,127,255}));
-  connect(senTem3.port, vol1.ports[4])
-    annotation (Line(points={{50,50},{40,50},{40,81.8}}, color={0,127,255}));
+  connect(senTem3.port, vol1.ports[3])
+    annotation (Line(points={{50,50},{40,50},{40,80.6}}, color={0,127,255}));
   connect(senTem4.port, val2.port_2)
     annotation (Line(points={{70,50},{80,50},{80,74}}, color={0,127,255}));
-  connect(senMasFlo1.port_b, plugFlowPipe2.ports_b[1])
-    annotation (Line(points={{40,-4},{40,12}}, color={0,127,255}));
   connect(senMasFlo1.port_a, Ext_Cold.port_b1) annotation (Line(points={{40,-24},
           {40,-40},{0,-40},{0,-54},{14,-54}},color={0,127,255}));
   connect(Ext_Warm.port_b1, senMasFlo.port_a) annotation (Line(points={{-62,-54},
           {-80,-54},{-80,-44}}, color={0,127,255}));
-  connect(senMasFlo.port_b, plugFlowPipe1.ports_b[1])
-    annotation (Line(points={{-80,-24},{-80,2}}, color={0,127,255}));
   connect(senMasFlo.m_flow, massflow_hot) annotation (Line(points={{-91,-34},{
           -114,-34},{-114,-80},{-80,-80},{-80,-100}}, color={0,0,127}));
   connect(fan2.P, power_pump_hot) annotation (Line(points={{-32.8,-28.8},{-32.8,
@@ -354,6 +312,10 @@ equation
           {-100,40}}, color={0,0,127}));
   connect(Air_in, Ext_Warm.port_a2)
     annotation (Line(points={{-130,-66},{-62,-66}}, color={0,127,255}));
+  connect(senMasFlo.port_b, vol.ports[4])
+    annotation (Line(points={{-80,-24},{-80,61.8}}, color={0,127,255}));
+  connect(senMasFlo1.port_b, vol1.ports[4])
+    annotation (Line(points={{40,-4},{40,81.8}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},
