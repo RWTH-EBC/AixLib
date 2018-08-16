@@ -6,7 +6,7 @@ model Full_Transfer_RLT
     AixLib.Media.Air "Medium in the component";
 
     parameter Real riseTime_valve = 0 annotation(Dialog(tab = "General"));
-  RLT Workshop(
+  RLT_Central Workshop(
     riseTime_valve=riseTime_valve,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=0.65,
@@ -31,7 +31,7 @@ model Full_Transfer_RLT
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
     fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
-               annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
+    annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
@@ -58,7 +58,7 @@ model Full_Transfer_RLT
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   BusSystem.ControlBus controlBus
     annotation (Placement(transformation(extent={{82,8},{122,48}})));
-  RLT Canteen(
+  RLT_Central Canteen(
     riseTime_valve=riseTime_valve,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=1.1,
@@ -83,8 +83,8 @@ model Full_Transfer_RLT
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
     fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
-              annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
-  RLT MultiPersonOffice(
+    annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
+  RLT_Central MultiPersonOffice(
     riseTime_valve=riseTime_valve,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=0.08,
@@ -110,7 +110,7 @@ model Full_Transfer_RLT
     dpValve_nominal_cold=10000,
     fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
-  RLT ConferenceRoom(
+  RLT_Central ConferenceRoom(
     riseTime_valve=riseTime_valve,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=0.333,
@@ -136,7 +136,7 @@ model Full_Transfer_RLT
     dpValve_nominal_cold=10000,
     fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
-  RLT OpenPlanOffice(
+  RLT_Central OpenPlanOffice(
     riseTime_valve=riseTime_valve,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=1.2,
@@ -162,7 +162,7 @@ model Full_Transfer_RLT
     dpValve_nominal_cold=10000,
     fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6()))
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
-  RLT Central(
+  RLT_Central Central(
     riseTime_valve=riseTime_valve,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=3.363,
@@ -187,7 +187,7 @@ model Full_Transfer_RLT
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
     fan1(per=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12()))
-              annotation (Placement(transformation(extent={{-66,72},{-46,52}})));
+    annotation (Placement(transformation(extent={{-66,72},{-46,52}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[5]
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   BusSystem.measureBus measureBus
