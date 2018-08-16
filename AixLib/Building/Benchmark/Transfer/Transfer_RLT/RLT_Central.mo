@@ -291,13 +291,6 @@ equation
           -54},{-42,-54}},           color={0,127,255}));
   connect(fan2.y, pump_hot) annotation (Line(points={{-30.4,-20},{-20,-20},{-20,
           -40},{100,-40}}, color={0,0,127}));
-  connect(fan2.heatPort, plugFlowPipe.heatPort) annotation (Line(points={{
-          -45.44,-20},{-60,-20},{-60,11},{-48,11}}, color={191,0,0}));
-  connect(fan1.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
-          74.56,0},{60,0},{60,21},{72,21}}, color={191,0,0}));
-  connect(fan2.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
-          -45.44,-20},{-60,-20},{-60,-40},{60,-40},{60,21},{72,21}}, color={191,
-          0,0}));
   connect(heatPort_pumpsAndPipes, plugFlowPipe3.heatPort) annotation (Line(
         points={{0,-100},{0,-40},{60,-40},{60,21},{72,21}}, color={191,0,0}));
   connect(senTem2.port, vol.ports[3]) annotation (Line(points={{-72,26},{-80,26},
@@ -345,6 +338,8 @@ equation
     annotation (Line(points={{-42,-66},{-19.2,-66}}, color={0,127,255}));
   connect(vol3.ports[2], Ext_Cold.port_a2)
     annotation (Line(points={{-16.8,-66},{14,-66}}, color={0,127,255}));
+  connect(plugFlowPipe.heatPort, heatPort_pumpsAndPipes) annotation (Line(
+        points={{-48,11},{-60,11},{-60,-40},{0,-40},{0,-100}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},

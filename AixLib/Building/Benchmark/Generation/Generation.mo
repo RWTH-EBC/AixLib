@@ -504,8 +504,6 @@ equation
   connect(plugFlowPipe3.heatPort, heatPort_workshop) annotation (Line(points={{81.5,
           -90},{82,-90},{82,-80},{66,-80},{66,-120},{-100,-120},{-100,20}},
         color={191,0,0}));
-  connect(fan3.heatPort, heatPort_workshop) annotation (Line(points={{56,-90.56},
-          {56,-80},{66,-80},{66,-120},{-100,-120},{-100,20}}, color={191,0,0}));
   connect(ColdWater.heatportOutside, heatPort_workshop) annotation (Line(points=
          {{47.625,-67.86},{66,-67.86},{66,-120},{-100,-120},{-100,20}}, color={191,
           0,0}));
@@ -513,16 +511,11 @@ equation
           21},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
   connect(plugFlowPipe1.heatPort, heatPort_Canteen) annotation (Line(points={{81.5,
           87},{81.5,64},{120,64},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
-  connect(fan2.heatPort, heatPort_Canteen) annotation (Line(points={{60,88.56},{
-          60,64},{120,64},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
   connect(HotWater.heatportOutside, heatPort_Canteen) annotation (Line(points={{
           47.625,64.14},{60,64},{120,64},{120,120},{-100,120},{-100,60}}, color=
          {191,0,0}));
   connect(WarmWater.heatportOutside, heatPort_Canteen) annotation (Line(points={
           {45.625,2.14},{70,2},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
-        color={191,0,0}));
-  connect(fan1.heatPort, heatPort_Canteen) annotation (Line(points={{48,22.56},{
-          48,12},{70,12},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
         color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
