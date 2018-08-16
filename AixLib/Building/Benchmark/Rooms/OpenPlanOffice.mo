@@ -39,11 +39,11 @@ replaceable package Medium_Air =
     windowarea=60,
     withSunblind=false,
     outside=false,
-    wall_length=20,
     withDoor=true,
     door_height=2.125,
-    door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
+    wall_length=30,
+    door_width=2,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
@@ -61,24 +61,6 @@ replaceable package Medium_Air =
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=180,
         origin={60,0})));
-  Components.Walls.Wall WestWallToConferenceRoom(
-    wall_height=3,
-    solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    windowarea=60,
-    withSunblind=false,
-    outside=false,
-    withDoor=true,
-    door_height=2.125,
-    door_width=1,
-    wall_length=10,
-    WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    T0=293.15) annotation (Placement(transformation(
-        extent={{-3.99999,-24},{4.00002,24}},
-        rotation=0,
-        origin={-76,-28})));
   Components.Walls.Wall FloorToWorkshop(
     solar_absorptance=0.48,
     withWindow=true,
@@ -117,8 +99,6 @@ replaceable package Medium_Air =
     annotation (Placement(transformation(extent={{60,-110},{80,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToWorkshop
     annotation (Placement(transformation(extent={{4,-110},{24,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToConferenceRoom
-    annotation (Placement(transformation(extent={{-110,-38},{-90,-18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     HeatPort_ToMultiPersonOffice
     annotation (Placement(transformation(extent={{-110,18},{-90,38}})));
@@ -213,8 +193,6 @@ equation
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
   connect(FloorToWorkshop.port_outside, HeatPort_ToWorkshop)
     annotation (Line(points={{14,-66.2},{14,-100}}, color={191,0,0}));
-  connect(WestWallToConferenceRoom.port_outside, HeatPort_ToConferenceRoom)
-    annotation (Line(points={{-80.2,-28},{-100,-28}}, color={191,0,0}));
   connect(WestWallToMultiPersonOffice.port_outside,
     HeatPort_ToMultiPersonOffice)
     annotation (Line(points={{-80.2,28},{-100,28}}, color={191,0,0}));
@@ -238,9 +216,6 @@ equation
   connect(FloorToWorkshop.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{14,-58},{14,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(WestWallToConferenceRoom.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-72,-28},{-60,-28},{-60,-52},{-20.1,-52},{-20.1,
-          -35.4}}, color={191,0,0}));
   connect(WestWallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-72,28},{-60,28},{-60,-52},{-20.1,-52},{-20.1,
           -35.4}}, color={191,0,0}));

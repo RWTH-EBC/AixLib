@@ -85,10 +85,6 @@ equation
   connect(conferenceRoom.HeatPort_ToMultiPersonOffice, multiPersonOffice.HeatPort_ToConferenceRoom)
     annotation (Line(points={{-39.04,-16},{-38,-16},{-38,0},{-29.32,0},{-29.32,
           14}}, color={191,0,0}));
-  connect(openPlanOffice.HeatPort_ToConferenceRoom, conferenceRoom.HeatPort_ToOpenPlanOffice)
-    annotation (Line(points={{18,-3.76},{0,-3.76},{0,-4},{0,-4},{0,-36},{0,-36},
-          {0,-36},{0,-36.4},{-8,-36.4},{-16,-36.4}},
-                       color={191,0,0}));
   connect(openPlanOffice.HeatPort_ToMultiPersonOffice, multiPersonOffice.HeatPort_ToOpenPlanOffice)
     annotation (Line(points={{18,5.76},{0,5.76},{0,6},{0,6},{0,24},{0,24},{0,24},
           {0,23.86},{-10,23.86},{-16,23.86}},
@@ -219,6 +215,9 @@ equation
   connect(conferenceRoom.SolarRadiationPort_WestWall, SolarRadiationPort[5])
     annotation (Line(points={{-53.8,-38.44},{-80,-38.44},{-80,-38},{-80,-38},{
           -80,78},{-92,78}}, color={255,128,0}));
+  connect(conferenceRoom.HeatPort_ToOpenPlanOffice, openPlanOffice.HeatPort_ToMultiPersonOffice)
+    annotation (Line(points={{-16,-36.4},{-12,-36.4},{-12,-36},{0,-36},{0,5.76},
+          {18,5.76}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FirstFloor;
