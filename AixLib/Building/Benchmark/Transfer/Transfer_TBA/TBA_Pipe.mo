@@ -54,7 +54,8 @@ model TBA_Pipe
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=dp_Valve_nominal,
-    riseTime=riseTime_valve)
+    riseTime=riseTime_valve,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{6,6},{-6,-6}},
         rotation=-90,
         origin={-60,-40})));

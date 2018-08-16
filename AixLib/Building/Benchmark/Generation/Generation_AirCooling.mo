@@ -54,7 +54,8 @@ model Generation_AirCooling
     m_flow_nominal=m_flow_nominal_generation_aircooler,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_generation_aircooler)
+    dpValve_nominal=dpValve_nominal_generation_aircooler,
+    use_inputFilter=false)
     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,

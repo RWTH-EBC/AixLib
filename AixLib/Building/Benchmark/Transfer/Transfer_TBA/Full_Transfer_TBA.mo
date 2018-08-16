@@ -51,7 +51,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_workshop,
     m_flow_nominal=m_flow_nominal_workshop,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -63,7 +64,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_workshop,
     m_flow_nominal=m_flow_nominal_workshop,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -72,7 +74,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_canteen,
     m_flow_nominal=m_flow_nominal_canteen,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -81,7 +84,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_multipersonoffice,
     m_flow_nominal=m_flow_nominal_multipersonoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -90,7 +94,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_canteen,
     m_flow_nominal=m_flow_nominal_canteen,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -152,7 +157,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_conferenceroom,
     dpValve_nominal=dp_Valve_nominal_conferenceroom,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -161,7 +167,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_openplanoffice,
     m_flow_nominal=m_flow_nominal_openplanoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -170,7 +177,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_multipersonoffice,
     m_flow_nominal=m_flow_nominal_multipersonoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -179,7 +187,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_conferenceroom,
     dpValve_nominal=dp_Valve_nominal_conferenceroom,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -188,7 +197,8 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_openplanoffice,
     m_flow_nominal=m_flow_nominal_openplanoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    riseTime=riseTime_valve,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,

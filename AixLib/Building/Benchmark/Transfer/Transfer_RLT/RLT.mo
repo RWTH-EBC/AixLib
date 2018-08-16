@@ -103,7 +103,8 @@ model RLT
     m_flow_nominal=m_flow_nominal_hot,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=dpValve_nominal_hot,
-    riseTime=riseTime_valve)
+    riseTime=riseTime_valve,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-40,60})));
@@ -131,7 +132,8 @@ model RLT
     m_flow_nominal=m_flow_nominal_cold,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=dpValve_nominal_cold,
-    riseTime=riseTime_valve)
+    riseTime=riseTime_valve,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={80,80})));

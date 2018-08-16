@@ -151,7 +151,8 @@ model Generation
     m_flow_nominal=m_flow_nominal_generation_warmwater,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_warmwater)
+    dpValve_nominal=dpValve_nominal_warmwater,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{-20,8},{-36,24}})));
   Generation_geothermalProbe generation_geothermalProbe(
     Probe_depth=Probe_depth,
@@ -167,8 +168,8 @@ model Generation
     m_flow_nominal=m_flow_nominal_generation_coldwater,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_coldwater)
-                                             annotation (Placement(
+    dpValve_nominal=dpValve_nominal_coldwater,
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{7,-7},{-7,7}},
         rotation=90,
@@ -179,7 +180,8 @@ model Generation
     riseTime=riseTime_valve,
     m_flow_nominal=m_flow_nominal_generation_coldwater,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_coldwater)
+    dpValve_nominal=dpValve_nominal_coldwater,
+    use_inputFilter=false)
                         annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
@@ -190,7 +192,8 @@ model Generation
     m_flow_nominal=m_flow_nominal_generation_coldwater,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_coldwater)
+    dpValve_nominal=dpValve_nominal_coldwater,
+    use_inputFilter=false)
                         annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
@@ -237,7 +240,8 @@ model Generation
     m_flow_nominal=m_flow_nominal_generation_hot,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_generation_hot)
+    dpValve_nominal=dpValve_nominal_generation_hot,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{-6,66},{-22,82}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve5(
     y_start=0,
@@ -245,7 +249,8 @@ model Generation
     m_flow_nominal=m_flow_nominal_generation_warmwater,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_warmwater)
+    dpValve_nominal=dpValve_nominal_warmwater,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{2,8},{-14,24}})));
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
             {-16,80},{24,120}}), iconTransformation(extent={{30,90},{50,110}})));

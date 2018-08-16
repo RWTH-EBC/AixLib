@@ -32,7 +32,8 @@ model Generation_Hot
     m_flow_nominal=m_flow_nominal_generation_hot,
     riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_generation_hot)
+    dpValve_nominal=dpValve_nominal_generation_hot,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{8,26},{-12,6}})));
 
   Fluid.BoilerCHP.CHP cHP(
