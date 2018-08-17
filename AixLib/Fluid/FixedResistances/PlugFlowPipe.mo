@@ -22,7 +22,7 @@ model PlugFlowPipe
     "Average height of surface asperities (default: smooth steel pipe)"
     annotation (Dialog(group="Material"));
 
-  parameter Modelica.SIunits.Length length "Pipe length"
+  parameter Modelica.SIunits.Length length=1 "Pipe length"
     annotation (Dialog(group="Material"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
