@@ -208,7 +208,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
         origin={32,-59},
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.Airload airload(V=room_V, T(start=T0_air))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
@@ -299,12 +300,14 @@ model Ow2IwL1IwS1Lf1At1Ro1
         origin={74,100})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair
     annotation (Placement(transformation(extent={{24,-20},{38,-6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
     room_V=room_V,
     n50=n50,
     e=e,
     eps=eps) annotation (Placement(transformation(extent={{-74,42},{-56,50}})));
-  AixLib.Building.Components.DryAir.DynamicVentilation dynamicVentilation(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation
+    dynamicVentilation(
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
@@ -315,7 +318,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-10,8},{10,-8}},
         rotation=90,
         origin={-20,-26})));
-  AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
+    NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-70,-42},{-50,-22}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     floor_FH(

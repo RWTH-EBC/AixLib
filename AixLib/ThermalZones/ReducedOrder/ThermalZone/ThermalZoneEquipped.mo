@@ -17,10 +17,8 @@ model ThermalZoneEquipped
     ATot > 0 or zoneParam.VAir > 0
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-66,-28},{-46,-8}})));
-  Building.Components.DryAir.VarAirExchange airExc(
-    final V=zoneParam.VAir) if
-    ATot > 0 or zoneParam.VAir > 0
-    "Heat flow due to ventilation"
+  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
+    ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
   redeclare Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078

@@ -105,7 +105,9 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
         origin={-28,24},
         extent={{-3.99999,-24},{3.99999,24}},
         rotation=270)));
-  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-12, -12}, {-32, 8}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
+    annotation (Placement(transformation(extent={{-12,-12},{-32,8}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_CE,
     outside=false,
@@ -130,7 +132,12 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
         origin={118,55},
         extent={{-2.99998,-16},{2.99998,16}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-44, 60}, {-18, 86}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
+    room_V=room_V,
+    n50=n50,
+    e=e,
+    eps=eps) annotation (Placement(transformation(extent={{-44,60},{-18,86}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermStaircase annotation(Placement(transformation(extent = {{-112, 70}, {-92, 90}}), iconTransformation(extent = {{-112, 70}, {-92, 90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermKitchen annotation(Placement(transformation(extent = {{-112, 40}, {-92, 60}}), iconTransformation(extent = {{-112, 40}, {-92, 60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermBath annotation(Placement(transformation(extent = {{-110, -50}, {-90, -30}}), iconTransformation(extent = {{-110, -50}, {-90, -30}})));

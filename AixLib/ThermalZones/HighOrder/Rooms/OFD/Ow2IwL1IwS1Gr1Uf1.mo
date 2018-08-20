@@ -214,7 +214,8 @@ model Ow2IwL1IwS1Gr1Uf1
         origin={16,-60},
         extent={{-4,-24},{4,24}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.Airload airload(V=room_V, T(start=T0_air))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
@@ -279,12 +280,14 @@ model Ow2IwL1IwS1Gr1Uf1
         origin={-20.5,98.5})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair
     annotation (Placement(transformation(extent={{24,-20},{38,-6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
     room_V=room_V,
     n50=n50,
     e=e,
     eps=eps) annotation (Placement(transformation(extent={{-70,50},{-52,58}})));
-  AixLib.Building.Components.DryAir.DynamicVentilation dynamicVentilation(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation
+    dynamicVentilation(
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
@@ -297,7 +300,8 @@ model Ow2IwL1IwS1Gr1Uf1
         origin={-20,-26})));
   Utilities.Interfaces.Star starRoom annotation (Placement(transformation(
           extent={{10,10},{30,30}}), iconTransformation(extent={{10,10},{30,30}})));
-  AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
+    NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-70,-44},{-50,-24}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     floor_FH(

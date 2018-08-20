@@ -1,4 +1,4 @@
-within AixLib.Building.Components.DryAir;
+within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model Airload "Air volume"
   parameter Modelica.SIunits.Density rho = 1.19 "Density of air";
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1007

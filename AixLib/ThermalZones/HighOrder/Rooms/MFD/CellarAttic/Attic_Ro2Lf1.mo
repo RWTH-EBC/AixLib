@@ -44,7 +44,9 @@ model Attic_Ro2Lf1
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=270,
         origin={-42,63})));
-  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{0, -20}, {20, 0}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
+    annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-109.5, -10}, {-89.5, 10}}), iconTransformation(extent = {{-109.5, -10}, {-89.5, 10}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RoofNW annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-45.5, 100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-50, 90})));
@@ -76,11 +78,19 @@ model Attic_Ro2Lf1
         origin={1,-46},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-64, -24}, {-46, -16}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
+    room_V=room_V,
+    n50=n50,
+    e=e,
+    eps=eps)
+    annotation (Placement(transformation(extent={{-64,-24},{-46,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-10, -86}, {10, -66}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-28, 6})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation(Placement(transformation(origin = {-100, 25}, extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{-110, 30}, {-90, 50}})));
-  AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-70, -56}, {-50, -36}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
+    NaturalVentilation(V=room_V)
+    annotation (Placement(transformation(extent={{-70,-56},{-50,-36}})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));

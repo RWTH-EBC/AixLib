@@ -197,7 +197,8 @@ model Attic_Ro2Lf5
         origin={-29,-40},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.Airload airload(V=room_V, T(start=T0_air))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom1(
     T0=T0_FL1,
@@ -319,7 +320,8 @@ model Attic_Ro2Lf5
     annotation (Placement(transformation(extent={{60,-100},{80,-80}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair
     annotation (Placement(transformation(extent={{24,-20},{38,-6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
     room_V=room_V,
     n50=n50,
     e=e,
@@ -329,7 +331,8 @@ model Attic_Ro2Lf5
         extent={{-10,-8},{10,8}},
         rotation=90,
         origin={-30,-10})));
-  AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
+    NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-64,16},{-44,36}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW1(
     withDoor=false,

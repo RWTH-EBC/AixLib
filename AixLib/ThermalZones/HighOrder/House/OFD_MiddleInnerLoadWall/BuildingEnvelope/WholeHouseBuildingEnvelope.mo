@@ -144,8 +144,8 @@ model WholeHouseBuildingEnvelope
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={90,-90})));
-  AixLib.Building.Components.DryAir.VarAirExchange varAirExchange(V=
-        upperFloor_Building.Corridor.airload.V) annotation (Placement(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange varAirExchange(
+      V=upperFloor_Building.Corridor.airload.V) annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,

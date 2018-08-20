@@ -22,7 +22,9 @@ model Cellar "Cellar completly under ground"
   parameter Modelica.SIunits.Temperature T0_Walls = 284.95 "Walls" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_Ceiling = 285.25 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   // Infiltration rate
-  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-18, -4}, {-38, 16}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
+    annotation (Placement(transformation(extent={{-18,-4},{-38,16}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_Ceiling,
     outside=false,
@@ -47,7 +49,13 @@ model Cellar "Cellar completly under ground"
         origin={110,32},
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-44, -100}, {-18, -74}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
+    room_V=room_V,
+    n50=n50,
+    e=e,
+    eps=eps)
+    annotation (Placement(transformation(extent={{-44,-100},{-18,-74}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall1(
     T0=T0_Walls,
     outside=false,

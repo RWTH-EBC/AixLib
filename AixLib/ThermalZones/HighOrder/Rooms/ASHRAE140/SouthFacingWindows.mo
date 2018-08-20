@@ -120,7 +120,7 @@ public
         extent={{-2.00031,-12},{2.00003,12}},
         rotation=90,
         origin={-32,-64})));
-  Building.Components.DryAir.Airload airload(V=Room_V, c=1005)
+  Components.DryAir.Airload airload(V=Room_V, c=1005)
     annotation (Placement(transformation(extent={{10,-18},{28,0}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb
                                              thermStar_Demux annotation (
@@ -145,7 +145,7 @@ public
     annotation (Placement(transformation(extent={{-36,16},{-22,30}})));
   Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
     annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
-  Building.Components.DryAir.VarAirExchange varAirExchange(
+  Components.DryAir.VarAirExchange varAirExchange(
     V=Room_V,
     c=airload.c,
     rho=airload.rho)

@@ -1,4 +1,4 @@
-within AixLib.Building.Components.DryAir;
+within AixLib.ThermalZones.HighOrder.Components.DryAir;
 model VarAirExchange "Heat flow caused by air exchange"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
   parameter Modelica.SIunits.Volume V = 50 "Volume of the room";

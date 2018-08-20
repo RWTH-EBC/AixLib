@@ -50,3 +50,7 @@ convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.PartialWindow"
 convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007");
 convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG");
 convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG");
+convertClass("AixLib.Building.Components.DryAir.Airload","AixLib.ThermalZones.HighOrder.Components.DryAir.Airload");
+convertClass("AixLib.Building.Components.DryAir.DynamicVentilation","AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation");
+convertClass("AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831","AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831");
+convertClass("AixLib.Building.Components.DryAir.VarAirExchange","AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange");

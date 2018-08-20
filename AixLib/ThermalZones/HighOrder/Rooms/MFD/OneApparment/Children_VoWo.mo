@@ -57,7 +57,9 @@ model Children_VoWo "Children room from the VoWo appartment"
         origin={60,4.92309},
         extent={{-2,-35.0769},{10,36.9231}},
         rotation=180)));
-  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-38, 16}, {-58, 36}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
+    annotation (Placement(transformation(extent={{-38,16},{-58,36}})));
   Utilities.Interfaces.SolarRad_in Strahlung_SE annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-82, 110}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-30, 110})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
     wall_length=3.38,
@@ -108,7 +110,13 @@ model Children_VoWo "Children room from the VoWo appartment"
         origin={112,42},
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-44, -120}, {-18, -94}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
+    room_V=room_V,
+    n50=n50,
+    e=e,
+    eps=eps)
+    annotation (Placement(transformation(extent={{-44,-120},{-18,-94}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-70, 88}, {-50, 108}}), iconTransformation(extent = {{-70, 88}, {-50, 108}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-124, -8}, {-84, 32}}), iconTransformation(extent = {{-110, 30}, {-90, 50}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation(Placement(transformation(extent = {{-124, 20}, {-84, 60}}), iconTransformation(extent = {{-110, 60}, {-90, 80}})));
@@ -121,7 +129,9 @@ model Children_VoWo "Children room from the VoWo appartment"
   Utilities.Interfaces.Star StarRoom annotation(Placement(transformation(extent = {{6, -6}, {26, 14}}), iconTransformation(extent = {{6, -6}, {26, 14}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermRoom annotation(Placement(transformation(extent = {{-26, -4}, {-6, 16}}), iconTransformation(extent = {{-26, -4}, {-6, 16}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {0, -22})));
-  AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-44, -94}, {-16, -68}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
+    NaturalVentilation(V=room_V)
+    annotation (Placement(transformation(extent={{-44,-94},{-16,-68}})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));

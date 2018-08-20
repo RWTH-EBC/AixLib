@@ -55,7 +55,9 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
         origin={58,-22},
         extent={{-6,-36},{6,36}},
         rotation=180)));
-  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-12, -26}, {8, -6}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+        start=T0_air))
+    annotation (Placement(transformation(extent={{-12,-26},{8,-6}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Kitchen2(
     T0=T0_IWKitchen,
     outside=false,
@@ -104,7 +106,12 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
         origin={106,-116},
         extent={{-1.99983,-10},{1.99984,10}},
         rotation=90)));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-42, 60}, {-16, 86}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate(
+    room_V=room_V,
+    n50=n50,
+    e=e,
+    eps=eps) annotation (Placement(transformation(extent={{-42,60},{-16,86}})));
   Utilities.Interfaces.SolarRad_in SolarRadiation_NW annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-56, -150})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-122, -30}, {-82, 10}}), iconTransformation(extent = {{-110, 12}, {-94, 28}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation(Placement(transformation(extent = {{-122, 0}, {-82, 40}}), iconTransformation(extent = {{-110, 52}, {-94, 68}})));
@@ -117,7 +124,9 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
   Utilities.Interfaces.Star StarRoom annotation(Placement(transformation(extent = {{10, -54}, {30, -34}}), iconTransformation(extent = {{10, -54}, {30, -34}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermRoom annotation(Placement(transformation(extent = {{-28, -52}, {-8, -32}}), iconTransformation(extent = {{-28, -52}, {-8, -32}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {0, -68})));
-  AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{16, 68}, {44, 94}})));
+  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
+    NaturalVentilation(V=room_V)
+    annotation (Placement(transformation(extent={{16,68},{44,94}})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
