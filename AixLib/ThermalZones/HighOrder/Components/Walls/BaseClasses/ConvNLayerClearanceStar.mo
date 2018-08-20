@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Components.Walls.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
@@ -47,7 +47,7 @@ model ConvNLayerClearanceStar
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent={{90,-10},
             {110,10}}),                                                                                                          iconTransformation(extent={{90,-10},
             {110,10}})));
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
     final A=A,
     final n=n,
     final d=d,

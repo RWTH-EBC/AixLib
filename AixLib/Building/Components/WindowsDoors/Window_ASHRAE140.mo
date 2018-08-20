@@ -43,15 +43,15 @@ calcMethod=2,
 alpha_custom=2,
 A=windowarea)
 annotation (Placement(transformation(extent={{68,-20},{48,2}})));
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer                     pane1(
-n=1,
-lambda={1.06},
-c={750},
-d={0.003175},
-rho={2500},
-A=windowarea,
-T0=T0)
-annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1
+    (
+    n=1,
+    lambda={1.06},
+    c={750},
+    d={0.003175},
+    rho={2500},
+    A=windowarea,
+    T0=T0) annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
@@ -62,15 +62,16 @@ Star(T(start=T0)),
 eps=WindowType.Emissivity,
 A=windowarea)              annotation (Placement(transformation(extent={{36,22},
         {56,42}})));
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer pane2(
-n=1,
-lambda={1.06},
-c={750},
-d={0.003175},
-rho={2500},
-T0=T0,
-A=windowarea)
-annotation (Placement(transformation(extent={{18,-18},{38,2}})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2
+    (
+    n=1,
+    lambda={1.06},
+    c={750},
+    d={0.003175},
+    rho={2500},
+    T0=T0,
+    A=windowarea)
+    annotation (Placement(transformation(extent={{18,-18},{38,2}})));
   Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
     "multiplication with area and solar gain factor"
     annotation (Placement(transformation(extent={{-4,54},{8,66}})));

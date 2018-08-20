@@ -24,14 +24,86 @@ model Bathroom_VoWo "Bathroom from the VoWo appartment"
   parameter Modelica.SIunits.Temperature T0_CE = 295.35 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_FL = 294.95 "Floor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   // Infiltration rate
-  AixLib.Building.Components.Walls.Wall Wall_Corridor(T0 = T0_Corridor, outside = false, WallType = Type_IWsimple, wall_length = 1.31, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {7, 37}, extent = {{-7, -39}, {7, 39}}, rotation = 270)));
-  AixLib.Building.Components.Walls.Wall Wall_Bedroom(T0 = T0_IWBedroom, outside = false, WallType = Type_IWload, wall_length = 3.28, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(extent = {{-60, -76}, {-46, 8}})));
-  AixLib.Building.Components.Walls.Wall Wall_Kitchen1(T0 = T0_IWKitchen, outside = false, WallType = Type_IWsimple, wall_length = 3.28, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {58, -22}, extent = {{-6, -36}, {6, 36}}, rotation = 180)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor(
+    T0=T0_Corridor,
+    outside=false,
+    WallType=Type_IWsimple,
+    wall_length=1.31,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={7,37},
+        extent={{-7,-39},{7,39}},
+        rotation=270)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bedroom(
+    T0=T0_IWBedroom,
+    outside=false,
+    WallType=Type_IWload,
+    wall_length=3.28,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false)
+    annotation (Placement(transformation(extent={{-60,-76},{-46,8}})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Kitchen1(
+    T0=T0_IWKitchen,
+    outside=false,
+    WallType=Type_IWsimple,
+    wall_length=3.28,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={58,-22},
+        extent={{-6,-36},{6,36}},
+        rotation=180)));
   AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-12, -26}, {8, -6}})));
-  AixLib.Building.Components.Walls.Wall Wall_Kitchen2(T0 = T0_IWKitchen, outside = false, WallType = Type_IWsimple, wall_length = 0.44, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {77, -59}, extent = {{-3, -15}, {3, 15}}, rotation = 270)));
-  AixLib.Building.Components.Walls.Wall outsideWall(wall_height = 2.46, windowarea = 0.75, wall_length = 1.75, withWindow = true, T0 = T0_OW, solar_absorptance = solar_absorptance_OW, withDoor = false, WallType = Type_OW, WindowType = Type_Win) annotation(Placement(transformation(origin = {8, -105}, extent = {{-11, -66}, {11, 66}}, rotation = 90)));
-  AixLib.Building.Components.Walls.Wall Wall_Ceiling(T0 = T0_CE, outside = false, WallType = Type_CE, wall_length = sqrt(4.65), wall_height = sqrt(4.65), ISOrientation = 3, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {106, -80}, extent = {{-1.99998, -10}, {1.99998, 10}}, rotation = 270)));
-  AixLib.Building.Components.Walls.Wall Wall_Floor(T0 = T0_FL, outside = false, WallType = Type_FL, wall_length = sqrt(4.65), wall_height = sqrt(4.65), ISOrientation = 2, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {106, -116}, extent = {{-1.99983, -10}, {1.99984, 10}}, rotation = 90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Kitchen2(
+    T0=T0_IWKitchen,
+    outside=false,
+    WallType=Type_IWsimple,
+    wall_length=0.44,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={77,-59},
+        extent={{-3,-15},{3,15}},
+        rotation=270)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
+    wall_height=2.46,
+    windowarea=0.75,
+    wall_length=1.75,
+    withWindow=true,
+    T0=T0_OW,
+    solar_absorptance=solar_absorptance_OW,
+    withDoor=false,
+    WallType=Type_OW,
+    WindowType=Type_Win) annotation (Placement(transformation(
+        origin={8,-105},
+        extent={{-11,-66},{11,66}},
+        rotation=90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+    T0=T0_CE,
+    outside=false,
+    WallType=Type_CE,
+    wall_length=sqrt(4.65),
+    wall_height=sqrt(4.65),
+    ISOrientation=3,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={106,-80},
+        extent={{-1.99998,-10},{1.99998,10}},
+        rotation=270)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+    T0=T0_FL,
+    outside=false,
+    WallType=Type_FL,
+    wall_length=sqrt(4.65),
+    wall_height=sqrt(4.65),
+    ISOrientation=2,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={106,-116},
+        extent={{-1.99983,-10},{1.99984,10}},
+        rotation=90)));
   AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-42, 60}, {-16, 86}})));
   Utilities.Interfaces.SolarRad_in SolarRadiation_NW annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-56, -150})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-122, -30}, {-82, 10}}), iconTransformation(extent = {{-110, 12}, {-94, 28}})));

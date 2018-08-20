@@ -161,7 +161,7 @@ model Attic_Ro2Lf5
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Infiltration rate
-  AixLib.Building.Components.Walls.Wall roof1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof1(
     withDoor=false,
     door_height=0,
     door_width=0,
@@ -181,7 +181,7 @@ model Attic_Ro2Lf5
         extent={{-5.00001,-29},{5.00001,29}},
         rotation=270,
         origin={-41,59})));
-  AixLib.Building.Components.Walls.Wall floorRoom2(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom2(
     T0=T0_FL2,
     WallType=Type_FL,
     wall_length=room2_length,
@@ -199,7 +199,7 @@ model Attic_Ro2Lf5
         rotation=90)));
   AixLib.Building.Components.DryAir.Airload airload(V=room_V, T(start=T0_air))
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
-  AixLib.Building.Components.Walls.Wall floorRoom1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom1(
     T0=T0_FL1,
     WallType=Type_FL,
     wall_length=room1_length,
@@ -231,7 +231,7 @@ model Attic_Ro2Lf5
   Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation (Placement(
         transformation(origin={-100,17}, extent={{-10,-10},{10,10}}),
         iconTransformation(extent={{-110,30},{-90,50}})));
-  AixLib.Building.Components.Walls.Wall roof2(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof2(
     solar_absorptance=solar_absorptance_RO,
     withDoor=false,
     door_height=0,
@@ -259,7 +259,7 @@ model Attic_Ro2Lf5
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,90})));
-  AixLib.Building.Components.Walls.Wall floorRoom3(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom3(
     T0=T0_FL3,
     WallType=Type_FL,
     wall_length=room3_length,
@@ -275,7 +275,7 @@ model Attic_Ro2Lf5
         origin={3,-40},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
-  AixLib.Building.Components.Walls.Wall floorRoom4(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom4(
     T0=T0_FL4,
     WallType=Type_FL,
     wall_length=room4_length,
@@ -291,7 +291,7 @@ model Attic_Ro2Lf5
         origin={35,-40},
         extent={{-1.99998,-13},{1.99999,13}},
         rotation=90)));
-  AixLib.Building.Components.Walls.Wall floorRoom5(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom5(
     T0=T0_FL5,
     WallType=Type_FL,
     wall_length=room5_length,
@@ -331,7 +331,7 @@ model Attic_Ro2Lf5
         origin={-30,-10})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-64,16},{-44,36}})));
-  AixLib.Building.Components.Walls.Wall OW1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW1(
     withDoor=false,
     door_height=0,
     door_width=0,
@@ -351,7 +351,7 @@ model Attic_Ro2Lf5
           origin={-75,-22})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-116,-30},{-96,-10}})));
-  AixLib.Building.Components.Walls.Wall OW2(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW2(
     withDoor=false,
     door_height=0,
     door_width=0,

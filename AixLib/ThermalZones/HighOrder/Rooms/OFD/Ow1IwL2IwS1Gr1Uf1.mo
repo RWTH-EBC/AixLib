@@ -121,7 +121,7 @@ model Ow1IwL2IwS1Gr1Uf1
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));
 
-  AixLib.Building.Components.Walls.Wall outside_wall1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW1,
     T0=T0_OW1,
@@ -140,7 +140,7 @@ model Ow1IwL2IwS1Gr1Uf1
     U_door=U_door_OD1,
     eps_door=eps_door_OD1)
     annotation (Placement(transformation(extent={{-64,-14},{-54,42}})));
-  AixLib.Building.Components.Walls.Wall inside_wall1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     T0=T0_IW1,
     outside=false,
     WallType=Type_IWsimple,
@@ -155,7 +155,7 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={23,59},
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
-  AixLib.Building.Components.Walls.Wall inside_wall2a(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
     T0=T0_IW2a,
     outside=false,
     WallType=Type_IWload,
@@ -170,7 +170,7 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={61,23},
         extent={{-3,-15},{3,15}},
         rotation=180)));
-  AixLib.Building.Components.Walls.Wall inside_wall3(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     T0=T0_IW3,
     outside=false,
     WallType=Type_IWsimple,
@@ -187,7 +187,7 @@ model Ow1IwL2IwS1Gr1Uf1
         rotation=90)));
   AixLib.Building.Components.DryAir.Airload airload(V=room_V, T(start=T0_air))
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
-  AixLib.Building.Components.Walls.Wall Ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
     WallType=Type_CE,
@@ -203,7 +203,7 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={-31,60},
         extent={{2,-9},{-2,9}},
         rotation=90)));
-  AixLib.Building.Components.Walls.Wall floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
     WallType=Type_FL,
@@ -242,7 +242,7 @@ model Ow1IwL2IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{10,10},{30,30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
-  AixLib.Building.Components.Walls.Wall inside_wall2b(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
     T0=T0_IW2b,
     outside=false,
     WallType=Type_IWload,
@@ -281,7 +281,8 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={-20,-26})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
+    floor_FH(
     A=room_width*room_length,
     n=Type_FL.n,
     d=Type_FL.d,

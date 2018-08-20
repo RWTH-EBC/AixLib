@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
   import BaseLib = AixLib.Utilities;
@@ -73,12 +73,17 @@ model Wall
   BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model == 2)  annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
-  Weather.Sunblinds.Sunblind Sunblind(
+  Building.Components.Weather.Sunblinds.Sunblind Sunblind(
     n=1,
     gsunblind={Blinding},
     Imax=LimitSolIrr) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-21},{-21,5}})));
-  WindowsDoors.Door Door(T0 = T0, door_area = door_height * door_width, eps = eps_door, U = if outside then U_door else U_door * 2) if withDoor annotation(Placement(transformation(extent = {{-21, -102}, {11, -70}})));
+  Building.Components.WindowsDoors.Door Door(
+    T0=T0,
+    door_area=door_height*door_width,
+    eps=eps_door,
+    U=if outside then U_door else U_door*2) if withDoor
+    annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));

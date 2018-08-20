@@ -41,7 +41,7 @@ protected
   parameter Modelica.SIunits.Volume Room_V=Room_Lenght*Room_Height*Room_Width;
 
 public
-  Building.Components.Walls.Wall_ASHRAE140 outerWall_South(
+  Components.Walls.Wall_ASHRAE140 outerWall_South(
     withDoor=false,
     WallType=TypOW,
     T0=T0_OW,
@@ -55,7 +55,7 @@ public
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
     withWindow=false)
     annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_West(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
     withDoor=false,
@@ -67,12 +67,11 @@ public
     Model=2,
     withWindow=true,
     WindowType=Win,
-    windowarea=Win_Area*0.5)
-             annotation (Placement(transformation(
+    windowarea=Win_Area*0.5) annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
         origin={26,78})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_East(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
     T0=T0_IW,
@@ -83,12 +82,11 @@ public
     Model=2,
     withWindow=true,
     WindowType=Win,
-    windowarea=Win_Area*0.5)
-             annotation (Placement(transformation(
+    windowarea=Win_Area*0.5) annotation (Placement(transformation(
         extent={{-4.00001,-24},{4.00001,24}},
         rotation=90,
         origin={26,-68})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_North(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_North(
     wall_height=Room_Height,
     U_door=5.25,
     door_height=1,
@@ -101,7 +99,7 @@ public
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     Model=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
     ISOrientation=3,
@@ -115,7 +113,7 @@ public
         extent={{-2,-12},{2,12}},
         rotation=270,
         origin={-32,78})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 floor(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
     withDoor=false,

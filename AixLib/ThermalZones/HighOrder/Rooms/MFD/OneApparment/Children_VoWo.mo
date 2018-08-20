@@ -26,15 +26,88 @@ model Children_VoWo "Children room from the VoWo appartment"
   parameter Modelica.SIunits.Temperature T0_CE = 295.35 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_FL = 294.95 "Floor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   // Infiltration rate
-  AixLib.Building.Components.Walls.Wall Wall_Livingroom(T0 = T0_IWLivingroom, outside = false, WallType = Type_IWload, wall_length = 4.2, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(extent = {{-76, -40}, {-66, 20}})));
-  AixLib.Building.Components.Walls.Wall Wall_Corridor(T0 = T0_IWCorridor, outside = false, WallType = Type_IWload, wall_length = 2.13, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {-25.6, -49}, extent = {{-3, -21.6}, {5, 26.4}}, rotation = 90)));
-  AixLib.Building.Components.Walls.Wall Wall_Neighbour(T0 = T0_IWNeighbour, outside = false, WallType = Type_IWload, wall_length = 4.2, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {60, 4.92309}, extent = {{-2, -35.0769}, {10, 36.9231}}, rotation = 180)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Livingroom(
+    T0=T0_IWLivingroom,
+    outside=false,
+    WallType=Type_IWload,
+    wall_length=4.2,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false)
+    annotation (Placement(transformation(extent={{-76,-40},{-66,20}})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor(
+    T0=T0_IWCorridor,
+    outside=false,
+    WallType=Type_IWload,
+    wall_length=2.13,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={-25.6,-49},
+        extent={{-3,-21.6},{5,26.4}},
+        rotation=90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Neighbour(
+    T0=T0_IWNeighbour,
+    outside=false,
+    WallType=Type_IWload,
+    wall_length=4.2,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={60,4.92309},
+        extent={{-2,-35.0769},{10,36.9231}},
+        rotation=180)));
   AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-38, 16}, {-58, 36}})));
   Utilities.Interfaces.SolarRad_in Strahlung_SE annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-82, 110}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-30, 110})));
-  AixLib.Building.Components.Walls.Wall outsideWall(wall_length = 3.38, wall_height = 2.46, windowarea = 1.84, withWindow = true, T0 = T0_OW, solar_absorptance = solar_absorptance_OW, WallType = Type_OW, WindowType = Type_Win, outside = true, withDoor = false) annotation(Placement(transformation(origin = {-12, 51}, extent = {{-9, -54}, {9, 54}}, rotation = 270)));
-  AixLib.Building.Components.Walls.Wall Wall_Staircase(T0 = T0_IWStraicase, outside = false, WallType = Type_IWload, wall_length = 0.86, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {36.9565, -47}, extent = {{-3, -21.0435}, {5, 22.9565}}, rotation = 90)));
-  AixLib.Building.Components.Walls.Wall Wall_Ceiling(T0 = T0_CE, outside = false, WallType = Type_CE, wall_length = 4.20, wall_height = 3.38, ISOrientation = 3, withWindow = false, withDoor = false) "Decke" annotation(Placement(transformation(origin = {112, 76}, extent = {{-1.99998, -10}, {1.99998, 10}}, rotation = 270)));
-  AixLib.Building.Components.Walls.Wall Wall_Floor(T0 = T0_FL, outside = false, WallType = Type_FL, wall_length = 4.20, wall_height = 3.38, ISOrientation = 2, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {112, 42}, extent = {{-1.99998, -10}, {1.99998, 10}}, rotation = 90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
+    wall_length=3.38,
+    wall_height=2.46,
+    windowarea=1.84,
+    withWindow=true,
+    T0=T0_OW,
+    solar_absorptance=solar_absorptance_OW,
+    WallType=Type_OW,
+    WindowType=Type_Win,
+    outside=true,
+    withDoor=false) annotation (Placement(transformation(
+        origin={-12,51},
+        extent={{-9,-54},{9,54}},
+        rotation=270)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Staircase(
+    T0=T0_IWStraicase,
+    outside=false,
+    WallType=Type_IWload,
+    wall_length=0.86,
+    wall_height=2.46,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={36.9565,-47},
+        extent={{-3,-21.0435},{5,22.9565}},
+        rotation=90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+    T0=T0_CE,
+    outside=false,
+    WallType=Type_CE,
+    wall_length=4.20,
+    wall_height=3.38,
+    ISOrientation=3,
+    withWindow=false,
+    withDoor=false) "Decke" annotation (Placement(transformation(
+        origin={112,76},
+        extent={{-1.99998,-10},{1.99998,10}},
+        rotation=270)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+    T0=T0_FL,
+    outside=false,
+    WallType=Type_FL,
+    wall_length=4.20,
+    wall_height=3.38,
+    ISOrientation=2,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={112,42},
+        extent={{-1.99998,-10},{1.99998,10}},
+        rotation=90)));
   AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-44, -120}, {-18, -94}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-70, 88}, {-50, 108}}), iconTransformation(extent = {{-70, 88}, {-50, 108}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-124, -8}, {-84, 32}}), iconTransformation(extent = {{-110, 30}, {-90, 50}})));

@@ -41,7 +41,7 @@ protected
   parameter Modelica.SIunits.Volume Room_V=Room_Lenght*Room_Height*Room_Width;
 
 public
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_South(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_South(
     withDoor=false,
     WallType=TypOW,
     T0=T0_OW,
@@ -55,7 +55,7 @@ public
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140())
     annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_West(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
     withDoor=false,
@@ -68,7 +68,7 @@ public
         extent={{-4,-24},{4,24}},
         rotation=-90,
         origin={26,78})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_East(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
     T0=T0_IW,
@@ -80,7 +80,7 @@ public
         extent={{-4.00001,-24},{4.00001,24}},
         rotation=90,
         origin={26,-64})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_North(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_North(
     wall_height=Room_Height,
     U_door=5.25,
     door_height=1,
@@ -93,7 +93,7 @@ public
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     Model=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
     ISOrientation=3,
@@ -107,7 +107,7 @@ public
         extent={{-2,-12},{2,12}},
         rotation=270,
         origin={-32,78})));
-  AixLib.Building.Components.Walls.Wall_ASHRAE140 floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 floor(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
     withDoor=false,
@@ -216,8 +216,7 @@ equation
       points={{-23.2,80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}},
       color={0,0,127}));
   connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(
-      points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,
-          28}},
+      points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,28}},
       color={0,0,127}));
 
   connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(
@@ -241,8 +240,7 @@ equation
 
   connect(outerWall_South.solarRadWinTrans, ceiling.solarRadWin) annotation (
       Line(
-      points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,
-          75.8}},
+      points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,75.8}},
       color={0,0,127}));
 
   connect(outerWall_North.solarRadWin, outerWall_South.solarRadWinTrans)
@@ -264,8 +262,7 @@ equation
       color={255,128,0}));
   connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
     annotation (Line(
-      points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,
-          52}},
+      points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,52}},
       color={255,128,0}));
 
   connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (

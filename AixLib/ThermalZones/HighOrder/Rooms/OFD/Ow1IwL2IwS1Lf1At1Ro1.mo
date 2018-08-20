@@ -119,7 +119,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));
   // Infiltration rate
-  AixLib.Building.Components.Walls.Wall outside_wall1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
     T0=T0_OW1,
     wall_length=room_length,
@@ -135,7 +135,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     door_width=0,
     WallType=Type_OW)
     annotation (Placement(transformation(extent={{-64,-12},{-54,46}})));
-  AixLib.Building.Components.Walls.Wall inner_wall1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inner_wall1(
     T0=T0_IW1,
     outside=false,
     WallType=Type_IWsimple,
@@ -151,7 +151,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         origin={-14,58},
         extent={{-3.99997,-22},{3.99999,22}},
         rotation=270)));
-  AixLib.Building.Components.Walls.Wall inside_wall2a(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
     T0=T0_IW2a,
     outside=false,
     WallType=Type_IWload,
@@ -166,7 +166,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         origin={61,19},
         extent={{-3,-15},{3,15}},
         rotation=180)));
-  AixLib.Building.Components.Walls.Wall inside_wall3(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     T0=T0_IW3,
     outside=false,
     WallType=Type_IWsimple,
@@ -184,7 +184,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         rotation=90)));
   AixLib.Building.Components.DryAir.Airload airload(V=room_V, T(start=T0_air))
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
-  AixLib.Building.Components.Walls.Wall Ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
     WallType=Type_CE,
@@ -200,7 +200,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         origin={28,60},
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
-  AixLib.Building.Components.Walls.Wall floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
     WallType=Type_FL,
@@ -240,7 +240,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation (
       Placement(transformation(extent={{-16,-104},{4,-84}}), iconTransformation(
           extent={{-16,-104},{4,-84}})));
-  AixLib.Building.Components.Walls.Wall roof(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof(
     T0=T0_RO,
     solar_absorptance=solar_absorptance_RO,
     wall_length=room_length,
@@ -265,7 +265,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={74,100})));
-  AixLib.Building.Components.Walls.Wall inside_wall2b(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
     T0=T0_IW2b,
     outside=false,
     WallType=Type_IWload,
@@ -310,16 +310,16 @@ model Ow1IwL2IwS1Lf1At1Ro1
     "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling"
     annotation (Placement(transformation(extent={{-84,-86},{-70,-72}}),
         iconTransformation(extent={{-56,-92},{-36,-72}})));
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
+    floor_FH(
     A=room_width_long*room_length,
     n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
     lambda=Type_FL.lambda,
     c=Type_FL.c,
-    T0=T0_FL) if withFloorHeating
-    "floor component if using Floor heating" annotation (Placement(
-        transformation(
+    T0=T0_FL) if withFloorHeating "floor component if using Floor heating"
+    annotation (Placement(transformation(
         origin={-30,-85},
         extent={{3.00007,16},{-3,-16}},
         rotation=90)));

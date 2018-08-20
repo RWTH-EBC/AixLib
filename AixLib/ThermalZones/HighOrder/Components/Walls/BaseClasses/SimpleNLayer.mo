@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Walls.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model SimpleNLayer "Wall consisting of n layers"
   parameter Modelica.SIunits.Area A = 12 "Area" annotation(Dialog(group = "Geometry"));
   parameter Integer n(min = 1) = 8 "Number of layers" annotation(Dialog(group = "Structure of wall layers"));

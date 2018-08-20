@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall_ASHRAE140
   "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 
@@ -111,13 +111,13 @@ public
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model ==2)
     annotation (Placement(transformation(extent={{-113,54},{-93,74}}), iconTransformation(extent={{-31,78},{-11,98}})));
 
-  Weather.Sunblinds.Sunblind Sunblind(
+  Building.Components.Weather.Sunblinds.Sunblind Sunblind(
     n=1,
     gsunblind={Blinding},
     Imax=Limit) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
-  WindowsDoors.Door                     Door(
+  Building.Components.WindowsDoors.Door Door(
     T0=T0,
     door_area=door_height*door_width,
     U=U_door*2,

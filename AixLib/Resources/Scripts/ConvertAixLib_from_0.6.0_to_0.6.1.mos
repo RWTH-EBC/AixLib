@@ -39,3 +39,7 @@ convertClass("AixLib.Building.HighOrder.Validation.Case920","AixLib.ThermalZones
 convertClass("AixLib.Building.HighOrder.Validation.Case940","AixLib.ThermalZones.HighOrder.Validation.Case940");
 convertClass("AixLib.Building.HighOrder.Validation.Case950","AixLib.ThermalZones.HighOrder.Validation.Case950");
 convertClass("AixLib.Building.HighOrder.Validation.Case950FF","AixLib.ThermalZones.HighOrder.Validation.Case950FF");
+convertClass("AixLib.Building.Components.Walls.Wall","AixLib.ThermalZones.HighOrder.Components.Walls.Wall");
+convertClass("AixLib.Building.Components.Walls.Wall_ASHRAE140","AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140");
+convertClass("AixLib.Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar","AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar");
+convertClass("AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer","AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer");

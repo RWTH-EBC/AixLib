@@ -1,4 +1,4 @@
-within AixLib.Building.Components;
+within AixLib.ThermalZones.HighOrder.Components;
 package Walls "Wall models"
   extends Modelica.Icons.Package;
 

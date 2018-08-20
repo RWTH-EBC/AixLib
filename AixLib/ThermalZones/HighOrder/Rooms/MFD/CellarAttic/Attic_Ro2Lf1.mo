@@ -30,14 +30,52 @@ model Attic_Ro2Lf1
   parameter Boolean withWindow2 = false "Window 2 " annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox = true));
   parameter Modelica.SIunits.Area windowarea_RO2 = 0 "Window area" annotation(Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow2));
   // Infiltration rate
-  AixLib.Building.Components.Walls.Wall roof1(withDoor = false, door_height = 0, door_width = 0, T0 = T0_RO1, solar_absorptance = solar_absorptance_RO, wall_height = roof_width1, wall_length = room_width, withWindow = false, WallType = Type_RO, ISOrientation = 1) annotation(Placement(transformation(extent = {{-4.99998, -28}, {4.99998, 28}}, rotation = 270, origin = {-42, 63})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof1(
+    withDoor=false,
+    door_height=0,
+    door_width=0,
+    T0=T0_RO1,
+    solar_absorptance=solar_absorptance_RO,
+    wall_height=roof_width1,
+    wall_length=room_width,
+    withWindow=false,
+    WallType=Type_RO,
+    ISOrientation=1) annotation (Placement(transformation(
+        extent={{-4.99998,-28},{4.99998,28}},
+        rotation=270,
+        origin={-42,63})));
   AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{0, -20}, {20, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-109.5, -10}, {-89.5, 10}}), iconTransformation(extent = {{-109.5, -10}, {-89.5, 10}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RoofNW annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-45.5, 100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-50, 90})));
-  AixLib.Building.Components.Walls.Wall roof2(solar_absorptance = solar_absorptance_RO, withDoor = false, door_height = 0, door_width = 0, T0 = T0_RO2, wall_height = roof_width2, wall_length = room_width, withWindow = false, WallType = Type_RO, outside = true, ISOrientation = 1) annotation(Placement(transformation(origin = {50, 63}, extent = {{-4.99998, -28}, {4.99998, 28}}, rotation = 270)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof2(
+    solar_absorptance=solar_absorptance_RO,
+    withDoor=false,
+    door_height=0,
+    door_width=0,
+    T0=T0_RO2,
+    wall_height=roof_width2,
+    wall_length=room_width,
+    withWindow=false,
+    WallType=Type_RO,
+    outside=true,
+    ISOrientation=1) annotation (Placement(transformation(
+        origin={50,63},
+        extent={{-4.99998,-28},{4.99998,28}},
+        rotation=270)));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RoofSE annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {48, 100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {50, 90})));
-  AixLib.Building.Components.Walls.Wall Floor(T0 = T0_FL, outside = false, WallType = Type_FL, wall_length = room_length, wall_height = room_width, ISOrientation = 2, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {1, -46}, extent = {{-1.99999, -13}, {1.99999, 13}}, rotation = 90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Floor(
+    T0=T0_FL,
+    outside=false,
+    WallType=Type_FL,
+    wall_length=room_length,
+    wall_height=room_width,
+    ISOrientation=2,
+    withWindow=false,
+    withDoor=false) annotation (Placement(transformation(
+        origin={1,-46},
+        extent={{-1.99999,-13},{1.99999,13}},
+        rotation=90)));
   AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-64, -24}, {-46, -16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-10, -86}, {10, -66}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-28, 6})));
