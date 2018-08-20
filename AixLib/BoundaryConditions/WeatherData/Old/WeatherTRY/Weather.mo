@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY;
 model Weather "Complex weather model"
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude = 49.5
     "latitude of location"                                                                           annotation(Dialog(group = "Location Properties"));
@@ -20,9 +20,9 @@ model Weather "Complex weather model"
     "output = offset for time < startTime (same value for all columns)"                                 annotation(Dialog(group = "Properties of Weather Data"));
 
   replaceable model RadOnTiltedSurface =
-      AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
-  constrainedby
-    AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
+      AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
+    constrainedby
+    AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
     "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
 
   parameter

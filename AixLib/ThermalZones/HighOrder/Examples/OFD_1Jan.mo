@@ -16,8 +16,22 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={186,-95}),     iconTransformation(extent = {{172, -95}, {188, -79}})));
   Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={100,-94}),     iconTransformation(extent = {{171, -29}, {187, -13}})));
   Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={121,-94}),     iconTransformation(extent = {{171, -29}, {187, -13}})));
-  AixLib.Building.Components.Weather.Weather Weather(Latitude = 49.5, Longitude = 8.5, GroundReflection = 0.2, tableName = "wetter", extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(), Wind_dir = false, Wind_speed = true, Air_temp = true, fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent={{125,55},
-            {77,87}})));
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
+    Latitude=49.5,
+    Longitude=8.5,
+    GroundReflection=0.2,
+    tableName="wetter",
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(),
+
+    Wind_dir=false,
+    Wind_speed=true,
+    Air_temp=true,
+    fileName=
+        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
+
+    WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
+    annotation (Placement(transformation(extent={{125,55},{77,87}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     OFD(TIR=3, withDynamicVentilation=true)
     annotation (Placement(transformation(extent={{-35,-48},{60,47}})));

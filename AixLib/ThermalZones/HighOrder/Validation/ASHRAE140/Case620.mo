@@ -1,14 +1,15 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case620
   extends Modelica.Icons.Example;
-  Building.Components.Weather.BaseClasses.Sun sun(
+  BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez radOnTiltedSurf_Perez[5](
+  BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
     each GroundReflection=0.2,

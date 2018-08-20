@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.BaseClasses;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses;
 function CalculateNrOfOutputs "Calculates number of outputs"
   input Boolean Cloud_cover "Cloud cover";
   input Boolean Wind_dir "Wind direction";

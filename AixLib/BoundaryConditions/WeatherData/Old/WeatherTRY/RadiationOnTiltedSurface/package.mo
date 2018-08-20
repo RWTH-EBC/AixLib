@@ -1,3 +1,3 @@
-within AixLib.Building.Components.Weather;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY;
 package RadiationOnTiltedSurface
 end RadiationOnTiltedSurface;

@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface;
 model RadOnTiltedSurf_Liu
   "Calculates solar radiation on tilted surfaces according to Liu"
   extends BaseClasses.PartialRadOnTiltedSurf;

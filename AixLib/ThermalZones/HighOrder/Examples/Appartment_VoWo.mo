@@ -28,7 +28,19 @@ model Appartment_VoWo "Simulation of 1 apartment "
   Modelica.Blocks.Sources.Constant Source_TsetLivingroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 52}, {-86, 66}})));
   Modelica.Blocks.Sources.Constant Source_TsetBedroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 30}, {-86, 44}})));
   Modelica.Blocks.Sources.Constant Source_TsetKitchen(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, -36}, {-86, -22}})));
-  AixLib.Building.Components.Weather.Weather combinedWeather(Latitude = 49.5, Longitude = 8.5, Wind_dir = false, Wind_speed = true, Air_temp = true, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(), fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent = {{-82, 74}, {-50, 96}})));
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather combinedWeather(
+    Latitude=49.5,
+    Longitude=8.5,
+    Wind_dir=false,
+    Wind_speed=true,
+    Air_temp=true,
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(),
+
+    fileName=
+        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
+
+    WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
+    annotation (Placement(transformation(extent={{-82,74},{-50,96}})));
   Modelica.Blocks.Sources.Constant Source_TsetBath(k = 273.15 + 24) annotation(Placement(transformation(extent = {{-100, -16}, {-86, -2}})));
   Modelica.Blocks.Sources.Constant AirExWindow[5](each k = 0.5) annotation(Placement(transformation(extent = {{-6, 74}, {0, 80}})));
   AixLib.Fluid.Sources.Boundary_ph

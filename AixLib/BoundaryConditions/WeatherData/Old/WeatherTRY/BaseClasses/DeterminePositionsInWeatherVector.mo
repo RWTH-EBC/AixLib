@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.BaseClasses;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses;
 function DeterminePositionsInWeatherVector
   "Determines position in weather vector"
   input Boolean Cloud_cover "Cloud cover";

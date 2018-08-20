@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses;
 partial model PartialRadOnTiltedSurf
   parameter Integer WeatherFormat = 1 "Format weather file" annotation (Dialog(group=
         "Properties of Weather Data",                                                                              compact = true, descriptionLabel = true), choices(choice = 1 "TRY", choice= 2 "TMY", radioButtons = true));
