@@ -4,8 +4,6 @@ model Generation_Hot
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
 
-    parameter Modelica.SIunits.Time riseTime_valve = 0 annotation(Dialog(tab = "General"));
-
     parameter Real m_flow_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
 
@@ -30,9 +28,9 @@ model Generation_Hot
     y_start=1,
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_generation_hot,
-    riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_generation_hot)
+    dpValve_nominal=dpValve_nominal_generation_hot,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{8,26},{-12,6}})));
 
   Fluid.BoilerCHP.CHP cHP(

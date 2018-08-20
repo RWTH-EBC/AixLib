@@ -1,5 +1,5 @@
 ﻿within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
-model RLT
+model RLT_Central
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
   replaceable package Medium_Air =
@@ -47,6 +47,11 @@ model RLT
     redeclare package Medium1 = Medium_Water,
     redeclare package Medium2 = Medium_Air)
     annotation (Placement(transformation(extent={{34,-70},{14,-50}})));
+  Fluid.Humidifiers.SprayAirWasher_X hum(
+    m_flow_nominal=20,
+    dp_nominal=20,
+    redeclare package Medium = Medium_Air)
+    annotation (Placement(transformation(extent={{66,-76},{86,-56}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
         Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
@@ -71,6 +76,12 @@ model RLT
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-76},{110,-56}})));
+  Modelica.Blocks.Interfaces.RealInput X_w
+    "Set point for water vapor mass fraction in kg/kg total air of the fluid that leaves port_b"
+    annotation (Placement(transformation(
+        extent={{12,-12},{-12,12}},
+        rotation=90,
+        origin={0,100})));
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(redeclare package Medium =
         Medium_Water,
     cPip=500,
@@ -185,7 +196,8 @@ model RLT
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4
-      per)
+      per,
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));
@@ -251,6 +263,12 @@ model RLT
 equation
   connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
     annotation (Line(points={{-42,-66},{14,-66}},color={0,127,255}));
+  connect(Ext_Cold.port_b2, hum.port_a)
+    annotation (Line(points={{34,-66},{66,-66}}, color={0,127,255}));
+  connect(hum.port_b, Air_out)
+    annotation (Line(points={{86,-66},{100,-66}}, color={0,127,255}));
+  connect(hum.X_w, X_w) annotation (Line(points={{64,-60},{40,-60},{40,-40},{0,-40},
+          {0,100}},      color={0,0,127}));
   connect(plugFlowPipe1.port_a, vol.ports[1])
     annotation (Line(points={{-80,20},{-80,58.2}}, color={0,127,255}));
   connect(val1.port_3, vol.ports[2]) annotation (Line(points={{-46,60},{-64,60},
@@ -337,8 +355,6 @@ equation
           {-100,40}}, color={0,0,127}));
   connect(Air_in, Ext_Warm.port_a2)
     annotation (Line(points={{-100,-66},{-62,-66}}, color={0,127,255}));
-  connect(Ext_Cold.port_b2, Air_out)
-    annotation (Line(points={{34,-66},{100,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},
@@ -346,4 +362,4 @@ equation
           textString="Parameter Wärmetausch
 müssen angepasst werden
 ")}));
-end RLT;
+end RLT_Central;

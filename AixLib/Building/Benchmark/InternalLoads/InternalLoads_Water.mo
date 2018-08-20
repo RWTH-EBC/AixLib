@@ -1,14 +1,14 @@
 within AixLib.Building.Benchmark.InternalLoads;
 model InternalLoads_Water
-  Modelica.Blocks.Math.Gain WaterPerson_OpenPlanOffice(k=0.04/3600)
+  Modelica.Blocks.Math.Gain WaterPerson_OpenPlanOffice(k=0.05/3600)
     annotation (Placement(transformation(extent={{-60,74},{-48,86}})));
-  Modelica.Blocks.Math.Gain WaterPerson_MultipersonOffice(k=0.04/3600)
+  Modelica.Blocks.Math.Gain WaterPerson_MultipersonOffice(k=0.05/3600)
     annotation (Placement(transformation(extent={{-60,34},{-48,46}})));
-  Modelica.Blocks.Math.Gain WaterPerson_Conferenceroom(k=0.04/3600)
+  Modelica.Blocks.Math.Gain WaterPerson_Conferenceroom(k=0.05/3600)
     annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
   Modelica.Blocks.Math.Gain WaterPerson_Canteen(k=0.1/3600)
     annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
-  Modelica.Blocks.Math.Gain WaterPerson_Workshop(k=0.12/3600)
+  Modelica.Blocks.Math.Gain WaterPerson_Workshop(k=0.113/3600)
     annotation (Placement(transformation(extent={{-60,-86},{-48,-74}})));
   Modelica.Blocks.Interfaces.RealInput u1[10] "Input signal connector"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));

@@ -147,8 +147,8 @@ equation
     annotation (Line(points={{20.8,-42},{80,-42},{80,40},{90,40}}, color={255,
           128,0}));
   connect(groundFloor.SolarRadiationPort_South, SolarRadiationPort_South1)
-    annotation (Line(points={{12,-60.8},{12,-80},{60,-80},{60,0},{90,0}}, color
-        ={255,128,0}));
+    annotation (Line(points={{12,-60.8},{12,-80},{60,-80},{60,0},{90,0}}, color=
+         {255,128,0}));
   connect(groundFloor.SolarRadiationPort_West, SolarRadiationPort_West1)
     annotation (Line(points={{-20.8,-24},{-30,-24},{-30,-22},{-30,-22},{-30,0},
           {60,0},{60,-40},{90,-40}}, color={255,128,0}));

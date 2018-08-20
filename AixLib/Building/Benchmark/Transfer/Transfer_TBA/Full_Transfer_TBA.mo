@@ -3,8 +3,6 @@ model Full_Transfer_TBA
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
 
-    parameter Real riseTime_valve = 0 annotation(Dialog(tab = "General"));
-
     parameter Modelica.SIunits.Pressure dp_Valve_nominal_openplanoffice = 0 annotation(Dialog(tab = "General"));
     parameter Real m_flow_nominal_openplanoffice = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dp_Valve_nominal_conferenceroom = 0 annotation(Dialog(tab = "General"));
@@ -17,7 +15,6 @@ model Full_Transfer_TBA
     parameter Real m_flow_nominal_workshop = 0 annotation(Dialog(tab = "General"));
   TBA_Pipe Workshop(dp_Valve_nominal=dp_Valve_nominal_workshop, m_flow_nominal=
         m_flow_nominal_workshop,
-    riseTime_valve=riseTime_valve,
     v_nominal=1.839,
     pipe_length=15,
     pipe_wall_thickness=0.0032,
@@ -28,6 +25,7 @@ model Full_Transfer_TBA
     TBA_wall_height=30,
     V_mixing=0.0001)
     annotation (Placement(transformation(extent={{58,60},{78,80}})));
+
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
         Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -51,7 +49,7 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_workshop,
     m_flow_nominal=m_flow_nominal_workshop,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
@@ -63,41 +61,44 @@ model Full_Transfer_TBA
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_workshop,
     m_flow_nominal=m_flow_nominal_workshop,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={74,-14})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_Canteen_1(
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_canteen,
     m_flow_nominal=m_flow_nominal_canteen,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={24,18})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_MultiPersonOffice_1(
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_multipersonoffice,
     m_flow_nominal=m_flow_nominal_multipersonoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={-12,18})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_Canteen_2(
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_canteen,
     m_flow_nominal=m_flow_nominal_canteen,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={36,-2})));
+
   TBA_Pipe Canteen(dp_Valve_nominal=dp_Valve_nominal_canteen, m_flow_nominal=
         m_flow_nominal_canteen,
-    riseTime_valve=riseTime_valve,
     v_nominal=1.839,
     pipe_length=10,
     pipe_wall_thickness=0.0032,
@@ -108,10 +109,10 @@ model Full_Transfer_TBA
     TBA_wall_height=30,
     V_mixing=0.0001)
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
+
   TBA_Pipe Multipersonoffice(dp_Valve_nominal=
         dp_Valve_nominal_multipersonoffice, m_flow_nominal=
         m_flow_nominal_multipersonoffice,
-    riseTime_valve=riseTime_valve,
     v_nominal=1.884,
     pipe_length=28,
     pipe_wall_thickness=0.0026,
@@ -122,9 +123,9 @@ model Full_Transfer_TBA
     TBA_wall_height=20,
     V_mixing=0.0001)
     annotation (Placement(transformation(extent={{-16,60},{4,80}})));
+
   TBA_Pipe Conferenceroom(m_flow_nominal=m_flow_nominal_conferenceroom,
       dp_Valve_nominal=dp_Valve_nominal_conferenceroom,
-    riseTime_valve=riseTime_valve,
     v_nominal=1.546,
     pipe_length=48,
     pipe_wall_thickness=0.0023,
@@ -135,9 +136,9 @@ model Full_Transfer_TBA
     TBA_wall_height=10,
     V_mixing=0.0001)
     annotation (Placement(transformation(extent={{-50,60},{-30,80}})));
+
   TBA_Pipe OpenPlanOffice(dp_Valve_nominal=dp_Valve_nominal_openplanoffice,
       m_flow_nominal=m_flow_nominal_openplanoffice,
-    riseTime_valve=riseTime_valve,
     v_nominal=1.851,
     pipe_length=8,
     pipe_wall_thickness=0.0032,
@@ -148,51 +149,57 @@ model Full_Transfer_TBA
     TBA_wall_height=30,
     V_mixing=0.0001)
     annotation (Placement(transformation(extent={{-86,60},{-66,80}})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_ConferenceRoom_1(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_conferenceroom,
     dpValve_nominal=dp_Valve_nominal_conferenceroom,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={-46,18})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_OpenPlanOffice_1(
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_openplanoffice,
     m_flow_nominal=m_flow_nominal_openplanoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={-82,18})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_MultiPersonOffice_2(
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_multipersonoffice,
     m_flow_nominal=m_flow_nominal_multipersonoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={0,-2})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_ConferenceRoom_2(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_conferenceroom,
     dpValve_nominal=dp_Valve_nominal_conferenceroom,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={-34,-2})));
+
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_OpenPlanOffice_2(
     redeclare package Medium = Medium_Water,
     dpValve_nominal=dp_Valve_nominal_openplanoffice,
     m_flow_nominal=m_flow_nominal_openplanoffice,
-    riseTime=riseTime_valve)                 annotation (Placement(
+    use_inputFilter=false)                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={-70,-2})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_pumpsAndPipes[5]
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
   BusSystem.measureBus measureBus

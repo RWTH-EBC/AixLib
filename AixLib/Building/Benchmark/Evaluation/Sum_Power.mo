@@ -67,10 +67,10 @@ equation
           {{-62,-50},{-80,-50},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_8.u1, measureBus.Pump_RLT_canteen_cold) annotation (Line(points=
           {{-62,-60},{-80,-60},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
-  connect(add3_8.u2, measureBus.Pump_RLT_workshop_warm) annotation (Line(points
-        ={{-62,-68},{-80,-68},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
-  connect(add3_8.u3, measureBus.Pump_RLT_workshop_cold) annotation (Line(points
-        ={{-62,-76},{-80,-76},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_8.u2, measureBus.Pump_RLT_workshop_warm) annotation (Line(points=
+         {{-62,-68},{-80,-68},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_8.u3, measureBus.Pump_RLT_workshop_cold) annotation (Line(points=
+         {{-62,-76},{-80,-76},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_9.u3, measureBus.Pump_TBA_openplanoffice) annotation (Line(
         points={{-20,32},{-30,32},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_9.u2, measureBus.Pump_TBA_conferenceroom) annotation (Line(

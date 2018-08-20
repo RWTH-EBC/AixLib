@@ -13,7 +13,6 @@ model TBA_Pipe
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity = 0  annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Volume V_mixing = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dp_Valve_nominal = 0 annotation(Dialog(tab = "General"));
-    parameter Real riseTime_valve = 0 annotation(Dialog(tab = "General"));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
@@ -54,10 +53,11 @@ model TBA_Pipe
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=dp_Valve_nominal,
-    riseTime=riseTime_valve)
+    use_inputFilter=false)
     annotation (Placement(transformation(extent={{6,6},{-6,-6}},
         rotation=-90,
         origin={-60,-40})));
+
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
                                                    redeclare package Medium =
         Medium_Water,

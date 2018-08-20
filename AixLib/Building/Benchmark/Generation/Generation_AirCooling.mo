@@ -5,8 +5,6 @@ model Generation_AirCooling
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
 
-    parameter Modelica.SIunits.Time riseTime_valve = 0 annotation(Dialog(tab = "General"));
-
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal_generation_warmwater = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal_generation_coldwater = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal_generation_aircooler = 0 annotation(Dialog(tab = "General"));
@@ -52,13 +50,14 @@ model Generation_AirCooling
   Fluid.Actuators.Valves.ThreeWayLinear Valve8(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_generation_aircooler,
-    riseTime=riseTime_valve,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dpValve_nominal_generation_aircooler)
+    dpValve_nominal=dpValve_nominal_generation_aircooler,
+    use_inputFilter=false)
     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-16,44})));
+
   Fluid.HeatExchangers.ConstantEffectiveness hex1(
     redeclare package Medium1 = Medium_Water,
     redeclare package Medium2 = Medium_Water,
