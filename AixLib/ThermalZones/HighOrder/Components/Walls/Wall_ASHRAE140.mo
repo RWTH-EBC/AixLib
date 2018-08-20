@@ -111,7 +111,7 @@ public
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model ==2)
     annotation (Placement(transformation(extent={{-113,54},{-93,74}}), iconTransformation(extent={{-31,78},{-11,98}})));
 
-  Building.Components.Weather.Sunblinds.Sunblind Sunblind(
+  Sunblinds.Sunblind Sunblind(
     n=1,
     gsunblind={Blinding},
     Imax=Limit) if outside and withWindow and withSunblind

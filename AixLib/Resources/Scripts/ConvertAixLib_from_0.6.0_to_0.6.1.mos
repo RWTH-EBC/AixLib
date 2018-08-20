@@ -54,3 +54,6 @@ convertClass("AixLib.Building.Components.DryAir.Airload","AixLib.ThermalZones.Hi
 convertClass("AixLib.Building.Components.DryAir.DynamicVentilation","AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation");
 convertClass("AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831","AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831");
 convertClass("AixLib.Building.Components.DryAir.VarAirExchange","AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange");
+convertClass("AixLib.Building.Components.Weather.Sunblinds.Sunblind","AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind");
+convertClass("AixLib.Building.Components.Weather.Sunblinds.Sunblind_Task44","AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind_Task44");
+convertClass("AixLib.Building.Components.Weather.Sunblinds.BaseClasses.PartialSunblind","AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind");

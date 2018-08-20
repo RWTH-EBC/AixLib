@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.Sunblinds.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses;
 partial model PartialSunblind "A Base Class for Sunblindes"
 
   parameter Integer n=4

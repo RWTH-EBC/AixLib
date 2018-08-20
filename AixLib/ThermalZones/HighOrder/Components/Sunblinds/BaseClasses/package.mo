@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.Sunblinds;
+within AixLib.ThermalZones.HighOrder.Components.Sunblinds;
 package BaseClasses
   extends Modelica.Icons.BasesPackage;
 end BaseClasses;
