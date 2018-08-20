@@ -1,8 +1,6 @@
-within AixLib.Building.Components.Sources.InternalGains.Lights;
+within AixLib.Utilities.Sources.InternalGains.Lights;
 model Lights_Avar
-  extends
-    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain(
-      RadiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
   parameter Real Emissivity_Lighting = 0.98;
   parameter Modelica.SIunits.RadiantEnergyFluenceRate specificPower=100
     "radiative power per m2";

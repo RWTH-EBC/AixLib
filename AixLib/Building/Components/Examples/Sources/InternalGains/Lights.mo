@@ -1,13 +1,12 @@
 within AixLib.Building.Components.Examples.Sources.InternalGains;
 model Lights "Simulation to check the light models"
   extends Modelica.Icons.Example;
-  Components.Sources.InternalGains.Lights.Lights_simple
+  Utilities.Sources.InternalGains.Lights.Lights_simple
     lights_sensibleHeat_simple
     annotation (Placement(transformation(extent={{-10,48},{10,68}})));
-  Components.Sources.InternalGains.Lights.Lights_relative lights
+  Utilities.Sources.InternalGains.Lights.Lights_relative lights
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Components.Sources.InternalGains.Lights.Lights_Avar
-    lights_sensibleHeat_Avar
+  Utilities.Sources.InternalGains.Lights.Lights_Avar lights_sensibleHeat_Avar
     annotation (Placement(transformation(extent={{-10,-62},{10,-42}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0;
         28800,1; 64800,1; 64860,0; 86400,0])

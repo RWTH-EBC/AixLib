@@ -1,7 +1,9 @@
 within AixLib.Building.Components.Examples.Sources.InternalGains;
 model Humans "Simulation to check the human models"
   extends Modelica.Icons.Example;
-  Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078 human_SensibleHeat_VDI2078_1(RatioConvectiveHeat = 0.6) annotation(Placement(transformation(extent = {{-24, -20}, {22, 32}})));
+  Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+    human_SensibleHeat_VDI2078_1(RatioConvectiveHeat=0.6)
+    annotation (Placement(transformation(extent={{-24,-20},{22,32}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempRoom annotation(Placement(transformation(extent = {{-64, 42}, {-84, 62}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T = 293.15) annotation(Placement(transformation(extent = {{78, 4}, {58, 24}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table = [0, 0; 28740, 0; 28800, 1; 43200, 1; 43260, 0; 46800, 0; 46860, 1; 64800, 1; 64860, 0; 86400, 0]) annotation(Placement(transformation(extent = {{-82, -26}, {-62, -6}})));

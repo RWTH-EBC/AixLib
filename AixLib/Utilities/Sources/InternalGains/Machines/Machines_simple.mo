@@ -1,38 +1,36 @@
-within AixLib.Building.Components.Sources.InternalGains.Machines;
-model Machines_Avar
-  extends
-    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain(
-      RadiativeHeat(T_ref=T0));
-  parameter Integer ActivityType=2 "Machine activity (unused)"
-    annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
-  parameter Real NrPeople=1.0 "Number of people with machines (unused)"  annotation(Dialog(descriptionLabel = true));
+within AixLib.Utilities.Sources.InternalGains.Machines;
+model Machines_simple
+  "Heat source with convective and radiative component and connector for power input signal."
+  extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
+  parameter Modelica.SIunits.Area SurfaceArea_Machines=2
+    "surface area of radiative heat source";
   parameter Real Emissivity_Machines = 0.98;
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate specificPower=10
-    "radiative power per m2";
-  Utilities.HeatTransfer.HeatToStar_Avar         RadiationConvertor(eps=
-        Emissivity_Machines)
-    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
+
+  Utilities.HeatTransfer.HeatToStar
+                                  RadiationConvertor(
+                              eps=Emissivity_Machines, A=max(1e-4,
+        SurfaceArea_Machines))
+    annotation (Placement(transformation(extent={{52,-70},{72,-50}})));
 equation
-  RadiationConvertor.A = max(1e-4,Schedule / specificPower);
+  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
+      points={{40,-10},{40,-60},{52.8,-60}},
+      color={191,0,0}));
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
-      points={{69.1,-60},{90,-60}},
+      points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
-      points={{40,-10},{44,-10},{44,-60},{50.8,-60}},
-      color={191,0,0}));
   connect(Schedule, gain.u) annotation (Line(
-      points={{-100,0},{-20,0},{-20,30},{3.2,30}},
+      points={{-100,0},{-60,0},{-60,30},{3.2,30}},
       color={0,0,127}));
   connect(Schedule, gain1.u) annotation (Line(
-      points={{-100,0},{-20,0},{-20,-10},{3.2,-10}},
+      points={{-100,0},{-60,0},{-60,-10},{3.2,-10}},
       color={0,0,127}));
-  annotation ( Icon(graphics={
+  annotation (Icon(graphics={
         Rectangle(
           extent={{-60,60},{60,-38}},
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+          pattern=LinePattern.None),
         Rectangle(
           extent={{-56,56},{56,-34}},
           pattern=LinePattern.None,
@@ -247,27 +245,23 @@ equation
           lineColor={255,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Avar")}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+          textString="simple")}),    Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Heat source with convective and radiative component. The load is determined by a power input signal. </p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
+<h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The input signal can take values from 0 to an arbitrary maximum value. </p>
-<p>The parameter A can be given by an extra input in the radiative converter.</p>
-<h4><span style=\"color: #008000\">Assumptions</span></h4>
-<p>The surface for radiation exchange is computed from the schedule, which leads
-to a surface area of zero, when no activity takes place. In particular cases
-this might lead to an error as depending of the rest of the system a division by
-this surface will be introduced in the system of equations -&gt; division by
-zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
+<h4><span style=\"color:#008000\">Known limitation</span></h4>
+<p>The parameter A cannot be set by default since other models must be able to implement their own equations for A. For example in the model <a href=\"Building.Components.Sources.InternalGains.Machines.Machines_Avar\">Machines_Avar</a> a changing radiative area is implemented.</p>
+<h4><span style=\"color:#008000\">Assumptions</span></h4>
+<p>The surface for radiation exchange is computed from the schedule, which leads to a surface area of zero, when no activity takes place. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
+<h4><span style=\"color:#008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Machines\">AixLib.Building.Examples.Sources.InternalGains.Machines </a></p>
 </html>",
     revisions="<html>
 <ul>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
-<li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+<li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 </ul>
 </html>"));
-end Machines_Avar;
+end Machines_simple;

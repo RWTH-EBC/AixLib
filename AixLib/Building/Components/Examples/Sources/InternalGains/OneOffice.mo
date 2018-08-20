@@ -1,9 +1,14 @@
 within AixLib.Building.Components.Examples.Sources.InternalGains;
 model OneOffice
   extends Modelica.Icons.Example;
-  Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078 human_SensibleHeat_VDI2078(NrPeople = 2) annotation(Placement(transformation(extent = {{-10, 40}, {12, 64}})));
-  Building.Components.Sources.InternalGains.Machines.Machines_DIN18599 machines_SensibleHeat_DIN18599(NrPeople = 2) annotation(Placement(transformation(extent = {{-10, -6}, {14, 24}})));
-  Components.Sources.InternalGains.Lights.Lights_relative lights annotation(Placement(transformation(extent = {{-8, -46}, {12, -22}})));
+  Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+    human_SensibleHeat_VDI2078(NrPeople=2)
+    annotation (Placement(transformation(extent={{-10,40},{12,64}})));
+  Utilities.Sources.InternalGains.Machines.Machines_DIN18599
+    machines_SensibleHeat_DIN18599(NrPeople=2)
+    annotation (Placement(transformation(extent={{-10,-6},{14,24}})));
+  Utilities.Sources.InternalGains.Lights.Lights_relative lights
+    annotation (Placement(transformation(extent={{-8,-46},{12,-22}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RoomTemp annotation(Placement(transformation(extent = {{-58, 40}, {-38, 60}})));
   Modelica.Blocks.Sources.Ramp Evolution_RoomTemp(duration = 36000, offset = 293.15, startTime = 4000, height = 0) annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(columns = {2, 3, 4, 5}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = [0, 0, 0.1, 0, 0; 36000, 0, 0.1, 0, 0; 36060, 1, 1, 0.3, 0.8; 72000, 1, 1, 0.3, 0.8; 72060, 0, 0.1, 0, 0; 86400, 0, 0.1, 0, 0]) annotation(Placement(transformation(extent = {{-80, -20}, {-60, 0}})));

@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Sources.InternalGains.BaseClasses;
+within AixLib.Utilities.Sources.InternalGains.BaseClasses;
 partial model PartialInternalGain
   "Partial model to build a heat source with convective and radiative component"
   parameter Real ratioConv = 0.6 "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
