@@ -42,8 +42,20 @@ model GroundFloor
       Medium = Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort[5]
-    annotation (Placement(transformation(extent={{-102,60},{-82,80}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_North annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,104})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_East
+    annotation (Placement(transformation(extent={{114,-20},{94,0}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_South annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={60,-104})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_West
+    annotation (Placement(transformation(extent={{-114,70},{-94,90}})));
 equation
   connect(HeatPort_FromCanteen, HeatPort_FromCanteen)
     annotation (Line(points={{40,100},{40,100}}, color={191,0,0}));
@@ -114,24 +126,22 @@ equation
           {0,5.6},{0,80},{-80,80},{-80,0},{-100,0}}, color={0,127,255}));
   connect(workshop.Air_in, Air_in_Workshop) annotation (Line(points={{-20,1.2},
           {0,1.2},{0,80},{-80,80},{-80,-20},{-100,-20}}, color={0,127,255}));
-  connect(workshop.SolarRadiationPort_NorthWall, SolarRadiationPort[2])
-    annotation (Line(points={{-38,22},{-38,80},{-80,80},{-80,66},{-92,66}},
+  connect(workshop.SolarRadiationPort_NorthWall, SolarRadiationPort_North)
+    annotation (Line(points={{-38,22},{-38,80},{0,80},{0,104}}, color={255,128,
+          0}));
+  connect(canteen.SolarRadiationPort_EastWall, SolarRadiationPort_East)
+    annotation (Line(points={{62,-10},{104,-10}}, color={255,128,0}));
+  connect(workshop.SolarRadiationPort_SouthWall, SolarRadiationPort_South)
+    annotation (Line(points={{-44.8,-22},{-44,-22},{-44,-80},{60,-80},{60,-104}},
         color={255,128,0}));
-  connect(workshop.SolarRadiationPort_WestWall, SolarRadiationPort[5])
-    annotation (Line(points={{-62,-6.4},{-80,-6.4},{-80,-8},{-80,-8},{-80,78},{
-          -92,78}}, color={255,128,0}));
-  connect(workshop.SolarRadiationPort_SouthWall, SolarRadiationPort[4])
-    annotation (Line(points={{-44.8,-22},{-44,-22},{-44,-30},{0,-30},{0,80},{
-          -80,80},{-80,74},{-92,74}}, color={255,128,0}));
-  connect(canteen.SolarRadiationPort_SouthWall, SolarRadiationPort[4])
-    annotation (Line(points={{35.2,-22},{36,-22},{36,-30},{0,-30},{0,80},{-80,
-          80},{-80,74},{-92,74}}, color={255,128,0}));
-  connect(canteen.SolarRadiationPort_EastWall, SolarRadiationPort[3])
-    annotation (Line(points={{62,-10},{80,-10},{80,80},{-80,80},{-80,70},{-92,
-          70}}, color={255,128,0}));
-  connect(canteen.SolarRadiationPort_NorthWall, SolarRadiationPort[2])
-    annotation (Line(points={{42,22},{42,80},{-80,80},{-80,66},{-92,66}}, color=
-         {255,128,0}));
+  connect(workshop.SolarRadiationPort_WestWall, SolarRadiationPort_West)
+    annotation (Line(points={{-62,-6.4},{-80,-6.4},{-80,-6},{-80,-6},{-80,80},{
+          -104,80}}, color={255,128,0}));
+  connect(canteen.SolarRadiationPort_NorthWall, SolarRadiationPort_North)
+    annotation (Line(points={{42,22},{42,80},{0,80},{0,104}}, color={255,128,0}));
+  connect(canteen.SolarRadiationPort_SouthWall, SolarRadiationPort_South)
+    annotation (Line(points={{35.2,-22},{36,-22},{36,-80},{60,-80},{60,-104}},
+        color={255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GroundFloor;

@@ -4,8 +4,6 @@ model Office
     AixLib.Media.Air "Medium in the component";
   Floors.FirstFloor firstFloor
     annotation (Placement(transformation(extent={{-20,20},{20,60}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort[5]
-    annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in[5](redeclare package Medium =
         Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -37,6 +35,16 @@ model Office
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   BusSystem.InternalBus internalBus
     annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_North
+    annotation (Placement(transformation(extent={{80,70},{100,90}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_East
+    annotation (Placement(transformation(extent={{80,30},{100,50}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_South1
+    annotation (Placement(transformation(extent={{80,-10},{100,10}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_West1
+    annotation (Placement(transformation(extent={{80,-50},{100,-30}})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_Hor1
+    annotation (Placement(transformation(extent={{80,-90},{100,-70}})));
 equation
   connect(prescribedTemperature.port, firstFloor.HeatPort_OutdoorTemp)
     annotation (Line(points={{8,74},{8,60}},
@@ -65,8 +73,6 @@ equation
   connect(prescribedTemperature.T, measureBus.AirTemp) annotation (Line(points=
           {{8,87.2},{8,92},{-26,92},{-26,68},{-80,68},{-80,0.1},{-99.9,0.1}},
         color={0,0,127}));
-  connect(firstFloor.SolarRadiationPort, SolarRadiationPort) annotation (Line(
-        points={{-18.4,54},{-40,54},{-40,80},{-100,80}}, color={255,128,0}));
   connect(firstFloor.Air_out_Openplanoffice, vol1.ports[2]) annotation (Line(
         points={{-20,48},{-60,48},{-60,-70.4}}, color={0,127,255}));
   connect(firstFloor.Air_out_Conferenceroom, vol1.ports[3]) annotation (Line(
@@ -121,8 +127,31 @@ equation
           -44},{-40,-44},{-40,-92}}, color={0,127,255}));
   connect(groundFloor.Air_in_Canteen, Air_in[4]) annotation (Line(points={{-20,
           -36},{-40,-36},{-40,-96}}, color={0,127,255}));
-  connect(groundFloor.SolarRadiationPort, SolarRadiationPort) annotation (Line(
-        points={{-18.4,-26},{-80,-26},{-80,80},{-100,80}}, color={255,128,0}));
+  connect(firstFloor.SolarRadiationPort_North, SolarRadiationPort_North)
+    annotation (Line(points={{14,60.8},{14,80},{90,80}}, color={255,128,0}));
+  connect(firstFloor.SolarRadiationPort_East, SolarRadiationPort_East)
+    annotation (Line(points={{21.2,22.8},{80,22.8},{80,40},{90,40}}, color={255,
+          128,0}));
+  connect(firstFloor.SolarRadiationPort_South, SolarRadiationPort_South1)
+    annotation (Line(points={{13.2,18.8},{13.2,0},{90,0}}, color={255,128,0}));
+  connect(firstFloor.SolarRadiationPort_West, SolarRadiationPort_West1)
+    annotation (Line(points={{-20.8,22.8},{-30,22.8},{-30,0},{80,0},{80,-40},{
+          90,-40}}, color={255,128,0}));
+  connect(firstFloor.SolarRadiationPort_Hor, SolarRadiationPort_Hor1)
+    annotation (Line(points={{20.8,60.8},{20.8,80},{80,80},{80,-80},{90,-80}},
+        color={255,128,0}));
+  connect(groundFloor.SolarRadiationPort_North, SolarRadiationPort_North)
+    annotation (Line(points={{0,-19.2},{0,0},{80,0},{80,80},{90,80}}, color={
+          255,128,0}));
+  connect(groundFloor.SolarRadiationPort_East, SolarRadiationPort_East)
+    annotation (Line(points={{20.8,-42},{80,-42},{80,40},{90,40}}, color={255,
+          128,0}));
+  connect(groundFloor.SolarRadiationPort_South, SolarRadiationPort_South1)
+    annotation (Line(points={{12,-60.8},{12,-80},{60,-80},{60,0},{90,0}}, color
+        ={255,128,0}));
+  connect(groundFloor.SolarRadiationPort_West, SolarRadiationPort_West1)
+    annotation (Line(points={{-20.8,-24},{-30,-24},{-30,-22},{-30,-22},{-30,0},
+          {60,0},{60,-40},{90,-40}}, color={255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office;

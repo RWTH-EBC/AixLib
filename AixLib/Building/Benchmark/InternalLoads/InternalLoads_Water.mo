@@ -25,7 +25,8 @@ model InternalLoads_Water
     annotation (Placement(transformation(extent={{20,24},{32,36}})));
   Modelica.Blocks.Math.Add add3
     annotation (Placement(transformation(extent={{20,-56},{32,-44}})));
-  Modelica.Blocks.Interfaces.RealOutput y1[5] "Output signal connector"
+  Modelica.Blocks.Interfaces.RealOutput WaterPerRoom[5]
+    "Output signal connector"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 equation
   connect(WaterPerson_Conferenceroom.u, u1[2]) annotation (Line(points={{-61.2,
@@ -51,16 +52,16 @@ equation
           {8,-40},{8,-46.4},{18.8,-46.4}}, color={0,0,127}));
   connect(FixWater_Canteen.y, add3.u2) annotation (Line(points={{-43,-60},{8,
           -60},{8,-53.6},{18.8,-53.6}}, color={0,0,127}));
-  connect(add.y, y1[1]) annotation (Line(points={{32.6,70},{80,70},{80,-8},{100,
-          -8}}, color={0,0,127}));
-  connect(add1.y, y1[3]) annotation (Line(points={{32.6,30},{80,30},{80,0},{100,
-          0}}, color={0,0,127}));
-  connect(WaterPerson_Conferenceroom.y, y1[2]) annotation (Line(points={{-47.4,
-          0},{80,0},{80,-4},{100,-4}}, color={0,0,127}));
-  connect(add3.y, y1[4]) annotation (Line(points={{32.6,-50},{80,-50},{80,4},{
-          100,4}}, color={0,0,127}));
-  connect(WaterPerson_Workshop.y, y1[5]) annotation (Line(points={{-47.4,-80},{
-          80,-80},{80,8},{100,8}}, color={0,0,127}));
+  connect(add.y, WaterPerRoom[1]) annotation (Line(points={{32.6,70},{80,70},{
+          80,-8},{100,-8}}, color={0,0,127}));
+  connect(add1.y, WaterPerRoom[3]) annotation (Line(points={{32.6,30},{80,30},{
+          80,0},{100,0}}, color={0,0,127}));
+  connect(WaterPerson_Conferenceroom.y, WaterPerRoom[2]) annotation (Line(
+        points={{-47.4,0},{80,0},{80,-4},{100,-4}}, color={0,0,127}));
+  connect(add3.y, WaterPerRoom[4]) annotation (Line(points={{32.6,-50},{80,-50},
+          {80,4},{100,4}}, color={0,0,127}));
+  connect(WaterPerson_Workshop.y, WaterPerRoom[5]) annotation (Line(points={{-47.4,
+          -80},{80,-80},{80,8},{100,8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{34,98},{96,78}},

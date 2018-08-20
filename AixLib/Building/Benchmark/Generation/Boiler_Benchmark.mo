@@ -1,4 +1,4 @@
-within AixLib.Building.Benchmark.Test;
+within AixLib.Building.Benchmark.Generation;
 model Boiler_Benchmark "Boiler with internal and external control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
         a=paramBoiler.pressureDrop), vol(V=paramBoiler.volume));
@@ -16,6 +16,9 @@ model Boiler_Benchmark "Boiler with internal and external control"
     annotation (Dialog(tab = "General", group = "Boiler type"));
   parameter Modelica.SIunits.Time riseTime=30
     "Rise/Fall time for step input(T>0 required)"
+    annotation (Dialog(tab = "General", group = "Boiler type"));
+  parameter Real eta=0.93
+    "Efficiency"
     annotation (Dialog(tab = "General", group = "Boiler type"));
   parameter Real declination=1.1
     "Declination";
@@ -50,6 +53,10 @@ model Boiler_Benchmark "Boiler with internal and external control"
     annotation (Placement(transformation(extent={{-8,12},{-28,32}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=false)
     annotation (Placement(transformation(extent={{24,54},{4,74}})));
+  Modelica.Blocks.Interfaces.RealOutput Fuel_Input
+    annotation (Placement(transformation(extent={{90,70},{110,90}})));
+  Modelica.Blocks.Math.Gain gain(k=eta)
+    annotation (Placement(transformation(extent={{4,-2},{16,10}})));
 equation
   connect(senTCold.T, internalControl.TFlowCold) annotation (Line(points={{-70,
           -69},{-70,-69},{-70,-20},{-80,-20},{-80,-1.625},{-70.075,-1.625}},
@@ -73,6 +80,10 @@ equation
           46},{6,14},{-6,14}}, color={255,0,255}));
   connect(booleanExpression.y, logicalSwitch.u1) annotation (Line(points={{3,64},
           {-2,64},{-2,30},{-6,30}}, color={255,0,255}));
+  connect(Fuel_Input, gain.y) annotation (Line(points={{100,80},{60,80},{60,4},
+          {16.6,4}}, color={0,0,127}));
+  connect(gain.u, heater.Q_flow) annotation (Line(points={{2.8,4},{-36,4},{-36,-32},
+          {-60,-32},{-60,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{-18.5,-23.5},{-26.5,-7.5},{-4.5,36.5},{3.5,10.5},{25.5,14.5},

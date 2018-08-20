@@ -46,6 +46,10 @@ model InternalLoads_Power
     annotation (Placement(transformation(extent={{54,-10},{74,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b AddPower[5]
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+  Modelica.Blocks.Math.MultiSum multiSum(k={1,1,1,1,1}, nu=5)
+    annotation (Placement(transformation(extent={{54,-68},{66,-56}})));
+  Modelica.Blocks.Interfaces.RealOutput Power_Sum
+    annotation (Placement(transformation(extent={{90,-72},{110,-52}})));
 equation
   connect(Met_OpenPlanOffice.y, add3_1.u1) annotation (Line(points={{-1.4,90},{
           20,90},{20,40.8},{26.8,40.8}}, color={0,0,127}));
@@ -123,6 +127,18 @@ equation
           40.6,-40},{46,-40},{46,0},{54,0}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, AddPower)
     annotation (Line(points={{74,0},{100,0}}, color={191,0,0}));
+  connect(multiSum.u[1], add3_1.y) annotation (Line(points={{54,-58.64},{52,
+          -58.64},{52,36},{40.6,36}}, color={0,0,127}));
+  connect(multiSum.u[2], add3_2.y) annotation (Line(points={{54,-60.32},{52,
+          -60.32},{52,18},{40.6,18}}, color={0,0,127}));
+  connect(multiSum.u[3], add3_3.y) annotation (Line(points={{54,-62},{54,-62},{
+          54,-60},{52,-60},{52,0},{40.6,0}}, color={0,0,127}));
+  connect(multiSum.u[4], add3_4.y) annotation (Line(points={{54,-63.68},{54,-64},
+          {54,-64},{52,-64},{52,-20},{40.6,-20}}, color={0,0,127}));
+  connect(multiSum.u[5], add3_5.y) annotation (Line(points={{54,-65.36},{54,-66},
+          {54,-66},{52,-66},{52,-40},{40.6,-40}}, color={0,0,127}));
+  connect(multiSum.y, Power_Sum)
+    annotation (Line(points={{67.02,-62},{100,-62}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{34,98},{96,78}},

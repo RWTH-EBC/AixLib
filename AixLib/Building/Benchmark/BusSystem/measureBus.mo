@@ -118,6 +118,13 @@ expandable connector measureBus
   SI.Power Pump_TBA_canteen;
   SI.Power Pump_TBA_workshop;
 
+  Real InternalLoad_Power;
+  Real PV_Power;
+  Real Sum_Power;
+
+  Real Fuel_Boiler "kW";
+  Real Fuel_CHP "kW";
+
   //COP
   Real Heatpump_small_COP;
   Real Heatpump_big_COP;
@@ -128,4 +135,7 @@ expandable connector measureBus
   Real X_Multipersonoffice;
   Real X_Canteen;
   Real X_Workshop;
+
+  //Costs
+  Real Total_Cost;
 end measureBus;

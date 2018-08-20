@@ -71,12 +71,12 @@ model FullModel
   InternalLoads.InternalLoads internalLoads
     annotation (Placement(transformation(extent={{-48,50},{-8,10}})));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
-    dp1_nominal=10,
-    dp2_nominal=10,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium1 = Medium_Air,
     m1_flow_nominal=100,
-    m2_flow_nominal=100)
+    m2_flow_nominal=100,
+    dp1_nominal=1,
+    dp2_nominal=1)
     annotation (Placement(transformation(extent={{-8,9},{8,-9}},
         rotation=90,
         origin={11,58})));
@@ -86,6 +86,8 @@ model FullModel
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
+  Evaluation.Evaluation evaluation
+    annotation (Placement(transformation(extent={{-40,-16},{-20,4}})));
 equation
   connect(generation.Fluid_out_hot, full_Transfer_RLT.Fluid_in_hot) annotation (
      Line(points={{-60,-42},{-6,-42},{-6,-42},{0,-42}}, color={0,127,255}));
@@ -99,8 +101,6 @@ equation
   connect(full_Transfer_TBA.Fluid_out_warm, generation.Fluid_in_warm)
     annotation (Line(points={{60,-51.4},{40,-51.4},{40,-80},{-40,-80},{-40,-52},
           {-60,-52}}, color={0,127,255}));
-  connect(weather.SolarRadiation_OrientedSurfaces1, office.SolarRadiationPort)
-    annotation (Line(points={{51,99},{22,99},{22,54},{30,54}}, color={255,128,0}));
   connect(office.Air_in, full_Transfer_RLT.Air_out) annotation (Line(points={{48.6,0},
           {48.6,-20},{14,-20},{14,-40}},         color={0,127,255}));
   connect(weather.Air_out, Ext_Warm.port_a2)
@@ -116,7 +116,7 @@ equation
           {16,50},{16,-10},{36.2,-10},{36.2,0}},
                                              color={0,127,255}));
   connect(weather.measureBus, measureBus) annotation (Line(
-      points={{66,82},{66,80},{-74,80},{-74,20},{-100,20}},
+      points={{60,82},{60,80},{-74,80},{-74,20},{-100,20}},
       color={255,204,51},
       thickness=0.5));
   connect(generation.measureBus, measureBus) annotation (Line(
@@ -150,7 +150,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(weather.internalBus, office.internalBus) annotation (Line(
-      points={{70,92},{80,92},{80,80},{0,80},{0,42},{30,42}},
+      points={{66,81.8},{66,81.8},{66,80},{0,80},{0,42},{30,42}},
       color={255,204,51},
       thickness=0.5));
   connect(generation.heatPort_Canteen, office.AddPower[4]) annotation (Line(
@@ -189,6 +189,29 @@ equation
   connect(full_Transfer_TBA.Fluid_out_cold, generation.Fluid_in_cold)
     annotation (Line(points={{60,-58},{40,-58},{40,-80},{-40,-80},{-40,-54},{-60,
           -54}}, color={0,127,255}));
+  connect(internalLoads.measureBus, office.measureBus) annotation (Line(
+      points={{-9.6,30},{0,30},{0,30},{30,30}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(evaluation.measureBus, measureBus) annotation (Line(
+      points={{-40,-6},{-74,-6},{-74,20},{-100,20}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weather.SolarRadiation_North5, office.SolarRadiationPort_North)
+    annotation (Line(points={{71,99},{110,99},{110,54},{88.9,54}}, color={255,
+          128,0}));
+  connect(weather.SolarRadiation_East, office.SolarRadiationPort_East)
+    annotation (Line(points={{71,95},{114,95},{114,42},{88.9,42}}, color={255,
+          128,0}));
+  connect(weather.SolarRadiation_South, office.SolarRadiationPort_South1)
+    annotation (Line(points={{71,91},{118,91},{118,30},{88.9,30}}, color={255,
+          128,0}));
+  connect(weather.SolarRadiation_West, office.SolarRadiationPort_West1)
+    annotation (Line(points={{71,87},{122,87},{122,88},{122,88},{122,18},{88.9,
+          18},{88.9,18}}, color={255,128,0}));
+  connect(weather.SolarRadiation_Hor, office.SolarRadiationPort_Hor1)
+    annotation (Line(points={{71,83},{126,83},{126,6},{88.9,6}}, color={255,128,
+          0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5000, Interval=1));

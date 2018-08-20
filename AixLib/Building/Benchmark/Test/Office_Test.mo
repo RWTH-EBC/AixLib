@@ -45,7 +45,7 @@ replaceable package Medium_Water =
         rotation=-90,
         origin={2,-62})));
 equation
-  connect(weather.SolarRadiation_OrientedSurfaces1,office. SolarRadiationPort)
+  connect(weather.SolarRadiation_OrientedSurfaces, office.SolarRadiationPort)
     annotation (Line(points={{51,99},{22,99},{22,54},{30,54}}, color={255,128,0}));
   connect(weather.Air_out,Ext_Warm. port_a2)
     annotation (Line(points={{50,90},{5.6,90},{5.6,66}},

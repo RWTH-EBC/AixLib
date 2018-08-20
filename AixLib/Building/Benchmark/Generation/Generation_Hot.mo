@@ -18,7 +18,7 @@ model Generation_Hot
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{86,-48},{106,-28}})));
 
-  Test.Boiler_Benchmark boiler_Benchmark(
+  Boiler_Benchmark boiler_Benchmark(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_generation_hot,
     transferHeat=true,
@@ -70,6 +70,10 @@ model Generation_Hot
     annotation (Placement(transformation(extent={{70,38},{90,58}})));
   BusSystem.measureBus measureBus annotation (Placement(transformation(extent={{
             10,70},{50,110}}), iconTransformation(extent={{30,88},{50,110}})));
+  Modelica.Blocks.Math.Gain gain2(k=-1) annotation (Placement(transformation(
+        extent={{-3,-3},{3,3}},
+        rotation=90,
+        origin={-81,33})));
 equation
   connect(Valve6.port_3, boiler_Benchmark.port_a)
     annotation (Line(points={{-2,26},{-2,56},{10,56}}, color={0,127,255}));
@@ -122,8 +126,14 @@ equation
   connect(fan2.P, measureBus.Pump_generation_hot_power) annotation (Line(points=
          {{-29.2,23.2},{-20,23.2},{-20,40},{30.1,40},{30.1,90.1}}, color={0,0,
           127}));
-  connect(cHP.electricalPower, measureBus.Electrical_power_CHP) annotation (
-      Line(points={{-81,25},{-81,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
+  connect(boiler_Benchmark.Fuel_Input, measureBus.Fuel_Boiler) annotation (Line(
+        points={{30,64},{36,64},{36,70},{30.1,70},{30.1,90.1}}, color={0,0,127}));
+  connect(cHP.fuelInput, measureBus.Fuel_CHP) annotation (Line(points={{-74,25},
+          {-74,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
+  connect(cHP.electricalPower, gain2.u) annotation (Line(points={{-81,25},{-81,
+          26.5},{-81,26.5},{-81,29.4}}, color={0,0,127}));
+  connect(gain2.y, measureBus.Electrical_power_CHP) annotation (Line(points={{
+          -81,36.3},{-80,36.3},{-80,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_Hot;
