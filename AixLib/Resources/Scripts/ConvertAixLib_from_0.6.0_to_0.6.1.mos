@@ -57,3 +57,10 @@ convertClass("AixLib.Building.Components.DryAir.VarAirExchange","AixLib.ThermalZ
 convertClass("AixLib.Building.Components.Weather.Sunblinds.Sunblind","AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind");
 convertClass("AixLib.Building.Components.Weather.Sunblinds.Sunblind_Task44","AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind_Task44");
 convertClass("AixLib.Building.Components.Weather.Sunblinds.BaseClasses.PartialSunblind","AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind");
+convertClass("AixLib.Building.Components.Weather.Weather","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather");
+convertClass("AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu");
+convertClass("AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez");
+convertClass("AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf");
+convertClass("AixLib.Building.Components.Weather.BaseClasses.CalculateNrOfOutputs","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.CalculateNrOfOutputs");
+convertClass("AixLib.Building.Components.Weather.BaseClasses.DeterminePositionsInWeatherVector","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.DeterminePositionsInWeatherVector");
+convertClass("AixLib.Building.Components.Weather.BaseClasses.Sun","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun");
