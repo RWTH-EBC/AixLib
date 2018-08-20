@@ -1,4 +1,4 @@
-within AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
   extends PartialCorG;
 

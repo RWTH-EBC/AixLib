@@ -1,4 +1,4 @@
-within AixLib.Building.Components.WindowsDoors.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses;
 partial model PartialWindow "Partial model for windows"
 
   parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";

@@ -1,4 +1,4 @@
-within AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain;
 partial model PartialCorG
   "partial model for correction of the solar gain factor"
 

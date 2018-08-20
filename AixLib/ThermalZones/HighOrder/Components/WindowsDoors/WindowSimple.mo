@@ -1,4 +1,4 @@
-within AixLib.Building.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Window with radiation and U-Value"
   //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";

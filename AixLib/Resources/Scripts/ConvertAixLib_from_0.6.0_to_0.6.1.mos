@@ -43,3 +43,10 @@ convertClass("AixLib.Building.Components.Walls.Wall","AixLib.ThermalZones.HighOr
 convertClass("AixLib.Building.Components.Walls.Wall_ASHRAE140","AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140");
 convertClass("AixLib.Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar","AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar");
 convertClass("AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer","AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer");
+convertClass("AixLib.Building.Components.WindowsDoors.Door","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door");
+convertClass("AixLib.Building.Components.WindowsDoors.WindowSimple","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple");
+convertClass("AixLib.Building.Components.WindowsDoors.Window_ASHRAE140","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140");
+convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.PartialWindow","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow");
+convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007");
+convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG");
+convertClass("AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG","AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG");

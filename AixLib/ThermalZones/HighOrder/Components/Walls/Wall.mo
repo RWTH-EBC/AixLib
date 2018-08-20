@@ -36,9 +36,9 @@ model Wall
   parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
   replaceable model Window =
-      AixLib.Building.Components.WindowsDoors.WindowSimple
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
   constrainedby
-    AixLib.Building.Components.WindowsDoors.BaseClasses.PartialWindow
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
@@ -78,7 +78,7 @@ model Wall
     gsunblind={Blinding},
     Imax=LimitSolIrr) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-21},{-21,5}})));
-  Building.Components.WindowsDoors.Door Door(
+  WindowsDoors.Door Door(
     T0=T0,
     door_area=door_height*door_width,
     eps=eps_door,

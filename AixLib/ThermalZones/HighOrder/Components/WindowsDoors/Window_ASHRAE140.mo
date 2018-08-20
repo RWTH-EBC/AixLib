@@ -1,7 +1,8 @@
-within AixLib.Building.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  extends AixLib.Building.Components.WindowsDoors.BaseClasses.PartialWindow;
+  extends
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
 //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Real windowarea=2 "Total fenestration area";
@@ -43,8 +44,7 @@ calcMethod=2,
 alpha_custom=2,
 A=windowarea)
 annotation (Placement(transformation(extent={{68,-20},{48,2}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1
-    (
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
     n=1,
     lambda={1.06},
     c={750},
@@ -62,8 +62,7 @@ Star(T(start=T0)),
 eps=WindowType.Emissivity,
 A=windowarea)              annotation (Placement(transformation(extent={{36,22},
         {56,42}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2
-    (
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     n=1,
     lambda={1.06},
     c={750},

@@ -1,7 +1,9 @@
 within AixLib.Building.Components.Examples.WindowsDoors;
 model WindowSimple
   extends Modelica.Icons.Example;
-  Components.WindowsDoors.WindowSimple windowSimple(windowarea = 10) annotation(Placement(transformation(extent = {{-24, -4}, {12, 28}})));
+  ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple windowSimple(
+      windowarea=10)
+    annotation (Placement(transformation(extent={{-24,-4},{12,28}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Toutside(T = 273.15) annotation(Placement(transformation(extent = {{-62, 0}, {-42, 20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside(T = 293.15) annotation(Placement(transformation(extent = {{58, 0}, {38, 20}})));
   Modelica.Blocks.Sources.RealExpression UValue(y = windowSimple.port_inside.Q_flow / (1 - windowSimple.frameFraction) / windowSimple.windowarea / (windowSimple.port_inside.T - windowSimple.port_outside.T)) annotation(Placement(transformation(extent = {{-20, -46}, {0, -26}})));

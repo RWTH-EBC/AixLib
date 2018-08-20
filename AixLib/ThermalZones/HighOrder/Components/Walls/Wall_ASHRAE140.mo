@@ -117,14 +117,13 @@ public
     Imax=Limit) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
-  Building.Components.WindowsDoors.Door Door(
+  WindowsDoors.Door Door(
     T0=T0,
     door_area=door_height*door_width,
     U=U_door*2,
     eps=eps_door) if withDoor
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
-  Building.Components.WindowsDoors.Window_ASHRAE140
-                                                windowSimple(
+  WindowsDoors.Window_ASHRAE140 windowSimple(
     T0=T0,
     windowarea=windowarea,
     WindowType=WindowType,
