@@ -5,7 +5,6 @@ model RLT
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
 
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_hot annotation(Dialog(tab = "Hot"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Real m_flow_nominal_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Length pipe_length_hot = 0 annotation(Dialog(tab = "Hot"));
@@ -15,7 +14,6 @@ model RLT
     parameter Modelica.SIunits.Volume V_mixing_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_hot = 0 annotation(Dialog(tab = "Hot"));
 
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_cold annotation(Dialog(tab = "Cold"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Real m_flow_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Length pipe_length_cold = 0 annotation(Dialog(tab = "Cold"));
@@ -122,8 +120,8 @@ model RLT
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
-    annotation (Dialog(enable = true), Placement(transformation(extent={{-8,-8},{8,8}},
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
   Modelica.Blocks.Interfaces.RealInput pump_cold
@@ -184,8 +182,7 @@ model RLT
         rotation=-90,
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4
-      per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));

@@ -84,10 +84,5 @@ expandable connector ControlBus
   Real TSet_boiler "Temperatur Setpoint boiler";
 
   // Moisterlevel
-  Real X_OpenPlanOffice "Moisterlevel for the RLT of the openplanoffice";
-  Real X_ConfernceRoom "Moisterlevel for the RLT of the conferenceroom";
-  Real X_MultiPersonRoom "Moisterlevel for the RLT of the multipersonoffice";
-  Real X_Canteen "Moisterlevel for the RLT of the canteen";
-  Real X_Workshop "Moisterlevel for the RLT of the workshop";
   Real X_Central "Moisterlevel for the central RLT";
 end ControlBus;
