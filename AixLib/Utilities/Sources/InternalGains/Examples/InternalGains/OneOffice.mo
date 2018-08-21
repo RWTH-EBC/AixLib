@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Examples.Sources.InternalGains;
+within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model OneOffice
   extends Modelica.Icons.Example;
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078

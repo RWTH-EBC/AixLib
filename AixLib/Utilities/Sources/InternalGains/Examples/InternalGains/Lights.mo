@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Examples.Sources.InternalGains;
+within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model Lights "Simulation to check the light models"
   extends Modelica.Icons.Example;
   Utilities.Sources.InternalGains.Lights.Lights_simple

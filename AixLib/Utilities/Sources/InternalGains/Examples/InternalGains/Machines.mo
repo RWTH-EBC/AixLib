@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Examples.Sources.InternalGains;
+within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model Machines "Simulation to check the machine models"
   extends Modelica.Icons.Example;
   Utilities.Sources.InternalGains.Machines.Machines_simple
