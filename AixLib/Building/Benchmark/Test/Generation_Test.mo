@@ -2,7 +2,7 @@ within AixLib.Building.Benchmark.Test;
 model Generation_Test
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
-  Regelungsbenchmark.Testcontroller testcontroller
+  Regelungsbenchmark.Controller.Testcontroller testcontroller
     annotation (Placement(transformation(extent={{-100,68},{-80,88}})));
   Generation.Generation generation(
     v_nominal_hotwater=1.692,

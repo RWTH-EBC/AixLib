@@ -1,4 +1,4 @@
-within AixLib.Building.Benchmark.Regelungsbenchmark;
+within AixLib.Building.Benchmark.Regelungsbenchmark.Controller;
 model Testcontroller
   BusSystem.ControlBus controlBus
     annotation (Placement(transformation(extent={{80,-40},{120,0}})));

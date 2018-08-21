@@ -34,8 +34,8 @@ expandable connector ControlBus
   Real Pump_TBA_Workshop_y "Normalized speed of waterpump of the workshop TBA";
 
   // Fan m_flow
-  Real Fan_Aircooler "Massflow of the Aircoolerfan";
-  Real Fan_RLT "Massflow of the RLT-fan";
+  Real Fan_Aircooler "Normalized Massflow of Aircooler";
+  Real Fan_RLT "Normalized Massflow of the RLT-fan";
 
   // Valvepositions
   Real Valve1 "Valveposition of Valve1 (Coldwater geothermalprobe)";

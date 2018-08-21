@@ -20,7 +20,7 @@ replaceable package Medium_Water =
     annotation (Placement(transformation(extent={{-8,9},{8,-9}},
         rotation=90,
         origin={11,58})));
-  Regelungsbenchmark.Testcontroller testcontroller
+  Regelungsbenchmark.Controller.Testcontroller testcontroller
     annotation (Placement(transformation(extent={{-98,74},{-78,94}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1
                                                                          [5](T=293.15)

@@ -4,7 +4,7 @@ model RLT_Test
     AixLib.Media.Water "Medium in the component";
       replaceable package Medium_Air = AixLib.Media.Air
     "Medium in the component";
-  Regelungsbenchmark.Testcontroller testcontroller
+  Regelungsbenchmark.Controller.Testcontroller testcontroller
     annotation (Placement(transformation(extent={{-100,68},{-80,88}})));
   Fluid.Sources.Boundary_pT bou2(
     redeclare package Medium = Medium_Water,

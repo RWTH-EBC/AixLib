@@ -2,7 +2,7 @@ within AixLib.Building.Benchmark.Test;
 model TBA_Test
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
-  Regelungsbenchmark.Testcontroller testcontroller
+  Regelungsbenchmark.Controller.Testcontroller testcontroller
     annotation (Placement(transformation(extent={{-100,68},{-80,88}})));
   Fluid.Sources.Boundary_pT bou2(
     redeclare package Medium = Medium_Water,

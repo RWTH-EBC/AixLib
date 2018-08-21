@@ -87,6 +87,10 @@ model FullModel
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Evaluation.Evaluation evaluation
     annotation (Placement(transformation(extent={{-40,-16},{-20,4}})));
+  Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Air)
+    annotation (Placement(transformation(extent={{-34,52},{-22,64}})));
+  Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Air)
+    annotation (Placement(transformation(extent={{62,64},{74,76}})));
 equation
   connect(generation.Fluid_out_hot, full_Transfer_RLT.Fluid_in_hot) annotation (
      Line(points={{-60,-42},{-6,-42},{-6,-42},{0,-42}}, color={0,127,255}));
@@ -112,7 +116,7 @@ equation
     annotation (Line(points={{50,86},{16.4,86},{16.4,66}},
                                                        color={0,127,255}));
   connect(Ext_Warm.port_a1, office.Air_out) annotation (Line(points={{16.4,50},
-          {16,50},{16,-10},{36.2,-10},{36.2,0}},
+          {16,50},{16,-16},{36,-16},{36,-8},{36.2,-8},{36.2,0}},
                                              color={0,127,255}));
   connect(weather.measureBus, measureBus) annotation (Line(
       points={{60,82},{60,80},{-74,80},{-74,20},{-100,20}},
@@ -211,6 +215,16 @@ equation
   connect(weather.SolarRadiation_Hor, office.SolarRadiationPort_Hor1)
     annotation (Line(points={{71,83},{126,83},{126,6},{88.9,6}}, color={255,128,
           0}));
+  connect(senTem2.port, full_Transfer_RLT.Air_in) annotation (Line(points={{-28,
+          52},{-16,52},{-16,52},{-2,52},{-2,46},{6,46},{6,-40}}, color={0,127,
+          255}));
+  connect(senTem1.port, office.Air_out) annotation (Line(points={{68,64},{68,62},
+          {26,62},{26,46},{16,46},{16,-16},{36,-16},{36,-8},{36.2,-8},{36.2,0}},
+        color={0,127,255}));
+  connect(senTem1.T, measureBus.Air_out) annotation (Line(points={{72.2,70},{76,
+          70},{76,80},{-74,80},{-74,20.1},{-99.9,20.1}}, color={0,0,127}));
+  connect(senTem2.T, measureBus.Air_in) annotation (Line(points={{-23.8,58},{0,
+          58},{0,80},{-74,80},{-74,20.1},{-99.9,20.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5000, Interval=1));
