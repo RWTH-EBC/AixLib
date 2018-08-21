@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Examples.Weather;
+within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Examples;
 model WeatherModels
   extends Modelica.Icons.Example;
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(
