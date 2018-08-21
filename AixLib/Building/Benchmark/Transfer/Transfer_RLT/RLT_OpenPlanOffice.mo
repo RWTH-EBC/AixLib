@@ -245,14 +245,6 @@ model RLT_OpenPlanOffice
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-100,-40})));
-  Fluid.MixingVolumes.MixingVolume vol2(
-    nPorts=2,
-    redeclare package Medium = Medium_Air,
-    m_flow_nominal=100,
-    V=0.01)   annotation (Placement(transformation(
-        extent={{-6,6},{6,-6}},
-        rotation=0,
-        origin={-78,-72})));
   Fluid.MixingVolumes.MixingVolume vol3(
     nPorts=2,
     redeclare package Medium = Medium_Air,
@@ -261,6 +253,20 @@ model RLT_OpenPlanOffice
         extent={{-6,6},{6,-6}},
         rotation=0,
         origin={-14,-72})));
+  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe4(
+    cPip=500,
+    rhoPip=8000,
+    thickness=pipe_wall_thickness_hot,
+    nPorts=1,
+    redeclare package Medium = Medium_Air,
+    v_nominal=RLT_v_nominal,
+    m_flow_nominal=RLT_m_flow_nominal,
+    length=RLT_pipe_length,
+    dIns=RLT_pipe_insulation_thickness,
+    kIns=RLT_pipe_insulation_conductivity)
+    annotation (Placement(transformation(extent={{9.5,9.5},{-9.5,-9.5}},
+        rotation=0,
+        origin={-78.5,-66.5})));
 equation
   connect(plugFlowPipe1.port_a, vol.ports[1])
     annotation (Line(points={{-80,20},{-80,58.2}}, color={0,127,255}));
@@ -348,14 +354,17 @@ equation
           {-100,40}}, color={0,0,127}));
   connect(Ext_Cold.port_b2, Air_out)
     annotation (Line(points={{34,-66},{100,-66}}, color={0,127,255}));
-  connect(Air_in, vol2.ports[1])
-    annotation (Line(points={{-100,-66},{-79.2,-66}}, color={0,127,255}));
-  connect(vol2.ports[2], Ext_Warm.port_a2)
-    annotation (Line(points={{-76.8,-66},{-62,-66}}, color={0,127,255}));
   connect(Ext_Warm.port_b2, vol3.ports[1])
     annotation (Line(points={{-42,-66},{-15.2,-66}}, color={0,127,255}));
   connect(vol3.ports[2], Ext_Cold.port_a2)
     annotation (Line(points={{-12.8,-66},{14,-66}}, color={0,127,255}));
+  connect(Air_in, plugFlowPipe4.ports_b[1]) annotation (Line(points={{-100,-66},
+          {-94,-66},{-94,-66.5},{-88,-66.5}}, color={0,127,255}));
+  connect(plugFlowPipe4.port_a, Ext_Warm.port_a2) annotation (Line(points={{-69,
+          -66.5},{-66.5,-66.5},{-66.5,-66},{-62,-66}}, color={0,127,255}));
+  connect(plugFlowPipe4.heatPort, heatPort_pumpsAndPipes) annotation (Line(
+        points={{-78.5,-76},{-78,-76},{-78,-84},{0,-84},{0,-100}}, color={191,0,
+          0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},

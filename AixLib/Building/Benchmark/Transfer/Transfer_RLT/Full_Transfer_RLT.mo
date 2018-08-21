@@ -167,9 +167,15 @@ model Full_Transfer_RLT
     m_flow_nominal_cold=0.87,
     pipe_wall_thickness_cold=0.0032,
     pipe_length_hot=8,
-    dpValve_nominal_hot=7000,
     pipe_length_cold=8,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=1.204,
+    RLT_pipe_length=28,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},
@@ -423,8 +429,8 @@ equation
   connect(Central.massflow_hot, measureBus.RLT_central_warm) annotation (Line(
         points={{-62,72},{-62,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
         color={0,0,127}));
-  connect(Central.power_pump_hot, measureBus.Pump_RLT_central_warm) annotation
-    (Line(points={{-58,72},{-58,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,
+  connect(Central.power_pump_hot, measureBus.Pump_RLT_central_warm) annotation (
+     Line(points={{-58,72},{-58,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,
           -29.9}}, color={0,0,127}));
   connect(Central.massflow_cold, measureBus.RLT_central_cold) annotation (Line(
         points={{-46,72},{-46,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},

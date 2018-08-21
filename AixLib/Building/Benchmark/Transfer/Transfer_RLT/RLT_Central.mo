@@ -23,12 +23,6 @@ model RLT_Central
     parameter Modelica.SIunits.Volume V_mixing_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
 
-    parameter Modelica.SIunits.Velocity RLT_v_nominal = 0 annotation(Dialog(tab = "RLT"));
-    parameter Real RLT_m_flow_nominal = 0 annotation(Dialog(tab = "RLT"));
-    parameter Modelica.SIunits.Length RLT_pipe_length = 0 annotation(Dialog(tab = "RLT"));
-    parameter Modelica.SIunits.Length RLT_pipe_wall_thickness = 0 annotation(Dialog(tab = "RLT"));
-    parameter Modelica.SIunits.Length RLT_pipe_insulation_thickness = 0 annotation(Dialog(tab = "RLT"));
-    parameter Modelica.SIunits.ThermalConductivity RLT_pipe_insulation_conductivity = 0  annotation(Dialog(tab = "RLT"));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
     m1_flow_nominal=1,
     m2_flow_nominal=10,

@@ -397,14 +397,14 @@ equation
   connect(OpenPlanOffice.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[1])
     annotation (Line(points={{-72,80},{-72,90},{-40,90},{-40,92}}, color={191,0,
           0}));
-  connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points
-        ={{-80,80},{-80,90},{40,90},{40,92}}, color={191,0,0}));
+  connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points=
+         {{-80,80},{-80,90},{40,90},{40,92}}, color={191,0,0}));
   connect(OpenPlanOffice.Fluid_in, Valve_WarmCold_OpenPlanOffice_1.port_2)
     annotation (Line(points={{-82,60},{-82,24}}, color={0,127,255}));
   connect(OpenPlanOffice.Fluid_out, Valve_WarmCold_OpenPlanOffice_2.port_2)
     annotation (Line(points={{-70,60},{-70,4}}, color={0,127,255}));
-  connect(OpenPlanOffice.Temp_in, measureBus.TBA_openplanoffice_in) annotation
-    (Line(points={{-66,64},{-60,64},{-60,40},{86,40},{86,-39.9},{100.1,-39.9}},
+  connect(OpenPlanOffice.Temp_in, measureBus.TBA_openplanoffice_in) annotation (
+     Line(points={{-66,64},{-60,64},{-60,40},{86,40},{86,-39.9},{100.1,-39.9}},
         color={0,0,127}));
   connect(OpenPlanOffice.Temp_out, measureBus.TBA_openplanoffice_out)
     annotation (Line(points={{-66,68},{-60,68},{-60,40},{86,40},{86,-39.9},{
