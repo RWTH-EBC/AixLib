@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Examples.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.Examples.WindowsDoors;
 model WindowSimple
   extends Modelica.Icons.Example;
   ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple windowSimple(

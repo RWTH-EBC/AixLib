@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Examples.DryAir;
+within AixLib.ThermalZones.HighOrder.Components.Examples.DryAir;
 model DryAir_test "Simulation to test the dry air models"
   import AixLib;
   extends Modelica.Icons.Example;
