@@ -72,10 +72,10 @@ model FullModel
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium1 = Medium_Air,
-    m1_flow_nominal=100,
-    m2_flow_nominal=100,
     dp1_nominal=1,
-    dp2_nominal=1)
+    dp2_nominal=1,
+    m1_flow_nominal=3.375,
+    m2_flow_nominal=3.375)
     annotation (Placement(transformation(extent={{-8,9},{8,-9}},
         rotation=90,
         origin={11,58})));

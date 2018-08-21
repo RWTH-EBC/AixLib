@@ -92,6 +92,9 @@ model Weather
     annotation (Placement(transformation(extent={{100,-100},{120,-80}})));
   Utilities.Interfaces.SolarRad_out SolarRadiation_North5
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table=[-1,0; 0.9999,0; 1,
+        3.375; 2,3.375], smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
+    annotation (Placement(transformation(extent={{-32,-78},{-12,-58}})));
 equation
   connect(weather.WindDirection, gain.u)
     annotation (Line(points={{-19,33},{0,33},{0,41},{9,41}}, color={0,0,127}));
@@ -129,8 +132,6 @@ equation
           -40},{-36,-24},{-42,-24}}, color={0,0,127}));
   connect(realExpression.y, feedback.u1)
     annotation (Line(points={{9.4,-40},{-16,-40}}, color={0,0,127}));
-  connect(boundary.m_flow_in, controlBus.Fan_RLT) annotation (Line(points={{-44,-12},
-          {-6,-12},{-6,-80},{-69.9,-80},{-69.9,-99.9}},       color={0,0,127}));
   connect(Air_in, Air_in_bou.ports[1])
     annotation (Line(points={{-100,-60},{-62,-60}}, color={0,127,255}));
   connect(weather.WaterInAir, measureBus.WaterInAir) annotation (Line(points={{
@@ -183,6 +184,10 @@ equation
   connect(pVSystem.IcTotalRad, weather.SolarRadiation_OrientedSurfaces[6])
     annotation (Line(points={{-51.8,69.5},{-60,69.5},{-60,0},{-42.8,0},{-42.8,
           13}}, color={255,128,0}));
+  connect(combiTable1Ds.u, controlBus.Fan_RLT) annotation (Line(points={{-34,
+          -68},{-40,-68},{-40,-80},{-69.9,-80},{-69.9,-99.9}}, color={0,0,127}));
+  connect(combiTable1Ds.y[1], boundary.m_flow_in) annotation (Line(points={{-11,
+          -68},{-8,-68},{-8,-12},{-44,-12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

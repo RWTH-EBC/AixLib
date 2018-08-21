@@ -24,25 +24,25 @@ model RLT_Central
     parameter Modelica.SIunits.Pressure dpValve_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
 
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
-    m1_flow_nominal=1,
-    m2_flow_nominal=10,
-    dp1_nominal=10,
-    dp2_nominal=10,
     redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Air)
+    redeclare package Medium2 = Medium_Air,
+    m2_flow_nominal=3.375,
+    dp2_nominal=1,
+    dp1_nominal(displayUnit="bar") = 20000,
+    m1_flow_nominal=m_flow_nominal_hot)
     annotation (Placement(transformation(extent={{-42,-70},{-62,-50}})));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Cold(
-    m1_flow_nominal=1,
-    m2_flow_nominal=10,
-    dp1_nominal=10,
-    dp2_nominal=10,
     redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Air)
+    redeclare package Medium2 = Medium_Air,
+    m2_flow_nominal=3.375,
+    dp2_nominal=1,
+    dp1_nominal(displayUnit="bar") = 20000,
+    m1_flow_nominal=m_flow_nominal_cold)
     annotation (Placement(transformation(extent={{34,-70},{14,-50}})));
   Fluid.Humidifiers.SprayAirWasher_X hum(
-    m_flow_nominal=20,
-    dp_nominal=20,
-    redeclare package Medium = Medium_Air)
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=3.375,
+    dp_nominal=1)
     annotation (Placement(transformation(extent={{66,-76},{86,-56}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
         Medium_Water)
@@ -254,16 +254,18 @@ model RLT_Central
   Fluid.MixingVolumes.MixingVolume vol2(
     nPorts=2,
     redeclare package Medium = Medium_Air,
-    m_flow_nominal=100,
-    V=0.01)   annotation (Placement(transformation(
+    V=0.01,
+    m_flow_nominal=3.375)
+              annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=0,
         origin={-78,-72})));
   Fluid.MixingVolumes.MixingVolume vol3(
     nPorts=2,
     redeclare package Medium = Medium_Air,
-    m_flow_nominal=100,
-    V=0.01)   annotation (Placement(transformation(
+    V=0.01,
+    m_flow_nominal=3.375)
+              annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=0,
         origin={-14,-72})));

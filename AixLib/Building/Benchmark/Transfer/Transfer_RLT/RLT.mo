@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
+within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
 model RLT
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
@@ -29,21 +29,22 @@ model RLT
     parameter Modelica.SIunits.Length RLT_pipe_wall_thickness = 0 annotation(Dialog(tab = "RLT"));
     parameter Modelica.SIunits.Length RLT_pipe_insulation_thickness = 0 annotation(Dialog(tab = "RLT"));
     parameter Modelica.SIunits.ThermalConductivity RLT_pipe_insulation_conductivity = 0  annotation(Dialog(tab = "RLT"));
+    parameter Modelica.SIunits.Pressure RLT_dp_Heatexchanger = 0 annotation(Dialog(tab = "RLT"));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
-    m1_flow_nominal=1,
-    m2_flow_nominal=10,
-    dp1_nominal=10,
-    dp2_nominal=10,
     redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Air)
+    redeclare package Medium2 = Medium_Air,
+    dp2_nominal=RLT_dp_Heatexchanger,
+    dp1_nominal(displayUnit="bar") = 20000,
+    m1_flow_nominal=m_flow_nominal_hot,
+    m2_flow_nominal=RLT_m_flow_nominal)
     annotation (Placement(transformation(extent={{-42,-70},{-62,-50}})));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Cold(
-    m1_flow_nominal=1,
-    m2_flow_nominal=10,
-    dp1_nominal=10,
-    dp2_nominal=10,
     redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Air)
+    redeclare package Medium2 = Medium_Air,
+    dp1_nominal(displayUnit="bar") = 20000,
+    dp2_nominal=RLT_dp_Heatexchanger,
+    m1_flow_nominal=m_flow_nominal_cold,
+    m2_flow_nominal=RLT_m_flow_nominal)
     annotation (Placement(transformation(extent={{34,-70},{14,-50}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
         Medium_Water)
@@ -366,10 +367,5 @@ equation
         points={{-78.5,-76},{-78,-76},{-78,-84},{0,-84},{0,-100}}, color={191,0,
           0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-188,-56},{-126,-76}},
-          lineColor={28,108,200},
-          textString="Parameter Wärmetausch
-müssen angepasst werden
-")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end RLT;
