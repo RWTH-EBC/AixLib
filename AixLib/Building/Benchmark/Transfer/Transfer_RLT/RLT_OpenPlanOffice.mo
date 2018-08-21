@@ -245,9 +245,23 @@ model RLT_OpenPlanOffice
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-100,-40})));
+  Fluid.MixingVolumes.MixingVolume vol2(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=100,
+    V=0.01)   annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=0,
+        origin={-78,-72})));
+  Fluid.MixingVolumes.MixingVolume vol3(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=100,
+    V=0.01)   annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=0,
+        origin={-14,-72})));
 equation
-  connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
-    annotation (Line(points={{-42,-66},{14,-66}},color={0,127,255}));
   connect(plugFlowPipe1.port_a, vol.ports[1])
     annotation (Line(points={{-80,20},{-80,58.2}}, color={0,127,255}));
   connect(val1.port_3, vol.ports[2]) annotation (Line(points={{-46,60},{-64,60},
@@ -332,10 +346,16 @@ equation
           {20,40},{20,80},{-100,80}}, color={0,0,127}));
   connect(senTem4.T, cold_in) annotation (Line(points={{77,60},{78,60},{78,40},
           {-100,40}}, color={0,0,127}));
-  connect(Air_in, Ext_Warm.port_a2)
-    annotation (Line(points={{-100,-66},{-62,-66}}, color={0,127,255}));
   connect(Ext_Cold.port_b2, Air_out)
     annotation (Line(points={{34,-66},{100,-66}}, color={0,127,255}));
+  connect(Air_in, vol2.ports[1])
+    annotation (Line(points={{-100,-66},{-79.2,-66}}, color={0,127,255}));
+  connect(vol2.ports[2], Ext_Warm.port_a2)
+    annotation (Line(points={{-76.8,-66},{-62,-66}}, color={0,127,255}));
+  connect(Ext_Warm.port_b2, vol3.ports[1])
+    annotation (Line(points={{-42,-66},{-15.2,-66}}, color={0,127,255}));
+  connect(vol3.ports[2], Ext_Cold.port_a2)
+    annotation (Line(points={{-12.8,-66},{14,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-188,-56},{-126,-76}},

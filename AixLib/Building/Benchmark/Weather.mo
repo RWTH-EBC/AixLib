@@ -157,17 +157,11 @@ equation
           {0,0,127}));
   connect(weather.WindSpeed, product1.u1) annotation (Line(points={{-19,30},{40,
           30},{40,42.4},{67.2,42.4}}, color={0,0,127}));
-  connect(pVSystem.TOutside, weather.WaterInAir) annotation (Line(points={{-52,
-          77.6},{-60,77.6},{-60,0},{-24,0},{-24,16},{-10,16},{-10,21},{-19,21}},
-        color={0,0,127}));
   connect(pVSystem.PVPowerW, gain2.u)
     annotation (Line(points={{-29,70},{-19.2,70}}, color={0,0,127}));
   connect(gain2.y, measureBus.PV_Power) annotation (Line(points={{-5.4,70},{0,
           70},{0,42},{0,-84},{-32,-84},{-32,-92},{-31.9,-92},{-31.9,-99.9}},
         color={0,0,127}));
-  connect(pVSystem.IcTotalRad, weather.SolarRadiation_OrientedSurfaces[6])
-    annotation (Line(points={{-51.8,69.5},{-60,69.5},{-60,0},{-42.8,0},{-42.8,
-          13}}, color={255,128,0}));
   connect(weather.SolarRadiation_OrientedSurfaces[2], SolarRadiation_East)
     annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,30},
           {110,30}}, color={255,128,0}));
@@ -183,6 +177,12 @@ equation
   connect(weather.SolarRadiation_OrientedSurfaces[5], SolarRadiation_Hor)
     annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,
           -90},{110,-90}}, color={255,128,0}));
+  connect(pVSystem.TOutside, boundary.T_in) annotation (Line(points={{-52,77.6},
+          {-60,77.6},{-60,0},{0,0},{0,26},{0,26},{0,-16},{-42,-16}}, color={0,0,
+          127}));
+  connect(pVSystem.IcTotalRad, weather.SolarRadiation_OrientedSurfaces[6])
+    annotation (Line(points={{-51.8,69.5},{-60,69.5},{-60,0},{-42.8,0},{-42.8,
+          13}}, color={255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

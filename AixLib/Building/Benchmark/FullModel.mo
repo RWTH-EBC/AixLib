@@ -26,7 +26,6 @@ model FullModel
     pipe_length_hotwater=25,
     pipe_length_warmwater=25,
     pipe_length_coldwater=25,
-    riseTime_valve=2,
     pipe_wall_thickness_hotwater=0.004,
     pipe_insulation_thickness_hotwater=0.02,
     pipe_insulation_conductivity_hotwater=0.05,
@@ -54,7 +53,6 @@ model FullModel
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
   Transfer.Transfer_TBA.Full_Transfer_TBA full_Transfer_TBA(
-    riseTime_valve=2,
     m_flow_nominal_openplanoffice=2.516,
     m_flow_nominal_conferenceroom=0.19,
     m_flow_nominal_multipersonoffice=0.378,
@@ -66,7 +64,8 @@ model FullModel
     dp_Valve_nominal_canteen=10000,
     dp_Valve_nominal_workshop=10000)
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-  Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT(riseTime_valve=2)
+
+  Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   InternalLoads.InternalLoads internalLoads
     annotation (Placement(transformation(extent={{-48,50},{-8,10}})));

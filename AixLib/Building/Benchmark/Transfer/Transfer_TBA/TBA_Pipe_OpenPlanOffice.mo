@@ -1,5 +1,5 @@
 within AixLib.Building.Benchmark.Transfer.Transfer_TBA;
-model TBA_Pipe
+model TBA_Pipe_OpenPlanOffice
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
   import BaseLib = AixLib.Utilities;
@@ -82,7 +82,7 @@ model TBA_Pipe
         rotation=90,
         origin={66,-40})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to12 per)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=-90,
         origin={-60,28})));
@@ -158,4 +158,4 @@ equation
           {100,-60}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end TBA_Pipe;
+end TBA_Pipe_OpenPlanOffice;

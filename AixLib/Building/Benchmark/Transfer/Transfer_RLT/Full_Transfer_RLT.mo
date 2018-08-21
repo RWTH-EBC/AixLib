@@ -135,9 +135,41 @@ model Full_Transfer_RLT
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{82,-50},{122,-10}})));
-  RLT_Central rLT_Central
+  RLT_Central Central(
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    v_nominal_hot=1.707,
+    m_flow_nominal_hot=3.649,
+    pipe_wall_thickness_hot=0.0036,
+    v_nominal_cold=1.418,
+    m_flow_nominal_cold=3.139,
+    pipe_wall_thickness_cold=0.0036,
+    pipe_length_hot=20,
+    dpValve_nominal_hot=7000,
+    pipe_length_cold=20,
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-64,72},{-44,52}})));
-  RLT_OpenPlanOffice rLT_OpenPlanOffice
+  RLT_OpenPlanOffice OpenPlanOffice(
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    v_nominal_hot=1.562,
+    m_flow_nominal_hot=2.078,
+    pipe_wall_thickness_hot=0.0032,
+    v_nominal_cold=1.487,
+    m_flow_nominal_cold=0.87,
+    pipe_wall_thickness_cold=0.0032,
+    pipe_length_hot=8,
+    dpValve_nominal_hot=7000,
+    pipe_length_cold=8,
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},
@@ -348,28 +380,26 @@ equation
   connect(Canteen.power_pump_hot, measureBus.Pump_RLT_canteen_warm) annotation (
      Line(points={{-4,-66},{-4,-58},{28,-58},{28,-90},{86,-90},{86,-29.9},{
           102.1,-29.9}}, color={0,0,127}));
-  connect(rLT_Central.Air_in, Air_in) annotation (Line(points={{-64,68.6},{-72,68.6},
+  connect(Central.Air_in, Air_in) annotation (Line(points={{-64,68.6},{-72,68.6},
           {-72,68},{-72,68},{-72,80},{-40,80},{-40,100}}, color={0,127,255}));
-  connect(rLT_Central.Fluid_in_hot, Fluid_in_hot) annotation (Line(points={{-58,
-          52},{-58,46},{-74,46},{-74,80},{-100,80}}, color={0,127,255}));
-  connect(rLT_Central.Fluid_out_cold, Fluid_out_cold) annotation (Line(points={{
-          -50,52},{-50,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
-  connect(rLT_Central.Fluid_in_cold, Fluid_in_cold) annotation (Line(points={{-46,
+  connect(Central.Fluid_in_hot, Fluid_in_hot) annotation (Line(points={{-58,52},
+          {-58,46},{-74,46},{-74,80},{-100,80}}, color={0,127,255}));
+  connect(Central.Fluid_out_cold, Fluid_out_cold) annotation (Line(points={{-50,
+          52},{-50,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
+  connect(Central.Fluid_in_cold, Fluid_in_cold) annotation (Line(points={{-46,
           52},{-46,-40},{-100,-40}}, color={0,127,255}));
-  connect(rLT_Central.heatPort_pumpsAndPipes, heatPort[4]) annotation (Line(
-        points={{-54,72},{-54,80},{0,80},{0,104}}, color={191,0,0}));
-  connect(rLT_Central.X_w, controlBus.X_Central) annotation (Line(points={{-54,52},
+  connect(Central.heatPort_pumpsAndPipes, heatPort[4]) annotation (Line(points=
+          {{-54,72},{-54,80},{0,80},{0,104}}, color={191,0,0}));
+  connect(Central.X_w, controlBus.X_Central) annotation (Line(points={{-54,52},
           {-54,28.1},{102.1,28.1}}, color={0,0,127}));
-  connect(rLT_Central.valve_cold, controlBus.Valve_RLT_Cold_Central)
-    annotation (Line(points={{-44,54},{-36,54},{-36,28.1},{102.1,28.1}}, color={
-          0,0,127}));
-  connect(rLT_Central.valve_hot, controlBus.Valve_RLT_Hot_Central) annotation (
-      Line(points={{-44,58},{-36,58},{-36,28.1},{102.1,28.1}}, color={0,0,127}));
-  connect(rLT_Central.pump_cold, controlBus.Pump_RLT_Central_cold_y)
-    annotation (Line(points={{-44,62},{-36,62},{-36,28.1},{102.1,28.1}}, color={
-          0,0,127}));
-  connect(rLT_Central.pump_hot, controlBus.Pump_RLT_Central_hot_y) annotation (
-      Line(points={{-44,66},{-36,66},{-36,28.1},{102.1,28.1}}, color={0,0,127}));
+  connect(Central.valve_cold, controlBus.Valve_RLT_Cold_Central) annotation (
+      Line(points={{-44,54},{-36,54},{-36,28.1},{102.1,28.1}}, color={0,0,127}));
+  connect(Central.valve_hot, controlBus.Valve_RLT_Hot_Central) annotation (Line(
+        points={{-44,58},{-36,58},{-36,28.1},{102.1,28.1}}, color={0,0,127}));
+  connect(Central.pump_cold, controlBus.Pump_RLT_Central_cold_y) annotation (
+      Line(points={{-44,62},{-36,62},{-36,28.1},{102.1,28.1}}, color={0,0,127}));
+  connect(Central.pump_hot, controlBus.Pump_RLT_Central_hot_y) annotation (Line(
+        points={{-44,66},{-36,66},{-36,28.1},{102.1,28.1}}, color={0,0,127}));
   connect(ConferenceRoom.Fluid_in_hot, Fluid_in_hot) annotation (Line(points={{52,
           52},{52,46},{-74,46},{-74,80},{-100,80}}, color={0,127,255}));
   connect(MultiPersonOffice.Fluid_in_hot, Fluid_in_hot) annotation (Line(points=
@@ -378,92 +408,94 @@ equation
           {-4,-86},{-4,-90},{-74,-90},{-74,80},{-100,80}}, color={0,127,255}));
   connect(Workshop.Fluid_in_hot, Fluid_in_hot) annotation (Line(points={{50,-86},
           {50,-86},{50,-90},{-74,-90},{-74,80},{-100,80}}, color={0,127,255}));
-  connect(rLT_Central.cold_out, measureBus.RLT_central_cold_out) annotation (
-      Line(points={{-64,54},{-68,54},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
+  connect(Central.cold_out, measureBus.RLT_central_cold_out) annotation (Line(
+        points={{-64,54},{-68,54},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
         color={0,0,127}));
-  connect(rLT_Central.cold_in, measureBus.RLT_central_cold_in) annotation (Line(
+  connect(Central.cold_in, measureBus.RLT_central_cold_in) annotation (Line(
         points={{-64,58},{-68,58},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
         color={0,0,127}));
-  connect(rLT_Central.hot_out, measureBus.RLT_central_hot_out) annotation (Line(
+  connect(Central.hot_out, measureBus.RLT_central_hot_out) annotation (Line(
         points={{-64,62},{-68,62},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
         color={0,0,127}));
-  connect(rLT_Central.hot_in, measureBus.RLT_central_hot_in) annotation (Line(
+  connect(Central.hot_in, measureBus.RLT_central_hot_in) annotation (Line(
         points={{-64,66},{-68,66},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
         color={0,0,127}));
-  connect(rLT_Central.massflow_hot, measureBus.RLT_central_warm) annotation (
-      Line(points={{-62,72},{-62,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,
+  connect(Central.massflow_hot, measureBus.RLT_central_warm) annotation (Line(
+        points={{-62,72},{-62,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
+        color={0,0,127}));
+  connect(Central.power_pump_hot, measureBus.Pump_RLT_central_warm) annotation
+    (Line(points={{-58,72},{-58,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,
           -29.9}}, color={0,0,127}));
-  connect(rLT_Central.power_pump_hot, measureBus.Pump_RLT_central_warm)
-    annotation (Line(points={{-58,72},{-58,76},{-68,76},{-68,28},{86,28},{86,-29.9},
-          {102.1,-29.9}}, color={0,0,127}));
-  connect(rLT_Central.massflow_cold, measureBus.RLT_central_cold) annotation (
-      Line(points={{-46,72},{-46,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,
-          -29.9}}, color={0,0,127}));
-  connect(rLT_Central.power_pump_cold, measureBus.Pump_RLT_central_cold)
+  connect(Central.massflow_cold, measureBus.RLT_central_cold) annotation (Line(
+        points={{-46,72},{-46,76},{-68,76},{-68,28},{86,28},{86,-29.9},{102.1,-29.9}},
+        color={0,0,127}));
+  connect(Central.power_pump_cold, measureBus.Pump_RLT_central_cold)
     annotation (Line(points={{-50,72},{-50,76},{-68,76},{-68,28},{86,28},{86,-29.9},
           {102.1,-29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.heatPort_pumpsAndPipes, heatPort[1])
+  connect(OpenPlanOffice.heatPort_pumpsAndPipes, heatPort[1])
     annotation (Line(points={{0,72},{0,92}}, color={191,0,0}));
-  connect(rLT_Central.Air_out, rLT_OpenPlanOffice.Air_in) annotation (Line(
-        points={{-44,68.6},{-27,68.6},{-27,68.6},{-10,68.6}}, color={0,127,255}));
-  connect(ConferenceRoom.Air_in, rLT_OpenPlanOffice.Air_in) annotation (Line(
-        points={{46,68.6},{20,68.6},{20,70},{20,70},{20,80},{-24,80},{-24,68.6},
-          {-10,68.6}}, color={0,127,255}));
-  connect(MultiPersonOffice.Air_in, rLT_OpenPlanOffice.Air_in) annotation (Line(
-        points={{-66,-69.4},{-74,-69.4},{-74,12},{-24,12},{-24,68},{-24,68.6},{-10,
-          68.6}}, color={0,127,255}));
-  connect(Canteen.Air_in, rLT_OpenPlanOffice.Air_in) annotation (Line(points={{-10,
-          -69.4},{-24,-69.4},{-24,-70},{-24,-70},{-24,68.6},{-10,68.6}}, color={
-          0,127,255}));
-  connect(Workshop.Air_in, rLT_OpenPlanOffice.Air_in) annotation (Line(points={{
-          44,-69.4},{36,-69.4},{36,-70},{36,-70},{36,12},{-24,12},{-24,68.6},{-10,
-          68.6}}, color={0,127,255}));
-  connect(rLT_Central.Fluid_out_hot, Fluid_out_hot)
+  connect(Central.Fluid_out_hot, Fluid_out_hot)
     annotation (Line(points={{-62,52},{-62,40},{-100,40}}, color={0,127,255}));
-  connect(rLT_OpenPlanOffice.Fluid_out_hot, Fluid_out_hot)
+  connect(OpenPlanOffice.Fluid_out_hot, Fluid_out_hot)
     annotation (Line(points={{-8,52},{-8,40},{-100,40}}, color={0,127,255}));
-  connect(rLT_OpenPlanOffice.Fluid_in_hot, Fluid_in_hot) annotation (Line(
-        points={{-4,52},{-4,46},{-74,46},{-74,80},{-100,80}}, color={0,127,255}));
-  connect(rLT_OpenPlanOffice.Fluid_out_cold, Fluid_out_cold) annotation (Line(
+  connect(OpenPlanOffice.Fluid_in_hot, Fluid_in_hot) annotation (Line(points={{
+          -4,52},{-4,46},{-74,46},{-74,80},{-100,80}}, color={0,127,255}));
+  connect(OpenPlanOffice.Fluid_out_cold, Fluid_out_cold) annotation (Line(
         points={{4,52},{4,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
-  connect(rLT_OpenPlanOffice.Fluid_in_cold, Fluid_in_cold)
+  connect(OpenPlanOffice.Fluid_in_cold, Fluid_in_cold)
     annotation (Line(points={{8,52},{8,-40},{-100,-40}}, color={0,127,255}));
-  connect(rLT_OpenPlanOffice.valve_cold, controlBus.Valve_RLT_Cold_OpenPlanOffice)
-    annotation (Line(points={{10,54},{18,54},{18,28.1},{102.1,28.1}}, color={0,0,
-          127}));
-  connect(rLT_OpenPlanOffice.valve_hot, controlBus.Valve_RLT_Hot_OpenPlanOffice)
-    annotation (Line(points={{10,58},{18,58},{18,28.1},{102.1,28.1}}, color={0,0,
-          127}));
-  connect(rLT_OpenPlanOffice.pump_cold, controlBus.Pump_RLT_OpenPlanOffice_cold_y)
-    annotation (Line(points={{10,62},{18,62},{18,28.1},{102.1,28.1}}, color={0,0,
-          127}));
-  connect(rLT_OpenPlanOffice.pump_hot, controlBus.Pump_RLT_OpenPlanOffice_hot_y)
-    annotation (Line(points={{10,66},{18,66},{18,28.1},{102.1,28.1}}, color={0,0,
-          127}));
-  connect(rLT_OpenPlanOffice.cold_out, measureBus.RLT_openplanoffice_cold_out)
-    annotation (Line(points={{-10,54},{-18,54},{-18,28},{86,28},{86,-29.9},{102.1,
-          -29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.cold_in, measureBus.RLT_openplanoffice_cold_in)
-    annotation (Line(points={{-10,58},{-18,58},{-18,28},{86,28},{86,-29.9},{102.1,
-          -29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.hot_out, measureBus.RLT_openplanoffice_hot_out)
-    annotation (Line(points={{-10,62},{-18,62},{-18,28},{86,28},{86,-29.9},{102.1,
-          -29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.hot_in, measureBus.RLT_openplanoffice_hot_in)
-    annotation (Line(points={{-10,66},{-18,66},{-18,28},{86,28},{86,-29.9},{102.1,
-          -29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.massflow_hot, measureBus.RLT_openplanoffice_warm)
+  connect(OpenPlanOffice.valve_cold, controlBus.Valve_RLT_Cold_OpenPlanOffice)
+    annotation (Line(points={{10,54},{18,54},{18,28.1},{102.1,28.1}}, color={0,
+          0,127}));
+  connect(OpenPlanOffice.valve_hot, controlBus.Valve_RLT_Hot_OpenPlanOffice)
+    annotation (Line(points={{10,58},{18,58},{18,28.1},{102.1,28.1}}, color={0,
+          0,127}));
+  connect(OpenPlanOffice.pump_cold, controlBus.Pump_RLT_OpenPlanOffice_cold_y)
+    annotation (Line(points={{10,62},{18,62},{18,28.1},{102.1,28.1}}, color={0,
+          0,127}));
+  connect(OpenPlanOffice.pump_hot, controlBus.Pump_RLT_OpenPlanOffice_hot_y)
+    annotation (Line(points={{10,66},{18,66},{18,28.1},{102.1,28.1}}, color={0,
+          0,127}));
+  connect(OpenPlanOffice.cold_out, measureBus.RLT_openplanoffice_cold_out)
+    annotation (Line(points={{-10,54},{-18,54},{-18,28},{86,28},{86,-29.9},{
+          102.1,-29.9}}, color={0,0,127}));
+  connect(OpenPlanOffice.cold_in, measureBus.RLT_openplanoffice_cold_in)
+    annotation (Line(points={{-10,58},{-18,58},{-18,28},{86,28},{86,-29.9},{
+          102.1,-29.9}}, color={0,0,127}));
+  connect(OpenPlanOffice.hot_out, measureBus.RLT_openplanoffice_hot_out)
+    annotation (Line(points={{-10,62},{-18,62},{-18,28},{86,28},{86,-29.9},{
+          102.1,-29.9}}, color={0,0,127}));
+  connect(OpenPlanOffice.hot_in, measureBus.RLT_openplanoffice_hot_in)
+    annotation (Line(points={{-10,66},{-18,66},{-18,28},{86,28},{86,-29.9},{
+          102.1,-29.9}}, color={0,0,127}));
+  connect(OpenPlanOffice.massflow_hot, measureBus.RLT_openplanoffice_warm)
     annotation (Line(points={{-8,72},{-8,76},{-18,76},{-18,28},{86,28},{86,-29.9},
           {102.1,-29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.massflow_cold, measureBus.RLT_openplanoffice_cold)
+  connect(OpenPlanOffice.massflow_cold, measureBus.RLT_openplanoffice_cold)
     annotation (Line(points={{8,72},{8,76},{-18,76},{-18,28},{86,28},{86,-29.9},
           {102.1,-29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.power_pump_hot, measureBus.Pump_RLT_openplanoffice_warm)
+  connect(OpenPlanOffice.power_pump_hot, measureBus.Pump_RLT_openplanoffice_warm)
     annotation (Line(points={{-4,72},{-4,76},{-18,76},{-18,28},{86,28},{86,-29.9},
           {102.1,-29.9}}, color={0,0,127}));
-  connect(rLT_OpenPlanOffice.power_pump_cold, measureBus.Pump_RLT_openplanoffice_cold)
+  connect(OpenPlanOffice.power_pump_cold, measureBus.Pump_RLT_openplanoffice_cold)
     annotation (Line(points={{4,72},{4,76},{-18,76},{-18,28},{86,28},{86,-29.9},
           {102.1,-29.9}}, color={0,0,127}));
+  connect(ConferenceRoom.Air_in, Central.Air_out) annotation (Line(points={{46,
+          68.6},{28,68.6},{28,68},{28,68},{28,80},{-26,80},{-26,68.6},{-44,68.6}},
+        color={0,127,255}));
+  connect(OpenPlanOffice.Air_in, Central.Air_out) annotation (Line(points={{-10,
+          68.6},{-28,68.6},{-28,68.6},{-44,68.6}}, color={0,127,255}));
+  connect(Canteen.Air_in, Central.Air_out) annotation (Line(points={{-10,-69.4},
+          {-26,-69.4},{-26,-70},{-26,-70},{-26,68.6},{-44,68.6}}, color={0,127,
+          255}));
+  connect(MultiPersonOffice.Air_in, Central.Air_out) annotation (Line(points={{
+          -66,-69.4},{-70,-69.4},{-70,-44},{-26,-44},{-26,68.6},{-44,68.6}},
+        color={0,127,255}));
+  connect(Workshop.Air_in, Central.Air_out) annotation (Line(points={{44,-69.4},
+          {40,-69.4},{40,-70},{36,-70},{36,-44},{-26,-44},{-26,68.6},{-44,68.6}},
+        color={0,127,255}));
+  connect(OpenPlanOffice.Air_out, Air_out[1]) annotation (Line(points={{10,68.6},
+          {16,68.6},{16,70},{16,70},{16,80},{40,80},{40,92}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Full_Transfer_RLT;

@@ -137,19 +137,6 @@ model Full_Transfer_TBA
     V_mixing=0.0001)
     annotation (Placement(transformation(extent={{-50,60},{-30,80}})));
 
-  TBA_Pipe OpenPlanOffice(dp_Valve_nominal=dp_Valve_nominal_openplanoffice,
-      m_flow_nominal=m_flow_nominal_openplanoffice,
-    v_nominal=1.851,
-    pipe_length=8,
-    pipe_wall_thickness=0.0032,
-    pipe_insulation_thickness=0.02,
-    pipe_insulation_conductivity=0.05,
-    TBA_pipe_diameter=0.02,
-    TBA_wall_length=45,
-    TBA_wall_height=30,
-    V_mixing=0.0001)
-    annotation (Placement(transformation(extent={{-86,60},{-66,80}})));
-
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_ConferenceRoom_1(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_conferenceroom,
@@ -204,6 +191,19 @@ model Full_Transfer_TBA
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{80,-60},{120,-20}})));
+  TBA_Pipe_OpenPlanOffice OpenPlanOffice(
+    pipe_length=8,
+    pipe_insulation_thickness=0.02,
+    pipe_insulation_conductivity=0.05,
+    V_mixing=0.0001,
+    dp_Valve_nominal=dp_Valve_nominal_openplanoffice,
+    v_nominal=1.851,
+    m_flow_nominal=m_flow_nominal_openplanoffice,
+    pipe_wall_thickness=0.0032,
+    TBA_pipe_diameter=0.02,
+    TBA_wall_length=45,
+    TBA_wall_height=30)
+    annotation (Placement(transformation(extent={{-86,60},{-66,80}})));
 equation
   connect(Workshop.Fluid_in, Valve_WarmCold_Workshop_1.port_2)
     annotation (Line(points={{62,60},{62,32}}, color={0,127,255}));
@@ -220,16 +220,12 @@ equation
                                                color={0,127,255}));
   connect(Valve_WarmCold_ConferenceRoom_1.port_2, Conferenceroom.Fluid_in)
     annotation (Line(points={{-46,24},{-46,60}}, color={0,127,255}));
-  connect(Valve_WarmCold_OpenPlanOffice_1.port_2, OpenPlanOffice.Fluid_in)
-    annotation (Line(points={{-82,24},{-82,60}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_2.port_3, Fluid_out_warm)
     annotation (Line(points={{68,-14},{-100,-14}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_2.port_1, Fluid_out_cold) annotation (Line(
         points={{74,-20},{74,-80},{-100,-80}}, color={0,127,255}));
   connect(Canteen.Fluid_out, Valve_WarmCold_Canteen_2.port_2)
     annotation (Line(points={{36,60},{36,4}}, color={0,127,255}));
-  connect(OpenPlanOffice.Fluid_out, Valve_WarmCold_OpenPlanOffice_2.port_2)
-    annotation (Line(points={{-70,60},{-70,4}}, color={0,127,255}));
   connect(Conferenceroom.Fluid_out, Valve_WarmCold_ConferenceRoom_2.port_2)
     annotation (Line(points={{-34,60},{-34,4}}, color={0,127,255}));
   connect(Multipersonoffice.Fluid_out, Valve_WarmCold_MultiPersonOffice_2.port_2)
@@ -299,11 +295,6 @@ equation
         points={{-10,80},{-10,90},{40,90},{40,100}},        color={191,0,0}));
   connect(Conferenceroom.HeatPort_TBA, HeatPort_TBA[2]) annotation (Line(points={{-44,80},
           {-44,90},{40,90},{40,96}},          color={191,0,0}));
-  connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points={{-80,80},
-          {-80,90},{40,90},{40,92}},          color={191,0,0}));
-  connect(OpenPlanOffice.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[1])
-    annotation (Line(points={{-72,80},{-72,90},{-40,90},{-40,92}}, color={191,0,
-          0}));
   connect(Conferenceroom.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[2])
     annotation (Line(points={{-36,80},{-36,90},{-40,90},{-40,96}}, color={191,0,
           0}));
@@ -316,10 +307,6 @@ equation
   connect(Workshop.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[5])
     annotation (Line(points={{72,80},{72,90},{-40,90},{-40,108}}, color={191,0,
           0}));
-  connect(OpenPlanOffice.valve, controlBus.Valve_TBA_Cold_OpenPlanOffice_Temp)
-    annotation (Line(points={{-86,66},{-90,66},{-90,40},{86,40},{86,0},{86,0},{86,
-          40.1},{100.1,40.1}},
-                 color={0,0,127}));
   connect(Conferenceroom.valve, controlBus.Valve_TBA_Cold_ConferenceRoom_Temp)
     annotation (Line(points={{-50,66},{-54,66},{-54,40},{86,40},{86,0},{86,0},{86,
           40.1},{100.1,40.1}},
@@ -336,9 +323,6 @@ equation
       Line(points={{58,66},{54,66},{54,40},{86,40},{86,0},{86,0},{86,40.1},{100.1,
           40.1}},                                                         color=
          {0,0,127}));
-  connect(OpenPlanOffice.pump, controlBus.Pump_TBA_OpenPlanOffice_y)
-    annotation (Line(points={{-86,72.8},{-90,72.8},{-90,40},{86,40},{86,0},{86,0},
-          {86,40.1},{100.1,40.1}},      color={0,0,127}));
   connect(Conferenceroom.pump, controlBus.Pump_TBA_ConferenceRoom_y)
     annotation (Line(points={{-50,72.8},{-54,72.8},{-54,40},{86,40},{86,0},{86,0},
           {86,40.1},{100.1,40.1}},      color={0,0,127}));
@@ -353,12 +337,6 @@ equation
         points={{58,72.8},{54,72.8},{54,40},{86,40},{86,0},{86,0},{86,40.1},{100.1,
           40.1}},
         color={0,0,127}));
-  connect(OpenPlanOffice.Temp_in, measureBus.TBA_openplanoffice_in) annotation (
-     Line(points={{-66,64},{-60,64},{-60,40},{86,40},{86,-39.9},{100.1,-39.9}},
-        color={0,0,127}));
-  connect(OpenPlanOffice.Temp_out, measureBus.TBA_openplanoffice_out)
-    annotation (Line(points={{-66,68},{-60,68},{-60,40},{86,40},{86,-39.9},{100.1,
-          -39.9}}, color={0,0,127}));
   connect(Conferenceroom.Temp_in, measureBus.TBA_conferencerom_in) annotation (
       Line(points={{-30,64},{-24,64},{-24,40},{86,40},{86,-39.9},{100.1,-39.9}},
         color={0,0,127}));
@@ -390,12 +368,6 @@ equation
   connect(Conferenceroom.m_flow, measureBus.TBA_conferenceroom) annotation (
       Line(points={{-30,72},{-24,72},{-24,40},{86,40},{86,-39.9},{100.1,-39.9}},
         color={0,0,127}));
-  connect(OpenPlanOffice.m_flow, measureBus.TBA_openplanoffice) annotation (
-      Line(points={{-66,72},{-60,72},{-60,40},{86,40},{86,-39.9},{100.1,-39.9}},
-        color={0,0,127}));
-  connect(OpenPlanOffice.Power_pump, measureBus.Pump_TBA_openplanoffice)
-    annotation (Line(points={{-66,76},{-60,76},{-60,40},{86,40},{86,-39.9},{100.1,
-          -39.9}}, color={0,0,127}));
   connect(Conferenceroom.Power_pump, measureBus.Pump_TBA_conferenceroom)
     annotation (Line(points={{-30,76},{-24,76},{-24,40},{86,40},{86,-39.9},{100.1,
           -39.9}}, color={0,0,127}));
@@ -422,6 +394,33 @@ equation
   connect(Valve_WarmCold_Workshop_2.y, controlBus.Valve_TBA_WarmCold_workshop_1)
     annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}}, color=
          {0,0,127}));
+  connect(OpenPlanOffice.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[1])
+    annotation (Line(points={{-72,80},{-72,90},{-40,90},{-40,92}}, color={191,0,
+          0}));
+  connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points
+        ={{-80,80},{-80,90},{40,90},{40,92}}, color={191,0,0}));
+  connect(OpenPlanOffice.Fluid_in, Valve_WarmCold_OpenPlanOffice_1.port_2)
+    annotation (Line(points={{-82,60},{-82,24}}, color={0,127,255}));
+  connect(OpenPlanOffice.Fluid_out, Valve_WarmCold_OpenPlanOffice_2.port_2)
+    annotation (Line(points={{-70,60},{-70,4}}, color={0,127,255}));
+  connect(OpenPlanOffice.Temp_in, measureBus.TBA_openplanoffice_in) annotation
+    (Line(points={{-66,64},{-60,64},{-60,40},{86,40},{86,-39.9},{100.1,-39.9}},
+        color={0,0,127}));
+  connect(OpenPlanOffice.Temp_out, measureBus.TBA_openplanoffice_out)
+    annotation (Line(points={{-66,68},{-60,68},{-60,40},{86,40},{86,-39.9},{
+          100.1,-39.9}}, color={0,0,127}));
+  connect(OpenPlanOffice.m_flow, measureBus.TBA_openplanoffice) annotation (
+      Line(points={{-66,72},{-60,72},{-60,40},{86,40},{86,-39.9},{100.1,-39.9}},
+        color={0,0,127}));
+  connect(OpenPlanOffice.Power_pump, measureBus.Pump_TBA_openplanoffice)
+    annotation (Line(points={{-66,76},{-60,76},{-60,40},{86,40},{86,-39.9},{
+          100.1,-39.9}}, color={0,0,127}));
+  connect(OpenPlanOffice.valve, controlBus.Valve_TBA_Cold_OpenPlanOffice_Temp)
+    annotation (Line(points={{-86,66},{-92,66},{-92,40.1},{100.1,40.1}}, color=
+          {0,0,127}));
+  connect(OpenPlanOffice.pump, controlBus.Pump_TBA_OpenPlanOffice_y)
+    annotation (Line(points={{-86,72.8},{-90,72.8},{-92,72.8},{-92,72},{-92,
+          40.1},{100.1,40.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Full_Transfer_TBA;
