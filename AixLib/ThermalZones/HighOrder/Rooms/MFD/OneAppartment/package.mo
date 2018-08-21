@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.HighOrder.Rooms.MFD;
-package OneApparment
+package OneAppartment
   extends Modelica.Icons.Package;
 
 
@@ -7,4 +7,4 @@ package OneApparment
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package for the rooms in the appartment.</p>
  </html>"));
-end OneApparment;
+end OneAppartment;
