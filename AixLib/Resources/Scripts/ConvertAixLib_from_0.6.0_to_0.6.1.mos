@@ -64,3 +64,11 @@ convertClass("AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseCl
 convertClass("AixLib.Building.Components.Weather.BaseClasses.CalculateNrOfOutputs","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.CalculateNrOfOutputs");
 convertClass("AixLib.Building.Components.Weather.BaseClasses.DeterminePositionsInWeatherVector","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.DeterminePositionsInWeatherVector");
 convertClass("AixLib.Building.Components.Weather.BaseClasses.Sun","AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078","AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Lights.Lights_Avar","AixLib.Utilities.Sources.InternalGains.Lights.Lights_Avar");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Lights.Lights_relative","AixLib.Utilities.Sources.InternalGains.Lights.Lights_relative");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Lights.Lights_simple","AixLib.Utilities.Sources.InternalGains.Lights.Lights_simple");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Machines.Machines_Avar","AixLib.Utilities.Sources.InternalGains.Machines.Machines_Avar");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599","AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599");
+convertClass("AixLib.Building.Components.Sources.InternalGains.Machines.Machines_simple","AixLib.Utilities.Sources.InternalGains.Machines.Machines_simple");
+convertClass("AixLib.Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain","AixLib.Utilities.Sources.InternalGains.BaseClasses.PartialInternalGain");
