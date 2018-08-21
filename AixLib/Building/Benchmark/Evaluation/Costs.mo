@@ -24,6 +24,13 @@ model Costs
         6.0001,0.11,0.11,0.27,0.27; 21.9999,0.11,0.11,0.27,0.27; 22,0.11,0.11,
         0.19,0.19; 25,0.11,0.11,0.19,0.19])
     annotation (Placement(transformation(extent={{4,74},{24,94}})));
+  Modelica.Blocks.Interfaces.RealOutput minute "Minute of the hour"
+    annotation (Placement(transformation(extent={{90,60},{110,80}})));
+  Modelica.Blocks.Interfaces.IntegerOutput hour "Hour of the day"
+    annotation (Placement(transformation(extent={{90,40},{110,60}})));
+  Modelica.Blocks.Interfaces.IntegerOutput weekDay
+    "Integer output representing week day (monday = 1, sunday = 7)"
+    annotation (Placement(transformation(extent={{90,22},{110,42}})));
 equation
   der(Total_Cost)=fuel_in/3600/1000 + Power_Cost.y/3600/1000;
 
@@ -39,4 +46,10 @@ equation
           -10,-50},{-100,-50}}, color={0,0,127}));
   connect(combiTable2D.y, Power_Cost.u1) annotation (Line(points={{25,84},{28,
           84},{28,-24},{38,-24}}, color={0,0,127}));
+  connect(calTim.minute, minute) annotation (Line(points={{-79,99},{-60,99},{
+          -60,70},{100,70}}, color={0,0,127}));
+  connect(calTim.hour, hour) annotation (Line(points={{-79,96.2},{-60,96.2},{
+          -60,70},{76,70},{76,50},{100,50}}, color={255,127,0}));
+  connect(calTim.weekDay, weekDay) annotation (Line(points={{-79,85},{-60,85},{
+          -60,70},{76,70},{76,32},{100,32}}, color={255,127,0}));
 end Costs;

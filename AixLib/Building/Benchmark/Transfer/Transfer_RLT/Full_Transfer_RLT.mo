@@ -10,7 +10,6 @@ model Full_Transfer_RLT
     RLT_m_flow_nominal=0.65,
     RLT_pipe_length=25,
     RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_thickness=0,
     RLT_pipe_insulation_conductivity=1,
     pipe_length_hot=15,
     pipe_length_cold=15,
@@ -26,8 +25,10 @@ model Full_Transfer_RLT
     pipe_insulation_thickness_cold=0.02,
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
+    RLT_pipe_insulation_thickness=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 35.5)
                annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -61,7 +62,6 @@ model Full_Transfer_RLT
     RLT_m_flow_nominal=1.1,
     RLT_pipe_length=15,
     RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_thickness=0,
     RLT_pipe_insulation_conductivity=1,
     pipe_length_hot=10,
     pipe_length_cold=10,
@@ -77,8 +77,10 @@ model Full_Transfer_RLT
     pipe_insulation_thickness_cold=0.02,
     pipe_insulation_conductivity_cold=0.05,
     V_mixing_cold=0.0001,
+    RLT_pipe_insulation_thickness=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 38.5)
               annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
 
   RLT MultiPersonOffice(
@@ -86,7 +88,6 @@ model Full_Transfer_RLT
     RLT_m_flow_nominal=0.08,
     RLT_pipe_length=48,
     RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_thickness=0,
     RLT_pipe_insulation_conductivity=1,
     pipe_length_hot=28,
     pipe_length_cold=28,
@@ -102,8 +103,10 @@ model Full_Transfer_RLT
     V_mixing_cold=0.0001,
     v_nominal_hot=1.26,
     m_flow_nominal_hot=0.152,
+    RLT_pipe_insulation_thickness=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 4)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
 
   RLT ConferenceRoom(
@@ -111,7 +114,6 @@ model Full_Transfer_RLT
     RLT_m_flow_nominal=0.333,
     RLT_pipe_length=68,
     RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_thickness=0,
     RLT_pipe_insulation_conductivity=1,
     pipe_length_hot=48,
     pipe_length_cold=48,
@@ -127,8 +129,10 @@ model Full_Transfer_RLT
     v_nominal_cold=1.542,
     m_flow_nominal_cold=0.192,
     pipe_wall_thickness_cold=0.0023,
+    RLT_pipe_insulation_thickness=0.0001,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 20)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[5]
@@ -168,14 +172,15 @@ model Full_Transfer_RLT
     pipe_wall_thickness_cold=0.0032,
     pipe_length_hot=8,
     pipe_length_cold=8,
-    dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000,
     RLT_v_nominal=4,
     RLT_m_flow_nominal=1.204,
     RLT_pipe_length=28,
     RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_thickness=0,
-    RLT_pipe_insulation_conductivity=1)
+    RLT_pipe_insulation_conductivity=1,
+    RLT_pipe_insulation_thickness=0.0001,
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 37)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},

@@ -35,8 +35,6 @@ model FullModel
     pipe_wall_thickness_coldwater=0.0036,
     pipe_insulation_thickness_coldwater=0.02,
     pipe_insulation_conductivity_coldwater=0.05,
-    m_flow_nominal_generation_air_max=100,
-    m_flow_nominal_generation_air_min=10,
     alphaHC1_warm=500,
     alphaHC2_warm=500,
     alphaHC1_cold=500,
@@ -49,6 +47,8 @@ model FullModel
     dpValve_nominal_warmwater=285000,
     dpValve_nominal_coldwater=200000,
     dpValve_nominal_generation_aircooler=60000,
+    m_flow_nominal_generation_air_max=28.649,
+    m_flow_nominal_generation_air_min=22.537,
     Earthtemperature_start=283.15)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 

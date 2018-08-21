@@ -50,10 +50,11 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,2},{-20,22}})));
   Modelica.Blocks.Sources.BooleanExpression Heatpump_big(y=false)
     annotation (Placement(transformation(extent={{-100,-64},{-80,-44}})));
-  Modelica.Blocks.Sources.Step step(height=100, startTime=1000)
-    annotation (Placement(transformation(extent={{2,-104},{22,-84}})));
   Modelica.Blocks.Math.Gain gain(k=1)
     annotation (Placement(transformation(extent={{52,34},{32,54}})));
+  Modelica.Blocks.Sources.RealExpression Pumps1(
+                                               y=1)
+    annotation (Placement(transformation(extent={{14,-106},{34,-86}})));
 equation
   connect(Boiler.y, controlBus.OnOff_boiler) annotation (Line(points={{-79,-68},
           {-70,-68},{-70,-19.9},{100.1,-19.9}},
@@ -202,11 +203,6 @@ equation
           -68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
   connect(Pumps.y, controlBus.Pump_TBA_Workshop_y) annotation (Line(points={{3,
           -68},{-10,-68},{-10,-19.9},{100.1,-19.9}}, color={0,0,127}));
-  connect(step.y, controlBus.Fan_RLT) annotation (Line(points={{23,-94},{36,-94},
-          {36,-92},{50,-92},{50,-19.9},{100.1,-19.9}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(gain.u, measureBus.WaterInAir) annotation (Line(points={{54,44},{78,
           44},{78,20.1},{100.1,20.1}}, color={0,0,127}), Text(
       string="%second",
@@ -224,6 +220,11 @@ equation
           44},{14,-20},{100,-20}},       color={0,0,127}));
   connect(gain.y, controlBus.X_Central) annotation (Line(points={{31,44},{14,44},
           {14,-19.9},{100.1,-19.9}}, color={0,0,127}));
+  connect(Pumps1.y, controlBus.Fan_RLT) annotation (Line(points={{35,-96},{50,
+          -96},{50,-19.9},{100.1,-19.9}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Testcontroller;

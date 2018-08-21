@@ -11,7 +11,7 @@ equation
 
 
   connect(measureBus, sum_Power.measureBus) annotation (Line(
-      points={{-100,0},{-78,0},{-78,-30},{-60,-30}},
+      points={{-100,0},{-80,0},{-80,-30},{-60,-30}},
       color={255,204,51},
       thickness=0.5));
   connect(sum_Power.Sum_Power, costs.power_in) annotation (Line(points={{-40,
@@ -24,6 +24,14 @@ equation
           5},{26,5}}, color={0,0,127}));
   connect(costs.Total_Cost, measureBus.Total_Cost) annotation (Line(points={{46,
           0},{60,0},{60,60},{-99.9,60},{-99.9,0.1}}, color={0,0,127}));
+  connect(costs.minute, measureBus.Minute) annotation (Line(points={{46,7},{60,
+          7},{60,6},{60,6},{60,60},{-99.9,60},{-99.9,0.1}}, color={0,0,127}));
+  connect(costs.hour, measureBus.Hour) annotation (Line(points={{46,5},{54,5},{
+          60,5},{60,6},{60,6},{60,6},{60,60},{-99.9,60},{-99.9,0.1}}, color={
+          255,127,0}));
+  connect(costs.weekDay, measureBus.WeekDay) annotation (Line(points={{46,3.2},
+          {60,3.2},{60,4},{60,4},{60,60},{-99.9,60},{-99.9,0.1}}, color={255,
+          127,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Evaluation;

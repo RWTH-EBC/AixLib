@@ -138,4 +138,9 @@ expandable connector measureBus
 
   //Costs
   Real Total_Cost;
+
+  //Time
+  Real Minute;
+  Integer Hour;
+  Integer WeekDay;
 end measureBus;
