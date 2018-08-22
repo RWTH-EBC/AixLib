@@ -82,7 +82,8 @@ model TBA_Pipe
         rotation=90,
         origin={66,-40})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=-90,
         origin={-60,28})));
@@ -117,8 +118,6 @@ equation
                                     color={191,0,0}));
   connect(plugFlowPipe1.heatPort, plugFlowPipe.heatPort)
     annotation (Line(points={{-52,-9},{52,-9}}, color={191,0,0}));
-  connect(fan2.heatPort, plugFlowPipe.heatPort) annotation (Line(points={{-54.56,
-          28},{0,28},{0,-9},{52,-9}}, color={191,0,0}));
   connect(Fluid_in, val1.port_1)
     annotation (Line(points={{-60,-100},{-60,-46}}, color={0,127,255}));
   connect(plugFlowPipe1.ports_b[1], fan2.port_a)

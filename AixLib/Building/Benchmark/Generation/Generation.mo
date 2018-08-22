@@ -265,7 +265,8 @@ model Generation
         rotation=180,
         origin={81.5,94.5})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={60,94})));
@@ -300,17 +301,20 @@ model Generation
         rotation=180,
         origin={81.5,-97.5})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={48,28})));
   Fluid.Movers.SpeedControlled_y fan3(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=180,
         origin={56,-96})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-68,-60})));
@@ -491,8 +495,6 @@ equation
   connect(plugFlowPipe3.heatPort, heatPort_workshop) annotation (Line(points={{81.5,
           -90},{82,-90},{82,-80},{66,-80},{66,-120},{-100,-120},{-100,20}},
         color={191,0,0}));
-  connect(fan3.heatPort, heatPort_workshop) annotation (Line(points={{56,-90.56},
-          {56,-80},{66,-80},{66,-120},{-100,-120},{-100,20}}, color={191,0,0}));
   connect(ColdWater.heatportOutside, heatPort_workshop) annotation (Line(points=
          {{47.625,-67.86},{66,-67.86},{66,-120},{-100,-120},{-100,20}}, color={191,
           0,0}));
@@ -500,16 +502,11 @@ equation
           21},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
   connect(plugFlowPipe1.heatPort, heatPort_Canteen) annotation (Line(points={{81.5,
           87},{81.5,64},{120,64},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
-  connect(fan2.heatPort, heatPort_Canteen) annotation (Line(points={{60,88.56},{
-          60,64},{120,64},{120,120},{-100,120},{-100,60}}, color={191,0,0}));
   connect(HotWater.heatportOutside, heatPort_Canteen) annotation (Line(points={{
           47.625,64.14},{60,64},{120,64},{120,120},{-100,120},{-100,60}}, color=
          {191,0,0}));
   connect(WarmWater.heatportOutside, heatPort_Canteen) annotation (Line(points={
           {45.625,2.14},{70,2},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
-        color={191,0,0}));
-  connect(fan1.heatPort, heatPort_Canteen) annotation (Line(points={{48,22.56},{
-          48,12},{70,12},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
         color={191,0,0}));
   connect(fan4.port_b, generation_heatPump1.Fluid_in_cold)
     annotation (Line(points={{-68,-52},{-68,16},{-60,16}}, color={0,127,255}));

@@ -121,7 +121,8 @@ model RLT_OpenPlanOffice
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
@@ -183,7 +184,8 @@ model RLT_OpenPlanOffice
         rotation=-90,
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to8 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to8 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));
@@ -313,11 +315,6 @@ equation
           -45.44,-20},{-60,-20},{-60,11},{-48,11}}, color={191,0,0}));
   connect(plugFlowPipe2.heatPort, plugFlowPipe3.heatPort) annotation (Line(
         points={{48,21},{60,21},{60,21},{72,21}}, color={191,0,0}));
-  connect(fan1.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
-          74.56,0},{60,0},{60,21},{72,21}}, color={191,0,0}));
-  connect(fan2.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
-          -45.44,-20},{-60,-20},{-60,-40},{60,-40},{60,21},{72,21}}, color={191,
-          0,0}));
   connect(heatPort_pumpsAndPipes, plugFlowPipe3.heatPort) annotation (Line(
         points={{0,-100},{0,-40},{60,-40},{60,21},{72,21}}, color={191,0,0}));
   connect(senTem2.port, vol.ports[4]) annotation (Line(points={{-72,26},{-80,26},

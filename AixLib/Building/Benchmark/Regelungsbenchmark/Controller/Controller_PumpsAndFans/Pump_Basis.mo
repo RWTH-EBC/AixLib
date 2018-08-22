@@ -43,41 +43,47 @@ model Pump_Basis
     k=0.1,
     Ti=20) annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
   Modelica.Blocks.Continuous.LimPID PID_Pump_RLT_Openplanoffice_Cold(
-    yMax=1,
-    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{60,80},{40,100}})));
+    Ti=20,
+    yMax=0,
+    yMin=-1)
+           annotation (Placement(transformation(extent={{60,80},{40,100}})));
   Modelica.Blocks.Continuous.LimPID PID_Pump_RLT_Conferenceroom_Cold(
-    yMax=1,
-    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{60,46},{40,66}})));
+    Ti=20,
+    yMax=0,
+    yMin=-1)
+           annotation (Placement(transformation(extent={{60,46},{40,66}})));
   Modelica.Blocks.Continuous.LimPID PID_Pump_RLT_Multipersonoffice_Cold(
-    yMax=1,
-    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{60,12},{40,32}})));
+    Ti=20,
+    yMax=0,
+    yMin=-1)
+           annotation (Placement(transformation(extent={{60,12},{40,32}})));
   Modelica.Blocks.Continuous.LimPID PID_Pump_RLT_Canteen_Cold(
-    yMax=1,
-    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
+    Ti=20,
+    yMax=0,
+    yMin=-1)
+           annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
   Modelica.Blocks.Continuous.LimPID PID_Pump_RLT_Workshop_Cold(
-    yMax=1,
-    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{60,-56},{40,-36}})));
+    Ti=20,
+    yMax=0,
+    yMin=-1)
+           annotation (Placement(transformation(extent={{60,-56},{40,-36}})));
   Modelica.Blocks.Continuous.LimPID PID_Pump_RLT_Central_Cold(
-    yMax=1,
-    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{60,-90},{40,-70}})));
+    Ti=20,
+    yMax=0,
+    yMin=-1)
+           annotation (Placement(transformation(extent={{60,-90},{40,-70}})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=273.15 + 20)
     annotation (Placement(transformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=273.15 + 15)

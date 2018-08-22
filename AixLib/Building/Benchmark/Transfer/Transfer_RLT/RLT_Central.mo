@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
+within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
 model RLT_Central
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
@@ -44,20 +44,20 @@ model RLT_Central
     m_flow_nominal=3.375,
     dp_nominal=1)
     annotation (Placement(transformation(extent={{66,-76},{86,-56}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
-        Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
+      = Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{70,90},{90,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
-        Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
+      = Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{30,90},{50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
-        Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
+      = Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
-        Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
+      = Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-90,90},{-70,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
@@ -125,7 +125,8 @@ model RLT_Central
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
+    y_start=1)
     annotation (Dialog(enable = true), Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
@@ -182,13 +183,16 @@ model RLT_Central
     m_flow_nominal=m_flow_nominal_cold,
     dIns=pipe_insulation_thickness_cold,
     kIns=pipe_insulation_conductivity_cold,
-    thickness=pipe_wall_thickness_cold)
+    thickness=pipe_wall_thickness_cold,
+    m_flow_start=0.001,
+    initDelay=false)
     annotation (Placement(transformation(extent={{-9,8},{9,-8}},
         rotation=-90,
         origin={80,21})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
     use_inputFilter=true,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-40,-20})));
@@ -320,11 +324,6 @@ equation
           -45.44,-20},{-60,-20},{-60,11},{-48,11}}, color={191,0,0}));
   connect(plugFlowPipe2.heatPort, plugFlowPipe3.heatPort) annotation (Line(
         points={{48,21},{60,21},{60,21},{72,21}}, color={191,0,0}));
-  connect(fan1.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
-          74.56,0},{60,0},{60,21},{72,21}}, color={191,0,0}));
-  connect(fan2.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
-          -45.44,-20},{-60,-20},{-60,-40},{60,-40},{60,21},{72,21}}, color={191,
-          0,0}));
   connect(heatPort_pumpsAndPipes, plugFlowPipe3.heatPort) annotation (Line(
         points={{0,-100},{0,-40},{60,-40},{60,21},{72,21}}, color={191,0,0}));
   connect(senTem2.port, vol.ports[4]) annotation (Line(points={{-72,26},{-80,26},
@@ -369,10 +368,5 @@ equation
   connect(vol3.ports[2], Ext_Cold.port_a2)
     annotation (Line(points={{-12.8,-66},{14,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-188,-56},{-126,-76}},
-          lineColor={28,108,200},
-          textString="Parameter Wärmetausch
-müssen angepasst werden
-")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end RLT_Central;

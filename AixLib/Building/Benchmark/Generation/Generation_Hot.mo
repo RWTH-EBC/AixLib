@@ -7,12 +7,12 @@ model Generation_Hot
     parameter Real m_flow_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
 
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,28},{110,48}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{86,-48},{106,-28}})));
 
@@ -55,7 +55,8 @@ model Generation_Hot
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
             {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-38,16})));
@@ -73,7 +74,8 @@ model Generation_Hot
         origin={-81,33})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
       redeclare
-      Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per)
+      Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
+    y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-2,48})));
