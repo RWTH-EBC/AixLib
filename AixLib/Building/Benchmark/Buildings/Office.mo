@@ -49,17 +49,6 @@ equation
   connect(prescribedTemperature.port, firstFloor.HeatPort_OutdoorTemp)
     annotation (Line(points={{8,74},{8,60}},
         color={191,0,0}));
-  connect(firstFloor.HeatPort_ToWorkshop_MultiPersonOffice, groundFloor.HeatPort_FromWorkshop)
-    annotation (Line(points={{-12.8,20},{-12,20},{-12,0},{-8,0},{-8,-20}},
-        color={191,0,0}));
-  connect(firstFloor.HeatPort_ToWorkshop_ConferenceRoom, groundFloor.HeatPort_FromWorkshop)
-    annotation (Line(points={{-6.4,20},{-6.4,0},{-8,0},{-8,-20}}, color={191,0,
-          0}));
-  connect(firstFloor.HeatPort_ToWorkshop_OpenPlanOffice, groundFloor.HeatPort_FromWorkshop)
-    annotation (Line(points={{0,20},{0,20},{0,0},{-8,0},{-8,-20}}, color={191,0,
-          0}));
-  connect(firstFloor.HeatPort_ToKitchen_OpenPlanOffice, groundFloor.HeatPort_FromCanteen)
-    annotation (Line(points={{8,20},{8,-20}}, color={191,0,0}));
   connect(vol1.ports[1],  Air_out) annotation (Line(points={{-60,-71.3333},{-60,
           -86},{-80,-86},{-80,-100}}, color={0,127,255}));
   connect(measureBus, groundFloor.measureBus) annotation (Line(

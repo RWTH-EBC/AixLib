@@ -3,8 +3,6 @@ model Generation_heatPump
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
 
-    parameter Real factor_heatpump_model_small = 3 annotation(Dialog(tab = "General"));
-    parameter Real factor_heatpump_model_big = 6 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K T_conMax_big = 328.15 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K T_conMax_small = 328.15 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dpHeatexchanger_nominal = 20000 annotation(Dialog(tab = "General"));

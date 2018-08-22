@@ -67,6 +67,7 @@ expandable connector measureBus
   SI.Temp_K RoomTemp_Workshop;
   SI.Temp_K Air_out "Befor Heatexchanger";
   SI.Temp_K Air_in "After Heatexchanger";
+  SI.Temp_K Air_RLT_Central_out;
 
 
   //MassflowRates

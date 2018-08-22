@@ -4,8 +4,6 @@ model Valve_Basis
     annotation (Placement(transformation(extent={{-100,86},{-80,106}})));
   Modelica.Blocks.Logical.Switch Warm_Aircooler
     annotation (Placement(transformation(extent={{-12,64},{0,76}})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=273.15 +
-        40) annotation (Placement(transformation(extent={{-54,64},{-42,76}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=0)
     annotation (Placement(transformation(extent={{-100,-106},{-80,-86}})));
   BusSystem.measureBus measureBus
@@ -32,18 +30,22 @@ model Valve_Basis
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression3(y=true)
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=273.15 + 10)
-    annotation (Placement(transformation(extent={{-54,-54},{-42,-42}})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold1(threshold=273.15
-         + 10)
-    annotation (Placement(transformation(extent={{-54,-36},{-42,-24}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression4(y=true)
     annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
   Modelica.Blocks.Logical.Switch Aircooler
     annotation (Placement(transformation(extent={{-12,-76},{0,-64}})));
+  Modelica.Blocks.Logical.Hysteresis hysteresis2(uLow=273.15 + 7, uHigh=273.15
+         + 10)
+    annotation (Placement(transformation(extent={{-72,-56},{-60,-44}})));
+  Modelica.Blocks.Logical.Hysteresis hysteresis1(uLow=273.15 + 7, uHigh=273.15
+         + 10)
+    annotation (Placement(transformation(extent={{-54,-36},{-42,-24}})));
+  Modelica.Blocks.Logical.Not not1
+    annotation (Placement(transformation(extent={{-50,-56},{-38,-44}})));
+  Modelica.Blocks.Logical.Hysteresis hysteresis3(uLow=273.15 + 35, uHigh=273.15
+         + 40)
+    annotation (Placement(transformation(extent={{-54,64},{-42,76}})));
 equation
-  connect(greaterThreshold.y, Warm_Aircooler.u2)
-    annotation (Line(points={{-41.4,70},{-13.2,70}}, color={255,0,255}));
   connect(booleanExpression.y, Cold_Aircooler.u2)
     annotation (Line(points={{-39,-10},{-13.2,-10}}, color={255,0,255}));
   connect(booleanExpression1.y, Warm_Storage.u2)
@@ -52,23 +54,10 @@ equation
     annotation (Line(points={{-39,10},{-13.2,10}}, color={255,0,255}));
   connect(booleanExpression3.y, Hot_Boiler.u2)
     annotation (Line(points={{-39,30},{-13.2,30}}, color={255,0,255}));
-  connect(greaterThreshold.u, measureBus.WarmWater_TTop) annotation (Line(
-        points={{-55.2,70},{-68,70},{-68,88},{0.1,88},{0.1,100.1}}, color={0,0,
-          127}));
-  connect(lessThreshold1.y, Cold_Geothermalprobe.u2) annotation (Line(points={{
-          -41.4,-48},{-28,-48},{-28,-50},{-13.2,-50}}, color={255,0,255}));
-  connect(greaterThreshold1.u, measureBus.ColdWater_TBottom) annotation (Line(
-        points={{-55.2,-30},{-78,-30},{-78,88},{0.1,88},{0.1,100.1}}, color={0,
-          0,127}));
   connect(Warm_Aircooler.u1, realExpression1.y) annotation (Line(points={{-13.2,
           74.8},{-34,74.8},{-34,-96},{-79,-96}}, color={0,0,127}));
   connect(Warm_Aircooler.u3, realExpression.y) annotation (Line(points={{-13.2,
           65.2},{-28,65.2},{-28,96},{-79,96}}, color={0,0,127}));
-  connect(greaterThreshold1.y, Cold_Storage.u2)
-    annotation (Line(points={{-41.4,-30},{-13.2,-30}}, color={255,0,255}));
-  connect(lessThreshold1.u, measureBus.ColdWater_TBottom) annotation (Line(
-        points={{-55.2,-48},{-78,-48},{-78,88},{0.1,88},{0.1,100.1}}, color={0,
-          0,127}));
   connect(Cold_Storage.u3, realExpression.y) annotation (Line(points={{-13.2,
           -34.8},{-28,-34.8},{-28,96},{-79,96}}, color={0,0,127}));
   connect(Cold_Storage.u1, realExpression1.y) annotation (Line(points={{-13.2,
@@ -115,6 +104,21 @@ equation
           -65.2},{-34,-65.2},{-34,-96},{-79,-96}}, color={0,0,127}));
   connect(Aircooler.y, controlBus.Valve8) annotation (Line(points={{0.6,-70},{
           40,-70},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
+  connect(hysteresis1.y, Cold_Storage.u2)
+    annotation (Line(points={{-41.4,-30},{-13.2,-30}}, color={255,0,255}));
+  connect(hysteresis2.y, not1.u)
+    annotation (Line(points={{-59.4,-50},{-51.2,-50}}, color={255,0,255}));
+  connect(not1.y, Cold_Geothermalprobe.u2)
+    annotation (Line(points={{-37.4,-50},{-13.2,-50}}, color={255,0,255}));
+  connect(hysteresis3.y, Warm_Aircooler.u2)
+    annotation (Line(points={{-41.4,70},{-13.2,70}}, color={255,0,255}));
+  connect(hysteresis3.u, measureBus.WarmWater_TTop) annotation (Line(points={{
+          -55.2,70},{-70,70},{-70,86},{0.1,86},{0.1,100.1}}, color={0,0,127}));
+  connect(hysteresis1.u, measureBus.ColdWater_TBottom) annotation (Line(points=
+          {{-55.2,-30},{-70,-30},{-70,86},{0.1,86},{0.1,100.1}}, color={0,0,127}));
+  connect(hysteresis2.u, measureBus.ColdWater_TBottom) annotation (Line(points=
+          {{-73.2,-50},{-82,-50},{-82,-30},{-70,-30},{-70,86},{0.1,86},{0.1,
+          100.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Valve_Basis;

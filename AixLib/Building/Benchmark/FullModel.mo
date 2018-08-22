@@ -7,15 +7,10 @@ model FullModel
   Buildings.Office office
     annotation (Placement(transformation(extent={{30,0},{92,60}})));
   Generation.Generation generation(
-    v_nominal_hotwater=1.692,
     m_flow_nominal_hotwater=6.307,
-    v_nominal_warmwater=1.543,
     m_flow_nominal_warmwater=7.819,
-    v_nominal_coldwater=1.567,
     m_flow_nominal_coldwater=7.774,
     m_flow_nominal_generation_hot=3.805,
-    factor_heatpump_model_small=3,
-    factor_heatpump_model_big=6,
     vol_small=0.012,
     vol_big=0.024,
     m_flow_nominal_generation_warmwater=4.951,
@@ -26,15 +21,6 @@ model FullModel
     pipe_length_hotwater=25,
     pipe_length_warmwater=25,
     pipe_length_coldwater=25,
-    pipe_wall_thickness_hotwater=0.004,
-    pipe_insulation_thickness_hotwater=0.02,
-    pipe_insulation_conductivity_hotwater=0.05,
-    pipe_wall_thickness_warmwater=0.004,
-    pipe_insulation_thickness_warmwater=0.02,
-    pipe_insulation_conductivity_warmwater=0.05,
-    pipe_wall_thickness_coldwater=0.0036,
-    pipe_insulation_thickness_coldwater=0.02,
-    pipe_insulation_conductivity_coldwater=0.05,
     alphaHC1_warm=500,
     alphaHC2_warm=500,
     alphaHC1_cold=500,
@@ -42,7 +28,11 @@ model FullModel
     R_loss_big=100,
     m_flow_nominal_generation_air_max=28.649,
     m_flow_nominal_generation_air_min=22.537,
+    pipe_diameter_hotwater=0.0809,
+    pipe_diameter_warmwater=0.0809,
+    pipe_diameter_coldwater=0.0689,
     dpHeatexchanger_nominal=20000,
+    pipe_nodes=2,
     dpValve_nominal_generation_hot=40000,
     T_conMax_big=328.15,
     T_conMax_small=328.15,
@@ -143,11 +133,6 @@ equation
         points={{74,-40},{74,-20},{79.6,-20},{79.6,0}}, color={191,0,0}));
   connect(internalLoads.AddPower, office.AddPower)
     annotation (Line(points={{-9.2,18},{30,18}}, color={191,0,0}));
-  connect(full_Transfer_RLT.heatPort, office.AddPower)
-    annotation (Line(points={{10,-40},{10,18},{30,18}}, color={191,0,0}));
-  connect(full_Transfer_TBA.HeatPort_pumpsAndPipes, office.AddPower)
-    annotation (Line(points={{66,-40},{66,-20},{10,-20},{10,18},{30,18}}, color=
-         {191,0,0}));
   connect(internalLoads.internalBus, office.internalBus) annotation (Line(
       points={{-9.6,42},{30,42}},
       color={255,204,51},
@@ -156,12 +141,6 @@ equation
       points={{66,81.8},{66,81.8},{66,80},{0,80},{0,42},{30,42}},
       color={255,204,51},
       thickness=0.5));
-  connect(generation.heatPort_Canteen, office.AddPower[4]) annotation (Line(
-        points={{-80,-44},{-84,-44},{-84,-20},{10,-20},{10,19.2},{30,19.2}},
-        color={191,0,0}));
-  connect(generation.heatPort_workshop, office.AddPower[5]) annotation (Line(
-        points={{-80,-48},{-84,-48},{-84,-20},{10,-20},{10,20.4},{30,20.4}},
-        color={191,0,0}));
   connect(generation.controlBus, controlBus) annotation (Line(
       points={{-66,-40},{-66,-20},{-100,-20}},
       color={255,204,51},

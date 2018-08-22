@@ -75,17 +75,18 @@ model PI_Regler_RLT
     annotation (Placement(transformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Central_Cold(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=20,
     yMax=0,
-    yMin=-1)
+    yMin=-1,
+    Ti=100,
+    k=0.01)
            annotation (Placement(transformation(extent={{-30,-40},{-10,-60}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Central_Hot(
     yMax=1,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
+    Ti=100,
+    k=0.01)
+           annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     annotation (Placement(transformation(extent={{-56,-54},{-48,-46}})));
   Modelica.Blocks.Math.Gain gain1(k=-1)
@@ -225,8 +226,8 @@ equation
   connect(Central.y_pump_hot, controlBus.Pump_RLT_Central_hot_y) annotation (
       Line(points={{16,17},{10,17},{10,0.1},{100.1,0.1}}, color={0,0,127}));
   connect(Central.y_pump_cold, controlBus.Pump_RLT_Central_cold_y) annotation (
-      Line(points={{16,11},{14,11},{14,12},{10,12},{10,0.1},{100.1,0.1}}, color
-        ={0,0,127}));
+      Line(points={{16,11},{14,11},{14,12},{10,12},{10,0.1},{100.1,0.1}}, color=
+         {0,0,127}));
   connect(Multipersonoffice.y_pump_cold, controlBus.Pump_RLT_MultiPersonOffice_cold_y)
     annotation (Line(points={{60,31},{58,31},{58,32},{52,32},{52,0.1},{100.1,
           0.1}}, color={0,0,127}));

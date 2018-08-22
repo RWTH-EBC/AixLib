@@ -15,15 +15,13 @@ model Full_Transfer_TBA
     parameter Real m_flow_nominal_workshop = 0 annotation(Dialog(tab = "General"));
   TBA_Pipe Workshop(dp_Valve_nominal=dp_Valve_nominal_workshop, m_flow_nominal=
         m_flow_nominal_workshop,
-    v_nominal=1.839,
     pipe_length=15,
-    pipe_wall_thickness=0.0032,
-    pipe_insulation_thickness=0.02,
-    pipe_insulation_conductivity=0.05,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=30,
     TBA_wall_height=30,
-    V_mixing=0.0001)
+    V_mixing=0.0001,
+    pipe_diameter(displayUnit="m") = 0.0273,
+    pipe_height=0)
     annotation (Placement(transformation(extent={{58,60},{78,80}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
@@ -99,42 +97,36 @@ model Full_Transfer_TBA
 
   TBA_Pipe Canteen(dp_Valve_nominal=dp_Valve_nominal_canteen, m_flow_nominal=
         m_flow_nominal_canteen,
-    v_nominal=1.839,
     pipe_length=10,
-    pipe_wall_thickness=0.0032,
-    pipe_insulation_thickness=0.02,
-    pipe_insulation_conductivity=0.05,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=20,
     TBA_wall_height=30,
-    V_mixing=0.0001)
+    V_mixing=0.0001,
+    pipe_diameter=0.0273,
+    pipe_height=0)
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
 
   TBA_Pipe Multipersonoffice(dp_Valve_nominal=
         dp_Valve_nominal_multipersonoffice, m_flow_nominal=
         m_flow_nominal_multipersonoffice,
-    v_nominal=1.884,
     pipe_length=28,
-    pipe_wall_thickness=0.0026,
-    pipe_insulation_thickness=0.02,
-    pipe_insulation_conductivity=0.05,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=5,
     TBA_wall_height=20,
-    V_mixing=0.0001)
+    V_mixing=0.0001,
+    pipe_diameter=0.0126,
+    pipe_height=3)
     annotation (Placement(transformation(extent={{-16,60},{4,80}})));
 
   TBA_Pipe Conferenceroom(m_flow_nominal=m_flow_nominal_conferenceroom,
       dp_Valve_nominal=dp_Valve_nominal_conferenceroom,
-    v_nominal=1.546,
     pipe_length=48,
-    pipe_wall_thickness=0.0023,
-    pipe_insulation_thickness=0.02,
-    pipe_insulation_conductivity=0.05,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=5,
     TBA_wall_height=10,
-    V_mixing=0.0001)
+    V_mixing=0.0001,
+    pipe_diameter=0.0161,
+    pipe_height=3)
     annotation (Placement(transformation(extent={{-50,60},{-30,80}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_ConferenceRoom_1(
@@ -187,22 +179,18 @@ model Full_Transfer_TBA
         rotation=90,
         origin={-70,-2})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_pumpsAndPipes[5]
-    annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{80,-60},{120,-20}})));
   TBA_Pipe_OpenPlanOffice OpenPlanOffice(
     pipe_length=8,
-    pipe_insulation_thickness=0.02,
-    pipe_insulation_conductivity=0.05,
     V_mixing=0.0001,
     dp_Valve_nominal=dp_Valve_nominal_openplanoffice,
-    v_nominal=1.851,
     m_flow_nominal=m_flow_nominal_openplanoffice,
-    pipe_wall_thickness=0.0032,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=45,
-    TBA_wall_height=30)
+    TBA_wall_height=30,
+    pipe_diameter=0.0419,
+    pipe_height=3)
     annotation (Placement(transformation(extent={{-86,60},{-66,80}})));
 equation
   connect(Workshop.Fluid_in, Valve_WarmCold_Workshop_1.port_2)
@@ -295,18 +283,6 @@ equation
         points={{-10,80},{-10,90},{40,90},{40,100}},        color={191,0,0}));
   connect(Conferenceroom.HeatPort_TBA, HeatPort_TBA[2]) annotation (Line(points={{-44,80},
           {-44,90},{40,90},{40,96}},          color={191,0,0}));
-  connect(Conferenceroom.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[2])
-    annotation (Line(points={{-36,80},{-36,90},{-40,90},{-40,96}}, color={191,0,
-          0}));
-  connect(Multipersonoffice.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[3])
-    annotation (Line(points={{-2,80},{-2,90},{-40,90},{-40,100}},
-                                                                color={191,0,0}));
-  connect(Canteen.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[4])
-    annotation (Line(points={{34,80},{34,90},{-40,90},{-40,104}}, color={191,0,
-          0}));
-  connect(Workshop.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[5])
-    annotation (Line(points={{72,80},{72,90},{-40,90},{-40,108}}, color={191,0,
-          0}));
   connect(Conferenceroom.valve, controlBus.Valve_TBA_Cold_ConferenceRoom_Temp)
     annotation (Line(points={{-50,66},{-54,66},{-54,40},{86,40},{86,0},{86,0},{86,
           40.1},{100.1,40.1}},
@@ -394,9 +370,6 @@ equation
   connect(Valve_WarmCold_Workshop_2.y, controlBus.Valve_TBA_WarmCold_workshop_1)
     annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}}, color=
          {0,0,127}));
-  connect(OpenPlanOffice.HeatPort_pumpsAndPipes, HeatPort_pumpsAndPipes[1])
-    annotation (Line(points={{-72,80},{-72,90},{-40,90},{-40,92}}, color={191,0,
-          0}));
   connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points=
          {{-80,80},{-80,90},{40,90},{40,92}}, color={191,0,0}));
   connect(OpenPlanOffice.Fluid_in, Valve_WarmCold_OpenPlanOffice_1.port_2)

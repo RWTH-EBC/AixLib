@@ -6,29 +6,20 @@ model Full_Transfer_RLT
     AixLib.Media.Air "Medium in the component";
 
   RLT Workshop(
-    RLT_v_nominal=4,
     RLT_m_flow_nominal=0.65,
-    RLT_pipe_length=25,
-    RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_conductivity=1,
-    pipe_length_hot=15,
-    pipe_length_cold=15,
-    v_nominal_hot=1.609,
     m_flow_nominal_hot=0.194,
-    pipe_wall_thickness_hot=0.0023,
-    pipe_insulation_thickness_hot=0.02,
-    pipe_insulation_conductivity_hot=0.05,
-    V_mixing_hot=0.0001,
-    v_nominal_cold=1.571,
     m_flow_nominal_cold=0.919,
-    pipe_wall_thickness_cold=0.0032,
-    pipe_insulation_thickness_cold=0.02,
-    pipe_insulation_conductivity_cold=0.05,
-    V_mixing_cold=0.0001,
-    RLT_pipe_insulation_thickness=0.0001,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 35.5,
+    pipe_length=15,
+    V_mixing=0.0001,
+    pipe_height=0,
+    pipe_length_air=25,
+    pipe_diameter_hot=0.0126,
+    pipe_diameter_cold=0.0273,
+    pipe_diameter_air=0.415,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 35.5)
+    RLT_tau=6.25)
                annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -58,129 +49,84 @@ model Full_Transfer_RLT
   BusSystem.ControlBus controlBus
     annotation (Placement(transformation(extent={{82,8},{122,48}})));
   RLT Canteen(
-    RLT_v_nominal=4,
     RLT_m_flow_nominal=1.1,
-    RLT_pipe_length=15,
-    RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_conductivity=1,
-    pipe_length_hot=10,
-    pipe_length_cold=10,
-    v_nominal_hot=1.898,
     m_flow_nominal_hot=1.072,
-    pipe_wall_thickness_hot=0.0032,
-    pipe_insulation_thickness_hot=0.02,
-    pipe_insulation_conductivity_hot=0.05,
-    V_mixing_hot=0.0001,
-    v_nominal_cold=1.328,
     m_flow_nominal_cold=0.777,
-    pipe_wall_thickness_cold=0.0032,
-    pipe_insulation_thickness_cold=0.02,
-    pipe_insulation_conductivity_cold=0.05,
-    V_mixing_cold=0.0001,
-    RLT_pipe_insulation_thickness=0.0001,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 38.5,
+    pipe_length=10,
+    V_mixing=0.0001,
+    pipe_height=0,
+    pipe_length_air=10,
+    pipe_diameter_hot=0.0273,
+    pipe_diameter_cold=0.0273,
+    pipe_diameter_air=0.54,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 38.5)
+    RLT_tau=3.75)
               annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
 
   RLT MultiPersonOffice(
-    RLT_v_nominal=4,
     RLT_m_flow_nominal=0.08,
-    RLT_pipe_length=48,
-    RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_conductivity=1,
-    pipe_length_hot=28,
-    pipe_length_cold=28,
-    pipe_wall_thickness_hot=0.0023,
-    pipe_insulation_thickness_hot=0.02,
-    pipe_insulation_conductivity_hot=0.05,
-    V_mixing_hot=0.0001,
-    v_nominal_cold=1.866,
     m_flow_nominal_cold=0.38,
-    pipe_wall_thickness_cold=0.0026,
-    pipe_insulation_thickness_cold=0.02,
-    pipe_insulation_conductivity_cold=0.05,
-    V_mixing_cold=0.0001,
-    v_nominal_hot=1.26,
     m_flow_nominal_hot=0.152,
-    RLT_pipe_insulation_thickness=0.0001,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 4,
+    V_mixing=0.0001,
+    pipe_length=28,
+    pipe_height=3,
+    pipe_length_air=48,
+    pipe_diameter_hot=0.0126,
+    pipe_diameter_cold=0.0161,
+    pipe_diameter_air=0.146,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 4)
+    RLT_tau=12)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
 
   RLT ConferenceRoom(
-    RLT_v_nominal=4,
     RLT_m_flow_nominal=0.333,
-    RLT_pipe_length=68,
-    RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_conductivity=1,
-    pipe_length_hot=48,
-    pipe_length_cold=48,
-    pipe_wall_thickness_hot=0.0023,
-    pipe_insulation_thickness_hot=0.02,
-    pipe_insulation_conductivity_hot=0.05,
-    V_mixing_hot=0.0001,
-    pipe_insulation_thickness_cold=0.02,
-    pipe_insulation_conductivity_cold=0.05,
-    V_mixing_cold=0.0001,
-    v_nominal_hot=1.269,
     m_flow_nominal_hot=0.153,
-    v_nominal_cold=1.542,
     m_flow_nominal_cold=0.192,
-    pipe_wall_thickness_cold=0.0023,
-    RLT_pipe_insulation_thickness=0.0001,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 20,
+    pipe_length=48,
+    V_mixing=0.0001,
+    pipe_height=3,
+    pipe_length_air=68,
+    pipe_diameter_hot=0.0126,
+    pipe_diameter_cold=0.0126,
+    pipe_diameter_air=0.297,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 20)
+    RLT_tau=17)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[5]
-    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{82,-50},{122,-10}})));
   RLT_Central Central(
-    pipe_insulation_thickness_hot=0.02,
-    pipe_insulation_conductivity_hot=0.05,
-    V_mixing_hot=0.0001,
-    pipe_insulation_thickness_cold=0.02,
-    pipe_insulation_conductivity_cold=0.05,
-    V_mixing_cold=0.0001,
-    v_nominal_hot=1.707,
     m_flow_nominal_hot=3.649,
-    pipe_wall_thickness_hot=0.0036,
-    v_nominal_cold=1.418,
     m_flow_nominal_cold=3.139,
-    pipe_wall_thickness_cold=0.0036,
-    pipe_length_hot=20,
-    dpValve_nominal_hot=7000,
-    pipe_length_cold=20,
-    dpValve_nominal_cold=10000)
-    annotation (Placement(transformation(extent={{-64,72},{-44,52}})));
-  RLT_OpenPlanOffice OpenPlanOffice(
-    pipe_insulation_thickness_hot=0.02,
-    pipe_insulation_conductivity_hot=0.05,
-    V_mixing_hot=0.0001,
-    pipe_insulation_thickness_cold=0.02,
-    pipe_insulation_conductivity_cold=0.05,
-    V_mixing_cold=0.0001,
-    v_nominal_hot=1.562,
-    m_flow_nominal_hot=2.078,
-    pipe_wall_thickness_hot=0.0032,
-    v_nominal_cold=1.487,
-    m_flow_nominal_cold=0.87,
-    pipe_wall_thickness_cold=0.0032,
-    pipe_length_hot=8,
-    pipe_length_cold=8,
-    RLT_v_nominal=4,
-    RLT_m_flow_nominal=1.204,
-    RLT_pipe_length=28,
-    RLT_pipe_wall_thickness=0.003,
-    RLT_pipe_insulation_conductivity=1,
-    RLT_pipe_insulation_thickness=0.0001,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 37)
+    pipe_length=20,
+    V_mixing=0.0001,
+    pipe_height=0,
+    pipe_diameter_hot=0.0531,
+    pipe_diameter_cold=0.0531)
+    annotation (Placement(transformation(extent={{-64,72},{-44,52}})));
+  RLT_OpenPlanOffice OpenPlanOffice(
+    m_flow_nominal_hot=2.078,
+    m_flow_nominal_cold=0.87,
+    RLT_m_flow_nominal=1.204,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 37,
+    pipe_length=8,
+    V_mixing=0.0001,
+    pipe_height=3,
+    pipe_length_air=28,
+    pipe_diameter_hot=0.0419,
+    pipe_diameter_cold=0.0273,
+    pipe_diameter_air=0.564,
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000,
+    RLT_tau=7)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},
@@ -228,17 +174,6 @@ equation
   connect(Workshop.Fluid_in_cold, Fluid_in_cold)
     annotation (Line(points={{62,-86},{62,-90},{70,-90},{70,-90},{70,-40},{-100,
           -40}},                                           color={0,127,255}));
-  connect(ConferenceRoom.heatPort_pumpsAndPipes, heatPort[2]) annotation (Line(
-        points={{56,72},{56,80},{0,80},{0,96}},   color={191,0,0}));
-  connect(MultiPersonOffice.heatPort_pumpsAndPipes, heatPort[3]) annotation (
-      Line(points={{-56,-66},{-56,-46},{-12,-46},{-12,-46},{20,-46},{20,80},{0,
-          80},{0,100}},                             color={191,0,0}));
-  connect(Canteen.heatPort_pumpsAndPipes, heatPort[4]) annotation (Line(points={{0,-66},
-          {0,-46},{20,-46},{20,-46},{20,80},{0,80},{0,104}},
-                                            color={191,0,0}));
-  connect(Workshop.heatPort_pumpsAndPipes, heatPort[5]) annotation (Line(points={{54,-66},
-          {54,-46},{20,-46},{20,80},{0,80},{0,108}},
-                                           color={191,0,0}));
   connect(ConferenceRoom.valve_cold, controlBus.Valve_RLT_Cold_ConferenceRoom)
     annotation (Line(points={{66,54},{86,54},{86,28.1},{102.1,28.1}},
         color={0,0,127}));
@@ -399,8 +334,6 @@ equation
           52},{-50,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
   connect(Central.Fluid_in_cold, Fluid_in_cold) annotation (Line(points={{-46,
           52},{-46,-40},{-100,-40}}, color={0,127,255}));
-  connect(Central.heatPort_pumpsAndPipes, heatPort[4]) annotation (Line(points=
-          {{-54,72},{-54,80},{0,80},{0,104}}, color={191,0,0}));
   connect(Central.X_w, controlBus.X_Central) annotation (Line(points={{-54,52},
           {-54,28.1},{102.1,28.1}}, color={0,0,127}));
   connect(Central.valve_cold, controlBus.Valve_RLT_Cold_Central) annotation (
@@ -443,8 +376,6 @@ equation
   connect(Central.power_pump_cold, measureBus.Pump_RLT_central_cold)
     annotation (Line(points={{-50,72},{-50,76},{-68,76},{-68,28},{86,28},{86,-29.9},
           {102.1,-29.9}}, color={0,0,127}));
-  connect(OpenPlanOffice.heatPort_pumpsAndPipes, heatPort[1])
-    annotation (Line(points={{0,72},{0,92}}, color={191,0,0}));
   connect(Central.Fluid_out_hot, Fluid_out_hot)
     annotation (Line(points={{-62,52},{-62,40},{-100,40}}, color={0,127,255}));
   connect(OpenPlanOffice.Fluid_out_hot, Fluid_out_hot)
@@ -507,6 +438,9 @@ equation
         color={0,127,255}));
   connect(OpenPlanOffice.Air_out, Air_out[1]) annotation (Line(points={{10,68.6},
           {16,68.6},{16,70},{16,70},{16,80},{40,80},{40,92}}, color={0,127,255}));
+  connect(Central.Airtemp_out, measureBus.Air_RLT_Central_out) annotation (Line(
+        points={{-43,71.2},{-36,71.2},{-36,28},{86,28},{86,-29.9},{102.1,-29.9}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Full_Transfer_RLT;
