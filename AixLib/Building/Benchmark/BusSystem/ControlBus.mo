@@ -13,6 +13,8 @@ expandable connector ControlBus
   Real Pump_Warmwater_heatpump_y "Normalized speed of warmwaterpump on heatpumpside";
   Real Pump_Aircooler_y "Normalized speed of aircoolerpump";
   Real Pump_Hotwater_CHP_y "Normalized speed of aircoolerpump";
+  Real Pump_Hotwater_Boiler_y "Normalized speed of aircoolerpump";
+
   //RLT
   Real Pump_RLT_Central_hot_y "Normalized speed of hotwaterpump of the central RLT";
   Real Pump_RLT_OpenPlanOffice_hot_y "Normalized speed of hotwaterpump of the openplanoffice RLT";
@@ -26,6 +28,7 @@ expandable connector ControlBus
   Real Pump_RLT_MultiPersonOffice_cold_y "Normalized speed of coldwaterpump of the multipersonoffice RLT";
   Real Pump_RLT_Canteen_cold_y "Normalized speed of coldwaterpump of the canteen RLT";
   Real Pump_RLT_Workshop_cold_y "Normalized speed of coldwaterpump of the workshop RLT";
+
   // TBA
   Real Pump_TBA_OpenPlanOffice_y "Normalized speed of waterpump of the openplanoffice TBA";
   Real Pump_TBA_ConferenceRoom_y "Normalized speed of waterpump of the conferenceroom TBA";

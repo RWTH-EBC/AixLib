@@ -97,6 +97,7 @@ expandable connector measureBus
   SI.Power Heatpump_small_power "Power of small heatpump";
   SI.Power Heatpump_big_power "Power of big heatpump";
   SI.Power Pump_generation_hot_power;
+  SI.Power Pump_generation_hot_power_Boiler;
   SI.Power Pump_Coldwater_heatpump_power;
   SI.Power Pump_Coldwater_power;
   SI.Power Pump_Warmwater_power;

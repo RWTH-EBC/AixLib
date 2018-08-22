@@ -310,10 +310,10 @@ model Generation
         rotation=180,
         origin={56,-96})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
-        origin={-68,-58})));
+        origin={-68,-60})));
   BusSystem.measureBus measureBus
     annotation (Placement(transformation(extent={{-70,70},{-30,110}}),
         iconTransformation(extent={{-50,90},{-30,110}})));
@@ -435,7 +435,7 @@ equation
   connect(fan1.y, controlBus.Pump_Warmwater_y) annotation (Line(points={{48,37.6},
           {48,40},{4.1,40},{4.1,100.1}}, color={0,0,127}));
   connect(fan4.port_a, generation_geothermalProbe.Fulid_out_Geothermal)
-    annotation (Line(points={{-68,-66},{-68,-70},{-44,-70},{-44,-80}}, color={0,
+    annotation (Line(points={{-68,-68},{-68,-70},{-44,-70},{-44,-80}}, color={0,
           127,255}));
   connect(Valve1.port_1, generation_geothermalProbe.Fulid_out_Geothermal)
     annotation (Line(points={{-85,-74},{-84,-74},{-84,-76},{-68,-76},{-68,-70},{
@@ -443,10 +443,8 @@ equation
   connect(bou1.ports[1], generation_geothermalProbe.Fulid_out_Geothermal)
     annotation (Line(points={{-50,-60},{-50,-70},{-44,-70},{-44,-80}}, color={0,
           127,255}));
-  connect(fan4.port_b, generation_heatPump1.Fluid_in_cold)
-    annotation (Line(points={{-68,-50},{-68,16},{-60,16}}, color={0,127,255}));
   connect(fan4.y, controlBus.Pump_Coldwater_heatpump_y) annotation (Line(points={{-77.6,
-          -58},{-98,-58},{-98,88},{4.1,88},{4.1,100.1}},        color={0,0,127}));
+          -60},{-98,-60},{-98,88},{4.1,88},{4.1,100.1}},        color={0,0,127}));
   connect(generation_AirCooling.measureBus, measureBus) annotation (Line(
       points={{-60,-36},{-72,-36},{-72,-30},{-98,-30},{-98,88},{-50,88},{-50,90}},
       color={255,204,51},
@@ -479,7 +477,8 @@ equation
           -103.2},{68,-103.2},{68,-110},{4,-110},{4,88},{-49.9,88},{-49.9,90.1}},
         color={0,0,127}));
   connect(fan4.P, measureBus.Pump_Coldwater_heatpump_power) annotation (Line(
-        points={{-75.2,-49.2},{-75.2,-30},{-98,-30},{-98,88},{-49.9,88},{-49.9,90.1}},
+        points={{-75.2,-51.2},{-75.2,-30},{-98,-30},{-98,88},{-49.9,88},{-49.9,
+          90.1}},
         color={0,0,127}));
   connect(generation_Hot.measureBus, measureBus) annotation (Line(
       points={{-66,79.9},{-66,88},{-50,88},{-50,90}},
@@ -512,6 +511,8 @@ equation
   connect(fan1.heatPort, heatPort_Canteen) annotation (Line(points={{48,22.56},{
           48,12},{70,12},{69.5,0},{120,0},{120,120},{-100,120},{-100,60}},
         color={191,0,0}));
+  connect(fan4.port_b, generation_heatPump1.Fluid_in_cold)
+    annotation (Line(points={{-68,-52},{-68,16},{-60,16}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation;

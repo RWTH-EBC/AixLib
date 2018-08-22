@@ -24,8 +24,6 @@ model Sum_Power
     annotation (Placement(transformation(extent={{38,-18},{74,18}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-16,-40},{4,-20}})));
-  Modelica.Blocks.Sources.RealExpression realExpression
-    annotation (Placement(transformation(extent={{-32,-94},{-12,-74}})));
   Modelica.Blocks.Interfaces.RealOutput Sum_Power
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 equation
@@ -106,12 +104,12 @@ equation
           -24},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add.y, multiSum.u[10]) annotation (Line(points={{5,-30},{18,-30},{18,
           -11.34},{38,-11.34}}, color={0,0,127}));
-  connect(realExpression.y, add.u2) annotation (Line(points={{-11,-84},{-8,-84},
-          {-8,-50},{-30,-50},{-30,-36},{-18,-36}}, color={0,0,127}));
   connect(multiSum.y, Sum_Power)
     annotation (Line(points={{77.06,0},{100,0}}, color={0,0,127}));
   connect(multiSum.y, measureBus.Sum_Power) annotation (Line(points={{77.06,0},
           {88,0},{88,108},{-99.9,108},{-99.9,0.1}}, color={0,0,127}));
+  connect(add.u2, measureBus.Pump_generation_hot_power_Boiler) annotation (Line(
+        points={{-18,-36},{-30,-36},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Sum_Power;

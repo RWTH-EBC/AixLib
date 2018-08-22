@@ -21,8 +21,8 @@ record Benchmark_12000l
     rhoWall=7850,
     cWall=400,
     roughness=2.5e-5,
-    pipeHC1=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
-    pipeHC2=AixLib.DataBase.Pipes.Copper.Copper_54x1(),
+    pipeHC1=AixLib.DataBase.Pipes.Copper.Copper_66_7x1_2(),
+    pipeHC2=AixLib.DataBase.Pipes.Copper.Copper_66_7x1_2(),
     lengthHC1=300,
     lengthHC2=300);
 

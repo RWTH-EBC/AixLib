@@ -160,8 +160,8 @@ equation
   connect(PID_RLT_Central_Cold.u_s, realExpression3.y) annotation (Line(points=
           {{-32,-50},{-38,-50},{-38,-30},{-100,-30},{-100,-90},{-105,-90}},
         color={0,0,127}));
-  connect(PID_RLT_Workshop_Cold.u_s, realExpression3.y) annotation (Line(points
-        ={{18,-50},{10,-50},{10,-30},{-100,-30},{-100,-90},{-105,-90}}, color={
+  connect(PID_RLT_Workshop_Cold.u_s, realExpression3.y) annotation (Line(points=
+         {{18,-50},{10,-50},{10,-30},{-100,-30},{-100,-90},{-105,-90}}, color={
           0,0,127}));
   connect(PID_RLT_Central_Hot.u_s, realExpression2.y) annotation (Line(points={
           {-32,50},{-40,50},{-40,30},{-100,30},{-100,90},{-119,90}}, color={0,0,
@@ -169,10 +169,10 @@ equation
   connect(PID_RLT_Workshop_Hot.u_s, realExpression2.y) annotation (Line(points=
           {{18,50},{12,50},{12,30},{-100,30},{-100,90},{-119,90}}, color={0,0,
           127}));
-  connect(PID_RLT_Canteen_Cold.u_m, measureBus.RLT_canteen_cold_in) annotation
-    (Line(points={{-70,-38},{-70,-26},{-99.9,-26},{-99.9,0.1}}, color={0,0,127}));
-  connect(PID_RLT_Central_Cold.u_m, measureBus.RLT_central_cold_in) annotation
-    (Line(points={{-20,-38},{-20,-26},{-99.9,-26},{-99.9,0.1}}, color={0,0,127}));
+  connect(PID_RLT_Canteen_Cold.u_m, measureBus.RLT_canteen_cold_in) annotation (
+     Line(points={{-70,-38},{-70,-26},{-99.9,-26},{-99.9,0.1}}, color={0,0,127}));
+  connect(PID_RLT_Central_Cold.u_m, measureBus.RLT_central_cold_in) annotation (
+     Line(points={{-20,-38},{-20,-26},{-99.9,-26},{-99.9,0.1}}, color={0,0,127}));
   connect(PID_RLT_Workshop_Cold.u_m, measureBus.RLT_workshop_cold_in)
     annotation (Line(points={{30,-38},{30,-26},{-99.9,-26},{-99.9,0.1}}, color=
           {0,0,127}));
@@ -198,8 +198,8 @@ equation
       Line(points={{-70,38},{-70,34},{-99.9,34},{-99.9,0.1}}, color={0,0,127}));
   connect(PID_RLT_Central_Hot.u_m, measureBus.RLT_central_hot_in) annotation (
       Line(points={{-20,38},{-20,34},{-99.9,34},{-99.9,0.1}}, color={0,0,127}));
-  connect(PID_RLT_Workshop_Hot.u_m, measureBus.RLT_workshop_hot_in) annotation
-    (Line(points={{30,38},{30,34},{-99.9,34},{-99.9,0.1}}, color={0,0,127}));
+  connect(PID_RLT_Workshop_Hot.u_m, measureBus.RLT_workshop_hot_in) annotation (
+     Line(points={{30,38},{30,34},{-99.9,34},{-99.9,0.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end PI_Regler_RLT;

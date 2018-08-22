@@ -103,8 +103,8 @@ model Pump_Basis
   Modelica.Blocks.Math.Gain gain5(k=-1)
     annotation (Placement(transformation(extent={{32,-84},{24,-76}})));
 equation
-  connect(realExpression.y, controlBus.Pump_Hotwater_y) annotation (Line(points
-        ={{-39,-132},{0.1,-132},{0.1,-99.9}}, color={0,0,127}));
+  connect(realExpression.y, controlBus.Pump_Hotwater_y) annotation (Line(points=
+         {{-39,-132},{0.1,-132},{0.1,-99.9}}, color={0,0,127}));
   connect(realExpression.y, controlBus.Pump_Warmwater_y) annotation (Line(
         points={{-39,-132},{0.1,-132},{0.1,-99.9}}, color={0,0,127}));
   connect(realExpression.y, controlBus.Pump_Coldwater_y) annotation (Line(
@@ -217,8 +217,8 @@ equation
       Line(points={{23.6,22},{0.1,22},{0.1,-99.9}}, color={0,0,127}));
   connect(gain2.y, controlBus.Pump_RLT_Canteen_cold_y) annotation (Line(points=
           {{23.6,-12},{0.1,-12},{0.1,-99.9}}, color={0,0,127}));
-  connect(gain3.y, controlBus.Pump_RLT_Workshop_cold_y) annotation (Line(points
-        ={{23.6,-46},{0.1,-46},{0.1,-99.9}}, color={0,0,127}));
+  connect(gain3.y, controlBus.Pump_RLT_Workshop_cold_y) annotation (Line(points=
+         {{23.6,-46},{0.1,-46},{0.1,-99.9}}, color={0,0,127}));
   connect(gain5.y, controlBus.Pump_RLT_Central_cold_y) annotation (Line(points=
           {{23.6,-80},{0.1,-80},{0.1,-99.9}}, color={0,0,127}));
   connect(PID_Pump_RLT_Central_Cold.u_m, measureBus.Air_out) annotation (Line(
@@ -227,6 +227,8 @@ equation
   connect(PID_Pump_RLT_Central_Hot.u_m, measureBus.Air_out) annotation (Line(
         points={{-50,-92},{-50,-100},{-26,-100},{-26,-72},{0.1,-72},{0.1,100.1}},
         color={0,0,127}));
+  connect(realExpression.y, controlBus.Pump_Hotwater_Boiler_y) annotation (Line(
+        points={{-39,-132},{0.1,-132},{0.1,-99.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Pump_Basis;

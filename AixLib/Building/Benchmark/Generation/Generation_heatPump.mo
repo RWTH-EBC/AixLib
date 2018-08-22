@@ -36,14 +36,15 @@ model Generation_heatPump
     redeclare package Medium_con = Medium_Water,
     redeclare package Medium_eva = Medium_Water,
     T_conMax=T_conMax_big,
-    volume_eva=vol_big,
-    volume_con=vol_big,
-    factorScale=factor_heatpump_model_big,
     heatLosses_con=true,
     R_loss=R_loss_small,
-    dp_conNominal=dpHeatexchanger_nominal,
-    dp_evaNominal=dpHeatexchanger_nominal,
-    dataTable=DataBase.HeatPump.EN14511.Ochsner_GMSW_15plus(),
+    dataTable=DataBase.HeatPump.EN14511.Benchmark_Heatpump_Big(),
+    volume_eva=vol_big,
+    volume_con=vol_big,
+    factorScale=1,
+    CorrFlowEv=false,
+    dp_conNominal=dpHeatexchanger_nominal/100,
+    dp_evaNominal=dpHeatexchanger_nominal/90,
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,18},{16,38}})));
@@ -58,7 +59,7 @@ model Generation_heatPump
   BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
             {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={42,60})));
@@ -69,14 +70,15 @@ model Generation_heatPump
     redeclare package Medium_con = Medium_Water,
     redeclare package Medium_eva = Medium_Water,
     T_conMax=T_conMax_small,
-    volume_eva=vol_small,
-    volume_con=vol_small,
-    factorScale=factor_heatpump_model_small,
     heatLosses_con=true,
     R_loss=R_loss_small,
-    dp_conNominal=dpHeatexchanger_nominal,
-    dp_evaNominal=dpHeatexchanger_nominal,
-    dataTable=DataBase.HeatPump.EN14511.Ochsner_GMSW_15plus(),
+    volume_eva=vol_small,
+    volume_con=vol_small,
+    factorScale=1,
+    CorrFlowEv=false,
+    dataTable=DataBase.HeatPump.EN14511.Benchmark_Heatpump_Small(),
+    dp_conNominal=dpHeatexchanger_nominal/100,
+    dp_evaNominal=dpHeatexchanger_nominal/90,
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-38},{16,-18}})));

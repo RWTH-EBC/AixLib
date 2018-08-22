@@ -40,6 +40,10 @@ model Generation_Basis
     annotation (Placement(transformation(extent={{-92,68},{-80,80}})));
   Modelica.Blocks.Logical.Change change6
     annotation (Placement(transformation(extent={{-72,68},{-60,80}})));
+  Modelica.Blocks.Logical.And and1
+    annotation (Placement(transformation(extent={{12,60},{26,74}})));
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=2.5)
+            annotation (Placement(transformation(extent={{-10,68},{2,80}})));
 equation
   connect(realExpression3.y, controlBus.ElSet_CHP) annotation (Line(points={{59,
           -56},{40,-56},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
@@ -81,8 +85,15 @@ equation
           -10},{0.1,-10},{0.1,-99.9}}, color={255,0,255}));
   connect(or2.y, controlBus.OnOff_heatpump_small) annotation (Line(points={{-25,
           30},{0.1,30},{0.1,-99.9}}, color={255,0,255}));
-  connect(or1.y, controlBus.OnOff_heatpump_big) annotation (Line(points={{-25,
-          70},{0.1,70},{0.1,-99.9}}, color={255,0,255}));
+  connect(or1.y, and1.u2) annotation (Line(points={{-25,70},{-18,70},{-18,61.4},
+          {10.6,61.4}}, color={255,0,255}));
+  connect(greaterThreshold.y, and1.u1) annotation (Line(points={{2.6,74},{6,74},
+          {6,67},{10.6,67}}, color={255,0,255}));
+  connect(greaterThreshold.u, measureBus.heatpump_cold_massflow) annotation (
+      Line(points={{-11.2,74},{-20,74},{-20,86},{0.1,86},{0.1,100.1}}, color={0,
+          0,127}));
+  connect(and1.y, controlBus.OnOff_heatpump_big) annotation (Line(points={{26.7,
+          67},{36,67},{36,40},{0.1,40},{0.1,-99.9}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_Basis;

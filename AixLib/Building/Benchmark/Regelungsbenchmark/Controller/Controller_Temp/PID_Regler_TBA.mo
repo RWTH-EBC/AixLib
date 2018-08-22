@@ -200,8 +200,8 @@ equation
           {-26,-16.8},{-26,4},{-56,4},{-56,-16},{-59,-16}}, color={0,0,127}));
   connect(switch5.u3, realExpression5.y) annotation (Line(points={{-18.8,-23.2},
           {-54,-23.2},{-54,6},{-54,6},{-54,10},{-59,10}}, color={0,0,127}));
-  connect(switch6.u1, PID_TBA_Multipersonoffice_Warm.y) annotation (Line(points
-        ={{-18.8,-4.8},{-24,-4.8},{-24,40},{2,40},{2,66},{54,66},{54,90},{41,90}},
+  connect(switch6.u1, PID_TBA_Multipersonoffice_Warm.y) annotation (Line(points=
+         {{-18.8,-4.8},{-24,-4.8},{-24,40},{2,40},{2,66},{54,66},{54,90},{41,90}},
         color={0,0,127}));
   connect(hysteresis1.y, switch4.u2) annotation (Line(points={{16.6,16},{22,16},
           {22,22},{31.2,22}}, color={255,0,255}));
@@ -233,8 +233,8 @@ equation
           70,37.2},{70,4},{-56,4},{-56,-16},{-59,-16}}, color={0,0,127}));
   connect(switch9.u3, realExpression5.y) annotation (Line(points={{81.2,30.8},{
           74,30.8},{74,-26},{-54,-26},{-54,10},{-59,10}}, color={0,0,127}));
-  connect(switch1.y, controlBus.Valve_TBA_Cold_OpenPlanOffice_Temp) annotation
-    (Line(points={{-9.6,22},{-6,22},{-6,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(switch1.y, controlBus.Valve_TBA_Cold_OpenPlanOffice_Temp) annotation (
+     Line(points={{-9.6,22},{-6,22},{-6,0.1},{100.1,0.1}}, color={0,0,127}));
   connect(switch2.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
     annotation (Line(points={{-9.6,10},{-6,10},{-6,0.1},{100.1,0.1}}, color={0,
           0,127}));
@@ -244,8 +244,8 @@ equation
   connect(switch5.y, controlBus.Valve_TBA_WarmCold_multipersonoffice_1)
     annotation (Line(points={{-9.6,-20},{-6,-20},{-6,0.1},{100.1,0.1}}, color={
           0,0,127}));
-  connect(switch4.y, controlBus.Valve_TBA_Cold_ConferenceRoom_Temp) annotation
-    (Line(points={{40.4,22},{46,22},{46,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(switch4.y, controlBus.Valve_TBA_Cold_ConferenceRoom_Temp) annotation (
+     Line(points={{40.4,22},{46,22},{46,0.1},{100.1,0.1}}, color={0,0,127}));
   connect(switch3.y, controlBus.Valve_TBA_WarmCold_conferenceroom_1)
     annotation (Line(points={{40.4,10},{46,10},{46,0.1},{100.1,0.1}}, color={0,
           0,127}));

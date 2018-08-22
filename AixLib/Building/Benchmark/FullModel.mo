@@ -40,15 +40,15 @@ model FullModel
     alphaHC1_cold=500,
     R_loss_small=50,
     R_loss_big=100,
-    dpHeatexchanger_nominal=20000,
-    dpValve_nominal_generation_hot=227000,
-    T_conMax_big=328.15,
-    T_conMax_small=328.15,
-    dpValve_nominal_warmwater=285000,
-    dpValve_nominal_coldwater=200000,
-    dpValve_nominal_generation_aircooler=60000,
     m_flow_nominal_generation_air_max=28.649,
     m_flow_nominal_generation_air_min=22.537,
+    dpHeatexchanger_nominal=20000,
+    dpValve_nominal_generation_hot=40000,
+    T_conMax_big=328.15,
+    T_conMax_small=328.15,
+    dpValve_nominal_warmwater=37000,
+    dpValve_nominal_coldwater=40000,
+    dpValve_nominal_generation_aircooler=60000,
     Earthtemperature_start=283.15)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
