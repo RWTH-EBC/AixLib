@@ -5,3 +5,6 @@ Functions
 SecurityControls
 HeatPumpControl
 PerformanceData
+CapacityWithLosses
+HeatCoeffNat
+HeatCoeffForc

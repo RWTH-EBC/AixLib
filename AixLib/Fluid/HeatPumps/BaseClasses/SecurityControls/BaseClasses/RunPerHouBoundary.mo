@@ -5,7 +5,7 @@ block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
     "Checks if the count of total runs is lower than the maximal value"
     annotation (Placement(transformation(extent={{74,-8},{90,8}})));
   Modelica.Blocks.Sources.Constant inputRunPerHou(final k=maxRunPer_h)
-    "maximal number of on/off cycles in one hour"
+    "Maximal number of on/off cycles in one hour"
     annotation (Placement(transformation(extent={{44,-22},{60,-6}})));
   Modelica.Blocks.MathInteger.TriggeredAdd triggeredAdd
     annotation (Placement(transformation(extent={{-32,6},{-20,-6}})));

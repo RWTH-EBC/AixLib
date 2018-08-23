@@ -29,14 +29,14 @@ block AntiLegionella "Control to avoid Legionella in the DHW"
     annotation (Placement(transformation(extent={{-16,-30},{-2,-16}})));
   parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control";
-  Modelica.Blocks.Logical.Timer timeAntiLeg "time in which legionella will die"
+  Modelica.Blocks.Logical.Timer timeAntiLeg "Time in which legionella will die"
     annotation (Placement(transformation(extent={{-24,-10},{-4,10}})));
   Modelica.Blocks.Logical.Less lessMinAntLegTime
     annotation (Placement(transformation(extent={{12,-8},{26,8}})));
   Modelica.Blocks.Interfaces.RealInput TSet_in "Input of TSet"
     annotation (Placement(transformation(extent={{-142,60},{-102,100}})));
   Modelica.Blocks.Logical.Timer timeSinceAntiLeg
-    "time since last Antilegionella cycle"
+    "Time since last Antilegionella cycle"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Blocks.Logical.Pre pre1
     annotation (Placement(transformation(extent={{-44,-6},{-32,6}})));

@@ -117,7 +117,7 @@ protected
     "Port temperature"
     annotation (Placement(transformation(extent={{-40,-10},{-60,10}})));
   Modelica.Blocks.Sources.RealExpression portT(y=T) "Port temperature"
-    annotation (Placement(transformation(extent={{-10,-10},{-30,10}})));
+    annotation (Placement(transformation(extent={{-8,-10},{-28,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heaFloSen
     "Heat flow sensor"
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
@@ -166,7 +166,7 @@ equation
   end if;
 
   connect(portT.y, preTem.T)
-    annotation (Line(points={{-31,0},{-38,0}},   color={0,0,127}));
+    annotation (Line(points={{-29,0},{-38,0}},   color={0,0,127}));
   connect(heaFloSen.port_b, preTem.port)
     annotation (Line(points={{-70,0},{-65,0},{-60,0}},    color={191,0,0}));
   connect(heaFloSen.Q_flow, steBal.Q_flow) annotation (Line(points={{-80,-10},{
