@@ -1,6 +1,6 @@
 within AixLib.Utilities.Communication.SocketCommunication.Components;
 model TCPCommunicatorExample
-  "Example model to show TCP-Communication with simple server"
+  "Example model to show TCP communication with simple server"
   extends BaseClasses.PartialTCPCommunicator(
           final nin = nSend,
           final nout = nRecv,
@@ -16,42 +16,42 @@ model TCPCommunicatorExample
     "Start time when sampling starts";
   parameter String IP_AddressExample = "127.0.0.1"
     "IP address or name of Server";
-  parameter String portExample="27015" "Port on server";
-  parameter Integer nSend = 1 "Number of datapoints to be written";
-  parameter Integer nRecv = 1 "Number of datapoints to be read";
-
-  parameter Integer maxLen = 512
-    "Maximum number of single characters receiveable per message";
-  String msgSend "Variable for the message to be send";
-  Integer intLength "integer value of length of message";
-  Integer stateExample
-    "dummy variable to check state of function, 0 == OK, 1 == errror";
-  String msgRecv "Variable to host received message";
-equation
+  parameter Integer portExample=27015 "Port on server";
+  parameter Integer nSend = 1 "Number of data points to be written";
+  parameter Integer nRecv = 1 "Number of data points to be read";
+  parameter Modelica_DeviceDrivers.Utilities.Types.ByteOrder byteOrder = Modelica_DeviceDrivers.Utilities.Types.ByteOrder.LE "Byte order";
+protected
+  Integer stateExample "Dummy variable to check state of TCP send function, 0 == OK, 1 == error";
+  Modelica_DeviceDrivers.Packaging.SerialPackager pkgSend = Modelica_DeviceDrivers.Packaging.SerialPackager(8*nSend) "Package for the message to be send";
+  Modelica_DeviceDrivers.Packaging.SerialPackager pkgRecv = Modelica_DeviceDrivers.Packaging.SerialPackager(8*nRecv) "Package to host the received message";
 
 algorithm
   when {sampleTrigger} then
+    if isConnected then
+      Modelica_DeviceDrivers.Packaging.SerialPackager_.addReal(pkgSend, u, byteOrder);
+      stateExample := Modelica_DeviceDrivers.Communication.TCPIPSocketClient_.sendTo(socketHandle, pkgSend, 8*nSend);    // send message
+      Modelica_DeviceDrivers.Packaging.SerialPackager_.resetPointer(pkgSend);
 
-     intLength := Modelica.Utilities.Strings.length(String(u[1]));// Evaluate length of input u[1]
-     msgSend := String(u[1]);// Insert String of u[1]
-     stateExample :=Functions.TCP.SocketSend(msgSend, intLength,socketHandle);    // send message
+/************************* In between for explanation ******************************/
+      Modelica.Utilities.Streams.print("SocketSend(): Send message to IP " + IP_Address + " at port " + String(port) + ": " + String(u[1]));
+/************************* In between for explanation ******************************/
 
-/************************* In between for expalanation ******************************/
-   Modelica.Utilities.Streams.print("SocketSend(): Send message to IP " + IP_Address + " at port " + port + ": " + msgSend);
-/************************* In between for expalanation ******************************/
+      Modelica_DeviceDrivers.Communication.TCPIPSocketClient_.read(socketHandle, pkgRecv, 8*nRecv);   // receive message
 
-   (msgRecv, stateExample) :=Functions.TCP.SocketReceive(maxLen,socketHandle);   // receive message
+      y := Modelica_DeviceDrivers.Packaging.SerialPackager_.getReal(pkgRecv, nRecv, byteOrder);
+      Modelica_DeviceDrivers.Packaging.SerialPackager_.resetPointer(pkgRecv);
 
-    y[1] :=Modelica.Utilities.Strings.scanReal(msgRecv);
-
-/************************* In between for expalanation ******************************/
-  Modelica.Utilities.Streams.print("SocketReceive(): Message received from IP " + IP_Address + " at port " + port + ": " + msgRecv);
-/************************* In between for expalanation ******************************/
-
- end when;
+/************************* In between for explanation ******************************/
+      Modelica.Utilities.Streams.print("SocketReceive(): Message received from IP " + IP_Address + " at port " + String(port) + ": " + String(y[1]));
+/************************* In between for explanation ******************************/
+    end if;
+  end when;
 
 annotation(Documentation(revisions="<html>
 <ul>
+<li><i>August 25, 2018&nbsp;</i>
+         by Thomas Beutlich:<br/>
+         Utilize TCPIPSocketClient_ functions from Modelica_DeviceDrivers library</li>
 <li><i>June 01, 2013&nbsp;</i>
          by Georg Ferdinand Schneider:<br />
          Implemented</li>
@@ -63,10 +63,9 @@ annotation(Documentation(revisions="<html>
 
 <h4>Simple TCP Communicator Example</h4>
 
-<p>This is a small example Block which allows to establish a TCP Connection between a Client (i.e. Dymola) 
-and a Server (External) it sends the value of input <code>u[1]</code> as a string to the server and receives a string message.
-This received string message should only contain a real number as it is converted into a <code>Real</code> value afterwards and
-forwarded to output <code>y[1]</code>. Check <code>SocketCommunication.Examples.ExampleClientLoop</code> for a executable example.
+<p>This is a small example block which allows to establish a TCP connection between a client (i.e., Dymola or SimulationX by ESI)
+and an external server. It sends the value of input <code>u[1]</code> as a floating-point number to the server and receives a floating-point number.
+Check <code>SocketCommunication.Examples.ExampleClientLoop</code> for an executable example.
 </p>
 </html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
@@ -96,7 +95,7 @@ forwarded to output <code>y[1]</code>. Check <code>SocketCommunication.Examples.
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-38,10},{28,-36}},
+          extent={{-38,10},{38,-36}},
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
