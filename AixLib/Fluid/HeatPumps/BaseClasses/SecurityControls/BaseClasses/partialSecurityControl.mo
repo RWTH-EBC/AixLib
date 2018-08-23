@@ -6,7 +6,7 @@ partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{120,-10},{140,10}})));
-  Modelica.Blocks.Logical.Switch swiErr
+  AixLib.Utilities.Logical.SmoothSwitch swiErr
     "If an error occurs, the value of the conZero block will be used(0)"
     annotation (Placement(transformation(extent={{86,-10},{106,10}})));
   Modelica.Blocks.Sources.Constant conZer(final k=0)

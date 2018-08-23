@@ -9,7 +9,7 @@ model PolynomalApproach
 equation
   if sigBusHP.onOff then
     //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
-    Char = data_poly(sigBusHP.N,sigBusHP.T_ret_co,sigBusHP.T_flow_ev,sigBusHP.m_flow_co,sigBusHP.m_flow_ev);
+    Char = PolyData(sigBusHP.N,sigBusHP.T_ret_co,sigBusHP.T_flow_ev,sigBusHP.m_flow_co,sigBusHP.m_flow_ev);
     QCon = Char[2];
     Pel = Char[1];
     QEva = QCon-Pel;

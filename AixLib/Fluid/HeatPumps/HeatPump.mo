@@ -133,11 +133,11 @@ model HeatPump "Base model of realistic heat pump"
     "Time constant representing inertia of compressor"
     annotation (Dialog(enable=use_ComIne));
 
-  parameter Boolean use_EvaCap=false
+  parameter Boolean use_EvaCap=true
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                            choices(checkBox=true));
-  parameter Boolean use_ConCap=false
+  parameter Boolean use_ConCap=true
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
@@ -408,7 +408,30 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Line(points={{-88,60},{88,60}}, color={28,108,200}),
-        Line(points={{-88,-60},{88,-60}}, color={28,108,200})}),
-                                            Diagram(coordinateSystem(extent={{-100,
+        Line(points={{-88,-60},{88,-60}}, color={28,108,200}),
+    Line(
+    origin={-75.5,-80.333},
+    points={{43.5,8.3333},{37.5,0.3333},{25.5,-1.667},{33.5,-9.667},{17.5,-11.667},{27.5,-21.667},{13.5,-23.667},
+              {11.5,-31.667}},
+      smooth=Smooth.Bezier,
+      visible=use_EvaCap),
+        Polygon(
+          points={{-70,-122},{-68,-108},{-58,-114},{-70,-122}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          fillColor={0,0,0},
+          visible=use_EvaCap),
+    Line(
+    origin={40.5,93.667},
+    points={{39.5,6.333},{37.5,0.3333},{25.5,-1.667},{33.5,-9.667},{17.5,-11.667},{27.5,-21.667},{13.5,-23.667},
+              {11.5,-27.667}},
+      smooth=Smooth.Bezier,
+      visible=use_ConCap),
+        Polygon(
+          points={{86,110},{84,96},{74,102},{86,110}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          fillColor={0,0,0},
+          visible=use_ConCap)}),          Diagram(coordinateSystem(extent={{-100,
             -120},{100,120}})));
 end HeatPump;

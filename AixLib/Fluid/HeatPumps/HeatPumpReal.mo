@@ -19,7 +19,8 @@ model HeatPumpReal
     final CCon=CCon,
     final GCon=GCon,
     final use_ComIne=useComIne,
-    redeclare final model PerfData = PerfData)
+    redeclare final model PerfData = PerfData,
+    use_ConCap=true)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
@@ -230,8 +231,8 @@ model HeatPumpReal
     annotation (Placement(transformation(extent={{240,0},{200,40}})));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
-      points={{79.82,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},{
-          -14,-19.32}},
+      points={{79.82,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},
+          {-14,-19.32}},
       color={255,204,51},
       thickness=0.5));
   connect(defrostControl.sigBusHP, heatPump.sigBusHP) annotation (Line(
@@ -242,8 +243,8 @@ equation
     annotation (Line(points={{84,-19},{84,-100}},   color={0,127,255}));
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-220,40},{-206,40},
           {-206,5.2},{-196.16,5.2}}, color={0,0,127}));
-  connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100},
-          {160,100}}, color={0,127,255}));
+  connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100}},
+                      color={0,127,255}));
   if not useConPum then
   end if;
   connect(pumSin.port_b, heatPump.port_a1)
@@ -267,8 +268,8 @@ equation
           200,-20},{200,-12.6667},{166.08,-12.6667}},
                                                   color={0,0,127}));
   connect(heatPump.sigBusHP, hPControls.sigBusHP) annotation (Line(
-      points={{79.82,-8.55},{78,-8.55},{78,-8},{76,-8},{76,-48},{-194,-48},{-194,
-          -15.08},{-190.56,-15.08}},
+      points={{79.82,-8.55},{78,-8.55},{78,-8},{76,-8},{76,-48},{-194,-48},{
+          -194,-15.08},{-190.56,-15.08}},
       color={255,204,51},
       thickness=0.5));
   connect(hPControls.nOut, realPasThrHPC.u) annotation (Line(
