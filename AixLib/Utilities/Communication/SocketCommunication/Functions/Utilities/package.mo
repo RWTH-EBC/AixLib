@@ -1,6 +1,7 @@
 within AixLib.Utilities.Communication.SocketCommunication.Functions;
 package Utilities "Contains functions to handle string manipulations and conversions for top level protocols"
   extends Modelica.Icons.Package;
+  extends Modelica.Icons.ObsoleteModel;
 
 
    annotation (Documentation(info="<html>

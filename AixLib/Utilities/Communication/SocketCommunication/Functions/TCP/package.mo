@@ -1,7 +1,7 @@
 within AixLib.Utilities.Communication.SocketCommunication.Functions;
 package TCP "Contains all functions necessary to handle a TCP communication"
   extends Modelica.Icons.Package;
-
+  extends Modelica.Icons.ObsoleteModel;
 
     annotation (Documentation(info="<html>
     This is a package containing a set of C-functions to handle basic TCP-communication within 
