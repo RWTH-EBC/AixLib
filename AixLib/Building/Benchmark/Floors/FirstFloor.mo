@@ -20,7 +20,7 @@ model FirstFloor
     annotation (Placement(transformation(extent={{-42,-110},{-22,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToWorkshop_MultiPersonOffice
     annotation (Placement(transformation(extent={{-74,-110},{-54,-90}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{80,0},{120,40}})));
   BusSystem.InternalBus internalBus
     annotation (Placement(transformation(extent={{80,40},{120,80}})));

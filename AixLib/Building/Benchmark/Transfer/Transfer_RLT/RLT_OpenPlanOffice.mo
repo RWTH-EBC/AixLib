@@ -183,9 +183,8 @@ model RLT_OpenPlanOffice
   Fluid.MixingVolumes.MixingVolume vol3(
     nPorts=2,
     redeclare package Medium = Medium_Air,
-    V=0.01,
-    m_flow_nominal=RLT_m_flow_nominal)
-              annotation (Placement(transformation(
+    m_flow_nominal=RLT_m_flow_nominal,
+    V=1)      annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=0,
         origin={-14,-72})));
@@ -287,8 +286,6 @@ equation
           {20,40},{20,80},{-100,80}}, color={0,0,127}));
   connect(senTem4.T, cold_in) annotation (Line(points={{77,60},{78,60},{78,40},
           {-100,40}}, color={0,0,127}));
-  connect(Ext_Cold.port_b2, Air_out)
-    annotation (Line(points={{34,-66},{100,-66}}, color={0,127,255}));
   connect(Ext_Warm.port_b2, vol3.ports[1])
     annotation (Line(points={{-42,-66},{-15.2,-66}}, color={0,127,255}));
   connect(vol3.ports[2], Ext_Cold.port_a2)
@@ -315,6 +312,8 @@ equation
     annotation (Line(points={{-100,-66},{-81.2,-66}}, color={0,127,255}));
   connect(del.ports[2], Ext_Warm.port_a2)
     annotation (Line(points={{-78.8,-66},{-62,-66}}, color={0,127,255}));
+  connect(Ext_Cold.port_b2, Air_out)
+    annotation (Line(points={{34,-66},{100,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end RLT_OpenPlanOffice;

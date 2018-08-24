@@ -206,7 +206,7 @@ replaceable package Medium_Air =
     annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{8,12},{28,32}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)

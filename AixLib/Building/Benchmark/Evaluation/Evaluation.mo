@@ -1,7 +1,7 @@
 within AixLib.Building.Benchmark.Evaluation;
 model Evaluation
   Costs costs annotation (Placement(transformation(extent={{26,-10},{46,10}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Sum_Power sum_Power
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));

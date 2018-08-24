@@ -93,8 +93,8 @@ model Generation_AirCooling
         rotation=-90,
         origin={36,-10})));
 
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
-            {-120,-20},{-80,20}}), iconTransformation(extent={{-110,-10},{-90,
+  BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
+            {{-120,-20},{-80,20}}), iconTransformation(extent={{-110,-10},{-90,
             10}})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
@@ -110,8 +110,9 @@ model Generation_AirCooling
     annotation (Placement(transformation(extent={{-70,-82},{-50,-102}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
     annotation (Placement(transformation(extent={{-94,-100},{-82,-84}})));
-  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={{
-            -130,-90},{-90,-50}}), iconTransformation(extent={{-110,-70},{-90,-50}})));
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{-130,-90},{-90,-50}}), iconTransformation(extent={{-110,-70},{-90,
+            -50}})));
   Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

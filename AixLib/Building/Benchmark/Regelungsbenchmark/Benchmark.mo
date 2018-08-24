@@ -1,18 +1,22 @@
 within AixLib.Building.Benchmark.Regelungsbenchmark;
 model Benchmark
-  FullModel fullModel
+  extends AixLib.Building.Benchmark.Logger;
+  FullModel_v2 fullModel_v2
     annotation (Placement(transformation(extent={{20,-20},{60,20}})));
-  Controller.ControllerBasis controllerBasis
+  Controller.ControllerBasis_v2 controllerBasis_v2_1
     annotation (Placement(transformation(extent={{-60,-20},{-20,20}})));
 equation
-  connect(controllerBasis.measureBus, fullModel.measureBus) annotation (Line(
+  connect(controllerBasis_v2_1.measureBus, fullModel_v2.Measure) annotation (
+      Line(
       points={{-20,4},{20,4}},
       color={255,204,51},
       thickness=0.5));
-  connect(controllerBasis.controlBus, fullModel.controlBus) annotation (Line(
+  connect(controllerBasis_v2_1.controlBus, fullModel_v2.Control) annotation (
+      Line(
       points={{-20,-4},{20,-4}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    __Dymola_selections);
 end Benchmark;

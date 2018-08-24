@@ -1,6 +1,6 @@
 within AixLib.Building.Benchmark.Evaluation;
 model Sum_Power
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Math.Add3 add3_1
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));

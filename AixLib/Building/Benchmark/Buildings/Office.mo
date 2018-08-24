@@ -21,13 +21,14 @@ model Office
     annotation (Placement(transformation(extent={{-20,-60},{20,-20}})));
   Fluid.MixingVolumes.MixingVolume vol1(
     redeclare package Medium = Medium_Air,
-    m_flow_nominal=100,
     V=10,
-    nPorts=6)  annotation (Placement(transformation(
+    nPorts=6,
+    m_flow_nominal=3.375)
+               annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={-67,-69})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA[5]
     annotation (Placement(transformation(extent={{50,-110},{70,-90}})));

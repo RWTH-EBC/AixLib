@@ -6,7 +6,7 @@ model InternalLoads_Power
     annotation (Placement(transformation(extent={{-14,8},{-2,20}})));
   Modelica.Blocks.Math.Gain PowerEquiment_OpenPlanOffice(k=100)
     annotation (Placement(transformation(extent={{-42,74},{-30,86}})));
-  Modelica.Blocks.Math.Gain PowerEquiment_Workshop(k=2)
+  Modelica.Blocks.Math.Gain PowerEquiment_Workshop(k=200)
     annotation (Placement(transformation(extent={{-42,-2},{-30,10}})));
   Modelica.Blocks.Math.Add3 add3_1
     annotation (Placement(transformation(extent={{28,30},{40,42}})));
@@ -50,6 +50,16 @@ model InternalLoads_Power
     annotation (Placement(transformation(extent={{54,-68},{66,-56}})));
   Modelica.Blocks.Interfaces.RealOutput Power_Sum
     annotation (Placement(transformation(extent={{90,-72},{110,-52}})));
+  Modelica.Blocks.Math.Gain Matlab_Transition(k=1/100)
+    annotation (Placement(transformation(extent={{-14,-22},{-2,-10}})));
+  Modelica.Blocks.Math.Gain Matlab_Transition1(k=1/100)
+    annotation (Placement(transformation(extent={{-14,-40},{-2,-28}})));
+  Modelica.Blocks.Math.Gain Matlab_Transition2(k=1/100)
+    annotation (Placement(transformation(extent={{-14,-58},{-2,-46}})));
+  Modelica.Blocks.Math.Gain Matlab_Transition3(k=1/100)
+    annotation (Placement(transformation(extent={{-14,-76},{-2,-64}})));
+  Modelica.Blocks.Math.Gain Matlab_Transition4(k=1/100)
+    annotation (Placement(transformation(extent={{-14,-94},{-2,-82}})));
 equation
   connect(Met_OpenPlanOffice.y, add3_1.u1) annotation (Line(points={{-1.4,90},{
           20,90},{20,40.8},{26.8,40.8}}, color={0,0,127}));
@@ -93,18 +103,8 @@ equation
   connect(PowerEquiment_Cooking.y, add3_4.u3) annotation (Line(points={{-29.4,
           24},{20,24},{20,-24},{24,-24},{24,-24.8},{26.8,-24.8}}, color={0,0,
           127}));
-  connect(PowerEquiment_Workshop.y, add3_5.u3) annotation (Line(points={{-29.4,
-          4},{20,4},{20,-44},{24,-44},{24,-44.8},{26.8,-44.8}}, color={0,0,127}));
-  connect(Light_OpenPlanOffice.y, add3_1.u2) annotation (Line(points={{-29.4,
-          -16},{20,-16},{20,36},{26.8,36}}, color={0,0,127}));
-  connect(Light_MultipersonOffice.y, add3_2.u2) annotation (Line(points={{-29.4,
-          -34},{20,-34},{20,18},{26.8,18}}, color={0,0,127}));
-  connect(Light_Conferenceroom.y, add3_3.u2) annotation (Line(points={{-29.4,
-          -52},{20,-52},{20,0},{26.8,0}}, color={0,0,127}));
-  connect(Light_Canteen.y, add3_4.u2) annotation (Line(points={{-29.4,-70},{20,
-          -70},{20,-20},{26.8,-20}}, color={0,0,127}));
-  connect(Light_Workshop.y, add3_5.u2) annotation (Line(points={{-29.4,-88},{20,
-          -88},{20,-40},{26.8,-40}}, color={0,0,127}));
+  connect(PowerEquiment_Workshop.y, add3_5.u3) annotation (Line(points={{-29.4,4},
+          {20,4},{20,-44},{24,-44},{24,-44.8},{26.8,-44.8}},    color={0,0,127}));
   connect(Light_OpenPlanOffice.u, u1[6]) annotation (Line(points={{-43.2,-16},{
           -60,-16},{-60,2},{-100,2}}, color={0,0,127}));
   connect(Light_MultipersonOffice.u, u1[8]) annotation (Line(points={{-43.2,-34},
@@ -139,6 +139,26 @@ equation
           {54,-66},{52,-66},{52,-40},{40.6,-40}}, color={0,0,127}));
   connect(multiSum.y, Power_Sum)
     annotation (Line(points={{67.02,-62},{100,-62}}, color={0,0,127}));
+  connect(Light_OpenPlanOffice.y, Matlab_Transition.u)
+    annotation (Line(points={{-29.4,-16},{-15.2,-16}}, color={0,0,127}));
+  connect(Matlab_Transition.y, add3_1.u2) annotation (Line(points={{-1.4,-16},{
+          20,-16},{20,36},{26.8,36}}, color={0,0,127}));
+  connect(Light_MultipersonOffice.y, Matlab_Transition1.u)
+    annotation (Line(points={{-29.4,-34},{-15.2,-34}}, color={0,0,127}));
+  connect(Matlab_Transition1.y, add3_2.u2) annotation (Line(points={{-1.4,-34},
+          {20,-34},{20,18},{26.8,18}}, color={0,0,127}));
+  connect(Light_Conferenceroom.y, Matlab_Transition2.u)
+    annotation (Line(points={{-29.4,-52},{-15.2,-52}}, color={0,0,127}));
+  connect(Matlab_Transition2.y, add3_3.u2) annotation (Line(points={{-1.4,-52},
+          {20,-52},{20,0},{26.8,0}}, color={0,0,127}));
+  connect(Light_Canteen.y, Matlab_Transition3.u)
+    annotation (Line(points={{-29.4,-70},{-15.2,-70}}, color={0,0,127}));
+  connect(Matlab_Transition3.y, add3_4.u2) annotation (Line(points={{-1.4,-70},
+          {20,-70},{20,-20},{26.8,-20}}, color={0,0,127}));
+  connect(Light_Workshop.y, Matlab_Transition4.u)
+    annotation (Line(points={{-29.4,-88},{-15.2,-88}}, color={0,0,127}));
+  connect(Matlab_Transition4.y, add3_5.u2) annotation (Line(points={{-1.4,-88},
+          {20,-88},{20,-40},{26.8,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{34,98},{96,78}},

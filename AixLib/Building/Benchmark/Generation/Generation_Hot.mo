@@ -45,15 +45,8 @@ model Generation_Hot
     TAmb=298.15)
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
 
-  Fluid.Sources.Boundary_pT bou3(
-    p=100000,
-    redeclare package Medium = Medium_Water,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=-90,
-        origin={-56,20})));
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
-            {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
+  BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
+            {{-60,80},{-20,120}}), iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
     y_start=1)
@@ -66,9 +59,10 @@ model Generation_Hot
     annotation (Placement(transformation(extent={{-52,-20},{-32,0}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{70,38},{90,58}})));
-  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={{
-            10,70},{50,110}}), iconTransformation(extent={{30,88},{50,110}})));
-  Modelica.Blocks.Math.Gain gain2(k=-1) annotation (Placement(transformation(
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{10,70},{50,110}}), iconTransformation(extent={{30,88},{50,110}})));
+  Modelica.Blocks.Math.Gain gain2(k=-1000)
+                                        annotation (Placement(transformation(
         extent={{-3,-3},{3,3}},
         rotation=90,
         origin={-81,33})));
@@ -79,6 +73,13 @@ model Generation_Hot
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-2,48})));
+  Fluid.Sources.Boundary_pT bou3(
+    p=100000,
+    redeclare package Medium = Medium_Water,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-62,54})));
 equation
   connect(Valve6.port_1, Fluid_out_Hot) annotation (Line(points={{8,16},{70,16},
           {70,38},{100,38}}, color={0,127,255}));
@@ -130,10 +131,6 @@ equation
           26.5},{-81,26.5},{-81,29.4}}, color={0,0,127}));
   connect(gain2.y, measureBus.Electrical_power_CHP) annotation (Line(points={{
           -81,36.3},{-80,36.3},{-80,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
-  connect(cHP.port_b, bou3.ports[1])
-    annotation (Line(points={{-66,16},{-55.2,16}}, color={0,127,255}));
-  connect(bou3.ports[2], fan2.port_a)
-    annotation (Line(points={{-56.8,16},{-46,16}}, color={0,127,255}));
   connect(senMasFlo.port_a, Fluid_in_Hot) annotation (Line(points={{-10,-20},{
           70,-20},{70,-38},{96,-38}}, color={0,127,255}));
   connect(fan1.port_a, Valve6.port_3)
@@ -144,6 +141,10 @@ equation
           -11.6,48},{-39.9,48},{-39.9,100.1}}, color={0,0,127}));
   connect(fan1.P, measureBus.Pump_generation_hot_power_Boiler) annotation (Line(
         points={{-9.2,56.8},{-9.2,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
+  connect(cHP.port_b, fan2.port_a)
+    annotation (Line(points={{-66,16},{-46,16}}, color={0,127,255}));
+  connect(bou3.ports[1], cHP.port_b)
+    annotation (Line(points={{-62,50},{-62,16},{-66,16}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_Hot;

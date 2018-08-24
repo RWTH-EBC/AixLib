@@ -1,9 +1,9 @@
 within AixLib.Building.Benchmark.BusSystem;
-expandable connector measureBus
+expandable connector Bus_measure
   "Control bus that is adapted to the signals connected to it"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  // Weather
+// Weather
   SI.Temp_K AirTemp;
   Real WaterInAir;
 
@@ -68,7 +68,6 @@ expandable connector measureBus
   SI.Temp_K Air_out "Befor Heatexchanger";
   SI.Temp_K Air_in "After Heatexchanger";
   SI.Temp_K Air_RLT_Central_out;
-
 
   //MassflowRates
   SI.MassFlowRate heatpump_cold_massflow;
@@ -147,4 +146,4 @@ expandable connector measureBus
   Real Minute;
   Integer Hour;
   Integer WeekDay;
-end measureBus;
+end Bus_measure;

@@ -123,11 +123,12 @@ model Generation_AirCooling
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{50,90},{70,110}})));
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
-            {-120,-20},{-80,20}}), iconTransformation(extent={{-110,-10},{-90,
+  BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
+            {{-120,-20},{-80,20}}), iconTransformation(extent={{-110,-10},{-90,
             10}})));
-  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={{
-            -130,-90},{-90,-50}}), iconTransformation(extent={{-110,-70},{-90,-50}})));
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{-130,-90},{-90,-50}}), iconTransformation(extent={{-110,-70},{-90,
+            -50}})));
 equation
   connect(Fluid_in_cool_airCooler,hex1. port_a1)
     annotation (Line(points={{-60,100},{-60,88},{-12,88}}, color={0,127,255}));

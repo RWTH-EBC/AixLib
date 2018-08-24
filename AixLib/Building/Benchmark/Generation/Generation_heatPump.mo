@@ -48,14 +48,14 @@ model Generation_heatPump
     annotation (Placement(transformation(extent={{-14,18},{16,38}})));
 
   Fluid.Sources.Boundary_pT bou1(
-    nPorts=2,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    p=100000) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+    p=100000,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
         rotation=-90,
-        origin={60,-24})));
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-60,80},
-            {-20,120}}),         iconTransformation(extent={{-50,90},{-30,110}})));
+        origin={50,-22})));
+  BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
+            {{-60,80},{-20,120}}), iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
     y_start=1)
@@ -83,8 +83,8 @@ model Generation_heatPump
     annotation (Placement(transformation(extent={{-14,-38},{16,-18}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 25)
     annotation (Placement(transformation(extent={{-76,-24},{-56,-4}})));
-  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={{
-            10,70},{50,110}}), iconTransformation(extent={{30,90},{50,110}})));
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{10,70},{50,110}}), iconTransformation(extent={{30,90},{50,110}})));
   Fluid.Sensors.Temperature senTem(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-68,-60},{-48,-40}})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
@@ -106,8 +106,6 @@ equation
     annotation (Line(points={{-12,21},{-12,-21}},          color={0,127,255}));
   connect(heatPumpDetailed_small.port_evaOut, Fluid_out_cold) annotation (Line(
         points={{-12,-35},{-12,-60},{-100,-60}}, color={0,127,255}));
-  connect(heatPumpDetailed_small.port_conIn, bou1.ports[1]) annotation (Line(
-        points={{14,-35},{62,-35},{62,-34}},                   color={0,127,255}));
   connect(heatPumpDetailed_small.port_conOut, heatPumpDetailed_big.port_conIn)
     annotation (Line(points={{14,-21},{14,21}}, color={0,127,255}));
   connect(heatPumpDetailed_big.port_conOut, fan4.port_a) annotation (Line(
@@ -140,8 +138,6 @@ equation
           0,127}));
   connect(senTem2.port, fan4.port_a) annotation (Line(points={{16,48},{16,44},{
           30,44},{30,60},{34,60}}, color={0,127,255}));
-  connect(heatPumpDetailed_small.port_conIn, senTem3.port) annotation (Line(
-        points={{14,-35},{41,-35},{41,-18},{40,-18}}, color={0,127,255}));
   connect(senTem1.T, measureBus.Heatpump_cold_big_in) annotation (Line(points={
           {-53,70},{-40,70},{-40,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
   connect(senTem.T, measureBus.Heatpump_cold_small_out) annotation (Line(points={{-51,-50},
@@ -158,8 +154,6 @@ equation
         points={{-60,60},{-60,40},{-12,40},{-12,35}}, color={0,127,255}));
   connect(senMasFlo1.port_a, Fluid_in_warm)
     annotation (Line(points={{84,-60},{100,-60}}, color={0,127,255}));
-  connect(senMasFlo1.port_b, bou1.ports[2])
-    annotation (Line(points={{64,-60},{64,-34},{58,-34}}, color={0,127,255}));
   connect(senMasFlo.m_flow, measureBus.heatpump_cold_massflow) annotation (Line(
         points={{-78,71},{-78,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
   connect(senMasFlo1.m_flow, measureBus.heatpump_warm_massflow) annotation (
@@ -168,6 +162,12 @@ equation
     annotation (Line(points={{-58,-60},{-100,-60}}, color={0,127,255}));
   connect(heatPumpDetailed_small.port_evaOut, senTem.port) annotation (Line(
         points={{-12,-35},{-12,-60},{-58,-60}}, color={0,127,255}));
+  connect(senMasFlo1.port_b, heatPumpDetailed_small.port_conIn) annotation (
+      Line(points={{64,-60},{50,-60},{50,-35},{14,-35}}, color={0,127,255}));
+  connect(senTem3.port, heatPumpDetailed_small.port_conIn)
+    annotation (Line(points={{40,-18},{40,-35},{14,-35}}, color={0,127,255}));
+  connect(bou1.ports[1], heatPumpDetailed_small.port_conIn)
+    annotation (Line(points={{50,-26},{50,-35},{14,-35}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_heatPump;

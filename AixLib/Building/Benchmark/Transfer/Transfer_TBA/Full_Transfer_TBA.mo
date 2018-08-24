@@ -53,7 +53,7 @@ model Full_Transfer_TBA
         rotation=90,
         origin={62,26})));
 
-  BusSystem.ControlBus controlBus
+  BusSystem.Bus_Control controlBus
     annotation (Placement(transformation(extent={{80,20},{120,60}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve_WarmCold_Workshop_2(
     redeclare package Medium = Medium_Water,
@@ -179,7 +179,7 @@ model Full_Transfer_TBA
         rotation=90,
         origin={-70,-2})));
 
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{80,-60},{120,-20}})));
   TBA_Pipe_OpenPlanOffice OpenPlanOffice(
     pipe_length=8,
@@ -193,32 +193,31 @@ model Full_Transfer_TBA
     pipe_height=3)
     annotation (Placement(transformation(extent={{-86,60},{-66,80}})));
 equation
-  connect(Workshop.Fluid_in, Valve_WarmCold_Workshop_1.port_2)
+  connect(Workshop.Fluid_in_cold, Valve_WarmCold_Workshop_1.port_2)
     annotation (Line(points={{62,60},{62,32}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_1.port_3, Fluid_in_warm)
     annotation (Line(points={{56,26},{-100,26}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_1.port_1, Fluid_in_cold)
     annotation (Line(points={{62,20},{62,-40},{-100,-40}}, color={0,127,255}));
-  connect(Workshop.Fluid_out, Valve_WarmCold_Workshop_2.port_2)
+  connect(Workshop.Fluid_out_cold, Valve_WarmCold_Workshop_2.port_2)
     annotation (Line(points={{74,60},{74,-8}}, color={0,127,255}));
-  connect(Valve_WarmCold_Canteen_1.port_2, Canteen.Fluid_in)
+  connect(Valve_WarmCold_Canteen_1.port_2, Canteen.Fluid_in_cold)
     annotation (Line(points={{24,24},{24,60}}, color={0,127,255}));
-  connect(Valve_WarmCold_MultiPersonOffice_1.port_2, Multipersonoffice.Fluid_in)
-    annotation (Line(points={{-12,24},{-12,60}},
-                                               color={0,127,255}));
-  connect(Valve_WarmCold_ConferenceRoom_1.port_2, Conferenceroom.Fluid_in)
+  connect(Valve_WarmCold_MultiPersonOffice_1.port_2, Multipersonoffice.Fluid_in_cold)
+    annotation (Line(points={{-12,24},{-12,60}}, color={0,127,255}));
+  connect(Valve_WarmCold_ConferenceRoom_1.port_2, Conferenceroom.Fluid_in_cold)
     annotation (Line(points={{-46,24},{-46,60}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_2.port_3, Fluid_out_warm)
     annotation (Line(points={{68,-14},{-100,-14}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_2.port_1, Fluid_out_cold) annotation (Line(
         points={{74,-20},{74,-80},{-100,-80}}, color={0,127,255}));
-  connect(Canteen.Fluid_out, Valve_WarmCold_Canteen_2.port_2)
+  connect(Canteen.Fluid_out_cold, Valve_WarmCold_Canteen_2.port_2)
     annotation (Line(points={{36,60},{36,4}}, color={0,127,255}));
-  connect(Conferenceroom.Fluid_out, Valve_WarmCold_ConferenceRoom_2.port_2)
+  connect(Conferenceroom.Fluid_out_cold, Valve_WarmCold_ConferenceRoom_2.port_2)
     annotation (Line(points={{-34,60},{-34,4}}, color={0,127,255}));
-  connect(Multipersonoffice.Fluid_out, Valve_WarmCold_MultiPersonOffice_2.port_2)
+  connect(Multipersonoffice.Fluid_out_cold, Valve_WarmCold_MultiPersonOffice_2.port_2)
     annotation (Line(points={{0,60},{0,32},{4.44089e-016,32},{4.44089e-016,4}},
-                                            color={0,127,255}));
+        color={0,127,255}));
   connect(Valve_WarmCold_OpenPlanOffice_1.port_3, Fluid_in_warm) annotation (
       Line(points={{-88,18},{-90,18},{-90,26},{-100,26}}, color={0,127,255}));
   connect(Valve_WarmCold_ConferenceRoom_1.port_3, Fluid_in_warm) annotation (
@@ -256,24 +255,22 @@ equation
   connect(Valve_WarmCold_Canteen_2.port_1, Fluid_out_cold)
     annotation (Line(points={{36,-8},{36,-80},{-100,-80}}, color={0,127,255}));
   connect(Valve_WarmCold_Workshop_1.y, controlBus.Valve_TBA_WarmCold_workshop_1)
-    annotation (Line(points={{69.2,26},{86,26},{86,40.1},{100.1,40.1}},
-                                                                      color={0,
+    annotation (Line(points={{69.2,26},{86,26},{86,40},{100,40}},     color={0,
           0,127}));
   connect(Valve_WarmCold_Canteen_1.y, controlBus.Valve_TBA_WarmCold_canteen_1)
-    annotation (Line(points={{31.2,18},{44,18},{44,40},{86,40},{86,0},{86,0},{86,
-          40},{100.1,40},{100.1,40.1}},
+    annotation (Line(points={{31.2,18},{44,18},{44,40},{86,40},{86,0},{86,0},{
+          86,40},{100,40},{100,40}},
                                  color={0,0,127}));
   connect(Valve_WarmCold_MultiPersonOffice_1.y, controlBus.Valve_TBA_WarmCold_multipersonoffice_1)
-    annotation (Line(points={{-4.8,18},{10,18},{10,40},{86,40},{86,0},{86,0},{86,
-          40.1},{100.1,40.1}},
-                             color={0,0,127}));
+    annotation (Line(points={{-4.8,18},{10,18},{10,40},{86,40},{86,0},{86,0},{
+          86,40},{100,40}},  color={0,0,127}));
   connect(Valve_WarmCold_ConferenceRoom_1.y, controlBus.Valve_TBA_WarmCold_conferenceroom_1)
     annotation (Line(points={{-38.8,18},{-24,18},{-24,40},{86,40},{86,0},{86,0},
-          {86,40.1},{100.1,40.1}},
+          {86,40},{100,40}},
                        color={0,0,127}));
   connect(Valve_WarmCold_OpenPlanOffice_1.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
     annotation (Line(points={{-74.8,18},{-60,18},{-60,40},{86,40},{86,0},{86,0},
-          {86,40.1},{100.1,40.1}},
+          {86,40},{100,40}},
                        color={0,0,127}));
   connect(Workshop.HeatPort_TBA, HeatPort_TBA[5]) annotation (Line(points={{64,80},
           {64,90},{40,90},{40,108}},     color={191,0,0}));
@@ -284,20 +281,20 @@ equation
   connect(Conferenceroom.HeatPort_TBA, HeatPort_TBA[2]) annotation (Line(points={{-44,80},
           {-44,90},{40,90},{40,96}},          color={191,0,0}));
   connect(Conferenceroom.valve, controlBus.Valve_TBA_Cold_ConferenceRoom_Temp)
-    annotation (Line(points={{-50,66},{-54,66},{-54,40},{86,40},{86,0},{86,0},{86,
-          40.1},{100.1,40.1}},
+    annotation (Line(points={{-50,66},{-54,66},{-54,40},{86,40},{86,0},{86,0},{
+          86,40},{100,40}},
                  color={0,0,127}));
   connect(Multipersonoffice.valve, controlBus.Valve_TBA_Cold_MultiPersonOffice_Temp)
-    annotation (Line(points={{-16,66},{-20,66},{-20,40},{86,40},{86,0},{86,0},{86,
-          40.1},{100.1,40.1}},
+    annotation (Line(points={{-16,66},{-20,66},{-20,40},{86,40},{86,0},{86,0},{
+          86,40},{100,40}},
                  color={0,0,127}));
   connect(Canteen.valve, controlBus.Valve_TBA_Cold_Canteen_Temp) annotation (
-      Line(points={{20,66},{16,66},{16,40},{86,40},{86,0},{86,0},{86,40.1},{100.1,
-          40.1}},                                                         color=
+      Line(points={{20,66},{16,66},{16,40},{86,40},{86,0},{86,0},{86,40},{100,
+          40}},                                                           color=
          {0,0,127}));
   connect(Workshop.valve, controlBus.Valve_TBA_Cold_Workshop_Temp) annotation (
-      Line(points={{58,66},{54,66},{54,40},{86,40},{86,0},{86,0},{86,40.1},{100.1,
-          40.1}},                                                         color=
+      Line(points={{58,66},{54,66},{54,40},{86,40},{86,0},{86,0},{86,40},{100,
+          40}},                                                           color=
          {0,0,127}));
   connect(Conferenceroom.pump, controlBus.Pump_TBA_ConferenceRoom_y)
     annotation (Line(points={{-50,72.8},{-54,72.8},{-54,40},{86,40},{86,0},{86,0},
@@ -356,19 +353,19 @@ equation
   connect(Workshop.Power_pump, measureBus.Pump_TBA_workshop) annotation (Line(
         points={{78,76},{86,76},{86,-39.9},{100.1,-39.9}}, color={0,0,127}));
   connect(Valve_WarmCold_OpenPlanOffice_2.y, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
-    annotation (Line(points={{-62.8,-2},{-62,-2},{-62,0},{-60,0},{-60,40.1},{
-          100.1,40.1}}, color={0,0,127}));
+    annotation (Line(points={{-62.8,-2},{-62,-2},{-62,0},{-60,0},{-60,40},{100,
+          40}},         color={0,0,127}));
   connect(Valve_WarmCold_ConferenceRoom_2.y, controlBus.Valve_TBA_WarmCold_conferenceroom_1)
-    annotation (Line(points={{-26.8,-2},{-24,-2},{-24,40.1},{100.1,40.1}},
+    annotation (Line(points={{-26.8,-2},{-24,-2},{-24,40},{100,40}},
         color={0,0,127}));
   connect(Valve_WarmCold_MultiPersonOffice_2.y, controlBus.Valve_TBA_WarmCold_multipersonoffice_1)
-    annotation (Line(points={{7.2,-2},{10,-2},{10,40.1},{100.1,40.1}}, color={0,
+    annotation (Line(points={{7.2,-2},{10,-2},{10,40},{100,40}},       color={0,
           0,127}));
   connect(Valve_WarmCold_Canteen_2.y, controlBus.Valve_TBA_WarmCold_canteen_1)
-    annotation (Line(points={{43.2,-2},{44,-2},{44,40.1},{100.1,40.1}}, color={
+    annotation (Line(points={{43.2,-2},{44,-2},{44,40},{100,40}},       color={
           0,0,127}));
   connect(Valve_WarmCold_Workshop_2.y, controlBus.Valve_TBA_WarmCold_workshop_1)
-    annotation (Line(points={{81.2,-14},{86,-14},{86,40.1},{100.1,40.1}}, color=
+    annotation (Line(points={{81.2,-14},{86,-14},{86,40},{100,40}},       color=
          {0,0,127}));
   connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points=
          {{-80,80},{-80,90},{40,90},{40,92}}, color={191,0,0}));
@@ -389,7 +386,7 @@ equation
     annotation (Line(points={{-66,76},{-60,76},{-60,40},{86,40},{86,-39.9},{
           100.1,-39.9}}, color={0,0,127}));
   connect(OpenPlanOffice.valve, controlBus.Valve_TBA_Cold_OpenPlanOffice_Temp)
-    annotation (Line(points={{-86,66},{-92,66},{-92,40.1},{100.1,40.1}}, color=
+    annotation (Line(points={{-86,66},{-92,66},{-92,40},{100,40}},       color=
           {0,0,127}));
   connect(OpenPlanOffice.pump, controlBus.Pump_TBA_OpenPlanOffice_y)
     annotation (Line(points={{-86,72.8},{-90,72.8},{-92,72.8},{-92,72},{-92,

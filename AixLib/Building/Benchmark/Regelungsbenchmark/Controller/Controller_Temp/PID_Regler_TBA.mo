@@ -30,7 +30,7 @@ model PID_Regler_TBA
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
     Ti=20) annotation (Placement(transformation(extent={{20,40},{40,60}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Continuous.LimPID PID_TBA_Conferenceroom_Cold(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -67,7 +67,7 @@ model PID_Regler_TBA
     yMax=0,
     yMin=-1)
            annotation (Placement(transformation(extent={{20,-40},{40,-60}})));
-  BusSystem.ControlBus controlBus
+  BusSystem.Bus_Control controlBus
     annotation (Placement(transformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 15)
     annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
@@ -179,15 +179,15 @@ equation
   connect(Openplanoffice.warm, PID_TBA_Openplanoffice_Warm.y)
     annotation (Line(points={{-48,24},{-48,90},{-59,90}}, color={0,0,127}));
   connect(Openplanoffice.WarmCold, controlBus.Valve_TBA_WarmCold_OpenPlanOffice_1)
-    annotation (Line(points={{-39,11},{-34,11},{-34,0.1},{100.1,0.1}}, color={0,
+    annotation (Line(points={{-39,11},{-34,11},{-34,0},{100,0}},       color={0,
           0,127}));
   connect(Openplanoffice.Tempvalve, controlBus.Valve_TBA_Cold_OpenPlanOffice_Temp)
-    annotation (Line(points={{-39,17},{-34,17},{-34,0.1},{100.1,0.1}}, color={0,
+    annotation (Line(points={{-39,17},{-34,17},{-34,0},{100,0}},       color={0,
           0,127}));
   connect(Conferenceroom.warm, PID_TBA_Conferenceroom_Warm.y) annotation (Line(
         points={{-12,24},{-12,30},{0,30},{0,90},{-9,90}}, color={0,0,127}));
-  connect(Multipersonoffice.warm, PID_TBA_Multipersonoffice_Warm.y) annotation
-    (Line(points={{22,24},{22,30},{50,30},{50,90},{41,90}}, color={0,0,127}));
+  connect(Multipersonoffice.warm, PID_TBA_Multipersonoffice_Warm.y) annotation (
+     Line(points={{22,24},{22,30},{50,30},{50,90},{41,90}}, color={0,0,127}));
   connect(Canteen.warm, PID_TBA_Canteen_Warm.y) annotation (Line(points={{-48,
           -4},{-48,-4},{-48,0},{-70,0},{-70,30},{-54,30},{-54,50},{-59,50}},
         color={0,0,127}));
@@ -222,28 +222,28 @@ equation
   connect(Canteen.y_pump, controlBus.Pump_TBA_Canteen_y) annotation (Line(
         points={{-60,-18},{-64,-18},{-64,0.1},{100.1,0.1}}, color={0,0,127}));
   connect(Canteen.Tempvalve, controlBus.Valve_TBA_Cold_Canteen_Temp)
-    annotation (Line(points={{-39,-11},{-34,-11},{-34,0.1},{100.1,0.1}}, color=
+    annotation (Line(points={{-39,-11},{-34,-11},{-34,0},{100,0}},       color=
           {0,0,127}));
   connect(Workshop.Tempvalve, controlBus.Valve_TBA_Cold_Workshop_Temp)
-    annotation (Line(points={{31,-11},{36,-11},{36,0.1},{100.1,0.1}}, color={0,
+    annotation (Line(points={{31,-11},{36,-11},{36,0},{100,0}},       color={0,
           0,127}));
   connect(Multipersonoffice.Tempvalve, controlBus.Valve_TBA_Cold_MultiPersonOffice_Temp)
-    annotation (Line(points={{31,17},{36,17},{36,0.1},{100.1,0.1}}, color={0,0,
+    annotation (Line(points={{31,17},{36,17},{36,0},{100,0}},       color={0,0,
           127}));
   connect(Conferenceroom.Tempvalve, controlBus.Valve_TBA_Cold_ConferenceRoom_Temp)
-    annotation (Line(points={{-3,17},{0,17},{0,0.1},{100.1,0.1}}, color={0,0,
+    annotation (Line(points={{-3,17},{0,17},{0,0},{100,0}},       color={0,0,
           127}));
   connect(Canteen.WarmCold, controlBus.Valve_TBA_WarmCold_canteen_1)
-    annotation (Line(points={{-39,-17},{-34,-17},{-34,0.1},{100.1,0.1}}, color=
+    annotation (Line(points={{-39,-17},{-34,-17},{-34,0},{100,0}},       color=
           {0,0,127}));
   connect(Conferenceroom.WarmCold, controlBus.Valve_TBA_WarmCold_conferenceroom_1)
-    annotation (Line(points={{-3,11},{0,11},{0,0.1},{100.1,0.1}}, color={0,0,
+    annotation (Line(points={{-3,11},{0,11},{0,0},{100,0}},       color={0,0,
           127}));
   connect(Multipersonoffice.WarmCold, controlBus.Valve_TBA_WarmCold_multipersonoffice_1)
-    annotation (Line(points={{31,11},{36,11},{36,0.1},{100.1,0.1}}, color={0,0,
+    annotation (Line(points={{31,11},{36,11},{36,0},{100,0}},       color={0,0,
           127}));
   connect(Workshop.WarmCold, controlBus.Valve_TBA_WarmCold_workshop_1)
-    annotation (Line(points={{31,-17},{36,-17},{36,0.1},{100.1,0.1}}, color={0,
+    annotation (Line(points={{31,-17},{36,-17},{36,0},{100,0}},       color={0,
           0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

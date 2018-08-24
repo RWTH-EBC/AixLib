@@ -1,6 +1,6 @@
 within AixLib.Building.Benchmark.Regelungsbenchmark.Controller;
 model Testcontroller
-  BusSystem.ControlBus controlBus
+  BusSystem.Bus_Control controlBus
     annotation (Placement(transformation(extent={{80,-40},{120,0}})));
   Modelica.Blocks.Sources.RealExpression TSet_Boiler(y=273.15 + 95)
     annotation (Placement(transformation(extent={{-40,-78},{-60,-58}})));
@@ -36,7 +36,7 @@ model Testcontroller
     annotation (Placement(transformation(extent={{-40,44},{-60,64}})));
   Modelica.Blocks.Sources.RealExpression Valve_WarmCold_OPO
     annotation (Placement(transformation(extent={{-40,86},{-20,106}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{80,0},{120,40}})));
   Modelica.Blocks.Sources.RealExpression Valve_WarmCold_CR
     annotation (Placement(transformation(extent={{-40,72},{-20,92}})));

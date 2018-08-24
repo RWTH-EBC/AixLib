@@ -25,8 +25,6 @@ model Generation_geothermalProbe
             {-74,70}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe2(
     allowFlowReversal=true,
-    isCircular=true,
-    diameter=0.02,
     roughness=2.5e-5,
     height_ab=0,
     redeclare model FlowModel =
@@ -42,27 +40,29 @@ model Generation_geothermalProbe
     useLumpedPressure=false,
     useInnerPortProperties=false,
     modelStructure=Modelica.Fluid.Types.ModelStructure.av_vb,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer (
-          T_ambient=293.15),
-    crossArea=1,
-    perimeter=0.5,
     C_start=fill(0, 0),
     X_start={0},
     redeclare package Medium = Medium_Water,
-    length=Probe_depth,
     nParallel=n_probes,
+    length=Probe_depth*2,
+    diameter=0.032,
+    redeclare model HeatTransfer =
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
+        (alpha0=0.4/0.0029),
+    isCircular=false,
+    crossArea=0.0008042477,
+    perimeter=0.032,
     p_a_start=100000,
     p_b_start=100000,
-    T_start=293.15)
+    T_start=283.15)
     annotation (Placement(transformation(extent={{-30,-26},{6,10}})));
 
     parameter Modelica.SIunits.Length Probe_depth = 0 annotation(Dialog(tab = "General"));
     parameter Real n_probes = 1 "Number of Probes" annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K Earthtemperature_start = 283.15 annotation(Dialog(tab = "General"));
 
-  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={
-            {-28,72},{12,112}}), iconTransformation(extent={{-12,88},{12,112}})));
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{-28,72},{12,112}}), iconTransformation(extent={{-12,88},{12,112}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{36,60},{56,80}})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)

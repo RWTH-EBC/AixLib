@@ -75,7 +75,8 @@ model Generation
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_warm,
     alphaHC2=alphaHC2_warm,
-    data=DataBase.Storage.Benchmark_7500l())
+    data=DataBase.Storage.Benchmark_7500l(),
+    TStart=343.15)
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
@@ -110,7 +111,8 @@ model Generation
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_cold,
-    data=DataBase.Storage.Benchmark_12000l())
+    data=DataBase.Storage.Benchmark_12000l(),
+    TStart=283.15)
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
         Medium_Water)
@@ -200,7 +202,8 @@ model Generation
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_warm,
     alphaHC2=alphaHC2_warm,
-    data=DataBase.Storage.Benchmark_7500l())
+    data=DataBase.Storage.Benchmark_7500l(),
+    TStart=308.15)
     annotation (Placement(transformation(extent={{16,-18},{46,20}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
         Medium_Water)
@@ -213,10 +216,10 @@ model Generation
   Fluid.Sources.Boundary_pT bou4(
     redeclare package Medium = Medium_Water,
     p=100000,
-    nPorts=2) annotation (Placement(transformation(
+    nPorts=1) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
-        origin={42,98})));
+        origin={30,102})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve7(
     y_start=0,
     redeclare package Medium = Medium_Water,
@@ -235,8 +238,8 @@ model Generation
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{2,8},{-14,24}})));
 
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
-            {-16,80},{24,120}}), iconTransformation(extent={{30,90},{50,110}})));
+  BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
+            {{-16,80},{24,120}}), iconTransformation(extent={{30,90},{50,110}})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
     y_start=0)
@@ -248,7 +251,7 @@ model Generation
     y_start=0)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
-        origin={48,28})));
+        origin={56,28})));
   Fluid.Movers.SpeedControlled_y fan3(redeclare package Medium = Medium_Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
     y_start=0)
@@ -261,9 +264,8 @@ model Generation
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-68,-60})));
-  BusSystem.measureBus measureBus
-    annotation (Placement(transformation(extent={{-70,70},{-30,110}}),
-        iconTransformation(extent={{-50,90},{-30,110}})));
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{-70,70},{-30,110}}), iconTransformation(extent={{-50,90},{-30,110}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe(
     redeclare package Medium = Medium_Water,
     nNodes=pipe_nodes,
@@ -281,7 +283,7 @@ model Generation
     height_ab=0)       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={72,26})));
+        origin={78,28})));
   Modelica.Fluid.Pipes.DynamicPipe pipe2(
     redeclare package Medium = Medium_Water,
     nNodes=pipe_nodes,
@@ -291,6 +293,20 @@ model Generation
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={80,-94})));
+  Fluid.Sources.Boundary_pT bou2(
+    redeclare package Medium = Medium_Water,
+    p=100000,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={36,34})));
+  Fluid.Sources.Boundary_pT bou3(
+    redeclare package Medium = Medium_Water,
+    p=100000,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={12,-92})));
 equation
   connect(generation_Hot.Fluid_in_Hot, HotWater.portHC1Out) annotation (Line(
         points={{-60.4,66.2},{-32,66.2},{-32,67.94},{17.8125,67.94}},
@@ -373,23 +389,19 @@ equation
   connect(Valve1.port_3, generation_geothermalProbe.Fluid_in_Geothermal)
     annotation (Line(points={{-78,-67},{-74,-67},{-74,-80},{-56,-80}}, color={0,
           127,255}));
-  connect(HotWater.fluidportTop2, bou4.ports[1]) annotation (Line(points={{37.6875,
-          82.19},{37.6875,94},{42.8,94}}, color={0,127,255}));
   connect(Fluid_out_hot, Fluid_out_hot) annotation (Line(points={{100,80},{94,80},
           {94,80},{100,80}}, color={0,127,255}));
-  connect(bou4.ports[2], fan2.port_a)
-    annotation (Line(points={{41.2,94},{52,94}}, color={0,127,255}));
   connect(fan2.y, controlBus.Pump_Hotwater_y) annotation (Line(points={{60,103.6},
           {60,108},{20,108},{20,100},{12,100},{12,100.1},{4.1,100.1}}, color={0,
           0,127}));
   connect(fan3.port_a, ColdWater.fluidportBottom1) annotation (Line(points={{48,
           -96},{28,-96},{28,-94},{27.9375,-94},{27.9375,-88.38}}, color={0,127,255}));
   connect(WarmWater.fluidportTop2, fan1.port_a) annotation (Line(points={{35.6875,
-          20.19},{35.6875,28},{40,28}}, color={0,127,255}));
+          20.19},{35.6875,28},{48,28}}, color={0,127,255}));
   connect(fan3.y, controlBus.Pump_Coldwater_y) annotation (Line(points={{56,-105.6},
           {56,-110},{4.1,-110},{4.1,100.1}}, color={0,0,127}));
-  connect(fan1.y, controlBus.Pump_Warmwater_y) annotation (Line(points={{48,37.6},
-          {48,40},{4.1,40},{4.1,100.1}}, color={0,0,127}));
+  connect(fan1.y, controlBus.Pump_Warmwater_y) annotation (Line(points={{56,37.6},
+          {56,40},{4.1,40},{4.1,100.1}}, color={0,0,127}));
   connect(fan4.port_a, generation_geothermalProbe.Fulid_out_Geothermal)
     annotation (Line(points={{-68,-68},{-68,-70},{-44,-70},{-44,-80}}, color={0,
           127,255}));
@@ -423,7 +435,7 @@ equation
         color={0,0,127}));
   connect(fan2.P, measureBus.Pump_Hotwater_power) annotation (Line(points={{68.8,101.2},
           {70,101.2},{70,88},{-49.9,88},{-49.9,90.1}},         color={0,0,127}));
-  connect(fan1.P, measureBus.Pump_Warmwater_power) annotation (Line(points={{56.8,
+  connect(fan1.P, measureBus.Pump_Warmwater_power) annotation (Line(points={{64.8,
           35.2},{60,35.2},{60,40},{4,40},{4,90},{-49.9,90},{-49.9,90.1}},
         color={0,0,127}));
   connect(fan3.P, measureBus.Pump_Coldwater_power) annotation (Line(points={{64.8,
@@ -447,9 +459,9 @@ equation
     annotation (Line(points={{68,94},{74,94}}, color={0,127,255}));
   connect(pipe.port_b, Fluid_out_hot) annotation (Line(points={{94,94},{98,94},{
           98,80},{100,80}}, color={0,127,255}));
-  connect(fan1.port_b, pipe1.port_a) annotation (Line(points={{56,28},{60,28},{60,
-          26},{62,26}}, color={0,127,255}));
-  connect(pipe1.port_b, Fluid_out_warm) annotation (Line(points={{82,26},{90,26},
+  connect(fan1.port_b, pipe1.port_a) annotation (Line(points={{64,28},{68,28}},
+                        color={0,127,255}));
+  connect(pipe1.port_b, Fluid_out_warm) annotation (Line(points={{88,28},{90,28},
           {90,20},{100,20}}, color={0,127,255}));
   connect(fan3.port_b, pipe2.port_a) annotation (Line(points={{64,-96},{68,-96},
           {68,-94},{70,-94}}, color={0,127,255}));
@@ -458,6 +470,14 @@ equation
   connect(ColdWater.TBottom, measureBus.ColdWater_TBottom) annotation (Line(
         points={{18,-84.2},{12,-84.2},{12,-84},{4,-84},{4,90.1},{-49.9,90.1}},
         color={0,0,127}));
+  connect(WarmWater.fluidportTop2, bou2.ports[1]) annotation (Line(points={{
+          35.6875,20.19},{35.6875,30},{36,30}}, color={0,127,255}));
+  connect(fan3.port_a, bou3.ports[1])
+    annotation (Line(points={{48,-96},{12,-96}}, color={0,127,255}));
+  connect(fan2.port_a, HotWater.fluidportTop2) annotation (Line(points={{52,94},
+          {37.6875,94},{37.6875,82.19}}, color={0,127,255}));
+  connect(bou4.ports[1], HotWater.fluidportTop2) annotation (Line(points={{30,
+          98},{30,94},{37.6875,94},{37.6875,82.19}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation;

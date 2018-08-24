@@ -13,7 +13,7 @@ model TBA_Test
         origin={32,-14})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=300)
     annotation (Placement(transformation(extent={{72,64},{92,84}})));
-  BusSystem.measureBus measureBus1
+  BusSystem.Bus_measure measureBus1
     annotation (Placement(transformation(extent={{-4,54},{36,94}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=0)
     annotation (Placement(transformation(extent={{84,38},{104,58}})));

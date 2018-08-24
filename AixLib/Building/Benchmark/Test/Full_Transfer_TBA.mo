@@ -72,13 +72,13 @@ equation
     annotation (Line(points={{10,-40},{-100,-40}}, color={0,127,255}));
   connect(val2.port_a, Fluid_out_cold)
     annotation (Line(points={{-18,-80},{-100,-80}}, color={0,127,255}));
-  connect(val2.port_b, OpenPlanOffice.Fluid_out)
+  connect(val2.port_b, OpenPlanOffice.Fluid_out_cold)
     annotation (Line(points={{2,-80},{86,-80},{86,40}}, color={0,127,255}));
-  connect(val3.port_a, OpenPlanOffice.Fluid_in)
+  connect(val3.port_a, OpenPlanOffice.Fluid_in_cold)
     annotation (Line(points={{30,-40},{74,-40},{74,40}}, color={0,127,255}));
-  connect(val4.port_a, OpenPlanOffice.Fluid_in)
+  connect(val4.port_a, OpenPlanOffice.Fluid_in_cold)
     annotation (Line(points={{20,26},{74,26},{74,40}}, color={0,127,255}));
-  connect(val1.port_b, OpenPlanOffice.Fluid_out)
+  connect(val1.port_b, OpenPlanOffice.Fluid_out_cold)
     annotation (Line(points={{2,-14},{86,-14},{86,40}}, color={0,127,255}));
   connect(ramp2.y, val4.y)
     annotation (Line(points={{-45,64},{10,64},{10,38}}, color={0,0,127}));

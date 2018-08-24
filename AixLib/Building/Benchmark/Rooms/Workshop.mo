@@ -156,7 +156,7 @@ model Workshop
     annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_Workshop
     annotation (Placement(transformation(extent={{50,90},{70,110}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{8,12},{28,32}})));

@@ -66,11 +66,11 @@ model Weather
     annotation (Placement(transformation(extent={{-14,-30},{-34,-50}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
     annotation (Placement(transformation(extent={{22,-48},{10,-32}})));
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-90,
-            -120},{-50,-80}}),      iconTransformation(extent={{-70,-110},{-50,
+  BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
+            {{-90,-120},{-50,-80}}), iconTransformation(extent={{-70,-110},{-50,
             -90}})));
-  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={
-            {-52,-120},{-12,-80}}), iconTransformation(extent={{-10,-110},{10,
+  BusSystem.Bus_measure measureBus annotation (Placement(transformation(extent=
+            {{-52,-120},{-12,-80}}), iconTransformation(extent={{-10,-110},{10,
             -90}})));
   BusSystem.InternalBus internalBus
     annotation (Placement(transformation(extent={{30,-132},{70,-92}}),

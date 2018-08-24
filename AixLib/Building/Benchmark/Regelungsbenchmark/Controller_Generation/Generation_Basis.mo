@@ -1,35 +1,37 @@
 within AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Generation;
 model Generation_Basis
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-20,80},{20,120}})));
-  BusSystem.ControlBus controlBus
+  BusSystem.Bus_Control controlBus
     annotation (Placement(transformation(extent={{-20,-120},{20,-80}})));
   Modelica.Blocks.Logical.Or or1
     annotation (Placement(transformation(extent={{-46,60},{-26,80}})));
   Modelica.Blocks.Logical.Or or2
     annotation (Placement(transformation(extent={{-46,20},{-26,40}})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=90)
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=273.15 + 90)
     annotation (Placement(transformation(extent={{80,-54},{60,-34}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=26)
     annotation (Placement(transformation(extent={{80,-66},{60,-46}})));
-  Modelica.Blocks.Sources.RealExpression realExpression4(y=90)
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=273.15 + 90)
     annotation (Placement(transformation(extent={{80,-20},{60,0}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresis(uLow=273.15 + 60, uHigh=273.15
+  Modelica.Blocks.Logical.Hysteresis hysteresis(                  uHigh=273.15
          + 80,
-    pre_y_start=true)
+    pre_y_start=true,
+    uLow=273.15 + 45)
     annotation (Placement(transformation(extent={{-92,-16},{-80,-4}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresis1(uLow=273.15 + 70, uHigh=273.15
-         + 90,
-    pre_y_start=true)
+  Modelica.Blocks.Logical.Hysteresis hysteresis1(
+    pre_y_start=true,
+    uHigh=273.15 + 70,
+    uLow=273.15 + 55)
     annotation (Placement(transformation(extent={{-92,-56},{-80,-44}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresis2(uLow=273.15 + 8, uHigh=273.15
-         + 11)
+  Modelica.Blocks.Logical.Hysteresis hysteresis2(uLow=273.15 + 3, uHigh=273.15
+         + 6)
     annotation (Placement(transformation(extent={{-92,12},{-80,24}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis3(uLow=273.15 + 35, uHigh=273.15
          + 45)
     annotation (Placement(transformation(extent={{-92,28},{-80,40}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresis4(                  uHigh=273.15
-         + 13, uLow=273.15 + 9)
+  Modelica.Blocks.Logical.Hysteresis hysteresis4(uLow=273.15 + 5, uHigh=273.15
+         + 9)
     annotation (Placement(transformation(extent={{-92,52},{-80,64}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis5(uLow=273.15 + 30, uHigh=273.15
          + 40)

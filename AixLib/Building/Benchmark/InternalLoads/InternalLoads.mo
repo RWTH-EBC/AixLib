@@ -17,7 +17,7 @@ model InternalLoads
 
   BusSystem.InternalBus internalBus
     annotation (Placement(transformation(extent={{72,-40},{112,-80}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{72,20},{112,-20}})));
 equation
   connect(internalLoads_Power.AddPower, AddPower)

@@ -17,9 +17,10 @@ model Full_Transfer_RLT
     pipe_diameter_hot=0.0126,
     pipe_diameter_cold=0.0273,
     pipe_diameter_air=0.415,
+    RLT_tau=6.25,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_tau=6.25)
+    V_air=0.55)
                annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -46,7 +47,7 @@ model Full_Transfer_RLT
         Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
-  BusSystem.ControlBus controlBus
+  BusSystem.Bus_Control controlBus
     annotation (Placement(transformation(extent={{82,8},{122,48}})));
   RLT Canteen(
     RLT_m_flow_nominal=1.1,
@@ -60,9 +61,10 @@ model Full_Transfer_RLT
     pipe_diameter_hot=0.0273,
     pipe_diameter_cold=0.0273,
     pipe_diameter_air=0.54,
+    RLT_tau=3.75,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_tau=3.75)
+    V_air=0.92)
               annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
 
   RLT MultiPersonOffice(
@@ -77,9 +79,10 @@ model Full_Transfer_RLT
     pipe_diameter_hot=0.0126,
     pipe_diameter_cold=0.0161,
     pipe_diameter_air=0.146,
+    RLT_tau=12,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_tau=12)
+    V_air=0.07)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
 
   RLT ConferenceRoom(
@@ -94,12 +97,13 @@ model Full_Transfer_RLT
     pipe_diameter_hot=0.0126,
     pipe_diameter_cold=0.0126,
     pipe_diameter_air=0.297,
+    RLT_tau=17,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_tau=17)
+    V_air=0.28)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
 
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{82,-50},{122,-10}})));
   RLT_Central Central(
     m_flow_nominal_hot=3.649,

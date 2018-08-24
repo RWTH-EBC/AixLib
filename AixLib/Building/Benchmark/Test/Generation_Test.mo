@@ -52,7 +52,7 @@ model Generation_Test
     annotation (Placement(transformation(extent={{-34,-58},{-14,-38}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=300)
     annotation (Placement(transformation(extent={{72,64},{92,84}})));
-  BusSystem.measureBus measureBus1
+  BusSystem.Bus_measure measureBus1
     annotation (Placement(transformation(extent={{-4,54},{36,94}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=0)
     annotation (Placement(transformation(extent={{64,-24},{84,-4}})));

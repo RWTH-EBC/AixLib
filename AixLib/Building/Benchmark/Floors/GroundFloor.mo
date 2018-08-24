@@ -14,7 +14,7 @@ model GroundFloor
     annotation (Placement(transformation(extent={{20,-20},{60,20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature GroundTemp(T=286.65)
     annotation (Placement(transformation(extent={{-36,-56},{-24,-44}})));
-  BusSystem.measureBus measureBus
+  BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{82,0},{122,40}})));
   BusSystem.InternalBus internalBus
     annotation (Placement(transformation(extent={{80,40},{120,80}})));

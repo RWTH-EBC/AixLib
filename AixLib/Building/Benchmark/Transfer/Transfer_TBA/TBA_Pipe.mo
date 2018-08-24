@@ -57,12 +57,6 @@ model TBA_Pipe
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=-90,
         origin={-60,28})));
-  Modelica.Blocks.Interfaces.RealInput valve
-    "Actuator position (0: closed, 1: open)"
-    annotation (Placement(transformation(extent={{-112,-52},{-88,-28}})));
-  Modelica.Blocks.Interfaces.RealInput pump
-    "Constant normalized rotational speed"
-    annotation (Placement(transformation(extent={{-112,16},{-88,40}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-42,-30},{-22,-10}})));
   Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
@@ -100,6 +94,12 @@ model TBA_Pipe
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={60,-8})));
+  Modelica.Blocks.Interfaces.RealInput valve_temp
+    "Actuator position (0: closed, 1: open)"
+    annotation (Placement(transformation(extent={{-112,-52},{-88,-28}})));
+  Modelica.Blocks.Interfaces.RealInput pump
+    "Constant normalized rotational speed"
+    annotation (Placement(transformation(extent={{-112,16},{-88,40}})));
 equation
   connect(vol.heatPort, HeatPort_TBA) annotation (Line(points={{-8,56},{-24,56},
           {-24,56},{-40,56},{-40,100},{-40,100}},
@@ -108,17 +108,11 @@ equation
     annotation (Line(points={{-60,-100},{-60,-46}}, color={0,127,255}));
   connect(fan2.port_b, vol.ports[1])
     annotation (Line(points={{-60,36},{-60,46},{0,46}}, color={0,127,255}));
-  connect(val1.port_3, vol1.ports[1]) annotation (Line(points={{-54,-40},{4,-40},
-          {4,-41.8},{60,-41.8}},
-                             color={0,127,255}));
-  connect(vol1.ports[2], Fluid_out)
-    annotation (Line(points={{60,-40.6},{60,-100}}, color={0,127,255}));
-  connect(val1.y, valve)
-    annotation (Line(points={{-67.2,-40},{-100,-40}}, color={0,0,127}));
-  connect(fan2.y, pump)
-    annotation (Line(points={{-69.6,28},{-100,28}}, color={0,0,127}));
-  connect(senTem1.port, vol1.ports[3]) annotation (Line(points={{32,-30},{60,-30},
-          {60,-39.4}}, color={0,127,255}));
+  connect(vol1.ports[1], Fluid_out)
+    annotation (Line(points={{60,-41.8},{60,-100}}, color={0,127,255}));
+  connect(senTem1.port, vol1.ports[2]) annotation (Line(points={{32,-30},{60,
+          -30},{60,-40.6}},
+                       color={0,127,255}));
   connect(vol.ports[2], senMasFlo.port_b)
     annotation (Line(points={{4,46},{60,46},{60,36}}, color={0,127,255}));
   connect(senMasFlo.m_flow, m_flow) annotation (Line(points={{71,26},{80,26},{80,
@@ -137,8 +131,14 @@ equation
     annotation (Line(points={{-60,4},{-60,20}}, color={0,127,255}));
   connect(pipe.port_a, senMasFlo.port_a)
     annotation (Line(points={{60,2},{60,16}}, color={0,127,255}));
-  connect(pipe.port_b, vol1.ports[4])
-    annotation (Line(points={{60,-18},{60,-38.2}}, color={0,127,255}));
+  connect(pipe.port_b, vol1.ports[3])
+    annotation (Line(points={{60,-18},{60,-39.4}}, color={0,127,255}));
+  connect(val1.port_3, vol1.ports[4]) annotation (Line(points={{-54,-40},{4,-40},
+          {4,-38.2},{60,-38.2}}, color={0,127,255}));
+  connect(fan2.y, pump)
+    annotation (Line(points={{-69.6,28},{-100,28}}, color={0,0,127}));
+  connect(val1.y, valve_temp) annotation (Line(points={{-67.2,-40},{-82.6,-40},
+          {-82.6,-40},{-100,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end TBA_Pipe;

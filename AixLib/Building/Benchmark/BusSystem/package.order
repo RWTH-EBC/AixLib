@@ -1,3 +1,5 @@
-ControlBus
-measureBus
+Bus_Control
+Bus_measure
 InternalBus
+Logger_Bus_Control
+Logger_Bus_measure
