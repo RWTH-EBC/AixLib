@@ -95,6 +95,11 @@ model Weather
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table=[-1,0; 0.9999,0; 1,
         3.375; 2,3.375], smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-32,-78},{-12,-58}})));
+  Modelica.Blocks.Interfaces.RealOutput RLT_Velocity
+    "Connector of Real output signals"
+    annotation (Placement(transformation(extent={{-100,30},{-120,50}})));
+  Modelica.Blocks.Math.Gain gain3(k=10090/(4*3600))
+    annotation (Placement(transformation(extent={{-78,36},{-86,44}})));
 equation
   connect(weather.WindDirection, gain.u)
     annotation (Line(points={{-19,33},{0,33},{0,41},{9,41}}, color={0,0,127}));
@@ -188,6 +193,10 @@ equation
           -68},{-40,-68},{-40,-80},{-69.9,-80},{-69.9,-99.9}}, color={0,0,127}));
   connect(combiTable1Ds.y[1], boundary.m_flow_in) annotation (Line(points={{-11,
           -68},{-8,-68},{-8,-12},{-44,-12}}, color={0,0,127}));
+  connect(RLT_Velocity, gain3.y)
+    annotation (Line(points={{-110,40},{-86.4,40}}, color={0,0,127}));
+  connect(gain3.u, combiTable1Ds.y[1]) annotation (Line(points={{-77.2,40},{-60,
+          40},{-60,0},{-8,0},{-8,-68},{-11,-68}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

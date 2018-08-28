@@ -15,6 +15,8 @@ model Generation_Aircooling_v2
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_aircooler = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dpHeatexchanger_nominal = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Area Area_Heatexchanger_Air = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.ThermalConductance Thermal_Conductance_Cold = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.ThermalConductance Thermal_Conductance_Warm = 0 annotation(Dialog(tab = "General"));
 
   Fluid.Sources.MassFlowSource_T boundary(
     use_m_flow_in=true,
@@ -41,25 +43,6 @@ model Generation_Aircooling_v2
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-16,44})));
-  Fluid.HeatExchangers.ConstantEffectiveness hex1(
-    redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Water,
-    m1_flow_nominal=m_flow_nominal_generation_coldwater,
-    m2_flow_nominal=m_flow_nominal_generation_aircooler,
-    dp1_nominal=dpHeatexchanger_nominal,
-    dp2_nominal=dpHeatexchanger_nominal)
-    annotation (Placement(transformation(extent={{-12,72},{8,92}})));
-  Fluid.HeatExchangers.ConstantEffectiveness hex2(
-    redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Water,
-    m1_flow_nominal=m_flow_nominal_generation_warmwater,
-    m2_flow_nominal=m_flow_nominal_generation_aircooler,
-    dp1_nominal=dpHeatexchanger_nominal,
-    dp2_nominal=dpHeatexchanger_nominal)                  annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={76,4})));
   Fluid.Sources.Boundary_pT bou1(
     redeclare package Medium = Medium_Water,
     p=100000,
@@ -89,11 +72,10 @@ model Generation_Aircooling_v2
   Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-2,-18},{18,2}})));
   Fluid.MixingVolumes.MixingVolume vol1(
-    V=0.1,
     redeclare package Medium = Medium_Water,
     nPorts=2,
-    m_flow_nominal=m_flow_nominal_generation_aircooler)
-           annotation (Placement(transformation(extent={{-2,-26},{8,-16}})));
+    m_flow_nominal=m_flow_nominal_generation_aircooler,
+    V=0.1) annotation (Placement(transformation(extent={{-2,-26},{8,-16}})));
   Fluid.MixingVolumes.MixingVolume vol2(
     nPorts=2,
     redeclare package Medium = Medium_Air,
@@ -140,25 +122,73 @@ model Generation_Aircooling_v2
     annotation (Placement(transformation(extent={{-16,-20},{-36,0}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrder(T=30)
     annotation (Placement(transformation(extent={{-62,-30},{-50,-18}})));
+  Fluid.FixedResistances.PressureDrop res1(
+    redeclare package Medium = Medium_Water,
+    dp_nominal=dpHeatexchanger_nominal,
+    m_flow_nominal=m_flow_nominal_generation_coldwater)
+    annotation (Placement(transformation(extent={{20,78},{32,90}})));
+  Fluid.MixingVolumes.MixingVolume vol3(
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    m_flow_nominal=m_flow_nominal_generation_coldwater,
+    V=0.01)
+           annotation (Placement(transformation(extent={{-6,84},{6,96}})));
+  Fluid.MixingVolumes.MixingVolume vol4(
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    m_flow_nominal=m_flow_nominal_generation_aircooler,
+    V=0.01)
+           annotation (Placement(transformation(extent={{-6,78},{6,66}})));
+  Fluid.FixedResistances.PressureDrop res2(
+    m_flow_nominal=m_flow_nominal_generation_aircooler,
+    redeclare package Medium = Medium_Water,
+    dp_nominal=dpHeatexchanger_nominal)
+    annotation (Placement(transformation(extent={{20,72},{32,84}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(G=
+        Thermal_Conductance_Cold)
+                             annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={-29,81})));
+  Fluid.MixingVolumes.MixingVolume vol5(
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    m_flow_nominal=m_flow_nominal_generation_aircooler,
+    V=0.01)
+           annotation (Placement(transformation(extent={{-6,6},{6,-6}},
+        rotation=-90,
+        origin={66,20})));
+  Fluid.MixingVolumes.MixingVolume vol6(
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    V=0.01,
+    m_flow_nominal=m_flow_nominal_generation_warmwater)
+           annotation (Placement(transformation(extent={{6,6},{-6,-6}},
+        rotation=90,
+        origin={84,20})));
+  Fluid.FixedResistances.PressureDrop res3(
+    redeclare package Medium = Medium_Water,
+    dp_nominal=dpHeatexchanger_nominal,
+    m_flow_nominal=m_flow_nominal_generation_warmwater)
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={78,0})));
+  Fluid.FixedResistances.PressureDrop res4(
+    redeclare package Medium = Medium_Water,
+    dp_nominal=dpHeatexchanger_nominal,
+    m_flow_nominal=m_flow_nominal_generation_aircooler)
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={72,0})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor1(G=
+        Thermal_Conductance_Warm)
+                             annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=0,
+        origin={75,37})));
 equation
-  connect(Fluid_in_cool_airCooler,hex1. port_a1)
-    annotation (Line(points={{-60,100},{-60,88},{-12,88}}, color={0,127,255}));
-  connect(hex1.port_b1,Fluid_out_cool_airCooler)
-    annotation (Line(points={{8,88},{60,88},{60,100}}, color={0,127,255}));
-  connect(Fluid_in_warm_airCooler,hex2. port_a1)
-    annotation (Line(points={{100,60},{82,60},{82,14}}, color={0,127,255}));
-  connect(hex2.port_b1,Fluid_out_warm_airCooler)  annotation (Line(points={{82,
-          -6},{82,-6},{82,-60},{100,-60}}, color={0,127,255}));
-  connect(Valve8.port_1,hex1. port_a2) annotation (Line(points={{-16,54},{-16,58},
-          {8,58},{8,76}},     color={0,127,255}));
-  connect(Valve8.port_3,hex2. port_a2) annotation (Line(points={{-6,44},{52,44},
-          {52,-6},{70,-6}}, color={0,127,255}));
-  connect(hex2.port_b2,hex1. port_b2) annotation (Line(points={{70,14},{70,42},
-          {18,42},{18,64},{-22,64},{-22,76},{-12,76}}, color={0,127,255}));
   connect(Valve8.y,controlBus. Valve8) annotation (Line(points={{-28,44},{-64,44},
           {-64,0.1},{-99.9,0.1}},     color={0,0,127}));
-  connect(fan4.port_a,hex1. port_b2) annotation (Line(points={{18,18},{18,64},{-22,
-          64},{-22,76},{-12,76}}, color={0,127,255}));
   connect(fan4.y,controlBus. Pump_Aircooler_y) annotation (Line(points={{27.6,
           10},{38,10},{38,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(combiTable1D.u[1],controlBus. Fan_Aircooler) annotation (Line(points={{-96,-24},
@@ -218,6 +248,38 @@ equation
           {-46,-24},{-46,-40},{-34,-40}}, color={0,0,127}));
   connect(gain.u, boundary.m_flow_in) annotation (Line(points={{-16.6,-37},{-46,
           -37},{-46,-40},{-34,-40}}, color={0,0,127}));
+  connect(vol4.ports[1], res2.port_a)
+    annotation (Line(points={{-1.2,78},{20,78}}, color={0,127,255}));
+  connect(Valve8.port_1, vol4.ports[2])
+    annotation (Line(points={{-16,54},{-16,78},{1.2,78}}, color={0,127,255}));
+  connect(Fluid_in_cool_airCooler, vol3.ports[1]) annotation (Line(points={{-60,
+          100},{-60,84},{-1.2,84}}, color={0,127,255}));
+  connect(vol3.ports[2], res1.port_a)
+    annotation (Line(points={{1.2,84},{20,84}}, color={0,127,255}));
+  connect(res1.port_b, Fluid_out_cool_airCooler)
+    annotation (Line(points={{32,84},{60,84},{60,100}}, color={0,127,255}));
+  connect(res2.port_b, fan4.port_a) annotation (Line(points={{32,78},{40,78},{40,
+          60},{18,60},{18,18}}, color={0,127,255}));
+  connect(thermalConductor.port_b, vol3.heatPort)
+    annotation (Line(points={{-29,86},{-29,90},{-6,90}}, color={191,0,0}));
+  connect(thermalConductor.port_a, vol4.heatPort)
+    annotation (Line(points={{-29,76},{-29,72},{-6,72}}, color={191,0,0}));
+  connect(res4.port_a, vol5.ports[1])
+    annotation (Line(points={{72,6},{72,21.2}}, color={0,127,255}));
+  connect(res3.port_a, vol6.ports[1])
+    annotation (Line(points={{78,6},{78,21.2}}, color={0,127,255}));
+  connect(res4.port_b, fan4.port_a) annotation (Line(points={{72,-6},{72,-12},{50,
+          -12},{50,28},{18,28},{18,18}}, color={0,127,255}));
+  connect(vol5.ports[2], Valve8.port_3) annotation (Line(points={{72,18.8},{72,44},
+          {-6,44},{-6,44}}, color={0,127,255}));
+  connect(vol6.ports[2], Fluid_in_warm_airCooler)
+    annotation (Line(points={{78,18.8},{78,60},{100,60}}, color={0,127,255}));
+  connect(res3.port_b, Fluid_out_warm_airCooler)
+    annotation (Line(points={{78,-6},{78,-60},{100,-60}}, color={0,127,255}));
+  connect(vol5.heatPort, thermalConductor1.port_a)
+    annotation (Line(points={{66,26},{66,37},{70,37}}, color={191,0,0}));
+  connect(thermalConductor1.port_b, vol6.heatPort) annotation (Line(points={{80,
+          37},{84,37},{84,36},{84,36},{84,26}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_Aircooling_v2;

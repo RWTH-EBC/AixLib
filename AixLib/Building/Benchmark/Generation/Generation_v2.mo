@@ -47,6 +47,8 @@ model Generation_v2
     parameter Real m_flow_nominal_generation_air_max annotation(Dialog(tab = "generation_aircooler"));
     parameter Real m_flow_nominal_generation_air_min annotation(Dialog(tab = "generation_aircooler"));
     parameter Modelica.SIunits.Area Area_Heatexchanger_Air = 0 annotation(Dialog(tab = "generation_aircooler"));
+    parameter Modelica.SIunits.ThermalConductance Thermal_Conductance_Cold = 0 annotation(Dialog(tab = "generation_aircooler"));
+    parameter Modelica.SIunits.ThermalConductance Thermal_Conductance_Warm = 0 annotation(Dialog(tab = "generation_aircooler"));
 
     //Geothermal Probe
     parameter Modelica.SIunits.Length Probe_depth = 0 annotation(Dialog(tab = "Geothermal Probe"));
@@ -295,7 +297,9 @@ model Generation_v2
     redeclare package Medium_Water = Medium_Water,
     dpValve_nominal_generation_aircooler=dpValve_nominal_generation_aircooler,
     dpHeatexchanger_nominal=dpHeatexchanger_nominal,Area_Heatexchanger_Air=
-        Area_Heatexchanger_Air)
+        Area_Heatexchanger_Air,
+    Thermal_Conductance_Cold=Thermal_Conductance_Cold,
+    Thermal_Conductance_Warm=Thermal_Conductance_Warm)
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature

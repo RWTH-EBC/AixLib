@@ -1,5 +1,5 @@
 within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
-model RLT
+model RLT_OpenPlanOffice_v2
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
   replaceable package Medium_Air =
@@ -20,38 +20,24 @@ model RLT
     parameter Real RLT_m_flow_nominal = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure RLT_dp_Heatexchanger = 0 annotation(Dialog(tab = "RLT"));
     parameter Modelica.SIunits.Time RLT_tau = 0 annotation(Dialog(tab = "General"));
-    parameter Modelica.SIunits.Volume V_air = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Area Area_Heatexchanger_AirWater_Hot = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Area Area_Heatexchanger_AirWater_Cold = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Area Area_pipe_air = 0 annotation(Dialog(tab = "General"));
 
-  Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
-    redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Air,
-    dp2_nominal=RLT_dp_Heatexchanger,
-    dp1_nominal(displayUnit="bar") = 20000,
-    m1_flow_nominal=m_flow_nominal_hot,
-    m2_flow_nominal=RLT_m_flow_nominal)
-    annotation (Placement(transformation(extent={{-42,-70},{-62,-50}})));
-  Fluid.HeatExchangers.ConstantEffectiveness Ext_Cold(
-    redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Air,
-    dp1_nominal(displayUnit="bar") = 20000,
-    dp2_nominal=RLT_dp_Heatexchanger,
-    m1_flow_nominal=m_flow_nominal_cold,
-    m2_flow_nominal=RLT_m_flow_nominal)
-    annotation (Placement(transformation(extent={{34,-70},{14,-50}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{70,90},{90,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{30,90},{50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-90,90},{-70,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
@@ -118,7 +104,7 @@ model RLT
         rotation=90,
         origin={34,80})));
   Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to8 per,
     y_start=0)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
@@ -128,7 +114,7 @@ model RLT
   Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-80,-34})));
+        origin={-80,-20})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-60,26},{-40,46}})));
   Fluid.Sensors.Temperature senTem3(redeclare package Medium = Medium_Water)
@@ -183,12 +169,11 @@ model RLT
   Fluid.MixingVolumes.MixingVolume vol3(
     nPorts=2,
     redeclare package Medium = Medium_Air,
-    V=V_air,
-    m_flow_nominal=RLT_m_flow_nominal)
-              annotation (Placement(transformation(
+    m_flow_nominal=RLT_m_flow_nominal,
+    V=1)      annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=0,
-        origin={-16,-72})));
+        origin={-6,-72})));
   Modelica.Fluid.Pipes.DynamicPipe pipe1(
     redeclare package Medium = Medium_Water,
     diameter=pipe_diameter_hot,
@@ -233,6 +218,65 @@ model RLT
     nPorts=2,
     tau=RLT_tau)
     annotation (Placement(transformation(extent={{-86,-66},{-74,-78}})));
+  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
+    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
+    Model=1,
+    A=Area_Heatexchanger_AirWater_Hot)                                                                                                                                                      annotation(Placement(transformation(extent={{-5.5,-6},
+            {5.5,6}},
+        rotation=90,
+        origin={-60.5,-54})));
+  Fluid.FixedResistances.PressureDrop res(
+    redeclare package Medium = Medium_Water,
+    m_flow_nominal=m_flow_nominal_hot,
+    dp_nominal(displayUnit="bar") = 20000)
+    annotation (Placement(transformation(extent={{-64,-40},{-74,-30}})));
+  Fluid.MixingVolumes.MixingVolume vol2(
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    m_flow_nominal=m_flow_nominal_hot,
+    V=0.01)
+           annotation (Placement(transformation(extent={{-50,-42},{-40,-52}})));
+  Fluid.MixingVolumes.MixingVolume vol4(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    V=1,
+    m_flow_nominal=RLT_m_flow_nominal)
+           annotation (Placement(transformation(extent={{-50,-66},{-40,-56}})));
+  Fluid.Sensors.MassFlowRate senMasFlo2(redeclare package Medium = Medium_Air)
+    annotation (Placement(transformation(extent={{62,-76},{82,-56}})));
+  Modelica.Blocks.Math.Gain gain(k=1/(1.2041*Area_pipe_air))
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+        rotation=90,
+        origin={72,-48})));
+  Fluid.MixingVolumes.MixingVolume vol5(
+    nPorts=2,
+    redeclare package Medium = Medium_Air,
+    V=1,
+    m_flow_nominal=RLT_m_flow_nominal)
+           annotation (Placement(transformation(extent={{46,-66},{56,-56}})));
+  Fluid.MixingVolumes.MixingVolume vol6(
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    m_flow_nominal=m_flow_nominal_cold,
+    V=0.01)
+           annotation (Placement(transformation(extent={{46,-42},{56,-52}})));
+  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside1(
+    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
+    Model=1,
+    A=Area_Heatexchanger_AirWater_Cold)                                                                                                                                                     annotation(Placement(transformation(extent={{-5.5,-6},
+            {5.5,6}},
+        rotation=90,
+        origin={33.5,-54})));
+  Fluid.FixedResistances.PressureDrop res1(
+    redeclare package Medium = Medium_Water,
+    m_flow_nominal=m_flow_nominal_cold,
+    dp_nominal(displayUnit="bar") = 20000)
+    annotation (Placement(transformation(extent={{36,-40},{26,-30}})));
+  Fluid.FixedResistances.PressureDrop res2(
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=RLT_m_flow_nominal,
+    dp_nominal(displayUnit="bar") = RLT_dp_Heatexchanger*2)
+    annotation (Placement(transformation(extent={{12,-72},{24,-60}})));
 equation
   connect(val1.port_3, vol.ports[1]) annotation (Line(points={{-46,60},{-64,60},
           {-64,58.2},{-80,58.2}},
@@ -254,10 +298,6 @@ equation
     annotation (Line(points={{40,100},{40,79.4},{40,79.4}},color={0,127,255}));
   connect(Fluid_in_cold, val2.port_1)
     annotation (Line(points={{80,100},{80,86},{80,86}}, color={0,127,255}));
-  connect(Ext_Cold.port_a1, fan1.port_b) annotation (Line(points={{34,-54},{60,-54},
-          {60,-40},{80,-40},{80,-8}}, color={0,127,255}));
-  connect(fan2.port_b, Ext_Warm.port_a1) annotation (Line(points={{-40,-28},{-40,
-          -54},{-42,-54}},           color={0,127,255}));
   connect(fan2.y, pump_hot) annotation (Line(points={{-30.4,-20},{-20,-20},{-20,
           -40},{100,-40}}, color={0,0,127}));
   connect(senTem2.port, vol.ports[3]) annotation (Line(points={{-72,26},{-80,26},
@@ -266,12 +306,8 @@ equation
     annotation (Line(points={{50,50},{40,50},{40,80.6}}, color={0,127,255}));
   connect(senTem4.port, val2.port_2)
     annotation (Line(points={{70,50},{80,50},{80,74}}, color={0,127,255}));
-  connect(senMasFlo1.port_a, Ext_Cold.port_b1) annotation (Line(points={{40,-24},
-          {40,-40},{0,-40},{0,-54},{14,-54}},color={0,127,255}));
-  connect(Ext_Warm.port_b1, senMasFlo.port_a) annotation (Line(points={{-62,-54},
-          {-80,-54},{-80,-44}}, color={0,127,255}));
-  connect(senMasFlo.m_flow, massflow_hot) annotation (Line(points={{-91,-34},{
-          -114,-34},{-114,-80},{-80,-80},{-80,-100}}, color={0,0,127}));
+  connect(senMasFlo.m_flow, massflow_hot) annotation (Line(points={{-91,-20},{-114,
+          -20},{-114,-80},{-80,-80},{-80,-100}},      color={0,0,127}));
   connect(fan2.P, power_pump_hot) annotation (Line(points={{-32.8,-28.8},{-32.8,
           -80},{-40,-80},{-40,-100}}, color={0,0,127}));
   connect(fan1.P, power_pump_cold) annotation (Line(points={{87.2,-8.8},{87.2,
@@ -287,34 +323,67 @@ equation
           {20,40},{20,80},{-100,80}}, color={0,0,127}));
   connect(senTem4.T, cold_in) annotation (Line(points={{77,60},{78,60},{78,40},
           {-100,40}}, color={0,0,127}));
-  connect(Ext_Warm.port_b2, vol3.ports[1])
-    annotation (Line(points={{-42,-66},{-17.2,-66}}, color={0,127,255}));
-  connect(vol3.ports[2], Ext_Cold.port_a2)
-    annotation (Line(points={{-14.8,-66},{14,-66}}, color={0,127,255}));
+  connect(senMasFlo.port_b, pipe1.port_a)
+    annotation (Line(points={{-80,-10},{-80,-6}}, color={0,127,255}));
   connect(pipe1.port_b, vol.ports[4])
     annotation (Line(points={{-80,14},{-80,61.8}}, color={0,127,255}));
-  connect(pipe1.port_a, senMasFlo.port_b)
-    annotation (Line(points={{-80,-6},{-80,-24}}, color={0,127,255}));
-  connect(pipe.port_a, val1.port_2)
-    annotation (Line(points={{-40,16},{-40,54}}, color={0,127,255}));
-  connect(senTem1.port, val1.port_2) annotation (Line(points={{-50,26},{-46,26},
-          {-46,28},{-40,28},{-40,54}}, color={0,127,255}));
-  connect(pipe.port_b, fan2.port_a) annotation (Line(points={{-40,-4},{-40,-12},
-          {-40,-12}}, color={0,127,255}));
-  connect(pipe3.port_b, vol1.ports[4])
-    annotation (Line(points={{40,30},{40,81.8}}, color={0,127,255}));
+  connect(val1.port_2, pipe.port_a)
+    annotation (Line(points={{-40,54},{-40,16}}, color={0,127,255}));
+  connect(pipe.port_b, fan2.port_a)
+    annotation (Line(points={{-40,-4},{-40,-12}}, color={0,127,255}));
   connect(pipe3.port_a, senMasFlo1.port_b)
     annotation (Line(points={{40,10},{40,-4}}, color={0,127,255}));
+  connect(pipe3.port_b, vol1.ports[4])
+    annotation (Line(points={{40,30},{40,81.8}}, color={0,127,255}));
   connect(pipe2.port_b, fan1.port_a)
     annotation (Line(points={{80,16},{80,8}}, color={0,127,255}));
   connect(pipe2.port_a, val2.port_2)
     annotation (Line(points={{80,36},{80,74}}, color={0,127,255}));
+  connect(senTem1.port, pipe.port_a)
+    annotation (Line(points={{-50,26},{-40,26},{-40,16}}, color={0,127,255}));
   connect(Air_in, del.ports[1])
     annotation (Line(points={{-100,-66},{-81.2,-66}}, color={0,127,255}));
-  connect(del.ports[2], Ext_Warm.port_a2)
-    annotation (Line(points={{-78.8,-66},{-62,-66}}, color={0,127,255}));
-  connect(Ext_Cold.port_b2, Air_out)
-    annotation (Line(points={{34,-66},{100,-66}}, color={0,127,255}));
+  connect(res.port_a, vol2.ports[1]) annotation (Line(points={{-64,-35},{-60,-35},
+          {-60,-42},{-46,-42}}, color={0,127,255}));
+  connect(vol2.ports[2], fan2.port_b) annotation (Line(points={{-44,-42},{-40,-42},
+          {-40,-28}}, color={0,127,255}));
+  connect(res.port_b, senMasFlo.port_a) annotation (Line(points={{-74,-35},{-80,
+          -35},{-80,-30}}, color={0,127,255}));
+  connect(del.ports[2], vol4.ports[1])
+    annotation (Line(points={{-78.8,-66},{-46,-66}}, color={0,127,255}));
+  connect(vol4.ports[2], vol3.ports[1])
+    annotation (Line(points={{-44,-66},{-7.2,-66}},  color={0,127,255}));
+  connect(heatTransfer_Outside.port_b, vol2.heatPort) annotation (Line(points={{
+          -60.5,-48.5},{-60.5,-47},{-50,-47}}, color={191,0,0}));
+  connect(heatTransfer_Outside.port_a, vol4.heatPort) annotation (Line(points={{
+          -60.5,-59.5},{-60.5,-61},{-50,-61}}, color={191,0,0}));
+  connect(senMasFlo2.port_b, Air_out)
+    annotation (Line(points={{82,-66},{100,-66}}, color={0,127,255}));
+  connect(senMasFlo2.m_flow, gain.u)
+    annotation (Line(points={{72,-55},{72,-52.8}}, color={0,0,127}));
+  connect(gain.y, heatTransfer_Outside.WindSpeedPort) annotation (Line(points={{72,
+          -43.6},{72,-40},{0,-40},{0,-80},{-56.18,-80},{-56.18,-59.06}},
+        color={0,0,127}));
+  connect(vol5.ports[1], senMasFlo2.port_a)
+    annotation (Line(points={{50,-66},{62,-66}}, color={0,127,255}));
+  connect(heatTransfer_Outside1.port_a, vol5.heatPort) annotation (Line(points={
+          {33.5,-59.5},{33.5,-61},{46,-61}}, color={191,0,0}));
+  connect(res1.port_a, vol6.ports[1]) annotation (Line(points={{36,-35},{42,-35},
+          {42,-42},{50,-42}}, color={0,127,255}));
+  connect(res1.port_b, senMasFlo1.port_a) annotation (Line(points={{26,-35},{24,
+          -35},{22,-35},{22,-34},{22,-34},{22,-34},{22,-24},{40,-24}}, color={0,
+          127,255}));
+  connect(vol6.ports[2], fan1.port_b) annotation (Line(points={{52,-42},{80,-42},
+          {80,-8},{80,-8}}, color={0,127,255}));
+  connect(heatTransfer_Outside1.port_b, vol6.heatPort) annotation (Line(points={
+          {33.5,-48.5},{33.5,-47},{46,-47}}, color={191,0,0}));
+  connect(heatTransfer_Outside1.WindSpeedPort, gain.y) annotation (Line(points={{37.82,
+          -59.06},{37.82,-80},{0,-80},{0,-40},{72,-40},{72,-43.6}},
+        color={0,0,127}));
+  connect(vol3.ports[2], res2.port_a)
+    annotation (Line(points={{-4.8,-66},{12,-66}}, color={0,127,255}));
+  connect(res2.port_b, vol5.ports[2])
+    annotation (Line(points={{24,-66},{52,-66}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end RLT;
+end RLT_OpenPlanOffice_v2;
