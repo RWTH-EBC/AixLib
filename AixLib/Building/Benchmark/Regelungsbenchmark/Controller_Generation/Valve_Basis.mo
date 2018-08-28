@@ -33,7 +33,7 @@ model Valve_Basis
     yMax=1,
     yMin=0,
     k=0.01,
-    Ti=200)  annotation (Placement(transformation(extent={{-12,64},{0,76}})));
+    Ti=200)  annotation (Placement(transformation(extent={{-12,70},{0,82}})));
   Modelica.Blocks.Continuous.LimPID Cold_Storage(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
@@ -42,18 +42,30 @@ model Valve_Basis
     Ti=200) annotation (Placement(transformation(extent={{-12,-36},{0,-24}})));
   Modelica.Blocks.Continuous.LimPID Cold_Geothermal(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=200,
     yMax=0,
     yMin=-1,
-    k=0.1)   annotation (Placement(transformation(extent={{-12,-56},{0,-44}})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=273.15 + 2)
+    k=0.1,
+    Ti=20)   annotation (Placement(transformation(extent={{-12,-56},{0,-44}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=273.15 + 2.3)
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=273.15 + 47)
-    annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-  Modelica.Blocks.Sources.RealExpression realExpression4(y=273.15 + 2.5)
+    annotation (Placement(transformation(extent={{-100,66},{-80,86}})));
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=273.15 + 3)
     annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
   Modelica.Blocks.Math.Gain gain2(k=-1)
     annotation (Placement(transformation(extent={{16,-54},{24,-46}})));
+  Modelica.Blocks.Continuous.LimPID Warm_Aircooler1(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=0.01,
+    Ti=200,
+    yMax=0,
+    yMin=-1) annotation (Placement(transformation(extent={{6,58},{18,70}})));
+  Modelica.Blocks.Sources.RealExpression realExpression5(y=273.15 + 2)
+    annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
+  Modelica.Blocks.Math.Gain gain1(k=-1)
+    annotation (Placement(transformation(extent={{24,60},{32,68}})));
+  Modelica.Blocks.Math.Min min
+    annotation (Placement(transformation(extent={{50,62},{62,74}})));
 equation
   connect(booleanExpression.y, Cold_Aircooler.u2)
     annotation (Line(points={{-39,-10},{-13.2,-10}}, color={255,0,255}));
@@ -96,7 +108,7 @@ equation
   connect(Aircooler.y, controlBus.Valve8) annotation (Line(points={{0.6,-70},{
           40,-70},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
   connect(realExpression3.y, Warm_Aircooler.u_s)
-    annotation (Line(points={{-79,70},{-13.2,70}}, color={0,0,127}));
+    annotation (Line(points={{-79,76},{-13.2,76}}, color={0,0,127}));
   connect(realExpression2.y, Cold_Geothermal.u_s)
     annotation (Line(points={{-79,-50},{-13.2,-50}}, color={0,0,127}));
   connect(realExpression4.y, Cold_Storage.u_s)
@@ -108,16 +120,27 @@ equation
         points={{-6,-37.2},{-6,-40},{-72,-40},{-72,86},{0.1,86},{0.1,100.1}},
         color={0,0,127}));
   connect(Warm_Aircooler.u_m, measureBus.WarmWater_TTop) annotation (Line(
-        points={{-6,62.8},{-6,60},{-72,60},{-72,86},{0.1,86},{0.1,100.1}},
+        points={{-6,68.8},{-6,60},{-72,60},{-72,86},{0.1,86},{0.1,100.1}},
         color={0,0,127}));
   connect(Cold_Storage.y, controlBus.Valve2) annotation (Line(points={{0.6,-30},
           {40,-30},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
-  connect(Warm_Aircooler.y, controlBus.Valve4) annotation (Line(points={{0.6,70},
-          {40,70},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
   connect(Cold_Geothermal.y, gain2.u)
     annotation (Line(points={{0.6,-50},{15.2,-50}}, color={0,0,127}));
   connect(gain2.y, controlBus.Valve1) annotation (Line(points={{24.4,-50},{40,
           -50},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
+  connect(realExpression5.y, Warm_Aircooler1.u_s) annotation (Line(points={{-79,
+          60},{-76,60},{-76,64},{4.8,64}}, color={0,0,127}));
+  connect(Warm_Aircooler1.u_m, measureBus.Aircooler_out) annotation (Line(
+        points={{12,56.8},{12,52},{4,52},{4,60},{-72,60},{-72,86},{0.1,86},{0.1,
+          100.1}}, color={0,0,127}));
+  connect(Warm_Aircooler1.y, gain1.u)
+    annotation (Line(points={{18.6,64},{23.2,64}}, color={0,0,127}));
+  connect(gain1.y, min.u2) annotation (Line(points={{32.4,64},{40,64},{40,64.4},
+          {48.8,64.4}}, color={0,0,127}));
+  connect(Warm_Aircooler.y, min.u1) annotation (Line(points={{0.6,76},{26,76},{
+          26,71.6},{48.8,71.6}}, color={0,0,127}));
+  connect(min.y, controlBus.Valve4) annotation (Line(points={{62.6,68},{70,68},
+          {70,54},{40,54},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Valve_Basis;

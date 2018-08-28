@@ -65,13 +65,13 @@ model PI_Regler_TBA_v2
   Modelica.Blocks.Continuous.LimPID PID_TBA_Workshop_Cold(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
-    Ti=20,
     yMax=0,
-    yMin=-1)
+    yMin=-1,
+    Ti=200)
            annotation (Placement(transformation(extent={{20,-40},{40,-60}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 14.5)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 14)
     annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=273.15 + 15.5)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=273.15 + 16)
     annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=273.15 + 20)
     annotation (Placement(transformation(extent={{-126,80},{-106,100}})));

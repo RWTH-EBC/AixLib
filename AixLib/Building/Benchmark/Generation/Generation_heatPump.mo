@@ -44,7 +44,9 @@ model Generation_heatPump
     dp_conNominal=dpHeatexchanger_nominal/100,
     dp_evaNominal=dpHeatexchanger_nominal/90,
     T_startEva=283.15,
-    T_startCon=313.15)
+    T_startCon=313.15,
+    PT1_cycle=true,
+    timeConstantCycle=30)
     annotation (Placement(transformation(extent={{-14,18},{16,38}})));
 
   Fluid.Sources.Boundary_pT bou1(
@@ -79,7 +81,9 @@ model Generation_heatPump
     dp_conNominal=dpHeatexchanger_nominal/100,
     dp_evaNominal=dpHeatexchanger_nominal/90,
     T_startEva=283.15,
-    T_startCon=313.15)
+    T_startCon=313.15,
+    PT1_cycle=true,
+    timeConstantCycle=30)
     annotation (Placement(transformation(extent={{-14,-38},{16,-18}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 25)
     annotation (Placement(transformation(extent={{-76,-24},{-56,-4}})));

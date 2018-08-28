@@ -31,8 +31,9 @@ model PI_Regler_RLT
     yMax=1,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=20) annotation (Placement(transformation(extent={{20,40},{40,60}})));
+    k=0.01,
+    Ti=200)
+           annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Conferenceroom_Cold(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,
@@ -62,10 +63,10 @@ model PI_Regler_RLT
            annotation (Placement(transformation(extent={{20,-80},{40,-100}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Workshop_Cold(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=20,
     yMax=0,
-    yMin=-1)
+    yMin=-1,
+    k=0.01,
+    Ti=200)
            annotation (Placement(transformation(extent={{20,-40},{40,-60}})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=273.15 + 20)
     annotation (Placement(transformation(extent={{-140,80},{-120,100}})));
@@ -113,9 +114,9 @@ model PI_Regler_RLT
     annotation (Placement(transformation(extent={{60,-44},{80,-24}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=273.15 + 18.5)
     annotation (Placement(transformation(extent={{-136,-44},{-116,-24}})));
-  Modelica.Blocks.Sources.RealExpression realExpression4(y=273.15 + 15.5)
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=273.15 + 16)
     annotation (Placement(transformation(extent={{-136,-64},{-116,-44}})));
-  Modelica.Blocks.Sources.RealExpression realExpression5(y=273.15 + 14.5)
+  Modelica.Blocks.Sources.RealExpression realExpression5(y=273.15 + 14)
     annotation (Placement(transformation(extent={{-136,40},{-116,60}})));
   Modelica.Blocks.Sources.RealExpression realExpression6(y=273.15 + 18)
     annotation (Placement(transformation(extent={{-136,22},{-116,42}})));

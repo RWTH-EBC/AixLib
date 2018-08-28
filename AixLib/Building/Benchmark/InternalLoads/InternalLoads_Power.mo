@@ -46,7 +46,8 @@ model InternalLoads_Power
     annotation (Placement(transformation(extent={{54,-10},{74,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b AddPower[5]
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  Modelica.Blocks.Math.MultiSum multiSum(k={1,1,1,1,1}, nu=5)
+  Modelica.Blocks.Math.MultiSum multiSum(               nu=10, k={1,1,1,1,1,1,1,
+        1,1,1})
     annotation (Placement(transformation(extent={{54,-68},{66,-56}})));
   Modelica.Blocks.Interfaces.RealOutput Power_Sum
     annotation (Placement(transformation(extent={{90,-72},{110,-52}})));
@@ -127,16 +128,6 @@ equation
           40.6,-40},{46,-40},{46,0},{54,0}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, AddPower)
     annotation (Line(points={{74,0},{100,0}}, color={191,0,0}));
-  connect(multiSum.u[1], add3_1.y) annotation (Line(points={{54,-58.64},{52,
-          -58.64},{52,36},{40.6,36}}, color={0,0,127}));
-  connect(multiSum.u[2], add3_2.y) annotation (Line(points={{54,-60.32},{52,
-          -60.32},{52,18},{40.6,18}}, color={0,0,127}));
-  connect(multiSum.u[3], add3_3.y) annotation (Line(points={{54,-62},{54,-62},{
-          54,-60},{52,-60},{52,0},{40.6,0}}, color={0,0,127}));
-  connect(multiSum.u[4], add3_4.y) annotation (Line(points={{54,-63.68},{54,-64},
-          {54,-64},{52,-64},{52,-20},{40.6,-20}}, color={0,0,127}));
-  connect(multiSum.u[5], add3_5.y) annotation (Line(points={{54,-65.36},{54,-66},
-          {54,-66},{52,-66},{52,-40},{40.6,-40}}, color={0,0,127}));
   connect(multiSum.y, Power_Sum)
     annotation (Line(points={{67.02,-62},{100,-62}}, color={0,0,127}));
   connect(Light_OpenPlanOffice.y, Matlab_Transition.u)
@@ -159,6 +150,35 @@ equation
     annotation (Line(points={{-29.4,-88},{-15.2,-88}}, color={0,0,127}));
   connect(Matlab_Transition4.y, add3_5.u2) annotation (Line(points={{-1.4,-88},
           {20,-88},{20,-40},{26.8,-40}}, color={0,0,127}));
+  connect(multiSum.u[1], Matlab_Transition.y) annotation (Line(points={{54,
+          -58.22},{20,-58.22},{20,-16},{-1.4,-16}}, color={0,0,127}));
+  connect(multiSum.u[2], Matlab_Transition1.y) annotation (Line(points={{54,
+          -59.06},{38,-59.06},{38,-60},{20,-60},{20,-62},{20,-62},{20,-34},{
+          -1.4,-34}}, color={0,0,127}));
+  connect(multiSum.u[3], Matlab_Transition2.y) annotation (Line(points={{54,
+          -59.9},{20,-59.9},{20,-64},{20,-64},{20,-64},{20,-52},{0,-52},{0,-52},
+          {-2,-52},{-2,-52},{-1.4,-52}}, color={0,0,127}));
+  connect(multiSum.u[4], Matlab_Transition3.y) annotation (Line(points={{54,
+          -60.74},{38,-60.74},{20,-60.74},{20,-64},{20,-66},{20,-66},{20,-70},{
+          -1.4,-70}}, color={0,0,127}));
+  connect(multiSum.u[5], Matlab_Transition4.y) annotation (Line(points={{54,
+          -61.58},{20,-61.58},{20,-72},{20,-72},{20,-88},{-1.4,-88}}, color={0,
+          0,127}));
+  connect(PowerEquiment_Workshop.y, multiSum.u[6]) annotation (Line(points={{
+          -29.4,4},{-14,4},{-14,4},{20,4},{20,-62.42},{54,-62.42}}, color={0,0,
+          127}));
+  connect(PowerEquiment_Cooking.y, multiSum.u[7]) annotation (Line(points={{
+          -29.4,24},{-10,24},{-10,24},{20,24},{20,-63.26},{54,-63.26}}, color={
+          0,0,127}));
+  connect(PowerEquiment_Conferenceroom.y, multiSum.u[8]) annotation (Line(
+        points={{-29.4,44},{-10,44},{-10,44},{20,44},{20,-64.1},{54,-64.1}},
+        color={0,0,127}));
+  connect(PowerEquiment_MultiPersonOffice.y, multiSum.u[9]) annotation (Line(
+        points={{-29.4,62},{-10,62},{-10,62},{20,62},{20,-64.94},{54,-64.94}},
+        color={0,0,127}));
+  connect(PowerEquiment_OpenPlanOffice.y, multiSum.u[10]) annotation (Line(
+        points={{-29.4,80},{-10,80},{-10,80},{20,80},{20,-65.78},{54,-65.78}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{34,98},{96,78}},
