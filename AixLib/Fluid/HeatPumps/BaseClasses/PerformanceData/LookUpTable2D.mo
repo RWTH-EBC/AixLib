@@ -27,7 +27,7 @@ model LookUpTable2D "Performance data coming from manufacturer"
   parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable= AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()
     "Data Table of HP" annotation(choicesAllMatching = true);
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-                    "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{52,70},
+    "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{52,70},
             {72,90}})));
   Utilities.Logical.SmoothSwitch switchPel
     "If HP is off, no heat will be exchanged"

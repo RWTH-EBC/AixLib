@@ -33,8 +33,8 @@ model HeatPumpReal
     final tableUpp=tableUpp,
     final useMinLocTime=useMinLocTime) if useSec
     annotation (Placement(transformation(extent={{-10,-28},{54,28}})));
-  BaseClasses.HeatPumpControl.DefrostControl defrostControl if   useDeFro
-    annotation (Placement(transformation(extent={{-102,-26},{-42,26}})));
+  BaseClasses.SecurityControls.DefrostControl defrostControl if   useDeFro
+    annotation (Placement(transformation(extent={{-104,-26},{-44,26}})));
   BaseClasses.HeatPumpControl.HPControl hPControls(final useAntilegionella=
         useAntLeg)
     annotation (Placement(transformation(extent={{-190,-26},{-134,26}})));
@@ -236,13 +236,13 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(defrostControl.sigBusHP, heatPump.sigBusHP) annotation (Line(
-      points={{-104.4,-21.32},{-104.4,-48},{76,-48},{76,-8.55},{79.82,-8.55}},
+      points={{-74,-25.48},{-74,-48},{76,-48},{76,-8.55},{79.82,-8.55}},
       color={255,204,51},
       thickness=0.5));
   connect(heatPump.port_b2, port_b2)
     annotation (Line(points={{84,-19},{84,-100}},   color={0,127,255}));
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-220,40},{-206,40},
-          {-206,5.2},{-196.16,5.2}}, color={0,0,127}));
+          {-206,5.2},{-195.6,5.2}},  color={0,0,127}));
   connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100}},
                       color={0,127,255}));
   if not useConPum then
@@ -281,7 +281,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(defrostControl.nOut, realPasThrSec.u) annotation (Line(
-      points={{-38.4,0},{-34,0},{-34,-70},{12.4,-70}},
+      points={{-40.4,0},{-34,0},{-34,-70},{12.4,-70}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(realPasThrSec.y, heatPump.nSet) annotation (Line(
@@ -298,11 +298,11 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(
-      points={{-130.08,0},{-122,0},{-122,0},{-108,0}},
+      points={{-130.08,0},{-110,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(defrostControl.nOut, securityControl.nSet) annotation (Line(
-      points={{-38.4,0},{-14.2667,0}},
+      points={{-40.4,0},{-14.2667,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, heatPump.nSet) annotation (Line(

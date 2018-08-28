@@ -1,5 +1,5 @@
 AntiLegionella
-HeatingCurve
-DefrostControl
 HPControl
-TSetToNSet
+OnOffHP
+InverterControlledHP
+BaseClasses
