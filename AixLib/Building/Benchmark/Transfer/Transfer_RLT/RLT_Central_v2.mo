@@ -22,7 +22,8 @@ model RLT_Central_v2
   Fluid.Humidifiers.SprayAirWasher_X hum(
     redeclare package Medium = Medium_Air,
     m_flow_nominal=3.375,
-    dp_nominal=1)
+    dp_nominal=1,
+    allowFlowReversal=true)
     annotation (Placement(transformation(extent={{50,-76},{70,-56}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
         Medium_Water)

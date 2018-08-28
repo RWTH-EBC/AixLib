@@ -4,8 +4,9 @@ model PI_Regler_RLT
     yMax=1,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=40) annotation (Placement(transformation(extent={{-30,80},{-10,100}})));
+    k=0.3,
+    Ti=400)
+           annotation (Placement(transformation(extent={{-30,80},{-10,100}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Openplanoffice_Hot(
     yMax=1,
     yMin=0,
@@ -35,11 +36,12 @@ model PI_Regler_RLT
     Ti=200)
            annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Conferenceroom_Cold(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
     yMax=0,
     yMin=-1,
-    Ti=40) annotation (Placement(transformation(extent={{-30,-80},{-10,-100}})));
+    k=0.3,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    Ti=400)
+           annotation (Placement(transformation(extent={{-30,-80},{-10,-100}})));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Openplanoffice_Cold(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=0.1,

@@ -1,4 +1,4 @@
-within AixLib.Building.Benchmark.Evaluation;
+within AixLib.Building.Benchmark;
 model FullModel_v4
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
@@ -41,7 +41,7 @@ model FullModel_v4
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
   AixLib.Building.Benchmark.LogModel
            logModel
-    annotation (Placement(transformation(extent={{112,-44},{132,-24}})));
+    annotation (Placement(transformation(extent={{100,-26},{120,-46}})));
   AixLib.Building.Benchmark.BusSystem.Bus_measure
                         Measure
     annotation (Placement(transformation(extent={{-120,0},{-80,40}})));
@@ -73,7 +73,9 @@ model FullModel_v4
     pipe_diameter_warmwater=0.0809,
     pipe_diameter_coldwater=0.0689,
     pipe_nodes=2,
-    n_probes=60,                  Area_Heatexchanger_Air=100,
+    n_probes=60,
+    Thermal_Conductance_Cold=115000/10,
+    Thermal_Conductance_Warm=145000/10,
     dpHeatexchanger_nominal=20000,
     dpValve_nominal_generation_hot=40000,
     T_conMax_big=328.15,
@@ -81,8 +83,7 @@ model FullModel_v4
     dpValve_nominal_warmwater=37000,
     dpValve_nominal_coldwater=40000,
     dpValve_nominal_generation_aircooler=60000,
-    Thermal_Conductance_Cold=115000/10,
-    Thermal_Conductance_Warm=145000/10,
+    Area_Heatexchanger_Air=772.39,
     Earthtemperature_start=283.15)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
@@ -107,6 +108,17 @@ model FullModel_v4
     V=5)   annotation (Placement(transformation(extent={{-5,-5},{5,5}},
         rotation=-90,
         origin={21,67})));
+  Infiltration infiltration(
+    room_V_openplanoffice=4050,
+    room_V_conferenceroom=150,
+    room_V_multipersonoffice=300,
+    room_V_canteen=1800,
+    room_V_workshop=2700,
+    n50=1.5,
+    e=0.05,
+    eps=1,
+    rho=1.2041)
+    annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
 equation
   connect(weather.measureBus,Measure)  annotation (Line(
       points={{60,82},{60,80},{-74,80},{-74,20},{-100,20}},
@@ -181,11 +193,11 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(logModel.logger_Bus_measure,Measure)  annotation (Line(
-      points={{112,-30},{88,-30},{88,-36},{-74,-36},{-74,20},{-100,20}},
+      points={{100,-40},{88,-40},{88,-36},{-74,-36},{-74,20},{-100,20}},
       color={255,204,51},
       thickness=0.5));
   connect(logModel.logger_Bus_Control,Control)  annotation (Line(
-      points={{112,-38},{98,-38},{98,-32},{-66,-32},{-66,-20},{-100,-20}},
+      points={{100,-32},{-66,-32},{-66,-20},{-100,-20}},
       color={255,204,51},
       thickness=0.5));
   connect(generation_v2_1.measureBus, Measure) annotation (Line(
@@ -224,8 +236,8 @@ equation
     annotation (Line(points={{6,68.3333},{6,90},{50,90}}, color={0,127,255}));
   connect(heatTransfer_Outside.WindSpeedPort, gain.y) annotation (Line(points={
           {16.56,93.68},{25.28,93.68},{25.28,96},{27.6,96}}, color={0,0,127}));
-  connect(gain.u, weather.RLT_Velocity)
-    annotation (Line(points={{36.8,96},{49,96}}, color={0,0,127}));
+  connect(gain.u, weather.RLT_Velocity) annotation (Line(points={{36.8,96},{42,
+          96},{42,100},{49,100}}, color={0,0,127}));
   connect(heatTransfer_Outside.port_b, vol2.heatPort)
     annotation (Line(points={{6,98},{1,98},{1,72}}, color={191,0,0}));
   connect(heatTransfer_Outside.port_a, vol1.heatPort)
@@ -238,6 +250,12 @@ equation
           14,-40},{14,-20},{48.6,-20},{48.6,0}}, color={0,127,255}));
   connect(full_Transfer_RLT.Fluid_in_hot, generation_v2_1.Fluid_out_hot)
     annotation (Line(points={{0,-42},{-60,-42}}, color={0,127,255}));
+  connect(infiltration.Air_out, office.Air_in) annotation (Line(points={{20,-80},
+          {48.6,-80},{48.6,0}}, color={0,127,255}));
+  connect(infiltration.measureBus, Measure) annotation (Line(
+      points={{0,-80},{-8,-80},{-8,-36},{-74,-36},{-74,20},{-100,20}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel_v4;

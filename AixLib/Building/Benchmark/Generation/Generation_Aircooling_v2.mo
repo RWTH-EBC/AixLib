@@ -55,10 +55,10 @@ model Generation_Aircooling_v2
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=90,
         origin={18,10})));
-  Modelica.Blocks.Tables.CombiTable1D combiTable1D(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-      table=[-1,0; 0.0,0.0; 0.0001,m_flow_nominal_generation_air_min; 1,
-        m_flow_nominal_generation_air_max; 1.1,
-        m_flow_nominal_generation_air_max])
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+      table=[-1,0,0; 0.0,0.0,0; 0.0001,m_flow_nominal_generation_air_min,3900;
+        1,m_flow_nominal_generation_air_max,6000; 1.1,
+        m_flow_nominal_generation_air_max,6000])
     annotation (Placement(transformation(extent={{-94,-34},{-74,-14}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-70,-82},{-50,-102}})));
@@ -111,7 +111,7 @@ model Generation_Aircooling_v2
     Model=1,
     A=Area_Heatexchanger_Air)                                                                                                                                                               annotation(Placement(transformation(extent={{4,-40},
             {15,-28}})));
-  Modelica.Blocks.Math.Gain gain(k=2)
+  Modelica.Blocks.Math.Gain gain(k=7.764)
     annotation (Placement(transformation(extent={{-16,-40},{-10,-34}})));
   Fluid.FixedResistances.PressureDrop res(
     m_flow_nominal=m_flow_nominal_generation_aircooler,
@@ -191,8 +191,6 @@ equation
           {-64,0.1},{-99.9,0.1}},     color={0,0,127}));
   connect(fan4.y,controlBus. Pump_Aircooler_y) annotation (Line(points={{27.6,
           10},{38,10},{38,0.1},{-99.9,0.1}}, color={0,0,127}));
-  connect(combiTable1D.u[1],controlBus. Fan_Aircooler) annotation (Line(points={{-96,-24},
-          {-99.9,-24},{-99.9,0.1}},            color={0,0,127}));
   connect(realExpression.y,feedback. u1)
     annotation (Line(points={{-81.4,-92},{-68,-92}}, color={0,0,127}));
   connect(boundary.X_in[1],measureBus. WaterInAir) annotation (Line(points={{-36,-52},
@@ -242,8 +240,6 @@ equation
   connect(temperatureSensor.T, measureBus.Aircooler_out) annotation (Line(
         points={{-36,-10},{-40,-10},{-40,-70},{-109.9,-70},{-109.9,-69.9}},
         color={0,0,127}));
-  connect(combiTable1D.y[1], firstOrder.u)
-    annotation (Line(points={{-73,-24},{-63.2,-24}}, color={0,0,127}));
   connect(firstOrder.y, boundary.m_flow_in) annotation (Line(points={{-49.4,-24},
           {-46,-24},{-46,-40},{-34,-40}}, color={0,0,127}));
   connect(gain.u, boundary.m_flow_in) annotation (Line(points={{-16.6,-37},{-46,
@@ -280,6 +276,12 @@ equation
     annotation (Line(points={{66,26},{66,37},{70,37}}, color={191,0,0}));
   connect(thermalConductor1.port_b, vol6.heatPort) annotation (Line(points={{80,
           37},{84,37},{84,36},{84,36},{84,26}}, color={191,0,0}));
+  connect(firstOrder.u, combiTable1Ds.y[1])
+    annotation (Line(points={{-63.2,-24},{-73,-24}}, color={0,0,127}));
+  connect(combiTable1Ds.y[2], measureBus.Fan_Aircooler) annotation (Line(points
+        ={{-73,-24},{-68,-24},{-68,-69.9},{-109.9,-69.9}}, color={0,0,127}));
+  connect(combiTable1Ds.u, controlBus.Fan_Aircooler) annotation (Line(points={{
+          -96,-24},{-99.9,-24},{-99.9,0.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_Aircooling_v2;

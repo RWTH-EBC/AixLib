@@ -3,7 +3,7 @@ model Benchmark
   extends AixLib.Building.Benchmark.Logger;
   Controller.ControllerBasis_v2 controllerBasis_v2_1
     annotation (Placement(transformation(extent={{-60,-20},{-20,20}})));
-  Evaluation.FullModel_v4 fullModel_v4_1
+  FullModel_v4 fullModel_v4_1
     annotation (Placement(transformation(extent={{20,-20},{60,20}})));
 equation
   connect(controllerBasis_v2_1.measureBus, fullModel_v4_1.Measure) annotation (

@@ -281,7 +281,8 @@ model RLT_v2
   Fluid.FixedResistances.PressureDrop res2(
     redeclare package Medium = Medium_Air,
     m_flow_nominal=RLT_m_flow_nominal,
-    dp_nominal(displayUnit="bar") = RLT_dp_Heatexchanger*2)
+    dp_nominal(displayUnit="bar") = RLT_dp_Heatexchanger*2,
+    allowFlowReversal=false)
     annotation (Placement(transformation(extent={{-46,-72},{-34,-60}})));
 equation
   connect(val1.port_3,vol. ports[1]) annotation (Line(points={{-46,60},{-64,60},

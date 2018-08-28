@@ -120,6 +120,8 @@ expandable connector Bus_measure
   SI.Power Pump_TBA_multipersonoffice;
   SI.Power Pump_TBA_canteen;
   SI.Power Pump_TBA_workshop;
+  SI.Power Fan_RLT;
+  SI.Power Fan_Aircooler;
 
   Real InternalLoad_Power;
   Real PV_Power;
