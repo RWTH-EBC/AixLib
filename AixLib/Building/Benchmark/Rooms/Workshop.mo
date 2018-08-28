@@ -107,8 +107,6 @@ model Workshop
     annotation (Placement(transformation(extent={{18,-110},{38,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToCanteen
     annotation (Placement(transformation(extent={{90,-42},{110,-22}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
-    annotation (Placement(transformation(extent={{-62,90},{-42,110}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_WestWall annotation (
       Placement(transformation(
         extent={{12,-12},{-12,12}},
@@ -160,11 +158,26 @@ model Workshop
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{8,12},{28,32}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature1
+                          annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={-52,90})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature2
+                          annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-92,32})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature annotation (Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=-90,
+        origin={-52,-88})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{28,-66.2},{28,-100}}, color={191,0,0}));
-  connect(NorthWall.port_outside,HeatPort_OutdoorTemp)
-    annotation (Line(points={{-52,64.2},{-52,100}}, color={191,0,0}));
   connect(SouthWall.WindSpeedPort,WindSpeedPort_SouthWall)  annotation (Line(
         points={{-69.6,-66.2},{-69.6,-80},{-82,-80},{-82,-106}}, color={0,0,127}));
   connect(WestWall.WindSpeedPort,WindSpeedPort_WestWall)  annotation (Line(
@@ -192,12 +205,6 @@ equation
     annotation (Line(points={{-76,4.44089e-016},{-68,4.44089e-016},{-68,0},{-60,
           0},{-60,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(SouthWall.port_outside,HeatPort_OutdoorTemp)  annotation (Line(points=
-         {{-52,-66.2},{-52,-80},{-90,-80},{-90,80},{-52,80},{-52,100}}, color={
-          191,0,0}));
-  connect(WestWall.port_outside,HeatPort_OutdoorTemp)  annotation (Line(points={{-84.2,
-          -4.44089e-016},{-88,-4.44089e-016},{-88,0},{-90,0},{-90,80},{-52,80},
-          {-52,100}},                                   color={191,0,0}));
   connect(NorthWall.WindSpeedPort,WindSpeedPort_NorthWall)  annotation (Line(
         points={{-34.4,64.2},{-34.4,80},{-20,80},{-20,104}}, color={0,0,127}));
   connect(activeWallPipeBased.thermStarComb_inside,thermStar_Demux. thermStarComb)
@@ -232,6 +239,21 @@ equation
   connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
         points={{8,22},{-6,22},{-6,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,
           0}));
+  connect(prescribedTemperature1.port, NorthWall.port_outside)
+    annotation (Line(points={{-52,84},{-52,64.2}}, color={191,0,0}));
+  connect(prescribedTemperature2.port, WestWall.port_outside) annotation (Line(
+        points={{-86,32},{-86,16},{-86,0},{-84.2,0}}, color={191,0,0}));
+  connect(prescribedTemperature.port, SouthWall.port_outside)
+    annotation (Line(points={{-52,-82},{-52,-66.2}}, color={191,0,0}));
+  connect(prescribedTemperature.T, measureBus.AirTemp) annotation (Line(points=
+          {{-52,-95.2},{-52,-98},{-24,-98},{-24,-52},{-60,-52},{-60,-60},{-80,
+          -60},{-80,-59.9},{-99.9,-59.9}}, color={0,0,127}));
+  connect(prescribedTemperature2.T, measureBus.AirTemp) annotation (Line(points
+        ={{-99.2,32},{-104,32},{-104,48},{-60,48},{-60,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
+  connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points
+        ={{-52,97.2},{-52,102},{-80,102},{-80,48},{-60,48},{-60,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Workshop;

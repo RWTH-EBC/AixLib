@@ -12,11 +12,6 @@ model Office
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=-90,
-        origin={8,80})));
   Floors.GroundFloor groundFloor
     annotation (Placement(transformation(extent={{-20,-60},{20,-20}})));
   Fluid.MixingVolumes.MixingVolume vol1(
@@ -47,9 +42,6 @@ model Office
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_Hor1
     annotation (Placement(transformation(extent={{80,-90},{100,-70}})));
 equation
-  connect(prescribedTemperature.port, firstFloor.HeatPort_OutdoorTemp)
-    annotation (Line(points={{8,74},{8,60}},
-        color={191,0,0}));
   connect(vol1.ports[1],  Air_out) annotation (Line(points={{-60,-71.3333},{-60,
           -86},{-80,-86},{-80,-100}}, color={0,127,255}));
   connect(measureBus, groundFloor.measureBus) annotation (Line(
@@ -60,9 +52,6 @@ equation
       points={{-100,0},{-80,0},{-80,-80},{60,-80},{60,44},{20,44}},
       color={255,204,51},
       thickness=0.5));
-  connect(prescribedTemperature.T, measureBus.AirTemp) annotation (Line(points=
-          {{8,87.2},{8,92},{-26,92},{-26,68},{-80,68},{-80,0.1},{-99.9,0.1}},
-        color={0,0,127}));
   connect(firstFloor.Air_out_Openplanoffice, vol1.ports[2]) annotation (Line(
         points={{-20,48},{-60,48},{-60,-70.4}}, color={0,127,255}));
   connect(firstFloor.Air_out_Conferenceroom, vol1.ports[3]) annotation (Line(
@@ -94,9 +83,6 @@ equation
   connect(groundFloor.AddPower_Canteen, AddPower[4]) annotation (Line(points={{
           -20,-60},{-40,-60},{-40,-80},{-80,-80},{-80,-36},{-100,-36}}, color={
           191,0,0}));
-  connect(groundFloor.HeatPort_OutdoorTemp, firstFloor.HeatPort_OutdoorTemp)
-    annotation (Line(points={{0,-60},{0,-80},{60,-80},{60,68},{8,68},{8,60}},
-        color={191,0,0}));
   connect(groundFloor.Heatport_TBA_Canteen, Heatport_TBA[4])
     annotation (Line(points={{20,-48},{60,-48},{60,-96}}, color={191,0,0}));
   connect(groundFloor.Heatport_TBA_Workshop, Heatport_TBA[5])

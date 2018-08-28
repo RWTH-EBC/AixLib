@@ -2,8 +2,6 @@ within AixLib.Building.Benchmark.Floors;
 model GroundFloor
   replaceable package Medium =
     AixLib.Media.Air "Medium in the component";
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
-    annotation (Placement(transformation(extent={{-10,-90},{10,-110}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_FromWorkshop
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_FromCanteen
@@ -13,7 +11,7 @@ model GroundFloor
   Rooms.Canteen canteen
     annotation (Placement(transformation(extent={{20,-20},{60,20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature GroundTemp(T=286.65)
-    annotation (Placement(transformation(extent={{-36,-56},{-24,-44}})));
+    annotation (Placement(transformation(extent={{-64,-56},{-52,-44}})));
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{82,0},{122,40}})));
   BusSystem.InternalBus internalBus
@@ -56,6 +54,9 @@ model GroundFloor
         origin={60,-104})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_West
     annotation (Placement(transformation(extent={{-114,70},{-94,90}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature GroundTemp1(
+                                                                    T=286.65)
+    annotation (Placement(transformation(extent={{16,-56},{28,-44}})));
 equation
   connect(HeatPort_FromCanteen, HeatPort_FromCanteen)
     annotation (Line(points={{40,100},{40,100}}, color={191,0,0}));
@@ -66,17 +67,6 @@ equation
         points={{52,20},{52,80},{40,80},{40,100}}, color={191,0,0}));
   connect(workshop.HeatPort_Workshop, HeatPort_FromWorkshop) annotation (Line(
         points={{-28,20},{-28,80},{-40,80},{-40,100}}, color={191,0,0}));
-  connect(workshop.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp) annotation (Line(
-        points={{-50.4,20},{-52,20},{-52,80},{-80,80},{-80,-80},{0,-80},{0,-100}},
-        color={191,0,0}));
-  connect(canteen.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp) annotation (Line(
-        points={{29.6,20},{28,20},{28,80},{-80,80},{-80,-80},{0,-80},{0,-100}},
-        color={191,0,0}));
-  connect(workshop.HeatPort_ToGround, GroundTemp.port) annotation (Line(points={
-          {-34.4,-20},{-34.4,-30},{-10,-30},{-10,-50},{-24,-50}}, color={191,0,0}));
-  connect(canteen.HeatPort_ToGround, GroundTemp.port) annotation (Line(points={{
-          42.8,-20},{44,-20},{44,-30},{-10,-30},{-10,-50},{-24,-50}}, color={191,
-          0,0}));
   connect(canteen.measureBus, measureBus) annotation (Line(
       points={{20,-12},{0,-12},{0,-80},{80,-80},{80,20},{102,20}},
       color={255,204,51},
@@ -142,6 +132,10 @@ equation
   connect(canteen.SolarRadiationPort_SouthWall, SolarRadiationPort_South)
     annotation (Line(points={{35.2,-22},{36,-22},{36,-80},{60,-80},{60,-104}},
         color={255,128,0}));
+  connect(workshop.HeatPort_ToGround, GroundTemp.port) annotation (Line(points=
+          {{-34.4,-20},{-34,-20},{-34,-50},{-52,-50}}, color={191,0,0}));
+  connect(GroundTemp1.port, canteen.HeatPort_ToGround) annotation (Line(points=
+          {{28,-50},{42.8,-50},{42.8,-20}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GroundFloor;

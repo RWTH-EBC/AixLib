@@ -4,8 +4,6 @@ model FirstFloor
     AixLib.Media.Air "Medium in the component";
   Rooms.OpenPlanOffice openPlanOffice
     annotation (Placement(transformation(extent={{18,-16},{54,18}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
-    annotation (Placement(transformation(extent={{30,90},{50,110}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     HeatPort_ToWorkshop_OpenPlanOffice
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
@@ -84,9 +82,6 @@ model FirstFloor
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_West
     annotation (Placement(transformation(extent={{-114,-96},{-94,-76}})));
 equation
-  connect(openPlanOffice.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp)
-    annotation (Line(points={{26.64,18},{26,18},{26,80},{40,80},{40,100},{40,
-          100}},                                           color={191,0,0}));
   connect(openPlanOffice.HeatPort_ToWorkshop,
     HeatPort_ToWorkshop_OpenPlanOffice) annotation (Line(points={{38.52,-16},{
           39,-16},{39,-80},{0,-80},{0,-100}},     color={191,0,0}));
@@ -96,9 +91,6 @@ equation
   connect(HeatPort_ToKitchen_OpenPlanOffice, HeatPort_ToKitchen_OpenPlanOffice)
     annotation (Line(points={{40,-100},{40,-100}},                   color={191,
           0,0}));
-  connect(multiPersonOffice.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp)
-    annotation (Line(points={{-43.36,48},{-42,48},{-42,80},{40,80},{40,100}},
-        color={191,0,0}));
   connect(conferenceRoom.HeatPort_ToMultiPersonOffice, multiPersonOffice.HeatPort_ToConferenceRoom)
     annotation (Line(points={{-39.04,-16},{-38,-16},{-38,0},{-29.32,0},{-29.32,
           14}}, color={191,0,0}));
@@ -125,9 +117,6 @@ equation
       points={{-52,-43.2},{-80,-43.2},{-80,-80},{80,-80},{80,20},{100,20}},
       color={255,204,51},
       thickness=0.5));
-  connect(conferenceRoom.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp)
-    annotation (Line(points={{-43.36,-16},{-44,-16},{-44,0},{-80,0},{-80,80},{
-          40,80},{40,100}}, color={191,0,0}));
   connect(multiPersonOffice.WindSpeedPort_Roof, internalBus.InternalLoads_Wind_Speed_Hor)
     annotation (Line(points={{-26.8,48.68},{-26.8,80},{80,80},{80,60},{90,60},{
           90,60.1},{100.1,60.1}}, color={0,0,127}));

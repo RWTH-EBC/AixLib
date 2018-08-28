@@ -62,8 +62,6 @@ model MultiPersonOffice
     annotation (Placement(transformation(extent={{-38,-110},{-18,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToConferenceRoom
     annotation (Placement(transformation(extent={{16,-110},{36,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
-    annotation (Placement(transformation(extent={{-62,90},{-42,110}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_WestWall annotation (
       Placement(transformation(
         extent={{12,-12},{-12,12}},
@@ -164,12 +162,27 @@ model MultiPersonOffice
     annotation (Placement(transformation(extent={{8,12},{28,32}})));
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={-52,88})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature1
+                          annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={20,88})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature2
+                          annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-90,32})));
 equation
   connect(FloorToWorkshop.port_outside,HeatPort_ToWorkshop)
     annotation (Line(points={{-28,-66.2},{-28,-100}},
                                                     color={191,0,0}));
-  connect(NorthWall.port_outside,HeatPort_OutdoorTemp)
-    annotation (Line(points={{-52,64.2},{-52,100}}, color={191,0,0}));
   connect(NorthWall.SolarRadiationPort,SolarRadiationPort_NorthWall)
     annotation (Line(points={{-30,65.2},{-30,80},{10,80},{10,110}}, color={255,
           128,0}));
@@ -184,8 +197,6 @@ equation
   connect(activeWallPipeBased.thermStarComb_inside,thermStar_Demux. thermStarComb)
     annotation (Line(points={{20,56},{20,48},{-60,48},{-60,-52},{-20.1,-52},{
           -20.1,-35.4}}, color={191,0,0}));
-  connect(activeWallPipeBased.port_outside,HeatPort_OutdoorTemp)  annotation (
-      Line(points={{20,64.2},{20,80},{-52,80},{-52,100}}, color={191,0,0}));
   connect(WindSpeedPort_Roof,activeWallPipeBased. WindSpeedPort) annotation (
       Line(points={{40,104},{40,80},{37.6,80},{37.6,64.2}}, color={0,0,127}));
   connect(activeWallPipeBased.SolarRadiationPort,SolarRadiationPort_Hor)
@@ -215,9 +226,6 @@ equation
   connect(EastWallToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{66,-6},{64,-6},{64,-8},{60,-8},{60,-52},{-20.1,
           -52},{-20.1,-35.4}}, color={191,0,0}));
-  connect(WestWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points=
-          {{-80.2,4.44089e-016},{-86,4.44089e-016},{-86,0},{-90,0},{-90,80},{
-          -52,80},{-52,100}}, color={191,0,0}));
   connect(WestWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-72,0},{-60,0},{-60,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
@@ -234,6 +242,21 @@ equation
   connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
         points={{8,22},{-4,22},{-4,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,
           0}));
+  connect(prescribedTemperature.port, NorthWall.port_outside)
+    annotation (Line(points={{-52,82},{-52,64.2}}, color={191,0,0}));
+  connect(prescribedTemperature1.port, activeWallPipeBased.port_outside)
+    annotation (Line(points={{20,82},{20,64.2}}, color={191,0,0}));
+  connect(prescribedTemperature2.port, WestWall.port_outside) annotation (Line(
+        points={{-84,32},{-80.2,32},{-80.2,4.44089e-016}}, color={191,0,0}));
+  connect(prescribedTemperature2.T, measureBus.AirTemp) annotation (Line(points
+        ={{-97.2,32},{-100,32},{-100,48},{-60,48},{-60,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
+  connect(prescribedTemperature.T, measureBus.AirTemp) annotation (Line(points=
+          {{-52,95.2},{-52,100},{-80,100},{-80,48},{-60,48},{-60,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
+  connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points
+        ={{20,95.2},{20,98},{-8,98},{-8,48},{-60,48},{-60,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},
