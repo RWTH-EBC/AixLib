@@ -1,5 +1,6 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
-model HeatCoeffNat "Calculates the dynamic heat loss coefficient for natural convection"
+﻿within AixLib.Utilities.HeatTransfer.BaseClasses;
+model HeatCoeffNat
+  "Calculates the dynamic heat loss coefficient for natural convection"
   extends Modelica.Blocks.Interfaces.MISO(
   final nin=3);
 

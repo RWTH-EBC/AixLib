@@ -53,8 +53,7 @@ model HeatPump
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
     "Temperature at the outlet of the sink side of the heat pump"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  AixLib.Fluid.HeatPumps.HeatPumpReal heatPumpReal(
-    useSec=false,
+  AixLib.Fluid.HeatPumps.HeatPumpSystem heatPumpReal(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     mFlow_conNominal=1,
@@ -71,20 +70,24 @@ model HeatPump
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     useComIne=false,
     comIneTime_constant=0,
-    useMinRunTime=true,
-    useMinLocTime=true,
-    useRunPerHou=true,
     maxRunPerHou=2,
-    useOpeEnv=true,
-    tableUpp=[0,0],
-    tableLow=[0,0],
     CEva=8000,
     CCon=8000,
-    minRunTime=120,
-    minLocTime=120,
+    scalingFactor=1,
     redeclare model PerfData =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          final dataTable=AixLib.DataBase.HeatPump.EN14511.Ochsner_GMSW_15plus()))
+          final dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()),
+    useRunPerHou=false,
+    use_sec=true,
+    useMinRunTime=true,
+    useOpeEnv=true,
+    use_deFro=true,
+    minIceFac=0.5,
+    minRunTime(displayUnit="min") = 1800,
+    tableUpp=[-15,60; 35,60],
+    tableLow=[-15,0; 35,0],
+    useMinLocTime=true,
+    minLocTime(displayUnit="min") = 3000)
     annotation (Placement(transformation(extent={{-18,-12},{22,8}})));
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
     annotation (Placement(transformation(extent={{66,-38},{46,-18}})));
@@ -107,19 +110,22 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideMassFlowSource.ports[1], heatPumpReal.port_a2) annotation (
-      Line(points={{8,-50},{18,-50},{18,-12}},         color={0,127,255}));
-  connect(heatPumpReal.port_b1, temperature.port_a) annotation (Line(points={{18,8},{
+      Line(points={{8,-50},{17,-50},{17,-12}},         color={0,127,255}));
+  connect(heatPumpReal.port_b1, temperature.port_a) annotation (Line(points={{17,8},{
           38,8},{38,18},{56,18}},            color={0,127,255}));
   connect(heatPumpReal.port_a1, sourceSideMassFlowSource.ports[1]) annotation (
-      Line(points={{10.4,8},{10,8},{10,34},{-34,34}},
+      Line(points={{7.5,8},{10,8},{10,34},{-34,34}},
                     color={0,127,255}));
   connect(heatPumpReal.port_b2, sourceSideFixedBoundary.ports[1]) annotation (
-      Line(points={{10.4,-12},{10,-12},{10,-18},{-38,-18}},
+      Line(points={{7.5,-12},{10,-12},{10,-18},{-38,-18}},
                                                      color={0,127,255}));
   connect(T_amb_internal.y, heatPumpReal.T_amb_eva) annotation (Line(points={{45,-28},
-          {34,-28},{34,-4},{24,-4}},       color={0,0,127}));
+          {36,-28},{36,-4},{24.5,-4}},     color={0,0,127}));
   connect(TsuSourceRamp.y,heatPumpReal.T_oda)  annotation (Line(points={{-73,12},
-          {-47.5,12},{-47.5,2},{-20,2}}, color={0,0,127}));
+          {-47.5,12},{-47.5,2},{-20.5,2}},
+                                         color={0,0,127}));
+  connect(T_amb_internal.y, heatPumpReal.T_amb_con) annotation (Line(points={{
+          45,-28},{36,-28},{36,0},{24.5,0}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),

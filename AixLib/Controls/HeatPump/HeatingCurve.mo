@@ -9,7 +9,8 @@ model HeatingCurve "Model of a heating curve"
   parameter Modelica.SIunits.ThermodynamicTemperature TOffset(displayUnit="K") = 0
     "Offset to heating curve temperature" annotation (Dialog(descriptionLabel = true));
   //Function
-  replaceable function HeatingCurveFunction = BaseClasses.baseFct "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
+  replaceable function HeatingCurveFunction = BaseClasses.Functions.baseFct
+                                                                  "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
   //Table Data
   parameter DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord
     "Record with information about heating curve data"                                                                                                        annotation(Dialog(enable=

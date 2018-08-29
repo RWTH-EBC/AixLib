@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Utilities.HeatTransfer.BaseClasses;
 model HeatCoeffForc
   "Calculates the dynamic heat loss coefficient for forced convection"
   extends Modelica.Blocks.Interfaces.MISO(
@@ -10,7 +10,6 @@ model HeatCoeffForc
 protected
   Real kA_nominal;
   Modelica.SIunits.MassFlowRate mFlow "Mass flow rate";
-
 
 equation
   kA_nominal = u[1];

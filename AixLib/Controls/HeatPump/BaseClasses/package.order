@@ -1,2 +1,5 @@
-baseFct
-HeatingCurveFunction
+Functions
+partialTSetToNSet
+CalcQdot
+InverterControlledHP
+OnOffHP

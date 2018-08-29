@@ -24,7 +24,7 @@ model HeatPumpSystem
     final use_EvaCap=use_EvaCap,
     final use_ConCap=false)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
-  BaseClasses.SecurityControls.SecurityControl securityControl(
+  Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
     final minRunTime(displayUnit="min") = minRunTime,
     final minLocTime(displayUnit="min") = minLocTime,
@@ -39,9 +39,8 @@ model HeatPumpSystem
     pre_n_start=pre_n_start) if
                             use_sec
     annotation (Placement(transformation(extent={{-12,-28},{52,28}})));
-  BaseClasses.HeatPumpControl.HPControl hPControls(final useAntilegionella=
-        useAntLeg, redeclare model TSetToNSet =
-        BaseClasses.HeatPumpControl.OnOffHP)
+  Controls.HeatPump.HPControl hPControls(final useAntilegionella=useAntLeg,
+      redeclare model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP)
     annotation (Placement(transformation(extent={{-104,-30},{-42,30}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium = Medium_eva,

@@ -185,7 +185,7 @@ model HeatPump "Base model of realistic heat pump"
   Modelica.Blocks.Interfaces.RealInput T_amb_con
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{132,24},{100,56}})));
-  BaseClasses.CapacityWithLosses ConCapacity(
+  Utilities.HeatTransfer.CapacityWithLosses ConCapacity(
     final use_ForConv=false,
     final C=CCon,
     final scalingFactor=scalingFactor,
@@ -193,7 +193,7 @@ model HeatPump "Base model of realistic heat pump"
     final kAOutNat_nominal=GCon) if             use_ConCap
     "Model calculating the heat losses to the ambient based on current parameters"
     annotation (Placement(transformation(extent={{-100,94},{-72,120}})));
-  BaseClasses.CapacityWithLosses EvaCapacity(
+  Utilities.HeatTransfer.CapacityWithLosses EvaCapacity(
     final C=CEva,
     final scalingFactor=scalingFactor,
     final use_ForConv=false,

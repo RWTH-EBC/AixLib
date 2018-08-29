@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Utilities.HeatTransfer;
 model CapacityWithLosses
   "Base model for heat capacity with heat losses depending on ambient conditions"
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCap(final C=C)
@@ -45,7 +45,7 @@ model CapacityWithLosses
         extent={{8,8},{-8,-8}},
         rotation=180,
         origin={-94,-16})));
-  HeatCoeffNat calcHeatCoeffNat(
+  BaseClasses.HeatCoeffNat calcHeatCoeffNat(
     final scalingFactor=scalingFactor,
     final wukExp=wukExpOutNat,
     final T_amb_nominal=T_amb_nominal,
@@ -54,18 +54,18 @@ model CapacityWithLosses
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-57,-15})));
-  HeatCoeffForc heatCoeffForcInn(
+  BaseClasses.HeatCoeffForc heatCoeffForcInn(
     mFlow_nominal=mFlowIns_nominal,
     scalingFactor=scalingFactor,
     wukExp=wukExpIns) annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={42,-36})));
-  HeatCoeffForc heatCoeffForcOut(
+  BaseClasses.HeatCoeffForc heatCoeffForcOut(
     final scalingFactor=scalingFactor,
     final mFlow_nominal=mFlowOut_nominal,
-    final wukExp=wukExpOutFor) if
-                            use_ForConv annotation (Placement(transformation(
+    final wukExp=wukExpOutFor) if use_ForConv annotation (Placement(
+        transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={-22,-14})));
