@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps;
-model HeatPumpReal
+model HeatPumpSystem
   "Model containing the basic heat pump block and different control blocks(optional)"
 
   HeatPump heatPump(
@@ -33,14 +33,14 @@ model HeatPumpReal
     final useOpeEnv=useOpeEnv,
     final tableLow=tableLow,
     final tableUpp=tableUpp,
-    final useMinLocTime=useMinLocTime) if useSec
-    annotation (Placement(transformation(extent={{-10,-28},{54,28}})));
-  BaseClasses.SecurityControls.DefrostControl defrostControl if   useDeFro
-    annotation (Placement(transformation(extent={{-104,-26},{-44,26}})));
+    final useMinLocTime=useMinLocTime,
+    use_deFro=use_deFro,
+    minIceFac=minIceFac) if use_sec
+    annotation (Placement(transformation(extent={{-12,-28},{52,28}})));
   BaseClasses.HeatPumpControl.HPControl hPControls(final useAntilegionella=
         useAntLeg, redeclare model TSetToNSet =
         BaseClasses.HeatPumpControl.OnOffHP)
-    annotation (Placement(transformation(extent={{-190,-26},{-134,26}})));
+    annotation (Placement(transformation(extent={{-104,-30},{-42,30}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium = Medium_eva,
     h_outflow(start=Medium_eva.h_default),
@@ -65,39 +65,41 @@ model HeatPumpReal
     m_flow(max=if allowFlowReversalCon then +Modelica.Constants.inf else 0))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{94,-110},{74,-90}})));
-  parameter Boolean useDeFro=false "False if defrost in not considered"
-                                    annotation (choices(checkBox=true), Dialog(
-        tab="Defrost Control", group="General", descriptionLabel = true));
-  parameter Boolean useSec=true
+  parameter Boolean use_sec=true
     "False if the Security block should be disabled"
                                      annotation (choices(checkBox=true), Dialog(
         tab="Security Control", group="General", descriptionLabel = true));
+  parameter Boolean use_deFro=true "False if defrost in not considered"
+                                    annotation (choices(checkBox=true), Dialog(
+        tab="Security Control",group="Defrost", descriptionLabel = true, enable=use_sec));
+
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
-    annotation (Placement(transformation(extent={{-240,20},{-200,60}})));
+    annotation (Placement(transformation(extent={{-160,20},{-120,60}})));
   parameter Boolean useMinRunTime=true
     "False if minimal runtime of HP is not considered"
-    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
+    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
+  parameter Modelica.SIunits.Time minRunTime=12000
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=useSec and useMinRunTime));
+      enable=use_sec and useMinRunTime));
   parameter Boolean useMinLocTime=true
     "False if minimal locktime of HP is not considered"
-    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime(displayUnit="min")
+    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
+  parameter Modelica.SIunits.Time minLocTime=600
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=useSec and useMinLocTime));
+      enable=use_sec and useMinLocTime));
   parameter Boolean useRunPerHou=true
     "False if maximal runs per hour of HP are not considered"
-    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
+    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
+  parameter Real maxRunPerHou=5
+                              "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=useSec and useRunPerHou));
+      enable=use_sec and useRunPerHou));
   parameter Boolean useOpeEnv=true
     "False to allow HP to run out of operational envelope"
     annotation (Dialog(tab="Security Control", group="Operational Envelope",
-      enable=useSecurity, descriptionLabel = true),                                                   choices(checkBox=true));
+      enable=useSecurity, descriptionLabel = true, enable=use_sec),                                                   choices(checkBox=true));
   parameter Boolean useAntLeg=false
     "True if Anti-Legionella control is considered"
     annotation (Dialog(tab="HP Control", group="Anti Legionella", descriptionLabel = true),choices(checkBox=true));
@@ -113,11 +115,11 @@ model HeatPumpReal
   parameter Real tableUpp[:,2] "Upper boundary of envelope" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
-      enable=useSec and useOpeEnv));
+      enable=use_sec and useOpeEnv));
   parameter Real tableLow[:,2] "Lower boundary of envelope" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
-      enable=useSec and useOpeEnv));
+      enable=use_sec and useOpeEnv));
   Movers.SpeedControlled_Nrpm pumSou(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
@@ -214,15 +216,9 @@ model HeatPumpReal
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Replaceable model for performance data of HP"
     annotation (choicesAllMatching=true);
-  Modelica.Blocks.Routing.RealPassThrough realPasThrHPC if not useDeFro and not useSec "No 2. and 1. Layer"
-    annotation (Placement(transformation(extent={{-54,-96},{-38,-80}})));
-  Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not useSec and
-    useDeFro                                                          "No 1. Layer"
-    annotation (Placement(transformation(extent={{14,-78},{30,-62}})));
-  Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not useDeFro and
-    useSec "No 2. Layer"
-    annotation (Placement(transformation(extent={{-84,-70},{-68,-54}})),
-      choicesAllMatching=true);
+  Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
+                                                                      "No 1. Layer"
+    annotation (Placement(transformation(extent={{12,-78},{28,-62}})));
   Interfaces.PassThroughMedium mediumPassThroughSin(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
@@ -244,26 +240,27 @@ model HeatPumpReal
     annotation (Placement(transformation(extent={{240,0},{200,40}})));
 
   parameter Real scalingFactor "Scaling-factor of HP";
+  parameter Real minIceFac "Minimal value above which no defrost is necessary"
+    annotation (Dialog(
+      tab="Security Control",
+      group="Defrost",
+      enable=use_sec and use_deFro));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
-      points={{79.82,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},
-          {-14,-19.32}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(defrostControl.sigBusHP, heatPump.sigBusHP) annotation (Line(
-      points={{-74,-25.48},{-74,-48},{76,-48},{76,-8.55},{79.82,-8.55}},
+      points={{79.82,-12.9833},{76,-12.9833},{76,-48},{-26.675,-48},{-26.675,
+          -19.32},{-16,-19.32}},
       color={255,204,51},
       thickness=0.5));
   connect(heatPump.port_b2, port_b2)
     annotation (Line(points={{84,-19},{84,-100}},   color={0,127,255}));
-  connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-220,40},{-206,40},
-          {-206,5.2},{-195.6,5.2}},  color={0,0,127}));
+  connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-140,40},{-116,40},
+          {-116,0},{-110.2,0}},      color={0,0,127}));
   connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100}},
                       color={0,127,255}));
   if not useConPum then
   end if;
   connect(pumSin.port_b, heatPump.port_a1)
-    annotation (Line(points={{102,54},{102,38},{84,38},{84,19}},
+    annotation (Line(points={{102,54},{102,48},{84,48},{84,19}},
                                                  color={0,127,255},
       pattern=LinePattern.Dash));
   connect(pumSin.port_a, port_a1)
@@ -283,45 +280,16 @@ equation
           200,-20},{200,-12.6667},{166.08,-12.6667}},
                                                   color={0,0,127}));
   connect(heatPump.sigBusHP, hPControls.sigBusHP) annotation (Line(
-      points={{79.82,-8.55},{78,-8.55},{78,-8},{76,-8},{76,-48},{-194,-48},{
-          -194,-15.08},{-190.56,-15.08}},
+      points={{79.82,-12.9833},{78,-12.9833},{78,-8},{76,-8},{76,-48},{-116,-48},
+          {-116,-18},{-112,-18},{-112,-17.4},{-104.62,-17.4}},
       color={255,204,51},
       thickness=0.5));
-  connect(hPControls.nOut, realPasThrHPC.u) annotation (Line(
-      points={{-130.08,0},{-128,0},{-128,-88},{-55.6,-88}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(realPasThrHPC.y, heatPump.nSet) annotation (Line(
-      points={{-37.2,-88},{72,-88},{72,0},{76.4,0}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(defrostControl.nOut, realPasThrSec.u) annotation (Line(
-      points={{-40.4,0},{-34,0},{-34,-70},{12.4,-70}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(realPasThrSec.y, heatPump.nSet) annotation (Line(
-      points={{30.8,-70},{72,-70},{72,0},{76.4,0}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(hPControls.nOut, realPasThrDef.u) annotation (Line(
-      points={{-130.08,4.44089e-16},{-130,4.44089e-16},{-130,0},{-128,0},{-128,-62},
-          {-85.6,-62}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(realPasThrDef.y, securityControl.nSet) annotation (Line(
-      points={{-67.2,-62},{-18,-62},{-18,3.55271e-15},{-14.2667,3.55271e-15}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(hPControls.nOut, defrostControl.nSet) annotation (Line(
-      points={{-130.08,0},{-110,0}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(defrostControl.nOut, securityControl.nSet) annotation (Line(
-      points={{-40.4,0},{-14.2667,0}},
+      points={{28.8,-70},{72,-70},{72,6.33333},{77.92,6.33333}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, heatPump.nSet) annotation (Line(
-      points={{56.6667,0},{76.4,0}},
+      points={{54.6667,5.6},{66,5.6},{66,6.33333},{77.92,6.33333}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(port_a1, mediumPassThroughSin.port_a) annotation (Line(
@@ -333,52 +301,28 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSou.port_a, port_a2) annotation (Line(
-      points={{182,-62},{180,-62},{180,-100},{160,-100}},
+      points={{182,-62},{182,-100},{160,-100}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSou.port_b, heatPump.port_a2) annotation (Line(
-      points={{182,-50},{178,-50},{178,-19},{160,-19}},
+      points={{182,-50},{182,-19},{160,-19}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(T_amb_con, heatPump.T_amb_con) annotation (Line(points={{220,20},{200,
           20},{200,12.6667},{166.08,12.6667}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-100},
+  connect(hPControls.nOut, securityControl.nSet) annotation (Line(
+      points={{-37.66,6},{-28,6},{-28,5.6},{-16.2667,5.6}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(hPControls.nOut, realPasThrSec.u) annotation (Line(
+      points={{-37.66,6},{-34,6},{-34,-70},{10.4,-70}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{
+          54.6667,-5.6},{77.92,-5.6},{77.92,-6.33333}}, color={255,0,255}));
+  connect(hPControls.modeOut, securityControl.modeSet) annotation (Line(points=
+          {{-37.66,-6},{-26,-6},{-26,-5.6},{-16.2667,-5.6}}, color={255,0,255}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},
             {200,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-200,-100},{200,100}}), graphics={
-        Text(
-          extent={{-180,42},{-132,28}},
-          lineColor={0,0,255},
-          lineThickness=0.5,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          textString="3. Layer"),
-        Text(
-          extent={{-100,48},{-52,34}},
-          lineColor={0,0,255},
-          lineThickness=0.5,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          textString="2. Layer"),
-        Text(
-          extent={{-4,48},{44,34}},
-          lineColor={0,0,255},
-          lineThickness=0.5,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          textString="1. Layer"),
-        Line(
-          points={{-32,100},{-32,-100}},
-          color={238,46,47},
-          thickness=0.5,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{60,100},{60,-100}},
-          color={238,46,47},
-          thickness=0.5,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{-122,100},{-122,-100}},
-          color={238,46,47},
-          thickness=0.5,
-          pattern=LinePattern.Dash)}));
-end HeatPumpReal;
+          extent={{-120,-100},{200,100}})));
+end HeatPumpSystem;

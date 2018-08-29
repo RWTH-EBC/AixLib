@@ -2,10 +2,10 @@ within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls.BaseClasses;
 partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
-    annotation (Placement(transformation(extent={{-152,-16},{-120,16}})));
+    annotation (Placement(transformation(extent={{-152,4},{-120,36}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
-    annotation (Placement(transformation(extent={{120,-10},{140,10}})));
+    annotation (Placement(transformation(extent={{120,10},{140,30}})));
   AixLib.Utilities.Logical.SmoothSwitch swiErr
     "If an error occurs, the value of the conZero block will be used(0)"
     annotation (Placement(transformation(extent={{86,-10},{106,10}})));
@@ -14,11 +14,16 @@ partial block PartialSecurityControl "Base Block"
     annotation (Placement(transformation(extent={{58,-24},{70,-12}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
+  Modelica.Blocks.Interfaces.BooleanOutput modeOut
+    annotation (Placement(transformation(extent={{120,-30},{140,-10}})));
+  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+    annotation (Placement(transformation(extent={{-152,-36},{-120,-4}})));
 equation
   connect(conZer.y,swiErr. u3) annotation (Line(points={{70.6,-18},{78,-18},
           {78,-8},{84,-8}}, color={0,0,127}));
   connect(swiErr.y, nOut)
-    annotation (Line(points={{107,0},{130,0}}, color={0,0,127}));
+    annotation (Line(points={{107,0},{118,0},{118,20},{130,20}},
+                                               color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
             -120,-100},{120,100}}), graphics={
         Polygon(

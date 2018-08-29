@@ -6,9 +6,10 @@ block HPControl
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
-    annotation (Placement(transformation(extent={{100,-14},{128,14}})));
+    annotation (Placement(transformation(extent={{100,6},{128,34}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
-    annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
+        iconTransformation(extent={{-140,-20},{-100,20}})));
   parameter Boolean useAntilegionella
     "True if Legionella Control is of relevance";
   Controls.HeatPump.HeatingCurve heatCurve(
@@ -39,17 +40,20 @@ block HPControl
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntiLeg if not
     useAntilegionella "No Anti Legionella" annotation (Placement(transformation(
           extent={{-8,44},{8,60}})), choicesAllMatching=true);
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant
-    annotation (Placement(transformation(extent={{-148,-66},{-128,-46}})));
+  Modelica.Blocks.Sources.BooleanConstant constHeating
+    annotation (Placement(transformation(extent={{58,-44},{78,-24}})));
+  Modelica.Blocks.Interfaces.BooleanOutput modeOut
+    annotation (Placement(transformation(extent={{100,-34},{128,-6}})));
 equation
 
-  connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-120,20},{-90,20},{-90,-57.93},{-101.93,-57.93}},
-                                         color={0,0,127}), Text(
+  connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-120,0},{-90,0},{-90,
+          -57.93},{-101.93,-57.93}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(T_oda, heatCurve.T_oda) annotation (Line(points={{-120,20},{-76,20}}, color={0,0,127}));
+  connect(T_oda, heatCurve.T_oda) annotation (Line(points={{-120,0},{-98,0},{
+          -98,20},{-76,20}},                                                    color={0,0,127}));
   connect(heatCurve.TSet, antiLegionella.TSet_in) annotation (Line(points={{-53,20},
           {-38,20},{-38,22.8},{-26,22.8}},                                                       color={0,0,127},
 
@@ -59,7 +63,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ConvTSetNSet.nOut, nOut) annotation (Line(points={{77.6,7},{88.8,7},{
-          88.8,1.77636e-15},{114,1.77636e-15}}, color={0,0,127}));
+          88.8,20},{114,20}}, color={0,0,127}));
   connect(sigBusHP, ConvTSetNSet.sigBusHP) annotation (Line(
       points={{-102,-58},{24,-58},{24,2.41},{42.88,2.41}},
       color={255,204,51},
@@ -84,12 +88,6 @@ equation
       points={{8.8,52},{26,52},{26,17.2},{41.44,17.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(booleanConstant.y, sigBusHP.mode) annotation (Line(points={{-127,-56},
-          {-116,-56},{-116,-57.93},{-101.93,-57.93}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(sigBusHP.T_ret_co, antiLegionella.TSupAct) annotation (Line(
       points={{-101.93,-57.93},{-66,-57.93},{-66,6},{-26,6}},
       color={255,204,51},
@@ -98,12 +96,26 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(modeOut, constHeating.y) annotation (Line(points={{114,-20},{96,-20},
+          {96,-34},{79,-34}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
                             Rectangle(
           extent={{-84,85.5},{91.5,-82.5}},
           lineColor={175,175,175},
           lineThickness=0.5,
           fillPattern=FillPattern.Solid,
-          fillColor={255,255,170})}),                            Diagram(
+          fillColor={255,255,170}),
+        Text(
+          extent={{-104,86},{106,62}},
+          lineColor={28,108,200},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.None,
+          textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end HPControl;

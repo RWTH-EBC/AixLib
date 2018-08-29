@@ -17,8 +17,8 @@ equation
   connect(boundaryMap.ERR,swiErr.u2)
     annotation (Line(points={{-1.36364,-3},{42,-3},{42,0},{84,0}},
                                                color={255,0,255}));
-  connect(nSet,swiErr.u1)  annotation (Line(points={{-136,0},{32,0},{32,8},{84,
-          8}},    color={0,0,127}));
+  connect(nSet,swiErr.u1)  annotation (Line(points={{-136,20},{32,20},{32,8},{
+          84,8}}, color={0,0,127}));
   connect(booConOpeEnv.y, swiErr.u2) annotation (Line(
       points={{24.7,-29},{24.7,-28},{42,-28},{42,0},{84,0}},
       color={255,0,255},
@@ -40,4 +40,6 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
 
+  connect(modeSet, modeOut) annotation (Line(points={{-136,-20},{-114,-20},{
+          -114,-92},{114,-92},{114,-20},{130,-20}}, color={255,0,255}));
 end OperationalEnvelope;
