@@ -2,7 +2,9 @@ within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls;
 block OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   extends BaseClasses.PartialSecurityControl;
-  Modelica.Blocks.Logical.Greater nSetGreaterNull "True if device is set on"
+  Modelica.Blocks.Logical.GreaterThreshold
+                                  nSetGreaterNull(final threshold=Modelica.Constants.eps)
+                                                  "True if device is set on"
     annotation (Placement(transformation(extent={{-102,56},{-86,72}})));
   parameter Boolean useMinRunTime
     "False if minimal runtime of HP is not considered";
@@ -19,9 +21,10 @@ block OnOffControl
   parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(enable=useRunPerHour));
 
-  Modelica.Blocks.Logical.Greater nIsGreaterNull
+  Modelica.Blocks.Logical.GreaterThreshold
+                                  nIsGreaterNull(final threshold=Modelica.Constants.eps)
     "True if the device is still on"
-    annotation (Placement(transformation(extent={{-104,-36},{-88,-20}})));
+    annotation (Placement(transformation(extent={{-106,-36},{-90,-20}})));
   Modelica.Blocks.MathBoolean.Or or1(nu=3)
     annotation (Placement(transformation(extent={{56,12},{68,24}})));
   Modelica.Blocks.Logical.Switch SwiSta
@@ -57,16 +60,8 @@ block OnOffControl
     annotation (Placement(transformation(extent={{-4,-36},{10,-22}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstantRunTim(final k=true) if not
     useMinRunTime
-    annotation (Placement(transformation(extent={{-2,16},{12,30}})));
+    annotation (Placement(transformation(extent={{0,16},{14,30}})));
 equation
-  connect(conZer.y,nSetGreaterNull. u2) annotation (Line(points={{70.6,-18},{78,
-          -18},{78,-94},{-108,-94},{-108,57.6},{-103.6,57.6}},   color={0,0,
-          127}));
-  connect(nSetGreaterNull.u1, nSet) annotation (Line(points={{-103.6,64},{-118,64},
-          {-118,0},{-136,0}},       color={0,0,127}));
-  connect(conZer.y,nIsGreaterNull. u2) annotation (Line(points={{70.6,-18},{78,
-          -18},{78,-94},{-108,-94},{-108,-34.4},{-105.6,-34.4}},    color={0,
-          0,127}));
   connect(andRun.y, SwiSta.u2) annotation (Line(points={{36.6,46},{48,46},{48,12},
           {-54,12},{-54,-4},{-100,-4},{-100,8},{-94,8}},
                                                color={255,0,255}));
@@ -75,7 +70,7 @@ equation
   connect(or1.y,swiErr.u2)
     annotation (Line(points={{68.9,18},{76,18},{76,0},{84,0}}, color={255,0,255}));
   connect(pre1.u,nIsGreaterNull. y)
-    annotation (Line(points={{-85.2,-28},{-87.2,-28}},
+    annotation (Line(points={{-85.2,-28},{-89.2,-28}},
                                                      color={255,0,255}));
   connect(andRun.u1, not2.y) annotation (Line(points={{22.8,46},{-2,46},{-2,64},
           {-57.6,64}},         color={255,0,255}));
@@ -96,7 +91,8 @@ equation
   connect(not1.y, locTimControl.u)
     annotation (Line(points={{-53.5,-15},{-45.2,-15}}, color={255,0,255}));
   connect(runTimControl.y, andRun.u2) annotation (Line(points={{-8.4,37},{-2,37},
-          {-2,41.2},{22.8,41.2}},color={255,0,255}));
+          {-2,41.2},{22.8,41.2}},color={255,0,255},
+      pattern=LinePattern.Dash));
   connect(runTimControl.u, pre1.y) annotation (Line(points={{-45.2,37},{-45.2,
           36},{-71.4,36},{-71.4,-28}}, color={255,0,255}));
   connect(nSet, SwiSta.u3) annotation (Line(points={{-136,0},{-113.5,0},{-113.5,
@@ -104,9 +100,11 @@ equation
   connect(andLoc.y, or1.u[3]) annotation (Line(points={{38.6,-36},{48,-36},{48,
           16},{52,16},{52,15.2},{56,15.2}}, color={255,0,255}));
   connect(locTimControl.y, andLoc.u1) annotation (Line(points={{-8.4,-15},{-8.4,
-          -6},{24.8,-6},{24.8,-36}},   color={255,0,255}));
+          -6},{24.8,-6},{24.8,-36}},   color={255,0,255},
+      pattern=LinePattern.Dash));
   connect(runPerHouBoundary.y, andLoc.u2) annotation (Line(points={{-8.4,-56},{6,
-          -56},{6,-40.8},{24.8,-40.8}}, color={255,0,255}));
+          -56},{6,-40.8},{24.8,-40.8}}, color={255,0,255},
+      pattern=LinePattern.Dash));
   connect(booleanConstantRunPerHou.y, andLoc.u2) annotation (Line(
       points={{10.7,-81},{16,-81},{16,-40.8},{24.8,-40.8}},
       color={255,0,255},
@@ -116,26 +114,16 @@ equation
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(booleanConstantRunTim.y, andRun.u2) annotation (Line(
-      points={{12.7,23},{12.7,40},{12.7,41.2},{22.8,41.2}},
+      points={{14.7,23},{14.7,41.2},{22.8,41.2}},
       color={255,0,255},
       pattern=LinePattern.Dash));
-  connect(sigBusHP.N, nIsGreaterNull.u1) annotation (Line(
-      points={{-134.915,-68.925},{-134.915,-28},{-105.6,-28}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.N, SwiSta.u1) annotation (Line(
-      points={{-134.915,-68.925},{-134.915,-28},{-114,-28},{-114,16},{-94,16}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
 
+  connect(nSet, nSetGreaterNull.u) annotation (Line(points={{-136,0},{-120,0},{
+          -120,64},{-103.6,64}}, color={0,0,127}));
+  connect(nOut, nIsGreaterNull.u) annotation (Line(points={{130,0},{140,0},{140,
+          -104},{-116,-104},{-116,-28},{-107.6,-28}}, color={0,0,127}));
+  connect(nOut, SwiSta.u1) annotation (Line(points={{130,0},{140,0},{140,100},{
+          -114,100},{-114,16},{-94,16}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
 <p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>

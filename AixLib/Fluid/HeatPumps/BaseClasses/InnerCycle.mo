@@ -30,11 +30,11 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
         rotation=-90,
         origin={0.5,-110.5})));
 
+  AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock
+    annotation (Placement(transformation(extent={{-72,-10},{-92,10}})));
 equation
   connect(switchQCon.y, QCon)
     annotation (Line(points={{95,0},{110,0}}, color={0,0,127}));
-  connect(switchQEva.y, QEva)
-    annotation (Line(points={{-61,0},{-110,0}}, color={0,0,127}));
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
       points={{1.085,103.075},{1.085,104},{-38,104},{-38,0}},
       color={255,204,51},
@@ -69,6 +69,16 @@ equation
           22.3},{23.2,22.3},{23.2,8},{-38,8}}, color={0,0,127}));
   connect(PerformanceData.QEva, switchQCon.u3) annotation (Line(points={{22.4,
           22.3},{22,22.3},{22,-8},{72,-8}}, color={0,0,127}));
+  connect(icingBlock.iceFac_out, sigBusHP.iceFac) annotation (Line(points={{-82,
+          11},{-82,103.075},{1.085,103.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(switchQEva.y, icingBlock.u)
+    annotation (Line(points={{-61,0},{-70,0}}, color={0,0,127}));
+  connect(QEva, icingBlock.y)
+    annotation (Line(points={{-110,0},{-93,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

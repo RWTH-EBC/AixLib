@@ -136,7 +136,7 @@ model HeatPump "Base model of realistic heat pump"
   parameter Boolean use_EvaCap=true
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
-                                           choices(checkBox=true));
+                                          choices(checkBox=true));
   parameter Boolean use_ConCap=true
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
@@ -369,6 +369,13 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(realToBoolean.y, sigBusHP.mode) annotation (Line(points={{-140,-22.6},
+          {-130,-22.6},{-130,-30.915},{-116.925,-30.915}}, color={255,0,255}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},

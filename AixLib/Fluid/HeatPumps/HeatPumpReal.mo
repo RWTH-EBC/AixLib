@@ -20,7 +20,9 @@ model HeatPumpReal
     final GCon=GCon,
     final use_ComIne=useComIne,
     redeclare final model PerfData = PerfData,
-    use_ConCap=true)
+    final scalingFactor=scalingFactor,
+    final use_EvaCap=use_EvaCap,
+    final use_ConCap=false)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
@@ -36,7 +38,8 @@ model HeatPumpReal
   BaseClasses.SecurityControls.DefrostControl defrostControl if   useDeFro
     annotation (Placement(transformation(extent={{-104,-26},{-44,26}})));
   BaseClasses.HeatPumpControl.HPControl hPControls(final useAntilegionella=
-        useAntLeg)
+        useAntLeg, redeclare model TSetToNSet =
+        BaseClasses.HeatPumpControl.OnOffHP)
     annotation (Placement(transformation(extent={{-190,-26},{-134,26}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium = Medium_eva,
@@ -75,7 +78,7 @@ model HeatPumpReal
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
   parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
-    "Mimimum runtime of heat pump"
+    "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=useSec and useMinRunTime));
   parameter Boolean useMinLocTime=true
@@ -179,19 +182,30 @@ model HeatPumpReal
   constant Modelica.SIunits.Time comIneTime_constant
     "Time constant representing inertia of compressor"
     annotation (Dialog(group="Compressor Inertia", enable=useComIne));
-
+  parameter Boolean use_ConCap=false
+    "If heat losses at capacitor side are considered or not"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"),
+                                          choices(checkBox=true));
+  parameter Boolean use_EvaCap=false
+    "If heat losses at capacitor side are considered or not"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),
+                                          choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m)"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
+      enable=use_EvaCap));
   parameter Modelica.SIunits.ThermalConductance GEva
     "Constant thermal conductance of Evaporator material"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
+      enable=use_EvaCap));
   parameter Modelica.SIunits.HeatCapacity CCon
     "Heat capacity of Condenser (= cp*m)"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
+      enable=use_ConCap));
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
+      enable=use_ConCap));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva
     "Ambient temperature on evaporator side"
     annotation (Placement(transformation(extent={{240,-40},{200,0}})));
@@ -206,8 +220,7 @@ model HeatPumpReal
     useDeFro                                                          "No 1. Layer"
     annotation (Placement(transformation(extent={{14,-78},{30,-62}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not useDeFro and
-    useSec
-    "No 2. Layer"
+    useSec "No 2. Layer"
     annotation (Placement(transformation(extent={{-84,-70},{-68,-54}})),
       choicesAllMatching=true);
   Interfaces.PassThroughMedium mediumPassThroughSin(
@@ -229,6 +242,8 @@ model HeatPumpReal
   Modelica.Blocks.Interfaces.RealInput T_amb_con
     "Ambient temperature on condenser side"
     annotation (Placement(transformation(extent={{240,0},{200,40}})));
+
+  parameter Real scalingFactor "Scaling-factor of HP";
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{79.82,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},
@@ -357,7 +372,7 @@ equation
           thickness=0.5,
           pattern=LinePattern.Dash),
         Line(
-          points={{58,96},{58,-104}},
+          points={{60,100},{60,-100}},
           color={238,46,47},
           thickness=0.5,
           pattern=LinePattern.Dash),

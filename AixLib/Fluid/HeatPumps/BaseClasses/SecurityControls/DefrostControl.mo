@@ -44,13 +44,93 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.iceFac, iceFacGreMin.u1) annotation (Line(
+      points={{0.07,-97.93},{0.07,-70},{19,-70},{19,-61.6}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
-          extent={{-84,85.5},{91.5,-82.5}},
+          extent={{-86,85.5},{89.5,-82.5}},
           lineColor={175,175,175},
           lineThickness=0.5,
           fillPattern=FillPattern.Solid,
-          fillColor={255,255,170})}),                            Diagram(
+          fillColor={255,255,170}),
+        Line(
+          points={{-38,64},{-38,24}},
+          color={28,108,200}),
+        Line(
+          points={{0,20},{0,-20}},
+          color={28,108,200},
+          origin={-38,44},
+          rotation=90),
+        Line(
+          points={{-14,14},{14,-14}},
+          color={28,108,200},
+          origin={-38,44},
+          rotation=90),
+        Line(
+          points={{14,14},{-14,-14}},
+          color={28,108,200},
+          origin={-38,44},
+          rotation=90),
+        Line(
+          points={{14,52},{14,12}},
+          color={28,108,200}),
+        Line(
+          points={{0,20},{0,-20}},
+          color={28,108,200},
+          origin={14,32},
+          rotation=90),
+        Line(
+          points={{-14,14},{14,-14}},
+          color={28,108,200},
+          origin={14,32},
+          rotation=90),
+        Line(
+          points={{14,14},{-14,-14}},
+          color={28,108,200},
+          origin={14,32},
+          rotation=90),
+        Line(
+          points={{-32,12},{-32,-28}},
+          color={28,108,200}),
+        Line(
+          points={{0,20},{0,-20}},
+          color={28,108,200},
+          origin={-32,-8},
+          rotation=90),
+        Line(
+          points={{-14,14},{14,-14}},
+          color={28,108,200},
+          origin={-32,-8},
+          rotation=90),
+        Line(
+          points={{14,14},{-14,-14}},
+          color={28,108,200},
+          origin={-32,-8},
+          rotation=90),
+        Line(
+          points={{32,0},{32,-40}},
+          color={28,108,200}),
+        Line(
+          points={{0,20},{0,-20}},
+          color={28,108,200},
+          origin={32,-20},
+          rotation=90),
+        Line(
+          points={{-14,14},{14,-14}},
+          color={28,108,200},
+          origin={32,-20},
+          rotation=90),
+        Line(
+          points={{14,14},{-14,-14}},
+          color={28,108,200},
+          origin={32,-20},
+          rotation=90)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>Basic model for a defrost control. The icing factor is calculated in the heat pump based on functions or other models.</p>

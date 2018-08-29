@@ -30,6 +30,8 @@ expandable connector HeatPumpControlBus
     "Ambient temperature on evaporator side";
   Modelica.SIunits.ThermodynamicTemperature T_amb_con
     "Ambient temperature on condenser side";
+  Real iceFac
+    "Factor(0..1) to estimate efficiency losses through icing of evaporator"
   annotation (
     defaultComponentName = "sigBusHP",
     Icon(coordinateSystem(preserveAspectRatio=false)),

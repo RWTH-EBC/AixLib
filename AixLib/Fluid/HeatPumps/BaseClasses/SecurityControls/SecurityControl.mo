@@ -30,22 +30,26 @@ block SecurityControl "Block including all security levels"
   OperationalEnvelope operationalEnvelope(final useOpeEnv=useOpeEnv,
     final tableLow=tableLow,
     final tableUpp=tableUpp)
-    annotation (Placement(transformation(extent={{-18,-18},{20,18}})));
+    annotation (Placement(transformation(extent={{-20,-18},{18,18}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,
-    final minLocTime=minLocTime)
+    final minLocTime=minLocTime,
+    useMinRunTime=useMinRunTime,
+    useMinLocTime=useMinLocTime,
+    useRunPerHou=useRunPerHou,
+    maxRunPerHou=maxRunPerHou)
     annotation (Placement(transformation(extent={{-86,-18},{-50,18}})));
 
 equation
   connect(conTru.y,swiErr.u2)
     annotation (Line(points={{70.6,0},{84,0}}, color={255,0,255}));
   connect(onOffController.nOut, operationalEnvelope.nSet) annotation (Line(
-        points={{-48.5,0},{-20.5333,0}},                                  color=
+        points={{-48.5,0},{-22.5333,0}},                                  color=
          {0,0,127}));
 
   connect(nSet, onOffController.nSet) annotation (Line(points={{-136,0},{-88.4,0}},
                                                      color={0,0,127}));
-  connect(operationalEnvelope.nOut,swiErr.u1)  annotation (Line(points={{21.5833,
+  connect(operationalEnvelope.nOut,swiErr.u1)  annotation (Line(points={{19.5833,
           0},{54,0},{54,12},{72,12},{72,8},{84,8}},   color={0,0,127}));
   connect(sigBusHP, onOffController.sigBusHP) annotation (Line(
       points={{-135,-69},{-88.25,-69},{-88.25,-12.42}},
@@ -57,8 +61,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(onOffController.sigBusHP, operationalEnvelope.sigBusHP) annotation (
       Line(
-      points={{-88.25,-12.42},{-88,-12.42},{-88,-46},{-20,-46},{-20,-12.42},{-20.375,
-          -12.42}},
+      points={{-88.25,-12.42},{-100,-12.42},{-100,-36},{-32,-36},{-32,-12.42},{
+          -22.375,-12.42}},
       color={255,204,51},
       thickness=0.5));
 end SecurityControl;

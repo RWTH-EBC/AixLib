@@ -30,7 +30,7 @@ partial model partialTSetToNSet "Partial model to convert set temperature to com
             8.5,8.5}},
         rotation=0,
         origin={-34.5,75.5})));
-  Utilities.Logical.SmoothSwitch swiNullsecHeaGen
+  Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen
     "If second heater is off, zero is passed" annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},

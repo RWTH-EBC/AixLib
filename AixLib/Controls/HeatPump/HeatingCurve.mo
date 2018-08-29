@@ -97,9 +97,9 @@ equation
   //Check if current outdoor air temperature is higher than the needed room temperature. If so, no heating is required
   //Else the needed offset is added and the temperature is adjusted according to the wished room temperature
   if T_oda >= TRoom_internal then
-    TSet = TRoom_internal - 273.15;
+    TSet = TRoom_internal;
   else
-    TSet =(TSet_internal + TOffset);
+    TSet =(TSet_internal + TOffset) + 273.15;
   end if;
   annotation (Icon(graphics={
         Rectangle(
