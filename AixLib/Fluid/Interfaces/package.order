@@ -19,10 +19,6 @@ PrescribedOutlet
 StaticFourPortHeatMassExchanger
 StaticTwoPortConservationEquation
 StaticTwoPortHeatMassExchanger
-TwoPortHeatMassExchanger
-FourPortFlowResistanceParameters
-LumpedVolumeDeclarations
 TwoPortFlowResistanceParameters
-Examples
 TwoPortHeatMassExchanger
 Examples
