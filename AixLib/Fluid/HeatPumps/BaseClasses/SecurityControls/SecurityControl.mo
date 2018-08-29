@@ -37,9 +37,11 @@ block SecurityControl "Block including all security levels"
     useMinRunTime=useMinRunTime,
     useMinLocTime=useMinLocTime,
     useRunPerHou=useRunPerHou,
-    maxRunPerHou=maxRunPerHou)
+    maxRunPerHou=maxRunPerHou,
+    pre_n_start=pre_n_start)
     annotation (Placement(transformation(extent={{-86,-18},{-50,18}})));
 
+  parameter Boolean pre_n_start=true "Start value of pre(n) at initial time";
 equation
   connect(conTru.y,swiErr.u2)
     annotation (Line(points={{70.6,0},{84,0}}, color={255,0,255}));

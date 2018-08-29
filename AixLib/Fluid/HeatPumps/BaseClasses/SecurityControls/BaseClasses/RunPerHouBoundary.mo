@@ -19,10 +19,6 @@ block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(final delayTime(displayUnit=
           "h") = delayTime)
                annotation (Placement(transformation(extent={{14,-14},{24,-4}})));
-  Modelica.Blocks.Logical.Edge edge1 annotation (Placement(transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=180,
-        origin={-82,0})));
   parameter Real maxRunPer_h "Number of maximal on/off cycles per hour";
   parameter Modelica.SIunits.Time delayTime(displayUnit="h") = 3600
     "Delay time of output with respect to input signal";
@@ -31,9 +27,6 @@ equation
           {66,-14},{66,-6.4},{72.4,-6.4}}, color={0,0,127}));
   connect(intConPluOne.y, triggeredAdd.u)
     annotation (Line(points={{-49.4,0},{-38.4,0}}, color={255,127,0}));
-  connect(edge1.y, triggeredAdd.trigger) annotation (Line(points={{-75.4,
-          -4.44089e-16},{-70,-4.44089e-16},{-70,16},{-33.6,16},{-33.6,7.2}},
-                                                               color={255,0,255}));
   connect(intToReal.u, triggeredAdd.y)
     annotation (Line(points={{-15.2,0},{-22.8,0}}, color={255,127,0}));
   connect(intToReal.y, sub.u1) annotation (Line(points={{-1.4,0},{0.15,0},{0.15,
@@ -44,10 +37,10 @@ equation
     annotation (Line(points={{-1.4,0},{0,0},{0,-9},{13,-9}}, color={0,0,127}));
   connect(fixedDelay.y, sub.u2) annotation (Line(points={{24.5,-9},{34,-9},{34,3.2},
           {42.4,3.2}}, color={0,0,127}));
-  connect(u, edge1.u)
-    annotation (Line(points={{-120,0},{-89.2,0}}, color={255,0,255}));
   connect(runCouLesMax.y, y)
     annotation (Line(points={{90.8,0},{110,0},{110,0}}, color={255,0,255}));
+  connect(u, triggeredAdd.trigger) annotation (Line(points={{-120,0},{-82,0},{
+          -82,24},{-33.6,24},{-33.6,7.2}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                 Rectangle(
         extent={{-100,-100},{100,100}},
