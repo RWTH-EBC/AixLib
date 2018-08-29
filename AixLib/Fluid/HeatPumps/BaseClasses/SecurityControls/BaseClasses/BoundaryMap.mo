@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls.BaseClasses;
 block BoundaryMap
   "A function yielding true if input parameters are out of the charasteristic map"
-  Modelica.Blocks.Interfaces.BooleanOutput ERR
+  Modelica.Blocks.Interfaces.BooleanOutput noErr
     "If an error occurs, this will be false"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput x_in "Current value of x-Axis"
@@ -15,9 +15,10 @@ block BoundaryMap
   Modelica.Blocks.Tables.CombiTable1Ds lowCombiTable1Ds(final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
       table=tableLow)
     annotation (Placement(transformation(extent={{-52,16},{-32,36}})));
-  Modelica.Blocks.MathBoolean.Or
-                             or1(nu=4)
-    annotation (Placement(transformation(extent={{48,-10},{68,10}})));
+  Modelica.Blocks.MathBoolean.Nor
+                             nor1(
+                                 nu=4)
+    annotation (Placement(transformation(extent={{44,-10},{64,10}})));
   Modelica.Blocks.Logical.Greater greaterLow
     annotation (Placement(transformation(extent={{-6,16},{14,36}})));
   Modelica.Blocks.Logical.Less lessUpp
@@ -52,7 +53,8 @@ equation
     annotation (Line(points={{-114,60},{-54,60}}, color={0,0,127}));
   connect(x_in, lowCombiTable1Ds.u) annotation (Line(points={{-114,60},{-72,60},{-72,26},
           {-54,26}}, color={0,0,127}));
-  connect(or1.y, ERR) annotation (Line(points={{69.5,0},{110,0}}, color={255,0,255}));
+  connect(nor1.y, noErr)
+    annotation (Line(points={{65.5,0},{110,0}}, color={255,0,255}));
   connect(y_in, greaterLow.u2) annotation (Line(points={{-114,-60},{-20,-60},{-20,18},
           {-8,18}}, color={0,0,127}));
   connect(lowCombiTable1Ds.y[1], greaterLow.u1)
@@ -61,14 +63,14 @@ equation
           52}}, color={0,0,127}));
   connect(uppCombiTable1Ds.y[1], lessUpp.u1)
     annotation (Line(points={{-31,60},{-8,60}}, color={0,0,127}));
-  connect(lessUpp.y, or1.u[1]) annotation (Line(points={{15,60},{32,60},{32,5.25},{48,
-          5.25}}, color={255,0,255}));
-  connect(greaterLow.y, or1.u[2]) annotation (Line(points={{15,26},{32,26},{32,1.75},
-          {48,1.75}}, color={255,0,255}));
-  connect(lessLef.y, or1.u[3]) annotation (Line(points={{15,-30},{32,-30},{32,-1.75},
-          {48,-1.75}}, color={255,0,255}));
-  connect(greaterRig.y, or1.u[4]) annotation (Line(points={{15,-60},{32,-60},{32,-5.25},
-          {48,-5.25}}, color={255,0,255}));
+  connect(lessUpp.y, nor1.u[1]) annotation (Line(points={{15,60},{32,60},{32,
+          5.25},{44,5.25}}, color={255,0,255}));
+  connect(greaterLow.y, nor1.u[2]) annotation (Line(points={{15,26},{32,26},{32,
+          1.75},{44,1.75}}, color={255,0,255}));
+  connect(lessLef.y, nor1.u[3]) annotation (Line(points={{15,-30},{32,-30},{32,
+          -1.75},{44,-1.75}}, color={255,0,255}));
+  connect(greaterRig.y, nor1.u[4]) annotation (Line(points={{15,-60},{32,-60},{
+          32,-5.25},{44,-5.25}}, color={255,0,255}));
   connect(x_in, lessLef.u1) annotation (Line(points={{-114,60},{-72,60},{-72,-30},{-8,
           -30}}, color={0,0,127}));
   connect(x_in, greaterRig.u1) annotation (Line(points={{-114,60},{-72,60},{-72,-60},

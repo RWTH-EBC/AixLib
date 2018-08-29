@@ -35,7 +35,9 @@ model HeatPumpSystem
     final tableUpp=tableUpp,
     final useMinLocTime=useMinLocTime,
     use_deFro=use_deFro,
-    minIceFac=minIceFac) if use_sec
+    minIceFac=minIceFac,
+    pre_n_start=pre_n_start) if
+                            use_sec
     annotation (Placement(transformation(extent={{-12,-28},{52,28}})));
   BaseClasses.HeatPumpControl.HPControl hPControls(final useAntilegionella=
         useAntLeg, redeclare model TSetToNSet =
@@ -245,6 +247,11 @@ model HeatPumpSystem
       tab="Security Control",
       group="Defrost",
       enable=use_sec and use_deFro));
+  parameter Boolean pre_n_start=true "Start value of pre(n) at initial time"
+    annotation (Dialog(
+      tab="Security Control",
+      group="On-/Off Control",
+      enable=use_sec));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{79.82,-12.9833},{76,-12.9833},{76,-48},{-26.675,-48},{-26.675,

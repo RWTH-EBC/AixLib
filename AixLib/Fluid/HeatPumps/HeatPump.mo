@@ -87,7 +87,7 @@ model HeatPump "Base model of realistic heat pump"
       Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
-        origin={-10,8})));
+        origin={-12,8})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateEva
     "Heat flow rate of the evaporator" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -279,10 +279,11 @@ equation
   connect(heatFlowRateEva.port, Evaporator.heatPort) annotation (Line(points={{-10,-56},
           {-10,-74},{-8,-74}},                        color={191,0,0}));
   connect(innerCycle.QEva, heatFlowRateEva.Q_flow)
-    annotation (Line(points={{-10,-25},{-10,-36}},         color={0,0,127}));
+    annotation (Line(points={{-12,-25},{-12,-30},{-10,-30},{-10,-36}},
+                                                           color={0,0,127}));
   connect(Condenser.heatPort, heatFlowRateCon.port)
     annotation (Line(points={{-6,76},{-16,76},{-16,60}},color={191,0,0}));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{23.15,8.15},{
+  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{21.15,8.15},{
           30,8.15},{30,-44},{-70,-44},{-70,-44.915},{-116.925,-44.915}},
                                             color={0,0,127}), Text(
       string="%second",
@@ -301,8 +302,8 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(innerCycle.QCon, heatFlowRateCon.Q_flow) annotation (Line(points={{
-          -10,41},{-10,43.5},{-16,43.5},{-16,48}}, color={0,0,127}));
+  connect(innerCycle.QCon, heatFlowRateCon.Q_flow) annotation (Line(points={{-12,41},
+          {-12,43.5},{-16,43.5},{-16,48}},         color={0,0,127}));
   connect(T_amb_eva, sigBusHP.T_amb_eva) annotation (Line(points={{116,-40},{54,
           -40},{54,-44},{-94,-44},{-94,-44.915},{-116.925,-44.915}},
         color={0,0,127}), Text(
@@ -311,7 +312,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP, innerCycle.sigBusHP) annotation (Line(
-      points={{-117,-45},{-77.5,-45},{-77.5,8.3},{-40.9,8.3}},
+      points={{-117,-45},{-77.5,-45},{-77.5,8.3},{-42.9,8.3}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

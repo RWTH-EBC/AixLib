@@ -17,7 +17,7 @@ block DefrostControl
   Utilities.Logical.SmoothSwitch        swiErr1
     "If an error occurs, the value of the conZero block will be used(0)"
     annotation (Placement(transformation(extent={{60,-16},{80,4}})));
-  Modelica.Blocks.Sources.Constant conOne(final k=1)
+  Modelica.Blocks.Sources.Constant conOneas(final k=1)
     "If Defrost is enabled, HP runs at full power"
     annotation (Placement(transformation(extent={{20,-30},{32,-18}})));
   Modelica.Blocks.Interfaces.RealOutput nOut1
@@ -28,8 +28,8 @@ block DefrostControl
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
 equation
-  connect(conOne.y, swiErr1.u3) annotation (Line(points={{32.6,-24},{38,-24},{
-          38,-14},{58,-14}}, color={0,0,127}));
+  connect(conOneas.y, swiErr1.u3) annotation (Line(points={{32.6,-24},{38,-24},
+          {38,-14},{58,-14}}, color={0,0,127}));
   connect(swiErr1.y, nOut1) annotation (Line(points={{81,-6},{96,-6},{96,20},{
           110,20}},color={0,0,127}));
   connect(iceFacGreMin.y, modeOut) annotation (Line(points={{5.8,-62},{60,-62},
