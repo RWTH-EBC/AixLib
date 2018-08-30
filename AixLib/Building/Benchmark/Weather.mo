@@ -46,7 +46,7 @@ model Weather
     nPorts=1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-52,-60})));
+        origin={-52,-40})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
@@ -94,13 +94,21 @@ model Weather
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(
                          smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments, table=[-1,
-        0,0; 0.9999,0,0; 1,3.375,8000; 2,3.375,8000])
+        0.05,0; 0,0.05,0; 1,3.375,8000; 2,3.375,8000])
     annotation (Placement(transformation(extent={{-32,-78},{-12,-58}})));
   Modelica.Blocks.Interfaces.RealOutput RLT_Velocity
     "Connector of Real output signals"
     annotation (Placement(transformation(extent={{-100,70},{-120,90}})));
   Modelica.Blocks.Math.Gain gain3(k=10090/(4*3600))
     annotation (Placement(transformation(extent={{-78,76},{-86,84}})));
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=30, y_start=1)
+    annotation (Placement(transformation(extent={{-16,-18},{-28,-6}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{-54,-74},{-42,-62}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1
+    annotation (Placement(transformation(extent={{-76,-84},{-64,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=1)
+    annotation (Placement(transformation(extent={{-76,-68},{-64,-52}})));
 equation
   connect(weather.WindDirection, gain.u)
     annotation (Line(points={{-19,33},{0,33},{0,41},{9,41}}, color={0,0,127}));
@@ -139,7 +147,8 @@ equation
   connect(realExpression.y, feedback.u1)
     annotation (Line(points={{9.4,-40},{-16,-40}}, color={0,0,127}));
   connect(Air_in, Air_in_bou.ports[1])
-    annotation (Line(points={{-100,-60},{-62,-60}}, color={0,127,255}));
+    annotation (Line(points={{-100,-60},{-92,-60},{-92,-40},{-62,-40}},
+                                                    color={0,127,255}));
   connect(weather.WaterInAir, measureBus.WaterInAir) annotation (Line(points={{
           -19,21},{0,21},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
   connect(product.y, internalBus.InternalLoads_Wind_Speed_North) annotation (
@@ -190,16 +199,24 @@ equation
   connect(pVSystem.IcTotalRad, weather.SolarRadiation_OrientedSurfaces[6])
     annotation (Line(points={{-51.8,69.5},{-60,69.5},{-60,0},{-42.8,0},{-42.8,
           13}}, color={255,128,0}));
-  connect(combiTable1Ds.u, controlBus.Fan_RLT) annotation (Line(points={{-34,
-          -68},{-40,-68},{-40,-80},{-69.9,-80},{-69.9,-99.9}}, color={0,0,127}));
-  connect(combiTable1Ds.y[1], boundary.m_flow_in) annotation (Line(points={{-11,
-          -68},{-8,-68},{-8,-12},{-44,-12}}, color={0,0,127}));
   connect(RLT_Velocity, gain3.y)
     annotation (Line(points={{-110,80},{-86.4,80}}, color={0,0,127}));
   connect(gain3.u, combiTable1Ds.y[1]) annotation (Line(points={{-77.2,80},{-60,
           80},{-60,0},{-8,0},{-8,-68},{-11,-68}}, color={0,0,127}));
   connect(combiTable1Ds.y[2], measureBus.Fan_RLT) annotation (Line(points={{-11,
           -68},{0,-68},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
+  connect(boundary.m_flow_in, firstOrder.y)
+    annotation (Line(points={{-44,-12},{-28.6,-12}}, color={0,0,127}));
+  connect(firstOrder.u, combiTable1Ds.y[1]) annotation (Line(points={{-14.8,-12},
+          {-8,-12},{-8,-68},{-11,-68}}, color={0,0,127}));
+  connect(realExpression1.y, switch1.u3) annotation (Line(points={{-63.4,-76},{
+          -60,-76},{-60,-72.8},{-55.2,-72.8}}, color={0,0,127}));
+  connect(switch1.y, combiTable1Ds.u)
+    annotation (Line(points={{-41.4,-68},{-34,-68}}, color={0,0,127}));
+  connect(realExpression2.y, switch1.u1) annotation (Line(points={{-63.4,-60},{
+          -58,-60},{-58,-63.2},{-55.2,-63.2}}, color={0,0,127}));
+  connect(switch1.u2, controlBus.OnOff_RLT) annotation (Line(points={{-55.2,-68},
+          {-88,-68},{-88,-99.9},{-69.9,-99.9}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

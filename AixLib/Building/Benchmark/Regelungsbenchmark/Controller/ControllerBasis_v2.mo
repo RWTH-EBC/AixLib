@@ -1,15 +1,18 @@
 within AixLib.Building.Benchmark.Regelungsbenchmark.Controller;
 model ControllerBasis_v2
+  import AixLib;
   Modelica.Blocks.Math.Gain gain(k=1)
     annotation (Placement(transformation(extent={{82,20},{74,28}})));
-  Controller_Temp.PI_Regler_RLT RLT_Temp annotation (Placement(transformation(
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_RLT
+    RLT_Temp annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-60,0})));
-  Controller_PumpsAndFans.Pump_Basis pump_Basis
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_PumpsAndFans.Pump_Basis
+    pump_Basis
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Controller_PumpsAndFans.Fan_Basis fan_Basis
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_PumpsAndFans.Fan_Basis
+    fan_Basis annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Controller_Generation.Valve_Basis valve_Basis
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Controller_Generation.Generation_Basis generation_Basis
@@ -18,8 +21,8 @@ model ControllerBasis_v2
     annotation (Placement(transformation(extent={{80,-40},{120,0}})));
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{80,0},{120,40}})));
-  Controller_Temp.PI_Regler_TBA_v2 TBA_Temp annotation (Placement(
-        transformation(
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_TBA_v2
+    TBA_Temp annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-86,0})));

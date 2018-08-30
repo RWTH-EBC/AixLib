@@ -55,11 +55,12 @@ model Generation_Aircooling_v2
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=90,
         origin={18,10})));
-  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-      table=[-1,0,0; 0.0,0.0,0; 0.0001,m_flow_nominal_generation_air_min,3900;
-        1,m_flow_nominal_generation_air_max,6000; 1.1,
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, table=[-1,
+        m_flow_nominal_generation_air_min,3900; 0.0,
+        m_flow_nominal_generation_air_min,3900; 1,
+        m_flow_nominal_generation_air_max,6000; 1.1,
         m_flow_nominal_generation_air_max,6000])
-    annotation (Placement(transformation(extent={{-94,-34},{-74,-14}})));
+    annotation (Placement(transformation(extent={{-140,-30},{-120,-10}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-70,-82},{-50,-102}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
@@ -186,6 +187,10 @@ model Generation_Aircooling_v2
         extent={{-5,-5},{5,5}},
         rotation=0,
         origin={75,37})));
+  Modelica.Blocks.Sources.RealExpression realExpression1[2](y=0)
+    annotation (Placement(transformation(extent={{-120,-56},{-108,-40}})));
+  Modelica.Blocks.Logical.Switch switch1[2]
+    annotation (Placement(transformation(extent={{-88,-30},{-76,-18}})));
 equation
   connect(Valve8.y,controlBus. Valve8) annotation (Line(points={{-28,44},{-64,44},
           {-64,0.1},{-99.9,0.1}},     color={0,0,127}));
@@ -237,9 +242,6 @@ equation
     annotation (Line(points={{8,-18},{18,-18},{18,2}}, color={0,127,255}));
   connect(temperatureSensor.port, vol1.heatPort) annotation (Line(points={{-16,
           -10},{-12,-10},{-12,-21},{-2,-21}}, color={191,0,0}));
-  connect(temperatureSensor.T, measureBus.Aircooler_out) annotation (Line(
-        points={{-36,-10},{-40,-10},{-40,-70},{-109.9,-70},{-109.9,-69.9}},
-        color={0,0,127}));
   connect(firstOrder.y, boundary.m_flow_in) annotation (Line(points={{-49.4,-24},
           {-46,-24},{-46,-40},{-34,-40}}, color={0,0,127}));
   connect(gain.u, boundary.m_flow_in) annotation (Line(points={{-16.6,-37},{-46,
@@ -276,12 +278,22 @@ equation
     annotation (Line(points={{66,26},{66,37},{70,37}}, color={191,0,0}));
   connect(thermalConductor1.port_b, vol6.heatPort) annotation (Line(points={{80,
           37},{84,37},{84,36},{84,36},{84,26}}, color={191,0,0}));
-  connect(firstOrder.u, combiTable1Ds.y[1])
-    annotation (Line(points={{-63.2,-24},{-73,-24}}, color={0,0,127}));
-  connect(combiTable1Ds.y[2], measureBus.Fan_Aircooler) annotation (Line(points
-        ={{-73,-24},{-68,-24},{-68,-69.9},{-109.9,-69.9}}, color={0,0,127}));
+  connect(combiTable1Ds.y, switch1.u1) annotation (Line(points={{-119,-20},{
+          -104,-20},{-104,-19.2},{-89.2,-19.2}}, color={0,0,127}));
+  connect(switch1[1].y, firstOrder.u)
+    annotation (Line(points={{-75.4,-24},{-63.2,-24}}, color={0,0,127}));
+  connect(switch1[2].y, measureBus.Fan_Aircooler) annotation (Line(points={{
+          -75.4,-24},{-70,-24},{-70,-69.9},{-109.9,-69.9}}, color={0,0,127}));
   connect(combiTable1Ds.u, controlBus.Fan_Aircooler) annotation (Line(points={{
-          -96,-24},{-99.9,-24},{-99.9,0.1}}, color={0,0,127}));
+          -142,-20},{-160,-20},{-160,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(switch1[1].u2, controlBus.OnOff_Aircooler) annotation (Line(points={{
+          -89.2,-24},{-99.9,-24},{-99.9,0.1}}, color={255,0,255}));
+  connect(switch1[2].u2, controlBus.OnOff_Aircooler) annotation (Line(points={{
+          -89.2,-24},{-99.9,-24},{-99.9,0.1}}, color={255,0,255}));
+  connect(realExpression1.y, switch1.u3) annotation (Line(points={{-107.4,-48},
+          {-100,-48},{-100,-28.8},{-89.2,-28.8}}, color={0,0,127}));
+  connect(temperatureSensor.T, measureBus.Aircooler) annotation (Line(points={{
+          -36,-10},{-40,-10},{-40,-69.9},{-109.9,-69.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_Aircooling_v2;

@@ -37,6 +37,8 @@ expandable connector Bus_Control
   Real Pump_TBA_Workshop_y "Normalized speed of waterpump of the workshop TBA" annotation (__Dymola_Tag={"ControlBus"});
 
   // Fan m_flow
+  Boolean OnOff_RLT "On/Off Signal for the RLT fan" annotation (__Dymola_Tag={"ControlBus"});
+  Boolean OnOff_Aircooler "On/Off Signal for the aircooler fan" annotation (__Dymola_Tag={"ControlBus"});
   Real Fan_Aircooler "Normalized Massflow of Aircooler" annotation (__Dymola_Tag={"ControlBus"});
   Real Fan_RLT "Normalized Massflow of the RLT-fan" annotation (__Dymola_Tag={"ControlBus"});
 
@@ -76,8 +78,8 @@ expandable connector Bus_Control
   Real Valve_TBA_Workshop_Temp "Valveposition to control the temperatur to the workshop" annotation (__Dymola_Tag={"ControlBus"});
 
   // On/Off components
-  Boolean OnOff_heatpump_small "On/Off Signal for the small heatpump" annotation (__Dymola_Tag={"ControlBus"});
-  Boolean OnOff_heatpump_big "On/Off Signal for the big heatpump" annotation (__Dymola_Tag={"ControlBus"});
+  Boolean OnOff_heatpump_1 "On/Off Signal for the first heatpump" annotation (__Dymola_Tag={"ControlBus"});
+  Boolean OnOff_heatpump_2 "On/Off Signal for the second heatpump" annotation (__Dymola_Tag={"ControlBus"});
   Boolean OnOff_CHP   "On/Off Signal for the CHP" annotation (__Dymola_Tag={"ControlBus"});
   Boolean OnOff_boiler "On/Off Signal for the boiler" annotation (__Dymola_Tag={"ControlBus"});
 

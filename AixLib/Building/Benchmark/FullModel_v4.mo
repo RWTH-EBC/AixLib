@@ -5,7 +5,7 @@ model FullModel_v4
   AixLib.Building.Benchmark.Weather
           weather
     annotation (Placement(transformation(extent={{50,82},{70,102}})));
-  AixLib.Building.Benchmark.Buildings.Office
+  Buildings.Office_v2
                    office
     annotation (Placement(transformation(extent={{30,0},{92,60}})));
   Transfer.Transfer_RLT.Full_Transfer_RLT_v2
@@ -29,15 +29,15 @@ model FullModel_v4
     full_Transfer_TBA_Heatexchanger(
     dp_Heatexchanger_nominal=20000,
     dp_Valve_nominal_openplanoffice=30000,
-    m_flow_nominal_openplanoffice=2.516,
+    m_flow_nominal_openplanoffice=2.394,
     dp_Valve_nominal_conferenceroom=30000,
-    m_flow_nominal_conferenceroom=0.19,
+    m_flow_nominal_conferenceroom=0.379,
     dp_Valve_nominal_multipersonoffice=30000,
-    m_flow_nominal_multipersonoffice=0.378,
+    m_flow_nominal_multipersonoffice=0.56,
     dp_Valve_nominal_canteen=30000,
-    m_flow_nominal_canteen=1.061,
+    m_flow_nominal_canteen=1.086,
     dp_Valve_nominal_workshop=30000,
-    m_flow_nominal_workshop=1.061)
+    m_flow_nominal_workshop=1.981)
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
   AixLib.Building.Benchmark.LogModel
            logModel
@@ -49,42 +49,42 @@ model FullModel_v4
                         Control
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}})));
   Generation.Generation_v2 generation_v2_1(
-    m_flow_nominal_hotwater=6.307,
-    m_flow_nominal_warmwater=7.819,
-    m_flow_nominal_coldwater=7.774,
     m_flow_nominal_generation_hot=3.805,
-    vol_small=0.012,
-    vol_big=0.024,
-    m_flow_nominal_generation_warmwater=4.951,
-    m_flow_nominal_generation_coldwater=3.914,
-    m_flow_nominal_generation_aircooler=4.951,
     Probe_depth=120,
     pipe_length_hotwater=25,
     pipe_length_warmwater=25,
     pipe_length_coldwater=25,
     alphaHC1_warm=500,
     alphaHC2_warm=500,
-    alphaHC1_cold=500,
-    R_loss_small=50,
-    R_loss_big=100,
     m_flow_nominal_generation_air_max=28.649,
     m_flow_nominal_generation_air_min=22.537,
     pipe_diameter_hotwater=0.0809,
     pipe_diameter_warmwater=0.0809,
-    pipe_diameter_coldwater=0.0689,
     pipe_nodes=2,
     n_probes=60,
     Thermal_Conductance_Cold=115000/10,
     Thermal_Conductance_Warm=145000/10,
+    m_flow_nominal_hotwater=7.953,
+    m_flow_nominal_warmwater=7.999,
+    m_flow_nominal_coldwater=7.914,
+    pipe_diameter_coldwater=0.0809,
+    vol_1=0.024,
+    vol_2=0.024,
+    R_loss_1=2.8,
+    R_loss_2=2.8,
+    m_flow_nominal_generation_warmwater=6.601,
+    m_flow_nominal_generation_coldwater=5.218,
+    m_flow_nominal_generation_aircooler=6.601,
+    Area_Heatexchanger_Air=1130.06,
     dpHeatexchanger_nominal=20000,
     dpValve_nominal_generation_hot=40000,
-    T_conMax_big=328.15,
-    T_conMax_small=328.15,
+    T_conMax_1=328.15,
+    T_conMax_2=328.15,
     dpValve_nominal_warmwater=37000,
     dpValve_nominal_coldwater=40000,
     dpValve_nominal_generation_aircooler=60000,
-    Area_Heatexchanger_Air=772.39,
-    Earthtemperature_start=283.15)
+    Earthtemperature_start=283.15,
+    alphaHC1_cold=700)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
     surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),

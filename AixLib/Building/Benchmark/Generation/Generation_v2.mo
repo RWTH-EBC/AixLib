@@ -26,12 +26,12 @@ model Generation_v2
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "generation_hot"));
 
     //Heatpump
-    parameter Modelica.SIunits.Temp_K T_conMax_big = 328.15 annotation(Dialog(tab = "Heatpump"));
-    parameter Modelica.SIunits.Temp_K T_conMax_small = 328.15 annotation(Dialog(tab = "Heatpump"));
-    parameter Modelica.SIunits.Volume vol_small = 0.012 annotation(Dialog(tab = "Heatpump"));
-    parameter Modelica.SIunits.Volume vol_big = 0.024 annotation(Dialog(tab = "Heatpump"));
-    parameter Modelica.SIunits.ThermalConductance R_loss_small = 0 annotation(Dialog(tab = "Heatpump"));
-    parameter Modelica.SIunits.ThermalConductance R_loss_big = 0 annotation(Dialog(tab = "Heatpump"));
+    parameter Modelica.SIunits.Temp_K T_conMax_1 = 328.15 annotation(Dialog(tab = "Heatpump"));
+    parameter Modelica.SIunits.Temp_K T_conMax_2 = 328.15 annotation(Dialog(tab = "Heatpump"));
+    parameter Modelica.SIunits.Volume vol_1 = 0.012 annotation(Dialog(tab = "Heatpump"));
+    parameter Modelica.SIunits.Volume vol_2 = 0.024 annotation(Dialog(tab = "Heatpump"));
+    parameter Modelica.SIunits.ThermalConductance R_loss_1 = 0 annotation(Dialog(tab = "Heatpump"));
+    parameter Modelica.SIunits.ThermalConductance R_loss_2 = 0 annotation(Dialog(tab = "Heatpump"));
 
     //Generation Warm
     parameter Real m_flow_nominal_generation_warmwater = 0 annotation(Dialog(tab = "generation_warmwater"));
@@ -76,18 +76,18 @@ model Generation_v2
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_warm,
     alphaHC2=alphaHC2_warm,
-    data=DataBase.Storage.Benchmark_7500l(),
+    data=DataBase.Storage.Benchmark_22000l(),
     TStart=343.15)
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
   Generation_heatPump generation_heatPump1(
-    T_conMax_big=T_conMax_big,
-    T_conMax_small=T_conMax_small,
-    vol_small=vol_small,
-    vol_big=vol_big,
-    R_loss_small=R_loss_small,
-    R_loss_big=R_loss_big,
     redeclare package Medium_Water = Medium_Water,
-    dpHeatexchanger_nominal=dpHeatexchanger_nominal)
+    dpHeatexchanger_nominal=dpHeatexchanger_nominal,
+    T_conMax_1=T_conMax_1,
+    T_conMax_2=T_conMax_2,
+    vol_1=vol_1,
+    vol_2=vol_2,
+    R_loss_1=R_loss_1,
+    R_loss_2=R_loss_2)
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   Fluid.Storage.BufferStorage ColdWater(
     useHeatingRod=false,
@@ -101,7 +101,7 @@ model Generation_v2
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_cold,
-    data=DataBase.Storage.Benchmark_12000l(),
+    data=DataBase.Storage.Benchmark_42000l(),
     TStart=283.15)
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve4(
@@ -169,8 +169,8 @@ model Generation_v2
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_warm,
     alphaHC2=alphaHC2_warm,
-    data=DataBase.Storage.Benchmark_7500l(),
-    TStart=308.15)
+    TStart=308.15,
+    data=DataBase.Storage.Benchmark_22000l())
     annotation (Placement(transformation(extent={{16,-18},{46,20}})));
   Fluid.Sources.Boundary_pT bou4(
     redeclare package Medium = Medium_Water,
@@ -498,6 +498,11 @@ equation
   connect(prescribedTemperature.T, measureBus.RoomTemp_Canteen) annotation (
       Line(points={{73.2,64},{76,64},{76,80},{76,80},{76,88},{4,88},{4,90.1},{
           -49.9,90.1}}, color={0,0,127}));
+  connect(generation_geothermalProbe.measureBus, measureBus) annotation (Line(
+      points={{-40,-90},{-34,-90},{-34,-104},{-98,-104},{-98,88},{-50,88},{-50,
+          90},{-50,90}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_v2;

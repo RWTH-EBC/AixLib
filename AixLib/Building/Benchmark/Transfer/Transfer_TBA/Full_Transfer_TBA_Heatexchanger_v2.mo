@@ -15,22 +15,22 @@ model Full_Transfer_TBA_Heatexchanger_v2
     parameter Modelica.SIunits.Pressure dp_Valve_nominal_workshop = 0 annotation(Dialog(tab = "General"));
     parameter Real m_flow_nominal_workshop = 0 annotation(Dialog(tab = "General"));
 
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,16},{-90,36}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-24},{-90,-4}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA[5]
     annotation (Placement(transformation(extent={{30,90},{50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
   BusSystem.Bus_Control controlBus
@@ -38,7 +38,6 @@ model Full_Transfer_TBA_Heatexchanger_v2
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{80,-60},{120,-20}})));
   TBA_Pipe_Openplanoffice_v3 OpenPlanOffice(
-    pipe_length=8,
     V_mixing=0.0001,
     dp_Valve_nominal=dp_Valve_nominal_openplanoffice,
     m_flow_nominal=m_flow_nominal_openplanoffice,
@@ -46,35 +45,35 @@ model Full_Transfer_TBA_Heatexchanger_v2
     TBA_wall_length=45,
     TBA_wall_height=30,
     pipe_diameter=0.0419,
-    pipe_height=3,
     dp_Heatexchanger_nominal=dp_Heatexchanger_nominal,
-    Thermal_Conductance=74000/10)
+    pipe_height=0,
+    pipe_length=35,
+    Thermal_Conductance=70072/10)
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   TBA_Pipe_v3 Conferenceroom(
     m_flow_nominal=m_flow_nominal_conferenceroom,
     dp_Valve_nominal=dp_Valve_nominal_conferenceroom,
-    pipe_length=48,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=5,
     TBA_wall_height=10,
     V_mixing=0.0001,
     pipe_diameter=0.0161,
-    pipe_height=3,
     dp_Heatexchanger_nominal=dp_Heatexchanger_nominal,
-    Thermal_Conductance=6000/10)
+    pipe_length=45,
+    Thermal_Conductance=11105/10)
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
   TBA_Pipe_v3 Multipersonoffice(
     dp_Valve_nominal=dp_Valve_nominal_multipersonoffice,
     m_flow_nominal=m_flow_nominal_multipersonoffice,
-    pipe_length=28,
     TBA_pipe_diameter=0.02,
     TBA_wall_length=5,
     TBA_wall_height=20,
     V_mixing=0.0001,
-    pipe_diameter=0.0126,
-    pipe_height=3,
     dp_Heatexchanger_nominal=dp_Heatexchanger_nominal,
-    Thermal_Conductance=11000/10)
+    pipe_length=70,
+    pipe_height=0,
+    pipe_diameter=0.0273,
+    Thermal_Conductance=16397/10)
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   TBA_Pipe_v3 Canteen(
     dp_Valve_nominal=dp_Valve_nominal_canteen,
@@ -87,7 +86,7 @@ model Full_Transfer_TBA_Heatexchanger_v2
     pipe_diameter=0.0273,
     pipe_height=0,
     dp_Heatexchanger_nominal=dp_Heatexchanger_nominal,
-    Thermal_Conductance=31000/10)
+    Thermal_Conductance=31781/10)
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
   TBA_Pipe_v3 Workshop(
     dp_Valve_nominal=dp_Valve_nominal_workshop,
@@ -97,10 +96,10 @@ model Full_Transfer_TBA_Heatexchanger_v2
     TBA_wall_length=30,
     TBA_wall_height=30,
     V_mixing=0.0001,
-    pipe_diameter(displayUnit="m") = 0.0273,
     pipe_height=0,
     dp_Heatexchanger_nominal=dp_Heatexchanger_nominal,
-    Thermal_Conductance=31000/10)
+    pipe_diameter(displayUnit="m") = 0.0419,
+    Thermal_Conductance=57972/10)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 equation
   connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA[1]) annotation (Line(points=

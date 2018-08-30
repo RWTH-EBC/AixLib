@@ -4,7 +4,7 @@ model InternalLoads_Power
     annotation (Placement(transformation(extent={{-14,84},{-2,96}})));
   Modelica.Blocks.Math.Gain Met_Workshop(k=2*1.8*58)
     annotation (Placement(transformation(extent={{-14,8},{-2,20}})));
-  Modelica.Blocks.Math.Gain PowerEquiment_OpenPlanOffice(k=100)
+  Modelica.Blocks.Math.Gain PowerEquiment_OpenPlanOffice(k=50)
     annotation (Placement(transformation(extent={{-42,74},{-30,86}})));
   Modelica.Blocks.Math.Gain PowerEquiment_Workshop(k=200)
     annotation (Placement(transformation(extent={{-42,-2},{-30,10}})));
@@ -28,15 +28,15 @@ model InternalLoads_Power
     annotation (Placement(transformation(extent={{28,-26},{40,-14}})));
   Modelica.Blocks.Math.Add3 add3_5
     annotation (Placement(transformation(extent={{28,-46},{40,-34}})));
-  Modelica.Blocks.Math.Gain PowerEquiment_MultiPersonOffice(k=100)
+  Modelica.Blocks.Math.Gain PowerEquiment_MultiPersonOffice(k=50)
     annotation (Placement(transformation(extent={{-42,56},{-30,68}})));
-  Modelica.Blocks.Math.Gain PowerEquiment_Conferenceroom(k=100)
+  Modelica.Blocks.Math.Gain PowerEquiment_Conferenceroom(k=20)
     annotation (Placement(transformation(extent={{-42,38},{-30,50}})));
   Modelica.Blocks.Math.Gain Light_OpenPlanOffice(k=4737)
     annotation (Placement(transformation(extent={{-42,-22},{-30,-10}})));
-  Modelica.Blocks.Math.Gain Light_MultipersonOffice(k=210)
+  Modelica.Blocks.Math.Gain Light_MultipersonOffice(k=421)
     annotation (Placement(transformation(extent={{-42,-40},{-30,-28}})));
-  Modelica.Blocks.Math.Gain Light_Conferenceroom(k=421)
+  Modelica.Blocks.Math.Gain Light_Conferenceroom(k=210)
     annotation (Placement(transformation(extent={{-42,-58},{-30,-46}})));
   Modelica.Blocks.Math.Gain Light_Canteen(k=5684)
     annotation (Placement(transformation(extent={{-42,-76},{-30,-64}})));

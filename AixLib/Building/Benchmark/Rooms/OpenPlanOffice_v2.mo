@@ -1,5 +1,5 @@
 within AixLib.Building.Benchmark.Rooms;
-model OpenPlanOffice
+model OpenPlanOffice_v2
 replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
 
@@ -11,9 +11,9 @@ replaceable package Medium_Air =
     withDoor=false,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     T0(displayUnit="degC") = 293.15,
-    wall_length=45,
-    windowarea=67.5)
-               annotation (Placement(transformation(
+    wall_length=40,
+    windowarea=80,
+    Model=1)   annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=-90,
         origin={-52,60})));
@@ -24,30 +24,12 @@ replaceable package Medium_Air =
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     withSunblind=false,
     withDoor=false,
-    wall_length=45,
-    windowarea=67.5,
+    wall_length=30,
+    windowarea=60,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={-52,-62})));
-  Components.Walls.Wall WestWallToMultiPersonOffice(
-    wall_height=3,
-    solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    windowarea=60,
-    withSunblind=false,
-    outside=false,
-    wall_length=20,
-    withDoor=true,
-    door_height=2.125,
-    door_width=1,
-    WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    T0=293.15) annotation (Placement(transformation(
-        extent={{-3.99999,-24},{4.00002,24}},
-        rotation=0,
-        origin={-76,28})));
   Components.Walls.Wall EastWall(
     wall_height=3,
     solar_absorptance=0.48,
@@ -56,7 +38,7 @@ replaceable package Medium_Air =
     withSunblind=false,
     withDoor=false,
     wall_length=30,
-    windowarea=45,
+    windowarea=60,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=180,
@@ -70,16 +52,16 @@ replaceable package Medium_Air =
     windowarea=60,
     withSunblind=false,
     outside=false,
-    withDoor=true,
     door_height=2.125,
     door_width=1,
-    wall_length=10,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
+    withDoor=false,
+    wall_length=20,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
-        origin={-76,-28})));
-  Components.Walls.Wall FloorToWorkshop(
+        origin={-76,26})));
+  Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
     withWindow=true,
     redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
@@ -88,40 +70,21 @@ replaceable package Medium_Air =
     withSunblind=false,
     withDoor=false,
     outside=false,
-    WallType=DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf(),
     wall_length=30,
     ISOrientation=2,
-    wall_height=25,
+    wall_height=45,
+    WallType=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={14,-62})));
-  Components.Walls.Wall FloorToKitchen1(
-    solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    windowarea=60,
-    withSunblind=false,
-    withDoor=false,
-    outside=false,
-    WallType=DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf(),
-    wall_length=30,
-    wall_height=20,
-    ISOrientation=2,
-    T0=293.15) annotation (Placement(transformation(
-        extent={{-3.99999,-24},{4.00002,24}},
-        rotation=90,
-        origin={70,-62})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToKitchen
-    annotation (Placement(transformation(extent={{60,-110},{80,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToWorkshop
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToGround
     annotation (Placement(transformation(extent={{4,-110},{24,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToConferenceRoom
-    annotation (Placement(transformation(extent={{-110,-38},{-90,-18}})));
+    annotation (Placement(transformation(extent={{-110,16},{-90,36}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     HeatPort_ToMultiPersonOffice
-    annotation (Placement(transformation(extent={{-110,18},{-90,38}})));
+    annotation (Placement(transformation(extent={{60,-110},{80,-90}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_EastWall annotation (
       Placement(transformation(
         extent={{-12,-12},{12,12}},
@@ -229,16 +192,49 @@ replaceable package Medium_Air =
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={80,0})));
+  Components.Walls.Wall WestWallToMultiPersonOffice(
+    wall_height=3,
+    solar_absorptance=0.48,
+    withWindow=true,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    windowarea=60,
+    withSunblind=false,
+    outside=false,
+    door_height=2.125,
+    door_width=1,
+    WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
+    withDoor=false,
+    wall_length=30,
+    T0=293.15) annotation (Placement(transformation(
+        extent={{-3.99999,-24},{4.00002,24}},
+        rotation=90,
+        origin={70,-62})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToCanteen
+    annotation (Placement(transformation(extent={{-110,-36},{-90,-16}})));
+  Components.Walls.Wall WestWallToConferenceRoom1(
+    wall_height=3,
+    solar_absorptance=0.48,
+    withWindow=true,
+    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    windowarea=60,
+    withSunblind=false,
+    outside=false,
+    door_height=2.125,
+    door_width=1,
+    WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
+    withDoor=false,
+    wall_length=30,
+    T0=293.15) annotation (Placement(transformation(
+        extent={{-3.99999,-24},{4.00002,24}},
+        rotation=0,
+        origin={-76,-26})));
 equation
-  connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
-    annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
-  connect(FloorToWorkshop.port_outside, HeatPort_ToWorkshop)
+  connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{14,-66.2},{14,-100}}, color={191,0,0}));
   connect(WestWallToConferenceRoom.port_outside, HeatPort_ToConferenceRoom)
-    annotation (Line(points={{-80.2,-28},{-100,-28}}, color={191,0,0}));
-  connect(WestWallToMultiPersonOffice.port_outside,
-    HeatPort_ToMultiPersonOffice)
-    annotation (Line(points={{-80.2,28},{-100,28}}, color={191,0,0}));
+    annotation (Line(points={{-80.2,26},{-100,26}},   color={191,0,0}));
   connect(SouthWall.WindSpeedPort, WindSpeedPort_SouthWall) annotation (Line(
         points={{-69.6,-66.2},{-69.6,-80},{-82,-80},{-82,-106}}, color={0,0,127}));
   connect(EastWall.WindSpeedPort, WindSpeedPort_EastWall) annotation (Line(
@@ -254,21 +250,15 @@ equation
   connect(SouthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-52,-58},{-52,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(FloorToWorkshop.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{14,-58},{14,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
   connect(WestWallToConferenceRoom.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-72,-28},{-60,-28},{-60,-52},{-20.1,-52},{-20.1,
-          -35.4}}, color={191,0,0}));
-  connect(WestWallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-72,28},{-60,28},{-60,-52},{-20.1,-52},{-20.1,
+    annotation (Line(points={{-72,26},{-60,26},{-60,-52},{-20.1,-52},{-20.1,
           -35.4}}, color={191,0,0}));
   connect(NorthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-52,56},{-52,48},{-60,48},{-60,-52},{-20.1,-52},{
           -20.1,-35.4}}, color={191,0,0}));
-  connect(FloorToKitchen1.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{70,-58},{70,-52},{-20.1,-52},{-20.1,-35.4}},
-        color={191,0,0}));
   connect(EastWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{56,0},{50,0},{50,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
@@ -323,6 +313,18 @@ equation
   connect(prescribedTemperature2.T, measureBus.AirTemp) annotation (Line(points=
          {{-52,-95.2},{-52,-98},{-24,-98},{-24,-52},{-60,-52},{-60,-59.9},{
           -99.9,-59.9}}, color={0,0,127}));
+  connect(WestWallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
+    annotation (Line(points={{70,-58},{70,-52},{-20,-52},{-20,-44},{-20.1,-44},
+          {-20.1,-35.4}}, color={191,0,0}));
+  connect(WestWallToMultiPersonOffice.port_outside,
+    HeatPort_ToMultiPersonOffice)
+    annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
+  connect(WestWallToConferenceRoom1.port_outside, HeatPort_ToCanteen)
+    annotation (Line(points={{-80.2,-26},{-86,-26},{-86,-26},{-86,-26},{-86,-26},
+          {-100,-26}}, color={191,0,0}));
+  connect(WestWallToConferenceRoom1.thermStarComb_inside, thermStar_Demux.thermStarComb)
+    annotation (Line(points={{-72,-26},{-60,-26},{-60,-52},{-20.1,-52},{-20.1,
+          -35.4}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},
@@ -330,4 +332,4 @@ equation
           textString="Solar absorptance ist noch nicht richtig,
 gucken wie das mit PV Anlage ist
 ")}));
-end OpenPlanOffice;
+end OpenPlanOffice_v2;

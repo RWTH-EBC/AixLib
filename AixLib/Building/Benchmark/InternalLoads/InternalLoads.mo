@@ -8,11 +8,11 @@ model InternalLoads
     annotation (Placement(transformation(extent={{84,50},{104,70}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(
                                                         tableOnFile=true,
-    final fileName=
-        "D:/aku-bga/AixLib/AixLib/Building/Benchmark/InternalLoads/InternalLoads_v1.mat",
     tableName="final",
     timeScale=1,
-    columns={2,3,4,5,6,7,8,9,10,11})
+    columns={2,3,4,5,6,7,8,9,10,11},
+    final fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v1.mat"))
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   BusSystem.InternalBus internalBus

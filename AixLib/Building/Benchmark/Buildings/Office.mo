@@ -128,6 +128,16 @@ equation
   connect(groundFloor.SolarRadiationPort_West, SolarRadiationPort_West1)
     annotation (Line(points={{-20.8,-24},{-30,-24},{-30,-22},{-30,-22},{-30,0},
           {60,0},{60,-40},{90,-40}}, color={255,128,0}));
+  connect(firstFloor.HeatPort_ToWorkshop_OpenPlanOffice, groundFloor.HeatPort_FromWorkshop)
+    annotation (Line(points={{0,20},{0,10},{-8,10},{-8,-20}}, color={191,0,0}));
+  connect(firstFloor.HeatPort_ToWorkshop_ConferenceRoom, groundFloor.HeatPort_FromWorkshop)
+    annotation (Line(points={{-6.4,20},{-6,10},{-8,10},{-8,-20}}, color={191,0,
+          0}));
+  connect(firstFloor.HeatPort_ToWorkshop_MultiPersonOffice, groundFloor.HeatPort_FromWorkshop)
+    annotation (Line(points={{-12.8,20},{-14,20},{-14,10},{-8,10},{-8,-20}},
+        color={191,0,0}));
+  connect(firstFloor.HeatPort_ToKitchen_OpenPlanOffice, groundFloor.HeatPort_FromCanteen)
+    annotation (Line(points={{8,20},{8,-20}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office;

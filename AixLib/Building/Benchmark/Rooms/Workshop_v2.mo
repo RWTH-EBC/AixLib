@@ -1,5 +1,5 @@
 within AixLib.Building.Benchmark.Rooms;
-model Workshop
+model Workshop_v2
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
   Components.Walls.Wall NorthWall(
@@ -10,8 +10,8 @@ model Workshop
     withSunblind=false,
     withDoor=false,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    T0(displayUnit="degC") = 293.15,
-    wall_length=30)
+    wall_length=30,
+    T0(displayUnit="degC") = 288.15)
                annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=-90,
@@ -25,7 +25,7 @@ model Workshop
     withSunblind=false,
     withDoor=false,
     wall_length=30,
-    T0=293.15) annotation (Placement(transformation(
+    T0=288.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={-52,-62})));
@@ -38,7 +38,7 @@ model Workshop
     withDoor=false,
     wall_length=30,
     windowarea=60,
-    T0=293.15) annotation (Placement(transformation(
+    T0=288.15) annotation (Placement(transformation(
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=180,
         origin={-80,0})));
@@ -51,12 +51,12 @@ model Workshop
     windowarea=60,
     withSunblind=false,
     outside=false,
-    withDoor=true,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
     wall_length=30,
-    T0=293.15) annotation (Placement(transformation(
+    withDoor=false,
+    T0=288.15) annotation (Placement(transformation(
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=0,
         origin={72,-10})));
@@ -73,7 +73,7 @@ model Workshop
     ISOrientation=2,
     WallType=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     wall_height=30,
-    T0=293.15) annotation (Placement(transformation(
+    T0=288.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={28,-62})));
@@ -82,9 +82,11 @@ model Workshop
     wall_height=30,
     withDoor=false,
     ISOrientation=3,
-    outside=false,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf_TBA(),
-    wall_length=30)
+    wall_length=30,
+    outside=true,
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA(),
+    withWindow=false,
+    T0=288.15)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
@@ -99,9 +101,9 @@ model Workshop
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     redeclare package Medium = Medium_Air,
+    V=2700,
     p_start=100000,
-    T_start=293.15,
-    V=2700)
+    T_start=288.15)
     annotation (Placement(transformation(extent={{6,-12},{26,8}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToGround
     annotation (Placement(transformation(extent={{18,-110},{38,-90}})));
@@ -152,8 +154,6 @@ model Workshop
     annotation (Placement(transformation(extent={{-116,80},{-92,104}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a AddPower_Workshop
     annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_Workshop
-    annotation (Placement(transformation(extent={{50,90},{70,110}})));
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
@@ -175,6 +175,22 @@ model Workshop
         extent={{6,-6},{-6,6}},
         rotation=-90,
         origin={-52,-88})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort_Roof annotation (Placement(
+        transformation(
+        extent={{-12,-12},{12,12}},
+        rotation=-90,
+        origin={40,104})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_Roof annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={70,110})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature3
+                          annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={20,88})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{28,-66.2},{28,-100}}, color={191,0,0}));
@@ -228,8 +244,6 @@ equation
           -35.4}}, color={191,0,0}));
   connect(HeatPort_ToCanteen, WestWallToCanteen.port_outside) annotation (Line(
         points={{100,-32},{88,-32},{88,-10},{76.2,-10}}, color={191,0,0}));
-  connect(activeWallPipeBased.port_outside, HeatPort_Workshop) annotation (Line(
-        points={{20,64.2},{20,80},{60,80},{60,100}}, color={191,0,0}));
   connect(temperatureSensor.T, measureBus.RoomTemp_Workshop) annotation (Line(
         points={{28,22},{40,22},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,
           -59.9}}, color={0,0,127}));
@@ -254,6 +268,16 @@ equation
   connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points=
          {{-52,97.2},{-52,102},{-80,102},{-80,48},{-60,48},{-60,-59.9},{-99.9,
           -59.9}}, color={0,0,127}));
+  connect(activeWallPipeBased.WindSpeedPort, WindSpeedPort_Roof) annotation (
+      Line(points={{37.6,64.2},{37.6,80.1},{40,80.1},{40,104}}, color={0,0,127}));
+  connect(SolarRadiationPort_Roof, activeWallPipeBased.SolarRadiationPort)
+    annotation (Line(points={{70,110},{70,80},{42,80},{42,65.2}}, color={255,
+          128,0}));
+  connect(prescribedTemperature3.port, activeWallPipeBased.port_outside)
+    annotation (Line(points={{20,82},{20,64.2}}, color={191,0,0}));
+  connect(prescribedTemperature3.T, measureBus.AirTemp) annotation (Line(points
+        ={{20,95.2},{20,98},{10,98},{10,80},{-20,80},{-20,48},{-60,48},{-60,
+          -59.9},{-99.9,-59.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end Workshop;
+end Workshop_v2;

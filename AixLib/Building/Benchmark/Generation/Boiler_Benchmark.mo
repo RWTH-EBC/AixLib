@@ -55,7 +55,7 @@ model Boiler_Benchmark "Boiler with internal and external control"
     annotation (Placement(transformation(extent={{24,54},{4,74}})));
   Modelica.Blocks.Interfaces.RealOutput Fuel_Input
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  Modelica.Blocks.Math.Gain gain(k=eta)
+  Modelica.Blocks.Math.Gain gain(k=eta/1000)
     annotation (Placement(transformation(extent={{4,-2},{16,10}})));
 equation
   connect(senTCold.T, internalControl.TFlowCold) annotation (Line(points={{-70,

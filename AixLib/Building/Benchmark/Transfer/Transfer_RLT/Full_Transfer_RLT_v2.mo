@@ -8,22 +8,22 @@ model Full_Transfer_RLT_v2
   RLT_v2 Workshop(
     RLT_m_flow_nominal=0.65,
     m_flow_nominal_hot=0.194,
-    m_flow_nominal_cold=0.919,
     RLT_dp_Heatexchanger(displayUnit="Pa") = 35.5,
     pipe_length=15,
     V_mixing=0.0001,
     pipe_height=0,
     pipe_length_air=25,
     pipe_diameter_hot=0.0126,
-    pipe_diameter_cold=0.0273,
     pipe_diameter_air=0.415,
     RLT_tau=6.25,
     V_air=0.55,
     Area_pipe_air=1950/(4*3600),
     Area_Heatexchanger_AirWater_Hot=4.75,
     dpValve_nominal_hot=7000,
+    pipe_diameter_cold=0.0419,
+    m_flow_nominal_cold=1.409,
     dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=270.62)
+    Area_Heatexchanger_AirWater_Cold=414.86)
     annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -34,20 +34,20 @@ model Full_Transfer_RLT_v2
         Medium_Air)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   BusSystem.Bus_Control controlBus
@@ -55,100 +55,100 @@ model Full_Transfer_RLT_v2
   RLT_v2 Canteen(
     RLT_m_flow_nominal=1.1,
     m_flow_nominal_hot=1.072,
-    m_flow_nominal_cold=0.777,
     RLT_dp_Heatexchanger(displayUnit="Pa") = 38.5,
     pipe_length=10,
     V_mixing=0.0001,
     pipe_height=0,
     pipe_length_air=10,
     pipe_diameter_hot=0.0273,
-    pipe_diameter_cold=0.0273,
     pipe_diameter_air=0.54,
     RLT_tau=3.75,
     V_air=0.92,
     Area_pipe_air=3300/(4*3600),
     Area_Heatexchanger_AirWater_Hot=26.31,
     dpValve_nominal_hot=7000,
+    pipe_diameter_cold=0.0419,
+    m_flow_nominal_cold=1.963,
     dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=228.84)
+    Area_Heatexchanger_AirWater_Cold=577.82)
     annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
 
   RLT_v2 MultiPersonOffice(
     RLT_m_flow_nominal=0.08,
-    m_flow_nominal_cold=0.38,
     m_flow_nominal_hot=0.152,
     RLT_dp_Heatexchanger(displayUnit="Pa") = 4,
     V_mixing=0.0001,
-    pipe_length=28,
-    pipe_height=3,
-    pipe_length_air=48,
     pipe_diameter_hot=0.0126,
-    pipe_diameter_cold=0.0161,
     pipe_diameter_air=0.146,
-    RLT_tau=12,
     V_air=0.07,
     Area_pipe_air=240/(4*3600),
     Area_Heatexchanger_AirWater_Hot=3.72,
+    pipe_length=70,
     dpValve_nominal_hot=7000,
+    pipe_diameter_cold=0.0126,
+    m_flow_nominal_cold=0.110,
     dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=111.8)
+    pipe_height=0,
+    pipe_length_air=55,
+    RLT_tau=13.75,
+    Area_Heatexchanger_AirWater_Cold=32.28)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
 
   RLT_v2 ConferenceRoom(
     RLT_m_flow_nominal=0.333,
     m_flow_nominal_hot=0.153,
-    m_flow_nominal_cold=0.192,
     RLT_dp_Heatexchanger(displayUnit="Pa") = 20,
-    pipe_length=48,
     V_mixing=0.0001,
-    pipe_height=3,
-    pipe_length_air=68,
     pipe_diameter_hot=0.0126,
-    pipe_diameter_cold=0.0126,
     pipe_diameter_air=0.297,
-    RLT_tau=17,
     V_air=0.28,
     Area_pipe_air=1000/(4*3600),
     Area_Heatexchanger_AirWater_Hot=3.75,
+    pipe_length=45,
+    pipe_height=0,
+    pipe_length_air=30,
+    RLT_tau=7.5,
+    pipe_diameter_cold=0.0273,
+    m_flow_nominal_cold=0.661,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=56.58)
+    Area_Heatexchanger_AirWater_Cold=194.48)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
 
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{82,-50},{122,-10}})));
   RLT_Central_v2 Central(
-    m_flow_nominal_hot=3.649,
-    m_flow_nominal_cold=3.139,
     pipe_length=20,
     V_mixing=0.0001,
     pipe_height=0,
-    pipe_diameter_hot=0.0531,
     pipe_diameter_cold=0.0531,
     Area_pipe_air=10090/(4*3600),
     Area_Heatexchanger_AirWater_Hot=89.51,
-    Area_Heatexchanger_AirWater_Cold=923.99,
+    pipe_diameter_hot=0.0419,
+    Area_Heatexchanger_AirWater_Cold=819.41,
+    m_flow_nominal_hot=3.649,
     dpValve_nominal_hot=7000,
+    m_flow_nominal_cold=2.784,
     dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-64,72},{-44,52}})));
   RLT_OpenPlanOffice_v2 OpenPlanOffice(
     m_flow_nominal_hot=2.078,
-    m_flow_nominal_cold=0.87,
     RLT_m_flow_nominal=1.204,
     RLT_dp_Heatexchanger(displayUnit="Pa") = 37,
-    pipe_length=8,
     V_mixing=0.0001,
-    pipe_height=3,
-    pipe_length_air=28,
     pipe_diameter_hot=0.0419,
-    pipe_diameter_cold=0.0273,
     pipe_diameter_air=0.564,
-    RLT_tau=7,
     Area_pipe_air=3600/(4*3600),
     Area_Heatexchanger_AirWater_Hot=50.98,
+    pipe_length=35,
+    pipe_diameter_cold=0.0419,
+    m_flow_nominal_cold=1.467,
+    pipe_height=0,
+    pipe_length_air=15,
+    Area_Heatexchanger_AirWater_Cold=431.91,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=256.15)
+    RLT_tau=3.75)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},

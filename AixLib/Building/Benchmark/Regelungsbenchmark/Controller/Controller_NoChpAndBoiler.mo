@@ -1,5 +1,5 @@
 within AixLib.Building.Benchmark.Regelungsbenchmark.Controller;
-model ControllerBasis
+model Controller_NoChpAndBoiler
   import AixLib;
   BusSystem.Bus_Control controlBus
     annotation (Placement(transformation(extent={{80,-40},{120,0}})));
@@ -7,7 +7,7 @@ model ControllerBasis
     annotation (Placement(transformation(extent={{80,0},{120,40}})));
   Modelica.Blocks.Math.Gain gain(k=1)
     annotation (Placement(transformation(extent={{82,20},{74,28}})));
-  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PID_Regler_TBA
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_TBA_v2
     TBA_Temp annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -17,15 +17,17 @@ model ControllerBasis
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-60,0})));
-  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_PumpsAndFans.Pump_Basis
-    pump_Basis
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_PumpsAndFans.Pump_NoChpAndBoiler
+    pump_NoChpAndBoiler
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   AixLib.Building.Benchmark.Regelungsbenchmark.Controller_PumpsAndFans.Fan_Basis
     fan_Basis annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Controller_Generation.Valve_Basis valve_Basis
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Generation.Valve_NoChpAndBoiler
+    valve_NoChpAndBoiler
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Controller_Generation.Generation_Basis generation_Basis
-    annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Generation.Generation_NoChpAndBoiler
+    generation_NoChpAndBoiler
+    annotation (Placement(transformation(extent={{48,-10},{68,10}})));
 equation
   connect(gain.u, measureBus.WaterInAir) annotation (Line(points={{82.8,24},{86,
           24},{86,20},{92,20},{92,20.1},{100.1,20.1}},
@@ -51,11 +53,11 @@ equation
       points={{-90,-10},{-90,-40},{100,-40},{100,-20}},
       color={255,204,51},
       thickness=0.5));
-  connect(pump_Basis.measureBus, measureBus) annotation (Line(
+  connect(pump_NoChpAndBoiler.measureBus, measureBus) annotation (Line(
       points={{-30,10},{-30,40},{100,40},{100,20}},
       color={255,204,51},
       thickness=0.5));
-  connect(pump_Basis.controlBus, controlBus) annotation (Line(
+  connect(pump_NoChpAndBoiler.controlBus, controlBus) annotation (Line(
       points={{-30,-10},{-30,-40},{100,-40},{100,-20}},
       color={255,204,51},
       thickness=0.5));
@@ -67,22 +69,22 @@ equation
       points={{0,-10},{0,-40},{100,-40},{100,-20}},
       color={255,204,51},
       thickness=0.5));
-  connect(valve_Basis.measureBus, measureBus) annotation (Line(
+  connect(valve_NoChpAndBoiler.measureBus, measureBus) annotation (Line(
       points={{30,10},{30,40},{100,40},{100,20}},
       color={255,204,51},
       thickness=0.5));
-  connect(valve_Basis.controlBus, controlBus) annotation (Line(
-      points={{30,-10},{30,-40},{100,-40},{100,-20}},
+  connect(valve_NoChpAndBoiler.controlBus, controlBus) annotation (Line(
+      points={{30,-10},{30,-10},{30,-40},{100,-40},{100,-20}},
       color={255,204,51},
       thickness=0.5));
-  connect(generation_Basis.controlBus, controlBus) annotation (Line(
-      points={{60,-10},{60,-40},{100,-40},{100,-20}},
+  connect(generation_NoChpAndBoiler.measureBus, measureBus) annotation (Line(
+      points={{58,10},{58,40},{100,40},{100,20}},
       color={255,204,51},
       thickness=0.5));
-  connect(generation_Basis.measureBus, measureBus) annotation (Line(
-      points={{60,10},{60,40},{100,40},{100,20}},
+  connect(generation_NoChpAndBoiler.controlBus, controlBus) annotation (Line(
+      points={{58,-10},{58,-40},{100,-40},{100,-20}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end ControllerBasis;
+end Controller_NoChpAndBoiler;

@@ -16,12 +16,12 @@ expandable connector Logger_Bus_measure
   SI.Temp_K ColdWater_TBottom "Temperatur at the bottom of the coldwater-bufferstorage";
 
   //Measured Temperatures
-  SI.Temp_K Heatpump_cold_big_in;
-  SI.Temp_K Heatpump_cold_small_out;
-  SI.Temp_K Heatpump_warm_big_out;
-  SI.Temp_K Heatpump_warm_small_in;
+  SI.Temp_K Heatpump_cold_in;
+  SI.Temp_K Heatpump_cold_out;
+  SI.Temp_K Heatpump_warm_out;
+  SI.Temp_K Heatpump_warm_in;
   SI.Temp_K Aircooler_in;
-  SI.Temp_K Aircooler_out;
+  SI.Temp_K Aircooler;
   SI.Temp_K GeothermalProbe_in;
   SI.Temp_K GeothermalProbe_out;
   SI.Temp_K generation_hot_in;
@@ -94,8 +94,8 @@ expandable connector Logger_Bus_measure
 
   //Power
   SI.Power Pump_Warmwater_heatpump_power "Power of warmwater heatpump pump";
-  SI.Power Heatpump_small_power "Power of small heatpump";
-  SI.Power Heatpump_big_power "Power of big heatpump";
+  SI.Power Heatpump_1_power "Power of first heatpump";
+  SI.Power Heatpump_2_power "Power of second heatpump";
   SI.Power Pump_generation_hot_power;
   SI.Power Pump_generation_hot_power_Boiler;
   SI.Power Pump_Coldwater_heatpump_power;
@@ -129,8 +129,8 @@ expandable connector Logger_Bus_measure
   Real Fuel_CHP "kW";
 
   //COP
-  Real Heatpump_small_COP;
-  Real Heatpump_big_COP;
+  Real Heatpump_1_COP;
+  Real Heatpump_2_COP;
 
   //Humidity
   Real X_OpenplanOffice;
@@ -141,6 +141,8 @@ expandable connector Logger_Bus_measure
 
   //Costs
   Real Total_Cost;
+  Real Total_Power "kWh";
+  Real Total_Fuel "kWh";
 
   //Time
   Real Minute;

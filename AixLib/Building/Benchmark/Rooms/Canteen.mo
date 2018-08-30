@@ -245,11 +245,11 @@ equation
   connect(prescribedTemperature.T, measureBus.AirTemp) annotation (Line(points=
           {{-52,-95.2},{-52,-98},{-24,-98},{-24,-52},{-60,-52},{-60,-59.9},{
           -99.9,-59.9}}, color={0,0,127}));
-  connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points
-        ={{-52,97.2},{-52,102},{-80,102},{-80,48},{-60,48},{-60,-59.9},{-99.9,
+  connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points=
+         {{-52,97.2},{-52,102},{-80,102},{-80,48},{-60,48},{-60,-59.9},{-99.9,
           -59.9}}, color={0,0,127}));
-  connect(prescribedTemperature2.T, measureBus.AirTemp) annotation (Line(points
-        ={{89.2,0},{92,0},{92,36},{40,36},{40,-52},{-60,-52},{-60,-59.9},{-99.9,
+  connect(prescribedTemperature2.T, measureBus.AirTemp) annotation (Line(points=
+         {{89.2,0},{92,0},{92,36},{40,36},{40,-52},{-60,-52},{-60,-59.9},{-99.9,
           -59.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
