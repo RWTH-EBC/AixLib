@@ -56,8 +56,8 @@ equation
           -98,20},{-76,20}},                                                    color={0,0,127}));
   connect(heatCurve.TSet, antiLegionella.TSet_in) annotation (Line(points={{-53,20},
           {-38,20},{-38,22.8},{-26,22.8}},                                                       color={0,0,127},
-
       pattern=LinePattern.Dash));
+
   connect(antiLegionella.TSet_out, ConvTSetNSet.TSet) annotation (Line(
       points={{20.8,22},{26,22},{26,17.2},{41.44,17.2}},
       color={0,0,127},
