@@ -109,9 +109,6 @@ equation
     annotation (Line(points={{-79,-50},{-13.2,-50}}, color={0,0,127}));
   connect(realExpression4.y, Cold_Storage.u_s)
     annotation (Line(points={{-79,-30},{-13.2,-30}}, color={0,0,127}));
-  connect(Cold_Geothermal.u_m, measureBus.Heatpump_cold_small_out) annotation (
-      Line(points={{-6,-57.2},{-6,-60},{-72,-60},{-72,86},{0.1,86},{0.1,100.1}},
-        color={0,0,127}));
   connect(Cold_Storage.u_m, measureBus.ColdWater_TBottom) annotation (Line(
         points={{-6,-37.2},{-6,-40},{-72,-40},{-72,86},{0.1,86},{0.1,100.1}},
         color={0,0,127}));
@@ -143,6 +140,9 @@ equation
           50},{18,50},{18,40},{40,40},{40,-99.9},{0.1,-99.9}}, color={0,0,127}));
   connect(Warm_Aircooler1.u_m, measureBus.Aircooler) annotation (Line(points={{
           12,56.8},{12,52},{0,52},{0,60},{-72,60},{-72,86},{0.1,86},{0.1,100.1}},
+        color={0,0,127}));
+  connect(Cold_Geothermal.u_m, measureBus.Heatpump_cold_out) annotation (Line(
+        points={{-6,-57.2},{-6,-60},{-72,-60},{-72,86},{0.1,86},{0.1,100.1}},
         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

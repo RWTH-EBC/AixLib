@@ -3,7 +3,7 @@ model ControllerBasis_v2
   import AixLib;
   Modelica.Blocks.Math.Gain gain(k=1)
     annotation (Placement(transformation(extent={{82,20},{74,28}})));
-  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_RLT
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_RLT_test
     RLT_Temp annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -21,7 +21,7 @@ model ControllerBasis_v2
     annotation (Placement(transformation(extent={{80,-40},{120,0}})));
   BusSystem.Bus_measure measureBus
     annotation (Placement(transformation(extent={{80,0},{120,40}})));
-  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_TBA_v2
+  AixLib.Building.Benchmark.Regelungsbenchmark.Controller_Temp.PI_Regler_TBA_Test
     TBA_Temp annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,

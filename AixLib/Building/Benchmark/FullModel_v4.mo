@@ -55,7 +55,6 @@ model FullModel_v4
     pipe_length_warmwater=25,
     pipe_length_coldwater=25,
     alphaHC1_warm=500,
-    alphaHC2_warm=500,
     m_flow_nominal_generation_air_max=28.649,
     m_flow_nominal_generation_air_min=22.537,
     pipe_diameter_hotwater=0.0809,
@@ -76,6 +75,7 @@ model FullModel_v4
     m_flow_nominal_generation_coldwater=5.218,
     m_flow_nominal_generation_aircooler=6.601,
     Area_Heatexchanger_Air=1130.06,
+    alphaHC1_cold=700,
     dpHeatexchanger_nominal=20000,
     dpValve_nominal_generation_hot=40000,
     T_conMax_1=328.15,
@@ -84,7 +84,7 @@ model FullModel_v4
     dpValve_nominal_coldwater=40000,
     dpValve_nominal_generation_aircooler=60000,
     Earthtemperature_start=283.15,
-    alphaHC1_cold=700)
+    alphaHC2_warm=500)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
     surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),

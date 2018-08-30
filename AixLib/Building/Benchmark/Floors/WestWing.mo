@@ -26,8 +26,8 @@ model WestWing
       Medium = Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Air_in_Canteen(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in_Canteen(redeclare package Medium =
+        Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out_Workshop(redeclare package
@@ -132,8 +132,8 @@ equation
   connect(workshop.WindSpeedPort_Roof, internalBus.InternalLoads_Wind_Speed_Hor)
     annotation (Line(points={{-32,20.8},{-32,80},{80,80},{80,60.1},{100.1,60.1}},
         color={0,0,127}));
-  connect(workshop.SolarRadiationPort_Roof, SolarRadiationPort_Hor) annotation
-    (Line(points={{-26,22},{-26,80},{80,80},{80,104}}, color={255,128,0}));
+  connect(workshop.SolarRadiationPort_Roof, SolarRadiationPort_Hor) annotation (
+     Line(points={{-26,22},{-26,80},{80,80},{80,104}}, color={255,128,0}));
   connect(canteen.SolarRadiationPort_Roof, SolarRadiationPort_Hor) annotation (
       Line(points={{58,22},{58,80},{80,80},{80,104}}, color={255,128,0}));
   connect(canteen.WindSpeedPort_Roof, internalBus.InternalLoads_Wind_Speed_Hor)

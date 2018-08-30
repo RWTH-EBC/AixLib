@@ -92,7 +92,6 @@ model Generation_v2
   Fluid.Storage.BufferStorage ColdWater(
     useHeatingRod=false,
     n=5,
-    useHeatingCoil2=false,
     upToDownHC1=false,
     useHeatingCoil1=true,
     redeclare model HeatTransfer =
@@ -102,7 +101,10 @@ model Generation_v2
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_cold,
     data=DataBase.Storage.Benchmark_42000l(),
-    TStart=283.15)
+    useHeatingCoil2=true,
+    TStart=283.15,
+    alphaHC2=alphaHC1_cold,
+    upToDownHC2=false)
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve4(
     y_start=0,
@@ -202,14 +204,14 @@ model Generation_v2
         rotation=180,
         origin={60,94})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
-    y_start=0)
+    y_start=0,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=180,
         origin={56,28})));
   Fluid.Movers.SpeedControlled_y fan3(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
-    y_start=0)
+    y_start=0,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to12 per)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=180,
         origin={56,-96})));
@@ -503,6 +505,12 @@ equation
           90},{-50,90}},
       color={255,204,51},
       thickness=0.5));
+  connect(ColdWater.portHC2In, Valve2.port_3) annotation (Line(points={{17.8125,
+          -73.75},{14,-73.75},{12,-73.75},{12,-74},{12,-45},{-78,-45}}, color={
+          0,127,255}));
+  connect(ColdWater.portHC2Out, Valve1.port_2) annotation (Line(points={{
+          17.8125,-79.83},{-16,-79.83},{-16,-104},{-104,-104},{-104,-58},{-85,
+          -58},{-85,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_v2;

@@ -116,8 +116,6 @@ equation
           0.1,-84},{0.1,-99.9}}, color={255,0,255}));
   connect(or2.y, or3.u1)
     annotation (Line(points={{-23.4,-8},{-17.2,-8}}, color={255,0,255}));
-  connect(or3.y, controlBus.OnOff_heatpump_small) annotation (Line(points={{-3.4,-8},
-          {0.1,-8},{0.1,-99.9}},          color={255,0,255}));
   connect(hysteresis6.y, not5.u)
     annotation (Line(points={{-63.4,-28},{-55.2,-28}},
                                                    color={255,0,255}));
@@ -130,11 +128,6 @@ equation
           -137,30},{-140,30},{-140,64},{-146.8,64}}, color={0,0,127}));
   connect(lessEqualThreshold.u, greaterEqualThreshold.u) annotation (Line(
         points={{-146.8,46},{-140,46},{-140,64},{-146.8,64}}, color={0,0,127}));
-  connect(and1.y, controlBus.OnOff_heatpump_big) annotation (Line(points={{26.7,
-          67},{40,67},{40,16},{0.1,16},{0.1,-99.9}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(not4.y, and2.u1) annotation (Line(points={{-61.4,74},{-60,74},{-60,39},
           {-57.4,39}}, color={255,0,255}));
   connect(and2.y, or1.u1) annotation (Line(points={{-41.3,39},{-40,39},{-40,54},
@@ -154,6 +147,10 @@ equation
           33.4},{-57.4,33.4}}, color={255,0,255}));
   connect(hysteresis6.u, measureBus.Aircooler) annotation (Line(points={{-77.2,
           -28},{-100,-28},{-100,86},{0.1,86},{0.1,100.1}}, color={0,0,127}));
+  connect(or3.y, controlBus.OnOff_heatpump_1) annotation (Line(points={{-3.4,-8},
+          {0.1,-8},{0.1,-99.9}}, color={255,0,255}));
+  connect(and1.y, controlBus.OnOff_heatpump_2) annotation (Line(points={{26.7,
+          67},{32,67},{32,0},{0.1,0},{0.1,-99.9}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_VariablePowerCost;

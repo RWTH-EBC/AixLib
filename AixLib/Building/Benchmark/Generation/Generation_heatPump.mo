@@ -37,16 +37,16 @@ model Generation_heatPump
     dataTable=DataBase.HeatPump.EN14511.Benchmark_Heatpump_Big(),
     factorScale=1,
     CorrFlowEv=false,
-    dp_conNominal=dpHeatexchanger_nominal/100,
     dp_evaNominal=dpHeatexchanger_nominal/90,
     PT1_cycle=true,
     timeConstantCycle=30,
     volume_eva=vol_1,
     volume_con=vol_1,
-    T_startEva=283.15,
-    T_startCon=313.15,
     R_loss=R_loss_1,
-    T_conMax=T_conMax_1)
+    T_conMax=T_conMax_1,
+    dp_conNominal=dpHeatexchanger_nominal/120,
+    T_startEva=283.15,
+    T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,18},{16,38}})));
 
   Fluid.Sources.Boundary_pT bou1(
@@ -73,17 +73,17 @@ model Generation_heatPump
     heatLosses_con=true,
     factorScale=1,
     CorrFlowEv=false,
-    dp_conNominal=dpHeatexchanger_nominal/100,
     dp_evaNominal=dpHeatexchanger_nominal/90,
     PT1_cycle=true,
     timeConstantCycle=30,
     dataTable=DataBase.HeatPump.EN14511.Benchmark_Heatpump_Big(),
     volume_eva=vol_2,
     volume_con=vol_2,
-    T_startEva=283.15,
-    T_startCon=313.15,
     R_loss=R_loss_2,
-    T_conMax=T_conMax_2)
+    T_conMax=T_conMax_2,
+    dp_conNominal=dpHeatexchanger_nominal/120,
+    T_startEva=283.15,
+    T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-38},{16,-18}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 25)
     annotation (Placement(transformation(extent={{-76,-24},{-56,-4}})));

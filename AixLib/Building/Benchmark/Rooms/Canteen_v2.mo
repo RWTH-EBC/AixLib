@@ -245,8 +245,8 @@ equation
                    color={0,0,127}));
   connect(prescribedTemperature3.port, activeWallPipeBased.port_outside)
     annotation (Line(points={{20,82},{20,64.2}}, color={191,0,0}));
-  connect(prescribedTemperature3.T, measureBus.AirTemp) annotation (Line(points
-        ={{20,95.2},{20,98},{60,98},{60,48},{-60,48},{-60,-59.9},{-99.9,-59.9}},
+  connect(prescribedTemperature3.T, measureBus.AirTemp) annotation (Line(points=
+         {{20,95.2},{20,98},{60,98},{60,48},{-60,48},{-60,-59.9},{-99.9,-59.9}},
         color={0,0,127}));
   connect(Wall_ToOpenplanoffice.port_outside, HeatPort_ToOpenplanoffice)
     annotation (Line(points={{64.2,0},{80,0},{80,-40},{100,-40}}, color={191,0,

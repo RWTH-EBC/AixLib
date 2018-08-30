@@ -283,10 +283,6 @@ package Controller_PumpsAndFans
             -49.5,22},{-30,22}}, color={0,0,127}));
     connect(max.y, controlBus.Pump_Aircooler_y)
       annotation (Line(points={{-7,28},{0.1,28},{0.1,-99.9}}, color={0,0,127}));
-    connect(or1.u1, controlBus.OnOff_heatpump_small) annotation (Line(points={{
-            -65.2,62},{-72,62},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
-    connect(or1.u2, controlBus.OnOff_heatpump_big) annotation (Line(points={{
-            -65.2,57.2},{-72,57.2},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
     connect(or1.y, switch1.u2)
       annotation (Line(points={{-51.4,62},{-26,62}}, color={255,0,255}));
     connect(switch1.y, controlBus.Pump_Coldwater_heatpump_y)
@@ -399,6 +395,10 @@ package Controller_PumpsAndFans
     connect(Aircooler.u_m, measureBus.Aircooler) annotation (Line(points={{-62,
             26.8},{-62,22},{-72,22},{-72,90},{0.1,90},{0.1,100.1}}, color={0,0,
             127}));
+    connect(or1.u2, controlBus.OnOff_heatpump_1) annotation (Line(points={{
+            -65.2,57.2},{-72,57.2},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
+    connect(or1.u1, controlBus.OnOff_heatpump_2) annotation (Line(points={{
+            -65.2,62},{-72,62},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end Pump_VariablePowerCost;
@@ -488,10 +488,6 @@ package Controller_PumpsAndFans
             -49.5,22},{-30,22}}, color={0,0,127}));
     connect(max.y, controlBus.Pump_Aircooler_y)
       annotation (Line(points={{-7,28},{0.1,28},{0.1,-99.9}}, color={0,0,127}));
-    connect(or1.u1, controlBus.OnOff_heatpump_small) annotation (Line(points={{
-            -65.2,62},{-72,62},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
-    connect(or1.u2, controlBus.OnOff_heatpump_big) annotation (Line(points={{
-            -65.2,57.2},{-72,57.2},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
     connect(or1.y, switch1.u2)
       annotation (Line(points={{-51.4,62},{-26,62}}, color={255,0,255}));
     connect(switch1.y, controlBus.Pump_Coldwater_heatpump_y)
@@ -509,6 +505,10 @@ package Controller_PumpsAndFans
     connect(Aircooler.u_m, measureBus.Aircooler) annotation (Line(points={{-62,
             26.8},{-62,22},{-72,22},{-72,84},{0.1,84},{0.1,100.1}}, color={0,0,
             127}));
+    connect(or1.u2, controlBus.OnOff_heatpump_2) annotation (Line(points={{
+            -65.2,57.2},{-72,57.2},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
+    connect(or1.u1, controlBus.OnOff_heatpump_1) annotation (Line(points={{
+            -65.2,62},{-72,62},{-72,-99.9},{0.1,-99.9}}, color={255,0,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end Pump_NoChpAndBoiler;

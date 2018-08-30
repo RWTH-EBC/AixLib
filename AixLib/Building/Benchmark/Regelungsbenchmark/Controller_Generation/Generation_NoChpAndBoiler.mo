@@ -68,9 +68,6 @@ equation
   connect(greaterThreshold.u, measureBus.heatpump_cold_massflow) annotation (
       Line(points={{-11.2,78},{-20,78},{-20,86},{0.1,86},{0.1,100.1}}, color={0,
           0,127}));
-  connect(and1.y, controlBus.OnOff_heatpump_big) annotation (Line(points={{26.7,67},
-          {36,67},{36,0},{0,0},{0,-50},{0.1,-50},{0.1,-99.9}},
-                                                     color={255,0,255}));
   connect(hysteresis5.y, not4.u)
     annotation (Line(points={{-79.4,74},{-71.2,74}}, color={255,0,255}));
   connect(not4.y, or1.u1) annotation (Line(points={{-57.4,74},{-52,74},{-52,70},
@@ -93,10 +90,12 @@ equation
           255}));
   connect(or1.y, and1.u2) annotation (Line(points={{-25,70},{-8,70},{-8,61.4},{
           10.6,61.4}}, color={255,0,255}));
-  connect(or3.y, controlBus.OnOff_heatpump_small) annotation (Line(points={{
-          -11.4,26},{0.1,26},{0.1,-99.9}}, color={255,0,255}));
   connect(hysteresis6.u, measureBus.Aircooler) annotation (Line(points={{-93.2,
           2},{-100,2},{-100,86},{0.1,86},{0.1,100.1}}, color={0,0,127}));
+  connect(or3.y, controlBus.OnOff_heatpump_2) annotation (Line(points={{-11.4,
+          26},{0.1,26},{0.1,-99.9}}, color={255,0,255}));
+  connect(and1.y, controlBus.OnOff_heatpump_1) annotation (Line(points={{26.7,
+          67},{32,67},{32,28},{0.1,28},{0.1,-99.9}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_NoChpAndBoiler;

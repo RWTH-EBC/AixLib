@@ -19,11 +19,11 @@ model Full_Transfer_RLT_v2
     V_air=0.55,
     Area_pipe_air=1950/(4*3600),
     Area_Heatexchanger_AirWater_Hot=4.75,
-    dpValve_nominal_hot=7000,
     pipe_diameter_cold=0.0419,
     m_flow_nominal_cold=1.409,
-    dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=414.86)
+    Area_Heatexchanger_AirWater_Cold=414.86,
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -66,11 +66,11 @@ model Full_Transfer_RLT_v2
     V_air=0.92,
     Area_pipe_air=3300/(4*3600),
     Area_Heatexchanger_AirWater_Hot=26.31,
-    dpValve_nominal_hot=7000,
     pipe_diameter_cold=0.0419,
     m_flow_nominal_cold=1.963,
-    dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=577.82)
+    Area_Heatexchanger_AirWater_Cold=577.82,
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
 
   RLT_v2 MultiPersonOffice(
@@ -84,14 +84,14 @@ model Full_Transfer_RLT_v2
     Area_pipe_air=240/(4*3600),
     Area_Heatexchanger_AirWater_Hot=3.72,
     pipe_length=70,
-    dpValve_nominal_hot=7000,
     pipe_diameter_cold=0.0126,
     m_flow_nominal_cold=0.110,
-    dpValve_nominal_cold=10000,
     pipe_height=0,
     pipe_length_air=55,
     RLT_tau=13.75,
-    Area_Heatexchanger_AirWater_Cold=32.28)
+    Area_Heatexchanger_AirWater_Cold=32.28,
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
 
   RLT_v2 ConferenceRoom(
@@ -110,9 +110,9 @@ model Full_Transfer_RLT_v2
     RLT_tau=7.5,
     pipe_diameter_cold=0.0273,
     m_flow_nominal_cold=0.661,
+    Area_Heatexchanger_AirWater_Cold=194.48,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000,
-    Area_Heatexchanger_AirWater_Cold=194.48)
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
 
   BusSystem.Bus_measure measureBus

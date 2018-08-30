@@ -61,8 +61,8 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
       roughness=2.5e-5,
       pipeHC1=AixLib.DataBase.Pipes.Copper.Copper_66_7x1_2(),
       pipeHC2=AixLib.DataBase.Pipes.Copper.Copper_66_7x1_2(),
-      lengthHC1=500,
-      lengthHC2=500);
+      lengthHC1=250,
+      lengthHC2=250);
 
     annotation (Icon(graphics),               Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>

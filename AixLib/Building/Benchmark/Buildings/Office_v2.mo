@@ -81,8 +81,8 @@ equation
       Line(points={{60,-4},{80,-4},{80,-80},{60,-80},{60,-108}}, color={191,0,0}));
   connect(eastWing.Heatport_TBA_ConferenceRoom, Heatport_TBA[2]) annotation (
       Line(points={{60,-8},{80,-8},{80,-80},{60,-80},{60,-104}}, color={191,0,0}));
-  connect(eastWing.Heatport_TBA_Multipersonoffice, Heatport_TBA[3]) annotation
-    (Line(points={{60,-12},{80,-12},{80,-80},{60,-80},{60,-100}}, color={191,0,
+  connect(eastWing.Heatport_TBA_Multipersonoffice, Heatport_TBA[3]) annotation (
+     Line(points={{60,-12},{80,-12},{80,-80},{60,-80},{60,-100}}, color={191,0,
           0}));
   connect(eastWing.SolarRadiationPort_East, SolarRadiationPort_East)
     annotation (Line(points={{61.2,-17.2},{80,-17.2},{80,40},{90,40}}, color={
@@ -90,14 +90,14 @@ equation
   connect(eastWing.SolarRadiationPort_South, SolarRadiationPort_South1)
     annotation (Line(points={{53.2,-21.2},{53.2,-40},{80,-40},{80,0},{90,0}},
         color={255,128,0}));
-  connect(eastWing.SolarRadiationPort_Hor, SolarRadiationPort_Hor1) annotation
-    (Line(points={{60.8,20.8},{60.8,40},{80,40},{80,-80},{90,-80}}, color={255,
+  connect(eastWing.SolarRadiationPort_Hor, SolarRadiationPort_Hor1) annotation (
+     Line(points={{60.8,20.8},{60.8,40},{80,40},{80,-80},{90,-80}}, color={255,
           128,0}));
   connect(eastWing.SolarRadiationPort_North, SolarRadiationPort_North)
     annotation (Line(points={{54,20.8},{54,40},{80,40},{80,80},{90,80}}, color=
           {255,128,0}));
-  connect(westWing.SolarRadiationPort_Hor, SolarRadiationPort_Hor1) annotation
-    (Line(points={{-24,20.8},{-24,40},{80,40},{80,-80},{90,-80}}, color={255,
+  connect(westWing.SolarRadiationPort_Hor, SolarRadiationPort_Hor1) annotation (
+     Line(points={{-24,20.8},{-24,40},{80,40},{80,-80},{90,-80}}, color={255,
           128,0}));
   connect(westWing.SolarRadiationPort_North, SolarRadiationPort_North)
     annotation (Line(points={{-40,20.8},{-40,40},{80,40},{80,80},{90,80}},
@@ -124,8 +124,8 @@ equation
           {-66,-4},{-66,-36},{-40,-36},{-40,-92}}, color={0,127,255}));
   connect(westWing.Air_in_Canteen, Air_in[4]) annotation (Line(points={{-60,4},
           {-66,4},{-66,-36},{-40,-36},{-40,-96}}, color={0,127,255}));
-  connect(eastWing.Air_in_Multipersonoffice, Air_in[3]) annotation (Line(points
-        ={{20,-12},{4,-12},{4,-36},{-40,-36},{-40,-100}}, color={0,127,255}));
+  connect(eastWing.Air_in_Multipersonoffice, Air_in[3]) annotation (Line(points=
+         {{20,-12},{4,-12},{4,-36},{-40,-36},{-40,-100}}, color={0,127,255}));
   connect(eastWing.Air_in_Conferenceroom, Air_in[2]) annotation (Line(points={{
           20,-4},{4,-4},{4,-36},{-40,-36},{-40,-104}}, color={0,127,255}));
   connect(eastWing.Air_in_Openplanoffice, Air_in[1]) annotation (Line(points={{
