@@ -64,31 +64,27 @@ model HeatPumpDetailed
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     P_eleOutput=true,
+    capCalcType=2,
     CorrFlowCo=false,
     CorrFlowEv=false,
-    dataTable=AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
-        tableQdot_con=[0,0,10; 35,4800,6300; 55,4400,5750],
-        tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
-        mFlow_conNom=0.01,
-        mFlow_evaNom=0.01),
-    capCalcType=2,
-    HPctrlType=false)
+    dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(),
+    PT1_cycle=true,
+    timeConstantCycle=1,
+    mFlow_conNominal=1,
+    mFlow_evaNominal=1,
+    T_evaIn(transferHeat=true, TAmb=291.15),
+    T_evaOut(transferHeat=true, TAmb=291.15),
+    T_conIn(transferHeat=true, TAmb=273.15),
+    T_conOut(transferHeat=true, TAmb=273.15))
     "Detailed heat pump mainly based on manufacturing data"
     annotation (Placement(transformation(extent={{-6,0},{24,20}})));
-  Modelica.Blocks.Sources.Ramp NRamp(
-    height=3000,
-    duration=2600,
-    offset=1300,
-    startTime=500)
-    "Ramp signal for the temperature input of the source side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-2,56},{18,76}})));
 equation
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
       points={{-59,10},{-54,10},{-54,18},{-46,18}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(massFlowPulse.y, sinkSideMassFlowSource.m_flow_in) annotation (Line(
-      points={{-59,-50},{20,-50},{20,-40}},
+      points={{-59,-50},{18,-50},{18,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideFixedBoundary.ports[1], temperature.port_b) annotation (Line(
@@ -127,8 +123,6 @@ equation
       points={{22,3},{36,3},{36,-18},{50,-18},{50,-48},{40,-48}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(NRamp.y, heatPump.N_in)
-    annotation (Line(points={{19,66},{8,66},{8,19}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),
