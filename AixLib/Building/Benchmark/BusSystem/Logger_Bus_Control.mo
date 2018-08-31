@@ -10,7 +10,8 @@ expandable connector Logger_Bus_Control
   Real Pump_Warmwater_y "Normalized speed of warmwaterpump" annotation (__Dymola_Tag={"ControlBus"});
   Real Pump_Coldwater_y "Normalized speed of coldwaterpump" annotation (__Dymola_Tag={"ControlBus"});
   Real Pump_Coldwater_heatpump_y "Normalized speed of coldwaterpump on heatpumpside" annotation (__Dymola_Tag={"ControlBus"});
-  Real Pump_Warmwater_heatpump_y "Normalized speed of warmwaterpump on heatpumpside" annotation (__Dymola_Tag={"ControlBus"});
+  Real Pump_Warmwater_heatpump_1_y "Normalized speed of warmwaterpump on heatpumpside" annotation (__Dymola_Tag={"ControlBus"});
+  Real Pump_Warmwater_heatpump_2_y "Normalized speed of warmwaterpump on heatpumpside" annotation (__Dymola_Tag={"ControlBus"});
   Real Pump_Aircooler_y "Normalized speed of aircoolerpump" annotation (__Dymola_Tag={"ControlBus"});
   Real Pump_Hotwater_CHP_y "Normalized speed of aircoolerpump" annotation (__Dymola_Tag={"ControlBus"});
   Real Pump_Hotwater_Boiler_y "Normalized speed of aircoolerpump" annotation (__Dymola_Tag={"ControlBus"});

@@ -87,7 +87,8 @@ model Canteen_v2
     wall_length=20,
     outside=true,
     WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA(),
-    withWindow=false)
+    withWindow=false,
+    solar_absorptance=0.24)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,

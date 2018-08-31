@@ -899,8 +899,8 @@ package Controller_Temp
         Line(points={{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
     connect(ramp.y, controlBus.Valve_RLT_Cold_Canteen) annotation (Line(points=
             {{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
-    connect(ramp.y, controlBus.Valve_RLT_Cold_Workshop) annotation (Line(points
-          ={{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
+    connect(ramp.y, controlBus.Valve_RLT_Cold_Workshop) annotation (Line(points=
+           {{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end PI_Regler_RLT_test;
@@ -929,16 +929,16 @@ package Controller_Temp
         Line(points={{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
     connect(ramp.y, controlBus.Valve_TBA_Canteen_Temp) annotation (Line(points=
             {{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
-    connect(ramp.y, controlBus.Valve_TBA_Workshop_Temp) annotation (Line(points
-          ={{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
+    connect(ramp.y, controlBus.Valve_TBA_Workshop_Temp) annotation (Line(points=
+           {{21,0},{60,0},{60,0.1},{100.1,0.1}}, color={0,0,127}));
     connect(ramp1.y, controlBus.Valve_TBA_Warm_OpenPlanOffice) annotation (Line(
           points={{21,50},{100.1,50},{100.1,0.1}}, color={0,0,127}));
     connect(ramp1.y, controlBus.Valve_TBA_Warm_conferenceroom) annotation (Line(
           points={{21,50},{100.1,50},{100.1,0.1}}, color={0,0,127}));
     connect(ramp1.y, controlBus.Valve_TBA_Warm_multipersonoffice) annotation (
         Line(points={{21,50},{100.1,50},{100.1,0.1}}, color={0,0,127}));
-    connect(ramp1.y, controlBus.Valve_TBA_Warm_canteen) annotation (Line(points
-          ={{21,50},{100.1,50},{100.1,0.1}}, color={0,0,127}));
+    connect(ramp1.y, controlBus.Valve_TBA_Warm_canteen) annotation (Line(points=
+           {{21,50},{100.1,50},{100.1,0.1}}, color={0,0,127}));
     connect(ramp1.y, controlBus.Valve_TBA_Warm_workshop) annotation (Line(
           points={{21,50},{100.1,50},{100.1,0.1}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

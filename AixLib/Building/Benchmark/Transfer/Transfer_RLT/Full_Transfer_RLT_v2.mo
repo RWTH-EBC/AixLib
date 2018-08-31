@@ -8,7 +8,6 @@ model Full_Transfer_RLT_v2
   RLT_v2 Workshop(
     RLT_m_flow_nominal=0.65,
     m_flow_nominal_hot=0.194,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 35.5,
     pipe_length=15,
     V_mixing=0.0001,
     pipe_height=0,
@@ -23,7 +22,8 @@ model Full_Transfer_RLT_v2
     m_flow_nominal_cold=1.409,
     Area_Heatexchanger_AirWater_Cold=414.86,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 38)
     annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
@@ -55,7 +55,6 @@ model Full_Transfer_RLT_v2
   RLT_v2 Canteen(
     RLT_m_flow_nominal=1.1,
     m_flow_nominal_hot=1.072,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 38.5,
     pipe_length=10,
     V_mixing=0.0001,
     pipe_height=0,
@@ -70,13 +69,13 @@ model Full_Transfer_RLT_v2
     m_flow_nominal_cold=1.963,
     Area_Heatexchanger_AirWater_Cold=577.82,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 39)
     annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
 
   RLT_v2 MultiPersonOffice(
     RLT_m_flow_nominal=0.08,
     m_flow_nominal_hot=0.152,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 4,
     V_mixing=0.0001,
     pipe_diameter_hot=0.0126,
     pipe_diameter_air=0.146,
@@ -91,13 +90,13 @@ model Full_Transfer_RLT_v2
     RLT_tau=13.75,
     Area_Heatexchanger_AirWater_Cold=32.28,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 39.5)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
 
   RLT_v2 ConferenceRoom(
     RLT_m_flow_nominal=0.333,
     m_flow_nominal_hot=0.153,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 20,
     V_mixing=0.0001,
     pipe_diameter_hot=0.0126,
     pipe_diameter_air=0.297,
@@ -112,7 +111,8 @@ model Full_Transfer_RLT_v2
     m_flow_nominal_cold=0.661,
     Area_Heatexchanger_AirWater_Cold=194.48,
     dpValve_nominal_hot=7000,
-    dpValve_nominal_cold=10000)
+    dpValve_nominal_cold=10000,
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 37.5)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
 
   BusSystem.Bus_measure measureBus
@@ -134,7 +134,6 @@ model Full_Transfer_RLT_v2
   RLT_OpenPlanOffice_v2 OpenPlanOffice(
     m_flow_nominal_hot=2.078,
     RLT_m_flow_nominal=1.204,
-    RLT_dp_Heatexchanger(displayUnit="Pa") = 37,
     V_mixing=0.0001,
     pipe_diameter_hot=0.0419,
     pipe_diameter_air=0.564,
@@ -146,9 +145,10 @@ model Full_Transfer_RLT_v2
     pipe_height=0,
     pipe_length_air=15,
     Area_Heatexchanger_AirWater_Cold=431.91,
+    RLT_tau=3.75,
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000,
-    RLT_tau=3.75)
+    RLT_dp_Heatexchanger(displayUnit="Pa") = 38.5)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},

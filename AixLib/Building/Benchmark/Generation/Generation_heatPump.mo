@@ -59,8 +59,8 @@ model Generation_heatPump
   BusSystem.Bus_Control controlBus annotation (Placement(transformation(extent=
             {{-60,80},{-20,120}}), iconTransformation(extent={{-50,90},{-30,110}})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
-    y_start=1)
+    y_start=1,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={42,60})));
@@ -101,11 +101,14 @@ model Generation_heatPump
     annotation (Placement(transformation(extent={{-88,50},{-68,70}})));
   Fluid.Sensors.MassFlowRate senMasFlo1(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
+  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
+    y_start=1,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
+      per)
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+        rotation=0,
+        origin={70,60})));
 equation
-  connect(fan4.port_b, Fluid_out_warm)
-    annotation (Line(points={{50,60},{100,60}}, color={0,127,255}));
-  connect(fan4.y, controlBus.Pump_Warmwater_heatpump_y) annotation (Line(points={{42,69.6},
-          {42,80},{-39.9,80},{-39.9,100.1}},       color={0,0,127}));
   connect(heatPumpDetailed_1.port_evaOut, heatPumpDetailed_2.port_evaIn)
     annotation (Line(points={{-12,21},{-12,-21}}, color={0,127,255}));
   connect(heatPumpDetailed_2.port_evaOut, Fluid_out_cold) annotation (Line(
@@ -118,9 +121,6 @@ equation
     annotation (Line(points={{-55,-14},{6,-14},{6,-19}}, color={0,0,127}));
   connect(heatPumpDetailed_1.T_amb, heatPumpDetailed_2.T_amb) annotation (Line(
         points={{6,37},{6,50},{-40,50},{-40,-14},{6,-14},{6,-19}}, color={0,0,127}));
-  connect(fan4.P, measureBus.Pump_Warmwater_heatpump_power) annotation (Line(
-        points={{50.8,67.2},{60,67.2},{60,80},{30.1,80},{30.1,90.1}}, color={0,0,
-          127}));
   connect(senTem2.port, fan4.port_a) annotation (Line(points={{16,48},{16,44},{
           30,44},{30,60},{34,60}}, color={0,127,255}));
   connect(Fluid_in_cold, senMasFlo.port_a)
@@ -165,6 +165,20 @@ equation
       Line(points={{0,-37},{0,-42},{30.1,-42},{30.1,90.1}}, color={0,0,127}));
   connect(heatPumpDetailed_2.P_eleOut, measureBus.Heatpump_2_power) annotation (
      Line(points={{-4,-37},{-4,-42},{30.1,-42},{30.1,90.1}}, color={0,0,127}));
+  connect(fan4.port_b, fan1.port_a)
+    annotation (Line(points={{50,60},{62,60}}, color={0,127,255}));
+  connect(fan1.port_b, Fluid_out_warm)
+    annotation (Line(points={{78,60},{100,60}}, color={0,127,255}));
+  connect(fan4.y, controlBus.Pump_Warmwater_heatpump_1_y) annotation (Line(
+        points={{42,69.6},{42,80},{-39.9,80},{-39.9,100.1}}, color={0,0,127}));
+  connect(fan1.y, controlBus.Pump_Warmwater_heatpump_2_y) annotation (Line(
+        points={{70,69.6},{70,80},{-39.9,80},{-39.9,100.1}}, color={0,0,127}));
+  connect(fan4.P, measureBus.Pump_Warmwater_heatpump_1_power) annotation (Line(
+        points={{50.8,67.2},{56,67.2},{56,80},{30.1,80},{30.1,90.1}}, color={0,
+          0,127}));
+  connect(fan1.P, measureBus.Pump_Warmwater_heatpump_2_power) annotation (Line(
+        points={{78.8,67.2},{78.8,68},{82,68},{82,80},{30.1,80},{30.1,90.1}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_heatPump;

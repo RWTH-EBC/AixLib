@@ -93,7 +93,8 @@ expandable connector Logger_Bus_measure
   SI.MassFlowRate TBA_workshop;
 
   //Power
-  SI.Power Pump_Warmwater_heatpump_power "Power of warmwater heatpump pump";
+  SI.Power Pump_Warmwater_heatpump_1_power "Power of first warmwater heatpump pump";
+  SI.Power Pump_Warmwater_heatpump_2_power "Power of second warmwater heatpump pump";
   SI.Power Heatpump_1_power "Power of first heatpump";
   SI.Power Heatpump_2_power "Power of second heatpump";
   SI.Power Pump_generation_hot_power;

@@ -86,6 +86,7 @@ model Workshop_v2
     outside=true,
     WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA(),
     withWindow=false,
+    solar_absorptance=0.24,
     T0=288.15)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},

@@ -122,7 +122,8 @@ replaceable package Medium_Air =
     ISOrientation=3,
     outside=true,
     wall_length=45,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA())
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA(),
+    solar_absorptance=0.48)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,

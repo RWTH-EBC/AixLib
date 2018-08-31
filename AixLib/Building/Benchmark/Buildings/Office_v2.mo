@@ -110,8 +110,8 @@ equation
         color={255,128,0}));
   connect(westWing.Air_out_Canteen, vol1.ports[2]) annotation (Line(points={{
           -60,8},{-70,8},{-70,-40},{-60,-40},{-60,-70.4}}, color={0,127,255}));
-  connect(westWing.Air_out_Workshop, vol1.ports[3]) annotation (Line(points={{
-          -60,0},{-70,0},{-70,-40},{-60,-40},{-60,-69.4667}}, color={0,127,255}));
+  connect(westWing.Air_out_Workshop, vol1.ports[3]) annotation (Line(points={{-60,0},
+          {-70,0},{-70,-40},{-60,-40},{-60,-69.4667}},        color={0,127,255}));
   connect(eastWing.Air_out_Openplanoffice, vol1.ports[4]) annotation (Line(
         points={{20,8},{0,8},{0,-40},{-60,-40},{-60,-68.5333}}, color={0,127,
           255}));

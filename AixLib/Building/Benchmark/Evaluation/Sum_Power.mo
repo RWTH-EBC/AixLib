@@ -22,23 +22,19 @@ model Sum_Power
     annotation (Placement(transformation(extent={{-60,-104},{-40,-84}})));
   Modelica.Blocks.Math.MultiSum multiSum(nu=11, k={1,1,1,1,1,1,1,1,1,1,1})
     annotation (Placement(transformation(extent={{38,-18},{74,18}})));
-  Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{-16,-14},{4,6}})));
   Modelica.Blocks.Interfaces.RealOutput Sum_Power
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Math.Add add1
     annotation (Placement(transformation(extent={{-16,-40},{4,-20}})));
+  Modelica.Blocks.Math.Add3 add3_4
+    annotation (Placement(transformation(extent={{-16,-12},{4,8}})));
 equation
-  connect(add3_1.u1, measureBus.Pump_Warmwater_heatpump_power) annotation (Line(
-        points={{-62,98},{-80,98},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_2.u1, measureBus.Pump_generation_hot_power) annotation (Line(
         points={{-62,72},{-80,72},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_2.u2, measureBus.Pump_Coldwater_heatpump_power) annotation (Line(
         points={{-62,64},{-80,64},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_2.u3, measureBus.Pump_Coldwater_power) annotation (Line(points={
           {-62,56},{-80,56},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
-  connect(add3_3.u1, measureBus.Pump_Warmwater_power) annotation (Line(points={
-          {-62,46},{-80,46},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_3.u2, measureBus.Pump_Hotwater_power) annotation (Line(points={{
           -62,38},{-80,38},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_3.u3, measureBus.Electrical_power_CHP) annotation (Line(points={
@@ -107,27 +103,33 @@ equation
                                       color={0,0,127}));
   connect(add3_10.u3, measureBus.InternalLoad_Power) annotation (Line(points={{
           -62,-102},{-80,-102},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
-  connect(add.u1, measureBus.PV_Power) annotation (Line(points={{-18,2},{-30,2},
-          {-30,0.1},{-99.9,0.1}},      color={0,0,127}));
-  connect(add.y, multiSum.u[10]) annotation (Line(points={{5,-4},{18,-4},{18,
-          -9.16364},{38,-9.16364}},
-                                color={0,0,127}));
   connect(multiSum.y, Sum_Power)
     annotation (Line(points={{77.06,0},{100,0}}, color={0,0,127}));
   connect(multiSum.y, measureBus.Sum_Power) annotation (Line(points={{77.06,0},
           {88,0},{88,108},{-99.9,108},{-99.9,0.1}}, color={0,0,127}));
-  connect(add.u2, measureBus.Pump_generation_hot_power_Boiler) annotation (Line(
-        points={{-18,-10},{-30,-10},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add1.u1, measureBus.Fan_RLT) annotation (Line(points={{-18,-24},{-30,
           -24},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add1.u2, measureBus.Fan_Aircooler) annotation (Line(points={{-18,-36},
           {-30,-36},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
-  connect(add1.y, multiSum.u[11]) annotation (Line(points={{5,-30},{12,-30},{12,
-          -30},{18,-30},{18,-11.4545},{38,-11.4545}}, color={0,0,127}));
+  connect(add1.y, multiSum.u[10]) annotation (Line(points={{5,-30},{12,-30},{12,
+          -30},{18,-30},{18,-9.16364},{38,-9.16364}}, color={0,0,127}));
   connect(add3_1.u2, measureBus.Heatpump_1_power) annotation (Line(points={{-62,
           90},{-80,90},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
   connect(add3_1.u3, measureBus.Heatpump_2_power) annotation (Line(points={{-62,
           82},{-80,82},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_4.y, multiSum.u[11]) annotation (Line(points={{5,-2},{18,-2},{18,
+          -12},{18,-12},{18,-12},{18,-11.4545},{38,-11.4545},{38,-11.4545}},
+        color={0,0,127}));
+  connect(add3_3.u1, measureBus.Pump_generation_hot_power_Boiler) annotation (
+      Line(points={{-62,46},{-80,46},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_4.u3, measureBus.PV_Power) annotation (Line(points={{-18,-10},{
+          -30,-10},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_1.u1, measureBus.Pump_Warmwater_power) annotation (Line(points={
+          {-62,98},{-80,98},{-80,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_4.u1, measureBus.Pump_Warmwater_heatpump_1_power) annotation (
+      Line(points={{-18,6},{-30,6},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
+  connect(add3_4.u2, measureBus.Pump_Warmwater_heatpump_2_power) annotation (
+      Line(points={{-18,-2},{-30,-2},{-30,0.1},{-99.9,0.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Sum_Power;

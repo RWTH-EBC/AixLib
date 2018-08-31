@@ -51,7 +51,7 @@ model Generation_Aircooling_v2
         rotation=-90,
         origin={36,-10})));
   Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+      redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=90,
         origin={18,10})));
@@ -176,8 +176,8 @@ model Generation_Aircooling_v2
         origin={78,0})));
   Fluid.FixedResistances.PressureDrop res4(
     redeclare package Medium = Medium_Water,
-    dp_nominal=dpHeatexchanger_nominal,
-    m_flow_nominal=m_flow_nominal_generation_aircooler)
+    m_flow_nominal=m_flow_nominal_generation_aircooler,
+    dp_nominal=dpHeatexchanger_nominal)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={72,0})));
