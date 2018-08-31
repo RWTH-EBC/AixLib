@@ -247,9 +247,9 @@ package Controller_PumpsAndFans
       annotation (Placement(transformation(extent={{-148,-54},{-128,-34}})));
     Modelica.Blocks.Sources.RealExpression realExpression2(y=0)
       annotation (Placement(transformation(extent={{-148,-94},{-128,-74}})));
-    Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
-         5)  annotation (Placement(transformation(extent={{-170,-62},{-158,-50}})));
-    Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold=20)
+    Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold
+        =6)  annotation (Placement(transformation(extent={{-170,-62},{-158,-50}})));
+    Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold=22)
       annotation (Placement(transformation(extent={{-170,-80},{-158,-68}})));
     Modelica.Blocks.Math.IntegerToReal integerToReal
       annotation (Placement(transformation(extent={{-206,-74},{-186,-54}})));
@@ -262,10 +262,10 @@ package Controller_PumpsAndFans
       annotation (Placement(transformation(extent={{-146,-110},{-126,-90}})));
     Modelica.Blocks.Sources.RealExpression realExpression3(y=0.5)
       annotation (Placement(transformation(extent={{-146,-150},{-126,-130}})));
-    Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold1(threshold=
-         5)  annotation (Placement(transformation(extent={{-168,-118},{-156,
+    Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold1(threshold
+        =6)  annotation (Placement(transformation(extent={{-168,-118},{-156,
               -106}})));
-    Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold1(threshold=20)
+    Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold1(threshold=22)
       annotation (Placement(transformation(extent={{-168,-136},{-156,-124}})));
     Modelica.Blocks.Math.IntegerToReal integerToReal1
       annotation (Placement(transformation(extent={{-204,-130},{-184,-110}})));
@@ -291,7 +291,7 @@ package Controller_PumpsAndFans
     connect(switch1.y, controlBus.Pump_Coldwater_heatpump_y)
       annotation (Line(points={{-3,62},{0.1,62},{0.1,-99.9}}, color={0,0,127}));
     connect(switch1.y, controlBus.Pump_Warmwater_heatpump_y)
-      annotation (Line(points={{-3,62},{0.1,62},{0.1,-99.9}}, color={0,0,127}));
+      annotation (Line(points={{-3,62},{0,62},{0,-100}},      color={0,0,127}));
     connect(Generatoren.y, switch1.u1) annotation (Line(points={{-79,76},{-38,
             76},{-38,70},{-26,70}}, color={0,0,127}));
     connect(Generatoren1.y, switch1.u3) annotation (Line(points={{-79,48},{-40,
@@ -578,8 +578,8 @@ package Controller_PumpsAndFans
         Line(points={{-39,16},{0.1,16},{0.1,-99.9}}, color={0,0,127}));
     connect(Hotwater_Generation.y, controlBus.Pump_Hotwater_Boiler_y)
       annotation (Line(points={{-39,16},{0.1,16},{0.1,-99.9}}, color={0,0,127}));
-    connect(Heatpump_pumps.y, controlBus.Pump_Coldwater_heatpump_y) annotation
-      (Line(points={{-39,44},{0.1,44},{0.1,-99.9}}, color={0,0,127}));
+    connect(Heatpump_pumps.y, controlBus.Pump_Coldwater_heatpump_y) annotation (
+       Line(points={{-39,44},{0.1,44},{0.1,-99.9}}, color={0,0,127}));
     connect(Heatpump_pumps.y, controlBus.Pump_Warmwater_heatpump_1_y)
       annotation (Line(points={{-39,44},{0.1,44},{0.1,-99.9}}, color={0,0,127}));
     connect(Heatpump_pumps.y, controlBus.Pump_Warmwater_heatpump_2_y)

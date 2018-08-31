@@ -5,8 +5,8 @@ package Controller_Temp
       yMax=1,
       yMin=0,
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.3,
-      Ti=400)
+      Ti=400,
+      k=0.01)
              annotation (Placement(transformation(extent={{-30,80},{-10,100}})));
     Modelica.Blocks.Continuous.LimPID PID_RLT_Openplanoffice_Hot(
       yMax=1,
@@ -39,9 +39,9 @@ package Controller_Temp
     Modelica.Blocks.Continuous.LimPID PID_RLT_Conferenceroom_Cold(
       yMax=0,
       yMin=-1,
-      k=0.3,
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      Ti=400)
+      Ti=400,
+      k=0.01)
              annotation (Placement(transformation(extent={{-30,-80},{-10,-100}})));
     Modelica.Blocks.Continuous.LimPID PID_RLT_Openplanoffice_Cold(
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -624,8 +624,9 @@ package Controller_Temp
       yMax=1,
       yMin=0,
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.1,
-      Ti=20) annotation (Placement(transformation(extent={{-30,80},{-10,100}})));
+      Ti=200,
+      k=0.01)
+             annotation (Placement(transformation(extent={{-30,80},{-10,100}})));
     Modelica.Blocks.Continuous.LimPID PID_TBA_Openplanoffice_Warm(
       yMax=1,
       yMin=0,
@@ -656,10 +657,10 @@ package Controller_Temp
              annotation (Placement(transformation(extent={{20,40},{40,60}})));
     Modelica.Blocks.Continuous.LimPID PID_TBA_Conferenceroom_Cold(
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.1,
-      Ti=20,
       yMax=0,
-      yMin=-1)
+      yMin=-1,
+      Ti=200,
+      k=0.01)
              annotation (Placement(transformation(extent={{-30,-80},{-10,-100}})));
     Modelica.Blocks.Continuous.LimPID PID_TBA_Openplanoffice_Cold(
       controllerType=Modelica.Blocks.Types.SimpleController.PI,

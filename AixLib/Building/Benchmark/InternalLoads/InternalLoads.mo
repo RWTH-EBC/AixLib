@@ -12,7 +12,7 @@ model InternalLoads
     timeScale=1,
     columns={2,3,4,5,6,7,8,9,10,11},
     final fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v1.mat"))
+        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"))
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   BusSystem.InternalBus internalBus

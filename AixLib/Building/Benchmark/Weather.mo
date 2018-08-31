@@ -2,18 +2,19 @@ within AixLib.Building.Benchmark;
 model Weather
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
-  Components.Weather.Weather weather(
+  Components.Weather.Weather_Benchmark
+                             weather(
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
     Rel_hum=false,
-    fileName=
-        "D:/aku-bga/AixLib/AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt",
     Mass_frac=true,
     Air_press=false,
     Latitude=48.0304,
     Longitude=9.3138,
-    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor_PV())
+    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor_PV(),
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Building/Benchmark/SimYear_Variante3_angepasst.mat"))
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
   Modelica.Blocks.Math.Gain gain(k=1/360)
     annotation (Placement(transformation(extent={{10,36},{20,46}})));
