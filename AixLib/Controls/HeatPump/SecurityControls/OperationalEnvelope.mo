@@ -2,17 +2,19 @@ within AixLib.Controls.HeatPump.SecurityControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSecurityControl;
-  parameter Boolean useOpeEnv
-    "False to allow HP to run out of operational envelope";
+  parameter Boolean use_opeEnv
+    "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
   BaseClasses.BoundaryMap boundaryMap(final tableLow=tableLow, final tableUpp=
-        tableUpp) if                   useOpeEnv
+        tableUpp) if use_opeEnv
     annotation (Placement(transformation(extent={{-62,-28},{-4,22}})));
-  Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not useOpeEnv
+  Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not
+    use_opeEnv
     annotation (Placement(transformation(extent={{10,-36},{24,-22}})));
 
-  parameter Real tableLow[:,2]=[-15,0; 30,0] "Lower boundary of envelope";
+  parameter Real tableLow[:,2]=[-15,0; 30,0] "Lower boundary of envelope"
+    annotation (Dialog(enable=use_opeEnv));
   parameter Real tableUpp[:,2]=[-15,55; 5,60; 30,60]
-    "Upper boundary of envelope";
+    "Upper boundary of envelope" annotation (Dialog(enable=use_opeEnv));
   Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_ret_co annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,-24},{
             -70,-12}})));

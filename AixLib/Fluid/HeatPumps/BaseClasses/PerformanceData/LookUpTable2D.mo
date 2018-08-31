@@ -7,8 +7,8 @@ model LookUpTable2D "Performance data coming from manufacturer"
     table=dataTable.tableQdot_con,
     final tableOnFile=false,
     final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
-    annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-40,20},
-            {0,60}})));
+    annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-44,20},
+            {-4,60}})));
   Modelica.Blocks.Tables.CombiTable2D P_eleTable(
     tableName="NoName",
     fileName="NoName",
@@ -39,52 +39,53 @@ model LookUpTable2D "Performance data coming from manufacturer"
     "Power if HP is turned off"
     annotation (Placement(transformation(extent={{-24,2},{-14,12}})));
 equation
-  connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{-77.4,28},{-44,
+  connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{-77.4,28},{-48,
           28}},                            color={0,0,127}));
   connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(points={{-77.4,28},{-58,28},
           {-58,-52},{-44,-52}}, color={0,0,127}));
   connect(t_Co_ou.y, P_eleTable.u1) annotation (Line(points={{-77.4,-28},{-44,
           -28}},                color={0,0,127}));
   connect(t_Co_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-77.4,-28},{
-          -58,-28},{-58,52},{-44,52},{-44,52}},
+          -58,-28},{-58,52},{-48,52}},
                                   color={0,0,127}));
   connect(sigBusHP.T_ret_co, t_Co_ou.u) annotation (Line(
-      points={{-106.925,0.07},{-106,0.07},{-106,-28},{-91.2,-28}},
+      points={{1.075,104.07},{-106,104.07},{-106,-28},{-91.2,-28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
-      points={{-106.925,0.07},{-106.925,28},{-106,28},{-106,28},{-91.2,28}},
+      points={{1.075,104.07},{1.075,28},{-106,28},{-106,28},{-91.2,28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(feedbackHeatFlowEvaporator.y, QEva)
-    annotation (Line(points={{71,80},{110,80}}, color={0,0,127}));
+    annotation (Line(points={{71,80},{76,80},{76,-110},{80,-110}},
+                                                color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{37,-48},{44,-48},{44,0},{
-          50,0},{50,0},{110,0},{110,0}}, color={0,0,127}));
+          50,0},{50,0},{0,0},{0,-110}},  color={0,0,127}));
   connect(switchPel.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={
           {37,-48},{38,-48},{38,-48},{44,-48},{44,80},{54,80}}, color={0,0,127}));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u2)
     annotation (Line(points={{37,32},{62,32},{62,72}}, color={0,0,127}));
-  connect(switchQCon.y, QCon) annotation (Line(points={{37,32},{62,32},{62,-80},
-          {110,-80}}, color={0,0,127}));
+  connect(switchQCon.y, QCon) annotation (Line(points={{37,32},{62,32},{62,-110},
+          {-80,-110}},color={0,0,127}));
   connect(P_eleTable.y, switchPel.u1)
     annotation (Line(points={{2,-40},{14,-40}}, color={0,0,127}));
   connect(Qdot_ConTable.y, switchQCon.u1)
-    annotation (Line(points={{2,40},{14,40}}, color={0,0,127}));
+    annotation (Line(points={{-2,40},{14,40}},color={0,0,127}));
   connect(sigBusHP.onOff, switchQCon.u2) annotation (Line(
-      points={{-106.925,0.07},{7.5,0.07},{7.5,32},{14,32}},
+      points={{1.075,104.07},{7.5,104.07},{7.5,32},{14,32}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.onOff, switchPel.u2) annotation (Line(
-      points={{-106.925,0.07},{7.5,0.07},{7.5,-48},{14,-48}},
+      points={{1.075,104.07},{7.5,104.07},{7.5,-48},{14,-48}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -95,4 +96,19 @@ equation
   connect(constZero.y, switchPel.u3) annotation (Line(points={{-13.5,7},{-13.5,
           8},{-14,8},{8,8},{8,8},{8,-56},{10,-56},{10,-56},{14,-56},{14,-56}},
         color={0,0,127}));
+  annotation (Icon(graphics={
+    Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
+    Line(points={{0.0,40.0},{0.0,-40.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,20.0},{-30.0,40.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,0.0},{-30.0,20.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,-20.0},{-30.0,0.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,-40.0},{-30.0,-20.0}})}));
 end LookUpTable2D;

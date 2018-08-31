@@ -128,14 +128,14 @@ model HeatPump "Base model of realistic heat pump"
     y_start=0,
     initType=Modelica.Blocks.Types.Init.NoInit,
     final k=1,
-    T=comIneTime_constant) if use_ComIne
+    T=comIneTime_constant) if use_comIne
     "As all changes in a compressor have certain inertia, no nSet is directly obtained. This first order block represents the inertia of the compressor."
     annotation (Placement(transformation(extent={{-92,20},{-80,32}})));
-  parameter Boolean use_ComIne=false "Consider the inertia of the compressor" annotation(choices(checkBox=true));
+  parameter Boolean use_comIne=false "Consider the inertia of the compressor" annotation(choices(checkBox=true));
 
   constant Modelica.SIunits.Time comIneTime_constant
     "Time constant representing inertia of compressor"
-    annotation (Dialog(enable=use_ComIne));
+    annotation (Dialog(enable=use_comIne));
 
   parameter Boolean use_EvaCap=true
     "If heat losses at capacitor side are considered or not"
@@ -165,7 +165,7 @@ model HeatPump "Base model of realistic heat pump"
       enable=use_ConCap));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva
     "Ambient temperature on the evaporator side"
-    annotation (Placement(transformation(extent={{132,-56},{100,-24}})));
+    annotation (Placement(transformation(extent={{122,-50},{100,-28}})));
 
   replaceable model PerfData =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
@@ -177,14 +177,14 @@ model HeatPump "Base model of realistic heat pump"
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={-140,-14})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSet if not use_ComIne
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSet if not use_comIne
     "Use default nSet value" annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=0,
         origin={-87,7})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con
     "Ambient temperature on the condenser side"
-    annotation (Placement(transformation(extent={{132,24},{100,56}})));
+    annotation (Placement(transformation(extent={{122,30},{100,52}})));
   Utilities.HeatTransfer.CapacityWithLosses ConCapacity(
     final use_ForConv=false,
     final C=CCon,
@@ -304,8 +304,8 @@ equation
 
   connect(innerCycle.QCon, heatFlowRateCon.Q_flow) annotation (Line(points={{-12,41},
           {-12,43.5},{-16,43.5},{-16,48}},         color={0,0,127}));
-  connect(T_amb_eva, sigBusHP.T_amb_eva) annotation (Line(points={{116,-40},{54,
-          -40},{54,-44},{-94,-44},{-94,-44.915},{-116.925,-44.915}},
+  connect(T_amb_eva, sigBusHP.T_amb_eva) annotation (Line(points={{111,-39},{54,
+          -39},{54,-44},{-94,-44},{-94,-44.915},{-116.925,-44.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -339,9 +339,8 @@ equation
       points={{-116,20},{-104,20},{-104,7},{-93,7}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(T_amb_con, sigBusHP.T_amb_con) annotation (Line(points={{116,40},{36,
-          40},{36,62},{-70,62},{-70,-44.915},{-116.925,-44.915}},
-                                                              color={0,0,127}),
+  connect(T_amb_con, sigBusHP.T_amb_con) annotation (Line(points={{111,41},{36,41},
+          {36,62},{-70,62},{-70,-44.915},{-116.925,-44.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -450,6 +449,18 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={0,0,0},
-          visible=use_ConCap)}),          Diagram(coordinateSystem(extent={{-100,
+          visible=use_ConCap),
+        Line(
+          points={{-42,72},{34,72}},
+          color={0,0,0},
+          arrow={Arrow.None,Arrow.Filled},
+          thickness=0.5),
+        Line(
+          points={{-38,0},{38,0}},
+          color={0,0,0},
+          arrow={Arrow.None,Arrow.Filled},
+          thickness=0.5,
+          origin={0,-74},
+          rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
             -120},{100,120}})));
 end HeatPump;

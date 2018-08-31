@@ -16,7 +16,7 @@ partial model partialTSetToNSet
     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={10,110})));
+        origin={0,110})));
   parameter Boolean use_secHeaGen "True to choose a bivalent system" annotation(choices(checkBox=true));
   parameter Boolean use_bivPar "Switch between bivalent parallel and bivalent alternative control" annotation (Dialog(enable=use_secHeaGen), choices(choice=true "Parallel",
       choice=false "Alternativ",
@@ -29,22 +29,22 @@ partial model partialTSetToNSet
   CalcQdot calcQdot if use_secHeaGen annotation (Placement(transformation(
         extent={{-8.5,-8.5},{8.5,8.5}},
         rotation=0,
-        origin={-34.5,75.5})));
+        origin={-44.5,75.5})));
   Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen
     "If second heater is off, zero is passed" annotation (Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=90,
-        origin={10,86})));
+        origin={0,86})));
   Modelica.Blocks.Math.Gain gain if use_secHeaGen
-    annotation (Placement(transformation(extent={{-16,64},{-4,76}})));
+    annotation (Placement(transformation(extent={{-26,64},{-14,76}})));
 equation
   connect(conZer.y, swiNullHP.u3) annotation (Line(points={{50.6,-18},{58,-18},
           {58,-8},{64,-8}}, color={0,0,127}));
   connect(swiNullHP.y, nOut)
     annotation (Line(points={{87,0},{110,0}}, color={0,0,127}));
   connect(sigBusHP.m_flow_co, calcQdot.mFlow_con) annotation (Line(
-      points={{-106.915,-26.925},{-76,-26.925},{-76,50},{-44.36,50},{-44.36,
+      points={{-106.915,-26.925},{-76,-26.925},{-76,50},{-54.36,50},{-54.36,
           70.4}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -53,7 +53,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_ret_co, calcQdot.TCon_out) annotation (Line(
-      points={{-106.915,-26.925},{-76,-26.925},{-76,50},{-44.36,50},{-44.36,
+      points={{-106.915,-26.925},{-76,-26.925},{-76,50},{-54.36,50},{-54.36,
           75.5}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -62,15 +62,17 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(TSet, calcQdot.TSet) annotation (Line(points={{-116,60},{-76,60},{-76,
-          50},{-44.36,50},{-44.36,80.6}}, color={0,0,127}));
+          50},{-54.36,50},{-54.36,80.6}}, color={0,0,127}));
   connect(swiNullsecHeaGen.y, ySecHeaGen)
-    annotation (Line(points={{10,94.8},{10,110}}, color={0,0,127}));
+    annotation (Line(points={{0,94.8},{0,110}},   color={0,0,127}));
   connect(conZer.y, swiNullsecHeaGen.u3) annotation (Line(points={{50.6,-18},{
-          58,-18},{58,76.4},{16.4,76.4}}, color={0,0,127}));
-  connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-3.4,70},{0,70},
-          {0,76.4},{3.6,76.4}}, color={0,0,127}));
-  connect(gain.u, calcQdot.ySecHeaGen) annotation (Line(points={{-17.2,70},{-20,
-          70},{-20,75.5},{-25.15,75.5}}, color={0,0,127}));
+          58,-18},{58,76.4},{6.4,76.4}},  color={0,0,127}));
+  connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-13.4,70},{0,
+          70},{0,76.4},{-6.4,76.4}},
+                                color={0,0,127}));
+  connect(gain.u, calcQdot.ySecHeaGen) annotation (Line(points={{-27.2,70},{-28,
+          70},{-28,74},{-32,74},{-32,75.5},{-35.15,75.5}},
+                                         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
           extent={{-84,85.5},{91.5,-82.5}},

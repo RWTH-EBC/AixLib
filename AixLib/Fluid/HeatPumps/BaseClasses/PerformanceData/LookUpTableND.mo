@@ -40,15 +40,17 @@ model LookUpTableND "N-dimensional table with data for heat pump"
 
 equation
   connect(feedbackHeatFlowEvaporator.y, QEva)
-    annotation (Line(points={{93,80},{110,80}}, color={0,0,127}));
-  connect(switchPel.y, Pel) annotation (Line(points={{59,-48},{66,-48},{66,0},{110,
-          0}}, color={0,0,127}));
+    annotation (Line(points={{93,80},{86,80},{86,-110},{80,-110}},
+                                                color={0,0,127}));
+  connect(switchPel.y, Pel) annotation (Line(points={{59,-48},{66,-48},{66,-110},
+          {0,-110}},
+               color={0,0,127}));
   connect(switchPel.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{
           59,-48},{66,-48},{66,80},{76,80}}, color={0,0,127}));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u2)
     annotation (Line(points={{59,32},{84,32},{84,72}}, color={0,0,127}));
-  connect(switchQCon.y, QCon) annotation (Line(points={{59,32},{84,32},{84,-80},
-          {110,-80}}, color={0,0,127}));
+  connect(switchQCon.y, QCon) annotation (Line(points={{59,32},{84,32},{84,-110},
+          {-80,-110}},color={0,0,127}));
 
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{12.6,0},{21.25,0},
           {21.25,24},{36,24}}, color={0,0,127}));
@@ -74,14 +76,14 @@ equation
           -14},{-50,-14},{-50,0},{-39.6,0}}, color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
-      points={{-106.925,0.07},{-106,0.07},{-106,54},{-97.2,54}},
+      points={{1.075,104.07},{-106,104.07},{-106,54},{-97.2,54}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.N, nConverter.u) annotation (Line(
-      points={{-106.925,0.07},{-92.5,0.07},{-92.5,15},{-77,15}},
+      points={{1.075,104.07},{-92.5,104.07},{-92.5,15},{-77,15}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash),
@@ -90,7 +92,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.N, realPasThrNCon.u) annotation (Line(
-      points={{-106.925,0.07},{-92,0.07},{-92,-14},{-79.6,-14}},
+      points={{1.075,104.07},{-92,104.07},{-92,-14},{-79.6,-14}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash),
@@ -99,24 +101,39 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.T_ret_co, t_Co_ou.u) annotation (Line(
-      points={{-106.925,0.07},{-106,0.07},{-106,-54},{-97.2,-54}},
+      points={{1.075,104.07},{-106,104.07},{-106,-54},{-97.2,-54}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.onOff, switchPel.u2) annotation (Line(
-      points={{-106.925,0.07},{-106,0.07},{-106,-80},{36,-80},{36,-48}},
+      points={{1.075,104.07},{-106,104.07},{-106,-80},{36,-80},{36,-48}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.onOff, switchQCon.u2) annotation (Line(
-      points={{-106.925,0.07},{-106,0.07},{-106,72},{28,72},{28,32},{36,32}},
+      points={{1.075,104.07},{-106,104.07},{-106,72},{28,72},{28,32},{36,32}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  annotation (Icon(graphics={
+    Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
+    Line(points={{0.0,40.0},{0.0,-40.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,20.0},{-30.0,40.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,0.0},{-30.0,20.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,-20.0},{-30.0,0.0}}),
+    Rectangle(fillColor={255,215,136},
+      fillPattern=FillPattern.Solid,
+      extent={{-60.0,-40.0},{-30.0,-20.0}})}));
 end LookUpTableND;

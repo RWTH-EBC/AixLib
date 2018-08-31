@@ -2,7 +2,8 @@ within AixLib.Controls.HeatPump.SecurityControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   Modelica.Blocks.Logical.GreaterEqualThreshold
-                                       iceFacGreMin(final threshold=minIceFac)
+                                       iceFacGreMin(final threshold=minIceFac) if
+    use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
@@ -14,31 +15,56 @@ block DefrostControl
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
     annotation (Placement(transformation(extent={{-132,4},{-100,36}})));
-  Utilities.Logical.SmoothSwitch        swiErr1
+  Utilities.Logical.SmoothSwitch swiErr
     "If an error occurs, the value of the conZero block will be used(0)"
     annotation (Placement(transformation(extent={{60,-16},{80,4}})));
   Modelica.Blocks.Sources.Constant conOneas(final k=1)
     "If Defrost is enabled, HP runs at full power"
-    annotation (Placement(transformation(extent={{20,-30},{32,-18}})));
-  Modelica.Blocks.Interfaces.RealOutput nOut1
+    annotation (Placement(transformation(extent={{22,-30},{34,-18}})));
+  Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
+  parameter Boolean use_chiller=true
+    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
+                                                                                                     annotation(choices(checkBox=true));
+  Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
+    "Relative speed of compressor. From 0 to 1" annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={0,110})));
+  Modelica.Blocks.Sources.BooleanConstant conTrue(final k=true) if not
+    use_chiller
+    "If ice is melted with an additional heater, HP can continue running"
+    annotation (Placement(transformation(extent={{-24,-12},{-12,0}})));
+  Modelica.Blocks.Sources.RealExpression realPel_deFro(y=calcPel_deFro) if not
+    use_chiller
+               "Calculate how much eletrical energy is used to melt ice"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,74})));
+  parameter Modelica.SIunits.Power calcPel_deFro
+    "Calculate how much eletrical energy is used to melt ice"
+    annotation (Dialog(enable=not use_chiller));
 equation
-  connect(conOneas.y, swiErr1.u3) annotation (Line(points={{32.6,-24},{38,-24},
-          {38,-14},{58,-14}}, color={0,0,127}));
-  connect(swiErr1.y, nOut1) annotation (Line(points={{81,-6},{96,-6},{96,20},
-          {110,20}},
-                   color={0,0,127}));
+  connect(conOneas.y, swiErr.u3) annotation (Line(points={{34.6,-24},{38,-24},{38,
+          -14},{58,-14}}, color={0,0,127}));
+  connect(swiErr.y, nOut) annotation (Line(points={{81,-6},{96,-6},{96,20},{110,
+          20}}, color={0,0,127}));
   connect(iceFacGreMin.y, modeOut) annotation (Line(points={{5.8,-62},{60,-62},
-          {60,-20},{110,-20}}, color={255,0,255}));
-  connect(iceFacGreMin.y, swiErr1.u2)
-    annotation (Line(points={{5.8,-62},{5.8,-6},{58,-6}}, color={255,0,255}));
-  connect(nSet, swiErr1.u1) annotation (Line(points={{-116,20},{32,20},{32,2},
-          {58,2}}, color={0,0,127}));
+          {60,-20},{110,-20}}, color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(iceFacGreMin.y, swiErr.u2) annotation (Line(
+      points={{5.8,-62},{5.8,-6},{58,-6}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(nSet, swiErr.u1) annotation (Line(points={{-116,20},{32,20},{32,2},{58,
+          2}}, color={0,0,127}));
   connect(sigBusHP.iceFac, iceFacGreMin.u) annotation (Line(
       points={{-105.93,-61.93},{-78,-61.93},{-78,-62},{-12.6,-62}},
       color={255,204,51},
@@ -47,6 +73,12 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(conTrue.y, swiErr.u2) annotation (Line(
+      points={{-11.4,-6},{58,-6}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(Pel_deFro, realPel_deFro.y)
+    annotation (Line(points={{0,110},{0,85}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

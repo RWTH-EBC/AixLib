@@ -6,20 +6,20 @@ block OnOffControl
                                   nSetGreaterZero(final threshold=Modelica.Constants.eps)
                                                   "True if device is set on"
     annotation (Placement(transformation(extent={{-110,56},{-94,72}})));
-  parameter Boolean useMinRunTime
-    "False if minimal runtime of HP is not considered";
+  parameter Boolean use_minRunTime
+    "False if minimal runtime of HP is not considered" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
     "Mimimum runtime of heat pump"
-    annotation (Dialog(enable=useMinRunTim));
-  parameter Boolean useMinLocTime
-    "False if minimal locktime of HP is not considered";
+    annotation (Dialog(enable=use_minRunTime));
+  parameter Boolean use_minLocTime
+    "False if minimal locktime of HP is not considered" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.Time minLocTime(displayUnit="min")
     "Minimum lock time of heat pump"
-    annotation (Dialog(enable=useMinLocTim));
-  parameter Boolean useRunPerHou
-    "False if maximal runs per hour of HP are not considered";
+    annotation (Dialog(enable=use_minLocTime));
+  parameter Boolean use_runPerHou
+    "False if maximal runs per hour of HP are not considered" annotation(choices(checkBox=true));
   parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
-    annotation (Dialog(enable=useRunPerHour));
+    annotation (Dialog(enable=use_runPerHou));
 
   Modelica.Blocks.Logical.GreaterThreshold
                                   nIsGreaterZero(final threshold=Modelica.Constants.eps)
@@ -30,27 +30,27 @@ block OnOffControl
   Modelica.Blocks.Logical.Pre pre1(final pre_u_start=pre_n_start)
     annotation (Placement(transformation(extent={{-84,-48},{-72,-36}})));
   BaseClasses.RunPerHouBoundary runPerHouBoundary(final maxRunPer_h=
-        maxRunPerHou, final delayTime=3600) if useRunPerHou
+        maxRunPerHou, final delayTime=3600) if use_runPerHou
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
   BaseClasses.TimeControl locTimControl(final minRunTime=minLocTime) if
-    useMinLocTime
+    use_minLocTime
     annotation (Placement(transformation(extent={{-40,-24},{-20,-4}})));
   Modelica.Blocks.Logical.Not notIsOn
     annotation (Placement(transformation(extent={{-66,-22},{-58,-14}})));
   BaseClasses.TimeControl runTimControl(final minRunTime=minRunTime) if
-    useMinRunTime
+    use_minRunTime
     annotation (Placement(transformation(extent={{-40,52},{-20,72}})));
   Modelica.Blocks.Logical.And andLoc
     annotation (Placement(transformation(extent={{28,-66},{40,-54}})));
 
   Modelica.Blocks.Sources.BooleanConstant booleanConstantRunPerHou(final k=true) if not
-    useRunPerHou
+    use_runPerHou
     annotation (Placement(transformation(extent={{0,-90},{14,-76}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstantLocTim(final k=true) if not
-    useMinLocTime
+    use_minLocTime
     annotation (Placement(transformation(extent={{-34,-44},{-20,-30}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstantRunTim(final k=true) if not
-    useMinRunTime
+    use_minRunTime
     annotation (Placement(transformation(extent={{-4,52},{10,66}})));
   Modelica.Blocks.Logical.Not notSetOn
     annotation (Placement(transformation(extent={{-66,72},{-56,82}})));

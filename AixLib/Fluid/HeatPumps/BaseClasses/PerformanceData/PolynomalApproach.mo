@@ -18,4 +18,18 @@ equation
     Pel = 0;
     QEva = 0;
   end if;
+  annotation (Icon(graphics={
+        Text(
+          lineColor={0,0,255},
+          extent={{-136,109},{164,149}},
+          textString="%name"),
+        Ellipse(
+          lineColor = {108,88,49},
+          fillColor = {255,215,136},
+          fillPattern = FillPattern.Solid,
+          extent={{-86,-96},{88,64}}),
+        Text(
+          lineColor={108,88,49},
+          extent={{-90,-108},{90,72}},
+          textString="f")}));
 end PolynomalApproach;
