@@ -1,0 +1,711 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+*       { font-size: 100%; font-family: Arial, sans-serif; }
+.modelica, .modelica * { font-size: 90%; font-family: Courier, monospace; white-space: pre; } /* For the Modelica code (in exported html). */
+h4      { font-size: 100%; font-weight: bold; color: green; } 
+h3      { font-size: 110%; font-weight: bold; color: green; }
+h2      { font-size: 130%; font-weight: bold; color: green; }
+address { font-weight: normal; }
+td      { padding: 2px; border: 1px solid #808080; vertical-align: top; }
+th      { padding: 2px; border: 1px solid #808080; vertical-align: top; font-weight: bold; }
+table   { border: 1px solid #808080; border-collapse: collapse; }
+pre, code {font-family: "Courier New", monospace;}
+pre {white-space: pre; overflow-x : hidden;}
+.ModelicaDescription {font-weight: bold;} /* For the description string of the class. */
+.ModelicaBaseClass {} /* For the list of base-classes at the of the description. */
+.ModelicaKeyword { color: blue; font-weight: normal; font-style: normal; } /* Keywords in Modelica. */
+.ModelicaComment { color: #006400;  font-weight: normal; font-style: normal;} /* All three variants of comments in Modelica.  */
+.ModelicaString { color: #006400;  font-weight: normal; font-style: normal;} /* String constants. */
+.ModelicaClass { color: red; font-weight: normal; font-style: normal;} /* Formatting the names of referenced classes (for base-class and components). */
+.ModelicaFunction { color: red; font-weight: normal; font-style: normal;} /* Formatting for called functions. */
+.ModelicaTablePackageContent { } /* The table of contents for each package. */
+.ModelicaTableCrossReference { } /* The optional cross-reference table. */
+.ModelicaTableInputs {} /* The table of inputs for a function. */
+.ModelicaTableOutputs {} /* The table of outputs for a function. */
+.ModelicaTableParameters {} /* The table of parameters for a model/block. */
+.ModelicaTableConnectors {} /* The table of connectors for a model/block. */
+.ModelicaTableContents {} /* The table of contents for a connector. */
+.ModelicaStartAttribute { font-weight: bold; } /* The formatting used for start-attribute in the table of parameters, to separate them from parameter values. */
+.ModelicaParameterTab { background-color: #c0c0c0; font-weight: bold; } /* The tab-heading in the table of parameters */
+.ModelicaParameterGroup { background-color: #e0e0e0; } /* The group-heading in the table of parameters */
+</style>
+</head>
+<body>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE ExpansionValveModified<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples</a>.ExpansionValveModified</h2>
+<p>
+</p>
+<h3>Package Content</h3>
+<table summary="Package Content" class="ModelicaTablePackageContent">
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Vadcb9a9c8a54f1e2cifiedS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.SubcoolingExpansionValveModified" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.SubcoolingExpansionValveModified"
+>SubcoolingExpansionValveModified</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Vadcb9a9c8a54f1e2cifiedS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.UpStreamPressureExpansionValveModified" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.UpStreamPressureExpansionValveModified"
+>UpStreamPressureExpansionValveModified</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Vadcb9a9c8a54f1e2cifiedS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.DownStreamPressureExpansionValveModified" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.DownStreamPressureExpansionValveModified"
+>DownStreamPressureExpansionValveModified</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Vadcb9a9c8a54f1e2cifiedS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.AreaExpansionValveModified" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.AreaExpansionValveModified"
+>AreaExpansionValveModified</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Va68ad193bb4fa2d1erenceS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValvesPressureDifference" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValvesPressureDifference"
+>ModularExpansionValvesPressureDifference</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Va68ad193bb4fa2d1erenceS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValveModifiedsMassFlowRate" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValveModifiedsMassFlowRate"
+>ModularExpansionValveModifiedsMassFlowRate</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Vae1f1d4c3269fdcb9ariesS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.StaticHeatPumpBoundaries" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.StaticHeatPumpBoundaries"
+>StaticHeatPumpBoundaries</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><img src="AixLib.Fluid.Actuators.Va2b282242a0a83946ifiedS.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.MassFlowRateValveModified" width="20" height="20" align="top">&nbsp;<a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.MassFlowRateValveModified"
+>MassFlowRateValveModified</a>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE SubcoolingExpansionValveModified<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.SubcoolingExpansionValveModified"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.SubcoolingExpansionValveModified</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Vadcb9a9c8a54f1e2cifiedD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.SubcoolingExpansionValveModified">
+</p>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> SubcoolingExpansionValveModified
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_ph"
+>Modelica.Fluid.Sources.Boundary_ph</a> boundary1(
+    nPorts=1,
+    use_h_in=true,
+    p=800000,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>);
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.ExpansionValveModified"
+>SimpleExpansionValves.ExpansionValveModified</a> expansionValveModified(
+    m_flow_nominal=0.1,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> MetastabilityCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_MetastabilityCoefficient_SpecifiedMetastabilityCoefficient.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth"
+>Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Buck_R22R407CR410A_EEV_16_18"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Buck_R22R407CR410A_EEV_16_18</a>,
+    Choice=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.Choice.Bernoullip_th,
+    AVal=1.15e-6,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>);
+
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</a> const(k=0.4);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.TimeTable"
+>Modelica.Blocks.Sources.TimeTable</a> timeTable(table=[0,1; 15,15; 16,16]);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_pT"
+>Modelica.Fluid.Sources.Boundary_pT</a> boundary2(
+    nPorts=1,
+    use_p_in=false,
+    use_T_in=true,
+    p=2600000,
+    T=278.15,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>);
+  <a href="AixLib_Fluid_Sensors.html#AixLib.Fluid.Sensors.SpecificEnthalpy"
+>Sensors.SpecificEnthalpy</a> senSpeEnt;
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(expansionValveModified.port_b,boundary1. ports[1]);
+  <span class="ModelicaFunction">connect</span>(const.y,expansionValveModified. manVarVal);
+  <span class="ModelicaFunction">connect</span>(boundary2.ports[1], senSpeEnt.port);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.port, expansionValveModified.port_a);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.h_out, boundary1.h_in);
+  <span class="ModelicaFunction">connect</span>(timeTable.y, boundary2.T_in);
+<span class="ModelicaKeyword">end </span>SubcoolingExpansionValveModified;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE UpStreamPressureExpansionValveModified<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.UpStreamPressureExpansionValveModified"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.UpStreamPressureExpansionValveModified</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Vaa33914fb7948df91ifiedD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.UpStreamPressureExpansionValveModified">
+</p>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> UpStreamPressureExpansionValveModified
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_ph"
+>Modelica.Fluid.Sources.Boundary_ph</a> boundary1(
+    nPorts=1,
+    use_h_in=true,
+    p=800000,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>);
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.ExpansionValveModified"
+>SimpleExpansionValves.ExpansionValveModified</a> expansionValveModified(
+    m_flow_nominal=0.1,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> MetastabilityCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_MetastabilityCoefficient_SpecifiedMetastabilityCoefficient.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth"
+>Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Buck_R22R407CR410A_EEV_16_18"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Buck_R22R407CR410A_EEV_16_18</a>,
+    Choice=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.Choice.Bernoullip_th,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>,
+    AVal=2.3e-6);
+
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</a> const(k=0.4);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.TimeTable"
+>Modelica.Blocks.Sources.TimeTable</a> timeTable(table=[0,10e5; 20,40e5; 20,40e5]);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_pT"
+>Modelica.Fluid.Sources.Boundary_pT</a> boundary2(
+    use_p_in=true,
+    T=278.15,
+    nPorts=1,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>);
+  <a href="AixLib_Fluid_Sensors.html#AixLib.Fluid.Sensors.SpecificEnthalpy"
+>Sensors.SpecificEnthalpy</a> senSpeEnt;
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(expansionValveModified.port_b, boundary1.ports[1]);
+  <span class="ModelicaFunction">connect</span>(const.y, expansionValveModified.manVarVal);
+  <span class="ModelicaFunction">connect</span>(timeTable.y, boundary2.p_in);
+  <span class="ModelicaFunction">connect</span>(boundary2.ports[1], senSpeEnt.port);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.port, expansionValveModified.port_a);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.h_out, boundary1.h_in);
+<span class="ModelicaKeyword">end </span>UpStreamPressureExpansionValveModified;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE DownStreamPressureExpansionValveModified<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.DownStreamPressureExpansionValveModified"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.DownStreamPressureExpansionValveModified</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Va332c2baa7385d654ifiedD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.DownStreamPressureExpansionValveModified">
+</p>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> DownStreamPressureExpansionValveModified
+
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_ph"
+>Modelica.Fluid.Sources.Boundary_ph</a> boundary1(
+    h=250000,
+    use_h_in=true,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    use_p_in=true,
+    p=500000,
+    nPorts=1);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</a> const(k=1);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_pT"
+>Modelica.Fluid.Sources.Boundary_pT</a> boundary2(
+    nPorts=1,
+    use_p_in=false,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    p=2600000,
+    T=276.15);
+  <a href="AixLib_Fluid_Sensors.html#AixLib.Fluid.Sensors.SpecificEnthalpy"
+>Sensors.SpecificEnthalpy</a> senSpeEnt;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.TimeTable"
+>Modelica.Blocks.Sources.TimeTable</a> timeTable(table=[0,25e5; 23,2e5; 24,2e5]);
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.ExpansionValveModified"
+>SimpleExpansionValves.ExpansionValveModified</a> expansionValveModified(
+    m_flow_nominal=0.1,
+    Choice=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.Choice.Bernoullip_th,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> MetastabilityCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_MetastabilityCoefficient_SpecifiedMetastabilityCoefficient.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth"
+>Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22</a>,
+    AVal=0.88e-6);
+
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(boundary2.ports[1], senSpeEnt.port);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.h_out, boundary1.h_in);
+  <span class="ModelicaFunction">connect</span>(timeTable.y, boundary1.p_in);
+  <span class="ModelicaFunction">connect</span>(const.y, expansionValveModified.manVarVal);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.port, expansionValveModified.port_a);
+  <span class="ModelicaFunction">connect</span>(expansionValveModified.port_b, boundary1.ports[1]);
+<span class="ModelicaKeyword">end </span>DownStreamPressureExpansionValveModified;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE AreaExpansionValveModified<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.AreaExpansionValveModified"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.AreaExpansionValveModified</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Va9fc8f96cf53cb33fifiedD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.AreaExpansionValveModified">
+</p>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> AreaExpansionValveModified
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.ExpansionValveModified"
+>SimpleExpansionValves.ExpansionValveModified</a> expansionValveModified(
+    m_flow_nominal=0.1,
+    Choice=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.Choice.Bernoullip_th,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> MetastabilityCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_MetastabilityCoefficient_SpecifiedMetastabilityCoefficient.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth"
+>Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22</a>,
+    AVal=2.3e-6);
+
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_pT"
+>Modelica.Fluid.Sources.Boundary_pT</a> boundary3(
+    use_p_in=false,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    nPorts=1,
+    p=2400000,
+    T=278.15);
+  <a href="AixLib_Fluid_Sensors.html#AixLib.Fluid.Sensors.SpecificEnthalpy"
+>Sensors.SpecificEnthalpy</a> senSpeEnt;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Fluid_Sources.html#Modelica.Fluid.Sources.Boundary_ph"
+>Modelica.Fluid.Sources.Boundary_ph</a> boundary2(
+    h=250000,
+    nPorts=1,
+    use_h_in=true,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    use_p_in=false,
+    p=850000);
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.TimeTable"
+>Modelica.Blocks.Sources.TimeTable</a> timeTable(table=[0,0; 1,1; 2,1]);
+
+
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(boundary3.ports[1], senSpeEnt.port);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.port, expansionValveModified.port_a);
+  <span class="ModelicaFunction">connect</span>(senSpeEnt.h_out, boundary2.h_in);
+  <span class="ModelicaFunction">connect</span>(expansionValveModified.port_b, boundary2.ports[1]);
+  <span class="ModelicaFunction">connect</span>(timeTable.y, expansionValveModified.manVarVal);
+<span class="ModelicaKeyword">end </span>AreaExpansionValveModified;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE ModularExpansionValvesPressureDifference<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="AixLib.Fluid.Actuators.Va68ad193bb4fa2d1erenceI.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValvesPressureDifference" align="right" style="border: 1px solid" width="80" height="80">
+<a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValvesPressureDifference"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.ModularExpansionValvesPressureDifference</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Va68ad193bb4fa2d1erenceD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValvesPressureDifference">
+</p>
+<h3>Parameters</h3>
+<table summary="Parameters" class="ModelicaTableParameters">
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_ModularExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValvesSensors"
+>ModularExpansionValvesSensors</a></td><td>modVal</td><td>redeclare ModularExpansionVa...</td><td>Modular expansion valves in parallel</td></tr>
+</table>
+<h3>Connectors</h3>
+<table summary="Connectors" class="ModelicaTableConnectors">
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="AixLib_Controls_Interfaces.html#AixLib.Controls.Interfaces.ModularHeatPumpControlBus"
+>ModularHeatPumpControlBus</a></td><td>dataBus</td><td>Data bus used to enable communication with dummy signals</td></tr>
+</table>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> ModularExpansionValvesPressureDifference
+  <a href="AixLib_Fluid_Sources.html#AixLib.Fluid.Sources.FixedBoundary"
+>Sources.FixedBoundary</a> source(
+    use_p=true,
+    use_T=true,
+    nPorts=1,
+    p=pInl,
+    T=TInl,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Formula.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula</a>)
+            <span class="ModelicaComment">&quot;Source of constant pressure and temperature&quot;</span>;
+  <span class="ModelicaKeyword">replaceable </span><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_ModularExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValvesSensors"
+>ModularExpansionValves.ModularExpansionValvesSensors</a> modVal(
+    nVal=nVal,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> SimpleExpansionValve =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsenthalpicExpansionValve"
+>SimpleExpansionValves.IsenthalpicExpansionValve</a>,
+    show_parVal=false,
+    show_parCon=false,
+    useInpFil={true,true,true},
+    AVal={2e-6,1.5e-6,1e-6},
+    risTim={0.25,0.25,0.5},
+    useExt=true,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> ModularController =
+        <a href="AixLib_Controls_HeatPump_ModularHeatPumps.html#AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController"
+>Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Formula.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula</a>)
+    <span class="ModelicaComment">&quot;Modular expansion valves in parallel&quot;</span>;
+  <a href="AixLib_Fluid_Interfaces.html#AixLib.Fluid.Interfaces.PortsAThroughPortB"
+>Interfaces.PortsAThroughPortB</a> portsAThroughPortB(                                   nVal=nVal,
+      <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Formula.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula</a>)
+    <span class="ModelicaComment">&quot;Model to connect each valves&#39; outlet pipe with each other&quot;</span>;
+  <a href="AixLib_Fluid_Sources.html#AixLib.Fluid.Sources.FixedBoundary"
+>Sources.FixedBoundary</a>              sink(
+    p=pOut,
+    T=TOut,
+    nPorts=1,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Formula.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Formula</a>)
+    <span class="ModelicaComment">&quot;Sink of constant pressure and temperature&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repValOpe(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the valves&#39; opening signal&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Sine"
+>Modelica.Blocks.Sources.Sine</a> valOpe(
+    freqHz=1,
+    amplitude=0.45,
+    offset=0.5)
+    <span class="ModelicaComment">&quot;Input signal to prediscribe expansion valve&#39;s opening&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repInt(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the internal set signal&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repCur(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the current value of the manipulated variables&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</a> ramCur(
+    height=0.5,
+    offset=0.3,
+    duration=1)
+    <span class="ModelicaComment">&quot;Ramp to fake current value of the controlled variables&quot;</span>;
+  <a href="AixLib_Controls_Interfaces.html#AixLib.Controls.Interfaces.ModularHeatPumpControlBus"
+>Controls.Interfaces.ModularHeatPumpControlBus</a> dataBus(nVal=nVal)
+    <span class="ModelicaComment">&quot;Data bus used to enable communication with dummy signals&quot;</span>;
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(source.ports[1],modVal. port_a);
+  <span class="ModelicaFunction">connect</span>(modVal.ports_b,portsAThroughPortB. ports_a);
+  <span class="ModelicaFunction">connect</span>(portsAThroughPortB.port_b,sink. ports[1]);
+  <span class="ModelicaFunction">connect</span>(valOpe.y,repValOpe. u);
+  <span class="ModelicaFunction">connect</span>(valOpe.y,repInt. u);
+  <span class="ModelicaFunction">connect</span>(ramCur.y,repCur. u);
+  <span class="ModelicaFunction">connect</span>(modVal.dataBus,dataBus);
+  <span class="ModelicaFunction">connect</span>(repValOpe.y,dataBus. expValBus.extManVarVal);
+  <span class="ModelicaFunction">connect</span>(repInt.y,dataBus. expValBus.intSetPoiVal);
+  <span class="ModelicaFunction">connect</span>(repCur.y,dataBus. expValBus.meaConVarVal);
+<span class="ModelicaKeyword">end </span>ModularExpansionValvesPressureDifference;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE ModularExpansionValveModifiedsMassFlowRate<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="AixLib.Fluid.Actuators.Va68ad193bb4fa2d1erenceI.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValveModifiedsMassFlowRate" align="right" style="border: 1px solid" width="80" height="80">
+<a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValveModifiedsMassFlowRate"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.ModularExpansionValveModifiedsMassFlowRate</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Va0b240bb6ce0b87fbwRateD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.ModularExpansionValveModifiedsMassFlowRate">
+</p>
+<h3>Parameters</h3>
+<table summary="Parameters" class="ModelicaTableParameters">
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_ModularExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValvesSensors"
+>ModularExpansionValvesSensors</a></td><td>modVal</td><td>redeclare ModularExpansionVa...</td><td>Modular expansion valves in parallel</td></tr>
+</table>
+<h3>Connectors</h3>
+<table summary="Connectors" class="ModelicaTableConnectors">
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="AixLib_Controls_Interfaces.html#AixLib.Controls.Interfaces.ModularHeatPumpControlBus"
+>ModularHeatPumpControlBus</a></td><td>dataBus</td><td>Data bus used to enable communication with dummy signals</td></tr>
+</table>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> ModularExpansionValveModifiedsMassFlowRate
+  <a href="AixLib_Fluid_Sources.html#AixLib.Fluid.Sources.MassFlowSource_T"
+>Sources.MassFlowSource_T</a> source(
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium = Medium,
+    T=TInl,
+    nPorts=1,
+    m_flow=1) <span class="ModelicaComment">&quot;Source of constant mass flow and temperature&quot;</span>;
+  <span class="ModelicaKeyword">replaceable </span><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_ModularExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValvesSensors"
+>ModularExpansionValves.ModularExpansionValvesSensors</a> modVal(
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium = Medium,
+    nVal=nVal,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> SimpleExpansionValve =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsenthalpicExpansionValve"
+>SimpleExpansionValves.IsenthalpicExpansionValve</a>,
+    show_parVal=false,
+    show_parCon=false,
+    useInpFil={true,true,true},
+    AVal={2e-6,1.5e-6,1e-6},
+    risTim={0.25,0.25,0.5},
+    controllerType={Modelica.Blocks.Types.SimpleController.P,Modelica.Blocks.Types.SimpleController.P,
+        Modelica.Blocks.Types.SimpleController.P},
+    useExt=true,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Power_R134a_EEV_15"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Power_R134a_EEV_15</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> ModularController =
+        <a href="AixLib_Controls_HeatPump_ModularHeatPumps.html#AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController"
+>Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController</a>)
+    <span class="ModelicaComment">&quot;Modular expansion valves in parallel&quot;</span>;
+  <a href="AixLib_Fluid_Interfaces.html#AixLib.Fluid.Interfaces.PortsAThroughPortB"
+>Interfaces.PortsAThroughPortB</a> portsAThroughPortB(<span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium = Medium, nVal=nVal)
+    <span class="ModelicaComment">&quot;Model to connect each valves&#39; outlet pipe with each other&quot;</span>;
+  <a href="AixLib_Fluid_Sources.html#AixLib.Fluid.Sources.FixedBoundary"
+>Sources.FixedBoundary</a>              sink(
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium = Medium,
+    p=pOut,
+    T=TOut,
+    nPorts=1)
+    <span class="ModelicaComment">&quot;Sink of constant pressure and temperature&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repValOpe(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the valves&#39; opening signal&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Sine"
+>Modelica.Blocks.Sources.Sine</a> valOpe(
+    freqHz=1,
+    amplitude=0.45,
+    offset=0.5)
+    <span class="ModelicaComment">&quot;Input signal to prediscribe expansion valve&#39;s opening&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repInt(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the internal set signal&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repCur(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the actual value of the manipulated variables&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</a> ramCur(
+    height=0.5,
+    offset=0.3,
+    duration=1)
+    <span class="ModelicaComment">&quot;Ramp to fake actual value of the controlled variables&quot;</span>;
+  <a href="AixLib_Controls_Interfaces.html#AixLib.Controls.Interfaces.ModularHeatPumpControlBus"
+>Controls.Interfaces.ModularHeatPumpControlBus</a> dataBus(nVal=nVal)
+    <span class="ModelicaComment">&quot;Data bus used to enable communication with dummy signals&quot;</span>;
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(source.ports[1],modVal. port_a);
+  <span class="ModelicaFunction">connect</span>(modVal.ports_b,portsAThroughPortB. ports_a);
+  <span class="ModelicaFunction">connect</span>(portsAThroughPortB.port_b,sink. ports[1]);
+  <span class="ModelicaFunction">connect</span>(valOpe.y,repValOpe. u);
+  <span class="ModelicaFunction">connect</span>(valOpe.y,repInt. u);
+  <span class="ModelicaFunction">connect</span>(ramCur.y,repCur. u);
+  <span class="ModelicaFunction">connect</span>(modVal.dataBus,dataBus);
+  <span class="ModelicaFunction">connect</span>(repValOpe.y,dataBus. expValBus.extManVarVal);
+  <span class="ModelicaFunction">connect</span>(repInt.y,dataBus. expValBus.intSetPoiVal);
+  <span class="ModelicaFunction">connect</span>(repCur.y,dataBus. expValBus.meaConVarVal);
+<span class="ModelicaKeyword">end </span>ModularExpansionValveModifiedsMassFlowRate;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE StaticHeatPumpBoundaries<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><img src="AixLib.Fluid.Actuators.Vae1f1d4c3269fdcb9ariesI.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.StaticHeatPumpBoundaries" align="right" style="border: 1px solid" width="80" height="80">
+<a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.StaticHeatPumpBoundaries"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.StaticHeatPumpBoundaries</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Vae1f1d4c3269fdcb9ariesD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.StaticHeatPumpBoundaries">
+</p>
+<h3>Connectors</h3>
+<table summary="Connectors" class="ModelicaTableConnectors">
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="AixLib_Controls_Interfaces.html#AixLib.Controls.Interfaces.ModularHeatPumpControlBus"
+>ModularHeatPumpControlBus</a></td><td>dataBus</td><td>Connector that contains all control signals</td></tr>
+</table>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> StaticHeatPumpBoundaries
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.CombiTimeTable"
+>Modelica.Blocks.Sources.CombiTimeTable</a> inpDat(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.NoExtrapolation,
+    columns=2:7,
+    table=[0,64,285.15,5180,308.15,900,5.755555556; 1,64,283.15,4920,308.15,910,5.406593407; 2,63,280.15,
+        4370,308.15,930,4.698924731; 3,64,285.15,4980,318.15,1140,4.368421053; 4,64,283.15,4730,318.15,
+        1140,4.149122807; 5,55,285.15,4180,328.15,1240,3.370967742; 6,64,283.15,4650,328.15,1380,3.369565217;
+        7,63,280.15,4160,318.15,1610,2.583850932; 8,55,275.15,2800,308.15,790,3.544303797; 9,106,258.15,
+        3760,308.15,1570,2.394904459; 10,115,266.15,4850,308.15,1940,2.5; 11,55,275.15,2640,318.15,
+        960,2.75; 12,111,258.15,4150,318.15,2120,1.95754717; 13,107,270.15,4780,318.15,2210,2.162895928;
+        14,113,266.15,4560,318.15,2290,1.991266376; 15,100,266.15,3880,328.15,2240,1.732142857; 16,
+        63,275.15,3280,328.15,1330,2.466165414; 17,63,280.15,4080,328.15,1400,2.914285714],
+    smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
+    <span class="ModelicaComment">&quot;Static boundaries of compressor model&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression"
+>Modelica.Blocks.Sources.RealExpression</a> inpSetSpeEnt(y=con.hOut)
+    <span class="ModelicaComment">&quot;Expressions describing set point of specific enthalpy&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression"
+>Modelica.Blocks.Sources.RealExpression</a> inpAmbTemp(y=inpDat.y[2])
+    <span class="ModelicaComment">&quot;Expressions describing ambient temperature&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression"
+>Modelica.Blocks.Sources.RealExpression</a> inpColCap(y=inpDat.y[3] - inpDat.y[5])
+    <span class="ModelicaComment">&quot;Expressions describing col capacity&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression"
+>Modelica.Blocks.Sources.RealExpression</a> inpHeaCap(y=inpDat.y[3])
+    <span class="ModelicaComment">&quot;Expressions describing heat capacity&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression"
+>Modelica.Blocks.Sources.RealExpression</a> inpTFlo(y=inpDat.y[4])
+    <span class="ModelicaComment">&quot;Expressions describing flow temperature at heat capacity&quot;</span>;
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValve.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValve.StaticHeatPumpBoundaries.StaticEvaporator"
+>ExpansionValve.StaticHeatPumpBoundaries.StaticEvaporator</a>
+                   eva(
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">final </span><span class="ModelicaKeyword">package</span> Medium = Medium,
+    <span class="ModelicaKeyword">final </span>dTPin=dTPinEva,
+    <span class="ModelicaKeyword">final </span>dTSupHea=dTSupHea,
+    nPorts=nVal)
+    <span class="ModelicaComment">&quot;Model that describes a simple static evaporator&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Continuous.html#Modelica.Blocks.Continuous.LimPID"
+>Modelica.Blocks.Continuous.LimPID</a> conPID(
+    k=0.001,
+    limitsAtInit=true,
+    Ti=10,
+    controllerType=Modelica.Blocks.Types.SimpleController.P,
+    yMax=1,
+    yMin=0.05)
+    <span class="ModelicaComment">&quot;PID controller to set valves&#39; openings&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.RealExpression"
+>Modelica.Blocks.Sources.RealExpression</a> inpCurSpeEnt(y=eva.hInl)
+    <span class="ModelicaComment">&quot;Expressions describing current specific enthalpy&quot;</span>;
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Replicator"
+>Modelica.Blocks.Routing.Replicator</a> repMea(nout=nVal)
+    <span class="ModelicaComment">&quot;Replicating the current value of the manipulated variables&quot;</span>;
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_ModularExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.ModularExpansionValves.ModularExpansionValvesSensors"
+>ModularExpansionValves.ModularExpansionValvesSensors</a> modExpVal(
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium = Medium,
+    nVal=nVal,
+    AVal=<span class="ModelicaFunction">fill</span>(1.767e-6, nVal),
+    useExt=true,
+    useInpFil=<span class="ModelicaFunction">fill</span>(true, nVal),
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22</a>,
+    risTim=<span class="ModelicaFunction">fill</span>(0.01328, nVal),
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> SimpleExpansionValve =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.ExpansionValveModified"
+>SimpleExpansionValves.ExpansionValveModified</a>)
+    <span class="ModelicaComment">&quot;Model that describes modular expansion valves in parallel&quot;</span>;
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValve.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValve.StaticHeatPumpBoundaries.StaticCondenser"
+>ExpansionValve.StaticHeatPumpBoundaries.StaticCondenser</a>
+                  con(
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium = Medium,
+    dTSubCool=dTSubCool,
+    dTPin=dTPinCond,
+    dSec=dSec,
+    cpSec=cpSec,
+    V_flowSec=V_flowSec)
+    <span class="ModelicaComment">&quot;Model that describes a simple static condenser&quot;</span>;
+  <a href="AixLib_Controls_Interfaces.html#AixLib.Controls.Interfaces.ModularHeatPumpControlBus"
+>Controls.Interfaces.ModularHeatPumpControlBus</a>        dataBus(nVal=nVal)
+    <span class="ModelicaComment">&quot;Connector that contains all control signals&quot;</span>;
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(con.port_b,modExpVal. port_a);
+  <span class="ModelicaFunction">connect</span>(modExpVal.dataBus,dataBus);
+  <span class="ModelicaFunction">connect</span>(inpHeaCap.y,con. inpQ_flow);
+  <span class="ModelicaFunction">connect</span>(inpTFlo.y,con. inpTFlo);
+  <span class="ModelicaFunction">connect</span>(repMea.y,dataBus. expValBus.extManVarVal);
+  <span class="ModelicaFunction">connect</span>(inpColCap.y,eva. inpQ_flow);
+  <span class="ModelicaFunction">connect</span>(inpAmbTemp.y,eva. inpTAmb);
+  <span class="ModelicaFunction">connect</span>(inpCurSpeEnt.y,conPID. u_m);
+  <span class="ModelicaFunction">connect</span>(inpSetSpeEnt.y,conPID. u_s);
+  <span class="ModelicaFunction">connect</span>(conPID.y,repMea. u);
+  <span class="ModelicaFunction">connect</span>(eva.ports_b,modExpVal. ports_b);
+<span class="ModelicaKeyword">end </span>StaticHeatPumpBoundaries;
+</div>
+<hr>
+<!--[if supportFields]><span style="mso-element:field-begin"></span>
+<span style="mso-spacerun:yes"></span>XE MassFlowRateValveModified<![endif]-->
+<!--[if supportFields]><span style="mso-element:field-end"></span><![endif]-->
+<h2><a name="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.MassFlowRateValveModified"></a><a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Examples_ExpansionValveModified.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified"
+>AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified</a>.MassFlowRateValveModified</h2>
+<p>
+<br><img src="AixLib.Fluid.Actuators.Va2b282242a0a83946ifiedD.png" alt="AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.ExpansionValveModified.MassFlowRateValveModified">
+</p>
+<h3>Modelica definition</h3>
+<div class="modelica"><span class="ModelicaKeyword">model</span> MassFlowRateValveModified
+  <a href="AixLib_Fluid_Sources.html#AixLib.Fluid.Sources.FixedBoundary"
+>Sources.FixedBoundary</a>              source(
+    use_p=true,
+    use_T=true,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>,
+    p=2400000,
+    T=278.15)
+    <span class="ModelicaComment">&quot;Source of constant pressure and temperature&quot;</span>;
+  <a href="AixLib_Fluid_Sources.html#AixLib.Fluid.Sources.FixedBoundary"
+>Sources.FixedBoundary</a>              sink(
+    T=TOut,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_340_Record.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record</a>,
+    p=80000)
+    <span class="ModelicaComment">&quot;Sink of constant pressure and temperature&quot;</span>;
+  <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_SimpleExpansionValves.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.ExpansionValveModified"
+>SimpleExpansionValves.ExpansionValveModified</a> expansionValveModified(
+    m_flow_nominal=0.1,
+    Choice=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.Choice.Bernoullip_th,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> MetastabilityCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_MetastabilityCoefficient_SpecifiedMetastabilityCoefficient.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth"
+>Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.Poly_R410A_16_18_pth</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">package</span> Medium =
+        <a href="AixLib_Media_Refrigerants_R410A_HEoS_R410a_IIR_P1_48_T233_473_Horner.html#AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner"
+>Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner</a>,
+    <span class="ModelicaKeyword">redeclare </span><span class="ModelicaKeyword">model</span> FlowCoefficient =
+        <a href="AixLib_Fluid_Actuators_Valves_ExpansionValves_Utilities_FlowCoefficient_SpecifiedFlowCoefficients.html#AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22"
+>Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R22R407CR410A_EEV_15_22</a>);
+
+  <a href="file:///C:/Program%20Files/Dymola%202019/Modelica/Library/Modelica%203.2.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</a> const;
+<span class="ModelicaKeyword">equation </span>
+  <span class="ModelicaFunction">connect</span>(const.y, expansionValveModified.manVarVal);
+<span class="ModelicaKeyword">end </span>MassFlowRateValveModified;
+</div>
+<hr>
+<address>
+<a href="http://www.3ds.com/">Automatically generated</a> Mon Aug 27 10:31:00 2018.
+</address>
+</body>
+</html>
