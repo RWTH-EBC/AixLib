@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Components.Walls;
+within AixLib.Building.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
   import BaseLib = AixLib.Utilities;

@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
 function constantCoP "Constant CoP and constant electric power"
-  extends
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct(
+  extends AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct(
     N,
     T_con,
     T_eva,

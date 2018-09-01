@@ -1,7 +1,8 @@
 within AixLib.Fluid.MixingVolumes.BaseClasses.Validation;
 model MixingVolumeHeatMoisturePort
   "Validation model for setting the initialization of the pressure for model with moisture port"
-  extends AixLib.Fluid.MixingVolumes.BaseClasses.Validation.MixingVolumeHeatPortWater(
+  extends
+    AixLib.Fluid.MixingVolumes.BaseClasses.Validation.MixingVolumeHeatPortWater(
     redeclare package Medium = AixLib.Media.Air,
     redeclare each AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatMoisturePort vol);
 

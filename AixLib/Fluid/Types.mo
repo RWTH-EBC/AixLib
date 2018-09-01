@@ -98,7 +98,6 @@ First implementation.
 </li>
 </ul>
 </html>"));
-
   type HeatExchangerFlowRegime = enumeration(
       ParallelFlow "Parallel flow",
       CounterFlow "Counter flow",
@@ -171,7 +170,6 @@ First implementation.
 </li>
 </ul>
 </html>"));
-
  annotation (preferredView="info", Documentation(info="<html>
 <p>
 This package contains type definitions.

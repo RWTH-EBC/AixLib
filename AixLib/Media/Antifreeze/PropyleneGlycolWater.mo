@@ -75,8 +75,7 @@ package PropyleneGlycolWater
 Temperature T (= " + String(T) + " K) is not
 in the allowed range (" + String(T_min) + " K <= T <= " + String(T_max) + " K)
 required from medium model \"" + mediumName + "\".
-");
-    assert(X_a >= X_a_min and X_a <= X_a_max, "
+"); assert(X_a >= X_a_min and X_a <= X_a_max, "
     Mass fraction X_a (= " + String(X_a) + " ) is not
 in the allowed range (" + String(X_a_min) + " <= X_a <= " + String(X_a_max) + " )
 required from medium model \"" + mediumName + "\".

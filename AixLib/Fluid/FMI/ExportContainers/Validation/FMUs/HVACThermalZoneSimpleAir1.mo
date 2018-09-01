@@ -1,7 +1,8 @@
 within AixLib.Fluid.FMI.ExportContainers.Validation.FMUs;
 block HVACThermalZoneSimpleAir1
   "Validation model for the convective HVAC system"
-  extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.HVACThermalZoneAir1(
+  extends AixLib.Fluid.FMI.ExportContainers.Validation.FMUs.HVACThermalZoneAir1
+    (
     redeclare package Medium = Modelica.Media.Air.SimpleAir);
 annotation (
     Documentation(info="<html>

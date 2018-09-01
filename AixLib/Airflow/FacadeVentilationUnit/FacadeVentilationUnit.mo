@@ -92,8 +92,8 @@ model FacadeVentilationUnit
         extent={{-8,-6},{8,6}},
         rotation=0,
         origin={-134,44})));
-  Modelica.Fluid.Sensors.Temperature coolerTemperature(redeclare package Medium =
-           Air) "Temperature of the supply air stream behind the cooler"
+  Modelica.Fluid.Sensors.Temperature coolerTemperature(redeclare package Medium
+      =    Air) "Temperature of the supply air stream behind the cooler"
     annotation (Placement(transformation(
         extent={{-8,-6},{8,6}},
         rotation=180,
@@ -110,8 +110,8 @@ model FacadeVentilationUnit
         extent={{-5,-5},{5,5}},
         rotation=180,
         origin={-61,27})));
-  Modelica.Fluid.Sensors.Temperature mixAirTemperature(redeclare package Medium =
-           Air) "Temperature of the mixed circulation and fresh air streams"
+  Modelica.Fluid.Sensors.Temperature mixAirTemperature(redeclare package Medium
+      =    Air) "Temperature of the mixed circulation and fresh air streams"
     annotation (Placement(transformation(extent={{32,42},{48,54}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
@@ -145,8 +145,8 @@ model FacadeVentilationUnit
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-82,-68})));
-  Modelica.Fluid.Sensors.Temperature heaterTemperature(redeclare package Medium =
-                Air) "Temperature of the supply air stream behind the heater"
+  Modelica.Fluid.Sensors.Temperature heaterTemperature(redeclare package Medium
+      =         Air) "Temperature of the supply air stream behind the heater"
     annotation (Placement(transformation(
         extent={{-8,-6},{8,6}},
         rotation=180,

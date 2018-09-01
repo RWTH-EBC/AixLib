@@ -20,8 +20,8 @@ model MassFlowSource_WeatherData
       Medium = Medium, m_flow_nominal=1,
     tau=0)                               "Sensor for relative humidity"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-  AixLib.Fluid.Sensors.MassFractionTwoPort senMasFra(redeclare package Medium =
-        Medium, m_flow_nominal=1,
+  AixLib.Fluid.Sensors.MassFractionTwoPort senMasFra(redeclare package Medium
+      = Medium, m_flow_nominal=1,
     tau=0)                        "Sensor for mass fraction of water"
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium,

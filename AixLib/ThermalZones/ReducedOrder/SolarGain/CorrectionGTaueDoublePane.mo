@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.SolarGain;
 model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   translucence factor according to VDI6007 Part 3"
-  extends AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionGTaue;
+  extends
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionGTaue;
   // Parameters for the transmission correction factor based on VDI 6007 Part 3
   // a0 to a6 are experimental constants VDI 6007 Part 3 page 20
 
