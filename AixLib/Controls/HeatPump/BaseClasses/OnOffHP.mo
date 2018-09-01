@@ -15,12 +15,7 @@ equation
   connect(onOffController.y, swiNullHP.u2) annotation (Line(points={{-22.6,-34},
           {20,-34},{20,0},{64,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                            Rectangle(
-          extent={{-84,85.5},{91.5,-82.5}},
-          lineColor={175,175,175},
-          lineThickness=0.5,
-          fillPattern=FillPattern.Solid,
-          fillColor={255,255,170}), Text(
+                                    Text(
           extent={{-36,30},{48,-14}},
           lineColor={28,108,200},
           fillColor={255,255,255},

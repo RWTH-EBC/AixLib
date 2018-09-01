@@ -2,56 +2,6 @@ within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   import AixLib;
 
- extends Modelica.Icons.Example;
-
-  AixLib.Fluid.Sources.MassFlowSource_T sourceSideMassFlowSource(
-    use_T_in=true,
-    m_flow=1,
-    nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
-    T=275.15) "Ideal mass flow source at the inlet of the source side"
-    annotation (Placement(transformation(extent={{-54,24},{-34,44}})));
-
-  AixLib.Fluid.Sources.FixedBoundary sourceSideFixedBoundary(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
-    "Fixed boundary at the outlet of the source side"
-    annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
-  AixLib.Fluid.Sources.FixedBoundary sinkSideFixedBoundary(nPorts=1, redeclare
-      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "Fixed boundary at the outlet of the sink side"
-    annotation (Placement(transformation(extent={{110,8},{90,28}})));
-  AixLib.Fluid.Sources.MassFlowSource_T sinkSideMassFlowSource(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
-    m_flow=0.5,
-    use_m_flow_in=true,
-    nPorts=1,
-    T=308.15) "Ideal mass flow source at the inlet of the sink side"
-    annotation (Placement(transformation(extent={{-12,-60},{8,-40}})));
-  Modelica.Blocks.Sources.Ramp TsuSourceRamp(
-    duration=1000,
-    startTime=1000,
-    height=25,
-    offset=278)
-    "Ramp signal for the temperature input of the source side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-94,2},{-74,22}})));
-  Modelica.Blocks.Sources.Pulse massFlowPulse(
-    amplitude=0.5,
-    period=1000,
-    offset=0,
-    startTime=0,
-    width=51)
-    "Pulse signal for the mass flow input of the sink side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort temperature(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
-        heatPumpSystem.mFlow_conNominal)
-    "Temperature sensor at the outlet of the sink side"
-    annotation (Placement(transformation(extent={{56,8},{76,28}})));
-  Modelica.Blocks.Interfaces.RealOutput T_Co_out
-    "Temperature at the outlet of the sink side of the heat pump"
-    annotation (Placement(transformation(extent={{100,40},{120,60}})));
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -61,8 +11,8 @@ model HeatPumpSystem "Example for a heat pump system"
     VEva=1,
     dpEva_nominal=0,
     dpCon_nominal=0,
-    useConPum=false,
-    useEvaPum=false,
+    use_conPum=false,
+    use_evaPum=false,
     GEva=1,
     GCon=1,
     redeclare package Medium_eva =
@@ -87,37 +37,139 @@ model HeatPumpSystem "Example for a heat pump system"
     tableLow=[-15,0; 35,0],
     use_minLocTime=true,
     minLocTime(displayUnit="min") = 3000)
-    annotation (Placement(transformation(extent={{-10,-16},{16,8}})));
+    annotation (Placement(transformation(extent={{4,-82},{56,-34}})));
+  AixLib.Fluid.MixingVolumes.MixingVolume vol(
+    redeclare package Medium = MediumA,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    m_flow_nominal=mA_flow_nominal,
+    V=V)
+    annotation (Placement(transformation(extent={{86,34},{106,54}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon(G=20000/40)
+    "Thermal conductance with the ambient"
+    annotation (Placement(transformation(extent={{38,54},{58,74}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea
+    "Prescribed heat flow"
+    annotation (Placement(transformation(extent={{38,84},{58,104}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heaCap(C=2*V*1.2*1006)
+    "Heat capacity for furniture and walls"
+    annotation (Placement(transformation(extent={{78,64},{98,84}})));
+  Modelica.Blocks.Sources.CombiTimeTable timTab(
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+      smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
+      table=[-6*3600, 0;
+              8*3600, QRooInt_flow;
+             18*3600, 0]) "Time table for internal heat gain"
+    annotation (Placement(transformation(extent={{-2,84},{18,104}})));
+  AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2 rad(
+    redeclare package Medium = MediumW,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    Q_flow_nominal=Q_flow_nominal,
+    T_a_nominal=TRadSup_nominal,
+    T_b_nominal=TRadRet_nominal,
+    m_flow_nominal=mHeaPum_flow_nominal,
+    T_start=TRadSup_nominal)     "Radiator"
+    annotation (Placement(transformation(extent={{38,2},{18,22}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temRoo
+    "Room temperature" annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        origin={-18,44})));
+  AixLib.Fluid.Sources.FixedBoundary preSou(redeclare package Medium = MediumW,
+    T=TRadSup_nominal,
+    nPorts=2)
+    "Source for pressure and to account for thermal expansion of water"
+    annotation (Placement(transformation(extent={{-38,-32},{-18,-12}})));
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
+        Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-118,52},{-98,72}})));
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+    annotation (Placement(transformation(extent={{-78,52},{-58,72}}),
+        iconTransformation(extent={{-78,52},{-58,72}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TOut
+    "Outside temperature"
+    annotation (Placement(transformation(extent={{-2,54},{18,74}})));
+  AixLib.Fluid.Sources.FixedBoundary sou(
+    redeclare package Medium = MediumW,
+    use_T=true,
+    T=281.15,
+    nPorts=1) "Fluid source on source side"
+    annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
+  AixLib.Fluid.Sources.FixedBoundary sin(
+    redeclare package Medium = MediumW,
+    use_T=true,
+    T=283.15,
+    nPorts=1) "Fluid sink on source side"
+    annotation (Placement(transformation(extent={{-48,-100},{-28,-80}})));
 equation
 
-  connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
-      points={{-73,12},{-68,12},{-68,38},{-56,38}},
+  connect(theCon.port_b,vol. heatPort) annotation (Line(
+      points={{58,64},{68,64},{68,44},{86,44}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(preHea.port,vol. heatPort) annotation (Line(
+      points={{58,94},{68,94},{68,44},{86,44}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(heaCap.port,vol. heatPort) annotation (Line(
+      points={{88,64},{68,64},{68,44},{86,44}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(timTab.y[1],preHea. Q_flow) annotation (Line(
+      points={{19,94},{38,94}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(massFlowPulse.y,sinkSideMassFlowSource. m_flow_in) annotation (Line(
-      points={{-59,-50},{-14,-50},{-14,-42}},
-      color={0,0,127},
+  connect(temRoo.port,vol. heatPort) annotation (Line(
+      points={{-8,44},{86,44}},
+      color={191,0,0},
       smooth=Smooth.None));
-  connect(sinkSideFixedBoundary.ports[1],temperature. port_b) annotation (Line(
-      points={{90,18},{76,18}},
-      color={0,127,255},
+  connect(rad.heatPortCon,vol. heatPort) annotation (Line(
+      points={{30,19.2},{30,44},{86,44}},
+      color={191,0,0},
       smooth=Smooth.None));
-  connect(temperature.T,T_Co_out)  annotation (Line(
-      points={{66,29},{66,50},{110,50}},
-      color={0,0,127},
+  connect(rad.heatPortRad,vol. heatPort) annotation (Line(
+      points={{26,19.2},{26,44},{86,44}},
+      color={191,0,0},
       smooth=Smooth.None));
-  connect(sinkSideMassFlowSource.ports[1], heatPumpSystem.port_a2)
-    annotation (Line(points={{8,-50},{8,-16},{9.5,-16}}, color={0,127,255}));
-  connect(heatPumpSystem.port_b1, temperature.port_a) annotation (Line(points={
-          {9.5,8},{38,8},{38,18},{56,18}}, color={0,127,255}));
-  connect(heatPumpSystem.port_a1, sourceSideMassFlowSource.ports[1])
-    annotation (Line(points={{-3.5,8},{0,8},{0,34},{-34,34}}, color={0,127,255}));
-  connect(heatPumpSystem.port_b2, sourceSideFixedBoundary.ports[1]) annotation
-    (Line(points={{-3.5,-16},{10,-16},{10,-18},{-38,-18}}, color={0,127,255}));
-  connect(TsuSourceRamp.y, heatPumpSystem.T_oda) annotation (Line(points={{-73,
-          12},{-47.5,12},{-47.5,3.9},{-11.625,3.9}}, color={0,0,127}));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),
+  connect(weaDat.weaBus,weaBus)  annotation (Line(
+      points={{-98,62},{-68,62}},
+      color={255,204,51},
+      thickness=0.5,
+      smooth=Smooth.None), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(weaBus.TDryBul,TOut. T) annotation (Line(
+      points={{-68,62},{-34,62},{-34,64},{-4,64}},
+      color={255,204,51},
+      thickness=0.5,
+      smooth=Smooth.None), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(TOut.port,theCon. port_a) annotation (Line(
+      points={{18,64},{38,64}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(sou.ports[1], heatPumpSystem.port_a2)
+    annotation (Line(points={{82,-90},{43,-90},{43,-82}}, color={0,127,255}));
+  connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
+          {16,-90},{16,-82},{17,-82}}, color={0,127,255}));
+  connect(heatPumpSystem.port_b1, rad.port_a) annotation (Line(points={{43,-34},
+          {43,0},{74,0},{74,12},{38,12}}, color={0,127,255}));
+  connect(rad.port_b, preSou.ports[1]) annotation (Line(points={{18,12},{-8,12},
+          {-8,-20},{-18,-20}}, color={0,127,255}));
+  connect(preSou.ports[2], heatPumpSystem.port_a1)
+    annotation (Line(points={{-18,-24},{17,-24},{17,-34}}, color={0,127,255}));
+  connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
+      points={{-68,62},{-58,62},{-58,-42.2},{0.75,-42.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+            -120},{120,120}})),
     experiment(StopTime=3600),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
@@ -137,5 +189,15 @@ equation
   </li>
  </ul>
 </html>
-"), __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"));
+"), __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
+        Ellipse(lineColor = {75,138,73},
+                fillColor={255,255,255},
+                fillPattern = FillPattern.Solid,
+                extent={{-120,-120},{120,120}}),
+        Polygon(lineColor = {0,0,255},
+                fillColor = {75,138,73},
+                pattern = LinePattern.None,
+                fillPattern = FillPattern.Solid,
+                points={{-38,64},{68,-2},{-38,-64},{-38,64}})}));
 end HeatPumpSystem;

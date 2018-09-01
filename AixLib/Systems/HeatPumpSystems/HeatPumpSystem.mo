@@ -19,10 +19,13 @@ model HeatPumpSystem
     final CCon=CCon,
     final GCon=GCon,
     final use_comIne=use_comIne,
-    redeclare final model PerfData = PerfData,
+    redeclare final model PerDataChi = PerDataChi,
+    redeclare final model PerDataHea = PerDataHea,
     final scalingFactor=scalingFactor,
-    final use_EvaCap=use_EvaCap,
-    final use_ConCap=false)
+    final use_EvaCap=use_evaCap,
+    final use_ConCap=false,
+    use_revHP=false,
+    realToBoolean(final threshold=Modelica.Constants.eps))
     annotation (Placement(transformation(extent={{-24,-32},{26,28}})));
   Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final use_minRunTime=use_minRunTime,
@@ -40,12 +43,12 @@ model HeatPumpSystem
     use_chiller=use_chiller,
     final calcPel_deFro=calcPel_deFro) if use_sec
     annotation (Placement(transformation(extent={{-102,-24},{-72,6}})));
-  Controls.HeatPump.HPControl hPControls(final useAntilegionella=useAntLeg,
-      redeclare model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP,
+  Controls.HeatPump.HPControl hPControls(
+    final use_antLeg=use_antLeg,
+    redeclare model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP,
     use_bivPar=use_bivPar,
     use_secHeaGen=use_secHeaGen,
-    hys=hys)
-    annotation (Placement(transformation(extent={{-102,18},{-72,48}})));
+    hys=hys) annotation (Placement(transformation(extent={{-102,18},{-72,48}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium = Medium_eva,
     h_outflow(start=Medium_eva.h_default),
@@ -82,7 +85,7 @@ model HeatPumpSystem
     annotation (Placement(transformation(extent={{-150,64},{-120,94}})));
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
-    annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
+    annotation (Dialog(enable=use_sec, tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
   parameter Modelica.SIunits.Time minRunTime=12000
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
@@ -105,14 +108,14 @@ model HeatPumpSystem
     "False to allow HP to run out of operational envelope"
     annotation (Dialog(tab="Security Control", group="Operational Envelope",
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
-  parameter Boolean useAntLeg=false
+  parameter Boolean use_antLeg=false
     "True if Anti-Legionella control is considered"
     annotation (Dialog(tab="HP Control", group="Anti Legionella", descriptionLabel = true),choices(checkBox=true));
   Fluid.Movers.SpeedControlled_Nrpm pumSin(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final per=perEva,
-    final addPowerToMedium=addPowerToMediumEva) if useConPum
+    final addPowerToMedium=addPowerToMediumEva) if use_conPum
     "Fan or pump at sink side of HP" annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=90,
@@ -129,7 +132,7 @@ model HeatPumpSystem
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final per=perCon,
-    final addPowerToMedium=addPowerToMediumCon) if useEvaPum
+    final addPowerToMedium=addPowerToMediumCon) if use_evaPum
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -156,77 +159,85 @@ model HeatPumpSystem
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Assumptions"),
-                                                                        choices(checkBox=true));
+    annotation (Dialog(tab="Advanced", group="Assumptions"),            choices(checkBox=true));
   parameter Boolean allowFlowReversalCon=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Assumptions"),
-                                                                       choices(checkBox=true));
-  parameter Boolean useConPum=true
+    annotation (Dialog(tab="Advanced", group="Assumptions"),           choices(checkBox=true));
+  parameter Boolean use_conPum=true
     "True if pump or fan at condenser side are included into this model"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"),choices(checkBox=true));
-  parameter Boolean useEvaPum=true
+  parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),choices(checkBox=true));
   parameter Fluid.Movers.Data.Generic perEva "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       tab="Evaporator/ Condenser",
       group="Evaporator",
-      enable=useEvaPum));
+      enable=use_evaPum));
   parameter Boolean addPowerToMediumEva=true
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=useEvaPum));
+    annotation (Dialog(tab="Advanced", group="Evaporator",
+      enable=use_evaPum), choices(checkBox=true));
   parameter Fluid.Movers.Data.Generic perCon "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       tab="Evaporator/ Condenser",
       group="Condenser",
-      enable=useConPum));
+      enable=use_conPum));
   parameter Boolean addPowerToMediumCon=true
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=useConPum));
+    annotation (Dialog(tab="Advanced", group="Condenser",
+      enable=use_conPum), choices(checkBox=true));
   parameter Boolean use_comIne=false "Consider the inertia of the compressor"
     annotation (Dialog(group="Compressor Inertia"), choices(checkBox=true));
   constant Modelica.SIunits.Time comIneTime_constant
     "Time constant representing inertia of compressor"
     annotation (Dialog(group="Compressor Inertia", enable=use_comIne));
-  parameter Boolean use_ConCap=false
+  parameter Boolean use_conCap=false
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"),
                                           choices(checkBox=true));
-  parameter Boolean use_EvaCap=false
+  parameter Boolean use_evaCap=false
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=use_EvaCap));
+      enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEva
     "Constant thermal conductance of Evaporator material"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=use_EvaCap));
+      enable=use_evaCap));
   parameter Modelica.SIunits.HeatCapacity CCon
     "Heat capacity of Condenser (= cp*m)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=use_ConCap));
+      enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=use_ConCap));
-
-  replaceable model PerfData =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-  "Replaceable model for performance data of HP"
+      enable=use_conCap));
+  parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
+      choice=false "only heating",
+      radioButtons=true));
+  replaceable model PerDataHea =
+      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
+
+  replaceable model PerDataChi =
+      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of HP in chilling mode"
+    annotation (Dialog(enable=use_revHP), choicesAllMatching=true);
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
                                                                       "No 1. Layer"
     annotation (Placement(transformation(extent={{-92,-44},{-78,-30}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_nominal=mFlow_evaNominal) if not useConPum annotation (
+    final m_flow_nominal=mFlow_evaNominal) if not use_conPum
+                                                            annotation (
       Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=90,
@@ -234,13 +245,15 @@ model HeatPumpSystem
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_nominal=mFlow_conNominal) if not useEvaPum annotation (
+    final m_flow_nominal=mFlow_conNominal) if not use_evaPum
+                                                            annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={50,-58})));
 
-  parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
+  parameter Boolean use_secHeaGen=false
+                                       "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
   parameter Real scalingFactor=1
                                "Scaling-factor of HP";
@@ -260,7 +273,8 @@ model HeatPumpSystem
     AixLib.Fluid.Interfaces.PartialTwoPortInterface                                                                  annotation(Dialog(group="System", enable=
           use_secHeaGen), choicesAllMatching=true);
 
-  secHeatGen secondHeaGen if use_secHeaGen annotation (Placement(transformation(
+  secHeatGen secHeaGen(redeclare package Medium = Medium_con) if
+                             use_secHeaGen annotation (Placement(transformation(
         extent={{12,-12},{-12,12}},
         rotation=-90,
         origin={32,62})));
@@ -306,6 +320,7 @@ model HeatPumpSystem
       radioButtons=true));
   parameter Real hys=5 "Hysteresis of controller"
     annotation (Dialog(tab="HP Control", group="Control"));
+
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -314,8 +329,6 @@ equation
       thickness=0.5));
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-135,79},{-114,79},
           {-114,32.1},{-105,32.1}},  color={0,0,127}));
-  if not useConPum then
-  end if;
   connect(pumSin.port_b, heatPump.port_a1)
     annotation (Line(points={{-20,46},{-20,13},{-24,13}},
                                                  color={0,127,255},
@@ -324,9 +337,7 @@ equation
     annotation (Line(points={{-20,62},{-20,102},{-60,102},{-60,120}},
                                                 color={0,127,255},
       pattern=LinePattern.Dash));
-  if not useEvaPum then
 
-  end if;
   connect(port_a2, pumSou.port_a)
     annotation (Line(points={{60,-120},{60,-98},{26,-98},{26,-68}},
                                                     color={0,127,255},

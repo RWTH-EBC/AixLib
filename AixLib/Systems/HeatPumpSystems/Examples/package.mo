@@ -1,6 +1,6 @@
 within AixLib.Systems.HeatPumpSystems;
 package Examples "Package with Examples for Heat Pump Systems"
-  
+
 annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},

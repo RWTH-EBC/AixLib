@@ -75,12 +75,12 @@ equation
                                          color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
-          extent={{-84,85.5},{91.5,-82.5}},
+          extent={{-100,100},{100,-100}},
           lineColor={175,175,175},
           lineThickness=0.5,
           fillPattern=FillPattern.Solid,
           fillColor={255,255,170}), Text(
-          extent={{-36,30},{48,-14}},
+          extent={{-40,30},{44,-14}},
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,

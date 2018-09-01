@@ -29,8 +29,7 @@ block DefrostControl
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
   parameter Boolean use_chiller=true
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
-                                                                                                     annotation(choices(checkBox=true));
+    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
   Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
     "Relative speed of compressor. From 0 to 1" annotation (Placement(
         transformation(

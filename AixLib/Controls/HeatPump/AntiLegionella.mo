@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model AntiLegionella "Control to avoid Legionella in the DHW"
   Modelica.Blocks.Interfaces.RealOutput TSet_out
     "Set value for the condenser outlet temperature"
@@ -89,11 +89,62 @@ equation
     annotation (Line(points={{1,0},{12.6,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
-          extent={{-84,85.5},{91.5,-82.5}},
+          extent={{-100,99.5},{100,-100}},
           lineColor={175,175,175},
           lineThickness=0.5,
           fillPattern=FillPattern.Solid,
-          fillColor={255,255,170})}),                            Diagram(
+          fillColor={255,255,170}),
+        Ellipse(extent={{-80,98},{80,-62}}, lineColor={160,160,164},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Line(points={{0,98},{0,78}}, color={160,160,164}),
+        Line(points={{80,18},{60,18}},
+                                     color={160,160,164}),
+        Line(points={{0,-62},{0,-42}}, color={160,160,164}),
+        Line(points={{-80,18},{-60,18}},
+                                       color={160,160,164}),
+        Line(points={{37,88},{26,68}}, color={160,160,164}),
+        Line(points={{70,56},{49,44}}, color={160,160,164}),
+        Line(points={{71,-19},{52,-9}},  color={160,160,164}),
+        Line(points={{39,-52},{29,-33}}, color={160,160,164}),
+        Line(points={{-39,-52},{-29,-34}}, color={160,160,164}),
+        Line(points={{-71,-19},{-50,-8}},  color={160,160,164}),
+        Line(points={{-71,55},{-54,46}}, color={160,160,164}),
+        Line(points={{-38,88},{-28,69}}, color={160,160,164}),
+        Line(
+          points={{0,18},{-50,68}},
+          thickness=0.5),
+        Line(
+          points={{0,18},{40,18}},
+          thickness=0.5),
+        Line(
+          points={{0,18},{0,86}},
+          thickness=0.5,
+          color={238,46,47}),
+        Line(
+          points={{0,18},{-18,-14}},
+          thickness=0.5,
+          color={238,46,47}),
+        Text(
+          extent={{-14,0},{72,-36}},
+          lineColor={238,46,47},
+          pattern=LinePattern.Dash,
+          lineThickness=0.5,
+          textString=DynamicSelect("%TLegMin K", String(TLegMin-273.15)+ "°C")),
+        Text(
+          extent={{-94,0},{56,-154}},
+          lineColor={28,108,200},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Day of week: %trigWeekDay
+Hour of Day: %trigHour",
+          horizontalAlignment=TextAlignment.Left),
+        Text(
+          extent={{-104,146},{100,92}},
+          lineColor={28,108,200},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),                                                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This control Block checks if the current condenser outlet Temperature(TCon) is below a minimal Temperature(TLegMin) at which Legionella die (Typically 60 &deg;C).</p>
