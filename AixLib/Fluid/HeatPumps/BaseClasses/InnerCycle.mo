@@ -4,9 +4,9 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
   Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
         transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
             -16,88},{18,118}})));
-  Modelica.Blocks.Interfaces.RealOutput QCon "Heat Flow to condenser"
+  Modelica.Blocks.Interfaces.RealOutput QCon(unit="W", displayUnit="kW") "Heat Flow to condenser"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealOutput QEva "Heat flow from evaporator"
+  Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
   replaceable model PerDataHea =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D
@@ -25,13 +25,13 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
   PerDataHea PerformanceDataHeater
                           annotation (Placement(transformation(extent={{13,20},{
             67,76}},  rotation=0)));
-  Utilities.Logical.SmoothSwitch switchQEva
+  Utilities.Logical.SmoothSwitch switchQEva(u1(unit="W",displayUnit="kW"),u3(unit="W",displayUnit="kW"),y(unit="W",displayUnit="kW"))
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{-66,-22},{-86,-2}})));
-  Utilities.Logical.SmoothSwitch switchQCon if use_revHP
+  Utilities.Logical.SmoothSwitch switchQCon(u1(unit="W",displayUnit="kW"),u3(unit="W",displayUnit="kW"),y(unit="W",displayUnit="kW"))
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{72,-22},{92,-2}})));
-  Modelica.Blocks.Interfaces.RealOutput Pel if use_revHP
+  Modelica.Blocks.Interfaces.RealOutput Pel(unit="W", displayUnit="kW")
     "Electrical power consumed by compressor" annotation (Placement(
         transformation(
         extent={{-10.5,-10.5},{10.5,10.5}},
@@ -45,17 +45,17 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
         origin={-46,48})));
   parameter Boolean use_revHP=true
                               "True if the HP is reversible";
-  Utilities.Logical.SmoothSwitch switchPel if use_revHP
+  Utilities.Logical.SmoothSwitch switchPel(u1(unit="W",displayUnit="kW"),u3(unit="W",displayUnit="kW"),y(unit="W",displayUnit="kW"))
     "Whether to use cooling or heating power consumption" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-76})));
+  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_revHP
+    "If no heating is used, the switches may still be connected"
+    annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
 equation
   assert(use_revHP or (use_revHP==false and sigBusHP.mode==true), "Can't turn to chilling on irreversible HP", level = AssertionLevel.error);
-  connect(switchQCon.y, QCon)
-    annotation (Line(points={{93,-12},{104,-12},{104,0},{110,0}},
-                                              color={0,0,127}));
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
       points={{1.085,103.075},{1.085,104},{-64,104},{-64,-12}},
       color={255,204,51},
@@ -98,8 +98,9 @@ equation
   connect(PerformanceDataChiller.Pel, switchPel.u3) annotation (Line(points={{-46,
           17.2},{-46,-30},{-8,-30},{-8,-64}}, color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QCon, switchQCon.u3) annotation (Line(points={{
-          -67.6,17.2},{-67.6,4},{-4,4},{-4,-20},{70,-20}}, color={0,0,127},
+  connect(PerformanceDataChiller.QCon, switchQCon.u3) annotation (Line(
+      points={{-67.6,17.2},{-67.6,4},{-4,4},{-4,-20},{70,-20}},
+      color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataHeater.QEva, switchQEva.u1) annotation (Line(points={{61.6,
           17.2},{61.6,-4},{-64,-4}}, color={0,0,127}));
@@ -113,6 +114,14 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(constZero.y, switchPel.u3)
+    annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
+  connect(constZero.y, switchQEva.u3) annotation (Line(points={{-59,-64},{-62,
+          -64},{-62,-20},{-64,-20}}, color={0,0,127}));
+  connect(constZero.y, switchQCon.u3) annotation (Line(points={{-59,-64},{-52,
+          -64},{-52,-38},{70,-38},{70,-20}}, color={0,0,127}));
+  connect(switchQCon.y, QCon) annotation (Line(points={{93,-12},{94,-12},{94,0},
+          {110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

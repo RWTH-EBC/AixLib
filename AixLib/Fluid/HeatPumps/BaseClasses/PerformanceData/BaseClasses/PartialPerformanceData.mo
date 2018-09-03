@@ -1,13 +1,14 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
-  Modelica.Blocks.Interfaces.RealOutput Pel annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")
+                                                      "Electrical Power consumed by HP" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-110})));
-  Modelica.Blocks.Interfaces.RealOutput QCon annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.RealOutput QCon(final unit="W", final displayUnit="kW")
+    "Heat flow rate through Condenser" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-80,-110})));
@@ -16,7 +17,8 @@ partial model PartialPerformanceData
         extent={{-15,-14},{15,14}},
         rotation=0,
         origin={1,104})));
-  Modelica.Blocks.Interfaces.RealOutput QEva annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final displayUnit="kW")
+                                                                         "Heat flow rate through Condenser"  annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

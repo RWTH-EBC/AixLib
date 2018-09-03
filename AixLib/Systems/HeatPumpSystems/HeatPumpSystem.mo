@@ -321,6 +321,15 @@ model HeatPumpSystem
   parameter Real hys=5 "Hysteresis of controller"
     annotation (Dialog(tab="HP Control", group="Control"));
 
+  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(n_Pel=3)
+    annotation (Placement(transformation(extent={{84,-22},{118,20}})));
+  Controls.Interfaces.HeatPumpControlBus
+                           sigBusHP
+    annotation (Placement(transformation(extent={{-142,-18},{-112,16}}),
+        iconTransformation(extent={{-130,-10},{-112,16}})));
+  Controls.HeatPump.BaseClasses.CalcQdot calcQdot(mediumConc_p=
+        Medium_con.heatCapacity_cp())
+    annotation (Placement(transformation(extent={{74,26},{94,46}})));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -412,6 +421,46 @@ equation
           255,0,255}));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{-70.75,
           -12},{-54,-12},{-54,-7},{-28,-7}}, color={255,0,255}));
+  connect(pumSou.P, calcCOP.Pel[1]) annotation (Line(points={{17,-47},{17,-28},
+          {64,-28},{64,-12.2},{80.6,-12.2}}, color={0,0,127}));
+  connect(heatPump.sigBusHP, sigBusHP) annotation (Line(
+      points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-1},{-127,
+          -1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(sigBusHP.Pel, calcCOP.Pel[2]) annotation (Line(
+      points={{-126.925,-0.915},{-114,-0.915},{-114,-50},{-30,-50},{-30,-28},{
+          66,-28},{66,-9.4},{80.6,-9.4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(pumSin.P, calcCOP.Pel[1]) annotation (Line(points={{-27.2,45.2},{
+          -27.2,24},{62,24},{62,-12.2},{80.6,-12.2}}, color={0,0,127}));
+  connect(sigBusHP.m_flow_co, calcQdot.mFlow_con) annotation (Line(
+      points={{-126.925,-0.915},{-114,-0.915},{-114,-50},{-30,-50},{-30,-28},{
+          60,-28},{60,30},{72.4,30}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(sigBusHP.T_flow_co, calcQdot.TCon_out) annotation (Line(
+      points={{-126.925,-0.915},{-114,-0.915},{-114,-50},{-30,-50},{-30,-28},{
+          60,-28},{60,36},{72.4,36}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(senTSup.T, calcQdot.TSet) annotation (Line(points={{23.2,98},{74,98},
+          {74,50},{66,50},{66,42},{72.4,42}}, color={0,0,127}));
+  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{95,36},{100,
+          36},{100,16},{74,16},{74,7.4},{80.6,7.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-120,-120},{120,120}})));

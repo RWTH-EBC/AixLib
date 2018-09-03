@@ -5,10 +5,7 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    mFlow_conNominal=1,
     mFlow_evaNominal=1,
-    VCon=1,
-    VEva=1,
     dpEva_nominal=0,
     dpCon_nominal=0,
     use_conPum=false,
@@ -23,7 +20,7 @@ model HeatPumpSystem "Example for a heat pump system"
     CEva=8000,
     CCon=8000,
     scalingFactor=1,
-    redeclare model PerfData =
+    redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
           final dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()),
     use_runPerHou=false,
@@ -36,13 +33,20 @@ model HeatPumpSystem "Example for a heat pump system"
     tableUpp=[-15,60; 35,60],
     tableLow=[-15,0; 35,0],
     use_minLocTime=true,
-    minLocTime(displayUnit="min") = 3000)
+    minLocTime(displayUnit="min") = 3000,
+    use_revHP=false,
+    VCon=0.1,
+    VEva=0.1,
+    addPowerToMediumEva=false,
+    addPowerToMediumCon=false,
+    hys=2,
+    mFlow_conNominal=20000/4180/5)
     annotation (Placement(transformation(extent={{4,-82},{56,-34}})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
-    redeclare package Medium = MediumA,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    m_flow_nominal=mA_flow_nominal,
-    V=V)
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    V=40,
+    m_flow_nominal=40*6/3600)
     annotation (Placement(transformation(extent={{86,34},{106,54}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon(G=20000/40)
     "Thermal conductance with the ambient"
@@ -50,32 +54,34 @@ model HeatPumpSystem "Example for a heat pump system"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea
     "Prescribed heat flow"
     annotation (Placement(transformation(extent={{38,84},{58,104}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heaCap(C=2*V*1.2*1006)
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heaCap(C=2*40*1.2*1006)
     "Heat capacity for furniture and walls"
     annotation (Placement(transformation(extent={{78,64},{98,84}})));
   Modelica.Blocks.Sources.CombiTimeTable timTab(
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
-      table=[-6*3600, 0;
-              8*3600, QRooInt_flow;
-             18*3600, 0]) "Time table for internal heat gain"
+    table=[-6*3600,0; 8*3600,4000; 18*3600,0])
+                          "Time table for internal heat gain"
     annotation (Placement(transformation(extent={{-2,84},{18,104}})));
   AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2 rad(
-    redeclare package Medium = MediumW,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    Q_flow_nominal=Q_flow_nominal,
-    T_a_nominal=TRadSup_nominal,
-    T_b_nominal=TRadRet_nominal,
-    m_flow_nominal=mHeaPum_flow_nominal,
-    T_start=TRadSup_nominal)     "Radiator"
+    T_a_nominal(displayUnit="degC") = 323.15,
+    dp_nominal=0,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    m_flow_nominal=20000/4180/5,
+    Q_flow_nominal=20000,
+    T_start=293.15,
+    T_b_nominal=318.15,
+    TAir_nominal=293.15,
+    TRad_nominal=293.15)         "Radiator"
     annotation (Placement(transformation(extent={{38,2},{18,22}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temRoo
-    "Room temperature" annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        origin={-18,44})));
-  AixLib.Fluid.Sources.FixedBoundary preSou(redeclare package Medium = MediumW,
-    T=TRadSup_nominal,
-    nPorts=2)
+
+  AixLib.Fluid.Sources.FixedBoundary preSou(
+    nPorts=2,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    T=293.15)
     "Source for pressure and to account for thermal expansion of water"
     annotation (Placement(transformation(extent={{-38,-32},{-18,-12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
@@ -90,17 +96,19 @@ model HeatPumpSystem "Example for a heat pump system"
     "Outside temperature"
     annotation (Placement(transformation(extent={{-2,54},{18,74}})));
   AixLib.Fluid.Sources.FixedBoundary sou(
-    redeclare package Medium = MediumW,
     use_T=true,
-    T=281.15,
-    nPorts=1) "Fluid source on source side"
+    nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    T=281.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
+
   AixLib.Fluid.Sources.FixedBoundary sin(
-    redeclare package Medium = MediumW,
     use_T=true,
-    T=283.15,
-    nPorts=1) "Fluid sink on source side"
+    nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    T=283.15) "Fluid sink on source side"
     annotation (Placement(transformation(extent={{-48,-100},{-28,-80}})));
+
 equation
 
   connect(theCon.port_b,vol. heatPort) annotation (Line(
@@ -118,10 +126,6 @@ equation
   connect(timTab.y[1],preHea. Q_flow) annotation (Line(
       points={{19,94},{38,94}},
       color={0,0,127},
-      smooth=Smooth.None));
-  connect(temRoo.port,vol. heatPort) annotation (Line(
-      points={{-8,44},{86,44}},
-      color={191,0,0},
       smooth=Smooth.None));
   connect(rad.heatPortCon,vol. heatPort) annotation (Line(
       points={{30,19.2},{30,44},{86,44}},

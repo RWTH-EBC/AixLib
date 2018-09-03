@@ -190,7 +190,8 @@ model HeatPump "Base model of realistic heat pump"
     "Constant thermal conductance of condenser material"
     annotation (Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
-  Modelica.Blocks.Interfaces.RealInput T_amb_eva
+  Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
+      displayUnit="degC")
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{122,-50},{100,-28}})));
 
@@ -213,7 +214,8 @@ model HeatPump "Base model of realistic heat pump"
         extent={{-5,-5},{5,5}},
         rotation=0,
         origin={-87,7})));
-  Modelica.Blocks.Interfaces.RealInput T_amb_con
+  Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
+      displayUnit="degC")
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{122,30},{100,52}})));
   Utilities.HeatTransfer.CapacityWithLosses ConCapacity(
@@ -259,12 +261,12 @@ model HeatPump "Base model of realistic heat pump"
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
     annotation (Dialog(tab="Initialization", group="Evaporator"));
-  parameter Modelica.SIunits.Temperature TAmbCon_nom(displayUnit="degC")=291.15
+  parameter Modelica.SIunits.Temperature TAmbCon_nom=291.15
     "Fixed ambient temperature for heat transfer at condenser side" annotation (Dialog(tab="Condenser", group="Nominal conditions"));
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="General"));
-  parameter Modelica.SIunits.Temperature TAmbEva_nom(displayUnit="degC")=273.15
+  parameter Modelica.SIunits.Temperature TAmbEva_nom=273.15
     "Fixed ambient temperature for heat transfer at evaporator"
     annotation (Dialog(tab="Evaporator", group="Nominal conditions"));
   parameter Modelica.SIunits.Time tauHeaTra=1200
@@ -353,12 +355,6 @@ equation
                                                            color={0,0,127}));
   connect(Condenser.heatPort, heatFlowRateCon.port)
     annotation (Line(points={{-6,76},{-16,76},{-16,60}},color={191,0,0}));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{21.15,8.15},{
-          30,8.15},{30,-44},{-70,-44},{-70,-44.915},{-116.925,-44.915}},
-                                            color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
     connect(nSet, firstOrder.u)
                                annotation (Line(points={{-116,20},{-104,20},{
           -104,26},{-93.2,26}},                                              color={0,0,127},
@@ -456,6 +452,11 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{21.15,8.15},{40,
+          8.15},{40,-44.915},{-116.925,-44.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
