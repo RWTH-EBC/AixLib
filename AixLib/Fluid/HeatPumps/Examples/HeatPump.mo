@@ -63,7 +63,6 @@ model HeatPump
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     mFlow_conNominal=1,
     mFlow_evaNominal=1,
-    VEva=0.04,
     dpEva_nominal=0,
     dpCon_nominal=0,
     use_comIne=false,
@@ -79,7 +78,8 @@ model HeatPump
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
           dataTable=AixLib.DataBase.HeatPump.EN14511.Ochsner_GMLW_19()),
     use_revHP=false,
-    VCon=0.4)                              annotation (Placement(transformation(
+    VEva = 0.04,
+    VCon = 0.04)                     annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-3})));
@@ -87,6 +87,7 @@ model HeatPump
     annotation (Placement(transformation(extent={{-4,56},{16,76}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{-32,62},{-12,82}})));
+
 equation
 
   connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(

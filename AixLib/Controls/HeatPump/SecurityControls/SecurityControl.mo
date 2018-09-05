@@ -46,7 +46,7 @@ block SecurityControl "Block including all security levels"
     annotation (Dialog(group="OnOffControl", descriptionLabel=true),choices(checkBox=true));
   DefrostControl defrostControl(
     final minIceFac=minIceFac,
-    use_chiller=false,
+    use_chiller=use_chiller,
     calcPel_deFro=calcPel_deFro) if use_deFro
     annotation (Placement(transformation(extent={{-104,-22},{-62,22}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not use_deFro
@@ -69,7 +69,8 @@ block SecurityControl "Block including all security levels"
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=use_chiller and use_deFro, group="Defrost"));
-  Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
+  Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller and
+    use_deFro
     "Relative speed of compressor. From 0 to 1" annotation (Placement(
         transformation(
         extent={{10,10},{-10,-10}},

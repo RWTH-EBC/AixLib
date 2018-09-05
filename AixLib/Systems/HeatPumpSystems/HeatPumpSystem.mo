@@ -40,7 +40,7 @@ model HeatPumpSystem
     pre_n_start=pre_n_start,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
-    use_chiller=use_chiller,
+    final use_chiller=use_chiller,
     final calcPel_deFro=calcPel_deFro) if use_sec
     annotation (Placement(transformation(extent={{-102,-24},{-72,6}})));
   Controls.HeatPump.HPControl hPControls(
@@ -277,7 +277,7 @@ model HeatPumpSystem
                              use_secHeaGen annotation (Placement(transformation(
         extent={{12,-12},{-12,12}},
         rotation=-90,
-        origin={32,62})));
+        origin={32,64})));
 
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     redeclare final package Medium = Medium_eva,
@@ -321,15 +321,16 @@ model HeatPumpSystem
   parameter Real hys=5 "Hysteresis of controller"
     annotation (Dialog(tab="HP Control", group="Control"));
 
-  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(n_Pel=3)
-    annotation (Placement(transformation(extent={{84,-22},{118,20}})));
-  Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-142,-18},{-112,16}}),
-        iconTransformation(extent={{-130,-10},{-112,16}})));
+  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final n_Pel=1) if
+       use_deFro
+    annotation (Placement(transformation(extent={{80,-22},{114,20}})));
   Controls.HeatPump.BaseClasses.CalcQdot calcQdot(mediumConc_p=
-        Medium_con.heatCapacity_cp())
-    annotation (Placement(transformation(extent={{74,26},{94,46}})));
+        Medium_con.heatCapacity_cp()) if use_deFro
+    annotation (Placement(transformation(extent={{74,24},{94,44}})));
+  Modelica.Blocks.Sources.Constant const(k=291.15)
+    annotation (Placement(transformation(extent={{80,-54},{100,-34}})));
+  Modelica.Blocks.Interfaces.RealOutput y if use_deFro
+    annotation (Placement(transformation(extent={{128,-10},{148,10}})));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -393,22 +394,22 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, secHeaGen.port_a) annotation (Line(
-      points={{26,13},{26,30},{32,30},{32,50}},
+      points={{26,13},{26,30},{32,30},{32,52}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b1, mediumPassThroughSecHeaGen.port_b) annotation (Line(
-      points={{26,13},{26,30},{64,30},{64,68}},
+  connect(heatPump.port_b1, mediumPassThroughSecHeaGen.port_a) annotation (Line(
+      points={{26,13},{26,30},{64,30},{64,56}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(port_b1, senTSup.port_b)
-    annotation (Line(points={{60,120},{60,106},{32,106}},
+    annotation (Line(points={{60,120},{60,114},{32,114},{32,106}},
                                                   color={0,127,255}));
   connect(secHeaGen.port_b, senTSup.port_a) annotation (Line(
-      points={{32,74},{32,90}},
+      points={{32,76},{32,90}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(mediumPassThroughSecHeaGen.port_a, senTSup.port_a) annotation (Line(
-      points={{64,56},{64,90},{32,90}},
+  connect(mediumPassThroughSecHeaGen.port_b, senTSup.port_a) annotation (Line(
+      points={{64,68},{64,90},{32,90}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(senTSup.T, hPControls.TSup) annotation (Line(points={{23.2,98},{-110,98},
@@ -421,46 +422,16 @@ equation
           255,0,255}));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{-70.75,
           -12},{-54,-12},{-54,-7},{-28,-7}}, color={255,0,255}));
-  connect(pumSou.P, calcCOP.Pel[1]) annotation (Line(points={{17,-47},{17,-28},
-          {64,-28},{64,-12.2},{80.6,-12.2}}, color={0,0,127}));
-  connect(heatPump.sigBusHP, sigBusHP) annotation (Line(
-      points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-1},{-127,
-          -1}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(sigBusHP.Pel, calcCOP.Pel[2]) annotation (Line(
-      points={{-126.925,-0.915},{-114,-0.915},{-114,-50},{-30,-50},{-30,-28},{
-          66,-28},{66,-9.4},{80.6,-9.4}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(pumSin.P, calcCOP.Pel[1]) annotation (Line(points={{-27.2,45.2},{
-          -27.2,24},{62,24},{62,-12.2},{80.6,-12.2}}, color={0,0,127}));
-  connect(sigBusHP.m_flow_co, calcQdot.mFlow_con) annotation (Line(
-      points={{-126.925,-0.915},{-114,-0.915},{-114,-50},{-30,-50},{-30,-28},{
-          60,-28},{60,30},{72.4,30}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.T_flow_co, calcQdot.TCon_out) annotation (Line(
-      points={{-126.925,-0.915},{-114,-0.915},{-114,-50},{-30,-50},{-30,-28},{
-          60,-28},{60,36},{72.4,36}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(senTSup.T, calcQdot.TSet) annotation (Line(points={{23.2,98},{74,98},
-          {74,50},{66,50},{66,42},{72.4,42}}, color={0,0,127}));
-  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{95,36},{100,
-          36},{100,16},{74,16},{74,7.4},{80.6,7.4}}, color={0,0,127}));
+  connect(senTSup.T, calcQdot.TSet) annotation (Line(points={{23.2,98},{6,98},{6,
+          40},{72.4,40}},                     color={0,0,127}));
+  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{95,34},{100,34},
+          {100,16},{74,16},{74,7.4},{76.6,7.4}},     color={0,0,127}));
+  connect(const.y, heatPump.T_amb_eva) annotation (Line(points={{101,-44},{68,-44},
+          {68,-11.75},{28.75,-11.75}}, color={0,0,127}));
+  connect(const.y, heatPump.T_amb_con) annotation (Line(points={{101,-44},{66,-44},
+          {66,8.25},{28.75,8.25}}, color={0,0,127}));
+  connect(calcCOP.y_COP, y) annotation (Line(points={{115.7,-1},{118.85,-1},{118.85,
+          0},{138,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-120,-120},{120,120}})));

@@ -27,7 +27,6 @@ model HeatPumpSystem "Example for a heat pump system"
     use_sec=true,
     use_minRunTime=true,
     use_opeEnv=true,
-    use_deFro=true,
     minIceFac=0.5,
     minRunTime(displayUnit="min") = 1800,
     tableUpp=[-15,60; 35,60],
@@ -40,7 +39,14 @@ model HeatPumpSystem "Example for a heat pump system"
     addPowerToMediumEva=false,
     addPowerToMediumCon=false,
     hys=2,
-    mFlow_conNominal=20000/4180/5)
+    mFlow_conNominal=20000/4180/5,
+    calcQdot(mediumConc_p=4180),
+    calcCOP(
+      n_QHeat=1,
+      lowBouPel=200),
+    use_deFro=false,
+    use_chiller=false,
+    calcPel_deFro=0)
     annotation (Placement(transformation(extent={{4,-82},{56,-34}})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -68,7 +74,6 @@ model HeatPumpSystem "Example for a heat pump system"
     T_a_nominal(displayUnit="degC") = 323.15,
     dp_nominal=0,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=20000/4180/5,
     Q_flow_nominal=20000,
     T_start=293.15,
@@ -80,10 +85,10 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Fluid.Sources.FixedBoundary preSou(
     nPorts=2,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     T=293.15)
     "Source for pressure and to account for thermal expansion of water"
     annotation (Placement(transformation(extent={{-38,-32},{-18,-12}})));
+
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
         Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
