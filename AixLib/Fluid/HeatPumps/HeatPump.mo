@@ -18,7 +18,7 @@ model HeatPump "Base model of realistic heat pump"
     final X_start=XCon_start,
     final C_start=fill(0, Medium_con.nC),
     final C_nominal=fill(1E-2, Medium_con.nC),
-    final V=VCon*scalingFactor)            "Volume of Condenser"
+    final V=VCon*scalingFactor) "Volume of Condenser"
     annotation (Placement(transformation(extent={{-6,86},{14,66}})));
   MixingVolumes.MixingVolume Evaporator(
     nPorts=2,
@@ -91,7 +91,7 @@ model HeatPump "Base model of realistic heat pump"
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
     final dp_nominal=dpEva_nominal) "Pressure drop at sink side"
-    annotation (Placement(transformation(extent={{-60,-84},{-80,-64}})));
+    annotation (Placement(transformation(extent={{-60,-82},{-80,-62}})));
   FixedResistances.PressureDrop preDro_1(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
@@ -136,7 +136,8 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Evaluate=false,Dialog(group="Condenser", tab="Assumptions"));
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate, used for regularization near zero flow"
-    annotation (Evaluate=false,Dialog(group="General", tab="Condenser"));
+    annotation (               Dialog(group="General", tab="Condenser"),
+      Evaluate=false);
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate" annotation (Evaluate=false,Dialog(group="General", tab="Evaporator"));
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
@@ -158,7 +159,7 @@ model HeatPump "Base model of realistic heat pump"
                               use_comIne
     "As all changes in a compressor have certain inertia, no nSet is directly obtained. This first order block represents the inertia of the compressor."
     annotation (Placement(transformation(extent={{-92,20},{-80,32}})));
-  parameter Boolean use_comIne=false "Consider the inertia of the compressor" annotation(Evaluate=false,choices(checkBox=true));
+  parameter Boolean use_comIne=false "Consider the inertia of the compressor" annotation(choices(checkBox=true));
 
   constant Modelica.SIunits.Time comIneTime_constant
     "Time constant representing inertia of compressor"
@@ -166,11 +167,11 @@ model HeatPump "Base model of realistic heat pump"
 
   parameter Boolean use_EvaCap=false
     "If heat losses at capacitor side are considered or not"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Evaporator"),
+    annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                           choices(checkBox=true));
   parameter Boolean use_ConCap=false
     "If heat losses at capacitor side are considered or not"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Condenser"),
+    annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
 
 
@@ -204,11 +205,11 @@ model HeatPump "Base model of realistic heat pump"
   "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
 
-  Modelica.Blocks.Math.RealToBoolean realToBoolean(threshold=0.1)
+  Modelica.Blocks.Math.RealToBoolean realToBoolean(threshold=1)
     "To generate the on off signal" annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=90,
-        origin={-140,-14})));
+        origin={-140,-12})));
   Modelica.Blocks.Routing.RealPassThrough realPassThroughnSet if not use_comIne
     "Use default nSet value" annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
@@ -224,23 +225,37 @@ model HeatPump "Base model of realistic heat pump"
     final mFlowIns_nominal=mFlow_conNominal,
     final kAOutNat_nominal=GCon,
     final T_amb_nominal=TAmbCon_nom,
-    final C=CCon*scalingFactor) if              use_ConCap
+    final C=CCon*scalingFactor,
+    kAInn_nominal=3.66,
+    wukExpIns=0.88,
+    wukExpOutNat=0.56,
+    mFlowOut_nominal=0,
+    kAOutFor_nominal=0,
+    wukExpOutFor=0,
+    TSurf_nominal=303.15) if                    use_ConCap
     "Model calculating the heat losses to the ambient based on current parameters"
     annotation (Placement(transformation(extent={{-100,94},{-72,120}})));
   Utilities.HeatTransfer.CapacityWithLosses EvaCapacity(
     final scalingFactor=scalingFactor,
-    final use_ForConv=false,
     final mFlowIns_nominal=mFlow_evaNominal,
     kAOutNat_nominal=GEva,
     final T_amb_nominal=TAmbEva_nom,
-    final C=CEva*scalingFactor) if              use_EvaCap
+    final C=CEva*scalingFactor,
+    kAInn_nominal=3.66,
+    wukExpIns=0.88,
+    wukExpOutNat=0.56,
+    mFlowOut_nominal=0,
+    kAOutFor_nominal=0,
+    wukExpOutFor=0,
+    final use_ForConv=false,
+    TSurf_nominal=278.15) if                    use_EvaCap
     "Model calculating the heat losses to the ambient based on current parameters"
     annotation (Placement(transformation(extent={{-100,-120},{-72,-94}})));
   parameter Real scalingFactor "Scaling-factor of HP";
 
   Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
-  parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Evaluate=false,choices(choice=true "reversible HP",
+  parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
       choice=false "only heating",
       radioButtons=true));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pCon_start=
@@ -265,7 +280,7 @@ model HeatPump "Base model of realistic heat pump"
     "Fixed ambient temperature for heat transfer at condenser side" annotation (Evaluate=false,Dialog(tab="Condenser", group="Nominal conditions"));
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="General"));
+    annotation (Dialog(tab="Initialization", group="General"));
   parameter Modelica.SIunits.Temperature TAmbEva_nom=273.15
     "Fixed ambient temperature for heat transfer at evaporator"
     annotation (Evaluate=false,Dialog(tab="Evaporator", group="Nominal conditions"));
@@ -274,9 +289,9 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Evaluate=false,Dialog(tab="Assumptions"));
   parameter Modelica.SIunits.Time tauSenT=1
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
-    annotation (Evaluate=false,Dialog(tab="Assumptions"));
+    annotation (Dialog(tab="Assumptions"));
   parameter Real yComIne_start=0 "Initial or guess value of output (= state)"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="General"));
+    annotation (Dialog(tab="Initialization", group="General"),Evaluate=false);
 equation
   connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,80},
           {-72,80}},          color={0,127,255}));
@@ -301,10 +316,10 @@ equation
   connect(senT_b2.port_a, Evaporator.ports[2]) annotation (Line(points={{-26,-82},
           {-16,-82},{-16,-84},{4,-84}}, color={0,127,255}));
   connect(preDro_2.port_b, port_b2)
-    annotation (Line(points={{-80,-74},{-90,-74},{-90,-60},{-100,-60}},
+    annotation (Line(points={{-80,-72},{-90,-72},{-90,-60},{-100,-60}},
                                                     color={0,127,255}));
-  connect(preDro_2.port_a, senT_b2.port_b) annotation (Line(points={{-60,-74},{
-          -54,-74},{-54,-82},{-46,-82}}, color={0,127,255}));
+  connect(preDro_2.port_a, senT_b2.port_b) annotation (Line(points={{-60,-72},{-54,
+          -72},{-54,-82},{-46,-82}},     color={0,127,255}));
   connect(mFlow_a1.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-62,69},
           {-62,62},{-70,62},{-70,-44},{-116,-44},{-116,-44.915},{-116.925,
           -44.915}},                     color={0,0,127}), Text(
@@ -330,20 +345,6 @@ equation
   connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{22,-71},{22,
           -44},{-70,-44},{-70,-44.915},{-116.925,-44.915}},
                                                         color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_a1.T, sigBusHP.T_ret_co) annotation (Line(points={{-34,69},{-34,
-          62},{-70,62},{-70,-44.915},{-116.925,-44.915}},
-                                                      color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_flow_co) annotation (Line(points={{36,69},{36,
-          62},{-70,62},{-70,-44.915},{-116.925,-44.915}},
-                                                      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -385,14 +386,14 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(realToBoolean.y, sigBusHP.onOff) annotation (Line(points={{-140,-20.6},
+  connect(realToBoolean.y, sigBusHP.onOff) annotation (Line(points={{-140,-18.6},
           {-140,-44.915},{-116.925,-44.915}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nSet, realToBoolean.u) annotation (Line(points={{-116,20},{-140,20},{
-          -140,-6.8}},          color={0,0,127}));
+  connect(nSet, realToBoolean.u) annotation (Line(points={{-116,20},{-140,20},{-140,
+          -4.8}},               color={0,0,127}));
   connect(realPassThroughnSet.y, sigBusHP.N) annotation (Line(
       points={{-81.5,7},{-69.5,7},{-69.5,-44.915},{-116.925,-44.915}},
       color={0,0,127},
@@ -457,6 +458,18 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-34,69},{-34,62},
+          {-70,62},{-70,-44.915},{-116.925,-44.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{36,69},{36,62},
+          {-70,62},{-70,-44.915},{-116.925,-44.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},

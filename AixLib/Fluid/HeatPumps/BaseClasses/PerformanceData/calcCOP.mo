@@ -11,6 +11,23 @@ model calcCOP
         iconTransformation(extent={{-140,20},{-100,60}})));
   Modelica.Blocks.Interfaces.RealOutput y_COP "Output for calculated COP value"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+  parameter Integer n_Pel=1 "Dimension of input array of Pel";
+  parameter Integer n_QHeat=1 "Dimension of input array of QHeat";
+  parameter Modelica.SIunits.Power lowBouPel
+    "If P_el falls below this value, COP will not be calculated";
+  Modelica.SIunits.Power absSumPel;
+  Modelica.SIunits.HeatFlowRate absSumQHeat;
+  AixLib.Utilities.Math.MovingAverage movAve(T=10) "to calculate the moving average of Pel values";
+equation
+  absSumPel = sum(Pel);
+  absSumQHeat = sum(QHeat);
+  //Check if any of the two sums are lower than the given threshold. If so, set COP to zero
+  if absSumPel < lowBouPel or absSumQHeat < Modelica.Constants.eps then
+    movAve.u = 0;
+  else
+    movAve.u = absSumQHeat/absSumPel;
+  end if;
+  connect(movAve.y, y_COP);
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Line(
           points={{-82,0},{-12,0}},
@@ -34,21 +51,4 @@ model calcCOP
           lineThickness=0.5,
           textString="COP")}),                                   Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-  parameter Integer n_Pel=1 "Dimension of input array of Pel";
-  parameter Integer n_QHeat=1 "Dimension of input array of QHeat";
-  parameter Modelica.SIunits.Power lowBouPel
-    "If P_el falls below this value, COP will not be calculated";
-  Modelica.SIunits.Power absSumPel;
-  Modelica.SIunits.HeatFlowRate absSumQHeat;
-  AixLib.Utilities.Math.MovingAverage movAve(T=10) "to calculate the moving average of Pel values";
-equation
-  absSumPel = sum(Pel);
-  absSumQHeat = sum(QHeat);
-  //Check if any of the two sums are lower than the given threshold. If so, set COP to zero
-  if absSumPel < lowBouPel or absSumQHeat < Modelica.Constants.eps then
-    movAve.u = 0;
-  else
-    movAve.u = absSumQHeat/absSumPel;
-  end if;
-  connect(movAve.y, y_COP);
 end calcCOP;

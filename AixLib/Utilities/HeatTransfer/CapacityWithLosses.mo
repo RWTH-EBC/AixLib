@@ -81,7 +81,7 @@ model CapacityWithLosses
     annotation (Dialog(group="Outside"), choices(checkBox=true));
   parameter Modelica.SIunits.ThermalConductance kAInn_nominal
     "Nominal convective resistance on the inside"
-    annotation (Dialog(group="Inside"));
+    annotation (Evaluate=false,Dialog(group="Inside"));
   parameter Real scalingFactor "Scaling-factor of HP"
     annotation (Dialog(group="General"));
   parameter Real wukExpIns "Exponent for the wük on the inside"
@@ -97,13 +97,13 @@ model CapacityWithLosses
     annotation (Dialog(group="Outside", enable=use_ForConv));
   parameter Real wukExpOutFor
     "Exponent for the wük of forced convection to outside"
-    annotation (Dialog(group="Outside", enable=use_ForConv));
+    annotation (Evaluate=false,Dialog(group="Outside", enable=use_ForConv));
   parameter Real wukExpOutNat
     "Exponent for the wük natural convection on outside"
-    annotation (Dialog(group="Outside", enable=not use_ForConv));
+    annotation (Evaluate=false,Dialog(group="Outside", enable=not use_ForConv));
   parameter Modelica.SIunits.ThermodynamicTemperature TSurf_nominal
     "Nominal temperature of surface"
-    annotation (Dialog(group="Outside", enable=not use_ForConv));
+    annotation (Evaluate=false,Dialog(group="Outside", enable=not use_ForConv));
   parameter Modelica.SIunits.ThermodynamicTemperature T_amb_nominal
     "Nominal temperature of ambient air"
     annotation (Dialog(group="Outside", enable=not use_ForConv));
@@ -153,7 +153,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(heatLossNatOut_nominal.y, calcHeatCoeffNat.u[1]) annotation (Line(
-      points={{-85.2,0},{-78.15,0},{-78.15,-15},{-65.4,-15}},
+      points={{-85.2,0},{-76.15,0},{-76.15,-15},{-65.4,-15}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(heatCoeffForcOut.y, convectionOut.Gc) annotation (Line(

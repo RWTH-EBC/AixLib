@@ -19,11 +19,11 @@ equation
   assert(
     T_amb_nominal == TSurf_nominal,
     "With the given set of nominal Temperatures no heat flow would occur. Disable the HeatLosses model.",
-    level=AssertionLevel.error);
+    level=AssertionLevel.warning);
   kA_nominal = u[1];
   T_amb = u[2];
   TSurf = u[3];
-  y =kA_nominal*(scalingFactor^(3*wukExp + 1))*(((TSurf - T_amb)*T_amb_nominal)
-    /(TSurf_nominal - T_amb_nominal)*TSurf_nominal)^wukExp;
+  y =kA_nominal*(scalingFactor^(3*wukExp + 1))*(((abs(TSurf - T_amb))*T_amb_nominal)
+    /(abs(TSurf_nominal - T_amb_nominal))*TSurf_nominal)^wukExp;
 
 end HeatCoeffNat;
