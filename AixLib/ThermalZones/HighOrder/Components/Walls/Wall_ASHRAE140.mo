@@ -54,10 +54,15 @@ model Wall_ASHRAE140
                            annotation(Dialog( tab="Window", enable = withWindow and outside),choicesAllMatching= true);
    parameter Modelica.SIunits.Area windowarea=2 "Area of window" annotation(Dialog( tab="Window",  enable = withWindow and outside));
 
-   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog( tab="Window", enable = outside and withWindow));
-   parameter Real Blinding=0 "blinding factor <=1" annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
-   parameter Real Limit=180
-    "minimum specific total solar radiation in W/m2 for blinding becoming active"  annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
+  parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
+  parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+  parameter Real LimitSolIrr
+    "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
+    annotation(Dialog(tab="Window",   enable=withWindow and outside and
+          withSunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
+    "Temperature at which sunblind closes (see also LimitSolIrr)"
+    annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
 
    // door parameters
    parameter Boolean withDoor = false "Choose if the wall has got a door"  annotation(Dialog(tab="Door"));
@@ -111,10 +116,18 @@ public
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model ==2)
     annotation (Placement(transformation(extent={{-113,54},{-93,74}}), iconTransformation(extent={{-31,78},{-11,98}})));
 
+<<<<<<< HEAD:AixLib/ThermalZones/HighOrder/Components/Walls/Wall_ASHRAE140.mo
   Sunblinds.Sunblind Sunblind(
     n=1,
     gsunblind={Blinding},
     Imax=Limit) if outside and withWindow and withSunblind
+=======
+  Weather.Sunblinds.Sunblind Sunblind(
+    final n=1,
+    final gsunblind={Blinding},
+    final Imax=LimitSolIrr,
+    final TOutAirLimit=TOutAirLimit) if outside and withWindow and withSunblind
+>>>>>>> issue605_sunblindRatioFactor:AixLib/Building/Components/Walls/Wall_ASHRAE140.mo
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
   WindowsDoors.Door Door(

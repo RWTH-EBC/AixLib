@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case600
   extends Modelica.Icons.Example;
   BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
@@ -33,7 +33,10 @@ model Case600
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
-  Rooms.ASHRAE140.SouthFacingWindows Room
+  Rooms.ASHRAE140.SouthFacingWindows Room(
+    ratioSunblind=0.8,
+    solIrrThreshold=350,
+    TOutAirLimit=273.15+17)
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));

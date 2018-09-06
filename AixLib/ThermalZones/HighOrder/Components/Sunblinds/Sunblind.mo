@@ -2,7 +2,7 @@ within AixLib.ThermalZones.HighOrder.Components.Sunblinds;
 model Sunblind "Reduces beam at Imax and TOutAirLimit"
   extends BaseClasses.PartialSunblind;
 
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+  parameter Modelica.SIunits.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also Imax)";
 
   Modelica.Blocks.Interfaces.RealInput TOutAir(unit="K", displayUnit="degC")
