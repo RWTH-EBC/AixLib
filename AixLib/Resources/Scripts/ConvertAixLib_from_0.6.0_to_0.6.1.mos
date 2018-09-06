@@ -82,3 +82,10 @@ convertClass("AixLib.Building.Components.Examples.Walls.InsideWall","AixLib.Ther
 convertClass("AixLib.Building.Components.Examples.Walls.OutsideWall","AixLib.ThermalZones.HighOrder.Components.Examples.Walls.OutsideWall");
 convertClass("AixLib.Building.Components.Examples.WindowsDoors.DoorSimple","AixLib.ThermalZones.HighOrder.Components.Examples.WindowsDoors.DoorSimple");
 convertClass("AixLib.Building.Components.Examples.WindowsDoors.WindowSimple","AixLib.ThermalZones.HighOrder.Components.Examples.WindowsDoors.WindowSimple");
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Gr1Uf1", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1", {"ratioSunblind"}, {"ratioSunblind=1-%ratioSunblind%"});
