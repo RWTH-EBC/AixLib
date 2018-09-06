@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataULg160104_2 "Experimental data from ULg's pipe test bench from 4 January 2016. Low mass flow"
   extends AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
     final n=5,
@@ -1004,7 +1004,6 @@ record PipeDataULg160104_2 "Experimental data from ULg's pipe test bench from 4 
         21.2; 10145.1,0.2494,22.2,22.3,21.3,21.2; 10152.7,0.2494,22.1,22.3,21.2,
         21.2; 10161.2,0.2494,22.1,22.3,21.2,21.1; 10169,0.2494,22.1,22.2,21.2,
         21.1; 10176.5,0.2494,22.1,22.2,21.2,21.1]);
-                         // TODO adapt this value
   annotation (Documentation(revisions="<html>
 <ul>
 <li>

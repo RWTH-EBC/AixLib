@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.Valves;
+﻿within AixLib.FastHVAC.Examples.Valves;
 model ThermostaticValve
   extends Modelica.Icons.Example;
    Modelica.Blocks.Sources.Constant T_setRoom(k=273.15 + 20)

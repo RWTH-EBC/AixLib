@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.Sensors;
+﻿within AixLib.FastHVAC.Examples.Sensors;
 model SensorVerification
   extends Modelica.Icons.Example;
 
