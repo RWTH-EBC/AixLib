@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Examples;
+﻿within AixLib.ThermalZones.HighOrder.Examples;
 model Appartment_VoWo "Simulation of 1 apartment "
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
@@ -9,7 +9,10 @@ model Appartment_VoWo "Simulation of 1 apartment "
     redeclare package Medium = Medium,
     fixedHeatFlow3(T_ref=288.15),
     fixedHeatFlow5(T_ref=283.15),
-    fixedHeatFlow16(T_ref=288.15))
+    fixedHeatFlow16(T_ref=288.15),
+    ratioSunblind=0.8,
+    solIrrThreshold=350,
+    TOutAirLimit=290.15)
     annotation (Placement(transformation(extent={{-42,-4},{36,46}})));
   AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
        0.0001) "Pump in heating system"
@@ -35,12 +38,11 @@ model Appartment_VoWo "Simulation of 1 apartment "
     Wind_speed=true,
     Air_temp=true,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(),
-
     fileName=
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
-
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
     annotation (Placement(transformation(extent={{-82,74},{-50,96}})));
+
   Modelica.Blocks.Sources.Constant Source_TsetBath(k = 273.15 + 24) annotation(Placement(transformation(extent = {{-100, -16}, {-86, -2}})));
   Modelica.Blocks.Sources.Constant AirExWindow[5](each k = 0.5) annotation(Placement(transformation(extent = {{-6, 74}, {0, 80}})));
   AixLib.Fluid.Sources.Boundary_ph

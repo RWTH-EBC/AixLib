@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment;
 model Kitchen_VoWo "Kitchen from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
@@ -23,10 +23,26 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   parameter Modelica.SIunits.Temperature T0_IWStraicase = 288.15 "IWStaircase" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_CE = 295.35 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_FL = 294.95 "Floor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  // Infiltration rate
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0)
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor1(
     T0=T0_IWCorridor,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_IWsimple,
     wall_length=2.2,
     wall_height=2.46,
@@ -38,6 +54,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bath1(
     T0=T0_IWBath,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_IWsimple,
     wall_length=3.28,
     wall_height=2.46,
@@ -47,6 +67,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Staircase(
     T0=T0_IWStraicase,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_IWload,
     wall_length=3.94,
     wall_height=2.46,
@@ -61,6 +85,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Bath2(
     T0=T0_IWBath,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_IWsimple,
     wall_length=0.44,
     wall_height=2.46,
@@ -77,6 +105,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
     solar_absorptance=solar_absorptance_OW,
     withWindow=true,
     withDoor=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_OW,
     WindowType=Type_Win) annotation (Placement(transformation(
         origin={5,-99},
@@ -85,6 +117,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Corridor2(
     T0=T0_IWCorridor,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_IWsimple,
     wall_length=0.6,
     wall_height=2.46,
@@ -94,6 +130,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_CE,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_CE,
     wall_length=sqrt(8.35),
     wall_height=sqrt(8.35),
@@ -106,6 +146,10 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
     T0=T0_FL,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_length=sqrt(8.35),
     wall_height=sqrt(8.35),

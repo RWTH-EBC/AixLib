@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope;
+﻿within AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope;
 model OneAppartment_VoWo
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
@@ -7,12 +7,49 @@ model OneAppartment_VoWo
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
   parameter Integer Floor = 1 "Floor" annotation(Dialog(group = "Floor", compact = true, descriptionLabel = true), choices(choice = 1 "GF", choice = 2 "1F", choice = 3 "2F", radioButtons = true));
-  Rooms.MFD.OneApparment.Livingroom_VoWo Livingroom(TMC = TMC, TIR = TIR, Floor = Floor) annotation(Placement(transformation(extent = {{-68, 26}, {-16, 78}})));
-  Rooms.MFD.OneApparment.Children_VoWo Children(TMC = TMC, TIR = TIR, Floor = Floor) annotation(Placement(transformation(extent = {{36, 38}, {74, 76}})));
-  Rooms.MFD.OneApparment.Corridor_VoWo Corridor(TMC = TMC, TIR = TIR, Floor = Floor) annotation(Placement(transformation(extent = {{22, -12}, {60, 26}})));
-  Rooms.MFD.OneApparment.Bedroom_VoWo Bedroom(TMC = TMC, TIR = TIR, Floor = Floor) annotation(Placement(transformation(extent = {{-64, -74}, {-20, -30}})));
-  Rooms.MFD.OneApparment.Bathroom_VoWo Bathroom(TMC = TMC, TIR = TIR, Floor = Floor) annotation(Placement(transformation(extent = {{-6, -72}, {32, -34}})));
-  Rooms.MFD.OneApparment.Kitchen_VoWo Kitchen(TMC = TMC, TIR = TIR, Floor = Floor) annotation(Placement(transformation(extent = {{46, -74}, {88, -28}})));
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0)
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Livingroom_VoWo Livingroom(TMC = TMC, TIR = TIR, Floor = Floor,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{-68, 26}, {-16, 78}})));
+  AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Children_VoWo Children(TMC = TMC, TIR = TIR, Floor = Floor,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{36, 38}, {74, 76}})));
+  AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Corridor_VoWo Corridor(TMC = TMC, TIR = TIR, Floor = Floor,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{22, -12}, {60, 26}})));
+  AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bedroom_VoWo Bedroom(TMC = TMC, TIR = TIR, Floor = Floor,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{-64, -74}, {-20, -30}})));
+  AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bathroom_VoWo Bathroom(TMC = TMC, TIR = TIR, Floor = Floor,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{-6, -72}, {32, -34}})));
+  AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Kitchen_VoWo Kitchen(TMC = TMC, TIR = TIR, Floor = Floor,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit) annotation(Placement(transformation(extent = {{46, -74}, {88, -28}})));
   Utilities.Interfaces.SolarRad_in SolarRadiation_SE annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {28, 110})));
   Utilities.Interfaces.SolarRad_in SolarRadiation_NW annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {58, 110})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] annotation(Placement(transformation(extent = {{-15, -15}, {15, 15}}, rotation = 270, origin = {-9, 115}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-4, 110})));

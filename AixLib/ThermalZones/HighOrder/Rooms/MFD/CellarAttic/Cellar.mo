@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Cellar "Cellar completly under ground"
   import AixLib;
   ///////// construction parameters
@@ -21,13 +21,29 @@ model Cellar "Cellar completly under ground"
   parameter Modelica.SIunits.Temperature T0_air = 285.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_Walls = 284.95 "Walls" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_Ceiling = 285.25 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
-  // Infiltration rate
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0)
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
         start=T0_air))
     annotation (Placement(transformation(extent={{-18,-4},{-38,16}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_Ceiling,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_CE,
     wall_length=room_width,
     wall_height=room_length,
@@ -40,6 +56,10 @@ model Cellar "Cellar completly under ground"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
     T0=T0_Walls,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_length=room_width,
     wall_height=room_length,
@@ -59,6 +79,10 @@ model Cellar "Cellar completly under ground"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall1(
     T0=T0_Walls,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_length=room_width,
     wall_height=room_height,
@@ -71,6 +95,10 @@ model Cellar "Cellar completly under ground"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall3(
     T0=T0_Walls,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_height=room_height,
     wall_length=room_width,
@@ -81,6 +109,10 @@ model Cellar "Cellar completly under ground"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall2(
     T0=T0_Walls,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_height=room_height,
     wall_length=room_length,
@@ -91,6 +123,10 @@ model Cellar "Cellar completly under ground"
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall4(
     T0=T0_Walls,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_height=room_height,
     wall_length=room_length,

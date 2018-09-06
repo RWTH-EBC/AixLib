@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
+﻿within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Attic_Ro2Lf1
   "Attic with two saddle roofs and on floor towards the rooms on the lower floors"
   import AixLib;
@@ -29,7 +29,19 @@ model Attic_Ro2Lf1
   parameter Modelica.SIunits.Area windowarea_RO1 = 0 "Window area" annotation(Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow1));
   parameter Boolean withWindow2 = false "Window 2 " annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox = true));
   parameter Modelica.SIunits.Area windowarea_RO2 = 0 "Window area" annotation(Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow2));
-  // Infiltration rate
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0)
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof1(
     withDoor=false,
     door_height=0,
@@ -39,6 +51,10 @@ model Attic_Ro2Lf1
     wall_height=roof_width1,
     wall_length=room_width,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_RO,
     ISOrientation=1) annotation (Placement(transformation(
         extent={{-4.99998,-28},{4.99998,28}},
@@ -61,6 +77,10 @@ model Attic_Ro2Lf1
     withWindow=false,
     WallType=Type_RO,
     outside=true,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=1) annotation (Placement(transformation(
         origin={50,63},
         extent={{-4.99998,-28},{4.99998,28}},
@@ -69,6 +89,10 @@ model Attic_Ro2Lf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Floor(
     T0=T0_FL,
     outside=false,
+    final withSunblind=use_sunblind,
+    final Blinding=1-ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_FL,
     wall_length=room_length,
     wall_height=room_width,

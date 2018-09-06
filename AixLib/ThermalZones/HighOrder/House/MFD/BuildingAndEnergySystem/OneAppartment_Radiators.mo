@@ -1,9 +1,22 @@
-within AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem;
+﻿within AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem;
 model OneAppartment_Radiators
   "just one appartment (same appartment as in MFD, but hydraulic network fit to this one appartment)"
   import HouseModels = AixLib.ThermalZones.HighOrder;
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0)
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   HouseModels.House.MFD.EnergySystem.OneAppartment.Radiators Hydraulic(
     hydResRadLi(m_flow_nominal=0.0001),
     hydResRadBe(m_flow_nominal=0.0001),
@@ -37,6 +50,10 @@ model OneAppartment_Radiators
   Modelica.Blocks.Interfaces.RealInput AirExchangePort_Window[5] annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {20, 112}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = -90, origin = {26, 106})));
   Utilities.Interfaces.SolarRad_in SolarRadiation[2] "[SE, NW]" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {58, 108})));
   HouseModels.House.MFD.BuildingEnvelope.OneAppartment_VoWo Appartment(
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     Floor=2,
     Livingroom(
       T0_air=293.15,
