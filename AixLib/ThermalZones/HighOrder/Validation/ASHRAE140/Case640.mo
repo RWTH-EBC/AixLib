@@ -1,26 +1,22 @@
-<<<<<<< HEAD:AixLib/ThermalZones/HighOrder/Validation/ASHRAE140/Case640.mo
-within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
-=======
-﻿within AixLib.Building.HighOrder.Examples.Validation.ASHRAE140;
->>>>>>> issue605_sunblindRatioFactor:AixLib/Building/HighOrder/Examples/Validation/ASHRAE140/Case640.mo
+﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case640
   extends Modelica.Icons.Example;
 
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
-  BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
     radOnTiltedSurf_Perez[5](
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
-    each GroundReflection=0.2,
-    each Latitude=39.76,
-    each h=1609,
+    each GroundReflection= 0.2,
+    each Latitude= 39.76,
+    each h= 1609,
     each WeatherFormat=2) "N,E,S,W, Horz"
     annotation (Placement(transformation(extent={{-102,56},{-74,84}})));
 
