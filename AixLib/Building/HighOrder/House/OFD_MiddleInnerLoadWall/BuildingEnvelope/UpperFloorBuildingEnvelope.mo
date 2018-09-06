@@ -82,7 +82,7 @@ model UpperFloorBuildingEnvelope
     "Will sunblind become active automatically?"
     annotation(Dialog(group = "Sunblind"));
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
-    "Sunblind factor"
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"

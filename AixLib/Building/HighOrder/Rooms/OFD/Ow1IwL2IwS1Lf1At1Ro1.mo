@@ -88,7 +88,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     "Will sunblind become active automatically?"
     annotation(Dialog(group = "Sunblind"));
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
-    "Sunblind factor"
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
     "Temperature at which sunblind closes (see also solIrrThreshold)"
