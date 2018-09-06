@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
+﻿within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
 model OutsideWall
   extends Modelica.Icons.Example;
   ThermalZones.HighOrder.Components.Walls.Wall wall_simple(
@@ -10,6 +10,9 @@ model OutsideWall
     outside=true,
     WallType=AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S(),
     Model=2,
+    Blinding=0.2,
+    LimitSolIrr=100,
+    TOutAirLimit=282.15,
     T0=289.15) annotation (Placement(transformation(
         extent={{-6,57},{6,-57}},
         rotation=180,
