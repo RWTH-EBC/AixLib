@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms;
+﻿within AixLib.Building.HighOrder.Rooms;
 package ASHRAE140
   extends Modelica.Icons.Package;
   model SouthFacingWindows "windows facing south"
@@ -9,6 +9,19 @@ package ASHRAE140
                                                           annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
     parameter Modelica.SIunits.Area Win_Area= 12 "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
+    // Sunblind
+    parameter Boolean use_sunblind = false
+      "Will sunblind become active automatically?"
+      annotation(Dialog(group = "Sunblind"));
+    parameter Real ratioSunblind(min=0.0, max=1.0)
+      "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+      annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+      "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+      annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    parameter Modelica.SIunits.Temperature TOutAirLimit
+      "Temperature at which sunblind closes (see also solIrrThreshold)"
+      annotation(Dialog(group = "Sunblind", enable=use_sunblind));
 
     parameter Modelica.SIunits.Temperature T0=295.15 "Outside"
                                                               annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
@@ -52,6 +65,10 @@ package ASHRAE140
       Model=2,
       outside=true,
       withWindow=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       windowarea=Win_Area,
       wall_height=Room_Height,
       surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -63,6 +80,10 @@ package ASHRAE140
       withDoor=false,
       T0=T0_IW,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       WallType=TypOW,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -75,6 +96,10 @@ package ASHRAE140
       wall_height=Room_Height,
       T0=T0_IW,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       WallType=TypOW,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -92,6 +117,10 @@ package ASHRAE140
       wall_length=Room_Width,
       outside=true,
       WallType=TypOW,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
       Model=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
@@ -103,6 +132,10 @@ package ASHRAE140
       T0=T0_CE,
       WallType=TypCE,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
       Model=2) annotation (Placement(transformation(
@@ -118,6 +151,10 @@ package ASHRAE140
       WallType=TypFL,
       solar_absorptance=solar_absorptance_OW,
       outside=false,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       Model=2) annotation (Placement(transformation(
           extent={{-2.00031,-12},{2.00003,12}},
           rotation=90,
@@ -349,6 +386,19 @@ package ASHRAE140
                                                           annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
     parameter Modelica.SIunits.Area Win_Area= 12 "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
+    // Sunblind
+    parameter Boolean use_sunblind = false
+      "Will sunblind become active automatically?"
+      annotation(Dialog(group = "Sunblind"));
+    parameter Real ratioSunblind(min=0.0, max=1.0)
+      "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+      annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+      "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+      annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+    parameter Modelica.SIunits.Temperature TOutAirLimit
+      "Temperature at which sunblind closes (see also solIrrThreshold)"
+      annotation(Dialog(group = "Sunblind", enable=use_sunblind));
 
     parameter Modelica.SIunits.Temperature T0=295.15 "Outside"
                                                               annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
@@ -391,6 +441,10 @@ package ASHRAE140
       solar_absorptance=solar_absorptance_OW,
       Model=2,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       windowarea=Win_Area,
       wall_height=Room_Height,
       surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -403,6 +457,10 @@ package ASHRAE140
       withDoor=false,
       T0=T0_IW,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       WallType=TypOW,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -419,6 +477,10 @@ package ASHRAE140
       wall_height=Room_Height,
       T0=T0_IW,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       WallType=TypOW,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -439,6 +501,10 @@ package ASHRAE140
       T0=T0_IW,
       wall_length=Room_Width,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       WallType=TypOW,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
@@ -451,6 +517,10 @@ package ASHRAE140
       T0=T0_CE,
       WallType=TypCE,
       outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
       Model=2) annotation (Placement(transformation(
@@ -466,6 +536,10 @@ package ASHRAE140
       WallType=TypFL,
       solar_absorptance=solar_absorptance_OW,
       outside=false,
+      final withSunblind=use_sunblind,
+      final Blinding=1-ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
       Model=2) annotation (Placement(transformation(
           extent={{-2.00031,-12},{2.00003,12}},
           rotation=90,

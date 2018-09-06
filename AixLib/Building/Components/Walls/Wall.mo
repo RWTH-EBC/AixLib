@@ -45,12 +45,12 @@ model Wall
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
-  parameter Real Blinding = 0 "blinding factor <=1" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
-  parameter Real LimitSolIrr=180
+  parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+  parameter Real LimitSolIrr
     "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
     annotation(Dialog(tab="Window",   enable=withWindow and outside and
           withSunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+  parameter Modelica.SIunits.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also LimitSolIrr)"
     annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   // door parameters
@@ -74,9 +74,11 @@ model Wall
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model == 2)  annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
   Weather.Sunblinds.Sunblind Sunblind(
-    n=1,
-    gsunblind={Blinding},
-    Imax=LimitSolIrr) if outside and withWindow and withSunblind
+    final n=1,
+    final gsunblind={Blinding},
+    final Imax=LimitSolIrr,
+    final TOutAirLimit=TOutAirLimit) if
+                         outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-21},{-21,5}})));
   WindowsDoors.Door Door(T0 = T0, door_area = door_height * door_width, eps = eps_door, U = if outside then U_door else U_door * 2) if withDoor annotation(Placement(transformation(extent = {{-21, -102}, {11, -70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));

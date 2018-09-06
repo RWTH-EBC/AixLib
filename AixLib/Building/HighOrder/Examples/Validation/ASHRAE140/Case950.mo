@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Examples.Validation.ASHRAE140;
+﻿within AixLib.Building.HighOrder.Examples.Validation.ASHRAE140;
 model Case950
   extends Modelica.Icons.Example;
 
@@ -40,7 +40,10 @@ model Case950
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(TypOW=
         AixLib.DataBase.Walls.ASHRAE140.OW_Case900(), TypFL=
-        AixLib.DataBase.Walls.ASHRAE140.FL_Case900())
+        AixLib.DataBase.Walls.ASHRAE140.FL_Case900(),
+    ratioSunblind=0.8,
+    solIrrThreshold=350,
+    TOutAirLimit=273.15+17)
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));
