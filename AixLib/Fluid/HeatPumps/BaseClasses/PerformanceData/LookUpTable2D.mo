@@ -62,9 +62,17 @@ protected
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={2,-10})));
-public
-  parameter Modelica.SIunits.Power k=0 "Constant output value";
+  Real minSup = min(dataTable.tableP_ele[:,2:end]);
+  Real minSou = min(dataTable.tableP_ele[2:end,:]);
+  Real maxSup = max(dataTable.tableP_ele[:,2:end]);
+  Real maxSou = max(dataTable.tableP_ele[2:end,:]);
 equation
+
+  assert(minSou > sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(maxSou > sigBusHP.T_flow_ev, "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(minSup > sigBusHP.T_ret_co, "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(maxSup > sigBusHP.T_ret_co, "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+
   connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,70},
           {46,70},{46,40},{38,40}},        color={0,0,127}));
   connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(points={{52,65.4},{-68,65.4},
