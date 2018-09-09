@@ -66,6 +66,15 @@ protected
   Real minSou = min(dataTable.tableP_ele[2:end,:]);
   Real maxSup = max(dataTable.tableP_ele[:,2:end]);
   Real maxSou = max(dataTable.tableP_ele[2:end,:]);
+public
+  Modelica.Blocks.Math.Product nTimesPel annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=-90,
+        origin={-39,-19})));
+  Modelica.Blocks.Math.Product nTimesQCon annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={60,-26})));
 equation
 
   assert(minSou > sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
@@ -108,12 +117,6 @@ equation
                                                        color={0,0,127}));
   connect(switchQCon.y, QCon) annotation (Line(points={{52,-61},{52,-84},{-80,-84},
           {-80,-108},{-80,-108},{-80,-110},{-80,-110}}, color={0,0,127}));
-  connect(P_eleTable.y, switchPel.u1)
-    annotation (Line(points={{-56,-4},{-56,-4},{-56,-16},{-56,-16},{-56,-16},{-48,
-          -16},{-48,-40},{-48,-40}},            color={0,0,127}));
-  connect(Qdot_ConTable.y, switchQCon.u1)
-    annotation (Line(points={{50,-6},{60,-6},{60,-38}},
-                                              color={0,0,127}));
   connect(sigBusHP.onOff, switchQCon.u2) annotation (Line(
       points={{1.075,104.07},{22,104.07},{22,-28},{52,-28},{52,-38},{52,-38}},
       color={255,204,51},
@@ -134,6 +137,28 @@ equation
   connect(constZero.y, switchPel.u3) annotation (Line(points={{2,-18.8},{2,-24},
           {-64,-24},{-64,-40}},
         color={0,0,127}));
+  connect(P_eleTable.y, nTimesPel.u2) annotation (Line(points={{-56,-4},{-56,-8},
+          {-43.2,-8},{-43.2,-10.6}}, color={0,0,127}));
+  connect(sigBusHP.N, nTimesPel.u1) annotation (Line(
+      points={{1.075,104.07},{1.075,102},{-20,102},{-20,-10.6},{-34.8,-10.6}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(nTimesPel.y, switchPel.u1) annotation (Line(points={{-39,-26.7},{-39,
+          -32.35},{-48,-32.35},{-48,-40}}, color={0,0,127}));
+  connect(Qdot_ConTable.y, nTimesQCon.u1) annotation (Line(points={{50,-6},{64,
+          -6},{64,-18.8},{63.6,-18.8}}, color={0,0,127}));
+  connect(switchQCon.u1, nTimesQCon.y)
+    annotation (Line(points={{60,-38},{60,-32.6}}, color={0,0,127}));
+  connect(sigBusHP.N, nTimesQCon.u2) annotation (Line(
+      points={{1.075,104.07},{22,104.07},{22,-14},{56.4,-14},{56.4,-18.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

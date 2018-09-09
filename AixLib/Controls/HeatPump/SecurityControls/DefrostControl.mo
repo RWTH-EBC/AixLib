@@ -18,7 +18,7 @@ block DefrostControl
   Utilities.Logical.SmoothSwitch swiErr
     "If an error occurs, the value of the conZero block will be used(0)"
     annotation (Placement(transformation(extent={{60,-16},{80,4}})));
-  Modelica.Blocks.Sources.Constant conOneas(final k=1)
+  Modelica.Blocks.Sources.Constant conOne(final k=1)
     "If Defrost is enabled, HP runs at full power"
     annotation (Placement(transformation(extent={{22,-30},{34,-18}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
@@ -51,7 +51,7 @@ block DefrostControl
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
 equation
-  connect(conOneas.y, swiErr.u3) annotation (Line(points={{34.6,-24},{38,-24},{38,
+  connect(conOne.y, swiErr.u3) annotation (Line(points={{34.6,-24},{38,-24},{38,
           -14},{58,-14}}, color={0,0,127}));
   connect(swiErr.y, nOut) annotation (Line(points={{81,-6},{96,-6},{96,20},{110,
           20}}, color={0,0,127}));
@@ -78,7 +78,8 @@ equation
       pattern=LinePattern.Dash));
   connect(Pel_deFro, realPel_deFro.y)
     annotation (Line(points={{0,110},{0,85}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,80}}),                                   graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
@@ -163,7 +164,8 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="%name")}),                                 Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})),
     Documentation(info="<html>
 <p>Basic model for a defrost control. The icing factor is calculated in the heat pump based on functions or other models.</p>
 <p>If a given lower boundary is surpassed, the mode of the heat pump will be set to false(eq. Chilling) and the compressor speed is set to 1 to make the defrost process as fast as possible.</p>

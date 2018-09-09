@@ -14,12 +14,6 @@ equation
           {-76,-42.4},{-54.8,-42.4}}, color={0,0,127}));
   connect(onOffController.y, swiNullHP.u2) annotation (Line(points={{-22.6,-34},
           {20,-34},{20,0},{64,0}}, color={255,0,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                                    Text(
-          extent={{-36,30},{48,-14}},
-          lineColor={28,108,200},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="%name")}),                                 Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end OnOffHP;

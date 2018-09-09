@@ -4,7 +4,7 @@ block HPControl
   AixLib.Controls.HeatPump.AntiLegionella antiLegionella(
     trigWeekDay=5,
     trigHour=3,
-    TLegMin=373.15) if use_antLeg
+    TLegMin=333.15) if use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
@@ -33,11 +33,11 @@ block HPControl
       AixLib.Controls.HeatPump.BaseClasses.OnOffHP constrainedby
     AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet                                                                                                                     annotation(choicesAllMatching=true);
 
-  TSetToNSet ConvTSetNSet(
+  TSetToNSet OnOffControl(
     use_secHeaGen=use_secHeaGen,
     use_bivPar=use_bivPar,
-    hys=hys)              annotation (Placement(transformation(extent={{44,-10},
-            {76,24}})));
+    hys=hys)              annotation (Placement(transformation(extent={{44,-8},
+            {76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg "No Anti Legionella"
                                            annotation (
                                      choicesAllMatching=true, Placement(
@@ -77,14 +77,14 @@ equation
           {-38,20},{-38,22.8},{-30,22.8}},                                                       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(antiLegionella.TSet_out, ConvTSetNSet.TSet) annotation (Line(
-      points={{16.8,22},{26,22},{26,17.2},{41.44,17.2}},
+  connect(antiLegionella.TSet_out,OnOffControl. TSet) annotation (Line(
+      points={{16.8,22},{26,22},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(ConvTSetNSet.nOut, nOut) annotation (Line(points={{77.6,7},{88.8,7},{
+  connect(OnOffControl.nOut, nOut) annotation (Line(points={{77.6,9},{88.8,9},{
           88.8,20},{114,20}}, color={0,0,127}));
-  connect(sigBusHP, ConvTSetNSet.sigBusHP) annotation (Line(
-      points={{-102,-58},{24,-58},{24,2.41},{42.88,2.41}},
+  connect(sigBusHP,OnOffControl. sigBusHP) annotation (Line(
+      points={{-102,-58},{24,-58},{24,4.41},{42.88,4.41}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -95,21 +95,24 @@ equation
       points={{-53,20},{-46,20},{-46,46},{-11.6,46}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(realPasThrAntLeg.y, ConvTSetNSet.TSet) annotation (Line(
-      points={{6.8,46},{26,46},{26,17.2},{41.44,17.2}},
+  connect(realPasThrAntLeg.y,OnOffControl. TSet) annotation (Line(
+      points={{6.8,46},{26,46},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(modeOut, constHeating.y) annotation (Line(points={{114,-20},{96,-20},
           {96,-34},{79,-34}}, color={255,0,255}));
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
-  connect(TSup, ConvTSetNSet.TAct) annotation (Line(points={{-114,60},{-82,60},{
-          -82,-22},{30,-22},{30,-6.6},{41.44,-6.6}}, color={0,0,127}));
-  connect(ConvTSetNSet.ySecHeaGen, ySecHeaGen) annotation (Line(
-      points={{60,25.7},{60,90},{0,90},{0,110},{0,110}},
+  connect(TSup,OnOffControl. TAct) annotation (Line(points={{-114,60},{-82,60},
+          {-82,-22},{30,-22},{30,-4.6},{41.44,-4.6}},color={0,0,127}));
+  connect(OnOffControl.ySecHeaGen, ySecHeaGen) annotation (Line(
+      points={{60,27.7},{60,74},{0,74},{0,110}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  connect(ySecHeaGen, ySecHeaGen)
+    annotation (Line(points={{0,110},{0,110}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,80}}),                                   graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,127},
@@ -128,5 +131,6 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="%name")}),                                 Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})));
 end HPControl;

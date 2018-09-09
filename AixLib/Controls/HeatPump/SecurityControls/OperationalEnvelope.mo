@@ -53,4 +53,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  annotation (Diagram(coordinateSystem(extent={{-120,-120},{120,100}})), Icon(
+        coordinateSystem(extent={{-120,-120},{120,100}})));
 end OperationalEnvelope;

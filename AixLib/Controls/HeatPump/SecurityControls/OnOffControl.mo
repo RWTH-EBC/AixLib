@@ -126,8 +126,9 @@ equation
     annotation (Line(points={{130,0},{130,0}}, color={0,0,127}));
   connect(swinOutnSet.y, nOut)
     annotation (Line(points={{111,0},{130,0}}, color={0,0,127}));
-  connect(nSet, swinOutnSet.u1) annotation (Line(points={{-136,0},{-120,0},{-120,
-          100},{78,100},{78,8},{88,8}}, color={0,0,127}));
+  connect(nSet, swinOutnSet.u1) annotation (Line(points={{-136,0},{-120,0},{
+          -120,98},{78,98},{78,8},{88,8}},
+                                        color={0,0,127}));
   connect(andTurnOff.y, andRun.u1) annotation (Line(points={{0.6,86},{8,86},{8,78},
           {16.8,78}}, color={255,0,255}));
   connect(orSetN.y, swinOutnSet.u2)
@@ -180,8 +181,8 @@ equation
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
 <p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>
 </html>"),
-    Diagram(coordinateSystem(extent={{-120,-100},{120,100}})),
-    Icon(coordinateSystem(extent={{-120,-100},{120,100}}), graphics={
+    Diagram(coordinateSystem(extent={{-120,-120},{120,100}})),
+    Icon(coordinateSystem(extent={{-120,-120},{120,100}}), graphics={
         Polygon(
           points={{-42,20},{0,62},{-42,20}},
           lineColor={28,108,200},
