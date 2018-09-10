@@ -151,19 +151,20 @@ model HeatPump "Base model of realistic heat pump"
     "Pressure drop at nominal mass flow rate"
     annotation (Evaluate=false,Dialog(group="General", tab="Condenser"));
 
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(
-    final k=1,
-    final T=comIneTime_constant,
+  Modelica.Blocks.Continuous.CriticalDamping NthOrder(
     final initType=initType,
-    final y_start=yComIne_start) if
-                              use_comIne
-    "As all changes in a compressor have certain inertia, no nSet is directly obtained. This first order block represents the inertia of the compressor."
+    final y_start=yComIne_start,
+    n=nthOrder,
+    f=comIneFre_constant,
+    final normalized=true) if use_comIne
+    "As all changes in a compressor have certain inertia, no nSet is directly obtained. This n-th order block represents the inertia of the compressor."
     annotation (Placement(transformation(extent={{-92,20},{-80,32}})));
   parameter Boolean use_comIne=false "Consider the inertia of the compressor" annotation(choices(checkBox=true));
 
-  constant Modelica.SIunits.Time comIneTime_constant
-    "Time constant representing inertia of compressor"
+  constant Modelica.SIunits.Time comIneFre_constant
+    "Cut off frequency for inertia of compressor"
     annotation (Dialog(enable=use_comIne));
+  parameter Integer nthOrder=3 "Order of compressor interia" annotation (Dialog(enable=use_comIne));
 
   parameter Boolean use_EvaCap=false
     "If heat losses at capacitor side are considered or not"
@@ -356,15 +357,15 @@ equation
                                                            color={0,0,127}));
   connect(Condenser.heatPort, heatFlowRateCon.port)
     annotation (Line(points={{-6,76},{-16,76},{-16,60}},color={191,0,0}));
-    connect(nSet, firstOrder.u)
-                               annotation (Line(points={{-116,20},{-104,20},{
-          -104,26},{-93.2,26}},                                              color={0,0,127},
-        pattern=LinePattern.Dash));
+  connect(nSet, NthOrder.u) annotation (Line(
+      points={{-116,20},{-104,20},{-104,26},{-93.2,26}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
 
-    connect(firstOrder.y, sigBusHP.N) annotation (Line(points={{-79.4,26},{-70,
-          26},{-70,-44.915},{-116.925,-44.915}},
-                                            color={0,0,127},
-        pattern=LinePattern.Dash),                            Text(
+  connect(NthOrder.y, sigBusHP.N) annotation (Line(
+      points={{-79.4,26},{-70,26},{-70,-44.915},{-116.925,-44.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

@@ -13,19 +13,20 @@ model HeatPumpSystem
     final VEva=VEva,
     final dpEva_nominal=dpEva_nominal,
     final dpCon_nominal=dpCon_nominal,
-    final comIneTime_constant=comIneTime_constant,
+    final comIneFre_constant=comIneFre_constant,
     final CEva=CEva,
     final GEva=GEva,
     final CCon=CCon,
     final GCon=GCon,
-    final use_comIne=use_comIne,
     redeclare final model PerDataChi = PerDataChi,
     redeclare final model PerDataHea = PerDataHea,
     final scalingFactor=scalingFactor,
     final use_EvaCap=use_evaCap,
     final use_ConCap=false,
     use_revHP=false,
-    realToBoolean(final threshold=Modelica.Constants.eps))
+    realToBoolean(final threshold=Modelica.Constants.eps),
+    final use_comIne=true,
+    nthOrder=nthOrder)
     annotation (Placement(transformation(extent={{-24,-32},{26,28}})));
   Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final use_minRunTime=use_minRunTime,
@@ -189,8 +190,8 @@ model HeatPumpSystem
       enable=use_conPum), choices(checkBox=true));
   parameter Boolean use_comIne=false "Consider the inertia of the compressor"
     annotation (Dialog(group="Compressor Inertia"), choices(checkBox=true));
-  constant Modelica.SIunits.Time comIneTime_constant
-    "Time constant representing inertia of compressor"
+  constant Modelica.SIunits.Time comIneFre_constant
+    "Cut off frequency representing inertia of compressor"
     annotation (Dialog(group="Compressor Inertia", enable=use_comIne));
   parameter Boolean use_conCap=false
     "If heat losses at capacitor side are considered or not"
@@ -339,6 +340,8 @@ model HeatPumpSystem
                            sigBusHP
     annotation (Placement(transformation(extent={{136,68},{166,102}}),
         iconTransformation(extent={{148,76},{166,102}})));
+  parameter Integer nthOrder=3 "Order of compressor interia"
+    annotation (Dialog(group="Compressor Inertia", enable=use_comIne));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -346,7 +349,8 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-135,79},{-114,79},
-          {-114,32.1},{-105,32.1}},  color={0,0,127}));
+          {-114,33.6667},{-105,33.6667}},
+                                     color={0,0,127}));
   connect(pumSin.port_b, heatPump.port_a1)
     annotation (Line(points={{-20,46},{-20,13},{-24,13}},
                                                  color={0,127,255},
@@ -365,8 +369,8 @@ equation
                                                      color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.sigBusHP, hPControls.sigBusHP) annotation (Line(
-      points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,24.3},{-102.3,
-          24.3}},
+      points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,25},{
+          -102.3,25}},
       color={255,204,51},
       thickness=0.5));
   connect(realPasThrSec.y, heatPump.nSet) annotation (Line(
@@ -394,11 +398,11 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(hPControls.nOut, securityControl.nSet) annotation (Line(
-      points={{-69.9,36},{-68,36},{-68,12},{-108,12},{-108,-6},{-104,-6}},
+      points={{-69.9,38},{-68,38},{-68,12},{-108,12},{-108,-6},{-104,-6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(hPControls.nOut, realPasThrSec.u) annotation (Line(
-      points={{-69.9,36},{-68,36},{-68,12},{-108,12},{-108,-37},{-93.4,-37}},
+      points={{-69.9,38},{-68,38},{-68,12},{-108,12},{-108,-37},{-93.4,-37}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, secHeaGen.port_a) annotation (Line(
@@ -420,13 +424,14 @@ equation
       points={{64,68},{64,90},{32,90}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(senTSup.T, hPControls.TSup) annotation (Line(points={{23.2,98},{-110,98},
-          {-110,42},{-106,42},{-106,41.1},{-105,41.1}},
+  connect(senTSup.T, hPControls.TSup) annotation (Line(points={{23.2,98},{-110,
+          98},{-110,42},{-106,42},{-106,43.6667},{-105,43.6667}},
                               color={0,0,127}));
   connect(heatPump.port_b2, port_b2) annotation (Line(points={{-24,-17},{-24,-98},
           {-60,-98},{-60,-120}}, color={0,127,255}));
   connect(hPControls.modeOut, securityControl.modeSet) annotation (Line(points={{-69.9,
-          30},{-68,30},{-68,12},{-110,12},{-110,-12},{-104,-12}},        color={
+          31.3333},{-68,31.3333},{-68,12},{-110,12},{-110,-12},{-104,-12}},
+                                                                         color={
           255,0,255}));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{-70.75,
           -12},{-54,-12},{-54,-7},{-28,-7}}, color={255,0,255}));
