@@ -42,7 +42,9 @@ model HeatPumpSystem
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
     final use_chiller=use_chiller,
-    final calcPel_deFro=calcPel_deFro) if use_sec
+    final calcPel_deFro=calcPel_deFro,
+    final use_antFre=use_antFre,
+    final TantFre=TantFre) if             use_sec
     annotation (Placement(transformation(extent={{-102,-24},{-72,6}})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
@@ -324,10 +326,10 @@ model HeatPumpSystem
 
   Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final n_Pel=1,
       lowBouPel=200)
-    annotation (Placement(transformation(extent={{116,-8},{150,34}})));
+    annotation (Placement(transformation(extent={{82,-18},{116,24}})));
   Controls.HeatPump.BaseClasses.CalcQdot calcQdot(mediumConc_p=
         Medium_con.heatCapacity_cp())
-    annotation (Placement(transformation(extent={{112,40},{132,60}})));
+    annotation (Placement(transformation(extent={{78,30},{98,50}})));
   Modelica.Blocks.Sources.Constant const(k=291.15)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
@@ -338,10 +340,21 @@ model HeatPumpSystem
     annotation (Placement(transformation(extent={{-70,66},{-50,86}})));
   Controls.Interfaces.HeatPumpControlBus
                            sigBusHP
-    annotation (Placement(transformation(extent={{136,68},{166,102}}),
-        iconTransformation(extent={{148,76},{166,102}})));
+    annotation (Placement(transformation(extent={{102,58},{132,92}}),
+        iconTransformation(extent={{114,66},{132,92}})));
   parameter Integer nthOrder=3 "Order of compressor interia"
     annotation (Dialog(group="Compressor Inertia", enable=use_comIne));
+  parameter Boolean use_antFre=false
+    "True if anti freeze control is part of security control" annotation (
+      Dialog(
+      tab="Security Control",
+      group="Anti Freeze Control",
+      enable=use_sec),choices(checkBox=true));
+  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
+    "Limit temperature for anti freeze control" annotation (Dialog(
+      tab="Security Control",
+      group="Anti Freeze Control",
+      enable=use_sec and use_antFre));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -369,8 +382,8 @@ equation
                                                      color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.sigBusHP, hPControls.sigBusHP) annotation (Line(
-      points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,25},{
-          -102.3,25}},
+      points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,25},{-102.3,
+          25}},
       color={255,204,51},
       thickness=0.5));
   connect(realPasThrSec.y, heatPump.nSet) annotation (Line(
@@ -435,8 +448,8 @@ equation
           255,0,255}));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{-70.75,
           -12},{-54,-12},{-54,-7},{-28,-7}}, color={255,0,255}));
-  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{133,50},{136,
-          50},{136,30},{110,30},{110,21.4},{112.6,21.4}},
+  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{99,40},{102,
+          40},{102,20},{76,20},{76,11.4},{78.6,11.4}},
                                                      color={0,0,127}));
   connect(const.y, heatPump.T_amb_eva) annotation (Line(points={{71,-42},{68,
           -42},{68,-11.75},{28.75,-11.75}},
@@ -449,7 +462,7 @@ equation
   connect(constNSin.y, pumSin.Nrpm) annotation (Line(points={{-49,76},{-42,76},
           {-42,54},{-29.6,54}}, color={0,0,127}));
   connect(sigBusHP.Pel, calcCOP.Pel[1]) annotation (Line(
-      points={{151.075,85.085},{151.075,32.5},{112.6,32.5},{112.6,4.6}},
+      points={{117.075,75.085},{117.075,22.5},{78.6,22.5},{78.6,-5.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -457,7 +470,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.m_flow_co, calcQdot.mFlow_con) annotation (Line(
-      points={{151.075,85.085},{151.075,64.5},{110.4,64.5},{110.4,44}},
+      points={{117.075,75.085},{117.075,54.5},{76.4,54.5},{76.4,34}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -465,7 +478,7 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_flow_co, calcQdot.TCon_out) annotation (Line(
-      points={{151.075,85.085},{130.5,85.085},{130.5,50},{110.4,50}},
+      points={{117.075,75.085},{96.5,75.085},{96.5,40},{76.4,40}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -473,7 +486,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(sigBusHP.T_ret_co, calcQdot.TSet) annotation (Line(
-      points={{151.075,85.085},{129.5,85.085},{129.5,56},{110.4,56}},
+      points={{117.075,75.085},{95.5,75.085},{95.5,46},{76.4,46}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -481,7 +494,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(heatPump.sigBusHP, sigBusHP) annotation (Line(
-      points={{-26.75,-12.25},{62.625,-12.25},{62.625,85},{151,85}},
+      points={{-26.75,-12.25},{52,-12.25},{52,74},{84,74},{84,75},{117,75}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

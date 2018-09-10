@@ -1,5 +1,6 @@
 SecurityControl
 OperationalEnvelope
 OnOffControl
+AntiFreeze
 DefrostControl
 BaseClasses

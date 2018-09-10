@@ -31,7 +31,7 @@ block SecurityControl "Block including all security levels"
     final use_opeEnv=use_opeEnv,
     final tableLow=tableLow,
     final tableUpp=tableUpp)
-    annotation (Placement(transformation(extent={{6,-18},{44,18}})));
+    annotation (Placement(transformation(extent={{-10,-10},{14,12}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,
     final minLocTime=minLocTime,
@@ -40,7 +40,7 @@ block SecurityControl "Block including all security levels"
     use_runPerHou=use_runPerHou,
     maxRunPerHou=maxRunPerHou,
     pre_n_start=pre_n_start)
-    annotation (Placement(transformation(extent={{-42,-18},{-6,18}})));
+    annotation (Placement(transformation(extent={{-62,-16},{-26,20}})));
 
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time"
     annotation (Dialog(group="OnOffControl", descriptionLabel=true),choices(checkBox=true));
@@ -48,7 +48,7 @@ block SecurityControl "Block including all security levels"
     final minIceFac=minIceFac,
     use_chiller=use_chiller,
     calcPel_deFro=calcPel_deFro) if use_deFro
-    annotation (Placement(transformation(extent={{-102,-14},{-66,16}})));
+    annotation (Placement(transformation(extent={{-110,-14},{-74,16}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not use_deFro
     "No 2. Layer"
     annotation (Placement(transformation(extent={{-92,32},{-76,48}})),
@@ -76,15 +76,24 @@ block SecurityControl "Block including all security levels"
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={130,80})));
+  AntiFreeze antiFreeze(final TantFre=TantFre, final use_antFre=use_antFre)
+    annotation (Placement(transformation(extent={{24,-8},{48,12}})));
+  parameter Boolean use_antFre=true
+    "True if anti freeze control is part of security control"
+    annotation (Dialog(group="Anti Freeze Control"), choices(checkBox=true));
+  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
+    "Limit temperature for anti freeze control"
+    annotation (Dialog(group="Anti Freeze Control", enable=use_antFre));
+
 equation
   connect(conTru.y,swiErr.u2)
     annotation (Line(points={{70.6,0},{84,0}}, color={255,0,255}));
   connect(onOffController.nOut, operationalEnvelope.nSet) annotation (Line(
-        points={{-4.5,1.63636},{0,1.63636},{0,4.90909},{3.46667,4.90909}},color=
+        points={{-24.5,3.63636},{-24,3.63636},{-24,4},{-11.6,4}},         color=
          {0,0,127}));
 
   connect(sigBusHP, onOffController.sigBusHP) annotation (Line(
-      points={{-135,-69},{-44.25,-69},{-44.25,-9.65455}},
+      points={{-135,-69},{-64.25,-69},{-64.25,-7.65455}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -92,7 +101,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP, operationalEnvelope.sigBusHP) annotation (Line(
-      points={{-135,-69},{3.625,-69},{3.625,-9.65455}},
+      points={{-135,-69},{-11.5,-69},{-11.5,-4.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -100,18 +109,15 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP, defrostControl.sigBusHP) annotation (Line(
-      points={{-135,-69},{-103.08,-69},{-103.08,-7.66667}},
+      points={{-135,-69},{-111.08,-69},{-111.08,-7.66667}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(operationalEnvelope.nOut, swiErr.u1) annotation (Line(points={{45.5833,
-          4.90909},{50,4.90909},{50,16},{78,16},{78,8},{84,8}},
-                                                    color={0,0,127}));
   connect(nSet, defrostControl.nSet) annotation (Line(
-      points={{-136,20},{-124,20},{-124,6},{-104.88,6}},
+      points={{-136,20},{-124,20},{-124,6},{-112.88,6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(nSet, realPasThrDef.u) annotation (Line(
@@ -119,24 +125,21 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(realPasThrDef.y, onOffController.nSet) annotation (Line(
-      points={{-75.2,40},{-52,40},{-52,1.63636},{-44.4,1.63636}},
+      points={{-75.2,40},{-60,40},{-60,3.63636},{-64.4,3.63636}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(operationalEnvelope.modeOut, modeOut) annotation (Line(points={{45.5833,
-          -1.63636},{50,-1.63636},{50,-36},{114,-36},{114,-20},{130,-20}},
-        color={255,0,255}));
   connect(modeSet, defrostControl.modeSet) annotation (Line(
-      points={{-136,-20},{-120,-20},{-120,-0.666667},{-104.88,-0.666667}},
+      points={{-136,-20},{-120,-20},{-120,-0.666667},{-112.88,-0.666667}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(defrostControl.nOut, onOffController.nSet) annotation (Line(
-      points={{-64.2,6},{-64.2,1.63636},{-44.4,1.63636}},
+      points={{-72.2,6},{-72.2,3.63636},{-64.4,3.63636}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(defrostControl.modeOut, operationalEnvelope.modeSet) annotation (
       Line(
-      points={{-64.2,-0.666667},{-56,-0.666667},{-56,-28},{0,-28},{0,-4},{4,-4},
-          {4,-1.63636},{3.46667,-1.63636}},
+      points={{-72.2,-0.666667},{-68,-0.666667},{-68,-32},{-22,-32},{-22,0},{-11.6,
+          0}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(modeSet, boolPasThrDef.u) annotation (Line(
@@ -144,11 +147,19 @@ equation
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(boolPasThrDef.y, operationalEnvelope.modeSet) annotation (Line(
-      points={{-75.2,-42},{-2,-42},{-2,-4},{3.46667,-4},{3.46667,-1.63636}},
+      points={{-75.2,-42},{-22,-42},{-22,0},{-11.6,0}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(defrostControl.Pel_deFro, Pel_deFro) annotation (Line(
-      points={{-84,21},{-84,28},{-54,28},{-54,80},{130,80}},
+      points={{-92,21},{-92,28},{-54,28},{-54,80},{130,80}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(antiFreeze.nSet, operationalEnvelope.nOut)
+    annotation (Line(points={{22.4,4},{15,4}}, color={0,0,127}));
+  connect(antiFreeze.modeSet, operationalEnvelope.modeOut)
+    annotation (Line(points={{22.4,0},{15,0}}, color={255,0,255}));
+  connect(antiFreeze.nOut, swiErr.u1) annotation (Line(points={{49,4},{54,4},{54,
+          18},{76,18},{76,8},{84,8}}, color={0,0,127}));
+  connect(antiFreeze.modeOut, modeOut) annotation (Line(points={{49,0},{52,0},{52,
+          -36},{100,-36},{100,-20},{130,-20}}, color={255,0,255}));
 end SecurityControl;
