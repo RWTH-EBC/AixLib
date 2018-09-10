@@ -2,13 +2,30 @@
 model CHPCombined
   "CHP with internal combustion engine (ICE) including part load operation. To be used with dynamic mode controller (start/stop/OnOff/P_elRel)"
 
-//    parameter Integer CHPType "CHP Type"
-//     annotation(Dialog(group = "General", compact = true, descriptionLabel = true), choices(choice=1
-//         "ICE",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",
-//                               radioButtons = true));
-   parameter Integer CHPType "CHP Type"
-    annotation(Dialog(group = "General", compact = true, descriptionLabel = true), choices(choice=1
-        "ICE",choice = 2 "PEM Fuel Cell",radioButtons = true));
+  /* *******************************************************************
+  Model Selection
+  ******************************************************************* */
+  parameter Integer CHPType "CHP Type"
+    annotation(Dialog(group = "Model Selection", compact = true, descriptionLabel = true), choices(choice=1
+        "ICE",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",radioButtons = true));
+  parameter Boolean EfficiencyByDatatable=true
+    "Use datasheet values for efficiency calculations" annotation(Dialog(group = "Model Selection"));
+  parameter AixLib.FastHVAC.Data.CHP.Engine.BaseDataDefinition paramIFC=
+      AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
+    "Record for IFC Parametrization"
+    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1,group = "Model Selection"));
+  parameter
+    AixLib.FastHVAC.Data.CHP.FuelcellPEM.BaseDataDefinition paramPEM=
+      AixLib.FastHVAC.Data.CHP.FuelcellPEM.MorrisonPEMFC()
+         "Record for PCM Parametrization"
+    annotation (choicesAllMatching=true, Dialog(enable=
+          EfficiencyByDatatable and CHPType == 2,group = "Model Selection"));
+    AixLib.FastHVAC.Data.CHP.FuelcellSOFC.BaseDataDefinition paramSOFC=
+      AixLib.FastHVAC.Data.CHP.FuelcellSOFC.MorrisonSOFC()
+         "Record for SOFC Parametrization"
+    annotation (choicesAllMatching=true, Dialog(enable=
+          EfficiencyByDatatable and CHPType == 3,group = "Model Selection"));
+
   /* *******************************************************************
   Medium
   ******************************************************************* */
@@ -19,22 +36,8 @@ model CHPCombined
   /* *******************************************************************
   BHKW Parameters
   ******************************************************************* */
-  parameter Boolean EfficiencyByDatatable=true
-    "Use datasheet values for efficiency calculations";
-  parameter Data.CHP.Engine.BaseDataDefinition paramIFC=
-      AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
-    "Record for IFC Parametrization"
-    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1));
 
-  parameter
-    Data.CHP.FuelcellPEM.BaseDataDefinition paramPEM=
-      AixLib.FastHVAC.Data.CHP.FuelcellPEM.MorrisonPEMFC()
-         "Record for PCM Parametrization"
-    annotation (choicesAllMatching=true, Dialog(enable=
-          EfficiencyByDatatable and CHPType == 2));
-  parameter Data.CHP.FuelcellPEM.BaseDataDefinition paramSOFC=
-      AixLib.FastHVAC.Data.CHP.FuelcellPEM.MorrisonPEMFC()
-         "Record for SOFT Parametrization *CHANGE*";
+
 
   parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group="Control and operation"));
 
@@ -43,21 +46,20 @@ model CHPCombined
   annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Efficiency omega_prescribed = 0.65 "CHP's total efficiency "
   annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Power P_elStandby_prescribed=90
+  parameter Modelica.SIunits.Power P_elStandby_prescribed=-90
     "electrical consumption in standby mode"
                                             annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Power P_elStop_prescribed=190
+  parameter Modelica.SIunits.Power P_elStop_prescribed=-190
     "electrical consumption during shutdown mode"
                                                  annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Power P_elStart_prescribed=190
+  parameter Modelica.SIunits.Power P_elStart_prescribed=-190
       "electrical consumption during startup"
                                              annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Time tauSystem = 10 "general time constant for system to prevent discrete changes";
-  parameter Modelica.SIunits.Time tauQ_th_stop_prescribed = 90
+  parameter Modelica.SIunits.Time tauQ_th_stop_prescribed = 35
   "time constant for thermal start behavior" annotation (Dialog(tab = "ICE", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Time tauQ_th_start_prescribed = 800
+  parameter Modelica.SIunits.Time tauQ_th_start_prescribed = 320
   "time constant for stop behaviour" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Time tauP_el_prescribed = 100
+  parameter Modelica.SIunits.Time tauP_el_prescribed = 5
   "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed CHP Model", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauQ_th_loss_prescribed = 100 annotation (Dialog(tab = "Prescribed PEM Model", group = "Prescribed PEM model",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Efficiency eta_PCU_presribed = 0.95 "Efficiency of the PCU" annotation (Dialog(tab = "Prescribed PEM Model", group = "Prescribed PEM model",enable=not EfficiencyByDatatable));
@@ -82,31 +84,33 @@ protected
   parameter Modelica.SIunits.Power dotE_stop = if EfficiencyByDatatable and CHPType==2 then paramPEM.FuelConsumptionStop else 1/3 * dotE_fuelRated "Fuel consumption during stop process";
   parameter Modelica.SIunits.Power dotQ_stop =  0.5 * dotQ_thRated "Themal energy production during stop process";
 
-  parameter Modelica.SIunits.Time tauQ_th_start=if EfficiencyByDatatable then
-      paramIFC.tauQ_th_start else tauQ_th_stop_prescribed
-    "time constant for thermal start behavior (unit=sec) ";
-  parameter Modelica.SIunits.Time tauQ_th_stop=if EfficiencyByDatatable then
-      paramIFC.tauQ_th_stop else tauQ_th_stop_prescribed
-    "time constant for stop behaviour (unit=sec)";
+  parameter Modelica.SIunits.Time tauQ_th_start=if EfficiencyByDatatable and CHPType==1 then
+  paramIFC.tauQ_th_start/2.5 elseif EfficiencyByDatatable and CHPType==2 then paramPEM.tauQ else tauQ_th_start_prescribed
+  "time constant for thermal start behavior (unit=sec) ";
+
+  parameter Modelica.SIunits.Time tauQ_th_stop=if EfficiencyByDatatable and CHPType==1 then
+  paramIFC.tauQ_th_stop/2.5 elseif EfficiencyByDatatable and CHPType==2 then paramPEM.tauQ else tauQ_th_stop_prescribed
+  "time constant for stop behaviour (unit=sec)";
+
   parameter Modelica.SIunits.Time tauQ_th_loss=if EfficiencyByDatatable then
       paramPEM.tauQ else tauQ_th_loss_prescribed
-    "time constant for stop behaviour (unit=sec)";
+    "time constant for stop behaviour for heatloss(unit=sec)";
 
-  parameter Modelica.SIunits.Time tauP_el=if EfficiencyByDatatable then
-  paramIFC.tauP_el else tauP_el_prescribed
+  parameter Modelica.SIunits.Time tauP_el=if EfficiencyByDatatable and CHPType==1 then
+  paramIFC.tauP_el elseif EfficiencyByDatatable and CHPType==2 then paramPEM.tauP_el else tauP_el_prescribed
     "time constant electrical power start behavior (unit=sec)";
   parameter Modelica.SIunits.Volume V_water = 3e-3;
-  parameter Real LimiterPelPos = if CHPType == 1 then 760 else 0.61;
-  parameter Real LimiterPelNeg = if CHPType == 1 then 760 else 0.60;
+  parameter Real LimiterPelPos = if CHPType == 1 then 760 elseif CHPType==2 then 0.61 else 0;
+  parameter Real LimiterPelNeg = if CHPType == 1 then 760 elseif CHPType==2 then 0.60 else 0;
   parameter Real LHV(unit="J/kg")= if CHPType == 1 then 47300000 else 119972000 "Lower heating value [J/kg]";
-//tauQ in PARAMETER !!!!
+
 public
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20);
   parameter Modelica.SIunits.Time WarmupTime=110
-    "time until first heat is delivered by system after switched on"
+    "time until first heat/power is delivered by system after switched on if internal controller is used"
                                                             annotation (Dialog(group="Control and operation", enable=withController));
   parameter Modelica.SIunits.Time CooldownTime=330
-    "time until thermal output is zero after switched to standby"
+    "time until thermal output is zero after switched to standby if internal controller is used"
                                                   annotation (Dialog(group="Control and operation", enable=withController));
 
   /* *******************************************************************
@@ -156,7 +160,7 @@ public
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow varHeatFlow
     annotation (Placement(transformation(extent={{7,-8},{-7,8}},
         rotation=90,
-        origin={2,-65})));
+        origin={2,-63})));
   AixLib.FastHVAC.Components.Sensors.TemperatureSensor T_flow
     annotation (Placement(transformation(extent={{-48,-88},{-28,-68}})));
   AixLib.FastHVAC.Components.Sensors.TemperatureSensor T_return
@@ -210,7 +214,7 @@ public
     annotation (Placement(transformation(extent={{-46,74},{-34,86}})));
 
   Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2, Falling=-2554.2)
-    annotation (Placement(transformation(extent={{6,40},{26,60}})));
+    annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderEFuel(T=5)
     annotation (Placement(transformation(extent={{-46,54},{-34,66}})));
   Modelica.Blocks.Math.Gain PelDemand(k=P_elRated)
@@ -229,9 +233,9 @@ public
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_stop(T=tauQ_th_stop)
     annotation (Placement(transformation(extent={{-46,14},{-34,26}})));
   Modelica.Blocks.Logical.Switch Qth(y( unit="W")) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-8,-8},{8,8}},
         rotation=0,
-        origin={16,20})));
+        origin={20,26})));
   BaseClasses.StartStopController StartStopController(StartTime=WarmupTime,
       StopTime=CooldownTime) if                             withController
     annotation (Placement(transformation(
@@ -242,14 +246,14 @@ protected
   Modelica.Blocks.Interfaces.BooleanInput Start                       annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=0,
-        origin={-98,50}), iconTransformation(
+        origin={-96,50}), iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
-        origin={-98,78})), Dialog(enable=false));
+        origin={-96,78})), Dialog(enable=false));
   Modelica.Blocks.Interfaces.BooleanInput Stop                       annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
         rotation=0,
-        origin={-98,68}), iconTransformation(
+        origin={-96,68}), iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
         origin={-68,108})), Dialog(enable=false));
@@ -260,13 +264,13 @@ public
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_loss(T=tauQ_th_loss)
     annotation (Placement(transformation(extent={{-46,-6},{-34,6}})));
   Modelica.Blocks.Sources.RealExpression AncillaryConsumption(y=Pel_anc)
-    annotation (Placement(transformation(extent={{72,62},{88,78}})));
-  Modelica.Blocks.Math.Add sub(k2=-1) annotation (
-     Placement(transformation(extent={{93,73},{107,87}})));
+    annotation (Placement(transformation(extent={{62,62},{78,78}})));
+  Modelica.Blocks.Math.Add sub        annotation (
+     Placement(transformation(extent={{93,69},{107,83}})));
   Modelica.Blocks.Math.Product product
-    annotation (Placement(transformation(extent={{14,74},{26,86}})));
+    annotation (Placement(transformation(extent={{14,80},{26,92}})));
   Modelica.Blocks.Sources.RealExpression EfficiencyPCU(y=eta_PCU)
-    annotation (Placement(transformation(extent={{-16,62},{-4,78}})));
+    annotation (Placement(transformation(extent={{-16,66},{-4,82}})));
 equation
   // Calculated efficiencies
 
@@ -275,19 +279,19 @@ equation
       if CHPType == 1 then
         sigma = eff_el/eff_th;
         omega = eff_el+eff_th;
-        eff_el = paramIFC.a_0 + paramIFC.a_1*(PelDemand.y/1000)^2 +
-        paramIFC.a_2*(PelDemand.y/1000) + paramIFC.a_3*
-        massFlowRate.dotm^2 + paramIFC.a_4*
-        massFlowRate.dotm + paramIFC.a_5*
-        Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + paramIFC.a_6*
-        Modelica.SIunits.Conversions.to_degC(T_return.T);
-        eff_th =paramIFC.b_0 + paramIFC.b_1*(
-        PelDemand.y/1000)^2 + paramIFC.b_2*(PelDemand.y/1000) + paramIFC.b_3*
-        massFlowRate.dotm^2 + paramIFC.b_4*
-        massFlowRate.dotm + paramIFC.b_5*
-        Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + paramIFC.b_6*
-        Modelica.SIunits.Conversions.to_degC(T_return.T);
-        eta_PCU = 1; // dummy
+         eff_el = paramIFC.a_0 + paramIFC.a_1*(PelDemand.y/1000)^2 +
+         paramIFC.a_2*(PelDemand.y/1000) + paramIFC.a_3*
+         massFlowRate.dotm^2 + paramIFC.a_4*
+         massFlowRate.dotm + paramIFC.a_5*
+         Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + paramIFC.a_6*
+         Modelica.SIunits.Conversions.to_degC(T_return.T);
+         eff_th =paramIFC.b_0 + paramIFC.b_1*(
+         PelDemand.y/1000)^2 + paramIFC.b_2*(PelDemand.y/1000) + paramIFC.b_3*
+         massFlowRate.dotm^2 + paramIFC.b_4*
+         massFlowRate.dotm + paramIFC.b_5*
+         Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + paramIFC.b_6*
+         Modelica.SIunits.Conversions.to_degC(T_return.T);
+        eta_PCU = 1; // dummy, no PCU for ICE CHP
      // If PEM
       else
       //elseif CHPType ==2 then
@@ -307,6 +311,8 @@ equation
     end if;
     eff_th = omega_prescribed - eff_el;
     eta_PCU = eta_PCU_presribed;
+    sigma = eff_el/eff_th;
+    omega = eff_el+eff_th;
   end if;
 
   // Operation conditions
@@ -366,14 +372,14 @@ equation
          end if;
      else
          if Stop then
-           firstOrderPel.u = 0;
+           firstOrderPel.u = Modelica.Constants.eps; // not zero to prevent numerical issues
            firstOrderQ_start.u = 0;
            firstOrderQ_stop.u = 0;
            firstOrderQ_loss.u = 0;
            Pel_anc = paramPEM.PelStopANC;
            firstOrderEFuel.u = dotE_stop;
          else
-           firstOrderPel.u = 0;
+           firstOrderPel.u = Modelica.Constants.eps; // not zero to prevent numerical issues
            firstOrderQ_start.u = 0;
            firstOrderQ_stop.u = 0;
            firstOrderQ_loss.u = 0;
@@ -392,9 +398,10 @@ equation
     firstOrderEFuel.u = dotE_start;
   end if;
   connect(varHeatFlow.port, workingFluid.heatPort)
-    annotation (Line(points={{2,-72},{2,-78.6}},          color={191,0,0}));
+    annotation (Line(points={{2,-70},{2,-78.6}},          color={191,0,0}));
   connect(enthalpyPort_a1, massFlowRate.enthalpyPort_a) annotation (Line(points={{-160,0},
-          {-154,0},{-154,-78.1},{-82.8,-78.1}},            color={176,0,0}));
+          {-146,0},{-146,-78},{-114,-78},{-114,-78.1},{-82.8,-78.1}},
+                                                           color={176,0,0}));
   connect(massFlowRate.enthalpyPort_b, T_flow.enthalpyPort_a) annotation (Line(
         points={{-65,-78.1},{-46.8,-78.1}},                             color={176,
           0,0}));
@@ -411,28 +418,28 @@ equation
     annotation (Line(points={{-33.4,80},{-28.7,80},{-28.7,90},{-17.2,90}},
                         color={0,0,127}));
   connect(firstOrderEFuel.y, LimiterEFuel.u) annotation (Line(points={{-33.4,60},
-          {-23.3,60},{-23.3,50},{4,50}},                                               color={0,0,127}));
-  connect(LimiterEFuel.y, integrator[3].u) annotation (Line(points={{27,50},{49.5,
-          50},{49.5,51},{61.5,51},{61.5,30},{128,30}},                                                color={0,0,127}));
+          {-17.2,60}},                                                                 color={0,0,127}));
+  connect(LimiterEFuel.y, integrator[3].u) annotation (Line(points={{-3.4,60},{62,
+          60},{62,30},{128,30}},                                                                      color={0,0,127}));
   connect(Gain_LHV.y, dotmFuel)
     annotation (Line(points={{148.8,60},{158,60},{158,62},{168,62}},
                                                   color={0,0,127}));
   connect(firstOrderQ_start.y, Qth.u1)
-    annotation (Line(points={{-33.4,40},{-17.3,40},{-17.3,28},{4,28}},
+    annotation (Line(points={{-33.4,40},{-17.3,40},{-17.3,32.4},{10.4,32.4}},
                                                             color={0,0,127}));
   connect(firstOrderQ_stop.y, Qth.u3)
-    annotation (Line(points={{-33.4,20},{-15.3,20},{-15.3,12},{4,12}},
+    annotation (Line(points={{-33.4,20},{-15.3,20},{-15.3,19.6},{10.4,19.6}},
                                                           color={0,0,127}));
   connect(Qth.y, Capacity[2])
-    annotation (Line(points={{27,20},{52.5,20},{52.5,90},{168,90}},
+    annotation (Line(points={{28.8,26},{46.5,26},{46.5,90},{168,90}},
                                                                   color={0,0,127}));
-  connect(Qth.y, integrator[2].u) annotation (Line(points={{27,20},{57.5,20},{57.5,
-          45},{62,45},{62,30},{128,30}},
+  connect(Qth.y, integrator[2].u) annotation (Line(points={{28.8,26},{57.5,26},{
+          57.5,45},{62,45},{62,30},{128,30}},
                     color={0,0,127}));
-  connect(LimiterEFuel.y, Gain_LHV.u) annotation (Line(points={{27,50},{69.3,50},
-          {69.3,60},{130.4,60}},                                                                   color={0,0,127}));
-  connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{27,20},{57,20},{57,
-          -55},{2,-55},{2,-58}},
+  connect(LimiterEFuel.y, Gain_LHV.u) annotation (Line(points={{-3.4,60},{130.4,
+          60}},                                                                                    color={0,0,127}));
+  connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{28.8,26},{57,26},
+          {57,-51},{2,-51},{2,-56}},
                    color={0,0,127}));
   connect(PelRel, PelDemand.u) annotation (Line(
         points={{-164,36},{-143.6,36}}, color={0,0,
@@ -440,48 +447,46 @@ equation
 
   if withController then
     connect(StartStopController.Stop, Stop)
-    annotation (Line(points={{-130.8,61.8},{-110,61.8},
-            {-110,68},{-98,68}},                                         color={255,0,255}));
+    annotation (Line(points={{-130.8,61.8},{-110,61.8},{-110,68},{-96,68}},
+                                                                         color={255,0,255}));
     connect(StartStopController.Start, Start)
-    annotation (Line(points={{-130.8,70.8},{-116,70.8},
-            {-116,50},{-98,50}},                                         color={255,0,255}));
+    annotation (Line(points={{-130.8,70.8},{-116,70.8},{-116,50},{-96,50}},
+                                                                         color={255,0,255}));
   else
-    connect(StartIn, Start) annotation (Line(points={{-126,
-            108},{-126,88},{-116,88},{-116,50},{-98,
-            50}},                                                                                    color={255,0,255}));
+    connect(StartIn, Start) annotation (Line(points={{-126,108},{-126,88},{-116,
+            88},{-116,50},{-96,50}},                                                                 color={255,0,255}));
   end if;
   connect(OnOff, switchCounter.u) annotation (Line(points={{-154,
           108},{-154,82},{-151,82}},                                                              color={255,0,255}));
   connect(OnOff, StartStopController.OnOff) annotation (Line(points={{-154,
           108},{-154,82},{-156,82},{-156,66},{-152,
           66}},                                color={255,0,255}));
-  connect(Qth.u2, StartStopController.OnOff) annotation (Line(points={{4,20},{-4,
-          20},{-4,-32},{-148,-32},{-148,20},{-156,20},{-156,66},{-152,66}},
+  connect(Qth.u2, StartStopController.OnOff) annotation (Line(points={{10.4,26},
+          {-2,26},{-2,-18},{-142,-18},{-142,20},{-156,20},{-156,66},{-152,66}},
                                                                color={255,0,255}));
   connect(StopIn, Stop)
-    annotation (Line(points={{-102,108},{-102,68},
-          {-98,68}},                                       color={255,0,255}));
+    annotation (Line(points={{-102,108},{-102,68},{-96,68}},
+                                                           color={255,0,255}));
   connect(LimiterEFuel.y, Capacity[3])
-    annotation (Line(points={{27,50},{52.5,50},{52.5,98},{168,98}},
+    annotation (Line(points={{-3.4,60},{46.5,60},{46.5,98},{168,98}},
                      color={0,0,127}));
-  connect(AncillaryConsumption.y, sub.u2) annotation (Line(points={{88.8,70},{89.3,
-          70},{89.3,75.8},{91.6,75.8}},
-                                      color={0,0,127}));
   connect(sub.y, Capacity[1]) annotation (Line(
-        points={{107.7,80},{113.65,80},{113.65,82},{168,82}},
+        points={{107.7,76},{113.65,76},{113.65,82},{168,82}},
                 color={0,0,127}));
   connect(sub.y, integrator[1].u) annotation (
-      Line(points={{107.7,80},{114.65,80},{114.65,30},{128,30}},
+      Line(points={{107.7,76},{114.65,76},{114.65,30},{128,30}},
                 color={0,0,127}));
-  connect(EfficiencyPCU.y, product.u2) annotation (Line(points={{-3.4,70},{1.3,70},
-          {1.3,76.4},{12.8,76.4}},
+  connect(EfficiencyPCU.y, product.u2) annotation (Line(points={{-3.4,74},{1.3,74},
+          {1.3,82.4},{12.8,82.4}},
                                  color={0,0,127}));
   connect(LimiterPel.y, product.u1) annotation (Line(points={{-3.4,90},{-0.7,90},
-          {-0.7,83.6},{12.8,83.6}},
+          {-0.7,89.6},{12.8,89.6}},
                               color={0,0,127}));
-  connect(product.y, sub.u1) annotation (Line(points={{26.6,80},{36.4,80},{36.4,
-          84.2},{91.6,84.2}},
+  connect(product.y, sub.u1) annotation (Line(points={{26.6,86},{36.4,86},{36.4,
+          80.2},{91.6,80.2}},
                         color={0,0,127}));
+  connect(AncillaryConsumption.y, sub.u2) annotation (Line(points={{78.8,70},{80,
+          70},{80,71.8},{91.6,71.8}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(initialScale=0.2, extent={
             {-160,-100},{160,100}}),         graphics={

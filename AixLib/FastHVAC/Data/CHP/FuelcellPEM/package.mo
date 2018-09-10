@@ -30,10 +30,12 @@ package FuelcellPEM
       FuelConsumptionStart=131.71,
       FuelConsumptionStop=4,
       P_elStart = 146,
-      PelStartANC = 453,
-      PelStopANC = 16.67,
-      tauQ = 100);
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+      PelStartANC = -453,
+      PelStopANC = -16.67,
+      tauQ = 50,
+      tauP_el=5);
+      // estimated values for the last 2 parameters because no dynamic behaviour is shown in literature
+     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),Documentation(revisions="<html><ul>
   <li>
   <i>Aug 09, 2018&#160;</i> by David Jansen:<br/>
@@ -50,9 +52,10 @@ package FuelcellPEM
   Source:
 </p>
 <ul>
-<li>Geoffrey Johnson, The calibration and validation of a model for simulating the thermal
+<li>
+<a href='https://www.sciencedirect.com/science/article/pii/S0378775312013237?via%3Dihub'> Geoffrey Johnson, The calibration and validation of a model for simulating the thermal
 and electrical performance of a 1 kWAC proton-exchange membrane
-fuel-cell micro-cogeneration device (2013)
+fuel-cell micro-cogeneration device (2013) </a>
   </li>
 
 </ul>

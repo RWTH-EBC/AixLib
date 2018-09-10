@@ -34,6 +34,8 @@ extends Modelica.Icons.Record;
   parameter SI.Power PelStartANC "AC power consumption during start";
   parameter SI.Power PelStopANC "AC power consumption during stop";
   parameter SI.Time tauQ "Time constant for thermal behaviour";
+  parameter Modelica.SIunits.Time tauP_el
+  "time constant electrical power start behavior (unit=sec)";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BaseDataDefinition;

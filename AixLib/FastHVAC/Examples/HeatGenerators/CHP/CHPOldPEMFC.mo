@@ -19,8 +19,8 @@ model CHPOldPEMFC
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-86,0})));
-  Modelica.Blocks.Sources.Constant T_source1(k=1)
-    annotation (Placement(transformation(extent={{-44,0},{-24,20}})));
+  Modelica.Blocks.Sources.Constant PelRel(k=1)
+    annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
   Components.HeatGenerators.CHP.PEMFC pEMFC
     annotation (Placement(transformation(extent={{2,-64},{22,-44}})));
   Components.HeatGenerators.CHP.BaseClasses.StartStopController
@@ -54,8 +54,8 @@ equation
           -18.8,-23.2},{-12,-23.2},{-12,-50},{2,-50}}, color={255,0,255}));
   connect(startStopController.Stop, pEMFC.Stop) annotation (Line(points={{-18.8,
           -32.2},{-18.8,-52.6},{2,-52.6}}, color={255,0,255}));
-  connect(T_source1.y, pEMFC.u) annotation (Line(points={{-23,10},{-14,10},{-14,
-          8},{-6,8},{-6,-46.6},{2,-46.6}}, color={0,0,127}));
+  connect(PelRel.y, pEMFC.u) annotation (Line(points={{-23,14},{-14,14},{-14,8},
+          {-6,8},{-6,-46.6},{2,-46.6}}, color={0,0,127}));
   connect(temperatureSensor_before.enthalpyPort_b, pEMFC.enthalpyPort_a1)
     annotation (Line(points={{-24.8,-61.07},{-12.4,-61.07},{-12.4,-62.2},{1.4,
           -62.2}}, color={176,0,0}));

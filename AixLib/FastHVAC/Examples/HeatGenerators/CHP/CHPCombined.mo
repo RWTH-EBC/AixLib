@@ -19,11 +19,24 @@ model CHPCombined
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-86,0})));
-  Modelica.Blocks.Sources.Constant T_source1(k=1)
-    annotation (Placement(transformation(extent={{-44,0},{-24,20}})));
   Components.HeatGenerators.CHP.CHPCombined cHPCombined(
-    paramPEM=Data.CHP.FuelcellPEM.MorrisonPEMFC(), CHPType=2)
+    P_elRated_prescribed=5580,
+    omega_prescribed=0.78,
+    eta_el_prescribed=0.26,
+    EfficiencyByDatatable=true,
+    WarmupTime=5000,
+    CooldownTime=1200,
+    CHPType=1)
     annotation (Placement(transformation(extent={{-18,-66},{38,-32}})));
+  Modelica.Blocks.Sources.Ramp P_elRel(
+    height=0.8,
+    duration=36000,
+    offset=0.2) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-40,34})));
+  Modelica.Blocks.Sources.Constant P_elRelConstant(k=1)
+    annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
 equation
   connect(fluidSource.enthalpyPort_b, temperatureSensor_before.enthalpyPort_a)
     annotation (Line(
@@ -45,14 +58,14 @@ equation
       smooth=Smooth.None));
   connect(booleanOnOffCHP1.y, cHPCombined.OnOff) annotation (Line(points={{-75,
           0},{-66,0},{-66,-16},{15.6,-16},{15.6,-32.34}}, color={255,0,255}));
-  connect(T_source1.y, cHPCombined.PelRel) annotation (Line(points={{-23,10},{
-          -18,10},{-18,8},{-6.1,8},{-6.1,-32.34}}, color={0,0,127}));
   connect(temperatureSensor_before.enthalpyPort_b, cHPCombined.enthalpyPort_a1)
     annotation (Line(points={{-24.8,-61.07},{-22,-61.07},{-22,-49},{-18,-49}},
         color={176,0,0}));
   connect(cHPCombined.enthalpyPort_b1, temperatureSensor_after.enthalpyPort_a)
     annotation (Line(points={{38.35,-49.34},{38.35,-61.07},{42.96,-61.07}},
         color={176,0,0}));
+  connect(P_elRelConstant.y, cHPCombined.PelRel) annotation (Line(points={{-31,
+          0},{-6.1,0},{-6.1,-32.34}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=72000, Interval=60),
