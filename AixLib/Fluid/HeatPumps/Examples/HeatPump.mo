@@ -35,8 +35,8 @@ model HeatPump
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    use_comIne=false,
-    comIneFre_constant=1,
+    use_refIne=false,
+    refIneFre_constant=1,
     scalingFactor=1,
     redeclare model PerDataChi =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
@@ -87,8 +87,8 @@ model HeatPump
         origin={54,-64})));
   Modelica.Blocks.Logical.Hysteresis hys(
     pre_y_start=true,
-    uLow=273.15 + 60,
-    uHigh=273.15 + 70)
+    uLow=273.15 + 35,
+    uHigh=273.15 + 40)
     annotation (Placement(transformation(extent={{64,50},{44,70}})));
   Modelica.Blocks.Math.BooleanToReal booleanToReal
     annotation (Placement(transformation(extent={{30,30},{10,50}})));

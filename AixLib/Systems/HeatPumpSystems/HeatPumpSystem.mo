@@ -1,7 +1,7 @@
 within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   "Model containing the basic heat pump block and different control blocks(optional)"
-
+  import Modelica.Blocks.Types.Init;
   Fluid.HeatPumps.HeatPump heatPump(
     redeclare final package Medium_con = Medium_con,
     redeclare final package Medium_eva = Medium_eva,
@@ -13,7 +13,7 @@ model HeatPumpSystem
     final VEva=VEva,
     final dpEva_nominal=dpEva_nominal,
     final dpCon_nominal=dpCon_nominal,
-    final comIneFre_constant=comIneFre_constant,
+    final refIneFre_constant=comIneFre_constant,
     final CEva=CEva,
     final GEva=GEva,
     final CCon=CCon,
@@ -25,8 +25,12 @@ model HeatPumpSystem
     final use_ConCap=false,
     use_revHP=false,
     realToBoolean(final threshold=Modelica.Constants.eps),
-    final use_comIne=true,
-    nthOrder=nthOrder)
+    final use_refIne=true,
+    nthOrder=nthOrder,
+    final deltaM_con=deltaM_con,
+    yRefIne_start=yRefIne_start,
+    initType=initType,
+    final deltaM_eva=deltaM_eva)
     annotation (Placement(transformation(extent={{-24,-32},{26,28}})));
   Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final use_minRunTime=use_minRunTime,
@@ -239,7 +243,9 @@ model HeatPumpSystem
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_nominal=mFlow_evaNominal) if not use_conPum
+    final m_flow_nominal=mFlow_evaNominal,
+    final m_flow_small=1E-4*abs(mFlow_evaNominal),
+    final show_T=false) if                    not use_conPum
                                                             annotation (
       Placement(transformation(
         extent={{6,-6},{-6,6}},
@@ -248,7 +254,9 @@ model HeatPumpSystem
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_nominal=mFlow_conNominal) if not use_evaPum
+    final m_flow_nominal=mFlow_conNominal,
+    final m_flow_small=1E-4*abs(mFlow_conNominal),
+    final show_T=false) if                    not use_evaPum
                                                             annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -285,7 +293,9 @@ model HeatPumpSystem
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_nominal=mFlow_evaNominal) if not use_secHeaGen
+    final m_flow_nominal=mFlow_evaNominal,
+    final m_flow_small=1E-4*abs(mFlow_evaNominal),
+    final show_T=false) if                    not use_secHeaGen
     "Used if monovalent HP System" annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=270,
@@ -355,6 +365,19 @@ model HeatPumpSystem
       tab="Security Control",
       group="Anti Freeze Control",
       enable=use_sec and use_antFre));
+  parameter Real deltaM_con=0.1
+    "Fraction of nominal mass flow rate where transition to turbulent occurs"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+  parameter Real deltaM_eva=0.1
+    "Fraction of nominal mass flow rate where transition to turbulent occurs"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+
+  parameter Init initType=Modelica.Blocks.Types.Init.InitialOutput
+    "Type of initialization (InitialState and InitialOutput are identical)"
+    annotation (Dialog(tab="Initialization", group="System Inertia"));
+
+  parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
+    annotation (Dialog(tab="Initialization", group="System Inertia", enable=initType == Init.InitialOutput));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-26.75,-12.25},{-44,-12.25},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -448,9 +471,8 @@ equation
           255,0,255}));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{-70.75,
           -12},{-54,-12},{-54,-7},{-28,-7}}, color={255,0,255}));
-  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{99,40},{102,
-          40},{102,20},{76,20},{76,11.4},{78.6,11.4}},
-                                                     color={0,0,127}));
+  connect(calcQdot.y, calcCOP.QHeat[1]) annotation (Line(points={{99,40},{102,40},
+          {102,20},{76,20},{76,11.4},{78.6,11.4}},   color={0,0,127}));
   connect(const.y, heatPump.T_amb_eva) annotation (Line(points={{71,-42},{68,
           -42},{68,-11.75},{28.75,-11.75}},
                                        color={0,0,127}));
