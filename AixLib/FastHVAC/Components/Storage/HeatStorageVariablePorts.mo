@@ -215,19 +215,26 @@ public
      BaseClasses.HeatTransferOnlyConduction constrainedby
     BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+      Documentation(info =                             "<html><h4>
+  <font color=\"#008000\">Overview</font>
+</h4>
 <p>
-Heat transfer model for heat transfer between two fluid layers.
+  Heat transfer model for heat transfer between two fluid layers.
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<h4>
+  <font color=\"#008000\">Level of Development</font>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+</p>
 </html>
 ",
- revisions="<html>
-<p><ul>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+ revisions="<html><ul>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
+</ul>
 </html>
 "));
 equation
@@ -630,24 +637,65 @@ connect(heatTransfer.therm, layer.port);
           lineColor={0,0,255},
           origin={90,-20},
           rotation=90)}),
-   Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Buffer storage model with support for heating rod and two heating coils. Model with variable connection pairs for loading and unlouding cycles which are defined by the associated <U>storage layer number </U> of the ports.  </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>It represents a buffer storage stratified into n layers where 1 represents the bottom layer and n represents the top layer. The layers are connected to each other allowing heat and fluid transfer. The conductance, buoyancy and enthalpy flow represent the heat transfer between the layers.    </p>
-<p>The geometrical data for the storage is read by records in the DataBase package. In this model the number and the position of connection pairs for loading and unlouding cycles is variable. The position for each connection pair is defined by the associated storage layer number of input and output connection (compare connections tab).</p>
-<p>  The model also includes heat losses over the storage walls (wall, top and bottom).   </p>
-<p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
-<p><a href=\"FastHVAC.Examples.Storage.BufferStorage_variablePorts\">BufferStorage_variablePorts</a></p>
+   Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Buffer storage model with support for heating rod and two heating
+  coils. Model with variable connection pairs for loading and unlouding
+  cycles which are defined by the associated <u>storage layer
+  number</u> of the ports.
+</p>
+<h4>
+  <span style=\"color:#008000\">Level of Development</span>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  It represents a buffer storage stratified into n layers where 1
+  represents the bottom layer and n represents the top layer. The
+  layers are connected to each other allowing heat and fluid transfer.
+  The conductance, buoyancy and enthalpy flow represent the heat
+  transfer between the layers.
+</p>
+<p>
+  The geometrical data for the storage is read by records in the
+  DataBase package. In this model the number and the position of
+  connection pairs for loading and unlouding cycles is variable. The
+  position for each connection pair is defined by the associated
+  storage layer number of input and output connection (compare
+  connections tab).
+</p>
+<p>
+  The model also includes heat losses over the storage walls (wall, top
+  and bottom).
+</p>
+<p>
+  <br/>
+  <b><font style=\"color: #008000;\">Example Results</font></b>
+</p>
+<p>
+  <a href=
+  \"FastHVAC.Examples.Storage.BufferStorage_variablePorts\">BufferStorage_variablePorts</a>
+</p>
 </html>",
-revisions="<html>
-<p><ul>
-<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>January 27, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>Added documentation.</li>
-<li><i>December 16, 2014</i> by Sebastian Stinner:<br/>Implemented.</li>
-
-</ul></p>
+revisions="<html><ul>
+  <li>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    Added documentation.
+  </li>
+  <li>
+    <i>December 16, 2014</i> by Sebastian Stinner:<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end HeatStorageVariablePorts;
