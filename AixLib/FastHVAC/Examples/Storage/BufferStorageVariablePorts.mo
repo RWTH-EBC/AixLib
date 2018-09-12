@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.Storage;
+﻿within AixLib.FastHVAC.Examples.Storage;
 model BufferStorageVariablePorts
 
   extends Modelica.Icons.Example;

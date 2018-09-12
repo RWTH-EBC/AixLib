@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.HeatGenerators;
+﻿within AixLib.FastHVAC.Examples.HeatGenerators;
 package CHP
   extends Modelica.Icons.ExamplesPackage;
 
