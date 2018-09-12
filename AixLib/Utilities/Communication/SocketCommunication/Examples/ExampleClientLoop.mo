@@ -1,6 +1,6 @@
 within AixLib.Utilities.Communication.SocketCommunication.Examples;
 model ExampleClientLoop
-  "Example to include TCP Communication to simple test server in the control loop"
+  "Example to include TCP communication to simple test server in the control loop"
 extends Modelica.Icons.Example;
   Modelica.Blocks.Continuous.FirstOrder system(
     k=1,
@@ -33,7 +33,7 @@ extends Modelica.Icons.Example;
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={50,-10})));
-  Components.TCPCommunicatorExample tCPCommunicatorExample(portExample="27015",
+  Components.TCPCommunicatorExample tCPCommunicatorExample(portExample=27015,
     samplePeriodExample=0.01,
     IP_AddressExample="127.0.0.1")
     "TCP block which sends values and receives values, has no impact on signal"
@@ -68,6 +68,9 @@ equation
             -100},{100,100}}), graphics),
 Documentation(revisions="<html>
 <ul>
+<li><i>August 25, 2018&nbsp;</i>
+         by Thomas Beutlich:<br/>
+         Changed data type of port from String to Integer</li>
   <li><i>September 03, 2013&nbsp;</i>
          by Georg Ferdinand Schneider:<br />
          Revised documented</li>
@@ -78,7 +81,7 @@ Documentation(revisions="<html>
 </html>",
 info="<html>
 
-<p>This is a very simple example to show TCP-Communication functionality.
+<p>This is a very simple example to show the TCP communication functionality.
 A feedback control is modeled where a gain controller controls a first
 order system. The signal is send to a server which returns the send message
 unaltered back to the client.</p>
@@ -105,12 +108,12 @@ to <code>.../AixLib/Resources/SocketCommunicationServer</code>,
 run <code>ExampleServer.exe</code>. The Server is now ready to operate.
 Now simulate <code>ExampleClientLoop</code>.</p>
 
-<h4>Verfication of IP address</h4>
+<h4>Verification of IP address</h4>
 
 <p>Note: Depending on your network settings it may be required to change
 the IP address in <code>ExampleClientLoop.tCPCommunicatorExample</code>.
 Set the IP address to the IP address of your local machine. (You may retrieve
-your local IP adress in Windows from the console (Start -> Run -> insert: \"cmd\" -> ipconfig)).</p>
+your local IP address in Windows from the console (Start -> Run -> insert: \"cmd\" -> ipconfig)).</p>
 
 <h4>Requirements</h4>
 <p>This example and the executable have been tested on Windows 7 64-bit using Dymola 2015 32-bit.</p>
