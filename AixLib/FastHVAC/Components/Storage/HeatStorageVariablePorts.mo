@@ -21,7 +21,7 @@ public
     "Mediums charastics HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-  parameter Modelica.SIunits.Temperature T_start=323.15
+  parameter Modelica.SIunits.Temperature[n] T_start=fill(293.15, n)
     "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
   parameter Modelica.SIunits.Temperature T_start_wall=293.15
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
@@ -39,7 +39,7 @@ public
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
+      AixLib.DataBase.Storage.Generic_500l() "Storage data"
     annotation (choicesAllMatching);
   parameter Integer[n_load_cycles, 2] load_cycles= {{n,1},{n,1}}
     "Loading cycle connection pairs (upper position first)"
@@ -95,7 +95,7 @@ public
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor layer[n](C=
         fill(data.hTank*Modelica.Constants.pi*(data.dTank/2)^2*medium.rho*medium.c
-        /n, n), T(start=fill(T_start, n))) annotation (Placement(
+        /n, n), T(start=T_start))             annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -172,7 +172,7 @@ public
                            out
     annotation (Placement(transformation(extent={{90,90},{110,110}}),iconTransformation(extent={{50,70},{70,90}})));
   BaseClasses.HeatingCoil heatingCoil1(
-    T_start=T_start,
+    T_start=T_start[n],
     dis_HC=dis_HC1,
     alpha_HC=alpha_HC1,
     medium_HC=mediumHC1,
@@ -183,7 +183,7 @@ public
         rotation=270,
         origin={-72,59})));
   BaseClasses.HeatingCoil heatingCoil2(
-    T_start=T_start,
+    T_start=T_start[n],
     dis_HC=dis_HC2,
     alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
@@ -225,7 +225,7 @@ public
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
 </p>
 </html>
 ",
@@ -647,6 +647,12 @@ connect(heatTransfer.therm, layer.port);
   number</u> of the ports.
 </p>
 <h4>
+  <span style=\"color:#008000\">Level of Development</span>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+</p>
+<h4>
   <span style=\"color:#008000\">Concept</span>
 </h4>
 <p>
@@ -674,7 +680,7 @@ connect(heatTransfer.therm, layer.port);
 </p>
 <p>
   <a href=
-  \"AixLib.FastHVAC.Examples.Storage.BufferStorageVariablePorts\">BufferStorageVariablePorts</a>
+  \"FastHVAC.Examples.Storage.BufferStorage_variablePorts\">BufferStorage_variablePorts</a>
 </p>
 </html>",
 revisions="<html><ul>
