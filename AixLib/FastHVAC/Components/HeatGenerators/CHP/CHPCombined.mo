@@ -10,21 +10,23 @@ model CHPCombined
         "ICE",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",radioButtons = true));
   parameter Boolean EfficiencyByDatatable=true
     "Use datasheet values for efficiency calculations" annotation(Dialog(group = "Model Selection"));
+    parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group = "Model Selection"));
   parameter AixLib.FastHVAC.Data.CHP.Engine.BaseDataDefinition paramIFC=
       AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
     "Record for IFC Parametrization"
-    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1,group = "Model Selection"));
+    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1,tab = "Record Based Model", group="CHP Type Records"));
   parameter
     AixLib.FastHVAC.Data.CHP.FuelcellPEM.BaseDataDefinition paramPEM=
       AixLib.FastHVAC.Data.CHP.FuelcellPEM.MorrisonPEMFC()
          "Record for PCM Parametrization"
     annotation (choicesAllMatching=true, Dialog(enable=
-          EfficiencyByDatatable and CHPType == 2,group = "Model Selection"));
+          EfficiencyByDatatable and CHPType == 2,tab = "Record Based Model", group="CHP Type Records"));
     AixLib.FastHVAC.Data.CHP.FuelcellSOFC.BaseDataDefinition paramSOFC=
       AixLib.FastHVAC.Data.CHP.FuelcellSOFC.MorrisonSOFC()
          "Record for SOFC Parametrization"
     annotation (choicesAllMatching=true, Dialog(enable=
-          EfficiencyByDatatable and CHPType == 3,group = "Model Selection"));
+          EfficiencyByDatatable and CHPType == 3,tab = "Record Based Model", group="CHP Type Records"));
+
 
   /* *******************************************************************
   Medium
@@ -39,30 +41,30 @@ model CHPCombined
 
 
 
-  parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group="Control and operation"));
 
-  parameter Modelica.SIunits.Power P_elRated_prescribed = 5000 annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+
+  parameter Modelica.SIunits.Power P_elRated_prescribed = 5000 annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Efficiency eta_el_prescribed = 0.25 "CHP's electrical efficiency  "
-  annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Efficiency omega_prescribed = 0.65 "CHP's total efficiency "
-  annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Power P_elStandby_prescribed=-90
     "electrical consumption in standby mode"
-                                            annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+                                            annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Power P_elStop_prescribed=-190
     "electrical consumption during shutdown mode"
-                                                 annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+                                                 annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Power P_elStart_prescribed=-190
       "electrical consumption during startup"
-                                             annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+                                             annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauQ_th_stop_prescribed = 35
-  "time constant for thermal start behavior" annotation (Dialog(tab = "ICE", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  "time constant for thermal start behavior" annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauQ_th_start_prescribed = 320
-  "time constant for stop behaviour" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  "time constant for stop behaviour" annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauP_el_prescribed = 5
-  "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed CHP Model", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Time tauQ_th_loss_prescribed = 100 annotation (Dialog(tab = "Prescribed PEM Model", group = "Prescribed PEM model",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Efficiency eta_PCU_presribed = 0.95 "Efficiency of the PCU" annotation (Dialog(tab = "Prescribed PEM Model", group = "Prescribed PEM model",enable=not EfficiencyByDatatable));
+  "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Time tauQ_th_loss_prescribed = 100 annotation (Dialog(tab = "Prescribed Model", group = "PEM Fuel Cell",enable=not EfficiencyByDatatable and CHPType==2));
+  parameter Modelica.SIunits.Efficiency eta_PCU_presribed = 0.95 "Efficiency of the PCU" annotation (Dialog(tab = "Prescribed Model", group = "PEM Fuel Cell",enable=not EfficiencyByDatatable and CHPType==2));
 
   // Calculation of normative capacities for ICE and prescribed calculation to get(for PEM empirical calculation methods are used)
 protected
@@ -197,7 +199,7 @@ public
     annotation (Placement(transformation(
         extent={{-14,14},{14,-14}},
         rotation=-90,
-        origin={-126,108}),iconTransformation(
+        origin={-130,108}),iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
         origin={-58,98})));
@@ -205,7 +207,7 @@ public
   Modelica.Blocks.Interfaces.BooleanInput StopIn if not withController
     annotation (Placement(transformation(extent={{-14,-14},{14,14}},
         rotation=270,
-        origin={-102,108}),
+        origin={-112,108}),
         iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
@@ -241,7 +243,7 @@ public
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-142,66})));
+        origin={-140,66})));
 protected
   Modelica.Blocks.Interfaces.BooleanInput Start                       annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
@@ -259,8 +261,7 @@ protected
         origin={-68,108})), Dialog(enable=false));
 public
   Controller.SwitchCounter                     switchCounter
-    annotation (Placement(transformation(extent={{-152,72},
-            {-132,92}})));
+    annotation (Placement(transformation(extent={{-152,72},{-132,92}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_loss(T=tauQ_th_loss)
     annotation (Placement(transformation(extent={{-46,-6},{-34,6}})));
   Modelica.Blocks.Sources.RealExpression AncillaryConsumption(y=Pel_anc)
@@ -295,11 +296,12 @@ equation
      // If PEM
       else
       //elseif CHPType ==2 then
+        sigma = 0; //dummy
+        omega = 0; //dummy
         eff_el = paramPEM.eta_0  + paramPEM.eta_1 * P_elDC + paramPEM.eta_2 *P_elDC^2;
         eta_PCU = paramPEM.u_0  + paramPEM.u_1 * P_elDC + paramPEM.u_2 *P_elDC^2;
         eff_th = 0; //dummy
-        sigma = 0; //dummy
-        omega = 0; //dummy
+
       end if;
 
   // fixed efficiencies
@@ -355,6 +357,7 @@ equation
   elseif CHPType == 2 then
     P_elDC = LimiterPel.y;
      if OnOff then
+         //Startvorgang
          if Start then
            firstOrderPel.u = P_elStart;
            firstOrderQ_start.u = 0;
@@ -362,6 +365,7 @@ equation
            firstOrderQ_loss.u = 0;
            Pel_anc = paramPEM.PelStartANC;
            firstOrderEFuel.u = dotE_start;
+         //Normalbetrieb
          else
            firstOrderPel.u = PelDemand.y;
            firstOrderQ_start.u = paramPEM.r_0 + paramPEM.r_1*(P_elDC)^paramPEM.alpha_0 + paramPEM.r_2*(Modelica.SIunits.Conversions.to_degC(T_flow.T) - paramPEM.T_0)^paramPEM.alpha_1;
@@ -371,6 +375,7 @@ equation
            firstOrderEFuel.u = P_elDC/eff_el;
          end if;
      else
+           //Stoppvorgang
          if Stop then
            firstOrderPel.u = Modelica.Constants.eps; // not zero to prevent numerical issues
            firstOrderQ_start.u = 0;
@@ -378,6 +383,7 @@ equation
            firstOrderQ_loss.u = 0;
            Pel_anc = paramPEM.PelStopANC;
            firstOrderEFuel.u = dotE_stop;
+           //Standby
          else
            firstOrderPel.u = Modelica.Constants.eps; // not zero to prevent numerical issues
            firstOrderQ_start.u = 0;
@@ -447,25 +453,23 @@ equation
 
   if withController then
     connect(StartStopController.Stop, Stop)
-    annotation (Line(points={{-130.8,61.8},{-110,61.8},{-110,68},{-96,68}},
+    annotation (Line(points={{-128.8,61.8},{-110,61.8},{-110,68},{-96,68}},
                                                                          color={255,0,255}));
     connect(StartStopController.Start, Start)
-    annotation (Line(points={{-130.8,70.8},{-116,70.8},{-116,50},{-96,50}},
+    annotation (Line(points={{-128.8,70.8},{-116,70.8},{-116,50},{-96,50}},
                                                                          color={255,0,255}));
   else
-    connect(StartIn, Start) annotation (Line(points={{-126,108},{-126,88},{-116,
-            88},{-116,50},{-96,50}},                                                                 color={255,0,255}));
+    connect(StartIn, Start) annotation (Line(points={{-130,108},{-130,88},{-116,88},{-116,
+            50},{-96,50}},                                                                           color={255,0,255}));
   end if;
-  connect(OnOff, switchCounter.u) annotation (Line(points={{-154,
-          108},{-154,82},{-151,82}},                                                              color={255,0,255}));
-  connect(OnOff, StartStopController.OnOff) annotation (Line(points={{-154,
-          108},{-154,82},{-156,82},{-156,66},{-152,
-          66}},                                color={255,0,255}));
-  connect(Qth.u2, StartStopController.OnOff) annotation (Line(points={{10.4,26},
-          {-2,26},{-2,-18},{-142,-18},{-142,20},{-156,20},{-156,66},{-152,66}},
+  connect(OnOff, switchCounter.u) annotation (Line(points={{-154,108},{-154,82},{-151,82}},       color={255,0,255}));
+  connect(OnOff, StartStopController.OnOff) annotation (Line(points={{-154,108},{-154,82},
+          {-156,82},{-156,66},{-150,66}},      color={255,0,255}));
+  connect(Qth.u2, StartStopController.OnOff) annotation (Line(points={{10.4,26},{-2,26},
+          {-2,-18},{-142,-18},{-142,20},{-156,20},{-156,66},{-150,66}},
                                                                color={255,0,255}));
   connect(StopIn, Stop)
-    annotation (Line(points={{-102,108},{-102,68},{-96,68}},
+    annotation (Line(points={{-112,108},{-112,68},{-96,68}},
                                                            color={255,0,255}));
   connect(LimiterEFuel.y, Capacity[3])
     annotation (Line(points={{-3.4,60},{46.5,60},{46.5,98},{168,98}},

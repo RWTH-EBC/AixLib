@@ -23,10 +23,11 @@ model CHPCombined
     P_elRated_prescribed=5580,
     omega_prescribed=0.78,
     eta_el_prescribed=0.26,
-    EfficiencyByDatatable=true,
     WarmupTime=5000,
     CooldownTime=1200,
-    CHPType=1)
+    withController=true,
+    CHPType=2,
+    EfficiencyByDatatable=false)
     annotation (Placement(transformation(extent={{-18,-66},{38,-32}})));
   Modelica.Blocks.Sources.Ramp P_elRel(
     height=0.8,
