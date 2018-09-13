@@ -231,6 +231,28 @@ replaceable package Medium_Air =
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
         origin={-76,-26})));
+  WallTemp wallTemp2(AngeFactor=0.4328) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-34,38})));
+  WallTemp wallTemp(AngeFactor=0.0358)
+    annotation (Placement(transformation(extent={{-56,22},{-48,30}})));
+  WallTemp wallTemp4(AngeFactor=0.459) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={14,-40})));
+  WallTemp wallTemp5(AngeFactor=0.013) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={60,-34})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=4, k={1,1,1,1})
+    annotation (Placement(transformation(extent={{36,-88},{24,-74}})));
+  WallTemp wallTemp6(AngeFactor=0.013)
+    annotation (Placement(transformation(extent={{-56,-30},{-48,-22}})));
+  WallTemp wallTemp1(AngeFactor=0.0358) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=270,
+        origin={70,-46})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{14,-66.2},{14,-100}}, color={191,0,0}));
@@ -326,11 +348,40 @@ equation
   connect(WestWallToConferenceRoom1.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-72,-26},{-60,-26},{-60,-52},{-20.1,-52},{-20.1,
           -35.4}}, color={191,0,0}));
+  connect(wallTemp5.thermStarComb1, EastWall.thermStarComb_inside) annotation (
+      Line(points={{56,-34},{50,-34},{50,0},{56,0}}, color={191,0,0}));
+  connect(wallTemp1.thermStarComb1, WestWallToMultiPersonOffice.thermStarComb_inside)
+    annotation (Line(points={{70,-50},{70,-58}}, color={191,0,0}));
+  connect(wallTemp4.thermStarComb1, FloorToGround.thermStarComb_inside)
+    annotation (Line(points={{14,-44},{14,-58}}, color={191,0,0}));
+  connect(wallTemp6.thermStarComb1, WestWallToConferenceRoom1.thermStarComb_inside)
+    annotation (Line(points={{-56,-26},{-72,-26}}, color={191,0,0}));
+  connect(wallTemp.thermStarComb1, WestWallToConferenceRoom.thermStarComb_inside)
+    annotation (Line(points={{-56,26},{-72,26}}, color={191,0,0}));
+  connect(wallTemp2.thermStarComb1, activeWallPipeBased.thermStarComb_inside)
+    annotation (Line(points={{-34,42},{-34,48},{20,48},{20,56},{20,56}}, color=
+          {191,0,0}));
+  connect(wallTemp2.WallTempWithFactor, measureBus.CeilingTemp_Openplanoffice)
+    annotation (Line(points={{-34,34},{-34,-52},{-60,-52},{-60,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
+  connect(wallTemp.WallTempWithFactor, multiSum.u[1]) annotation (Line(points={{-48,26},
+          {-40,26},{-40,-52},{44,-52},{44,-77.325},{36,-77.325}},        color=
+          {0,0,127}));
+  connect(wallTemp6.WallTempWithFactor, multiSum.u[2]) annotation (Line(points={{-48,-26},
+          {-40,-26},{-40,-52},{44,-52},{44,-78},{44,-78},{36,-78},{36,-79.775}},
+                       color={0,0,127}));
+  connect(wallTemp5.WallTempWithFactor, multiSum.u[3]) annotation (Line(points={{64,-34},
+          {78,-34},{78,-36},{78,-36},{78,-52},{44,-52},{44,-82.225},{36,-82.225}},
+                       color={0,0,127}));
+  connect(wallTemp1.WallTempWithFactor, multiSum.u[4]) annotation (Line(points={{70,-42},
+          {70,-34},{78,-34},{78,-52},{44,-52},{44,-84.675},{36,-84.675}},
+        color={0,0,127}));
+  connect(wallTemp4.WallTempWithFactor, measureBus.FloorTemp_Openplanoffice)
+    annotation (Line(points={{14,-36},{14,-30},{0,-30},{0,-52},{-60,-52},{-60,
+          -60},{-99.9,-60},{-99.9,-59.9}}, color={0,0,127}));
+  connect(multiSum.y, measureBus.WallTemp_Openplanoffice) annotation (Line(
+        points={{22.98,-81},{-14,-81},{-14,-52},{-60,-52},{-60,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-4,46},{44,36}},
-          lineColor={28,108,200},
-          textString="Solar absorptance ist noch nicht richtig,
-gucken wie das mit PV Anlage ist
-")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end OpenPlanOffice_v2;

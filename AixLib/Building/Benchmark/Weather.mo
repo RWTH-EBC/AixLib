@@ -96,7 +96,7 @@ model Weather
     annotation (Placement(transformation(extent={{100,60},{120,80}})));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(
                          smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments, table=[-1,
-        0.05,0; 0,0.05,0; 1,3.375,8000; 2,3.375,8000])
+        0.05,0; 0,0.05,0; 1,3.375,10125; 2,3.375,10125])
     annotation (Placement(transformation(extent={{-32,-78},{-12,-58}})));
   Modelica.Blocks.Interfaces.RealOutput RLT_Velocity
     "Connector of Real output signals"

@@ -37,7 +37,7 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
 </html>"));
   end Benchmark_22000l;
 
-  record Benchmark_42000l
+  record Benchmark_46000l
     extends DataBase.Storage.BufferStorageBaseDataDefinition(
       hTank=3,
       hLowerPorts=0.05,
@@ -47,7 +47,7 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
       hHC2Up=2.9,
       hHC2Low=0.1,
       hHR=1,
-      dTank=8.444,
+      dTank=8.837,
       sWall=0.005,
       sIns=0.1,
       lambdaWall=60,
@@ -72,5 +72,5 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
 href=\"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and <a
 href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a> </p>
 </html>"));
-  end Benchmark_42000l;
+  end Benchmark_46000l;
 end Storage;

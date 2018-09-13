@@ -44,8 +44,10 @@ model Generation_v2
     //Generation Aircooler
     parameter Real m_flow_nominal_generation_aircooler = 0 annotation(Dialog(tab = "generation_aircooler"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_aircooler = 0 annotation(Dialog(tab = "generation_aircooler"));
-    parameter Real m_flow_nominal_generation_air_max annotation(Dialog(tab = "generation_aircooler"));
-    parameter Real m_flow_nominal_generation_air_min annotation(Dialog(tab = "generation_aircooler"));
+    parameter Real m_flow_nominal_generation_air_small_max annotation(Dialog(tab = "generation_aircooler"));
+    parameter Real m_flow_nominal_generation_air_small_min annotation(Dialog(tab = "generation_aircooler"));
+    parameter Real m_flow_nominal_generation_air_big_max annotation(Dialog(tab = "generation_aircooler"));
+    parameter Real m_flow_nominal_generation_air_big_min annotation(Dialog(tab = "generation_aircooler"));
     parameter Modelica.SIunits.Area Area_Heatexchanger_Air = 0 annotation(Dialog(tab = "generation_aircooler"));
     parameter Modelica.SIunits.ThermalConductance Thermal_Conductance_Cold = 0 annotation(Dialog(tab = "generation_aircooler"));
     parameter Modelica.SIunits.ThermalConductance Thermal_Conductance_Warm = 0 annotation(Dialog(tab = "generation_aircooler"));
@@ -100,11 +102,11 @@ model Generation_v2
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
     alphaHC1=alphaHC1_cold,
-    data=DataBase.Storage.Benchmark_42000l(),
     useHeatingCoil2=true,
-    TStart=283.15,
     alphaHC2=alphaHC1_cold,
-    upToDownHC2=false)
+    upToDownHC2=false,
+    TStart=283.15,
+    data=DataBase.Storage.Benchmark_46000l())
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve4(
     y_start=0,
@@ -294,15 +296,20 @@ model Generation_v2
     m_flow_nominal_generation_warmwater=m_flow_nominal_generation_warmwater,
     m_flow_nominal_generation_coldwater=m_flow_nominal_generation_coldwater,
     m_flow_nominal_generation_aircooler=m_flow_nominal_generation_aircooler,
-    m_flow_nominal_generation_air_max=m_flow_nominal_generation_air_max,
-    m_flow_nominal_generation_air_min=m_flow_nominal_generation_air_min,
     redeclare package Medium_Water = Medium_Water,
     dpValve_nominal_generation_aircooler=dpValve_nominal_generation_aircooler,
     dpHeatexchanger_nominal=dpHeatexchanger_nominal,Area_Heatexchanger_Air=
         Area_Heatexchanger_Air,
     Thermal_Conductance_Cold=Thermal_Conductance_Cold,
-    Thermal_Conductance_Warm=Thermal_Conductance_Warm)
+    Thermal_Conductance_Warm=Thermal_Conductance_Warm,
+    m_flow_nominal_generation_air_big_max=m_flow_nominal_generation_air_big_max,
+    m_flow_nominal_generation_air_big_min=m_flow_nominal_generation_air_big_min,
+    m_flow_nominal_generation_air_small_max=
+        m_flow_nominal_generation_air_small_max,
+    m_flow_nominal_generation_air_small_min=
+        m_flow_nominal_generation_air_small_min)
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
+
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{72,58},{60,70}})));
@@ -478,8 +485,8 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(generation_Aircooling_v2_1.measureBus, measureBus) annotation (Line(
-      points={{-60,-36},{-66,-36},{-66,-30},{-98,-30},{-98,88},{-50,88},{-50,90},
-          {-50,90}},
+      points={{-59.4,-36.8},{-66,-36.8},{-66,-30},{-98,-30},{-98,88},{-50,88},{-50,
+          90},{-50,90}},
       color={255,204,51},
       thickness=0.5));
   connect(HotWater.heatportOutside, prescribedTemperature.port) annotation (

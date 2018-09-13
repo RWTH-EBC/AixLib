@@ -27,17 +27,17 @@ model FullModel_v4
     annotation (Placement(transformation(extent={{62,64},{74,76}})));
   Transfer.Transfer_TBA.Full_Transfer_TBA_Heatexchanger_v2
     full_Transfer_TBA_Heatexchanger(
+    m_flow_nominal_openplanoffice=2.394,
+    m_flow_nominal_canteen=1.086,
+    m_flow_nominal_conferenceroom=0.350,
+    m_flow_nominal_multipersonoffice=0.319,
+    m_flow_nominal_workshop=1.654,
     dp_Heatexchanger_nominal=20000,
     dp_Valve_nominal_openplanoffice=30000,
-    m_flow_nominal_openplanoffice=2.394,
     dp_Valve_nominal_conferenceroom=30000,
-    m_flow_nominal_conferenceroom=0.379,
     dp_Valve_nominal_multipersonoffice=30000,
-    m_flow_nominal_multipersonoffice=0.56,
     dp_Valve_nominal_canteen=30000,
-    m_flow_nominal_canteen=1.086,
-    dp_Valve_nominal_workshop=30000,
-    m_flow_nominal_workshop=1.981)
+    dp_Valve_nominal_workshop=30000)
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
   AixLib.Building.Benchmark.LogModel
            logModel
@@ -55,27 +55,25 @@ model FullModel_v4
     pipe_length_warmwater=25,
     pipe_length_coldwater=25,
     alphaHC1_warm=500,
-    m_flow_nominal_generation_air_max=28.649,
-    m_flow_nominal_generation_air_min=22.537,
     pipe_diameter_hotwater=0.0809,
     pipe_diameter_warmwater=0.0809,
     pipe_nodes=2,
     n_probes=60,
-    Thermal_Conductance_Cold=115000/10,
-    Thermal_Conductance_Warm=145000/10,
     m_flow_nominal_hotwater=7.953,
     m_flow_nominal_warmwater=7.999,
-    m_flow_nominal_coldwater=7.914,
-    pipe_diameter_coldwater=0.0809,
     vol_1=0.024,
     vol_2=0.024,
     R_loss_1=2.8,
     R_loss_2=2.8,
     m_flow_nominal_generation_warmwater=6.601,
     m_flow_nominal_generation_coldwater=5.218,
-    m_flow_nominal_generation_aircooler=6.601,
-    Area_Heatexchanger_Air=1130.06,
     alphaHC1_cold=700,
+    alphaHC2_warm=500,
+    m_flow_nominal_coldwater=5.628,
+    pipe_diameter_coldwater=0.0689,
+    Thermal_Conductance_Cold=97000/10,
+    m_flow_nominal_generation_aircooler=3.314,
+    Thermal_Conductance_Warm=193000/10,
     dpHeatexchanger_nominal=20000,
     dpValve_nominal_generation_hot=40000,
     T_conMax_1=328.15,
@@ -83,13 +81,17 @@ model FullModel_v4
     dpValve_nominal_warmwater=37000,
     dpValve_nominal_coldwater=40000,
     dpValve_nominal_generation_aircooler=60000,
-    Earthtemperature_start=283.15,
-    alphaHC2_warm=500)
+    m_flow_nominal_generation_air_small_max=7.5808,
+    m_flow_nominal_generation_air_small_min=6.1376,
+    m_flow_nominal_generation_air_big_max=30.1309,
+    m_flow_nominal_generation_air_big_min=23.9081,
+    Area_Heatexchanger_Air=856.01,
+    Earthtemperature_start=283.15)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
     surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
     Model=1,
-    A=100)                                                                                                                                                                                  annotation(Placement(transformation(extent={{17,92},
+    A=169.594)                                                                                                                                                                              annotation(Placement(transformation(extent={{17,92},
             {6,104}})));
   Modelica.Blocks.Math.Gain gain(k=2)
     annotation (Placement(transformation(extent={{36,92},{28,100}})));
@@ -217,17 +219,19 @@ equation
     annotation (Line(points={{-60,-54},{-34,-54},{-34,-58},{0,-58}}, color={0,127,
           255}));
   connect(generation_v2_1.Fluid_out_warm, full_Transfer_TBA_Heatexchanger.Fluid_in_warm)
-    annotation (Line(points={{-60,-48},{-18,-48},{-18,-66},{36,-66},{36,-47.4},{
-          60,-47.4}}, color={0,127,255}));
+    annotation (Line(points={{-60,-48},{-18,-48},{-18,-66},{36,-66},{36,-47.4},
+          {60,-47.4}},color={0,127,255}));
   connect(full_Transfer_TBA_Heatexchanger.Fluid_out_warm, generation_v2_1.Fluid_in_warm)
     annotation (Line(points={{60,-51.4},{36,-51.4},{36,-66},{-18,-66},{-18,-52},
           {-60,-52}}, color={0,127,255}));
   connect(full_Transfer_TBA_Heatexchanger.Fluid_in_cold, generation_v2_1.Fluid_out_cold)
-    annotation (Line(points={{60,-54},{36,-54},{36,-66},{-18,-66},{-18,-58},{-60,
-          -58}}, color={0,127,255}));
+    annotation (Line(points={{60,-54},{36,-54},{36,-66},{-18,-66},{-18,-58},{
+          -60,-58}},
+                 color={0,127,255}));
   connect(full_Transfer_TBA_Heatexchanger.Fluid_out_cold, generation_v2_1.Fluid_in_cold)
-    annotation (Line(points={{60,-58},{36,-58},{36,-66},{-18,-66},{-18,-54},{-60,
-          -54}}, color={0,127,255}));
+    annotation (Line(points={{60,-58},{36,-58},{36,-66},{-18,-66},{-18,-54},{
+          -60,-54}},
+                 color={0,127,255}));
   connect(vol1.ports[1], office.Air_out) annotation (Line(points={{16,68},{16,
           -16},{36,-16},{36,-8},{36.2,-8},{36.2,0}}, color={0,127,255}));
   connect(vol1.ports[2], weather.Air_in)

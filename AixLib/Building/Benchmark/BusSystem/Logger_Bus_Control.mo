@@ -39,8 +39,10 @@ expandable connector Logger_Bus_Control
 
   // Fan m_flow
   Boolean OnOff_RLT "On/Off Signal for the RLT fan" annotation (__Dymola_Tag={"ControlBus"});
-  Boolean OnOff_Aircooler "On/Off Signal for the aircooler fan" annotation (__Dymola_Tag={"ControlBus"});
-  Real Fan_Aircooler "Normalized Massflow of Aircooler" annotation (__Dymola_Tag={"ControlBus"});
+  Boolean OnOff_Aircooler_small "On/Off Signal for the aircooler fan" annotation (__Dymola_Tag={"ControlBus"});
+  Boolean OnOff_Aircooler_big "On/Off Signal for the aircooler fan" annotation (__Dymola_Tag={"ControlBus"});
+  Real Fan_Aircooler_small "Normalized Massflow of Aircooler" annotation (__Dymola_Tag={"ControlBus"});
+  Real Fan_Aircooler_big "Normalized Massflow of Aircooler" annotation (__Dymola_Tag={"ControlBus"});
   Real Fan_RLT "Normalized Massflow of the RLT-fan" annotation (__Dymola_Tag={"ControlBus"});
 
   // Valvepositions

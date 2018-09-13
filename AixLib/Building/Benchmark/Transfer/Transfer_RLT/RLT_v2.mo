@@ -44,8 +44,8 @@ model RLT_v2
         rotation=90,
         origin={-86,60})));
   Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
-    y_start=0)
+    y_start=0,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to12 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));

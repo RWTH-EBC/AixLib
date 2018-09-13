@@ -19,10 +19,10 @@ model CostsFuelPower
     annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
   Modelica.Blocks.Math.Gain fuel_cost(k=0.0609/(1000*3600))
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
-  Modelica.Blocks.Tables.CombiTable2D combiTable2D(smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
-      table=[0.0,-1,0,0.0001,1; -1,0.11,0.11,0.19,0.19; 6,0.11,0.11,0.19,0.19;
-        6.0001,0.11,0.11,0.27,0.27; 21.9999,0.11,0.11,0.27,0.27; 22,0.11,0.11,
-        0.19,0.19; 25,0.11,0.11,0.19,0.19])
+  Modelica.Blocks.Tables.CombiTable2D combiTable2D(smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments, table=[
+        0.0,-1,0,0.0001,1; -1,0.105,0.105,0.19,0.19; 6,0.105,0.105,0.19,0.19;
+        6.0001,0.105,0.105,0.27,0.27; 21.9999,0.105,0.105,0.27,0.27; 22,0.105,
+        0.105,0.19,0.19; 25,0.105,0.105,0.19,0.19])
     annotation (Placement(transformation(extent={{4,74},{24,94}})));
   Modelica.Blocks.Interfaces.RealOutput minute "Minute of the hour"
     annotation (Placement(transformation(extent={{90,60},{110,80}})));

@@ -192,6 +192,30 @@ model Workshop_v2
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={20,88})));
+  WallTemp wallTemp1(AngeFactor=0.0286) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-52,34})));
+  WallTemp wallTemp2(AngeFactor=0.4232) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-34,34})));
+  WallTemp wallTemp(AngeFactor=0.0286)
+    annotation (Placement(transformation(extent={{-54,-4},{-46,4}})));
+  WallTemp wallTemp3(AngeFactor=0.0286) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={-52,-40})));
+  WallTemp wallTemp4(AngeFactor=0.4604) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={28,-40})));
+  WallTemp wallTemp5(AngeFactor=0.0286) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={72,-44})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=4, k={1,1,1,1})
+    annotation (Placement(transformation(extent={{72,-86},{60,-72}})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{28,-66.2},{28,-100}}, color={191,0,0}));
@@ -279,6 +303,41 @@ equation
   connect(prescribedTemperature3.T, measureBus.AirTemp) annotation (Line(points=
          {{20,95.2},{20,98},{10,98},{10,80},{-20,80},{-20,48},{-60,48},{-60,
           -59.9},{-99.9,-59.9}}, color={0,0,127}));
+  connect(wallTemp1.thermStarComb1, NorthWall.thermStarComb_inside)
+    annotation (Line(points={{-52,38},{-52,56}}, color={191,0,0}));
+  connect(wallTemp2.thermStarComb1, activeWallPipeBased.thermStarComb_inside)
+    annotation (Line(points={{-34,38},{-34,48},{20,48},{20,56},{20,56}}, color=
+          {191,0,0}));
+  connect(wallTemp.thermStarComb1, WestWall.thermStarComb_inside)
+    annotation (Line(points={{-54,0},{-76,0}}, color={191,0,0}));
+  connect(wallTemp3.thermStarComb1, SouthWall.thermStarComb_inside)
+    annotation (Line(points={{-52,-44},{-52,-58}}, color={191,0,0}));
+  connect(wallTemp4.thermStarComb1, FloorToGround.thermStarComb_inside)
+    annotation (Line(points={{28,-44},{28,-58}}, color={191,0,0}));
+  connect(wallTemp5.thermStarComb1, WestWallToCanteen.thermStarComb_inside)
+    annotation (Line(points={{68,-44},{60,-44},{60,-10},{68,-10}}, color={191,0,
+          0}));
+  connect(wallTemp2.WallTempWithFactor, measureBus.CeilingTemp_Workshop)
+    annotation (Line(points={{-34,30},{-34,-52},{-60,-52},{-60,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
+  connect(wallTemp5.WallTempWithFactor, multiSum.u[1]) annotation (Line(points={{76,-44},
+          {82,-44},{82,-44},{82,-44},{82,-75.325},{72,-75.325}},         color=
+          {0,0,127}));
+  connect(wallTemp3.WallTempWithFactor, multiSum.u[2]) annotation (Line(points={{-52,-36},
+          {-52,-28},{-38,-28},{-38,-52},{82,-52},{82,-77.775},{72,-77.775}},
+        color={0,0,127}));
+  connect(wallTemp.WallTempWithFactor, multiSum.u[3]) annotation (Line(points={{-46,0},
+          {-38,0},{-38,-52},{82,-52},{82,-80.225},{72,-80.225}},       color={0,
+          0,127}));
+  connect(wallTemp1.WallTempWithFactor, multiSum.u[4]) annotation (Line(points={{-52,30},
+          {-52,16},{-38,16},{-38,-52},{82,-52},{82,-82.675},{72,-82.675}},
+        color={0,0,127}));
+  connect(wallTemp4.WallTempWithFactor, measureBus.FloorTemp_Workshop)
+    annotation (Line(points={{28,-36},{28,-32},{4,-32},{4,-52},{-60,-52},{-60,
+          -59.9},{-99.9,-59.9}}, color={0,0,127}));
+  connect(multiSum.y, measureBus.WallTemp_Workshop) annotation (Line(points={{
+          58.98,-79},{52,-79},{52,-52},{-60,-52},{-60,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Workshop_v2;

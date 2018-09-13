@@ -72,8 +72,8 @@ model Full_Transfer_TBA_Heatexchanger_v2
     dp_Heatexchanger_nominal=dp_Heatexchanger_nominal,
     pipe_length=70,
     pipe_height=0,
-    pipe_diameter=0.0273,
-    Thermal_Conductance=16397/10)
+    Thermal_Conductance=16397/10,
+    pipe_diameter=0.0161)
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   TBA_Pipe_v3 Canteen(
     dp_Valve_nominal=dp_Valve_nominal_canteen,

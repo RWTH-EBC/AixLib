@@ -179,6 +179,30 @@ model Canteen_v2
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={90,110})));
+  WallTemp wallTemp(AngeFactor=0.0494)
+    annotation (Placement(transformation(extent={{-54,-4},{-46,4}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=4, k={1,1,1,1})
+    annotation (Placement(transformation(extent={{72,-86},{60,-72}})));
+  WallTemp wallTemp1(AngeFactor=0.0224) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-52,34})));
+  WallTemp wallTemp2(AngeFactor=0.4) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={-34,34})));
+  WallTemp wallTemp3(AngeFactor=0.0224) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={-52,-40})));
+  WallTemp wallTemp4(AngeFactor=0.459) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={14,-40})));
+  WallTemp wallTemp5(AngeFactor=0.0494) annotation (Placement(transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={60,-34})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{14,-66.2},{14,-100}}, color={191,0,0}));
@@ -257,11 +281,46 @@ equation
   connect(activeWallPipeBased.SolarRadiationPort, SolarRadiationPort_Roof)
     annotation (Line(points={{42,65.2},{42,65.2},{42,80},{90,80},{90,110}},
         color={255,128,0}));
+  connect(wallTemp.thermStarComb1, WestWallToWorkshop.thermStarComb_inside)
+    annotation (Line(points={{-54,0},{-72,0}}, color={191,0,0}));
+  connect(wallTemp.WallTempWithFactor, multiSum.u[1]) annotation (Line(points={{-46,0},
+          {-40,0},{-40,-52},{90,-52},{90,-75.325},{72,-75.325}},       color={0,
+          0,127}));
+  connect(wallTemp1.thermStarComb1, NorthWall.thermStarComb_inside)
+    annotation (Line(points={{-52,38},{-52,56}}, color={191,0,0}));
+  connect(wallTemp1.WallTempWithFactor, multiSum.u[2]) annotation (Line(points={{-52,30},
+          {-52,14},{-40,14},{-40,-52},{90,-52},{90,-77.775},{72,-77.775}},
+        color={0,0,127}));
+  connect(activeWallPipeBased.thermStarComb_inside, wallTemp2.thermStarComb1)
+    annotation (Line(points={{20,56},{20,48},{-34,48},{-34,38}}, color={191,0,0}));
+  connect(wallTemp2.WallTempWithFactor, measureBus.CeilingTemp_Canteen)
+    annotation (Line(points={{-34,30},{-34,-52},{-60,-52},{-60,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
+  connect(wallTemp3.thermStarComb1, SouthWall.thermStarComb_inside)
+    annotation (Line(points={{-52,-44},{-52,-58}}, color={191,0,0}));
+  connect(wallTemp3.WallTempWithFactor, multiSum.u[3]) annotation (Line(points={{-52,-36},
+          {-52,-28},{-40,-28},{-40,-52},{90,-52},{90,-80},{90,-80},{72,-80},{72,
+          -80.225}},         color={0,0,127}));
+  connect(wallTemp4.thermStarComb1, FloorToGround.thermStarComb_inside)
+    annotation (Line(points={{14,-44},{14,-58}}, color={191,0,0}));
+  connect(wallTemp5.thermStarComb1, Wall_ToOpenplanoffice.thermStarComb_inside)
+    annotation (Line(points={{56,-34},{50,-34},{50,0},{56,0},{56,4.44089e-016}},
+        color={191,0,0}));
+  connect(wallTemp5.WallTempWithFactor, multiSum.u[4]) annotation (Line(points={{64,-34},
+          {70,-34},{70,-52},{90,-52},{90,-82.675},{72,-82.675}},         color=
+          {0,0,127}));
+  connect(wallTemp4.WallTempWithFactor, measureBus.FloorTemp_Canteen)
+    annotation (Line(points={{14,-36},{14,-30},{0,-30},{0,-52},{-60,-52},{-60,
+          -59.9},{-99.9,-59.9}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(multiSum.y, measureBus.WallTemp_Canteen) annotation (Line(points={{
+          58.98,-79},{56,-79},{52,-79},{52,-80},{52,-80},{52,-80},{52,-52},{-60,
+          -52},{-60,-59.9},{-99.9,-59.9}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-4,46},{44,36}},
-          lineColor={28,108,200},
-          textString="Solar absorptance ist noch nicht richtig,
-gucken wie das mit PV Anlage ist
-")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end Canteen_v2;
