@@ -25,10 +25,15 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
   PerDataHea PerformanceDataHeater
                           annotation (Placement(transformation(extent={{13,20},{
             67,76}},  rotation=0)));
-  Utilities.Logical.SmoothSwitch switchQEva(u1(unit="W",displayUnit="kW"),u3(unit="W",displayUnit="kW"),y(unit="W",displayUnit="kW"))
+  Utilities.Logical.SmoothSwitch switchQEva(
+    u1(unit="W", displayUnit="kW"),
+    u3(unit="W", displayUnit="kW"),
+    y(unit="W", displayUnit="kW"))
     "If mode is false, Condenser becomes Evaporator and vice versa"
-    annotation (Placement(transformation(extent={{-66,-22},{-86,-2}})));
-  Utilities.Logical.SmoothSwitch switchQCon(u1(unit="W",displayUnit="kW"),u3(unit="W",displayUnit="kW"),y(unit="W",displayUnit="kW"))
+    annotation (Placement(transformation(extent={{-70,-24},{-90,-4}})));
+  Utilities.Logical.SmoothSwitch switchQCon(                                                            y(unit="W",displayUnit="kW"),
+    u1(unit="W", displayUnit="kW"),
+    u3(unit="W", displayUnit="kW"))
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{72,-22},{92,-2}})));
   Modelica.Blocks.Interfaces.RealOutput Pel(unit="W", displayUnit="kW")
@@ -45,7 +50,10 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
         origin={-46,48})));
   parameter Boolean use_revHP=true
                               "True if the HP is reversible";
-  Utilities.Logical.SmoothSwitch switchPel(u1(unit="W",displayUnit="kW"),u3(unit="W",displayUnit="kW"),y(unit="W",displayUnit="kW"))
+  Utilities.Logical.SmoothSwitch switchPel(
+    u1(unit="W", displayUnit="kW"),
+    u3(unit="W", displayUnit="kW"),
+    y(unit="W", displayUnit="kW"))
     "Whether to use cooling or heating power consumption" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -57,7 +65,7 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
 equation
   assert(use_revHP or (use_revHP==false and sigBusHP.mode==true), "Can't turn to chilling on irreversible HP", level = AssertionLevel.error);
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
-      points={{1.085,103.075},{1.085,104},{-64,104},{-64,-12}},
+      points={{1.085,103.075},{1.085,104},{-68,104},{-68,-14}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -80,7 +88,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switchQEva.y, QEva) annotation (Line(points={{-87,-12},{-92,-12},{-92,
+  connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-92,-14},{-92,
           0},{-110,0}}, color={0,0,127}));
   connect(PerformanceDataHeater.QCon, switchQCon.u1)
     annotation (Line(points={{18.4,17.2},{18.4,-4},{70,-4}}, color={0,0,127}));
@@ -103,9 +111,9 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataHeater.QEva, switchQEva.u1) annotation (Line(points={{61.6,
-          17.2},{61.6,-4},{-64,-4}}, color={0,0,127}));
-  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{
-          -24.4,17.2},{-24.4,-20},{-64,-20}}, color={0,0,127},
+          17.2},{61.6,-6},{-68,-6}}, color={0,0,127}));
+  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-24.4,
+          17.2},{-24.4,-22},{-68,-22}},       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP, PerformanceDataChiller.sigBusHP) annotation (Line(
       points={{1,103},{1,86},{-45.73,86},{-45.73,77.12}},
@@ -117,7 +125,7 @@ equation
   connect(constZero.y, switchPel.u3)
     annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
   connect(constZero.y, switchQEva.u3) annotation (Line(points={{-59,-64},{-62,
-          -64},{-62,-20},{-64,-20}}, color={0,0,127}));
+          -64},{-62,-22},{-68,-22}}, color={0,0,127}));
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{-59,-64},{-52,
           -64},{-52,-38},{70,-38},{70,-20}}, color={0,0,127}));
   connect(switchQCon.y, QCon) annotation (Line(points={{93,-12},{94,-12},{94,0},

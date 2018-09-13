@@ -75,8 +75,6 @@ public
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={60,0})));
-  IcingBlock icingBlock
-    annotation (Placement(transformation(extent={{-172,2},{-152,22}})));
   Modelica.Blocks.Math.Product proRedQEva
     "Based on the icing factor, the heat flow to the evaporator is reduced"
     annotation (Placement(transformation(
@@ -89,6 +87,11 @@ public
         extent={{-6,-6},{6,6}},
         rotation=270,
         origin={-80,-86})));
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
+        Modelica.Constants.eps) annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=270,
+        origin={-8,78})));
 equation
 
   assert(minSou > sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
@@ -126,20 +129,6 @@ equation
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u2)
     annotation (Line(points={{52,-45},{52,-56},{72,-56}},
                                                        color={0,0,127}));
-  connect(sigBusHP.onOff, switchQCon.u2) annotation (Line(
-      points={{1.075,104.07},{24,104.07},{24,-12},{52,-12},{52,-22}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.onOff, switchPel.u2) annotation (Line(
-      points={{1.075,104.07},{-20,104.07},{-20,-18},{-56,-18},{-56,-22}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{-1.55431e-15,
           23.2},{-1.55431e-15,-16},{44,-16},{44,-22}},
                                   color={0,0,127}));
@@ -189,6 +178,18 @@ equation
   connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{76,-88.6},{66,
           -88.6},{66,-88},{-60,-88},{-60,-62},{-76.4,-62},{-76.4,-78.8}}, color
         ={0,0,127}));
+  connect(sigBusHP.N, greaterThreshold.u) annotation (Line(
+      points={{1.075,104.07},{-8,104.07},{-8,85.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-8,71.4},
+          {-8,48},{-20,48},{-20,-12},{-56,-12},{-56,-22}}, color={255,0,255}));
+  connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-8,71.4},
+          {-8,48},{-20,48},{-20,-12},{52,-12},{52,-22}}, color={255,0,255}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),
