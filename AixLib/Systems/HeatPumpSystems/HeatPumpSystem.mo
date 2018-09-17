@@ -23,11 +23,8 @@ model HeatPumpSystem
     final scalingFactor=scalingFactor,
     final use_EvaCap=use_evaCap,
     final use_ConCap=false,
-    use_revHP=false,
     final use_refIne=true,
-    nthOrder=nthOrder,
     final deltaM_con=deltaM_con,
-    yRefIne_start=yRefIne_start,
     final deltaM_eva=deltaM_eva,
     final initType=initType,
     final pCon_start=pCon_start,
@@ -40,7 +37,15 @@ model HeatPumpSystem
     final massDynamics=massDynamics,
     final energyDynamics=energyDynamics,
     final mSenFacCon=mSenFacCon,
-    final mSenFacEva=mSenFacEva)
+    final mSenFacEva=mSenFacEva,
+    final tauSenT=tauSenT,
+    final transferHeat=transferHeat,
+    final tauHeaTra=tauHeaTra,
+    final TAmbCon_nom=TAmbCon_nom,
+    final TAmbEva_nom=TAmbEva_nom,
+    final use_revHP=false,
+    final nthOrder=nthOrder,
+    final yRefIne_start=yRefIne_start)
     annotation (Placement(transformation(extent={{-24,-32},{26,28}})));
   Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final use_minRunTime=use_minRunTime,
@@ -60,6 +65,42 @@ model HeatPumpSystem
     final use_antFre=use_antFre,
     final TantFre=TantFre) if             use_sec
     annotation (Placement(transformation(extent={{-102,-24},{-72,6}})));
+  Fluid.Movers.SpeedControlled_y           pumSin(
+    redeclare final package Medium = Medium_con,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final p_start=pCon_start,
+    final T_start=TCon_start,
+    final X_start=XCon_start,
+    final allowFlowReversal=allowFlowReversalCon,
+    final m_flow_small=1E-4*abs(mFlow_conNominal),
+    final init=initType,
+    final addPowerToMedium=addPowerToMediumCon,
+    final per=perCon,
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) if
+                            use_conPum
+    "Fan or pump at sink side of HP" annotation (Placement(transformation(
+        extent={{8,-8},{-8,8}},
+        rotation=90,
+        origin={-20,56})));
+  Fluid.Movers.SpeedControlled_y      pumSou(
+    redeclare package Medium = Medium_eva,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    final p_start=pEva_start,
+    final T_start=TEva_start,
+    final X_start=XEva_start,
+    final allowFlowReversal=allowFlowReversalEva,
+    final m_flow_small=1E-4*abs(mFlow_evaNominal),
+    final init=initType,
+    final addPowerToMedium=addPowerToMediumEva,
+    final per=perEva,
+    final inputType=AixLib.Fluid.Types.InputType.Continuous) if
+                            use_evaPum
+    "Fan or pump at source side of HP" annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=90,
+        origin={26,-60})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
     redeclare model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP,
@@ -97,16 +138,12 @@ model HeatPumpSystem
     final lowBouPel=200,
     final n_Pel=4)
     annotation (Placement(transformation(extent={{92,-44},{114,-18}})));
-  Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-112,-94},{-82,-60}}),
-        iconTransformation(extent={{-100,-86},{-82,-60}})));
 
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-150,64},{-120,94}})));
- Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(
-        senTSup.T - sigBusHP.T_flow_co)*Medium_con.heatCapacity_cp())
-    annotation (Placement(transformation(extent={{62,-36},{80,-16}})));
+ Modelica.Blocks.Sources.RealExpression calcQHeat(final y=heatPump.sigBusHP.m_flow_co
+        *(senTSup.T - heatPump.sigBusHP.T_flow_co)*4180)
+    annotation (Placement(transformation(extent={{62,-36},{80,-18}})));
   Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock if
     use_deFro
     annotation (Placement(transformation(extent={{-72,-74},{-62,-64}})));
@@ -142,8 +179,8 @@ model HeatPumpSystem
     allowFlowReversal=allowFlowReversalCon,
     m_flow_nominal=mFlow_conNominal,
     dp_nominal=0,
-    final m_flow_small=1E-4*abs(mFlow_conNominal)) if
-                             use_secHeaGen annotation (Placement(transformation(
+    final m_flow_small=1E-4*abs(mFlow_conNominal),
+    Q_flow_nominal=2000) if  use_secHeaGen annotation (Placement(transformation(
         extent={{12,-12},{-12,12}},
         rotation=-90,
         origin={32,64})));
@@ -165,8 +202,10 @@ model HeatPumpSystem
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
     tauHeaTra=1200,
-    T_start=308.15,
-    final TAmb=291.15) "Supply temperature"
+    final m_flow_small=1E-4*mFlow_conNominal,
+    final initType=initType,
+    final T_start=TCon_start,
+    TAmb=291.15)       "Supply temperature"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=90,
         origin={32,98})));
@@ -175,8 +214,7 @@ model HeatPumpSystem
     annotation (Dialog(group="Sink"),choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(group="Source"), choicesAllMatching=true);
-  parameter Boolean use_secHeaGen=false
-                                       "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
+  parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
   replaceable model secHeatGen =
@@ -189,20 +227,15 @@ model HeatPumpSystem
   parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(group="Source"),choices(checkBox=true));
-  replaceable
-  AixLib.Fluid.Movers.SpeedControlled_Nrpm pumSin if use_conPum constrainedby
-    Fluid.Movers.BaseClasses.PartialFlowMachine
-    "Fan or pump at sink side of HP" annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
-        rotation=90,
-        origin={-20,56})), choicesAllMatching=true,Dialog(group="Sink",enable=use_conPum));
-  replaceable
-  Fluid.Movers.SpeedControlled_Nrpm   pumSou if use_evaPum constrainedby
-    Fluid.Movers.BaseClasses.PartialFlowMachine
-    "Fan or pump at source side of HP" annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
-        rotation=90,
-        origin={26,-60})),choicesAllMatching=true,Dialog(group="Source",enable=use_evaPum));
+  parameter Fluid.Movers.Data.Generic perEva "Record with performance data"
+    annotation (choicesAllMatching=true, Dialog(
+      group="Source",
+      enable=use_evaPum));
+  parameter Fluid.Movers.Data.Generic perCon "Record with performance data"
+    annotation (choicesAllMatching=true, Dialog(
+      group="Sink",
+      enable=use_conPum));
+
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",
@@ -403,14 +436,51 @@ model HeatPumpSystem
   parameter Real mSenFacEva=1
     "Factor for scaling the sensible thermal mass of the volume in the evaporator"
     annotation (Dialog(tab="Dynamics", group="Evaporator"));
-//Advanced
+//Assumptions
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation (Dialog(tab="Advanced", group="Assumptions"),            choices(checkBox=true));
+    annotation (Dialog(tab="Assumptions", group="Evaporator"),            choices(checkBox=true));
   parameter Boolean allowFlowReversalCon=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation (Dialog(tab="Advanced", group="Assumptions"),           choices(checkBox=true));
-
+    annotation (Dialog(tab="Assumptions", group="Condenser"),           choices(checkBox=true));
+  parameter Boolean addPowerToMediumEva=true
+    "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
+    annotation (Dialog(tab="Assumptions", group="Evaporator",
+      enable=use_evaPum), choices(checkBox=true));
+  parameter Boolean addPowerToMediumCon=true
+    "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
+    annotation (Dialog(tab="Assumptions", group="Condenser",
+      enable=use_conPum), choices(checkBox=true));
+  parameter Modelica.SIunits.Time tauSenT=1
+    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
+  parameter Boolean transferHeat=true
+    "If true, temperature T converges towards TAmb when no flow"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
+  parameter Modelica.SIunits.Time tauHeaTra=1200
+    "Time constant for heat transfer in temperature sensors, default 20 minutes"
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Temperature sensors",
+      enable=transferHeat));
+  parameter Modelica.SIunits.Temperature TAmbCon_nom=291.15
+    "Fixed ambient temperature for heat transfer of sensors at the condenser side"
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Condenser",
+      enable=transferHeat));
+  parameter Modelica.SIunits.Temperature TAmbEva_nom=273.15
+    "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
+    annotation (Dialog(
+      tab="Assumptions",
+      group="Evaporator",
+      enable=transferHeat));
+  Modelica.Blocks.Sources.Constant const(final k=273.15 + 18)
+    annotation (Placement(transformation(extent={{86,-8},{66,12}})));
+  Controls.Interfaces.HeatPumpControlBus
+                           sigBusHP
+    annotation (Placement(transformation(extent={{-108,-84},{-78,-50}}),
+        iconTransformation(extent={{-96,-76},{-78,-50}})));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{-23.75,-11.75},{-44,-11.75},{-44,-50},{-114,-50},{-114,-19.35},{-103.875,
@@ -505,18 +575,45 @@ equation
           255,0,255}));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{-70.75,
           -12},{-54,-12},{-54,-7},{-28,-7}}, color={255,0,255}));
+  connect(calcQHeat.y, calcCOP.QHeat[1]) annotation (Line(points={{80.9,-27},{88,
+          -27},{88,-25.8},{89.8,-25.8}},          color={0,0,127}));
+  connect(pumSou.P, calcCOP.Pel[2]) annotation (Line(points={{18.8,-51.2},{18.8,
+          -36.85},{89.8,-36.85}}, color={0,0,127}));
+  connect(pumSin.P, calcCOP.Pel[3]) annotation (Line(points={{-27.2,47.2},{-27.2,38},
+          {52,38},{52,-35.55},{89.8,-35.55}},     color={0,0,127}));
+  connect(icingBlock.iceFac, heatPump.iceFac_in) annotation (Line(
+      points={{-61.5,-69},{-18,-69},{-18,-36}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(constIceFacOne.y, heatPump.iceFac_in) annotation (Line(
+      points={{-61.5,-83},{-18,-83},{-18,-36}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(const.y, heatPump.T_amb_con) annotation (Line(points={{65,2},{48,2},{48,
+          23},{28.5,23}}, color={0,0,127}));
+  connect(const.y, heatPump.T_amb_eva) annotation (Line(points={{65,2},{48,2},{48,
+          -27},{28.5,-27}}, color={0,0,127}));
+  connect(hPControls.y_sou, pumSou.y) annotation (Line(points={{-95.2,51.2889},
+          {-95.2,66},{-60,66},{-60,-60},{16.4,-60}},color={0,0,127}));
+  connect(hPControls.ySecHeaGen, secHeaGen.u) annotation (Line(points={{-85,
+          50.6667},{-85,80},{2,80},{2,40},{39.2,40},{39.2,49.6}},
+                                                         color={0,0,127}));
+  connect(secHeaGen.Q_flow, calcCOP.Pel[4]) annotation (Line(points={{39.2,77.2},
+          {39.2,84},{54,84},{54,-34.25},{89.8,-34.25}}, color={0,0,127}));
+  connect(hPControls.y_sin, pumSin.y) annotation (Line(points={{-74.8,51.2889},
+          {-74.8,56},{-29.6,56}},
+                           color={0,0,127}));
   connect(heatPump.sigBusHP, sigBusHP) annotation (Line(
-      points={{-23.75,-11.75},{-44,-11.75},{-44,-50},{-96,-50},{-96,-77},{-97,-77}},
+      points={{-23.75,-11.75},{-34,-11.75},{-34,-12},{-44,-12},{-44,-50},{-94,-50},{-94,
+          -67},{-93,-67}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(calcQHeat.y, calcCOP.QHeat[1]) annotation (Line(points={{80.9,-26},{88,
-          -26},{88,-25.8},{89.8,-25.8}},          color={0,0,127}));
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.Pel, calcCOP.Pel[1]) annotation (Line(
-      points={{-96.925,-76.915},{-96,-76.915},{-96,-92},{82,-92},{82,-38.15},{89.8,
+      points={{-92.925,-66.915},{-86,-66.915},{-86,-104},{78,-104},{78,-38.15},{89.8,
           -38.15}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -524,54 +621,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(pumSou.P, calcCOP.Pel[2]) annotation (Line(points={{18.8,-51.2},{18.8,
-          -36.85},{89.8,-36.85}}, color={0,0,127}));
-  connect(pumSin.P, calcCOP.Pel[3]) annotation (Line(points={{-27.2,47.2},{-27.2,
-          38},{52,38},{52,-35.55},{89.8,-35.55}}, color={0,0,127}));
-  connect(icingBlock.iceFac, heatPump.iceFac_in) annotation (Line(
-      points={{-61.5,-69},{-18,-69},{-18,-36}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(sigBusHP.T_flow_ev, icingBlock.T_flow_ev) annotation (Line(
-      points={{-96.925,-76.915},{-86.5,-76.915},{-86.5,-68},{-72.4,-68}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.T_oda, icingBlock.T_oda) annotation (Line(
-      points={{-96.925,-76.915},{-84.5,-76.915},{-84.5,-66},{-72.4,-66}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.T_ret_ev, icingBlock.T_ret_ev) annotation (Line(
-      points={{-96.925,-76.915},{-85.5,-76.915},{-85.5,-70},{-72.4,-70}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.m_flow_ev, icingBlock.m_flow_ev) annotation (Line(
-      points={{-96.925,-76.915},{-84.5,-76.915},{-84.5,-72},{-72.4,-72}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(constIceFacOne.y, heatPump.iceFac_in) annotation (Line(
-      points={{-61.5,-83},{-18,-83},{-18,-36}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},
             {120,120}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-120,-120},{120,120}})));

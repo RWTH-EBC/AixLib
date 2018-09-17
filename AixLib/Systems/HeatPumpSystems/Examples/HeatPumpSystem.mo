@@ -30,23 +30,27 @@ model HeatPumpSystem "Example for a heat pump system"
     use_revHP=false,
     hys=2,
     mFlow_conNominal=20000/4180/5,
-    calcCOP(n_QHeat=1, lowBouPel=200),
     use_deFro=false,
     use_chiller=false,
     calcPel_deFro=0,
     use_evaPum=true,
-    perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
-    perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
     tableUpp=[5,60; 35,60],
     tableLow=[5,0; 35,0],
     use_minLocTime=false,
     VCon=2,
     VEva=2,
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     use_conCap=true,
     use_evaCap=true,
-    initType=Modelica.Blocks.Types.Init.SteadyState,
-    use_conPum=false,
-    redeclare AixLib.Fluid.Movers.SpeedControlled_y pumSou)
+    use_secHeaGen=true,
+    redeclare model secHeatGen = AixLib.Fluid.HeatExchangers.HeaterCooler_u,
+    use_bivPar=true,
+    hPControls(OnOffControl(Q_flow_nominal=2000)),
+    use_conPum=true,
+    perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to4(),
+    perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12())
     annotation (Placement(transformation(extent={{4,-82},{56,-34}})));
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -104,6 +108,7 @@ model HeatPumpSystem "Example for a heat pump system"
     use_T=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     T=285.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
 
@@ -111,6 +116,7 @@ model HeatPumpSystem "Example for a heat pump system"
     use_T=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     T=281.15) "Fluid sink on source side"
     annotation (Placement(transformation(extent={{-48,-100},{-28,-80}})));
 

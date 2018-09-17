@@ -62,6 +62,20 @@ block HPControl
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={0,110})));
+  Modelica.Blocks.Interfaces.RealOutput y_sou
+    annotation (Placement(transformation(extent={{-14,-14},{14,14}},
+        rotation=90,
+        origin={-60,114})));
+  Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(
+        transformation(
+        extent={{-14,-14},{14,14}},
+        rotation=90,
+        origin={60,114})));
+  Modelica.Blocks.Sources.Constant        constHeating1(final k=1)
+    "If you want to include chilling, please insert control blocks first"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-36,78})));
 equation
 
   connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{-90,
@@ -111,6 +125,10 @@ equation
       pattern=LinePattern.Dash));
   connect(ySecHeaGen, ySecHeaGen)
     annotation (Line(points={{0,110},{0,110}}, color={0,0,127}));
+  connect(constHeating1.y, y_sou)
+    annotation (Line(points={{-36,89},{-60,89},{-60,114}}, color={0,0,127}));
+  connect(constHeating1.y, y_sin) annotation (Line(points={{-36,89},{12,89},{12,
+          88},{60,88},{60,114}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,80}}),                                   graphics={
         Rectangle(
