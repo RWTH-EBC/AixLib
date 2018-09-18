@@ -648,13 +648,6 @@ connect(heatTransfer.therm, layer.port);
   number</u> of the ports.
 </p>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="
-                                                      " />
-</p>
-<h4>
   <span style=\"color:#008000\">Concept</span>
 </h4>
 <p>
@@ -686,18 +679,18 @@ connect(heatTransfer.therm, layer.port);
 </p>
 </html>",
 revisions="<html><ul>
-  <li>
+<li>
     <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
-  </li>
-  <li>
+</li>
+<li>
     <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
     Added documentation.
-  </li>
-  <li>
+</li>
+<li>
     <i>December 16, 2014</i> by Sebastian Stinner:<br/>
     Implemented.
-  </li>
+</li>
 </ul>
 </html>"));
 end HeatStorageVariablePorts;
