@@ -131,25 +131,8 @@ model ConferenceRoom_v2
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={4,88})));
-  Modelica.Blocks.Math.MultiSum multiSum(nu=2, k={1,1})
-    annotation (Placement(transformation(extent={{-40,-10},{-52,4}})));
-  WallTemp wallTemp2(AngeFactor=0.1973) annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=-90,
-        origin={-34,34})));
-  WallTemp wallTemp3(AngeFactor=0.4069) annotation (Placement(transformation(
-        extent={{4,-4},{-4,4}},
-        rotation=-90,
-        origin={-28,-42})));
-  WallTemp wallTemp4(AngeFactor=0.1541 + 2*0.0456) annotation (Placement(
-        transformation(
-        extent={{4,-4},{-4,4}},
-        rotation=-90,
-        origin={30,-40})));
-  WallTemp wallTemp5(AngeFactor=0.1541) annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=270,
-        origin={-72,34})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
+    annotation (Placement(transformation(extent={{6,-48},{26,-28}})));
 equation
   connect(FloorToWorkshop.port_outside, HeatPort_ToGround) annotation (Line(
         points={{-32,-66.2},{-32,-76},{-32,-76},{-32,-84},{-32,-84},{-32,-100}},
@@ -210,29 +193,11 @@ equation
         color={0,0,127}));
   connect(NorthWall.WindSpeedPort, WindSpeedPort_NorthWall) annotation (Line(
         points={{-77.6,64.2},{-77.6,80},{-40,80},{-40,106}}, color={0,0,127}));
-  connect(wallTemp5.thermStarComb1, NorthWall.thermStarComb_inside) annotation (
-     Line(points={{-72,38},{-72,44},{-60,44},{-60,56}}, color={191,0,0}));
-  connect(wallTemp2.thermStarComb1, activeWallPipeBased.thermStarComb_inside)
-    annotation (Line(points={{-34,38},{-34,48},{4,48},{4,56}}, color={191,0,0}));
-  connect(wallTemp5.WallTempWithFactor, multiSum.u[1]) annotation (Line(points={{-72,30},
-          {-72,20},{-34,20},{-34,-0.55},{-40,-0.55}},                 color={0,
-          0,127}));
-  connect(wallTemp4.WallTempWithFactor, multiSum.u[2]) annotation (Line(points={{30,-36},
-          {30,-26},{16,-26},{16,-52},{-34,-52},{-34,-5.45},{-40,-5.45}},
-                      color={0,0,127}));
-  connect(wallTemp3.thermStarComb1, FloorToWorkshop.thermStarComb_inside)
-    annotation (Line(points={{-28,-46},{-28,-50},{-32,-50},{-32,-58}}, color={
-          191,0,0}));
-  connect(wallTemp4.thermStarComb1, WestWallToOpenPlanOffice.thermStarComb_inside)
-    annotation (Line(points={{30,-44},{30,-58}}, color={191,0,0}));
-  connect(wallTemp2.WallTempWithFactor, measureBus.CeilingTemp_Conferenceroom)
-    annotation (Line(points={{-34,30},{-34,24},{-60,24},{-60,-59.9},{-99.9,
-          -59.9}}, color={0,0,127}));
-  connect(wallTemp3.WallTempWithFactor, measureBus.FloorTemp_Conferenceroom)
-    annotation (Line(points={{-28,-38},{-28,-30},{-60,-30},{-60,-59.9},{-99.9,
-          -59.9}}, color={0,0,127}));
-  connect(multiSum.y, measureBus.WallTemp_Conferenceroom) annotation (Line(
-        points={{-53.02,-3},{-60,-3},{-60,-59.9},{-99.9,-59.9}}, color={0,0,127}));
+  connect(temperatureSensor1.port, thermStar_Demux.star) annotation (Line(
+        points={{6,-38},{-4,-38},{-4,-15.6},{-14.2,-15.6}}, color={191,0,0}));
+  connect(temperatureSensor1.T, measureBus.StrahlungTemp_Conferenceroom)
+    annotation (Line(points={{26,-38},{40,-38},{40,-52},{-60,-52},{-60,-59.9},{
+          -99.9,-59.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ConferenceRoom_v2;

@@ -152,24 +152,11 @@ expandable connector Bus_measure
   Integer Hour;
   Integer WeekDay;
 
-  //Wall Temps
-  Real WallTemp_Openplanoffice;
-  Real WallTemp_Conferenceroom;
-  Real WallTemp_Multipersonoffice;
-  Real WallTemp_Canteen;
-  Real WallTemp_Workshop;
+  //Strahlungs Temps
+  Real StrahlungTemp_Openplanoffice;
+  Real StrahlungTemp_Conferenceroom;
+  Real StrahlungTemp_Multipersonoffice;
+  Real StrahlungTemp_Canteen;
+  Real StrahlungTemp_Workshop;
 
-  //Floor Temps
-  Real FloorTemp_Openplanoffice;
-  Real FloorTemp_Conferenceroom;
-  Real FloorTemp_Multipersonoffice;
-  Real FloorTemp_Canteen;
-  Real FloorTemp_Workshop;
-
-  //Ceiling Temps
-  Real CeilingTemp_Openplanoffice;
-  Real CeilingTemp_Conferenceroom;
-  Real CeilingTemp_Multipersonoffice;
-  Real CeilingTemp_Canteen;
-  Real CeilingTemp_Workshop;
 end Bus_measure;

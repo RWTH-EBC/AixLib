@@ -6,7 +6,6 @@ model TestTBA
     wall_length=10,
     wall_height=3,
     connActiveLayer={3,4},
-    pipe_diameter=0.02,
     pipe_thermal_resistance=0)
     annotation (Placement(transformation(extent={{-32,-34},{-18,46}})));
   AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb
@@ -55,6 +54,11 @@ model TestTBA
   Modelica.Fluid.Sensors.Temperature temperature1(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{-14,-26},{6,-6}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{-30,-70},{-50,-50}})));
+  AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb
+                                               thermStar_Demux1
+                                                               annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation=180,  origin={0,-60})));
 equation
   connect(thermStar_Demux.thermStarComb, activeWall.thermStarComb_inside)
     annotation (Line(points={{47.9,-77.4},{21.95,-77.4},{21.95,6},{-18,6}},
@@ -85,5 +89,9 @@ equation
   connect(temperature1.port, activeWall.port_a1) annotation (Line(points={{-4,-26},
           {16,-26},{16,-28},{34,-28},{34,22},{26,22},{26,24.3333},{-18,24.3333}},
                      color={0,127,255}));
-  annotation ();
+  connect(temperatureSensor.port, thermStar_Demux1.therm) annotation (Line(
+        points={{-30,-60},{-18,-60},{-18,-65.1},{-10.1,-65.1}}, color={191,0,0}));
+  connect(thermStar_Demux1.thermStarComb, activeWall.thermStarComb_inside)
+    annotation (Line(points={{9.4,-60.1},{16,-60.1},{16,-60},{22,-60},{22,6},{-18,
+          6}}, color={191,0,0}));
 end TestTBA;
