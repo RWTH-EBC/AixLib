@@ -4,23 +4,29 @@ block OperationalEnvelope
   extends BaseClasses.PartialSecurityControl;
   parameter Boolean use_opeEnv
     "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
-  BaseClasses.BoundaryMap boundaryMap(final tableLow=tableLow, final tableUpp=
-        tableUpp) if use_opeEnv
-    annotation (Placement(transformation(extent={{-62,-28},{-4,22}})));
-  Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not
-    use_opeEnv
-    annotation (Placement(transformation(extent={{10,-36},{24,-22}})));
-
-  parameter Real tableLow[:,2]=[-15,0; 30,0] "Lower boundary of envelope"
-    annotation (Dialog(enable=use_opeEnv));
-  parameter Real tableUpp[:,2]=[-15,55; 5,60; 30,60]
-    "Upper boundary of envelope" annotation (Dialog(enable=use_opeEnv));
+  parameter Boolean use_opeEnvFroRec=true
+    "Use a the operational envelope given in the datasheet" annotation(choices(checkBox=true), Dialog(
+        enable=use_opeEnv, descriptionLabel=true));
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
+    "Data Table of HP" annotation (choicesAllMatching = true,Dialog(enable=use_opeEnvFroRec and use_opeEnv));
+  parameter Real tableLow[:,2] "Lower boundary of envelope"
+    annotation (Dialog(enable=use_opeEnv and not use_opeEnvFroRec));
+  parameter Real tableUpp[:,2] "Upper boundary of envelope" annotation (Dialog(enable=use_opeEnv and not use_opeEnvFroRec));
   Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_ret_co annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,-24},{
             -70,-12}})));
   Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_flow_ev annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,6},{-70,
             18}})));
+  BaseClasses.BoundaryMap boundaryMap(final tableLow=tableLow, final tableUpp=
+        tableUpp,
+    final use_opeEnvFroRec=use_opeEnvFroRec,
+    final dataTable=dataTable) if
+                     use_opeEnv
+    annotation (Placement(transformation(extent={{-62,-28},{-4,22}})));
+  Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not
+    use_opeEnv
+    annotation (Placement(transformation(extent={{10,-36},{24,-22}})));
 equation
   connect(boundaryMap.noErr, swiErr.u2) annotation (Line(points={{-1.36364,-3},
           {42,-3},{42,0},{84,0}}, color={255,0,255}));

@@ -2,6 +2,9 @@ within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block TimeControl
   "Counts seconds a device is turned on and returns true if the time is inside given boundaries"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
+
+  parameter Modelica.SIunits.Time minRunTime
+    "Minimal time the device is turned on or off";
   Modelica.Blocks.Logical.Timer runTim
     "Counts the seconds the heat pump is locked still"
     annotation (Placement(transformation(extent={{-22,-8},{-6,8}})));
@@ -10,8 +13,6 @@ block TimeControl
         minRunTime)
     "Checks if the runtime is greater than the minimal runtime"
     annotation (Placement(transformation(extent={{22,-8},{36,8}})));
-  parameter Modelica.SIunits.Time minRunTime
-    "Minimal time the device is turned on or off";
 equation
   connect(runTimGreaterMin.y, y)
     annotation (Line(points={{36.7,0},{110,0}}, color={255,0,255}));

@@ -1,11 +1,9 @@
 within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump
   "Example for the detailed heat pump model in order to compare to simple one."
-  import AixLib;
-
  extends Modelica.Icons.Example;
-
-  Sources.MassFlowSource_T                sourceSideMassFlowSource(
+ import AixLib;
+  AixLib.Fluid.Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     m_flow=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -13,7 +11,7 @@ model HeatPump
     nPorts=1) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
-  Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
+  AixLib.Fluid.Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
        1) "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
@@ -153,14 +151,13 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{
-          1.9984e-15,-59},{4,-59},{4,-43.0364},{11.9083,-43.0364}},
+          1.9984e-15,-59},{4,-59},{4,-47.4},{26.1667,-47.4}},
                                                 color={0,0,127}));
   connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{
-          1.9984e-15,-59},{1.9984e-15,-43.0364},{-7.425,-43.0364}},
+          1.9984e-15,-59},{1.9984e-15,-47.4},{-22.1667,-47.4}},
                                        color={0,0,127}));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_a2) annotation (Line(
-        points={{-34,-70},{-24,-70},{-24,-40.6364},{-12.5,-40.6364}},
-                                                            color={0,127,255}));
+        points={{-34,-70},{-24,-70},{-24,-45},{-12.5,-45}}, color={0,127,255}));
   connect(nIn.y, pumSou.Nrpm)
     annotation (Line(points={{50,29.6},{50,24}}, color={0,0,127}));
   connect(Room.heatPort, heatFlowRateCon.port)
@@ -172,9 +169,8 @@ equation
   connect(heatPump.port_b2, sourceSideFixedBoundary.ports[1])
     annotation (Line(points={{-12.5,3},{-62,3},{-62,40},{-76,40}},
                                                           color={0,127,255}));
-  connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,
-          -40.6364},{30,-40.6364},{30,-64},{44,-64}},
-                                       color={0,127,255}));
+  connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,-45},
+          {30,-45},{30,-64},{44,-64}}, color={0,127,255}));
   connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-18},{76,4},
           {60,4},{60,12}}, color={0,127,255}));
   connect(pumSou.port_b, heatPump.port_a1) annotation (Line(points={{40,12},{28,
@@ -190,9 +186,9 @@ equation
   connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-64},{66,
           -64},{66,-22},{76,-22}}, color={0,127,255}));
   connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{3,38},{4,38},
-          {4,6.49091},{6.83333,6.49091}}, color={0,0,127}));
-  connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{-10,
-          77.6},{-6,77.6},{-6,6.49091},{-2.83333,6.49091}}, color={255,0,255}));
+          {4,6.84},{6.83333,6.84}},       color={0,0,127}));
+  connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
+          {-6,77.6},{-6,6.84},{-2.83333,6.84}},             color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),

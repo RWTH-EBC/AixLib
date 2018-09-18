@@ -1,11 +1,7 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model IcingBlock
   "Block which decreases evaporator power by an icing factor"
-  Modelica.Blocks.Interfaces.RealOutput iceFac "Output of current icing factor"
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={110,0})));
+
   replaceable function iceFunc =
       AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.baseFct constrainedby
     AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.baseFct                                                                                  "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
@@ -26,6 +22,11 @@ model IcingBlock
   Modelica.Blocks.Interfaces.RealInput m_flow_ev "Mass flow rate at evaporator"
     annotation (Placement(transformation(extent={{-128,-80},{-100,-52}}),
         iconTransformation(extent={{-116,-68},{-100,-52}})));
+  Modelica.Blocks.Interfaces.RealOutput iceFac "Output of current icing factor"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={110,0})));
 protected
   parameter Real iceFac_default = 1;
   Real iceFac_internal "Calculated value of icing factor";

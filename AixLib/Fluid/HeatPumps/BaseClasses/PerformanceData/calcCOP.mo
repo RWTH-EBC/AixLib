@@ -1,7 +1,11 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model calcCOP
   "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
-  Modelica.Blocks.Interfaces.RealInput Pel[n_Pel]
+
+  parameter Integer n_Pel=1 "Dimension of input array of Pel";
+  parameter Integer n_QHeat=1 "Dimension of input array of QHeat";
+  parameter Modelica.SIunits.Power lowBouPel "If P_el falls below this value, COP will not be calculated";
+ Modelica.Blocks.Interfaces.RealInput Pel[n_Pel]
     "Input for all electrical power consumed by the system"
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}),
         iconTransformation(extent={{-140,-60},{-100,-20}})));
@@ -11,13 +15,10 @@ model calcCOP
         iconTransformation(extent={{-140,20},{-100,60}})));
   Modelica.Blocks.Interfaces.RealOutput y_COP "Output for calculated COP value"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  parameter Integer n_Pel=1 "Dimension of input array of Pel";
-  parameter Integer n_QHeat=1 "Dimension of input array of QHeat";
-  parameter Modelica.SIunits.Power lowBouPel
-    "If P_el falls below this value, COP will not be calculated";
+protected
   Modelica.SIunits.Power absSumPel;
   Modelica.SIunits.HeatFlowRate absSumQHeat;
-  AixLib.Utilities.Math.MovingAverage movAve(T=10) "to calculate the moving average of Pel values";
+  AixLib.Utilities.Math.MovingAverage movAve(T=10) "To calculate the moving average of Pel values";
 equation
   absSumPel = sum(Pel);
   absSumQHeat = sum(QHeat);

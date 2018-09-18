@@ -1,13 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle "Blackbox model of refrigerant cycle of a HP"
-  import AixLib;
-  Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
-        transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
-            -16,88},{18,118}})));
-  Modelica.Blocks.Interfaces.RealOutput QCon(unit="W", displayUnit="kW") "Heat Flow to condenser"
-    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"
-    annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
   replaceable model PerDataHea =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D
     constrainedby
@@ -21,7 +13,14 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
     AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
      "Replaceable model for performance data of HP in cooling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-
+  parameter Boolean use_revHP=true "True if the HP is reversible";
+ AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
+        transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
+            -16,88},{18,118}})));
+  Modelica.Blocks.Interfaces.RealOutput QCon(unit="W", displayUnit="kW") "Heat Flow to condenser"
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+  Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"
+    annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
   PerDataHea PerformanceDataHeater
                           annotation (Placement(transformation(extent={{13,20},{
             67,76}},  rotation=0)));
@@ -48,9 +47,8 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
         extent={{-27,-28},{27,28}},
         rotation=0,
         origin={-46,48})));
-  parameter Boolean use_revHP=true
-                              "True if the HP is reversible";
-  Utilities.Logical.SmoothSwitch switchPel(
+
+  AixLib.Utilities.Logical.SmoothSwitch switchPel(
     u1(unit="W", displayUnit="kW"),
     u3(unit="W", displayUnit="kW"),
     y(unit="W", displayUnit="kW"))

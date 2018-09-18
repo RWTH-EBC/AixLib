@@ -1,57 +1,11 @@
 within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   import AixLib;
-
-  AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
-    redeclare package Medium_con =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    mFlow_evaNominal=1,
-    dpEva_nominal=0,
-    dpCon_nominal=0,
-    GEva=1,
-    GCon=1,
-    redeclare package Medium_eva =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    refIneFre_constant=0,
-    maxRunPerHou=2,
-    CEva=8000,
-    CCon=8000,
-    scalingFactor=1,
-    redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          final dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()),
-    use_runPerHou=false,
-    use_sec=true,
-    use_minRunTime=true,
-    use_opeEnv=true,
-    minIceFac=0.5,
-    minRunTime(displayUnit="min") = 1800,
-    minLocTime(displayUnit="min") = 3000,
-    use_revHP=false,
-    hys=2,
-    mFlow_conNominal=20000/4180/5,
-    use_deFro=false,
-    use_chiller=false,
-    calcPel_deFro=0,
-    use_evaPum=true,
-    tableUpp=[5,60; 35,60],
-    tableLow=[5,0; 35,0],
-    use_minLocTime=false,
-    VCon=2,
-    VEva=2,
-    initType=Modelica.Blocks.Types.Init.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    use_conCap=true,
-    use_evaCap=true,
-    use_secHeaGen=true,
-    redeclare model secHeatGen = AixLib.Fluid.HeatExchangers.HeaterCooler_u,
-    use_bivPar=true,
-    hPControls(OnOffControl(Q_flow_nominal=2000)),
-    use_conPum=true,
-    perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to4(),
-    perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12())
-    annotation (Placement(transformation(extent={{4,-82},{56,-34}})));
+  replaceable package Medium_sin =
+      Modelica.Media.Water.ConstantPropertyLiquidWater
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+  replaceable package Medium_sou = AixLib.Media.Specialized.Air.PerfectGas
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
@@ -77,18 +31,18 @@ model HeatPumpSystem "Example for a heat pump system"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_a_nominal(displayUnit="degC") = 323.15,
     dp_nominal=0,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=20000/4180/5,
     Q_flow_nominal=20000,
+    redeclare package Medium = Medium_sin,
     T_start=293.15,
     T_b_nominal=318.15,
     TAir_nominal=293.15,
     TRad_nominal=293.15)         "Radiator"
-    annotation (Placement(transformation(extent={{38,2},{18,22}})));
+    annotation (Placement(transformation(extent={{40,2},{20,22}})));
 
   AixLib.Fluid.Sources.FixedBoundary preSou(
     nPorts=2,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium = Medium_sin,
     T=293.15)
     "Source for pressure and to account for thermal expansion of water"
     annotation (Placement(transformation(extent={{-42,-34},{-22,-14}})));
@@ -107,21 +61,19 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Fluid.Sources.FixedBoundary sou(
     use_T=true,
     nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
+    redeclare package Medium = Medium_sou,
     T=285.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
 
   AixLib.Fluid.Sources.FixedBoundary sin(
     use_T=true,
     nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
+    redeclare package Medium = Medium_sou,
     T=281.15) "Fluid sink on source side"
     annotation (Placement(transformation(extent={{-48,-100},{-28,-80}})));
-
+  AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem
+    annotation (Placement(transformation(extent={{4,-76},{46,-34}})));
 equation
-
   connect(theCon.port_b,vol. heatPort) annotation (Line(
       points={{58,64},{68,64},{68,44},{86,44}},
       color={191,0,0},
@@ -139,11 +91,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(rad.heatPortCon,vol. heatPort) annotation (Line(
-      points={{30,19.2},{30,44},{86,44}},
+      points={{32,19.2},{32,44},{86,44}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(rad.heatPortRad,vol. heatPort) annotation (Line(
-      points={{26,19.2},{26,44},{86,44}},
+      points={{28,19.2},{28,44},{86,44}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -167,17 +119,21 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(sou.ports[1], heatPumpSystem.port_a2)
-    annotation (Line(points={{82,-90},{43,-90},{43,-82}}, color={0,127,255}));
+    annotation (Line(points={{82,-90},{35.5,-90},{35.5,-76}},
+                                                          color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {16,-90},{16,-82},{17,-82}}, color={0,127,255}));
-  connect(heatPumpSystem.port_b1, rad.port_a) annotation (Line(points={{43,-34},
-          {43,0},{74,0},{74,12},{38,12}}, color={0,127,255}));
-  connect(rad.port_b, preSou.ports[1]) annotation (Line(points={{18,12},{-8,12},
-          {-8,-22},{-22,-22}}, color={0,127,255}));
+          {16,-90},{16,-76},{14.5,-76}},
+                                       color={0,127,255}));
+  connect(heatPumpSystem.port_b1, rad.port_a) annotation (Line(points={{35.5,
+          -34},{35.5,0},{74,0},{74,12},{40,12}},
+                                          color={0,127,255}));
+  connect(rad.port_b, preSou.ports[1]) annotation (Line(points={{20,12},{-8,12},{-8,-22},
+          {-22,-22}},          color={0,127,255}));
   connect(preSou.ports[2], heatPumpSystem.port_a1)
-    annotation (Line(points={{-22,-26},{17,-26},{17,-34}}, color={0,127,255}));
+    annotation (Line(points={{-22,-26},{14.5,-26},{14.5,-34}},
+                                                           color={0,127,255}));
   connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
-      points={{-68,64},{-58,64},{-58,-42.2},{0.75,-42.2}},
+      points={{-68,64},{-58,64},{-58,-41.175},{1.375,-41.175}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

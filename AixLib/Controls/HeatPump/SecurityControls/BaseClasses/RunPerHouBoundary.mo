@@ -1,7 +1,10 @@
 within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
-  Modelica.Blocks.Logical.Less runCouLesMax
+  parameter Real maxRunPer_h "Number of maximal on/off cycles per hour";
+  parameter Modelica.SIunits.Time delayTime(displayUnit="h") = 3600
+    "Delay time of output with respect to input signal";
+ Modelica.Blocks.Logical.Less runCouLesMax
     "Checks if the count of total runs is lower than the maximal value"
     annotation (Placement(transformation(extent={{74,-8},{90,8}})));
   Modelica.Blocks.Sources.Constant inputRunPerHou(final k=maxRunPer_h)
@@ -19,9 +22,6 @@ block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(final delayTime(displayUnit=
           "h") = delayTime)
                annotation (Placement(transformation(extent={{14,-14},{24,-4}})));
-  parameter Real maxRunPer_h "Number of maximal on/off cycles per hour";
-  parameter Modelica.SIunits.Time delayTime(displayUnit="h") = 3600
-    "Delay time of output with respect to input signal";
 equation
   connect(inputRunPerHou.y, runCouLesMax.u2) annotation (Line(points={{60.8,-14},
           {66,-14},{66,-6.4},{72.4,-6.4}}, color={0,0,127}));

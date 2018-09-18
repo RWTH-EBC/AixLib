@@ -1,7 +1,23 @@
 within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block BoundaryMap
   "A function yielding true if input parameters are out of the charasteristic map"
-  Modelica.Blocks.Interfaces.BooleanOutput noErr
+  parameter Boolean use_opeEnvFroRec=true
+    "Use a the operational envelope given in the datasheet" annotation(choices(checkBox=true));
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable "Data Table of HP"
+                       annotation(choicesAllMatching = true, Dialog(enable=
+          use_opeEnvFroRec));
+  parameter Real tableLow[:,2]=fill(
+      0.0,
+      0,
+      2) "Table matrix (grid = first column; e.g., table=[0,2])" annotation(choicesAllMatchning=true, Dialog(
+        enable=not use_opeEnvFroRec));
+  parameter Real tableUpp[:,2]=fill(
+      0.0,
+      0,
+      2) "Table matrix (grid = first column; e.g., table=[0,2])"
+    annotation (Dialog(enable=not use_opeEnvFroRec));
+
+ Modelica.Blocks.Interfaces.BooleanOutput noErr
     "If an error occurs, this will be false"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput x_in "Current value of x-Axis"
@@ -9,11 +25,11 @@ block BoundaryMap
   Modelica.Blocks.Interfaces.RealInput y_in "Current value on y-Axis"
     annotation (Placement(transformation(extent={{-128,-74},{-100,-46}})));
 
-  Modelica.Blocks.Tables.CombiTable1Ds uppCombiTable1Ds(final table=tableUpp, smoothness=
+  Modelica.Blocks.Tables.CombiTable1Ds uppCombiTable1Ds(final table=tableUpp_internal, smoothness=
         Modelica.Blocks.Types.Smoothness.LinearSegments)
     annotation (Placement(transformation(extent={{-52,50},{-32,70}})));
   Modelica.Blocks.Tables.CombiTable1Ds lowCombiTable1Ds(final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-      table=tableLow)
+      table=tableLow_internal)
     annotation (Placement(transformation(extent={{-52,16},{-32,36}})));
   Modelica.Blocks.MathBoolean.Nor
                              nor1(
@@ -27,26 +43,21 @@ block BoundaryMap
     annotation (Placement(transformation(extent={{-6,-40},{14,-20}})));
   Modelica.Blocks.Logical.Greater greaterRig
     annotation (Placement(transformation(extent={{-6,-70},{14,-50}})));
-  parameter Real tableLow[:,2]=fill(
-      0.0,
-      0,
-      2) "Table matrix (grid = first column; e.g., table=[0,2])";
-  parameter Real tableUpp[:,2]=fill(
-      0.0,
-      0,
-      2) "Table matrix (grid = first column; e.g., table=[0,2])";
   Modelica.Blocks.Sources.Constant conXMin(k=xMin)
     annotation (Placement(transformation(extent={{-50,-46},{-38,-34}})));
   Modelica.Blocks.Sources.Constant conXMax(k=xMax)
     annotation (Placement(transformation(extent={{-50,-76},{-38,-64}})));
+
 protected
-  parameter Real xMax=min(tableLow[end, 1], tableUpp[end, 1])
+  parameter Real tableLow_internal[:,2] = if use_opeEnvFroRec then dataTable.tableLowBou else tableLow;
+  parameter Real tableUpp_internal[:,2] = if use_opeEnvFroRec then dataTable.tableUppBou else tableUpp;
+  parameter Real xMax=min(tableLow_internal[end, 1], tableUpp_internal[end, 1])
     "Minimal value of lower and upper table data";
-  parameter Real xMin=max(tableLow[1, 1], tableUpp[1, 1])
+  parameter Real xMin=max(tableLow_internal[1, 1], tableUpp_internal[1, 1])
     "Maximal value of lower and upper table data";
 initial equation
-  assert(tableLow[end,1]==tableUpp[end,1],"The boundary values have to the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
-  assert(tableLow[1,1]==tableUpp[1,1],"The boundary values have to the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
+  assert(tableLow_internal[end,1]==tableUpp_internal[end,1],"The boundary values have to be the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
+  assert(tableLow[1,1]==tableUpp_internal[1,1],"The boundary values have to be the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
 
 equation
   connect(x_in, uppCombiTable1Ds.u)

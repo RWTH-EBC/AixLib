@@ -7,6 +7,8 @@ record HeatPumpBaseDataDefinition "Basic heat pump data"
     "Nominal mass flow rate in condenser";
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNom
     "Nominal mass flow rate in evaporator";
+  parameter Real tableUppBou[:,2] "Points to define upper boundary for sink temperature";
+  parameter Real tableLowBou[:,2] "Points to define lower boundary for sink temperature";
 
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>

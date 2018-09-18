@@ -1,11 +1,6 @@
 within AixLib.Controls.HeatPump.SecurityControls;
-block OnOffControl
+model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
-
-  Modelica.Blocks.Logical.GreaterThreshold
-                                  nSetGreaterZero(final threshold=Modelica.Constants.eps)
-                                                  "True if device is set on"
-    annotation (Placement(transformation(extent={{-110,56},{-94,72}})));
   parameter Boolean use_minRunTime
     "False if minimal runtime of HP is not considered" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
@@ -20,7 +15,11 @@ block OnOffControl
     "False if maximal runs per hour of HP are not considered" annotation(choices(checkBox=true));
   parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(enable=use_runPerHou));
-
+  parameter Boolean pre_n_start=true "Start value of pre(n) at initial time";
+  Modelica.Blocks.Logical.GreaterThreshold
+                                  nSetGreaterZero(final threshold=Modelica.Constants.eps)
+                                                  "True if device is set on"
+    annotation (Placement(transformation(extent={{-110,56},{-94,72}})));
   Modelica.Blocks.Logical.GreaterThreshold
                                   nIsGreaterZero(final threshold=Modelica.Constants.eps)
     "True if the device is still on"
@@ -82,7 +81,6 @@ block OnOffControl
     annotation (Placement(transformation(extent={{16,32},{28,44}})));
   Modelica.Blocks.Logical.And andLocOff
     annotation (Placement(transformation(extent={{52,-78},{64,-66}})));
-  parameter Boolean pre_n_start=true "Start value of pre(n) at initial time";
 equation
   connect(pre1.u,nIsGreaterZero. y)
     annotation (Line(points={{-85.2,-42},{-91.2,-42}},

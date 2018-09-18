@@ -5,6 +5,7 @@ model PolynomalApproach
 
   replaceable function PolyData =
       AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct "Function to calculate peformance Data" annotation(choicesAllMatching=true);
+protected
   Real Char[2];
 equation
   if sigBusHP.onOff then

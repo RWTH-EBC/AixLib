@@ -1,18 +1,18 @@
 within AixLib.Controls.HeatPump.SecurityControls;
 model AntiFreeze "Model to prevent source from freezing"
   extends BaseClasses.PartialSecurityControl;
+
+  parameter Boolean use_antFre=true
+    "True if anti freeze control is part of security control" annotation(choices(checkBox=true));
+  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
+    "Limit temperature for anti freeze control"
+    annotation (Dialog(enable=use_antFre));
   Modelica.Blocks.Sources.BooleanConstant booConAntFre(final k=true) if not
     use_antFre
     annotation (Placement(transformation(extent={{2,-36},{16,-22}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=TantFre) if
        use_antFre
     annotation (Placement(transformation(extent={{-62,-20},{-36,6}})));
-  parameter Boolean use_antFre=true
-    "True if anti freeze control is part of security control" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
-    "Limit temperature for anti freeze control"
-    annotation (Dialog(enable=use_antFre));
-
   Modelica.Blocks.Math.Min min if use_antFre
     annotation (Placement(transformation(extent={{-98,-24},{-78,-4}})));
 equation
@@ -32,20 +32,20 @@ equation
           -14},{-72,-7},{-64.6,-7}}, color={0,0,127}));
   connect(sigBusHP.T_flow_co, min.u1) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-38},{-112,-38},{-112,-8},{-100,-8}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+
   connect(sigBusHP.T_ret_ev, min.u2) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-38},{-112,-38},{-112,-20},{-100,-20}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+
 end AntiFreeze;

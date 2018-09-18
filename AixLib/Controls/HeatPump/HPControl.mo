@@ -1,10 +1,23 @@
 within AixLib.Controls.HeatPump;
-block HPControl
+model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
+  replaceable model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP                                                                constrainedby
+    AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet
+                                                     "Model for converting set temperature to set compressor speed"
+                                                           annotation(choicesAllMatching=true);
+  parameter Boolean use_antLeg "True if Legionella Control is of relevance";
+  parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
+  parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation(choices(choice=true "Parallel",
+      choice=false "Alternativ",
+      radioButtons=true), Dialog(enable=use_secHeaGen));
+  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
+    "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
+    annotation (Dialog(enable=use_secHeaGen));
   AixLib.Controls.HeatPump.AntiLegionella antiLegionella(
     trigWeekDay=5,
     trigHour=3,
-    TLegMin=333.15) if use_antLeg
+    final TLegMin=333.15) if
+                       use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
@@ -13,7 +26,25 @@ block HPControl
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}}),
         iconTransformation(extent={{-140,-26},{-100,14}})));
-  parameter Boolean use_antLeg "True if Legionella Control is of relevance";
+  Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
+                                                   "Relative power of second heat generator, from 0 to 1"
+    annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={0,110})));
+  Modelica.Blocks.Interfaces.RealOutput y_sou
+    annotation (Placement(transformation(extent={{-14,-14},{14,14}},
+        rotation=90,
+        origin={-60,114})));
+  Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(transformation(
+        extent={{-14,-14},{14,14}},
+        rotation=90,
+        origin={60,114})));
+  Modelica.Blocks.Sources.Constant        constHeating1(final k=1)
+    "If you want to include chilling, please insert control blocks first"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-34,78})));
   Controls.HeatPump.HeatingCurve heatCurve(
     use_dynTRoom=false,
     heatingCurveRecord=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
@@ -28,16 +59,11 @@ block HPControl
     declination=2,
     TRoom_nominal=293.15) annotation (Placement(transformation(extent={{-74,10},
             {-54,30}})));
-
-  replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.OnOffHP constrainedby
-    AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet                                                                                                                     annotation(choicesAllMatching=true);
-
   TSetToNSet OnOffControl(
     use_secHeaGen=use_secHeaGen,
     use_bivPar=use_bivPar,
-    hys=hys)              annotation (Placement(transformation(extent={{44,-8},
-            {76,26}})));
+    final Q_flow_nominal=Q_flow_nominal)
+                                        annotation (Placement(transformation(extent={{44,-8},{76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg "No Anti Legionella"
                                            annotation (
                                      choicesAllMatching=true, Placement(
@@ -50,32 +76,6 @@ block HPControl
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
-  parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
-  parameter Boolean use_bivPar=true
-    "Switch between bivalent parallel and bivalent alternative control" annotation(choices(choice=true "Parallel",
-      choice=false "Alternativ",
-      radioButtons=true));
-  parameter Real hys=5 "Hysteresis of controller";
-  Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
-                                                   "Relative power of second heat generator, from 0 to 1"
-    annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=-90,
-        origin={0,110})));
-  Modelica.Blocks.Interfaces.RealOutput y_sou
-    annotation (Placement(transformation(extent={{-14,-14},{14,14}},
-        rotation=90,
-        origin={-60,114})));
-  Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(
-        transformation(
-        extent={{-14,-14},{14,14}},
-        rotation=90,
-        origin={60,114})));
-  Modelica.Blocks.Sources.Constant        constHeating1(final k=1)
-    "If you want to include chilling, please insert control blocks first"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-36,78})));
 equation
 
   connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{-90,
@@ -95,8 +95,8 @@ equation
       points={{16.8,22},{26,22},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(OnOffControl.nOut, nOut) annotation (Line(points={{77.6,9},{88.8,9},{
-          88.8,20},{114,20}}, color={0,0,127}));
+  connect(OnOffControl.nOut, nOut) annotation (Line(points={{77.6,9},{88.8,9},{88.8,20},
+          {114,20}},          color={0,0,127}));
   connect(sigBusHP,OnOffControl. sigBusHP) annotation (Line(
       points={{-102,-58},{24,-58},{24,4.41},{42.88,4.41}},
       color={255,204,51},
@@ -117,8 +117,8 @@ equation
           {96,-34},{79,-34}}, color={255,0,255}));
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
-  connect(TSup,OnOffControl. TAct) annotation (Line(points={{-114,60},{-82,60},
-          {-82,-22},{30,-22},{30,-4.6},{41.44,-4.6}},color={0,0,127}));
+  connect(TSup,OnOffControl. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
+          {30,-22},{30,-4.6},{41.44,-4.6}},          color={0,0,127}));
   connect(OnOffControl.ySecHeaGen, ySecHeaGen) annotation (Line(
       points={{60,27.7},{60,74},{0,74},{0,110}},
       color={0,0,127},
@@ -126,9 +126,10 @@ equation
   connect(ySecHeaGen, ySecHeaGen)
     annotation (Line(points={{0,110},{0,110}}, color={0,0,127}));
   connect(constHeating1.y, y_sou)
-    annotation (Line(points={{-36,89},{-60,89},{-60,114}}, color={0,0,127}));
-  connect(constHeating1.y, y_sin) annotation (Line(points={{-36,89},{12,89},{12,
-          88},{60,88},{60,114}}, color={0,0,127}));
+    annotation (Line(points={{-34,89},{-60,89},{-60,114}}, color={0,0,127}));
+  connect(constHeating1.y, y_sin) annotation (Line(points={{-34,89},{12,89},{12,
+          88},{60,88},{60,114}},
+                            color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,80}}),                                   graphics={
         Rectangle(

@@ -10,162 +10,7 @@ model HeatPump "Base model of realistic heat pump"
     final m2_flow_small=1E-4*abs(mFlow_evaNominal),
     final show_T=show_TPort,
     redeclare package Medium2 = Medium_eva);
-  import Modelica.Blocks.Types.Init;
-  BaseClasses.EvaporatorCondenserWithCapacity Condenser(
-    redeclare final package Medium = Medium_con,
-    final allowFlowReversal=allowFlowReversalCon,
-    final mFlow_nominal=mFlow_conNominal,
-    final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final show_T=show_TPort,
-    final deltaM=deltaM_con,
-    final dp_nominal=dpCon_nominal,
-    final V=VCon,
-    final tau=tauSenT,
-    final initType=initType,
-    final T_start=TCon_start,
-    final TAmb=TAmbCon_nom,
-    final tauHeaTra=tauHeaTra,
-    final p_start=pCon_start,
-    final kAOut_nominal=GCon,
-    final kAIns_nominal=3.66,
-    final htcExpIns=0.88,
-    final use_cap=use_ConCap,
-    final C=CCon,
-    final X_start=XCon_start,
-    final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized,
-    final massDynamics=massDynamics,
-    final energyDynamics=energyDynamics,
-    final mSenFac=mSenFacCon,
-    final transferHeat=transferHeat,
-    final is_con=true)               "Heat exchanger model for the condenser"
-    annotation (Placement(transformation(extent={{-16,72},{16,104}})));
-  BaseClasses.EvaporatorCondenserWithCapacity Evaporator(
-    redeclare final package Medium = Medium_eva,
-    final mFlow_nominal=mFlow_evaNominal,
-    final deltaM=deltaM_eva,
-    final dp_nominal=dpEva_nominal,
-    final V=VEva,
-    final TAmb=TAmbEva_nom,
-    final tauHeaTra=tauHeaTra,
-    final use_cap=use_EvaCap,
-    final C=CEva,
-    final kAOut_nominal=GEva,
-    final kAIns_nominal=3.66,
-    final htcExpIns=0.88,
-    final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=show_TPort,
-    final tau=tauSenT,
-    final initType=initType,
-    final T_start=TEva_start,
-    final p_start=pEva_start,
-    final X_start=XEva_start,
-    final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized,
-    final massDynamics=massDynamics,
-    final energyDynamics=energyDynamics,
-    final transferHeat=transferHeat,
-    final mSenFac=mSenFacEva,
-    final is_con=false)              "Heat exchanger model for the evaporator"
-    annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
-  Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
-    final initType=initType,
-    final y_start=yRefIne_start,
-    final normalized=true,
-    final n=nthOrder,
-    final f=refIneFre_constant,
-    final x_start=x_start) if      use_refIne
-    "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
-    annotation (Placement(transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=180,
-        origin={30,-30})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if
-                                                                 not use_refIne
-    "Use default nSet value" annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={28,32})));
-  Modelica.Blocks.Continuous.CriticalDamping heatFlowIneCon(
-    final initType=initType,
-    final y_start=yRefIne_start,
-    final normalized=true,
-    final n=nthOrder,
-    final f=refIneFre_constant,
-    final x_start=x_start) if      use_refIne
-    "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
-    annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={28,52})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetEva if
-                                                                 not use_refIne
-    "Use default nSet value" annotation (Placement(transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=180,
-        origin={30,-48})));
-  Modelica.Blocks.Interfaces.RealInput iceFac_in
-    "Input signal for icing factor" annotation (Placement(transformation(
-        extent={{-16,-16},{16,16}},
-        rotation=90,
-        origin={-76,-136})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
-    use_EvaCap "Foreces heat losses according to ambient temperature"
-    annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={68,-108})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
-    use_ConCap "Foreces heat losses according to ambient temperature"
-    annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
-        rotation=180,
-        origin={68,108})));
 
-  Modelica.Blocks.Interfaces.RealInput nSet
-    "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
-        transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
-        iconTransformation(extent={{-108,-52},{-90,-26}})));
-  BaseClasses.InnerCycle innerCycle(redeclare final model PerDataHea =
-      PerDataHea,
-      redeclare final model PerDataChi = PerDataChi,
-    final use_revHP=use_revHP)                                                           annotation (
-      Placement(transformation(
-        extent={{-26,-27},{26,27}},
-        rotation=90,
-        origin={-21,0})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateEva(final alpha=0, final T_ref=293.15)
-    "Heat flow rate to the evaporator" annotation (Placement(transformation(
-        extent={{-9,-9},{9,9}},
-        rotation=270,
-        origin={49,-59})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon(final
-      T_ref=293.15, final alpha=0)
-    "Heat flow rate of the condenser" annotation (Placement(transformation(
-        extent={{8,-8},{-8,8}},
-        rotation=270,
-        origin={48,60})));
-  Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
-      displayUnit="degC")
-    "Ambient temperature on the evaporator side"
-    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
-        rotation=0,
-        origin={110,-100})));
-  Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
-      displayUnit="degC")
-    "Ambient temperature on the condenser side"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
-        rotation=180,
-        origin={110,100})));
-
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
-    annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
 //General
   replaceable package Medium_con = Modelica.Media.Air.MoistAir constrainedby
@@ -325,6 +170,161 @@ model HeatPump "Base model of realistic heat pump"
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
+  BaseClasses.EvaporatorCondenserWithCapacity Condenser(
+    redeclare final package Medium = Medium_con,
+    final allowFlowReversal=allowFlowReversalCon,
+    final mFlow_nominal=mFlow_conNominal,
+    final m_flow_small=1E-4*abs(mFlow_conNominal),
+    final show_T=show_TPort,
+    final deltaM=deltaM_con,
+    final dp_nominal=dpCon_nominal,
+    final V=VCon,
+    final tau=tauSenT,
+    final initType=initType,
+    final T_start=TCon_start,
+    final TAmb=TAmbCon_nom,
+    final tauHeaTra=tauHeaTra,
+    final p_start=pCon_start,
+    final kAOut_nominal=GCon,
+    final kAIns_nominal=3.66,
+    final htcExpIns=0.88,
+    final use_cap=use_ConCap,
+    final C=CCon,
+    final X_start=XCon_start,
+    final from_dp=from_dp,
+    final homotopyInitialization=homotopyInitialization,
+    final linearized=linearized,
+    final massDynamics=massDynamics,
+    final energyDynamics=energyDynamics,
+    final mSenFac=mSenFacCon,
+    final transferHeat=transferHeat,
+    final is_con=true)               "Heat exchanger model for the condenser"
+    annotation (Placement(transformation(extent={{-16,72},{16,104}})));
+  BaseClasses.EvaporatorCondenserWithCapacity Evaporator(
+    redeclare final package Medium = Medium_eva,
+    final mFlow_nominal=mFlow_evaNominal,
+    final deltaM=deltaM_eva,
+    final dp_nominal=dpEva_nominal,
+    final V=VEva,
+    final TAmb=TAmbEva_nom,
+    final tauHeaTra=tauHeaTra,
+    final use_cap=use_EvaCap,
+    final C=CEva,
+    final kAOut_nominal=GEva,
+    final kAIns_nominal=3.66,
+    final htcExpIns=0.88,
+    final allowFlowReversal=allowFlowReversalEva,
+    final m_flow_small=1E-4*abs(mFlow_evaNominal),
+    final show_T=show_TPort,
+    final tau=tauSenT,
+    final initType=initType,
+    final T_start=TEva_start,
+    final p_start=pEva_start,
+    final X_start=XEva_start,
+    final from_dp=from_dp,
+    final homotopyInitialization=homotopyInitialization,
+    final linearized=linearized,
+    final massDynamics=massDynamics,
+    final energyDynamics=energyDynamics,
+    final transferHeat=transferHeat,
+    final mSenFac=mSenFacEva,
+    final is_con=false)              "Heat exchanger model for the evaporator"
+    annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
+  Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
+    final initType=initType,
+    final y_start=yRefIne_start,
+    final normalized=true,
+    final n=nthOrder,
+    final f=refIneFre_constant,
+    final x_start=x_start) if      use_refIne
+    "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
+    annotation (Placement(transformation(
+        extent={{6,6},{-6,-6}},
+        rotation=180,
+        origin={30,-30})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if
+                                                                 not use_refIne
+    "Use default nSet value" annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={28,32})));
+  Modelica.Blocks.Continuous.CriticalDamping heatFlowIneCon(
+    final initType=initType,
+    final y_start=yRefIne_start,
+    final normalized=true,
+    final n=nthOrder,
+    final f=refIneFre_constant,
+    final x_start=x_start) if      use_refIne
+    "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
+    annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={28,52})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetEva if
+                                                                 not use_refIne
+    "Use default nSet value" annotation (Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=180,
+        origin={30,-48})));
+  Modelica.Blocks.Interfaces.RealInput iceFac_in
+    "Input signal for icing factor" annotation (Placement(transformation(
+        extent={{-16,-16},{16,16}},
+        rotation=90,
+        origin={-76,-136})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
+    use_EvaCap "Foreces heat losses according to ambient temperature"
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=180,
+        origin={68,-108})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
+    use_ConCap "Foreces heat losses according to ambient temperature"
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=180,
+        origin={68,108})));
+
+  Modelica.Blocks.Interfaces.RealInput nSet
+    "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
+        transformation(extent={{-132,4},{-100,36}})));
+  Controls.Interfaces.HeatPumpControlBus
+                           sigBusHP
+    annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
+        iconTransformation(extent={{-108,-52},{-90,-26}})));
+  BaseClasses.InnerCycle innerCycle(redeclare final model PerDataHea =
+      PerDataHea,
+      redeclare final model PerDataChi = PerDataChi,
+    final use_revHP=use_revHP)                                                           annotation (
+      Placement(transformation(
+        extent={{-26,-27},{26,27}},
+        rotation=90,
+        origin={-21,0})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateEva(final alpha=0, final T_ref=293.15)
+    "Heat flow rate to the evaporator" annotation (Placement(transformation(
+        extent={{-9,-9},{9,9}},
+        rotation=270,
+        origin={49,-59})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon(final
+      T_ref=293.15, final alpha=0)
+    "Heat flow rate of the condenser" annotation (Placement(transformation(
+        extent={{8,-8},{-8,8}},
+        rotation=270,
+        origin={48,60})));
+  Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
+      displayUnit="degC")
+    "Ambient temperature on the evaporator side"
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={110,-100})));
+  Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
+      displayUnit="degC")
+    "Ambient temperature on the condenser side"
+    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={110,100})));
+
+  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+    annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
 equation
 
@@ -517,8 +517,7 @@ equation
           fillPattern=FillPattern.Solid,
           fillColor={0,0,0},
           visible=use_EvaCap),
-    Line(
-          origin={40.5,93.667},
+    Line( origin={40.5,93.667},
           points={{39.5,6.333},{37.5,0.3333},{25.5,-1.667},{33.5,-9.667},{17.5,
               -11.667},{27.5,-21.667},{13.5,-23.667},{11.5,-27.667}},
           smooth=Smooth.Bezier,

@@ -1,6 +1,12 @@
 within AixLib.Controls.HeatPump.SecurityControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
+  parameter Real minIceFac "Minimal value above which no defrost is necessary";
+  parameter Boolean use_chiller=true
+    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
+  parameter Modelica.SIunits.Power calcPel_deFro
+    "Calculate how much eletrical energy is used to melt ice"
+    annotation (Dialog(enable=not use_chiller));
   Modelica.Blocks.Logical.GreaterEqualThreshold
                                        iceFacGreMin(final threshold=minIceFac) if
     use_chiller
@@ -9,7 +15,23 @@ block DefrostControl
         extent={{-8,-9},{8,9}},
         rotation=0,
         origin={-3,-62})));
-  parameter Real minIceFac "Minimal value above which no defrost is necessary";
+ Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
+    "Relative speed of compressor. From 0 to 1" annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={0,110})));
+  Modelica.Blocks.Sources.BooleanConstant conTrue(final k=true) if not
+    use_chiller
+    "If ice is melted with an additional heater, HP can continue running"
+    annotation (Placement(transformation(extent={{-24,-12},{-12,0}})));
+  Modelica.Blocks.Sources.RealExpression realPel_deFro(y=calcPel_deFro) if not
+    use_chiller
+               "Calculate how much eletrical energy is used to melt ice"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,74})));
   Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
   Modelica.Blocks.Interfaces.RealInput nSet
@@ -28,28 +50,6 @@ block DefrostControl
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
-  parameter Boolean use_chiller=true
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
-  Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
-    "Relative speed of compressor. From 0 to 1" annotation (Placement(
-        transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=-90,
-        origin={0,110})));
-  Modelica.Blocks.Sources.BooleanConstant conTrue(final k=true) if not
-    use_chiller
-    "If ice is melted with an additional heater, HP can continue running"
-    annotation (Placement(transformation(extent={{-24,-12},{-12,0}})));
-  Modelica.Blocks.Sources.RealExpression realPel_deFro(y=calcPel_deFro) if not
-    use_chiller
-               "Calculate how much eletrical energy is used to melt ice"
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,74})));
-  parameter Modelica.SIunits.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice"
-    annotation (Dialog(enable=not use_chiller));
 equation
   connect(conOne.y, swiErr.u3) annotation (Line(points={{34.6,-24},{38,-24},{38,
           -14},{58,-14}}, color={0,0,127}));

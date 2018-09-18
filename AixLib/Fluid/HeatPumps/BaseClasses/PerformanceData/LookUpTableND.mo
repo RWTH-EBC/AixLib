@@ -1,7 +1,24 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends BaseClasses.PartialPerformanceData;
-  Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
+
+  replaceable model nConv =
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.ConvToN
+      constrainedby Modelica.Blocks.Interfaces.SISO annotation(Dialog(enable=use_nConv),choicesAllMatching=true);
+
+  parameter Boolean use_nConv
+    "True if you need to convert the n-signal before the table data" annotation(choices(checkBox=true));
+
+  nConv nConverter if use_nConv
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+        rotation=-90,
+        origin={21,73})));
+  Modelica.Blocks.Routing.RealPassThrough realPasThrNCon if not use_nConv
+    "If nConverter is not used"
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+        rotation=-90,
+        origin={-24,74})));
+ Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
             {6,6}},
         rotation=-90,
@@ -45,21 +62,6 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={2,20})));
-  parameter Boolean use_nConv
-    "True if you need to convert the n-signal before the table data" annotation(choices(checkBox=true));
-  replaceable model nConv =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.ConvToN
-      constrainedby Modelica.Blocks.Interfaces.SISO annotation(Dialog(enable=use_nConv),choicesAllMatching=true);
-  nConv nConverter if use_nConv
-    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
-        rotation=-90,
-        origin={21,73})));
-  Modelica.Blocks.Routing.RealPassThrough realPasThrNCon if not use_nConv
-    "If nConverter is not used"
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
-        rotation=-90,
-        origin={-24,74})));
-
 equation
   connect(feedbackHeatFlowEvaporator.y, QEva)
     annotation (Line(points={{80,-89},{80,-110}},
