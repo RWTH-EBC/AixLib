@@ -39,7 +39,7 @@ public
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_500l() "Storage data"
+      AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
   parameter Integer[n_load_cycles, 2] load_cycles= {{n,1},{n,1}}
     "Loading cycle connection pairs (upper position first)"
@@ -225,7 +225,8 @@ public
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="
+                                                      " />
 </p>
 </html>
 ",
@@ -650,7 +651,8 @@ connect(heatTransfer.therm, layer.port);
   <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="
+                                                      " />
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>
