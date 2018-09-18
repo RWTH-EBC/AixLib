@@ -31,14 +31,14 @@ public
       HeatStorage Parameters
      ******************************************************************* */
 
-  inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
-  inner parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
+  parameter Real tau(min=0) = 1000 "Time constant for mixing";
+  parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=1500
     "Coefficient at the inner wall";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
-  inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
   parameter Integer[n_load_cycles, 2] load_cycles= {{n,1},{n,1}}
@@ -207,37 +207,15 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-38})));
+  HeatTransfer heatTransfer annotation (Placement(
+        transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
-        HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-8,18},
-            {12,38}},  rotation=0)));
+    replaceable model HeatTransfer =
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
+    BaseClasses.PartialHeatTransferLayers(n=n,Medium=medium,data=data)
+    "Heat Transfer Model between fluid layers" annotation (Dialoag(enable=false),choicesAllMatching=true);
 
- replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction constrainedby
-    BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html><h4>
-  <font color=\"#008000\">Overview</font>
-</h4>
-<p>
-  Heat transfer model for heat transfer between two fluid layers.
-</p>
-<h4>
-  <font color=\"#008000\">Level of Development</font>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="
-                                                      " />
-</p>
-</html>
-",
- revisions="<html><ul>
-  <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
-</html>
-"));
+
 equation
 
   if use_heatingRod then

@@ -18,7 +18,6 @@ model BufferStorageVariablePorts
         rotation=180,
         origin={-42,28})));
   Components.Storage.HeatStorageVariablePorts heatStorageVariablePorts(
-    n=10,
     load_cycles=[10,4; 6,1],
     n_HC1_up=10,
     n_HC1_low=6,
@@ -27,8 +26,7 @@ model BufferStorageVariablePorts
     unload_cycles=[1,10; 4,10],
     T_start_wall=323.15,
     T_start_ins=323.15,
-    redeclare model HeatTransfer =
-        Components.Storage.BaseClasses.HeatTransferDirectedHeatTransfer)
+    n=10)
     annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-70,50},{-50,70}})));

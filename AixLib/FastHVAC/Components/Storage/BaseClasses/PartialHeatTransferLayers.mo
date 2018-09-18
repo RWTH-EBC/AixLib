@@ -1,22 +1,16 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
 partial model PartialHeatTransferLayers
-
-  final outer parameter Integer n(min=2)=3;
+protected
+  parameter Integer  n(min=2)=3;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] therm annotation (
       Placement(transformation(extent={{40,0},{60,20}}, rotation=0)));
-   // Modelica_Fluid.Interfaces.FluidPort_a[n+1] fluidport(  redeclare final
-   //   package Medium =
-   //             Medium) annotation 1;
-
-  final outer replaceable package Medium =
+  replaceable package Medium =
        FastHVAC.Media.WaterSimple "Medium model"   annotation(choicesAllMatching);
-
-final outer replaceable parameter
+  replaceable parameter
     AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l()
     annotation (choicesAllMatching);
-
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
             -100,-100},{100,100}}),
                       graphics),
                        Icon(coordinateSystem(preserveAspectRatio=false,
@@ -84,8 +78,4 @@ final outer replaceable parameter
 </ul>
 </html>
 "));
-  //Modelica.Blocks.Interfaces.RealInput m_flow annotation 5;
-  //Modelica.Blocks.Interfaces.RealInput[n+1] H_flow
-  //  "Enthalpy flow between the volumes" annotation 6;
-
 end PartialHeatTransferLayers;
