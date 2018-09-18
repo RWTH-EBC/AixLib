@@ -6,14 +6,15 @@ model HeatPump
   AixLib.Fluid.Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     m_flow=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=275.15,
-    nPorts=1) "Ideal mass flow source at the inlet of the source side"
+    nPorts=1,
+    redeclare package Medium = AixLib.Media.Air,
+    T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
-  AixLib.Fluid.Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
-      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
-       1) "Fixed boundary at the outlet of the source side"
+  AixLib.Fluid.Sources.FixedBoundary                sourceSideFixedBoundary(
+                                                                         nPorts=
+       1, redeclare package Medium = AixLib.Media.Air)
+          "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-86,40})));
@@ -27,7 +28,7 @@ model HeatPump
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={0,-70})));
+        origin={2,-76})));
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
     use_refIne=false,
     refIneFre_constant=1,
@@ -50,13 +51,12 @@ model HeatPump
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package Medium_eva =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     use_EvaCap=true,
     use_ConCap=true,
-    TCon_start=303.15,
+    redeclare package Medium_eva = AixLib.Media.Air,
     TAmbCon_nom=288.15,
-    TAmbEva_nom=273.15) annotation (Placement(transformation(
+    TAmbEva_nom=273.15,
+    TCon_start=303.15)  annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));
@@ -144,18 +144,21 @@ model HeatPump
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={88,-64})));
+  Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
+        transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=180,
+        origin={-71,-3})));
 equation
 
   connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
       points={{-73,-74},{-68,-74},{-68,-66},{-56,-66}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{
-          1.9984e-15,-59},{4,-59},{4,-47.4},{26.1667,-47.4}},
-                                                color={0,0,127}));
-  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{
-          1.9984e-15,-59},{1.9984e-15,-47.4},{-22.1667,-47.4}},
-                                       color={0,0,127}));
+  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{2,-65},
+          {4,-65},{4,-47.4},{26.1667,-47.4}},   color={0,0,127}));
+  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{2,-65},
+          {2,-47.4},{-22.1667,-47.4}}, color={0,0,127}));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_a2) annotation (Line(
         points={{-34,-70},{-24,-70},{-24,-45},{-12.5,-45}}, color={0,127,255}));
   connect(nIn.y, pumSou.Nrpm)
@@ -189,6 +192,8 @@ equation
           {4,6.84},{6.83333,6.84}},       color={0,0,127}));
   connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
           {-6,77.6},{-6,6.84},{-2.83333,6.84}},             color={255,0,255}));
+  connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
+          -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),

@@ -22,9 +22,9 @@ partial model partialTSetToNSet
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={0,110})));
+        origin={12,-108})));
   Modelica.Blocks.Interfaces.RealInput TAct "Actual temperature, control variable"
     annotation (Placement(transformation(
         extent={{16,16},{-16,-16}},
@@ -33,29 +33,31 @@ partial model partialTSetToNSet
   Utilities.Logical.SmoothSwitch swiNullsecHeaGen if use_secHeaGen
     "If second heater is off, zero is passed" annotation (Placement(
         transformation(
-        extent={{-8,-8},{8,8}},
+        extent={{8,-8},{-8,8}},
         rotation=90,
-        origin={0,86})));
+        origin={12,-84})));
   Modelica.Blocks.Math.Gain gain(final k=1/Q_flow_nominal) if
                                     use_secHeaGen
-    annotation (Placement(transformation(extent={{-26,62},{-14,74}})));
+    annotation (Placement(transformation(extent={{-16,-60},{-4,-72}})));
  Modelica.Blocks.Sources.RealExpression calcQHeat(final y=sigBusHP.m_flow_co*(
         sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180) if use_secHeaGen
-    annotation (Placement(transformation(extent={{-80,64},{-38,100}})));
+    annotation (Placement(transformation(extent={{-70,-48},{-28,-84}})));
 equation
   connect(conZer.y, swiNullHP.u3) annotation (Line(points={{50.6,-18},{58,-18},
           {58,-8},{64,-8}}, color={0,0,127}));
   connect(swiNullHP.y, nOut)
     annotation (Line(points={{87,0},{110,0}}, color={0,0,127}));
   connect(swiNullsecHeaGen.y, ySecHeaGen)
-    annotation (Line(points={{0,94.8},{0,110}},   color={0,0,127}));
+    annotation (Line(points={{12,-92.8},{12,-108}},
+                                                  color={0,0,127}));
   connect(conZer.y, swiNullsecHeaGen.u3) annotation (Line(points={{50.6,-18},{
-          58,-18},{58,76.4},{6.4,76.4}},  color={0,0,127}));
-  connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-13.4,68},{-6,
-          68},{-6,76.4},{-6.4,76.4}},
+          70,-18},{70,-74.4},{18.4,-74.4}},
+                                          color={0,0,127}));
+  connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-3.4,-66},{6,
+          -66},{6,-74.4},{5.6,-74.4}},
                                 color={0,0,127}));
-  connect(gain.u, calcQHeat.y) annotation (Line(points={{-27.2,68},{-32,68},{
-          -32,82},{-35.9,82}}, color={0,0,127}));
+  connect(gain.u, calcQHeat.y) annotation (Line(points={{-17.2,-66},{-25.9,-66}},
+                               color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
           extent={{-100,100},{100,-100}},

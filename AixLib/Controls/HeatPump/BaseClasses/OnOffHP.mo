@@ -7,9 +7,9 @@ model OnOffHP "Converts a desired temperature to a certain compressor speed"
   Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=true)
                                                           annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,38})));
+        extent={{-7,-7},{7,7}},
+        rotation=270,
+        origin={13,-59})));
   Modelica.Blocks.Sources.Constant conOne(k=1) "Constant one for on off heat pump" annotation (Placement(transformation(extent={{38,14},{50,26}})));
 
 equation
@@ -21,8 +21,8 @@ equation
           {-76,-42.4},{-54.8,-42.4}}, color={0,0,127}));
   connect(onOffController.y, swiNullHP.u2) annotation (Line(points={{-22.6,-34},
           {20,-34},{20,0},{64,0}}, color={255,0,255}));
-  connect(swiNullsecHeaGen.u2, booleanConstant.y) annotation (Line(points={{-5.55112e-16,
-          76.4},{0,76.4},{0,49}},              color={255,0,255}));
+  connect(swiNullsecHeaGen.u2, booleanConstant.y) annotation (Line(points={{12,
+          -74.4},{12,-66.7},{13,-66.7}},       color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end OnOffHP;

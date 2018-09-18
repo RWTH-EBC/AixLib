@@ -29,22 +29,22 @@ model HPControl
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={0,110})));
+        origin={-4,-104})));
   Modelica.Blocks.Interfaces.RealOutput y_sou
-    annotation (Placement(transformation(extent={{-14,-14},{14,14}},
+    annotation (Placement(transformation(extent={{14,-14},{-14,14}},
         rotation=90,
-        origin={-60,114})));
+        origin={-64,-100})));
   Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(transformation(
-        extent={{-14,-14},{14,14}},
+        extent={{14,-14},{-14,14}},
         rotation=90,
-        origin={60,114})));
+        origin={56,-100})));
   Modelica.Blocks.Sources.Constant        constHeating1(final k=1)
     "If you want to include chilling, please insert control blocks first"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={-34,78})));
+        origin={-12,-72})));
   Controls.HeatPump.HeatingCurve heatCurve(
     use_dynTRoom=false,
     heatingCurveRecord=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
@@ -120,16 +120,18 @@ equation
   connect(TSup,OnOffControl. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
           {30,-22},{30,-4.6},{41.44,-4.6}},          color={0,0,127}));
   connect(OnOffControl.ySecHeaGen, ySecHeaGen) annotation (Line(
-      points={{60,27.7},{60,74},{0,74},{0,110}},
+      points={{61.92,-9.36},{61.92,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,
+          -90},{-4,-104}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ySecHeaGen, ySecHeaGen)
-    annotation (Line(points={{0,110},{0,110}}, color={0,0,127}));
+    annotation (Line(points={{-4,-104},{-4,-104}},
+                                               color={0,0,127}));
   connect(constHeating1.y, y_sou)
-    annotation (Line(points={{-34,89},{-60,89},{-60,114}}, color={0,0,127}));
-  connect(constHeating1.y, y_sin) annotation (Line(points={{-34,89},{12,89},{12,
-          88},{60,88},{60,114}},
-                            color={0,0,127}));
+    annotation (Line(points={{-12,-83},{-12,-84},{-64,-84},{-64,-100}},
+                                                           color={0,0,127}));
+  connect(constHeating1.y, y_sin) annotation (Line(points={{-12,-83},{56,-83},{
+          56,-100}},        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,80}}),                                   graphics={
         Rectangle(
