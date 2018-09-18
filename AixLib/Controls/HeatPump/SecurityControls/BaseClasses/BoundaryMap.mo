@@ -57,7 +57,7 @@ protected
     "Maximal value of lower and upper table data";
 initial equation
   assert(tableLow_internal[end,1]==tableUpp_internal[end,1],"The boundary values have to be the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
-  assert(tableLow[1,1]==tableUpp_internal[1,1],"The boundary values have to be the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
+  assert(tableLow_internal[1,1]==tableUpp_internal[1,1],"The boundary values have to be the same. For now the value to the safe operational side has been selected.", level = AssertionLevel.error);
 
 equation
   connect(x_in, uppCombiTable1Ds.u)

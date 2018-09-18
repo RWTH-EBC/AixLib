@@ -4,7 +4,8 @@ model HeatPumpSystem "Example for a heat pump system"
   replaceable package Medium_sin =
       Modelica.Media.Water.ConstantPropertyLiquidWater
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
-  replaceable package Medium_sou = AixLib.Media.Specialized.Air.PerfectGas
+  replaceable package Medium_sou =
+      Modelica.Media.Water.ConstantPropertyLiquidWater
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -62,6 +63,8 @@ model HeatPumpSystem "Example for a heat pump system"
     use_T=true,
     nPorts=1,
     redeclare package Medium = Medium_sou,
+    use_p=true,
+    p=200000,
     T=285.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
 
@@ -69,9 +72,57 @@ model HeatPumpSystem "Example for a heat pump system"
     use_T=true,
     nPorts=1,
     redeclare package Medium = Medium_sou,
+    p=200000,
     T=281.15) "Fluid sink on source side"
     annotation (Placement(transformation(extent={{-48,-100},{-28,-80}})));
-  AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem
+  AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
+    redeclare package Medium_con = Medium_sin,
+    redeclare package Medium_eva = Medium_sou,
+    mFlow_conNominal=1,
+    mFlow_evaNominal=1,
+    Q_flow_nominal=8000,
+    perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4(),
+    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
+    use_deFro=false,
+    initType=Modelica.Blocks.Types.Init.InitialState,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    use_revHP=false,
+    redeclare model PerDataHea =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable
+          =AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()),
+    scalingFactor=1,
+    use_refIne=false,
+    refIneFre_constant=0.01,
+    VCon=0.04,
+    VEva=0.04,
+    dpEva_nominal=0,
+    dpCon_nominal=0,
+    deltaM_con=0.1,
+    use_opeEnvFroRec=true,
+    tableUpp=[-100,100; 100,100],
+    tableLow=[-100,0; 100,0],
+    minIceFac=0,
+    use_chiller=true,
+    calcPel_deFro=100,
+    use_conCap=false,
+    use_evaCap=false,
+    CEva=0,
+    GEva=0,
+    CCon=0,
+    GCon=0,
+    redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
+        use_bivPar=true,
+        Q_flow_nominal=8000,
+        hys=2),
+    perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12(),
+    use_minRunTime=true,
+    minRunTime(displayUnit="min"),
+    use_minLocTime=true,
+    minLocTime(displayUnit="min"),
+    use_runPerHou=true,
+    pre_n_start=false)
     annotation (Placement(transformation(extent={{4,-76},{46,-34}})));
 equation
   connect(theCon.port_b,vol. heatPort) annotation (Line(
@@ -122,7 +173,7 @@ equation
     annotation (Line(points={{82,-90},{35.5,-90},{35.5,-76}},
                                                           color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {16,-90},{16,-76},{14.5,-76}},
+          {14,-90},{14,-76},{14.5,-76}},
                                        color={0,127,255}));
   connect(heatPumpSystem.port_b1, rad.port_a) annotation (Line(points={{35.5,
           -34},{35.5,0},{74,0},{74,12},{40,12}},

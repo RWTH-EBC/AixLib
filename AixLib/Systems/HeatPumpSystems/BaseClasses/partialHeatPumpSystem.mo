@@ -16,9 +16,7 @@ partial model partialHeatPumpSystem
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
-  replaceable model secHeatGen =
-      AixLib.Fluid.HeatExchangers.HeaterCooler_u constrainedby
-    AixLib.Fluid.Interfaces.PartialTwoPortInterface                                                                  annotation(Dialog(group="System", enable=
+  replaceable model secHeatGen = AixLib.Fluid.HeatExchangers.HeaterCooler_u                                                                                   annotation(Dialog(group="System", enable=
           use_secHeaGen), choicesAllMatching=true);
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
@@ -342,10 +340,10 @@ partial model partialHeatPumpSystem
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={50,-58})));
- secHeatGen secHeaGen(redeclare package Medium = Medium_con,
-    allowFlowReversal=allowFlowReversalCon,
-    m_flow_nominal=mFlow_conNominal,
-    dp_nominal=0,
+ secHeatGen secHeaGen(redeclare final package Medium = Medium_con,
+    final allowFlowReversal=allowFlowReversalCon,
+    final m_flow_nominal=mFlow_conNominal,
+    final dp_nominal=0,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final Q_flow_nominal=Q_flow_nominal) if
                              use_secHeaGen annotation (Placement(transformation(
@@ -369,7 +367,7 @@ partial model partialHeatPumpSystem
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
-    tauHeaTra=1200,
+    final tauHeaTra=tauHeaTra,
     final m_flow_small=1E-4*mFlow_conNominal,
     final initType=initType,
     final T_start=TCon_start,
@@ -421,7 +419,7 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(hPControls.nOut, securityControl.nSet) annotation (Line(
-      points={{-65.62,36.6667},{-68,36.6667},{-68,12},{-108,12},{-108,-6},{-104,
+      points={{-65.62,36.6667},{-62,36.6667},{-62,12},{-110,12},{-110,-6},{-104,
           -6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
