@@ -28,8 +28,8 @@ public
       HeatStorage Parameters
      ******************************************************************* */
 
-  inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
-  inner parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
+  parameter Real tau(min=0) = 1000 "Time constant for mixing";
+  parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=1500
     "Coefficient at the inner wall";
@@ -207,7 +207,10 @@ public
     alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
-    pipeRecordHC=data.pipeHC2) if use_heatingCoil2 annotation (Placement(
+    pipeRecordHC=data.pipeHC2,
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                  use_heatingCoil2 annotation (Placement(
         transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,
@@ -215,30 +218,21 @@ public
 //   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransCover[2]
 //     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
 
-HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-10,-10},
+HeatTransfer heatTransfer(final Medium=medium,final data=data,
+    final n=n) annotation (Placement(transformation(extent={{-10,-10},
             {10,10}},  rotation=0)));
 
  replaceable model HeatTransfer =
      BaseClasses.HeatTransferOnlyConduction constrainedby
     BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html><h4>
-  <font color=\"#008000\">Overview</font>
-</h4>
-<p>
-  Heat transfer model for heat transfer between two fluid layers.
-</p>
-</html>
-",
- revisions="<html><ul>
-  <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
-</html>
-"));
+    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
+parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient"
+                                                      annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coeffiecient inside pipe"
+                                                          annotation(Dialog(enable = not calculateAlphaInside,tab="Heating Coils and Rod"));
 equation
   if use_heatingRod then
 

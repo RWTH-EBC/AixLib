@@ -112,7 +112,12 @@ public
   FastHVAC.Interfaces.EnthalpyPort_a UnloadingCycle_In annotation (Placement(
         transformation(extent={{10,-110},{30,-90}}), iconTransformation(extent={
             {10,-110},{30,-90}})));
-
+parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient"
+                                                      annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coeffiecient inside pipe"
+                                                          annotation(Dialog(enable = not calculateAlphaInside,tab="Heating Coils and Rod"));
 public
   FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n]
     annotation (Placement(transformation(

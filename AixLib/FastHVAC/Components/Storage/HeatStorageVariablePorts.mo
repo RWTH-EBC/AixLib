@@ -177,7 +177,10 @@ public
     alpha_HC=alpha_HC1,
     medium_HC=mediumHC1,
     lengthHC=data.lengthHC1,
-    pipeRecordHC=data.pipeHC1) if   use_heatingCoil1 annotation (Placement(
+    pipeRecordHC=data.pipeHC1,
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                    use_heatingCoil1 annotation (Placement(
         transformation(
         extent={{-15,-12},{15,12}},
         rotation=270,
@@ -188,7 +191,10 @@ public
     alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
-    pipeRecordHC=data.pipeHC2) if   use_heatingCoil2 annotation (Placement(
+    pipeRecordHC=data.pipeHC2,
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                    use_heatingCoil2 annotation (Placement(
         transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,
@@ -216,6 +222,12 @@ public
   HeatTransfer heatTransfer(final Medium=medium,final data=data,
     final n=n)      annotation (Placement(transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
+  parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient"
+                                                      annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coeffiecient inside pipe"
+                                                          annotation(Dialog(enable = not calculateAlphaInside,tab="Heating Coils and Rod"));
 equation
 
   if use_heatingRod then
