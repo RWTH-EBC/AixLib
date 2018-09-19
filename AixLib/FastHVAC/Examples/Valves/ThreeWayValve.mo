@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.Valves;
+﻿within AixLib.FastHVAC.Examples.Valves;
 model ThreeWayValve
   extends Modelica.Icons.Example;
   Components.Valves.ThreeWayValve threeWayValve

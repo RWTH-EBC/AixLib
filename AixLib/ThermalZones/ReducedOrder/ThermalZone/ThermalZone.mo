@@ -9,16 +9,15 @@ model ThermalZone
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
 
-  replaceable Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+  replaceable Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     humanSenHea(
     final ActivityType=3,
     final T0=zoneParam.T_start,
     final NrPeople=zoneParam.nrPeople,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
-    "Internal gains from persons"
-    annotation (choicesAllMatching=true,
+    "Internal gains from persons" annotation (choicesAllMatching=true,
       Placement(transformation(extent={{64,-36},{84,-16}})));
-  replaceable Building.Components.Sources.InternalGains.Machines.Machines_DIN18599
+  replaceable Utilities.Sources.InternalGains.Machines.Machines_DIN18599
     machinesSenHea(
     final ratioConv=zoneParam.ratioConvectiveHeatMachines,
     final T0=zoneParam.T_start,
@@ -26,12 +25,11 @@ model ThermalZone
     final NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  replaceable Building.Components.Sources.InternalGains.Lights.Lights_relative lights(
+  replaceable Utilities.Sources.InternalGains.Lights.Lights_relative lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
     final T0=zoneParam.T_start,
     final LightingPower=zoneParam.lightingPower,
-    final RoomArea=zoneParam.AZone) if ATot > 0
-    "Internal gains from light"
+    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   corG corGMod(
     final n=zoneParam.nOrientations,
