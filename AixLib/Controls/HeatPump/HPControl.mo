@@ -87,16 +87,14 @@ model HPControl
   SetPoints.HeatingCurve heatCurve(
     redeclare function HeatingCurveFunction =
         SetPoints.Functions.HeatingCurveFunction,
-    final use_tableData=true,
     final TOffset=0,
     final use_dynTRoom=false,
-    final n=0,
-    final m=0,
     final zerTim=zerTim,
     final day_hour=day_hour,
     final night_hour=night_hour,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
+    final use_tableData=true,
     final TRoom_nominal=293.15)
     annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
 

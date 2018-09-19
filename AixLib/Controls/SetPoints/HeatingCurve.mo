@@ -21,13 +21,8 @@ model HeatingCurve "Model of a heating curve"
   //Dynamic room temperature
   parameter Boolean use_dynTRoom=true "If different room temperatures are required, set to true"   annotation(choices(checkBox=true), Dialog(
         group="Dynamic room Temperature"));
-
-  parameter Modelica.SIunits.ThermodynamicTemperature TRoom_nominal=293.15 "Desired room temperature"
-    annotation (Dialog(group="Dynamic room Temperature"));
-  parameter Real n "Offset to arrange TSet according to TRoom"
-    annotation (Dialog(enable=use_dynTRoom, group="Dynamic room Temperature"));
-  parameter Real m "Slope to arrange TSet according to TRoom"
-    annotation (Dialog(enable=use_dynTRoom, group="Dynamic room Temperature"));
+  parameter Modelica.SIunits.ThermodynamicTemperature TRoom_nominal=293.15 "Constant desired room temperature "
+    annotation (Dialog(group="Dynamic room Temperature",enable=not use_dynTRoom));
   //Day-Night Mode:
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.Custom
     "Enumeration for choosing how reference time (time = 0) should be defined"
