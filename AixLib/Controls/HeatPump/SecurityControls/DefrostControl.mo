@@ -8,8 +8,7 @@ block DefrostControl
     "Calculate how much eletrical power is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
   Modelica.Blocks.Logical.GreaterEqualThreshold
-                                       iceFacGreMin(final threshold=minIceFac) if
-    use_chiller
+                                       iceFacGreMin(final threshold=minIceFac)
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
