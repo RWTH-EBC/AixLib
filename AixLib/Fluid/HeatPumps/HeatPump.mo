@@ -233,11 +233,12 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
-    final y_start=yRefIne_start,
     final normalized=true,
     final n=nthOrder,
     final f=refIneFre_constant,
-    final x_start=x_start) if      use_refIne
+    final x_start=x_start,
+    final y_start=yRefIne_start) if
+                                   use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
@@ -251,11 +252,12 @@ model HeatPump "Base model of realistic heat pump"
         origin={28,32})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneCon(
     final initType=initType,
-    final y_start=yRefIne_start,
     final normalized=true,
     final n=nthOrder,
     final f=refIneFre_constant,
-    final x_start=x_start) if      use_refIne
+    final x_start=x_start,
+    final y_start=yRefIne_start) if
+                                   use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -296,7 +298,8 @@ model HeatPump "Base model of realistic heat pump"
       model                                                                     PerDataHea =
       PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
-    final use_revHP=use_revHP)                                                           annotation (
+    final use_revHP=use_revHP,
+    final scalingFactor=scalingFactor)                                                   annotation (
       Placement(transformation(
         extent={{-26,-27},{26,27}},
         rotation=90,

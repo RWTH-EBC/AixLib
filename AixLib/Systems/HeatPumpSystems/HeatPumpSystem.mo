@@ -9,8 +9,6 @@ model HeatPumpSystem
       final pEva_start=pEva_start,
       final TEva_start=TEva_start,
       final XEva_start=XEva_start,
-      final x_start=x_start,
-      final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
       final mSenFacCon=mSenFacCon,
@@ -63,13 +61,13 @@ model HeatPumpSystem
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=false);
-  parameter Boolean use_refIne=false "Consider the inertia of the refrigerant cycle"
+  parameter Boolean use_refIne=true  "Consider the inertia of the refrigerant cycle"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia"), choices(checkBox=true));
   constant Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency representing inertia of refrigerant cycle"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=false);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=false);
+    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
 //Condenser/Evaporator
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);

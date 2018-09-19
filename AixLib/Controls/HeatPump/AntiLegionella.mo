@@ -35,7 +35,7 @@ model AntiLegionella "Control to avoid Legionella in the DHW"
     annotation (Placement(transformation(extent={{-140,64},{-100,104}})));
   Modelica.Blocks.Logical.Pre pre1
     annotation (Placement(transformation(extent={{-44,-6},{-32,6}})));
-  AixLib.Utilities.Time.daytimeSwitch daytimeSwitch(
+  AixLib.Utilities.Time.DaytimeSwitch daytimeSwitch(
     final hourDay=trigHour,
     final zerTim=zerTim,
     final yearRef=yearRef,
