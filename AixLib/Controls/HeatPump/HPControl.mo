@@ -2,14 +2,12 @@ within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
-    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet
   replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet                                                                                           constrainedby
+      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby
     AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final Q_flow_nominal=Q_flow_nominal,
     final use_secHeaGen=use_secHeaGen,
-    final use_bivPar=use_bivPar)                     "Model for converting set temperature to set compressor speed"
-                                                           annotation(choicesAllMatching=true);
+    final use_bivPar=use_bivPar);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
   parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation(choices(choice=true "Parallel",
@@ -100,8 +98,9 @@ model HPControl
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
     final TRoom_nominal=293.15)
+    annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
 
-    annotation (Placement(transformation(extent={{-74,10},{-54,30}})));  TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
+                                                                         TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
             {76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg "No Anti Legionella"
                                            annotation (
