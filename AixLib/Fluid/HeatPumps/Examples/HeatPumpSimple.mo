@@ -63,9 +63,8 @@ model HeatPumpSimple
     tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
         5750],
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    VolumeEvaporator=1,
-    VolumeCondenser=1,
-    gain(k=-1))            "Simple heat pump based on manufacturing data"
+    VolumeEvaporator=0.004,
+    VolumeCondenser=0.004)            "Simple heat pump based on manufacturing data"
     annotation (Placement(transformation(extent={{-2,4},{18,24}})));
 
 equation
@@ -74,7 +73,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(massFlowPulse.y, sinkSideMassFlowSource.m_flow_in) annotation (Line(
-      points={{-59,-50},{-32,-50},{-32,-40},{-4,-40},{-4,-40},{18,-40},{18,-40}},
+      points={{-59,-50},{18,-50},{18,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideFixedBoundary.ports[1], temperature.port_b) annotation (Line(
