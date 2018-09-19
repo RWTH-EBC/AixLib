@@ -11,7 +11,6 @@ model HeatPump "Base model of realistic heat pump"
     final show_T=show_TPort,
     redeclare package Medium2 = Medium_eva);
 
-
 //General
   replaceable package Medium_con = Modelica.Media.Air.MoistAir constrainedby
     Modelica.Media.Interfaces.PartialMedium                                "Medium at sink side"
@@ -108,12 +107,12 @@ model HeatPump "Base model of realistic heat pump"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer in temperature sensors, default 20 minutes"
     annotation (Evaluate=false,Dialog(tab="Assumptions", group="Temperature sensors"));
-  parameter Modelica.SIunits.Temperature TAmbCon_nom=291.15
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side" annotation (               Dialog(tab=
           "Assumptions",                                                                                               group=
           "Condenser"));
 
-  parameter Modelica.SIunits.Temperature TAmbEva_nom=273.15
+  parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
     annotation (               Dialog(tab="Assumptions",group="Evaporator"));
 
@@ -170,7 +169,7 @@ model HeatPump "Base model of realistic heat pump"
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  BaseClasses.EvaporatorCondenserWithCapacity Condenser(
+  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity Condenser(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final mFlow_nominal=mFlow_conNominal,
@@ -182,7 +181,7 @@ model HeatPump "Base model of realistic heat pump"
     final tau=tauSenT,
     final initType=initType,
     final T_start=TCon_start,
-    final TAmb=TAmbCon_nom,
+    final TAmb_nominal=TAmbCon_nominal,
     final tauHeaTra=tauHeaTra,
     final p_start=pCon_start,
     final kAOut_nominal=GCon,
@@ -198,15 +197,15 @@ model HeatPump "Base model of realistic heat pump"
     final energyDynamics=energyDynamics,
     final mSenFac=mSenFacCon,
     final transferHeat=transferHeat,
-    final is_con=true)               "Heat exchanger model for the condenser"
+    final is_con=true) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,72},{16,104}})));
-  BaseClasses.EvaporatorCondenserWithCapacity Evaporator(
+  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity Evaporator(
     redeclare final package Medium = Medium_eva,
     final mFlow_nominal=mFlow_evaNominal,
     final deltaM=deltaM_eva,
     final dp_nominal=dpEva_nominal,
     final V=VEva,
-    final TAmb=TAmbEva_nom,
+    final TAmb_nominal=TAmbEva_nominal,
     final tauHeaTra=tauHeaTra,
     final use_cap=use_EvaCap,
     final C=CEva,
@@ -228,7 +227,7 @@ model HeatPump "Base model of realistic heat pump"
     final energyDynamics=energyDynamics,
     final transferHeat=transferHeat,
     final mSenFac=mSenFacEva,
-    final is_con=false)              "Heat exchanger model for the evaporator"
+    final is_con=false) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
@@ -287,11 +286,12 @@ model HeatPump "Base model of realistic heat pump"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.HeatPumpControlBus
+  AixLib.Controls.Interfaces.HeatPumpControlBus
                            sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  BaseClasses.InnerCycle innerCycle(redeclare final model PerDataHea =
+  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final
+      model                                                                     PerDataHea =
       PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
     final use_revHP=use_revHP)                                                           annotation (

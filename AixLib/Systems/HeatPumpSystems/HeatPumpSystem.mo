@@ -46,7 +46,7 @@ model HeatPumpSystem
       redeclare final model PerDataChi = PerDataChi), final calcQHeat(final y=
           heatPump.sigBusHP.m_flow_co*(senTSup.T - heatPump.sigBusHP.T_flow_co)
           *4180),
-    calcPel_total(y=sigBusHP.Pel));
+    calcPel_total(y=sigBusHP.Pel + pumSou.P + pumSin.P));
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",

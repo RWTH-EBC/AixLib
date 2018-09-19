@@ -1,7 +1,76 @@
 within AixLib.Fluid.HeatPumps.BaseClasses;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(final m_flow_nominal=mFlow_nominal);
-  MixingVolumes.MixingVolume vol(
+
+  replaceable package Medium =
+      Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choicesAllMatching = true);
+  parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
+      choice=false "Evaporator",
+      radioButtons=true));
+  parameter Modelica.SIunits.PressureDifference dp_nominal
+    "Pressure drop at nominal mass flow rate"
+    annotation (Dialog(group="Flow resistance"));
+  parameter Real deltaM=0.3
+    "Fraction of nominal mass flow rate where transition to turbulent occurs"
+    annotation (Dialog(group="Flow resistance"));
+
+  parameter Modelica.SIunits.Volume V "Volume of heat exchanger";
+  parameter Modelica.SIunits.Time tau=1
+    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
+    annotation (Dialog(group="Temperature sensors"));
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
+    "Type of initialization (InitialState and InitialOutput are identical)"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
+    "Initial or guess value of output (= state)" annotation (Dialog(tab="Initialization"));
+  parameter Boolean transferHeat=true
+    "If true, temperature T converges towards TAmb when no flow"
+    annotation (Dialog(group="Temperature sensors"),choices(checkBox=true));
+  parameter Modelica.SIunits.Temperature TAmb_nominal=273.15
+    "Fixed ambient temperature for heat transfer"
+    annotation (Dialog(group="Temperature sensors",enable=transferHeat));
+  parameter Modelica.SIunits.Time tauHeaTra=1200 "Time constant for heat transfer, default 20 minutes"
+    annotation (Dialog(group="Temperature sensors",enable=transferHeat));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure"
+    annotation (Dialog(tab="Initialization"));
+  parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
+    annotation (Dialog(group="Heat losses"),choices(checkBox=true));
+  parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
+    annotation (Dialog(group="Heat losses", enable=use_cap));
+  parameter Modelica.SIunits.ThermalConductance kAOut_nominal
+    "Nominal value for thermal conductance to the ambient" annotation (Dialog(group="Heat losses", enable=
+          use_cap));
+  parameter Modelica.SIunits.ThermalConductance kAIns_nominal
+    "Nominal value for thermal conductance on the inside of the heat exchanger"
+    annotation (Dialog(group="Heat losses", enable=use_cap));
+  parameter Real htcExpIns=0.88 "Exponent heat transfer coefficient for internal convection"
+    annotation (Dialog(group="Heat losses", enable=use_cap));
+
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=vol.energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics", group="Equation"));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics", group="Equation"));
+
+  parameter Real mSenFac=mSenFac
+                           "Factor for scaling the sensible thermal mass of the volume"
+    annotation (Dialog(tab="Dynamics"));
+  parameter Modelica.SIunits.MassFlowRate mFlow_nominal=1;
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation (Dialog(tab="Advanced", group="Flow resistance"));
+  parameter Boolean homotopyInitialization=false "= true, use homotopy method"
+    annotation (Dialog(tab="Advanced", group="Flow resistance"));
+  parameter Boolean linearized=false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation (Dialog(tab="Advanced", group="Flow resistance"));
+  parameter Modelica.Media.Interfaces.Types.MassFraction X_start[Medium.nX]=
+      Medium.X_default "Start value of mass fractions m_i/m"
+    annotation (Dialog(tab="Initialization"));
+ AixLib.Fluid.MixingVolumes.MixingVolume vol(
     nPorts=2,
     final use_C_flow=false,
     final m_flow_nominal=m_flow_nominal,
@@ -18,10 +87,10 @@ model EvaporatorCondenserWithCapacity
     final massDynamics=massDynamics,
     final X_start=X_start)                   "Volume of heat exchanger"
     annotation (Placement(transformation(extent={{-12,0},{8,-20}})));
-  Sensors.MassFlowRate mFlow_a(redeclare final package Medium = Medium, final
+  AixLib.Fluid.Sensors.MassFlowRate mFlow_a(redeclare final package Medium = Medium, final
       allowFlowReversal=allowFlowReversal) "Mass flow rate at inlet"
     annotation (Placement(transformation(extent={{-80,10},{-60,-10}})));
-  Sensors.TemperatureTwoPort senT_b(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_b(
     final allowFlowReversal=allowFlowReversal,
     final m_flow_small=1E-4*m_flow_nominal,
     redeclare final package Medium = Medium,
@@ -29,23 +98,23 @@ model EvaporatorCondenserWithCapacity
     final tau=tau,
     final initType=initType,
     final T_start=T_start,
-    final TAmb(displayUnit="K") = TAmb,
+    final TAmb(displayUnit="K") = TAmb_nominal,
     final tauHeaTra=tauHeaTra,
-    final transferHeat=transferHeat)         "Temperature at outlet"
+    final transferHeat=transferHeat) "Temperature at outlet"
     annotation (Placement(transformation(extent={{20,10},{40,-10}})));
-  Sensors.TemperatureTwoPort senT_a(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_a(
     final initType=initType,
     final tauHeaTra=tauHeaTra,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=1E-4*m_flow_nominal,
     final T_start=T_start,
-    final TAmb=TAmb,
+    final TAmb=TAmb_nominal,
     redeclare final package Medium = Medium,
     final tau=tau,
-    final transferHeat=transferHeat)         "Temperature at inlet"
+    final transferHeat=transferHeat) "Temperature at inlet"
     annotation (Placement(transformation(extent={{-50,10},{-30,-10}})));
-  FixedResistances.PressureDrop preDro(
+  AixLib.Fluid.FixedResistances.PressureDrop preDro(
     final allowFlowReversal=allowFlowReversal,
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
@@ -106,74 +175,6 @@ model EvaporatorCondenserWithCapacity
     annotation (Placement(transformation(extent={{-100,-70},{-120,-50}})));
   Modelica.Blocks.Interfaces.RealOutput T_ret_out "Output value return temperature"
     annotation (Placement(transformation(extent={{-100,-90},{-120,-70}})));
-  replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-      annotation (choicesAllMatching = true);
-  parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
-      choice=false "Evaporator",
-      radioButtons=true));
-  parameter Modelica.SIunits.PressureDifference dp_nominal
-    "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance"));
-  parameter Real deltaM=0.3
-    "Fraction of nominal mass flow rate where transition to turbulent occurs"
-    annotation (Dialog(group="Flow resistance"));
-
-  parameter Modelica.SIunits.Volume V "Volume of heat exchanger";
-  parameter Modelica.SIunits.Time tau=1
-    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
-    annotation (Dialog(group="Temperature sensors"));
-  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
-    "Type of initialization (InitialState and InitialOutput are identical)"
-    annotation (Dialog(tab="Initialization"));
-  parameter Modelica.SIunits.Temperature T_start=Medium.T_default
-    "Initial or guess value of output (= state)" annotation (Dialog(tab="Initialization"));
-  parameter Boolean transferHeat=true
-    "If true, temperature T converges towards TAmb when no flow"
-    annotation (Dialog(group="Temperature sensors"),choices(checkBox=true));
-  parameter Modelica.SIunits.Temperature TAmb=273.15 "Fixed ambient temperature for heat transfer"
-    annotation (Dialog(group="Temperature sensors",enable=transferHeat));
-  parameter Modelica.SIunits.Time tauHeaTra=1200 "Time constant for heat transfer, default 20 minutes"
-    annotation (Dialog(group="Temperature sensors",enable=transferHeat));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
-    "Start value of pressure"
-    annotation (Dialog(tab="Initialization"));
-  parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
-    annotation (Dialog(group="Heat losses"),choices(checkBox=true));
-  parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
-  parameter Modelica.SIunits.ThermalConductance kAOut_nominal
-    "Nominal value for thermal conductance to the ambient" annotation (Dialog(group="Heat losses", enable=
-          use_cap));
-  parameter Modelica.SIunits.ThermalConductance kAIns_nominal
-    "Nominal value for thermal conductance on the inside of the heat exchanger"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
-  parameter Real htcExpIns=0.88 "Exponent heat transfer coefficient for internal convection"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
-
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=vol.energyDynamics
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics", group="Equation"));
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics", group="Equation"));
-
-  parameter Real mSenFac=mSenFac
-                           "Factor for scaling the sensible thermal mass of the volume"
-    annotation (Dialog(tab="Dynamics"));
-  parameter Modelica.SIunits.MassFlowRate mFlow_nominal=1;
-  parameter Boolean from_dp=false
-    "= true, use m_flow = f(dp) else dp = f(m_flow)"
-    annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  parameter Boolean homotopyInitialization=false "= true, use homotopy method"
-    annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  parameter Boolean linearized=false
-    "= true, use linear relation between m_flow and dp for any flow rate"
-    annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  parameter Modelica.Media.Interfaces.Types.MassFraction X_start[Medium.nX]=
-      Medium.X_default "Start value of mass fractions m_i/m"
-    annotation (Dialog(tab="Initialization"));
-
 equation
   connect(mFlow_a.port_b, senT_a.port_a)
     annotation (Line(points={{-60,0},{-50,0}}, color={0,127,255}));

@@ -1,5 +1,24 @@
 ﻿within AixLib.Controls.HeatPump;
 model AntiLegionella "Control to avoid Legionella in the DHW"
+
+  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
+    "Temperature at which the legionella in DWH dies";
+
+  parameter Modelica.SIunits.Time minTimeAntLeg
+    "Minimal duration of antilegionella control";
+
+  parameter Integer trigWeekDay "Day of the week at which control is triggered";
+  parameter Integer trigHour "Hour of the day at which control is triggered";
+  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim
+    "Enumeration for choosing how reference time (time = 0) should be defined";
+  parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
+  Modelica.Blocks.Logical.GreaterEqual
+                               TConLessTLegMin
+    "Compare if current TCon is smaller than the minimal TLeg"
+    annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
+  AixLib.Utilities.Logical.SmoothSwitch switchTLeg
+    "Switch to Legionalla control if needed"
+    annotation (Placement(transformation(extent={{70,72},{84,86}})));
   Modelica.Blocks.Interfaces.RealOutput TSet_out
     "Set value for the condenser outlet temperature"
     annotation (Placement(transformation(extent={{100,66},{128,94}})));
@@ -7,17 +26,6 @@ model AntiLegionella "Control to avoid Legionella in the DHW"
   Modelica.Blocks.Sources.Constant constTLegMin(final k=TLegMin)
     "Temperature at which the legionella in DWH dies"
     annotation (Placement(transformation(extent={{-96,-12},{-88,-4}})));
-  parameter Modelica.SIunits.Temp_K TLegMin=333.15
-    "Temperature at which the legionella in DWH dies";
-  Modelica.Blocks.Logical.GreaterEqual
-                               TConLessTLegMin
-    "Compare if current TCon is smaller than the minimal TLeg"
-    annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-  Utilities.Logical.SmoothSwitch switchTLeg
-    "Switch to Legionalla control if needed"
-    annotation (Placement(transformation(extent={{70,72},{84,86}})));
-  parameter Modelica.SIunits.Time minTimeAntLeg
-    "Minimal duration of antilegionella control";
   Modelica.Blocks.Logical.Timer timeAntiLeg "Time in which legionella will die"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Logical.GreaterThreshold
@@ -27,7 +35,7 @@ model AntiLegionella "Control to avoid Legionella in the DHW"
     annotation (Placement(transformation(extent={{-140,64},{-100,104}})));
   Modelica.Blocks.Logical.Pre pre1
     annotation (Placement(transformation(extent={{-44,-6},{-32,6}})));
-  Utilities.Time.daytimeSwitch daytimeSwitch(
+  AixLib.Utilities.Time.daytimeSwitch daytimeSwitch(
     final hourDay=trigHour,
     final zerTim=zerTim,
     final yearRef=yearRef,
@@ -37,11 +45,6 @@ model AntiLegionella "Control to avoid Legionella in the DHW"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-46,34})));
-  parameter Integer trigWeekDay "Day of the week at which control is triggered";
-  parameter Integer trigHour "Hour of the day at which control is triggered";
-  parameter Utilities.Time.Types.ZeroTime zerTim
-    "Enumeration for choosing how reference time (time = 0) should be defined";
-  parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
   Modelica.Blocks.MathInteger.TriggeredAdd triggeredAdd(use_reset=true, use_set=
        false,
     y_start=0)

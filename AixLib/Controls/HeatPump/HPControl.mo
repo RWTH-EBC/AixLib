@@ -1,11 +1,12 @@
 within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
+  //General
   replaceable model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP                                                                constrainedby
     AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet
                                                      "Model for converting set temperature to set compressor speed"
                                                            annotation(choicesAllMatching=true);
-  parameter Boolean use_antLeg "True if Legionella Control is of relevance";
+
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
   parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation(choices(choice=true "Parallel",
       choice=false "Alternativ",
@@ -13,10 +14,45 @@ model HPControl
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
     annotation (Dialog(enable=use_secHeaGen));
+//Heating Curve
+  parameter
+    AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
+    heatingCurveRecord=
+      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
+    "Record with information about heating curve data"
+    annotation (Dialog(group="Heating Curve"),choicesAllMatching=true);
+  parameter Real declination=2 "Declination of curve"
+    annotation (Dialog(group="Heating Curve"));
+  parameter Real day_hour=6 "Hour of day at which day mode is enabled"
+    annotation (Dialog(group="Heating Curve"));
+  parameter Real night_hour=22 "Hour of day at which night mode is enabled"
+    annotation (Dialog(group="Heating Curve"));
+  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
+    "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve and antilegionella"
+    annotation (Dialog(group="Heating Curve"));
+//Anti Legionella
+  parameter Boolean use_antLeg "True if Legionella Control is of relevance"
+    annotation (Dialog(group="Anti Legionella"),choices(checkBox=true));
+  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
+    "Temperature at which the legionella in DWH dies"
+    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+  parameter Modelica.SIunits.Time minTimeAntLeg
+    "Minimal duration of antilegionella control"
+    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+  parameter Integer trigWeekDay=5
+    "Day of the week at which control is triggered"
+    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+  parameter Integer trigHour=3 "Hour of the day at which control is triggered"
+    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+
+
   AixLib.Controls.HeatPump.AntiLegionella antiLegionella(
-    trigWeekDay=5,
-    trigHour=3,
-    final TLegMin=333.15) if
+    final TLegMin=TLegMin,
+    minTimeAntLeg=minTimeAntLeg,
+    trigWeekDay=trigWeekDay,
+    trigHour=trigHour,
+    yearRef=2017,
+    final zerTim=zerTim) if
                        use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
@@ -46,36 +82,38 @@ model HPControl
         rotation=90,
         origin={-12,-72})));
   Controls.HeatPump.HeatingCurve heatCurve(
-    use_dynTRoom=false,
-    heatingCurveRecord=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
-    zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017,
-    day_hour=6,
-    night_hour=22,
     redeclare function HeatingCurveFunction =
         Controls.HeatPump.BaseClasses.Functions.HeatingCurveFunction,
-    n=0,
-    m=0,
-    use_tableData=true,
-    declination=2,
-    TRoom_nominal=293.15) annotation (Placement(transformation(extent={{-74,10},
+    final use_tableData=true,
+    final TOffset=0,
+    final use_dynTRoom=false,
+    final n=0,
+    final m=0,
+    final zerTim=zerTim,
+    final day_hour=day_hour,
+    final night_hour=night_hour,
+    final heatingCurveRecord=heatingCurveRecord,
+    final declination=declination,
+    final TRoom_nominal=293.15)
+                          annotation (Placement(transformation(extent={{-74,10},
             {-54,30}})));
   TSetToNSet OnOffControl(
-    use_secHeaGen=use_secHeaGen,
-    use_bivPar=use_bivPar,
-    final Q_flow_nominal=Q_flow_nominal)
-                                        annotation (Placement(transformation(extent={{44,-8},{76,26}})));
+    final Q_flow_nominal=Q_flow_nominal,
+    final use_secHeaGen=use_secHeaGen,
+    final use_bivPar=use_bivPar)        annotation (Placement(transformation(extent={{44,-8},{76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg "No Anti Legionella"
                                            annotation (
                                      choicesAllMatching=true, Placement(
         transformation(extent={{-10,38},{6,54}})));
   Modelica.Blocks.Sources.BooleanConstant constHeating(final k=true)
     "If you want to include chilling, please insert control blocks first"
-    annotation (Placement(transformation(extent={{58,-44},{78,-24}})));
+    annotation (Placement(transformation(extent={{82,-26},{94,-14}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut
     annotation (Placement(transformation(extent={{100,-34},{128,-6}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
+
 equation
 
   connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{-90,
@@ -113,8 +151,8 @@ equation
       points={{6.8,46},{26,46},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(modeOut, constHeating.y) annotation (Line(points={{114,-20},{96,-20},
-          {96,-34},{79,-34}}, color={255,0,255}));
+  connect(modeOut, constHeating.y) annotation (Line(points={{114,-20},{94.6,-20}},
+                              color={255,0,255}));
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
   connect(TSup,OnOffControl. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
@@ -130,8 +168,8 @@ equation
   connect(constHeating1.y, y_sou)
     annotation (Line(points={{-12,-83},{-12,-84},{-64,-84},{-64,-100}},
                                                            color={0,0,127}));
-  connect(constHeating1.y, y_sin) annotation (Line(points={{-12,-83},{56,-83},{
-          56,-100}},        color={0,0,127}));
+  connect(constHeating1.y, y_sin) annotation (Line(points={{-12,-83},{56,-83},{56,
+          -100}},           color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,80}}),                                   graphics={
         Rectangle(

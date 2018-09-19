@@ -47,18 +47,52 @@ partial model partialHeatPumpSystem
       enable=use_conPum));
 
 
-//HP Control
+//HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
-    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="HP Control"),choicesAllMatching=true);
-  parameter Boolean use_antLeg=false
-    "True if Anti-Legionella control is considered"
-    annotation (Dialog(tab="HP Control", group="Anti Legionella", descriptionLabel = true),choices(checkBox=true));
+    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
   parameter Boolean use_bivPar=true
     "Switch between bivalent parallel and bivalent alternative control"
     annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
       choice=false "Alternativ",
       radioButtons=true));
-
+  parameter
+    DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
+    heatingCurveRecord=
+      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
+         "Record with information about heating curve data"
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choicesAllMatching=true);
+  parameter Real declination=2 "Declination of heating curve"
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
+  parameter Real day_hour=6 "Hour of day at which day mode is enabled"
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
+  parameter Real night_hour=22 "Hour of day at which night mode is enabled"
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
+  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
+    "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve and antilegionella"
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
+  parameter Boolean use_antLeg=true
+    "True if Anti-Legionella control is considered"
+    annotation (Dialog(tab="Heat Pump Control", group="Anti Legionella", descriptionLabel = true),choices(checkBox=true));
+  parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
+    "Temperature at which the legionella in DWH dies" annotation (Dialog(
+      tab="Heat Pump Control",
+      group="Anti Legionella",
+      enable=use_antLeg));
+  parameter Modelica.SIunits.Time minTimeAntLeg
+    "Minimal duration of antilegionella control" annotation (Dialog(
+      tab="Heat Pump Control",
+      group="Anti Legionella",
+      enable=use_antLeg));
+  parameter Integer trigWeekDay=5
+    "Day of the week at which control is triggered" annotation (Dialog(
+      tab="Heat Pump Control",
+      group="Anti Legionella",
+      enable=use_antLeg));
+  parameter Integer trigHour=3 "Hour of the day at which control is triggered"
+    annotation (Dialog(
+      tab="Heat Pump Control",
+      group="Anti Legionella",
+      enable=use_antLeg));
 //Security Control
   parameter Boolean use_sec=true
     "False if the Security block should be disabled"
@@ -210,13 +244,13 @@ partial model partialHeatPumpSystem
       tab="Assumptions",
       group="Temperature sensors",
       enable=transferHeat));
-  parameter Modelica.SIunits.Temperature TAmbCon_nom=291.15
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(
       tab="Assumptions",
       group="Condenser",
       enable=transferHeat));
-  parameter Modelica.SIunits.Temperature TAmbEva_nom=273.15
+  parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
     annotation (Dialog(
       tab="Assumptions",
@@ -285,10 +319,19 @@ partial model partialHeatPumpSystem
         origin={60,-42})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
-    use_bivPar=use_bivPar,
-    use_secHeaGen=use_secHeaGen,
-    Q_flow_nominal=Q_flow_nominal,
-    redeclare model TSetToNSet = TSetToNSet)
+    final use_bivPar=use_bivPar,
+    final use_secHeaGen=use_secHeaGen,
+    final Q_flow_nominal=Q_flow_nominal,
+    redeclare final model  TSetToNSet = TSetToNSet,
+    final heatingCurveRecord=heatingCurveRecord,
+    final declination=declination,
+    final day_hour=day_hour,
+    final night_hour=night_hour,
+    final zerTim=zerTim,
+    final TLegMin=TLegMin,
+    final minTimeAntLeg=minTimeAntLeg,
+    final trigWeekDay=trigWeekDay,
+    final trigHour=trigHour)
              annotation (Placement(transformation(extent={{-68,120},{-30,154}})));
 
   Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(
@@ -358,7 +401,7 @@ partial model partialHeatPumpSystem
     final m_flow_small=1E-4*mFlow_conNominal,
     final initType=initType,
     final T_start=TCon_start,
-    TAmb=291.15)       "Supply temperature"
+    final TAmb=TAmbCon_nominal)       "Supply temperature"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={78,44})));
@@ -371,6 +414,7 @@ partial model partialHeatPumpSystem
   Modelica.Blocks.Sources.RealExpression calcPel_total(y=0.0)
     "Real expression to calculate total power consumption"
     annotation (Placement(transformation(extent={{28,168},{52,186}})));
+
 
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-115,155},{-92,155},
@@ -560,7 +604,7 @@ equation
           fillPattern=FillPattern.None,
           textString="Control"),
         Text(
-          extent={{-14,190},{50,152}},
+          extent={{-12,188},{48,154}},
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.None,

@@ -9,10 +9,10 @@ model HeatingCurve "Model of a heating curve"
   parameter Modelica.SIunits.ThermodynamicTemperature TOffset(displayUnit="K") = 0
     "Offset to heating curve temperature" annotation (Dialog(descriptionLabel = true));
   //Function
-  replaceable function HeatingCurveFunction = BaseClasses.Functions.baseFct
-                                                                  "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
+  replaceable function HeatingCurveFunction =
+      AixLib.Controls.HeatPump.BaseClasses.Functions.baseFct      "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
   //Table Data
-  parameter DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord
+  parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord
     "Record with information about heating curve data"                                                                                                        annotation(Dialog(enable=
           use_tableData),                                                                                                                                                                                                  choicesAllMatching=True);
   parameter Real declination=1 "Declination of curve"
@@ -29,7 +29,7 @@ model HeatingCurve "Model of a heating curve"
   parameter Real m "Slope to arrange TSet according to TRoom"
     annotation (Dialog(enable=use_dynTRoom, group="Dynamic room Temperature"));
   //Day-Night Mode:
-  parameter Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.Custom
+  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.Custom
     "Enumeration for choosing how reference time (time = 0) should be defined"
     annotation (Dialog(group="Night-Mode"));
   parameter Real day_hour=6 "Hour of day at which day mode is enabled" annotation(Dialog(group="Night-Mode",descriptionLabel = true));
