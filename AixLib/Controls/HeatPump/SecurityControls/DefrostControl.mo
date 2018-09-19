@@ -7,31 +7,30 @@ block DefrostControl
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
-  Modelica.Blocks.Logical.GreaterEqualThreshold
-                                       iceFacGreMin(final threshold=minIceFac) if
-    use_chiller
+  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinHea(final threshold
+      =minIceFac) if not use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
         rotation=0,
-        origin={-3,-62})));
+        origin={-31,-76})));
  Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
     "Relative speed of compressor. From 0 to 1" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={0,110})));
-  Modelica.Blocks.Sources.BooleanConstant conTrue(final k=true) if not
-    use_chiller
+  Modelica.Blocks.Sources.BooleanConstant conTrueNotUseChi(final k=true) if
+    not use_chiller
     "If ice is melted with an additional heater, HP can continue running"
-    annotation (Placement(transformation(extent={{-24,-12},{-12,0}})));
-  Modelica.Blocks.Sources.RealExpression realPel_deFro(y=calcPel_deFro) if not
-    use_chiller
-               "Calculate how much eletrical energy is used to melt ice"
+    annotation (Placement(transformation(extent={{-36,-6},{-24,6}})));
+  Modelica.Blocks.Sources.Constant constPel_deFro(final k=calcPel_deFro) if
+                                                                           not
+    use_chiller "Calculate how much eletrical energy is used to melt ice"
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-6,-6},{6,6}},
         rotation=90,
-        origin={0,74})));
+        origin={10,52})));
   Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
   Modelica.Blocks.Interfaces.RealInput nSet
@@ -39,10 +38,10 @@ block DefrostControl
     annotation (Placement(transformation(extent={{-132,4},{-100,36}})));
   Utilities.Logical.SmoothSwitch swiErr
     "If an error occurs, the value of the conZero block will be used(0)"
-    annotation (Placement(transformation(extent={{60,-16},{80,4}})));
+    annotation (Placement(transformation(extent={{58,2},{78,22}})));
   Modelica.Blocks.Sources.Constant conOne(final k=1)
     "If Defrost is enabled, HP runs at full power"
-    annotation (Placement(transformation(extent={{22,-30},{34,-18}})));
+    annotation (Placement(transformation(extent={{24,-12},{36,0}})));
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
@@ -50,34 +49,93 @@ block DefrostControl
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
+  Utilities.Logical.SmoothSwitch swiPel if not use_chiller
+    "If defrost is on, output will be positive" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,84})));
+  Modelica.Blocks.Sources.Constant conZero(final k=0) if not use_chiller
+    "If Defrost is enabled, HP runs at full power"
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={-12,52})));
+  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinChi(final threshold
+      =minIceFac) if use_chiller
+    "Check if icing factor is greater than a boundary" annotation (Placement(
+        transformation(
+        extent={{-8,-9},{8,9}},
+        rotation=0,
+        origin={-31,-50})));
+  Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
+    "If a chiller is used to defrost, mode will be false"
+    annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
+  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false) if not
+    use_chiller
+    "If ice is melted with an additional heater, HP can continue running"
+    annotation (Placement(transformation(extent={{34,-50},{44,-40}})));
 equation
-  connect(conOne.y, swiErr.u3) annotation (Line(points={{34.6,-24},{38,-24},{38,
-          -14},{58,-14}}, color={0,0,127}));
-  connect(swiErr.y, nOut) annotation (Line(points={{81,-6},{96,-6},{96,20},{110,
+  connect(conOne.y, swiErr.u3) annotation (Line(points={{36.6,-6},{38,-6},{38,4},
+          {56,4}},        color={0,0,127}));
+  connect(swiErr.y, nOut) annotation (Line(points={{79,12},{96,12},{96,20},{110,
           20}}, color={0,0,127}));
-  connect(iceFacGreMin.y, modeOut) annotation (Line(points={{5.8,-62},{60,-62},
-          {60,-20},{110,-20}}, color={255,0,255},
-      pattern=LinePattern.Dash));
-  connect(iceFacGreMin.y, swiErr.u2) annotation (Line(
-      points={{5.8,-62},{5.8,-6},{58,-6}},
-      color={255,0,255},
-      pattern=LinePattern.Dash));
-  connect(nSet, swiErr.u1) annotation (Line(points={{-116,20},{32,20},{32,2},{58,
-          2}}, color={0,0,127}));
-  connect(sigBusHP.iceFac, iceFacGreMin.u) annotation (Line(
-      points={{-105.93,-61.93},{-78,-61.93},{-78,-62},{-12.6,-62}},
+  connect(nSet, swiErr.u1) annotation (Line(points={{-116,20},{56,20}},
+               color={0,0,127}));
+  connect(sigBusHP.iceFac, iceFacGreMinHea.u) annotation (Line(
+      points={{-105.93,-61.93},{-68,-61.93},{-68,-76},{-40.6,-76}},
       color={255,204,51},
-      thickness=0.5), Text(
+      thickness=0.5,
+      pattern=LinePattern.Dash), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(conTrue.y, swiErr.u2) annotation (Line(
-      points={{-11.4,-6},{58,-6}},
+  connect(Pel_deFro, swiPel.y)
+    annotation (Line(points={{0,110},{0,95}}, color={0,0,127}));
+  connect(conTrueNotUseChi.y, swiErr.u2) annotation (Line(
+      points={{-23.4,0},{0,0},{0,12},{56,12}},
       color={255,0,255},
       pattern=LinePattern.Dash));
-  connect(Pel_deFro, realPel_deFro.y)
-    annotation (Line(points={{0,110},{0,85}}, color={0,0,127}));
+  connect(iceFacGreMinHea.y, swiPel.u2) annotation (Line(
+      points={{-22.2,-76},{-10,-76},{-10,34},{-6.66134e-16,34},{-6.66134e-16,72}},
+
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(constPel_deFro.y, swiPel.u3) annotation (Line(
+      points={{10,58.6},{10,68},{8,68},{8,72}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(swiPel.u1, conZero.y) annotation (Line(
+      points={{-8,72},{-8,58.6},{-12,58.6}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(sigBusHP.iceFac, iceFacGreMinChi.u) annotation (Line(
+      points={{-105.93,-61.93},{-68,-61.93},{-68,-50},{-40.6,-50}},
+      color={255,204,51},
+      thickness=0.5,
+      pattern=LinePattern.Dash), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(iceFacGreMinChi.y, swiErr.u2) annotation (Line(
+      points={{-22.2,-50},{8,-50},{8,12},{56,12}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(logicalSwitch.y, modeOut) annotation (Line(points={{79,-32},{84,-32},
+          {84,-20},{110,-20}}, color={255,0,255}));
+  connect(modeSet, logicalSwitch.u1) annotation (Line(points={{-116,-20},{-32,
+          -20},{-32,-24},{56,-24}}, color={255,0,255}));
+  connect(conTrueNotUseChi.y, logicalSwitch.u2) annotation (Line(
+      points={{-23.4,0},{0,0},{0,-32},{56,-32}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(conTrueUseChi.y, logicalSwitch.u3) annotation (Line(points={{44.5,-45},
+          {50,-45},{50,-40},{56,-40}}, color={255,0,255}));
+  connect(iceFacGreMinChi.y, logicalSwitch.u2) annotation (Line(
+      points={{-22.2,-50},{8,-50},{8,-32},{56,-32}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,80}}),                                   graphics={
         Rectangle(
