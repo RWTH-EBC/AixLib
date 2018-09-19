@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
-partial function PartialBbaseFct "Base class for Cycle Characteristic"
+partial function PartialBaseFct "Base class for Cycle Characteristic"
   extends Modelica.Icons.Function;
   input Real N;
   input Real T_con;
@@ -17,4 +17,4 @@ partial function PartialBbaseFct "Base class for Cycle Characteristic"
 </ul>
 </html>
 "));
-end PartialBbaseFct;
+end PartialBaseFct;
