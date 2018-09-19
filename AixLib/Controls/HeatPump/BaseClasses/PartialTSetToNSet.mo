@@ -1,5 +1,5 @@
 within AixLib.Controls.HeatPump.BaseClasses;
-partial model partialTSetToNSet
+partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
  Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
@@ -70,4 +70,4 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)));
-end partialTSetToNSet;
+end PartialTSetToNSet;

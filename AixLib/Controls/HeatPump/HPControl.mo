@@ -2,9 +2,10 @@ within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
+    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet
   replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet                                                                                           constrainedby
-    AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet(
+      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet                                                                                           constrainedby
+    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final Q_flow_nominal=Q_flow_nominal,
     final use_secHeaGen=use_secHeaGen,
     final use_bivPar=use_bivPar)                     "Model for converting set temperature to set compressor speed"
@@ -84,9 +85,10 @@ model HPControl
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-12,-72})));
-  Controls.HeatPump.HeatingCurve heatCurve(
+
+  SetPoints.HeatingCurve heatCurve(
     redeclare function HeatingCurveFunction =
-        Controls.HeatPump.BaseClasses.Functions.HeatingCurveFunction,
+        SetPoints.Functions.HeatingCurveFunction,
     final use_tableData=true,
     final TOffset=0,
     final use_dynTRoom=false,
@@ -98,9 +100,8 @@ model HPControl
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
     final TRoom_nominal=293.15)
-                          annotation (Placement(transformation(extent={{-74,10},
-            {-54,30}})));
-  TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
+
+    annotation (Placement(transformation(extent={{-74,10},{-54,30}})));  TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
             {76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg "No Anti Legionella"
                                            annotation (
@@ -130,12 +131,15 @@ equation
           {-38,20},{-38,22.8},{-30,22.8}},                                                       color={0,0,127},
       pattern=LinePattern.Dash));
 
+
   connect(antiLegionella.TSet_out,ConvTSetToNSet. TSet) annotation (Line(
       points={{16.8,22},{26,22},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+
   connect(ConvTSetToNSet.nOut, nOut) annotation (Line(points={{77.6,9},{88.8,9},{88.8,20},
           {114,20}},          color={0,0,127}));
+
   connect(sigBusHP,ConvTSetToNSet. sigBusHP) annotation (Line(
       points={{-102,-58},{24,-58},{24,4.41},{42.88,4.41}},
       color={255,204,51},
@@ -148,6 +152,7 @@ equation
       points={{-53,20},{-46,20},{-46,46},{-11.6,46}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+
   connect(realPasThrAntLeg.y,ConvTSetToNSet. TSet) annotation (Line(
       points={{6.8,46},{26,46},{26,19.2},{41.44,19.2}},
       color={0,0,127},
@@ -156,8 +161,10 @@ equation
                               color={255,0,255}));
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
+
   connect(TSup,ConvTSetToNSet. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
           {30,-22},{30,-4.6},{41.44,-4.6}},          color={0,0,127}));
+
   connect(ConvTSetToNSet.ySecHeaGen, ySecHeaGen) annotation (Line(
       points={{61.92,-9.36},{61.92,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,
           -90},{-4,-104}},
