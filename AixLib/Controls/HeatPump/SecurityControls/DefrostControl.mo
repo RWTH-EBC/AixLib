@@ -3,9 +3,9 @@ block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
   parameter Boolean use_chiller=true
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
+    "True if ice is defrosted by changing operating mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice"
+    "Calculate how much eletrical power is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
   Modelica.Blocks.Logical.GreaterEqualThreshold
                                        iceFacGreMin(final threshold=minIceFac) if
