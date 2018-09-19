@@ -1,7 +1,7 @@
 within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.partialHeatPumpSystem(
-      redeclare Fluid.HeatPumps.HeatPump heatPump(
+    redeclare Fluid.HeatPumps.HeatPump heatPump(
       final initType=initType,
       final pCon_start=pCon_start,
       final TCon_start=TCon_start,
@@ -33,8 +33,8 @@ model HeatPumpSystem
       final allowFlowReversalCon=allowFlowReversalCon,
       final tauSenT=tauSenT,
       final tauHeaTra=tauHeaTra,
-      final TAmbCon_nom=TAmbCon_nom,
-      final TAmbEva_nom=TAmbEva_nom,
+      final TAmbCon_nominal=TAmbCon_nominal,
+      final TAmbEva_nominal=TAmbEva_nominal,
       final use_ConCap=use_conCap,
       final use_EvaCap=use_evaCap,
       final use_refIne=use_refIne,
@@ -43,8 +43,8 @@ model HeatPumpSystem
       redeclare final package Medium_con = Medium_con,
       redeclare final package Medium_eva = Medium_eva,
       redeclare final model PerDataHea = PerDataHea,
-      redeclare final model PerDataChi = PerDataChi), final calcQHeat(final y=
-          heatPump.sigBusHP.m_flow_co*(senTSup.T - heatPump.sigBusHP.T_flow_co)
+      redeclare final model PerDataChi = PerDataChi),
+    final calcQHeat(final y=heatPump.sigBusHP.m_flow_co*(senTSup.T - heatPump.sigBusHP.T_flow_co)
           *4180),
     calcPel_total(y=sigBusHP.Pel + pumSou.P + pumSin.P));
 //Heat Pump
@@ -62,35 +62,31 @@ model HeatPumpSystem
     AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
-  parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"));
+  parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=false);
   parameter Boolean use_refIne=false "Consider the inertia of the refrigerant cycle"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia"), choices(checkBox=true));
   constant Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency representing inertia of refrigerant cycle"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
+    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=false);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
+    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=false);
 //Condenser/Evaporator
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
-    "Nominal mass flow rate, used for regularization near zero flow"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
-
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
   parameter Modelica.SIunits.PressureDifference dpEva_nominal
     "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
   parameter Modelica.SIunits.PressureDifference dpCon_nominal
     "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
 
   parameter Boolean use_conCap=false
     "If heat losses at capacitor side are considered or not"
@@ -103,19 +99,19 @@ model HeatPumpSystem
   parameter Modelica.SIunits.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=use_evaCap));
+      enable=use_evaCap), Evaluate=false);
   parameter Modelica.SIunits.ThermalConductance GEva
     "Constant thermal conductance of Evaporator material"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=use_evaCap));
+      enable=use_evaCap), Evaluate=false);
   parameter Modelica.SIunits.HeatCapacity CCon
     "Heat capacity of Condenser (= cp*m)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=use_conCap));
+      enable=use_conCap), Evaluate=false);
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=use_conCap));
+      enable=use_conCap), Evaluate=false);
 //Dynamics
   parameter Real x_start[nthOrder]=zeros(nthOrder)
     "Initial or guess values of states"
@@ -136,16 +132,15 @@ model HeatPumpSystem
         origin={87,-1})));
 equation
   connect(realPasThrSec.y, heatPump.nSet) annotation (Line(
-      points={{4.7,167},{4,167},{4,168},{76,168},{76,102},{-36,102},{-36,
-          1.66667},{-29.52,1.66667}},
+      points={{4.7,167},{4,167},{4,168},{76,168},{76,102},{-36,102},{-36,1.66667},
+          {-29.52,1.66667}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{57.6667,
           135.2},{72,135.2},{72,94},{-44,94},{-44,-5.66667},{-29.52,-5.66667}},
                                                        color={255,0,255}));
   connect(sigBusHP, heatPump.sigBusHP) annotation (Line(
-      points={{-105,113},{-128,113},{-128,-8},{-70,-8},{-70,-9.15},{-25.78,
-          -9.15}},
+      points={{-105,113},{-128,113},{-128,-8},{-70,-8},{-70,-9.15},{-25.78,-9.15}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -190,9 +185,11 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{
-          79.3,0},{28,0},{28,16},{20.2,16},{20.2,16.3333}}, color={0,0,127}));
+          79.3,0},{28,0},{28,16},{20.2,16},{20.2,16.3333}},
+                                                       color={0,0,127}));
   connect(constTAmb.y, heatPump.T_amb_eva) annotation (Line(points={{79.3,-1},{
-          79.3,0},{28,0},{28,-20.3333},{20.2,-20.3333}}, color={0,0,127}));
+          79.3,0},{28,0},{28,-20.3333},{20.2,-20.3333}},
+                                                    color={0,0,127}));
   connect(port_a1, port_a1)
     annotation (Line(points={{-100,60},{-100,60}}, color={0,127,255}));
   connect(icingBlock.iceFac, heatPump.iceFac_in) annotation (Line(

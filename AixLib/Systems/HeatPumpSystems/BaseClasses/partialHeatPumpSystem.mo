@@ -19,10 +19,10 @@ partial model partialHeatPumpSystem
     annotation (Dialog(group="Source"), choicesAllMatching=true);
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate, used for regularization near zero flow"
-    annotation (Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"), Evaluate=false);
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate"
-    annotation (Dialog(group="Nominal condition"));
+    annotation (Dialog(group="Nominal condition"), Evaluate=false);
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
@@ -30,7 +30,7 @@ partial model partialHeatPumpSystem
           use_secHeaGen), choicesAllMatching=true);
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
-    annotation (Dialog(group="System", enable=use_secHeaGen));
+    annotation (Dialog(group="System", enable=use_secHeaGen), Evaluate=false);
   parameter Boolean use_conPum=true
     "True if pump or fan at condenser side are included into this model"
     annotation (Dialog(group="Sink"),choices(checkBox=true));
@@ -77,7 +77,7 @@ partial model partialHeatPumpSystem
     "Temperature at which the legionella in DWH dies" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
-      enable=use_antLeg));
+      enable=use_antLeg), Evaluate=false);
   parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control" annotation (Dialog(
       tab="Heat Pump Control",
@@ -105,21 +105,21 @@ partial model partialHeatPumpSystem
   parameter Modelica.SIunits.Time minRunTime=12000
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=use_sec and use_minRunTime));
+      enable=use_sec and use_minRunTime), Evaluate=false);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
   parameter Modelica.SIunits.Time minLocTime=600
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=use_sec and use_minLocTime));
+      enable=use_sec and use_minLocTime), Evaluate=false);
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
   parameter Real maxRunPerHou=5
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=use_sec and use_runPerHou));
+      enable=use_sec and use_runPerHou), Evaluate=false);
   parameter Boolean pre_n_start=false
                                      "Start value of pre(n) at initial time"
     annotation (Dialog(
@@ -186,19 +186,19 @@ partial model partialHeatPumpSystem
     annotation (Dialog(tab="Initialization", group="Parameters"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pCon_start=
       Medium_con.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"), Evaluate=false);
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"), Evaluate=false);
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pEva_start=
       Medium_eva.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"), Evaluate=false);
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"), Evaluate=false);
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
@@ -213,10 +213,10 @@ partial model partialHeatPumpSystem
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Real mSenFacCon=1
     "Factor for scaling the sensible thermal mass of the volume in the condenser"
-    annotation (Dialog(tab="Dynamics",group="Condenser"));
+    annotation (Dialog(tab="Dynamics",group="Condenser"), Evaluate=false);
   parameter Real mSenFacEva=1
     "Factor for scaling the sensible thermal mass of the volume in the evaporator"
-    annotation (Dialog(tab="Dynamics", group="Evaporator"));
+    annotation (Dialog(tab="Dynamics", group="Evaporator"), Evaluate=false);
 //Assumptions
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
@@ -243,19 +243,19 @@ partial model partialHeatPumpSystem
     annotation (Dialog(
       tab="Assumptions",
       group="Temperature sensors",
-      enable=transferHeat));
+      enable=transferHeat), Evaluate=false);
   parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(
       tab="Assumptions",
       group="Condenser",
-      enable=transferHeat));
+      enable=transferHeat), Evaluate=false);
   parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
     annotation (Dialog(
       tab="Assumptions",
       group="Evaporator",
-      enable=transferHeat));
+      enable=transferHeat), Evaluate=false);
 
   replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
     Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
