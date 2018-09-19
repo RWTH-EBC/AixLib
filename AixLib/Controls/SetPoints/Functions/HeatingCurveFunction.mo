@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.BaseClasses.Functions;
+within AixLib.Controls.SetPoints.Functions;
 function HeatingCurveFunction
   extends PartialBaseFct;
 

@@ -1,5 +1,5 @@
 within AixLib.Controls.HeatPump.BaseClasses;
-partial model partialTSetToNSet
+partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
 
   parameter Boolean use_secHeaGen "True to choose a bivalent system" annotation(choices(checkBox=true));
@@ -70,4 +70,4 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)));
-end partialTSetToNSet;
+end PartialTSetToNSet;

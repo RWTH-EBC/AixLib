@@ -3,7 +3,7 @@ model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
   replaceable model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP                                                                constrainedby
-    AixLib.Controls.HeatPump.BaseClasses.partialTSetToNSet
+    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet
                                                      "Model for converting set temperature to set compressor speed"
                                                            annotation(choicesAllMatching=true);
 
@@ -81,9 +81,9 @@ model HPControl
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-12,-72})));
-  Controls.HeatPump.HeatingCurve heatCurve(
+  SetPoints.HeatingCurve heatCurve(
     redeclare function HeatingCurveFunction =
-        Controls.HeatPump.BaseClasses.Functions.HeatingCurveFunction,
+        SetPoints.Functions.HeatingCurveFunction,
     final use_tableData=true,
     final TOffset=0,
     final use_dynTRoom=false,
@@ -95,8 +95,7 @@ model HPControl
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
     final TRoom_nominal=293.15)
-                          annotation (Placement(transformation(extent={{-74,10},
-            {-54,30}})));
+    annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
   TSetToNSet OnOffControl(
     final Q_flow_nominal=Q_flow_nominal,
     final use_secHeaGen=use_secHeaGen,

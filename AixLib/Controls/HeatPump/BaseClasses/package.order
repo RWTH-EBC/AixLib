@@ -1,5 +1,5 @@
-Functions
-partialTSetToNSet
 CalcQdot
+PartialHPController
+PartialTSetToNSet
 InverterControlledHP
 OnOffHP

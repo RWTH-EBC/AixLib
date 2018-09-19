@@ -1,9 +1,7 @@
-HPControllerBaseClass
+AntiLegionella
+HPControl
 HPControllerOnOff
 ModularHeatPumps
-HeatingCurve
-HPControl
-AntiLegionella
 SecurityControls
 Examples
 BaseClasses

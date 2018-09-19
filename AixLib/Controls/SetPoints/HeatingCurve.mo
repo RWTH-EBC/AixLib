@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+within AixLib.Controls.SetPoints;
 model HeatingCurve "Model of a heating curve"
   //General
   parameter Boolean use_tableData=true "Choose between tables or function to calculate TSet" annotation (
@@ -10,8 +10,7 @@ model HeatingCurve "Model of a heating curve"
     "Offset to heating curve temperature" annotation (Dialog(descriptionLabel = true));
   //Function
   replaceable function HeatingCurveFunction =
-      AixLib.Controls.HeatPump.BaseClasses.Functions.PartialBaseFct
-                                                                  "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
+      AixLib.Controls.SetPoints.Functions.PartialBaseFct          "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
   //Table Data
   parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord
     "Record with information about heating curve data"                                                                                                        annotation(Dialog(enable=
