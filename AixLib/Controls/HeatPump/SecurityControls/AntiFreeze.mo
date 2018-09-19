@@ -4,14 +4,14 @@ model AntiFreeze "Model to prevent source from freezing"
 
   parameter Boolean use_antFre=true
     "True if anti freeze control is part of security control" annotation(choices(checkBox=true));
-  parameter Modelica.SIunits.ThermodynamicTemperature TantFre=276.15
+  parameter Modelica.SIunits.ThermodynamicTemperature TAntFre=276.15
     "Limit temperature for anti freeze control"
     annotation (Dialog(enable=use_antFre));
   Modelica.Blocks.Sources.BooleanConstant booConAntFre(final k=true) if not
     use_antFre
     annotation (Placement(transformation(extent={{2,-36},{16,-22}})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=TantFre) if
-       use_antFre
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=TAntFre)
+    if use_antFre
     annotation (Placement(transformation(extent={{-62,-20},{-36,6}})));
   Modelica.Blocks.Math.Min min if use_antFre
     annotation (Placement(transformation(extent={{-98,-24},{-78,-4}})));

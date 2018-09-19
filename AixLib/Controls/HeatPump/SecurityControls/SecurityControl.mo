@@ -87,7 +87,7 @@ block SecurityControl "Block including all security levels"
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={130,80})));
-  AntiFreeze antiFreeze(final TantFre=TantFre, final use_antFre=use_antFre)
+  AntiFreeze antiFreeze(final TAntFre=TantFre, final use_antFre=use_antFre)
     annotation (Placement(transformation(extent={{24,-8},{48,12}})));
   Modelica.Blocks.Routing.BooleanPassThrough boolPasThrDef if
                                                            not use_deFro
