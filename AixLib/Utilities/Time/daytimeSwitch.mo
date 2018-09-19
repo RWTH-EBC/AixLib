@@ -1,5 +1,5 @@
 within AixLib.Utilities.Time;
-model daytimeSwitch
+model DaytimeSwitch
   "If given daytime stamp is equal to current daytime output is true"
   AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
   parameter Integer weekDay "Day of the week";
@@ -49,4 +49,4 @@ equation
           points={{0,0},{-18,-32}},
           thickness=0.5,
           color={238,46,47})}));
-end daytimeSwitch;
+end DaytimeSwitch;
