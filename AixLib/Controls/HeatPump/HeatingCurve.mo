@@ -10,7 +10,8 @@ model HeatingCurve "Model of a heating curve"
     "Offset to heating curve temperature" annotation (Dialog(descriptionLabel = true));
   //Function
   replaceable function HeatingCurveFunction =
-      AixLib.Controls.HeatPump.BaseClasses.Functions.baseFct      "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
+      AixLib.Controls.HeatPump.BaseClasses.Functions.PartialBaseFct
+                                                                  "Function to calculate set temperature"  annotation(Dialog(enable=not use_tableData), choicesAllMatching=True);
   //Table Data
   parameter AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition heatingCurveRecord
     "Record with information about heating curve data"                                                                                                        annotation(Dialog(enable=
