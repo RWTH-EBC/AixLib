@@ -14,6 +14,7 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
      "Replaceable model for performance data of HP in cooling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible";
+  parameter Real scalingFactor=1 "Scaling factor of heat pump";
  AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
         transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
             -16,88},{18,118}})));

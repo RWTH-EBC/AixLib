@@ -177,7 +177,6 @@ model HeatPump "Base model of realistic heat pump"
     final show_T=show_TPort,
     final deltaM=deltaM_con,
     final dp_nominal=dpCon_nominal,
-    final V=VCon,
     final tau=tauSenT,
     final initType=initType,
     final T_start=TCon_start,
@@ -188,7 +187,6 @@ model HeatPump "Base model of realistic heat pump"
     final kAIns_nominal=3.66,
     final htcExpIns=0.88,
     final use_cap=use_ConCap,
-    final C=CCon,
     final X_start=XCon_start,
     final from_dp=from_dp,
     final homotopyInitialization=homotopyInitialization,
@@ -197,18 +195,19 @@ model HeatPump "Base model of realistic heat pump"
     final energyDynamics=energyDynamics,
     final mSenFac=mSenFacCon,
     final transferHeat=transferHeat,
-    final is_con=true) "Heat exchanger model for the condenser"
+    final is_con=true,
+    final V=VCon*scalingFactor,
+    final C=CCon*scalingFactor)
+                       "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,72},{16,104}})));
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity Evaporator(
     redeclare final package Medium = Medium_eva,
     final mFlow_nominal=mFlow_evaNominal,
     final deltaM=deltaM_eva,
     final dp_nominal=dpEva_nominal,
-    final V=VEva,
     final TAmb_nominal=TAmbEva_nominal,
     final tauHeaTra=tauHeaTra,
     final use_cap=use_EvaCap,
-    final C=CEva,
     final kAOut_nominal=GEva,
     final kAIns_nominal=3.66,
     final htcExpIns=0.88,
@@ -227,7 +226,10 @@ model HeatPump "Base model of realistic heat pump"
     final energyDynamics=energyDynamics,
     final transferHeat=transferHeat,
     final mSenFac=mSenFacEva,
-    final is_con=false) "Heat exchanger model for the evaporator"
+    final is_con=false,
+    final V=VEva*scalingFactor,
+    final C=CEva*scalingFactor)
+                        "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,

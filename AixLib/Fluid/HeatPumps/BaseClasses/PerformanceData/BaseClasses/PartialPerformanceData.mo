@@ -1,6 +1,7 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
+    parameter Real scalingFactor=1 "Scaling factor of heat pump";
   Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")
                                                       "Electrical Power consumed by HP" annotation (Placement(
         transformation(
