@@ -54,14 +54,23 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
       choice=false "Alternativ",
       radioButtons=true));
+  parameter Boolean use_tableData=true
+    "Choose between tables or function to calculate TSet"
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
+      choice=true "Table Data",
+      choice=false "Function",
+      radioButtons=true));
+  replaceable function HeatingCurveFunction =
+      Controls.SetPoints.Functions.HeatingCurveFunction annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=not use_tableData),choicesAllMatching=true);
+
   parameter
     DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
       AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
          "Record with information about heating curve data"
-    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choicesAllMatching=true);
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=use_tableData),choicesAllMatching=true);
   parameter Real declination=2 "Declination of heating curve"
-    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
+    annotation (Dialog(tab="Heat Pump Control", group="Heating Curve", enable=use_tableData));
   parameter Real day_hour=6 "Hour of day at which day mode is enabled"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"));
   parameter Real night_hour=22 "Hour of day at which night mode is enabled"
@@ -329,7 +338,9 @@ partial model PartialHeatPumpSystem
     final TLegMin=TLegMin,
     final minTimeAntLeg=minTimeAntLeg,
     final trigWeekDay=trigWeekDay,
-    final trigHour=trigHour)
+    final trigHour=trigHour,
+    final use_tableData=use_tableData,
+    redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,120},{-30,154}})));
 
   Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(

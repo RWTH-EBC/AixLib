@@ -17,35 +17,44 @@ model HPControl
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
     annotation (Dialog(enable=use_secHeaGen));
 //Heating Curve
+  parameter Boolean use_tableData=true
+    "Choose between tables or function to calculate TSet"
+    annotation (Dialog(group="Heating Curve - Data"),choices(
+      choice=true "Table Data",
+      choice=false "Function",
+      radioButtons=true));
+  replaceable function HeatingCurveFunction =
+      SetPoints.Functions.HeatingCurveFunction constrainedby
+    SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
       AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
     "Record with information about heating curve data"
-    annotation (Dialog(group="Heating Curve"),choicesAllMatching=true);
+    annotation (Dialog(group="Heating Curve - Data", enable = use_tableData),choicesAllMatching=true);
   parameter Real declination=2 "Declination of curve"
-    annotation (Dialog(group="Heating Curve"));
+    annotation (Dialog(group="Heating Curve - Data", enable = use_tableData));
   parameter Real day_hour=6 "Hour of day at which day mode is enabled"
-    annotation (Dialog(group="Heating Curve"));
+    annotation (Dialog(group="Heating Curve - Night mode"));
   parameter Real night_hour=22 "Hour of day at which night mode is enabled"
-    annotation (Dialog(group="Heating Curve"));
+    annotation (Dialog(group="Heating Curve - Night mode"));
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2017
     "Enumeration for choosing how reference time (time = 0) should be defined. Used for heating curve and antilegionella"
-    annotation (Dialog(group="Heating Curve"));
+    annotation (Dialog(group="Heating Curve - Night mode"));
 //Anti Legionella
   parameter Boolean use_antLeg "True if Legionella Control is of relevance"
-    annotation (Dialog(group="Anti Legionella"),choices(checkBox=true));
+    annotation (Dialog(tab="Anti Legionella"),choices(checkBox=true));
   parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
     "Temperature at which the legionella in DWH dies"
-    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+    annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
   parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control"
-    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+    annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
   parameter Integer trigWeekDay=5
     "Day of the week at which control is triggered"
-    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+    annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
   parameter Integer trigHour=3 "Hour of the day at which control is triggered"
-    annotation (Dialog(group="Anti Legionella", enable=use_antLeg));
+    annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
 
 
   AixLib.Controls.HeatPump.AntiLegionella antiLegionella(
@@ -85,8 +94,6 @@ model HPControl
         origin={-12,-72})));
 
   SetPoints.HeatingCurve heatCurve(
-    redeclare function HeatingCurveFunction =
-        SetPoints.Functions.HeatingCurveFunction,
     final TOffset=0,
     final use_dynTRoom=false,
     final zerTim=zerTim,
@@ -94,7 +101,8 @@ model HPControl
     final night_hour=night_hour,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
-    final use_tableData=true,
+    redeclare function HeatingCurveFunction = HeatingCurveFunction,
+    use_tableData=use_tableData,
     final TRoom_nominal=293.15)
     annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
 
@@ -112,6 +120,7 @@ model HPControl
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
+
 
 equation
 
