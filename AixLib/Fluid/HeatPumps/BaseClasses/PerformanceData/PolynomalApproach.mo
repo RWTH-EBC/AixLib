@@ -4,7 +4,8 @@ model PolynomalApproach
   extends BaseClasses.PartialPerformanceData;
 
   replaceable function PolyData =
-      AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct "Function to calculate peformance Data" annotation(choicesAllMatching=true);
+      AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBbaseFct
+                                                                           "Function to calculate peformance Data" annotation(choicesAllMatching=true);
 protected
   Real Char[2];
 equation

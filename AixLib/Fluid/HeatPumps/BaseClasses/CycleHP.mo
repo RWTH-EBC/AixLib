@@ -19,16 +19,16 @@ protected
   final parameter Real tableP_ele[:,:]= dataTable.tableP_ele;
 public
   replaceable function data_poly =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.constantQualityGrade
+  AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBbaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.noModel
+  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.NoModel
                                                                  constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));

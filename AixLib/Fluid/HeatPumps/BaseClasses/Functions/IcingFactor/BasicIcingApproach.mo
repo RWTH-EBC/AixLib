@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor;
-function basicIcingApproach
+function BasicIcingApproach
   "A function which utilizes the outdoor air temperature and current heat flow from the evaporator"
-  extends baseFct;
+  extends PartialBaseFct;
 protected
   Real TEva_m "Medium temperature at evaporator in degC";
 algorithm
@@ -14,4 +14,4 @@ algorithm
     iceFac :=1;
   end if;
 
-end basicIcingApproach;
+end BasicIcingApproach;

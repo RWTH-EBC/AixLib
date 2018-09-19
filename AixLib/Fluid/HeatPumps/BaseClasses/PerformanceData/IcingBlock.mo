@@ -3,8 +3,9 @@ model IcingBlock
   "Block which decreases evaporator power by an icing factor"
 
   replaceable function iceFunc =
-      AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.baseFct constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.baseFct                                                                                  "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
+      AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct
+                                                                       constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct                                                                           "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
   Modelica.Blocks.Sources.RealExpression calcIceFac(final y=iceFac_internal)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Interfaces.RealInput T_flow_ev

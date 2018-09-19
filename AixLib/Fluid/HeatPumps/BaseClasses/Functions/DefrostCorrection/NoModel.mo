@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection;
-function noModel "No model"
+function NoModel "No model"
   extends
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct(
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct(
       T_eva);
 
 algorithm
@@ -15,4 +15,4 @@ f_CoPicing:=1;
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 </ul>
 </html>"));
-end noModel;
+end NoModel;
