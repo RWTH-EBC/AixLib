@@ -5,7 +5,7 @@ model PipeBase
   /* *******************************************************************
       Medium
      ******************************************************************* */
-    parameter Integer nNodes( min=3)=3 "Number of discrete flow volumes";
+    parameter Integer nNodes(min=3)=3 "Number of discrete flow volumes";
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"

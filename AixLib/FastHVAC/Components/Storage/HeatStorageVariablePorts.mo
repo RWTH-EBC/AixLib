@@ -6,7 +6,7 @@ model HeatStorageVariablePorts "Simple model of a heat storage"
      ******************************************************************* */
 
 public
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
@@ -207,14 +207,14 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-38})));
-  HeatTransfer heatTransfer annotation (Placement(
-        transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
-    replaceable model HeatTransfer =
+  replaceable model HeatTransfer =
      BaseClasses.HeatTransferOnlyConduction  constrainedby
-    BaseClasses.PartialHeatTransferLayers(n=n,Medium=medium,data=data)
-    "Heat Transfer Model between fluid layers" annotation (Dialoag(enable=false),choicesAllMatching=true);
+    BaseClasses.PartialHeatTransferLayers
+    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
+  HeatTransfer heatTransfer(final Medium=medium,final data=data,
+    final n=n)      annotation (Placement(transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
 equation
 
@@ -623,7 +623,8 @@ connect(heatTransfer.therm, layer.port);
   Buffer storage model with support for heating rod and two heating
   coils. Model with variable connection pairs for loading and unlouding
   cycles which are defined by the associated <u>storage layer
-  number</u> of the ports.
+  number</u> of the ports. Compared to the standard HeatStorage model, the 
+  position of the heating coils can also be defined in this model.
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>

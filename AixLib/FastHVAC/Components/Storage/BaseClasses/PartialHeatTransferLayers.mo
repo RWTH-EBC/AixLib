@@ -1,11 +1,11 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
 partial model PartialHeatTransferLayers
-protected
+
   parameter Integer  n(min=2)=3;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] therm annotation (
       Placement(transformation(extent={{40,0},{60,20}}, rotation=0)));
-  replaceable package Medium =
-       FastHVAC.Media.WaterSimple "Medium model"   annotation(choicesAllMatching);
+  parameter FastHVAC.Media.BaseClasses.MediumSimple Medium
+        "Medium model"   annotation(choicesAllMatching);
   replaceable parameter
     AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l()

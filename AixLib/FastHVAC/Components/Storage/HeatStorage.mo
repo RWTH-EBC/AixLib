@@ -202,7 +202,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-46})));
-  HeatTransfer heatTransfer annotation (Placement(
+  HeatTransfer heatTransfer(final Medium=medium,final data=data,
+    final n=n) annotation (Placement(
         transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
     replaceable model HeatTransfer =
