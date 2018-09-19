@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatPumps.Examples;
 model Carnot_TCon
   "Test model for heat pump based on Carnot efficiency and condenser outlet temperature control signal"
   extends Modelica.Icons.Example;
- package Medium1 = AixLib.Media.Air "Medium model";
+ package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Water "Medium model";
 
   parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-5
