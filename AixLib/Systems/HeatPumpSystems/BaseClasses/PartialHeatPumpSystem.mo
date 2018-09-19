@@ -1,5 +1,5 @@
 within AixLib.Systems.HeatPumpSystems.BaseClasses;
-partial model partialHeatPumpSystem
+partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -26,7 +26,7 @@ partial model partialHeatPumpSystem
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
-  replaceable model secHeatGen = AixLib.Fluid.HeatExchangers.HeaterCooler_u                                                                                   annotation(Dialog(group="System", enable=
+  replaceable model SecHeatGen = AixLib.Fluid.HeatExchangers.HeaterCooler_u                                                                                   annotation(Dialog(group="System", enable=
           use_secHeaGen), choicesAllMatching=true);
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
@@ -45,7 +45,6 @@ partial model partialHeatPumpSystem
     annotation (choicesAllMatching=true, Dialog(
       group="Sink",
       enable=use_conPum));
-
 
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
@@ -203,7 +202,6 @@ partial model partialHeatPumpSystem
      Medium_eva.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
 
-
 //Dynamics
   parameter Modelica.Fluid.Types.Dynamics massDynamics
     "Type of mass balance: dynamic (3 initialization options) or steady state"
@@ -322,7 +320,7 @@ partial model partialHeatPumpSystem
     final use_bivPar=use_bivPar,
     final use_secHeaGen=use_secHeaGen,
     final Q_flow_nominal=Q_flow_nominal,
-    redeclare final model  TSetToNSet = TSetToNSet,
+    redeclare final model TSetToNSet =  TSetToNSet,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
     final day_hour=day_hour,
@@ -369,7 +367,7 @@ partial model partialHeatPumpSystem
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={58,-16})));
- secHeatGen secHeaGen(redeclare final package Medium = Medium_con,
+ SecHeatGen secHeaGen(redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
     final dp_nominal=0,
@@ -414,7 +412,6 @@ partial model partialHeatPumpSystem
   Modelica.Blocks.Sources.RealExpression calcPel_total(y=0.0)
     "Real expression to calculate total power consumption"
     annotation (Placement(transformation(extent={{28,168},{52,186}})));
-
 
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-115,155},{-92,155},
@@ -486,8 +483,9 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
-          {-60,-60},{-100,-60}}, color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
+          -15.2},{-60,-60},{-100,-60}},
+                                 color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
@@ -634,4 +632,4 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="Controls")}));
-end partialHeatPumpSystem;
+end PartialHeatPumpSystem;

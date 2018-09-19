@@ -10,8 +10,8 @@ model AntiFreeze "Model to prevent source from freezing"
   Modelica.Blocks.Sources.BooleanConstant booConAntFre(final k=true) if not
     use_antFre
     annotation (Placement(transformation(extent={{2,-36},{16,-22}})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=TAntFre)
-    if use_antFre
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=TAntFre) if
+       use_antFre
     annotation (Placement(transformation(extent={{-62,-20},{-36,6}})));
   Modelica.Blocks.Math.Min min if use_antFre
     annotation (Placement(transformation(extent={{-98,-24},{-78,-4}})));

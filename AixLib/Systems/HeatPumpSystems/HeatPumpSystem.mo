@@ -1,6 +1,6 @@
 within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
-  extends AixLib.Systems.HeatPumpSystems.BaseClasses.partialHeatPumpSystem(
+  extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     redeclare Fluid.HeatPumps.HeatPump heatPump(
       final initType=initType,
       final pCon_start=pCon_start,

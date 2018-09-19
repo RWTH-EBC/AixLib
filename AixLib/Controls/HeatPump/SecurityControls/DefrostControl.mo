@@ -7,8 +7,8 @@ block DefrostControl
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
-  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinHea(final threshold
-      =minIceFac) if not use_chiller
+  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinHea(final threshold=
+       minIceFac) if not use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
@@ -60,8 +60,8 @@ block DefrostControl
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-12,52})));
-  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinChi(final threshold
-      =minIceFac) if use_chiller
+  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinChi(final threshold=
+       minIceFac) if use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
@@ -98,9 +98,9 @@ equation
       pattern=LinePattern.Dash));
   connect(iceFacGreMinHea.y, swiPel.u2) annotation (Line(
       points={{-22.2,-76},{-10,-76},{-10,34},{-6.66134e-16,34},{-6.66134e-16,72}},
-
       color={255,0,255},
       pattern=LinePattern.Dash));
+
   connect(constPel_deFro.y, swiPel.u3) annotation (Line(
       points={{10,58.6},{10,68},{8,68},{8,72}},
       color={0,0,127},
