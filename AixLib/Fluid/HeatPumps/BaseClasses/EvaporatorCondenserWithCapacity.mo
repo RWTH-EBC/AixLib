@@ -48,7 +48,7 @@ model EvaporatorCondenserWithCapacity
   parameter Real htcExpIns=0.88 "Exponent heat transfer coefficient for internal convection"
     annotation (Dialog(group="Heat losses", enable=use_cap));
 
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=vol.energyDynamics
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -101,7 +101,7 @@ model EvaporatorCondenserWithCapacity
     final TAmb(displayUnit="K") = TAmb_nominal,
     final tauHeaTra=tauHeaTra,
     final transferHeat=transferHeat) "Temperature at outlet"
-    annotation (Placement(transformation(extent={{20,10},{40,-10}})));
+    annotation (Placement(transformation(extent={{22,10},{42,-10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_a(
     final initType=initType,
     final tauHeaTra=tauHeaTra,
@@ -125,7 +125,7 @@ model EvaporatorCondenserWithCapacity
     final homotopyInitialization=homotopyInitialization,
     final linearized=linearized)
                          "Pressure drop"
-    annotation (Placement(transformation(extent={{54,-10},{74,10}})));
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Thermal.HeatTransfer.Components.Convection conIns if use_cap
     "Convection between fluid and solid" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
@@ -139,20 +139,19 @@ model EvaporatorCondenserWithCapacity
         origin={-12,78})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCap(
     final C=C,
-    final der_T(start=0, fixed=true),
-    final T(start=T_start, fixed=true)) if
-                             use_cap
+    final T(start=T_start),
+    final der_T(start=0)) if use_cap
     "Heat Capacity"
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=270,
-        origin={2,52})));
+        origin={12,52})));
   Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAIns_nominal*htcExpIns) if
                                                use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},
         rotation=0,
-        origin={-59,28})));
+        origin={-61,28})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_out if use_cap
     "Temperature and heat flow to the ambient"
     annotation (Placement(transformation(extent={{-5,105},{5,95}}),
@@ -180,20 +179,19 @@ equation
     annotation (Line(points={{-60,0},{-50,0}}, color={0,127,255}));
   connect(senT_a.port_b, vol.ports[1])
     annotation (Line(points={{-30,0},{-4,0}}, color={0,127,255}));
-  connect(vol.ports[2], senT_b.port_a)
-    annotation (Line(points={{0,0},{20,0}}, color={0,127,255}));
-  connect(preDro.port_a, senT_b.port_b)
-    annotation (Line(points={{54,0},{40,0}}, color={0,127,255}));
   connect(vol.heatPort, conIns.solid)
     annotation (Line(points={{-12,-10},{-12,20}}, color={191,0,0},
       pattern=LinePattern.Dash));
   connect(conIns.fluid, heatCap.port)
-    annotation (Line(points={{-12,36},{-12,52},{-10,52}}, color={191,0,0}));
+    annotation (Line(points={{-12,36},{-12,52},{1.77636e-15,52}},
+                                                          color={191,0,0},
+      pattern=LinePattern.Dash));
   connect(heatCap.port, conOut.solid)
-    annotation (Line(points={{-10,52},{-12,52},{-12,70}}, color={191,0,0},
+    annotation (Line(points={{1.77636e-15,52},{-12,52},{-12,70}},
+                                                          color={191,0,0},
       pattern=LinePattern.Dash));
   connect(conIns.Gc, heatLossIns.y)
-    annotation (Line(points={{-20,28},{-42.5,28}}, color={0,0,127},
+    annotation (Line(points={{-20,28},{-44.5,28}}, color={0,0,127},
       pattern=LinePattern.Dash));
   connect(port_ref, vol.heatPort)
     annotation (Line(points={{0,-100},{0,-56},{-12,-56},{-12,-10}},
@@ -208,9 +206,15 @@ equation
   connect(mFlow_a.m_flow, m_flow_out)
     annotation (Line(points={{-70,-11},{-70,-40},{-110,-40}}, color={0,0,127}));
   connect(senT_a.T, T_flow_out) annotation (Line(points={{-40,-11},{-40,-60},{-110,-60}}, color={0,0,127}));
-  connect(senT_b.T, T_ret_out) annotation (Line(points={{30,-11},{30,-80},{-110,-80}}, color={0,0,127}));
+  connect(senT_b.T, T_ret_out) annotation (Line(points={{32,-11},{32,-80},{-110,
+          -80}},                                                                       color={0,0,127}));
   connect(mFlow_a.port_a, port_a) annotation (Line(points={{-80,0},{-100,0}}, color={0,127,255}));
-  connect(preDro.port_b, port_b) annotation (Line(points={{74,0},{86,0},{86,0},{100,0}}, color={0,127,255}));
+  connect(vol.ports[2], senT_b.port_a)
+    annotation (Line(points={{0,0},{22,0}}, color={0,127,255}));
+  connect(preDro.port_a, senT_b.port_b)
+    annotation (Line(points={{60,0},{42,0}}, color={0,127,255}));
+  connect(port_b, preDro.port_b)
+    annotation (Line(points={{100,0},{80,0}}, color={0,127,255}));
   annotation (Icon(graphics={ Ellipse(
           extent={{-46,44},{48,-44}},
           lineColor={0,0,0},

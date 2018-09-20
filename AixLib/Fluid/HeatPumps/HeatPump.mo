@@ -2,25 +2,25 @@ within AixLib.Fluid.HeatPumps;
 model HeatPump "Base model of realistic heat pump"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
+    redeclare final package Medium2 = Medium_eva,
     final m1_flow_nominal=mFlow_conNominal,
     final m2_flow_nominal=mFlow_evaNominal,
     final allowFlowReversal1=allowFlowReversalCon,
     final allowFlowReversal2=allowFlowReversalEva,
     final m1_flow_small=1E-4*abs(mFlow_conNominal),
     final m2_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=show_TPort,
-    redeclare package Medium2 = Medium_eva);
+    final show_T=show_TPort);
 
 //General
   replaceable package Medium_con = Modelica.Media.Air.MoistAir constrainedby
     Modelica.Media.Interfaces.PartialMedium                                "Medium at sink side"
-    annotation (choicesAllMatching=true);
+    annotation (Dialog(tab = "Condenser"),choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Air.MoistAir constrainedby
     Modelica.Media.Interfaces.PartialMedium                                "Medium at source side"
-    annotation (choicesAllMatching=true);
+    annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
       choice=false "only heating",
-      radioButtons=true));
+      radioButtons=true), Dialog(descriptionLabel=true));
   replaceable model PerDataHea =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in heating mode"
@@ -30,14 +30,16 @@ model HeatPump "Base model of realistic heat pump"
   "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
 
-  parameter Real scalingFactor "Scaling-factor of HP";
+  parameter Real scalingFactor=1 "Scaling-factor of HP";
   parameter Boolean use_refIne=true
-    "Consider the inertia of the refrigerant cycle"                           annotation(choices(checkBox=true));
+    "Consider the inertia of the refrigerant cycle"                           annotation(choices(checkBox=true), Dialog(
+        group="Refrigerant inertia"));
 
   constant Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency for inertia of refrigerant cycle"
-    annotation (Dialog(enable=use_refIne));
-  parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=use_refIne));
+    annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"));
+  parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
+          use_refIne, group="Refrigerant inertia"));
 
 //Condenser
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
@@ -140,12 +142,12 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
   parameter Real x_start[nthOrder]=zeros(nthOrder)
     "Initial or guess values of states"
-    annotation (Dialog(tab="Initialization", group="System inertia", enable=use_refIne));
+    annotation (Dialog(tab="Initialization", group="Refrigerant inertia", enable=use_refIne));
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
-    annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
+    annotation (Dialog(tab="Initialization", group="Refrigerant inertia",enable=initType ==
           Init.InitialOutput and use_refIne));
 //Dynamics
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=Condenser.vol.energyDynamics
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -169,7 +171,7 @@ model HeatPump "Base model of realistic heat pump"
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity Condenser(
+  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final mFlow_nominal=mFlow_conNominal,
@@ -197,10 +199,9 @@ model HeatPump "Base model of realistic heat pump"
     final transferHeat=transferHeat,
     final is_con=true,
     final V=VCon*scalingFactor,
-    final C=CCon*scalingFactor)
-                       "Heat exchanger model for the condenser"
+    final C=CCon*scalingFactor) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,72},{16,104}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity Evaporator(
+  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
     final mFlow_nominal=mFlow_evaNominal,
     final deltaM=deltaM_eva,
@@ -228,8 +229,7 @@ model HeatPump "Base model of realistic heat pump"
     final mSenFac=mSenFacEva,
     final is_con=false,
     final V=VEva*scalingFactor,
-    final C=CEva*scalingFactor)
-                        "Heat exchanger model for the evaporator"
+    final C=CEva*scalingFactor) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
@@ -345,17 +345,17 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(port_a1, Condenser.port_a) annotation (Line(points={{-100,60},{-80,60},
-          {-80,88},{-16,88}}, color={0,127,255}));
-  connect(Condenser.port_b, port_b1) annotation (Line(points={{16,88},{80,88},{80,
-          60},{100,60}}, color={0,127,255}));
-  connect(heatFlowRateCon.port, Condenser.port_ref)
+  connect(port_a1, con.port_a) annotation (Line(points={{-100,60},{-80,60},{-80,
+          88},{-16,88}}, color={0,127,255}));
+  connect(con.port_b, port_b1) annotation (Line(points={{16,88},{80,88},{80,60},
+          {100,60}}, color={0,127,255}));
+  connect(heatFlowRateCon.port, con.port_ref)
     annotation (Line(points={{48,68},{48,72},{0,72}}, color={191,0,0}));
-  connect(Evaporator.port_a, port_a2) annotation (Line(points={{16,-86},{80,-86},
-          {80,-60},{100,-60}}, color={0,127,255}));
-  connect(Evaporator.port_b, port_b2) annotation (Line(points={{-16,-86},{-80,-86},
-          {-80,-60},{-100,-60}}, color={0,127,255}));
-  connect(heatFlowRateEva.port, Evaporator.port_ref)
+  connect(eva.port_a, port_a2) annotation (Line(points={{16,-86},{80,-86},{80,-60},
+          {100,-60}}, color={0,127,255}));
+  connect(eva.port_b, port_b2) annotation (Line(points={{-16,-86},{-80,-86},{-80,
+          -60},{-100,-60}}, color={0,127,255}));
+  connect(heatFlowRateEva.port, eva.port_ref)
     annotation (Line(points={{49,-68},{0,-68},{0,-70}}, color={191,0,0}));
   connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
           {-104.925,-42.915}},
@@ -404,36 +404,34 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(Condenser.m_flow_out, sigBusHP.m_flow_co) annotation (Line(points={{-17.6,
-          81.6},{-76,81.6},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
+  connect(con.m_flow_out, sigBusHP.m_flow_co) annotation (Line(points={{-17.6,81.6},
+          {-76,81.6},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(Condenser.T_ret_out, sigBusHP.T_ret_co) annotation (Line(points={{-17.6,
-          75.2},{-76,75.2},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
+  connect(con.T_ret_out, sigBusHP.T_ret_co) annotation (Line(points={{-17.6,75.2},
+          {-76,75.2},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(Evaporator.m_flow_out, sigBusHP.m_flow_ev) annotation (Line(points={{17.6,
-          -79.6},{24,-79.6},{24,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
+  connect(eva.m_flow_out, sigBusHP.m_flow_ev) annotation (Line(points={{17.6,-79.6},
+          {24,-79.6},{24,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(Evaporator.T_ret_out, sigBusHP.T_ret_ev) annotation (Line(points={{17.6,
-          -73.2},{24,-73.2},{24,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
+  connect(eva.T_ret_out, sigBusHP.T_ret_ev) annotation (Line(points={{17.6,-73.2},
+          {24,-73.2},{24,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(Evaporator.T_flow_out, sigBusHP.T_flow_ev) annotation (Line(points={{17.6,
-          -76.4},{24,-76.4},{24,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
+  connect(eva.T_flow_out, sigBusHP.T_flow_ev) annotation (Line(points={{17.6,-76.4},
+          {24,-76.4},{24,-110},{-76,-110},{-76,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -449,7 +447,7 @@ equation
       points={{110,100},{84,100},{84,108},{77.6,108}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(varTempOutCon.port, Condenser.port_out) annotation (Line(
+  connect(varTempOutCon.port, con.port_out) annotation (Line(
       points={{60,108},{0,108},{0,104}},
       color={191,0,0},
       pattern=LinePattern.Dash));
@@ -457,15 +455,14 @@ equation
       points={{110,-100},{94,-100},{94,-108},{77.6,-108}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(Evaporator.port_out, varTempOutEva.port) annotation (Line(
+  connect(eva.port_out, varTempOutEva.port) annotation (Line(
       points={{0,-102},{0,-108},{60,-108}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
           -60}}, color={0,127,255}));
-  connect(Condenser.T_flow_out, sigBusHP.T_flow_co) annotation (Line(points={{-17.6,
-          78.4},{-76,78.4},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
+  connect(con.T_flow_out, sigBusHP.T_flow_co) annotation (Line(points={{-17.6,78.4},
+          {-76,78.4},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

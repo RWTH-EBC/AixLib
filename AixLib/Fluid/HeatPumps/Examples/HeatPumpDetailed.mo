@@ -3,12 +3,11 @@ model HeatPumpDetailed
   "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
-
+  replaceable package Medium_sin = AixLib.Media.Water
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+  replaceable package Medium_sou = AixLib.Media.Air
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
-    redeclare package Medium_con =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package Medium_eva =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     P_eleOutput=true,
     capCalcType=2,
     CorrFlowCo=false,
@@ -21,19 +20,21 @@ model HeatPumpDetailed
     T_evaIn(transferHeat=true, TAmb=291.15),
     T_evaOut(transferHeat=true, TAmb=291.15),
     T_conIn(transferHeat=true, TAmb=273.15),
-    T_conOut(transferHeat=true, TAmb=273.15))
+    T_conOut(transferHeat=true, TAmb=273.15),
+    redeclare package Medium_con = Medium_sin,
+    redeclare package Medium_eva = Medium_sou)
     "Detailed heat pump mainly based on manufacturing data"
     annotation (Placement(transformation(extent={{-16,14},{14,-6}})));
   Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     m_flow=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=275.15,
-    nPorts=1) "Ideal mass flow source at the inlet of the source side"
+    redeclare package Medium = Medium_sou,
+    nPorts=1,
+    T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
-      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
+      package Medium = Medium_sou, nPorts=
        1) "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
@@ -52,7 +53,7 @@ model HeatPumpDetailed
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final tauHeaTra=1200,
     redeclare final package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
+        Medium_sin,
     final T_start=303.15,
     final TAmb=291.15)      "Temperature at sink  inlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -70,7 +71,7 @@ model HeatPumpDetailed
     annotation (Placement(transformation(extent={{76,26},{84,34}})));
   Movers.SpeedControlled_Nrpm       pumSou(
     redeclare final package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
+        Medium_sin,
     redeclare final Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
     final addPowerToMedium=false)
@@ -83,7 +84,7 @@ model HeatPumpDetailed
     final use_C_flow=false,
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final V=5,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium = Medium_sin,
     final allowFlowReversal=true) "Volume of Condenser" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -109,7 +110,7 @@ model HeatPumpDetailed
         origin={32,62},
         rotation=180)));
   Sources.FixedBoundary              sinkSideFixedBoundary(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
+      Medium = Medium_sin, nPorts=1)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
