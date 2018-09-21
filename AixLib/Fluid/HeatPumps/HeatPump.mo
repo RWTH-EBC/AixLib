@@ -181,8 +181,6 @@ model HeatPump "Base model of realistic heat pump"
     final T_start=TCon_start,
     final p_start=pCon_start,
     final kAOut_nominal=GCon,
-    final kAIns_nominal=3.66,
-    final htcExpIns=0.88,
     final use_cap=use_ConCap,
     final X_start=XCon_start,
     final from_dp=from_dp,
@@ -192,8 +190,9 @@ model HeatPump "Base model of realistic heat pump"
     final is_con=true,
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
-    final m_flow_nominal=mFlow_conNominal)
-                                "Heat exchanger model for the condenser"
+    final m_flow_nominal=mFlow_conNominal,
+    final kAInn=3.66*(1 + mFlow_con.m_flow/mFlow_conNominal)^0.88)
+    "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
@@ -201,8 +200,6 @@ model HeatPump "Base model of realistic heat pump"
     final dp_nominal=dpEva_nominal,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
-    final kAIns_nominal=3.66,
-    final htcExpIns=0.88,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*abs(mFlow_evaNominal),
     final show_T=show_TPort,
@@ -217,7 +214,8 @@ model HeatPump "Base model of realistic heat pump"
     final is_con=false,
     final V=VEva*scalingFactor,
     final C=CEva*scalingFactor,
-    final m_flow_nominal=mFlow_evaNominal)
+    final m_flow_nominal=mFlow_evaNominal,
+    kAInn=3.66*(1 + mFlow_eva.m_flow/mFlow_evaNominal)^0.88)
                                 "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
@@ -375,7 +373,7 @@ model HeatPump "Base model of realistic heat pump"
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-34,92})));
-  Sensors.MassFlowRate mFlow_eva1(final allowFlowReversal=allowFlowReversalEva,
+  Sensors.MassFlowRate mFlow_con(final allowFlowReversal=allowFlowReversalEva,
       redeclare final package Medium = Medium_con)
     "Mass flow sensor at the evaporator" annotation (Placement(transformation(
         origin={-76,60},
@@ -474,9 +472,9 @@ equation
           -60},{58,-86},{48,-86}}, color={0,127,255}));
   connect(con.port_a, senT_a1.port_b)
     annotation (Line(points={{-16,92},{-24,92}}, color={0,127,255}));
-  connect(senT_a1.port_a, mFlow_eva1.port_b) annotation (Line(points={{-44,92},{
+  connect(senT_a1.port_a, mFlow_con.port_b) annotation (Line(points={{-44,92},{
           -56,92},{-56,60},{-66,60}}, color={0,127,255}));
-  connect(port_a1, mFlow_eva1.port_a)
+  connect(port_a1, mFlow_con.port_a)
     annotation (Line(points={{-100,60},{-86,60}}, color={0,127,255}));
   connect(con.port_b, senT_b1.port_a)
     annotation (Line(points={{16,92},{28,92}}, color={0,127,255}));
@@ -514,8 +512,8 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva1.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-76,49},
-          {-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(mFlow_con.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-76,
+          49},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},

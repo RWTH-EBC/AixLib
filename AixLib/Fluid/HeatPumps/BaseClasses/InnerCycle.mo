@@ -123,8 +123,8 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(constZero.y, switchPel.u3)
     annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
-  connect(constZero.y, switchQEva.u3) annotation (Line(points={{-59,-64},{-62,
-          -64},{-62,-22},{-68,-22}}, color={0,0,127}));
+  connect(constZero.y, switchQEva.u3) annotation (Line(points={{-59,-64},{-52,
+          -64},{-52,-22},{-68,-22}}, color={0,0,127}));
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{-59,-64},{-52,
           -64},{-52,-38},{70,-38},{70,-20}}, color={0,0,127}));
   connect(switchQCon.y, QCon) annotation (Line(points={{93,-12},{94,-12},{94,0},
