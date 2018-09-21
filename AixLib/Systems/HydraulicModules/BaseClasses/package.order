@@ -3,3 +3,4 @@ PumpInterface_SpeedControlledNrpm
 HydraulicBus
 PumpBus
 PartialHydraulicModule
+PumpInterface_Calibrator

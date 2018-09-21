@@ -15,9 +15,11 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
   parameter Modelica.SIunits.Temperature T_start=303.15
-    "Initialization temperature" annotation(Dialog(tab="Advanced"));
+    "Initialization temperature inner Circuit" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Temperature  T_start_outercir=331
+    "Initialization temperature of outer Circuit" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Time tau=15
-    "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
+    "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"),Evaluate=false);
   parameter Modelica.SIunits.Length dIns
     "Thickness of insulation of all pipes (can be overwritten in each pipe) "
     annotation (Dialog(group="Pipes"));
@@ -64,7 +66,7 @@ protected
         origin={100,42})));
 
   Fluid.Sensors.TemperatureTwoPort senT_a1(
-    T_start=T_start,
+    T_start=T_start_outercir,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
@@ -88,7 +90,7 @@ protected
     final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Fluid.Sensors.TemperatureTwoPort senT_b2(
-    T_start=T_start,
+    T_start=T_start_outercir,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,

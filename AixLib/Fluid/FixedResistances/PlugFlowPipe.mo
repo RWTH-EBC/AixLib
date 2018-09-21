@@ -16,11 +16,11 @@ model PlugFlowPipe
     annotation(Dialog(group="Nominal condition"));
 
   parameter Real ReC=4000
-    "Reynolds number where transition to turbulent starts";
+    "Reynolds number where transition to turbulent starts" annotation(Evaluate=false);
 
   parameter Modelica.SIunits.Height roughness=2.5e-5
     "Average height of surface asperities (default: smooth steel pipe)"
-    annotation (Dialog(group="Material"));
+    annotation (Dialog(group="Material"),Evaluate=false);
 
   parameter Modelica.SIunits.Length length=1 "Pipe length"
     annotation (Dialog(group="Material"));
@@ -70,7 +70,7 @@ model PlugFlowPipe
     annotation (Dialog(group="Thermal resistance"));
 
   parameter Real fac=1
-    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
+    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal" annotation(Evaluate=false);
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
