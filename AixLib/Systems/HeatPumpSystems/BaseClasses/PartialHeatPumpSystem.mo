@@ -194,19 +194,19 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(tab="Initialization", group="Parameters"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pCon_start=
       Medium_con.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"), Evaluate=false);
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"), Evaluate=false);
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pEva_start=
       Medium_eva.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"), Evaluate=false);
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"), Evaluate=false);
+    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
@@ -220,10 +220,10 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Real mSenFacCon=1
     "Factor for scaling the sensible thermal mass of the volume in the condenser"
-    annotation (Dialog(tab="Dynamics",group="Condenser"), Evaluate=false);
+    annotation (Dialog(tab="Dynamics",group="Condenser"));
   parameter Real mSenFacEva=1
     "Factor for scaling the sensible thermal mass of the volume in the evaporator"
-    annotation (Dialog(tab="Dynamics", group="Evaporator"), Evaluate=false);
+    annotation (Dialog(tab="Dynamics", group="Evaporator"));
 //Assumptions
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
@@ -250,7 +250,7 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(
       tab="Assumptions",
       group="Temperature sensors",
-      enable=transferHeat), Evaluate=false);
+      enable=transferHeat));
   parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(
@@ -268,26 +268,6 @@ partial model PartialHeatPumpSystem
     Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
-  Controls.HeatPump.SecurityControls.SecurityControl securityControl(
-    final use_minRunTime=use_minRunTime,
-    final minRunTime(displayUnit="min") = minRunTime,
-    final minLocTime(displayUnit="min") = minLocTime,
-    final use_runPerHou=use_runPerHou,
-    final maxRunPerHou=maxRunPerHou,
-    final use_opeEnv=use_opeEnv,
-    final use_minLocTime=use_minLocTime,
-    pre_n_start=pre_n_start,
-    final use_deFro=use_deFro,
-    final minIceFac=minIceFac,
-    final use_chiller=use_chiller,
-    final calcPel_deFro=calcPel_deFro,
-    final use_antFre=use_antFre,
-    final TantFre=TantFre,
-    final tableLow=tableLow,
-    final tableUpp=tableUpp,
-    final use_opeEnvFroRec=use_opeEnvFroRec,
-    final dataTable=dataTable) if         use_sec
-    annotation (Placement(transformation(extent={{16,120},{56,158}})));
   Fluid.Movers.SpeedControlled_y           pumSin(
     redeclare final package Medium = Medium_con,
     final energyDynamics=energyDynamics,
@@ -324,36 +304,9 @@ partial model PartialHeatPumpSystem
         extent={{8,8},{-8,-8}},
         rotation=0,
         origin={60,-42})));
-  Controls.HeatPump.HPControl hPControls(
-    final use_antLeg=use_antLeg,
-    final use_bivPar=use_bivPar,
-    final use_secHeaGen=use_secHeaGen,
-    final Q_flow_nominal=Q_flow_nominal,
-    redeclare final model TSetToNSet =  TSetToNSet,
-    final heatingCurveRecord=heatingCurveRecord,
-    final declination=declination,
-    final day_hour=day_hour,
-    final night_hour=night_hour,
-    final zerTim=zerTim,
-    final TLegMin=TLegMin,
-    final minTimeAntLeg=minTimeAntLeg,
-    final trigWeekDay=trigWeekDay,
-    final trigHour=trigHour,
-    final use_tableData=use_tableData,
-    redeclare final function HeatingCurveFunction = HeatingCurveFunction)
-             annotation (Placement(transformation(extent={{-68,120},{-30,154}})));
-
-  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(
-    final lowBouPel=200)
-    annotation (Placement(transformation(extent={{66,170},{92,198}})));
 
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
-    annotation (Placement(transformation(extent={{-130,140},{-100,170}})));
-  Modelica.Blocks.Sources.RealExpression calcQHeat
-    annotation (Placement(transformation(extent={{28,180},{52,198}})));
-  Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
-                                                                      "No 1. Layer"
-    annotation (Placement(transformation(extent={{-10,160},{4,174}})));
+    annotation (Placement(transformation(extent={{-132,98},{-102,128}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*abs(mFlow_evaNominal),
@@ -377,7 +330,7 @@ partial model PartialHeatPumpSystem
       Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
-        origin={58,-16})));
+        origin={60,-16})));
  SecHeatGen secHeaGen(redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
@@ -387,7 +340,7 @@ partial model PartialHeatPumpSystem
                              use_secHeaGen annotation (Placement(transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
-        origin={36,43})));
+        origin={40,61})));
 
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     final allowFlowReversal=allowFlowReversalEva,
@@ -399,7 +352,7 @@ partial model PartialHeatPumpSystem
     "Used if monovalent HP System" annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
-        origin={50,12})));
+        origin={38,34})));
   Fluid.Sensors.TemperatureTwoPort
                              senTSup(
     final transferHeat=true,
@@ -413,21 +366,45 @@ partial model PartialHeatPumpSystem
     final TAmb=TAmbCon_nominal)       "Supply temperature"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
-        origin={78,44})));
+        origin={78,60})));
 
-  Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-120,96},{-90,130}}),
-        iconTransformation(extent={{-108,104},{-90,130}})));
-
-  Modelica.Blocks.Sources.RealExpression calcPel_total(y=0.0)
-    "Real expression to calculate total power consumption"
-    annotation (Placement(transformation(extent={{28,168},{52,186}})));
-
+  HPSystemController hPSystemController(
+    final use_secHeaGen=use_secHeaGen,
+    final Q_flow_nominal=Q_flow_nominal,
+    final use_bivPar=use_bivPar,
+    final heatingCurveRecord=heatingCurveRecord,
+    final declination=declination,
+    final day_hour=day_hour,
+    final night_hour=night_hour,
+    final zerTim=zerTim,
+    final use_antLeg=use_antLeg,
+    final TLegMin=TLegMin,
+    final minTimeAntLeg=minTimeAntLeg,
+    final trigWeekDay=trigWeekDay,
+    final trigHour=trigHour,
+    redeclare final model TSetToNSet = TSetToNSet,
+    final use_tableData=use_tableData,
+    redeclare final function HeatingCurveFunction = HeatingCurveFunction,
+    final use_sec=use_sec,
+    final use_minRunTime=use_minRunTime,
+    final minRunTime=minRunTime,
+    final use_minLocTime=use_minLocTime,
+    final pre_n_start=pre_n_start,
+    final use_opeEnv=use_opeEnv,
+    final use_opeEnvFroRec=use_opeEnvFroRec,
+    final dataTable=dataTable,
+    final tableUpp=tableUpp,
+    final tableLow=tableLow,
+    final use_deFro=use_deFro,
+    final minIceFac=minIceFac,
+    final use_chiller=use_chiller,
+    final calcPel_deFro=calcPel_deFro,
+    final use_antFre=use_antFre,
+    final TantFre=TantFre,
+    final use_runPerHou=use_runPerHou,
+    final maxRunPerHou=5)
+    annotation (Placement(transformation(extent={{-50,98},{48,168}})));
 equation
-  connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-115,155},{-92,155},
-          {-92,137.756},{-71.8,137.756}},
-                                     color={0,0,127}));
   connect(pumSin.port_b, heatPump.port_a1) annotation (Line(
       points={{-62,40},{-62,11.2},{-26,11.2}},
       color={0,127,255},
@@ -442,58 +419,25 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSou.port_b, heatPump.port_a2) annotation (Line(
-      points={{52,-16},{18,-16},{18,-15.2}},
+      points={{54,-16},{18,-16},{18,-15.2}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(hPControls.nOut, securityControl.nSet) annotation (Line(
-      points={{-27.34,142.667},{-10,142.667},{-10,142.8},{13.3333,142.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(hPControls.nOut, realPasThrSec.u) annotation (Line(
-      points={{-27.34,142.667},{-24,142.667},{-24,167},{-11.4,167}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(heatPump.port_b1, secHeaGen.port_a) annotation (Line(
-      points={{18,11.2},{18,44},{28,44},{28,43}},
+      points={{18,11.2},{18,60},{32,60},{32,61}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, mediumPassThroughSecHeaGen.port_a) annotation (Line(
-      points={{18,11.2},{18,12},{44,12}},
+      points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(secHeaGen.port_b, senTSup.port_a) annotation (Line(
-      points={{44,43},{44,44},{70,44}},
+      points={{48,61},{48,60},{70,60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSecHeaGen.port_b, senTSup.port_a) annotation (Line(
-      points={{56,12},{64,12},{64,44},{70,44}},
+      points={{44,34},{64,34},{64,60},{70,60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(hPControls.modeOut, securityControl.modeSet) annotation (Line(points={{-27.34,
-          135.111},{-24,135.111},{-24,135.2},{13.3333,135.2}},           color={
-          255,0,255}));
-  connect(hPControls.y_sou, pumSou.y) annotation (Line(points={{-61.16,120},{-60,
-          120},{-60,102},{-50,102},{-50,-64},{60,-64},{60,-51.6}},
-                                                    color={0,0,127}));
-  connect(hPControls.ySecHeaGen, secHeaGen.u) annotation (Line(points={{-49.76,
-          119.244},{-49.76,56},{-50,56},{-50,48.4},{26.4,48.4}},
-                                                         color={0,0,127}));
-  connect(sigBusHP, hPControls.sigBusHP) annotation (Line(
-      points={{-105,113},{-80,113},{-80,127.933},{-68.38,127.933}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP, securityControl.sigBusHP) annotation (Line(
-      points={{-105,113},{-14,113},{-14,125.89},{13.5,125.89}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
           {-60,-60},{-100,-60}}, color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
@@ -501,11 +445,11 @@ equation
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSou.port_a, port_a2) annotation (Line(
-      points={{64,-16},{100,-16},{100,-60}},
+      points={{66,-16},{100,-16},{100,-60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(senTSup.port_b, port_b1)
-    annotation (Line(points={{86,44},{86,60},{100,60}}, color={0,127,255}));
+    annotation (Line(points={{86,60},{100,60}},         color={0,127,255}));
   connect(port_a1, pumSin.port_a) annotation (Line(
       points={{-100,60},{-100,40},{-78,40}},
       color={0,127,255},
@@ -514,19 +458,21 @@ equation
       points={{-76,12},{-100,12},{-100,60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(senTSup.T, hPControls.TSup) annotation (Line(points={{78,52.8},{78,88},
-          {-130,88},{-130,176},{-84,176},{-84,149.089},{-71.8,149.089}},
-                                                   color={0,0,127}));
-  connect(calcPel_total.y, calcCOP.Pel) annotation (Line(points={{53.2,177},{57.6,
-          177},{57.6,178.4},{63.4,178.4}},color={0,0,127}));
-  connect(calcQHeat.y, calcCOP.QHeat) annotation (Line(points={{53.2,189},{57.6,
-          189},{57.6,189.6},{63.4,189.6}}, color={0,0,127}));
-  connect(hPControls.y_sin, pumSin.y) annotation (Line(points={{-38.36,120},{-38,
-          120},{-38,102},{-48,102},{-48,56},{-70,56},{-70,49.6}}, color={0,0,127}));
   connect(port_b1, port_b1) annotation (Line(points={{100,60},{104,60},{104,60},
           {100,60}}, color={0,127,255}));
+  connect(T_oda, hPSystemController.T_oda) annotation (Line(points={{-117,113},{
+          -90,113},{-90,133},{-56.86,133}}, color={0,0,127}));
+  connect(senTSup.T, hPSystemController.TSup) annotation (Line(points={{78,68.8},
+          {78,172},{-64,172},{-64,147},{-56.86,147}}, color={0,0,127}));
+  connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-40.2,93.1},
+          {-40.2,66},{-70,66},{-70,49.6}}, color={0,0,127}));
+  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{
+          18.6,93.1},{18.6,66.4},{30.4,66.4}}, color={0,0,127}));
+  connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{38.2,93.1},
+          {38.2,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,200}}), graphics={
+            {100,180}}), graphics={
         Rectangle(
           extent={{-17,50},{17,-50}},
           fillColor={255,0,128},
@@ -600,46 +546,35 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="Heater"),                      Rectangle(
-          extent={{-100,200},{100,140}},
+          extent={{-100,186},{100,138}},
           lineColor={135,135,135},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           lineThickness=1),
         Text(
-          extent={{-84,184},{-38,160}},
+          extent={{-84,176},{-38,152}},
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="Control"),
         Text(
-          extent={{-12,188},{48,154}},
+          extent={{-12,180},{48,146}},
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="Security",
           visible=use_sec),
         Rectangle(
-          extent={{-16,190},{52,152}},
+          extent={{-16,182},{52,144}},
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           visible=use_sec),
         Rectangle(
-          extent={{-94,190},{-26,152}},
+          extent={{-94,182},{-26,144}},
           lineColor={0,0,127},
           fillColor={255,255,255},
           fillPattern=FillPattern.None)}),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,200}}), graphics={Rectangle(
-          extent={{-100,200},{100,80}},
-          lineColor={135,135,135},
-          fillColor={255,255,170},
-          fillPattern=FillPattern.Solid,
-          lineThickness=1), Text(
-          extent={{-16,192},{18,200}},
-          lineColor={135,135,135},
-          lineThickness=1,
-          fillColor={255,255,170},
-          fillPattern=FillPattern.Solid,
-          textString="Controls")}));
+          extent={{-100,-100},{100,180}})));
 end PartialHeatPumpSystem;

@@ -41,10 +41,7 @@ model HeatPumpSystem
       redeclare final package Medium_con = Medium_con,
       redeclare final package Medium_eva = Medium_eva,
       redeclare final model PerDataHea = PerDataHea,
-      redeclare final model PerDataChi = PerDataChi),
-    final calcQHeat(final y=heatPump.sigBusHP.m_flow_co*(senTSup.T - heatPump.sigBusHP.T_flow_co)
-          *4180),
-    calcPel_total(y=sigBusHP.Pel + pumSou.P + pumSin.P));
+      redeclare final model PerDataChi = PerDataChi));
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",
@@ -117,71 +114,13 @@ model HeatPumpSystem
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
           Init.InitialOutput and use_refIne));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock if
-    use_deFro
-    annotation (Placement(transformation(extent={{-88,-32},{-78,-22}})));
-  Modelica.Blocks.Sources.Constant constIceFacOne(final k=1) if not use_deFro
-    "If defrost is neglacted, iceFac is constant 1"
-    annotation (Placement(transformation(extent={{-86,-46},{-76,-36}})));
-  Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 18) annotation (
+  Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
       Placement(transformation(
         extent={{-7,7},{7,-7}},
         rotation=180,
         origin={87,-1})));
 equation
-  connect(realPasThrSec.y, heatPump.nSet) annotation (Line(
-      points={{4.7,167},{4,167},{4,168},{76,168},{76,102},{-36,102},{-36,1.66667},
-          {-29.52,1.66667}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(securityControl.modeOut, heatPump.modeSet) annotation (Line(points={{57.6667,
-          135.2},{72,135.2},{72,94},{-44,94},{-44,-5.66667},{-29.52,-5.66667}},
-                                                       color={255,0,255}));
-  connect(sigBusHP, heatPump.sigBusHP) annotation (Line(
-      points={{-105,113},{-128,113},{-128,-8},{-70,-8},{-70,-9.15},{-25.78,-9.15}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
 
-  connect(constIceFacOne.y, heatPump.iceFac_in) annotation (Line(
-      points={{-75.5,-41},{-20.72,-41},{-20.72,-26.9333}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(sigBusHP.T_flow_ev, icingBlock.T_flow_ev) annotation (Line(
-      points={{-104.925,113.085},{-128,113.085},{-128,-26},{-88.4,-26}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.T_oda, icingBlock.T_oda) annotation (Line(
-      points={{-104.925,113.085},{-128,113.085},{-128,-24},{-88.4,-24}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(sigBusHP.T_ret_ev, icingBlock.T_ret_ev) annotation (Line(
-      points={{-104.925,113.085},{-128,113.085},{-128,-28},{-88.4,-28}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.m_flow_ev, icingBlock.m_flow_ev) annotation (Line(
-      points={{-104.925,113.085},{-128,113.085},{-128,-30},{-88.4,-30}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{
           79.3,0},{28,0},{28,16},{20.2,16},{20.2,16.3333}},
                                                        color={0,0,127}));
@@ -190,15 +129,19 @@ equation
                                                     color={0,0,127}));
   connect(port_a1, port_a1)
     annotation (Line(points={{-100,60},{-100,60}}, color={0,127,255}));
-  connect(icingBlock.iceFac, heatPump.iceFac_in) annotation (Line(
-      points={{-77.5,-27},{-50,-27},{-50,-42},{-20.72,-42},{-20.72,-26.9333}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(securityControl.nOut, heatPump.nSet) annotation (Line(
-      points={{57.6667,142.8},{76,142.8},{76,102},{-36,102},{-36,1.66667},{
-          -29.52,1.66667}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
+  connect(hPSystemController.modeOut, heatPump.modeSet) annotation (Line(points=
+         {{-20.6,93.1},{-20.6,32},{-48,32},{-48,-5.66667},{-29.52,-5.66667}},
+        color={255,0,255}));
+  connect(hPSystemController.nOut, heatPump.nSet) annotation (Line(points={{-1,93.1},
+          {-1,30},{-40,30},{-40,1.66667},{-29.52,1.66667}}, color={0,0,127}));
+  connect(hPSystemController.iceFac_out, heatPump.iceFac_in) annotation (Line(
+        points={{54.86,161},{58,161},{58,-2},{36,-2},{36,-54},{-20.72,-54},{
+          -20.72,-26.9333}},
+                      color={0,0,127}));
+  connect(heatPump.sigBusHP, hPSystemController.sigBusHP) annotation (Line(
+      points={{-25.78,-9.15},{-84,-9.15},{-84,115.85},{-50.49,115.85}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end HeatPumpSystem;

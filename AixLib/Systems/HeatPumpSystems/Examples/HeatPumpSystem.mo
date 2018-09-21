@@ -117,8 +117,8 @@ model HeatPumpSystem "Example for a heat pump system"
     use_secHeaGen=false,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable
-          =AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()),
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+           AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()),
     redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
           hys=2),
     scalingFactor=1)
@@ -169,18 +169,21 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(sou.ports[1], heatPumpSystem.port_a2)
-    annotation (Line(points={{82,-90},{62,-90},{62,-78}}, color={0,127,255}));
+    annotation (Line(points={{82,-90},{62,-90},{62,-77.4286}},
+                                                          color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {14,-90},{14,-78},{8,-78}},  color={0,127,255}));
-  connect(heatPumpSystem.port_b1, rad.port_a) annotation (Line(points={{62,-54},
-          {74,-54},{74,12},{40,12}},      color={0,127,255}));
+          {14,-90},{14,-77.4286},{8,-77.4286}},
+                                       color={0,127,255}));
+  connect(heatPumpSystem.port_b1, rad.port_a) annotation (Line(points={{62,
+          -51.7143},{74,-51.7143},{74,12},{40,12}},
+                                          color={0,127,255}));
   connect(rad.port_b, preSou.ports[1]) annotation (Line(points={{20,12},{-8,12},{-8,-22},
           {-22,-22}},          color={0,127,255}));
   connect(preSou.ports[2], heatPumpSystem.port_a1)
-    annotation (Line(points={{-22,-26},{-14,-26},{-14,-54},{8,-54}},
+    annotation (Line(points={{-22,-26},{-14,-26},{-14,-51.7143},{8,-51.7143}},
                                                            color={0,127,255}));
   connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
-      points={{-68,64},{-58,64},{-58,-35},{3.95,-35}},
+      points={{-68,64},{-58,64},{-58,-40.3571},{3.41,-40.3571}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

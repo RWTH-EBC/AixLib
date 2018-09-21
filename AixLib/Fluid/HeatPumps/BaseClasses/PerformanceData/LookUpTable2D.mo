@@ -78,11 +78,11 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-14,34})));
-protected
-  Real minSup = min(dataTable.tableP_ele[:,2:end]);
-  Real minSou = min(dataTable.tableP_ele[2:end,:]);
-  Real maxSup = max(dataTable.tableP_ele[:,2:end]);
-  Real maxSou = max(dataTable.tableP_ele[2:end,:]);
+
+  Real minSou = min(dataTable.tableP_ele[1,2:end]);
+  Real minSup = min(dataTable.tableP_ele[2:end,1]);
+  Real maxSou = max(dataTable.tableP_ele[1,2:end]);
+  Real maxSup = max(dataTable.tableP_ele[2:end,1]);
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
     "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-10,-10},
             {10,10}},
@@ -103,12 +103,11 @@ protected
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={6,32})));
-
 equation
-  assert(minSou > sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-  assert(maxSou > sigBusHP.T_flow_ev, "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-  assert(minSup > sigBusHP.T_ret_co, "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-  assert(maxSup > sigBusHP.T_ret_co, "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(minSou+273.15 < sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(maxSou+273.15 > sigBusHP.T_flow_ev, "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(minSup+273.15 < sigBusHP.T_ret_co, "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+  assert(maxSup+273.15 > sigBusHP.T_ret_co, "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
 
   connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
           60},{35.6,60},{35.6,50.8}},      color={0,0,127}));

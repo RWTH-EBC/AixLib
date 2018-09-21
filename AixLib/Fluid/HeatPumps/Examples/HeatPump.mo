@@ -3,17 +3,21 @@ model HeatPump
   "Example for the detailed heat pump model in order to compare to simple one."
  extends Modelica.Icons.Example;
  import AixLib;
+  replaceable package Medium_sin = AixLib.Media.Water
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+  replaceable package Medium_sou = AixLib.Media.Water
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   AixLib.Fluid.Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     m_flow=1,
     nPorts=1,
-    redeclare package Medium = AixLib.Media.Air,
+    redeclare package Medium = Medium_sou,
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
   AixLib.Fluid.Sources.FixedBoundary                sourceSideFixedBoundary(
                                                                          nPorts=
-       1, redeclare package Medium = AixLib.Media.Air)
+       1, redeclare package Medium = Medium_sou)
           "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
@@ -48,12 +52,11 @@ model HeatPump
     VCon=0.4,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
-    redeclare package Medium_con =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package Medium_eva = AixLib.Media.Air,
     use_refIne=true,
     use_ConCap=false,
     use_EvaCap=false,
+    redeclare package Medium_con = Medium_sin,
+    redeclare package Medium_eva = Medium_sou,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
     TCon_start=303.15)  annotation (Placement(transformation(
@@ -74,10 +77,9 @@ model HeatPump
     final tau=1,
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final tauHeaTra=1200,
-    redeclare final package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     final allowFlowReversal=heatPump.allowFlowReversalCon,
     final transferHeat=false,
+    redeclare final package Medium = Medium_sin,
     final T_start=303.15,
     final TAmb=291.15) "Temperature at sink inlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -97,11 +99,10 @@ model HeatPump
     annotation (Placement(transformation(extent={{76,26},{84,34}})));
   AixLib.Fluid.Movers.SpeedControlled_Nrpm
                                     pumSou(
-    redeclare final package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
-    final addPowerToMedium=false)
+    final addPowerToMedium=false,
+    redeclare final package Medium = Medium_sin)
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -112,8 +113,9 @@ model HeatPump
     final use_C_flow=false,
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final V=5,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    final allowFlowReversal=true) "Volume of Condenser" annotation (Placement(
+    final allowFlowReversal=true,
+    redeclare package Medium = Medium_sin)
+                                  "Volume of Condenser" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -137,8 +139,8 @@ model HeatPump
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         origin={32,62},
         rotation=180)));
-  AixLib.Fluid.Sources.FixedBoundary sinkSideFixedBoundary(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
+  AixLib.Fluid.Sources.FixedBoundary sinkSideFixedBoundary(      nPorts=1,
+      redeclare package Medium = Medium_sin)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
@@ -191,7 +193,7 @@ equation
   connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{3,38},{4,38},
           {4,6.84},{6.83333,6.84}},       color={0,0,127}));
   connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
-          {-6,77.6},{-6,6.84},{-2.83333,6.84}},             color={255,0,255}));
+          {-4,77.6},{-4,6.84},{-2.83333,6.84}},             color={255,0,255}));
   connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
           -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

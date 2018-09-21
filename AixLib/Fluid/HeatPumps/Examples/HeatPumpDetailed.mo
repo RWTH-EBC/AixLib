@@ -55,7 +55,7 @@ model HeatPumpDetailed
     redeclare final package Medium =
         Medium_sin,
     final T_start=303.15,
-    final TAmb=291.15)      "Temperature at sink  inlet"
+    final TAmb=291.15) "Temperature at sink  inlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={54,-64})));
