@@ -75,10 +75,10 @@ model HeatPumpSystem
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
   parameter Modelica.SIunits.PressureDifference dpEva_nominal
     "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
   parameter Modelica.SIunits.PressureDifference dpCon_nominal
     "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);

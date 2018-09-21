@@ -30,7 +30,6 @@ model HeatPump
         rotation=-90,
         origin={2,-76})));
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
-    use_refIne=false,
     refIneFre_constant=1,
     scalingFactor=1,
     redeclare model PerDataChi =
@@ -51,11 +50,12 @@ model HeatPump
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    use_EvaCap=true,
-    use_ConCap=true,
     redeclare package Medium_eva = AixLib.Media.Air,
-    TAmbCon_nom=288.15,
-    TAmbEva_nom=273.15,
+    use_refIne=true,
+    use_ConCap=false,
+    use_EvaCap=false,
+    TAmbCon_nominal=288.15,
+    TAmbEva_nominal=273.15,
     TCon_start=303.15)  annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
@@ -77,9 +77,9 @@ model HeatPump
     redeclare final package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     final allowFlowReversal=heatPump.allowFlowReversalCon,
-    final T_start=303.15,
     final transferHeat=false,
-    final TAmb=291.15)      "Temperature at sink  inlet"
+    final T_start=303.15,
+    final TAmb=291.15) "Temperature at sink inlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={54,-64})));

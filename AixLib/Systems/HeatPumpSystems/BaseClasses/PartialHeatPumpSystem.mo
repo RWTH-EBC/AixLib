@@ -19,10 +19,10 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(group="Source"), choicesAllMatching=true);
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate, used for regularization near zero flow"
-    annotation (Dialog(group="Nominal condition"), Evaluate=false);
+    annotation (Dialog(group="Nominal condition"));
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate"
-    annotation (Dialog(group="Nominal condition"), Evaluate=false);
+    annotation (Dialog(group="Nominal condition"));
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
@@ -494,9 +494,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
-          -15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
