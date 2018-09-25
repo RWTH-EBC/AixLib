@@ -191,7 +191,7 @@ model HeatPump "Base model of realistic heat pump"
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
     final m_flow_nominal=mFlow_conNominal,
-    final kAInn=3.66*(1 + mFlow_con.m_flow/mFlow_conNominal)^0.88)
+    final kAInn=3.66*(1 + GCon)^0.88)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
@@ -215,8 +215,7 @@ model HeatPump "Base model of realistic heat pump"
     final V=VEva*scalingFactor,
     final C=CEva*scalingFactor,
     final m_flow_nominal=mFlow_evaNominal,
-    kAInn=3.66*(1 + mFlow_eva.m_flow/mFlow_evaNominal)^0.88)
-                                "Heat exchanger model for the evaporator"
+    kAInn=3.66*(1 + GEva)^0.88) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,

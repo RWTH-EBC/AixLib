@@ -70,10 +70,15 @@ block DefrostControl
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     "If a chiller is used to defrost, mode will be false"
     annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
-  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false) if not
+  Modelica.Blocks.Sources.BooleanConstant conFalseNotUseChi(final k=false) if
+                                                                          not
     use_chiller
     "If ice is melted with an additional heater, HP can continue running"
-    annotation (Placement(transformation(extent={{34,-50},{44,-40}})));
+    annotation (Placement(transformation(extent={{28,-48},{38,-38}})));
+  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=true) if
+    use_chiller
+    "If ice is melted with an additional heater, HP can continue running"
+    annotation (Placement(transformation(extent={{28,-66},{38,-56}})));
 equation
   connect(conOne.y, swiErr.u3) annotation (Line(points={{36.6,-6},{38,-6},{38,4},
           {56,4}},        color={0,0,127}));
@@ -130,10 +135,16 @@ equation
       points={{-23.4,0},{0,0},{0,-32},{56,-32}},
       color={255,0,255},
       pattern=LinePattern.Dash));
-  connect(conTrueUseChi.y, logicalSwitch.u3) annotation (Line(points={{44.5,-45},
-          {50,-45},{50,-40},{56,-40}}, color={255,0,255}));
+  connect(conFalseNotUseChi.y, logicalSwitch.u3) annotation (Line(
+      points={{38.5,-43},{50,-43},{50,-40},{56,-40}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
   connect(iceFacGreMinChi.y, logicalSwitch.u2) annotation (Line(
       points={{-22.2,-50},{8,-50},{8,-32},{56,-32}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(conTrueUseChi.y, logicalSwitch.u3) annotation (Line(
+      points={{38.5,-61},{50,-61},{50,-40},{56,-40}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,

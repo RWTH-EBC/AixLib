@@ -2,22 +2,15 @@ within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends BaseClasses.PartialPerformanceData;
 
-  replaceable model nConv =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.ConvToN
-      constrainedby Modelica.Blocks.Interfaces.SISO annotation(Dialog(enable=use_nConv),choicesAllMatching=true);
 
-  parameter Boolean use_nConv
-    "True if you need to convert the n-signal before the table data" annotation(choices(checkBox=true));
 
-  nConv nConverter if use_nConv
-    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+
+  Modelica.Blocks.Math.Gain nConGain(final k=nConv)
+    "Convert relative speed n to an absolute value for interpolation in sdf tables"
+    annotation (Placement(transformation(
+        extent={{-8,-8},{8,8}},
         rotation=-90,
-        origin={21,73})));
-  Modelica.Blocks.Routing.RealPassThrough realPasThrNCon if not use_nConv
-    "If nConverter is not used"
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
-        rotation=-90,
-        origin={-24,74})));
+        origin={0,68})));
  Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
             {6,6}},
@@ -47,11 +40,11 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-4,-18})));
-  SDF.NDTable nDTableQCon
+  SDF.NDTable nDTableQCon(nin=3)
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=-90,
         origin={-42,-10})));
-  SDF.NDTable nDTablePel
+  SDF.NDTable nDTablePel(nin=3)
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=-90,
         origin={58,-8})));
@@ -61,7 +54,9 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     final n3=1) "Concat all inputs into an array"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
-        origin={2,20})));
+        origin={0,20})));
+  parameter Real nConv=1
+    "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
 equation
   connect(feedbackHeatFlowEvaporator.y, QEva)
     annotation (Line(points={{80,-89},{80,-110}},
@@ -90,20 +85,18 @@ equation
   connect(nDTablePel.y, switchPel.u1)
     annotation (Line(points={{58,-21.2},{58,-48}},color={0,0,127}));
   connect(t_Ev_in.y,multiplex3_1. u1[1]) annotation (Line(points={{60,33.4},{8,
-          33.4},{8,29.6},{7.6,29.6}}, color={0,0,127}));
+          33.4},{8,29.6},{5.6,29.6}}, color={0,0,127}));
   connect(t_Co_ou.y,multiplex3_1. u3[1]) annotation (Line(points={{-40,33.4},{
-          -3.6,33.4},{-3.6,29.6}},       color={0,0,127}));
-  connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{2,11.2},{2,
-          4.4},{-42,4.4}},                color={0,0,127}));
-  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{2,11.2},{2,
-          6.4},{58,6.4}},                    color={0,0,127}));
-  connect(nConverter.y,multiplex3_1. u2[1])
-    annotation (Line(points={{21,67.5},{22,67.5},{22,48},{2,48},{2,29.6}},
-                                                   color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(realPasThrNCon.y, multiplex3_1.u2[1]) annotation (Line(points={{-24,
-          65.2},{-24,66},{-24,66},{-24,68},{-24,48},{2,48},{2,29.6}},
-                                             color={0,0,127},
+          -5.6,33.4},{-5.6,29.6}},       color={0,0,127}));
+  connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-1.55431e-15,
+          11.2},{-1.55431e-15,4.4},{-42,4.4}},
+                                          color={0,0,127}));
+  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,
+          11.2},{-1.77636e-15,6.4},{58,6.4}},color={0,0,127}));
+  connect(nConGain.y, multiplex3_1.u2[1]) annotation (Line(
+      points={{-1.77636e-15,59.2},{-1.77636e-15,60},{0,60},{0,42},{1.77636e-15,
+          42},{1.77636e-15,29.6}},
+      color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
       points={{1.075,104.07},{60,104.07},{60,54},{60,48},{60,48},{60,47.2}},
@@ -112,21 +105,11 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.N, nConverter.u) annotation (Line(
-      points={{1.075,104.07},{22,104.07},{22,79},{21,79}},
+  connect(sigBusHP.N, nConGain.u) annotation (Line(
+      points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
       color={255,204,51},
       thickness=0.5,
-      pattern=LinePattern.Dash),
-                      Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.N, realPasThrNCon.u) annotation (Line(
-      points={{1.075,104.07},{-24,104.07},{-24,83.6}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash),
-                      Text(
+      pattern=LinePattern.Dash), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));

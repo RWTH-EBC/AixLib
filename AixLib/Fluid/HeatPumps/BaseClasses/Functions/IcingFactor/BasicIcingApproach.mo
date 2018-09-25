@@ -4,12 +4,15 @@ function BasicIcingApproach
   extends PartialBaseFct;
 protected
   Real TEva_m "Medium temperature at evaporator in degC";
+  Modelica.SIunits.Time timer = 0 "Timer to reduce icing factor";
+  Modelica.SIunits.Time maxTimeNoDefrost = 86400*3 "Maximal time without defrost";
+  Real rel_value "Relative value based on time and outside temperature";
+  Modelica.SIunits.ThermodynamicTemperature T_flow_ev_crit=273.15;
 algorithm
-  //Calculate the medium temperature at the evaporator
-  TEva_m :=0.5*(T_flow_ev + T_ret_ev) - 273.15;
   //Check if icing is an issue at current Toda (greater 5 degC defrost is not regarded)
+  rel_value :=(timer/maxTimeNoDefrost)*(T_flow_ev/T_flow_ev_crit);
   if T_oda < 278.15 then
-    iceFac :=1-(5-TEva_m)/25;
+    iceFac :=sqrt(1-rel_value^2);
   else
     iceFac :=1;
   end if;

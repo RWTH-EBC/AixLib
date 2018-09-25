@@ -42,7 +42,7 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Fluid.Sources.FixedBoundary preSou(
     nPorts=2,
     redeclare package Medium = Medium_sin,
-    T=293.15)
+    T=313.15)
     "Source for pressure and to account for thermal expansion of water"
     annotation (Placement(transformation(extent={{-42,-34},{-22,-14}})));
 
@@ -115,13 +115,17 @@ model HeatPumpSystem "Example for a heat pump system"
     minTimeAntLeg(displayUnit="min") = 900,
     Q_flow_nominal=5,
     use_secHeaGen=false,
-    redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()),
     redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
           hys=2),
-    scalingFactor=1)
+    scalingFactor=1,
+    TCon_start=313.15,
+    TEva_start=283.15,
+    redeclare model PerDataHea =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable
+          =AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,-5.0,
+            0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,4958,
+            5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,7583])))
     annotation (Placement(transformation(extent={{8,-86},{62,-26}})));
 equation
   connect(theCon.port_b,vol. heatPort) annotation (Line(

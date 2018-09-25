@@ -9,9 +9,9 @@ model PolynomalApproach
 protected
   Real Char[2];
 equation
-  if sigBusHP.onOff then
+  Char = PolyData(sigBusHP.N,sigBusHP.T_ret_co,sigBusHP.T_flow_ev,sigBusHP.m_flow_co,sigBusHP.m_flow_ev);
+  if sigBusHP.N > Modelica.Constants.eps then
     //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
-    Char = PolyData(sigBusHP.N,sigBusHP.T_ret_co,sigBusHP.T_flow_ev,sigBusHP.m_flow_co,sigBusHP.m_flow_ev);
     QCon = Char[2];
     Pel = Char[1];
     QEva = QCon-Pel;
