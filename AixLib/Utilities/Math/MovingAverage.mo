@@ -1,6 +1,6 @@
 within AixLib.Utilities.Math;
 model MovingAverage
-  parameter Real T=24*3600 "time span for average";
+  parameter Real T=24*3600 "Time span for average";
   Modelica.Blocks.Interfaces.RealInput u "Continuous input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y "Continuous output signal"

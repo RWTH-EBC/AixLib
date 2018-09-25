@@ -1,7 +1,7 @@
 within AixLib.Controls.HeatPump;
 model HPControllerOnOff
   "Simple on/off controller for heat pump model"
-  extends HPControllerBaseClass;
+  extends BaseClasses.PartialHPController;
 
   parameter Real bandwidth(start=0.1) "Bandwidth around reference signal";
   parameter Boolean pre_y_start=false "Value of pre(y) at initial time";
