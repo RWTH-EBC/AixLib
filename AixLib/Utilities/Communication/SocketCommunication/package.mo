@@ -5,6 +5,9 @@ extends Modelica.Icons.Package;
 
   annotation (Documentation(revisions="<html>
 <ul>
+ <li><i>September 28, 2018&nbsp;</i>
+ by Thomas Beutlich and Ana Constantin:<br />
+         Revised to using Modelica_DeviceDrivers.Communication.TCPIPSocketClient</li>
  <li><i>September 03, 2013&nbsp;</i>
  by Georg Ferdinand Schneider:<br />
          Revised, tidied up and updated to current setup</li>
