@@ -51,7 +51,7 @@ annotation(Documentation(revisions="<html>
 <ul>
 <li><i>August 25, 2018&nbsp;</i>
          by Thomas Beutlich:<br/>
-         Utilize TCPIPSocketClient_ functions from Modelica_DeviceDrivers library</li>
+         Utilize TCPIPSocketClient_ functions from Modelica_DeviceDrivers library. This is for:<a href=\"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a></li>
 <li><i>June 01, 2013&nbsp;</i>
          by Georg Ferdinand Schneider:<br />
          Implemented</li>

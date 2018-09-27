@@ -11,7 +11,7 @@ annotation (Documentation(info="<html>
 <ul>
 <li><i>August 27, 2018&nbsp;</i>
          by Ana Constantin:<br />
-         Implemented</li>
+         Implemented. This is for:<a href=\"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a></li>
 </ul>
 </HTML>"));
 end UsersGuide;

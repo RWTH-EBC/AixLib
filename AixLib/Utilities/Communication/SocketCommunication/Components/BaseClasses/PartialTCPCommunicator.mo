@@ -33,7 +33,7 @@ revisions="<HTML>
 <ul>
 <li><i>August 25, 2018&nbsp;</i>
          by Thomas Beutlich:<br/>
-         Utilize TCPIPSocketClient from Modelica_DeviceDrivers library</li>
+         Utilize TCPIPSocketClient from Modelica_DeviceDrivers library. This is for:<a href=\"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a></li>
 
 <li><i>January 25, 2016&nbsp;</i>
          by Ana Constantin:<br/>

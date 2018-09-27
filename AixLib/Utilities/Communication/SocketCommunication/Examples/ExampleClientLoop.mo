@@ -70,7 +70,7 @@ Documentation(revisions="<html>
 <ul>
 <li><i>August 25, 2018&nbsp;</i>
          by Thomas Beutlich:<br/>
-         Changed data type of port from String to Integer</li>
+         Changed data type of port from String to Integer. This is for:<a href=\"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a></li>
   <li><i>September 03, 2013&nbsp;</i>
          by Georg Ferdinand Schneider:<br />
          Revised documented</li>
