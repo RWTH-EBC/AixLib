@@ -191,7 +191,7 @@ model HeatPump "Base model of realistic heat pump"
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
     final m_flow_nominal=mFlow_conNominal,
-    final kAInn=3.66*(1 + GCon)^0.88)
+    final kAInn=GCon*(1 + abs(mFlow_con.m_flow/mFlow_conNominal))^0.88)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
@@ -311,12 +311,12 @@ model HeatPump "Base model of realistic heat pump"
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
     final m_flow_small=1E-4*mFlow_evaNominal,
-    final tau=tauHeaTra,
     final initType=initType,
     final T_start=TEva_start,
     final transferHeat=transferHeat,
     final TAmb=TAmbEva_nominal,
-    final tauHeaTra=tauHeaTra) "Temperature at sink inlet" annotation (
+    final tauHeaTra=tauHeaTra,
+    final tau=tauSenT)         "Temperature at sink inlet" annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -326,12 +326,12 @@ model HeatPump "Base model of realistic heat pump"
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
     final m_flow_small=1E-4*mFlow_evaNominal,
-    final tau=tauHeaTra,
     final initType=initType,
     final T_start=TEva_start,
     final transferHeat=transferHeat,
     final TAmb=TAmbEva_nominal,
-    final tauHeaTra=tauHeaTra) "Temperature at sink outlet" annotation (
+    final tauHeaTra=tauHeaTra,
+    final tau=tauSenT)         "Temperature at sink outlet" annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -343,7 +343,6 @@ model HeatPump "Base model of realistic heat pump"
         extent={{10,-10},{-10,10}},
         rotation=0)));
   Sensors.TemperatureTwoPort senT_b1(
-    final tau=tauHeaTra,
     final initType=initType,
     final transferHeat=transferHeat,
     final TAmb=TAmbEva_nominal,
@@ -352,13 +351,13 @@ model HeatPump "Base model of realistic heat pump"
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
     final m_flow_small=1E-4*mFlow_conNominal,
-    final T_start=TCon_start) "Temperature at sink outlet" annotation (
+    final T_start=TCon_start,
+    final tau=tauSenT)        "Temperature at sink outlet" annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={38,92})));
   Sensors.TemperatureTwoPort senT_a1(
-    final tau=tauHeaTra,
     final initType=initType,
     final transferHeat=transferHeat,
     final tauHeaTra=tauHeaTra,
@@ -367,7 +366,8 @@ model HeatPump "Base model of realistic heat pump"
     final m_flow_nominal=mFlow_conNominal,
     final m_flow_small=1E-4*mFlow_conNominal,
     final T_start=TCon_start,
-    final TAmb=TAmbCon_nominal) "Temperature at sink inlet" annotation (
+    final TAmb=TAmbCon_nominal,
+    final tau=tauSenT)          "Temperature at sink inlet" annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
