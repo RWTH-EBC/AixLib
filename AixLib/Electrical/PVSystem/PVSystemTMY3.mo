@@ -77,7 +77,7 @@ NOC</p>
 <p>PV system data (DataBase Records) can be found: </p>
 <ul>
 <li><a href=\"http://www.eks-solar.de/pdfs/aleo_s24.pdf\">eks-solar</a></li>
-<li><a href=\"http://www.solarelectricsupply.com/fileuploader/download/download/?d=0&file=custom%2Fupload%2FCSI-CS6P-220-250.pdf\">solar-electric</a></li>
+<li><a href=\"https://www.solarelectricsupply.com/canadian-solar-cs6p-250-solar-panels-117\">solar-electric</a></li>
 <li><a href=\"http://www.fl200.com/gourdinne/energie/Datenblatt_Kid_SME_1_Serie_DE.pdf\">schueco</a></li>
 <li><a href=\"https://solarco.en.ec21.com/Solar_Module_SE6M60-Series--7320291_7320754.html\">solarco</a></li>
 </ul>
