@@ -37,19 +37,19 @@ model HeatPump "Base model of realistic heat pump"
 
   parameter Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency for inertia of refrigerant cycle"
-    annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=false);
+    annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
 
 //Condenser
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate"
-    annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=false);
+    annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
-    annotation (Evaluate=false,Dialog(group="Parameters", tab="Condenser"));
+    annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
   parameter Modelica.SIunits.PressureDifference dpCon_nominal
     "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance", tab="Condenser"), Evaluate=false);
+    annotation (Dialog(group="Flow resistance", tab="Condenser"), Evaluate=true);
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
@@ -58,26 +58,26 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CCon
-    "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=false,Dialog(group="Heat Losses",
+    "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true,Dialog(group="Heat Losses",
         tab="Condenser",
       enable=use_ConCap));
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Condenser",
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
   parameter Modelica.SIunits.ThermalConductance GConIns
     "Constant thermal conductance of condenser material"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Condenser",
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
 //Evaporator
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
-    "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=false);
+    "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
 
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
-    annotation (Evaluate=false,Dialog(group="Parameters", tab="Evaporator"));
+    annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
   parameter Modelica.SIunits.PressureDifference dpEva_nominal
     "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance", tab="Evaporator"),Evaluate=false);
+    annotation (Dialog(group="Flow resistance", tab="Evaporator"),Evaluate=true);
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -87,15 +87,15 @@ model HeatPump "Base model of realistic heat pump"
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m)"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Evaporator",
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
   parameter Modelica.SIunits.ThermalConductance GEva
     "Constant thermal conductance of Evaporator material"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Evaporator",
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaIns
     "Constant thermal conductance of Evaporator material"
-    annotation (Evaluate=false,Dialog(group="Heat Losses", tab="Evaporator",
+    annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
 //Assumptions
   parameter Boolean allowFlowReversalEva=true
@@ -114,7 +114,7 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer in temperature sensors, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"),Evaluate=false);
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"),Evaluate=true);
   parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side" annotation (               Dialog(tab=
           "Assumptions",                                                                                               group=
@@ -130,22 +130,22 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Dialog(tab="Initialization", group="Parameters"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pCon_start=
       Medium_con.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pEva_start=
       Medium_eva.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Real x_start[nthOrder]=zeros(nthOrder)
     "Initial or guess values of states"
     annotation (Dialog(tab="Initialization", group="Refrigerant inertia", enable=use_refIne));
