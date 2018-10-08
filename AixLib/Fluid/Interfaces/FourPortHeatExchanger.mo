@@ -9,6 +9,8 @@ model FourPortHeatExchanger
   extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
      final computeFlowResistance1=true, final computeFlowResistance2=true);
 
+  parameter Integer nNodes(min=1) = 2 "Spatial segmentation";
+
   parameter Modelica.SIunits.Time tau1 = 30 "Time constant at nominal flow"
      annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
   parameter Modelica.SIunits.Time tau2 = 30 "Time constant at nominal flow"
@@ -63,54 +65,50 @@ model FourPortHeatExchanger
     "Nominal value of trace substances. (Set to typical order of magnitude.)"
    annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nC > 0));
 
-  Modelica.SIunits.HeatFlowRate Q1_flow = vol1.heatPort.Q_flow
+  Modelica.SIunits.HeatFlowRate Q1_flow = sum(vol1.heatPort.Q_flow)
     "Heat flow rate into medium 1";
-  Modelica.SIunits.HeatFlowRate Q2_flow = vol2.heatPort.Q_flow
+  Modelica.SIunits.HeatFlowRate Q2_flow = sum(vol2.heatPort.Q_flow)
     "Heat flow rate into medium 2";
 
-  replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1
+  replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1[nNodes](
+    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes)
     constrainedby AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
-        redeclare final package Medium = Medium1,
-        nPorts = 2,
-        V=m1_flow_nominal*tau1/rho1_nominal,
-        final allowFlowReversal=allowFlowReversal1,
-        final m_flow_nominal=m1_flow_nominal,
-        energyDynamics=if tau1 > Modelica.Constants.eps
-                         then energyDynamics else
-                         Modelica.Fluid.Types.Dynamics.SteadyState,
-        massDynamics=if tau1 > Modelica.Constants.eps
-                         then massDynamics else
-                         Modelica.Fluid.Types.Dynamics.SteadyState,
-        final p_start=p1_start,
-        final T_start=T1_start,
-        final X_start=X1_start,
-        final C_start=C1_start,
-        final C_nominal=C1_nominal,
-        mSenFac=1,
-    annotation (uses(Modelica(version="3.2.2"))))
-                   "Volume for fluid 1"
+    redeclare final package Medium = Medium1,
+    each nPorts=2,
+    each V=m1_flow_nominal*tau1/rho1_nominal,
+    each final allowFlowReversal=allowFlowReversal1,
+    each final m_flow_nominal=m1_flow_nominal,
+    each energyDynamics=if tau1 > Modelica.Constants.eps then energyDynamics else
+        Modelica.Fluid.Types.Dynamics.SteadyState,
+    each massDynamics=if tau1 > Modelica.Constants.eps then massDynamics else
+        Modelica.Fluid.Types.Dynamics.SteadyState,
+    each final p_start=p1_start,
+    each final T_start=T1_start,
+    each final X_start=X1_start,
+    each final C_start=C1_start,
+    each final C_nominal=C1_nominal,
+    each mSenFac=1) "Volume for fluid 1"
     annotation (Placement(transformation(extent={{-10,60},{10,40}})));
 
-  replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2
+  replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2[nNodes](
+    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes)
     constrainedby AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
-        redeclare final package Medium = Medium2,
-        nPorts = 2,
-        V=m2_flow_nominal*tau2/rho2_nominal,
-        final allowFlowReversal=allowFlowReversal2,
-        mSenFac=1,
-        final m_flow_nominal = m2_flow_nominal,
-        energyDynamics=if tau2 > Modelica.Constants.eps
-                         then energyDynamics else
-                         Modelica.Fluid.Types.Dynamics.SteadyState,
-        massDynamics=if tau2 > Modelica.Constants.eps
-                         then massDynamics else
-                         Modelica.Fluid.Types.Dynamics.SteadyState,
-        final p_start=p2_start,
-        final T_start=T2_start,
-        final X_start=X2_start,
-        final C_start=C2_start,
-        final C_nominal=C2_nominal) "Volume for fluid 2"
-   annotation (Placement(transformation(
+    redeclare final package Medium = Medium2,
+    each nPorts=2,
+    each V=m2_flow_nominal*tau2/rho2_nominal,
+    each final allowFlowReversal=allowFlowReversal2,
+    each mSenFac=1,
+    each final m_flow_nominal=m2_flow_nominal,
+    each energyDynamics=if tau2 > Modelica.Constants.eps then energyDynamics else
+        Modelica.Fluid.Types.Dynamics.SteadyState,
+    each massDynamics=if tau2 > Modelica.Constants.eps then massDynamics else
+        Modelica.Fluid.Types.Dynamics.SteadyState,
+    each final p_start=p2_start,
+    each final T_start=T2_start,
+    each final X_start=X2_start,
+    each final C_start=C2_start,
+    each final C_nominal=C2_nominal) "Volume for fluid 2" annotation (Placement(
+        transformation(
         origin={0,-50},
         extent={{-10,10},{10,-10}},
         rotation=180)));
@@ -184,24 +182,32 @@ initial equation
  Received tau2 = " + String(tau2) + "\n");
 
 equation
-  connect(vol1.ports[2], port_b1) annotation (Line(
-      points={{0,60},{100,60}},
-      color={0,127,255}));
-  connect(vol2.ports[2], port_b2) annotation (Line(
-      points={{-8.88178e-016,-60},{-100,-60}},
-      color={0,127,255}));
+
+
   connect(port_a1, preDro1.port_a) annotation (Line(
       points={{-100,60},{-80,60}},
       color={0,127,255}));
-  connect(preDro1.port_b, vol1.ports[1]) annotation (Line(
+  connect(preDro1.port_b, vol1[1].ports[1]) annotation (Line(
       points={{-60,60},{0,60}},
+      color={0,127,255}));
+  connect(vol1[nNodes].ports[2], port_b1) annotation (Line(
+      points={{0,60},{100,60}},
       color={0,127,255}));
   connect(port_a2, preDro2.port_a) annotation (Line(
       points={{100,-60},{80,-60}},
       color={0,127,255}));
-  connect(preDro2.port_b, vol2.ports[1]) annotation (Line(
+  connect(preDro2.port_b, vol2[1].ports[1]) annotation (Line(
       points={{60,-60},{-8.88178e-016,-60}},
       color={0,127,255}));
+  connect(vol2[nNodes].ports[2], port_b2) annotation (Line(
+      points={{-8.88178e-016,-60},{-100,-60}},
+      color={0,127,255}));
+
+  for i in 1:nNodes-1 loop
+    connect(vol1[i].ports[2],vol1[i+1].ports[1]);
+    connect(vol2[i].ports[2],vol2[i+1].ports[1]);
+  end for;
+
   annotation (
     Documentation(info="<html>
 <p>
