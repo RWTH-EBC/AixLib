@@ -89,7 +89,7 @@ model FourPortHeatExchanger
         mSenFac=1,
     annotation (uses(Modelica(version="3.2.2"))))
                    "Volume for fluid 1"
-    annotation (Placement(transformation(extent={{-10,70}, {10,50}})));
+    annotation (Placement(transformation(extent={{-10,60},{10,40}})));
 
   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2
     constrainedby AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
@@ -111,7 +111,7 @@ model FourPortHeatExchanger
         final C_start=C2_start,
         final C_nominal=C2_nominal) "Volume for fluid 2"
    annotation (Placement(transformation(
-        origin={2,-60},
+        origin={0,-50},
         extent={{-10,10},{10,-10}},
         rotation=180)));
 
@@ -125,7 +125,7 @@ model FourPortHeatExchanger
     final linearized=linearizeFlowResistance1,
     final homotopyInitialization=homotopyInitialization,
     final dp_nominal=dp1_nominal) "Flow resistance of fluid 1"
-    annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
+    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
 
   AixLib.Fluid.FixedResistances.PressureDrop preDro2(
     redeclare final package Medium = Medium2,
@@ -137,7 +137,7 @@ model FourPortHeatExchanger
     final linearized=linearizeFlowResistance2,
     final homotopyInitialization=homotopyInitialization,
     final dp_nominal=dp2_nominal) "Flow resistance of fluid 2"
-    annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
+    annotation (Placement(transformation(extent={{80,-70},{60,-50}})));
 
 protected
   parameter Medium1.ThermodynamicState sta1_nominal=Medium1.setState_pTX(
@@ -185,22 +185,22 @@ initial equation
 
 equation
   connect(vol1.ports[2], port_b1) annotation (Line(
-      points={{0,70},{20,70},{20,60},{100,60}},
+      points={{0,60},{100,60}},
       color={0,127,255}));
   connect(vol2.ports[2], port_b2) annotation (Line(
-      points={{2,-70},{-30,-70},{-30,-60},{-100,-60}},
+      points={{-8.88178e-016,-60},{-100,-60}},
       color={0,127,255}));
   connect(port_a1, preDro1.port_a) annotation (Line(
-      points={{-100,60},{-90,60},{-90,80},{-80,80}},
+      points={{-100,60},{-80,60}},
       color={0,127,255}));
   connect(preDro1.port_b, vol1.ports[1]) annotation (Line(
-      points={{-60,80},{0,80},{0,70}},
+      points={{-60,60},{0,60}},
       color={0,127,255}));
   connect(port_a2, preDro2.port_a) annotation (Line(
-      points={{100,-60},{90,-60},{90,-80},{80,-80}},
+      points={{100,-60},{80,-60}},
       color={0,127,255}));
   connect(preDro2.port_b, vol2.ports[1]) annotation (Line(
-      points={{60,-80},{2,-80},{2,-70}},
+      points={{60,-60},{-8.88178e-016,-60}},
       color={0,127,255}));
   annotation (
     Documentation(info="<html>
