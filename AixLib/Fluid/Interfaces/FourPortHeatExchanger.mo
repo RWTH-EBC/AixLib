@@ -71,15 +71,15 @@ model FourPortHeatExchanger
     "Heat flow rate into medium 2";
 
   replaceable AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort vol1[nNodes](
-    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes)
-    constrainedby AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
+    each V = m1_flow_nominal*tau1/rho1_nominal/nNodes) constrainedby
+    MixingVolumes.BaseClasses.PartialMixingVolume(
     redeclare final package Medium = Medium1,
     each nPorts=2,
     each V=m1_flow_nominal*tau1/rho1_nominal,
     each final allowFlowReversal=allowFlowReversal1,
     each final m_flow_nominal=m1_flow_nominal,
-    each energyDynamics=if tau1 > Modelica.Constants.eps then energyDynamics else
-        Modelica.Fluid.Types.Dynamics.SteadyState,
+    each energyDynamics=if tau1 > Modelica.Constants.eps then energyDynamics
+         else Modelica.Fluid.Types.Dynamics.SteadyState,
     each massDynamics=if tau1 > Modelica.Constants.eps then massDynamics else
         Modelica.Fluid.Types.Dynamics.SteadyState,
     each final p_start=p1_start,
@@ -88,19 +88,20 @@ model FourPortHeatExchanger
     each final C_start=C1_start,
     each final C_nominal=C1_nominal,
     each mSenFac=1) "Volume for fluid 1"
-    annotation (Placement(transformation(extent={{-10,60},{10,40}})));
+    annotation (Placement(transformation(extent={{-10,60},{10,40}})),
+      __Dymola_choicesAllMatching=true);
 
   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2[nNodes](
-    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes)
-    constrainedby AixLib.Fluid.MixingVolumes.BaseClasses.MixingVolumeHeatPort(
+    each V = m2_flow_nominal*tau2/rho2_nominal/nNodes) constrainedby
+    MixingVolumes.BaseClasses.PartialMixingVolume(
     redeclare final package Medium = Medium2,
     each nPorts=2,
     each V=m2_flow_nominal*tau2/rho2_nominal,
     each final allowFlowReversal=allowFlowReversal2,
     each mSenFac=1,
     each final m_flow_nominal=m2_flow_nominal,
-    each energyDynamics=if tau2 > Modelica.Constants.eps then energyDynamics else
-        Modelica.Fluid.Types.Dynamics.SteadyState,
+    each energyDynamics=if tau2 > Modelica.Constants.eps then energyDynamics
+         else Modelica.Fluid.Types.Dynamics.SteadyState,
     each massDynamics=if tau2 > Modelica.Constants.eps then massDynamics else
         Modelica.Fluid.Types.Dynamics.SteadyState,
     each final p_start=p2_start,
@@ -111,7 +112,7 @@ model FourPortHeatExchanger
         transformation(
         origin={0,-50},
         extent={{-10,10},{10,-10}},
-        rotation=180)));
+        rotation=180)), __Dymola_choicesAllMatching=true);
 
   AixLib.Fluid.FixedResistances.PressureDrop preDro1(
     redeclare final package Medium = Medium1,
