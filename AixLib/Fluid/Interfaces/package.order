@@ -1,6 +1,7 @@
 UsersGuide
 ConservationEquation
 FourPortFlowResistanceParameters
+FourPortHeatExchanger
 FourPortHeatMassExchanger
 LumpedVolumeDeclarations
 PartialFourPort
@@ -21,8 +22,5 @@ StaticTwoPortConservationEquation
 StaticTwoPortHeatMassExchanger
 TwoPortFlowResistanceParameters
 TwoPortHeatMassExchanger
-FourPortFlowResistanceParameters
-LumpedVolumeDeclarations
-TwoPortFlowResistanceParameters
 PassThroughMedium
 Examples

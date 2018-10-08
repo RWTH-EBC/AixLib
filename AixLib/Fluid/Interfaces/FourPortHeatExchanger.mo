@@ -1,6 +1,6 @@
-within AixLib.Fluid.Interfaces;
-model FourPortHeatMassExchanger
-  "Model transporting two fluid streams between four ports with storing mass or energy"
+﻿within AixLib.Fluid.Interfaces;
+model FourPortHeatExchanger
+  "Model transporting two fluid streams between four ports with storing mass or energy in n volumes"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     port_a1(h_outflow(start=h1_outflow_start)),
     port_b1(h_outflow(start=h1_outflow_start)),
@@ -86,7 +86,9 @@ model FourPortHeatMassExchanger
         final X_start=X1_start,
         final C_start=C1_start,
         final C_nominal=C1_nominal,
-        mSenFac=1) "Volume for fluid 1"
+        mSenFac=1,
+    annotation (uses(Modelica(version="3.2.2"))))
+                   "Volume for fluid 1"
     annotation (Placement(transformation(extent={{-10,70}, {10,50}})));
 
   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2
@@ -181,7 +183,6 @@ initial equation
  You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
  Received tau2 = " + String(tau2) + "\n");
 
-
 equation
   connect(vol1.ports[2], port_b1) annotation (Line(
       points={{0,70},{20,70},{20,60},{100,60}},
@@ -227,6 +228,11 @@ Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+October 08, 2018, by Alexander Kümpel:<br/>
+Multiple volumes for discretization. This is required for
+<a href=\"https://github.com/RWTH-EBC/AixLib/issues/623\">AixLib, issue 623</a>.
+</li>
 <li>
 October 23, 2017, by Michael Wetter:<br/>
 Made volume <code>vol1</code> replaceable. This is required for
@@ -370,4 +376,4 @@ First implementation.
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}));
-end FourPortHeatMassExchanger;
+end FourPortHeatExchanger;
