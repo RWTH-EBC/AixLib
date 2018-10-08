@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
 model HeatingCoil
 
- parameter Integer dis_HC = 3;
+ parameter Integer dis_HC;
 
   parameter Media.BaseClasses.MediumSimple medium_HC=Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
@@ -55,8 +55,8 @@ model HeatingCoil
   parameter Boolean calculateAlphaInside=true
     "Use calculated value for inside heat coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
-    "Fix value for heat transfer coeffiecient inside pipe"
-                                                          annotation(Dialog(enable = not calculateAlphaInside));
+    "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable = not calculateAlphaInside));
 equation
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-2,82},{-2,104}},
