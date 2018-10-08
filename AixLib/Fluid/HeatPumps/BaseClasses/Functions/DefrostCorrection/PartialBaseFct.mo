@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection;
-partial function baseFct
+partial function PartialBaseFct
   "Base class for correction model, icing and defrosting of evaporator"
   extends Modelica.Icons.Function;
   input Real T_eva;
@@ -12,4 +12,4 @@ partial function baseFct
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 </ul>
 </html>"));
-end baseFct;
+end PartialBaseFct;

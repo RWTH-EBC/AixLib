@@ -21,4 +21,8 @@ StaticTwoPortConservationEquation
 StaticTwoPortHeatMassExchanger
 TwoPortFlowResistanceParameters
 TwoPortHeatMassExchanger
+FourPortFlowResistanceParameters
+LumpedVolumeDeclarations
+TwoPortFlowResistanceParameters
+PassThroughMedium
 Examples
