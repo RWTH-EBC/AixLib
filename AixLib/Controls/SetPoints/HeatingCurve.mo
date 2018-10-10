@@ -30,12 +30,12 @@ model HeatingCurve "Model of a heating curve"
   parameter Real day_hour=6 "Hour of day at which day mode is enabled" annotation(Dialog(group="Night-Mode",descriptionLabel = true));
   parameter Real night_hour=22 "Hour of day at which night mode is enabled" annotation (Dialog(group="Night-Mode",descriptionLabel = true));
 
-  Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
+  Modelica.Blocks.Interfaces.RealInput T_oda(unit="K") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealInput TRoom_in if use_dynTRoom
+  Modelica.Blocks.Interfaces.RealInput TRoom_in(unit="K") if use_dynTRoom
                                                 "Desired room temperature"
     annotation (Placement(transformation(extent={{-140,36},{-100,76}})));
-  Modelica.Blocks.Interfaces.RealOutput TSet
+  Modelica.Blocks.Interfaces.RealOutput TSet(unit="K")
     "Set temperature calculated by heating curve"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 

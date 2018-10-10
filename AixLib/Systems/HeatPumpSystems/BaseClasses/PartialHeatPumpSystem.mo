@@ -305,7 +305,8 @@ partial model PartialHeatPumpSystem
         rotation=0,
         origin={60,-42})));
 
-  Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
+  Modelica.Blocks.Interfaces.RealInput T_oda(unit="K")
+    "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-132,98},{-102,128}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
@@ -438,8 +439,9 @@ equation
       points={{44,34},{64,34},{64,60},{70,60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
-          {-60,-60},{-100,-60}}, color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
+          -15.2},{-60,-60},{-100,-60}},
+                                 color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
@@ -462,8 +464,6 @@ equation
           {100,60}}, color={0,127,255}));
   connect(T_oda, hPSystemController.T_oda) annotation (Line(points={{-117,113},{
           -90,113},{-90,133},{-56.86,133}}, color={0,0,127}));
-  connect(senTSup.T, hPSystemController.TSup) annotation (Line(points={{78,68.8},
-          {78,172},{-64,172},{-64,147},{-56.86,147}}, color={0,0,127}));
   connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-40.2,93.1},
           {-40.2,66},{-70,66},{-70,49.6}}, color={0,0,127}));
   connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{
@@ -471,6 +471,8 @@ equation
   connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{38.2,93.1},
           {38.2,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
         color={0,0,127}));
+  connect(senTSup.T, hPSystemController.TSup) annotation (Line(points={{78,68.8},
+          {80,68.8},{80,176},{-80,176},{-80,147},{-56.86,147}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,180}}), graphics={
         Rectangle(
