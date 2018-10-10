@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Calibrate heat pump model from performance data &#8212; IBPSA library User Guide</title>
+    <title>Calibrate heat pump model from performance data &#8212; AixLib library User Guide</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -152,7 +152,7 @@ file generated in the
 Once heat pump parameters are identified, the results are verified
 by running the model in Dymola.</p>
 <p>The following script can be found in
-<cite>IBPSA/Resources/src/fluid/heatpumps/calibration/Examples/example_calibration.py</cite>:</p>
+<cite>AixLib/Resources/src/fluid/heatpumps/calibration/Examples/example_calibration.py</cite>:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
@@ -492,10 +492,10 @@ by running the model in Dymola.</p>
 
     <span class="c1"># Print the record in Modelica format.</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;within IBPSA.Fluid.HeatPumps.Data.ScrollWaterToWater.&#39;</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;within AixLib.Fluid.HeatPumps.Data.ScrollWaterToWater.&#39;</span>
                 <span class="o">+</span> <span class="n">mode</span> <span class="o">+</span> <span class="s1">&#39;;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;record &#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;  IBPSA.Fluid.HeatPumps.Data.ScrollWaterToWater.Generic (&#39;</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;  AixLib.Fluid.HeatPumps.Data.ScrollWaterToWater.Generic (&#39;</span>
                 <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;    volRat = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">volRat</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;    V_flow_nominal = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v_flow</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -556,9 +556,9 @@ calibrated parameters.</span></p>
 18
 19
 20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">within</span> <span class="nn">IBPSA</span><span class="o">.</span><span class="n">Fluid</span><span class="o">.</span><span class="n">HeatPumps</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">ScrollWaterToWater</span><span class="o">.</span><span class="n">Heating</span><span class="p">;</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">within</span> <span class="nn">AixLib</span><span class="o">.</span><span class="n">Fluid</span><span class="o">.</span><span class="n">HeatPumps</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">ScrollWaterToWater</span><span class="o">.</span><span class="n">Heating</span><span class="p">;</span>
 <span class="kr">record</span> <span class="nc">SomeManufacturer_ABC060_70kW_4_0COP_R410A</span> <span class="o">=</span>
-  <span class="n">IBPSA</span><span class="o">.</span><span class="n">Fluid</span><span class="o">.</span><span class="n">HeatPumps</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">ScrollWaterToWater</span><span class="o">.</span><span class="n">Generic</span> <span class="p">(</span>
+  <span class="n">AixLib</span><span class="o">.</span><span class="n">Fluid</span><span class="o">.</span><span class="n">HeatPumps</span><span class="o">.</span><span class="n">Data</span><span class="o">.</span><span class="n">ScrollWaterToWater</span><span class="o">.</span><span class="n">Generic</span> <span class="p">(</span>
     <span class="n">volRat</span> <span class="o">=</span> <span class="mf">2.36185869323</span><span class="p">,</span>
     <span class="n">V_flow_nominal</span> <span class="o">=</span> <span class="mf">0.00287086738316</span><span class="p">,</span>
     <span class="n">leaCoe</span> <span class="o">=</span> <span class="mf">0.00408074950474</span><span class="p">,</span>

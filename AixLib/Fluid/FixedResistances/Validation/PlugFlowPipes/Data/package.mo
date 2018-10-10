@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
+within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 package Data "Experimental data for verification of pipe models"
 
 

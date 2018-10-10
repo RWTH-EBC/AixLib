@@ -1,6 +1,5 @@
 within AixLib.Systems.HydraulicModules.Controller;
 block CtrUnmixed "controller for unmixed circuit"
-  import Zugabe;
   //Boolean choice;
 
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
