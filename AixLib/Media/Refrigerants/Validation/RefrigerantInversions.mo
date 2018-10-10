@@ -6,7 +6,7 @@ model RefrigerantInversions
 
   // Define the refrigerant that shall be tested
   package Medium =
-      AixLib.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_340_Record
+      AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record
       "Internal medium model";
 
   // Define the fluid limits of the medium that shall be tested

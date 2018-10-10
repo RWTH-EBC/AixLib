@@ -225,7 +225,6 @@ public
   HeatTransfer heatTransfer(final Medium=medium,final data=data,
     final n=n)      annotation (Placement(transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
-
 equation
 
   if use_heatingRod then
