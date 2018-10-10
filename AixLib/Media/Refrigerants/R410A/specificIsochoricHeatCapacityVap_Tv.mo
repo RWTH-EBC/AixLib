@@ -1,4 +1,4 @@
-﻿within AixLib.Media.Refrigerants.R410A;
+within AixLib.Media.Refrigerants.R410A;
 function specificIsochoricHeatCapacityVap_Tv
   "Function that calculates the specific isochoric heat capacity of R410A vapor
   based on temperature and specific volume"
@@ -73,7 +73,7 @@ of the Martin-Hou equation of state.
 <p>
 F. de Monte. (2002).
 Calculation of thermodynamic properties of R407C and
-R410A by the Martin–Hou equation of state — part I:
+R410A by the Martin-Hou equation of state, part I:
 theoretical development.
 <i>
 International Journal of Refrigeration.
