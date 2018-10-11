@@ -81,7 +81,7 @@ model HPSystemController
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=false);
-  parameter Boolean use_runPerHou=use_runPerHou
+  parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
   parameter Real maxRunPerHou=5

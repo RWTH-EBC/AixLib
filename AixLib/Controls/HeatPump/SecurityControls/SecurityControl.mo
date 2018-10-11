@@ -61,11 +61,11 @@ block SecurityControl "Block including all security levels"
   OnOffControl onOffController(
     final minRunTime=minRunTime,
     final minLocTime=minLocTime,
-    use_minRunTime=use_minRunTime,
-    use_minLocTime=use_minLocTime,
-    use_runPerHou=use_runPerHou,
-    maxRunPerHou=maxRunPerHou,
-    pre_n_start=pre_n_start)
+    final use_minRunTime=use_minRunTime,
+    final use_minLocTime=use_minLocTime,
+    final use_runPerHou=use_runPerHou,
+    final maxRunPerHou=maxRunPerHou,
+    final pre_n_start=pre_n_start)
     annotation (Placement(transformation(extent={{-62,-18},{-26,18}})));
 
   DefrostControl defrostControl(
