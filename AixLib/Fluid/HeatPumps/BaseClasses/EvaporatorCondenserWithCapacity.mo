@@ -15,7 +15,7 @@ model EvaporatorCondenserWithCapacity
   parameter Modelica.SIunits.ThermalConductance kAOut_nominal
     "Nominal value for thermal conductance to the ambient" annotation (Dialog(group="Heat losses", enable=
           use_cap));
-  parameter Modelica.Blocks.Interfaces.RealOutput kAInn
+  Modelica.Blocks.Interfaces.RealOutput kAInn
     "Formular for calculation of heat transfer coefficient on the inside"
                                                                          annotation (Dialog(group="Heat losses", enable=
           use_cap));

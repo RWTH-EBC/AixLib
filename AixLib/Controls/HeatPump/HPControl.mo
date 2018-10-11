@@ -108,7 +108,8 @@ model HPControl
 
                                                                          TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
             {76,26}})));
-  Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg "No Anti Legionella"
+  Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg if not use_antLeg
+                                                           "No Anti Legionella"
                                            annotation (
                                      choicesAllMatching=true, Placement(
         transformation(extent={{-10,38},{6,54}})));
