@@ -48,4 +48,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
+  connect(greaterThreshold.y, not1.u) annotation (Line(points={{-34.7,-7},{-21,
+          -7},{-21,-63}}, color={255,0,255}));
+  connect(booConAntFre.y, not1.u) annotation (Line(points={{16.7,-29},{36,-29},
+          {36,-56},{-22,-56},{-22,-60},{-21,-63}}, color={255,0,255}));
 end AntiFreeze;
