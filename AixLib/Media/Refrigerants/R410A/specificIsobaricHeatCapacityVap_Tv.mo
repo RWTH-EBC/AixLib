@@ -1,4 +1,4 @@
-﻿within AixLib.Media.Refrigerants.R410A;
+within AixLib.Media.Refrigerants.R410A;
 function specificIsobaricHeatCapacityVap_Tv
   "Function that calculates the specific isobaric heat capacity of R410A vapor based on temperature and specific volume"
   input Modelica.SIunits.Temperature T
@@ -61,7 +61,7 @@ The specific isobaric heat capacity is evaluated from the partial derivatives of
 <p>
 F. de Monte. (2002).
 Calculation of thermodynamic properties of R407C and
-R410A by the Martin–Hou equation of state — part I:
+R410A by the Martin-Hou equation of state, part I:
 theoretical development.
 <i>
 International Journal of Refrigeration.
