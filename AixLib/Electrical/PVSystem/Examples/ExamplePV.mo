@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.Examples;
+within AixLib.Electrical.PVSystem.Examples;
 model ExamplePV
   extends Modelica.Icons.Example;
 
@@ -7,7 +7,7 @@ model ExamplePV
     final unit="W")
     "Output Power of the PV system including the inverter"
     annotation (Placement(transformation(extent={{72,30},{92,50}})));
-  AixLib.Building.Components.Weather.Weather Weather(
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
     Latitude=49.5,
     Longitude=8.5,
     GroundReflection=0.2,
@@ -17,6 +17,7 @@ model ExamplePV
     Air_temp=true,
     Wind_speed=false,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(),
+
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
     "Weather data input for simulation of PV power "

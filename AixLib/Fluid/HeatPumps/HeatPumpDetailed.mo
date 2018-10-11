@@ -50,26 +50,26 @@ model HeatPumpDetailed
           capCalcType == 2), group="Capacity data"));
 
   replaceable function data_poly =
-      AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.constantQualityGrade
+      AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics for inverter heat pump" annotation (
       choicesAllMatching=true, Dialog(enable=(capCalcType == 1), group="Capacity data"));
 
-  parameter SI.Temperature T_startEva=273.15 "initial evaporator temperature"
+  parameter SI.Temperature T_startEva=273.15 "Initial evaporator temperature"
     annotation (Evaluate=true, Dialog(
       tab="Evaporator, Condenser",
       group="Initialization",
       enable=initEvaporatorVol));
-  parameter SI.Temperature T_startCon=308.15 "initial condenser temperature"
+  parameter SI.Temperature T_startCon=308.15 "Initial condenser temperature"
     annotation (Evaluate=true, Dialog(
       tab="Evaporator, Condenser",
       group="Initialization",
       enable=initCondenserVol));
   replaceable function Corr_icing =
-      AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.noModel
+      AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.NoModel
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)" annotation (
       choicesAllMatching=true, Dialog(
       enable=(capCalcType == 1),
@@ -104,13 +104,13 @@ model HeatPumpDetailed
       enable=PT1_cycle));
 
   parameter Real eta_ele=1
-    "assumption of P_tech/P_el (for calculation of Evaporator load)"
+    "Assumption of P_tech/P_el (for calculation of Evaporator load)"
     annotation (Dialog(group="Assumptions", tab="Advanced"));
   parameter Real factorScale=1
-    "scaling factor (Attention: not physically correct)"
+    "Scaling factor (Attention: not physically correct)"
     annotation (Dialog(group="Assumptions", tab="Advanced"));
   parameter SI.Power P_eleAdd=0
-    "additional electric power when heat pump is on (not influenced through 
+    "Additional electric power when heat pump is on (not influenced through 
     scaling factor)"
     annotation (Dialog(group="Assumptions", tab="Advanced"));
 
@@ -215,7 +215,7 @@ public
         origin={-96,2})));
 
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
-    "smoothness of table interpolation" annotation (Dialog(
+    "Smoothness of table interpolation" annotation (Dialog(
       group="Assumptions",
       tab="Advanced",
       enable=not (capCalcType == 1)));

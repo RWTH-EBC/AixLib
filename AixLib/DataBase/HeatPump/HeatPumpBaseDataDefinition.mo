@@ -1,13 +1,14 @@
 within AixLib.DataBase.HeatPump;
 record HeatPumpBaseDataDefinition "Basic heat pump data"
     extends Modelica.Icons.Record;
-  import SI = Modelica.SIunits;
-  parameter Real tableQdot_con[:,:] "Heating power lookup table";
-  parameter Real tableP_ele[:,:] "Electrical power lookup table";
-  parameter SI.MassFlowRate mFlow_conNom
+  parameter Real tableQdot_con[:,:] "Heating power table; T in degC; Q_flow in W";
+  parameter Real tableP_ele[:,:] "Electrical power table; T in degC; Q_flow in W";
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNom
     "Nominal mass flow rate in condenser";
-  parameter SI.MassFlowRate mFlow_evaNom
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNom
     "Nominal mass flow rate in evaporator";
+  parameter Real tableUppBou[:,2] "Points to define upper boundary for sink temperature";
+  parameter Real tableLowBou[:,2] "Points to define lower boundary for sink temperature";
 
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
