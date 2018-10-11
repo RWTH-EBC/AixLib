@@ -28,8 +28,8 @@ block OperationalEnvelope
     use_opeEnv
     annotation (Placement(transformation(extent={{10,-36},{24,-22}})));
 equation
-  connect(boundaryMap.noErr, swiErr.u2) annotation (Line(points={{-1.36364,-3},
-          {42,-3},{42,0},{84,0}}, color={255,0,255}));
+  connect(boundaryMap.noErr, swiErr.u2) annotation (Line(points={{-1.1,-3},{42,
+          -3},{42,0},{84,0}},     color={255,0,255}));
   connect(nSet,swiErr.u1)  annotation (Line(points={{-136,20},{32,20},{32,8},
           {84,8}},color={0,0,127}));
   connect(booConOpeEnv.y, swiErr.u2) annotation (Line(
@@ -48,9 +48,9 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(boundaryMap.x_in, toDegCT_flow_ev.y)
-    annotation (Line(points={{-60.4182,12},{-69.4,12}}, color={0,0,127}));
+    annotation (Line(points={{-66.06,12},{-69.4,12}},   color={0,0,127}));
   connect(boundaryMap.y_in, toDegCT_ret_co.y)
-    annotation (Line(points={{-60.4182,-18},{-69.4,-18}}, color={0,0,127}));
+    annotation (Line(points={{-66.06,-18},{-69.4,-18}},   color={0,0,127}));
   connect(sigBusHP.T_ret_co, toDegCT_ret_co.u) annotation (Line(
       points={{-134.915,-68.925},{-98,-68.925},{-98,-18},{-83.2,-18}},
       color={255,204,51},
@@ -59,6 +59,10 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  annotation (Diagram(coordinateSystem(extent={{-120,-120},{120,100}})), Icon(
-        coordinateSystem(extent={{-120,-120},{120,100}})));
+  connect(boundaryMap.noErr, not1.u) annotation (Line(points={{-1.1,-3},{42,-3},
+          {42,-56},{-21,-56},{-21,-63}}, color={255,0,255}));
+  connect(booConOpeEnv.y, not1.u) annotation (Line(points={{24.7,-29},{42,-29},
+          {42,-56},{-21,-56},{-21,-63}}, color={255,0,255}));
+  annotation (Diagram(coordinateSystem(extent={{-120,-100},{120,100}})), Icon(
+        coordinateSystem(extent={{-120,-100},{120,100}})));
 end OperationalEnvelope;
