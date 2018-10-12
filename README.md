@@ -35,6 +35,18 @@ We continuously improve **AixLib** and try to keep the community up-to-date with
   BauSIM 2016, p.3–9, September 2016.
   [link](http://www.iea-annex60.org/downloads/2016-bausim-aixlib.pdf)
 
+As Bibtex Text:
+```
+@incollection{Muller.2016,
+ author = {M{\"u}ller, Dirk and Lauster, Moritz and Constantin, Ana and Fuchs, Marcus and Remmen, Peter},
+ title = {AixLib - An Open-Source Modelica Library within the IEA-EBC Annex 60 Framework},
+ url = {http://www.iea-annex60.org/downloads/2016-bausim-aixlib.pdf},
+ pages = {3--9},
+ booktitle = {BauSim 2016},
+ year = {September 2016}
+}
+```
+
 ### How to contribute to the development of AixLib
 
 You are invited to contribute to the development of **AixLib**.
