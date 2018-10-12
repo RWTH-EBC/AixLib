@@ -245,8 +245,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
   parameter Boolean use_calcCOP=true
     "Only relevant for Carnot system simulation";
-  Modelica.Blocks.Routing.BooleanPassThrough booleanPassThroughMode
-    "Pass through for mode signal"
+  Modelica.Blocks.Routing.BooleanPassThrough booleanPassThroughMode if not
+    use_sec "Pass through for mode signal"
     annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
