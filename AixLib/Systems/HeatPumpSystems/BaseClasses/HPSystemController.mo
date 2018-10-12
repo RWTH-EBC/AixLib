@@ -189,8 +189,8 @@ model HPSystemController
   Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200) if
     use_calcCOP
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
-  Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(TSup
-         - sigBusHP.T_flow_co)*4180) if use_calcCOP
+  Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(
+        sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180) if use_calcCOP
     "Calculates the heat flow added to the source medium"
     annotation (Placement(transformation(extent={{-90,78},{-66,96}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec

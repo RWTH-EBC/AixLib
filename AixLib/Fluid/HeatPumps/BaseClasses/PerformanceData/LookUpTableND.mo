@@ -1,9 +1,28 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends BaseClasses.PartialPerformanceData;
-
-
-
+  parameter Real nConv=1
+    "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
+  parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
+    "Interpolation method";
+  parameter SDF.Types.ExtrapolationMethod extrapMethod=SDF.Types.ExtrapolationMethod.None
+    "Extrapolation method";
+  parameter String filename_Pel="" "File name of sdf table data"
+    annotation (Dialog(group="Electrical Power",loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
+  parameter String dataset_Pel="" "Dataset name"
+    annotation (Dialog(group="Electrical Power"));
+  parameter String dataUnit_Pel="" "Data unit"
+    annotation (Dialog(group="Electrical Power"));
+  parameter String scaleUnits_Pel[3]=fill("", 3) "Scale units"
+    annotation (Dialog(group="Electrical Power"));
+  parameter String filename_QCon="" "File name of sdf table data"
+    annotation (Dialog(group="Condenser heat flow",loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
+  parameter String dataset_QCon="" "Dataset name"
+    annotation (Dialog(group="Condenser heat flow"));
+  parameter String dataUnit_QCon="" "Data unit"
+    annotation (Dialog(group="Condenser heat flow"));
+  parameter String scaleUnits_QCon[3]=fill("", 3) "Scale units"
+    annotation (Dialog(group="Condenser heat flow"));
 
   Modelica.Blocks.Math.Gain nConGain(final k=nConv)
     "Convert relative speed n to an absolute value for interpolation in sdf tables"
@@ -40,14 +59,31 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-4,-18})));
-  SDF.NDTable nDTableQCon(nin=3)
+  SDF.NDTable nDTableQCon(
+    final nin=3,
+    final readFromFile=true,
+    final filename=filename_QCon,
+    final dataset=dataset_QCon,
+    final dataUnit=dataUnit_QCon,
+    final scaleUnits=scaleUnits_QCon,
+    final interpMethod=interpMethod,
+    final extrapMethod=extrapMethod) "SDF-Table data for condenser heat flow"
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=-90,
         origin={-42,-10})));
-  SDF.NDTable nDTablePel(nin=3)
-    annotation (Placement(transformation(extent={{-12,-12},{12,12}},
+  SDF.NDTable nDTablePel(
+    final nin=3,
+    final readFromFile=true,
+    final filename=filename_Pel,
+    final dataset=dataset_Pel,
+    final dataUnit=dataUnit_Pel,
+    final scaleUnits=scaleUnits_Pel,
+    final interpMethod=interpMethod,
+    final extrapMethod=extrapMethod) "SDF table data for electrical power"
+                                     annotation (Placement(transformation(
+        extent={{-12,-12},{12,12}},
         rotation=-90,
-        origin={58,-8})));
+        origin={50,-10})));
   Modelica.Blocks.Routing.Multiplex3 multiplex3_1(
     final n1=1,
     final n2=1,
@@ -55,8 +91,7 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={0,20})));
-  parameter Real nConv=1
-    "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
+
 equation
   connect(feedbackHeatFlowEvaporator.y, QEva)
     annotation (Line(points={{80,-89},{80,-110}},
@@ -83,7 +118,8 @@ equation
     annotation (Line(points={{-42,-23.2},{-42,-44}},
                                                 color={0,0,127}));
   connect(nDTablePel.y, switchPel.u1)
-    annotation (Line(points={{58,-21.2},{58,-48}},color={0,0,127}));
+    annotation (Line(points={{50,-23.2},{50,-34},{58,-34},{58,-48}},
+                                                  color={0,0,127}));
   connect(t_Ev_in.y,multiplex3_1. u1[1]) annotation (Line(points={{60,33.4},{8,
           33.4},{8,29.6},{5.6,29.6}}, color={0,0,127}));
   connect(t_Co_ou.y,multiplex3_1. u3[1]) annotation (Line(points={{-40,33.4},{
@@ -91,8 +127,8 @@ equation
   connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-1.55431e-15,
           11.2},{-1.55431e-15,4.4},{-42,4.4}},
                                           color={0,0,127}));
-  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,
-          11.2},{-1.77636e-15,6.4},{58,6.4}},color={0,0,127}));
+  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
+          {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
   connect(nConGain.y, multiplex3_1.u2[1]) annotation (Line(
       points={{-1.77636e-15,59.2},{-1.77636e-15,60},{0,60},{0,42},{1.77636e-15,
           42},{1.77636e-15,29.6}},
@@ -148,5 +184,7 @@ equation
       extent={{-60.0,-20.0},{-30.0,0.0}}),
     Rectangle(fillColor={255,215,136},
       fillPattern=FillPattern.Solid,
-      extent={{-60.0,-40.0},{-30.0,-20.0}})}));
+      extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(info="<html>
+<p>Basic models showing the concept of using n-dimensional table data for the innerCycle of the heat pump model. This model assumes one provides data for inverter controlled heat pumps or chillers. However, this basis structure can be used to create own models, where electrical power and condenser depend on other inputs, such as ambient temperature.</p>
+</html>"));
 end LookUpTableND;
