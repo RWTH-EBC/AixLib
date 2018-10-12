@@ -245,6 +245,9 @@ model HPSystemController
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
   parameter Boolean use_calcCOP=true
     "Only relevant for Carnot system simulation";
+  Modelica.Blocks.Routing.BooleanPassThrough booleanPassThroughMode
+    "Pass through for mode signal"
+    annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
@@ -258,8 +261,9 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(hPControls.modeOut,securityControl. modeSet) annotation (Line(points={{-27.34,
-          0},{5.33333,0}},                                               color={
-          255,0,255}));
+          0},{5.33333,0}},                                               color={255,0,
+          255},
+      pattern=LinePattern.Dash));
   connect(sigBusHP,hPControls. sigBusHP) annotation (Line(
       points={{-107,-53},{-80,-53},{-80,-7.6},{-68.38,-7.6}},
       color={255,204,51},
@@ -293,7 +297,8 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
-          {62,0},{62,-58},{-40,-58},{-40,-114}}, color={255,0,255}));
+          {62,0},{62,-58},{-40,-58},{-40,-114}}, color={255,0,255},
+      pattern=LinePattern.Dash));
   connect(hPControls.ySecHeaGen, ySecHeaGen) annotation (Line(points={{-49.76,
           -16.8},{-49.76,-44},{40,-44},{40,-114}},
                                             color={0,0,127}));
@@ -366,6 +371,14 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(hPControls.modeOut, booleanPassThroughMode.u) annotation (Line(
+      points={{-27.34,0},{-10,0},{-10,-32},{20.8,-32}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(booleanPassThroughMode.y, modeOut) annotation (Line(
+      points={{34.6,-32},{62,-32},{62,-58},{-40,-58},{-40,-114}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                                      Rectangle(
           extent={{100,100},{-100,-100}},
