@@ -6,7 +6,7 @@ model HeatStorageVariablePorts "Simple model of a heat storage"
      ******************************************************************* */
 
 public
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
@@ -31,15 +31,15 @@ public
       HeatStorage Parameters
      ******************************************************************* */
 
-  inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
-  inner parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
+  parameter Real tau(min=0) = 1000 "Time constant for mixing";
+  parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=1500
     "Coefficient at the inner wall";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
-  inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_500l() "Storage data"
+  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+      AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
   parameter Integer[n_load_cycles, 2] load_cycles= {{n,1},{n,1}}
     "Loading cycle connection pairs (upper position first)"
@@ -70,6 +70,12 @@ public
   parameter Boolean Up_to_down_HC2 = true
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
+  parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient"
+                                                      annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable = not calculateAlphaInside,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                             annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC2=0.02 "Inner diameter of HC2"
@@ -100,7 +106,6 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,50})));
-public
   FastHVAC.Interfaces.EnthalpyPort_a LoadingCycle_In[n_load_cycles] annotation (
      Placement(transformation(extent={{-30,90},{-10,110}}), iconTransformation(
           extent={{-30,90},{-10,110}})));
@@ -113,8 +118,6 @@ public
   FastHVAC.Interfaces.EnthalpyPort_a UnloadingCycle_In[n_unload_cycles]
     annotation (Placement(transformation(extent={{10,-110},{30,-90}}),
         iconTransformation(extent={{10,-110},{30,-90}})));
-
-public
   FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n,n_load_cycles]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
@@ -177,7 +180,10 @@ public
     alpha_HC=alpha_HC1,
     medium_HC=mediumHC1,
     lengthHC=data.lengthHC1,
-    pipeRecordHC=data.pipeHC1) if   use_heatingCoil1 annotation (Placement(
+    pipeRecordHC=data.pipeHC1,
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                    use_heatingCoil1 annotation (Placement(
         transformation(
         extent={{-15,-12},{15,12}},
         rotation=270,
@@ -188,7 +194,10 @@ public
     alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
-    pipeRecordHC=data.pipeHC2) if   use_heatingCoil2 annotation (Placement(
+    pipeRecordHC=data.pipeHC2,
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                    use_heatingCoil2 annotation (Placement(
         transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,
@@ -208,35 +217,14 @@ public
         rotation=270,
         origin={0,-38})));
 
-        HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-8,18},
-            {12,38}},  rotation=0)));
-
- replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction constrainedby
+  replaceable model HeatTransfer =
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
     BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html><h4>
-  <font color=\"#008000\">Overview</font>
-</h4>
-<p>
-  Heat transfer model for heat transfer between two fluid layers.
-</p>
-<h4>
-  <font color=\"#008000\">Level of Development</font>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
-</p>
-</html>
-",
- revisions="<html><ul>
-  <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
-</html>
-"));
+    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
+
+  HeatTransfer heatTransfer(final Medium=medium,final data=data,
+    final n=n)      annotation (Placement(transformation(extent={{-8,18},{12,38}}, rotation=0)));
+
 equation
 
   if use_heatingRod then
@@ -644,13 +632,8 @@ connect(heatTransfer.therm, layer.port);
   Buffer storage model with support for heating rod and two heating
   coils. Model with variable connection pairs for loading and unlouding
   cycles which are defined by the associated <u>storage layer
-  number</u> of the ports.
-</p>
-<h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+  number</u> of the ports. Compared to the standard HeatStorage model, the 
+  position of the heating coils can also be defined in this model.
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>
@@ -684,18 +667,18 @@ connect(heatTransfer.therm, layer.port);
 </p>
 </html>",
 revisions="<html><ul>
-  <li>
+<li>
     <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
-  </li>
-  <li>
+</li>
+<li>
     <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
     Added documentation.
-  </li>
-  <li>
+</li>
+<li>
     <i>December 16, 2014</i> by Sebastian Stinner:<br/>
     Implemented.
-  </li>
+</li>
 </ul>
 </html>"));
 end HeatStorageVariablePorts;
