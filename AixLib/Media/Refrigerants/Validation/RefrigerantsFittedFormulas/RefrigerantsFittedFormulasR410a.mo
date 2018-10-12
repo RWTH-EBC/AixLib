@@ -3,7 +3,7 @@ model RefrigerantsFittedFormulasR410a
   "Model that checks the fitted formulas of R410a"
   extends RefrigerantsFittedFormulasR134a(
     redeclare package MediumInt =
-      AixLib.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner,
+      AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner,
     extProp(fileName=Modelica.Utilities.Files.loadResource(
       "modelica://AixLib/Resources/Media/Refrigerants/ValidationFittedFormulasR410a.txt")),
     h_min = 155e3,

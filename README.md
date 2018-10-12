@@ -13,8 +13,8 @@ If you have any questions regarding **AixLib**, feel free to contact us at aixli
 
 ### License
 
-The model library **AixLib** is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate under the [Modelica License 2.0](https://www.modelica.org/licenses/ModelicaLicense2).
-
+The **AixLib** Library is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD-license.
+See [AixLib Library license](https://htmlpreview.github.io/?https://github.com/rwth-ebc/aixlib/blob/master/AixLib/legal.html).
 ### Acknowledgements
 
 Parts of **AixLib** have been developed within public funded projects and with financial support by BMWi (German Federal Ministry for Economic Affairs and Energy).

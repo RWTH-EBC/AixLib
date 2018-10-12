@@ -41,7 +41,9 @@ model HeatPumpSystem
       redeclare final package Medium_con = Medium_con,
       redeclare final package Medium_eva = Medium_eva,
       redeclare final model PerDataHea = PerDataHea,
-      redeclare final model PerDataChi = PerDataChi));
+      redeclare final model PerDataChi = PerDataChi,
+      GConIns=10,
+      GEvaIns=10));
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",
