@@ -14,12 +14,11 @@ equation
     //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
     QCon = Char[2];
     Pel = Char[1];
-    QEva = QCon-Pel;
   else //If heat pump is turned off, all values become zero.
     QCon = 0;
     Pel = 0;
-    QEva = 0;
   end if;
+  QEva = -(QCon - Pel);
   annotation (Icon(graphics={
         Text(
           lineColor={0,0,255},

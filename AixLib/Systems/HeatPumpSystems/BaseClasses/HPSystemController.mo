@@ -1,6 +1,9 @@
 within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
+  extends AixLib.Controls.HeatPump.SecurityControls.BaseClasses.BoundaryMapIcon(
+  final iconMin = 10,
+  final iconMax = 70);
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
@@ -98,25 +101,7 @@ model HPSystemController
     "False to allow HP to run out of operational envelope"
     annotation (Dialog(tab="Security Control", group="Operational Envelope",
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
-  parameter Boolean use_opeEnvFroRec=true
-    "Use a the operational envelope given in the datasheet" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv,
-      descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
-  parameter Real tableUpp[:,2] "Upper boundary of envelope" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
-  parameter Real tableLow[:,2] "Lower boundary of envelope" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
+
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Security Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -148,6 +133,8 @@ model HPSystemController
       tab="Security Control",
       group="Anti Freeze Control",
       enable=use_sec and use_antFre));
+  parameter Boolean use_calcCOP=true
+    "Only relevant for Carnot system simulation";
   Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final use_minRunTime=use_minRunTime,
     final minRunTime(displayUnit="min") = minRunTime,
@@ -243,11 +230,11 @@ model HPSystemController
         origin={114,80})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
-  parameter Boolean use_calcCOP=true
-    "Only relevant for Carnot system simulation";
+
   Modelica.Blocks.Routing.BooleanPassThrough booleanPassThroughMode if not
     use_sec "Pass through for mode signal"
     annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
+
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
@@ -380,13 +367,8 @@ equation
       color={255,0,255},
       pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                                                     Rectangle(
-          extent={{100,100},{-100,-100}},
-          lineColor={135,135,135},
-          fillColor={255,255,170},
-          fillPattern=FillPattern.Solid,
-          lineThickness=1), Text(
-          extent={{-100,28},{100,-16}},
+                            Text(
+          extent={{-100,26},{100,-18}},
           lineColor={0,0,127},
           pattern=LinePattern.Dash,
           fillColor={255,255,170},

@@ -42,9 +42,8 @@ partial block PartialSecurityControl "Base Block"
 equation
   connect(conZer.y,swiErr. u3) annotation (Line(points={{70.6,-18},{78,-18},
           {78,-8},{84,-8}}, color={0,0,127}));
-  connect(swiErr.y, nOut)
-    annotation (Line(points={{107,0},{118,0},{118,20},{130,20}},
-                                               color={0,0,127}));
+  connect(swiErr.y, nOut) annotation (Line(points={{107,0},{118,0},{118,20},{
+          130,20}}, color={0,0,127}));
   connect(disErr.y, ERR) annotation (Line(points={{-1.77636e-15,-89.6},{
           -1.77636e-15,-100},{0,-100},{0,-110}}, color={255,127,0}));
   connect(not1.y, disErr.trigger) annotation (Line(points={{-21,-74.5},{-21,

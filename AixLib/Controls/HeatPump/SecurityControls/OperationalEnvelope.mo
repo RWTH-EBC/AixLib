@@ -2,17 +2,12 @@ within AixLib.Controls.HeatPump.SecurityControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSecurityControl;
-  parameter Boolean use_opeEnv
-    "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
-  parameter Boolean use_opeEnvFroRec=true
-    "Use a the operational envelope given in the datasheet" annotation(choices(checkBox=true), Dialog(
-        enable=use_opeEnv, descriptionLabel=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (choicesAllMatching = true,Dialog(enable=use_opeEnvFroRec and use_opeEnv));
-  parameter Real tableLow[:,2] "Lower boundary of envelope"
-    annotation (Dialog(enable=use_opeEnv and not use_opeEnvFroRec));
-  parameter Real tableUpp[:,2] "Upper boundary of envelope" annotation (Dialog(enable=use_opeEnv and not use_opeEnvFroRec));
-  Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_ret_co annotation (
+  extends BaseClasses.BoundaryMapIcon(final iconMin=-70,
+  final iconMax=70);
+ parameter Boolean use_opeEnv
+  "False to allow HP to run out of operational envelope" annotation(choices(checkBox=true));
+
+    Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_ret_co annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,-24},{
             -70,-12}})));
   Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_flow_ev annotation (
@@ -27,6 +22,7 @@ block OperationalEnvelope
   Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not
     use_opeEnv
     annotation (Placement(transformation(extent={{10,-36},{24,-22}})));
+
 equation
   connect(boundaryMap.noErr, swiErr.u2) annotation (Line(points={{-1.1,-3},{42,
           -3},{42,0},{84,0}},     color={255,0,255}));

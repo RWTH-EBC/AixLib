@@ -43,7 +43,7 @@ model HeatPumpSystem
       redeclare final model PerDataHea = PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
       GConIns=10,
-      GEvaIns=10));
+      GEvaIns=10), hPSystemController(use_calcCOP=false));
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",

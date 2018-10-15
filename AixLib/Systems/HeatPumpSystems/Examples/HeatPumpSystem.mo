@@ -201,8 +201,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(senT_a1.port_a, heatPumpSystem.port_b1) annotation (Line(points={{88,
-          -30},{88,-51.7143},{62,-51.7143}}, color={0,127,255}));
+  connect(senT_a1.port_a, heatPumpSystem.port_b1) annotation (Line(points={{88,-30},
+          {88,-51.7143},{62,-51.7143}},      color={0,127,255}));
   connect(senT_a1.port_b, rad.port_a) annotation (Line(points={{88,-10},{90,-10},
           {90,12},{40,12}}, color={0,127,255}));
   connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{54,
@@ -213,8 +213,7 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 </html>
-"), 
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
+"), Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},
                 fillPattern = FillPattern.Solid,
