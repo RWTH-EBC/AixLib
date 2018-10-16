@@ -1,27 +1,37 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends BaseClasses.PartialPerformanceData;
-  parameter Real nConv=1
+  parameter Real nConv=100
     "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
   parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
     "Interpolation method";
   parameter SDF.Types.ExtrapolationMethod extrapMethod=SDF.Types.ExtrapolationMethod.None
     "Extrapolation method";
-  parameter String filename_Pel="" "File name of sdf table data"
+  parameter String filename_Pel=
+      "modelica://Resources/Data/Fluid/BaseClasses/PerformanceData/LookUpTableND/VZH088AG.sdf"
+                                   "File name of sdf table data"
     annotation (Dialog(group="Electrical Power",loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
-  parameter String dataset_Pel="" "Dataset name"
+  parameter String dataset_Pel="/Pel"
+                                  "Dataset name"
     annotation (Dialog(group="Electrical Power"));
-  parameter String dataUnit_Pel="" "Data unit"
+  parameter String dataUnit_Pel="W"
+                                   "Data unit"
     annotation (Dialog(group="Electrical Power"));
-  parameter String scaleUnits_Pel[3]=fill("", 3) "Scale units"
+  parameter String scaleUnits_Pel[3]={"K","K",""}
+                                                 "Scale units"
     annotation (Dialog(group="Electrical Power"));
-  parameter String filename_QCon="" "File name of sdf table data"
+  parameter String filename_QCon=
+      "modelica://Resources/Data/Fluid/BaseClasses/PerformanceData/LookUpTableND/VZH088AG.sdf"
+                                    "File name of sdf table data"
     annotation (Dialog(group="Condenser heat flow",loadSelector(filter="SDF Files (*.sdf);;All Files (*.*)", caption="Select SDF file")));
-  parameter String dataset_QCon="" "Dataset name"
+  parameter String dataset_QCon="/QCon"
+                                   "Dataset name"
     annotation (Dialog(group="Condenser heat flow"));
-  parameter String dataUnit_QCon="" "Data unit"
+  parameter String dataUnit_QCon="W"
+                                    "Data unit"
     annotation (Dialog(group="Condenser heat flow"));
-  parameter String scaleUnits_QCon[3]=fill("", 3) "Scale units"
+  parameter String scaleUnits_QCon[3]={"K","K",""}
+                                                  "Scale units"
     annotation (Dialog(group="Condenser heat flow"));
 
   Modelica.Blocks.Math.Gain nConGain(final k=nConv)
@@ -34,11 +44,11 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
             {6,6}},
         rotation=-90,
-        origin={60,40})));
+        origin={46,42})));
   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
         -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={-40,40})));
+        origin={-40,46})));
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
                     "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-10,-10},
             {10,10}},
@@ -92,6 +102,11 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         rotation=-90,
         origin={0,20})));
 
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
+        Modelica.Constants.eps) annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=270,
+        origin={-72,46})));
 equation
   connect(feedbackHeatFlowEvaporator.y, QEva)
     annotation (Line(points={{80,-89},{80,-110}},
@@ -120,56 +135,51 @@ equation
   connect(nDTablePel.y, switchPel.u1)
     annotation (Line(points={{50,-23.2},{50,-34},{58,-34},{58,-48}},
                                                   color={0,0,127}));
-  connect(t_Ev_in.y,multiplex3_1. u1[1]) annotation (Line(points={{60,33.4},{8,
-          33.4},{8,29.6},{5.6,29.6}}, color={0,0,127}));
-  connect(t_Co_ou.y,multiplex3_1. u3[1]) annotation (Line(points={{-40,33.4},{
-          -5.6,33.4},{-5.6,29.6}},       color={0,0,127}));
   connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-1.55431e-15,
           11.2},{-1.55431e-15,4.4},{-42,4.4}},
                                           color={0,0,127}));
   connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
           {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
-  connect(nConGain.y, multiplex3_1.u2[1]) annotation (Line(
-      points={{-1.77636e-15,59.2},{-1.77636e-15,60},{0,60},{0,42},{1.77636e-15,
-          42},{1.77636e-15,29.6}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
-      points={{1.075,104.07},{60,104.07},{60,54},{60,48},{60,48},{60,47.2}},
+      points={{1.075,104.07},{46,104.07},{46,49.2}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.N, nConGain.u) annotation (Line(
-      points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
-      color={255,204,51},
-      thickness=0.5,
-      pattern=LinePattern.Dash), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.T_ret_co, t_Co_ou.u) annotation (Line(
-      points={{1.075,104.07},{-40,104.07},{-40,47.2}},
+      points={{1.075,104.07},{-40,104.07},{-40,53.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.onOff, switchPel.u2) annotation (Line(
-      points={{1.075,104.07},{-78,104.07},{-78,-34},{50,-34},{50,-48}},
+  connect(sigBusHP.N, greaterThreshold.u) annotation (Line(
+      points={{1.075,104.07},{-72,104.07},{-72,53.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(sigBusHP.onOff, switchQCon.u2) annotation (Line(
-      points={{1.075,104.07},{-78,104.07},{-78,-34},{-50,-34},{-50,-44}},
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-72,39.4},
+          {-72,-34},{-50,-34},{-50,-44}}, color={255,0,255}));
+  connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
+          {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
+  connect(sigBusHP.N, nConGain.u) annotation (Line(
+      points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
-      extent={{-6,3},{-6,3}}));
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{
+          -1.55431e-15,59.2},{-6,59.2},{-6,29.6},{-5.6,29.6}}, color={0,0,127}));
+  connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
+          -40,36},{5.6,36},{5.6,29.6}}, color={0,0,127}));
+  connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,35.4},{46,
+          32},{0,32},{0,29.6}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),
