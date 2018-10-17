@@ -1,7 +1,7 @@
-within AixLib.Fluid;
+within ;
 package PhysicalCompressors "Package contains models of compressors based on physical equations"
 
 
 
-  annotation ();
+  annotation (uses(Modelica(version="3.2.2")));
 end PhysicalCompressors;
