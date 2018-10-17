@@ -6,10 +6,10 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    final parameter Real cp_default = 4180 "Cp-value of Water";
+    final parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Real HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
-    parameter Real CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
@@ -329,5 +329,11 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end SubstationHeatingCoolingVarDeltaT;

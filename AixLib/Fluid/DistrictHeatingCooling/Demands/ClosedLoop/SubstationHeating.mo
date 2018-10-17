@@ -5,9 +5,9 @@ model SubstationHeating
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Real cp_default = 4180 "Cp-value of Water (district heating network)";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water (district heating network)";
 
-    parameter Real HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
 
@@ -182,5 +182,11 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{160,
-            120}})));
+            120}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end SubstationHeating;

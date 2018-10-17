@@ -5,9 +5,9 @@ model SubstationCooling
     Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Real cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Real CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
 
@@ -185,5 +185,11 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,120}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,120}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end SubstationCooling;
