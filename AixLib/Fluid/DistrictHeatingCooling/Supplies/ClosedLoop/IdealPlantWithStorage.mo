@@ -112,5 +112,11 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.None)}),                       Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{100,
-            100}})));
+            100}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end IdealPlantWithStorage;
