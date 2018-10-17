@@ -182,5 +182,11 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{160,
-            120}})));
+            120}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end SubstationHeating;

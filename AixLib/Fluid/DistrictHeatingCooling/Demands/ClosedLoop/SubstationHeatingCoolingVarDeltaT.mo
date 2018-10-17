@@ -329,5 +329,11 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},{220,160}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end SubstationHeatingCoolingVarDeltaT;
