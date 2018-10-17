@@ -84,7 +84,8 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe1(length=2),
     pipe2(length=2),
     pipe3(length=4),
-    energyDynamics=Admix.energyDynamics) annotation (Placement(transformation(
+    energyDynamics=Admix.energyDynamics,
+    length=2)                            annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,7})));
@@ -103,7 +104,8 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=1),
-    energyDynamics=Admix.energyDynamics) annotation (Placement(transformation(
+    energyDynamics=Admix.energyDynamics,
+    length=2)                            annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,7})));
@@ -129,7 +131,9 @@ model ERC_ExperimentalHall_CoolingCircuit
       dIns=0.02),
     pipe5(length=1),
     pipe6(length=1),
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) annotation (
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    length=1,
+    Kv=10)                                                     annotation (
       Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,

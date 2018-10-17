@@ -56,11 +56,11 @@ model Wall_ASHRAE140
 
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
-  parameter Real LimitSolIrr
+  parameter Real LimitSolIrr if withWindow and outside and withSunblind
     "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
     annotation(Dialog(tab="Window",   enable=withWindow and outside and
           withSunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit
+  parameter Modelica.SIunits.Temperature TOutAirLimit if withWindow and outside and withSunblind
     "Temperature at which sunblind closes (see also LimitSolIrr)"
     annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
 

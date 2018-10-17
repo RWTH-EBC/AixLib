@@ -186,10 +186,11 @@ model HPSystemController
     final use_tableData=use_tableData,
     redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
+  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200) if
+    use_calcCOP
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(TSup
-         - sigBusHP.T_flow_co)*4180)
+         - sigBusHP.T_flow_co)*4180) if use_calcCOP
     "Calculates the heat flow added to the source medium"
     annotation (Placement(transformation(extent={{-90,78},{-66,96}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
@@ -228,8 +229,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{14,-14},{-14,14}},
         rotation=90,
         origin={-80,-114})));
-  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
-    annotation (Placement(transformation(extent={{-72,66},{-60,78}})));
+  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1) if use_calcCOP
+    annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
       final function iceFunc =
         Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.BasicIcingApproach)
@@ -242,6 +243,8 @@ model HPSystemController
         origin={114,80})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
+  parameter Boolean use_calcCOP=true
+    "Only relevant for Carnot system simulation";
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
@@ -298,15 +301,15 @@ equation
           {-38,-40},{80,-40},{80,-114}}, color={0,0,127}));
   connect(hPControls.y_sou, y_sou) annotation (Line(points={{-61.16,-16},{-62,
           -16},{-62,-58},{-80,-58},{-80,-114}},       color={0,0,127}));
-  connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-58.98,72},{-48,72},
+  connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-48,70},
           {-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
   connect(securityControl.Pel_deFro, multiSum.u[1]) annotation (Line(
-      points={{49.6667,20},{54,20},{54,28},{-80,28},{-80,72},{-72,72}},
+      points={{49.6667,20},{54,20},{54,26},{-80,26},{-80,70},{-78,70}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP.Pel, multiSum.u[1]) annotation (Line(
-      points={{-106.925,-52.915},{-80,-52.915},{-80,72},{-72,72}},
+      points={{-106.925,-52.915},{-78,-52.915},{-78,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
