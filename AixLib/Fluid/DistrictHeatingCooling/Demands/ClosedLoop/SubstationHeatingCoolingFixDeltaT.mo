@@ -9,8 +9,8 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
 
     parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "Maximum heat demand for scaling of heat pump";
-    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "Maximum cooling demand for scaling of chiller (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
+    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
@@ -75,7 +75,7 @@ public
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
   Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet))
     annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
-  Modelica.Blocks.Interfaces.RealInput HeatDemand(unit = "W")
+  Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
   "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}),
         iconTransformation(extent={{152,68},{112,108}})));
@@ -124,7 +124,7 @@ public
     addPowerToMedium=false,
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
-  Modelica.Blocks.Interfaces.RealInput CoolingDemand(unit = "W")
+  Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
   "Input for cooling demand profile of substation"
     annotation (Placement(
         transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-176,40},

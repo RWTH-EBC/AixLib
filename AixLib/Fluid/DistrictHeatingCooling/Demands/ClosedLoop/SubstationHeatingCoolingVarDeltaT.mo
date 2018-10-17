@@ -8,8 +8,8 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
 
     final parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
-    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
@@ -184,13 +184,13 @@ public
         rotation=180,
         origin={228,142}),   iconTransformation(extent={{-280,28},{-240,68}})));
 
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP(unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandHP(unit = "W")
   "Power demand of heat pump"
     annotation (Placement(transformation(extent={{-260,108},{-280,128}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller(unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandChiller(unit = "W")
   "Power demand of chiller"
     annotation (Placement(transformation(extent={{-260,134},{-280,154}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit = "W")
   "Power demand of heat pump and chiller (sum)"
     annotation (Placement(transformation(extent={{-260,70},{-280,90}})));
   Modelica.Blocks.Math.Sum sum1(nin=2)

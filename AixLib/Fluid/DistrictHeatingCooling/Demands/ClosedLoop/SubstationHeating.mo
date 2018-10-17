@@ -7,7 +7,7 @@ model SubstationHeating
 
     parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
 
-    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.SIunits.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
@@ -93,15 +93,15 @@ public
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{56,64},{36,84}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP(unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandHP(unit = "W")
   "Power demand of heat pump"
     annotation (Placement(transformation(extent={{158,96},{178,116}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump(unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandPump(unit = "W")
   "Power demand of distribution pump"
     annotation (Placement(transformation(extent={{158,76},{178,96}})));
   Modelica.Blocks.Math.Sum sumPower(nin=1)
     annotation (Placement(transformation(extent={{108,40},{128,60}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit = "W")
     annotation (Placement(transformation(extent={{158,40},{178,60}})));
 equation
   connect(port_a,vol. ports[1])
