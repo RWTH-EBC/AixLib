@@ -80,11 +80,11 @@ public
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem_supHeating(redeclare package
       Medium = Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-36,-26},{-56,-46}})));
-  Modelica.Blocks.Interfaces.RealInput heatDemand( unit = "W")
+  Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
   "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{156,-58},{116,-18}}),
         iconTransformation(extent={{156,-58},{116,-18}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet( unit = "K")
+  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K")
   "Supply temperature of the heating circuit in the building"
    annotation (Placement(
         transformation(extent={{156,-102},{116,-62}}), iconTransformation(
@@ -93,15 +93,15 @@ public
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{56,64},{36,84}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP( unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP(unit = "W")
   "Power demand of heat pump"
     annotation (Placement(transformation(extent={{158,96},{178,116}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump( unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump(unit = "W")
   "Power demand of distribution pump"
     annotation (Placement(transformation(extent={{158,76},{178,96}})));
   Modelica.Blocks.Math.Sum sumPower(nin=1)
     annotation (Placement(transformation(extent={{108,40},{128,60}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation( unit = "W")
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit = "W")
     annotation (Placement(transformation(extent={{158,40},{178,60}})));
 equation
   connect(port_a,vol. ports[1])

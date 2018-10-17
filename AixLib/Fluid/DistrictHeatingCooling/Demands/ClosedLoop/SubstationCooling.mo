@@ -78,26 +78,26 @@ model SubstationCooling
     annotation (Placement(transformation(extent={{-24,42},{-12,54}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-8,64},{6,78}})));
-  Modelica.Blocks.Interfaces.RealInput coolingDemand( final unit="W")
+  Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W")
     "Input for cooling demand profile of substation (negative values for cooling)"
     annotation (Placement(transformation(extent={{-166,60},{-126,100}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-34,-10},{-14,12}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet( final unit="K")
+  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
   "Supply temperature of the cooling circuit in the building"
     annotation (Placement(transformation(extent={{-166,10},{-126,50}})));
   Modelica.Blocks.Math.Add add(k2=+1)
     annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller( final unit="W")
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller(unit="W")
   "Power demand of chiller"
     annotation (Placement(transformation(extent={{100,86},{120,106}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump( final unit="W")
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump(unit="W")
   "Power demand of distribution pump"
     annotation (Placement(transformation(extent={{100,66},{120,86}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation( final unit="W")
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit="W")
     annotation (Placement(transformation(extent={{100,46},{120,66}})));
   Modelica.Blocks.Math.Sum sum1(nin=1)
     annotation (Placement(transformation(extent={{60,46},{80,66}})));
