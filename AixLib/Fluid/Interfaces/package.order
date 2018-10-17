@@ -2,6 +2,7 @@ UsersGuide
 ConservationEquation
 EightPort
 EightPortHeatMassExchanger
+FourPortHeatExchanger
 FourPortHeatMassExchanger
 PartialEightPortInterface
 PartialFourPort
