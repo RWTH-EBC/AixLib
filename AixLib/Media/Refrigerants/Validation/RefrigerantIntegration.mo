@@ -6,7 +6,7 @@ model RefrigerantIntegration
   // Definition of the refrigerant that shall be tested
   //
   package Medium =
-     AixLib.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
+     AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_473_Horner
     "Internal medium model";
 
   // Definition of parameters and constants

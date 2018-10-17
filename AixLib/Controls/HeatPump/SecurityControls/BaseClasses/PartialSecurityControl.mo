@@ -18,12 +18,39 @@ partial block PartialSecurityControl "Base Block"
     annotation (Placement(transformation(extent={{120,-30},{140,-10}})));
   Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
     annotation (Placement(transformation(extent={{-152,-36},{-120,-4}})));
+  Modelica.Blocks.MathInteger.TriggeredAdd disErr(
+    y_start=0,
+    use_reset=false,
+    use_set=false)
+               "Used to show if the error was triggered" annotation (Placement(
+        transformation(
+        extent={{-8,-8},{8,8}},
+        rotation=270,
+        origin={0,-80})));
+  Modelica.Blocks.Interfaces.IntegerOutput ERR annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,-110})));
+  Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=270,
+        origin={-21,-69})));
+  Modelica.Blocks.Sources.IntegerConstant intConOne(final k=1)
+    "Used for display of current error"
+    annotation (Placement(transformation(extent={{36,-70},{24,-58}})));
 equation
   connect(conZer.y,swiErr. u3) annotation (Line(points={{70.6,-18},{78,-18},
           {78,-8},{84,-8}}, color={0,0,127}));
   connect(swiErr.y, nOut)
     annotation (Line(points={{107,0},{118,0},{118,20},{130,20}},
                                                color={0,0,127}));
+  connect(disErr.y, ERR) annotation (Line(points={{-1.77636e-15,-89.6},{
+          -1.77636e-15,-100},{0,-100},{0,-110}}, color={255,127,0}));
+  connect(not1.y, disErr.trigger) annotation (Line(points={{-21,-74.5},{-21,
+          -75.2},{-9.6,-75.2}}, color={255,0,255}));
+  connect(intConOne.y, disErr.u) annotation (Line(points={{23.4,-64},{0,-64},{0,
+          -68.8}}, color={255,127,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
             -120,-100},{120,100}}), graphics={
         Polygon(
