@@ -5,15 +5,15 @@ model SubstationHeating
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water (district heating network)";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
 
-    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
+    parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "set temperature difference for heating on the site of thermal network";
+    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000;
+    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
@@ -56,9 +56,11 @@ model SubstationHeating
 public
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         AixLib.Media.Water)
+    "Fluid connector for connecting the substation to the warm line of the network"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         AixLib.Media.Water)
+    "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{150,-10},{170,10}}),
         iconTransformation(extent={{150,-10},{170,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
@@ -78,23 +80,28 @@ public
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem_supHeating(redeclare package
       Medium = Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-36,-26},{-56,-46}})));
-  Modelica.Blocks.Interfaces.RealInput heatDemand
+  Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
+  "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{156,-58},{116,-18}}),
         iconTransformation(extent={{156,-58},{116,-18}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K")
+  "Supply temperature of the heating circuit in the building"
+   annotation (Placement(
         transformation(extent={{156,-102},{116,-62}}), iconTransformation(
           extent={{156,-102},{116,-62}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{56,64},{36,84}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP(unit = "W")
+  "Power demand of heat pump"
     annotation (Placement(transformation(extent={{158,96},{178,116}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump(unit = "W")
+  "Power demand of distribution pump"
     annotation (Placement(transformation(extent={{158,76},{178,96}})));
   Modelica.Blocks.Math.Sum sumPower(nin=1)
     annotation (Placement(transformation(extent={{108,40},{128,60}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit = "W")
     annotation (Placement(transformation(extent={{158,40},{178,60}})));
 equation
   connect(port_a,vol. ports[1])

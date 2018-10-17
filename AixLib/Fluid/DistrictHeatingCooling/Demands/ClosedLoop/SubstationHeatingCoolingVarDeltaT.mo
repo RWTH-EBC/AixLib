@@ -55,9 +55,11 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
 public
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
+    "Fluid connector for connecting the substation to the warm line of the network"
     annotation (Placement(transformation(extent={{-270,-10},{-250,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)
+    "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{210,-10},{230,10}}),
         iconTransformation(extent={{210,-10},{230,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
@@ -73,10 +75,13 @@ public
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
   Modelica.Blocks.Math.Gain        const3(k=cp_default)
     annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
-  Modelica.Blocks.Interfaces.RealInput heatDemand
+  Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
+  "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}),
         iconTransformation(extent={{232,76},{192,116}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet annotation (
+  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K")
+  "Supply temeprature of heating circuit in the building"
+    annotation (
       Placement(transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
@@ -120,10 +125,14 @@ public
     use_inputFilter=false,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
-  Modelica.Blocks.Interfaces.RealInput coolingDemand annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
+  "Input for cooling demand profile of substation"
+    annotation (Placement(
         transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-280,76},
             {-240,116}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet annotation (
+  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit = "K")
+  "Supply temperatur of cooling circuit in the building"
+    annotation (
       Placement(transformation(extent={{248,82},{208,122}}),
         iconTransformation(extent={{-280,124},{-240,164}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
@@ -161,23 +170,28 @@ public
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium =
                Medium)
     annotation (Placement(transformation(extent={{78,14},{58,34}})));
-  Modelica.Blocks.Interfaces.RealInput deltaT_heatingGridSet "set temperature difference for heating on the site of thermal network"
+  Modelica.Blocks.Interfaces.RealInput deltaT_heatingGridSet(unit = "K")
+  "Set temperature difference for heating on the site of thermal network"
                                                           annotation (
       Placement(transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
         origin={-268,-158}), iconTransformation(extent={{232,32},{192,72}})));
-  Modelica.Blocks.Interfaces.RealInput deltaT_coolingGridSet "set temperature difference for cooling on the site of thermal network"  annotation (
+  Modelica.Blocks.Interfaces.RealInput deltaT_coolingGridSet(unit = "K")
+  "Set temperature difference for cooling on the site of thermal network"  annotation (
       Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={228,142}),   iconTransformation(extent={{-280,28},{-240,68}})));
 
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP(unit = "W")
+  "Power demand of heat pump"
     annotation (Placement(transformation(extent={{-260,108},{-280,128}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller(unit = "W")
+  "Power demand of chiller"
     annotation (Placement(transformation(extent={{-260,134},{-280,154}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit = "W")
+  "Power demand of heat pump and chiller (sum)"
     annotation (Placement(transformation(extent={{-260,70},{-280,90}})));
   Modelica.Blocks.Math.Sum sum1(nin=2)
     annotation (Placement(transformation(extent={{-204,70},{-224,90}})));
