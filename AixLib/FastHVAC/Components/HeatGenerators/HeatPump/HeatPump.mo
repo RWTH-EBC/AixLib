@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
+﻿within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
 model HeatPump "Simple heat pump model"
 
     /* *******************************************************************
@@ -54,9 +54,9 @@ protected
 
 public
   replaceable function data_poly =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.constantQualityGrade
+  AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics for inverter heat pump"
     annotation(choicesAllMatching = true,Dialog(enable=(cap_calcType==1),group="Capacity data"));
 
@@ -65,9 +65,9 @@ public
   parameter SI.Temperature T_startCo=308.15 "Initial condenser temperature"
     annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser", group="Initialization", enable=initCondenserVol));
   replaceable function corr_icing =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.noModel
+  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.NoModel
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
     annotation(choicesAllMatching = true,Dialog(enable=(cap_calcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 

@@ -19,16 +19,16 @@ protected
   final parameter Real tableP_ele[:,:]= dataTable.tableP_ele;
 public
   replaceable function data_poly =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.constantQualityGrade
+  AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.noModel
+  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.NoModel
                                                                  constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
@@ -43,12 +43,12 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
   parameter Boolean PT1_cycle=false "First Order model for capacity" annotation(Dialog(group = "Start/stop behavior",tab="Advanced"), choices(checkBox=true));
   parameter SI.Time timeConstantCycle=1 "Time constant for first order model" annotation(Dialog(group = "Start/stop behavior",tab="Advanced", enable=PT1_cycle));
   parameter Real eta_ele=1
-    "assumption of P_tech/P_el (for calculation of Evaporator load)"                         annotation(Dialog(group="Assumptions",tab="Advanced"));
+    "Assumption of P_tech/P_el (for calculation of Evaporator load)"                         annotation(Dialog(group="Assumptions",tab="Advanced"));
   parameter Real factorScale=1
-    "scaling factor (Attention: not physically correct)"
+    "Scaling factor (Attention: not physically correct)"
      annotation(Dialog(group="Assumptions",tab="Advanced"));
   parameter SI.Power P_eleAdd=0
-    "additional electric power when heat pump is on (not influenced through scaling factor)"
+    "Additional electric power when heat pump is on (not influenced through scaling factor)"
     annotation(Dialog(group="Assumptions",tab="Advanced"));
 
   parameter Boolean CorrFlowCo=false
@@ -172,7 +172,7 @@ public
   Modelica.Blocks.Sources.RealExpression realCoP_corr(y=CoP_corr) annotation (
       Placement(transformation(extent={{-32,-50},{-12,-30}}, rotation=0)));
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
-    "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
+    "Smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
                                                                                             (capCalcType==1)));
 public
   Modelica.Blocks.Logical.TriggeredTrapezoid realP_eleAdd(amplitude=P_eleAdd)
@@ -429,7 +429,7 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
-            {150,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=true,
+            {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
         Rectangle(
           extent={{-130,90},{130,-90}},

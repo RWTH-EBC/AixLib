@@ -1,34 +1,31 @@
 within AixLib.FastHVAC.Components.Storage;
 model HeatStorage "Simple model of a heat storage"
-
-
   /* *******************************************************************
       Medium
      ******************************************************************* */
- parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
+
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
-
-     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
-
-     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
-
   parameter Modelica.SIunits.Temperature T_start=323.15
     "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
   parameter Modelica.SIunits.Temperature T_start_wall=293.15
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
   parameter Modelica.SIunits.Temperature T_start_ins=293.15
     "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
+
   /* *******************************************************************
       HeatStorage Parameters
-     ******************************************************************* */
+      ******************************************************************* */
 
   inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
   inner parameter Integer n(min=3) = 3 "Model assumptions Number of Layers";
@@ -40,14 +37,6 @@ model HeatStorage "Simple model of a heat storage"
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
-protected
-   parameter Real[ 2] load_cycles= {data.hUpperPorts,data.hLowerPorts}
-    "Loading cycle connection pairs (upper position first)"
-    annotation (Dialog(tab="Connections"));
-  parameter Real[ 2] unload_cycles = {data.hLowerPorts,data.hUpperPorts}
-    "Unloading cycle connection pairs (lower position first)"
-    annotation (Dialog(tab="Connections"));
-public
   Modelica.SIunits.Energy Heat_loss;
 
   /* ***************Heating Coil Section********************************/
@@ -65,6 +54,12 @@ public
   parameter Boolean Up_to_down_HC2 = true
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
+  parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient"
+                                                      annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable = not calculateAlphaInside,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                            annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC2=0.02 "Inner diameter of HC2"
@@ -89,8 +84,7 @@ public
 
   /* *******************************************************************
       Components
-      ******************************************************************* */
-
+  ******************************************************************* */
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor layer[n](C=
         fill(data.hTank*Modelica.Constants.pi*(data.dTank/2)^2*medium.rho*medium.c
         /n, n), T(start=fill(T_start, n))) annotation (Placement(
@@ -113,7 +107,8 @@ public
         transformation(extent={{10,-110},{30,-90}}), iconTransformation(extent={
             {10,-110},{30,-90}})));
 
-public
+
+
   FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
@@ -202,35 +197,22 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-46})));
-  BaseClasses.HeatTransferOnlyConduction heatTransfer annotation (Placement(
+  HeatTransfer heatTransfer(final Medium=medium,final data=data,
+    final n=n) annotation (Placement(
         transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
-    replaceable model HeatTransfer =
+  replaceable model HeatTransfer =
      BaseClasses.HeatTransferOnlyConduction  constrainedby
     BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html><h4>
-  <font color=\"#008000\">Overview</font>
-</h4>
-<p>
-  Heat transfer model for heat transfer between two fluid layers.
-</p>
-<h4>
-  <font color=\"#008000\">Level of Development</font>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
-</p>
-</html>
-",     revisions=
-           "<html><ul>
-  <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
-</html>
-"));
+    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
+
+protected
+   parameter Real[ 2] load_cycles= {data.hUpperPorts,data.hLowerPorts}
+    "Loading cycle connection pairs (upper position first)"
+    annotation (Dialog(tab="Connections"));
+  parameter Real[ 2] unload_cycles = {data.hLowerPorts,data.hUpperPorts}
+    "Unloading cycle connection pairs (lower position first)"
+    annotation (Dialog(tab="Connections"));
 equation
 
   if use_heatingRod then
@@ -268,22 +250,22 @@ connect(heatingRod, layer[n_HR].port);
 
   /* *************Setting of the lower temperature********************************/
 
-     if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[2]/(data.hTank/n) + 0.5, 0), 1), n))==1 then
+    if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[2]/(data.hTank/n) + 0.5, 0), 1), n))==1 then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-    varTemp_load[1].T = 323.15;
-     else
-    varTemp_load[1].T = layer[integer(min(max(AixLib.Utilities.Math.Functions.round(
+      varTemp_load[1].T = 323.15;
+    else
+      varTemp_load[1].T = layer[integer(min(max(AixLib.Utilities.Math.Functions.round(
       load_cycles[2]/(data.hTank/n) + 0.5, 0), 1), n))].T;
-     end if;
+    end if;
 
   /* *************Setting of the upper temperature********************************/
 
-if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n))==n then
+    if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n))==n then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-    varTemp_load[2].T = 323.15;
-     else
-    varTemp_load[2].T = LoadingCycle_In.T;
-     end if;
+      varTemp_load[2].T = 323.15;
+    else
+      varTemp_load[2].T = LoadingCycle_In.T;
+    end if;
 
   /* ***************Umloading Cycles********************************/
 
@@ -321,29 +303,25 @@ if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.h
      end if;
 
   /* *************Connection Heating Coil********************************/
-    if use_heatingCoil1 then
+  if use_heatingCoil1 then
+   for i in n_HC1_low:n_HC1_up loop
+     if Up_to_down_HC1 == true then
+       connect(heatingCoil1.Therm1[n_HC1_up+1-i], layer[i].port);
+     else
+       connect(heatingCoil1.Therm1[i-n_HC1_low+1], layer[i].port);
+     end if;
+    end for;
+  end if;
 
- for i in n_HC1_low:n_HC1_up loop
-   if Up_to_down_HC1 == true then
-     connect(heatingCoil1.Therm1[n_HC1_up+1-i], layer[i].port);
-   else
-     connect(heatingCoil1.Therm1[i-n_HC1_low+1], layer[i].port);
- end if;
-
-end for;
-end if;
-
-    if use_heatingCoil2 then
-
- for i in n_HC2_low:n_HC2_up loop
-   if Up_to_down_HC2 == true then
-     connect(heatingCoil2.Therm1[n_HC2_up+1-i], layer[i].port);
-   else
-     connect(heatingCoil2.Therm1[i-n_HC2_low+1], layer[i].port);
- end if;
-
-end for;
-    end if;
+  if use_heatingCoil2 then
+   for i in n_HC2_low:n_HC2_up loop
+     if Up_to_down_HC2 == true then
+       connect(heatingCoil2.Therm1[n_HC2_up+1-i], layer[i].port);
+     else
+       connect(heatingCoil2.Therm1[i-n_HC2_low+1], layer[i].port);
+     end if;
+   end for;
+  end if;
 
   for i in 1:n loop
     T_layers[i] = layer[i].T;
@@ -351,12 +329,12 @@ end for;
 //   T_Top = layer[n].T;
 //   T_Mid = layer[integer(AixLib.Utilities.Math.Functions.round(n/2 + 0.5,0))].T;
 //   T_Bottom = layer[1].T;
-connect(heatTransfer.therm, layer.port);
 
   connect(varTemp_load.port, dummy_load.port) annotation (Line(
       points={{120,22},{94,22},{94,54},{118,54}},
       color={191,0,0},
       smooth=Smooth.None));
+  connect(heatTransfer.therm, layer.port);
   connect(varTemp_unload.port, dummy_unload.port) annotation (Line(
       points={{120,-64},{96,-64},{96,-26},{118,-26}},
       color={191,0,0},
