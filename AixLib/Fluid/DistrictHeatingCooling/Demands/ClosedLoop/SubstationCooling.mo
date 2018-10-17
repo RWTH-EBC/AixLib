@@ -5,21 +5,23 @@ model SubstationCooling
     Modelica.Media.Interfaces.PartialMedium "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
 
-    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
 
-    parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
+    parameter Modelica.SIunits.Temperature deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "set temperature difference for cooling on the side of the thermal network";
+    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000;
+    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
+    "Fluid connector for connecting the substation to the warm line of the network"
     annotation (Placement(transformation(extent={{-152,-10},{-132,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)
+    "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
@@ -76,23 +78,26 @@ model SubstationCooling
     annotation (Placement(transformation(extent={{-24,42},{-12,54}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-8,64},{6,78}})));
-  Modelica.Blocks.Interfaces.RealInput coolingDemand
-    "in Watt (negative values for cooling)"
+  Modelica.Blocks.Interfaces.RealInput coolingDemand( final unit="W")
+    "Input for cooling demand profile of substation (negative values for cooling)"
     annotation (Placement(transformation(extent={{-166,60},{-126,100}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-34,-10},{-14,12}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet
+  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet( final unit="K")
+  "Supply temperature of the cooling circuit in the building"
     annotation (Placement(transformation(extent={{-166,10},{-126,50}})));
   Modelica.Blocks.Math.Add add(k2=+1)
     annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller( final unit="W")
+  "Power demand of chiller"
     annotation (Placement(transformation(extent={{100,86},{120,106}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump( final unit="W")
+  "Power demand of distribution pump"
     annotation (Placement(transformation(extent={{100,66},{120,86}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation
+  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation( final unit="W")
     annotation (Placement(transformation(extent={{100,46},{120,66}})));
   Modelica.Blocks.Math.Sum sum1(nin=1)
     annotation (Placement(transformation(extent={{60,46},{80,66}})));

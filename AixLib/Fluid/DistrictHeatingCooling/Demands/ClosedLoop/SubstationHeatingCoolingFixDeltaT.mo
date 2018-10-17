@@ -9,16 +9,16 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
 
     parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
-    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "Maximum heat demand for scaling of heat pump";
+    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "Maximum cooling demand for scaling of chiller (negative values)";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
+    parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "set temperature difference for heating on the site of thermal network";
-    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "set temperature difference for cooling on the side of the thermal network";
+    parameter Modelica.SIunits.Temperature deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
+    parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
-    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "nominal pressure drop";
+    parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
@@ -55,9 +55,11 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
 public
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
+    "Fluid connector for connecting the substation to the warm line of the network"
     annotation (Placement(transformation(extent={{-270,-10},{-250,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)
+    "Fluid connector for connecting the substation to the cold line of the network"
     annotation (Placement(transformation(extent={{210,-10},{230,10}}),
         iconTransformation(extent={{210,-10},{230,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
@@ -73,14 +75,18 @@ public
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
   Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet))
     annotation (Placement(transformation(extent={{-138,-104},{-126,-92}})));
-  Modelica.Blocks.Interfaces.RealInput HeatDemand
+  Modelica.Blocks.Interfaces.RealInput HeatDemand(unit = "W")
+  "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}),
         iconTransformation(extent={{152,68},{112,108}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet annotation (
+  Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K")
+  "Supply temperature of the heating circuit in the building"
+    annotation (
       Placement(transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
         origin={-270,-138}), iconTransformation(extent={{152,114},{112,154}})));
+
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
@@ -118,10 +124,14 @@ public
     addPowerToMedium=false,
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
-  Modelica.Blocks.Interfaces.RealInput CoolingDemand annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput CoolingDemand(unit = "W")
+  "Input for cooling demand profile of substation"
+    annotation (Placement(
         transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-176,40},
             {-136,80}})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet annotation (
+  Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit = "K")
+  "Supply temperature of cooling circuit in the building"
+    annotation (
       Placement(transformation(extent={{248,82},{208,122}}),
         iconTransformation(extent={{-176,110},{-136,150}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
