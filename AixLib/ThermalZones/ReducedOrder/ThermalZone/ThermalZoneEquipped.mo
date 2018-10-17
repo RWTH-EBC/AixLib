@@ -17,23 +17,20 @@ model ThermalZoneEquipped
     ATot > 0 or zoneParam.VAir > 0
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-66,-28},{-46,-8}})));
-  Building.Components.DryAir.VarAirExchange airExc(
-    final V=zoneParam.VAir) if
-    ATot > 0 or zoneParam.VAir > 0
-    "Heat flow due to ventilation"
+  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
+    ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
-  redeclare Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     humanSenHea(
     final ActivityType=3,
     final T0=zoneParam.T_start,
     final NrPeople=zoneParam.nrPeople,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
-    "Internal gains from persons"
-    annotation (choicesAllMatching=true,
+    "Internal gains from persons" annotation (choicesAllMatching=true,
       Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  redeclare Building.Components.Sources.InternalGains.Machines.Machines_DIN18599
+  redeclare Utilities.Sources.InternalGains.Machines.Machines_DIN18599
     machinesSenHea(
     final ratioConv=zoneParam.ratioConvectiveHeatMachines,
     final T0=zoneParam.T_start,
@@ -41,12 +38,11 @@ model ThermalZoneEquipped
     final NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  redeclare Building.Components.Sources.InternalGains.Lights.Lights_relative lights(
+  redeclare Utilities.Sources.InternalGains.Lights.Lights_relative lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
     final T0=zoneParam.T_start,
     final LightingPower=zoneParam.lightingPower,
-    final RoomArea=zoneParam.AZone) if ATot > 0
-    "Internal gains from light"
+    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
 protected
