@@ -7,10 +7,10 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-    parameter Real cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
-    parameter Real HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
-    parameter Real CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate HeatDemand_max "maximum heat demand for scaling of heatpump in Watt";
+    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "maximum cooling demand for scaling of chiller in Watt (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "set temperature difference for heating on the site of building";
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "set temperature difference for cooling on the building site";
@@ -148,17 +148,17 @@ public
     annotation (Placement(transformation(extent={{-58,120},{-72,134}})));
   Modelica.Blocks.Sources.Constant const2(k=-(cp_default*deltaT_coolingSet))
     annotation (Placement(transformation(extent={{-32,94},{-44,106}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{78,14},{58,34}})));
 equation
   connect(port_a,vol. ports[1])
