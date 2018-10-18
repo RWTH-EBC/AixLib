@@ -138,7 +138,7 @@ partial model PartialHeatPumpSystem
     "False to allow HP to run out of operational envelope"
     annotation (Dialog(tab="Security Control", group="Operational Envelope",
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
-  parameter Boolean use_opeEnvFroRec=true
+  parameter Boolean use_opeEnvFroRec=false
     "Use a the operational envelope given in the datasheet" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
@@ -149,11 +149,13 @@ partial model PartialHeatPumpSystem
       tab="Security Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
-  parameter Real tableUpp[:,2] "Upper boundary of envelope" annotation (Dialog(
+  parameter Real tableUpp[:,2]=[0,60; 5,70; 30,70]
+                               "Upper boundary of envelope" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
-  parameter Real tableLow[:,2] "Lower boundary of envelope" annotation (Dialog(
+  parameter Real tableLow[:,2]=[0,0; 30,0]
+                               "Lower boundary of envelope" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
@@ -419,9 +421,8 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
-          -15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
@@ -440,12 +441,12 @@ equation
       pattern=LinePattern.Dash));
   connect(port_b1, port_b1) annotation (Line(points={{100,60},{104,60},{104,60},
           {100,60}}, color={0,127,255}));
-  connect(T_oda, hPSystemController.T_oda) annotation (Line(points={{-115,119},
-          {-90,119},{-90,133},{-56.86,133}},color={0,0,127}));
+  connect(T_oda, hPSystemController.T_oda) annotation (Line(points={{-115,119},{
+          -90,119},{-90,133},{-56.86,133}}, color={0,0,127}));
   connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-40.2,93.1},
           {-40.2,66},{-70,66},{-70,49.6}}, color={0,0,127}));
-  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{
-          18.6,93.1},{18.6,66.4},{30.4,66.4}}, color={0,0,127}));
+  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{18.6,
+          93.1},{18.6,66.4},{30.4,66.4}},      color={0,0,127}));
   connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{38.2,93.1},
           {38.2,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
         color={0,0,127}));
@@ -457,8 +458,8 @@ equation
       points={{44,34},{82,34},{82,60},{100,60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(TAct, hPSystemController.TSup) annotation (Line(points={{-115,161},{
-          -88.5,161},{-88.5,147},{-56.86,147}}, color={0,0,127}));
+  connect(TAct, hPSystemController.TSup) annotation (Line(points={{-115,161},{-88.5,
+          161},{-88.5,147},{-56.86,147}},       color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,180}}), graphics={
         Rectangle(

@@ -44,16 +44,16 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
             {6,6}},
         rotation=-90,
-        origin={46,42})));
+        origin={46,44})));
   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
         -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-40,46})));
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-                    "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-10,-10},
-            {10,10}},
+                    "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-6,-6},
+            {6,6}},
         rotation=-90,
-        origin={80,-80})));
+        origin={-80,-88})));
   Utilities.Logical.SmoothSwitch switchPel
     "If HP is off, no heat will be exchanged"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -109,18 +109,18 @@ model LookUpTableND "N-dimensional table with data for heat pump"
         origin={-72,46})));
 equation
   connect(feedbackHeatFlowEvaporator.y, QEva)
-    annotation (Line(points={{80,-89},{80,-110}},
+    annotation (Line(points={{-80,-93.4},{-80,-110}},
                                                 color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-76},{0,-76},
           {0,-110}},
                color={0,0,127}));
   connect(switchPel.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{50,-71},
-          {66,-71},{66,-72},{80,-72}},       color={0,0,127}));
+          {50,-76},{-80,-76},{-80,-83.2}},   color={0,0,127}));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u2)
-    annotation (Line(points={{-50,-67},{-50,-80},{72,-80}},
+    annotation (Line(points={{-50,-67},{-50,-70},{-90,-70},{-90,-88},{-84.8,-88}},
                                                        color={0,0,127}));
-  connect(switchQCon.y, QCon) annotation (Line(points={{-50,-67},{-50,-67},{-50,
-          -80},{-80,-80},{-80,-82},{-80,-82},{-80,-110},{-80,-110}},
+  connect(switchQCon.y, QCon) annotation (Line(points={{-50,-67},{-50,-76},{80,
+          -76},{80,-110}},
                       color={0,0,127}));
 
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{-4,-24.6},{-4,
@@ -141,7 +141,7 @@ equation
   connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
           {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
   connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
-      points={{1.075,104.07},{46,104.07},{46,49.2}},
+      points={{1.075,104.07},{46,104.07},{46,51.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -178,7 +178,7 @@ equation
           -1.55431e-15,59.2},{-6,59.2},{-6,29.6},{-5.6,29.6}}, color={0,0,127}));
   connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
           -40,36},{5.6,36},{5.6,29.6}}, color={0,0,127}));
-  connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,35.4},{46,
+  connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
           32},{0,32},{0,29.6}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),

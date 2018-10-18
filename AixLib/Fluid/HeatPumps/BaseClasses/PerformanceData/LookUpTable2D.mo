@@ -57,24 +57,19 @@ model LookUpTable2D "Performance data coming from manufacturer"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
-        origin={76,-76})));
+        origin={-80,-80})));
   Modelica.Blocks.Math.Add calcRedQCon
     "Based on redcued heat flow to the evaporator, the heat flow to the condenser is also reduced"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
-        origin={-80,-86})));
+        origin={80,-88})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
         Modelica.Constants.eps) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
         origin={-8,78})));
 
-  Modelica.Blocks.Math.Gain gain(final k=-1)
-    "Negate QEva to match definition of heat flow direction"
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
-        rotation=270,
-        origin={76,-92})));
 protected
   Modelica.Blocks.Sources.RealExpression realCorr(final y=scalingFactor*
         sigBusHP.N)
@@ -89,10 +84,10 @@ protected
   Real maxSou = max(dataTable.tableP_ele[1,2:end]);
   Real maxSup = max(dataTable.tableP_ele[2:end,1]);
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-    "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-10,-10},
-            {10,10}},
+    "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-5,-5},
+            {5,5}},
         rotation=270,
-        origin={80,-54})));
+        origin={-83,-63})));
   Utilities.Logical.SmoothSwitch switchPel
     "If HP is off, no heat will be exchanged"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -137,7 +132,7 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(switchPel.y, Pel) annotation (Line(points={{-56,-45},{-56,-80},{0,-80},
+  connect(switchPel.y, Pel) annotation (Line(points={{-56,-45},{-56,-52},{0,-52},
           {0,-110}},                     color={0,0,127}));
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{6,23.2},{6,-16},
           {44,-16},{44,-22}},     color={0,0,127}));
@@ -153,23 +148,13 @@ equation
           64,18.6},{64,7.2},{63.6,7.2}},color={0,0,127}));
   connect(switchQCon.u1, nTimesQCon.y)
     annotation (Line(points={{60,-22},{60,-6.6}},  color={0,0,127}));
-  connect(sigBusHP.iceFac, proRedQEva.u2) annotation (Line(
-      points={{1.075,104.07},{2,104.07},{2,46},{18,46},{18,-70},{72.4,-70},{
-          72.4,-68.8}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(feedbackHeatFlowEvaporator.y, proRedQEva.u1) annotation (Line(points={{80,-63},
-          {80,-68},{79.6,-68},{79.6,-68.8}},           color={0,0,127}));
-  connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{-56,-45},{-82,
-          -45},{-82,-78.8},{-83.6,-78.8}}, color={0,0,127}));
+  connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{-56,-45},{-56,
+          -52},{0,-52},{0,-80.8},{76.4,-80.8}},
+                                           color={0,0,127}));
   connect(QCon, calcRedQCon.y)
-    annotation (Line(points={{-80,-110},{-80,-92.6}}, color={0,0,127}));
-  connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{76,-82.6},{66,
-          -82.6},{66,-88},{-60,-88},{-60,-62},{-76.4,-62},{-76.4,-78.8}}, color=
+    annotation (Line(points={{80,-110},{80,-94.6}},   color={0,0,127}));
+  connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{-80,-86.6},{
+          -80,-92},{-6,-92},{-6,-74},{83.6,-74},{83.6,-80.8}},            color=
          {0,0,127}));
   connect(sigBusHP.N, greaterThreshold.u) annotation (Line(
       points={{1.075,104.07},{-8,104.07},{-8,85.2}},
@@ -184,17 +169,28 @@ equation
   connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-8,71.4},
           {-8,48},{-20,48},{-20,-12},{52,-12},{52,-22}}, color={255,0,255}));
   connect(switchQCon.y, feedbackHeatFlowEvaporator.u1)
-    annotation (Line(points={{52,-45},{52,-46},{80,-46}}, color={0,0,127}));
+    annotation (Line(points={{52,-45},{52,-52},{-83,-52},{-83,-59}},
+                                                          color={0,0,127}));
   connect(switchPel.y, feedbackHeatFlowEvaporator.u2)
-    annotation (Line(points={{-56,-45},{-56,-54},{72,-54}}, color={0,0,127}));
+    annotation (Line(points={{-56,-45},{-56,-52},{-92,-52},{-92,-63},{-87,-63}},
+                                                            color={0,0,127}));
   connect(realCorr.y, nTimesPel.u1) annotation (Line(points={{-14,23},{-14,12},{
           -42.8,12},{-42.8,5.4}}, color={0,0,127}));
   connect(realCorr.y, nTimesQCon.u2) annotation (Line(points={{-14,23},{-14,12},
           {56.4,12},{56.4,7.2}}, color={0,0,127}));
-  connect(proRedQEva.y, gain.u)
-    annotation (Line(points={{76,-82.6},{76,-87.2}}, color={0,0,127}));
-  connect(QEva, gain.y) annotation (Line(points={{80,-110},{80,-96.4},{76,-96.4}},
-        color={0,0,127}));
+  connect(proRedQEva.y, QEva)
+    annotation (Line(points={{-80,-86.6},{-80,-110}}, color={0,0,127}));
+  connect(feedbackHeatFlowEvaporator.y, proRedQEva.u2) annotation (Line(points=
+          {{-83,-67.5},{-83,-69.7},{-83.6,-69.7},{-83.6,-72.8}}, color={0,0,127}));
+  connect(sigBusHP.N, proRedQEva.u1) annotation (Line(
+      points={{1.075,104.07},{1.075,46},{-30,46},{-30,-70},{-76.4,-70},{-76.4,
+          -72.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),

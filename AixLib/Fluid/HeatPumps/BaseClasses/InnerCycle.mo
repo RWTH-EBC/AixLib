@@ -58,9 +58,23 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-76})));
+protected
   Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_revHP
     "If no heating is used, the switches may still be connected"
     annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
+public
+  Modelica.Blocks.Math.Gain gainCon(final k=-1) if use_revHP
+    "Negate QCon to match definition of heat flow direction" annotation (
+      Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=0,
+        origin={58,-20})));
+  Modelica.Blocks.Math.Gain gainEva(final k=-1)
+    "Negate QEva to match definition of heat flow direction" annotation (
+      Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=180,
+        origin={-56,-6})));
 equation
   assert(use_revHP or (use_revHP==false and sigBusHP.mode==true), "Can't turn to chilling on irreversible HP", level = AssertionLevel.error);
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
@@ -90,7 +104,7 @@ equation
   connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-92,-14},{-92,
           0},{-110,0}}, color={0,0,127}));
   connect(PerformanceDataHeater.QCon, switchQCon.u1)
-    annotation (Line(points={{18.4,17.2},{18.4,-4},{70,-4}}, color={0,0,127}));
+    annotation (Line(points={{61.6,17.2},{61.6,-4},{70,-4}}, color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-015,-87},{-2.22045e-015,
           -110.5},{0.5,-110.5}}, color={0,0,127}));
   connect(sigBusHP.mode, switchPel.u2) annotation (Line(
@@ -105,14 +119,8 @@ equation
   connect(PerformanceDataChiller.Pel, switchPel.u3) annotation (Line(points={{-46,
           17.2},{-46,-30},{-8,-30},{-8,-64}}, color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QCon, switchQCon.u3) annotation (Line(
-      points={{-67.6,17.2},{-67.6,4},{-4,4},{-4,-20},{70,-20}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataHeater.QEva, switchQEva.u1) annotation (Line(points={{61.6,
-          17.2},{61.6,-6},{-68,-6}}, color={0,0,127}));
-  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-24.4,
-          17.2},{-24.4,-22},{-68,-22}},       color={0,0,127},
+  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-67.6,
+          17.2},{-67.6,-22},{-68,-22}},       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP, PerformanceDataChiller.sigBusHP) annotation (Line(
       points={{1,103},{1,86},{-45.73,86},{-45.73,77.12}},
@@ -124,11 +132,25 @@ equation
   connect(constZero.y, switchPel.u3)
     annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
   connect(constZero.y, switchQEva.u3) annotation (Line(points={{-59,-64},{-52,
-          -64},{-52,-22},{-68,-22}}, color={0,0,127}));
+          -64},{-52,-22},{-68,-22}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(constZero.y, switchQCon.u3) annotation (Line(points={{-59,-64},{-52,
-          -64},{-52,-38},{70,-38},{70,-20}}, color={0,0,127}));
+          -64},{-52,-38},{70,-38},{70,-20}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(switchQCon.y, QCon) annotation (Line(points={{93,-12},{94,-12},{94,0},
           {110,0}}, color={0,0,127}));
+  connect(gainEva.y, switchQEva.u1)
+    annotation (Line(points={{-60.4,-6},{-68,-6}}, color={0,0,127}));
+  connect(switchQCon.u3, gainCon.y) annotation (Line(
+      points={{70,-20},{62.4,-20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PerformanceDataChiller.QCon, gainCon.u) annotation (Line(
+      points={{-24.4,17.2},{-24.4,0},{-24,0},{-24,-20},{53.2,-20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{18.4,
+          17.2},{18.4,-6},{-51.2,-6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
