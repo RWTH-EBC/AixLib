@@ -1,7 +1,4 @@
 within AixLib.Controls.HeatPump.BaseClasses;
-class partialTSetToNSet
-end partialTSetToNSet;
-
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
  Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
