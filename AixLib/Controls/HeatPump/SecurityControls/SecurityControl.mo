@@ -38,12 +38,12 @@ block SecurityControl "Block including all security levels"
   parameter Real minIceFac "Minimal value above which no defrost is necessary"
     annotation (Dialog(group="Defrost", enable=use_deFro));
   parameter Boolean use_chiller=true
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
+    "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(group="Defrost", enable=use_deFro),
                                         choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
-    annotation (Dialog(enable=use_chiller and use_deFro, group="Defrost"));
+    annotation (Dialog(enable=not use_chiller and use_deFro, group="Defrost"));
   parameter Boolean use_antFre=true
     "True if anti freeze control is part of security control"
     annotation (Dialog(group="Anti Freeze Control"), choices(checkBox=true));

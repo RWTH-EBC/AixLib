@@ -1,13 +1,18 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model IcingBlock
   "Block which decreases evaporator power by an icing factor"
-
-  replaceable function iceFunc =
-      AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct
+  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
+  parameter Integer hourDay=16
+                            "Hour of the day";
+  parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2016
+    "Enumeration for choosing how reference time (time = 0) should be defined";
+  parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
+  replaceable function iceFunc = Functions.IcingFactor.BasicIcingApproach
                                                                        constrainedby
     AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct                                                                           "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
-  Modelica.Blocks.Sources.RealExpression calcIceFac(final y=iceFac_internal)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Sources.RealExpression calcIceFac(final y=if (T_oda < 278.15
+         and calTim.hour == hourDay) then 0.3 else 1)
+    annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Interfaces.RealInput T_flow_ev
     "Temperature at evaporator inlet"
     annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
@@ -34,7 +39,7 @@ protected
 equation
   iceFac_internal = iceFunc(T_flow_ev,T_ret_ev,T_oda,m_flow_ev);
   connect(calcIceFac.y, iceFac)
-    annotation (Line(points={{11,0},{110,0}}, color={0,0,127}));
+    annotation (Line(points={{1,0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           lineColor={0,0,255},

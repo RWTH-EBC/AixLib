@@ -1,5 +1,5 @@
 within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
-model BoundaryMap
+block BoundaryMap
   "A function yielding true if input parameters are out of the charasteristic map"
   extends BoundaryMapIcon(final iconMin=-70,
   final iconMax=70);

@@ -1,5 +1,5 @@
 within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
-partial model BoundaryMapIcon "PartialModel for the icon of a boundary map"
+partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
 
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));

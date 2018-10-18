@@ -3,7 +3,7 @@ block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
   parameter Boolean use_chiller=true
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
+    "True if defrost operates by changing mode to cooling. False to use an electrical heater" annotation(choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
@@ -70,14 +70,12 @@ block DefrostControl
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     "If a chiller is used to defrost, mode will be false"
     annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
-  Modelica.Blocks.Sources.BooleanConstant conFalseNotUseChi(final k=false) if
+  Modelica.Blocks.Sources.BooleanConstant conFalseNotUseChi(final k=true) if
                                                                           not
-    use_chiller
-    "If ice is melted with an additional heater, HP can continue running"
+    use_chiller "Just to omit warnings"
     annotation (Placement(transformation(extent={{28,-48},{38,-38}})));
-  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=true) if
-    use_chiller
-    "If ice is melted with an additional heater, HP can continue running"
+  Modelica.Blocks.Sources.BooleanConstant conTrueUseChi(final k=false) if
+    use_chiller "Set mode to false to simulate the defrost cycle"
     annotation (Placement(transformation(extent={{28,-66},{38,-56}})));
 equation
   connect(conOne.y, swiErr.u3) annotation (Line(points={{36.6,-6},{38,-6},{38,4},

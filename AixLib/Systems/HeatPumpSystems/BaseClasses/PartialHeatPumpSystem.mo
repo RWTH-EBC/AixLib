@@ -168,17 +168,17 @@ partial model PartialHeatPumpSystem
       group="Defrost",
       enable=use_sec and use_deFro));
   parameter Boolean use_chiller=false
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
+    "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(
       tab="Security Control",
       group="Defrost",
       enable=use_sec and use_deFro), choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice. Insert a formular"
+    "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(
       tab="Security Control",
       group="Defrost",
-      enable=use_sec and use_deFro and use_chiller));
+      enable=use_sec and use_deFro and not use_chiller));
   parameter Boolean use_antFre=false
     "True if anti freeze control is part of security control" annotation (
       Dialog(
@@ -378,6 +378,7 @@ partial model PartialHeatPumpSystem
     final use_minRunTime=use_minRunTime,
     final minRunTime=minRunTime,
     final use_minLocTime=use_minLocTime,
+    final minLocTime=minLocTime,
     final pre_n_start=pre_n_start,
     final use_opeEnv=use_opeEnv,
     final use_opeEnvFroRec=use_opeEnvFroRec,
@@ -391,7 +392,7 @@ partial model PartialHeatPumpSystem
     final use_antFre=use_antFre,
     final TantFre=TantFre,
     final use_runPerHou=use_runPerHou,
-    final maxRunPerHou=5)
+    final maxRunPerHou=maxRunPerHou)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
   Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));

@@ -1,9 +1,6 @@
 within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
-  extends AixLib.Controls.HeatPump.SecurityControls.BaseClasses.BoundaryMapIcon(
-  final iconMin = 10,
-  final iconMax = 70);
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
@@ -101,7 +98,15 @@ model HPSystemController
     "False to allow HP to run out of operational envelope"
     annotation (Dialog(tab="Security Control", group="Operational Envelope",
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
-
+  parameter Boolean use_opeEnvFroRec=true
+    "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable "Data Table of HP"
+                       annotation(choicesAllMatching = true, Dialog(tab="Security Control", group="Operational Envelope",enable=
+          use_opeEnvFroRec));
+  parameter Real tableLow[:,2] "Table matrix (grid = first column; e.g., table=[0,2])" annotation(choicesAllMatchning=true, Dialog(tab="Security Control", group="Operational Envelope",
+        enable=not use_opeEnvFroRec));
+  parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
+    annotation (Dialog(tab="Security Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Security Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -111,17 +116,17 @@ model HPSystemController
       group="Defrost",
       enable=use_sec and use_deFro));
   parameter Boolean use_chiller=false
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
+    "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(
       tab="Security Control",
       group="Defrost",
       enable=use_sec and use_deFro), choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice. Insert a formular"
+    "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(
       tab="Security Control",
       group="Defrost",
-      enable=use_sec and use_deFro and use_chiller));
+      enable=use_sec and use_deFro and not use_chiller));
   parameter Boolean use_antFre=false
     "True if anti freeze control is part of security control" annotation (
       Dialog(
@@ -367,6 +372,11 @@ equation
       color={255,0,255},
       pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={28,108,200},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid),
                             Text(
           extent={{-100,26},{100,-18}},
           lineColor={0,0,127},
