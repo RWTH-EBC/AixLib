@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
 model HeatingCoil
 
- parameter Integer dis_HC;
+ parameter Integer dis_HC(min=1);
 
   parameter Media.BaseClasses.MediumSimple medium_HC=Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
@@ -22,7 +22,7 @@ model HeatingCoil
     parameterPipe=pipeRecordHC,
     T_0=T_start,
     length=lengthHC,
-    nNodes(min=1)=dis_HC,
+    nNodes=dis_HC,
     alphaInsideFix=alphaInsideFix,
     calculateAlpha=true)  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
