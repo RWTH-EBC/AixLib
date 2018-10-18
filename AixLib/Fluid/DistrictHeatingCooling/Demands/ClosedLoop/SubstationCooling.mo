@@ -50,10 +50,10 @@ model SubstationCooling
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     allowFlowReversal2=false,
-    QEva_flow_nominal=CoolingDemand_max,
     dTEva_nominal=-5,
     dTCon_nominal=6,
-    etaCarnot_nominal=0.3)
+    etaCarnot_nominal=0.3,
+    QEva_flow_nominal=coolingDemand_max)
                       annotation (Placement(transformation(
         extent={{-15,10},{15,-10}},
         rotation=180,
@@ -143,11 +143,11 @@ equation
           {60,30},{60,-39},{23,-39}},color={0,0,127}));
   connect(division1.y, pumpCooling.m_flow_in)
     annotation (Line(points={{6.7,71},{38,71},{38,12}}, color={0,0,127}));
-  connect(chiller.P, powerConsumptionChiller) annotation (Line(points={{-11.5,
+  connect(chiller.P, powerDemandChiller) annotation (Line(points={{-11.5,
           -48},{-54,-48},{-54,96},{110,96}},                 color={0,0,127}));
-  connect(pumpCooling.P, powerConsumptionPump) annotation (Line(points={{27,9},
+  connect(pumpCooling.P, powerDemandPump) annotation (Line(points={{27,9},
           {20,9},{20,76},{110,76}}, color={0,0,127}));
-  connect(sum1.y, powerConsumptionSubstation)
+  connect(sum1.y, powerDemandSubstation)
     annotation (Line(points={{81,56},{110,56}}, color={0,0,127}));
   connect(chiller.P, sum1.u[1]) annotation (Line(points={{-11.5,-48},{-54,-48},{
           -54,56},{58,56}},  color={0,0,127}));

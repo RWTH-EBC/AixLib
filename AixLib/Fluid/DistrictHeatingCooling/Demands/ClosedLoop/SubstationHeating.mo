@@ -65,13 +65,13 @@ public
         iconTransformation(extent={{150,-10},{170,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
-    QCon_flow_nominal=HeatDemand_max,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
     show_T=true,
     etaCarnot_nominal=0.5,
-    dTEva_nominal=-5)
+    dTEva_nominal=-5,
+    QCon_flow_nominal=heatDemand_max)
     annotation (Placement(transformation(extent={{6,-20},{-14,-40}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-26,62},{-40,76}})));
@@ -147,13 +147,13 @@ equation
           {70,40},{70,68},{58,68}}, color={0,0,127}));
   connect(division1.u1, add1.y) annotation (Line(points={{-24.6,73.2},{5.7,73.2},
           {5.7,74},{35,74}}, color={0,0,127}));
-  connect(heaPum.P, powerConsumptionHP) annotation (Line(points={{-15,-30},{
+  connect(heaPum.P, powerDemandHP) annotation (Line(points={{-15,-30},{
           -20,-30},{-20,40},{90,40},{90,106},{168,106}},   color={0,0,127}));
-  connect(pumpHeating.P, powerConsumptionPump) annotation (Line(points={{-45,
+  connect(pumpHeating.P, powerDemandPump) annotation (Line(points={{-45,
           9},{66,9},{66,86},{168,86}}, color={0,0,127}));
   connect(heaPum.P, sumPower.u[1]) annotation (Line(points={{-15,-30},{-20,-30},
           {-20,40},{90,40},{90,50},{106,50}},      color={0,0,127}));
-  connect(sumPower.y, powerConsumptionSubstation)
+  connect(sumPower.y, powerDemandSubstation)
     annotation (Line(points={{129,50},{168,50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{160,120}}), graphics={

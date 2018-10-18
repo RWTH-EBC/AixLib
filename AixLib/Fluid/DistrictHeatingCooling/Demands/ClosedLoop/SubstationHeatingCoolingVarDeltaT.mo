@@ -64,12 +64,12 @@ public
         iconTransformation(extent={{210,-10},{230,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
-    QCon_flow_nominal=HeatDemand_max,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
     show_T=true,
-    etaCarnot_nominal=0.5)
+    etaCarnot_nominal=0.5,
+    QCon_flow_nominal=heatDemand_max)
     annotation (Placement(transformation(extent={{10,-20},{-10,-40}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
@@ -110,13 +110,13 @@ public
     redeclare package Medium2 = Medium,
     allowFlowReversal1=true,
     allowFlowReversal2=true,
-    QEva_flow_nominal=CoolingDemand_max,
     use_eta_Carnot_nominal=true,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     dTEva_nominal=-5,
     dTCon_nominal=6,
-    etaCarnot_nominal=0.4)
+    etaCarnot_nominal=0.4,
+    QEva_flow_nominal=coolingDemand_max)
     annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
@@ -293,11 +293,11 @@ equation
           {-148,-158},{-148,-98},{-139.2,-98}}, color={0,0,127}));
   connect(deltaT_coolingGridSet, const1.u) annotation (Line(points={{228,142},
           {152,142},{152,90},{79.2,90}}, color={0,0,127}));
-  connect(chi.P, powerConsumptionChiller) annotation (Line(points={{-25,30},{-166,
+  connect(chi.P, powerDemandChiller) annotation (Line(points={{-25,30},{-166,
           30},{-166,144},{-270,144}},      color={0,0,127}));
-  connect(heaPum.P, powerConsumptionHP) annotation (Line(points={{-11,-30},{-174,
+  connect(heaPum.P, powerDemandHP) annotation (Line(points={{-11,-30},{-174,
           -30},{-174,118},{-270,118}},    color={0,0,127}));
-  connect(sum1.y, powerConsumptionSubstation)
+  connect(sum1.y, powerDemandSubstation)
     annotation (Line(points={{-225,80},{-270,80}}, color={0,0,127}));
   //Power Consumptin Calculation
   connect(chi.P, sum1.u[1]);
