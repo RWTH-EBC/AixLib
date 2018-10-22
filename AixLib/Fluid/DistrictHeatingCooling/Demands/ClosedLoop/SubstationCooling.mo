@@ -7,7 +7,7 @@ model SubstationCooling
 
     parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Specific heat capacity of Water (cp-value)";
 
-    parameter Modelica.SIunits.HeatFlowRate CoolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
+    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller in Watt (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
@@ -50,10 +50,10 @@ model SubstationCooling
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     allowFlowReversal2=false,
-    QEva_flow_nominal=CoolingDemand_max,
     dTEva_nominal=-5,
     dTCon_nominal=6,
-    etaCarnot_nominal=0.3)
+    etaCarnot_nominal=0.3,
+    QEva_flow_nominal=coolingDemand_max)
                       annotation (Placement(transformation(
         extent={{-15,10},{15,-10}},
         rotation=180,
@@ -91,13 +91,13 @@ model SubstationCooling
     annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller(unit="W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandChiller(unit="W")
   "Power demand of chiller"
     annotation (Placement(transformation(extent={{100,86},{120,106}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionPump(unit="W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandPump(unit="W")
   "Power demand of distribution pump"
     annotation (Placement(transformation(extent={{100,66},{120,86}})));
-  Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit="W")
+  Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit="W")
     annotation (Placement(transformation(extent={{100,46},{120,66}})));
   Modelica.Blocks.Math.Sum sum1(nin=1)
     annotation (Placement(transformation(extent={{60,46},{80,66}})));
@@ -143,11 +143,11 @@ equation
           {60,30},{60,-39},{23,-39}},color={0,0,127}));
   connect(division1.y, pumpCooling.m_flow_in)
     annotation (Line(points={{6.7,71},{38,71},{38,12}}, color={0,0,127}));
-  connect(chiller.P, powerConsumptionChiller) annotation (Line(points={{-11.5,
+  connect(chiller.P, powerDemandChiller) annotation (Line(points={{-11.5,
           -48},{-54,-48},{-54,96},{110,96}},                 color={0,0,127}));
-  connect(pumpCooling.P, powerConsumptionPump) annotation (Line(points={{27,9},
+  connect(pumpCooling.P, powerDemandPump) annotation (Line(points={{27,9},
           {20,9},{20,76},{110,76}}, color={0,0,127}));
-  connect(sum1.y, powerConsumptionSubstation)
+  connect(sum1.y, powerDemandSubstation)
     annotation (Line(points={{81,56},{110,56}}, color={0,0,127}));
   connect(chiller.P, sum1.u[1]) annotation (Line(points={{-11.5,-48},{-54,-48},{
           -54,56},{58,56}},  color={0,0,127}));

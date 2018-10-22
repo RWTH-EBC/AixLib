@@ -1,40 +1,45 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
 model IdealPlantWithStorage
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
       annotation (choicesAllMatching = true);
 
-      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000;
+      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+      "Nominal pressure drop";
 
       parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
-      parameter Modelica.SIunits.Volume V_Tank "Volume of thermal storage tank in m³";
+      parameter Modelica.SIunits.Volume V_Tank "Volume of thermal storage tank";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
+     "Fluid connector for connecting the ideal plant with storage to the cold line of the network"
     annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)
+     "Fluid connector for connecting the ideal plant with storage to the warm line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet preOut(redeclare package Medium
-      = Medium, use_X_wSet=false,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet preOut(redeclare package Medium =
+        Medium, use_X_wSet=false,
     dp_nominal=dp_nominal,
     use_TSet=true,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-66,-10},{-86,10}})));
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet preOut1(redeclare package Medium
-      = Medium, use_X_wSet=false,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet preOut1(redeclare package Medium =
+        Medium, use_X_wSet=false,
     dp_nominal=dp_nominal,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{42,-10},{62,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-92,-10},{-112,10}})));
-  Modelica.Blocks.Interfaces.RealInput T_coolingSet
+  Modelica.Blocks.Interfaces.RealInput T_coolingSet(unit = "K")
+  "Maximum supply temperature of the cold line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-148,30},{-108,70}})));
-  Modelica.Blocks.Interfaces.RealInput T_heatingSet
+  Modelica.Blocks.Interfaces.RealInput T_heatingSet(unit = "K")
+  "Minimum supply temperature of the hot line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-148,60},{-108,100}})));
   AixLib.Fluid.Storage.Stratified    tan(
     allowFlowReversal=true,
@@ -50,11 +55,11 @@ model IdealPlantWithStorage
                                                  redeclare package Medium =
         Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTemStoHea(redeclare package Medium
-      = Medium, m_flow_nominal=2)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemStoHea(redeclare package Medium =
+        Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{26,-10},{6,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTemStoCoo(redeclare package Medium
-      = Medium, m_flow_nominal=2)
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTemStoCoo(redeclare package Medium =
+        Medium, m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-30,-10},{-50,10}})));
   Modelica.Blocks.Math.Min min
     annotation (Placement(transformation(extent={{-44,28},{-56,40}})));
@@ -107,5 +112,11 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.None)}),                       Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{100,
-            100}})));
+            100}})),
+    Documentation(revisions="<html>
+<ul>
+<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+Implemented </li>
+</ul>
+</html>"));
 end IdealPlantWithStorage;
