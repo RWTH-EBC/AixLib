@@ -11,7 +11,7 @@ partial model PartialHeatTransferLayers
   final outer replaceable record Medium =
        FastHVAC.Media.WaterSimple "Medium model"   annotation(choicesAllMatching);
 
-final outer replaceable parameter
+  final outer replaceable parameter
     AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l()
     annotation (choicesAllMatching);

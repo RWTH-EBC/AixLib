@@ -7,10 +7,8 @@ partial model PartialHeatTransferLayers "Partial for storage heat transfer model
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model" annotation(choicesAllMatching);
 
-  replaceable parameter
-    AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_New_2000l()
-      "Storage data record"
+  replaceable parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition
+    data=AixLib.DataBase.Storage.Generic_New_2000l() "Storage data record"
     annotation (choicesAllMatching);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
