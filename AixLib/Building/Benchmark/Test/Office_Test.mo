@@ -25,8 +25,6 @@ replaceable package Medium_Water =
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1
                                                                          [5](T=293.15)
     annotation (Placement(transformation(extent={{-92,-34},{-72,-14}})));
-  Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT(riseTime_valve=1)
-    annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2
                                                                          [5](T=293.15)
     annotation (Placement(transformation(extent={{-22,-28},{-2,-8}})));

@@ -4,52 +4,6 @@ model Generation_Test
     AixLib.Media.Water "Medium in the component";
   Regelungsbenchmark.Controller.Testcontroller testcontroller
     annotation (Placement(transformation(extent={{-100,68},{-80,88}})));
-  Generation.Generation generation(
-    v_nominal_hotwater=1.692,
-    m_flow_nominal_hotwater=6.307,
-    v_nominal_warmwater=1.543,
-    m_flow_nominal_warmwater=7.819,
-    v_nominal_coldwater=1.567,
-    m_flow_nominal_coldwater=7.774,
-    m_flow_nominal_generation_hot=3.805,
-    factor_heatpump_model_small=3,
-    factor_heatpump_model_big=6,
-    vol_small=0.012,
-    vol_big=0.024,
-    m_flow_nominal_generation_warmwater=4.951,
-    m_flow_nominal_generation_coldwater=3.914,
-    m_flow_nominal_generation_aircooler=4.951,
-    Probe_depth=120,
-    n_probes=1,
-    pipe_length_hotwater=25,
-    pipe_length_warmwater=25,
-    pipe_length_coldwater=25,
-    riseTime_valve=2,
-    pipe_wall_thickness_hotwater=0.004,
-    pipe_insulation_thickness_hotwater=0.02,
-    pipe_insulation_conductivity_hotwater=0.05,
-    pipe_wall_thickness_warmwater=0.004,
-    pipe_insulation_thickness_warmwater=0.02,
-    pipe_insulation_conductivity_warmwater=0.05,
-    pipe_wall_thickness_coldwater=0.0036,
-    pipe_insulation_thickness_coldwater=0.02,
-    pipe_insulation_conductivity_coldwater=0.05,
-    m_flow_nominal_generation_air_max=100,
-    m_flow_nominal_generation_air_min=10,
-    alphaHC1_warm=500,
-    alphaHC2_warm=500,
-    alphaHC1_cold=500,
-    R_loss_small=50,
-    R_loss_big=100,
-    dpHeatexchanger_nominal=20000,
-    dpValve_nominal_generation_hot=227000,
-    T_conMax_big=328.15,
-    T_conMax_small=328.15,
-    dpValve_nominal_warmwater=285000,
-    dpValve_nominal_coldwater=200000,
-    dpValve_nominal_generation_aircooler=60000,
-    Earthtemperature_start=283.15)
-    annotation (Placement(transformation(extent={{-34,-58},{-14,-38}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=300)
     annotation (Placement(transformation(extent={{72,64},{92,84}})));
   BusSystem.Bus_measure measureBus1
@@ -62,19 +16,6 @@ model Generation_Test
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=
         293.15)
     annotation (Placement(transformation(extent={{-94,-78},{-74,-58}})));
-  Transfer.Transfer_TBA.Full_Transfer_TBA full_Transfer_TBA(
-    riseTime_valve=2,
-    m_flow_nominal_openplanoffice=2.516,
-    m_flow_nominal_conferenceroom=0.19,
-    m_flow_nominal_multipersonoffice=0.378,
-    m_flow_nominal_canteen=1.061,
-    m_flow_nominal_workshop=1.061,
-    dp_Valve_nominal_openplanoffice=10000,
-    dp_Valve_nominal_conferenceroom=10000,
-    dp_Valve_nominal_multipersonoffice=10000,
-    dp_Valve_nominal_canteen=10000,
-    dp_Valve_nominal_workshop=10000)
-    annotation (Placement(transformation(extent={{58,-60},{78,-40}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2[5](T=
         293.15)
     annotation (Placement(transformation(extent={{8,-36},{28,-16}})));

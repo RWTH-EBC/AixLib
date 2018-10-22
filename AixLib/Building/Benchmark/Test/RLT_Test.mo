@@ -37,8 +37,6 @@ model RLT_Test
     annotation (Placement(transformation(extent={{-42,-40},{-22,-20}})));
   BusSystem.Bus_measure measureBus1
     annotation (Placement(transformation(extent={{-4,54},{36,94}})));
-  Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT(riseTime_valve=1)
-    annotation (Placement(transformation(extent={{46,-4},{66,16}})));
   Fluid.Sources.MassFlowSource_T boundary2(
     m_flow=1,
     nPorts=1,

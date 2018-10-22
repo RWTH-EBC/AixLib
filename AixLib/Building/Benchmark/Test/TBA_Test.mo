@@ -20,19 +20,6 @@ model TBA_Test
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature[5](T=
         293.15)
     annotation (Placement(transformation(extent={{-76,32},{-56,52}})));
-  Transfer.Transfer_TBA.Full_Transfer_TBA full_Transfer_TBA(
-    riseTime_valve=1,
-    dp_Valve_nominal_openplanoffice=100000,
-    m_flow_nominal_openplanoffice=1,
-    dp_Valve_nominal_conferenceroom=100000,
-    m_flow_nominal_conferenceroom=1,
-    dp_Valve_nominal_multipersonoffice=100000,
-    m_flow_nominal_multipersonoffice=1,
-    dp_Valve_nominal_canteen=100000,
-    m_flow_nominal_canteen=1,
-    dp_Valve_nominal_workshop=100000,
-    m_flow_nominal_workshop=1)
-    annotation (Placement(transformation(extent={{62,-8},{82,12}})));
   Fluid.Sources.Boundary_pT bou1(
     redeclare package Medium = Medium_Water,
     p=100000,

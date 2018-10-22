@@ -1,7 +1,5 @@
 within AixLib.Building.Benchmark.Test;
 model Full_Transfer_TBA
-  Transfer.Transfer_TBA.TBA_Pipe OpenPlanOffice(wall_length=40, wall_height=30)
-    annotation (Placement(transformation(extent={{70,40},{90,60}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"

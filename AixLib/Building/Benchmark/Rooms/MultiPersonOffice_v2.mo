@@ -131,11 +131,6 @@ model MultiPersonOffice_v2
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={20,88})));
-  WallTemp wallTemp5(AngeFactor=0.1739 + 2*0.015) annotation (Placement(
-        transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=180,
-        origin={52,-6})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
     annotation (Placement(transformation(extent={{6,-46},{26,-26}})));
 equation
@@ -202,8 +197,6 @@ equation
   connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points=
          {{20,95.2},{20,98},{-8,98},{-8,48},{-60,48},{-60,-59.9},{-99.9,-59.9}},
         color={0,0,127}));
-  connect(wallTemp5.thermStarComb1, EastWallToOpenPlanOffice.thermStarComb_inside)
-    annotation (Line(points={{56,-6},{66,-6}}, color={191,0,0}));
   connect(temperatureSensor1.port, thermStar_Demux.star) annotation (Line(
         points={{6,-36},{0,-36},{0,-9.6},{-8.2,-9.6}}, color={191,0,0}));
   connect(temperatureSensor1.T, measureBus.StrahlungTemp_Multipersonoffice)
