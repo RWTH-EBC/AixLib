@@ -8,30 +8,31 @@ model ControllerTFlexibilityElectricHeating
 
   Modelica.Blocks.Interfaces.RealInput T_setNormalOperation(unit="K")
     "Supply temperature input for normal network operation, could be a constant value or a heating curve based on the outdoor air temperature."
-    annotation (Placement(transformation(extent={{-140,10},{-100,50}})));
+    annotation (Placement(transformation(extent={{-138,-80},{-98,-40}})));
   Modelica.Blocks.Interfaces.BooleanInput electricitySignal
     "Input indicating whether there is a surplus of renewable electricity Electricity (true: renewable energy available)"
-    annotation (Placement(transformation(extent={{-140,-48},{-100,-8}})));
+    annotation (Placement(transformation(extent={{-138,-10},{-98,30}})));
   Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{-46,-38},{-26,-18}})));
+    annotation (Placement(transformation(extent={{-44,0},{-24,20}})));
   Modelica.Blocks.Sources.Constant const(k=0)
-    annotation (Placement(transformation(extent={{-92,-70},{-72,-50}})));
+    annotation (Placement(transformation(extent={{-88,-20},{-68,0}})));
   Modelica.Blocks.Sources.Constant const1(k=T_maxNetwork)
-    annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  Modelica.Blocks.Math.Max max
-    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    annotation (Placement(transformation(extent={{-88,20},{-68,40}})));
+  Modelica.Blocks.Interfaces.RealOutput T_setElectricHeater
+    annotation (Placement(transformation(extent={{100,20},{120,40}})));
 equation
   connect(electricitySignal, switch1.u2)
-    annotation (Line(points={{-120,-28},{-48,-28}}, color={255,0,255}));
-  connect(T_setNormalOperation, max.u1)
-    annotation (Line(points={{-120,30},{6,30},{6,6},{18,6}}, color={0,0,127}));
-  connect(max.y, y) annotation (Line(points={{41,0},{110,0}}, color={0,0,127}));
-  connect(const1.y, switch1.u1) annotation (Line(points={{-69,0},{-60,0},{-60,
-          -20},{-48,-20}}, color={0,0,127}));
-  connect(const.y, switch1.u3) annotation (Line(points={{-71,-60},{-56,-60},{
-          -56,-36},{-48,-36}}, color={0,0,127}));
-  connect(switch1.y, max.u2) annotation (Line(points={{-25,-28},{6,-28},{6,-6},
-          {18,-6}}, color={0,0,127}));
+    annotation (Line(points={{-118,10},{-46,10}},   color={255,0,255}));
+  connect(const1.y, switch1.u1) annotation (Line(points={{-67,30},{-58,30},{-58,
+          18},{-46,18}},   color={0,0,127}));
+  connect(const.y, switch1.u3) annotation (Line(points={{-67,-10},{-54,-10},{
+          -54,2},{-46,2}},     color={0,0,127}));
+  connect(T_setElectricHeater, T_setElectricHeater)
+    annotation (Line(points={{110,30},{110,30}}, color={0,0,127}));
+  connect(switch1.y, T_setElectricHeater) annotation (Line(points={{-23,10},{52,
+          10},{52,30},{110,30}}, color={0,0,127}));
+  connect(T_setNormalOperation, y) annotation (Line(points={{-118,-60},{66,-60},
+          {66,0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -80},{100,40}})),                                    Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,40}})),

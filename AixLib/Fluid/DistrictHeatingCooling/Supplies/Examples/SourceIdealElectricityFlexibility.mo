@@ -1,12 +1,15 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.Examples;
-model ControllerTFlexibilityElectricHeating
+model SourceIdealElectricityFlexibility
    extends Modelica.Icons.ExamplesPackage;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   AixLib.Fluid.DistrictHeatingCooling.Supplies.Controllers.Temperature.ControllerTFlexibilityElectricHeating
     controllerTFlexibilityElectricHeating(T_maxNetwork=373.15)
     annotation (Placement(transformation(extent={{-90,32},{-70,44}})));
-  AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop.SourceIdeal sourceIdeal(
+  OpenLoop.SourceIdealElectricityFlexibility                        sourceIdealElectricityFlexibility(
     redeclare package Medium = Medium,
+    Q_maxHeater=15000,
+    m_flow_nominal=5,
+    Q_maxElectricHeater=25000,
     pReturn=12000000000,
     TReturn=343.15)
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
@@ -83,7 +86,7 @@ model ControllerTFlexibilityElectricHeating
   Modelica.Blocks.Sources.Constant const1(k=90 + 273.15)
     annotation (Placement(transformation(extent={{-142,52},{-122,72}})));
 equation
-  connect(sourceIdeal.port_b, plugFlowPipe.port_a)
+  connect(sourceIdealElectricityFlexibility.port_b, plugFlowPipe.port_a)
     annotation (Line(points={{-32,10},{-20,10}}, color={0,127,255}));
   connect(plugFlowPipe.ports_b[1], varTSupplyDp.port_a)
     annotation (Line(points={{0,8},{24,8},{24,-10}}, color={0,127,255}));
@@ -97,18 +100,15 @@ equation
     annotation (Line(points={{24,-30},{24,-48},{0,-48}}, color={0,127,255}));
   connect(plugFlowPipe2.ports_b[1], plugFlowPipe3.port_a)
     annotation (Line(points={{40,-48},{0,-48}}, color={0,127,255}));
-  connect(plugFlowPipe3.ports_b[1], sourceIdeal.port_a) annotation (Line(points={{-20,-48},
-          {-92,-48},{-92,10},{-50.1818,10}},      color={0,127,255}));
+  connect(plugFlowPipe3.ports_b[1], sourceIdealElectricityFlexibility.port_a)
+    annotation (Line(points={{-20,-48},{-92,-48},{-92,10},{-50.1818,10}}, color
+        ={0,127,255}));
   connect(sine.y, varTSupplyDp.Q_flow_input)
     annotation (Line(points={{21,40},{32,40},{32,-9.2}}, color={0,0,127}));
   connect(sine1.y, varTSupplyDp1.Q_flow_input)
     annotation (Line(points={{77,40},{88,40},{88,-9.2}}, color={0,0,127}));
-  connect(controllerTFlexibilityElectricHeating.y, sourceIdeal.TIn) annotation (
-     Line(points={{-69,40},{-60,40},{-60,17},{-50.5455,17}},
-                                                          color={0,0,127}));
-  connect(const.y, sourceIdeal.dpIn) annotation (Line(points={{-69,-12},{-60,
-          -12},{-60,3},{-50.5455,3}},
-                              color={0,0,127}));
+  connect(const.y, sourceIdealElectricityFlexibility.dpIn) annotation (Line(
+        points={{-69,-12},{-60,-12},{-60,3},{-50.5455,3}}, color={0,0,127}));
   connect(booleanTable.y, controllerTFlexibilityElectricHeating.electricitySignal)
     annotation (Line(points={{-121,32},{-102,32},{-102,41},{-91.8,41}},   color=
          {255,0,255}));
@@ -116,6 +116,12 @@ equation
     annotation (Line(points={{-121,62},{-100,62},{-100,34},{-91.8,34}},
                                                                       color={0,0,
           127}));
+  connect(controllerTFlexibilityElectricHeating.T_setElectricHeater,
+    sourceIdealElectricityFlexibility.Tset_electricHeater) annotation (Line(
+        points={{-69,43},{-58,43},{-58,13.8},{-50.5455,13.8}}, color={0,0,127}));
+  connect(controllerTFlexibilityElectricHeating.y,
+    sourceIdealElectricityFlexibility.TIn) annotation (Line(points={{-69,40},{
+          -62,40},{-62,17},{-50.5455,17}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
@@ -128,4 +134,4 @@ Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 
 </li>
 </ul>
 </html>"));
-end ControllerTFlexibilityElectricHeating;
+end SourceIdealElectricityFlexibility;
