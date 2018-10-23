@@ -101,14 +101,14 @@ equation
   connect(plugFlowPipe2.ports_b[1], plugFlowPipe3.port_a)
     annotation (Line(points={{40,-48},{0,-48}}, color={0,127,255}));
   connect(plugFlowPipe3.ports_b[1], sourceIdealElectricityFlexibility.port_a)
-    annotation (Line(points={{-20,-48},{-92,-48},{-92,10},{-50.1818,10}}, color
-        ={0,127,255}));
+    annotation (Line(points={{-20,-48},{-92,-48},{-92,10},{-50.1818,10}}, color=
+         {0,127,255}));
   connect(sine.y, varTSupplyDp.Q_flow_input)
     annotation (Line(points={{21,40},{32,40},{32,-9.2}}, color={0,0,127}));
   connect(sine1.y, varTSupplyDp1.Q_flow_input)
     annotation (Line(points={{77,40},{88,40},{88,-9.2}}, color={0,0,127}));
   connect(const.y, sourceIdealElectricityFlexibility.dpIn) annotation (Line(
-        points={{-69,-12},{-60,-12},{-60,3},{-50.5455,3}}, color={0,0,127}));
+        points={{-69,-12},{-60,-12},{-60,3},{-50.7273,3}}, color={0,0,127}));
   connect(booleanTable.y, controllerTFlexibilityElectricHeating.electricitySignal)
     annotation (Line(points={{-121,32},{-102,32},{-102,41},{-91.8,41}},   color=
          {255,0,255}));
@@ -121,7 +121,7 @@ equation
         points={{-69,43},{-58,43},{-58,13.8},{-50.5455,13.8}}, color={0,0,127}));
   connect(controllerTFlexibilityElectricHeating.y,
     sourceIdealElectricityFlexibility.TIn) annotation (Line(points={{-69,40},{
-          -62,40},{-62,17},{-50.5455,17}}, color={0,0,127}));
+          -62,40},{-62,17},{-50.7273,17}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
