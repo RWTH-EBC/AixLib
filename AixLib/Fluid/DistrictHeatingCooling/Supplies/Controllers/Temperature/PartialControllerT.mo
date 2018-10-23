@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.Controllers.Temperature;
 partial model PartialControllerT "Base class for temperature controller"
-  Modelica.Blocks.Interfaces.RealOutput y "Set temperature output"
+  Modelica.Blocks.Interfaces.RealOutput y(unit="K") "Set temperature output"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={Rectangle(
