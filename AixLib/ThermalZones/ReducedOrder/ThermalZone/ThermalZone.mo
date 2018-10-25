@@ -99,7 +99,8 @@ model ThermalZone
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,96},{-68,113}})));
 
-  Modelica.Blocks.Math.Add sunblindCorrection[zoneParam.nOrientations] if
+  Modelica.Blocks.Math.Product
+                           sunblindCorrection[zoneParam.nOrientations] if
     sum(zoneParam.ATransparent) > 0
     annotation (Placement(transformation(extent={{14,50},{22,58}})));
   Windows.BaseClasses.SunblindEquippedWindow sunblindEquippedWindow(

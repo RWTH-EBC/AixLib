@@ -66,6 +66,8 @@ record OPH_1_Office "Office zone of office building"
     maxOverheatingACH = {3.0, 2.0},
     maxSummerACH = {1.0, 273.15 + 10, 273.15 + 17},
     winterReduction = {0.2,273.15,273.15 + 10},
+    maxIrr = 100,
+    shadingFactor = 1,
     withAHU = true,
     minAHU = 0,
     maxAHU = 12,
