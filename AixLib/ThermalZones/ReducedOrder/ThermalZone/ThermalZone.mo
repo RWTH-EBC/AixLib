@@ -99,13 +99,15 @@ model ThermalZone
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,96},{-68,113}})));
 
-  Modelica.Blocks.Math.Add sunblindCorrection[zoneParam.nOrientations]
+  Modelica.Blocks.Math.Add sunblindCorrection[zoneParam.nOrientations] if
+    sum(zoneParam.ATransparent) > 0
     annotation (Placement(transformation(extent={{14,50},{22,58}})));
-  Windows.BaseClasses.SunblindEquipped sunblindEquipped(
+  Windows.BaseClasses.SunblindEquippedWindow sunblindEquippedWindow(
     n=zoneParam.nOrientations,
     lim=zoneParam.maxIrr,
-    shadingFactor=zoneParam.shadingFactor)
-    annotation (Placement(transformation(extent={{-50,50},{-34,66}})));
+    shadingFactor=zoneParam.shadingFactor) if
+    sum(zoneParam.ATransparent) > 0
+    annotation (Placement(transformation(extent={{-10,56},{-2,64}})));
 protected
   Modelica.Blocks.Sources.Constant alphaRoof(
     final k=(zoneParam.alphaRoofOut +
@@ -172,7 +174,16 @@ protected
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{12,23},{24,35}})));
 
+public
+  Windows.BaseClasses.SunblindEquippedWall sunblindEquippedWall(
+    n=zoneParam.nOrientations,
+    lim=zoneParam.maxIrr,
+    shadingFactor=zoneParam.shadingFactor)
+    annotation (Placement(transformation(extent={{-44,48},{-36,56}})));
 equation
+  connect(HDirTilWall.H, sunblindEquippedWindow.HDirTil) annotation (Line(
+        points={{-67.2,39.5},{-58,39.5},{-58,57.52},{-10.4,57.52}}, color={0,0,
+          127}));
   connect(intGains[1],humanSenHea. Schedule) annotation (Line(points={{80,
           -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
         color={0,0,127}));
@@ -192,18 +203,17 @@ equation
           -52.01},{94,-52.01},{94,54},{98,54}},   color={95,95,95}));
   connect(lights.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.01},
           {94,-72.01},{94,54},{98,54}},   color={95,95,95}));
-  connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,
-          11.8},{-12,11.8},{-12,24},{6,24},{6,29},{10.8,29}},
+  connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,11.8},
+          {-12,11.8},{-12,24},{6,24},{6,29},{10.8,29}},
                                                 color={0,0,127}));
-  connect(eqAirTempWall.TEqAir, preTemWall.T) annotation (Line(points={{-15,8},
-          {10.8,8}},                   color={0,0,127}));
+  connect(eqAirTempWall.TEqAir, preTemWall.T) annotation (Line(points={{-15,8},{
+          10.8,8}},                    color={0,0,127}));
   connect(HDirTilWall.H, corGMod.HDirTil) annotation (Line(points={{-67.2,39.5},
           {-58,39.5},{-58,46.6},{-13.2,46.6}},          color={0,0,127}));
-  connect(HDirTilWall.H, solRadWall.u1) annotation (Line(points={{-67.2,39.5},{
-          -58,39.5},{-58,22},{-55,22}}, color={0,0,127}));
-  connect(HDirTilWall.inc, corGMod.inc) annotation (Line(points={{-67.2,36.1},{
-          -60,36.1},{-60,36},{-56,36},{-56,39.4},{-13.2,39.4}},
-                                                            color={0,0,127}));
+  connect(HDirTilWall.H, solRadWall.u1) annotation (Line(points={{-67.2,39.5},{-58,
+          39.5},{-58,22},{-55,22}},     color={0,0,127}));
+  connect(HDirTilWall.inc, corGMod.inc) annotation (Line(points={{-67.2,36.1},{-60,
+          36.1},{-60,36},{-56,36},{-56,39.4},{-13.2,39.4}}, color={0,0,127}));
   connect(HDifTilWall.H, solRadWall.u2) annotation (Line(points={{-67.2,18},{-60,
           18},{-60,16},{-55,16}}, color={0,0,127}));
   connect(HDifTilWall.HGroDifTil, corGMod.HGroDifTil) annotation (Line(points={{-67.2,
@@ -228,9 +238,8 @@ equation
           22.8},{-64,22.8},{-64,44.2},{-13.2,44.2}},       color={0,0,127}));
   connect(theConWin.solid, ROM.window) annotation (Line(points={{42,29},{42,50},
           {50,50}},           color={191,0,0}));
-  connect(theConWall.solid, ROM.extWall) annotation (Line(points={{42,13},{47,
-          13},{47,42},{50,42}},
-                              color={191,0,0}));
+  connect(theConWall.solid, ROM.extWall) annotation (Line(points={{42,13},{47,13},
+          {47,42},{50,42}},   color={191,0,0}));
   connect(weaBus.TDryBul,eqAirTempRoof. TDryBul) annotation (Line(
       points={{-100,34},{-86,34},{-86,88},{-38,88}},
       color={255,204,51},
@@ -312,19 +321,22 @@ equation
   connect(humanSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-21},
           {84,-21},{84,-22},{92,-22},{92,50},{98,50}},
         color={191,0,0}));
-  connect(sunblindCorrection.y, ROM.solRad) annotation (Line(points={{22.4,54},
-          {36,54},{36,61},{49,61}}, color={0,0,127}));
-  connect(HDirTilWall.H, sunblindEquipped.HDirTil) annotation (Line(points={{
-          -67.2,39.5},{-58,39.5},{-58,53.04},{-50.8,53.04}}, color={0,0,127}));
-  connect(HDifTilWall.HSkyDifTil, sunblindEquipped.HSkyDifTil) annotation (Line(
-        points={{-67.2,22.8},{-64,22.8},{-64,62.48},{-50.96,62.48}}, color={0,0,
-          127}));
-  connect(sunblindEquipped.eqAirTempWallFac, eqAirTempWall.sunblind)
-    annotation (Line(points={{-33.68,53.2},{-26,53.2},{-26,20}}, color={0,0,127}));
-  connect(sunblindEquipped.winFac, sunblindCorrection.u1) annotation (Line(
-        points={{-33.68,62.8},{-2,62.8},{-2,56.4},{13.2,56.4}}, color={0,0,127}));
-  connect(corGMod.solarRadWinTrans, sunblindCorrection.u2) annotation (Line(
-        points={{0.6,43},{6.3,43},{6.3,51.6},{13.2,51.6}}, color={0,0,127}));
+  connect(sunblindCorrection.y, ROM.solRad) annotation (Line(points={{22.4,54},{
+          36,54},{36,61},{49,61}}, color={0,0,127}));
+  connect(HDirTilWall.H, sunblindEquippedWall.HDirTil) annotation (Line(points={{-67.2,
+          39.5},{-58,39.5},{-58,49.52},{-44.4,49.52}},        color={0,0,127}));
+  connect(HDifTilWall.HSkyDifTil, sunblindEquippedWall.HSkyDifTil) annotation (
+      Line(points={{-67.2,22.8},{-64,22.8},{-64,54.24},{-44.48,54.24}}, color={0,
+          0,127}));
+  connect(sunblindCorrection.u2, corGMod.solarRadWinTrans) annotation (Line(
+        points={{13.2,51.6},{6.6,51.6},{6.6,43},{0.6,43}}, color={0,0,127}));
+  connect(sunblindEquippedWall.eqAirTempWallFac, eqAirTempWall.sunblind)
+    annotation (Line(points={{-35.84,52},{-26,52},{-26,20}}, color={0,0,127}));
+  connect(sunblindEquippedWindow.windowFac, sunblindCorrection.u1) annotation (
+      Line(points={{-1.84,60},{6,60},{6,56.4},{13.2,56.4}}, color={0,0,127}));
+  connect(HDifTilWall.HSkyDifTil, sunblindEquippedWindow.HSkyDifTil)
+    annotation (Line(points={{-67.2,22.8},{-64,22.8},{-64,62.24},{-10.48,62.24}},
+        color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>

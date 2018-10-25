@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneEquipped
   "Thermal zone model with ventilation, infiltration and internal gains"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone;
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone(
+      sunblindEquippedWall(n=zoneParam.nOrientations));
 
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,

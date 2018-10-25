@@ -1,5 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
-model SunblindEquipped "Calculates if sunblind of window is active"
+model SunblindEquippedWindow
+  "Calculates if sunblind of window is active"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Integer n(min = 1) "Vector size for input and output";
@@ -21,18 +22,14 @@ model SunblindEquipped "Calculates if sunblind of window is active"
     "Hemispherical diffuse solar irradiation on a tilted surface from the sky" annotation (Placement(transformation(
           extent={{-116,52},{-100,68}}),   iconTransformation(extent={{-122,46},
             {-102,66}})));
-  Modelica.Blocks.Interfaces.RealOutput winFac[n]
-    annotation (Placement(transformation(extent={{94,50},{114,70}})));
-  Modelica.Blocks.Interfaces.RealOutput eqAirTempWallFac[n]
-    annotation (Placement(transformation(extent={{94,-70},{114,-50}})));
+  Modelica.Blocks.Interfaces.RealOutput windowFac[n]
+    annotation (Placement(transformation(extent={{94,-10},{114,10}})));
 equation
   for i in 1:n loop
     if (HSkyDifTil[i]+HDirTil[i])>lim then
-       winFac[i] = shadingFactor;
-       eqAirTempWallFac[i] = 1-shadingFactor;
+       windowFac[i] = shadingFactor;
     else
-       winFac[i] = 1;
-       eqAirTempWallFac[i] = 0;
+       windowFac[i] = 0;
     end if;
   end for;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
@@ -48,4 +45,4 @@ equation
 <li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
 </ul>
 </html>"));
-end SunblindEquipped;
+end SunblindEquippedWindow;
