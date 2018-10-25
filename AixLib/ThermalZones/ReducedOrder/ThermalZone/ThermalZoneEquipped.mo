@@ -77,7 +77,7 @@ equation
           {-74,-100},{-74,-15},{-65.6,-15}}, color={0,0,127}));
   connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-100,
           -40},{-76,-40},{-76,-10.2},{-65.6,-10.2}}, color={0,0,127}));
-  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{87,62},{90,62},{
+  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{99,62},{90,62},{
           90,-6},{52,-6},{52,-50},{-70,-50},{-70,-54},{-70,-56}}, color={0,0,
           127}));
   connect(preTemVen.port, airExc.port_a)
@@ -88,7 +88,7 @@ equation
           -31.4},{-34,-28},{-24,-28},{-24,-23.12},{-21.2,-23.12}}, color={0,0,
           127}));
   connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-18},{
-          44,-18},{44,-2},{92,-2},{92,50},{86,50}},
+          44,-18},{44,-2},{92,-2},{92,50},{98,50}},
                                                color={191,0,0}));
   connect(weaBus.TDryBul, mixedTemp.temperature_flow2) annotation (Line(
       points={{-100,34},{-100,34},{-86,34},{-86,-20},{-65.6,-20}},
@@ -128,7 +128,7 @@ equation
   </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics={
+            -100},{120,120}}), graphics={
   Rectangle(
     extent={{-79,-8},{-4,-81}},
     lineColor={0,0,255},
@@ -141,5 +141,6 @@ equation
     fillPattern=FillPattern.Solid,
           textString="Ventilation
 Infiltration
-")}));
+")}),
+    Icon(coordinateSystem(extent={{-100,-100},{120,120}})));
 end ThermalZoneEquipped;

@@ -98,6 +98,10 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Additional ACH in summer, Tmin, Tmax";
   parameter Real winterReduction[3]
     "Reduction factor of userACH for cold weather";
+  parameter Real maxIrr
+    "Limit for the sunscreen to become active";
+  parameter Real shadingFactor
+    "Factor representing how much solar irradiation goes through the sunblind";
 
   parameter Boolean withAHU
     "Zone is connected to central air handling unit";
