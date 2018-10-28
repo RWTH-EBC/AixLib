@@ -109,6 +109,16 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
+  parameter Modelica.SIunits.VolumeFlowRate V_flow_air_curtain
+    "Volume flow through air curtain";
+  parameter Modelica.SIunits.Temperature T_add_air_curtain
+    "Temperature raise over air curtain";
+  parameter Real eta_air_curtain
+    "Efficiency of air curtain, meaing how much of the air stay in the building";
+  parameter Modelica.SIunits.Temperature T_thershold_air_curtain
+    "Temperature threshold when air curtain becomes active";
+  parameter Modelica.SIunit.Power Power_air_curtain
+    "Thermal design power of air curtain";
 
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";

@@ -13,14 +13,14 @@ model ThermalZoneEquipped
     final winterReduction=zoneParam.winterReduction,
     final Tmean_start=zoneParam.T_start) if ATot > 0 or zoneParam.VAir > 0
     "Calculates natural venitlation and infiltration"
-    annotation (Placement(transformation(extent={{-70,-72},{-50,-52}})));
+    annotation (Placement(transformation(extent={{-88,-78},{-68,-58}})));
   Utilities.Psychrometrics.MixedTemperature mixedTemp if
     ATot > 0 or zoneParam.VAir > 0
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
-    annotation (Placement(transformation(extent={{-66,-28},{-46,-8}})));
+    annotation (Placement(transformation(extent={{-84,-34},{-64,-14}})));
   HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
-    annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
+    annotation (Placement(transformation(extent={{-40,-32},{-24,-16}})));
 
   redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     humanSenHea(
@@ -46,6 +46,13 @@ model ThermalZoneEquipped
     final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
+  Airflow.AirCurtain.AirCurtainSimplyfied airCurtainSimplyfied(
+    VolumeFlowAirCurtain=zoneParam.V_flow_air_curtain,
+    TemperatureAdditionAirCurtain=zoneParam.T_add_air_curtain,
+    eta_air_curtain=zoneParam.eta_air_curtain,
+    TemperatureThreshold=zoneParam.T_thershold_air_curtain) if
+    zoneParam.V_flow_air_curtain > 0
+    annotation (Placement(transformation(extent={{-2,-50},{20,-28}})));
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
     "Combines infiltration and ventilation"
@@ -53,58 +60,72 @@ protected
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
-        origin={-34,-38})));
+        origin={-52,-44})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemVen if
     ATot > 0 or zoneParam.VAir > 0
     "Prescribed temperature for ventilation"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
-        origin={-32,-18})));
+        origin={-50,-24})));
 
 equation
   connect(ventCont.y, addInfVen.u1) annotation (Line(
-      points={{-51,-62},{-37.6,-62},{-37.6,-45.2}},
+      points={{-69,-68},{-55.6,-68},{-55.6,-51.2}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{0,-78},{-70,-78},{-70,-68}}, color=
+          -133.333},{80,-84},{-88,-84},{-88,-74}},                       color=
           {0,0,127}));
-  connect(ventRate, addInfVen.u2) annotation (Line(points={{-40,-100},{-40,-76},
-          {-30.4,-76},{-30.4,-45.2}}, color={0,0,127}));
-  connect(ventCont.y, mixedTemp.flowRate_flow2) annotation (Line(points={{-51,-62},
-          {-49,-62},{-49,-30},{-70,-30},{-70,-25},{-65.6,-25}}, color={0,0,127}));
-  connect(ventRate, mixedTemp.flowRate_flow1) annotation (Line(points={{-40,-100},
-          {-74,-100},{-74,-15},{-65.6,-15}}, color={0,0,127}));
-  connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-100,
-          -40},{-76,-40},{-76,-10.2},{-65.6,-10.2}}, color={0,0,127}));
-  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{99,62},{90,62},{
-          90,-6},{52,-6},{52,-50},{-70,-50},{-70,-54},{-70,-56}}, color={0,0,
+  connect(ventRate, addInfVen.u2) annotation (Line(points={{-40,-120},{-40,-82},
+          {-48.4,-82},{-48.4,-51.2}}, color={0,0,127}));
+  connect(ventCont.y, mixedTemp.flowRate_flow2) annotation (Line(points={{-69,-68},
+          {-67,-68},{-67,-36},{-88,-36},{-88,-31},{-83.6,-31}}, color={0,0,127}));
+  connect(ventRate, mixedTemp.flowRate_flow1) annotation (Line(points={{-40,
+          -120},{-92,-120},{-92,-21},{-83.6,-21}},
+                                             color={0,0,127}));
+  connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-120,
+          -40},{-94,-40},{-94,-16.2},{-83.6,-16.2}}, color={0,0,127}));
+  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{99,62},{72,62},{
+          72,-12},{34,-12},{34,-56},{-88,-56},{-88,-62}},         color={0,0,
           127}));
   connect(preTemVen.port, airExc.port_a)
-    annotation (Line(points={{-26,-18},{-26,-18},{-22,-18}}, color={191,0,0}));
+    annotation (Line(points={{-44,-24},{-40,-24}},           color={191,0,0}));
   connect(mixedTemp.mixedTemperatureOut, preTemVen.T)
-    annotation (Line(points={{-46,-18},{-39.2,-18}}, color={0,0,127}));
-  connect(addInfVen.y, airExc.InPort1) annotation (Line(points={{-34,-31.4},{-34,
-          -31.4},{-34,-28},{-24,-28},{-24,-23.12},{-21.2,-23.12}}, color={0,0,
+    annotation (Line(points={{-64,-24},{-57.2,-24}}, color={0,0,127}));
+  connect(addInfVen.y, airExc.InPort1) annotation (Line(points={{-52,-37.4},{
+          -52,-34},{-42,-34},{-42,-29.12},{-39.2,-29.12}},         color={0,0,
           127}));
-  connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-6,-18},{
-          44,-18},{44,-2},{92,-2},{92,50},{98,50}},
+  connect(airExc.port_b, ROM.intGainsConv) annotation (Line(points={{-24,-24},{
+          26,-24},{26,-8},{74,-8},{74,50},{98,50}},
                                                color={191,0,0}));
   connect(weaBus.TDryBul, mixedTemp.temperature_flow2) annotation (Line(
-      points={{-100,34},{-100,34},{-86,34},{-86,-20},{-65.6,-20}},
+      points={{-120,34},{-120,28},{-104,28},{-104,-26},{-83.6,-26}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, ventCont.Tambient) annotation (Line(
-      points={{-100,34},{-100,34},{-86,34},{-86,-20},{-78,-20},{-78,-62},{-70,-62}},
+      points={{-120,34},{-120,28},{-104,28},{-104,-26},{-96,-26},{-96,-68},{-88,
+          -68}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(airCurtainSimplyfied.port_b, ROM.intGainsConv) annotation (Line(
+        points={{20,-40},{22,-40},{22,-24},{26,-24},{26,-8},{74,-8},{74,50},{98,
+          50}}, color={191,0,0}));
+  connect(weaBus.TDryBul, airCurtainSimplyfied.Tambient) annotation (Line(
+      points={{-120,34},{-120,28},{-104,28},{-104,-10},{-12,-10},{-12,-46},{-3,-46}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
@@ -128,20 +149,20 @@ equation
   First implementation.
   </li>
 </ul>
-</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{120,120}}), graphics={
+</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+            -120},{120,120}}), graphics={
   Rectangle(
-    extent={{-79,-8},{-4,-81}},
+    extent={{-97,-14},{-22,-87}},
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid),
   Text(
-    extent={{-28,-69},{-5,-80}},
+    extent={{-46,-75},{-23,-86}},
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
           textString="Ventilation
 Infiltration
 ")}),
-    Icon(coordinateSystem(extent={{-100,-100},{120,120}})));
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}})));
 end ThermalZoneEquipped;

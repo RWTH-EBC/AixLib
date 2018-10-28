@@ -186,12 +186,12 @@ equation
         points={{-67.2,39.5},{-58,39.5},{-58,57.52},{-10.4,57.52}}, color={0,0,
           127}));
   connect(intGains[1],humanSenHea. Schedule) annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
+          -133.333},{80,-133.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
         color={0,0,127}));
-  connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-100},
-          {80,-100},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
-  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},
-          {80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
+  connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-120},
+          {80,-120},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
+  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-106.667},
+          {80,-106.667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
   connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
           {92,-60.8},{92,50},{98,50}}, color={191,0,0}));
   connect(machinesSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
@@ -222,14 +222,14 @@ equation
   connect(solRadWall.y, eqAirTempWall.HSol) annotation (Line(points={{-43.5,19},
           {-42,19},{-42,18},{-42,14},{-38,14}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTempWall.TBlaSky) annotation (Line(
-      points={{-100,34},{-86,34},{-86,8},{-38,8}},
+      points={{-120,34},{-86,34},{-86,8},{-38,8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, eqAirTempWall.TDryBul) annotation (Line(
-      points={{-100,34},{-86,34},{-86,2},{-38,2}},
+      points={{-120,34},{-86,34},{-86,2},{-38,2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -242,14 +242,14 @@ equation
   connect(theConWall.solid, ROM.extWall) annotation (Line(points={{42,13},{47,13},
           {47,42},{50,42}},   color={191,0,0}));
   connect(weaBus.TDryBul,eqAirTempRoof. TDryBul) annotation (Line(
-      points={{-100,34},{-86,34},{-86,88},{-38,88}},
+      points={{-120,34},{-86,34},{-86,88},{-38,88}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TBlaSky,eqAirTempRoof. TBlaSky) annotation (Line(
-      points={{-100,34},{-86,34},{-86,94},{-38,94}},
+      points={{-120,34},{-86,34},{-86,94},{-38,94}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -281,14 +281,14 @@ equation
     annotation (Line(points={{61,94},{72.9,94},{72.9,64}}, color={191,0,0}));
   for i in 1:zoneParam.nOrientations loop
     connect(weaBus,HDifTilWall [i].weaBus) annotation (Line(
-        points={{-100,34},{-100,34},{-86,34},{-86,18},{-84,18}},
+        points={{-120,34},{-120,34},{-86,34},{-86,18},{-84,18}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
     connect(HDirTilWall[i].weaBus, weaBus) annotation (Line(
-        points={{-84,39.5},{-86,39.5},{-86,46},{-86,34},{-100,34}},
+        points={{-84,39.5},{-86,39.5},{-86,46},{-86,34},{-120,34}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%second",
@@ -297,14 +297,14 @@ equation
   end for;
   for i in 1:zoneParam.nOrientationsRoof loop
     connect(weaBus, HDifTilRoof[i].weaBus) annotation (Line(
-      points={{-100,34},{-86,34},{-86,81},{-84,81}},
+      points={{-120,34},{-86,34},{-86,81},{-84,81}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
     connect(weaBus, HDirTilRoof[i].weaBus) annotation (Line(
-      points={{-100,34},{-86,34},{-86,104.5},{-84,104.5}},
+      points={{-120,34},{-86,34},{-86,104.5},{-84,104.5}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -362,7 +362,7 @@ equation
   </li>
  </ul>
  </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{
             120,120}}),
                     graphics={
   Polygon(
@@ -425,5 +425,5 @@ equation
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
           textString="Windows")}),
-    Icon(coordinateSystem(extent={{-100,-100},{120,120}})));
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}})));
 end ThermalZone;

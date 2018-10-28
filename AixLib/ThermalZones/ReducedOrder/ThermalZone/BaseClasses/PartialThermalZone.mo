@@ -16,7 +16,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-40,-100}), iconTransformation(
+        origin={-40,-120}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={-70,-84})));
@@ -27,7 +27,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     min=0) if ATot > 0 or zoneParam.VAir > 0
     "Ventilation and infiltration temperature"
     annotation (Placement(
-        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
+        transformation(extent={{-140,-60},{-100,-20}}),iconTransformation(
           extent={{-126,-52},{-100,-26}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
@@ -35,7 +35,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={80,-100}), iconTransformation(
+        origin={80,-120}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={80,-84})));
@@ -57,12 +57,12 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
-    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
+    transformation(extent={{-137,18},{-103,50}}),iconTransformation(
     extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare each final package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
+    annotation (Placement(transformation(extent={{-49,-126},{49,-102}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
     ATot > 0 or zoneParam.VAir > 0
@@ -127,8 +127,8 @@ equation
   connect(ROM.TAir, TAir) annotation (Line(points={{99,62},{112,62},{112,56},{
           124,56}},
                 color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{89,28.05},{89,-4},{48,-4},
-          {48,-44},{0,-44},{0,-94}},            color={0,127,255}));
+  connect(ROM.ports, ports) annotation (Line(points={{89,28.05},{89,-24},{48,
+          -24},{48,-64},{0,-64},{0,-114}},      color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{98,50},{106,
           50},{106,-2},{118,-2}},
                                color={191,0,0}));
@@ -139,8 +139,8 @@ equation
   connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{98,54},{108,
           54},{108,18},{118,18}},
                            color={191,0,0}));
-  annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
-            -100},{120,120}}),
+  annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-120,
+            -120},{120,120}}),
                         graphics={Text(extent={{
               -80,114},{92,64}},lineColor=
               {0,0,255},
@@ -186,7 +186,7 @@ equation
   </li>
  </ul>
  </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{
             120,120}}),
                     graphics={
   Rectangle(
