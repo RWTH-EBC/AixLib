@@ -7,7 +7,7 @@ model AirCurtainSimplyfied
     port_b
     annotation (Placement(transformation(extent={{110,-10},{130,10}})));
   parameter Modelica.SIunits.VolumeFlowRate VolumeFlowAirCurtain;
-  parameter Modelica.SIunits.Temperature TemperatureAdditionAirCurtain;
+  parameter Modelica.SIunits.TemperatureDifference TemperatureAdditionAirCurtain;
   parameter Real eta_air_curtain "Efficiency of the air curtain";
   parameter Modelica.SIunits.Density rho = 1.25 "Air density";
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1000

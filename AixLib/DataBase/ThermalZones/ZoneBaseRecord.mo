@@ -117,7 +117,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Efficiency of air curtain, meaing how much of the air stay in the building";
   parameter Modelica.SIunits.Temperature T_thershold_air_curtain
     "Temperature threshold when air curtain becomes active";
-  parameter Modelica.SIunit.Power Power_air_curtain
+  parameter Modelica.SIunits.Power Power_air_curtain
     "Thermal design power of air curtain";
 
   parameter Real hHeat "Upper limit controller output";
