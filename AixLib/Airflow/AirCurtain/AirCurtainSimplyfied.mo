@@ -14,20 +14,26 @@ model AirCurtainSimplyfied
     "Specific heat capacity of air";
   parameter Modelica.SIunits.Temperature TemperatureThreshold
     "Threshold of the ambient temperature when aircurtain becomes active";
+  parameter Modelica.SIunits.Power PowerAirCurtain
+    "The thermal Power of the air curtain, simplified use";
   Utilities.Psychrometrics.MixedTemperature mixedTemperature
     annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
+  Modelica.Blocks.Interfaces.RealOutput powerOut
+    annotation (Placement(transformation(extent={{118,70},{138,90}})));
 equation
   connect(Tambient, mixedTemperature.temperature_flow2);
   if Tambient <= TemperatureThreshold then
     mixedTemperature.flowRate_flow2 = (1 - eta_air_curtain) * VolumeFlowAirCurtain;
     mixedTemperature.flowRate_flow1 = eta_air_curtain * VolumeFlowAirCurtain;
     mixedTemperature.temperature_flow1 = port_b.T + TemperatureAdditionAirCurtain;
-    port_b.Q_flow = eta_air_curtain * VolumeFlowAirCurtain * rho * c * (mixedTemperature.mixedTemperatureOut - port_b.T);
+    port_b.Q_flow = - eta_air_curtain * VolumeFlowAirCurtain * rho * c * (mixedTemperature.mixedTemperatureOut - port_b.T);
+    powerOut = PowerAirCurtain;
   else
     mixedTemperature.flowRate_flow2 = (1 - eta_air_curtain) * VolumeFlowAirCurtain;
     mixedTemperature.flowRate_flow1 = eta_air_curtain * VolumeFlowAirCurtain;
     mixedTemperature.temperature_flow1 = port_b.T;
     port_b.Q_flow = 0;
+    powerOut = 0;
   end if;
    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {120,120}}),                                        graphics={
