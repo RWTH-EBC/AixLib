@@ -20,9 +20,11 @@ model AirCurtainSimplyfied
     annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
   Modelica.Blocks.Interfaces.RealOutput powerOut
     annotation (Placement(transformation(extent={{118,70},{138,90}})));
+  Modelica.Blocks.Interfaces.RealInput AHUSchedule
+    annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
 equation
   connect(Tambient, mixedTemperature.temperature_flow2);
-  if Tambient <= TemperatureThreshold then
+  if Tambient <= TemperatureThreshold and AHUSchedule > 0 then
     mixedTemperature.flowRate_flow2 = (1 - eta_air_curtain) * VolumeFlowAirCurtain;
     mixedTemperature.flowRate_flow1 = eta_air_curtain * VolumeFlowAirCurtain;
     mixedTemperature.temperature_flow1 = port_b.T + TemperatureAdditionAirCurtain;

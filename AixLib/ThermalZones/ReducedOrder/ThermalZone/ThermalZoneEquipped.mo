@@ -50,7 +50,8 @@ model ThermalZoneEquipped
     VolumeFlowAirCurtain=zoneParam.V_flow_air_curtain,
     TemperatureAdditionAirCurtain=zoneParam.T_add_air_curtain,
     eta_air_curtain=zoneParam.eta_air_curtain,
-    TemperatureThreshold=zoneParam.T_thershold_air_curtain) if
+    TemperatureThreshold=zoneParam.T_thershold_air_curtain,
+    PowerAirCurtain=zoneParam.Power_air_curtain) if
     zoneParam.V_flow_air_curtain > 0
     annotation (Placement(transformation(extent={{-2,-50},{20,-28}})));
 protected
@@ -126,6 +127,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
 
+  connect(ventRate, airCurtainSimplyfied.AHUSchedule) annotation (Line(points={
+          {-40,-120},{-40,-90},{-8,-90},{-8,-32},{-2.8,-32}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
