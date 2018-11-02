@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall_ASHRAE140
   "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 
@@ -133,8 +133,7 @@ public
                                                 windowSimple(
     T0=T0,
     windowarea=windowarea,
-    WindowType=WindowType,
-    eps_out=0.84) if          withWindow and outside
+    WindowType=WindowType) if          withWindow and outside
     annotation (Placement(transformation(extent={{-15,-48},{11,-22}})));
   Utilities.HeatTransfer.HeatConv_outside
                                         heatTransfer_Outside(
