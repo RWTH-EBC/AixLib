@@ -78,11 +78,6 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-14,34})));
-
-  Real minSou = min(dataTable.tableP_ele[1,2:end]);
-  Real minSup = min(dataTable.tableP_ele[2:end,1]);
-  Real maxSou = max(dataTable.tableP_ele[1,2:end]);
-  Real maxSup = max(dataTable.tableP_ele[2:end,1]);
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
     "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-5,-5},
             {5,5}},
@@ -103,6 +98,12 @@ protected
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={6,32})));
+protected
+  parameter Real minSou = min(dataTable.tableP_ele[1,2:end]);
+  parameter Real minSup = min(dataTable.tableP_ele[2:end,1]);
+  parameter Real maxSou = max(dataTable.tableP_ele[1,2:end]);
+  parameter Real maxSup = max(dataTable.tableP_ele[2:end,1]);
+
 equation
   assert(minSou+273.15 < sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
   assert(maxSou+273.15 > sigBusHP.T_flow_ev, "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
@@ -152,7 +153,8 @@ equation
           -52},{0,-52},{0,-80.8},{76.4,-80.8}},
                                            color={0,0,127}));
   connect(QCon, calcRedQCon.y)
-    annotation (Line(points={{80,-110},{80,-94.6}},   color={0,0,127}));
+    annotation (Line(points={{-80,-110},{-80,-102},{80,-102},{80,-94.6}},
+                                                      color={0,0,127}));
   connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{-80,-86.6},{
           -80,-92},{-6,-92},{-6,-74},{83.6,-74},{83.6,-80.8}},            color=
          {0,0,127}));
@@ -179,7 +181,8 @@ equation
   connect(realCorr.y, nTimesQCon.u2) annotation (Line(points={{-14,23},{-14,12},
           {56.4,12},{56.4,7.2}}, color={0,0,127}));
   connect(proRedQEva.y, QEva)
-    annotation (Line(points={{-80,-86.6},{-80,-110}}, color={0,0,127}));
+    annotation (Line(points={{-80,-86.6},{-80,-98},{-80,-110},{80,-110}},
+                                                      color={0,0,127}));
   connect(feedbackHeatFlowEvaporator.y, proRedQEva.u2) annotation (Line(points=
           {{-83,-67.5},{-83,-69.7},{-83.6,-69.7},{-83.6,-72.8}}, color={0,0,127}));
   connect(sigBusHP.N, proRedQEva.u1) annotation (Line(

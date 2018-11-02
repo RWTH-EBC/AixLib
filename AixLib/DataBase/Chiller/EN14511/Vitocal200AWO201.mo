@@ -1,5 +1,5 @@
 within AixLib.DataBase.Chiller.EN14511;
-record Vitocal200AWO201 "Vitocal200AWO201"
+record Vitocal200AWO201 "Vitocal200AWO201Chilling"
   extends AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
     tableP_ele=[0, 20, 25, 27, 30, 35; 7,1380.0, 1590.0, 1680.0, 1800.0, 1970.0;  18,950.0, 1060.0, 1130.0, 1200.0, 1350.0],
     tableQdot_con=[0, 20, 25, 27, 30, 35; 7,2540.0, 2440.0, 2370.0, 2230.0, 2170.0;  18, 5270.0, 5060.0, 4920.0, 4610.0, 4500.0],
