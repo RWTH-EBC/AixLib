@@ -191,8 +191,8 @@ equation
 </html>",
  revisions="<html>
  <ul>
- <li><i>November 11, 2018&nbsp;</i> by Fabian Wüllhorst: Removed parameters phi and eps_out(see issue651 on this)<br/></li>
- <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:Improved implementation of transmitted solar radiation<br/></li>
+ <li><i>November 11, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>Removed parameters phi and eps_out. This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
+ <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Improved implementation of transmitted solar radiation</li>
  <li><i>February 24, 2014&nbsp;</i> by Reza Tavakoli:<br/>First implementation</li>
 </ul>
 </html>"),
