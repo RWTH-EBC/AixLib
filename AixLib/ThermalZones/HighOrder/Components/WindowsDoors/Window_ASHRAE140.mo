@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends
@@ -21,10 +21,6 @@ model Window_ASHRAE140
 
   parameter Real g= if selectable then WindowType.g else 0.60
     "Coefficient of solar energy transmission"                                                            annotation (Dialog(group="Window type", enable = not selectable));
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
-                                       annotation(Dialog(group = "Outside surface", enable = outside));
-                                       parameter Real phi= 90
-    "surface tilted angle in [degree]"                                                           annotation(Dialog(group = "Outside surface", enable = outside));
 
   BaseClasses.CorrectionSolarGain.CorG_VDI6007
     RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
@@ -195,7 +191,8 @@ equation
 </html>",
  revisions="<html>
  <ul>
- <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:Improved implementation of transmitted solar radiation<br/></li>
+ <li><i>November 11, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>Removed parameters phi and eps_out. This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
+ <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Improved implementation of transmitted solar radiation</li>
  <li><i>February 24, 2014&nbsp;</i> by Reza Tavakoli:<br/>First implementation</li>
 </ul>
 </html>"),
