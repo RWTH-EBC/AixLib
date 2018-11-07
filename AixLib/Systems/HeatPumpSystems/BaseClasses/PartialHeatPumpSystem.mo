@@ -220,12 +220,6 @@ partial model PartialHeatPumpSystem
   parameter Modelica.Fluid.Types.Dynamics energyDynamics
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equation"));
-  parameter Real mSenFacCon=1
-    "Factor for scaling the sensible thermal mass of the volume in the condenser"
-    annotation (Dialog(tab="Dynamics",group="Condenser"));
-  parameter Real mSenFacEva=1
-    "Factor for scaling the sensible thermal mass of the volume in the evaporator"
-    annotation (Dialog(tab="Dynamics", group="Evaporator"));
 //Assumptions
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"

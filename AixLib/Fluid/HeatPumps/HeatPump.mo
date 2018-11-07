@@ -159,12 +159,6 @@ model HeatPump "Base model of realistic heat pump"
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equation"));
-  parameter Real mSenFacCon=1
-    "Factor for scaling the sensible thermal mass of the volume in the condenser"
-    annotation (Dialog(tab="Dynamics",group="Condenser"));
-  parameter Real mSenFacEva=1
-    "Factor for scaling the sensible thermal mass of the volume in the evaporator"
-    annotation (Dialog(tab="Dynamics", group="Evaporator"));
 //Advanced
   parameter Boolean show_TPort=false
     "= true, if actual temperature at port is computed"
