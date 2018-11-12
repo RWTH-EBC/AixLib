@@ -127,9 +127,9 @@ equation
     preferredView="info",
     Documentation(revisions="<html>
 <ul>
-<li><i>November 12, 2018 by Philipp Mehrfeld:</i><br>Enhance documentation for script to add binary paths to environment varialbe. Important for DDE simulations <a href=\"https://github.com/RWTH-EBC/AixLib/issues/658\">#658</a>.</li>
-<li><i>Feburary 6, 2017 by Philipp Mehrfeld:</i><br>Revised documentation.</li>
-<li><i>December 14, 2016 by Fabian Wuellhorst:</i><br>Implemented.</li>
+<li><i>November 12, 2018 by Philipp Mehrfeld:</i><br/>Enhance documentation for script to add binary paths to environment varialbe. Important for DDE simulations <a href=\"https://github.com/RWTH-EBC/AixLib/issues/658\">#658</a>.</li>
+<li><i>Feburary 6, 2017 by Philipp Mehrfeld:</i><br/>Revised documentation.</li>
+<li><i>December 14, 2016 by Fabian Wuellhorst:</i><br/>Implemented.</li>
 </ul>
 </html>", info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
