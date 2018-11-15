@@ -88,7 +88,9 @@ public
     redeclare package Medium = Medium,
     use_m_flow_in=true,
     nPorts=1,
-    T=TReturn) "Source sending prescribed flow back to the network" annotation (
+    T=TReturn,
+    use_T_in=true)
+               "Source sending prescribed flow back to the network" annotation (
      Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
@@ -96,13 +98,28 @@ public
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
-  Modelica.Blocks.Sources.Constant mindeltaT(k=10)
+  Modelica.Blocks.Sources.Constant mindeltaT(k=5)
     "Temperature of return line in °C" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-114,-28})));
   Modelica.Blocks.Math.Max max
     annotation (Placement(transformation(extent={{-50,-4},{-30,16}})));
+  Modelica.Blocks.Math.Min min annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={64,-2})));
+  Modelica.Blocks.Sources.Constant TReturnNominal(k=TReturn)
+    "Temperature of return line in °C" annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={24,72})));
+  Modelica.Blocks.Math.Add deltaT1(k1=+1, k2=-1)
+    "Differernce of flow and return line temperature in K" annotation (
+      Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=0,
+        origin={36,22})));
 equation
 
   dpOut = dp;
@@ -122,9 +139,9 @@ equation
   connect(heat2massFlow.y, changeSign.u) annotation (Line(points={{-1.9984e-015,
           -13},{0,-13},{0,-24}}, color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
-    annotation (Line(points={{0,-47},{0,-52},{-20,-52}}, color={0,0,127}));
+    annotation (Line(points={{0,-47},{0,-52},{-18,-52}}, color={0,0,127}));
   connect(heat2massFlow.y, source.m_flow_in) annotation (Line(points={{0,-13},{
-          0,-20},{20,-20},{20,-68},{32,-68}}, color={0,0,127}));
+          0,-20},{20,-20},{20,-68},{30,-68}}, color={0,0,127}));
   connect(senT_supply.port_b, sink.ports[1])
     annotation (Line(points={{-54,-60},{-40,-60}}, color={0,127,255}));
   connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-64,-49},{-64,-8},
@@ -135,6 +152,16 @@ equation
           {-52,12}}, color={0,0,127}));
   connect(mindeltaT.y, max.u2) annotation (Line(points={{-103,-28},{-78,-28},{
           -78,0},{-52,0}}, color={0,0,127}));
+  connect(min.y, source.T_in) annotation (Line(points={{64,-13},{64,-42},{24,
+          -42},{24,-64},{30,-64}}, color={0,0,127}));
+  connect(TReturnNominal.y, min.u1)
+    annotation (Line(points={{35,72},{70,72},{70,10}}, color={0,0,127}));
+  connect(senT_supply.T, deltaT1.u2)
+    annotation (Line(points={{-64,-49},{-64,28},{24,28}}, color={0,0,127}));
+  connect(mindeltaT.y, deltaT1.u1) annotation (Line(points={{-103,-28},{-18,-28},
+          {-18,16},{24,16}}, color={0,0,127}));
+  connect(deltaT1.y, min.u2)
+    annotation (Line(points={{47,22},{58,22},{58,10}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
