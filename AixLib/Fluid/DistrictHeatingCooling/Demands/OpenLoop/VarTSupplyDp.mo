@@ -98,7 +98,7 @@ public
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
-  Modelica.Blocks.Sources.Constant mindeltaT(k=5)
+  Modelica.Blocks.Sources.Constant mindeltaT(k=20)
     "Temperature of return line in °C" annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
