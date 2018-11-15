@@ -156,12 +156,12 @@ equation
           -42},{24,-64},{30,-64}}, color={0,0,127}));
   connect(TReturnNominal.y, min.u1)
     annotation (Line(points={{35,72},{70,72},{70,10}}, color={0,0,127}));
-  connect(senT_supply.T, deltaT1.u2)
-    annotation (Line(points={{-64,-49},{-64,28},{24,28}}, color={0,0,127}));
-  connect(mindeltaT.y, deltaT1.u1) annotation (Line(points={{-103,-28},{-18,-28},
-          {-18,16},{24,16}}, color={0,0,127}));
   connect(deltaT1.y, min.u2)
     annotation (Line(points={{47,22},{58,22},{58,10}}, color={0,0,127}));
+  connect(senT_supply.T, deltaT1.u1)
+    annotation (Line(points={{-64,-49},{-64,16},{24,16}}, color={0,0,127}));
+  connect(mindeltaT.y, deltaT1.u2) annotation (Line(points={{-103,-28},{-20,-28},
+          {-20,28},{24,28}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
