@@ -29,7 +29,7 @@ equation
     if (HSkyDifTil[i]+HDirTil[i])>lim then
        windowFac[i] = shadingFactor;
     else
-       windowFac[i] = 0;
+       windowFac[i] = 1;
     end if;
   end for;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
