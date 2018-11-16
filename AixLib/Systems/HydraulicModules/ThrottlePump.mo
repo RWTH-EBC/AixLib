@@ -1,7 +1,13 @@
 within AixLib.Systems.HydraulicModules;
 model ThrottlePump "Throttle circuit with pump and two way valve"
-  extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
+  extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule(
+    senT_a1(transferHeat=false),
+    senT_b1(transferHeat=true, tauHeaTra=500),
+    senT_b2(transferHeat=false),
+    senT_a2(transferHeat=false));
 
+  parameter Boolean valveCharacteristics=false "If true, valve opening characteristics will be used"
+    annotation (Dialog(tab="General", group="Valve parameters"));
 
   replaceable BaseClasses.BasicPumpInterface basicPumpInterface(redeclare
       package Medium = Medium,
@@ -77,21 +83,19 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
       Placement(transformation(extent={{20,-70},{0,-50}})));
 
 
+  Modelica.Blocks.Tables.CombiTable1D valveChar(table=[0,0; 0.1,0.1; 0.2,0.2;
+        0.3,0.3; 0.4,0.4; 0.5,0.5; 0.6,0.6; 0.7,0.7; 0.8,0.8; 0.9,0.9; 1,1]) if
+                                                   valveCharacteristics
+    annotation (Dialog(enable=true,group="Valve parameters"),Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-36,58})));
 equation
+
   connect(val.port_b,pipe2. port_a)
     annotation (Line(points={{-16,20},{0,20}},     color={0,127,255}));
-  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-26,32},{-26,
-          100.1},{0.1,100.1}},           color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(basicPumpInterface.port_b,pipe3. port_a)
     annotation (Line(points={{48,20},{60,20}},   color={0,127,255}));
-  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-21,27},
-          {-21,100.1},{0.1,100.1}},     color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
       points={{40,28},{40,100.1},{0.1,100.1}},
       color={255,204,51},
@@ -119,6 +123,32 @@ equation
           10},{70,-2},{10,-2},{10,-20},{32,-20}}, color={191,0,0}));
   connect(pipe1.heatPort, prescribedTemperature.port) annotation (Line(points={{-70,
           10},{-70,-2},{10,-2},{10,-20},{32,-20}}, color={191,0,0}));
+
+    if valveCharacteristics then
+    connect(valveChar.y[1], val.y) annotation (Line(points={{-36,47},{-36,40},{-26,
+            40},{-26,32}},                                                                        color={0,0,127}));
+    connect(valveChar.u[1], hydraulicBus.valSet) annotation (Line(points={{-36,70},
+            {-36,70},{-36,72},{-36,72},{-36,88},{-36,88},{-36,100.1},{0.1,100.1}},
+                                             color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+
+  else
+    connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-26,32},{-18,32},
+            {-18,100.1},{0.1,100.1}},
+                                    color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+    end if;
+    connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-21,27},
+          {0,27},{0,28},{0,28},{0.1,28},{0.1,100.1}},       color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

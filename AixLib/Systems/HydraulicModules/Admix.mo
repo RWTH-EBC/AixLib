@@ -15,14 +15,11 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
             {38,28}})));
 
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume" annotation(Dialog(tab="Advanced"));
-  parameter Boolean valveCharacteristics=false "If true, valve opening characteristics will be used"
-    annotation (Dialog(tab="General", group="Valve parameters"));
 
 
 
-  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
+  Fluid.Actuators.Valves.ThreeWay_two_characteristics         val(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    l={0.001,0.001},
     redeclare package Medium = Medium,
     T_start=T_start,
     init=Modelica.Blocks.Types.Init.NoInit,
@@ -137,11 +134,6 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     annotation (Placement(transformation(extent={{-38,-60},{-22,-76}})));
 
 
-  Modelica.Blocks.Tables.CombiTable1D valveChar if valveCharacteristics
-    annotation (Dialog(enable=true,group="Valve parameters"),Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-36,58})));
 equation
 
   connect(val.port_2, pipe2.port_a)
@@ -188,23 +180,9 @@ equation
   connect(pipe4.heatPort, prescribedTemperature.port) annotation (Line(points={{32,
           -52},{32,-48},{0,-48},{0,-20},{32,-20}}, color={191,0,0}));
 
-  if valveCharacteristics then
-    connect(valveChar.y[1], val.y) annotation (Line(points={{-36,47},{-36,40},{-30,
-            40},{-30,32}},                                                                        color={0,0,127}));
-    connect(valveChar.u[1], hydraulicBus.valSet) annotation (Line(points={{-36,70},
-            {-36,70},{-36,72},{-36,72},{-36,88},{-36,88},{-36,100.1},{0.1,100.1}},
-                                             color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
 
-  else
-    connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-30,32},{-18,32},
-          {-18,100.1},{0.1,100.1}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  end if;
+  connect(val.y, hydraulicBus.valSet);
+
   connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-25,27},
           {-26,27},{-26,28},{-26,28},{0.1,28},{0.1,100.1}}, color={0,0,127}),
       Text(
@@ -212,6 +190,11 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
+  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-30,32},{-30,32},
+          {-30,34},{-30,34},{-30,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
     annotation (Line(points={{-30,47},{-30,32}}, color={0,0,127}),
     Documentation(info="<html>
 <p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>

@@ -4,7 +4,7 @@ model Injection "Injection circuit with pump and three way valve"
 
   replaceable BaseClasses.BasicPumpInterface basicPumpInterface(
     redeclare package Medium = Medium,
-    final allowFlowReversal=allowFlowReversal,
+    allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal) annotation (
     Dialog(group="Actuators"),
     choicesAllMatching=true,
@@ -15,8 +15,7 @@ model Injection "Injection circuit with pump and three way valve"
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"
     annotation (Dialog(tab="Advanced"));
 
-
-  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
+  Fluid.Actuators.Valves.ThreeWay_two_characteristics         val(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     l={0.001,0.001},
     dpFixed_nominal={8000,8000},
@@ -25,7 +24,8 @@ model Injection "Injection circuit with pump and three way valve"
     init=Modelica.Blocks.Types.Init.NoInit,
     y_start=0.5,
     tau=0.2,
-    final m_flow_nominal=m_flow_nominal) annotation (Dialog(enable=true, group="Actuators"),
+    final m_flow_nominal=m_flow_nominal,
+    Kv=10)                               annotation (Dialog(enable=true, group="Actuators"),
       Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -281,14 +281,15 @@ equation
           -52},{52,-46},{32,-46},{32,-20}}, color={191,0,0}));
   connect(pipe6.heatPort, prescribedTemperature.port) annotation (Line(points={{-8,
           -52},{-8,-46},{32,-46},{32,-20}}, color={191,0,0}));
+
   connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-40,-69.6},{-40,
-          -82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+          -102},{-130,-102},{-130,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-44,
-          -65.6},{-44,-82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}),
-      Text(
+          -65.6},{-58,-65.6},{-58,-102},{-130,-102},{-130,100.1},{0.1,100.1}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

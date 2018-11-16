@@ -3,6 +3,7 @@ SimpleValve
 ThermostaticValve
 ThreeWayEqualPercentageLinear
 ThreeWayLinear
+ThreeWay_two_characteristics
 TwoWayEqualPercentage
 TwoWayLinear
 TwoWayPolynomial

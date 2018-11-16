@@ -13,7 +13,7 @@ package BasicHX
     replaceable package MediumWater = Modelica.Media.Water.StandardWater constrainedby
       Modelica.Media.Interfaces.PartialMedium "Fluid Water"  annotation(choicesAllMatching,Dialog(tab="General", group="Fluid Water"));
 
-    parameter Modelica.SIunits.PressureDifference dp_nom_Air = 66 "Nominal Pressure drop of Medium Air in Pa" annotation (Dialog(tab="General", group="Nominal Parameters"));
+    parameter Modelica.SIunits.PressureDifference dp_nom_Air = 66 "Nominal Pressure drop of Medium Air in Pa" annotation (ialog(tab="General", group="Nominal Parameters"));
     parameter Modelica.SIunits.PressureDifference dp_nom_Water = 6000 "Nominal Pressure drop of Medium Water in Pa" annotation (Dialog(tab="General", group="Nominal Parameters"));
 
     parameter Modelica.SIunits.MassFlowRate m_flow_nom_Air = 3000/3600*1.2 "nominal mass flow rate in kg/s medium Air" annotation (Dialog(tab="General", group="Nominal Parameters"));
@@ -145,7 +145,7 @@ package BasicHX
     Q_flow_Air = sum(volAir.heatPort.Q_flow);
     Q_flow_Water = sum(volWater.heatPort.Q_flow);
     connect(volAir.heatPort, heatCapacitorAir.port) annotation (Line(points={{-14,82},
-            {-18,82},{-18,58},{10,58}},color={191,0,0}));
+            {-18,82},{-18,58},{8,58}}, color={191,0,0}));
     connect(volWater.heatPort, heatCapacitorWater.port) annotation (Line(points={{-18,-50},
             {-24,-50},{-24,-26},{6,-26}},           color={191,0,0}));
 
@@ -171,7 +171,7 @@ package BasicHX
     connect(convection.solid, heatCapacitorWater.port) annotation (Line(points={{-6,
             4},{-6,4},{-6,-26},{6,-26}}, color={191,0,0}));
     connect(heatCapacitorAir.port, convection.fluid)
-      annotation (Line(points={{10,58},{2,58},{2,24},{-6,24}}, color={191,0,0}));
+      annotation (Line(points={{8,58},{2,58},{2,24},{-6,24}},  color={191,0,0}));
     connect(realExpression1.y, convection.Gc)
       annotation (Line(points={{-47,14},{-16,14}}, color={0,0,127}));
     annotation (   Icon(coordinateSystem(preserveAspectRatio=false,

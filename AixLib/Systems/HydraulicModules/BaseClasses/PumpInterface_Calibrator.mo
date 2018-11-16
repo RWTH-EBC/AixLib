@@ -2,7 +2,7 @@ within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_Calibrator
   extends BasicPumpInterface;
   Zugabe.Fluid.Movers.PumpN pumpN( redeclare package Medium = Medium)
-    annotation (Dialog(enable=true),Placement(transformation(extent={{-10,-6},{10,14}})));
+    annotation (ChoicesAllMatching=true,Dialog(enable=true),Placement(transformation(extent={{-10,-6},{10,14}})));
 equation
   connect(port_a, pumpN.port_a) annotation (Line(points={{-100,0},{-54,0},{-54,4},
           {-10,4}}, color={0,127,255}));
