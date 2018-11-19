@@ -1,7 +1,7 @@
 within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
-    redeclare Fluid.HeatPumps.HeatPump heatPump(
+      redeclare Fluid.HeatPumps.HeatPump heatPump(
       final initType=initType,
       final pCon_start=pCon_start,
       final TCon_start=TCon_start,
@@ -18,21 +18,20 @@ model HeatPumpSystem
       final dpCon_nominal=dpCon_nominal,
       final deltaM_con=deltaM_con,
       final CCon=CCon,
-      final GCon=GCon,
+      final GConOut=GConOut,
       final mFlow_evaNominal=mFlow_evaNominal,
       final VEva=VEva,
       final dpEva_nominal=dpEva_nominal,
       final deltaM_eva=deltaM_eva,
       final CEva=CEva,
-      final GEva=GEva,
+      final GEvaOut=GEvaOut,
       final allowFlowReversalEva=allowFlowReversalEva,
       final allowFlowReversalCon=allowFlowReversalCon,
       final tauSenT=tauSenT,
-      final tauHeaTra=tauHeaTra,
       final TAmbCon_nominal=TAmbCon_nominal,
       final TAmbEva_nominal=TAmbEva_nominal,
-      final use_ConCap=use_conCap,
-      final use_EvaCap=use_evaCap,
+      final use_conCap=use_conCap,
+      final use_evaCap=use_evaCap,
       final use_refIne=use_refIne,
       final transferHeat=transferHeat,
       final scalingFactor=scalingFactor,
@@ -40,10 +39,14 @@ model HeatPumpSystem
       redeclare final package Medium_eva = Medium_eva,
       redeclare final model PerDataHea = PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
-      GConIns=10,
-      GEvaIns=10,
-      use_revHP=use_revHP),
-                   hPSystemController(use_calcCOP=false));
+      GConIns=GConIns,
+      GEvaIns=GEvaIns,
+      use_revHP=use_revHP,
+      final tauHeaTraEva=tauHeaTraEva,
+      final tauHeaTraCon=tauHeaTraCon),
+                            hPSystemController(use_calcCOP=false),
+    addPowerToMediumEva=true,
+    transferHeat=true);
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",
@@ -59,19 +62,19 @@ model HeatPumpSystem
     AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
-  parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=false);
+  parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=true);
   parameter Boolean use_refIne=true  "Consider the inertia of the refrigerant cycle"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia"), choices(checkBox=true));
   constant Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency representing inertia of refrigerant cycle"
-    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=false);
+    annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne), Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
 //Condenser/Evaporator
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=true);
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=true);
   parameter Modelica.SIunits.PressureDifference dpEva_nominal
     "Pressure drop at nominal mass flow rate"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
@@ -80,10 +83,10 @@ model HeatPumpSystem
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=false);
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=true);
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=false);
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=true);
 
   parameter Boolean use_conCap=false
     "If heat losses at capacitor side are considered or not"
@@ -96,19 +99,27 @@ model HeatPumpSystem
   parameter Modelica.SIunits.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=use_evaCap), Evaluate=false);
-  parameter Modelica.SIunits.ThermalConductance GEva
-    "Constant thermal conductance of Evaporator material"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
-      enable=use_evaCap), Evaluate=false);
+      enable=use_evaCap), Evaluate=true);
+  parameter Modelica.SIunits.ThermalConductance GEvaOut
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    annotation (Evaluate=true,Dialog(group="Evaporator", tab="Evaporator/ Condenser",
+      enable=use_evaCap));
+  parameter Modelica.SIunits.ThermalConductance GEvaIns
+    "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
+    annotation (Evaluate=true,Dialog(group="Evaporator", tab="Evaporator/ Condenser",
+      enable=use_evaCap));
   parameter Modelica.SIunits.HeatCapacity CCon
     "Heat capacity of Condenser (= cp*m)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=use_conCap), Evaluate=false);
-  parameter Modelica.SIunits.ThermalConductance GCon
-    "Constant thermal conductance of condenser material"
-    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
-      enable=use_conCap), Evaluate=false);
+      enable=use_conCap), Evaluate=true);
+  parameter Modelica.SIunits.ThermalConductance GConOut
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    annotation (Evaluate=true,Dialog(group="Condenser", tab="Evaporator/ Condenser",
+      enable=use_conCap));
+  parameter Modelica.SIunits.ThermalConductance GConIns
+    "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
+    annotation (Evaluate=true,Dialog(group="Condenser", tab="Evaporator/ Condenser",
+      enable=use_conCap));
 //Dynamics
   parameter Real x_start[nthOrder]=zeros(nthOrder)
     "Initial or guess values of states"

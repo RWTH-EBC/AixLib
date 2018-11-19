@@ -53,22 +53,22 @@ model HeatPump "Base model of realistic heat pump"
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
-  parameter Boolean use_ConCap=true
+  parameter Boolean use_conCap=true
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CCon
     "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true,Dialog(group="Heat Losses",
         tab="Condenser",
-      enable=use_ConCap));
+      enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GConOut
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
-      enable=use_ConCap));
+      enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GConIns
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
-      enable=use_ConCap));
+      enable=use_conCap));
 //Evaporator
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
@@ -81,22 +81,22 @@ model HeatPump "Base model of realistic heat pump"
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
-  parameter Boolean use_EvaCap=true
+  parameter Boolean use_evaCap=true
     "If heat losses at capacitor side are considered or not"
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
     "Heat capacity of Evaporator (= cp*m)"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
-      enable=use_EvaCap));
+      enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaOut
     "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
-      enable=use_EvaCap));
+      enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaIns
     "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
-      enable=use_EvaCap));
+      enable=use_evaCap));
 //Assumptions
   parameter Modelica.SIunits.Time tauSenT=1
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
@@ -184,7 +184,7 @@ model HeatPump "Base model of realistic heat pump"
     final tau=tauSenT,
     final T_start=TCon_start,
     final p_start=pCon_start,
-    final use_cap=use_ConCap,
+    final use_cap=use_conCap,
     final X_start=XCon_start,
     final from_dp=from_dp,
     final homotopyInitialization=homotopyInitialization,
@@ -201,7 +201,7 @@ model HeatPump "Base model of realistic heat pump"
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
     final deltaM=deltaM_eva,
-    final use_cap=use_EvaCap,
+    final use_cap=use_evaCap,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*abs(mFlow_evaNominal),
     final show_T=show_TPort,
@@ -265,13 +265,13 @@ model HeatPump "Base model of realistic heat pump"
         rotation=90,
         origin={-76,-136})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
-    use_EvaCap "Foreces heat losses according to ambient temperature"
+    use_evaCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,-108})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
-    use_ConCap "Foreces heat losses according to ambient temperature"
+    use_conCap "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
@@ -355,8 +355,8 @@ model HeatPump "Base model of realistic heat pump"
     final m_flow_small=1E-4*mFlow_conNominal,
     final T_start=TCon_start,
     final tau=tauSenT,
-    final m_flow_nominal=mFlow_conNomina*scalingFactorl,
-    final tauHeaTra=tauHeaTraCon)
+    final tauHeaTra=tauHeaTraCon,
+    final m_flow_nominal=mFlow_conNominal*scalingFactor)
     "Temperature at sink outlet" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
@@ -569,24 +569,24 @@ equation
     points={{43.5,8.3333},{37.5,0.3333},{25.5,-1.667},{33.5,-9.667},{17.5,-11.667},{27.5,-21.667},{13.5,-23.667},
               {11.5,-31.667}},
       smooth=Smooth.Bezier,
-      visible=use_EvaCap),
+      visible=use_evaCap),
         Polygon(
           points={{-70,-122},{-68,-108},{-58,-114},{-70,-122}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={0,0,0},
-          visible=use_EvaCap),
+          visible=use_evaCap),
     Line( origin={40.5,93.667},
           points={{39.5,6.333},{37.5,0.3333},{25.5,-1.667},{33.5,-9.667},{17.5,
               -11.667},{27.5,-21.667},{13.5,-23.667},{11.5,-27.667}},
           smooth=Smooth.Bezier,
-          visible=use_ConCap),
+          visible=use_conCap),
         Polygon(
           points={{86,110},{84,96},{74,102},{86,110}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={0,0,0},
-          visible=use_ConCap),
+          visible=use_conCap),
         Line(
           points={{-42,72},{34,72}},
           color={0,0,0},

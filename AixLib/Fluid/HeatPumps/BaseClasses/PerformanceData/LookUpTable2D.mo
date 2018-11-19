@@ -6,29 +6,29 @@ model LookUpTable2D "Performance data coming from manufacturer"
     "Smoothness of table interpolation";
   parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable = AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()
     "Data Table of HP" annotation(choicesAllMatching = true);
+  parameter Boolean extrapolation=true "False to hold last value";
+  parameter Boolean printAsserts=false
+    "WARNING: This will lead to a lot of state-events if extrapolation occurs frequently! If extrapolation is enabled, the user will get warnings when extrapolation occurs."
+    annotation (Dialog(enable=extrapolation));
 
-  Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
-    tableName="NoName",
-    fileName="NoName",
-    table=dataTable.tableQdot_con,
-    final tableOnFile=false,
-    u1(unit="degC"),
-    u2(unit="degC"),
-    y(unit="W",displayUnit="kW"),
-    final smoothness=smoothness)
+  Utilities.Tables.CombiTable2DExtra  Qdot_ConTable(
+    final smoothness=smoothness,
+    final u1(unit="degC"),
+    final u2(unit="degC"),
+    final y(unit="W", displayUnit="kW"),
+    final extrapolation=extrapolation,
+    final table=dataTable.tableQdot_con)
     annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-14,-14},
             {14,14}},
         rotation=-90,
         origin={46,34})));
-  Modelica.Blocks.Tables.CombiTable2D P_eleTable(
-    tableName="NoName",
-    fileName="NoName",
-    table=dataTable.tableP_ele,
-    final tableOnFile=false,
-    u1(unit="degC"),
-    u2(unit="degC"),
-    y(unit="W",displayUnit="kW"),
-    final smoothness=smoothness)
+  Utilities.Tables.CombiTable2DExtra  P_eleTable(
+    final smoothness=smoothness,
+    extrapolation=extrapolation,
+    final u1(unit="degC"),
+    final u2(unit="degC"),
+    final y(unit="W", displayUnit="kW"),
+    final table=dataTable.tableP_ele)
                     "Electrical power table"
     annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-14,-14},
             {14,14}},
@@ -71,7 +71,13 @@ model LookUpTable2D "Performance data coming from manufacturer"
         extent={{-7,-7},{7,7}},
         rotation=-90,
         origin={-11,23})));
+
+
 protected
+  parameter Real minSou = min(dataTable.tableP_ele[1,2:end]);
+  parameter Real minSup = min(dataTable.tableP_ele[2:end,1]);
+  parameter Real maxSou = max(dataTable.tableP_ele[1,2:end]);
+  parameter Real maxSup = max(dataTable.tableP_ele[2:end,1]);
   Modelica.Blocks.Sources.Constant       realCorr(final k=scalingFactor)
     "Calculates correction of table output based on scaling factor"
     annotation (Placement(transformation(
@@ -83,19 +89,15 @@ protected
             {5,5}},
         rotation=270,
         origin={-81,-43})));
-  /*
-  parameter Real minSou = min(dataTable.tableP_ele[1,2:end]);
-  parameter Real minSup = min(dataTable.tableP_ele[2:end,1]);
-  parameter Real maxSou = max(dataTable.tableP_ele[1,2:end]);
-  parameter Real maxSup = max(dataTable.tableP_ele[2:end,1]);
-*/
+
 equation
-  /*
+  if printAsserts then
   assert(minSou+273.15 < sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
   assert(maxSou+273.15 > sigBusHP.T_flow_ev, "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
   assert(minSup+273.15 < sigBusHP.T_ret_co, "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
   assert(maxSup+273.15 > sigBusHP.T_ret_co, "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-  */
+  else
+  end if;
   connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
           60},{37.6,60},{37.6,50.8}},      color={0,0,127}));
   connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(points={{52,65.4},{-68.4,

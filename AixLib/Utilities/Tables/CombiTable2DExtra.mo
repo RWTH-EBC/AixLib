@@ -18,14 +18,14 @@ model CombiTable2DExtra
         rotation=0,
         origin={20,0})));
   Modelica.Blocks.Nonlinear.Limiter limiter1(final uMax=max(table[2:end, 1]),
-      final uMin=min(table[2:end, 1])) if extrapolation
+      final uMin=min(table[2:end, 1])) if not extrapolation
     annotation (Placement(transformation(extent={{-76,24},{-60,40}})));
   Modelica.Blocks.Nonlinear.Limiter limiter2(final uMax=max(table[1, 2:end]),
-      final uMin=min(table[1, 2:end])) if extrapolation
+      final uMin=min(table[1, 2:end])) if not extrapolation
     annotation (Placement(transformation(extent={{-76,-40},{-60,-24}})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThrough2 if not extrapolation
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough2 if extrapolation
     annotation (Placement(transformation(extent={{-76,-68},{-60,-52}})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThrough1 if not extrapolation
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough1 if extrapolation
     annotation (Placement(transformation(extent={{-76,52},{-60,68}})));
 equation
   connect(combiTable2D.y, y)

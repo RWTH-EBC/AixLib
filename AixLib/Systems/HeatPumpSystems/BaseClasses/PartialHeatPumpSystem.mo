@@ -30,7 +30,7 @@ partial model PartialHeatPumpSystem
           use_secHeaGen), choicesAllMatching=true);
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
-    annotation (Dialog(group="System", enable=use_secHeaGen), Evaluate=false);
+    annotation (Dialog(group="System", enable=use_secHeaGen), Evaluate=true);
   parameter Boolean use_conPum=true
     "True if pump or fan at condenser side are included into this model"
     annotation (Dialog(group="Sink"),choices(checkBox=true));
@@ -85,7 +85,7 @@ partial model PartialHeatPumpSystem
     "Temperature at which the legionella in DWH dies" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
-      enable=use_antLeg), Evaluate=false);
+      enable=use_antLeg), Evaluate=true);
   parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control" annotation (Dialog(
       tab="Heat Pump Control",
@@ -113,21 +113,21 @@ partial model PartialHeatPumpSystem
   parameter Modelica.SIunits.Time minRunTime=12000
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=use_sec and use_minRunTime), Evaluate=false);
+      enable=use_sec and use_minRunTime), Evaluate=true);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
   parameter Modelica.SIunits.Time minLocTime=600
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=use_sec and use_minLocTime), Evaluate=false);
+      enable=use_sec and use_minLocTime), Evaluate=true);
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
   parameter Real maxRunPerHou=5
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
-      enable=use_sec and use_runPerHou), Evaluate=false);
+      enable=use_sec and use_runPerHou), Evaluate=true);
   parameter Boolean pre_n_start=false
                                      "Start value of pre(n) at initial time"
     annotation (Dialog(
@@ -196,22 +196,22 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(tab="Initialization", group="Parameters"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pCon_start=
       Medium_con.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pEva_start=
       Medium_eva.p_default "Start value of pressure"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
-    annotation (Evaluate=false,Dialog(tab="Initialization", group="Evaporator"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
 
 //Dynamics
   parameter Modelica.Fluid.Types.Dynamics massDynamics
@@ -221,6 +221,12 @@ partial model PartialHeatPumpSystem
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equation"));
 //Assumptions
+  parameter Modelica.SIunits.Time tauSenT=1
+    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
+  parameter Boolean transferHeat=true
+    "If true, temperature T converges towards TAmb when no flow"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions", group="Evaporator"),            choices(checkBox=true));
@@ -235,30 +241,25 @@ partial model PartialHeatPumpSystem
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
     annotation (Dialog(tab="Assumptions", group="Condenser",
       enable=use_conPum), choices(checkBox=true));
-  parameter Modelica.SIunits.Time tauSenT=1
-    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
-  parameter Boolean transferHeat=true
-    "If true, temperature T converges towards TAmb when no flow"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
-  parameter Modelica.SIunits.Time tauHeaTra=1200
-    "Time constant for heat transfer in temperature sensors, default 20 minutes"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Temperature sensors",
-      enable=transferHeat));
+
+  parameter Modelica.SIunits.Time tauHeaTraEva=1200
+    "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
+    annotation (Dialog(tab="Assumptions", group="Evaporator",enable=transferHeat),         Evaluate=true);
+  parameter Modelica.SIunits.Time tauHeaTraCon=1200
+    "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
+    annotation (Dialog(tab="Assumptions", group="Condenser",enable=transferHeat),Evaluate=true);
   parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(
       tab="Assumptions",
       group="Condenser",
-      enable=transferHeat), Evaluate=false);
+      enable=transferHeat), Evaluate=true);
   parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
     annotation (Dialog(
       tab="Assumptions",
       group="Evaporator",
-      enable=transferHeat), Evaluate=false);
+      enable=transferHeat), Evaluate=true);
 
   replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
     Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
@@ -416,8 +417,9 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
-          {-60,-60},{-100,-60}}, color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
+          -15.2},{-60,-60},{-100,-60}},
+                                 color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},

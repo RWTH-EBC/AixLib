@@ -99,9 +99,9 @@ model HeatPumpSystem "Example for a heat pump system"
     use_conCap=false,
     use_evaCap=false,
     CEva=0,
-    GEva=0,
+    GEvaOut=0,
     CCon=0,
-    GCon=0,
+    GConOut=0,
     perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12(),
     use_minRunTime=true,
     minRunTime(displayUnit="min"),
@@ -118,14 +118,16 @@ model HeatPumpSystem "Example for a heat pump system"
     redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
           hys=2),
     scalingFactor=1,
-    TCon_start=313.15,
-    TEva_start=283.15,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,-5.0,
             0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,4958,
-            5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,7583])))
+            5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,7583])),
+    TCon_start=313.15,
+    TEva_start=283.15,
+    GEvaIns=0,
+    GConIns=0)
     annotation (Placement(transformation(extent={{8,-86},{62,-26}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
