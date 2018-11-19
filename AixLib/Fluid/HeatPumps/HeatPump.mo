@@ -61,12 +61,12 @@ model HeatPump "Base model of realistic heat pump"
     "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true,Dialog(group="Heat Losses",
         tab="Condenser",
       enable=use_ConCap));
-  parameter Modelica.SIunits.ThermalConductance GCon
-    "Constant thermal conductance of condenser material"
+  parameter Modelica.SIunits.ThermalConductance GConOut
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
   parameter Modelica.SIunits.ThermalConductance GConIns
-    "Constant thermal conductance of condenser material"
+    "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
 //Evaporator
@@ -89,22 +89,15 @@ model HeatPump "Base model of realistic heat pump"
     "Heat capacity of Evaporator (= cp*m)"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
-  parameter Modelica.SIunits.ThermalConductance GEva
-    "Constant thermal conductance of Evaporator material"
+  parameter Modelica.SIunits.ThermalConductance GEvaOut
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaIns
-    "Constant thermal conductance of Evaporator material"
+    "Constant parameter for heat transfer to heat exchangers capacity. Represents a sum of thermal resistances such as forced convection and conduction inside of the capacity"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
 //Assumptions
-  parameter Boolean allowFlowReversalEva=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation (Dialog(group="Evaporator", tab="Assumptions"));
-  parameter Boolean allowFlowReversalCon=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation (Dialog(group="Condenser", tab="Assumptions"));
-
   parameter Modelica.SIunits.Time tauSenT=1
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
@@ -112,17 +105,28 @@ model HeatPump "Base model of realistic heat pump"
   parameter Boolean transferHeat=true
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
-  parameter Modelica.SIunits.Time tauHeaTra=1200
-    "Time constant for heat transfer in temperature sensors, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"),Evaluate=true);
+  parameter Boolean allowFlowReversalEva=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation (Dialog(group="Evaporator", tab="Assumptions"));
+  parameter Boolean allowFlowReversalCon=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation (Dialog(group="Condenser", tab="Assumptions"));
+
+  parameter Modelica.SIunits.Time tauHeaTraEva=1200
+    "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
+    annotation (Dialog(tab="Assumptions", group="Evaporator",enable=transferHeat),         Evaluate=true);
+  parameter Modelica.SIunits.Time tauHeaTraCon=1200
+    "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
+    annotation (Dialog(tab="Assumptions", group="Condenser",enable=transferHeat),Evaluate=true);
   parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side" annotation (               Dialog(tab=
           "Assumptions",                                                                                               group=
-          "Condenser"));
+          "Condenser",
+      enable=transferHeat));
 
   parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
-    annotation (               Dialog(tab="Assumptions",group="Evaporator"));
+    annotation (               Dialog(tab="Assumptions",group="Evaporator",enable=transferHeat));
 
 //Initialization
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
@@ -177,11 +181,9 @@ model HeatPump "Base model of realistic heat pump"
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final show_T=show_TPort,
     final deltaM=deltaM_con,
-    final dp_nominal=dpCon_nominal,
     final tau=tauSenT,
     final T_start=TCon_start,
     final p_start=pCon_start,
-    final kAOut_nominal=GCon,
     final use_cap=use_ConCap,
     final X_start=XCon_start,
     final from_dp=from_dp,
@@ -191,16 +193,15 @@ model HeatPump "Base model of realistic heat pump"
     final is_con=true,
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
-    final m_flow_nominal=mFlow_conNominal,
-    final kAInn=GCon + GConIns*abs(mFlow_con.m_flow/mFlow_conNominal)^0.88)
-    "Heat exchanger model for the condenser"
-    annotation (Placement(transformation(extent={{-16,76},{16,108}})));
+    final GOut=GConOut*scalingFactor,
+    final m_flow_nominal=mFlow_conNominal*scalingFactor,
+    final dp_nominal=dpCon_nominal*scalingFactor,
+    final GInn=GConIns*scalingFactor) "Heat exchanger model for the condenser"
+    annotation (Placement(transformation(extent={{-16,78},{16,110}})));
   AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
     final deltaM=deltaM_eva,
-    final dp_nominal=dpEva_nominal,
     final use_cap=use_EvaCap,
-    final kAOut_nominal=GEva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*abs(mFlow_evaNominal),
     final show_T=show_TPort,
@@ -215,9 +216,10 @@ model HeatPump "Base model of realistic heat pump"
     final is_con=false,
     final V=VEva*scalingFactor,
     final C=CEva*scalingFactor,
-    final m_flow_nominal=mFlow_evaNominal,
-    kAInn=GEva + GEvaIns*abs(mFlow_eva.m_flow/mFlow_evaNominal)^0.88)
-                                "Heat exchanger model for the evaporator"
+    final m_flow_nominal=mFlow_evaNominal*scalingFactor,
+    final dp_nominal=dpEva_nominal*scalingFactor,
+    final GOut=GEvaOut*scalingFactor,
+    GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
@@ -311,30 +313,30 @@ model HeatPump "Base model of realistic heat pump"
   Sensors.TemperatureTwoPort senT_a2(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_nominal=mFlow_evaNominal,
     final m_flow_small=1E-4*mFlow_evaNominal,
     final initType=initType,
     final T_start=TEva_start,
     final transferHeat=transferHeat,
     final TAmb=TAmbEva_nominal,
-    final tauHeaTra=tauHeaTra,
-    final tau=tauSenT)         "Temperature at sink inlet" annotation (
-      Placement(transformation(
+    final tauHeaTra=tauHeaTraEva,
+    final tau=tauSenT,
+    final m_flow_nominal=mFlow_evaNominal*scalingFactor)
+    "Temperature at sink inlet" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={38,-86})));
   Sensors.TemperatureTwoPort senT_b2(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_nominal=mFlow_evaNominal,
     final m_flow_small=1E-4*mFlow_evaNominal,
     final initType=initType,
     final T_start=TEva_start,
     final transferHeat=transferHeat,
     final TAmb=TAmbEva_nominal,
-    final tauHeaTra=tauHeaTra,
-    final tau=tauSenT)         "Temperature at sink outlet" annotation (
-      Placement(transformation(
+    final tauHeaTra=tauHeaTraEva,
+    final tau=tauSenT,
+    final m_flow_nominal=mFlow_evaNominal*scalingFactor)
+    "Temperature at sink outlet" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={-52,-86})));
@@ -348,32 +350,32 @@ model HeatPump "Base model of realistic heat pump"
     final initType=initType,
     final transferHeat=transferHeat,
     final TAmb=TAmbEva_nominal,
-    final tauHeaTra=tauHeaTra,
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_nominal=mFlow_conNominal,
     final m_flow_small=1E-4*mFlow_conNominal,
     final T_start=TCon_start,
-    final tau=tauSenT)        "Temperature at sink outlet" annotation (
-      Placement(transformation(
+    final tau=tauSenT,
+    final m_flow_nominal=mFlow_conNomina*scalingFactorl,
+    final tauHeaTra=tauHeaTraCon)
+    "Temperature at sink outlet" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={38,92})));
   Sensors.TemperatureTwoPort senT_a1(
     final initType=initType,
     final transferHeat=transferHeat,
-    final tauHeaTra=tauHeaTra,
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_nominal=mFlow_conNominal,
     final m_flow_small=1E-4*mFlow_conNominal,
     final T_start=TCon_start,
     final TAmb=TAmbCon_nominal,
-    final tau=tauSenT)          "Temperature at sink inlet" annotation (
-      Placement(transformation(
+    final tau=tauSenT,
+    final m_flow_nominal=mFlow_conNominal*scalingFactor,
+    final tauHeaTra=tauHeaTraCon)
+    "Temperature at sink inlet" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
-        origin={-34,92})));
+        origin={-34,90})));
   Sensors.MassFlowRate mFlow_con(final allowFlowReversal=allowFlowReversalEva,
       redeclare final package Medium = Medium_con)
     "Mass flow sensor at the evaporator" annotation (Placement(transformation(
@@ -437,7 +439,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(varTempOutCon.port, con.port_out) annotation (Line(
-      points={{60,110},{0,110},{0,108}},
+      points={{60,110},{0,110}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(T_amb_eva, varTempOutEva.T) annotation (Line(
@@ -451,11 +453,11 @@ equation
   connect(port_b2, port_b2) annotation (Line(points={{-100,-60},{-100,-60},{-100,
           -60}}, color={0,127,255}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(
-      points={{16,64.6},{16,75.04},{0,75.04}},
+      points={{16,64.6},{16,77.04},{0,77.04}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(
-      points={{-16,64.6},{-16,75.04},{0,75.04}},
+      points={{-16,64.6},{-16,77.04},{0,77.04}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(realPassThroughnSetEva.y, eva.QFlow_in) annotation (Line(points={{16,-58.6},
@@ -473,13 +475,15 @@ equation
   connect(mFlow_eva.port_b, senT_a2.port_a) annotation (Line(points={{62,-60},{58,
           -60},{58,-86},{48,-86}}, color={0,127,255}));
   connect(con.port_a, senT_a1.port_b)
-    annotation (Line(points={{-16,92},{-24,92}}, color={0,127,255}));
-  connect(senT_a1.port_a, mFlow_con.port_b) annotation (Line(points={{-44,92},{
-          -56,92},{-56,60},{-66,60}}, color={0,127,255}));
+    annotation (Line(points={{-16,94},{-20,94},{-20,90},{-24,90}},
+                                                 color={0,127,255}));
+  connect(senT_a1.port_a, mFlow_con.port_b) annotation (Line(points={{-44,90},{-56,
+          90},{-56,60},{-66,60}},     color={0,127,255}));
   connect(port_a1, mFlow_con.port_a)
     annotation (Line(points={{-100,60},{-86,60}}, color={0,127,255}));
   connect(con.port_b, senT_b1.port_a)
-    annotation (Line(points={{16,92},{28,92}}, color={0,127,255}));
+    annotation (Line(points={{16,94},{22,94},{22,92},{28,92}},
+                                               color={0,127,255}));
   connect(port_b1, senT_b1.port_b) annotation (Line(points={{100,60},{72,60},{72,
           92},{48,92}}, color={0,127,255}));
   connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-52,-75},{-52,
@@ -507,7 +511,7 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-34,81},{-34,
+  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-34,79},{-34,
           40},{-76,40},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
