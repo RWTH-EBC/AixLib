@@ -63,7 +63,7 @@ model HeatPumpSystem "Example for a heat pump system"
     redeclare package Medium = Medium_sou,
     use_p=true,
     p=200000,
-    T=285.15) "Fluid source on source side"
+    T=290.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
 
   AixLib.Fluid.Sources.FixedBoundary sin(
@@ -118,17 +118,20 @@ model HeatPumpSystem "Example for a heat pump system"
     redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
           hys=2),
     scalingFactor=1,
-    redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,-5.0,
-            0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,4958,
-            5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,7583])),
+    GEvaIns=0,
+    GConIns=0,
     TCon_start=313.15,
     TEva_start=283.15,
-    GEvaIns=0,
-    GConIns=0)
-    annotation (Placement(transformation(extent={{8,-86},{62,-26}})));
+    redeclare model PerDataHea =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+        smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+        dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,
+            -5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,
+            4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,
+            7583]),
+        printAsserts=false,
+        extrapolation=false))
+    annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
     redeclare final package Medium = Medium_sin,
@@ -186,29 +189,29 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(sou.ports[1], heatPumpSystem.port_a2)
-    annotation (Line(points={{82,-90},{62,-90},{62,-77.4286}},
+    annotation (Line(points={{82,-90},{62,-90},{62,-79.4286}},
                                                           color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {14,-90},{14,-77.4286},{8,-77.4286}},
+          {14,-90},{14,-79.4286},{8,-79.4286}},
                                        color={0,127,255}));
   connect(rad.port_b, preSou.ports[1]) annotation (Line(points={{20,12},{-8,12},{-8,-22},
           {-22,-22}},          color={0,127,255}));
   connect(preSou.ports[2], heatPumpSystem.port_a1)
-    annotation (Line(points={{-22,-26},{-14,-26},{-14,-51.7143},{8,-51.7143}},
+    annotation (Line(points={{-22,-26},{-14,-26},{-14,-53.7143},{8,-53.7143}},
                                                            color={0,127,255}));
   connect(weaBus.TDryBul, heatPumpSystem.T_oda) annotation (Line(
-      points={{-68,64},{-58,64},{-58,-39.0714},{3.95,-39.0714}},
+      points={{-68,64},{-58,64},{-58,-41.0714},{3.95,-41.0714}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(senT_a1.port_a, heatPumpSystem.port_b1) annotation (Line(points={{88,-30},
-          {88,-51.7143},{62,-51.7143}},      color={0,127,255}));
+          {88,-53.7143},{62,-53.7143}},      color={0,127,255}));
   connect(senT_a1.port_b, rad.port_a) annotation (Line(points={{88,-10},{90,-10},
           {90,12},{40,12}}, color={0,127,255}));
   connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{54,
-          -20},{54,-16},{3.95,-16},{3.95,-30.0714}}, color={0,0,127}));
+          -20},{54,-16},{3.95,-16},{3.95,-32.0714}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
     experiment(StopTime=3600),
