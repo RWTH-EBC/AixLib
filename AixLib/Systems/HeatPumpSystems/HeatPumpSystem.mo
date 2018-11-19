@@ -11,8 +11,6 @@ model HeatPumpSystem
       final XEva_start=XEva_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-      final mSenFacCon=mSenFacCon,
-      final mSenFacEva=mSenFacEva,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
       final mFlow_conNominal=mFlow_conNominal,
@@ -43,7 +41,9 @@ model HeatPumpSystem
       redeclare final model PerDataHea = PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
       GConIns=10,
-      GEvaIns=10), hPSystemController(use_calcCOP=false));
+      GEvaIns=10,
+      use_revHP=use_revHP),
+                   hPSystemController(use_calcCOP=false));
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",

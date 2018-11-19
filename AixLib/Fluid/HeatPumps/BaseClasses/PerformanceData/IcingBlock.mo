@@ -11,7 +11,7 @@ model IcingBlock
                                                                        constrainedby
     AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct                                                                           "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
   Modelica.Blocks.Sources.RealExpression calcIceFac(final y=if (T_oda < 278.15
-         and calTim.hour == hourDay) then 0.3 else 1)
+         and calTim.hour == hourDay and calTim.minute < 10) then 0.3 else 1)
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Interfaces.RealInput T_flow_ev
     "Temperature at evaporator inlet"
