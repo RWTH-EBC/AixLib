@@ -56,8 +56,8 @@ model HeatPump
           dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable
-          =AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     use_refIne=false,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,

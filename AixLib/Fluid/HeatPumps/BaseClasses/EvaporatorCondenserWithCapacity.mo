@@ -2,7 +2,9 @@ within AixLib.Fluid.HeatPumps.BaseClasses;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
-    final prescribedHeatFlowRate=true, final V=V));
+    final prescribedHeatFlowRate=true,
+    final V=V),
+    final tau=30);
 
   parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
