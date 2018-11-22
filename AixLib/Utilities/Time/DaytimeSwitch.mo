@@ -1,16 +1,30 @@
 within AixLib.Utilities.Time;
 model DaytimeSwitch
   "If given daytime stamp is equal to current daytime output is true"
-  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
-  parameter Integer weekDay "Day of the week";
-  parameter Integer hourDay "Hour of the day";
+  parameter Boolean weekly=true
+    "Switch between a daily or weekly trigger approach" annotation(Dialog(
+        enable=not daily,descriptionLabel=true), choices(choice=true "Weekly",
+      choice=false "Daily",
+      radioButtons=true));
+
+  parameter Integer weekDay = 1 "Day of the week" annotation (Dialog(enable=weekly));
+  parameter Integer hourDay = 12
+                                "Hour of the day";
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim
     "Enumeration for choosing how reference time (time = 0) should be defined";
   parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
+  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
+
   Modelica.Blocks.Interfaces.BooleanOutput isDaytime
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+
 equation
-  isDaytime =(calTim.weekDay == weekDay and calTim.hour == hourDay);
+  if weekly then
+    isDaytime =(calTim.weekDay == weekDay and calTim.hour == hourDay); //Trigger every week
+  else
+    isDaytime =(calTim.hour == hourDay); //Trigger every day
+  end if;
+
   annotation (Icon(graphics={   Rectangle(
         extent={{-100,-100},{100,100}},
         lineColor={0,0,127},

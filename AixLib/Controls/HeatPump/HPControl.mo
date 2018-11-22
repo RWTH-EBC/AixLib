@@ -50,9 +50,12 @@ model HPControl
   parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control"
     annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
-  parameter Integer trigWeekDay=5
-    "Day of the week at which control is triggered"
-    annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
+  parameter Boolean weekly=true
+    "Switch between a daily or weekly trigger approach" annotation(Dialog(tab="Anti Legionella",descriptionLabel=true), choices(choice=true "Weekly",
+      choice=false "Daily",
+      radioButtons=true));
+  parameter Integer trigWeekDay "Day of the week at which control is triggered"
+    annotation (Dialog(tab="Anti Legionella", enable=use_antLeg and weekly));
   parameter Integer trigHour=3 "Hour of the day at which control is triggered"
     annotation (Dialog(tab="Anti Legionella", enable=use_antLeg));
 

@@ -6,8 +6,12 @@ model AntiLegionella "Control to avoid Legionella in the DHW"
 
   parameter Modelica.SIunits.Time minTimeAntLeg
     "Minimal duration of antilegionella control";
-
-  parameter Integer trigWeekDay "Day of the week at which control is triggered";
+  parameter Boolean weekly=true
+    "Switch between a daily or weekly trigger approach" annotation(Dialog(descriptionLabel=true), choices(choice=true "Weekly",
+      choice=false "Daily",
+      radioButtons=true));
+  parameter Integer trigWeekDay "Day of the week at which control is triggered"
+    annotation (Dialog(enable=weekly));
   parameter Integer trigHour "Hour of the day at which control is triggered";
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim
     "Enumeration for choosing how reference time (time = 0) should be defined";
