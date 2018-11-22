@@ -7,13 +7,17 @@ block DefrostControl
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(enable=not use_chiller));
-  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinHea(final threshold=
-       minIceFac) if not use_chiller
+  parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events.";
+  Modelica.Blocks.Logical.Hysteresis            iceFacGreMinHea(
+    final uLow=minIceFac,
+    final uHigh=minIceFac + deltaIceFac,
+    final pre_y_start=true) if
+                     not use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
         rotation=0,
-        origin={-31,-76})));
+        origin={-31,-78})));
  Modelica.Blocks.Interfaces.RealOutput Pel_deFro if not use_chiller
     "Relative speed of compressor. From 0 to 1" annotation (Placement(
         transformation(
@@ -60,13 +64,16 @@ block DefrostControl
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-12,52})));
-  Modelica.Blocks.Logical.GreaterEqualThreshold iceFacGreMinChi(final threshold=
-       minIceFac) if use_chiller
+  Modelica.Blocks.Logical.Hysteresis            iceFacGreMinChi(
+    final uLow=minIceFac,
+    final uHigh=minIceFac + deltaIceFac,
+    final pre_y_start=true) if
+                     use_chiller
     "Check if icing factor is greater than a boundary" annotation (Placement(
         transformation(
         extent={{-8,-9},{8,9}},
         rotation=0,
-        origin={-31,-50})));
+        origin={-31,-46})));
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     "If a chiller is used to defrost, mode will be false"
     annotation (Placement(transformation(extent={{58,-42},{78,-22}})));
@@ -85,7 +92,7 @@ equation
   connect(nSet, swiErr.u1) annotation (Line(points={{-116,20},{56,20}},
                color={0,0,127}));
   connect(sigBusHP.iceFac, iceFacGreMinHea.u) annotation (Line(
-      points={{-105.93,-61.93},{-68,-61.93},{-68,-76},{-40.6,-76}},
+      points={{-105.93,-61.93},{-68,-61.93},{-68,-78},{-40.6,-78}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash), Text(
@@ -100,7 +107,7 @@ equation
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(iceFacGreMinHea.y, swiPel.u2) annotation (Line(
-      points={{-22.2,-76},{-10,-76},{-10,34},{-6.66134e-16,34},{-6.66134e-16,72}},
+      points={{-22.2,-78},{-10,-78},{-10,34},{-6.66134e-16,34},{-6.66134e-16,72}},
       color={255,0,255},
       pattern=LinePattern.Dash));
 
@@ -113,7 +120,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP.iceFac, iceFacGreMinChi.u) annotation (Line(
-      points={{-105.93,-61.93},{-68,-61.93},{-68,-50},{-40.6,-50}},
+      points={{-105.93,-61.93},{-68,-61.93},{-68,-46},{-40.6,-46}},
       color={255,204,51},
       thickness=0.5,
       pattern=LinePattern.Dash), Text(
@@ -122,7 +129,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(iceFacGreMinChi.y, swiErr.u2) annotation (Line(
-      points={{-22.2,-50},{8,-50},{8,12},{56,12}},
+      points={{-22.2,-46},{8,-46},{8,12},{56,12}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(logicalSwitch.y, modeOut) annotation (Line(points={{79,-32},{84,-32},
@@ -138,7 +145,7 @@ equation
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(iceFacGreMinChi.y, logicalSwitch.u2) annotation (Line(
-      points={{-22.2,-50},{8,-50},{8,-32},{56,-32}},
+      points={{-22.2,-46},{8,-46},{8,-32},{56,-32}},
       color={255,0,255},
       pattern=LinePattern.Dash));
   connect(conTrueUseChi.y, logicalSwitch.u3) annotation (Line(

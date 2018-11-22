@@ -37,6 +37,7 @@ block SecurityControl "Block including all security levels"
     annotation (Dialog(group="Defrost"), choices(checkBox=true));
   parameter Real minIceFac "Minimal value above which no defrost is necessary"
     annotation (Dialog(group="Defrost", enable=use_deFro));
+  parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events." annotation (Dialog(group="Defrost", enable=use_deFro));
   parameter Boolean use_chiller=true
     "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(group="Defrost", enable=use_deFro),

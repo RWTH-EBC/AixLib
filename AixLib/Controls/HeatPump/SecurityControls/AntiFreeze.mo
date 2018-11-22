@@ -14,8 +14,8 @@ model AntiFreeze "Model to prevent source from freezing"
     annotation (Placement(transformation(extent={{2,-36},{16,-22}})));
   Modelica.Blocks.Logical.Hysteresis       hysteresis(
     final uLow=TAntFre,
-    final uHigh=dTHys,
-    final pre_y_start=true) if
+    final pre_y_start=true,
+    final uHigh=TAntFre + dTHys) if
        use_antFre
     annotation (Placement(transformation(extent={{-62,-18},{-38,6}})));
                            //assume that the initial temperature is high enough.

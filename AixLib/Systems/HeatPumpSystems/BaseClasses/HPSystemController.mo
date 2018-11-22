@@ -122,6 +122,11 @@ model HPSystemController
       tab="Security Control",
       group="Defrost",
       enable=use_sec and use_deFro));
+  parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events."
+  annotation (Dialog(
+      tab="Security Control",
+      group="Defrost",
+      enable=use_sec and use_deFro));
   parameter Boolean use_chiller=false
     "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(
