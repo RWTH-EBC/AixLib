@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps;
-model HeatPump "Base model of realistic heat pump"
+model HeatPump "Grey-box heat pump model using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
     redeclare final package Medium2 = Medium_eva,

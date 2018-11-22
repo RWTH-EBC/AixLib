@@ -77,21 +77,21 @@ model HPSystemController
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(enable=use_sec, tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime=12000
+  parameter Modelica.SIunits.Time minRunTime=300
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minRunTime), Evaluate=false);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime=600
+  parameter Modelica.SIunits.Time minLocTime=300
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=false);
   parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Real maxRunPerHou=5
+  parameter Real maxRunPerHou=3
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_runPerHou), Evaluate=false);
@@ -145,8 +145,6 @@ model HPSystemController
       tab="Security Control",
       group="Anti Freeze Control",
       enable=use_sec and use_antFre));
-  parameter Boolean use_calcCOP=true
-    "Only relevant for Carnot system simulation";
   Controls.HeatPump.SecurityControls.SecurityControl securityControl(
     final use_minRunTime=use_minRunTime,
     final minRunTime(displayUnit="min") = minRunTime,

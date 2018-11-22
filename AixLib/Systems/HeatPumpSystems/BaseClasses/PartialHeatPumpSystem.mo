@@ -12,6 +12,8 @@ partial model PartialHeatPumpSystem
     final show_T=false,
     redeclare package Medium2 = Medium_eva);
   import Modelica.Blocks.Types.Init;
+
+
 //General
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
     annotation (Dialog(group="Sink"),choicesAllMatching=true);
@@ -117,21 +119,21 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(enable=use_sec, tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime=12000
+  parameter Modelica.SIunits.Time minRunTime=300
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minRunTime), Evaluate=true);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime=600
+  parameter Modelica.SIunits.Time minLocTime=300
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=true);
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Real maxRunPerHou=5
+  parameter Real maxRunPerHou=3
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_runPerHou), Evaluate=true);
@@ -424,9 +426,8 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
-          -15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
