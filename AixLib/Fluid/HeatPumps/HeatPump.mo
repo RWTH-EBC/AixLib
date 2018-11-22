@@ -175,7 +175,7 @@ model HeatPump "Base model of realistic heat pump"
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity con(
+  AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
@@ -197,7 +197,7 @@ model HeatPump "Base model of realistic heat pump"
     final dp_nominal=dpCon_nominal*scalingFactor,
     final GInn=GConIns*scalingFactor) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,78},{16,110}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity eva(
+  AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
     final deltaM=deltaM_eva,
     final use_cap=use_evaCap,

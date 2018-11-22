@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+within AixLib.Fluid.HeatExchangers;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -57,7 +57,6 @@ model EvaporatorCondenserWithCapacity
         extent={{-15,-10},{15,10}},
         rotation=0,
         origin={-61,78})));
-
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea(final alpha=0,
       final T_ref=293.15) "Heat flow rate of the condenser" annotation (
