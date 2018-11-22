@@ -9,6 +9,10 @@ record HeatPumpBaseDataDefinition "Basic heat pump data"
     "Nominal mass flow rate in evaporator";
   parameter Real tableUppBou[:,2] "Points to define upper boundary for sink temperature";
   parameter Real tableLowBou[:,2] "Points to define lower boundary for sink temperature";
+  parameter Modelica.SIunits.Power p[6] = {0,0,0,0,0,0}
+    "Polynomal coefficient for the electrical power";
+  parameter Modelica.SIunits.HeatFlowRate q[6] = {0,0,0,0,0,0}
+    "Polynomal coefficient for the condenser heat flow";
 
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
