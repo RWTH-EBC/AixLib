@@ -62,7 +62,7 @@ model HeatPumpSimple
     "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
   parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2)
     "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
-  Modelica.Blocks.Math.Gain gain(k=-10000000)
+  Modelica.Blocks.Math.Gain gain(k=-1)
                                          annotation(Placement(transformation(extent = {{-18, -60}, {-38, -40}})));
 equation
   connect(temperatureSourceIn.port_a, port_a_source) annotation(Line(points = {{-80, 46}, {-80, 70}, {-90, 70}}, color = {0, 127, 255}));
