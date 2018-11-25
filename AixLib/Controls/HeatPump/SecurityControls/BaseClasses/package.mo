@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 package BaseClasses "Package with base classes for AixLib.Controls.HeatPump.SecurityControls"
 
 
@@ -18,5 +18,7 @@ annotation (Icon(graphics={
           extent={{-30.0,-30.0},{30.0,30.0}},
           lineColor={128,128,128},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end BaseClasses;

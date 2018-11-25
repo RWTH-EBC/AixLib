@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Window with radiation and U-Value"
   parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
@@ -136,14 +136,13 @@ equation
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.WindowsDoors.WindowSimple\">AixLib.Building.Components.Examples.WindowsDoors.WindowSimple</a></p>
  </html>", revisions="<html>
- <ul>
- <li><i>November 2, 2018Mai 19, 2014&nbsp;</i> by Fabian Wüllhorst:<br/>Remove redundand twoStar_radEx from model. 
-This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
- <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- <li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br/>Implemented.</li>
- </ul>
- </html>"),
+<ul>
+<li><i>November 2, 2018&nbsp;</i> by Fabian W&uuml;llhorst:<br>Remove redundand twoStar_radEx from model. This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>. </li>
+<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br>Uses components from MSL and respects the naming conventions </li>
+<li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately </li>
+<li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br>Implemented. </li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

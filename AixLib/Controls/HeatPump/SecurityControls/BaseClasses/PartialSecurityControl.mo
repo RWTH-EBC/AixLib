@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
@@ -96,5 +96,8 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None)}),
                                      Diagram(coordinateSystem(
-          preserveAspectRatio=false, extent={{-120,-100},{120,100}})));
+          preserveAspectRatio=false, extent={{-120,-100},{120,100}})),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end PartialSecurityControl;

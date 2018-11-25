@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.Examples;
+﻿within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
   import AixLib;
   replaceable package Medium_sin = AixLib.Media.Water
@@ -218,7 +218,10 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 </html>
-"), Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
+", revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"),
+    Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},
                 fillPattern = FillPattern.Solid,

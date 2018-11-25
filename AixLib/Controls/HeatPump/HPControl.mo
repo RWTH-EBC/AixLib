@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
@@ -209,5 +209,8 @@ equation
           fillPattern=FillPattern.None,
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+            100}})),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end HPControl;

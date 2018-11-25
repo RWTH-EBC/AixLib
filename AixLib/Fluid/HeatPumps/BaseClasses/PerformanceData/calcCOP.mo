@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model calcCOP
   "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
 
@@ -49,5 +49,8 @@ equation
           lineColor={28,108,200},
           lineThickness=0.5,
           textString="COP")}),                                   Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end calcCOP;

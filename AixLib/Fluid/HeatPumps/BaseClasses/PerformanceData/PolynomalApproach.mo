@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model PolynomalApproach
   "Calculating heat pump data based on a polynomal approach"
   extends BaseClasses.PartialPerformanceData;
@@ -32,5 +32,7 @@ equation
         Text(
           lineColor={108,88,49},
           extent={{-90,-108},{90,72}},
-          textString="f")}));
+          textString="f")}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end PolynomalApproach;

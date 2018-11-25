@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -295,7 +295,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, nOut) annotation (Line(
-      points={{49.6667,8},{76,8},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
+      points={{49.6667,8},{76,8},{76,-58},{1.77636e-015,-58},{1.77636e-015,-114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
@@ -413,5 +413,8 @@ equation
           pattern=LinePattern.Dash,
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
-          textString="Icing Factor")}));
+          textString="Icing Factor")}),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end HPSystemController;

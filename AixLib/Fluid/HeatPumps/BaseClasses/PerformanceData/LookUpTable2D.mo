@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
   extends BaseClasses.PartialPerformanceData;
 
@@ -182,5 +182,7 @@ equation
       extent={{-60.0,-20.0},{-30.0,0.0}}),
     Rectangle(fillColor={255,215,136},
       fillPattern=FillPattern.Solid,
-      extent={{-60.0,-40.0},{-30.0,-20.0}})}));
+      extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end LookUpTable2D;

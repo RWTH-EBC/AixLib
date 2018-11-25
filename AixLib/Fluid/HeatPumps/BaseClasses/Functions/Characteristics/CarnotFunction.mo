@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
 function CarnotFunction
   "Function to emulate the polynomal approach of the Carnot_y heat pump model"
   extends PartialBaseFct;
@@ -23,4 +23,7 @@ algorithm
   COP :=etaCarnot_nominal*etaPartLoad*COP_carnot;
   Char[1] :=Pel;
   Char[2] :=COP*Pel;
+  annotation (Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end CarnotFunction;

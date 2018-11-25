@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems;
+﻿within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=true,
@@ -164,5 +164,8 @@ equation
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end HeatPumpSystem;

@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
 
   parameter Boolean use_opeEnvFroRec=true
@@ -55,5 +55,8 @@ protected
           fillPattern=FillPattern.Solid),
         Line(points={{iconMin-15,iconMax},{iconMin-15,iconMin-15}}, color={95,95,95}),
         Line(points={{iconMin-20,iconMin-10},{iconMax+10,iconMin-10}}, color={95,95,95})}), coordinateSystem(preserveAspectRatio=false), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end BoundaryMapIcon;

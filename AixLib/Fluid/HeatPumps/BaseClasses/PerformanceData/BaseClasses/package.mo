@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 package BaseClasses "Package with partial classes of Performance Data"
 annotation (Icon(graphics={
         Rectangle(
@@ -15,5 +15,7 @@ annotation (Icon(graphics={
           extent={{-30.0,-30.0},{30.0,30.0}},
           lineColor={128,128,128},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end BaseClasses;

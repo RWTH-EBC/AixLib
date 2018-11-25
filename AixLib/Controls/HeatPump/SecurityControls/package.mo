@@ -1,7 +1,10 @@
-within AixLib.Controls.HeatPump;
+﻿within AixLib.Controls.HeatPump;
 package SecurityControls
 
 
 
 
+annotation (Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end SecurityControls;

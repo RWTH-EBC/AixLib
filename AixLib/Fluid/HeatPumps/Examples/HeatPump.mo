@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.Examples;
+﻿within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump
   "Example for the detailed heat pump model in order to compare to simple one."
  extends Modelica.Icons.Example;
@@ -209,17 +209,8 @@ equation
 <p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or polynomial functions.</p>
 </html>",
       revisions="<html>
- <ul>
-  <li>
-  May 19, 2017, by Mirko Engelpracht:<br/>
-  Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
-  </li>
-  <li>
-  October 17, 2016, by Philipp Mehrfeld:<br/>
-  Implemented especially for comparison to simple heat pump model.
-  </li>
- </ul>
-</html>
-"), __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"),
+    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-100,-100},{100,80}})));
 end HeatPump;

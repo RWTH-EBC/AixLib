@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 model AntiFreeze "Model to prevent source from freezing"
   extends BaseClasses.PartialSecurityControl;
 
@@ -59,4 +59,7 @@ equation
           -63}}, color={255,0,255}));
   connect(booConAntFre.y, not1.u) annotation (Line(points={{16.7,-29},{36,-29},
           {36,-56},{-22,-56},{-22,-60},{-21,-63}}, color={255,0,255}));
+  annotation (Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end AntiFreeze;

@@ -1,4 +1,4 @@
-within AixLib.Controls.SetPoints;
+﻿within AixLib.Controls.SetPoints;
 model HeatingCurve "Model of a heating curve"
   //General
   parameter Boolean use_tableData=true "Choose between tables or function to calculate TSet" annotation (
@@ -155,5 +155,7 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="- TOda",
-          visible = use_tableData)}));
+          visible = use_tableData)}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end HeatingCurve;

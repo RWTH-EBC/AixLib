@@ -1,4 +1,4 @@
-within AixLib.Utilities.Tables;
+﻿within AixLib.Utilities.Tables;
 model CombiTable2DExtra
   "Altered CombiTable2D with the option to not extrapolate"
   extends Modelica.Blocks.Interfaces.SI2SO;
@@ -96,5 +96,7 @@ equation
     Rectangle(origin={-2.3077,-0.0},
       fillColor={255,215,136},
       fillPattern=FillPattern.Solid,
-      extent={{32.3077,20.0},{62.3077,40.0}})}));
+      extent={{32.3077,20.0},{62.3077,40.0}})}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end CombiTable2DExtra;

@@ -1,4 +1,4 @@
-within AixLib.Utilities;
+﻿within AixLib.Utilities;
 package Tables "Package containing table blocks altered from them in the standard library"
 annotation (Icon(coordinateSystem(extent={{-80,-80},{80,80}}), graphics={
         Rectangle(
@@ -32,5 +32,8 @@ annotation (Icon(coordinateSystem(extent={{-80,-80},{80,80}}), graphics={
         Line(
           points={{24,74},{24,-76}},
           color={95,95,95})}), Diagram(coordinateSystem(extent={{-80,-80},{80,
-          80}})));
+          80}})),
+  Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end Tables;

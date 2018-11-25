@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle "Blackbox model of refrigerant cycle of a HP"
   replaceable model PerDataHea =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
@@ -104,7 +104,7 @@ equation
   connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-92,-14},{-92,
           0},{-110,0}}, color={0,0,127}));
   connect(PerformanceDataHeater.QCon, switchQCon.u1)
-    annotation (Line(points={{61.6,17.2},{61.6,-4},{70,-4}}, color={0,0,127}));
+    annotation (Line(points={{18.4,17.2},{18.4,-4},{70,-4}}, color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-015,-87},{-2.22045e-015,
           -110.5},{0.5,-110.5}}, color={0,0,127}));
   connect(sigBusHP.mode, switchPel.u2) annotation (Line(
@@ -119,8 +119,8 @@ equation
   connect(PerformanceDataChiller.Pel, switchPel.u3) annotation (Line(points={{-46,
           17.2},{-46,-30},{-8,-30},{-8,-64}}, color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-67.6,
-          17.2},{-67.6,-22},{-68,-22}},       color={0,0,127},
+  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-24.4,
+          17.2},{-24.4,-22},{-68,-22}},       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(sigBusHP, PerformanceDataChiller.sigBusHP) annotation (Line(
       points={{1,103},{1,86},{-45.73,86},{-45.73,77.12}},
@@ -146,11 +146,11 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(PerformanceDataChiller.QCon, gainCon.u) annotation (Line(
-      points={{-24.4,17.2},{-24.4,0},{-24,0},{-24,-20},{53.2,-20}},
+      points={{-67.6,17.2},{-67.6,0},{-24,0},{-24,-20},{53.2,-20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{18.4,
-          17.2},{18.4,-6},{-51.2,-6}}, color={0,0,127}));
+  connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{61.6,
+          17.2},{61.6,-6},{-51.2,-6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -215,5 +215,8 @@ equation
           lineThickness=0.5,
           textString="%name",
           origin={0,-8},
-          rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+          rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end InnerCycle;

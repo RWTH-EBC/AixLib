@@ -1,4 +1,4 @@
-within AixLib.Systems;
+﻿within AixLib.Systems;
 package HeatPumpSystems "Package with models for a heat pump system"
 annotation (Icon(graphics={
         Rectangle(
@@ -33,5 +33,7 @@ annotation (Icon(graphics={
           lineColor={128,128,128},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          extent={{-80.0,0.0},{-20.0,60.0}})}));
+          extent={{-80.0,0.0},{-20.0,60.0}})}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end HeatPumpSystems;

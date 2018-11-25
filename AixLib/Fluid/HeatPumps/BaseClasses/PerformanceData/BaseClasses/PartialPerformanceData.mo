@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
 
@@ -37,5 +37,8 @@ protected
           pattern=LinePattern.Dash,
           textString="%name
 ",        origin={0.5,60.5},
-          rotation=180)}),Diagram(coordinateSystem(preserveAspectRatio=false)));
+          rotation=180)}),Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end PartialPerformanceData;

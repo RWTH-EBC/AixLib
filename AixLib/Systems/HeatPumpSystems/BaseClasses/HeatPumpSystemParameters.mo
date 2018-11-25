@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 record HeatPumpSystemParameters
   "Parameters for design point of a heat pump system"
   parameter Modelica.SIunits.HeatFlowRate QCon_nominal
@@ -22,4 +22,7 @@ record HeatPumpSystemParameters
     "Percentage of heat losses in the heat exchangers to the nominal heating power" annotation (Dialog(group="Design"));
 protected
   parameter Modelica.SIunits.HeatFlowRate QEva_nominal = QCon_nominal-P_el_nominal;
+  annotation (Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end HeatPumpSystemParameters;

@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 block SecurityControl "Block including all security levels"
   extends BaseClasses.PartialSecurityControl;
 
@@ -199,4 +199,7 @@ equation
           {100,-50},{100,-110}}, color={255,127,0}));
   connect(operationalEnvelope.ERR, ERR_opeEnv) annotation (Line(points={{2,-11.1},
           {2,-50},{60,-50},{60,-110}}, color={255,127,0}));
+  annotation (Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end SecurityControl;

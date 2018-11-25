@@ -1,4 +1,4 @@
-within AixLib.Utilities.Time;
+﻿within AixLib.Utilities.Time;
 model DaytimeSwitch
   "If given daytime stamp is equal to current daytime output is true"
   parameter Boolean weekly=true
@@ -62,5 +62,7 @@ equation
         Line(
           points={{0,0},{-18,-32}},
           thickness=0.5,
-          color={238,46,47})}));
+          color={238,46,47})}), Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end DaytimeSwitch;

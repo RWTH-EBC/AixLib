@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor;
 function WetterAfjei1996
   "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
   extends
@@ -26,8 +26,6 @@ iceFac:=1-factor;
 <p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996. </p>
 </html>",
   revisions="<html>
-<ul>
-<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
 </html>"));
 end WetterAfjei1996;

@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
 function PolynomalApproach
   "Function to emulate the polynomal approach of the TRNSYS Type 401 heat pump model"
   extends PartialBaseFct;
@@ -16,4 +16,7 @@ algorithm
     Char[1] := 0;
     Char[2] := 0;
   end if;
+  annotation (Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end PolynomalApproach;

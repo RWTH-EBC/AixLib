@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model IcingBlock
   "Block which decreases evaporator power by an icing factor"
   AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
@@ -54,5 +54,8 @@ equation
           lineColor={108,88,49},
           extent={{-90.0,-90.0},{90.0,90.0}},
           textString="f")}),                                     Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+ <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>"));
 end IcingBlock;
