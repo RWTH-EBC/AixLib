@@ -58,5 +58,7 @@ protected
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Icon block used for the icon of the dynamic icon of the model <a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.BaseClasses.BoundaryMap\">BoundaryMap</a>. Extending this model will display the used operational envelope in the top-layer of the used models.</p>
 </html>"));
 end BoundaryMapIcon;

@@ -154,9 +154,7 @@ Hour of Day: %trigHour",
           textString="%name")}),                                                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This control Block checks if the current condenser outlet Temperature(TCon) is below a minimal Temperature(TLegMin) at which Legionella die (Typically 60 &deg;C).</p>
-<p>To asure that all Legionella in the DHW-System die, a certain amount of time is needed, in which TCon does not fall below TLegMin.</p>
-<p>As the HP has to kill all Legionella every few days/weeks, the control will only start if a given daytime is matched with current simulation daytime.</p>
+<p>This model represents the anti legionella control of a real heat pump. Based on a daily or weekly approach, the given supply temperature is raised above the minimal temperature required for the thermal desinfection (at least 60 &deg;C) for a given duration minTimeAntLeg.</p>
 </html>", revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
 </html>"));

@@ -201,5 +201,15 @@ equation
           {2,-50},{60,-50},{60,-110}}, color={255,127,0}));
   annotation (Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Aggregation of the four main security measurements of a heat pump. The order is based on the relevance to the real system. Only the AntiFreeze-Control is put last because of the relevance for the simulation. If the medium temperature falls below the critical value, the simulation will fail.</p>
+<p>All used functions are optional. See the used models for more info on each security function:</p>
+<ul>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.DefrostControl\">DefrostControl</a></li>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.OnOffControl+\">OnOffControl</a></li>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.OperationalEnvelope\">OperationalEnvelope</a></li>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.AntiFreeze\">AntiFreeze</a></li>
+</ul>
+<p><br>The security function for the anti legionella control is placed inside the model <a href=\"modelica://AixLib.Controls.HeatPump.HPControl\">HPControl</a></p>
 </html>"));
 end SecurityControl;

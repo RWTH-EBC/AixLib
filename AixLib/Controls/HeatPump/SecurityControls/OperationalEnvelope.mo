@@ -63,5 +63,7 @@ equation
         coordinateSystem(extent={{-120,-100},{120,100}})),
     Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Model for checking if the given condenser return temperature and evaporator inlet temperature are in the given boundaries. If not, the heat pump will switch off.</p>
 </html>"));
 end OperationalEnvelope;

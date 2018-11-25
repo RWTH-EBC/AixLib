@@ -73,9 +73,9 @@ equation
     isDay = false;
   end if;
   //Convert Kelvin to degC for tables and function
-  connect(T_oda, to_degC.u);
   //Connect all models if tables are used, else use the function to calculate the internal set temperature
   if use_tableData then
+    connect(T_oda, to_degC.u);
     connect(dec.y, tableDay.u2);
     connect(dec.y, tableNight.u2);
     connect(to_degC.y, tableDay.u1);
@@ -86,7 +86,7 @@ equation
     connect(dayNightSwitch.y, TSet_internal);
   else
     TSet_internal = HeatingCurveFunction(
-      to_degC.y,
+      T_oda,
       TRoom_internal,
       isDay);
   end if;
@@ -157,5 +157,12 @@ equation
           textString="- TOda",
           visible = use_tableData)}), Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Model of a heating curve. Either based on table input data or with a function, the set temperature for the heating system is calculated.</p>
+<p>This model is capable of:</p>
+<ul>
+<li>Day-Night Control</li>
+<li>Control based on dynamic room temperatures</li>
+</ul>
 </html>"));
 end HeatingCurve;
