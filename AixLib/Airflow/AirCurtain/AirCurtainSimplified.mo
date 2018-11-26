@@ -1,8 +1,8 @@
 within AixLib.Airflow.AirCurtain;
-model AirCurtainSimplyfied
+model AirCurtainSimplified
   "Ideal model for the usage of an air curtain in the context of low order retail zones"
   Modelica.Blocks.Interfaces.RealInput Tambient
-    annotation (Placement(transformation(extent={{-130,-80},{-90,-40}})));
+    annotation (Placement(transformation(extent={{-128,-80},{-88,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b
     port_b
     annotation (Placement(transformation(extent={{110,-10},{130,10}})));
@@ -58,4 +58,4 @@ equation
     Documentation(info="<html>
 <p>It should account for the thermal impact of air curtains to the thermal zone due to heating the air volumen in the zone and additional ventilation of the leckage of the air curtain.</p>
 </html>"));
-end AirCurtainSimplyfied;
+end AirCurtainSimplified;
