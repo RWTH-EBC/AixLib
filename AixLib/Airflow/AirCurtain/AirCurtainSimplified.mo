@@ -69,11 +69,13 @@ equation
 <h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>Ideal mass balance: All air flow rate going outside through the entrance will be replace by ambient air flow going inside. This is mainly described by the air curtain efficiency. It mainly describes the share of total airflow of the air curtain staying inside.</p>
 <p>Ideal temperature mixing: Ideal mixing of two air flows with different temperatures</p>
-<p><br><img src=\"//eonakku/home/ebc/mma/My Documents/My Pictures/AirCurtain.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Airflow/AirCurtain/AirCurtain.png\"
+    alt=\"schema of AirCurtain\"/> </p>
 </html>", revisions="<html>
 <ul>
   <li><i>Novmeber, 2018&nbsp;</i>
     by Michael Mans:<br/>
-    Model implemented</li></p>
+    Model implemented</li>
+</ul>
 </html>"));
 end AirCurtainSimplified;
