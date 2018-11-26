@@ -6,9 +6,9 @@ model AirCurtainSimplified
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b
     port_b "heat port for heat transfer"
     annotation (Placement(transformation(extent={{110,-10},{130,10}})));
-  parameter Modelica.SIunits.VolumeFlowRate VolumeFlowAirCurtain = 5
+  parameter Modelica.SIunits.VolumeFlowRate volumeFlowAirCurtain = 5
     "Design volume flow rate of the air curtain";
-  parameter Modelica.SIunits.TemperatureDifference TemperatureAdditionAirCurtain = 5
+  parameter Modelica.SIunits.TemperatureDifference temperatureAdditionAirCurtain = 5
     "Temperature increase over the air curtain";
   parameter Real eta_air_curtain = 0.73
     "Efficiency of the air curtain";
@@ -16,9 +16,9 @@ model AirCurtainSimplified
     "Air density";
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
     "Specific heat capacity of air";
-  parameter Modelica.SIunits.Temperature TemperatureThreshold
+  parameter Modelica.SIunits.Temperature temperatureThreshold = 287.15
     "Threshold of the ambient temperature when aircurtain becomes active";
-  parameter Modelica.SIunits.Power PowerAirCurtain
+  parameter Modelica.SIunits.Power powerAirCurtain = 27500
     "The thermal Power of the air curtain, simplified use";
   Utilities.Psychrometrics.MixedTemperature mixedTemperature
     annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
@@ -70,5 +70,10 @@ equation
 <p>Ideal mass balance: All air flow rate going outside through the entrance will be replace by ambient air flow going inside. This is mainly described by the air curtain efficiency. It mainly describes the share of total airflow of the air curtain staying inside.</p>
 <p>Ideal temperature mixing: Ideal mixing of two air flows with different temperatures</p>
 <p><br><img src=\"//eonakku/home/ebc/mma/My Documents/My Pictures/AirCurtain.png\"/></p>
+</html>", revisions="<html>
+<ul>
+  <li><i>Novmeber, 2018&nbsp;</i>
+    by Michael Mans:<br/>
+    Model implemented</li></p>
 </html>"));
 end AirCurtainSimplified;
