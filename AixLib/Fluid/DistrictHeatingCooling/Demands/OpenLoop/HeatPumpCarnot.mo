@@ -165,6 +165,13 @@ public
         origin={42,-76})));
   Modelica.Blocks.Math.Gain gainInput(k=1) "Optional gain on the input"
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
+  Modelica.Blocks.Sources.Constant minT_return(k=273.15 + 10)
+    "Minimal return Temperature" annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={-40,20})));
+  Modelica.Blocks.Math.Max max
+    annotation (Placement(transformation(extent={{-2,-32},{18,-12}})));
 equation
 
   dpOut = dp;
@@ -213,14 +220,18 @@ equation
           {-58,-16},{-52,-16}}, color={0,0,127}));
   connect(temperatureDropHP.y, deltaT.u2) annotation (Line(points={{-79,50},{
           -58,50},{-58,-4},{-52,-4}}, color={0,0,127}));
-  connect(deltaT.y, source.T_in) annotation (Line(points={{-29,-10},{-12,-10},{
-          -12,-28},{40,-28},{40,-44},{58,-44}}, color={0,0,127}));
   connect(Q_flow_input, gainInput.u)
     annotation (Line(points={{-108,80},{-62,80}}, color={0,0,127}));
   connect(Q_con.u1, gainInput.y)
     annotation (Line(points={{-2,80},{-39,80}}, color={0,0,127}));
   connect(gainInput.y, mFlowBuilding.u) annotation (Line(points={{-39,80},{-20,
           80},{-20,94},{60,94},{60,62}}, color={0,0,127}));
+  connect(deltaT.y, max.u2) annotation (Line(points={{-29,-10},{-18,-10},{-18,
+          -28},{-4,-28}}, color={0,0,127}));
+  connect(minT_return.y, max.u1) annotation (Line(points={{-29,20},{-6,20},{-6,
+          -16},{-4,-16}}, color={0,0,127}));
+  connect(max.y, source.T_in) annotation (Line(points={{19,-22},{38,-22},{38,
+          -44},{58,-44}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
