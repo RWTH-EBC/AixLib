@@ -233,5 +233,9 @@ equation
           fillPattern=FillPattern.Solid,
           visible=not is_con)}), Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Model for an evaporator or condenser with the use of a capacity to simulate heat losses.</p>
+<p>Used in <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>, the heat flow to or from the volume is calculated in a black box. Thus the heat is directly added to the medium.</p>
+<p>In order to model transient states and inertias of a real heat pump, a capacity is added to the base model <a href=\"modelica://AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger\">TwoPortHeatMassExchanger</a>. The heat exchange between capacity and medium (<span style=\"font-family: Courier New;\">GIns</span>) is based on a series of heat resistances caused by forced convection and conduction through the capacity of the heat exchanger. Losses or gains in result of heat exchange with the ambient are modeled through the heat exchange coefficient <span style=\"font-family: Courier New;\">GOut</span> is represented by a series of conductive resistances and the convection to the ambient. Both parameters <span style=\"font-family: Courier New;\">GIns</span> and <span style=\"font-family: Courier New;\">GOut</span> are variable so that the calculation can follow a temperature or flow-rate based approach.</p>
 </html>"));
 end EvaporatorCondenserWithCapacity;
