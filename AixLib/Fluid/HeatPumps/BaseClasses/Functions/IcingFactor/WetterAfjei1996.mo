@@ -23,7 +23,7 @@ else
 end if;
 iceFac:=1-factor;
   annotation (Documentation(info="<html>
-<p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996. </p>
+<p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996.</p>
 </html>",
   revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>

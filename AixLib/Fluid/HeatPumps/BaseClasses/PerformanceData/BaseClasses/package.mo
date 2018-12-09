@@ -17,5 +17,7 @@ annotation (Icon(graphics={
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>This package contains base classes for the package <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData</a>.</p>
 </html>"));
 end BaseClasses;

@@ -10,36 +10,31 @@ model IcingBlock
   replaceable function iceFunc = Functions.IcingFactor.BasicIcingApproach
                                                                        constrainedby
     AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct                                                                           "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
-  Modelica.Blocks.Sources.RealExpression calcIceFac(final y=if (T_oda < 278.15
-         and calTim.hour == hourDay and calTim.minute < 10) then 0.3 else 1)
-    annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-  Modelica.Blocks.Interfaces.RealInput T_flow_ev
+  Modelica.Blocks.Interfaces.RealInput T_flow_ev(unit="K", displayUnit="degC")
     "Temperature at evaporator inlet"
     annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
         iconTransformation(extent={{-116,12},{-100,28}})));
 
-  Modelica.Blocks.Interfaces.RealInput T_ret_ev
+  Modelica.Blocks.Interfaces.RealInput T_ret_ev(unit="K", displayUnit="degC")
     "Temperature at evaporator outlet" annotation (Placement(transformation(
           extent={{-128,-40},{-100,-12}}),iconTransformation(extent={{-116,-28},
             {-100,-12}})));
-  Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
+  Modelica.Blocks.Interfaces.RealInput T_oda(unit="K", displayUnit="degC") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-116,52},{-100,68}})));
-  Modelica.Blocks.Interfaces.RealInput m_flow_ev "Mass flow rate at evaporator"
+  Modelica.Blocks.Interfaces.RealInput m_flow_ev(unit="kg/s") "Mass flow rate at evaporator"
     annotation (Placement(transformation(extent={{-128,-80},{-100,-52}}),
         iconTransformation(extent={{-116,-68},{-100,-52}})));
-  Modelica.Blocks.Interfaces.RealOutput iceFac "Output of current icing factor"
+  Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Output of current icing factor"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={110,0})));
 protected
-  parameter Real iceFac_default = 1;
   Real iceFac_internal "Calculated value of icing factor";
 equation
   iceFac_internal = iceFunc(T_flow_ev,T_ret_ev,T_oda,m_flow_ev);
-  connect(calcIceFac.y, iceFac)
-    annotation (Line(points={{1,0},{110,0}}, color={0,0,127}));
+  iceFac = iceFac_internal;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           lineColor={0,0,255},
@@ -57,5 +52,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Model for calculation of the icing factor. The replaceable function uses the inputs to calculate the resulting icing factor.</p>
 </html>"));
 end IcingBlock;

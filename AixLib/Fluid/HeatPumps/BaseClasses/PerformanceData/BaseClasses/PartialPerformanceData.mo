@@ -13,7 +13,7 @@ partial model PartialPerformanceData
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-80,-110})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
+  Controls.Interfaces.HeatPumpControlBus sigBusHP "Bus-connector used in a heat pump" annotation (Placement(
         transformation(
         extent={{-15,-14},{15,14}},
         rotation=0,
@@ -40,5 +40,7 @@ protected
           rotation=180)}),Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Partial model for calculation of <span style=\"font-family: Courier New;\">P_el</span>, <span style=\"font-family: Courier New;\">QCon</span> and <span style=\"font-family: Courier New;\">QEva</span> based on the values in the <span style=\"font-family: Courier New;\">sigBusHP</span>.</p>
 </html>"));
 end PartialPerformanceData;
