@@ -1,6 +1,6 @@
 ﻿within AixLib.Utilities.Time;
 model DaytimeSwitch
-  "If given daytime stamp is equal to current daytime output is true"
+  "Set the output to true if the given daytime stamp is equal to current daytime"
   parameter Boolean weekly=true
     "Switch between a daily or weekly trigger approach" annotation(Dialog(
         enable=not daily,descriptionLabel=true), choices(choice=true "Weekly",
@@ -64,5 +64,7 @@ equation
           thickness=0.5,
           color={238,46,47})}), Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>Using <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">AixLib.Utilities.Time.CalendarTime</a>, this model triggers a control if the current time is equal to a certain hour of the day and or day of the week.</p>
 </html>"));
 end DaytimeSwitch;
