@@ -416,5 +416,8 @@ equation
           textString="Icing Factor")}),
     Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>This system controller aggregates the heat pump controller and relevant security controls from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a> to control the heat pump based on an ambient temperature and the current supply temperature.</p>
+<p>Further, the COP is calculated. The icing factor used for air-source heat pumps is added to simulate defrost cycles. </p>
 </html>"));
 end HPSystemController;

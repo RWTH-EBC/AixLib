@@ -35,5 +35,7 @@ annotation (Icon(graphics={
           fillPattern=FillPattern.Solid,
           extent={{-80.0,0.0},{-20.0,60.0}})}), Documentation(revisions="<html>
  <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+</html>", info="<html>
+<p>This package contains models for a standard heat pump system.</p>
 </html>"));
 end HeatPumpSystems;
