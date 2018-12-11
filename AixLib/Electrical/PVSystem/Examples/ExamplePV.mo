@@ -7,7 +7,7 @@ model ExamplePV
     final unit="W")
     "Output Power of the PV system including the inverter"
     annotation (Placement(transformation(extent={{72,30},{92,50}})));
-  AixLib.Building.Components.Weather.Weather Weather(
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
     Latitude=49.5,
     Longitude=8.5,
     GroundReflection=0.2,
@@ -21,6 +21,7 @@ model ExamplePV
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
     "Weather data input for simulation of PV power "
     annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
+
   Electrical.PVSystem.PVSystem PVsystem(
     MaxOutputPower=4000,
     NumberOfPanels=5,

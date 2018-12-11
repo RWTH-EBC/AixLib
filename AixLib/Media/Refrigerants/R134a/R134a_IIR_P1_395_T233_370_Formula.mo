@@ -1469,6 +1469,7 @@ package R134a_IIR_P1_395_T233_370_Formula
   algorithm
     sigma := 0.05801*(1-sat.Tsat/374.21)^1.241;
   end surfaceTension;
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

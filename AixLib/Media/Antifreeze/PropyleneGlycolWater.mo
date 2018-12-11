@@ -12,7 +12,7 @@ package PropyleneGlycolWater
     final lambda_const=thermalConductivity_TX_a(T = property_T, X_a = X_a),
     a_const=1484,
     final T_min=fusionTemperature_TX_a(T = property_T, X_a = X_a),
-    final T_max=Modelica.SIunits.Conversions.from_degC(100),
+    T_max=Modelica.SIunits.Conversions.from_degC(100),
     T0=273.15,
     MM_const=(X_a/simplePropyleneGlycolWaterConstants[1].molarMass + (1
          - X_a)/0.018015268)^(-1),
@@ -75,7 +75,8 @@ package PropyleneGlycolWater
 Temperature T (= " + String(T) + " K) is not
 in the allowed range (" + String(T_min) + " K <= T <= " + String(T_max) + " K)
 required from medium model \"" + mediumName + "\".
-"); assert(X_a >= X_a_min and X_a <= X_a_max, "
+");
+    assert(X_a >= X_a_min and X_a <= X_a_max, "
     Mass fraction X_a (= " + String(X_a) + " ) is not
 in the allowed range (" + String(X_a_min) + " <= X_a <= " + String(X_a_max) + " )
 required from medium model \"" + mediumName + "\".

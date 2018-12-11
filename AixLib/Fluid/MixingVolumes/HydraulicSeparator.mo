@@ -51,8 +51,8 @@ model HydraulicSeparator
     ///////////////////////////////////////////////////////////////////////////
     //Ports/ Flanges                                                         //
     ///////////////////////////////////////////////////////////////////////////
-  Modelica.Fluid.Interfaces.FluidPort_a port_a_primary(redeclare package Medium
-      = Medium) "Top-flange primary circuit" annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPort_a port_a_primary(redeclare package Medium =
+        Medium) "Top-flange primary circuit" annotation (Placement(
         transformation(extent={{-110,40},{-90,60}}), iconTransformation(extent={
             {-110,40},{-90,60}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a_secondary(redeclare package
@@ -63,8 +63,8 @@ model HydraulicSeparator
       Medium = Medium) "Top-flange secondary circuit" annotation (Placement(
         transformation(extent={{90,40},{110,60}}), iconTransformation(extent={{90,
             40},{110,60}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b_primary(redeclare package Medium
-      = Medium) "Bottom-flange primary circuit" annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPort_b port_b_primary(redeclare package Medium =
+        Medium) "Bottom-flange primary circuit" annotation (Placement(
         transformation(extent={{-110,-60},{-90,-40}}), iconTransformation(
           extent={{-110,-60},{-90,-40}})));
 

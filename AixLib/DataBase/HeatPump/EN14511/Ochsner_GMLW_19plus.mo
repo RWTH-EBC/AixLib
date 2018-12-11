@@ -5,7 +5,9 @@ record Ochsner_GMLW_19plus "Ochsner GMLW 19 plus"
     tableQdot_con=[0,-10,2,7; 35,12600,16800,19800; 50,11700,15900,18900; 60,11400,
         15600,18600],
     mFlow_conNom=19800/4180/5,
-    mFlow_evaNom=1);
+    mFlow_evaNom=1,
+    tableUppBou=[-24,52;-15, 55;-10,65; 40, 65],
+    tableLowBou=[-24, 0; 40, 0]);
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,

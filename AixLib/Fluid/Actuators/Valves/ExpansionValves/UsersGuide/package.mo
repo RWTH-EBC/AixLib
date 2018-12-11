@@ -35,14 +35,6 @@ model's information section.
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
-  </ul>
-  
-  <ul>
-  <li>
-  August 28, 2018, by Sven Hinrichs, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/590\">issue 590</a>).
-  </li>
 </ul>
 </html>"));
 end UsersGuide;

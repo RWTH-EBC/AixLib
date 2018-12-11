@@ -3,7 +3,7 @@ class Approaches
   "Approaches implemented in the library"
   extends Modelica.Icons.Information;
 
-  class PolynomialApproach "Polynomial Approaches for flow coefficient"
+  class PolynomialApproach "Polynomial Aprroaches"
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html>
@@ -13,9 +13,7 @@ class Approaches
       First implementation
       (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
       </li>
-      </ul>
-
-      
+    </ul>
     </html>",
             info="<html>
 <p>
@@ -129,8 +127,7 @@ a6*(T<sub>subcooling</sub>/T<sub>crit</sub>)^2</code></td>
 </html>"));
   end PolynomialApproach;
 
-  class PowerApproach "Power Approaches for flow coefficient
-  "
+  class PowerApproach "Power Aprroaches"
     extends Modelica.Icons.Information;
 
     annotation (Documentation(revisions="<html>
@@ -501,25 +498,8 @@ A<sub>valve</sub>*dp</code></td>
 </code></td> 
 <td>Chosen by default and follows from Bernoulli's law</td> 
 </tr> 
-<tr>
-<td><b>Expansionfactor</b></td> 
-<td><code>m&#775; = C*A<sub>valve</sub>*Y*sqrt(2*&rho;<sub>inlet</sub>*p<sub>inlet</sub>*X)
-</code></td> 
-<td>Chosen by default and follows from Bernoulli´s law with choke condition</td> 
-</tr>
-<tr>
-<td><b>Metastability degree</b></td> 
-<td><code>m&#775; = C*A<sub>valve</sub>*sqrt(2*&rho;<sub>inlet</sub>*(p<sub>inlet</sub>-p<sub>th</sub>))
-</code></td> 
-<td>Chosen by default and follows from Bernoulli´s law with metastability degree</td> 
-</tr>
-
-
 </table>
 <p>
-
-
-
 For the third approach (i.e. flow coefficient), different calculation
 models are stored in
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">

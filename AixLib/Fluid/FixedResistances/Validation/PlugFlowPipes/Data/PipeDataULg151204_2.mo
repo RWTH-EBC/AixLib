@@ -1,8 +1,7 @@
 ﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataULg151204_2
   "Experimental data from ULg's pipe test bench from December 4, 2015 (2)"
-  extends
-    AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
+  extends AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data.BaseClasses.PipeDataULg(
     final n=5,
     T_start_out=14.3,
     T_start_in=14.7,

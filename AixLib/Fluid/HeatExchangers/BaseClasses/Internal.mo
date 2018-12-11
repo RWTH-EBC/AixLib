@@ -12,6 +12,7 @@ Received NTU = " + String(x) + "
         Z=p,
         flowRegime=Integer(AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed));
   end f_nonlinear;
+
 annotation (
 Documentation(
 info="<html>

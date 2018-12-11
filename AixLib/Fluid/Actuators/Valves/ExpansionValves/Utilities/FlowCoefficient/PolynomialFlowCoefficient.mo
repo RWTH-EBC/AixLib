@@ -110,10 +110,8 @@ equation
       (Medium.fluidConstants[1].criticalTemperature-273.15))^2
       "Quadratic degree of subcooling";
 
-    /*corFact = 1 - ((1-pOut/pInl)/
-    (3*(Medium.isentropicExponent(staOut)/1.4)*pDifRat))*/
-
-    corFact = 1
+    corFact = 1 - ((1-pOut/pInl)/
+      (3*(Medium.isentropicExponent(staOut)/1.4)*pDifRat))
       "Correction factor taking partial vaporisation into account";
 
       /*The correction factos takes into accout that a partial vaporisation 

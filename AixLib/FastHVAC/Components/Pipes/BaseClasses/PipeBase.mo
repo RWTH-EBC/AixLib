@@ -5,14 +5,14 @@ model PipeBase
   /* *******************************************************************
       Medium
      ******************************************************************* */
-    parameter Integer nNodes( min=3)=3 "Number of discrete flow volumes";
+    parameter Integer nNodes(min=1)=1 "Number of discrete flow volumes";
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe"  annotation(Dialog(enable = not calculateAlpha));
     parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
+    final parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
 
     parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature of fluid";

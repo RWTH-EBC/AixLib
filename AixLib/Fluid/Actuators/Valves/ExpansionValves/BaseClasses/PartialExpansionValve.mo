@@ -57,24 +57,14 @@ partial model PartialExpansionValve
 
   // Extends from partial two port (insert here for position of tabs)
   //
-  /*extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
+  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
     redeclare replaceable package Medium =
         Modelica.Media.R134a.R134a_ph,
     show_T = false,
     show_V_flow = false,
     dp_start = 1e6,
     m_flow_start = 0.5*m_flow_nominal,
-    m_flow_small = 1e-6*m_flow_nominal);*/
-
-    extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
-    redeclare replaceable package Medium =
-       Modelica.Media.Interfaces.PartialTwoPhaseMedium,
-    show_T = false,
-    show_V_flow = false,
-    dp_start = 1e6,
-    m_flow_start = 0.5*m_flow_nominal,
     m_flow_small = 1e-6*m_flow_nominal);
-
 
   // Definition of parameters describing diagnostic options
   //
@@ -146,10 +136,9 @@ partial model PartialExpansionValve
       extent={{10,60},{30,80}})));
 
 
+protected
   Modelica.SIunits.Area AThr
     "Current cross-sectional area of the valve";
-
-protected
   Real opening(unit="1")
     "Current valve's opening";
 

@@ -57,12 +57,6 @@ partial model PartialModularExpansionVavles
       nVal) "Chose predefined calculation method for flow coefficients"
     annotation (Dialog(tab="Expansion valves", group="Flow Coefficient"),
       HideResult=not show_parVal);
-  parameter Utilities.Types.Choice Choice[nVal]= fill(Utilities.Types.Choice.Bernoullip_th,
-    nVal) "Chose predefined calculation method for metastability degree"
-    annotation (Dialog(tab="Expansion valves", group="Metastability Coefficient"),
-      HideResult=not show_parVal);
-
-
   parameter Modelica.SIunits.MassFlowRate mFlowNom[nVal]=
     {m_flow_nominal/sum(AVal)*AVal[i] for i in 1:nVal}
     "Mass flow at nominal conditions"
@@ -81,14 +75,6 @@ partial model PartialModularExpansionVavles
     annotation(choicesAllMatching=true,
                Dialog(tab="Expansion valves",group="Flow Coefficient"),
                HideResult=not show_parVal);
-
-  replaceable model MetastabilityCoefficient =
-    Utilities.MetastabilityCoefficient.SpecifiedMetastabilityCoefficient.ConstantMetastabilityCoefficient
-    constrainedby BaseClasses.Coefficient.PartialMetastabilityCoefficient
-    "Model that describe the calculation of metastability degree"
-    annotation(choicesAllMatching=true,
-              Dialog(tab="Expansion valves", group="Metastability Coefficient"),
-              HideResult=not show_parVal);
 
   /*Parameters presented above are used to define each element of the 
     expansion valve vector. Therefore, the parameters are identically to the 

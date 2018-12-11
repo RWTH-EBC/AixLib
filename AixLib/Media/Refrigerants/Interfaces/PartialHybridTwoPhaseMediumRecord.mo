@@ -1,8 +1,7 @@
 within AixLib.Media.Refrigerants.Interfaces;
 partial package PartialHybridTwoPhaseMediumRecord
   "Base class for two phase medium using a hybrid approach with records"
-  extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula;
+  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula;
 
   /*Provide records that contain the fitting coefficients for all fitted
     formula (e.g. Helmholtz equation of state). These records must be

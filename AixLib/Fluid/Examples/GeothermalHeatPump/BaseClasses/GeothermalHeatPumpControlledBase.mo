@@ -1,5 +1,5 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
-model GeothermalHeatPumpControlledBase
+partial model GeothermalHeatPumpControlledBase
   "Example of a geothermal heat pump system with controllers"
   extends BaseClasses.GeothermalHeatPumpBase;
   Modelica.Blocks.Sources.RealExpression getTStorageUpper(y=heatStorage.layer[

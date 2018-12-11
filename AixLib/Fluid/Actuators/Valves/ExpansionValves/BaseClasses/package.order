@@ -1,7 +1,6 @@
-PartialModularExpansionVavles
 PartialExpansionValve
 PartialIsenthalpicExpansionValve
-BaseValves
+PartialModularExpansionVavles
+PartialMetaExpansionValve
+PartialMetaIsenthalpicExpansionValve
 Coefficient
-PartialFlowIsenthalpicValve
-PartialFlowValve

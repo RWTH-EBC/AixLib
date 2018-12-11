@@ -64,10 +64,6 @@ equation
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model represents the phenomenon of heat convection inside a pipe by a flowing medium.</p>
  <p>The heat transfer coefficient at the inside could be calculated by formular from VDI-Waermeatlas or a fixed value can be choosen.</p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
- <h4><font color=\"#008000\">Example Results</font></h4>
- <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.HeatTransfer_test </a></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>August 11, 2017;</i> by David Jansen:<br/></li>

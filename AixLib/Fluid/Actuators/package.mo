@@ -181,6 +181,7 @@ because it generates a state event whenever the valve position changes.
 
 end UsersGuide;
 
+
 annotation (preferredView="info", Documentation(info="<html>
 This package contains component models for actuators.
 </html>"));

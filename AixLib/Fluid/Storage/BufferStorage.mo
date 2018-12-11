@@ -109,7 +109,8 @@ model BufferStorage
         rotation=0,
         origin={-80,-80})));
   Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
-      Medium =  Medium)
+              Medium =
+                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
@@ -160,14 +161,12 @@ model BufferStorage
 /////HEATING COIL 1 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Fluid.Interfaces.FluidPort_a portHC1In(redeclare final package
-      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a portHC1In(redeclare final package Medium =
         MediumHC1) if useHeatingCoil1
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,36},{-72,56}}),
         iconTransformation(extent={{-90,50},{-74,64}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare final package
-      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare final package Medium =
         MediumHC1) if useHeatingCoil1
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,2},{-70,22}}),
@@ -177,14 +176,12 @@ model BufferStorage
 /////HEATING COIL 2 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Fluid.Interfaces.FluidPort_a portHC2In(redeclare final package
-      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a portHC2In(redeclare final package Medium =
         MediumHC2) if useHeatingCoil2
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-30},{-72,-10}}),
         iconTransformation(extent={{-88,-32},{-74,-18}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portHC2Out(redeclare final package
-      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b portHC2Out(redeclare final package Medium =
         MediumHC2) if useHeatingCoil2
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-68},{-72,-48}}),

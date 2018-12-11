@@ -1,6 +1,6 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves;
 model ExpansionValveChoke "Model with choke conditions"
- extends BaseClasses.PartialIsenthalpicExpansionValve;
+   extends BaseClasses.PartialIsenthalpicExpansionValve;
  //
  //Definition of choke variables
    Real X=(pInl - pOut)/pInl
@@ -20,24 +20,13 @@ model ExpansionValveChoke "Model with choke conditions"
     "Saturation properties at valve's inlet conditions";
   //
   //Definition of choke parameters
-
    Real F_l = 0.7
      "Liquid pressure recovery factor for a control valve without attached fittings";
   parameter Real X_T=0.7
     "pressure differential ratio factor of a controlled valve";
-
-parameter Utilities.Types.Choice Choice = Utilities.Types.Choice.ExpansionValveChoke
-  "Chose ExpansionValve Bernoulli model";
-
-  Real t = sqrt(X);
-
-
-
-
 equation
 
-
- satInl = Medium.setSat_T(Medium.temperature(staInl))
+satInl = Medium.setSat_T(Medium.temperature(staInl))
    "Saturtation properties";
     F_F*Medium.fluidConstants[1].criticalPressure = 0.96*Medium.fluidConstants[1].criticalPressure - 0.28*(satInl.psat)
     "Liquid critical pressure ratio factor";
@@ -45,11 +34,9 @@ equation
  kappa*Medium.specificHeatCapacityCv(staInl)= Medium.specificHeatCapacityCp(staInl)
    "Isentrop exponent";
 
-    C = flowCoefficient.C
-      "Flow Coefficient";
-
+    C = flowCoefficient.C  "Flow Coefficient";
+   //C = 0.95;
   //Valve with choke conditions
-  if (Choice == Utilities.Types.Choice.ExpansionValveChoke) then
 
  //Incompressible, single-phase liquid Medium
     if staInl.phase == 1 and staOut.phase == 1 then
@@ -68,19 +55,6 @@ equation
      else
       m_flow^2 = 0;
     end if;
-
-    //3 Bereiche : linear, expontential, drosselmechanismus:Konstant
-    //https://www.valin.com/resources/blog/gas-flow-control-valves
-    //http://blackmonk.co.uk/2009/11/16/how-to-size-a-gas-control-valve/
-    //https://neutrium.net/fluid_flow/choked-flow/
-
-
- else
-    assert(false, "Invalid choice of calculation procedure");
-  end if;
-
-
-
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(
-          preserveAspectRatio=false)));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
 end ExpansionValveChoke;
