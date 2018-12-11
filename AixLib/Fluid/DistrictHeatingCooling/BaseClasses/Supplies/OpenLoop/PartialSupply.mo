@@ -7,7 +7,8 @@ partial model PartialSupply
     "Medium model" annotation (choicesAllMatching=true);
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=1) "Supply flow temperature sensor"
+        Medium, m_flow_nominal=1,
+    tau=0)                        "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium) "Mass flow rate sensor"
@@ -19,15 +20,16 @@ partial model PartialSupply
   Modelica.Blocks.Interfaces.RealInput dpIn(unit="Pa")
     "Prescribed pressure rise" annotation (Placement(transformation(extent={{-126,
             -90},{-86,-50}}), iconTransformation(extent={{-126,-90},{-86,-50}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=1) "Return temperature sensor"
-    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=1,
+    tau=0)                        "Return temperature sensor"
+    annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
 equation
   connect(senMasFlo.port_a, senT_supply.port_b)
     annotation (Line(points={{70,0},{60,0}}, color={0,127,255}));
   connect(senMasFlo.port_b, port_b)
     annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
-  connect(port_a, senT_return.port_a)
+  connect(port_a, senT_return.port_b)
     annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(

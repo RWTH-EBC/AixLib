@@ -25,8 +25,9 @@ model SourceIdealElectricityFlexibility
         rotation=0,
         origin={-10,0})));
 
-  Sources.FixedBoundary sink(redeclare package Medium = Medium, nPorts=1,
-    p=pReturn)
+  Sources.FixedBoundary sink(redeclare package Medium = Medium,
+    p=pReturn,
+    nPorts=1)
     "Ideal sink for return from the network" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -66,18 +67,18 @@ equation
     annotation (Line(points={{16,46},{26,46}}, color={0,127,255}));
   connect(Heater.port_b, senT_supply.port_a) annotation (Line(points={{46,46},{58,
           46},{58,26},{28,26},{28,0},{40,0}}, color={0,127,255}));
-  connect(dpIn, source.p_in) annotation (Line(points={{-104,-70},{-28,-70},{-28,
+  connect(dpIn, source.p_in) annotation (Line(points={{-106,-70},{-28,-70},{-28,
           8},{-22,8}}, color={0,0,127}));
-  connect(senT_return.port_b, sink.ports[1]) annotation (Line(points={{-58,0},{
-          -57,0},{-57,1.33227e-15},{-50,1.33227e-15}}, color={0,127,255}));
-  connect(senT_return.T, source.T_in) annotation (Line(points={{-68,11},{-68,20},
+  connect(senT_return.T, source.T_in) annotation (Line(points={{-70,11},{-70,20},
           {-26,20},{-26,4},{-22,4}}, color={0,0,127}));
   connect(electricHeater.Q_flow, Q_flow_elctricHeater)
     annotation (Line(points={{1,54},{6,54},{6,80},{106,80}}, color={0,0,127}));
-  connect(TIn, Heater.TSet) annotation (Line(points={{-104,70},{18,70},{18,54},
+  connect(TIn, Heater.TSet) annotation (Line(points={{-106,70},{18,70},{18,54},
           {24,54}}, color={0,0,127}));
   connect(Tset_electricHeater, electricHeater.TSet) annotation (Line(points={{
           -104,38},{-58,38},{-58,54},{-22,54}}, color={0,0,127}));
+  connect(senT_return.port_a, sink.ports[1])
+    annotation (Line(points={{-60,0},{-50,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(extent={{-120,-100},{100,100}}),
                    graphics={Ellipse(
           extent={{-78,40},{2,-40}},

@@ -1,7 +1,8 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.OpenLoop;
 model SourceIdeal
   "Simple supply node model with ideal flow source and return port"
-  extends BaseClasses.Supplies.OpenLoop.PartialSupply;
+  extends BaseClasses.Supplies.OpenLoop.PartialSupply(senT_return(
+        allowFlowReversal=true));
 
   parameter Modelica.SIunits.AbsolutePressure pReturn
     "Fixed return pressure";
@@ -19,14 +20,19 @@ model SourceIdeal
         rotation=0,
         origin={20,0})));
 
-  Sources.FixedBoundary sink(redeclare package Medium = Medium, nPorts=1,
-    p=pReturn)
+  Sources.FixedBoundary sink(redeclare package Medium = Medium,
+    p=pReturn,
+    use_T=false,
+    nPorts=1)
     "Ideal sink for return from the network" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-30,0})));
+  Modelica.Blocks.Interfaces.RealOutput Q_flow
+    annotation (Placement(transformation(extent={{98,70},{118,90}})));
 equation
+  Q_flow = (senT_supply.T - senT_return.T) * 4180 * senMasFlo.m_flow;
   connect(source.ports[1], senT_supply.port_a)
     annotation (Line(points={{30,0},{40,0}},       color={0,127,255}));
   connect(TIn, source.T_in)
@@ -34,9 +40,10 @@ equation
                                                        color={0,0,127}));
   connect(dpIn, source.p_in) annotation (Line(points={{-106,-70},{-2,-70},{-2,8},
           {8,8}},             color={0,0,127}));
-  connect(senT_return.port_b, sink.ports[1])
+  connect(senT_return.port_a, sink.ports[1])
     annotation (Line(points={{-60,0},{-40,0}}, color={0,127,255}));
-  annotation (Icon(graphics={Ellipse(
+    annotation (Placement(transformation(extent={{98,50},{118,70}})),
+              Icon(graphics={Ellipse(
           extent={{-78,40},{2,-40}},
           lineColor={28,108,200},
           fillColor={28,108,200},

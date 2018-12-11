@@ -47,12 +47,12 @@ protected
 
 equation
   connect(gain.y, source.m_flow_in)
-    annotation (Line(points={{0,39},{0,8},{8,8}},  color={0,0,127}));
+    annotation (Line(points={{0,39},{0,8},{6,8}},  color={0,0,127}));
   connect(Q_flow_input, gain.u)
     annotation (Line(points={{0,104},{0,62}}, color={0,0,127}));
   connect(senT_supply.port_a, source.ports[1])
     annotation (Line(points={{40,0},{28,0}}, color={0,127,255}));
-  connect(senT_return.port_b, sink.ports[1])
+  connect(senT_return.port_a, sink.ports[1])
     annotation (Line(points={{-60,0},{-40,0}}, color={0,127,255}));
   annotation (Icon(graphics={Ellipse(
           extent={{-78,40},{2,-40}},
