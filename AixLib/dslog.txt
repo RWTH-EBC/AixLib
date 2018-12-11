@@ -1,0 +1,60 @@
+Log-file of program ./dymosim
+(generated: Fri Dec 07 02:11:29 2018)
+
+dymosim started
+... "dsin.txt" loading (dymosim input file)
+
+ERROR: Failed to solve nonlinear system using Newton solver.
+  During initialization at time: 0
+  Tag: simulation.nonlinear[1]
+
+  Common causes:
+   * The system of equations has no solution - the residual will be above zero.
+     - This may be caused by initial conditions not being fully specified, check the translation log.
+     - In some cases the event-logic can cause this.
+   * Starting values are too far from the solution, see homotopy in the manual.
+     - In rare cases this could occur at events.
+   * The equations are too discontinuous for the nonlinear solver - the residual will have knees.
+     - Likely caused by over-using noEvent.
+  Especially consider the first two items above when the nonlinear solver fails during initialization.
+
+  To get more information consider the options:
+   * Simulation/Setup/Translation/Generate listing of translated Modelica code in dsmodel.mof
+   * Simulation/Setup/Translation/List non-linear iteration variables
+   * Simulation/Setup/Debug/Store variables after failed initialization
+     - If a failure to solve a nonlinear equation caused failed initialization.
+   * The options under the group Simulation/Setup/Debug/Nonlinear solver diagnostics
+
+  Jacobian inverse norm estimate: 149507
+  Condition number estimate: 1
+  1-norm of the residual = 1.6965E-013
+  The estimates indicate that the Jacobian is close to singular, suggesting that there is no solution.
+   - Especially since the norm of the last residual vector is small.
+
+  Last value of the solution:
+    boundary1.ports[1].m_flow = 4.11885E-007
+  Last value of the residual:
+    { 1.6965E-013 }
+ 
+... "ExpansionValveChokePressureDifference4.mat" creating (simulation result file)
+
+Integration started at T = 0 using integration method DASSL
+(DAE multi-step solver (dassl/dasslrt of Petzold modified by Dynasim))
+Integration terminated successfully at T = 5
+   CPU-time for integration      : 0.027 seconds
+   CPU-time for one GRID interval: 0.054 milliseconds
+   Number of result points       : 503
+   Number of GRID   points       : 501
+   Number of (successful) steps  : 79
+   Number of F-evaluations       : 205
+   Number of H-evaluations       : 579
+   Number of Jacobian-evaluations: 31
+   Number of (model) time events : 1
+   Number of (U) time events     : 0
+   Number of state    events     : 0
+   Number of step     events     : 0
+   Minimum integration stepsize  : 1e-005
+   Maximum integration stepsize  : 1.18
+   Maximum integration order     : 5
+Calling terminal section
+... "dsfinal.txt" creating (final states)

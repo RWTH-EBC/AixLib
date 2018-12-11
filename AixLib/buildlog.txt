@@ -1,0 +1,10 @@
+ 
+Compiling and linking the model (Visual C++). 
+ 
+dsmodel.c
+dsmodel.c(4554) : warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+dsmodel.c(4556) : warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+   Creating library dymosim.lib and object dymosim.exp
+ 
+Successful generation of Dymosim. 
+ 
