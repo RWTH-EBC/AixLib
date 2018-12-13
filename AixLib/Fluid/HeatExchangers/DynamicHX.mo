@@ -51,9 +51,11 @@ equation
     annotation (Line(points={{47,-30},{40,-30}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
-<li>December 12, 2018, by Alexander K&uuml;mpel:<br/>
+<li>
+December 12, 2018, by Alexander K&uuml;mpel:<br/>
 First implementation, <a href=\"https://github.com/RWTH-EBC/AixLib/tree/issue661_SimpleDynamicHeatExchangerModel\">AixLib, issue 661</a>.
 </li>
+</ul>
 </html>", info="<html>
 <p>This is a simple dynamic heat exchanger with a heat capacity and convection. The heat exchanger is discretized in n elements and the volume elements are replacealbe. </p>
 <p>The heat transfer and pressure losses are calculated by nominal values. Nevertheless, the heattransfer coefficient Gc can be overwritten.</p>

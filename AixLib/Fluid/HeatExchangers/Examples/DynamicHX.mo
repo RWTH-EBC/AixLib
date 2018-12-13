@@ -132,7 +132,7 @@ for different inlet conditions.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>December 12, 2018, by Alexander K&uuml;mpel:<br>First implementation. </li>
+<li>December 12, 2018, by Alexander K&uuml;mpel:<br/>First implementation. </li>
 </ul>
 </html>"));
 end DynamicHX;
