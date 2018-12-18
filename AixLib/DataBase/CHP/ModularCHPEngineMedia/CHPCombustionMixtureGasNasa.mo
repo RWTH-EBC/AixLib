@@ -1,5 +1,4 @@
-within AixLib.DataBase.CHP;
-package ModularCHPEngineMedia
+within AixLib.DataBase.CHP.ModularCHPEngineMedia;
 partial package CHPCombustionMixtureGasNasa
     "Medium model of a mixture of ideal gases based on NASA source"
 
@@ -170,7 +169,7 @@ required from medium model \"" + mediumName + "\".");
   end specificInternalEnergy;
 
   redeclare function extends specificEntropy "Return specific entropy"
-    protected
+  protected
     Real[nX] Y(unit="mol/mol")=massToMoleFractions(state.X, data.MM)
       "Molar fractions";
   algorithm
@@ -307,11 +306,11 @@ required from medium model \"" + mediumName + "\".");
     input AbsolutePressure p2 "Downstream pressure";
     input ThermodynamicState state "Thermodynamic state at upstream location";
     output SpecificEnthalpy h_is "Isentropic enthalpy";
-    protected
+  protected
     SpecificEnthalpy h "Specific enthalpy at upstream location";
     SpecificEnthalpy h_component[nX] "Specific enthalpy at upstream location";
     IsentropicExponent gamma =  isentropicExponent(state) "Isentropic exponent";
-    protected
+  protected
     MassFraction[nX] X "Complete X-vector";
   algorithm
     X := if reducedX then cat(1,state.X,{1-sum(state.X)}) else state.X;
@@ -340,7 +339,7 @@ function gasMixtureViscosity
   input MolarMass[size(yi,1)] M "Mole masses";
   input DynamicViscosity[size(yi,1)] eta "Pure component viscosities";
   output DynamicViscosity etam "Viscosity of the mixture";
-    protected
+  protected
   Real fi[size(yi,1),size(yi,1)];
 algorithm
   for i in 1:size(eta,1) loop
@@ -389,7 +388,7 @@ end gasMixtureViscosity;
 
     redeclare replaceable function extends dynamicViscosity
     "Return mixture dynamic viscosity"
-    protected
+  protected
       DynamicViscosity[nX] etaX "Component dynamic viscosities";
     algorithm
       for i in 1:nX loop
@@ -421,7 +420,7 @@ end gasMixtureViscosity;
     input MoleFraction[nX] y "Molar Fractions";
     input Real[nX] kappa =  zeros(nX) "Association Factors";
     output DynamicViscosity etaMixture "Mixture viscosity (Pa.s)";
-    protected
+  protected
   constant Real[size(y,1)] Vc =  Vcrit*1000000 "Critical volumes (cm3/mol)";
   constant Real[size(y,1)] M =  MolecularWeights*1000
       "Molecular weights (g/mol)";
@@ -609,7 +608,7 @@ function lowPressureThermalConductivity
   input ThermalConductivity[size(y,1)] lambda
       "Thermal conductivities of the pure gases";
   output ThermalConductivity lambdam "Thermal conductivity of the gas mixture";
-    protected
+  protected
   MolarMass[size(y,1)] gamma;
   Real[size(y,1)] Tr "Reduced temperature";
   Real[size(y,1),size(y,1)] A "Mason and Saxena Modification";
@@ -653,7 +652,7 @@ end lowPressureThermalConductivity;
     "Return thermal conductivity for low pressure gas mixtures"
       input Integer method=methodForThermalConductivity
       "Method to compute single component thermal conductivity";
-    protected
+  protected
       ThermalConductivity[nX] lambdaX "Component thermal conductivities";
       DynamicViscosity[nX] eta "Component thermal dynamic viscosities";
       SpecificHeatCapacity[nX] cp "Component heat capacity";
@@ -740,7 +739,7 @@ end lowPressureThermalConductivity;
      input Modelica.SIunits.SpecificEnthalpy h_off=h_offset
         "User defined offset for reference enthalpy, if referenceChoice = UserDefined";
     output Temperature T "Temperature";
-    protected
+  protected
     MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
   package Internal
       "Solve h(data,T) for T with given h (use only indirectly via temperature_phX)"
@@ -772,7 +771,7 @@ end lowPressureThermalConductivity;
     input SpecificEntropy s "Specific entropy";
     input MassFraction[nX] X "Mass fractions of composition";
     output Temperature T "Temperature";
-    protected
+  protected
     MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
   package Internal
       "Solve h(data,T) for T with given h (use only indirectly via temperature_phX)"
@@ -784,7 +783,7 @@ end lowPressureThermalConductivity;
 
     redeclare function extends f_nonlinear
         "Note that this function always sees the complete mass fraction vector"
-        protected
+      protected
     MassFraction[nX] Xfull = if size(X,1) == nX then X else cat(1,X,{1-sum(X)});
     Real[nX] Y(unit="mol/mol")=massToMoleFractions(if size(X,1) == nX then X else cat(1,X,{1-sum(X)}), data.MM)
           "Molar fractions";
@@ -852,705 +851,3 @@ It has been developed by Hubertus Tummescheit.
 </p>
 </html>"));
 end CHPCombustionMixtureGasNasa;
-
-  package NaturalGasMixture_GeneralType
-    "Simple natural gas mixture for CHP-engine combustion"
-    import AixLib;
-
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
-      mediumName="NaturalGasMixture_SelectableVolumetricProportions",
-      data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.CH4,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C2H4,Modelica.Media.IdealGases.Common.SingleGasesData.C2H6,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C3H8,Modelica.Media.IdealGases.Common.SingleGasesData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C5H12_n_pentane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.CO2},
-      fluidConstants={Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.CH4,
-          Modelica.Media.IdealGases.Common.FluidData.C2H4,Modelica.Media.IdealGases.Common.FluidData.C2H6,
-          Modelica.Media.IdealGases.Common.FluidData.C3H8,Modelica.Media.IdealGases.Common.FluidData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.FluidData.C5H12_n_pentane,Modelica.Media.IdealGases.Common.FluidData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.FluidData.CO2},
-      substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
-          "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
-
-    constant
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
-      NatGasTyp=NaturalGas_GeneralDefinition()
-      "Needed natural gas data for calculations, manual redefinition of volumetric proportions of the gas components (Xi_mole) required (default:{1/9,1/9,...})!"
-      annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
-
-     import Modelica.SIunits.*;
-
-    constant MoleFraction moleFractions_Gas[:] = NatGasTyp.Xi_mole;
-    constant MolarMass MM = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.MMi[i] for i in 1:size(NatGasTyp.MMi, 1)) "Molar mass of natural gas type from its composition";
-    constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(NatGasTyp.Xi_mole, NatGasTyp.MMi);
-    constant SpecificEnergy H_U = sum(massFractions_Gas[i]*NatGasTyp.H_Ui[i] for i in 1:size(NatGasTyp.MMi, 1)) "Calorific Value of the fuel gas";
-    constant Real l_min = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.nue_min[i] for i in 1:size(NatGasTyp.MMi, 1))/0.21;
-    constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
-
-    record NaturalGas_GeneralDefinition
-      extends
-        AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
-          naturalGasType="GeneralTypeForRedefinition", Xi_mole={1/9,1/9,1/9,1/9,
-            1/9,1/9,1/9,1/9,1/9});
-    end NaturalGas_GeneralDefinition;
-
-    annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
-</html>"));
-  end NaturalGasMixture_GeneralType;
-
-  package NaturalGasMixture_TypeAachen
-    "Simple natural gas mixture (type Aachen) for CHP-engine combustion"
-
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
-      mediumName="NaturalGasMixtureForAachen",
-      data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.CH4,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C2H4,Modelica.Media.IdealGases.Common.SingleGasesData.C2H6,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C3H8,Modelica.Media.IdealGases.Common.SingleGasesData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C5H12_n_pentane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.CO2},
-      fluidConstants={Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.CH4,
-          Modelica.Media.IdealGases.Common.FluidData.C2H4,Modelica.Media.IdealGases.Common.FluidData.C2H6,
-          Modelica.Media.IdealGases.Common.FluidData.C3H8,Modelica.Media.IdealGases.Common.FluidData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.FluidData.C5H12_n_pentane,Modelica.Media.IdealGases.Common.FluidData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.FluidData.CO2},
-      substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
-          "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
-
-    constant
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
-      NatGasTyp=NaturalGasTypeAachen()
-      "Needed natural gas data for calculations"
-      annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
-
-     import Modelica.SIunits.*;
-
-    constant MoleFraction moleFractions_Gas[:] = NatGasTyp.Xi_mole;
-    constant MolarMass MM = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.MMi[i] for i in 1:size(NatGasTyp.MMi, 1)) "Molar mass of natural gas type from its composition";
-    constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(NatGasTyp.Xi_mole, NatGasTyp.MMi);
-    constant SpecificEnergy H_U = sum(massFractions_Gas[i]*NatGasTyp.H_Ui[i] for i in 1:size(NatGasTyp.MMi, 1)) "Calorific Value of the fuel gas";
-    constant Real l_min = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.nue_min[i] for i in 1:size(NatGasTyp.MMi, 1))/0.21;
-    constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
-
-    record NaturalGasTypeAachen
-      extends
-        AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
-          naturalGasType="TypeAachen", Xi_mole={0.0089,0.9255,0,0.045,0.0063,
-            0.0019,0.0004,0.0001,0.0119});
-    end NaturalGasTypeAachen;
-    annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
-</html>"));
-  end NaturalGasMixture_TypeAachen;
-
-  package NaturalGasMixture_TypeH
-    "Simple natural gas mixture (type H) for CHP-engine combustion"
-
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
-      mediumName="NaturalGasMixtureTypeH",
-      data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.CH4,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C2H4,Modelica.Media.IdealGases.Common.SingleGasesData.C2H6,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C3H8,Modelica.Media.IdealGases.Common.SingleGasesData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C5H12_n_pentane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.CO2},
-      fluidConstants={Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.CH4,
-          Modelica.Media.IdealGases.Common.FluidData.C2H4,Modelica.Media.IdealGases.Common.FluidData.C2H6,
-          Modelica.Media.IdealGases.Common.FluidData.C3H8,Modelica.Media.IdealGases.Common.FluidData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.FluidData.C5H12_n_pentane,Modelica.Media.IdealGases.Common.FluidData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.FluidData.CO2},
-      substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
-          "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
-
-    constant
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
-      NatGasTyp=NaturalGasTypeH() "Needed natural gas data for calculations"
-      annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
-
-     import Modelica.SIunits.*;
-
-    constant MoleFraction moleFractions_Gas[:] = NatGasTyp.Xi_mole;
-    constant MolarMass MM = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.MMi[i] for i in 1:size(NatGasTyp.MMi, 1)) "Molar mass of natural gas type from its composition";
-    constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(NatGasTyp.Xi_mole, NatGasTyp.MMi);
-    constant SpecificEnergy H_U = sum(massFractions_Gas[i]*NatGasTyp.H_Ui[i] for i in 1:size(NatGasTyp.MMi, 1)) "Calorific Value of the fuel gas";
-    constant Real l_min = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.nue_min[i] for i in 1:size(NatGasTyp.MMi, 1))/0.21;
-    constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
-
-    record NaturalGasTypeH
-      extends
-        AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
-          naturalGasType="TypeH", Xi_mole={0.007,0.854,0,0.08,0.029,0.01,0,0,
-            0.02});
-    end NaturalGasTypeH;
-    annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
-</html>"));
-  end NaturalGasMixture_TypeH;
-
-  package NaturalGasMixture_TypeL
-    "Simple natural gas mixture (type L) for CHP-engine combustion"
-
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
-      mediumName="NaturalGasMixtureTypeL",
-      data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.CH4,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C2H4,Modelica.Media.IdealGases.Common.SingleGasesData.C2H6,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C3H8,Modelica.Media.IdealGases.Common.SingleGasesData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C5H12_n_pentane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.SingleGasesData.CO2},
-      fluidConstants={Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.CH4,
-          Modelica.Media.IdealGases.Common.FluidData.C2H4,Modelica.Media.IdealGases.Common.FluidData.C2H6,
-          Modelica.Media.IdealGases.Common.FluidData.C3H8,Modelica.Media.IdealGases.Common.FluidData.C4H10_n_butane,
-          Modelica.Media.IdealGases.Common.FluidData.C5H12_n_pentane,Modelica.Media.IdealGases.Common.FluidData.C6H14_n_hexane,
-          Modelica.Media.IdealGases.Common.FluidData.CO2},
-      substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
-          "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
-
-    constant
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
-      NatGasTyp=NaturalGasTypeL() "Needed natural gas data for calculations"
-      annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
-
-     import Modelica.SIunits.*;
-
-    constant MoleFraction moleFractions_Gas[:] = NatGasTyp.Xi_mole;
-    constant MolarMass MM = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.MMi[i] for i in 1:size(NatGasTyp.MMi, 1)) "Molar mass of natural gas type from its composition";
-    constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(NatGasTyp.Xi_mole, NatGasTyp.MMi);
-    constant SpecificEnergy H_U = sum(massFractions_Gas[i]*NatGasTyp.H_Ui[i] for i in 1:size(NatGasTyp.MMi, 1)) "Calorific Value of the fuel gas";
-    constant Real l_min = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.nue_min[i] for i in 1:size(NatGasTyp.MMi, 1))/0.21;
-    constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
-
-    record NaturalGasTypeL
-      extends
-        AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
-          naturalGasType="TypeL", Xi_mole={0.126,0.82,0,0.033,0.006,0.003,0,0,
-            0.012});
-    end NaturalGasTypeL;
-    annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
-</html>"));
-  end NaturalGasMixture_TypeL;
-
-  package CHPFlueGasLambdaOnePlus
-    "Simple flue gas for overstoichiometric O2-fuel ratios"
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
-      mediumName="FlueGasLambdaPlus",
-      data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.O2,
-          Modelica.Media.IdealGases.Common.SingleGasesData.H2O,Modelica.Media.IdealGases.Common.SingleGasesData.CO2},
-      fluidConstants={Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.O2,
-          Modelica.Media.IdealGases.Common.FluidData.H2O,Modelica.Media.IdealGases.Common.FluidData.CO2},
-      substanceNames={"Nitrogen","Oxygen","Water","Carbondioxide"},
-      reference_X={0.768,0.232,0.0,0.0});
-
-    annotation (Documentation(info="<html>
-
-</html>"));
-  end CHPFlueGasLambdaOnePlus;
-
-  package EngineCombustionAir "Air as mixture of N2 and O2"
-    extends Modelica.Media.IdealGases.Common.MixtureGasNasa(
-      mediumName="CombustionAirN2O2",
-      data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.O2},
-      fluidConstants={Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.O2},
-      substanceNames={"Nitrogen","Oxygen"}, reference_X = {0.768, 0.232});
-
-    //!!For the script calculating the combustion: Nitrogen has to be at first place for the composition of the fuel!!"
-      constant ThermodynamicState stateAir = setState_pTX(reference_p, reference_T, reference_X);
-      constant MolarMass MM = 1/sum(stateAir.X[j]/data[j].MM for j in 1:size(stateAir.X, 1));
-      constant MolarMass MMX[:] = data[:].MM;
-      constant Real X[:] = stateAir.X;
-      constant MoleFraction moleFractions_Air[:] = massToMoleFractions(X, MMX);
-    annotation (Documentation(info="<html>
-
-</html>"));
-  end EngineCombustionAir;
-
-  package CHPCoolantPropyleneGlycolWater
-    "Package with model for propylene glycol - water with constant properties"
-    extends Modelica.Media.Interfaces.PartialSimpleMedium(
-      mediumName="PropyleneGlycolWater(X_a = "
-        + String(X_a) + ", property_T = "
-        + String(property_T) + ")",
-      final cp_const=specificHeatCapacityCp_TX_a(T = property_T, X_a = X_a),
-      final cv_const=cp_const,
-      final d_const=density_TX_a(T = property_T, X_a = X_a),
-      final eta_const=dynamicViscosity_TX_a(T = property_T, X_a = X_a),
-      final lambda_const=thermalConductivity_TX_a(T = property_T, X_a = X_a),
-      a_const=1484,
-      final T_min=fusionTemperature_TX_a(T = property_T, X_a = X_a),
-      T_max=Modelica.SIunits.Conversions.from_degC(100),
-      T0=273.15,
-      MM_const=(X_a/simplePropyleneGlycolWaterConstants[1].molarMass + (1
-           - X_a)/0.018015268)^(-1),
-      fluidConstants=simplePropyleneGlycolWaterConstants,
-      p_default=300000,
-      reference_p=300000,
-      reference_T=273.15,
-      reference_X={1},
-      AbsolutePressure(start=p_default),
-      Temperature(start=T_default),
-      Density(start=d_const));
-
-    constant Modelica.SIunits.Temperature property_T
-      "Temperature for evaluation of constant fluid properties";
-    constant Modelica.SIunits.MassFraction X_a
-      "Mass fraction of propylene glycol in water";
-
-    redeclare model BaseProperties "Base properties"
-      Temperature T(stateSelect=
-        if preferredMediumStates then StateSelect.prefer else StateSelect.default)
-        "Temperature of medium";
-
-      InputAbsolutePressure p "Absolute pressure of medium";
-      InputMassFraction[nXi] Xi=fill(0, 0)
-        "Structurally independent mass fractions";
-      InputSpecificEnthalpy h "Specific enthalpy of medium";
-      Modelica.SIunits.SpecificInternalEnergy u
-        "Specific internal energy of medium";
-      Modelica.SIunits.Density d=d_const "Density of medium";
-      Modelica.SIunits.MassFraction[nX] X={1}
-        "Mass fractions (= (component mass)/total mass  m_i/m)";
-      final Modelica.SIunits.SpecificHeatCapacity R=0
-        "Gas constant (of mixture if applicable)";
-      final Modelica.SIunits.MolarMass MM=MM_const
-        "Molar mass (of mixture or single fluid)";
-      ThermodynamicState state
-        "Thermodynamic state record for optional functions";
-      parameter Boolean preferredMediumStates=false
-        "= true if StateSelect.prefer shall be used for the independent property variables of the medium"
-        annotation(Evaluate=true, Dialog(tab="Advanced"));
-      final parameter Boolean standardOrderComponents=true
-        "If true, and reducedX = true, the last element of X will be computed from the other ones";
-      Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC=
-          Modelica.SIunits.Conversions.to_degC(T)
-        "Temperature of medium in [degC]";
-      Modelica.SIunits.Conversions.NonSIunits.Pressure_bar p_bar=
-          Modelica.SIunits.Conversions.to_bar(p)
-        "Absolute pressure of medium in [bar]";
-
-      // Local connector definition, used for equation balancing check
-      connector InputAbsolutePressure = input Modelica.SIunits.AbsolutePressure
-        "Pressure as input signal connector";
-      connector InputSpecificEnthalpy = input Modelica.SIunits.SpecificEnthalpy
-        "Specific enthalpy as input signal connector";
-      connector InputMassFraction = input Modelica.SIunits.MassFraction
-        "Mass fraction as input signal connector";
-
-    equation
-      assert(T >= T_min and T <= T_max, "
-Temperature T (= "   + String(T) + " K) is not
-in the allowed range ("   + String(T_min) + " K <= T <= " + String(T_max) + " K)
-required from medium model \""   + mediumName + "\".
-");   assert(X_a >= X_a_min and X_a <= X_a_max, "
-    Mass fraction X_a (= "   + String(X_a) + " ) is not
-in the allowed range ("   + String(X_a_min) + " <= X_a <= " + String(X_a_max) + " )
-required from medium model \""   + mediumName + "\".
-");
-
-      h = cp_const*(T-reference_T);
-      u = h;
-      state.T = T;
-      state.p = p;
-
-      annotation(Documentation(info="<html>
-    <p>
-    This base properties model is identical to
-    <a href=\"modelica://Modelica.Media.Water.ConstantPropertyLiquidWater\">
-    Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
-    except that the equation
-    <code>u = cv_const*(T - reference_T)</code>
-    has been replaced by <code>u=h</code> because
-    <code>cp_const=cv_const</code>.
-    Also, the model checks if the mass fraction of the mixture is within the
-    allowed limits.
-    </p>
-</html>"));
-    end BaseProperties;
-  protected
-    constant Modelica.SIunits.MassFraction X_a_min=0.
-      "Minimum allowed mass fraction of propylene glycol in water";
-    constant Modelica.SIunits.MassFraction X_a_max=0.6
-      "Maximum allowed mass fraction of propylene glycol in water";
-
-    // Fluid constants based on pure Propylene Glycol
-    constant Modelica.Media.Interfaces.Types.Basic.FluidConstants[1]
-      simplePropyleneGlycolWaterConstants(
-      each chemicalFormula="C3H8O2",
-      each structureFormula="CH3CH(OH)CH2OH",
-      each casRegistryNumber="57-55-6",
-      each iupacName="1,2-Propylene glycol",
-      each molarMass=0.07609);
-
-    // Coefficients for evaluation of physical properties
-    constant AixLib.Media.Antifreeze.BaseClasses.PropertyCoefficients
-      proCoe(
-      X_a_ref=0.307031,
-      T_ref=Modelica.SIunits.Conversions.from_degC(32.7083),
-      nX_a=6,
-      nT={4,4,4,3,2,1},
-      nTot=18,
-      a_d={1.018e3,-5.406e-1,-2.666e-3,1.347e-5,7.604e-1,-9.450e-3,5.541e-5,-1.343e-7,
-          -2.498e-3,2.700e-5,-4.018e-7,3.376e-9,-1.550e-4,2.829e-6,-7.175e-9,-1.131e-6,
-          -2.221e-8,2.342e-8},
-      a_eta={6.837e-1,-3.045e-2,2.525e-4,-1.399e-6,3.328e-2,-3.984e-4,4.332e-6,-1.860e-8,
-          5.453e-5,-8.600e-8,-1.593e-8,-4.465e-11,-3.900e-6,1.054e-7,-1.589e-9,-1.587e-8,
-          4.475e-10,3.564e-9},
-      a_Tf={-1.325e1,-3.820e-5,7.865e-7,-1.733e-9,-6.631e-1,6.774e-6,-6.242e-8,-7.819e-10,
-          -1.094e-2,5.332e-8,-4.169e-9,3.288e-11,-2.283e-4,-1.131e-8,1.918e-10,-3.409e-6,
-          8.035e-11,1.465e-8},
-      a_cp={3.882e3,2.699e0,-1.659e-3,-1.032e-5,-1.304e1,5.070e-2,-4.752e-5,
-          1.522e-6,-1.598e-1,9.534e-5,1.167e-5,-4.870e-8,3.539e-4,3.102e-5,-2.950e-7,
-          5.000e-5,-7.135e-7,-4.959e-7},
-      a_lambda={4.513e-1,7.955e-4,3.482e-8,-5.966e-9,-4.795e-3,-1.678e-5,8.941e-8,
-          1.493e-10,2.076e-5,1.563e-7,-4.615e-9,9.897e-12,-9.083e-8,-2.518e-9,
-          6.543e-11,-5.952e-10,-3.605e-11,2.104e-11})
-      "Coefficients for evaluation of thermo-physical properties";
-
-    replaceable function density_TX_a
-      "Evaluate density of antifreeze-water mixture"
-      extends Modelica.Icons.Function;
-      input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-      input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-      output Modelica.SIunits.Density d "Density of antifreeze-water mixture";
-    algorithm
-      d :=polynomialProperty(
-          X_a,
-          T,
-          proCoe.a_d)
-      annotation (
-      Documentation(info="<html>
-  <p>
-  Density of propylene antifreeze-water mixture at specified mass fraction
-  and temperature, based on Melinder (2010).
-  </p>
-  <h4>References</h4>
-  <p>
-  Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-  Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-  IIR/IIF.
-  </p>
-  </html>",
-    revisions="<html>
-  <ul>
-  <li>
-  May 2, 2018 by Massimo Cimmino:<br/>
-  First implementation.
-  This function is used by
-  <a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-  AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-  </li>
-  </ul>
-  </html>"));
-
-    end density_TX_a;
-
-    replaceable function dynamicViscosity_TX_a
-      "Evaluate dynamic viscosity of antifreeze-water mixture"
-        extends Modelica.Icons.Function;
-      input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-      input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-      output Modelica.SIunits.DynamicViscosity eta "Dynamic Viscosity of antifreeze-water mixture";
-    algorithm
-      eta :=1e-3*exp(polynomialProperty(
-          X_a,
-          T,
-          proCoe.a_eta));
-
-    annotation (
-    Documentation(info="<html>
-<p>
-Dynamic viscosity of antifreeze-water mixture at specified mass fraction and
-temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",     revisions="<html>
-<ul>
-<li>
-May 2, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
-    end dynamicViscosity_TX_a;
-
-    replaceable function fusionTemperature_TX_a
-      "Evaluate temperature of fusion of antifreeze-water mixture"
-        extends Modelica.Icons.Function;
-      input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-      input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-      output Modelica.SIunits.Temperature Tf "Temperature of fusion of antifreeze-water mixture";
-    algorithm
-      Tf :=Modelica.SIunits.Conversions.from_degC(polynomialProperty(
-          X_a,
-          T,
-          proCoe.a_Tf));
-
-    annotation (
-    Documentation(info="<html>
-<p>
-Fusion temperature of antifreeze-water mixture at specified mass fraction and
-temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",     revisions="<html>
-<ul>
-<li>
-May 2, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
-    end fusionTemperature_TX_a;
-
-    replaceable function polynomialProperty
-      "Evaluates thermophysical property from 2-variable polynomial"
-      extends Modelica.Icons.Function;
-
-      input Real x "First independent variable";
-      input Real y "Second independent variable";
-      input Real a[sum(proCoe.nT)] "Polynomial coefficients";
-
-      output Real f "Value of thermophysical property";
-
-    protected
-      Real dx;
-      Real dy;
-      Integer n;
-    algorithm
-      dx := 100*(x - proCoe.X_a_ref);
-      dy := y - proCoe.T_ref;
-
-      f := 0;
-      n := 0;
-      for i in 0:proCoe.nX_a - 1 loop
-        for j in 0:proCoe.nT[i+1] - 1 loop
-          n := n + 1;
-          f := f + a[n]*dx^i*dy^j;
-        end for;
-      end for;
-    annotation (
-    Documentation(info="<html>
-<p>
-Evaluates a thermophysical property of a mixture, based on correlations proposed
-by Melinder (2010).
-</p>
-<p>
-The polynomial has the form
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-f = a<sub>1</sub> (x-xm)<sup>0</sup>(y-ym)<sup>0</sup>
-+ a<sub>2</sub> (x-xm)<sup>0</sup>(y-ym)<sup>1</sup>
-+ ... +
-a<sub>ny[1]</sub> (x-xm)<sup>0</sup>(y-ym)<sup>ny[1]-1</sup>
-+ ... +
-a<sub>ny[1])+1</sub> (x-xm)<sup>1</sup>(y-ym)<sup>0</sup>
-+ ... +
-a<sub>ny[1]+ny[2]</sub> (x-xm)<sup>1</sup>(y-ym)<sup>ny[2]-1</sup>
-+ ...
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",     revisions="<html>
-<ul>
-<li>
-March 16, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used models in
-<a href=\"modelica://AixLib.Media.Antifreeze\">
-AixLib.Media.Antifreeze</a>.
-</li>
-</ul>
-</html>"));
-    end polynomialProperty;
-
-    replaceable function specificHeatCapacityCp_TX_a
-      "Evaluate specific heat capacity of antifreeze-water mixture"
-        extends Modelica.Icons.Function;
-      input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-      input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-      output Modelica.SIunits.SpecificHeatCapacity cp "Specific heat capacity of antifreeze-water mixture";
-    algorithm
-      cp :=polynomialProperty(
-          X_a,
-          T,
-          proCoe.a_cp);
-
-    annotation (
-    Documentation(info="<html>
-<p>
-Specific heat capacity of antifreeze-water mixture at specified mass fraction
-and temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",     revisions="<html>
-<ul>
-<li>
-March 16, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
-    end specificHeatCapacityCp_TX_a;
-
-    replaceable function thermalConductivity_TX_a
-      "Evaluate thermal conductivity of antifreeze-water mixture"
-        extends Modelica.Icons.Function;
-      input Modelica.SIunits.Temperature T "Temperature of antifreeze-water mixture";
-      input Modelica.SIunits.MassFraction X_a "Mass fraction of antifreeze";
-      output Modelica.SIunits.ThermalConductivity lambda "Thermal conductivity of antifreeze-water mixture";
-    algorithm
-      lambda :=polynomialProperty(
-          X_a,
-          T,
-          proCoe.a_lambda);
-
-    annotation (
-    Documentation(info="<html>
-<p>
-Thermal conductivity of antifreeze-water mixture at specified mass fraction and
-temperature, based on Melinder (2010).
-</p>
-<h4>References</h4>
-<p>
-Melinder, &#197;ke. 2010. Properties of Secondary Working Fluids (Secondary
-Refrigerants or Coolants, Heat Transfer Fluids) for Indirect Systems. Paris:
-IIR/IIF.
-</p>
-</html>",     revisions="<html>
-<ul>
-<li>
-March 16, 2018 by Massimo Cimmino:<br/>
-First implementation.
-This function is used by
-<a href=\"modelica://AixLib.Media.Antifreeze.PropyleneGlycolWater\">
-AixLib.Media.Antifreeze.PropyleneGlycolWater</a>.
-</li>
-</ul>
-</html>"));
-    end thermalConductivity_TX_a;
-  annotation(preferredView="info", Documentation(info="<html>
-<p>
-This medium package models propylene glycol - water mixtures.
-</p>
-<p>
-The mass density, specific heat capacity, thermal conductivity and viscosity
-are assumed constant and evaluated at a set temperature and mass fraction of
-propylene glycol within the mixture. The dependence of the four properties
-are shown on the figure below.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterProperties.png\" border=\"1\"
-alt=\"Relative variation of specific heat capacity with temperature\"/>
-</p>
-<p>
-The accuracy of the thermophysical properties is dependent on the temperature
-variations encountered during simulations.
-The figure below shows the relative error of the the four properties over a
-<i>10</i> &deg;C range around the temperature used to evaluate the constant
-properties. The maximum errors are <i>0.8</i> % for mass density, <i>1.5</i> %
-for specific heat capacity, <i>3.2</i> % for thermal conductivity and <i>250</i>
-% for dynamic viscosity.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError10degC.png\" border=\"1\"
-alt=\"Relative variation of specific heat capacity with temperature\"/>
-</p>
-<p>
-The figure below shows the relative error of the the four properties over a
-<i>20</i> &deg;C range around the temperature used to evaluate the constant
-proepties. The maximum errors are <i>1.6</i> % for mass density, <i>3.0</i> %
-for specific heat capacity, <i>6.2</i> % for thermal conductivity and <i>950</i>
-% for dynamic viscosity.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError20degC.png\" border=\"1\"
-alt=\"Relative variation of specific heat capacity with temperature\"/>
-</p>
-<p>
-The enthalpy is computed using the convention that <i>h=0</i>
-if <i>T=0</i> &deg;C.
-</p>
-<h4>Limitations</h4>
-<p>
-Density, specific heat capacity, thermal conductivity and viscosity are constant.
-The propylene glycol/water mixture is modeled as an incompressible liquid.
-There are no phase changes. The medium is limited to temperatures below
-<i>100</i> &deg;C and mass fractions below <i>0.60</i>.
-As is the case for AixLib.Media.Water, this medium package should not be used if
-the simulation relies on the dynamic viscosity.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-The temperature and mass fraction must be specified for the evaluation of the
-constant thermophysical properties. A typical use of the package is (e.g. for
-a temperature of <i>20</i> &deg;C and a mass fraction of <i>0.40</i>):
-</p>
-<p>
-<code>Medium = AixLib.Media.Antifreeze.PropyleneGlycolWater(property_T=293.15, X_a=0.40)</code>
-</p>
-</html>",   revisions="<html>
-<ul>
-<li>
-March 16, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
-  end CHPCoolantPropyleneGlycolWater;
-
-  record CombustionEngineFuelDataBaseRecord
-
-      extends Modelica.Icons.Record;
-
-      //Base-Record for physical combustion calculations of natural gas out of (Nitrogen,Methane,Ethene,Ethane,Propane,n-Butane,n-Pentane,n-Hexane,Carbondioxide)
-      parameter String naturalGasType "Name of the natural gas composition";
-      parameter String substanceNames[:] = {"Nitrogen","Methane","Ethene","Ethane","Propane","n-Butane","n-Pentane","n-Hexane","Carbondioxide"};
-      parameter Modelica.SIunits.MoleFraction Xi_mole[:] "Volumetric proportion of each fuel component";
-      parameter Modelica.SIunits.MolarMass MMi[:] = {0.02802,0.01604,0.02805,0.03007,0.0441,0.05815,0.07215,0.08618,0.04401} "Molar mass of natural gas components";
-      parameter Modelica.SIunits.SpecificEnergy H_Ui[:] = {0,50000000,50900000,47160000,46440000,45720000,45000000,44640000,0};
-      //constant Modelica.SIunits.MolarMass MM = sum(Xi_mole[i]/MMi[i] for i in 1:size(MMi, 1));
-      parameter Real nue_C[size(MMi, 1)] = {0, 1, 2, 2, 3, 4, 5, 6, 1} "Number of carbon atoms for each gas component (for composition calculation)";
-      parameter Real nue_H[size(MMi, 1)] = {0, 4, 4, 6, 8, 10, 12, 14, 0} "Number of hydrogen atoms for each gas component (for composition calculation)";
-      parameter Real nue_O[size(MMi, 1)] = {0, 0, 0, 0, 0, 0, 0, 0, 2} "Number of oxygen atoms for each gas component (for composition calculation)";
-      parameter Real nue_N[size(MMi, 1)] = {2, 0, 0, 0, 0, 0, 0, 0, 0} "Number of nitrogen atoms for each gas component (for composition calculation)";
-      parameter Real nue_min[:] = {0, 2, 3, 3.5, 5, 6.5, 8, 9.5, 0} "Number of O2 molecules needed for combustion";
-
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
-  end CombustionEngineFuelDataBaseRecord;
-end ModularCHPEngineMedia;
