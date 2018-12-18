@@ -1,0 +1,13 @@
+property_T
+X_a
+BaseProperties
+X_a_min
+X_a_max
+simplePropyleneGlycolWaterConstants
+proCoe
+density_TX_a
+dynamicViscosity_TX_a
+fusionTemperature_TX_a
+polynomialProperty
+specificHeatCapacityCp_TX_a
+thermalConductivity_TX_a

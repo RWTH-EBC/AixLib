@@ -9,8 +9,7 @@ model CHPSystem "Example that illustrates use of CHP model"
     TSetIn=true,
     minCapacity=20,
     delayTime=300,
-    param=DataBase.CHP.CHP_FMB_65_GSK())
-    "CHP"
+    param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(
     redeclare package Medium =
