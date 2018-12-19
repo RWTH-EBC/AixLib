@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHPCombustionHeatToCooling "Partial model for heat generators"
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHPCombustionHeatToCooling1812 "Partial model for heat generators"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     redeclare package Medium = Medium4,
     m_flow_small=0.001,
@@ -175,4 +175,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end CHPCombustionHeatToCooling;
+end CHPCombustionHeatToCooling1812;

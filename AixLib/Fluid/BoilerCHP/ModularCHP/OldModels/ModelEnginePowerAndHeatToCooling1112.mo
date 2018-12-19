@@ -52,7 +52,7 @@ model ModelEnginePowerAndHeatToCooling1112
     "A physikal model for calculating the thermal, mass and mechanical output of an ice powered CHP"
     annotation (Placement(transformation(extent={{2,26},{30,54}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionHeatToCooling
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionHeatToCooling1812
     engineHeatTransfer(
     redeclare package Medium = Medium_Coolant,
     redeclare package Medium4 = Medium_Coolant,
@@ -144,7 +144,8 @@ model ModelEnginePowerAndHeatToCooling1112
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-62,-8},{-78,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger1812
+    exhaustHeatExchanger(
     TAmb=T_ambient,
     pAmb=p_ambient,
     T_ExhPowUniOut=CHPEngineModel.T_ExhPowUniOut,

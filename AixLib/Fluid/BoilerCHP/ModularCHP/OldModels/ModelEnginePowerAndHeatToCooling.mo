@@ -58,7 +58,7 @@ model ModelEnginePowerAndHeatToCooling
     redeclare package Medium4 = Medium_Coolant,
     vol(V=0.002),
     T_start=coolantReturnFlow.T) constrainedby
-    AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionHeatToCooling(
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionHeatToCooling1812(
     redeclare package Medium = Medium_Coolant,
     redeclare package Medium4 = Medium_Coolant,
     vol(V=0.002),

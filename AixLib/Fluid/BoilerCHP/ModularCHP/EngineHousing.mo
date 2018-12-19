@@ -1,5 +1,6 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
 class EngineHousing "Engine housing as a simple two layer wall."
+  import AixLib;
 
   replaceable package Medium3 =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
@@ -31,14 +32,9 @@ class EngineHousing "Engine housing as a simple two layer wall."
   parameter Modelica.SIunits.Mass mEng
     "Total engine mass"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_Air = 3.84 "Coefficient of heat transfer for air inside and outside the power unit (for DeltaT=15K)"
-    annotation (Dialog(tab="Thermal"));
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
-    "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
-    annotation (Dialog(tab="Calibration properties"));
-  parameter Modelica.SIunits.ThermalConductance GAirToAmb=0.36
-    "Thermal conductance from the sorrounding air to the ambient"
-    annotation (Dialog(tab="Calibration properties"));
+  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
+    "Thermal conductance from engine housing to the surrounding air"
+   annotation (Dialog(tab="Thermal"));
   parameter Modelica.SIunits.Temperature T_Amb=298.15
     "Ambient temperature"
     annotation (Dialog(tab="Thermal"));
@@ -71,9 +67,6 @@ protected
   parameter Modelica.SIunits.ThermalConductance GEngBlo=lambda*A_WInn/dOut
    "Thermal conductance of the remaining engine body"
    annotation (Dialog(tab="Thermal"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAir = A_WInn*alpha_Air
-   "Thermal conductance from engine housing to the surrounding air"
-   annotation (Dialog(tab="Thermal"));
 
 public
   Modelica.SIunits.Temperature T_Com
@@ -81,8 +74,8 @@ public
    annotation (Dialog(tab="Thermal"));
   Modelica.SIunits.Temperature T_CylWall
     "Temperature of cylinder wall";
-  Modelica.SIunits.Temperature T_LogMeanCool
-    "Mean logarithmic coolant temperature" annotation (Dialog(tab="Thermal"));
+ /* Modelica.SIunits.Temperature T_LogMeanCool
+ "Mean logarithmic coolant temperature" annotation (Dialog(tab="Thermal")); */
   Modelica.SIunits.Temperature T_Exh
     "Inlet temperature of exhaust gas" annotation (Dialog(group="Thermal"));
   type RotationSpeed=Real(final unit="1/s", min=0);
@@ -116,8 +109,6 @@ public
         rotation=180)));
   Modelica.Blocks.Sources.RealExpression realExpr1(y=innerWall.T)
     annotation (Placement(transformation(extent={{-116,-48},{-96,-28}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor innerWallToCoolingCircle(G=GCoolChannel)
-    annotation (Placement(transformation(extent={{20,-10},{40,10}},rotation=0)));
   Modelica.Blocks.Sources.RealExpression realExpr2(y=T_CylWall) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -139,12 +130,12 @@ public
     V=0.005,
     use_HeatTransfer=false)
     annotation (Placement(transformation(extent={{-10,80},{10,60}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium =
-        Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium
+      = Medium3)
     annotation (Placement(transformation(extent={{-90,50},{-70,70}}),
         iconTransformation(extent={{-90,50},{-70,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium =
-        Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
+  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium
+      = Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
         iconTransformation(extent={{70,50},{90,70}})));
   CylToInnerWall cylToInnerWall(
     GInnWall=GInnWall,
@@ -157,11 +148,9 @@ public
     annotation (Placement(transformation(extent={{88,-12},{112,12}}),
         iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor engHeatToCoolant
-    annotation (Placement(transformation(extent={{58,-10},{78,10}})));
-  engineBlockToAmbient engineBlock(
+    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+  AixLib.Fluid.BoilerCHP.ModularCHP.engineBlock engineBlock(
     CEngBlo=CEngBlo,
-    GEngToAir=GEngToAir,
-    GAirToAmb=GAirToAmb,
     GInnWall=GInnWall,
     GEngBlo=GEngBlo,
     dInn=dInn,
@@ -169,12 +158,12 @@ public
     lambda=lambda,
     rhoEngWall=rhoEngWall,
     c=c,
-    alpha_Air=alpha_Air,
     A_WInn=A_WInn,
     z=z,
     mEngBlo=mEngBlo,
     mEng=mEng,
-    mEngWall=mEngWall) annotation (Placement(transformation(rotation=0,
+    mEngWall=mEngWall,
+    GEngToAmb=GEngToAmb) annotation (Placement(transformation(rotation=0,
           extent={{-6,-46},{14,-26}})));
 
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
@@ -214,20 +203,18 @@ equation
                                         color={0,0,127}));
   connect(engineBlock.port_a1, port_Ambient)
     annotation (Line(points={{0,-45},{0,-100}}, color={191,0,0}));
-  connect(innerThermalCond2_1.port_b, innerWallToCoolingCircle.port_a)
-    annotation (Line(points={{0,0},{20,0}}, color={191,0,0}));
   connect(innerThermalCond2_1.port_a, innerWall.port)
     annotation (Line(points={{-20,0},{-24,0},{-24,-48}}, color={191,0,0}));
-  connect(innerWallToCoolingCircle.port_b, engHeatToCoolant.port_a)
-    annotation (Line(points={{40,0},{58,0}}, color={191,0,0}));
   connect(port_CoolingCircle, engHeatToCoolant.port_b)
-    annotation (Line(points={{100,0},{78,0}}, color={191,0,0}));
+    annotation (Line(points={{100,0},{50,0}}, color={191,0,0}));
   connect(port_EngineIn, exhaustStateCHPOutlet.ports[1]) annotation (Line(
         points={{-80,60},{-60,60},{-60,80},{-2,80}}, color={0,127,255}));
   connect(port_EngineOut, exhaustStateCHPOutlet.ports[2]) annotation (Line(
         points={{80,60},{60,60},{60,80},{2,80}}, color={0,127,255}));
   connect(calculatedExhaustTemp.y, exhaustGasTemperature)
     annotation (Line(points={{-48.9,20},{-84,20}}, color={0,0,127}));
+  connect(innerThermalCond2_1.port_b, engHeatToCoolant.port_a)
+    annotation (Line(points={{0,0},{30,0}}, color={191,0,0}));
   annotation (
     Documentation(revisions="<html>
 <ul>

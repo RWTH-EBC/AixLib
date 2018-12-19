@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModelEnginePowerAndHeatToCooling1712
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModelEnginePowerAndHeatToCooling1812
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -30,7 +30,7 @@ model ModelEnginePowerAndHeatToCooling1712
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousing               engineToCoolant(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.EngineHousing1812 engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPGasolineEngine.m_Exh,
@@ -51,7 +51,7 @@ model ModelEnginePowerAndHeatToCooling1712
     "A physikal model for calculating the thermal, mass and mechanical output of an ice powered CHP"
     annotation (Placement(transformation(extent={{2,26},{30,54}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionHeatToCooling
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionHeatToCooling1812
     engineHeatTransfer(
     redeclare package Medium = Medium_Coolant,
     redeclare package Medium4 = Medium_Coolant,
@@ -144,7 +144,8 @@ model ModelEnginePowerAndHeatToCooling1712
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-62,-8},{-78,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger1812
+    exhaustHeatExchanger(
     TAmb=T_ambient,
     pAmb=p_ambient,
     T_ExhPowUniOut=CHPEngineModel.T_ExhPowUniOut,
@@ -206,6 +207,7 @@ equation
   connect(engineToCoolant.exhaustGasTemperature, cHPGasolineEngine.exhaustGasTemperature)
     annotation (Line(points={{4.24,42.8},{-2,42.8},{-2,44.2},{-10,44.2}}, color=
          {0,0,127}));
+        // __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/ModelEnginePowerAndHeatToCooling.mos" "Simulate and plot")),
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -263,5 +265,4 @@ physikal"),
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "SimulateAndOverviewPlot"));
-        // __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/ModelEnginePowerAndHeatToCooling.mos" "Simulate and plot")),
-end ModelEnginePowerAndHeatToCooling1712;
+end ModelEnginePowerAndHeatToCooling1812;

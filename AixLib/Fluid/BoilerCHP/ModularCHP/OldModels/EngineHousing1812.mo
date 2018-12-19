@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
-class EngineHousing1212 "Engine housing as a simple two layer wall."
+class EngineHousing1812 "Engine housing as a simple two layer wall."
 
   replaceable package Medium3 =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
@@ -111,58 +111,54 @@ public
     C=CEngWall,
     der_T(fixed=false, start=0),
     T(fixed=true, start=298.15)) annotation (Placement(transformation(
-        origin={-32,-58},
+        origin={-24,-58},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Blocks.Sources.RealExpression realExpr1(y=innerWall.T)
-    annotation (Placement(transformation(extent={{-128,-48},{-108,-28}})));
+    annotation (Placement(transformation(extent={{-116,-48},{-96,-28}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor innerWallToCoolingCircle(G=GCoolChannel)
     annotation (Placement(transformation(extent={{20,-10},{40,10}},rotation=0)));
   Modelica.Blocks.Sources.RealExpression realExpr2(y=T_CylWall) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-118,-58})));
+        origin={-106,-58})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor innerThermalCond2_1(G=GInnWall/2)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                                                                    rotation=0,
         origin={-10,0})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow actualHeatFlowEngine
-    annotation (Placement(transformation(extent={{-64,-58},{-44,-38}})));
+    annotation (Placement(transformation(extent={{-56,-58},{-36,-38}})));
   Modelica.Fluid.Vessels.ClosedVolume   exhaustStateCHPOutlet(
       redeclare package Medium = Medium3,
     nPorts=2,
     use_portsData=false,
-    use_HeatTransfer=true,
     redeclare model HeatTransfer =
         Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer,
     T_start=T_Amb,
-    V=0.005)
+    V=0.005,
+    use_HeatTransfer=false)
     annotation (Placement(transformation(extent={{-10,80},{10,60}})));
-  Modelica.Blocks.Sources.RealExpression realExpr3(y=T_Exh)
-    annotation (Placement(transformation(extent={{-66,24},{-52,44}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium =
-        Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium
+      = Medium3)
     annotation (Placement(transformation(extent={{-90,50},{-70,70}}),
         iconTransformation(extent={{-90,50},{-70,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium =
-        Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
+  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium
+      = Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
         iconTransformation(extent={{70,50},{90,70}})));
   CylToInnerWall cylToInnerWall(
     GInnWall=GInnWall,
     dInn=dInn,
     lambda=lambda,
     A_WInn=A_WInn,
-    z=z) annotation (Placement(transformation(rotation=0, extent={{-92,-58},{
-            -72,-38}})));
+    z=z) annotation (Placement(transformation(rotation=0, extent={{-84,-58},{
+            -64,-38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CoolingCircle
     annotation (Placement(transformation(extent={{88,-12},{112,12}}),
         iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor engHeatToCoolant
     annotation (Placement(transformation(extent={{58,-10},{78,10}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature exhaustHexInlet
-    annotation (Placement(transformation(extent={{-44,26},{-28,42}})));
-  engineBlockToAmbient1812 engineBlock(
+  OldModels.engineBlockToAmbient1812 engineBlock(
     CEngBlo=CEngBlo,
     GEngToAir=GEngToAir,
     GAirToAmb=GAirToAmb,
@@ -181,6 +177,10 @@ public
     mEngWall=mEngWall) annotation (Placement(transformation(rotation=0, extent=
             {{-6,-46},{14,-26}})));
 
+  Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
+    annotation (Placement(transformation(extent={{-30,10},{-48,30}})));
+  Modelica.Blocks.Interfaces.RealOutput exhaustGasTemperature
+    annotation (Placement(transformation(extent={{-72,8},{-96,32}})));
 equation
 
  /* if EngOp and m_Exh>0.001 then
@@ -188,7 +188,7 @@ equation
   else
   T_CylWall=T_Amb;
   end if;*/
-  CalT_Exh = if (meanCpExh*m_Exh<0.001) then 0.001 else meanCpExh*m_Exh;
+  CalT_Exh = if (meanCpExh*m_Exh<0.001) then 1 else meanCpExh*m_Exh;
   T_Exh=T_ExhPowUniOut + (cylToInnerWall.maximumEngineHeat.y
  - actualHeatFlowEngine.Q_flow)/CalT_Exh;
   T_CylWall=(T_Com-T_Amb)/Modelica.Math.log(T_Com/T_Amb);
@@ -201,21 +201,23 @@ equation
   end if; */
 
   connect(actualHeatFlowEngine.port,innerWall. port)
-    annotation (Line(points={{-44,-48},{-32,-48}},color={191,0,0}));
+    annotation (Line(points={{-36,-48},{-24,-48}},color={191,0,0}));
   connect(engineBlock.port_a, innerWall.port) annotation (Line(points={{-5,-32},
-          {-32,-32},{-32,-48}},      color={191,0,0}));
+          {-24,-32},{-24,-48}},      color={191,0,0}));
   connect(cylToInnerWall.y, actualHeatFlowEngine.Q_flow)
-    annotation (Line(points={{-71.4,-48},{-64,-48}}, color={0,0,127}));
-  connect(cylToInnerWall.T, realExpr2.y) annotation (Line(points={{-91.8,-51},{-100,
-          -51},{-100,-58},{-107,-58}}, color={0,0,127}));
-  connect(realExpr1.y, cylToInnerWall.T1) annotation (Line(points={{-107,-38},{-100,
-          -38},{-100,-45},{-91.8,-45}}, color={0,0,127}));
+    annotation (Line(points={{-63.4,-48},{-56,-48}}, color={0,0,127}));
+  connect(cylToInnerWall.T, realExpr2.y) annotation (Line(points={{-83.8,-51},{
+          -92,-51},{-92,-58},{-95,-58}},
+                                       color={0,0,127}));
+  connect(realExpr1.y, cylToInnerWall.T1) annotation (Line(points={{-95,-38},{
+          -92,-38},{-92,-45},{-83.8,-45}},
+                                        color={0,0,127}));
   connect(engineBlock.port_a1, port_Ambient)
     annotation (Line(points={{0,-45},{0,-100}}, color={191,0,0}));
   connect(innerThermalCond2_1.port_b, innerWallToCoolingCircle.port_a)
     annotation (Line(points={{0,0},{20,0}}, color={191,0,0}));
   connect(innerThermalCond2_1.port_a, innerWall.port)
-    annotation (Line(points={{-20,0},{-32,0},{-32,-48}}, color={191,0,0}));
+    annotation (Line(points={{-20,0},{-24,0},{-24,-48}}, color={191,0,0}));
   connect(innerWallToCoolingCircle.port_b, engHeatToCoolant.port_a)
     annotation (Line(points={{40,0},{58,0}}, color={191,0,0}));
   connect(port_CoolingCircle, engHeatToCoolant.port_b)
@@ -224,10 +226,8 @@ equation
         points={{-80,60},{-60,60},{-60,80},{-2,80}}, color={0,127,255}));
   connect(port_EngineOut, exhaustStateCHPOutlet.ports[2]) annotation (Line(
         points={{80,60},{60,60},{60,80},{2,80}}, color={0,127,255}));
-  connect(realExpr3.y, exhaustHexInlet.T)
-    annotation (Line(points={{-51.3,34},{-45.6,34}}, color={0,0,127}));
-  connect(exhaustHexInlet.port, exhaustStateCHPOutlet.heatPort) annotation (
-      Line(points={{-28,34},{-20,34},{-20,70},{-10,70}}, color={191,0,0}));
+  connect(calculatedExhaustTemp.y, exhaustGasTemperature)
+    annotation (Line(points={{-48.9,20},{-84,20}}, color={0,0,127}));
   annotation (
     Documentation(revisions="<html>
 <ul>
@@ -277,4 +277,4 @@ equation
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousing1212;
+end EngineHousing1812;
