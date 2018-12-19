@@ -44,7 +44,6 @@ protected
 
   AixLib.Fluid.HeatExchangers.HeaterCooler_u hex(
     redeclare final package Medium = Medium,
-    final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal,
     final from_dp=false,
     final linearizeFlowResistance=true,
@@ -54,7 +53,8 @@ protected
     final deltaM=deltaM,
     final tau=tau,
     final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics)
+    final massDynamics=massDynamics,
+    final allowFlowReversal=true)
     "Component to remove heat from or add heat to fluid"
     annotation (Placement(transformation(extent={{34,-70},{54,-50}})));
 
