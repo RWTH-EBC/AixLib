@@ -220,7 +220,6 @@ equation
   connect(engineToCoolant.exhaustGasTemperature, cHPGasolineEngine.exhaustGasTemperature)
     annotation (Line(points={{4.24,42.8},{-2,42.8},{-2,44.2},{-10,44.2}}, color=
          {0,0,127}));
-        // __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/ModelEnginePowerAndHeatToCooling.mos" "Simulate and plot")),
   connect(engineHeatTransfer.heatPort_outside, engineToCoolant.port_CoolingCircle)
     annotation (Line(points={{-20.4,-52.4},{-20.4,-24},{30,-24},{30,40}}, color=
          {191,0,0}));
@@ -280,5 +279,5 @@ physikal"),
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-         __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "SimulateAndOverviewPlot"));
+         __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"));
 end ModelEnginePowerAndHeatToCooling1912;
