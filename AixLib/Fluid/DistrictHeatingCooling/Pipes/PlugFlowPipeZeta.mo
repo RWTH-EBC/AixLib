@@ -159,7 +159,12 @@ public
     diameter=dh,
     m_flow_nominal=m_flow_nominal,
     redeclare package Medium = Medium,
-    zeta=sum_zetas)
+    zeta=sum_zetas,
+    allowFlowReversal=allowFlowReversal,
+    from_dp=from_dp,
+    homotopyInitialization=homotopyInitialization,
+    linearized=linearized,
+    m_flow_start=m_flow_start)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
   for i in 1:nPorts loop
