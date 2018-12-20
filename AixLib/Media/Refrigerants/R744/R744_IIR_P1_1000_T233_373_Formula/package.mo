@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.R744;
+﻿within AixLib.Media.Refrigerants.R744;
 package R744_IIR_P1_1000_T233_373_Formula "Refrigerant model for R744 using a hybrid approach with explicit formulas"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
@@ -245,13 +245,13 @@ redeclare function extends t_fRes_t
     "Short form for tau*(dalpha_r/dtau)_delta=const"
 protected
     Real[3] Theta = {  (1-tau) + residualNaA[i] * ((delta-1)^2)^(0.5 / residualNaBeta[i]) for i in 1:3} "Theta";
-    Real[3] Dis = { Theta[i]^2 + residualNaB[i] * ((delta-1)^2)^(residualNaa[i]) for i in 1:3} "Theta";
+    Real[3] Dis = { Theta[i]^2 + residualNaB[i] * ((delta-1)^2)^(residualNaa[i]) for i in 1:3} "Dis";
     Real[3] Psi = { exp(-residualNaC[i] * (delta-1)^2 - residualNaD[i] * (tau-1)^2) for i in 1:3}  "Psi";
 algorithm
     t_fRes_t :=
     sum(residualPolN[i] * residualPolT[i] * delta^(residualPolD[i]) * tau^(residualPolT[i]) for i in 1:7) +
     sum(residualExpN[i] * residualExpT[i] * delta^(residualExpD[i]) * tau^(residualExpT[i]) * exp(-delta^(residualExpC[i])) for i in 1:27) +
-    sum(residualGbsN[i] * residualGbsT[i] * delta^(residualGbsD[i]) * tau^(residualGbsT[i]) * exp(-residualGbsAlpha[i]*(delta-residualGbsEpsilon[i])^2 - residualGbsBeta[i] * (tau - residualGbsGamma[i])^2) * (residualGbsT[i] - 2*tau*residualGbsBeta[i]*(tau-residualGbsGamma[i])) for i in 1:5) +
+    sum(residualGbsN[i] * delta^(residualGbsD[i]) * tau^(residualGbsT[i]) * exp(-residualGbsAlpha[i]*(delta-residualGbsEpsilon[i])^2 - residualGbsBeta[i] * (tau - residualGbsGamma[i])^2) * (residualGbsT[i] - 2*tau*residualGbsBeta[i]*(tau-residualGbsGamma[i])) for i in 1:5)+
     sum(residualNaN[i] * delta * tau * (( -2*Theta[i]*residualNab[i]*Dis[i]^(residualNab[i]-1)) * Psi[i] + Dis[i]^(residualNab[i]) * (-2) * residualNaD[i]*(tau-1)*Psi[i]) for i in 1:3);
 
 end t_fRes_t;
@@ -973,4 +973,150 @@ else
 end if;
 
 end dynamicViscosity;
+
+redeclare function extends thermalConductivity
+    "Calculates thermal conductivity of refrigerant"
+    /*The functional form of the thermal conductivity is implented as presented in
+    G. Scalabrin et al (2006), A Reference Multiparameter Thermal Conductivity
+    Equation for Carbon Dioxide with an Optimized Functional Form*/
+protected
+    SaturationProperties sat = setSat_T(state.T) "Saturation properties";
+    Integer phase_dT "Phase calculated by density and temperature";
+
+    ThermodynamicState bubbleState "Thermodynamic state at bubble line";
+    ThermodynamicState dewState "Thermodynamic state at dew line";
+    Real quality "Vapour quality";
+    Real delta "Reduced density";
+    Real deltaG "Reduced density at dew line";
+    Real deltaL "Reduced density at bubble line";
+    Real tau "Reduced temperature";
+    Real lambdaG "thermal conductivity at bubble dew line";
+    Real lambdaL "thermal conductivity at bubble dew line";
+    Real lambdaR "Reduced thermal conductivity";
+    Real lambdaRCri "Reduced thermal conductivity in critical region";
+    Real lambdaRNonCri "Reduced thermal conductivity without critical region";
+    Real lambdaRG "Reduced thermal conductivity";
+    Real lambdaRCriG "Reduced thermal conductivity in critical region";
+    Real lambdaRNonCriG "Reduced thermal conductivity without critical region";
+    Real lambdaRL "Reduced thermal conductivity";
+    Real lambdaRCriL "Reduced thermal conductivity in critical region";
+    Real lambdaRNonCriL "Reduced thermal conductivity without critical region";
+    Real alpha "coefficient for the critical region term";
+
+    final constant Real lambdaC = 4.81384;
+    final constant Real n[10] = {
+    7.69857587,
+    0.159885811,
+    1.56918621,
+    -6.73400790,
+    16.3890156,
+    3.69415242,
+    22.3205514,
+    66.1420950,
+    -0.171779133,
+    0.00433043347,
+    0.775547504};
+    final constant Real g[10]= {
+    0,
+    0,
+    1.5,
+    0,
+    1,
+    1.5,
+    1.5,
+    1.5,
+    3.5,
+    5.5};
+    final constant Integer h[10]= {
+    1,
+    5,
+    1,
+    1,
+    2,
+    0,
+    5,
+    9,
+    0,
+    0};
+    final constant Real a[12]={
+    3,
+    6.70697,
+    0.94604,
+    0.3,
+    0.3,
+    0.39751,
+    0.33791,
+    0.77963,
+    0.79857,
+    0.90,
+    0.02,
+    0.20};
+
+algorithm
+  // Check phase
+    if state.phase == 0 then
+      phase_dT :=if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(
+        sat)) and state.T < fluidConstants[1].criticalTemperature) then 1 else 2;
+    else
+      phase_dT :=state.phase;
+    end if;
+    if (state.phase == 1 or phase_dT == 1) then
+      // Calculate properties
+      delta := state.d/467.6;
+      tau   := state.T/304.1282;
+      alpha := 1-a[10]*Modelica.Math.acosh(1+a[11]*((1-tau)^2)^a[12]);
+      lambdaRNonCri :=
+      sum(n[i] * tau^g[i] * delta^h[i] for i in 1:3)+
+      exp(-5*delta^2)*sum(n[i]*tau^g[i]*delta^h[i] for i in 4:10);
+      //Calculate correction term for critical region
+      lambdaRCri :=
+      (delta * exp(-delta^a[1]/a[1] - (a[2]*(tau-1))^2-(a[3]*(delta-1))^2))/
+      ( ((((1-1/tau)+a[4]*((delta-1)^2)^(0.5/a[5]))^2)^a[6] + ((a[7]*(delta-alpha))^2)^a[8])^a[9]);
+      lambdaR := lambdaRNonCri+lambdaRCri;
+      //Calculate the final thermal conductivity
+      lambda :=lambdaC*lambdaR;
+    else
+      // Calculate properties
+      bubbleState := setBubbleState(setSat_T(state.T));
+      dewState := setDewState(setSat_T(state.T));
+      quality := (bubbleState.d/state.d - 1)/(bubbleState.d/dewState.d - 1);
+      deltaL :=bubbleState.d/467.6;
+      deltaG :=dewState.d/467.6;
+
+      alpha := 1-a[10]*Modelica.Math.acosh(1+a[11]*((1-tau)^2)^a[12]);
+      lambdaRNonCriG :=
+      sum(n[i] * tau^g[i] * deltaG^h[i] for i in 1:3)+
+      exp(-5*deltaG^2)*sum(n[i]*tau^g[i]*deltaG^h[i] for i in 4:10);
+      lambdaRNonCriL :=
+      sum(n[i] * tau^g[i] * deltaL^h[i] for i in 1:3)+
+      exp(-5*deltaL^2)*sum(n[i]*tau^g[i]*deltaL^h[i] for i in 4:10);
+      //Calculate correction term for critical region
+      lambdaRCriL :=
+      (delta * exp(-deltaL^a[1]/a[1] - (a[2]*(tau-1))^2-(a[3]*(deltaL-1))^2))/
+      ( ((((1-1/tau)+a[4]*((deltaL-1)^2)^(0.5/a[5]))^2)^a[6] + ((a[7]*(deltaL-alpha))^2)^a[8])^a[9]);
+      lambdaRCriG :=
+      (delta * exp(-deltaG^a[1]/a[1] - (a[2]*(tau-1))^2-(a[3]*(deltaG-1))^2))/
+      ( ((((1-1/tau)+a[4]*((deltaG-1)^2)^(0.5/a[5]))^2)^a[6] + ((a[7]*(deltaG-alpha))^2)^a[8])^a[9]);
+      lambdaRG := lambdaRNonCriG+lambdaRCriG;
+      lambdaRL := lambdaRNonCriL+lambdaRCriL;
+      //Calculate the final thermal conductivity
+      lambdaG :=lambdaC*lambdaRG;
+      lambdaG :=lambdaC*lambdaRL;
+      // Calculate the final dynamic visocity
+      lambda := (quality/lambdaG + (1 - quality)/lambdaL)^(-1);
+
+
+    end if;
+end thermalConductivity;
+
+ redeclare function extends surfaceTension
+    "Surface tension in two phase region of refrigerant"
+
+  /*The functional form of the surface tension is implented as presented in
+  Mulero and Cachadiña (2012), Recommended Correlations for the Surface Tension
+  of Common Fluids. Journal of Physical and Chemical Reference Data 41,
+  */
+ algorithm
+    sigma := 0.07863*(1-sat.Tsat/304.1282)^1.254;
+ end surfaceTension;
 end R744_IIR_P1_1000_T233_373_Formula;

@@ -50,3 +50,5 @@ temperature_ph
 temperature_ps
 density_pT
 dynamicViscosity
+thermalConductivity
+surfaceTension

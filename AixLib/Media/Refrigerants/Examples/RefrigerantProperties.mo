@@ -6,7 +6,7 @@ model RefrigerantProperties
   // Define the refrigerant that shall be tested
   //
   package Medium =
-      AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+      AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Formula
       "Internal medium model";
 
   // Define way of calculating pressure and temperature
@@ -18,28 +18,28 @@ model RefrigerantProperties
 
   // Define the fluid limits of the medium that shall be tested
   //
-  parameter Modelica.SIunits.SpecificEnthalpy h_min = 145e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_min=110e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_max = 480e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_max=500e3
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_min = 2
+  parameter Modelica.SIunits.Density d_min(displayUnit="kg/m3")=15
     "Fluid limit: Minimum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_max = 1325
+  parameter Modelica.SIunits.Density d_max(displayUnit="kg/m3")=1000
     "Fluid limit: Maximum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
+  parameter Modelica.SIunits.AbsolutePressure p_min=1500000
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max = 39e5
+  parameter Modelica.SIunits.AbsolutePressure p_max=9500000
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_min = 233.15
+  parameter Modelica.SIunits.Temperature T_min=253.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max = 455.15
+  parameter Modelica.SIunits.Temperature T_max=373.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 

@@ -3,14 +3,13 @@ model RefrigerantTestImplementation
   "Model to test the refrigerant implementation"
   extends Modelica.Icons.Example;
   extends Modelica.Media.Examples.Tests.Components.PartialTestModel2(
-    redeclare package Medium =
-        AixLib.Media.Refrigerants.R410A_HEoS.R410a_IIR_P1_48_T233_340_Record,
-    h_start=151000,
-    p_start=150000,
-    T_start=333.15,
     fixedMassFlowRate(use_T_ambient=true),
     volume(use_T_start=true),
-    ambient(use_T_ambient=true));
+    ambient(use_T_ambient=true),
+    redeclare package Medium = R744.R744_IIR_P1_1000_T233_373_Formula,
+    h_start=200000,
+    p_start=9500000,
+    T_start=363.15);
 
     annotation (experiment(Tolerance=1e-006),
       Documentation(info="<html>
