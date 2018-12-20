@@ -1,72 +1,13 @@
-within AixLib.FastHVAC.Components.HeatGenerators;
-partial model PartialFourPortInterface2
+within AixLib.FastHVAC.Interfaces;
+partial model PartialFourPortInterface
   "Partial model transporting fluid between two ports without storing mass or energy"
-  extends AixLib.FastHVAC.Components.HeatGenerators.PartialFourPort2;
+  extends AixLib.FastHVAC.Interfaces.PartialFourPort;
   parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));
   parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));
-//   parameter Medium1.MassFlowRate m1_flow_small(min=0) = 1E-4*abs(m1_flow_nominal)
-//     "Small mass flow rate for regularization of zero flow"
-//     annotation(Dialog(tab = "Advanced"));
-//   parameter Medium2.MassFlowRate m2_flow_small(min=0) = 1E-4*abs(m2_flow_nominal)
-//     "Small mass flow rate for regularization of zero flow"
-//     annotation(Dialog(tab = "Advanced"));
-  // Diagnostics
-  parameter Boolean show_T = false
-    "= true, if actual temperature at port is computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
-
-  Medium1.MassFlowRate m1_flow=enthalpyPort_a.m_flow
-    "Mass flow rate from port_a1 to port_b1 (m1_flow > 0 is design flow direction)";
-
-  Medium2.MassFlowRate m2_flow=enthalpyPort_a1.m_flow
-    "Mass flow rate from port_a2 to port_b2 (m2_flow > 0 is design flow direction)";
-
-//   Medium1.ThermodynamicState sta_a1=Medium1.setState_phX(
-//       enthalpyPort_a.p,
-//       noEvent(actualStream(enthalpyPort_a.h_outflow)),
-//       noEvent(actualStream(enthalpyPort_a.Xi_outflow))) if show_T
-//     "Medium properties in port_a1";
-//   Medium1.ThermodynamicState sta_b1=Medium1.setState_phX(
-//       enthalpyPort_b.p,
-//       noEvent(actualStream(enthalpyPort_b.h_outflow)),
-//       noEvent(actualStream(enthalpyPort_b.Xi_outflow))) if show_T
-//     "Medium properties in port_b1";
-//   Medium2.ThermodynamicState sta_a2=Medium2.setState_phX(
-//       enthalpyPort_a1.p,
-//       noEvent(actualStream(enthalpyPort_a1.h_outflow)),
-//       noEvent(actualStream(enthalpyPort_a1.Xi_outflow))) if show_T
-//     "Medium properties in port_a2";
-//   Medium2.ThermodynamicState sta_b2=Medium2.setState_phX(
-//       enthalpyPort_b1.p,
-//       noEvent(actualStream(enthalpyPort_b1.h_outflow)),
-//       noEvent(actualStream(enthalpyPort_b1.Xi_outflow))) if show_T
-//     "Medium properties in port_b2";
-// protected
-//   Medium1.ThermodynamicState state_a1_inflow=Medium1.setState_phX(
-//       enthalpyPort_a.p,
-//       inStream(enthalpyPort_a.h_outflow),
-//       inStream(enthalpyPort_a.Xi_outflow))
-//     "state for medium inflowing through port_a1";
-//   Medium1.ThermodynamicState state_b1_inflow=Medium1.setState_phX(
-//       enthalpyPort_b.p,
-//       inStream(enthalpyPort_b.h_outflow),
-//       inStream(enthalpyPort_b.Xi_outflow))
-//     "state for medium inflowing through port_b1";
-//   Medium2.ThermodynamicState state_a2_inflow=Medium2.setState_phX(
-//       enthalpyPort_a1.p,
-//       inStream(enthalpyPort_a1.h_outflow),
-//       inStream(enthalpyPort_a1.Xi_outflow))
-//     "state for medium inflowing through port_a2";
-//   Medium2.ThermodynamicState state_b2_inflow=Medium2.setState_phX(
-//       enthalpyPort_b1.p,
-//       inStream(enthalpyPort_b1.h_outflow),
-//       inStream(enthalpyPort_b1.Xi_outflow))
-//     "state for medium inflowing through port_b2";
-
   annotation (
   preferredView="info",
     Documentation(info="<html>
@@ -185,4 +126,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end PartialFourPortInterface2;
+end PartialFourPortInterface;

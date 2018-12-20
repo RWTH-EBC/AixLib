@@ -1,5 +1,5 @@
-within AixLib.FastHVAC.Components.HeatGenerators;
-partial model PartialFourPort2 "Partial model with four ports"
+within AixLib.FastHVAC.Interfaces;
+partial model PartialFourPort "Partial model with four ports"
 
   replaceable package Medium1 =
       AixLib.FastHVAC.Media.BaseClasses.MediumSimple "Medium 1 in the component"
@@ -120,4 +120,4 @@ are often iteration variables in nonlinear equation systems.
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255},
           textString="%name")}));
-end PartialFourPort2;
+end PartialFourPort;

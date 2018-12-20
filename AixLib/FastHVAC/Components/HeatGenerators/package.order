@@ -2,9 +2,4 @@ Boiler
 CHP
 HeatPump
 HeatPump2
-EvaporatorCondenserWithCapacity2
-TwoPortHeatMassExchanger2
-PartialTwoPortInterface2
-PartialTwoPort2
-PartialFourPortInterface2
-PartialFourPort2
+EvaporatorCondenserWithCapacity

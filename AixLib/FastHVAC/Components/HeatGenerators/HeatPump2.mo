@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Components.HeatGenerators;
 model HeatPump2 "Base model of fastHVAC heat pump"
-   extends AixLib.FastHVAC.Components.HeatGenerators.PartialFourPortInterface2(
+   extends AixLib.FastHVAC.Interfaces.PartialFourPortInterface(
      redeclare final package Medium1 = Medium_con,
      redeclare final package Medium2 = Medium_eva,
      final m1_flow_nominal=mFlow_conNominal,
@@ -50,10 +50,8 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
-  parameter Modelica.SIunits.PressureDifference dpCon_nominal
-    "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance", tab="Condenser"), Evaluate=true);
-  parameter Real deltaM_con=0.1
+
+   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
   parameter Boolean use_ConCap=true
@@ -108,10 +106,6 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Condenser", tab="Assumptions"));
 
-  parameter Modelica.SIunits.Time tauSenT=1
-    "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
-
   parameter Boolean transferHeat=true
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
@@ -131,27 +125,14 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure pCon_start=
-      Medium_con.p_default "Start value of pressure"
-    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
+
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-//   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
-//      Medium_con.X_default "Start value of mass fractions m_i/m"
-//     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure pEva_start=
-      Medium_eva.p_default "Start value of pressure"
-    annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
-//   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
-//      Medium_eva.X_default "Start value of mass fractions m_i/m"
-//     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
-//   parameter Real x_start[nthOrder]=zeros(nthOrder)
-//     "Initial or guess values of states"
-//     annotation (Dialog(tab="Initialization", group="Refrigerant inertia", enable=use_refIne));
+
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="Refrigerant inertia",enable=initType ==
           Init.InitialOutput and use_refIne));
@@ -169,18 +150,9 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     "Factor for scaling the sensible thermal mass of the volume in the evaporator"
     annotation (Dialog(tab="Dynamics", group="Evaporator"));
 //Advanced
-  parameter Boolean show_TPort=false
-    "= true, if actual temperature at port is computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean from_dp=false
-    "= true, use m_flow = f(dp) else dp = f(m_flow)"
-    annotation (Dialog(tab="Advanced", group="Flow resistance"));
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  parameter Boolean linearized=false
-    "= true, use linear relation between m_flow and dp for any flow rate"
-    annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  EvaporatorCondenserWithCapacity2                                   con(
+  EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
@@ -204,7 +176,7 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final kAInn=GCon + GConIns*abs(mFlow_con.m_flow/mFlow_conNominal)^0.88)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
-  EvaporatorCondenserWithCapacity2                                   eva(
+  EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
     final deltaM=deltaM_eva,
     final dp_nominal=dpEva_nominal,
@@ -226,7 +198,7 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final C=CEva*scalingFactor,
     final m_flow_nominal=mFlow_evaNominal,
     kAInn=GEva + GEvaIns*abs(mFlow_eva.m_flow/mFlow_evaNominal)^0.88)
-                                "Heat exchanger model for the evaporator"
+    "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,

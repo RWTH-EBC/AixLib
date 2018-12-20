@@ -1,9 +1,5 @@
-within AixLib.FastHVAC.Components.HeatGenerators;
-partial model PartialTwoPort2 "Partial component with two ports"
-
-//    replaceable package Medium =
-//        AixLib.FastHVAC.Media.BaseClasses.MediumSimple "Medium in the component"
-//        annotation (choicesAllMatching = true);
+within AixLib.FastHVAC.Interfaces;
+partial model PartialTwoPort "Partial component with two ports"
 
   parameter Boolean allowFlowReversal = true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
@@ -92,4 +88,4 @@ First implementation.
           extent={{-149,-114},{151,-154}},
           lineColor={0,0,255},
           textString="%name")}));
-end PartialTwoPort2;
+end PartialTwoPort;

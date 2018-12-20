@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Components.HeatGenerators;
-model EvaporatorCondenserWithCapacity2
-  extends AixLib.FastHVAC.Components.HeatGenerators.TwoPortHeatMassExchanger2;
+model EvaporatorCondenserWithCapacity
+  extends AixLib.FastHVAC.BaseClasses.TwoPortHeatMassExchanger;
 
   parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
@@ -227,4 +227,4 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           visible=not is_con)}));
-end EvaporatorCondenserWithCapacity2;
+end EvaporatorCondenserWithCapacity;
