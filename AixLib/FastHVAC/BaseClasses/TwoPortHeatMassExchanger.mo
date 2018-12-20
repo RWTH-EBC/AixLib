@@ -3,18 +3,16 @@ model TwoPortHeatMassExchanger
   "Partial model transporting one fluid stream with storing mass or energy"
   extends AixLib.FastHVAC.Interfaces.PartialTwoPortInterface;
 
-  // Initialization
-   parameter Medium.Temperature T_start = Medium.T_default
-     "Start value of temperature"
-     annotation(Dialog(tab = "Initialization"));
-
-  BaseClasses.WorkingFluid workingFluid annotation (Placement(transformation(
+  BaseClasses.WorkingFluid workingFluid(m_fluid=m_fluid, medium=medium)
+                                        annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,0})));
-   parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
-     "Start value for outflowing enthalpy";
 
+  parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
+  parameter Media.BaseClasses.MediumSimple medium=
+      AixLib.FastHVAC.Media.WaterSimple()
+    "Mediums charastics (heat capacity, density, thermal conductivity)";
 equation
   connect(enthalpyPort_b, workingFluid.enthalpyPort_a) annotation (Line(points={
           {100,0},{50,0},{50,-1.77636e-15},{9,-1.77636e-15}}, color={176,0,0}));

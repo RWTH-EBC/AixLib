@@ -1,16 +1,10 @@
 within AixLib.FastHVAC.Interfaces;
 partial model PartialTwoPort "Partial component with two ports"
 
-  parameter Boolean allowFlowReversal = true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation(Dialog(tab="Assumptions"), Evaluate=true);
-
-  Interfaces.EnthalpyPort_a             enthalpyPort_a(
-     m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0))
+   Interfaces.EnthalpyPort_a             enthalpyPort_a
     "FastHVAC connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-104,-4},{-96,4}})));
-  Interfaces.EnthalpyPort_b             enthalpyPort_b(
-    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0))
+  Interfaces.EnthalpyPort_b             enthalpyPort_b
     "FastHVAC connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{104,-4},{96,4}})));
 

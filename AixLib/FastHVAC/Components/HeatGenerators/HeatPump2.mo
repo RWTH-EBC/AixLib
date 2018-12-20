@@ -1,24 +1,19 @@
 within AixLib.FastHVAC.Components.HeatGenerators;
 model HeatPump2 "Base model of fastHVAC heat pump"
    extends AixLib.FastHVAC.Interfaces.PartialFourPortInterface(
-     redeclare final package Medium1 = Medium_con,
-     redeclare final package Medium2 = Medium_eva,
+     final Medium1 = Medium_con,
+     final Medium2 = Medium_eva,
      final m1_flow_nominal=mFlow_conNominal,
      final m2_flow_nominal=mFlow_evaNominal,
      final allowFlowReversal1=allowFlowReversalCon,
-     final allowFlowReversal2=allowFlowReversalEva,
-     final m1_flow_small=1E-4*abs(mFlow_conNominal),
-     final m2_flow_small=1E-4*abs(mFlow_evaNominal),
-     final show_T=show_TPort);
+     final allowFlowReversal2=allowFlowReversalEva);
 
 //General
-  replaceable package Medium_con =
-      AixLib.FastHVAC.Media.BaseClasses.MediumSimple.WaterSimple                              constrainedby
-    AixLib.FastHVAC.Media.BaseClasses.MediumSimple                                "Medium at sink side"
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
+      AixLib.FastHVAC.Media.WaterSimple()     "Medium at sink side"
     annotation (Dialog(tab = "Condenser"),choicesAllMatching=true);
-  replaceable package Medium_eva =
-      AixLib.FastHVAC.Media.BaseClasses.MediumSimple.WaterSimple                              constrainedby
-    AixLib.FastHVAC.Media.BaseClasses.MediumSimple                                "Medium at source side"
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_eva=
+      AixLib.FastHVAC.Media.WaterSimple()     "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
       choice=false "only heating",
@@ -36,7 +31,6 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"                           annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
-
 
   parameter Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency for inertia of refrigerant cycle"
@@ -76,9 +70,6 @@ model HeatPump2 "Base model of fastHVAC heat pump"
 
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
-  parameter Modelica.SIunits.PressureDifference dpEva_nominal
-    "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Flow resistance", tab="Evaporator"),Evaluate=true);
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -126,10 +117,10 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
 
-  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
+  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T0
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
+  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T0
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
 
@@ -153,22 +144,10 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
   EvaporatorCondenserWithCapacity con(
-    redeclare final package Medium = Medium_con,
-    final allowFlowReversal=allowFlowReversalCon,
+    final medium = Medium_con,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final show_T=show_TPort,
-    final deltaM=deltaM_con,
-    final dp_nominal=dpCon_nominal,
-    final tau=tauSenT,
-    final T_start=TCon_start,
-    final p_start=pCon_start,
     final kAOut_nominal=GCon,
     final use_cap=use_ConCap,
-    final X_start=XCon_start,
-    final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
-    final massDynamics=massDynamics,
-    final energyDynamics=energyDynamics,
     final is_con=true,
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
@@ -176,23 +155,12 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final kAInn=GCon + GConIns*abs(mFlow_con.m_flow/mFlow_conNominal)^0.88)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
+
   EvaporatorCondenserWithCapacity eva(
-    redeclare final package Medium = Medium_eva,
-    final deltaM=deltaM_eva,
-    final dp_nominal=dpEva_nominal,
+    final medium = Medium_eva,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
-    final allowFlowReversal=allowFlowReversalEva,
     final m_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=show_TPort,
-    final tau=tauSenT,
-    final T_start=TEva_start,
-    final p_start=pEva_start,
-    final X_start=XEva_start,
-    final from_dp=from_dp,
-    final homotopyInitialization=homotopyInitialization,
-    final massDynamics=massDynamics,
-    final energyDynamics=energyDynamics,
     final is_con=false,
     final V=VEva*scalingFactor,
     final C=CEva*scalingFactor,

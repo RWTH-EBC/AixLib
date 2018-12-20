@@ -3,19 +3,18 @@ partial model PartialTwoPortInterface
   "Partial model transporting fluid between two ports without storing mass or energy"
   extends AixLib.FastHVAC.Interfaces.PartialTwoPort;
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate"
-    annotation(Dialog(group = "Nominal condition"));
-  parameter Modelica.SIunits.MassFlowRate m_flow_small(min=0) = 1E-4*abs(m_flow_nominal)
-    "Small mass flow rate for regularization of zero flow"
-    annotation(Dialog(tab = "Advanced"));
-  Modelica.SIunits.MassFlowRate m_flow(start=_m_flow_start) = enthalpyPort_a.m_flow
-    "Mass flow rate from port_a to port_b (m_flow > 0 is design flow direction)";
+   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+     "Nominal mass flow rate"
+     annotation(Dialog(group = "Nominal condition"));
+   parameter Modelica.SIunits.MassFlowRate m_flow_small(min=0) = 1E-4*abs(m_flow_nominal)
+     "Small mass flow rate for regularization of zero flow"
+     annotation(Dialog(tab = "Advanced"));
+   Modelica.SIunits.MassFlowRate m_flow(start=_m_flow_start) = enthalpyPort_a.m_flow
+     "Mass flow rate from port_a to port_b (m_flow > 0 is design flow direction)";
 
 
-protected
-  final parameter Modelica.SIunits.MassFlowRate _m_flow_start = 0
-  "Start value for m_flow, used to avoid a warning if not set in m_flow, and to avoid m_flow.start in parameter window";
+   final parameter Modelica.SIunits.MassFlowRate _m_flow_start = 0
+   "Start value for m_flow, used to avoid a warning if not set in m_flow, and to avoid m_flow.start in parameter window";
 
   annotation (
     preferredView="info",

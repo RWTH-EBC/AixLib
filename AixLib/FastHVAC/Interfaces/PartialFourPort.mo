@@ -1,11 +1,9 @@
 within AixLib.FastHVAC.Interfaces;
 partial model PartialFourPort "Partial model with four ports"
 
-  replaceable package Medium1 =
-      AixLib.FastHVAC.Media.BaseClasses.MediumSimple "Medium 1 in the component"
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium1 "Medium 1 in the component"
       annotation (choicesAllMatching = true);
-  replaceable package Medium2 =
-      AixLib.FastHVAC.Media.BaseClasses.MediumSimple "Medium 2 in the component"
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium2 "Medium 2 in the component"
       annotation (choicesAllMatching = true);
 
   parameter Boolean allowFlowReversal1 = true
