@@ -76,8 +76,6 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    mFlow_conNominal=1,
-    mFlow_evaNominal=1,
     perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4(),
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
@@ -132,7 +130,9 @@ model HeatPumpSystem "Example for a heat pump system"
     use_secHeaGen=true,
     Q_flow_nominal=5000,
     TCon_start=313.15,
-    TEva_start=283.15)
+    TEva_start=283.15,
+    cpEva=4180,
+    cpCon=4180)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
@@ -231,6 +231,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </li>
 </ul>
 </html>"),
+    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpsystem.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

@@ -1,10 +1,10 @@
 ﻿within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
-    addPowerToMediumEva=true,
+    addPowerToMediumEva=false,
     transferHeat=true,
-    final mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
-    final mFlow_evaNominal=QEva_nominal/(cpEva*dTEva));
+    mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
+    mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
     redeclare Fluid.HeatPumps.HeatPump heatPump(
       redeclare final model PerDataHea = PerDataHea,
       redeclare final package Medium_con = Medium_con,
