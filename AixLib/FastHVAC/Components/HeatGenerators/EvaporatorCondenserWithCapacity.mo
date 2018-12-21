@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.HeatGenerators;
 model EvaporatorCondenserWithCapacity
-  extends AixLib.FastHVAC.BaseClasses.TwoPortHeatMassExchanger(workingFluid(
-        medium=medium));
+  extends AixLib.FastHVAC.BaseClasses.TwoPortHeatMassExchanger(workingFluid(m_fluid=m_fluid,
+    medium=medium));
 
   parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
@@ -11,6 +11,7 @@ model EvaporatorCondenserWithCapacity
     annotation (Dialog(group="Heat losses"),choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
     annotation (Dialog(group="Heat losses", enable=use_cap));
+  parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
   parameter Modelica.SIunits.ThermalConductance kAOut_nominal
     "Nominal value for thermal conductance to the ambient" annotation (Dialog(group="Heat losses", enable=
           use_cap));
@@ -31,7 +32,7 @@ model EvaporatorCondenserWithCapacity
         origin={-12,78})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCap(
     final C=C,
-    final T(start=workingFluid.T0),
+    final T(start=T_start),
     final der_T(start=0)) if use_cap
     "Heat Capacity"
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},

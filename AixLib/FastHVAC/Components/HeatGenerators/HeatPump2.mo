@@ -44,8 +44,8 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
-
-   parameter Real deltaM_con=0.1
+  parameter Modelica.SIunits.Mass m_fluidCon = VCon * con.medium.rho "Mass of working fluid";
+  parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
   parameter Boolean use_ConCap=true
@@ -70,6 +70,7 @@ model HeatPump2 "Base model of fastHVAC heat pump"
 
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
+  parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho "Mass of working fluid";
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -117,10 +118,10 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
 
-  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T0
+  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=50+273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T0
+  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=10+273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
 
@@ -144,15 +145,17 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
   EvaporatorCondenserWithCapacity con(
-    final medium = Medium_con,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final kAOut_nominal=GCon,
+    final m_fluid=m_fluidCon,
+    final T_start=TCon_start,
     final use_cap=use_ConCap,
     final is_con=true,
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
     final m_flow_nominal=mFlow_conNominal,
-    final kAInn=GCon + GConIns*abs(mFlow_con.m_flow/mFlow_conNominal)^0.88)
+    final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal)^0.88,
+    final medium=Medium_con)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
 
@@ -160,12 +163,14 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final medium = Medium_eva,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
+    final m_fluid=m_fluidEva,
+    final T_start=TEva_start,
     final m_flow_small=1E-4*abs(mFlow_evaNominal),
     final is_con=false,
     final V=VEva*scalingFactor,
     final C=CEva*scalingFactor,
     final m_flow_nominal=mFlow_evaNominal,
-    kAInn=GEva + GEvaIns*abs(mFlow_eva.m_flow/mFlow_evaNominal)^0.88)
+    final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal)^0.88)
     "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
@@ -173,7 +178,6 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final normalized=true,
     final n=nthOrder,
     final f=refIneFre_constant,
-    final x_start=x_start,
     final y_start=yRefIne_start) if
                                    use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
@@ -192,7 +196,6 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final normalized=true,
     final n=nthOrder,
     final f=refIneFre_constant,
-    final x_start=x_start,
     final y_start=yRefIne_start) if
                                    use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
@@ -292,6 +295,8 @@ model HeatPump2 "Base model of fastHVAC heat pump"
         extent={{-10,10},{10,-10}},
         rotation=0)));
 
+  parameter Media.BaseClasses.MediumSimple medium=Medium_con
+    "Mediums charastics (heat capacity, density, thermal conductivity)";
 equation
 
   connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},

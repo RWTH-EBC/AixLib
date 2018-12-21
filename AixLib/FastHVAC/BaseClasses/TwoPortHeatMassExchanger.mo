@@ -3,6 +3,9 @@ model TwoPortHeatMassExchanger
   "Partial model transporting one fluid stream with storing mass or energy"
   extends AixLib.FastHVAC.Interfaces.PartialTwoPortInterface;
 
+//Initialisation
+
+parameter Modelica.Media.Interfaces.Types.Temperature T_start = workingFluid.T0;
   BaseClasses.WorkingFluid workingFluid(m_fluid=m_fluid, medium=medium)
                                         annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
