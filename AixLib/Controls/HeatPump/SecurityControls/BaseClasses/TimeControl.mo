@@ -50,6 +50,11 @@ equation
 <p>When the input is true, a timer thats counting seconds until it is false again. As long as the counted time is smaller than a given minimal time, the block yields false.</p>
 <p>This block is used to check the mimimal run- or loctime of a device.</p>
 </html>", revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>"));
 end TimeControl;

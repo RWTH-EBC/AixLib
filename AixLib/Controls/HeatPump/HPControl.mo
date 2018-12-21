@@ -211,7 +211,12 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Model of a heat pump controller, setting a compressor signal and heat pump mode based on a given input temperarute. A heating curve is used to determine the supply temperature. This TSet is later converted to a signal nSet based on the acutal temperature in the system. Futhermore, a legionella protection for DHW-Simulation is implemented.</p>
 <p>Using the control bus, more complex control strategies can easily be adapted.</p>

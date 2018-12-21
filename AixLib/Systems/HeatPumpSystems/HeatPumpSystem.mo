@@ -166,7 +166,12 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>This model uses the heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> to simulate a whole system, including controls, pumps and second heat generator. </p>
 <p>A <a href=\"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters\">set of parameters</a> is used to estimate the model parameters.</p>

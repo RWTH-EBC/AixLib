@@ -156,7 +156,12 @@ equation
           fillPattern=FillPattern.Solid,
           textString="- TOda",
           visible = use_tableData)}), Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Model of a heating curve. Either based on table input data or with a function, the set temperature for the heating system is calculated.</p>
 <p>This model is capable of:</p>

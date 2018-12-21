@@ -1,4 +1,4 @@
-within AixLib.DataBase.Chiller;
+﻿within AixLib.DataBase.Chiller;
 record ChillerBaseDataDefinition "Basic chiller data"
     extends Modelica.Icons.Record;
   parameter Real tableQdot_con[:,:] "Heating power table; T in degC; Q_flow in W";
@@ -16,8 +16,11 @@ record ChillerBaseDataDefinition "Basic chiller data"
 </html>",
         revisions="<html>
 <ul>
-<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
 </ul>
-</html>
-"),Icon,     preferedView="info");
+</html>"),
+   Icon,     preferedView="info");
 end ChillerBaseDataDefinition;

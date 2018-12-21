@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps;
+﻿within AixLib.Fluid.HeatPumps;
 model HeatPump "Grey-box heat pump model using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -597,5 +597,13 @@ equation
           thickness=0.5,
           origin={0,-74},
           rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
-            -120},{100,120}})));
+            -120},{100,120}})),
+    Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>"));
 end HeatPump;

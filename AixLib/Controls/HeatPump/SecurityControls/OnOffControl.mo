@@ -179,7 +179,12 @@ equation
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
 <p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>
 </html>", revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-120,-120},{120,100}})),
     Icon(coordinateSystem(extent={{-120,-120},{120,100}}), graphics={

@@ -8,7 +8,12 @@ partial function PartialBaseFct "Base function for all icing factor functions"
   output Real iceFac(min=0, max=1) "Icing factor, normalized value between 0 and 1";
 
   annotation (Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Base function for calculation of the icing factor. The normalized value represents reduction of heat exchange as a result of icing of the evaporator.</p>
 </html>"));

@@ -295,7 +295,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, nOut) annotation (Line(
-      points={{49.6667,8},{76,8},{76,-58},{1.77636e-015,-58},{1.77636e-015,-114}},
+      points={{49.6667,8},{76,8},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
@@ -415,7 +415,12 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Icing Factor")}),
     Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>This system controller aggregates the heat pump controller and relevant security controls from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a> to control the heat pump based on an ambient temperature and the current supply temperature.</p>
 <p>Further, the COP is calculated. The icing factor used for air-source heat pumps is added to simulate defrost cycles. </p>

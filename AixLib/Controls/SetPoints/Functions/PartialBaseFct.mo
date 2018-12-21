@@ -8,7 +8,12 @@ partial function PartialBaseFct "Base function of a heating curve"
   output Modelica.SIunits.ThermodynamicTemperature TSet "Set temperature for the heat generator";
 
   annotation (Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Calculate a set temperature based on the outdoor air and room temperature. The boolean isDay enables day/night dependent set temperatures.</p>
 <p>Used in model <a href=\"modelica://AixLib.Controls.SetPoints.HeatingCurve\">HeatingCurve</a>.</p>

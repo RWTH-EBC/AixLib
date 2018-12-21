@@ -51,7 +51,12 @@ equation
           textString="f")}),                                     Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Model for calculation of the icing factor. The replaceable function uses the inputs to calculate the resulting icing factor.</p>
 </html>"));

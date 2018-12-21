@@ -31,6 +31,11 @@ equation
   connect(booleanConstant.y, swiNullsecHeaGen.u2)
     annotation (Line(points={{12,-62.8},{12,-74.4}}, color={255,0,255}));
   annotation (Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>"));
 end InverterControlledHP;

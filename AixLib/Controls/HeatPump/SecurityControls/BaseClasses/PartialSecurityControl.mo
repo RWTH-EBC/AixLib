@@ -102,7 +102,12 @@ equation
                                      Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-120,-100},{120,100}})),
     Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Partial block for a security control. Based on the signals in the sigBusHP either the input signals are equal to the output signals or, if an error occurs, set to 0.</p>
 <p>The Output ERR informs about the number of errors in the specific security block.</p>

@@ -33,7 +33,12 @@ equation
           lineColor={108,88,49},
           extent={{-90,-108},{90,72}},
           textString="f")}), Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>This model is used to calculate the three values based on a functional approach. The user can choose between several functions or use their own.</p>
 <p>As the <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct\">base function</a> only returns the electrical power and the condenser heat flow, the evaporator heat flow is calculated with the following energy balance:</p>

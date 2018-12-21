@@ -60,7 +60,12 @@ equation
   connect(booConAntFre.y, not1.u) annotation (Line(points={{16.7,-29},{36,-29},
           {36,-56},{-22,-56},{-22,-60},{-21,-63}}, color={255,0,255}));
   annotation (Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>This models takes the minimum of the two temperatures evaporator outlet and condenser inlet. If this minimal temperature falls below the given lower boundary, the hystereses will trigger an error and cause the device to switch off.</p>
 <p><h4>Assumptions</h4></p><p>Assuming that the outlet temperature of an evaporator is always lower than the inlet temperature(for the condenser vice versa).</p>
