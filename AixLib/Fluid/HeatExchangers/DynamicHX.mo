@@ -6,27 +6,28 @@ model DynamicHX "Simple dynamic heat exchanger model"
                                                                                                                               annotation(Dialog(tab = "Dynamics",group = "Nominal condition"));
   parameter Modelica.SIunits.TemperatureDifference dT_nom "Temperature difference at nominal conditions (used to calculate Gc)" annotation(Dialog(group = "Heat Transfer"));
   parameter Modelica.SIunits.HeatFlowRate Q_nom "Temperature difference at nominal conditions (used to calculate Gc)" annotation(Dialog(group = "Heat Transfer"));
-  parameter Modelica.SIunits.Temperature Tcapacity_start = (T1_start + T2_start)/2
+  parameter Modelica.SIunits.Temperature TCapacity_start=(T1_start + T2_start)/2
     "Start value of temperature"
-    annotation(Dialog(tab = "Initialization", group = "Heat capacity"));
+    annotation(Dialog(tab="Initialization",   group="Heat capacity"));
   parameter Modelica.Blocks.Interfaces.RealInput Gc1(unit="W/K") = Q_nom/dT_nom*2
     "Signal representing the convective thermal conductance in [W/K]" annotation(Dialog(group = "Heat Transfer"));
   parameter Modelica.Blocks.Interfaces.RealInput Gc2(unit="W/K") = Q_nom/dT_nom*2
     "Signal representing the convective thermal conductance in [W/K]"  annotation(Dialog(group = "Heat Transfer"));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor[nNodes](each final
-            C=Q_nom/dT_nom*tau_C/nNodes, each final T(fixed=true, start=
-          Tcapacity_start))
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor[nNodes](
+    each final C=Q_nom/dT_nom*tau_C/nNodes,
+    each final T(fixed=true, start=TCapacity_start))
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
-  Modelica.Blocks.Sources.RealExpression Gc1_Expression[nNodes](each final y=
-        Gc1)
+  Modelica.Blocks.Sources.RealExpression Gc1_Expression[nNodes](
+  each final y=Gc1)
     annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
   Modelica.Thermal.HeatTransfer.Components.Convection convection1[nNodes]
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-32,30})));
-  Modelica.Blocks.Sources.RealExpression Gc2_Expression[nNodes](each final y=
-        Gc2)                                                    annotation (
+  Modelica.Blocks.Sources.RealExpression Gc2_Expression[nNodes](
+  each final y=Gc2)
+    annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
