@@ -68,6 +68,6 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </ul>
 </html>", info="<html>
 <p>This models takes the minimum of the two temperatures evaporator outlet and condenser inlet. If this minimal temperature falls below the given lower boundary, the hystereses will trigger an error and cause the device to switch off.</p>
-<p><h4>Assumptions</h4></p><p>Assuming that the outlet temperature of an evaporator is always lower than the inlet temperature(for the condenser vice versa).</p>
+<h4>Assumptions</h4><p>Assuming that the outlet temperature of an evaporator is always lower than the inlet temperature(for the condenser vice versa).</p>
 </html>"));
 end AntiFreeze;

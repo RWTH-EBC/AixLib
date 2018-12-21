@@ -97,7 +97,12 @@ equation
       fillColor={255,215,136},
       fillPattern=FillPattern.Solid,
       extent={{32.3077,20.0},{62.3077,40.0}})}), Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>As the standard model for two dimensional tables (<a href=\"modelica://Modelica.Blocks.Tables.CombiTable2D\">Modelica.Blocks.Tables.CombiTable2D</a>) does not allow extrapolation to be disabled, this models presents a work around. Using a simple limiter, extrapolation can be switched on or off.</p>
 <p><br>See <a href=\"Modelica.Blocks.Tables.CombiTable2D\">Modelica.Blocks.Tables.CombiTable2D</a> for further information on the used tables.</p>

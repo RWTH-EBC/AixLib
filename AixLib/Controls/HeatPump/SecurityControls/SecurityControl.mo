@@ -215,6 +215,6 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.OperationalEnvelope\">OperationalEnvelope</a></li>
 <li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.AntiFreeze\">AntiFreeze</a></li>
 </ul>
-<p><br>The security function for the anti legionella control is placed inside the model <a href=\"modelica://AixLib.Controls.HeatPump.HPControl\">HPControl</a></p>
+<p>The security function for the anti legionella control is placed inside the model <a href=\"modelica://AixLib.Controls.HeatPump.HPControl\">HPControl</a></p>
 </html>"));
 end SecurityControl;
