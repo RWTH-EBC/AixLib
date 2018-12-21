@@ -57,7 +57,7 @@ First implementation, <a href=\"https://github.com/RWTH-EBC/AixLib/tree/issue661
 </li>
 </ul>
 </html>", info="<html>
-<p>This is a simple dynamic heat exchanger with a heat capacity and convection. The heat exchanger is discretized in n elements and the volume elements are replacealbe. </p>
-<p>The heat transfer and pressure losses are calculated by nominal values. Nevertheless, the heattransfer coefficient Gc can be overwritten.</p>
+<p>This is a simple dynamic heat exchanger with a heat capacity and convection. The heat exchanger is discretized in n elements and the volume elements are replaceable. </p>
+<p>The heat transfer and pressure losses are calculated by nominal values. Nevertheless, the heat transfer coefficient Gc can be overwritten.</p>
 </html>"));
 end DynamicHX;
