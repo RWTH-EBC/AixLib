@@ -232,7 +232,12 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           visible=not is_con)}), Documentation(revisions="<html>
- <li><i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>Model for an evaporator or condenser with the use of a capacity to simulate heat losses.</p>
 <p>Used in <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>, the heat flow to or from the volume is calculated in a black box. Thus the heat is directly added to the medium.</p>
