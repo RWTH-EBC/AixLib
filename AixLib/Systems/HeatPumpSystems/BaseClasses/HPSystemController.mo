@@ -234,8 +234,8 @@ model HPSystemController
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
       final function iceFunc =
-        Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.BasicIcingApproach)
-    if use_deFro
+        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
+       use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Interfaces.RealOutput iceFac_out
     "Output value of icing factor" annotation (Placement(transformation(

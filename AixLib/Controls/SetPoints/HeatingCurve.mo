@@ -55,7 +55,8 @@ protected
   Modelica.Blocks.Sources.Constant dec(k=declination) "Declination constant for connectors";
   AixLib.Utilities.Time.CalendarTime calTime(zerTim = zerTim) "Calendar-time to get current hour";
   Modelica.Blocks.Interfaces.RealInput TRoom_internal "Actual room temperature to calculate with";
-  Modelica.Blocks.Math.UnitConversions.To_degC to_degC "Convert Kelvin to degC";
+  Modelica.Blocks.Math.UnitConversions.To_degC to_degC if use_tableData
+                                                                       "Convert Kelvin to degC";
   AixLib.Utilities.Logical.SmoothSwitch dayNightSwitch if use_tableData "Switch between day and night mode";
   Modelica.Blocks.Interfaces.BooleanOutput isDay "Boolean to evaluate whether it is daytime or nighttime";
 

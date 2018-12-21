@@ -13,11 +13,14 @@ record HeatPumpSystemParameters
     "Temperature difference at the evaporator" annotation (Dialog(group="Design"));
   parameter Modelica.SIunits.TemperatureDifference dTCon=5
     "Temperature difference at the condenser" annotation (Dialog(group="Design"));
+  parameter Modelica.SIunits.SpecificHeatCapacityAtConstantPressure cpEva
+    "Specific heat capacity of evaportor medium" annotation (Dialog(group="Design"));
+  parameter Modelica.SIunits.SpecificHeatCapacityAtConstantPressure cpCon
+    "Specific heat capacity of condenser medium" annotation (Dialog(group="Design"));
   parameter Modelica.SIunits.TemperatureDifference dTPinchEva=8
     "Pinch temperature in the evaporator" annotation (Dialog(group="Design"));
   parameter Modelica.SIunits.TemperatureDifference dTPinchCon=8
     "Pinch temperature in the condenser" annotation (Dialog(group="Design"));
-
   parameter Real percHeatLoss=0.1
     "Percentage of heat losses in the heat exchangers to the nominal heating power" annotation (Dialog(group="Design"));
 protected

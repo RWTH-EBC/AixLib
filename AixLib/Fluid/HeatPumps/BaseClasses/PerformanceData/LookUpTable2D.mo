@@ -189,5 +189,17 @@ equation
 First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
 </li>
 </ul>
+</html>", info="<html>
+<p>This model uses the 2-dimensional table data given in the DIN EN 14511 (formerly EN255) to calculate <i>QCon</i> and <i>P_el</i>. To model an inverter controlled heat pump, the relative <b>compressor speed <i>n </i>is scaled linearly</b> with the ouput of the tables. Furthermore, the design of a heat pump is modeled via a scaling factor. As a result, the equations follow below:</p>
+<p align=\"center\"><i>QCon,n = n * scalingFactor * TableQCon.y</i></p>
+<p align=\"center\"><i>P_el = n * scalingFactor * TablePel.y</i></p>
+<p align=\"justify\">To simulate possible icing of the evaporator on air-source heat pumps, the icing factor is used to influence the output as well. As the factor resembles the reduction of heat transfer between refrigerant and source, the factor is implemented as follows:</p>
+<p align=\"center\"><i>QEva = iceFac * (QCon,n-P_el,n)</i></p>
+<p>With <i>iceFac </i>as a relative value between 0 and 1:</p>
+<p align=\"center\"><i>iceFac = kA/kA_noIce</i></p>
+<p>Finally, to follow the first law of thermodynamics:</p>
+<p align=\"center\"><i>QCon = P_el,n + QEva</i></p>
+<h4>Known Limitations</h4>
+<p>The model <a href=\"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a> is able to disallow extrapolation by holding the last value. If one extrapolates the given perfomance data, warnings about occuring extrapolations are emitted. <b>CAUTION: Checking for possible extrapolations will trigger state events which results in higher computing time.</b></p>
 </html>"));
 end LookUpTable2D;

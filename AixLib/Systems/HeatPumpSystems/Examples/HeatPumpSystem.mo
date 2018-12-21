@@ -85,10 +85,8 @@ model HeatPumpSystem "Example for a heat pump system"
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     use_revHP=false,
     refIneFre_constant=0.01,
-    VCon=0.04,
     VEva=0.04,
     dpEva_nominal=0,
-    dpCon_nominal=0,
     deltaM_con=0.1,
     use_opeEnvFroRec=true,
     tableUpp=[-100,100; 100,100],
@@ -96,12 +94,6 @@ model HeatPumpSystem "Example for a heat pump system"
     minIceFac=0,
     use_chiller=true,
     calcPel_deFro=100,
-    use_conCap=false,
-    use_evaCap=false,
-    CEva=0,
-    GEvaOut=0,
-    CCon=0,
-    GConOut=0,
     perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12(),
     use_minRunTime=true,
     minRunTime(displayUnit="min"),
@@ -113,15 +105,7 @@ model HeatPumpSystem "Example for a heat pump system"
     use_refIne=true,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     minTimeAntLeg(displayUnit="min") = 900,
-    Q_flow_nominal=5,
-    use_secHeaGen=false,
-    redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
-          hys=2),
     scalingFactor=1,
-    GEvaIns=0,
-    GConIns=0,
-    TCon_start=313.15,
-    TEva_start=283.15,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
@@ -130,7 +114,25 @@ model HeatPumpSystem "Example for a heat pump system"
             4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,
             7583]),
         printAsserts=false,
-        extrapolation=false))
+        extrapolation=false),
+    P_el_nominal=1000,
+    QCon_nominal=4000,
+    redeclare model TSetToNSet = AixLib.Controls.HeatPump.BaseClasses.OnOffHP (
+          hys=2),
+    use_tableData=false,
+    redeclare function HeatingCurveFunction =
+        AixLib.Controls.SetPoints.Functions.HeatingCurveFunction (TDesign=
+            308.15),
+    VCon=0.04,
+    dpCon_nominal=0,
+    use_conCap=true,
+    CCon=3000,
+    use_evaCap=true,
+    CEva=3000,
+    use_secHeaGen=true,
+    Q_flow_nominal=5000,
+    TCon_start=313.15,
+    TEva_start=283.15)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
@@ -211,7 +213,8 @@ equation
   connect(senT_a1.port_b, rad.port_a) annotation (Line(points={{88,-10},{90,-10},
           {90,12},{40,12}}, color={0,127,255}));
   connect(senT_a1.T, heatPumpSystem.TAct) annotation (Line(points={{77,-20},{54,
-          -20},{54,-16},{3.95,-16},{3.95,-32.0714}}, color={0,0,127}));
+          -20},{54,-16},{-2,-16},{-2,-24},{3.95,-24},{3.95,-32.0714}},
+                                                     color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
     experiment(StopTime=3600),
