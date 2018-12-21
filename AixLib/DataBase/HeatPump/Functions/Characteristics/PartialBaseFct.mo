@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
+within AixLib.DataBase.HeatPump.Functions.Characteristics;
 partial function PartialBaseFct "Base class for Cycle Characteristic"
   extends Modelica.Icons.Function;
   input Real N "Relative compressor speed";

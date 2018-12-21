@@ -1,8 +1,7 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor;
+﻿within AixLib.DataBase.HeatPump.Functions.IcingFactor;
 function WetterAfjei1996
   "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
-  extends
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct;
+  extends AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct;
 
 parameter Real A=0.03;
 parameter Real B=-0.004;

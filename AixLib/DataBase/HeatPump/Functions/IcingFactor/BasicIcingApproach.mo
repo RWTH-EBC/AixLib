@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor;
+﻿within AixLib.DataBase.HeatPump.Functions.IcingFactor;
 function BasicIcingApproach
   "A function which utilizes the outdoor air temperature and current heat flow from the evaporator"
   extends PartialBaseFct;

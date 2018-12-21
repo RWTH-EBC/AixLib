@@ -1,8 +1,7 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
+within AixLib.DataBase.HeatPump.Functions.Characteristics;
 function ConstantQualityGrade
   "Carnot CoP multiplied with constant quality grade and constant electric power"
-  extends
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct(
+  extends AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct(
     N,
     T_con,
     T_eva,

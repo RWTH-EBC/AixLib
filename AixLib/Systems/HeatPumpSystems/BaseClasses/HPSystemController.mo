@@ -188,11 +188,10 @@ model HPSystemController
     final use_tableData=use_tableData,
     redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200) if
-    use_calcCOP
+  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(
-        sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180) if use_calcCOP
+        sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180)
     "Calculates the heat flow added to the source medium"
     annotation (Placement(transformation(extent={{-90,78},{-66,96}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
@@ -231,7 +230,7 @@ model HPSystemController
     annotation (Placement(transformation(extent={{14,-14},{-14,14}},
         rotation=90,
         origin={-80,-114})));
-  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1) if use_calcCOP
+  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
   Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
       final function iceFunc =

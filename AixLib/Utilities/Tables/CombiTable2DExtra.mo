@@ -105,6 +105,6 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </ul>
 </html>", info="<html>
 <p>As the standard model for two dimensional tables (<a href=\"modelica://Modelica.Blocks.Tables.CombiTable2D\">Modelica.Blocks.Tables.CombiTable2D</a>) does not allow extrapolation to be disabled, this models presents a work around. Using a simple limiter, extrapolation can be switched on or off.</p>
-<p><br>See <a href=\"Modelica.Blocks.Tables.CombiTable2D\">Modelica.Blocks.Tables.CombiTable2D</a> for further information on the used tables.</p>
+<p>See <a href=\"Modelica.Blocks.Tables.CombiTable2D\">Modelica.Blocks.Tables.CombiTable2D</a> for further information on the used tables.</p>
 </html>"));
 end CombiTable2DExtra;

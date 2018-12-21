@@ -1,7 +1,6 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection;
+within AixLib.DataBase.HeatPump.Functions.DefrostCorrection;
 function NoModel "No model"
-  extends
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct(
+  extends AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct(
       T_eva);
 
 algorithm
