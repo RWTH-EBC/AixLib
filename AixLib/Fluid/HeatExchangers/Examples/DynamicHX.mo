@@ -1,10 +1,10 @@
 within AixLib.Fluid.HeatExchangers.Examples;
 model DynamicHX
   "Model that demonstrates use of a simple dynamic heat exchanger"
+ package Medium1 = AixLib.Media.Water "Medium model";
   import AixLib;
   extends Modelica.Icons.Example;
 
- package Medium1 = AixLib.Media.Water "Medium model";
  package Medium2 = AixLib.Media.Air "Medium model";
 
   AixLib.Fluid.Sources.Boundary_pT sin_2(
@@ -121,13 +121,11 @@ equation
   connect(THeaOut2.port_b, sin_2.ports[1])
     annotation (Line(points={{-28,0},{-38,0}}, color={0,127,255}));
   annotation(experiment(Tolerance=1e-6, StopTime=360),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Validation/ConstantEffectiveness.mos"
-        "Simulate and plot"),
 Documentation(info="<html>
 <p>
 This model tests
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.DynamicHX\">
-AixLib.Fluid.HeatExchangers.ConstantEffectiveness</a>
+AixLib.Fluid.HeatExchangers.DynamicHX</a>
 for different inlet conditions.
 </p>
 </html>", revisions="<html>
