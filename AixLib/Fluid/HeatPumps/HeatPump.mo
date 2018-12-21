@@ -607,7 +607,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </ul>
 </html>", info="<html>
 <p>This generic grey-box heat pump model uses empirical data to model the refrigerant cycle. The modelling of system inertias and heat losses allow the simulation of transient states. </p>
-<p><br>Resulting in the choosen model structure, several configurations are possible:</p>
+<p>Resulting in the choosen model structure, several configurations are possible:</p>
 <ol>
 <li>Compressor type: on/off or inverter controlled</li>
 <li>Reversible heat pump / only heating</li>
