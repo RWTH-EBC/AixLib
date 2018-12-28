@@ -347,7 +347,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
   Sensors.TemperatureTwoPort senT_b1(
     final initType=initType,
     final transferHeat=transferHeat,
-    final TAmb=TAmbEva_nominal,
+    final TAmb=TAmbCon_nominal,
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_small=1E-4*mFlow_conNominal,
