@@ -82,7 +82,7 @@ model ModelEnginePowerAndHeatToCooling1812
     T=T_CoolRet)
     annotation (Placement(transformation(extent={{-110,-68},{-90,-48}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPGasolineEngine
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPGasolineEngine2112
     cHPGasolineEngine(
     redeclare package Medium1 = Medium_Gasoline,
     redeclare package Medium2 = Medium_Air,

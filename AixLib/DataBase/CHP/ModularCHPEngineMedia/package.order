@@ -6,4 +6,7 @@ NaturalGasMixture_TypeL
 CHPFlueGasLambdaOnePlus
 EngineCombustionAir
 CHPCoolantPropyleneGlycolWater
+LiquidFuel_Diesel
+LiquidFuel_Petrol
 CombustionEngineFuelDataBaseRecord
+CombustionEngineFuelDataBaseRecordNEW

@@ -20,23 +20,26 @@ package NaturalGasMixture_TypeH
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
   constant
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
-    NatGasTyp=NaturalGasTypeH() "Needed natural gas data for calculations"
+    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW
+    Fuel=NaturalGasTypeH() "Needed natural gas data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
    import Modelica.SIunits.*;
 
-  constant MoleFraction moleFractions_Gas[:] = NatGasTyp.Xi_mole;
-  constant MolarMass MM = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.MMi[i] for i in 1:size(NatGasTyp.MMi, 1)) "Molar mass of natural gas type from its composition";
-  constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(NatGasTyp.Xi_mole, NatGasTyp.MMi);
-  constant SpecificEnergy H_U = sum(massFractions_Gas[i]*NatGasTyp.H_Ui[i] for i in 1:size(NatGasTyp.MMi, 1)) "Calorific Value of the fuel gas";
-  constant Real l_min = sum(NatGasTyp.Xi_mole[i]*NatGasTyp.nue_min[i] for i in 1:size(NatGasTyp.MMi, 1))/0.21;
+  constant Boolean isGas = Fuel.isGasoline "True = Gasoline fuel, False = Liquid fuel";
+  constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;
+  constant MolarMass MM = sum(Fuel.Xi_mole[i]*Fuel.MMi[i] for i in 1:size(Fuel.MMi, 1)) "Molar mass of natural gas type from its composition";
+  constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(Fuel.Xi_mole, Fuel.MMi);
+  constant SpecificEnergy H_U = sum(massFractions_Gas[i]*Fuel.H_Ui[i] for i in 1:size(Fuel.MMi, 1)) "Calorific Value of the fuel gas";
+  constant Real l_min = sum(Fuel.Xi_mole[i]*Fuel.nue_min[i] for i in 1:size(Fuel.MMi, 1))/0.21;
   constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
 
   record NaturalGasTypeH
     extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
-        naturalGasType="TypeH", Xi_mole={0.007,0.854,0,0.08,0.029,0.01,0,0,
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+        fuelType="TypeH",
+        isGasoline = true,
+        Xi_mole={0.007,0.854,0,0.08,0.029,0.01,0,0,
           0.02});
   end NaturalGasTypeH;
   annotation (Documentation(info="<html>

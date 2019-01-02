@@ -139,12 +139,12 @@ public
     V=0.005,
     use_HeatTransfer=false)
     annotation (Placement(transformation(extent={{-10,80},{10,60}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium
-      = Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium =
+        Medium3)
     annotation (Placement(transformation(extent={{-90,50},{-70,70}}),
         iconTransformation(extent={{-90,50},{-70,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium
-      = Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
+  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium =
+        Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
         iconTransformation(extent={{70,50},{90,70}})));
   CylToInnerWall cylToInnerWall(
     GInnWall=GInnWall,

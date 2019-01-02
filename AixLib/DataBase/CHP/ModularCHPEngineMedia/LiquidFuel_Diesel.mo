@@ -1,10 +1,9 @@
 within AixLib.DataBase.CHP.ModularCHPEngineMedia;
-package NaturalGasMixture_GeneralType
-  "Simple natural gas mixture for CHP-engine combustion"
+package LiquidFuel_Diesel
+  "Simple diesel fuel for CHP-engine combustion"
 
-  extends
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
-    mediumName="NaturalGasMixture_SelectableVolumetricProportions",
+  extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
+    mediumName="Just dummy data and no use for calculation",
     data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.CH4,
         Modelica.Media.IdealGases.Common.SingleGasesData.C2H4,Modelica.Media.IdealGases.Common.SingleGasesData.C2H6,
         Modelica.Media.IdealGases.Common.SingleGasesData.C3H8,Modelica.Media.IdealGases.Common.SingleGasesData.C4H10_n_butane,
@@ -19,31 +18,29 @@ package NaturalGasMixture_GeneralType
     substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
-  constant
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW
-    Fuel=NaturalGas_GeneralDefinition()
-    "Needed natural gas data for calculations, manual redefinition of volumetric proportions of the gas components (Xi_mole) required (default:{1/9,1/9,...})!"
+  constant AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW Fuel=DieselFuel()
+    "Needed fuel data for combustion calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
    import Modelica.SIunits.*;
 
   constant Boolean isGas = Fuel.isGasoline "True = Gasoline fuel, False = Liquid fuel";
+  constant MolarMass MM = 1 / sum(Fuel.Xi_liq[i]/Fuel.MMi_liq[i] for i in 1:size(Fuel.MMi_liq, 1)) "Molar mass of the fuel calculated from its composition";
+  constant SpecificEnergy H_U = Fuel.H_U "Calorific Value of the fuel gas";
+  constant Real l_min = L_st*MM/0.02885;
+  constant Real L_st = 4.31034*(2.664*Fuel.Xi_liq[1]+7.937*Fuel.Xi_liq[2]-Fuel.Xi_liq[3]) "Stoichiometric air consumption";
+  //Unused information for simulation stability
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;
-  constant MolarMass MM = sum(Fuel.Xi_mole[i]*Fuel.MMi[i] for i in 1:size(Fuel.MMi, 1)) "Molar mass of natural gas type from its composition";
-  constant MassFraction massFractions_Gas[:] = Modelica.Media.Interfaces.PartialMixtureMedium.moleToMassFractions(Fuel.Xi_mole, Fuel.MMi);
-  constant SpecificEnergy H_U = sum(massFractions_Gas[i]*Fuel.H_Ui[i] for i in 1:size(Fuel.MMi, 1)) "Calorific Value of the fuel gas";
-  constant Real l_min = sum(Fuel.Xi_mole[i]*Fuel.nue_min[i] for i in 1:size(Fuel.MMi, 1))/0.21;
-  constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
 
-  record NaturalGas_GeneralDefinition
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
-        fuelType="GeneralTypeForRedefinition",
-        isGasoline = true,
-        Xi_mole={1/9,1/9,1/9,1/9,
-          1/9,1/9,1/9,1/9,1/9});
-  end NaturalGas_GeneralDefinition;
+  record DieselFuel "Data record for simple diesel fuel"
+    extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+    fuelType = "Simple diesel fuel",
+    isGasoline = false,
+    H_U = 42800000,
+    Xi_liq = {0.86,0.14,0.0});
+
+  end DieselFuel;
   annotation (Documentation(info="<html>
 <p>Gasoline model for natural gas type H.</p>
 </html>"));
-end NaturalGasMixture_GeneralType;
+end LiquidFuel_Diesel;
