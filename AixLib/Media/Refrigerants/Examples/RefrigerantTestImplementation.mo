@@ -4,14 +4,16 @@ model RefrigerantTestImplementation
   extends Modelica.Icons.Example;
   extends Modelica.Media.Examples.Tests.Components.PartialTestModel2(
     fixedMassFlowRate(use_T_ambient=true),
-    volume(use_T_start=true),
+    volume(use_T_start=true, use_p_start=true),
     ambient(use_T_ambient=true),
     redeclare package Medium = R744.R744_IIR_P1_1000_T233_373_Formula,
-    h_start=200000,
-    p_start=9500000,
-    T_start=363.15);
+    h_start=511630,
+    p_start=2000000,
+    T_start=323.15,
+    shortPipe(dp_nominal=10000),
+    shortPipe1(dp_nominal=10000));
 
-    annotation (experiment(Tolerance=1e-006),
+    annotation (experiment(StopTime=100, Tolerance=1e-06),
       Documentation(info="<html>
 <p>
 This is a simple test for the refrigerant models. This model uses the test

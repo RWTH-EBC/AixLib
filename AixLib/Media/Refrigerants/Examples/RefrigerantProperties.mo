@@ -11,7 +11,7 @@ model RefrigerantProperties
 
   // Define way of calculating pressure and temperature
   //
-  parameter Boolean wayOfCalc = true
+  parameter Boolean wayOfCalc=false
     "true = Slowly raise pressure and change temperature | false = Slowly raise
     temperature and change pressure"
     annotation (Dialog(group="General"));
@@ -21,7 +21,7 @@ model RefrigerantProperties
   parameter Modelica.SIunits.SpecificEnthalpy h_min=110e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_max=500e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_max=1000e3
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.Density d_min(displayUnit="kg/m3")=15
@@ -39,7 +39,7 @@ model RefrigerantProperties
   parameter Modelica.SIunits.Temperature T_min=253.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max=373.15
+  parameter Modelica.SIunits.Temperature T_max=423.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
@@ -89,93 +89,93 @@ model RefrigerantProperties
 
   // Define records to summarise further variables that shall be tested
   //
-  record ThermodynamicProperties
-    "Records that contains furhter thermodynamic properties"
-    Medium.SpecificHeatCapacity cp
-      "Actual specific heat capacity at constant pressure";
-    Medium.SpecificHeatCapacity cv
-      "Actual specific heat capacity at constant volume";
-    Medium.VelocityOfSound w
-      "Actual velocity of sound";
-    Medium.IsobaricExpansionCoefficient betta
-      "Actual isobaric expansion coefficient";
-    Modelica.SIunits.IsothermalCompressibility kappa
-      "Actual isothermal compressibility";
-    Modelica.SIunits.IsentropicExponent gamma
-      "Actual isentropic coefficient";
-    Real delta_T(unit= "J/(Pa.kg)")
-      "Actual isothermal throttling coefficient";
-    Real my(unit="K/Pa")
-      "Actual joule Thomson Coefficient";
-    Medium.DynamicViscosity eta
-      "Actual dynamic viscosity";
-    Medium.ThermalConductivity lambda
-      "Actual thermal conductivity";
-    Medium.SurfaceTension sigma
-      "Acutal surface tension";
-  end ThermodynamicProperties;
+   record ThermodynamicProperties
+     "Records that contains furhter thermodynamic properties"
+     Medium.SpecificHeatCapacity cp
+       "Actual specific heat capacity at constant pressure";
+     Medium.SpecificHeatCapacity cv
+       "Actual specific heat capacity at constant volume";
+     Medium.VelocityOfSound w
+       "Actual velocity of sound";
+     Medium.IsobaricExpansionCoefficient betta
+       "Actual isobaric expansion coefficient";
+     Modelica.SIunits.IsothermalCompressibility kappa
+       "Actual isothermal compressibility";
+     Modelica.SIunits.IsentropicExponent gamma
+       "Actual isentropic coefficient";
+     Real delta_T(unit= "J/(Pa.kg)")
+       "Actual isothermal throttling coefficient";
+     Real my(unit="K/Pa")
+       "Actual joule Thomson Coefficient";
+     Medium.DynamicViscosity eta
+       "Actual dynamic viscosity";
+     Medium.ThermalConductivity lambda
+       "Actual thermal conductivity";
+     Medium.SurfaceTension sigma
+       "Acutal surface tension";
+   end ThermodynamicProperties;
 
-  record StateErrors
-    "Record that contains errors occuring using the different
-    setState functions"
-    extends Modelica.Icons.Record;
+   record StateErrors
+     "Record that contains errors occuring using the different
+     setState functions"
+     extends Modelica.Icons.Record;
 
-    Real errorTemperature_dTMax
-      "Error of temperature_dT compared to T";
-    Real errorPressure_dTMax
-      "Error of pressure_dT compared to p";
-    Real errorDensity_dTMax
-      "Error of density_dT compared to density_pT";
-    Real errorSpecificEnthalpy_dTMax
-      "Error of specificEnthalpy_dT compared to specificEnthalpy_pT";
-    Real errorTemperature_phMax
-      "Error of temperature_ph compared to T";
-    Real errorPressure_phMax
-      "Error of pressure_ph compared to p";
-    Real errorDensity_phMax
-      "Error of density_ph compared to density_pT";
-    Real errorSpecificEnthalpy_phMax
-      "Error of specificEnthalpy_ph compared to specificEnthalpy_pT";
-    Real errorTemperature_psMax
-      "Error of temperature_ps compared to T";
-    Real errorPressure_psMax
-      "Error of pressure_ps compared to p";
-    Real errorDensity_psMax
-      "Error of density_ps compared to density_pT";
-    Real errorSpecificEnthalpy_psMax
-      "Error of specificEnthalpy_ps compared to specificEnthalpy_pT";
-    Real relErrorTemperature_dTMax
-     "Relative error of temperature_dT compared to T";
-    Real relErrorPressure_dTMax
-     "Relative error of pressure_dT compared to p";
-    Real relErrorDensity_dTMax
-     "Relative error of density_dT compared to density_pT";
-    Real relErrorSpecificEnthalpy_dTMax
-     "Relative error of specificEnthalpy_dT compared to specificEnthalpy_pT";
-    Real relErrorTemperature_phMax
-     "Relative error of temperature_ph compared to T";
-    Real relErrorPressure_phMax
-     "Relative error of pressure_ph compared to p";
-    Real relErrorDensity_phMax
-     "Relative error of density_ph compared to density_pT";
-    Real relErrorSpecificEnthalpy_phMax
-     "Relative error of specificEnthalpy_ph compared to specificEnthalpy_pT";
-    Real relErrorTemperature_psMax
-     "Relative error of temperature_ps compared to T";
-    Real relErrorPressure_psMax
-     "Relative error of pressure_ps compared to p";
-    Real relErrorDensity_psMax
-     "Relative error of density_ps compared to density_pT";
-    Real relErrorSpecificEnthalpy_psMax
-     "Relative error of specificEnthalpy_ps compared to specificEnthalpy_pT";
-  end StateErrors;
+     Real errorTemperature_dTMax
+       "Error of temperature_dT compared to T";
+     Real errorPressure_dTMax
+       "Error of pressure_dT compared to p";
+     Real errorDensity_dTMax
+       "Error of density_dT compared to density_pT";
+     Real errorSpecificEnthalpy_dTMax
+       "Error of specificEnthalpy_dT compared to specificEnthalpy_pT";
+     Real errorTemperature_phMax
+       "Error of temperature_ph compared to T";
+     Real errorPressure_phMax
+       "Error of pressure_ph compared to p";
+     Real errorDensity_phMax
+       "Error of density_ph compared to density_pT";
+     Real errorSpecificEnthalpy_phMax
+       "Error of specificEnthalpy_ph compared to specificEnthalpy_pT";
+     Real errorTemperature_psMax
+       "Error of temperature_ps compared to T";
+     Real errorPressure_psMax
+       "Error of pressure_ps compared to p";
+     Real errorDensity_psMax
+       "Error of density_ps compared to density_pT";
+     Real errorSpecificEnthalpy_psMax
+       "Error of specificEnthalpy_ps compared to specificEnthalpy_pT";
+     Real relErrorTemperature_dTMax
+      "Relative error of temperature_dT compared to T";
+     Real relErrorPressure_dTMax
+      "Relative error of pressure_dT compared to p";
+     Real relErrorDensity_dTMax
+      "Relative error of density_dT compared to density_pT";
+     Real relErrorSpecificEnthalpy_dTMax
+      "Relative error of specificEnthalpy_dT compared to specificEnthalpy_pT";
+     Real relErrorTemperature_phMax
+      "Relative error of temperature_ph compared to T";
+     Real relErrorPressure_phMax
+      "Relative error of pressure_ph compared to p";
+     Real relErrorDensity_phMax
+      "Relative error of density_ph compared to density_pT";
+     Real relErrorSpecificEnthalpy_phMax
+      "Relative error of specificEnthalpy_ph compared to specificEnthalpy_pT";
+     Real relErrorTemperature_psMax
+      "Relative error of temperature_ps compared to T";
+     Real relErrorPressure_psMax
+      "Relative error of pressure_ps compared to p";
+     Real relErrorDensity_psMax
+      "Relative error of density_ps compared to density_pT";
+     Real relErrorSpecificEnthalpy_psMax
+      "Relative error of specificEnthalpy_ps compared to specificEnthalpy_pT";
+   end StateErrors;
 
-  ThermodynamicProperties thermodynamicProperties
-    "Record that contains further thermodynamic properties calculated during
-    the test";
-  StateErrors stateErros
-    "Record that contains errors occuring using the different
-    setState functions";
+   ThermodynamicProperties thermodynamicProperties
+     "Record that contains further thermodynamic properties calculated during
+     the test";
+   StateErrors stateErros
+     "Record that contains errors occuring using the different
+     setState functions";
 
 protected
   Modelica.SIunits.Time convChange(start = 0)
@@ -236,61 +236,61 @@ equation
   state_ph = Medium.setState_ph(p,h);
   state_ps = Medium.setState_ps(p,s);
 
-  // Calculate further properties
-  //
-  thermodynamicProperties.cp = Medium.specificHeatCapacityCp(state_pT);
-  thermodynamicProperties.cv = Medium.specificHeatCapacityCv(state_pT);
-  thermodynamicProperties.w = Medium.velocityOfSound(state_pT);
-  thermodynamicProperties.betta =
-    Medium.isobaricExpansionCoefficient(state_pT);
-  thermodynamicProperties.kappa = Medium.isothermalCompressibility(state_pT);
-  thermodynamicProperties.gamma = Medium.isentropicExponent(state_pT);
-  thermodynamicProperties.delta_T =
-    Medium.isothermalThrottlingCoefficient(state_pT);
-  thermodynamicProperties.my = Medium.jouleThomsonCoefficient(state_pT);
-  thermodynamicProperties.eta = Medium.dynamicViscosity(state_pT);
-  thermodynamicProperties.lambda = Medium.thermalConductivity(state_pT);
-  thermodynamicProperties.sigma = Medium.surfaceTension(satT);
+   // Calculate further properties
+   //
+   thermodynamicProperties.cp = Medium.specificHeatCapacityCp(state_pT);
+   thermodynamicProperties.cv = Medium.specificHeatCapacityCv(state_pT);
+   thermodynamicProperties.w = Medium.velocityOfSound(state_pT);
+   thermodynamicProperties.betta =
+     Medium.isobaricExpansionCoefficient(state_pT);
+   thermodynamicProperties.kappa = Medium.isothermalCompressibility(state_pT);
+   thermodynamicProperties.gamma = Medium.isentropicExponent(state_pT);
+   thermodynamicProperties.delta_T =
+     Medium.isothermalThrottlingCoefficient(state_pT);
+   thermodynamicProperties.my = Medium.jouleThomsonCoefficient(state_pT);
+   thermodynamicProperties.eta = Medium.dynamicViscosity(state_pT);
+   thermodynamicProperties.lambda = Medium.thermalConductivity(state_pT);
+   thermodynamicProperties.sigma = Medium.surfaceTension(satT);
 
-  // Calculate errors of thermodynamic state properties
-  //
-  stateErros.errorTemperature_dTMax =  abs(state_dT.T - state_pT.T);
-  stateErros.errorPressure_dTMax =  abs(state_dT.p - state_pT.p);
-  stateErros.errorDensity_dTMax = abs(state_dT.d - state_pT.d);
-  stateErros.errorSpecificEnthalpy_dTMax = abs(state_dT.h - state_pT.h);
-  stateErros.errorTemperature_phMax = abs(state_ph.T - state_pT.T);
-  stateErros.errorPressure_phMax = abs(state_ph.p - state_pT.p);
-  stateErros.errorDensity_phMax = abs(state_ph.d - state_pT.d);
-  stateErros.errorSpecificEnthalpy_phMax = abs(state_ph.h - state_pT.h);
-  stateErros.errorTemperature_psMax = abs(state_ps.T - state_pT.T);
-  stateErros.errorPressure_psMax = abs(state_ps.p - state_pT.p);
-  stateErros.errorDensity_psMax = abs(state_ps.d - state_pT.d);
-  stateErros.errorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h);
+   // Calculate errors of thermodynamic state properties
+   //
+   stateErros.errorTemperature_dTMax =  abs(state_dT.T - state_pT.T);
+   stateErros.errorPressure_dTMax =  abs(state_dT.p - state_pT.p);
+   stateErros.errorDensity_dTMax = abs(state_dT.d - state_pT.d);
+   stateErros.errorSpecificEnthalpy_dTMax = abs(state_dT.h - state_pT.h);
+   stateErros.errorTemperature_phMax = abs(state_ph.T - state_pT.T);
+   stateErros.errorPressure_phMax = abs(state_ph.p - state_pT.p);
+   stateErros.errorDensity_phMax = abs(state_ph.d - state_pT.d);
+   stateErros.errorSpecificEnthalpy_phMax = abs(state_ph.h - state_pT.h);
+   stateErros.errorTemperature_psMax = abs(state_ps.T - state_pT.T);
+   stateErros.errorPressure_psMax = abs(state_ps.p - state_pT.p);
+   stateErros.errorDensity_psMax = abs(state_ps.d - state_pT.d);
+   stateErros.errorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h);
 
-  stateErros.relErrorTemperature_dTMax =  abs(state_dT.T - state_pT.T) /
-    abs(state_pT.T)*100;
-  stateErros.relErrorPressure_dTMax =  abs(state_dT.p - state_pT.p) /
-    abs(state_pT.p)*100;
-  stateErros.relErrorDensity_dTMax = abs(state_dT.d - state_pT.d) /
-    abs(state_pT.d)*100;
-  stateErros.relErrorSpecificEnthalpy_dTMax = abs(state_dT.h - state_pT.h) /
-    abs(state_pT.h)*100;
-  stateErros.relErrorTemperature_phMax = abs(state_ph.T - state_pT.T) /
-    abs(state_pT.T)*100;
-  stateErros.relErrorPressure_phMax = abs(state_ph.p - state_pT.p) /
-    abs(state_pT.p)*100;
-  stateErros.relErrorDensity_phMax = abs(state_ph.d - state_pT.d) /
-    abs(state_pT.d)*100;
-  stateErros.relErrorSpecificEnthalpy_phMax = abs(state_ph.h - state_pT.h) /
-    abs(state_pT.h)*100;
-  stateErros.relErrorTemperature_psMax = abs(state_ps.T - state_pT.T) /
-    abs(state_pT.T)*100;
-  stateErros.relErrorPressure_psMax = abs(state_ps.p - state_pT.p) /
-    abs(state_pT.p)*100;
-  stateErros.relErrorDensity_psMax = abs(state_ps.d - state_pT.d) /
-    abs(state_pT.d)*100;
-  stateErros.relErrorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h) /
-    abs(state_pT.h)*100;
+   stateErros.relErrorTemperature_dTMax =  abs(state_dT.T - state_pT.T) /
+     abs(state_pT.T)*100;
+   stateErros.relErrorPressure_dTMax =  abs(state_dT.p - state_pT.p) /
+     abs(state_pT.p)*100;
+   stateErros.relErrorDensity_dTMax = abs(state_dT.d - state_pT.d) /
+     abs(state_pT.d)*100;
+   stateErros.relErrorSpecificEnthalpy_dTMax = abs(state_dT.h - state_pT.h) /
+     abs(state_pT.h)*100;
+   stateErros.relErrorTemperature_phMax = abs(state_ph.T - state_pT.T) /
+     abs(state_pT.T)*100;
+   stateErros.relErrorPressure_phMax = abs(state_ph.p - state_pT.p) /
+     abs(state_pT.p)*100;
+   stateErros.relErrorDensity_phMax = abs(state_ph.d - state_pT.d) /
+     abs(state_pT.d)*100;
+   stateErros.relErrorSpecificEnthalpy_phMax = abs(state_ph.h - state_pT.h) /
+     abs(state_pT.h)*100;
+   stateErros.relErrorTemperature_psMax = abs(state_ps.T - state_pT.T) /
+     abs(state_pT.T)*100;
+   stateErros.relErrorPressure_psMax = abs(state_ps.p - state_pT.p) /
+     abs(state_pT.p)*100;
+   stateErros.relErrorDensity_psMax = abs(state_ps.d - state_pT.d) /
+     abs(state_pT.d)*100;
+   stateErros.relErrorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h) /
+     abs(state_pT.h)*100;
 
    annotation(experiment(StopTime=6400, Tolerance=1e-006),
       Documentation(info="<html>
