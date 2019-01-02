@@ -17,8 +17,9 @@ package LiquidFuel_Petrol "Simple petrol fuel for CHP-engine combustion"
     substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
-  constant AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW Fuel=PetrolFuel()
-    "Needed fuel data for combustion calculations"
+  constant
+    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
+    Fuel=PetrolFuel() "Needed fuel data for combustion calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
    import Modelica.SIunits.*;
@@ -33,7 +34,7 @@ package LiquidFuel_Petrol "Simple petrol fuel for CHP-engine combustion"
 
   record PetrolFuel "Data record for simple petrol fuel"
     extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
     fuelType = "Simple petrol fuel",
     isGasoline = false,
     H_U = 42000000,

@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModelEnginePowerAndHeatToCooling2812
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModelEnginePowerAndHeatToCooling3012
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -157,7 +157,8 @@ model ModelEnginePowerAndHeatToCooling2812
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-62,-8},{-78,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger3012
+    exhaustHeatExchanger(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -282,4 +283,4 @@ physikal"),
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"));
-end ModelEnginePowerAndHeatToCooling2812;
+end ModelEnginePowerAndHeatToCooling3012;

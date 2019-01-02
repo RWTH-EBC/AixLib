@@ -18,8 +18,9 @@ package LiquidFuel_Diesel
     substanceNames={"Nitrogen","Methane","Ethene","Ethane","Propane",
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
-  constant AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW Fuel=DieselFuel()
-    "Needed fuel data for combustion calculations"
+  constant
+    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
+    Fuel=DieselFuel() "Needed fuel data for combustion calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
    import Modelica.SIunits.*;
@@ -33,7 +34,7 @@ package LiquidFuel_Diesel
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;
 
   record DieselFuel "Data record for simple diesel fuel"
-    extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+    extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
     fuelType = "Simple diesel fuel",
     isGasoline = false,
     H_U = 42800000,

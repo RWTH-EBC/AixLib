@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ExhaustHeatExchangerExplizit
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger3012
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -41,7 +41,7 @@ model ExhaustHeatExchangerExplizit
   AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
       = Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
-    annotation (Placement(transformation(extent={{60,70},{80,50}})));
+    annotation (Placement(transformation(extent={{60,50},{80,70}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolCold(
     redeclare final package Medium = Medium2,
     final tau=tau,
@@ -166,6 +166,26 @@ model ExhaustHeatExchangerExplizit
     Modelica.Media.Interfaces.PartialMedium annotation (
       __Dymola_choicesAllMatching=true);
 
+  AixLib.Fluid.BoilerCHP.ModularCHP.heatFromExhaustGas heatFromExhaustGas(
+    T1_start=T1_start,
+    p1_start=p1_start,
+    d_iExh=d_iExh,
+    TAmb=TAmb,
+    pAmb=pAmb,
+    heatConvExhaustPipeInside(
+      c=meanCpExh,
+      rho=rho1_in,
+      lambda=lambda1_in,
+      eta=eta1_in,
+      A_sur=A_surExhHea),
+    redeclare package Medium1 = Medium3,
+    allowFlowReversal1=allowFlowReversal1,
+    m1_flow_nominal=m1_flow_nominal,
+    m1_flow_small=m1_flow_small,
+    m_flow=senMasFloExh.m_flow,
+    l_Exh=l_ExhHex) annotation (Placement(transformation(rotation=0, extent={{-42,
+            32},{-8,66}})));
+
   parameter Modelica.SIunits.Length l_ExhHex=1
     "Length of the exhaust pipe inside the exhaust heat exchanger" annotation (
       Dialog(tab="Calibration parameters", group="Engine parameters"));
@@ -188,40 +208,6 @@ model ExhaustHeatExchangerExplizit
           m_flow_nominal=m2_flow_nominal, dp_nominal=0))
     annotation (Placement(transformation(extent={{32,-70},{12,-50}})));
 
-  Modelica.Fluid.Vessels.ClosedVolume volExhaust(
-    redeclare final package Medium = Medium1,
-    final m_flow_nominal=m1_flow_nominal,
-    final p_start=p1_start,
-    final T_start=T1_start,
-    use_HeatTransfer=true,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer,
-    use_portsData=false,
-    final m_flow_small=m1_flow_small,
-    V=0.002,
-    nPorts=2)                          "Fluid volume"
-    annotation (Placement(transformation(extent={{-20,60},{-40,40}})));
-  AixLib.Fluid.FixedResistances.HydraulicDiameter
-                                pressureDropExhaust(
-    redeclare final package Medium = Medium1,
-    final show_T=false,
-    final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal,
-    dh=d_iExh,
-    rho_default=1.18,
-    mu_default=1.82*10^(-5),
-    length=l_ExhHex)               "Pressure drop"
-    annotation (Placement(transformation(extent={{0,50},{20,70}})));
-  AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
-                                                   heatConvExhaustPipeInside(
-    d_i=d_iExh,
-    A_sur=A_surExhHea,
-    rho=rho1_in,
-    lambda=lambda1_in,
-    eta=eta1_in)                     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-20,20})));
 equation
 
   if (QuoT_ExhInOut-1)>0.0001 then
@@ -245,26 +231,20 @@ equation
   connect(port_b,ambientLoss. port_b)
     annotation (Line(points={{-100,0},{-90,0},{-90,-12},{-66,-12}},
                                                 color={191,0,0}));
+  connect(senTExhHot.port_b, heatFromExhaustGas.ports) annotation (Line(points={{-60,60},
+          {-56,60},{-56,56.48},{-42,56.48}},          color={0,127,255}));
+  connect(heatFromExhaustGas.port_b1, senTExhCold.port_a) annotation (Line(
+        points={{-8,56.48},{6,56.48},{6,60},{28,60}},  color={0,127,255}));
   connect(senTCoolCold.port_a, pipeCoolant.port_a)
     annotation (Line(points={{60,-60},{32.4,-60}}, color={0,127,255}));
   connect(senTCoolHot.port_b, pipeCoolant.port_b)
     annotation (Line(points={{-20,-60},{11.6,-60}}, color={0,127,255}));
   connect(ambientLoss.port_a, heatCapacitor.port)
     annotation (Line(points={{-46,-12},{0,-12}}, color={191,0,0}));
+  connect(heatFromExhaustGas.port_b, heatCapacitor.port)
+    annotation (Line(points={{-25,33.7},{-25,-12},{0,-12}}, color={191,0,0}));
   connect(heatCapacitor.port, pipeCoolant.heatPort_outside) annotation (Line(
         points={{0,-12},{20.4,-12},{20.4,-54.4}}, color={191,0,0}));
-  connect(volExhaust.heatPort, heatConvExhaustPipeInside.port_a)
-    annotation (Line(points={{-20,50},{-20,30}}, color={191,0,0}));
-  connect(heatConvExhaustPipeInside.port_b, heatCapacitor.port)
-    annotation (Line(points={{-20,10},{-20,-12},{0,-12}}, color={191,0,0}));
-  connect(pressureDropExhaust.port_a, volExhaust.ports[1]) annotation (Line(
-        points={{0,60},{-14,60},{-14,64},{-28,64},{-28,60}}, color={0,127,255}));
-  connect(senTExhHot.port_b, volExhaust.ports[2]) annotation (Line(points={{-60,
-          60},{-46,60},{-46,64},{-32,64},{-32,60}}, color={0,127,255}));
-  connect(pressureDropExhaust.port_b, senTExhCold.port_a)
-    annotation (Line(points={{20,60},{28,60}}, color={0,127,255}));
-  connect(senMasFloExh.m_flow, heatConvExhaustPipeInside.m_flow)
-    annotation (Line(points={{70,49},{70,20.4},{-9.2,20.4}}, color={0,0,127}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-70,80},{70,-80}},
@@ -284,4 +264,4 @@ equation
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}));
-end ExhaustHeatExchangerExplizit;
+end ExhaustHeatExchanger3012;

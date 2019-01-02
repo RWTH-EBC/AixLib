@@ -20,7 +20,7 @@ package NaturalGasMixture_GeneralType
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
   constant
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW
+    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
     Fuel=NaturalGas_GeneralDefinition()
     "Needed natural gas data for calculations, manual redefinition of volumetric proportions of the gas components (Xi_mole) required (default:{1/9,1/9,...})!"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
@@ -37,7 +37,7 @@ package NaturalGasMixture_GeneralType
 
   record NaturalGas_GeneralDefinition
     extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
         fuelType="GeneralTypeForRedefinition",
         isGasoline = true,
         Xi_mole={1/9,1/9,1/9,1/9,

@@ -20,9 +20,8 @@ package NaturalGasMixture_TypeAachen
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
   constant
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW
-    Fuel=NaturalGasTypeAachen()
-    "Needed natural gas data for calculations"
+    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
+    Fuel=NaturalGasTypeAachen() "Needed natural gas data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
    import Modelica.SIunits.*;
@@ -37,7 +36,7 @@ package NaturalGasMixture_TypeAachen
 
   record NaturalGasTypeAachen
     extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
         fuelType="TypeAachen",
         isGasoline = true,
         Xi_mole={0.0089,0.9255,0,0.045,0.0063,0.0019,0.0004,0.0001,0.0119});

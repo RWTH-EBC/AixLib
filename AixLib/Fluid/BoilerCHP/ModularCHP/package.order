@@ -3,10 +3,8 @@ CylToInnerWall
 heatFromExhaustGas
 ASM_CHPGenerator
 cHPEngineExample
-ExhaustHeatExchanger
 EngineHousing
 engineBlock
 CHPGasolineEngine
-ModelEnginePowerAndHeatToCooling2812
-ExhaustHeatExchangerExplizit
-ModelEnginePowerAndHeatToCooling2812Explizit
+ExhaustHeatExchanger
+ModelEnginePowerAndHeatToCooling

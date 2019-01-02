@@ -20,7 +20,7 @@ package NaturalGasMixture_TypeL
         "n-Butane","n-Pentane","n-Hexane","Carbondioxide"});
 
   constant
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW
+    AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
     Fuel=NaturalGasTypeL() "Needed natural gas data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
@@ -36,7 +36,7 @@ package NaturalGasMixture_TypeL
 
   record NaturalGasTypeL
     extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecordNEW(
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
         fuelType="TypeL",
         isGasoline = true,
         Xi_mole={0.126,0.82,0,0.033,0.006,0.003,0,0,
