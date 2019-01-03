@@ -24,7 +24,7 @@ block DynamicHysteresis
 initial equation
   pre(y) = pre_y_start;
 equation
-  assert(uHigh > uLow,"Hysteresis limits wrong (uHigh <= uLow)");
+  assert(uHigh > uLow,"Hysteresis limits wrong (uHigh = "+String(uHigh)+" <= uLow = "+String(uLow)+")");
   y = not pre(y) and u > uHigh or pre(y) and u >= uLow;
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{

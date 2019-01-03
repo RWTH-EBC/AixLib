@@ -1,10 +1,7 @@
 ﻿within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
-  import AixLib;
-  package Medium_sin = AixLib.Media.Water
-    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
-  package Medium_sou = AixLib.Media.Water
-    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+  package Medium_sin = AixLib.Media.Water;
+  package Medium_sou = AixLib.Media.Water;
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Modelica.Media.Air.SimpleAir,

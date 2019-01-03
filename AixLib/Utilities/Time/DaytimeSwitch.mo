@@ -13,9 +13,9 @@ model DaytimeSwitch
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim
     "Enumeration for choosing how reference time (time = 0) should be defined";
   parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
-  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
+  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef) "Used to get the unix time stamp and calendar time from the simulation time";
 
-  Modelica.Blocks.Interfaces.BooleanOutput isDaytime
+  Modelica.Blocks.Interfaces.BooleanOutput isDaytime "Output boolean if current time stamp matches the set parameters"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 equation
