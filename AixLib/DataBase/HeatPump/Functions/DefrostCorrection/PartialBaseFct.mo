@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection;
+within AixLib.DataBase.HeatPump.Functions.DefrostCorrection;
 partial function PartialBaseFct
   "Base class for correction model, icing and defrosting of evaporator"
   extends Modelica.Icons.Function;

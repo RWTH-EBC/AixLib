@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions;
+within AixLib.DataBase.HeatPump.Functions;
 package Characteristics
   extends Modelica.Icons.Package;
 

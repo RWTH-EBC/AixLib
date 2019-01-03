@@ -1,8 +1,10 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Fluid.HeatExchangers;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
-    final prescribedHeatFlowRate=true, final V=V));
+    final prescribedHeatFlowRate=true,
+    final V=V),
+    final tau=30);
 
   parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
@@ -12,13 +14,14 @@ model EvaporatorCondenserWithCapacity
     annotation (Dialog(group="Heat losses"),choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
     annotation (Dialog(group="Heat losses", enable=use_cap));
-  parameter Modelica.SIunits.ThermalConductance kAOut_nominal
-    "Nominal value for thermal conductance to the ambient" annotation (Dialog(group="Heat losses", enable=
-          use_cap));
-  Modelica.Blocks.Interfaces.RealOutput kAInn
+  Modelica.SIunits.ThermalConductance GOut
+    "Formular for calculation of heat transfer coefficient on the outside"
+                                                           annotation (Dialog(group=
+          "Heat losses",                                                                           enable=use_cap));
+  Modelica.Blocks.Interfaces.RealOutput GInn
     "Formular for calculation of heat transfer coefficient on the inside"
-                                                                         annotation (Dialog(group="Heat losses", enable=
-          use_cap));
+                                                                         annotation (Dialog(group=
+          "Heat losses",                                                                                         enable=use_cap));
   Modelica.Thermal.HeatTransfer.Components.Convection conIns if use_cap
     "Convection between fluid and solid" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
@@ -38,8 +41,7 @@ model EvaporatorCondenserWithCapacity
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=270,
         origin={12,52})));
-  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAInn) if
-                                               use_cap
+  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=GInn) if use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},
@@ -49,13 +51,12 @@ model EvaporatorCondenserWithCapacity
     "Temperature and heat flow to the ambient"
     annotation (Placement(transformation(extent={{-5,105},{5,95}}),
         iconTransformation(extent={{-5,105},{5,95}})));
-  Modelica.Blocks.Sources.RealExpression heatLossOut(final y=kAOut_nominal) if use_cap
+  Modelica.Blocks.Sources.RealExpression heatLossOut(final y=GOut) if use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},
         rotation=0,
         origin={-61,78})));
-
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea(final alpha=0,
       final T_ref=293.15) "Heat flow rate of the condenser" annotation (
@@ -230,5 +231,18 @@ equation
           pattern=LinePattern.None,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
-          visible=not is_con)}));
+          visible=not is_con)}), Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>", info="<html>
+<p>Model for an evaporator or condenser with the use of a capacity to simulate heat losses.</p>
+<p>Used in <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>, the heat flow to or from the volume is calculated in a black box. Thus the heat is directly added to the medium.</p>
+<p>In order to model transient states and inertias of a real heat pump, a capacity is added to the base model <a href=\"modelica://AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger\">TwoPortHeatMassExchanger</a>. </p>
+<p>The heat exchange between capacity and medium (<span style=\"font-family: Courier New;\">GIns</span>) is based on a series of heat resistances caused by forced convection and conduction through the capacity of the heat exchanger. Losses or gains in result of heat exchange with the ambient are modeled through the heat exchange coefficient <span style=\"font-family: Courier New;\">GOut</span> is represented by a series of conductive resistances and the convection to the ambient. </p>
+<p>Both parameters <span style=\"font-family: Courier New;\">GIns</span> and <span style=\"font-family: Courier New;\">GOut</span> are variable so that the calculation can follow a temperature or flow-rate based approach.</p>
+</html>"));
 end EvaporatorCondenserWithCapacity;
