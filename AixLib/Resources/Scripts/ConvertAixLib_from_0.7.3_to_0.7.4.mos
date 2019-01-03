@@ -11,3 +11,6 @@ convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.Wet
 convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor","AixLib.DataBase.HeatPump.Functions.IcingFactor");
 convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.BasicIcingApproach","AixLib.DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach");
 convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct","AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct");
+convertElement("AixLib.Fluid.HeatPumps.HeatPump", "GCon", "GConOut");
+convertElement("AixLib.Fluid.HeatPumps.HeatPump", "GEva", "GEvaOut");
+convertModifiers("AixLib.Fluid.HeatPumps.HeatPump", {"tauHeaTra"}, {"tauHeaTraCon=%tauHeaTra%", "tauHeaTraEva=%tauHeaTra%"});
