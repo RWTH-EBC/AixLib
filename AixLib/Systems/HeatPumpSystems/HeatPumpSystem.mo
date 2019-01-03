@@ -75,15 +75,17 @@ model HeatPumpSystem
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia", enable=use_refIne));
 //Condenser/Evaporator
-  parameter Modelica.SIunits.Volume VCon "Volume in condenser"
+  parameter Modelica.SIunits.Volume VCon(displayUnit="l")
+                                         "Volume in condenser. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"), Evaluate=true);
-  parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
+  parameter Modelica.SIunits.Volume VEva(displayUnit="l")
+                                         "Volume in evaporator. Typical values range from 1 to 20 l, depending on the size of the heat pump and the mass flow rate."
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"), Evaluate=true);
-  parameter Modelica.SIunits.PressureDifference dpEva_nominal
-    "Pressure drop at nominal mass flow rate"
+  parameter Modelica.SIunits.PressureDifference dpEva_nominal(displayUnit="kPa")
+    "Pressure drop at nominal mass flow rate. Only relevant if a mover is used. Try to select values to match the nominal mass flow rate."
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
-  parameter Modelica.SIunits.PressureDifference dpCon_nominal
-    "Pressure drop at nominal mass flow rate"
+  parameter Modelica.SIunits.PressureDifference dpCon_nominal(displayUnit="kPa")
+    "Pressure drop at nominal mass flow rate. Only relevant if a mover is used. Try to select values to match the nominal mass flow rate."
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"

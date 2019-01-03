@@ -80,7 +80,6 @@ model HeatPumpSystem "Example for a heat pump system"
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     use_revHP=false,
     refIneFre_constant=0.01,
-    VEva=0.04,
     dpEva_nominal=0,
     deltaM_con=0.1,
     use_opeEnvFroRec=true,
@@ -118,7 +117,6 @@ model HeatPumpSystem "Example for a heat pump system"
     redeclare function HeatingCurveFunction =
         AixLib.Controls.SetPoints.Functions.HeatingCurveFunction (TDesign=
             308.15),
-    VCon=0.04,
     dpCon_nominal=0,
     use_conCap=true,
     CCon=3000,
@@ -126,10 +124,12 @@ model HeatPumpSystem "Example for a heat pump system"
     CEva=3000,
     use_secHeaGen=true,
     Q_flow_nominal=5000,
+    cpEva=4180,
+    cpCon=4180,
     TCon_start=313.15,
     TEva_start=283.15,
-    cpEva=4180,
-    cpCon=4180)
+    VCon=0.004,
+    VEva=0.004)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
