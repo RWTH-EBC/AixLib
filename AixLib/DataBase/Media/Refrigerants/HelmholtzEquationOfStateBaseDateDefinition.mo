@@ -3,89 +3,115 @@ record HelmholtzEquationOfStateBaseDateDefinition
   "Base data definition for fitting coefficients of the Helmholtz EoS"
   extends Modelica.Icons.Record;
 
-  parameter String name
-  "Short description of the record"
-  annotation (Dialog(group="General"));
+  parameter String name "Short description of the record"
+    annotation (Dialog(group="General"));
 
   parameter Integer f_IdgNl
-  "Number of terms of the equation's (alpha_0) first part"
-  annotation (Dialog(group="Ideal gas part"));
+    "Number of terms of the equation's (alpha_0) first part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Real f_IdgL1[:]
-  "First coefficient of the equation's (alpha_0) first part"
-  annotation (Dialog(group="Ideal gas part"));
+    "First coefficient of the equation's (alpha_0) first part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Real f_IdgL2[:]
-  "Second coefficient of the equation's (alpha_0) first part"
-  annotation (Dialog(group="Ideal gas part"));
+    "Second coefficient of the equation's (alpha_0) first part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Integer f_IdgNp
-  "Number of terms of the equation's (alpha_0) second part"
-  annotation (Dialog(group="Ideal gas part"));
+    "Number of terms of the equation's (alpha_0) second part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Real f_IdgP1[:]
-  "First coefficient of the equation's (alpha_0) second part"
-  annotation (Dialog(group="Ideal gas part"));
+    "First coefficient of the equation's (alpha_0) second part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Real f_IdgP2[:]
-  "Second coefficient of the equation's (alpha_0) second part"
-  annotation (Dialog(group="Ideal gas part"));
+    "Second coefficient of the equation's (alpha_0) second part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Integer f_IdgNe
-  "Number of terms of the equation's (alpha_0) third part"
-  annotation (Dialog(group="Ideal gas part"));
+    "Number of terms of the equation's (alpha_0) third part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Real f_IdgE1[:]
-  "First coefficient of the equation's (alpha_0) third part"
-  annotation (Dialog(group="Ideal gas part"));
+    "First coefficient of the equation's (alpha_0) third part"
+    annotation (Dialog(group="Ideal gas part"));
   parameter Real f_IdgE2[:]
-  "Second coefficient of the equation's (alpha_0) third part"
-  annotation (Dialog(group="Ideal gas part"));
+    "Second coefficient of the equation's (alpha_0) third part"
+    annotation (Dialog(group="Ideal gas part"));
 
   parameter Integer f_ResNp
-  "Number of terms of the equation's (alpha_r) first part"
-  annotation (Dialog(group="Residual part"));
+    "Number of terms of the equation's (alpha_r) first part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResP1[:]
-  "First coefficient of the equation's (alpha_r) first part"
-  annotation (Dialog(group="Residual part"));
+    "First coefficient of the equation's (alpha_r) first part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResP2[:]
-  "Second coefficient of the equation's (alpha_r) first part"
-  annotation (Dialog(group="Residual part"));
+    "Second coefficient of the equation's (alpha_r) first part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResP3[:]
-  "Third coefficient of the equation's (alpha_r) first part"
-  annotation (Dialog(group="Residual part"));
+    "Third coefficient of the equation's (alpha_r) first part"
+    annotation (Dialog(group="Residual part"));
   parameter Integer f_ResNb
-  "Number of terms of the equation's (alpha_r) second part"
-  annotation (Dialog(group="Residual part"));
+    "Number of terms of the equation's (alpha_r) second part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResB1[:]
-  "First coefficient of the equation's (alpha_r) second part"
-  annotation (Dialog(group="Residual part"));
+    "First coefficient of the equation's (alpha_r) second part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResB2[:]
-  "Second coefficient of the equation's (alpha_r) second part"
-  annotation (Dialog(group="Residual part"));
+    "Second coefficient of the equation's (alpha_r) second part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResB3[:]
-  "Third coefficient of the equation's (alpha_r) second part"
-  annotation (Dialog(group="Residual part"));
+    "Third coefficient of the equation's (alpha_r) second part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResB4[:]
-  "Fourth coefficient of the equation's (alpha_r) second part"
-  annotation (Dialog(group="Residual part"));
+    "Fourth coefficient of the equation's (alpha_r) second part"
+    annotation (Dialog(group="Residual part"));
   parameter Integer f_ResNG
-  "Number of terms of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Number of terms of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG1[:]
-  "First coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "First coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG2[:]
-  "Second coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Second coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG3[:]
-  "Third coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Third coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG4[:]
-  "Fourth coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Fourth coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG5[:]
-  "Fifth coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Fifth coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG6[:]
-  "Sixth coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Sixth coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
   parameter Real f_ResG7[:]
-  "Seventh coefficient of the equation's (alpha_r) third part"
-  annotation (Dialog(group="Residual part"));
+    "Seventh coefficient of the equation's (alpha_r) third part"
+    annotation (Dialog(group="Residual part"));
+  parameter Integer f_ResNNa
+    "Number of terms of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa1[:]
+    "First coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa2[:]
+    "Second coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa3[:]
+    "Third coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa4[:]
+    "Fourth coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa5[:]
+    "Fifth coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa6[:]
+    "Sixth coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa7[:]
+    "Seventh coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
+  parameter Real f_ResNa8[:]
+    "Eigth coefficient of the equation's (alpha_r) fourth part (Non-Analytic)"
+    annotation (Dialog(group="Residual part"));
 
   annotation (Documentation(revisions="<html>
 <ul>

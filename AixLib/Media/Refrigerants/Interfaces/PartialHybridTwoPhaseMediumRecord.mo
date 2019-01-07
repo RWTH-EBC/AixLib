@@ -64,6 +64,9 @@ partial package PartialHybridTwoPhaseMediumRecord
     "Dimensionless Helmholtz energy (Residual part f_Res)"
   protected
     EoS cf;
+    Real Psi;
+    Real Theta;
+    Real Dis;
 
   algorithm
     if not cf.f_ResNp == 0 then
@@ -83,6 +86,20 @@ partial package PartialHybridTwoPhaseMediumRecord
                  exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^2 -
                  cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2);
       end for;
+    end if;
+    if not cf.f_ResNNa == 0 then
+       for k in 1:cf.f_ResNNa loop
+         Psi := Psi + exp(-cf.f_ResNa3[k]*(delta - 1)^2 - cf.f_ResNa4[k]*(tau - 1)^2);
+       end for;
+       for k in 1:cf.f_ResNNa loop
+         Theta := Theta + (1-tau)+cf.f_ResNa5[k]*((delta-1)^2)^(0.5/cf.f_ResNa6[k]);
+       end for;
+       for k in 1:cf.f_ResNNa loop
+          Dis := Dis + Theta^2 + cf.f_ResNa7[k]*((delta - 1)^2)^cf.f_ResNa8[k];
+       end for;
+       for k in 1:cf.f_ResNNa loop
+         f_Res :=f_Res + cf.f_ResNa1[k]*Dis^cf.f_ResNa2[k]*delta*Psi;
+       end for;
     end if;
 
     annotation(Inline=false,
@@ -148,37 +165,70 @@ partial package PartialHybridTwoPhaseMediumRecord
     "Short form for tau*(dalpha_r/dtau)_delta=const"
   protected
     EoS cf;
+    Real[cf.f_ResNNa] Psi={exp(-cf.f_ResNa3[k]*(delta - 1)^2 - cf.f_ResNa4[k]*(
+        tau - 1)^2) for k in 1:cf.f_ResNNa} "Psi";
+    Real[cf.f_ResNNa] Theta={(1 - tau) + cf.f_ResNa5[k]*((delta - 1)^2)^(0.5/cf.f_ResNa6
+        [k]) for k in 1:cf.f_ResNNa} "Theta";
+    Real[cf.f_ResNNa] Dis={Theta[k]^2 + cf.f_ResNa7[k]*((delta - 1)^2)^cf.f_ResNa8
+        [k] for k in 1:cf.f_ResNNa} "Distance function";
+    Real[cf.f_ResNNa] Disb = {Dis[k]^cf.f_ResNa2[k] for k in 1:cf.f_ResNNa} "Distance function to the power of b";
+    Real[cf.f_ResNNa] Psi_t={-cf.f_ResNa4[k]*(2*tau - 2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_t={-1 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_t={2*Theta[k]*Theta_t[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_t={if Dis[k] <> 0 then cf.f_ResNa2[k]*Dis[k]^(cf.f_ResNa2
+        [k] - 1)*Dis_t[k] else 0 for k in 1:cf.f_ResNNa};
 
   algorithm
     if not cf.f_ResNp == 0 then
       for k in 1:cf.f_ResNp loop
         t_fRes_t := t_fRes_t + cf.f_ResP1[k]*cf.f_ResP3[k]*delta^cf.f_ResP2[k]*
-                    tau^cf.f_ResP3[k];
+          tau^cf.f_ResP3[k];
       end for;
     end if;
     if not cf.f_ResNb == 0 then
       for k in 1:cf.f_ResNb loop
         t_fRes_t := t_fRes_t + cf.f_ResB1[k]*cf.f_ResB3[k]*delta^cf.f_ResB2[k]*
-                    tau^cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k]);
+          tau^cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k]);
       end for;
     end if;
     if not cf.f_ResNG == 0 then
       for k in 1:cf.f_ResNG loop
-        t_fRes_t := t_fRes_t + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
-                    cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^2 -
-                    cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*(cf.f_ResG3[k]-2*
-                    cf.f_ResG6[k]*tau*(tau-cf.f_ResG7[k]));
+        t_fRes_t := t_fRes_t + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^cf.f_ResG3[k]
+          *exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^2 - cf.f_ResG6[k]*(tau - cf.f_ResG7
+          [k])^2)*(cf.f_ResG3[k] - 2*cf.f_ResG6[k]*tau*(tau - cf.f_ResG7[k]));
       end for;
     end if;
 
-  annotation(Inline=false,
-             LateInline=true);
+    if not cf.f_ResNNa == 0 then
+      for k in 1:cf.f_ResNNa loop
+        t_fRes_t := t_fRes_t + delta*tau*cf.f_ResNa1[k]*(Disb[k]*Psi_t[k] + Psi[k]*
+          Disb_t[k]);
+      end for;
+    end if;
+    annotation (Inline=false, LateInline=true);
   end t_fRes_t;
 
   redeclare function extends tt_fRes_tt
     "Short form for tau*tau*(ddalpha_r/(dtau*dtau))_delta=const"
   protected
     EoS cf;
+    Real[cf.f_ResNNa] Psi={exp(-cf.f_ResNa3[k]*(delta - 1)^2 - cf.f_ResNa4[k]*(
+        tau - 1)^2) for k in 1:cf.f_ResNNa} "Psi";
+    Real[cf.f_ResNNa] Theta={(1 - tau) + cf.f_ResNa5[k]*((delta - 1)^2)^(0.5/cf.f_ResNa6
+        [k]) for k in 1:cf.f_ResNNa} "Theta";
+    Real[cf.f_ResNNa] Dis={Theta[k]^2 + cf.f_ResNa7[k]*((delta - 1)^2)^cf.f_ResNa8
+        [k] for k in 1:cf.f_ResNNa} "Distance function";
+    Real[cf.f_ResNNa] Disb = {Dis[k]^cf.f_ResNa2[k] for k in 1:cf.f_ResNNa} "Distance function to the power of b";
+    Real[cf.f_ResNNa] Psi_t={-cf.f_ResNa4[k]*(2*tau - 2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_t={-1 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_t={2*Theta[k]*Theta_t[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_t={if Dis[k] <> 0 then cf.f_ResNa2[k]*Dis[k]^(cf.f_ResNa2
+        [k] - 1)*Dis_t[k] else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Psi_tt = {2*cf.f_ResNa4[k]*(2*cf.f_ResNa4[k]*(tau-1)^2-1)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_tt = {2 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_tt = {if Dis[k]<>0 then cf.f_ResNa2[k]*(cf.f_ResNa2[k]*Dis_t[k]^2 + Dis[k]*Dis_tt[k] - Dis_t[k]^2)*Dis[k]^(cf.f_ResNa2[k]-2)
+                                          else cf.f_ResNa2[k]*(cf.f_ResNa2[k]*Dis_t[k]^2 + Dis[k]*Dis_tt[k] - Dis_t[k]^2)*Modelica.Constants.inf for k in 1:cf.f_ResNNa};
+
 
   algorithm
     if not cf.f_ResNp == 0 then
@@ -204,7 +254,11 @@ partial package PartialHybridTwoPhaseMediumRecord
           cf.f_ResG6[k]*tau^2);
       end for;
     end if;
-
+    if not cf.f_ResNNa == 0 then
+      for k in 1:cf.f_ResNNa loop
+        tt_fRes_tt := tt_fRes_tt + tau^2*delta*cf.f_ResNa1[k]*(Disb[k]*Psi_tt[k] + Psi[k]*Disb_tt[k] + 2*Disb_t[k]*Psi_t[k]);
+      end for;
+    end if;
   annotation(Inline=false,
              LateInline=true);
   end tt_fRes_tt;
@@ -213,6 +267,16 @@ partial package PartialHybridTwoPhaseMediumRecord
     "Short form for delta*(dalpha_r/(ddelta))_tau=const"
   protected
     EoS cf;
+    Real[cf.f_ResNNa] Psi={exp(-cf.f_ResNa3[k]*(delta - 1)^2 - cf.f_ResNa4[k]*(
+        tau - 1)^2) for k in 1:cf.f_ResNNa} "Psi";
+    Real[cf.f_ResNNa] Theta={(1 - tau) + cf.f_ResNa5[k]*((delta - 1)^2)^(0.5/cf.f_ResNa6
+        [k]) for k in 1:cf.f_ResNNa} "Theta";
+    Real[cf.f_ResNNa] Dis={Theta[k]^2 + cf.f_ResNa7[k]*((delta - 1)^2)^cf.f_ResNa8[k] for k in 1:cf.f_ResNNa} "Distance function";
+    Real[cf.f_ResNNa] Disb = {Dis[k]^cf.f_ResNa2[k] for k in 1:cf.f_ResNNa} "Distance function to the power of b";
+    Real[cf.f_ResNNa] Psi_d = {-cf.f_ResNa3[k]*(2*delta-2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_d = {if (delta-1)<>0 then (cf.f_ResNa5[k]*(2*delta-2)*((delta-1)^2)^(0.5/cf.f_ResNa6[k])) / (2*cf.f_ResNa6[k]*(delta-1)^2) else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_d = {if (delta-1)<>0 then (2*cf.f_ResNa7[k]*cf.f_ResNa8[k]*((delta-1)^2)^cf.f_ResNa8[k]) / (delta-1) +2*Theta[k]*Theta_d[k] else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_d = {if Dis[k]<>0 then cf.f_ResNa2[k]*Dis[k]^(cf.f_ResNa2[k]-1)*Dis_d[k] else 0 for k in 1:cf.f_ResNNa};
 
   algorithm
     if not cf.f_ResNp == 0 then
@@ -236,6 +300,12 @@ partial package PartialHybridTwoPhaseMediumRecord
                     cf.f_ResG4[k]*delta*(delta-cf.f_ResG5[k]));
       end for;
     end if;
+    if not cf.f_ResNNa == 0 then
+      for k in 1:cf.f_ResNNa loop
+        d_fRes_d :=d_fRes_d + delta*cf.f_ResNa1[k]*(delta*Disb[k]*Psi_d[k] +
+          delta*Psi[k]*Disb_d[k] + Disb[k]*Psi[k]);
+      end for;
+    end if;
 
   annotation(Inline=false,
              LateInline=true);
@@ -245,6 +315,23 @@ partial package PartialHybridTwoPhaseMediumRecord
     "Short form for delta*delta(ddalpha_r/(ddelta*delta))_tau=const"
   protected
     EoS cf;
+    Real[cf.f_ResNNa] Psi={exp(-cf.f_ResNa3[k]*(delta - 1)^2 - cf.f_ResNa4[k]*(
+        tau - 1)^2) for k in 1:cf.f_ResNNa} "Psi";
+    Real[cf.f_ResNNa] Theta={(1 - tau) + cf.f_ResNa5[k]*((delta - 1)^2)^(0.5/cf.f_ResNa6
+        [k]) for k in 1:cf.f_ResNNa} "Theta";
+    Real[cf.f_ResNNa] Dis={Theta[k]^2 + cf.f_ResNa7[k]*((delta - 1)^2)^cf.f_ResNa8[k] for k in 1:cf.f_ResNNa} "Distance function";
+    Real[cf.f_ResNNa] Disb = {Dis[k]^cf.f_ResNa2[k] for k in 1:cf.f_ResNNa} "Distance function to the power of b";
+
+    Real[cf.f_ResNNa] Psi_d = {-cf.f_ResNa3[k]*(2*delta-2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_d = {if (delta-1)<>0 then (cf.f_ResNa5[k]*(2*delta-2)*((delta-1)^2)^(0.5/cf.f_ResNa6[k])) / (2*cf.f_ResNa6[k]*(delta-1)^2) else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_d = {if (delta-1)<>0 then (2*cf.f_ResNa7[k]*cf.f_ResNa8[k]*((delta-1)^2)^cf.f_ResNa8[k]) / (delta-1) +2*Theta[k]*Theta_d[k] else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_d = {if Dis[k]<>0 then cf.f_ResNa2[k]*Dis[k]^(cf.f_ResNa2[k]-1)*Dis_d[k] else 0 for k in 1:cf.f_ResNNa};
+
+    Real[cf.f_ResNNa] Psi_dd = {2*cf.f_ResNa3[k]*(2*cf.f_ResNa3[k]*(delta-1)^2-1)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_dd = {if (delta-1)<>0 then (cf.f_ResNa5[k]*(1/cf.f_ResNa6[k]-1)*((delta-1)^2)^(0.5/cf.f_ResNa6[k])) / (cf.f_ResNa6[k]*(delta-1)^2) else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_dd = {if (delta-1)<>0 then 2*Theta[k]*Theta_dd[k] + 2*Theta_d[k]^2 + (2*((delta-1)^2)^cf.f_ResNa8[k]) / (delta-1)^2 *(2*cf.f_ResNa7[k]*cf.f_ResNa8[k]^2-cf.f_ResNa7[k]*cf.f_ResNa8[k]) else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_dd = {if (delta-1)<>0 then cf.f_ResNa2[k]*(cf.f_ResNa2[k]*Dis_d[k]^2 + Dis[k]*Dis_dd[k] - Dis_d[k]^2)*Dis[k]^(cf.f_ResNa2[k]-2) else 0 for k in 1:cf.f_ResNNa};
+
 
   algorithm
     if not cf.f_ResNp == 0 then
@@ -253,6 +340,7 @@ partial package PartialHybridTwoPhaseMediumRecord
                       delta^cf.f_ResP2[k]*tau^cf.f_ResP3[k];
       end for;
     end if;
+
     if not cf.f_ResNb == 0 then
       for k in 1:cf.f_ResNb loop
         dd_fRes_dd := dd_fRes_dd + cf.f_ResB1[k]*delta^cf.f_ResB2[k]*tau^
@@ -262,6 +350,7 @@ partial package PartialHybridTwoPhaseMediumRecord
                       delta^cf.f_ResB4[k]);
       end for;
     end if;
+
     if not cf.f_ResNG == 0 then
       for k in 1:cf.f_ResNG loop
         dd_fRes_dd := dd_fRes_dd + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
@@ -272,6 +361,11 @@ partial package PartialHybridTwoPhaseMediumRecord
       end for;
     end if;
 
+    if not cf.f_ResNNa == 0 then
+      for k in 1:cf.f_ResNNa loop
+        dd_fRes_dd :=dd_fRes_dd + delta^2*cf.f_ResNa1[k]*(delta*Disb[k]*Psi_dd[k] + delta*Psi[k]*Disb_dd[k] + 2*delta*Disb_d[k]*Psi_d[k] + 2*Disb[k]*Psi_d[k] + 2*Psi[k]*Disb_d[k]);
+      end for;
+    end if;
   annotation(Inline=false,
              LateInline=true);
   end dd_fRes_dd;
@@ -280,6 +374,27 @@ partial package PartialHybridTwoPhaseMediumRecord
     "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   protected
     EoS cf;
+    Real[cf.f_ResNNa] Psi={exp(-cf.f_ResNa3[k]*(delta - 1)^2 - cf.f_ResNa4[k]*(
+        tau - 1)^2) for k in 1:cf.f_ResNNa} "Psi";
+    Real[cf.f_ResNNa] Theta={(1 - tau) + cf.f_ResNa5[k]*((delta - 1)^2)^(0.5/cf.f_ResNa6
+        [k]) for k in 1:cf.f_ResNNa} "Theta";
+    Real[cf.f_ResNNa] Dis={Theta[k]^2 + cf.f_ResNa7[k]*((delta - 1)^2)^cf.f_ResNa8[k] for k in 1:cf.f_ResNNa} "Distance function";
+    Real[cf.f_ResNNa] Disb = {Dis[k]^cf.f_ResNa2[k] for k in 1:cf.f_ResNNa} "Distance function to the power of b";
+
+    Real[cf.f_ResNNa] Psi_d = {-cf.f_ResNa3[k]*(2*delta-2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_d = {if (delta-1)<>0 then (cf.f_ResNa5[k]*(2*delta-2)*((delta-1)^2)^(0.5/cf.f_ResNa6[k])) / (2*cf.f_ResNa6[k]*(delta-1)^2) else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_d = {if (delta-1)<>0 then (2*cf.f_ResNa7[k]*cf.f_ResNa8[k]*((delta-1)^2)^cf.f_ResNa8[k]) / (delta-1) +2*Theta[k]*Theta_d[k] else 0 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_d = {if Dis[k]<>0 then cf.f_ResNa2[k]*Dis[k]^(cf.f_ResNa2[k]-1)*Dis_d[k] else 0 for k in 1:cf.f_ResNNa};
+
+    Real[cf.f_ResNNa] Psi_t={-cf.f_ResNa4[k]*(2*tau - 2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Theta_t={-1 for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_t={2*Theta[k]*Theta_t[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_t={if Dis[k] <> 0 then cf.f_ResNa2[k]*Dis[k]^(cf.f_ResNa2[k] - 1)*Dis_t[k] else 0 for k in 1:cf.f_ResNNa};
+
+    Real[cf.f_ResNNa] Psi_td = {cf.f_ResNa3[k]*cf.f_ResNa4[k]*(2*delta-2)*(2*tau-2)*Psi[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Dis_td = {2*Theta_d[k]*Theta_t[k] for k in 1:cf.f_ResNNa};
+    Real[cf.f_ResNNa] Disb_td = {if Dis[k]<>0 then cf.f_ResNa2[k]/Dis[k]^3* ((cf.f_ResNa2[k]-1)*Dis[k]^(cf.f_ResNa2[k]+1)*Dis_d[k]*Dis_t[k] + Dis[k]^(cf.f_ResNa2[k]+2)*Dis_td[k]) else 0 for k in 1:cf.f_ResNNa};
+
 
   algorithm
     if not cf.f_ResNp == 0 then
@@ -305,6 +420,13 @@ partial package PartialHybridTwoPhaseMediumRecord
       end for;
     end if;
 
+    if not cf.f_ResNNa == 0 then
+      for k in 1:cf.f_ResNNa loop
+        td_fRes_td :=td_fRes_td + delta*tau*cf.f_ResNa1[k]*(delta*Disb[k]*
+          Psi_td[k] + delta*Psi[k]*Disb_td[k] + delta*Disb_d[k]*Psi_t[k] +
+          delta*Disb_t[k]*Psi_d[k] + Disb[k]*Psi_t[k] + Psi[k]*Disb_t[k]);
+      end for;
+    end if;
   annotation(Inline=false,
              LateInline=true);
   end td_fRes_td;
@@ -554,12 +676,23 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+    if cf.dl_approach == 2 then
+
     x := (sat.Tsat - cf.dl_IO[1])/cf.dl_IO[2];
     for k in 1:cf.dl_Nt-1 loop
       dl_1 := dl_1 + cf.dl_N[k]*x^(cf.dl_Nt - k);
     end for;
     dl_1 := dl_1 + cf.dl_N[cf.dl_Nt];
     dl := dl_1*cf.dl_IO[4] + cf.dl_IO[3];
+
+    elseif cf.dl_approach == 16 then
+     x:=abs(1 - (sat.Tsat/fluidConstants[1].criticalTemperature));
+      for k in 1:cf.dl_Nt - 1 loop
+        dl_1 :=dl_1 + cf.dl_N[k + 1]*x^(k/3);
+      end for;
+      dl :=cf.dl_N[1] + dl_1;
+    end if;
+
 
     annotation(smoothOrder = 2,
                Inline=false,
@@ -574,12 +707,21 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+    if cf.dv_approach ==2 then
     x := (sat.Tsat - cf.dv_IO[1])/cf.dv_IO[2];
     for k in 1:cf.dv_Nt-1 loop
       dv_1 := dv_1 + cf.dv_N[k]*x^(cf.dv_Nt - k);
     end for;
     dv_1 := dv_1 + cf.dv_N[cf.dv_Nt];
     dv := dv_1*cf.dv_IO[4] + cf.dv_IO[3];
+
+  elseif cf.dv_approach == 16 then
+     x:=abs(1 - (sat.Tsat/fluidConstants[1].criticalTemperature));
+      for k in 1:cf.dv_Nt - 1 loop
+        dv_1 :=dv_1 + cf.dv_N[k + 1]*x^(k/3);
+      end for;
+      dv :=cf.dv_N[1] + dv_1;
+    end if;
 
     annotation(smoothOrder = 2,
                Inline=false,
@@ -594,6 +736,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+    if cf.hl_approach == 2 then
+
     x := (sat.psat - cf.hl_IO[1])/cf.hl_IO[2];
     for k in 1:cf.hl_Nt-1 loop
       hl_1 := hl_1 + cf.hl_N[k]*x^(cf.hl_Nt - k);
@@ -601,6 +745,13 @@ partial package PartialHybridTwoPhaseMediumRecord
     hl_1 := hl_1 + cf.hl_N[cf.hl_Nt];
     hl := hl_1*cf.hl_IO[4] + cf.hl_IO[3];
 
+    elseif cf.hl_approach == 1 then
+      x :=abs(1 - sat.psat/fluidConstants[1].criticalPressure);
+      for k in 1:cf.hl_Nt loop
+        hl_1 :=hl_1 + cf.hl_N[k + 1]*x^cf.hl_E[k];
+      end for;
+      hl :=cf.hl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) + hl_1) - cf.h_IIR_I0;
+    end if;
     annotation(smoothOrder = 2,
                Inline=false,
                LateInline=true);
@@ -614,12 +765,21 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+    if cf.hv_approach == 2 then
     x := (sat.psat - cf.hv_IO[1])/cf.hv_IO[2];
     for k in 1:cf.hv_Nt-1 loop
       hv_1 := hv_1 + cf.hv_N[k]*x^(cf.hv_Nt - k);
     end for;
     hv_1 := hv_1 + cf.hv_N[cf.hv_Nt];
     hv := hv_1*cf.hv_IO[4] + cf.hv_IO[3];
+
+  elseif cf.hv_approach == 16 then
+     x:=sat.psat / fluidConstants[1].criticalPressure;
+      for k in 1:cf.dv_Nt - 1 loop
+        hv_1 :=hv_1 + cf.hv_N[k + 1]*x^(k/3);
+      end for;
+      hv :=cf.hv_N[1] + hv_1 - cf.h_IIR_I0;
+    end if;
 
     annotation(smoothOrder = 2,
                Inline=false,
@@ -634,12 +794,22 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+   if cf.sl_approach == 2 then
     x := (sat.psat - cf.sl_IO[1])/cf.sl_IO[2];
     for k in 1:cf.sl_Nt-1 loop
       sl_1 := sl_1 + cf.sl_N[k]*x^(cf.sl_Nt - k);
     end for;
     sl_1 := sl_1 + cf.sl_N[cf.sl_Nt];
     sl := sl_1*cf.sl_IO[4] + cf.sl_IO[3];
+
+   elseif cf.sl_approach == 1 then
+      x :=abs(1 - sat.psat/fluidConstants[1].criticalPressure);
+      for k in 1:cf.hl_Nt loop
+        sl_1 :=sl_1 + cf.sl_N[k + 1]*x^cf.sl_E[k];
+      end for;
+      sl :=cf.sl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) + sl_1) - cf.s_IIR_I0;
+    end if;
+
 
     annotation(smoothOrder = 2,
                Inline=false,
@@ -654,12 +824,21 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+    if cf.sv_approach == 2 then
     x := (sat.psat - cf.sv_IO[1])/cf.sv_IO[2];
     for k in 1:cf.sv_Nt-1 loop
       sv_1 := sv_1 + cf.sv_N[k]*x^(cf.sv_Nt - k);
     end for;
     sv_1 := sv_1 + cf.sv_N[cf.sv_Nt];
     sv := sv_1*cf.sv_IO[4] + cf.sv_IO[3];
+
+  elseif cf.sv_approach == 1 then
+      x :=abs(1 - sat.psat/fluidConstants[1].criticalPressure);
+      for k in 1:cf.hl_Nt loop
+        sv_1 :=sv_1 + cf.sv_N[k + 1]*x^cf.sv_E[k];
+      end for;
+      sv :=cf.sv_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) + sv_1) - cf.s_IIR_I0;
+    end if;
 
     annotation(smoothOrder = 2,
                Inline=false,

@@ -27,7 +27,9 @@ record BubbleDewStatePropertiesBaseDataDefinition
   parameter Real Tsat_IO[:]
   "Mean input (p) | Std input (p) | Mean output (T) | Std output (T)"
   annotation (Dialog(group="Saturation temperature"));
-
+  parameter Integer dl_approach
+  "Approach for bubble density calculation"
+  annotation (Dialog(group="dew density"));
   parameter Integer dl_Nt
   "Number of terms for bubble density"
   annotation (Dialog(group="Bubble density"));
@@ -37,6 +39,10 @@ record BubbleDewStatePropertiesBaseDataDefinition
   parameter Real dl_IO[:]
   "Mean input (T) | Std input (T) | Mean output (dl) | Std output (dl)"
   annotation (Dialog(group="Bubble density"));
+
+  parameter Integer dv_approach
+  "Approach for dew density calculation"
+  annotation (Dialog(group="dew density"));
 
   parameter Integer dv_Nt
   "Number of terms for dew density"
@@ -48,22 +54,34 @@ record BubbleDewStatePropertiesBaseDataDefinition
   "Mean input (T) | Std input (T) | Mean output (dv) | Std output (dv)"
   annotation (Dialog(group="Dew density"));
 
+  parameter Integer hl_approach
+  "Appoach for bubble enthalpy calculation"
+  annotation (Dialog(group="Bubble Enthalpy"));
   parameter Integer hl_Nt
   "Number of terms for bubble enthalpy"
   annotation (Dialog(group="Bubble Enthalpy"));
   parameter Real hl_N[:]
   "Fitting coefficients for bubble enthalpy"
   annotation (Dialog(group="Bubble Enthalpy"));
+  parameter Real hl_E[:]
+  "Fitting coefficients for bubble enthalpy"
+  annotation (Dialog(group="Bubble Enthalpy"));
   parameter Real hl_IO[:]
   "Mean input (p) | Std input (p) | Mean output (hl) | Std output (hl)"
   annotation (Dialog(group="Bubble Enthalpy"));
 
+  parameter Integer hv_approach
+  "Appoach for dew enthalpy calculation"
+  annotation (Dialog(group="Dew Enthalpy"));
   parameter Integer hv_Nt
   "Number of terms for dew enthalpy"
   annotation (Dialog(group="Dew Enthalpy"));
   parameter Real hv_N[:]
   "Fitting coefficients for dew enthalpy"
   annotation (Dialog(group="Dew Enthalpy"));
+  parameter Real hv_E[:]
+  "Fitting coefficients for bubble enthalpy"
+  annotation (Dialog(group="Bubble Enthalpy"));
   parameter Real hv_IO[:]
   "Mean input (p) | Std input (p) | Mean output (hv) | Std output (hv)"
   annotation (Dialog(group="Dew Enthalpy"));

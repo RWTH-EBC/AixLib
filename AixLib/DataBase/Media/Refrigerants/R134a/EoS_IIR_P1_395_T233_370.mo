@@ -35,7 +35,8 @@ record EoS_IIR_P1_395_T233_370
     f_ResG4={0},
     f_ResG5={0},
     f_ResG6={0},
-    f_ResG7={0});
+    f_ResG7={0},
+    f_ResNNa=0);
 
   annotation (Documentation(revisions="<html>
 <ul>
