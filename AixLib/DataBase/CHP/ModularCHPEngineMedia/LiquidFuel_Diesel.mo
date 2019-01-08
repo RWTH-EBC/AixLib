@@ -26,7 +26,7 @@ package LiquidFuel_Diesel
    import Modelica.SIunits.*;
 
   constant Boolean isGas = Fuel.isGasoline "True = Gasoline fuel, False = Liquid fuel";
-  constant MolarMass MM = 1 / sum(Fuel.Xi_liq[i]/Fuel.MMi_liq[i] for i in 1:size(Fuel.MMi_liq, 1)) "Molar mass of the fuel calculated from its composition";
+  constant MolarMass MM = Fuel.MM_liq "Molar mass of the fuel";
   constant SpecificEnergy H_U = Fuel.H_U "Calorific Value of the fuel gas";
   constant Real l_min = L_st*MM/0.02885;
   constant Real L_st = 4.31034*(2.664*Fuel.Xi_liq[1]+7.937*Fuel.Xi_liq[2]-Fuel.Xi_liq[3]) "Stoichiometric air consumption";
@@ -38,10 +38,13 @@ package LiquidFuel_Diesel
     fuelType = "Simple diesel fuel",
     isGasoline = false,
     H_U = 42800000,
+    MM_liq = 0.19,
     Xi_liq = {0.86,0.14,0.0});
 
   end DieselFuel;
   annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
+<p>Gasoline model for liquid diesel fuel.</p>
+<p><u><b>NOTE:</b></u></p>
+<p>The calculation of the engine combustion is partly based on an empirical approach that uses exhaust gas measurements from an SI-engine. This might result in limitations of the model output accuracy!</p>
 </html>"));
 end LiquidFuel_Diesel;

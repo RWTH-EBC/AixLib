@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-class EngineHousing "Engine housing as a simple two layer wall."
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+class EngineHousing0401 "Engine housing as a simple two layer wall."
   import AixLib;
 
   replaceable package Medium3 =
@@ -11,17 +11,11 @@ class EngineHousing "Engine housing as a simple two layer wall."
   parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Calibration properties"));
-
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMatData=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
-    "Thermal engine material data for calculations (most common is cast iron)"
-    annotation (choicesAllMatching=true, Dialog(tab="Structure", group="Material Properties"));
-
-  parameter Modelica.SIunits.ThermalConductivity lambda=EngMatData.lambda
+  parameter Modelica.SIunits.ThermalConductivity lambda=44.5
     "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.Density rhoEngWall=EngMatData.rhoEngWall
+  parameter Modelica.SIunits.Density rhoEngWall=72000
     "Density of the the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c=EngMatData.c
+  parameter Modelica.SIunits.SpecificHeatCapacity c=535
     "Specific heat capacity of the cylinder wall material" annotation (Dialog(tab="Structure", group="Material Properties"));
   parameter Real z
     "Number of engine cylinders"
@@ -38,14 +32,14 @@ class EngineHousing "Engine housing as a simple two layer wall."
   parameter Modelica.SIunits.Mass mEng
     "Total engine mass"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  Real nEng
-    "Current engine speed"
-    annotation (Dialog(tab="Structure", group="Engine Properties"));
   parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
    annotation (Dialog(tab="Thermal"));
   parameter Modelica.SIunits.Temperature T_Amb=298.15
     "Ambient temperature"
+    annotation (Dialog(tab="Thermal"));
+  parameter Modelica.SIunits.Temperature T_ExhPowUniOut
+    "Outlet temperature of exhaust gas"
     annotation (Dialog(tab="Thermal"));
 
 protected
@@ -76,7 +70,7 @@ protected
 
 public
   Modelica.SIunits.Temperature T_Com
-    "Calculated maximum combustion temperature inside the engine"
+    "Calculated maximum combustion temperature inside of cylinder wall"
    annotation (Dialog(tab="Thermal"));
   Modelica.SIunits.Temperature T_CylWall
     "Temperature of cylinder wall";
@@ -84,9 +78,6 @@ public
  "Mean logarithmic coolant temperature" annotation (Dialog(tab="Thermal")); */
   Modelica.SIunits.Temperature T_Exh
     "Inlet temperature of exhaust gas" annotation (Dialog(group="Thermal"));
-  Modelica.SIunits.Temperature T_ExhPowUniOut
-    "Outlet temperature of exhaust gas"
-    annotation (Dialog(tab="Thermal"));
   type RotationSpeed=Real(final unit="1/s", min=0);
   Modelica.SIunits.MassFlowRate m_Exh
     "Mass flow rate of exhaust gas" annotation (Dialog(tab="Thermal"));
@@ -129,6 +120,23 @@ public
         origin={-10,0})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow actualHeatFlowEngine
     annotation (Placement(transformation(extent={{-56,-58},{-36,-38}})));
+  Modelica.Fluid.Vessels.ClosedVolume   exhaustStateCHPOutlet(
+      redeclare package Medium = Medium3,
+    nPorts=2,
+    use_portsData=false,
+    redeclare model HeatTransfer =
+        Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer,
+    T_start=T_Amb,
+    V=0.005,
+    use_HeatTransfer=false)
+    annotation (Placement(transformation(extent={{-10,80},{10,60}})));
+  Modelica.Fluid.Interfaces.FluidPort_a port_EngineIn(redeclare package Medium =
+        Medium3)
+    annotation (Placement(transformation(extent={{-90,50},{-70,70}}),
+        iconTransformation(extent={{-90,50},{-70,70}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium =
+        Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
+        iconTransformation(extent={{70,50},{90,70}})));
   CylToInnerWall cylToInnerWall(
     GInnWall=GInnWall,
     dInn=dInn,
@@ -169,15 +177,10 @@ equation
   else
   T_CylWall=T_Amb;
   end if;*/
-  if nEng*60>=800 then
-  T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
-  else
-  T_CylWall=innerWall.T;
-  end if;
-  CalT_Exh = if (meanCpExh*m_Exh<0.001) then 1000000 else meanCpExh*m_Exh;
+  CalT_Exh = if (meanCpExh*m_Exh<0.001) then 1 else meanCpExh*m_Exh;
   T_Exh=T_ExhPowUniOut + (cylToInnerWall.maximumEngineHeat.y
  - actualHeatFlowEngine.Q_flow)/CalT_Exh;
- // T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
+  T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
   // T_CylWall=(T_Com-T_Amb)/Modelica.Math.log(T_Com/T_Amb);
 
  /* if abs(QuoT_SupRet-1)>0.0001 then
@@ -204,6 +207,10 @@ equation
     annotation (Line(points={{-20,0},{-24,0},{-24,-48}}, color={191,0,0}));
   connect(port_CoolingCircle, engHeatToCoolant.port_b)
     annotation (Line(points={{100,0},{50,0}}, color={191,0,0}));
+  connect(port_EngineIn, exhaustStateCHPOutlet.ports[1]) annotation (Line(
+        points={{-80,60},{-60,60},{-60,80},{-2,80}}, color={0,127,255}));
+  connect(port_EngineOut, exhaustStateCHPOutlet.ports[2]) annotation (Line(
+        points={{80,60},{60,60},{60,80},{2,80}}, color={0,127,255}));
   connect(calculatedExhaustTemp.y, exhaustGasTemperature)
     annotation (Line(points={{-48.9,20},{-84,20}}, color={0,0,127}));
   connect(innerThermalCond2_1.port_b, engHeatToCoolant.port_a)
@@ -286,4 +293,4 @@ alt=\"Calculation of the cylinder wall temperature\"/> </p>
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousing;
+end EngineHousing0401;

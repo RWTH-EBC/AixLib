@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ExhaustHeatExchanger
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger0201
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -81,11 +81,6 @@ model ExhaustHeatExchanger
   Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
   Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
 
-  parameter
-    AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
-    CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
-    "Needed engine data for calculations"
-    annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
   parameter Modelica.SIunits.Time tau=1
     "Time constant of the temperature sensors at nominal flow rate"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
@@ -110,12 +105,11 @@ model ExhaustHeatExchanger
   parameter Modelica.SIunits.Temperature TAmb=298.15
     "Fixed ambient temperature for heat transfer"
     annotation (Dialog(group="Ambient Properties"));
-  parameter Modelica.SIunits.Temperature T_ExhPowUniOut=CHPEngData.T_ExhPowUniOut
-                                                               "Outlet temperature of exhaust gas flow"
+  parameter Modelica.SIunits.Temperature T_ExhPowUniOut=383.15 "Outlet temperature of exhaust gas flow"
   annotation (Dialog(group="Thermal"));
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer" annotation (Dialog(tab="Calibration parameters"));
-  parameter Modelica.SIunits.Length d_iExh=CHPEngData.dExh
+  parameter Modelica.SIunits.Length d_iExh=0.06
     "Inner diameter of exhaust pipe"
     annotation (Dialog(group="Nominal condition"));
   parameter Modelica.SIunits.Volume VExhHex=l_ExhHex/4*Modelica.Constants.pi*
@@ -133,8 +127,7 @@ model ExhaustHeatExchanger
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure pAmb=101325
     "Start value of pressure"
     annotation (Dialog(group="Ambient Properties"));
-  parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=
-      CHPEngData.dp_Coo
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=15000
     "Guess value of dp = port_a.p - port_b.p"
     annotation (Dialog(tab="Advanced", group="Initialization"));
   parameter Modelica.SIunits.Time tauHeaTra=1200
@@ -176,7 +169,7 @@ model ExhaustHeatExchanger
   parameter Modelica.SIunits.Length l_ExhHex=1
     "Length of the exhaust pipe inside the exhaust heat exchanger" annotation (
       Dialog(tab="Calibration parameters", group="Engine parameters"));
-  parameter Modelica.SIunits.PressureDifference dp_CooExhHex=CHPEngData.dp_Coo
+  parameter Modelica.SIunits.PressureDifference dp_CooExhHex=15000
     "Pressure drop at nominal mass flow rate inside the coolant circle "
     annotation (Dialog(group="Nominal condition"));
   AixLib.Fluid.FixedResistances.Pipe pipeCoolant(
@@ -205,8 +198,8 @@ model ExhaustHeatExchanger
         Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer,
     use_portsData=false,
     final m_flow_small=m1_flow_small,
-    nPorts=2,
-    V=VExhHex)                         "Fluid volume"
+    V=0.002,
+    nPorts=2)                          "Fluid volume"
     annotation (Placement(transformation(extent={{-20,60},{-40,40}})));
   AixLib.Fluid.FixedResistances.HydraulicDiameter
                                 pressureDropExhaust(
@@ -299,12 +292,10 @@ equation
 <p>-&gt; Bekannte Gr&ouml;&szlig;en sind die Abgastemperatur bei Austritt und die Gr&ouml;&szlig;enordnung des W&auml;rmestroms an den K&uuml;hlwasserkreislauf</p>
 <p>- Die W&auml;rme&uuml;bertragung an die Umgebung (G_Amb) und den K&uuml;hlwasserkreislauf (G_Cool) wird mittels W&auml;rmeleitung berechnet</p>
 <p>-&gt; Koeffizienten k&ouml;nnen mittels bekannter Gr&ouml;&szlig;en angen&auml;hert werden</p>
-<p>- W&auml;rmeleistung aus der Kondensation von Wasser im Abgas ist momentan nicht ber&uuml;cksichtigt</p>
 <p><br>- Calculation of a convective heat transfer between exhaust gas and heat exchanger capacity as a cylindrical exhaust pipe</p>
 <p>-&gt; For the pipe cross section, the connection cross section of the power unit is used, the heat transfer area and the capacity of the heat exchanger can be calibrated</p>
 <p>-&gt; Known quantities are the exhaust gas temperature at the outlet and the magnitude of the heat flow to the cooling water circuit</p>
 <p>- The heat transfer to the environment (G_Amb) and the cooling water circuit (G_Cool) is calculated by means of heat conduction</p>
 <p>-&gt; Coefficients can be approximated using known quantities</p>
-<p>- Heat output from water condensation in the exhaust gas is currently not considered</p>
 </html>"));
-end ExhaustHeatExchanger;
+end ExhaustHeatExchanger0201;

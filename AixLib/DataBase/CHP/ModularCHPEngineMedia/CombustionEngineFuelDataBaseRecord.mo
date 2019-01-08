@@ -20,9 +20,10 @@ record CombustionEngineFuelDataBaseRecord
 
     //Base-Data for combustion calculations with liquid fuels (sulfur is not considered)
 
-    parameter Modelica.SIunits.SpecificEnergy H_U = 0 "Calorific value of the liquid fuel";
+    parameter Modelica.SIunits.SpecificEnergy H_U = 0 "Calorific value of the liquid fuel based on VK1 by S.Pischinger";
     parameter Modelica.SIunits.MassFraction Xi_liq[:] = {0,0,0} "Elements mass fractions of carbon, hydrogen and oxygen";
-    parameter Modelica.SIunits.MolarMass MMi_liq[:] = {12.011, 1.008, 15.999} "Molar mass of the main liquid fuel elements (C,H,O)";
+    parameter Modelica.SIunits.MolarMass MMi_liq[:] = {0.012, 0.001, 0.016} "Molar mass of the main liquid fuel elements (C,H,O)";
+    parameter Modelica.SIunits.MolarMass MM_liq = 0 "Total molar mass of the liquid fuel based on VK1 by S.Pischinger";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

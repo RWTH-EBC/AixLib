@@ -1,4 +1,7 @@
 BoilerSystem
 CHPSystem
 HeatGeneratorNoControllSystem
-ModularCHPSubsystems
+ModularCHP_Engine
+ModularCHP_ExhaustHeatExchanger
+ModularCHP_ExhaustHeatExchangerStartStop
+ModularCHP_EngineStartStop

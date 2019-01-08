@@ -24,12 +24,13 @@ model ModelEnginePowerAndHeatToCooling3012
                                  property_T=356, X_a=0.50)   constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
-  parameter DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
+  parameter
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPEngDataBaseRecord_MaterialData
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousing engineToCoolant(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.EngineHousing0401 engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPGasolineEngineLIQUIDFUEL.m_Exh,
@@ -90,7 +91,7 @@ model ModelEnginePowerAndHeatToCooling3012
     T=T_CoolRet)
     annotation (Placement(transformation(extent={{-110,-68},{-90,-48}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPGasolineEngine
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngine0501
     cHPGasolineEngineLIQUIDFUEL(
     redeclare package Medium1 = Medium_Gasoline,
     redeclare package Medium2 = Medium_Air,
@@ -186,7 +187,7 @@ equation
                                                    color={0,127,255}));
   connect(inletGasoline.m_flow_in,massFlowGas. y) annotation (Line(points={{-76,
           68.4},{-84,68.4},{-84,68},{-87,68}}, color={0,0,127}));
-  connect(inletGasoline.ports[1], cHPGasolineEngineLIQUIDFUEL.port_Gasoline)
+  connect(inletGasoline.ports[1], cHPGasolineEngineLIQUIDFUEL.port_Fuel)
     annotation (Line(points={{-60,62},{-44,62},{-44,49.14},{-40,49.14}}, color=
           {0,127,255}));
   connect(inletAir.ports[1], cHPGasolineEngineLIQUIDFUEL.port_Air) annotation (

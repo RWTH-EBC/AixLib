@@ -1,5 +1,5 @@
 within AixLib.DataBase.CHP.ModularCHPEngineMedia;
-package LiquidFuel_Petrol "Simple petrol fuel for CHP-engine combustion"
+package LiquidFuel_LPG "Simple LPG fuel for CHP-engine combustion"
 
   extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
     mediumName="Just dummy data and no use for calculation",
@@ -19,7 +19,7 @@ package LiquidFuel_Petrol "Simple petrol fuel for CHP-engine combustion"
 
   constant
     AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord
-    Fuel=PetrolFuel() "Needed fuel data for combustion calculations"
+    Fuel=LPGFuel()    "Needed fuel data for combustion calculations"
     annotation (choicesAllMatching=true, Dialog(group="Natural gas type"));
 
    import Modelica.SIunits.*;
@@ -32,17 +32,17 @@ package LiquidFuel_Petrol "Simple petrol fuel for CHP-engine combustion"
   //Unused information for simulation stability
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;
 
-  record PetrolFuel "Data record for simple petrol fuel"
+  record LPGFuel "Data record for simple LPG fuel"
     extends
       AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
-    fuelType = "Simple petrol fuel",
+    fuelType = "Simple LPG fuel",
     isGasoline = false,
-    H_U = 42000000,
-    MM_liq = 0.098,
-    Xi_liq = {0.84,0.14,0.02});
+    H_U = 45330000,
+    MM_liq = 0.048,
+    Xi_liq = {0.82,0.18,0.00});
 
-  end PetrolFuel;
+  end LPGFuel;
   annotation (Documentation(info="<html>
 <p>Gasoline model for natural gas type H.</p>
 </html>"));
-end LiquidFuel_Petrol;
+end LiquidFuel_LPG;

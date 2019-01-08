@@ -25,7 +25,8 @@ model ModelEnginePowerAndHeatToCoolingHeatPorts
                                  property_T=356, X_a=0.50)   constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
-  parameter DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
+  parameter
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPEngDataBaseRecord_MaterialData
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));

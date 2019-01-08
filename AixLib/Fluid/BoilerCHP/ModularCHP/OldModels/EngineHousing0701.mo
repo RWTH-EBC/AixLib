@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-class EngineHousing "Engine housing as a simple two layer wall."
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+class EngineHousing0701 "Engine housing as a simple two layer wall."
   import AixLib;
 
   replaceable package Medium3 =
@@ -11,17 +11,11 @@ class EngineHousing "Engine housing as a simple two layer wall."
   parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Calibration properties"));
-
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMatData=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
-    "Thermal engine material data for calculations (most common is cast iron)"
-    annotation (choicesAllMatching=true, Dialog(tab="Structure", group="Material Properties"));
-
-  parameter Modelica.SIunits.ThermalConductivity lambda=EngMatData.lambda
+  parameter Modelica.SIunits.ThermalConductivity lambda=44.5
     "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.Density rhoEngWall=EngMatData.rhoEngWall
+  parameter Modelica.SIunits.Density rhoEngWall=72000
     "Density of the the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c=EngMatData.c
+  parameter Modelica.SIunits.SpecificHeatCapacity c=535
     "Specific heat capacity of the cylinder wall material" annotation (Dialog(tab="Structure", group="Material Properties"));
   parameter Real z
     "Number of engine cylinders"
@@ -46,6 +40,9 @@ class EngineHousing "Engine housing as a simple two layer wall."
    annotation (Dialog(tab="Thermal"));
   parameter Modelica.SIunits.Temperature T_Amb=298.15
     "Ambient temperature"
+    annotation (Dialog(tab="Thermal"));
+  parameter Modelica.SIunits.Temperature T_ExhPowUniOut
+    "Outlet temperature of exhaust gas"
     annotation (Dialog(tab="Thermal"));
 
 protected
@@ -84,9 +81,6 @@ public
  "Mean logarithmic coolant temperature" annotation (Dialog(tab="Thermal")); */
   Modelica.SIunits.Temperature T_Exh
     "Inlet temperature of exhaust gas" annotation (Dialog(group="Thermal"));
-  Modelica.SIunits.Temperature T_ExhPowUniOut
-    "Outlet temperature of exhaust gas"
-    annotation (Dialog(tab="Thermal"));
   type RotationSpeed=Real(final unit="1/s", min=0);
   Modelica.SIunits.MassFlowRate m_Exh
     "Mass flow rate of exhaust gas" annotation (Dialog(tab="Thermal"));
@@ -286,4 +280,4 @@ alt=\"Calculation of the cylinder wall temperature\"/> </p>
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousing;
+end EngineHousing0701;

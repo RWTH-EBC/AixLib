@@ -1,5 +1,5 @@
-﻿within AixLib.DataBase.CHP.ModularCHPEngineData;
-record CHPEngDataBaseRecord "Base record for CHP engine data"
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+record CHPEngDataBaseRecord_MaterialData "Base record for CHP engine data"
   extends Modelica.Icons.Record;
 
   constant Boolean SIEngine = true "Default:True=SI-Engine(Otto) / False=DI-Engine(Diesel)";
@@ -59,4 +59,4 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
 <p>- <u>Exhaust and Coolant:</u> <b>dExh</b>(default=0.06m), <b>dCoo</b>(default=0.04m), <b>dp_Coo</b>(default=0.15bar)<b>, m_flowCooNominal</b>(default=0.00003*Q_MaxHea-0.2043)</p>
 <p>- <u>Engine material:</u> <b>lambda</b>, <b>rhoEngWall</b>, <b>c </b>(default is cast iron(most common))</p>
 </html>"));
-end CHPEngDataBaseRecord;
+end CHPEngDataBaseRecord_MaterialData;

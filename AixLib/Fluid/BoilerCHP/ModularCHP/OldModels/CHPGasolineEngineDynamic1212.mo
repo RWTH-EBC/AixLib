@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
 model CHPGasolineEngineDynamic1212
+  import AixLib;
   replaceable package Medium1 =
       DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeH
                                                                 constrainedby
@@ -16,8 +17,9 @@ model CHPGasolineEngineDynamic1212
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                  annotation(choicesAllMatching=true);
 
-  parameter DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord CHPEngData=
-      DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
+  parameter
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPEngDataBaseRecord_MaterialData
+    CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "Needed engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
@@ -29,8 +31,12 @@ model CHPGasolineEngineDynamic1212
   type GasConstant=Real(final unit="J/(mol.K)");
   constant GasConstant R = 8.31446 "Gasconstante for calculation purposes";
   constant Real QuoDCyl = CHPEngData.QuoDCyl;
-  constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_MaxFue/H_U*(1+Lambda*L_St) "Maximal exhaust gas flow based on the fuel and combustion properties";
-  constant Modelica.SIunits.Mass m_FueEngRot = CHPEngData.P_MaxFue*60/(H_U*CHPEngData.nEngMax*CHPEngData.i) "Injected fuel mass per engine rotation(presumed as constant)";
+  constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_FueNominal/H_U*(
+      1 + Lambda*L_St)
+    "Maximal exhaust gas flow based on the fuel and combustion properties";
+  constant Modelica.SIunits.Mass m_FueEngRot=CHPEngData.P_FueNominal*60/(H_U*
+      CHPEngData.nEngMax*CHPEngData.i)
+    "Injected fuel mass per engine rotation(presumed as constant)";
   constant Modelica.SIunits.Pressure p_Amb = 101325 "Ambient pressure";
   constant Modelica.SIunits.Pressure p_mi = p_mfNom+p_meNom "Constant indicated mean effective cylinder pressure";
   constant Modelica.SIunits.Pressure p_meNom = CHPEngData.p_meNom "Nominal mean effective cylinder pressure";
@@ -72,7 +78,9 @@ model CHPGasolineEngineDynamic1212
   Modelica.SIunits.SpecificHeatCapacity meanCpExh "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature";
   Modelica.SIunits.SpecificEnergy h_Exh = 1000*(-286 + 1.011*CHPEngData.T_ExhPowUniOut - 27.29*Lambda + 0.000136*CHPEngData.T_ExhPowUniOut^2 - 0.0255*CHPEngData.T_ExhPowUniOut*Lambda + 6.425*Lambda^2) "Specific enthalpy of the exhaust gas";
   Modelica.SIunits.Power P_eff "Effective(mechanical) engine power";
-  Modelica.SIunits.Power P_Fue(min=0, max=CHPEngData.P_MaxFue) = m_Fue*H_U "Fuel expenses at operating point";
+  Modelica.SIunits.Power P_Fue(
+    min=0,
+    max=CHPEngData.P_FueNominal) = m_Fue*H_U "Fuel expenses at operating point";
   Modelica.SIunits.Power H_Exh "Enthalpy stream of the exhaust gas";
   Modelica.SIunits.Power CalQ_therm "Calculated heat from engine combustion";
   Modelica.SIunits.Power Q_therm(min=0) "Total heat from engine combustion";

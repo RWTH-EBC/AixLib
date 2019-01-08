@@ -1,25 +1,22 @@
 within AixLib.Fluid.BoilerCHP.Examples;
-model ModularCHPSubsystems
+model ModularCHP_Engine
   "Example that illustrates use of modular CHP engine submodel"
+  import AixLib;
   extends Modelica.Icons.Example;
 
   replaceable package Medium_Gasoline =
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_Petrol   constrainedby
+      DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG             constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                 annotation(choicesAllMatching=true);
 
-  replaceable package Medium_Air =
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                         annotation(choicesAllMatching=true);
+  package Medium_Air =
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir;
 
-  replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                 annotation(choicesAllMatching=true);
+  package Medium_Exhaust =
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus;
 
-  parameter DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
+  parameter
+    AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
@@ -30,18 +27,15 @@ model ModularCHPSubsystems
   parameter Modelica.SIunits.AbsolutePressure p_ambient=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
 
-  Modelica.Blocks.Sources.RealExpression massFlowGas(y=
-        cHPGasolineEngineLIQUIDFUEL.m_Fue)
+  Modelica.Blocks.Sources.RealExpression massFlowFuel(y=cHPGasolineEngine.m_Fue)
     annotation (Placement(transformation(extent={{-82,20},{-62,40}})));
-  Modelica.Fluid.Sources.MassFlowSource_T
-                                        inletGasoline(
+  Modelica.Fluid.Sources.MassFlowSource_T inletFuel(
     redeclare package Medium = Medium_Gasoline,
     use_m_flow_in=true,
     nPorts=1,
     T=T_ambient)
     annotation (Placement(transformation(extent={{-50,16},{-34,32}})));
-  Modelica.Blocks.Sources.RealExpression massFlowAir(y=
-        cHPGasolineEngineLIQUIDFUEL.m_Air)
+  Modelica.Blocks.Sources.RealExpression massFlowAir(y=cHPGasolineEngine.m_Air)
     annotation (Placement(transformation(extent={{-82,-8},{-62,12}})));
   Modelica.Fluid.Sources.MassFlowSource_T
                                         inletAir(
@@ -51,15 +45,19 @@ model ModularCHPSubsystems
     use_T_in=false,
     T=T_ambient)
     annotation (Placement(transformation(extent={{-50,-12},{-34,4}})));
-  ModularCHP.CHPGasolineEngine
-    cHPGasolineEngineLIQUIDFUEL(
+  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionEngine
+                                         cHPGasolineEngine(
     redeclare package Medium1 = Medium_Gasoline,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,
     T_Amb=T_ambient,
     CHPEngData=CHPEngineModel,
-    inertia(w(fixed=true, start=100)),
-    T_logEngCool=629.3)
+    inertia(w(
+        fixed=true,
+        start=85,
+        displayUnit="rad/s"), J=1),
+    T_logEngCool=356.15,
+    T_ExhCHPOut=383.15)
     annotation (Placement(transformation(extent={{-14,-12},{14,16}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
     quadraticSpeedDependentTorque(w_nominal=160, tau_nominal=-100)
@@ -74,28 +72,24 @@ model ModularCHPSubsystems
   inner Modelica.Fluid.System system(p_ambient=p_ambient, T_ambient=T_ambient)
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
 equation
-  connect(massFlowGas.y, inletGasoline.m_flow_in) annotation (Line(points={{-61,
-          30},{-56,30},{-56,30.4},{-50,30.4}}, color={0,0,127}));
+  connect(massFlowFuel.y, inletFuel.m_flow_in) annotation (Line(points={{-61,30},
+          {-56,30},{-56,30.4},{-50,30.4}}, color={0,0,127}));
   connect(massFlowAir.y, inletAir.m_flow_in) annotation (Line(points={{-61,2},{-56,
           2},{-56,2.4},{-50,2.4}}, color={0,0,127}));
-  connect(inletGasoline.ports[1], cHPGasolineEngineLIQUIDFUEL.port_Gasoline)
-    annotation (Line(points={{-34,24},{-28,24},{-28,12.92},{-14,12.92}}, color={
-          0,127,255}));
-  connect(inletAir.ports[1], cHPGasolineEngineLIQUIDFUEL.port_Air) annotation (
-      Line(points={{-34,-4},{-28,-4},{-28,8.72},{-14,8.72}}, color={0,127,255}));
-  connect(cHPGasolineEngineLIQUIDFUEL.flange_a, quadraticSpeedDependentTorque.flange)
+  connect(inletAir.ports[1], cHPGasolineEngine.port_Air) annotation (Line(
+        points={{-34,-4},{-28,-4},{-28,8.72},{-14,8.72}}, color={0,127,255}));
+  connect(cHPGasolineEngine.flange_a, quadraticSpeedDependentTorque.flange)
     annotation (Line(points={{0,16},{-6,16},{-6,50},{-12,50}}, color={0,0,0}));
-  connect(cHPGasolineEngineLIQUIDFUEL.exhaustGasTemperature, realExpT_Exh.y)
-    annotation (Line(points={{14,7.6},{24,7.6},{24,-6},{33,-6}}, color={0,0,127}));
-  connect(cHPGasolineEngineLIQUIDFUEL.port_Exhaust, outletExhaustGas.ports[1])
-    annotation (Line(points={{13.72,12.08},{24,12.08},{24,24},{34,24}}, color={0,
-          127,255}));
+  connect(cHPGasolineEngine.exhaustGasTemperature, realExpT_Exh.y) annotation (
+      Line(points={{14,7.6},{24,7.6},{24,-6},{33,-6}}, color={0,0,127}));
+  connect(cHPGasolineEngine.port_Exhaust, outletExhaustGas.ports[1])
+    annotation (Line(points={{13.72,12.08},{24,12.08},{24,24},{34,24}}, color={
+          0,127,255}));
+  connect(inletFuel.ports[1], cHPGasolineEngine.port_Fuel) annotation (Line(
+        points={{-34,24},{-28,24},{-28,12.92},{-14,12.92}}, color={0,127,255}));
   annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.CHP\">AixLib.Fluid.BoilerCHP.CHP</a> in different conditions.
-Inlet and outlet temperature as well as the electrical and thermal power of the
-CHP can be observed.
-Change the inlet water temperature profile to see the reaction timing. </p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.CHP\">AixLib.Fluid.ModularCHP.CHPCombustionEngine</a> in different conditions. Fuel and engine model as well as the mechanical and thermal output of the power unit can be observed. Change the engine properties to see its impact to the calculated engine combustion. </p>
 </html>",
         revisions="<html>
 <ul>
@@ -108,5 +102,5 @@ documentation.</li>
 <li>by Pooyan Jahangiri:<br/>First implementation.</li>
 </ul>
 </html>"),
-experiment(StopTime=35000, Interval=60));
-end ModularCHPSubsystems;
+experiment(StopTime=300, Interval=0.1));
+end ModularCHP_Engine;

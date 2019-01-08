@@ -16,6 +16,15 @@ package ModularCHP "Modular and complex CHP model with physical calculation appr
 
 
 
+  record EngineMaterialData
+    extends Modelica.Icons.Record;
+
+    constant Modelica.SIunits.ThermalConductivity lambda = 44.5    "Thermal conductivity of the engine block material (default value is 44.5)";
+    constant Modelica.SIunits.Density rhoEngWall = 7200            "Density of the the engine block material (default value is 72000)";
+    constant Modelica.SIunits.SpecificHeatCapacity c = 535         "Specific heat capacity of the cylinder wall material (default value is 535)";
+
+  end EngineMaterialData;
+
   annotation (Icon(graphics={                                             Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},

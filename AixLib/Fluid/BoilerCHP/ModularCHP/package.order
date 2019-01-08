@@ -3,8 +3,13 @@ CylToInnerWall
 heatFromExhaustGas
 ASM_CHPGenerator
 cHPEngineExample
-EngineHousing
 engineBlock
-CHPGasolineEngine
 ExhaustHeatExchanger
+CHPCombustionEngine
+EngineHousing
 ModelEnginePowerAndHeatToCooling
+EngineMaterialData
+EngineMaterial_CastIron
+EngineMaterial_SpheroidalGraphiteIron
+EngineMaterial_CastAluminium
+EngineHousingConstant

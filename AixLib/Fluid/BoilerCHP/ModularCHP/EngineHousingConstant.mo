@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-class EngineHousing "Engine housing as a simple two layer wall."
+class EngineHousingConstant
+  "Engine housing as a simple two layer wall."
   import AixLib;
 
   replaceable package Medium3 =
@@ -17,25 +18,25 @@ class EngineHousing "Engine housing as a simple two layer wall."
     "Thermal engine material data for calculations (most common is cast iron)"
     annotation (choicesAllMatching=true, Dialog(tab="Structure", group="Material Properties"));
 
-  parameter Modelica.SIunits.ThermalConductivity lambda=EngMatData.lambda
+  constant Modelica.SIunits.ThermalConductivity lambda=EngMatData.lambda
     "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.Density rhoEngWall=EngMatData.rhoEngWall
+  constant Modelica.SIunits.Density rhoEngWall=EngMatData.rhoEngWall
     "Density of the the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c=EngMatData.c
+  constant Modelica.SIunits.SpecificHeatCapacity c=EngMatData.c
     "Specific heat capacity of the cylinder wall material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Real z
+  constant Real z
     "Number of engine cylinders"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Modelica.SIunits.Thickness dCyl
+  constant Modelica.SIunits.Thickness dCyl
     "Engine cylinder diameter"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Modelica.SIunits.Thickness hStr
+  constant Modelica.SIunits.Thickness hStr
     "Engine stroke"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Real eps
+  constant Real eps
     "Engine compression ratio"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  parameter Modelica.SIunits.Mass mEng
+  constant Modelica.SIunits.Mass mEng
     "Total engine mass"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
   Real nEng
@@ -49,7 +50,7 @@ class EngineHousing "Engine housing as a simple two layer wall."
     annotation (Dialog(tab="Thermal"));
 
 protected
-  parameter Modelica.SIunits.Area A_WInn=z*(Modelica.Constants.pi*dCyl*(dCyl/2 + hStr*(1 + 1/(eps - 1))))
+  constant Modelica.SIunits.Area A_WInn=z*(Modelica.Constants.pi*dCyl*(dCyl/2 + hStr*(1 + 1/(eps - 1))))
     "Area of heat transporting surface from cylinder wall to outer engine block"
     annotation (Dialog(tab="Structure"));
   parameter Modelica.SIunits.Mass mEngWall=A_WInn*rhoEngWall*dInn
@@ -286,4 +287,4 @@ alt=\"Calculation of the cylinder wall temperature\"/> </p>
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousing;
+end EngineHousingConstant;

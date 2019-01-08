@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
 model CHPGasolineEngine
+  import AixLib;
   replaceable package Medium1 =
       DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeH
                                                                 constrainedby
@@ -16,19 +17,23 @@ model CHPGasolineEngine
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                  annotation(choicesAllMatching=true);
 
-  parameter DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord CHPEngData=
-      DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
+  parameter
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPEngDataBaseRecord_MaterialData
+    CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "Needed engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
   parameter Modelica.SIunits.Volume VCyl = CHPEngData.VEng/CHPEngData.z "Cylinder displacement";
   type RotationSpeed=Real(final unit="1/s", min=0);
   parameter RotationSpeed nEng(max=CHPEngData.nEngMax) = 25.583 "Engine speed at full load";
-  parameter Modelica.SIunits.Power P_Fue(max=CHPEngData.P_MaxFue) = 49000 "Maximum fuel expenses";
+  parameter Modelica.SIunits.Power P_Fue(max=CHPEngData.P_FueNominal) = 49000
+    "Maximum fuel expenses";
   parameter Modelica.SIunits.Temperature T_Amb=298.15   "Ambient temperature (matches to fuel and combustion air temperature)";
   type GasConstant=Real(final unit="J/(mol.K)");
   constant GasConstant R = 8.31446 "Gasconstante for calculation purposes";
-  constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_MaxFue/H_U*(1+Lambda*L_St) "Maximal exhaust gas flow based on the fuel and combustion properties";
+  constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_FueNominal/H_U*(
+      1 + Lambda*L_St)
+    "Maximal exhaust gas flow based on the fuel and combustion properties";
   constant Modelica.SIunits.Pressure p_Amb = 101325 "Ambient pressure";
   constant Modelica.SIunits.SpecificEnergy H_U = Medium1.H_U "Specific calorific value of the fuel";
   constant Real Lambda=0.21/(0.21-CHPEngData.xO2Exh) "Combustion air ratio from the residual oxygen content in the exhaust gas";
