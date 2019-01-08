@@ -46,7 +46,7 @@ model ThermalZoneEquipped
     final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
-  Airflow.AirCurtain.AirCurtainSimplyfied airCurtainSimplyfied(
+  Airflow.AirCurtain.AirCurtainSimplified airCurtainSimplyfied(
     VolumeFlowAirCurtain=zoneParam.V_flow_air_curtain,
     TemperatureAdditionAirCurtain=zoneParam.T_add_air_curtain,
     eta_air_curtain=zoneParam.eta_air_curtain,
@@ -119,7 +119,8 @@ equation
         points={{20,-40},{22,-40},{22,-24},{26,-24},{26,-8},{74,-8},{74,50},{98,
           50}}, color={191,0,0}));
   connect(weaBus.TDryBul, airCurtainSimplyfied.Tambient) annotation (Line(
-      points={{-120,34},{-120,28},{-104,28},{-104,-10},{-12,-10},{-12,-46},{-3,-46}},
+      points={{-120,34},{-120,28},{-104,28},{-104,-10},{-12,-10},{-12,-46},{
+          -2.8,-46}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
