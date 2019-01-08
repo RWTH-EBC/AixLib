@@ -2,10 +2,6 @@ within AixLib.Airflow.AirCurtain.Examples;
 model AirCurtain
   "This model is an example for the use of an air curtain in the low order model"
   extends Modelica.Icons.Example;
-
-
-
-
   AirCurtainSimplified                    airCurtainSimplyfied(
     VolumeFlowAirCurtain=5,
     TemperatureAdditionAirCurtain=5,
@@ -30,12 +26,18 @@ model AirCurtain
     offset=0,
     startTime=25200)
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
+  BoundaryConditions.WeatherData.Bus        weaBus
+    "Weather data bus"
+    annotation (Placement(transformation(extent={{-84,56},{-50,88}}),
+    iconTransformation(extent={{-70,-12},{-50,8}})));
 equation
   connect(airCurtainSimplyfied.port_b, airload.port)
     annotation (Line(points={{20,2.54545},{40,2.54545},{40,0},{63,0}},
                                              color={191,0,0}));
+  connect(pulse.y, airCurtainSimplyfied.schedule) annotation (Line(points={{-39,50},
+          {-24,50},{-24,14.1818},{-15.2364,14.1818}},     color={0,0,127}));
   connect(weaDat.weaBus, weaBus) annotation (Line(
-      points={{-80,72},{-72,72},{-72,0},{-64,0}},
+      points={{-80,72},{-67,72}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -43,14 +45,12 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(weaBus.TDryBul, airCurtainSimplyfied.T_ambient) annotation (Line(
-      points={{-64,0},{-38,0},{-38,-6.18182},{-15.2364,-6.18182}},
+      points={{-67,72},{-67,-6.18182},{-15.2364,-6.18182}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(pulse.y, airCurtainSimplyfied.schedule) annotation (Line(points={{-39,
-          50},{-24,50},{-24,14.1818},{-15.2364,14.1818}}, color={0,0,127}));
   annotation (experiment(StopTime=1209600, Interval=3600));
 end AirCurtain;
