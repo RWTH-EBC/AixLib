@@ -400,7 +400,7 @@ partial package PartialHybridTwoPhaseMediumFormula
 
   redeclare function extends density "Density of refrigerant"
   algorithm
-    d := state.d;
+    d :=state.d;
 
     annotation(derivative=density_der,
           Inline=true);

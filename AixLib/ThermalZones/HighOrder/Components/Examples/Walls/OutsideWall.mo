@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
 model OutsideWall
   extends Modelica.Icons.Example;
   ThermalZones.HighOrder.Components.Walls.Wall wall_simple(

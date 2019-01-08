@@ -4,6 +4,7 @@ record TSP_IIR_P1_395_T233_370
   extends
     AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition(
     name="Coefficients taken from Engelpracht",
+    T_ph_regions = 2,
     T_phNt={4, 9, 40,
             4, 9, 40},
     Tl_phA={0.0532548969281581, -0.0327402932674217,
@@ -52,6 +53,7 @@ record TSP_IIR_P1_395_T233_370
              258541.38494292, 87545.3330013087, 0, 1,
              1623982.43177388, 1517145.25710131,
              464371.882231745, 51004.186742787, 0, 1},
+    T_ps_regions = 2,
     T_psNt={4, 10, 45,
             4, 10, 45},
     Tl_psA={0.94996237530845, 0.303157516353388,
@@ -104,6 +106,7 @@ record TSP_IIR_P1_395_T233_370
             1126.31192475932, 244.853512874793, 0, 1,
             13.204266881401, 1.16895892611495,
             1831.0596916082, 116.879525072462, 0, 1},
+    d_pT_regions = 2,
     d_pTNt={3, 12, 46,
             18, 4, 85},
     dl_pTA={7.87433412548864, -0.393021216688428,

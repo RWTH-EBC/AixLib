@@ -85,21 +85,39 @@ record BubbleDewStatePropertiesBaseDataDefinition
   parameter Real hv_IO[:]
   "Mean input (p) | Std input (p) | Mean output (hv) | Std output (hv)"
   annotation (Dialog(group="Dew Enthalpy"));
+  parameter Real h_IIR_I0
+  "Delta between IIR reference point and I0"
+  annotation (Dialog(group="Dew Enthalpy"));
+  parameter Real s_IIR_I0
+  "Delta between IIR and I0 referendce points"
+  annotation (Dialog(group="Bubble Entropy"));
 
+  parameter Integer sl_approach
+  "Appoach for bubble entropy calculation"
+  annotation (Dialog(group="Bubble Entropy"));
   parameter Integer sl_Nt
   "Number of terms for bubble entropy"
   annotation (Dialog(group="Bubble Entropy"));
   parameter Real sl_N[:]
   "Fitting coefficients for bubble entropy"
   annotation (Dialog(group="Bubble Entropy"));
+  parameter Real sl_E[:]
+  "Fitting coefficients for bubble entropy"
+  annotation (Dialog(group="Bubble Entropy"));
   parameter Real sl_IO[:]
   "Mean input (p) | Std input (p) | Mean output (sl) | Std output (sl)"
   annotation (Dialog(group="Bubble Entropy"));
 
+  parameter Integer sv_approach
+  "Appoach for dew entropy calculation"
+  annotation (Dialog(group="Dew Entropy"));
   parameter Integer sv_Nt
   "Number of terms for dew entropy"
   annotation (Dialog(group="Dew Entropy"));
   parameter Real sv_N[:]
+  "Fitting coefficients for dew entropy"
+  annotation (Dialog(group="Dew Entropy"));
+  parameter Real sv_E[:]
   "Fitting coefficients for dew entropy"
   annotation (Dialog(group="Dew Entropy"));
   parameter Real sv_IO[:]

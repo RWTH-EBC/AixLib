@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
+within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model ValidationHeatPump
 
   extends Modelica.Icons.Example;

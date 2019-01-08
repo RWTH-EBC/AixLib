@@ -213,8 +213,7 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 </html>
-"), 
-    Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
+"), Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},
                 fillPattern = FillPattern.Solid,

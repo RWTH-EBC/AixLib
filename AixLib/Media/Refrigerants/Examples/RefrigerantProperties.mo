@@ -24,22 +24,22 @@ model RefrigerantProperties
   parameter Modelica.SIunits.SpecificEnthalpy h_max=550e3-505.8414680723884e+03
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_min(displayUnit="kg/m3")=15
+  parameter Modelica.SIunits.Density d_min=12
     "Fluid limit: Minimum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_max(displayUnit="kg/m3")=1000
+  parameter Modelica.SIunits.Density d_max=1300
     "Fluid limit: Maximum density"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.AbsolutePressure p_min=1000000
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max=9900000
+  parameter Modelica.SIunits.AbsolutePressure p_max=10000000
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_min=234.15
+  parameter Modelica.SIunits.Temperature T_min=233.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max(displayUnit="K")=304.1282
+  parameter Modelica.SIunits.Temperature T_max=373.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
@@ -52,6 +52,8 @@ model RefrigerantProperties
 
   // Define variables that shall be tested
   //
+  Modelica.SIunits.SpecificEntropy s_dew;
+  Modelica.SIunits.SpecificEntropy s_bubble;
   Modelica.SIunits.Temperature T(start = T_min)
     "Actual temperature";
   Modelica.SIunits.AbsolutePressure p(start = p_min)
@@ -84,8 +86,8 @@ model RefrigerantProperties
     "Actual state calculated by d and T";
   Medium.ThermodynamicState state_ph
     "Actual state calculated by p and h";
-//   Medium.ThermodynamicState state_ps
-//     "Actual state calculated by p and s";
+   Medium.ThermodynamicState state_ps
+     "Actual state calculated by p and s";
 
   // Define records to summarise further variables that shall be tested
   //
@@ -109,8 +111,8 @@ model RefrigerantProperties
        "Actual joule Thomson Coefficient";
      Medium.DynamicViscosity eta
        "Actual dynamic viscosity";
-     Medium.ThermalConductivity lambda
-       "Actual thermal conductivity";
+      Medium.ThermalConductivity lambda
+        "Actual thermal conductivity";
      Medium.SurfaceTension sigma
        "Acutal surface tension";
    end ThermodynamicProperties;
@@ -136,14 +138,14 @@ model RefrigerantProperties
        "Error of density_ph compared to density_pT";
      Real errorSpecificEnthalpy_phMax
        "Error of specificEnthalpy_ph compared to specificEnthalpy_pT";
-    //      Real errorTemperature_psMax
-    //        "Error of temperature_ps compared to T";
-    //      Real errorPressure_psMax
-    //        "Error of pressure_ps compared to p";
-    //      Real errorDensity_psMax
-    //        "Error of density_ps compared to density_pT";
-    //      Real errorSpecificEnthalpy_psMax
-    //        "Error of specificEnthalpy_ps compared to specificEnthalpy_pT";
+       Real errorTemperature_psMax
+         "Error of temperature_ps compared to T";
+       Real errorPressure_psMax
+         "Error of pressure_ps compared to p";
+       Real errorDensity_psMax
+         "Error of density_ps compared to density_pT";
+       Real errorSpecificEnthalpy_psMax
+         "Error of specificEnthalpy_ps compared to specificEnthalpy_pT";
      Real relErrorTemperature_dTMax
       "Relative error of temperature_dT compared to T";
      Real relErrorPressure_dTMax
@@ -160,14 +162,14 @@ model RefrigerantProperties
       "Relative error of density_ph compared to density_pT";
      Real relErrorSpecificEnthalpy_phMax
       "Relative error of specificEnthalpy_ph compared to specificEnthalpy_pT";
-    //      Real relErrorTemperature_psMax
-    //       "Relative error of temperature_ps compared to T";
-    //      Real relErrorPressure_psMax
-    //       "Relative error of pressure_ps compared to p";
-    //      Real relErrorDensity_psMax
-    //       "Relative error of density_ps compared to density_pT";
-    //      Real relErrorSpecificEnthalpy_psMax
-    //       "Relative error of specificEnthalpy_ps compared to specificEnthalpy_pT";
+       Real relErrorTemperature_psMax
+        "Relative error of temperature_ps compared to T";
+       Real relErrorPressure_psMax
+        "Relative error of pressure_ps compared to p";
+       Real relErrorDensity_psMax
+        "Relative error of density_ps compared to density_pT";
+       Real relErrorSpecificEnthalpy_psMax
+        "Relative error of specificEnthalpy_ps compared to specificEnthalpy_pT";
    end StateErrors;
 
    ThermodynamicProperties thermodynamicProperties
@@ -212,7 +214,7 @@ equation
     p =  min((p_min + convP * (time - convChange)),p_max);
   end if;
 
-  // Calculate furhter thermodynamic state properties
+  // Calculate further thermodynamic state properties
   //
   d = Medium.density(state_pT);
   h = Medium.specificEnthalpy(state_pT);
@@ -235,7 +237,9 @@ equation
   state_pT = Medium.setState_pT(p,T);
   state_dT = Medium.setState_dT(d,T);
   state_ph = Medium.setState_ph(p,h);
-  //state_ps = Medium.setState_ps(p,s);
+  state_ps = Medium.setState_ps(p,s);
+  s_dew = Medium.dewEntropy(satT);
+  s_bubble = Medium.bubbleEntropy(satT);
 
    // Calculate further properties
    //
@@ -263,10 +267,10 @@ equation
    stateErros.errorPressure_phMax = abs(state_ph.p - state_pT.p);
    stateErros.errorDensity_phMax = abs(state_ph.d - state_pT.d);
    stateErros.errorSpecificEnthalpy_phMax = abs(state_ph.h - state_pT.h);
-//    stateErros.errorTemperature_psMax = abs(state_ps.T - state_pT.T);
-//    stateErros.errorPressure_psMax = abs(state_ps.p - state_pT.p);
-//    stateErros.errorDensity_psMax = abs(state_ps.d - state_pT.d);
-//    stateErros.errorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h);
+    stateErros.errorTemperature_psMax = abs(state_ps.T - state_pT.T);
+    stateErros.errorPressure_psMax = abs(state_ps.p - state_pT.p);
+    stateErros.errorDensity_psMax = abs(state_ps.d - state_pT.d);
+    stateErros.errorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h);
 
    stateErros.relErrorTemperature_dTMax =  abs(state_dT.T - state_pT.T) /
      abs(state_pT.T)*100;
@@ -284,14 +288,14 @@ equation
      abs(state_pT.d)*100;
    stateErros.relErrorSpecificEnthalpy_phMax = abs(state_ph.h - state_pT.h) /
      abs(state_pT.h)*100;
-//    stateErros.relErrorTemperature_psMax = abs(state_ps.T - state_pT.T) /
-//      abs(state_pT.T)*100;
-//    stateErros.relErrorPressure_psMax = abs(state_ps.p - state_pT.p) /
-//      abs(state_pT.p)*100;
-//    stateErros.relErrorDensity_psMax = abs(state_ps.d - state_pT.d) /
-//      abs(state_pT.d)*100;
-//    stateErros.relErrorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h) /
-//      abs(state_pT.h)*100;
+    stateErros.relErrorTemperature_psMax = abs(state_ps.T - state_pT.T) /
+      abs(state_pT.T)*100;
+    stateErros.relErrorPressure_psMax = abs(state_ps.p - state_pT.p) /
+      abs(state_pT.p)*100;
+    stateErros.relErrorDensity_psMax = abs(state_ps.d - state_pT.d) /
+      abs(state_pT.d)*100;
+    stateErros.relErrorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h) /
+      abs(state_pT.h)*100;
 
    annotation(experiment(StopTime=6400, Tolerance=1e-006),
       Documentation(info="<html>

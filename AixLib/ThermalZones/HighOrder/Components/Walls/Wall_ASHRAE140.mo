@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall_ASHRAE140
   "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 

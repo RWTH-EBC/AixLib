@@ -853,90 +853,48 @@ partial package PartialHybridTwoPhaseMediumRecord
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase=0
-      "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
   protected
     TSP cf;
     SmoothTransition st;
 
-    SpecificEnthalpy dh = st.T_ph;
-    SpecificEnthalpy h_dew = 0;
-    SpecificEnthalpy h_bubble = 0;
+    SpecificEnthalpy dh=st.T_ph;
+    SpecificEnthalpy h_dew=0;
+    SpecificEnthalpy h_bubble=0;
+    SpecificEnthalpy hIIR;
+    Real h_scr1=0;
+    Real h_scr=0;
+    Real x_scr=0;
 
-    Real x1 = 0;
-    Real y1 = 0;
-    Real T1 = 0;
-    Real x2 = 0;
-    Real y2 = 0;
-    Real T2 = 0;
-    Integer count = 0;
+    Real x1=0;
+    Real y1=0;
+    Real T1=0;
+    Real x2=0;
+    Real y2=0;
+    Real T2=0;
+    Real x3=0;
+    Real T3=0;
+    Real y3=0;
+    Integer count=0;
 
   algorithm
-    h_dew := dewEnthalpy(sat = setSat_p(p=p));
-    h_bubble := bubbleEnthalpy(sat = setSat_p(p=p));
+    if cf.T_ph_regions == 3 then
+      x_scr := (p - cf.hscr_IO[1])/cf.hscr_IO[2];
+      for i in 1:cf.hscr_Nt loop
+        h_scr1 := h_scr1 + cf.hscr_N[i]*x_scr^(i - 1);
+      end for;
+      h_scr := cf.hscr_IO[3] + cf.hscr_IO[4]*h_scr1;
+    end if;
 
-    if h<h_bubble-dh then
-      x1 := (p-cf.T_phIO[1])/cf.T_phIO[2];
-      y1 := (h-cf.T_phIO[3])/cf.T_phIO[4];
-      T1 := cf.Tl_phD[1];
-      for i in 1:cf.T_phNt[1] loop
-        T1 := T1 + cf.Tl_phA[i]*x1^i;
-      end for;
-      for j in 1:cf.T_phNt[2] loop
-        T1 := T1 + cf.Tl_phB[j]*y1^j;
-      end for;
-      if cf.T_phNt[1] >= cf.T_phNt[2] then
-        for i in 1:cf.T_phNt[1]-1 loop
-          for j in 1:min(i,cf.T_phNt[2]) loop
-            count :=count + 1;
-            T1 := T1 + cf.Tl_phC[count]*
-                  x1^(cf.T_phNt[1] - i)*y1^j;
-          end for;
-        end for;
-      else
-        for j in 1:cf.T_phNt[2]-1 loop
-          for i in 1:min(j,cf.T_phNt[1]) loop
-            count :=count + 1;
-            T1 := T1 + cf.Tl_phC[count]*
-                  y1^(cf.T_phNt[2] - j)*x1^i;
-          end for;
-        end for;
-      end if;
-      T := T1*cf.T_phIO[6]+cf.T_phIO[5];
-    elseif h>h_dew+dh then
-       x2 := (p-cf.T_phIO[7])/cf.T_phIO[8];
-       y2 := (h-cf.T_phIO[9])/cf.T_phIO[10];
-       T2 := cf.Tv_phD[1];
-       for i in 1:cf.T_phNt[4] loop
-         T2:= T2 + cf.Tv_phA[i]*x2^i;
-       end for;
-       for j in 1:cf.T_phNt[5] loop
-         T2:= T2 + cf.Tv_phB[j]*y2^j;
-       end for;
-       if cf.T_phNt[4] >= cf.T_phNt[5] then
-         for i in 1:cf.T_phNt[4]-1 loop
-           for j in 1:min(i, cf.T_phNt[5]) loop
-             count :=count + 1;
-             T2 := T2 + cf.Tv_phC[count]*
-                   x2^(cf.T_phNt[4] - i)*y2^j;
-           end for;
-         end for;
-       else
-         for j in 1:cf.T_phNt[5]-1 loop
-           for i in 1:min(j,cf.T_phNt[4]) loop
-             count :=count + 1;
-             T2 := T2 + cf.Tv_phC[count]*
-                   y2^(cf.T_phNt[5] - j)*x2^i;
-           end for;
-         end for;
-       end if;
-       T := T2*cf.T_phIO[12]+cf.T_phIO[11];
-    else
-      if h<h_bubble then
-        x1 := (p-cf.T_phIO[1])/cf.T_phIO[2];
-        y1 := (h-cf.T_phIO[3])/cf.T_phIO[4];
+    hIIR := h + cf.h_IIR_IO;
+    h_dew := dewEnthalpy(sat=setSat_p(p=p)) + cf.h_IIR_IO;
+    h_bubble := bubbleEnthalpy(sat=setSat_p(p=p)) + cf.h_IIR_IO;
+    if p < fluidConstants[1].criticalPressure then
+      if hIIR < h_bubble - dh then
+        x1 := (p - cf.T_phIO[1])/cf.T_phIO[2];
+        y1 := (hIIR - cf.T_phIO[3])/cf.T_phIO[4];
         T1 := cf.Tl_phD[1];
         for i in 1:cf.T_phNt[1] loop
           T1 := T1 + cf.Tl_phA[i]*x1^i;
@@ -945,64 +903,174 @@ partial package PartialHybridTwoPhaseMediumRecord
           T1 := T1 + cf.Tl_phB[j]*y1^j;
         end for;
         if cf.T_phNt[1] >= cf.T_phNt[2] then
-          for i in 1:cf.T_phNt[1]-1 loop
+          for i in 1:cf.T_phNt[1] - 1 loop
             for j in 1:min(i, cf.T_phNt[2]) loop
-              count :=count + 1;
-              T1 := T1 + cf.Tl_phC[count]*
-                    x1^(cf.T_phNt[1] - i)*y1^j;
+              count := count + 1;
+              T1 := T1 + cf.Tl_phC[count]*x1^(cf.T_phNt[1] - i)*y1^j;
             end for;
           end for;
         else
-          for j in 1:cf.T_phNt[2]-1 loop
-            for i in 1:min(j,cf.T_phNt[1]) loop
-              count :=count + 1;
-              T1 := T1 + cf.Tl_phC[count]*
-                    y1^(cf.T_phNt[2] - j)*x1^i;
+          for j in 1:cf.T_phNt[2] - 1 loop
+            for i in 1:min(j, cf.T_phNt[1]) loop
+              count := count + 1;
+              T1 := T1 + cf.Tl_phC[count]*y1^(cf.T_phNt[2] - j)*x1^i;
             end for;
           end for;
         end if;
-        T1 := T1*cf.T_phIO[6]+cf.T_phIO[5];
-        T := saturationTemperature(p)*(1 - (h_bubble - h)/dh) +
-          T1*(h_bubble - h)/dh;
-      elseif h>h_dew then
-        x2 := (p-cf.T_phIO[7])/cf.T_phIO[8];
-        y2 := (h-cf.T_phIO[9])/cf.T_phIO[10];
+        T := T1*cf.T_phIO[6] + cf.T_phIO[5];
+      elseif hIIR > h_dew + dh then
+        x2 := (p - cf.T_phIO[7])/cf.T_phIO[8];
+        y2 := (hIIR - cf.T_phIO[9])/cf.T_phIO[10];
         T2 := cf.Tv_phD[1];
         for i in 1:cf.T_phNt[4] loop
-          T2:= T2 + cf.Tv_phA[i]*x2^i;
+          T2 := T2 + cf.Tv_phA[i]*x2^i;
         end for;
         for j in 1:cf.T_phNt[5] loop
-          T2:= T2 + cf.Tv_phB[j]*y2^j;
+          T2 := T2 + cf.Tv_phB[j]*y2^j;
         end for;
         if cf.T_phNt[4] >= cf.T_phNt[5] then
-          for i in 1:cf.T_phNt[4]-1 loop
+          for i in 1:cf.T_phNt[4] - 1 loop
             for j in 1:min(i, cf.T_phNt[5]) loop
-              count :=count + 1;
-              T2 := T2 + cf.Tv_phC[count]*
-                    x2^(cf.T_phNt[4] - i)*y2^j;
+              count := count + 1;
+              T2 := T2 + cf.Tv_phC[count]*x2^(cf.T_phNt[4] - i)*y2^j;
             end for;
           end for;
         else
-          for j in 1:cf.T_phNt[5]-1 loop
-            for i in 1:min(j,cf.T_phNt[4]) loop
-              count :=count + 1;
-              T2 := T2 + cf.Tv_phC[count]*
-                    y2^(cf.T_phNt[5] - j)*x2^i;
+          for j in 1:cf.T_phNt[5] - 1 loop
+            for i in 1:min(j, cf.T_phNt[4]) loop
+              count := count + 1;
+              T2 := T2 + cf.Tv_phC[count]*y2^(cf.T_phNt[5] - j)*x2^i;
             end for;
           end for;
         end if;
-        T2 := T2*cf.T_phIO[12]+cf.T_phIO[11];
-        T := saturationTemperature(p)*(1 - (h - h_dew)/dh) +
-             T2*(h - h_dew)/dh;
+        T := T2*cf.T_phIO[12] + cf.T_phIO[11];
       else
-        T := saturationTemperature(p);
+        if hIIR < h_bubble then
+          x1 := (p - cf.T_phIO[1])/cf.T_phIO[2];
+          y1 := (hIIR - cf.T_phIO[3])/cf.T_phIO[4];
+          T1 := cf.Tl_phD[1];
+          for i in 1:cf.T_phNt[1] loop
+            T1 := T1 + cf.Tl_phA[i]*x1^i;
+          end for;
+          for j in 1:cf.T_phNt[2] loop
+            T1 := T1 + cf.Tl_phB[j]*y1^j;
+          end for;
+          if cf.T_phNt[1] >= cf.T_phNt[2] then
+            for i in 1:cf.T_phNt[1] - 1 loop
+              for j in 1:min(i, cf.T_phNt[2]) loop
+                count := count + 1;
+                T1 := T1 + cf.Tl_phC[count]*x1^(cf.T_phNt[1] - i)*y1^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.T_phNt[2] - 1 loop
+              for i in 1:min(j, cf.T_phNt[1]) loop
+                count := count + 1;
+                T1 := T1 + cf.Tl_phC[count]*y1^(cf.T_phNt[2] - j)*x1^i;
+              end for;
+            end for;
+          end if;
+          T1 := T1*cf.T_phIO[6] + cf.T_phIO[5];
+          T := saturationTemperature(p)*(1 - (h_bubble - hIIR)/dh) + T1*(
+            h_bubble - hIIR)/dh;
+        elseif hIIR > h_dew then
+          x2 := (p - cf.T_phIO[7])/cf.T_phIO[8];
+          y2 := (hIIR - cf.T_phIO[9])/cf.T_phIO[10];
+          T2 := cf.Tv_phD[1];
+          for i in 1:cf.T_phNt[4] loop
+            T2 := T2 + cf.Tv_phA[i]*x2^i;
+          end for;
+          for j in 1:cf.T_phNt[5] loop
+            T2 := T2 + cf.Tv_phB[j]*y2^j;
+          end for;
+          if cf.T_phNt[4] >= cf.T_phNt[5] then
+            for i in 1:cf.T_phNt[4] - 1 loop
+              for j in 1:min(i, cf.T_phNt[5]) loop
+                count := count + 1;
+                T2 := T2 + cf.Tv_phC[count]*x2^(cf.T_phNt[4] - i)*y2^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.T_phNt[5] - 1 loop
+              for i in 1:min(j, cf.T_phNt[4]) loop
+                count := count + 1;
+                T2 := T2 + cf.Tv_phC[count]*y2^(cf.T_phNt[5] - j)*x2^i;
+              end for;
+            end for;
+          end if;
+          T2 := T2*cf.T_phIO[12] + cf.T_phIO[11];
+          T := saturationTemperature(p)*(1 - (hIIR - h_dew)/dh) + T2*(hIIR -
+            h_dew)/dh;
+        else
+          T := saturationTemperature(p);
+        end if;
+      end if;
+    elseif cf.T_ph_regions == 3 then
+      if hIIR < h_scr then
+        //SC
+        x1 := (p - cf.T_phIO[1])/cf.T_phIO[2];
+        y1 := (hIIR - cf.T_phIO[3])/cf.T_phIO[4];
+        T1 := cf.Tl_phD[1];
+        for i in 1:cf.T_phNt[1] loop
+          T1 := T1 + cf.Tl_phA[i]*x1^i;
+        end for;
+        for j in 1:cf.T_phNt[2] loop
+          T1 := T1 + cf.Tl_phB[j]*y1^j;
+        end for;
+        if cf.T_phNt[1] >= cf.T_phNt[2] then
+          for i in 1:cf.T_phNt[1] - 1 loop
+            for j in 1:min(i, cf.T_phNt[2]) loop
+              count := count + 1;
+              T1 := T1 + cf.Tl_phC[count]*x1^(cf.T_phNt[1] - i)*y1^j;
+            end for;
+          end for;
+        else
+          for j in 1:cf.T_phNt[2] - 1 loop
+            for i in 1:min(j, cf.T_phNt[1]) loop
+              count := count + 1;
+              T1 := T1 + cf.Tl_phC[count]*y1^(cf.T_phNt[2] - j)*x1^i;
+            end for;
+          end for;
+        end if;
+        T := T1*cf.T_phIO[6] + cf.T_phIO[5];
+      elseif hIIR > h_scr then
+        //SCr
+        x3 := (p - cf.T_phIO[13])/cf.T_phIO[14];
+        y3 := (hIIR - cf.T_phIO[15])/cf.T_phIO[16];
+        T3 := cf.Tscr_phD[1];
+        for i in 1:cf.T_phNt[7] loop
+          T3 := T3 + cf.Tscr_phA[i]*x3^i;
+        end for;
+        for j in 1:cf.T_phNt[8] loop
+          T3 := T3 + cf.Tscr_phB[j]*y3^j;
+        end for;
+        if cf.T_phNt[5] >= cf.T_phNt[8] then
+          for i in 1:cf.T_phNt[1] - 1 loop
+            for j in 1:min(i, cf.T_phNt[8]) loop
+              count := count + 1;
+              T3 := T3 + cf.Tscr_phC[count]*x3^(cf.T_phNt[7] - i)*y3^j;
+            end for;
+          end for;
+        else
+          for j in 1:cf.T_phNt[8] - 1 loop
+            for i in 1:min(j, cf.T_phNt[7]) loop
+              count := count + 1;
+              T3 := T3 + cf.Tscr_phC[count]*y3^(cf.T_phNt[8] - j)*x3^i;
+            end for;
+          end for;
+        end if;
+        T := T3*cf.T_phIO[18] + cf.T_phIO[17];
       end if;
     end if;
 
-    annotation(derivative(noDerivative=phase)=temperature_ph_der,
-               inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
-               Inline=false,
-               LateInline=false);
+    annotation (
+      derivative(noDerivative=phase) = temperature_ph_der,
+      inverse(h=specificEnthalpy_pT(
+              p=p,
+              T=T,
+              phase=phase)),
+      Inline=false,
+      LateInline=false);
   end temperature_ph;
 
   redeclare function temperature_ps
@@ -1021,6 +1089,10 @@ partial package PartialHybridTwoPhaseMediumRecord
     SpecificEntropy ds = st.T_ps;
     SpecificEntropy s_dew = 0;
     SpecificEntropy s_bubble = 0;
+    SpecificEntropy s_IIR;
+    Real s_scr = 0;
+    Real s_scr1 = 0;
+    Real x_scr = 0;
 
     Real x1 = 0;
     Real y1 = 0;
@@ -1028,15 +1100,29 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x2 = 0;
     Real y2 = 0;
     Real T2 = 0;
+    Real x3 = 0;
+    Real y3 = 0;
+
+    Real T3 = 0;
     Integer count = 0;
 
   algorithm
-    s_dew := dewEntropy(sat = setSat_p(p=p));
-    s_bubble := bubbleEntropy(sat = setSat_p(p=p));
+    s_IIR :=s + cf.s_IIR_IO;
+    if cf.T_ps_regions == 3 then
+        x_scr := (p - cf.sscr_IO[1])/cf.sscr_IO[2];
+          for i in 1:cf.sscr_Nt loop
+            s_scr1 := s_scr1 + cf.sscr_N[i]*x_scr^(i - 1);
+          end for;
+          s_scr :=cf.sscr_IO[3] + cf.sscr_IO[4]*s_scr1;
+       end if;
+    s_dew := dewEntropy(sat = setSat_p(p=p))+ cf.s_IIR_IO;
+    s_bubble := bubbleEntropy(sat = setSat_p(p=p))+ cf.s_IIR_IO;
 
-    if s<s_bubble-ds then
+    if p < fluidConstants[1].criticalPressure then
+    if s_IIR<s_bubble-ds then //SC
+
       x1 := (log(p)-cf.T_psIO[1])/cf.T_psIO[2];
-      y1 := (s-cf.T_psIO[3])/cf.T_psIO[4];
+      y1 := (s_IIR-cf.T_psIO[3])/cf.T_psIO[4];
       T1 := cf.Tl_psD[1];
       for i in 1:cf.T_psNt[1] loop
         T1:= T1 + cf.Tl_psA[i]*x1^i;
@@ -1063,9 +1149,9 @@ partial package PartialHybridTwoPhaseMediumRecord
       end if;
       T := T1;
       T := T1*cf.T_psIO[6]+cf.T_psIO[5];
-    elseif s>s_dew+ds then
+    elseif s_IIR>s_dew+ds then //SH
         x2 := (log(p)-cf.T_psIO[7])/cf.T_psIO[8];
-        y2 := (s-cf.T_psIO[9])/cf.T_psIO[10];
+        y2 := (s_IIR-cf.T_psIO[9])/cf.T_psIO[10];
         T2 := cf.Tv_psD[1];
         for i in 1:cf.T_psNt[4] loop
           T2:= T2 + cf.Tv_psA[i]*x2^i;
@@ -1092,9 +1178,9 @@ partial package PartialHybridTwoPhaseMediumRecord
         end if;
         T := T2*cf.T_psIO[12]+cf.T_psIO[11];
     else
-      if s<s_bubble then
+      if s_IIR<s_bubble then //SC+smooth
         x1 := (log(p)-cf.T_psIO[1])/cf.T_psIO[2];
-        y1 := (s-cf.T_psIO[3])/cf.T_psIO[4];
+        y1 := (s_IIR-cf.T_psIO[3])/cf.T_psIO[4];
         T1 := cf.Tl_psD[1];
         for i in 1:cf.T_psNt[1] loop
           T1:= T1 + cf.Tl_psA[i]*x1^i;
@@ -1120,11 +1206,11 @@ partial package PartialHybridTwoPhaseMediumRecord
           end for;
         end if;
         T1 := T1*cf.T_psIO[6]+cf.T_psIO[5];
-        T := saturationTemperature(p)*(1 - (s_bubble - s)/ds) +
-             T1*(s_bubble - s)/ds;
-      elseif s>s_dew then
+        T := saturationTemperature(p)*(1 - (s_bubble - s_IIR)/ds) +
+             T1*(s_bubble - s_IIR)/ds;
+      elseif s_IIR>s_dew then //SH+smooth
         x2 := (log(p)-cf.T_psIO[7])/cf.T_psIO[8];
-        y2 := (s-cf.T_psIO[9])/cf.T_psIO[10];
+        y2 := (s_IIR-cf.T_psIO[9])/cf.T_psIO[10];
         T2 := cf.Tv_psD[1];
         for i in 1:cf.T_psNt[4] loop
           T2:= T2 + cf.Tv_psA[i]*x2^i;
@@ -1150,12 +1236,71 @@ partial package PartialHybridTwoPhaseMediumRecord
           end for;
         end if;
         T2 := T2*cf.T_psIO[12]+cf.T_psIO[11];
-        T := saturationTemperature(p)*(1 - (s - s_dew)/ds) +
-             T2*(s - s_dew)/ ds;
+        T := saturationTemperature(p)*(1 - (s_IIR - s_dew)/ds) +
+             T2*(s_IIR - s_dew)/ ds;
       else
         T := saturationTemperature(p);
       end if;
     end if;
+    elseif cf.T_ps_regions == 3 then
+      if s_IIR < s_scr then //SC
+      x1 := (log(p)-cf.T_psIO[1])/cf.T_psIO[2];
+      y1 := (s_IIR-cf.T_psIO[3])/cf.T_psIO[4];
+      T1 := cf.Tl_psD[1];
+      for i in 1:cf.T_psNt[1] loop
+        T1:= T1 + cf.Tl_psA[i]*x1^i;
+      end for;
+      for j in 1:cf.T_psNt[2] loop
+        T1:= T1 + cf.Tl_psB[j]*y1^j;
+      end for;
+      if cf.T_psNt[1] >= cf.T_psNt[2] then
+        for i in 1:cf.T_psNt[1]-1 loop
+          for j in 1:min(i,cf.T_psNt[2]) loop
+            count :=count + 1;
+            T1 := T1 + cf.Tl_psC[count]*
+                  x1^(cf.T_psNt[1] - i)*y1^j;
+          end for;
+        end for;
+      else
+        for j in 1:cf.T_psNt[2]-1 loop
+          for i in 1:min(j,cf.T_psNt[1]) loop
+            count :=count + 1;
+            T1 := T1 + cf.Tl_psC[count]*
+                  y1^(cf.T_psNt[2] - j)*x1^i;
+          end for;
+        end for;
+      end if;
+      T := T1;
+      T := T1*cf.T_psIO[6]+cf.T_psIO[5];
+      elseif s_IIR>s_scr then //SCr
+        x3 := (p - cf.T_psIO[13])/cf.T_psIO[14];
+        y3 := (s_IIR - cf.T_psIO[15])/cf.T_psIO[16];
+        T3 := cf.Tscr_psD[1];
+        for i in 1:cf.T_psNt[7] loop
+          T3 := T3 + cf.Tscr_psA[i]*x3^i;
+        end for;
+        for j in 1:cf.T_psNt[8] loop
+          T3 := T3 + cf.Tscr_psB[j]*y3^j;
+        end for;
+        if cf.T_psNt[5] >= cf.T_psNt[8] then
+          for i in 1:cf.T_psNt[1] - 1 loop
+            for j in 1:min(i, cf.T_psNt[8]) loop
+              count := count + 1;
+              T3 := T3 + cf.Tscr_psC[count]*x3^(cf.T_psNt[7] - i)*y3^j;
+            end for;
+          end for;
+        else
+          for j in 1:cf.T_psNt[8] - 1 loop
+            for i in 1:min(j, cf.T_psNt[7]) loop
+              count := count + 1;
+              T3 := T3 + cf.Tscr_psC[count]*y3^(cf.T_psNt[8] - j)*x3^i;
+            end for;
+          end for;
+        end if;
+        T := T3*cf.T_psIO[18] + cf.T_psIO[17];
+      end if;
+    end if;
+
 
     annotation(derivative(noDerivative=phase)=temperature_ps_der);
   end temperature_ps;
@@ -1165,146 +1310,588 @@ partial package PartialHybridTwoPhaseMediumRecord
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
-    input FixedPhase phase = 0
-      "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
     output Density d "Density";
 
   protected
     TSP cf;
     SmoothTransition st;
 
-    AbsolutePressure dp = st.d_pT;
-    SaturationProperties sat = setSat_T(T=T);
+    AbsolutePressure dp=st.d_pT;
+    SaturationProperties sat=setSat_T(T=T);
 
-    Real x1 = 0;
-    Real y1 = 0;
-    Real d1 = 0;
-    Real x2 = 0;
-    Real y2 = 0;
-    Real d2 = 0;
-    Integer count = 0;
+    Real x1=0;
+    Real y1=0;
+    Real d1=0;
+    Real x2=0;
+    Real y2=0;
+    Real d2=0;
+    Real x3=0;
+    Real y3=0;
+    Real d3=0;
+    Real x4=0;
+    Real y4=0;
+    Real d4=0;
+    Real x5=0;
+    Real y5=0;
+    Real d5=0;
+    Real x6=0;
+    Real y6=0;
+    Real d6=0;
+    Real fitSCrSH;
+    Real fitSCrSC;
+    Real x_SCrSH;
+    Real x_SCrSC;
+    Real fitSCrSH1;
+    Real fitSCrSC1;
+    Real x_SCrSH1;
+    Real x_SCrSC1;
+    Integer count=0;
 
   algorithm
-    if p<sat.psat-dp then
-      x1 := (p-cf.d_pTIO[7])/cf.d_pTIO[8];
-      y1 := (T-cf.d_pTIO[9])/cf.d_pTIO[10];
-      d1 := cf.dv_pTD[1];
-      for i in 1:cf.d_pTNt[4] loop
-        d1:= d1 + cf.dv_pTA[i]*x1^i;
-      end for;
-      for j in 1:cf.d_pTNt[5] loop
-        d1:= d1 + cf.dv_pTB[j]*y1^j;
-      end for;
-      if cf.d_pTNt[4] >= cf.d_pTNt[5] then
-        for i in 1:cf.d_pTNt[4]-1 loop
-          for j in 1:min(i,cf.d_pTNt[5]) loop
-            count :=count + 1;
-            d1 := d1 + cf.dv_pTC[count]*
-                  x1^(cf.d_pTNt[4] - i)*y1^j;
-          end for;
-        end for;
-      else
-        for j in 1:cf.d_pTNt[5]-1 loop
-          for i in 1:min(j,cf.d_pTNt[4]) loop
-            count :=count + 1;
-            d1 := d1 + cf.dv_pTC[count]*
-                  y1^(cf.d_pTNt[5] - j)*x1^i;
-          end for;
-        end for;
-      end if;
-      d := d1*cf.d_pTIO[12]+cf.d_pTIO[11];
-    elseif p>sat.psat+dp then
-      x2 := (p-cf.d_pTIO[1])/cf.d_pTIO[2];
-      y2 := (T-cf.d_pTIO[3])/cf.d_pTIO[4];
-      d2 := cf.dl_pTD[1];
-      for i in 1:cf.d_pTNt[1] loop
-        d2:= d2 + cf.dl_pTA[i]*x2^i;
-      end for;
-      for j in 1:cf.d_pTNt[2] loop
-        d2:= d2 + cf.dl_pTB[j]*y2^j;
-      end for;
-      if cf.d_pTNt[1] >= cf.d_pTNt[2] then
-        for i in 1:cf.d_pTNt[1]-1 loop
-          for j in 1:min(i,cf.d_pTNt[2]) loop
-            count :=count + 1;
-            d2 := d2 + cf.dl_pTC[count]*
-                  x2^(cf.d_pTNt[1] - i)*y2^j;
-          end for;
-        end for;
-      else
-        for j in 1:cf.d_pTNt[2]-1 loop
-          for i in 1:min(j,cf.d_pTNt[1]) loop
-            count :=count + 1;
-            d2 := d2 + cf.dl_pTC[count]*
-                  y2^(cf.d_pTNt[2] - j)*x2^i;
-          end for;
-        end for;
-      end if;
-      d := d2*cf.d_pTIO[6]+cf.d_pTIO[5];
-    else
-      if p<sat.psat then
-        x1 := (p-cf.d_pTIO[7])/cf.d_pTIO[8];
-        y1 := (T-cf.d_pTIO[9])/cf.d_pTIO[10];
+    if cf.d_pT_regions == 2 then
+
+      if p < sat.psat - dp then
+        x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+        y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
         d1 := cf.dv_pTD[1];
         for i in 1:cf.d_pTNt[4] loop
-          d1:= d1 + cf.dv_pTA[i]*x1^i;
+          d1 := d1 + cf.dv_pTA[i]*x1^i;
         end for;
         for j in 1:cf.d_pTNt[5] loop
-          d1:= d1 + cf.dv_pTB[j]*y1^j;
+          d1 := d1 + cf.dv_pTB[j]*y1^j;
         end for;
         if cf.d_pTNt[4] >= cf.d_pTNt[5] then
-          for i in 1:cf.d_pTNt[4]-1 loop
-            for j in 1:min(i,cf.d_pTNt[5]) loop
-              count :=count + 1;
-              d1 := d1 + cf.dv_pTC[count]*
-                    x1^(cf.d_pTNt[4] - i)*y1^j;
+          for i in 1:cf.d_pTNt[4] - 1 loop
+            for j in 1:min(i, cf.d_pTNt[5]) loop
+              count := count + 1;
+              d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
             end for;
           end for;
         else
-          for j in 1:cf.d_pTNt[5]-1 loop
-            for i in 1:min(j,cf.d_pTNt[4]) loop
-              count :=count + 1;
-              d1 := d1 + cf.dv_pTC[count]*
-                    y1^(cf.d_pTNt[5] - j)*x1^i;
+          for j in 1:cf.d_pTNt[5] - 1 loop
+            for i in 1:min(j, cf.d_pTNt[4]) loop
+              count := count + 1;
+              d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
             end for;
           end for;
         end if;
-        d1 := d1*cf.d_pTIO[12]+cf.d_pTIO[11];
-        d := bubbleDensity(sat)*(1 -(sat.psat - p)/dp) + d1*(sat.psat - p)/dp;
-      elseif p>=sat.psat then
-        x2 := (p-cf.d_pTIO[1])/cf.d_pTIO[2];
-        y2 := (T-cf.d_pTIO[3])/cf.d_pTIO[4];
+        d := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+      elseif p > sat.psat + dp then
+        x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+        y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
         d2 := cf.dl_pTD[1];
         for i in 1:cf.d_pTNt[1] loop
-          d2:= d2 + cf.dl_pTA[i]*x2^i;
+          d2 := d2 + cf.dl_pTA[i]*x2^i;
         end for;
         for j in 1:cf.d_pTNt[2] loop
-          d2:= d2 + cf.dl_pTB[j]*y2^j;
+          d2 := d2 + cf.dl_pTB[j]*y2^j;
         end for;
         if cf.d_pTNt[1] >= cf.d_pTNt[2] then
-          for i in 1:cf.d_pTNt[1]-1 loop
-            for j in 1:min(i,cf.d_pTNt[2]) loop
-              count :=count + 1;
-              d2 := d2 + cf.dl_pTC[count]*
-                    x2^(cf.d_pTNt[1] - i)*y2^j;
+          for i in 1:cf.d_pTNt[1] - 1 loop
+            for j in 1:min(i, cf.d_pTNt[2]) loop
+              count := count + 1;
+              d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
             end for;
           end for;
         else
-          for j in 1:cf.d_pTNt[2]-1 loop
-            for i in 1:min(j,cf.d_pTNt[1]) loop
-              count :=count + 1;
-              d2 := d2 + cf.dl_pTC[count]*
-                    y2^(cf.d_pTNt[2] - j)*x2^i;
+          for j in 1:cf.d_pTNt[2] - 1 loop
+            for i in 1:min(j, cf.d_pTNt[1]) loop
+              count := count + 1;
+              d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
             end for;
           end for;
         end if;
-        d2 := d2*cf.d_pTIO[6]+cf.d_pTIO[5];
-        d := dewDensity(sat)*(1 -(p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
+        d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+      else
+        if p < sat.psat then
+          x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+          y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
+          d1 := cf.dv_pTD[1];
+          for i in 1:cf.d_pTNt[4] loop
+            d1 := d1 + cf.dv_pTA[i]*x1^i;
+          end for;
+          for j in 1:cf.d_pTNt[5] loop
+            d1 := d1 + cf.dv_pTB[j]*y1^j;
+          end for;
+          if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+            for i in 1:cf.d_pTNt[4] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[5]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[5] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[4]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
+              end for;
+            end for;
+          end if;
+          d1 := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+          d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)/
+            dp;
+        elseif p >= sat.psat then
+          x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+          y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
+          d2 := cf.dl_pTD[1];
+          for i in 1:cf.d_pTNt[1] loop
+            d2 := d2 + cf.dl_pTA[i]*x2^i;
+          end for;
+          for j in 1:cf.d_pTNt[2] loop
+            d2 := d2 + cf.dl_pTB[j]*y2^j;
+          end for;
+          if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+            for i in 1:cf.d_pTNt[1] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[2]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[2] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[1]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
+              end for;
+            end for;
+          end if;
+          d2 := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+          d := dewDensity(sat)*(1 - (p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
+        end if;
+      end if;
+
+    elseif cf.d_pT_regions == 6 then
+      //approach with 6 regions
+
+      if T < cf.d_pT_TO[1] then
+        fitSCrSH := 999E5;
+        fitSCrSC := 0;
+      elseif T > cf.d_pT_TO[2] then
+        fitSCrSH := 999E5;
+        fitSCrSC := 999E5;
+      else
+        x_SCrSH := (T - cf.fit_SCrSH_IO[1])/cf.fit_SCrSH_IO[2];
+        for i in 1:cf.fit_SCrSH_Nt loop
+          fitSCrSH1 := fitSCrSH1 + cf.fit_SCrSH_N[i]*x_SCrSH^(i - 1);
+        end for;
+        fitSCrSH := cf.fit_SCrSH_IO[3] + cf.fit_SCrSH_IO[4]*fitSCrSH1;
+
+        x_SCrSC := (T - cf.fit_SCrSC_IO[1])/cf.fit_SCrSC_IO[2];
+        for i in 1:cf.fit_SCrSC_Nt loop
+          fitSCrSC1 := fitSCrSC1 + cf.fit_SCrSC_N[i]*x_SCrSC^(i - 1);
+        end for;
+        fitSCrSC := cf.fit_SCrSC_IO[3] + cf.fit_SCrSC_IO[4]*fitSCrSC1;
+      end if;
+      if p < cf.d_pT_pO[1] then
+        //SC,SH,SC+smooth or SH+smooth
+        if p < sat.psat - dp then
+          //SH
+          x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+          y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
+          d1 := cf.dv_pTD[1];
+          for i in 1:cf.d_pTNt[4] loop
+            d1 := d1 + cf.dv_pTA[i]*x1^i;
+          end for;
+          for j in 1:cf.d_pTNt[5] loop
+            d1 := d1 + cf.dv_pTB[j]*y1^j;
+          end for;
+          if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+            for i in 1:cf.d_pTNt[4] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[5]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[5] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[4]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
+              end for;
+            end for;
+          end if;
+          d := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+        elseif p > sat.psat + dp then
+          //SC
+          x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+          y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
+          d2 := cf.dl_pTD[1];
+          for i in 1:cf.d_pTNt[1] loop
+            d2 := d2 + cf.dl_pTA[i]*x2^i;
+          end for;
+          for j in 1:cf.d_pTNt[2] loop
+            d2 := d2 + cf.dl_pTB[j]*y2^j;
+          end for;
+          if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+            for i in 1:cf.d_pTNt[1] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[2]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[2] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[1]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
+              end for;
+            end for;
+          end if;
+          d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+        else
+          if p < sat.psat then
+            //SH+smooth
+            x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+            y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
+            d1 := cf.dv_pTD[1];
+            for i in 1:cf.d_pTNt[4] loop
+              d1 := d1 + cf.dv_pTA[i]*x1^i;
+            end for;
+            for j in 1:cf.d_pTNt[5] loop
+              d1 := d1 + cf.dv_pTB[j]*y1^j;
+            end for;
+            if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+              for i in 1:cf.d_pTNt[4] - 1 loop
+                for j in 1:min(i, cf.d_pTNt[5]) loop
+                  count := count + 1;
+                  d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
+                end for;
+              end for;
+            else
+              for j in 1:cf.d_pTNt[5] - 1 loop
+                for i in 1:min(j, cf.d_pTNt[4]) loop
+                  count := count + 1;
+                  d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
+                end for;
+              end for;
+            end if;
+            d1 := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+            d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)
+              /dp;
+          elseif p >= sat.psat then
+            //SC+smooth
+            x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+            y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
+            d2 := cf.dl_pTD[1];
+            for i in 1:cf.d_pTNt[1] loop
+              d2 := d2 + cf.dl_pTA[i]*x2^i;
+            end for;
+            for j in 1:cf.d_pTNt[2] loop
+              d2 := d2 + cf.dl_pTB[j]*y2^j;
+            end for;
+            if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+              for i in 1:cf.d_pTNt[1] - 1 loop
+                for j in 1:min(i, cf.d_pTNt[2]) loop
+                  count := count + 1;
+                  d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
+                end for;
+              end for;
+            else
+              for j in 1:cf.d_pTNt[2] - 1 loop
+                for i in 1:min(j, cf.d_pTNt[1]) loop
+                  count := count + 1;
+                  d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
+                end for;
+              end for;
+            end if;
+            d2 := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+            d := dewDensity(sat)*(1 - (p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
+          end if;
+        end if;
+      elseif p < cf.d_pT_pO[2] then
+        //SC,SH,Tra1 or Tra2
+        if p > sat.psat then
+          if p > fitSCrSC then
+            //SC
+            x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+            y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
+            d2 := cf.dl_pTD[1];
+            for i in 1:cf.d_pTNt[1] loop
+              d2 := d2 + cf.dl_pTA[i]*x2^i;
+            end for;
+            for j in 1:cf.d_pTNt[2] loop
+              d2 := d2 + cf.dl_pTB[j]*y2^j;
+            end for;
+            if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+              for i in 1:cf.d_pTNt[1] - 1 loop
+                for j in 1:min(i, cf.d_pTNt[2]) loop
+                  count := count + 1;
+                  d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
+                end for;
+              end for;
+            else
+              for j in 1:cf.d_pTNt[2] - 1 loop
+                for i in 1:min(j, cf.d_pTNt[1]) loop
+                  count := count + 1;
+                  d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
+                end for;
+              end for;
+            end if;
+            d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+          else
+            // Tra1
+            x3 := (p - cf.d_pTIO[13])/cf.d_pTIO[14];
+            y3 := (T - cf.d_pTIO[15])/cf.d_pTIO[16];
+            d3 := cf.dtra1_pTD[1];
+            for i in 1:cf.d_pTNt[7] loop
+              d3 := d3 + cf.dtra1_pTA[i]*x3^i;
+            end for;
+            for j in 1:cf.d_pTNt[8] loop
+              d3 := d3 + cf.dtra1_pTB[j]*y3^j;
+            end for;
+            if cf.d_pTNt[7] >= cf.d_pTNt[8] then
+              for i in 1:cf.d_pTNt[7] - 1 loop
+                for j in 1:min(i, cf.d_pTNt[8]) loop
+                  count := count + 1;
+                  d3 := d3 + cf.dtra1_pTC[count]*x3^(cf.d_pTNt[7] - i)*y3^j;
+                end for;
+              end for;
+            else
+              for j in 1:cf.d_pTNt[8] - 1 loop
+                for i in 1:min(j, cf.d_pTNt[7]) loop
+                  count := count + 1;
+                  d3 := d3 + cf.dtra1_pTC[count]*y3^(cf.d_pTNt[8] - j)*x3^i;
+                end for;
+              end for;
+            end if;
+            d := d3*cf.d_pTIO[18] + cf.d_pTIO[17];
+          end if;
+        elseif p < sat.psat then
+          if p < fitSCrSH then
+            //SH
+            x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+            y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
+            d1 := cf.dv_pTD[1];
+            for i in 1:cf.d_pTNt[4] loop
+              d1 := d1 + cf.dv_pTA[i]*x1^i;
+            end for;
+            for j in 1:cf.d_pTNt[5] loop
+              d1 := d1 + cf.dv_pTB[j]*y1^j;
+            end for;
+            if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+              for i in 1:cf.d_pTNt[4] - 1 loop
+                for j in 1:min(i, cf.d_pTNt[5]) loop
+                  count := count + 1;
+                  d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
+                end for;
+              end for;
+            else
+              for j in 1:cf.d_pTNt[5] - 1 loop
+                for i in 1:min(j, cf.d_pTNt[4]) loop
+                  count := count + 1;
+                  d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
+                end for;
+              end for;
+            end if;
+            d := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+          else
+            //Tra2
+            x4 := (p - cf.d_pTIO[19])/cf.d_pTIO[20];
+            y4 := (T - cf.d_pTIO[21])/cf.d_pTIO[22];
+            d4 := cf.dtra2_pTD[1];
+            for i in 1:cf.d_pTNt[10] loop
+              d4 := d4 + cf.dtra2_pTA[i]*x4^i;
+            end for;
+            for j in 1:cf.d_pTNt[11] loop
+              d4 := d4 + cf.dtra2_pTB[j]*y4^j;
+            end for;
+            if cf.d_pTNt[10] >= cf.d_pTNt[11] then
+              for i in 1:cf.d_pTNt[10] - 1 loop
+                for j in 1:min(i, cf.d_pTNt[11]) loop
+                  count := count + 1;
+                  d4 := d4 + cf.dtra2_pTC[count]*x4^(cf.d_pTNt[10] - i)*y4^j;
+                end for;
+              end for;
+            else
+              for j in 1:cf.d_pTNt[11] - 1 loop
+                for i in 1:min(j, cf.d_pTNt[10]) loop
+                  count := count + 1;
+                  d4 := d4 + cf.dtra2_pTC[count]*y4^(cf.d_pTNt[11] - j)*x4^i;
+                end for;
+              end for;
+            end if;
+            d := d4*cf.d_pTIO[24] + cf.d_pTIO[23];
+          end if;
+        end if;
+      elseif p < cf.d_pT_pO[3] then
+        //SC, SH or SCr1
+        if p > fitSCrSC then
+          //SC
+          x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+          y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
+          d2 := cf.dl_pTD[1];
+          for i in 1:cf.d_pTNt[1] loop
+            d2 := d2 + cf.dl_pTA[i]*x2^i;
+          end for;
+          for j in 1:cf.d_pTNt[2] loop
+            d2 := d2 + cf.dl_pTB[j]*y2^j;
+          end for;
+          if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+            for i in 1:cf.d_pTNt[1] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[2]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[2] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[1]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
+              end for;
+            end for;
+          end if;
+          d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+        elseif p > fitSCrSH then
+          //SCr1
+          x5 := (p - cf.d_pTIO[25])/cf.d_pTIO[26];
+          y5 := (T - cf.d_pTIO[27])/cf.d_pTIO[28];
+          d5 := cf.dscr1_pTD[1];
+          for i in 1:cf.d_pTNt[13] loop
+            d5 := d5 + cf.dscr1_pTA[i]*x5^i;
+          end for;
+          for j in 1:cf.d_pTNt[14] loop
+            d5 := d5 + cf.dscr1_pTB[j]*y5^j;
+          end for;
+          if cf.d_pTNt[13] >= cf.d_pTNt[14] then
+            for i in 1:cf.d_pTNt[13] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[14]) loop
+                count := count + 1;
+                d5 := d5 + cf.dscr1_pTC[count]*x5^(cf.d_pTNt[13] - i)*y5^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[14] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[13]) loop
+                count := count + 1;
+                d5 := d5 + cf.dscr1_pTC[count]*y5^(cf.d_pTNt[14] - j)*x5^i;
+              end for;
+            end for;
+          end if;
+          d := d5*cf.d_pTIO[29] + cf.d_pTIO[30];
+        else
+          //SH
+          x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+          y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
+          d1 := cf.dv_pTD[1];
+          for i in 1:cf.d_pTNt[4] loop
+            d1 := d1 + cf.dv_pTA[i]*x1^i;
+          end for;
+          for j in 1:cf.d_pTNt[5] loop
+            d1 := d1 + cf.dv_pTB[j]*y1^j;
+          end for;
+          if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+            for i in 1:cf.d_pTNt[4] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[5]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[5] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[4]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
+              end for;
+            end for;
+          end if;
+          d := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+        end if;
+      elseif p > cf.d_pT_pO[4] then
+        //SC,SH or SCr2
+        if p > fitSCrSC then
+          //SC
+          x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
+          y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
+          d2 := cf.dl_pTD[1];
+          for i in 1:cf.d_pTNt[1] loop
+            d2 := d2 + cf.dl_pTA[i]*x2^i;
+          end for;
+          for j in 1:cf.d_pTNt[2] loop
+            d2 := d2 + cf.dl_pTB[j]*y2^j;
+          end for;
+          if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+            for i in 1:cf.d_pTNt[1] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[2]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*x2^(cf.d_pTNt[1] - i)*y2^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[2] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[1]) loop
+                count := count + 1;
+                d2 := d2 + cf.dl_pTC[count]*y2^(cf.d_pTNt[2] - j)*x2^i;
+              end for;
+            end for;
+          end if;
+          d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
+        elseif p > fitSCrSH then
+          //SCr2
+          x6 := (p - cf.d_pTIO[31])/cf.d_pTIO[32];
+          y6 := (T - cf.d_pTIO[33])/cf.d_pTIO[34];
+          d6 := cf.dscr2_pTD[1];
+          for i in 1:cf.d_pTNt[16] loop
+            d6 := d6 + cf.dscr2_pTA[i]*x6^i;
+          end for;
+          for j in 1:cf.d_pTNt[17] loop
+            d6 := d6 + cf.dscr2_pTB[j]*y6^j;
+          end for;
+          if cf.d_pTNt[16] >= cf.d_pTNt[17] then
+            for i in 1:cf.d_pTNt[16] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[17]) loop
+                count := count + 1;
+                d6 := d6 + cf.dscr2_pTC[count]*x6^(cf.d_pTNt[16] - i)*y6^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[17] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[16]) loop
+                count := count + 1;
+                d6 := d6 + cf.dscr2_pTC[count]*y6^(cf.d_pTNt[17] - j)*x6^i;
+              end for;
+            end for;
+          end if;
+          d := d6*cf.d_pTIO[29] + cf.d_pTIO[30];
+        else
+          //SH
+          x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
+          y1 := (T - cf.d_pTIO[9])/cf.d_pTIO[10];
+          d1 := cf.dv_pTD[1];
+          for i in 1:cf.d_pTNt[4] loop
+            d1 := d1 + cf.dv_pTA[i]*x1^i;
+          end for;
+          for j in 1:cf.d_pTNt[5] loop
+            d1 := d1 + cf.dv_pTB[j]*y1^j;
+          end for;
+          if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+            for i in 1:cf.d_pTNt[4] - 1 loop
+              for j in 1:min(i, cf.d_pTNt[5]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*x1^(cf.d_pTNt[4] - i)*y1^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.d_pTNt[5] - 1 loop
+              for i in 1:min(j, cf.d_pTNt[4]) loop
+                count := count + 1;
+                d1 := d1 + cf.dv_pTC[count]*y1^(cf.d_pTNt[5] - j)*x1^i;
+              end for;
+            end for;
+          end if;
+          d := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
+        end if;
       end if;
     end if;
 
-    annotation(derivative(noDerivative=phase)=density_pT_der,
-          inverse(p=pressure_dT(d=d,T=T,phase=phase)));
+
+    annotation (derivative(noDerivative=phase) = density_pT_der, inverse(p=
+            pressure_dT(
+              d=d,
+              T=T,
+              phase=phase)));
   end density_pT;
   annotation (Documentation(revisions="<html>
 <ul>

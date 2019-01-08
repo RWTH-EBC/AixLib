@@ -7,7 +7,13 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   parameter String name
   "Short description of the record"
   annotation (Dialog(group="General"));
-
+  parameter Real h_IIR_IO
+  "Delta between IIR reference point and I0"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Integer hscr_Nt;
+  parameter Real hscr_N[:];
+  parameter Real hscr_IO[:];
+  parameter Integer T_ph_regions;
   parameter Integer T_phNt[:]
   "Polynomial order for p (SC) | Polynomial order for h (SC) |
    Total number of terms (SC) | Polynomial order for p (SH) |
@@ -37,11 +43,31 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   parameter Real Tv_phD[:]
   "Coefficient d for superheated regime"
   annotation (Dialog(group="Temperature_ph"));
+  parameter Real Tscr_phA[:]
+  "Coefficients a for supercritical regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real Tscr_phB[:]
+  "Coefficients b for supercritical regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real Tscr_phC[:]
+  "Coefficients c for supercritical regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real Tscr_phD[:]
+  "Coefficient d for supercritical regime"
+  annotation (Dialog(group="Temperature_ph"));
   parameter Real T_phIO[:]
   "Mean SC p | Std SC p | Mean SC h | Std SC h | Mean SC T | Std SC T |
-   Mean SH p | Std SH p | Mean SH h | Std SH h | Mean SH T | Std SH T"
+  Mean SH p | Std SH p | Mean SH h | Std SH h | Mean SH T | Std SH T
+  Mean SCr p | Std SCr p | Mean SCr h | Std SCr h | Mean SCr T | Std SCr T"
   annotation (Dialog(group="Temperature_ph"));
 
+  parameter Real s_IIR_IO
+  "Delta between IIR and I0 referendce points"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Integer sscr_Nt;
+  parameter Real sscr_N[:];
+  parameter Real sscr_IO[:];
+  parameter Integer T_ps_regions;
   parameter Integer T_psNt[:]
   "Polynomial order for p (SC) | Polynomial order for s (SC) |
    Total number of terms (SC) | Polynomial order for p (SH) |
@@ -71,11 +97,31 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   parameter Real Tv_psD[:]
   "Coefficient d for superheated regime"
   annotation (Dialog(group="Temperature_ps"));
+  parameter Real Tscr_psA[:]
+  "Coefficients a for supercritical regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real Tscr_psB[:]
+  "Coefficients b for supercritical regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real Tscr_psC[:]
+  "Coefficients c for supercritical regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real Tscr_psD[:]
+  "Coefficient d for supercritical regime"
+  annotation (Dialog(group="Temperature_ps"));
   parameter Real T_psIO[:]
   "Mean SC p | Std SC p | Mean SC s | Std SC s | Mean SC T | Std SC T |
    Mean SH p | Std SH p | Mean SH s | Std SH s | Mean SH T | Std SH T"
   annotation (Dialog(group="Temperature_ps"));
-
+  parameter Integer d_pT_regions;
+  parameter Real d_pT_TO[:];
+  parameter Real d_pT_pO[:];
+  parameter Real fit_SCrSH_IO[:];
+  parameter Integer fit_SCrSH_Nt;
+  parameter Real fit_SCrSH_N[:];
+  parameter Real fit_SCrSC_IO[:];
+  parameter Integer fit_SCrSC_Nt;
+  parameter Real fit_SCrSC_N[:];
   parameter Integer d_pTNt[:]
   "Polynomial order for p (SC) | Polynomial order for T (SC) |
    Total number of terms (SC) | Polynomial order for p (SH) |
@@ -105,9 +151,62 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   parameter Real dv_pTD[:]
   "Coefficient d for superheated regime"
   annotation (Dialog(group="Density_pT"));
+  parameter Real dtra1_pTA[:]
+  "Coefficients a for transition1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra1_pTB[:]
+  "Coefficients b for transition1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra1_pTC[:]
+  "Coefficients c for transition1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra1_pTD[:]
+  "Coefficient d for transition1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra2_pTA[:]
+  "Coefficients a for transition 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra2_pTB[:]
+  "Coefficients b for transition 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra2_pTC[:]
+  "Coefficients c for transition 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dtra2_pTD[:]
+  "Coefficient d for transition 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr1_pTA[:]
+  "Coefficients a for supercritical 1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr1_pTB[:]
+  "Coefficients b for supercritical 1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr1_pTC[:]
+  "Coefficients c for supercritical 1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr1_pTD[:]
+  "Coefficient d for supercritical 1 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr2_pTA[:]
+  "Coefficients a for supercritical 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr2_pTB[:]
+  "Coefficients b for supercritical 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr2_pTC[:]
+  "Coefficients c for supercritical 2 regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real dscr2_pTD[:]
+  "Coefficient d for supercritical 2 regime"
+  annotation (Dialog(group="Density_pT"));
+
   parameter Real d_pTIO[:]
   "Mean SC p | Std SC p | Mean SC T | Std SC T | Mean SC d | Std SC d |
-   Mean SH p | Std SH p | Mean SH T | Std SH T | Mean SH d | Std SH d"
+  Mean SH p | Std SH p | Mean SH T | Std SH T | Mean SH d | Std SH d  |
+  Mean Tra1 p | Std Tra1 p | Mean Tra1 T | Std Tra1 T | Mean Tra1 d | Std Tra1 d  |
+  Mean Tra2 p | Std Tra2 p | Mean Tra2 T | Std Tra2 T | Mean Tra2 d | Std Tra2 d  |
+  Mean SCr1 p | Std SCr1 p | Mean SCr1 T | Std SCr1 T | Mean SCr1 d | Std SCr1 d  |
+  Mean SCr2 p | Std SCr2 p | Mean SCr2 T | Std SCr2 T | Mean SCr2 d | Std SCr2 d"
   annotation (Dialog(group="Density_pT"));
 
   annotation (Documentation(revisions="<html>
