@@ -3,11 +3,11 @@ model AirCurtain
   "This model is an example for the use of an air curtain in the low order model"
   extends Modelica.Icons.Example;
   AirCurtainSimplified                    airCurtainSimplyfied(
-    VolumeFlowAirCurtain=5,
-    TemperatureAdditionAirCurtain=5,
-    eta_air_curtain=0.73,
-    PowerAirCurtain=50000,
-    TemperatureThreshold=287.15)
+    V_flowAirCur=5,
+    TAddAirCur=5,
+    etaAirCur=0.73,
+    PAirCur=50000,
+    TBou=287.15)
     annotation (Placement(transformation(extent={{-14,-12},{20,20}})));
   ThermalZones.HighOrder.Components.DryAir.Airload airload
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
@@ -44,7 +44,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(weaBus.TDryBul, airCurtainSimplyfied.T_ambient) annotation (Line(
+  connect(weaBus.TDryBul, airCurtainSimplyfied.TAmb) annotation (Line(
       points={{-67,72},{-67,-6.18182},{-15.2364,-6.18182}},
       color={255,204,51},
       thickness=0.5), Text(

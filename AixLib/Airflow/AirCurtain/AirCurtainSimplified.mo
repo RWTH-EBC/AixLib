@@ -1,51 +1,50 @@
 within AixLib.Airflow.AirCurtain;
 model AirCurtainSimplified
   "Ideal model for the usage of an air curtain in the context of low order retail zones"
-  parameter Modelica.SIunits.VolumeFlowRate VolumeFlowAirCurtain = 5
+  parameter Modelica.SIunits.VolumeFlowRate V_flowAirCur = 5
     "Design volume flow rate of the air curtain";
-  parameter Modelica.SIunits.TemperatureDifference TemperatureAdditionAirCurtain = 5
+  parameter Modelica.SIunits.TemperatureDifference TAddAirCur = 5
     "Temperature increase over the air curtain";
-  parameter Real eta_air_curtain = 0.73
+  parameter Real etaAirCur = 0.73
     "Efficiency of the air curtain";
   parameter Modelica.SIunits.Density rho = 1.25
     "Air density";
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1000
     "Specific heat capacity of air";
-  parameter Modelica.SIunits.Temperature TemperatureThreshold = 287.15
+  parameter Modelica.SIunits.Temperature TBou = 287.15
     "Threshold of the ambient temperature when aircurtain becomes active";
-  parameter Modelica.SIunits.Power PowerAirCurtain = 27500
+  parameter Modelica.SIunits.Power PAirCur = 27500
     "The thermal Power of the air curtain, simplified use";
   Utilities.Psychrometrics.MixedTemperature mixedTemperature
     annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
-  Modelica.Blocks.Interfaces.RealInput T_ambient "Ambient airtemperature in K"
+  Modelica.Blocks.Interfaces.RealInput TAmb "Ambient airtemperature in K"
     annotation (Placement(transformation(extent={{-128,-80},{-88,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b
     port_b "heat port for heat transfer"
     annotation (Placement(transformation(extent={{110,-10},{130,10}})));
 
-  Modelica.Blocks.Interfaces.RealOutput powerOut
-    "Power used by the air curtain"
+  Modelica.Blocks.Interfaces.RealOutput Power "Power used by the air curtain"
     annotation (Placement(transformation(extent={{118,70},{138,90}})));
   Modelica.Blocks.Interfaces.RealInput schedule "Signal for the schedule"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
 equation
 
-  if T_ambient <= TemperatureThreshold and schedule > 0 then
-    mixedTemperature.flowRate_flow2 = (1 - eta_air_curtain) * VolumeFlowAirCurtain;
-    mixedTemperature.flowRate_flow1 = eta_air_curtain * VolumeFlowAirCurtain;
-    mixedTemperature.temperature_flow1 = port_b.T + TemperatureAdditionAirCurtain;
-    port_b.Q_flow = - eta_air_curtain * VolumeFlowAirCurtain * rho * c * (mixedTemperature.mixedTemperatureOut - port_b.T);
-    powerOut = PowerAirCurtain;
+  if TAmb <= TBou and schedule > 0 then
+    mixedTemperature.flowRate_flow2 = (1 - etaAirCur) * V_flowAirCur;
+    mixedTemperature.flowRate_flow1 = etaAirCur * V_flowAirCur;
+    mixedTemperature.temperature_flow1 = port_b.T + TAddAirCur;
+    port_b.Q_flow = - etaAirCur * V_flowAirCur * rho * c * (mixedTemperature.mixedTemperatureOut - port_b.T);
+    Power = PAirCur;
   else
-    mixedTemperature.flowRate_flow2 = (1 - eta_air_curtain) * VolumeFlowAirCurtain;
-    mixedTemperature.flowRate_flow1 = eta_air_curtain * VolumeFlowAirCurtain;
+    mixedTemperature.flowRate_flow2 = (1 - etaAirCur) * V_flowAirCur;
+    mixedTemperature.flowRate_flow1 = etaAirCur * V_flowAirCur;
     mixedTemperature.temperature_flow1 = port_b.T;
     port_b.Q_flow = 0;
-    powerOut = 0;
+    Power = 0;
   end if;
 
-  connect(T_ambient, mixedTemperature.temperature_flow2) annotation (Line(
-        points={{-108,-60},{-20,-60},{-20,-2},{-5.6,-2}}, color={0,0,127}));
+  connect(TAmb, mixedTemperature.temperature_flow2) annotation (Line(points={{-108,
+          -60},{-20,-60},{-20,-2},{-5.6,-2}}, color={0,0,127}));
    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {120,120}}),                                        graphics={
         Rectangle(
