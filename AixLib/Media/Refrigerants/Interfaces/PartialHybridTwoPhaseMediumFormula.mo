@@ -575,8 +575,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       dqualityph := (quality*dsvp + (1-quality)*dslp)/
                     (bubbleEntropy(sat)-dewEntropy(sat));
 
-      a := sqrt(-1/(state.d^2*(dvlp + dqualityph*(1/dewDensity(sat)-
-           1/bubbleDensity(sat)) + quality*(dvvp-dvlp))));
+      a := sqrt(abs( -1/(state.d^2*(dvlp + dqualityph*(1/dewDensity(sat)-
+           1/bubbleDensity(sat)) + quality*(dvvp-dvlp)))));
     end if;
 
     annotation(Inline=false,

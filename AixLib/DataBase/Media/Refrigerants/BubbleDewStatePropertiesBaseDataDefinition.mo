@@ -8,6 +8,10 @@ record BubbleDewStatePropertiesBaseDataDefinition
   "Short description of the record"
   annotation (Dialog(group="General"));
 
+  parameter Real p_Z
+  "Last value for saturation line";
+  parameter Real T_Z
+  "Last value for saturation line";
   parameter Integer psat_Nt
   "Number of terms for saturation pressure"
   annotation (Dialog(group="Saturation pressure"));

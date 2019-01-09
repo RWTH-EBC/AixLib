@@ -631,9 +631,9 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real p_1 = 0;
 
   algorithm
-    if T>fluidConstants[1].criticalTemperature then
+    if T >= fluidConstants[1].criticalTemperature then
      p := fluidConstants[1].criticalPressure;
-    elseif T<fluidConstants[1].triplePointTemperature then
+    elseif T <= fluidConstants[1].triplePointTemperature then
      p := fluidConstants[1].triplePointPressure;
     else
       for k in 1:cf.psat_Nt loop
@@ -656,6 +656,12 @@ partial package PartialHybridTwoPhaseMediumRecord
     Real x = 0;
 
   algorithm
+    if p >= fluidConstants[1].criticalPressure then
+      T :=fluidConstants[1].criticalTemperature;
+    elseif p <= fluidConstants[1].triplePointPressure then
+      T :=fluidConstants[1].triplePointTemperature;
+    end if;
+
     x := (p - cf.Tsat_IO[1])/cf.Tsat_IO[2];
     for k in 1:cf.Tsat_Nt-1 loop
       T_1 := T_1 + cf.Tsat_N[k]*x^(cf.Tsat_Nt - k);
@@ -686,7 +692,10 @@ partial package PartialHybridTwoPhaseMediumRecord
     dl := dl_1*cf.dl_IO[4] + cf.dl_IO[3];
 
     elseif cf.dl_approach == 16 then
-     x:=abs(1 - (sat.Tsat/fluidConstants[1].criticalTemperature));
+     x:=1 - (sat.Tsat/fluidConstants[1].criticalTemperature);
+     if sat.Tsat >= cf.T_Z then
+       x:=1 - (cf.T_Z/fluidConstants[1].criticalTemperature);
+     end if;
       for k in 1:cf.dl_Nt - 1 loop
         dl_1 :=dl_1 + cf.dl_N[k + 1]*x^(k/3);
       end for;
@@ -734,6 +743,7 @@ partial package PartialHybridTwoPhaseMediumRecord
     BDSP cf;
     Real hl_1 = 0;
     Real x = 0;
+    Real small = Modelica.Constants.small;
 
   algorithm
     if cf.hl_approach == 2 then
@@ -746,11 +756,14 @@ partial package PartialHybridTwoPhaseMediumRecord
     hl := hl_1*cf.hl_IO[4] + cf.hl_IO[3];
 
     elseif cf.hl_approach == 1 then
-      x :=abs(1 - sat.psat/fluidConstants[1].criticalPressure);
+      x := 1 - sat.psat/fluidConstants[1].criticalPressure;
+      if sat.psat >= cf.p_Z then
+        x:=1 - cf.p_Z/fluidConstants[1].criticalPressure;
+      end if;
       for k in 1:cf.hl_Nt loop
         hl_1 :=hl_1 + cf.hl_N[k + 1]*x^cf.hl_E[k];
       end for;
-      hl :=cf.hl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) + hl_1) - cf.h_IIR_I0;
+      hl :=cf.hl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) * hl_1) - cf.h_IIR_I0;
     end if;
     annotation(smoothOrder = 2,
                Inline=false,
@@ -775,10 +788,13 @@ partial package PartialHybridTwoPhaseMediumRecord
 
   elseif cf.hv_approach == 16 then
      x:=sat.psat / fluidConstants[1].criticalPressure;
-      for k in 1:cf.dv_Nt - 1 loop
+     if sat.psat >= cf.p_Z then
+       x:=cf.p_Z / fluidConstants[1].criticalPressure;
+     end if;
+      for k in 1:cf.hv_Nt - 1 loop
         hv_1 :=hv_1 + cf.hv_N[k + 1]*x^(k/3);
       end for;
-      hv :=cf.hv_N[1] + hv_1 - cf.h_IIR_I0;
+      hv := cf.hv_IO[1] * (cf.hv_N[1] + hv_1) - cf.h_IIR_I0;
     end if;
 
     annotation(smoothOrder = 2,
@@ -803,11 +819,14 @@ partial package PartialHybridTwoPhaseMediumRecord
     sl := sl_1*cf.sl_IO[4] + cf.sl_IO[3];
 
    elseif cf.sl_approach == 1 then
-      x :=abs(1 - sat.psat/fluidConstants[1].criticalPressure);
-      for k in 1:cf.hl_Nt loop
+      x :=1 - sat.psat/fluidConstants[1].criticalPressure;
+      if sat.psat >= cf.p_Z then
+        x :=1 - cf.p_Z/fluidConstants[1].criticalPressure;
+      end if;
+      for k in 1:cf.sl_Nt loop
         sl_1 :=sl_1 + cf.sl_N[k + 1]*x^cf.sl_E[k];
       end for;
-      sl :=cf.sl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) + sl_1) - cf.s_IIR_I0;
+      sl :=cf.sl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) * sl_1) - cf.s_IIR_I0;
     end if;
 
 
@@ -822,6 +841,7 @@ partial package PartialHybridTwoPhaseMediumRecord
     BDSP cf;
     Real sv_1 = 0;
     Real x = 0;
+    Real small = Modelica.Constants.small;
 
   algorithm
     if cf.sv_approach == 2 then
@@ -833,11 +853,14 @@ partial package PartialHybridTwoPhaseMediumRecord
     sv := sv_1*cf.sv_IO[4] + cf.sv_IO[3];
 
   elseif cf.sv_approach == 1 then
-      x :=abs(1 - sat.psat/fluidConstants[1].criticalPressure);
-      for k in 1:cf.hl_Nt loop
+      x :=1 - sat.psat/fluidConstants[1].criticalPressure;
+      if sat.psat > cf.p_Z then
+        x :=1 - cf.p_Z/fluidConstants[1].criticalPressure;
+      end if;
+      for k in 1:cf.sv_Nt loop
         sv_1 :=sv_1 + cf.sv_N[k + 1]*x^cf.sv_E[k];
       end for;
-      sv :=cf.sv_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) + sv_1) - cf.s_IIR_I0;
+      sv :=cf.sv_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) * sv_1) - cf.s_IIR_I0;
     end if;
 
     annotation(smoothOrder = 2,
@@ -865,8 +888,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     SpecificEnthalpy h_bubble=0;
     SpecificEnthalpy hIIR;
     Real h_scr1=0;
-    Real h_scr=0;
-    Real x_scr=0;
+    Real h_scr;
+    Real x_scr;
 
     Real x1=0;
     Real y1=0;
@@ -891,7 +914,7 @@ partial package PartialHybridTwoPhaseMediumRecord
     hIIR := h + cf.h_IIR_IO;
     h_dew := dewEnthalpy(sat=setSat_p(p=p)) + cf.h_IIR_IO;
     h_bubble := bubbleEnthalpy(sat=setSat_p(p=p)) + cf.h_IIR_IO;
-    if p < fluidConstants[1].criticalPressure then
+    if p < fluidConstants[1].criticalPressure then //SC
       if hIIR < h_bubble - dh then
         x1 := (p - cf.T_phIO[1])/cf.T_phIO[2];
         y1 := (hIIR - cf.T_phIO[3])/cf.T_phIO[4];
@@ -918,7 +941,7 @@ partial package PartialHybridTwoPhaseMediumRecord
           end for;
         end if;
         T := T1*cf.T_phIO[6] + cf.T_phIO[5];
-      elseif hIIR > h_dew + dh then
+      elseif hIIR > h_dew + dh then //SH
         x2 := (p - cf.T_phIO[7])/cf.T_phIO[8];
         y2 := (hIIR - cf.T_phIO[9])/cf.T_phIO[10];
         T2 := cf.Tv_phD[1];
@@ -945,7 +968,7 @@ partial package PartialHybridTwoPhaseMediumRecord
         end if;
         T := T2*cf.T_phIO[12] + cf.T_phIO[11];
       else
-        if hIIR < h_bubble then
+        if hIIR < h_bubble then //SC+smooth
           x1 := (p - cf.T_phIO[1])/cf.T_phIO[2];
           y1 := (hIIR - cf.T_phIO[3])/cf.T_phIO[4];
           T1 := cf.Tl_phD[1];
@@ -971,9 +994,9 @@ partial package PartialHybridTwoPhaseMediumRecord
             end for;
           end if;
           T1 := T1*cf.T_phIO[6] + cf.T_phIO[5];
-          T := saturationTemperature(p)*(1 - (h_bubble - hIIR)/dh) + T1*(
-            h_bubble - hIIR)/dh;
-        elseif hIIR > h_dew then
+          T := saturationTemperature(p)*(1 - (h_bubble - hIIR)/dh) + T1*(h_bubble -
+            hIIR)/dh;
+        elseif hIIR > h_dew then //SH+smooth
           x2 := (p - cf.T_phIO[7])/cf.T_phIO[8];
           y2 := (hIIR - cf.T_phIO[9])/cf.T_phIO[10];
           T2 := cf.Tv_phD[1];
@@ -1035,40 +1058,41 @@ partial package PartialHybridTwoPhaseMediumRecord
         T := T1*cf.T_phIO[6] + cf.T_phIO[5];
       elseif hIIR > h_scr then
         //SCr
-        x3 := (p - cf.T_phIO[13])/cf.T_phIO[14];
-        y3 := (hIIR - cf.T_phIO[15])/cf.T_phIO[16];
-        T3 := cf.Tscr_phD[1];
-        for i in 1:cf.T_phNt[7] loop
-          T3 := T3 + cf.Tscr_phA[i]*x3^i;
-        end for;
-        for j in 1:cf.T_phNt[8] loop
-          T3 := T3 + cf.Tscr_phB[j]*y3^j;
-        end for;
-        if cf.T_phNt[5] >= cf.T_phNt[8] then
-          for i in 1:cf.T_phNt[1] - 1 loop
-            for j in 1:min(i, cf.T_phNt[8]) loop
-              count := count + 1;
-              T3 := T3 + cf.Tscr_phC[count]*x3^(cf.T_phNt[7] - i)*y3^j;
-            end for;
-          end for;
-        else
-          for j in 1:cf.T_phNt[8] - 1 loop
-            for i in 1:min(j, cf.T_phNt[7]) loop
-              count := count + 1;
-              T3 := T3 + cf.Tscr_phC[count]*y3^(cf.T_phNt[8] - j)*x3^i;
-            end for;
-          end for;
-        end if;
-        T := T3*cf.T_phIO[18] + cf.T_phIO[17];
+
+         x3 := (p - cf.T_phIO[13])/cf.T_phIO[14];
+         y3 := (hIIR - cf.T_phIO[15])/cf.T_phIO[16];
+         T3 := cf.Tscr_phD[1];
+         for i in 1:cf.T_phNt[7] loop
+           T3 := T3 + cf.Tscr_phA[i]*x3^i;
+         end for;
+         for j in 1:cf.T_phNt[8] loop
+           T3 := T3 + cf.Tscr_phB[j]*y3^j;
+         end for;
+         if cf.T_phNt[7] >= cf.T_phNt[8] then
+           for i in 1:cf.T_phNt[7] - 1 loop
+             for j in 1:min(i, cf.T_phNt[8]) loop
+               count := count + 1;
+               T3 := T3 + cf.Tscr_phC[count]*x3^(cf.T_phNt[7] - i)*y3^j;
+             end for;
+           end for;
+         else
+           for j in 1:cf.T_phNt[8] - 1 loop
+             for i in 1:min(j, cf.T_phNt[7]) loop
+               count := count + 1;
+               T3 := T3 + cf.Tscr_phC[count]*y3^(cf.T_phNt[8] - j)*x3^i;
+             end for;
+           end for;
+         end if;
+         T := T3*cf.T_phIO[18] + cf.T_phIO[17];
       end if;
     end if;
 
     annotation (
       derivative(noDerivative=phase) = temperature_ph_der,
       inverse(h=specificEnthalpy_pT(
-              p=p,
-              T=T,
-              phase=phase)),
+            p=p,
+            T=T,
+            phase=phase)),
       Inline=false,
       LateInline=false);
   end temperature_ph;
@@ -1085,7 +1109,6 @@ partial package PartialHybridTwoPhaseMediumRecord
   protected
     TSP cf;
     SmoothTransition st;
-
     SpecificEntropy ds = st.T_ps;
     SpecificEntropy s_dew = 0;
     SpecificEntropy s_bubble = 0;
@@ -1109,7 +1132,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   algorithm
     s_IIR :=s + cf.s_IIR_IO;
     if cf.T_ps_regions == 3 then
-        x_scr := (p - cf.sscr_IO[1])/cf.sscr_IO[2];
+        x_scr := (log(p) - cf.sscr_IO[1])/cf.sscr_IO[2];
           for i in 1:cf.sscr_Nt loop
             s_scr1 := s_scr1 + cf.sscr_N[i]*x_scr^(i - 1);
           end for;
@@ -1147,8 +1170,7 @@ partial package PartialHybridTwoPhaseMediumRecord
           end for;
         end for;
       end if;
-      T := T1;
-      T := T1*cf.T_psIO[6]+cf.T_psIO[5];
+      T := abs(T1*cf.T_psIO[6]+cf.T_psIO[5]);
     elseif s_IIR>s_dew+ds then //SH
         x2 := (log(p)-cf.T_psIO[7])/cf.T_psIO[8];
         y2 := (s_IIR-cf.T_psIO[9])/cf.T_psIO[10];
@@ -1242,7 +1264,7 @@ partial package PartialHybridTwoPhaseMediumRecord
         T := saturationTemperature(p);
       end if;
     end if;
-    elseif cf.T_ps_regions == 3 then
+    elseif cf.T_ps_regions == 3 then //p>pcrit SC or SCr
       if s_IIR < s_scr then //SC
       x1 := (log(p)-cf.T_psIO[1])/cf.T_psIO[2];
       y1 := (s_IIR-cf.T_psIO[3])/cf.T_psIO[4];
@@ -1273,31 +1295,31 @@ partial package PartialHybridTwoPhaseMediumRecord
       T := T1;
       T := T1*cf.T_psIO[6]+cf.T_psIO[5];
       elseif s_IIR>s_scr then //SCr
-        x3 := (p - cf.T_psIO[13])/cf.T_psIO[14];
-        y3 := (s_IIR - cf.T_psIO[15])/cf.T_psIO[16];
-        T3 := cf.Tscr_psD[1];
-        for i in 1:cf.T_psNt[7] loop
-          T3 := T3 + cf.Tscr_psA[i]*x3^i;
-        end for;
-        for j in 1:cf.T_psNt[8] loop
-          T3 := T3 + cf.Tscr_psB[j]*y3^j;
-        end for;
-        if cf.T_psNt[5] >= cf.T_psNt[8] then
-          for i in 1:cf.T_psNt[1] - 1 loop
-            for j in 1:min(i, cf.T_psNt[8]) loop
-              count := count + 1;
-              T3 := T3 + cf.Tscr_psC[count]*x3^(cf.T_psNt[7] - i)*y3^j;
-            end for;
+          x3 := (log(p) - cf.T_psIO[13])/cf.T_psIO[14];
+          y3 := (s_IIR - cf.T_psIO[15])/cf.T_psIO[16];
+          T3 := cf.Tscr_psD[1];
+          for i in 1:cf.T_psNt[7] loop
+            T3 := T3 + cf.Tscr_psA[i]*x3^i;
           end for;
-        else
-          for j in 1:cf.T_psNt[8] - 1 loop
-            for i in 1:min(j, cf.T_psNt[7]) loop
-              count := count + 1;
-              T3 := T3 + cf.Tscr_psC[count]*y3^(cf.T_psNt[8] - j)*x3^i;
-            end for;
+          for j in 1:cf.T_psNt[8] loop
+            T3 := T3 + cf.Tscr_psB[j]*y3^j;
           end for;
-        end if;
-        T := T3*cf.T_psIO[18] + cf.T_psIO[17];
+          if cf.T_psNt[5] >= cf.T_psNt[8] then
+            for i in 1:cf.T_psNt[1] - 1 loop
+              for j in 1:min(i, cf.T_psNt[8]) loop
+                count := count + 1;
+                T3 := T3 + cf.Tscr_psC[count]*x3^(cf.T_psNt[7] - i)*y3^j;
+              end for;
+            end for;
+          else
+            for j in 1:cf.T_psNt[8] - 1 loop
+              for i in 1:min(j, cf.T_psNt[7]) loop
+                count := count + 1;
+                T3 := T3 + cf.Tscr_psC[count]*y3^(cf.T_psNt[8] - j)*x3^i;
+              end for;
+            end for;
+          end if;
+          T := T3*cf.T_psIO[18] + cf.T_psIO[17];
       end if;
     end if;
 
@@ -1430,8 +1452,7 @@ partial package PartialHybridTwoPhaseMediumRecord
             end for;
           end if;
           d1 := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
-          d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)/
-            dp;
+          d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)/dp;
         elseif p >= sat.psat then
           x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
           y2 := (T - cf.d_pTIO[3])/cf.d_pTIO[4];
@@ -1568,8 +1589,8 @@ partial package PartialHybridTwoPhaseMediumRecord
               end for;
             end if;
             d1 := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
-            d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)
-              /dp;
+            d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)/
+              dp;
           elseif p >= sat.psat then
             //SC+smooth
             x2 := (p - cf.d_pTIO[1])/cf.d_pTIO[2];
@@ -1746,31 +1767,32 @@ partial package PartialHybridTwoPhaseMediumRecord
           d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
         elseif p > fitSCrSH then
           //SCr1
-          x5 := (p - cf.d_pTIO[25])/cf.d_pTIO[26];
-          y5 := (T - cf.d_pTIO[27])/cf.d_pTIO[28];
-          d5 := cf.dscr1_pTD[1];
-          for i in 1:cf.d_pTNt[13] loop
-            d5 := d5 + cf.dscr1_pTA[i]*x5^i;
-          end for;
-          for j in 1:cf.d_pTNt[14] loop
-            d5 := d5 + cf.dscr1_pTB[j]*y5^j;
-          end for;
-          if cf.d_pTNt[13] >= cf.d_pTNt[14] then
-            for i in 1:cf.d_pTNt[13] - 1 loop
-              for j in 1:min(i, cf.d_pTNt[14]) loop
-                count := count + 1;
-                d5 := d5 + cf.dscr1_pTC[count]*x5^(cf.d_pTNt[13] - i)*y5^j;
-              end for;
-            end for;
-          else
-            for j in 1:cf.d_pTNt[14] - 1 loop
-              for i in 1:min(j, cf.d_pTNt[13]) loop
-                count := count + 1;
-                d5 := d5 + cf.dscr1_pTC[count]*y5^(cf.d_pTNt[14] - j)*x5^i;
-              end for;
-            end for;
-          end if;
-          d := d5*cf.d_pTIO[29] + cf.d_pTIO[30];
+
+           x5 := (p - cf.d_pTIO[25])/cf.d_pTIO[26];
+           y5 := (T - cf.d_pTIO[27])/cf.d_pTIO[28];
+           d5 := cf.dscr1_pTD[1];
+           for i in 1:cf.d_pTNt[13] loop
+             d5 := d5 + cf.dscr1_pTA[i]*x5^i;
+           end for;
+           for j in 1:cf.d_pTNt[14] loop
+             d5 := d5 + cf.dscr1_pTB[j]*y5^j;
+           end for;
+           if cf.d_pTNt[13] >= cf.d_pTNt[14] then
+             for i in 1:cf.d_pTNt[13] - 1 loop
+               for j in 1:min(i, cf.d_pTNt[14]) loop
+                 count := count + 1;
+                 d5 := d5 + cf.dscr1_pTC[count]*x5^(cf.d_pTNt[13] - i)*y5^j;
+               end for;
+             end for;
+           else
+             for j in 1:cf.d_pTNt[14] - 1 loop
+               for i in 1:min(j, cf.d_pTNt[13]) loop
+                 count := count + 1;
+                 d5 := d5 + cf.dscr1_pTC[count]*y5^(cf.d_pTNt[14] - j)*x5^i;
+               end for;
+             end for;
+           end if;
+           d := d5*cf.d_pTIO[30] + cf.d_pTIO[29];
         else
           //SH
           x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
@@ -1799,7 +1821,7 @@ partial package PartialHybridTwoPhaseMediumRecord
           end if;
           d := d1*cf.d_pTIO[12] + cf.d_pTIO[11];
         end if;
-      elseif p > cf.d_pT_pO[4] then
+      else
         //SC,SH or SCr2
         if p > fitSCrSC then
           //SC
@@ -1830,31 +1852,32 @@ partial package PartialHybridTwoPhaseMediumRecord
           d := d2*cf.d_pTIO[6] + cf.d_pTIO[5];
         elseif p > fitSCrSH then
           //SCr2
-          x6 := (p - cf.d_pTIO[31])/cf.d_pTIO[32];
-          y6 := (T - cf.d_pTIO[33])/cf.d_pTIO[34];
-          d6 := cf.dscr2_pTD[1];
-          for i in 1:cf.d_pTNt[16] loop
-            d6 := d6 + cf.dscr2_pTA[i]*x6^i;
-          end for;
-          for j in 1:cf.d_pTNt[17] loop
-            d6 := d6 + cf.dscr2_pTB[j]*y6^j;
-          end for;
-          if cf.d_pTNt[16] >= cf.d_pTNt[17] then
-            for i in 1:cf.d_pTNt[16] - 1 loop
-              for j in 1:min(i, cf.d_pTNt[17]) loop
-                count := count + 1;
-                d6 := d6 + cf.dscr2_pTC[count]*x6^(cf.d_pTNt[16] - i)*y6^j;
-              end for;
-            end for;
-          else
-            for j in 1:cf.d_pTNt[17] - 1 loop
-              for i in 1:min(j, cf.d_pTNt[16]) loop
-                count := count + 1;
-                d6 := d6 + cf.dscr2_pTC[count]*y6^(cf.d_pTNt[17] - j)*x6^i;
-              end for;
-            end for;
-          end if;
-          d := d6*cf.d_pTIO[29] + cf.d_pTIO[30];
+
+           x6 := (p - cf.d_pTIO[31])/cf.d_pTIO[32];
+           y6 := (T - cf.d_pTIO[33])/cf.d_pTIO[34];
+           d6 := cf.dscr2_pTD[1];
+           for i in 1:cf.d_pTNt[16] loop
+             d6 := d6 + cf.dscr2_pTA[i]*x6^i;
+           end for;
+           for j in 1:cf.d_pTNt[17] loop
+             d6 := d6 + cf.dscr2_pTB[j]*y6^j;
+           end for;
+           if cf.d_pTNt[16] >= cf.d_pTNt[17] then
+             for i in 1:cf.d_pTNt[16] - 1 loop
+               for j in 1:min(i, cf.d_pTNt[17]) loop
+                 count := count + 1;
+                 d6 := d6 + cf.dscr2_pTC[count]*x6^(cf.d_pTNt[16] - i)*y6^j;
+               end for;
+             end for;
+           else
+             for j in 1:cf.d_pTNt[17] - 1 loop
+               for i in 1:min(j, cf.d_pTNt[16]) loop
+                 count := count + 1;
+                 d6 := d6 + cf.dscr2_pTC[count]*y6^(cf.d_pTNt[17] - j)*x6^i;
+               end for;
+             end for;
+           end if;
+           d := d6*cf.d_pTIO[36] + cf.d_pTIO[35];
         else
           //SH
           x1 := (p - cf.d_pTIO[7])/cf.d_pTIO[8];
@@ -1889,9 +1912,9 @@ partial package PartialHybridTwoPhaseMediumRecord
 
     annotation (derivative(noDerivative=phase) = density_pT_der, inverse(p=
             pressure_dT(
-              d=d,
-              T=T,
-              phase=phase)));
+            d=d,
+            T=T,
+            phase=phase)));
   end density_pT;
   annotation (Documentation(revisions="<html>
 <ul>
