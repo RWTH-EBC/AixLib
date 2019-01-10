@@ -3,6 +3,7 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   extends Modelica.Icons.Record;
 
   constant Boolean SIEngine = true "Default:True=SI-Engine(Otto) / False=DI-Engine(Diesel)";
+  constant Boolean CondTech = false "Is condensing technology used? (default=false)";
   constant String EngMat = "CastIron" "Name of the engine material(Choices: CastIron, SpheroidalGraphiteIron, CastAluminium)";
   type RotationSpeed=Real(final unit="1/s", min=0);
   constant RotationSpeed nEngMax = nEngNominal "Engine speed at full load (default=nEngNominal)";
@@ -17,13 +18,10 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   constant Modelica.SIunits.Length hStr "Stroke";
   constant Modelica.SIunits.Length dCyl(min=0.01) "Cylinder diameter";
   constant Modelica.SIunits.Length ref_dCyl=0.091 "Reference cylinder diameter for friction calculation";
-  constant Modelica.SIunits.Diameter dExh = 0.06 "Exhaust pipe diameter for heat transfer calculation";
-  constant Modelica.SIunits.Diameter dCoo = 0.03175 "Coolant circle pipe diameter for heat transfer calculation";
+  constant Modelica.SIunits.Diameter dExh = 0.0253+Q_MaxHea*2*10^(-7) "Exhaust pipe diameter for heat transfer calculation";
+  constant Modelica.SIunits.Diameter dCoo = 0.0612+(Lambda*P_FueNominal)*10^(-7) "Coolant circle pipe diameter for heat transfer calculation";
   constant Modelica.SIunits.Thickness dInn "Thickness of the cylinder wall between combustion chamber and cooling circle (default value is 5mm)";
-  constant Modelica.SIunits.ThermalConductivity lambda = 44.5 "Thermal conductivity of the engine block material (default value is 44.5)";
-  constant Modelica.SIunits.Density rhoEngWall = 72000 "Density of the the engine block material (default value is 72000)";
-  constant Modelica.SIunits.SpecificHeatCapacity c = 535 "Specific heat capacity of the cylinder wall material (default value is 535)";
-  constant Modelica.SIunits.MassFlowRate m_floCooNominal = 0.00003*Q_MaxHea-0.2043 "Nominal mass flow rate of coolant inside the engine cooling circle (default value is 0,5556kg/s)";
+  constant Modelica.SIunits.MassFlowRate m_floCooNominal = 0.00003*Q_MaxHea-0.2043 "Nominal mass flow rate of coolant inside the engine cooling circle (default density of coolant is 1kg/l)";
   constant Modelica.SIunits.Mass mEng = 70389*VEng+17.913 "Total dry weight of the engine block";
   constant Modelica.SIunits.Pressure ref_p_mfNominal = if SIEngine then 75000 else 110000 "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
   constant Modelica.SIunits.Pressure p_meNominal = P_mecNominal/(i*nEngNominal*VEng) "Nominal mean effective cylinder pressure";
@@ -45,7 +43,6 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
 <p>- <u>Engine Geometry:</u> <b>hStr</b>, <b>dCyl</b>, <b>z</b>, <b>i</b></p>
 <p>- <b>Lambda</b> or <b>xO2Exh</b>: Required for calculation of the engine combustion, heat flow and the exhaust gas composition (Lambda = 0.21 / (0.21 - xO2Exh))</p>
 <p>- <b>nEngNominal</b></p>
-<p><b>- T_ExhPowOut </b>(typical values around 373K, needed for calculation of exhaust gas enthalpy)</p>
 <p>- <b>dInn</b> (typical values around 0.005m, important for heat transfer from engine to cooling)</p>
 <h4><span style=\"color: #008000\">Default values and variable relations </span></h4>
 <p>These are the default values or relations in case that there is no information available:</p>
@@ -56,6 +53,7 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
 <p>- <b>VEng</b> (default=0.25*hStr*Modelica.Constants.pi*dCyl^2*z)</p>
 <p>- <b>mEng</b> (default=70389*VEng+17.913, for first appraisal of the heat capacities of engine housing, should be calibrated)</p>
 <p>- <b>eps</b> (typical values around 12 (SI) and 21 (DI))</p>
+<p>- <b>T_ExhPowOut</b> (typical values around 373K)</p>
 <p>- <u>Exhaust and Coolant:</u> <b>dExh</b>(default=0.06m), <b>dCoo</b>(default=0.04m), <b>dp_Coo</b>(default=0.15bar)<b>, m_flowCooNominal</b>(default=0.00003*Q_MaxHea-0.2043)</p>
 <p>- <u>Engine material:</u> <b>lambda</b>, <b>rhoEngWall</b>, <b>c </b>(default is cast iron(most common))</p>
 </html>"));

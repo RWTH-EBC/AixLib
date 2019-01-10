@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ExhaustHeatExchanger
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger1001
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -73,6 +73,14 @@ model ExhaustHeatExchanger
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
 
+  Medium1.ThermodynamicState state1 = Medium1.setState_pTX(senTExhHot.port_b.p,T_LogMeanExh,senTExhHot.port_b.Xi_outflow);
+  Modelica.SIunits.SpecificEnthalpy h1_in = Medium1.specificEnthalpy(state1);
+  Modelica.SIunits.DynamicViscosity eta1_in = Medium1.dynamicViscosity(state1);
+  Modelica.SIunits.Density rho1_in = Medium1.density_phX(state1.p,h1_in,state1.X);
+  Modelica.SIunits.Velocity v1_in = senMasFloExh.m_flow/(Modelica.Constants.pi*rho1_in*d_iExh^2/4);
+  Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
+  Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
+
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
     CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
@@ -99,14 +107,11 @@ model ExhaustHeatExchanger
   parameter Boolean transferHeat=false
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
-  parameter Boolean ConTec=false
-    "Is condensing technology used and should latent heat be considered?"
-    annotation (Dialog(tab="Advanced", group="Condensing technology"));
   parameter Modelica.SIunits.Temperature TAmb=298.15
     "Fixed ambient temperature for heat transfer"
     annotation (Dialog(group="Ambient Properties"));
   parameter Modelica.SIunits.Temperature T_ExhPowUniOut=CHPEngData.T_ExhPowUniOut
-    "Outlet temperature of exhaust gas flow"
+                                                               "Outlet temperature of exhaust gas flow"
   annotation (Dialog(group="Thermal"));
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer" annotation (Dialog(tab="Calibration parameters"));
@@ -138,16 +143,17 @@ model ExhaustHeatExchanger
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
     "Guess value of m_flow = port_a.m_flow"
     annotation (Dialog(tab="Advanced", group="Initialization"));
-  constant Modelica.SIunits.MolarMass M_H2O=0.01802
-    "Molar mass of water";
-  constant Modelica.SIunits.MolarMass M_Exh
-    "Molar mass of the exhaust gas"
-    annotation (Dialog(group="Thermal"));
+  Modelica.SIunits.SpecificHeatCapacity meanCpExh=1227.23
+    "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
+   annotation (Dialog(group = "Thermal"));
+  Modelica.SIunits.HeatFlowRate Q_flowExhHea=senMasFloExh.m_flow*meanCpExh*(
+      senTExhHot.T - T_ExhPowUniOut)
+    "Calculated exhaust heat from fixed exhaust outlet temperature";
 
-    //Antoine-Parameters needed for the calculation of the saturation vapor pressure xSat_H2OExhDry
-  constant Real A=11.7621;
-  constant Real B=3874.61;
-  constant Real C=229.73;
+  Modelica.SIunits.Temperature T_LogMeanExh
+    "Mean logarithmic temperature of exhaust gas";
+  Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
+  "Quotient of exhaust gas in and outgoing temperature";
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
         C_ExhHex, T(start=TAmb, fixed=true))
@@ -223,73 +229,7 @@ model ExhaustHeatExchanger
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,20})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow latentHeatFlow
-    "Latent heat flow from water condensation in the exhaust gas"
-    annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
-  Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=m_ConH2OExh*
-        deltaH_Vap)
-    "Calculated latent exhaust heat from water condensation"
-    annotation (Placement(transformation(extent={{92,-22},{72,-2}})));
-
-  Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
-  "Quotient of exhaust gas in and outgoing temperature";
-
-   //Calculation of water condensation and its usable latent heat
-  Real x_H2OExhDry
-    "Water load of the exhaust gas";
-  Real xSat_H2OExhDry
-    "Saturation water load of the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_H2OExh
-    "Mass flow of water in the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_ExhDry
-    "Mass flow of dry exhaust gas";
-  Modelica.SIunits.MassFlowRate m_ConH2OExh
-    "Mass flow of condensing water";
-  Modelica.SIunits.AbsolutePressure pExh
-    "Pressure in the exhaust gas stream (assuming ambient conditions)";
-  Modelica.SIunits.AbsolutePressure pSatH2OExh
-    "Saturation vapor pressure of the exhaust gas water";
-  Modelica.SIunits.SpecificEnthalpy deltaH_Vap
-    "Specific enthalpy of vaporization (empirical formula based on table data)";
-  Modelica.SIunits.SpecificHeatCapacity meanCpExh=1227.23
-    "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
-   annotation (Dialog(group = "Thermal"));
- /* Modelica.SIunits.HeatFlowRate Q_flowExhHea=senMasFloExh.m_flow*meanCpExh*(
-      senTExhHot.T - T_ExhPowUniOut)
-    "Calculated exhaust heat from fixed exhaust outlet temperature";*/
-  Modelica.SIunits.Temperature T_LogMeanExh
-    "Mean logarithmic temperature of exhaust gas";
-
-    //Calculation of the thermodynamic state of the exhaust gas inlet used by the convective heat transfer model
-  Medium1.ThermodynamicState state1 = Medium1.setState_pTX(senTExhHot.port_b.p,T_LogMeanExh,senTExhHot.port_b.Xi_outflow);
-  Modelica.SIunits.SpecificEnthalpy h1_in = Medium1.specificEnthalpy(state1);
-  Modelica.SIunits.DynamicViscosity eta1_in = Medium1.dynamicViscosity(state1);
-  Modelica.SIunits.Density rho1_in = Medium1.density_phX(state1.p,h1_in,state1.X);
-  Modelica.SIunits.Velocity v1_in = senMasFloExh.m_flow/(Modelica.Constants.pi*rho1_in*d_iExh^2/4);
-  Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
-  Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
-
 equation
-
-  if ConTec then
-  x_H2OExhDry=senTExhHot.port_a.Xi_outflow[3]/(1 - senTExhHot.port_a.Xi_outflow[3]);
-  xSat_H2OExhDry=if noEvent(M_H2O*pSatH2OExh/((pExh-pSatH2OExh)*M_Exh)>=0) then M_H2O*pSatH2OExh/((pExh-pSatH2OExh)*M_Exh) else x_H2OExhDry;
-  m_H2OExh=senMasFloExh.m_flow*senTExhHot.port_a.Xi_outflow[3];
-  m_ExhDry=senMasFloExh.m_flow-m_H2OExh;
-  m_ConH2OExh=if (x_H2OExhDry>xSat_H2OExhDry) then m_ExhDry*(x_H2OExhDry-xSat_H2OExhDry) else 0;
-  pExh=senTExhHot.port_a.p;
-  pSatH2OExh=100000*Modelica.Math.exp(A-B/(senTExhCold.T-273.15+C));
-  deltaH_Vap=2697400+446.25*senTExhCold.T-4.357*(senTExhCold.T)^2;
-  else
-  x_H2OExhDry=0;
-  xSat_H2OExhDry=0;
-  m_H2OExh=0;
-  m_ExhDry=0;
-  m_ConH2OExh=0;
-  pExh=0;
-  pSatH2OExh=0;
-  deltaH_Vap=0;
-  end if;
 
   if (QuoT_ExhInOut-1)>0.0001 then
   T_LogMeanExh=(senTExhHot.T-senTExhCold.T)/Modelica.Math.log(QuoT_ExhInOut);
@@ -332,10 +272,6 @@ equation
     annotation (Line(points={{20,60},{28,60}}, color={0,127,255}));
   connect(senMasFloExh.m_flow, heatConvExhaustPipeInside.m_flow)
     annotation (Line(points={{70,49},{70,20.4},{-9.2,20.4}}, color={0,0,127}));
-  connect(latentExhaustHeat.y, latentHeatFlow.Q_flow)
-    annotation (Line(points={{71,-12},{60,-12}}, color={0,0,127}));
-  connect(latentHeatFlow.port, heatCapacitor.port)
-    annotation (Line(points={{40,-12},{20,-12}}, color={191,0,0}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-70,80},{70,-80}},
@@ -363,18 +299,12 @@ equation
 <p>-&gt; Bekannte Gr&ouml;&szlig;en sind die Abgastemperatur bei Austritt und die Gr&ouml;&szlig;enordnung des W&auml;rmestroms an den K&uuml;hlwasserkreislauf</p>
 <p>- Die W&auml;rme&uuml;bertragung an die Umgebung (G_Amb) und den K&uuml;hlwasserkreislauf (G_Cool) wird mittels W&auml;rmeleitung berechnet</p>
 <p>-&gt; Koeffizienten k&ouml;nnen mittels bekannter Gr&ouml;&szlig;en angen&auml;hert werden</p>
-<p>- W&auml;rmeleistung aus der Kondensation von Wasser im Abgas kann ber&uuml;cksichtigt werden</p>
-<p>-&gt; Berechnung aus der Bestimmung des ausfallenden Wassers &uuml;ber den S&auml;ttigungsdampfdruck und die kritische Beladung im Abgas</p>
-<p>-&gt; Bestimmung der Verdampfungsenthalpie &uuml;ber eine empirische Formel aus Tabellendaten</p>
-<p>-&gt; Annahme: Der latente W&auml;rmestrom geht zus&auml;tzlich zum konvektiven W&auml;rmestrom auf die Kapazit&auml;t des Abgasw&auml;rme&uuml;bertragers &uuml;ber</p>
+<p>- W&auml;rmeleistung aus der Kondensation von Wasser im Abgas ist momentan nicht ber&uuml;cksichtigt</p>
 <p><br>- Calculation of a convective heat transfer between exhaust gas and heat exchanger capacity as a cylindrical exhaust pipe</p>
 <p>-&gt; For the pipe cross section, the connection cross section of the power unit is used, the heat transfer area and the capacity of the heat exchanger can be calibrated</p>
 <p>-&gt; Known quantities are the exhaust gas temperature at the outlet and the magnitude of the heat flow to the cooling water circuit</p>
 <p>- The heat transfer to the environment (G_Amb) and the cooling water circuit (G_Cool) is calculated by means of heat conduction</p>
 <p>-&gt; Coefficients can be approximated using known quantities</p>
-<p>- Heat output from water condensation in the exhaust gas is can be considered</p>
-<p>-&gt; Calculation from the determination of the condensing water over the saturation vapor pressure and the critical load in the exhaust gas</p>
-<p>-&gt; Determination of the enthalpy of vaporization using an empirical formula from tabular data</p>
-<p>-&gt; Assumption: The latent heat flow is is added to the convective heat flow to the capacity of the exhaust heat exchanger</p>
+<p>- Heat output from water condensation in the exhaust gas is currently not considered</p>
 </html>"));
-end ExhaustHeatExchanger;
+end ExhaustHeatExchanger1001;

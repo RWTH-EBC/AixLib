@@ -6,7 +6,7 @@ record CHP_ECPowerXRGI9
     hStr=0.078,
     dCyl=0.072,
     dExh=0.06,
-    dCoo=0.03,
+    dCoo=0.0272,
     dInn=0.005,
     nEngNominal=40.833,
     xO2Exh=0.05,

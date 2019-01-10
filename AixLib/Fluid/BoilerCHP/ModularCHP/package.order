@@ -4,12 +4,11 @@ heatFromExhaustGas
 ASM_CHPGenerator
 cHPEngineExample
 engineBlock
-ExhaustHeatExchanger
+EngineHousingConstant
 CHPCombustionEngine
-EngineHousing
+ExhaustHeatExchanger
 ModelEnginePowerAndHeatToCooling
 EngineMaterialData
 EngineMaterial_CastIron
 EngineMaterial_SpheroidalGraphiteIron
 EngineMaterial_CastAluminium
-EngineHousingConstant

@@ -51,3 +51,6 @@ EngineHousing0701
 EngineHousing0801
 ModelEnginePowerAndHeatToCooling0801
 CHPEngDataBaseRecord_MaterialData
+EngineHousing0901
+ExhaustHeatExchanger1001
+ModelEnginePowerAndHeatToCooling1001

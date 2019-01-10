@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
-model ModelEnginePowerAndHeatToCooling0801
+model ModelEnginePowerAndHeatToCooling1001
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -25,16 +25,21 @@ model ModelEnginePowerAndHeatToCooling0801
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
   parameter
-    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPEngDataBaseRecord_MaterialData
+    AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.EngineHousing0801 engineToCoolant(
+  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
+      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+    "Thermal engine material data for calculations"
+    annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
+
+  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousingConstant
+                                                  engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPCombustionEngine.m_Exh,
-    lambda=CHPEngineModel.lambda,
     T_Amb=T_ambient,
     redeclare package Medium3 = Medium_Exhaust,
     dCyl=CHPEngineModel.dCyl,
@@ -42,20 +47,21 @@ model ModelEnginePowerAndHeatToCooling0801
     mEng=CHPEngineModel.mEng,
     meanCpExh=cHPCombustionEngine.meanCpExh,
     dInn=CHPEngineModel.dInn,
-    rhoEngWall=CHPEngineModel.rhoEngWall,
-    c=CHPEngineModel.c,
     cylToInnerWall(maximumEngineHeat(y=cHPCombustionEngine.Q_therm)),
     T_Com=cHPCombustionEngine.T_Com,
     GEngToAmb=0.23,
     nEng=cHPCombustionEngine.nEng,
-    T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T)
+    T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T,
+    lambda=EngMat.lambda,
+    rhoEngWall=EngMat.rhoEngWall,
+    c=EngMat.c,
+    EngMatData=EngMat)
     "A physikal model for calculating the thermal, mass and mechanical output of an ice powered CHP"
     annotation (Placement(transformation(extent={{2,16},{30,44}})));
 
   AixLib.Fluid.FixedResistances.Pipe
     engineHeatTransfer(
     redeclare package Medium = Medium_Coolant,
-    diameter=0.03175,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=CHPEngineModel.dp_Coo, m_flow_nominal=m_flow),
@@ -66,7 +72,8 @@ model ModelEnginePowerAndHeatToCooling0801
     use_HeatTransferConvective=false,
     p_a_start=system.p_start,
     p_b_start=system.p_start,
-    alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length))
+    alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
+    diameter=CHPEngineModel.dCoo)
     annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
                                  /* constrainedby 
     CHPCombustionHeatToCoolingHeatPorts(
@@ -99,11 +106,11 @@ model ModelEnginePowerAndHeatToCooling0801
     T_Amb=T_ambient,
     CHPEngData=CHPEngineModel,
     T_logEngCool=exhaustHeatExchanger.senTCoolCold.T,
+    T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T,
     inertia(phi(fixed=true, start=0), w(
         fixed=true,
-        start=100,
-        displayUnit="rad/s")),
-    T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T)
+        start=85,
+        displayUnit="rad/s")))
     annotation (Placement(transformation(extent={{-40,26},{-10,52}})));
   Modelica.Blocks.Sources.RealExpression massFlowFuel(y=cHPCombustionEngine.m_Fue)
     annotation (Placement(transformation(extent={{-108,58},{-88,78}})));
@@ -124,8 +131,24 @@ model ModelEnginePowerAndHeatToCooling0801
     "Coolant return temperature" annotation (Dialog(tab="Engine Cooling Circle"));
   Modelica.SIunits.Temperature T_CoolSup=tempCoolantSupplyFlow.T
     "Coolant supply temperature" annotation (Dialog(tab="Engine Cooling Circle"));
-  Modelica.SIunits.Power Q_TotalUnused=cHPCombustionEngine.Q_therm-engineToCoolant.actualHeatFlowEngine.Q_flow+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total unused heat of the CHP unit";
-  Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total unused heat in the exhaust gas";
+  Modelica.SIunits.Power Q_Therm=if (engineHeatTransfer.heatPort_outside.Q_flow+exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow)>10
+  then engineHeatTransfer.heatPort_outside.Q_flow+exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow
+  else 1 "Thermal output power of the CHP unit";
+  Modelica.SIunits.Power P_Mech=cHPCombustionEngine.P_eff "Mechanical output power of the CHP unit";
+  Modelica.SIunits.Power P_Fuel=m_Fuel*Medium_Fuel.H_U "CHP fuel expenses";
+  Modelica.SIunits.Power Q_TotUnused=cHPCombustionEngine.Q_therm-engineToCoolant.actualHeatFlowEngine.Q_flow+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total heat error of the CHP unit";
+  Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total exhaust heat error";
+  Modelica.SIunits.MassFlowRate m_CO2=cHPCombustionEngine.m_CO2Exh "CO2 emission output rate";
+  Modelica.SIunits.MassFlowRate m_Fuel=if
+                                         (cHPCombustionEngine.m_Fue)>0.0001 then cHPCombustionEngine.m_Fue else 0.0001 "Fuel consumption rate of CHP unit";
+  type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
+  SpecificEmission b_CO2=3600000000*m_CO2/(Q_Therm+P_Mech) "Specific CO2 emissions per kWh (heat and power)";
+  SpecificEmission b_e=3600000000*m_Fuel/(Q_Therm+P_Mech) "Specific fuel consumption per kWh (heat and power)";
+  Real FueUtiRate = (Q_Therm+P_Mech)/P_Fuel "Fuel utilization rate of the CHP unit";
+  Real PowHeatRatio = P_Mech/Q_Therm "Power to heat ration of the CHP unit";
+  Real eta_Therm = Q_Therm/P_Fuel "Thermal efficiency of the CHP unit";
+  Real eta_Mech = P_Mech/P_Fuel "Mechanical efficiency of the CHP unit";
+
   Modelica.Fluid.Sources.MassFlowSource_T inletFuel(
     redeclare package Medium = Medium_Fuel,
     use_m_flow_in=true,
@@ -166,7 +189,8 @@ model ModelEnginePowerAndHeatToCooling0801
       p_a_start=system.p_start,
       p_b_start=system.p_start,
       use_HeatTransferConvective=false,
-      isEmbedded=true),
+      isEmbedded=true,
+      diameter=CHPEngineModel.dCoo),
     TAmb=T_ambient,
     pAmb=p_ambient,
     T_ExhPowUniOut=CHPEngineModel.T_ExhPowUniOut,
@@ -287,4 +311,4 @@ physikal"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end ModelEnginePowerAndHeatToCooling0801;
+end ModelEnginePowerAndHeatToCooling1001;

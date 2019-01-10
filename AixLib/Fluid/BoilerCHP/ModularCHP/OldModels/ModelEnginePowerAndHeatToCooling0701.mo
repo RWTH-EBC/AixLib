@@ -159,7 +159,8 @@ model ModelEnginePowerAndHeatToCooling0701
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-62,-8},{-78,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger1001
+    exhaustHeatExchanger(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,

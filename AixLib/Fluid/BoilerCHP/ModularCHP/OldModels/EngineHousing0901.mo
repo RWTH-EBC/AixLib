@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-class EngineHousing "Engine housing as a simple two layer wall."
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+class EngineHousing0901 "Engine housing as a simple two layer wall."
   import AixLib;
 
   replaceable package Medium3 =
@@ -112,7 +112,8 @@ public
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor innerWall(
     C=CEngWall,
     der_T(fixed=false, start=0),
-    T(fixed=true, start=298.15)) annotation (Placement(transformation(
+    T(start=T_Amb,
+      fixed=true))       annotation (Placement(transformation(
         origin={-24,-58},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -155,7 +156,9 @@ public
     mEngBlo=mEngBlo,
     mEng=mEng,
     mEngWall=mEngWall,
-    GEngToAmb=GEngToAmb) annotation (Placement(transformation(rotation=0,
+    GEngToAmb=GEngToAmb,
+    outerEngineBlock(T(start=T_Amb)))
+                         annotation (Placement(transformation(rotation=0,
           extent={{-6,-46},{14,-26}})));
 
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
@@ -286,4 +289,4 @@ alt=\"Calculation of the cylinder wall temperature\"/> </p>
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousing;
+end EngineHousing0901;

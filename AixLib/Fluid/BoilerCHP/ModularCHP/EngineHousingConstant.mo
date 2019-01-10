@@ -74,6 +74,8 @@ protected
   parameter Modelica.SIunits.ThermalConductance GEngBlo=lambda*A_WInn/dOut
    "Thermal conductance of the remaining engine body"
    annotation (Dialog(tab="Thermal"));
+  Modelica.SIunits.ThermalConductance CalT_Exh
+ "Calculation condition for the inlet temperature of exhaust gas";
 
 public
   Modelica.SIunits.Temperature T_Com
@@ -94,26 +96,14 @@ public
   Modelica.SIunits.SpecificHeatCapacity meanCpExh
     "Mean specific heat capacity of the exhaust gas" annotation (Dialog(tab="Thermal"));
 
-protected
-  Modelica.SIunits.ThermalConductance CalT_Exh
- "Calculation condition for the inlet temperature of exhaust gas";
-
-/*Modelica.SIunits.Temperature T_CoolSup=363.15
-    "Temperature of coolant outlet" annotation (Dialog(tab="Thermal"));
-  Modelica.SIunits.Temperature T_CoolRet=350.15
-    "Temperature of coolant inlet" annotation (Dialog(tab="Thermal"));
-  Real QuoT_SupRet=T_CoolSup/T_CoolRet
-    "Quotient of coolant supply and return temperature";
-*/
-
-public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient
     annotation (Placement(transformation(extent={{-12,-112},{12,-88}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor innerWall(
     C=CEngWall,
     der_T(fixed=false, start=0),
-    T(fixed=true, start=298.15)) annotation (Placement(transformation(
+    T(start=T_Amb,
+      fixed=true))       annotation (Placement(transformation(
         origin={-24,-58},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -156,7 +146,9 @@ public
     mEngBlo=mEngBlo,
     mEng=mEng,
     mEngWall=mEngWall,
-    GEngToAmb=GEngToAmb) annotation (Placement(transformation(rotation=0,
+    GEngToAmb=GEngToAmb,
+    outerEngineBlock(T(start=T_Amb)))
+                         annotation (Placement(transformation(rotation=0,
           extent={{-6,-46},{14,-26}})));
 
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)

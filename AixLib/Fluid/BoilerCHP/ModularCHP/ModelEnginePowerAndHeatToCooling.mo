@@ -62,7 +62,6 @@ model ModelEnginePowerAndHeatToCooling
   AixLib.Fluid.FixedResistances.Pipe
     engineHeatTransfer(
     redeclare package Medium = Medium_Coolant,
-    diameter=0.03175,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=CHPEngineModel.dp_Coo, m_flow_nominal=m_flow),
@@ -73,7 +72,8 @@ model ModelEnginePowerAndHeatToCooling
     use_HeatTransferConvective=false,
     p_a_start=system.p_start,
     p_b_start=system.p_start,
-    alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length))
+    alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
+    diameter=CHPEngineModel.dCoo)
     annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
                                  /* constrainedby 
     CHPCombustionHeatToCoolingHeatPorts(
@@ -139,8 +139,7 @@ model ModelEnginePowerAndHeatToCooling
   Modelica.SIunits.Power Q_TotUnused=cHPCombustionEngine.Q_therm-engineToCoolant.actualHeatFlowEngine.Q_flow+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total heat error of the CHP unit";
   Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total exhaust heat error";
   Modelica.SIunits.MassFlowRate m_CO2=cHPCombustionEngine.m_CO2Exh "CO2 emission output rate";
-  Modelica.SIunits.MassFlowRate m_Fuel=if
-                                         (cHPCombustionEngine.m_Fue)>0.0001 then cHPCombustionEngine.m_Fue else 0.0001 "Fuel consumption rate of CHP unit";
+  Modelica.SIunits.MassFlowRate m_Fuel=if (cHPCombustionEngine.m_Fue)>0.0001 then cHPCombustionEngine.m_Fue else 0.0001 "Fuel consumption rate of CHP unit";
   type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
   SpecificEmission b_CO2=3600000000*m_CO2/(Q_Therm+P_Mech) "Specific CO2 emissions per kWh (heat and power)";
   SpecificEmission b_e=3600000000*m_Fuel/(Q_Therm+P_Mech) "Specific fuel consumption per kWh (heat and power)";
@@ -148,7 +147,6 @@ model ModelEnginePowerAndHeatToCooling
   Real PowHeatRatio = P_Mech/Q_Therm "Power to heat ration of the CHP unit";
   Real eta_Therm = Q_Therm/P_Fuel "Thermal efficiency of the CHP unit";
   Real eta_Mech = P_Mech/P_Fuel "Mechanical efficiency of the CHP unit";
-
 
   Modelica.Fluid.Sources.MassFlowSource_T inletFuel(
     redeclare package Medium = Medium_Fuel,
@@ -189,7 +187,8 @@ model ModelEnginePowerAndHeatToCooling
       p_a_start=system.p_start,
       p_b_start=system.p_start,
       use_HeatTransferConvective=false,
-      isEmbedded=true),
+      isEmbedded=true,
+      diameter=CHPEngineModel.dCoo),
     TAmb=T_ambient,
     pAmb=p_ambient,
     T_ExhPowUniOut=CHPEngineModel.T_ExhPowUniOut,
@@ -201,12 +200,17 @@ model ModelEnginePowerAndHeatToCooling
     heatConvExhaustPipeInside(length=exhaustHeatExchanger.l_ExhHex, c=
           cHPCombustionEngine.meanCpExh),
     volExhaust(V=exhaustHeatExchanger.VExhHex),
-    CHPEngData=CHPEngineModel)
+    CHPEngData=CHPEngineModel,
+    M_Exh=cHPCombustionEngine.MM_Exh,
+    ConTec=ConTec)
     annotation (Placement(transformation(extent={{48,-12},{72,12}})));
    // VExhHex = CHPEngineModel.VExhHex,
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
     quadraticSpeedDependentTorque(w_nominal=160, tau_nominal=-100)
     annotation (Placement(transformation(extent={{-50,82},{-38,94}})));
+  parameter Boolean ConTec=CHPEngineModel.CondTech
+    "Is condensing technology used and should latent heat be considered?"
+    annotation (Dialog(tab="Advanced", group="Latent heat use"));
 equation
   connect(engineHeatTransfer.port_a, coolantReturnFlow.ports[1])
     annotation (Line(points={{-32.4,-58},{-90,-58}},

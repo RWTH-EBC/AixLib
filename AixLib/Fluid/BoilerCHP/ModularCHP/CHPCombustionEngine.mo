@@ -10,7 +10,7 @@ model CHPCombustionEngine
       Documentation(revisions="<html>
 </html>"));
   replaceable package Medium2 =
-      DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
                                                             constrainedby
     DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
                          annotation(choicesAllMatching=true);
@@ -94,7 +94,8 @@ model CHPCombustionEngine
   Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
   annotation(Dialog(group="Parameters"));
   Modelica.SIunits.Temperature T_Com(start=T_Amb) "Temperature of the combustion gases";
-  Modelica.SIunits.Temperature T_ExhCHPOut "Exhaust gas outlet temperature of CHP unit"
+  Modelica.SIunits.Temperature T_ExhCHPOut=383.15
+                                           "Exhaust gas outlet temperature of CHP unit"
   annotation(Dialog(group="Parameters"));
 
   // Dynamic engine friction calculation model for the mechanical power and heat output of the combustion engine
@@ -146,7 +147,8 @@ model CHPCombustionEngine
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-20,50})));
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=1) annotation (
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.5*CHPEngData.z/4)
+                                                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,

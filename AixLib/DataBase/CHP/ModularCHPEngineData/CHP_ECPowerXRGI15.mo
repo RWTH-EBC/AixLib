@@ -7,7 +7,7 @@ record CHP_ECPowerXRGI15
     hStr=0.086,
     dCyl=0.091,
     dExh=0.06,
-    dCoo=0.04,
+    dCoo=0.0418,
     dInn=0.005,
     nEngNominal=25.583,
     xO2Exh=0.05,
