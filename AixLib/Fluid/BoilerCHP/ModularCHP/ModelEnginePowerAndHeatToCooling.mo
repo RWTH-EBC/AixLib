@@ -35,8 +35,7 @@ model ModelEnginePowerAndHeatToCooling
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousingConstant
-                                                  engineToCoolant(
+  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousing engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPCombustionEngine.m_Exh,
@@ -73,7 +72,8 @@ model ModelEnginePowerAndHeatToCooling
     p_a_start=system.p_start,
     p_b_start=system.p_start,
     alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
-    diameter=CHPEngineModel.dCoo)
+    diameter=CHPEngineModel.dCoo,
+    allowFlowReversal=allowFlowReversalCoolant)
     annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
                                  /* constrainedby 
     CHPCombustionHeatToCoolingHeatPorts(
@@ -107,10 +107,7 @@ model ModelEnginePowerAndHeatToCooling
     CHPEngData=CHPEngineModel,
     T_logEngCool=exhaustHeatExchanger.senTCoolCold.T,
     T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T,
-    inertia(phi(fixed=true, start=0), w(
-        fixed=true,
-        start=85,
-        displayUnit="rad/s")))
+    inertia(phi(fixed=false), w(fixed=false, displayUnit="rad/s")))
     annotation (Placement(transformation(extent={{-40,26},{-10,52}})));
   Modelica.Blocks.Sources.RealExpression massFlowFuel(y=cHPCombustionEngine.m_Fue)
     annotation (Placement(transformation(extent={{-108,58},{-88,78}})));
@@ -188,7 +185,8 @@ model ModelEnginePowerAndHeatToCooling
       p_b_start=system.p_start,
       use_HeatTransferConvective=false,
       isEmbedded=true,
-      diameter=CHPEngineModel.dCoo),
+      diameter=CHPEngineModel.dCoo,
+      allowFlowReversal=allowFlowReversalCoolant),
     TAmb=T_ambient,
     pAmb=p_ambient,
     T_ExhPowUniOut=CHPEngineModel.T_ExhPowUniOut,
@@ -198,19 +196,44 @@ model ModelEnginePowerAndHeatToCooling
     d_iExh=CHPEngineModel.dExh,
     dp_CooExhHex=CHPEngineModel.dp_Coo,
     heatConvExhaustPipeInside(length=exhaustHeatExchanger.l_ExhHex, c=
-          cHPCombustionEngine.meanCpExh),
+          cHPCombustionEngine.meanCpExh,
+      m_flow=cHPCombustionEngine.exhaustFlow.m_flow_in),
     volExhaust(V=exhaustHeatExchanger.VExhHex),
     CHPEngData=CHPEngineModel,
     M_Exh=cHPCombustionEngine.MM_Exh,
-    ConTec=ConTec)
+    ConTec=ConTec,
+    allowFlowReversal1=allowFlowReversalExhaust,
+    allowFlowReversal2=allowFlowReversalCoolant,
+    m1_flow_small=mExh_flow_small,
+    m2_flow_small=mCool_flow_small)
     annotation (Placement(transformation(extent={{48,-12},{72,12}})));
    // VExhHex = CHPEngineModel.VExhHex,
-  Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque
-    quadraticSpeedDependentTorque(w_nominal=160, tau_nominal=-100)
-    annotation (Placement(transformation(extent={{-50,82},{-38,94}})));
   parameter Boolean ConTec=CHPEngineModel.CondTech
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
+  Modelica.Mechanics.Rotational.Sources.Speed speed
+    annotation (Placement(transformation(extent={{-70,84},{-50,104}})));
+  Modelica.Blocks.Sources.Trapezoid trapezoid(
+    amplitude=160,
+    rising=10,
+    falling=10,
+    width=1000,
+    period=1500)
+    annotation (Placement(transformation(extent={{-108,84},{-88,104}})));
+  parameter Boolean allowFlowReversalExhaust=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for exhaust medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Boolean allowFlowReversalCoolant=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mExh_flow_small=0.0001
+    "Small exhaust mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mCool_flow_small=0.0001
+    "Small coolant mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
 equation
   connect(engineHeatTransfer.port_a, coolantReturnFlow.ports[1])
     annotation (Line(points={{-32.4,-58},{-90,-58}},
@@ -241,8 +264,6 @@ equation
     annotation (Line(points={{-62,0},{16,0},{16,16}}, color={191,0,0}));
   connect(exhaustHeatExchanger.port_b, engineToCoolant.port_Ambient)
     annotation (Line(points={{48,0},{16,0},{16,16}}, color={191,0,0}));
-  connect(quadraticSpeedDependentTorque.flange, cHPCombustionEngine.flange_a)
-    annotation (Line(points={{-38,88},{-25,88},{-25,52}}, color={0,0,0}));
   connect(engineToCoolant.exhaustGasTemperature, cHPCombustionEngine.exhaustGasTemperature)
     annotation (Line(points={{4.24,32.8},{-2,32.8},{-2,44.2},{-10,44.2}}, color=
          {0,0,127}));
@@ -252,6 +273,10 @@ equation
   connect(cHPCombustionEngine.port_Exhaust, exhaustHeatExchanger.port_a1)
     annotation (Line(points={{-10.3,48.36},{38,48.36},{38,7.2},{48,7.2}}, color=
          {0,127,255}));
+  connect(speed.w_ref,trapezoid. y)
+    annotation (Line(points={{-72,94},{-87,94}}, color={0,0,127}));
+  connect(speed.flange, cHPCombustionEngine.flange_a)
+    annotation (Line(points={{-50,94},{-25,94},{-25,52}}, color={0,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},

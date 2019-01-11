@@ -1,4 +1,4 @@
-within AixLib.Utilities.HeatTransfer;
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
 model HeatConvPipeInsideDynamic
   "Model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
@@ -7,8 +7,6 @@ model HeatConvPipeInsideDynamic
   parameter Modelica.SIunits.Area A_sur = 2 "Surface for heat transfer";
   parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 annotation(Dialog(enable = not calculateAlpha));
-  Modelica.SIunits.MassFlowRate m_flow "Mass flow rate of gas"
-    annotation (Dialog(group="Parameters"));
   Modelica.SIunits.SpecificHeatCapacity c
     "Heat capacity of considered medium" annotation(Dialog(group="Parameters"));
   Modelica.SIunits.Density rho "Density of considered medium" annotation(Dialog(group="Parameters"));
@@ -27,6 +25,10 @@ model HeatConvPipeInsideDynamic
   Modelica.SIunits.CoefficientOfHeatTransfer alpha;
   Real zeta "pressure loss coefficient";
 
+  Modelica.Blocks.Interfaces.RealInput m_flow annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={-4,108})));
 equation
   if calculateAlpha then
     v      =        4*m_flow/(Modelica.Constants.pi * d_i^2 * rho);

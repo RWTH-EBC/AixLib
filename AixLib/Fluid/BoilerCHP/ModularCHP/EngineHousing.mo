@@ -1,6 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-class EngineHousingConstant
-  "Engine housing as a simple two layer wall."
+class EngineHousing "Engine housing as a simple two layer wall."
   import AixLib;
 
   replaceable package Medium3 =
@@ -279,4 +278,4 @@ alt=\"Calculation of the cylinder wall temperature\"/> </p>
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousingConstant;
+end EngineHousing;

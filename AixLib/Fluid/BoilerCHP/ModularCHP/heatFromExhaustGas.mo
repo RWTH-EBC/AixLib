@@ -1,8 +1,7 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
 model heatFromExhaustGas
-  Utilities.HeatTransfer.HeatConvPipeInsideDynamic heatConvExhaustPipeInside(
-                         d_i=d_iExh, A_sur=3)
-                                     annotation (Placement(transformation(
+  OldModels.HeatConvPipeInsideDynamic heatConvExhaustPipeInside(d_i=d_iExh,
+      A_sur=3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-54,0})));

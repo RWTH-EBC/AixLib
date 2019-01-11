@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.Examples;
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
 model ModularCHP_ExhaustHeatExchangerStartStop
   "Example that illustrates use of modular CHP exhaust heat exchanger submodel"
   import AixLib;
@@ -14,6 +14,19 @@ model ModularCHP_ExhaustHeatExchangerStartStop
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
   constant Modelica.SIunits.MassFraction Xi_Exh[:] = {0.73,0.05,0.08,0.14};
+  constant Modelica.SIunits.MolarMass M_H2O=0.01802
+    "Molar mass of water";
+  constant Modelica.SIunits.MolarMass M_Exh=0.02846
+    "Molar mass of the exhaust gas";
+
+    //Antoine-Parameters needed for the calculation of the saturation vapor pressure xSat_H2OExhDry
+  constant Real A=11.7621;
+  constant Real B=3874.61;
+  constant Real C=229.73;
+
+  parameter Boolean ConTec=false
+    "Is condensing technology used and should latent heat be considered?"
+    annotation (Dialog(tab="Advanced", group="Condensing technology"));
   parameter Modelica.SIunits.Time tau=1
     "Time constant of the temperature sensors at nominal flow rate"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
@@ -60,9 +73,9 @@ model ModularCHP_ExhaustHeatExchangerStartStop
   Modelica.SIunits.SpecificHeatCapacity meanCpExh=1200
     "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
    annotation (Dialog(group = "Thermal"));
-  Modelica.SIunits.HeatFlowRate Q_flowExhHea=senMasFloExh.m_flow*meanCpExh*(
+  /*  Modelica.SIunits.HeatFlowRate Q_flowExhHea=senMasFloExh.m_flow*meanCpExh*(
       senTExhHot.T - T_ExhPowUniOut)
-    "Calculated exhaust heat from fixed exhaust outlet temperature";
+    "Calculated exhaust heat from fixed exhaust outlet temperature"; */
 
   Medium_Exhaust.ThermodynamicState state1 = Medium_Exhaust.setState_pTX(senTExhHot.port_b.p,T_LogMeanExh,senTExhHot.port_b.Xi_outflow);
   Modelica.SIunits.SpecificEnthalpy h1_in = Medium_Exhaust.specificEnthalpy(state1);
@@ -71,6 +84,24 @@ model ModularCHP_ExhaustHeatExchangerStartStop
   Modelica.SIunits.Velocity v1_in = senMasFloExh.m_flow/(Modelica.Constants.pi*rho1_in*d_iExh^2/4);
   Modelica.SIunits.ThermalConductivity lambda1_in = Medium_Exhaust.thermalConductivity(state1);
   Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
+
+     //Variables for water condensation and its usable latent heat calculation
+  Real x_H2OExhDry
+    "Water load of the exhaust gas";
+  Real xSat_H2OExhDry
+    "Saturation water load of the exhaust gas";
+  Modelica.SIunits.MassFlowRate m_H2OExh
+    "Mass flow of water in the exhaust gas";
+  Modelica.SIunits.MassFlowRate m_ExhDry
+    "Mass flow of dry exhaust gas";
+  Modelica.SIunits.MassFlowRate m_ConH2OExh
+    "Mass flow of condensing water";
+  Modelica.SIunits.AbsolutePressure pExh
+    "Pressure in the exhaust gas stream (assuming ambient conditions)";
+  Modelica.SIunits.AbsolutePressure pSatH2OExh
+    "Saturation vapor pressure of the exhaust gas water";
+  Modelica.SIunits.SpecificEnthalpy deltaH_Vap
+    "Specific enthalpy of vaporization (empirical formula based on table data)";
 
   Modelica.SIunits.Temperature T_LogMeanExh
     "Mean logarithmic temperature of exhaust gas";
@@ -122,14 +153,15 @@ model ModularCHP_ExhaustHeatExchangerStartStop
     mu_default=1.82*10^(-5),
     length=l_ExhHex)               "Pressure drop"
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Utilities.HeatTransfer.HeatConvPipeInsideDynamic heatConvExhaustPipeInside(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.HeatConvPipeInsideDynamic
+    heatConvExhaustPipeInside(
     length=l_ExhHex,
     d_i=d_iExh,
     A_sur=A_surExhHea,
     c=1200,
     rho=rho1_in,
     lambda=lambda1_in,
-    eta=eta1_in)                     annotation (Placement(transformation(
+    eta=eta1_in) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,0})));
@@ -163,7 +195,8 @@ model ModularCHP_ExhaustHeatExchangerStartStop
     final m_flow_small=0.0001)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
-  Modelica.Blocks.Sources.RealExpression realExpT_Exh(y=T_ExhPowUniOut)
+  Modelica.Blocks.Sources.RealExpression realExpT_Exh(y=if max.y > 0.00011
+         then T_ExhPowUniOut else heatCapacitor.T)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=270,
         origin={-106,14})));
@@ -186,7 +219,35 @@ model ModularCHP_ExhaustHeatExchangerStartStop
     falling=3,
     period=600)
     annotation (Placement(transformation(extent={{-158,50},{-138,70}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow latentHeatFlow
+    "Latent heat flow from water condensation in the exhaust gas"
+    annotation (Placement(transformation(extent={{20,-42},{0,-22}})));
+  Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=m_ConH2OExh*
+        deltaH_Vap)
+    "Calculated latent exhaust heat from water condensation"
+    annotation (Placement(transformation(extent={{52,-42},{32,-22}})));
 equation
+
+//Calculation of water condensation and its usable latent heat
+  if ConTec then
+  x_H2OExhDry=senTExhHot.port_a.Xi_outflow[3]/(1 - senTExhHot.port_a.Xi_outflow[3]);
+  xSat_H2OExhDry=if noEvent(M_H2O*pSatH2OExh/((pExh-pSatH2OExh)*M_Exh)>=0) then M_H2O*pSatH2OExh/((pExh-pSatH2OExh)*M_Exh) else x_H2OExhDry;
+  m_H2OExh=senMasFloExh.m_flow*senTExhHot.port_a.Xi_outflow[3];
+  m_ExhDry=senMasFloExh.m_flow-m_H2OExh;
+  m_ConH2OExh=if (x_H2OExhDry>xSat_H2OExhDry) then m_ExhDry*(x_H2OExhDry-xSat_H2OExhDry) else 0;
+  pExh=senTExhHot.port_a.p;
+  pSatH2OExh=100000*Modelica.Math.exp(A-B/(senTExhCold.T-273.15+C));
+  deltaH_Vap=2697400+446.25*senTExhCold.T-4.357*(senTExhCold.T)^2;
+  else
+  x_H2OExhDry=0;
+  xSat_H2OExhDry=0;
+  m_H2OExh=0;
+  m_ExhDry=0;
+  m_ConH2OExh=0;
+  pExh=0;
+  pSatH2OExh=0;
+  deltaH_Vap=0;
+  end if;
 
     if (QuoT_ExhInOut-1)>0.0001 then
   T_LogMeanExh=(senTExhHot.T-senTExhCold.T)/Modelica.Math.log(QuoT_ExhInOut);
@@ -225,6 +286,10 @@ equation
                           color={0,0,127}));
   connect(max.u1, trapezoid.y) annotation (Line(points={{-130,54},{-134,54},{
           -134,60},{-137,60}}, color={0,0,127}));
+  connect(latentExhaustHeat.y,latentHeatFlow. Q_flow)
+    annotation (Line(points={{31,-32},{20,-32}}, color={0,0,127}));
+  connect(latentHeatFlow.port, heatCapacitor.port)
+    annotation (Line(points={{0,-32},{-20,-32}}, color={191,0,0}));
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.CHP\">AixLib.Fluid.ModularCHP.CHPCombustionEngine</a> in different conditions. Fuel and engine model as well as the mechanical and thermal output of the power unit can be observed. Change the engine properties to see its impact to the calculated engine combustion. </p>
@@ -240,5 +305,5 @@ documentation.</li>
 <li>by Pooyan Jahangiri:<br/>First implementation.</li>
 </ul>
 </html>"),
-experiment(StartTime=1, StopTime=300, Interval=0.1));
+experiment(StartTime=0, StopTime=300, Interval=0.1));
 end ModularCHP_ExhaustHeatExchangerStartStop;

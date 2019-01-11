@@ -38,8 +38,8 @@ model ExhaustHeatExchanger
     final m_flow_small=m1_flow_small)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
-      = Medium1, final allowFlowReversal=allowFlowReversal1)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
+        Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,70},{80,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolCold(
@@ -214,12 +214,12 @@ model ExhaustHeatExchanger
     length=l_ExhHex)               "Pressure drop"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
   AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
-                                                   heatConvExhaustPipeInside(
+    heatConvExhaustPipeInside(
     d_i=d_iExh,
     A_sur=A_surExhHea,
     rho=rho1_in,
     lambda=lambda1_in,
-    eta=eta1_in)                     annotation (Placement(transformation(
+    eta=eta1_in) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,20})));
@@ -234,7 +234,7 @@ model ExhaustHeatExchanger
   Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
   "Quotient of exhaust gas in and outgoing temperature";
 
-   //Calculation of water condensation and its usable latent heat
+   //Variables for water condensation and its usable latent heat calculation
   Real x_H2OExhDry
     "Water load of the exhaust gas";
   Real xSat_H2OExhDry
@@ -270,7 +270,7 @@ model ExhaustHeatExchanger
   Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
 
 equation
-
+//Calculation of water condensation and its usable latent heat
   if ConTec then
   x_H2OExhDry=senTExhHot.port_a.Xi_outflow[3]/(1 - senTExhHot.port_a.Xi_outflow[3]);
   xSat_H2OExhDry=if noEvent(M_H2O*pSatH2OExh/((pExh-pSatH2OExh)*M_Exh)>=0) then M_H2O*pSatH2OExh/((pExh-pSatH2OExh)*M_Exh) else x_H2OExhDry;
@@ -330,8 +330,6 @@ equation
           60},{-46,60},{-46,64},{-32,64},{-32,60}}, color={0,127,255}));
   connect(pressureDropExhaust.port_b, senTExhCold.port_a)
     annotation (Line(points={{20,60},{28,60}}, color={0,127,255}));
-  connect(senMasFloExh.m_flow, heatConvExhaustPipeInside.m_flow)
-    annotation (Line(points={{70,49},{70,20.4},{-9.2,20.4}}, color={0,0,127}));
   connect(latentExhaustHeat.y, latentHeatFlow.Q_flow)
     annotation (Line(points={{71,-12},{60,-12}}, color={0,0,127}));
   connect(latentHeatFlow.port, heatCapacitor.port)

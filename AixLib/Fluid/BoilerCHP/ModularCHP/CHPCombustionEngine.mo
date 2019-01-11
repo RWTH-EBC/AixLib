@@ -28,7 +28,7 @@ model CHPCombustionEngine
 
   constant Modelica.SIunits.Volume VCyl = CHPEngData.VEng/CHPEngData.z "Cylinder displacement";
   type RotationSpeed=Real(final unit="1/s", min=0);
-  constant RotationSpeed nEngNominal(max=CHPEngData.nEngNominal) = 25.583 "Nominal engine speed at operating point";
+  constant RotationSpeed nEngNominal = 25.583 "Nominal engine speed at operating point";
   constant Modelica.SIunits.Power P_mecNominal = CHPEngData.P_mecNominal "Mecanical power output at nominal operating point";
   parameter Modelica.SIunits.Temperature T_Amb=298.15     "Ambient temperature (matches to fuel and combustion air temperature)";
   type GasConstant=Real(final unit="J/(mol.K)");
@@ -77,16 +77,16 @@ model CHPCombustionEngine
   constant Modelica.SIunits.MassFraction Xi_Exh[size(n_ComExh, 1)] = {X_N2Exh, X_O2Exh, X_H2OExh, X_CO2Exh};
 
  // RotationSpeed nEng(max=CHPEngData.nEngMax) = 25.583 "Current engine speed";
-  RotationSpeed nEng(max=CHPEngData.nEngMax, min=0.001) "Current engine speed";
+  RotationSpeed nEng(min=0) "Current engine speed";
   Modelica.SIunits.MassFlowRate m_Exh "Mass flow rate of exhaust gas";
   Modelica.SIunits.MassFlowRate m_CO2Exh "Mass flow rate of CO2 in the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_Fue(min=0.001) "Mass flow rate of fuel";
-  Modelica.SIunits.MassFlowRate m_Air(min=0.001) "Mass flow rate of combustion air";
+  Modelica.SIunits.MassFlowRate m_Fue(min=0) "Mass flow rate of fuel";
+  Modelica.SIunits.MassFlowRate m_Air(min=0) "Mass flow rate of combustion air";
   Modelica.SIunits.SpecificHeatCapacity meanCpComExh[size(n_ComExh, 1)] "Calculated specific heat capacities of the exhaust gas components for the calculated combustion temperature";
   Modelica.SIunits.SpecificHeatCapacity meanCpExh "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature";
   Modelica.SIunits.SpecificEnergy h_Exh = 1000*(-286 + 1.011*T_ExhCHPOut - 27.29*Lambda + 0.000136*T_ExhCHPOut^2 - 0.0255*T_ExhCHPOut*Lambda + 6.425*Lambda^2) "Specific enthalpy of the exhaust gas";
   Modelica.SIunits.Power P_eff "Effective(mechanical) engine power";
-  Modelica.SIunits.Power P_Fue(min=0, max=CHPEngData.P_FueNominal) = m_Fue*H_U "Fuel expenses at operating point";
+  Modelica.SIunits.Power P_Fue(min=0) = m_Fue*H_U "Fuel expenses at operating point";
   Modelica.SIunits.Power H_Exh "Enthalpy stream of the exhaust gas";
   Modelica.SIunits.Power CalQ_therm "Calculated heat from engine combustion";
   Modelica.SIunits.Power Q_therm(min=0) "Total heat from engine combustion";
@@ -166,12 +166,12 @@ for i in 1:size(n_ComExh, 1) loop
   m_Air = m_Fue*Lambda*L_St;
  // m_Exh = m_Fue + m_Air;
   m_CO2Exh = m_Fue*(1+Lambda*L_St)*X_CO2Exh;
-  H_Exh = h_Exh*m_Exh;
+  H_Exh = h_Exh*m_Fue*(1+Lambda*L_St);
   if inertia.w>=80 then
   Mmot = CHPEngData.i*p_me*CHPEngData.VEng/(2*Modelica.Constants.pi);
   nEng = inertia.w/(2*Modelica.Constants.pi);
   m_Exh = m_Fue + m_Air;
-  elseif inertia.w<80 and noEvent(inertia.w>0) then
+  elseif inertia.w<80 and noEvent(inertia.w>0.1) then
   Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
   nEng = inertia.w/(2*Modelica.Constants.pi);
   m_Exh = m_Fue + m_Air;
@@ -181,7 +181,7 @@ for i in 1:size(n_ComExh, 1) loop
   m_Exh = 0.00001;
   end if;
   CalQ_therm = P_Fue - P_eff - H_Exh;
-  Q_therm = if (CalQ_therm>0) then CalQ_therm else 0;
+  Q_therm = if (nEng>1) and (CalQ_therm>=10) then CalQ_therm else 0;
   T_Com = (H_U-(60*p_me*CHPEngData.VEng)/m_FueEngRot)/((1 + Lambda*L_St)*meanCpExh) + T_Amb;
   P_eff = CHPEngData.i*nEng*p_me*CHPEngData.VEng;
  /* if m_Fue>0 then

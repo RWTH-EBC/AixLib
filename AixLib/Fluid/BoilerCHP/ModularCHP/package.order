@@ -4,7 +4,7 @@ heatFromExhaustGas
 ASM_CHPGenerator
 cHPEngineExample
 engineBlock
-EngineHousingConstant
+EngineHousing
 CHPCombustionEngine
 ExhaustHeatExchanger
 ModelEnginePowerAndHeatToCooling

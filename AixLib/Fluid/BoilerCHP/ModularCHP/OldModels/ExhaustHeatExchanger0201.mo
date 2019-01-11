@@ -212,13 +212,13 @@ model ExhaustHeatExchanger0201
     mu_default=1.82*10^(-5),
     length=l_ExhHex)               "Pressure drop"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
-  AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
-                                                   heatConvExhaustPipeInside(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.HeatConvPipeInsideDynamic
+    heatConvExhaustPipeInside(
     d_i=d_iExh,
     A_sur=A_surExhHea,
     rho=rho1_in,
     lambda=lambda1_in,
-    eta=eta1_in)                     annotation (Placement(transformation(
+    eta=eta1_in) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,20})));

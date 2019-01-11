@@ -205,13 +205,13 @@ model ExhaustHeatExchangerEXPERIMENTAL
     Modelica.Media.Interfaces.PartialMedium annotation (
       __Dymola_choicesAllMatching=true);
 
-  Utilities.HeatTransfer.HeatConvPipeInsideDynamic heatConvExhaustPipeInside(
+  HeatConvPipeInsideDynamic heatConvExhaustPipeInside(
     c=meanCpExh,
     rho=rho1_in,
     lambda=lambda1_in,
     eta=eta1_in,
     A_sur=A_surExhHea,
-    d_i=d_iExh)  annotation (Placement(transformation(
+    d_i=d_iExh) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-54,20})));

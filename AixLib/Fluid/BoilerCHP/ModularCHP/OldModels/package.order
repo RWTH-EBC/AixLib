@@ -54,3 +54,5 @@ CHPEngDataBaseRecord_MaterialData
 EngineHousing0901
 ExhaustHeatExchanger1001
 ModelEnginePowerAndHeatToCooling1001
+ModularCHP_ExhaustHeatExchangerStartStop
+HeatConvPipeInsideDynamic

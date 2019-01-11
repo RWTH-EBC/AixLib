@@ -38,8 +38,8 @@ model ExhaustHeatExchanger1001
     final m_flow_small=m1_flow_small)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
-      = Medium1, final allowFlowReversal=allowFlowReversal1)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
+        Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,70},{80,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolCold(
@@ -219,13 +219,13 @@ model ExhaustHeatExchanger1001
     mu_default=1.82*10^(-5),
     length=l_ExhHex)               "Pressure drop"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
-  AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
-                                                   heatConvExhaustPipeInside(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.HeatConvPipeInsideDynamic
+    heatConvExhaustPipeInside(
     d_i=d_iExh,
     A_sur=A_surExhHea,
     rho=rho1_in,
     lambda=lambda1_in,
-    eta=eta1_in)                     annotation (Placement(transformation(
+    eta=eta1_in) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,20})));
