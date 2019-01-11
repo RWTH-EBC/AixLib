@@ -14,3 +14,7 @@ convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBa
 convertElement("AixLib.Fluid.HeatPumps.HeatPump", "GCon", "GConOut");
 convertElement("AixLib.Fluid.HeatPumps.HeatPump", "GEva", "GEvaOut");
 convertModifiers("AixLib.Fluid.HeatPumps.HeatPump", {"tauHeaTra"}, {"tauHeaTraCon=%tauHeaTra%", "tauHeaTraEva=%tauHeaTra%"});
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "MAIN_FLOW", "main_flow");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "MAIN_RETURN", "main_return");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "volume", "vol_flow");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "volume1", "vol_return");
