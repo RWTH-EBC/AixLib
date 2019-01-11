@@ -7,7 +7,7 @@ model RefrigerantTestImplementation
     volume(use_T_start=true, use_p_start=true),
     ambient(use_T_ambient=true),
     redeclare package Medium = R744.R744_IIR_P1_1000_T233_373_Formula,
-    h_start=511630,
+    h_start=0,
     p_start=2000000,
     T_start=323.15,
     shortPipe(dp_nominal=10000),

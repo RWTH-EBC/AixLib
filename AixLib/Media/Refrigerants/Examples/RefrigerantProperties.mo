@@ -6,7 +6,7 @@ model RefrigerantProperties
   // Define the refrigerant that shall be tested
   //
   package Medium =
-      AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Record
+      AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Horner
       "Internal medium model";
 
   // Define way of calculating pressure and temperature
