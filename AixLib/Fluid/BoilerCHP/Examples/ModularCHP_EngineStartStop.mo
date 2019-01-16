@@ -45,8 +45,8 @@ model ModularCHP_EngineStartStop
     use_T_in=false,
     T=T_ambient)
     annotation (Placement(transformation(extent={{-50,-12},{-34,4}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionEngine
-                                         cHPGasolineEngine(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngine1601
+    cHPGasolineEngine(
     redeclare package Medium1 = Medium_Gasoline,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,

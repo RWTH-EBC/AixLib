@@ -92,7 +92,8 @@ model ModelEnginePowerAndHeatToCooling0801
     T=T_CoolRet)
     annotation (Placement(transformation(extent={{-110,-68},{-90,-48}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionEngine cHPCombustionEngine(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngine1601
+    cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,

@@ -17,6 +17,11 @@ record CHP_SenerTecDachsG5_5
     P_elNominal=5500,
     Q_MaxHea=12500,
     T_ExhPowUniOut=423.15,
-    i=0.5);
+    i=0.5,
+    n0=3000/60,
+    n_nominal=3045/60,
+    f_1=50,
+    U_1=400,
+    gearRatio=2450/3045);
 
 end CHP_SenerTecDachsG5_5;

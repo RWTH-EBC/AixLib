@@ -362,7 +362,7 @@ equation
 <p>- Die W&auml;rme&uuml;bertragung an die Umgebung (G_Amb) und den K&uuml;hlwasserkreislauf (G_Cool) wird mittels W&auml;rmeleitung berechnet</p>
 <p>-&gt; Koeffizienten k&ouml;nnen mittels bekannter Gr&ouml;&szlig;en angen&auml;hert werden</p>
 <p>- W&auml;rmeleistung aus der Kondensation von Wasser im Abgas kann ber&uuml;cksichtigt werden</p>
-<p>-&gt; Berechnung aus der Bestimmung des ausfallenden Wassers &uuml;ber den S&auml;ttigungsdampfdruck und die kritische Beladung im Abgas</p>
+<p>-&gt; Berechnung aus der Bestimmung des ausfallenden Wassers &uuml;ber den S&auml;ttigungsdampfdruck und die kritische Beladung im Abgas f&uuml;r den niedrigsten Zustand (bei Austrittstemperatur)</p>
 <p>-&gt; Bestimmung der Verdampfungsenthalpie &uuml;ber eine empirische Formel aus Tabellendaten</p>
 <p>-&gt; Annahme: Der latente W&auml;rmestrom geht zus&auml;tzlich zum konvektiven W&auml;rmestrom auf die Kapazit&auml;t des Abgasw&auml;rme&uuml;bertragers &uuml;ber</p>
 <p><br>- Calculation of a convective heat transfer between exhaust gas and heat exchanger capacity as a cylindrical exhaust pipe</p>
@@ -371,7 +371,7 @@ equation
 <p>- The heat transfer to the environment (G_Amb) and the cooling water circuit (G_Cool) is calculated by means of heat conduction</p>
 <p>-&gt; Coefficients can be approximated using known quantities</p>
 <p>- Heat output from water condensation in the exhaust gas is can be considered</p>
-<p>-&gt; Calculation from the determination of the condensing water over the saturation vapor pressure and the critical load in the exhaust gas</p>
+<p>-&gt; Calculation from the determination of the condensing water over the saturation vapor pressure and the critical load in the exhaust gas for the ExhHex outlet state (lowest temperature)</p>
 <p>-&gt; Determination of the enthalpy of vaporization using an empirical formula from tabular data</p>
 <p>-&gt; Assumption: The latent heat flow is is added to the convective heat flow to the capacity of the exhaust heat exchanger</p>
 </html>"));

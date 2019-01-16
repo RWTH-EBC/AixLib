@@ -35,7 +35,7 @@ model ModelEnginePowerAndHeatToCooling1001
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousing engineToCoolant(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.EngineHousing1601 engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPCombustionEngine.m_Exh,
@@ -98,7 +98,8 @@ model ModelEnginePowerAndHeatToCooling1001
     T=T_CoolRet)
     annotation (Placement(transformation(extent={{-110,-68},{-90,-48}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionEngine cHPCombustionEngine(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngine1601
+    cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,

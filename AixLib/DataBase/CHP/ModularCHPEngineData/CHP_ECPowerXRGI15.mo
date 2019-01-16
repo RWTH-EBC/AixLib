@@ -23,6 +23,11 @@ record CHP_ECPowerXRGI15
     P_FueNominal=49000,
     Q_MaxHea=30400,
     T_ExhPowUniOut=383.15,
-    i=0.5);
+    i=0.5,
+    p=2,
+    n_nominal=1530/60,
+    f_1=50,
+    U_1=400,
+    useHeat=true);
 
 end CHP_ECPowerXRGI15;

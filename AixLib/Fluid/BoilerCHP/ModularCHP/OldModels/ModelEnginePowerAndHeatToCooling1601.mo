@@ -1,8 +1,7 @@
-within AixLib.Fluid.BoilerCHP.Examples;
-model ModularCHP_PowerUnit
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModelEnginePowerAndHeatToCooling1601
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
-  extends Modelica.Icons.Example;
 
   replaceable package Medium_Fuel =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG      constrainedby
@@ -73,7 +72,8 @@ model ModularCHP_PowerUnit
     p_a_start=system.p_start,
     p_b_start=system.p_start,
     alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
-    diameter=CHPEngineModel.dCoo)
+    diameter=CHPEngineModel.dCoo,
+    allowFlowReversal=allowFlowReversalCoolant)
     annotation (Placement(transformation(extent={{-32,-68},{-12,-48}})));
                                  /* constrainedby 
     CHPCombustionHeatToCoolingHeatPorts(
@@ -108,7 +108,7 @@ model ModularCHP_PowerUnit
     CHPEngData=CHPEngineModel,
     T_logEngCool=exhaustHeatExchanger.senTCoolCold.T,
     T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T,
-    inertia(w(fixed=false, displayUnit="rad/s"), phi(fixed=false)))
+    inertia(phi(fixed=false), w(fixed=false, displayUnit="rad/s")))
     annotation (Placement(transformation(extent={{-40,26},{-10,52}})));
   Modelica.Blocks.Sources.RealExpression massFlowFuel(y=cHPCombustionEngine.m_Fue)
     annotation (Placement(transformation(extent={{-108,58},{-88,78}})));
@@ -161,6 +161,11 @@ model ModularCHP_PowerUnit
     T=T_ambient)
     annotation (Placement(transformation(extent={{-76,26},{-60,42}})));
 
+  Modelica.Blocks.Interfaces.RealOutput heatLossesToAmbient annotation (
+      Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={-108,-30})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempCoolantSupplyFlow(redeclare
       package Medium = Medium_Coolant)
     annotation (Placement(transformation(extent={{54,-68},{74,-48}})));
@@ -181,7 +186,8 @@ model ModularCHP_PowerUnit
       p_b_start=system.p_start,
       use_HeatTransferConvective=false,
       isEmbedded=true,
-      diameter=CHPEngineModel.dCoo),
+      diameter=CHPEngineModel.dCoo,
+      allowFlowReversal=allowFlowReversalCoolant),
     TAmb=T_ambient,
     pAmb=p_ambient,
     T_ExhPowUniOut=CHPEngineModel.T_ExhPowUniOut,
@@ -196,21 +202,38 @@ model ModularCHP_PowerUnit
     volExhaust(V=exhaustHeatExchanger.VExhHex),
     CHPEngData=CHPEngineModel,
     M_Exh=cHPCombustionEngine.MM_Exh,
+    allowFlowReversal1=allowFlowReversalExhaust,
+    allowFlowReversal2=allowFlowReversalCoolant,
+    m1_flow_small=mExh_flow_small,
+    m2_flow_small=mCool_flow_small,
     ConTec=ConTec)
     annotation (Placement(transformation(extent={{48,-12},{72,12}})));
    // VExhHex = CHPEngineModel.VExhHex,
-  parameter Boolean ConTec=CHPEngineModel.CondTech
+  parameter Boolean ConTec=false
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
-  Modelica.Mechanics.Rotational.Sources.Speed speed
-    annotation (Placement(transformation(extent={{-70,84},{-50,104}})));
-  Modelica.Blocks.Sources.Trapezoid trapezoid(
-    amplitude=160,
-    falling=10,
-    rising=3,
-    width=1000,
-    period=1500)
-    annotation (Placement(transformation(extent={{-110,84},{-90,104}})));
+  parameter Boolean allowFlowReversalExhaust=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for exhaust medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Boolean allowFlowReversalCoolant=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mExh_flow_small=0.0001
+    "Small exhaust mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mCool_flow_small=0.0001
+    "Small coolant mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator
+    cHP_ASMGeneratorCURRENT(CHPEngData=CHPEngineModel)
+    annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
+  Modelica.Blocks.Sources.BooleanPulse onOffStep(
+    width=50,
+    period(displayUnit="h") = 7200,
+    startTime(displayUnit="h") = 0)
+    annotation (Placement(transformation(extent={{-108,82},{-92,98}})));
 equation
   connect(engineHeatTransfer.port_a, coolantReturnFlow.ports[1])
     annotation (Line(points={{-32.4,-58},{-90,-58}},
@@ -225,6 +248,8 @@ equation
           -84,40},{-84,40.4},{-76,40.4}},   color={0,0,127}));
   connect(coolantSupplyFlow.ports[1],tempCoolantSupplyFlow. port_b)
     annotation (Line(points={{90,-58},{74,-58}}, color={0,127,255}));
+  connect(heatFlowSensor.Q_flow, heatLossesToAmbient) annotation (Line(points={{-70,-8},
+          {-70,-30},{-108,-30}},          color={0,0,127}));
   connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1]) annotation (
       Line(points={{72,7.2},{80,7.2},{80,48},{92,48}}, color={0,127,255}));
   connect(tempCoolantSupplyFlow.port_a, exhaustHeatExchanger.port_b2)
@@ -248,11 +273,68 @@ equation
   connect(cHPCombustionEngine.port_Exhaust, exhaustHeatExchanger.port_a1)
     annotation (Line(points={{-10.3,48.36},{38,48.36},{38,7.2},{48,7.2}}, color=
          {0,127,255}));
-  connect(speed.w_ref,trapezoid. y)
-    annotation (Line(points={{-72,94},{-89,94}}, color={0,0,127}));
-  connect(speed.flange, cHPCombustionEngine.flange_a)
-    annotation (Line(points={{-50,94},{-25,94},{-25,52}}, color={0,0,0}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  connect(cHP_ASMGeneratorCURRENT.flange_a, cHPCombustionEngine.flange_a)
+    annotation (Line(points={{-40,90},{-25,90},{-25,52}}, color={0,0,0}));
+  connect(cHP_ASMGeneratorCURRENT.port_GeneratorHeat, engineToCoolant.port_Ambient)
+    annotation (Line(points={{-48.6,80.2},{-48.6,72},{-46,72},{-46,0},{16,0},{
+          16,16}}, color={191,0,0}));
+  connect(cHP_ASMGeneratorCURRENT.isOn, onOffStep.y)
+    annotation (Line(points={{-59.8,90},{-91.2,90}}, color={255,0,255}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
+          extent={{-50,58},{50,18}},
+          lineColor={255,255,255},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={175,175,175},
+          textString="CHP",
+          textStyle={TextStyle.Bold}),
+                              Rectangle(
+          extent={{-60,80},{60,-80}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.VerticalCylinder,
+          fillColor={170,170,255}),                                       Text(
+          extent={{-50,68},{50,28}},
+          lineColor={255,255,255},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={175,175,175},
+          textStyle={TextStyle.Bold},
+          textString="CHP
+physikal"),
+        Rectangle(
+          extent={{-12,6},{12,-36}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-10,-16},{-10,-36},{-8,-30},{8,-30},{10,-36},{10,-16},{-10,-16}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-2,-26},{4,-32}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-18,-54},{-8,-64}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-2,-30},{-14,-54},{-10,-56},{0,-32},{-2,-30}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-4.5,-15.5},{-8,-10},{0,4},{6,-4},{10,-4},{8,-8},{8,-12},{5.5,
+              -15.5},{-4.5,-15.5}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,127,0}),
+        Polygon(
+          points={{-4.5,-13.5},{0,-4},{6,-10},{2,-14},{-4.5,-13.5}},
+          lineColor={255,255,170},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
@@ -260,4 +342,4 @@ equation
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end ModularCHP_PowerUnit;
+end ModelEnginePowerAndHeatToCooling1601;

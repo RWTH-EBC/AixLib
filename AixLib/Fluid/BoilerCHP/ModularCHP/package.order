@@ -5,6 +5,7 @@ ASM_CHPGenerator
 cHPEngineExample
 engineBlock
 EngineHousing
+CHP_StarterGenerator
 CHPCombustionEngine
 ExhaustHeatExchanger
 ModelEnginePowerAndHeatToCooling

@@ -19,6 +19,11 @@ record CHP_ECPowerXRGI9
     P_elNominal=9000,
     Q_MaxHea=20000,
     T_ExhPowUniOut=373.15,
-    i=0.5);
+    i=0.5,
+    p=2,
+    n_nominal=1550/60,
+    f_1=50,
+    U_1=400,
+    useHeat=true);
 
 end CHP_ECPowerXRGI9;

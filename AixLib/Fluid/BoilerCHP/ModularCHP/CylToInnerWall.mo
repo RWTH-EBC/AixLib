@@ -11,7 +11,7 @@ model CylToInnerWall
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     temperatureInnerWall
     annotation (Placement(transformation(extent={{-32,6},{-12,26}})));
-  Modelica.Blocks.Nonlinear.VariableLimiter heatLimit
+  Modelica.Blocks.Nonlinear.VariableLimiter heatLimit(strict=true)
     annotation (Placement(transformation(extent={{12,-54},{28,-38}})));
   Modelica.Blocks.Sources.RealExpression maximumEngineHeat
     annotation (Placement(transformation(extent={{-34,-50},{-14,-30}})));

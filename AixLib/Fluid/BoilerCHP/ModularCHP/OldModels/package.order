@@ -56,3 +56,8 @@ ExhaustHeatExchanger1001
 ModelEnginePowerAndHeatToCooling1001
 ModularCHP_ExhaustHeatExchangerStartStop
 HeatConvPipeInsideDynamic
+CHP_ASMGeneratorEASY1401
+CHPCombustionEngine1601
+CHP_StarterGenerator1601
+ModelEnginePowerAndHeatToCooling1601
+EngineHousing1601

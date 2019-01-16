@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-class EngineHousing "Engine housing as a simple two layer wall."
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+class EngineHousing1601 "Engine housing as a simple two layer wall."
   import AixLib;
 
   replaceable package Medium3 =
@@ -73,10 +73,10 @@ protected
   parameter Modelica.SIunits.ThermalConductance GEngBlo=lambda*A_WInn/dOut
    "Thermal conductance of the remaining engine body"
    annotation (Dialog(tab="Thermal"));
+  Modelica.SIunits.ThermalConductance CalT_Exh
+ "Calculation condition for the inlet temperature of exhaust gas";
 
 public
-  Modelica.SIunits.ThermalConductance CalT_Exh
- "Calculation variable for the temperature of the exhaust gas";
   Modelica.SIunits.Temperature T_Com
     "Calculated maximum combustion temperature inside the engine"
    annotation (Dialog(tab="Thermal"));
@@ -161,15 +161,14 @@ equation
   else
   T_CylWall=T_Amb;
   end if;*/
-  CalT_Exh = meanCpExh*m_Exh;
-  if noEvent(nEng*60<800) then
-  T_CylWall=innerWall.T;
-  T_Exh=innerWall.T;
-  else
+  if nEng*60>=800 then
   T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
-  T_Exh=T_ExhPowUniOut + abs((cylToInnerWall.maximumEngineHeat.y-actualHeatFlowEngine.Q_flow)/CalT_Exh);
+  else
+  T_CylWall=innerWall.T;
   end if;
-
+  CalT_Exh = if (meanCpExh*m_Exh<0.001) then 1000000 else meanCpExh*m_Exh;
+  T_Exh=T_ExhPowUniOut + (cylToInnerWall.maximumEngineHeat.y
+ - actualHeatFlowEngine.Q_flow)/CalT_Exh;
  // T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
   // T_CylWall=(T_Com-T_Amb)/Modelica.Math.log(T_Com/T_Amb);
 
@@ -279,4 +278,4 @@ alt=\"Calculation of the cylinder wall temperature\"/> </p>
           textStyle={TextStyle.Bold},
           textString="%name")}),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
-end EngineHousing;
+end EngineHousing1601;
