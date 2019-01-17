@@ -115,8 +115,8 @@ model CHPCombustionEngine1601
   Modelica.Fluid.Interfaces.FluidPort_a port_Air(redeclare package Medium =
         Medium2)
     annotation (Placement(transformation(extent={{-110,38},{-90,58}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
-      = Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
+        Medium3)
     annotation (Placement(transformation(extent={{108,62},{88,82}})));
   Modelica.Fluid.Sources.FixedBoundary boundaryFuel(
     nPorts=1,

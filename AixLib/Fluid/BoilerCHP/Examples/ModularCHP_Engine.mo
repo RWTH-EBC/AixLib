@@ -37,7 +37,7 @@ model ModularCHP_Engine
         fixed=true,
         start=0,
         displayUnit="rad/s"), J=1),
-    T_logEngCool=356.15,
+    T_logEngCool=363.15,
     T_ExhCHPOut=383.15)
     annotation (Placement(transformation(extent={{-14,-12},{14,16}})));
   Modelica.Blocks.Sources.RealExpression realExpT_Exh(y=383.15)
@@ -51,11 +51,9 @@ model ModularCHP_Engine
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator
     cHP_ASMGeneratorCURRENT(inertia(w(fixed=false)))
-    annotation (Placement(transformation(extent={{-42,60},{-20,82}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambientTemperature(T=
-        T_ambient)
-    annotation (Placement(transformation(extent={{-72,32},{-52,52}})));
-  Modelica.Blocks.Sources.BooleanPulse onOffSignal(period=10, startTime=0)
+    annotation (Placement(transformation(extent={{-42,58},{-20,80}})));
+  Modelica.Blocks.Sources.BooleanPulse onOffSignal(           startTime=0, period=
+        10)
     annotation (Placement(transformation(extent={{-118,62},{-100,80}})));
 equation
   connect(cHPGasolineEngine.exhaustGasTemperature, realExpT_Exh.y) annotation (
@@ -67,12 +65,9 @@ equation
   connect(onOffSignal.y, cHPGasolineEngine.isOn) annotation (Line(points={{
           -99.1,71},{-90,71},{-90,2},{-13.72,2}}, color={255,0,255}));
   connect(cHP_ASMGeneratorCURRENT.isOn, cHPGasolineEngine.isOn) annotation (
-      Line(points={{-41.78,71},{-90,70},{-90,2},{-13.72,2}}, color={255,0,255}));
-  connect(ambientTemperature.port, cHP_ASMGeneratorCURRENT.port_GeneratorHeat)
-    annotation (Line(points={{-52,42},{-29.46,42},{-29.46,60.22}}, color={191,0,
-          0}));
+      Line(points={{-41.78,69},{-90,69},{-90,2},{-13.72,2}}, color={255,0,255}));
   connect(cHP_ASMGeneratorCURRENT.flange_a, cHPGasolineEngine.flange_a)
-    annotation (Line(points={{-20,71},{-10,71},{-10,70},{0,70},{0,16}}, color={
+    annotation (Line(points={{-20,69},{-10,69},{-10,70},{0,70},{0,16}}, color={
           0,0,0}));
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>

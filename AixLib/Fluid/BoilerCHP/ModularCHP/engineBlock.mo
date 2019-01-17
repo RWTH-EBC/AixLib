@@ -9,7 +9,8 @@ model engineBlock
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor outerEngineBlock(
     der_T(fixed=false, start=0),
     C=CEngBlo,
-    T(fixed=true, start=298.15)) annotation (Placement(transformation(
+    T(start=T_Amb,
+      fixed=true))      annotation (Placement(transformation(
         origin={22,-10},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -30,6 +31,9 @@ model engineBlock
   parameter Modelica.SIunits.ThermalConductance GEngBlo=lambda*A_WInn/dOut
   "Thermal conductance of the outer engine wall"
   annotation (Dialog(group="Thermal"));
+  parameter Modelica.SIunits.Temperature T_Amb=298.15
+    "Ambient temperature"
+    annotation (Dialog(tab="Thermal"));
   parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Structure Calculations"));

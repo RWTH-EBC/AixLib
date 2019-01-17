@@ -20,9 +20,8 @@ model ModularCHP_PowerUnit
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                  annotation(choicesAllMatching=true);
 
-  replaceable package Medium_Coolant =
-      DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                 property_T=356, X_a=0.50)   constrainedby
+  replaceable package Medium_Coolant = Modelica.Media.Air.DryAirNasa
+                                                             constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
   parameter
@@ -196,13 +195,14 @@ model ModularCHP_PowerUnit
     volExhaust(V=exhaustHeatExchanger.VExhHex),
     CHPEngData=CHPEngineModel,
     M_Exh=cHPCombustionEngine.MM_Exh,
-    ConTec=ConTec)
+    ConTec=ConTec,
+    Q_Gen=0)
     annotation (Placement(transformation(extent={{48,-12},{72,12}})));
    // VExhHex = CHPEngineModel.VExhHex,
-  parameter Boolean ConTec=CHPEngineModel.CondTech
+  parameter Boolean ConTec=false
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
-  Modelica.Mechanics.Rotational.Sources.Speed speed
+  Modelica.Mechanics.Rotational.Sources.Speed speed(phi(fixed=false))
     annotation (Placement(transformation(extent={{-70,84},{-50,104}})));
   Modelica.Blocks.Sources.Trapezoid trapezoid(
     amplitude=160,
@@ -237,7 +237,7 @@ equation
     annotation (Line(points={{-92,0},{-78,0}}, color={191,0,0}));
   connect(heatFlowSensor.port_a, engineToCoolant.port_Ambient)
     annotation (Line(points={{-62,0},{16,0},{16,16}}, color={191,0,0}));
-  connect(exhaustHeatExchanger.port_b, engineToCoolant.port_Ambient)
+  connect(exhaustHeatExchanger.port_Ambient, engineToCoolant.port_Ambient)
     annotation (Line(points={{48,0},{16,0},{16,16}}, color={191,0,0}));
   connect(engineToCoolant.exhaustGasTemperature, cHPCombustionEngine.exhaustGasTemperature)
     annotation (Line(points={{4.24,32.8},{-2,32.8},{-2,44.2},{-10,44.2}}, color=

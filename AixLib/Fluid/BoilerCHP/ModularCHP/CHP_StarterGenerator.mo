@@ -30,7 +30,7 @@ model CHP_StarterGenerator
   parameter Modelica.SIunits.Power P_elNominal=CHPEngData.P_elNominal
     "Nominal electrical power of electric machine"
     annotation (Dialog(group="Machine specifications"));
-  parameter Modelica.SIunits.Power P_Mec_nominal=P_elNominal*(1-s_nominal) "Nominal mechanical power of electric machine"
+  parameter Modelica.SIunits.Power P_Mec_nominal=P_elNominal*(1+s_nominal/0.22) "Nominal mechanical power of electric machine"
     annotation (Dialog(tab="Calculations"));
   parameter Modelica.SIunits.Torque M_nominal=P_Mec_nominal/(2*Modelica.Constants.pi*n_nominal) "Nominal torque of electric machine"
     annotation (Dialog(tab="Calculations"));
@@ -64,7 +64,7 @@ model CHP_StarterGenerator
     annotation (Dialog(tab="Calculations"));
   parameter Real rho1=(M_start*(1+s_til^2)-2*s_til*M_til)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
     annotation (Dialog(tab="Calculations"));
-  parameter Real rho3=(M_til*M_start*(1-s_til^2))/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
+  parameter Real rho3=(M_til*M_start*(1-s_til)^2)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
     annotation (Dialog(tab="Calculations"));
   parameter Real k=((I_elNominal/I_1_start)^2)*(((s_nominal^2)+rho1*s_nominal+rho0)/(1+rho1+rho0)) "Calculation variable for analytical approach (Aree, 2017)"
     annotation (Dialog(tab="Calculations"));
@@ -92,41 +92,31 @@ model CHP_StarterGenerator
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=180,
-        origin={-8,-40})));
-  Modelica.Blocks.Sources.RealExpression machineHeat(y=if SwitchOnOff then
-        Q_Therm else 0)
-    annotation (Placement(transformation(extent={{-54,-50},{-34,-30}})));
   Modelica.Blocks.Interfaces.BooleanInput isOn
     annotation (Placement(transformation(extent={{-126,-20},{-86,20}}),
         iconTransformation(extent={{-112,-14},{-84,14}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_GeneratorHeat
-    annotation (Placement(transformation(extent={{4,-108},{24,-88}}),
-        iconTransformation(extent={{4,-108},{24,-88}})));
   Modelica.Mechanics.Rotational.Components.IdealGear gearEngineToGenerator(
       ratio=gearRatio)
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
   Modelica.Blocks.Interfaces.RealOutput electricPower annotation (Placement(
         transformation(
-        extent={{16,-16},{-16,16}},
-        rotation=0,
-        origin={-108,-40})));
+        extent={{20,-20},{-20,20}},
+        rotation=270,
+        origin={0,112})));
 equation
 
-if SwitchOnOff then
+if noEvent(SwitchOnOff) then
 
   I_1=sign(s)*I_1_start*sqrt(abs((1+((k-1)/((s_nominal^2)-k))*(s^2)*(1+rho1+rho0))*calI_1));
   P_E=if noEvent(s>0) then sqrt(3)*I_1*U_1*cosPhi elseif noEvent(s<0) then P_Mec+CalQ_Loss else 1;
-  P_Mec=if noEvent(s>0) then 2*Modelica.Constants.pi*M*n else 2*Modelica.Constants.pi*n*M;
+ // P_Mec=if noEvent(s>0) then 2*Modelica.Constants.pi*M*n else 2*Modelica.Constants.pi*n*M;
+  P_Mec=2*Modelica.Constants.pi*M*n;
   CalQ_Loss=2*Modelica.Constants.pi*M*(s*n0)/0.22;
   M=sign(s)*(rho3*abs(s))/((s^2)+rho1*abs(s)+rho0);
   eta=if noEvent(s>0) then abs(P_Mec/(P_E+1))
-  elseif noEvent(s<0) then abs(P_E/(P_Mec+1)) else 0;
+  elseif noEvent(s<0) then abs(P_E/(P_Mec-1)) else 0;
 
 else
 
@@ -147,10 +137,6 @@ else
     annotation (Line(points={{40,0},{60,0}}, color={0,0,0}));
   connect(gearEngineToGenerator.flange_a, flange_a)
     annotation (Line(points={{80,0},{100,0}}, color={0,0,0}));
-  connect(prescribedHeatFlow.port, port_GeneratorHeat)
-    annotation (Line(points={{2,-40},{14,-40},{14,-98}},  color={191,0,0}));
-  connect(machineHeat.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-33,-40},{-18,-40}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Model of an electric induction machine that includes the calculation of:</p>
 <p>-&gt; mechanical output (torque and speed)</p>
@@ -159,10 +145,17 @@ else
 <p>The calculations are based on simple electrical equations and an analytical approach by Pichai Aree (2017) that determinates stator current and torque depending on the slip.</p>
 <p>The parameters rho0, rho1, rho3 and k are used for the calculation of the characteristic curves. They are determined from the general machine data at nominal operation and realistic assumptions about the ratio between starting torque, starting current, breakdown torque, breakdown slip and nominal current and torque. These assumptions are taken from DIN VDE 2650/2651. It shows good agreement for machines up to 100kW of mechanical power operating at a speed up to 3000rpm and with a rated voltage up to 500V.</p>
 <p>The only data required is:</p>
-<p>- number of polepairs or synchronous speed</p>
-<p>- voltage and frequence of the electric power supply</p>
-<p>- nominal current, speed</p>
+<p>- number of polepairs or synchronous speed (<b>p</b> or <b>n0</b>)</p>
+<p>- voltage and frequence of the electric power supply (<b>U_1</b> and <b>f_1</b>)</p>
+<p>- nominal current and speed (<b>I_elNominal</b> and <b>n_nominal</b> )</p>
 <p>- power factor if available (default=0.8)</p>
+<p><br>Additional Information:</p>
 <p><br>- Electric power calculation as a generator from mechanical input speed can be further approached by small changes to the speed.</p>
-</html>"));
+<p>- The electric losses are calculated from the slip depending rotor loss which corresponds to roughly 22&percnt; of the total losses according to Almeida (DOI: 10.1109/MIAS.2010.939427).</p>
+</html>"), Icon(graphics={
+        Text(
+          extent={{-86,98},{84,82}},
+          lineColor={28,108,200},
+          textStyle={TextStyle.Bold},
+          textString="%name")}));
 end CHP_StarterGenerator;

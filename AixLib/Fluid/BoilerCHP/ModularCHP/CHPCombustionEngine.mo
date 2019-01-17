@@ -110,8 +110,8 @@ model CHPCombustionEngine
   Modelica.SIunits.Pressure p_me = p_mi-p_mf "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
-      = Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
+        Medium3)
     annotation (Placement(transformation(extent={{108,-10},{88,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
     use_m_flow_in=true,
@@ -142,13 +142,15 @@ model CHPCombustionEngine
   Modelica.Blocks.Interfaces.RealInput exhaustGasTemperature
     annotation (Placement(transformation(extent={{110,-42},{90,-22}})));
   Modelica.Blocks.Interfaces.RealOutput fuelFlow
-    annotation (Placement(transformation(extent={{-98,30},{-118,50}})));
+    annotation (Placement(transformation(extent={{92,60},{132,100}}),
+        iconTransformation(extent={{90,66},{118,94}})));
   Modelica.Blocks.Interfaces.RealOutput airFlow
-    annotation (Placement(transformation(extent={{-98,-50},{-118,-30}})));
+    annotation (Placement(transformation(extent={{92,24},{136,68}}),
+        iconTransformation(extent={{90,32},{118,60}})));
   Modelica.Blocks.Sources.RealExpression massFlowFuel(y=m_Fue)
-    annotation (Placement(transformation(extent={{-58,28},{-80,52}})));
+    annotation (Placement(transformation(extent={{62,68},{84,92}})));
   Modelica.Blocks.Sources.RealExpression massFlowAir(y=m_Air)
-    annotation (Placement(transformation(extent={{-58,-52},{-80,-28}})));
+    annotation (Placement(transformation(extent={{62,34},{84,58}})));
   Modelica.Blocks.Interfaces.BooleanInput isOn
     annotation (Placement(transformation(extent={{-126,-20},{-86,20}}),
         iconTransformation(extent={{-112,-14},{-84,14}})));
@@ -204,10 +206,10 @@ for i in 1:size(n_ComExh, 1) loop
                                              color={0,0,0}));
   connect(exhaustGasTemperature, exhaustFlow.T_in) annotation (Line(points={{100,-32},
           {58,-32},{58,4},{64,4}},          color={0,0,127}));
+  connect(massFlowFuel.y, fuelFlow)
+    annotation (Line(points={{85.1,80},{112,80}}, color={0,0,127}));
   connect(airFlow, massFlowAir.y)
-    annotation (Line(points={{-108,-40},{-81.1,-40}}, color={0,0,127}));
-  connect(fuelFlow, massFlowFuel.y)
-    annotation (Line(points={{-108,40},{-81.1,40}}, color={0,0,127}));
+    annotation (Line(points={{114,46},{85.1,46}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-120,-134},{122,134}}, fileName=
               "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png"),

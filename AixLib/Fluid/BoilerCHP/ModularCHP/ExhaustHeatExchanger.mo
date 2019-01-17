@@ -154,8 +154,8 @@ model ExhaustHeatExchanger
     annotation (Placement(transformation(extent={{10,-12},{30,8}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor ambientLoss(G=G_Amb)
     annotation (Placement(transformation(extent={{-46,-22},{-66,-2}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_b
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient annotation (
+      Placement(transformation(extent={{-110,-10},{-90,10}}),
         iconTransformation(extent={{-110,-10},{-90,10}})));
   replaceable package Medium3 =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
@@ -186,7 +186,7 @@ model ExhaustHeatExchanger
     diameter=0.03175,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          m_flow_nominal=m2_flow_nominal, dp_nominal=0))
+          m_flow_nominal=m2_flow_nominal, dp_nominal=10))
     annotation (Placement(transformation(extent={{32,-70},{12,-50}})));
 
   Modelica.Fluid.Vessels.ClosedVolume volExhaust(
@@ -223,13 +223,12 @@ model ExhaustHeatExchanger
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-20,20})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow latentHeatFlow
-    "Latent heat flow from water condensation in the exhaust gas"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow additionalHeat
+    "Heat flow from water condensation in the exhaust gas and generator losses"
     annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
   Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=m_ConH2OExh*
-        deltaH_Vap)
-    "Calculated latent exhaust heat from water condensation"
-    annotation (Placement(transformation(extent={{92,-22},{72,-2}})));
+        deltaH_Vap) "Calculated latent exhaust heat from water condensation"
+    annotation (Placement(transformation(extent={{126,-12},{106,8}})));
 
   Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
   "Quotient of exhaust gas in and outgoing temperature";
@@ -254,6 +253,9 @@ model ExhaustHeatExchanger
   Modelica.SIunits.SpecificHeatCapacity meanCpExh=1227.23
     "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
    annotation (Dialog(group = "Thermal"));
+  Modelica.SIunits.HeatFlowRate Q_Gen
+    "Calculated loss heat from the induction machine"
+   annotation (Dialog(group = "Thermal"));
  /* Modelica.SIunits.HeatFlowRate Q_flowExhHea=senMasFloExh.m_flow*meanCpExh*(
       senTExhHot.T - T_ExhPowUniOut)
     "Calculated exhaust heat from fixed exhaust outlet temperature";*/
@@ -269,6 +271,11 @@ model ExhaustHeatExchanger
   Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
   Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
 
+  Modelica.Blocks.Sources.RealExpression generatorHeat(y=Q_Gen)
+    "Calculated heat from generator losses"
+    annotation (Placement(transformation(extent={{126,-32},{106,-12}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=2)
+    annotation (Placement(transformation(extent={{86,-18},{74,-6}})));
 equation
 //Calculation of water condensation and its usable latent heat
   if ConTec then
@@ -309,9 +316,8 @@ equation
     annotation (Line(points={{-40,-60},{-60,-60}}, color={0,127,255}));
   connect(senMasFloCool.port_b, port_b2)
     annotation (Line(points={{-80,-60},{-100,-60}}, color={0,127,255}));
-  connect(port_b,ambientLoss. port_b)
-    annotation (Line(points={{-100,0},{-90,0},{-90,-12},{-66,-12}},
-                                                color={191,0,0}));
+  connect(port_Ambient, ambientLoss.port_b) annotation (Line(points={{-100,0},{-90,
+          0},{-90,-12},{-66,-12}}, color={191,0,0}));
   connect(senTCoolCold.port_a, pipeCoolant.port_a)
     annotation (Line(points={{60,-60},{32.4,-60}}, color={0,127,255}));
   connect(senTCoolHot.port_b, pipeCoolant.port_b)
@@ -330,10 +336,14 @@ equation
           60},{-46,60},{-46,64},{-32,64},{-32,60}}, color={0,127,255}));
   connect(pressureDropExhaust.port_b, senTExhCold.port_a)
     annotation (Line(points={{20,60},{28,60}}, color={0,127,255}));
-  connect(latentExhaustHeat.y, latentHeatFlow.Q_flow)
-    annotation (Line(points={{71,-12},{60,-12}}, color={0,0,127}));
-  connect(latentHeatFlow.port, heatCapacitor.port)
+  connect(additionalHeat.port, heatCapacitor.port)
     annotation (Line(points={{40,-12},{20,-12}}, color={191,0,0}));
+  connect(additionalHeat.Q_flow, multiSum.y)
+    annotation (Line(points={{60,-12},{72.98,-12}}, color={0,0,127}));
+  connect(latentExhaustHeat.y, multiSum.u[1]) annotation (Line(points={{105,-2},
+          {96,-2},{96,-9.9},{86,-9.9}}, color={0,0,127}));
+  connect(generatorHeat.y, multiSum.u[2]) annotation (Line(points={{105,-22},{
+          96,-22},{96,-14.1},{86,-14.1}}, color={0,0,127}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-70,80},{70,-80}},

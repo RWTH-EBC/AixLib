@@ -35,7 +35,7 @@ class EngineHousing "Engine housing as a simple two layer wall."
   constant Real eps
     "Engine compression ratio"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
-  constant Modelica.SIunits.Mass mEng
+  parameter Modelica.SIunits.Mass mEng
     "Total engine mass"
     annotation (Dialog(tab="Structure", group="Engine Properties"));
   Real nEng
@@ -153,7 +153,8 @@ public
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
     annotation (Placement(transformation(extent={{-30,10},{-48,30}})));
   Modelica.Blocks.Interfaces.RealOutput exhaustGasTemperature
-    annotation (Placement(transformation(extent={{-72,8},{-96,32}})));
+    annotation (Placement(transformation(extent={{-72,8},{-96,32}}),
+        iconTransformation(extent={{-68,4},{-100,36}})));
 equation
 
  /* if EngOp and m_Exh>0.001 then
