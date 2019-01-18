@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Data.CHP.FuelcellPEM;
-record BaseDataDefinition "Basic Mikro_KWK Data"
+record BaseDataDefinition "Basic PEMFC Data"
 extends Modelica.Icons.Record;
 
   import SI = Modelica.SIunits;

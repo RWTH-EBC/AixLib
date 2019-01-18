@@ -1,4 +1,4 @@
 within AixLib.FastHVAC.Data.CHP;
-package FuelcellPEM
+package FuelcellSOFC
         extends Modelica.Icons.Package;
-end FuelcellPEM;
+end FuelcellSOFC;

@@ -26,8 +26,8 @@ model CHPCombined
     WarmupTime=5000,
     CooldownTime=1200,
     withController=true,
-    CHPType=2,
-    EfficiencyByDatatable=false)
+    EfficiencyByDatatable=true,
+    CHPType=2)
     annotation (Placement(transformation(extent={{-18,-66},{38,-32}})));
   Modelica.Blocks.Sources.Ramp P_elRel(
     height=0.8,
@@ -57,16 +57,16 @@ equation
       points={{-75,-80},{-66,-80},{-66,-64.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(booleanOnOffCHP1.y, cHPCombined.OnOff) annotation (Line(points={{-75,
-          0},{-66,0},{-66,-16},{15.6,-16},{15.6,-32.34}}, color={255,0,255}));
+  connect(booleanOnOffCHP1.y, cHPCombined.OnOff) annotation (Line(points={{-75,0},
+          {-66,0},{-66,-16},{20.15,-16},{20.15,-32.34}},  color={255,0,255}));
   connect(temperatureSensor_before.enthalpyPort_b, cHPCombined.enthalpyPort_a1)
     annotation (Line(points={{-24.8,-61.07},{-22,-61.07},{-22,-49},{-18,-49}},
         color={176,0,0}));
   connect(cHPCombined.enthalpyPort_b1, temperatureSensor_after.enthalpyPort_a)
     annotation (Line(points={{38.35,-49.34},{38.35,-61.07},{42.96,-61.07}},
         color={176,0,0}));
-  connect(P_elRelConstant.y, cHPCombined.PelRel) annotation (Line(points={{-31,
-          0},{-6.1,0},{-6.1,-32.34}}, color={0,0,127}));
+  connect(P_elRelConstant.y, cHPCombined.PelRel) annotation (Line(points={{-31,0},
+          {-17.3,0},{-17.3,-35.74}},  color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=72000, Interval=60),

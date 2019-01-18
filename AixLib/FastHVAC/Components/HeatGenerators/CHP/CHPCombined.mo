@@ -7,7 +7,7 @@ model CHPCombined
   ******************************************************************* */
   parameter Integer CHPType "CHP Type"
     annotation(Dialog(group = "Model Selection", compact = true, descriptionLabel = true), choices(choice=1
-        "ICE",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",radioButtons = true));
+        "ICE",choice = 2 "PEM Fuel Cell", radioButtons = true)); // ,choice = 3 "SOFC Fuel Cell" to be added when SOFC is integrated
   parameter Boolean EfficiencyByDatatable=true
     "Use datasheet values for efficiency calculations" annotation(Dialog(group = "Model Selection"));
     parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group = "Model Selection"));
@@ -143,8 +143,8 @@ public
         rotation=0,
         origin={-164,36}), iconTransformation(
         extent={{-14,-14},{14,14}},
-        rotation=270,
-        origin={-92,98})));
+        rotation=0,
+        origin={-156,78})));
   Modelica.Blocks.Interfaces.BooleanInput OnOff
     annotation (Placement(transformation(extent={{14,14},{-14,-14}},
         rotation=90,
@@ -152,7 +152,7 @@ public
                          iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
-        origin={32,98})));
+        origin={58,98})));
   Modelica.Blocks.Interfaces.RealOutput Capacity[3]( unit="W")
     "1=P_el 2=dotQ_th 3=dotE_fuel(incl. calorific value)"
     annotation (Placement(transformation(extent={{156,78},
@@ -202,7 +202,7 @@ public
         origin={-130,108}),iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
-        origin={-58,98})));
+        origin={-50,98})));
   input
   Modelica.Blocks.Interfaces.BooleanInput StopIn if not withController
     annotation (Placement(transformation(extent={{-14,-14},{14,14}},
@@ -211,7 +211,7 @@ public
         iconTransformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
-        origin={-14,98})));
+        origin={-4,98})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderPel(T=tauP_el)
     annotation (Placement(transformation(extent={{-46,74},{-34,86}})));
 
@@ -227,7 +227,7 @@ public
   Modelica.Blocks.Interfaces.RealOutput dotmFuel(  unit="kg/s") "Fuel consumption " annotation (
      Placement(transformation(extent={{156,50},{180,
             74}}),                                        iconTransformation(
-          extent={{94,90},{118,114}})));
+          extent={{152,-92},{176,-68}})));
   Modelica.Blocks.Math.Gain Gain_LHV(k=1/LHV)
     annotation (Placement(transformation(extent={{132,52},{148,68}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=tauQ_th_start)
@@ -273,20 +273,22 @@ public
   Modelica.Blocks.Sources.RealExpression EfficiencyPCU(y=eta_PCU)
     annotation (Placement(transformation(extent={{-16,66},{-4,82}})));
 equation
-  // Calculated efficiencies
-
+  //
+  /* *******************************************************************
+  Calculated efficiencies 
+  ******************************************************************* */
   if EfficiencyByDatatable then
     // If IFC
       if CHPType == 1 then
         sigma = eff_el/eff_th;
         omega = eff_el+eff_th;
-         eff_el = paramIFC.a_0 + paramIFC.a_1*(PelDemand.y/1000)^2 +
+        eff_el = paramIFC.a_0 + paramIFC.a_1*(PelDemand.y/1000)^2 +
          paramIFC.a_2*(PelDemand.y/1000) + paramIFC.a_3*
          massFlowRate.dotm^2 + paramIFC.a_4*
          massFlowRate.dotm + paramIFC.a_5*
          Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + paramIFC.a_6*
          Modelica.SIunits.Conversions.to_degC(T_return.T);
-         eff_th =paramIFC.b_0 + paramIFC.b_1*(
+        eff_th =paramIFC.b_0 + paramIFC.b_1*(
          PelDemand.y/1000)^2 + paramIFC.b_2*(PelDemand.y/1000) + paramIFC.b_3*
          massFlowRate.dotm^2 + paramIFC.b_4*
          massFlowRate.dotm + paramIFC.b_5*
@@ -301,11 +303,12 @@ equation
         eff_el = paramPEM.eta_0  + paramPEM.eta_1 * P_elDC + paramPEM.eta_2 *P_elDC^2;
         eta_PCU = paramPEM.u_0  + paramPEM.u_1 * P_elDC + paramPEM.u_2 *P_elDC^2;
         eff_th = 0; //dummy
-
+      // SOFC Missing!!!
       end if;
 
   // fixed efficiencies
   else
+    // Data for IFC below. PEM & SOFC data for fixed efficiency not implemented yet!
     if PelRel > 0.1 then
       eff_el =eta_el_prescribed*(0.261 + 0.161*Modelica.Math.log(PelRel*100));
     else
@@ -495,7 +498,7 @@ equation
     Icon(coordinateSystem(initialScale=0.2, extent={
             {-160,-100},{160,100}}),         graphics={
         Rectangle(
-          extent={{-100,100},{100,-100}},
+          extent={{-160,100},{160,-100}},
           fillPattern=FillPattern.Solid,
           fillColor={247,247,247},
           lineColor={0,0,0}),
@@ -510,7 +513,7 @@ equation
           fillColor={255,85,85},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-8,80},{66,66}},
+          extent={{24,80},{98,66}},
           lineColor={0,0,0},
           lineThickness=0.5,
           fillColor={255,255,255},
@@ -620,12 +623,19 @@ equation
           smooth=Smooth.None,
           color={0,0,0}),
         Text(
-          extent={{-70,80},{4,66}},
+          extent={{-62,78},{12,64}},
           lineColor={0,0,0},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="Start/Stop")}),
+          textString="Start/Stop"),
+        Text(
+          extent={{-146,84},{-72,70}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Pe_ rel")}),
     Diagram(coordinateSystem(initialScale=0.2, extent={
             {-160,-100},{160,100}}),            graphics={Rectangle(
           extent={{-56,100},{-24,-12}},
