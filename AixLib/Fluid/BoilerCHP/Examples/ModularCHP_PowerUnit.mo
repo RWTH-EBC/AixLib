@@ -20,8 +20,9 @@ model ModularCHP_PowerUnit
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                  annotation(choicesAllMatching=true);
 
-  replaceable package Medium_Coolant = Modelica.Media.Air.DryAirNasa
-                                                             constrainedby
+  replaceable package Medium_Coolant =
+      DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
+                                 property_T=356, X_a=0.50)   constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
   parameter

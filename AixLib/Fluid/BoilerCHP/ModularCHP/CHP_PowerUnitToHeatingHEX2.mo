@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnitToHeating
+model CHP_PowerUnitToHeatingHEX2
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -123,13 +123,13 @@ model CHP_PowerUnitToHeating
     mEng=mEng,
     redeclare package Medium_Coolant = Medium_Coolant)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
-  AixLib.Fluid.Movers.BaseClasses.IdealSource coolantPump(
-    control_m_flow=true,
-    control_dp=true,
-    dp_start=CHPEngineModel.dp_Coo,
+  AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
     m_flow_small=mCool_flow_small,
-    redeclare package Medium = Medium_Coolant)
-    annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
+    redeclare package Medium = Medium_Coolant,
+    m_flow_nominal=CHPEngineModel.m_floCooNominal,
+    dp_nominal=CHPEngineModel.dp_Coo,
+    allowFlowReversal=allowFlowReversalCoolant)
+    annotation (Placement(transformation(extent={{-60,-2},{-38,22}})));
   Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
     nPorts=1,
     redeclare package Medium = Medium_Coolant,
@@ -157,7 +157,7 @@ model CHP_PowerUnitToHeating
     period(displayUnit="h") = 86400,
     width=50)
     annotation (Placement(transformation(extent={{-106,48},{-90,64}})));
-  Buildings.Fluid.HeatExchangers.BaseClasses.HexElementSensible coolantHex(
+  AixLib.Fluid.HeatExchangers.ConstantEffectiveness             coolantHex(
     redeclare package Medium2 = Medium_Coolant,
     allowFlowReversal1=allowFlowReversalCoolant,
     allowFlowReversal2=allowFlowReversalCoolant,
@@ -167,16 +167,16 @@ model CHP_PowerUnitToHeating
     m2_flow_small=mCool_flow_small,
     dp1_nominal=1,
     dp2_nominal=1,
-    UA_nominal=GCooHex,
-    redeclare package Medium1 = Medium_Coolant)
+    redeclare package Medium1 = Medium_Coolant,
+    eps=0.9)
     annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
-  Modelica.Fluid.Sources.MassFlowSource_T coolantReturnFlow(
+  Modelica.Fluid.Sources.MassFlowSource_T heatingReturnFlow(
     redeclare package Medium = Medium_Coolant,
     nPorts=1,
     use_T_in=true,
     m_flow=m_flowHeaCir)
     annotation (Placement(transformation(extent={{-110,-74},{-90,-54}})));
-  Modelica.Fluid.Sources.FixedBoundary coolantSupplyFlow(redeclare package
+  Modelica.Fluid.Sources.FixedBoundary heatingSupplyFlow(redeclare package
       Medium = Medium_Coolant, nPorts=1)
     annotation (Placement(transformation(extent={{110,-74},{90,-54}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempReturnFlow(
@@ -190,11 +190,6 @@ model CHP_PowerUnitToHeating
     m_flow_nominal=CHPEngineModel.m_floCooNominal)
     annotation (Placement(transformation(extent={{40,-72},{56,-56}})));
 
-  Modelica.Blocks.Sources.RealExpression conCoe_GC1(y=2000000)
-    annotation (Placement(transformation(extent={{-38,-98},{-18,-78}})));
-  Modelica.Blocks.Sources.RealExpression conCoe_GC2(y=2000000)
-    annotation (Placement(transformation(extent={{-38,-28},{-18,-8}})));
-
   Modelica.Blocks.Logical.Timer timerIsOff
     annotation (Placement(transformation(extent={{-18,84},{-4,98}})));
   Modelica.Blocks.Logical.Not not1
@@ -203,43 +198,40 @@ model CHP_PowerUnitToHeating
     annotation (Placement(transformation(extent={{8,84},{22,98}})));
   Modelica.Blocks.Logical.Or pumpControl
     annotation (Placement(transformation(extent={{38,70},{58,90}})));
-  Modelica.Blocks.Sources.RealExpression massFlowCoolant1(y=if cHPIsOnOff.y
+  Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=if cHPIsOnOff.y
          then 350 else 313.15)
-    annotation (Placement(transformation(extent={{-142,-70},{-122,-50}})));
+    annotation (Placement(transformation(extent={{-144,-70},{-124,-50}})));
   parameter Modelica.SIunits.Mass mEng=80
     "Total engine mass for heat capacity calculation of the motor block"
     annotation (Dialog(tab="Engine Cooling Circle"));
 equation
   connect(coolantPump.port_b, cHP_PowerUnit.port_Return) annotation (Line(
-        points={{-40,10},{-28,10},{-28,10.08},{-19.2,10.08}},
+        points={{-38,10},{-28,10},{-28,10.08},{-19.2,10.08}},
                                                         color={0,127,255}));
   connect(tempCoolantReturn.port_b, coolantPump.port_a) annotation (Line(points={{-56,-40},
           {-76,-40},{-76,10},{-60,10}},         color={0,127,255}));
   connect(fixedPressureLevel.ports[1], coolantPump.port_a) annotation (Line(
         points={{-92,8},{-76,8},{-76,10},{-60,10}}, color={0,127,255}));
   connect(massFlowCoolant.y, coolantPump.m_flow_in)
-    annotation (Line(points={{-59,32},{-56,32},{-56,18}},color={0,0,127}));
+    annotation (Line(points={{-59,32},{-49,32},{-49,24.4}},
+                                                         color={0,0,127}));
   connect(tempCoolantSupply.port_b, coolantHex.port_a1) annotation (Line(points=
          {{56,10},{74,10},{74,-40},{20,-40}}, color={0,127,255}));
   connect(coolantHex.port_b1, tempCoolantReturn.port_a)
     annotation (Line(points={{-20,-40},{-40,-40}}, color={0,127,255}));
-  connect(coolantReturnFlow.ports[1],tempReturnFlow. port_a)
+  connect(heatingReturnFlow.ports[1],tempReturnFlow. port_a)
     annotation (Line(points={{-90,-64},{-56,-64}}, color={0,127,255}));
   connect(coolantHex.port_a2, tempReturnFlow.port_b)
     annotation (Line(points={{-20,-64},{-40,-64}}, color={0,127,255}));
   connect(coolantHex.port_b2, tempSupplyFlow.port_a)
     annotation (Line(points={{20,-64},{40,-64}}, color={0,127,255}));
-  connect(tempSupplyFlow.port_b, coolantSupplyFlow.ports[1])
+  connect(tempSupplyFlow.port_b,heatingSupplyFlow. ports[1])
     annotation (Line(points={{56,-64},{90,-64}}, color={0,127,255}));
   connect(cHPIsOnOff.y, cHP_PowerUnit.onOffStep) annotation (Line(points={{-89.2,
           56},{-44,56},{-44,40.32},{-23.04,40.32}}, color={255,0,255}));
   connect(cHP_PowerUnit.port_Supply, tempCoolantSupply.port_a) annotation (Line(
         points={{19.2,10.08},{29.6,10.08},{29.6,10},{40,10}},
                                                           color={0,127,255}));
-  connect(conCoe_GC1.y, coolantHex.Gc_2)
-    annotation (Line(points={{-17,-88},{-8,-88},{-8,-72}}, color={0,0,127}));
-  connect(coolantHex.Gc_1, conCoe_GC2.y) annotation (Line(points={{8,-32},{8,-32},
-          {8,-18},{8,-18},{8,-18},{-17,-18}}, color={0,0,127}));
   connect(timerIsOff.u, not1.y)
     annotation (Line(points={{-19.4,91},{-29.3,91}}, color={255,0,255}));
   connect(not1.u, cHP_PowerUnit.onOffStep) annotation (Line(points={{-45.4,91},
@@ -251,8 +243,8 @@ equation
   connect(pumpControl.u2, cHP_PowerUnit.onOffStep) annotation (Line(points={{36,
           72},{-56,72},{-56,56},{-44,56},{-44,40.32},{-23.04,40.32}}, color={255,
           0,255}));
-  connect(coolantReturnFlow.T_in, massFlowCoolant1.y)
-    annotation (Line(points={{-112,-60},{-121,-60}}, color={0,0,127}));
+  connect(heatingReturnFlow.T_in, tempFlowHeating.y)
+    annotation (Line(points={{-112,-60},{-123,-60}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -315,4 +307,4 @@ physikal"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end CHP_PowerUnitToHeating;
+end CHP_PowerUnitToHeatingHEX2;
