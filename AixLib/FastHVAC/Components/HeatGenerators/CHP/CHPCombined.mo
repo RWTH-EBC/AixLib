@@ -9,7 +9,7 @@ model CHPCombined
     annotation(Dialog(group = "Model Selection", compact = true, descriptionLabel = true), choices(choice=1
         "ICE",choice = 2 "PEM Fuel Cell", radioButtons = true)); // ,choice = 3 "SOFC Fuel Cell" to be added when SOFC is integrated
   parameter Boolean EfficiencyByDatatable=true
-    "Use datasheet values for efficiency calculations" annotation(Dialog(group = "Model Selection"));
+    "Use datasheet values for efficiency calculations" annotation(Dialog(group = "Model Selection",enable = CHPType == 1));
     parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group = "Model Selection"));
   parameter AixLib.FastHVAC.Data.CHP.Engine.BaseDataDefinition paramIFC=
       AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
