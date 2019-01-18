@@ -238,8 +238,8 @@ equation
   state_dT = Medium.setState_dT(d,T);
   state_ph = Medium.setState_ph(p,h);
   state_ps = Medium.setState_ps(p,s);
-  s_dew = Medium.dewEntropy(satT);
-  s_bubble = Medium.bubbleEntropy(satT);
+  s_dew = Medium.dewEntropy(satP);
+  s_bubble = Medium.bubbleEntropy(satP);
 
    // Calculate further properties
    //
