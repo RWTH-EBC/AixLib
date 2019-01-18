@@ -97,7 +97,6 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Boolean allowFlowReversalCon=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Condenser", tab="Assumptions"));
-
   parameter Boolean transferHeat=true
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
@@ -128,19 +127,7 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="Refrigerant inertia",enable=initType ==
           Init.InitialOutput and use_refIne));
-//Dynamics
-  parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics", group="Equation"));
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics", group="Equation"));
-  parameter Real mSenFacCon=1
-    "Factor for scaling the sensible thermal mass of the volume in the condenser"
-    annotation (Dialog(tab="Dynamics",group="Condenser"));
-  parameter Real mSenFacEva=1
-    "Factor for scaling the sensible thermal mass of the volume in the evaporator"
-    annotation (Dialog(tab="Dynamics", group="Evaporator"));
+
 //Advanced
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
@@ -258,14 +245,14 @@ model HeatPump2 "Base model of fastHVAC heat pump"
         origin={110,100})));
 
   Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
-    annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
+    annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
 
   Sensors.TemperatureSensor        senT_a2
                        "Temperature at sink inlet" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={38,-86})));
+        origin={40,-86})));
   Sensors.TemperatureSensor        senT_b2
                        "Temperature at sink outlet" annotation (Placement(
         transformation(
@@ -291,143 +278,126 @@ model HeatPump2 "Base model of fastHVAC heat pump"
         origin={-34,92})));
   Sensors.MassFlowSensor     mFlow_con
     "Mass flow sensor at the evaporator" annotation (Placement(transformation(
-        origin={-76,60},
+        origin={-80,60},
         extent={{-10,10},{10,-10}},
         rotation=0)));
 
-  parameter Media.BaseClasses.MediumSimple medium=Medium_con
-    "Mediums charastics (heat capacity, density, thermal conductivity)";
 equation
-
-  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
-          {-76,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
-          {38,-0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
-                                                  color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
-          {-104.925,-42.915}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(
-      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{16,-38},{16,-44.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(
-      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{-14,-38},{-14,-44.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(
-      points={{1.77636e-15,28.7},{1.77636e-15,30},{0,30},{0,40},{-16,40},{-16,50.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(
-      points={{1.77636e-15,28.7},{0,28.7},{0,40},{16,40},{16,50.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(sigBusHP, innerCycle.sigBusHP) annotation (Line(
-      points={{-105,-43},{-54,-43},{-54,-0.73},{-26.78,-0.73}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
+  connect(enthalpyPort_a, mFlow_con.enthalpyPort_a) annotation (Line(points={{-100,60},
+          {-92,60},{-92,60.1},{-88.8,60.1}},     color={176,0,0}));
+  connect(mFlow_con.enthalpyPort_b, senT_a1.enthalpyPort_a) annotation (Line(
+        points={{-71,60.1},{-52,60.1},{-52,92.1},{-42.8,92.1}}, color={176,0,0}));
+  connect(senT_a1.enthalpyPort_b, con.enthalpyPort_a) annotation (Line(points={{
+          -25,92.1},{-21.5,92.1},{-21.5,92},{-16,92}}, color={176,0,0}));
+  connect(con.enthalpyPort_b, senT_b1.enthalpyPort_a) annotation (Line(points={{
+          16,92},{22,92},{22,92.1},{29.2,92.1}}, color={176,0,0}));
+  connect(senT_b1.enthalpyPort_b, enthalpyPort_b) annotation (Line(points={{47,92.1},
+          {84,92.1},{84,60},{100,60}}, color={176,0,0}));
+  connect(T_amb_con, varTempOutCon.T) annotation (Line(points={{110,100},{82,100},
+          {82,110},{77.6,110}}, color={0,0,127}));
+  connect(varTempOutCon.port, con.port_out)
+    annotation (Line(points={{60,110},{0,110},{0,108}}, color={191,0,0}));
+  connect(varTempOutEva.port, eva.port_out)
+    annotation (Line(points={{60,-108},{0,-108},{0,-102}}, color={191,0,0}));
+  connect(T_amb_eva, varTempOutEva.T) annotation (Line(points={{110,-100},{82,-100},
+          {82,-108},{77.6,-108}}, color={0,0,127}));
+  connect(senT_a2.enthalpyPort_a, mFlow_eva.enthalpyPort_b) annotation (Line(
+        points={{48.8,-86.1},{52,-86.1},{52,-60.1},{61,-60.1}}, color={176,0,0}));
+  connect(mFlow_eva.enthalpyPort_a, enthalpyPort_a1) annotation (Line(points={{78.8,
+          -60.1},{92,-60.1},{92,-60},{100,-60}}, color={176,0,0}));
+  connect(senT_a2.enthalpyPort_b, eva.enthalpyPort_a) annotation (Line(points={{
+          31,-86.1},{16,-86.1},{16,-86}}, color={176,0,0}));
+  connect(eva.enthalpyPort_b, senT_b2.enthalpyPort_a) annotation (Line(points={{
+          -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
+  connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
+          -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
   connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(T_amb_con, varTempOutCon.T) annotation (Line(
-      points={{110,100},{84,100},{84,110},{77.6,110}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(varTempOutCon.port, con.port_out) annotation (Line(
-      points={{60,110},{0,110},{0,108}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(T_amb_eva, varTempOutEva.T) annotation (Line(
-      points={{110,-100},{94,-100},{94,-108},{77.6,-108}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(eva.port_out, varTempOutEva.port) annotation (Line(
-      points={{0,-102},{0,-108},{60,-108}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(enthalpyPort_b1, enthalpyPort_b1) annotation (Line(points={{-100,-60},
-          {-100,-60},{-100,-60}}, color={0,127,255}));
-  connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(
-      points={{16,64.6},{16,75.04},{0,75.04}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(
-      points={{-16,64.6},{-16,75.04},{0,75.04}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(realPassThroughnSetEva.y, eva.QFlow_in) annotation (Line(points={{16,-58.6},
-          {16,-69.04},{0,-69.04}}, color={0,0,127}));
+  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(points={{0,
+          -30.7},{0,-40},{16,-40},{16,-44.8}}, color={0,0,127}));
+  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(points={{0,-30.7},
+          {0,-40},{-14,-40},{-14,-44.8}}, color={0,0,127}));
   connect(heatFlowIneEva.y, eva.QFlow_in) annotation (Line(points={{-14,-58.6},{
           -14,-69.04},{0,-69.04}}, color={0,0,127}));
+  connect(realPassThroughnSetEva.y, eva.QFlow_in) annotation (Line(points={{16,-58.6},
+          {16,-69.04},{0,-69.04}}, color={0,0,127}));
+  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(points={{0,
+          28.7},{0,40},{16,40},{16,50.8}}, color={0,0,127}));
+  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(points={{0,28.7},{
+          0,40},{-16,40},{-16,50.8}}, color={0,0,127}));
+  connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(points={{-16,64.6},{-16,
+          75.04},{0,75.04}}, color={0,0,127}));
+  connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
+          {16,75.04},{0,75.04}}, color={0,0,127}));
+  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
+          {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
+          {-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-88,-18},
+          {-88,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
+          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
+          {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
+          {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
+          {52,-0.865},{52,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(innerCycle.sigBusHP, sigBusHP) annotation (Line(
+      points={{-26.78,-0.73},{-38,-0.73},{-38,-44},{-72,-44},{-72,-43},{-105,-43}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
+          {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{37,-75},{37,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
-          40},{-76,40},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(enthalpyPort_a, enthalpyPort_a)
-    annotation (Line(points={{-100,60},{-100,60}}, color={176,0,0}));
-  connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
-          -86.1},{-84.5,-86.1},{-84.5,-60},{-100,-60}}, color={176,0,0}));
-  connect(senT_a2.enthalpyPort_a, mFlow_eva.enthalpyPort_b) annotation (Line(
-        points={{46.8,-86.1},{46.8,-74.05},{61,-74.05},{61,-60.1}}, color={176,0,
-          0}));
-  connect(mFlow_eva.enthalpyPort_a, enthalpyPort_a1) annotation (Line(points={{78.8,
-          -60.1},{88.4,-60.1},{88.4,-60},{100,-60}}, color={176,0,0}));
-  connect(senT_b1.enthalpyPort_b, enthalpyPort_b) annotation (Line(points={{47,92.1},
-          {71.5,92.1},{71.5,60},{100,60}}, color={176,0,0}));
-  connect(senT_a1.enthalpyPort_a, mFlow_con.enthalpyPort_b) annotation (Line(
-        points={{-42.8,92.1},{-42.8,79.05},{-67,79.05},{-67,60.1}}, color={176,0,
-          0}));
-  connect(mFlow_con.enthalpyPort_a, enthalpyPort_a) annotation (Line(points={{-84.8,
-          60.1},{-91.4,60.1},{-91.4,60},{-100,60}}, color={176,0,0}));
-  connect(con.enthalpyPort_b, senT_b1.enthalpyPort_a) annotation (Line(points={{16,92},
-          {22,92},{22,92.1},{29.2,92.1}},        color={176,0,0}));
-  connect(con.enthalpyPort_a, senT_a1.enthalpyPort_b) annotation (Line(points={{-16,92},
-          {-20,92},{-20,92.1},{-25,92.1}},         color={176,0,0}));
-  connect(senT_a2.enthalpyPort_b, eva.enthalpyPort_a) annotation (Line(points={{29,
-          -86.1},{16,-86.1},{16,-86}},    color={176,0,0}));
-  connect(eva.enthalpyPort_b, senT_b2.enthalpyPort_a) annotation (Line(points={{-16,-86},
-          {-30,-86},{-30,-86.1},{-43.2,-86.1}},          color={176,0,0}));
-  annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
+ annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
           fillColor={170,213,255},
