@@ -21,7 +21,7 @@ model CHP_PowerUnit
 
   replaceable package Medium_Coolant =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                 property_T=356, X_a=0.50)   constrainedby
+                                 property_T=356, X_a=0.50) constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
   parameter
@@ -281,7 +281,7 @@ equation
           fillColor={175,175,175},
           textStyle={TextStyle.Bold},
           textString="CHP
-physikal"),
+physical"),
         Rectangle(
           extent={{-12,6},{12,-36}},
           lineColor={0,0,0},

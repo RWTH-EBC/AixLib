@@ -10,7 +10,6 @@ CHPCombustionEngine
 ExhaustHeatExchanger
 CHP_PowerUnit
 CHP_PowerUnitCircuit
-CHP_PowerUnitToHeating
 EngineMaterialData
 EngineMaterial_CastIron
 EngineMaterial_SpheroidalGraphiteIron

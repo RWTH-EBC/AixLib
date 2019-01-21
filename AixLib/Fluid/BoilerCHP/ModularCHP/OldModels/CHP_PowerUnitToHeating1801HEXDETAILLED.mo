@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnitToHeating
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_PowerUnitToHeating1801HEXDETAILLED
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -315,4 +315,4 @@ physikal"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end CHP_PowerUnitToHeating;
+end CHP_PowerUnitToHeating1801HEXDETAILLED;

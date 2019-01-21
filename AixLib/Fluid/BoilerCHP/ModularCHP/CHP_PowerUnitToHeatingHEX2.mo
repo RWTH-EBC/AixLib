@@ -24,6 +24,12 @@ model CHP_PowerUnitToHeatingHEX2
                                  property_T=356, X_a=0.50)   constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
+  replaceable package Medium_HeatingCircuit =
+      DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
+                                 property_T=356, X_a=0.50)   constrainedby
+    Modelica.Media.Interfaces.PartialMedium annotation (
+      __Dymola_choicesAllMatching=true);
+
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
@@ -126,9 +132,9 @@ model CHP_PowerUnitToHeatingHEX2
   AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
     m_flow_small=mCool_flow_small,
     redeclare package Medium = Medium_Coolant,
-    m_flow_nominal=CHPEngineModel.m_floCooNominal,
     dp_nominal=CHPEngineModel.dp_Coo,
-    allowFlowReversal=allowFlowReversalCoolant)
+    allowFlowReversal=allowFlowReversalCoolant,
+    m_flow_nominal=m_flowCoo)
     annotation (Placement(transformation(extent={{-60,-2},{-38,22}})));
   Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
     nPorts=1,
@@ -137,14 +143,14 @@ model CHP_PowerUnitToHeatingHEX2
     T=298.15)
     annotation (Placement(transformation(extent={{-112,-2},{-92,18}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempCoolantSupply(
-    m_flow_nominal=CHPEngineModel.m_floCooNominal,
     m_flow_small=mCool_flow_small,
-    redeclare package Medium = Medium_Coolant)
+    redeclare package Medium = Medium_Coolant,
+    m_flow_nominal=m_flowCoo)
     annotation (Placement(transformation(extent={{40,2},{56,18}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempCoolantReturn(
     m_flow_small=mCool_flow_small,
-    m_flow_nominal=CHPEngineModel.m_floCooNominal,
-    redeclare package Medium = Medium_Coolant)
+    redeclare package Medium = Medium_Coolant,
+    m_flow_nominal=m_flowCoo)
     annotation (Placement(transformation(extent={{-40,-48},{-56,-32}})));
   Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if pumpControl.y
          then m_flowCoo else mCool_flow_small)
@@ -158,36 +164,37 @@ model CHP_PowerUnitToHeatingHEX2
     width=50)
     annotation (Placement(transformation(extent={{-106,48},{-90,64}})));
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness             coolantHex(
-    redeclare package Medium2 = Medium_Coolant,
     allowFlowReversal1=allowFlowReversalCoolant,
     allowFlowReversal2=allowFlowReversalCoolant,
-    m1_flow_nominal=CHPEngineModel.m_floCooNominal,
     m2_flow_nominal=CHPEngineModel.m_floCooNominal,
     m1_flow_small=mCool_flow_small,
     m2_flow_small=mCool_flow_small,
-    dp1_nominal=1,
-    dp2_nominal=1,
     redeclare package Medium1 = Medium_Coolant,
-    eps=0.9)
+    eps=0.9,
+    m1_flow_nominal=m_flowCoo,
+    redeclare package Medium2 = Medium_HeatingCircuit,
+    dp1_nominal(displayUnit="kPa") = 10000,
+    dp2_nominal(displayUnit="kPa") = 10000)
     annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
   Modelica.Fluid.Sources.MassFlowSource_T heatingReturnFlow(
-    redeclare package Medium = Medium_Coolant,
     nPorts=1,
     use_T_in=true,
-    m_flow=m_flowHeaCir)
+    m_flow=m_flowHeaCir,
+    redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{-110,-74},{-90,-54}})));
-  Modelica.Fluid.Sources.FixedBoundary heatingSupplyFlow(redeclare package
-      Medium = Medium_Coolant, nPorts=1)
+  Modelica.Fluid.Sources.FixedBoundary heatingSupplyFlow(
+                               nPorts=1, redeclare package Medium =
+        Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{110,-74},{90,-54}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempReturnFlow(
-    redeclare package Medium = Medium_Coolant,
     m_flow_small=mCool_flow_small,
-    m_flow_nominal=CHPEngineModel.m_floCooNominal)
+    m_flow_nominal=CHPEngineModel.m_floCooNominal,
+    redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{-56,-72},{-40,-56}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempSupplyFlow(
-    redeclare package Medium = Medium_Coolant,
     m_flow_small=mCool_flow_small,
-    m_flow_nominal=CHPEngineModel.m_floCooNominal)
+    m_flow_nominal=CHPEngineModel.m_floCooNominal,
+    redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{40,-72},{56,-56}})));
 
   Modelica.Blocks.Logical.Timer timerIsOff
@@ -215,8 +222,8 @@ equation
   connect(massFlowCoolant.y, coolantPump.m_flow_in)
     annotation (Line(points={{-59,32},{-49,32},{-49,24.4}},
                                                          color={0,0,127}));
-  connect(tempCoolantSupply.port_b, coolantHex.port_a1) annotation (Line(points=
-         {{56,10},{74,10},{74,-40},{20,-40}}, color={0,127,255}));
+  connect(tempCoolantSupply.port_b, coolantHex.port_a1) annotation (Line(points={{56,10},
+          {74,10},{74,-40},{20,-40}},         color={0,127,255}));
   connect(coolantHex.port_b1, tempCoolantReturn.port_a)
     annotation (Line(points={{-20,-40},{-40,-40}}, color={0,127,255}));
   connect(heatingReturnFlow.ports[1],tempReturnFlow. port_a)
@@ -304,7 +311,9 @@ physikal"),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
 <p>Limitations:</p>
-<p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
+<p>- </p>
+<p><br>Caution: </p>
+<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
 end CHP_PowerUnitToHeatingHEX2;
