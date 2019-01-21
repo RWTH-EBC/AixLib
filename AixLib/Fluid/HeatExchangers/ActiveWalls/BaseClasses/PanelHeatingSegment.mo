@@ -4,37 +4,10 @@ model PanelHeatingSegment
 
 extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
-parameter Boolean isFloor = true;
-
-parameter Modelica.SIunits.Area A "Area of Floor part";
-
-parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity";
-
 parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
 parameter Modelica.SIunits.Volume VWater "Volume of Water in m^3";
-
-parameter Modelica.SIunits.CoefficientOfHeatTransfer kTop;
-parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
-
-parameter HeatCapacityPerArea cTop;
-parameter HeatCapacityPerArea cDown;
-
-  parameter Integer calcMethodConvection = 1
-    "Calculation Method for convection at surface"
-    annotation (Dialog(group = "Heat convection",
-        descriptionLabel=true), choices(
-        choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
-        choice=2 "By Bernd Glueck",
-        choice=3 "Constant alpha",
-        radioButtons=true));
-
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
-    "Constant heat transfer coefficient"
-    annotation (Dialog(group = "Heat convection",
-    descriptionLabel=true,
-        enable=if calcMethodConvection == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume vol(
     redeclare package Medium = Medium,
@@ -55,38 +28,8 @@ parameter HeatCapacityPerArea cDown;
     annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvWall
     annotation (Placement(transformation(extent={{-22,-110},{-2,-90}})));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=A, eps=eps)
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-30,74})));
-  Utilities.HeatTransfer.HeatConv_inside HeatConv(
-    final A = A,
-    final calcMethod = calcMethodConvection,
-    final alpha_custom = convCoeffCustom,
-    surfaceOrientation = if isFloor then 2 else 1)                 annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={1.77636e-015,74})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvRoom
     annotation (Placement(transformation(extent={{-12,90},{8,110}})));
-  AixLib.Utilities.Interfaces.Star starRad
-    annotation (Placement(transformation(extent={{-38,92},{-18,112}})));
-  HeatConductionSegment panel_Segment1(
-    kA=kTop*A,
-    mc_p=cTop*A,
-    T0=T0) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-16,30})));
-  HeatConductionSegment panel_Segment2(
-    T0=T0,
-    kA=kDown*A,
-    mc_p=cDown*A) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-12,-56})));
 equation
 
   connect(port_a, TFlow.port_a) annotation (Line(
@@ -106,40 +49,14 @@ equation
       points={{70,-26},{84,-26},{84,0},{100,0}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(HeatConv.port_a, thermConvRoom) annotation (Line(
-      points={{3.60822e-015,84},{3.60822e-015,92.5},{-2,92.5},{-2,100}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(twoStar_RadEx.Star,starRad)
-                                     annotation (Line(
-      points={{-30,83.1},{-30,102},{-28,102}},
-      color={95,95,95},
-      pattern=LinePattern.None,
-      smooth=Smooth.None));
   connect(thermConvWall, thermConvWall) annotation (Line(
       points={{-12,-100},{-12,-100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panel_Segment1.port_b, twoStar_RadEx.Therm) annotation (Line(
-      points={{-16.9,39.1},{-16.9,51.55},{-30,51.55},{-30,64.8}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(panel_Segment1.port_b, HeatConv.port_b) annotation (Line(
-      points={{-16.9,39.1},{-16.9,51.55},{0,51.55},{0,64}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(panel_Segment1.port_a, vol.heatPort) annotation (Line(
-      points={{-16.9,20.9},{-16.9,2},{-14,2},{-14,-15}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(panel_Segment2.port_b, thermConvWall) annotation (Line(
-      points={{-11.1,-65.1},{-11.1,-81.55},{-12,-81.55},{-12,-100}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(panel_Segment2.port_a, vol.heatPort) annotation (Line(
-      points={{-11.1,-46.9},{-11.1,-31.45},{-14,-31.45},{-14,-15}},
-      color={191,0,0},
-      smooth=Smooth.None));
+  connect(vol.heatPort, thermConvRoom) annotation (Line(points={{-14,-15},{-14,
+          40},{-2,40},{-2,100}}, color={191,0,0}));
+  connect(vol.heatPort, thermConvWall) annotation (Line(points={{-14,-15},{-14,
+          -100},{-12,-100}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(graphics={
         Rectangle(

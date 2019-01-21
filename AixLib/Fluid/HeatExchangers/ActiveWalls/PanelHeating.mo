@@ -81,21 +81,10 @@ model PanelHeating
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConv annotation (
       Placement(transformation(extent={{4,48},{24,68}}), iconTransformation(
           extent={{4,30},{24,50}})));
-  AixLib.Utilities.Interfaces.Star starRad annotation (Placement(transformation(
-          extent={{-26,50},{-6,70}}), iconTransformation(extent={{-22,28},{-2,48}})));
   BaseClasses.PanelHeatingSegment panelHeatingSegment[dis](
     redeclare package Medium = Medium,
-    each final A=A/dis,
-    each final eps=eps,
     each final T0=T0,
-    each final VWater=VWater/dis,
-    each final kTop=kTop_nominal,
-    each final kDown=kDown_nominal,
-    each final cTop=cTop,
-    each final cDown=cDown,
-    each final isFloor=isFloor,
-    each final calcMethodConvection=calcMethodConvection,
-    each final convCoeffCustom=convCoeffCustom)
+    each final VWater=VWater/dis)
     annotation (Placement(transformation(extent={{-52,-22},{-8,22}})));
 
   BaseClasses.PressureDropPH pressureDrop(
@@ -113,8 +102,6 @@ equation
                                                     color={191,0,0}));
     connect(panelHeatingSegment[i].thermConvRoom, thermConv) annotation (Line(points={{-30.44,
             22},{-28,22},{-28,38},{14,38},{14,58}},                                                                color={191,0,0}));
-    connect(panelHeatingSegment[i].starRad, starRad) annotation (Line(points={{-36.16,
-            22.44},{-36.16,44},{-16,44},{-16,60}},                                                           color={95,95,95}));
   end for;
 
   // FLOW CONNECTIONS
