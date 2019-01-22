@@ -46,6 +46,8 @@ block CtrMix "Controller for mixed and injection circuits "
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant
+    annotation (Placement(transformation(extent={{60,20},{80,40}})));
 equation
 
   if useExternalTset then
@@ -72,6 +74,11 @@ equation
       extent={{6,3},{6,3}}));
   connect(PID.u_m, hydraulicBus.TFwrd_out) annotation (Line(points={{-6,-62},{-6,
           -80},{93.135,-80},{93.135,-10.865}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(booleanConstant.y, hydraulicBus.pumpBus.onOff_Input) annotation (Line(
+        points={{81,30},{93.135,30},{93.135,-10.865}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

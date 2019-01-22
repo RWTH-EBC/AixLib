@@ -9,9 +9,16 @@ block CtrPump "controller for pump circuit"
   BaseClasses.HydraulicBus hydraulicBus annotation (Placement(
         transformation(extent={{78,-24},{124,24}}), iconTransformation(extent={{
             78,-24},{124,24}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant
+    annotation (Placement(transformation(extent={{60,20},{80,40}})));
 equation
   connect(realExpression.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(
         points={{11,0},{101.115,0},{101.115,0.12}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(booleanConstant.y, hydraulicBus.pumpBus.onOff_Input) annotation (Line(
+        points={{81,30},{101.115,30},{101.115,0.12}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
