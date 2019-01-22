@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.Functions;
+within AixLib.DataBase.HeatPump.Functions;
 package DefrostCorrection
    extends Modelica.Icons.Package;
 
