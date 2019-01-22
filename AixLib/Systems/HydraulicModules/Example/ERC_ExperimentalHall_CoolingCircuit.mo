@@ -48,19 +48,17 @@ model ERC_ExperimentalHall_CoolingCircuit
     T_amb=T_amb,
     T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
-  AixLib.Systems.HydraulicModules.Controller.CtrAdmix ctr_admix(
+  AixLib.Systems.HydraulicModules.Controller.CtrMix ctr_admix(
     Td=0,
     Ti=180,
     k=0.12,
-    T_amb=T_amb,
     xi_start=0.5,
-    initType=Modelica.Blocks.Types.InitPID.InitialState)
+    initType=Modelica.Blocks.Types.InitPID.InitialState,
+    reverseAction=true)
     annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
-  AixLib.Systems.HydraulicModules.Controller.CtrUnmixed ctr_unmixed_simple(
-      T_amb=T_amb)
+  AixLib.Systems.HydraulicModules.Controller.CtrPump ctr_unmixed_simple
     annotation (Placement(transformation(extent={{-142,80},{-118,104}})));
-  AixLib.Systems.HydraulicModules.Controller.CtrUnmixed ctr_unmixed_simple1(
-      T_amb=T_amb)
+  AixLib.Systems.HydraulicModules.Controller.CtrPump ctr_unmixed_simple1
     annotation (Placement(transformation(extent={{-142,58},{-118,82}})));
   AixLib.Fluid.Sources.Boundary_pT bou1(
     nPorts=1,
