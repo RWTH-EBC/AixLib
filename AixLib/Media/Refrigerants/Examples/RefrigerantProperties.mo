@@ -6,7 +6,7 @@ model RefrigerantProperties
   // Define the refrigerant that shall be tested
   //
   package Medium =
-      AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Horner
+      AixLib.Media.Refrigerants.R32.R32_IIR_P1_70_T233_373_Horner
       "Internal medium model";
 
   // Define way of calculating pressure and temperature
@@ -30,10 +30,10 @@ model RefrigerantProperties
   parameter Modelica.SIunits.Density d_max=1300
     "Fluid limit: Maximum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_min= 10e5
+  parameter Modelica.SIunits.AbsolutePressure p_min= 1e5
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max= 100e5
+  parameter Modelica.SIunits.AbsolutePressure p_max= 70e5
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.Temperature T_min=233.15

@@ -787,10 +787,7 @@ partial package PartialHybridTwoPhaseMediumRecord
     hv := hv_1*cf.hv_IO[4] + cf.hv_IO[3];
 
   elseif cf.hv_approach == 16 then
-     x:=sat.psat / fluidConstants[1].criticalPressure;
-     if sat.psat >= cf.p_Z then
-       x:=cf.p_Z / fluidConstants[1].criticalPressure;
-     end if;
+     x:=abs(1 - sat.psat / fluidConstants[1].criticalPressure);
       for k in 1:cf.hv_Nt - 1 loop
         hv_1 :=hv_1 + cf.hv_N[k + 1]*x^(k/3);
       end for;
@@ -1304,7 +1301,7 @@ partial package PartialHybridTwoPhaseMediumRecord
           for j in 1:cf.T_psNt[8] loop
             T3 := T3 + cf.Tscr_psB[j]*y3^j;
           end for;
-          if cf.T_psNt[5] >= cf.T_psNt[8] then
+          if cf.T_psNt[7] >= cf.T_psNt[8] then
             for i in 1:cf.T_psNt[1] - 1 loop
               for j in 1:min(i, cf.T_psNt[8]) loop
                 count := count + 1;
