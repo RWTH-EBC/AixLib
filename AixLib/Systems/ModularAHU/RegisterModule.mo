@@ -13,7 +13,7 @@ model RegisterModule "AHU register module for heaters and coolers"
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(group="Heat exchanger"));
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  replaceable HydraulicModules.BaseClasses.PartialHydraulicModule
+  replaceable HydraulicModules.Admix
     partialHydraulicModule(final T_amb=T_amb, redeclare package Medium =
         Medium2,
     final m_flow_nominal=m2_flow_nominal,
