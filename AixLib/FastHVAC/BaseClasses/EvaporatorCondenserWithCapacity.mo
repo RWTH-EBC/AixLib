@@ -232,7 +232,7 @@ equation
           visible=not is_con)}),
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>Evaporator/Condenser model adapted to FastHAVC library.<br> 
+  <p>Evaporator/Condenser model adapted to FastHAVC library.<br/> 
   This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity\">AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity</a>. It includes heat losses to the environment. </p>
   </html>",
   revisions="<html><ul>

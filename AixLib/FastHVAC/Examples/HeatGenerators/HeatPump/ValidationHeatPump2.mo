@@ -8,7 +8,7 @@ model ValidationHeatPump2
   FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  Components.HeatGenerators.HeatPump2                  heatPump2(
+  Components.HeatGenerators.HeatPump.HeatPump2 heatPump2(
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -30,8 +30,8 @@ model ValidationHeatPump2
     use_revHP=true,
     redeclare model PerDataChi =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
-    TAmbCon_nominal=288.15)
-    annotation (Placement(transformation(extent={{-13,-16},{13,16}},
+    TAmbCon_nominal=288.15) annotation (Placement(transformation(
+        extent={{-13,-16},{13,16}},
         rotation=-90,
         origin={3,-2})));
   FastHVAC.Components.Pumps.FluidSource fluidSource1 annotation (Placement(
@@ -143,8 +143,8 @@ equation
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>Simple test set-up for the HeatPump2 model.<br>
-  The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. <br> 
+  <p>Simple test set-up for the HeatPump2 model.<br/>
+  The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. <br/> 
   Example Setup is based on FastHVAC part from <a href=\"modelica://AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump</a> </p>
   </html>",
   revisions="<html><ul>

@@ -57,7 +57,7 @@ equation
           fillPattern=FillPattern.Solid)}),
    Documentation(info="<html>
    <p>
-   This component transports one fluid stream.<br>
+   This component transports one fluid stream.<br/>
    It is based on the Fluid model <a href=\"modelica://AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger\">AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger</a> and was adapted to the FastHVAC library.
   </p>
   </html>", revisions="<html>
