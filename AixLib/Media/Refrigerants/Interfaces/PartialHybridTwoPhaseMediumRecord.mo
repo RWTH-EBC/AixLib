@@ -824,8 +824,14 @@ partial package PartialHybridTwoPhaseMediumRecord
         sl_1 :=sl_1 + cf.sl_N[k + 1]*x^cf.sl_E[k];
       end for;
       sl :=cf.sl_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) * sl_1) - cf.s_IIR_I0;
-    end if;
 
+  elseif cf.sl_approach == 16 then
+     x:=abs(1 - sat.psat / fluidConstants[1].criticalPressure);
+      for k in 1:cf.sl_Nt - 1 loop
+        sl_1 :=sl_1 + cf.sl_N[k + 1]*x^(k/3);
+      end for;
+      sl := cf.sl_IO[1] * (cf.sl_N[1] + sl_1) - cf.s_IIR_I0;
+    end if;
 
     annotation(smoothOrder = 2,
                Inline=false,
@@ -858,6 +864,13 @@ partial package PartialHybridTwoPhaseMediumRecord
         sv_1 :=sv_1 + cf.sv_N[k + 1]*x^cf.sv_E[k];
       end for;
       sv :=cf.sv_N[1]*exp((fluidConstants[1].criticalPressure/sat.psat) * sv_1) - cf.s_IIR_I0;
+
+    elseif cf.sv_approach == 16 then
+     x:=abs(1 - sat.psat / fluidConstants[1].criticalPressure);
+      for k in 1:cf.sv_Nt - 1 loop
+        sv_1 :=sv_1 + cf.sv_N[k + 1]*x^(k/3);
+      end for;
+      sv := cf.sv_IO[1] * (cf.sv_N[1] + sv_1) - cf.s_IIR_I0;
     end if;
 
     annotation(smoothOrder = 2,

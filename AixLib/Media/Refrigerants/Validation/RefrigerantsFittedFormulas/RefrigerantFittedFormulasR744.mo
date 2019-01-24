@@ -8,7 +8,7 @@ model RefrigerantFittedFormulasR744
   // Define the refrigerant that shall be tested
   //
   replaceable package MediumInt =
-    AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Horner
+    AixLib.Media.Refrigerants.R744.R744_I0_P10_100_T233_373_Horner
     "Internal medium model";
 
   // Define parameters that define the range for calculating the fitted formulas

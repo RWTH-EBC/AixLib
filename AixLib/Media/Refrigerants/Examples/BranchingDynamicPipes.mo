@@ -3,7 +3,7 @@ model BranchingDynamicPipes
   "Example model to test dynamic mass and energy equations"
   extends Modelica.Fluid.Examples.BranchingDynamicPipes(
     redeclare package Medium =
-        AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Formula,
+        AixLib.Media.Refrigerants.R744.R744_I0_P10_100_T233_373_Formula,
     boundary1(use_p_in=false, p=5000000),
     ramp1(
       duration=2,

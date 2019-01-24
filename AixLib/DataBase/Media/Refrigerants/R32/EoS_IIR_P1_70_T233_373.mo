@@ -1,5 +1,5 @@
 ﻿within AixLib.DataBase.Media.Refrigerants.R32;
-record EoS_IIR_P1_57_T233_373 "Record with Coefficients for EoS"
+record EoS_IIR_P1_70_T233_373 "Record with Coefficients for EoS"
   extends
     AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
     name="Coefficients taken from Tillner-Roth, Yokozeki 'An International Standard Equation of State for Difluoromethane R-32  for
@@ -25,7 +25,6 @@ record EoS_IIR_P1_57_T233_373 "Record with Coefficients for EoS"
     f_ResNG = 0,
     f_ResNNa = 0);
 
-
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end EoS_IIR_P1_57_T233_373;
+end EoS_IIR_P1_70_T233_373;

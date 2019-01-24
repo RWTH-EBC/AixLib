@@ -1,5 +1,5 @@
 ﻿within AixLib.Media.Refrigerants.R744;
-package R744_IIR_P1_1000_T233_373_Horner "Refrigerant model for R744 using a hybrid approach with explicit horner formulas"
+package R744_I0_P10_100_T233_373_Horner "Refrigerant model for R744 using a hybrid approach with explicit horner formulas"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -1418,4 +1418,4 @@ end thermalConductivity;
  algorithm
     sigma := 0.07863*(1-sat.Tsat/304.1282)^1.254;
  end surfaceTension;
-end R744_IIR_P1_1000_T233_373_Horner;
+end R744_I0_P10_100_T233_373_Horner;

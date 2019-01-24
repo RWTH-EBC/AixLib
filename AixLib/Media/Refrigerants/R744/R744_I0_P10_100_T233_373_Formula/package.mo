@@ -1,5 +1,5 @@
 ﻿within AixLib.Media.Refrigerants.R744;
-package R744_IIR_P1_1000_T233_373_Formula "Refrigerant model for R744 using a hybrid approach with explicit formulas"
+package R744_I0_P10_100_T233_373_Formula "Refrigerant model for R744 using a hybrid approach with explicit formulas"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -29,7 +29,7 @@ package R744_IIR_P1_1000_T233_373_Formula "Refrigerant model for R744 using a hy
     of specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
+  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
     mediumName="R744",
     substanceNames={"R744"},
     singleState=false,
@@ -120,7 +120,6 @@ package R744_IIR_P1_1000_T233_373_Formula "Refrigerant model for R744 using a hy
          log(delta) +
          idealAlpha0[1] + idealAlpha0[2]*tau + idealAlpha0[3]*log(tau) +
          sum(idealAlpha0[i]*log(1 - exp(-tau*idealPhi0[i])) for i in 4:8);
-
 
   // protected
   //     final constant Integer nLog = 1;
@@ -1001,7 +1000,6 @@ algorithm
         T  :=  327.197781935892 + 20.1689191976422 *( -0.481681032173056 + (0.340880756284145).*x3.^1 + (-0.0189052771014906).*x3.^2 + (0.898533079116176).*y3.^1 + (0.6990529125834).*y3.^2 + (0.104098429636939).*y3.^3 + (-0.121154138164734).*y3.^4 + (0.0024522493687735).*y3.^5 + (0.0240911243159528).*y3.^6 + (-0.0113436636739131).*y3.^7 + (-0.00337608018566535).*y3.^8 + (0.00582909108085912).*y3.^9 + (-6.40449860099882e-06).*y3.^10 + (-0.000939036255501953).*y3.^11 + (-0.00148696936311922).*y3.^10.*x3.^1 + (-0.00179434912959592).*y3.^9.*x3.^1 + (3.08343385541494e-05).*y3.^9.*x3.^2 + (0.00999079694572103).*y3.^8.*x3.^1 + (-0.000857644807702166).*y3.^8.*x3.^2 + (0.00864417561353578).*y3.^7.*x3.^1 + (-0.00118437955830187).*y3.^7.*x3.^2 + (-0.0281216242373478).*y3.^6.*x3.^1 + (0.00474753441451223).*y3.^6.*x3.^2 + (-0.0138264060178187).*y3.^5.*x3.^1 + (0.00355971143102101).*y3.^5.*x3.^2 + (0.0472332916594976).*y3.^4.*x3.^1 + (-0.00941298519624451).*y3.^4.*x3.^2 + (0.0133946337552411).*y3.^3.*x3.^1 + (-0.00414526384253996).*y3.^3.*x3.^2 + (-0.104950210334764).*y3.^2.*x3.^1 + (0.0106618719338033).*y3.^2.*x3.^2 + (0.0233968615764063).*y3.^1.*x3.^1 + (0.005080472749631).*y3.^1.*x3.^2);
     end if;
 
-
 end temperature_ph;
 
 redeclare replaceable function temperature_ps
@@ -1121,9 +1119,6 @@ algorithm
    x_SCrSC := (T-302.260412713472)/5.61368969154838;
    fitSCrSC := 7892500 + 1217198.69646113 * (0.000119724593648295.*x_SCrSC.^8  -0.000333709955125262.*x_SCrSC.^7-0.000492485309735125.*x_SCrSC.^6 + 0.000188842225009553.*x_SCrSC.^5 -0.00341321580455679.*x_SCrSC.^4  -0.00943221113935049.*x_SCrSC.^3 -0.0847871234324372.*x_SCrSC.^2 + 1.0454687249959.*x_SCrSC + 0.096352688710157);
  end if;
-
-
-
 
   if p< 5784000 then
     if p<sat.psat-dp then //"SH"
@@ -1406,7 +1401,6 @@ algorithm
       // Calculate the final dynamic visocity
       lambda := (quality/lambdaG + (1 - quality)/lambdaL)^(-1);
 
-
     end if;
 end thermalConductivity;
 
@@ -1420,4 +1414,4 @@ end thermalConductivity;
  algorithm
     sigma := 0.07863*(1-sat.Tsat/304.1282)^1.254;
  end surfaceTension;
-end R744_IIR_P1_1000_T233_373_Formula;
+end R744_I0_P10_100_T233_373_Formula;

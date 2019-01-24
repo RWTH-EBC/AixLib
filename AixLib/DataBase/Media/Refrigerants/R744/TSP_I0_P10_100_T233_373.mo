@@ -1,5 +1,5 @@
 ﻿within AixLib.DataBase.Media.Refrigerants.R744;
-record TSP_I0_P1_1000_T233_373
+record TSP_I0_P10_100_T233_373
   "Record with fitting coefficients calculated for 1-phase functions"
   extends ThermodynamicStatePropertiesBaseDataDefinition(
   name="Coefficients taken from Göbel",
@@ -95,4 +95,4 @@ record TSP_I0_P1_1000_T233_373
   fit_SCrSC_Nt = 9,
   fit_SCrSC_N = {0.096352688710157,1.0454687249959, -0.0847871234324372, -0.00943221113935049, -0.00341321580455679, 0.000188842225009553,-0.000492485309735125,-0.000333709955125262,0.000119724593648295});
 
-end TSP_I0_P1_1000_T233_373;
+end TSP_I0_P10_100_T233_373;

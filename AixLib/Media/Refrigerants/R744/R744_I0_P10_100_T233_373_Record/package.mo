@@ -1,6 +1,5 @@
 ﻿within AixLib.Media.Refrigerants.R744;
-package R744_IIR_P1_1000_T233_373_Record
-  "Refrigerant model for R744 using a hybrid approach with records"
+package R744_I0_P10_100_T233_373_Record "Refrigerant model for R744 using a hybrid approach with records"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -30,7 +29,7 @@ package R744_IIR_P1_1000_T233_373_Record
     of specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="R744",
     substanceNames={"R744"},
     singleState=false,
@@ -85,22 +84,19 @@ package R744_IIR_P1_1000_T233_373_Record
   */
 redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R744.EoS_I0_P1_1000_T233_373;
+    extends AixLib.DataBase.Media.Refrigerants.R744.EoS_I0_P10_100_T233_373;
 end EoS;
 
   redeclare record BDSP
     "Record that contains fitting coefficients of the state properties at
     bubble and dew lines"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R744.BDSP_I0_P1_1000_T233_373;
+    extends AixLib.DataBase.Media.Refrigerants.R744.BDSP_I0_P10_100_T233_373;
   end BDSP;
 
   redeclare record TSP
     "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R744.TSP_I0_P1_1000_T233_373;
+    extends AixLib.DataBase.Media.Refrigerants.R744.TSP_I0_P10_100_T233_373;
   end TSP;
 
   redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
@@ -125,7 +121,7 @@ redeclare function extends dynamicViscosity
   Ind. Eng. Chem. Res(42)
   Afterwards, the coefficients are adapted to the HelmholtzMedia libary.
 */
-  protected
+protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -196,7 +192,7 @@ redeclare function extends thermalConductivity
     /*The functional form of the thermal conductivity is implented as presented in
     G. Scalabrin et al (2006), A Reference Multiparameter Thermal Conductivity
     Equation for Carbon Dioxide with an Optimized Functional Form*/
-  protected
+protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Integer phase_dT "Phase calculated by density and temperature";
 
@@ -337,4 +333,4 @@ end thermalConductivity;
  algorithm
     sigma := 0.07863*(1-sat.Tsat/304.1282)^1.254;
  end surfaceTension;
-end R744_IIR_P1_1000_T233_373_Record;
+end R744_I0_P10_100_T233_373_Record;

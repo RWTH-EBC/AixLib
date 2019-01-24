@@ -1,5 +1,5 @@
 within AixLib.DataBase.Media.Refrigerants.R744;
-record EoS_I0_P1_1000_T233_373 "Records with Coeffizients for EoS"
+record EoS_I0_P10_100_T233_373 "Records with Coeffizients for EoS"
   extends
     AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
     name="Coefficients taken from Span,Wagner 'A New Equation of State for Carbon Dioxide Covering the Fluid Region from the Triple-
@@ -52,5 +52,4 @@ record EoS_I0_P1_1000_T233_373 "Records with Coeffizients for EoS"
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 
-
-end EoS_I0_P1_1000_T233_373;
+end EoS_I0_P10_100_T233_373;

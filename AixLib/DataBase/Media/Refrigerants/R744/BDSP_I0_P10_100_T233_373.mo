@@ -1,5 +1,5 @@
 ﻿within AixLib.DataBase.Media.Refrigerants.R744;
-record BDSP_I0_P1_1000_T233_373
+record BDSP_I0_P10_100_T233_373
   "Record with fitting coefficients for dew and bubble line"
   extends
     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition(
@@ -36,7 +36,6 @@ record BDSP_I0_P1_1000_T233_373
     sv_Nt = 4,
     sv_N= {1852.51697191582, -0.104686424493378, -0.231351021595994, 0.350507795905541, -0.0111283896749802},
     sv_E= {1.91767692218586, -0.00970758719031325, 0.456797862631896, 8.11458177168435});
-
 
        annotation (Documentation(revisions="<html>
 <ul>
@@ -94,4 +93,4 @@ Göbel, Stephan (2019): Automated simulation model evaluation for refrigerant ci
 </p>
 </html>"));
 
-end BDSP_I0_P1_1000_T233_373;
+end BDSP_I0_P10_100_T233_373;

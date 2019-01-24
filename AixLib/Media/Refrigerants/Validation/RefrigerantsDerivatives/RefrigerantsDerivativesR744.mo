@@ -6,7 +6,7 @@ model RefrigerantsDerivativesR744
   // Definition of the refrigerant that shall be tested
   //
   replaceable package MediumInt =
-     AixLib.Media.Refrigerants.R744.R744_IIR_P1_1000_T233_373_Formula
+     AixLib.Media.Refrigerants.R744.R744_I0_P10_100_T233_373_Formula
     "Internal medium model";
 
   // Definition of parameters and constants
