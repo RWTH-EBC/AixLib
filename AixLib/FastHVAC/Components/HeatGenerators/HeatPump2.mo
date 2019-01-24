@@ -1,37 +1,32 @@
-within AixLib.FastHVAC.Components.HeatGenerators;
-model HeatPump2 "Base model of fastHVAC heat pump"
-   extends AixLib.FastHVAC.Interfaces.PartialFourPortInterface(
-     final Medium1 = Medium_con,
-     final Medium2 = Medium_eva,
-     final m1_flow_nominal=mFlow_conNominal,
-     final m2_flow_nominal=mFlow_evaNominal,
-     final allowFlowReversal1=allowFlowReversalCon,
-     final allowFlowReversal2=allowFlowReversalEva);
+﻿within AixLib.FastHVAC.Components.HeatGenerators;
+model HeatPump2 "Base model of FastHVAC Heat Pump"
 
 //General
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
-      AixLib.FastHVAC.Media.WaterSimple()     "Medium at sink side"
+      AixLib.FastHVAC.Media.WaterSimple()
+    "Medium at sink side"
     annotation (Dialog(tab = "Condenser"),choicesAllMatching=true);
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_eva=
-      AixLib.FastHVAC.Media.WaterSimple()     "Medium at source side"
+      AixLib.FastHVAC.Media.WaterSimple()
+    "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
+  parameter Boolean use_revHP=true
+    "True if the HP is reversible"
+    annotation(choices(choice=true "reversible HP",
       choice=false "only heating",
       radioButtons=true), Dialog(descriptionLabel=true));
   replaceable model PerDataHea =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of HP in heating mode"
+    "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of HP in chilling mode"
+    "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-
   parameter Real scalingFactor=1 "Scaling-factor of HP";
-  parameter Boolean use_refIne=true
-    "Consider the inertia of the refrigerant cycle"                           annotation(choices(checkBox=true), Dialog(
+  parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
+    annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
-
   parameter Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency for inertia of refrigerant cycle"
     annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
@@ -64,10 +59,10 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     "Constant thermal conductance of condenser material"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_ConCap));
+
 //Evaporator
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
-
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
   parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho "Mass of working fluid";
@@ -90,6 +85,7 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     "Constant thermal conductance of Evaporator material"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_EvaCap));
+
 //Assumptions
   parameter Boolean allowFlowReversalEva=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
@@ -111,19 +107,16 @@ model HeatPump2 "Base model of fastHVAC heat pump"
   parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
     annotation (               Dialog(tab="Assumptions",group="Evaporator"));
-
 //Initialization
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
-
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=50+273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=10+273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
-
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="Refrigerant inertia",enable=initType ==
           Init.InitialOutput and use_refIne));
@@ -131,8 +124,23 @@ model HeatPump2 "Base model of fastHVAC heat pump"
 //Advanced
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  EvaporatorCondenserWithCapacity con(
-    final m_flow_small=1E-4*abs(mFlow_conNominal),
+    Interfaces.EnthalpyPort_a             enthalpyPort_a(
+                     m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0))
+    "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{-104,56},{-96,64}})));
+  Interfaces.EnthalpyPort_b             enthalpyPort_b(
+                     m_flow(max=if allowFlowReversalCon then +Modelica.Constants.inf else 0))
+    "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{104,56},{96,64}})));
+  Interfaces.EnthalpyPort_a             enthalpyPort_a1(
+                     m_flow(min=if allowFlowReversalEva then -Modelica.Constants.inf else 0))
+    "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
+    annotation (Placement(transformation(extent={{96,-64},{104,-56}})));
+  Interfaces.EnthalpyPort_b             enthalpyPort_b1(
+                     m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0))
+    "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
+    annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));
+  BaseClasses.EvaporatorCondenserWithCapacity con(
     final kAOut_nominal=GCon,
     final m_fluid=m_fluidCon,
     final T_start=TCon_start,
@@ -140,14 +148,14 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final is_con=true,
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
-    final m_flow_nominal=mFlow_conNominal,
     final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal)^0.88,
-    final medium=Medium_con)
+    final medium=Medium_con,
+    final m_flow_small=1E-4*abs(mFlow_conNominal),
+    final m_flow_nominal=mFlow_conNominal)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
-
-  EvaporatorCondenserWithCapacity eva(
-    final medium = Medium_eva,
+  BaseClasses.EvaporatorCondenserWithCapacity eva(
+    final medium=Medium_eva,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
     final m_fluid=m_fluidEva,
@@ -165,15 +173,13 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final normalized=true,
     final n=nthOrder,
     final f=refIneFre_constant,
-    final y_start=yRefIne_start) if
-                                   use_refIne
+    final y_start=yRefIne_start) if use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=90,
         origin={-14,-52})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if
-                                                                 not use_refIne
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetCon if not use_refIne
     "Use default nSet value" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
@@ -183,21 +189,21 @@ model HeatPump2 "Base model of fastHVAC heat pump"
     final normalized=true,
     final n=nthOrder,
     final f=refIneFre_constant,
-    final y_start=yRefIne_start) if
-                                   use_refIne
+    final y_start=yRefIne_start) if use_refIne
     "This n-th order block represents the inertia of the refrigerant cycle and delays the heat flow"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-16,58})));
-  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetEva if
-                                                                 not use_refIne
-    "Use default nSet value" annotation (Placement(transformation(
+  Modelica.Blocks.Routing.RealPassThrough realPassThroughnSetEva if not use_refIne
+    "Use default nSet value"
+     annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={16,-52})));
   Modelica.Blocks.Interfaces.RealInput iceFac_in
-    "Input signal for icing factor" annotation (Placement(transformation(
+    "Input signal for icing factor"
+     annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=90,
         origin={-76,-136})));
@@ -213,84 +219,84 @@ model HeatPump2 "Base model of fastHVAC heat pump"
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,110})));
-
   Modelica.Blocks.Interfaces.RealInput nSet
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  AixLib.Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
+  AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final
-      model PerDataHea =
-      PerDataHea,
-      redeclare final model PerDataChi = PerDataChi,
+  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(
+    redeclare final model PerDataHea =PerDataHea,
+    redeclare final model PerDataChi = PerDataChi,
     final use_revHP=use_revHP,
     final scalingFactor=scalingFactor)                                                   annotation (
       Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
-  Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
-      displayUnit="degC")
+  Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K",
+    final displayUnit="degC")
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
-  Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
-      displayUnit="degC")
+  Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K",
+    final displayUnit="degC")
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
-
   Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
-
   Sensors.TemperatureSensor        senT_a2
-                       "Temperature at sink inlet" annotation (Placement(
+    "Temperature at sink inlet"
+    annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={40,-86})));
   Sensors.TemperatureSensor        senT_b2
-                       "Temperature at sink outlet" annotation (Placement(
+    "Temperature at sink outlet"
+    annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={-52,-86})));
-  Sensors.MassFlowSensor     mFlow_eva
-    "Mass flow sensor at the evaporator" annotation (Placement(transformation(
+  Sensors.MassFlowSensor           mFlow_eva
+    "Mass flow sensor at the evaporator"
+    annotation (Placement(transformation(
         origin={70,-60},
         extent={{10,-10},{-10,10}},
         rotation=0)));
   Sensors.TemperatureSensor        senT_b1
-                       "Temperature at sink outlet" annotation (Placement(
+    "Temperature at sink outlet"
+    annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={38,92})));
   Sensors.TemperatureSensor        senT_a1
-                       "Temperature at sink inlet" annotation (Placement(
+    "Temperature at sink inlet"
+    annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-34,92})));
-  Sensors.MassFlowSensor     mFlow_con
-    "Mass flow sensor at the evaporator" annotation (Placement(transformation(
+  Sensors.MassFlowSensor           mFlow_con
+    "Mass flow sensor at the evaporator"
+    annotation (Placement(transformation(
         origin={-80,60},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-
 equation
   connect(enthalpyPort_a, mFlow_con.enthalpyPort_a) annotation (Line(points={{-100,60},
           {-92,60},{-92,60.1},{-88.8,60.1}},     color={176,0,0}));
   connect(mFlow_con.enthalpyPort_b, senT_a1.enthalpyPort_a) annotation (Line(
         points={{-71,60.1},{-52,60.1},{-52,92.1},{-42.8,92.1}}, color={176,0,0}));
-  connect(senT_a1.enthalpyPort_b, con.enthalpyPort_a) annotation (Line(points={{
-          -25,92.1},{-21.5,92.1},{-21.5,92},{-16,92}}, color={176,0,0}));
-  connect(con.enthalpyPort_b, senT_b1.enthalpyPort_a) annotation (Line(points={{
-          16,92},{22,92},{22,92.1},{29.2,92.1}}, color={176,0,0}));
+  connect(senT_a1.enthalpyPort_b, con.enthalpyPort_a) annotation (Line(points={{-25,
+          92.1},{-21.5,92.1},{-21.5,92},{-16,92}},     color={176,0,0}));
+  connect(con.enthalpyPort_b, senT_b1.enthalpyPort_a) annotation (Line(points={{16,92},
+          {22,92},{22,92.1},{29.2,92.1}},        color={176,0,0}));
   connect(senT_b1.enthalpyPort_b, enthalpyPort_b) annotation (Line(points={{47,92.1},
           {84,92.1},{84,60},{100,60}}, color={176,0,0}));
   connect(T_amb_con, varTempOutCon.T) annotation (Line(points={{110,100},{82,100},
@@ -329,8 +335,9 @@ equation
           28.7},{0,40},{16,40},{16,50.8}}, color={0,0,127}));
   connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(points={{0,28.7},{
           0,40},{-16,40},{-16,50.8}}, color={0,0,127}));
-  connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(points={{-16,64.6},{-16,
-          75.04},{0,75.04}}, color={0,0,127}));
+  connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(points={{-16,64.6},{
+          -16,75.04},{0,75.04}},
+                             color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
   connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
@@ -472,5 +479,17 @@ equation
           thickness=0.5,
           origin={0,-74},
           rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
-            -120},{100,120}})));
+            -120},{100,120}})),
+  Documentation(info="<html>
+  <h4><span style=\"color: #008000\">Overview</span></h4>
+  <p>HeatPump model adapted to FastHAVC library.<br>
+  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian Wüllhorst in 2018. </p>
+  </html>",
+  revisions="<html><ul>
+    <li>
+    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
+    Moved into AixLib 
+    </li>
+  </ul>
+  </html>"));
 end HeatPump2;

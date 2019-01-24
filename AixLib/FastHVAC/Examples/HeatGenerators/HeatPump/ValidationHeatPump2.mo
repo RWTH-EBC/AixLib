@@ -1,6 +1,5 @@
-within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
+﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model ValidationHeatPump2
-
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sinks.Vessel vessel_co
     annotation (Placement(transformation(extent={{72,-56},{94,-38}})));
@@ -9,8 +8,7 @@ model ValidationHeatPump2
   FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  Components.HeatGenerators.HeatPump2                  heatPump2_1(
-    use_revHP=false,
+  Components.HeatGenerators.HeatPump2                  heatPump2(
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -27,6 +25,11 @@ model ValidationHeatPump2
     CEva=100,
     GEva=5,
     allowFlowReversalEva=true,
+    redeclare model PerDataHea =
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
+    use_revHP=true,
+    redeclare model PerDataChi =
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
     TAmbCon_nominal=288.15)
     annotation (Placement(transformation(extent={{-13,-16},{13,16}},
         rotation=-90,
@@ -41,16 +44,13 @@ model ValidationHeatPump2
         extent={{-11,-9},{11,9}},
         rotation=180,
         origin={-35,57})));
-
-
   Modelica.Blocks.Sources.Ramp TsuSourceRamp1(
     startTime=1000,
     height=25,
     offset=278,
     duration=36000)
     annotation (Placement(transformation(extent={{-98,-32},{-78,-12}})));
-  Modelica.Blocks.Sources.BooleanPulse    booleanConstant1(
-                                                          period=10000)
+  Modelica.Blocks.Sources.BooleanPulse    booleanConstant1(period=10000)
     annotation (Placement(transformation(extent={{-92,64},{-72,84}})));
   Modelica.Blocks.Sources.Constant dotm_ev2(k=0.5)
     annotation (Placement(transformation(extent={{-98,-82},{-78,-62}})));
@@ -89,13 +89,13 @@ model ValidationHeatPump2
 equation
   connect(dotm_ev2.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
-  connect(fluidSource.enthalpyPort_b, heatPump2_1.enthalpyPort_a1)
+  connect(fluidSource.enthalpyPort_b, heatPump2.enthalpyPort_a1)
     annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
-  connect(T_amb_internal.y, heatPump2_1.T_amb_eva) annotation (Line(points={{3,-27.3},
+  connect(T_amb_internal.y, heatPump2.T_amb_eva) annotation (Line(points={{3,-27.3},
           {-10.3333,-27.3},{-10.3333,-16.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, heatPump2_1.T_amb_con) annotation (Line(points={{3,-27.3},
+  connect(T_amb_internal.y, heatPump2.T_amb_con) annotation (Line(points={{3,-27.3},
           {16.3333,-27.3},{16.3333,-16.3}}, color={0,0,127}));
-  connect(heatPump2_1.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
+  connect(heatPump2.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
     annotation (Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,
           0}));
   connect(temperatureSensor.T, hys.u) annotation (Line(points={{35.9,-63.1},{35.9,
@@ -111,16 +111,16 @@ equation
           64,25.8},{52,25.8}}, color={0,0,127}));
   connect(dotm_co2.y, fluidSource1.dotm) annotation (Line(points={{77,84},{68,84},
           {68,32.6},{52,32.6}}, color={0,0,127}));
-  connect(fluidSource1.enthalpyPort_b, heatPump2_1.enthalpyPort_a)
+  connect(fluidSource1.enthalpyPort_b, heatPump2.enthalpyPort_a)
     annotation (Line(points={{34,29},{34,11},{11,11}}, color={176,0,0}));
-  connect(booleanToReal.y, heatPump2_1.nSet) annotation (Line(points={{7,44},{
+  connect(booleanToReal.y, heatPump2.nSet) annotation (Line(points={{7,44},{
           5.66667,44},{5.66667,13.08}},
                                 color={0,0,127}));
-  connect(heatPump2_1.modeSet, booleanConstant1.y) annotation (Line(points={{0.6,
+  connect(heatPump2.modeSet, booleanConstant1.y) annotation (Line(points={{0.6,
           13.08},{0.6,74},{-71,74}}, color={255,0,255}));
-  connect(heatPump2_1.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
+  connect(heatPump2.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
     annotation (Line(points={{-5,11},{-5,57},{-27.3,57}}, color={176,0,0}));
-  connect(iceFac.y, heatPump2_1.iceFac_in) annotation (Line(points={{-33.5,9},{
+  connect(iceFac.y, heatPump2.iceFac_in) annotation (Line(points={{-33.5,9},{
           -15.1333,9},{-15.1333,7.88}},
                                color={0,0,127}));
   connect(TsuSourceRamp1.y, fluidSource.T_fluid) annotation (Line(points={{-77,-22},
@@ -141,11 +141,17 @@ equation
 ")}),
     experiment(StopTime=72000, Interval=60),
     __Dymola_experimentSetupOutput,
-    Documentation(revisions="<html><ul>
-  <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+  Documentation(info="<html>
+  <h4><span style=\"color: #008000\">Overview</span></h4>
+  <p>Simple test set-up for the HeatPump2 model.<br>
+  The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. <br> 
+  Example Setup is based on FastHVAC part from <a href=\"modelica://AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump</a> </p>
+  </html>",
+  revisions="<html><ul>
+    <li>
+    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
     Moved into AixLib
-  </li>
-</ul>
-</html>"));
+    </li>
+  </ul>
+  </html>"));
 end ValidationHeatPump2;

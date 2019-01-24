@@ -1,23 +1,24 @@
-within AixLib.FastHVAC.Components.HeatGenerators;
+﻿within AixLib.FastHVAC.BaseClasses;
 model EvaporatorCondenserWithCapacity
-  extends AixLib.FastHVAC.BaseClasses.TwoPortHeatMassExchanger(workingFluid(m_fluid=m_fluid,
+  extends AixLib.FastHVAC.Interfaces.TwoPortHeatMassExchanger( workingFluid(m_fluid=m_fluid,
     medium=medium));
-
-  parameter Boolean is_con "Type of heat exchanger" annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
+  parameter Boolean is_con "Type of heat exchanger"
+  annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
       choice=false "Evaporator",
       radioButtons=true));
   parameter Modelica.SIunits.Volume V "Volume in condenser";
   parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
-    annotation (Dialog(group="Heat losses"),choices(checkBox=true));
+  annotation (Dialog(group="Heat losses"),choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
-    annotation (Dialog(group="Heat losses", enable=use_cap));
+  annotation (Dialog(group="Heat losses", enable=use_cap));
   parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
   parameter Modelica.SIunits.ThermalConductance kAOut_nominal
-    "Nominal value for thermal conductance to the ambient" annotation (Dialog(group="Heat losses", enable=
+    "Nominal value for thermal conductance to the ambient"
+  annotation (Dialog(group="Heat losses", enable=
           use_cap));
   Modelica.Blocks.Interfaces.RealOutput kAInn
     "Formular for calculation of heat transfer coefficient on the inside"
-                                                                         annotation (Dialog(group="Heat losses", enable=
+  annotation (Dialog(group="Heat losses", enable=
           use_cap));
   Modelica.Thermal.HeatTransfer.Components.Convection conIns if use_cap
     "Convection between fluid and solid" annotation (Placement(transformation(
@@ -71,7 +72,6 @@ model EvaporatorCondenserWithCapacity
         extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-8.88178e-16,-106})));
-
 equation
   connect(conIns.fluid, heatCap.port)
     annotation (Line(points={{-12,36},{-12,52},{1.77636e-15,52}},
@@ -95,9 +95,9 @@ equation
           -2.22045e-15,-99},{0,-99},{0,-118}}, color={0,0,127}));
   connect(conIns.solid, preHea.port) annotation (Line(points={{-12,20},{-14,20},
           {-14,-56},{2.22045e-15,-56}}, color={191,0,0}));
-  connect(workingFluid.heatPort, preHea.port) annotation (Line(points={{
-          -1.11022e-15,-9.4},{-8,-9.4},{-8,-16},{-14,-16},{-14,-56},{
-          2.22045e-15,-56}}, color={191,0,0}));
+  connect(workingFluid.heatPort, preHea.port) annotation (Line(points={{0,9.4},{
+          -14,9.4},{-14,-56},{2.22045e-15,-56}},
+                             color={191,0,0}));
   annotation (Icon(graphics={ Ellipse(
           extent={{-48,46},{46,-42}},
           lineColor={0,0,0},
@@ -229,5 +229,17 @@ equation
           pattern=LinePattern.None,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
-          visible=not is_con)}));
+          visible=not is_con)}),
+  Documentation(info="<html>
+  <h4><span style=\"color: #008000\">Overview</span></h4>
+  <p>Evaporator/Condenser model adapted to FastHAVC library.<br> 
+  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity\">AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity</a>. It includes heat losses to the environment. </p>
+  </html>",
+  revisions="<html><ul>
+    <li>
+    <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
+    Moved into AixLib 
+    </li>
+  </ul>
+  </html>"));
 end EvaporatorCondenserWithCapacity;
