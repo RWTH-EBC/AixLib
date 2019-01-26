@@ -34,7 +34,8 @@ model RegisterModule "AHU register module for heaters and coolers"
     T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,32},{20,66}})));
   BaseClasses.registerBus registerBus
-    annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
+    annotation (Placement(transformation(extent={{-106,-12},{-82,10}}),
+        iconTransformation(extent={{-112,-14},{-86,12}})));
 
 protected
   Fluid.Sensors.TemperatureTwoPort senT_airIn(
@@ -92,7 +93,7 @@ equation
           {42,59.2},{42,60},{60,60}}, color={0,127,255}));
   connect(partialHydraulicModule.hydraulicBus, registerBus.hydraulicBus)
     annotation (Line(
-      points={{-38,-40},{-119.95,-40},{-119.95,0.05}},
+      points={{-38,-40},{-93.94,-40},{-93.94,-0.945}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -102,19 +103,19 @@ equation
     annotation (Line(points={{-60,60},{-48,60}}, color={0,127,255}));
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
           {-24,60},{-24,59.2},{-20,59.2}}, color={0,127,255}));
-  connect(PT1_airIn.y, registerBus.Tair_in) annotation (Line(points={{-70,101},{
-          -86,101},{-86,102},{-119.95,102},{-119.95,0.05}}, color={0,0,127}),
+  connect(PT1_airIn.y, registerBus.Tair_in) annotation (Line(points={{-70,101},
+          {-86,101},{-86,102},{-93.94,102},{-93.94,-0.945}},color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(PT1_airOut.y, registerBus.Tair_out) annotation (Line(points={{70,101},
-          {70,110},{-119.95,110},{-119.95,0.05}}, color={0,0,127}), Text(
+          {70,110},{-93.94,110},{-93.94,-0.945}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(VFSen_out.V_flow, registerBus.VF_air) annotation (Line(points={{-38,49},
-          {-38,30},{-119.95,30},{-119.95,0.05}}, color={0,0,127}), Text(
+          {-38,30},{-93.94,30},{-93.94,-0.945}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -126,15 +127,207 @@ equation
           -78},{-58,-78},{-58,-72},{-100,-72},{-100,-60}}, color={0,127,255}));
   connect(partialHydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,
           -78},{100,-78},{100,-60}}, color={0,127,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,120}}), graphics={Rectangle(
-          extent={{-40,120},{40,40}},
-          lineColor={0,0,0},
-          lineThickness=1,
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -140},{100,120}}),
+                         graphics={
+        Rectangle(
+          extent={{-100,114},{100,-140}},
+          lineColor={175,175,175},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dash),
+        Line(
+          points={{100,60},{68,60},{68,106},{34,106},{34,-140},{100,-140},{100,
+              -62}},
+          color={28,108,200},
+          thickness=1),
+        Line(
+          points={{-100,60},{-68,60},{-68,106},{-34,106},{-34,-140},{-100,-140},
+              {-100,-62}},
+          color={28,108,200},
+          thickness=1),
+        Line(
+          points={{-34,-70},{34,-70}},
+          color={28,108,200},
+          thickness=1),
+        Polygon(
+          points={{0,0},{0,0}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
           fillColor={215,215,215},
-          fillPattern=FillPattern.Solid), Line(
-          points={{-40,120},{40,40}},
-          color={0,0,0},
-          thickness=1)}),                                        Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,120}})));
+          fillPattern=FillPattern.Solid,
+          origin={-34,24},
+          rotation=360), Ellipse(
+          extent={{-20,20},{20,-20}},
+          lineColor={135,135,135},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={-34,-18},
+          rotation=360),                 Line(
+          points={{-10,20},{10,0},{-10,-20}},
+          color={135,135,135},
+          thickness=0.5,
+          origin={-34,-8},
+          rotation=90),
+        Polygon(
+          points={{-10,-10},{-10,10},{10,0},{-10,-10}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={-24,-70},
+          rotation=180),
+        Polygon(
+          points={{10,-10},{10,10},{-10,0},{10,-10}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          origin={-34,-60},
+          rotation=90),
+        Polygon(
+          points={{10,-10},{-10,-10},{0,10},{10,-10}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={-34,-80},
+          rotation=360),
+        Ellipse(
+          extent={{-6,6},{6,-6}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={-48,-70},
+          rotation=360),
+        Line(
+          points={{0,4},{0,-4}},
+          color={95,95,95},
+          thickness=0.5,
+          origin={-38,-70},
+          rotation=90),
+        Ellipse(
+          extent={{-42,-112},{-26,-128}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-42,-112},{-26,-128}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q"),
+        Ellipse(
+          extent={{-58,-112},{-42,-128}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-58,-112},{-42,-128}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Polygon(
+          points={{0,0},{0,0}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          origin={-34,24},
+          rotation=360),
+        Ellipse(
+          extent={{-42,28},{-26,12}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-42,28},{-26,12}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q"),
+        Ellipse(
+          extent={{-58,28},{-42,12}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-58,28},{-42,12}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Ellipse(
+          extent={{32,-68},{36,-72}},
+          lineColor={28,108,200},
+          lineThickness=1,
+          fillColor={28,108,200},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{74,94},{90,78}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{74,94},{90,78}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Line(points={{68,86},{74,86}},     color={28,108,200}),
+        Ellipse(
+          extent={{40,28},{56,12}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{40,28},{56,12}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Line(points={{34,20},{40,20}},   color={28,108,200}),
+        Polygon(
+          points={{-40,38},{40,98},{-40,98},{-40,38}},
+          lineThickness=0.5,
+          fillColor={215,215,238},
+          fillPattern=FillPattern.Solid,
+          lineColor={135,135,135}),
+        Polygon(
+          points={{-40,38},{40,98},{40,38},{-40,38}},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          lineColor={135,135,135}),
+        Ellipse(
+          extent={{40,-112},{56,-128}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{40,-112},{56,-128}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Line(points={{34,-120},{40,-120}},
+                                         color={28,108,200}),
+        Ellipse(
+          extent={{-90,94},{-74,78}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-90,94},{-74,78}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Line(points={{-74,86},{-68,86}},   color={28,108,200})}),Diagram(
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
+            120}})));
 end RegisterModule;
