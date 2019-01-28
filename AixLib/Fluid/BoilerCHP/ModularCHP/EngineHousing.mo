@@ -151,10 +151,14 @@ public
           extent={{-6,-46},{14,-26}})));
 
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
-    annotation (Placement(transformation(extent={{-30,10},{-48,30}})));
+    annotation (Placement(transformation(extent={{28,40},{10,60}})));
   Modelica.Blocks.Interfaces.RealOutput exhaustGasTemperature
-    annotation (Placement(transformation(extent={{-72,8},{-96,32}}),
-        iconTransformation(extent={{-68,4},{-100,36}})));
+    annotation (Placement(transformation(extent={{12,-12},{-12,12}},
+        rotation=270,
+        origin={0,106}),
+        iconTransformation(extent={{14,-14},{-14,14}},
+        rotation=270,
+        origin={0,122})));
 equation
 
  /* if EngOp and m_Exh>0.001 then
@@ -198,10 +202,10 @@ equation
     annotation (Line(points={{-20,0},{-24,0},{-24,-48}}, color={191,0,0}));
   connect(port_CoolingCircle, engHeatToCoolant.port_b)
     annotation (Line(points={{100,0},{50,0}}, color={191,0,0}));
-  connect(calculatedExhaustTemp.y, exhaustGasTemperature)
-    annotation (Line(points={{-48.9,20},{-84,20}}, color={0,0,127}));
   connect(innerThermalCond2_1.port_b, engHeatToCoolant.port_a)
     annotation (Line(points={{0,0},{30,0}}, color={191,0,0}));
+  connect(calculatedExhaustTemp.y, exhaustGasTemperature)
+    annotation (Line(points={{9.1,50},{0,50},{0,106}}, color={0,0,127}));
   annotation (
     Documentation(revisions="<html>
 <ul>

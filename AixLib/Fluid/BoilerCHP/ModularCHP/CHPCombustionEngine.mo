@@ -110,8 +110,8 @@ model CHPCombustionEngine
   Modelica.SIunits.Pressure p_me = p_mi-p_mf "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
-        Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
+      = Medium3)
     annotation (Placement(transformation(extent={{108,-10},{88,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
     use_m_flow_in=true,
@@ -140,7 +140,12 @@ model CHPCombustionEngine
         origin={0,78})));
 
   Modelica.Blocks.Interfaces.RealInput exhaustGasTemperature
-    annotation (Placement(transformation(extent={{110,-42},{90,-22}})));
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={0,-104}), iconTransformation(
+        extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={0,-70})));
   Modelica.Blocks.Interfaces.RealOutput fuelFlow
     annotation (Placement(transformation(extent={{92,60},{132,100}}),
         iconTransformation(extent={{90,66},{118,94}})));
@@ -204,12 +209,12 @@ for i in 1:size(n_ComExh, 1) loop
   connect(inertia.flange_a, engineTorque.flange)
     annotation (Line(points={{0,68},{0,60},{4.44089e-016,60}},
                                              color={0,0,0}));
-  connect(exhaustGasTemperature, exhaustFlow.T_in) annotation (Line(points={{100,-32},
-          {58,-32},{58,4},{64,4}},          color={0,0,127}));
   connect(massFlowFuel.y, fuelFlow)
     annotation (Line(points={{85.1,80},{112,80}}, color={0,0,127}));
   connect(airFlow, massFlowAir.y)
     annotation (Line(points={{114,46},{85.1,46}}, color={0,0,127}));
+  connect(exhaustFlow.T_in, exhaustGasTemperature) annotation (Line(points={{64,
+          4},{56,4},{56,-40},{0,-40},{0,-104}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-120,-134},{122,134}}, fileName=
               "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png"),

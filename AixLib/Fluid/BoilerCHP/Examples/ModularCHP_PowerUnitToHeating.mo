@@ -84,8 +84,8 @@ model ModularCHP_PowerUnitToHeating
 
   inner Modelica.Fluid.System system(p_ambient=p_ambient, T_ambient=T_ambient)
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnit cHP_PowerUnit(redeclare
-      package Medium_Coolant = Medium_Coolant, m_flow=m_flowCoo)
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_PowerUnit2801 cHP_PowerUnit(
+      redeclare package Medium_Coolant = Medium_Coolant, m_flow=m_flowCoo)
     annotation (Placement(transformation(extent={{-20,-20},{20,18}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
     allowFlowReversal=true,

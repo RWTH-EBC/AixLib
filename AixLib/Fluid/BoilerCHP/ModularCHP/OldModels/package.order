@@ -64,3 +64,5 @@ EngineHousing1601
 ModelEnginePowerAndHeatToCooling1701
 CHP_PowerUnitToHeating1801HEXDETAILLED
 ModularCHP_ExhaustHeatExchanger2101
+CHP_PowerUnit2801
+CHP_PowerUnitToHeatingHEX2_2801

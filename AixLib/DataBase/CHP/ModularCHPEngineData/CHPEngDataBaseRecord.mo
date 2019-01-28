@@ -27,7 +27,7 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   constant Modelica.SIunits.Power P_mecNominal = P_elNominal/etaGen "Mechanical power output of the engine at nominal operating point";
   constant Modelica.SIunits.Power P_FueNominal = (P_elNominal+Q_MaxHea)/etaCHP "Nominal fuel expenses";
   constant Modelica.SIunits.Power Q_MaxHea "Maximum of usable heat";
-  constant Modelica.SIunits.Temperature T_ExhPowUniOut "Exhaust gas temperature after exhaust heat exchanger";
+  constant Modelica.SIunits.Temperature T_ExhPowUniOut = 373.15 "Exhaust gas temperature after exhaust heat exchanger (default=100°C)";
 
   //General CHP parameters
 
@@ -71,7 +71,7 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
 <p>- <b>VEng</b> (default=0.25*hStr*Modelica.Constants.pi*dCyl^2*z)</p>
 <p>- <b>mEng</b> (default=70389*VEng+17.913, for first appraisal of the heat capacities of engine housing, should be calibrated)</p>
 <p>- <b>eps</b> (typical values around 12 (SI) and 21 (DI))</p>
-<p>- <b>T_ExhPowOut</b> (typical values around 373K)</p>
+<p>- <b>T_ExhPowOut</b> (default=373.15K)</p>
 <p>- <b>gearRatio</b> (default=1)</p>
 <p>- <b>cosPhi </b>(default=0.8)</p>
 <p>- <b>useGenHeat</b> (default=false)</p>

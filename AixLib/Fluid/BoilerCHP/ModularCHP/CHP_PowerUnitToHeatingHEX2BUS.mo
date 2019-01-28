@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnitToHeatingHEX2
+model CHP_PowerUnitToHeatingHEX2BUS
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -154,9 +154,7 @@ model CHP_PowerUnitToHeatingHEX2
   Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if pumpControl.y
          then m_flowCoo else mCool_flow_small)
     annotation (Placement(transformation(extent={{-80,22},{-60,42}})));
-  Modelica.Blocks.Interfaces.BooleanInput
-                                       cHPOnOff
-    annotation (Placement(transformation(extent={{-110,64},{-94,80}})));
+
   Modelica.Blocks.Sources.BooleanPulse cHPIsOnOff(
     startTime(displayUnit="h") = 0,
     period(displayUnit="h") = 86400,
@@ -315,4 +313,4 @@ physikal"),
 <p><br>Caution: </p>
 <p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-end CHP_PowerUnitToHeatingHEX2;
+end CHP_PowerUnitToHeatingHEX2BUS;

@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnit
+model CHP_PowerUnitBUS
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -154,7 +154,8 @@ model CHP_PowerUnit
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator inductionMachineGenerator(
+  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGeneratorBUS
+                                                         inductionMachineGenerator(
       CHPEngData=CHPEngineModel, useHeat=useGenHea)
     annotation (Placement(transformation(extent={{-64,56},{-40,80}})));
   Modelica.Blocks.Interfaces.BooleanInput
@@ -172,17 +173,17 @@ model CHP_PowerUnit
         transformation(
         extent={{-14,-14},{14,14}},
         rotation=90,
-        origin={-40,108})));
+        origin={-124,122})));
   Modelica.Blocks.Interfaces.RealOutput fuelConsumption annotation (Placement(
         transformation(
         extent={{-14,-14},{14,14}},
         rotation=90,
-        origin={0,108})));
+        origin={-84,122})));
   Modelica.Blocks.Interfaces.RealOutput airConsumption annotation (Placement(
         transformation(
         extent={{-14,-14},{14,14}},
         rotation=90,
-        origin={40,108})));
+        origin={-44,122})));
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer"
     annotation (Dialog(tab="Engine Cooling Circle"));
@@ -201,6 +202,8 @@ model CHP_PowerUnit
         T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T),
     engineToCoolant(T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T))
     annotation (Placement(transformation(rotation=0, extent={{-24,10},{10,44}})));
+  AixLib.Controls.Interfaces.ModularCHPControlBus sigBusCHP
+    annotation (Placement(transformation(extent={{-28,74},{28,124}})));
 equation
   connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1]) annotation (
       Line(points={{68,8.4},{80,8.4},{80,26},{92,26}}, color={0,127,255}));
@@ -213,15 +216,8 @@ equation
     annotation (Line(points={{-80,-58},{-34.48,-58}},  color={0,127,255}));
   connect(port_Supply, exhaustHeatExchanger.port_b2) annotation (Line(points={{80,-58},
           {40,-58},{40,-8.4}},                color={0,127,255}));
-  connect(inductionMachineGenerator.isOn, onOffStep)
-    annotation (Line(points={{-63.76,68},{-96,68}},  color={255,0,255}));
   connect(inductionMachineGenerator.flange_a, gasolineEngineChp.flange_a)
     annotation (Line(points={{-40,68},{-7,68},{-7,43.66}}, color={0,0,0}));
-  connect(gasolineEngineChp.airFlow, airConsumption) annotation (Line(points={{5.41,
-          43.83},{5.41,66},{40,66},{40,108}},
-                                           color={0,0,127}));
-  connect(fuelConsumption, gasolineEngineChp.fuelFlow) annotation (Line(points={{0,108},
-          {0,76},{0,43.83},{-0.03,43.83}},  color={0,0,127}));
   connect(gasolineEngineChp.isOn, onOffStep) annotation (Line(points={{-24,25.64},
           {-76,25.64},{-76,68},{-96,68}}, color={255,0,255}));
   connect(gasolineEngineChp.port_Exhaust, exhaustHeatExchanger.port_a1)
@@ -234,8 +230,14 @@ equation
   connect(gasolineEngineChp.port_CoolingCircle, engineHeatTransfer.heatPort_outside)
     annotation (Line(points={{10,12.04},{10,-18},{-20.08,-18},{-20.08,-51.28}},
         color={191,0,0}));
-  connect(inductionMachineGenerator.electricPower, electricalPower) annotation
-    (Line(points={{-52,81.44},{-52,86},{-40,86},{-40,108}}, color={0,0,127}));
+  connect(inductionMachineGenerator.modularCHPControlBus, sigBusCHP)
+    annotation (Line(
+      points={{-61.12,68},{-68,68},{-68,99},{0,99}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -298,4 +300,4 @@ physical"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end CHP_PowerUnit;
+end CHP_PowerUnitBUS;
