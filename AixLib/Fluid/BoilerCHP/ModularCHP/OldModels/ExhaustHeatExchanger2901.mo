@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ExhaustHeatExchangerBUS
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger2901
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -38,8 +38,8 @@ model ExhaustHeatExchangerBUS
     final m_flow_small=m1_flow_small)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
-      = Medium1, final allowFlowReversal=allowFlowReversal1)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
+        Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,70},{80,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolCold(
@@ -385,4 +385,4 @@ equation
 <p>-&gt; Determination of the enthalpy of vaporization using an empirical formula from tabular data</p>
 <p>-&gt; Assumption: The latent heat flow is is added to the convective heat flow to the capacity of the exhaust heat exchanger</p>
 </html>"));
-end ExhaustHeatExchangerBUS;
+end ExhaustHeatExchanger2901;

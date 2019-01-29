@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHPCombustionEngine
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHPCombustionEngine2901
   "Internal combustion engine model for CHP-applications."
   import AixLib;
   replaceable package Medium1 =
@@ -124,20 +124,20 @@ model CHPCombustionEngine
   Modelica.Blocks.Sources.RealExpression massFlowExhaust(y=m_Exh)
     annotation (Placement(transformation(extent={{28,-4},{50,20}})));
   Modelica.Blocks.Sources.RealExpression effectiveMechanicalTorque(y=Mmot)
-    annotation (Placement(transformation(extent={{18,-12},{-6,12}})));
+    annotation (Placement(transformation(extent={{-34,8},{-10,32}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   Modelica.Mechanics.Rotational.Sources.Torque engineTorque annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
-        origin={-30,0})));
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,50})));
   Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.5*CHPEngData.z/4)
                                                                 annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-68,0})));
+        rotation=90,
+        origin={0,78})));
 
   Modelica.Blocks.Interfaces.RealInput exhaustGasTemperature
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
@@ -146,9 +146,19 @@ model CHPCombustionEngine
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={0,-70})));
-  Modelica.Blocks.Interfaces.BooleanInput isOn annotation (Placement(
-        transformation(rotation=0, extent={{-122,44},{-90,76}}),
-        iconTransformation(extent={{-110,56},{-90,76}})));
+  Modelica.Blocks.Interfaces.RealOutput fuelFlow
+    annotation (Placement(transformation(extent={{92,60},{132,100}}),
+        iconTransformation(extent={{90,66},{118,94}})));
+  Modelica.Blocks.Interfaces.RealOutput airFlow
+    annotation (Placement(transformation(extent={{92,24},{136,68}}),
+        iconTransformation(extent={{90,32},{118,60}})));
+  Modelica.Blocks.Sources.RealExpression massFlowFuel(y=m_Fue)
+    annotation (Placement(transformation(extent={{62,68},{84,92}})));
+  Modelica.Blocks.Sources.RealExpression massFlowAir(y=m_Air)
+    annotation (Placement(transformation(extent={{62,34},{84,58}})));
+  Modelica.Blocks.Interfaces.BooleanInput isOn
+    annotation (Placement(transformation(extent={{-126,-20},{-86,20}}),
+        iconTransformation(extent={{-112,-14},{-84,14}})));
 equation
 
 for i in 1:size(n_ComExh, 1) loop
@@ -192,22 +202,24 @@ for i in 1:size(n_ComExh, 1) loop
     annotation (Line(points={{66,8},{51.1,8}},   color={0,0,127}));
   connect(exhaustFlow.ports[1], port_Exhaust)
     annotation (Line(points={{86,0},{98,0}},   color={0,127,255}));
-  connect(inertia.flange_b, flange_a) annotation (Line(points={{-78,
-          1.33227e-015},{-100,1.33227e-015},{-100,0}},
-                           color={0,0,0}));
+  connect(effectiveMechanicalTorque.y, engineTorque.tau) annotation (Line(
+        points={{-8.8,20},{-6.66134e-016,20},{-6.66134e-016,38}},  color={0,0,127}));
+  connect(inertia.flange_b, flange_a) annotation (Line(points={{4.44089e-016,88},
+          {0,88},{0,100}}, color={0,0,0}));
   connect(inertia.flange_a, engineTorque.flange)
-    annotation (Line(points={{-58,-1.33227e-015},{-58,1.33227e-015},{-40,
-          1.33227e-015}},                    color={0,0,0}));
+    annotation (Line(points={{0,68},{0,60},{4.44089e-016,60}},
+                                             color={0,0,0}));
+  connect(massFlowFuel.y, fuelFlow)
+    annotation (Line(points={{85.1,80},{112,80}}, color={0,0,127}));
+  connect(airFlow, massFlowAir.y)
+    annotation (Line(points={{114,46},{85.1,46}}, color={0,0,127}));
   connect(exhaustFlow.T_in, exhaustGasTemperature) annotation (Line(points={{64,
           4},{56,4},{56,-40},{0,-40},{0,-104}}, color={0,0,127}));
-  connect(engineTorque.tau, effectiveMechanicalTorque.y) annotation (Line(
-        points={{-18,-1.55431e-015},{-12,-1.55431e-015},{-12,0},{-7.2,0}},
-        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-120,-134},{122,134}}, fileName=
               "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png"),
         Text(
-          extent={{-100,80},{100,64}},
+          extent={{-100,90},{100,74}},
           lineColor={28,108,200},
           textStyle={TextStyle.Bold},
           textString="%name")}),                                 Diagram(
@@ -276,4 +288,4 @@ for i in 1:size(n_ComExh, 1) loop
 <p>- Based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) - Is dependent on speed and temperature of the engine</p>
 <p>-&gt; Distinction between SI and DI engine - Other engine types are not considered!</p>
 </html>"));
-end CHPCombustionEngine;
+end CHPCombustionEngine2901;

@@ -199,7 +199,7 @@ model ExhaustHeatExchanger
         Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer,
     use_portsData=false,
     final m_flow_small=m1_flow_small,
-    nPorts=2,
+    nPorts=3,
     V=VExhHex)                         "Fluid volume"
     annotation (Placement(transformation(extent={{-20,60},{-40,40}})));
   AixLib.Fluid.FixedResistances.HydraulicDiameter
@@ -276,6 +276,14 @@ model ExhaustHeatExchanger
     annotation (Placement(transformation(extent={{126,-32},{106,-12}})));
   Modelica.Blocks.Math.MultiSum multiSum(nu=2)
     annotation (Placement(transformation(extent={{86,-18},{74,-6}})));
+  AixLib.Controls.Interfaces.CHPControlBus cHPControlBus(
+    meaTemOutEng=senTCoolCold.T,
+    meaTemExhOutHex=senTExhCold.T,
+    meaTemExhInHex=senTExhHot.T,
+    meaThePowOutHex=pipeCoolant.heatPort_outside.Q_flow,
+    meaMasFloConHex=m_ConH2OExh,
+    meaTemSupChp=senTCoolHot.T) annotation (Placement(transformation(extent={{
+            -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
 equation
 //Calculation of water condensation and its usable latent heat
   if ConTec then
@@ -331,9 +339,10 @@ equation
   connect(heatConvExhaustPipeInside.port_b, heatCapacitor.port)
     annotation (Line(points={{-20,10},{-20,-12},{20,-12}},color={191,0,0}));
   connect(pressureDropExhaust.port_a, volExhaust.ports[1]) annotation (Line(
-        points={{0,60},{-14,60},{-14,64},{-28,64},{-28,60}}, color={0,127,255}));
-  connect(senTExhHot.port_b, volExhaust.ports[2]) annotation (Line(points={{-60,
-          60},{-46,60},{-46,64},{-32,64},{-32,60}}, color={0,127,255}));
+        points={{0,60},{-14,60},{-14,64},{-27.3333,64},{-27.3333,60}},
+                                                             color={0,127,255}));
+  connect(senTExhHot.port_b, volExhaust.ports[2]) annotation (Line(points={{-60,60},
+          {-46,60},{-46,64},{-30,64},{-30,60}},     color={0,127,255}));
   connect(pressureDropExhaust.port_b, senTExhCold.port_a)
     annotation (Line(points={{20,60},{28,60}}, color={0,127,255}));
   connect(additionalHeat.port, heatCapacitor.port)

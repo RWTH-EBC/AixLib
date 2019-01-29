@@ -80,7 +80,8 @@ model CHP_PowerUnit2801
   inner Modelica.Fluid.System system(p_ambient=p_ambient, T_ambient=T_ambient)
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionEngine cHPCombustionEngine(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngine2901
+    cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,
@@ -135,7 +136,8 @@ model CHP_PowerUnit2801
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-62,-8},{-78,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger2901
+    exhaustHeatExchanger(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -188,8 +190,8 @@ model CHP_PowerUnit2801
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator inductionMachineGenerator(
-      CHPEngData=CHPEngineModel, useHeat=useGenHea)
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_StarterGenerator2901
+    inductionMachineGenerator(CHPEngData=CHPEngineModel, useHeat=useGenHea)
     annotation (Placement(transformation(extent={{-64,56},{-40,80}})));
   Modelica.Blocks.Interfaces.BooleanInput
                                        onOffStep

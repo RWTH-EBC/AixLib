@@ -6,3 +6,4 @@ ModularExpansionValveControlBus
 ModularHeatPumpControlBus
 ModularSensorControlBus
 ModularCHPControlBus
+CHPControlBus

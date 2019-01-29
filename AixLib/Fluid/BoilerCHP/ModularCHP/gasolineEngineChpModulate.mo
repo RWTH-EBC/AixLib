@@ -1,6 +1,7 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model gasolineEngineChp
-  CHPCombustionEngine cHPCombustionEngine(
+model gasolineEngineChpModulate
+  CHPCombustionEngineModulate
+                      cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,
@@ -8,7 +9,8 @@ model gasolineEngineChp
     CHPEngData=CHPEngineModel,
     inertia(phi(fixed=false), w(fixed=false, displayUnit="rad/s")),
     T_logEngCool=T_logEngCool,
-    T_ExhCHPOut=T_ExhCHPOut)
+    T_ExhCHPOut=T_ExhCHPOut,
+    modFac=modFac)
     annotation (Placement(transformation(extent={{-30,0},{30,56}})));
   EngineHousing engineToCoolant(
     z=CHPEngineModel.z,
@@ -66,13 +68,15 @@ model gasolineEngineChp
   parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
     annotation (Dialog(tab="Engine Cooling Circle"));
+  Real modFac=cHPControlBus.modFac
+    "Modulation factor for energy outuput control of the Chp unit  "
+    annotation (Dialog(group="Engine Parameters"));
   Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
-  annotation(Dialog(group="Engine Parameters"));
+    annotation(Dialog(group="Engine Parameters"));
   Modelica.SIunits.Temperature T_ExhCHPOut=383.15  "Exhaust gas outlet temperature of CHP unit"
-  annotation(Dialog(group="Engine Parameters"));
-  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh
-                                      "Inlet temperature of exhaust gas"
-  annotation (Dialog(group="Thermal"));
+    annotation(Dialog(group="Engine Parameters"));
+  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Inlet temperature of exhaust gas"
+    annotation (Dialog(group="Thermal"));
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a annotation (
       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
@@ -108,6 +112,7 @@ model gasolineEngineChp
         iconTransformation(extent={{-11,-11},{11,11}},
         rotation=0,
         origin={-99,47})));
+
 equation
   connect(port_Exhaust, cHPCombustionEngine.port_Exhaust) annotation (Line(
         points={{102,2},{64,2},{64,28},{29.4,28}},   color={0,127,255}));
@@ -124,4 +129,4 @@ equation
   annotation (Icon(graphics={
           Bitmap(extent={{-136,-134},{144,160}}, fileName=
               "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png")}));
-end gasolineEngineChp;
+end gasolineEngineChpModulate;

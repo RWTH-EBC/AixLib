@@ -123,7 +123,8 @@ model ModularCHP_ExhaustHeatExchanger2101
     falling=1,
     period(displayUnit="d") = 86400)
     annotation (Placement(transformation(extent={{-158,50},{-138,70}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger2901
+    exhaustHeatExchanger(
     M_Exh=28,
     redeclare package Medium3 = Medium_Exhaust,
     Q_Gen=0,

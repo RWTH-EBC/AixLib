@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnit
+model CHP_PowerUnitModulate
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -171,7 +171,8 @@ model CHP_PowerUnit
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.gasolineEngineChp gasolineEngineChp(
+  AixLib.Fluid.BoilerCHP.ModularCHP.gasolineEngineChpModulate
+                                                      gasolineEngineChp(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,
@@ -319,4 +320,4 @@ physical"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end CHP_PowerUnit;
+end CHP_PowerUnitModulate;

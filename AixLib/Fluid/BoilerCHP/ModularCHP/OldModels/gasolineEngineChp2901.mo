@@ -1,6 +1,7 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model gasolineEngineChpBUS
-  CHPCombustionEngine cHPCombustionEngine(
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model gasolineEngineChp2901
+  import AixLib;
+  OldModels.CHPCombustionEngine2901 cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,
@@ -10,7 +11,7 @@ model gasolineEngineChpBUS
     T_logEngCool=T_logEngCool,
     T_ExhCHPOut=T_ExhCHPOut)
     annotation (Placement(transformation(extent={{-30,0},{30,56}})));
-  EngineHousing engineToCoolant(
+  AixLib.Fluid.BoilerCHP.ModularCHP.EngineHousing engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPCombustionEngine.m_Exh,
@@ -96,8 +97,8 @@ model gasolineEngineChpBUS
   Modelica.Blocks.Interfaces.BooleanInput isOn annotation (Placement(
         transformation(rotation=0, extent={{-110,-18},{-90,2}}),
         iconTransformation(extent={{-110,-18},{-90,2}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
-      = Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent=
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
+        Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent=
            {{90,-16},{110,4}}), iconTransformation(extent={{90,-16},{110,4}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient annotation (
       Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),
@@ -126,4 +127,4 @@ equation
   annotation (Icon(graphics={
           Bitmap(extent={{-140,-146},{140,148}}, fileName=
               "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png")}));
-end gasolineEngineChpBUS;
+end gasolineEngineChp2901;

@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_StarterGeneratorBUS
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_StarterGenerator2901
   "Model of a general induction machine working as a starter generator"
   extends Modelica.Electrical.Machines.Icons.TransientMachine;
 
@@ -92,20 +92,19 @@ model CHP_StarterGeneratorBUS
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+  Modelica.Blocks.Interfaces.BooleanInput isOn
+    annotation (Placement(transformation(extent={{-126,-20},{-86,20}}),
+        iconTransformation(extent={{-112,-14},{-84,14}})));
 
   Modelica.Mechanics.Rotational.Components.IdealGear gearEngineToGenerator(
       ratio=gearRatio)
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
-  Controls.Interfaces.ModularCHPControlBus modularCHPControlBus(
-    meaElPowGen=P_E,
-    meaCurGen=I_1,
-    meaTorGen=M,
-    calEtaGen=eta) annotation (Placement(transformation(extent={{-132,28},{-72,
-            84}}), iconTransformation(
-        extent={{-30,-28},{30,28}},
-        rotation=90,
-        origin={-76,0})));
+  Modelica.Blocks.Interfaces.RealOutput electricPower annotation (Placement(
+        transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=270,
+        origin={0,112})));
 equation
 
 if noEvent(SwitchOnOff) then
@@ -159,4 +158,4 @@ else
           lineColor={28,108,200},
           textStyle={TextStyle.Bold},
           textString="%name")}));
-end CHP_StarterGeneratorBUS;
+end CHP_StarterGenerator2901;

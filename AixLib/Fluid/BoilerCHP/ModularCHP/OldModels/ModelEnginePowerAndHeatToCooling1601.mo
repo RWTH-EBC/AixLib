@@ -180,7 +180,8 @@ model ModelEnginePowerAndHeatToCooling1601
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-62,-8},{-78,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger2901
+    exhaustHeatExchanger(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -196,8 +197,9 @@ model ModelEnginePowerAndHeatToCooling1601
     redeclare package Medium4 = Medium_Coolant,
     d_iExh=CHPEngineModel.dExh,
     dp_CooExhHex=CHPEngineModel.dp_Coo,
-    heatConvExhaustPipeInside(length=exhaustHeatExchanger.l_ExhHex, c=
-          cHPCombustionEngine.meanCpExh,
+    heatConvExhaustPipeInside(
+      length=exhaustHeatExchanger.l_ExhHex,
+      c=cHPCombustionEngine.meanCpExh,
       m_flow=cHPCombustionEngine.exhaustFlow.m_flow_in),
     volExhaust(V=exhaustHeatExchanger.VExhHex),
     CHPEngData=CHPEngineModel,
@@ -226,7 +228,7 @@ model ModelEnginePowerAndHeatToCooling1601
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_StarterGenerator2901
     cHP_ASMGeneratorCURRENT(CHPEngData=CHPEngineModel)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Modelica.Blocks.Sources.BooleanPulse onOffStep(

@@ -11,7 +11,8 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   constant RotationSpeed nEngNominal "Nominal engine speed at nominal operating point";
   constant Real QuoDCyl = dCyl/ref_dCyl "Comparison of cylinder diameter to the reference";
   constant Real xO2Exh = 0.05 "Residual oxygen content in the exhaust gas(default value is 5%)";
-  constant Real Lambda = 0.21 / (0.21 - xO2Exh) "Engine air ratio (default value is 1.31)";
+  type AirRatio=Real(final unit="1", min=1.01);
+  constant Real Lambda = 0.21 / (0.21 - xO2Exh) "Engine air ratio (default value is 1.31; min=1.01)";
   constant Real z "Number of cylinders";
   constant Real eps = if SIEngine then 12 else 21 "Compression ratio (default values are 12(SI) and 21(DI))";
   constant Real i "Number of combustion for one operating cycle (1->two-stroke, 0.5->four-stroke)";

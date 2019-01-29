@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHPCombustionEngine
+model CHPCombustionEngineModulate
   "Internal combustion engine model for CHP-applications."
   import AixLib;
   replaceable package Medium1 =
@@ -95,9 +95,10 @@ model CHPCombustionEngine
   Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
   annotation(Dialog(group="Parameters"));
   Modelica.SIunits.Temperature T_Com(start=T_Amb) "Temperature of the combustion gases";
-  Modelica.SIunits.Temperature T_ExhCHPOut=383.15
-                                           "Exhaust gas outlet temperature of CHP unit"
+  Modelica.SIunits.Temperature T_ExhCHPOut=383.15 "Exhaust gas outlet temperature of CHP unit"
   annotation(Dialog(group="Parameters"));
+  Real modFac=1 "Modulation factor for energy outuput control of the Chp unit"
+    annotation (Dialog(group="Modulation"));
 
   // Dynamic engine friction calculation model for the mechanical power and heat output of the combustion engine
 
@@ -107,7 +108,7 @@ model CHPCombustionEngine
   Real B0 = -2.625*10^(-3)+3.75*10^(-7)*(nEng*60)+1.75*10^(-5)*(T_logEngCool-273.15)+2.5*10^(-9)*(T_logEngCool-273.15)*(nEng*60);
   Real B1 = 8.95*10^(-3)+1.5*10^(-7)*(nEng*60)+7*10^(-6)*(T_logEngCool-273.15)-10^(-9)*(T_logEngCool-273.15)*(nEng*60);
   Modelica.SIunits.Pressure p_mf = p_mfNominal*((A0+A1*(nEng*60)+A2*(nEng*60)^2)+(B0+B1*(p_meNominal/100000))) "Current friction mean pressure at operating point";
-  Modelica.SIunits.Pressure p_me = p_mi-p_mf "Current mean effective pressure at operating point";
+  Modelica.SIunits.Pressure p_me = (modFac*p_mi)-p_mf "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
   Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
@@ -155,7 +156,7 @@ for i in 1:size(n_ComExh, 1) loop
   meanCpComExh[i] = cpRefComExh[i]/(expFacCpComExh[i] + 1)/(T_Com/273.15 - 1)*(-1 + (T_Com/273.15)^(expFacCpComExh[i] + 1));
   end for;
   meanCpExh = sum(meanCpComExh[i]*Xi_Exh[i] for i in 1:size(n_ComExh, 1));
-  m_Fue = m_FueEngRot*nEng*CHPEngData.i/60;
+  m_Fue = modFac*m_FueEngRot*nEng*CHPEngData.i/60;
   m_Air = m_Fue*Lambda*L_St;
  // m_Exh = m_Fue + m_Air;
   m_CO2Exh = m_Fue*(1+Lambda*L_St)*X_CO2Exh;
@@ -276,4 +277,4 @@ for i in 1:size(n_ComExh, 1) loop
 <p>- Based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) - Is dependent on speed and temperature of the engine</p>
 <p>-&gt; Distinction between SI and DI engine - Other engine types are not considered!</p>
 </html>"));
-end CHPCombustionEngine;
+end CHPCombustionEngineModulate;

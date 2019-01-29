@@ -1,139 +1,123 @@
 within AixLib.Controls.Interfaces;
-expandable connector ModularCHPControlBus
+expandable connector CHPControlBus
   "Connector used for modular CHP models"
   extends Modelica.Icons.SignalBus;
 
   type RotationSpeed=Real(final unit="1/s", min=0);
   type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
 
-  // Definition of parameters describing modular approach in general
+ // Definition of variables describing combustion engines
   //
-  parameter Integer nEngSen=1 "Number of combustion engines"
-    annotation(Dialog(              group="Modular approach"),
-               HideResult=true);
-  parameter Integer nGenSen=1 "Number of generators"
-    annotation(Dialog(              group="Modular approach"),
-               HideResult=true);
-  parameter Integer nExhHexSen=1 "Number of exhaust heat exchanger"
-    annotation(Dialog(              group="Modular approach"),
-               HideResult=true);
-  parameter Integer nChpSen=1 "Number of CHP units"
-    annotation(Dialog(              group="Modular approach"),
-               HideResult=true);
-
-  // Definition of variables describing combustion engines
-  //
-  RotationSpeed meaRotEng[nEngSen] "Array of measured engines' speed"
+  RotationSpeed meaRotEng "Array of measured engines' speed"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.Power meaFuePowEng[nEngSen]
+  Modelica.SIunits.Power meaFuePowEng
     "Array of needed fuel power at combustion engines'"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.Power meaThePowEng[nEngSen]
+  Modelica.SIunits.Power meaThePowEng
     "Array of thermal power output at combustion engines'"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.Torque meaTorEng[nEngSen]
+  Modelica.SIunits.Torque meaTorEng
     "Array of engine torque at combustion engines'"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.MassFlowRate meaMasFloFueEng[nEngSen]
+  Modelica.SIunits.MassFlowRate meaMasFloFueEng
     "Array of calculated fuel consumption at engines' inlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.MassFlowRate meaMasFloAirEng[nEngSen]
+  Modelica.SIunits.MassFlowRate meaMasFloAirEng
     "Array of calculated air consumption at engines' inlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.MassFlowRate meaMasFloCO2Eng[nEngSen]
+  Modelica.SIunits.MassFlowRate meaMasFloCO2Eng
     "Array of measured CO2 mass flow rates at engines' exhaust outlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
-  Modelica.SIunits.Temperature meaTemOutEng[nEngSen]
+  Modelica.SIunits.Temperature meaTemOutEng
     "Array of measured coolant temperature at engines' outlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
 
   // Definition of variables describing generators
   //
-  Modelica.SIunits.Power meaElPowGen[nGenSen]
+  Modelica.SIunits.Power meaElPowGen
     "Array of electric power at generators'"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
-  Modelica.SIunits.Current meaCurGen[nGenSen]
+  Modelica.SIunits.Current meaCurGen
     "Array of electric current at generators'"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
-  Modelica.SIunits.Torque meaTorGen[nGenSen]
+  Modelica.SIunits.Torque meaTorGen
     "Array of generators' torque"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
-  Real calEtaGen[nGenSen](unit="1")
+  Real calEtaGen(unit="1")
     "Array of calculated generators' efficiency"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
 
   // Definition of variables describing exhaust heat exchangers
   //
-  Modelica.SIunits.Temperature meaTemExhOutHex[nExhHexSen]
+  Modelica.SIunits.Temperature meaTemExhOutHex
     "Array of measured exhaust gas temperatures at exhaust heat exchangers' outlets"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemExhInHex[nExhHexSen]
+  Modelica.SIunits.Temperature meaTemExhInHex
     "Array of measured exhaust gas temperatures at exhaust heat exchangers' inlets"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Power meaThePowOutHex[nExhHexSen]
+  Modelica.SIunits.Power meaThePowOutHex
     "Array of measured thermal power of exhaust heat exchangers'"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.MassFlowRate meaMasFloConHex[nExhHexSen]
+  Modelica.SIunits.MassFlowRate meaMasFloConHex
     "Array of measured condensed water mass flow rates at exhaust heat exchangers' outlets"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
 
   // Definition of variables describing CHP units in general
   //
-  Modelica.SIunits.Power meaThePowChp[nChpSen]
+  Modelica.SIunits.Power meaThePowChp
     "Array of measured thermal power at CHP units' outlets"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Modelica.SIunits.Temperature meaTemRetChp[nChpSen]
+  Modelica.SIunits.Temperature meaTemRetChp
     "Array of measured temperatures at CHP units' return flow"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Modelica.SIunits.Temperature meaTemSupChp[nChpSen]
+  Modelica.SIunits.Temperature meaTemSupChp
     "Array of measured temperatures at CHP units' supply flow"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  SpecificEmission calEmiCO2Chp[nChpSen]
+  SpecificEmission calEmiCO2Chp
     "Array of calculated specific CO2 emissions of CHP units"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  SpecificEmission calFueChp[nChpSen]
+  SpecificEmission calFueChp
     "Array of calculated specific fuel consumption of CHP units"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Real calEtaTheChp[nChpSen](unit="1")
+  Real calEtaTheChp(unit="1")
     "Array of calculated thermal efficiency of CHP units"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Real calEtaElChp[nChpSen](unit="1")
+  Real calEtaElChp(unit="1")
     "Array of calculated electric efficiency of CHP units"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Real calFueUtiChp[nChpSen](unit="1")
+  Real calFueUtiChp(unit="1")
     "Array of calculated fuel utilization rate of CHP units"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Real modFac[nChpSen](unit="1")
+  Real modFac(unit="1")
     "Modulation factor of CHP units"
   annotation (Dialog(tab="Operation point", group="CHP Unit"));
-  Boolean isOn[nChpSen]
+  Boolean isOn
     "Indicator if Chp unit is in operation or not (true=On, false=Off)"
   annotation (Dialog(tab="Operation point", group="CHP Unit"));
-
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -184,4 +168,4 @@ Three different sensors are proposed at source's and sink's sides:
 </ol>
 </html>"));
 
-end ModularCHPControlBus;
+end CHPControlBus;

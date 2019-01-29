@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnitToHeatingHEX2
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_PowerUnitToHeatingHEX2_2901
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -106,7 +106,7 @@ model CHP_PowerUnitToHeatingHEX2
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnit cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_PowerUnit2901 cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,
@@ -315,4 +315,4 @@ physikal"),
 <p><br>Caution: </p>
 <p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-end CHP_PowerUnitToHeatingHEX2;
+end CHP_PowerUnitToHeatingHEX2_2901;

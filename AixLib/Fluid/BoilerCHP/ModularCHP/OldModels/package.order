@@ -66,3 +66,10 @@ CHP_PowerUnitToHeating1801HEXDETAILLED
 ModularCHP_ExhaustHeatExchanger2101
 CHP_PowerUnit2801
 CHP_PowerUnitToHeatingHEX2_2801
+CHP_PowerUnitCircuit2901
+CHP_StarterGenerator2901
+CHPCombustionEngine2901
+gasolineEngineChp2901
+ExhaustHeatExchanger2901
+CHP_PowerUnit2901
+CHP_PowerUnitToHeatingHEX2_2901
