@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.Examples;
+within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump
   "Example for the detailed heat pump model in order to compare to simple one."
  extends Modelica.Icons.Example;
@@ -36,40 +36,37 @@ model HeatPump
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
     refIneFre_constant=1,
     scalingFactor=1,
+    redeclare model PerDataChi =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+          dataTable=AixLib.DataBase.HeatPump.EN14511.Ochsner_GMLW_19()),
+    use_revHP=false,
     VEva=0.04,
     CEva=100,
-    GEvaOut=5,
+    GEva=5,
     CCon=100,
-    GConOut=5,
+    GCon=5,
     dpEva_nominal=0,
     dpCon_nominal=0,
     mFlow_conNominal=0.5,
     mFlow_evaNominal=0.5,
     VCon=0.4,
-    use_conCap=false,
-    use_evaCap=false,
+    redeclare model PerDataHea =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
+    use_refIne=true,
+    use_ConCap=false,
+    use_EvaCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    use_revHP=true,
-    redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
-    redeclare model PerDataChi =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
-    use_refIne=false,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
-    TCon_start=303.15) annotation (Placement(transformation(
+    TCon_start=303.15)  annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));
 
 
 
-  Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
-      startValue=true)
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=270,
         origin={-10,82})));
@@ -195,8 +192,8 @@ equation
           -64},{66,-22},{76,-22}}, color={0,127,255}));
   connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{3,38},{4,38},
           {4,6.84},{6.83333,6.84}},       color={0,0,127}));
-  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
-          {-4,77.6},{-4,6.84},{-2.83333,6.84}}, color={255,0,255}));
+  connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
+          {-4,77.6},{-4,6.84},{-2.83333,6.84}},             color={255,0,255}));
   connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
           -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -209,13 +206,17 @@ equation
 <p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or polynomial functions.</p>
 </html>",
       revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
-</ul>
-</html>"),
-    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
+ <ul>
+  <li>
+  May 19, 2017, by Mirko Engelpracht:<br/>
+  Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
+  </li>
+  <li>
+  October 17, 2016, by Philipp Mehrfeld:<br/>
+  Implemented especially for comparison to simple heat pump model.
+  </li>
+ </ul>
+</html>
+"), __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-100,-100},{100,80}})));
 end HeatPump;
