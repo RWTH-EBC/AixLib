@@ -26,7 +26,7 @@ model CHP_PowerUnitToHeatingModulate
 
   replaceable package Medium_HeatingCircuit =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                 property_T=356, X_a=0.50)   constrainedby
+                                 property_T=356, X_a=0.50) constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (
       __Dymola_choicesAllMatching=true);
 
@@ -194,12 +194,13 @@ model CHP_PowerUnitToHeatingModulate
     annotation (Placement(transformation(extent={{40,-72},{56,-56}})));
 
   Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=if
-        onOff_ControllerCHP.cHPIsOnOff.y then 303.15 else 293.15)
+        onOff_ControllerCHP.cHPOnOffSwitch.y then 303.15 else 293.15)
     annotation (Placement(transformation(extent={{-144,-70},{-124,-50}})));
   parameter Modelica.SIunits.Mass mEng=80
     "Total engine mass for heat capacity calculation of the motor block"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.OnOff_ControllerCHP onOff_ControllerCHP
+  AixLib.Fluid.BoilerCHP.ModularCHP.OnOff_ControllerCHP onOff_ControllerCHP(
+      CHPEngineModel=CHPEngineModel)
     annotation (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
 equation
   connect(coolantPump.port_b, cHP_PowerUnit.port_Return) annotation (Line(
