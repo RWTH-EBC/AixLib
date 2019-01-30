@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
  Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
@@ -69,5 +69,13 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>"));
 end PartialTSetToNSet;
