@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems;
+within AixLib.Systems.HeatPumpSystems;
 package Examples "Package with Examples for Heat Pump Systems"
 
 annotation (Icon(graphics={
@@ -18,15 +18,5 @@ annotation (Icon(graphics={
           fillColor={78,138,73},
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
-          points={{-58.0,46.0},{42.0,-14.0},{-58.0,-74.0},{-58.0,46.0}})}),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
-</ul>
-</html>", info="<html>
-<p>This package contains examples for a heat pump system.</p>
-</html>"));
+          points={{-58.0,46.0},{42.0,-14.0},{-58.0,-74.0},{-58.0,46.0}})}));
 end Examples;

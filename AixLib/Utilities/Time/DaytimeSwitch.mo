@@ -1,30 +1,16 @@
-﻿within AixLib.Utilities.Time;
+within AixLib.Utilities.Time;
 model DaytimeSwitch
-  "Set the output to true if the given daytime stamp is equal to current daytime"
-  parameter Boolean weekly=true
-    "Switch between a daily or weekly trigger approach" annotation(Dialog(
-        enable=not daily,descriptionLabel=true), choices(choice=true "Weekly",
-      choice=false "Daily",
-      radioButtons=true));
-
-  parameter Integer weekDay = 1 "Day of the week" annotation (Dialog(enable=weekly));
-  parameter Integer hourDay = 12
-                                "Hour of the day";
+  "If given daytime stamp is equal to current daytime output is true"
+  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
+  parameter Integer weekDay "Day of the week";
+  parameter Integer hourDay "Hour of the day";
   parameter AixLib.Utilities.Time.Types.ZeroTime zerTim
     "Enumeration for choosing how reference time (time = 0) should be defined";
   parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
-  AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef) "Used to get the unix time stamp and calendar time from the simulation time";
-
-  Modelica.Blocks.Interfaces.BooleanOutput isDaytime "Output boolean if current time stamp matches the set parameters"
+  Modelica.Blocks.Interfaces.BooleanOutput isDaytime
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-
 equation
-  if weekly then
-    isDaytime =(calTim.weekDay == weekDay and calTim.hour == hourDay); //Trigger every week
-  else
-    isDaytime =(calTim.hour == hourDay); //Trigger every day
-  end if;
-
+  isDaytime =(calTim.weekDay == weekDay and calTim.hour == hourDay);
   annotation (Icon(graphics={   Rectangle(
         extent={{-100,-100},{100,100}},
         lineColor={0,0,127},
@@ -62,14 +48,5 @@ equation
         Line(
           points={{0,0},{-18,-32}},
           thickness=0.5,
-          color={238,46,47})}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
-</ul>
-</html>", info="<html>
-<p>Using <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">AixLib.Utilities.Time.CalendarTime</a>, this model triggers a control if the current time is equal to a certain hour of the day and or day of the week.</p>
-</html>"));
+          color={238,46,47})}));
 end DaytimeSwitch;
