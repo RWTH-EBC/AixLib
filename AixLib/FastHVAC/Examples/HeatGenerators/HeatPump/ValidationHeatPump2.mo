@@ -30,6 +30,8 @@ model ValidationHeatPump2
     use_revHP=true,
     redeclare model PerDataChi =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
+    TCon_start(displayUnit="K"),
+    TEva_start(displayUnit="K"),
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=-90,
@@ -44,29 +46,18 @@ model ValidationHeatPump2
         extent={{-11,-9},{11,9}},
         rotation=180,
         origin={-35,57})));
-  Modelica.Blocks.Sources.Ramp TsuSourceRamp1(
-    startTime=1000,
-    height=25,
-    offset=278,
-    duration=36000)
-    annotation (Placement(transformation(extent={{-98,-32},{-78,-12}})));
-  Modelica.Blocks.Sources.BooleanPulse    booleanConstant1(period=10000)
+  Modelica.Blocks.Sources.BooleanPulse    booleanConstant1(period=5000)
     annotation (Placement(transformation(extent={{-92,64},{-72,84}})));
-  Modelica.Blocks.Sources.Constant dotm_ev2(k=0.5)
+  Modelica.Blocks.Sources.Constant dotm_ev2(k=1)
     annotation (Placement(transformation(extent={{-98,-82},{-78,-62}})));
-  Modelica.Blocks.Sources.Constant T2(k=308.15) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={86,26})));
   Modelica.Blocks.Sources.Constant dotm_co2(k=0.5) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,10},{10,-10}},
         rotation=180,
         origin={88,84})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
         transformation(
-        extent={{5,-5},{-5,5}},
+        extent={{5,5},{-5,-5}},
         rotation=180,
         origin={-39,9})));
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
@@ -86,6 +77,13 @@ model ValidationHeatPump2
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
         origin={52,-12})));
+  Modelica.Blocks.Sources.Constant T2(k=303.15) annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={86,26})));
+  Modelica.Blocks.Sources.Constant const(k=283.15)
+    annotation (Placement(transformation(extent={{-96,-34},{-76,-14}})));
 equation
   connect(dotm_ev2.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
@@ -107,8 +105,6 @@ equation
     annotation (Line(points={{63,-12},{73.2,-12}}, color={255,0,255}));
   connect(not2.y, booleanToReal.u) annotation (Line(points={{82.4,-12},{92,-12},
           {92,2},{60,2},{60,44},{30,44}}, color={255,0,255}));
-  connect(T2.y, fluidSource1.T_fluid) annotation (Line(points={{75,26},{64,26},{
-          64,25.8},{52,25.8}}, color={0,0,127}));
   connect(dotm_co2.y, fluidSource1.dotm) annotation (Line(points={{77,84},{68,84},
           {68,32.6},{52,32.6}}, color={0,0,127}));
   connect(fluidSource1.enthalpyPort_b, heatPump2.enthalpyPort_a)
@@ -123,8 +119,10 @@ equation
   connect(iceFac.y, heatPump2.iceFac_in) annotation (Line(points={{-33.5,9},{
           -15.1333,9},{-15.1333,7.88}},
                                color={0,0,127}));
-  connect(TsuSourceRamp1.y, fluidSource.T_fluid) annotation (Line(points={{-77,-22},
-          {-54,-22},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
+  connect(T2.y, fluidSource1.T_fluid) annotation (Line(points={{75,26},{64,26},
+          {64,25.8},{52,25.8}}, color={0,0,127}));
+  connect(const.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},{-64,
+          -24},{-64,-29.8},{-48,-29.8}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(
@@ -145,7 +143,7 @@ equation
   <h4><span style=\"color: #008000\">Overview</span></h4>
   <p>Simple test set-up for the HeatPump2 model.<br/>
   The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. <br/> 
-  Example Setup is based on FastHVAC part from <a href=\"modelica://AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump</a> </p>
+  Example Setup is based on FastHVAC part of <a href=\"modelica://AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump</a> </p>
   </html>",
   revisions="<html><ul>
     <li>

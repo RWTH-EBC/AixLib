@@ -22,7 +22,7 @@ model TwoPortHeatMassExchanger
     Interfaces.EnthalpyPort_b             enthalpyPort_b
     "FastHVAC connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{104,-4},{96,4}})));
-    BaseClasses.WorkingFluid workingFluid(m_fluid=m_fluid, medium=medium)
+    BaseClasses.WorkingFluid workingFluid(m_fluid=m_fluid, medium=medium, T0=T_start)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

@@ -111,7 +111,7 @@ model HeatPump2 "Base model of FastHVAC Heat Pump"
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=50+273.15
+  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=30+273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=10+273.15
