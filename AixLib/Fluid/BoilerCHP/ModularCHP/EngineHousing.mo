@@ -167,6 +167,7 @@ equation
   T_CylWall=T_Amb;
   end if;*/
   CalT_Exh = meanCpExh*m_Exh;
+
   if noEvent(nEng*60<800) then
   T_CylWall=innerWall.T;
   T_Exh=innerWall.T;
@@ -174,6 +175,7 @@ equation
   T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
   T_Exh=T_ExhPowUniOut + abs((cylToInnerWall.maximumEngineHeat.y-actualHeatFlowEngine.Q_flow)/CalT_Exh);
   end if;
+
 
  // T_CylWall=T_Amb+0.2929*(T_Com-T_Amb);
   // T_CylWall=(T_Com-T_Amb)/Modelica.Math.log(T_Com/T_Amb);

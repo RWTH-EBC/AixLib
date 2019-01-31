@@ -2,6 +2,7 @@
 model CHPCombustionEngineModulate
   "Internal combustion engine model for CHP-applications."
   import AixLib;
+
   replaceable package Medium1 =
       DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
                                                                 constrainedby
@@ -59,6 +60,7 @@ model CHPCombustionEngineModulate
   constant Modelica.SIunits.Temperature RefT_Com = 1473.15 "Reference combustion temperature for calculation purposes";
 
   // Exhaust composition for gasoline fuels
+
   constant Real n_N2Exh = if FuelType then Medium1.moleFractions_Gas[1] + Lambda*l_Min*Medium2.moleFractions_Air[1]
   else Lambda*l_Min*Medium2.moleFractions_Air[1] "Exhaust: Number of molecules Nitrogen per mole of fuel";
   constant Real n_O2Exh = (Lambda-1)*l_Min*Medium2.moleFractions_Air[2] "Exhaust: Number of molecules Oxygen per mole of fuel";
@@ -77,6 +79,7 @@ model CHPCombustionEngineModulate
   constant Modelica.SIunits.MassFraction Xi_Exh[size(n_ComExh, 1)] = {X_N2Exh, X_O2Exh, X_H2OExh, X_CO2Exh};
 
  // RotationSpeed nEng(max=CHPEngData.nEngMax) = 25.583 "Current engine speed";
+
   Boolean SwitchOnOff=isOn "Operation of electric machine (true=On, false=Off)";
   RotationSpeed nEng(min=0) "Current engine speed";
   Modelica.SIunits.MassFlowRate m_Exh "Mass flow rate of exhaust gas";
@@ -169,11 +172,11 @@ for i in 1:size(n_ComExh, 1) loop
                               (SwitchOnOff) then
   Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
   nEng = inertia.w/(2*Modelica.Constants.pi);
-  m_Exh = m_Fue + m_Air;
+  m_Exh = m_Fue + m_Air + 0.0001;
   elseif inertia.w<80 and noEvent(inertia.w>0.1) then
   Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
   nEng = inertia.w/(2*Modelica.Constants.pi);
-  m_Exh = m_Fue + m_Air;
+  m_Exh = m_Fue + m_Air + 0.0001;
   else
   Mmot = 0;
   nEng = 0;

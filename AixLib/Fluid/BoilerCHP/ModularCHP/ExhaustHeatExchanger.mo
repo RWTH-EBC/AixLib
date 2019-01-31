@@ -226,8 +226,9 @@ model ExhaustHeatExchanger
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow additionalHeat
     "Heat flow from water condensation in the exhaust gas and generator losses"
     annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
-  Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=m_ConH2OExh*
-        deltaH_Vap) "Calculated latent exhaust heat from water condensation"
+  Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=if cHPControlBus.isOn
+         then m_ConH2OExh*deltaH_Vap else 0)
+                    "Calculated latent exhaust heat from water condensation"
     annotation (Placement(transformation(extent={{126,-12},{106,8}})));
 
   Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
@@ -271,7 +272,8 @@ model ExhaustHeatExchanger
   Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
   Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
 
-  Modelica.Blocks.Sources.RealExpression generatorHeat(y=Q_Gen)
+  Modelica.Blocks.Sources.RealExpression generatorHeat(y=if cHPControlBus.isOn
+         then Q_Gen else 0)
     "Calculated heat from generator losses"
     annotation (Placement(transformation(extent={{126,-32},{106,-12}})));
   Modelica.Blocks.Math.MultiSum multiSum(nu=2)

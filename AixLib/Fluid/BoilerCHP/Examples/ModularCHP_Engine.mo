@@ -27,7 +27,8 @@ model ModularCHP_Engine
   parameter Modelica.SIunits.AbsolutePressure p_ambient=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHPCombustionEngine cHPGasolineEngine(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngine3101
+    cHPGasolineEngine(
     redeclare package Medium1 = Medium_Gasoline,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,

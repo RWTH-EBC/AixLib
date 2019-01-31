@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHPCombustionEngine
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHPCombustionEngine3101
   "Internal combustion engine model for CHP-applications."
   import AixLib;
   replaceable package Medium1 =
@@ -110,8 +110,8 @@ model CHPCombustionEngine
   Modelica.SIunits.Pressure p_me = p_mi-p_mf "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
-        Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
+      = Medium3)
     annotation (Placement(transformation(extent={{108,-10},{88,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
     use_m_flow_in=true,
@@ -168,11 +168,11 @@ for i in 1:size(n_ComExh, 1) loop
                               (SwitchOnOff) then
   Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
   nEng = inertia.w/(2*Modelica.Constants.pi);
-  m_Exh = m_Fue + m_Air;
+  m_Exh = m_Fue + m_Air + 0.0001;
   elseif inertia.w<80 and noEvent(inertia.w>0.1) then
   Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
   nEng = inertia.w/(2*Modelica.Constants.pi);
-  m_Exh = m_Fue + m_Air;
+  m_Exh = m_Fue + m_Air + 0.0001;
   else
   Mmot = 0;
   nEng = 0;
@@ -276,4 +276,4 @@ for i in 1:size(n_ComExh, 1) loop
 <p>- Based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) - Is dependent on speed and temperature of the engine</p>
 <p>-&gt; Distinction between SI and DI engine - Other engine types are not considered!</p>
 </html>"));
-end CHPCombustionEngine;
+end CHPCombustionEngine3101;
