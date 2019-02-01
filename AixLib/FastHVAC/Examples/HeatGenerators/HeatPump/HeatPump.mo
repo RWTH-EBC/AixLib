@@ -1,5 +1,5 @@
 ﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
-model ValidationHeatPump2
+model HeatPump
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
@@ -179,4 +179,4 @@ equation
     </li>
   </ul>
   </html>"));
-end ValidationHeatPump2;
+end HeatPump;

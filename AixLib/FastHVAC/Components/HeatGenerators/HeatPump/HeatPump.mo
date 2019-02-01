@@ -1,5 +1,5 @@
 ﻿within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
-model HeatPump2 "Base model of FastHVAC Heat Pump"
+model HeatPump "Base model of FastHVAC Heat Pump"
 
 //General
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
@@ -492,4 +492,4 @@ equation
     </li>
   </ul>
   </html>"));
-end HeatPump2;
+end HeatPump;
