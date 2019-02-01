@@ -6,7 +6,7 @@ model HeatPump
   FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  Components.HeatGenerators.HeatPump.HeatPump2 heatPump2(
+  Components.HeatGenerators.HeatPump.HeatPump heatPump2(
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -106,8 +106,8 @@ model HeatPump
         rotation=0,
         origin={36,20})));
 equation
-  connect(dotm_source.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{
-          -64,-72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
+  connect(dotm_source.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
+          -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, heatPump2.enthalpyPort_a1)
     annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
   connect(T_amb_internal.y, heatPump2.T_amb_eva) annotation (Line(points={{3,-27.3},
@@ -117,12 +117,10 @@ equation
   connect(heatPump2.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
     annotation (Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,
           0}));
-  connect(temperatureSensor.T, hys.u) annotation (Line(points={{35.9,-63.1},{
-          35.9,-54},{43,-54}},
-                          color={0,0,127}));
-  connect(booleanToReal.y, heatPump2.nSet) annotation (Line(points={{7.5,53},{
-          5.66667,53},{5.66667,13.08}},
-                                color={0,0,127}));
+  connect(temperatureSensor.T, hys.u) annotation (Line(points={{35.9,-63.1},{35.9,
+          -54},{43,-54}}, color={0,0,127}));
+  connect(booleanToReal.y, heatPump2.nSet) annotation (Line(points={{7.5,53},{5.66667,
+          53},{5.66667,13.08}}, color={0,0,127}));
   connect(heatPump2.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
     annotation (Line(points={{-5,11},{-5,57},{-27.3,57}}, color={176,0,0}));
   connect(iceFac.y, heatPump2.iceFac_in) annotation (Line(points={{-33.5,9},{
@@ -130,8 +128,8 @@ equation
                                color={0,0,127}));
   connect(booleanStep.y, heatPump2.modeSet) annotation (Line(points={{-75.6,76},
           {0.6,76},{0.6,13.08}}, color={255,0,255}));
-  connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-79,
-          -24},{-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
+  connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-79,-24},
+          {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
   connect(pump.enthalpyPort_b, heatPump2.enthalpyPort_a)
     annotation (Line(points={{26.4,20},{11,20},{11,11}}, color={176,0,0}));
   connect(dotm_sink.y, pump.dotm_setValue)
@@ -164,7 +162,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="FastHVAC HeatPump2
 ")}),
-    experiment(StopTime=3600, Interval=60),
+    experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
