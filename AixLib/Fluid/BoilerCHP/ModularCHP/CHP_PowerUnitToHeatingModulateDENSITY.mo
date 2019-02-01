@@ -90,9 +90,9 @@ model CHP_PowerUnitToHeatingModulateDENSITY
   Modelica.SIunits.MassFlowRate m_flowHeaCir=if not VolCon then
   CHPEngineModel.m_floCooNominal else V_flowHeaCir*senDen.d
     "Nominal mass flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
-  Modelica.SIunits.VolumeFlowRate V_flowHeaCir=0.5/3600
+  Modelica.SIunits.VolumeFlowRate V_flowHeaCir=0.3/3600
     "Nominal volume flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Boolean VolCon=false "Is volume flow rate control used?"
+  parameter Boolean VolCon=true  "Is volume flow rate control used?"
     annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Boolean ConTec=true
     "Is condensing technology used and should latent heat be considered?"
