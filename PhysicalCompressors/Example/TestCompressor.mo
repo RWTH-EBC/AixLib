@@ -4,9 +4,9 @@ model TestCompressor
   Modelica.Mechanics.Rotational.Sources.ConstantTorque constantTorque(
       tau_constant=10)
     annotation (Placement(transformation(extent={{-118,-10},{-98,10}})));
-  BaseClasses.Mechanics.MechanicProcess mechanicProcess
+  RotaryCompressor.BaseClasses.Mechanics.MechanicProcess mechanicProcess
     annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
-  BaseClasses.CompressorVolumes compressorVolumes(
+  RotaryCompressor.BaseClasses.CompressorVolumes compressorVolumes(
     r_cyl=mechanicProcess.r_cyl,
     r_rol=mechanicProcess.r_rol,
     h_cyl=mechanicProcess.h_cyl,
