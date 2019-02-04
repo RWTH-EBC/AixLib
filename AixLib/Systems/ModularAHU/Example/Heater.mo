@@ -30,18 +30,17 @@ model Heater "Heating register"
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
-    annotation (Placement(transformation(extent={{-40,-44},{20,34}})));
+    annotation (Placement(transformation(extent={{-38,-40},{22,38}})));
   Fluid.Sources.Boundary_pT          boundary(
     nPorts=1,
     redeclare package Medium = MediumWater,
-    T=323.15) annotation (Placement(transformation(
+    T=343.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-42,-70})));
   Fluid.Sources.Boundary_pT          boundary1(
-    nPorts=1,
-    redeclare package Medium = MediumWater,
-    T=323.15) annotation (Placement(transformation(
+    nPorts=1, redeclare package Medium = MediumWater)
+              annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={22,-70})));
@@ -49,7 +48,7 @@ model Heater "Heating register"
     nPorts=1,
     redeclare package Medium = MediumAir,
     p=102000,
-    T=288.15) annotation (Placement(transformation(
+    T=283.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-82,38})));
@@ -58,39 +57,25 @@ model Heater "Heating register"
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={80,40})));
-  BaseClasses.registerBus registerBus1 annotation (Placement(transformation(
-          extent={{-70,-10},{-50,10}}), iconTransformation(extent={{-72,-12},{
-            -52,8}})));
-  Modelica.Blocks.Sources.Ramp valveOpening(              duration=500,
-      startTime=180)
-    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
-  Modelica.Blocks.Sources.Constant RPM(k=2000)
-    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+  Controller.CtrBasic ctrBasic(
+    k=0.04,
+    Ti=100,
+    Td=1) annotation (Placement(transformation(extent={{-70,-16},{-50,4}})));
+  Modelica.Blocks.Sources.Constant Tset(k=273.15 + 20)
+    annotation (Placement(transformation(extent={{-100,-18},{-80,2}})));
 equation
   connect(boundary1.ports[1], registerModule.port_b2) annotation (Line(points={
-          {22,-60},{24,-60},{24,-20},{20,-20}}, color={0,127,255}));
+          {22,-60},{24,-60},{24,-16},{22,-16}}, color={0,127,255}));
   connect(boundary.ports[1], registerModule.port_a2) annotation (Line(points={{
-          -42,-60},{-42,-20},{-40,-20}}, color={0,127,255}));
+          -42,-60},{-42,-16},{-38,-16}}, color={0,127,255}));
   connect(registerModule.port_b1, boundaryAirSink.ports[1]) annotation (Line(
-        points={{20,16},{44,16},{44,40},{70,40}}, color={0,127,255}));
+        points={{22,20},{44,20},{44,40},{70,40}}, color={0,127,255}));
   connect(registerModule.port_a1, boundaryAirSource.ports[1]) annotation (Line(
-        points={{-40,16},{-46,16},{-46,36},{-72,36},{-72,38}}, color={0,127,255}));
-  connect(registerModule.registerBus, registerBus1) annotation (Line(
-      points={{-39.7,-2.3},{-60,-2.3},{-60,0}},
+        points={{-38,20},{-46,20},{-46,36},{-72,36},{-72,38}}, color={0,127,255}));
+  connect(ctrBasic.registerBus, registerModule.registerBus) annotation (Line(
+      points={{-51.8,-6},{-46,-6},{-46,1.7},{-37.7,1.7}},
       color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(RPM.y, registerBus1.hydraulicBus.pumpBus.rpm_Input) annotation (Line(
-        points={{-79,0},{-72,0},{-72,0.05},{-59.95,0.05}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(valveOpening.y, registerBus1.hydraulicBus.valSet) annotation (Line(
-        points={{-79,-40},{-59.95,-40},{-59.95,0.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
+      thickness=0.5));
+  connect(ctrBasic.Tset, Tset.y)
+    annotation (Line(points={{-70.2,-8},{-79,-8}}, color={0,0,127}));
 end Heater;
