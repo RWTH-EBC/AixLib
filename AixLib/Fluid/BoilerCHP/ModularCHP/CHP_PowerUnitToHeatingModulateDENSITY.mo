@@ -69,18 +69,33 @@ model CHP_PowerUnitToHeatingModulateDENSITY
   Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
   Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
 
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=15
-    "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GCooHex=30000
-    "Thermal conductance of the coolant heat exchanger at nominal flow"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Mass mEng=80
-    "Total engine mass for heat capacity calculation of the motor block"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Area A_surExhHea=100
+ /* parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
+      CHPEngineModel.m_floCooNominal
+    "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));*/
+  parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer"
     annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
+    "Total engine mass for heat capacity calculation"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
+    "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.ThermalConductance G_CooExhHex=1500
+    "Thermal conductance of exhaust heat exchanger to cooling circuit"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.HeatCapacity C_ExhHex=4000
+    "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
+      Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.Thickness dInn=0.005
+    "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
+    "Thermal conductance from engine housing to the surrounding air"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.ThermalConductance G_Amb=5
+    "Constant heat transfer coefficient of engine housing to ambient" annotation (Dialog(tab="Engine Cooling Circle",
+        group="Calibration Parameters"));
   parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.5
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
           "Engine Cooling Circle", group="Calibration Parameters"));
@@ -137,7 +152,12 @@ model CHP_PowerUnitToHeatingModulateDENSITY
     redeclare package Medium_Coolant = Medium_Coolant,
     inductionMachine(s_til=0.16),
     T_CoolRet=tempReturnFlow.T,
-    T_CoolSup=tempSupplyFlow.T)
+    T_CoolSup=tempSupplyFlow.T,
+    G_CooExhHex=G_CooExhHex,
+    C_ExhHex=C_ExhHex,
+    dInn=dInn,
+    GEngToAmb=GEngToAmb,
+    G_Amb=G_Amb)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
     m_flow_small=mCool_flow_small,

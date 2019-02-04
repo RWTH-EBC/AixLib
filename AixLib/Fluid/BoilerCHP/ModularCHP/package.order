@@ -16,7 +16,7 @@ CHP_StarterGenerator
 CHPCombustionEngineModulate
 gasolineEngineChpModulate
 CHP_PowerUnitModulate
-CHP_PowerUnitToHeatingModulate
 CHP_PowerUnitToHeatingModulateDENSITY
 OnOff_ControllerCHPTests
-CHP_AuswertungDynDresden
+CHP_AuswertungDynDresdenWECHSEL
+CHP_PowerUnitModulateWECHSEL

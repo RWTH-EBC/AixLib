@@ -57,6 +57,9 @@ model CHP_StarterGenerator
   parameter Real cosPhi=CHPEngData.cosPhi
                             "Power factor of electric machine (default=0.8)"
     annotation (Dialog(group="Machine specifications"));
+  parameter Real calFac=1
+    "Calibration factor for electric power outuput (default=1)"
+    annotation (Dialog(group="Calibration"));
   parameter Real gearRatio=CHPEngData.gearRatio
                              "Transmission ratio (engine speed / generator speed)"
     annotation (Dialog(group="Machine specifications"));
@@ -118,10 +121,10 @@ equation
 if noEvent(SwitchOnOff) then
 
   I_1=sign(s)*I_1_start*sqrt(abs((1+((k-1)/((s_nominal^2)-k))*(s^2)*(1+rho1+rho0))*calI_1));
-  P_E=if noEvent(s>0) then sqrt(3)*I_1*U_1*cosPhi elseif noEvent(s<0) then P_Mec+CalQ_Loss else 1;
+  P_E=if noEvent(s>0) then sqrt(3)*I_1*U_1*cosPhi elseif noEvent(s<0) then calFac*(P_Mec+CalQ_Loss) else 1;
  // P_Mec=if noEvent(s>0) then 2*Modelica.Constants.pi*M*n else 2*Modelica.Constants.pi*n*M;
   P_Mec=2*Modelica.Constants.pi*M*n;
-  CalQ_Loss=2*Modelica.Constants.pi*M*(s*n0)/0.22;
+  CalQ_Loss= (calFac-1)*P_E + 2*Modelica.Constants.pi*M*(s*n0)/0.22;
   M=sign(s)*(rho3*abs(s))/((s^2)+rho1*abs(s)+rho0);
   eta=if noEvent(s>0) then abs(P_Mec/(P_E+1))
   elseif noEvent(s<0) then abs(P_E/(P_Mec-1)) else 0;

@@ -23,9 +23,10 @@ model OnOff_ControllerCHPTests
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={100,0})));
-  Modelica.Blocks.Sources.TimeTable modulationFactorControl(table=[0.0,0.75;
-        7200,0.75; 7200,1; 10800,1; 10800,0.5; 14400,0.5; 14400,0.75; 18000,
-        0.75; 18000,0.0], startTime=startTimeChp)
+  Modelica.Blocks.Sources.TimeTable modulationFactorControl(
+                          startTime=startTimeChp, table=[0.0,0.8; 7200,0.8;
+        7200,0.91; 10800,0.91; 10800,0.62; 14400,0.62; 14400,0.8; 18000,0.8;
+        18000,0.0])
     annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold
     annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
