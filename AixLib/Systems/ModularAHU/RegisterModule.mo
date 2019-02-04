@@ -9,18 +9,16 @@ model RegisterModule "AHU register module for heaters and coolers"
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));
     parameter Modelica.SIunits.Temperature T_start=303.15
-    "Initialization temperature" annotation(Dialog(tab="Advanced"));
+    "Initialization temperature" annotation(Dialog(tab="Initialization"));
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(group="Heat exchanger"));
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  replaceable HydraulicModules.Admix
+  replaceable HydraulicModules.BaseClasses.PartialHydraulicModule
     partialHydraulicModule(final T_amb=T_amb, redeclare package Medium =
         Medium2,
     final m_flow_nominal=m2_flow_nominal,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal2)
-                           constrainedby
-    HydraulicModules.BaseClasses.PartialHydraulicModule
     annotation (Dialog(enable=true, group="Hydraulics"), Placement(transformation(extent={{-38,-38},{38,38}},
         rotation=90,
         origin={0,-40})), __Dymola_choicesAllMatching=true);
@@ -32,7 +30,8 @@ model RegisterModule "AHU register module for heaters and coolers"
     redeclare package Medium2 = Medium2,
     T1_start=T_start,
     T2_start=T_start)
-    annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,32},{20,66}})));
+    annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
+            {20,68}})));
   BaseClasses.registerBus registerBus
     annotation (Placement(transformation(extent={{-106,-12},{-82,10}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
@@ -81,16 +80,15 @@ protected
         origin={-38,60})));
 equation
   connect(partialHydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(
-        points={{-22.8,-2},{0,-2},{0,28},{20,28},{20,38.8}}, color={0,127,255}));
+        points={{-22.8,-2},{0,-2},{0,28},{20,28},{20,36}},   color={0,127,255}));
   connect(partialHydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(
-        points={{22.8,-2},{18,-2},{18,12},{-20,12},{-20,38.8}},
-                                                              color={0,127,255}));
+        points={{22.8,-2},{18,-2},{18,12},{-20,12},{-20,36}}, color={0,127,255}));
   connect(senT_airIn.T, PT1_airIn.u)
     annotation (Line(points={{-70,71},{-70,78}}, color={0,0,127}));
   connect(senT_airOut.T, PT1_airOut.u)
     annotation (Line(points={{70,71},{70,78}}, color={0,0,127}));
-  connect(dynamicHX.port_b1, senT_airOut.port_a) annotation (Line(points={{20,59.2},
-          {42,59.2},{42,60},{60,60}}, color={0,127,255}));
+  connect(dynamicHX.port_b1, senT_airOut.port_a) annotation (Line(points={{20,60},
+          {60,60}},                   color={0,127,255}));
   connect(partialHydraulicModule.hydraulicBus, registerBus.hydraulicBus)
     annotation (Line(
       points={{-38,-40},{-93.94,-40},{-93.94,-0.945}},
@@ -102,7 +100,7 @@ equation
   connect(senT_airIn.port_b, VFSen_out.port_a)
     annotation (Line(points={{-60,60},{-48,60}}, color={0,127,255}));
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
-          {-24,60},{-24,59.2},{-20,59.2}}, color={0,127,255}));
+          {-20,60}},                       color={0,127,255}));
   connect(PT1_airIn.y, registerBus.Tair_in) annotation (Line(points={{-70,101},
           {-86,101},{-86,102},{-93.94,102},{-93.94,-0.945}},color={0,0,127}),
       Text(
@@ -317,17 +315,27 @@ equation
         Line(points={{34,-120},{40,-120}},
                                          color={28,108,200}),
         Ellipse(
-          extent={{-90,94},{-74,78}},
+          extent={{-92,94},{-76,78}},
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-90,94},{-74,78}},
+          extent={{-92,94},{-76,78}},
           lineColor={216,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="T"),
-        Line(points={{-74,86},{-68,86}},   color={28,108,200})}),Diagram(
+        Ellipse(
+          extent={{-76,94},{-60,78}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-76,94},{-60,78}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q")}),                                     Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
             120}})));
 end RegisterModule;
