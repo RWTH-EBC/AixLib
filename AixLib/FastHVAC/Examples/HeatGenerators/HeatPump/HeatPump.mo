@@ -175,7 +175,7 @@ equation
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
   <p>
-  Example Setup is based on fluid example part of
+  Example Setup is based on fluid example of
   <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump\">
   AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
   </p>
