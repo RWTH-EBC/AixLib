@@ -174,15 +174,11 @@ equation
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>Simple test set-up for the HeatPump model.<br/>
-  The heat pump is turned on and off while the source temperature increases
-  linearly. Outputs are the electric power consumption of the heat pump and 
-  the supply temperature. <br/> 
-  Example Setup is based on FastHVAC part of
-  <a href=\"modelica://AixLib.FastHVAC.Examples.
-  HeatGenerators.HeatPump.ValidationHeatPump\">
-  AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.
-  ValidationHeatPump</a> </p>
+  <p>
+  Example Setup is based on fluid example part of
+  <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump\">
+  AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
+  </p>
   </html>",
   revisions="<html><ul>
     <li>

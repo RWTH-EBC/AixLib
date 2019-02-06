@@ -483,8 +483,8 @@ equation
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
   <p>HeatPump model adapted to FastHAVC library.<br/>
-  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.
-  HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian 
+  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">
+  AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian 
   Wüllhorst in 2018. </p>
   </html>",
   revisions="<html><ul>
