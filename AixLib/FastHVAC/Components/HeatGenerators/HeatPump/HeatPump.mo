@@ -208,13 +208,13 @@ model HeatPump "Base model of FastHVAC Heat Pump"
         rotation=90,
         origin={-76,-136})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutEva if
-    use_EvaCap "Foreces heat losses according to ambient temperature"
+    use_EvaCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,-108})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempOutCon if
-    use_ConCap "Foreces heat losses according to ambient temperature"
+    use_ConCap "Forces heat losses according to ambient temperature"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
@@ -483,7 +483,9 @@ equation
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
   <p>HeatPump model adapted to FastHAVC library.<br/>
-  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian Wüllhorst in 2018. </p>
+  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.
+  HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian 
+  Wüllhorst in 2018. </p>
   </html>",
   revisions="<html><ul>
     <li>
