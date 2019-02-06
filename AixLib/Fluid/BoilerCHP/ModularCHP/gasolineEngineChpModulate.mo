@@ -52,7 +52,7 @@ model gasolineEngineChpModulate
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter EngineMaterialData                            EngMat=
+  parameter EngineMaterialData EngMat=
       Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
@@ -62,7 +62,7 @@ model gasolineEngineChpModulate
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.Thickness dInn=0.005
+parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23

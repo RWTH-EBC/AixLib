@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
 model CHP_PowerUnitToHeatingModulateDENSITY
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
@@ -75,8 +75,11 @@ model CHP_PowerUnitToHeatingModulateDENSITY
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
+  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
     "Total engine mass for heat capacity calculation"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.Mass Cal_mEng=0
+    "Added engine mass for calibration purposes of the system´s thermal inertia"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"

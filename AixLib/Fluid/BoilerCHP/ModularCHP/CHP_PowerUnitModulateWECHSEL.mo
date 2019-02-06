@@ -232,13 +232,14 @@ model CHP_PowerUnitModulateWECHSEL
     m_flow_small=mCool_flow_small) annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=270,
-        origin={0,-30})));
+        origin={0,-34})));
   Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngOut(
     redeclare package Medium = Medium_Coolant,
     allowFlowReversal=allowFlowReversalCoolant,
     m_flow_nominal=m_flow,
     m_flow_small=mCool_flow_small)
     annotation (Placement(transformation(extent={{52,-66},{68,-50}})));
+
 equation
   connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1]) annotation (
       Line(points={{68,26.4},{80,26.4},{80,40},{92,40}},
@@ -299,10 +300,10 @@ equation
   connect(port_Supply, senTCooEngOut.port_b)
     annotation (Line(points={{80,-58},{68,-58}}, color={0,127,255}));
   connect(exhaustHeatExchanger.port_b2, senTCooEngIn.port_a) annotation (Line(
-        points={{40,9.6},{38,9.6},{38,10},{36,10},{36,-12},{0,-12},{0,-22}},
+        points={{40,9.6},{38,9.6},{38,10},{36,10},{36,-12},{0,-12},{0,-26}},
         color={0,127,255}));
   connect(senTCooEngIn.port_b, engineHeatTransfer.port_a)
-    annotation (Line(points={{0,-38},{0,-58},{13.52,-58}}, color={0,127,255}));
+    annotation (Line(points={{0,-42},{0,-58},{13.52,-58}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
