@@ -171,6 +171,9 @@ model CHP_PowerUnitModulate
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Real calFac=1
+    "Calibration factor for electric power outuput (default=1)"
+    annotation (Dialog(tab="Advanced", group="Generator heat use"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
     mExh_flow_small=0.0001
     "Small exhaust mass flow rate for regularization of zero flow"
