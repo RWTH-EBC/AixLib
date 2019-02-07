@@ -52,7 +52,8 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
     "Coolant return temperature";
   Modelica.SIunits.Temperature T_Sup=tempSupplyFlow.T
     "Coolant supply temperature";
-  Modelica.SIunits.Power Q_Therm=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit";
+  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
+  Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
   Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
   Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
   Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
@@ -237,7 +238,7 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
                                                         onOff_ControllerCHP(
       CHPEngineModel=CHPEngineModel,
     startTimeChp=0,
-    modulationFactorControl(table=[0.0,0.78; 108000,0.78]))
+    modulationFactorControl(table=[0.0,0.8; 108000,0.8]))
     annotation (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,
@@ -268,12 +269,16 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
         21600,0.3; 43200,0.3; 43200,0.35; 64800,0.35; 64800,0.4; 86400,0.4; 86400,
         0.45; 108000,0.45])
     annotation (Placement(transformation(extent={{-144,-32},{-124,-12}})));
+  Modelica.Fluid.Sources.FixedBoundary fixedCoolingRetSink(
+    nPorts=1,
+    redeclare package Medium = Medium_Coolant,
+    p=300000,
+    T(displayUnit="K") = T_HeaRet)
+    annotation (Placement(transformation(extent={{-110,-40},{-90,-20}})));
 equation
   connect(coolantPump.port_b, cHP_PowerUnit.port_Return) annotation (Line(
         points={{-38,10},{-28,10},{-28,10.08},{-19.2,10.08}},
                                                         color={0,127,255}));
-  connect(tempCoolantReturn.port_b, coolantPump.port_a) annotation (Line(points={{-56,-40},
-          {-76,-40},{-76,10},{-60,10}},         color={0,127,255}));
   connect(fixedPressureLevel.ports[1], coolantPump.port_a) annotation (Line(
         points={{-92,10},{-60,10}},                 color={0,127,255}));
   connect(massFlowCoolant.y, coolantPump.m_flow_in)
@@ -309,6 +314,8 @@ equation
           78.1},{70,78.1}}, color={0,0,127}));
   connect(realExpression.y,simTime. u[2]) annotation (Line(points={{50.9,94},{64,
           94},{64,73.9},{70,73.9}}, color={0,0,127}));
+  connect(tempCoolantReturn.port_b, fixedCoolingRetSink.ports[1]) annotation (
+      Line(points={{-56,-40},{-70,-40},{-70,-30},{-90,-30}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},

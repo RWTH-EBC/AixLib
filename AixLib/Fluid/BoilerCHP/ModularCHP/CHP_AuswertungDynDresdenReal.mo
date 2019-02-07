@@ -52,7 +52,8 @@ model CHP_AuswertungDynDresdenReal
     "Coolant return temperature";
   Modelica.SIunits.Temperature T_Sup=tempSupplyFlow.T
     "Coolant supply temperature";
-  Modelica.SIunits.Power Q_Therm=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit";
+  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
+  Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
   Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
   Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
   Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
@@ -236,8 +237,8 @@ model CHP_AuswertungDynDresdenReal
   AixLib.Fluid.BoilerCHP.ModularCHP.OnOff_ControllerCHPTests
                                                         onOff_ControllerCHP(
       CHPEngineModel=CHPEngineModel, startTimeChp=3600,
-    modulationFactorControl(table=[0.0,0.78; 7200,0.78; 7200,0.92; 10800,0.92;
-          10800,0.61; 14400,0.61; 14400,0.78; 18000,0.78; 18000,0.0]))
+    modulationFactorControl(table=[0.0,0.78; 7200,0.78; 7200,0.92; 10800,0.92; 10800,
+          0.61; 14400,0.61; 14400,0.78; 18000,0.78; 18000,0.0]))
     annotation (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,

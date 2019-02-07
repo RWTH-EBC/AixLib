@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnitToHeatingModulateDENSITY
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW_Closed
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -43,7 +43,7 @@ model CHP_PowerUnitToHeatingModulateDENSITY
   inner Modelica.Fluid.System system(p_ambient=p_ambient, T_ambient=T_ambient)
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
 
-  parameter Modelica.SIunits.Temperature T_ambient=298.15
+  parameter Modelica.SIunits.Temperature T_ambient=293.15
     "Default ambient temperature"
     annotation (Dialog(group="Ambient Parameters"));
   parameter Modelica.SIunits.AbsolutePressure p_ambient=101325
@@ -52,8 +52,7 @@ model CHP_PowerUnitToHeatingModulateDENSITY
     "Coolant return temperature";
   Modelica.SIunits.Temperature T_Sup=tempSupplyFlow.T
     "Coolant supply temperature";
-  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
-  Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
+  Modelica.SIunits.Power Q_Therm=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit";
   Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
   Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
   Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
@@ -70,46 +69,44 @@ model CHP_PowerUnitToHeatingModulateDENSITY
   Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
   Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
 
- /* parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
-      CHPEngineModel.m_floCooNominal
-    "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));*/
-  parameter Modelica.SIunits.Area A_surExhHea=50
-    "Surface for exhaust heat transfer"
-    annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.ThermalConductance GCoolChannel=60
+    "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
+    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.ThermalConductance GCooExhHex=250
+    "Thermal conductance of the coolant heat exchanger at nominal flow"
+    annotation (Dialog(tab="Engine Cooling Circle", group=
+          "Calibration Parameters"));
+  parameter Modelica.SIunits.HeatCapacity C_ExhHex=25000
+    "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
+      Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Mass Cal_mEng=0
+  parameter Modelica.SIunits.Mass Cal_mEng=250
     "Added engine mass for calibration purposes of the system´s thermal inertia"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
-    "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance G_CooExhHex=1500
-    "Thermal conductance of exhaust heat exchanger to cooling circuit"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.HeatCapacity C_ExhHex=4000
-    "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
-      Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Thickness dInn=0.005
+  parameter Modelica.SIunits.Area A_surExhHea=100
+    "Surface for exhaust heat transfer"
+    annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.35
+    "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
+          "Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Modelica.SIunits.Thickness dInn=0.015
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
+  parameter Modelica.SIunits.ThermalConductance GEngToAmb=5
     "Thermal conductance from engine housing to the surrounding air"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.ThermalConductance G_Amb=5
     "Constant heat transfer coefficient of engine housing to ambient" annotation (Dialog(tab="Engine Cooling Circle",
         group="Calibration Parameters"));
-  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.5
-    "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
-          "Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Temperature T_HeaRet=303.15
     "Constant heating circuit return temperature"
     annotation (Dialog(tab="Engine Cooling Circle"));
   Modelica.SIunits.MassFlowRate m_flowHeaCir=if not VolCon then
   CHPEngineModel.m_floCooNominal else V_flowHeaCir*senDen.d
     "Nominal mass flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
-  Modelica.SIunits.VolumeFlowRate V_flowHeaCir=0.3/3600
+  Modelica.SIunits.VolumeFlowRate V_flowHeaCir=volFlowVariation.y/3600
     "Nominal volume flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Boolean VolCon=true  "Is volume flow rate control used?"
     annotation (Dialog(tab="Engine Cooling Circle"));
@@ -125,7 +122,7 @@ model CHP_PowerUnitToHeatingModulateDENSITY
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Real calFac=1
+  parameter Real calFac=0.94
     "Calibration factor for electric power outuput (default=1)"
     annotation (Dialog(tab="Advanced", group="Generator heat use"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
@@ -136,9 +133,14 @@ model CHP_PowerUnitToHeatingModulateDENSITY
     mCool_flow_small=0.005
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
+  Real timeSimulation=simTime.y
+    "Time of the simulation without the start delay for measurement comparison";
+  Modelica.SIunits.Temperature T_RetCelsius=T_Ret-273.15
+    "Coolant return temperature";
+  Modelica.SIunits.Temperature T_SupCelsius=T_Sup-273.15
+    "Coolant supply temperature";
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnitModulate
-                                                  cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnitModulateWECHSEL cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,
@@ -157,11 +159,11 @@ model CHP_PowerUnitToHeatingModulateDENSITY
     A_surExhHea=A_surExhHea,
     mEng=mEng,
     redeclare package Medium_Coolant = Medium_Coolant,
-    inductionMachine(s_til=0.16, calFac=calFac),
     T_CoolRet=tempReturnFlow.T,
     T_CoolSup=tempSupplyFlow.T,
-    G_CooExhHex=G_CooExhHex,
+    G_CooExhHex=GCooExhHex,
     C_ExhHex=C_ExhHex,
+    inductionMachine(J_Gen=1, s_til=0.18),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     G_Amb=G_Amb,
@@ -233,7 +235,9 @@ model CHP_PowerUnitToHeatingModulateDENSITY
     annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.OnOff_ControllerCHPTests
                                                         onOff_ControllerCHP(
-      CHPEngineModel=CHPEngineModel, startTimeChp=3600)
+      CHPEngineModel=CHPEngineModel,
+    startTimeChp=0,
+    modulationFactorControl(table=[0.0,0.78; 108000,0.78]))
     annotation (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,
@@ -242,6 +246,28 @@ model CHP_PowerUnitToHeatingModulateDENSITY
     annotation (Placement(transformation(extent={{-74,-74},{-54,-54}})));
   Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flowHeaCir)
     annotation (Placement(transformation(extent={{-144,-60},{-124,-40}})));
+
+  Modelica.Blocks.Sources.TimeTable tempRetVariation(table=[0.0,298.15; 7200,298.15;
+        7200,303.15; 10800,303.15; 10800,308.15; 14400,308.15; 14400,313.15; 18000,
+        313.15; 18000,318.15; 21600,318.15; 21600,298.15; 28800,298.15; 28800,303.15;
+        32400,303.15; 32400,308.15; 36000,308.15; 36000,313.15; 39600,313.15; 39600,
+        318.15; 43200,318.15; 43200,298.15; 50400,298.15; 50400,303.15; 54000,303.15;
+        54000,308.15; 57600,308.15; 57600,313.15; 61200,313.15; 61200,318.15; 64800,
+        318.15; 64800,298.15; 72000,298.15; 72000,303.15; 75600,303.15; 75600,308.15;
+        79200,308.15; 79200,313.15; 82800,313.15; 82800,318.15; 86400,318.15; 86400,
+        298.15; 93600,298.15; 93600,303.15; 97200,303.15; 97200,308.15; 100800,308.15;
+        100800,313.15; 104400,313.15; 104400,318.15; 108000,318.15])
+    annotation (Placement(transformation(extent={{-144,-98},{-124,-78}})));
+  AixLib.Utilities.Time.ModelTime modTim
+    annotation (Placement(transformation(extent={{36,70},{50,84}})));
+  Modelica.Blocks.Math.MultiSum simTime(nu=2, k={1,-1})
+    annotation (Placement(transformation(extent={{70,70},{82,82}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=onOff_ControllerCHP.startTimeChp)
+    annotation (Placement(transformation(extent={{32,84},{50,104}})));
+  Modelica.Blocks.Sources.TimeTable volFlowVariation(table=[0.0,0.25; 21600,0.25;
+        21600,0.3; 43200,0.3; 43200,0.35; 64800,0.35; 64800,0.4; 86400,0.4; 86400,
+        0.45; 108000,0.45])
+    annotation (Placement(transformation(extent={{-144,-32},{-124,-12}})));
 equation
   connect(coolantPump.port_b, cHP_PowerUnit.port_Return) annotation (Line(
         points={{-38,10},{-28,10},{-28,10.08},{-19.2,10.08}},
@@ -266,9 +292,6 @@ equation
   connect(cHP_PowerUnit.port_Supply, tempCoolantSupply.port_a) annotation (Line(
         points={{19.2,10.08},{29.6,10.08},{29.6,10},{40,10}},
                                                           color={0,127,255}));
-  connect(heatingReturnFlow.T_in, tempFlowHeating.y)
-    annotation (Line(points={{-112,-60},{-118,-60},{-118,-66},{-123,-66}},
-                                                     color={0,0,127}));
   connect(onOff_ControllerCHP.modularCHPControlBus, cHP_PowerUnit.sigBusCHP)
     annotation (Line(
       points={{-44,80},{-0.24,80},{-0.24,47.76}},
@@ -280,6 +303,12 @@ equation
     annotation (Line(points={{-46,-64},{-54,-64}}, color={0,127,255}));
   connect(massFlowHeating.y, heatingReturnFlow.m_flow_in) annotation (Line(
         points={{-123,-50},{-118,-50},{-118,-56},{-110,-56}}, color={0,0,127}));
+  connect(heatingReturnFlow.T_in, tempRetVariation.y) annotation (Line(points={{
+          -112,-60},{-116,-60},{-116,-88},{-123,-88}}, color={0,0,127}));
+  connect(modTim.y,simTime. u[1]) annotation (Line(points={{50.7,77},{62,77},{62,
+          78.1},{70,78.1}}, color={0,0,127}));
+  connect(realExpression.y,simTime. u[2]) annotation (Line(points={{50.9,94},{64,
+          94},{64,73.9},{70,73.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -343,5 +372,6 @@ physikal"),
 <p>- </p>
 <p><br>Caution: </p>
 <p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
-</html>"));
-end CHP_PowerUnitToHeatingModulateDENSITY;
+</html>"),
+experiment(StopTime=108000, Interval=100));
+end CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW_Closed;
