@@ -31,7 +31,7 @@ model ICE
   parameter Modelica.SIunits.Time tauQ_th_start_prescribed = 800
   "time constant for stop behaviour" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauP_el_prescribed = 100
-  "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed CHP Model", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  "time constant electrical power start behavior" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
 
 protected
   parameter Modelica.SIunits.Power P_elRated = if EfficiencyByDatatable then param.P_elRated else P_elRated_prescribed;
@@ -94,8 +94,8 @@ public
         origin={32,98})));
   Modelica.Blocks.Interfaces.RealOutput Capacity[3]( unit="W")
     "1=P_el 2=dotQ_th 3=dotE_fuel(incl. calorific value)"
-    annotation (Placement(transformation(extent={{94,90},{118,114}}),
-        iconTransformation(extent={{94,90},{118,114}})));
+    annotation (Placement(transformation(extent={{88,78},{112,102}}),
+        iconTransformation(extent={{88,78},{112,102}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow varHeatFlow
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
@@ -116,8 +116,8 @@ public
   AixLib.FastHVAC.Components.Sensors.MassFlowSensor massFlowRate
     annotation (Placement(transformation(extent={{-84,-84},{-64,-64}})));
   Modelica.Blocks.Interfaces.RealOutput Energy[3](unit="J") "1=W_el 2=Q_th 3=E_fuel"
-    annotation (Placement(transformation(extent={{96,16},{120,40}}),
-        iconTransformation(extent={{96,16},{120,40}})));
+    annotation (Placement(transformation(extent={{88,16},{112,40}}),
+        iconTransformation(extent={{88,16},{112,40}})));
   Modelica.Blocks.Continuous.Integrator integrator[3]
     annotation (Placement(transformation(extent={{72,18},{92,38}})));
   AixLib.FastHVAC.BaseClasses.WorkingFluid workingFluid(
@@ -125,8 +125,6 @@ public
     T0=T0,
     m_fluid=V_water*medium.rho)
     annotation (Placement(transformation(extent={{-8,-94},{12,-74}})));
-  Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterP(Rising=760, Falling=-760)
-    annotation (Placement(transformation(extent={{20,76},{40,96}})));
   input
   Modelica.Blocks.Interfaces.BooleanInput StartIn if not withController
     annotation (Placement(transformation(
@@ -148,8 +146,6 @@ public
   Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=tauP_el/3)
     annotation (Placement(transformation(extent={{-20,76},{0,96}})));
 
-  Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2, Falling=-2554.2)
-    annotation (Placement(transformation(extent={{20,46},{40,66}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderEFuel(T=5)
     annotation (Placement(transformation(extent={{-20,46},{0,66}})));
   Modelica.Blocks.Math.Gain Pel(k=P_elRated)
@@ -158,10 +154,10 @@ public
         rotation=-90,
         origin={-96,72})));
   Modelica.Blocks.Interfaces.RealOutput dotmFuel(  unit="kg/s") "Fuel consumption " annotation (
-     Placement(transformation(extent={{96,50},{120,74}}), iconTransformation(
-          extent={{94,90},{118,114}})));
+     Placement(transformation(extent={{88,48},{112,72}}), iconTransformation(
+          extent={{88,48},{112,72}})));
   Modelica.Blocks.Math.Gain Gain_LHV(k=1/LHV)
-    annotation (Placement(transformation(extent={{76,54},{92,70}})));
+    annotation (Placement(transformation(extent={{62,52},{78,68}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=tauQ_th_start/3)
     annotation (Placement(transformation(extent={{-18,14},{2,34}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_stop(T=tauQ_th_stop/3)
@@ -256,29 +252,20 @@ equation
       Line(points={{11,-84},{24,-84},{24,-74.1},{37.2,-74.1}}, color={176,0,0}));
   connect(T_return.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{55,
           -74.1},{75.5,-74.1},{75.5,-2},{100,-2}},   color={176,0,0}));
-  connect(LimiterP.y, Capacity[1]) annotation (Line(points={{41,86},{48,86},{48,
-          102},{106,102},{106,94}},               color={0,0,127}));
-  connect(integrator.y, Energy) annotation (Line(points={{93,28},{108,28}},
+  connect(integrator.y, Energy) annotation (Line(points={{93,28},{100,28},{100,
+          28},{100,28}},
                      color={0,0,127}));
-  connect(firstOrderP.y, LimiterP.u) annotation (Line(points={{1,86},{18,86}}, color={0,0,127}));
-  connect(LimiterP.y, integrator[1].u)
-    annotation (Line(points={{41,86},{48,86},{48,56},{56,56},{56,28},{70,28}}, color={0,0,127}));
-  connect(firstOrderEFuel.y, LimiterEFuel.u) annotation (Line(points={{1,56},{18,56}}, color={0,0,127}));
-  connect(LimiterEFuel.y, Capacity[3]) annotation (Line(points={{41,56},{48,56},{48,102},{80,102},{80,102},{94,102},{94,102},{106,
-          102},{106,102},{106,102},{106,110},{106,110}}, color={0,0,127}));
-  connect(LimiterEFuel.y, integrator[3].u) annotation (Line(points={{41,56},{56,56},{56,28},{70,28}}, color={0,0,127}));
   connect(Gain_LHV.y, dotmFuel)
-    annotation (Line(points={{92.8,62},{108,62}}, color={0,0,127}));
+    annotation (Line(points={{78.8,60},{100,60}}, color={0,0,127}));
   connect(firstOrderQ_start.y, Qth.u1)
     annotation (Line(points={{3,24},{6,24},{6,14},{18,14}}, color={0,0,127}));
   connect(firstOrderQ_stop.y, Qth.u3)
     annotation (Line(points={{3,-10},{8,-10},{8,-2},{18,-2}},
                                                           color={0,0,127}));
   connect(Qth.y, Capacity[2])
-    annotation (Line(points={{41,6},{48,6},{48,102},{106,102}},   color={0,0,127}));
+    annotation (Line(points={{41,6},{48,6},{48,90},{100,90}},     color={0,0,127}));
   connect(Qth.y, integrator[2].u) annotation (Line(points={{41,6},{48,6},{48,70},{56,70},{56,28},
           {70,28}}, color={0,0,127}));
-  connect(LimiterEFuel.y, Gain_LHV.u) annotation (Line(points={{41,56},{66,56},{66,62},{74.4,62}}, color={0,0,127}));
   connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{41,6},{48,6},{48,
           -36},{2,-36},{2,-46}},
                    color={0,0,127}));
@@ -299,6 +286,16 @@ equation
     connect(StartIn, Start) annotation (Line(points={{-70,108},{-70,56},{-56,56},{-56,20},{-44,20}}, color={255,0,255}));
   end if;
   connect(OnOff, switchCounter.u) annotation (Line(points={{-110,30},{-98,30},{-98,48},{-89,48}}, color={255,0,255}));
+  connect(firstOrderEFuel.y, Capacity[3]) annotation (Line(points={{1,56},{48,
+          56},{48,98},{100,98}}, color={0,0,127}));
+  connect(firstOrderEFuel.y, Gain_LHV.u)
+    annotation (Line(points={{1,56},{60.4,56},{60.4,60}}, color={0,0,127}));
+  connect(firstOrderEFuel.y, integrator[3].u) annotation (Line(points={{1,56},{
+          56,56},{56,28},{70,28}}, color={0,0,127}));
+  connect(firstOrderP.y, Capacity[1]) annotation (Line(points={{1,86},{48,86},{
+          48,82},{100,82}}, color={0,0,127}));
+  connect(firstOrderP.y, integrator[1].u) annotation (Line(points={{1,86},{48,
+          86},{48,28},{70,28}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(initialScale=0.2), graphics={
         Rectangle(

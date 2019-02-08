@@ -13,22 +13,36 @@ model EngineCHP
     annotation (Placement(transformation(extent={{-96,-50},{-76,-30}})));
   Modelica.Blocks.Sources.Constant dotm_source(k=0.04)
     annotation (Placement(transformation(extent={{-96,-90},{-76,-70}})));
-  Components.HeatGenerators.CHP.ICE cHPNew(withController=true, param=
-        Data.CHP.Engine.Dachs())
+  Components.HeatGenerators.CHP.ICE cHPNew(                     param=
+        Data.CHP.Engine.Dachs(),
+    P_elStop=(cHPNew.P_elRated/6000)*190,
+    P_elStart=(cHPNew.P_elRated/6000)*190,
+    EfficiencyByDatatable=false,
+    P_elRated_prescribed=20000,
+    eta_el_prescribed=0.4,
+    omega_prescribed=0.85,
+    tauP_el_prescribed=1,
+    withController=true,
+    WarmupTime=1800,
+    CooldownTime=1800)
     annotation (Placement(transformation(extent={{-14,-82},{26,-42}})));
   Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP1(
-                                                       width=50, period=36000)
+                                                       width=50,
+    startTime=7200,
+    period=3600*8)
                annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-76,4})));
-  Modelica.Blocks.Sources.Ramp P_elRel(
-    height=0.8,
-    duration=36000,
-    offset=0.2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-44,-28})));
+  Modelica.Blocks.Sources.Trapezoid trapezoid(
+    amplitude=0.5,
+    falling=0,
+    offset=0.5,
+    startTime=7200,
+    period=4*3600,
+    rising=0,
+    width=3600*4)
+    annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 equation
   connect(fluidSource.enthalpyPort_b, temperatureSensor_before.enthalpyPort_a)
     annotation (Line(
@@ -56,8 +70,8 @@ equation
         color={176,0,0}));
   connect(booleanOnOffCHP1.y, cHPNew.OnOff) annotation (Line(points={{-65,4},{
           12.4,4},{12.4,-42.4}}, color={255,0,255}));
-  connect(P_elRel.y, cHPNew.P_elRel) annotation (Line(points={{-33,-28},{-12.4,
-          -28},{-12.4,-42.4}}, color={0,0,127}));
+  connect(trapezoid.y, cHPNew.P_elRel) annotation (Line(points={{-39,-30},{
+          -12.4,-30},{-12.4,-42.4}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=72000, Interval=60),
