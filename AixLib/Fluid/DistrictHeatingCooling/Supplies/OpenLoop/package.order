@@ -4,3 +4,4 @@ SourcePowerDoubleM
 SourcePowerDoubleMvar
 SourceIdealElectricityFlexibility
 SourceSpeedControl
+SourceSpeedControl_simple
