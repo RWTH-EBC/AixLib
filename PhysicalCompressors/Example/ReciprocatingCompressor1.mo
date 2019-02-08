@@ -43,7 +43,8 @@ model ReciprocatingCompressor1
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-6,-38})));
-  parameter Modelica.SIunits.ThermalConductance G=ReciprocatingCompressor.Utilities.Geometry_Roskoch.G_wall_env "Constant thermal conductance of material";
+  parameter Modelica.SIunits.ThermalConductance G=ReciprocatingCompressor.Utilities.Geometry_Roskoch.G_wall_env
+    "Constant thermal conductance of material";
   ReciprocatingCompressor.Utilities.ThermalConductor_Gas_Cylinder
     thermalConductor_Gas_Cylinder annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
