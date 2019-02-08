@@ -70,10 +70,10 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW
   Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
   Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
 
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=100
+  parameter Modelica.SIunits.ThermalConductance GCoolChannel=2000
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GCooExhHex=100
+  parameter Modelica.SIunits.ThermalConductance GCooExhHex=1100
     "Thermal conductance of the coolant heat exchanger at nominal flow"
     annotation (Dialog(tab="Engine Cooling Circle", group=
           "Calibration Parameters"));
@@ -89,7 +89,7 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW
   parameter Modelica.SIunits.Area A_surExhHea=100
     "Surface for exhaust heat transfer"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.3
+  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.32
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
           "Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Thickness dInn=0.005
@@ -123,7 +123,7 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Real calFac=1
+  parameter Real calFac=0.96
     "Calibration factor for electric power outuput (default=1)"
     annotation (Dialog(tab="Advanced", group="Generator heat use"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
@@ -164,11 +164,11 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW
     T_CoolSup=tempSupplyFlow.T,
     G_CooExhHex=GCooExhHex,
     C_ExhHex=C_ExhHex,
-    inductionMachine(J_Gen=1, s_til=0.18),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     G_Amb=G_Amb,
-    calFac=calFac)
+    calFac=calFac,
+    inductionMachine(J_Gen=1, s_til=0.18))
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
     m_flow_small=mCool_flow_small,
@@ -209,7 +209,7 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW
     redeclare package Medium2 = Medium_HeatingCircuit,
     dp1_nominal(displayUnit="kPa") = 10000,
     dp2_nominal(displayUnit="kPa") = 10000,
-    eps=0.9)
+    eps=0.99)
     annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
   Modelica.Fluid.Sources.MassFlowSource_T heatingReturnFlow(
     use_T_in=true,

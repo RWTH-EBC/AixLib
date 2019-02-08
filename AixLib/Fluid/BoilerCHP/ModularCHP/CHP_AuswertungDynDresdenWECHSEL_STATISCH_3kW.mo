@@ -70,29 +70,29 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
   Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
   Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
 
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=60
+  parameter Modelica.SIunits.ThermalConductance GCoolChannel=2000
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GCooExhHex=250
+  parameter Modelica.SIunits.ThermalConductance GCooExhHex=1100
     "Thermal conductance of the coolant heat exchanger at nominal flow"
     annotation (Dialog(tab="Engine Cooling Circle", group=
           "Calibration Parameters"));
-  parameter Modelica.SIunits.HeatCapacity C_ExhHex=25000
+  parameter Modelica.SIunits.HeatCapacity C_ExhHex=5000
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
       Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Mass Cal_mEng=250
+  parameter Modelica.SIunits.Mass Cal_mEng=0
     "Added engine mass for calibration purposes of the system´s thermal inertia"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Area A_surExhHea=100
     "Surface for exhaust heat transfer"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.35
+  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.32
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
           "Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Thickness dInn=0.015
+  parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.ThermalConductance GEngToAmb=5
@@ -123,7 +123,7 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Real calFac=0.94
+  parameter Real calFac=0.96
     "Calibration factor for electric power outuput (default=1)"
     annotation (Dialog(tab="Advanced", group="Generator heat use"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
@@ -164,11 +164,11 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
     T_CoolSup=tempSupplyFlow.T,
     G_CooExhHex=GCooExhHex,
     C_ExhHex=C_ExhHex,
-    inductionMachine(J_Gen=1, s_til=0.18),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     G_Amb=G_Amb,
-    calFac=calFac)
+    calFac=calFac,
+    inductionMachine(J_Gen=1, s_til=0.18))
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
     m_flow_small=mCool_flow_small,
@@ -209,7 +209,7 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_3kW
     redeclare package Medium2 = Medium_HeatingCircuit,
     dp1_nominal(displayUnit="kPa") = 10000,
     dp2_nominal(displayUnit="kPa") = 10000,
-    eps=0.9)
+    eps=0.99)
     annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
   Modelica.Fluid.Sources.MassFlowSource_T heatingReturnFlow(
     use_T_in=true,
