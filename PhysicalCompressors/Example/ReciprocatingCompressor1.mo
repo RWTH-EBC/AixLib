@@ -1,8 +1,10 @@
 within PhysicalCompressors.Example;
-model TestReciprocatingCompressor2
+model ReciprocatingCompressor1
+  "Compressor model using constants for valve areas, Constants valid for propen"
 
-  ReciprocatingCompressor.Geometry.Volumes volumes
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  ReciprocatingCompressor.Utilities.Geometry.Volumes volumes annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-10,68})));
   Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=314.16)
@@ -13,13 +15,13 @@ model TestReciprocatingCompressor2
     redeclare package Medium = ReciprocatingCompressor.Medium,
     nPorts=1,
     T(displayUnit="degC") = 283.15,
-    p=400000) annotation (Placement(transformation(extent={{-100,28},{-80,48}})));
+    p=300000) annotation (Placement(transformation(extent={{-100,28},{-80,48}})));
   Modelica.Fluid.Sources.FixedBoundary Condenser_in(
     use_T=true,
     redeclare package Medium = ReciprocatingCompressor.Medium,
     T(displayUnit="degC") = 373.15,
     nPorts=1,
-    p=1500000)                      annotation (Placement(transformation(
+    p=1000000)                      annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={88,38})));
@@ -28,8 +30,9 @@ model TestReciprocatingCompressor2
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={28,-62})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor CompressorWall(C=10, T(
-        start=298.15)) annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor CompressorWall(C=10, T(start=
+          315, displayUnit="K"))
+                       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-38,-12})));
@@ -40,13 +43,13 @@ model TestReciprocatingCompressor2
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-6,-38})));
-  parameter Modelica.SIunits.ThermalConductance G=ReciprocatingCompressor.Geometry.Geometry_Roskoch.A_env*6 "Constant thermal conductance of material";
-  ReciprocatingCompressor.ThermalConductor_Gas_Cylinder
+  parameter Modelica.SIunits.ThermalConductance G=ReciprocatingCompressor.Utilities.Geometry_Roskoch.G_wall_env "Constant thermal conductance of material";
+  ReciprocatingCompressor.Utilities.ThermalConductor_Gas_Cylinder
     thermalConductor_Gas_Cylinder annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-12,12})));
-  ReciprocatingCompressor.test_closedVolume_v6 test_closedVolume_v6_1
+  ReciprocatingCompressor.Utilities.closedVolume1 test_closedVolume_v6_1
     annotation (Placement(transformation(extent={{-20,28},{0,48}})));
 equation
 
@@ -77,4 +80,4 @@ equation
     annotation (Line(points={{-6,57},{-8,57},{-8,48}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end TestReciprocatingCompressor2;
+end ReciprocatingCompressor1;

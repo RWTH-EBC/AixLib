@@ -1,2 +1,3 @@
 within PhysicalCompressors.ReciprocatingCompressor;
-package Medium = AixLib.Media.Refrigerants.R32.R32_IIR_P1_70_T233_373_Horner;
+package Medium =
+    AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner;

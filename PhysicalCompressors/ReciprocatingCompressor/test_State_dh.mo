@@ -53,7 +53,7 @@ if wayOfCalc then
     h = min((h_min + convh*(time - convChange)), h_max);
   end if;
 
-  (state_dh,h_delta, n) = setState_dh(d=d,h=h);
+  (state_dh,h_delta, n) =Utilities.setState_dh(d=d, h=h);
   state_dT = Medium.setState_dT(d=d, T=state_dh.T);
   relError_h = h_delta/h *100;
 

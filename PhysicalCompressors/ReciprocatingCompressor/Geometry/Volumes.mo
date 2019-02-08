@@ -14,6 +14,7 @@ model Volumes "Model that calculates the piston hub volume"
   Modelica.SIunits.Length x;
   Modelica.SIunits.Length x_int(start=0.001);
   Modelica.SIunits.Angle phi;
+  Modelica.SIunits.Area A "Heat transfer area of gas to cylinder";
 
   Modelica.Blocks.Interfaces.RealOutput v_x_avg "average velocity of piston"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
@@ -27,7 +28,8 @@ equation
   V_gas = pi*(0.5*D_pis)^2*x;
   //V_gas = Modelica.Constants.pi*D_pis*x;
   V1 = V_gas;
-  A_gas_cyl = pi*D_pis*x + 2*(0.5*D_pis)^2;
+  A = pi*D_pis*x + 2*pi*(0.5*D_pis)^2;
+  A_gas_cyl = A;
 
 
   //Average velocity of piston
