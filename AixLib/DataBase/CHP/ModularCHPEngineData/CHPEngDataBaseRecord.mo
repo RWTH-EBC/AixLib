@@ -33,7 +33,7 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   //General CHP parameters
 
   constant Modelica.SIunits.Diameter dExh = 0.0612+(Lambda*P_FueNominal)*10^(-7) "Exhaust pipe diameter for heat transfer calculation";
-  constant Modelica.SIunits.Diameter dCoo = 0.0253+Q_MaxHea*2*10^(-7) "Coolant circle pipe diameter for heat transfer calculation";
+  constant Modelica.SIunits.Diameter dCoo = 0.0224+Q_MaxHea*2*10^(-7) "Coolant circle pipe diameter for heat transfer calculation";
   constant Modelica.SIunits.Thickness dInn "Thickness of the cylinder wall between combustion chamber and cooling circle (default value is 5mm)";
   constant Modelica.SIunits.MassFlowRate m_floCooNominal = 0.00003*Q_MaxHea-0.2043 "Nominal mass flow rate of coolant inside the engine cooling circle (default density of coolant is 1kg/l)";
   constant Modelica.SIunits.Pressure dp_Coo = 15000 "Pressure loss between coolant supply and return flow (default value is 0.15bar)";

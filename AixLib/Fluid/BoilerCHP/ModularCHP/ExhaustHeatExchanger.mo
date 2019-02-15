@@ -38,8 +38,8 @@ model ExhaustHeatExchanger
     final m_flow_small=m1_flow_small)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
-        Medium1, final allowFlowReversal=allowFlowReversal1)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
+      = Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,70},{80,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolCold(
@@ -279,7 +279,6 @@ model ExhaustHeatExchanger
   Modelica.Blocks.Math.MultiSum multiSum(nu=2)
     annotation (Placement(transformation(extent={{86,-18},{74,-6}})));
   AixLib.Controls.Interfaces.CHPControlBus cHPControlBus(
-    meaTemOutEng=senTCoolCold.T,
     meaTemExhOutHex=senTExhCold.T,
     meaTemExhInHex=senTExhHot.T,
     meaThePowOutHex=pipeCoolant.heatPort_outside.Q_flow,

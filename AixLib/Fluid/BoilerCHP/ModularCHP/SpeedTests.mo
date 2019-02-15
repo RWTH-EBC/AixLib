@@ -21,12 +21,12 @@ package SpeedTests
       DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                    annotation(choicesAllMatching=true);
 
-    replaceable package Medium_Coolant = Modelica.Media.Air.DryAirNasa
-                                                             constrainedby
+    replaceable package Medium_Coolant =
+        Modelica.Media.CompressibleLiquids.LinearColdWater   constrainedby
       Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
     replaceable package Medium_HeatingCircuit =
-        Modelica.Media.CompressibleLiquids.LinearColdWater   constrainedby
+        Modelica.Media.CompressibleLiquids.LinearColdWater      constrainedby
       Modelica.Media.Interfaces.PartialMedium annotation (
         __Dymola_choicesAllMatching=true);
 
@@ -190,8 +190,7 @@ package SpeedTests
       m_flow_nominal=m_flowCoo)
       annotation (Placement(transformation(extent={{-40,-48},{-56,-32}})));
     Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if
-          onOff_ControllerCHP.pumpControl.y then m_flowCoo else
-          mCool_flow_small)
+          onOff_ControllerCHP.pumpControl.y then m_flowCoo else mCool_flow_small)
       annotation (Placement(transformation(extent={{-80,22},{-60,42}})));
 
     AixLib.Fluid.HeatExchangers.ConstantEffectiveness             coolantHex(
@@ -349,26 +348,26 @@ physikal"),
     extends Modelica.Icons.Example;
 
     CHP combinedHeatPower(
-      redeclare package Medium =
-          Media.Specialized.Water.TemperatureDependentDensity,
       m_flow_nominal=0.02,
       TSetIn=true,
       minCapacity=20,
       delayTime=300,
-      param=DataBase.CHP.CHPDataSimple.CHP_XRGI_9kWel()) "CHP"
+      param=DataBase.CHP.CHPDataSimple.CHP_XRGI_9kWel(),
+      redeclare package Medium =
+          Modelica.Media.CompressibleLiquids.LinearColdWater)
+                                                         "CHP"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     Modelica.Fluid.Sources.MassFlowSource_T source(
-      redeclare package Medium =
-          Media.Specialized.Water.TemperatureDependentDensity,
       use_T_in=true,
       nPorts=1,
-      m_flow=0.5)
+      m_flow=0.5,
+      redeclare package Medium =
+          Modelica.Media.CompressibleLiquids.LinearColdWater)
       "Source"
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
     Modelica.Fluid.Sources.Boundary_pT sink(
-      nPorts=1,
-      redeclare package Medium =
-          Media.Specialized.Water.TemperatureDependentDensity)
+      nPorts=1, redeclare package Medium =
+          Modelica.Media.CompressibleLiquids.LinearColdWater)
       "Sink"
       annotation (Placement(transformation(extent={{60,-10},{40,10}})));
     Modelica.Blocks.Sources.Trapezoid trapezoid(
@@ -385,7 +384,7 @@ physikal"),
       "Set temperature"
       annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
 
-    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=28800)
+    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=86400)
                  annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
@@ -435,7 +434,7 @@ documentation.</li>
       annotation (Placement(transformation(extent={{-100,12},{-80,32}})));
     Modelica.Blocks.Sources.Constant dotm_source(k=0.04)
       annotation (Placement(transformation(extent={{-100,-28},{-80,-8}})));
-    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=28800)
+    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=86400)
                  annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
@@ -519,7 +518,7 @@ documentation.</li>
           extent={{-20,-20},{20,20}},
           rotation=270,
           origin={100,0})));
-    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=28800)
+    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=86400)
                  annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
