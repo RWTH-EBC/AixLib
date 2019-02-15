@@ -11,9 +11,8 @@ model CoolingTowerSimple
 
   parameter Modelica.SIunits.Temperature TAdiabaticMax = 308.15 "Maximum air temperature where maximum water flow rate occures";
 
+  Modelica.SIunits.MassFlowRate m_flow_water_value;
 
-  Modelica.Blocks.Interfaces.RealOutput TLvg "Leaving water temperature"
-    annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
   Modelica.Blocks.Interfaces.RealInput TAirDry(min=0, unit="K")
     "Entering air dry or wet bulb temperature"
     annotation (Placement(transformation(extent={{-138,60},{-98,100}})));
@@ -24,8 +23,8 @@ model CoolingTowerSimple
   Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{46,-10},{66,10}})));
   Sinks.Vessel vessel
-    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=enthalpyPort_a.m_flow)
+    annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=massFlowRate.dotm)
     annotation (Placement(transformation(extent={{4,-18},{24,2}})));
   Modelica.Blocks.Interfaces.RealInput TAirWetBulb(min=0, unit="K")
     "Entering air dry or wet bulb temperature"
@@ -47,24 +46,26 @@ model CoolingTowerSimple
     annotation (Placement(transformation(extent={{-92,48},{-84,56}})));
   Modelica.Blocks.Interfaces.RealOutput m_flow_water
     annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
+  Sensors.MassFlowSensor massFlowRate
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=m_flow_water_value)
+    annotation (Placement(transformation(extent={{56,-50},{76,-30}})));
 equation
 
   if TAirDry >= TAdiabaticMax and not less.y then
-    m_flow_water = m_flow_water_max;
+    m_flow_water_value = m_flow_water_max;
 
   elseif not less.y then
-    m_flow_water = ((m_flow_water_max - m_flow_water_min)/(TAdiabaticMax - TAdiabaticSwitch)) * (TAirDry - TAdiabaticSwitch) + m_flow_water_min;
+    m_flow_water_value = ((m_flow_water_max - m_flow_water_min)/(TAdiabaticMax - TAdiabaticSwitch)) * (TAirDry - TAdiabaticSwitch) + m_flow_water_min;
 
   else
-    m_flow_water = 0;
+    m_flow_water_value = 0;
 
   end if;
 
 
   connect(fluidSource.enthalpyPort_b, enthalpyPort_b)
     annotation (Line(points={{66,1},{80,1},{80,0},{100,0}}, color={176,0,0}));
-  connect(enthalpyPort_a, vessel.enthalpyPort_a)
-    annotation (Line(points={{-100,0},{-77,0}}, color={176,0,0}));
   connect(realExpression1.y, fluidSource.dotm) annotation (Line(points={{25,-8},
           {36,-8},{36,-2.6},{48,-2.6}}, color={0,0,127}));
   connect(add.y, fluidSource.T_fluid)
@@ -85,6 +86,12 @@ equation
     annotation (Line(points={{-83.6,52},{-64,52}}, color={0,0,127}));
   connect(m_flow_water, m_flow_water)
     annotation (Line(points={{110,-40},{110,-40}}, color={0,0,127}));
+  connect(enthalpyPort_a, massFlowRate.enthalpyPort_a) annotation (Line(points={
+          {-100,0},{-92,0},{-92,-0.1},{-78.8,-0.1}}, color={176,0,0}));
+  connect(massFlowRate.enthalpyPort_b, vessel.enthalpyPort_a) annotation (Line(
+        points={{-61,-0.1},{-54.5,-0.1},{-54.5,0},{-47,0}}, color={176,0,0}));
+  connect(realExpression.y, m_flow_water)
+    annotation (Line(points={{77,-40},{110,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-70,60},{70,-60}},
