@@ -34,10 +34,10 @@ model HeatPump "Base model of FastHVAC Heat Pump"
           use_refIne, group="Refrigerant inertia"));
 
 //Condenser
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal = 0.5
     "Nominal mass flow rate"
     annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
-  parameter Modelica.SIunits.Volume VCon "Volume in condenser"
+  parameter Modelica.SIunits.Volume VCon = 0.4 "Volume in condenser"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
   parameter Modelica.SIunits.Mass m_fluidCon = VCon * con.medium.rho "Mass of working fluid";
   parameter Real deltaM_con=0.1
@@ -61,9 +61,9 @@ model HeatPump "Base model of FastHVAC Heat Pump"
       enable=use_ConCap));
 
 //Evaporator
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal = 0.5
     "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
-  parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
+  parameter Modelica.SIunits.Volume VEva = 0.04 "Volume in evaporator"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
   parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho "Mass of working fluid";
   parameter Real deltaM_eva=0.1
@@ -99,7 +99,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer in temperature sensors, default 20 minutes"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),Evaluate=true);
-  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=288.15
     "Fixed ambient temperature for heat transfer of sensors at the condenser side" annotation (               Dialog(tab=
           "Assumptions",                                                                                               group=
           "Condenser"));
