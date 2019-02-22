@@ -15,8 +15,9 @@
 
 ## District Heating and Cooling <a name="dhc"></a>
 
-+ Automated model generation and simplification for district heating and cooling networks
+#### Automated model generation and simplification for district heating and cooling networks
 Mans, Michael; Blacha, Tobias; Remmen, Peter; Müller, Dirk; Modelica Conference 2019, p. 179-186, March 2019, [pdf](http://www.ep.liu.se/ecp/157/ecp19157.pdf), [DOI: 10.3384/ecp19157179](http://dx.doi.org/10.3384/ecp19157179)
+
 
 
 ## Fast HVAC <a name="fasthvac"></a>
