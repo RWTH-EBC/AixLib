@@ -140,7 +140,8 @@ model CHP_AuswertungDynDresdenKALIBRIERUNG_FORTSCHRITT_0602
   Modelica.SIunits.Temperature T_SupCelsius=T_Sup-273.15
     "Coolant supply temperature";
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnitModulateWECHSEL cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_PowerUnitModulateWECHSEL1502
+    cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,

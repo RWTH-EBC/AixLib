@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
+within AixLib.Fluid.BoilerCHP.ModularCHP;
 model gasolineEngineChpModulate
   CHPCombustionEngineModulate
                       cHPCombustionEngine(
@@ -128,5 +128,5 @@ equation
           -80,46},{-30,46},{-30,46.48}}, color={255,0,255}));
   annotation (Icon(graphics={
           Bitmap(extent={{-136,-134},{144,160}}, fileName=
-              "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png")}));
+              "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png")}));
 end gasolineEngineChpModulate;

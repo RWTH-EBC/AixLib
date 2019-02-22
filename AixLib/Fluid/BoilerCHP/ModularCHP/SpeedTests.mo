@@ -136,7 +136,8 @@ package SpeedTests
       "Small coolant mass flow rate for regularization of zero flow"
       annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-    AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnitModulateWECHSEL cHP_PowerUnit(
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_PowerUnitModulateWECHSEL1502
+      cHP_PowerUnit(
       redeclare package Medium_Fuel = Medium_Fuel,
       redeclare package Medium_Air = Medium_Air,
       redeclare package Medium_Exhaust = Medium_Exhaust,

@@ -209,7 +209,7 @@ for i in 1:size(n_ComExh, 1) loop
         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-120,-134},{122,134}}, fileName=
-              "modelica://AixLib/../../Nützliches/Modelica Icons_Screenshots/Icon_ICE.png"),
+              "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png"),
         Text(
           extent={{-100,80},{100,64}},
           lineColor={28,108,200},
