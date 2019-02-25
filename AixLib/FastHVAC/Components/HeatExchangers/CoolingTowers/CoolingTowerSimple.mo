@@ -16,9 +16,9 @@ model CoolingTowerSimple
   Modelica.Blocks.Interfaces.RealInput TAirDry(min=0, unit="K")
     "Entering air dry or wet bulb temperature"
     annotation (Placement(transformation(extent={{-138,60},{-98,100}})));
-  Interfaces.EnthalpyPort_a enthalpyPort_a
+  Interfaces.EnthalpyPort_a enthalpyPort_a "hot inflow"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Interfaces.EnthalpyPort_b enthalpyPort_b
+  Interfaces.EnthalpyPort_b enthalpyPort_b "cool outflow"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{46,-10},{66,10}})));
