@@ -9,23 +9,32 @@ model ThermalZone
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
 
-  replaceable Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+  replaceable Utilities.Sources.InternalGains.Humans.HumanSensibleHeatAreaSpecific
     humanSenHea(
-    final ActivityType=3,
     final T0=zoneParam.T_start,
-    final NrPeople=zoneParam.nrPeople,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
+    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final RoomArea=zoneParam.AZone) if ATot > 0
+    constrainedby
+    Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078(
+    final T0=zoneParam.T_start,
+    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final RoomArea=zoneParam.AZone)
     "Internal gains from persons" annotation (choicesAllMatching=true,
       Placement(transformation(extent={{64,-36},{84,-16}})));
-  replaceable Utilities.Sources.InternalGains.Machines.Machines_DIN18599
+  replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
     final ratioConv=zoneParam.ratioConvectiveHeatMachines,
     final T0=zoneParam.T_start,
-    final ActivityType=2,
-    final NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
+    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
+    final RoomArea=zoneParam.AZone) if ATot > 0 constrainedby
+    Utilities.Sources.InternalGains.Machines.Machines_DIN18599(
+    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+    final T0=zoneParam.T_start,
+    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
+    final RoomArea=zoneParam.AZone)
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  replaceable Utilities.Sources.InternalGains.Lights.Lights_relative lights(
+  replaceable Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
     final T0=zoneParam.T_start,
     final LightingPower=zoneParam.lightingPower,
@@ -186,8 +195,6 @@ equation
   connect(machinesSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
           -40.8},{92,-40.8},{92,-40},{92,-40},{92,50},{86,50},{86,50}},
                                                  color={191,0,0}));
-  connect(humanSenHea.TRoom, ROM.intGainsConv) annotation (Line(points={{65,-17},
-          {65,-14},{92,-14},{92,50},{86,50},{86,50}},           color={191,0,0}));
   connect(humanSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
           {94,-27},{94,54},{86,54}},   color={95,95,95}));
   connect(machinesSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,

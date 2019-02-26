@@ -21,24 +21,24 @@ model ThermalZoneEquipped
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
-  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeatAreaSpecific
     humanSenHea(
-    final ActivityType=3,
     final T0=zoneParam.T_start,
-    final NrPeople=zoneParam.nrPeople,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
+    final InternalGainsPeopleSpecific=zoneParam.internalGainsPeopleSpecific,
+    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from persons" annotation (choicesAllMatching=true,
       Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  redeclare Utilities.Sources.InternalGains.Machines.Machines_DIN18599
+  redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
     final ratioConv=zoneParam.ratioConvectiveHeatMachines,
     final T0=zoneParam.T_start,
-    final ActivityType=2,
-    final NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
+    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
+    final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  redeclare Utilities.Sources.InternalGains.Lights.Lights_relative lights(
+  redeclare Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
     final T0=zoneParam.T_start,
     final LightingPower=zoneParam.lightingPower,
