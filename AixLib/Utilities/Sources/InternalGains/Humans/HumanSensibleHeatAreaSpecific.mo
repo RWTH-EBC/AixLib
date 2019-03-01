@@ -82,6 +82,7 @@ equation
 <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice</a> </p>
 </html>",  revisions="<html>
  <ul>
+ <li><i>March 01, 2019&nbsp;</i> by Niklas Huelsenbeck:<br/>Duplicated HumanSensibleHeat_VDI2078 Class and adapted it to a heat flux input value instead of a total number of persons</li>
  <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Set minimal surface to surface of one person</li>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>April 10, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it won&apos;t lead to a division by zero</li>

@@ -325,6 +325,10 @@ equation
 </html>",  revisions="<html>
  <ul>
   <li>
+  March 01, 2019, by Niklas Huelsenbeck:<br/>
+  Integration of new Internal Gains models, HumanSensibleHeatAreaSpecific and MachinesAreaSpecific
+  </li>
+  <li>
   September 27, 2016, by Moritz Lauster:<br/>
   Reimplementation based on Annex60 and MSL models.
   </li>

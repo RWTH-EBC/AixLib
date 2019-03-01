@@ -310,6 +310,7 @@ limitation of 1e-4 m2 has been introduced.</p>
 </html>",
     revisions="<html>
 <ul>
+<li><i>March 01, 2019&nbsp;</i> by Niklas Huelsenbeck:<br/>Duplicated Machines_DIN18599 Class and adapted it to a heat flux input value instead of a total number of machines</li>
 <li><i>October 19, 2016&nbsp;</i> by Ana Constantin:<br/>Corrected documentation to refer to machines directly</li>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
