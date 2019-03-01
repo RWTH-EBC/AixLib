@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
 model ValveControlledHX "Substation with variable dT and Heat Exchanger"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
@@ -44,11 +44,11 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Actuators.Valves.TwoWayPressureIndependent valve(
     redeclare package Medium = Medium,
@@ -57,7 +57,7 @@ public
     l=0.05,
     dpValve_nominal(displayUnit="bar") = 50000)
             "Control valve"
-    annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
@@ -67,29 +67,41 @@ public
     annotation (Placement(transformation(extent={{-90,-50},{-70,-30}})));
   Modelica.Blocks.Math.Min min
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  Delays.DelayFirstOrder              vol1(
-    redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=m_flow_nominal,
-    nPorts=2)
-             annotation (Placement(transformation(extent={{30,0},{50,20}})));
   Modelica.Blocks.Math.Division rel_Q_flow_cur
     annotation (Placement(transformation(extent={{-40,64},{-20,84}})));
   Modelica.Blocks.Math.Feedback feedback(u2=1 - rel_Q_flow_cur.y)
                                          annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=0,
-        origin={-10,50})));
+        origin={-30,50})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0) annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={-30,34})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow(
-      Q_flow=-min.y) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={20,-28})));
+        origin={-50,34})));
+  Sources.Boundary_pT                   sink(
+    redeclare package Medium = Medium,
+    nPorts=1,
+    use_p_in=true,
+    p_in=port_b.p)
+              "Sink extracting prescribed flow from the network"
+                                              annotation (Placement(
+        transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={0,0})));
+  Sources.MassFlowSource_T source(
+    redeclare package Medium = Medium,
+    nPorts=1,
+    use_T_in=true,
+    use_m_flow_in=true,
+    T_in=senT_supply.T - min.y/(cp_default*port_a.m_flow),
+    m_flow_in=port_a.m_flow)
+               "Source sending prescribed flow back to the network" annotation (
+     Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=0,
+        origin={38,0})));
 equation
 
   dpOut = dp;
@@ -99,29 +111,28 @@ equation
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{80,0}},
                           color={0,127,255}));
   connect(senT_supply.port_b, valve.port_a)
-    annotation (Line(points={{-70,0},{-20,0}},     color={0,127,255}));
-  connect(Q_flow_max.y, min.u2) annotation (Line(points={{-69,-40},{-60,-40},{-60,
-          -76},{-42,-76}}, color={0,0,127}));
-  connect(Q_flow_input, min.u1) annotation (Line(points={{-108,80},{-50,80},{-50,
-          -64},{-42,-64}},              color={0,0,127}));
-  connect(senT_return.port_a, vol1.ports[1]) annotation (Line(points={{60,0},{38,
-          0}},                    color={0,127,255}));
+    annotation (Line(points={{-70,0},{-40,0}},     color={0,127,255}));
+  connect(Q_flow_max.y, min.u2) annotation (Line(points={{-69,-40},{-62,-40},{
+          -62,-76},{-42,-76}},
+                           color={0,0,127}));
+  connect(Q_flow_input, min.u1) annotation (Line(points={{-108,80},{-66,80},{
+          -66,-64},{-42,-64}},          color={0,0,127}));
   connect(Q_flow_max.y, rel_Q_flow_cur.u2) annotation (Line(points={{-69,-40},{
-          -60,-40},{-60,68},{-42,68}},
+          -62,-40},{-62,68},{-42,68}},
                                      color={0,0,127}));
-  connect(valve.y_actual, feedback.u1) annotation (Line(points={{-5,7},{-5,20},
-          {10,20},{10,50},{-2,50}},    color={0,0,127}));
+  connect(valve.y_actual, feedback.u1) annotation (Line(points={{-25,7},{-25,20},
+          {-10,20},{-10,50},{-22,50}}, color={0,0,127}));
   connect(feedback.y, limiter.u)
-    annotation (Line(points={{-19,50},{-30,50},{-30,46}}, color={0,0,127}));
+    annotation (Line(points={{-39,50},{-50,50},{-50,46}}, color={0,0,127}));
   connect(limiter.y, valve.y)
-    annotation (Line(points={{-30,23},{-30,20},{-10,20},{-10,12}},
+    annotation (Line(points={{-50,23},{-50,20},{-30,20},{-30,12}},
                                                  color={0,0,127}));
-  connect(rel_Q_flow_cur.u1, min.u1) annotation (Line(points={{-42,80},{-50,80},
-          {-50,-64},{-42,-64}}, color={0,0,127}));
-  connect(valve.port_b, vol1.ports[2])
-    annotation (Line(points={{0,0},{42,0}}, color={0,127,255}));
-  connect(prescribedHeatFlow.port, vol1.heatPort)
-    annotation (Line(points={{20,-18},{20,10},{30,10}}, color={191,0,0}));
+  connect(rel_Q_flow_cur.u1, min.u1) annotation (Line(points={{-42,80},{-66,80},
+          {-66,-64},{-42,-64}}, color={0,0,127}));
+  connect(valve.port_b, sink.ports[1])
+    annotation (Line(points={{-20,0},{-10,0}}, color={0,127,255}));
+  connect(source.ports[1], senT_return.port_a)
+    annotation (Line(points={{48,0},{60,0}}, color={0,127,255}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
