@@ -55,7 +55,8 @@ public
     m_flow_nominal=m_flow_nominal,
     l2=1e-9,
     l=0.05,
-    dpValve_nominal(displayUnit="bar") = 50000)
+    dpValve_nominal(displayUnit="bar") = 50000,
+    use_inputFilter=false)
             "Control valve"
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Interfaces.RealOutput dpOut

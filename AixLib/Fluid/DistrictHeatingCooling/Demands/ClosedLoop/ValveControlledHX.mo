@@ -55,7 +55,8 @@ public
     m_flow_nominal=m_flow_nominal,
     l2=1e-9,
     l=0.05,
-    dpValve_nominal(displayUnit="bar") = 50000)
+    dpValve_nominal(displayUnit="bar") = 50000,
+    use_inputFilter=false)
             "Control valve"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Interfaces.RealOutput dpOut
@@ -106,9 +107,6 @@ equation
           -64},{-42,-64}},              color={0,0,127}));
   connect(senT_return.port_a, vol1.ports[1]) annotation (Line(points={{60,0},{38,
           0}},                    color={0,127,255}));
-  connect(Q_flow_max.y, rel_Q_flow_cur.u2) annotation (Line(points={{-69,-40},{
-          -60,-40},{-60,68},{-42,68}},
-                                     color={0,0,127}));
   connect(valve.y_actual, feedback.u1) annotation (Line(points={{-5,7},{-5,20},
           {10,20},{10,50},{-2,50}},    color={0,0,127}));
   connect(feedback.y, limiter.u)
@@ -122,6 +120,8 @@ equation
     annotation (Line(points={{0,0},{42,0}}, color={0,127,255}));
   connect(prescribedHeatFlow.port, vol1.heatPort)
     annotation (Line(points={{20,-18},{20,10},{30,10}}, color={191,0,0}));
+  connect(Q_flow_max.y, rel_Q_flow_cur.u2) annotation (Line(points={{-69,-40},{
+          -56,-40},{-56,68},{-42,68}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
