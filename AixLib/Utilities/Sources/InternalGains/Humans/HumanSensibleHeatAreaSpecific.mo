@@ -1,11 +1,13 @@
 within AixLib.Utilities.Sources.InternalGains.Humans;
 model HumanSensibleHeatAreaSpecific
-  "Model for sensible heat output after VDI 2078"
+  "Model for sensible heat output area specific"
   //Internal Gains People
-  parameter Real InternalGainsPeopleSpecific = 1.0 "Specific Heat Flow from people to the environment" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.HeatFlux InternalGainsPeopleSpecific = 1.0 "Specific Heat Flow from people to the environment" annotation(Dialog(descriptionLabel = true));
   parameter Real RatioConvectiveHeat = 0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
+    "Initial temperature";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
   Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
   Utilities.Interfaces.Star RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
@@ -15,8 +17,6 @@ model HumanSensibleHeatAreaSpecific
     annotation (Placement(transformation(extent={{-70,-26},{-58,-14}})));
   Modelica.Blocks.Math.Gain SurfaceArea_People(k = SurfaceArea_Human) annotation(Placement(transformation(extent={{16,-54},
             {28,-42}})));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
-    "Initial temperature";
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax = 1e+23, uMin=1)      annotation(Placement(transformation(extent={{-18,-58},
             {2,-38}})));
   Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
@@ -25,9 +25,13 @@ model HumanSensibleHeatAreaSpecific
     annotation (Placement(transformation(extent={{-94,32},{-74,52}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
     annotation (Placement(transformation(extent={{-40,-6},{-20,14}})));
+  Modelica.Blocks.Math.Gain PersonHeat(k=1/HeatPerPerson)
+    "Divides total heat by the Heat Output per Person to get number of persons"
+    annotation (Placement(transformation(extent={{-46,-54},{-34,-42}})));
 protected
   parameter Modelica.SIunits.Area SurfaceArea_Human = 2;
   parameter Real Emissivity_Human = 0.98;
+  parameter Modelica.SIunits.HeatFlowRate HeatPerPerson = 70 "Average Heat Flow per person taken from DIN V 18599-10" annotation(Dialog(descriptionLabel = true));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, 20}, {42, 44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
@@ -38,8 +42,6 @@ equation
     annotation (Line(points={{-100,-20},{-71.2,-20}}, color={0,0,127}));
   connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));
   connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
-  connect(internalGainsPeopleSpecific.y, limiter.u) annotation (Line(points={{-57.4,
-          -20},{-30,-20},{-30,-48},{-20,-48}}, color={0,0,127}));
   connect(limiter.y, SurfaceArea_People.u) annotation (Line(
       points={{3,-48},{14.8,-48}},
       color={0,0,127}));
@@ -49,12 +51,16 @@ equation
   connect(internalGainsPeopleSpecific.y, productHeatOutput.u[1]) annotation (
       Line(points={{-57.4,-20},{-54,-20},{-54,4},{-40,4},{-40,7.5}}, color={0,0,
           127}));
-  connect(Area.y, productHeatOutput.u[2]) annotation (Line(points={{-73,42},{
-          -54,42},{-54,4},{-40,4},{-40,0.5}}, color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(points={{-18.3,4},{-8,
           4},{-8,-8},{5.2,-8}}, color={0,0,127}));
   connect(productHeatOutput.y, gain.u) annotation (Line(points={{-18.3,4},{-8,4},
           {-8,32},{5.2,32}}, color={0,0,127}));
+  connect(PersonHeat.y, limiter.u)
+    annotation (Line(points={{-33.4,-48},{-20,-48}}, color={0,0,127}));
+  connect(productHeatOutput.y, PersonHeat.u) annotation (Line(points={{-18.3,4},
+          {-18,4},{-18,-32},{-52,-32},{-52,-48},{-47.2,-48}}, color={0,0,127}));
+  connect(Area.y, productHeatOutput.u[2]) annotation (Line(points={{-73,42},{
+          -54,42},{-54,0.5},{-40,0.5}}, color={0,0,127}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},

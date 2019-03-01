@@ -2,12 +2,13 @@ within AixLib.Utilities.Sources.InternalGains.Machines;
 model MachinesAreaSpecific
   extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
 
-  parameter Real InternalGainsMachinesSpecific=1.0 "Specific Heat Flow from machines to the environment"  annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.HeatFlux InternalGainsMachinesSpecific=1.0 "Specific Heat Flow from machines to the environment"  annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
     "surface area of radiative heat source";
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Real Emissivity_Machines=0.98;
 protected
+  parameter Modelica.SIunits.HeatFlowRate HeatPerMachine = 100 "Average Heat Flow per machine taken from DIN V 18599-10" annotation(Dialog(descriptionLabel = true));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
     annotation (Placement(transformation(extent={{-24,-10},{-4,10}})));
 public
@@ -16,7 +17,7 @@ public
     annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
   Utilities.HeatTransfer.HeatToStar
                                   RadiationConvertor(eps=
-        Emissivity_Machines, A=max(1e-4, SurfaceArea_Machines*NrPeople))
+        Emissivity_Machines, A=max(1e-4, SurfaceArea_Machines*InternalGainsMachinesSpecific*(1/HeatPerMachine)*RoomArea)) "Surface Area of a machine multiplied with the number of machines"
     annotation (Placement(transformation(extent={{48,-70},{68,-50}})));
   Modelica.Blocks.Sources.Constant Area(k=RoomArea)
     annotation (Placement(transformation(extent={{-92,38},{-72,58}})));
@@ -39,7 +40,7 @@ equation
   connect(internalGainsMachinesSpecific.y, productHeatOutput.u[1]) annotation (
       Line(points={{-47.4,-40},{-36,-40},{-36,0},{-26,0},{-26,3.5},{-24,3.5}},
         color={0,0,127}));
-  connect(roomArea.y, productHeatOutput.u[2]) annotation (Line(points={{-71,48},
+  connect(Area.y, productHeatOutput.u[2]) annotation (Line(points={{-71,48},
           {-36,48},{-36,0},{-24,0},{-24,-3.5}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(

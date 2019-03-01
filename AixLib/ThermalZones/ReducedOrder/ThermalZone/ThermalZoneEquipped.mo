@@ -41,7 +41,7 @@ model ThermalZoneEquipped
   redeclare Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
     final T0=zoneParam.T_start,
-    final LightingPower=zoneParam.lightingPower,
+    final LightingPower=zoneParam.lightingPowerSpecific,
     final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 

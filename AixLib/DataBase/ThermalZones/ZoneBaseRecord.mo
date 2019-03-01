@@ -79,13 +79,13 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real wfGro
     "Weight factor of the ground";
 
-  parameter Real internalGainsPeopleSpecific "Specific Heat Flow from people to the environment";
+  parameter Real internalGainsPeopleSpecific "Heat Flux of people";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
-  parameter Real internalGainsMachinesSpecific "Specific Heat Flow from machines to the environment";
+  parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
   parameter Real ratioConvectiveHeatMachines
     "Ratio of convective heat from overall heat output for machines";
-  parameter Modelica.SIunits.HeatFlux lightingPower "Heat flux of lighting";
+  parameter Modelica.SIunits.HeatFlux lightingPowerSpecific "Heat flux of lighting";
   parameter Real ratioConvectiveHeatLighting
     "Ratio of convective heat from overall heat output for lights";
   parameter Boolean useConstantACHrate
