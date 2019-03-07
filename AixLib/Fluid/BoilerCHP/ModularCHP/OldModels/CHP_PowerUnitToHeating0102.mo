@@ -36,8 +36,8 @@ model CHP_PowerUnitToHeating0102
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData EngMat=
+      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
@@ -107,8 +107,7 @@ model CHP_PowerUnitToHeating0102
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_PowerUnitModulate
-                                                  cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_PowerUnit1502 cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,
@@ -199,7 +198,7 @@ model CHP_PowerUnitToHeating0102
   parameter Modelica.SIunits.Mass mEng=80
     "Total engine mass for heat capacity calculation of the motor block"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.OnOff_ControllerCHPModulate
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.OnOff_ControllerCHP0102
     onOff_ControllerCHP(CHPEngineModel=CHPEngineModel) annotation (Placement(
         transformation(rotation=0, extent={{-76,64},{-44,96}})));
 equation

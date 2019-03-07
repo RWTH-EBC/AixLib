@@ -147,13 +147,14 @@ class EngineHousingToCoolingHeatPortsPIPETEST
   Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium =
         Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
         iconTransformation(extent={{70,50},{90,70}})));
-  CylToInnerWall cylToInnerWall(
+  BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing_CylToInnerWall
+    cylToInnerWall(
     GInnWall=GInnWall,
     dInn=dInn,
     lambda=lambda,
     A_WInn=A_WInn,
-    z=z) annotation (Placement(transformation(rotation=0, extent={{-92,-58},{
-            -72,-38}})));
+    z=z) annotation (Placement(transformation(rotation=0, extent={{-92,-58},{-72,
+            -38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CoolingCircle
     annotation (Placement(transformation(extent={{88,-12},{112,12}}),
         iconTransformation(extent={{90,-10},{110,10}})));

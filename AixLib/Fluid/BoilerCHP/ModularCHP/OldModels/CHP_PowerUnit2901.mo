@@ -30,8 +30,8 @@ model CHP_PowerUnit2901
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData EngMat=
+      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 

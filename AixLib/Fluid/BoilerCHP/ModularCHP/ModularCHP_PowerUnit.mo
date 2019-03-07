@@ -1,6 +1,6 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_PowerUnitModulateWECHSEL
-  "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
+model ModularCHP_PowerUnit
+  "Model of modular CHP power unit"
   import AixLib;
 
   replaceable package Medium_Fuel =
@@ -30,8 +30,8 @@ model CHP_PowerUnitModulateWECHSEL
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData EngMat=
+      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
@@ -49,17 +49,17 @@ model CHP_PowerUnitModulateWECHSEL
     annotation (Dialog(group="Ambient Parameters"));
   parameter Modelica.SIunits.AbsolutePressure p_ambient=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
-  Modelica.SIunits.Temperature T_CoolRet=350.15
-    "Coolant return temperature" annotation (Dialog(tab="Engine Cooling Circle"));
+ // Modelica.SIunits.Temperature T_CoolRet=350.15
+ //   "Coolant return temperature" annotation (Dialog(tab="Engine Cooling Circle"));
   Modelica.SIunits.Temperature T_CoolSup=submodel_Cooling.senTCooEngOut.T
-    "Coolant supply temperature" annotation (Dialog(tab="Engine Cooling Circle"));
+    "Coolant supply temperature";
   Modelica.SIunits.Power Q_Therm=if (submodel_Cooling.heatPort_outside.Q_flow+exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow)>10
   then submodel_Cooling.heatPort_outside.Q_flow+exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow
   else 1 "Thermal power output of the CHP unit";
   Modelica.SIunits.Power P_Mech=gasolineEngineChp.cHPCombustionEngine.P_eff "Mechanical power output of the CHP unit";
   Modelica.SIunits.Power P_El=-inductionMachine.P_E
     "Electrical power output of the CHP unit";
-  Modelica.SIunits.Power P_Fuel=if (gasolineEngineChp.isOn) then m_Fuel*Medium_Fuel.H_U else 0 "CHP fuel expenses";
+  Modelica.SIunits.Power P_Fuel=if (gasolineEngineChp.cHPControlBus.isOn) then m_Fuel*Medium_Fuel.H_U else 0 "CHP fuel expenses";
   Modelica.SIunits.Power Q_TotUnused=gasolineEngineChp.cHPCombustionEngine.Q_therm-gasolineEngineChp.engineToCoolant.actualHeatFlowEngine.Q_flow+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total heat error of the CHP unit";
  // Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total exhaust heat error";
   Modelica.SIunits.MassFlowRate m_CO2=gasolineEngineChp.cHPCombustionEngine.m_CO2Exh "CO2 emission output rate";
@@ -97,9 +97,9 @@ model CHP_PowerUnitModulateWECHSEL
   parameter Modelica.SIunits.ThermalConductance G_Amb=5
     "Constant thermal conductance of material" annotation (Dialog(tab="Engine Cooling Circle",
         group="Calibration Parameters"));
-  parameter Modelica.SIunits.Temperature T_HeaRet=303.15
-    "Constant heating circuit return temperature"
-    annotation (Dialog(tab="Engine Cooling Circle"));
+//  parameter Modelica.SIunits.Temperature T_HeaRet = 303.15
+//    "Constant heating circuit return temperature"
+//    annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));
@@ -108,7 +108,8 @@ model CHP_PowerUnitModulateWECHSEL
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-64,-8},{-80,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger
+    exhaustHeatExchanger(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -125,9 +126,7 @@ model CHP_PowerUnitModulateWECHSEL
     d_iExh=CHPEngineModel.dExh,
     dp_CooExhHex=CHPEngineModel.dp_Coo,
     heatConvExhaustPipeInside(
-      length=exhaustHeatExchanger.l_ExhHex,
-      c=gasolineEngineChp.cHPCombustionEngine.meanCpExh,
-      m_flow=gasolineEngineChp.cHPCombustionEngine.exhaustFlow.m_flow_in),
+      length=exhaustHeatExchanger.l_ExhHex),
     volExhaust(V=exhaustHeatExchanger.VExhHex),
     CHPEngData=CHPEngineModel,
     M_Exh=gasolineEngineChp.cHPCombustionEngine.MM_Exh,
@@ -168,8 +167,10 @@ model CHP_PowerUnitModulateWECHSEL
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator inductionMachine(
-      CHPEngData=CHPEngineModel, useHeat=useGenHea,
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.CHP_StarterGenerator
+    inductionMachine(
+    CHPEngData=CHPEngineModel,
+    useHeat=useGenHea,
     calFac=calFac)
     annotation (Placement(transformation(extent={{-66,12},{-36,42}})));
 
@@ -179,8 +180,8 @@ model CHP_PowerUnitModulateWECHSEL
   Modelica.Fluid.Interfaces.FluidPort_b port_Supply(redeclare package Medium =
         Medium_Coolant)
     annotation (Placement(transformation(extent={{70,-68},{90,-48}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.gasolineEngineChpModulate
-                                                      gasolineEngineChp(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.GasolineEngineChp
+    gasolineEngineChp(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,
@@ -188,26 +189,23 @@ model CHP_PowerUnitModulateWECHSEL
     EngMat=EngMat,
     T_ambient=T_ambient,
     mEng=mEng,
-    cHPCombustionEngine(
-        T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T, T_logEngCool=
-          gasolineEngineChp.T_logEngCool),
+    cHPCombustionEngine(T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T,
+        T_logEngCool=gasolineEngineChp.T_logEngCool),
     engineToCoolant(T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T),
     dInn=dInn,
-    GEngToAmb=GEngToAmb,
-    T_logEngCool=(gasolineEngineChp.cHPControlBus.meaTemInEng +
-        gasolineEngineChp.cHPControlBus.meaTemInEng)/2)
-    annotation (Placement(transformation(rotation=0, extent={{-18,8},{18,44}})));
-  AixLib.Controls.Interfaces.CHPControlBus        sigBusCHP(
+    GEngToAmb=GEngToAmb)                                 annotation (Placement(
+        transformation(rotation=0, extent={{-18,8},{18,44}})));
+  AixLib.Controls.Interfaces.CHPControlBus     sigBusCHP(
     meaThePowChp=Q_Therm,
     calEmiCO2Chp=b_CO2,
     calFueChp=b_e,
     calEtaTheChp=eta_Therm,
     calEtaElChp=eta_El,
-    calFueUtiChp=FueUtiRate)
-    annotation (Placement(transformation(extent={{-28,68},{26,118}}),
-        iconTransformation(extent={{-28,68},{26,118}})));
+    calFueUtiChp=FueUtiRate) annotation (Placement(transformation(extent={{-28,68},
+            {26,118}}), iconTransformation(extent={{-28,68},{26,118}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.Submodel_Cooling submodel_Cooling(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.Submodel_Cooling
+    submodel_Cooling(
     sigBus_Cooling(meaTemInEng=submodel_Cooling.senTCooEngIn.T, meaTemOutEng=
           submodel_Cooling.senTCooEngOut.T),
     redeclare package Medium_Coolant = Medium_Coolant,
@@ -258,16 +256,6 @@ equation
       string="",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(sigBusCHP.isOn, inductionMachine.isOn) annotation (Line(
-      points={{-0.865,93.125},{-0.865,60},{-28,60},{-28,34.2},{-37.5,34.2}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(gasolineEngineChp.isOn, inductionMachine.isOn) annotation (Line(
-        points={{-17.82,34.46},{-28,34.46},{-28,34.2},{-37.5,34.2}}, color={255,
-          0,255}));
   connect(port_Supply,submodel_Cooling.port_b)
     annotation (Line(points={{80,-58},{42,-58}}, color={0,127,255}));
   connect(exhaustHeatExchanger.port_b2,submodel_Cooling.port_a)
@@ -298,9 +286,8 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={175,175,175},
           textStyle={TextStyle.Bold},
-          textString="CHP
-physical"),
-        Rectangle(
+          textString="Modular
+CHP"),  Rectangle(
           extent={{-12,6},{12,-36}},
           lineColor={0,0,0},
           fillColor={255,255,255},
@@ -343,4 +330,4 @@ physical"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end CHP_PowerUnitModulateWECHSEL;
+end ModularCHP_PowerUnit;

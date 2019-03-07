@@ -1,6 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
-model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
-  "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
+model ModularCHP "Modular combined heat and power system model"
   import AixLib;
 
   replaceable package Medium_Fuel =
@@ -52,7 +51,8 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
     "Coolant return temperature";
   Modelica.SIunits.Temperature T_Sup=tempSupplyFlow.T
     "Coolant supply temperature";
-  Modelica.SIunits.Power Q_Therm=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit";
+  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
+  Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
   Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
   Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
   Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
@@ -69,47 +69,37 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
   Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
   Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
 
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=60
+  parameter Modelica.SIunits.ThermalConductance GCoolChannel=33
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GCooExhHex=250
+  parameter Modelica.SIunits.ThermalConductance GCooExhHex=400
     "Thermal conductance of the coolant heat exchanger at nominal flow"
     annotation (Dialog(tab="Engine Cooling Circle", group=
           "Calibration Parameters"));
-  parameter Modelica.SIunits.HeatCapacity C_ExhHex=25000
+  parameter Modelica.SIunits.HeatCapacity C_ExhHex=50000
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
       Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Mass Cal_mEng=250
+  parameter Modelica.SIunits.Mass Cal_mEng=0
     "Added engine mass for calibration purposes of the system´s thermal inertia"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Area A_surExhHea=100
     "Surface for exhaust heat transfer"
     annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.35
+  parameter Modelica.SIunits.MassFlowRate m_flowCoo=0.4
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
           "Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Thickness dInn=0.015
+  parameter Modelica.SIunits.Thickness dInn=0.01
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAmb=5
+  parameter Modelica.SIunits.ThermalConductance GEngToAmb=2
     "Thermal conductance from engine housing to the surrounding air"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance G_Amb=5
+  parameter Modelica.SIunits.ThermalConductance G_Amb=10
     "Constant heat transfer coefficient of engine housing to ambient" annotation (Dialog(tab="Engine Cooling Circle",
         group="Calibration Parameters"));
-  parameter Modelica.SIunits.Temperature T_HeaRet=303.15
-    "Constant heating circuit return temperature"
-    annotation (Dialog(tab="Engine Cooling Circle"));
-  Modelica.SIunits.MassFlowRate m_flowHeaCir=if not VolCon then
-  CHPEngineModel.m_floCooNominal else V_flowHeaCir*senDen.d
-    "Nominal mass flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
-  Modelica.SIunits.VolumeFlowRate V_flowHeaCir=volFlowVariation.y/3600
-    "Nominal volume flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Boolean VolCon=true  "Is volume flow rate control used?"
-    annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Boolean ConTec=true
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
@@ -133,15 +123,8 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
     mCool_flow_small=0.005
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  Real timeSimulation=simTime.y
-    "Time of the simulation without the start delay for measurement comparison";
-  Modelica.SIunits.Temperature T_RetCelsius=T_Ret-273.15
-    "Coolant return temperature";
-  Modelica.SIunits.Temperature T_SupCelsius=T_Sup-273.15
-    "Coolant supply temperature";
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_PowerUnitModulateWECHSEL1502
-    cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP_PowerUnit cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     redeclare package Medium_Air = Medium_Air,
     redeclare package Medium_Exhaust = Medium_Exhaust,
@@ -160,8 +143,6 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
     A_surExhHea=A_surExhHea,
     mEng=mEng,
     redeclare package Medium_Coolant = Medium_Coolant,
-    T_CoolRet=tempReturnFlow.T,
-    T_CoolSup=tempSupplyFlow.T,
     G_CooExhHex=GCooExhHex,
     C_ExhHex=C_ExhHex,
     inductionMachine(J_Gen=1, s_til=0.18),
@@ -170,33 +151,6 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
     G_Amb=G_Amb,
     calFac=calFac)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
-  AixLib.Fluid.Movers.FlowControlled_m_flow   coolantPump(
-    m_flow_small=mCool_flow_small,
-    redeclare package Medium = Medium_Coolant,
-    dp_nominal=CHPEngineModel.dp_Coo,
-    allowFlowReversal=allowFlowReversalCoolant,
-    m_flow_nominal=m_flowCoo,
-    addPowerToMedium=false)
-    annotation (Placement(transformation(extent={{-60,-2},{-38,22}})));
-  Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
-    nPorts=1,
-    redeclare package Medium = Medium_Coolant,
-    p=300000,
-    T(displayUnit="K") = T_HeaRet)
-    annotation (Placement(transformation(extent={{-112,0},{-92,20}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort tempCoolantSupply(
-    m_flow_small=mCool_flow_small,
-    redeclare package Medium = Medium_Coolant,
-    m_flow_nominal=m_flowCoo)
-    annotation (Placement(transformation(extent={{40,2},{56,18}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort tempCoolantReturn(
-    m_flow_small=mCool_flow_small,
-    redeclare package Medium = Medium_Coolant,
-    m_flow_nominal=m_flowCoo)
-    annotation (Placement(transformation(extent={{-40,-48},{-56,-32}})));
-  Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if
-        onOff_ControllerCHP.pumpControl.y then m_flowCoo else mCool_flow_small)
-    annotation (Placement(transformation(extent={{-80,22},{-60,42}})));
 
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness             coolantHex(
     allowFlowReversal1=allowFlowReversalCoolant,
@@ -211,105 +165,46 @@ model CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed
     dp2_nominal(displayUnit="kPa") = 10000,
     eps=0.9)
     annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
-  Modelica.Fluid.Sources.MassFlowSource_T heatingReturnFlow(
-    use_T_in=true,
-    redeclare package Medium = Medium_HeatingCircuit,
-    nPorts=1,
-    use_m_flow_in=true)
-    annotation (Placement(transformation(extent={{-110,-74},{-90,-54}})));
-  Modelica.Fluid.Sources.FixedBoundary heatingSupplyFlow(
-                               nPorts=1, redeclare package Medium =
-        Medium_HeatingCircuit)
-    annotation (Placement(transformation(extent={{110,-74},{90,-54}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempReturnFlow(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
-    annotation (Placement(transformation(extent={{-46,-72},{-30,-56}})));
+    annotation (Placement(transformation(extent={{-58,-72},{-42,-56}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort tempSupplyFlow(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
-    annotation (Placement(transformation(extent={{40,-72},{56,-56}})));
+    annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
 
-  Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
-    annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.OnOff_ControllerCHPTests2702
-    onOff_ControllerCHP(
-    CHPEngineModel=CHPEngineModel,
-    startTimeChp=0,
-    modulationFactorControl(table=[0.0,0.61; 108000,0.61])) annotation (
-      Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
-  AixLib.Fluid.Sensors.DensityTwoPort senDen(
-    m_flow_small=mCool_flow_small,
-    m_flow_nominal=CHPEngineModel.m_floCooNominal,
-    redeclare package Medium = Medium_HeatingCircuit)
-    annotation (Placement(transformation(extent={{-74,-74},{-54,-54}})));
-  Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flowHeaCir)
-    annotation (Placement(transformation(extent={{-144,-60},{-124,-40}})));
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_ControllerEasy
+    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600) annotation (
+     Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
 
-  Modelica.Blocks.Sources.TimeTable tempRetVariation(table=[0.0,298.15; 7200,298.15;
-        7200,303.15; 10800,303.15; 10800,308.15; 14400,308.15; 14400,313.15; 18000,
-        313.15; 18000,318.15; 21600,318.15; 21600,298.15; 28800,298.15; 28800,303.15;
-        32400,303.15; 32400,308.15; 36000,308.15; 36000,313.15; 39600,313.15; 39600,
-        318.15; 43200,318.15; 43200,298.15; 50400,298.15; 50400,303.15; 54000,303.15;
-        54000,308.15; 57600,308.15; 57600,313.15; 61200,313.15; 61200,318.15; 64800,
-        318.15; 64800,298.15; 72000,298.15; 72000,303.15; 75600,303.15; 75600,308.15;
-        79200,308.15; 79200,313.15; 82800,313.15; 82800,318.15; 86400,318.15; 86400,
-        298.15; 93600,298.15; 93600,303.15; 97200,303.15; 97200,308.15; 100800,308.15;
-        100800,313.15; 104400,313.15; 104400,318.15; 108000,318.15])
-    annotation (Placement(transformation(extent={{-144,-98},{-124,-78}})));
-  AixLib.Utilities.Time.ModelTime modTim
-    annotation (Placement(transformation(extent={{36,70},{50,84}})));
-  Modelica.Blocks.Math.MultiSum simTime(nu=2, k={1,-1})
-    annotation (Placement(transformation(extent={{70,70},{82,82}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=onOff_ControllerCHP.startTimeChp)
-    annotation (Placement(transformation(extent={{32,84},{50,104}})));
-  Modelica.Blocks.Sources.TimeTable volFlowVariation(table=[0.0,0.25; 21600,0.25;
-        21600,0.3; 43200,0.3; 43200,0.35; 64800,0.35; 64800,0.4; 86400,0.4; 86400,
-        0.45; 108000,0.45])
-    annotation (Placement(transformation(extent={{-144,-32},{-124,-12}})));
+  Modelica.Fluid.Interfaces.FluidPort_a port_Return(redeclare package Medium =
+        Medium_Coolant)
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_Supply(redeclare package Medium =
+        Medium_Coolant)
+    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 equation
-  connect(coolantPump.port_b, cHP_PowerUnit.port_Return) annotation (Line(
-        points={{-38,10},{-28,10},{-28,10.08},{-19.2,10.08}},
-                                                        color={0,127,255}));
-  connect(tempCoolantReturn.port_b, coolantPump.port_a) annotation (Line(points={{-56,-40},
-          {-76,-40},{-76,10},{-60,10}},         color={0,127,255}));
-  connect(fixedPressureLevel.ports[1], coolantPump.port_a) annotation (Line(
-        points={{-92,10},{-60,10}},                 color={0,127,255}));
-  connect(massFlowCoolant.y, coolantPump.m_flow_in)
-    annotation (Line(points={{-59,32},{-49,32},{-49,24.4}},
-                                                         color={0,0,127}));
-  connect(tempCoolantSupply.port_b, coolantHex.port_a1) annotation (Line(points={{56,10},
-          {74,10},{74,-40},{20,-40}},         color={0,127,255}));
-  connect(coolantHex.port_b1, tempCoolantReturn.port_a)
-    annotation (Line(points={{-20,-40},{-40,-40}}, color={0,127,255}));
   connect(coolantHex.port_a2, tempReturnFlow.port_b)
-    annotation (Line(points={{-20,-64},{-30,-64}}, color={0,127,255}));
+    annotation (Line(points={{-20,-64},{-42,-64}}, color={0,127,255}));
   connect(coolantHex.port_b2, tempSupplyFlow.port_a)
-    annotation (Line(points={{20,-64},{40,-64}}, color={0,127,255}));
-  connect(tempSupplyFlow.port_b,heatingSupplyFlow. ports[1])
-    annotation (Line(points={{56,-64},{90,-64}}, color={0,127,255}));
-  connect(cHP_PowerUnit.port_Supply, tempCoolantSupply.port_a) annotation (Line(
-        points={{19.2,10.08},{29.6,10.08},{29.6,10},{40,10}},
-                                                          color={0,127,255}));
-  connect(onOff_ControllerCHP.modularCHPControlBus, cHP_PowerUnit.sigBusCHP)
+    annotation (Line(points={{20,-64},{42,-64}}, color={0,127,255}));
+  connect(ControllerCHP.modularCHPControlBus, cHP_PowerUnit.sigBusCHP)
     annotation (Line(
-      points={{-44,80},{-0.24,80},{-0.24,47.76}},
+      points={{-44,80},{-0.24,80},{-0.24,46.32}},
       color={255,204,51},
       thickness=0.5));
-  connect(heatingReturnFlow.ports[1], senDen.port_a)
-    annotation (Line(points={{-90,-64},{-74,-64}}, color={0,127,255}));
-  connect(tempReturnFlow.port_a, senDen.port_b)
-    annotation (Line(points={{-46,-64},{-54,-64}}, color={0,127,255}));
-  connect(massFlowHeating.y, heatingReturnFlow.m_flow_in) annotation (Line(
-        points={{-123,-50},{-118,-50},{-118,-56},{-110,-56}}, color={0,0,127}));
-  connect(heatingReturnFlow.T_in, tempRetVariation.y) annotation (Line(points={{
-          -112,-60},{-116,-60},{-116,-88},{-123,-88}}, color={0,0,127}));
-  connect(modTim.y,simTime. u[1]) annotation (Line(points={{50.7,77},{62,77},{62,
-          78.1},{70,78.1}}, color={0,0,127}));
-  connect(realExpression.y,simTime. u[2]) annotation (Line(points={{50.9,94},{64,
-          94},{64,73.9},{70,73.9}}, color={0,0,127}));
+  connect(coolantHex.port_b1, cHP_PowerUnit.port_Return) annotation (Line(
+        points={{-20,-40},{-60,-40},{-60,10.08},{-19.2,10.08}}, color={0,127,
+          255}));
+  connect(cHP_PowerUnit.port_Supply, coolantHex.port_a1) annotation (Line(
+        points={{19.2,10.08},{60,10.08},{60,-40},{20,-40}}, color={0,127,255}));
+  connect(tempSupplyFlow.port_b, port_Supply) annotation (Line(points={{58,-64},
+          {90,-64},{90,0},{100,0}}, color={0,127,255}));
+  connect(port_Return, tempReturnFlow.port_a) annotation (Line(points={{-100,0},
+          {-90,0},{-90,-64},{-58,-64}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -327,9 +222,8 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={175,175,175},
           textStyle={TextStyle.Bold},
-          textString="CHP
-physikal"),
-        Rectangle(
+          textString="Modular
+CHP"),  Rectangle(
           extent={{-12,6},{12,-36}},
           lineColor={0,0,0},
           fillColor={255,255,255},
@@ -364,15 +258,19 @@ physikal"),
           points={{-4.5,-13.5},{0,-4},{6,-10},{2,-14},{-4.5,-13.5}},
           lineColor={255,255,170},
           fillColor={255,255,170},
-          fillPattern=FillPattern.Solid)}),                      Diagram(
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-90,0},{-60,0}},
+          color={0,127,255},
+          thickness=1),
+        Line(
+          points={{60,0},{90,0}},
+          color={0,127,255},
+          thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
-<p>Limitations:</p>
-<p>- </p>
-<p>- </p>
-<p><br>Caution: </p>
+<p>Caution: </p>
 <p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
-</html>"),
-experiment(StopTime=108000, Interval=100));
-end CHP_AuswertungDynDresdenWECHSEL_STATISCH_2kW_Closed;
+</html>"));
+end ModularCHP;

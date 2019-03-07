@@ -1,7 +1,7 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
 package SpeedTests
-  model CHP_SpeedComparison
-    "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
+  model ModularCHP_SpeedTest "Speed test example of the modular CHP model"
+    extends Modelica.Icons.Example;
     import AixLib;
 
     replaceable package Medium_Fuel =
@@ -36,8 +36,8 @@ package SpeedTests
       "CHP engine data for calculations"
       annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-    parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
-        Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+    parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData EngMat=
+        AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
       "Thermal engine material data for calculations"
       annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
@@ -230,7 +230,7 @@ package SpeedTests
 
     Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
       annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
-    AixLib.Fluid.BoilerCHP.ModularCHP.SpeedTests.OnOff_ControllerCHPTestsEASY
+    AixLib.Fluid.BoilerCHP.ModularCHP.SpeedTests.OnOff_Controller_ModularCHP_SpeedTest
       onOff_ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600)
       annotation (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
     AixLib.Fluid.Sensors.DensityTwoPort senDen(
@@ -279,73 +279,93 @@ package SpeedTests
       annotation (Line(points={{-46,-64},{-54,-64}}, color={0,127,255}));
     connect(massFlowHeating.y, heatingReturnFlow.m_flow_in) annotation (Line(
           points={{-123,-50},{-118,-50},{-118,-56},{-110,-56}}, color={0,0,127}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
-            extent={{-50,58},{50,18}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={175,175,175},
-            textString="CHP",
-            textStyle={TextStyle.Bold}),
-                                Rectangle(
-            extent={{-60,80},{60,-80}},
-            lineColor={0,0,0},
-            fillPattern=FillPattern.VerticalCylinder,
-            fillColor={170,170,255}),                                       Text(
-            extent={{-50,68},{50,28}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={175,175,175},
-            textStyle={TextStyle.Bold},
-            textString="CHP
-physikal"),
-          Rectangle(
-            extent={{-12,6},{12,-36}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-10,-16},{-10,-36},{-8,-30},{8,-30},{10,-36},{10,-16},{-10,-16}},
-            lineColor={0,0,0},
-            fillColor={215,215,215},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{-2,-26},{4,-32}},
-            lineColor={0,0,0},
-            fillColor={135,135,135},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{-18,-54},{-8,-64}},
-            lineColor={0,0,0},
-            fillColor={135,135,135},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-2,-30},{-14,-54},{-10,-56},{0,-32},{-2,-30}},
-            lineColor={0,0,0},
-            fillColor={135,135,135},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-4.5,-15.5},{-8,-10},{0,4},{6,-4},{10,-4},{8,-8},{8,-12},{5.5,
-                -15.5},{-4.5,-15.5}},
-            lineColor={0,0,0},
-            fillPattern=FillPattern.Sphere,
-            fillColor={255,127,0}),
-          Polygon(
-            points={{-4.5,-13.5},{0,-4},{6,-10},{2,-14},{-4.5,-13.5}},
-            lineColor={255,255,170},
-            fillColor={255,255,170},
-            fillPattern=FillPattern.Solid)}),                      Diagram(
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<p>Limitations:</p>
-<p>- </p>
-<p>- </p>
-<p><br>Caution: </p>
+<h4>Caution: </h4>
 <p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-  end CHP_SpeedComparison;
+  end ModularCHP_SpeedTest;
 
-  model CHPSystemAixLib_SpeedTest "Example that illustrates use of CHP model"
+  model OnOff_Controller_ModularCHP_SpeedTest
+    import AixLib;
+
+    parameter
+      AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
+      CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
+      "CHP engine data for calculations"
+      annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
+
+    parameter Modelica.SIunits.Time startTimeChp=0
+      "Start time for discontinous simulation tests to heat the Chp unit up to the prescribed return temperature";
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702
+      modularCHPControlBus annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={100,0})));
+    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=86400)
+                 annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-82,2})));
+    Modelica.Blocks.Sources.RealExpression realExpression(y=0.5)
+      annotation (Placement(transformation(extent={{-8,-46},{12,-26}})));
+    Modelica.Blocks.Logical.Timer timerIsOff
+      annotation (Placement(transformation(extent={{-26,62},{-12,76}})));
+    Modelica.Blocks.Logical.Not not1
+      annotation (Placement(transformation(extent={{-52,62},{-38,76}})));
+    Modelica.Blocks.Logical.LessThreshold declarationTime(threshold=7200)
+      annotation (Placement(transformation(extent={{0,62},{14,76}})));
+    Modelica.Blocks.Logical.Or pumpControl
+      annotation (Placement(transformation(extent={{28,54},{44,70}})));
+  equation
+    connect(realExpression.y, modularCHPControlBus.modFac) annotation (Line(
+          points={{13,-36},{52,-36},{52,-0.1},{100.1,-0.1}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}}));
+    connect(timerIsOff.u,not1. y)
+      annotation (Line(points={{-27.4,69},{-37.3,69}}, color={255,0,255}));
+    connect(timerIsOff.y,declarationTime. u)
+      annotation (Line(points={{-11.3,69},{-1.4,69}},
+                                                    color={0,0,127}));
+    connect(declarationTime.y,pumpControl. u1) annotation (Line(points={{14.7,69},
+            {18,69},{18,62},{26.4,62}},
+                                      color={255,0,255}));
+    connect(pumpControl.u2,not1. u) annotation (Line(points={{26.4,55.6},{-60,
+            55.6},{-60,69},{-53.4,69}},
+                                      color={255,0,255}));
+    connect(booleanOnOffCHP.y, not1.u) annotation (Line(points={{-71,2},{-66,2},
+            {-66,62},{-60,62},{-60,69},{-53.4,69}}, color={255,0,255}));
+    connect(booleanOnOffCHP.y, modularCHPControlBus.isOn) annotation (Line(
+          points={{-71,2},{12,2},{12,-0.1},{100.1,-0.1}}, color={255,0,255}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}}));
+    connect(pumpControl.y, modularCHPControlBus.isOnPump) annotation (Line(
+          points={{44.8,62},{64,62},{64,-0.1},{100.1,-0.1}}, color={255,0,255}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}}));
+    annotation (Icon(graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+            extent={{-86,18},{82,-8}},
+            lineColor={28,108,200},
+            textString="onOff
+Controller
+CHP")}));
+  end OnOff_Controller_ModularCHP_SpeedTest;
+
+  model GeneralCHP_SpeedTest "Speed test example of the general CHP model"
     extends Modelica.Icons.Example;
 
     CHP combinedHeatPower(
@@ -419,9 +439,9 @@ documentation.</li>
 </ul>
 </html>"),
   experiment(StopTime=35000, Interval=60));
-  end CHPSystemAixLib_SpeedTest;
+  end GeneralCHP_SpeedTest;
 
-  model FastHVAC_CHP_Test
+  model FastHVAC_CHP_SpeedTest "Speed test example of the FastHVAC CHP model"
    extends Modelica.Icons.Example;
     FastHVAC.Components.Pumps.FluidSource fluidSource
       annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
@@ -501,82 +521,11 @@ documentation.</li>
   </li>
 </ul>
 </html>"));
-  end FastHVAC_CHP_Test;
+  end FastHVAC_CHP_SpeedTest;
 
-  model OnOff_ControllerCHPTestsEASY
-
-    parameter
-      AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
-      CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
-      "CHP engine data for calculations"
-      annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
-    parameter Modelica.SIunits.Time startTimeChp=0
-      "Start time for discontinous simulation tests to heat the Chp unit up to the prescribed return temperature";
-    Controls.Interfaces.CHPControlBus modularCHPControlBus
-      annotation (Placement(
-          transformation(
-          extent={{-20,-20},{20,20}},
-          rotation=270,
-          origin={100,0})));
-    Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP(width=50, period=86400)
-                 annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=0,
-          origin={-82,2})));
-    Modelica.Blocks.Sources.RealExpression realExpression(y=0.5)
-      annotation (Placement(transformation(extent={{-8,-46},{12,-26}})));
-    Modelica.Blocks.Logical.Timer timerIsOff
-      annotation (Placement(transformation(extent={{-26,62},{-12,76}})));
-    Modelica.Blocks.Logical.Not not1
-      annotation (Placement(transformation(extent={{-52,62},{-38,76}})));
-    Modelica.Blocks.Logical.LessThreshold declarationTime(threshold=7200)
-      annotation (Placement(transformation(extent={{0,62},{14,76}})));
-    Modelica.Blocks.Logical.Or pumpControl
-      annotation (Placement(transformation(extent={{28,54},{44,70}})));
-  equation
-    connect(realExpression.y, modularCHPControlBus.modFac) annotation (Line(
-          points={{13,-36},{52,-36},{52,-0.1},{100.1,-0.1}}, color={0,0,127}),
-        Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
-    connect(timerIsOff.u,not1. y)
-      annotation (Line(points={{-27.4,69},{-37.3,69}}, color={255,0,255}));
-    connect(timerIsOff.y,declarationTime. u)
-      annotation (Line(points={{-11.3,69},{-1.4,69}},
-                                                    color={0,0,127}));
-    connect(declarationTime.y,pumpControl. u1) annotation (Line(points={{14.7,69},
-            {18,69},{18,62},{26.4,62}},
-                                      color={255,0,255}));
-    connect(pumpControl.u2,not1. u) annotation (Line(points={{26.4,55.6},{-60,
-            55.6},{-60,69},{-53.4,69}},
-                                      color={255,0,255}));
-    connect(booleanOnOffCHP.y, not1.u) annotation (Line(points={{-71,2},{-66,2},
-            {-66,62},{-60,62},{-60,69},{-53.4,69}}, color={255,0,255}));
-    connect(booleanOnOffCHP.y, modularCHPControlBus.isOn) annotation (Line(
-          points={{-71,2},{12,2},{12,-0.1},{100.1,-0.1}}, color={255,0,255}),
-        Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
-    connect(pumpControl.y, modularCHPControlBus.isOnPump) annotation (Line(
-          points={{44.8,62},{64,62},{64,-0.1},{100.1,-0.1}}, color={255,0,255}),
-        Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
-    annotation (Icon(graphics={
-        Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid), Text(
-            extent={{-86,18},{82,-8}},
-            lineColor={28,108,200},
-            textString="onOff
-Controller
-CHP")}));
-  end OnOff_ControllerCHPTestsEASY;
+  annotation (Documentation(info="<html>
+<p>The following examples were used for an easy comparison of the chp model simulation performances by changing the amount of On-/Off-signals per day. It was carried out using the example of the Kirsch L4.12 and experimental measurement data. </p>
+<p>Further information (non-public) is available in the Bachelor thesis: </p>
+<p>Development of modular simulation models for Combined Heat and Power systems (CHP)</p>
+</html>"));
 end SpeedTests;

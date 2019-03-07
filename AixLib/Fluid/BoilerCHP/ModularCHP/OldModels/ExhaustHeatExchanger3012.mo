@@ -166,7 +166,8 @@ model ExhaustHeatExchanger3012
     Modelica.Media.Interfaces.PartialMedium annotation (
       __Dymola_choicesAllMatching=true);
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.heatFromExhaustGas heatFromExhaustGas(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.heatFromExhaustGas
+    heatFromExhaustGas(
     T1_start=T1_start,
     p1_start=p1_start,
     d_iExh=d_iExh,

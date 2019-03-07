@@ -1,10 +1,4 @@
 BoilerSystem
 CHPSystem
 HeatGeneratorNoControllSystem
-ModularCHP_Engine
-ModularCHP_EngineStartStop
-ModularCHP_ExhaustHeatExchanger
-ModularCHP_PowerUnit
-ModularCHP_StarterGenerator
-ModularCHP_ExhaustHeatExchangerTESTSIMPLE
 ModularCHP_PowerUnitToHeating

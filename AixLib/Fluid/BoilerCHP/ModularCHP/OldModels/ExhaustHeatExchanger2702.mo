@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ExhaustHeatExchanger
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger2702
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -278,12 +278,11 @@ model ExhaustHeatExchanger
     annotation (Placement(transformation(extent={{126,-32},{106,-12}})));
   Modelica.Blocks.Math.MultiSum multiSum(nu=2)
     annotation (Placement(transformation(extent={{86,-18},{74,-6}})));
-  AixLib.Controls.Interfaces.CHPControlBus cHPControlBus(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 cHPControlBus(
     meaTemExhOutHex=senTExhCold.T,
     meaTemExhInHex=senTExhHot.T,
     meaThePowOutHex=pipeCoolant.heatPort_outside.Q_flow,
-    meaMasFloConHex=m_ConH2OExh,
-    meaTemSupChp=senTCoolHot.T) annotation (Placement(transformation(extent={{
+    meaMasFloConHex=m_ConH2OExh) annotation (Placement(transformation(extent={{
             -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
 equation
 //Calculation of water condensation and its usable latent heat
@@ -395,4 +394,4 @@ equation
 <p>-&gt; Determination of the enthalpy of vaporization using an empirical formula from tabular data</p>
 <p>-&gt; Assumption: The latent heat flow is is added to the convective heat flow to the capacity of the exhaust heat exchanger</p>
 </html>"));
-end ExhaustHeatExchanger;
+end ExhaustHeatExchanger2702;

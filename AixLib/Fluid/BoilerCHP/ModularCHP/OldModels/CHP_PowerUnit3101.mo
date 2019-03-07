@@ -30,8 +30,8 @@ model CHP_PowerUnit3101
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData EngMat=
+      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
@@ -102,7 +102,8 @@ model CHP_PowerUnit3101
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-64,-8},{-80,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.ExhaustHeatExchanger exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ExhaustHeatExchanger2702
+    exhaustHeatExchanger(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -155,8 +156,8 @@ model CHP_PowerUnit3101
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator inductionMachine(
-      CHPEngData=CHPEngineModel, useHeat=useGenHea)
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_StarterGenerator2702
+    inductionMachine(CHPEngData=CHPEngineModel, useHeat=useGenHea)
     annotation (Placement(transformation(extent={{-66,12},{-36,42}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_Return(redeclare package Medium =
@@ -184,7 +185,7 @@ model CHP_PowerUnit3101
         T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T),
     engineToCoolant(T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T))
     annotation (Placement(transformation(rotation=0, extent={{-18,8},{18,44}})));
-  AixLib.Controls.Interfaces.CHPControlBus        sigBusCHP(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 sigBusCHP(
     meaThePowChp=Q_Therm,
     meaTemRetChp=senTCooRet.T,
     calEmiCO2Chp=b_CO2,

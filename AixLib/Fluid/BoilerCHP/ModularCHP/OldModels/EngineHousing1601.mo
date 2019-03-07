@@ -12,10 +12,11 @@ class EngineHousing1601 "Engine housing as a simple two layer wall."
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Calibration properties"));
 
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMatData=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData
+    EngMatData=AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations (most common is cast iron)"
-    annotation (choicesAllMatching=true, Dialog(tab="Structure", group="Material Properties"));
+    annotation (choicesAllMatching=true, Dialog(tab="Structure", group=
+          "Material Properties"));
 
   constant Modelica.SIunits.ThermalConductivity lambda=EngMatData.lambda
     "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
@@ -119,19 +120,21 @@ public
         origin={-10,0})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow actualHeatFlowEngine
     annotation (Placement(transformation(extent={{-56,-58},{-36,-38}})));
-  CylToInnerWall cylToInnerWall(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing_CylToInnerWall
+    cylToInnerWall(
     GInnWall=GInnWall,
     dInn=dInn,
     lambda=lambda,
     A_WInn=A_WInn,
-    z=z) annotation (Placement(transformation(rotation=0, extent={{-84,-58},{
-            -64,-38}})));
+    z=z) annotation (Placement(transformation(rotation=0, extent={{-84,-58},{-64,
+            -38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CoolingCircle
     annotation (Placement(transformation(extent={{88,-12},{112,12}}),
         iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor engHeatToCoolant
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.engineBlock engineBlock(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing_EngineBlock
+    engineBlock(
     CEngBlo=CEngBlo,
     GInnWall=GInnWall,
     GEngBlo=GEngBlo,
@@ -146,9 +149,8 @@ public
     mEng=mEng,
     mEngWall=mEngWall,
     GEngToAmb=GEngToAmb,
-    outerEngineBlock(T(start=T_Amb)))
-                         annotation (Placement(transformation(rotation=0,
-          extent={{-6,-46},{14,-26}})));
+    outerEngineBlock(T(start=T_Amb))) annotation (Placement(transformation(
+          rotation=0, extent={{-6,-46},{14,-26}})));
 
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
     annotation (Placement(transformation(extent={{-30,10},{-48,30}})));

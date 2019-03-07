@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHPCombustionEngineModulate
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHPCombustionEngineModulate2702
   "Internal combustion engine model for CHP-applications."
   import AixLib;
 
@@ -114,8 +114,8 @@ model CHPCombustionEngineModulate
   Modelica.SIunits.Pressure p_me = (modFac*p_mi)-p_mf "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
-        Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
+      = Medium3)
     annotation (Placement(transformation(extent={{108,-10},{88,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
     use_m_flow_in=true,
@@ -280,4 +280,4 @@ for i in 1:size(n_ComExh, 1) loop
 <p>- Based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) - Is dependent on speed and temperature of the engine</p>
 <p>-&gt; Distinction between SI and DI engine - Other engine types are not considered!</p>
 </html>"));
-end CHPCombustionEngineModulate;
+end CHPCombustionEngineModulate2702;

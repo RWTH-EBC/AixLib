@@ -1,6 +1,5 @@
-within AixLib.Controls.Interfaces;
-expandable connector CHPControlBus
-  "Connector used for modular CHP models"
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+expandable connector CHPControlBus2702 "Connector used for modular CHP models"
   extends Modelica.Icons.SignalBus;
 
   type RotationSpeed=Real(final unit="1/s", min=0);
@@ -24,22 +23,15 @@ expandable connector CHPControlBus
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
   Modelica.SIunits.MassFlowRate meaMasFloFueEng
-    "Fuel consumption at engines' inlets"
+    "Calculated fuel consumption at engines' inlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
   Modelica.SIunits.MassFlowRate meaMasFloAirEng
-    "Air consumption at engines' inlets"
+    "Calculated air consumption at engines' inlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
   Modelica.SIunits.MassFlowRate meaMasFloCO2Eng
-    "CO2 mass flow rates at engines' exhaust outlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Combustion Engine"));
-  Modelica.SIunits.SpecificHeatCapacity calMeaCpExh
-    "Calculated mean specific heat capacity of the exhaust gas flow"
-    annotation (Dialog(tab="Operation point", group="Combustion Engine"));
-  Modelica.SIunits.Temperature meaTemInEng
-    "Measured coolant temperature at engines' inlets"
+    "Measured CO2 mass flow rates at engines' exhaust outlets"
     annotation(Dialog(tab="Operation point",
                                          group="Combustion Engine"));
   Modelica.SIunits.Temperature meaTemOutEng
@@ -84,14 +76,6 @@ expandable connector CHPControlBus
     "Measured condensed water mass flow rates at exhaust heat exchangers' outlets"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemInHex
-    "Measured coolant temperature at exhaust heat exchangers' inlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemOutHex
-    "Measured coolant temperature at exhaust heat exchangers' outlets"
-    annotation(Dialog(tab="Operation point",
-                                         group="Exhaust Heat Exchanger"));
 
   // Definition of variables describing CHP units in general
   //
@@ -157,4 +141,4 @@ expandable connector CHPControlBus
 <p>Typically, a Chp unit consists of three main components: Combustion engine, a exhaust heat exchanger and a generator. The controlled parameters are listed below. </p>
 </html>"));
 
-end CHPControlBus;
+end CHPControlBus2702;

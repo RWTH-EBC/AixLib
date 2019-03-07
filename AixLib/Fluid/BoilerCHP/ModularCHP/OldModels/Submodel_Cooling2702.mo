@@ -1,5 +1,6 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model Submodel_Cooling
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model Submodel_Cooling2702
+  import AixLib;
   Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngIn(
     redeclare package Medium = Medium_Coolant,
     allowFlowReversal=allowFlowReversalCoolant,
@@ -67,9 +68,9 @@ model Submodel_Cooling
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium_Coolant) annotation (Placement(transformation(rotation=0, extent=
            {{90,-10},{110,10}})));
-  Controls.Interfaces.CHPControlBus sigBus_Cooling annotation (Placement(
-        transformation(extent={{-28,26},{28,80}}), iconTransformation(extent={{-28,
-            26},{30,82}})));
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 sigBus_Cooling
+    annotation (Placement(transformation(extent={{-28,26},{28,80}}),
+        iconTransformation(extent={{-28,26},{30,82}})));
   Movers.FlowControlled_m_flow                coolantPump(
     m_flow_small=mCool_flow_small,
     redeclare package Medium = Medium_Coolant,
@@ -127,4 +128,4 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255},
           textString="%name")}));
-end Submodel_Cooling;
+end Submodel_Cooling2702;

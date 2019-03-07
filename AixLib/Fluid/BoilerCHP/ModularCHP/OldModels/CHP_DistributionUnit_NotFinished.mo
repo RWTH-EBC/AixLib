@@ -1,7 +1,6 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_DistributionUnit
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_DistributionUnit_NotFinished
   "Distribution unit model for CHP power units with heat storage and heating supply and return connection"
-
 
   replaceable package Medium_Heating =
       Modelica.Media.Water.ConstantPropertyLiquidWater          constrainedby
@@ -24,9 +23,6 @@ model CHP_DistributionUnit
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flowHeaCir=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate inside the heating circuit" annotation (Dialog(tab="Engine Cooling Circle"));
-
-
-
 
   HeatExchangers.ConstantEffectiveness hex_DistributionUnit(
     redeclare package Medium1 = Medium_Heating,
@@ -68,8 +64,8 @@ model CHP_DistributionUnit
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,-10})));
-  Movers.FlowControlled_m_flow pump_SecondaryCircuit(redeclare package Medium =
-        Medium_Heating) annotation (Placement(transformation(
+  Movers.FlowControlled_m_flow pump_SecondaryCircuit(redeclare package Medium
+      = Medium_Heating) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-50,-40})));
@@ -171,4 +167,4 @@ equation
     annotation (Line(points={{-50.4,40},{-74,40}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end CHP_DistributionUnit;
+end CHP_DistributionUnit_NotFinished;

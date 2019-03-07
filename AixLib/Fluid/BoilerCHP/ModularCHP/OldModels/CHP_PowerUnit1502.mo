@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
-model CHP_PowerUnitModulateWECHSEL1502
+model CHP_PowerUnit1502
   "Model of engine combustion, its power output and heat transfer to the cooling circle and ambient"
   import AixLib;
 
@@ -51,7 +51,7 @@ model CHP_PowerUnitModulateWECHSEL1502
     alpha_i=GCoolChannel/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
     diameter=CHPEngineModel.dCoo,
     allowFlowReversal=allowFlowReversalCoolant)
-    annotation (Placement(transformation(extent={{14,-70},{38,-46}})));
+    annotation (Placement(transformation(extent={{-30,-70},{-6,-46}})));
 
   inner Modelica.Fluid.System system(p_ambient=p_ambient, T_ambient=T_ambient)
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
@@ -183,10 +183,7 @@ model CHP_PowerUnitModulateWECHSEL1502
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
   AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_StarterGenerator2702
-    inductionMachine(
-    CHPEngData=CHPEngineModel,
-    useHeat=useGenHea,
-    calFac=calFac)
+    inductionMachine(CHPEngData=CHPEngineModel, useHeat=useGenHea)
     annotation (Placement(transformation(extent={{-66,12},{-36,42}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_Return(redeclare package Medium =
@@ -207,10 +204,10 @@ model CHP_PowerUnitModulateWECHSEL1502
     cHPCombustionEngine(T_logEngCool=exhaustHeatExchanger.senTCoolCold.T,
         T_ExhCHPOut=exhaustHeatExchanger.senTExhCold.T),
     engineToCoolant(T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T),
+    T_logEngCool=(senTCooRet.T + senTCooEngOut.T)/2,
     dInn=dInn,
-    GEngToAmb=GEngToAmb,
-    T_logEngCool=(senTCooEngIn.T + senTCooEngOut.T)/2) annotation (Placement(
-        transformation(rotation=0, extent={{-18,8},{18,44}})));
+    GEngToAmb=GEngToAmb) annotation (Placement(transformation(rotation=0,
+          extent={{-18,8},{18,44}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 sigBusCHP(
     meaThePowChp=Q_Therm,
     meaTemRetChp=senTCooRet.T,
@@ -225,29 +222,21 @@ model CHP_PowerUnitModulateWECHSEL1502
     allowFlowReversal=allowFlowReversalCoolant,
     m_flow_nominal=m_flow,
     m_flow_small=mCool_flow_small)
-    annotation (Placement(transformation(extent={{-60,-66},{-44,-50}})));
-
-  Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngIn(
-    redeclare package Medium = Medium_Coolant,
-    allowFlowReversal=allowFlowReversalCoolant,
-    m_flow_nominal=m_flow,
-    m_flow_small=mCool_flow_small) annotation (Placement(transformation(
-        extent={{-8,-8},{8,8}},
-        rotation=270,
-        origin={0,-34})));
+    annotation (Placement(transformation(extent={{-58,-66},{-42,-50}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngOut(
     redeclare package Medium = Medium_Coolant,
     allowFlowReversal=allowFlowReversalCoolant,
     m_flow_nominal=m_flow,
     m_flow_small=mCool_flow_small)
-    annotation (Placement(transformation(extent={{52,-66},{68,-50}})));
-
+    annotation (Placement(transformation(extent={{4,-66},{20,-50}})));
 equation
   connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1]) annotation (
       Line(points={{68,26.4},{80,26.4},{80,40},{92,40}},
                                                        color={0,127,255}));
   connect(ambientTemperature.port, heatFlowSensor.port_b)
     annotation (Line(points={{-92,0},{-80,0}}, color={191,0,0}));
+  connect(port_Supply, exhaustHeatExchanger.port_b2) annotation (Line(points={{80,-58},
+          {40,-58},{40,9.6}},                 color={0,127,255}));
   connect(inductionMachine.flange_a, gasolineEngineChp.flange_a) annotation (
       Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,0}));
   connect(gasolineEngineChp.port_Exhaust, exhaustHeatExchanger.port_a1)
@@ -257,12 +246,14 @@ equation
   connect(gasolineEngineChp.port_Ambient, heatFlowSensor.port_a)
     annotation (Line(points={{0,9.8},{0,0},{-64,0}},    color={191,0,0}));
   connect(gasolineEngineChp.port_CoolingCircle, engineHeatTransfer.heatPort_outside)
-    annotation (Line(points={{18,10.16},{18,-18},{27.92,-18},{27.92,-51.28}},
+    annotation (Line(points={{18,10.16},{18,-18},{-16.08,-18},{-16.08,-51.28}},
         color={191,0,0}));
   connect(exhaustHeatExchanger.port_Ambient, heatFlowSensor.port_a) annotation (
      Line(points={{40,18},{30,18},{30,0},{-64,0}}, color={191,0,0}));
   connect(port_Return, senTCooRet.port_a)
-    annotation (Line(points={{-80,-58},{-60,-58}}, color={0,127,255}));
+    annotation (Line(points={{-80,-58},{-58,-58}}, color={0,127,255}));
+  connect(engineHeatTransfer.port_a, senTCooRet.port_b)
+    annotation (Line(points={{-30.48,-58},{-42,-58}}, color={0,127,255}));
   connect(inductionMachine.cHPControlBus, sigBusCHP) annotation (Line(
       points={{-62.4,27},{-70,27},{-70,99},{-1,99}},
       color={255,204,51},
@@ -294,18 +285,11 @@ equation
   connect(gasolineEngineChp.isOn, inductionMachine.isOn) annotation (Line(
         points={{-17.82,34.46},{-28,34.46},{-28,34.2},{-37.5,34.2}}, color={255,
           0,255}));
-  connect(senTCooRet.port_b, exhaustHeatExchanger.port_a2) annotation (Line(
-        points={{-44,-58},{-12,-58},{-12,-82},{108,-82},{108,9.6},{68,9.6}},
-        color={0,127,255}));
   connect(engineHeatTransfer.port_b, senTCooEngOut.port_a)
-    annotation (Line(points={{38.48,-58},{52,-58}}, color={0,127,255}));
-  connect(port_Supply, senTCooEngOut.port_b)
-    annotation (Line(points={{80,-58},{68,-58}}, color={0,127,255}));
-  connect(exhaustHeatExchanger.port_b2, senTCooEngIn.port_a) annotation (Line(
-        points={{40,9.6},{38,9.6},{38,10},{36,10},{36,-12},{0,-12},{0,-26}},
-        color={0,127,255}));
-  connect(senTCooEngIn.port_b, engineHeatTransfer.port_a)
-    annotation (Line(points={{0,-42},{0,-58},{13.52,-58}}, color={0,127,255}));
+    annotation (Line(points={{-5.52,-58},{4,-58}}, color={0,127,255}));
+  connect(senTCooEngOut.port_b, exhaustHeatExchanger.port_a2) annotation (Line(
+        points={{20,-58},{26,-58},{26,-24},{80,-24},{80,9.6},{68,9.6}}, color={0,
+          127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -368,4 +352,4 @@ physical"),
 <p>- Transmissions between generator and engine are not considered </p>
 <p>- </p>
 </html>"));
-end CHP_PowerUnitModulateWECHSEL1502;
+end CHP_PowerUnit1502;

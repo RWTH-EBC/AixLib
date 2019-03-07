@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.Examples;
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
 model ModularCHP_Engine
   "Example that illustrates use of modular CHP engine submodel"
   import AixLib;
@@ -52,7 +52,7 @@ model ModularCHP_Engine
     annotation (Placement(transformation(extent={{108,58},{88,78}})));
   inner Modelica.Fluid.System system(p_ambient=p_ambient, T_ambient=T_ambient)
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.CHP_StarterGenerator
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHP_StarterGenerator2702
     cHP_ASMGeneratorCURRENT(inertia(w(fixed=false)))
     annotation (Placement(transformation(extent={{-52,58},{-30,80}})));
   Modelica.Blocks.Sources.BooleanPulse onOffSignal(           startTime=0, period=

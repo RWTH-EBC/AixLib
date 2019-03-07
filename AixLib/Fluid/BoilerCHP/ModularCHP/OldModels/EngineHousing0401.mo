@@ -137,19 +137,21 @@ public
   Modelica.Fluid.Interfaces.FluidPort_b port_EngineOut(redeclare package Medium =
         Medium3) annotation (Placement(transformation(extent={{70,50},{90,70}}),
         iconTransformation(extent={{70,50},{90,70}})));
-  CylToInnerWall cylToInnerWall(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing_CylToInnerWall
+    cylToInnerWall(
     GInnWall=GInnWall,
     dInn=dInn,
     lambda=lambda,
     A_WInn=A_WInn,
-    z=z) annotation (Placement(transformation(rotation=0, extent={{-84,-58},{
-            -64,-38}})));
+    z=z) annotation (Placement(transformation(rotation=0, extent={{-84,-58},{-64,
+            -38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CoolingCircle
     annotation (Placement(transformation(extent={{88,-12},{112,12}}),
         iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor engHeatToCoolant
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.engineBlock engineBlock(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing_EngineBlock
+    engineBlock(
     CEngBlo=CEngBlo,
     GInnWall=GInnWall,
     GEngBlo=GEngBlo,

@@ -1,6 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ASM_CHPGenerator
-  "AsynchronousInductionMachineSquirrelCage for CHP"
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ASM_CHPGenerator "AsynchronousInductionMachineSquirrelCage for CHP"
   import ModularCHP;
 
   constant Integer m=3 "Number of phases";

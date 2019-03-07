@@ -1,5 +1,5 @@
-within AixLib.Controls.Interfaces;
-expandable connector ModularCHPControlBus
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+expandable connector ModularCHPControlBus0302
   "Connector used for modular CHP models"
   extends Modelica.Icons.SignalBus;
 
@@ -134,7 +134,6 @@ expandable connector ModularCHPControlBus
     "Indicator if Chp unit is in operation or not (true=On, false=Off)"
   annotation (Dialog(tab="Operation point", group="CHP Unit"));
 
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -184,4 +183,4 @@ Three different sensors are proposed at source's and sink's sides:
 </ol>
 </html>"));
 
-end ModularCHPControlBus;
+end ModularCHPControlBus0302;

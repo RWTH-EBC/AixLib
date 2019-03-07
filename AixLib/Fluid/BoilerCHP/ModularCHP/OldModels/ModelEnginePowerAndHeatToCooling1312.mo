@@ -157,9 +157,9 @@ model ModelEnginePowerAndHeatToCooling1312
     dp_CooExhHex=CHPEngineModel.dp_Coo)
     annotation (Placement(transformation(extent={{48,-12},{72,12}})));
    // VExhHex = CHPEngineModel.VExhHex,
-  AixLib.Fluid.BoilerCHP.ModularCHP.ASM_CHPGenerator aSM_CHPGenerator(
-      loadInertia(w(fixed=false, start=0)))
-    annotation (Placement(transformation(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ASM_CHPGenerator aSM_CHPGenerator(
+      loadInertia(w(fixed=false, start=0))) annotation (Placement(
+        transformation(
         extent={{-14,-14},{14,14}},
         rotation=270,
         origin={-26,88})));

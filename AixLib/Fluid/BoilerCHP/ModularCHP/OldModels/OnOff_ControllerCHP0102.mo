@@ -1,5 +1,6 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model OnOff_ControllerCHPModulate
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model OnOff_ControllerCHP0102
+  import AixLib;
 
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
@@ -22,9 +23,8 @@ model OnOff_ControllerCHPModulate
     annotation (Placement(transformation(extent={{20,0},{34,14}})));
   Modelica.Blocks.Logical.Or pumpControl
     annotation (Placement(transformation(extent={{48,-8},{64,8}})));
-  Controls.Interfaces.CHPControlBus modularCHPControlBus
-    annotation (Placement(
-        transformation(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702
+    modularCHPControlBus annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={100,0})));
@@ -101,4 +101,4 @@ equation
           textString="onOff
 Controller
 CHP")}));
-end OnOff_ControllerCHPModulate;
+end OnOff_ControllerCHP0102;

@@ -35,8 +35,8 @@ model CHP_AuswertungDynDresdenWECHSEL1502
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
-  parameter Fluid.BoilerCHP.ModularCHP.EngineMaterialData EngMat=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterialData EngMat=
+      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
 
@@ -230,9 +230,8 @@ model CHP_AuswertungDynDresdenWECHSEL1502
 
   Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
     annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.OnOff_ControllerCHPTests
-                                                        onOff_ControllerCHP(
-      CHPEngineModel=CHPEngineModel, startTimeChp=3600)
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.OnOff_ControllerCHPTests2702
+    onOff_ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600)
     annotation (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,

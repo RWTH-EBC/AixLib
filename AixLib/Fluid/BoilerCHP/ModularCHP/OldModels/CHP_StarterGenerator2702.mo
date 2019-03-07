@@ -1,6 +1,7 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model CHP_StarterGenerator
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_StarterGenerator2702
   "Model of a general induction machine working as a starter generator"
+  import AixLib;
   extends Modelica.Electrical.Machines.Icons.TransientMachine;
 
   parameter
@@ -100,7 +101,7 @@ model CHP_StarterGenerator
       ratio=gearRatio)
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
-  Controls.Interfaces.CHPControlBus cHPControlBus(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 cHPControlBus(
     meaElPowGen=P_E,
     meaCurGen=I_1,
     meaTorGen=M,
@@ -169,4 +170,4 @@ else
           lineColor={28,108,200},
           textStyle={TextStyle.Bold},
           textString="%name")}));
-end CHP_StarterGenerator;
+end CHP_StarterGenerator2702;

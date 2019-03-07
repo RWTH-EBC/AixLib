@@ -1,7 +1,8 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
-model gasolineEngineChpModulate
-  CHPCombustionEngineModulate
-                      cHPCombustionEngine(
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model gasolineEngineChpModulate2702
+  import AixLib;
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPCombustionEngineModulate2702
+    cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
     redeclare package Medium3 = Medium_Exhaust,
@@ -12,7 +13,8 @@ model gasolineEngineChpModulate
     T_ExhCHPOut=T_ExhCHPOut,
     modFac=modFac)
     annotation (Placement(transformation(extent={{-30,0},{30,56}})));
-  EngineHousing engineToCoolant(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing
+    engineToCoolant(
     z=CHPEngineModel.z,
     eps=CHPEngineModel.eps,
     m_Exh=cHPCombustionEngine.m_Exh,
@@ -52,8 +54,8 @@ model gasolineEngineChpModulate
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter EngineMaterialData EngMat=
-      Fluid.BoilerCHP.ModularCHP.EngineMaterial_CastIron()
+  parameter Data.ModularCHP.EngineMaterialData EngMat=
+      Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
   parameter Modelica.SIunits.Temperature T_ambient=298.15
@@ -81,8 +83,8 @@ parameter Modelica.SIunits.Thickness dInn=0.005
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a annotation (
       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
         iconTransformation(extent={{-114,-6},{-94,14}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
-        Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent={{92,-8},
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
+      = Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent={{92,-8},
             {112,12}}),         iconTransformation(extent={{92,-8},{112,12}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient annotation (
       Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),
@@ -90,7 +92,7 @@ parameter Modelica.SIunits.Thickness dInn=0.005
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CoolingCircle
     annotation (Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
         iconTransformation(extent={{90,-98},{110,-78}})));
-  Controls.Interfaces.CHPControlBus cHPControlBus(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 cHPControlBus(
     meaRotEng=cHPCombustionEngine.nEng,
     meaFuePowEng=cHPCombustionEngine.P_Fue,
     meaThePowEng=cHPCombustionEngine.Q_therm,
@@ -129,4 +131,4 @@ equation
   annotation (Icon(graphics={
           Bitmap(extent={{-136,-134},{144,160}}, fileName=
               "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png")}));
-end gasolineEngineChpModulate;
+end gasolineEngineChpModulate2702;
