@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-package SpeedTests
+package SpeedTests "CHP models used for a simulation performance study"
   model ModularCHP_SpeedTest "Speed test example of the modular CHP model"
     extends Modelica.Icons.Example;
     import AixLib;
@@ -522,7 +522,6 @@ documentation.</li>
 </ul>
 </html>"));
   end FastHVAC_CHP_SpeedTest;
-
   annotation (Documentation(info="<html>
 <p>The following examples were used for an easy comparison of the chp model simulation performances by changing the amount of On-/Off-signals per day. It was carried out using the example of the Kirsch L4.12 and experimental measurement data. </p>
 <p>Further information (non-public) is available in the Bachelor thesis: </p>

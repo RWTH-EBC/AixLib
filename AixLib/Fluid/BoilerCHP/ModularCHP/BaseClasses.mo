@@ -136,7 +136,13 @@ This package contains base classes that are used to construct the models in
             lineColor={0,0,255},
             fillPattern=FillPattern.HorizontalCylinder,
             fillColor={0,127,255},
-            textString="%name")}));
+            textString="%name")}), Documentation(info="<html>
+<p>Model of important cooling circuit components that needs to be used with the engine model to realise its heat transfer.</p>
+<p>Therefore a heat port is implemented as well as temperature sensors to capture the in- and outlet temperatures of the coolant medium for engine calculations.</p>
+<p>Depending on the unit configuration this model can be placed inside the cooling circuit before or after the fluid ports of the exhaust heat exchanger.</p>
+<p>Assumptions:</p>
+<p>The pressure level within the cooling circuit is assumed to be constant at about 3 bar.</p>
+</html>"));
   end Submodel_Cooling;
 
   model GasolineEngineChp
