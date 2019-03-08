@@ -7,7 +7,7 @@ model ModularCHP_PowerUnit
       AixLib.DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG      constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                 annotation(choicesAllMatching=true);
-
+protected
   replaceable package Medium_Air =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
                                                                constrainedby
@@ -18,7 +18,7 @@ model ModularCHP_PowerUnit
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                  annotation(choicesAllMatching=true);
-
+public
   replaceable package Medium_Coolant =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
                                  property_T=356, X_a=0.50) constrainedby
@@ -73,36 +73,48 @@ model ModularCHP_PowerUnit
   Real eta_Mech = P_Mech/(m_Fuel*Medium_Fuel.H_U) "Mechanical efficiency of the CHP unit";
   Real eta_El = P_El/(m_Fuel*Medium_Fuel.H_U) "Mechanical efficiency of the CHP unit";
 
-  parameter Modelica.SIunits.Area A_surExhHea=50
-    "Surface for exhaust heat transfer"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
-    "Total engine mass for heat capacity calculation"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+  parameter Real s_til=abs((inductionMachine.s_nominal*(inductionMachine.M_til/
+      inductionMachine.M_nominal) + inductionMachine.s_nominal*sqrt(abs(((
+      inductionMachine.M_til/inductionMachine.M_nominal)^2) - 1 + 2*
+      inductionMachine.s_nominal*((inductionMachine.M_til/inductionMachine.M_nominal)
+       - 1))))/(1 - 2*inductionMachine.s_nominal*((inductionMachine.M_til/
+      inductionMachine.M_nominal) - 1))) "Tilting slip of electric machine"
+    annotation (Dialog(tab="Calibration parameters", group="Fast calibration - Electric power and fuel usage"));
+  parameter Real calFac=1
+    "Calibration factor for electric power output (default=1)"
+    annotation (Dialog(tab="Calibration parameters",
+    group="Fast calibration - Electric power and fuel usage"));
   parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+    annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
   parameter Modelica.SIunits.ThermalConductance G_CooExhHex=G_CooExhHex
     "Thermal conductance of exhaust heat exchanger to cooling circuit"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+    annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
+  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
+    "Total engine mass for heat capacity calculation"
+    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
   parameter Modelica.SIunits.HeatCapacity C_ExhHex=C_ExhHex
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
-      Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+     Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
   parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+    annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
   parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
-    annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
+    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
   parameter Modelica.SIunits.ThermalConductance G_Amb=5
-    "Constant thermal conductance of material" annotation (Dialog(tab="Engine Cooling Circle",
-        group="Calibration Parameters"));
+    "Constant thermal conductance of material" annotation (Dialog(tab="Calibration parameters",
+        group="Advanced calibration parameters"));
 //  parameter Modelica.SIunits.Temperature T_HeaRet = 303.15
 //    "Constant heating circuit return temperature"
 //    annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.Area A_surExhHea=50
+    "Surface for exhaust heat transfer"
+    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
-    "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));
+    "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
+          "Calibration parameters", group="Advanced calibration parameters"));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambientTemperature(T=
         T_ambient)
     annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
@@ -156,9 +168,6 @@ model ModularCHP_PowerUnit
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Real calFac=1
-    "Calibration factor for electric power outuput (default=1)"
-    annotation (Dialog(tab="Advanced", group="Generator heat use"));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
     mExh_flow_small=0.0001
     "Small exhaust mass flow rate for regularization of zero flow"
@@ -171,7 +180,8 @@ model ModularCHP_PowerUnit
     inductionMachine(
     CHPEngData=CHPEngineModel,
     useHeat=useGenHea,
-    calFac=calFac)
+    calFac=calFac,
+    s_til=s_til)
     annotation (Placement(transformation(extent={{-66,12},{-36,42}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_Return(redeclare package Medium =
@@ -215,6 +225,7 @@ model ModularCHP_PowerUnit
     allowFlowReversalCoolant=allowFlowReversalCoolant,
     mCool_flow_small=mCool_flow_small) annotation (Placement(transformation(
           rotation=0, extent={{14,-72},{42,-44}})));
+
 equation
   connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1]) annotation (
       Line(points={{68,26.4},{80,26.4},{80,40},{92,40}},

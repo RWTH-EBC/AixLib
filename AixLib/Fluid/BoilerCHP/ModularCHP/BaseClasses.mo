@@ -334,6 +334,7 @@ This package contains base classes that are used to construct the models in
     parameter Real gearRatio=CHPEngData.gearRatio
                                "Transmission ratio (engine speed / generator speed)"
       annotation (Dialog(group="Machine specifications"));
+  protected
     parameter Real rho0=s_til^2 "Calculation variable for analytical approach (Aree, 2017)"
       annotation (Dialog(tab="Calculations"));
     parameter Real rho1=(M_start*(1+s_til^2)-2*s_til*M_til)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
@@ -342,7 +343,7 @@ This package contains base classes that are used to construct the models in
       annotation (Dialog(tab="Calculations"));
     parameter Real k=((I_elNominal/I_1_start)^2)*(((s_nominal^2)+rho1*s_nominal+rho0)/(1+rho1+rho0)) "Calculation variable for analytical approach (Aree, 2017)"
       annotation (Dialog(tab="Calculations"));
-
+  public
     Modelica.SIunits.Frequency n=inertia.w/(2*Modelica.Constants.pi) "Speed of machine rotor [1/s]";
     Modelica.SIunits.Current I_1 "Electric current of machine stator";
     Modelica.SIunits.Power P_E "Electrical power at the electric machine";
@@ -846,9 +847,11 @@ This package contains base classes that are used to construct the models in
       CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
       "CHP engine data for calculations"
       annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
     parameter Modelica.SIunits.Time startTimeChp=0
       "Start time for discontinous simulation tests to heat the Chp unit up to the prescribed return temperature";
+    parameter Real modTab[:,2]=[0.0,0.8; 7200,0.8; 7200,0.93; 10800,0.93; 10800,
+        0.62; 14400,0.62; 14400,0.8; 18000,0.8; 18000,0.0]
+      "Table for unit modulation (time = first column; modulation factors = second column)";
     Modelica.Blocks.Logical.Timer timerIsOff
       annotation (Placement(transformation(extent={{-6,0},{8,14}})));
     Modelica.Blocks.Logical.Not not1
@@ -863,12 +866,11 @@ This package contains base classes that are used to construct the models in
           rotation=270,
           origin={100,0})));
     Modelica.Blocks.Sources.TimeTable modulationFactorControl(
-                            startTime=startTimeChp, table=[0.0,0.8; 7200,0.8;
-          7200,0.93; 10800,0.93; 10800,0.62; 14400,0.62; 14400,0.8; 18000,0.8;
-          18000,0.0])
+                            startTime=startTimeChp, table=modTab)
       annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
     Modelica.Blocks.Logical.GreaterThreshold greaterThreshold
       annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
+
   equation
     connect(timerIsOff.u,not1. y)
       annotation (Line(points={{-7.4,7},{-17.3,7}},    color={255,0,255}));
