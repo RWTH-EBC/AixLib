@@ -227,8 +227,8 @@ This package contains base classes that are used to construct the models in
     Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a annotation (
         Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
           iconTransformation(extent={{-114,-6},{-94,14}})));
-    Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
-        = Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent={{92,-8},
+    Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
+          Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent={{92,-8},
               {112,12}}),         iconTransformation(extent={{92,-8},{112,12}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient annotation (
         Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),

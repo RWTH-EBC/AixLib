@@ -61,8 +61,8 @@ model heatFromExhaustGas
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation (
       Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),
         iconTransformation(extent={{-10,-100},{10,-80}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare final package Medium
-      = Medium1) annotation (Placement(transformation(rotation=0, extent={{90,34},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare final package Medium =
+        Medium1) annotation (Placement(transformation(rotation=0, extent={{90,34},
             {110,54}}), iconTransformation(extent={{90,34},{110,54}})));
   Modelica.Fluid.Interfaces.FluidPort_a                 ports(redeclare each
       package Medium = Medium1) annotation (Placement(transformation(rotation=0,

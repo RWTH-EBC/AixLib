@@ -114,8 +114,8 @@ model CHPCombustionEngineModulate2702
   Modelica.SIunits.Pressure p_me = (modFac*p_mi)-p_mf "Current mean effective pressure at operating point";
   Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium
-      = Medium3)
+  Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
+        Medium3)
     annotation (Placement(transformation(extent={{108,-10},{88,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
     use_m_flow_in=true,

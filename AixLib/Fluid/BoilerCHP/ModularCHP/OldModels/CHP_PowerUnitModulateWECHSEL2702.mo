@@ -196,8 +196,8 @@ model CHP_PowerUnitModulateWECHSEL2702
     engineToCoolant(T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
-    T_logEngCool=(gasolineEngineChp.cHPControlBus.meaTemInEng +
-        gasolineEngineChp.cHPControlBus.meaTemOutEng)/2) annotation (Placement(
+    T_logEngCool=(submodel_Cooling.senTCooEngIn.T + submodel_Cooling.senTCooEngOut.T)
+        /2)                                            annotation (Placement(
         transformation(rotation=0, extent={{-18,8},{18,44}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.CHPControlBus2702 sigBusCHP(
     meaThePowChp=Q_Therm,
@@ -210,7 +210,7 @@ model CHP_PowerUnitModulateWECHSEL2702
 
   AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.Submodel_Cooling2702
     submodel_Cooling(
-    sigBus_Cooling(meaTemInEng=submodel_Cooling.senTCooEngIn.T, meaTemOutEng=
+    sigBus_Cooling(meaTemOutEng=
           submodel_Cooling.senTCooEngOut.T),
     redeclare package Medium_Coolant = Medium_Coolant,
     CHPEngineModel=CHPEngineModel,

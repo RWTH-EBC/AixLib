@@ -64,8 +64,8 @@ model CHP_DistributionUnit_NotFinished
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,-10})));
-  Movers.FlowControlled_m_flow pump_SecondaryCircuit(redeclare package Medium
-      = Medium_Heating) annotation (Placement(transformation(
+  Movers.FlowControlled_m_flow pump_SecondaryCircuit(redeclare package Medium =
+        Medium_Heating) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=270,
         origin={-50,-40})));

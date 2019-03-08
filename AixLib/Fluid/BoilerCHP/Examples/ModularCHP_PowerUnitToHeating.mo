@@ -157,7 +157,7 @@ model ModularCHP_PowerUnitToHeating
     redeclare package Medium_Coolant = Medium_Coolant,
     G_CooExhHex=GCooExhHex,
     C_ExhHex=C_ExhHex,
-    inductionMachine(J_Gen=1, s_til=0.18),
+    inductionMachine(J_Gen=1),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     G_Amb=G_Amb,

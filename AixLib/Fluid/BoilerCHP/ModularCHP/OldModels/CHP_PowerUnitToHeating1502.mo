@@ -231,8 +231,8 @@ model CHP_PowerUnitToHeating1502
   Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
     annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.OnOff_ControllerCHPTests2702
-    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600) annotation
-    (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
+    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600) annotation (
+     Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,

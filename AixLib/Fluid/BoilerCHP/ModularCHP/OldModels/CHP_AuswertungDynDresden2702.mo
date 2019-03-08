@@ -159,11 +159,12 @@ model CHP_AuswertungDynDresden2702
     T_CoolSup=tempSupplyFlow.T,
     G_CooExhHex=GCooExhHex,
     C_ExhHex=C_ExhHex,
-    inductionMachine(J_Gen=1, s_til=0.18),
+    inductionMachine(J_Gen=1),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     G_Amb=G_Amb,
-    calFac=calFac)
+    calFac=calFac,
+    gasolineEngineChp(T_ExhCHPOut=cHP_PowerUnit.exhaustHeatExchanger.senTExhCold.T))
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
 
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness             coolantHex(
@@ -203,8 +204,8 @@ model CHP_AuswertungDynDresden2702
   Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
     annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.OnOff_ControllerCHPTests2702
-    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600) annotation
-    (Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
+    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600) annotation (
+     Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
