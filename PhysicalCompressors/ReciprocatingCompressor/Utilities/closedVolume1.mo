@@ -1,5 +1,6 @@
 within PhysicalCompressors.ReciprocatingCompressor.Utilities;
-model closedVolume1 "model using constants for fluid dependent values"
+model closedVolume1
+  "model using constants for fluid dependent values"
   extends
     PhysicalCompressors.ReciprocatingCompressor.Utilities.Geometry_Roskoch;
   //Volumina
@@ -7,14 +8,14 @@ model closedVolume1 "model using constants for fluid dependent values"
   Modelica.SIunits.Volume V_0(start = 0);
   //State variables
   Modelica.SIunits.Density d_gas(start=5);
-  Modelica.SIunits.Temperature T_gas;
+  Modelica.SIunits.Temperature T_gas(start=290);
   Modelica.SIunits.Pressure p_gas(start=3e5) "Pressure inside the chamber";
-  Modelica.SIunits.SpecificInternalEnergy u_gas(start = 550e3);
-  Modelica.SIunits.SpecificEnthalpy h_gas(start = 600e3);
+  Modelica.SIunits.SpecificInternalEnergy u_gas(start = 0);
+  Modelica.SIunits.SpecificEnthalpy h_gas(start = 0);
   Medium.ThermodynamicState state_dh;
   Medium.ThermodynamicState state_in;
   //Mass
-  Modelica.SIunits.Mass m_gas(start=0.0001);
+  Modelica.SIunits.Mass m_gas(start=5e-4);
   Modelica.SIunits.Mass m_in(start=small);
   Modelica.SIunits.Mass m_out;
   Modelica.SIunits.MassFlowRate m_in_avg;
@@ -77,6 +78,10 @@ algorithm
 
   when modi == 1 then
     i:=i + 1;
+  end when;
+  when modi == 2 and i>1 then
+    eta_is :=(-m_out*(h_out_is - h_in))/(-U_out - U_in);
+    lambda :=m_in/(state_in.d*V_0*i);
   end when;
 
 equation
@@ -162,19 +167,19 @@ equation
   der(U_out) = U_flow_out;
   s_out_is = Medium.specificEntropy(state_in);
   h_out_is = Medium.specificEnthalpy_ps(p=Fluid_out.p, s=s_out_is);
-  if time > 0.1 then
-    eta_is = (-m_out * (h_out_is - h_in))  / ( -U_out - U_in);
-  else
-    eta_is = 0;
-  end if;
+//   if time > 0.1 then
+//     eta_is = (-m_out * (h_out_is - h_in))  / ( -U_out - U_in);
+//   else
+//     eta_is = 0;
+//   end if;
 
   //Volumetric efficiency
   V_0 =  Modelica.Constants.pi * H * ( 1 + c_dead) * (0.5 * D_pis)^2;
-  if i > 0 then
-    lambda = m_in / ( state_in.d * V_0 * i);
-  else
-    lambda = 0;
-  end if;
+//   if i > 0 then
+//     lambda = m_in / ( state_in.d * V_0 * i);
+//   else
+//     lambda = 0;
+//   end if;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

@@ -8,14 +8,14 @@ model closedVolume2
   Modelica.SIunits.Volume V_0(start = 0);
   //State variables
   Modelica.SIunits.Density d_gas(start=5);
-  Modelica.SIunits.Temperature T_gas;
-  Modelica.SIunits.Pressure p_gas(start=3e5) "Pressure inside the chamber";
-  Modelica.SIunits.SpecificInternalEnergy u_gas(start = 550e3);
-  Modelica.SIunits.SpecificEnthalpy h_gas(start = 600e3);
+  Modelica.SIunits.Temperature T_gas(start=300);
+  Modelica.SIunits.Pressure p_gas(start=40e5) "Pressure inside the chamber";
+  Modelica.SIunits.SpecificInternalEnergy u_gas(start = 500e3);
+  Modelica.SIunits.SpecificEnthalpy h_gas(start = 550e3);
   Medium.ThermodynamicState state_dh;
   Medium.ThermodynamicState state_in;
   //Mass
-  Modelica.SIunits.Mass m_gas(start=0.0001);
+  Modelica.SIunits.Mass m_gas(start=5e-4);
   Modelica.SIunits.Mass m_in(start=small);
   Modelica.SIunits.Mass m_out;
   Modelica.SIunits.MassFlowRate m_in_avg;
@@ -50,7 +50,6 @@ model closedVolume2
   Modelica.SIunits.Area Aeff_in_cor "Effective Area of inlet valve calculated by correlation";
   Modelica.SIunits.Area Aeff_out_cor(max = 5e-5) "Effective Area of outlet valve calculated by correlation";
   Real G_dot_out(min=small) "Mass flow density at valve outlet";
-
   Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
@@ -75,29 +74,25 @@ model closedVolume2
         extent={{-14,-14},{14,14}},
         rotation=-90,
         origin={22,-102})));
-// initial equation
-//    m_gas = d_gas * V_gas;
-algorithm
 
+algorithm
   when modi == 1 then
     i:=i + 1;
   end when;
+ when modi == 2 and i>1 then
+    eta_is :=(-m_out*(h_out_is - h_in))/(-U_out - U_in);
+    lambda :=m_in/(state_in.d*V_0*i);
+ end when;
+
 
 equation
-  //Connect ports
-  //Fluid ports
-  Fluid_in.m_flow = der(m_in);
-  Fluid_out.m_flow = der(m_out);
-  Fluid_in.h_outflow = h_gas;
-  Fluid_out.h_outflow = h_gas;
-  h_in = inStream(Fluid_in.h_outflow);
-  state_in = Medium.setState_ph(p=Fluid_in.p, h=h_in);
-  //Heat port
-  Heat_port.T = T_gas;
-  //Real inputs
-  V_gas = u;
-  v_pis_avg = v_pis;
 
+  //Energy balance
+  der(m_gas)*u_gas + m_gas*der(u_gas) - der(W_rev) - der(W_irr) - Heat_port.Q_flow - U_flow_in - U_flow_out = 0;
+
+  //Heat transfer Coefficient (Gas to cylinder)
+  alpha = 127.93*D_pis^(-0.2)*(p_gas/1e6)^(0.8)*T_gas^(-0.53)*(c1*v_pis_avg)^(0.8);
+  alpha_gas_cyl = alpha;
   //Work, reversible and irreversible
   der(W_rev) = -p_gas*der(V_gas);
   der(W_irr) = abs(-p_rub*der(V_gas));
@@ -106,13 +101,14 @@ equation
   //Effective area of valves
   //G_dot_out = -der(m_out) / Aeff_out;
   Aeff_in_cor = 2.0415e-3 * (Modelica.Constants.R / Medium.refrigerantConstants.molarMass)^(-0.9826);
-  Aeff_out_cor = 5.1109e-4 * G_dot_out^(-0.4860);
-  G_dot_out = smooth(2, if der(m_out) < 0 then  -der(m_out) / Aeff_out  else   -m_out_avg / Aeff_out);
+  Aeff_out_cor = smooth(1,if der(m_out) < m_out_avg then 5.1109e-4 * G_dot_out^(-0.4860) else Aeff_out);
+  G_dot_out = smooth(1, if der(m_out) < 0 then  -der(m_out) / Aeff_out  else   4000);///-m_out_avg / Aeff_out);
   //State in piston
   (state_dh,h_delta,n) = Utilities.setState_dh(d=d_gas, h=h_gas);
-  h_gas = u_gas - p_gas / d_gas;
+  u_gas = h_gas - p_gas / d_gas;
   p_gas = state_dh.p;
   T_gas = state_dh.T;
+
   //Mass balance
   if Fluid_in.p > p_gas then //Suction
     der(m_gas) = Aeff_in_cor*sqrt(2*d_gas*abs((Fluid_in.p - p_gas)));
@@ -139,15 +135,24 @@ equation
     //c1 = 6.18;
     modi = 2;
   end if;
-
   c1 = smooth(2, if der(V_gas) > 0 then 6.18 else 2.28);
 
-  //Energy balance
-  der(m_gas)*u_gas + m_gas*der(u_gas) - der(W_rev) - der(W_irr) - Heat_port.Q_flow - U_flow_in - U_flow_out = 0;
-   //m_gas * der(u_gas) - der(W_rev) - der(W_irr) - port_a.Q_flow - u_dot = 0;
+  //Connect ports
+  //Fluid ports
+  Fluid_in.m_flow = der(m_in);
+  Fluid_out.m_flow = der(m_out);
+  Fluid_in.h_outflow = h_gas;
+  Fluid_out.h_outflow = h_gas;
+  h_in = inStream(Fluid_in.h_outflow);
+  state_in = Medium.setState_ph(p=Fluid_in.p, h=h_in);
+  //Heat port
+  Heat_port.T = T_gas;
+  //Real inputs
+  V_gas = u;
+  v_pis_avg = v_pis;
 
   //Average
-  if time > 0.01 then
+  if time > 0.05 then
   m_in_avg = m_in / time;
   m_out_avg = m_out / time;
   P = (W_irr+W_rev) / time;
@@ -157,24 +162,19 @@ equation
     P=0;
   end if;
 
-  //Heat transfer Coefficient (Gas to cylinder)
-  alpha = 127.93*D_pis^(-0.2)*(p_gas/1e6)^(0.8)*T_gas^(-0.53)*(c1*v_pis_avg)^(0.8);
-  alpha_gas_cyl = alpha;
-
   //Isentropic efficiency
   der(U_in) = U_flow_in;
   der(U_out) = U_flow_out;
   s_out_is = Medium.specificEntropy(state_in);
   h_out_is = Medium.specificEnthalpy_ps(p=Fluid_out.p, s=s_out_is);
-//   if time > 0.1 then
-//     eta_is = (-m_out * (h_out_is - h_in))  / ( -U_out - U_in);
-//   else
-//     eta_is = 0;
-//   end if;
-when modi == 1 then
-  eta_is = (-m_out * (h_out_is - h_in))  / ( -U_out - U_in);
-  lambda = m_in / ( state_in.d * V_0 * i);
-end when;
+//        if time > 0.05 then
+//          eta_is = (-m_out * (h_out_is - h_in))  / ( -U_out - U_in);
+//          lambda = m_in / ( state_in.d * V_0 * i);
+//        else
+//          eta_is = 0;
+//          lambda = 0;
+//        end if;
+
 
   //Volumetric efficiency
   V_0 =  Modelica.Constants.pi * H * ( 1 + c_dead) * (0.5 * D_pis)^2;
