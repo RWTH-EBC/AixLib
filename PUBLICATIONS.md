@@ -12,7 +12,7 @@
 ## Building Systems <a name="buildingsystems"></a>
 
 #### Stcturing the building performance modelica library AixLib for open collaborative development
-Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Rmmen, Peter; Streblow, Rita; Müller, Dirk (2015). 14th International Conference of the International Building Performance Simulation Association , 14th IBPSA, 07.12.2015-09.12.2015, Hyderabad, India. [PDF](http://www.ibpsa.org/proceedings/BS2015/p2202.pdf), [Info](http://www.ebc.eonerc.rwth-aachen.de/cms/E-ON-ERC-EBC/Forschung/Publikationen/~dncb/Details/?file=540827&lidx=1).
+Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Remmen, Peter; Streblow, Rita; Müller, Dirk (2015). 14th International Conference of the International Building Performance Simulation Association , 14th IBPSA, 07.12.2015-09.12.2015, Hyderabad, India. [PDF](http://www.ibpsa.org/proceedings/BS2015/p2202.pdf), [Info](http://www.ebc.eonerc.rwth-aachen.de/cms/E-ON-ERC-EBC/Forschung/Publikationen/~dncb/Details/?file=540827&lidx=1).
 
 
 ## District Heating and Cooling <a name="dhc"></a>
