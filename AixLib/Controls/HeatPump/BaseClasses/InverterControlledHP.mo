@@ -5,8 +5,12 @@ model InverterControlledHP "Converter model for a inverter controlled HP"
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys,
       pre_y_start=false)                                                                    "Hysteresis controller for set temperature"
     annotation (Placement(transformation(extent={{0,-14},{28,14}})));
-  Modelica.Blocks.Continuous.LimPID InverterControl(final k=1, controllerType=
-        Modelica.Blocks.Types.SimpleController.PI)
+  Modelica.Blocks.Continuous.LimPID InverterControl(           controllerType=
+        Modelica.Blocks.Types.SimpleController.PI,
+    final k=0.1,
+    Ti=30,
+    yMax=1,
+    yMin=0)
     "PI-Control for a inverter controlled HP"
     annotation (Placement(transformation(extent={{14,38},{34,58}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant(final k=true)
