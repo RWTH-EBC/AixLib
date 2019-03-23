@@ -28,12 +28,15 @@ partial model PartialTSetToNSet
         extent={{8,-8},{-8,8}},
         rotation=90,
         origin={12,-84})));
-  Modelica.Blocks.Math.Gain gain(final k=1/Q_flow_nominal) if
-                                    use_secHeaGen
-    annotation (Placement(transformation(extent={{-16,-60},{-4,-72}})));
  Modelica.Blocks.Sources.RealExpression calcQHeat(final y=sigBusHP.m_flow_co*(
         sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180) if use_secHeaGen
-    annotation (Placement(transformation(extent={{-70,-48},{-28,-84}})));
+    annotation (Placement(transformation(extent={{-76,-48},{-34,-84}})));
+  Modelica.Blocks.Math.Gain gain(final k=1/Q_flow_nominal) if
+                                    use_secHeaGen
+    annotation (Placement(transformation(extent={{-26,-60},{-14,-72}})));
+  Modelica.Blocks.Nonlinear.Limiter limSecHeaGen(final uMax=1, final uMin=0)
+    "Input for second heat generator is normalized to 1..0. After calculating ideal heat flow rate, the sec hea gen is not allowd to exceed its maximal installed capacity."
+    annotation (Placement(transformation(extent={{-8,-70},{0,-62}})));
 protected
   parameter Boolean use_secHeaGen=true "True to choose a bivalent system" annotation(choices(checkBox=true));
   parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation (Dialog(enable=use_secHeaGen), choices(choice=true "Parallel",
@@ -53,11 +56,12 @@ equation
   connect(conZer.y, swiNullsecHeaGen.u3) annotation (Line(points={{50.6,-18},{
           70,-18},{70,-74.4},{18.4,-74.4}},
                                           color={0,0,127}));
-  connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-3.4,-66},{6,
-          -66},{6,-74.4},{5.6,-74.4}},
-                                color={0,0,127}));
-  connect(gain.u, calcQHeat.y) annotation (Line(points={{-17.2,-66},{-25.9,-66}},
+  connect(gain.u, calcQHeat.y) annotation (Line(points={{-27.2,-66},{-31.9,-66}},
                                color={0,0,127}));
+  connect(gain.y, limSecHeaGen.u)
+    annotation (Line(points={{-13.4,-66},{-8.8,-66}}, color={0,0,127}));
+  connect(limSecHeaGen.y, swiNullsecHeaGen.u1) annotation (Line(points={{0.4,
+          -66},{6,-66},{6,-74.4},{5.6,-74.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
           extent={{-100,100},{100,-100}},
