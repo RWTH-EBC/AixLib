@@ -5,7 +5,10 @@ partial model PartialTSetToNSet
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
   Modelica.Blocks.Sources.Constant conZer(k=0) "If an error occurs, the compressor speed is set to zero"
     annotation (Placement(transformation(extent={{38,-24},{50,-12}})));
-  Modelica.Blocks.Interfaces.RealInput TSet "Set temperature"
+  Modelica.Blocks.Interfaces.RealInput TSet(
+      final quantity="ThermodynamicTemperature",
+      final unit="K",
+      final displayUnit="degC") "Set temperature"
     annotation (Placement(transformation(extent={{-132,44},{-100,76}})));
   Modelica.Blocks.Interfaces.RealOutput nOut "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
@@ -17,7 +20,10 @@ partial model PartialTSetToNSet
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={12,-108})));
-  Modelica.Blocks.Interfaces.RealInput TAct "Actual temperature, control variable"
+  Modelica.Blocks.Interfaces.RealInput TAct(
+      final quantity="ThermodynamicTemperature",
+      final unit="K",
+      final displayUnit="degC") "Actual temperature, control variable"
     annotation (Placement(transformation(
         extent={{16,16},{-16,-16}},
         rotation=180,
@@ -60,8 +66,8 @@ equation
                                color={0,0,127}));
   connect(gain.y, limSecHeaGen.u)
     annotation (Line(points={{-13.4,-66},{-8.8,-66}}, color={0,0,127}));
-  connect(limSecHeaGen.y, swiNullsecHeaGen.u1) annotation (Line(points={{0.4,
-          -66},{6,-66},{6,-74.4},{5.6,-74.4}}, color={0,0,127}));
+  connect(limSecHeaGen.y, swiNullsecHeaGen.u1) annotation (Line(points={{0.4,-66},
+          {6,-66},{6,-74.4},{5.6,-74.4}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
           extent={{-100,100},{100,-100}},
