@@ -52,9 +52,10 @@ partial model PartialHeaterCoolerPI
     "Heat port to thermal zone" annotation (Placement(transformation(extent={{
             80,-80},{100,-60}}), iconTransformation(extent={{80,-80},{100,-60}})));
   ThermalZones.ReducedOrder.RC.BaseClasses.ThermSplitter theSpl(
-    splitFactor=[0.7,0.3],
     nOut=2,
-    nIn=1) annotation (Placement(transformation(extent={{28,-66},{48,-46}})));
+    nIn=1,
+    splitFactor=[0.7; 0.3])
+           annotation (Placement(transformation(extent={{28,-66},{48,-46}})));
 equation
   connect(pITempCool.y, Cooling.Q_flow) annotation (Line(
         points={{-1,-20},{26,-20},{26,-12.5}},
@@ -65,18 +66,18 @@ equation
     annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));
   connect(Cooling.Q_flow,coolingPower)  annotation (Line(points={{26,-12.5},{56,
           -12.5},{56,-6},{100,-6}}, color={0,0,127}));
-  connect(theSpl.portOut[1], heatCoolRoom) annotation (Line(points={{48,-57},{
-          70,-57},{70,-40},{90,-40}}, color={191,0,0}));
-  connect(theSpl.portOut[2], heatCoolRoom1rad) annotation (Line(points={{48,-55},
-          {70,-55},{70,-70},{90,-70}}, color={191,0,0}));
-  connect(Cooling.port, theSpl.portIn[1]) annotation (Line(points={{6,-12.5},{2,
-          -12.5},{2,-56},{28,-56}}, color={191,0,0}));
-  connect(Heating.port, theSpl.portIn[1]) annotation (Line(points={{6,12},{18,
-          12},{18,-56},{28,-56}}, color={191,0,0}));
   connect(heatCoolRoom, pITempHeat.heatPort) annotation (Line(points={{90,-40},
           {38,-40},{38,11},{-16,11}}, color={191,0,0}));
   connect(heatCoolRoom, pITempCool.heatPort) annotation (Line(points={{90,-40},
           {38,-40},{38,-11},{-16,-11}}, color={191,0,0}));
+  connect(theSpl.portOut[1], heatCoolRoom) annotation (Line(points={{48,-57},{
+          68,-57},{68,-40},{90,-40}}, color={191,0,0}));
+  connect(theSpl.portOut[2], heatCoolRoom1rad) annotation (Line(points={{48,-55},
+          {68,-55},{68,-70},{90,-70}}, color={191,0,0}));
+  connect(Cooling.port, theSpl.portIn[1]) annotation (Line(points={{6,-12.5},{
+          12,-12.5},{12,-58},{28,-58},{28,-56}}, color={191,0,0}));
+  connect(Heating.port, theSpl.portIn[1]) annotation (Line(points={{6,12},{8,12},
+          {8,-56},{28,-56}}, color={191,0,0}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base class of an ideal heater and/or cooler. It is used in full ideal heater/cooler models as an extension. It extends another base class and adds some basic elements.</p>
