@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.RC;
+within AixLib.ThermalZones.ReducedOrder.RC;
 model OneElement "Thermal Zone with one element for exterior walls"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
@@ -470,6 +470,10 @@ The image below shows the RC-network of this model.
   </html>",
 revisions="<html>
   <ul>
+  <li>
+  March 26, 2019, by Martin Kremer:<br/>
+  Declare volAir as replaceable. Thus it can be changed to an MixingVolumeMoistAir.
+  </li>
   <li>
   September 26, 2016, by Moritz Lauster:<br/>
   Added conditional statements to solar radiation part.<br/>
