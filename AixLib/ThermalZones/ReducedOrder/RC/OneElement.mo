@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.RC;
+﻿within AixLib.ThermalZones.ReducedOrder.RC;
 model OneElement "Thermal Zone with one element for exterior walls"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
@@ -116,7 +116,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     transformation(extent={{-170,-190},{-150,-170}}), iconTransformation(
     extent={{-170,-190},{-150,-170}})));
 
-  Fluid.MixingVolumes.MixingVolume volAir(
+  replaceable Fluid.MixingVolumes.MixingVolume volAir(
     redeclare final package Medium = Medium,
     final nPorts=nPorts,
     m_flow_nominal=VAir*6/3600*1.2,
@@ -129,7 +129,9 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final use_C_flow=false) if VAir > 0 "Indoor air volume"
+    final use_C_flow=false) if VAir > 0
+    constrainedby Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
+                                        "Indoor air volume"
     annotation (Placement(transformation(extent={{38,-10},{18,10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin) if
     ATotWin > 0 "Resistor for windows"

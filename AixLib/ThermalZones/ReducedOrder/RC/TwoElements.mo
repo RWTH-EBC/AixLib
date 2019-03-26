@@ -1,7 +1,21 @@
-within AixLib.ThermalZones.ReducedOrder.RC;
+﻿within AixLib.ThermalZones.ReducedOrder.RC;
 model TwoElements
   "Thermal Zone with two elements for exterior and interior walls"
-  extends OneElement(AArray={ATotExt,ATotWin,AInt});
+  extends OneElement(AArray={ATotExt,ATotWin,AInt},
+    redeclare replaceable Fluid.MixingVolumes.MixingVolume volAir(
+      redeclare final package Medium = Medium,
+      final nPorts=nPorts,
+      m_flow_nominal=VAir*6/3600*1.2,
+      final V=VAir,
+      final energyDynamics=energyDynamics,
+      final massDynamics=massDynamics,
+      final p_start=p_start,
+      final T_start=T_start,
+      final X_start=X_start,
+      final C_start=C_start,
+      final C_nominal=C_nominal,
+      final mSenFac=mSenFac,
+      final use_C_flow=false));
 
   parameter Modelica.SIunits.Area AInt "Area of interior walls"
     annotation(Dialog(group="Interior walls"));

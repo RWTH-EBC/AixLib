@@ -1,7 +1,21 @@
-within AixLib.ThermalZones.ReducedOrder.RC;
+﻿within AixLib.ThermalZones.ReducedOrder.RC;
 model FourElements "Thermal Zone with four elements for exterior walls,
   interior walls, floor plate and roof"
-  extends ThreeElements(AArray={ATotExt,ATotWin,AInt,AFloor,ARoof});
+  extends ThreeElements(AArray={ATotExt,ATotWin,AInt,AFloor,ARoof},
+    redeclare replaceable Fluid.MixingVolumes.MixingVolume volAir(
+      redeclare final package Medium = Medium,
+      final nPorts=nPorts,
+      m_flow_nominal=VAir*6/3600*1.2,
+      final V=VAir,
+      final energyDynamics=energyDynamics,
+      final massDynamics=massDynamics,
+      final p_start=p_start,
+      final T_start=T_start,
+      final X_start=X_start,
+      final C_start=C_start,
+      final C_nominal=C_nominal,
+      final mSenFac=mSenFac,
+      final use_C_flow=false));
 
   parameter Modelica.SIunits.Area ARoof "Area of roof"
     annotation(Dialog(group="Roof"));
