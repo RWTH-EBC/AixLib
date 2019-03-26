@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.Examples;
+within AixLib.Airflow.AirHandlingUnit.Examples;
 model AHU
   "Example to test all states of the AHU model - Play with the possible modes (boolean parameters for: heating, cooling, de-/humidification"
     extends Modelica.Icons.Example;
@@ -124,9 +124,7 @@ equation
           lineColor={28,108,200},
           textString="Use the following Table for investigation of all possible modes.
 Check whether variable allCond is always 1.")}),
-    experiment(
-      StopTime=86400,
-      Interval=60),
+    experiment(StopTime=86400, Tolerance=1e-005),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/Examples/AHU.mos"
         "Simulate and plot"),
     Documentation(info="<html>

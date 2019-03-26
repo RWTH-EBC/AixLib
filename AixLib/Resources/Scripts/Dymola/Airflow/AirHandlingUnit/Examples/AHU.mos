@@ -1,4 +1,4 @@
-simulateModel("AixLib.Airflow.AirHandlingUnit.Examples.AHU", stopTime=86400, outputInterval=60, method="lsodar", resultFile="AHU");
+simulateModel("AixLib.Airflow.AirHandlingUnit.Examples.AHU", stopTime=86400,tolerance = 1e-005, method="dassl", resultFile="AHU");
 
 createPlot(
   id=1, 
@@ -6,7 +6,6 @@ createPlot(
   y={"ahu.allCond"}, 
   range={0.0, 90000.0, 0.89, 1.11}, 
   grid=true, 
-  filename="TestAHU.mat", 
   colors={{28,108,200}}, 
   markers={MarkerStyle.SmallSquare});
 
@@ -16,7 +15,6 @@ createPlot(
   y={"ahu.startState.active", "ahu.deHuHRS_true.active", "ahu.deHuHRS_false.active", "ahu.onlyHeatingHRS_true.active", "ahu.onlyHeatingHRS_false.active"}, 
   range={0.0, 90000.0, -0.05, 1.05}, 
   grid=true, 
-  filename="TestAHU.mat", 
   colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}}, 
   markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
 
@@ -26,7 +24,6 @@ createPlot(
   y={"ahu.onlyCoolingHRS_true.active", "ahu.onlyCoolingHRS_false.active", "ahu.huPreHHRS_true.active", "ahu.huPreHHRS_false.active", "ahu.huCHRS_true.active", "ahu.huCHRS_false.active"}, 
   range={0.0, 90000.0, -0.05, 1.05}, 
   grid=true, 
-  filename="TestAHU.mat", 
   colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}, {162,29,33}}, 
   markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
 
@@ -36,7 +33,6 @@ createPlot(
   y={"ahu.QflowC", "ahu.QflowH"}, 
   range={0.0, 88000.0, -100000.0, 2100000.0}, 
   grid=true, 
-  filename="TestAHU.mat", 
   colors={{28,108,200}, {238,46,47}});
 
 createPlot(
@@ -45,7 +41,6 @@ createPlot(
   y={"ahu.X_oda", "ahu.X_supMin", "ahu.X_supMax"}, 
   range={0.0, 88000.0, 0.0058000000000000005, 0.0102}, 
   grid=true, 
-  filename="TestAHU.mat", 
   colors={{28,108,200}, {238,46,47}, {0,140,72}}, 
   markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
 
@@ -54,7 +49,6 @@ createPlot(
   position={31, 19, 1416, 654}, 
   y={"ahu.T_6", "ahu.T_oda", "ahu.T_supplyAirOut"}, 
   range={0.0, 88000.0, 8.0, 30.0}, 
-  grid=true, 
-  filename="TestAHU.mat", 
+  grid=true,  
   colors={{28,108,200}, {238,46,47}, {28,108,200}}, 
   markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.None});
