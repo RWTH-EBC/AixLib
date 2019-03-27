@@ -115,9 +115,11 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac)
+    final mSenFac=mSenFac,
+    use_m_wat_flow=false)
     "RC calculation core"
     annotation (Placement(transformation(extent={{38,28},{86,64}})));
+
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
