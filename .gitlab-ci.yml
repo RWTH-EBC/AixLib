@@ -23,7 +23,7 @@ test_dymola_Airflow:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -52,7 +52,7 @@ test_dymola_BoundaryConditions:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -81,7 +81,7 @@ test_dymola_Controls:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -110,7 +110,7 @@ test_dymola_Electrical:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -139,7 +139,7 @@ test_dymola_FastHVAC:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -168,7 +168,7 @@ test_dymola_Fluid:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -197,7 +197,7 @@ test_dymola_Media:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -226,7 +226,7 @@ test_dymola_Systems:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
 
 
@@ -252,5 +252,5 @@ test_dymola_ThermalZones:
       - AixLib/simulator-dymola.log
 
   retry:
-    max: 3
+    max: 2
     when: runner_system_failure
