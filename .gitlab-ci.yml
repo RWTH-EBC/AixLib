@@ -15,7 +15,7 @@ test_dymola_Airflow:
     - export PYTHONIOENCODING=utf-8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.Airflow --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Airflow --tool dymola
 
   artifacts:
     when: on_failure
@@ -44,7 +44,7 @@ test_dymola_BoundaryConditions:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.BoundaryConditions --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.BoundaryConditions --tool dymola
 
   artifacts:
     when: on_failure
@@ -73,7 +73,7 @@ test_dymola_Controls:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.Controls --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Controls --tool dymola
 
   artifacts:
     when: on_failure
@@ -102,7 +102,7 @@ test_dymola_Electrical:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.Electrical --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola
 
   artifacts:
     when: on_failure
@@ -131,7 +131,7 @@ test_dymola_FastHVAC:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.FastHVAC --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola
 
   artifacts:
     when: on_failure
@@ -160,7 +160,7 @@ test_dymola_Fluid:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.Fluid --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Fluid --tool dymola
 
   artifacts:
     when: on_failure
@@ -189,7 +189,7 @@ test_dymola_Media:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.Media --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Media --tool dymola
 
   artifacts:
     when: on_failure
@@ -218,7 +218,7 @@ test_dymola_Systems:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.Systems --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Systems --tool dymola
 
   artifacts:
     when: on_failure
@@ -244,7 +244,7 @@ test_dymola_ThermalZones:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py --batch --single-package AixLib.ThermalZones --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.ThermalZones --tool dymola
 
   artifacts:
     when: on_failure

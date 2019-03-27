@@ -21,7 +21,7 @@ model HeatPumpSystem "Example for a heat pump system"
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
     table=[-6*3600,0; 8*3600,4000; 18*3600,0])
-                          "Time table for internal heat gain"
+                          "Time tabl, Tolerance=1e-6, method="dassl"e for internal heat gain"
     annotation (Placement(transformation(extent={{-2,84},{18,104}})));
   AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2 rad(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -89,16 +89,16 @@ model HeatPumpSystem "Example for a heat pump system"
     use_chiller=true,
     calcPel_deFro=100,
     perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12(),
-    use_minRunTime=true,
-    minRunTime(displayUnit="min"),
-    use_minLocTime=true,
-    minLocTime(displayUnit="min"),
+    use_minRunTime=true, Tolerance=1e-6, method="dassl",
+    minRunTime(disp, Tolerance=1e-6, method="dassl"layUnit="min"),
+    use_minLocTime=true, Tolerance=1e-6, method="dassl",
+    minLocTime(disp, Tolerance=1e-6, method="dassl"layUnit="min"),
     use_runPerHou=true,
     pre_n_start=false,
     use_antLeg=false,
     use_refIne=true,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
-    minTimeAntLeg(displayUnit="min") = 900,
+    minTimeAntLe, Tolerance=1e-6, method="dassl"g(displayUnit="min") = 900,
     scalingFactor=1,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
@@ -214,7 +214,7 @@ equation
                                                      color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
-    experiment(StopTime=3600),
+    experiment(StopTime=3600, Tolerance=1e-6, method="dassl"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <p>Model for testing the model <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.</p>
