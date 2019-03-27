@@ -55,6 +55,9 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean indoorPortExtWalls = false
     "Additional heat port at indoor surface of exterior walls"
     annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
+  parameter Boolean use_m_wat_flow = false
+    "Considering moisture balance"
+    annotation(Dialog(tab="Advanced"),choices(checkBox = true));
 
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
     each final quantity="RadiantEnergyFluenceRate",
@@ -132,7 +135,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final use_C_flow=false) if VAir > 0
     constrainedby Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
                                         "Indoor air volume"
-    annotation (Placement(transformation(extent={{38,-10},{18,10}})));
+    annotation (Dialog(tab="Advanced"),Placement(transformation(extent={{38,-10},{18,10}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin) if
     ATotWin > 0 "Resistor for windows"
     annotation (Placement(transformation(extent={{-180,30},{-160,50}})));
@@ -167,6 +171,9 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final T_start=T_start) if ATotExt > 0 "RC-element for exterior walls"
     annotation (Placement(transformation(extent={{-158,-50},{-178,-28}})));
 
+  Modelica.Blocks.Interfaces.RealInput m_wat_flow if use_m_wat_flow
+    annotation (Placement(transformation(extent={{-280,-140},{-240,-100}}),
+        iconTransformation(extent={{-260,-120},{-240,-100}})));
 protected
   parameter Modelica.SIunits.Area ATot=sum(AArray) "Sum of wall surface areas";
   parameter Modelica.SIunits.Area ATotExt=sum(AExt)
