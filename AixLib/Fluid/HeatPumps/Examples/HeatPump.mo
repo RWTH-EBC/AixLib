@@ -201,7 +201,7 @@ equation
           -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-    experiment(StopTime=3600),
+    experiment(StopTime=3600, Tolerance=1e-06),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
