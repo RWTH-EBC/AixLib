@@ -76,6 +76,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
     ut.setNumberOfThreads(n_pro)
     ut.pedanticModelica(True)
     ut.showGUI(show_gui)
+    ut.get_test_example_coverage()
     # Below are some option that may occassionally be used.
     # These are currently not exposed as command line arguments.
 #    ut.setNumberOfThreads(1)

@@ -12,6 +12,7 @@ test_dymola_Airflow:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=utf-8 # just in case
 
   script:
