@@ -76,7 +76,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
     ut.setNumberOfThreads(n_pro)
     ut.pedanticModelica(True)
     ut.showGUI(show_gui)
-    # ut.get_test_example_coverage()
+    ut.get_test_example_coverage()
     # Below are some option that may occassionally be used.
     # These are currently not exposed as command line arguments.
 #    ut.setNumberOfThreads(1)
@@ -88,6 +88,22 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
 
     retVal = ut.run()
     return retVal
+
+
+def _run_coverage_only(batch, tool, package, path, n_pro, show_gui):
+    import buildingspy.development.regressiontest as u
+
+    ut = u.Tester(tool=tool)
+    ut.batchMode(batch)
+    ut.setLibraryRoot(path)
+    if package is not None:
+        ut.setSinglePackage(package)
+    ut.setNumberOfThreads(n_pro)
+    ut.pedanticModelica(True)
+    ut.showGUI(show_gui)
+    ut.get_test_example_coverage()
+    return 0
+
 
 def _runOpenModelicaUnitTests():
     import buildingspy.development.regressiontest as u
@@ -127,6 +143,10 @@ if __name__ == '__main__':
                         help='Maximum number of processors to be used')
     unit_test_group.add_argument("--show-gui",
                         help='Show the GUI of the simulator',
+                        action="store_true")
+
+    unit_test_group.add_argument("--coverage-only",
+                        help='Only run the coverage test',
                         action="store_true")
 
     html_group = parser.add_argument_group("arguments to check html syntax only")
@@ -173,6 +193,16 @@ if __name__ == '__main__':
         single_package = args.single_package
     else:
         single_package = None
+
+    if args.coverage_only:
+        ret_val = _run_coverage_only(batch = args.batch,
+                           tool = args.tool,
+                           package = single_package,
+                           path = args.path,
+                           n_pro = args.number_of_processors,
+                           show_gui = args.show_gui)
+        exit(ret_val)
+
 
     retVal = _runUnitTests(batch = args.batch,
                            tool = args.tool,

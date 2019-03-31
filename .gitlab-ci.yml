@@ -1,10 +1,32 @@
+test_overall_coverage:
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  stage: test
+  services:
+    -  docker
+
+  before_script:
+    - export PIP_CACHE_DIR="/opt/cache/pip"
+    - source activate python27
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+    - export PYTHONIOENCODING=utf-8 # just in case
+
+  script:
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --tool dymola --coverage-only
+
+  artifacts:
+    when: on_failure
+    paths:
+      - AixLib/simulator-dymola.log
+
+  retry:
+    max: 2
+    when: runner_system_failure
+
 test_dymola_Airflow:
   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -12,6 +34,7 @@ test_dymola_Airflow:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=utf-8 # just in case
 
   script:
@@ -32,8 +55,6 @@ test_dymola_BoundaryConditions:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -41,6 +62,7 @@ test_dymola_BoundaryConditions:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -61,8 +83,6 @@ test_dymola_Controls:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -70,6 +90,7 @@ test_dymola_Controls:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -90,8 +111,6 @@ test_dymola_Electrical:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -99,6 +118,7 @@ test_dymola_Electrical:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -119,8 +139,6 @@ test_dymola_FastHVAC:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -128,6 +146,7 @@ test_dymola_FastHVAC:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -148,8 +167,6 @@ test_dymola_Fluid:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -157,6 +174,7 @@ test_dymola_Fluid:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -177,8 +195,6 @@ test_dymola_Media:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -186,6 +202,7 @@ test_dymola_Media:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -206,8 +223,6 @@ test_dymola_Systems:
   stage: test
   services:
     -  docker
-  # variables:
-  #   CI_DEBUG_TRACE: "true"
 
   before_script:
     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
@@ -215,6 +230,7 @@ test_dymola_Systems:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -241,6 +257,7 @@ test_dymola_ThermalZones:
     - source activate python27
     - python -V               # Print out python version for debugging
     - dir
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
