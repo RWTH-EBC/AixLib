@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
   import BaseLib = AixLib.Utilities;
@@ -157,7 +157,6 @@ equation
             -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}));
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
-  connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
           -14},{-54,-14},{-54,-13.2},{-45.84,-13.2}}, color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},
