@@ -93,6 +93,9 @@ model PanelHeating
     final n=floorHeatingType.PressureDropExponent,
     final m=floorHeatingType.PressureDropCoefficient)
   annotation (Placement(transformation(extent={{14,-22},{54,22}})));
+
+initial equation
+  assert(tubeLength < 100, "Current tube length is higher than 100 m. Consider changing this unrealistic value.", level = AssertionLevel.warning);
 equation
 
   // HEAT CONNECTIONS
