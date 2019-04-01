@@ -1,8 +1,8 @@
-within AixLib.Utilities.Interfaces;
+﻿within AixLib.Utilities.Interfaces;
 connector HeatStarComb "
     Combines heat ports for convective and radiative heat transfer."
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv;
-  AixLib.Utilities.Interfaces.Star rad;
+  AixLib.Utilities.Interfaces.RadPort rad;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 102}, {102, -100}}, lineColor = {191, 0, 0}, fillColor = {191, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{-9, 86}, {17, 86}, {17, 12}, {81, 34}, {89, 6}, {26, -14}, {66, -72}, {41, -88}, {4, -28}, {-31, -88}, {-56, -72}, {-18, -14}, {-81, 6}, {-73, 34}, {-9, 12}, {-9, 86}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html>

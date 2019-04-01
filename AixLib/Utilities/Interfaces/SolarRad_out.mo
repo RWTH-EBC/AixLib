@@ -1,4 +1,4 @@
-within AixLib.Utilities.Interfaces;
+﻿within AixLib.Utilities.Interfaces;
 connector SolarRad_out
   "Scalar total radiation connector (output) with additional direct, diffuse and from ground reflected radiation"
 
