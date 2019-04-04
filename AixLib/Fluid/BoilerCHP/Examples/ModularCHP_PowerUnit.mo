@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP.Examples;
-model ModularCHP_PowerUnitToHeating
+model ModularCHP_PowerUnit
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;
   import AixLib;
@@ -227,7 +227,6 @@ public
   Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flowHeaCir)
     annotation (Placement(transformation(extent={{-144,-60},{-124,-40}})));
 
-
 equation
   connect(coolantHex.port_a2, tempReturnFlow.port_b)
     annotation (Line(points={{-20,-64},{-30,-64}}, color={0,127,255}));
@@ -258,7 +257,10 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
+<p>An example of the use of modular CHP components combined as a power unit with interfaces to a controller and to the heating circuit.</p>
+<p>It allows an impression of the versatile and complex application possibilities of the model by the changeability of many variables of individual components and the detailed investigation capability.</p>
+<p>The return temperature as well as the volume flow in the heating circuit are considered constant.</p>
 <p><br><br>Caution: </p>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
+<p>If the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-end ModularCHP_PowerUnitToHeating;
+end ModularCHP_PowerUnit;

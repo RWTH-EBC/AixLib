@@ -313,8 +313,6 @@ package Calibration "CHP unit models edited for calibration tests"
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<h4>Caution: </h4>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"),
   experiment(StartTime=3600, StopTime=28800, Interval=5));
   end CHP_DynamicUncalibrated;
@@ -632,8 +630,6 @@ package Calibration "CHP unit models edited for calibration tests"
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<p><b>Caution:</b> </p>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"),
   experiment(StartTime=3600, StopTime=28800, Interval=5));
   end CHP_DynamicCalibrated;
@@ -961,8 +957,6 @@ package Calibration "CHP unit models edited for calibration tests"
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<h4>Caution: </h4>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"),
   experiment(StopTime=108000, Interval=100));
   end CHP_Static_FullLoad;
@@ -1290,8 +1284,6 @@ package Calibration "CHP unit models edited for calibration tests"
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<h4>Caution: </h4>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"),
   experiment(StopTime=108000, Interval=100));
   end CHP_Static_75PercentLoad;
@@ -1619,8 +1611,6 @@ package Calibration "CHP unit models edited for calibration tests"
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<h4>Caution: </h4>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"),
   experiment(StopTime=108000, Interval=100));
   end CHP_Static_50PercentLoad;

@@ -140,14 +140,15 @@ This package contains base classes that are used to construct the models in
 <p>Model of important cooling circuit components that needs to be used with the engine model to realise its heat transfer.</p>
 <p>Therefore a heat port is implemented as well as temperature sensors to capture the in- and outlet temperatures of the coolant medium for engine calculations.</p>
 <p>Depending on the unit configuration this model can be placed inside the cooling circuit before or after the fluid ports of the exhaust heat exchanger.</p>
-<p>Assumptions:</p>
+<h4>Assumptions:</h4>
 <p>The pressure level within the cooling circuit is assumed to be constant at about 3 bar.</p>
 </html>"));
   end Submodel_Cooling;
 
   model GasolineEngineChp
+    "Thermal and mechanical model of an internal combustion engine with consideration of the individual mass flows"
     import AixLib;
-    AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_CHPCombustionEngineModulate
+    AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineModel
       cHPCombustionEngine(
       redeclare package Medium1 = Medium_Fuel,
       redeclare package Medium2 = Medium_Air,
@@ -230,8 +231,8 @@ This package contains base classes that are used to construct the models in
     Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Inlet temperature of exhaust gas"
       annotation (Dialog(group="Thermal"));
 
-    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a annotation (
-        Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
+    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_Engine annotation (
+       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
           iconTransformation(extent={{-114,-6},{-94,14}})));
     Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
           Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent={{92,-8},
@@ -268,11 +269,15 @@ This package contains base classes that are used to construct the models in
       annotation (Line(points={{100,-88},{100,-30},{22,-30}}, color={191,0,0}));
     connect(engineToCoolant.exhaustGasTemperature, cHPCombustionEngine.exhaustGasTemperature)
       annotation (Line(points={{0,-3.16},{0,8.4}}, color={0,0,127}));
-    connect(cHPCombustionEngine.flange_a, flange_a) annotation (Line(points={{-30,
-            28},{-68,28},{-68,4},{-104,4}}, color={0,0,0}));
+    connect(cHPCombustionEngine.flange_a, flange_Engine) annotation (Line(
+          points={{-30,28},{-64,28},{-64,4},{-104,4}}, color={0,0,0}));
     annotation (Icon(graphics={
             Bitmap(extent={{-136,-134},{144,160}}, fileName=
-                "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png")}));
+                "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png")}),
+        Documentation(info="<html>
+<p>Model of a combustion engine combined from the thermal and mechanical engine model. #</p>
+<p>Together with the submodels cooling circuit, exhaust gas heat exchanger and electric motor, it can be connected to form the power unit of a combined heat and power unit.</p>
+</html>"));
   end GasolineEngineChp;
 
   model CHP_StarterGenerator
@@ -371,7 +376,7 @@ This package contains base classes that are used to construct the models in
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
     Modelica.Mechanics.Rotational.Sources.Torque torque
       annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
+    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_Machine
       annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
     Modelica.Mechanics.Rotational.Components.IdealGear gearEngineToGenerator(
@@ -417,7 +422,7 @@ This package contains base classes that are used to construct the models in
       annotation (Line(points={{0,0},{20,0}}, color={0,0,0}));
     connect(inertia.flange_b, gearEngineToGenerator.flange_b)
       annotation (Line(points={{40,0},{60,0}}, color={0,0,0}));
-    connect(gearEngineToGenerator.flange_a, flange_a)
+    connect(gearEngineToGenerator.flange_a, flange_Machine)
       annotation (Line(points={{80,0},{100,0}}, color={0,0,0}));
     annotation (Documentation(info="<html>
 <p>Model of an electric induction machine that includes the calculation of:</p>
@@ -824,24 +829,11 @@ This package contains base classes that are used to construct the models in
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle.</p>
 <p><b>Assumptions</b> </p>
-<p>- Berechnung eines konvektiven W&auml;rme&uuml;bergangs zwischen Abgas und W&auml;rme&uuml;bertrager als zylindrisches Abgasrohr</p>
-<p>-&gt; F&uuml;r den Rohrquerschnitt wird der Anschlussquerschnitt der Erzeugereinheit verwendet, die w&auml;rme&uuml;bertragende Fl&auml;che und die Kapazit&auml;t des W&auml;rme&uuml;bertragers k&ouml;nnen kalibriert werden</p>
-<p>-&gt; Bekannte Gr&ouml;&szlig;en sind die Abgastemperatur bei Austritt und die Gr&ouml;&szlig;enordnung des W&auml;rmestroms an den K&uuml;hlwasserkreislauf</p>
-<p>- Die W&auml;rme&uuml;bertragung an die Umgebung (G_Amb) und den K&uuml;hlwasserkreislauf (G_Cool) wird mittels W&auml;rmeleitung berechnet</p>
-<p>-&gt; Koeffizienten k&ouml;nnen mittels bekannter Gr&ouml;&szlig;en angen&auml;hert werden</p>
-<p>- W&auml;rmeleistung aus der Kondensation von Wasser im Abgas kann ber&uuml;cksichtigt werden</p>
-<p>-&gt; Berechnung aus der Bestimmung des ausfallenden Wassers &uuml;ber den S&auml;ttigungsdampfdruck und die kritische Beladung im Abgas f&uuml;r den niedrigsten Zustand (bei Austrittstemperatur)</p>
-<p>-&gt; Bestimmung der Verdampfungsenthalpie &uuml;ber eine empirische Formel aus Tabellendaten</p>
-<p>-&gt; Annahme: Der latente W&auml;rmestrom geht zus&auml;tzlich zum konvektiven W&auml;rmestrom auf die Kapazit&auml;t des Abgasw&auml;rme&uuml;bertragers &uuml;ber</p>
-<p><br>- Calculation of a convective heat transfer between exhaust gas and heat exchanger capacity as a cylindrical exhaust pipe</p>
-<p>-&gt; For the pipe cross section, the connection cross section of the power unit is used, the heat transfer area and the capacity of the heat exchanger can be calibrated</p>
-<p>-&gt; Known quantities are the exhaust gas temperature at the outlet and the magnitude of the heat flow to the cooling water circuit</p>
-<p>- The heat transfer to the environment (G_Amb) and the cooling water circuit (G_Cool) is calculated by means of heat conduction</p>
-<p>-&gt; Coefficients can be approximated using known quantities</p>
-<p>- Heat output from water condensation in the exhaust gas is can be considered</p>
-<p>-&gt; Calculation from the determination of the condensing water over the saturation vapor pressure and the critical load in the exhaust gas for the ExhHex outlet state (lowest temperature)</p>
-<p>-&gt; Determination of the enthalpy of vaporization using an empirical formula from tabular data</p>
-<p>-&gt; Assumption: The latent heat flow is is added to the convective heat flow to the capacity of the exhaust heat exchanger</p>
+<p>The convective heat transfer between exhaust gas and heat exchanger is calculated as a cylindrical exhaust pipe. For the pipe cross-section, the connection cross-section of the power unit is used; the heat transfer area and the capacity of the heat exchanger can be calibrated.</p>
+<p>Known variables are the combustion air ratio and the heat flow to the cooling water circuit at nominal operation. These are used to estimate the pipe diameters if unknown.</p>
+<p>The heat transfer to the environment (G_Amb) and the cooling water circuit (G_Cool) is calculated by means of heat conduction.</p>
+<p>There is the option of considering the heat output from the condensation of water in the flue gas. This is determined from the determination of the precipitating water via the saturation vapour pressure and the critical loading in the flue gas for the critical state (at outlet temperature). The evaporation enthalpy is approximated using an empirical formula based on table data for ambient pressure.</p>
+<p>Simplifying it is assumed that the latent heat flux in addition to the convective heat flux is transferred to the capacity of the exhaust gas heat exchanger.</p>
 </html>"));
   end ExhaustHeatExchanger;
 
@@ -933,6 +925,246 @@ This package contains base classes that are used to construct the models in
 <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP\">AixLib.Fluid.BoilerCHP.ModularCHP</a>.
 </p>
 </html>"));
+    model GasolineEngineChp_EngineModel
+      "Internal combustion engine model for CHP-applications."
+      import AixLib;
+
+      replaceable package Medium1 =
+          DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
+                                                                    constrainedby
+        DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                    annotation(choicesAllMatching=true,
+          Documentation(revisions="<html>
+</html>"));
+      replaceable package Medium2 =
+          AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                                constrainedby
+        DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                             annotation(choicesAllMatching=true);
+
+      replaceable package Medium3 =
+          DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus constrainedby
+        DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                     annotation(choicesAllMatching=true);
+
+      parameter
+        AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
+        CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_SenerTecDachsG5_5()
+        "Needed engine data for calculations"
+        annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
+
+      constant Modelica.SIunits.Volume VCyl = CHPEngData.VEng/CHPEngData.z "Cylinder displacement";
+      type RotationSpeed=Real(final unit="1/s", min=0);
+      constant RotationSpeed nEngNominal = 25.583 "Nominal engine speed at operating point";
+      constant Modelica.SIunits.Power P_mecNominal = CHPEngData.P_mecNominal "Mecanical power output at nominal operating point";
+      parameter Modelica.SIunits.Temperature T_Amb=298.15     "Ambient temperature (matches to fuel and combustion air temperature)";
+      type GasConstant=Real(final unit="J/(mol.K)");
+      constant GasConstant R = 8.31446 "Gasconstant for calculation purposes";
+      constant Real QuoDCyl = CHPEngData.QuoDCyl;
+      constant Boolean FuelType = Medium1.isGas "True = Gasoline fuel, False = Liquid fuel";
+      constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_FueNominal/H_U*(1
+           + Lambda*L_St)
+        "Maximal exhaust gas flow based on the fuel and combustion properties";
+      constant Modelica.SIunits.Mass m_FueEngRot=CHPEngData.P_FueNominal*60/(H_U*
+          CHPEngData.nEngMax*CHPEngData.i)
+        "Injected fuel mass per engine rotation(presumed as constant)";
+      constant Modelica.SIunits.Pressure p_Amb = 101325 "Ambient pressure";
+      constant Modelica.SIunits.Pressure p_mi = p_mfNominal+p_meNominal "Constant indicated mean effective cylinder pressure";
+      constant Modelica.SIunits.Pressure p_meNominal = CHPEngData.p_meNominal "Nominal mean effective cylinder pressure";
+      constant Modelica.SIunits.Pressure ref_p_mfNominal = CHPEngData.ref_p_mfNominal "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
+      constant Modelica.SIunits.Pressure p_mfNominal=ref_p_mfNominal*QuoDCyl^(-0.3) "Nominal friction mean pressure";
+      constant Modelica.SIunits.Temperature T_ExhOut = CHPEngData.T_ExhPowUniOut "Assumed exhaust gas outlet temperature of the CHP unit for heat calculations";
+      constant Modelica.SIunits.SpecificEnergy H_U = Medium1.H_U "Specific calorific value of the fuel";
+      constant Real Lambda=CHPEngData.Lambda "Combustion air ratio";
+      constant Real L_St = Medium1.L_st "Stoichiometric air consumption per mass fuel";
+      constant Real l_Min = L_St*MM_Fuel/MM_Air "Minimum molar air consumption per mole fuel";
+      constant Modelica.SIunits.MolarMass MM_Fuel = Medium1.MM "Molar mass of the fuel";
+      constant Modelica.SIunits.MolarMass MM_Air = Medium2.MM "Molar mass of the combustion air";
+      constant Modelica.SIunits.MolarMass MM_ComExh[:] = Medium3.data[:].MM "Molar masses of the combustion products: N2, O2, H2O, CO2";
+      constant Real expFacCpComExh[:] = {0.11, 0.15, 0.20, 0.30} "Exponential factor for calculating the specific heat capacity of N2, O2, H2O, CO2";
+      constant Modelica.SIunits.SpecificHeatCapacity cpRefComExh[:] = {1000, 900, 1750, 840} "Specific heat capacities of the combustion products at reference state at 0°C";
+      constant Modelica.SIunits.Temperature RefT_Com = 1473.15 "Reference combustion temperature for calculation purposes";
+
+      // Exhaust composition for gasoline fuels
+
+      constant Real n_N2Exh = if FuelType then Medium1.moleFractions_Gas[1] + Lambda*l_Min*Medium2.moleFractions_Air[1]
+      else Lambda*l_Min*Medium2.moleFractions_Air[1] "Exhaust: Number of molecules Nitrogen per mole of fuel";
+      constant Real n_O2Exh = (Lambda-1)*l_Min*Medium2.moleFractions_Air[2] "Exhaust: Number of molecules Oxygen per mole of fuel";
+      constant Real n_H2OExh = if FuelType then 0.5*sum(Medium1.moleFractions_Gas[i]*Medium1.Fuel.nue_H[i] for i in 1:size(Medium1.Fuel.nue_H, 1))
+      else 0.5*(Medium1.Fuel.Xi_liq[2]*Medium1.MM/Medium1.Fuel.MMi_liq[2]) "Exhaust: Number of molecules H20 per mole of fuel";
+      constant Real n_CO2Exh = if FuelType then sum(Medium1.moleFractions_Gas[i]*Medium1.Fuel.nue_C[i] for i in 1:size(Medium1.Fuel.nue_C, 1))
+      else Medium1.Fuel.Xi_liq[1]*Medium1.MM/Medium1.Fuel.MMi_liq[1] "Exhaust: Number of molecules CO2 per mole of fuel";
+      constant Real n_ComExh[:] = {n_N2Exh, n_O2Exh, n_H2OExh, n_CO2Exh};
+      constant Real n_Exh = sum(n_ComExh[j] for j in 1:size(n_ComExh, 1)) "Number of exhaust gas molecules per mole of fuel";
+      constant Modelica.SIunits.MolarMass MM_Exh = sum(n_ComExh[i]*MM_ComExh[i] for i in 1:size(n_ComExh, 1))/sum(n_ComExh[i] for i in 1:size(n_ComExh, 1))
+      "Molar mass of the exhaust gas";
+      constant Modelica.SIunits.MassFraction X_N2Exh =  MM_ComExh[1]*n_ComExh[1]/(MM_Exh*n_Exh)  "Mass fraction of N2 in the exhaust gas";
+      constant Modelica.SIunits.MassFraction X_O2Exh =  MM_ComExh[2]*n_ComExh[2]/(MM_Exh*n_Exh)  "Mass fraction of O2 in the exhaust gas";
+      constant Modelica.SIunits.MassFraction X_H2OExh =  MM_ComExh[3]*n_ComExh[3]/(MM_Exh*n_Exh)  "Mass fraction of H2O in the exhaust gas";
+      constant Modelica.SIunits.MassFraction X_CO2Exh =  MM_ComExh[4]*n_ComExh[4]/(MM_Exh*n_Exh)  "Mass fraction of CO2 in the exhaust gas";
+      constant Modelica.SIunits.MassFraction Xi_Exh[size(n_ComExh, 1)] = {X_N2Exh, X_O2Exh, X_H2OExh, X_CO2Exh};
+
+     // RotationSpeed nEng(max=CHPEngData.nEngMax) = 25.583 "Current engine speed";
+
+      Boolean SwitchOnOff=true
+                          "Operation switch of the CHP unit (true=On, false=Off)"
+        annotation (Dialog(group="Modulation"));
+      RotationSpeed nEng(min=0) "Current engine speed";
+      Modelica.SIunits.MassFlowRate m_Exh "Mass flow rate of exhaust gas";
+      Modelica.SIunits.MassFlowRate m_CO2Exh "Mass flow rate of CO2 in the exhaust gas";
+      Modelica.SIunits.MassFlowRate m_Fue(min=0) "Mass flow rate of fuel";
+      Modelica.SIunits.MassFlowRate m_Air(min=0) "Mass flow rate of combustion air";
+      Modelica.SIunits.SpecificHeatCapacity meanCpComExh[size(n_ComExh, 1)] "Calculated specific heat capacities of the exhaust gas components for the calculated combustion temperature";
+      Modelica.SIunits.SpecificHeatCapacity meanCpExh "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature";
+      Modelica.SIunits.SpecificEnergy h_Exh = 1000*(-286 + 1.011*T_ExhCHPOut - 27.29*Lambda + 0.000136*T_ExhCHPOut^2 - 0.0255*T_ExhCHPOut*Lambda + 6.425*Lambda^2) "Specific enthalpy of the exhaust gas";
+      Modelica.SIunits.Power P_eff "Effective(mechanical) engine power";
+      Modelica.SIunits.Power P_Fue(min=0) = m_Fue*H_U "Fuel expenses at operating point";
+      Modelica.SIunits.Power H_Exh "Enthalpy stream of the exhaust gas";
+      Modelica.SIunits.Power CalQ_therm "Calculated heat from engine combustion";
+      Modelica.SIunits.Power Q_therm(min=0) "Total heat from engine combustion";
+      Modelica.SIunits.Torque Mmot "Calculated engine torque";
+      Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
+      annotation(Dialog(group="Parameters"));
+      Modelica.SIunits.Temperature T_Com(start=T_Amb) "Temperature of the combustion gases";
+      Modelica.SIunits.Temperature T_ExhCHPOut=383.15 "Exhaust gas outlet temperature of CHP unit"
+      annotation(Dialog(group="Parameters"));
+      Real modFac=1 "Modulation factor for energy outuput control of the Chp unit"
+        annotation (Dialog(group="Modulation"));
+
+      // Dynamic engine friction calculation model for the mechanical power and heat output of the combustion engine
+
+      Real A0 = 1.0895-1.079*10^(-2)*(T_logEngCool-273.15)+5.525*10^(-5)*(T_logEngCool-273.15)^2;
+      Real A1 = 4.68*10^(-4)-5.904*10^(-6)*(T_logEngCool-273.15)+1.88*10^(-8)*(T_logEngCool-273.15)^2;
+      Real A2 = -4.35*10^(-8)+1.12*10^(-9)*(T_logEngCool-273.15)-4.79*10^(-12)*(T_logEngCool-273.15)^2;
+      Real B0 = -2.625*10^(-3)+3.75*10^(-7)*(nEng*60)+1.75*10^(-5)*(T_logEngCool-273.15)+2.5*10^(-9)*(T_logEngCool-273.15)*(nEng*60);
+      Real B1 = 8.95*10^(-3)+1.5*10^(-7)*(nEng*60)+7*10^(-6)*(T_logEngCool-273.15)-10^(-9)*(T_logEngCool-273.15)*(nEng*60);
+      Modelica.SIunits.Pressure p_mf = p_mfNominal*((A0+A1*(nEng*60)+A2*(nEng*60)^2)+(B0+B1*(p_meNominal/100000))) "Current friction mean pressure at operating point";
+      Modelica.SIunits.Pressure p_me = (modFac*p_mi)-p_mf "Current mean effective pressure at operating point";
+      Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
+
+      Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package
+          Medium =
+            Medium3)
+        annotation (Placement(transformation(extent={{108,-10},{88,10}})));
+      Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
+        use_m_flow_in=true,
+        use_T_in=true,
+        redeclare package Medium = Medium3,
+        X=Xi_Exh,
+        use_X_in=false,
+        nPorts=1)
+        annotation (Placement(transformation(extent={{66,-10},{86,10}})));
+      Modelica.Blocks.Sources.RealExpression massFlowExhaust(y=m_Exh)
+        annotation (Placement(transformation(extent={{28,-4},{50,20}})));
+      Modelica.Blocks.Sources.RealExpression effectiveMechanicalTorque(y=Mmot)
+        annotation (Placement(transformation(extent={{18,-12},{-6,12}})));
+      Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Mechanics.Rotational.Sources.Torque engineTorque annotation (
+          Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=180,
+            origin={-30,0})));
+      Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.5*CHPEngData.z/4)
+                                                                    annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-68,0})));
+
+      Modelica.Blocks.Interfaces.RealInput exhaustGasTemperature
+        annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+            rotation=270,
+            origin={0,-104}), iconTransformation(
+            extent={{10,-10},{-10,10}},
+            rotation=270,
+            origin={0,-70})));
+    equation
+
+    for i in 1:size(n_ComExh, 1) loop
+      meanCpComExh[i] = cpRefComExh[i]/(expFacCpComExh[i] + 1)/(T_Com/273.15 - 1)*(-1 + (T_Com/273.15)^(expFacCpComExh[i] + 1));
+      end for;
+      meanCpExh = sum(meanCpComExh[i]*Xi_Exh[i] for i in 1:size(n_ComExh, 1));
+      m_Fue = modFac*m_FueEngRot*nEng*CHPEngData.i/60;
+      m_Air = m_Fue*Lambda*L_St;
+     // m_Exh = m_Fue + m_Air;
+      m_CO2Exh = m_Fue*(1+Lambda*L_St)*X_CO2Exh;
+      H_Exh = h_Exh*m_Fue*(1+Lambda*L_St);
+      if inertia.w>=80 and SwitchOnOff then
+      Mmot = CHPEngData.i*p_me*CHPEngData.VEng/(2*Modelica.Constants.pi);
+      nEng = inertia.w/(2*Modelica.Constants.pi);
+      m_Exh = m_Fue + m_Air;
+      elseif inertia.w>=80 and not
+                                  (SwitchOnOff) then
+      Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
+      nEng = inertia.w/(2*Modelica.Constants.pi);
+      m_Exh = m_Fue + m_Air + 0.0001;
+      elseif inertia.w<80 and noEvent(inertia.w>0.1) then
+      Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
+      nEng = inertia.w/(2*Modelica.Constants.pi);
+      m_Exh = m_Fue + m_Air + 0.0001;
+      else
+      Mmot = 0;
+      nEng = 0;
+      m_Exh = 0.001;
+      end if;
+      CalQ_therm = P_Fue - P_eff - H_Exh;
+      Q_therm = if (nEng>1) and (CalQ_therm>=10) then CalQ_therm else 0;
+      T_Com = (H_U-(60*p_me*CHPEngData.VEng)/m_FueEngRot)/((1 + Lambda*L_St)*meanCpExh) + T_Amb;
+      P_eff = CHPEngData.i*nEng*p_me*CHPEngData.VEng;
+     /* if m_Fue>0 then
+  T_Com = (P_Fue - P_eff)/(m_Fue*(1 + Lambda*L_St)*meanCpExh) + T_Amb;
+  else
+  T_Com = T_Amb;
+  end if;  */
+
+      connect(exhaustFlow.m_flow_in, massFlowExhaust.y)
+        annotation (Line(points={{66,8},{51.1,8}},   color={0,0,127}));
+      connect(exhaustFlow.ports[1], port_Exhaust)
+        annotation (Line(points={{86,0},{98,0}},   color={0,127,255}));
+      connect(inertia.flange_b, flange_a) annotation (Line(points={{-78,
+              1.33227e-015},{-100,1.33227e-015},{-100,0}},
+                               color={0,0,0}));
+      connect(inertia.flange_a, engineTorque.flange)
+        annotation (Line(points={{-58,-1.33227e-015},{-58,1.33227e-015},{-40,
+              1.33227e-015}},                    color={0,0,0}));
+      connect(exhaustFlow.T_in, exhaustGasTemperature) annotation (Line(points={{64,
+              4},{56,4},{56,-40},{0,-40},{0,-104}}, color={0,0,127}));
+      connect(engineTorque.tau, effectiveMechanicalTorque.y) annotation (Line(
+            points={{-18,-1.55431e-015},{-12,-1.55431e-015},{-12,0},{-7.2,0}},
+            color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+              Bitmap(extent={{-120,-134},{122,134}}, fileName=
+                  "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png"),
+            Text(
+              extent={{-100,80},{100,64}},
+              lineColor={28,108,200},
+              textStyle={TextStyle.Bold},
+              textString="%name")}),                                 Diagram(
+            coordinateSystem(preserveAspectRatio=false)),
+        Documentation(revisions="<html>
+</html>",     info="<html>
+<p>The model of the internal combustion engine is the centrepiece of the BHKW model developed. It is divided into a thermal and a mechanical-chemical part.</p>
+<p>The energy balance of the combustion engine is used to determine the maximum heat released. The mechanical power is calculated using a mean value model, which is characterized by short calculation times and simple parameterization. An empirical approach is used to describe the specific enthalpy of the exhaust gas. The required mass flows of the combustion products are determined by assuming complete combustion with a known fuel composition. Various liquid and gaseous fuels have been implemented on the basis of the existing material models and are available to the user. </p>
+<p>Due to the complexity of a combustion engine, assumptions have to be made. These are listed below to understand the function and applicability of the model.</p>
+<p><br><b><span style=\"color: #005500;\">Assumptions</span></b></p>
+<p><br>Assumptions made and resulting limitations of the internal combustion engine model:</p>
+<p>- The nominal power point of the power unit is known and the modulationof the operation point is achieved by a reduction of the introduced fuel.</p>
+<p>- The indicated mean pressure is assumed to be constant as a necessary measure for the calculation of engine power. This corresponds to a constant thermodynamic combustion process within the cylinders.</p>
+<p>- The engine must be started with an electric machine. It is controlled by the release of the fuel quantity from a minimum speed (800rpm). The speed then increases to equilibrium with the counteracting generator torque.</p>
+<p>- Complete and superstoichiometric combustion is assumed to solve the gross reaction equation</p>
+<p>- Entry of air and fuel at ambient conditions and constant amount of fuel and air per combustion cycle</p>
+<p>-&gt; Only conditionally with turbocharging of the engines, since then the cylinder filling can vary depending on the boost pressure (slight consideration due to stored rated performance data)</p>
+<p><br>Air ratio or residual oxygen in the exhaust gas is known to estimate the combustion process. So this is a necessary assumption for the calculation of material flows (mass flows, composition of the exhaust gas).</p>
+<p>The mean specific heat capacity of the exhaust gas for a temperature range from 0 &deg; C to the maximum adiabatic combustion temperature is used to calculate the exhaust gas temperature.</p>
+<p>The mean specific heat capacity is determinated with a potency approach according to M&uuml;ller (1968).</p>
+<p>Frictional losses that can be calculated based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) are converted into usable heat. </p>
+<p>The calculation of the exhaust gas enthalpy according to an empirical approach is based on investigations by R.Pischinger which uses a reference point temperature of 25 &deg; C (initial state of the reaction educts from combustion air and fuel).</p>
+<p>-&gt; Consideration of the chemical and thermal proportions of the enthalpy</p>
+<p>-&gt; Limited accuracy for diesel engine (non-premixed) processes</p>
+</html>"));
+    end GasolineEngineChp_EngineModel;
+
     class GasolineEngineChp_EngineHousing
       "Engine housing as a simple two layer wall."
       import AixLib;
@@ -1153,36 +1385,15 @@ This package contains base classes that are used to construct the models in
 </html>
 ",     info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Engine&nbsp;housing&nbsp;as&nbsp;a&nbsp;simple&nbsp;two&nbsp;layer&nbsp;wall.</p>
+<p><br>The model of the motor housing uses a build-up scheme as a two-layer wall with thermal transitions to a circulating cooling medium. Assumptions were made to simplify the thermal simulation.</p>
 <h4>Assumptions</h4>
-<p>- Aus einzelnen Zylindern wird eine Gesamtfl&auml;che (Annahme: Zylinder liegt im unteren Totpunkt) berechnet und die W&auml;rmeleitung als ebene Wand modelliert</p>
-<p>-&gt; N&auml;herung der unbekannten Motorengeometrie mit zu kalibrierenden W&auml;rme&uuml;berg&auml;ngen an Umgebung und K&uuml;hlwasserkreislauf</p>
-<p>- Motorblock besteht aus einem homogenen Material mit bekanntem Gesamtgewicht und teilt sich in einen inneren und einen &auml;u&szlig;eren Teil auf (default ist Grauguss)</p>
-<p>- &Ouml;lkreislauf wird zur Vereinfachung als Kapazit&auml;t in dem &auml;u&szlig;eren Motorblock ber&uuml;cksichtigt</p>
-<p>-&gt; K&uuml;hlwasserkreislauf liegt zwischen diesen beiden Teilen (nur &auml;u&szlig;erer Teil wechselwirkt mit der Umgebung)</p>
-<p>-&gt; Dicke des inneren Motorblocks ist eine wesentliche, aber unbekannte Gr&ouml;&szlig;e (Literatur gibt Werte um 5mm f&uuml;r PKW-Motoren an)</p>
-<p>-&gt; Anbauteile und einzelne unterschiedliche Materialschichten im Motorblock bleiben zur Vereinfachung unber&uuml;cksichtigt und k&ouml;nnen durch Kalibration angen&auml;hert werden</p>
-<p>- Das isolierende/d&auml;mmende Geh&auml;use der Erzeugereinheit besitzt keine eigene Kapazit&auml;t</p>
-<p>-&gt; Erh&ouml;hte Komplexit&auml;t der Modelle wird so vermieden (W&auml;rmeverlust an Umgebung sehr gering)</p>
-<p>- W&auml;rme&uuml;bergang (Zylinderwand zu K&uuml;hlwasserkreislauf) wird kalibriert und ist proportional zur Temperaturdifferenz </p>
-<p>-&gt; Annahme eines konstanten Durchflusses von K&uuml;hlwasser und Geometrie der K&uuml;hlkan&auml;le ist unbekannt, daher keine Berechnung eines konvektiven W&auml;rme&uuml;bergangs zum K&uuml;hlwasserkreislauf</p>
-<p>- Zylinderwand mit homogenem Temperaturprofil gebildet aus der Umgebungstemperatur und der maximalen Verbrennungstemperatur (Temperaturverlauf in Zylinder als Dreieck mit T_Amb - T_Com - T_Amb)</p>
-<p>-&gt; Bestimmung einer mittleren Zylinderwandtemperatur mithilfe einer Fl&auml;chenhalbierenden im Temperaturverlauf</p>
-<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\" width=\"426\" height=\"300\"
-alt=\"Calculation of the cylinder wall temperature\"/> </p>
-<p>- From individual cylinders, a total area (assumption: cylinder is at bottom dead center) is calculated and the heat conduction is modeled as a flat wall</p>
-<p>-&gt; Approximation of the unknown motor geometry with heat transfers to the environment and the cooling water circuit to be calibrated</p>
-<p>- Engine block consists of a homogeneous material with known total weight and is divided into an inner and an outer part (default is gray cast iron)</p>
-<p>- Oil circuit is considered as a capacity in the outer engine block for simplicity</p>
-<p>-&gt; Cooling water circuit lies between these two parts (only outer part interacts with the environment)</p>
-<p>-&gt; Thickness of the inner engine block is an essential, but unknown size (literature indicates values ​​around 5mm for car engines)</p>
-<p>-&gt; Attachments and individual different material layers in the engine block are not taken into account for simplicity and can be approximated by calibration</p>
-<p>- The insulating housing of the power unit has no own capacity</p>
-<p>-&gt; Increased complexity of the models is thus avoided (heat loss to environment on very low level)</p>
-<p>- Heat transfer (cylinder wall to cooling water circuit) is calibrated and is proportional to the temperature difference</p>
-<p>-&gt; Assumption of a constant flow of cooling water and geometry of the cooling channels is unknown, therefore no calculation of a convective heat transfer to the cooling water circuit</p>
-<p>Cylinder wall with homogeneous temperature profile formed from the ambient temperature and the maximum combustion temperature (temperature curve in cylinder as a triangle with T_Amb - T_Com - T_Amb)</p>
-<p>-&gt; Determination of a mean cylinder wall temperature using a bisector in the temperature profile</p>
+<p>From individual cylinders, a total area (assumption: cylinder is at bottom dead center) is calculated and the heat conduction is modeled as a flat wall. This approximation of the unknown motor geometry with heat transfers to the environment and the cooling water circuit needs to be calibrated. </p>
+<p>The engine block consists of a homogeneous material with known total weight and is divided into an inner and an outer part (default is grey cast iron)</p>
+<p>For simplicity the oil circuit is considered as a capacity in the outer engine block that needs to calibrated as well. The cooling water circuit is assumed to run between these two parts (only the outer part interacts with the environment).</p>
+<p>The thickness of the inner engine block is an essential, but unknown variable (literature indicates values ​​around 5mm for car engines). Attachments and individual different material layers in the engine block are not taken into account for simplicity and can be approximated by calibration. The insulating housing of the power unit has no own capacity.</p>
+<p>The heat transfer (cylinder wall to cooling water circuit) is calibrated and assumed to be proportional to the temperature difference because due to unknown cooling channel geometry the calculation of a convective heat transfer coefficient is not possible.</p>
+<p>The temperature profile of the cylinder wall is homogeneously formed from the ambient temperature and the maximum combustion temperature (temperature curve in cylinder as a triangle with T_Amb - T_Com - T_Amb). Therefore a mean cylinder wall temperature is determinated using a bisector in the temperature profile as shown in the following figure.</p>
+<p align=\"center\"><br><span style=\"font-size: 18pt;\"><img src=\"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\" alt=\"Calculation of the cylinder wall temperature\"/></span> </p>
 </html>"),   Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
                   graphics={
             Rectangle(
@@ -1404,288 +1615,6 @@ to engine"),Line(
 to ambient")}));
     end GasolineEngineChp_EngineHousing_EngineBlock;
 
-    model GasolineEngineChp_CHPCombustionEngineModulate
-      "Internal combustion engine model for CHP-applications."
-      import AixLib;
-
-      replaceable package Medium1 =
-          DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
-                                                                    constrainedby
-        DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                    annotation(choicesAllMatching=true,
-          Documentation(revisions="<html>
-</html>"));
-      replaceable package Medium2 =
-          AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                                constrainedby
-        DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                             annotation(choicesAllMatching=true);
-
-      replaceable package Medium3 =
-          DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus constrainedby
-        DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                     annotation(choicesAllMatching=true);
-
-      parameter
-        AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
-        CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_SenerTecDachsG5_5()
-        "Needed engine data for calculations"
-        annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
-      constant Modelica.SIunits.Volume VCyl = CHPEngData.VEng/CHPEngData.z "Cylinder displacement";
-      type RotationSpeed=Real(final unit="1/s", min=0);
-      constant RotationSpeed nEngNominal = 25.583 "Nominal engine speed at operating point";
-      constant Modelica.SIunits.Power P_mecNominal = CHPEngData.P_mecNominal "Mecanical power output at nominal operating point";
-      parameter Modelica.SIunits.Temperature T_Amb=298.15     "Ambient temperature (matches to fuel and combustion air temperature)";
-      type GasConstant=Real(final unit="J/(mol.K)");
-      constant GasConstant R = 8.31446 "Gasconstant for calculation purposes";
-      constant Real QuoDCyl = CHPEngData.QuoDCyl;
-      constant Boolean FuelType = Medium1.isGas "True = Gasoline fuel, False = Liquid fuel";
-      constant Modelica.SIunits.MassFlowRate m_MaxExh=CHPEngData.P_FueNominal/H_U*(1
-           + Lambda*L_St)
-        "Maximal exhaust gas flow based on the fuel and combustion properties";
-      constant Modelica.SIunits.Mass m_FueEngRot=CHPEngData.P_FueNominal*60/(H_U*
-          CHPEngData.nEngMax*CHPEngData.i)
-        "Injected fuel mass per engine rotation(presumed as constant)";
-      constant Modelica.SIunits.Pressure p_Amb = 101325 "Ambient pressure";
-      constant Modelica.SIunits.Pressure p_mi = p_mfNominal+p_meNominal "Constant indicated mean effective cylinder pressure";
-      constant Modelica.SIunits.Pressure p_meNominal = CHPEngData.p_meNominal "Nominal mean effective cylinder pressure";
-      constant Modelica.SIunits.Pressure ref_p_mfNominal = CHPEngData.ref_p_mfNominal "Friction mean pressure of reference engine for calculation(dCyl=91mm & nEng=3000rpm & TEng=90°C)";
-      constant Modelica.SIunits.Pressure p_mfNominal=ref_p_mfNominal*QuoDCyl^(-0.3) "Nominal friction mean pressure";
-      constant Modelica.SIunits.Temperature T_ExhOut = CHPEngData.T_ExhPowUniOut "Assumed exhaust gas outlet temperature of the CHP unit for heat calculations";
-      constant Modelica.SIunits.SpecificEnergy H_U = Medium1.H_U "Specific calorific value of the fuel";
-      constant Real Lambda=CHPEngData.Lambda "Combustion air ratio";
-      constant Real L_St = Medium1.L_st "Stoichiometric air consumption per mass fuel";
-      constant Real l_Min = L_St*MM_Fuel/MM_Air "Minimum molar air consumption per mole fuel";
-      constant Modelica.SIunits.MolarMass MM_Fuel = Medium1.MM "Molar mass of the fuel";
-      constant Modelica.SIunits.MolarMass MM_Air = Medium2.MM "Molar mass of the combustion air";
-      constant Modelica.SIunits.MolarMass MM_ComExh[:] = Medium3.data[:].MM "Molar masses of the combustion products: N2, O2, H2O, CO2";
-      constant Real expFacCpComExh[:] = {0.11, 0.15, 0.20, 0.30} "Exponential factor for calculating the specific heat capacity of N2, O2, H2O, CO2";
-      constant Modelica.SIunits.SpecificHeatCapacity cpRefComExh[:] = {1000, 900, 1750, 840} "Specific heat capacities of the combustion products at reference state at 0°C";
-      constant Modelica.SIunits.Temperature RefT_Com = 1473.15 "Reference combustion temperature for calculation purposes";
-
-      // Exhaust composition for gasoline fuels
-
-      constant Real n_N2Exh = if FuelType then Medium1.moleFractions_Gas[1] + Lambda*l_Min*Medium2.moleFractions_Air[1]
-      else Lambda*l_Min*Medium2.moleFractions_Air[1] "Exhaust: Number of molecules Nitrogen per mole of fuel";
-      constant Real n_O2Exh = (Lambda-1)*l_Min*Medium2.moleFractions_Air[2] "Exhaust: Number of molecules Oxygen per mole of fuel";
-      constant Real n_H2OExh = if FuelType then 0.5*sum(Medium1.moleFractions_Gas[i]*Medium1.Fuel.nue_H[i] for i in 1:size(Medium1.Fuel.nue_H, 1))
-      else 0.5*(Medium1.Fuel.Xi_liq[2]*Medium1.MM/Medium1.Fuel.MMi_liq[2]) "Exhaust: Number of molecules H20 per mole of fuel";
-      constant Real n_CO2Exh = if FuelType then sum(Medium1.moleFractions_Gas[i]*Medium1.Fuel.nue_C[i] for i in 1:size(Medium1.Fuel.nue_C, 1))
-      else Medium1.Fuel.Xi_liq[1]*Medium1.MM/Medium1.Fuel.MMi_liq[1] "Exhaust: Number of molecules CO2 per mole of fuel";
-      constant Real n_ComExh[:] = {n_N2Exh, n_O2Exh, n_H2OExh, n_CO2Exh};
-      constant Real n_Exh = sum(n_ComExh[j] for j in 1:size(n_ComExh, 1)) "Number of exhaust gas molecules per mole of fuel";
-      constant Modelica.SIunits.MolarMass MM_Exh = sum(n_ComExh[i]*MM_ComExh[i] for i in 1:size(n_ComExh, 1))/sum(n_ComExh[i] for i in 1:size(n_ComExh, 1))
-      "Molar mass of the exhaust gas";
-      constant Modelica.SIunits.MassFraction X_N2Exh =  MM_ComExh[1]*n_ComExh[1]/(MM_Exh*n_Exh)  "Mass fraction of N2 in the exhaust gas";
-      constant Modelica.SIunits.MassFraction X_O2Exh =  MM_ComExh[2]*n_ComExh[2]/(MM_Exh*n_Exh)  "Mass fraction of O2 in the exhaust gas";
-      constant Modelica.SIunits.MassFraction X_H2OExh =  MM_ComExh[3]*n_ComExh[3]/(MM_Exh*n_Exh)  "Mass fraction of H2O in the exhaust gas";
-      constant Modelica.SIunits.MassFraction X_CO2Exh =  MM_ComExh[4]*n_ComExh[4]/(MM_Exh*n_Exh)  "Mass fraction of CO2 in the exhaust gas";
-      constant Modelica.SIunits.MassFraction Xi_Exh[size(n_ComExh, 1)] = {X_N2Exh, X_O2Exh, X_H2OExh, X_CO2Exh};
-
-     // RotationSpeed nEng(max=CHPEngData.nEngMax) = 25.583 "Current engine speed";
-
-      Boolean SwitchOnOff=true
-                          "Operation switch of the CHP unit (true=On, false=Off)"
-        annotation (Dialog(group="Modulation"));
-      RotationSpeed nEng(min=0) "Current engine speed";
-      Modelica.SIunits.MassFlowRate m_Exh "Mass flow rate of exhaust gas";
-      Modelica.SIunits.MassFlowRate m_CO2Exh "Mass flow rate of CO2 in the exhaust gas";
-      Modelica.SIunits.MassFlowRate m_Fue(min=0) "Mass flow rate of fuel";
-      Modelica.SIunits.MassFlowRate m_Air(min=0) "Mass flow rate of combustion air";
-      Modelica.SIunits.SpecificHeatCapacity meanCpComExh[size(n_ComExh, 1)] "Calculated specific heat capacities of the exhaust gas components for the calculated combustion temperature";
-      Modelica.SIunits.SpecificHeatCapacity meanCpExh "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature";
-      Modelica.SIunits.SpecificEnergy h_Exh = 1000*(-286 + 1.011*T_ExhCHPOut - 27.29*Lambda + 0.000136*T_ExhCHPOut^2 - 0.0255*T_ExhCHPOut*Lambda + 6.425*Lambda^2) "Specific enthalpy of the exhaust gas";
-      Modelica.SIunits.Power P_eff "Effective(mechanical) engine power";
-      Modelica.SIunits.Power P_Fue(min=0) = m_Fue*H_U "Fuel expenses at operating point";
-      Modelica.SIunits.Power H_Exh "Enthalpy stream of the exhaust gas";
-      Modelica.SIunits.Power CalQ_therm "Calculated heat from engine combustion";
-      Modelica.SIunits.Power Q_therm(min=0) "Total heat from engine combustion";
-      Modelica.SIunits.Torque Mmot "Calculated engine torque";
-      Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
-      annotation(Dialog(group="Parameters"));
-      Modelica.SIunits.Temperature T_Com(start=T_Amb) "Temperature of the combustion gases";
-      Modelica.SIunits.Temperature T_ExhCHPOut=383.15 "Exhaust gas outlet temperature of CHP unit"
-      annotation(Dialog(group="Parameters"));
-      Real modFac=1 "Modulation factor for energy outuput control of the Chp unit"
-        annotation (Dialog(group="Modulation"));
-
-      // Dynamic engine friction calculation model for the mechanical power and heat output of the combustion engine
-
-      Real A0 = 1.0895-1.079*10^(-2)*(T_logEngCool-273.15)+5.525*10^(-5)*(T_logEngCool-273.15)^2;
-      Real A1 = 4.68*10^(-4)-5.904*10^(-6)*(T_logEngCool-273.15)+1.88*10^(-8)*(T_logEngCool-273.15)^2;
-      Real A2 = -4.35*10^(-8)+1.12*10^(-9)*(T_logEngCool-273.15)-4.79*10^(-12)*(T_logEngCool-273.15)^2;
-      Real B0 = -2.625*10^(-3)+3.75*10^(-7)*(nEng*60)+1.75*10^(-5)*(T_logEngCool-273.15)+2.5*10^(-9)*(T_logEngCool-273.15)*(nEng*60);
-      Real B1 = 8.95*10^(-3)+1.5*10^(-7)*(nEng*60)+7*10^(-6)*(T_logEngCool-273.15)-10^(-9)*(T_logEngCool-273.15)*(nEng*60);
-      Modelica.SIunits.Pressure p_mf = p_mfNominal*((A0+A1*(nEng*60)+A2*(nEng*60)^2)+(B0+B1*(p_meNominal/100000))) "Current friction mean pressure at operating point";
-      Modelica.SIunits.Pressure p_me = (modFac*p_mi)-p_mf "Current mean effective pressure at operating point";
-      Real etaMec = p_me/p_mi "Current percentage of usable mechanical power compared to inner cylinder power from combustion";
-
-      Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package
-          Medium =
-            Medium3)
-        annotation (Placement(transformation(extent={{108,-10},{88,10}})));
-      Modelica.Fluid.Sources.MassFlowSource_T exhaustFlow(
-        use_m_flow_in=true,
-        use_T_in=true,
-        redeclare package Medium = Medium3,
-        X=Xi_Exh,
-        use_X_in=false,
-        nPorts=1)
-        annotation (Placement(transformation(extent={{66,-10},{86,10}})));
-      Modelica.Blocks.Sources.RealExpression massFlowExhaust(y=m_Exh)
-        annotation (Placement(transformation(extent={{28,-4},{50,20}})));
-      Modelica.Blocks.Sources.RealExpression effectiveMechanicalTorque(y=Mmot)
-        annotation (Placement(transformation(extent={{18,-12},{-6,12}})));
-      Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
-        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-      Modelica.Mechanics.Rotational.Sources.Torque engineTorque annotation (
-          Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=180,
-            origin={-30,0})));
-      Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.5*CHPEngData.z/4)
-                                                                    annotation (
-          Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={-68,0})));
-
-      Modelica.Blocks.Interfaces.RealInput exhaustGasTemperature
-        annotation (Placement(transformation(extent={{10,-10},{-10,10}},
-            rotation=270,
-            origin={0,-104}), iconTransformation(
-            extent={{10,-10},{-10,10}},
-            rotation=270,
-            origin={0,-70})));
-    equation
-
-    for i in 1:size(n_ComExh, 1) loop
-      meanCpComExh[i] = cpRefComExh[i]/(expFacCpComExh[i] + 1)/(T_Com/273.15 - 1)*(-1 + (T_Com/273.15)^(expFacCpComExh[i] + 1));
-      end for;
-      meanCpExh = sum(meanCpComExh[i]*Xi_Exh[i] for i in 1:size(n_ComExh, 1));
-      m_Fue = modFac*m_FueEngRot*nEng*CHPEngData.i/60;
-      m_Air = m_Fue*Lambda*L_St;
-     // m_Exh = m_Fue + m_Air;
-      m_CO2Exh = m_Fue*(1+Lambda*L_St)*X_CO2Exh;
-      H_Exh = h_Exh*m_Fue*(1+Lambda*L_St);
-      if inertia.w>=80 and SwitchOnOff then
-      Mmot = CHPEngData.i*p_me*CHPEngData.VEng/(2*Modelica.Constants.pi);
-      nEng = inertia.w/(2*Modelica.Constants.pi);
-      m_Exh = m_Fue + m_Air;
-      elseif inertia.w>=80 and not
-                                  (SwitchOnOff) then
-      Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
-      nEng = inertia.w/(2*Modelica.Constants.pi);
-      m_Exh = m_Fue + m_Air + 0.0001;
-      elseif inertia.w<80 and noEvent(inertia.w>0.1) then
-      Mmot = -CHPEngData.i*p_mf*CHPEngData.VEng/(2*Modelica.Constants.pi);
-      nEng = inertia.w/(2*Modelica.Constants.pi);
-      m_Exh = m_Fue + m_Air + 0.0001;
-      else
-      Mmot = 0;
-      nEng = 0;
-      m_Exh = 0.001;
-      end if;
-      CalQ_therm = P_Fue - P_eff - H_Exh;
-      Q_therm = if (nEng>1) and (CalQ_therm>=10) then CalQ_therm else 0;
-      T_Com = (H_U-(60*p_me*CHPEngData.VEng)/m_FueEngRot)/((1 + Lambda*L_St)*meanCpExh) + T_Amb;
-      P_eff = CHPEngData.i*nEng*p_me*CHPEngData.VEng;
-     /* if m_Fue>0 then
-  T_Com = (P_Fue - P_eff)/(m_Fue*(1 + Lambda*L_St)*meanCpExh) + T_Amb;
-  else
-  T_Com = T_Amb;
-  end if;  */
-
-      connect(exhaustFlow.m_flow_in, massFlowExhaust.y)
-        annotation (Line(points={{66,8},{51.1,8}},   color={0,0,127}));
-      connect(exhaustFlow.ports[1], port_Exhaust)
-        annotation (Line(points={{86,0},{98,0}},   color={0,127,255}));
-      connect(inertia.flange_b, flange_a) annotation (Line(points={{-78,
-              1.33227e-015},{-100,1.33227e-015},{-100,0}},
-                               color={0,0,0}));
-      connect(inertia.flange_a, engineTorque.flange)
-        annotation (Line(points={{-58,-1.33227e-015},{-58,1.33227e-015},{-40,
-              1.33227e-015}},                    color={0,0,0}));
-      connect(exhaustFlow.T_in, exhaustGasTemperature) annotation (Line(points={{64,
-              4},{56,4},{56,-40},{0,-40},{0,-104}}, color={0,0,127}));
-      connect(engineTorque.tau, effectiveMechanicalTorque.y) annotation (Line(
-            points={{-18,-1.55431e-015},{-12,-1.55431e-015},{-12,0},{-7.2,0}},
-            color={0,0,127}));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-              Bitmap(extent={{-120,-134},{122,134}}, fileName=
-                  "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png"),
-            Text(
-              extent={{-100,80},{100,64}},
-              lineColor={28,108,200},
-              textStyle={TextStyle.Bold},
-              textString="%name")}),                                 Diagram(
-            coordinateSystem(preserveAspectRatio=false)),
-        Documentation(revisions="<html>
-</html>",     info="<html>
-<p>Getroffene Annahmen und daraus resultierende Einschr&auml;nkungen des Modells Verbrennungsmotor:</p>
-<p>- Volllast- / Nennleistungspunkt der Erzeugereinheit ist bekannt und Wechsel zwischen Stillstand und Volllastbetrieb wird angenommen </p>
-<p>-&gt; Modellierender Betrieb ist noch nicht implementiert</p>
-<p>- Steuerung des Motors erfolgt &uuml;ber die Freigabe der Brennstoffmenge ab einer Mindestdrehzahl (800rpm) / Die Drehzahl steigt dann bis zum Gleichgewicht mit dem entgegen wirkendem Generatormoment an</p>
-<p>- Vollst&auml;ndige und &uuml;berst&ouml;chiometrische Verbrennung wird angenommen zur L&ouml;sung der Bruttoreaktionsgleichung</p>
-<p>-&gt; Motor l&auml;uft deutlich unterhalb seiner Leistungsgrenze zur m&ouml;glichst optimalen und schadstoffarmen Brennstoffausnutzung</p>
-<p>- Wandtemperatur im Zylinder wird &uuml;ber die gesamte Fl&auml;che gleich angenommen (zeitlich variabel und r&auml;umlich konstant)</p>
-<p>-&gt; Berechnung eines gemittelten W&auml;rmeflusses nach Au&szlig;en (Zyklische Betrachtung ist nicht umsetzbar wegen geringem Datenumfang)</p>
-<p>- Eintritt von Luft und Brennstoff bei Umgebungsbedingungen und konstante Kraftstoff- und Luftmenge je Verbrennungszyklus</p>
-<p>-&gt; Gilt nur bedingt bei Turboaufladung der Motoren, da so die Zylinderf&uuml;llung je nach Ladedruck variieren kann (Geringf&uuml;gige Ber&uuml;cksichtigung durch hinterlegte Nennleistungsdaten)</p>
-<p>-&gt; Kommt bei BHKWs gro&szlig;er Leistung zu Einsatz</p>
-<p>- Luftverh&auml;ltnis oder Restsauerstoff im Abgas ist bekannt</p>
-<p>-&gt; Notwendige Annahme zur Berechnung der Stofffl&uuml;sse (Massenfl&uuml;sse, Zusammensetzung des Abgases)</p>
-<p>- Verwendung einer gemittelten spezifischen W&auml;rmekapazit&auml;t des Abgases f&uuml;r einen Temperaturbereich von 0&deg;C bis zur maximalen adiabaten Verbrennungstemperatur</p>
-<p>-&gt; Bestimmung &uuml;ber einen Potenzansatz nach M&uuml;ller(1968)</p>
-<p>- Reibverluste werden in nutzbare W&auml;rme umgewandelt</p>
-<p>- Berechnung der Abgasenthalpie nach einem empirischen Ansatz auf Grundlage von Untersuchungen durch R.Pischinger</p>
-<p>-&gt; Verwendung einer Nullpunkttemperatur von 25&deg;C (Eingangszustand der Reaktionsedukte in Verbrennungsluft und Kraftstoff)</p>
-<p>-&gt; Ber&uuml;cksichtigung chemischer und thermischer Anteile der Enthalpie</p>
-<p>-&gt; Eingeschr&auml;nkte Genauigkeit f&uuml;r dieselmotorische (nicht-vorgemischte) Prozesse</p>
-<p>- Enthaltenes Wasser im Kraftstoff oder der Verbrennungsluft wird nicht ber&uuml;cksichtigt</p>
-<p>-&gt; Annahme der Lufttrocknung vor Eintritt in Erzeugereinheit -&gt; SONST: Zus&auml;tzliche Schwankungen durch Wettereinfl&uuml;sse m&uuml;ssten ber&uuml;cksichtigt werden</p>
-<p>- Nebenprodukte der Verbrennung bleiben unber&uuml;cksichtigt (Stickoxide, Wasserstoff usw.)</p>
-<p>-&gt; Umfassende Kenntnis des Verbrennungsprozesses und des Motors notwendig (Geringf&uuml;gige Ber&uuml;cksichtigung in Energiebilanz, da Abgasenthalpie auf empirischen Ansatz nach Messungen beruht)</p>
-<p>- Annahme einer direkten Kopplung zwischen Motor und Generator (keine &Uuml;bersetzung dazwischen: n_Mot = n_Gen)</p>
-<p>-&gt; Kann aber mithilfe von mechanischen Modulen eingebracht werden</p>
-<p>- Annahme eines konstanten indizierten Mitteldrucks als notwendige Ma&szlig;nahme zur Berechnung der Motorleistung </p>
-<p>-&gt; Bedeutet, dass der Verbrennungsmotor mit einem gleichbleibenden thermodynamischen Kreisprozess arbeitet</p>
-<p>- Ausgehend von einem bekannten Reibmitteldruck bei einer Drehzahl von 3000rpm (falls nicht bekannt, default Mittelwerte aus VK1 von S. Pischinger) wird drehzahl- und temperaturabh&auml;ngig der Reibmitteldruck bestimmt</p>
-<p>-&gt; Unterscheidung zwischen SI- und DI-Motor - Weitere Motorenbauarten sind unber&uuml;cksichtigt!</p>
-<p><br><br><b><span style=\"color: #005500;\">Assumptions</span></b></p>
-<p><br><br>Assumptions made and resulting limitations of the internal combustion engine model:</p>
-<p>- Full load / nominal operating point of the power unit is known and a change between standstill and full load operation is assumed</p>
-<p>-&gt; Modeling operation is not implemented yet</p>
-<p>- The engine is controlled by the release of the fuel quantity from a minimum speed (800rpm) / The speed then increases to equilibrium with the counteracting generator torque</p>
-<p>- Complete and superstoichiometric combustion is assumed to solve the gross reaction equation</p>
-<p>-&gt; Engine runs well below its performance limit for optimum and low-emission fuel utilization</p>
-<p>- Wall temperature in the cylinder is assumed to be the same over the entire surface (variable in time and spatially constant)</p>
-<p>-&gt; Calculation of a mean heat flow to the outside (cyclic analysis is not feasible due to missing data)</p>
-<p>- Entry of air and fuel at ambient conditions and constant amount of fuel and air per combustion cycle</p>
-<p>-&gt; Only conditionally with turbocharging of the engines, since then the cylinder filling can vary depending on the boost pressure (slight consideration due to stored rated performance data)</p>
-<p>-&gt; Used in CHPs of high performance</p>
-<p>- Air ratio or residual oxygen in the exhaust gas is known</p>
-<p>-&gt; Necessary assumption for the calculation of material flows (mass flows, composition of the exhaust gas)</p>
-<p>- Use of the mean specific heat capacity of the exhaust gas for a temperature range from 0 &deg; C to the maximum adiabatic combustion temperature</p>
-<p>-&gt; Determination of a potency approach according to M&uuml;ller (1968)</p>
-<p>- Frictional losses are converted into usable heat</p>
-<p>- Calculation of the exhaust gas enthalpy according to an empirical approach based on investigations by R.Pischinger</p>
-<p>-&gt; Use of a reference point temperature of 25 &deg; C (initial state of the reaction educts from combustion air and fuel)</p>
-<p>-&gt; Consideration of the chemical and thermal proportions of the enthalpy</p>
-<p>-&gt; Limited accuracy for diesel engine (non-premixed) processes</p>
-<p>- Contained water in the fuel or the combustion air is not considered</p>
-<p>-&gt; Assumption of air drying before entering power unit -&gt; ELSE: Additional fluctuations due to weather conditions must be taken into account</p>
-<p>- Combustion by-products are ignored (nitrogen oxides, hydrogen, etc.)</p>
-<p>-&gt; Comprehensive knowledge of the combustion process and the engine necessary (slight consideration in energy balance, since exhaust enthalpy is based on empirical approach after exhaust gas measurements)</p>
-<p>- Assumption of a direct coupling between engine and generator (no translation in between: n_Mot = n_Gen)</p>
-<p>-&gt; Can be introduced by means of mechanical modules</p>
-<p>- Assumption of a constant indicated mean pressure as a necessary measure for the calculation of engine power</p>
-<p>-&gt; Means that the combustion engine operates with a constant thermodynamic cycle</p>
-<p>- Based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) - Is dependent on speed and temperature of the engine</p>
-<p>-&gt; Distinction between SI and DI engine - Other engine types are not considered!</p>
-</html>"));
-    end GasolineEngineChp_CHPCombustionEngineModulate;
     annotation (Documentation(info="<html>
 <p>This package contains base classe components that are used to construct the models in <a href=\"modelica://AixLib.Fluid.ModularCHP\">AixLib.Fluid.ModularCHP</a>. </p>
 </html>"));

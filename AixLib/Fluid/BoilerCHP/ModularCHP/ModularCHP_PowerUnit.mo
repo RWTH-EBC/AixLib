@@ -84,9 +84,10 @@ public
     "Calibration factor for electric power output (default=1)"
     annotation (Dialog(tab="Calibration parameters",
     group="Fast calibration - Electric power and fuel usage"));
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
+  parameter Modelica.SIunits.ThermalConductance G_CoolChannel=45
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
-    annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
+    annotation (Dialog(tab="Calibration parameters",group=
+          "Fast calibration - Thermal power output"));
   parameter Modelica.SIunits.ThermalConductance G_CooExhHex=G_CooExhHex
     "Thermal conductance of exhaust heat exchanger to cooling circuit"
     annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
@@ -99,9 +100,10 @@ public
   parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
+  parameter Modelica.SIunits.ThermalConductance G_EngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
-    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
+    annotation (Dialog(tab="Calibration parameters",group=
+          "Advanced calibration parameters"));
   parameter Modelica.SIunits.ThermalConductance G_Amb=5
     "Constant thermal conductance of material" annotation (Dialog(tab="Calibration parameters",
         group="Advanced calibration parameters"));
@@ -203,8 +205,8 @@ public
         T_logEngCool=gasolineEngineChp.T_logEngCool),
     engineToCoolant(T_ExhPowUniOut=exhaustHeatExchanger.senTExhCold.T),
     dInn=dInn,
-    GEngToAmb=GEngToAmb)                                 annotation (Placement(
-        transformation(rotation=0, extent={{-18,8},{18,44}})));
+    GEngToAmb=G_EngToAmb) annotation (Placement(transformation(rotation=0,
+          extent={{-18,8},{18,44}})));
   AixLib.Controls.Interfaces.CHPControlBus     sigBusCHP(
     meaThePowChp=Q_Therm,
     calEmiCO2Chp=b_CO2,
@@ -221,7 +223,7 @@ public
     redeclare package Medium_Coolant = Medium_Coolant,
     CHPEngineModel=CHPEngineModel,
     m_flow=m_flow,
-    GCoolChannel=GCoolChannel,
+    GCoolChannel=G_CoolChannel,
     allowFlowReversalCoolant=allowFlowReversalCoolant,
     mCool_flow_small=mCool_flow_small) annotation (Placement(transformation(
           rotation=0, extent={{14,-72},{42,-44}})));
@@ -232,8 +234,8 @@ equation
                                                        color={0,127,255}));
   connect(ambientTemperature.port, heatFlowSensor.port_b)
     annotation (Line(points={{-92,0},{-80,0}}, color={191,0,0}));
-  connect(inductionMachine.flange_a, gasolineEngineChp.flange_a) annotation (
-      Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,0}));
+  connect(inductionMachine.flange_Machine, gasolineEngineChp.flange_Engine)
+    annotation (Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,0}));
   connect(gasolineEngineChp.port_Exhaust, exhaustHeatExchanger.port_a1)
     annotation (Line(points={{18.36,26.36},{28,26.36},{28,26.4},{40,26.4}},
                                                                        color={0,
@@ -337,8 +339,11 @@ CHP"),  Rectangle(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
-<p>Limitations:</p>
-<p>- Transmissions between generator and engine are not considered </p>
-<p>- </p>
+<p>This example shows the implementation of a holistic overall model for a CHP power unit using the example of the ECPower XRGI 15. The model is able to map different gas engine CHPs of small and medium power classes (&lt; 200 kWel). It allows an investigation of the thermal and electrical dynamics of the individual components and the entire plant. In addition, a CO2 balance can be calculated for the comparison of different control strategies. </p>
+<p>The modular CHP model is aggregated from closed submodels that can be run on their own. These are based on physical calculation approaches and offer mechanical, material and thermal interfaces. The thermal interconnection of the exhaust gas heat exchanger and combustion engine in the internal primary circuit is freely selectable. Parameterization and control are realized on the highest model level.</p>
+<h4><span style=\"color: #000000\">Calibration:</span></h4>
+<p>If the calibration of the model is not to be performed for all listed calibration quantities, a quick adaptation of the essential model quantities for the use of are carried out. Setting the speed of the generator and internal combustion engine for the nominal power point using the calibration variables tilting slip, electrical calibration factor and modulation factor results in a high correspondence for electrical power and fuel input for each power stage of the CHP. The thermal output can then be checked by checking the flue gas temperature when the system exits. The examination of the data sheets of some cogeneration units provides general comparative values for the flue gas temperature in a range around 50 &deg;C with and around 110 &deg;C without condensing utilisation at rated output. The flue gas temperature can mainly be adjusted using the heat transitions G_CoolChannel and G_CooExhHex.</p>
+<h4><span style=\"color: #000000\">Limitations:</span></h4>
+<p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
 </html>"));
 end ModularCHP_PowerUnit;

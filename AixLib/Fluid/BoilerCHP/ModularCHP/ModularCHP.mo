@@ -82,12 +82,14 @@ public
     "Calibration factor for electric power outuput (default=1)"
     annotation (Dialog(tab="Calibration parameters",
     group="Fast calibration - Electric power and fuel usage"));
-  parameter Modelica.SIunits.ThermalConductance GCoolChannel=33
+  parameter Modelica.SIunits.ThermalConductance G_CoolChannel=33
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
-    annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
-  parameter Modelica.SIunits.ThermalConductance GCooExhHex=400
+    annotation (Dialog(tab="Calibration parameters",group=
+          "Fast calibration - Thermal power output"));
+  parameter Modelica.SIunits.ThermalConductance G_CooExhHex=400
     "Thermal conductance of the coolant heat exchanger at nominal flow"
-    annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
+    annotation (Dialog(tab="Calibration parameters",group=
+          "Fast calibration - Thermal power output"));
   parameter Modelica.SIunits.HeatCapacity C_ExhHex=50000
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
      Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
@@ -108,9 +110,10 @@ public
   parameter Modelica.SIunits.Thickness dInn=0.01
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
     annotation (Dialog(tab="Calibration parameters",group="Fast calibration - Thermal power output"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAmb=2
+  parameter Modelica.SIunits.ThermalConductance G_EngToAmb=2
     "Thermal conductance from engine housing to the surrounding air"
-    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
+    annotation (Dialog(tab="Calibration parameters",group=
+          "Advanced calibration parameters"));
   parameter Modelica.SIunits.ThermalConductance G_Amb=10
     "Constant heat transfer coefficient of engine housing to ambient" annotation (
      Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
@@ -148,7 +151,7 @@ public
     T_ambient=T_ambient,
     p_ambient=p_ambient,
     m_flow=m_flowCoo,
-    GCoolChannel=GCoolChannel,
+    G_CoolChannel=G_CoolChannel,
     ConTec=ConTec,
     useGenHea=useGenHea,
     allowFlowReversalExhaust=allowFlowReversalExhaust,
@@ -158,11 +161,11 @@ public
     A_surExhHea=A_surExhHea,
     mEng=mEng,
     redeclare package Medium_Coolant = Medium_Coolant,
-    G_CooExhHex=GCooExhHex,
+    G_CooExhHex=G_CooExhHex,
     C_ExhHex=C_ExhHex,
     inductionMachine(J_Gen=1, s_til=0.18),
     dInn=dInn,
-    GEngToAmb=GEngToAmb,
+    G_EngToAmb=G_EngToAmb,
     G_Amb=G_Amb,
     calFac=calFac,
     s_til=s_til)
@@ -288,7 +291,5 @@ CHP"),  Rectangle(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
-<p>Caution: </p>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
 end ModularCHP;

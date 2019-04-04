@@ -283,8 +283,6 @@ package SpeedTests "CHP models used for a simulation performance study"
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<h4>Caution: </h4>
-<p>- if the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
   end ModularCHP_SpeedTest;
 
@@ -422,11 +420,6 @@ CHP")}));
     connect(booleanOnOffCHP.y, combinedHeatPower.on)
       annotation (Line(points={{-17,-34},{3,-34},{3,-9}}, color={255,0,255}));
     annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.CHP\">AixLib.Fluid.BoilerCHP.CHP</a> in different conditions.
-Inlet and outlet temperature as well as the electrical and thermal power of the
-CHP can be observed.
-Change the inlet water temperature profile to see the reaction timing. </p>
 </html>", revisions="<html>
 <ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
