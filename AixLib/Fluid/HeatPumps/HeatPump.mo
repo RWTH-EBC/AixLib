@@ -155,7 +155,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
     annotation (Dialog(tab="Initialization", group="Refrigerant inertia", enable=use_refIne));
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="Refrigerant inertia",enable=initType ==
-          Init.InitialOutput and use_refIne));
+          Modelica.Blocks.Types.Init.InitialOutput and use_refIne));
 //Dynamics
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of mass balance: dynamic (3 initialization options) or steady state"

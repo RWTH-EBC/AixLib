@@ -136,7 +136,7 @@ model HeatPumpSystem
     annotation (Dialog(tab="Initialization", group="System inertia", enable=use_refIne));
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
-          Init.InitialOutput and use_refIne));
+          Modelica.Blocks.Types.Init.InitialOutput and use_refIne));
   Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
       Placement(transformation(
         extent={{-7,7},{7,-7}},
