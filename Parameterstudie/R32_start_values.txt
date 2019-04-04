@@ -1,0 +1,51 @@
+model closedVolume2
+  "model using correlation for fluid dependent values"
+  extends 
+    PhysicalCompressors.ReciprocatingCompressor.Utilities.Geometry_Roskoch;
+  //Volumina
+  Modelica.SIunits.Volume V_gas(min=0.001);
+  Modelica.SIunits.Volume V_0(start = 0);
+  //State variables
+  Modelica.SIunits.Density d_gas(start=5);
+  Modelica.SIunits.Temperature T_gas(start=300);
+  Modelica.SIunits.Pressure p_gas(start=40e5) "Pressure inside the chamber";
+  Modelica.SIunits.SpecificInternalEnergy u_gas(start = 500e3);
+  Modelica.SIunits.SpecificEnthalpy h_gas(start = 550e3);
+  Medium.ThermodynamicState state_dh;
+  Medium.ThermodynamicState state_in;
+  //Mass
+  Modelica.SIunits.Mass m_gas(start=5e-4);
+  Modelica.SIunits.Mass m_in(start=small);
+  Modelica.SIunits.Mass m_out;
+  Modelica.SIunits.MassFlowRate m_in_avg;
+  Modelica.SIunits.MassFlowRate m_out_avg;
+  //Work
+  Modelica.SIunits.Work W_rev(start=0) "reversible work";
+  Modelica.SIunits.Work W_irr(start=0) "irreversible work";
+  //Streams
+  Modelica.SIunits.EnergyFlowRate U_flow_in(start=0);
+  Modelica.SIunits.EnergyFlowRate U_flow_out(start=0);
+  Modelica.SIunits.SpecificEnthalpy h_in;
+  //Iteration variables
+  Modelica.SIunits.SpecificEnthalpy h_delta;
+  Integer n;
+  //Heat Transfer Coefficients
+  Modelica.SIunits.CoefficientOfHeatTransfer alpha(start = 0.0001);
+  Real c1;
+  Modelica.SIunits.Velocity v_pis_avg "average velocity of piston";
+  constant Real small =  Modelica.Constants.small;
+  //Isentropic efficiency
+  Modelica.SIunits.SpecificEntropy s_out_is "specific isentropic entropy for outgoing fluid";
+  Modelica.SIunits.SpecificEnthalpy h_out_is "specific insentropic enthaly for outgoing fluid";
+  Modelica.SIunits.Energy U_in;
+  Modelica.SIunits.Energy U_out;
+  Real eta_is "isentropic efficiency";
+  //Power
+  Modelica.SIunits.Power P "Power";
+  Integer modi;
+  Integer i "Counter";
+  //volumetric efficiency
+  Real lambda "volumetric efficiency";
+  Modelica.SIunits.Area Aeff_in_cor "Effective Area of inlet valve calculated by correlation";
+  Modelica.SIunits.Area Aeff_out_cor(max = 5e-5) "Effective Area of outlet valve calculated by correlation";
+  Real G_dot_out(min=small) "Mass flow density at valve outlet";
