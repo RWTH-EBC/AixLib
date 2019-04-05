@@ -82,8 +82,8 @@ record OPH_1_Office "Office zone of office building"
   annotation (Documentation(revisions="<html>
  <ul>
   <li>
-  February 28, 2019, by Niklas Huelsenbeck:<br/>
-  Adapting nrPeople and nrPeopleMachines to new calculation scheme.
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
   </li>
   <li>
   September 27, 2016, by Moritz Lauster:<br/>
