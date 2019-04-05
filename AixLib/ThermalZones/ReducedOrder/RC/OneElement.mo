@@ -55,8 +55,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean indoorPortExtWalls = false
     "Additional heat port at indoor surface of exterior walls"
     annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
-  parameter Boolean use_m_wat_flow = false
-    "Considering moisture balance"
+  parameter Boolean use_moisture_balance = false
+    "Considering moisture balance. If this is set to true, you have to replace the Air volume with the MixingVolumeMoistAir model."
     annotation(Dialog(tab="Advanced"),choices(checkBox = true));
 
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
@@ -171,7 +171,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final T_start=T_start) if ATotExt > 0 "RC-element for exterior walls"
     annotation (Placement(transformation(extent={{-158,-50},{-178,-28}})));
 
-  Modelica.Blocks.Interfaces.RealInput m_wat_flow if use_m_wat_flow
+  Modelica.Blocks.Interfaces.RealInput mWat_flow if use_moisture_balance
     annotation (Placement(transformation(extent={{-280,-140},{-240,-100}}),
         iconTransformation(extent={{-260,-120},{-240,-100}})));
 protected
@@ -369,6 +369,9 @@ equation
     pattern=LinePattern.Dash));
   connect(sumSolRad.y, convHeatSol.Q_flow)
     annotation (Line(points={{-173.4,124},{-166,124}}, color={0,0,127}));
+  if use_moisture_balance then
+    connect(mWat_flow,volAir.mWat_flow);
+  end if;
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
