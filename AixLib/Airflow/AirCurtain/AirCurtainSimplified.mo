@@ -45,8 +45,8 @@ equation
 
   connect(TAmb, mixedTemperature.temperature_flow2) annotation (Line(points={{-108,
           -60},{-20,-60},{-20,-2},{-5.6,-2}}, color={0,0,127}));
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {120,120}}),                                        graphics={
+   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{120,120}}),                                  graphics={
         Rectangle(
           extent={{-80,80},{80,-80}},
           lineColor={28,108,200},
@@ -54,17 +54,16 @@ equation
           fillPattern=FillPattern.Solid),                                                                                                                           Polygon(points={{
               -58,40},{-28,54},{24,50},{18,42},{70,34},{32,62},{26,56},{-44,56},
               {-58,40}},                                                                                                                                                                                                        lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{
-              -30,34},{30,-32}},                                                                                                                                                      lineColor=
-              {0,0,0},                                                                                                                                                                                       fillColor=
-              {255,255,255},
-            fillPattern=FillPattern.Solid,
-          textString="AirCurtain"),                                                                                                             Polygon(points={{
+            fillPattern =                                                                                                   FillPattern.Solid), Polygon(points={{
               60,-40},{30,-54},{-22,-50},{-16,-42},{-68,-34},{-30,-62},{-24,-56},
               {46,-56},{60,-40}},                                                                                                                                                                                                        lineColor = {0, 0, 0}, smooth = Smooth.Bezier, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid)}),
-      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{120,
-            120}})),
+            fillPattern =                                                                                                   FillPattern.Solid),
+                                      Text(
+          extent={{-152,118},{148,158}},
+          textString="%name",
+          lineColor={0,0,255})}),
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            120,120}})),
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>This is an ideal model of an air curtain. It accounts for additional heat losses through an air curtain in the entrance zone.</p>
