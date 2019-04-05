@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeEmbedded
+  "Embedded pipe model using spatialDistribution for temperature delay"
 
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector;
 
@@ -79,21 +80,21 @@ model PlugFlowPipeEmbedded
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  // Ground: values for sandy soil with clay content based on "SIMULATIONSMODELL
+  //Ground/Soil: values for sandy soil with clay content based on "SIMULATIONSMODELL
   //"ERDWÄRMEKOLLEKTOR" zur wärmetechnischen Beurteilung von Wärmequellen,
   //Wärmesenken und Wärme-/Kältespeichern" by Bernd Glück
 
-  parameter Modelica.SIunits.Density rho = 1630 "Density of material"
+  parameter Modelica.SIunits.Density rho = 1630 "Density of material/soil"
   annotation(Dialog(tab="Ground"));
 
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1046
-    "Specific heat capacity of material"
+    "Specific heat capacity of material/soil"
     annotation(Dialog(tab="Ground"));
-  parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of Ground layer for heat loss calulcation"
+  parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of soil layer for heat loss calulcation"
   annotation(Dialog(tab="Ground"));
 
   parameter Modelica.SIunits.ThermalConductivity lambda = 1.5
-    "Heat conductivity of pipe"
+    "Heat conductivity of material/soil"
     annotation(Dialog(tab="Ground"));
 
   final parameter Modelica.SIunits.Length d_in = dh + 2 * thickness "Inner diameter of pipe"
@@ -240,5 +241,9 @@ equation
           lineColor={28,108,200},
           fillColor={162,29,33},
           fillPattern=FillPattern.Forward)}), Diagram(coordinateSystem(
-          preserveAspectRatio=false)));
+          preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>This model represents an extension of <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a> by modelling the thermal capacity of the surrounding soil. For the description of the cylindric heat transfer within the surrounding soil <a href=\"modelica://AixLib.Utilities.HeatTransfer.CylindricHeatTransfer\">AixLib.Utilities.HeatTransfer.CylindricHeatTransfer</a> is used. The considered layer thickness of the surrounding soil is set as a parameter and divided into three capacities. For the heat transfer calculation within the material/soil, the density, the specific heat capacity, the thickness of the considered soil layer and the thermal conductivity of the material are used. </p>
+<p>The default values for the soil are for sandy soil with clay content and based on: &quot;Simulationsmodell Erdw&auml;rmekollektor zur w&auml;rmetechnischen Beurteilung von W&auml;rmequellen, W&auml;rmesenken und W&auml;rme-/K&auml;ltespeicher&quot; by Berd Gl&uuml;ck </p>
+</html>"));
 end PlugFlowPipeEmbedded;
