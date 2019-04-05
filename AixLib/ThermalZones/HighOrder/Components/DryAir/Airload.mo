@@ -5,7 +5,7 @@ model Airload "Air volume"
     "Specific heat capacity of air";
   parameter Modelica.SIunits.Volume V = 48.0 "Volume of the room";
   Modelica.SIunits.Temperature T(start=293.15, nominal=293.15,
-        min=278.15, max=323.15, displayUnit="degC") "Temperature of airload";
+        min=223.15, max=323.15, displayUnit="degC") "Temperature of airload";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port annotation(Placement(transformation(extent = {{-104, -24}, {-76, 4}}), iconTransformation(extent = {{-100, -30}, {-80, -10}})));
 protected
   parameter Modelica.SIunits.Mass m = rho * V;

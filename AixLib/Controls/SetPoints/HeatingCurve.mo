@@ -1,4 +1,4 @@
-within AixLib.Controls.SetPoints;
+﻿within AixLib.Controls.SetPoints;
 model HeatingCurve "Model of a heating curve"
   //General
   parameter Boolean use_tableData=true "Choose between tables or function to calculate TSet" annotation (
@@ -55,7 +55,8 @@ protected
   Modelica.Blocks.Sources.Constant dec(k=declination) "Declination constant for connectors";
   AixLib.Utilities.Time.CalendarTime calTime(zerTim = zerTim) "Calendar-time to get current hour";
   Modelica.Blocks.Interfaces.RealInput TRoom_internal "Actual room temperature to calculate with";
-  Modelica.Blocks.Math.UnitConversions.To_degC to_degC "Convert Kelvin to degC";
+  Modelica.Blocks.Math.UnitConversions.To_degC to_degC if use_tableData
+                                                                       "Convert Kelvin to degC";
   AixLib.Utilities.Logical.SmoothSwitch dayNightSwitch if use_tableData "Switch between day and night mode";
   Modelica.Blocks.Interfaces.BooleanOutput isDay "Boolean to evaluate whether it is daytime or nighttime";
 
@@ -73,9 +74,9 @@ equation
     isDay = false;
   end if;
   //Convert Kelvin to degC for tables and function
-  connect(T_oda, to_degC.u);
   //Connect all models if tables are used, else use the function to calculate the internal set temperature
   if use_tableData then
+    connect(T_oda, to_degC.u);
     connect(dec.y, tableDay.u2);
     connect(dec.y, tableNight.u2);
     connect(to_degC.y, tableDay.u1);
@@ -86,7 +87,7 @@ equation
     connect(dayNightSwitch.y, TSet_internal);
   else
     TSet_internal = HeatingCurveFunction(
-      to_degC.y,
+      T_oda,
       TRoom_internal,
       isDay);
   end if;
@@ -155,5 +156,19 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="- TOda",
-          visible = use_tableData)}));
+          visible = use_tableData)}), Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>", info="<html>
+<p>Model of a heating curve. Either based on table input data or with a function, the set temperature for the heating system is calculated.</p>
+<p>This model is capable of:</p>
+<ul>
+<li>Day-Night Control</li>
+<li>Control based on dynamic room temperatures</li>
+</ul>
+</html>"));
 end HeatingCurve;
