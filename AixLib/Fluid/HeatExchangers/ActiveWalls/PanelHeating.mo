@@ -71,10 +71,10 @@ model PanelHeating
 
   Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
         Medium)
-    annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
+    annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package Medium =
         Medium)
-    annotation (Placement(transformation(extent={{64,-10},{84,10}})));
+    annotation (Placement(transformation(extent={{60,-36},{80,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermDown annotation (
       Placement(transformation(extent={{-10,-72},{10,-52}}),
         iconTransformation(extent={{-2,-38},{18,-18}})));
@@ -96,36 +96,29 @@ model PanelHeating
     each final isFloor=isFloor,
     each final calcMethodConvection=calcMethodConvection,
     each final convCoeffCustom=convCoeffCustom)
-    annotation (Placement(transformation(extent={{-52,-22},{-8,22}})));
+    annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
 
   BaseClasses.PressureDropPH pressureDrop(
     redeclare package Medium = Medium,
     final tubeLength=tubeLength,
     final n=floorHeatingType.PressureDropExponent,
     final m=floorHeatingType.PressureDropCoefficient)
-  annotation (Placement(transformation(extent={{14,-22},{54,22}})));
+  annotation (Placement(transformation(extent={{8,0},{54,52}})));
 equation
 
   // HEAT CONNECTIONS
   for i in 1:dis loop
-    connect(panelHeatingSegment[i].thermConvWall, ThermDown) annotation (Line(
-        points={{-32.64,-22},{-32.64,-48},{0,-48},{0,-62}},
-                                                    color={191,0,0}));
-    connect(panelHeatingSegment[i].thermConvRoom, thermConv) annotation (Line(points={{-30.44,
-            22},{-28,22},{-28,38},{14,38},{14,58}},                                                                color={191,0,0}));
-    connect(panelHeatingSegment[i].starRad, starRad) annotation (Line(points={{-36.16,
-            22.44},{-36.16,44},{-16,44},{-16,60}},                                                           color={95,95,95}));
+    connect(panelHeatingSegment[i].thermConvWall, ThermDown);
+    connect(panelHeatingSegment[i].thermConvRoom, thermConv);
+    connect(panelHeatingSegment[i].starRad, starRad);
   end for;
 
   // FLOW CONNECTIONS
 
   //OUTER CONNECTIONS
 
-  connect(TFlow.port_b, panelHeatingSegment[1].port_a) annotation (Line(points={{-66,0},
-          {-52,0}},                                                 color={0,127,
-          255}));
-  connect(pressureDrop.port_a, panelHeatingSegment[dis].port_b) annotation (Line(points={{14,0},{
-          -8,0}},                                                                                         color={0,127,255}));
+  connect(TFlow.port_b, panelHeatingSegment[1].port_a);
+  connect(pressureDrop.port_a, panelHeatingSegment[dis].port_b);
 
   //INNER CONNECTIONS
 
@@ -136,16 +129,16 @@ equation
   end if;
 
   connect(port_a, TFlow.port_a) annotation (Line(
-      points={{-100,0},{-86,0}},
+      points={{-100,0},{-88,0},{-88,-30},{-70,-30}},
       color={0,127,255},
       smooth=Smooth.None));
 
   connect(TReturn.port_b, port_b) annotation (Line(
-      points={{84,0},{100,0}},
+      points={{80,-26},{84,-26},{84,0},{100,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(pressureDrop.port_b, TReturn.port_a) annotation (Line(
-      points={{54,0},{64,0}},
+      points={{54,26},{60,26},{60,-26}},
       color={0,127,255},
       smooth=Smooth.None));
 
