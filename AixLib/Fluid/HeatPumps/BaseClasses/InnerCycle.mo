@@ -151,6 +151,18 @@ equation
       pattern=LinePattern.Dash));
   connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{61.6,
           17.2},{61.6,-6},{-51.2,-6}}, color={0,0,127}));
+  connect(QEva, sigBusHP.QEva) annotation (Line(points={{-110,0},{-110,103.075},
+          {1.085,103.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(QCon, sigBusHP.QCon) annotation (Line(points={{110,0},{110,103.075},{
+          1.085,103.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
