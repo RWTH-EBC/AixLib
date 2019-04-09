@@ -139,8 +139,8 @@ This package contains base classes that are used to construct the models in
         CHPEngineModel.m_floCooNominal
       "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab=
             "Calibration parameters", group="Advanced calibration parameters"));
-    Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambientTemperature(T
-        =T_amb)
+    Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambientTemperature(T=
+         T_amb)
       annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
     Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
       annotation (Placement(transformation(extent={{-64,-8},{-80,8}})));
@@ -392,7 +392,6 @@ CHP"),    Rectangle(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
       alpha_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
-
       diameter=CHPEngineModel.dCoo,
       allowFlowReversal=allowFlowReversalCoolant)
       annotation (Placement(transformation(extent={{8,12},{32,-12}})));
@@ -1762,7 +1761,7 @@ This package contains base classes that are used to construct the models in
 <p>The thickness of the inner engine block is an essential, but unknown variable (literature indicates values ​​around 5mm for car engines). Attachments and individual different material layers in the engine block are not taken into account for simplicity and can be approximated by calibration. The insulating housing of the power unit has no own capacity.</p>
 <p>The heat transfer (cylinder wall to cooling water circuit) is calibrated and assumed to be proportional to the temperature difference because due to unknown cooling channel geometry the calculation of a convective heat transfer coefficient is not possible.</p>
 <p>The temperature profile of the cylinder wall is homogeneously formed from the ambient temperature and the maximum combustion temperature (temperature curve in cylinder as a triangle with T_Amb - T_Com - T_Amb). Therefore a mean cylinder wall temperature is determinated using a bisector in the temperature profile as shown in the following figure.</p>
-<p align=\"center\"><br><span style=\"font-size: 18pt;\"><img src=\"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\" alt=\"Calculation of the cylinder wall temperature\"/></span> </p>
+<p align=\"center\"><br><span style=\"font-size: 12pt;\"><img src=\"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\" width=\"550\" height=\"375\" alt=\"Calculation of the cylinder wall temperature\"/></span> </p>
 </html>"),   Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
                   graphics={
             Rectangle(
