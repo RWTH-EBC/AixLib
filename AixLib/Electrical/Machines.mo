@@ -32,7 +32,7 @@ package Machines
       annotation (Dialog(tab="Calculations"));
     parameter Modelica.SIunits.Torque M_start=if P_Mec_nominal<=4000 then 1.6*M_nominal
     elseif P_Mec_nominal>=22000 then 1*M_nominal else 1.25*M_nominal
-     "Tilting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
+     "Starting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
       annotation (Dialog(tab="Calculations"));
     parameter Modelica.SIunits.Inertia J_Gen=1
       "Moment of inertia of the electric machine (default=0.5kg.m2)"

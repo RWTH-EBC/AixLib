@@ -254,7 +254,7 @@ This package contains base classes that are used to construct the models in
                                                          color={0,127,255}));
     connect(ambientTemperature.port, heatFlowSensor.port_b)
       annotation (Line(points={{-92,0},{-80,0}}, color={191,0,0}));
-    connect(inductionMachine.flange_Machine, gasolineEngineChp.flange_eng)
+    connect(inductionMachine.flange_genIn, gasolineEngineChp.flange_eng)
       annotation (Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,
             0}));
     connect(gasolineEngineChp.port_exh, exhaustHeatExchanger.port_a1)
@@ -602,8 +602,8 @@ CHP"),    Rectangle(
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
         Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),
           iconTransformation(extent={{-10,-100},{10,-80}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_cooCir annotation
-      (Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_cooCir annotation (
+       Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
           iconTransformation(extent={{90,-98},{110,-78}})));
     AixLib.Controls.Interfaces.CHPControlBus cHPEngBus(
       meaRotEng=cHPCombustionEngine.nEng,
@@ -623,8 +623,8 @@ CHP"),    Rectangle(
           origin={0,88})));
 
   equation
-    connect(port_exh, cHPCombustionEngine.port_Exhaust) annotation (Line(points
-          ={{102,2},{64,2},{64,28},{29.4,28}}, color={0,127,255}));
+    connect(port_exh, cHPCombustionEngine.port_Exhaust) annotation (Line(points=
+           {{102,2},{64,2},{64,28},{29.4,28}}, color={0,127,255}));
     connect(port_amb, engineToCoolant.port_Ambient)
       annotation (Line(points={{0,-90},{0,-52}}, color={191,0,0}));
     connect(port_cooCir, engineToCoolant.port_CoolingCircle) annotation (Line(
@@ -682,7 +682,7 @@ CHP"),    Rectangle(
       annotation (Dialog(tab="Calculations"));
     parameter Modelica.SIunits.Torque M_start=if P_Mec_nominal<=4000 then 1.6*M_nominal
     elseif P_Mec_nominal>=22000 then 1*M_nominal else 1.25*M_nominal
-     "Tilting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
+     "Starting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
       annotation (Dialog(tab="Calculations"));
     parameter Modelica.SIunits.Inertia J_Gen=1
       "Moment of inertia of the electric machine (default=0.5kg.m2)"
@@ -739,7 +739,7 @@ CHP"),    Rectangle(
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
     Modelica.Mechanics.Rotational.Sources.Torque torque
       annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_Machine
+    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_genIn
       annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
     Modelica.Mechanics.Rotational.Components.IdealGear gearEngineToGenerator(
@@ -785,7 +785,7 @@ CHP"),    Rectangle(
       annotation (Line(points={{0,0},{20,0}}, color={0,0,0}));
     connect(inertia.flange_b, gearEngineToGenerator.flange_b)
       annotation (Line(points={{40,0},{60,0}}, color={0,0,0}));
-    connect(gearEngineToGenerator.flange_a, flange_Machine)
+    connect(gearEngineToGenerator.flange_a, flange_genIn)
       annotation (Line(points={{80,0},{100,0}}, color={0,0,0}));
     annotation (Documentation(info="<html>
 <p>Model of an electric induction machine that includes the calculation of:</p>
