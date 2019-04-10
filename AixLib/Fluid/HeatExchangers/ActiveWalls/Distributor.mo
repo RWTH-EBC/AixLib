@@ -1,9 +1,8 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls;
-model Distributor
-  replaceable package Medium = Media.Water constrainedby
-    Modelica.Media.Interfaces.PartialMedium
-    "Medium in the component"                                                                  annotation(Dialog(group="Medium"),choicesAllMatching=true);
-  parameter Integer n(min=1)=6  "Number of floor heating circuits" annotation(Dialog(group="General"));
+model Distributor "Heating circuit distributor for underfloor heating systems"
+  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+    "Medium in the component" annotation(Dialog(group="Medium"),choicesAllMatching=true);
+  parameter Integer n(min=1)=6  "Number of underfloor heating circuits" annotation(Dialog(group="General"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation(Dialog(group="General"));
@@ -15,29 +14,33 @@ model Distributor
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
      annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare package Medium =
-        Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,-20}}),
+  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package
+      Medium = Medium)
+                annotation (Placement(transformation(extent={{-70,-40},{-50,-20}}),
         iconTransformation(extent={{-70,-40},{-50,-20}})));
   MixingVolumes.MixingVolume          vol_flow(
-    redeclare package Medium = Medium,
     final nPorts=n + 1,
     final m_flow_nominal=m_flow_nominal,
-    final V=V) annotation (Placement(transformation(
+    final V=V,
+    redeclare final package Medium = Medium)
+               annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,10})));
   MixingVolumes.MixingVolume          vol_return(
-    redeclare package Medium = Medium,
     final nPorts=n + 1,
     final m_flow_nominal=m_flow_nominal,
-    final V=V) annotation (Placement(transformation(extent={{-10,-20},{10,0}},
+    final V=V,
+    redeclare final package Medium = Medium)
+               annotation (Placement(transformation(extent={{-10,-20},{10,0}},
           rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each package
-      Medium = Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
+      package Medium = Medium)
+                       annotation (Placement(
       visible=true,
       transformation(
         origin={0,58},
@@ -47,8 +50,9 @@ model Distributor
         origin={-2,60},
         extent={{-6,-16},{6,16}},
         rotation=90)));
-  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each package
-      Medium = Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
+      package Medium = Medium)
+                       annotation (Placement(
       visible=true,
       transformation(
         origin={0,-59},
