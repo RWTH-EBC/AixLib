@@ -65,7 +65,7 @@ model CHPCombined
   "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed Model", group = "All models",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauQ_th_loss_prescribed = 100 annotation (Dialog(tab = "Prescribed Model", group = "PEM Fuel Cell",enable=not EfficiencyByDatatable and CHPType==2));
   parameter Modelica.SIunits.Efficiency eta_PCU_presribed = 0.95 "Efficiency of the PCU" annotation (Dialog(tab = "Prescribed Model", group = "PEM Fuel Cell",enable=not EfficiencyByDatatable and CHPType==2));
-
+  parameter Modelica.SIunits.Volume V_water = 3e-3;
   // Calculation of normative capacities for ICE and prescribed calculation to get(for PEM empirical calculation methods are used)
 protected
   parameter Modelica.SIunits.Power P_elRated=if EfficiencyByDatatable and CHPType==1 then
@@ -101,7 +101,7 @@ protected
   parameter Modelica.SIunits.Time tauP_el=if EfficiencyByDatatable and CHPType==1 then
   paramIFC.tauP_el elseif EfficiencyByDatatable and CHPType==2 then paramPEM.tauP_el else tauP_el_prescribed
     "time constant electrical power start behavior (unit=sec)";
-  parameter Modelica.SIunits.Volume V_water = 3e-3;
+
   parameter Real LimiterPelPos = if CHPType == 1 then 760 elseif CHPType==2 then 0.61 else 0;
   parameter Real LimiterPelNeg = if CHPType == 1 then 760 elseif CHPType==2 then 0.60 else 0;
   parameter Real LHV(unit="J/kg")= if CHPType == 1 then 47300000 else 119972000 "Lower heating value [J/kg]";
