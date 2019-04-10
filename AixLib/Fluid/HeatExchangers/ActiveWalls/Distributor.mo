@@ -33,13 +33,13 @@ model Distributor
       Medium = Medium) annotation (Placement(
       visible=true,
       transformation(
-        origin={0,60},
+        origin={0,58},
         extent={{-8,-18},{8,18}},
         rotation=90),
       iconTransformation(
-        origin={0,60},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        origin={-2,60},
+        extent={{-6,-16},{6,16}},
+        rotation=90)));
   Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each package
       Medium = Medium) annotation (Placement(
       visible=true,
@@ -48,9 +48,9 @@ model Distributor
         extent={{-7,-18},{7,18}},
         rotation=90),
       iconTransformation(
-        origin={0,-60},
-        extent={{-10,-10},{10,10}},
-        rotation=0)));
+        origin={0,-62},
+        extent={{-6,-16},{6,16}},
+        rotation=90)));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate";
 equation
@@ -61,7 +61,7 @@ equation
 
 for k in 1:n loop
     connect(vol_flow.ports[k + 1], flowPorts[k])
-      annotation (Line(points={{0,20},{0,60}}, color={255,0,0}));
+      annotation (Line(points={{0,20},{0,58}}, color={255,0,0}));
     connect(vol_return.ports[k + 1], returnPorts[k])
       annotation (Line(points={{0,-20},{0,-59}}, color={0,0,255}));
 end for;
