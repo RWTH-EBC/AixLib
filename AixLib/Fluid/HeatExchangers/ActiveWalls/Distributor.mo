@@ -6,60 +6,64 @@ model Distributor
   parameter Integer n = 6 "Number of floor heating circuits";
   parameter Modelica.SIunits.Volume V=0.001 "Volume for numerical robustness";
 
-  Modelica.Fluid.Interfaces.FluidPort_a main_flow(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b main_return(redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-70,-40},{-50,-20}}),
+  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare package Medium =
+        Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,-20}}),
         iconTransformation(extent={{-70,-40},{-50,-20}})));
-  Modelica.Fluid.Vessels.ClosedVolume vol_flow(
+  MixingVolumes.MixingVolume          vol_flow(
     redeclare package Medium = Medium,
-    use_portsData=false,
     nPorts=n + 1,
-    final V=V) annotation (Placement(transformation(
+    final V=V,
+    m_flow_nominal=m_flow_nominal)
+               annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,10})));
-  Modelica.Fluid.Vessels.ClosedVolume vol_return(
+  MixingVolumes.MixingVolume          vol_return(
     redeclare package Medium = Medium,
-    use_portsData=false,
     nPorts=n + 1,
-    final V=V) annotation (Placement(transformation(extent={{-10,-20},{10,0}},
+    final V=V,
+    m_flow_nominal=m_flow_nominal)
+               annotation (Placement(transformation(extent={{-10,-20},{10,0}},
           rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPort_b Flow[n](redeclare each package Medium =
-        Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each package
+      Medium = Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,60},
-        extent={{-10,-10},{10,10}},
-        rotation=0),
+        extent={{-8,-18},{8,18}},
+        rotation=90),
       iconTransformation(
         origin={0,60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPort_a Return[n](redeclare each package Medium =
-        Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each package
+      Medium = Medium) annotation (Placement(
       visible=true,
       transformation(
-        origin={0,-60},
-        extent={{-10,-10},{10,10}},
-        rotation=0),
+        origin={0,-59},
+        extent={{-7,-18},{7,18}},
+        rotation=90),
       iconTransformation(
         origin={0,-60},
         extent={{-10,-10},{10,10}},
         rotation=0)));
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate";
 equation
-  connect(main_flow, vol_flow.ports[1]) annotation (Line(points={{-60,30},{-46,
+  connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,30},{-46,
           30},{-46,20},{3.55271e-15,20}}, color={255,0,0}));
-  connect(main_return, vol_return.ports[1]) annotation (Line(points={{-60,-30},
-          {-46,-30},{-46,-20},{0,-20}}, color={0,0,255}));
+  connect(mainReturn, vol_return.ports[1]) annotation (Line(points={{-60,-30},{
+          -46,-30},{-46,-20},{0,-20}}, color={0,0,255}));
 
 for k in 1:n loop
-    connect(vol_flow.ports[k + 1], Flow[k])
+    connect(vol_flow.ports[k + 1], flowPorts[k])
       annotation (Line(points={{0,20},{0,60}}, color={255,0,0}));
-    connect(vol_return.ports[k + 1], Return[k])
-      annotation (Line(points={{0,-20},{0,-60}}, color={0,0,255}));
+    connect(vol_return.ports[k + 1], returnPorts[k])
+      annotation (Line(points={{0,-20},{0,-59}}, color={0,0,255}));
 end for;
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},
