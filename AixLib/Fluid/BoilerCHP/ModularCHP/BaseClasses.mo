@@ -66,8 +66,8 @@ This package contains base classes that are used to construct the models in
     Modelica.SIunits.Power P_Mech=gasolineEngineChp.cHPCombustionEngine.P_eff "Mechanical power output of the CHP unit";
     Modelica.SIunits.Power P_El=-inductionMachine.P_E
       "Electrical power output of the CHP unit";
-    Modelica.SIunits.Power P_Fuel=if (gasolineEngineChp.cHPControlBus.isOn)
-         then m_flow_Fue*Medium_Fuel.H_U else 0 "CHP fuel expenses";
+    Modelica.SIunits.Power P_Fuel=if (gasolineEngineChp.cHPEngBus.isOn) then
+        m_flow_Fue*Medium_Fuel.H_U else 0 "CHP fuel expenses";
     Modelica.SIunits.Power Q_TotUnused=gasolineEngineChp.cHPCombustionEngine.Q_therm-gasolineEngineChp.engineToCoolant.actualHeatFlowEngine.Q_flow+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total heat error of the CHP unit";
    // Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total exhaust heat error";
     Modelica.SIunits.MassFlowRate m_flow_CO2=gasolineEngineChp.cHPCombustionEngine.m_flow_CO2Exh
@@ -146,6 +146,7 @@ This package contains base classes that are used to construct the models in
       annotation (Placement(transformation(extent={{-64,-8},{-80,8}})));
     AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger
       exhaustHeatExchanger(
+      cHPExhHexBus(meaTemRetChp=exhaustHeatExchanger.senTCooCold.T),
       pipeCoolant(
         p_a_start=system.p_start,
         p_b_start=system.p_start,
@@ -175,9 +176,7 @@ This package contains base classes that are used to construct the models in
       m2_flow_nominal=m_flow,
       CExhHex=CExhHex,
       GCoo=GCooExhHex,
-      GAmb=GAmb,
-      cHPControlBus(meaTemRetChp=exhaustHeatExchanger.senTCoolCold.T))
-      annotation (Placement(transformation(extent={{40,4},{68,32}})));
+      GAmb=GAmb) annotation (Placement(transformation(extent={{40,4},{68,32}})));
 
     parameter Boolean ConTec=false
       "Is condensing technology used and should latent heat be considered?"
@@ -207,10 +206,10 @@ This package contains base classes that are used to construct the models in
       s_til=s_til)
       annotation (Placement(transformation(extent={{-66,12},{-36,42}})));
 
-    Modelica.Fluid.Interfaces.FluidPort_a port_Return(redeclare package Medium =
+    Modelica.Fluid.Interfaces.FluidPort_a port_retCoo(redeclare package Medium =
           Medium_Coolant)
       annotation (Placement(transformation(extent={{-90,-68},{-70,-48}})));
-    Modelica.Fluid.Interfaces.FluidPort_b port_Supply(redeclare package Medium =
+    Modelica.Fluid.Interfaces.FluidPort_b port_supCoo(redeclare package Medium =
           Medium_Coolant)
       annotation (Placement(transformation(extent={{70,-68},{90,-48}})));
     AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.GasolineEngineChp
@@ -239,7 +238,7 @@ This package contains base classes that are used to construct the models in
 
     AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.Submodel_Cooling
       submodel_Cooling(
-      sigBus_Cooling(meaTemInEng=submodel_Cooling.senTCooEngIn.T, meaTemOutEng=
+      sigBus_coo(meaTemInEng=submodel_Cooling.senTCooEngIn.T, meaTemOutEng=
             submodel_Cooling.senTCooEngOut.T),
       redeclare package Medium_Coolant = Medium_Coolant,
       CHPEngineModel=CHPEngineModel,
@@ -255,52 +254,51 @@ This package contains base classes that are used to construct the models in
                                                          color={0,127,255}));
     connect(ambientTemperature.port, heatFlowSensor.port_b)
       annotation (Line(points={{-92,0},{-80,0}}, color={191,0,0}));
-    connect(inductionMachine.flange_Machine, gasolineEngineChp.flange_Engine)
-      annotation (Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,0}));
-    connect(gasolineEngineChp.port_Exhaust, exhaustHeatExchanger.port_a1)
+    connect(inductionMachine.flange_Machine, gasolineEngineChp.flange_eng)
+      annotation (Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,
+            0}));
+    connect(gasolineEngineChp.port_exh, exhaustHeatExchanger.port_a1)
       annotation (Line(points={{18.36,26.36},{28,26.36},{28,26.4},{40,26.4}},
-                                                                         color={0,
-            127,255}));
-    connect(gasolineEngineChp.port_Ambient, heatFlowSensor.port_a)
-      annotation (Line(points={{0,9.8},{0,0},{-64,0}},    color={191,0,0}));
-    connect(gasolineEngineChp.port_CoolingCircle,submodel_Cooling.heatPort_outside)
-      annotation (Line(points={{18,10.16},{18,-6},{-10,-6},{-10,-76},{28,-76},{28,
-            -65.56}},
-          color={191,0,0}));
-    connect(exhaustHeatExchanger.port_Ambient, heatFlowSensor.port_a) annotation (
-       Line(points={{40,18},{30,18},{30,0},{-64,0}}, color={191,0,0}));
-    connect(inductionMachine.cHPControlBus, sigBusCHP) annotation (Line(
+          color={0,127,255}));
+    connect(gasolineEngineChp.port_amb, heatFlowSensor.port_a)
+      annotation (Line(points={{0,9.8},{0,0},{-64,0}}, color={191,0,0}));
+    connect(gasolineEngineChp.port_cooCir, submodel_Cooling.heatPort_outside)
+      annotation (Line(points={{18,10.16},{18,-6},{-10,-6},{-10,-76},{28,-76},{
+            28,-65.56}}, color={191,0,0}));
+    connect(exhaustHeatExchanger.port_amb, heatFlowSensor.port_a) annotation (
+        Line(points={{40,18},{30,18},{30,0},{-64,0}}, color={191,0,0}));
+    connect(inductionMachine.cHPGenBus, sigBusCHP) annotation (Line(
         points={{-62.4,27},{-70,27},{-70,93},{-1,93}},
         color={255,204,51},
         thickness=0.5), Text(
         string="",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(exhaustHeatExchanger.cHPControlBus, sigBusCHP) annotation (Line(
+    connect(exhaustHeatExchanger.cHPExhHexBus, sigBusCHP) annotation (Line(
         points={{54,31.86},{54,93},{-1,93}},
         color={255,204,51},
         thickness=0.5), Text(
         string="",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(gasolineEngineChp.cHPControlBus, sigBusCHP) annotation (Line(
+    connect(gasolineEngineChp.cHPEngBus, sigBusCHP) annotation (Line(
         points={{0,41.84},{-1,41.84},{-1,93}},
         color={255,204,51},
         thickness=0.5), Text(
         string="",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(port_Supply,submodel_Cooling.port_b)
+    connect(port_supCoo,submodel_Cooling.port_b)
       annotation (Line(points={{80,-58},{42,-58}}, color={0,127,255}));
     connect(exhaustHeatExchanger.port_b2,submodel_Cooling.port_a)
                                                                annotation (Line(
           points={{40,9.6},{34,9.6},{34,-12},{0,-12},{0,-58},{14,-58}},
           color={0,127,255}));
-    connect(submodel_Cooling.sigBus_Cooling, sigBusCHP) annotation (Line(
+    connect(submodel_Cooling.sigBus_coo, sigBusCHP) annotation (Line(
         points={{28.14,-50.44},{28.14,93},{-1,93}},
         color={255,204,51},
         thickness=0.5));
-    connect(port_Return, exhaustHeatExchanger.port_a2) annotation (Line(points={{
+    connect(port_retCoo, exhaustHeatExchanger.port_a2) annotation (Line(points={{
             -80,-58},{-40,-58},{-40,-90},{100,-90},{100,9.6},{68,9.6}}, color={0,
             127,255}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
@@ -360,10 +358,10 @@ CHP"),    Rectangle(
           coordinateSystem(preserveAspectRatio=false)),
            __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
       Documentation(info="<html>
-<p>This example shows the implementation of a holistic overall model for a CHP power unit using the example of the ECPower XRGI 15. The model is able to map different gas engine CHPs of small and medium power classes (&lt; 200 kWel). It allows an investigation of the thermal and electrical dynamics of the individual components and the entire plant. In addition, a CO2 balance can be calculated for the comparison of different control strategies. </p>
-<p>The modular CHP model is aggregated from closed submodels that can be run on their own. These are based on physical calculation approaches and offer mechanical, material and thermal interfaces. The thermal interconnection of the exhaust gas heat exchanger and combustion engine in the internal primary circuit is freely selectable. Parameterization and control are realized on the highest model level.</p>
+<p>This model shows the implementation of a holistic overall model for a CHP power unit using the example of the Kirsch L4.12. The model is able to map different gas engine CHPs of small and medium power classes (&lt; 200 kWel). It allows an investigation of the thermal and electrical dynamics of the individual components and the entire plant. In addition, a CO2 balance can be calculated for the comparison of different control strategies. </p>
+<p>The modular CHP model is aggregated from closed submodels that can be run on their own. These are based on physical calculation approaches and offer mechanical, material and thermal interfaces. The thermal interconnection of the exhaust gas heat exchanger and combustion engine in the internal primary circuit is freely selectable. Detailed explanations of how the submodels work are provided in their documentation. Parameterization and control are realized on the highest model level using bus ports to transmit measured and calculated signals throughout the different hierarchical model levels.</p>
 <h4><span style=\"color: #000000\">Calibration:</span></h4>
-<p>If the calibration of the model is not to be performed for all listed calibration quantities, a quick adaptation of the essential model quantities for the use of are carried out. Setting the speed of the generator and internal combustion engine for the nominal power point using the calibration variables tilting slip, electrical calibration factor and modulation factor results in a high correspondence for electrical power and fuel input for each power stage of the CHP. The thermal output can then be checked by checking the flue gas temperature when the system exits. The examination of the data sheets of some cogeneration units provides general comparative values for the flue gas temperature in a range around 50 &deg;C with and around 110 &deg;C without condensing utilisation at rated output. The flue gas temperature can mainly be adjusted using the heat transitions G_CoolChannel and G_CooExhHex.</p>
+<p>If the calibration of the model is not to be performed for all listed calibration quantities, a quick adaptation of the essential model quantities for the use of are carried out. Setting the speed of the generator and internal combustion engine for the nominal power point using the calibration variables tilting slip, electrical calibration factor and modulation factor results in a high correspondence for electrical power and fuel input for each power stage of the CHP. The thermal output can then be checked by checking the flue gas temperature when the system exits. The examination of the data sheets of some cogeneration units provides general comparative values for the flue gas temperature in a range around 50 &deg;C with and around 110 &deg;C without condensing utilisation at rated output. The flue gas temperature can mainly be adjusted using the heat transitions G_CoolChannel and G_CooExhHex. Finally, the parameters of the heat exchanger can be adapted to the heating circuit.</p>
 <h4><span style=\"color: #000000\">Limitations:</span></h4>
 <p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
 </html>"));
@@ -439,7 +437,7 @@ CHP"),    Rectangle(
     Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
           Medium_Coolant) annotation (Placement(transformation(rotation=0, extent=
              {{90,-10},{110,10}})));
-    AixLib.Controls.Interfaces.CHPControlBus sigBus_Cooling(meaTemInEng=
+    AixLib.Controls.Interfaces.CHPControlBus sigBus_coo(meaTemInEng=
           senTCooEngIn.T, meaTemOutEng=senTCooEngOut.T) annotation (Placement(
           transformation(extent={{-28,26},{28,80}}), iconTransformation(extent=
               {{-28,26},{30,82}})));
@@ -459,7 +457,7 @@ CHP"),    Rectangle(
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=90,
           origin={-80,-40})));
-    Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if sigBus_Cooling.isOnPump
+    Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if sigBus_coo.isOnPump
            then m_flow else mCool_flow_small)
       annotation (Placement(transformation(extent={{12,-50},{-8,-30}})));
   equation
@@ -522,7 +520,7 @@ CHP"),    Rectangle(
       T_logEngCool=T_logEngCoo,
       T_ExhCHPOut=T_ExhCHPOut,
       modFac=modFac,
-      SwitchOnOff=cHPControlBus.isOn)
+      SwitchOnOff=cHPEngBus.isOn)
       annotation (Placement(transformation(extent={{-30,0},{30,56}})));
     AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing
       engineToCoolant(
@@ -582,32 +580,32 @@ CHP"),    Rectangle(
     parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
       "Thermal conductance from engine housing to the surrounding air"
       annotation (Dialog(tab="Engine Cooling Circle"));
-    Real modFac=cHPControlBus.modFac
+    Real modFac=cHPEngBus.modFac
       "Modulation factor for energy outuput control of the Chp unit  "
       annotation (Dialog(group="Engine Parameters"));
-    Modelica.SIunits.Temperature T_logEngCoo=(cHPControlBus.meaTemInEng +
-        cHPControlBus.meaTemOutEng)/2
-      "Logarithmic mean temperature of coolant inside the engine"
-      annotation(Dialog(group="Engine Parameters"));
-    Modelica.SIunits.Temperature T_ExhCHPOut=cHPControlBus.meaTemExhOutHex
-                                                     "Exhaust gas outlet temperature of CHP unit"
-      annotation(Dialog(group="Engine Parameters"));
+    Modelica.SIunits.Temperature T_logEngCoo=(cHPEngBus.meaTemInEng + cHPEngBus.meaTemOutEng)
+        /2 "Logarithmic mean temperature of coolant inside the engine"
+      annotation (Dialog(group="Engine Parameters"));
+    Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhOutHex
+      "Exhaust gas outlet temperature of CHP unit"
+      annotation (Dialog(group="Engine Parameters"));
     Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Inlet temperature of exhaust gas"
       annotation (Dialog(group="Thermal"));
 
-    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_Engine annotation (
-       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
+    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_eng annotation (
+        Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
           iconTransformation(extent={{-114,-6},{-94,14}})));
-    Modelica.Fluid.Interfaces.FluidPort_b port_Exhaust(redeclare package Medium =
-          Medium_Exhaust) annotation (Placement(transformation(rotation=0, extent={{92,-8},
-              {112,12}}),         iconTransformation(extent={{92,-8},{112,12}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient annotation (
+    Modelica.Fluid.Interfaces.FluidPort_b port_exh(redeclare package Medium =
+          Medium_Exhaust) annotation (Placement(transformation(rotation=0,
+            extent={{92,-8},{112,12}}), iconTransformation(extent={{92,-8},{112,
+              12}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
         Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),
           iconTransformation(extent={{-10,-100},{10,-80}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_CoolingCircle
-      annotation (Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_cooCir annotation
+      (Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
           iconTransformation(extent={{90,-98},{110,-78}})));
-    AixLib.Controls.Interfaces.CHPControlBus cHPControlBus(
+    AixLib.Controls.Interfaces.CHPControlBus cHPEngBus(
       meaRotEng=cHPCombustionEngine.nEng,
       meaFuePowEng=cHPCombustionEngine.P_Fue,
       meaThePowEng=cHPCombustionEngine.Q_therm,
@@ -625,16 +623,16 @@ CHP"),    Rectangle(
           origin={0,88})));
 
   equation
-    connect(port_Exhaust, cHPCombustionEngine.port_Exhaust) annotation (Line(
-          points={{102,2},{64,2},{64,28},{29.4,28}},   color={0,127,255}));
-    connect(port_Ambient, engineToCoolant.port_Ambient)
+    connect(port_exh, cHPCombustionEngine.port_Exhaust) annotation (Line(points
+          ={{102,2},{64,2},{64,28},{29.4,28}}, color={0,127,255}));
+    connect(port_amb, engineToCoolant.port_Ambient)
       annotation (Line(points={{0,-90},{0,-52}}, color={191,0,0}));
-    connect(port_CoolingCircle, engineToCoolant.port_CoolingCircle)
-      annotation (Line(points={{100,-88},{100,-30},{22,-30}}, color={191,0,0}));
+    connect(port_cooCir, engineToCoolant.port_CoolingCircle) annotation (Line(
+          points={{100,-88},{100,-30},{22,-30}}, color={191,0,0}));
     connect(engineToCoolant.exhaustGasTemperature, cHPCombustionEngine.exhaustGasTemperature)
       annotation (Line(points={{0,-3.16},{0,8.4}}, color={0,0,127}));
-    connect(cHPCombustionEngine.flange_a, flange_Engine) annotation (Line(
-          points={{-30,28},{-64,28},{-64,4},{-104,4}}, color={0,0,0}));
+    connect(cHPCombustionEngine.flange_a, flange_eng) annotation (Line(points={
+            {-30,28},{-64,28},{-64,4},{-104,4}}, color={0,0,0}));
     annotation (Icon(graphics={
             Bitmap(extent={{-136,-134},{144,160}}, fileName=
                 "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png")}),
@@ -733,7 +731,8 @@ CHP"),    Rectangle(
     Real eta "Total efficiency of the electric machine (as motor)";
     Real calI_1 = 1/(1+((k-1)/((s_nominal^2)-k))*((s^2)+rho1*abs(s)+rho0));
     Boolean OpMode = (n<=n0) "Operation mode (true=motor, false=generator)";
-    Boolean SwitchOnOff=cHPControlBus.isOn "Operation of electric machine (true=On, false=Off)";
+    Boolean SwitchOnOff=cHPGenBus.isOn
+      "Operation of electric machine (true=On, false=Off)";
     Modelica.Mechanics.Rotational.Components.Inertia inertia(       w(fixed=false), J=J_Gen)
       annotation (Placement(transformation(extent={{20,-10},{40,10}})));
     Modelica.Blocks.Sources.RealExpression electricTorque(y=M)
@@ -747,12 +746,12 @@ CHP"),    Rectangle(
         ratio=gearRatio)
       annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
-    AixLib.Controls.Interfaces.CHPControlBus cHPControlBus(
+    AixLib.Controls.Interfaces.CHPControlBus cHPGenBus(
       meaElPowGen=P_E,
       meaCurGen=I_1,
       meaTorGen=M,
-      calEtaGen=eta) annotation (Placement(transformation(extent={{-132,28},{-72,84}}),
-          iconTransformation(
+      calEtaGen=eta) annotation (Placement(transformation(extent={{-132,28},{-72,
+              84}}), iconTransformation(
           extent={{-30,-28},{30,28}},
           rotation=90,
           origin={-76,0})));
@@ -855,7 +854,7 @@ CHP"),    Rectangle(
           Medium1, final allowFlowReversal=allowFlowReversal1)
       "Sensor for mass flwo rate"
       annotation (Placement(transformation(extent={{60,70},{80,50}})));
-    AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolCold(
+    AixLib.Fluid.Sensors.TemperatureTwoPort senTCooCold(
       redeclare final package Medium = Medium2,
       final tau=tau,
       final m_flow_nominal=m2_flow_nominal,
@@ -868,7 +867,7 @@ CHP"),    Rectangle(
       final m_flow_small=m2_flow_small)
       "Temperature sensor of coolant cold side of exhaust heat exchanger"
       annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
-    AixLib.Fluid.Sensors.TemperatureTwoPort senTCoolHot(
+    AixLib.Fluid.Sensors.TemperatureTwoPort senTCooHot(
       redeclare final package Medium = Medium2,
       final tau=tau,
       final m_flow_nominal=m2_flow_nominal,
@@ -968,7 +967,7 @@ CHP"),    Rectangle(
     Modelica.Thermal.HeatTransfer.Components.ThermalConductor ambientLoss(G=
           GAmb)
       annotation (Placement(transformation(extent={{-46,-22},{-66,-2}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_Ambient annotation (
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
         Placement(transformation(extent={{-110,-10},{-90,10}}),
           iconTransformation(extent={{-110,-10},{-90,10}})));
     replaceable package Medium3 =
@@ -1034,18 +1033,18 @@ CHP"),    Rectangle(
       rho=rho1_in,
       lambda=lambda1_in,
       eta=eta1_in,
-      c=cHPControlBus.calMeaCpExh,
-      m_flow=cHPControlBus.meaMasFloFueEng + cHPControlBus.meaMasFloAirEng)
-                   annotation (Placement(transformation(
+      c=cHPExhHexBus.calMeaCpExh,
+      m_flow=cHPExhHexBus.meaMasFloFueEng + cHPExhHexBus.meaMasFloAirEng)
+      annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-20,20})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow additionalHeat
       "Heat flow from water condensation in the exhaust gas and generator losses"
       annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
-    Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=if cHPControlBus.isOn
+    Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=if cHPExhHexBus.isOn
            then m_ConH2OExh*deltaH_Vap else 0)
-                      "Calculated latent exhaust heat from water condensation"
+      "Calculated latent exhaust heat from water condensation"
       annotation (Placement(transformation(extent={{126,-12},{106,8}})));
 
     Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
@@ -1089,20 +1088,19 @@ CHP"),    Rectangle(
     Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
     Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
 
-    Modelica.Blocks.Sources.RealExpression generatorHeat(y=if cHPControlBus.isOn
-           then Q_Gen else 0)
-      "Calculated heat from generator losses"
+    Modelica.Blocks.Sources.RealExpression generatorHeat(y=if cHPExhHexBus.isOn
+           then Q_Gen else 0) "Calculated heat from generator losses"
       annotation (Placement(transformation(extent={{126,-32},{106,-12}})));
     Modelica.Blocks.Math.MultiSum multiSum(nu=2)
       annotation (Placement(transformation(extent={{86,-18},{74,-6}})));
-    AixLib.Controls.Interfaces.CHPControlBus cHPControlBus(
+    AixLib.Controls.Interfaces.CHPControlBus cHPExhHexBus(
       meaTemExhOutHex=senTExhCold.T,
       meaTemExhInHex=senTExhHot.T,
       meaThePowOutHex=pipeCoolant.heatPort_outside.Q_flow,
       meaMasFloConHex=m_ConH2OExh,
-      meaTemInHex=senTCoolCold.T,
-      meaTemOutHex=senTCoolHot.T) annotation (Placement(transformation(extent={
-              {-28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
+      meaTemInHex=senTCooCold.T,
+      meaTemOutHex=senTCooHot.T) annotation (Placement(transformation(extent={{
+              -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
   equation
   //Calculation of water condensation and its usable latent heat
     if ConTec then
@@ -1137,17 +1135,17 @@ CHP"),    Rectangle(
       annotation (Line(points={{-100,60},{-80,60}}, color={0,127,255}));
     connect(senMasFloExh.port_b, port_b1)
       annotation (Line(points={{80,60},{100,60}}, color={0,127,255}));
-    connect(port_a2, senTCoolCold.port_b)
+    connect(port_a2, senTCooCold.port_b)
       annotation (Line(points={{100,-60},{80,-60}}, color={0,127,255}));
-    connect(senTCoolHot.port_a, senMasFloCool.port_a)
+    connect(senTCooHot.port_a, senMasFloCool.port_a)
       annotation (Line(points={{-40,-60},{-60,-60}}, color={0,127,255}));
     connect(senMasFloCool.port_b, port_b2)
       annotation (Line(points={{-80,-60},{-100,-60}}, color={0,127,255}));
-    connect(port_Ambient, ambientLoss.port_b) annotation (Line(points={{-100,0},{-90,
+    connect(port_amb, ambientLoss.port_b) annotation (Line(points={{-100,0},{-90,
             0},{-90,-12},{-66,-12}}, color={191,0,0}));
-    connect(senTCoolCold.port_a, pipeCoolant.port_a)
+    connect(senTCooCold.port_a, pipeCoolant.port_a)
       annotation (Line(points={{60,-60},{32.4,-60}}, color={0,127,255}));
-    connect(senTCoolHot.port_b, pipeCoolant.port_b)
+    connect(senTCooHot.port_b, pipeCoolant.port_b)
       annotation (Line(points={{-20,-60},{11.6,-60}}, color={0,127,255}));
     connect(ambientLoss.port_a, heatCapacitor.port)
       annotation (Line(points={{-46,-12},{20,-12}},color={191,0,0}));
@@ -1216,53 +1214,56 @@ CHP"),    Rectangle(
         0.62; 14400,0.62; 14400,0.8; 18000,0.8; 18000,0.0]
       "Table for unit modulation (time = first column; modulation factors = second column)";
     Modelica.Blocks.Logical.Timer timerIsOff
-      annotation (Placement(transformation(extent={{-6,0},{8,14}})));
+      annotation (Placement(transformation(extent={{-6,16},{8,30}})));
     Modelica.Blocks.Logical.Not not1
-      annotation (Placement(transformation(extent={{-32,0},{-18,14}})));
+      annotation (Placement(transformation(extent={{-32,16},{-18,30}})));
     Modelica.Blocks.Logical.LessThreshold declarationTime(threshold=7200)
-      annotation (Placement(transformation(extent={{20,0},{34,14}})));
+      annotation (Placement(transformation(extent={{20,16},{34,30}})));
     Modelica.Blocks.Logical.Or pumpControl
-      annotation (Placement(transformation(extent={{48,-8},{64,8}})));
-    AixLib.Controls.Interfaces.CHPControlBus modularCHPControlBus annotation (
-        Placement(transformation(
+      annotation (Placement(transformation(extent={{48,8},{64,24}})));
+    AixLib.Controls.Interfaces.CHPControlBus modCHPConBus annotation (Placement(
+          transformation(
           extent={{-20,-20},{20,20}},
           rotation=270,
           origin={100,0})));
     Modelica.Blocks.Sources.TimeTable modulationFactorControl(
                             startTime=startTimeChp, table=modTab)
-      annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
+      annotation (Placement(transformation(extent={{-10,-54},{10,-34}})));
     Modelica.Blocks.Logical.GreaterThreshold greaterThreshold
-      annotation (Placement(transformation(extent={{-68,-10},{-48,10}})));
+      annotation (Placement(transformation(extent={{-68,6},{-48,26}})));
 
   equation
     connect(timerIsOff.u,not1. y)
-      annotation (Line(points={{-7.4,7},{-17.3,7}},    color={255,0,255}));
+      annotation (Line(points={{-7.4,23},{-17.3,23}},  color={255,0,255}));
     connect(timerIsOff.y,declarationTime. u)
-      annotation (Line(points={{8.7,7},{18.6,7}},   color={0,0,127}));
-    connect(declarationTime.y,pumpControl. u1) annotation (Line(points={{34.7,7},
-            {38,7},{38,0},{46.4,0}},  color={255,0,255}));
-    connect(pumpControl.y, modularCHPControlBus.isOnPump) annotation (Line(points=
-           {{64.8,0},{82,0},{82,-0.1},{100.1,-0.1}}, color={255,0,255}), Text(
+      annotation (Line(points={{8.7,23},{18.6,23}}, color={0,0,127}));
+    connect(declarationTime.y,pumpControl. u1) annotation (Line(points={{34.7,23},
+            {38,23},{38,16},{46.4,16}},
+                                      color={255,0,255}));
+    connect(pumpControl.y, modCHPConBus.isOnPump) annotation (Line(points={{
+            64.8,16},{82,16},{82,-0.1},{100.1,-0.1}}, color={255,0,255}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(modulationFactorControl.y, modularCHPControlBus.modFac) annotation (
-        Line(points={{11,-50},{100.1,-50},{100.1,-0.1}}, color={0,0,127}), Text(
+    connect(modulationFactorControl.y, modCHPConBus.modFac) annotation (Line(
+          points={{11,-44},{100.1,-44},{100.1,-0.1}}, color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(greaterThreshold.y, not1.u) annotation (Line(points={{-47,0},{-40,0},
-            {-40,7},{-33.4,7}}, color={255,0,255}));
-    connect(pumpControl.u2, not1.u) annotation (Line(points={{46.4,-6.4},{-40,
-            -6.4},{-40,7},{-33.4,7}}, color={255,0,255}));
-    connect(greaterThreshold.y, modularCHPControlBus.isOn) annotation (Line(
-          points={{-47,0},{-40,0},{-40,-16},{92,-16},{92,-0.1},{100.1,-0.1}},
-          color={255,0,255}), Text(
+    connect(greaterThreshold.y, not1.u) annotation (Line(points={{-47,16},{-40,
+            16},{-40,23},{-33.4,23}},
+                                color={255,0,255}));
+    connect(pumpControl.u2, not1.u) annotation (Line(points={{46.4,9.6},{-40,
+            9.6},{-40,23},{-33.4,23}},color={255,0,255}));
+    connect(greaterThreshold.y, modCHPConBus.isOn) annotation (Line(points={{
+            -47,16},{-40,16},{-40,0},{92,0},{92,-0.1},{100.1,-0.1}}, color={255,
+            0,255}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
     connect(greaterThreshold.u, modulationFactorControl.y) annotation (Line(
-          points={{-70,0},{-82,0},{-82,-32},{38,-32},{38,-50},{11,-50}}, color={0,
+          points={{-70,16},{-82,16},{-82,-16},{38,-16},{38,-44},{11,-44}},
+                                                                         color={0,
             0,127}));
     annotation (Icon(graphics={
         Rectangle(
@@ -2041,10 +2042,8 @@ to ambient")}));
       parameter Modelica.SIunits.AbsolutePressure p_amb=101325
         "Default ambient pressure" annotation (Dialog(group=
               "Ambient Parameters"));
-      Modelica.SIunits.Temperature T_Ret=tempReturnFlow.T
-        "Coolant return temperature";
-      Modelica.SIunits.Temperature T_Sup=tempSupplyFlow.T
-        "Coolant supply temperature";
+      Modelica.SIunits.Temperature T_Ret=senTRetHea.T "Coolant return temperature";
+      Modelica.SIunits.Temperature T_Sup=senTSupHea.T "Coolant supply temperature";
       Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
       Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
       Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
@@ -2133,8 +2132,8 @@ to ambient")}));
       parameter Boolean allowFlowReversalCoolant=true
         "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
         annotation (Dialog(tab="Advanced", group="Assumptions"));
-      Modelica.SIunits.MassFlowRate m_flow_HeaCir=if not VolCon then
-          CHPEngineModel.m_floCooNominal else V_flow_HeaCir*senDen.d
+      Modelica.SIunits.MassFlowRate m_flow_HeaCir=if not VolCon then CHPEngineModel.m_floCooNominal
+           else V_flow_HeaCir*senDen.d
         "Nominal mass flow rate inside the heating circuit"
         annotation (Dialog(tab="Engine Cooling Circle"));
       Modelica.SIunits.VolumeFlowRate V_flow_HeaCir=0.3/3600
@@ -2195,21 +2194,21 @@ to ambient")}));
         redeclare package Medium = Medium_HeatingCircuit,
         nPorts=1,
         use_m_flow_in=true)
-        annotation (Placement(transformation(extent={{-110,-74},{-90,-54}})));
+        annotation (Placement(transformation(extent={{-108,-74},{-88,-54}})));
       Modelica.Fluid.Sources.FixedBoundary heatingSupplyFlow(
                                    nPorts=1, redeclare package Medium =
             Medium_HeatingCircuit)
         annotation (Placement(transformation(extent={{110,-74},{90,-54}})));
-      Modelica.Fluid.Sensors.TemperatureTwoPort tempReturnFlow(
+      Modelica.Fluid.Sensors.TemperatureTwoPort senTRetHea(
         m_flow_small=mCool_flow_small,
         m_flow_nominal=CHPEngineModel.m_floCooNominal,
         redeclare package Medium = Medium_HeatingCircuit)
         annotation (Placement(transformation(extent={{-46,-72},{-30,-56}})));
-      Modelica.Fluid.Sensors.TemperatureTwoPort tempSupplyFlow(
+      Modelica.Fluid.Sensors.TemperatureTwoPort senTSupHea(
         m_flow_small=mCool_flow_small,
         m_flow_nominal=CHPEngineModel.m_floCooNominal,
         redeclare package Medium = Medium_HeatingCircuit)
-        annotation (Placement(transformation(extent={{40,-72},{56,-56}})));
+        annotation (Placement(transformation(extent={{52,-72},{68,-56}})));
 
       Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
         annotation (Placement(transformation(extent={{-144,-76},{-124,-56}})));
@@ -2226,32 +2225,31 @@ to ambient")}));
         annotation (Placement(transformation(extent={{-144,-60},{-124,-40}})));
 
     equation
-      connect(coolantHex.port_a2, tempReturnFlow.port_b)
+      connect(coolantHex.port_a2, senTRetHea.port_b)
         annotation (Line(points={{-20,-64},{-30,-64}}, color={0,127,255}));
-      connect(coolantHex.port_b2, tempSupplyFlow.port_a)
-        annotation (Line(points={{20,-64},{40,-64}}, color={0,127,255}));
-      connect(tempSupplyFlow.port_b,heatingSupplyFlow. ports[1])
-        annotation (Line(points={{56,-64},{90,-64}}, color={0,127,255}));
+      connect(coolantHex.port_b2, senTSupHea.port_a)
+        annotation (Line(points={{20,-64},{52,-64}}, color={0,127,255}));
+      connect(senTSupHea.port_b, heatingSupplyFlow.ports[1])
+        annotation (Line(points={{68,-64},{90,-64}}, color={0,127,255}));
       connect(heatingReturnFlow.T_in, tempFlowHeating.y)
-        annotation (Line(points={{-112,-60},{-118,-60},{-118,-66},{-123,-66}},
+        annotation (Line(points={{-110,-60},{-118,-60},{-118,-66},{-123,-66}},
                                                          color={0,0,127}));
-      connect(ControllerCHP.modularCHPControlBus, cHP_PowerUnit.sigBusCHP)
-        annotation (Line(
+      connect(ControllerCHP.modCHPConBus, cHP_PowerUnit.sigBusCHP) annotation (Line(
           points={{-44,80},{-0.24,80},{-0.24,46.32}},
           color={255,204,51},
           thickness=0.5));
       connect(heatingReturnFlow.ports[1], senDen.port_a)
-        annotation (Line(points={{-90,-64},{-76,-64}}, color={0,127,255}));
-      connect(tempReturnFlow.port_a, senDen.port_b)
+        annotation (Line(points={{-88,-64},{-76,-64}}, color={0,127,255}));
+      connect(senTRetHea.port_a, senDen.port_b)
         annotation (Line(points={{-46,-64},{-60,-64}}, color={0,127,255}));
       connect(massFlowHeating.y, heatingReturnFlow.m_flow_in) annotation (Line(
-            points={{-123,-50},{-118,-50},{-118,-56},{-110,-56}}, color={0,0,127}));
-      connect(coolantHex.port_b1, cHP_PowerUnit.port_Return) annotation (Line(
+            points={{-123,-50},{-118,-50},{-118,-56},{-108,-56}}, color={0,0,127}));
+      connect(coolantHex.port_b1,cHP_PowerUnit.port_retCoo)  annotation (Line(
             points={{-20,-40},{-60,-40},{-60,10.08},{-19.2,10.08}}, color={0,127,
               255}));
-      connect(cHP_PowerUnit.port_Supply, coolantHex.port_a1) annotation (Line(
+      connect(cHP_PowerUnit.port_supCoo, coolantHex.port_a1) annotation (Line(
             points={{19.2,10.08},{60,10.08},{60,-40},{20,-40}}, color={0,127,255}));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), experiment(StopTime=18000, Interval=5), Diagram(
             coordinateSystem(preserveAspectRatio=false)),
              __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
         Documentation(info="<html>

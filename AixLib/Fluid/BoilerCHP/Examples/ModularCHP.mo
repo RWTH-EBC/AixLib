@@ -49,9 +49,9 @@ public
     annotation (Dialog(group="Ambient Parameters"));
   parameter Modelica.SIunits.AbsolutePressure p_amb=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
-  Modelica.SIunits.Temperature T_Ret=cHP_PowerUnit.tempReturnFlow.T
+  Modelica.SIunits.Temperature T_Ret=cHP_PowerUnit.temRetFlo.T
     "Coolant return temperature";
-  Modelica.SIunits.Temperature T_Sup=cHP_PowerUnit.tempSupplyFlow.T
+  Modelica.SIunits.Temperature T_Sup=cHP_PowerUnit.temSupFlo.T
     "Coolant supply temperature";
   Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm_th "Thermal power output of the CHP unit to the coolant media";
   Modelica.SIunits.Power Q_Therm=cHP_PowerUnit.Q_Therm "Effective thermal power output of the CHP unit to the heating circuit";
@@ -222,17 +222,18 @@ equation
     annotation (Line(points={{-90,0},{-68,0}},     color={0,127,255}));
   connect(massFlowHeating.y, heatingReturnFlow.m_flow_in) annotation (Line(
         points={{-123,14},{-118,14},{-118,8},{-110,8}},       color={0,0,127}));
-  connect(cHP_PowerUnit.port_Supply, heatingSupplyFlow.ports[1])
+  connect(cHP_PowerUnit.port_supHea, heatingSupplyFlow.ports[1])
     annotation (Line(points={{26,0},{90,0}}, color={0,127,255}));
-  connect(senDen.port_b, cHP_PowerUnit.port_Return)
+  connect(senDen.port_b,cHP_PowerUnit.port_retHea)
     annotation (Line(points={{-52,0},{-26,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+        coordinateSystem(preserveAspectRatio=false)), experiment(StopTime=18000, Interval=5),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html>
 <p>An example of the use of modular CHP components combined as a power unit with interfaces to a controller and to the heating circuit.</p>
 <p>It allows an impression of the versatile and complex application possibilities of the model by the changeability of many variables of individual components and the detailed investigation capability.</p>
-<p>The return temperature as well as the volume flow in the heating circuit are considered constant.</p>
+<p>For a better understanding the controller modulates the fuel consumption of the CHP unit. The effects to the thermal output can be visualized by looking at <b>T_Ret</b> and <b>T_Sup</b>.</p>
+<p>The return temperature as well as the volume flow in the heating circuit are considered constant in this example.</p>
 <p><br><br>Caution: </p>
 <p>If the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
