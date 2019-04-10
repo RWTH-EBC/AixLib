@@ -1,10 +1,19 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls;
 model Distributor
-  replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium
+  replaceable package Medium = Media.Water constrainedby
+    Modelica.Media.Interfaces.PartialMedium
     "Medium in the component"                                                                  annotation(Dialog(group="Medium"),choicesAllMatching=true);
-  parameter Integer n = 6 "Number of floor heating circuits";
-  parameter Modelica.SIunits.Volume V=0.001 "Volume for numerical robustness";
+  parameter Integer n(min=1)=6  "Number of floor heating circuits" annotation(Dialog(group="General"));
+
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate" annotation(Dialog(group="General"));
+
+  parameter Modelica.SIunits.Volume V=m_flow_nominal*tau/rho_default
+    "Volume for numerical robustness" annotation(Dialog(group="General"));
+
+  parameter Modelica.SIunits.Time tau = 30
+    "Time constant at nominal flow (if energyDynamics <> SteadyState)"
+     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
 
   Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare package Medium =
         Medium)
@@ -15,19 +24,17 @@ model Distributor
         iconTransformation(extent={{-70,-40},{-50,-20}})));
   MixingVolumes.MixingVolume          vol_flow(
     redeclare package Medium = Medium,
-    nPorts=n + 1,
-    final V=V,
-    m_flow_nominal=m_flow_nominal)
-               annotation (Placement(transformation(
+    final nPorts=n + 1,
+    final m_flow_nominal=m_flow_nominal,
+    final V=V) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,10})));
   MixingVolumes.MixingVolume          vol_return(
     redeclare package Medium = Medium,
-    nPorts=n + 1,
-    final V=V,
-    m_flow_nominal=m_flow_nominal)
-               annotation (Placement(transformation(extent={{-10,-20},{10,0}},
+    final nPorts=n + 1,
+    final m_flow_nominal=m_flow_nominal,
+    final V=V) annotation (Placement(transformation(extent={{-10,-20},{10,0}},
           rotation=0)));
   Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each package
       Medium = Medium) annotation (Placement(
@@ -51,8 +58,12 @@ model Distributor
         origin={0,-62},
         extent={{-6,-16},{6,16}},
         rotation=90)));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate";
+
+protected
+  parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
+      T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
+  parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
+    "Density, used to compute fluid volume";
 equation
   connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,30},{-46,
           30},{-46,20},{3.55271e-15,20}}, color={255,0,0}));
