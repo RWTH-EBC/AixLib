@@ -68,8 +68,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         extent={{-10,-40},{10,40}},
         rotation=90),
       iconTransformation(
-        origin={-2,62},
-        extent={{-6,-16},{6,16}},
+        origin={0,60},
+        extent={{-6,-24},{6,24}},
         rotation=90)));
   Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
       package Medium = Medium)
@@ -81,7 +81,7 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         rotation=90),
       iconTransformation(
         origin={0,-62},
-        extent={{-6,-16},{6,16}},
+        extent={{-6,-24},{6,24}},
         rotation=90)));
 
 protected
