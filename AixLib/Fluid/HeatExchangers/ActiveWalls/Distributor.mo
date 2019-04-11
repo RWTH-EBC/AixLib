@@ -3,29 +3,29 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   //General
-  parameter Integer n(min=1)=6  "Number of underfloor heating circuits" annotation(Dialog(connectorSizing=true, group="General"));
+  parameter Integer n(min=1) = 6 "Number of underfloor heating circuits"
+    annotation (Dialog(connectorSizing=true, group="General"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate" annotation(Dialog(group="General"));
+    "Nominal mass flow rate" annotation (Dialog(group="General"));
 
-  parameter Modelica.SIunits.Time tau = 10
+  parameter Modelica.SIunits.Time tau=10
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
+    annotation (Dialog(tab="Dynamics", group="Nominal condition"));
 
   // Assumptions
-  parameter Boolean allowFlowReversal = true
+  parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation(Dialog(tab="Assumptions"), Evaluate=true);
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium =
-        Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium
+      = Medium)
     annotation (Placement(transformation(extent={{-70,22},{-50,42}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package
-      Medium = Medium)
-                annotation (Placement(transformation(extent={{-70,-40},{-50,-20}}),
-        iconTransformation(extent={{-70,-40},{-50,-20}})));
-  MixingVolumes.MixingVolume          vol_flow(
+      Medium = Medium) annotation (Placement(transformation(extent={{-70,-40},{
+            -50,-20}}), iconTransformation(extent={{-70,-40},{-50,-20}})));
+  MixingVolumes.MixingVolume vol_flow(
     final nPorts=n + 1,
     final m_flow_nominal=m_flow_nominal,
     final V=m_flow_nominal*tau/rho_default,
@@ -38,12 +38,12 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     final C_start=C_start,
     final mSenFac=mSenFac,
     each final C_nominal=C_nominal,
-    final allowFlowReversal=allowFlowReversal)
-               annotation (Placement(transformation(
+    final allowFlowReversal=allowFlowReversal) annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,12})));
-  MixingVolumes.MixingVolume          vol_return(
+  MixingVolumes.MixingVolume vol_return(
     final nPorts=n + 1,
     final m_flow_nominal=m_flow_nominal,
     final V=m_flow_nominal*tau/rho_default,
@@ -56,12 +56,10 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     final C_start=C_start,
     final mSenFac=mSenFac,
     each final C_nominal=C_nominal,
-    final allowFlowReversal=allowFlowReversal)
-               annotation (Placement(transformation(extent={{-10,-20},{10,0}},
-          rotation=0)));
+    final allowFlowReversal=allowFlowReversal) annotation (Placement(
+        transformation(extent={{-10,-20},{10,0}}, rotation=0)));
   Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
-      package Medium = Medium)
-                       annotation (Placement(
+      package Medium = Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,60},
@@ -72,8 +70,7 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         extent={{-6,-24},{6,24}},
         rotation=90)));
   Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
-      package Medium = Medium)
-                       annotation (Placement(
+      package Medium = Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,-60},
@@ -86,25 +83,29 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
 
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
-      T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
+      T=Medium.T_default,
+      p=Medium.p_default,
+      X=Medium.X_default);
   parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 equation
   connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,32},{-46,
-          32},{-46,22},{0,22}},           color={255,0,0}));
+          32},{-46,22},{0,22}}, color={255,0,0}));
   connect(mainReturn, vol_return.ports[1]) annotation (Line(points={{-60,-30},{
           -46,-30},{-46,-20},{0,-20}}, color={0,0,255}));
 
-for k in 1:n loop
+  for k in 1:n loop
     connect(vol_flow.ports[k + 1], flowPorts[k])
       annotation (Line(points={{0,22},{0,60}}, color={255,0,0}));
     connect(vol_return.ports[k + 1], returnPorts[k])
       annotation (Line(points={{0,-20},{0,-60}}, color={0,0,255}));
-end for;
+  end for;
 
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},
-            {60,60}})),          Icon(coordinateSystem(preserveAspectRatio=true,
-          extent={{-60,-60},{60,60}}),   graphics={
+  annotation (
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{60,60}})),
+
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{60,60}}),
+        graphics={
         Rectangle(
           extent={{-60,60},{60,-60}},
           lineColor={28,108,200},
@@ -139,8 +140,7 @@ Moved into AixLib</li>
 <li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
 Added documentation.</li>
 </ul>
-</html>",
-        info="<html>
+</html>", info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Model for a contributor for different floor heating circuits in a house.</p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
