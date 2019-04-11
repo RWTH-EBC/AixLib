@@ -30,3 +30,4 @@ convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_6"
 convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_6", "flowPorts[6]");
 convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "volume", "vol_flow");
 convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "volume1", "vol_return");
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", {"V"}, {"tau=%V%*rho_default/m_flow_nominal"});
