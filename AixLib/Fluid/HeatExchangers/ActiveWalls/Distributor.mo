@@ -3,7 +3,7 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   //General
-  parameter Integer n(min=1) = 6 "Number of underfloor heating circuits"
+  parameter Integer n(min=1) "Number of underfloor heating circuits / registers"
     annotation (Dialog(connectorSizing=true, group="General"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
@@ -18,13 +18,13 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package
+      Medium = Medium)
     annotation (Placement(transformation(extent={{-70,22},{-50,42}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package
-      Medium = Medium) annotation (Placement(transformation(extent={{-70,-40},{
-            -50,-20}}), iconTransformation(extent={{-70,-40},{-50,-20}})));
+      Medium = Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,
+            -20}}), iconTransformation(extent={{-70,-40},{-50,-20}})));
   MixingVolumes.MixingVolume vol_flow(
     final nPorts=n + 1,
     final m_flow_nominal=m_flow_nominal,
@@ -89,10 +89,10 @@ protected
   parameter Modelica.SIunits.Density rho_default=Medium.density(sta_default)
     "Density, used to compute fluid volume";
 equation
-  connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,32},{-46,
-          32},{-46,22},{0,22}}, color={255,0,0}));
-  connect(mainReturn, vol_return.ports[1]) annotation (Line(points={{-60,-30},{
-          -46,-30},{-46,-20},{0,-20}}, color={0,0,255}));
+  connect(mainFlow, vol_flow.ports[1]) annotation (Line(points={{-60,32},{-46,32},
+          {-46,22},{0,22}}, color={255,0,0}));
+  connect(mainReturn, vol_return.ports[1]) annotation (Line(points={{-60,-30},{-46,
+          -30},{-46,-20},{0,-20}}, color={0,0,255}));
 
   for k in 1:n loop
     connect(vol_flow.ports[k + 1], flowPorts[k])
@@ -103,7 +103,6 @@ equation
 
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{60,60}})),
-
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},{60,60}}),
         graphics={
         Rectangle(
