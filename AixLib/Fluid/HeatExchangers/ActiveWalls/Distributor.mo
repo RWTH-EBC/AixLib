@@ -3,12 +3,12 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   //General
-  parameter Integer n(min=1)=6  "Number of underfloor heating circuits" annotation(Dialog(group="General"));
+  parameter Integer n(min=1)=6  "Number of underfloor heating circuits" annotation(Dialog(connectorSizing=true, group="General"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation(Dialog(group="General"));
 
-  parameter Modelica.SIunits.Time tau = 30
+  parameter Modelica.SIunits.Time tau = 10
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
      annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
 
@@ -65,7 +65,7 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
       visible=true,
       transformation(
         origin={0,60},
-        extent={{-8,-18},{8,18}},
+        extent={{-10,-40},{10,40}},
         rotation=90),
       iconTransformation(
         origin={-2,62},
@@ -76,8 +76,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
                        annotation (Placement(
       visible=true,
       transformation(
-        origin={0,-59},
-        extent={{-7,-18},{7,18}},
+        origin={0,-60},
+        extent={{-10,-40},{10,40}},
         rotation=90),
       iconTransformation(
         origin={0,-62},
@@ -99,7 +99,7 @@ for k in 1:n loop
     connect(vol_flow.ports[k + 1], flowPorts[k])
       annotation (Line(points={{0,22},{0,60}}, color={255,0,0}));
     connect(vol_return.ports[k + 1], returnPorts[k])
-      annotation (Line(points={{0,-20},{0,-59}}, color={0,0,255}));
+      annotation (Line(points={{0,-20},{0,-60}}, color={0,0,255}));
 end for;
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-60},
