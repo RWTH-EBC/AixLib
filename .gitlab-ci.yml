@@ -11,7 +11,7 @@ test_overall_coverage:
     - export PYTHONIOENCODING=utf-8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --tool dymola --coverage-only
+    - cd AixLib && python ../bin/runUnitTests.py --coverage-only
 
   artifacts:
     when: on_failure

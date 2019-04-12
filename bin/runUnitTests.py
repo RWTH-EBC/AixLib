@@ -99,9 +99,9 @@ def _run_coverage_only(batch, tool, package, path, n_pro, show_gui):
     ut.setLibraryRoot(path)
     if package is not None:
         ut.setSinglePackage(package)
-    ut.setNumberOfThreads(n_pro)
-    ut.pedanticModelica(True)
-    ut.showGUI(show_gui)
+    # ut.setNumberOfThreads(n_pro)
+    # ut.pedanticModelica(True)
+    # ut.showGUI(show_gui)
     ut.get_test_example_coverage()
     return 0
 
