@@ -174,6 +174,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
   Modelica.Blocks.Interfaces.RealInput mWat_flow if use_moisture_balance and ATot >0
     annotation (Placement(transformation(extent={{-280,-140},{-240,-100}}),
         iconTransformation(extent={{-260,-120},{-240,-100}})));
+  Modelica.Blocks.Interfaces.RealOutput X_w if use_moisture_balance and ATot >0
+    annotation (Placement(transformation(extent={{240,-130},{260,-110}})));
 protected
   parameter Modelica.SIunits.Area ATot=sum(AArray) "Sum of wall surface areas";
   parameter Modelica.SIunits.Area ATotExt=sum(AExt)
@@ -371,6 +373,7 @@ equation
     annotation (Line(points={{-173.4,124},{-166,124}}, color={0,0,127}));
   if use_moisture_balance and ATot >0 then
     connect(mWat_flow,volAir.mWat_flow);
+    connect(volAir.X_w,X_w);
   end if;
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
