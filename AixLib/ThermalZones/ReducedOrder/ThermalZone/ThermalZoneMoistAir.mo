@@ -17,9 +17,26 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
       final mSenFac=ROM.mSenFac,
       final use_C_flow=false),
     final use_moisture_balance=true));
+  Modelica.Blocks.Interfaces.RealInput ventHum(
+    final quantity="MassFraction",
+    final unit="kg/kg",
+    min=0) if ATot > 0 or zoneParam.VAir > 0
+    "Ventilation and infiltration humidity" annotation (Placement(
+        transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
+          extent={{-126,-80},{-100,-54}})));
+  Modelica.Blocks.Math.MultiSum SumMoistFlow(nu=1) if ATot > 0
+    annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
+  Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0
+    "absolute humidity in thermal zone"
+    annotation (Placement(transformation(extent={{100,64},{120,84}})));
 equation
-  connect(humanSenHea.MoistGain, ROM.mWat_flow) annotation (Line(points={{83.6,-18},
-          {88,-18},{88,-4},{34,-4},{34,35},{37,35}}, color={0,0,127}));
+  connect(humanSenHea.MoistGain, SumMoistFlow.u[1]) annotation (Line(points={{83.6,
+          -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-30},{16,-30}},
+        color={0,0,127}));
+  connect(SumMoistFlow.y, ROM.mWat_flow) annotation (Line(points={{29.02,-30},{34,
+          -30},{34,35},{37,35}}, color={0,0,127}));
+  connect(ROM.X_w, X_w) annotation (Line(points={{87,34},{92,34},{92,74},{110,74}},
+        color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -34,7 +51,7 @@ equation
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
-<p> There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture.</p>
+<p> There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture. This leads to a steady increase of moisture in the room, when there is no ventilation.</p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>
