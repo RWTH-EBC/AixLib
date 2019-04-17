@@ -48,8 +48,7 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-      redeclare final package Medium_eva = Medium_eva),
-    secHeaGen(energyDynamics=energyDynamics));
+      redeclare final package Medium_eva = Medium_eva));
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters;
 
 //Heat Pump
