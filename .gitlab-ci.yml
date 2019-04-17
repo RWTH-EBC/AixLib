@@ -5,11 +5,7 @@ test_overall_coverage:
     -  docker
 
   before_script:
-    - sudo apt-get update && sudo apt-get install -y locales
-    - sudo cat /etc/locale.gen
-    - sudo echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
+    - printenv
     - export PIP_CACHE_DIR="/opt/cache/pip"
     - source activate python27
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
