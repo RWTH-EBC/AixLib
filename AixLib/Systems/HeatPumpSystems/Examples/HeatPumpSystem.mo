@@ -129,7 +129,9 @@ model HeatPumpSystem "Example for a heat pump system"
     TCon_start=313.15,
     TEva_start=283.15,
     VCon=0.004,
-    VEva=0.004)
+    VEva=0.004,
+    fixed_TCon_start=true,
+    fixed_TEva_start=true)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(

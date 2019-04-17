@@ -12,10 +12,10 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
     final show_T=show_TPort);
 
 //General
-  replaceable package Medium_con = 
+  replaceable package Medium_con =
     Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
     annotation (Dialog(tab = "Condenser"),choicesAllMatching=true);
-  replaceable package Medium_eva = 
+  replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
@@ -137,7 +137,12 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
-    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
+    annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser",
+      enable=use_conCap));
+  parameter Boolean fixed_TCon_start
+    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
+    annotation (Evaluate=true,Dialog(tab="Condenser",      group="Heat Losses",
+      enable=use_conCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
@@ -147,6 +152,10 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
+  parameter Boolean fixed_TEva_start
+    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
+    annotation (Evaluate=true,Dialog(tab="Evaporator",     group="Heat Losses",
+      enable=use_evaCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
@@ -195,7 +204,9 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
     final GOut=GConOut*scalingFactor,
     final m_flow_nominal=mFlow_conNominal*scalingFactor,
     final dp_nominal=dpCon_nominal*scalingFactor,
-    final GInn=GConIns*scalingFactor) "Heat exchanger model for the condenser"
+    final GInn=GConIns*scalingFactor,
+    final fixed_T_start=fixed_TCon_start)
+                                      "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,78},{16,110}})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
@@ -217,7 +228,9 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
     final m_flow_nominal=mFlow_evaNominal*scalingFactor,
     final dp_nominal=dpEva_nominal*scalingFactor,
     final GOut=GEvaOut*scalingFactor,
-    GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
+    GInn=GEvaIns*scalingFactor,
+    final fixed_T_start=fixed_TEva_start)
+                                "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,

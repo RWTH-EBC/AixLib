@@ -48,7 +48,9 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-      redeclare final package Medium_eva = Medium_eva));
+      redeclare final package Medium_eva = Medium_eva,
+      final fixed_TCon_start=fixed_TCon_start,
+      final fixed_TEva_start=fixed_TEva_start));
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters;
 
 //Heat Pump
@@ -142,6 +144,18 @@ model HeatPumpSystem
         extent={{-7,7},{7,-7}},
         rotation=180,
         origin={87,-1})));
+  parameter Boolean fixed_TCon_start
+    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
+    annotation (Dialog(
+      tab="Initialization",
+      group="Condenser",
+      enable=use_conCap));
+  parameter Boolean fixed_TEva_start
+    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
+    annotation (Dialog(
+      tab="Initialization",
+      group="Evaporator",
+      enable=use_evaCap));
 equation
 
   connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{
