@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
-model Lights_relative "light heat source model"
+model LightsAreaSpecific "light heat source model"
   extends BaseClasses.PartialInternalGain(ratioConv=0.5, RadiativeHeat(T_ref=T0));
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room"    annotation(Dialog( descriptionLabel = true));
   parameter Real LightingPower = 10 "Heating power of lighting in W/m2" annotation(Dialog( descriptionLabel = true));
@@ -73,4 +73,4 @@ equation
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Lights\">AixLib.Building.Examples.Sources.InternalGains.Lights</a> </p>
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Examples.Sources.InternalGains.OneOffice</a></p>
 </html>"));
-end Lights_relative;
+end LightsAreaSpecific;
