@@ -135,10 +135,10 @@ test_dymola_Controls:
 #     - python -V               # Print out python version for debugging
 #     - dir
 #     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-- apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
+#     - apt-get install -y locales
+#     - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+#     - locale-gen
+#     - export LC_ALL=en_US.UTF-8
 #     - export PYTHONIOENCODING=UTF8 # just in case
 
 #   script:
@@ -167,10 +167,10 @@ test_dymola_Controls:
 #     - python -V               # Print out python version for debugging
 #     - dir
 #     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-- apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
+#     - apt-get install -y locales
+#     - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+#     - locale-gen
+#     - export LC_ALL=en_US.UTF-8
 #     - export PYTHONIOENCODING=UTF8 # just in case
 
 #   script:
