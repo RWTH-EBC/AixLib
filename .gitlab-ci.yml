@@ -5,13 +5,13 @@ test_overall_coverage:
     -  docker
 
   before_script:
-    - export PIP_CACHE_DIR="/opt/cache/pip"
-    - source activate python27
-    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
+    - sudo apt-get update && sudo apt-get install -y locales
     - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
     - locale-gen
     - export LC_ALL=en_US.UTF-8
+    - export PIP_CACHE_DIR="/opt/cache/pip"
+    - source activate python27
+    - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
     - export PYTHONIOENCODING=utf-8 # just in case
 
   script:
@@ -39,10 +39,6 @@ test_dymola_Airflow:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=utf-8 # just in case
 
   script:
@@ -71,10 +67,6 @@ test_dymola_BoundaryConditions:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -103,10 +95,6 @@ test_dymola_Controls:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -135,10 +123,6 @@ test_dymola_Controls:
 #     - python -V               # Print out python version for debugging
 #     - dir
 #     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-#     - apt-get install -y locales
-#     - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-#     - locale-gen
-#     - export LC_ALL=en_US.UTF-8
 #     - export PYTHONIOENCODING=UTF8 # just in case
 
 #   script:
@@ -167,10 +151,6 @@ test_dymola_Controls:
 #     - python -V               # Print out python version for debugging
 #     - dir
 #     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-#     - apt-get install -y locales
-#     - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-#     - locale-gen
-#     - export LC_ALL=en_US.UTF-8
 #     - export PYTHONIOENCODING=UTF8 # just in case
 
 #   script:
@@ -199,10 +179,6 @@ test_dymola_Fluid:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -231,10 +207,6 @@ test_dymola_Media:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -263,10 +235,6 @@ test_dymola_Systems:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
@@ -294,10 +262,6 @@ test_dymola_ThermalZones:
     - python -V               # Print out python version for debugging
     - dir
     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-    - apt-get install -y locales
-    - echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-    - locale-gen
-    - export LC_ALL=en_US.UTF-8
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
