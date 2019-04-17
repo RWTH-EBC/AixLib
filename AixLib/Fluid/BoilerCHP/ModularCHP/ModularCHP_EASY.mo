@@ -1,6 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModularCHP_DynamicHX
-  "Modular combined heat and power system model"
+model ModularCHP_EASY "Modular combined heat and power system model"
   import AixLib;
 
   replaceable package Medium_Fuel =
@@ -125,13 +124,6 @@ public
       14400,0.62; 14400,0.8; 18000,0.8; 18000,0.0]
     "Table for unit modulation (time = first column; modulation factors = second column)"
     annotation (Dialog(tab="Calibration parameters", group="Fast calibration - Electric power and fuel usage"));
-  parameter Modelica.SIunits.TemperatureDifference dT_nominal=25 "Nominal heat exchanger temperature difference between cooling and heating circuit"
-    annotation (Dialog(tab="Calibration parameters", group=
-          "Advanced calibration parameters"));
-  parameter Modelica.Blocks.Interfaces.RealInput GCooHex=CHPEngineModel.Q_MaxHea
-      /dT_nominal*2
-    "Signal representing the convective thermal conductance of the coolant heat exchanger in [W/K]"
-    annotation (Dialog(tab="Calibration parameters", group="Advanced calibration parameters"));
   parameter Boolean ConTec=true
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
@@ -153,7 +145,7 @@ public
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit_EASY
     cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
@@ -173,7 +165,7 @@ public
     redeclare package Medium_Coolant = Medium_Coolant,
     GCooExhHex=GCooExhHex,
     CExhHex=CExhHex,
-    inductionMachine(J_Gen=1, s_til=0.18),
+    inductionMachine(J_Gen=1),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     GAmb=GAmb,
@@ -181,7 +173,7 @@ public
     s_til=s_til)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
 
-  AixLib.Fluid.HeatExchangers.DynamicHX             coolantHex(
+  AixLib.Fluid.HeatExchangers.ConstantEffectiveness coolantHex(
     allowFlowReversal1=allowFlowReversalCoolant,
     allowFlowReversal2=allowFlowReversalCoolant,
     m2_flow_nominal=CHPEngineModel.m_floCooNominal,
@@ -190,14 +182,9 @@ public
     redeclare package Medium1 = Medium_Coolant,
     m1_flow_nominal=m_flow_Coo,
     redeclare package Medium2 = Medium_HeatingCircuit,
-    dp1_nominal(displayUnit="kPa") = 0,
-    dp2_nominal(displayUnit="kPa") = 0,
-    nNodes=1,
-    Q_nom=CHPEngineModel.Q_MaxHea,
-    dT_nom=dT_nominal,
-    Gc1=GCooHex,
-    Gc2=coolantHex.Gc1)
-             annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
+    dp1_nominal(displayUnit="kPa") = 10000,
+    dp2_nominal(displayUnit="kPa") = 10000,
+    eps=0.9) annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort temRetFlo(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
@@ -221,6 +208,14 @@ public
         Medium_Coolant)
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
+  Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
+    nPorts=1,
+    redeclare package Medium = Medium_Coolant,
+    T(displayUnit="K"),
+    p=300000)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-74,-20})));
 equation
   connect(coolantHex.port_a2, temRetFlo.port_b)
     annotation (Line(points={{-20,-64},{-42,-64}}, color={0,127,255}));
@@ -239,6 +234,9 @@ equation
           -64},{90,0},{100,0}}, color={0,127,255}));
   connect(port_retHea, temRetFlo.port_a) annotation (Line(points={{-100,0},{-90,
           0},{-90,-64},{-58,-64}}, color={0,127,255}));
+  connect(fixedPressureLevel.ports[1], cHP_PowerUnit.port_retCoo) annotation (
+      Line(points={{-64,-20},{-60,-20},{-60,10.08},{-19.2,10.08}}, color={0,127,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -311,4 +309,4 @@ CHP"),  Rectangle(
 <h4>Limitations:</h4>
 <p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
 </html>"));
-end ModularCHP_DynamicHX;
+end ModularCHP_EASY;

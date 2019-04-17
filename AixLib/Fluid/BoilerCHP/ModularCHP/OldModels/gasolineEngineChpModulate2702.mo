@@ -118,9 +118,9 @@ parameter Modelica.SIunits.Thickness dInn=0.005
 equation
   connect(port_Exhaust, cHPCombustionEngine.port_Exhaust) annotation (Line(
         points={{102,2},{64,2},{64,28},{29.4,28}},   color={0,127,255}));
-  connect(port_Ambient, engineToCoolant.port_Ambient)
+  connect(port_Ambient, engineToCoolant.port_amb)
     annotation (Line(points={{0,-90},{0,-52}}, color={191,0,0}));
-  connect(port_CoolingCircle, engineToCoolant.port_CoolingCircle)
+  connect(port_CoolingCircle, engineToCoolant.port_coo)
     annotation (Line(points={{100,-88},{100,-30},{22,-30}}, color={191,0,0}));
   connect(engineToCoolant.exhaustGasTemperature, cHPCombustionEngine.exhaustGasTemperature)
     annotation (Line(points={{0,-3.16},{0,8.4}}, color={0,0,127}));

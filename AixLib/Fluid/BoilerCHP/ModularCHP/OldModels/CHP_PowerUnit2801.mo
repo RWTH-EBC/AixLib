@@ -234,21 +234,20 @@ equation
         color={0,127,255}));
   connect(ambientTemperature.port, heatFlowSensor.port_b)
     annotation (Line(points={{-92,0},{-78,0}}, color={191,0,0}));
-  connect(heatFlowSensor.port_a, engineToCoolant.port_Ambient)
-    annotation (Line(points={{-62,0},{16,0},{16,6}},  color={191,0,0}));
+  connect(heatFlowSensor.port_a, engineToCoolant.port_amb)
+    annotation (Line(points={{-62,0},{16,0},{16,6}}, color={191,0,0}));
   connect(engineToCoolant.exhaustGasTemperature, cHPCombustionEngine.exhaustGasTemperature)
     annotation (Line(points={{16,37.08},{-2,37.08},{-2,26.8},{-26,26.8}}, color=
          {0,0,127}));
-  connect(engineHeatTransfer.heatPort_outside, engineToCoolant.port_CoolingCircle)
+  connect(engineHeatTransfer.heatPort_outside, engineToCoolant.port_coo)
     annotation (Line(points={{-20.08,-51.28},{-20.08,-24},{30,-24},{30,20}},
-                                                                          color=
-         {191,0,0}));
+        color={191,0,0}));
   connect(cHPCombustionEngine.port_Exhaust, exhaustHeatExchanger.port_a1)
     annotation (Line(points={{-10.32,38},{38,38},{38,7.2},{48,7.2}},      color=
          {0,127,255}));
   connect(inductionMachineGenerator.flange_a, cHPCombustionEngine.flange_a)
     annotation (Line(points={{-40,68},{-26,68},{-26,54}}, color={0,0,0}));
-  connect(exhaustHeatExchanger.port_Ambient, engineToCoolant.port_Ambient)
+  connect(exhaustHeatExchanger.port_Ambient, engineToCoolant.port_amb)
     annotation (Line(points={{48,0},{16,0},{16,6}}, color={191,0,0}));
   connect(port_Return, engineHeatTransfer.port_a)
     annotation (Line(points={{-80,-58},{-34.48,-58}},  color={0,127,255}));

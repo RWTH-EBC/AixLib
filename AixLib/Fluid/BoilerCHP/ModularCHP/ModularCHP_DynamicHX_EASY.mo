@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModularCHP_DynamicHX
+model ModularCHP_DynamicHX_EASY
   "Modular combined heat and power system model"
   import AixLib;
 
@@ -153,7 +153,7 @@ public
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit_EASY
     cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
@@ -221,6 +221,14 @@ public
         Medium_Coolant)
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
+  Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
+    nPorts=1,
+    redeclare package Medium = Medium_Coolant,
+    T(displayUnit="K"),
+    p=300000)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-74,-20})));
 equation
   connect(coolantHex.port_a2, temRetFlo.port_b)
     annotation (Line(points={{-20,-64},{-42,-64}}, color={0,127,255}));
@@ -239,6 +247,9 @@ equation
           -64},{90,0},{100,0}}, color={0,127,255}));
   connect(port_retHea, temRetFlo.port_a) annotation (Line(points={{-100,0},{-90,
           0},{-90,-64},{-58,-64}}, color={0,127,255}));
+  connect(fixedPressureLevel.ports[1], cHP_PowerUnit.port_retCoo) annotation (
+      Line(points={{-64,-20},{-60,-20},{-60,10.08},{-19.2,10.08}}, color={0,127,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -311,4 +322,4 @@ CHP"),  Rectangle(
 <h4>Limitations:</h4>
 <p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
 </html>"));
-end ModularCHP_DynamicHX;
+end ModularCHP_DynamicHX_EASY;
