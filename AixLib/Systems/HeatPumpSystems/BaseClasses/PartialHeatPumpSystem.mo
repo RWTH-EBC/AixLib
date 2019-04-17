@@ -348,7 +348,9 @@ partial model PartialHeatPumpSystem
     final m_flow_nominal=mFlow_conNominal,
     final dp_nominal=0,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final Q_flow_nominal=Q_flow_nominal) if
+    final Q_flow_nominal=Q_flow_nominal,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics) if
                              use_secHeaGen annotation (Placement(transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
