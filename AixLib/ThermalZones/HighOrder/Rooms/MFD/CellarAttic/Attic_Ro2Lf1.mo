@@ -110,7 +110,10 @@ model Attic_Ro2Lf1
     eps=eps)
     annotation (Placement(transformation(extent={{-64,-24},{-46,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-10, -86}, {10, -66}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-28, 6})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={-28,6})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation(Placement(transformation(origin = {-100, 25}, extent = {{-10, -10}, {10, 10}}), iconTransformation(extent = {{-110, 30}, {-90, 50}})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)

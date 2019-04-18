@@ -169,12 +169,10 @@ public
                          airload(
       V=Room_V,
       c=1005) annotation (Placement(transformation(extent={{10,-18},{28,0}})));
-    Utilities.Interfaces.Adaptors.HeatStarToComb
-                                               thermStar_Demux annotation (
-        Placement(transformation(
-          extent={{-10,8},{10,-8}},
-          rotation=90,
-          origin={-32,-32})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={-32,-32})));
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
       annotation (Placement(transformation(extent={{32,-34},{42,-24}})));
     Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground

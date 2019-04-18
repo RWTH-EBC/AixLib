@@ -87,7 +87,10 @@ model Wall
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));
+  BaseLib.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=180,
+        origin={69,-1})));
   BaseLib.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
     "Outdoor air (dry bulb) temperature sensor"

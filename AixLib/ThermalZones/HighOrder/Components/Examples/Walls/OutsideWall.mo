@@ -22,7 +22,10 @@ model OutsideWall
   Modelica.Blocks.Sources.RealExpression UValue(y = -Tinside2.port.Q_flow / (Tinside2.T - Toutside.T) / (wall_simple.wall_length * wall_simple.wall_height)) annotation(Placement(transformation(extent = {{-32, -78}, {24, -58}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Toutside(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {30, 22})));
   Utilities.Sources.PrescribedSolarRad varRad            annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {50, 80})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, -8}, {10, 8}}, rotation = 180, origin = {-58, 26})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
+        extent={{-10,-8},{10,8}},
+        rotation=180,
+        origin={-58,26})));
   Modelica.Blocks.Sources.RealExpression WindSpeed(y = 4) annotation(Placement(transformation(extent = {{30, 48}, {12, 64}})));
   Modelica.Blocks.Sources.Constant Solarradiation(k=0)
     annotation (Placement(transformation(extent={{96,70},{78,88}})));

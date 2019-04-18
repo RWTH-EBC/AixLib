@@ -167,7 +167,10 @@ model Bedroom_VoWo "Bedroom from the VoWo appartment"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermNeigbour annotation(Placement(transformation(extent = {{-110, -100}, {-90, -80}}), iconTransformation(extent = {{-110, -100}, {-90, -80}})));
   Utilities.Interfaces.Star StarRoom annotation(Placement(transformation(extent = {{18, -44}, {38, -24}}), iconTransformation(extent = {{18, -44}, {38, -24}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermRoom annotation(Placement(transformation(extent = {{-20, -46}, {0, -26}}), iconTransformation(extent = {{-20, -46}, {0, -26}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {14, -60})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={14,-60})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{66,72},{94,98}})));

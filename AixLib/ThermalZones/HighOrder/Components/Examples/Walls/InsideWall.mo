@@ -31,8 +31,8 @@ model InsideWall
         rotation=180,
         origin={-30,30})));
   Modelica.Blocks.Sources.RealExpression UValue_new(y = -Tinside3.port.Q_flow / (Tinside3.T - Tinside.T) / (wall_simple_new.wall_length * wall_simple_new.wall_height)) annotation(Placement(transformation(extent = {{-28, -100}, {28, -80}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-56, -50}, {-72, -38}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux1 annotation(Placement(transformation(extent = {{56, -52}, {70, -40}})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(extent={{-56,-50},{-72,-38}})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux1 annotation (Placement(transformation(extent={{56,-52},{70,-40}})));
 equation
   connect(wall_simple1_new.port_outside, wall_simple_new.port_outside) annotation(Line(points = {{-23.7, 30}, {-23.7, 32}, {27.7, 32}}, color = {191, 0, 0}));
   connect(thermStar_Demux.thermStarComb, wall_simple1_new.thermStarComb_inside) annotation(Line(points = {{-56.48, -44.075}, {-39.24, -44.075}, {-39.24, 30}, {-36, 30}}, color = {191, 0, 0}));

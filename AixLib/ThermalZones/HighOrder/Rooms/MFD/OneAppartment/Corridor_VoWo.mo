@@ -194,7 +194,10 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-110, -140}, {-90, -120}}), iconTransformation(extent = {{-110, -140}, {-90, -120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermLivingroom annotation(Placement(transformation(extent = {{-112, 10}, {-92, 30}}), iconTransformation(extent = {{-112, 10}, {-92, 30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermChild annotation(Placement(transformation(extent = {{-112, -20}, {-92, 0}}), iconTransformation(extent = {{-112, -20}, {-92, 0}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {46, -26})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={46,-26})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));

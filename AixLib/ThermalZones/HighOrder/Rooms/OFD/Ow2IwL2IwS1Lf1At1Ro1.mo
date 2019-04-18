@@ -334,8 +334,7 @@ model Ow2IwL2IwS1Lf1At1Ro1
     Diff_toTempset=Diff_toTempset,
     Tset=Tset) if withDynamicVentilation
     annotation (Placement(transformation(extent={{-74,-56},{-50,-44}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation (
-      Placement(transformation(
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=90,
         origin={-20,-26})));

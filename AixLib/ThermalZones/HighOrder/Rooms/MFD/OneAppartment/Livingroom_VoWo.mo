@@ -169,7 +169,10 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     e=e,
     eps=eps)
     annotation (Placement(transformation(extent={{-72,-84},{-46,-58}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {24, -14})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=180,
+        origin={24,-14})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-72,-112},{-46,-86}})));

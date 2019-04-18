@@ -42,8 +42,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.UpperFloor
     upperFloor
     annotation (Placement(transformation(extent={{-115,-58},{-75,-27}})));
-  AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToCombHeaters[9]
-    annotation (Placement(transformation(extent={{-42,-23},{-56,-12}})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToCombHeaters[9] annotation (Placement(transformation(extent={{-42,-23},{-56,-12}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature tempGround[5](T=fill(273.15
          + 9, 5))
     annotation (Placement(transformation(extent={{-12.5,-52},{0,-39}})));

@@ -326,8 +326,7 @@ model Attic_Ro2Lf5
     n50=n50,
     e=e,
     eps=eps) annotation (Placement(transformation(extent={{-62,0},{-46,16}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation (
-      Placement(transformation(
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
         extent={{-10,-8},{10,8}},
         rotation=90,
         origin={-30,-10})));

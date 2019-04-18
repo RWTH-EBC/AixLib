@@ -135,7 +135,10 @@ model Cellar "Cellar completly under ground"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, -100}, {-80, -80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCellar annotation(Placement(transformation(extent = {{100, 80}, {120, 100}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TGround(T = T_Ground) annotation(Placement(transformation(extent = {{118, -80}, {138, -60}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {4, -6})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={4,-6})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));

@@ -168,7 +168,10 @@ model Children_VoWo "Children room from the VoWo appartment"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-110, -152}, {-90, -132}}), iconTransformation(extent = {{-110, -152}, {-90, -132}})));
   Utilities.Interfaces.Star StarRoom annotation(Placement(transformation(extent = {{6, -6}, {26, 14}}), iconTransformation(extent = {{6, -6}, {26, 14}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermRoom annotation(Placement(transformation(extent = {{-26, -4}, {-6, 16}}), iconTransformation(extent = {{-26, -4}, {-6, 16}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {0, -22})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={0,-22})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-44,-94},{-16,-68}})));

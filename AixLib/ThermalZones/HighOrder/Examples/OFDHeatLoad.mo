@@ -18,8 +18,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
     annotation (Placement(transformation(extent={{-54,-96},{-42,-84}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature[9]
     annotation (Placement(transformation(extent={{-36,-58},{-24,-46}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb[9] annotation (
-      Placement(transformation(
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[9] annotation (Placement(transformation(
         extent={{10,-8},{-10,8}},
         rotation=0,
         origin={-24,-16})));

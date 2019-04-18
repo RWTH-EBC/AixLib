@@ -143,9 +143,7 @@ public
     alpha_custom=alpha_custom) if            outside
     annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
 
-  Utilities.Interfaces.Adaptors.HeatStarToComb
-                                             heatStarToComb annotation (
-      Placement(transformation(
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=180,
         origin={69,-1})));
