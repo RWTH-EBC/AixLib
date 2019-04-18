@@ -168,5 +168,10 @@ equation
   connect(gain.y, room_EnergySyst.Schedule_mechVent) annotation (Line(points={{
           36.4,-90},{100,-90},{100,0},{-18,0},{-18,33.7},{12.8,33.7}}, color={0,
           0,127}));
-  annotation (experiment(StopTime=86400, Interval=300));
+  annotation (experiment(StopTime=86400, Interval=300), Documentation(revisions
+        ="<html>
+<ul>
+<li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
+</ul>
+</html>"));
 end Test;

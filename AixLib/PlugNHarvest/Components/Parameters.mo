@@ -70,12 +70,12 @@ record Parameters "Record for parametrisation of simulation model"
   parameter Modelica.SIunits.Power Pmax_chiller = 1000 "maximal power output chiller" annotation(Dialog(group = "Energy system", descriptionLabel = true));
 
   //**************************P R O F I L E S ************************
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition schedulePersons =  AixLib.DataBase.Profiles.NineToFive() "Schedule for persons";
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleLights =  AixLib.DataBase.Profiles.NineToFive() "Schedule for lights";
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleElAppliances =  AixLib.DataBase.Profiles.NineToFive() "Schedule for electrical appliances";
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleHVAC_heating =  AixLib.DataBase.Profiles.NineToFive() "Schedule for HVAC heating";
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleHVAC_cooling =  AixLib.DataBase.Profiles.NineToFive() "Schedule for HVAC cooling";
-  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleMechVent =  AixLib.DataBase.Profiles.NineToFive() "Schedule for mechanical ventilation";
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition schedulePersons =  AixLib.DataBase.Profiles.NineToFive() "Schedule for persons"  annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleLights =  AixLib.DataBase.Profiles.NineToFive() "Schedule for lights" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleElAppliances =  AixLib.DataBase.Profiles.NineToFive() "Schedule for electrical appliances" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleHVAC_heating =  AixLib.DataBase.Profiles.NineToFive() "Schedule for HVAC heating" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleHVAC_cooling =  AixLib.DataBase.Profiles.NineToFive() "Schedule for HVAC cooling" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleMechVent =  AixLib.DataBase.Profiles.NineToFive() "Schedule for mechanical ventilation" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
 
 
 
