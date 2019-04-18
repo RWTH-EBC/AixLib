@@ -26,6 +26,7 @@ package AixLib
     version="0.5.4", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.5.4_to_0.5.5.mos",
     version="0.6.0", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.6.0_to_0.7.0.mos",
     version="0.7.3", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.3_to_0.7.4.mos",
+	version="0.7.4", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.4_to_0.7.5.mos"),
 	version="0.7.5", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.5_to_0.7.6.mos")),
   Documentation(info = "<html>
     <p>The free open-source <code>AixLib</code> library is being developed for research and teaching purposes. It aims at dynamic simulations of thermal and hydraulic systems to develop control strategies for HVAC systems and analyse interactions in complex systems. It is used for simulations on component, building and city district level. As this library is developed mainly for academic purposes, user-friendliness and model robustness is not a main task. This research focus thus influences the layout and philosophy of the library. </p>
