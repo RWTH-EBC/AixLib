@@ -74,7 +74,7 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
     if package is not None:
         ut.setSinglePackage(package)
     ut.setNumberOfThreads(n_pro)
-    ut.pedanticModelica(True)
+    ut.pedanticModelica(False)
     ut.showGUI(show_gui)
     # ut.get_test_example_coverage()
     # Below are some option that may occassionally be used.
