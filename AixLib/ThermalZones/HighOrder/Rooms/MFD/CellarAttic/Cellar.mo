@@ -160,15 +160,13 @@ equation
           29.9},{110,8},{100,8},{100,-70},{138,-70}},                                                                                color = {191, 0, 0}));
   connect(Wall1.port_outside, TGround.port) annotation(Line(points = {{2, 74.45}, {2, 88}, {100, 88}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
   connect(Wall4.port_outside, TGround.port) annotation(Line(points = {{-79.45, 13}, {-86, 13}, {-86, -64}, {-2, -64}, {-2, -70}, {138, -70}}, color = {191, 0, 0}));
-  connect(Wall2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{59, 13}, {46, 13}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall3.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{2, -36}, {2, -25.1125}, {3.9, -25.1125}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{2, 56}, {2, 44}, {46, 44}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall4.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-61, 13}, {-48, 13}, {-48, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,34},
-          {110,34},{110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,60},
-          {110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}));
-  connect(thermStar_Demux.therm, airload.port) annotation(Line(points = {{-1.1, 4.1}, {-1.1, 12}, {-12, 12}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}));
+  connect(Wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{59,13},{46,13},{46,-24},{3.9,-24},{3.9,-15.4}}, color={191,0,0}));
+  connect(Wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,-36},{2,-25.1125},{3.9,-25.1125},{3.9,-15.4}}, color={191,0,0}));
+  connect(Wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,56},{2,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}}, color={191,0,0}));
+  connect(Wall4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-61,13},{-48,13},{-48,-24},{3.9,-24},{3.9,-15.4}}, color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}}, color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}}, color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,4},{-19,4}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>

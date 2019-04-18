@@ -35,12 +35,12 @@ model InsideWall
   Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux1 annotation (Placement(transformation(extent={{56,-52},{70,-40}})));
 equation
   connect(wall_simple1_new.port_outside, wall_simple_new.port_outside) annotation(Line(points = {{-23.7, 30}, {-23.7, 32}, {27.7, 32}}, color = {191, 0, 0}));
-  connect(thermStar_Demux.thermStarComb, wall_simple1_new.thermStarComb_inside) annotation(Line(points = {{-56.48, -44.075}, {-39.24, -44.075}, {-39.24, 30}, {-36, 30}}, color = {191, 0, 0}));
-  connect(thermStar_Demux1.thermStarComb, wall_simple_new.thermStarComb_inside) annotation(Line(points = {{56.42, -46.075}, {49.21, -46.075}, {49.21, 32}, {40, 32}}, color = {191, 0, 0}));
-  connect(Tinside2.port, thermStar_Demux.star) annotation(Line(points = {{-74, 62}, {-56, 62}, {-56, -22}, {-88, -22}, {-88, -39.65}, {-72.32, -39.65}}, color = {191, 0, 0}));
-  connect(Tinside3.port, thermStar_Demux.therm) annotation(Line(points = {{-74, 22}, {-60, 22}, {-60, -18}, {-92, -18}, {-92, -47.825}, {-72.08, -47.825}}, color = {191, 0, 0}));
-  connect(Tinside1.port, thermStar_Demux1.star) annotation(Line(points = {{72, 60}, {56, 60}, {56, -22}, {88, -22}, {88, -41.65}, {70.28, -41.65}}, color = {191, 0, 0}));
-  connect(Tinside.port, thermStar_Demux1.therm) annotation(Line(points = {{72, 20}, {60, 20}, {60, -18}, {94, -18}, {94, -50}, {82, -50}, {82, -49.825}, {70.07, -49.825}}, color = {191, 0, 0}));
+  connect(thermStar_Demux.portConvRadComb, wall_simple1_new.thermStarComb_inside) annotation (Line(points={{-56.48,-44.075},{-39.24,-44.075},{-39.24,30},{-36,30}}, color={191,0,0}));
+  connect(thermStar_Demux1.portConvRadComb, wall_simple_new.thermStarComb_inside) annotation (Line(points={{56.42,-46.075},{49.21,-46.075},{49.21,32},{40,32}}, color={191,0,0}));
+  connect(Tinside2.port, thermStar_Demux.portRad) annotation (Line(points={{-74,62},{-56,62},{-56,-22},{-88,-22},{-88,-39.65},{-72.32,-39.65}}, color={191,0,0}));
+  connect(Tinside3.port, thermStar_Demux.portConv) annotation (Line(points={{-74,22},{-60,22},{-60,-18},{-92,-18},{-92,-47.825},{-72.08,-47.825}}, color={191,0,0}));
+  connect(Tinside1.port, thermStar_Demux1.portRad) annotation (Line(points={{72,60},{56,60},{56,-22},{88,-22},{88,-41.65},{70.28,-41.65}}, color={191,0,0}));
+  connect(Tinside.port, thermStar_Demux1.portConv) annotation (Line(points={{72,20},{60,20},{60,-18},{94,-18},{94,-50},{82,-50},{82,-49.825},{70.07,-49.825}}, color={191,0,0}));
   annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an <b>inside wall</b> application.</p>

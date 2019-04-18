@@ -204,13 +204,11 @@ public
           rotation=180,
           origin={34,26})));
 equation
-    connect(thermStar_Demux.star, starRoom) annotation (Line(
-        points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
-        color={95,95,95},
-        pattern=LinePattern.Solid));
-    connect(thermStar_Demux.therm, thermRoom) annotation (Line(
-        points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}},
-        color={191,0,0}));
+  connect(thermStar_Demux.portRad, starRoom) annotation (Line(
+      points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
+      color={95,95,95},
+      pattern=LinePattern.Solid));
+  connect(thermStar_Demux.portConv, thermRoom) annotation (Line(points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}}, color={191,0,0}));
     connect(varAirExchange.InPort1, AER) annotation (Line(
         points={{-81,-62.4},{-111,-62.4},{-111,-51}},
         color={0,0,127}));
@@ -232,30 +230,12 @@ equation
     connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
         color={0,0,127}));
-    connect(outerWall_South.thermStarComb_inside, thermStar_Demux.thermStarComb)
-      annotation (Line(
-        points={{-62,4},{-54,4},{-54,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0}));
-    connect(floor.thermStarComb_inside, thermStar_Demux.thermStarComb)
-      annotation (Line(
-        points={{-32,-62},{-32,-41.4},{-32.1,-41.4}},
-        color={191,0,0}));
-    connect(outerWall_East.thermStarComb_inside, thermStar_Demux.thermStarComb)
-      annotation (Line(
-        points={{26,-64},{28,-64},{28,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0}));
-    connect(outerWall_North.thermStarComb_inside, thermStar_Demux.thermStarComb)
-      annotation (Line(
-        points={{60,4},{46,4},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0}));
-    connect(outerWall_West.thermStarComb_inside, thermStar_Demux.thermStarComb)
-      annotation (Line(
-        points={{26,74},{26,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0}));
-    connect(ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb)
-      annotation (Line(
-        points={{-32,76},{-32,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0}));
+  connect(outerWall_South.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,4},{-54,4},{-54,-56},{-32.1,-56},{-32.1,-41.4}}, color={191,0,0}));
+  connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-32,-62},{-32,-41.4},{-32.1,-41.4}}, color={191,0,0}));
+  connect(outerWall_East.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,-64},{28,-64},{28,-56},{-32.1,-56},{-32.1,-41.4}}, color={191,0,0}));
+  connect(outerWall_North.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{60,4},{46,4},{46,-56},{-32.1,-56},{-32.1,-41.4}}, color={191,0,0}));
+  connect(outerWall_West.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,74},{26,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}}, color={191,0,0}));
+  connect(ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-32,76},{-32,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}}, color={191,0,0}));
     connect(ceiling.port_outside, Therm_outside) annotation (Line(
         points={{-32,80.1},{-32,88},{-86,88},{-86,97},{-105,97}},
         color={191,0,0}));
@@ -299,9 +279,7 @@ equation
     connect(varAirExchange.port_a, Therm_outside) annotation (Line(
         points={{-82,-56},{-86,-56},{-86,97},{-105,97}},
         color={191,0,0}));
-    connect(thermStar_Demux.therm, airload.port) annotation (Line(
-        points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}},
-        color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}}, color={191,0,0}));
     connect(airload.port, temperatureSensor.port) annotation (Line(
         points={{10.9,-10.8},{4,-10.8},{4,-29},{32,-29}},
         color={191,0,0}));
