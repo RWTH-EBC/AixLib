@@ -1,2 +1,3 @@
+convertClass("AixLib.Utilities.Interfaces.Star", "AixLib.Utilities.Interfaces.RadPort");
 convertElement("AixLib.Utilities.Interfaces.HeatStarComb", "Therm", "conv");
 convertElement("AixLib.Utilities.Interfaces.HeatStarComb", "Star", "rad");
