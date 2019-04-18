@@ -73,7 +73,6 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4(),
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
     use_revHP=false,
@@ -86,7 +85,6 @@ model HeatPumpSystem "Example for a heat pump system"
     minIceFac=0,
     use_chiller=true,
     calcPel_deFro=100,
-    perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12(),
     use_minRunTime=true,
     minRunTime(displayUnit="min"),
     use_minLocTime=true,
@@ -122,16 +120,16 @@ model HeatPumpSystem "Example for a heat pump system"
     CEva=3000,
     use_secHeaGen=true,
     Q_flow_nominal=5000,
-    cpEva=4180,
-    cpCon=4180,
     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    fixed_TCon_start=true,
+    fixed_TEva_start=true,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     TCon_start=313.15,
     TEva_start=283.15,
     VCon=0.004,
-    VEva=0.004,
-    fixed_TCon_start=true,
-    fixed_TEva_start=true)
+    VEva=0.004)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
