@@ -2,6 +2,7 @@
 record Parameters "Record for parametrisation of simulation model"
     //  * * * * * * * * * * * * G  E  N  E  R  A  L * * * * * * * * * * * *
  replaceable package AirModel = AixLib.Media.Air "Air model" annotation (choicesAllMatching = true);
+ parameter String weatherFileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt");
     //**************************E N V E L O P E ************************
     // room geometry
   parameter Modelica.SIunits.Length room_length=5 "room length"
@@ -67,6 +68,18 @@ record Parameters "Record for parametrisation of simulation model"
   parameter Modelica.SIunits.Temperature Tout_isHeatOn = 288.15 "Touside under which heating is on" annotation(Dialog(group = "Energy system", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature Tset_chiller = 296.15 "set temperature for cooling" annotation(Dialog(group = "Energy system", descriptionLabel = true));
   parameter Modelica.SIunits.Power Pmax_chiller = 1000 "maximal power output chiller" annotation(Dialog(group = "Energy system", descriptionLabel = true));
+
+  //**************************P R O F I L E S ************************
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition schedulePersons =  AixLib.DataBase.Profiles.NineToFive() "Schedule for persons";
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleLights =  AixLib.DataBase.Profiles.NineToFive() "Schedule for lights";
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleElAppliances =  AixLib.DataBase.Profiles.NineToFive() "Schedule for electrical appliances";
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleHVAC_heating =  AixLib.DataBase.Profiles.NineToFive() "Schedule for HVAC heating";
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleHVAC_cooling =  AixLib.DataBase.Profiles.NineToFive() "Schedule for HVAC cooling";
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleMechVent =  AixLib.DataBase.Profiles.NineToFive() "Schedule for mechanical ventilation";
+
+
+
+
 
   //  * * * * * * * * * * A  D  V  A  N  C  E  D * * * * * * * * * * * *
   //**************************E N V E L O P E ************************

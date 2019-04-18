@@ -58,28 +58,53 @@ model Test
     Rel_hum=true,
     Wind_dir=true,
     Air_press=true,
-    Mass_frac=false)
+    Mass_frac=false,
+    fileName=parameters.weatherFileName)
     annotation (Placement(transformation(extent={{-100,28},{-48,62}})));
-  Modelica.Blocks.Sources.CombiTimeTable schedule_occupants "0...1"
+  Modelica.Blocks.Sources.CombiTimeTable schedule_occupants(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableOnFile=false,
+    table=parameters.schedulePersons.Profile)               "0...1"
     annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
-  Modelica.Blocks.Sources.CombiTimeTable schedule_lights "0...1"
+  Modelica.Blocks.Sources.CombiTimeTable schedule_lights(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableOnFile=false,
+    table=parameters.scheduleLights.Profile)             "0...1"
     annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
-  Modelica.Blocks.Sources.CombiTimeTable schedule_elAppliances "0...1"
+  Modelica.Blocks.Sources.CombiTimeTable schedule_elAppliances(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    table=parameters.scheduleElAppliances.Profile,
+    tableOnFile=false)                                         "0...1"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
-  Components.Parameters parameters
+  Components.Parameters parameters(
+    withSmartFacade=true,
+    withMechVent=true,
+    withPV=true,
+    withSolAirHeat=true)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   BoundaryConditions.WeatherData.Bus weaBus "Bus with weather data"
     annotation (Placement(transformation(extent={{-38,38},{-18,58}})));
-  Modelica.Blocks.Sources.CombiTimeTable schedule_ventilation "0...1 in 1/h"
+  Modelica.Blocks.Sources.CombiTimeTable schedule_ventilation(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableOnFile=false,
+    table=parameters.scheduleMechVent.Profile)                "0...1 in 1/h"
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
-  Modelica.Blocks.Sources.CombiTimeTable schedule_cooling "0(off) or 1 (on)"
+  Modelica.Blocks.Sources.CombiTimeTable schedule_cooling(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableOnFile=false,
+    table=parameters.scheduleHVAC_cooling.Profile)        "0(off) or 1 (on)"
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
-  Modelica.Blocks.Sources.CombiTimeTable schedule_heating "0(off) or 1 (on)"
+  Modelica.Blocks.Sources.CombiTimeTable schedule_heating(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableOnFile=false,
+    table=parameters.scheduleHVAC_heating.Profile)        "0(off) or 1 (on)"
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
   Modelica.Blocks.Math.RealToBoolean realToBoolean
     annotation (Placement(transformation(extent={{68,-56},{80,-44}})));
   Modelica.Blocks.Math.RealToBoolean realToBoolean1
     annotation (Placement(transformation(extent={{50,-76},{62,-64}})));
+  Modelica.Blocks.Math.Gain gain(k=0.1)
+    annotation (Placement(transformation(extent={{28,-94},{36,-86}})));
 equation
   connect(weather.SolarRadiation_OrientedSurfaces[1], room_EnergySyst.solRadPort_Facade1)
     annotation (Line(points={{-87.52,26.3},{-87.52,20},{-18,20},{-18,54.76},{
@@ -133,12 +158,15 @@ equation
   connect(realToBoolean1.y, room_EnergySyst.isChillerOn) annotation (Line(
         points={{62.6,-70},{100,-70},{100,0},{24,0},{24,5.08}}, color={255,0,
           255}));
-  connect(schedule_ventilation.y[1], room_EnergySyst.Schedule_mechVent)
-    annotation (Line(points={{21,-90},{100,-90},{100,0},{-18,0},{-18,33.7},{
-          12.8,33.7}}, color={0,0,127}));
-  connect(schedule_lights.y[1], room_EnergySyst.Schedule_Occupants) annotation
-    (Line(points={{-59,-70},{-18,-70},{-18,20.2},{12.8,20.2}}, color={0,0,127}));
+  connect(schedule_lights.y[1], room_EnergySyst.Schedule_Occupants) annotation (
+     Line(points={{-59,-70},{-18,-70},{-18,20.2},{12.8,20.2}}, color={0,0,127}));
   connect(schedule_elAppliances.y[1], room_EnergySyst.Schedule_elAppliances)
     annotation (Line(points={{-79,-90},{-18,-90},{-18,15.88},{12.8,15.88}},
         color={0,0,127}));
+  connect(schedule_ventilation.y[1], gain.u)
+    annotation (Line(points={{21,-90},{27.2,-90}}, color={0,0,127}));
+  connect(gain.y, room_EnergySyst.Schedule_mechVent) annotation (Line(points={{
+          36.4,-90},{100,-90},{100,0},{-18,0},{-18,33.7},{12.8,33.7}}, color={0,
+          0,127}));
+  annotation (experiment(StopTime=86400, Interval=300));
 end Test;

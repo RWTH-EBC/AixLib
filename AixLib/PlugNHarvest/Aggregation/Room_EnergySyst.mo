@@ -219,6 +219,8 @@ model Room_EnergySyst "Room and energy system"
     "schedule mechanical ventilation"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-100,0},{-80,20}})));
+  Modelica.Blocks.Sources.BooleanExpression switchToNight
+    annotation (Placement(transformation(extent={{-54,-62},{-34,-42}})));
 equation
   connect(heaterCoolerPI_withPel.heatCoolRoom, room_intGain.thermRoom)
     annotation (Line(points={{7.7,-28.8},{16,-28.8},{16,-36},{22,-36},{22,10},{
@@ -274,6 +276,11 @@ equation
     connect(room_intGain.Schedule_mechVent, Schedule_mechVent) annotation (Line(
         points={{-26.9,42.42},{-60,42.42},{-60,0},{-100,0}},     color={0,0,127}));
   end if;
+  connect(switchToNight.y, heater.switchToNightMode) annotation (Line(points={{
+          -33,-52},{-24,-52},{-24,-68.125},{-5.93,-68.125}}, color={255,0,255}));
+  connect(switchToNight.y, cooler.switchToNightMode) annotation (Line(points={{
+          -33,-52},{-24,-52},{-24,-67.6875},{-51.93,-67.6875}}, color={255,0,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-76,-86},{82,84}}, fileName=
               "modelica://AixLib/Resources/Images/PnH/PnH_Logo.png")}),    Diagram(
