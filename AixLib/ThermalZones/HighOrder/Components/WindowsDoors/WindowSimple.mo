@@ -26,8 +26,7 @@ model WindowSimple "Window with radiation and U-Value"
     annotation (Dialog(group="Window type", enable=not selectable));
 
   replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
-    BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(
         descriptionLabel=true), choicesAllMatching=true);
   Utilities.Interfaces.SolarRad_in solarRad_in

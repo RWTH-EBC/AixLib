@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Windows;
+within AixLib.ThermalZones.ReducedOrder.Windows;
 class UsersGuide "User's Guide"
       extends Modelica.Icons.Information;
 

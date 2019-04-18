@@ -5,8 +5,8 @@ model BuildingHeating
 
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare
-      package Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare package
+              Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-138,40},
             {-124,54}})));

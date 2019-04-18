@@ -15,9 +15,9 @@ model RoomGFOw2_DayNightMode
     Air_temp=true,
     fileName=
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
-
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))
     annotation (Placement(transformation(extent={{-100,78},{-62,104}})));
+
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp annotation(Placement(transformation(extent = {{-58, 38}, {-38, 58}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow thermCeiling(Q_flow = 0) annotation(Placement(transformation(extent = {{102, 58}, {82, 78}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow thermInsideWall1(Q_flow = 0) annotation(Placement(transformation(extent = {{102, 34}, {82, 54}})));
