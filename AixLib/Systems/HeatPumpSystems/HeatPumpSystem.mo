@@ -56,14 +56,12 @@ model HeatPumpSystem
       choice=false "only heating",
       radioButtons=true));
   replaceable model PerDataHea =
-      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in heating mode"
     annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=true);

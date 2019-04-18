@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Interfaces;
+within AixLib.Utilities.Interfaces;
 connector HeatStarComb "
     Combines heat ports for convective and radiative heat transfer."
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv;

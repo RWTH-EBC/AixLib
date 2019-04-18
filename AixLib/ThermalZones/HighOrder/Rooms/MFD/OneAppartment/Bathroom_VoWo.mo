@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment;
+within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment;
 model Bathroom_VoWo "Bathroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters

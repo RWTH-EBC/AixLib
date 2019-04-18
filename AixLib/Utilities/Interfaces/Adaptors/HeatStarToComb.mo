@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Interfaces.Adaptors;
+within AixLib.Utilities.Interfaces.Adaptors;
 model HeatStarToComb
   AixLib.Utilities.Interfaces.HeatStarComb thermStarComb annotation(Placement(transformation(extent = {{-120, -10}, {-76, 36}}), iconTransformation(extent = {{-116, -24}, {-72, 22}})));
   AixLib.Utilities.Interfaces.RadPort star annotation (Placement(transformation(

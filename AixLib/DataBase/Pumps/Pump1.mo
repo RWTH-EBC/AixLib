@@ -1,6 +1,4 @@
 within AixLib.DataBase.Pumps;
-
-
 record Pump1 "Pump with maximum head of 5 m"
   extends MinMaxCharacteristicsBaseDataDefinition(minMaxHead = [0.0000, 0.6, 5.0; 0.5000, 0.4, 4.5; 0.7500, 0.3, 4.0; 1.3000, 0.0, 3.0; 1.5000, 0.0, 2.5; 2.5000, 0.0, 1.5; 3.0000, 0.0, 1.0; 3.5000, 0.0, 0.5; 4.0000, 0.0, 0.0; 4.5000, 0.0, 0.0]);
   annotation(Documentation(revisions = "<html>

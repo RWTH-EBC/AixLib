@@ -17,11 +17,11 @@ model ExamplePV
     Air_temp=true,
     Wind_speed=false,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(),
-
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
     "Weather data input for simulation of PV power "
     annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
+
   Electrical.PVSystem.PVSystem PVsystem(
     MaxOutputPower=4000,
     NumberOfPanels=5,
