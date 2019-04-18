@@ -51,7 +51,6 @@ model HeatPumpSystem
       redeclare final package Medium_eva = Medium_eva,
       final fixed_TCon_start=fixed_TCon_start,
       final fixed_TEva_start=fixed_TEva_start));
-  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters;
 
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
@@ -139,11 +138,6 @@ model HeatPumpSystem
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
           Modelica.Blocks.Types.Init.InitialOutput and use_refIne));
-  Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
-      Placement(transformation(
-        extent={{-7,7},{7,-7}},
-        rotation=180,
-        origin={87,-1})));
   parameter Boolean fixed_TCon_start
     "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
     annotation (Dialog(
@@ -156,6 +150,12 @@ model HeatPumpSystem
       tab="Initialization",
       group="Evaporator",
       enable=use_evaCap));
+
+  Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
+      Placement(transformation(
+        extent={{-7,7},{7,-7}},
+        rotation=180,
+        origin={87,-1})));
 equation
 
   connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{
