@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Rooms.ASHRAE140;
 model SouthFacingWindows "windows facing south"
 
   parameter Modelica.SIunits.Length Room_Lenght=6 "length" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
