@@ -110,9 +110,8 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.Star star if withRadiationParam
-    annotation (Placement(transformation(extent={{-70,86},{-50,106}}),
-        iconTransformation(extent={{-70,86},{-50,106}})));
+  AixLib.Utilities.Interfaces.RadPort star if
+                                           withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](alpha=fill(
         alphaOutside, nNodes), A=AOutside/nNodes) if
                                   withConvection "Convection from pipe wall"

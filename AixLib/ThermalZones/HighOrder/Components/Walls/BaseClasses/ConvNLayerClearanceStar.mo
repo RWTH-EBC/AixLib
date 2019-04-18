@@ -37,7 +37,8 @@ model ConvNLayerClearanceStar
   // 2n HeatConds
   // n Loads
   Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_constant, A = A, surfaceOrientation = surfaceOrientation, calcMethod = calcMethod) annotation(Placement(transformation(origin={62,0},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent={{90,52},
+  Utilities.Interfaces.RadPort
+                            Star annotation(Placement(transformation(extent={{90,52},
             {110,72}})));
   Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent={{54,28},
             {74,48}})));

@@ -1,7 +1,7 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatToStar "Adaptor for approximative longwave radiation exchange"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}})));
-  AixLib.Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{81, -10}, {101, 10}})));
+  AixLib.Utilities.Interfaces.RadPort Star annotation (Placement(transformation(extent={{81,-10},{101,10}})));
   parameter Modelica.SIunits.Area A = 12 "Area of radiation exchange";
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
 equation

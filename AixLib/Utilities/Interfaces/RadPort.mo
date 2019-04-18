@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Interfaces;
+within AixLib.Utilities.Interfaces;
 connector RadPort "Connector for twostar (approximated) radiation exchange"
   extends Modelica.Thermal.HeatTransfer.Interfaces.HeatPort;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {95, 95, 95},  pattern = LinePattern.None, fillColor = {255, 255, 255},

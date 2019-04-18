@@ -222,9 +222,7 @@ parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
         rotation=180,
         origin={36,58})));
 
-  AixLib.Utilities.Interfaces.Star Star if    Heat_Loss_To_Ambient and not isEmbedded
-    annotation (Placement(transformation(extent={{-70,74},{-50,94}}),
-        iconTransformation(extent={{-24,46},{-4,66}})));
+  AixLib.Utilities.Interfaces.RadPort Star if Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-70,74},{-50,94}}), iconTransformation(extent={{-24,46},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes) if
                                      Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,

@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Interfaces;
+within AixLib.Utilities.Interfaces;
 connector SolarRad_in
   "Scalar total radiation connector (input) with additional direct, diffuse and from ground reflected radiation"
   input Modelica.SIunits.RadiantEnergyFluenceRate I

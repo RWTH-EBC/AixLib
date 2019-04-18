@@ -15,9 +15,7 @@ model PseudoRadiator
                              therm
     "Port connecting the source of convective heat and the environment"
       annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
-  AixLib.Utilities.Interfaces.Star star
-    "Port connecting the source of radiative heat and the environment"
-    annotation (Placement(transformation(extent={{20,80},{40,100}})));
+  AixLib.Utilities.Interfaces.RadPort star "Port connecting the source of radiative heat and the environment" annotation (Placement(transformation(extent={{20,80},{40,100}})));
   Interfaces.EnthalpyPort_a enthalpyPort_a[n]
     "Input port of the pseudo-radiator. Acts as a sink of heat medium"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
