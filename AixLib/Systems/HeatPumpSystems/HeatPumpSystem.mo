@@ -7,8 +7,9 @@ model HeatPumpSystem
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
     redeclare Fluid.HeatPumps.HeatPump heatPump(
       redeclare final model PerDataHea = PerDataHea,
-      redeclare final package Medium_con = Medium_con,
       redeclare final model PerDataChi = PerDataChi,
+      redeclare final package Medium_con = Medium_con,
+      redeclare final package Medium_eva = Medium_eva,
       final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
@@ -48,7 +49,6 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-      redeclare final package Medium_eva = Medium_eva,
       final fixed_TCon_start=fixed_TCon_start,
       final fixed_TEva_start=fixed_TEva_start));
 
