@@ -1,0 +1,96 @@
+﻿within AixLib.PlugNHarvest.Components;
+record Parameters "Record for parametrisation of simulation model"
+    //  * * * * * * * * * * * * G  E  N  E  R  A  L * * * * * * * * * * * *
+ replaceable package AirModel = AixLib.Media.Air "Air model" annotation (choicesAllMatching = true);
+    //**************************E N V E L O P E ************************
+    // room geometry
+  parameter Modelica.SIunits.Length room_length=5 "room length"
+    annotation (Dialog(group="Envelope", descriptionLabel=true));
+  parameter Modelica.SIunits.Length room_width=3 "room width"
+    annotation (Dialog(group="Envelope", descriptionLabel=true));
+  parameter Modelica.SIunits.Height room_height=3 "room height"
+    annotation (Dialog(group="Envelope", descriptionLabel=true));
+
+  //wall types
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_OW1= AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_M() "wall type OW1"
+    annotation (Dialog(group= "Envelope", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_IW1=AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half() "wall type IW1"
+    annotation (Dialog(group= "Envelope", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_IW2=AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_M_half() "wall type IW2"
+    annotation (Dialog(group= "Envelope", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_IW3=AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half() "wall type IW3"
+    annotation (Dialog(group= "Envelope", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_CE=AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf() "wall type Ceiling"
+    annotation (Dialog(group= "Envelope", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_FL=AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf() "wall type Floor"
+    annotation (Dialog(group= "Envelope", descriptionLabel=true));
+
+  // window
+  parameter Modelica.SIunits.Area windowarea_OW1=0 "Window area " annotation (
+      Dialog(
+      group="Envelope",
+      descriptionLabel=true,
+      enable=withWindow1));
+  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
+    Type_Win=
+      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "window type"
+      annotation (Dialog(group="Envelope"));
+
+  //**************************I N T E R N A L  G A I N S ************************
+  // persons
+  parameter Modelica.SIunits.Power heatLoadForActivity = 80 "Sensible heat output occupants for activity at 20°C" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
+  parameter Real occupationDensity = 0.2 "Density of occupants in persons/m2" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
+  // lights
+  parameter Real spPelSurface_lights(unit = "W/m2") =  22 "specific Pel/m2 for type of light source" annotation(Dialog(group = "Internal gains",descriptionLabel = true));
+  //electrical appliances
+  parameter Real spPelSurface_elApp(unit = "W/m2") =  22 "specific Pel/m2 for type of el. appliances" annotation(Dialog(group = "Internal gains",descriptionLabel = true));
+
+  //  * * * * * * * * * * A  D  V  A  N  C  E  D * * * * * * * * * * * *
+  //**************************E N V E L O P E ************************
+  // Outer walls properties
+  parameter Real solar_absorptance_OW=0.25 "Solar absoptance outer walls "
+    annotation (Dialog(tab = "Advanced", group="Envelope", descriptionLabel=true));
+
+  parameter Integer ModelConvOW=1 "Heat Convection Model" annotation (Dialog(
+      tab = "Advanced", group="Envelope",
+      compact=true,
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom alpha",
+      radioButtons=true));
+
+  // Infiltration rate
+  parameter Real n50(unit="h-1") = 3 "Air exchange rate at 50 Pa pressure differencefor infiltration "
+    annotation (Dialog(tab = "Advanced", group="Envelope"));
+  parameter Real e=0.02 "Coefficient of windshield for infiltration"
+    annotation (Dialog(tab = "Advanced", group="Envelope"));
+  parameter Real eps=1.0 "Coefficient of height for infiltration"
+    annotation (Dialog(tab = "Advanced", group="Envelope"));
+    // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(tab = "Advanced", group="Envelope"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+    annotation(Dialog(tab = "Advanced", group="Envelope"));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(tab = "Advanced", group="Envelope"));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(tab = "Advanced", group="Envelope"));
+
+  //**************************I N T E R N A L  G A I N S ************************
+  // persons
+  parameter Real RatioConvectiveHeat = 0.5
+  "Ratio of convective heat from overall heat output for persons"                                        annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
+  //lights
+  parameter Real coeffThermal_lights = 0.9 "coeff = Pth/Pel for lights" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
+  parameter Real coeffRadThermal_lights = 0.89 "coeff = Pth,rad/Pth for lights" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
+  //electrical appliances
+  parameter Real coeffThermal_elApp = 0.5 "coeff = Pth/Pel for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
+  parameter Real coeffRadThermal_elApp = 0.75 "coeff = Pth,rad/Pth for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end Parameters;
