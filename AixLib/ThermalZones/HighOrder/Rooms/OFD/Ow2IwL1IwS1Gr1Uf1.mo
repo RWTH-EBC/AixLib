@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL1IwS1Gr1Uf1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
-  import AixLib;
+
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
       group="Construction parameters",
@@ -297,7 +297,7 @@ model Ow2IwL1IwS1Gr1Uf1
         extent={{-10,8},{10,-8}},
         rotation=90,
         origin={-20,-26})));
-  Utilities.Interfaces.Star starRoom annotation (Placement(transformation(
+  AixLib.Utilities.Interfaces.RadPort starRoom annotation (Placement(transformation(
           extent={{10,10},{30,30}}), iconTransformation(extent={{10,10},{30,30}})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)

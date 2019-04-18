@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow1IwL2IwS1Lf1At1Ro1
   "1 outer wall, 2 inner walls load, 2 inner walls simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
-  import AixLib;
+
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
       group="Construction parameters",
@@ -236,7 +236,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (
       Placement(transformation(extent={{-30,10},{-10,30}}), iconTransformation(
           extent={{-30,10},{-10,30}})));
-  Utilities.Interfaces.Star starRoom annotation (Placement(transformation(
+  AixLib.Utilities.Interfaces.RadPort starRoom annotation (Placement(transformation(
           extent={{10,10},{30,30}}), iconTransformation(extent={{10,10},{30,30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation (
       Placement(transformation(extent={{-16,-104},{4,-84}}), iconTransformation(
