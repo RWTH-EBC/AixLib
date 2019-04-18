@@ -100,7 +100,11 @@ equation
         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-76,-86},{82,84}}, fileName=
-              "modelica://PlugNHarvest/Images/Plug-N-Harvest Logo Transparent New.png")}),
-                                                                 Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+              "modelica://AixLib/Resources/Images/PnH/PnH_Logo.png")}),    Diagram(
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
+</ul>
+</html>"));
 end Room_EnergySyst;

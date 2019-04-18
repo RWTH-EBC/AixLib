@@ -1,19 +1,18 @@
 within AixLib.PlugNHarvest.Components.Rooms;
 model Room
   "Room 1 vertical outer wall (facade) and the rest towards the building."
-  import AixLib;
   ///////// construction parameters
   // Outer wall type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_OW=
    AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
     annotation (Dialog(tab="Types"), choicesAllMatching = true);
   //Inner wall Types
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWsimple=
-      AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_S_half()
-    annotation (Dialog(tab="Types"), choicesAllMatching = true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWload=
-      AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half()
-    annotation (Dialog(tab="Types"), choicesAllMatching = true);
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_IW1=AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half() "wall type IW1"
+    annotation (Dialog(tab="Types", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_IW2=AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_M_half() "wall type IW2"
+    annotation (Dialog(tab="Types", descriptionLabel=true));
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition wallType_IW3=AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half() "wall type IW3"
+    annotation (Dialog(tab="Types", descriptionLabel=true));
   // Floor to ground type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
   AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML()
@@ -85,6 +84,11 @@ model Room
   parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+
+   // heat bridge parameters
+  parameter Boolean withHeatBridge = false "Choose if heat bridges should be considered or not" annotation(Dialog(group = "Heat bridges", enable= outside, compact = false));
+  parameter Modelica.SIunits.ThermalConductivity psiHor = 5 "Horizontal heat bridge coefficient" annotation(Dialog(group = "Heat bridges", enable = withHeatBridge));
+  parameter Modelica.SIunits.ThermalConductivity psiVer = 5 "Horizontal heat bridge coefficient" annotation(Dialog(group = "Heat bridges", enable = withHeatBridge));
  replaceable package AirModel = AixLib.Media.Air "Air model" annotation (choicesAllMatching = true);
 
    // smart facade
@@ -115,13 +119,26 @@ model Room
     redeclare package AirModel = AirModel,
     withDoor=false,
     roomV=room_V,
-    withSmartFacade=true,
-    withMechVent=true)
+    n50=n50,
+    e=e,
+    eps=eps,
+    withPV=withPV,
+    withSolAirHeat=withSolAirHeat,
+    NrPVpanels=NrPVpanels,
+    dataPV=dataPV,
+    PelPV_max=PelPV_max,
+    withHeatBridge=withHeatBridge,
+    psiHor=psiHor,
+    psiVer=psiVer,
+    redeclare model HeatBridge = Walls.HeatBridgeLinear,
+    withSmartFacade=withSmartFacade,
+    withMechVent=withMechVent,
+    redeclare model Window =
+        ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple)
     annotation (Placement(transformation(extent={{-64,-14},{-54,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     T0=T0_IW1,
     outside=false,
-    WallType=Type_IWsimple,
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
@@ -129,14 +146,15 @@ model Room
     final Blinding=1-ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    WallType=wallType_IW1)
+                    annotation (Placement(transformation(
         origin={23,59},
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     T0=T0_IW3,
     outside=false,
-    WallType=Type_IWsimple,
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
@@ -144,7 +162,9 @@ model Room
     final Blinding=1-ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDoor=false) annotation (Placement(transformation(
+    withDoor=false,
+    WallType=wallType_IW3)
+                    annotation (Placement(transformation(
         origin={25,-59},
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
@@ -201,7 +221,6 @@ model Room
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
     T0=T0_IW2b,
     outside=false,
-    WallType=Type_IWload,
     wall_height=room_height,
     withWindow=false,
     final withSunblind=use_sunblind,
@@ -209,7 +228,8 @@ model Room
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false,
-    wall_length=room_length) annotation (Placement(transformation(
+    wall_length=room_length,
+    WallType=wallType_IW2)   annotation (Placement(transformation(
         origin={64,6},
         extent={{-4,-24},{4,24}},
         rotation=180)));
@@ -224,17 +244,7 @@ model Room
         extent={{-10,8},{10,-8}},
         rotation=90,
         origin={-20,-26})));
-  //Door properties
-  parameter Real U_door_OD1=1.8  "U-value of door" annotation (
-     Dialog(
-      group="Windows and Doors",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor1));
-  parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(
-      group="Windows and Doors",
-      descriptionLabel=true,
-      enable=withDoor1));
+
   // Infiltration rate
   parameter Real n50(unit="h-1") = 3 "Air exchange rate at 50 Pa pressure difference"
     annotation (Dialog(tab="Infiltration"));
@@ -244,7 +254,7 @@ model Room
     annotation (Dialog(tab="Infiltration"));
 protected
   parameter Modelica.SIunits.Volume room_V=room_length*room_width*room_height;
-  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports1[1](redeclare
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[1](redeclare
       package Medium = AirModel) "Fluid inlets and outlets"
     annotation (Placement(transformation(extent={{-70,-104},{-12,-84}})));
 public
@@ -265,8 +275,8 @@ public
         rotation=0,
         origin={-100,-72}), iconTransformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={76,-94})));
+        rotation=0,
+        origin={-90,-70})));
 equation
   connect(thermInsideWall3, thermInsideWall3)
     annotation (Line(points={{44,-94},{44,-94}}, color={191,0,0}));
@@ -315,9 +325,8 @@ equation
           {-4,-40},{40,-40},{40,-13},{24,-13}}, color={191,0,0}));
   connect(airload.heatPort, thermRoom) annotation (Line(points={{0,-10},{-4,-10},
           {-4,-40},{-40,-40},{-40,40},{-20,40},{-20,20}}, color={191,0,0}));
-  connect(airload.ports[1:1], ports1) annotation (Line(points={{7,-20},{7,-30},{
-          8,-30},{8,-40},{-41,-40},{-41,-94}},
-                                color={0,127,255}));
+  connect(airload.ports[1:1], ports) annotation (Line(points={{7,-20},{7,-30},{8,
+          -30},{8,-40},{-41,-40},{-41,-94}}, color={0,127,255}));
   connect(outside_wall1.weaBus, weaBus) annotation (Line(
       points={{-67,14},{-67,0},{-98,0}},
       color={255,204,51},
@@ -409,7 +418,7 @@ equation
 <p>Model for a room with 1&nbsp;outer&nbsp;wall,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;ground,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;upper&nbsp;floor. </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>The following figure presents the room&apos;s layout: </p>
-<p><img src=\"modelica://PlugNHarvest/Images/RoomEnvelope.png\" alt=\"Room layout\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/PnH/RoomEnvelope.png\" alt=\"Room layout\"/> </p>
 <p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
 <p>The ground temperature can be coupled to any desired prescriped temperature. </p>
 </html>"));

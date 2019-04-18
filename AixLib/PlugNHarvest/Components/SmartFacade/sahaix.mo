@@ -64,8 +64,8 @@ model sahaix
     T_start=295.15)
     annotation (Placement(transformation(extent={{-92,62},{-112,42}})));
 
-  Modelica.Fluid.Sensors.VolumeFlowRate volumeFlowRate(redeclare package Medium
-      = Modelica.Media.Air.DryAirNasa)
+  Modelica.Fluid.Sensors.VolumeFlowRate volumeFlowRate(redeclare package Medium =
+        Modelica.Media.Air.DryAirNasa)
     annotation (Placement(transformation(extent={{-20,-14},{-4,-30}})));
   Modelica.Fluid.Machines.PrescribedPump fan(
     use_N_in=true,

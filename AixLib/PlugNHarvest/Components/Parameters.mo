@@ -36,6 +36,22 @@ record Parameters "Record for parametrisation of simulation model"
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "window type"
       annotation (Dialog(group="Envelope"));
 
+  //**************************S M A R T   F A C A D E ************************
+  // smart facade
+  parameter Boolean withSmartFacade = false annotation (Dialog( group = "Smart Facade", enable = outside), choices(checkBox=true));
+  // Mechanical ventilation
+  parameter Boolean withMechVent = false "with mechanical ventilation" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+  // PV
+  parameter Boolean withPV = false "with photovoltaics" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+  //solar air heater
+  parameter Boolean withSolAirHeat = false "with Solar Air Heater" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+  parameter Integer NrPVpanels=5 "Number of panels" annotation(Dialog(group = "Smart Facade", enable = withPV));
+  parameter AixLib.DataBase.SolarElectric.PVBaseRecord dataPV = AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181()
+                                                                 "PV data set" annotation(Dialog(group = "Smart Facade", enable = withPV));
+  parameter Modelica.SIunits.Power PelPV_max = 4000
+    "Maximum output power for inverter" annotation(Dialog(group = "Smart Facade", enable = withPV));
+
+
   //**************************I N T E R N A L  G A I N S ************************
   // persons
   parameter Modelica.SIunits.Power heatLoadForActivity = 80 "Sensible heat output occupants for activity at 20°C" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
@@ -81,6 +97,11 @@ record Parameters "Record for parametrisation of simulation model"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(tab = "Advanced", group="Envelope"));
 
+         // Heat bridge
+  parameter Boolean withHeatBridge = false "Choose if heat bridges should be considered or not" annotation(Dialog(tab = "Advanced", group = "Envelope", enable= outside, compact = false));
+  parameter Modelica.SIunits.ThermalConductivity psiHor = 5 "Horizontal heat bridge coefficient" annotation(Dialog(tab = "Advanced", group = "Envelope", enable = withHeatBridge));
+  parameter Modelica.SIunits.ThermalConductivity psiVer = 5 "Horizontal heat bridge coefficient" annotation(Dialog(tab = "Advanced", group = "Envelope", enable = withHeatBridge));
+
   //**************************I N T E R N A L  G A I N S ************************
   // persons
   parameter Real RatioConvectiveHeat = 0.5
@@ -92,5 +113,10 @@ record Parameters "Record for parametrisation of simulation model"
   parameter Real coeffThermal_elApp = 0.5 "coeff = Pth/Pel for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
   parameter Real coeffRadThermal_elApp = 0.75 "coeff = Pth,rad/Pth for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
+</ul>
+</html>"));
 end Parameters;

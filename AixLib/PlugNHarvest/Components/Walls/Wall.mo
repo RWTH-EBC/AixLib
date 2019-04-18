@@ -1,14 +1,14 @@
 within AixLib.PlugNHarvest.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
-  import DataBase;
+
 
   //Type parameter
   parameter Boolean outside = true "Choose if the wall is an outside or an inside wall" annotation(Dialog(group = "General Wall Type Parameter", compact = true), choices(choice = true "Outside Wall", choice = false "Inside Wall", radioButtons = true));
 
   // general wall parameters
-  parameter DataBase.Walls.WallBaseDataDefinition WallType=
-      DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition WallType=
+      AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
     "Choose an outside wall type from the database"
     annotation (Dialog(group="Room Geometry"), choicesAllMatching=true);
   parameter Modelica.SIunits.Length wall_length = 2 "Length of wall" annotation(Dialog(group = "Room Geometry"));
@@ -19,7 +19,7 @@ model Wall
   parameter Real solar_absorptance = 0.25 "Solar absorptance coefficient of outside wall surface" annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside));
   parameter Integer Model = 1 "Choose the model for calculation of heat convection at outside surface" annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside, compact = true), choices(choice = 1 "DIN 6946", choice = 2 "ASHRAE Fundamentals", choice = 3 "Custom alpha", radioButtons = true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 25 "Custom alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 3 and outside));
-  DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 2 and outside), choicesAllMatching = true);
+  parameter AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType = AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 2 and outside), choicesAllMatching = true);
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1 "vertical wall", choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
   parameter Integer calculationMethod = 1 "Choose the model for calculation of heat convection at inside surface" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<", choice=2 "By Bernd Glueck", choice=3 "Constant alpha", radioButtons = true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_constant = 2.5 "Constant alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", enable = calculationMethod == 3));
@@ -31,7 +31,7 @@ model Wall
   constrainedby
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
                                                                                   "Model for window" annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
-  parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Choose a window type from the database" annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
+  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Choose a window type from the database" annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor <=1" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));

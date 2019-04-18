@@ -36,6 +36,21 @@ model Room_intGain "Room with internal gains"
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "window type"
       annotation (Dialog(group="Envelope"));
 
+ //**************************S M A R T   F A C A D E ************************
+  // smart facade
+  parameter Boolean withSmartFacade = false annotation (Dialog( group = "Smart Facade", enable = outside), choices(checkBox=true));
+  // Mechanical ventilation
+  parameter Boolean withMechVent = false "with mechanical ventilation" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+  // PV
+  parameter Boolean withPV = false "with photovoltaics" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+  //solar air heater
+  parameter Boolean withSolAirHeat = false "with Solar Air Heater" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+  parameter Integer NrPVpanels=5 "Number of panels" annotation(Dialog(group = "Smart Facade", enable = withPV));
+  parameter AixLib.DataBase.SolarElectric.PVBaseRecord dataPV = AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181()
+                                                                 "PV data set" annotation(Dialog(group = "Smart Facade", enable = withPV));
+  parameter Modelica.SIunits.Power PelPV_max = 4000
+    "Maximum output power for inverter" annotation(Dialog(group = "Smart Facade", enable = withPV));
+
   //**************************I N T E R N A L  G A I N S ************************
   // persons
   parameter Modelica.SIunits.Power heatLoadForActivity = 80 "Sensible heat output occupants for activity at 20°C" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
@@ -59,27 +74,6 @@ model Room_intGain "Room with internal gains"
       choice=2 "ASHRAE Fundamentals",
       choice=3 "Custom alpha",
       radioButtons=true));
-  // Door
-  parameter Boolean withDoor1=false "Door 1" annotation (Dialog(
-      tab = "Advanced", group="Envelope",
-      joinNext=true,
-      descriptionLabel=true), choices(checkBox=true));
-  parameter Modelica.SIunits.Length door_width_OD1=0 "width " annotation (
-      Dialog(
-      tab = "Advanced", group="Envelope",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor1));
-  parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (
-      Dialog(
-      tab = "Advanced", group="Envelope",
-      descriptionLabel=true,
-      enable=withDoor1));
-  parameter Real U_door_OD1=1.8  "U-value of door" annotation (
-     Dialog(
-      tab = "Advanced", group="Envelope",
-      descriptionLabel=true,
-      enable=withDoor1));
     // Infiltration rate
   parameter Real n50(unit="h-1") = 3 "Air exchange rate at 50 Pa pressure differencefor infiltration "
     annotation (Dialog(tab = "Advanced", group="Envelope"));
@@ -101,9 +95,14 @@ model Room_intGain "Room with internal gains"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(tab = "Advanced", group="Envelope"));
 
+   // Heat bridge
+  parameter Boolean withHeatBridge = false "Choose if heat bridges should be considered or not" annotation(Dialog(tab = "Advanced", group = "Envelope", enable= outside, compact = false));
+  parameter Modelica.SIunits.ThermalConductivity psiHor = 5 "Horizontal heat bridge coefficient" annotation(Dialog(tab = "Advanced", group = "Envelope", enable = withHeatBridge));
+  parameter Modelica.SIunits.ThermalConductivity psiVer = 5 "Horizontal heat bridge coefficient" annotation(Dialog(tab = "Advanced", group = "Envelope", enable = withHeatBridge));
+
   //**************************I N T E R N A L  G A I N S ************************
   // persons
-  parameter Real RatioConvectiveHeat = 0.5
+  parameter Real RatioConvectiveHeat_Persons = 0.5
   "Ratio of convective heat from overall heat output for persons"                                        annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
   //lights
   parameter Real coeffThermal_lights = 0.9 "coeff = Pth/Pel for lights" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
@@ -111,12 +110,53 @@ model Room_intGain "Room with internal gains"
   //electrical appliances
   parameter Real coeffThermal_elApp = 0.5 "coeff = Pth/Pel for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
   parameter Real coeffRadThermal_elApp = 0.75 "coeff = Pth,rad/Pth for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
-  Components.Rooms.Room room
+  Components.Rooms.Room room(
+    room_length=room_length,
+    room_width=room_width,
+    room_height=room_height,
+    solar_absorptance_OW=solar_absorptance_OW,
+    ModelConvOW=ModelConvOW,
+    redeclare package AirModel = AirModel,
+    windowarea_OW1=windowarea_OW1,
+    use_sunblind=use_sunblind,
+    ratioSunblind=ratioSunblind,
+    solIrrThreshold=solIrrThreshold,
+    TOutAirLimit=TOutAirLimit,
+    Type_OW=wallType_OW1,
+    wallType_IW1=wallType_IW1,
+    wallType_IW2=wallType_IW2,
+    wallType_IW3=wallType_IW3,
+    Type_FL=wallType_FL,
+    Type_CE=wallType_CE,
+    Type_Win=Type_Win,
+    n50=n50,
+    e=e,
+    eps=eps,
+    withHeatBridge=withHeatBridge,
+    psiHor=psiHor,
+    psiVer=psiVer,
+    withSolAirHeat=withSolAirHeat,
+    NrPVpanels=NrPVpanels,
+    dataPV=dataPV,
+    PelPV_max=PelPV_max,
+    withPV=true,
+    withSmartFacade=withSmartFacade,
+    withMechVent=withMechVent)
     annotation (Placement(transformation(extent={{-24,16},{26,66}})));
-  Components.InternalGains.Facilities.Facilities facilities
+  Components.InternalGains.Facilities.Facilities facilities(
+    zoneArea=room_length*room_width,
+    spPelSurface_elApp=spPelSurface_elApp,
+    coeffThermal_elApp=coeffThermal_elApp,
+    coeffRadThermal_elApp=coeffRadThermal_elApp,
+    spPelSurface_lights=spPelSurface_lights,
+    coeffThermal_lights=coeffThermal_lights,
+    coeffRadThermal_lights=coeffRadThermal_lights)
     annotation (Placement(transformation(extent={{-60,-44},{-20,-8}})));
   Components.InternalGains.Occupants.Occupants occupants(ZoneArea=room.room_width
-        *room.room_length)
+        *room.room_length,
+    heatLoadForActivity=heatLoadForActivity,
+    occupationDensity=occupationDensity,
+    RatioConvectiveHeat=RatioConvectiveHeat_Persons)
     annotation (Placement(transformation(extent={{14,-42},{46,-10}})));
   AixLib.Utilities.Interfaces.SolarRad_in solRadPort_Facade
     annotation (Placement(transformation(extent={{-104,70},{-84,90}})));
@@ -146,6 +186,14 @@ model Room_intGain "Room with internal gains"
   Modelica.Blocks.Sources.Constant source_personsHumidity(k=0)
     "temporary model for humidity output of persons"
     annotation (Placement(transformation(extent={{20,-66},{40,-46}})));
+  Modelica.Blocks.Interfaces.RealInput Schedule_mechVent if withMechVent
+    "schedule mechanical ventilation" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={-100,-4}),  iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={76,-94})));
 equation
   connect(room.SolarRadiationPort_OW1, solRadPort_Facade) annotation (Line(
         points={{-23.875,56},{-24,56},{-24,54},{-40,54},{-40,80},{-94,80}},
@@ -199,6 +247,10 @@ equation
       extent={{6,3},{6,3}}));
   connect(source_personsHumidity.y, room.mWat_flow) annotation (Line(points={{
           41,-56},{50,-56},{50,0},{20,0},{20,17.5}}, color={0,0,127}));
+  if withMechVent then
+    connect(Schedule_mechVent, room.Schedule_mechVent) annotation (Line(points={{-100,
+          -4},{-40,-4},{-40,23.5},{-21.5,23.5}}, color={0,0,127}));
+  end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-80,82},{80,-78}},
@@ -212,5 +264,10 @@ equation
           textString="Room Envelope
 +
 Internal Gains")}),                                              Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
+</ul>
+</html>"));
 end Room_intGain;

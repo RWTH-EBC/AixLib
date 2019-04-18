@@ -84,5 +84,7 @@ equation
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>Testing for wall with smart facade.</p>
 </html>"));
 end Wall;
