@@ -149,10 +149,7 @@ public
         extent={{-10,8},{10,-8}},
         rotation=180,
         origin={69,-1})));
-  Utilities.Interfaces.HeatStarComb
-                                  thermStarComb_inside annotation (Placement(
-        transformation(extent={{92,-10},{112,10}}), iconTransformation(extent=
-           {{10,-10},{30,10}})));
+  Utilities.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Interfaces.RealInput solarRadWin
     "solar raditaion through window" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},

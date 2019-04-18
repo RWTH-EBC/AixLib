@@ -157,9 +157,7 @@ model WholeHouseBuildingEnvelope
     annotation (Placement(transformation(extent={{-60,70},{-52,78}})));
   AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToCombHeaters[9]
     annotation (Placement(transformation(extent={{-68,-26},{-48,-10}})));
-  AixLib.Utilities.Interfaces.HeatStarComb heatingToRooms[9]
-    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
-    annotation (Placement(transformation(extent={{-100,-46},{-80,-26}})));
+  AixLib.Utilities.Interfaces.ConvRadComb heatingToRooms[9] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF" annotation (Placement(transformation(extent={{-100,-46},{-80,-26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     thermFloorHeatingDownHeatFlow[9] if withFloorHeating
     "Thermal connector for heat flow of floor heating going downwards through the floors/ceilings; 1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
