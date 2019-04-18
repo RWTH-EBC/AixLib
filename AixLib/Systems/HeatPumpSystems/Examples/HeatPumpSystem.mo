@@ -122,16 +122,14 @@ model HeatPumpSystem "Example for a heat pump system"
     CEva=3000,
     use_secHeaGen=true,
     Q_flow_nominal=5000,
-    cpEva=4180,
-    cpCon=4180,
     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    fixed_TCon_start=true,
+    fixed_TEva_start=true,
     TCon_start=313.15,
     TEva_start=283.15,
     VCon=0.004,
-    VEva=0.004,
-    fixed_TCon_start=true,
-    fixed_TEva_start=true)
+    VEva=0.004)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
