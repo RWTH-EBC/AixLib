@@ -1,5 +1,5 @@
 ﻿within AixLib.Systems.HeatPumpSystems.Examples;
-model HeatPumpSystem "Example for a heat pump system"
+model SystemHeatPump "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -241,4 +241,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
                 pattern = LinePattern.None,
                 fillPattern = FillPattern.Solid,
                 points={{-38,64},{68,-2},{-38,-64},{-38,64}})}));
-end HeatPumpSystem;
+end SystemHeatPump;
