@@ -51,11 +51,15 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(group="Source"),choices(checkBox=true));
-  parameter Fluid.Movers.Data.Generic perEva "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perEva
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Source",
       enable=use_evaPum));
-  parameter Fluid.Movers.Data.Generic perCon "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perCon
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Sink",
       enable=use_conPum));
@@ -446,8 +450,9 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
-          {-60,-60},{-100,-60}}, color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
+          -15.2},{-60,-60},{-100,-60}},
+                                 color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
