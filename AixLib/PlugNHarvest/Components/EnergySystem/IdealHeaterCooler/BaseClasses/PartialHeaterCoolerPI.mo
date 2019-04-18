@@ -13,28 +13,25 @@ partial model PartialHeaterCoolerPI
                                                                   annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler = 1
     "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Boolean useRecord = true "Use record or individual parameters";
-  parameter A4_30.DataBase.ThermalZones.ZoneBaseRecord zoneParam
-    "Zone definition"
-    annotation (choicesAllMatching=true, Dialog(enable=recOrSep));
+
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
   AixLib.Controls.Continuous.PITemp pITempCool(
     rangeSwitch=false,
-    h=if useRecord then zoneParam.hCool else h_cooler,
-    l=if useRecord then zoneParam.lCool else l_cooler,
-    KR=if useRecord then zoneParam.KRCool else KR_cooler,
-    TN=if useRecord then zoneParam.TNCool else TN_cooler)
+    h=h_cooler,
+    l=l_cooler,
+    KR=KR_cooler,
+    TN=TN_cooler)
     "PI control for cooler"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
   AixLib.Controls.Continuous.PITemp pITempHeat(
     rangeSwitch=false,
-    h=if useRecord then zoneParam.hHeat else h_heater,
-    l=if useRecord then zoneParam.lHeat else l_heater,
-    KR=if useRecord then zoneParam.KRHeat else KR_heater,
-    TN=if useRecord then zoneParam.TNHeat else TN_heater)
+    h=h_heater,
+    l=l_heater,
+    KR=KR_heater,
+    TN=TN_heater)
     "PI control for heater"
     annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower(

@@ -23,9 +23,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(Checker.y, ControlBus.isOn) annotation (Line(points={{11,-2},{
-          99.8213,-2},{99.8213,22.5675}},
-                                  color={255,0,255}), Text(
+  connect(Checker.y, ControlBus.isOn) annotation (Line(points={{11,-2},{99.8213,
+          -2},{99.8213,22.5675}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

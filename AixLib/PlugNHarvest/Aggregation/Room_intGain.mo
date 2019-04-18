@@ -192,8 +192,8 @@ model Room_intGain "Room with internal gains"
         rotation=0,
         origin={-100,-4}),  iconTransformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={76,-94})));
+        rotation=0,
+        origin={-90,-2})));
 equation
   connect(room.SolarRadiationPort_OW1, solRadPort_Facade) annotation (Line(
         points={{-23.875,56},{-24,56},{-24,54},{-40,54},{-40,80},{-94,80}},
