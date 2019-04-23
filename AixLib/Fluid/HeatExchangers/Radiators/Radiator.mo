@@ -92,11 +92,7 @@ model Radiator "Radiator multilayer model"
     "Convective heat port to room"
     annotation (Placement(transformation(extent={{-60,20},{-44,36}}, rotation=
            0), iconTransformation(extent={{-30,10},{-10,30}})));
-  AixLib.Utilities.Interfaces.Star RadiativeHeat
-    "Radiative heat port to room"
-    annotation (Placement(
-        transformation(extent={{30,12},{50,30}}, rotation=0),
-        iconTransformation(extent={{30,10},{50,30}})));
+  AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Radiative heat port to room" annotation (Placement(transformation(extent={{30,12},{50,30}}, rotation=0), iconTransformation(extent={{30,10},{50,30}})));
   Sensors.TemperatureTwoPort FlowTemperature(redeclare package
     Medium = Medium,
     m_flow_nominal=m_flow_nominal)

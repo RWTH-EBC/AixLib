@@ -10,7 +10,7 @@ model HumanSensibleHeatAreaSpecific
     "Initial temperature";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
   Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
-  Utilities.Interfaces.Star RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
+  Interfaces.RadPort        RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -40}, {-80, 0}}), iconTransformation(extent = {{-102, -22}, {-80, 0}})));
   Modelica.Blocks.Math.Gain internalGainsPeopleSpecific(k=
         InternalGainsPeopleSpecific)

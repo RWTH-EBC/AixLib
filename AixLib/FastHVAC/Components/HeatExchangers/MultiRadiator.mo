@@ -37,9 +37,7 @@ public
     "Port for convective heat into the environment"
     annotation (Placement(transformation(extent={{-50,70},{-30,90}}),
         iconTransformation(extent={{-50,70},{-30,90}})));
-  AixLib.Utilities.Interfaces.Star RadiativeHeat
-    "Port for radiative heat into the environment"
-    annotation (Placement(transformation(extent={{30,70},{50,90}})));
+  AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Port for radiative heat into the environment" annotation (Placement(transformation(extent={{30,70},{50,90}})));
   Valves.Splitter splitter(n=n)
     annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
   Valves.Manifold manifold(n=n)
