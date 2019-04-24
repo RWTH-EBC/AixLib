@@ -82,7 +82,7 @@ parameter Modelica.SIunits.Thickness dInn=0.005
   Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut
     "Exhaust gas outlet temperature of CHP unit"
     annotation (Dialog(group="Engine Parameters"));
-  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Inlet temperature of exhaust gas"
+  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Calculated mean temperature of the exhaust gas inside the cylinders"
     annotation (Dialog(group="Thermal"));
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_eng annotation (

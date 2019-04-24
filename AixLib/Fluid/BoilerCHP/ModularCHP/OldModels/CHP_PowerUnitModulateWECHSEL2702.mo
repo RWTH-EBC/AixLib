@@ -20,8 +20,7 @@ model CHP_PowerUnitModulateWECHSEL2702
                                  annotation(choicesAllMatching=true);
 
   replaceable package Medium_Coolant =
-      DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                 property_T=356, X_a=0.50) constrainedby
+      Modelica.Media.Air.DryAirNasa     constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
 
   parameter
@@ -82,10 +81,10 @@ model CHP_PowerUnitModulateWECHSEL2702
   parameter Modelica.SIunits.ThermalConductance GCoolChannel=45
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.ThermalConductance G_CooExhHex=G_CooExhHex
+  parameter Modelica.SIunits.ThermalConductance G_CooExhHex=400
     "Thermal conductance of exhaust heat exchanger to cooling circuit"
     annotation (Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
-  parameter Modelica.SIunits.HeatCapacity C_ExhHex=C_ExhHex
+  parameter Modelica.SIunits.HeatCapacity C_ExhHex=50000
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
       Dialog(tab="Engine Cooling Circle", group="Calibration Parameters"));
   parameter Modelica.SIunits.Thickness dInn=0.005
@@ -97,9 +96,9 @@ model CHP_PowerUnitModulateWECHSEL2702
   parameter Modelica.SIunits.ThermalConductance G_Amb=5
     "Constant thermal conductance of material" annotation (Dialog(tab="Engine Cooling Circle",
         group="Calibration Parameters"));
-  parameter Modelica.SIunits.Temperature T_HeaRet=303.15
+ /* parameter Modelica.SIunits.Temperature T_HeaRet=303.15
     "Constant heating circuit return temperature"
-    annotation (Dialog(tab="Engine Cooling Circle"));
+    annotation (Dialog(tab="Engine Cooling Circle"));*/
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));

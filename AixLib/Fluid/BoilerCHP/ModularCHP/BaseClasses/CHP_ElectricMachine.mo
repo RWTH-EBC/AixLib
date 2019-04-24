@@ -107,7 +107,9 @@ public
     meaElPowGen=P_E,
     meaCurGen=I_1,
     meaTorGen=M,
-    calEtaGen=eta) annotation (Placement(transformation(extent={{-132,28},{-72,
+    calEtaGen=eta,
+    calThePowGen=Q_Therm)
+                   annotation (Placement(transformation(extent={{-132,28},{-72,
             84}}), iconTransformation(
         extent={{-30,-28},{30,28}},
         rotation=90,

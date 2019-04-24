@@ -48,8 +48,8 @@ public
     annotation (Dialog(group="Ambient Parameters"));
   parameter Modelica.SIunits.AbsolutePressure p_amb=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
- // Modelica.SIunits.Temperature T_CoolRet=350.15
- //   "Coolant return temperature" annotation (Dialog(tab="Engine Cooling Circle"));
+  Modelica.SIunits.Temperature T_CoolRet=exhaustHeatExchanger.senTCooCold.T
+    "Coolant return temperature";
   Modelica.SIunits.Temperature T_CooSup=submodel_CoolingEASY.senTCooEngOut.T
     "Coolant supply temperature";
   Modelica.SIunits.Power Q_Therm=if (submodel_CoolingEASY.heatPort_outside.Q_flow
@@ -139,7 +139,6 @@ public
     annotation (Placement(transformation(extent={{-52,-8},{-68,8}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger
     exhaustHeatExchanger(
-    cHPExhHexBus(meaTemRetChp=exhaustHeatExchanger.senTCooCold.T),
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -149,7 +148,6 @@ public
       allowFlowReversal=allowFlowReversalCoolant),
     T_Amb=T_amb,
     p_Amb=p_amb,
-    meanCpExh=gasolineEngineChp.cHPCombustionEngine.meanCpExh,
     redeclare package Medium3 = Medium_Exhaust,
     redeclare package Medium4 = Medium_Coolant,
     d_iExh=CHPEngineModel.dExh,
@@ -163,7 +161,6 @@ public
     m1_flow_small=mExh_flow_small,
     m2_flow_small=mCool_flow_small,
     ConTec=ConTec,
-    Q_Gen=inductionMachine.Q_Therm,
     A_surExhHea=A_surExhHea,
     m2_flow_nominal=m_flow,
     CExhHex=CExhHex,
@@ -216,7 +213,7 @@ public
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     cHPCombustionEngine(
-      T_Amb=T_amb,
+      T_Amb=gasolineEngineChp.T_amb,
       T_logEngCool=gasolineEngineChp.T_logEngCoo,
       T_ExhCHPOut=gasolineEngineChp.T_ExhCHPOut),
     engineToCoolant(T_ExhPowUniOut=gasolineEngineChp.T_ExhCHPOut))
@@ -224,6 +221,8 @@ public
           extent={{-18,8},{18,44}})));
   AixLib.Controls.Interfaces.CHPControlBus     sigBusCHP(
     meaThePowChp=Q_Therm,
+    meaTemRetCooChp=T_CoolRet,
+    meaTemSupCooChp=T_CooSup,
     calEmiCO2Chp=b_CO2,
     calFueChp=b_e,
     calEtaTheChp=eta_Therm,

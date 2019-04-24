@@ -103,12 +103,12 @@ expandable connector CHPControlBus
     "Measured thermal power at CHP units' outlets"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Modelica.SIunits.Temperature meaTemRetChp
-    "Measured temperatures at CHP units' return flow"
+  Modelica.SIunits.Temperature meaTemRetCooChp
+    "Measured temperatures at CHP units' coolant return flow"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
-  Modelica.SIunits.Temperature meaTemSupChp
-    "Measured temperatures at CHP units' supply flow"
+  Modelica.SIunits.Temperature meaTemSupCooChp
+    "Measured temperatures at CHP units' coolant supply flow"
     annotation(Dialog(tab="Operation point",
                                          group="CHP Unit"));
   Modelica.SIunits.VolumeFlowRate preVolFloHea
@@ -150,11 +150,7 @@ expandable connector CHPControlBus
 
   annotation (Documentation(revisions="<html>
 <ul>
-  <li>
-  October 25, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
-  </li>
+<li>January, 2019, by Julian Matthes:<br>First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">issue 6</a><u><span style=\"color: #0000ff;\">67</span></u>). </li>
 </ul>
 </html>", info="<html>
 <p>This connector is a base connector used forcombined heat and power units and contains typical variables that may be measured in the modular Chp models. </p>
