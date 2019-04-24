@@ -50,11 +50,11 @@ expandable connector CHPControlBus
   // Definition of variables describing generators
   //
   Modelica.SIunits.Power meaElPowGen
-    "Electric power at generators'"
+    "Electric power at generators' clamps"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
   Modelica.SIunits.Current meaCurGen
-    "Electric current at generators'"
+    "Electric current at generators' clamps"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
   Modelica.SIunits.Torque meaTorGen
@@ -65,14 +65,18 @@ expandable connector CHPControlBus
     "Calculated generators' efficiency"
     annotation(Dialog(tab="Operation point",
                                          group="Generator"));
+  Modelica.SIunits.Power calThePowGen
+    "Thermal loss power"
+    annotation(Dialog(tab="Operation point",
+                                         group="Generator"));
 
   // Definition of variables describing exhaust heat exchangers
   //
-  Modelica.SIunits.Temperature meaTemExhOutHex
+  Modelica.SIunits.Temperature meaTemExhHexOut
     "Measured exhaust gas temperatures at exhaust heat exchangers' outlets"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
-  Modelica.SIunits.Temperature meaTemExhInHex
+  Modelica.SIunits.Temperature meaTemExhHexIn
     "Measured exhaust gas temperatures at exhaust heat exchangers' inlets"
     annotation (Dialog(tab="Operation point",
                                            group="Exhaust Heat Exchanger"));
