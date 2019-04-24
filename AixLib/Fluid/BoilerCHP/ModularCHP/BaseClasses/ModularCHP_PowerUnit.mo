@@ -141,7 +141,6 @@ public
     annotation (Placement(transformation(extent={{-52,-8},{-68,8}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger
     exhaustHeatExchanger(
-    cHPExhHexBus(meaTemRetChp=exhaustHeatExchanger.senTCooCold.T),
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
