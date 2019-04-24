@@ -49,20 +49,24 @@ public
     annotation (Dialog(group="Ambient Parameters"));
   parameter Modelica.SIunits.AbsolutePressure p_amb=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
-  Modelica.SIunits.Temperature T_CoolRet=exhaustHeatExchanger.senTCooCold.T
+  Modelica.SIunits.Temperature T_CoolRet=exhaustHeatExchanger_EXPERIMENTL.senTCooCold.T
     "Coolant return temperature";
   Modelica.SIunits.Temperature T_CooSup=submodel_CoolingEASY.senTCooEngOut.T
     "Coolant supply temperature";
   Modelica.SIunits.Power Q_Therm=if (submodel_CoolingEASY.heatPort_outside.Q_flow
-       + exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow) > 10 then
-      submodel_CoolingEASY.heatPort_outside.Q_flow + exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow
+       + exhaustHeatExchanger_EXPERIMENTL.pipeCoolant.heatPort_outside.Q_flow)
+       > 10 then submodel_CoolingEASY.heatPort_outside.Q_flow +
+      exhaustHeatExchanger_EXPERIMENTL.pipeCoolant.heatPort_outside.Q_flow
        else 1 "Thermal power output of the CHP unit";
   Modelica.SIunits.Power P_Mech=gasolineEngineChp.cHPCombustionEngine.P_eff "Mechanical power output of the CHP unit";
   Modelica.SIunits.Power P_El=-inductionMachine.P_E
     "Electrical power output of the CHP unit";
   Modelica.SIunits.Power P_Fuel=if (gasolineEngineChp.cHPEngBus.isOn) then
       m_flow_Fue*Medium_Fuel.H_U else 0 "CHP fuel expenses";
-  Modelica.SIunits.Power Q_TotUnused=gasolineEngineChp.cHPCombustionEngine.Q_therm-gasolineEngineChp.engineToCoolant.actualHeatFlowEngine.Q_flow+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total heat error of the CHP unit";
+  Modelica.SIunits.Power Q_TotUnused=gasolineEngineChp.cHPCombustionEngine.Q_therm
+       - gasolineEngineChp.engineToCoolant.actualHeatFlowEngine.Q_flow +
+      exhaustHeatExchanger_EXPERIMENTL.volExhaust.heatPort.Q_flow
+    "Total heat error of the CHP unit";
  // Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total exhaust heat error";
   Modelica.SIunits.MassFlowRate m_flow_CO2=gasolineEngineChp.cHPCombustionEngine.m_flow_CO2Exh
     "CO2 emission output rate";
@@ -138,8 +142,8 @@ public
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-52,-8},{-68,8}})));
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger
-    exhaustHeatExchanger(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger_EXPERIMENTL
+    exhaustHeatExchanger_EXPERIMENTL(
     pipeCoolant(
       p_a_start=system.p_start,
       p_b_start=system.p_start,
@@ -153,8 +157,8 @@ public
     redeclare package Medium4 = Medium_Coolant,
     d_iExh=CHPEngineModel.dExh,
     dp_CooExhHex=CHPEngineModel.dp_Coo,
-    heatConvExhaustPipeInside(length=exhaustHeatExchanger.l_ExhHex),
-    volExhaust(V=exhaustHeatExchanger.VExhHex),
+    heatConvExhaustPipeInside(length=exhaustHeatExchanger_EXPERIMENTL.l_ExhHex),
+    volExhaust(V=exhaustHeatExchanger_EXPERIMENTL.VExhHex),
     CHPEngData=CHPEngineModel,
     M_Exh=gasolineEngineChp.cHPCombustionEngine.MM_Exh,
     allowFlowReversal1=allowFlowReversalExhaust,
@@ -249,7 +253,7 @@ equation
   connect(inductionMachine.flange_genIn, gasolineEngineChp.flange_eng)
     annotation (Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,
           0}));
-  connect(gasolineEngineChp.port_exh, exhaustHeatExchanger.port_a1)
+  connect(gasolineEngineChp.port_exh, exhaustHeatExchanger_EXPERIMENTL.port_a1)
     annotation (Line(points={{18.36,26.36},{28,26.36},{28,26.4},{40,26.4}},
         color={0,127,255}));
   connect(gasolineEngineChp.port_amb, heatFlowSensor.port_a)
@@ -257,8 +261,8 @@ equation
   connect(gasolineEngineChp.port_cooCir, submodel_CoolingEASY.heatPort_outside)
     annotation (Line(points={{18,10.16},{18,-6},{-10,-6},{-10,-76},{28,-76},{
           28,-65.56}}, color={191,0,0}));
-  connect(exhaustHeatExchanger.port_amb, heatFlowSensor.port_a) annotation (
-      Line(points={{40,18},{30,18},{30,0},{-52,0}}, color={191,0,0}));
+  connect(exhaustHeatExchanger_EXPERIMENTL.port_amb, heatFlowSensor.port_a)
+    annotation (Line(points={{40,18},{30,18},{30,0},{-52,0}}, color={191,0,0}));
   connect(inductionMachine.cHPGenBus, sigBusCHP) annotation (Line(
       points={{-62.4,27},{-70,27},{-70,93},{-1,93}},
       color={255,204,51},
@@ -266,7 +270,8 @@ equation
       string="",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(exhaustHeatExchanger.cHPExhHexBus, sigBusCHP) annotation (Line(
+  connect(exhaustHeatExchanger_EXPERIMENTL.cHPExhHexBus, sigBusCHP) annotation (
+     Line(
       points={{54,31.86},{54,93},{-1,93}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -282,19 +287,19 @@ equation
       extent={{6,3},{6,3}}));
   connect(port_supCoo, submodel_CoolingEASY.port_b)
     annotation (Line(points={{80,-58},{42,-58}}, color={0,127,255}));
-  connect(exhaustHeatExchanger.port_b2, submodel_CoolingEASY.port_a)
+  connect(exhaustHeatExchanger_EXPERIMENTL.port_b2, submodel_CoolingEASY.port_a)
     annotation (Line(points={{40,9.6},{34,9.6},{34,-12},{0,-12},{0,-58},{14,-58}},
         color={0,127,255}));
   connect(submodel_CoolingEASY.sigBus_coo, sigBusCHP) annotation (Line(
       points={{28.14,-50.44},{28.14,93},{-1,93}},
       color={255,204,51},
       thickness=0.5));
-  connect(port_retCoo, exhaustHeatExchanger.port_a2) annotation (Line(points={{
-          -80,-58},{-40,-58},{-40,-90},{100,-90},{100,9.6},{68,9.6}}, color={0,
-          127,255}));
-  connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1])
-    annotation (Line(points={{68,26.4},{80,26.4},{80,40},{92,40}}, color={0,
-          127,255}));
+  connect(port_retCoo, exhaustHeatExchanger_EXPERIMENTL.port_a2) annotation (
+      Line(points={{-80,-58},{-40,-58},{-40,-90},{100,-90},{100,9.6},{68,9.6}},
+        color={0,127,255}));
+  connect(exhaustHeatExchanger_EXPERIMENTL.port_b1, outletExhaustGas.ports[1])
+    annotation (Line(points={{68,26.4},{80,26.4},{80,40},{92,40}}, color={0,127,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},

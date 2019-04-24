@@ -108,7 +108,7 @@ model ExhaustHeatExchanger
     annotation (Dialog(group="Ambient Properties"));
  /* parameter Modelica.SIunits.Temperature T_ExhPowUniOut=CHPEngData.T_ExhPowUniOut
     "Outlet temperature of exhaust gas flow"
-  annotation (Dialog(group="Thermal"));*/
+    annotation (Dialog(group="Thermal")); */
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer" annotation (Dialog(tab="Calibration parameters"));
   parameter Modelica.SIunits.Length d_iExh=CHPEngData.dExh
@@ -247,7 +247,7 @@ model ExhaustHeatExchanger
     "Mass flow of dry exhaust gas";
   Modelica.SIunits.MassFlowRate m_ConH2OExh
     "Mass flow of condensing water";
-  parameter Modelica.SIunits.MolarMass M_Exh=1200
+  constant Modelica.SIunits.MolarMass M_Exh
     "Molar mass of the exhaust gas"
     annotation (Dialog(group="Thermal"));
   Modelica.SIunits.AbsolutePressure pExh

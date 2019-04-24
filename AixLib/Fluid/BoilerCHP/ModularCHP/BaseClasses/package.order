@@ -6,7 +6,7 @@ Submodel_CoolingEASY
 GasolineEngineChp
 CHP_ElectricMachine
 ExhaustHeatExchanger
-ExhaustHeatExchangerBACKUP
+ExhaustHeatExchanger_EXPERIMENTL
 OnOff_ControllerEasy
 BaseClassComponents
 Examples
