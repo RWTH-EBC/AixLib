@@ -38,8 +38,8 @@ model ExhaustHeatExchanger2504
     final m_flow_small=m1_flow_small)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
-      = Medium1, final allowFlowReversal=allowFlowReversal1)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
+        Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,70},{80,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCooCold(

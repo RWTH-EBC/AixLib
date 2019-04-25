@@ -1,5 +1,31 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 model GasolineEngineChp_EngineHousing_CylToInnerWall
+
+  parameter Modelica.SIunits.ThermalConductance GInnWall=lambda*A_WInn/dInn
+  "Thermal conductance of the inner engine wall"
+  annotation (Dialog(group="Thermal"));
+  parameter Modelica.SIunits.Thickness dInn=0.005
+    "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
+    annotation (Dialog(tab="Structure Calculations"));
+  parameter Modelica.SIunits.ThermalConductivity lambda=44.5
+    "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
+  parameter Modelica.SIunits.Area A_WInn
+    "Area of heat transporting surface from cylinder wall to outer engine block"
+    annotation (Dialog(tab="Structure Calculations"));
+  parameter Real z=4
+  annotation (Dialog(tab="Structure", group="Engine Properties"));
+
+  Modelica.Blocks.Interfaces.RealOutput y annotation (Placement(
+        transformation(rotation=0, extent={{96,-10},{116,10}})));
+  Modelica.Blocks.Interfaces.RealInput T(unit="K") annotation (Placement(
+        transformation(rotation=0, extent={{-118,-40},{-94,-16}}),
+        iconTransformation(extent={{-108,-40},{-88,-20}})));
+  Modelica.Blocks.Interfaces.RealInput T1(unit="K") annotation (Placement(
+        transformation(rotation=0, extent={{-118,4},{-94,28}}),
+        iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-98,30})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     logMeanTempCylWall
     annotation (Placement(transformation(extent={{-76,-22},{-56,-2}})));
@@ -17,30 +43,7 @@ model GasolineEngineChp_EngineHousing_CylToInnerWall
     annotation (Placement(transformation(extent={{-34,-50},{-14,-30}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-24,-60},{-14,-50}})));
-  parameter Modelica.SIunits.ThermalConductance GInnWall=lambda*A_WInn/dInn
-  "Thermal conductance of the inner engine wall"
-  annotation (Dialog(group="Thermal"));
-  parameter Modelica.SIunits.Thickness dInn=0.005
-    "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
-    annotation (Dialog(tab="Structure Calculations"));
-  parameter Modelica.SIunits.ThermalConductivity lambda=44.5
-    "Thermal conductivity of the engine block material" annotation (Dialog(tab="Structure", group="Material Properties"));
-  parameter Modelica.SIunits.Area A_WInn
-    "Area of heat transporting surface from cylinder wall to outer engine block"
-    annotation (Dialog(tab="Structure Calculations"));
-  parameter Real z=4
-  annotation (Dialog(tab="Structure", group="Engine Properties"));
-  Modelica.Blocks.Interfaces.RealOutput y annotation (Placement(
-        transformation(rotation=0, extent={{96,-10},{116,10}})));
-  Modelica.Blocks.Interfaces.RealInput T(unit="K") annotation (Placement(
-        transformation(rotation=0, extent={{-118,-40},{-94,-16}}),
-        iconTransformation(extent={{-108,-40},{-88,-20}})));
-  Modelica.Blocks.Interfaces.RealInput T1(unit="K") annotation (Placement(
-        transformation(rotation=0, extent={{-118,4},{-94,28}}),
-        iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-98,30})));
+
 equation
   connect(heatFlowEngine.Q_flow,heatLimit. u) annotation (Line(points={{22,-22},
           {22,-30},{-46,-30},{-46,-46},{10.4,-46}},     color={0,0,127}));

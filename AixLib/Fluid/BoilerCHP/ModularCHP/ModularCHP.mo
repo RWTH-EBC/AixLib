@@ -7,18 +7,6 @@ model ModularCHP "Modular combined heat and power system model"
                                                                     constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                 annotation(choicesAllMatching=true);
-protected
-  replaceable package Medium_Air =
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                         annotation(choicesAllMatching=true);
-
-  replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                 annotation(choicesAllMatching=true);
-public
   replaceable package Medium_Coolant = Modelica.Media.Air.DryAirNasa
                                                            constrainedby
     Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
@@ -38,37 +26,11 @@ public
       AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
-  inner Modelica.Fluid.System system(p_ambient=p_amb, T_ambient=T_amb)
-    annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
-
   parameter Modelica.SIunits.Temperature T_amb=293.15
     "Default ambient temperature"
     annotation (Dialog(group="Ambient Parameters"));
   parameter Modelica.SIunits.AbsolutePressure p_amb=101325
     "Default ambient pressure" annotation (Dialog(group="Ambient Parameters"));
-  Modelica.SIunits.Temperature T_Ret=temRetFlo.T "Coolant return temperature";
-  Modelica.SIunits.Temperature T_Sup=temSupFlo.T "Coolant supply temperature";
-  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
-  Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
-  Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
-  Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
-  Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
-  Modelica.SIunits.Power Q_TotUnused=cHP_PowerUnit.Q_TotUnused "Total heat error of the CHP unit";
- // Modelica.SIunits.Power Q_ExhUnused=exhaustHeatExchanger.volExhaust.ports_H_flow[1]+exhaustHeatExchanger.volExhaust.ports_H_flow[2]+exhaustHeatExchanger.volExhaust.heatPort.Q_flow "Total exhaust heat error";
-  Modelica.SIunits.MassFlowRate m_flow_CO2=cHP_PowerUnit.m_flow_CO2
-    "CO2 emission output rate";
-  Modelica.SIunits.MassFlowRate m_flow_Fue=cHP_PowerUnit.m_flow_Fue
-    "Fuel consumption rate of CHP unit";
-  type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
-  SpecificEmission b_CO2=cHP_PowerUnit.b_CO2 "Specific CO2 emissions per kWh (heat and power)";
-  SpecificEmission b_e=cHP_PowerUnit.b_e "Specific fuel consumption per kWh (heat and power)";
-  Real FueUtiRate = cHP_PowerUnit.FueUtiRate "Fuel utilization rate of the CHP unit";
-  Real PowHeatRatio = cHP_PowerUnit.PowHeatRatio "Power to heat ration of the CHP unit";
-  Real eta_Therm = cHP_PowerUnit.eta_Therm "Thermal efficiency of the CHP unit";
-  Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
-  Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
-
   parameter Real s_til=abs((cHP_PowerUnit.inductionMachine.s_nominal*(
       cHP_PowerUnit.inductionMachine.M_til/cHP_PowerUnit.inductionMachine.M_nominal)
        + cHP_PowerUnit.inductionMachine.s_nominal*sqrt(abs(((cHP_PowerUnit.inductionMachine.M_til
@@ -94,11 +56,6 @@ public
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)" annotation (
      Dialog(tab="Calibration parameters",group=
           "Advanced calibration parameters"));
-protected
-  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
-    "Total engine mass for heat capacity calculation"
-    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
-public
   parameter Modelica.SIunits.Mass Cal_mEng=0
     "Added engine mass for calibration purposes of the system´s thermal inertia"
     annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
@@ -130,6 +87,44 @@ public
   parameter Boolean useGenHea=true
     "Is the thermal loss energy of the elctric machine used?"
     annotation (Dialog(tab="Advanced", group="Generator heat use"));
+  parameter Boolean allowFlowReversalExhaust=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for exhaust medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Boolean allowFlowReversalCoolant=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mExh_flow_small=0.001
+    "Small exhaust mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mCool_flow_small=0.005
+    "Small coolant mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+
+  Modelica.SIunits.Temperature T_Ret=temRetFlo.T "Coolant return temperature";
+  Modelica.SIunits.Temperature T_Sup=temSupFlo.T "Coolant supply temperature";
+  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm "Thermal power output of the CHP unit to the coolant media";
+  Modelica.SIunits.Power Q_Therm=coolantHex.Q2_flow "Effective thermal power output of the CHP unit to the heating circuit";
+  Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
+  Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
+  Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
+  Modelica.SIunits.Power Q_TotUnused=cHP_PowerUnit.Q_TotUnused "Total heat error of the CHP unit";
+  Modelica.SIunits.MassFlowRate m_flow_CO2=cHP_PowerUnit.m_flow_CO2
+    "CO2 emission output rate";
+  Modelica.SIunits.MassFlowRate m_flow_Fue=cHP_PowerUnit.m_flow_Fue
+    "Fuel consumption rate of CHP unit";
+  type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
+  SpecificEmission b_CO2=cHP_PowerUnit.b_CO2 "Specific CO2 emissions per kWh (heat and power)";
+  SpecificEmission b_e=cHP_PowerUnit.b_e "Specific fuel consumption per kWh (heat and power)";
+  Real FueUtiRate = cHP_PowerUnit.FueUtiRate "Fuel utilization rate of the CHP unit";
+  Real PowHeatRatio = cHP_PowerUnit.PowHeatRatio "Power to heat ration of the CHP unit";
+  Real eta_Therm = cHP_PowerUnit.eta_Therm "Thermal efficiency of the CHP unit";
+  Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
+  Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
+
+  inner Modelica.Fluid.System system(p_ambient=p_amb, T_ambient=T_amb)
+    annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit
     cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
@@ -157,21 +152,6 @@ public
     calFac=calFac,
     s_til=s_til)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
-  parameter Boolean allowFlowReversalExhaust=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for exhaust medium"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Boolean allowFlowReversalCoolant=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
-    mExh_flow_small=0.001
-    "Small exhaust mass flow rate for regularization of zero flow"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
-    mCool_flow_small=0.005
-    "Small coolant mass flow rate for regularization of zero flow"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness coolantHex(
     allowFlowReversal1=allowFlowReversalCoolant,
     allowFlowReversal2=allowFlowReversalCoolant,
@@ -194,13 +174,11 @@ public
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
-
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_Controller ControllerCHP(
     CHPEngineModel=CHPEngineModel,
     startTimeChp=3600,
     modTab=modTab) annotation (Placement(transformation(rotation=0, extent={{-76,
             64},{-44,96}})));
-
   Modelica.Fluid.Interfaces.FluidPort_a port_retHea(redeclare package Medium =
         Medium_Coolant)
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
@@ -216,6 +194,24 @@ public
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-74,-20})));
+
+protected
+  replaceable package Medium_Air =
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                               constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                         annotation(choicesAllMatching=true);
+
+  replaceable package Medium_Exhaust =
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                 annotation(choicesAllMatching=true);
+
+  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
+    "Total engine mass for heat capacity calculation"
+    annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
+
+
 equation
   connect(coolantHex.port_a2, temRetFlo.port_b)
     annotation (Line(points={{-20,-64},{-42,-64}}, color={0,127,255}));

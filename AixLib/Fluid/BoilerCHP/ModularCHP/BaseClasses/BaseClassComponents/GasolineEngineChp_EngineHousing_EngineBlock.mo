@@ -1,25 +1,6 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 model GasolineEngineChp_EngineHousing_EngineBlock
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
-    innerThermalCond2_2(G=GInnWall/2) annotation (Placement(transformation(
-          extent={{-42,-10},{-22,10}},rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor outerThermalCond(
-      G=GEngBlo/2) annotation (Placement(transformation(extent={{-10,-10},{10,
-            10}},  rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor outerEngineBlock(
-    der_T(fixed=false, start=0),
-    C=CEngBlo,
-    T(start=T_Amb,
-      fixed=true))      annotation (Placement(transformation(
-        origin={22,-10},
-        extent={{-10,-10},{10,10}},
-        rotation=180)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor outerThermalCond2(
-     G=GEngBlo/2) annotation (Placement(transformation(extent={{34,-10},{54,10}},
-          rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor toAmbient(G=GEngToAmb)
-                   annotation (Placement(transformation(extent={{0,-70},{20,-50}},
-                   rotation=0)));
+
   parameter Modelica.SIunits.HeatCapacity CEngBlo=dOut*A_WInn*rhoEngWall*c
     "Heat capacity of the remaining engine body"
     annotation (Dialog(group="Thermal"));
@@ -63,6 +44,27 @@ model GasolineEngineChp_EngineHousing_EngineBlock
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a1 annotation (
       Placement(transformation(rotation=0, extent={{-50,-100},{-30,-80}}),
         iconTransformation(extent={{-50,-100},{-30,-80}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
+    innerThermalCond2_2(G=GInnWall/2) annotation (Placement(transformation(
+          extent={{-42,-10},{-22,10}},rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor outerThermalCond(
+      G=GEngBlo/2) annotation (Placement(transformation(extent={{-10,-10},{10,
+            10}},  rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor outerEngineBlock(
+    der_T(fixed=false, start=0),
+    C=CEngBlo,
+    T(start=T_Amb,
+      fixed=true))      annotation (Placement(transformation(
+        origin={22,-10},
+        extent={{-10,-10},{10,10}},
+        rotation=180)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor outerThermalCond2(
+     G=GEngBlo/2) annotation (Placement(transformation(extent={{34,-10},{54,10}},
+          rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor toAmbient(G=GEngToAmb)
+                   annotation (Placement(transformation(extent={{0,-70},{20,-50}},
+                   rotation=0)));
+
 equation
   connect(outerThermalCond.port_b,outerEngineBlock. port)
     annotation (Line(points={{10,0},{22,0}},     color={191,0,0}));

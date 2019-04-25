@@ -1,7 +1,6 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model CHP_ElectricMachine
   "Model of a general induction machine working as a starter generator"
-  import AixLib;
   extends Modelica.Electrical.Machines.Icons.TransientMachine;
 
   parameter
@@ -42,7 +41,7 @@ model CHP_ElectricMachine
    "Starting torque of electric machine (realistic factor used from DIN VDE 2650/2651)"
     annotation (Dialog(tab="Calculations"));
   parameter Modelica.SIunits.Inertia J_Gen=1
-    "Moment of inertia of the electric machine (default=0.5kg.m2)"
+    "Moment of inertia of the electric machine (default=1kg.m2)"
     annotation (Dialog(group="Calibration"));
   parameter Boolean useHeat=CHPEngData.useHeat
     "Is the thermal loss energy of the elctric machine used?"
@@ -64,16 +63,7 @@ model CHP_ElectricMachine
   parameter Real gearRatio=CHPEngData.gearRatio
                              "Transmission ratio (engine speed / generator speed)"
     annotation (Dialog(group="Machine specifications"));
-protected
-  parameter Real rho0=s_til^2 "Calculation variable for analytical approach (Aree, 2017)"
-    annotation (Dialog(tab="Calculations"));
-  parameter Real rho1=(M_start*(1+s_til^2)-2*s_til*M_til)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
-    annotation (Dialog(tab="Calculations"));
-  parameter Real rho3=(M_til*M_start*(1-s_til)^2)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
-    annotation (Dialog(tab="Calculations"));
-  parameter Real k=((I_elNominal/I_1_start)^2)*(((s_nominal^2)+rho1*s_nominal+rho0)/(1+rho1+rho0)) "Calculation variable for analytical approach (Aree, 2017)"
-    annotation (Dialog(tab="Calculations"));
-public
+
   Modelica.SIunits.Frequency n=inertia.w/(2*Modelica.Constants.pi) "Speed of machine rotor [1/s]";
   Modelica.SIunits.Current I_1 "Electric current of machine stator";
   Modelica.SIunits.Power P_E "Electrical power at the electric machine";
@@ -90,6 +80,7 @@ public
   Boolean OpMode = (n<=n0) "Operation mode (true=motor, false=generator)";
   Boolean SwitchOnOff=cHPGenBus.isOn
     "Operation of electric machine (true=On, false=Off)";
+
   Modelica.Mechanics.Rotational.Components.Inertia inertia(       w(fixed=false), J=J_Gen)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Sources.RealExpression electricTorque1(y=M)
@@ -102,7 +93,6 @@ public
   Modelica.Mechanics.Rotational.Components.IdealGear gearEngineToGenerator(
       ratio=gearRatio)
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-
   AixLib.Controls.Interfaces.CHPControlBus cHPGenBus
                    annotation (Placement(transformation(extent={{-72,28},{-132,
             84}}), iconTransformation(
@@ -119,6 +109,17 @@ public
     annotation (Placement(transformation(extent={{-36,74},{-56,94}})));
   Modelica.Blocks.Sources.RealExpression generatorEfficiency(y=eta)
     annotation (Placement(transformation(extent={{-36,60},{-56,80}})));
+
+protected
+  parameter Real rho0=s_til^2 "Calculation variable for analytical approach (Aree, 2017)"
+    annotation (Dialog(tab="Calculations"));
+  parameter Real rho1=(M_start*(1+s_til^2)-2*s_til*M_til)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
+    annotation (Dialog(tab="Calculations"));
+  parameter Real rho3=(M_til*M_start*(1-s_til)^2)/(M_til-M_start) "Calculation variable for analytical approach (Aree, 2017)"
+    annotation (Dialog(tab="Calculations"));
+  parameter Real k=((I_elNominal/I_1_start)^2)*(((s_nominal^2)+rho1*s_nominal+rho0)/(1+rho1+rho0)) "Calculation variable for analytical approach (Aree, 2017)"
+    annotation (Dialog(tab="Calculations"));
+
 equation
 
 if noEvent(SwitchOnOff) then

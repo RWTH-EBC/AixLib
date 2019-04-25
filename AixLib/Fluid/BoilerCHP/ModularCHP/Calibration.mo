@@ -3429,9 +3429,9 @@ package Calibration "CHP unit models edited for calibration tests"
       Cal_mEng=Cal_mEng,
       modTab=modTab,
       cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
-
       coolantHex(eps=eps))
       annotation (Placement(transformation(extent={{-26,-26},{26,26}})));
+
     parameter Modelica.SIunits.Efficiency eps=0.99
                                                   "Heat exchanger effectiveness"
       annotation (Dialog(tab="Calibration parameters", group=
@@ -3671,11 +3671,11 @@ package Calibration "CHP unit models edited for calibration tests"
       Cal_mEng=Cal_mEng,
       modTab=modTab,
       cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
-
       coolantHex(dT_nom=dT_nominal),
       dT_nominal=dT_nominal,
       GCooHex=GCooHex)
       annotation (Placement(transformation(extent={{-26,-26},{26,26}})));
+
   equation
     connect(heatingReturnFlow.T_in, tempFlowHeating.y)
       annotation (Line(points={{-112,4},{-118,4},{-118,-2},{-123,-2}},

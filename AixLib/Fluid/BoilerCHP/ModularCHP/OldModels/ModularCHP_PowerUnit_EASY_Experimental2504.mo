@@ -159,7 +159,6 @@ public
     d_iExh=CHPEngineModel.dExh,
     dp_CooExhHex=CHPEngineModel.dp_Coo,
     heatConvExhaustPipeInside(length=exhaustHeatExchanger_EXPERIMENTL.l_ExhHex),
-
     volExhaust(V=exhaustHeatExchanger_EXPERIMENTL.VExhHex),
     CHPEngData=CHPEngineModel,
     M_Exh=gasolineEngineChp.cHPCombustionEngine.MM_Exh,

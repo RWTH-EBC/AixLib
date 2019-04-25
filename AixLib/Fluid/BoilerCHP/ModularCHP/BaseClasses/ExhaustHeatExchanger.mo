@@ -1,7 +1,6 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model ExhaustHeatExchanger
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
-  import AixLib;
 
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     m1_flow_nominal=0.023,
@@ -12,66 +11,15 @@ model ExhaustHeatExchanger
     redeclare package Medium1 = Medium3,
     redeclare package Medium2 = Medium4);
 
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTExhHot(
-    redeclare final package Medium = Medium1,
-    final tau=tau,
-    final m_flow_nominal=m1_flow_nominal,
-    final initType=initType,
-    final T_start=T1_start,
-    final transferHeat=transferHeat,
-    final TAmb=T_Amb,
-    final tauHeaTra=tauHeaTra,
-    final allowFlowReversal=allowFlowReversal1,
-    final m_flow_small=m1_flow_small)
-    "Temperature sensor of hot side of exhaust heat exchanger"
-    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTExhCold(
-    redeclare final package Medium = Medium1,
-    final tau=tau,
-    final m_flow_nominal=m1_flow_nominal,
-    final initType=initType,
-    final T_start=T1_start,
-    final transferHeat=transferHeat,
-    final TAmb=T_Amb,
-    final tauHeaTra=tauHeaTra,
-    final allowFlowReversal=allowFlowReversal1,
-    final m_flow_small=m1_flow_small)
-    "Temperature sensor of cold side of exhaust heat exchanger"
-    annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
-      = Medium1, final allowFlowReversal=allowFlowReversal1)
-    "Sensor for mass flwo rate"
-    annotation (Placement(transformation(extent={{60,70},{80,50}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTCooCold(
-    redeclare final package Medium = Medium2,
-    final tau=tau,
-    final m_flow_nominal=m2_flow_nominal,
-    final initType=initType,
-    final T_start=T2_start,
-    final transferHeat=transferHeat,
-    final TAmb=T_Amb,
-    final tauHeaTra=tauHeaTra,
-    final allowFlowReversal=allowFlowReversal2,
-    final m_flow_small=m2_flow_small)
-    "Temperature sensor of coolant cold side of exhaust heat exchanger"
-    annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senTCooHot(
-    redeclare final package Medium = Medium2,
-    final tau=tau,
-    final m_flow_nominal=m2_flow_nominal,
-    final initType=initType,
-    final T_start=T2_start,
-    final transferHeat=transferHeat,
-    final TAmb=T_Amb,
-    final tauHeaTra=tauHeaTra,
-    final allowFlowReversal=allowFlowReversal2,
-    final m_flow_small=m2_flow_small)
-    "Temperature sensor of coolant hot side of exhaust heat exchanger"
-    annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloCool(redeclare final package
-      Medium = Medium2, final allowFlowReversal=allowFlowReversal2)
-    "Sensor for mass flwo rate"
-    annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
+  replaceable package Medium3 =
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (
+      __Dymola_choicesAllMatching=true);
+  replaceable package Medium4 =
+      DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
+                                      property_T=356, X_a=0.50) constrainedby
+    Modelica.Media.Interfaces.PartialMedium annotation (
+      __Dymola_choicesAllMatching=true);
 
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
@@ -105,17 +53,11 @@ model ExhaustHeatExchanger
   parameter Modelica.SIunits.Temperature T_Amb=298.15
     "Fixed ambient temperature for heat transfer"
     annotation (Dialog(group="Ambient Properties"));
- /* parameter Modelica.SIunits.Temperature T_ExhPowUniOut=CHPEngData.T_ExhPowUniOut
-    "Outlet temperature of exhaust gas flow"
-  annotation (Dialog(group="Thermal"));*/
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer" annotation (Dialog(tab="Calibration parameters"));
   parameter Modelica.SIunits.Length d_iExh=CHPEngData.dExh
     "Inner diameter of exhaust pipe"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.Volume VExhHex=l_ExhHex/4*Modelica.Constants.pi*
-      d_iExh^2
-    "Exhaust gas volume inside the exhaust heat exchanger" annotation(Dialog(tab="Calibration parameters",group="Engine parameters"));
   parameter Modelica.SIunits.ThermalConductance GAmb=5
     "Constant thermal conductance of material"
     annotation (Dialog(tab="Calibration parameters"));
@@ -124,7 +66,7 @@ model ExhaustHeatExchanger
     annotation (Dialog(tab="Calibration parameters"));
   parameter Modelica.SIunits.HeatCapacity CExhHex=4000
     "Heat capacity of exhaust heat exchanger(default= 4000 J/K)"
-  annotation (Dialog(tab="Calibration parameters"));
+    annotation (Dialog(tab="Calibration parameters"));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_Amb=101325
     "Start value of pressure"
     annotation (Dialog(group="Ambient Properties"));
@@ -146,31 +88,129 @@ model ExhaustHeatExchanger
   constant Real B=3874.61;
   constant Real C=229.73;
 
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
-        CExhHex, T(start=T_Amb, fixed=true))
-    annotation (Placement(transformation(extent={{10,-12},{30,8}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor ambientLoss(G=
-        GAmb)
-    annotation (Placement(transformation(extent={{-46,-22},{-66,-2}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
-      Placement(transformation(extent={{-110,-10},{-90,10}}),
-        iconTransformation(extent={{-110,-10},{-90,10}})));
-  replaceable package Medium3 =
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
-    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (
-      __Dymola_choicesAllMatching=true);
-  replaceable package Medium4 =
-      DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                      property_T=356, X_a=0.50) constrainedby
-    Modelica.Media.Interfaces.PartialMedium annotation (
-      __Dymola_choicesAllMatching=true);
-
   parameter Modelica.SIunits.Length l_ExhHex=1
     "Length of the exhaust pipe inside the exhaust heat exchanger" annotation (
       Dialog(tab="Calibration parameters", group="Engine parameters"));
   parameter Modelica.SIunits.PressureDifference dp_CooExhHex=CHPEngData.dp_Coo
     "Pressure drop at nominal mass flow rate inside the coolant circle "
     annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.SIunits.MolarMass M_Exh=1200
+    "Molar mass of the exhaust gas"
+    annotation (Dialog(group="Thermal"));
+
+  Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
+  "Quotient of exhaust gas in and outgoing temperature";
+
+   //Variables for water condensation and its usable latent heat calculation
+  Real x_H2OExhDry
+    "Water load of the exhaust gas";
+  Real xSat_H2OExhDry
+    "Saturation water load of the exhaust gas";
+  Modelica.SIunits.MassFlowRate m_H2OExh
+    "Mass flow of water in the exhaust gas";
+  Modelica.SIunits.MassFlowRate m_ExhDry
+    "Mass flow of dry exhaust gas";
+  Modelica.SIunits.MassFlowRate m_ConH2OExh
+    "Mass flow of condensing water";
+  Modelica.SIunits.AbsolutePressure pExh
+    "Pressure in the exhaust gas stream (assuming ambient conditions)";
+  Modelica.SIunits.AbsolutePressure pSatH2OExh
+    "Saturation vapor pressure of the exhaust gas water";
+  Modelica.SIunits.SpecificEnthalpy deltaH_Vap
+    "Specific enthalpy of vaporization (empirical formula based on table data)";
+  Modelica.SIunits.SpecificHeatCapacity meanCpExh=cHPExhHexBus.calMeaCpExh
+    "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
+   annotation (Dialog(group = "Thermal"));
+  Modelica.SIunits.HeatFlowRate Q_Gen=cHPExhHexBus.calThePowGen
+    "Calculated loss heat from the induction machine"
+   annotation (Dialog(group = "Thermal"));
+  Modelica.SIunits.Temperature T_LogMeanExh
+    "Mean logarithmic temperature of exhaust gas";
+
+    //Calculation of the thermodynamic state of the exhaust gas inlet used by the convective heat transfer model
+  Medium1.ThermodynamicState state1 = Medium1.setState_pTX(senTExhHot.port_b.p,T_LogMeanExh,senTExhHot.port_b.Xi_outflow);
+  Modelica.SIunits.SpecificEnthalpy h1_in = Medium1.specificEnthalpy(state1);
+  Modelica.SIunits.DynamicViscosity eta1_in = Medium1.dynamicViscosity(state1);
+  Modelica.SIunits.Density rho1_in = Medium1.density_phX(state1.p,h1_in,state1.X);
+  Modelica.SIunits.Velocity v1_in = senMasFloExh.m_flow/(Modelica.Constants.pi*rho1_in*d_iExh^2/4);
+  Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
+  Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
+
+  Modelica.Blocks.Sources.RealExpression machineIsOff(y=0)
+    "Calculated heat from generator losses"
+    annotation (Placement(transformation(extent={{142,-34},{98,-14}})));
+  AixLib.Controls.Interfaces.CHPControlBus cHPExhHexBus
+                               annotation (Placement(transformation(extent={{
+            -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
+  AixLib.Utilities.Logical.SmoothSwitch switch2 annotation (Placement(
+        transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=0,
+        origin={76,-12})));
+  Modelica.Blocks.Sources.RealExpression heatToCooling(y=pipeCoolant.heatPort_outside.Q_flow)
+    annotation (Placement(transformation(extent={{-42,76},{-22,96}})));
+  Modelica.Blocks.Sources.RealExpression condensingWater(y=m_ConH2OExh)
+    annotation (Placement(transformation(extent={{-42,62},{-22,82}})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTExhHot(
+    redeclare final package Medium = Medium1,
+    final tau=tau,
+    final m_flow_nominal=m1_flow_nominal,
+    final initType=initType,
+    final T_start=T1_start,
+    final transferHeat=transferHeat,
+    final TAmb=T_Amb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_small=m1_flow_small)
+    "Temperature sensor of hot side of exhaust heat exchanger"
+    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTExhCold(
+    redeclare final package Medium = Medium1,
+    final tau=tau,
+    final m_flow_nominal=m1_flow_nominal,
+    final initType=initType,
+    final T_start=T1_start,
+    final transferHeat=transferHeat,
+    final TAmb=T_Amb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_small=m1_flow_small)
+    "Temperature sensor of cold side of exhaust heat exchanger"
+    annotation (Placement(transformation(extent={{28,50},{48,70}})));
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
+        Medium1, final allowFlowReversal=allowFlowReversal1)
+    "Sensor for mass flwo rate"
+    annotation (Placement(transformation(extent={{60,70},{80,50}})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTCooCold(
+    redeclare final package Medium = Medium2,
+    final tau=tau,
+    final m_flow_nominal=m2_flow_nominal,
+    final initType=initType,
+    final T_start=T2_start,
+    final transferHeat=transferHeat,
+    final TAmb=T_Amb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal2,
+    final m_flow_small=m2_flow_small)
+    "Temperature sensor of coolant cold side of exhaust heat exchanger"
+    annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTCooHot(
+    redeclare final package Medium = Medium2,
+    final tau=tau,
+    final m_flow_nominal=m2_flow_nominal,
+    final initType=initType,
+    final T_start=T2_start,
+    final transferHeat=transferHeat,
+    final TAmb=T_Amb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal2,
+    final m_flow_small=m2_flow_small)
+    "Temperature sensor of coolant hot side of exhaust heat exchanger"
+    annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloCool(redeclare final package
+      Medium = Medium2, final allowFlowReversal=allowFlowReversal2)
+    "Sensor for mass flwo rate"
+    annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
   AixLib.Fluid.FixedResistances.Pipe pipeCoolant(
     redeclare package Medium = Medium2,
     p_b_start=system.p_start - 15000,
@@ -186,7 +226,6 @@ model ExhaustHeatExchanger
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           m_flow_nominal=m2_flow_nominal, dp_nominal=10))
     annotation (Placement(transformation(extent={{32,-70},{12,-50}})));
-
   Modelica.Fluid.Vessels.ClosedVolume volExhaust(
     redeclare final package Medium = Medium1,
     final m_flow_nominal=m1_flow_nominal,
@@ -231,66 +270,21 @@ model ExhaustHeatExchanger
         deltaH_Vap + Q_Gen)
     "Calculated latent exhaust heat from water condensation"
     annotation (Placement(transformation(extent={{142,-8},{98,12}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
+        CExhHex, T(start=T_Amb, fixed=true))
+    annotation (Placement(transformation(extent={{10,-12},{30,8}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor ambientLoss(G=
+        GAmb)
+    annotation (Placement(transformation(extent={{-46,-22},{-66,-2}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
+      Placement(transformation(extent={{-110,-10},{-90,10}}),
+        iconTransformation(extent={{-110,-10},{-90,10}})));
 
-  Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
-  "Quotient of exhaust gas in and outgoing temperature";
+protected
+  parameter Modelica.SIunits.Volume VExhHex=l_ExhHex/4*Modelica.Constants.pi*
+      d_iExh^2
+    "Exhaust gas volume inside the exhaust heat exchanger" annotation(Dialog(tab="Calibration parameters",group="Engine parameters"));
 
-   //Variables for water condensation and its usable latent heat calculation
-  Real x_H2OExhDry
-    "Water load of the exhaust gas";
-  Real xSat_H2OExhDry
-    "Saturation water load of the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_H2OExh
-    "Mass flow of water in the exhaust gas";
-  Modelica.SIunits.MassFlowRate m_ExhDry
-    "Mass flow of dry exhaust gas";
-  Modelica.SIunits.MassFlowRate m_ConH2OExh
-    "Mass flow of condensing water";
-  parameter Modelica.SIunits.MolarMass M_Exh=1200
-    "Molar mass of the exhaust gas"
-    annotation (Dialog(group="Thermal"));
-  Modelica.SIunits.AbsolutePressure pExh
-    "Pressure in the exhaust gas stream (assuming ambient conditions)";
-  Modelica.SIunits.AbsolutePressure pSatH2OExh
-    "Saturation vapor pressure of the exhaust gas water";
-  Modelica.SIunits.SpecificEnthalpy deltaH_Vap
-    "Specific enthalpy of vaporization (empirical formula based on table data)";
-  Modelica.SIunits.SpecificHeatCapacity meanCpExh=cHPExhHexBus.calMeaCpExh
-    "Calculated specific heat capacity of the exhaust gas for the calculated combustion temperature"
-   annotation (Dialog(group = "Thermal"));
-  Modelica.SIunits.HeatFlowRate Q_Gen=cHPExhHexBus.calThePowGen
-    "Calculated loss heat from the induction machine"
-   annotation (Dialog(group = "Thermal"));
- /* Modelica.SIunits.HeatFlowRate Q_flowExhHea=senMasFloExh.m_flow*meanCpExh*(
-      senTExhHot.T - T_ExhPowUniOut)
-    "Calculated exhaust heat from fixed exhaust outlet temperature";*/
-  Modelica.SIunits.Temperature T_LogMeanExh
-    "Mean logarithmic temperature of exhaust gas";
-
-    //Calculation of the thermodynamic state of the exhaust gas inlet used by the convective heat transfer model
-  Medium1.ThermodynamicState state1 = Medium1.setState_pTX(senTExhHot.port_b.p,T_LogMeanExh,senTExhHot.port_b.Xi_outflow);
-  Modelica.SIunits.SpecificEnthalpy h1_in = Medium1.specificEnthalpy(state1);
-  Modelica.SIunits.DynamicViscosity eta1_in = Medium1.dynamicViscosity(state1);
-  Modelica.SIunits.Density rho1_in = Medium1.density_phX(state1.p,h1_in,state1.X);
-  Modelica.SIunits.Velocity v1_in = senMasFloExh.m_flow/(Modelica.Constants.pi*rho1_in*d_iExh^2/4);
-  Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
-  Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
-
-  Modelica.Blocks.Sources.RealExpression machineIsOff(y=0)
-    "Calculated heat from generator losses"
-    annotation (Placement(transformation(extent={{142,-34},{98,-14}})));
-  AixLib.Controls.Interfaces.CHPControlBus cHPExhHexBus
-                               annotation (Placement(transformation(extent={{
-            -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
-  AixLib.Utilities.Logical.SmoothSwitch switch2 annotation (Placement(
-        transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=0,
-        origin={76,-12})));
-  Modelica.Blocks.Sources.RealExpression heatToCooling(y=pipeCoolant.heatPort_outside.Q_flow)
-    annotation (Placement(transformation(extent={{-42,76},{-22,96}})));
-  Modelica.Blocks.Sources.RealExpression condensingWater(y=m_ConH2OExh)
-    annotation (Placement(transformation(extent={{-42,62},{-22,82}})));
 equation
 //Calculation of water condensation and its usable latent heat
   if ConTec then

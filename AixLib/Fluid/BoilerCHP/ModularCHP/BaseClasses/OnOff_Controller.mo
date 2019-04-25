@@ -1,6 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model OnOff_Controller
-  import AixLib;
 
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
@@ -12,6 +11,7 @@ model OnOff_Controller
   parameter Real modTab[:,2]=[0.0,0.8; 7200,0.8; 7200,0.93; 10800,0.93; 10800,
       0.62; 14400,0.62; 14400,0.8; 18000,0.8; 18000,0.0]
     "Table for unit modulation (time = first column; modulation factors = second column)";
+
   Modelica.Blocks.Logical.Timer timerIsOff
     annotation (Placement(transformation(extent={{-6,16},{8,30}})));
   Modelica.Blocks.Logical.Not not1

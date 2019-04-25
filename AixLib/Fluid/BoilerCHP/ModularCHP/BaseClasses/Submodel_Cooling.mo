@@ -1,37 +1,6 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model Submodel_Cooling
-  import AixLib;
-  Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngIn(
-    redeclare package Medium = Medium_Coolant,
-    allowFlowReversal=allowFlowReversalCoolant,
-    m_flow_nominal=m_flow,
-    m_flow_small=mCool_flow_small) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-60,0})));
-  FixedResistances.Pipe engineHeatTransfer(
-    redeclare package Medium = Medium_Coolant,
-    redeclare model FlowModel =
-        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=CHPEngineModel.dp_Coo, m_flow_nominal=m_flow),
-    Heat_Loss_To_Ambient=true,
-    alpha=engineHeatTransfer.alpha_i,
-    eps=0,
-    isEmbedded=true,
-    use_HeatTransferConvective=false,
-    p_a_start=system.p_start,
-    p_b_start=system.p_start,
-    alpha_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
-    diameter=CHPEngineModel.dCoo,
-    allowFlowReversal=allowFlowReversalCoolant)
-    annotation (Placement(transformation(extent={{8,12},{32,-12}})));
 
-  Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngOut(
-    redeclare package Medium = Medium_Coolant,
-    allowFlowReversal=allowFlowReversalCoolant,
-    m_flow_nominal=m_flow,
-    m_flow_small=mCool_flow_small)
-    annotation (Placement(transformation(extent={{50,-10},{70,10}})));
   replaceable package Medium_Coolant =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
                                  property_T=356, X_a=0.50) constrainedby
@@ -41,8 +10,6 @@ model Submodel_Cooling
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  outer Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));
@@ -57,6 +24,9 @@ model Submodel_Cooling
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
+
+  outer Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
     annotation (Placement(transformation(rotation=0, extent={{-10,-70},{10,-50}}),
         iconTransformation(extent={{-12,-66},{12,-42}})));
@@ -87,6 +57,37 @@ model Submodel_Cooling
     annotation (Placement(transformation(extent={{-66,32},{-46,52}})));
   Modelica.Blocks.Sources.RealExpression minMassFlowPump(y=mCool_flow_small)
     annotation (Placement(transformation(extent={{-66,14},{-46,34}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngIn(
+    redeclare package Medium = Medium_Coolant,
+    allowFlowReversal=allowFlowReversalCoolant,
+    m_flow_nominal=m_flow,
+    m_flow_small=mCool_flow_small) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-60,0})));
+  FixedResistances.Pipe engineHeatTransfer(
+    redeclare package Medium = Medium_Coolant,
+    redeclare model FlowModel =
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
+          dp_nominal=CHPEngineModel.dp_Coo, m_flow_nominal=m_flow),
+    Heat_Loss_To_Ambient=true,
+    alpha=engineHeatTransfer.alpha_i,
+    eps=0,
+    isEmbedded=true,
+    use_HeatTransferConvective=false,
+    p_a_start=system.p_start,
+    p_b_start=system.p_start,
+    alpha_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
+    diameter=CHPEngineModel.dCoo,
+    allowFlowReversal=allowFlowReversalCoolant)
+    annotation (Placement(transformation(extent={{8,12},{32,-12}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngOut(
+    redeclare package Medium = Medium_Coolant,
+    allowFlowReversal=allowFlowReversalCoolant,
+    m_flow_nominal=m_flow,
+    m_flow_small=mCool_flow_small)
+    annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+
 equation
   connect(engineHeatTransfer.port_b, senTCooEngOut.port_a)
     annotation (Line(points={{32.48,0},{50,0}},     color={0,127,255}));

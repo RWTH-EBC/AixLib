@@ -1,7 +1,42 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model GasolineEngineChp
   "Thermal and mechanical model of an internal combustion engine with consideration of the individual mass flows"
-  import AixLib;
+
+  replaceable package Medium_Fuel =
+      DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG             constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                annotation(choicesAllMatching=true);
+  replaceable package Medium_Air =
+      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                               constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                         annotation(choicesAllMatching=true);
+  replaceable package Medium_Exhaust =
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
+    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                 annotation(choicesAllMatching=true);
+  parameter
+    DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
+    CHPEngineModel=AixLib.DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
+    "CHP engine data for calculations"
+    annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
+  parameter Data.ModularCHP.EngineMaterialData EngMat=
+      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
+    "Thermal engine material data for calculations"
+    annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
+  parameter Modelica.SIunits.Temperature T_amb=298.15
+    "Default ambient temperature"
+    annotation (Dialog(group="Ambient Parameters"));
+  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
+    "Total engine mass for heat capacity calculation"
+    annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.Thickness dInn=0.005
+    "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
+    annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
+    "Thermal conductance from engine housing to the surrounding air"
+    annotation (Dialog(tab="Engine Cooling Circle"));
+
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineModel
     cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
@@ -39,52 +74,6 @@ model GasolineEngineChp
     GEngToAmb=GEngToAmb)
     "A physikal model for calculating the thermal, mass and mechanical output of an ice powered CHP"
     annotation (Placement(transformation(extent={{-22,-52},{22,-8}})));
-  replaceable package Medium_Fuel =
-      DataBase.CHP.ModularCHPEngineMedia.LiquidFuel_LPG             constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                annotation(choicesAllMatching=true);
-  replaceable package Medium_Air =
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                         annotation(choicesAllMatching=true);
-  replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                 annotation(choicesAllMatching=true);
-  parameter
-    DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
-    CHPEngineModel=AixLib.DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
-    "CHP engine data for calculations"
-    annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter Data.ModularCHP.EngineMaterialData EngMat=
-      AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
-    "Thermal engine material data for calculations"
-    annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter Modelica.SIunits.Temperature T_amb=298.15
-    "Default ambient temperature"
-    annotation (Dialog(group="Ambient Parameters"));
-  parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng
-    "Total engine mass for heat capacity calculation"
-    annotation (Dialog(tab="Engine Cooling Circle"));
-parameter Modelica.SIunits.Thickness dInn=0.005
-    "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"
-    annotation (Dialog(tab="Engine Cooling Circle"));
-  parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
-    "Thermal conductance from engine housing to the surrounding air"
-    annotation (Dialog(tab="Engine Cooling Circle"));
-  Real modFac=cHPEngBus.modFac
-    "Modulation factor for energy outuput control of the Chp unit  "
-    annotation (Dialog(group="Engine Parameters"));
-  Modelica.SIunits.Temperature T_logEngCoo=(cHPEngBus.meaTemInEng + cHPEngBus.meaTemOutEng)
-      /2 "Logarithmic mean temperature of coolant inside the engine"
-    annotation (Dialog(group="Engine Parameters"));
-  Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut
-    "Exhaust gas outlet temperature of CHP unit"
-    annotation (Dialog(group="Engine Parameters"));
-  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Calculated mean temperature of the exhaust gas inside the cylinders"
-    annotation (Dialog(group="Thermal"));
-
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_eng annotation (
       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
         iconTransformation(extent={{-114,-6},{-94,14}})));
@@ -107,6 +96,19 @@ parameter Modelica.SIunits.Thickness dInn=0.005
         extent={{-26,-26},{26,26}},
         rotation=0,
         origin={0,88})));
+
+protected
+  Real modFac=cHPEngBus.modFac
+    "Modulation factor for energy outuput control of the Chp unit  "
+    annotation (Dialog(group="Engine Parameters"));
+  Modelica.SIunits.Temperature T_logEngCoo=(cHPEngBus.meaTemInEng + cHPEngBus.meaTemOutEng)
+      /2 "Logarithmic mean temperature of coolant inside the engine"
+    annotation (Dialog(group="Engine Parameters"));
+  Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut
+    "Exhaust gas outlet temperature of CHP unit"
+    annotation (Dialog(group="Engine Parameters"));
+  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Calculated mean temperature of the exhaust gas inside the cylinders"
+    annotation (Dialog(group="Thermal"));
 
 equation
   connect(port_exh, cHPCombustionEngine.port_exh) annotation (Line(points={{

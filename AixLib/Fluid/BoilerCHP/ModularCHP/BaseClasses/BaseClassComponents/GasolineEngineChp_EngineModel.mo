@@ -15,18 +15,15 @@ model GasolineEngineChp_EngineModel
                                                             constrainedby
     DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
                          annotation(choicesAllMatching=true);
-
   replaceable package Medium3 =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
                                  annotation(choicesAllMatching=true);
-
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
     CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_SenerTecDachsG5_5()
     "Needed engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
   constant Modelica.SIunits.Volume VCyl = CHPEngData.VEng/CHPEngData.z "Cylinder displacement";
   type RotationSpeed=Real(final unit="1/s", min=0);
   constant RotationSpeed nEngNominal = 25.583 "Nominal engine speed at operating point";
@@ -78,10 +75,8 @@ model GasolineEngineChp_EngineModel
   constant Modelica.SIunits.MassFraction X_CO2Exh =  MM_ComExh[4]*n_ComExh[4]/(MM_Exh*n_Exh)  "Mass fraction of CO2 in the exhaust gas";
   constant Modelica.SIunits.MassFraction Xi_Exh[size(n_ComExh, 1)] = {X_N2Exh, X_O2Exh, X_H2OExh, X_CO2Exh};
 
- // RotationSpeed nEng(max=CHPEngData.nEngMax) = 25.583 "Current engine speed";
-
   Boolean SwitchOnOff=true
-                      "Operation switch of the CHP unit (true=On, false=Off)"
+     "Operation switch of the CHP unit (true=On, false=Off)"
     annotation (Dialog(group="Modulation"));
   RotationSpeed nEng(min=0) "Current engine speed";
   Modelica.SIunits.MassFlowRate m_flow_Exh "Mass flow rate of exhaust gas";
@@ -209,6 +204,7 @@ for i in 1:size(n_ComExh, 1) loop
   Q_therm = if (nEng>1) and (CalQ_therm>=10) then CalQ_therm else 0;
   T_Com = (H_U-(60*p_me*CHPEngData.VEng)/m_FueEngRot)/((1 + Lambda*L_St)*meanCpExh) + T_Amb;
   P_eff = CHPEngData.i*nEng*p_me*CHPEngData.VEng;
+
  /* if m_Fue>0 then
   T_Com = (P_Fue - P_eff)/(m_Fue*(1 + Lambda*L_St)*meanCpExh) + T_Amb;
   else
