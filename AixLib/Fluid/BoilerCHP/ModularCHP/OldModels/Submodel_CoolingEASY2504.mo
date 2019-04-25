@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model Submodel_CoolingEASY
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model Submodel_CoolingEASY2504
   import AixLib;
   Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngIn(
     redeclare package Medium = Medium_Coolant,
@@ -159,4 +159,4 @@ equation
 <h4>Assumptions:</h4>
 <p>The pressure level within the cooling circuit is assumed to be constant at about 3 bar.</p>
 </html>"));
-end Submodel_CoolingEASY;
+end Submodel_CoolingEASY2504;

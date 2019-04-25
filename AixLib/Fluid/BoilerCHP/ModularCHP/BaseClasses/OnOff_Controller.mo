@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model OnOff_ControllerEasy
+model OnOff_Controller
   import AixLib;
 
   parameter
@@ -80,4 +80,4 @@ CHP")}),
 <p>Model of an easy on-off-controller for the modular CHP model.</p>
 <p>It allows to manually modulate the load of the power unit. A modulation factor (modFac) of 0 indicates that the machine is not in operation.</p>
 </html>"));
-end OnOff_ControllerEasy;
+end OnOff_Controller;

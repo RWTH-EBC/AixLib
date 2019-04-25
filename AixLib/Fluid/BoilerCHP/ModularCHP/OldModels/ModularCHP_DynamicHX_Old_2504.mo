@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModularCHP_DynamicHX
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModularCHP_DynamicHX_Old_2504
   "Modular combined heat and power system model"
   import AixLib;
 
@@ -153,7 +153,7 @@ public
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_PowerUnit2504
     cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
@@ -209,10 +209,11 @@ public
     redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_ControllerEasy
-    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600,
-    modTab=modTab)                                                  annotation (
-     Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_Controller ControllerCHP(
+    CHPEngineModel=CHPEngineModel,
+    startTimeChp=3600,
+    modTab=modTab) annotation (Placement(transformation(rotation=0, extent={{-76,
+            64},{-44,96}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_retHea(redeclare package Medium =
         Medium_Coolant)
@@ -311,4 +312,4 @@ CHP"),  Rectangle(
 <h4>Limitations:</h4>
 <p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
 </html>"));
-end ModularCHP_DynamicHX;
+end ModularCHP_DynamicHX_Old_2504;

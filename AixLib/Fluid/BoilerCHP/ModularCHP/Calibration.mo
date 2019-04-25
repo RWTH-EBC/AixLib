@@ -3068,7 +3068,7 @@ package Calibration "CHP unit models edited for calibration tests"
       "Small coolant mass flow rate for regularization of zero flow"
       annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-    AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_PowerUnit2504
       cHP_PowerUnit(
       redeclare package Medium_Fuel =
           AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.Medium_Fuel,
@@ -3125,10 +3125,12 @@ package Calibration "CHP unit models edited for calibration tests"
       redeclare package Medium = Medium_HeatingCircuit)
       annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
 
-    AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_ControllerEasy
-      ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600,
-      modTab=modTab)                                                  annotation (
-       Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
+    AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_Controller
+      ControllerCHP(
+      CHPEngineModel=CHPEngineModel,
+      startTimeChp=3600,
+      modTab=modTab) annotation (Placement(transformation(rotation=0, extent={{
+              -76,64},{-44,96}})));
 
     Modelica.Fluid.Interfaces.FluidPort_a port_retHea(redeclare package Medium =
           Medium_Coolant)
@@ -3399,8 +3401,8 @@ package Calibration "CHP unit models edited for calibration tests"
     Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flow_HeaCir)
       annotation (Placement(transformation(extent={{-144,4},{-124,24}})));
 
-    AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP_EASY
-                                                 cHP_PowerUnit(
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_Easy_2504
+      cHP_PowerUnit(
       redeclare package Medium_Fuel = Medium_Fuel,
       CHPEngineModel=CHPEngineModel,
       EngMat=EngMat,
@@ -3427,6 +3429,7 @@ package Calibration "CHP unit models edited for calibration tests"
       Cal_mEng=Cal_mEng,
       modTab=modTab,
       cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
+
       coolantHex(eps=eps))
       annotation (Placement(transformation(extent={{-26,-26},{26,26}})));
     parameter Modelica.SIunits.Efficiency eps=0.99
@@ -3640,8 +3643,8 @@ package Calibration "CHP unit models edited for calibration tests"
     Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flow_HeaCir)
       annotation (Placement(transformation(extent={{-144,4},{-124,24}})));
 
-    AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP_DynamicHX_EASY
-                                                 cHP_PowerUnit(
+    AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_DynamicHX_EASY_2504
+      cHP_PowerUnit(
       redeclare package Medium_Fuel = Medium_Fuel,
       CHPEngineModel=CHPEngineModel,
       EngMat=EngMat,
@@ -3668,6 +3671,7 @@ package Calibration "CHP unit models edited for calibration tests"
       Cal_mEng=Cal_mEng,
       modTab=modTab,
       cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
+
       coolantHex(dT_nom=dT_nominal),
       dT_nominal=dT_nominal,
       GCooHex=GCooHex)

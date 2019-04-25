@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model ExhaustHeatExchanger
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger2504
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -107,7 +107,7 @@ model ExhaustHeatExchanger
     annotation (Dialog(group="Ambient Properties"));
  /* parameter Modelica.SIunits.Temperature T_ExhPowUniOut=CHPEngData.T_ExhPowUniOut
     "Outlet temperature of exhaust gas flow"
-  annotation (Dialog(group="Thermal"));*/
+    annotation (Dialog(group="Thermal")); */
   parameter Modelica.SIunits.Area A_surExhHea=50
     "Surface for exhaust heat transfer" annotation (Dialog(tab="Calibration parameters"));
   parameter Modelica.SIunits.Length d_iExh=CHPEngData.dExh
@@ -227,10 +227,10 @@ model ExhaustHeatExchanger
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow additionalHeat
     "Heat flow from water condensation in the exhaust gas and generator losses"
     annotation (Placement(transformation(extent={{60,-22},{40,-2}})));
-  Modelica.Blocks.Sources.RealExpression latentAndGeneratorHeat(y=m_ConH2OExh*
-        deltaH_Vap + Q_Gen)
+  Modelica.Blocks.Sources.RealExpression latentExhaustHeat(y=if cHPExhHexBus.isOn
+         then m_ConH2OExh*deltaH_Vap else 0)
     "Calculated latent exhaust heat from water condensation"
-    annotation (Placement(transformation(extent={{142,-8},{98,12}})));
+    annotation (Placement(transformation(extent={{126,-12},{106,8}})));
 
   Real QuoT_ExhInOut=senTExhHot.T/senTExhCold.T
   "Quotient of exhaust gas in and outgoing temperature";
@@ -246,7 +246,7 @@ model ExhaustHeatExchanger
     "Mass flow of dry exhaust gas";
   Modelica.SIunits.MassFlowRate m_ConH2OExh
     "Mass flow of condensing water";
-  parameter Modelica.SIunits.MolarMass M_Exh=1200
+  constant Modelica.SIunits.MolarMass M_Exh
     "Molar mass of the exhaust gas"
     annotation (Dialog(group="Thermal"));
   Modelica.SIunits.AbsolutePressure pExh
@@ -276,21 +276,19 @@ model ExhaustHeatExchanger
   Modelica.SIunits.ThermalConductivity lambda1_in = Medium1.thermalConductivity(state1);
   Modelica.SIunits.ReynoldsNumber Re1_in = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(v1_in,rho1_in,eta1_in,d_iExh);
 
-  Modelica.Blocks.Sources.RealExpression machineIsOff(y=0)
-    "Calculated heat from generator losses"
-    annotation (Placement(transformation(extent={{142,-34},{98,-14}})));
-  AixLib.Controls.Interfaces.CHPControlBus cHPExhHexBus
-                               annotation (Placement(transformation(extent={{
+  Modelica.Blocks.Sources.RealExpression generatorHeat(y=if cHPExhHexBus.isOn
+         then Q_Gen else 0) "Calculated heat from generator losses"
+    annotation (Placement(transformation(extent={{126,-32},{106,-12}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=2)
+    annotation (Placement(transformation(extent={{86,-18},{74,-6}})));
+  AixLib.Controls.Interfaces.CHPControlBus cHPExhHexBus(
+    meaTemExhHexOut=senTExhCold.T,
+    meaTemExhHexIn=senTExhHot.T,
+    meaThePowOutHex=pipeCoolant.heatPort_outside.Q_flow,
+    meaMasFloConHex=m_ConH2OExh,
+    meaTemInHex=senTCooCold.T,
+    meaTemOutHex=senTCooHot.T) annotation (Placement(transformation(extent={{
             -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
-  AixLib.Utilities.Logical.SmoothSwitch switch2 annotation (Placement(
-        transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=0,
-        origin={76,-12})));
-  Modelica.Blocks.Sources.RealExpression heatToCooling(y=pipeCoolant.heatPort_outside.Q_flow)
-    annotation (Placement(transformation(extent={{-42,76},{-22,96}})));
-  Modelica.Blocks.Sources.RealExpression condensingWater(y=m_ConH2OExh)
-    annotation (Placement(transformation(extent={{-42,62},{-22,82}})));
 equation
 //Calculation of water condensation and its usable latent heat
   if ConTec then
@@ -349,33 +347,16 @@ equation
     annotation (Line(points={{20,60},{28,60}}, color={0,127,255}));
   connect(additionalHeat.port, heatCapacitor.port)
     annotation (Line(points={{40,-12},{20,-12}}, color={191,0,0}));
+  connect(additionalHeat.Q_flow, multiSum.y)
+    annotation (Line(points={{60,-12},{72.98,-12}}, color={0,0,127}));
+  connect(latentExhaustHeat.y, multiSum.u[1]) annotation (Line(points={{105,-2},
+          {96,-2},{96,-9.9},{86,-9.9}}, color={0,0,127}));
+  connect(generatorHeat.y, multiSum.u[2]) annotation (Line(points={{105,-22},{
+          96,-22},{96,-14.1},{86,-14.1}}, color={0,0,127}));
   connect(senTExhHot.port_b, volExhaust.ports[1])
     annotation (Line(points={{-60,60},{-28,60}}, color={0,127,255}));
   connect(pressureDropExhaust.port_a, volExhaust.ports[2])
     annotation (Line(points={{0,60},{-32,60}}, color={0,127,255}));
-  connect(switch2.y, additionalHeat.Q_flow)
-    annotation (Line(points={{69.4,-12},{60,-12}}, color={0,0,127}));
-  connect(cHPExhHexBus.isOn, switch2.u2) annotation (Line(
-      points={{0.14,99.135},{150,99.135},{150,-12},{83.2,-12}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(latentAndGeneratorHeat.y, switch2.u1) annotation (Line(points={{95.8,2},
-          {90,2},{90,-7.2},{83.2,-7.2}},    color={0,0,127}));
-  connect(machineIsOff.y, switch2.u3) annotation (Line(points={{95.8,-24},{90,
-          -24},{90,-16.8},{83.2,-16.8}}, color={0,0,127}));
-  connect(senTCooHot.T, cHPExhHexBus.meaTemOutHex) annotation (Line(points={{
-          -30,-49},{-30,-32},{-120,-32},{-120,99.135},{0.14,99.135}}, color={0,
-          0,127}));
-  connect(senTCooCold.T, cHPExhHexBus.meaTemInHex) annotation (Line(points={{70,
-          -49},{70,-34},{150,-34},{150,99.135},{0.14,99.135}}, color={0,0,127}));
-  connect(senTExhHot.T, cHPExhHexBus.meaTemExhHexIn) annotation (Line(points={{
-          -70,71},{-70,99.135},{0.14,99.135}}, color={0,0,127}));
-  connect(senTExhCold.T, cHPExhHexBus.meaTemExhHexOut) annotation (Line(points=
-          {{38,71},{38,99.135},{0.14,99.135}}, color={0,0,127}));
-  connect(heatToCooling.y, cHPExhHexBus.meaThePowOutHex) annotation (Line(
-        points={{-21,86},{0.14,86},{0.14,99.135}}, color={0,0,127}));
-  connect(condensingWater.y, cHPExhHexBus.meaMasFloConHex) annotation (Line(
-        points={{-21,72},{0.14,72},{0.14,99.135}}, color={0,0,127}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-70,80},{70,-80}},
@@ -404,4 +385,4 @@ equation
 <p>There is the option of considering the heat output from the condensation of water in the flue gas. This is determined from the determination of the precipitating water via the saturation vapour pressure and the critical loading in the flue gas for the critical state (at outlet temperature). The evaporation enthalpy is approximated using an empirical formula based on table data for ambient pressure.</p>
 <p>Simplifying it is assumed that the latent heat flux in addition to the convective heat flux is transferred to the capacity of the exhaust gas heat exchanger.</p>
 </html>"));
-end ExhaustHeatExchanger;
+end ExhaustHeatExchanger2504;

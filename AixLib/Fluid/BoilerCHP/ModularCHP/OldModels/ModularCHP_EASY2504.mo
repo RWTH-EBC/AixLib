@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.Examples;
-model ModularCHP
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModularCHP_EASY2504
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;
   import AixLib;
@@ -40,9 +40,6 @@ public
       AixLib.Fluid.BoilerCHP.Data.ModularCHP.EngineMaterial_CastIron()
     "Thermal engine material data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-
-  inner Modelica.Fluid.System system(p_ambient=p_amb, T_ambient=T_amb)
-    annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
 
   parameter Modelica.SIunits.Temperature T_amb=293.15
     "Default ambient temperature"
@@ -166,23 +163,24 @@ public
     redeclare package Medium = Medium_HeatingCircuit,
     nPorts=1,
     use_m_flow_in=true)
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+    annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
   Modelica.Fluid.Sources.FixedBoundary heatingSupplyFlow(
                                          redeclare package Medium =
         Medium_HeatingCircuit, nPorts=1)
-    annotation (Placement(transformation(extent={{110,-10},{90,10}})));
+    annotation (Placement(transformation(extent={{90,-10},{70,10}})));
 
   Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
-    annotation (Placement(transformation(extent={{-144,-12},{-124,8}})));
+    annotation (Placement(transformation(extent={{-96,-12},{-76,8}})));
   AixLib.Fluid.Sensors.DensityTwoPort senDen(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
-    annotation (Placement(transformation(extent={{-68,-8},{-52,8}})));
+    annotation (Placement(transformation(extent={{-30,-8},{-14,8}})));
   Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flow_HeaCir)
-    annotation (Placement(transformation(extent={{-144,4},{-124,24}})));
+    annotation (Placement(transformation(extent={{-96,4},{-76,24}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_Easy_2504
+    cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
     EngMat=EngMat,
@@ -210,22 +208,22 @@ public
     modTab=modTab,
     cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
     coolantHex(eps=eps))
-    annotation (Placement(transformation(extent={{-26,-26},{26,26}})));
+    annotation (Placement(transformation(extent={{0,-26},{52,26}})));
   parameter Modelica.SIunits.Efficiency eps=0.9 "Heat exchanger effectiveness"
     annotation (Dialog(tab="Calibration parameters", group=
           "Advanced calibration parameters"));
 equation
   connect(heatingReturnFlow.T_in, tempFlowHeating.y)
-    annotation (Line(points={{-112,4},{-118,4},{-118,-2},{-123,-2}},
+    annotation (Line(points={{-64,4},{-70,4},{-70,-2},{-75,-2}},
                                                      color={0,0,127}));
   connect(heatingReturnFlow.ports[1], senDen.port_a)
-    annotation (Line(points={{-90,0},{-68,0}},     color={0,127,255}));
+    annotation (Line(points={{-42,0},{-30,0}},     color={0,127,255}));
   connect(massFlowHeating.y, heatingReturnFlow.m_flow_in) annotation (Line(
-        points={{-123,14},{-118,14},{-118,8},{-110,8}},       color={0,0,127}));
+        points={{-75,14},{-70,14},{-70,8},{-62,8}},           color={0,0,127}));
   connect(cHP_PowerUnit.port_supHea, heatingSupplyFlow.ports[1])
-    annotation (Line(points={{26,0},{90,0}}, color={0,127,255}));
+    annotation (Line(points={{52,0},{70,0}}, color={0,127,255}));
   connect(senDen.port_b,cHP_PowerUnit.port_retHea)
-    annotation (Line(points={{-52,0},{-26,0}}, color={0,127,255}));
+    annotation (Line(points={{-14,0},{0,0}},   color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)), experiment(StopTime=18000, Interval=5),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
@@ -237,4 +235,4 @@ equation
 <p><br><br>Caution: </p>
 <p>If the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-end ModularCHP;
+end ModularCHP_EASY2504;

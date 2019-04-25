@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.Examples;
-model ModularCHP_EASY
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModularCHP_DynamicHX_EASY2504
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;
   import AixLib;
@@ -131,6 +131,9 @@ public
   parameter Modelica.SIunits.Temperature T_HeaRet=303.15
     "Constant heating circuit return temperature"
     annotation (Dialog(tab="Engine Cooling Circle"));
+  parameter Modelica.SIunits.TemperatureDifference dT_nominal=25 "Nominal heat exchanger temperature difference between cooling and heating circuit"
+    annotation (Dialog(tab="Calibration parameters", group=
+          "Advanced calibration parameters"));
   parameter Boolean ConTec=true
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
@@ -182,8 +185,8 @@ public
   Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flow_HeaCir)
     annotation (Placement(transformation(extent={{-144,4},{-124,24}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP_EASY
-                                               cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_DynamicHX_EASY_2504
+    cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
     EngMat=EngMat,
@@ -210,11 +213,9 @@ public
     Cal_mEng=Cal_mEng,
     modTab=modTab,
     cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
-    coolantHex(eps=eps))
+    coolantHex(dT_nom=dT_nominal),
+    dT_nominal=dT_nominal)
     annotation (Placement(transformation(extent={{-26,-26},{26,26}})));
-  parameter Modelica.SIunits.Efficiency eps=0.9 "Heat exchanger effectiveness"
-    annotation (Dialog(tab="Calibration parameters", group=
-          "Advanced calibration parameters"));
 equation
   connect(heatingReturnFlow.T_in, tempFlowHeating.y)
     annotation (Line(points={{-112,4},{-118,4},{-118,-2},{-123,-2}},
@@ -238,4 +239,4 @@ equation
 <p><br><br>Caution: </p>
 <p>If the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-end ModularCHP_EASY;
+end ModularCHP_DynamicHX_EASY2504;

@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model ExhaustHeatExchanger_EXPERIMENTL
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ExhaustHeatExchanger_EXPERIMENTL2504
   "Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle"
   import AixLib;
 
@@ -38,8 +38,8 @@ model ExhaustHeatExchanger_EXPERIMENTL
     final m_flow_small=m1_flow_small)
     "Temperature sensor of cold side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium =
-        Medium1, final allowFlowReversal=allowFlowReversal1)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloExh(redeclare final package Medium
+      = Medium1, final allowFlowReversal=allowFlowReversal1)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,70},{80,50}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTCooCold(
@@ -392,4 +392,4 @@ equation
 <p>There is the option of considering the heat output from the condensation of water in the flue gas. This is determined from the determination of the precipitating water via the saturation vapour pressure and the critical loading in the flue gas for the critical state (at outlet temperature). The evaporation enthalpy is approximated using an empirical formula based on table data for ambient pressure.</p>
 <p>Simplifying it is assumed that the latent heat flux in addition to the convective heat flux is transferred to the capacity of the exhaust gas heat exchanger.</p>
 </html>"));
-end ExhaustHeatExchanger_EXPERIMENTL;
+end ExhaustHeatExchanger_EXPERIMENTL2504;

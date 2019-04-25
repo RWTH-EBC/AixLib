@@ -1,5 +1,6 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModularCHP_EASY "Modular combined heat and power system model"
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModularCHP_DynamicHX_EASY_2504
+  "Modular combined heat and power system model"
   import AixLib;
 
   replaceable package Medium_Fuel =
@@ -124,6 +125,13 @@ public
       14400,0.62; 14400,0.8; 18000,0.8; 18000,0.0]
     "Table for unit modulation (time = first column; modulation factors = second column)"
     annotation (Dialog(tab="Calibration parameters", group="Fast calibration - Electric power and fuel usage"));
+  parameter Modelica.SIunits.TemperatureDifference dT_nominal=25 "Nominal heat exchanger temperature difference between cooling and heating circuit"
+    annotation (Dialog(tab="Calibration parameters", group=
+          "Advanced calibration parameters"));
+  parameter Modelica.Blocks.Interfaces.RealInput GCooHex=CHPEngineModel.Q_MaxHea
+      /dT_nominal*2
+    "Signal representing the convective thermal conductance of the coolant heat exchanger in [W/K]"
+    annotation (Dialog(tab="Calibration parameters", group="Advanced calibration parameters"));
   parameter Boolean ConTec=true
     "Is condensing technology used and should latent heat be considered?"
     annotation (Dialog(tab="Advanced", group="Latent heat use"));
@@ -145,7 +153,7 @@ public
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit_EASY
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_PowerUnit_EASY2504
     cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
@@ -165,7 +173,7 @@ public
     redeclare package Medium_Coolant = Medium_Coolant,
     GCooExhHex=GCooExhHex,
     CExhHex=CExhHex,
-    inductionMachine(J_Gen=1),
+    inductionMachine(J_Gen=1, s_til=0.18),
     dInn=dInn,
     GEngToAmb=GEngToAmb,
     GAmb=GAmb,
@@ -173,7 +181,7 @@ public
     s_til=s_til)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
 
-  AixLib.Fluid.HeatExchangers.ConstantEffectiveness coolantHex(
+  AixLib.Fluid.HeatExchangers.DynamicHX             coolantHex(
     allowFlowReversal1=allowFlowReversalCoolant,
     allowFlowReversal2=allowFlowReversalCoolant,
     m2_flow_nominal=CHPEngineModel.m_floCooNominal,
@@ -182,9 +190,14 @@ public
     redeclare package Medium1 = Medium_Coolant,
     m1_flow_nominal=m_flow_Coo,
     redeclare package Medium2 = Medium_HeatingCircuit,
-    dp1_nominal(displayUnit="kPa") = 10000,
-    dp2_nominal(displayUnit="kPa") = 10000,
-    eps=0.9) annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
+    dp1_nominal(displayUnit="kPa") = 0,
+    dp2_nominal(displayUnit="kPa") = 0,
+    nNodes=1,
+    Q_nom=CHPEngineModel.Q_MaxHea,
+    dT_nom=dT_nominal,
+    Gc1=GCooHex,
+    Gc2=coolantHex.Gc1)
+             annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort temRetFlo(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
@@ -196,10 +209,11 @@ public
     redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_ControllerEasy
-    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600,
-    modTab=modTab)                                                  annotation (
-     Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_Controller ControllerCHP(
+    CHPEngineModel=CHPEngineModel,
+    startTimeChp=3600,
+    modTab=modTab) annotation (Placement(transformation(rotation=0, extent={{-76,
+            64},{-44,96}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_retHea(redeclare package Medium =
         Medium_Coolant)
@@ -309,4 +323,4 @@ CHP"),  Rectangle(
 <h4>Limitations:</h4>
 <p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
 </html>"));
-end ModularCHP_EASY;
+end ModularCHP_DynamicHX_EASY_2504;

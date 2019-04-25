@@ -1,8 +1,8 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model GasolineEngineChp_NewBuild
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model GasolineEngineChp2504
   "Thermal and mechanical model of an internal combustion engine with consideration of the individual mass flows"
   import AixLib;
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineModel
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.GasolineEngineChp_EngineModel2504
     cHPCombustionEngine(
     redeclare package Medium1 = Medium_Fuel,
     redeclare package Medium2 = Medium_Air,
@@ -10,9 +10,10 @@ model GasolineEngineChp_NewBuild
     T_Amb=T_amb,
     CHPEngData=CHPEngineModel,
     inertia(phi(fixed=false), w(fixed=false, displayUnit="rad/s")),
-    SwitchOnOff=cHPEngBus.isOn,
     T_logEngCool=T_logEngCoo,
-    T_ExhCHPOut=T_ExhCHPOut)
+    T_ExhCHPOut=T_ExhCHPOut,
+    modFac=modFac,
+    SwitchOnOff=cHPEngBus.isOn)
     annotation (Placement(transformation(extent={{-30,0},{30,56}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing
     engineToCoolant(
@@ -34,8 +35,8 @@ model GasolineEngineChp_NewBuild
     EngMatData=EngMat,
     mEng=mEng,
     dInn=dInn,
-    GEngToAmb=GEngToAmb,
-    T_ExhPowUniOut=T_ExhCHPOut)
+    T_ExhPowUniOut=T_ExhCHPOut,
+    GEngToAmb=GEngToAmb)
     "A physikal model for calculating the thermal, mass and mechanical output of an ice powered CHP"
     annotation (Placement(transformation(extent={{-22,-52},{22,-8}})));
   replaceable package Medium_Fuel =
@@ -72,24 +73,17 @@ parameter Modelica.SIunits.Thickness dInn=0.005
   parameter Modelica.SIunits.ThermalConductance GEngToAmb=0.23
     "Thermal conductance from engine housing to the surrounding air"
     annotation (Dialog(tab="Engine Cooling Circle"));
-
-  Modelica.SIunits.Temperature meaTemInEng=cHPEngBus.meaTemInEng
-    "Measured coolant temperature at engines' inlets";
-  Modelica.SIunits.Temperature meaTemOutEng=cHPEngBus.meaTemInEng
-    "Measured coolant temperature at engines' outlets";
-  Modelica.SIunits.Temperature meaTemExhHexOut=cHPEngBus.meaTemExhHexOut
-    "Measured exhaust gas temperatures at exhaust heat exchangers' outlets";
-  Modelica.SIunits.Temperature T_logEngCoo=(meaTemInEng+meaTemOutEng)/2 "Logarithmic mean temperature of coolant inside the engine"
+  Real modFac=cHPEngBus.modFac
+    "Modulation factor for energy outuput control of the Chp unit  "
     annotation (Dialog(group="Engine Parameters"));
-  /*Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut "Exhaust gas outlet temperature of CHP unit"
+  Modelica.SIunits.Temperature T_logEngCoo=(cHPEngBus.meaTemInEng + cHPEngBus.meaTemOutEng)
+      /2 "Logarithmic mean temperature of coolant inside the engine"
     annotation (Dialog(group="Engine Parameters"));
-  Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Calculated mean temperature of the exhaust gas inside the cylinders"
-    annotation (Dialog(group="Thermal"));*/
-  Modelica.SIunits.Temperature T_ExhCHPOut=293.15                    "Exhaust gas outlet temperature of CHP unit"
+  Modelica.SIunits.Temperature T_ExhCHPOut=cHPEngBus.meaTemExhHexOut
+    "Exhaust gas outlet temperature of CHP unit"
     annotation (Dialog(group="Engine Parameters"));
   Modelica.SIunits.Temperature T_Exh=engineToCoolant.T_Exh "Calculated mean temperature of the exhaust gas inside the cylinders"
     annotation (Dialog(group="Thermal"));
-
 
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_eng annotation (
       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
@@ -139,4 +133,4 @@ equation
 <p>Model of a combustion engine combined from the thermal and mechanical engine model. #</p>
 <p>Together with the submodels cooling circuit, exhaust gas heat exchanger and electric motor, it can be connected to form the power unit of a combined heat and power unit.</p>
 </html>"));
-end GasolineEngineChp_NewBuild;
+end GasolineEngineChp2504;

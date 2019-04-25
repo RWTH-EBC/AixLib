@@ -155,6 +155,27 @@ model GasolineEngineChp_EngineModel
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={0,-70})));
+  AixLib.Controls.Interfaces.CHPControlBus cHPEngineBus
+    annotation (Placement(transformation(extent={{-20,76},{20,116}})));
+  Modelica.Blocks.Sources.RealExpression engineSpeed(y=nEng)
+    annotation (Placement(transformation(extent={{-42,66},{-22,86}})));
+  Modelica.Blocks.Sources.RealExpression fuelPower(y=P_Fue)
+    annotation (Placement(transformation(extent={{-42,52},{-22,72}})));
+  Modelica.Blocks.Sources.RealExpression thermalPower(y=Q_therm)
+    annotation (Placement(transformation(extent={{-42,38},{-22,58}})));
+  Modelica.Blocks.Sources.RealExpression outputTorque(y=Mmot)
+    annotation (Placement(transformation(extent={{42,24},{22,44}})));
+  Modelica.Blocks.Sources.RealExpression airFlow(y=m_flow_Fue)
+    annotation (Placement(transformation(extent={{42,52},{22,72}})));
+  Modelica.Blocks.Sources.RealExpression carbondioxideFlow(y=m_flow_CO2Exh)
+    annotation (Placement(transformation(extent={{42,66},{22,86}})));
+  Modelica.Blocks.Sources.RealExpression SpecificHeatCapExhGas(y=meanCpExh)
+    annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={-32,34})));
+  Modelica.Blocks.Sources.RealExpression fuelFlow(y=m_flow_Air)
+    annotation (Placement(transformation(extent={{42,38},{22,58}})));
 equation
 
 for i in 1:size(n_ComExh, 1) loop
@@ -209,6 +230,22 @@ for i in 1:size(n_ComExh, 1) loop
   connect(engineTorque.tau, effectiveMechanicalTorque.y) annotation (Line(
         points={{-18,-1.55431e-015},{-12,-1.55431e-015},{-12,0},{-7.2,0}},
         color={0,0,127}));
+  connect(engineSpeed.y, cHPEngineBus.meaRotEng)
+    annotation (Line(points={{-21,76},{0.1,76},{0.1,96.1}}, color={0,0,127}));
+  connect(fuelPower.y, cHPEngineBus.meaFuePowEng)
+    annotation (Line(points={{-21,62},{0.1,62},{0.1,96.1}}, color={0,0,127}));
+  connect(thermalPower.y, cHPEngineBus.meaThePowEng)
+    annotation (Line(points={{-21,48},{0.1,48},{0.1,96.1}}, color={0,0,127}));
+  connect(SpecificHeatCapExhGas.y, cHPEngineBus.calMeaCpExh)
+    annotation (Line(points={{-21,34},{0.1,34},{0.1,96.1}}, color={0,0,127}));
+  connect(carbondioxideFlow.y, cHPEngineBus.meaMasFloCO2Eng)
+    annotation (Line(points={{21,76},{0.1,76},{0.1,96.1}}, color={0,0,127}));
+  connect(airFlow.y, cHPEngineBus.meaMasFloAirEng)
+    annotation (Line(points={{21,62},{0.1,62},{0.1,96.1}}, color={0,0,127}));
+  connect(outputTorque.y, cHPEngineBus.meaTorEng)
+    annotation (Line(points={{21,34},{0.1,34},{0.1,96.1}}, color={0,0,127}));
+  connect(fuelFlow.y, cHPEngineBus.meaMasFloFueEng)
+    annotation (Line(points={{21,48},{0.1,48},{0.1,96.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-120,-134},{122,134}}, fileName=
               "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png"),

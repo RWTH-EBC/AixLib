@@ -98,15 +98,8 @@ parameter Modelica.SIunits.Thickness dInn=0.005
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_cooCir annotation (
      Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
         iconTransformation(extent={{90,-98},{110,-78}})));
-  AixLib.Controls.Interfaces.CHPControlBus cHPEngBus(
-    meaRotEng=cHPCombustionEngine.nEng,
-    meaFuePowEng=cHPCombustionEngine.P_Fue,
-    meaThePowEng=cHPCombustionEngine.Q_therm,
-    meaTorEng=cHPCombustionEngine.Mmot,
-    meaMasFloFueEng=cHPCombustionEngine.m_flow_Fue,
-    meaMasFloAirEng=cHPCombustionEngine.m_flow_Air,
-    meaMasFloCO2Eng=cHPCombustionEngine.m_flow_CO2Exh,
-    calMeaCpExh=cHPCombustionEngine.meanCpExh) annotation (Placement(
+  AixLib.Controls.Interfaces.CHPControlBus cHPEngBus
+                                               annotation (Placement(
         transformation(
         extent={{-30,-32},{30,32}},
         rotation=0,
@@ -126,6 +119,10 @@ equation
     annotation (Line(points={{0,-3.16},{0,8.4}}, color={0,0,127}));
   connect(cHPCombustionEngine.flange_a, flange_eng) annotation (Line(points={
           {-30,28},{-64,28},{-64,4},{-104,4}}, color={0,0,0}));
+  connect(cHPEngBus, cHPCombustionEngine.cHPEngineBus) annotation (Line(
+      points={{0,92},{0,54.88}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(graphics={
           Bitmap(extent={{-136,-134},{144,160}}, fileName=
               "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png")}),

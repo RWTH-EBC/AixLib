@@ -1,12 +1,7 @@
 ModularCHP_PowerUnit
-ModularCHP_PowerUnit_EASY
-ModularCHP_PowerUnit_EASY_Experimental
 Submodel_Cooling
-Submodel_CoolingEASY
 GasolineEngineChp
 CHP_ElectricMachine
 ExhaustHeatExchanger
-ExhaustHeatExchanger_EXPERIMENTL
-OnOff_ControllerEasy
+OnOff_Controller
 BaseClassComponents
-Examples

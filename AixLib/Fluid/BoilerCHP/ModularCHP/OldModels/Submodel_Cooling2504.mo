@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model Submodel_Cooling
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model Submodel_Cooling2504
   import AixLib;
   Modelica.Fluid.Sensors.TemperatureTwoPort senTCooEngIn(
     redeclare package Medium = Medium_Coolant,
@@ -50,6 +50,9 @@ model Submodel_Cooling
     "Thermal conductance of engine housing from the cylinder wall to the water cooling channels"
     annotation (Dialog(tab="Engine Cooling Circle", group=
           "Calibration Parameters"));
+  parameter Modelica.SIunits.Temperature T_HeaRet=303.15
+    "Constant heating circuit return temperature"
+    annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
@@ -66,7 +69,8 @@ model Submodel_Cooling
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium_Coolant) annotation (Placement(transformation(rotation=0, extent=
            {{90,-10},{110,10}})));
-  AixLib.Controls.Interfaces.CHPControlBus sigBus_coo annotation (Placement(
+  AixLib.Controls.Interfaces.CHPControlBus sigBus_coo(meaTemInEng=
+        senTCooEngIn.T, meaTemOutEng=senTCooEngOut.T) annotation (Placement(
         transformation(extent={{-28,26},{28,80}}), iconTransformation(extent=
             {{-28,26},{30,82}})));
   Movers.FlowControlled_m_flow                coolantPump(
@@ -75,18 +79,19 @@ model Submodel_Cooling
     dp_nominal=CHPEngineModel.dp_Coo,
     allowFlowReversal=allowFlowReversalCoolant,
     addPowerToMedium=false,
-    m_flow_nominal=m_flow,
-    use_inputFilter=false)
-    annotation (Placement(transformation(extent={{-30,-12},{-10,12}})));
-  AixLib.Utilities.Logical.SmoothSwitch switch1 annotation (Placement(
-        transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-30,34})));
-  Modelica.Blocks.Sources.RealExpression massFlowPump(y=m_flow)
-    annotation (Placement(transformation(extent={{-66,32},{-46,52}})));
-  Modelica.Blocks.Sources.RealExpression minMassFlowPump(y=mCool_flow_small)
-    annotation (Placement(transformation(extent={{-66,14},{-46,34}})));
+    m_flow_nominal=m_flow)
+    annotation (Placement(transformation(extent={{-30,12},{-10,-12}})));
+  Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
+    nPorts=1,
+    redeclare package Medium = Medium_Coolant,
+    T(displayUnit="K") = T_HeaRet,
+    p=300000)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-80,-40})));
+  Modelica.Blocks.Sources.RealExpression massFlowCoolant(y=if sigBus_coo.isOnPump
+         then m_flow else mCool_flow_small)
+    annotation (Placement(transformation(extent={{12,-50},{-8,-30}})));
 equation
   connect(engineHeatTransfer.port_b, senTCooEngOut.port_a)
     annotation (Line(points={{32.48,0},{50,0}},     color={0,127,255}));
@@ -100,20 +105,10 @@ equation
     annotation (Line(points={{-50,0},{-30,0}}, color={0,127,255}));
   connect(engineHeatTransfer.port_a, coolantPump.port_b)
     annotation (Line(points={{7.52,0},{-10,0}}, color={0,127,255}));
-  connect(switch1.y, coolantPump.m_flow_in) annotation (Line(points={{-23.4,
-          34},{-20,34},{-20,14.4}}, color={0,0,127}));
-  connect(sigBus_coo.isOnPump, switch1.u2) annotation (Line(
-      points={{0.14,53.135},{-72,53.135},{-72,34},{-37.2,34}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(massFlowPump.y, switch1.u1) annotation (Line(points={{-45,42},{-42,42},
-          {-42,38.8},{-37.2,38.8}},     color={0,0,127}));
-  connect(minMassFlowPump.y, switch1.u3) annotation (Line(points={{-45,24},{-42,
-          24},{-42,29.2},{-37.2,29.2}},     color={0,0,127}));
-  connect(senTCooEngIn.T, sigBus_coo.meaTemInEng) annotation (Line(points={{-60,
-          11},{-60,16},{-82,16},{-82,53.135},{0.14,53.135}}, color={0,0,127}));
-  connect(senTCooEngOut.T, sigBus_coo.meaTemOutEng) annotation (Line(points={{
-          60,11},{60,53.135},{0.14,53.135}}, color={0,0,127}));
+  connect(massFlowCoolant.y, coolantPump.m_flow_in) annotation (Line(points={{-9,
+          -40},{-20,-40},{-20,-14.4}}, color={0,0,127}));
+  connect(fixedPressureLevel.ports[1], senTCooEngIn.port_a)
+    annotation (Line(points={{-80,-30},{-80,0},{-70,0}}, color={0,127,255}));
   annotation (Icon(graphics={    Text(
           extent={{-151,113},{149,73}},
           lineColor={0,0,255},
@@ -163,4 +158,4 @@ equation
 <h4>Assumptions:</h4>
 <p>The pressure level within the cooling circuit is assumed to be constant at about 3 bar.</p>
 </html>"));
-end Submodel_Cooling;
+end Submodel_Cooling2504;

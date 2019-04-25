@@ -130,21 +130,6 @@ public
   parameter Boolean useGenHea=true
     "Is the thermal loss energy of the elctric machine used?"
     annotation (Dialog(tab="Advanced", group="Generator heat use"));
-  parameter Boolean allowFlowReversalExhaust=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for exhaust medium"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Boolean allowFlowReversalCoolant=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
-    mExh_flow_small=0.001
-    "Small exhaust mass flow rate for regularization of zero flow"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
-    mCool_flow_small=0.005
-    "Small coolant mass flow rate for regularization of zero flow"
-    annotation (Dialog(tab="Advanced", group="Assumptions"));
-
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit
     cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
@@ -172,6 +157,20 @@ public
     calFac=calFac,
     s_til=s_til)
     annotation (Placement(transformation(extent={{-24,0},{24,48}})));
+  parameter Boolean allowFlowReversalExhaust=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for exhaust medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Boolean allowFlowReversalCoolant=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mExh_flow_small=0.001
+    "Small exhaust mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+    mCool_flow_small=0.005
+    "Small coolant mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced", group="Assumptions"));
 
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness coolantHex(
     allowFlowReversal1=allowFlowReversalCoolant,
@@ -196,10 +195,11 @@ public
     redeclare package Medium = Medium_HeatingCircuit)
     annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_ControllerEasy
-    ControllerCHP(CHPEngineModel=CHPEngineModel, startTimeChp=3600,
-    modTab=modTab)                                                  annotation (
-     Placement(transformation(rotation=0, extent={{-76,64},{-44,96}})));
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.OnOff_Controller ControllerCHP(
+    CHPEngineModel=CHPEngineModel,
+    startTimeChp=3600,
+    modTab=modTab) annotation (Placement(transformation(rotation=0, extent={{-76,
+            64},{-44,96}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_retHea(redeclare package Medium =
         Medium_Coolant)
@@ -208,13 +208,21 @@ public
         Medium_Coolant)
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
+  Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
+    nPorts=1,
+    redeclare package Medium = Medium_Coolant,
+    T(displayUnit="K"),
+    p=300000)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-74,-20})));
 equation
   connect(coolantHex.port_a2, temRetFlo.port_b)
     annotation (Line(points={{-20,-64},{-42,-64}}, color={0,127,255}));
   connect(coolantHex.port_b2, temSupFlo.port_a)
     annotation (Line(points={{20,-64},{42,-64}}, color={0,127,255}));
   connect(ControllerCHP.modCHPConBus, cHP_PowerUnit.sigBusCHP) annotation (Line(
-      points={{-44,80},{-0.24,80},{-0.24,46.32}},
+      points={{-44,80},{0.24,80},{0.24,46.32}},
       color={255,204,51},
       thickness=0.5));
   connect(coolantHex.port_b1,cHP_PowerUnit.port_retCoo)  annotation (Line(
@@ -226,6 +234,9 @@ equation
           -64},{90,0},{100,0}}, color={0,127,255}));
   connect(port_retHea, temRetFlo.port_a) annotation (Line(points={{-100,0},{-90,
           0},{-90,-64},{-58,-64}}, color={0,127,255}));
+  connect(fixedPressureLevel.ports[1], cHP_PowerUnit.port_retCoo) annotation (
+      Line(points={{-64,-20},{-60,-20},{-60,10.08},{-19.2,10.08}}, color={0,127,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},

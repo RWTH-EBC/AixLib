@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
-model GasolineEngineChp_EngineModel_Build
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model GasolineEngineChp_EngineModel2504
   "Internal combustion engine model for CHP-applications."
   import AixLib;
 
@@ -100,13 +100,16 @@ model GasolineEngineChp_EngineModel_Build
   Modelica.SIunits.Power CalQ_therm "Calculated heat from engine combustion";
   Modelica.SIunits.Power Q_therm(min=0) "Total heat from engine combustion";
   Modelica.SIunits.Torque Mmot "Calculated engine torque";
-  Modelica.SIunits.Temperature T_logEngCool=calculateMeanTemp.y
-                                                   "Logarithmic mean temperature of coolant inside the engine";
+  Modelica.SIunits.Temperature T_logEngCool=356.15 "Logarithmic mean temperature of coolant inside the engine"
+  annotation(Dialog(group="Parameters"));
   Modelica.SIunits.Temperature T_Com(start=T_Amb) "Temperature of the combustion gases";
-
+  Modelica.SIunits.Temperature T_ExhCHPOut=383.15 "Exhaust gas outlet temperature of CHP unit"
+  annotation(Dialog(group="Parameters"));
+  Real modFac=1 "Modulation factor for energy outuput control of the Chp unit"
+    annotation (Dialog(group="Modulation"));
 
   // Dynamic engine friction calculation model for the mechanical power and heat output of the combustion engine
-  Real modFac = cHPControlBus.modFac;
+
   Real A0 = 1.0895-1.079*10^(-2)*(T_logEngCool-273.15)+5.525*10^(-5)*(T_logEngCool-273.15)^2;
   Real A1 = 4.68*10^(-4)-5.904*10^(-6)*(T_logEngCool-273.15)+1.88*10^(-8)*(T_logEngCool-273.15)^2;
   Real A2 = -4.35*10^(-8)+1.12*10^(-9)*(T_logEngCool-273.15)-4.79*10^(-12)*(T_logEngCool-273.15)^2;
@@ -152,21 +155,6 @@ model GasolineEngineChp_EngineModel_Build
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={0,-70})));
-  AixLib.Controls.Interfaces.CHPControlBus cHPControlBus
-    annotation (Placement(transformation(extent={{-20,72},{20,112}})));
-  Modelica.Blocks.Math.Add calculateMeanTemp(k1=0.5, k2=0.5) annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={0,54})));
-  Modelica.Blocks.Interfaces.RealInput T_ExhCHPOut annotation (Placement(
-        transformation(
-        extent={{18,-18},{-18,18}},
-        rotation=90,
-        origin={-30,120}), iconTransformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
-        origin={-38,112})));
 equation
 
 for i in 1:size(n_ComExh, 1) loop
@@ -221,14 +209,6 @@ for i in 1:size(n_ComExh, 1) loop
   connect(engineTorque.tau, effectiveMechanicalTorque.y) annotation (Line(
         points={{-18,-1.55431e-015},{-12,-1.55431e-015},{-12,0},{-7.2,0}},
         color={0,0,127}));
-  connect(cHPControlBus.meaTemInEng, calculateMeanTemp.u2) annotation (Line(
-      points={{0.1,92.1},{0.1,76},{-6,76},{-6,66}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(cHPControlBus.meaTemOutEng, calculateMeanTemp.u1) annotation (Line(
-      points={{0.1,92.1},{0.1,76},{6,76},{6,66}},
-      color={255,204,51},
-      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-120,-134},{122,134}}, fileName=
               "modelica://AixLib/Resources/Images/Fluid/BoilerCHP/Icon_ICE.png"),
@@ -259,4 +239,4 @@ for i in 1:size(n_ComExh, 1) loop
 <p>-&gt; Consideration of the chemical and thermal proportions of the enthalpy</p>
 <p>-&gt; Limited accuracy for diesel engine (non-premixed) processes</p>
 </html>"));
-end GasolineEngineChp_EngineModel_Build;
+end GasolineEngineChp_EngineModel2504;

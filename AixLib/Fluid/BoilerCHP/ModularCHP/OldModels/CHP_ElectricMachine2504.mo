@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model CHP_ElectricMachine
+within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model CHP_ElectricMachine2504
   "Model of a general induction machine working as a starter generator"
   import AixLib;
   extends Modelica.Electrical.Machines.Icons.TransientMachine;
@@ -92,7 +92,7 @@ public
     "Operation of electric machine (true=On, false=Off)";
   Modelica.Mechanics.Rotational.Components.Inertia inertia(       w(fixed=false), J=J_Gen)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Modelica.Blocks.Sources.RealExpression electricTorque1(y=M)
+  Modelica.Blocks.Sources.RealExpression electricTorque(y=M)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
@@ -103,22 +103,17 @@ public
       ratio=gearRatio)
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
-  AixLib.Controls.Interfaces.CHPControlBus cHPGenBus
-                   annotation (Placement(transformation(extent={{-72,28},{-132,
+  AixLib.Controls.Interfaces.CHPControlBus cHPGenBus(
+    meaElPowGen=P_E,
+    meaCurGen=I_1,
+    meaTorGen=M,
+    calEtaGen=eta,
+    calThePowGen=Q_Therm)
+                   annotation (Placement(transformation(extent={{-132,28},{-72,
             84}}), iconTransformation(
         extent={{-30,-28},{30,28}},
         rotation=90,
         origin={-76,0})));
-  Modelica.Blocks.Sources.RealExpression electricCurrent(y=I_1)
-    annotation (Placement(transformation(extent={{-36,18},{-56,38}})));
-  Modelica.Blocks.Sources.RealExpression electricTorque2(y=M)
-    annotation (Placement(transformation(extent={{-36,32},{-56,52}})));
-  Modelica.Blocks.Sources.RealExpression electricPower(y=P_E)
-    annotation (Placement(transformation(extent={{-36,46},{-56,66}})));
-  Modelica.Blocks.Sources.RealExpression generatorHeatLoss(y=Q_Therm)
-    annotation (Placement(transformation(extent={{-36,74},{-56,94}})));
-  Modelica.Blocks.Sources.RealExpression generatorEfficiency(y=eta)
-    annotation (Placement(transformation(extent={{-36,60},{-56,80}})));
 equation
 
 if noEvent(SwitchOnOff) then
@@ -143,7 +138,7 @@ else
 
   end if;
 
-  connect(electricTorque1.y, torque.tau)
+  connect(electricTorque.y, torque.tau)
     annotation (Line(points={{-39,0},{-22,0}}, color={0,0,127}));
   connect(torque.flange, inertia.flange_a)
     annotation (Line(points={{0,0},{20,0}}, color={0,0,0}));
@@ -151,16 +146,6 @@ else
     annotation (Line(points={{40,0},{60,0}}, color={0,0,0}));
   connect(gearEngineToGenerator.flange_a, flange_genIn)
     annotation (Line(points={{80,0},{100,0}}, color={0,0,0}));
-  connect(generatorHeatLoss.y, cHPGenBus.calThePowGen) annotation (Line(points=
-          {{-57,84},{-80,84},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
-  connect(electricPower.y, cHPGenBus.meaElPowGen) annotation (Line(points={{-57,
-          56},{-80,56},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
-  connect(electricTorque2.y, cHPGenBus.meaTorGen) annotation (Line(points={{-57,
-          42},{-80,42},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
-  connect(electricCurrent.y, cHPGenBus.meaCurGen) annotation (Line(points={{-57,
-          28},{-80,28},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
-  connect(generatorEfficiency.y, cHPGenBus.calEtaGen) annotation (Line(points={
-          {-57,70},{-80,70},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>Model of an electric induction machine that includes the calculation of:</p>
 <p>-&gt; mechanical output (torque and speed)</p>
@@ -182,4 +167,4 @@ else
           lineColor={28,108,200},
           textStyle={TextStyle.Bold},
           textString="%name")}));
-end CHP_ElectricMachine;
+end CHP_ElectricMachine2504;

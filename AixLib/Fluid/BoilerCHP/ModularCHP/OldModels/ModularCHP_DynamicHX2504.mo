@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.BoilerCHP.Examples;
-model ModularCHP_DynamicHX_EASY
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.OldModels;
+model ModularCHP_DynamicHX2504
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;
   import AixLib;
@@ -185,8 +185,8 @@ public
   Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flow_HeaCir)
     annotation (Placement(transformation(extent={{-144,4},{-124,24}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP_DynamicHX_EASY
-                                               cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.OldModels.ModularCHP_DynamicHX_Old_2504
+    cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
     EngMat=EngMat,
@@ -239,4 +239,4 @@ equation
 <p><br><br>Caution: </p>
 <p>If the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
 </html>"));
-end ModularCHP_DynamicHX_EASY;
+end ModularCHP_DynamicHX2504;
