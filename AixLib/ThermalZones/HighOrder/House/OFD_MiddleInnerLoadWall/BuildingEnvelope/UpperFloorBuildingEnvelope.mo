@@ -358,19 +358,19 @@ model UpperFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{100,-120},{120,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermBedroom
     annotation (Placement(transformation(extent={{-26,54},{-14,66}})));
-  Utilities.Interfaces.Star StarBedroom
+  AixLib.Utilities.Interfaces.RadPort StarBedroom
     annotation (Placement(transformation(extent={{-28,32},{-12,48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren1
     annotation (Placement(transformation(extent={{14,54},{26,66}})));
-  Utilities.Interfaces.Star StarChildren1
+  AixLib.Utilities.Interfaces.RadPort StarChildren1
     annotation (Placement(transformation(extent={{12,32},{28,48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermBath
     annotation (Placement(transformation(extent={{14,-46},{26,-34}})));
-  Utilities.Interfaces.Star StarBath
+  AixLib.Utilities.Interfaces.RadPort StarBath
     annotation (Placement(transformation(extent={{12,-68},{28,-52}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren2
     annotation (Placement(transformation(extent={{-26,-46},{-14,-34}})));
-  Utilities.Interfaces.Star StarChildren2
+  AixLib.Utilities.Interfaces.RadPort StarChildren2
     annotation (Placement(transformation(extent={{-28,-68},{-12,-52}})));
   Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k=0) "Storage"
     annotation (Placement(transformation(extent={{-116,-68},{-100,-52}})));

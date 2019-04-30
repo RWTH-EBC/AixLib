@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Attic_Ro2Lf5
   "Attic with 2 saddle roofs and a floor toward 5 rooms on the lower floor, with all other walls towards the outside"
-  import AixLib;
+
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
       group="Construction parameters",
@@ -326,8 +326,7 @@ model Attic_Ro2Lf5
     n50=n50,
     e=e,
     eps=eps) annotation (Placement(transformation(extent={{-62,0},{-46,16}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation (
-      Placement(transformation(
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
         extent={{-10,-8},{10,8}},
         rotation=90,
         origin={-30,-10})));
@@ -468,42 +467,25 @@ equation
           8},{-80,8},{-80,90},{-90,90}}, color={191,0,0}));
   connect(infiltrationRate.port_b, airload.port) annotation (Line(points={{-46,
           8},{-10,8},{-10,-12},{1,-12}}, color={191,0,0}));
-  connect(thermStar_Demux.therm, airload.port) annotation (Line(points={{-24.9,
-          0.1},{-24.9,8},{-10,8},{-10,-12},{1,-12}}, color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-24.9,0.1},{-24.9,8},{-10,8},{-10,-12},{1,-12}}, color={191,0,0}));
   connect(roof1.port_outside, thermOutside) annotation (Line(points={{-41,64.25},
           {-41,80},{-90,80},{-90,90}}, color={191,0,0}));
   connect(roof2.port_outside, thermOutside) annotation (Line(points={{47,64.25},
           {47,80},{-90,80},{-90,90}}, color={191,0,0}));
-  connect(floorRoom3.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{3,-38},{3,-28},{-30,-28},{-30,-19.4},{-29.9,-19.4}},
-        color={191,0,0}));
-  connect(floorRoom1.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-60,-38},{-60,-28},{-30,-28},{-30,-19.4},{-29.9,-19.4}},
-        color={191,0,0}));
-  connect(floorRoom2.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-29,-38},{-29,-28},{-29.9,-28},{-29.9,-19.4}},
-        color={191,0,0}));
-  connect(floorRoom4.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{35,-38},{35,-28},{-29.9,-28},{-29.9,-19.4}},
-        color={191,0,0}));
-  connect(floorRoom5.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{69,-38},{69,-28},{-29.9,-28},{-29.9,-19.4}},
-        color={191,0,0}));
-  connect(roof2.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{47,54},{47,40},{60,40},{60,-28},{-29.9,-28},{-29.9,
-          -19.4}}, color={191,0,0}));
-  connect(roof1.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-41,54},{-41,40},{60,40},{60,-28},{-29.9,-28},{
-          -29.9,-19.4}}, color={191,0,0}));
+  connect(floorRoom3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{3,-38},{3,-28},{-30,-28},{-30,-19.4},{-29.9,-19.4}}, color={191,0,0}));
+  connect(floorRoom1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-60,-38},{-60,-28},{-30,-28},{-30,-19.4},{-29.9,-19.4}}, color={191,0,0}));
+  connect(floorRoom2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-29,-38},{-29,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
+  connect(floorRoom4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{35,-38},{35,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
+  connect(floorRoom5.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{69,-38},{69,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
+  connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{47,54},{47,40},{60,40},{60,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
+  connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-41,54},{-41,40},{60,40},{60,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
   connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points=
           {{-63,19.6},{-80,19.6},{-80,17},{-100,17}}, color={0,0,127}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-64,
           26},{-80,26},{-80,90},{-90,90}}, color={191,0,0}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-44,
           26},{-40,26},{-40,8},{-10,8},{-10,-12},{1,-12}}, color={191,0,0}));
-  connect(OW1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation (
-      Line(points={{-71,-22},{-64,-22},{-64,-28},{-29.9,-28},{-29.9,-19.4}},
-        color={191,0,0}));
+  connect(OW1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-71,-22},{-64,-22},{-64,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
   connect(OW1.port_outside, thermOutside) annotation (Line(points={{-79.2,-22},
           {-86,-22},{-86,0},{-80,0},{-80,90},{-90,90}}, color={191,0,0}));
   connect(OW1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-79.2,-6.6},
@@ -511,9 +493,7 @@ equation
   connect(OW1.SolarRadiationPort, SolarRadiationPort_OW1) annotation (Line(
         points={{-80.2,-2.75},{-86,-2.75},{-86,-20},{-106,-20}}, color={255,128,
           0}));
-  connect(OW2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation (
-      Line(points={{81,-16},{76,-16},{76,-28},{-29.9,-28},{-29.9,-19.4}}, color=
-         {191,0,0}));
+  connect(OW2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{81,-16},{76,-16},{76,-28},{-29.9,-28},{-29.9,-19.4}}, color={191,0,0}));
   connect(OW2.port_outside, thermOutside) annotation (Line(points={{89.2,-16},{
           100,-16},{100,80},{-90,80},{-90,90}}, color={191,0,0}));
   connect(OW2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{89.2,-0.6},
