@@ -87,5 +87,12 @@ to engine"),
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
           textString="Q_Cyl",
-          fontSize=20)}));
+          fontSize=20)}), Documentation(revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
+</html>"));
 end GasolineEngineChp_EngineHousing_CylToInnerWall;

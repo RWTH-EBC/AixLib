@@ -163,5 +163,12 @@ equation
 <p>Depending on the unit configuration this model can be placed inside the cooling circuit before or after the fluid ports of the exhaust heat exchanger.</p>
 <h4>Assumptions:</h4>
 <p>The pressure level within the cooling circuit is assumed to be constant at about 3 bar.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
 </html>"));
 end Submodel_Cooling;

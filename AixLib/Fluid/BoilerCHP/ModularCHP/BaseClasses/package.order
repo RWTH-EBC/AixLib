@@ -3,5 +3,4 @@ Submodel_Cooling
 GasolineEngineChp
 CHP_ElectricMachine
 ExhaustHeatExchanger
-OnOff_Controller
 BaseClassComponents

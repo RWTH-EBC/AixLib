@@ -209,8 +209,10 @@ equation
   annotation (
     Documentation(revisions="<html>
 <ul>
-<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
 </ul>
 </html>
 ", info="<html>

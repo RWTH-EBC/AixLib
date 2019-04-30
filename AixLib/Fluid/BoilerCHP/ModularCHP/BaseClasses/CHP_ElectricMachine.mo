@@ -177,6 +177,13 @@ else
 <p><br>Additional Information:</p>
 <p><br>- Electric power calculation as a generator from mechanical input speed can be further approached by small changes to the speed.</p>
 <p>- The electric losses are calculated from the slip depending rotor loss which corresponds to roughly 22&percnt; of the total losses according to Almeida (DOI: 10.1109/MIAS.2010.939427).</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
 </html>"), Icon(graphics={
         Text(
           extent={{-86,98},{84,82}},

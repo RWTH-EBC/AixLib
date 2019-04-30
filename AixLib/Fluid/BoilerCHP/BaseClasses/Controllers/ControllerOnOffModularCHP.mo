@@ -1,5 +1,5 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model OnOff_Controller
+within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
+model ControllerOnOffModularCHP
 
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
@@ -79,5 +79,12 @@ CHP")}),
        Documentation(info="<html>
 <p>Model of an easy on-off-controller for the modular CHP model.</p>
 <p>It allows to manually modulate the load of the power unit. A modulation factor (modFac) of 0 indicates that the machine is not in operation.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
 </html>"));
-end OnOff_Controller;
+end ControllerOnOffModularCHP;

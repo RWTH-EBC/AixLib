@@ -70,5 +70,12 @@ package ModularCHP "Modular and complex CHP model with physical calculation appr
           points={{-4.5,-13.5},{0,-4},{6,-10},{2,-14},{-4.5,-13.5}},
           lineColor={255,255,170},
           fillColor={255,255,170},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
+</html>"));
 end ModularCHP;

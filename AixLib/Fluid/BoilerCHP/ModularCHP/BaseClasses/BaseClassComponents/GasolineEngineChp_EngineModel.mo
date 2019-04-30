@@ -252,6 +252,12 @@ for i in 1:size(n_ComExh, 1) loop
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
 </html>", info="<html>
 <p>The model of the internal combustion engine is the centrepiece of the BHKW model developed. It is divided into a thermal and a mechanical-chemical part.</p>
 <p>The energy balance of the combustion engine is used to determine the maximum heat released. The mechanical power is calculated using a mean value model, which is characterized by short calculation times and simple parameterization. An empirical approach is used to describe the specific enthalpy of the exhaust gas. The required mass flows of the combustion products are determined by assuming complete combustion with a known fuel composition. Various liquid and gaseous fuels have been implemented on the basis of the existing material models and are available to the user. </p>

@@ -131,5 +131,12 @@ equation
       Documentation(info="<html>
 <p>Model of a combustion engine combined from the thermal and mechanical engine model. #</p>
 <p>Together with the submodels cooling circuit, exhaust gas heat exchanger and electric motor, it can be connected to form the power unit of a combined heat and power unit.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+</li>
+</ul>
 </html>"));
 end GasolineEngineChp;
