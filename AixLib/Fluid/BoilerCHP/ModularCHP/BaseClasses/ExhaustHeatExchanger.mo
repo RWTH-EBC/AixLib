@@ -213,7 +213,6 @@ model ExhaustHeatExchanger
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
   AixLib.Fluid.FixedResistances.Pipe pipeCoolant(
     redeclare package Medium = Medium2,
-    p_b_start=system.p_start - 15000,
     isEmbedded=true,
     Heat_Loss_To_Ambient=true,
     withInsulation=false,
