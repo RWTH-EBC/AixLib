@@ -56,17 +56,17 @@ record Parameters "Record for parametrisation of simulation model"
   //**************************I N T E R N A L  G A I N S ************************
   // persons
   parameter Modelica.SIunits.Power heatLoadForActivity = 80 "Sensible heat output occupants for activity at 20°C" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
-  parameter Real occupationDensity = 0.2 "Density of occupants in persons/m2" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
+  parameter Real occupationDensity = 0.07 "Density of occupants in persons/m2" annotation(Dialog(group = "Internal gains", descriptionLabel = true));
   // lights
-  parameter Real spPelSurface_lights(unit = "W/m2") =  22 "specific Pel/m2 for type of light source" annotation(Dialog(group = "Internal gains",descriptionLabel = true));
+  parameter Real spPelSurface_lights(unit = "W/m2") =  10 "specific Pel/m2 for type of light source" annotation(Dialog(group = "Internal gains",descriptionLabel = true));
   //electrical appliances
-  parameter Real spPelSurface_elApp(unit = "W/m2") =  22 "specific Pel/m2 for type of el. appliances" annotation(Dialog(group = "Internal gains",descriptionLabel = true));
+  parameter Real spPelSurface_elApp(unit = "W/m2") =  14 "specific Pel/m2 for type of el. appliances" annotation(Dialog(group = "Internal gains",descriptionLabel = true));
 
     //**************************E N E R G Y   S Y S T E M ************************
   parameter Modelica.SIunits.Power Pmax_heater = 1000 "maximal power output heater" annotation(Dialog(group = "Energy system", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature Tset_heater = 293.15 "set temperature for heating" annotation(Dialog(group = "Energy system", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature Tset_heater = 294.15 "set temperature for heating" annotation(Dialog(group = "Energy system", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature Tout_isHeatOn = 288.15 "Touside under which heating is on" annotation(Dialog(group = "Energy system", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature Tset_chiller = 296.15 "set temperature for cooling" annotation(Dialog(group = "Energy system", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature Tset_chiller = 297.15 "set temperature for cooling" annotation(Dialog(group = "Energy system", descriptionLabel = true));
   parameter Modelica.SIunits.Power Pmax_chiller = 1000 "maximal power output chiller" annotation(Dialog(group = "Energy system", descriptionLabel = true));
 
   //**************************P R O F I L E S ************************
@@ -131,7 +131,7 @@ record Parameters "Record for parametrisation of simulation model"
   parameter Real coeffRadThermal_lights = 0.89 "coeff = Pth,rad/Pth for lights" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
   //electrical appliances
   parameter Real coeffThermal_elApp = 0.5 "coeff = Pth/Pel for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains",descriptionLabel = true));
-  parameter Real coeffRadThermal_elApp = 0.75 "coeff = Pth,rad/Pth for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
+  parameter Real coeffRadThermal_elApp = 0.78 "coeff = Pth,rad/Pth for el. appliances" annotation(Dialog(tab = "Advanced", group="Internal gains", descriptionLabel = true));
 
     //**************************E N E R G Y   S Y S T E M ************************
   parameter Boolean isEl_heater = true "is heater electrical? (heat pump)" annotation(Dialog(tab = "Advanced", group = "Energy system", descriptionLabel = true));

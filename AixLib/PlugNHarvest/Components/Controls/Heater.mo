@@ -2,13 +2,13 @@ within AixLib.PlugNHarvest.Components.Controls;
 model Heater "Controller heat generation"
   extends PlugNHarvest.Components.Controls.BaseClasses.PartialExternalControl;
   parameter Modelica.SIunits.Temperature Toutside_Threshold=16 + 273.15 "Heating limit";
-    parameter Modelica.SIunits.Temperature Troom_Threshold=19 + 273.15 "Threshold of the room temperature";
+    parameter Modelica.SIunits.Temperature Tset=19 + 273.15 "Threshold of the room temperature";
 
   Modelica.Blocks.Logical.And Checker
     annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
   Modelica.Blocks.Logical.LessThreshold    cooling(threshold=Toutside_Threshold)
     annotation (Placement(transformation(extent={{-52,-38},{-32,-18}})));
-  Modelica.Blocks.Sources.Constant const_setpoint(k=Troom_Threshold)
+  Modelica.Blocks.Sources.Constant const_setpoint(k=Tset)
     annotation (Placement(transformation(extent={{26,26},{46,46}})));
 equation
 

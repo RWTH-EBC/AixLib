@@ -80,7 +80,9 @@ model Test
     withSmartFacade=true,
     withMechVent=true,
     withPV=true,
-    withSolAirHeat=true)
+    withSolAirHeat=true,
+    Tset_heater=294.15,
+    Tset_chiller=297.15)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   BoundaryConditions.WeatherData.Bus weaBus "Bus with weather data"
     annotation (Placement(transformation(extent={{-38,38},{-18,58}})));
@@ -168,8 +170,9 @@ equation
   connect(gain.y, room_EnergySyst.Schedule_mechVent) annotation (Line(points={{
           36.4,-90},{100,-90},{100,0},{-18,0},{-18,33.7},{12.8,33.7}}, color={0,
           0,127}));
-  annotation (experiment(StopTime=86400, Interval=300), Documentation(revisions
-        ="<html>
+  annotation (experiment(StopTime=31536000, Interval=60),
+                                                        Documentation(revisions=
+         "<html>
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>

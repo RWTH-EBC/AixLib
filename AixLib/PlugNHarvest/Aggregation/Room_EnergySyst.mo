@@ -171,16 +171,17 @@ model Room_EnergySyst "Room and energy system"
   Components.EnergySystem.IdealHeaterCooler.HeaterCoolerPI_withPel
     heaterCoolerPI_withPel(
     h_heater=Pmax_heater,
-    h_cooler=Pmax_chiller,
     isEl_heater=isEl_heater,
     isEl_cooler=isEl_cooler,
     etaEl_heater=etaEl_heater,
-    etaEl_cooler=etaEl_cooler)
+    etaEl_cooler=etaEl_cooler,
+    h_cooler=0,
+    l_cooler=-Pmax_chiller)
     annotation (Placement(transformation(extent={{-36,-42},{10,2}})));
   Components.Controls.Cooler cooler(T_room_Threshold=Tset_chiller)
     annotation (Placement(transformation(extent={{-52,-88},{-24,-62}})));
-  Components.Controls.Heater heater(Toutside_Threshold=Tset_heater,
-      Troom_Threshold=Tout_isHeatOn)
+  Components.Controls.Heater heater(Toutside_Threshold=Tout_isHeatOn, Tset=
+        Tset_heater)
     annotation (Placement(transformation(extent={{-6,-90},{22,-62}})));
   AixLib.Utilities.Interfaces.SolarRad_in solRadPort_Facade1
     annotation (Placement(transformation(extent={{-104,78},{-84,98}})));
@@ -225,18 +226,6 @@ equation
   connect(heaterCoolerPI_withPel.heatCoolRoom, room_intGain.thermRoom)
     annotation (Line(points={{7.7,-28.8},{16,-28.8},{16,-36},{22,-36},{22,10},{
           -0.24,10},{-0.24,15.74}}, color={191,0,0}));
-  connect(cooler.ControlBus, heaterCoolerPI_withPel.ControlBus_idealHeater)
-    annotation (Line(
-      points={{-24.035,-72.075},{-24.035,-56},{-31.35,-56},{-31.35,-40.24},{
-          -23.35,-40.24}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(heater.ControlBus, heaterCoolerPI_withPel.ControlBus_idealCooler)
-    annotation (Line(
-      points={{21.965,-72.85},{26,-72.85},{26,-74},{32,-74},{32,-56},{-7.71,-56},
-          {-7.71,-39.8}},
-      color={255,204,51},
-      thickness=0.5));
   connect(room_intGain.solRadPort_Facade, solRadPort_Facade1) annotation (Line(
         points={{-28.14,66.2},{-60,66.2},{-60,88},{-94,88}}, color={255,128,0}));
   connect(room_intGain.Schedule_lights, Schedule_lights) annotation (Line(
@@ -281,6 +270,18 @@ equation
   connect(switchToNight.y, cooler.switchToNightMode) annotation (Line(points={{
           -33,-52},{-24,-52},{-24,-67.6875},{-51.93,-67.6875}}, color={255,0,
           255}));
+  connect(cooler.ControlBus, heaterCoolerPI_withPel.ControlBus_idealCooler)
+    annotation (Line(
+      points={{-24.035,-72.075},{-16,-72.075},{-16,-50},{-7.71,-50},{-7.71,
+          -39.8}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(heater.ControlBus, heaterCoolerPI_withPel.ControlBus_idealHeater)
+    annotation (Line(
+      points={{21.965,-72.85},{28,-72.85},{28,-50},{-23.35,-50},{-23.35,-40.24}},
+
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-76,-86},{82,84}}, fileName=
               "modelica://AixLib/Resources/Images/PnH/PnH_Logo.png")}),    Diagram(
