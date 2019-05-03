@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model WindowSimple "Window with radiation and U-Value"
   extends
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
@@ -37,12 +37,6 @@ model WindowSimple "Window with radiation and U-Value"
     final Uw=Uw,
     final n=1)
     annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
-    Therm(T(start=T0)),
-    Star(T(start=T0)),
-    final A=(1 - frameFraction)*windowarea,
-    final eps=WindowType.Emissivity)
-    annotation (Placement(transformation(extent={{30,50},{50,70}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(
     final G=windowarea*Uw)
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
@@ -56,8 +50,8 @@ equation
     annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   connect(Ag.y, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{-3.4,60},{2,60}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, twoStar_RadEx.Therm)
-    annotation (Line(points={{22,60},{30.8,60}}, color={191,0,0}));
+  connect(Star, prescribedHeatFlow.port)
+    annotation (Line(points={{90,60},{22,60}}, color={95,95,95}));
   connect(solarRad_in, corG.SR_input[1]) annotation (Line(points={{-90,60},{-70,
           60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
   connect(twoStar_RadEx.Star, Star)
@@ -139,6 +133,8 @@ equation
  <p><a href=\"AixLib.Building.Components.Examples.WindowsDoors.WindowSimple\">AixLib.Building.Components.Examples.WindowsDoors.WindowSimple</a></p>
  </html>", revisions="<html>
  <ul>
+ <li><i>November 2, 2018Mai 19, 2014&nbsp;</i> by Fabian Wüllhorst:<br/>Remove redundand twoStar_radEx from model. 
+This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br/>Implemented.</li>
