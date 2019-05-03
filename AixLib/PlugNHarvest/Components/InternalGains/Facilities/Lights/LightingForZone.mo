@@ -34,10 +34,9 @@ model LightingForZone
                                   RadiationConvertor(  A=max(1e-4, zoneArea/30.0), eps=
         emissivityLamp)
     annotation (Placement(transformation(extent={{70,-8},{90,12}})));
-  AixLib.Utilities.Interfaces.Star
-                            RadHeat "radiative heat connector" annotation(Placement(transformation(extent={{100,-8},
-            {120,12}}),                                                                                                               iconTransformation(extent={{80,2},{
-            100,22}})));
+  AixLib.Utilities.Interfaces.RadPort RadHeat "radiative heat connector"
+    annotation (Placement(transformation(extent={{100,-8},{120,12}}),
+        iconTransformation(extent={{80,2},{100,22}})));
 equation
   connect(Schedule, multiProduct.u[1])
     annotation (Line(points={{-100,0},{-16,0},{-16,0.8}}, color={0,0,127}));

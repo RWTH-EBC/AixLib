@@ -33,10 +33,9 @@ model ElAppliancesForZone
     "convective heat connector"                                                            annotation(Placement(transformation(extent={{80,60},
             {100,80}}),                                                                                                                                         iconTransformation(extent={{80,60},
             {100,80}})));
-  AixLib.Utilities.Interfaces.Star
-                            RadHeat "radiative heat connector" annotation(Placement(transformation(extent={{100,-8},
-            {120,12}}),                                                                                                               iconTransformation(extent={{80,2},{
-            100,22}})));
+  AixLib.Utilities.Interfaces.RadPort RadHeat "radiative heat connector"
+    annotation (Placement(transformation(extent={{100,-8},{120,12}}),
+        iconTransformation(extent={{80,2},{100,22}})));
 equation
   connect(AreaofZone.y,multiProduct. u[1]) annotation (Line(points={{-39,30},
           {-28,30},{-28,0.8},{-16,0.8}},

@@ -28,7 +28,7 @@ model Facilities
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat[2]
     "1- machines; 2 - lights" annotation (Placement(transformation(extent={{76,56},
             {102,82}}), iconTransformation(extent={{80,60},{100,80}})));
-  AixLib.Utilities.Interfaces.Star RadHeat[2] "1- machines; 2 - lights"
+  AixLib.Utilities.Interfaces.RadPort RadHeat[2] "1- machines; 2 - lights"
     annotation (Placement(transformation(extent={{80,20},{100,40}}),
         iconTransformation(extent={{80,20},{100,40}})));
   Modelica.Blocks.Interfaces.RealOutput Pel_elApp

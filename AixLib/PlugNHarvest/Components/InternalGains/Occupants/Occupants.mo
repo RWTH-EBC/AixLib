@@ -13,7 +13,7 @@ model Occupants
   AixLib.Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps=
         Emissivity_Human)
     annotation (Placement(transformation(extent={{48,-22},{72,2}})));
-  AixLib.Utilities.Interfaces.Star RadHeat
+  AixLib.Utilities.Interfaces.RadPort RadHeat
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)   annotation(Placement(transformation(extent = {{-24, 10}, {-4, 30}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC annotation(Placement(transformation(extent = {{-82, 46}, {-72, 56}})));

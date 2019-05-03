@@ -35,9 +35,11 @@ model Wall
     amplitude=0.3,
     offset=0.2)
     annotation (Placement(transformation(extent={{-64,-38},{-44,-18}})));
-  AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb
-                                               heatStarToComb annotation(Placement(transformation(extent={{7,-6},{
-            -7,6}},                                                                                                              rotation = 180, origin={13,-18})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb
+    annotation (Placement(transformation(
+        extent={{7,-6},{-7,6}},
+        rotation=180,
+        origin={13,-18})));
   Modelica.Blocks.Sources.Constant Solarradiation(k=0)
     annotation (Placement(transformation(extent={{-82,34},{-66,50}})));
   AixLib.Utilities.Sources.PrescribedSolarRad
@@ -51,10 +53,11 @@ equation
     annotation (Line(points={{21,84},{34,84},{34,22}}, color={0,0,127}));
   connect(fixedTemperature.port, vol.heatPort) annotation (Line(points={{20,50},
           {22,50},{22,14},{36,14}}, color={191,0,0}));
-  connect(wall.thermStarComb_inside, heatStarToComb.thermStarComb) annotation (
-      Line(points={{-4,11},{0,11},{0,-17.925},{6.42,-17.925}}, color={191,0,0}));
-  connect(heatStarToComb.therm, vol.heatPort) annotation (Line(points={{20.07,
-          -14.175},{36,-14.175},{36,14}}, color={191,0,0}));
+  connect(wall.thermStarComb_inside, heatStarToComb.portConvRadComb)
+    annotation (Line(points={{-4,11},{0,11},{0,-17.925},{6.42,-17.925}}, color=
+          {191,0,0}));
+  connect(heatStarToComb.portConv, vol.heatPort) annotation (Line(points={{
+          20.07,-14.175},{36,-14.175},{36,14}}, color={191,0,0}));
   connect(Solarradiation.y, varRad.AOI[1]) annotation (Line(points={{-65.2,42},
           {-60,42},{-60,46},{-56,46},{-56,45.3},{-53.1,45.3}}, color={0,0,127}));
   connect(Solarradiation.y, varRad.I_gr[1]) annotation (Line(points={{-65.2,42},
@@ -63,7 +66,7 @@ equation
           42},{-60,42},{-60,38.1},{-53.1,38.1}}, color={0,0,127}));
   connect(Solarradiation.y, varRad.I_dir[1]) annotation (Line(points={{-65.2,42},
           {-60,42},{-60,34.5},{-53.1,34.5}}, color={0,0,127}));
-  connect(Tinside2.port, heatStarToComb.star) annotation (Line(points={{26,-50},
+  connect(Tinside2.port, heatStarToComb.portRad) annotation (Line(points={{26,-50},
           {38,-50},{38,-22.35},{20.28,-22.35}}, color={191,0,0}));
   connect(weaDat.weaBus, wall.weaBus) annotation (Line(
       points={{-60,10},{-36,10},{-36,11},{-11.8,11}},

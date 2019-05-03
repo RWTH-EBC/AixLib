@@ -81,9 +81,10 @@ model Wall_withOpening
             {-96,99}}),                                                                                                                              iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside if heatflow annotation(Placement(transformation(extent={{-110,
             -50},{-90,-30}}),                                                                                                             iconTransformation(extent = {{-31, -10}, {-11, 10}})));
-  AixLib.Utilities.Interfaces.HeatStarComb
-                                    thermStarComb_inside if heatflow annotation(Placement(transformation(extent={{92,2},{
-            110,20}}),                                                                                                         iconTransformation(extent = {{10, -10}, {30, 10}})));
+  AixLib.Utilities.Interfaces.ConvRadComb thermStarComb_inside if
+                                                            heatflow
+    annotation (Placement(transformation(extent={{92,2},{110,20}}),
+        iconTransformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model == 1 or Model == 2 or massflow) annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
 
     // heatflow
@@ -121,8 +122,12 @@ model Wall_withOpening
             {13,4}})));
   AixLib.Utilities.HeatTransfer.HeatConv_outside
                                           heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside and heatflow annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
-  AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb
-                                               heatStarToComb if heatflow annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin={69,11})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb if
+                                                                 heatflow
+    annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=180,
+        origin={69,11})));
     replaceable model HeatBridge =
       PlugNHarvest.Components.Walls.HeatBridgeLinear constrainedby
     PlugNHarvest.Components.Walls.BaseClasses.PartialHeatBridgeWalls
@@ -168,12 +173,14 @@ equation
   //******************************************************************
   // **********************standard connection************************
   //******************************************************************
-  connect(Wall.Star, heatStarToComb.star) annotation(Line(points={{8,36.2},{48,36.2},
-            {48,16.8},{58.6,16.8}},                                                                               color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.therm) annotation(Line(points={{8,30},{48,
-            30},{48,5.9},{58.9,5.9}},                                                                                  color = {191, 0, 0}));
-  connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points={{78.4,
-          10.9},{101,11}},                                                                                                                    color = {191, 0, 0}));
+    connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
+        points={{8,36.2},{48,36.2},{48,16.8},{58.6,16.8}},
+        color={95,95,95},
+        pattern=LinePattern.Solid));
+    connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{8,
+            30},{48,30},{48,5.9},{58.9,5.9}}, color={191,0,0}));
+    connect(heatStarToComb.portConvRadComb, thermStarComb_inside)
+      annotation (Line(points={{78.4,10.9},{101,11}}, color={191,0,0}));
 
   //******************************************************************
   // **********************standard connection for inside wall********
@@ -205,19 +212,24 @@ equation
   if withDoor then
     connect(Door.port_a, port_outside) annotation(Line(points={{-13.4,-40},{
               -100,-40}},                                                                                                             color = {191, 0, 0}));
-    connect(Door.port_b, heatStarToComb.therm) annotation(Line(points={{15.4,-40},
-            {48,-40},{48,5.9},{58.9,5.9}},                                                                                 color = {191, 0, 0}));
-    connect(Door.Star, heatStarToComb.star) annotation(Line(points={{15.4,-30.4},
-            {48,-30.4},{48,16.8},{58.6,16.8}},                                                                            color = {95, 95, 95}, pattern = LinePattern.Solid));
+      connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{
+              15.4,-40},{48,-40},{48,5.9},{58.9,5.9}}, color={191,0,0}));
+      connect(Door.Star, heatStarToComb.portRad) annotation (Line(
+          points={{15.4,-30.4},{48,-30.4},{48,16.8},{58.6,16.8}},
+          color={95,95,95},
+          pattern=LinePattern.Solid));
   end if;
   //******************************************************************
   // ****standard connections for outside wall with window***********
   //******************************************************************
   if outside and withWindow then
-    connect(windowSimple.Star, heatStarToComb.star) annotation(Line(points={{11.7,
-            -1.2},{48,-1.2},{48,16.8},{58.6,16.8}},                                                                               color = {95, 95, 95}, pattern = LinePattern.Solid));
-    connect(windowSimple.port_inside, heatStarToComb.therm) annotation(Line(points={{11.7,
-            -10.3},{48,-10.3},{48,5.9},{58.9,5.9}},                                                                                         color = {191, 0, 0}));
+      connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
+          points={{11.7,-1.2},{48,-1.2},{48,16.8},{58.6,16.8}},
+          color={95,95,95},
+          pattern=LinePattern.Solid));
+      connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (
+          Line(points={{11.7,-10.3},{48,-10.3},{48,5.9},{58.9,5.9}}, color={191,
+              0,0}));
     connect(windowSimple.port_outside, port_outside) annotation(Line(points={{-11.7,
               -10.3},{-56,-10.3},{-56,-40},{-100,-40}},                                                                           color = {191, 0, 0}));
   end if;
@@ -239,8 +251,8 @@ equation
   end if;
 
   if withHeatBridge then
-  connect(heatBridge.port_b, heatStarToComb.therm) annotation (Line(points={{19.4,
-          58.6},{48,58.6},{48,5.9},{58.9,5.9}}, color={191,0,0}));
+      connect(heatBridge.port_b, heatStarToComb.portConv) annotation (Line(
+            points={{19.4,58.6},{48,58.6},{48,5.9},{58.9,5.9}}, color={191,0,0}));
   connect(heatBridge.port_a, port_outside) annotation (Line(points={{0.4,58.6},
               {-18,58.6},{-18,30},{-56,30},{-56,-40},{-100,-40}},
                                                            color={191,0,0}));
@@ -260,8 +272,8 @@ equation
               {-80,-90},{-80,-70},{-99.5,-70}}, color={0,127,255}));
     end if;
   end if;
-  connect(heatBridge.port_b, heatStarToComb.therm) annotation (Line(points={{19.4,
-          58.6},{48,58.6},{48,5.9},{58.9,5.9}}, color={191,0,0}));
+  connect(heatBridge.port_b, heatStarToComb.portConv) annotation (Line(points={
+          {19.4,58.6},{48,58.6},{48,5.9},{58.9,5.9}}, color={191,0,0}));
   connect(heatBridge.port_a, port_outside) annotation (Line(points={{0.4,58.6},
           {-18,58.6},{-18,30},{-56,30},{-56,-40},{-100,-40}},
                                                            color={191,0,0}));
