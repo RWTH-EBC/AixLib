@@ -51,6 +51,25 @@ model Room_EnergySyst "Room and energy system"
   parameter Modelica.SIunits.Power PelPV_max = 4000
     "Maximum output power for inverter" annotation(Dialog(group = "Smart Facade", enable = withPV));
 
+  parameter Modelica.SIunits.MassFlowRate MassFlowSetPoint=0.0306
+    "Mass Flow Set Point for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area CoverArea=1.2634
+    "Cover Area for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area InnerCrossSection=0.01181
+    "Channel Cross Section for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length Perimeter=1.348
+    "Perimeter for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength1=1.8
+    "Channel Length 1 for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength2=1.5
+    "Channel Length 2 for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.HeatCapacity AbsorberHeatCapacity=3950
+    "Absorber Heat Capacityfor solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.TransmissionCoefficient CoverTransmitance=0.84
+    "Cover Transmitance for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.ThermalConductance CoverConductance=3.2
+    "Cover Conductance for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+
 
   //**************************I N T E R N A L  G A I N S ************************
   // persons
@@ -166,7 +185,16 @@ model Room_EnergySyst "Room and energy system"
     coeffThermal_lights=coeffThermal_lights,
     coeffRadThermal_lights=coeffRadThermal_lights,
     coeffThermal_elApp=coeffThermal_elApp,
-    coeffRadThermal_elApp=coeffRadThermal_elApp)
+    coeffRadThermal_elApp=coeffRadThermal_elApp,
+    MassFlowSetPoint=MassFlowSetPoint,
+    CoverArea=CoverArea,
+    InnerCrossSection=InnerCrossSection,
+    Perimeter=Perimeter,
+    SAHLength1=SAHLength1,
+    SAHLength2=SAHLength2,
+    AbsorberHeatCapacity=AbsorberHeatCapacity,
+    CoverTransmitance=CoverTransmitance,
+    CoverConductance=CoverConductance)
     annotation (Placement(transformation(extent={{-30,14},{32,72}})));
   Components.EnergySystem.IdealHeaterCooler.HeaterCoolerPI_withPel
     heaterCoolerPI_withPel(
@@ -279,9 +307,9 @@ equation
   connect(heater.ControlBus, heaterCoolerPI_withPel.ControlBus_idealHeater)
     annotation (Line(
       points={{21.965,-72.85},{28,-72.85},{28,-50},{-23.35,-50},{-23.35,-40.24}},
-
       color={255,204,51},
       thickness=0.5));
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-76,-86},{82,84}}, fileName=
               "modelica://AixLib/Resources/Images/PnH/PnH_Logo.png")}),    Diagram(

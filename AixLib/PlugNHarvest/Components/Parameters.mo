@@ -52,6 +52,25 @@ record Parameters "Record for parametrisation of simulation model"
   parameter Modelica.SIunits.Power PelPV_max = 4000
     "Maximum output power for inverter" annotation(Dialog(group = "Smart Facade", enable = withPV));
 
+  parameter Modelica.SIunits.MassFlowRate MassFlowSetPoint=0.0306
+    "Mass Flow Set Point for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area CoverArea=1.2634
+    "Cover Area for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area InnerCrossSection=0.01181
+    "Channel Cross Section for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length Perimeter=1.348
+    "Perimeter for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength1=1.8
+    "Channel Length 1 for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength2=1.5
+    "Channel Length 2 for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.HeatCapacity AbsorberHeatCapacity=3950
+    "Absorber Heat Capacityfor solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.TransmissionCoefficient CoverTransmitance=0.84
+    "Cover Transmitance for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.ThermalConductance CoverConductance=3.2
+    "Cover Conductance for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+
 
   //**************************I N T E R N A L  G A I N S ************************
   // persons

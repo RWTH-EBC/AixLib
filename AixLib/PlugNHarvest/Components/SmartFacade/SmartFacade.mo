@@ -34,7 +34,16 @@ model SmartFacade
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}}),
         iconTransformation(extent={{-100,-60},{-80,-40}})));
 
-  sahaix                                     solarAirHeater if withSolAirHeat annotation (Placement(transformation(
+  sahaix                                     solarAirHeater(
+    MassFlowSetPoint=MassFlowSetPoint,
+    CoverArea=CoverArea,
+    InnerCrossSection=InnerCrossSection,
+    Perimeter=Perimeter,
+    SAHLength1=SAHLength1,
+    SAHLength2=SAHLength2,
+    AbsorberHeatCapacity=AbsorberHeatCapacity,
+    CoverTransmitance=CoverTransmitance,
+    CoverConductance=CoverConductance) if                      withSolAirHeat annotation (Placement(transformation(
         extent={{-21,-21},{21,21}},
         rotation=180,
         origin={-9,-55})));
@@ -53,6 +62,24 @@ model SmartFacade
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,-100})));
+  parameter Modelica.SIunits.MassFlowRate MassFlowSetPoint=0.0306
+    "Mass Flow Set Point for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area CoverArea=1.2634
+    "Cover Area for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area InnerCrossSection=0.01181
+    "Channel Cross Section for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length Perimeter=1.348
+    "Perimeter for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength1=1.8
+    "Channel Length 1 for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength2=1.5
+    "Channel Length 2 for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.HeatCapacity AbsorberHeatCapacity=3950
+    "Absorber Heat Capacityfor solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.TransmissionCoefficient CoverTransmitance=0.84
+    "Cover Transmitance for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
+  parameter Modelica.SIunits.ThermalConductance CoverConductance=3.2
+    "Cover Conductance for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
 equation
   if withMechVent then
     connect(weaBus, mechVent.weaBus) annotation (Line(

@@ -50,7 +50,16 @@ model Test
     isEl_cooler=parameters.isEl_cooler,
     etaEl_heater=parameters.etaEl_heater,
     etaEl_cooler=parameters.etaEl_cooler,
-    redeclare package AirModel = Media.Air)
+    redeclare package AirModel = Media.Air,
+    MassFlowSetPoint=parameters.MassFlowSetPoint,
+    CoverArea=parameters.CoverArea,
+    InnerCrossSection=parameters.InnerCrossSection,
+    Perimeter=parameters.Perimeter,
+    SAHLength1=parameters.SAHLength1,
+    SAHLength2=parameters.SAHLength2,
+    AbsorberHeatCapacity=parameters.AbsorberHeatCapacity,
+    CoverTransmitance=parameters.CoverTransmitance,
+    CoverConductance=parameters.CoverConductance)
     annotation (Placement(transformation(extent={{10,4},{66,58}})));
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(
     Wind_speed=true,
@@ -80,9 +89,7 @@ model Test
     withSmartFacade=true,
     withMechVent=true,
     withPV=true,
-    withSolAirHeat=true,
-    Tset_heater=294.15,
-    Tset_chiller=297.15)
+    withSolAirHeat=true)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   BoundaryConditions.WeatherData.Bus weaBus "Bus with weather data"
     annotation (Placement(transformation(extent={{-38,38},{-18,58}})));

@@ -45,11 +45,31 @@ model Room_intGain "Room with internal gains"
   parameter Boolean withPV = false "with photovoltaics" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
   //solar air heater
   parameter Boolean withSolAirHeat = false "with Solar Air Heater" annotation (Dialog( group = "Smart Facade", enable = withSmartFacade),choices(checkBox=true));
+
   parameter Integer NrPVpanels=5 "Number of panels" annotation(Dialog(group = "Smart Facade", enable = withPV));
   parameter AixLib.DataBase.SolarElectric.PVBaseRecord dataPV = AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181()
                                                                  "PV data set" annotation(Dialog(group = "Smart Facade", enable = withPV));
   parameter Modelica.SIunits.Power PelPV_max = 4000
     "Maximum output power for inverter" annotation(Dialog(group = "Smart Facade", enable = withPV));
+
+  parameter Modelica.SIunits.MassFlowRate MassFlowSetPoint=0.0306
+    "Mass Flow Set Point for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area CoverArea=1.2634
+    "Cover Area for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Area InnerCrossSection=0.01181
+    "Channel Cross Section for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length Perimeter=1.348
+    "Perimeter for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength1=1.8
+    "Channel Length 1 for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.Length SAHLength2=1.5
+    "Channel Length 2 for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.HeatCapacity AbsorberHeatCapacity=3950
+    "Absorber Heat Capacityfor solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.TransmissionCoefficient CoverTransmitance=0.84
+    "Cover Transmitance for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
+  parameter Modelica.SIunits.ThermalConductance CoverConductance=3.2
+    "Cover Conductance for solar air heater" annotation(Dialog(group = "Smart Facade", enable = withSolAirHeat));
 
   //**************************I N T E R N A L  G A I N S ************************
   // persons
@@ -141,7 +161,16 @@ model Room_intGain "Room with internal gains"
     PelPV_max=PelPV_max,
     withPV=true,
     withSmartFacade=withSmartFacade,
-    withMechVent=withMechVent)
+    withMechVent=withMechVent,
+    MassFlowSetPoint=MassFlowSetPoint,
+    CoverArea=CoverArea,
+    InnerCrossSection=InnerCrossSection,
+    Perimeter=Perimeter,
+    SAHLength1=SAHLength1,
+    SAHLength2=SAHLength2,
+    AbsorberHeatCapacity=AbsorberHeatCapacity,
+    CoverTransmitance=CoverTransmitance,
+    CoverConductance=CoverConductance)
     annotation (Placement(transformation(extent={{-24,16},{26,66}})));
   Components.InternalGains.Facilities.Facilities facilities(
     zoneArea=room_length*room_width,
