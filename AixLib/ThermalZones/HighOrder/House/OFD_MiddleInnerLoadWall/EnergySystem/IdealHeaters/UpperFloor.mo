@@ -2,13 +2,13 @@ within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.
 model UpperFloor
   parameter Real ratioRadHeat = 0.3
     "ratio of radiative heat from total heat generated";
-  Utilities.Interfaces.Star Rad_Bedroom annotation(Placement(transformation(extent = {{-149, 80}, {-129, 100}})));
+  AixLib.Utilities.Interfaces.RadPort Rad_Bedroom annotation(Placement(transformation(extent = {{-149, 80}, {-129, 100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Bedroom annotation(Placement(transformation(extent = {{-150, 49}, {-130, 69}})));
-  Utilities.Interfaces.Star Rad_Children2 annotation(Placement(transformation(extent = {{-149, -25}, {-129, -5}})));
+  AixLib.Utilities.Interfaces.RadPort Rad_Children2 annotation(Placement(transformation(extent = {{-149, -25}, {-129, -5}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Children2 annotation(Placement(transformation(extent = {{-151, -61}, {-131, -41}})));
-  Utilities.Interfaces.Star Rad_Children1 annotation(Placement(transformation(extent = {{127, 63}, {147, 83}})));
+  AixLib.Utilities.Interfaces.RadPort Rad_Children1 annotation(Placement(transformation(extent = {{127, 63}, {147, 83}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Chidlren1 annotation(Placement(transformation(extent = {{129, 40}, {149, 60}})));
-  Utilities.Interfaces.Star Rad_Bath annotation(Placement(transformation(extent = {{130, -50}, {150, -30}})));
+  AixLib.Utilities.Interfaces.RadPort Rad_Bath annotation(Placement(transformation(extent = {{130, -50}, {150, -30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Bath annotation(Placement(transformation(extent = {{129, -78}, {149, -58}})));
   Modelica.Blocks.Interfaces.RealInput TSet_UF[4] annotation(Placement(transformation(extent = {{-85, 82}, {-57, 112}}), iconTransformation(extent = {{-77, 90}, {-57, 112}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_bedroom annotation(Placement(transformation(extent = {{-119, -11}, {-107, 1}})));

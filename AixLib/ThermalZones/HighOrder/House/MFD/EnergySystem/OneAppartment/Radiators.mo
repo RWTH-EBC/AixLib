@@ -173,25 +173,19 @@ model Radiators
     redeclare package Medium = Medium,
     length=Length_toLi,
     diameter=Diam_Main)                "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
-  AixLib.Utilities.Interfaces.Star
-                          radLi
-    annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
+  AixLib.Utilities.Interfaces.RadPort radLi annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convLi
     annotation (Placement(transformation(extent={{-146,25},{-133,38}})));
-  AixLib.Utilities.Interfaces.Star radKi
-    annotation (Placement(transformation(extent={{-146,-50},{-129,-34}})));
+  AixLib.Utilities.Interfaces.RadPort radKi annotation (Placement(transformation(extent={{-146,-50},{-129,-34}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convKi
     annotation (Placement(transformation(extent={{-145,-66},{-131,-51}})));
-  AixLib.Utilities.Interfaces.Star radBe
-    annotation (Placement(transformation(extent={{128,88},{146,106}})));
+  AixLib.Utilities.Interfaces.RadPort radBe annotation (Placement(transformation(extent={{128,88},{146,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBe
     annotation (Placement(transformation(extent={{130,64},{146,82}})));
-  AixLib.Utilities.Interfaces.Star radCh
-    annotation (Placement(transformation(extent={{130,39},{150,59}})));
+  AixLib.Utilities.Interfaces.RadPort radCh annotation (Placement(transformation(extent={{130,39},{150,59}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convCh
     annotation (Placement(transformation(extent={{131,17},{146,34}})));
-  AixLib.Utilities.Interfaces.Star radBa
-    annotation (Placement(transformation(extent={{128,-38},{148,-18}})));
+  AixLib.Utilities.Interfaces.RadPort radBa annotation (Placement(transformation(extent={{128,-38},{148,-18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBa
     annotation (Placement(transformation(extent={{129,-59},{148,-41}})));
   Modelica.Blocks.Interfaces.RealInput TSet[5] annotation(Placement(transformation(extent = {{-123, 78}, {-95, 108}}), iconTransformation(extent = {{-10.5, -12}, {10.5, 12}}, rotation = 270, origin = {-105.5, 96})));

@@ -9,7 +9,7 @@ model HumanSensibleHeat_VDI2078
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
   Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
-  Utilities.Interfaces.Star RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
+  Interfaces.RadPort        RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)   annotation(Placement(transformation(extent = {{-24, 10}, {-4, 30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom
     "Air temperature in room"                                                         annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));

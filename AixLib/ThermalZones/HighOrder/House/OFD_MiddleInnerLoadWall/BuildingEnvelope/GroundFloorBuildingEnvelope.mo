@@ -327,27 +327,27 @@ model GroundFloorBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermLivingroom
     annotation (Placement(transformation(extent={{-26,54},{-14,66}}),
         iconTransformation(extent={{-28,56},{-14,66}})));
-  Utilities.Interfaces.Star StarLivingroom
+  AixLib.Utilities.Interfaces.RadPort StarLivingroom
     annotation (Placement(transformation(extent={{-28,32},{-12,48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermHobby
     annotation (Placement(transformation(extent={{14,54},{26,66}})));
-  Utilities.Interfaces.Star StarHobby
+  AixLib.Utilities.Interfaces.RadPort StarHobby
     annotation (Placement(transformation(extent={{12,32},{28,48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermCorridor annotation (
      Placement(transformation(extent={{8,-2},{20,10}}), iconTransformation(
           extent={{8,-2},{20,10}})));
-  Utilities.Interfaces.Star StarCorridor annotation (Placement(transformation(
+  AixLib.Utilities.Interfaces.RadPort StarCorridor annotation (Placement(transformation(
           extent={{6,-24},{22,-8}}), iconTransformation(extent={{6,-24},{22,-8}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermWC_Storage
     annotation (Placement(transformation(extent={{16,-56},{28,-44}}),
         iconTransformation(extent={{16,-56},{28,-44}})));
-  Utilities.Interfaces.Star StarWC_Storage annotation (Placement(transformation(
+  AixLib.Utilities.Interfaces.RadPort StarWC_Storage annotation (Placement(transformation(
           extent={{14,-78},{30,-62}}), iconTransformation(extent={{14,-78},{30,
             -62}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermKitchen annotation (
       Placement(transformation(extent={{-24,-56},{-12,-44}}),
         iconTransformation(extent={{-24,-56},{-12,-44}})));
-  Utilities.Interfaces.Star StarKitchen annotation (Placement(transformation(
+  AixLib.Utilities.Interfaces.RadPort StarKitchen annotation (Placement(transformation(
           extent={{-26,-78},{-10,-62}}), iconTransformation(extent={{-26,-78},{
             -10,-62}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a

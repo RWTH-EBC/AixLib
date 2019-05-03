@@ -1,0 +1,8 @@
+convertClass("AixLib.Utilities.Interfaces.Star", "AixLib.Utilities.Interfaces.RadPort");
+convertClass("AixLib.Utilities.Interfaces.HeatStarComb", "AixLib.Utilities.Interfaces.ConvRadComb")
+convertClass("AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb", "AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort")
+convertElement("AixLib.Utilities.Interfaces.HeatStarComb", "Therm", "conv");
+convertElement("AixLib.Utilities.Interfaces.HeatStarComb", "Star", "rad");
+convertElement("AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb", "thermStarComb", "portConvRadComb")
+convertElement("AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb", "star", "portRad")
+convertElement("AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb", "therm", "portConv")
