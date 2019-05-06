@@ -477,44 +477,7 @@ end gasMixtureViscosity;
   etaMixture := etam*1e7;
 
     annotation (smoothOrder=2,
-              Documentation(info="<html><p>
-  Equation to estimate the viscosity of gas mixtures at low
-  pressures.<br/>
-  It is a simplification of an extension of the rigorous kinetic theory
-  of Chapman and Enskog to determine the viscosity of multicomponent
-  mixtures, at low pressures and with a factor to correct for molecule
-  shape and polarity.
-</p>
-  The input argument Kappa is a special correction for highly polar
-  substances such as alcohols and acids.<br/>
-  Values of kappa for a few such materials:
-</p>
-  Chung, et al. (1984) suggest that for other alcohols not shown in the
-  table:<br/>
-  &#160;&#160;&#160;&#160;<br/>
-  &#160;&#160;&#160; kappa = 0.0682 + 4.704*[(number of -OH
-  groups)]/[molecular weight]<br/>
-  <br/>
-  <span style=\"font-weight: normal;\">S.I. units relation for the
-  debyes:&#160;</span><br/>
-  &#160;&#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160;
-  &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160;
-  &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160;
-  &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160; 1 debye =
-  3.162e-25 (J.m^3)^(1/2)<br/>
-</p>
-<h4>
-  References
-</h4>
-<p>
-  [1] THE PROPERTIES OF GASES AND LIQUIDS, Fifth Edition,<br/>
-  &#160;&#160;&#160; &#160;&#160;&#160; &#160; Bruce E. Poling, John M.
-  Prausnitz, John P. O'Connell.<br/>
-  [2] Chung, T.-H., M. Ajlan, L. L. Lee, and K. E. Starling: Ind. Eng.
-  Chem. Res., 27: 671 (1988).<br/>
-  [3] Chung, T.-H., L. L. Lee, and K. E. Starling; Ing. Eng. Chem.
-  Fundam., 23: 3 ()1984).<br/>
-</p>
+              Documentation(info="<html>
 </html>"));
   end mixtureViscosityChung;
 
