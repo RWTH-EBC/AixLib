@@ -383,7 +383,7 @@ annotation(preferredView="info", Documentation(info="<html><p>
   <img src=
   \"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterProperties.png\"
   border=\"1\" alt=
-  \"Relative variation of specific heat capacity with temperature\" alt="" />
+  \"Relative variation of specific heat capacity with temperature\">
 </p>
 <p>
   The accuracy of the thermophysical properties is dependent on the
@@ -398,7 +398,7 @@ annotation(preferredView="info", Documentation(info="<html><p>
   <img src=
   \"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError10degC.png\"
   border=\"1\" alt=
-  \"Relative variation of specific heat capacity with temperature\" alt="" />
+  \"Relative variation of specific heat capacity with temperature\">
 </p>
 <p>
   The figure below shows the relative error of the the four properties
@@ -411,7 +411,7 @@ annotation(preferredView="info", Documentation(info="<html><p>
   <img src=
   \"modelica://AixLib/Resources/Images/Media/Antifreeze/PropyleneGlycolWaterError20degC.png\"
   border=\"1\" alt=
-  \"Relative variation of specific heat capacity with temperature\" alt="" />
+  \"Relative variation of specific heat capacity with temperature\">
 </p>
 <p>
   The enthalpy is computed using the convention that <i>h=0</i> if
