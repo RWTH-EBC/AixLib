@@ -19,7 +19,6 @@ partial package CHPCombustionMixtureGasNasa
 
     redeclare record extends ThermodynamicState "Thermodynamic state variables"
     end ThermodynamicState;
-
 //   redeclare record extends FluidConstants "Fluid constants"
 //   end FluidConstants;
 
@@ -486,115 +485,10 @@ end gasMixtureViscosity;
   mixtures, at low pressures and with a factor to correct for molecule
   shape and polarity.
 </p>
-<p>
   The input argument Kappa is a special correction for highly polar
   substances such as alcohols and acids.<br/>
   Values of kappa for a few such materials:
 </p>
-<table style=\"text-align: left; width: 302px; height: 200px;\" border=
-\"1\" cellspacing=\"0\" cellpadding=\"2\">
-  <tbody>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        Compound<br/>
-      </td>
-      <td style=\"vertical-align: top; text-align: center;\">
-        Kappa<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        Compound<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        Kappa<br/>
-      </td>
-    </tr>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        Methanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.215<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        n-Pentanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.122<br/>
-      </td>
-    </tr>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        Ethanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.175<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        n-Hexanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.114<br/>
-      </td>
-    </tr>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        n-Propanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.143<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        n-Heptanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.109<br/>
-      </td>
-    </tr>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        i-Propanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.143<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        Acetic Acid<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.0916<br/>
-      </td>
-    </tr>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        n-Butanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.132<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        Water<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.076<br/>
-      </td>
-    </tr>
-    <tr>
-      <td style=\"vertical-align: top;\">
-        i-Butanol<br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        0.132
-      </td>
-      <td style=\"vertical-align: top;\">
-        <br/>
-      </td>
-      <td style=\"vertical-align: top;\">
-        <br/>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>
   Chung, et al. (1984) suggest that for other alcohols not shown in the
   table:<br/>
   &#160;&#160;&#160;&#160;<br/>
@@ -826,7 +720,6 @@ end lowPressureThermalConductivity;
   algorithm
     T := Internal.solve(s, 200, 6000, p, Xfull, data[1]);
   end T_psX;
-
 //   redeclare function extends specificEnthalpy_psX
 //   protected
 //     Temperature T "Temperature";
