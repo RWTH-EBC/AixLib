@@ -12,6 +12,5 @@ package CHPFlueGasLambdaOnePlus
     reference_X={0.768,0.232,0.0,0.0});
 
   annotation (Documentation(info="<html>
-
 </html>"));
 end CHPFlueGasLambdaOnePlus;

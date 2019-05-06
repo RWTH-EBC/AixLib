@@ -43,7 +43,8 @@ package NaturalGasMixture_GeneralType
         Xi_mole={1/9,1/9,1/9,1/9,
           1/9,1/9,1/9,1/9,1/9});
   end NaturalGas_GeneralDefinition;
-  annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
+  annotation (Documentation(info="<html><p>
+  Gasoline model for natural gas type H.
+</p>
 </html>"));
 end NaturalGasMixture_GeneralType;

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.Examples;
+within AixLib.Fluid.BoilerCHP.Examples;
 model ModularCHPSystem
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;
@@ -220,19 +220,43 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)), experiment(StopTime=18000, Interval=5),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
-    Documentation(info="<html>
-<p>An example of the use of modular CHP components combined as a power unit with interfaces to a controller and to the heating circuit.</p>
-<p>It allows an impression of the versatile and complex application possibilities of the model by the changeability of many variables of individual components and the detailed investigation capability.</p>
-<p>For a better understanding the controller modulates the fuel consumption of the CHP unit. The effects to the thermal output can be visualized by looking at <b>T_Ret</b> and <b>T_Sup</b>.</p>
-<p>The return temperature as well as the volume flow in the heating circuit are considered constant in this example.</p>
-<p><br><br>Caution: </p>
-<p>If the prime coolant cirlce of the power unit is using a gasoline medium instead of a liquid fluid, you may need to adjust (raise) the nominal mass flow and pressure drop of the cooling to heating heat exchanger to run the model, because of a background calculation for the nominal flow.</p>
+    Documentation(info="<html><p>
+  An example of the use of modular CHP components combined as a power
+  unit with interfaces to a controller and to the heating circuit.
+</p>
+<p>
+  It allows an impression of the versatile and complex application
+  possibilities of the model by the changeability of many variables of
+  individual components and the detailed investigation capability.
+</p>
+<p>
+  For a better understanding the controller modulates the fuel
+  consumption of the CHP unit. The effects to the thermal output can be
+  visualized by looking at <b>T_Ret</b> and <b>T_Sup</b>.
+</p>
+<p>
+  The return temperature as well as the volume flow in the heating
+  circuit are considered constant in this example.
+</p>
+<p>
+  <br/>
+  <br/>
+  Caution:
+</p>
+<p>
+  If the prime coolant cirlce of the power unit is using a gasoline
+  medium instead of a liquid fluid, you may need to adjust (raise) the
+  nominal mass flow and pressure drop of the cooling to heating heat
+  exchanger to run the model, because of a background calculation for
+  the nominal flow.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>"));
 end ModularCHPSystem;

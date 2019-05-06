@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
+within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 class GasolineEngineChp_EngineHousing
   "Engine housing as a simple two layer wall."
 
@@ -207,25 +207,73 @@ equation
   connect(calculatedExhaustTemp.y, exhaustGasTemperature)
     annotation (Line(points={{9.1,50},{0,50},{0,106}}, color={0,0,127}));
   annotation (
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>
-", info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p><br>The model of the motor housing uses a build-up scheme as a two-layer wall with thermal transitions to a circulating cooling medium. Assumptions were made to simplify the thermal simulation.</p>
-<h4>Assumptions</h4>
-<p>From individual cylinders, a total area (assumption: cylinder is at bottom dead center) is calculated and the heat conduction is modeled as a flat wall. This approximation of the unknown motor geometry with heat transfers to the environment and the cooling water circuit needs to be calibrated. </p>
-<p>The engine block consists of a homogeneous material with known total weight and is divided into an inner and an outer part (default is grey cast iron)</p>
-<p>For simplicity the oil circuit is considered as a capacity in the outer engine block that needs to calibrated as well. The cooling water circuit is assumed to run between these two parts (only the outer part interacts with the environment).</p>
-<p>The thickness of the inner engine block is an essential, but unknown variable (literature indicates values ​​around 5mm for car engines). Attachments and individual different material layers in the engine block are not taken into account for simplicity and can be approximated by calibration. The insulating housing of the power unit has no own capacity.</p>
-<p>The heat transfer (cylinder wall to cooling water circuit) is calibrated and assumed to be proportional to the temperature difference because due to unknown cooling channel geometry the calculation of a convective heat transfer coefficient is not possible.</p>
-<p>The temperature profile of the cylinder wall is homogeneously formed from the ambient temperature and the maximum combustion temperature (temperature curve in cylinder as a triangle with T_Amb - T_Com - T_Amb). Therefore a mean cylinder wall temperature is determinated using a bisector in the temperature profile as shown in the following figure.</p>
-<p align=\"center\"><br><span style=\"font-size: 12pt;\"><img src=\"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\" width=\"550\" height=\"375\" alt=\"Calculation of the cylinder wall temperature\"/></span> </p>
+", info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  <br/>
+  The model of the motor housing uses a build-up scheme as a two-layer
+  wall with thermal transitions to a circulating cooling medium.
+  Assumptions were made to simplify the thermal simulation.
+</p>
+<h4>
+  Assumptions
+</h4>
+<p>
+  From individual cylinders, a total area (assumption: cylinder is at
+  bottom dead center) is calculated and the heat conduction is modeled
+  as a flat wall. This approximation of the unknown motor geometry with
+  heat transfers to the environment and the cooling water circuit needs
+  to be calibrated.
+</p>
+<p>
+  The engine block consists of a homogeneous material with known total
+  weight and is divided into an inner and an outer part (default is
+  grey cast iron)
+</p>
+<p>
+  For simplicity the oil circuit is considered as a capacity in the
+  outer engine block that needs to calibrated as well. The cooling
+  water circuit is assumed to run between these two parts (only the
+  outer part interacts with the environment).
+</p>
+<p>
+  The thickness of the inner engine block is an essential, but unknown
+  variable (literature indicates values ​​around 5mm for car engines).
+  Attachments and individual different material layers in the engine
+  block are not taken into account for simplicity and can be
+  approximated by calibration. The insulating housing of the power unit
+  has no own capacity.
+</p>
+<p>
+  The heat transfer (cylinder wall to cooling water circuit) is
+  calibrated and assumed to be proportional to the temperature
+  difference because due to unknown cooling channel geometry the
+  calculation of a convective heat transfer coefficient is not
+  possible.
+</p>
+<p>
+  The temperature profile of the cylinder wall is homogeneously formed
+  from the ambient temperature and the maximum combustion temperature
+  (temperature curve in cylinder as a triangle with T_Amb - T_Com -
+  T_Amb). Therefore a mean cylinder wall temperature is determinated
+  using a bisector in the temperature profile as shown in the following
+  figure.
+</p>
+<p align=\"center\">
+  <br/>
+  <span style=\"font-size: 12pt;\"><img src=
+  \"modelica://AixLib/Resources/Images/Fluid/BoilerCHP/CylinderWallTemperature.png\"
+  width=\"550\" height=\"375\" alt=\"\" /></span>
+</p>
 </html>"),
          Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
               graphics={

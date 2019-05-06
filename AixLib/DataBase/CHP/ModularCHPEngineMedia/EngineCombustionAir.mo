@@ -13,6 +13,5 @@ package EngineCombustionAir "Air as mixture of N2 and O2"
     constant Real X[:] = stateAir.X;
     constant MoleFraction moleFractions_Air[:] = massToMoleFractions(X, MMX);
   annotation (Documentation(info="<html>
-
 </html>"));
 end EngineCombustionAir;

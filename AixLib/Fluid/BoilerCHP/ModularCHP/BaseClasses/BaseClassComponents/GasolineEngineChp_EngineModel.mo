@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
+within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 model GasolineEngineChp_EngineModel
   "Internal combustion engine model for CHP-applications."
   import AixLib;
@@ -251,31 +251,107 @@ for i in 1:size(n_ComExh, 1) loop
           textStyle={TextStyle.Bold},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>The model of the internal combustion engine is the centrepiece of the BHKW model developed. It is divided into a thermal and a mechanical-chemical part.</p>
-<p>The energy balance of the combustion engine is used to determine the maximum heat released. The mechanical power is calculated using a mean value model, which is characterized by short calculation times and simple parameterization. An empirical approach is used to describe the specific enthalpy of the exhaust gas. The required mass flows of the combustion products are determined by assuming complete combustion with a known fuel composition. Various liquid and gaseous fuels have been implemented on the basis of the existing material models and are available to the user. </p>
-<p>Due to the complexity of a combustion engine, assumptions have to be made. These are listed below to understand the function and applicability of the model.</p>
-<p><br><b><span style=\"color: #005500;\">Assumptions</span></b></p>
-<p><br>Assumptions made and resulting limitations of the internal combustion engine model:</p>
-<p>- The nominal power point of the power unit is known and the modulationof the operation point is achieved by a reduction of the introduced fuel.</p>
-<p>- The indicated mean pressure is assumed to be constant as a necessary measure for the calculation of engine power. This corresponds to a constant thermodynamic combustion process within the cylinders.</p>
-<p>- The engine must be started with an electric machine. It is controlled by the release of the fuel quantity from a minimum speed (800rpm). The speed then increases to equilibrium with the counteracting generator torque.</p>
-<p>- Complete and superstoichiometric combustion is assumed to solve the gross reaction equation</p>
-<p>- Entry of air and fuel at ambient conditions and constant amount of fuel and air per combustion cycle</p>
-<p>-&gt; Only conditionally with turbocharging of the engines, since then the cylinder filling can vary depending on the boost pressure (slight consideration due to stored rated performance data)</p>
-<p><br>Air ratio or residual oxygen in the exhaust gas is known to estimate the combustion process. So this is a necessary assumption for the calculation of material flows (mass flows, composition of the exhaust gas).</p>
-<p>The mean specific heat capacity of the exhaust gas for a temperature range from 0 &deg; C to the maximum adiabatic combustion temperature is used to calculate the exhaust gas temperature.</p>
-<p>The mean specific heat capacity is determinated with a potency approach according to M&uuml;ller (1968).</p>
-<p>Frictional losses that can be calculated based on a known friction mean pressure at a speed of 3000rpm (if not known, default average values ​​from VK1 by S.Pischinger) are converted into usable heat. </p>
-<p>The calculation of the exhaust gas enthalpy according to an empirical approach is based on investigations by R.Pischinger which uses a reference point temperature of 25 &deg; C (initial state of the reaction educts from combustion air and fuel).</p>
-<p>-&gt; Consideration of the chemical and thermal proportions of the enthalpy</p>
-<p>-&gt; Limited accuracy for diesel engine (non-premixed) processes</p>
+<p>
+  The model of the internal combustion engine is the centrepiece of the
+  BHKW model developed. It is divided into a thermal and a
+  mechanical-chemical part.
+</p>
+<p>
+  The energy balance of the combustion engine is used to determine the
+  maximum heat released. The mechanical power is calculated using a
+  mean value model, which is characterized by short calculation times
+  and simple parameterization. An empirical approach is used to
+  describe the specific enthalpy of the exhaust gas. The required mass
+  flows of the combustion products are determined by assuming complete
+  combustion with a known fuel composition. Various liquid and gaseous
+  fuels have been implemented on the basis of the existing material
+  models and are available to the user.
+</p>
+<p>
+  Due to the complexity of a combustion engine, assumptions have to be
+  made. These are listed below to understand the function and
+  applicability of the model.
+</p>
+<p>
+  <br/>
+  <b><span style=\"color: #005500;\">Assumptions</span></b>
+</p>
+<p>
+  <br/>
+  Assumptions made and resulting limitations of the internal combustion
+  engine model:
+</p>
+<p>
+  - The nominal power point of the power unit is known and the
+  modulationof the operation point is achieved by a reduction of the
+  introduced fuel.
+</p>
+<p>
+  - The indicated mean pressure is assumed to be constant as a
+  necessary measure for the calculation of engine power. This
+  corresponds to a constant thermodynamic combustion process within the
+  cylinders.
+</p>
+<p>
+  - The engine must be started with an electric machine. It is
+  controlled by the release of the fuel quantity from a minimum speed
+  (800rpm). The speed then increases to equilibrium with the
+  counteracting generator torque.
+</p>
+<p>
+  - Complete and superstoichiometric combustion is assumed to solve the
+  gross reaction equation
+</p>
+<p>
+  - Entry of air and fuel at ambient conditions and constant amount of
+  fuel and air per combustion cycle
+</p>
+<p>
+  -&gt; Only conditionally with turbocharging of the engines, since
+  then the cylinder filling can vary depending on the boost pressure
+  (slight consideration due to stored rated performance data)
+</p>
+<p>
+  <br/>
+  Air ratio or residual oxygen in the exhaust gas is known to estimate
+  the combustion process. So this is a necessary assumption for the
+  calculation of material flows (mass flows, composition of the exhaust
+  gas).
+</p>
+<p>
+  The mean specific heat capacity of the exhaust gas for a temperature
+  range from 0 ° C to the maximum adiabatic combustion temperature is
+  used to calculate the exhaust gas temperature.
+</p>
+<p>
+  The mean specific heat capacity is determinated with a potency
+  approach according to Müller (1968).
+</p>
+<p>
+  Frictional losses that can be calculated based on a known friction
+  mean pressure at a speed of 3000rpm (if not known, default average
+  values ​​from VK1 by S.Pischinger) are converted into usable heat.
+</p>
+<p>
+  The calculation of the exhaust gas enthalpy according to an empirical
+  approach is based on investigations by R.Pischinger which uses a
+  reference point temperature of 25 ° C (initial state of the reaction
+  educts from combustion air and fuel).
+</p>
+<p>
+  -&gt; Consideration of the chemical and thermal proportions of the
+  enthalpy
+</p>
+<p>
+  -&gt; Limited accuracy for diesel engine (non-premixed) processes
+</p>
 </html>"));
 end GasolineEngineChp_EngineModel;

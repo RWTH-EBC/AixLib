@@ -360,29 +360,27 @@ algorithm
   etam := sum(yi[i]*eta[i]/sum(yi[j]*fi[i,j] for j in 1:size(eta,1)) for i in 1:size(eta,1));
 
   annotation (smoothOrder=2,
-             Documentation(info="<html>
-
-<p>
-Simplification of the kinetic theory (Chapman and Enskog theory)
-approach neglecting the second-order effects.<br>
-<br>
-This equation has been extensively tested (Amdur and Mason, 1958;
-Bromley and Wilke, 1951; Cheung, 1958; Dahler, 1959; Gandhi and Saxena,
-1964; Ranz and Brodowsky, 1962; Saxena and Gambhir, 1963a; Strunk, et
-al., 1964; Vanderslice, et al. 1962; Wright and Gray, 1962). In most
-cases, only nonpolar mixtures were compared, and very good results
-obtained. For some systems containing hydrogen as one component, less
-satisfactory agreement was noted. Wilke's method predicted mixture
-viscosities that were larger than experimental for the H2-N2 system,
-but for H2-NH3, it underestimated the viscosities. <br>
-Gururaja, et al. (1967) found that this method also overpredicted in
-the H2-O2 case but was quite accurate for the H2-CO2 system. <br>
-Wilke's approximation has proved reliable even for polar-polar gas
-mixtures of aliphatic alcohols (Reid and Belenyessy, 1960). The
-principal reservation appears to lie in those cases where Mi&gt;&gt;Mj
-and etai&gt;&gt;etaj.<br>
+             Documentation(info="<html><p>
+  Simplification of the kinetic theory (Chapman and Enskog theory)
+  approach neglecting the second-order effects.<br/>
+  <br/>
+  This equation has been extensively tested (Amdur and Mason, 1958;
+  Bromley and Wilke, 1951; Cheung, 1958; Dahler, 1959; Gandhi and
+  Saxena, 1964; Ranz and Brodowsky, 1962; Saxena and Gambhir, 1963a;
+  Strunk, et al., 1964; Vanderslice, et al. 1962; Wright and Gray,
+  1962). In most cases, only nonpolar mixtures were compared, and very
+  good results obtained. For some systems containing hydrogen as one
+  component, less satisfactory agreement was noted. Wilke's method
+  predicted mixture viscosities that were larger than experimental for
+  the H2-N2 system, but for H2-NH3, it underestimated the
+  viscosities.<br/>
+  Gururaja, et al. (1967) found that this method also overpredicted in
+  the H2-O2 case but was quite accurate for the H2-CO2 system.<br/>
+  Wilke's approximation has proved reliable even for polar-polar gas
+  mixtures of aliphatic alcohols (Reid and Belenyessy, 1960). The
+  principal reservation appears to lie in those cases where
+  Mi&gt;&gt;Mj and etai&gt;&gt;etaj.<br/>
 </p>
-
 </html>"));
 end gasMixtureViscosity;
 
@@ -480,119 +478,148 @@ end gasMixtureViscosity;
   etaMixture := etam*1e7;
 
     annotation (smoothOrder=2,
-              Documentation(info="<html>
-
-<p>
-Equation to estimate the viscosity of gas mixtures at low pressures.<br>
-It is a simplification of an extension of the rigorous kinetic theory
-of Chapman and Enskog to determine the viscosity of multicomponent
-mixtures, at low pressures and with a factor to correct for molecule
-shape and polarity.
+              Documentation(info="<html><p>
+  Equation to estimate the viscosity of gas mixtures at low
+  pressures.<br/>
+  It is a simplification of an extension of the rigorous kinetic theory
+  of Chapman and Enskog to determine the viscosity of multicomponent
+  mixtures, at low pressures and with a factor to correct for molecule
+  shape and polarity.
 </p>
-
 <p>
-The input argument Kappa is a special correction for highly polar substances such as
-alcohols and acids.<br>
-Values of kappa for a few such materials:
+  The input argument Kappa is a special correction for highly polar
+  substances such as alcohols and acids.<br/>
+  Values of kappa for a few such materials:
 </p>
-
-<table style=\"text-align: left; width: 302px; height: 200px;\" border=\"1\"
-cellspacing=\"0\" cellpadding=\"2\">
-<tbody>
-<tr>
-<td style=\"vertical-align: top;\">Compound <br>
-</td>
-<td style=\"vertical-align: top; text-align: center;\">Kappa<br>
-</td>
-<td style=\"vertical-align: top;\">Compound<br>
-</td>
-<td style=\"vertical-align: top;\">Kappa<br>
-</td>
-</tr>
-<tr>
-<td style=\"vertical-align: top;\">Methanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.215<br>
-</td>
-<td style=\"vertical-align: top;\">n-Pentanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.122<br>
-</td>
-</tr>
-<tr>
-<td style=\"vertical-align: top;\">Ethanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.175<br>
-</td>
-<td style=\"vertical-align: top;\">n-Hexanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.114<br>
-</td>
-</tr>
-<tr>
-<td style=\"vertical-align: top;\">n-Propanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.143<br>
-</td>
-<td style=\"vertical-align: top;\">n-Heptanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.109<br>
-</td>
-</tr>
-<tr>
-<td style=\"vertical-align: top;\">i-Propanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.143<br>
-</td>
-<td style=\"vertical-align: top;\">Acetic Acid<br>
-</td>
-<td style=\"vertical-align: top;\">0.0916<br>
-</td>
-</tr>
-<tr>
-<td style=\"vertical-align: top;\">n-Butanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.132<br>
-</td>
-<td style=\"vertical-align: top;\">Water<br>
-</td>
-<td style=\"vertical-align: top;\">0.076<br>
-</td>
-</tr>
-<tr>
-<td style=\"vertical-align: top;\">i-Butanol<br>
-</td>
-<td style=\"vertical-align: top;\">0.132</td>
-<td style=\"vertical-align: top;\"><br>
-</td>
-<td style=\"vertical-align: top;\"><br>
-</td>
-</tr>
-</tbody>
+<table style=\"text-align: left; width: 302px; height: 200px;\" border=
+\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tbody>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        Compound<br/>
+      </td>
+      <td style=\"vertical-align: top; text-align: center;\">
+        Kappa<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        Compound<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        Kappa<br/>
+      </td>
+    </tr>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        Methanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.215<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        n-Pentanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.122<br/>
+      </td>
+    </tr>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        Ethanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.175<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        n-Hexanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.114<br/>
+      </td>
+    </tr>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        n-Propanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.143<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        n-Heptanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.109<br/>
+      </td>
+    </tr>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        i-Propanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.143<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        Acetic Acid<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.0916<br/>
+      </td>
+    </tr>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        n-Butanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.132<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        Water<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.076<br/>
+      </td>
+    </tr>
+    <tr>
+      <td style=\"vertical-align: top;\">
+        i-Butanol<br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        0.132
+      </td>
+      <td style=\"vertical-align: top;\">
+        <br/>
+      </td>
+      <td style=\"vertical-align: top;\">
+        <br/>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <p>
-Chung, et al. (1984) suggest that for other alcohols not shown in the
-table:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; kappa = 0.0682 + 4.704*[(number of -OH
-groups)]/[molecular weight]<br>
-<br>
-<span style=\"font-weight: normal;\">S.I. units relation for the
-debyes:&nbsp;</span><br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 1 debye = 3.162e-25 (J.m^3)^(1/2)<br>
+  Chung, et al. (1984) suggest that for other alcohols not shown in the
+  table:<br/>
+  &#160;&#160;&#160;&#160;<br/>
+  &#160;&#160;&#160; kappa = 0.0682 + 4.704*[(number of -OH
+  groups)]/[molecular weight]<br/>
+  <br/>
+  <span style=\"font-weight: normal;\">S.I. units relation for the
+  debyes:&#160;</span><br/>
+  &#160;&#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160;
+  &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160;
+  &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160;
+  &#160;&#160; &#160;&#160; &#160;&#160; &#160;&#160; 1 debye =
+  3.162e-25 (J.m^3)^(1/2)<br/>
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-[1] THE PROPERTIES OF GASES AND LIQUIDS, Fifth Edition,<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; Bruce E. Poling, John M.
-Prausnitz, John P. O'Connell.<br>
-[2] Chung, T.-H., M. Ajlan, L. L. Lee, and K. E. Starling: Ind. Eng.
-Chem. Res., 27: 671 (1988).<br>
-[3] Chung, T.-H., L. L. Lee, and K. E. Starling; Ing. Eng. Chem.
-Fundam., 23: 3 ()1984).<br>
+  [1] THE PROPERTIES OF GASES AND LIQUIDS, Fifth Edition,<br/>
+  &#160;&#160;&#160; &#160;&#160;&#160; &#160; Bruce E. Poling, John M.
+  Prausnitz, John P. O'Connell.<br/>
+  [2] Chung, T.-H., M. Ajlan, L. L. Lee, and K. E. Starling: Ind. Eng.
+  Chem. Res., 27: 671 (1988).<br/>
+  [3] Chung, T.-H., L. L. Lee, and K. E. Starling; Ing. Eng. Chem.
+  Fundam., 23: 3 ()1984).<br/>
 </p>
 </html>"));
   end mixtureViscosityChung;
@@ -628,23 +655,19 @@ algorithm
   lambdam := sum(y[i]*lambda[i]/(sum(y[j]*A[i,j] for j in 1:size(y,1))) for i in 1:size(y,1));
 
   annotation (smoothOrder=2,
-              Documentation(info="<html>
-
-<p>
-This function applies the Masson and Saxena modification of the
-Wassiljewa Equation for the thermal conductivity for gas mixtures of
-n elements at low pressure.
+              Documentation(info="<html><p>
+  This function applies the Masson and Saxena modification of the
+  Wassiljewa Equation for the thermal conductivity for gas mixtures of
+  n elements at low pressure.
 </p>
-
 <p>
-For nonpolar gas mixtures errors will generally be less than 3 to 4%.
-For mixtures of nonpolar-polar and polar-polar gases, errors greater
-than 5 to 8% may be expected. For mixtures in which the sizes and
-polarities of the constituent molecules are not greatly different, the
-thermal conductivity can be estimated satisfactorily by a mole fraction
-average of the pure component conductivities.
+  For nonpolar gas mixtures errors will generally be less than 3 to 4%.
+  For mixtures of nonpolar-polar and polar-polar gases, errors greater
+  than 5 to 8% may be expected. For mixtures in which the sizes and
+  polarities of the constituent molecules are not greatly different,
+  the thermal conductivity can be estimated satisfactorily by a mole
+  fraction average of the pure component conductivities.
 </p>
-
 </html>"));
 end lowPressureThermalConductivity;
 
@@ -825,29 +848,28 @@ end lowPressureThermalConductivity;
 //     d := p/(R*T);
 //   end density_phX;
 
-  annotation (Documentation(info="<html>
-<p>
-This model calculates the medium properties for single component ideal gases.
+  annotation (Documentation(info="<html><p>
+  This model calculates the medium properties for single component
+  ideal gases.
 </p>
 <p>
-<b>Sources for model and literature:</b><br>
-Original Data: Computer program for calculation of complex chemical
-equilibrium compositions and applications. Part 1: Analysis
-Document ID: 19950013764 N (95N20180) File Series: NASA Technical Reports
-Report Number: NASA-RP-1311  E-8017  NAS 1.61:1311
-Authors: Gordon, Sanford (NASA Lewis Research Center)
- Mcbride, Bonnie J. (NASA Lewis Research Center)
-Published: Oct 01, 1994.
-</p>
-<p><b>Known limits of validity:</b></br>
-The data is valid for
-temperatures between 200 K and 6000 K.  A few of the data sets for
-monatomic gases have a discontinuous 1st derivative at 1000 K, but
-this never caused problems so far.
+  <b>Sources for model and literature:</b><br/>
+  Original Data: Computer program for calculation of complex chemical
+  equilibrium compositions and applications. Part 1: Analysis Document
+  ID: 19950013764 N (95N20180) File Series: NASA Technical Reports
+  Report Number: NASA-RP-1311 E-8017 NAS 1.61:1311 Authors: Gordon,
+  Sanford (NASA Lewis Research Center) Mcbride, Bonnie J. (NASA Lewis
+  Research Center) Published: Oct 01, 1994.
 </p>
 <p>
-This model has been copied from the ThermoFluid library.
-It has been developed by Hubertus Tummescheit.
+  <b>Known limits of validity:</b><br/>
+  The data is valid for temperatures between 200 K and 6000 K. A few of
+  the data sets for monatomic gases have a discontinuous 1st derivative
+  at 1000 K, but this never caused problems so far.
+</p>
+<p>
+  This model has been copied from the ThermoFluid library. It has been
+  developed by Hubertus Tummescheit.
 </p>
 </html>"));
 end CHPCombustionMixtureGasNasa;

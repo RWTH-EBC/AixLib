@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.ModularCHPEngineData;
+within AixLib.DataBase.CHP.ModularCHPEngineData;
 record CHPEngDataBaseRecord "Base record for CHP engine data"
   extends Modelica.Icons.Record;
 
@@ -51,32 +51,97 @@ record CHPEngDataBaseRecord "Base record for CHP engine data"
   constant Modelica.SIunits.Current I_elNominal=P_elNominal/(sqrt(3)*U_1*cosPhi) "Rated current";
   constant Modelica.SIunits.Power P_elNominal "Nominal electrical power of electric machine";
 
-  annotation (Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Data base record for CHP power units. The nominal / rated operation point most likely corresponds to the given full load performance.</p>
-<h4><span style=\"color: #008000\">Requirements</span></h4>
-<p>These quantities <u><b>must</b></u> be known for reliable simulation (by value, variable relation etc.):</p>
-<p>- <u>Heat and Power:</u> <b>Q_MaxHea</b>, <b>etaCHP(Hi)</b></p>
-<p>- <u>Engine Geometry:</u> <b>hStr</b>, <b>dCyl</b>, <b>z</b>, <b>i</b></p>
-<p>- <u>Generator specification:</u> <b>p </b>or<b> n0, n_nominal, U_1, P_elNominal, f_1</b></p>
-<p>- <b>Lambda</b> or <b>xO2Exh</b>: Required for calculation of the engine combustion, heat flow and the exhaust gas composition (Lambda = 0.21 / (0.21 - xO2Exh))</p>
-<p>- <b>nEngNominal</b></p>
-<p>- <b>dInn</b> (typical values around 0.005m, important for heat transfer from engine to cooling)</p>
-<h4><span style=\"color: #008000\">Default values and variable relations </span></h4>
-<p>These are the default values or relations in case that there is no information available:</p>
-<p>- <b>nEngMax</b>: Engine&nbsp;speed&nbsp;at&nbsp;full&nbsp;load (=nEngNominal)</p>
-<p>- <b>etaGen</b>: Generator efficiency (default=0.92)</p>
-<p>- <b>I_elNominal </b>(=P_elNominal/(sqrt(3)*U_1*cosPhi))</p>
-<p>- <b>P_mecNominal</b> (=P_elNominal/etaGen)</p>
-<p>- <b>P_FueNominal</b> (=(P_elNominal+Q_MaxHea)/etaCHP)</p>
-<p>- <b>VEng</b> (default=0.25*hStr*Modelica.Constants.pi*dCyl^2*z)</p>
-<p>- <b>mEng</b> (default=70389*VEng+17.913, for first appraisal of the heat capacities of engine housing, should be calibrated)</p>
-<p>- <b>eps</b> (typical values around 12 (SI) and 21 (DI))</p>
-<p>- <b>T_ExhPowOut</b> (default=373.15K)</p>
-<p>- <b>gearRatio</b> (default=1)</p>
-<p>- <b>cosPhi </b>(default=0.8)</p>
-<p>- <b>useGenHeat</b> (default=false)</p>
-<p>- <u>Exhaust and Coolant:</u> <b>dExh</b>(default=0.06m), <b>dCoo</b>(default=0.04m), <b>dp_Coo</b>(default=0.15bar)<b>, m_flowCooNominal</b>(default=0.00003*Q_MaxHea-0.2043)</p>
-<p>- <u>Engine material:</u> <b>lambda</b>, <b>rhoEngWall</b>, <b>c </b>(default is cast iron(most common))</p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Data base record for CHP power units. The nominal / rated operation
+  point most likely corresponds to the given full load performance.
+</p>
+<h4>
+  <span style=\"color: #008000\">Requirements</span>
+</h4>
+<p>
+  These quantities <u><b>must</b></u> be known for reliable simulation
+  (by value, variable relation etc.):
+</p>
+<p>
+  - <u>Heat and Power:</u> <b>Q_MaxHea</b>, <b>etaCHP(Hi)</b>
+</p>
+<p>
+  - <u>Engine Geometry:</u> <b>hStr</b>, <b>dCyl</b>, <b>z</b>,
+  <b>i</b>
+</p>
+<p>
+  - <u>Generator specification:</u> <b>p</b> or <b>n0, n_nominal, U_1,
+  P_elNominal, f_1</b>
+</p>
+<p>
+  - <b>Lambda</b> or <b>xO2Exh</b>: Required for calculation of the
+  engine combustion, heat flow and the exhaust gas composition (Lambda
+  = 0.21 / (0.21 - xO2Exh))
+</p>
+<p>
+  - <b>nEngNominal</b>
+</p>
+<p>
+  - <b>dInn</b> (typical values around 0.005m, important for heat
+  transfer from engine to cooling)
+</p>
+<h4>
+  <span style=\"color: #008000\">Default values and variable
+  relations</span>
+</h4>
+<p>
+  These are the default values or relations in case that there is no
+  information available:
+</p>
+<p>
+  - <b>nEngMax</b>: Engine&#160;speed&#160;at&#160;full&#160;load
+  (=nEngNominal)
+</p>
+<p>
+  - <b>etaGen</b>: Generator efficiency (default=0.92)
+</p>
+<p>
+  - <b>I_elNominal</b> (=P_elNominal/(sqrt(3)*U_1*cosPhi))
+</p>
+<p>
+  - <b>P_mecNominal</b> (=P_elNominal/etaGen)
+</p>
+<p>
+  - <b>P_FueNominal</b> (=(P_elNominal+Q_MaxHea)/etaCHP)
+</p>
+<p>
+  - <b>VEng</b> (default=0.25*hStr*Modelica.Constants.pi*dCyl^2*z)
+</p>
+<p>
+  - <b>mEng</b> (default=70389*VEng+17.913, for first appraisal of the
+  heat capacities of engine housing, should be calibrated)
+</p>
+<p>
+  - <b>eps</b> (typical values around 12 (SI) and 21 (DI))
+</p>
+<p>
+  - <b>T_ExhPowOut</b> (default=373.15K)
+</p>
+<p>
+  - <b>gearRatio</b> (default=1)
+</p>
+<p>
+  - <b>cosPhi</b> (default=0.8)
+</p>
+<p>
+  - <b>useGenHeat</b> (default=false)
+</p>
+<p>
+  - <u>Exhaust and Coolant:</u> <b>dExh</b>(default=0.06m),
+  <b>dCoo</b>(default=0.04m), <b>dp_Coo</b>(default=0.15bar)<b>,
+  m_flowCooNominal</b>(default=0.00003*Q_MaxHea-0.2043)
+</p>
+<p>
+  - <u>Engine material:</u> <b>lambda</b>, <b>rhoEngWall</b>, <b>c</b>
+  (default is cast iron(most common))
+</p>
 </html>"));
 end CHPEngDataBaseRecord;

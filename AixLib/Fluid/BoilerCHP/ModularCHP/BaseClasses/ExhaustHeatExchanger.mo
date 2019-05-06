@@ -387,21 +387,53 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}), Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Exhaust gas heat exchanger for engine combustion and its heat transfer to a cooling circle.</p>
-<p><b>Assumptions</b> </p>
-<p>The convective heat transfer between exhaust gas and heat exchanger is calculated as a cylindrical exhaust pipe. For the pipe cross-section, the connection cross-section of the power unit is used; the heat transfer area and the capacity of the heat exchanger can be calibrated.</p>
-<p>Known variables are the combustion air ratio and the heat flow to the cooling water circuit at nominal operation. These are used to estimate the pipe diameters if unknown.</p>
-<p>The heat transfer to the environment (G_Amb) and the cooling water circuit (G_Cool) is calculated by means of heat conduction.</p>
-<p>There is the option of considering the heat output from the condensation of water in the flue gas. This is determined from the determination of the precipitating water via the saturation vapour pressure and the critical loading in the flue gas for the critical state (at outlet temperature). The evaporation enthalpy is approximated using an empirical formula based on table data for ambient pressure.</p>
-<p>Simplifying it is assumed that the latent heat flux in addition to the convective heat flux is transferred to the capacity of the exhaust gas heat exchanger.</p>
+          fillPattern=FillPattern.Solid)}), Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Exhaust gas heat exchanger for engine combustion and its heat
+  transfer to a cooling circle.
+</p>
+<p>
+  <b>Assumptions</b>
+</p>
+<p>
+  The convective heat transfer between exhaust gas and heat exchanger
+  is calculated as a cylindrical exhaust pipe. For the pipe
+  cross-section, the connection cross-section of the power unit is
+  used; the heat transfer area and the capacity of the heat exchanger
+  can be calibrated.
+</p>
+<p>
+  Known variables are the combustion air ratio and the heat flow to the
+  cooling water circuit at nominal operation. These are used to
+  estimate the pipe diameters if unknown.
+</p>
+<p>
+  The heat transfer to the environment (G_Amb) and the cooling water
+  circuit (G_Cool) is calculated by means of heat conduction.
+</p>
+<p>
+  There is the option of considering the heat output from the
+  condensation of water in the flue gas. This is determined from the
+  determination of the precipitating water via the saturation vapour
+  pressure and the critical loading in the flue gas for the critical
+  state (at outlet temperature). The evaporation enthalpy is
+  approximated using an empirical formula based on table data for
+  ambient pressure.
+</p>
+<p>
+  Simplifying it is assumed that the latent heat flux in addition to
+  the convective heat flux is transferred to the capacity of the
+  exhaust gas heat exchanger.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>"));
 end ExhaustHeatExchanger;

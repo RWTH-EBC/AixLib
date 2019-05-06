@@ -348,19 +348,61 @@ CHP"),  Rectangle(
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
          __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
-    Documentation(info="<html>
-<p>This model shows the implementation of a holistic overall model for a CHP power unit using the example of the Kirsch L4.12. The model is able to map different gas engine CHPs of small and medium power classes (&lt; 200 kWel). It allows an investigation of the thermal and electrical dynamics of the individual components and the entire plant. In addition, a CO2 balance can be calculated for the comparison of different control strategies. </p>
-<p>The modular CHP model is aggregated from closed submodels that can be run on their own. These are based on physical calculation approaches and offer mechanical, material and thermal interfaces. The thermal interconnection of the exhaust gas heat exchanger and combustion engine in the internal primary circuit is freely selectable. Detailed explanations of how the submodels work are provided in their documentation. Parameterization and control are realized on the highest model level using bus ports to transmit measured and calculated signals throughout the different hierarchical model levels.</p>
-<h4><span style=\"color: #000000\">Calibration:</span></h4>
-<p>If the calibration of the model is not to be performed for all listed calibration quantities, a quick adaptation of the essential model quantities for the use of are carried out. Setting the speed of the generator and internal combustion engine for the nominal power point using the calibration variables tilting slip, electrical calibration factor and modulation factor results in a high correspondence for electrical power and fuel input for each power stage of the CHP. The thermal output can then be checked by checking the flue gas temperature when the system exits. The examination of the data sheets of some cogeneration units provides general comparative values for the flue gas temperature in a range around 50 &deg;C with and around 110 &deg;C without condensing utilisation at rated output. The flue gas temperature can mainly be adjusted using the heat transitions G_CoolChannel and G_CooExhHex. Finally, the parameters of the heat exchanger can be adapted to the heating circuit.</p>
-<h4><span style=\"color: #000000\">Limitations:</span></h4>
-<p>Supercharged internal combustion engines and diesel engines cannot be completely mapped.</p>
+    Documentation(info="<html><p>
+  This model shows the implementation of a holistic overall model for a
+  CHP power unit using the example of the Kirsch L4.12. The model is
+  able to map different gas engine CHPs of small and medium power
+  classes (&lt; 200 kWel). It allows an investigation of the thermal
+  and electrical dynamics of the individual components and the entire
+  plant. In addition, a CO2 balance can be calculated for the
+  comparison of different control strategies.
+</p>
+<p>
+  The modular CHP model is aggregated from closed submodels that can be
+  run on their own. These are based on physical calculation approaches
+  and offer mechanical, material and thermal interfaces. The thermal
+  interconnection of the exhaust gas heat exchanger and combustion
+  engine in the internal primary circuit is freely selectable. Detailed
+  explanations of how the submodels work are provided in their
+  documentation. Parameterization and control are realized on the
+  highest model level using bus ports to transmit measured and
+  calculated signals throughout the different hierarchical model
+  levels.
+</p>
+<h4>
+  <span style=\"color: #000000\">Calibration:</span>
+</h4>
+<p>
+  If the calibration of the model is not to be performed for all listed
+  calibration quantities, a quick adaptation of the essential model
+  quantities for the use of are carried out. Setting the speed of the
+  generator and internal combustion engine for the nominal power point
+  using the calibration variables tilting slip, electrical calibration
+  factor and modulation factor results in a high correspondence for
+  electrical power and fuel input for each power stage of the CHP. The
+  thermal output can then be checked by checking the flue gas
+  temperature when the system exits. The examination of the data sheets
+  of some cogeneration units provides general comparative values for
+  the flue gas temperature in a range around 50 °C with and around 110
+  °C without condensing utilisation at rated output. The flue gas
+  temperature can mainly be adjusted using the heat transitions
+  G_CoolChannel and G_CooExhHex. Finally, the parameters of the heat
+  exchanger can be adapted to the heating circuit.
+</p>
+<h4>
+  <span style=\"color: #000000\">Limitations:</span>
+</h4>
+<p>
+  Supercharged internal combustion engines and diesel engines cannot be
+  completely mapped.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>"));
 end ModularCHP_PowerUnit;

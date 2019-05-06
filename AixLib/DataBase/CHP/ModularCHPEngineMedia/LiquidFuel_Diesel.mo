@@ -42,9 +42,17 @@ package LiquidFuel_Diesel
     Xi_liq = {0.86,0.14,0.0});
 
   end DieselFuel;
-  annotation (Documentation(info="<html>
-<p>Gasoline model for liquid diesel fuel.</p>
-<p><u><b>NOTE:</b></u></p>
-<p>The calculation of the engine combustion is partly based on an empirical approach that uses exhaust gas measurements from an SI-engine. This might result in limitations of the model output accuracy!</p>
+  annotation (Documentation(info="<html><p>
+  Gasoline model for liquid diesel fuel.
+</p>
+<p>
+  <u><b>NOTE:</b></u>
+</p>
+<p>
+  The calculation of the engine combustion is partly based on an
+  empirical approach that uses exhaust gas measurements from an
+  SI-engine. This might result in limitations of the model output
+  accuracy!
+</p>
 </html>"));
 end LiquidFuel_Diesel;

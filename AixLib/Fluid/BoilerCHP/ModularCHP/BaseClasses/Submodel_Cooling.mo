@@ -157,18 +157,34 @@ equation
           lineThickness=0.5,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,0,0},
-          textString="dQ = 0")}),Documentation(info="<html>
-<p>Model of important cooling circuit components that needs to be used with the engine model to realise its heat transfer.</p>
-<p>Therefore a heat port is implemented as well as temperature sensors to capture the in- and outlet temperatures of the coolant medium for engine calculations.</p>
-<p>Depending on the unit configuration this model can be placed inside the cooling circuit before or after the fluid ports of the exhaust heat exchanger.</p>
-<h4>Assumptions:</h4>
-<p>The pressure level within the cooling circuit is assumed to be constant at about 3 bar.</p>
+          textString="dQ = 0")}),Documentation(info="<html><p>
+  Model of important cooling circuit components that needs to be used
+  with the engine model to realise its heat transfer.
+</p>
+<p>
+  Therefore a heat port is implemented as well as temperature sensors
+  to capture the in- and outlet temperatures of the coolant medium for
+  engine calculations.
+</p>
+<p>
+  Depending on the unit configuration this model can be placed inside
+  the cooling circuit before or after the fluid ports of the exhaust
+  heat exchanger.
+</p>
+<h4>
+  Assumptions:
+</h4>
+<p>
+  The pressure level within the cooling circuit is assumed to be
+  constant at about 3 bar.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>"));
 end Submodel_Cooling;

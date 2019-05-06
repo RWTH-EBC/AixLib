@@ -148,13 +148,24 @@ expandable connector CHPControlBus
     "= false to use a prescibed heating circuit mass flow, = true to use a prescribed volume flow"
     annotation (Dialog(tab="Operation point", group="CHP Unit"));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>January, 2019, by Julian Matthes:<br>First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">issue 6</a><u><span style=\"color: #0000ff;\">67</span></u>). </li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>January, 2019, by Julian Matthes:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">issue
+    6</a><u><span style=\"color: #0000ff;\">67</span></u>).
+  </li>
 </ul>
 </html>", info="<html>
-<p>This connector is a base connector used forcombined heat and power units and contains typical variables that may be measured in the modular Chp models. </p>
-<p>Typically, a Chp unit consists of three main components: Combustion engine, a exhaust heat exchanger and a generator. The controlled parameters are listed below. </p>
+<p>
+  This connector is a base connector used forcombined heat and power
+  units and contains typical variables that may be measured in the
+  modular Chp models.
+</p>
+<p>
+  Typically, a Chp unit consists of three main components: Combustion
+  engine, a exhaust heat exchanger and a generator. The controlled
+  parameters are listed below.
+</p>
 </html>"));
 
 end CHPControlBus;

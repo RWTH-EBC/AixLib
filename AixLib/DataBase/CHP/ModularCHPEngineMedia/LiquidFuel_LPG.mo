@@ -42,7 +42,8 @@ package LiquidFuel_LPG "Simple LPG fuel for CHP-engine combustion"
     Xi_liq = {0.82,0.18,0.00});
 
   end LPGFuel;
-  annotation (Documentation(info="<html>
-<p>Gasoline model for natural gas type H.</p>
+  annotation (Documentation(info="<html><p>
+  Gasoline model for natural gas type H.
+</p>
 </html>"));
 end LiquidFuel_LPG;

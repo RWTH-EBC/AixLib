@@ -162,27 +162,75 @@ else
           28},{-80,28},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
   connect(generatorEfficiency.y, cHPGenBus.calEtaGen) annotation (Line(points={
           {-57,70},{-80,70},{-80,56.14},{-102.15,56.14}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<p>Model of an electric induction machine that includes the calculation of:</p>
-<p>-&gt; mechanical output (torque and speed)</p>
-<p>-&gt; electrical output (current and power)</p>
-<p>It delivers positive torque and negative electrical power when operating below the synchronous speed (motor) and can switch into generating electricity (positive electrical power and negative torque) when operating above the synchronous speed (generator).</p>
-<p>The calculations are based on simple electrical equations and an analytical approach by Pichai Aree (2017) that determinates stator current and torque depending on the slip.</p>
-<p>The parameters rho0, rho1, rho3 and k are used for the calculation of the characteristic curves. They are determined from the general machine data at nominal operation and realistic assumptions about the ratio between starting torque, starting current, breakdown torque, breakdown slip and nominal current and torque. These assumptions are taken from DIN VDE 2650/2651. It shows good agreement for machines up to 100kW of mechanical power operating at a speed up to 3000rpm and with a rated voltage up to 500V.</p>
-<p>The only data required is:</p>
-<p>- number of polepairs or synchronous speed (<b>p</b> or <b>n0</b>)</p>
-<p>- voltage and frequence of the electric power supply (<b>U_1</b> and <b>f_1</b>)</p>
-<p>- nominal current and speed (<b>I_elNominal</b> and <b>n_nominal</b> )</p>
-<p>- power factor if available (default=0.8)</p>
-<p><br>Additional Information:</p>
-<p><br>- Electric power calculation as a generator from mechanical input speed can be further approached by small changes to the speed.</p>
-<p>- The electric losses are calculated from the slip depending rotor loss which corresponds to roughly 22&percnt; of the total losses according to Almeida (DOI: 10.1109/MIAS.2010.939427).</p>
+  annotation (Documentation(info="<html><p>
+  Model of an electric induction machine that includes the calculation
+  of:
+</p>
+<p>
+  -&gt; mechanical output (torque and speed)
+</p>
+<p>
+  -&gt; electrical output (current and power)
+</p>
+<p>
+  It delivers positive torque and negative electrical power when
+  operating below the synchronous speed (motor) and can switch into
+  generating electricity (positive electrical power and negative
+  torque) when operating above the synchronous speed (generator).
+</p>
+<p>
+  The calculations are based on simple electrical equations and an
+  analytical approach by Pichai Aree (2017) that determinates stator
+  current and torque depending on the slip.
+</p>
+<p>
+  The parameters rho0, rho1, rho3 and k are used for the calculation of
+  the characteristic curves. They are determined from the general
+  machine data at nominal operation and realistic assumptions about the
+  ratio between starting torque, starting current, breakdown torque,
+  breakdown slip and nominal current and torque. These assumptions are
+  taken from DIN VDE 2650/2651. It shows good agreement for machines up
+  to 100kW of mechanical power operating at a speed up to 3000rpm and
+  with a rated voltage up to 500V.
+</p>
+<p>
+  The only data required is:
+</p>
+<p>
+  - number of polepairs or synchronous speed (<b>p</b> or <b>n0</b>)
+</p>
+<p>
+  - voltage and frequence of the electric power supply (<b>U_1</b> and
+  <b>f_1</b>)
+</p>
+<p>
+  - nominal current and speed (<b>I_elNominal</b> and <b>n_nominal</b>
+  )
+</p>
+<p>
+  - power factor if available (default=0.8)
+</p>
+<p>
+  <br/>
+  Additional Information:
+</p>
+<p>
+  <br/>
+  - Electric power calculation as a generator from mechanical input
+  speed can be further approached by small changes to the speed.
+</p>
+<p>
+  - The electric losses are calculated from the slip depending rotor
+  loss which corresponds to roughly 22% of the total losses according
+  to Almeida (DOI: 10.1109/MIAS.2010.939427).
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>April, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
-</li>
+  <li>
+    <i>April, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/667\">#667</a>)
+  </li>
 </ul>
 </html>"), Icon(graphics={
         Text(
