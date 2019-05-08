@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model ModularCHP_PowerUnit "Model of modular CHP power unit"
   import AixLib;
 
@@ -94,9 +94,9 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
 
-  Modelica.SIunits.Power Q_Therm=if (submodel_CoolingEASY_New.heatPort_outside.Q_flow
-       + exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow) > 10 then
-      submodel_CoolingEASY_New.heatPort_outside.Q_flow + exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow
+  Modelica.SIunits.Power Q_Therm=if (submodelCooling.heatPort_outside.Q_flow +
+      exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow) > 10 then
+      submodelCooling.heatPort_outside.Q_flow + exhaustHeatExchanger.pipeCoolant.heatPort_outside.Q_flow
        else 1 "Thermal power output of the CHP unit";
   Modelica.SIunits.Power P_Mech=gasolineEngineChp.cHPCombustionEngine.P_eff
     "Mechanical power output of the CHP unit";
@@ -198,8 +198,7 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
   AixLib.Controls.Interfaces.CHPControlBus     sigBusCHP
                              annotation (Placement(transformation(extent={{-26,68},
             {28,118}}), iconTransformation(extent={{-26,68},{28,118}})));
-AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.Submodel_Cooling
-    submodel_CoolingEASY_New(
+  AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.SubmodelCooling submodelCooling(
     redeclare package Medium_Coolant = Medium_Coolant,
     CHPEngineModel=CHPEngineModel,
     m_flow=m_flow,
@@ -241,7 +240,7 @@ equation
      Line(points={{18.36,26.36},{28,26.36},{28,26.4},{40,26.4}}, color={0,127,255}));
   connect(gasolineEngineChp.port_amb, heatFlowSensor.port_a)
     annotation (Line(points={{0,9.8},{0,0},{-42,0}}, color={191,0,0}));
-  connect(gasolineEngineChp.port_cooCir, submodel_CoolingEASY_New.heatPort_outside)
+  connect(gasolineEngineChp.port_cooCir, submodelCooling.heatPort_outside)
     annotation (Line(points={{18,10.16},{18,-6},{-10,-6},{-10,-76},{28,-76},{28,
           -65.56}}, color={191,0,0}));
   connect(exhaustHeatExchanger.port_amb, heatFlowSensor.port_a) annotation (
@@ -267,12 +266,12 @@ equation
       string="",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(port_supCoo, submodel_CoolingEASY_New.port_b)
+  connect(port_supCoo, submodelCooling.port_b)
     annotation (Line(points={{80,-58},{42,-58}}, color={0,127,255}));
-  connect(exhaustHeatExchanger.port_b2, submodel_CoolingEASY_New.port_a)
-    annotation (Line(points={{40,9.6},{34,9.6},{34,-12},{0,-12},{0,-58},{14,-58}},
-        color={0,127,255}));
-  connect(submodel_CoolingEASY_New.sigBus_coo, sigBusCHP) annotation (Line(
+  connect(exhaustHeatExchanger.port_b2, submodelCooling.port_a) annotation (
+      Line(points={{40,9.6},{34,9.6},{34,-12},{0,-12},{0,-58},{14,-58}}, color={
+          0,127,255}));
+  connect(submodelCooling.sigBus_coo, sigBusCHP) annotation (Line(
       points={{28.14,-50.44},{28.14,93},{1,93}},
       color={255,204,51},
       thickness=0.5));
@@ -347,8 +346,7 @@ CHP"),  Rectangle(
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-         __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
-    Documentation(info="<html><p>
+            Documentation(info="<html><p>
   This model shows the implementation of a holistic overall model for a
   CHP power unit using the example of the Kirsch L4.12. The model is
   able to map different gas engine CHPs of small and medium power

@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
-model Submodel_Cooling
+model SubmodelCooling
 
   replaceable package Medium_Coolant =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
@@ -187,4 +187,4 @@ equation
   </li>
 </ul>
 </html>"));
-end Submodel_Cooling;
+end SubmodelCooling;

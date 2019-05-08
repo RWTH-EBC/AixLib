@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents;
 class GasolineEngineChp_EngineHousing
   "Engine housing as a simple two layer wall."
 

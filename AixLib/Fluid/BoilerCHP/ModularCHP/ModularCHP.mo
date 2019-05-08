@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.ModularCHP;
+﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
 model ModularCHP "Modular combined heat and power system model"
   import AixLib;
 
@@ -297,7 +297,6 @@ CHP"),  Rectangle(
           color={0,127,255},
           thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-         __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html><p>
   This model of a gas engine CHP plant is aggregated from runnable and
   closed submodels. The model is able to map different gas engine CHPs

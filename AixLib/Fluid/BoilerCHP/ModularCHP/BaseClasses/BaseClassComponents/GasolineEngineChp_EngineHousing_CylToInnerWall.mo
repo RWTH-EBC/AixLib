@@ -26,16 +26,14 @@ model GasolineEngineChp_EngineHousing_CylToInnerWall
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-98,30})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    logMeanTempCylWall
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature meanTempCylWall
     annotation (Placement(transformation(extent={{-76,-22},{-56,-2}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
     innerThermalConductor1(G=GInnWall/2) annotation (Placement(transformation(
           extent={{-32,-22},{-12,-2}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowEngine
     annotation (Placement(transformation(extent={{12,-22},{32,-2}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    temperatureInnerWall
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempInnerWall
     annotation (Placement(transformation(extent={{-32,6},{-12,26}})));
   Modelica.Blocks.Nonlinear.VariableLimiter heatLimit(strict=true)
     annotation (Placement(transformation(extent={{12,-54},{28,-38}})));
@@ -49,15 +47,15 @@ equation
           {22,-30},{-46,-30},{-46,-46},{10.4,-46}},     color={0,0,127}));
   connect(innerThermalConductor1.port_b,heatFlowEngine. port_a)
     annotation (Line(points={{-12,-12},{12,-12}},  color={191,0,0}));
-  connect(heatFlowEngine.port_b,temperatureInnerWall. port) annotation (Line(
-        points={{32,-12},{36,-12},{36,16},{-12,16}},    color={191,0,0}));
-  connect(T, logMeanTempCylWall.T) annotation (Line(points={{-106,-28},{-88,
-          -28},{-88,-12},{-78,-12}}, color={0,0,127}));
+  connect(heatFlowEngine.port_b, tempInnerWall.port) annotation (Line(points={{
+          32,-12},{36,-12},{36,16},{-12,16}}, color={191,0,0}));
+  connect(T, meanTempCylWall.T) annotation (Line(points={{-106,-28},{-88,-28},{
+          -88,-12},{-78,-12}}, color={0,0,127}));
   connect(heatLimit.y, y) annotation (Line(points={{28.8,-46},{54,-46},{54,0},
           {106,0}}, color={0,0,127}));
-  connect(logMeanTempCylWall.port, innerThermalConductor1.port_a)
+  connect(meanTempCylWall.port, innerThermalConductor1.port_a)
     annotation (Line(points={{-56,-12},{-32,-12}}, color={191,0,0}));
-  connect(temperatureInnerWall.T, T1)
+  connect(tempInnerWall.T, T1)
     annotation (Line(points={{-34,16},{-106,16}}, color={0,0,127}));
   connect(maximumEngineHeat.y, heatLimit.limit1) annotation (Line(points={{
           -13,-40},{-2,-40},{-2,-39.6},{10.4,-39.6}}, color={0,0,127}));
