@@ -78,7 +78,7 @@ equation
   connect(masFlo1.m_flow, assEqu.u2)
     annotation (Line(points={{30,51},{30,64},{38,64}}, color={0,0,127}));
   annotation (
-    experiment(StopTime=3),
+    experiment(StopTime=3, Tolerance=1e-06),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/CompareFixedResistances.mos"
         "Simulate and plot"),
     __Dymola_experimentSetupOutput,
