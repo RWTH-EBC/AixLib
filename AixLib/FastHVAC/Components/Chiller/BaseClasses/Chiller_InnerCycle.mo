@@ -1,42 +1,22 @@
 ﻿within AixLib.FastHVAC.Components.Chiller.BaseClasses;
 model Chiller_InnerCycle
   "Blackbox model of refrigerant cycle of a HP in cooling mode"
-  replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
-     "Replaceable model for performance data of HP in heating mode"
-    annotation (choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.FastHVAC.Components.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
+    AixLib.FastHVAC.Components.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
      "Replaceable model for performance data of HP in cooling mode"
-    annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-  parameter Boolean use_revHP=true "True if the HP is reversible";
+    annotation (choicesAllMatching=true);
+
   parameter Real scalingFactor=1 "Scaling factor of heat pump";
- AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
-        transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
-            -16,88},{18,118}})));
+  Controls.Interfaces.ChillerControlBus sigBusChi annotation (Placement(
+        transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{-16,88},
+            {18,118}})));
   Modelica.Blocks.Interfaces.RealOutput QCon(unit="W", displayUnit="kW") "Heat Flow to condenser"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  PerDataHea PerformanceDataHeater
-                          annotation (Placement(transformation(extent={{13,20},{
-            67,76}},  rotation=0)));
-  Utilities.Logical.SmoothSwitch switchQEva(
-    u1(unit="W", displayUnit="kW"),
-    u3(unit="W", displayUnit="kW"),
-    y(unit="W", displayUnit="kW"))
-    "If mode is false, Condenser becomes Evaporator and vice versa"
-    annotation (Placement(transformation(extent={{-70,-24},{-90,-4}})));
-  Utilities.Logical.SmoothSwitch switchQCon(                                                            y(unit="W",displayUnit="kW"),
-    u1(unit="W", displayUnit="kW"),
-    u3(unit="W", displayUnit="kW"))
-    "If mode is false, Condenser becomes Evaporator and vice versa"
-    annotation (Placement(transformation(extent={{72,-22},{92,-2}})));
   Modelica.Blocks.Interfaces.RealOutput Pel(unit="W", displayUnit="kW")
     "Electrical power consumed by compressor" annotation (Placement(
         transformation(
@@ -44,114 +24,33 @@ model Chiller_InnerCycle
         rotation=-90,
         origin={0.5,-110.5})));
 
-  PerDataChi PerformanceDataChiller if use_revHP
+  PerDataChi PerformanceDataChiller
                           annotation(Placement(transformation(
-        extent={{-27,-28},{27,28}},
+        extent={{27,-28},{-27,28}},
         rotation=0,
-        origin={-46,48})));
+        origin={0,48})));
 
-  AixLib.Utilities.Logical.SmoothSwitch switchPel(
-    u1(unit="W", displayUnit="kW"),
-    u3(unit="W", displayUnit="kW"),
-    y(unit="W", displayUnit="kW"))
-    "Whether to use cooling or heating power consumption" annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={0,-76})));
-protected
-  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_revHP
-    "If no heating is used, the switches may still be connected"
-    annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
 public
-  Modelica.Blocks.Math.Gain gainCon(final k=-1) if use_revHP
+  Modelica.Blocks.Math.Gain gainCon(final k=-1)
     "Negate QCon to match definition of heat flow direction" annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
-        origin={58,-20})));
-  Modelica.Blocks.Math.Gain gainEva(final k=-1)
-    "Negate QEva to match definition of heat flow direction" annotation (
-      Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=180,
-        origin={-56,-6})));
+        origin={78,0})));
 equation
-  assert(use_revHP or (use_revHP==false and sigBusHP.mode==true), "Can't turn to chilling on irreversible HP", level = AssertionLevel.error);
-  connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
-      points={{1.085,103.075},{1.085,104},{-68,104},{-68,-14}},
+
+  connect(sigBusChi, PerformanceDataChiller.sigBusChi) annotation (Line(
+      points={{1,103},{1,90.5},{-0.27,90.5},{-0.27,77.12}},
       color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.mode, switchQCon.u2) annotation (Line(
-      points={{1.085,103.075},{1.085,102},{70,102},{70,-12}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP, PerformanceDataHeater.sigBusHP) annotation (Line(
-      points={{1,103},{1,86},{2,86},{2,86},{38,86},{38,77.12},{40.27,77.12}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-92,-14},{-92,
-          0},{-110,0}}, color={0,0,127}));
-  connect(PerformanceDataHeater.QCon, switchQCon.u1)
-    annotation (Line(points={{18.4,17.2},{18.4,-4},{70,-4}}, color={0,0,127}));
-  connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-015,-87},{-2.22045e-015,
-          -110.5},{0.5,-110.5}}, color={0,0,127}));
-  connect(sigBusHP.mode, switchPel.u2) annotation (Line(
-      points={{1.085,103.075},{1.085,-64},{2.22045e-015,-64}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(PerformanceDataHeater.Pel, switchPel.u1) annotation (Line(points={{40,
-          17.2},{40,-30},{8,-30},{8,-64}}, color={0,0,127}));
-  connect(PerformanceDataChiller.Pel, switchPel.u3) annotation (Line(points={{-46,
-          17.2},{-46,-30},{-8,-30},{-8,-64}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-24.4,
-          17.2},{-24.4,-22},{-68,-22}},       color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(sigBusHP, PerformanceDataChiller.sigBusHP) annotation (Line(
-      points={{1,103},{1,86},{-45.73,86},{-45.73,77.12}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(constZero.y, switchPel.u3)
-    annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
-  connect(constZero.y, switchQEva.u3) annotation (Line(points={{-59,-64},{-52,
-          -64},{-52,-22},{-68,-22}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(constZero.y, switchQCon.u3) annotation (Line(points={{-59,-64},{-52,
-          -64},{-52,-38},{70,-38},{70,-20}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(switchQCon.y, QCon) annotation (Line(points={{93,-12},{94,-12},{94,0},
-          {110,0}}, color={0,0,127}));
-  connect(gainEva.y, switchQEva.u1)
-    annotation (Line(points={{-60.4,-6},{-68,-6}}, color={0,0,127}));
-  connect(switchQCon.u3, gainCon.y) annotation (Line(
-      points={{70,-20},{62.4,-20}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QCon, gainCon.u) annotation (Line(
-      points={{-67.6,17.2},{-67.6,0},{-24,0},{-24,-20},{53.2,-20}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{61.6,
-          17.2},{61.6,-6},{-51.2,-6}}, color={0,0,127}));
+      thickness=0.5));
+  connect(gainCon.y, QCon)
+    annotation (Line(points={{82.4,0},{110,0}}, color={0,0,127}));
+  connect(PerformanceDataChiller.QEva, QEva) annotation (Line(points={{-21.6,17.2},
+          {-21.6,0},{-110,0}}, color={0,0,127}));
+  connect(PerformanceDataChiller.QCon, gainCon.u)
+    annotation (Line(points={{21.6,17.2},{21.6,0},{73.2,0}}, color={0,0,127}));
+  connect(PerformanceDataChiller.Pel, Pel) annotation (Line(points={{0,17.2},{0,
+          -46},{0,-110.5},{0.5,-110.5}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

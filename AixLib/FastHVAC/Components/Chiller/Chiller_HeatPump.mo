@@ -11,20 +11,11 @@ model Chiller_HeatPump
       AixLib.FastHVAC.Media.WaterSimple()
     "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  parameter Boolean use_revHP=true
-    "True if the HP is reversible"
-    annotation(choices(choice=true "reversible HP",
-      choice=false "only heating",
-      radioButtons=true), Dialog(descriptionLabel=true));
-  replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-    "Performance data of HP in heating mode"
-    annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-    "Performance data of HP in chilling mode"
-    annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-  parameter Real scalingFactor=1 "Scaling-factor of HP";
+      AixLib.FastHVAC.Components.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+    "Performance data of chiller"
+    annotation (choicesAllMatching=true);
+  parameter Real scalingFactor=1 "Scaling-factor of chiller";
   parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
@@ -223,18 +214,17 @@ model Chiller_HeatPump
   Modelica.Blocks.Interfaces.RealInput nSet
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP
-    annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
-        iconTransformation(extent={{-108,-52},{-90,-26}})));
+  Controls.Interfaces.ChillerControlBus sigBusChi annotation (Placement(
+        transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
+          extent={{-108,-52},{-90,-26}})));
   BaseClasses.Chiller_InnerCycle                innerCycle(
-    redeclare final model PerDataHea =PerDataHea,
     redeclare final model PerDataChi = PerDataChi,
-    final use_revHP=use_revHP,
     final scalingFactor=scalingFactor)                                                   annotation (
       Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
+
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K",
     final displayUnit="degC")
     "Ambient temperature on the evaporator side"
@@ -247,8 +237,6 @@ model Chiller_HeatPump
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
-    annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
   Sensors.TemperatureSensor        senT_a2
     "Temperature at sink inlet"
     annotation (Placement(
@@ -318,8 +306,8 @@ equation
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
   connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
-  connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
-          {-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(iceFac_in, sigBusChi.iceFac) annotation (Line(points={{-76,-136},{-76,
+          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -341,50 +329,45 @@ equation
                              color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
-  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
+  connect(mFlow_con.dotm, sigBusChi.m_flow_co) annotation (Line(points={{-79,51},
           {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
+  connect(nSet, sigBusChi.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-88,-18},
-          {-88,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
+  connect(senT_a1.T, sigBusChi.T_flow_co) annotation (Line(points={{-33,81},{-33,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
-          {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_a2.T, sigBusChi.T_flow_ev) annotation (Line(points={{39,-75},{39,
+          -36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
+  connect(senT_b1.T, sigBusChi.T_ret_co) annotation (Line(points={{39,81},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
+  connect(innerCycle.Pel, sigBusChi.Pel) annotation (Line(points={{28.73,-0.865},
           {52,-0.865},{52,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.sigBusHP, sigBusHP) annotation (Line(
+  connect(innerCycle.sigBusChi, sigBusChi) annotation (Line(
       points={{-26.78,-0.73},{-38,-0.73},{-38,-44},{-72,-44},{-72,-43},{-105,-43}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -392,14 +375,15 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
+
+  connect(mFlow_eva.dotm, sigBusChi.m_flow_ev) annotation (Line(points={{69,-51},
           {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
+  connect(senT_b2.T, sigBusChi.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,

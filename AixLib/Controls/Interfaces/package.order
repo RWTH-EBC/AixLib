@@ -1,4 +1,5 @@
 BoilerControlBus
+ChillerControlBus
 FVUControlBus
 HeatPumpControlBus
 ModularCompressorControlBus
