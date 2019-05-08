@@ -61,7 +61,9 @@ model HeatPump
     use_refIne=false,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
-    TCon_start=303.15) annotation (Placement(transformation(
+    TCon_start=303.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                       annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));
@@ -105,7 +107,8 @@ model HeatPump
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
     final addPowerToMedium=false,
-    redeclare final package Medium = Medium_sin)
+    redeclare final package Medium = Medium_sin,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -117,7 +120,8 @@ model HeatPump
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final V=5,
     final allowFlowReversal=true,
-    redeclare package Medium = Medium_sin)
+    redeclare package Medium = Medium_sin,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                                   "Volume of Condenser" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
