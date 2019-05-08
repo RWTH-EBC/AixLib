@@ -235,8 +235,8 @@ model HPSystemController
         origin={-80,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
-      final function iceFunc =
+  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare final function
+                     iceFunc =
         DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
        use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));

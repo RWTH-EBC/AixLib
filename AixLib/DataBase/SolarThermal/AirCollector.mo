@@ -1,6 +1,4 @@
 within AixLib.DataBase.SolarThermal;
-
-
 record AirCollector "Properties of an air collector"
   extends SolarThermalBaseDataDefinition(eta_zero = 0.8, c1 = 7.5, c2 = 0.01);
   annotation(Documentation(info="<html>

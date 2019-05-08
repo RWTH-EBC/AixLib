@@ -10,7 +10,7 @@ partial model PartialInternalGain
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = ratioConv) annotation(Placement(transformation(extent = {{20, -20}, {40, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat
     "convective heat connector"                                                            annotation(Placement(transformation(extent = {{80, 50}, {100, 70}}), iconTransformation(extent = {{80, 50}, {100, 70}})));
-  Utilities.Interfaces.Star RadHeat "radiative heat connector" annotation(Placement(transformation(extent = {{80, -70}, {100, -50}}), iconTransformation(extent = {{80, -68}, {100, -48}})));
+  Interfaces.RadPort        RadHeat "radiative heat connector" annotation(Placement(transformation(extent = {{80, -70}, {100, -50}}), iconTransformation(extent = {{80, -68}, {100, -48}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}}), iconTransformation(extent = {{-100, -10}, {-80, 10}})));
   Modelica.Blocks.Math.Gain gain(k = ratioConv) annotation(Placement(transformation(extent = {{4, 26}, {12, 34}})));
   Modelica.Blocks.Math.Gain gain1(k = 1 - ratioConv) annotation(Placement(transformation(extent = {{4, -14}, {12, -6}})));

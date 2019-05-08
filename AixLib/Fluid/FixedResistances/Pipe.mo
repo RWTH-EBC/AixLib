@@ -7,8 +7,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
    // Parameters Tab "General"
     replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby
-    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby Modelica.Media.Interfaces.PartialMedium
+                                            "Medium in the component"
       annotation (choicesAllMatching = true);
 
    parameter Real nParallel = 1 "Number of identical parallel pipes" annotation(Dialog(group = "Geometry"));
@@ -30,8 +30,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
    replaceable model FlowModel =
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow
-    constrainedby
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+    constrainedby Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
 
@@ -60,8 +59,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     "= true to use the convective HeatTransfer model"                                                      annotation(Dialog(tab="Heat transfer"));
     replaceable model HeatTransferConvective =
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (alpha0 = alpha_i)
-    constrainedby
-    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
+    constrainedby Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_i=1000
@@ -125,8 +123,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
-        (alpha0=alpha_i))
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (
+         alpha0=alpha_i))
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)
@@ -224,9 +222,7 @@ parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
         rotation=180,
         origin={36,58})));
 
-  AixLib.Utilities.Interfaces.Star Star if    Heat_Loss_To_Ambient and not isEmbedded
-    annotation (Placement(transformation(extent={{-70,74},{-50,94}}),
-        iconTransformation(extent={{-24,46},{-4,66}})));
+  AixLib.Utilities.Interfaces.RadPort Star if Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-70,74},{-50,94}}), iconTransformation(extent={{-24,46},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes) if
                                      Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
