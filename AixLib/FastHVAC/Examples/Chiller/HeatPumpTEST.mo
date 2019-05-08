@@ -1,12 +1,12 @@
 ﻿within AixLib.FastHVAC.Examples.Chiller;
-model Chiller
+model HeatPumpTEST
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple()) "Fluidsource for source"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  Components.Chiller.Chiller_HeatPump chiller(
+  Components.HeatGenerators.HeatPump.HeatPump heatPump(
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -23,10 +23,14 @@ model Chiller
     CEva=100,
     GEva=5,
     allowFlowReversalEva=true,
+    use_revHP=true,
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
+    redeclare model PerDataHea =
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
+            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        Components.Chiller.PerformanceData.LookUpTable2D (dataTable=
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
@@ -70,6 +74,12 @@ model Chiller
     annotation (Placement(transformation(extent={{5,-4},{-5,4}},
         rotation=180,
         origin={49,-54})));
+  Modelica.Blocks.Sources.BooleanStep     booleanStep(
+      startValue=true, startTime=0)
+    "boolean signal to switch from heating to cooling operation"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+        rotation=0,
+        origin={-80,76})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
@@ -106,25 +116,29 @@ model Chiller
 equation
   connect(dotm_source.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
-  connect(fluidSource.enthalpyPort_b, chiller.enthalpyPort_a1)
+  connect(fluidSource.enthalpyPort_b, heatPump.enthalpyPort_a1)
     annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
-  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,
-          -27.3},{-10.3333,-27.3},{-10.3333,-16.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,
-          -27.3},{16.3333,-27.3},{16.3333,-16.3}}, color={0,0,127}));
-  connect(chiller.enthalpyPort_b, temperatureSensor.enthalpyPort_a) annotation (
-     Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,0}));
+  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{3,-27.3},
+          {-10.3333,-27.3},{-10.3333,-16.3}}, color={0,0,127}));
+  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{3,-27.3},
+          {16.3333,-27.3},{16.3333,-16.3}}, color={0,0,127}));
+  connect(heatPump.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
+    annotation (Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,
+          0}));
   connect(temperatureSensor.T, hys.u) annotation (Line(points={{35.9,-63.1},{35.9,
           -54},{43,-54}}, color={0,0,127}));
-  connect(booleanToReal.y, chiller.nSet) annotation (Line(points={{7.5,53},{
-          5.66667,53},{5.66667,13.08}}, color={0,0,127}));
-  connect(chiller.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
+  connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{7.5,53},{5.66667,
+          53},{5.66667,13.08}}, color={0,0,127}));
+  connect(heatPump.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
     annotation (Line(points={{-5,11},{-5,57},{-27.3,57}}, color={176,0,0}));
-  connect(iceFac.y, chiller.iceFac_in) annotation (Line(points={{-33.5,9},{
-          -15.1333,9},{-15.1333,7.88}}, color={0,0,127}));
+  connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-33.5,9},{
+          -15.1333,9},{-15.1333,7.88}},
+                               color={0,0,127}));
+  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-75.6,76},{
+          0.6,76},{0.6,13.08}}, color={255,0,255}));
   connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
-  connect(pump.enthalpyPort_b, chiller.enthalpyPort_a)
+  connect(pump.enthalpyPort_b, heatPump.enthalpyPort_a)
     annotation (Line(points={{26.4,20},{11,20},{11,11}}, color={176,0,0}));
   connect(dotm_sink.y, pump.dotm_setValue)
     annotation (Line(points={{67.5,77},{36,77},{36,28}}, color={0,0,127}));
@@ -154,7 +168,7 @@ equation
           lineColor={0,0,255},
           fillColor={213,170,255},
           fillPattern=FillPattern.Solid,
-          textString="FastHVAC Chiller
+          textString="FastHVAC HeatPump2
 ")}),
     experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
@@ -173,4 +187,4 @@ equation
     </li>
   </ul>
   </html>"));
-end Chiller;
+end HeatPumpTEST;

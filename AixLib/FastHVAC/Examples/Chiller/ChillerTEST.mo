@@ -1,5 +1,5 @@
 ﻿within AixLib.FastHVAC.Examples.Chiller;
-model Chiller
+model ChillerTEST
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
@@ -108,10 +108,10 @@ equation
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, chiller.enthalpyPort_a1)
     annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
-  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,
-          -27.3},{-10.3333,-27.3},{-10.3333,-16.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,
-          -27.3},{16.3333,-27.3},{16.3333,-16.3}}, color={0,0,127}));
+  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,-27.3},
+          {-10.3333,-27.3},{-10.3333,-16.3}},        color={0,0,127}));
+  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,-27.3},
+          {16.3333,-27.3},{16.3333,-16.3}},        color={0,0,127}));
   connect(chiller.enthalpyPort_b, temperatureSensor.enthalpyPort_a) annotation (
      Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,0}));
   connect(temperatureSensor.T, hys.u) annotation (Line(points={{35.9,-63.1},{35.9,
@@ -173,4 +173,4 @@ equation
     </li>
   </ul>
   </html>"));
-end Chiller;
+end ChillerTEST;
