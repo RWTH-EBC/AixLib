@@ -3,8 +3,8 @@ model Chiller
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
-        FastHVAC.Media.WaterSimple()) "Fluidsource for source"
+  FastHVAC.Components.Pumps.FluidSource fluidSink(medium=
+        FastHVAC.Media.WaterSimple()) "Fluidsource for sink"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
   Components.Chiller.Chiller_HeatPump chiller(
     refIneFre_constant=1,
@@ -32,17 +32,15 @@ model Chiller
         extent={{-13,-16},{13,16}},
         rotation=-90,
         origin={3,-2})));
-  FastHVAC.Components.Sinks.Vessel vessel_ev
-    "vessel for open evaporator circuit"     annotation (Placement(
-        transformation(
+  FastHVAC.Components.Sinks.Vessel vessel_con
+    "Vessel for open condenser circuit" annotation (Placement(transformation(
         extent={{-11,-9},{11,9}},
         rotation=180,
         origin={-35,57})));
-  Modelica.Blocks.Sources.Constant dotm_source(k=1) "Source mass flow signal"
+  Modelica.Blocks.Sources.Constant dotm_sink(k=1) "Sink mass flow signal"
     annotation (Placement(transformation(extent={{-98,-82},{-78,-62}})));
-  Modelica.Blocks.Sources.Constant dotm_sink(k=0.106) "sink mass flow signal"
-                                                      annotation (Placement(
-        transformation(
+  Modelica.Blocks.Sources.Constant dotm_source(k=0.106)
+    "Source mass flow signal" annotation (Placement(transformation(
         extent={{-5,5},{5,-5}},
         rotation=180,
         origin={73,77})));
@@ -70,12 +68,12 @@ model Chiller
     annotation (Placement(transformation(extent={{5,-4},{-5,4}},
         rotation=180,
         origin={49,-54})));
-  Modelica.Blocks.Sources.Ramp TsuSourceRamp(
+  Modelica.Blocks.Sources.Ramp TsuSinkRamp(
     duration=1000,
     startTime=1000,
     height=25,
     offset=278)
-    "Ramp signal for the temperature input of the source side's ideal mass flow source"
+    "Ramp signal for the temperature input of the sink side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-96,-34},{-76,-14}})));
   BaseClasses.WorkingFluid Room(m_fluid=5*1000, T0=293.15) "Volume"
                                                            annotation (
@@ -83,8 +81,9 @@ model Chiller
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={90,-26})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon
-    "Heat flow rate of the condenser" annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateEva
+    "Heat flow rate of the evaporator"
+                                      annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=270,
         origin={52,-18})));
@@ -98,39 +97,39 @@ model Chiller
     amplitude=3000,
     offset=3000) "hourly sine "
     annotation (Placement(transformation(extent={{66,8},{58,16}})));
-  Components.Pumps.Pump pump "sink pump"
+  Components.Pumps.Pump pump "Source pump"
                              annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={36,20})));
 equation
-  connect(dotm_source.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
+  connect(dotm_sink.y, fluidSink.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
-  connect(fluidSource.enthalpyPort_b, chiller.enthalpyPort_a1)
+  connect(fluidSink.enthalpyPort_b, chiller.enthalpyPort_a1)
     annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
-  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,
-          -27.3},{-10.3333,-27.3},{-10.3333,-16.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,
-          -27.3},{16.3333,-27.3},{16.3333,-16.3}}, color={0,0,127}));
+  connect(T_amb_internal.y,chiller.T_amb_con)  annotation (Line(points={{3,-27.3},
+          {-10.3333,-27.3},{-10.3333,-16.3}},        color={0,0,127}));
+  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,-27.3},
+          {16.3333,-27.3},{16.3333,-16.3}},        color={0,0,127}));
   connect(chiller.enthalpyPort_b, temperatureSensor.enthalpyPort_a) annotation (
      Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,0}));
   connect(temperatureSensor.T, hys.u) annotation (Line(points={{35.9,-63.1},{35.9,
           -54},{43,-54}}, color={0,0,127}));
   connect(booleanToReal.y, chiller.nSet) annotation (Line(points={{7.5,53},{
           5.66667,53},{5.66667,13.08}}, color={0,0,127}));
-  connect(chiller.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
+  connect(chiller.enthalpyPort_b1, vessel_con.enthalpyPort_a)
     annotation (Line(points={{-5,11},{-5,57},{-27.3,57}}, color={176,0,0}));
   connect(iceFac.y, chiller.iceFac_in) annotation (Line(points={{-33.5,9},{
           -15.1333,9},{-15.1333,7.88}}, color={0,0,127}));
-  connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},
+  connect(TsuSinkRamp.y, fluidSink.T_fluid) annotation (Line(points={{-75,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
   connect(pump.enthalpyPort_b, chiller.enthalpyPort_a)
     annotation (Line(points={{26.4,20},{11,20},{11,11}}, color={176,0,0}));
-  connect(dotm_sink.y, pump.dotm_setValue)
+  connect(dotm_source.y, pump.dotm_setValue)
     annotation (Line(points={{67.5,77},{36,77},{36,28}}, color={0,0,127}));
   connect(sine.y, gain.u)
     annotation (Line(points={{57.6,12},{54,12},{54,2.8}}, color={0,0,127}));
-  connect(gain.y, heatFlowRateCon.Q_flow)
+  connect(gain.y,heatFlowRateEva. Q_flow)
     annotation (Line(points={{54,-6.4},{54,-12},{52,-12}}, color={0,0,127}));
   connect(temperatureSensor.enthalpyPort_b, Room.enthalpyPort_a) annotation (
       Line(points={{43.1,-73.09},{90,-73.09},{90,-35}}, color={176,0,0}));
@@ -140,7 +139,7 @@ equation
           {68,53},{19,53}}, color={255,0,255}));
   connect(Room.enthalpyPort_b, pump.enthalpyPort_a)
     annotation (Line(points={{90,-17},{90,20},{45.6,20}}, color={176,0,0}));
-  connect(heatFlowRateCon.port, Room.heatPort)
+  connect(heatFlowRateEva.port, Room.heatPort)
     annotation (Line(points={{52,-24},{52,-26},{80.6,-26}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={

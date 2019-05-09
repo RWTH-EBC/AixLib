@@ -11,13 +11,11 @@ model ChillerTEST
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
     mFlow_conNominal=0.5,
-    VCon=0.4,
     deltaM_con=0.1,
     use_ConCap=false,
     CCon=100,
     GCon=5,
     mFlow_evaNominal=0.5,
-    VEva=0.04,
     deltaM_eva=0.1,
     use_EvaCap=false,
     CEva=100,
@@ -28,7 +26,10 @@ model ChillerTEST
     redeclare model PerDataChi =
         Components.Chiller.PerformanceData.LookUpTable2D (dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
-    TAmbCon_nominal=288.15) annotation (Placement(transformation(
+    VCon=0.04,
+    VEva=0.4,
+    TAmbCon_nominal=273.15,
+    TAmbEva_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=-90,
         origin={3,-2})));
@@ -108,9 +109,9 @@ equation
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, chiller.enthalpyPort_a1)
     annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
-  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,-27.3},
+  connect(T_amb_internal.y,chiller.T_amb_con)  annotation (Line(points={{3,-27.3},
           {-10.3333,-27.3},{-10.3333,-16.3}},        color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,-27.3},
+  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,-27.3},
           {16.3333,-27.3},{16.3333,-16.3}},        color={0,0,127}));
   connect(chiller.enthalpyPort_b, temperatureSensor.enthalpyPort_a) annotation (
      Line(points={{11,-15},{27.08,-15},{27.08,-73.09}}, color={176,0,0}));
