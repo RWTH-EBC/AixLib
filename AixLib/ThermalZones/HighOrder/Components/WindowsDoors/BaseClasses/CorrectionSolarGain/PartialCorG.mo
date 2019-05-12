@@ -13,7 +13,7 @@ public
         extent={{18,-19},{-18,19}},
         rotation=180,
         origin={-98,-1})));
-  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans[n](unit="W/m2")
+  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans[n](each unit="W/m2")
     "transmitted solar radiation through window"
     annotation (Placement(transformation(extent={{80,-10},{100,10}}),
         iconTransformation(extent={{80,-10},{100,10}})));
