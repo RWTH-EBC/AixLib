@@ -69,7 +69,7 @@ equation
 <p>It uses control buses to conect with the controllers.</p>
 </html>", revisions="<html>
 <ul>
-<li><i>November 26, 2072&nbsp;</i> by Ana Constantin:<br>Implemented</li>
+<li><i>November 26, 2017&nbsp;</i> by Ana Constantin:<br>Implemented</li>
 </ul>
 </html>"));
 end HeaterCoolerPI_withPel;

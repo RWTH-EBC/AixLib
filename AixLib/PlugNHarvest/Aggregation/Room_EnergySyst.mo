@@ -313,10 +313,34 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-76,-86},{82,84}}, fileName=
               "modelica://AixLib/Resources/Images/PnH/PnH_Logo.png")}),    Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+        coordinateSystem(preserveAspectRatio=false), graphics={
+        Rectangle(
+          extent={{-100,0},{100,-40}},
+          lineColor={28,108,200},
+          fillColor={170,255,85},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{38,-4},{96,-16}},
+          lineColor={28,108,200},
+          fillColor={170,255,85},
+          fillPattern=FillPattern.None,
+          textString="Energy system"),
+        Rectangle(
+          extent={{100,-40},{-98,-100}},
+          lineColor={28,108,200},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{44,-44},{106,-56}},
+          lineColor={28,108,200},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.None,
+          textString="Control")}),
     Documentation(revisions="<html>
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>Room with internal gains and facilities + energy system + control</p>
 </html>"));
 end Room_EnergySyst;

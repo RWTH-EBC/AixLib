@@ -298,5 +298,7 @@ Internal Gains")}),                                              Diagram(
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>Room envelope + Internal gains (people, lights, appliances)</p>
 </html>"));
 end Room_intGain;

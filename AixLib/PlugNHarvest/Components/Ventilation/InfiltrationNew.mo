@@ -51,5 +51,9 @@ equation
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>Infiltration of fresh air (outside air), according to the german standard <code>DIN 12831.</code></p>
+<p>The boundary component pulls the same mass flow from the room in order to have mass equlibrium. </p>
+<p>The air model is a medium model.</p>
 </html>"));
 end InfiltrationNew;

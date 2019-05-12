@@ -138,5 +138,7 @@ equation
           points={{40,32},{32,18},{48,18},{40,32}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}), Documentation(info="<html>
+<p>Model for PV vnetilation: ventilation of a PV module to prevent overheating.</p>
+</html>"));
 end PVventilation;

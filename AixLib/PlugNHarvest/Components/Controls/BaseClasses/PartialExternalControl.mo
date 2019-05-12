@@ -50,6 +50,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name")}),
     Documentation(info="<html>
+<p>Partial model for controllers.</p>
 </html>",
 revisions="<html>
 <ul>

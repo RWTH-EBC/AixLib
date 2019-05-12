@@ -183,5 +183,7 @@ equation
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>SImulation set up for a PlugNHarvest use case.</p>
 </html>"));
 end Test;

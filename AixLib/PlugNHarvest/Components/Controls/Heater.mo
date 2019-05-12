@@ -62,7 +62,10 @@ equation
           textString="Controller")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>November 26, 2072&nbsp;</i> by Ana Constantin:<br>Implemented</li>
+<li><i>November 26, 2017&nbsp;</i> by Ana Constantin:<br>Implemented</li>
 </ul>
+</html>", info="<html>
+<p>Theperameter for set temperature is set only if the outside temperature goes under a temperature threshhold.</p>
+<p>The switch to night mode input is present, but not used.</p>
 </html>"));
 end Heater;

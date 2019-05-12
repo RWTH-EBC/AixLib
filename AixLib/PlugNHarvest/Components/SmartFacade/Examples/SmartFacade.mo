@@ -63,4 +63,7 @@ equation
           {37.62,14.72},{37.62,4},{64,4}}, color={0,127,255}));
   connect(smartFacade.port_a, vol.ports[2]) annotation (Line(points={{13.24,7.12},
           {41.62,7.12},{41.62,4},{68,4}}, color={0,127,255}));
+  annotation (Documentation(info="<html>
+<p>Test for the smart facade model. To ckech how the individual components can be activated an if they work properly.</p>
+</html>"));
 end SmartFacade;

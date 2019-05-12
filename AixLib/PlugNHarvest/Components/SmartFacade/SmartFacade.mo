@@ -140,5 +140,13 @@ Facade")}), Documentation(revisions="<html>
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>Model for a smart facade with the following components:</p>
+<ul>
+<li>PV-generation module</li>
+<li>Mechanical ventilation</li>
+<li>Solar Air Heater</li>
+</ul>
+<p>Each of these components can be individualy (de)activated.</p>
 </html>"));
 end SmartFacade;

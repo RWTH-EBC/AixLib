@@ -53,7 +53,10 @@ equation
           textString="Controller")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>November 26, 2072&nbsp;</i> by Ana Constantin:<br>Implemented</li>
+<li><i>November 26, 2017&nbsp;</i> by Ana Constantin:<br>Implemented</li>
 </ul>
+</html>", info="<html>
+<p>Sets a set temperatuzre. The temperature is given as a parameter.</p>
+<p>The inputs for switching to night mode and for outside temperature are there but not used in this version of the control. </p>
 </html>"));
 end Cooler;

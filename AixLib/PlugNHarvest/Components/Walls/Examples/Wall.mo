@@ -54,7 +54,7 @@ equation
   connect(fixedTemperature.port, vol.heatPort) annotation (Line(points={{20,50},
           {22,50},{22,14},{36,14}}, color={191,0,0}));
   connect(wall.thermStarComb_inside, heatStarToComb.portConvRadComb)
-    annotation (Line(points={{-4,11},{0,11},{0,-17.925},{6.42,-17.925}}, color=
+    annotation (Line(points={{-4,11},{0,11},{0,-18.975},{6.14,-18.975}}, color=
           {191,0,0}));
   connect(heatStarToComb.portConv, vol.heatPort) annotation (Line(points={{
           20.07,-14.175},{36,-14.175},{36,14}}, color={191,0,0}));

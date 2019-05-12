@@ -10,5 +10,7 @@ model PartialElectricalEquipment
     Documentation(revisions="<html>
 <ul>
 <li><i>September, 2072&nbsp;</i> by Ana Constantin:<br>Implemented</li>
-</ul>"));
+</ul>", info="<html>
+<p>Partial model for electrical equipment: inputs and outputs.</p>
+</html>"));
 end PartialElectricalEquipment;

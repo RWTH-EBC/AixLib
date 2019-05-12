@@ -163,5 +163,12 @@ record Parameters "Record for parametrisation of simulation model"
 <ul>
 <li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>Aggregation of all the relevant parameters for a PlugNHarvest simulation.</p>
+<p>The parameters are classified in </p>
+<ul>
+<li>general: have to be set for each  use case</li>
+<li>advanced: can be re-set for each  use case, however useful default values are already given</li>
+</ul>
 </html>"));
 end Parameters;
