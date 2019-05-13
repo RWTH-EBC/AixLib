@@ -2,7 +2,6 @@
 record Parameters "Record for parametrisation of simulation model"
     //  * * * * * * * * * * * * G  E  N  E  R  A  L * * * * * * * * * * * *
  replaceable package AirModel = AixLib.Media.Air "Air model" annotation (choicesAllMatching = true);
- parameter String weatherFileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt");
     //**************************E N V E L O P E ************************
     // room geometry
   parameter Modelica.SIunits.Length room_length=5 "room length"
@@ -88,7 +87,12 @@ record Parameters "Record for parametrisation of simulation model"
   parameter Modelica.SIunits.Temperature Tset_chiller = 297.15 "set temperature for cooling" annotation(Dialog(group = "Energy system", descriptionLabel = true));
   parameter Modelica.SIunits.Power Pmax_chiller = 1000 "maximal power output chiller" annotation(Dialog(group = "Energy system", descriptionLabel = true));
 
-  //**************************P R O F I L E S ************************
+  //**************************B O U N D A R Y  C O N D I T I O N S ************************
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude = 49.5
+    "latitude of location"                                                                           annotation(Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Longitude = 8.5
+    "longitude of location"                                                                           annotation(Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter String weatherFileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")  annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition schedulePersons =  AixLib.DataBase.Profiles.NineToFive() "Schedule for persons"  annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleLights =  AixLib.DataBase.Profiles.NineToFive() "Schedule for lights" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleElAppliances =  AixLib.DataBase.Profiles.NineToFive() "Schedule for electrical appliances" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));

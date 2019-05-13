@@ -68,7 +68,9 @@ model Test
     Wind_dir=true,
     Air_press=true,
     Mass_frac=false,
-    fileName=parameters.weatherFileName)
+    fileName=parameters.weatherFileName,
+    Latitude=parameters.Latitude,
+    Longitude=parameters.Longitude)
     annotation (Placement(transformation(extent={{-100,28},{-48,62}})));
   Modelica.Blocks.Sources.CombiTimeTable schedule_occupants(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
