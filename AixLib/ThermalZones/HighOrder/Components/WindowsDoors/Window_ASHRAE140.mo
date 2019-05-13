@@ -5,7 +5,7 @@ model Window_ASHRAE140
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
 //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
-  parameter Real windowarea=2 "Total fenestration area";
+  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
     parameter Modelica.SIunits.Temperature T0= 293.15 "Initial temperature";
   parameter Boolean selectable = true "Select window type" annotation (Dialog(group="Window type", descriptionLabel = true));
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=

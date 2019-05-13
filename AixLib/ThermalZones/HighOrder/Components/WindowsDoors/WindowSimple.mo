@@ -2,8 +2,6 @@
 model WindowSimple "Window with radiation and U-Value"
   extends
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
-  //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
-  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
   parameter Boolean selectable=true "Select window type"
     annotation (Dialog(group="Window type", descriptionLabel=true));
@@ -59,8 +57,6 @@ equation
     annotation (Line(points={{90,60},{22,60}}, color={95,95,95}));
   connect(solarRad_in, corG.SR_input[1]) annotation (Line(points={{-90,60},{-70,
           60},{-70,59.9},{-49.8,59.9}}, color={255,128,0}));
-  connect(twoStar_RadEx.Star, Star)
-    annotation (Line(points={{49.1,60},{90,60}}, color={95,95,95}));
   connect(port_outside, HeatTrans.port_a) annotation (Line(points={{-90,-10},{
           -50,-10},{-50,-10},{-10,-10}}, color={191,0,0}));
   connect(HeatTrans.port_b, port_inside)

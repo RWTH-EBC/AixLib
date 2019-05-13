@@ -88,10 +88,10 @@ model Test
     tableOnFile=false)                                         "0...1"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
   Components.Parameters parameters(
-    withSmartFacade=true,
+    isEl_heater = true,
     withMechVent=true,
-    withPV=true,
-    withSolAirHeat=true)
+    withPV=true,withSmartFacade=true,
+    withSolAirHeat= false)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   BoundaryConditions.WeatherData.Bus weaBus "Bus with weather data"
     annotation (Placement(transformation(extent={{-38,38},{-18,58}})));

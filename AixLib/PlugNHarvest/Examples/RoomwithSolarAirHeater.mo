@@ -16,8 +16,8 @@ model RoomwithSolarAirHeater
     Air_temp=true,
     Wind_dir=false,
     Wind_speed=true,
-    fileName=
-        "C:/Users/makis/Documents/Dymola/PnH_Greek_Pilot/Resources/grevena_TRY.txt")
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/grevena_TRY.txt"))
     annotation (Placement(transformation(extent={{-92,62},{-62,82}})));
   PlugNHarvest.Components.SmartFacade.sahaix sahaix1
     annotation (Placement(transformation(extent={{20,-78},{-46,-12}})));
@@ -42,8 +42,6 @@ equation
           128,0}));
   connect(weather.AirTemp, sahaix1.T_in) annotation (Line(points={{-61,75},{-61,
           -22.56},{-26.2,-22.56}}, color={0,0,127}));
-  connect(sahaix1.port, eastWestFacingWindows.thermRoom) annotation (Line(
-        points={{8.78,-44.78},{47.3,-44.78},{47.3,49.05}}, color={191,0,0}));
   annotation (                                 experiment(StopTime=604800,
         __Dymola_NumberOfIntervals=604800),
     Diagram(coordinateSystem(initialScale=0.1)),
