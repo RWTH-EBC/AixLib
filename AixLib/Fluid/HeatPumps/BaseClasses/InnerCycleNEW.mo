@@ -1,16 +1,16 @@
 ﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
   replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW(final scalingFactor = scalingFactor)
      "Replaceable model for performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
     constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW(final scalingFactor = scalingFactor)
      "Replaceable model for performance data of HP in cooling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible";
@@ -22,8 +22,7 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
-             PerformanceDataHeater
+  PerDataHea PerformanceDataHeater
                           annotation (Placement(transformation(extent={{13,20},{
             67,76}},  rotation=0)));
   Utilities.Logical.SmoothSwitch switchQEva(
@@ -44,8 +43,7 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
         rotation=-90,
         origin={0.5,-110.5})));
 
-  PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
-             PerformanceDataChiller if use_revHP
+  PerDataChi PerformanceDataChiller if use_revHP
                           annotation(Placement(transformation(
         extent={{-27,-28},{27,28}},
         rotation=0,
@@ -78,7 +76,6 @@ public
         rotation=180,
         origin={-56,-6})));
 equation
-  assert(use_revHP or (use_revHP==false and sigBusHP.mode==true), "Can't turn to chilling on irreversible HP", level = AssertionLevel.error);
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
       points={{1.085,103.075},{1.085,104},{-68,104},{-68,-14}},
       color={255,204,51},

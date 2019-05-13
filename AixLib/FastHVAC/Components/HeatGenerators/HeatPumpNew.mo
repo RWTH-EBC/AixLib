@@ -2,7 +2,7 @@
 package HeatPumpNew
   extends Modelica.Icons.Package;
 
-  model HeatPump "Base model of FastHVAC Heat Pump"
+  model HeatPumpNEW "Base model of FastHVAC Heat Pump"
 
   //General
     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
@@ -16,16 +16,16 @@ package HeatPumpNew
     parameter Boolean use_revHP=true
       "True if the HP is reversible"
       annotation(choices(choice=true "reversible HP",
-        choice=false "only heating",
+        choice=false "only heating or cooling",
         radioButtons=true), Dialog(descriptionLabel=true));
     replaceable model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
       "Performance data of HP in heating mode"
       annotation (choicesAllMatching=true);
     replaceable model PerDataChi =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
       "Performance data of HP in chilling mode"
-      annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
+      annotation (choicesAllMatching=true);
     parameter Real scalingFactor=1 "Scaling-factor of HP";
     parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
       annotation(choices(checkBox=true), Dialog(
@@ -225,10 +225,10 @@ package HeatPumpNew
     Modelica.Blocks.Interfaces.RealInput nSet
       "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
           transformation(extent={{-132,4},{-100,36}})));
-    AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP
+    Controls.Interfaces.HeatPumpControlBusNEW     sigBusHP
       annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
           iconTransformation(extent={{-108,-52},{-90,-26}})));
-    AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(
+    Fluid.HeatPumps.BaseClasses.InnerCycleNEW     innerCycle(
       redeclare final model PerDataHea =PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
       final use_revHP=use_revHP,
@@ -497,5 +497,5 @@ package HeatPumpNew
     </li>
   </ul>
   </html>"));
-  end HeatPump;
+  end HeatPumpNEW;
 end HeatPumpNew;

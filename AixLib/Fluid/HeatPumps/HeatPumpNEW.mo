@@ -20,16 +20,16 @@ model HeatPumpNEW
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
-      choice=false "only heating",
+      choice=false "only heating or cooling",
       radioButtons=true), Dialog(descriptionLabel=true));
   replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
   "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
   "Performance data of HP in chilling mode"
-    annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
 
   parameter Real scalingFactor=1 "Scaling-factor of HP";
   parameter Boolean use_refIne=true
