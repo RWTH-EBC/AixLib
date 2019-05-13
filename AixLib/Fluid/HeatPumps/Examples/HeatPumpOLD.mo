@@ -67,7 +67,7 @@ model HeatPumpOLD
         origin={2,-21})));
 
   Modelica.Blocks.Sources.BooleanStep     booleanStep(
-      startValue=true, startTime=10000)
+      startValue=true, startTime=20000)
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=270,
         origin={-10,82})));

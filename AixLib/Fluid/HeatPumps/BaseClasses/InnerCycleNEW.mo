@@ -81,6 +81,58 @@ protected
     "If no heating is used, the switches may still be connected"
     annotation (Placement(transformation(extent={{98,-74},{78,-54}})));
 equation
+  //if heating operation might be used (use_revHP == 1 or 2)
+  if not use_revHP==3 then
+
+  connect(constZeroForChiller.y, switchPel.u3)
+    annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
+  connect(constZeroForChiller.y, switchQEva.u3) annotation (Line(
+      points={{-59,-64},{-52,-64},{-52,-22},{-68,-22}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(constZeroForChiller.y, switchQCon.u3) annotation (Line(
+      points={{-59,-64},{-52,-64},{-52,-38},{70,-38},{70,-20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PerformanceDataHeater.QCon, switchQCon.u1) annotation (Line(
+      points={{18.4,17.2},{18.4,-4},{70,-4}}, color={0,0,127}));
+  connect(PerformanceDataHeater.Pel, switchPel.u1) annotation (Line(
+      points={{40,17.2},{40,-30},{8,-30},{8,-64}}, color={0,0,127}));
+  connect(gainEva.y, switchQEva.u1) annotation (Line(
+      points={{-60.4,-6},{-68,-6}}, color={0,0,127}));
+  connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{61.6,
+          17.2},{61.6,-6},{-51.2,-6}}, color={0,0,127}));
+  end if;
+
+  //if cooling operation might be used (use_revHP == 1 or 3)
+  if not use_revHP==2 then
+
+  connect(constZeroForHeater.y, switchPel.u1)
+    annotation (Line(points={{77,-64},{8,-64}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(constZeroForHeater.y, switchQCon.u1) annotation (Line(points={{77,-64},
+          {66,-64},{66,-4},{70,-4}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(constZeroForHeater.y, switchQEva.u1) annotation (Line(points={{77,-64},
+          {66,-64},{66,-6},{-68,-6}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(switchQCon.u3, gainCon.y) annotation (Line(
+      points={{70,-20},{62.4,-20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PerformanceDataChiller.QCon, gainCon.u) annotation (Line(
+      points={{-67.6,17.2},{-67.6,0},{-24,0},{-24,-20},{53.2,-20}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PerformanceDataChiller.Pel, switchPel.u3) annotation (Line(points={{-46,
+          17.2},{-46,-30},{-8,-30},{-8,-64}}, color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-24.4,
+          17.2},{-24.4,-22},{-68,-22}},       color={0,0,127},
+      pattern=LinePattern.Dash));
+  end if;
+
+  //needed connection in every case (use_revHP == 1, 2, 3)
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
       points={{1.085,103.075},{1.085,104},{-68,104},{-68,-14}},
       color={255,204,51},
@@ -107,8 +159,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-92,-14},{-92,
           0},{-110,0}}, color={0,0,127}));
-  connect(PerformanceDataHeater.QCon, switchQCon.u1)
-    annotation (Line(points={{18.4,17.2},{18.4,-4},{70,-4}}, color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-015,-87},{-2.22045e-015,
           -110.5},{0.5,-110.5}}, color={0,0,127}));
   connect(sigBusHP.mode, switchPel.u2) annotation (Line(
@@ -118,14 +168,6 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(PerformanceDataHeater.Pel, switchPel.u1) annotation (Line(points={{40,
-          17.2},{40,-30},{8,-30},{8,-64}}, color={0,0,127}));
-  connect(PerformanceDataChiller.Pel, switchPel.u3) annotation (Line(points={{-46,
-          17.2},{-46,-30},{-8,-30},{-8,-64}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QEva, switchQEva.u3) annotation (Line(points={{-24.4,
-          17.2},{-24.4,-22},{-68,-22}},       color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(sigBusHP, PerformanceDataChiller.sigBusHP) annotation (Line(
       points={{1,103},{1,86},{-45.73,86},{-45.73,77.12}},
       color={255,204,51},
@@ -133,39 +175,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(constZeroForChiller.y, switchPel.u3)
-    annotation (Line(points={{-59,-64},{-8,-64}}, color={0,0,127}));
-  connect(constZeroForChiller.y, switchQEva.u3) annotation (Line(
-      points={{-59,-64},{-52,-64},{-52,-22},{-68,-22}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(constZeroForChiller.y, switchQCon.u3) annotation (Line(
-      points={{-59,-64},{-52,-64},{-52,-38},{70,-38},{70,-20}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(switchQCon.y, QCon) annotation (Line(points={{93,-12},{94,-12},{94,0},
           {110,0}}, color={0,0,127}));
-  connect(gainEva.y, switchQEva.u1)
-    annotation (Line(points={{-60.4,-6},{-68,-6}}, color={0,0,127}));
-  connect(switchQCon.u3, gainCon.y) annotation (Line(
-      points={{70,-20},{62.4,-20}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataChiller.QCon, gainCon.u) annotation (Line(
-      points={{-67.6,17.2},{-67.6,0},{-24,0},{-24,-20},{53.2,-20}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(PerformanceDataHeater.QEva, gainEva.u) annotation (Line(points={{61.6,
-          17.2},{61.6,-6},{-51.2,-6}}, color={0,0,127}));
-  connect(constZeroForHeater.y, switchPel.u1)
-    annotation (Line(points={{77,-64},{8,-64}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(constZeroForHeater.y, switchQCon.u1) annotation (Line(points={{77,-64},
-          {66,-64},{66,-4},{70,-4}}, color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(constZeroForHeater.y, switchQEva.u1) annotation (Line(points={{77,-64},
-          {66,-64},{66,-6},{-68,-6}}, color={0,0,127},
-      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -247,4 +258,5 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.PolynomalApproach\">PolynomalApproach</a>: Use a function based approach to calculate the ouputs. Different functions are already implemented.</li>
 </ul>
 </html>"));
+
 end InnerCycleNEW;
