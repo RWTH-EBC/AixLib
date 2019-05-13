@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Storage;
+within AixLib.Fluid.Storage;
 model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
@@ -114,14 +114,14 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package
+              Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package
+              Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -134,8 +134,8 @@ model BufferStorage
         iconTransformation(extent={{14,92},{36,110}})));
 
   HeatTransfer heatTransfer(final n=n,
-      redeclare final package Medium = Medium, 
-      final data=data) 
+      redeclare final package Medium = Medium,
+      final data=data)
       "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 

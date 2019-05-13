@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Set value relative speed of compressor. Analog from 0 to 1"
@@ -13,10 +13,12 @@ partial block PartialSecurityControl "Base Block"
     "If an error occurs, the compressor speed is set to zero"
     annotation (Placement(transformation(extent={{58,-24},{70,-12}})));
   Controls.Interfaces.HeatPumpControlBus sigBusHP
+    "Bus-connector for the heat pump"
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut
+    "Heat pump mode, =true: heating, =false: chilling"
     annotation (Placement(transformation(extent={{120,-30},{140,-10}})));
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of heat pump mode"
     annotation (Placement(transformation(extent={{-152,-36},{-120,-4}})));
   Modelica.Blocks.MathInteger.TriggeredAdd disErr(
     y_start=0,
@@ -27,7 +29,9 @@ partial block PartialSecurityControl "Base Block"
         extent={{-8,-8},{8,8}},
         rotation=270,
         origin={0,-80})));
-  Modelica.Blocks.Interfaces.IntegerOutput ERR annotation (Placement(
+  Modelica.Blocks.Interfaces.IntegerOutput ERR
+    "Integer for displaying number off Errors during simulation"
+                                               annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -42,9 +46,8 @@ partial block PartialSecurityControl "Base Block"
 equation
   connect(conZer.y,swiErr. u3) annotation (Line(points={{70.6,-18},{78,-18},
           {78,-8},{84,-8}}, color={0,0,127}));
-  connect(swiErr.y, nOut)
-    annotation (Line(points={{107,0},{118,0},{118,20},{130,20}},
-                                               color={0,0,127}));
+  connect(swiErr.y, nOut) annotation (Line(points={{107,0},{118,0},{118,20},{
+          130,20}}, color={0,0,127}));
   connect(disErr.y, ERR) annotation (Line(points={{-1.77636e-15,-89.6},{
           -1.77636e-15,-100},{0,-100},{0,-110}}, color={255,127,0}));
   connect(not1.y, disErr.trigger) annotation (Line(points={{-21,-74.5},{-21,
@@ -97,5 +100,16 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None)}),
                                      Diagram(coordinateSystem(
-          preserveAspectRatio=false, extent={{-120,-100},{120,100}})));
+          preserveAspectRatio=false, extent={{-120,-100},{120,100}})),
+    Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>", info="<html>
+<p>Partial block for a security control. Based on the signals in the sigBusHP either the input signals are equal to the output signals or, if an error occurs, set to 0.</p>
+<p>The Output ERR informs about the number of errors in the specific security block.</p>
+</html>"));
 end PartialSecurityControl;

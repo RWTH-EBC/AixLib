@@ -1,6 +1,8 @@
-within AixLib.Controls.HeatPump.BaseClasses;
+﻿within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
+  parameter Modelica.SIunits.SpecificHeatCapacity cp
+    "Gain with specific heat capacity" annotation (Dialog(enable=use_secHeaGen));
  Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
   Modelica.Blocks.Sources.Constant conZer(k=0) "If an error occurs, the compressor speed is set to zero"
@@ -31,9 +33,9 @@ partial model PartialTSetToNSet
   Modelica.Blocks.Math.Gain gain(final k=1/Q_flow_nominal) if
                                     use_secHeaGen
     annotation (Placement(transformation(extent={{-16,-60},{-4,-72}})));
- Modelica.Blocks.Sources.RealExpression calcQHeat(final y=sigBusHP.m_flow_co*(
-        sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180) if use_secHeaGen
-    annotation (Placement(transformation(extent={{-70,-48},{-28,-84}})));
+
+  Utilities.HeatTransfer.CalcQFlow calcQFlow(final cp=cp)
+    annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
 protected
   parameter Boolean use_secHeaGen=true "True to choose a bivalent system" annotation(choices(checkBox=true));
   parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation (Dialog(enable=use_secHeaGen), choices(choice=true "Parallel",
@@ -42,6 +44,7 @@ protected
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal=2000
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y";
+
 equation
   connect(conZer.y, swiNullHP.u3) annotation (Line(points={{50.6,-18},{58,-18},
           {58,-8},{64,-8}}, color={0,0,127}));
@@ -56,8 +59,32 @@ equation
   connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-3.4,-66},{6,
           -66},{6,-74.4},{5.6,-74.4}},
                                 color={0,0,127}));
-  connect(gain.u, calcQHeat.y) annotation (Line(points={{-17.2,-66},{-25.9,-66}},
-                               color={0,0,127}));
+  connect(calcQFlow.Q_flow, gain.u) annotation (Line(points={{-39,-70},{-28,-70},
+          {-28,-66},{-17.2,-66}}, color={0,0,127}));
+  connect(sigBusHP.m_flow_co, calcQFlow.m_flow) annotation (Line(
+      points={{-106.915,-26.925},{-90,-26.925},{-90,-64},{-62,-64}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.T_ret_co, calcQFlow.T_a) annotation (Line(
+      points={{-106.915,-26.925},{-90,-26.925},{-90,-71},{-62,-71}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.T_flow_co, calcQFlow.T_b) annotation (Line(
+      points={{-106.915,-26.925},{-90,-26.925},{-90,-78},{-62,-78},{-62,-77}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
           extent={{-100,100},{100,-100}},
@@ -69,5 +96,13 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="%name")}),      Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>"));
 end PartialTSetToNSet;

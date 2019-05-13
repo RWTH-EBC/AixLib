@@ -1,4 +1,4 @@
-simulateModel("AixLib.Airflow.AirHandlingUnit.Examples.AHU", stopTime=86400, outputInterval=60, method="lsodar", resultFile="AHU");
+simulateModel("AixLib.Airflow.AirHandlingUnit.Examples.AHU", stopTime=86400, outputInterval=60, method="lsodar", tolerance=1e-6, resultFile="AHU");
 
 createPlot(
   id=1, 
