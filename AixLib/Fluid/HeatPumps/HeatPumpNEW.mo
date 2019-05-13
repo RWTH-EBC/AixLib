@@ -322,6 +322,9 @@ model HeatPumpNEW
   Modelica.Blocks.Interfaces.BooleanInput modeSet if use_revHP==1
     "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
+  Modelica.Blocks.Sources.BooleanExpression opType(y=if use_revHP==2
+         then true else false) if not use_revHP==1
+    annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
 
   Sensors.TemperatureTwoPort senT_a2(
     redeclare final package Medium = Medium_eva,
@@ -396,9 +399,6 @@ model HeatPumpNEW
         extent={{-10,10},{10,-10}},
         rotation=0)));
 
-  Modelica.Blocks.Sources.BooleanExpression opType(y=if use_revHP==2
-         then true else false) if not use_revHP==1
-    annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
 equation
   if use_revHP==1 then
   connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
