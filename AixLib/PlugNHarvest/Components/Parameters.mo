@@ -92,7 +92,7 @@ record Parameters "Record for parametrisation of simulation model"
     "latitude of location"                                                                           annotation(Dialog(group="Boundary conditions", descriptionLabel=true));
   parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Longitude = 8.5
     "longitude of location"                                                                           annotation(Dialog(group="Boundary conditions", descriptionLabel=true));
-  parameter String weatherFileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")  annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
+  parameter String weatherFileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt") "File name weather data"  annotation (Dialog(group="Boundary conditions", descriptionLabel=true,loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition schedulePersons =  AixLib.DataBase.Profiles.NineToFive() "Schedule for persons"  annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleLights =  AixLib.DataBase.Profiles.NineToFive() "Schedule for lights" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition scheduleElAppliances =  AixLib.DataBase.Profiles.NineToFive() "Schedule for electrical appliances" annotation (Dialog(group="Boundary conditions", descriptionLabel=true));
