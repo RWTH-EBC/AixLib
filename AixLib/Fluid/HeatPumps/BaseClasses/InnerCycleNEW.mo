@@ -12,8 +12,8 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
     constrainedby
     AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW(final scalingFactor = scalingFactor)
      "Replaceable model for performance data of HP in cooling mode"
-    annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-  parameter Boolean use_revHP=true "True if the HP is reversible";
+    annotation (choicesAllMatching=true);
+  parameter Integer use_revHP=1 "Operating type of the system";
   parameter Real scalingFactor=1 "Scaling factor of heat pump";
  Controls.Interfaces.HeatPumpControlBusNEW     sigBusHP annotation (Placement(
         transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
@@ -43,7 +43,7 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
         rotation=-90,
         origin={0.5,-110.5})));
 
-  PerDataChi PerformanceDataChiller if use_revHP
+  PerDataChi PerformanceDataChiller if use_revHP==1
                           annotation(Placement(transformation(
         extent={{-27,-28},{27,28}},
         rotation=0,
@@ -59,11 +59,11 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
         rotation=270,
         origin={0,-76})));
 protected
-  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_revHP
+  Modelica.Blocks.Sources.Constant constZero(final k=0) if use_revHP==3
     "If no heating is used, the switches may still be connected"
     annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
 public
-  Modelica.Blocks.Math.Gain gainCon(final k=-1) if use_revHP
+  Modelica.Blocks.Math.Gain gainCon(final k=-1) if use_revHP==1
     "Negate QCon to match definition of heat flow direction" annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},

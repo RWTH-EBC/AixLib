@@ -51,7 +51,6 @@ model HeatPumpNEW
     use_evaCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    use_revHP=true,
     use_refIne=false,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.LookUpTable2DNEW
@@ -60,6 +59,7 @@ model HeatPumpNEW
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.LookUpTable2DNEW
         ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+    use_revHP=2,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
     TCon_start=303.15) annotation (Placement(transformation(

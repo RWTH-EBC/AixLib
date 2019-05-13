@@ -13,10 +13,10 @@ package HeatPumpNew
         AixLib.FastHVAC.Media.WaterSimple()
       "Medium at source side"
       annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-    parameter Boolean use_revHP=true
-      "True if the HP is reversible"
-      annotation(choices(choice=true "reversible HP",
-        choice=false "only heating or cooling",
+    parameter Integer use_revHP=1    "Operating type of the system" annotation(choices(
+        choice=1   "reversible HP",
+        choice=2   "only heating operation",
+        choice=3   "only cooling operation",
         radioButtons=true), Dialog(descriptionLabel=true));
     replaceable model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
@@ -249,8 +249,12 @@ package HeatPumpNew
       annotation (Placement(transformation(extent={{-10,10},{10,-10}},
           rotation=180,
           origin={110,100})));
-    Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
-      annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
+    Modelica.Blocks.Interfaces.BooleanInput modeSet if use_revHP==1
+      "Set value of HP mode"
+      annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
+    Modelica.Blocks.Sources.BooleanExpression opType(y=if use_revHP==2
+           then true else false) if not use_revHP==1
+      annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
     Sensors.TemperatureSensor        senT_a2
       "Temperature at sink inlet"
       annotation (Placement(
@@ -292,6 +296,24 @@ package HeatPumpNew
           extent={{-10,10},{10,-10}},
           rotation=0)));
   equation
+
+    if use_revHP==1 then
+    connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
+            {-76,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+
+    else
+
+    connect(opType.y, sigBusHP.mode) annotation (Line(points={{-99,0},{-76,0},{-76,
+            -42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}}));
+    end if;
+
     connect(enthalpyPort_a, mFlow_con.enthalpyPort_a) annotation (Line(points={{-100,60},
             {-92,60},{-92,60.1},{-88.8,60.1}},     color={176,0,0}));
     connect(mFlow_con.enthalpyPort_b, senT_a1.enthalpyPort_a) annotation (Line(
@@ -351,12 +373,6 @@ package HeatPumpNew
         horizontalAlignment=TextAlignment.Right));
     connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
             {-104.925,-42.915}}, color={0,0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-    connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-88,-18},
-            {-88,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},

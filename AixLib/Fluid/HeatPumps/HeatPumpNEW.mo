@@ -19,9 +19,22 @@ model HeatPumpNEW
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",
-      choice=false "only heating or cooling",
+ /* parameter String use_revHP="reversible"    "Operating type of the system" annotation(choices(
+      choice="reversible" "reversible HP",
+      choice="heater"     "only heating operation",
+      choice="chiller"    "only cooling operation",
+      radioButtons=true), Dialog(descriptionLabel=true));*/
+ /* parameter Boolean onlHea=if use_revHP == "heater" or use_revHP == "reversible"
+       then true else false;
+  parameter Boolean onlCoo=if use_revHP == "chiller" or use_revHP == "reversible"
+       then true else false;*/
+
+  parameter Integer use_revHP=1    "Operating type of the system" annotation(choices(
+      choice=1   "reversible HP",
+      choice=2   "only heating operation",
+      choice=3   "only cooling operation",
       radioButtons=true), Dialog(descriptionLabel=true));
+
   replaceable model PerDataHea =
       AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
   "Performance data of HP in heating mode"
@@ -306,7 +319,8 @@ model HeatPumpNEW
         rotation=180,
         origin={110,100})));
 
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet if use_revHP==1
+    "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
   Sensors.TemperatureTwoPort senT_a2(
@@ -382,14 +396,27 @@ model HeatPumpNEW
         extent={{-10,10},{10,-10}},
         rotation=0)));
 
+  Modelica.Blocks.Sources.BooleanExpression opType(y=if use_revHP==2
+         then true else false) if not use_revHP==1
+    annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
 equation
-
+  if use_revHP==1 then
   connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
           {-76,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+
+  else
+
+  connect(opType.y, sigBusHP.mode) annotation (Line(points={{-99,0},{-76,0},{-76,
+          -42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+
+  end if;
   connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
           {38,-0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
                                                   color={0,0,127}), Text(

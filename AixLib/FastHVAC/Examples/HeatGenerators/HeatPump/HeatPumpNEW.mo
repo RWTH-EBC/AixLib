@@ -24,7 +24,7 @@ model HeatPumpNEW
     CEva=100,
     GEva=5,
     allowFlowReversalEva=true,
-    use_revHP=true,
+    use_revHP=1,
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
@@ -136,7 +136,8 @@ equation
           -15.1333,9},{-15.1333,7.88}},
                                color={0,0,127}));
   connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-75.6,76},{
-          0.6,76},{0.6,13.08}}, color={255,0,255}));
+          0.333333,76},{0.333333,13.08}},
+                                color={255,0,255}));
   connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
   connect(pump.enthalpyPort_b, heatPump.enthalpyPort_a)
