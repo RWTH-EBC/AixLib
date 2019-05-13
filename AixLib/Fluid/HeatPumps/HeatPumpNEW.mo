@@ -29,7 +29,7 @@ model HeatPumpNEW
   parameter Boolean onlCoo=if use_revHP == "chiller" or use_revHP == "reversible"
        then true else false;*/
 
-  parameter Integer use_revHP=1    "Operating type of the system" annotation(choices(
+  parameter Integer use_revHP=3    "Operating type of the system" annotation(choices(
       choice=1   "reversible HP",
       choice=2   "only heating operation",
       choice=3   "only cooling operation",

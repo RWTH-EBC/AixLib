@@ -59,7 +59,7 @@ model HeatPumpNEW
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.LookUpTable2DNEW
         ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
-    use_revHP=1,
+    use_revHP=3,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
     TCon_start=303.15) annotation (Placement(transformation(
