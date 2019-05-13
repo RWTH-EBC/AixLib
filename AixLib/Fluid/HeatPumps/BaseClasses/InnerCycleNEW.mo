@@ -43,7 +43,7 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
         rotation=-90,
         origin={0.5,-110.5})));
 
-  PerDataChi PerformanceDataChiller if use_revHP==1
+  PerDataChi PerformanceDataChiller if not use_revHP==2
                           annotation(Placement(transformation(
         extent={{-27,-28},{27,28}},
         rotation=0,
@@ -59,11 +59,11 @@ model InnerCycleNEW "Blackbox model of refrigerant cycle of a HP"
         rotation=270,
         origin={0,-76})));
 protected
-  Modelica.Blocks.Sources.Constant constZero(final k=0) if use_revHP==3
+  Modelica.Blocks.Sources.Constant constZero(final k=0) if use_revHP==2
     "If no heating is used, the switches may still be connected"
     annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
 public
-  Modelica.Blocks.Math.Gain gainCon(final k=-1) if use_revHP==1
+  Modelica.Blocks.Math.Gain gainCon(final k=-1) if not use_revHP==2
     "Negate QCon to match definition of heat flow direction" annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},

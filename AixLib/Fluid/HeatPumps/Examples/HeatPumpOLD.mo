@@ -50,7 +50,6 @@ model HeatPumpOLD
     use_evaCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    use_revHP=true,
     redeclare model PerDataHea =
         AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
           dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
@@ -59,6 +58,7 @@ model HeatPumpOLD
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     use_refIne=false,
+    use_revHP=true,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
     TCon_start=303.15) annotation (Placement(transformation(
@@ -66,8 +66,8 @@ model HeatPumpOLD
         rotation=270,
         origin={2,-21})));
 
-  Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
-      startValue=true)
+  Modelica.Blocks.Sources.BooleanStep     booleanStep(
+      startValue=true, startTime=10000)
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=270,
         origin={-10,82})));
