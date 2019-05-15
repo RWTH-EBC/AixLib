@@ -392,16 +392,6 @@ model HeatPumpNEWBACKUP
         rotation=0,
         origin={-52,-86})));
 
-  Interfaces.PassThroughMedium passThroughMedium annotation (Placement(
-        transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=90,
-        origin={-79,89})));
-  Interfaces.PassThroughMedium passThroughMedium1 annotation (Placement(
-        transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=90,
-        origin={-69,101})));
 equation
   if use_revHP==1 then
   connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
