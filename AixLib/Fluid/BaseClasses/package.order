@@ -1,6 +1,9 @@
 IndexMassFraction
 MassFlowRateMultiplier
+PartialInnerCycle
 PartialResistance
+PartialReversibleThermalMachine
 PartialThreeWayResistance
+ThermalMachine_PerformanceData
 FlowModels
 Validation
