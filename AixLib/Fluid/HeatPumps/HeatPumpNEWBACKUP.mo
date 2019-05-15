@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.HeatPumps;
-model HeatPumpNEW
+model HeatPumpNEWBACKUP
   "Grey-box heat pump model using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -392,6 +392,16 @@ model HeatPumpNEW
         rotation=0,
         origin={-52,-86})));
 
+  Interfaces.PassThroughMedium passThroughMedium annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={-79,89})));
+  Interfaces.PassThroughMedium passThroughMedium1 annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={-69,101})));
 equation
   if use_revHP==1 then
   connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
@@ -424,6 +434,22 @@ equation
 
   else
   //Connect fluid ports for cooling
+  connect(port_a1, mFlow_eva.port_a) annotation (Line(points={{-100,60},{-94,60},
+            {-94,120},{90,120},{90,-60},{84,-60}},
+                                                 color={0,127,255},
+          pattern=LinePattern.Dash));
+  connect(port_a2, mFlow_con.port_a) annotation (Line(points={{100,-60},{88,-60},
+            {88,118},{-90,118},{-90,60},{-86,60}},            color={0,127,255},
+          pattern=LinePattern.Dash));
+  connect(port_b2, senT_b1.port_b) annotation (Line(points={{-100,-60},{-100,
+            -60},{-100,-60},{-100,-60},{-100,-122},{124,-122},{124,94},{124,94},
+            {124,94},{48,94},{48,94},{48,94},{48,94},{48,94},{48,92},{48,92}},
+                                                                    color={0,127,
+          255}, pattern=LinePattern.Dash));
+  connect(port_b1, senT_b2.port_b) annotation (Line(points={{100,60},{120,60},{
+            120,60},{120,60},{120,60},{120,60},{120,60},{120,60},{120,-120},{
+            -62,-120},{-62,-86}},
+          color={0,127,255}, pattern=LinePattern.Dash));
   end if;
 
   connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
@@ -686,4 +712,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li>Reversing the mode: A normal 4-way-exchange valve suffers from heat losses and irreversibilities due to switching from one mode to another. Theses losses are not taken into account.</li>
 </ul>
 </html>"));
-end HeatPumpNEW;
+end HeatPumpNEWBACKUP;
