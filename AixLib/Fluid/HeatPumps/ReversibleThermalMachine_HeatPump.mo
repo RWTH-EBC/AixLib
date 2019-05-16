@@ -7,45 +7,6 @@ model ReversibleThermalMachine_HeatPump
 
 equation
 
-  connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-34,79},{-34,
-          40},{-76,40},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBus.T_ret_co) annotation (Line(points={{38,81},{38,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBus.T_flow_ev) annotation (Line(points={{38,-75},{38,-36},
-          {-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBus.T_ret_ev) annotation (Line(points={{-52,-75},{-52,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.m_flow, sigBus.m_flow_ev) annotation (Line(points={{72,-49},
-          {72,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_con.m_flow, sigBus.m_flow_co) annotation (Line(points={{-76,
-          49},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
-
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
