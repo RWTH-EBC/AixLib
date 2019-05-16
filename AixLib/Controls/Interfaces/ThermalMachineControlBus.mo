@@ -7,7 +7,7 @@ Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm N "rotational speed 
   annotation (HideResult=false);
 Boolean onOff "true: on" annotation (HideResult=false);
 
-Boolean mode "true: heat pump, false: chiller";
+Boolean mode "true: main operation mode, false: reversible operation mode";
 
 Modelica.SIunits.ThermodynamicTemperature T_flow_ev "temperature of flow into evaporator";
 

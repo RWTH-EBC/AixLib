@@ -1,8 +1,10 @@
 IndexMassFraction
 MassFlowRateMultiplier
 PartialInnerCycle
+PartialInnerCycleBACKUP
 PartialResistance
 PartialReversibleThermalMachine
+PartialReversibleThermalMachineBACKUP
 PartialThreeWayResistance
 ThermalMachine_PerformanceData
 FlowModels

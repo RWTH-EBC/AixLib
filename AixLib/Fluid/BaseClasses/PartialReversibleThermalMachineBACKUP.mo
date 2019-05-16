@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BaseClasses;
-partial model PartialReversibleThermalMachine
+partial model PartialReversibleThermalMachineBACKUP
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -19,21 +19,6 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-/*  replaceable model PartialInnerCycle =
-      AixLib.Fluid.BaseClasses.PartialInnerCycle
-  constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
-  "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
-  annotation (choicesAllMatching=true);  /*
-
-/*  replaceable model PartialInnerCycle innerCycle(
-      redeclare final model PerDataMain = PerDataMain,
-      redeclare final model PerDataRev = PerDataRev,
-      final use_rev=use_rev,
-      final scalingFactor=scalingFactor) annotation (Placement(transformation(
-        extent={{-27,-26},{27,26}},
-        rotation=90,
-        origin={0,-1})));  */
-
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   replaceable model PerDataMain =
       AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
@@ -189,16 +174,6 @@ partial model PartialReversibleThermalMachine
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-
-  PartialInnerCycle innerCycle(
-      redeclare final model PerDataMain = PerDataMain,
-      redeclare final model PerDataRev = PerDataRev,
-      final use_rev=use_rev,
-      final scalingFactor=scalingFactor)
-    annotation (Placement(transformation(
-        extent={{-27,-26},{27,26}},
-        rotation=90,
-        origin={0,-1})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
@@ -305,7 +280,14 @@ partial model PartialReversibleThermalMachine
   AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-
+  PartialInnerCycle innerCycle(
+      redeclare final model PerDataMain = PerDataMain,
+      redeclare final model PerDataRev = PerDataRev,
+      final use_rev=use_rev,
+      final scalingFactor=scalingFactor) annotation (Placement(transformation(
+        extent={{-27,-26},{27,26}},
+        rotation=90,
+        origin={0,-1})));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
       displayUnit="degC")
     "Ambient temperature on the evaporator side"
@@ -394,13 +376,6 @@ partial model PartialReversibleThermalMachine
         origin={-76,60},
         extent={{-10,10},{10,-10}},
         rotation=0)));
-
-protected
-  replaceable model PartialInnerCycle =
-      AixLib.Fluid.BaseClasses.PartialInnerCycle
-  constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
-  "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
-  annotation (choicesAllMatching=true);
 
 equation
 
@@ -624,4 +599,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li>Reversing the mode: A normal 4-way-exchange valve suffers from heat losses and irreversibilities due to switching from one mode to another. Theses losses are not taken into account.</li>
 </ul>
 </html>"));
-end PartialReversibleThermalMachine;
+end PartialReversibleThermalMachineBACKUP;
