@@ -1,23 +1,59 @@
 ﻿within AixLib.Fluid.BaseClasses;
 model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
-  replaceable model PerDataMain =
-      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
+
+  replaceable model PerDataMainHP =
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData(final scalingFactor = scalingFactor)
-     "Replaceable model for performance data of thermal machine in main operation mode"
+    AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData(
+     final scalingFactor = scalingFactor)
+    "Replaceable model for performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
 
-  replaceable model PerDataRev =
-      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
+  replaceable model PerDataRevHP =
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData(
+    AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
-     "Replaceable model for performance data of thermal machine in reversible operation mode"
+    "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
-  parameter Boolean use_rev=false
-                                 "True if the thermal machine is reversible";
+
+   replaceable model PerDataMainChi =
+      AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData
+    constrainedby
+    AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData(
+     final scalingFactor = scalingFactor)
+    "Replaceable model for performance data of a chiller in main operation mode"
+    annotation (choicesAllMatching=true);
+
+  replaceable model PerDataRevChi =
+      AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData
+    constrainedby
+    AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData(
+     final scalingFactor = scalingFactor)
+    "Replaceable model for performance data of a chiller in reversible operation mode"
+    annotation (Dialog(enable=use_rev),choicesAllMatching=true);
+
+  parameter Boolean use_rev=true "True if the thermal machine is reversible";
+  parameter Boolean machineType = true "true: heat pump; false: chiller";
+  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_rev
+    "If no heating is used, the switches may still be connected"
+    annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
   parameter Real scalingFactor=1 "Scaling factor of thermal machine";
+
+  PerDataMainChi PerformanceDataChillerCooling if not machineType
+  annotation (Placement(transformation(
+  extent={{11,20},{65,76}}, rotation=0)));
+  PerDataRevChi PerformanceDataChillerHeating if use_rev and not machineType
+  annotation (Placement(transformation(extent={{-27,-28},{27,28}},
+  rotation=0,origin={-38,48})));
+  PerDataMainHP PerformanceDataHPHeating if machineType
+  annotation (Placement(transformation(
+  extent={{11,20},{65,76}}, rotation=0)));
+  PerDataRevHP PerformanceDataHPCooling if use_rev and machineType
+  annotation (Placement(transformation(extent={{-27,-28},{27,28}},
+  rotation=0,origin={-38,48})));
+
   AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-18,86},{18,118}}), iconTransformation(
           extent={{-16,88},{18,118}})));
@@ -25,8 +61,6 @@ model PartialInnerCycle
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  PerDataMain PerformanceDataMainOperation annotation (Placement(transformation(
-          extent={{11,20},{65,76}}, rotation=0)));
   Utilities.Logical.SmoothSwitch switchQEva(
     u1(unit="W", displayUnit="kW"),
     u3(unit="W", displayUnit="kW"),
@@ -45,12 +79,6 @@ model PartialInnerCycle
         rotation=-90,
         origin={0.5,-110.5})));
 
-  PerDataRev PerformanceDataReversibleOperation if
-                                       use_rev annotation (Placement(
-        transformation(
-        extent={{-27,-28},{27,28}},
-        rotation=0,
-        origin={-38,48})));
 
   AixLib.Utilities.Logical.SmoothSwitch switchPel(
     u1(unit="W", displayUnit="kW"),
@@ -61,16 +89,14 @@ model PartialInnerCycle
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-80})));
-protected
-  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_rev
-    "If no heating is used, the switches may still be connected"
-    annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
+
+
 equation
   assert(
     use_rev or (use_rev == false and sigBus.mode == true),
-    "Can't turn to chilling on irreversible HP",
+    "Can't turn to reversible operation mode on irreversible thermal machine",
     level=AssertionLevel.error);
-  connect(sigBus, PerformanceDataMainOperation.sigBus) annotation (Line(
+  connect(sigBus, PerformanceDataChillerCooling.sigBus) annotation (Line(
       points={{0,102},{0,86},{38,86},{38,77.12},{38.27,77.12}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -78,6 +104,28 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(sigBus, PerformanceDataChillerHeating.sigBus) annotation (Line(
+      points={{0,102},{0,86},{-37.73,86},{-37.73,77.12}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(sigBus, PerformanceDataHPHeating.sigBus) annotation (Line(
+      points={{0,102},{0,86},{38,86},{38,77.12},{38.27,77.12}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBus, PerformanceDataHPCooling.sigBus) annotation (Line(
+      points={{0,102},{0,86},{-37.73,86},{-37.73,77.12}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
   connect(switchQEva.y, QEva) annotation (Line(points={{-91,-14},{-94,-14},{-94,
           0},{-110,0}}, color={0,0,127}));
   connect(switchPel.y, Pel) annotation (Line(points={{-2.22045e-15,-91},{
@@ -90,13 +138,7 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus, PerformanceDataReversibleOperation.sigBus) annotation (Line(
-      points={{0,102},{0,86},{-37.73,86},{-37.73,77.12}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
+
   connect(switchQCon.y, QCon) annotation (Line(points={{91,-12},{94,-12},{94,0},
           {110,0}}, color={0,0,127}));
   connect(sigBus.mode, switchQEva.u2) annotation (Line(

@@ -3,6 +3,7 @@ MassFlowRateMultiplier
 PartialInnerCycle
 PartialInnerCycleBACKUP
 PartialResistance
+PartialReversibleThermalMachineEASY
 PartialReversibleThermalMachine
 PartialReversibleThermalMachineBACKUP
 PartialThreeWayResistance

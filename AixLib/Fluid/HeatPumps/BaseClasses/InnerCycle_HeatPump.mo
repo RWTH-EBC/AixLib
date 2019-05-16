@@ -1,7 +1,7 @@
 ﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle_HeatPump
   "Blackbox model of refrigerant cycle of a heat pump"
-  extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
+  extends AixLib.Fluid.BaseClasses.PartialInnerCycle(final machineType = true);
 
   Modelica.Blocks.Math.Gain gainEva(final k=-1)
     "Negate QEva to match definition of heat flow direction" annotation (
@@ -15,18 +15,20 @@ model InnerCycle_HeatPump
         extent={{-4,-4},{4,4}},
         rotation=0,
         origin={58,-20})));
+
+
 equation
 
-  connect(PerformanceDataMainOperation.QCon, switchQCon.u1)
+  connect(PerformanceDataHPHeating.QCon, switchQCon.u1)
     annotation (Line(points={{16.4,17.2},{16.4,-4},{68,-4}}, color={0,0,127}));
-  connect(PerformanceDataMainOperation.Pel, switchPel.u1) annotation (Line(
+  connect(PerformanceDataHPHeating.Pel, switchPel.u1) annotation (Line(
         points={{38,17.2},{38,-30},{8,-30},{8,-68}}, color={0,0,127}));
-  connect(PerformanceDataReversibleOperation.Pel, switchPel.u3) annotation (
+  connect(PerformanceDataHPCooling.Pel, switchPel.u3) annotation (
       Line(
       points={{-38,17.2},{-38,-30},{-8,-30},{-8,-68}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataReversibleOperation.QEva, switchQEva.u3) annotation (
+  connect(PerformanceDataHPCooling.QEva, switchQEva.u3) annotation (
       Line(
       points={{-16.4,17.2},{-16.4,-22},{-68,-22}},
       color={0,0,127},
@@ -46,11 +48,11 @@ equation
       points={{68,-20},{62.4,-20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataReversibleOperation.QCon, gainCon.u) annotation (Line(
+  connect(PerformanceDataHPCooling.QCon, gainCon.u) annotation (Line(
       points={{-59.6,17.2},{-59.6,0},{-24,0},{-24,-20},{53.2,-20}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(PerformanceDataMainOperation.QEva, gainEva.u) annotation (Line(points={{59.6,
+  connect(PerformanceDataHPHeating.QEva, gainEva.u) annotation (Line(points={{59.6,
           17.2},{59.6,-6},{-51.2,-6}},       color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
