@@ -19,28 +19,14 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-/*  replaceable model PartialInnerCycle =
-      AixLib.Fluid.BaseClasses.PartialInnerCycle
-  constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
-  "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
-  annotation (choicesAllMatching=true);  /*
-
-/*  replaceable model PartialInnerCycle innerCycle(
-      redeclare final model PerDataMain = PerDataMain,
-      redeclare final model PerDataRev = PerDataRev,
-      final use_rev=use_rev,
-      final scalingFactor=scalingFactor) annotation (Placement(transformation(
-        extent={{-27,-26},{27,26}},
-        rotation=90,
-        origin={0,-1})));  */
 
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   replaceable model PerDataMain =
-      AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
   "Performance data of thermal machine in main operation mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRev =
-      AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
   "Performance data of thermal machine in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 

@@ -21,11 +21,11 @@ partial model PartialReversibleThermalMachineBACKUP
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   replaceable model PerDataMain =
-      AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of thermal machine in main operation mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRev =
-      AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of thermal machine in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 

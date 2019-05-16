@@ -1,6 +1,6 @@
-﻿within AixLib.Fluid.BaseClasses;
-package ThermalMachine_PerformanceData
-  "Different models used for a black box thermal machine model"
+﻿within AixLib.Fluid.HeatPumps.BaseClasses;
+package ReversibleHeatPump_PerformanceData
+  "Different models used for a black box heat pump model"
   model IcingBlock
     "Block which decreases evaporator power by an icing factor"
     AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
@@ -65,7 +65,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
   end IcingBlock;
 
   model LookUpTable2D "Performance data coming from manufacturer"
-    extends AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData;
+    extends
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData;
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
@@ -281,7 +282,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
   end LookUpTable2D;
 
   model LookUpTableND "N-dimensional table with data for heat pump"
-    extends AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData;
+    extends
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData;
     parameter Real nConv=100
       "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
     parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -543,7 +545,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
   model PolynomalApproach
     "Calculating heat pump data based on a polynomal approach"
-    extends AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData;
+    extends
+      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData;
 
     replaceable function PolyData =
         AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
@@ -743,4 +746,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </html>", info="<html>
 <p>This package contains models for the grey box heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.</p>
 </html>"));
-end ThermalMachine_PerformanceData;
+end ReversibleHeatPump_PerformanceData;

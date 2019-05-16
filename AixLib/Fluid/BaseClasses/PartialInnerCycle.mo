@@ -2,16 +2,17 @@
 model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
   replaceable model PerDataMain =
-      AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
+    AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData(final scalingFactor = scalingFactor)
      "Replaceable model for performance data of thermal machine in main operation mode"
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataRev =
-      AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.BaseClasses.PartialPerformanceData(final scalingFactor = scalingFactor)
+    AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData(
+     final scalingFactor = scalingFactor)
      "Replaceable model for performance data of thermal machine in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
   parameter Boolean use_rev=false

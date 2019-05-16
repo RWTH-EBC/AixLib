@@ -1,15 +1,17 @@
 ﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model InnerCycle "Blackbox model of refrigerant cycle of a HP"
   replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataORIGINAL_OLD.BaseClasses.PartialPerformanceData
+    constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataORIGINAL_OLD.BaseClasses.PartialPerformanceData(
                                                                                           final scalingFactor = scalingFactor)
      "Replaceable model for performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-    constrainedby AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataORIGINAL_OLD.BaseClasses.PartialPerformanceData
+    constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataORIGINAL_OLD.BaseClasses.PartialPerformanceData(
                                                                                           final scalingFactor = scalingFactor)
      "Replaceable model for performance data of HP in cooling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);

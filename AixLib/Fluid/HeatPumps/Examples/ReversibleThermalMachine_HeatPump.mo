@@ -52,11 +52,11 @@ model ReversibleThermalMachine_HeatPump
     redeclare package Medium_eva = Medium_sou,
     use_rev=true,
     redeclare model PerDataMain =
-        AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.LookUpTable2D (
-          dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        ( dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRev =
-        AixLib.Fluid.BaseClasses.ThermalMachine_PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     use_refIne=false,
     TAmbCon_nominal=288.15,
