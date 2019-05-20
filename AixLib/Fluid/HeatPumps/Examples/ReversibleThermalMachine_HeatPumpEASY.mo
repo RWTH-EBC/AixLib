@@ -33,8 +33,7 @@ model ReversibleThermalMachine_HeatPumpEASY
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={2,-76})));
-  AixLib.Fluid.HeatPumps.ReversibleThermalMachine_HeatPumpEASY
-                                                           heatPump(
+  AixLib.Fluid.HeatPumps.ReversibleThermalMachine_HeatPump heatPump(
     refIneFre_constant=1,
     scalingFactor=1,
     VEva=0.04,
@@ -51,18 +50,19 @@ model ReversibleThermalMachine_HeatPumpEASY
     use_evaCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    use_rev=true,
-    redeclare model PerDataMain =
-        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
-        ( dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
-    redeclare model PerDataRev =
-        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
-        ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     use_refIne=false,
+    use_rev=true,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
-    TCon_start=303.15) annotation (Placement(transformation(
+    TCon_start=303.15,
+    redeclare model PerDataMainHP =
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        ( dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+    redeclare model PerDataRevHP =
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()))
+                       annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));

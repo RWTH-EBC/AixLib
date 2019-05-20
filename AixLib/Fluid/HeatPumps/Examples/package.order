@@ -2,9 +2,7 @@ Carnot_TCon
 Carnot_y
 HeatPump
 HeatPumpOLD
-HeatPumpNEW
+ReversibleThermalMachine_HeatPumpEASY
 HeatPumpDetailed
 HeatPumpSimple
-ReversibleThermalMachine_HeatPump
-ReversibleThermalMachine_HeatPumpEASY
 ScrollWaterToWater_OneRoomRadiator

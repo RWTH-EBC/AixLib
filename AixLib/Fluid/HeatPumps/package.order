@@ -2,9 +2,7 @@ Carnot_TCon
 Carnot_y
 HeatPump
 ReversibleThermalMachine_HeatPump
-ReversibleThermalMachine_HeatPumpEASY
-HeatPumpNEW
-HeatPumpNEWBACKUP
+OldModels
 HeatPumpDetailed
 HeatPumpSimple
 ReciprocatingWaterToWater

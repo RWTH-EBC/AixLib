@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.HeatPumps.BaseClasses;
-package PerformanceDataORIGINAL_OLD
+package PerformanceData
   "Different moodels used for a black box heat pump model"
   model IcingBlock
     "Block which decreases evaporator power by an icing factor"
@@ -725,4 +725,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </html>", info="<html>
 <p>This package contains models for the grey box heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.</p>
 </html>"));
-end PerformanceDataORIGINAL_OLD;
+end PerformanceData;
