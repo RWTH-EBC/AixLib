@@ -1,6 +1,5 @@
 ﻿within AixLib.Fluid.Chillers.BaseClasses;
-package ReversibleChiller_PerformanceData
-  "Different models used for a black box chiller model"
+package PerformanceData "Different models used for a black box chiller model"
   model IcingBlock
     "Block which decreases evaporator power by an icing factor"
     AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
@@ -66,7 +65,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
   model LookUpTable2D "Performance data coming from manufacturer"
     extends
-      AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData;
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
@@ -101,12 +100,12 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           rotation=-90,
           origin={-60,36})));
 
-    Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
+    Modelica.Blocks.Math.UnitConversions.To_degC t_Co_in
       annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
               {6,6}},
           rotation=270,
           origin={52,72})));
-    Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
+    Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_ou annotation (extent=[-88,38;
           -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
           rotation=270,
           origin={-54,76})));
@@ -175,23 +174,23 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           level=AssertionLevel.warning);
     else
     end if;
-    connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
+    connect(t_Co_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
             60},{37.6,60},{37.6,50.8}},      color={0,0,127}));
-    connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(points={{52,65.4},{-68.4,
+    connect(t_Co_in.y, P_eleTable.u2) annotation (Line(points={{52,65.4},{-68.4,
             65.4},{-68.4,52.8}},  color={0,0,127}));
-    connect(t_Co_ou.y, P_eleTable.u1) annotation (Line(points={{-54,69.4},{-54,
+    connect(t_Ev_ou.y, P_eleTable.u1) annotation (Line(points={{-54,69.4},{-54,
             52.8},{-51.6,52.8}},  color={0,0,127}));
-    connect(t_Co_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-54,69.4},{-54,
+    connect(t_Ev_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-54,69.4},{-54,
             60},{52,60},{52,50.8},{54.4,50.8}},
                                     color={0,0,127}));
-    connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
+    connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
         points={{1.075,104.07},{-54,104.07},{-54,83.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+    connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
         points={{1.075,104.07},{2,104.07},{2,104},{52,104},{52,79.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -203,14 +202,14 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
                                        color={0,0,127}));
     connect(Qdot_ConTable.y, nTimesQCon.u1) annotation (Line(points={{46,18.6},{
             46,-2.8},{43.6,-2.8}},        color={0,0,127}));
-    connect(QCon, calcRedQCon.y)
-      annotation (Line(points={{-80,-110},{-80,-92},{82,-92},{82,-76.6}},
+    connect(QEva, calcRedQCon.y)
+      annotation (Line(points={{80,-110},{80,-92},{82,-92},{82,-76.6}},
                                                         color={0,0,127}));
     connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{-78,-68.6},{
             -78,-74},{-4,-74},{-4,-56},{85.6,-56},{85.6,-62.8}},            color=
            {0,0,127}));
-    connect(proRedQEva.y, QEva)
-      annotation (Line(points={{-78,-68.6},{-78,-88},{80,-88},{80,-110}},
+    connect(proRedQEva.y, QCon)
+      annotation (Line(points={{-78,-68.6},{-78,-88},{-80,-88},{-80,-110}},
                                                         color={0,0,127}));
     connect(feedbackHeatFlowEvaporator.y, proRedQEva.u2) annotation (Line(points={{-81,
             -47.5},{-81,-54},{-81.6,-54},{-81.6,-54.8}},           color={0,0,127}));
@@ -283,7 +282,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
   model LookUpTableND "N-dimensional table with data for heat pump"
     extends
-      AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData;
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
     parameter Real nConv=100
       "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
     parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -323,27 +322,28 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           extent={{-8,-8},{8,8}},
           rotation=-90,
           origin={0,68})));
-   Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
+   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_in
       annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
               {6,6}},
           rotation=-90,
           origin={46,44})));
-    Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
+    Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_ou annotation (extent=[-88,38;
           -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
           rotation=-90,
           origin={-40,46})));
-    Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-                      "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-6,-6},
-              {6,6}},
+    Modelica.Blocks.Math.Feedback feedbackHeatFlowCondenser
+      "Calculates condenser heat flow with total energy balance" annotation (
+        Placement(transformation(
+          extent={{-6,6},{6,-6}},
           rotation=-90,
-          origin={80,-82})));
+          origin={-80,-82})));
     Utilities.Logical.SmoothSwitch switchPel
       "If HP is off, no heat will be exchanged"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=-90,
           origin={50,-60})));
-    Utilities.Logical.SmoothSwitch switchQCon
-      "If HP is off, no heat will be exchanged"
+    Utilities.Logical.SmoothSwitch switchQEva
+      "If chiller is off, no heat will be exchanged"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=-90,
           origin={-50,-56})));
@@ -391,23 +391,17 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           rotation=270,
           origin={-72,46})));
   equation
-    connect(feedbackHeatFlowEvaporator.y, QEva)
-      annotation (Line(points={{80,-87.4},{80,-110}},
-                                                  color={0,0,127}));
     connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-76},{0,-76},
             {0,-110}},
                  color={0,0,127}));
-    connect(switchQCon.y, QCon) annotation (Line(points={{-50,-67},{-50,-76},{-80,
-            -76},{-80,-110}},
-                        color={0,0,127}));
 
-    connect(constZero.y, switchQCon.u3) annotation (Line(points={{-4,-24.6},{-4,
+    connect(constZero.y,switchQEva. u3) annotation (Line(points={{-4,-24.6},{-4,
             -24},{-4,-24},{-4,-28},{-4,-30},{-58,-30},{-58,-42},{-58,-42},{-58,
             -44},{-58,-44}},     color={0,0,127}));
     connect(constZero.y, switchPel.u3) annotation (Line(points={{-4,-24.6},{-4,
             -30},{42,-30},{42,-48}},
                             color={0,0,127}));
-    connect(nDTableQCon.y, switchQCon.u1)
+    connect(nDTableQCon.y,switchQEva. u1)
       annotation (Line(points={{-42,-23.2},{-42,-44}},
                                                   color={0,0,127}));
     connect(nDTablePel.y, switchPel.u1)
@@ -418,14 +412,14 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
                                             color={0,0,127}));
     connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
             {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
-    connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+    connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
         points={{1.075,104.07},{46,104.07},{46,51.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
+    connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
         points={{1.075,104.07},{-40,104.07},{-40,53.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -440,7 +434,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         index=-1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
-    connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-72,39.4},
+    connect(greaterThreshold.y,switchQEva. u2) annotation (Line(points={{-72,39.4},
             {-72,-34},{-50,-34},{-50,-44}}, color={255,0,255}));
     connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
             {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
@@ -454,14 +448,18 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         horizontalAlignment=TextAlignment.Right));
     connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{
             -1.55431e-15,59.2},{-6,59.2},{-6,29.6},{-5.6,29.6}}, color={0,0,127}));
-    connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
+    connect(t_Ev_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
             -40,36},{5.6,36},{5.6,29.6}}, color={0,0,127}));
-    connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
+    connect(t_Co_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
             32},{0,32},{0,29.6}}, color={0,0,127}));
-    connect(switchPel.y, feedbackHeatFlowEvaporator.u2)
-      annotation (Line(points={{50,-71},{50,-82},{75.2,-82}}, color={0,0,127}));
-    connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points=
-            {{-50,-67},{-50,-74},{80,-74},{80,-77.2}}, color={0,0,127}));
+    connect(switchPel.y, feedbackHeatFlowCondenser.u2) annotation (Line(points=
+            {{50,-71},{50,-82},{-75.2,-82}}, color={0,0,127}));
+    connect(switchQEva.y, feedbackHeatFlowCondenser.u1) annotation (Line(points
+          ={{-50,-67},{-50,-74},{-80,-74},{-80,-77.2}}, color={0,0,127}));
+    connect(feedbackHeatFlowCondenser.y, QCon)
+      annotation (Line(points={{-80,-87.4},{-80,-110}}, color={0,0,127}));
+    connect(switchQEva.y, QEva) annotation (Line(points={{-50,-67},{-50,-88},{
+            80,-88},{80,-110}}, color={0,0,127}));
     annotation (Icon(graphics={
       Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
       Line(points={{0.0,40.0},{0.0,-40.0}}),
@@ -546,7 +544,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
   model PolynomalApproach
     "Calculating heat pump data based on a polynomal approach"
     extends
-      AixLib.Fluid.Chillers.BaseClasses.ReversibleChiller_PerformanceData.BaseClasses.PartialPerformanceData;
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
 
     replaceable function PolyData =
         AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
@@ -555,19 +553,19 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
   equation
     Char =PolyData(
         sigBus.N,
-        sigBus.T_ret_co,
-        sigBus.T_flow_ev,
-        sigBus.m_flow_co,
-        sigBus.m_flow_ev);
+        sigBus.T_ret_ev,
+        sigBus.T_flow_co,
+        sigBus.m_flow_ev,
+        sigBus.m_flow_co);
     if sigBus.N > Modelica.Constants.eps then
       //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
-      QCon = Char[2];
+      QEva = Char[2];
       Pel = Char[1];
     else //If heat pump is turned off, all values become zero.
       QCon = 0;
       Pel = 0;
     end if;
-    QEva = -(QCon - Pel);
+    QCon = -(QCon - Pel);
     annotation (Icon(graphics={
           Text(
             lineColor={0,0,255},
@@ -680,7 +678,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             rotation=0,
             origin={1,104})));
       Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final displayUnit="kW")
-                                                                             "Heat flow rate through Condenser"  annotation (Placement(
+        "Heat flow rate through Condenser"  annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -746,4 +744,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </html>", info="<html>
 <p>This package contains models for the grey box heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.</p>
 </html>"));
-end ReversibleChiller_PerformanceData;
+end PerformanceData;

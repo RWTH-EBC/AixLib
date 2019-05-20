@@ -3,14 +3,14 @@ partial model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
 
   parameter Boolean use_rev=true "True if the thermal machine is reversible";
-  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_rev
-    "If no heating is used, the switches may still be connected"
-    annotation (Placement(transformation(extent={{-80,-78},{-60,-58}})));
   parameter Real scalingFactor=1 "Scaling factor of thermal machine";
 
   AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-18,86},{18,118}}), iconTransformation(
           extent={{-16,88},{18,118}})));
+  Modelica.Blocks.Sources.Constant constZero(final k=0) if not use_rev
+    "If no heating is used, the switches may still be connected"
+    annotation (Placement(transformation(extent={{-80,-78},{-60,-58}})));
   Modelica.Blocks.Interfaces.RealOutput QCon(unit="W", displayUnit="kW") "Heat Flow to condenser"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva(unit="W", displayUnit="kW") "Heat flow from evaporator"

@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.HeatPumps.Examples;
-model ReversibleThermalMachine_HeatPumpEASY
+model ReversibleThermalMachine_HeatPump
   "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
  import AixLib;
@@ -28,7 +28,7 @@ model ReversibleThermalMachine_HeatPumpEASY
     height=25,
     offset=278)
     "Ramp signal for the temperature input of the source side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-94,-84},{-74,-64}})));
+    annotation (Placement(transformation(extent={{-94,-90},{-74,-70}})));
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -36,7 +36,6 @@ model ReversibleThermalMachine_HeatPumpEASY
   AixLib.Fluid.HeatPumps.ReversibleThermalMachine_HeatPump heatPump(
     refIneFre_constant=1,
     scalingFactor=1,
-    VEva=0.04,
     CEva=100,
     GEvaOut=5,
     CCon=100,
@@ -52,17 +51,17 @@ model ReversibleThermalMachine_HeatPumpEASY
     redeclare package Medium_eva = Medium_sou,
     use_refIne=false,
     use_rev=true,
-    TAmbCon_nominal=288.15,
-    TAmbEva_nominal=273.15,
-    TCon_start=303.15,
     redeclare model PerDataMainHP =
         AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
         ( dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevHP =
         AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
         ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()))
-                       annotation (Placement(transformation(
+           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+    VEva=0.04,
+    TAmbCon_nominal=288.15,
+    TAmbEva_nominal=273.15,
+    TCon_start=303.15) annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));
@@ -71,7 +70,7 @@ model ReversibleThermalMachine_HeatPumpEASY
       startValue=true)
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=270,
-        origin={-10,82})));
+        origin={-4,82})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTAct(
     final m_flow_nominal=heatPump.mFlow_conNominal,
@@ -154,10 +153,6 @@ model ReversibleThermalMachine_HeatPumpEASY
         origin={-71,-3})));
 equation
 
-  connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
-      points={{-73,-74},{-68,-74},{-68,-66},{-56,-66}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{2,-65},
           {4,-65},{4,-47.4},{26.1667,-47.4}}, color={0,0,127}));
   connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{2,-65},
@@ -192,11 +187,13 @@ equation
           -64},{66,-22},{76,-22}}, color={0,127,255}));
   connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{3,38},{4,38},
           {4,6.84},{6.83333,6.84}}, color={0,0,127}));
-  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},{
-          -4,77.6},{-4,6.84},{-2.83333,6.84}}, color={255,0,255}));
+  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-4,77.6},{
+          -4,6.84},{-2.83333,6.84}},           color={255,0,255}));
   connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
           -47,-3},{-47,-2.76},{-30.8667,-2.76}},
                                              color={0,0,127}));
+  connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
+        points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=20000),
@@ -216,4 +213,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-100,-100},{100,80}})));
-end ReversibleThermalMachine_HeatPumpEASY;
+end ReversibleThermalMachine_HeatPump;

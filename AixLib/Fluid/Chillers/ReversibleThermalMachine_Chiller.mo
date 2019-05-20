@@ -1,9 +1,59 @@
 ﻿within AixLib.Fluid.Chillers;
 model ReversibleThermalMachine_Chiller
   "Grey-box model for reversible chillers using a black-box to simulate the refrigeration cycle"
-  extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine;
+  extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(use_rev=true);
+
+  replaceable model PerDataMainChi =
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of a chiller in main operation mode"
+    annotation (choicesAllMatching=true);
+  replaceable model PerDataRevChi =
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of a chiller in reversible operation mode"
+    annotation (Dialog(enable=use_rev),choicesAllMatching=true);
+
+  AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
+      final use_rev=use_rev,
+      final scalingFactor=scalingFactor,
+      redeclare model PerDataMainChi = PerDataMainChi,
+      redeclare model PerDataRevChi = PerDataRevChi)
+      "Blackbox model of refrigerant cycle of a thermal machine"
+    annotation (Placement(transformation(
+        extent={{-27,-26},{27,26}},
+        rotation=90,
+        origin={0,-1})));
 
 equation
+  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(
+      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{16,-38},{16,-44.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(
+      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{-14,-38},{-14,-44.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(
+      points={{1.77636e-15,28.7},{1.77636e-15,30},{0,30},{0,40},{-16,40},{-16,50.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(
+      points={{1.77636e-15,28.7},{0,28.7},{0,40},{16,40},{16,50.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.sigBus, sigBus) annotation (Line(
+      points={{-26.78,-0.73},{-54,-0.73},{-54,-43},{-105,-43}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{38,
+          -0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+
 
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
@@ -100,8 +150,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <h4>Concept</h4>
 <p>Using a signal bus as a connector, this heat pump model can be easily combined with the new <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a> or several control or security blocks from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>. The relevant data is aggregated. In order to control both chillers and heat pumps, both flow and return temperature are aggregated. The mode signal chooses the type of the heat pump. As a result, this model can also be used as a chiller:</p>
 <ul>
-<li>mode = true: Heating</li>
-<li>mode = false: Chilling</li>
+<li>mode = true: Chilling</li>
+<li>mode = false: Heating</li>
 </ul>
 <p>To model both on/off and inverter controlled heat pumps, the compressor speed is normalizd to a relative value between 0 and 1.</p>
 <p>Possible icing of the evaporator is modelled with an input value between 0 and 1.</p>

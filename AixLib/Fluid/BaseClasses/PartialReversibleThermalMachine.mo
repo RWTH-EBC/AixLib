@@ -21,16 +21,6 @@ partial model PartialReversibleThermalMachine
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
 
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-
-  replaceable model PerDataMain =
-      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
-  "Performance data of thermal machine in main operation mode"
-    annotation (choicesAllMatching=true);
-  replaceable model PerDataRev =
-      AixLib.Fluid.BaseClasses.ReversibleThermalMachine_PerformanceData.PartialPerformanceData
-  "Performance data of thermal machine in reversible operation mode"
-    annotation (Dialog(enable=use_rev),choicesAllMatching=true);
-
   parameter Real scalingFactor=1 "Scaling-factor of thermal machine";
   parameter Boolean use_refIne=true
     "Consider the inertia of the refrigerant cycle"                           annotation(choices(checkBox=true), Dialog(
@@ -177,18 +167,6 @@ partial model PartialReversibleThermalMachine
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
 
-  PartialInnerCycle innerCycle(
-      redeclare final model PerDataMainHP = PerDataMain,
-      redeclare final model PerDataRevHP = PerDataRev,
-      redeclare final model PerDataMainChi = PerDataMain,
-      redeclare final model PerDataRevChi = PerDataRev,
-      final use_rev=use_rev,
-      final scalingFactor=scalingFactor,
-      final machineType = machineType)
-    annotation (Placement(transformation(
-        extent={{-27,-26},{27,26}},
-        rotation=90,
-        origin={0,-1})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
@@ -387,11 +365,6 @@ partial model PartialReversibleThermalMachine
 
 protected
   parameter Boolean machineType = true "true: heat pump; false: chiller";
-  replaceable model PartialInnerCycle =
-      AixLib.Fluid.BaseClasses.PartialInnerCycle
-  constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
-  "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
-  annotation (choicesAllMatching=true);
 
 equation
 
@@ -446,22 +419,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(
-      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{16,-38},{16,-44.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(
-      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{-14,-38},{-14,-44.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(
-      points={{1.77636e-15,28.7},{1.77636e-15,30},{0,30},{0,40},{-16,40},{-16,50.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(
-      points={{1.77636e-15,28.7},{0,28.7},{0,40},{16,40},{16,50.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(iceFac_in, sigBus.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
@@ -520,20 +477,6 @@ equation
                                                color={0,127,255}));
   connect(port_b1, senT_b1.port_b) annotation (Line(points={{100,60},{72,60},{72,
           92},{48,92}}, color={0,127,255}));
-  connect(innerCycle.sigBus, sigBus) annotation (Line(
-      points={{-26.78,-0.73},{-54,-0.73},{-54,-43},{-105,-43}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{
-          38,-0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}},
-                                                                        color={0,
-          0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
