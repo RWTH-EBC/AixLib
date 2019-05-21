@@ -40,52 +40,45 @@ equation
   */
 
   // ++++++++++++++++EN ISO 6946 Appendix A >>Flat Surfaces<<++++++++++++++++
+  // upward heat flow: alpha = 5, downward heat flow: alpha = 0.7, horizontal heat flow: alpha = 2.5
   if calcMethod == 1 then
+
+    // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      // upward heat flow
-      if port_b.T >= port_a.T then
-        alpha = 5;
-        // downward heat flow
-      else
-        alpha = 0.7;
-      end if;
+      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 5 else 0.7));
+
+    // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      // downward heat flow
-      if port_b.T >= port_a.T then
-        alpha = 0.7;
-        // upward heat flow
-      else
-        alpha = 5;
-      end if;
+      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 0.7 else 5));
+
+    // vertical
     else
       alpha = 2.5;
     end if;
+
   // ++++++++++++++++Bernd Glueck++++++++++++++++
+  // (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
+  // upward heat flow: alpha = 2*(posDiff^0.31)          - equation 1.27, page 26
+  // downward heat flow: alpha = 0.54*(posDiff^0.31)     - equation 1.28, page 26
+  // horizontal heat flow: alpha = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
   elseif calcMethod == 2 then
 
-    // top side of horizontal plate
-// ------------------------------------------------------
-  if surfaceOrientation == 2 then
-      alpha = 2*(posDiff^0.31);  // equation 1.27, page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
+    // floor (horizontal facing up)
+    if surfaceOrientation == 2 then
+      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
 
-// down side of horizontal plate
-// ------------------------------------------------------
+    // ceiling (horizontal facing down)
+    elseif surfaceOrientation == 3 then
+      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
 
-  else
-    if surfaceOrientation == 3 then
-       alpha = 0.54*(posDiff^0.31);  //equation 1.28, page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
-
-// vertical plate
-//-------------------------------------------------
+    // vertical plate
     else
-      alpha = 1.6*(posDiff^0.3);  // equation 1.26 page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
+      alpha = 1.6*(posDiff^0.3);
     end if;
-  end if;
+
   // ++++++++++++++++alpha_custom++++++++++++++++
   else
-    // if calcMethod == 3 then
     alpha = alpha_custom;
-    // end if;
   end if;
 
   port_a.Q_flow = alpha*A*(port_a.T - port_b.T);
