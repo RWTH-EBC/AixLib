@@ -1,5 +1,6 @@
-﻿within AixLib.Systems.HeatPumpSystems.Examples;
+within AixLib.Systems.HeatPumpSystems.Examples;
 model HeatPumpSystem "Example for a heat pump system"
+  import AixLib;
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -101,7 +102,8 @@ model HeatPumpSystem "Example for a heat pump system"
     minTimeAntLeg(displayUnit="min") = 900,
     scalingFactor=1,
     redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,
             -5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,
@@ -222,10 +224,8 @@ equation
 </html>",
    revisions="<html>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+<li><i>May 22, 2019</i>  by Julian Matthes: <br>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>) </li>
+<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
 </ul>
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpsystem.mos" "Simulate and plot"),

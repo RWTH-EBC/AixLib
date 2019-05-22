@@ -1,7 +1,13 @@
-﻿within AixLib.Fluid.Chillers;
-model ReversibleThermalMachine_Chiller
+within AixLib.Fluid.Chillers;
+model Chiller
   "Grey-box model for reversible chillers using a black-box to simulate the refrigeration cycle"
-  extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(use_rev=true);
+  extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(
+  use_rev=true,
+  redeclare AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
+      final use_rev=use_rev,
+      final scalingFactor=scalingFactor,
+      redeclare model PerDataMainChi = PerDataMainChi,
+      redeclare model PerDataRevChi = PerDataRevChi));
 
   replaceable model PerDataMainChi =
       AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
@@ -11,49 +17,6 @@ model ReversibleThermalMachine_Chiller
       AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a chiller in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
-
-  AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
-      final use_rev=use_rev,
-      final scalingFactor=scalingFactor,
-      redeclare model PerDataMainChi = PerDataMainChi,
-      redeclare model PerDataRevChi = PerDataRevChi)
-      "Blackbox model of refrigerant cycle of a thermal machine"
-    annotation (Placement(transformation(
-        extent={{-27,-26},{27,26}},
-        rotation=90,
-        origin={0,-1})));
-
-equation
-  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(
-      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{16,-38},{16,-44.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(
-      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{-14,-38},{-14,-44.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(
-      points={{1.77636e-15,28.7},{1.77636e-15,30},{0,30},{0,40},{-16,40},{-16,50.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(
-      points={{1.77636e-15,28.7},{0,28.7},{0,40},{16,40},{16,50.8}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(innerCycle.sigBus, sigBus) annotation (Line(
-      points={{-26.78,-0.73},{-54,-0.73},{-54,-43},{-105,-43}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{38,
-          -0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,
-          0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-
 
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
@@ -134,26 +97,26 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>", info="<html>
-<p>This generic grey-box heat pump model uses empirical data to model the refrigerant cycle. The modelling of system inertias and heat losses allow the simulation of transient states. </p>
+<p>This generic grey-box chiller model uses empirical data to model the refrigerant cycle. The modelling of system inertias and heat losses allow the simulation of transient states. </p>
 <p>Resulting in the choosen model structure, several configurations are possible:</p>
 <ol>
 <li>Compressor type: on/off or inverter controlled</li>
-<li>Reversible heat pump / only heating</li>
+<li>Reversible chiller / only cooling</li>
 <li>Source/Sink: Any combination of mediums is possible</li>
 <li>Generik: Losses and inertias can be switched on or off.</li>
 </ol>
 <h4>Concept</h4>
-<p>Using a signal bus as a connector, this heat pump model can be easily combined with the new <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a> or several control or security blocks from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>. The relevant data is aggregated. In order to control both chillers and heat pumps, both flow and return temperature are aggregated. The mode signal chooses the type of the heat pump. As a result, this model can also be used as a chiller:</p>
+<p>Using a signal bus as a connector, this chiller model can be easily combined within a chiller system model including several control or security blocks analogous to <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>. The relevant data is aggregated. The mode signal chooses the type of the chiller operation. As a result, this model can also be used as a heat pump:</p>
 <ul>
 <li>mode = true: Chilling</li>
 <li>mode = false: Heating</li>
 </ul>
-<p>To model both on/off and inverter controlled heat pumps, the compressor speed is normalizd to a relative value between 0 and 1.</p>
+<p>To model both on/off and inverter controlled chillers, the compressor speed is normalizd to a relative value between 0 and 1.</p>
 <p>Possible icing of the evaporator is modelled with an input value between 0 and 1.</p>
 <p>The model structure is as follows. To understand each submodel, please have a look at the corresponding model information:</p>
 <ol>
@@ -162,12 +125,12 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li><a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity\">HeatExchanger</a>: This new model also enable modelling of thermal interias and heat losses in a heat exchanger. Please look at the model description for more info.</li>
 </ol>
 <h4>Assumptions</h4>
-<p>Several assumptions where made in order to model the heat pump. For a detailed description see the corresponding model. </p>
+<p>Several assumptions where made in order to model the chiller. For a detailed description see the corresponding model. </p>
 <ol>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: In order to model inverter controlled heat pumps, the compressor speed is scaled <b>linearly</b></li>
+<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: In order to model inverter controlled chillers, the compressor speed is scaled <b>linearly</b></li>
 <li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: Reduced evaporator power as a result of icing. The icing factor is multiplied with the evaporator power.</li>
-<li><b>Inertia</b>: The default value of the n-th order element is set to 3. This follows comparisons with experimental data. Previous heat pump models are using n = 1 as a default. However, it was pointed out that a higher order element fits a real heat pump better in</li>
-<li><b>Scaling factor</b>: A scaling facor is implemented for scaling of the heat pump power and capacity. The factor scales the parameters V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the heat pump can supply more heat with the COP staying nearly constant. However, one has to make sure that the supplied pressure difference or mass flow is also scaled with this factor, as the nominal values do not increase said mass flow.</li>
+<li><b>Inertia</b>: The default value of the n-th order element is set to 3. This follows comparisons with experimental data.</li>
+<li><b>Scaling factor</b>: A scaling facor is implemented for scaling of the chiller power and capacity. The factor scales the parameters V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the chiller can supply more heat with the COP staying nearly constant. However, one has to make sure that the supplied pressure difference or mass flow is also scaled with this factor, as the nominal values do not increase said mass flow.</li>
 </ol>
 <h4>Known Limitations</h4>
 <ul>
@@ -175,4 +138,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li>Reversing the mode: A normal 4-way-exchange valve suffers from heat losses and irreversibilities due to switching from one mode to another. Theses losses are not taken into account.</li>
 </ul>
 </html>"));
-end ReversibleThermalMachine_Chiller;
+end Chiller;

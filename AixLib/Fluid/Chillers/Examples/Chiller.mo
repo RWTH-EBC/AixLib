@@ -1,6 +1,5 @@
-﻿within AixLib.Fluid.Chillers.Examples;
-model ReversibleThermalMachine_Chiller
-  "Example for the reversible chiller model."
+within AixLib.Fluid.Chillers.Examples;
+model Chiller "Example for the reversible chiller model."
  extends Modelica.Icons.Example;
  import AixLib;
   replaceable package Medium_sin = AixLib.Media.Water
@@ -33,7 +32,7 @@ model ReversibleThermalMachine_Chiller
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=90,
         origin={0,62})));
-  AixLib.Fluid.Chillers.ReversibleThermalMachine_Chiller chiller(
+  AixLib.Fluid.Chillers.Chiller chiller(
     refIneFre_constant=1,
     scalingFactor=1,
     CEva=100,
@@ -51,11 +50,11 @@ model ReversibleThermalMachine_Chiller
     use_refIne=false,
     redeclare model PerDataMainChi =
         AixLib.Fluid.Chillers.BaseClasses.PerformanceData.LookUpTable2D (
-         dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+          dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
         AixLib.Fluid.Chillers.BaseClasses.PerformanceData.LookUpTable2D (
-         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+           AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     use_rev=true,
     VEva=0.4,
     VCon=0.04,
@@ -202,17 +201,17 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Simple test set-up for the HeatPumpDetailed model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. </p>
-<p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or polynomial functions.</p>
+<p>Simple test set-up for the reversible chiller model. The chiller is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the chiller and the supply temperature. </p>
+<p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.Chiller</a> or polynomial functions.</p>
 </html>",
       revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-100,-100},{100,80}})));
-end ReversibleThermalMachine_Chiller;
+end Chiller;

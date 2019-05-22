@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BaseClasses;
+within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleThermalMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -19,6 +19,12 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
+    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
+    annotation (Placement(transformation(
+        extent={{-27,-26},{27,26}},
+        rotation=90,
+        origin={0,-1})));
 
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Real scalingFactor=1 "Scaling-factor of thermal machine";
@@ -105,19 +111,16 @@ partial model PartialReversibleThermalMachine
 
   parameter Modelica.SIunits.Time tauHeaTraEva=1200
     "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Evaporator",enable=transferHeat),         Evaluate=true);
-  parameter Modelica.SIunits.Time tauHeaTraCon=1200
-    "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Condenser",enable=transferHeat),Evaluate=true);
-  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
-    "Fixed ambient temperature for heat transfer of sensors at the condenser side" annotation (               Dialog(tab=
-          "Assumptions",                                                                                               group=
-          "Condenser",
-      enable=transferHeat));
-
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat), Evaluate=true);
   parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
-    annotation (               Dialog(tab="Assumptions",group="Evaporator",enable=transferHeat));
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
+  parameter Modelica.SIunits.Time tauHeaTraCon=1200
+    "Time constant for heat transfer in temperature sensors in condenser, default 20 minutes"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat),Evaluate=true);
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
+    "Fixed ambient temperature for heat transfer of sensors at the condenser side"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
 //Initialization
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
@@ -368,7 +371,7 @@ protected
 
 equation
 
-    connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-34,79},{-34,
+  connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-34,79},{-34,
           40},{-76,40},{-76,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
@@ -406,6 +409,36 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+
+  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(
+      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{16,-38},{16,-44.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(
+      points={{-1.77636e-15,-30.7},{-1.77636e-15,-38},{-14,-38},{-14,-44.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(
+      points={{1.77636e-15,28.7},{1.77636e-15,30},{0,30},{0,40},{-16,40},{-16,50.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(
+      points={{1.77636e-15,28.7},{0,28.7},{0,40},{16,40},{16,50.8}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(innerCycle.sigBus, sigBus) annotation (Line(
+      points={{-26.78,-0.73},{-54,-0.73},{-54,-43},{-105,-43}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{38,
+          -0.865},{38,-36},{-52,-36},{-52,-42.915},{-104.925,-42.915}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
 
   connect(modeSet, sigBus.mode) annotation (Line(points={{-116,-20},{-76,-20},{-76,
           -42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
@@ -555,27 +588,25 @@ equation
             -120},{100,120}})),
     Documentation(revisions="<html>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+<li><i>May 22, 2019</i>  by Julian Matthes: <br>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>) </li>
+<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
 </ul>
 </html>", info="<html>
-<p>This generic grey-box heat pump model uses empirical data to model the refrigerant cycle. The modelling of system inertias and heat losses allow the simulation of transient states. </p>
+<p>This partial model for a generic grey-box thermal machine (heat pump or chiller) uses empirical data to model the refrigerant cycle. The modelling of system inertias and heat losses allow the simulation of transient states. </p>
 <p>Resulting in the choosen model structure, several configurations are possible:</p>
 <ol>
 <li>Compressor type: on/off or inverter controlled</li>
-<li>Reversible heat pump / only heating</li>
+<li>Reversible operation / only main operation</li>
 <li>Source/Sink: Any combination of mediums is possible</li>
 <li>Generik: Losses and inertias can be switched on or off.</li>
 </ol>
 <h4>Concept</h4>
-<p>Using a signal bus as a connector, this heat pump model can be easily combined with the new <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a> or several control or security blocks from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>. The relevant data is aggregated. In order to control both chillers and heat pumps, both flow and return temperature are aggregated. The mode signal chooses the type of the heat pump. As a result, this model can also be used as a chiller:</p>
+<p>Using a signal bus as a connector, this model working as a heat pump can be easily combined with several control or security blocks from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>. The relevant data is aggregated. In order to control both chillers and heat pumps, both flow and return temperature are aggregated. The mode signal chooses the operation type of the thermal machine:</p>
 <ul>
-<li>mode = true: Heating</li>
-<li>mode = false: Chilling</li>
+<li>mode = true: Main operation mode (heat pump: heating; chiller: cooling)</li>
+<li>mode = false: Reversible operation mode (heat pump: cooling; chiller: heating)</li>
 </ul>
-<p>To model both on/off and inverter controlled heat pumps, the compressor speed is normalizd to a relative value between 0 and 1.</p>
+<p>To model both on/off and inverter controlled thermal machines, the compressor speed is normalizd to a relative value between 0 and 1.</p>
 <p>Possible icing of the evaporator is modelled with an input value between 0 and 1.</p>
 <p>The model structure is as follows. To understand each submodel, please have a look at the corresponding model information:</p>
 <ol>
@@ -584,12 +615,12 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li><a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity\">HeatExchanger</a>: This new model also enable modelling of thermal interias and heat losses in a heat exchanger. Please look at the model description for more info.</li>
 </ol>
 <h4>Assumptions</h4>
-<p>Several assumptions where made in order to model the heat pump. For a detailed description see the corresponding model. </p>
+<p>Several assumptions where made in order to model the thermal machine. For a detailed description see the corresponding model. </p>
 <ol>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: In order to model inverter controlled heat pumps, the compressor speed is scaled <b>linearly</b></li>
+<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: In order to model inverter controlled machines, the compressor speed is scaled <b>linearly</b></li>
 <li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: Reduced evaporator power as a result of icing. The icing factor is multiplied with the evaporator power.</li>
 <li><b>Inertia</b>: The default value of the n-th order element is set to 3. This follows comparisons with experimental data. Previous heat pump models are using n = 1 as a default. However, it was pointed out that a higher order element fits a real heat pump better in</li>
-<li><b>Scaling factor</b>: A scaling facor is implemented for scaling of the heat pump power and capacity. The factor scales the parameters V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the heat pump can supply more heat with the COP staying nearly constant. However, one has to make sure that the supplied pressure difference or mass flow is also scaled with this factor, as the nominal values do not increase said mass flow.</li>
+<li><b>Scaling factor</b>: A scaling facor is implemented for scaling of the thermal power and capacity. The factor scales the parameters V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the thermal machine can supply more heat with the COP staying nearly constant. However, one has to make sure that the supplied pressure difference or mass flow is also scaled with this factor, as the nominal values do not increase said mass flow.</li>
 </ol>
 <h4>Known Limitations</h4>
 <ul>

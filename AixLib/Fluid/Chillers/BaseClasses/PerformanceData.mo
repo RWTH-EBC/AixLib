@@ -1,67 +1,6 @@
-﻿within AixLib.Fluid.Chillers.BaseClasses;
-package PerformanceData "Different models used for a black box chiller model"
-  model IcingBlock
-    "Block which decreases evaporator power by an icing factor"
-    AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
-    parameter Integer hourDay=16
-                              "Hour of the day";
-    parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2016
-      "Enumeration for choosing how reference time (time = 0) should be defined";
-    parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
-    replaceable function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach       constrainedby
-      AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct                                                                                     "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
-    Modelica.Blocks.Interfaces.RealInput T_flow_ev(unit="K", displayUnit="degC")
-      "Temperature at evaporator inlet"
-      annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
-          iconTransformation(extent={{-116,12},{-100,28}})));
-
-    Modelica.Blocks.Interfaces.RealInput T_ret_ev(unit="K", displayUnit="degC")
-      "Temperature at evaporator outlet" annotation (Placement(transformation(
-            extent={{-128,-40},{-100,-12}}),iconTransformation(extent={{-116,-28},
-              {-100,-12}})));
-    Modelica.Blocks.Interfaces.RealInput T_oda(unit="K", displayUnit="degC") "Outdoor air temperature"
-      annotation (Placement(transformation(extent={{-128,46},{-100,74}}),
-          iconTransformation(extent={{-116,52},{-100,68}})));
-    Modelica.Blocks.Interfaces.RealInput m_flow_ev(unit="kg/s") "Mass flow rate at evaporator"
-      annotation (Placement(transformation(extent={{-128,-80},{-100,-52}}),
-          iconTransformation(extent={{-116,-68},{-100,-52}})));
-    Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Output of current icing factor"
-      annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=0,
-          origin={110,0})));
-  protected
-    Real iceFac_internal "Calculated value of icing factor";
-  equation
-    iceFac_internal = iceFunc(T_flow_ev,T_ret_ev,T_oda,m_flow_ev);
-    iceFac = iceFac_internal;
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Text(
-            lineColor={0,0,255},
-            extent={{-150,105},{150,145}},
-            textString="%name"),
-          Ellipse(
-            lineColor = {108,88,49},
-            fillColor = {255,215,136},
-            fillPattern = FillPattern.Solid,
-            extent = {{-100,-100},{100,100}}),
-          Text(
-            lineColor={108,88,49},
-            extent={{-90.0,-90.0},{90.0,90.0}},
-            textString="f")}),                                     Diagram(
-          coordinateSystem(preserveAspectRatio=false)),
-      Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
-</ul>
-</html>",   info="<html>
-<p>Model for calculation of the icing factor. The replaceable function uses the inputs to calculate the resulting icing factor.</p>
-</html>"));
-  end IcingBlock;
+within AixLib.Fluid.Chillers.BaseClasses;
+package PerformanceData
+  "Different data models used for a black box chiller model"
 
   model LookUpTable2D "Performance data coming from manufacturer"
     extends
@@ -261,8 +200,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>",   info="<html>
@@ -454,8 +393,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             32},{0,32},{0,29.6}}, color={0,0,127}));
     connect(switchPel.y, feedbackHeatFlowCondenser.u2) annotation (Line(points=
             {{50,-71},{50,-82},{-75.2,-82}}, color={0,0,127}));
-    connect(switchQEva.y, feedbackHeatFlowCondenser.u1) annotation (Line(points
-          ={{-50,-67},{-50,-74},{-80,-74},{-80,-77.2}}, color={0,0,127}));
+    connect(switchQEva.y, feedbackHeatFlowCondenser.u1) annotation (Line(points=
+           {{-50,-67},{-50,-74},{-80,-74},{-80,-77.2}}, color={0,0,127}));
     connect(feedbackHeatFlowCondenser.y, QCon)
       annotation (Line(points={{-80,-87.4},{-80,-110}}, color={0,0,127}));
     connect(switchQEva.y, QEva) annotation (Line(points={{-50,-67},{-50,-88},{
@@ -534,8 +473,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </html>",   revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>"));
@@ -582,8 +521,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             textString="f")}), Documentation(revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>",   info="<html>
@@ -592,69 +531,6 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <p>                                <i>QEva = QCon - P_el</i></p>
 </html>"));
   end PolynomalApproach;
-
-  model calcCOP
-    "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
-
-    parameter Modelica.SIunits.Power lowBouPel "If P_el falls below this value, COP will not be calculated";
-    parameter Real T=60 "Time span for average";
-
-   Modelica.Blocks.Interfaces.RealInput Pel(final unit="W", final displayUnit=
-          "kW")
-      "Input for all electrical power consumed by the system"
-      annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}),
-          iconTransformation(extent={{-140,-60},{-100,-20}})));
-    Modelica.Blocks.Interfaces.RealInput QHeat(final unit="W", final displayUnit=
-          "kW")
-      "Input for all heating power delivered to the system"
-      annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
-          iconTransformation(extent={{-140,20},{-100,60}})));
-    Modelica.Blocks.Interfaces.RealOutput y_COP "Output for calculated COP value"
-      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  protected
-    AixLib.Utilities.Math.MovingAverage movAve(final T=T) "To calculate the moving average of the output values";
-  equation
-    //Check if any of the two sums are lower than the given threshold. If so, set COP to zero
-    if Pel < lowBouPel or QHeat < Modelica.Constants.eps then
-      movAve.u = 0;
-    else
-      movAve.u = QHeat/Pel;
-    end if;
-    connect(movAve.y, y_COP);
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Line(
-            points={{-82,0},{-12,0}},
-            color={28,108,200},
-            thickness=0.5),
-          Text(
-            extent={{-92,32},{-2,12}},
-            lineColor={28,108,200},
-            lineThickness=0.5,
-            textString="QHeat"),
-          Text(
-            extent={{-92,-8},{-2,-28}},
-            lineColor={28,108,200},
-            lineThickness=0.5,
-            textString="Pel"),
-          Line(points={{-6,6},{22,6}}, color={28,108,200}),
-          Line(points={{-6,-6},{22,-6}}, color={28,108,200}),
-          Text(
-            extent={{12,8},{102,-12}},
-            lineColor={28,108,200},
-            lineThickness=0.5,
-            textString="COP")}),                                   Diagram(
-          coordinateSystem(preserveAspectRatio=false)),
-      Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
-</ul>
-</html>",   info="<html>
-<p>This model is used to calculate the COP or the EER of a device. As the electrical power could get negative, a lower boundary is used to avoid division by zero. A moving average ensure a stable calculation of the COP or EER.</p>
-</html>"));
-  end calcCOP;
 
   package BaseClasses "Package with partial classes of Performance Data"
     partial model PartialPerformanceData
@@ -700,12 +576,12 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         Documentation(revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>",     info="<html>
-<p>Partial model for calculation of <span style=\"font-family: Courier New;\">P_el</span>, <span style=\"font-family: Courier New;\">QCon</span> and <span style=\"font-family: Courier New;\">QEva</span> based on the values in the <span style=\"font-family: Courier New;\">sigBusHP</span>.</p>
+<p>Partial model for calculation of <span style=\"font-family: Courier New;\">P_el</span>, <span style=\"font-family: Courier New;\">QCon</span> and <span style=\"font-family: Courier New;\">QEva</span> based on the values in the <span style=\"font-family: Courier New;\">sigBus</span>.</p>
 </html>"));
     end PartialPerformanceData;
   annotation (Icon(graphics={
@@ -726,22 +602,22 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>",   info="<html>
-<p>This package contains base classes for the package <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData</a>.</p>
+<p>This package contains base classes for the package <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.Chillers.BaseClasses.PerformanceData</a>.</p>
 </html>"));
   end BaseClasses;
 annotation (Documentation(revisions="<html>
 <ul>
 <li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
 </li>
 </ul>
 </html>", info="<html>
-<p>This package contains models for the grey box heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.</p>
+<p>This package contains models for the grey box chiller model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.Chillers.Chiller</a>.</p>
 </html>"));
 end PerformanceData;

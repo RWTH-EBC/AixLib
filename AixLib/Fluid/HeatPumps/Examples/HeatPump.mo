@@ -1,6 +1,5 @@
-﻿within AixLib.Fluid.HeatPumps.Examples;
-model HeatPump
-  "Example for the detailed heat pump model in order to compare to simple one."
+within AixLib.Fluid.HeatPumps.Examples;
+model HeatPump "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
  import AixLib;
   replaceable package Medium_sin = AixLib.Media.Water
@@ -28,7 +27,7 @@ model HeatPump
     height=25,
     offset=278)
     "Ramp signal for the temperature input of the source side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-94,-84},{-74,-64}})));
+    annotation (Placement(transformation(extent={{-94,-90},{-74,-70}})));
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -36,7 +35,6 @@ model HeatPump
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
     refIneFre_constant=1,
     scalingFactor=1,
-    VEva=0.04,
     CEva=100,
     GEvaOut=5,
     CCon=100,
@@ -47,18 +45,19 @@ model HeatPump
     mFlow_evaNominal=0.5,
     VCon=0.4,
     use_conCap=false,
-    use_evaCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    use_revHP=true,
-    redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
-    redeclare model PerDataChi =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     use_refIne=false,
+    use_rev=true,
+    redeclare model PerDataMainHP =
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+    redeclare model PerDataRevHP =
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+    VEva=0.04,
+    use_evaCap=false,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
     TCon_start=303.15) annotation (Placement(transformation(
@@ -66,16 +65,13 @@ model HeatPump
         rotation=270,
         origin={2,-21})));
 
-
-
   Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
       startValue=true)
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=270,
-        origin={-10,82})));
+        origin={-4,82})));
 
-  AixLib.Fluid.Sensors.TemperatureTwoPort
-                             senTAct(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTAct(
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final tau=1,
     final initType=Modelica.Blocks.Types.Init.InitialState,
@@ -84,8 +80,9 @@ model HeatPump
     final transferHeat=false,
     redeclare final package Medium = Medium_sin,
     final T_start=303.15,
-    final TAmb=291.15) "Temperature at sink inlet"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    final TAmb=291.15) "Temperature at sink inlet" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
         rotation=0,
         origin={54,-64})));
   Modelica.Blocks.Logical.Hysteresis hys(
@@ -117,9 +114,8 @@ model HeatPump
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final V=5,
     final allowFlowReversal=true,
-    redeclare package Medium = Medium_sin)
-                                  "Volume of Condenser" annotation (Placement(
-        transformation(
+    redeclare package Medium = Medium_sin) "Volume of Condenser" annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={86,-20})));
@@ -156,12 +152,8 @@ model HeatPump
         origin={-71,-3})));
 equation
 
-  connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
-      points={{-73,-74},{-68,-74},{-68,-66},{-56,-66}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{2,-65},
-          {4,-65},{4,-47.4},{26.1667,-47.4}},   color={0,0,127}));
+          {4,-65},{4,-47.4},{26.1667,-47.4}}, color={0,0,127}));
   connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{2,-65},
           {2,-47.4},{-22.1667,-47.4}}, color={0,0,127}));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_a2) annotation (Line(
@@ -174,9 +166,8 @@ equation
           {96,26.8}}, color={0,0,127}));
   connect(heatFlowRateCon.Q_flow, gain.y) annotation (Line(points={{94,12},{98,
           12},{98,17.6},{96,17.6}}, color={0,0,127}));
-  connect(heatPump.port_b2, sourceSideFixedBoundary.ports[1])
-    annotation (Line(points={{-12.5,3},{-62,3},{-62,40},{-76,40}},
-                                                          color={0,127,255}));
+  connect(heatPump.port_b2, sourceSideFixedBoundary.ports[1]) annotation (Line(
+        points={{-12.5,3},{-62,3},{-62,40},{-76,40}}, color={0,127,255}));
   connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,-45},
           {30,-45},{30,-64},{44,-64}}, color={0,127,255}));
   connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-18},{76,4},
@@ -194,14 +185,17 @@ equation
   connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-64},{66,
           -64},{66,-22},{76,-22}}, color={0,127,255}));
   connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{3,38},{4,38},
-          {4,6.84},{6.83333,6.84}},       color={0,0,127}));
-  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
-          {-4,77.6},{-4,6.84},{-2.83333,6.84}}, color={255,0,255}));
+          {4,6.84},{6.83333,6.84}}, color={0,0,127}));
+  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-4,77.6},{
+          -4,6.84},{-2.83333,6.84}},           color={255,0,255}));
   connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
-          -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
+          -47,-3},{-47,-2.76},{-30.8667,-2.76}},
+                                             color={0,0,127}));
+  connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
+        points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-    experiment(StopTime=3600),
+    experiment(StopTime=20000),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
@@ -210,10 +204,8 @@ equation
 </html>",
       revisions="<html>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+<li><i>May 22, 2019</i>  by Julian Matthes: <br>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>) </li>
+<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
 </ul>
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
