@@ -153,8 +153,7 @@ equation
           lineColor={0,0,255},
           fillColor={213,170,255},
           fillPattern=FillPattern.Solid,
-          textString="FastHVAC Chiller
-")}),
+          textString="FastHVAC Chiller")}),
     experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>

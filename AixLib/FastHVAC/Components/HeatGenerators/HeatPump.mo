@@ -1,8 +1,8 @@
 ﻿within AixLib.FastHVAC.Components.HeatGenerators;
-package HeatPumpNew
+package HeatPump
   extends Modelica.Icons.Package;
 
-  model HeatPumpNEW "Base model of FastHVAC Heat Pump"
+  model HeatPump "Base model of FastHVAC Heat Pump"
 
   //General
     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
@@ -13,19 +13,17 @@ package HeatPumpNew
         AixLib.FastHVAC.Media.WaterSimple()
       "Medium at source side"
       annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-    parameter Integer use_revHP=1    "Operating type of the system" annotation(choices(
-        choice=1   "reversible HP",
-        choice=2   "only heating operation",
-        choice=3   "only cooling operation",
-        radioButtons=true), Dialog(descriptionLabel=true));
+    parameter Boolean use_revHP=true
+      "True if the HP is reversible"
+      annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
     replaceable model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
       "Performance data of HP in heating mode"
       annotation (choicesAllMatching=true);
     replaceable model PerDataChi =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceDataNEW.BaseClasses.PartialPerformanceDataNEW
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
       "Performance data of HP in chilling mode"
-      annotation (choicesAllMatching=true);
+      annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
     parameter Real scalingFactor=1 "Scaling-factor of HP";
     parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
       annotation(choices(checkBox=true), Dialog(
@@ -225,13 +223,13 @@ package HeatPumpNew
     Modelica.Blocks.Interfaces.RealInput nSet
       "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
           transformation(extent={{-132,4},{-100,36}})));
-    Controls.Interfaces.HeatPumpControlBusNEW     sigBusHP
+    Controls.Interfaces.ThermalMachineControlBus  sigBusHP
       annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
           iconTransformation(extent={{-108,-52},{-90,-26}})));
-    Fluid.HeatPumps.BaseClasses.InnerCycleNEW     innerCycle(
-      redeclare final model PerDataHea =PerDataHea,
-      redeclare final model PerDataChi = PerDataChi,
-      final use_revHP=use_revHP,
+    AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
+      redeclare final model PerDataMainHP =PerDataHea,
+      redeclare final model PerDataRevHP = PerDataChi,
+      final use_rev=use_revHP,
       final scalingFactor=scalingFactor)                                                   annotation (
         Placement(transformation(
           extent={{-27,-26},{27,26}},
@@ -249,12 +247,8 @@ package HeatPumpNew
       annotation (Placement(transformation(extent={{-10,10},{10,-10}},
           rotation=180,
           origin={110,100})));
-    Modelica.Blocks.Interfaces.BooleanInput modeSet if use_revHP==1
-      "Set value of HP mode"
-      annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
-    Modelica.Blocks.Sources.BooleanExpression opType(y=if use_revHP==2
-           then true else false) if not use_revHP==1
-      annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
+    Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+      annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
     Sensors.TemperatureSensor        senT_a2
       "Temperature at sink inlet"
       annotation (Placement(
@@ -296,24 +290,6 @@ package HeatPumpNew
           extent={{-10,10},{10,-10}},
           rotation=0)));
   equation
-
-    if use_revHP==1 then
-    connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-20},{-76,-20},
-            {-76,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-
-    else
-
-    connect(opType.y, sigBusHP.mode) annotation (Line(points={{-99,0},{-76,0},{-76,
-            -42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
-    end if;
-
     connect(enthalpyPort_a, mFlow_con.enthalpyPort_a) annotation (Line(points={{-100,60},
             {-92,60},{-92,60.1},{-88.8,60.1}},     color={176,0,0}));
     connect(mFlow_con.enthalpyPort_b, senT_a1.enthalpyPort_a) annotation (Line(
@@ -377,6 +353,12 @@ package HeatPumpNew
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-84,-18},
+            {-84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
     connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
             -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
         string="%second",
@@ -396,14 +378,14 @@ package HeatPumpNew
         extent={{-3,-6},{-3,-6}},
         horizontalAlignment=TextAlignment.Right));
     connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
-            {52,-0.865},{52,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+            {42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
           color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(innerCycle.sigBusHP, sigBusHP) annotation (Line(
-        points={{-26.78,-0.73},{-38,-0.73},{-38,-44},{-72,-44},{-72,-43},{-105,-43}},
+    connect(innerCycle.sigBus, sigBusHP) annotation (Line(
+        points={{-26.78,-0.73},{-32,-0.73},{-32,-42},{-32,-42},{-32,-43},{-105,-43}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%second",
@@ -508,10 +490,14 @@ package HeatPumpNew
   </html>",
     revisions="<html><ul>
     <li>
+    <i>May 22, 2019</i>  by Julian Matthes: <br/>
+    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+    </li>
+    <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
     Moved into AixLib 
     </li>
   </ul>
   </html>"));
-  end HeatPumpNEW;
-end HeatPumpNew;
+  end HeatPump;
+end HeatPump;

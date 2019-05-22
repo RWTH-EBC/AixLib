@@ -27,11 +27,11 @@ model HeatPump
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=-90,
@@ -168,7 +168,7 @@ equation
           lineColor={0,0,255},
           fillColor={213,170,255},
           fillPattern=FillPattern.Solid,
-          textString="FastHVAC HeatPump2
+          textString="FastHVAC HeatPump
 ")}),
     experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
@@ -182,8 +182,12 @@ equation
   </html>",
   revisions="<html><ul>
     <li>
+    <i>May 22, 2019</i>  by Julian Matthes: <br/>
+    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+    </li>
+    <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib
+    Moved into AixLib 
     </li>
   </ul>
   </html>"));

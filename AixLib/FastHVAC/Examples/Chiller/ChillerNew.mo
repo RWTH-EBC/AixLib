@@ -1,13 +1,12 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
-model HeatPumpNEW
+﻿within AixLib.FastHVAC.Examples.Chiller;
+model ChillerNew
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple()) "Fluidsource for source"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  Components.HeatGenerators.HeatPumpNew.HeatPumpNEW
-                                              heatPump(
+  Components.HeatGenerators.HeatPump.HeatPump heatPump(
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -24,15 +23,15 @@ model HeatPumpNEW
     CEva=100,
     GEva=5,
     allowFlowReversalEva=true,
-    use_revHP=1,
+    use_revHP=true,
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
+        (dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=-90,
@@ -136,8 +135,7 @@ equation
           -15.1333,9},{-15.1333,7.88}},
                                color={0,0,127}));
   connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-75.6,76},{
-          0.333333,76},{0.333333,13.08}},
-                                color={255,0,255}));
+          0.6,76},{0.6,13.08}}, color={255,0,255}));
   connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
   connect(pump.enthalpyPort_b, heatPump.enthalpyPort_a)
@@ -170,23 +168,26 @@ equation
           lineColor={0,0,255},
           fillColor={213,170,255},
           fillPattern=FillPattern.Solid,
-          textString="FastHVAC HeatPump2
-")}),
+          textString="FastHVAC Chiller")}),
     experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
   <p>
   Example Setup is based on fluid example of
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump\">
-  AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
+  <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Chiller\">
+  AixLib.Fluid.Chillers.Examples.Chiller</a>
   </p>
   </html>",
   revisions="<html><ul>
     <li>
+    <i>May 22, 2019</i>  by Julian Matthes: <br/>
+    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+    </li>
+    <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib
+    Moved into AixLib 
     </li>
   </ul>
   </html>"));
-end HeatPumpNEW;
+end ChillerNew;

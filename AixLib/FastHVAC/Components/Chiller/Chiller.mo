@@ -1,6 +1,6 @@
 ﻿within AixLib.FastHVAC.Components.Chiller;
-model Chiller_HeatPumpBACKUP
-  "Base model of FastHVAC Chiller based on the heat pump model"
+model Chiller "Base model of FastHVAC Chiller"
+  import AixLib;
 
 //General
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
@@ -11,10 +11,16 @@ model Chiller_HeatPumpBACKUP
       AixLib.FastHVAC.Media.WaterSimple()
     "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  replaceable model PerDataChi =
-      AixLib.FastHVAC.Components.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
-    "Performance data of chiller"
+  parameter Boolean use_revChi=true "True if the chiller is reversible"
+    annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+  replaceable model PerDataMainChi =
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+    "Performance data of chiller in cooling mode"
     annotation (choicesAllMatching=true);
+  replaceable model PerDataRevChi =
+      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+    "Performance data of chiller in heating mode"
+    annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of chiller";
   parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
@@ -57,8 +63,7 @@ model Chiller_HeatPumpBACKUP
     "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
-  parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho
-    "Mass of working fluid";
+  parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho "Mass of working fluid";
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -133,7 +138,7 @@ model Chiller_HeatPumpBACKUP
                      m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));
-  .AixLib.FastHVAC.BaseClasses.EvaporatorCondenserWithCapacity con(
+  AixLib.FastHVAC.BaseClasses.EvaporatorCondenserWithCapacity con(
     final kAOut_nominal=GCon,
     final m_fluid=m_fluidCon,
     final T_start=TCon_start,
@@ -147,7 +152,7 @@ model Chiller_HeatPumpBACKUP
     final m_flow_nominal=mFlow_conNominal)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
-  .AixLib.FastHVAC.BaseClasses.EvaporatorCondenserWithCapacity eva(
+  AixLib.FastHVAC.BaseClasses.EvaporatorCondenserWithCapacity eva(
     final medium=Medium_eva,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
@@ -215,17 +220,17 @@ model Chiller_HeatPumpBACKUP
   Modelica.Blocks.Interfaces.RealInput nSet
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.ChillerControlBus sigBusChi annotation (Placement(
-        transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
-          extent={{-108,-52},{-90,-26}})));
-  BaseClasses.Chiller_InnerCycle                innerCycle(
-    redeclare final model PerDataChi = PerDataChi,
-    final scalingFactor=scalingFactor)                                                   annotation (
-      Placement(transformation(
+  Controls.Interfaces.ThermalMachineControlBus  sigBusHP
+    annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
+        iconTransformation(extent={{-108,-52},{-90,-26}})));
+  AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
+    redeclare final model PerDataMainChi = PerDataMainChi,
+    redeclare final model PerDataRevChi = PerDataRevChi,
+    final use_rev=use_revChi,
+    final scalingFactor=scalingFactor) annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
-
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K",
     final displayUnit="degC")
     "Ambient temperature on the evaporator side"
@@ -233,10 +238,13 @@ model Chiller_HeatPumpBACKUP
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K",
-    final displayUnit="degC") "Ambient temperature on the condenser side"
+    final displayUnit="degC")
+    "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
+  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+    annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
   Sensors.TemperatureSensor        senT_a2
     "Temperature at sink inlet"
     annotation (Placement(
@@ -306,84 +314,88 @@ equation
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
   connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
-  connect(iceFac_in, sigBusChi.iceFac) annotation (Line(points={{-76,-136},{-76,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
+          {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(innerCycle.QCon, realPassThroughnSetEva.u) annotation (Line(points={{0,
+  connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(points={{0,
           -30.7},{0,-40},{16,-40},{16,-44.8}}, color={0,0,127}));
-  connect(innerCycle.QCon, heatFlowIneEva.u) annotation (Line(points={{0,-30.7},
+  connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(points={{0,-30.7},
           {0,-40},{-14,-40},{-14,-44.8}}, color={0,0,127}));
   connect(heatFlowIneEva.y, eva.QFlow_in) annotation (Line(points={{-14,-58.6},{
           -14,-69.04},{0,-69.04}}, color={0,0,127}));
   connect(realPassThroughnSetEva.y, eva.QFlow_in) annotation (Line(points={{16,-58.6},
           {16,-69.04},{0,-69.04}}, color={0,0,127}));
-  connect(innerCycle.QEva, realPassThroughnSetCon.u) annotation (Line(points={{
-          0,28.7},{0,40},{16,40},{16,50.8}}, color={0,0,127}));
-  connect(innerCycle.QEva, heatFlowIneCon.u) annotation (Line(points={{0,28.7},
-          {0,40},{-16,40},{-16,50.8}}, color={0,0,127}));
+  connect(innerCycle.QCon, realPassThroughnSetCon.u) annotation (Line(points={{0,
+          28.7},{0,40},{16,40},{16,50.8}}, color={0,0,127}));
+  connect(innerCycle.QCon, heatFlowIneCon.u) annotation (Line(points={{0,28.7},{
+          0,40},{-16,40},{-16,50.8}}, color={0,0,127}));
   connect(heatFlowIneCon.y, con.QFlow_in) annotation (Line(points={{-16,64.6},{
           -16,75.04},{0,75.04}},
                              color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
-  connect(mFlow_con.dotm, sigBusChi.m_flow_co) annotation (Line(points={{-79,51},
+  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
           {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nSet, sigBusChi.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
+  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_a1.T, sigBusChi.T_flow_co) annotation (Line(points={{-33,81},{-33,
+  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-84,-18},
+          {-84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusChi.T_flow_ev) annotation (Line(points={{39,-75},{39,
-          -36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
-      Text(
+  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
+          {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusChi.T_ret_co) annotation (Line(points={{39,81},{39,-36},
+  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(innerCycle.Pel, sigBusChi.Pel) annotation (Line(points={{28.73,-0.865},
-          {52,-0.865},{52,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
+          {42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.sigBusChi, sigBusChi) annotation (Line(
-      points={{-26.78,-0.73},{-38,-0.73},{-38,-44},{-72,-44},{-72,-43},{-105,-43}},
+  connect(innerCycle.sigBus, sigBusHP) annotation (Line(
+      points={{-26.78,-0.73},{-32,-0.73},{-32,-42},{-32,-42},{-32,-43},{-105,-43}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-
-  connect(mFlow_eva.dotm, sigBusChi.m_flow_ev) annotation (Line(points={{69,-51},
+  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
           {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBusChi.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
+  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
           -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -467,13 +479,19 @@ equation
             -120},{100,120}})),
   Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>HeatPump model adapted to FastHAVC library consequently working as a chiller.</p><p>This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian W&uuml;llhorst in 2018. </p>
+<p>Chiller model adapted to FastHAVC library.</p>
+<p>  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.Chiller.Chiller\">
+  AixLib.Fluid.Chiller.Chiller</a> created by Julian Matthes in 2019. </p>
 </html>",
   revisions="<html><ul>
+    <li>
+    <i>May 22, 2019</i>  by Julian Matthes: <br/>
+    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+    </li>
     <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
     Moved into AixLib 
     </li>
   </ul>
   </html>"));
-end Chiller_HeatPumpBACKUP;
+end Chiller;
