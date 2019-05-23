@@ -11,10 +11,15 @@ model FacadeVentilationUnit
       maxExFanPower=0.6)
     "Comprehensive rule-based controller for the facade ventilation unit"
     annotation (Placement(transformation(extent={{-46,-30},{-6,10}})));
-  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare package
-              Air = Medium1, redeclare package Water = Medium2)
+  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare
+      package Air = Medium1, redeclare package Water = Medium2,
+    fanExhaustAir(fan(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)),
+    system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
+    fanSupplyAir(fan(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
+        p_start=FVU.system.p_start))
     "The facade ventilation unit to be tested in this example"
     annotation (Placement(transformation(extent={{70,-56},{106,-36}})));
+
   AixLib.Fluid.Sources.Boundary_pT freshAirSource(
     nPorts=1,
     redeclare package Medium = Medium1,
@@ -82,8 +87,8 @@ model FacadeVentilationUnit
   Modelica.Blocks.Sources.Constant coolingWaterTemperature(k=273.15 + 17)
     "Provides a test value of the cooling water temperatiure"
     annotation (Placement(transformation(extent={{84,74},{104,94}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort supplyAirTemperature(redeclare package
-              Medium = Medium1, m_flow_nominal=0.1)
+  AixLib.Fluid.Sensors.TemperatureTwoPort supplyAirTemperature(redeclare
+      package Medium = Medium1, m_flow_nominal=0.1)
     "Measures the supply air temperature"
     annotation (Placement(transformation(extent={{120,-54},{140,-34}})));
   Modelica.Blocks.Sources.Sine roomTemperature(
@@ -188,7 +193,7 @@ equation
             100}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             200,100}})),
-    experiment(StopTime=86400),
+    experiment(StopTime=86400, Tolerance=1e-006),
     Documentation(revisions="<html>
 <ul>
 <li>
@@ -207,5 +212,7 @@ heating valve and bypasses the heat recovery unit so that the supply air
 temperature is equal to the outdoor temperature.</p>
 <p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitExample.png\"
 alt=\"Example result of facade ventilation unit example\"/></p>
-</html>"));
+</html>"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/Airflow/FacadeVentilationUnit/Examples/FacadeVentilationUnit.mos"
+        "Simulate and plot"));
 end FacadeVentilationUnit;
