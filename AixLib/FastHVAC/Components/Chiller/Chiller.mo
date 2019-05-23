@@ -109,10 +109,10 @@ model Chiller "Base model of FastHVAC Chiller"
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=30+273.15
+  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=10 + 273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=10+273.15
+  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=30 + 273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
@@ -220,9 +220,9 @@ model Chiller "Base model of FastHVAC Chiller"
   Modelica.Blocks.Interfaces.RealInput nSet
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.ThermalMachineControlBus  sigBusHP
-    annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
-        iconTransformation(extent={{-108,-52},{-90,-26}})));
+  Controls.Interfaces.ThermalMachineControlBus sigBus annotation (Placement(
+        transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
+          extent={{-108,-52},{-90,-26}})));
   AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
     redeclare final model PerDataMainChi = PerDataMainChi,
     redeclare final model PerDataRevChi = PerDataRevChi,
@@ -314,7 +314,7 @@ equation
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
   connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
-  connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
+  connect(iceFac_in, sigBus.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -337,66 +337,67 @@ equation
                              color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
-  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
-          {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(mFlow_con.dotm, sigBus.m_flow_co) annotation (Line(points={{-79,51},{
+          -79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
+  connect(nSet, sigBus.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-84,-18},
-          {-84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(modeSet, sigBus.mode) annotation (Line(points={{-116,-18},{-84,-18},{
+          -84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-33,81},{-33,-42.915},
+          {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
+  connect(senT_a2.T, sigBus.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
+  connect(senT_b1.T, sigBus.T_ret_co) annotation (Line(points={{39,81},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
-          {42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{
+          42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.sigBus, sigBusHP) annotation (Line(
+  connect(innerCycle.sigBus, sigBus) annotation (Line(
       points={{-26.78,-0.73},{-32,-0.73},{-32,-42},{-32,-42},{-32,-43},{-105,-43}},
+
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
-          {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+  connect(mFlow_eva.dotm, sigBus.m_flow_ev) annotation (Line(points={{69,-51},{
+          69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_b2.T, sigBus.T_ret_ev) annotation (Line(points={{-53,-75},{-53,-42.915},
+          {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
