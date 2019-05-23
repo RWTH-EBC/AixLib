@@ -1,0 +1,17 @@
+simulateModel("AixLib.Airflow.AirCurtain.Examples.AirCurtain", stopTime=86400, method="dassl", tolerance=1e-006, resultFile="AirCurtain");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"airCurtainSimplyfied.Power"}, range={0.0, 1.0, -10000.0, 60000.0}, autoerase=false, grid=true, colors={{28,108,200}}, timeUnit="d");
+createPlot(id=1, position={0, 0, 1223, 348}, y={"airload.T"}, range={0.0, 1.0, 18.0, 28.0}, autoerase=false, grid=true, subPlot=2, colors={{28,108,200}}, timeUnit="d", displayUnits={"degC"});
+

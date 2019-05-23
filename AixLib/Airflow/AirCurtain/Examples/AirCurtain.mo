@@ -9,7 +9,7 @@ model AirCurtain
     PAirCur=50000,
     TBou=287.15)
     annotation (Placement(transformation(extent={{-14,-12},{20,20}})));
-  ThermalZones.HighOrder.Components.DryAir.Airload airload
+  ThermalZones.HighOrder.Components.DryAir.Airload airload(T(fixed=true))
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -52,5 +52,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  annotation (experiment(StopTime=1209600, Interval=3600));
+  annotation (experiment(StopTime=86400, Tolerance=1e-006), __Dymola_Commands(
+        file="Resources/Scripts/Dymola/Airflow/AirCurtain/Examples/AirCurtain.mos"
+        "Simulate and plot"));
 end AirCurtain;
