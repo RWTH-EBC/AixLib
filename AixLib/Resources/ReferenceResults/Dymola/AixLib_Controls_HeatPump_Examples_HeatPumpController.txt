@@ -1,0 +1,15 @@
+last-generated=2019-05-23
+statistics-simulation=
+{
+  "linear": " ",
+  "nonlinear": " ",
+  "numerical Jacobians": "0"
+}
+heatPumpControlBus.onOff=[0e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 1e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00]
+time=[0e+00, 1e+04]
+heatPumpControlBus.T_ret_co=[3.1e+02, 3.1e+02]
+heatPumpControlBus.T_flow_co=[2.9e+02, 2.9e+02]
+heatPumpControlBus.T_flow_ev=[2.8e+02, 2.8e+02]
+heatPumpControlBus.T_ret_ev=[3e+02, 3e+02]
+heatPumpControlBus.m_flow_co=[1e+00, 1e+00]
+heatPumpControlBus.m_flow_ev=[5e-01, 5e-01]

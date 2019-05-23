@@ -28,8 +28,8 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
             -100,-100},{100,100}})),
     experiment(
-      StopTime=3.1536e+007,
-      Interval=3600,
+      StopTime=31536000,
+      Tolerance=1e-006,
       __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
@@ -40,5 +40,8 @@ equation
 <ul>
 <li><i>October 20, 2017 </i> ,by Larissa Kuehn:<br/>First implementation</li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Electrical/PVSystem/Examples/ExamplePVTMY3.mos"
+        "Simulate and plot"));
 end ExamplePVTMY3;

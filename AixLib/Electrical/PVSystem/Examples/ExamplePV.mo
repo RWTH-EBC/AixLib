@@ -44,8 +44,8 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
             -100,-100},{100,100}})),
     experiment(
-      StopTime=3.1536e+007,
-      Interval=3600,
+      StopTime=31536000,
+      Tolerance=1e-006,
       __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
@@ -57,5 +57,8 @@ equation
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated documentation.</li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Electrical/PVSystem/Examples/ExamplePV.mos"
+        "Simulate and plot"));
 end ExamplePV;

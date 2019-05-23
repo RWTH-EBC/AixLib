@@ -1,0 +1,18 @@
+simulateModel("AixLib.Controls.HeatPump.Examples.HeatPumpController", stopTime=10000, tolerance=1e-006, resultFile="HeatPumpController");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"heatPumpControlBus.onOff"}, range={0.0, 10000.0, -0.2, 1.2000000000000002}, autoerase=false, grid=true, colors={{28,108,200}});
+createPlot(id=1, position={0, 0, 1223, 231}, y={"heatPumpControlBus.T_flow_ev", "heatPumpControlBus.T_flow_co", "heatPumpControlBus.T_ret_ev", "heatPumpControlBus.T_ret_co"}, range={0.0, 10000.0, 5.0, 40.0}, autoerase=false, grid=true, subPlot=2, colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}}, displayUnits={"degC", "degC", "degC", "degC"});
+createPlot(id=1, position={0, 0, 1223, 230}, y={"heatPumpControlBus.m_flow_ev", "heatPumpControlBus.m_flow_co"}, range={0.0, 10000.0, 0.4, 1.1}, autoerase=false, grid=true, subPlot=3, colors={{28,108,200}, {238,46,47}});
+
