@@ -54,15 +54,13 @@ model HeatPumpSystem
 
 //Heat Pump
   replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
-                                                                                          constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D                    constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in heating mode"
     annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.LookUpTable2D
-                                                                                          constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.ReversibleHeatPump_PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D                    constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
 
