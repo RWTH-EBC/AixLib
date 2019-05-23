@@ -1,6 +1,5 @@
 ﻿within AixLib.Fluid.HeatPumps.BaseClasses;
-package PerformanceData
-  "Different moodels used for a black box heat pump model"
+package PerformanceData "Different models used for a black box heat pump model"
   model IcingBlock
     "Block which decreases evaporator power by an icing factor"
     AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
@@ -65,7 +64,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
   end IcingBlock;
 
   model LookUpTable2D "Performance data coming from manufacturer"
-    extends BaseClasses.PartialPerformanceData;
+    extends
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
@@ -156,10 +156,22 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
   equation
     if printAsserts then
-    assert(minSou+273.15 < sigBusHP.T_flow_ev, "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-    assert(maxSou+273.15 > sigBusHP.T_flow_ev, "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-    assert(minSup+273.15 < sigBusHP.T_ret_co, "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
-    assert(maxSup+273.15 > sigBusHP.T_ret_co, "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results", level = AssertionLevel.warning);
+      assert(
+          minSou + 273.15 < sigBus.T_flow_ev,
+          "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results",
+          level=AssertionLevel.warning);
+      assert(
+          maxSou + 273.15 > sigBus.T_flow_ev,
+          "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results",
+          level=AssertionLevel.warning);
+      assert(
+          minSup + 273.15 < sigBus.T_ret_co,
+          "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results",
+          level=AssertionLevel.warning);
+      assert(
+          maxSup + 273.15 > sigBus.T_ret_co,
+          "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results",
+          level=AssertionLevel.warning);
     else
     end if;
     connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
@@ -171,14 +183,14 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
     connect(t_Co_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-54,69.4},{-54,
             60},{52,60},{52,50.8},{54.4,50.8}},
                                     color={0,0,127}));
-    connect(sigBusHP.T_ret_co, t_Co_ou.u) annotation (Line(
+    connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
         points={{1.075,104.07},{-54,104.07},{-54,83.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
+    connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
         points={{1.075,104.07},{2,104.07},{2,104},{52,104},{52,79.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -201,7 +213,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
                                                         color={0,0,127}));
     connect(feedbackHeatFlowEvaporator.y, proRedQEva.u2) annotation (Line(points={{-81,
             -47.5},{-81,-54},{-81.6,-54},{-81.6,-54.8}},           color={0,0,127}));
-    connect(sigBusHP.iceFac, proRedQEva.u1) annotation (Line(
+    connect(sigBus.iceFac, proRedQEva.u1) annotation (Line(
         points={{1.075,104.07},{14,104.07},{14,60},{6,60},{6,-52},{-64,-52},{-64,
             -54.8},{-74.4,-54.8}},
         color={255,204,51},
@@ -224,7 +236,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             -2.8},{12,15.3},{-11,15.3}}, color={0,0,127}));
     connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-15,39.7},{-15,
             31.4},{-15.2,31.4}}, color={0,0,127}));
-    connect(sigBusHP.N, nTimesSF.u1) annotation (Line(
+    connect(sigBus.N, nTimesSF.u1) annotation (Line(
         points={{1.075,104.07},{-2,104.07},{-2,31.4},{-6.8,31.4}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -269,7 +281,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
   end LookUpTable2D;
 
   model LookUpTableND "N-dimensional table with data for heat pump"
-    extends BaseClasses.PartialPerformanceData;
+    extends
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
     parameter Real nConv=100
       "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
     parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -404,21 +417,21 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
                                             color={0,0,127}));
     connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
             {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
-    connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
+    connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
         points={{1.075,104.07},{46,104.07},{46,51.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBusHP.T_ret_co, t_Co_ou.u) annotation (Line(
+    connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
         points={{1.075,104.07},{-40,104.07},{-40,53.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBusHP.N, greaterThreshold.u) annotation (Line(
+    connect(sigBus.N, greaterThreshold.u) annotation (Line(
         points={{1.075,104.07},{-72,104.07},{-72,53.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -430,7 +443,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             {-72,-34},{-50,-34},{-50,-44}}, color={255,0,255}));
     connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
             {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
-    connect(sigBusHP.N, nConGain.u) annotation (Line(
+    connect(sigBus.N, nConGain.u) annotation (Line(
         points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -531,15 +544,21 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
   model PolynomalApproach
     "Calculating heat pump data based on a polynomal approach"
-    extends BaseClasses.PartialPerformanceData;
+    extends
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
 
     replaceable function PolyData =
         AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
   protected
     Real Char[2];
   equation
-    Char = PolyData(sigBusHP.N,sigBusHP.T_ret_co,sigBusHP.T_flow_ev,sigBusHP.m_flow_co,sigBusHP.m_flow_ev);
-    if sigBusHP.N > Modelica.Constants.eps then
+    Char =PolyData(
+        sigBus.N,
+        sigBus.T_ret_co,
+        sigBus.T_flow_ev,
+        sigBus.m_flow_co,
+        sigBus.m_flow_ev);
+    if sigBus.N > Modelica.Constants.eps then
       //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
       QCon = Char[2];
       Pel = Char[1];
@@ -571,7 +590,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </html>",   info="<html>
 <p>This model is used to calculate the three values based on a functional approach. The user can choose between several functions or use their own.</p>
 <p>As the <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct\">base function</a> only returns the electrical power and the condenser heat flow, the evaporator heat flow is calculated with the following energy balance:</p>
-<p>				<i>QEva = QCon - P_el</i></p>
+<p>                                <i>QEva = QCon - P_el</i></p>
 </html>"));
   end PolynomalApproach;
 
@@ -653,7 +672,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-80,-110})));
-      Controls.Interfaces.HeatPumpControlBus sigBusHP "Bus-connector used in a heat pump" annotation (Placement(
+      AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus
+        "Bus-connector used in a thermal machine" annotation (Placement(
             transformation(
             extent={{-15,-14},{15,14}},
             rotation=0,

@@ -149,7 +149,7 @@ model Chiller "Example for the reversible chiller model."
     uHigh=273.15 + 40)
     annotation (Placement(transformation(extent={{36,-88},{20,-72}})));
   Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
-      startValue=false)
+      startValue=true)
     annotation (Placement(transformation(extent={{7,-7},{-7,7}},
         rotation=270,
         origin={23,-53})));

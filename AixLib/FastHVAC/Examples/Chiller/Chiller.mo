@@ -31,10 +31,10 @@ model Chiller
     CEva=100,
     GEva=5,
     allowFlowReversalEva=true,
-    TAmbEva_nominal=288.15,
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
-    TAmbCon_nominal=273.15) annotation (Placement(transformation(
+    TAmbCon_nominal=273.15,
+    TAmbEva_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=90,
         origin={3,-2})));
@@ -78,7 +78,7 @@ model Chiller
         rotation=180,
         origin={17,-90})));
   Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
-      startValue=false)
+      startValue=true)
     "boolean signal to switch from heating to cooling operation"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=90,
