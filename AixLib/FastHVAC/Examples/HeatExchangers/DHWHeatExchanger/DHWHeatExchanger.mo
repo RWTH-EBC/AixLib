@@ -116,6 +116,9 @@ temperature of the fluid. "),
           lineColor={0,0,0},
           horizontalAlignment=TextAlignment.Left,
           textString="....")}),
-    experiment(StopTime=10000, Interval=60),
-    __Dymola_experimentSetupOutput);
+    experiment(StopTime=10000, Tolerance=1e-006),
+    __Dymola_experimentSetupOutput,
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/HeatExchangers/DHWHeatExchanger/DHWHeatExchanger.mos"
+        "Simulate and plot"));
 end DHWHeatExchanger;

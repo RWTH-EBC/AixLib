@@ -67,7 +67,7 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics),
-    experiment(StopTime=72000, Interval=60),
+    experiment(StopTime=72000, Tolerance=1e-006),
     __Dymola_experimentSetupOutput,
     Documentation(revisions="<html><ul>
   <li>
@@ -75,5 +75,7 @@ equation
     Moved into AixLib
   </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file="Resources/Scripts/Dymola/FastHVAC/Examples/HeatGenerators/Boiler/Boiler.mos"
+                                                                                                        "Simulate and plot"));
 end Boiler;

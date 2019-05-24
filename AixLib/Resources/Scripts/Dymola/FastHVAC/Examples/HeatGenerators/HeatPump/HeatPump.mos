@@ -1,0 +1,17 @@
+simulateModel("AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.HeatPump", stopTime=20000, method="dassl", tolerance=1e-006, resultFile="HeatPump");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"temperatureSensor.T"}, range={0.0, 20000.0, 10.0, 40.0}, autoerase=false, grid=true, colors={{28,108,200}}, displayUnits={"degC"});
+createPlot(id=1, position={0, 0, 1223, 348}, y={"heatPump.sigBusHP.Pel"}, range={0.0, 20000.0, 200.0, 1600.0}, autoerase=false, grid=true, subPlot=2, colors={{28,108,200}});
+

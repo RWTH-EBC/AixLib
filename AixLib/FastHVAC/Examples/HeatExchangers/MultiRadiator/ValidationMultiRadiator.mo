@@ -40,19 +40,22 @@ model ValidationMultiRadiator
                                        radiator_ML(selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
-        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
+    each hexRadiator(radiatorWall(heatCapacitor(T(fixed=true)))))
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Components.HeatExchangers.RadiatorMultiLayer
                                        radiator_ML1(selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
-        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
+    each hexRadiator(radiatorWall(heatCapacitor(T(fixed=true)))))
     annotation (Placement(transformation(extent={{0,-36},{20,-16}})));
   Components.HeatExchangers.RadiatorMultiLayer
                                        radiator_ML2(selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
-        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
+    each hexRadiator(radiatorWall(heatCapacitor(T(fixed=true)))))
     annotation (Placement(transformation(extent={{0,-84},{20,-64}})));
   Modelica.Blocks.Sources.Constant Tset(k=273.15 + 75)
     annotation (Placement(transformation(extent={{-114,10},{-94,30}})));
@@ -60,7 +63,8 @@ model ValidationMultiRadiator
                                                         selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
-        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
+    each radiator(hexRadiator(radiatorWall(heatCapacitor(T(fixed=true))))))
     annotation (Placement(transformation(extent={{-10,52},{12,78}})));
   Modelica.Blocks.Sources.Constant dotMSet(k=0.111)
     annotation (Placement(transformation(extent={{-114,-20},{-94,0}})));
@@ -172,5 +176,5 @@ equation
   connect(dotMSet.y, fluidSource1.dotm) annotation (Line(points={{-93,-10},{-70,
           -10},{-70,-68.6},{-50,-68.6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})), experiment(StopTime=86400));
+            -100},{100,100}})), experiment(StopTime=86400, Tolerance=1e-006));
 end ValidationMultiRadiator;

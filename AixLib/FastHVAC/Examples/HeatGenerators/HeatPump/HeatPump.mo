@@ -170,7 +170,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="FastHVAC HeatPump2
 ")}),
-    experiment(StopTime=20000, Interval=60),
+    experiment(StopTime=20000, Tolerance=1e-006),
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>
@@ -186,5 +186,8 @@ equation
     Moved into AixLib
     </li>
   </ul>
-  </html>"));
+  </html>"),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/HeatGenerators/HeatPump/HeatPump.mos"
+        "Simulate and plot"));
 end HeatPump;

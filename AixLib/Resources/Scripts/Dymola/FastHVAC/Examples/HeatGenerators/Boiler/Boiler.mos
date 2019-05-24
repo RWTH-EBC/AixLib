@@ -1,0 +1,17 @@
+simulateModel("AixLib.FastHVAC.Examples.HeatGenerators.Boiler.Boiler", stopTime=72000, method="dassl", tolerance=1e-006, resultFile="Boiler");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"booleanOnOffBoiler.y"}, range={0.0, 72000.0, -0.1, 1.1}, autoerase=false, grid=true, colors={{28,108,200}});
+createPlot(id=1, position={0, 0, 1223, 348}, y={"temperatureSensor_before.T", "temperatureSensor_after.T"}, range={0.0, 72000.0, 0.0, 90.0}, autoerase=false, grid=true, subPlot=2, colors={{28,108,200}, {238,46,47}}, displayUnits={"degC", "degC"});
+

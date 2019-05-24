@@ -44,7 +44,9 @@ model ValidationRadiator
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
     m_flow_nominal=0.05,
-    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
+    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp,
+    multiLayer_HE(radiator_wall(heatCapacitor(T(fixed=true))), Volume(
+          energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)))
     annotation (Placement(transformation(extent={{-36,22},{6,64}})));
 
   Modelica.Blocks.Sources.Constant T_source(k=348.15)
@@ -66,7 +68,8 @@ model ValidationRadiator
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
-    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
+    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp,
+    hexRadiator(radiatorWall(heatCapacitor(T(fixed=true)))))
     annotation (Placement(transformation(extent={{-32,-76},{2,-42}})));
 
   Components.Pumps.FluidSource fluidSource(medium=
@@ -164,5 +167,8 @@ equation
           textString="FastHVAC")}),       Icon(graphics,
                                                coordinateSystem(extent={{-120,
             -100},{80,100}})),
-    experiment(StopTime=86400));
+    experiment(StopTime=86400, Tolerance=1e-006),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/HeatExchangers/RadiatorMultiLayer/ValidationRadiator.mos"
+        "Simulate and plot"));
 end ValidationRadiator;
