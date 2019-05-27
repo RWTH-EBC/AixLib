@@ -81,8 +81,7 @@ model PanelHeating
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConv annotation (
       Placement(transformation(extent={{4,48},{24,68}}), iconTransformation(
           extent={{4,30},{24,50}})));
-  AixLib.Utilities.Interfaces.Star starRad annotation (Placement(transformation(
-          extent={{-26,50},{-6,70}}), iconTransformation(extent={{-22,28},{-2,48}})));
+  AixLib.Utilities.Interfaces.RadPort starRad annotation (Placement(transformation(extent={{-26,50},{-6,70}}), iconTransformation(extent={{-22,28},{-2,48}})));
   BaseClasses.PanelHeatingSegment panelHeatingSegment[dis](
     redeclare package Medium = Medium,
     each final A=A/dis,

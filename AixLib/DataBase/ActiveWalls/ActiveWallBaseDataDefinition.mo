@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.ActiveWalls;
+within AixLib.DataBase.ActiveWalls;
 record ActiveWallBaseDataDefinition "Base data definition for active walls"
 extends Modelica.Icons.Record;
 parameter Modelica.SIunits.Temperature Temp_nom[3] "Nominal Temperatures T_flow, T_return, T_room / air ";

@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
 model HeatingCoil
 
- parameter Integer dis_HC = 2;
+ parameter Integer dis_HC(min=1);
 
   parameter Media.BaseClasses.MediumSimple medium_HC=Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
@@ -22,10 +22,12 @@ model HeatingCoil
     parameterPipe=pipeRecordHC,
     T_0=T_start,
     length=lengthHC,
-    nNodes=dis_HC) annotation (Placement(transformation(
+    nNodes=dis_HC,
+    alphaInsideFix=alphaInsideFix,
+    calculateAlpha=true)  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-4,0})));
+        origin={-2,0})));
 
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall_HC1[dis_HC](
     each T0=T_start,
@@ -37,57 +39,41 @@ model HeatingCoil
     lambda=fill(pipeRecordHC.lambda, dis_HC)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
-        origin={-4,50})));
+        origin={-2,50})));
   AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each alpha=
         alpha_HC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/dis_HC,
         dis_HC)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
-        origin={-4,76})));
+        origin={-2,76})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1[dis_HC]
-    annotation (Placement(transformation(extent={{-14,94},{6,114}})));
+    annotation (Placement(transformation(extent={{-12,94},{8,114}})));
   AixLib.FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b1
     annotation (Placement(transformation(extent={{82,-10},{102,10}})));
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
-  Sensors.MassFlowSensor m_flow
-    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-  Utilities.HeatTransfer.HeatConvPipeInside conv_HC1_Inside[dis_HC](
-    length=fill(lengthHC, dis_HC),
-    d_i=fill(pipeRecordHC.d_i, dis_HC),
-    d_a=fill(pipeRecordHC.d_o, dis_HC),
-    A_sur=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/dis_HC, dis_HC))
-                                                                    annotation (
-     Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-4,26})));
+  parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable = not calculateAlphaInside));
 equation
-
-    for i in 1:dis_HC loop
-    connect(m_flow.dotm, conv_HC1_Inside[i].m_flow);
-    end for;
-
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
-      points={{-4,82},{-4,104}},
+      points={{-2,82},{-2,104}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(PipeWall_HC1.port_b,conv_HC1_Outside.port_b)  annotation (Line(
-      points={{-4,55.28},{-4,70}},
+      points={{-2,55.28},{-2,70}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(pipeHC.enthalpyPort_a1, enthalpyPort_a1) annotation (Line(
-      points={{-13.8,0},{-96,0}},
+      points={{-11.8,0},{-96,0}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(PipeWall_HC1.port_a, conv_HC1_Inside.port_a)
-    annotation (Line(points={{-4,50},{-4,36}}, color={191,0,0}));
-  connect(conv_HC1_Inside.port_b, pipeHC.heatPorts)
-    annotation (Line(points={{-4,16},{-4,4.9},{-4.1,4.9}}, color={191,0,0}));
-  connect(m_flow.enthalpyPort_a, pipeHC.enthalpyPort_b1) annotation (Line(
-        points={{31.2,-0.1},{18.6,-0.1},{18.6,0},{5.8,0}}, color={176,0,0}));
-  connect(m_flow.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{49,-0.1},
-          {72.5,-0.1},{72.5,0},{92,0}}, color={176,0,0}));
+  connect(pipeHC.enthalpyPort_b1, enthalpyPort_b1)
+    annotation (Line(points={{7.8,0},{92,0}}, color={176,0,0}));
+  connect(pipeHC.heatPorts, PipeWall_HC1.port_a) annotation (Line(points={{-2.1,
+          4.9},{-2.1,27.45},{-2,27.45},{-2,50}}, color={127,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(graphics={
         Line(

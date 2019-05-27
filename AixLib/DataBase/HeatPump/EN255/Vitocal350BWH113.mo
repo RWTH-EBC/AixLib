@@ -7,7 +7,9 @@ record Vitocal350BWH113 "Vitocal 350 BWH 113"
         15708,17167,18583,20083,21583; 55,15708,17167,18583,20083,21583; 65,15708,
         17167,18583,20083,21583],
     mFlow_conNom=16292/4180/10,
-    mFlow_evaNom=12300/3600/3);
+    mFlow_evaNom=12300/3600/3,
+    tableUppBou=[-5, 55; 25, 55],
+    tableLowBou=[-5, 0; 25, 0]);
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,

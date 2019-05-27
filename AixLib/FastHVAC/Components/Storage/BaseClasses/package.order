@@ -2,7 +2,6 @@ HeatTransferBuoyancyWetter
 HeatTransferDirectedHeatTransfer
 HeatTransferLambdaEff
 HeatTransferLambdaEffSmooth
-HeatTransferLambdaSimple
 HeatTransferOnlyConduction
 HeatTransferQbuoy
 HeatTransferQbuoyTimer

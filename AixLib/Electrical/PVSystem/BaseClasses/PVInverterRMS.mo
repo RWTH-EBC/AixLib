@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 model PVInverterRMS
   "Inverter model including system management"
 
