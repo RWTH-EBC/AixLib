@@ -2,7 +2,7 @@
 model Chiller
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
-    annotation (Placement(transformation(extent={{42,-64},{60,-82}})));
+    annotation (Placement(transformation(extent={{52,-38},{66,-52}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple()) "Fluidsource for sink"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
@@ -62,27 +62,6 @@ model Chiller
     annotation (Placement(transformation(extent={{-7,-7},{7,7}},
         rotation=-90,
         origin={3,33})));
-  Modelica.Blocks.Math.BooleanToReal booleanToReal "on off control "
-    annotation (Placement(transformation(extent={{6,-6},{-6,6}},
-        rotation=270,
-        origin={0,-60})));
-  Modelica.Blocks.Logical.Not not2 "Negate output of hysteresis"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
-        origin={0,-78},
-        rotation=270)));
-  Modelica.Blocks.Logical.Hysteresis hys(
-    pre_y_start=true,
-    uLow=273.15 + 35,
-    uHigh=273.15 + 40) "hysteresis controller for on off control"
-    annotation (Placement(transformation(extent={{-5,-4},{5,4}},
-        rotation=180,
-        origin={17,-90})));
-  Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
-      startValue=true)
-    "boolean signal to switch from heating to cooling operation"
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
-        rotation=90,
-        origin={12,-40})));
   Modelica.Blocks.Sources.Ramp TsuSinkRamp(
     duration=1000,
     startTime=1000,
@@ -101,27 +80,50 @@ model Chiller
         extent={{-6,6},{6,-6}},
         rotation=270,
         origin={52,-18})));
-  Modelica.Blocks.Math.Gain gain(k=-1) "negate sine signal"
+  Modelica.Blocks.Math.Gain gain(k=1)  "negate sine signal"
                                        annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=270,
         origin={54,-2})));
   Modelica.Blocks.Sources.Sine sine(
     freqHz=1/3600,
-    amplitude=3000,
-    offset=3000) "hourly sine "
+    amplitude=500,
+    phase=3.1415926535898,
+    offset=500)  "hourly sine "
     annotation (Placement(transformation(extent={{66,8},{58,16}})));
   Components.Pumps.Pump pump "source pump"
                              annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={36,20})));
+  Modelica.Blocks.Math.BooleanToReal booleanToReal
+    annotation (Placement(transformation(extent={{7,-7},{-7,7}},
+        rotation=270,
+        origin={-3,-53})));
+  Modelica.Blocks.Logical.Hysteresis hysCooling(
+    pre_y_start=false,
+    uHigh=273.15 + 17,
+    uLow=273.15 + 14)
+    annotation (Placement(transformation(extent={{46,-98},{34,-86}})));
+  Modelica.Blocks.Sources.BooleanStep     booleanStep(
+      startValue=true, startTime=15000)
+    annotation (Placement(transformation(extent={{8,-8},{-8,8}},
+        rotation=0,
+        origin={32,-54})));
+  Modelica.Blocks.Logical.Not not2 "Negate output of hysteresis"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+        origin={24,-76},
+        rotation=180)));
+  Modelica.Blocks.Logical.Hysteresis hysHeating(
+    pre_y_start=true,
+    uLow=273.15 + 25,
+    uHigh=273.15 + 30)
+    annotation (Placement(transformation(extent={{46,-82},{34,-70}})));
+  Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
+    annotation (Placement(transformation(extent={{10,-78},{0,-88}})));
 equation
   connect(dotm_sink.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
-  connect(temperatureSensor.T, hys.u) annotation (Line(points={{51.9,-82.9},{
-          51.9,-90},{23,-90}},
-                          color={0,0,127}));
   connect(TsuSinkRamp.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
   connect(dotm_source.y, pump.dotm_setValue)
@@ -131,16 +133,13 @@ equation
   connect(gain.y, heatFlowRateCon.Q_flow)
     annotation (Line(points={{54,-6.4},{54,-12},{52,-12}}, color={0,0,127}));
   connect(temperatureSensor.enthalpyPort_b, Room.enthalpyPort_a) annotation (
-      Line(points={{59.1,-72.91},{90,-72.91},{90,-35}}, color={176,0,0}));
+      Line(points={{65.3,-44.93},{90,-44.93},{90,-35}}, color={176,0,0}));
   connect(Room.enthalpyPort_b, pump.enthalpyPort_a)
     annotation (Line(points={{90,-17},{90,20},{45.6,20}}, color={176,0,0}));
   connect(heatFlowRateCon.port, Room.heatPort)
     annotation (Line(points={{52,-24},{52,-26},{80.6,-26}}, color={191,0,0}));
   connect(pump.enthalpyPort_b, chiller.enthalpyPort_a1)
     annotation (Line(points={{26.4,20},{11,20},{11,11}}, color={176,0,0}));
-  connect(chiller.enthalpyPort_b1, temperatureSensor.enthalpyPort_a)
-    annotation (Line(points={{11,-15},{26,-15},{26,-68},{43.08,-68},{43.08,-72.91}},
-        color={176,0,0}));
   connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,25.3},
           {3,22},{-10.3333,22},{-10.3333,12.3}}, color={0,0,127}));
   connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,25.3},
@@ -152,15 +151,27 @@ equation
   connect(iceFac.y, chiller.iceFac_in) annotation (Line(points={{29.4,-12},{
           26.75,-12},{26.75,-11.88},{21.1333,-11.88}},
                                                  color={0,0,127}));
-  connect(booleanStep.y, chiller.modeSet) annotation (Line(points={{12,-35.6},{12,
-          -28},{5.4,-28},{5.4,-17.08}}, color={255,0,255}));
+  connect(hysHeating.y,not2. u)
+    annotation (Line(points={{33.4,-76},{28.8,-76}}, color={255,0,255}));
+  connect(logicalSwitch.y,booleanToReal. u) annotation (Line(points={{-0.5,-83},
+          {-3,-83},{-3,-61.4}}, color={255,0,255}));
+  connect(not2.y,logicalSwitch. u3) annotation (Line(points={{19.6,-76},{16,-76},
+          {16,-79},{11,-79}}, color={255,0,255}));
+  connect(hysCooling.y,logicalSwitch. u1) annotation (Line(points={{33.4,-92},{16,
+          -92},{16,-87},{11,-87}}, color={255,0,255}));
+  connect(booleanStep.y,logicalSwitch. u2) annotation (Line(points={{23.2,-54},{
+          14,-54},{14,-83},{11,-83}}, color={255,0,255}));
+  connect(chiller.enthalpyPort_b1, temperatureSensor.enthalpyPort_a)
+    annotation (Line(points={{11,-15},{11,-30},{44,-30},{44,-44.93},{52.84,-44.93}},
+        color={176,0,0}));
+  connect(temperatureSensor.T, hysHeating.u) annotation (Line(points={{59.7,-52.7},
+          {59.7,-76},{47.2,-76}}, color={0,0,127}));
+  connect(temperatureSensor.T, hysCooling.u) annotation (Line(points={{59.7,-52.7},
+          {59.7,-92},{47.2,-92}}, color={0,0,127}));
+  connect(booleanStep.y, chiller.modeSet) annotation (Line(points={{23.2,-54},{12,
+          -54},{12,-36},{5.4,-36},{5.4,-17.08}}, color={255,0,255}));
   connect(chiller.nSet, booleanToReal.y) annotation (Line(points={{0.333333,-17.08},
-          {0.333333,-33.54},{1.33227e-015,-33.54},{1.33227e-015,-53.4}}, color={
-          0,0,127}));
-  connect(booleanToReal.u, not2.y)
-    annotation (Line(points={{0,-67.2},{0,-73.6}}, color={255,0,255}));
-  connect(not2.u, hys.y) annotation (Line(points={{0,-82.8},{0,-90},{11.5,-90}},
-        color={255,0,255}));
+          {0.333333,-38},{-3,-38},{-3,-45.3}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(
@@ -174,7 +185,7 @@ equation
           fillColor={213,170,255},
           fillPattern=FillPattern.Solid,
           textString="FastHVAC Chiller")}),
-    experiment(StopTime=20000, Interval=60),
+    experiment(StopTime=30000, Interval=60),
     __Dymola_experimentSetupOutput,
   Documentation(info="<html>
   <h4><span style=\"color: #008000\">Overview</span></h4>

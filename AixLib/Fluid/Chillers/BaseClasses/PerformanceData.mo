@@ -96,20 +96,20 @@ package PerformanceData
   equation
     if printAsserts then
       assert(
-          minSou + 273.15 < sigBus.T_flow_ev,
-          "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results",
+          minSou + 273.15 < sigBus.T_flow_co,
+          "Current T_flow_co is too low. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
       assert(
-          maxSou + 273.15 > sigBus.T_flow_ev,
-          "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results",
+          maxSou + 273.15 > sigBus.T_flow_co,
+          "Current T_flow_co is too high. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
       assert(
-          minSup + 273.15 < sigBus.T_ret_co,
-          "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results",
+          minSup + 273.15 < sigBus.T_ret_ev,
+          "Current T_ret_ev is too low. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
       assert(
-          maxSup + 273.15 > sigBus.T_ret_co,
-          "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results",
+          maxSup + 273.15 > sigBus.T_ret_ev,
+          "Current T_ret_ev is too high. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
     else
     end if;
