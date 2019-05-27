@@ -1,8 +1,16 @@
 within AixLib.Fluid.Interfaces;
 partial model PartialTwoPortVector "Partial component with two ports, one of which being vectorized"
 
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium in the component" annotation (choicesAllMatching=true);
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15,
+          X_a=0.40)
+          "Propylene glycol water, 40% mass fraction")));
   parameter Integer nPorts "Number of ports"
     annotation(Evaluate=true, Dialog(connectorSizing=true, tab="General",group="Ports"));
   parameter Boolean allowFlowReversal=true
@@ -45,6 +53,11 @@ users have not used this global definition to assign parameters.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
 <li>
 July 8, 2018, by Filip Jorissen:<br/>
 Added nominal value of <code>h_outflow</code> in <code>FluidPorts</code>.

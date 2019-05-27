@@ -46,6 +46,7 @@ model HeatPump "Example for the reversible heat pump model."
     use_conCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
+
     use_refIne=false,
     use_rev=true,
     redeclare model PerDataMainHP =
@@ -58,9 +59,11 @@ model HeatPump "Example for the reversible heat pump model."
     VEva=0.04,
     use_evaCap=false,
     scalingFactor=1,
-    TAmbEva_nominal=273.15,
     TAmbCon_nominal=288.15,
-    TCon_start=303.15) annotation (Placement(transformation(
+    TAmbEva_nominal=273.15,
+    TCon_start=303.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                       annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));
@@ -104,7 +107,8 @@ model HeatPump "Example for the reversible heat pump model."
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
     final addPowerToMedium=false,
-    redeclare final package Medium = Medium_sin)
+    redeclare final package Medium = Medium_sin,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -116,9 +120,7 @@ model HeatPump "Example for the reversible heat pump model."
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final V=5,
     final allowFlowReversal=true,
-    redeclare package Medium = Medium_sin) "Volume of Condenser" annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        transformation(        extent={{-10,-10},{10,10}},
         rotation=270,
         origin={86,-20})));
 
@@ -161,6 +163,7 @@ model HeatPump "Example for the reversible heat pump model."
     annotation (Placement(transformation(extent={{58,40},{48,50}})));
 equation
 
+
   connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{2,-65},
           {4,-65},{4,-47.4},{26.1667,-47.4}}, color={0,0,127}));
   connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{2,-65},
@@ -199,7 +202,8 @@ equation
           -47,-3},{-47,-2.76},{-30.8667,-2.76}},
                                              color={0,0,127}));
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
-        points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127}));
+        points={{-73,-80},{-66,-80},{-66,-66},{-56,-66}}, color={0,0,127},
+        smooth=Smooth.None));
   connect(logicalSwitch.u1, not2.y) annotation (Line(points={{25,57},{36,57},{
           36,63},{39.5,63}}, color={255,0,255}));
   connect(hysCooling.y, logicalSwitch.u3) annotation (Line(points={{47.5,45},{
@@ -214,7 +218,6 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=20000),
-    __Dymola_experimentSetupOutput,
     Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>

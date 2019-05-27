@@ -126,7 +126,8 @@ equation
 Check whether variable allCond is always 1.")}),
     experiment(
       StopTime=86400,
-      Interval=60),
+      Interval=60,
+      Tolerance=1e-06),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/Examples/AHU.mos"
         "Simulate and plot"),
     Documentation(info="<html>

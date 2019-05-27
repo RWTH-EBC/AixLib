@@ -43,11 +43,9 @@ def _validate_html(path):
     n_msg = len(errMsg)
     for i in range(n_msg):
         if i == 0:
-            print "The following malformed html syntax has been found:\n%s" % errMsg[i].encode('utf-8')
+            print "The following malformed html syntax has been found:\n%s" % errMsg[i]
         else:
-            print errMsg[i].encode('utf-8')
-
-    print "Number of total conflicting files: ", n_msg
+            print errMsg[i]
 
     if n_msg == 0:
         return 0
@@ -67,10 +65,10 @@ def _setEnvironmentVariables(var, value):
     else:
         os.environ[var] = value
 
-def _runUnitTests(batch, package, path, n_pro, show_gui):
+def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
     import buildingspy.development.regressiontest as u
 
-    ut = u.Tester()
+    ut = u.Tester(tool=tool)
     ut.batchMode(batch)
     ut.setLibraryRoot(path)
     if package is not None:
@@ -111,6 +109,10 @@ if __name__ == '__main__':
     unit_test_group.add_argument("-b", "--batch",
                         action="store_true",
                         help="Run in batch mode without user interaction")
+    unit_test_group.add_argument('-t', "--tool",
+                        metavar="dymola",
+                        default="dymola",
+                        help="Tool for the regression tests. Set to dymola or jmodelica")
     unit_test_group.add_argument('-s', "--single-package",
                         metavar="Modelica.Package",
                         help="Test only the Modelica package Modelica.Package")
@@ -172,6 +174,7 @@ if __name__ == '__main__':
         single_package = None
 
     retVal = _runUnitTests(batch = args.batch,
+                           tool = args.tool,
                            package = single_package,
                            path = args.path,
                            n_pro = args.number_of_processors,
