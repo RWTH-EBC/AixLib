@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -413,15 +413,24 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="Icing Factor")}),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>This system controller aggregates the heat pump controller and relevant security controls from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a> to control the heat pump based on an ambient temperature and the current supply temperature.</p>
-<p>Further, the COP is calculated. The icing factor used for air-source heat pumps is added to simulate defrost cycles. </p>
+<p>
+  This system controller aggregates the heat pump controller and
+  relevant security controls from <a href=
+  \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a> to
+  control the heat pump based on an ambient temperature and the current
+  supply temperature.
+</p>
+<p>
+  Further, the COP is calculated. The icing factor used for air-source
+  heat pumps is added to simulate defrost cycles.
+</p>
 </html>"));
 end HPSystemController;

@@ -147,20 +147,49 @@ equation
           textString="%name",
           origin={0,-8},
           rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>This black box model represents the refrigerant cycle of a chiller. Used in AixLib.Fluid.Chillers.Chiller, this model serves the simulation of a reversible chiller. Thus, data both of chillers and heat pumps can be used to calculate the three relevant values <span style=\"font-family: Courier New;\">P_el</span>, <span style=\"font-family: Courier New;\">QCon</span> and <span style=\"font-family: Courier New;\">QEva</span>. The <span style=\"font-family: Courier New;\">mode</span> of the chiller is used to switch between the performance data of the chiller and the heat pump.</p>
-<p>The user can choose between different types of performance data or implement a new black-box model by extending from the <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData\">partial</a> model.</p>
+<p>
+  This black box model represents the refrigerant cycle of a chiller.
+  Used in AixLib.Fluid.Chillers.Chiller, this model serves the
+  simulation of a reversible chiller. Thus, data both of chillers and
+  heat pumps can be used to calculate the three relevant values
+  <span style=\"font-family: Courier New;\">P_el</span>, <span style=
+  \"font-family: Courier New;\">QCon</span> and <span style=
+  \"font-family: Courier New;\">QEva</span>. The <span style=
+  \"font-family: Courier New;\">mode</span> of the chiller is used to
+  switch between the performance data of the chiller and the heat pump.
+</p>
+<p>
+  The user can choose between different types of performance data or
+  implement a new black-box model by extending from the <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData\">
+  partial</a> model.
+</p>
 <ul>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">LookUpTable2D</a>: Use 2D-data based on the DIN EN 14511</li>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTableND\">LookUpTableND</a>: Use SDF-data tables to model invertercontroller chillers or include other dependencies (ambient temperature etc.)</li>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.PolynomalApproach\">PolynomalApproach</a>: Use a function based approach to calculate the ouputs. Different functions are already implemented.</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">
+    LookUpTable2D</a>: Use 2D-data based on the DIN EN 14511
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTableND\">
+    LookUpTableND</a>: Use SDF-data tables to model invertercontroller
+    chillers or include other dependencies (ambient temperature etc.)
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.PolynomalApproach\">
+    PolynomalApproach</a>: Use a function based approach to calculate
+    the ouputs. Different functions are already implemented.
+  </li>
 </ul>
 </html>"));
 end InnerCycle_Chiller;

@@ -1,7 +1,7 @@
 within AixLib.Fluid.Chillers.Examples;
 model Chiller "Example for the reversible chiller model."
  extends Modelica.Icons.Example;
- import AixLib;
+
   replaceable package Medium_sin = AixLib.Media.Water
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   replaceable package Medium_sou = AixLib.Media.Water
@@ -199,17 +199,28 @@ equation
             -100},{100,100}})),
     experiment(StopTime=20000),
     __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Simple test set-up for the reversible chiller model. The chiller is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the chiller and the supply temperature. </p>
-<p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.Chiller</a> or polynomial functions.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Simple test set-up for the reversible chiller model. The chiller is
+  turned on and off while the source temperature increases linearly.
+  Outputs are the electric power consumption of the chiller and the
+  supply temperature.
+</p>
+<p>
+  Besides using the default simple table data, the user should also
+  test tabulated data from <a href=
+  \"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.Chiller</a> or
+  polynomial functions.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li>
-<i>May 22, 2019&nbsp;</i> by Julian Matthes: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
-</li>
+      revisions="<html><ul>
+  <li>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
 </ul>
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),

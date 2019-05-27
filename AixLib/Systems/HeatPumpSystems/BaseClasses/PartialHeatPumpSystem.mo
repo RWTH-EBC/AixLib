@@ -570,19 +570,48 @@ equation
           fillPattern=FillPattern.None)}),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,180}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>May 22, 2019</i>  by Julian Matthes: <br>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>) </li>
-<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Partial heat pump system. This model is used to enable the use of different heat pump models in the resulting heat pump system.</p>
-<h4>Characteristics</h4>
+<p>
+  Partial heat pump system. This model is used to enable the use of
+  different heat pump models in the resulting heat pump system.
+</p>
+<h4>
+  Characteristics
+</h4>
 <ol>
-<li><a href=\"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HPSystemController\">HPSystemController</a>: Model used to calculate a relative compressor speed and heat pump mode based on the ambient temperature and current supply temperature.</li>
-<li>HeatPump: Any model out of <a href=\"modelica://AixLib.Fluid.HeatPumps\">AixLib.Fluid.HeatPumps</a>. Only restrain is the use of the signal bus. One has to first add the sigBus to the existing heat pump model.</li>
-<li>Movers: Any model out of <a href=\"modelica://AixLib.Fluid.Movers\">AixLib.Fluid.Movers</a> to move the used sink or source medium through the heat exchanger.</li>
-<li>Second heat generator: Any two port interface. This model should represent an auxiliar heater or a boiler in order to simulate a bivalent or hybrid heat pump system.</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HPSystemController\">
+    HPSystemController</a>: Model used to calculate a relative
+    compressor speed and heat pump mode based on the ambient
+    temperature and current supply temperature.
+  </li>
+  <li>HeatPump: Any model out of <a href=
+  \"modelica://AixLib.Fluid.HeatPumps\">AixLib.Fluid.HeatPumps</a>. Only
+  restrain is the use of the signal bus. One has to first add the
+  sigBus to the existing heat pump model.
+  </li>
+  <li>Movers: Any model out of <a href=
+  \"modelica://AixLib.Fluid.Movers\">AixLib.Fluid.Movers</a> to move the
+  used sink or source medium through the heat exchanger.
+  </li>
+  <li>Second heat generator: Any two port interface. This model should
+  represent an auxiliar heater or a boiler in order to simulate a
+  bivalent or hybrid heat pump system.
+  </li>
 </ol>
 </html>"));
 end PartialHeatPumpSystem;

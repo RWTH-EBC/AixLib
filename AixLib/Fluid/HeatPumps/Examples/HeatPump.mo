@@ -1,7 +1,7 @@
-within AixLib.Fluid.HeatPumps.Examples;
+﻿within AixLib.Fluid.HeatPumps.Examples;
 model HeatPump "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
- import AixLib;
+
   replaceable package Medium_sin = AixLib.Media.Water
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   replaceable package Medium_sou = AixLib.Media.Water
@@ -197,15 +197,34 @@ equation
             -100},{100,100}})),
     experiment(StopTime=20000),
     __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Simple test set-up for the HeatPumpDetailed model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. </p>
-<p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or polynomial functions.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Simple test set-up for the HeatPumpDetailed model. The heat pump is
+  turned on and off while the source temperature increases linearly.
+  Outputs are the electric power consumption of the heat pump and the
+  supply temperature.
+</p>
+<p>
+  Besides using the default simple table data, the user should also
+  test tabulated data from <a href=
+  \"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or
+  polynomial functions.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>May 22, 2019</i>  by Julian Matthes: <br>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>) </li>
-<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
+      revisions="<html><ul>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),

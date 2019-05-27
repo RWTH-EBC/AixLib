@@ -51,15 +51,18 @@ package PerformanceData "Different models used for a black box heat pump model"
             extent={{-90.0,-90.0},{90.0,90.0}},
             textString="f")}),                                     Diagram(
           coordinateSystem(preserveAspectRatio=false)),
-      Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+      Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>",   info="<html>
-<p>Model for calculation of the icing factor. The replaceable function uses the inputs to calculate the resulting icing factor.</p>
+<p>
+  Model for calculation of the icing factor. The replaceable function
+  uses the inputs to calculate the resulting icing factor.
+</p>
 </html>"));
   end IcingBlock;
 
@@ -258,25 +261,61 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         extent={{-60.0,-20.0},{-30.0,0.0}}),
       Rectangle(fillColor={255,215,136},
         fillPattern=FillPattern.Solid,
-        extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+        extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>",   info="<html>
-<p>This model uses the 2-dimensional table data given in the DIN EN 14511 (formerly EN255) to calculate <i>QCon</i> and <i>P_el</i>. To model an inverter controlled heat pump, the relative <b>compressor speed <i>n </i>is scaled linearly</b> with the ouput of the tables. Furthermore, the design of a heat pump is modeled via a scaling factor. As a result, the equations follow below:</p>
-<p align=\"center\"><i>QCon,n = n * scalingFactor * TableQCon.y</i></p>
-<p align=\"center\"><i>P_el = n * scalingFactor * TablePel.y</i></p>
-<p align=\"justify\">To simulate possible icing of the evaporator on air-source heat pumps, the icing factor is used to influence the output as well. As the factor resembles the reduction of heat transfer between refrigerant and source, the factor is implemented as follows:</p>
-<p align=\"center\"><i>QEva = iceFac * (QCon,n-P_el,n)</i></p>
-<p>With <i>iceFac </i>as a relative value between 0 and 1:</p>
-<p align=\"center\"><i>iceFac = kA/kA_noIce</i></p>
-<p>Finally, to follow the first law of thermodynamics:</p>
-<p align=\"center\"><i>QCon = P_el,n + QEva</i></p>
-<h4>Known Limitations</h4>
-<p>The model <a href=\"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a> is able to disallow extrapolation by holding the last value. If one extrapolates the given perfomance data, warnings about occuring extrapolations are emitted. <b>CAUTION: Checking for possible extrapolations will trigger state events which results in higher computing time.</b></p>
+<p>
+  This model uses the 2-dimensional table data given in the DIN EN
+  14511 (formerly EN255) to calculate <i>QCon</i> and <i>P_el</i>. To
+  model an inverter controlled heat pump, the relative <b>compressor
+  speed <i>n</i> is scaled linearly</b> with the ouput of the tables.
+  Furthermore, the design of a heat pump is modeled via a scaling
+  factor. As a result, the equations follow below:
+</p>
+<p align=\"center\">
+  <i>QCon,n = n * scalingFactor * TableQCon.y</i>
+</p>
+<p align=\"center\">
+  <i>P_el = n * scalingFactor * TablePel.y</i>
+</p>
+<p align=\"justify\">
+  To simulate possible icing of the evaporator on air-source heat
+  pumps, the icing factor is used to influence the output as well. As
+  the factor resembles the reduction of heat transfer between
+  refrigerant and source, the factor is implemented as follows:
+</p>
+<p align=\"center\">
+  <i>QEva = iceFac * (QCon,n-P_el,n)</i>
+</p>
+<p>
+  With <i>iceFac</i> as a relative value between 0 and 1:
+</p>
+<p align=\"center\">
+  <i>iceFac = kA/kA_noIce</i>
+</p>
+<p>
+  Finally, to follow the first law of thermodynamics:
+</p>
+<p align=\"center\">
+  <i>QCon = P_el,n + QEva</i>
+</p>
+<h4>
+  Known Limitations
+</h4>
+<p>
+  The model <a href=
+  \"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a>
+  is able to disallow extrapolation by holding the last value. If one
+  extrapolates the given perfomance data, warnings about occuring
+  extrapolations are emitted. <b>CAUTION: Checking for possible
+  extrapolations will trigger state events which results in higher
+  computing time.</b>
+</p>
 </html>"));
   end LookUpTable2D;
 
@@ -530,14 +569,21 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
       Rectangle(fillColor={255,255,0},
         fillPattern=FillPattern.Solid,
         extent={{-30,-20},{0,0}},
-            lineColor={0,0,0})}),                Documentation(info="<html>
-<p>Basic models showing the concept of using n-dimensional table data for the innerCycle of the heat pump model. This model assumes one provides data for inverter controlled heat pumps or chillers. However, this basis structure can be used to create own models, where electrical power and condenser depend on other inputs, such as ambient temperature.</p>
+            lineColor={0,0,0})}),                Documentation(info="<html><p>
+  Basic models showing the concept of using n-dimensional table data
+  for the innerCycle of the heat pump model. This model assumes one
+  provides data for inverter controlled heat pumps or chillers.
+  However, this basis structure can be used to create own models, where
+  electrical power and condenser depend on other inputs, such as
+  ambient temperature.
+</p>
 </html>",   revisions="<html>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
   end LookUpTableND;
@@ -580,17 +626,29 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           Text(
             lineColor={108,88,49},
             extent={{-90,-108},{90,72}},
-            textString="f")}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+            textString="f")}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>",   info="<html>
-<p>This model is used to calculate the three values based on a functional approach. The user can choose between several functions or use their own.</p>
-<p>As the <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct\">base function</a> only returns the electrical power and the condenser heat flow, the evaporator heat flow is calculated with the following energy balance:</p>
-<p>                                <i>QEva = QCon - P_el</i></p>
+<p>
+  This model is used to calculate the three values based on a
+  functional approach. The user can choose between several functions or
+  use their own.
+</p>
+<p>
+  As the <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct\">
+  base function</a> only returns the electrical power and the condenser
+  heat flow, the evaporator heat flow is calculated with the following
+  energy balance:
+</p>
+<p>
+  <i>QEva = QCon - P_el</i>
+</p>
 </html>"));
   end PolynomalApproach;
 
@@ -645,15 +703,20 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             lineThickness=0.5,
             textString="COP")}),                                   Diagram(
           coordinateSystem(preserveAspectRatio=false)),
-      Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+      Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>",   info="<html>
-<p>This model is used to calculate the COP or the EER of a device. As the electrical power could get negative, a lower boundary is used to avoid division by zero. A moving average ensure a stable calculation of the COP or EER.</p>
+<p>
+  This model is used to calculate the COP or the EER of a device. As
+  the electrical power could get negative, a lower boundary is used to
+  avoid division by zero. A moving average ensure a stable calculation
+  of the COP or EER.
+</p>
 </html>"));
   end calcCOP;
 
@@ -698,15 +761,21 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
               textString="%name
 ",            origin={0.5,60.5},
               rotation=180)}),Diagram(coordinateSystem(preserveAspectRatio=false)),
-        Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+        Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>",     info="<html>
-<p>Partial model for calculation of <span style=\"font-family: Courier New;\">P_el</span>, <span style=\"font-family: Courier New;\">QCon</span> and <span style=\"font-family: Courier New;\">QEva</span> based on the values in the <span style=\"font-family: Courier New;\">sigBusHP</span>.</p>
+<p>
+  Partial model for calculation of <span style=
+  \"font-family: Courier New;\">P_el</span>, <span style=
+  \"font-family: Courier New;\">QCon</span> and <span style=
+  \"font-family: Courier New;\">QEva</span> based on the values in the
+  <span style=\"font-family: Courier New;\">sigBusHP</span>.
+</p>
 </html>"));
     end PartialPerformanceData;
   annotation (Icon(graphics={
@@ -724,25 +793,31 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
             extent={{-30.0,-30.0},{30.0,30.0}},
             lineColor={128,128,128},
             fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+            fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>",   info="<html>
-<p>This package contains base classes for the package <a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData</a>.</p>
+<p>
+  This package contains base classes for the package <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData</a>.
+</p>
 </html>"));
   end BaseClasses;
-annotation (Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>This package contains models for the grey box heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.</p>
+<p>
+  This package contains models for the grey box heat pump model
+  <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.
+</p>
 </html>"));
 end PerformanceData;

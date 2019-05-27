@@ -1,4 +1,4 @@
-within AixLib.Fluid.BaseClasses;
+﻿within AixLib.Fluid.BaseClasses;
 partial model PartialReversibleThermalMachine
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
@@ -586,46 +586,141 @@ equation
           origin={0,-74},
           rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
             -120},{100,120}})),
-    Documentation(revisions="<html>
-<ul>
-<li><i>May 22, 2019</i>  by Julian Matthes: <br>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>) </li>
-<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>This partial model for a generic grey-box thermal machine (heat pump or chiller) uses empirical data to model the refrigerant cycle. The modelling of system inertias and heat losses allow the simulation of transient states. </p>
-<p>Resulting in the choosen model structure, several configurations are possible:</p>
+<p>
+  This partial model for a generic grey-box thermal machine (heat pump
+  or chiller) uses empirical data to model the refrigerant cycle. The
+  modelling of system inertias and heat losses allow the simulation of
+  transient states.
+</p>
+<p>
+  Resulting in the choosen model structure, several configurations are
+  possible:
+</p>
 <ol>
-<li>Compressor type: on/off or inverter controlled</li>
-<li>Reversible operation / only main operation</li>
-<li>Source/Sink: Any combination of mediums is possible</li>
-<li>Generik: Losses and inertias can be switched on or off.</li>
+  <li>Compressor type: on/off or inverter controlled
+  </li>
+  <li>Reversible operation / only main operation
+  </li>
+  <li>Source/Sink: Any combination of mediums is possible
+  </li>
+  <li>Generik: Losses and inertias can be switched on or off.
+  </li>
 </ol>
-<h4>Concept</h4>
-<p>Using a signal bus as a connector, this model working as a heat pump can be easily combined with several control or security blocks from <a href=\"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>. The relevant data is aggregated. In order to control both chillers and heat pumps, both flow and return temperature are aggregated. The mode signal chooses the operation type of the thermal machine:</p>
+<h4>
+  Concept
+</h4>
+<p>
+  Using a signal bus as a connector, this model working as a heat pump
+  can be easily combined with several control or security blocks from
+  <a href=
+  \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
+  The relevant data is aggregated. In order to control both chillers
+  and heat pumps, both flow and return temperature are aggregated. The
+  mode signal chooses the operation type of the thermal machine:
+</p>
 <ul>
-<li>mode = true: Main operation mode (heat pump: heating; chiller: cooling)</li>
-<li>mode = false: Reversible operation mode (heat pump: cooling; chiller: heating)</li>
+  <li>mode = true: Main operation mode (heat pump: heating; chiller:
+  cooling)
+  </li>
+  <li>mode = false: Reversible operation mode (heat pump: cooling;
+  chiller: heating)
+  </li>
 </ul>
-<p>To model both on/off and inverter controlled thermal machines, the compressor speed is normalizd to a relative value between 0 and 1.</p>
-<p>Possible icing of the evaporator is modelled with an input value between 0 and 1.</p>
-<p>The model structure is as follows. To understand each submodel, please have a look at the corresponding model information:</p>
+<p>
+  To model both on/off and inverter controlled thermal machines, the
+  compressor speed is normalizd to a relative value between 0 and 1.
+</p>
+<p>
+  Possible icing of the evaporator is modelled with an input value
+  between 0 and 1.
+</p>
+<p>
+  The model structure is as follows. To understand each submodel,
+  please have a look at the corresponding model information:
+</p>
 <ol>
-<li><a href=\"AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle\">InnerCycle</a> (Black Box): Here, the user can use between several input models or just easily create his own, modular black box model. Please look at the model description for more info.</li>
-<li>Inertia: A n-order element is used to model system inertias (mass and thermal) of components inside the refrigerant cycle (compressor, pipes, expansion valve)</li>
-<li><a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity\">HeatExchanger</a>: This new model also enable modelling of thermal interias and heat losses in a heat exchanger. Please look at the model description for more info.</li>
+  <li>
+    <a href=
+    \"AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle\">InnerCycle</a>
+    (Black Box): Here, the user can use between several input models or
+    just easily create his own, modular black box model. Please look at
+    the model description for more info.
+  </li>
+  <li>Inertia: A n-order element is used to model system inertias (mass
+  and thermal) of components inside the refrigerant cycle (compressor,
+  pipes, expansion valve)
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity\">
+    HeatExchanger</a>: This new model also enable modelling of thermal
+    interias and heat losses in a heat exchanger. Please look at the
+    model description for more info.
+  </li>
 </ol>
-<h4>Assumptions</h4>
-<p>Several assumptions where made in order to model the thermal machine. For a detailed description see the corresponding model. </p>
+<h4>
+  Assumptions
+</h4>
+<p>
+  Several assumptions where made in order to model the thermal machine.
+  For a detailed description see the corresponding model.
+</p>
 <ol>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: In order to model inverter controlled machines, the compressor speed is scaled <b>linearly</b></li>
-<li><a href=\"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">Performance data 2D</a>: Reduced evaporator power as a result of icing. The icing factor is multiplied with the evaporator power.</li>
-<li><b>Inertia</b>: The default value of the n-th order element is set to 3. This follows comparisons with experimental data. Previous heat pump models are using n = 1 as a default. However, it was pointed out that a higher order element fits a real heat pump better in</li>
-<li><b>Scaling factor</b>: A scaling facor is implemented for scaling of the thermal power and capacity. The factor scales the parameters V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the thermal machine can supply more heat with the COP staying nearly constant. However, one has to make sure that the supplied pressure difference or mass flow is also scaled with this factor, as the nominal values do not increase said mass flow.</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">
+    Performance data 2D</a>: In order to model inverter controlled
+    machines, the compressor speed is scaled <b>linearly</b>
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">
+    Performance data 2D</a>: Reduced evaporator power as a result of
+    icing. The icing factor is multiplied with the evaporator power.
+  </li>
+  <li>
+    <b>Inertia</b>: The default value of the n-th order element is set
+    to 3. This follows comparisons with experimental data. Previous
+    heat pump models are using n = 1 as a default. However, it was
+    pointed out that a higher order element fits a real heat pump
+    better in
+  </li>
+  <li>
+    <b>Scaling factor</b>: A scaling facor is implemented for scaling
+    of the thermal power and capacity. The factor scales the parameters
+    V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the
+    thermal machine can supply more heat with the COP staying nearly
+    constant. However, one has to make sure that the supplied pressure
+    difference or mass flow is also scaled with this factor, as the
+    nominal values do not increase said mass flow.
+  </li>
 </ol>
-<h4>Known Limitations</h4>
+<h4>
+  Known Limitations
+</h4>
 <ul>
-<li>The n-th order element has a big influence on computational time. Reducing the order or disabling it completly will decrease computational time. </li>
-<li>Reversing the mode: A normal 4-way-exchange valve suffers from heat losses and irreversibilities due to switching from one mode to another. Theses losses are not taken into account.</li>
+  <li>The n-th order element has a big influence on computational time.
+  Reducing the order or disabling it completly will decrease
+  computational time.
+  </li>
+  <li>Reversing the mode: A normal 4-way-exchange valve suffers from
+  heat losses and irreversibilities due to switching from one mode to
+  another. Theses losses are not taken into account.
+  </li>
 </ul>
 </html>"));
 end PartialReversibleThermalMachine;

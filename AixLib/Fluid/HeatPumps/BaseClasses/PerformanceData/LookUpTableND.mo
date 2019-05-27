@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
+within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
 model LookUpTableND "N-dimensional table with data for heat pump"
   extends BaseClasses.PartialPerformanceData;
   parameter Real nConv=100
@@ -248,14 +248,21 @@ equation
     Rectangle(fillColor={255,255,0},
       fillPattern=FillPattern.Solid,
       extent={{-30,-20},{0,0}},
-          lineColor={0,0,0})}),                Documentation(info="<html>
-<p>Basic models showing the concept of using n-dimensional table data for the innerCycle of the heat pump model. This model assumes one provides data for inverter controlled heat pumps or chillers. However, this basis structure can be used to create own models, where electrical power and condenser depend on other inputs, such as ambient temperature.</p>
+          lineColor={0,0,0})}),                Documentation(info="<html><p>
+  Basic models showing the concept of using n-dimensional table data
+  for the innerCycle of the heat pump model. This model assumes one
+  provides data for inverter controlled heat pumps or chillers.
+  However, this basis structure can be used to create own models, where
+  electrical power and condenser depend on other inputs, such as
+  ambient temperature.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end LookUpTableND;
