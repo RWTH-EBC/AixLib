@@ -587,7 +587,6 @@ connect(pumSou.port_a, port_a2) annotation (Line(
           fillPattern=FillPattern.None)}),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,180}})),
-
     Documentation(revisions="<html><ul>
   <li>
     <i>May 22, 2019</i> by Julian Matthes:<br/>

@@ -132,6 +132,10 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
+  parameter Boolean fixed_TCon_start
+    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
+    annotation (Evaluate=true,Dialog(tab="Condenser", group="Heat Losses",
+      enable=use_conCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
@@ -141,6 +145,10 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
+  parameter Boolean fixed_TEva_start
+    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
+    annotation (Evaluate=true,Dialog(tab="Evaporator",     group="Heat Losses",
+      enable=use_evaCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
@@ -190,7 +198,8 @@ partial model PartialReversibleThermalMachine
     final GOut=GConOut*scalingFactor,
     final m_flow_nominal=mFlow_conNominal*scalingFactor,
     final dp_nominal=dpCon_nominal*scalingFactor,
-    final GInn=GConIns*scalingFactor) "Heat exchanger model for the condenser"
+    final GInn=GConIns*scalingFactor,
+    final fixed_T_start=fixed_TCon_start) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,78},{16,110}})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
@@ -212,7 +221,8 @@ partial model PartialReversibleThermalMachine
     final m_flow_nominal=mFlow_evaNominal*scalingFactor,
     final dp_nominal=dpEva_nominal*scalingFactor,
     final GOut=GEvaOut*scalingFactor,
-    GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
+    GInn=GEvaIns*scalingFactor,
+    final fixed_T_start=fixed_TEva_start) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
