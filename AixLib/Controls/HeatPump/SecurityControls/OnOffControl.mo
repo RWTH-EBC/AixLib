@@ -68,7 +68,7 @@ model OnOffControl
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{120,-10},{140,10}})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Interfaces.ThermalMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
   Utilities.Logical.SmoothSwitch swinOutnSet
     "If any of the ornSet conditions is true, nSet will be passed. Else nOut will stay the same"

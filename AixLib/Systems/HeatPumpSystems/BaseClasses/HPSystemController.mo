@@ -1,4 +1,4 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -199,10 +199,9 @@ model HPSystemController
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}})));
-  Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-122,-70},{-92,-36}}),
-        iconTransformation(extent={{-110,-62},{-92,-36}})));
+  Controls.Interfaces.ThermalMachineControlBus sigBusHP annotation (Placement(
+        transformation(extent={{-122,-70},{-92,-36}}), iconTransformation(
+          extent={{-110,-62},{-92,-36}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature of HP system"
     annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
@@ -294,7 +293,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, nOut) annotation (Line(
-      points={{49.6667,8},{76,8},{76,-58},{1.77636e-015,-58},{1.77636e-015,-114}},
+      points={{49.6667,8},{76,8},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
