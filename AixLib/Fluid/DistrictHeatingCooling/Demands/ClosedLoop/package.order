@@ -5,3 +5,4 @@ SubstationHeatingCoolingVarDeltaT
 ValveControlled
 ValveControlledHeatPump
 ValveControlledHX
+SubstationHeatingDirectCooling

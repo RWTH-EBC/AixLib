@@ -3,3 +3,4 @@ SubstationHeating
 SubstationHeatingCoolingFixDeltaT
 SubstationHeatingCoolingVarDeltaT
 SubstationValveControlledHX
+SubstationHeatingDirectCooling
