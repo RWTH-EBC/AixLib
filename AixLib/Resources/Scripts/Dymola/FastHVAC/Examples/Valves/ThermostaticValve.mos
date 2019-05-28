@@ -1,0 +1,17 @@
+simulateModel("AixLib.FastHVAC.Examples.Valves.ThermostaticValve", stopTime=172800, tolerance=1e-006, resultFile="ThermostaticValve");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"dotm_pump"}, range={0.0, 175000.0, 0.04, 0.22}, autoerase=false, grid=true, colors={{28,108,200}});
+createPlot(id=1, position={0, 0, 1223, 348}, y={"setTemperature", "T_actually"}, range={0.0, 175000.0, 288.0, 293.5}, autoerase=false, grid=true, subPlot=2, colors={{28,108,200}, {238,46,47}});
+

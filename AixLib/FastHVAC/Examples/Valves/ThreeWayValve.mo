@@ -33,4 +33,10 @@ equation
           {-56,-9},{-56,-0.6}}, color={0,0,127}));
   connect(sine.y, threeWayValve.opening)
     annotation (Line(points={{-15,54},{4,54},{4,13}}, color={0,0,127}));
+  annotation (experiment(
+      StopTime=172800,
+      Tolerance=1e-006,
+      __Dymola_Algorithm="Dassl"), __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Valves/ThreeWayValve.mos"
+        "Simulate and plot"));
 end ThreeWayValve;

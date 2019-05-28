@@ -132,5 +132,9 @@ revisions="<html><ul>
     Implemented
   </li>
 </ul>
-</html> "));
+</html> "),
+    experiment(StopTime=30000, Tolerance=1e-006),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Sensors/SensorVerification.mos"
+        "Simulate and plot"));
 end SensorVerification;

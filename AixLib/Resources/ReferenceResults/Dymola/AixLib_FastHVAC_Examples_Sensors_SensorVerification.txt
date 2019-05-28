@@ -1,0 +1,10 @@
+last-generated=2019-05-28
+statistics-simulation=
+{
+  "linear": " ",
+  "nonlinear": " ",
+  "numerical Jacobians": "0"
+}
+TemperatureFastHVAC.T=[3.331499938964844e+02, 3.331499938964844e+02]
+TemperatureFluid.T=[3.331499938964844e+02, 3.331499938964844e+02]
+time=[0e+00, 3e+04]

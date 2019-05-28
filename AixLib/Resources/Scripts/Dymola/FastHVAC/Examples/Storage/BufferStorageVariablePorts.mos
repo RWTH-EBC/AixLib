@@ -1,0 +1,16 @@
+simulateModel("AixLib.FastHVAC.Examples.Storage.BufferStorageVariablePorts", stopTime=72000, method="dassl", tolerance=1e-006, resultFile="BufferStorageVariablePorts");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"T_layers1[1]", "T_layers1[4]", "T_layers1[7]", "T_layers1[10]"}, range={0.0, 72000.0, 290.0, 328.0}, autoerase=false, grid=true, colors={{28,108,200}, {217,67,180}, {244,125,35}, {238,46,47}}, patterns={LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Dash});
+

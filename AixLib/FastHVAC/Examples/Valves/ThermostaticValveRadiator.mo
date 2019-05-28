@@ -33,8 +33,9 @@ model ThermostaticValveRadiator
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={80,-8})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor room(C=99999999, T(
-        start=293.15)) annotation (Placement(transformation(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor room(C=99999999, T(start=
+          293.15, fixed=true))
+                       annotation (Placement(transformation(
         extent={{-21,-21},{21,21}},
         rotation=0,
         origin={25,51})));
@@ -48,7 +49,9 @@ model ThermostaticValveRadiator
   calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log,
   radiatorType=
       DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(
-      length=5)) annotation (Placement(transformation(
+      length=5),
+    hexRadiator(radiatorWall(heatCapacitor(T(fixed=true)))))
+                 annotation (Placement(transformation(
       extent={{-21,-20},{21,20}},
       rotation=0,
       origin={24,-7})));
@@ -120,7 +123,10 @@ connect(room.port, radiatorMultiLayer.RadiativeHeat) annotation (Line(
             -100},{100,100}})),
     experiment(
       StopTime=172800,
-      Interval=10,
+      Tolerance=1e-006,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_experimentSetupOutput);
+    __Dymola_experimentSetupOutput,
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Valves/ThermostaticValveRadiator.mos"
+        "Simulate and plot"));
 end ThermostaticValveRadiator;

@@ -59,7 +59,10 @@ equation
             -100},{100,100}})),
     experiment(
       StopTime=172800,
-      Interval=10,
+      Tolerance=1e-006,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_experimentSetupOutput);
+    __Dymola_experimentSetupOutput,
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Valves/ThermostaticValve.mos"
+        "Simulation and plot"));
 end ThermostaticValve;

@@ -24,9 +24,23 @@ model BufferStorageVariablePorts
     n_HC2_up=4,
     n_HR=10,
     unload_cycles=[1,10; 4,10],
+    n=10,
+    top_cover(loadWall(T(fixed=true)), loadIns(T(fixed=true))),
+    bottom_cover(loadWall(T(fixed=true)), loadIns(T(fixed=true))),
+    layer(T(start=heatStorageVariablePorts.T_start, fixed=true)),
+    heatingCoil1(PipeWall_HC1(CylindricLoad1(port(T(start=
+                  heatStorageVariablePorts.heatingCoil1.PipeWall_HC1.T0, fixed=
+                  true))))),
+    heatingCoil2(PipeWall_HC1(CylindricLoad1(port(T(start=
+                  heatStorageVariablePorts.heatingCoil2.PipeWall_HC1.T0, fixed=
+                  true))))),
+    storage_mantle(Wall(CylindricLoad1(port(T(start=heatStorageVariablePorts.storage_mantle.Wall.T0,
+                fixed=true)))), Insulation(CylindricLoad1(port(T(start=
+                  heatStorageVariablePorts.storage_mantle.Wall.T0, fixed=true))))),
+
     T_start_wall=323.15,
     T_start_ins=323.15,
-    n=10)
+    Heat_loss(start=0.0, fixed=true))
     annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
@@ -107,6 +121,8 @@ model BufferStorageVariablePorts
         extent={{-12,-7},{12,7}},
         rotation=180,
         origin={-25,-28})));
+  Modelica.Blocks.Interfaces.RealOutput T_layers1[10]
+    annotation (Placement(transformation(extent={{90,30},{110,50}})));
 equation
 
   connect(T_load2.y, fluidSource3.T_fluid) annotation (Line(
@@ -193,9 +209,11 @@ equation
   connect(fluidSource2.enthalpyPort_b, heatStorageVariablePorts.UnloadingCycle_In[
     2]) annotation (Line(points={{27,-52},{26.4,-52},{26.4,-40}}, color={176,0,
           0}));
+  connect(heatStorageVariablePorts.T_layers, T_layers1) annotation (Line(points=
+         {{-3.3,-10},{-10,-10},{-10,40},{100,40}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-    experiment(StopTime=72000, Interval=60),
+    experiment(StopTime=72000, Tolerance=1e-006),
     __Dymola_experimentSetupOutput,
     Documentation(revisions="<html><ul>
   <li>
@@ -203,5 +221,8 @@ equation
     Moved into AixLib
   </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Storage/BufferStorageVariablePorts.mos"
+        "Simulate and plot"));
 end BufferStorageVariablePorts;

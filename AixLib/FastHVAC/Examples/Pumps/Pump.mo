@@ -12,7 +12,8 @@ model Pump
   Components.HeatExchangers.RadiatorMultiLayer
                                        radiator_ML(selectable=true,
       radiatorType=
-        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
+    hexRadiator(radiatorWall(heatCapacitor(T(fixed=true)))))
     annotation (Placement(transformation(extent={{60,-2},{80,16}})));
   Components.HeatGenerators.Boiler.Boiler     boilerBase(paramBoiler=
         Data.Boiler.General.Boiler_Vitogas200F_11kW(), T_start=333.15)
@@ -26,6 +27,8 @@ model Pump
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={46,34})));
+  Components.Sensors.TemperatureSensor temperature
+    annotation (Placement(transformation(extent={{4,-48},{-14,-30}})));
 equation
   connect(boilerBase.enthalpyPort_b1, pump.enthalpyPort_a) annotation (Line(
       points={{-51.5,7},{-13.52,7}},
@@ -33,11 +36,6 @@ equation
       smooth=Smooth.None));
   connect(pump.enthalpyPort_b, radiator_ML.enthalpyPort_a1) annotation (Line(
       points={{9.52,7},{30,7},{30,6.82},{62,6.82}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(radiator_ML.enthalpyPort_b1, boilerBase.enthalpyPort_a1)
-    annotation (Line(
-      points={{78,6.82},{78,-20},{-62.5,-20},{-62.5,6.78}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(mdot.y, pump.dotm_setValue) annotation (Line(
@@ -56,6 +54,12 @@ equation
           {64.6,12.22},{64.6,14},{32,14},{32,34},{36,34}}, color={191,0,0}));
   connect(radiator_ML.RadiativeHeat, idealSink.port) annotation (Line(points={{
           75.6,12.4},{75.6,18},{36,18},{36,34}}, color={95,95,95}));
+  connect(boilerBase.enthalpyPort_a1, temperature.enthalpyPort_b) annotation (
+      Line(points={{-62.5,6.78},{-76,6.78},{-76,-39.09},{-13.1,-39.09}}, color=
+          {176,0,0}));
+  connect(temperature.enthalpyPort_a, radiator_ML.enthalpyPort_b1) annotation (
+      Line(points={{2.92,-39.09},{88,-39.09},{88,6.82},{78,6.82}}, color={176,0,
+          0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(
@@ -79,5 +83,9 @@ equation
           textString="Pump model only determines the 
 property mass flow rate of the fluid. 
 Specific enthalpy and temperature of 
-the fluid remain constant")}));
+the fluid remain constant")}),
+    experiment(StopTime=30000, Tolerance=1e-006),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Pumps/Pump.mos"
+        "Simulate and plot"));
 end Pump;

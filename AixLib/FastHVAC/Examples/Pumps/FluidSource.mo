@@ -8,7 +8,10 @@ model FluidSource
     annotation (Placement(transformation(extent={{60,-36},{82,-14}})));
   Modelica.Blocks.Sources.Constant dotm_source(k=2)
     annotation (Placement(transformation(extent={{-84,-52},{-64,-32}})));
-  Modelica.Blocks.Sources.Constant T_source(k=333.15)
+  Modelica.Blocks.Sources.Sine     T_source(
+    amplitude=4,
+    freqHz=1/3600,
+    offset=323.15)
     annotation (Placement(transformation(extent={{-84,-22},{-64,-2}})));
 equation
   connect(T_source.y, fluidSource.T_fluid) annotation (Line(
@@ -50,5 +53,9 @@ and specific enthalpy [J/kg]"),
           extent={{-72,88},{76,80}},
           lineColor={0,0,0},
           textString="Test fluid source model 
-(inclusive vessel model and real input values)")}));
+(inclusive vessel model and real input values)")}),
+    experiment(StopTime=5000, Tolerance=1e-006),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Pumps/FluidSource.mos"
+        "Simulate and plot"));
 end FluidSource;

@@ -2,13 +2,15 @@ within AixLib.FastHVAC.Examples.Sinks;
 model SinkSourceVesselTest
   extends Modelica.Icons.Example;
 
-  Components.Sinks.Sink sink
+  Components.Sinks.Sink sink(medium=Media.WaterSimple(), fluid(T0=606.3))
     annotation (Placement(transformation(extent={{-28,0},{-8,20}})));
   Components.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{80,-18},{100,2}})));
   Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-68,-16},{-48,4}})));
-  Components.Sinks.Sink source(isSource=true)
+  Components.Sinks.Sink source(isSource=true,
+    medium=Media.WaterSimple(),
+    fluid(T0=606.3))
     annotation (Placement(transformation(extent={{32,-70},{52,-50}})));
   Modelica.Blocks.Sources.Constant dotm(k=0.05)
     annotation (Placement(transformation(extent={{-96,-26},{-82,-12}})));
@@ -130,5 +132,9 @@ heat flow value."),
           horizontalAlignment=TextAlignment.Left,
           textString="Source 
 with constant
-heat flow value.")}));
+heat flow value.")}),
+    experiment(StopTime=5000, Tolerance=1e-006),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Sinks/SinkSourceVesselTest.mos"
+        "Simulate and plot"));
 end SinkSourceVesselTest;

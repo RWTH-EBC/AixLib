@@ -4,7 +4,12 @@ model Pipes
   Components.Pipes.DynamicPipe PipeInsulationAndConvectionandRadiation(
     withInsulation=true,
     withConvection=true,
-    withRadiation=true)
+    withRadiation=true,
+    insulation(CylindricLoad1(port(T(start=
+                PipeInsulationAndConvectionandRadiation.T_0, fixed=true)))),
+    T_0=333.15,
+    pipeWall(CylindricLoad1(port(T(start=
+                PipeInsulationAndConvectionandRadiation.T_0, fixed=true)))))
     annotation (Placement(transformation(extent={{-14,-96},{6,-76}})));
   Components.Pumps.FluidSource fluidSource1
     annotation (Placement(transformation(extent={{-76,-96},{-56,-76}})));
@@ -26,7 +31,12 @@ model Pipes
   Components.Pipes.DynamicPipe PipeInsulationAndConvection(
     withInsulation=true,
     withConvection=true,
-    withRadiation=false)
+    withRadiation=false,
+    T_0=333.15,
+    insulation(CylindricLoad1(port(T(start=PipeInsulationAndConvection.T_0,
+              fixed=true)))),
+    pipeWall(CylindricLoad1(port(T(start=PipeInsulationAndConvection.T_0, fixed
+              =true)))))
     annotation (Placement(transformation(extent={{-16,-28},{4,-8}})));
   Components.Pumps.FluidSource fluidSource2
     annotation (Placement(transformation(extent={{-74,-28},{-54,-8}})));
@@ -52,7 +62,10 @@ model Pipes
   Components.Pipes.DynamicPipe PipeInsulation(
     withInsulation=true,
     withRadiation=false,
-    withConvection=false)
+    withConvection=false,
+    T_0=333.15,
+    insulation(CylindricLoad1(port(T(start=PipeInsulation.T_0, fixed=true)))),
+    pipeWall(CylindricLoad1(port(T(start=PipeInsulation.T_0, fixed=true)))))
     annotation (Placement(transformation(extent={{-16,32},{4,52}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperatureSurroundingAir1(T=288.15)
@@ -100,7 +113,8 @@ equation
           -77.65,-19},{-77.65,-20.6},{-72,-20.6}}, color={0,0,127}));
   connect(mFlow1.y, fluidSource1.dotm) annotation (Line(points={{-83.3,-87},{
           -78.65,-87},{-78.65,-88.6},{-74,-88.6}}, color={0,0,127}));
-  annotation (experiment(StopTime=5000), Diagram(graphics={
+  annotation (experiment(StopTime=5000, Tolerance=1e-006),
+                                         Diagram(graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
@@ -136,5 +150,8 @@ equation
           fillColor={175,175,175},
           fillPattern=FillPattern.None,
           fontSize=14,
-          textString="Insulation only")}));
+          textString="Insulation only")}),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/FastHVAC/Examples/Pipes/Pipes.mos"
+        "Simulate and plot"));
 end Pipes;
