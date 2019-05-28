@@ -5,7 +5,7 @@ model HeatConv_inside
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
-  parameter Integer calcMethod=1 "Calculation Method" annotation (Dialog(
+  parameter Integer calcMethod=2 "Calculation Method" annotation (Dialog(
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
@@ -16,6 +16,8 @@ model HeatConv_inside
     "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
+  parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
+        enable=if calcMethod == 1 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation=1 "Surface orientation" annotation (
@@ -45,11 +47,11 @@ equation
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 5 else 0.7));
+      alpha = smooth(2, noEvent(if port_b.T >= port_a.T+dT_small then 5 elseif port_a.T >= port_b.T+dT_small then 0.7 else (5-0.7)/2/dT_small * (port_b.T - port_a.T) + 0.7+(5-0.7)/2));
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 0.7 else 5));
+      alpha = smooth(2, noEvent(if port_b.T >= port_a.T+dT_small then 0.7 elseif port_a.T >= port_b.T+dT_small then 5 else (5-0.7)/2/dT_small * (port_b.T - port_a.T) + 0.7+(5-0.7)/2));
 
     // vertical
     else
