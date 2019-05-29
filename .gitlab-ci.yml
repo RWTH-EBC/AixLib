@@ -107,7 +107,7 @@ test_dymola_Controls:
     when: runner_system_failure
 
 
- test_dymola_Electrical:
+test_dymola_Electrical:
    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
    stage: test
    services:
@@ -135,7 +135,7 @@ test_dymola_Controls:
      when: runner_system_failure
 
 
- test_dymola_FastHVAC:
+test_dymola_FastHVAC:
    image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
    stage: test
    services:
