@@ -1,5 +1,5 @@
 ﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
-model HeatPump
+model HeatPump_fastHVAC
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
@@ -188,6 +188,6 @@ equation
   </ul>
   </html>"),
     __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/FastHVAC/Examples/HeatGenerators/HeatPump/HeatPump.mos"
+          "Resources/Scripts/Dymola/FastHVAC/Examples/HeatGenerators/HeatPump/HeatPump_fastHVAC.mos"
         "Simulate and plot"));
-end HeatPump;
+end HeatPump_fastHVAC;

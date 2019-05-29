@@ -1,4 +1,4 @@
-simulateModel("AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.HeatPump", stopTime=20000, method="dassl", tolerance=1e-006, resultFile="HeatPump");
+simulateModel("AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.HeatPump", stopTime=20000, method="dassl", tolerance=1e-006, resultFile="HeatPump_fastHVAC");
 // Plot commands
 removePlots(false);
 Advanced.FilenameInLegend = false;
