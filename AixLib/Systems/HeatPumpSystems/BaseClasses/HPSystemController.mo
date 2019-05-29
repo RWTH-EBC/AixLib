@@ -293,7 +293,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, nOut) annotation (Line(
-      points={{49.6667,8},{76,8},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
+      points={{49.6667,8},{76,8},{76,-58},{1.77636e-015,-58},{1.77636e-015,-114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},

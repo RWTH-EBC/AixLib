@@ -193,8 +193,7 @@ equation
     annotation (Line(points={{82,-90},{62,-90},{62,-79.4286}},
                                                           color={0,127,255}));
   connect(sin.ports[1], heatPumpSystem.port_b2) annotation (Line(points={{-28,-90},
-          {14,-90},{14,-79.4286},{8,-79.4286}},
-                                       color={0,127,255}));
+          {8,-90},{8,-79.4286}},       color={0,127,255}));
   connect(rad.port_b, preSou.ports[1]) annotation (Line(points={{20,12},{-8,12},{-8,-22},
           {-22,-22}},          color={0,127,255}));
   connect(preSou.ports[2], heatPumpSystem.port_a1)

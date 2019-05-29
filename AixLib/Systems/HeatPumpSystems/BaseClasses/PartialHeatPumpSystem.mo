@@ -444,6 +444,9 @@ equation
       points={{18,9},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-13},{-60,
+          -13},{-60,-60},{-100,-60}},
+                                 color={0,127,255}));
 connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},

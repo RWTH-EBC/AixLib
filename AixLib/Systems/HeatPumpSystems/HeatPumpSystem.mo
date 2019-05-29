@@ -8,8 +8,9 @@ model HeatPumpSystem
     redeclare AixLib.Fluid.HeatPumps.HeatPump
       heatPump(
       redeclare final model PerDataMainHP = PerDataHea,
-      redeclare final package Medium_con = Medium_con,
       redeclare final model PerDataRevHP = PerDataChi,
+      redeclare final package Medium_con = Medium_con,
+      redeclare final package Medium_eva = Medium_eva,
       final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
@@ -49,9 +50,7 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters(
-      final fixed_TCon_start=fixed_TCon_start,
-      final fixed_TEva_start=fixed_TEva_start);
+      final fixed_TEva_start=fixed_TEva_start));
 
 //Heat Pump
   replaceable model PerDataHea =
