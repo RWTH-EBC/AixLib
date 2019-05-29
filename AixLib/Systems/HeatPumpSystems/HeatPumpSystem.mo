@@ -10,6 +10,7 @@ model HeatPumpSystem
       redeclare final model PerDataRevHP = PerDataChi,
       redeclare final package Medium_con = Medium_con,
       redeclare final package Medium_eva = Medium_eva,
+      final use_rev=use_revHP,
       final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,

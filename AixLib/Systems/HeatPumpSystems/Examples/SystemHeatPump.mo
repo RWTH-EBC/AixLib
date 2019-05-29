@@ -77,7 +77,6 @@ model SystemHeatPump "Example for a heat pump system"
     use_deFro=false,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    use_revHP=false,
     refIneFre_constant=0.01,
     dpEva_nominal=0,
     deltaM_con=0.1,
@@ -130,6 +129,7 @@ model SystemHeatPump "Example for a heat pump system"
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     TCon_start=313.15,
     TEva_start=283.15,
+    use_revHP=false,
     VCon=0.004,
     VEva=0.004)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
