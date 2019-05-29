@@ -1,4 +1,4 @@
- test_overall_coverage:
+test_overall_coverage:
   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
   stage: test
   services:
