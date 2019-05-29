@@ -107,60 +107,60 @@ test_dymola_Controls:
     when: runner_system_failure
 
 
-# test_dymola_Electrical:
-#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
-#   stage: test
-#   services:
-#     -  docker
+ test_dymola_Electrical:
+   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+   stage: test
+   services:
+     -  docker
 
-#   before_script:
-#     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-#     - export PIP_CACHE_DIR="/opt/cache/pip"
-#     - source activate python27
-#     - python -V               # Print out python version for debugging
-#     - dir
-#     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-#     - export PYTHONIOENCODING=UTF8 # just in case
+   before_script:
+     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+     - export PIP_CACHE_DIR="/opt/cache/pip"
+     - source activate python27
+     - python -V               # Print out python version for debugging
+     - dir
+     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+     - export PYTHONIOENCODING=UTF8 # just in case
 
-#   script:
-#     - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola
+   script:
+     - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Electrical --tool dymola
 
-#   artifacts:
-#     when: on_failure
-#     paths:
-#       - AixLib/simulator-dymola.log
+   artifacts:
+     when: on_failure
+     paths:
+       - AixLib/simulator-dymola.log
 
-#   retry:
-#     max: 2
-#     when: runner_system_failure
+   retry:
+     max: 2
+     when: runner_system_failure
 
 
-# test_dymola_FastHVAC:
-#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
-#   stage: test
-#   services:
-#     -  docker
+ test_dymola_FastHVAC:
+   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+   stage: test
+   services:
+     -  docker
 
-#   before_script:
-#     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
-#     - export PIP_CACHE_DIR="/opt/cache/pip"
-#     - source activate python27
-#     - python -V               # Print out python version for debugging
-#     - dir
-#     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
-#     - export PYTHONIOENCODING=UTF8 # just in case
+   before_script:
+     - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+     - export PIP_CACHE_DIR="/opt/cache/pip"
+     - source activate python27
+     - python -V               # Print out python version for debugging
+     - dir
+     - pip install --upgrade git+https://github.com/MichaMans/BuildingsPy@testexamplescoverage
+     - export PYTHONIOENCODING=UTF8 # just in case
 
-#   script:
-#     - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola
+   script:
+     - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.FastHVAC --tool dymola
 
-#   artifacts:
-#     when: on_failure
-#     paths:
-#       - AixLib/simulator-dymola.log
+   artifacts:
+     when: on_failure
+     paths:
+       - AixLib/simulator-dymola.log
 
-#   retry:
-#     max: 2
-#     when: runner_system_failure
+   retry:
+     max: 2
+     when: runner_system_failure
 
 
 test_dymola_Fluid:
