@@ -5,8 +5,7 @@ model HeatPumpSystem
     transferHeat=true,
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
-    redeclare AixLib.Fluid.HeatPumps.HeatPump
-      heatPump(
+    redeclare AixLib.Fluid.HeatPumps.HeatPump heatPump(
       redeclare final model PerDataMainHP = PerDataHea,
       redeclare final model PerDataRevHP = PerDataChi,
       redeclare final package Medium_con = Medium_con,
@@ -50,6 +49,7 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
+      final fixed_TCon_start=fixed_TCon_start,
       final fixed_TEva_start=fixed_TEva_start));
 
 //Heat Pump
