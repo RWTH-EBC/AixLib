@@ -10,7 +10,8 @@ model HeatConv_inside
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
       choice=3 "Constant alpha",
-      radioButtons=true));
+      radioButtons=true),
+      Evaluate=true);
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 2.5
     "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
@@ -26,8 +27,9 @@ model HeatConv_inside
       choice=1 "vertical",
       choice=2 "horizontal facing up",
       choice=3 "horizontal facing down",
-      radioButtons=true));
-  parameter Modelica.SIunits.Area A "Area of surface";
+      radioButtons=true),
+      Evaluate=true);
+  parameter Modelica.SIunits.Area A(min=0) "Area of surface";
   Modelica.SIunits.CoefficientOfHeatTransfer alpha
     "variable heat transfer coefficient";
 
@@ -47,11 +49,17 @@ equation
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T+dT_small then 5 elseif port_a.T >= port_b.T+dT_small then 0.7 else (5-0.7)/2/dT_small * (port_b.T - port_a.T) + 0.7+(5-0.7)/2));
+      alpha = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+        y1=5,
+        y2=0.7,
+        x_small=dT_small);
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T+dT_small then 0.7 elseif port_a.T >= port_b.T+dT_small then 5 else (5-0.7)/2/dT_small * (port_b.T - port_a.T) + 0.7+(5-0.7)/2));
+      alpha = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+        y1=0.7,
+        y2=5,
+        x_small=dT_small);
 
     // vertical
     else

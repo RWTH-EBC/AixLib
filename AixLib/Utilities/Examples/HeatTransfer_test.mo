@@ -7,7 +7,8 @@ model HeatTransfer_test "Test routine for heat transfer models"
   HeatTransfer.HeatConv_inside heatConv_inside(
     A=16,
     alpha_custom=2,
-    surfaceOrientation=2)
+    surfaceOrientation=2,
+    calcMethod=1)
     annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
   HeatTransfer.HeatConv_outside heatTransfer_Outside(Model = 1, A = 16, alpha_custom = 25, surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()) annotation(Placement(transformation(extent = {{-10, -38}, {10, -18}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTrans(G = 16 * 1.5) annotation(Placement(transformation(extent = {{-10, -56}, {10, -36}})));
@@ -65,5 +66,9 @@ Implemented, added documentation and formatted appropriately
 </li>
 </ul>
 </html>
- "), experiment(StopTime = 100, __Dymola_Algorithm = "Dassl"));
+ "), experiment(
+      StopTime=86400,
+      Interval=60,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"));
 end HeatTransfer_test;
