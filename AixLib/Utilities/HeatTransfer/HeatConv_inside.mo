@@ -280,7 +280,7 @@ equation
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions="<html>
 <ul>
-<li><i>May 30, 2019</i>  by Katharina Brinkmann / Philipp Mehrfeld:</li>
+<li><i>May 30, 2019</i>  by Katharina Brinkmann / Philipp Mehrfeld:<br>
 <a href=\"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br>
 - add smooth + noEvent functions<br>
 - ISO approach now linearized when heat flow reverses (depending on newly introduced <span style=\"font-family: Courier New;\">dT_small</span>)<br>
