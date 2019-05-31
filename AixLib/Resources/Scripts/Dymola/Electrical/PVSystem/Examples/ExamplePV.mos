@@ -1,0 +1,16 @@
+simulateModel("AixLib.Electrical.PVSystem.Examples.ExamplePV", stopTime=31536000, method="Lsodar", tolerance=1e-006, resultFile="ExamplePV");
+// Plot commands
+removePlots(false);
+Advanced.FilenameInLegend = false;
+Advanced.SequenceInLegend = true;
+Advanced.PlotLegendTooltip = true;
+Advanced.ShowPlotTooltip = true;
+Advanced.FullPlotTooltip = true;
+Advanced.DefaultAutoErase = false;
+Advanced.Legend.Horizontal = true;
+Advanced.Legend.Frame = false;
+Advanced.Legend.Transparent = true;
+Advanced.Legend.Location = 1;
+Advanced.FilesToKeep = 2;
+createPlot(id=1, position={0, 0, 1223, 701}, y={"Power"}, range={0.0, 32000000.0, -50.0, 800.0}, autoerase=false, grid=true, colors={{28,108,200}});
+
