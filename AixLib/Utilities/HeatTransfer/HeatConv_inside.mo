@@ -20,14 +20,14 @@ model HeatConv_inside
         enable=if calcMethod == 1 then true else false));
 
   // which orientation of surface?
-  parameter Integer surfaceOrientation=1 "Surface orientation" annotation (
+  parameter Integer surfaceOrientation "Surface orientation" annotation (
       Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
       choices(
       choice=1 "vertical",
       choice=2 "horizontal facing up",
       choice=3 "horizontal facing down",
       radioButtons=true));
-  parameter Modelica.SIunits.Area A=16 "Area of surface";
+  parameter Modelica.SIunits.Area A "Area of surface";
   Modelica.SIunits.CoefficientOfHeatTransfer alpha
     "variable heat transfer coefficient";
 
