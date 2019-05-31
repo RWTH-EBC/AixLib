@@ -15,8 +15,12 @@ model HeatTransfer_test "Test routine for heat transfer models"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempInside annotation(Placement(transformation(extent = {{80, 0}, {60, 20}})));
   Modelica.Blocks.Sources.Sine sineWindSpeed(amplitude = 10, freqHz = 0.5) annotation(Placement(transformation(extent = {{-34, -24}, {-24, -14}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow[6] annotation(Placement(transformation(extent = {{76, 50}, {94, 68}})));
-  Modelica.Blocks.Sources.Constant constTempOutside(k = 283) annotation(Placement(transformation(extent = {{-100, -20}, {-86, -6}})));
-  Modelica.Blocks.Sources.Constant constTempInside(k = 298) annotation(Placement(transformation(extent = {{7, -7}, {-7, 7}}, origin = {93, -15})));
+  Modelica.Blocks.Sources.Sine     sine(
+    amplitude=15,
+    freqHz=1/3600/12,
+    offset=273.15 + 15)                                      annotation(Placement(transformation(extent = {{-100, -20}, {-86, -6}})));
+  Modelica.Blocks.Sources.Constant constTempInside(k=273.15 + 20)
+                                                            annotation(Placement(transformation(extent = {{7, -7}, {-7, 7}}, origin = {93, -15})));
 equation
   //Connecting the Heat Flow Output, models as stated below in source code
   Q_flow[1] = heatConv.port_b.Q_flow;
@@ -37,7 +41,7 @@ equation
       color={191,0,0}));
   connect(sineWindSpeed.y, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-23.5, -19}, {-18, -19}, {-18, -35.2}, {-9.2, -35.2}}, color = {0, 0, 127}));
   connect(TempOutside.port, heatConv.port_a) annotation(Line(points = {{-60, 10}, {-40, 10}, {-40, 48}, {-10, 48}}, color = {191, 0, 0}));
-  connect(constTempOutside.y, TempOutside.T) annotation(Line(points = {{-85.3, -13}, {-82, -13}, {-82, 10}}, color = {0, 0, 127}));
+  connect(sine.y, TempOutside.T) annotation (Line(points={{-85.3,-13},{-82,-13},{-82,10}}, color={0,0,127}));
   connect(constTempInside.y, TempInside.T) annotation(Line(points = {{85.3, -15}, {84, -15}, {84, -16}, {84, -16}, {84, 10}, {82, 10}}, color = {0, 0, 127}));
   connect(TempOutside.port, heatTrans.port_a) annotation(Line(points = {{-60, 10}, {-40, 10}, {-40, -46}, {-10, -46}}, color = {191, 0, 0}));
   connect(heatTrans.port_b, TempInside.port) annotation(Line(points = {{10, -46}, {46, -46}, {46, 10}, {60, 10}}, color = {191, 0, 0}));
