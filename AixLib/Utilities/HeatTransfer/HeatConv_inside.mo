@@ -258,26 +258,32 @@ equation
           color={0,0,255},
           thickness=0.5)}),
     Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>The <b>HeatConv_inside</b> model represents the phenomenon of heat convection at inside surfaces, with different choice for surface orientation. </p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>In this model the orientation of the surface can be chosen from a menu for an easier adoption to new situations. This allows calculating <code>alpha</code> depending on orientation and respective direction of heat flow. The equations for <code>alpha</code> are taken from EN ISO 6946 (appendix A.1) and B. Glueck. </p>
-<p>The model can in this way be used on inside surfaces. There is also the possibility of setting a constant alpha value.</p>
-<p><b><font style=\"color: #008000; \">References</font></b> </p>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>The <b>HeatConv_inside</b> model represents the phenomenon of heat convection at inside surfaces of walls, with different choice for surface orientation. </p>
+<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
+<p>In this model the orientation of the surface can be chosen from a menu for an easier adoption to new situations. This allows calculating the<b> heat convection coefficient <span style=\"font-family: Courier New;\">alpha</span></b> depending on orientation and respective direction of heat flow. </p>
+<p>The equations for <span style=\"font-family: Courier New;\">alpha</span> are taken from EN ISO 6946 (appendix A.1) and B. Glueck. There is also the possibility of setting a constant alpha value.</p>
+<p><b><span style=\"color: #008000;\">References</span></b> </p>
 <ul>
 <li>EN ISO 6946:2008-04, appendix A. Building components and building elements - Thermal resistance and thermal transmittance.</li>
 <li>Bernd Glueck:<i> Heizen und K&uuml;hlen mit Niedrigexergie - Innovative W&auml;rme&uuml;bertragung und W&auml;rmespeicherung (LowEx) 2008.</i> </li>
 </ul>
-<p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
+<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions="<html>
 <ul>
-<li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters</li>
-<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
-<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
-<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions </li>
-<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>Formatted documentation according to standards </li>
-<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>Implemented. </li>
+<li><i>May 30, 2019</i>  by Katharina Brinkmann / Philipp Mehrfeld:</li>
+<a href=\"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br>
+- add smooth + noEvent functions<br>
+- ISO approach now linearized when heat flow reverses (depending on newly introduced <span style=\"font-family: Courier New;\">dT_small</span>)<br>
+- Approach acc. to Glueck can change heat flow during simulation.<br>
+- Standard Calculation Method now &quot;Glueck&quot; due to faster simulation speed<br>
+<li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br>Algorithm for HeatConv_inside is now selectable via parameters</li>
+<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
+<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
+<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br>Uses components from MSL and respects the naming conventions </li>
+<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br>Formatted documentation according to standards </li>
+<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br>Implemented. </li>
 </ul>
 </html>"));
 end HeatConv_inside;
