@@ -6,7 +6,8 @@ model HPControl
       AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final Q_flow_nominal=Q_flow_nominal,
     final use_secHeaGen=use_secHeaGen,
-    final use_bivPar=use_bivPar);
+    final use_bivPar=use_bivPar,
+    final cp=cp_con);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
   parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation(choices(choice=true "Parallel",
@@ -14,6 +15,9 @@ model HPControl
       radioButtons=true), Dialog(enable=use_secHeaGen));
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
+    annotation (Dialog(enable=use_secHeaGen));
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_con
+    "Gain with specific heat capacity in condenser medium"
     annotation (Dialog(enable=use_secHeaGen));
 //Heating Curve
   parameter Boolean use_tableData=true
@@ -108,8 +112,8 @@ model HPControl
     final TRoom_nominal=293.15)
     annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
 
-                                                                         TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
-            {76,26}})));
+  TSetToNSet ConvTSetToNSet
+   annotation (Placement(transformation(extent={{44,-8},{76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg if not use_antLeg
                                                            "No Anti Legionella"
                                            annotation (
@@ -123,7 +127,6 @@ model HPControl
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
-
 
 equation
 
