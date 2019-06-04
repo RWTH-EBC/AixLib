@@ -36,7 +36,16 @@ model ConvNLayerClearanceStar
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
   // n Loads
-  Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_constant, A = A, surfaceOrientation = surfaceOrientation, calcMethod = calcMethod) annotation(Placement(transformation(origin={62,0},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  Utilities.HeatTransfer.HeatConv_inside HeatConv1(
+    port_b(T(start=T0)),
+    hConvCustom=alpha_constant,
+    A=A,
+    surfaceOrientation=surfaceOrientation,
+    calcMethod=calcMethod)
+    annotation (Placement(transformation(
+        origin={62,0},
+        extent={{-10,-10},{10,10}},
+        rotation=180)));
   Utilities.Interfaces.RadPort
                             Star annotation(Placement(transformation(extent={{90,52},
             {110,72}})));

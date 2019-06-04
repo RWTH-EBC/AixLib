@@ -13,8 +13,8 @@ model HeatConv_inside
       radioButtons=true),
       Evaluate=true);
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 2.5
-    "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+                                         annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
   parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
@@ -30,8 +30,7 @@ model HeatConv_inside
       radioButtons=true),
       Evaluate=true);
   parameter Modelica.SIunits.Area A(min=0) "Area of surface";
-  Modelica.SIunits.CoefficientOfHeatTransfer alpha
-    "variable heat transfer coefficient";
+  Modelica.SIunits.CoefficientOfHeatTransfer hConv "variable heat transfer coefficient";
 
 protected
   Modelica.SIunits.Temp_C posDiff=noEvent(abs(port_b.T - port_a.T))
@@ -49,21 +48,21 @@ equation
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      alpha = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+      hConv = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
         y1=5,
         y2=0.7,
         x_small=dT_small);
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      alpha = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+      hConv = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
         y1=0.7,
         y2=5,
         x_small=dT_small);
 
     // vertical
     else
-      alpha = 2.5;
+      hConv = 2.5;
     end if;
 
   // ++++++++++++++++Bernd Glueck++++++++++++++++
@@ -75,23 +74,23 @@ equation
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
+      hConv = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
+      hConv = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
 
     // vertical plate
     else
-      alpha = 1.6*(posDiff^0.3);
+      hConv = 1.6*(posDiff^0.3);
     end if;
 
   // ++++++++++++++++alpha_custom++++++++++++++++
   else
-    alpha = alpha_custom;
+    hConv =hConvCustom;
   end if;
 
-  port_a.Q_flow = alpha*A*(port_a.T - port_b.T);
+  port_a.Q_flow =hConv *A*(port_a.T - port_b.T);
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
