@@ -37,7 +37,8 @@ model Wall
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
   replaceable model Window =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
-  constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
@@ -86,7 +87,12 @@ model Wall
     U=if outside then U_door else U_door*2) if withDoor
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
+  BaseLib.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+    A=wall_length*wall_height - clearance,
+    Model=Model,
+    surfaceType=surfaceType,
+    alpha_custom=alpha_custom) if                                                                                                                                                   outside
+    annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
   BaseLib.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=180,
@@ -165,7 +171,8 @@ equation
     connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-42.85,
             -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}));
   end if;
-  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.4,-1.1},{78.4,-1.05},{102,-1.05},{102,0}}, color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,
+          0.3},{78.8,-1.05},{102,-1.05},{102,0}},                                                                                       color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
           -14},{-54,-14},{-54,-13.2},{-45.84,-13.2}}, color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},

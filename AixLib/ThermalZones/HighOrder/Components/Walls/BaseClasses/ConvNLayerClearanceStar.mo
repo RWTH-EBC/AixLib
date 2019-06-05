@@ -1,6 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
+  import AixLib;
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l = 4 "Length" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
@@ -36,13 +37,12 @@ model ConvNLayerClearanceStar
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
   // n Loads
-  Utilities.HeatTransfer.HeatConv_inside HeatConv1(
+  AixLib.Utilities.HeatTransfer.HeatConvInside HeatConv1(
     port_b(T(start=T0)),
     hConvCustom=alpha_constant,
     A=A,
     surfaceOrientation=surfaceOrientation,
-    calcMethod=calcMethod)
-    annotation (Placement(transformation(
+    calcMethod=calcMethod) annotation (Placement(transformation(
         origin={62,0},
         extent={{-10,-10},{10,10}},
         rotation=180)));

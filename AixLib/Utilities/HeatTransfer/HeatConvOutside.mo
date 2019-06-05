@@ -1,5 +1,5 @@
 within AixLib.Utilities.HeatTransfer;
-model HeatConv_outside
+model HeatConvOutside
   "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
   parameter Integer Model = 1 "Model" annotation(Evaluate = true, Dialog(group = "Computational Models", compact = true, descriptionLabel = true), choices(choice = 1
@@ -90,4 +90,4 @@ alt=\"alpha \"/> (<b>alpha)</b> value </li>
           Implemented.</li>
  </ul>
  </html>"));
-end HeatConv_outside;
+end HeatConvOutside;

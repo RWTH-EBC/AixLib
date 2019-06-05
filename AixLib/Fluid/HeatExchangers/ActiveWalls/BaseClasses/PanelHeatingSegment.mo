@@ -1,6 +1,7 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
 model PanelHeatingSegment
   "One segment of the discretized panel heating"
+  import AixLib;
 
 extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
@@ -60,12 +61,12 @@ parameter HeatCapacityPerArea cDown;
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
-  Utilities.HeatTransfer.HeatConv_inside HeatConv(
+  AixLib.Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
     final calcMethod=calcMethodConvection,
     final hConvCustom=convCoeffCustom,
-    surfaceOrientation=if isFloor then 2 else 1)
-    annotation (Placement(transformation(
+    surfaceOrientation=if isFloor then 2 else 1) annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1.77636e-015,74})));
