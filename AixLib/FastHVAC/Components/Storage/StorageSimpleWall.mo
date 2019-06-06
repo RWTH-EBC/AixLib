@@ -64,11 +64,10 @@ public
   parameter Boolean Up_to_down_HC2 = true
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
-  parameter Boolean calculateAlphaInside=true
-    "Use calculated value for inside heat coefficient"
+  parameter Boolean calcHConvIn=true "Use calculated value for inside heat coefficient"
                                                       annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30 "Fix value for heat transfer coefficient inside pipe"
-                                                         annotation(Dialog(enable=not calculateAlphaInside,  tab="Heating Coils and Rod"));
+                                                         annotation(Dialog(enable=not calcHConvIn,           tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                             annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC2=0.02 "Inner diameter of HC2"
@@ -171,7 +170,7 @@ public
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
     pipeRecordHC=data.pipeHC2,
-    calculateHConvIn=calculateAlphaInside,
+    calcHConvIn=calcHConvIn,
     hConvInFix=hConvInFix) if use_heatingCoil2 annotation (Placement(transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,

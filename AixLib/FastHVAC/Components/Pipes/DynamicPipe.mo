@@ -67,12 +67,12 @@ public
 
 final parameter          Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = false));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOutside=8 "Heat transfer coefficient to ambient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOut=8 "Heat transfer coefficient to ambient"
                                                                 annotation (Dialog( enable=withConvection));
  parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
  annotation (Dialog( enable = withRadiation));
-  parameter Boolean calculateHConv=true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coeffiecient inside pipe"     annotation(Dialog(enable=not calculateHConv));
+  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30 "Fix value for heat transfer coeffiecient inside pipe"         annotation(Dialog(enable=not calcHConv));
 
   /* *******************************************************************
       Components
@@ -111,9 +111,7 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
 
   AixLib.Utilities.Interfaces.RadPort star if
                                            withRadiationParam annotation (Placement(transformation(extent={{78,42},{98,62}}), iconTransformation(extent={{78,42},{98,62}})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv(hConv=hConvOutside, A=Modelica.Constants.pi
-        *outerDiameter*length) if withConvection "Convection from pipe wall"
-                                annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv(hConv=hConvOut, A=Modelica.Constants.pi*outerDiameter*length) if withConvection "Convection from pipe wall" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-38,52})));
@@ -129,8 +127,8 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     T_0=T_0,
     nNodes=nNodes,
     length=length,
-    hConvInFix=hConvInsideFix,
-    calculateHConvIn=calculateHConv) annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
+    hConvInFix=hConvInFix,
+    calcHConvIn=calcHConv) annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
    //Connect the heat ports from the pipe to the pipe wall
       for i in 1:nNodes loop

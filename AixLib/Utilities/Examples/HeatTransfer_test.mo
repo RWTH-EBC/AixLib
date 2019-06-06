@@ -9,8 +9,7 @@ model HeatTransfer_test "Test routine for heat transfer models"
     A=16,
     hConvCustom=2,
     surfaceOrientation=2,
-    calcMethod=1)
-    annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
+    calcMethodHConv=1) annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
   AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     Model=1,
     A=16,

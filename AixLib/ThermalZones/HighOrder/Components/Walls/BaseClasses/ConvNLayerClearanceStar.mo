@@ -41,7 +41,7 @@ model ConvNLayerClearanceStar
     hConvCustom=hConv_const,
     A=A,
     surfaceOrientation=surfaceOrientation,
-    calcMethod=calcMethodHConv) annotation (Placement(transformation(
+    calcMethodHConv=calcMethodHConv) annotation (Placement(transformation(
         origin={62,0},
         extent={{-10,-10},{10,10}},
         rotation=180)));

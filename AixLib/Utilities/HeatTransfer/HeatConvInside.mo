@@ -4,7 +4,8 @@ model HeatConvInside "Natural convection computation according to B. Glueck or E
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
-  parameter Integer calcMethod=2 "Calculation method of heat transfer coefficient" annotation (Dialog(
+  parameter Integer calcMethodHConv=2 "Calculation method of heat transfer coefficient"
+                                                                                   annotation (Dialog(
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix C >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
@@ -14,14 +15,14 @@ model HeatConvInside "Natural convection computation according to B. Glueck or E
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
                                          annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 3 then true else false));
+        enable=if calcMethodHConv == 3 then true else false));
 
   parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 1 then true else false));
+        enable=if calcMethodHConv == 1 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
-      Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
+      Dialog(descriptionLabel=true, enable=if calcMethodHConv == 3 then false else true),
       choices(
       choice=1 "vertical",
       choice=2 "horizontal facing up",
@@ -43,7 +44,7 @@ equation
 
   // ++++++++++++++++EN ISO 6946 Appendix C >>Flat Surfaces<<++++++++++++++++
   // upward heat flow: hConv = 5, downward heat flow: hConv = 0.7, horizontal heat flow: hConv = 2.5
-  if calcMethod == 1 then
+  if calcMethodHConv == 1 then
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
@@ -69,7 +70,7 @@ equation
   // upward heat flow: hConv = 2*(posDiff^0.31)          - equation 1.27, page 26
   // downward heat flow: hConv = 0.54*(posDiff^0.31)     - equation 1.28, page 26
   // horizontal heat flow: hConv = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
-  elseif calcMethod == 2 then
+  elseif calcMethodHConv == 2 then
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then

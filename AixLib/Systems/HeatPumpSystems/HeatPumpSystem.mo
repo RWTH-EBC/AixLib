@@ -156,11 +156,9 @@ model HeatPumpSystem
         origin={87,-1})));
 equation
 
-  connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{
-          79.3,0},{28,0},{28,16},{20.2,16},{20.2,16.3333}},
+  connect(constTAmb.y, heatPump.T_amb_con) annotation (Line(points={{79.3,-1},{79.3,0},{28,0},{28,16},{20.2,16},{20.2,16.3333}},
                                                        color={0,0,127}));
-  connect(constTAmb.y, heatPump.T_amb_eva) annotation (Line(points={{79.3,-1},{
-          79.3,0},{28,0},{28,-20.3333},{20.2,-20.3333}},
+  connect(constTAmb.y, heatPump.T_amb_eva) annotation (Line(points={{79.3,-1},{79.3,0},{28,0},{28,-20.3333},{20.2,-20.3333}},
                                                     color={0,0,127}));
   connect(port_a1, port_a1)
     annotation (Line(points={{-100,60},{-100,60}}, color={0,127,255}));
@@ -170,8 +168,7 @@ equation
   connect(hPSystemController.nOut, heatPump.nSet) annotation (Line(points={{-1,93.1},
           {-1,30},{-40,30},{-40,1.66667},{-29.52,1.66667}}, color={0,0,127}));
   connect(hPSystemController.iceFac_out, heatPump.iceFac_in) annotation (Line(
-        points={{54.86,161},{58,161},{58,-2},{36,-2},{36,-54},{-20.72,-54},{
-          -20.72,-26.9333}},
+        points={{54.86,161},{58,161},{58,-2},{36,-2},{36,-54},{-20.72,-54},{-20.72,-26.9333}},
                       color={0,0,127}));
   connect(heatPump.sigBusHP, hPSystemController.sigBusHP) annotation (Line(
       points={{-25.78,-9.15},{-84,-9.15},{-84,115.85},{-50.49,115.85}},

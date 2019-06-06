@@ -103,7 +103,8 @@ public
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
-    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
+    HeatConv1(calcMethodHConv=
+                         2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in

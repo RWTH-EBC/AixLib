@@ -6,8 +6,8 @@ model HeatConvPipeInside
   parameter Modelica.SIunits.Length d_i = 0.02 "inner diameter of pipe";
   parameter Modelica.SIunits.Length d_a = 0.025 "outer diameter of pipe";
   parameter Modelica.SIunits.Area A_sur = 2 "surfuce for heat transfer";
-  parameter Boolean calculateHConv=true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30       annotation(Dialog(enable=not calculateHConv));
+  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30       annotation(Dialog(enable=not calcHConv));
   parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple();
     Modelica.SIunits.ReynoldsNumber Re;
@@ -26,7 +26,7 @@ model HeatConvPipeInside
         rotation=-90,
         origin={-4,108})));
 equation
-  if calculateHConv then
+  if calcHConv then
     v      =        4*m_flow/(Modelica.Constants.pi * d_i^2 * medium.rho);
     Re     =    Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
       v,medium.rho,medium.eta, d_i)
@@ -50,7 +50,7 @@ equation
     Nu_tur=0;
     Nu=0;
     end if;
-  hConv    =if calculateHConv then Nu*medium.lambda/d_i else hConvInFix;
+  hConv    =if calcHConv then Nu*medium.lambda/d_i else hConvInFix;
   port_a.Q_flow =hConv  * A_sur * (port_a.T - port_b.T);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,   extent={{-100,

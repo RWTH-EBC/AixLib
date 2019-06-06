@@ -61,7 +61,7 @@ parameter HeatCapacityPerArea cDown;
         origin={-30,74})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
-    final calcMethod=calcMethodHConv,
+    final calcMethodHConv=calcMethodHConv,
     final hConvCustom=hConvCustom,
     surfaceOrientation=if isFloor then 2 else 1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

@@ -23,7 +23,7 @@ model HeatingCoil
     length=lengthHC,
     nNodes=dis_HC,
     hConvInFix=hConvInFix,
-    calculateHConvIn=true) annotation (Placement(transformation(
+    calcHConvIn=true) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-2,0})));
@@ -49,9 +49,9 @@ model HeatingCoil
     annotation (Placement(transformation(extent={{82,-10},{102,10}})));
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
-  parameter Boolean calculateHConvIn=true "Use calculated value for inside heat coefficient";
+  parameter Boolean calcHConvIn=true "Use calculated value for inside heat coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30 "Fix value for heat transfer coefficient inside pipe"
-                                                         annotation(Dialog(enable=not calculateHConvIn));
+                                                         annotation(Dialog(enable=not calcHConvIn));
 equation
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-2,82},{-2,104}},

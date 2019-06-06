@@ -227,8 +227,8 @@ model BufferStorage
     each D1=data.dTank,
     each sWall=data.sWall,
     each sIns=data.sIns,
-    each hConvInside=hConvIn,
-    each hConvOutside=hConvOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
+    each hConvIn=hConvIn,
+    each hConvOut=hConvOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
     lambdaWall=data.lambdaWall,
     lambdaIns=data.lambdaIns,
