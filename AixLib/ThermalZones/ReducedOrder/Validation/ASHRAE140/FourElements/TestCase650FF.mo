@@ -36,13 +36,13 @@ model TestCase650FF "Test case 650 free float"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
   AixLib.ThermalZones.ReducedOrder.RC.FourElements thermalZoneFourElements(
     VAir=129.60000000000002,
-    alphaWin=3.16,
+    hConvWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
-    alphaRad=5.129999999999999,
+    hRad=5.129999999999999,
     AInt=48.0,
-    alphaInt=4.130000000000001,
+    hConvInt=4.130000000000001,
     nInt=1,
     RInt={0.00123677311011},
     CInt={935138.308506},
@@ -53,7 +53,7 @@ model TestCase650FF "Test case 650 free float"
     nPorts=2,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     AFloor=0,
-    alphaFloor=0,
+    hConvFloor=0,
     nFloor=1,
     RFloor={0.1},
     RFloorRem=0.1,
@@ -61,33 +61,29 @@ model TestCase650FF "Test case 650 free float"
     roofRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=4,
     AExt={9.600000000000001,16.200000000000003,21.6,16.200000000000003},
-    alphaExt=3.160000000000001,
+    hConvExt=3.160000000000001,
     RExt={0.000401763119801},
     RExtRem=0.0277316600608,
     CExt={620991.387295},
     ARoof=48.0,
-    alphaRoof=1.0,
+    hConvRoof=1.0,
     nRoof=1,
     RRoof={0.000550791436374},
     CRoof={381586.716241},
     AWin={12.0,0.0,0.0,0.0},
     ATransparent={12.0,0.0,0.0,0.0},
-    RRoofRem=0.061807839516) "Thermal zone"
-    annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
-    eqAirTemp(
+    RRoofRem=0.061807839516) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     wfGro=0,
     withLongwave=true,
     aExt=0.6,
-    alphaWallOut=24.670000000000005,
-    alphaRad=4.63,
-    alphaWinOut=16.37,
+    hConvWallOut=24.670000000000005,
+    hRad=4.63,
+    hConvWinOut=16.37,
     n=4,
-    wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,
-    0.2547169811320755},
+    wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,0.2547169811320755},
     wfWin={1.0,0.0,0.0,0.0},
-    TGro=286.15) "Computes equivalent air temperature"
-    annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
+    TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[4]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
@@ -112,20 +108,10 @@ model TestCase650FF "Test case 650 free float"
     annotation (Placement(
     transformation(extent={{-100,6},{-66,38}}),  iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=29.3*63.60000000000001)
-    "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(
-    transformation(
-    extent={{-4,-4},{4,4}},
-    rotation=90,
-    origin={30,0})));
-  Modelica.Blocks.Sources.Constant alphaWin(k=21.0*12.0)
-    "Outdoor coefficient of heat transfer for windows"
-    annotation (Placement(
-    transformation(
-    extent={{4,-4},{-4,4}},
-    rotation=90,
-    origin={32,54})));
+  Modelica.Blocks.Sources.Constant hConvWall(k=29.3*63.60000000000001) "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
+  Modelica.Blocks.Sources.Constant hConvWin(k=21.0*12.0) "Outdoor coefficient of heat transfer for windows"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
     "Radiative heat flow of internal gains"
     annotation (Placement(transformation(extent={{68,-34},{88,-14}})));
@@ -195,13 +181,12 @@ model TestCase650FF "Test case 650 free float"
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
     aExt=0.6,
     wfGro=0,
-    alphaWallOut=24.670000000000005,
-    alphaRad=4.63,
+    hConvWallOut=24.670000000000005,
+    hRad=4.63,
     n=1,
     wfWall={1.0},
     wfWin={0},
-    TGro=285.15) "Computes equivalent air temperature for roof"
-    annotation (Placement(transformation(extent={{30,110},{50,130}})));
+    TGro=285.15) "Computes equivalent air temperature for roof" annotation (Placement(transformation(extent={{30,110},{50,130}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperatureRoof
     "Prescribed temperature for roof outdoor surface temperature"
@@ -211,10 +196,8 @@ model TestCase650FF "Test case 650 free float"
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={67,67})));
-  Modelica.Blocks.Sources.Constant alphaRoof(k=29.3*48)
-    "Outdoor coefficient of heat transfer for roof"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}},rotation=0,
-    origin={86,67})));
+  Modelica.Blocks.Sources.Constant hConvRoof(k=29.3*48) "Outdoor coefficient of heat transfer for roof"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=0)));
   Modelica.Blocks.Sources.Constant const1[1](each k=0)
     "Sets sunblind signal to zero (open)" annotation (Placement(transformation(
         extent={{3,-3},{-3,3}},
@@ -332,10 +315,10 @@ equation
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,17},{24,17},{24,16},{20,16}},
                                                            color={191,0,0}));
-  connect(alphaWall.y, thermalConductorWall.Gc)
-    annotation (Line(points={{30,4.4},{30,12},{31,12}},   color={0,0,127}));
-  connect(alphaWin.y, thermalConductorWin.Gc)
-    annotation (Line(points={{32,49.6},{32,42},{33,42}}, color={0,0,127}));
+  connect(hConvWall.y, thermalConductorWall.Gc)
+    annotation (Line(points={{0,4.4},{0,12},{31,12}},     color={0,0,127}));
+  connect(hConvWin.y, thermalConductorWin.Gc)
+    annotation (Line(points={{0,-4.4},{0,42},{33,42}},   color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
     annotation (Line(
     points={{-83,22},{-58,22},{-58,18},{-32,18},{-32,12},{-26,12}},
@@ -359,12 +342,12 @@ equation
   connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-24},{37,-24}}, color={0,0,127}));
   connect(gain.y,ventilationIn. m_flow_in)
-    annotation (Line(points={{-65.3,-30},{-54,-30}}, color={0,0,127}));
+    annotation (Line(points={{-65.3,-30},{-56,-30}}, color={0,0,127}));
   connect(gain.y,gain1. u)
     annotation (Line(points={{-65.3,-30},{-64,-30},{-64,-46},{-90,-46},{-90,-62},
           {-83.4,-62}},                    color={0,0,127}));
   connect(gain1.y,ventilationOut. m_flow_in)
-    annotation (Line(points={{-67.3,-62},{-54,-62}}, color={0,0,127}));
+    annotation (Line(points={{-67.3,-62},{-56,-62}}, color={0,0,127}));
   connect(weaBus.TDryBul, ventilationIn.T_in) annotation (Line(
       points={{-83,22},{-83,-14},{-60,-14},{-60,-34},{-56,-34}},
       color={255,204,51},
@@ -399,8 +382,9 @@ equation
                                                         color={0,0,127}));
   connect(prescribedTemperatureRoof.port,thermalConductorRoof. fluid)
     annotation (Line(points={{67,78},{67,78},{67,72}}, color={191,0,0}));
-  connect(thermalConductorRoof.Gc,alphaRoof. y)
-    annotation (Line(points={{72,67},{78,67},{81.6,67}},color={0,0,127}));
+  connect(thermalConductorRoof.Gc,hConvRoof.y)
+    annotation (Line(points={{72,67},{-4.4,67},{-4.4,0}},
+                                                        color={0,0,127}));
   connect(eqAirTempVDI.TEqAir,prescribedTemperatureRoof. T) annotation (Line(
         points={{51,120},{56,120},{56,98},{67,98},{67,91.2}},
                                                             color={0,0,127}));

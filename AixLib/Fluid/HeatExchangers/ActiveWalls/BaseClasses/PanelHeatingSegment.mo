@@ -22,20 +22,18 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
 parameter HeatCapacityPerArea cTop;
 parameter HeatCapacityPerArea cDown;
 
-  parameter Integer calcMethodConvection = 1
-    "Calculation Method for convection at surface"
-    annotation (Dialog(group = "Heat convection",
+  parameter Integer calcMethodHConv=1 "Calculation Method for convection at surface"
+    annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
         choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
         choice=2 "By Bernd Glueck",
-        choice=3 "Constant alpha",
+        choice=3 "Constant hConv",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
-    "Constant heat transfer coefficient"
-    annotation (Dialog(group = "Heat convection",
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+    annotation (Dialog(group="Heat convection",
     descriptionLabel=true,
-        enable=if calcMethodConvection == 3 then true else false));
+        enable=if calcMethodHConv == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume vol(
     redeclare package Medium = Medium,
@@ -63,10 +61,9 @@ parameter HeatCapacityPerArea cDown;
         origin={-30,74})));
   AixLib.Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
-    final calcMethod=calcMethodConvection,
-    final hConvCustom=convCoeffCustom,
-    surfaceOrientation=if isFloor then 2 else 1) annotation (Placement(
-        transformation(
+    final calcMethod=calcMethodHConv,
+    final hConvCustom=hConvCustom,
+    surfaceOrientation=if isFloor then 2 else 1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1.77636e-015,74})));

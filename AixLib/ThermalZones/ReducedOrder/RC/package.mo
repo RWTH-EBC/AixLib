@@ -110,15 +110,15 @@ package RC "Package with reduced order thermal zones based on VDI 6007 Part 1"
   the models use a linearized approach
   </p>
   <p align=\"center\" style=\"font-style:italic;\">
-  Q = &alpha; <sub>rad</sub> (T<sub>1</sub> - T<sub>2</sub>),
+  Q = h <sub>rad</sub> (T<sub>1</sub> - T<sub>2</sub>),
   </p>
   <p>
   where
   the radiative heat transfer coefficient
-  <i>&alpha;<sub>rad</sub></i> is often set to
+  <i>h<sub>rad</sub></i> is often set to
   </p>
   <p align=\"center\" style=\"font-style:italic;\">
-  &alpha;<sub>rad</sub> = 4 &epsilon; &sigma; T<sub>m<sup>3</sup></sub>
+  h<sub>rad</sub> = 4 &epsilon; &sigma; T<sub>m<sup>3</sup></sub>
   </p>
   <p>
   where <i>T<sub>m</sub></i>

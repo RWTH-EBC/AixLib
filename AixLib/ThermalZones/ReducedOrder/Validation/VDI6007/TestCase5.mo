@@ -4,14 +4,14 @@ model TestCase5 "VDI 6007 Test Case 5 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    alphaExt=2.7,
-    alphaWin=2.7,
+    hConvExt=2.7,
+    hConvWin=2.7,
     gWin=1,
     nExt=1,
-    alphaRad=5,
+    hRad=5,
     nInt=1,
     AInt=75.5,
-    alphaInt=2.24,
+    hConvInt=2.24,
     RWin=0.00000001,
     RExt={0.00436791293674},
     RExtRem=0.03895919557,
@@ -26,9 +26,7 @@ model TestCase5 "VDI 6007 Test Case 5 model"
     AExt={10.5},
     extWallRC(thermCapExt(each T(fixed=true))),
     T_start=295.15,
-    intWallRC(thermCapInt(each T(fixed=true))))
-    "Thermal zone"
-    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    intWallRC(thermCapInt(each T(fixed=true)))) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));

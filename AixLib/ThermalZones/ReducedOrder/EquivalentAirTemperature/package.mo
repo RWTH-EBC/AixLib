@@ -32,8 +32,8 @@ temperature and dry bulb temperature.</p>
 <p align=\"center\" style=\"font-style:italic;\">
 &Delta;T<sub>EqLW</sub> =
 (T<sub>BlaSky</sub>-T<sub>DryBul</sub>)
-&alpha;<sub>Rad</sub>/
-(&alpha;<sub>Rad</sub>+&alpha;<sub>Ext</sub>).
+h<sub>Rad</sub>/
+(h<sub>Rad</sub>+h<sub>Ext</sub>).
 </p>
 <p>
 The Guideline VDI 6007 Part 1 considers in
@@ -60,7 +60,7 @@ as
 </p>
 <p align=\"center\"  style=\"font-style:italic;\">
 &Delta;T<sub>EqSW</sub> = H<sub>Sol
-</sub>a<sub>Ext</sub>/(&alpha;<sub>Rad</sub>+&alpha;<sub>Ext</sub>).
+</sub>a<sub>Ext</sub>/(h<sub>Rad</sub>+h<sub>Ext</sub>).
 </p>
 <p>
 With the equations above, one equivalent air temperature per orientation

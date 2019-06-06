@@ -5,8 +5,7 @@ model ThreeElements "Thermal Zone with three elements for exterior walls,
 
   parameter Modelica.SIunits.Area AFloor "Area of floor plate"
     annotation(Dialog(group="Floor plate"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaFloor
-    "Convective coefficient of heat transfer of floor plate (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvFloor "Convective coefficient of heat transfer of floor plate (indoor)"
     annotation(Dialog(group="Floor plate"));
   parameter Integer nFloor(min = 1) "Number of RC-elements of floor plate"
     annotation(Dialog(group="Floor plate"));
@@ -53,35 +52,17 @@ protected
     extent={{-8,8},{8,-8}},
     rotation=90,
     origin={-12,-116})));
-  Modelica.Blocks.Sources.Constant alphaFloorConst(final k=AFloor*alphaFloor) if
-    AFloor > 0 "Coefficient of convective heat transfer for floor"
-    annotation (Placement(transformation(
-    extent={{-5,-5},{5,5}},
-    rotation=180,
-    origin={12,-116})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallFloor(
-   final G=min(ATotExt, AFloor)*alphaRad) if  ATotExt > 0 and AFloor > 0
-    "Resistor between exterior walls and floor"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    rotation=-90,
-    origin={-144,-111})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallFloor(
-   final G=min(AFloor, AInt)*alphaRad) if  AInt > 0 and AFloor > 0
-    "Resistor between interior walls and floor"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    origin={204,-106})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resFloorWin(
-   final G=min(ATotWin, AFloor)*alphaRad) if  ATotWin > 0 and AFloor > 0
-    "Resistor between floor plate and windows"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    rotation=-90,
-    origin={-80,-110})));
+  Modelica.Blocks.Sources.Constant hConvFloor_const(final k=AFloor*hConvFloor) "Coefficient of convective heat transfer for floor"
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}}, rotation=180)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallFloor(final G=min(ATotExt, AFloor)*hRad) if ATotExt > 0 and AFloor > 0 "Resistor between exterior walls and floor" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-144,-111})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallFloor(final G=min(AFloor, AInt)*hRad) if AInt > 0 and AFloor > 0 "Resistor between interior walls and floor" annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={204,-106})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resFloorWin(final G=min(ATotWin, AFloor)*hRad) if ATotWin > 0 and AFloor > 0 "Resistor between floor plate and windows" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-80,-110})));
 
 equation
   connect(floorRC.port_a, convFloor.solid)
@@ -146,9 +127,7 @@ equation
   connect(resExtWallFloor.port_a, convExtWall.solid)
     annotation (Line(
     points={{-144,-101},{-144,-40},{-114,-40}}, color={191,0,0}));
-  connect(alphaFloorConst.y, convFloor.Gc)
-    annotation (Line(points={{6.5,-116},{6,-116},{-4,-116}},
-    color={0,0,127}));
+  connect(hConvFloor_const.y, convFloor.Gc) annotation (Line(points={{-5.5,0},{-4,0},{-4,-116}}, color={0,0,127}));
   connect(convFloor.fluid, senTAir.port)
     annotation (Line(points={{-12,-108},{-12,-40},{66,-40},{66,0},{80,0}},
     color={191,0,0}));

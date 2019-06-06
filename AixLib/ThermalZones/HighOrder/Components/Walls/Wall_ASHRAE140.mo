@@ -28,10 +28,10 @@ model Wall_ASHRAE140
     "Choose the model for calculation of heat convection at outside surface"
     annotation(Dialog(tab = "Surface Parameters",  group = "Outside surface", enable = outside, compact = true), choices(choice=1
         "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals", choice = 3 "Custom alpha",radioButtons =  true));
+        "ASHRAE Fundamentals", choice = 3 "Custom hConv",radioButtons =  true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom=25
-    "Custom alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab="Surface Parameters", group = "Outside surface", enable= Model == 3 and outside));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25 "Custom hConv for convection (just for manual selection, not recommended)"
+                                                                               annotation(Dialog(tab="Surface Parameters", group="Outside surface",   enable=Model == 3 and outside));
     parameter
     AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     surfaceType =    AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
@@ -139,8 +139,7 @@ public
     A=wall_length*wall_height - clearance,
     Model=Model,
     surfaceType=surfaceType,
-    alpha_custom=alpha_custom) if            outside
-    annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+    hConvCustom=hConvCustom) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
 
   Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
@@ -301,7 +300,7 @@ end if;
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
  connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
-  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.4,-1.1},{78.4,-1.05},{102,-1.05},{102,0}}, color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
   connect(solarRadWin, solarDistrFraction.u) annotation (Line(
       points={{101,80},{69.2,80}},
       color={0,0,127}));

@@ -1,6 +1,6 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvInside "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
-  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient alpha_custom
+  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient hConvCustom
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
@@ -8,7 +8,7 @@ model HeatConvInside "Natural convection computation according to B. Glueck or E
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant alpha",
+      choice=3 "Constant hConv",
       radioButtons=true),
       Evaluate=true);
 
@@ -42,7 +42,7 @@ equation
   */
 
   // ++++++++++++++++EN ISO 6946 Appendix A >>Flat Surfaces<<++++++++++++++++
-  // upward heat flow: alpha = 5, downward heat flow: alpha = 0.7, horizontal heat flow: alpha = 2.5
+  // upward heat flow: hConv = 5, downward heat flow: hConv = 0.7, horizontal heat flow: hConv = 2.5
   if calcMethod == 1 then
 
     // floor (horizontal facing up)
@@ -66,9 +66,9 @@ equation
 
   // ++++++++++++++++Bernd Glueck++++++++++++++++
   // (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
-  // upward heat flow: alpha = 2*(posDiff^0.31)          - equation 1.27, page 26
-  // downward heat flow: alpha = 0.54*(posDiff^0.31)     - equation 1.28, page 26
-  // horizontal heat flow: alpha = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
+  // upward heat flow: hConv = 2*(posDiff^0.31)          - equation 1.27, page 26
+  // downward heat flow: hConv = 0.54*(posDiff^0.31)     - equation 1.28, page 26
+  // horizontal heat flow: hConv = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
   elseif calcMethod == 2 then
 
     // floor (horizontal facing up)
@@ -84,7 +84,7 @@ equation
       hConv = 1.6*(posDiff^0.3);
     end if;
 
-  // ++++++++++++++++alpha_custom++++++++++++++++
+  // ++++++++++++++++hConvCustom++++++++++++++++
   else
     hConv =hConvCustom;
   end if;
@@ -293,7 +293,7 @@ equation
 <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>
 Algorithm for HeatConv_inside is now selectable via parameters</li>
 <li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>
-Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
+Added EN ISO 6946 equations and corrected usage of constant hConv_custom </li>
 <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>
 Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
 <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>

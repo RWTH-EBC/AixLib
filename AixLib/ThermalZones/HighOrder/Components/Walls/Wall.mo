@@ -19,19 +19,18 @@ model Wall
     "Choose the model for calculation of heat convection at outside surface"                           annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside, compact = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom alpha",                                                                                                    radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 25
-    "Custom alpha for convection (just for manual selection, not recommended)"                                                                      annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 3 and outside));
+        "Custom hConv",                                                                                                    radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25 "Custom hConv for convection (just for manual selection, not recommended)"    annotation(Dialog(tab="Surface Parameters",   group="Outside surface",   enable=Model == 3 and outside));
  DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type of outside wall"                                                                                                     annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 2 and outside), choicesAllMatching = true);
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1
         "vertical wall",                                                                                                    choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
-  parameter Integer calculationMethod = 1
-    "Choose the model for calculation of heat convection at inside surface" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+  parameter Integer calcMethodHConv=1 "Choose the model for calculation of heat convection at inside surface"
+                                                                            annotation(Dialog(tab="Surface Parameters",   group="Inside surface",   compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant alpha",radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_constant = 2.5
-    "Constant alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", enable = calculationMethod == 3));
+      choice=3 "Constant hConv",radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2.5 "Constant hConv for convection (just for manual selection, not recommended)"
+                                                                                 annotation(Dialog(tab="Surface Parameters",   group="Inside surface",   enable=calcMethodHConv == 3));
   // window parameters
   parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
@@ -67,7 +66,17 @@ model Wall
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Advanced Parameters"));
   // COMPONENT PART
-  BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation, calcMethod = calculationMethod, alpha_constant = alpha_constant) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
+  BaseClasses.ConvNLayerClearanceStar Wall(
+    h=wall_height,
+    l=wall_length,
+    T0=T0,
+    clearance=clearance,
+    selectable=true,
+    eps=WallType.eps,
+    wallType=WallType,
+    surfaceOrientation=ISOrientation,
+    calcMethodHConv=calcMethodHConv,
+    hConv_const=hConv_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
   BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -90,8 +99,7 @@ model Wall
     A=wall_length*wall_height - clearance,
     Model=Model,
     surfaceType=surfaceType,
-    alpha_custom=alpha_custom) if                                                                                                                                                   outside
-    annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+    hConvCustom=hConvCustom) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
   BaseLib.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=180,

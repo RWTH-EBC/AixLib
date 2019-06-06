@@ -6,7 +6,7 @@ model HeatConvRadiator
   parameter Real s_eff "Fraction of radiation power";
   parameter Real dT_nom "Nominal temperature difference";
   parameter Real kA=(1-s_eff)*NominalPower/dT_nom^n;
-  Real alpha_t;
+  Real hConv_t;
   Modelica.SIunits.Conversions.NonSIunits.Temperature_degC posDiff=
     noEvent(abs(port_b.T - port_a.T))
     "Positive temperature difference";
@@ -16,9 +16,9 @@ model HeatConvRadiator
     annotation (Placement(transformation(extent={{84,-10},{104,10}})));
 
 equation
-  alpha_t = if noEvent(posDiff <= 5e-12) then 0 else (kA*noEvent(posDiff^(n-1)));
+  hConv_t = if noEvent(posDiff <= 5e-12) then 0 else (kA*noEvent(posDiff^(n-1)));
   port_a.Q_flow + port_b.Q_flow = 0;
-  port_a.Q_flow = alpha_t*(port_a.T - port_b.T);
+  port_a.Q_flow =hConv_t *(port_a.T - port_b.T);
   annotation (Diagram(graphics),
                        Icon(graphics={
         Rectangle(

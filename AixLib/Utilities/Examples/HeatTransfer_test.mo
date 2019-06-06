@@ -2,7 +2,7 @@ within AixLib.Utilities.Examples;
 model HeatTransfer_test "Test routine for heat transfer models"
   import AixLib;
   extends Modelica.Icons.Example;
-  HeatTransfer.HeatConv heatConv(alpha = 2, A = 16) annotation(Placement(transformation(extent = {{-10, 38}, {10, 58}})));
+  HeatTransfer.HeatConv heatConv(hConv = 2, A = 16) annotation(Placement(transformation(extent = {{-10, 38}, {10, 58}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor load(C = 1000 * 1600 * 16 * 0.2) annotation(Placement(transformation(extent = {{-10, 20}, {10, 40}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond(G = 16 * 2.4 / 0.1) annotation(Placement(transformation(extent = {{-10, 2}, {10, 22}})));
   AixLib.Utilities.HeatTransfer.HeatConvInside heatConv_inside(
@@ -14,9 +14,8 @@ model HeatTransfer_test "Test routine for heat transfer models"
   AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     Model=1,
     A=16,
-    alpha_custom=25,
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster())
-    annotation (Placement(transformation(extent={{-10,-38},{10,-18}})));
+    hConvCustom=25,
+    surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()) annotation (Placement(transformation(extent={{-10,-38},{10,-18}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTrans(G = 16 * 1.5) annotation(Placement(transformation(extent = {{-10, -56}, {10, -36}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempOutside annotation(Placement(transformation(extent = {{-80, 0}, {-60, 20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempInside annotation(Placement(transformation(extent = {{80, 0}, {60, 20}})));

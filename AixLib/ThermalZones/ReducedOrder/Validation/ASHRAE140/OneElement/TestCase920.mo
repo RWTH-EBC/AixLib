@@ -36,39 +36,34 @@ model TestCase920 "Test case 920"
   AixLib.ThermalZones.ReducedOrder.RC.OneElement thermalZoneOneElement(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
-    alphaExt=2.2309677419354843,
-    alphaWin=3.16,
+    hConvExt=2.2309677419354843,
+    hConvWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
     RExt={0.0009058311925},
     CExt={9152069.64734},
-    alphaRad=5.13,
+    hRad=5.13,
     RWin=0.0133333333333,
     RExtRem=0.0186378908278,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=5,
-    AWin={12.0, 0.0, 0.0, 0.0, 0.0},
-    ATransparent={12.0, 0.0, 0.0, 0.0, 0.0},
+    AWin={12.0,0.0,0.0,0.0,0.0},
+    ATransparent={12.0,0.0,0.0,0.0,0.0},
     nPorts=2,
-    AExt={21.6,10.200000000000003,21.6,48.0,10.200000000000003})
-    "Thermal zone"
-    annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
-    eqAirTemp(
+    AExt={21.6,10.200000000000003,21.6,48.0,10.200000000000003}) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=5,
     wfGro=0,
     withLongwave=true,
     aExt=0.6,
-    alphaWallOut=24.670000000000005,
-    alphaRad=4.63,
-    alphaWinOut=16.37,
+    hConvWallOut=24.670000000000005,
+    hRad=4.63,
+    hConvWinOut=16.37,
     wfWin={0.0,0.5,0.0,0.0,0.5},
-    wfWall={0.23184720211891743,0.10948340100059993,0.23184720211891743,
-        0.3173387937609652,0.10948340100059993},
-    TGro=286.15) "Computes equivalent air temperature"
-    annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
+    wfWall={0.23184720211891743,0.10948340100059993,0.23184720211891743,0.3173387937609652,0.10948340100059993},
+    TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));

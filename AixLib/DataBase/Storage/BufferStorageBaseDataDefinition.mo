@@ -19,7 +19,7 @@ record BufferStorageBaseDataDefinition
     "thermal conductivity of storage wall";
   parameter Modelica.SIunits.ThermalConductivity lambdaIns
     "thermal conductivity of storage insulation";
-  //parameter SI.CoefficientOfHeatTransfer alpha
+  //parameter SI.CoefficientOfHeatTransfer hConv
     //"Coefficient of heat transfer air <-> insulation of tank";
   parameter SI.Length hTS1 "Height of lower temperature sensor";
   parameter SI.Length hTS2 "Height of upper temperature sensor";

@@ -11,10 +11,8 @@ partial model PartialVDI6007
     "Weight factor of the ground (0 if not considered)";
   parameter Modelica.SIunits.Temperature TGro
     "Temperature of the ground in contact with floor plate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
-    "Exterior walls convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad
-    "Coefficient of heat transfer for linearized radiation";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRad "Coefficient of heat transfer for linearized radiation";
   parameter Boolean withLongwave=true
     "Set to true to include longwave radiation exchange"
     annotation(choices(checkBox = true));
@@ -70,8 +68,8 @@ initial equation
    irrelevant.", level=AssertionLevel.warning);
 
 equation
-  delTEqLW=(TBlaSky-TDryBul)*alphaRad/(alphaRad+alphaWallOut);
-  delTEqSW=HSol*aExt/(alphaRad+alphaWallOut);
+  delTEqLW=(TBlaSky - TDryBul)*hRad/(hRad + hConvWallOut);
+  delTEqSW=HSol*aExt/(hRad + hConvWallOut);
   if withLongwave then
     TEqWin=TDryBul.+delTEqLWWin*(ones(n)-sunblind);
     TEqWall=TDryBul.+delTEqLW.+delTEqSW;

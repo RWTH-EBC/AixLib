@@ -38,29 +38,29 @@ model TestCase950 "Test case 950"
   AixLib.ThermalZones.ReducedOrder.RC.FourElements thermalZoneFourElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
-    alphaExt=3.160000000000001,
-    alphaWin=3.16,
+    hConvExt=3.160000000000001,
+    hConvWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
     RExt={0.000985315078012},
     CExt={8775985.69078},
-    alphaRad=5.13,
+    hRad=5.13,
     AInt=48.0,
-    alphaInt=4.130000000000001,
+    hConvInt=4.130000000000001,
     nInt=1,
     RInt={0.000491103488785},
     CInt={5373300.22817},
     RWin=0.0133333333333,
     RExtRem=0.0274795299795,
     AFloor=48.0,
-    alphaFloor=4.130000000000001,
+    hConvFloor=4.130000000000001,
     nFloor=1,
     RFloor={0.17413196439},
     RFloorRem=0.348263868943,
     CFloor={0.0902868158636},
     ARoof=48.0,
-    alphaRoof=1.0,
+    hConvRoof=1.0,
     nRoof=1,
     RRoof={0.000550791436374},
     RRoofRem=0.061807839516,
@@ -71,28 +71,21 @@ model TestCase950 "Test case 950"
     floorRC(thermCapExt(each der_T(fixed=true))),
     roofRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=4,
-    AWin={12.0, 0.0, 0.0, 0.0},
-    ATransparent={12.0, 0.0, 0.0, 0.0},
+    AWin={12.0,0.0,0.0,0.0},
+    ATransparent={12.0,0.0,0.0,0.0},
     nPorts=2,
-    AExt={9.600000000000001, 16.200000000000003, 21.6, 16.200000000000003})
-    "Thermal zone"
-    annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
-    eqAirTemp(
+    AExt={9.600000000000001,16.200000000000003,21.6,16.200000000000003}) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     wfGro=0,
     withLongwave=true,
     aExt=0.6,
-    alphaWallOut=24.670000000000005,
-    alphaRad=4.63,
-    alphaWinOut=16.37,
+    hConvWallOut=24.670000000000005,
+    hRad=4.63,
+    hConvWinOut=16.37,
     n=4,
-    wfWall={0.15094339622641512,
-            0.25471698113207547,
-            0.33962264150943394,
-            0.25471698113207547},
+    wfWall={0.15094339622641512,0.25471698113207547,0.33962264150943394,0.25471698113207547},
     wfWin={1.0,0.0,0.0,0.0},
-    TGro=286.15) "Computes equivalent air temperature"
-    annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
+    TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[4]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
@@ -200,13 +193,12 @@ model TestCase950 "Test case 950"
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
     aExt=0.6,
     wfGro=0,
-    alphaWallOut=24.670000000000005,
-    alphaRad=4.63,
+    hConvWallOut=24.670000000000005,
+    hRad=4.63,
     n=1,
     wfWall={1.0},
     wfWin={0},
-    TGro=285.15) "Computes equivalent air temperature for roof"
-    annotation (Placement(transformation(extent={{30,110},{50,130}})));
+    TGro=285.15) "Computes equivalent air temperature for roof" annotation (Placement(transformation(extent={{30,110},{50,130}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperatureRoof
     "Prescribed temperature for roof outdoor surface temperature"

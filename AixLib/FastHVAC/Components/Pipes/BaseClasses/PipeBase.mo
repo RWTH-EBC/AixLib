@@ -10,8 +10,8 @@ model PipeBase
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe"  annotation(Dialog(enable = not calculateAlpha));
-    parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30 "Fix value for heat transfer coeffiecient inside pipe"          annotation(Dialog(enable=not calculateHConvIn));
+  parameter Boolean calculateHConvIn=true "Use calculated value for inside heat coefficient";
     final parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
 
     parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
@@ -48,14 +48,13 @@ model PipeBase
     annotation (Placement(transformation(extent={{-18,58},{22,66}}),
         iconTransformation(extent={{-44,40},{42,58}})));
   Utilities.HeatTransfer.HeatConvPipeInside heatConvPipeInside[nNodes](
-                                 each alphaInsideFix=alphaInsideFix,
+    each hConvInFix=hConvInFix,
     d_i=fill(parameterPipe.d_i, nNodes),
     length=fill(length, nNodes),
     d_a=fill(parameterPipe.d_o, nNodes),
     A_sur=fill(parameterPipe.d_o*Modelica.Constants.pi*length/nNodes, nNodes),
     medium=fill(medium, nNodes),
-    each calculateAlpha=calculateAlpha)
-    annotation (Placement(transformation(
+    each calculateHConv=calculateHConvIn) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,38})));
