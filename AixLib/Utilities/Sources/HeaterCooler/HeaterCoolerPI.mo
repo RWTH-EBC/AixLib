@@ -40,7 +40,7 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
         origin={-70,-72})));
 equation
   if staOrDyn then
-    connect(booleanExpressionHeater.y, pITempThreshold.onOff) annotation (Line(
+    connect(booleanExpressionHeater.y, pITempHeat.onOff) annotation (Line(
         points={{-32.05,22},{-24,22},{-24,15},{-19,15}},
         color={255,0,255},
         pattern=LinePattern.Dash));
@@ -48,7 +48,7 @@ equation
           -22},{-24,-22},{-24,-15},{-19,-15}}, color={255,0,255},
         pattern=LinePattern.Dash));
   else
-    connect(heaterActive, pITempThreshold.onOff) annotation (Line(
+    connect(heaterActive, pITempHeat.onOff) annotation (Line(
         points={{-100,14},{-60,14},{-60,15},{-19,15}},
         color={255,0,255},
         pattern=LinePattern.Dash));
@@ -56,7 +56,7 @@ equation
           -15},{-24,-14},{-100,-14}}, color={255,0,255},
         pattern=LinePattern.Dash));
   end if;
-  connect(setPointHeat, pITempThreshold.setPoint)
+  connect(setPointHeat, pITempHeat.setPoint)
     annotation (Line(points={{-100,40},{-18,40},{-18,29}}, color={0,0,127}));
   connect(setPointCool, pITempCool.setPoint) annotation (Line(points={{-100,-40},
           {-58,-40},{-18,-40},{-18,-29}}, color={0,0,127}));

@@ -133,7 +133,8 @@ model MultizoneEquipped
   Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
     final zoneParam=zoneParam,
     each recOrSep=true,
-    each staOrDyn=true) if ASurTot > 0 or VAir > 0
+    each staOrDyn=false) if
+                           ASurTot > 0 or VAir > 0
     "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
   AHUMod AirHandlingUnit(

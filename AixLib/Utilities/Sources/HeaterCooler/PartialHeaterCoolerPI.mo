@@ -30,14 +30,14 @@ partial model PartialHeaterCoolerPI
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
-  Controls.Continuous.PITemp
-                 pITempThreshold(
+  Controls.Continuous.PITemp pITempHeat(
     rangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.hHeat,
     l=if not recOrSep then l_heater else zoneParam.lHeat,
     KR=if not recOrSep then KR_heater else zoneParam.KRHeat,
     TN=if not recOrSep then TN_heater else zoneParam.TNHeat)
-    "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+    "PI control for heater" annotation (Placement(transformation(extent={{-20,
+            10},{0,30}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower(
    final quantity="HeatFlowRate",
    final unit="W") "Power for heating"
@@ -53,7 +53,7 @@ equation
         points={{6,12},{2,12},{2,-40},{90,-40}},
         color={191,0,0},
         smooth=Smooth.None));
-  connect(pITempThreshold.heatPort, heatCoolRoom) annotation (Line(
+  connect(pITempHeat.heatPort, heatCoolRoom) annotation (Line(
       points={{-16,11},{-16,-40},{90,-40}},
       color={191,0,0},
       smooth=Smooth.None));
@@ -69,7 +69,7 @@ equation
       points={{-16,-11},{-16,-40},{90,-40}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(Heating.Q_flow, pITempThreshold.y)
+  connect(Heating.Q_flow, pITempHeat.y)
     annotation (Line(points={{26,12},{26,20},{-1,20}}, color={0,0,127}));
   connect(Heating.Q_flow,heatingPower)
     annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));

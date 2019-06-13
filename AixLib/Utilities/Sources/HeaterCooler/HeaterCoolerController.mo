@@ -3,7 +3,7 @@ model HeaterCoolerController
 
   parameter Modelica.SIunits.Temperature THeatingThreshold=273.15 + 15
     "Temperature below heating is applied";
-  parameter Modelica.SIunits.Temperature TCoolingThreshold=273.15 + 26
+  parameter Modelica.SIunits.Temperature TCoolingThreshold=273.15 + 23
     "Temperature above heating is applied";
   parameter Integer numZones(min=1) = 1 "Number of zones";
   BoundaryConditions.WeatherData.Bus weaBus
