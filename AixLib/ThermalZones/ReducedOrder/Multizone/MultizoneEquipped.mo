@@ -157,7 +157,9 @@ model MultizoneEquipped
     Placement(transformation(extent={{-52,10},{18,40}})));
 
   Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(
-      numZones=numZones)
+      numZones=numZones,
+    THeatingThreshold=zoneParam.T_threshold_IdealHeater,
+    TCoolingThreshold=zoneParam.T_threshold_IdealCooler) if zoneParam.IdealHeaterCoolerThresholdControlled
     annotation (Placement(transformation(extent={{-78,-70},{-58,-50}})));
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
