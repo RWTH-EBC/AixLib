@@ -38,11 +38,6 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-70,-72})));
-  BoundaryConditions.WeatherData.Bus weaBus
-    "Weather data bus"
-    annotation (Placement(
-    transformation(extent={{-113,78},{-79,110}}),iconTransformation(
-    extent={{-24,74},{8,106}})));
 equation
   if staOrDyn then
     connect(booleanExpressionHeater.y, pITempThreshold.onOff) annotation (Line(
@@ -65,14 +60,6 @@ equation
     annotation (Line(points={{-100,40},{-18,40},{-18,29}}, color={0,0,127}));
   connect(setPointCool, pITempCool.setPoint) annotation (Line(points={{-100,-40},
           {-58,-40},{-18,-40},{-18,-29}}, color={0,0,127}));
-  connect(weaBus.TDryBul, pITempThreshold.weaBus) annotation (Line(
-      points={{-96,94},{-10,94},{-10,29.8}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is just as simple heater and/or cooler with a PI-controller. It can be used as an quasi-ideal source for heating and cooling applications. </p>

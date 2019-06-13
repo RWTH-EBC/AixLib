@@ -30,7 +30,7 @@ partial model PartialHeaterCoolerPI
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
-  Controls.Continuous.PITempThreshold
+  Controls.Continuous.PITemp
                  pITempThreshold(
     rangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.hHeat,

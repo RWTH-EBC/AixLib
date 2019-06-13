@@ -155,6 +155,9 @@ model MultizoneEquipped
     annotation (
     Placement(transformation(extent={{-52,10},{18,40}})));
 
+  Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(
+      numZones=numZones)
+    annotation (Placement(transformation(extent={{-78,-70},{-58,-50}})));
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
@@ -233,15 +236,6 @@ equation
        Line(points={{76,-100},{74,-100},{74,0},{47.24,0},{47.24,20.8}},
                                                                      color={0,0,
             127}));
-    connect(heaterCooler[i].weaBus, weaBus)
-                                           annotation (Line(
-      points={{-36.04,-45.3},{-84,-45.3},{-84,69},{-100,69}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   end for;
 
   connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
@@ -335,6 +329,20 @@ equation
           31}},
         color={0,0,127}));
 
+  connect(weaBus, heaterCoolerController.weaBus) annotation (Line(
+      points={{-100,69},{-100,-34},{-84,-34},{-84,-55.7},{-75.7,-55.7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heaterCoolerController.heaterActive, heaterCooler.heaterActive)
+    annotation (Line(points={{-59.8,-58},{-54,-58},{-54,-72},{-26.16,-72},{
+          -26.16,-66.36}}, color={255,0,255}));
+  connect(heaterCoolerController.coolerActive, heaterCooler.coolerActive)
+    annotation (Line(points={{-59.8,-62},{-56,-62},{-56,-72},{-44.1,-72},{-44.1,
+          -66.36}}, color={255,0,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
@@ -351,7 +359,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Air Conditioning"),
         Text(
-          extent={{-80,-50},{-56,-56}},
+          extent={{-62,-46},{-38,-54}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
