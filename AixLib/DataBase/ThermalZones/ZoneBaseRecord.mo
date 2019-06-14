@@ -113,6 +113,13 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Volume flow through air curtain";
   parameter Modelica.SIunits.Temperature T_add_air_curtain
     "Temperature raise over air curtain";
+  parameter Modelica.SIunits.Temperature T_threshold_IdealCooler
+    "Threshold temperature above cooling will be used";
+  parameter Modelica.SIunits.Temperature T_threshold_IdealHeater
+    "Threshold temperature below heating will be used";
+  parameter Boolean IdealHeaterCoolerThresholdControlled
+    "true if the threshold based controller for ideal heater and cooler
+        should be used";
   parameter Real eta_air_curtain
     "Efficiency of air curtain, meaing how much of the air stay in the building";
   parameter Modelica.SIunits.Temperature T_thershold_air_curtain

@@ -156,10 +156,8 @@ model MultizoneEquipped
     annotation (
     Placement(transformation(extent={{-52,10},{18,40}})));
 
-  Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(
-      numZones=numZones,
-    THeatingThreshold=zoneParam.T_threshold_IdealHeater,
-    TCoolingThreshold=zoneParam.T_threshold_IdealCooler) if zoneParam.IdealHeaterCoolerThresholdControlled
+  Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController[numZones](
+     zoneParam=zoneParam)
     annotation (Placement(transformation(extent={{-78,-70},{-58,-50}})));
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
@@ -239,6 +237,15 @@ equation
        Line(points={{76,-100},{74,-100},{74,0},{47.24,0},{47.24,20.8}},
                                                                      color={0,0,
             127}));
+    connect(weaBus, heaterCoolerController[i].weaBus) annotation (Line(
+      points={{-100,69},{-100,-34},{-84,-34},{-84,-55.7},{-75.7,-55.7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+
   end for;
 
   connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
@@ -331,15 +338,6 @@ equation
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,
           31}},
         color={0,0,127}));
-
-  connect(weaBus, heaterCoolerController.weaBus) annotation (Line(
-      points={{-100,69},{-100,-34},{-84,-34},{-84,-55.7},{-75.7,-55.7}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(heaterCoolerController.heaterActive, heaterCooler.heaterActive)
     annotation (Line(points={{-59.8,-58},{-54,-58},{-54,-72},{-26.16,-72},{
           -26.16,-66.36}}, color={255,0,255}));
