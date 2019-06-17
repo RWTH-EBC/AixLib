@@ -47,20 +47,21 @@ model ExergyMeters
     m_flow_nominal=0.5,
     m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-64,76},{-44,96}})));
-  AixLib.Fluid.Storage.Storage bufferStorageHeatingcoils(
-    layer_HE(each T_start=T_start),
-    layer(each T_start=T_start),
+  AixLib.Fluid.Storage.Storage
+  bufferStorageHeatingcoils(
+  layer_HE(each T_start=T_start), layer(each T_start=T_start),
     redeclare package Medium = Medium,
     lambda_ins=0.075,
     s_ins=0.2,
-    hConvIn=100,
-    hConvOut=10,
+    alpha_in=100,
+    alpha_out=10,
     k_HE=300,
     h=1.5,
     V_HE=0.02,
     A_HE=7,
     n=10,
-    d=2) "Storage tank" annotation (Placement(transformation(extent={{26,54},{-2,88}})));
+    d=2) "Storage tank"
+         annotation (Placement(transformation(extent={{26,54},{-2,88}})));
   Fluid.FixedResistances.PressureDrop      pipePrim(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,

@@ -3,7 +3,8 @@ model VDI6007WithWindow
   "Equivalent air temperature as defined in VDI 6007 Part 1 with modifications"
   extends BaseClasses.PartialVDI6007;
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWinOut "Windows' convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWinOut
+    "Windows' convective coefficient of heat transfer (outdoor)";
 
   Modelica.Blocks.Interfaces.RealOutput TEqAirWin(final unit="K")
     "Equivalent air temperature for windows (no short-wave radiation)"
@@ -19,7 +20,7 @@ initial equation
   Normally, the sum should be 1.", level=AssertionLevel.warning);
 
 equation
-  delTEqLWWin=(TBlaSky - TDryBul)*hRad/(hRad + hConvWinOut);
+  delTEqLWWin=(TBlaSky-TDryBul)*alphaRad/(alphaRad+alphaWinOut);
   TEqAir = TEqWall*wfWall + TGro*wfGro;
   TEqAirWin = TEqWin*wfWin;
   annotation (defaultComponentName = "equAirTem",Documentation(revisions="<html>

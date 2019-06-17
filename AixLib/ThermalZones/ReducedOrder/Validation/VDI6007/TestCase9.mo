@@ -4,18 +4,18 @@ model TestCase9 "VDI 6007 Test Case 9 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare final package Medium = Modelica.Media.Air.SimpleAir,
-    hConvExt=2.7,
-    hConvWin=2.7,
+    alphaExt=2.7,
+    alphaWin=2.7,
     gWin=1,
     nExt=1,
-    hRad=5,
+    alphaRad=5,
     nInt=1,
     RWin=0.00000001,
     ratioWinConRad=0.09,
     RExt={0.0017362530106},
     CExt={5259932.23},
     AInt=60.5,
-    hConvInt=2.12,
+    alphaInt=2.12,
     RInt={0.000668895639141},
     CInt={12391363.8631},
     RExtRem=0.01913729904,
@@ -26,7 +26,9 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     AExt={10.5,15},
     T_start=295.15,
     extWallRC(thermCapExt(each T(fixed=true))),
-    intWallRC(thermCapInt(each T(fixed=true)))) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    intWallRC(thermCapInt(each T(fixed=true))))
+    "Thermal zone"
+    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Components.Convection theConWall
     "Outdoor convective heat transfer"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
@@ -154,12 +156,14 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     n=2,
     wfGro=0,
     aExt=0.7,
-    hConvWallOut=20,
-    hRad=5,
+    alphaWallOut=20,
+    alphaRad=5,
     wfWall={0.05796831135677373,0.13249899738691134},
     wfWin={0.4047663456281575,0.4047663456281575},
     withLongwave=true,
-    TGro=285.15) "Equivalent air temperature" annotation (Placement(transformation(extent={{-26,-16},{-6,2}})));
+    TGro=285.15)
+    "Equivalent air temperature"
+    annotation (Placement(transformation(extent={{-26,-16},{-6,2}})));
   Modelica.Blocks.Math.Add add(k1=-1)
     "Computes 1 - g_sunblind for one direction"
     annotation (Placement(transformation(

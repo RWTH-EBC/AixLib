@@ -6,12 +6,12 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     redeclare final package Medium = Modelica.Media.Air.SimpleAir,
     gWin=1,
     nExt=1,
-    hRad=5,
+    alphaRad=5,
     nInt=1,
     RWin=0.00000001,
     ratioWinConRad=0.09,
     AInt=58,
-    hConvWin=2.7,
+    alphaWin=2.7,
     VAir=0,
     nOrientations=1,
     AWin={0},
@@ -24,9 +24,10 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     CInt={12333949.4129606},
     intWallRC(thermCapInt(each T(fixed=true))),
     extWallRC(thermCapExt(each T(fixed=true))),
-    hConvInt=2.398,
+    alphaInt=2.398,
     T_start=290.75,
-    hConvExt=2.4) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    alphaExt=2.4)
+    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
@@ -131,14 +132,16 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     annotation (Placement(transformation(extent={{-90,-8},{-74,8}})));
   EquivalentAirTemperature.VDI6007 eqAirTemp(
     aExt=0.7,
-    hConvWallOut=20,
-    hRad=5,
+    alphaWallOut=20,
+    alphaRad=5,
     withLongwave=false,
     n=1,
     wfWall={0.04646093176283288},
     wfWin={0.32441554918476245},
     wfGro=0.6291235190524047,
-    TGro=288.15) "Equivalent air temperature" annotation (Placement(transformation(extent={{-24,-4},{-4,14}})));
+    TGro=288.15)
+    "Equivalent air temperature"
+    annotation (Placement(transformation(extent={{-24,-4},{-4,14}})));
   Modelica.Blocks.Sources.Constant const(k=273.15)
     "Dummy black body sky temperature"
     annotation (Placement(transformation(extent={{-56,4},{-50,10}})));

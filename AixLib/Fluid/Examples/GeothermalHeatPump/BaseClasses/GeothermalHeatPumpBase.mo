@@ -38,13 +38,14 @@ partial model GeothermalHeatPumpBase
     n=5,
     lambda_ins=0.075,
     s_ins=0.2,
-    hConvIn=100,
-    hConvOut=10,
+    alpha_in=100,
+    alpha_out=10,
     k_HE=300,
     h=1.5,
     V_HE=0.02,
     A_HE=7,
-    d=1) "Storage tank for buffering cold demand" annotation (Placement(transformation(extent={{52,-14},{24,20}})));
+    d=1) "Storage tank for buffering cold demand"
+    annotation (Placement(transformation(extent={{52,-14},{24,20}})));
   FixedResistances.PressureDrop                     resistanceColdStorage(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
@@ -97,13 +98,14 @@ partial model GeothermalHeatPumpBase
     n=5,
     lambda_ins=0.075,
     s_ins=0.2,
-    hConvIn=100,
-    hConvOut=10,
+    alpha_in=100,
+    alpha_out=10,
     k_HE=300,
     A_HE=3,
     h=1,
     V_HE=0.01,
-    d=1) "Storage tank for buffering heat demand" annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
+    d=1) "Storage tank for buffering heat demand"
+    annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
   FixedResistances.PressureDrop                     resistanceHeatStorage(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,

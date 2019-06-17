@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
 model PanelHeatingSegment
   "One segment of the discretized panel heating"
-  import AixLib;
 
 extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
@@ -22,18 +21,20 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
 parameter HeatCapacityPerArea cTop;
 parameter HeatCapacityPerArea cDown;
 
-  parameter Integer calcMethodHConv=1 "Calculation Method for convection at surface"
-    annotation (Dialog(group="Heat convection",
+  parameter Integer calcMethodConvection = 1
+    "Calculation Method for convection at surface"
+    annotation (Dialog(group = "Heat convection",
         descriptionLabel=true), choices(
         choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
         choice=2 "By Bernd Glueck",
-        choice=3 "Constant hConv",
+        choice=3 "Constant alpha",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
-    annotation (Dialog(group="Heat convection",
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
+    "Constant heat transfer coefficient"
+    annotation (Dialog(group = "Heat convection",
     descriptionLabel=true,
-        enable=if calcMethodHConv == 3 then true else false));
+        enable=if calcMethodConvection == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume vol(
     redeclare package Medium = Medium,
@@ -59,11 +60,12 @@ parameter HeatCapacityPerArea cDown;
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
-  AixLib.Utilities.HeatTransfer.HeatConvInside HeatConv(
+  Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
-    final calcMethodHConv=calcMethodHConv,
-    final hConvCustom=hConvCustom,
-    surfaceOrientation=if isFloor then 2 else 1) annotation (Placement(transformation(
+    final calcMethod=calcMethodConvection,
+    final alpha_custom=convCoeffCustom,
+    surfaceOrientation=if isFloor then 2 else 1)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1.77636e-015,74})));

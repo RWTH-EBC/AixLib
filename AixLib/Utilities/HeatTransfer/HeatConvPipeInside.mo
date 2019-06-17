@@ -6,8 +6,8 @@ model HeatConvPipeInside
   parameter Modelica.SIunits.Length d_i = 0.02 "inner diameter of pipe";
   parameter Modelica.SIunits.Length d_a = 0.025 "outer diameter of pipe";
   parameter Modelica.SIunits.Area A_sur = 2 "surfuce for heat transfer";
-  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30       annotation(Dialog(enable=not calcHConv));
+  parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 annotation(Dialog(enable = not calculateAlpha));
   parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple();
     Modelica.SIunits.ReynoldsNumber Re;
@@ -18,7 +18,7 @@ model HeatConvPipeInside
   Modelica.SIunits.NusseltNumber Nu_lam;
   Modelica.SIunits.NusseltNumber Nu_tur;
   Modelica.SIunits.PrandtlNumber Pr;
-  Modelica.SIunits.CoefficientOfHeatTransfer hConv;
+  Modelica.SIunits.CoefficientOfHeatTransfer alpha;
   Real zeta "pressure loss coefficient";
 
   Modelica.Blocks.Interfaces.RealInput m_flow annotation (Placement(transformation(
@@ -26,7 +26,7 @@ model HeatConvPipeInside
         rotation=-90,
         origin={-4,108})));
 equation
-  if calcHConv then
+  if calculateAlpha then
     v      =        4*m_flow/(Modelica.Constants.pi * d_i^2 * medium.rho);
     Re     =    Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
       v,medium.rho,medium.eta, d_i)
@@ -50,8 +50,8 @@ equation
     Nu_tur=0;
     Nu=0;
     end if;
-  hConv    =if calcHConv then Nu*medium.lambda/d_i else hConvInFix;
-  port_a.Q_flow =hConv  * A_sur * (port_a.T - port_b.T);
+  alpha    =      if calculateAlpha then Nu  * medium.lambda /d_i else alphaInsideFix;
+  port_a.Q_flow = alpha * A_sur * (port_a.T - port_b.T);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,   extent={{-100,
             -100},{100,100}}),                                                                                                                                                                                                        lineColor = {0, 0, 0}, pattern = LinePattern.Solid, fillColor = {211, 243, 255}, fillPattern = FillPattern.Solid, lineColor = {0, 0, 0}),                                                                                                                                                                                                        Icon(

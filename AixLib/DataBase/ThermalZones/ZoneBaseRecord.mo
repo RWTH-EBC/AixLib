@@ -6,7 +6,8 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean withAirCap = true "Consider capacity of indoor air";
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone";
   parameter Modelica.SIunits.Area AZone "Net floor area of zone";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRad "Coefficient of heat transfer for linearized radiation exchange between walls";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad
+    "Coefficient of heat transfer for linearized radiation exchange between walls";
   parameter Modelica.SIunits.Angle lat "Latitude of zone location";
   parameter Integer nOrientations(min=1) "Number of orientations";
 
@@ -14,7 +15,8 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Areas of windows by orientations";
   parameter Modelica.SIunits.Area ATransparent[nOrientations]
     "Areas of transparent (solar radiation transmittend) elements by orientations";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWin "Convective coefficient of heat transfer of windows (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWin
+    "Convective coefficient of heat transfer of windows (indoor)";
   parameter Modelica.SIunits.ThermalResistance RWin "Resistor for windows";
   parameter Modelica.SIunits.TransmissionCoefficient gWin
     "Total energy transmittance of windows";
@@ -23,24 +25,28 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real ratioWinConRad
     "Ratio for windows between convective and radiative heat emission";
   parameter Modelica.SIunits.Area AExt[nOrientations] "Areas of exterior walls by orientations";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvExt "Convective coefficient of heat transfer for exterior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaExt
+    "Convective coefficient of heat transfer for exterior walls (indoor)";
   parameter Integer nExt(min=1) "Number of RC-elements of exterior walls";
   parameter Modelica.SIunits.ThermalResistance RExt[nExt] "Resistances of exterior walls, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RExtRem "Resistance of remaining resistor RExtRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CExt[nExt] "Heat capacities of exterior walls, from inside to outside";
   parameter Modelica.SIunits.Area AInt "Area of interior walls";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInt "Convective coefficient of heat transfer of interior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInt
+    "Convective coefficient of heat transfer of interior walls (indoor)";
   parameter Integer nInt(min=1) "Number of RC-elements of interior walls";
   parameter Modelica.SIunits.ThermalResistance RInt[nInt] "Resistances of interior wall, from port to center";
   parameter Modelica.SIunits.HeatCapacity CInt[nInt] "Heat capacities of interior walls, from port to center";
   parameter Modelica.SIunits.Area AFloor "Area of floor plate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvFloor "Convective coefficient of heat transfer of floor plate (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaFloor
+    "Convective coefficient of heat transfer of floor plate (indoor)";
   parameter Integer nFloor(min=1) "Number of RC-elements of floor plate";
   parameter Modelica.SIunits.ThermalResistance RFloor[nFloor] "Resistances of floor plate, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RFloorRem "Resistance of remaining resistor RFloorRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CFloor[nFloor] "Heat capacities of floor plate, from inside to outside";
   parameter Modelica.SIunits.Area ARoof "Area of roof";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoof "Convective coefficient of heat transfer of roof (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRoof
+    "Convective coefficient of heat transfer of roof (indoor)";
   parameter Integer nRoof(min=1) "Number of RC-elements of roof";
   parameter Modelica.SIunits.ThermalResistance RRoof[nRoof] "Resistances of roof, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RRoofRem "Resistance of remaining resistor RRoofRem between capacity n and outside";
@@ -54,11 +60,16 @@ record ZoneBaseRecord "Base record definition for zone records"
 
   parameter Modelica.SIunits.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
   parameter Modelica.SIunits.Temperature TSoil "Temperature of soil";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRadWall "Coefficient of heat transfer for linearized radiation for exterior walls";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWinOut "Windows' convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoofOut "Roof's convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRadRoof "Coefficient of heat transfer for linearized radiation for roof";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
+    "Exterior walls convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWall
+    "Coefficient of heat transfer for linearized radiation for exterior walls";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWinOut
+    "Windows' convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRoofOut
+    "Roof's convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadRoof
+    "Coefficient of heat transfer for linearized radiation for roof";
   parameter Modelica.SIunits.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
   parameter Modelica.SIunits.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
   parameter Real wfWall[nOrientations]

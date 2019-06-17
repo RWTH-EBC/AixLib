@@ -1,7 +1,6 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  import AixLib;
   extends
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
@@ -29,14 +28,13 @@ model Window_ASHRAE140
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
       Placement(transformation(extent={{-10,-20},{10,0}})));
-  AixLib.Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
+  Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
     A=windowarea,
     Model=2,
-    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass())
-    annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
-  AixLib.Utilities.HeatTransfer.HeatConvInside heatConv_inside(
-    calcMethodHConv=2,
-    hConvCustom=2,
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
+  Utilities.HeatTransfer.HeatConvInside heatConv_inside(
+    calcMethod=2,
+    alpha_custom=2,
     A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
     n=1,

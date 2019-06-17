@@ -34,8 +34,10 @@ public
   parameter Real tau(min=0) = 1000 "Time constant for mixing";
   parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvIn=1500 "Coefficient at the inner wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOut=15 "Coefficient at the outer wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=1500
+    "Coefficient at the inner wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
+    "Coefficient at the outer wall";
   parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
@@ -58,20 +60,22 @@ public
   parameter Boolean use_heatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC1=20 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
-                                                                           annotation(Dialog(enable=use_heatingCoil1,  tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC2=400 "Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
-                                                                           annotation(Dialog(enable=use_heatingCoil2,  tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC1=20
+    "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water" annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC2=400
+    "Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water" annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
   parameter Boolean Up_to_down_HC1 = true
     "Heating Coil 1 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
   parameter Boolean Up_to_down_HC2 = true
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
-  parameter Boolean calcHConvIn=true "Use calculated value for inside heat coefficient"
+  parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient"
                                                       annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30 "Fix value for heat transfer coefficient inside pipe"
-                                                         annotation(Dialog(enable=not calcHConvIn,           tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable = not calculateAlphaInside,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                             annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC2=0.02 "Inner diameter of HC2"
@@ -173,24 +177,28 @@ public
   BaseClasses.HeatingCoil heatingCoil1(
     T_start=T_start[n],
     dis_HC=dis_HC1,
-    hConvHC=hConvHC1,
+    alpha_HC=alpha_HC1,
     medium_HC=mediumHC1,
     lengthHC=data.lengthHC1,
     pipeRecordHC=data.pipeHC1,
-    calcHConvIn=calcHConvIn,
-    hConvInFix=hConvInFix) if use_heatingCoil1 annotation (Placement(transformation(
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                    use_heatingCoil1 annotation (Placement(
+        transformation(
         extent={{-15,-12},{15,12}},
         rotation=270,
         origin={-72,59})));
   BaseClasses.HeatingCoil heatingCoil2(
     T_start=T_start[n],
     dis_HC=dis_HC2,
-    hConvHC=hConvHC2,
+    alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
     pipeRecordHC=data.pipeHC2,
-    calcHConvIn=calcHConvIn,
-    hConvInFix=hConvInFix) if use_heatingCoil2 annotation (Placement(transformation(
+    calculateAlphaInside=calculateAlphaInside,
+    alphaInsideFix=alphaInsideFix) if
+                                    use_heatingCoil2 annotation (Placement(
+        transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,
         origin={-72,-60})));

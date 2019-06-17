@@ -34,18 +34,19 @@ model TestCase650FF "Test case 650 free float"
     UWin=3.046492744695893)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  AixLib.ThermalZones.ReducedOrder.RC.TwoElements thermalZoneTwoElements(
+  AixLib.ThermalZones.ReducedOrder.RC.TwoElements
+    thermalZoneTwoElements(
     VAir=129.60000000000002,
-    hConvExt=2.2309677419354843,
-    hConvWin=3.16,
+    alphaExt=2.2309677419354843,
+    alphaWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
     RExt={0.000233924171895},
     CExt={1002578.02625},
-    hRad=5.129999999999999,
+    alphaRad=5.129999999999999,
     AInt=48.0,
-    hConvInt=4.130000000000001,
+    alphaInt=4.130000000000001,
     nInt=1,
     RInt={0.00123677311011},
     CInt={935138.308506},
@@ -55,22 +56,30 @@ model TestCase650FF "Test case 650 free float"
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
     nOrientations=5,
-    AWin={12.0,0.0,0.0,0.0,0.0},
-    ATransparent={12.0,0.0,0.0,0.0,0.0},
-    AExt={9.600000000000001,16.200000000000003,21.6,48.0,16.200000000000003},
+    AWin={12.0, 0.0, 0.0, 0.0, 0.0},
+    ATransparent={12.0, 0.0, 0.0, 0.0, 0.0},
+    AExt={9.600000000000001, 16.200000000000003, 21.6, 48.0, 16.200000000000003},
     nPorts=2,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+    redeclare package Medium = Modelica.Media.Air.DryAirNasa)
+    "Thermal zone"
+    annotation (Placement(transformation(extent={{44,14},{92,50}})));
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
+    eqAirTemp(
     n=5,
     wfGro=0,
-    wfWall={0.10339514389812844,0.17447930532809178,0.23263907377078896,0.31500717167489906,0.17447930532809178},
-    wfWin={1.0,0.0,0.0,0.0,0.0},
+    wfWall={0.10339514389812844,
+            0.17447930532809178,
+            0.23263907377078896,
+            0.31500717167489906,
+            0.17447930532809178},
+    wfWin={1.0, 0.0, 0.0, 0.0, 0.0},
     withLongwave=true,
     aExt=0.6,
-    hConvWallOut=24.670000000000005,
-    hRad=4.63,
-    hConvWinOut=16.37,
-    TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
+    alphaWallOut=24.670000000000005,
+    alphaRad=4.63,
+    alphaWinOut=16.37,
+    TGro=286.15) "Computes equivalent air temperature"
+    annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
@@ -312,12 +321,12 @@ equation
   connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-24},{37,-24}}, color={0,0,127}));
   connect(gain.y,ventilationIn. m_flow_in)
-    annotation (Line(points={{-65.3,-30},{-56,-30}}, color={0,0,127}));
+    annotation (Line(points={{-65.3,-30},{-54,-30}}, color={0,0,127}));
   connect(gain.y,gain1. u)
     annotation (Line(points={{-65.3,-30},{-64,-30},{-64,-46},{-90,-46},{-90,-62},
           {-83.4,-62}},                    color={0,0,127}));
   connect(gain1.y,ventilationOut. m_flow_in)
-    annotation (Line(points={{-67.3,-62},{-56,-62}}, color={0,0,127}));
+    annotation (Line(points={{-67.3,-62},{-54,-62}}, color={0,0,127}));
   connect(weaBus.TDryBul, ventilationIn.T_in) annotation (Line(
       points={{-83,22},{-83,-14},{-60,-14},{-60,-34},{-56,-34}},
       color={255,204,51},

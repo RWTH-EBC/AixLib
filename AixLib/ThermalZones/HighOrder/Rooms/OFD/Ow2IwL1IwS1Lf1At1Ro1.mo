@@ -65,7 +65,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
       descriptionLabel=true), choices(
       choice=1 "DIN 6946",
       choice=2 "ASHRAE Fundamentals",
-      choice=3 "Custom hConv",
+      choice=3 "Custom alpha",
       radioButtons=true));
   // Windows and Doors
   parameter Boolean withWindow2=true "Window 2" annotation (Dialog(

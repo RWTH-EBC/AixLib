@@ -35,19 +35,20 @@ model TestCase950 "Test case 950"
     UWin=3.046492744695893)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  AixLib.ThermalZones.ReducedOrder.RC.TwoElements thermalZoneTwoElements(
+  AixLib.ThermalZones.ReducedOrder.RC.TwoElements
+    thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
-    hConvExt=2.2309677419354843,
-    hConvWin=3.16,
+    alphaExt=2.2309677419354843,
+    alphaWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
     RExt={0.0009058311925},
     CExt={9152069.64734},
-    hRad=5.129999999999999,
+    alphaRad=5.129999999999999,
     AInt=48.0,
-    hConvInt=4.130000000000001,
+    alphaInt=4.130000000000001,
     nInt=1,
     RInt={0.000491103488785},
     CInt={5373300.22817},
@@ -57,21 +58,29 @@ model TestCase950 "Test case 950"
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
     nOrientations=5,
-    AWin={12.0,0.0,0.0,0.0,0.0},
-    ATransparent={12.0,0.0,0.0,0.0,0.0},
+    AWin={12.0, 0.0, 0.0, 0.0, 0.0},
+    ATransparent={12.0, 0.0, 0.0, 0.0, 0.0},
     nPorts=2,
-    AExt={9.600000000000001,16.200000000000003,21.6,48.0,16.200000000000003}) "Thermal zone" annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+    AExt={9.600000000000001, 16.200000000000003, 21.6, 48.0, 16.200000000000003})
+    "Thermal zone"
+    annotation (Placement(transformation(extent={{44,14},{92,50}})));
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
+    eqAirTemp(
     n=5,
     wfGro=0,
-    wfWall={0.10304320094174112,0.1738854015891881,0.23184720211891743,0.3173387937609652,0.1738854015891881},
-    wfWin={1.0,0.0,0.0,0.0,0.0},
+    wfWall={0.10304320094174112,
+            0.1738854015891881,
+            0.23184720211891743,
+            0.3173387937609652,
+            0.1738854015891881},
+    wfWin={1.0, 0.0, 0.0, 0.0, 0.0},
     withLongwave=true,
     aExt=0.6,
-    hConvWallOut=24.670000000000005,
-    hRad=4.63,
-    hConvWinOut=16.37,
-    TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
+    alphaWallOut=24.670000000000005,
+    alphaRad=4.63,
+    alphaWinOut=16.37,
+    TGro=286.15) "Computes equivalent air temperature"
+    annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));

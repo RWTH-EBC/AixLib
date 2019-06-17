@@ -1,33 +1,33 @@
 within AixLib.Utilities.HeatTransfer;
-model HeatConvOutside
-  "Model for heat transfer at outside surfaces. Choice between multiple models"
+model HeatConvOutside "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
   parameter Integer Model = 1 "Model" annotation(Evaluate = true, Dialog(group = "Computational Models", compact = true, descriptionLabel = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals (convective + radiative)",                                                                                                    choice = 3
-        "Custom hConv",                                                                                                    radioButtons = true));
+        "Custom alpha",                                                                                                    radioButtons = true));
   parameter Modelica.SIunits.Area A = 16 "Area of surface" annotation(Dialog(group = "Surface properties", descriptionLabel = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25 "Custom hConv"    annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=Model == 3));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 25
+    "Custom alpha"                                                                      annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable = Model == 3));
   parameter
     DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable = Model == 2), choicesAllMatching = true);
   // Variables
-  Modelica.SIunits.CoefficientOfHeatTransfer hConv;
+  Modelica.SIunits.CoefficientOfHeatTransfer alpha;
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if   Model==1 or Model ==2                         annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput WindSpeed_internal(unit="m/s");
 equation
   // Main equation of heat transfer
-  port_a.Q_flow =hConv *A*(port_a.T - port_b.T);
+  port_a.Q_flow = alpha*A*(port_a.T - port_b.T);
 
-  //Determine hConv
+  //Determine alpha
   if Model == 1 then
-    hConv = (4 + 4*WindSpeed_internal);
+    alpha = (4 + 4*WindSpeed_internal);
   elseif Model == 2 then
-    hConv = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
+    alpha = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
   else
-    hConv =hConvCustom;
+    alpha = alpha_custom;
     WindSpeed_internal = 0;
   end if;
 
@@ -52,21 +52,21 @@ equation
 <p>It allows the choice between three different models: </p>
 <ul>
 <li>after DIN 6946: <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-vd3eY3hw.png\"
-    alt=\"hConv = 4 + 4*v\"/> , where
+    alt=\"alpha = 4 + 4*v\"/> , where
     <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-MU6LPHRs.png\"
-    alt=\"hConv\"/> (<b>hConv)</b> is the heat transfer coefficent and
+    alt=\"alpha\"/> (<b>alpha)</b> is the heat transfer coefficent and
     <b>v</b> is the wind speed </li>
 <li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented
 in EnergyPlus Engineering reference from 2011:
 <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-A5RXdOdd.png\"
-alt=\"hConv  = D + E*v + F*v^2\"/>, where
-<img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-LDgZSLyY.png\" alt=\"h\"/>
-(<b>hConv</b>) and <b>v</b> are as above and the coefficients <b>D, E, F</b>
+alt=\"alpha  = D + E*v + F*v^2\"/>, where
+<img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-LDgZSLyY.png\" alt=\"alpha\"/>
+(<b>alpha</b>) and <b>v</b> are as above and the coefficients <b>D, E, F</b>
 depend on the surface of the outer wall.<br/><b>
 <span style=\"color: #ff0000;\">Attention:</span></b>
 This is a combined coefficient for convective and radiative heat exchange.</li>
 <li>with a custom constant <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-BjHulWj5.png\"
-alt=\"hConv \"/> (<b>hConv)</b> value </li>
+alt=\"alpha \"/> (<b>alpha)</b> value </li>
 </ul>
 <p><b><span style=\"color: #008000;\">References</span></b> </p>
 <ul>

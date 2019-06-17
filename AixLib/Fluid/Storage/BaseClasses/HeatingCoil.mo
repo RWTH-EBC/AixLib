@@ -6,7 +6,8 @@ model HeatingCoil "Heating coil for heat storage model"
 
  parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC=20 "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
+ parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC=20
+    "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
 
  parameter Modelica.SIunits.Temperature TStart=298.15
     "Start Temperature of fluid" annotation(Dialog(group = "Initialization"));
@@ -26,8 +27,8 @@ model HeatingCoil "Heating coil for heat storage model"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-4,26})));
-  AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each hConv=hConvHC,
-             A=fill(pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC,
+  AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each alpha=
+    alphaHC, A=fill(pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC,
     disHC))
     "Outer heat convection" annotation (Placement(transformation(
     extent={{-6,-6},{6,6}},

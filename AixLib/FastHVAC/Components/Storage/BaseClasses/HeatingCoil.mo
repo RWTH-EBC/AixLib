@@ -8,7 +8,8 @@ model HeatingCoil
 
  parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC=20 "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
+ parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC=20
+    "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
 
   parameter Modelica.SIunits.Temperature T_start "Start Temperature of fluid";
 
@@ -22,8 +23,8 @@ model HeatingCoil
     T_0=T_start,
     length=lengthHC,
     nNodes=dis_HC,
-    hConvInFix=hConvInFix,
-    calcHConvIn=true) annotation (Placement(transformation(
+    alphaInsideFix=alphaInsideFix,
+    calculateAlpha=true)  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-2,0})));
@@ -39,7 +40,9 @@ model HeatingCoil
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-2,50})));
-  AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each hConv=hConvHC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/dis_HC, dis_HC)) annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each alpha=
+        alpha_HC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/dis_HC,
+        dis_HC)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
         origin={-2,76})));
@@ -49,9 +52,11 @@ model HeatingCoil
     annotation (Placement(transformation(extent={{82,-10},{102,10}})));
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
-  parameter Boolean calcHConvIn=true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInFix=30 "Fix value for heat transfer coefficient inside pipe"
-                                                         annotation(Dialog(enable=not calcHConvIn));
+  parameter Boolean calculateAlphaInside=true
+    "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30
+    "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable = not calculateAlphaInside));
 equation
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-2,82},{-2,104}},
