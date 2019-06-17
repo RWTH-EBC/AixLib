@@ -60,7 +60,7 @@ model Test
     AbsorberHeatCapacity=parameters.AbsorberHeatCapacity,
     CoverTransmitance=parameters.CoverTransmitance,
     CoverConductance=parameters.CoverConductance)
-    annotation (Placement(transformation(extent={{10,4},{66,58}})));
+    annotation (Placement(transformation(extent={{10,2},{66,56}})));
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather(
     Wind_speed=true,
     Air_temp=true,
@@ -118,17 +118,21 @@ model Test
     annotation (Placement(transformation(extent={{68,-56},{80,-44}})));
   Modelica.Blocks.Math.RealToBoolean realToBoolean1
     annotation (Placement(transformation(extent={{50,-76},{62,-64}})));
-  Modelica.Blocks.Math.Gain gain(k=0.1)
+  Modelica.Blocks.Math.Gain gain(k=0.3)
     annotation (Placement(transformation(extent={{28,-94},{36,-86}})));
+  Modelica.Blocks.Math.Add addInfiltration
+    annotation (Placement(transformation(extent={{44,-100},{56,-88}})));
+  Modelica.Blocks.Sources.RealExpression infiltrationRate(y=0.2)
+    annotation (Placement(transformation(extent={{26,-112},{40,-96}})));
 equation
   connect(weather.SolarRadiation_OrientedSurfaces[1], room_EnergySyst.solRadPort_Facade1)
-    annotation (Line(points={{-87.52,26.3},{-87.52,20},{-18,20},{-18,54.76},{
-          11.68,54.76}},color={255,128,0}));
+    annotation (Line(points={{-87.52,26.3},{-87.52,20},{-18,20},{-18,52.76},{
+          11.68,52.76}},color={255,128,0}));
   connect(schedule_occupants.y[1], room_EnergySyst.Schedule_lights) annotation (
-     Line(points={{-39,-50},{-18,-50},{-18,27.22},{12.8,27.22}},
+     Line(points={{-39,-50},{-18,-50},{-18,25.22},{12.8,25.22}},
         color={0,0,127}));
   connect(room_EnergySyst.weaBus, weaBus) annotation (Line(
-      points={{11.68,47.2},{-13.16,47.2},{-13.16,48},{-28,48}},
+      points={{11.68,45.2},{-13.16,45.2},{-13.16,48},{-28,48}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -165,24 +169,28 @@ equation
       extent={{6,3},{6,3}}));
   connect(schedule_heating.y[1], realToBoolean.u)
     annotation (Line(points={{61,-50},{66.8,-50}}, color={0,0,127}));
-  connect(realToBoolean.y, room_EnergySyst.isHeaterOn) annotation (Line(points=
-          {{80.6,-50},{100,-50},{100,0},{36.32,0},{36.32,5.62}}, color={255,0,
+  connect(realToBoolean.y, room_EnergySyst.isHeaterOn) annotation (Line(points={{80.6,
+          -50},{100,-50},{100,0},{36.32,0},{36.32,3.62}},        color={255,0,
           255}));
   connect(schedule_cooling.y[1], realToBoolean1.u)
     annotation (Line(points={{41,-70},{48.8,-70}}, color={0,0,127}));
   connect(realToBoolean1.y, room_EnergySyst.isChillerOn) annotation (Line(
-        points={{62.6,-70},{100,-70},{100,0},{24,0},{24,5.08}}, color={255,0,
+        points={{62.6,-70},{100,-70},{100,0},{24,0},{24,3.08}}, color={255,0,
           255}));
   connect(schedule_lights.y[1], room_EnergySyst.Schedule_Occupants) annotation (
-     Line(points={{-59,-70},{-18,-70},{-18,20.2},{12.8,20.2}}, color={0,0,127}));
+     Line(points={{-59,-70},{-18,-70},{-18,18.2},{12.8,18.2}}, color={0,0,127}));
   connect(schedule_elAppliances.y[1], room_EnergySyst.Schedule_elAppliances)
-    annotation (Line(points={{-79,-90},{-18,-90},{-18,15.88},{12.8,15.88}},
+    annotation (Line(points={{-79,-90},{-18,-90},{-18,13.88},{12.8,13.88}},
         color={0,0,127}));
   connect(schedule_ventilation.y[1], gain.u)
     annotation (Line(points={{21,-90},{27.2,-90}}, color={0,0,127}));
-  connect(gain.y, room_EnergySyst.Schedule_mechVent) annotation (Line(points={{
-          36.4,-90},{100,-90},{100,0},{-18,0},{-18,33.7},{12.8,33.7}}, color={0,
-          0,127}));
+  connect(gain.y, addInfiltration.u1) annotation (Line(points={{36.4,-90},{40,
+          -90},{40,-90.4},{42.8,-90.4}}, color={0,0,127}));
+  connect(infiltrationRate.y, addInfiltration.u2) annotation (Line(points={{
+          40.7,-104},{42.8,-104},{42.8,-97.6}}, color={0,0,127}));
+  connect(addInfiltration.y, room_EnergySyst.Schedule_mechVent) annotation (
+      Line(points={{56.6,-94},{100,-94},{100,0},{-18,0},{-18,31.7},{12.8,31.7}},
+        color={0,0,127}));
   annotation (experiment(StopTime=31536000, Interval=60),
                                                         Documentation(revisions=
          "<html>
@@ -191,5 +199,7 @@ equation
 </ul>
 </html>", info="<html>
 <p>SImulation set up for a PlugNHarvest use case.</p>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(extent={{-100,-120},{100,100}})),
+    Icon(coordinateSystem(extent={{-100,-120},{100,100}})));
 end Test;

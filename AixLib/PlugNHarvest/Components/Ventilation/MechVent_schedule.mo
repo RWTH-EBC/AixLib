@@ -94,6 +94,6 @@ equation
 <p>Mechanical ventilation with fresh air (outside air) using a schedule as input.</p>
 <p>The air model is a medium model.</p>
 <p>The boundary component pulls the same mass flow from the room in order to have mass equlibrium. </p>
-<h4><span style=\"color: #ff007f\">It also includes the natural infiltration. </span></h4>
+<h4><span style=\"color: #ff007f\">It also includes the natural infiltration, since the schedule for the ventilation HAS to include the value for the infiltration. </span></h4>
 </html>"));
 end MechVent_schedule;

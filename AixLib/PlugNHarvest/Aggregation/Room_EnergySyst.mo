@@ -252,7 +252,7 @@ model Room_EnergySyst "Room and energy system"
     annotation (Placement(transformation(extent={{-54,-62},{-34,-42}})));
 equation
   connect(heaterCoolerPI_withPel.heatCoolRoom, room_intGain.thermRoom)
-    annotation (Line(points={{7.7,-28.8},{16,-28.8},{16,-36},{22,-36},{22,10},{
+    annotation (Line(points={{7.7,-28.8},{16,-28.8},{16,-30},{20,-30},{20,10},{
           -0.24,10},{-0.24,15.74}}, color={191,0,0}));
   connect(room_intGain.solRadPort_Facade, solRadPort_Facade1) annotation (Line(
         points={{-28.14,66.2},{-60,66.2},{-60,88},{-94,88}}, color={255,128,0}));
