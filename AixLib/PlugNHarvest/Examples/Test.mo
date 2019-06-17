@@ -91,7 +91,11 @@ model Test
     isEl_heater = true,
     withMechVent=true,
     withPV=true,withSmartFacade=true,
-    withSolAirHeat= false)
+    withSolAirHeat= false,
+    wallType_OW1=AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_M(),
+    Pmax_heater=100000,
+    Tout_isHeatOn=291.15,
+    Tset_chiller=298.15)
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   BoundaryConditions.WeatherData.Bus weaBus "Bus with weather data"
     annotation (Placement(transformation(extent={{-38,38},{-18,58}})));
