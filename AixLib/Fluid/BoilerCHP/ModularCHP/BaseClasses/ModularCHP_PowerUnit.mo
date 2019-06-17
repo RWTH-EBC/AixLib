@@ -138,7 +138,7 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
     nPorts=1)
     annotation (Placement(transformation(extent={{112,30},{92,50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambientTemperature(T=
-       T_amb)
+       T_amb) "Ambient temperature for thermal loss calculation"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     annotation (Placement(transformation(extent={{-42,-8},{-58,8}})));
@@ -169,19 +169,23 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
     m2_flow_nominal=m_flow,
     CExhHex=CExhHex,
     GCoo=GCooExhHex,
-    GAmb=GAmb) annotation (Placement(transformation(extent={{40,4},{68,32}})));
+    GAmb=GAmb) "Exhaust gas heat exchanger of a CHP power unit"
+               annotation (Placement(transformation(extent={{40,4},{68,32}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.CHP_ElectricMachine
     inductionMachine(
     CHPEngData=CHPEngineModel,
     useHeat=useGenHea,
     calFac=calFac,
     s_til=s_til)
+    "Induction machine working as a starter motor and generator inside the CHP power unit"
     annotation (Placement(transformation(extent={{-66,12},{-36,42}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_retCoo(redeclare package Medium =
         Medium_Coolant)
+    "Fluid port for the return flow side of the cooling circuit"
     annotation (Placement(transformation(extent={{-90,-68},{-70,-48}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_supCoo(redeclare package Medium =
         Medium_Coolant)
+    "Fluid port for the supply flow side of the cooling circuit"
     annotation (Placement(transformation(extent={{70,-68},{90,-48}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.GasolineEngineChp
     gasolineEngineChp(
@@ -193,9 +197,12 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
     T_amb=T_amb,
     mEng=mEng,
     dInn=dInn,
-    GEngToAmb=GEngToAmb) annotation (Placement(transformation(rotation=0,
+    GEngToAmb=GEngToAmb)
+    "Combustion engine with thermal and mechanical power output"
+                         annotation (Placement(transformation(rotation=0,
           extent={{-18,8},{18,44}})));
   AixLib.Controls.Interfaces.CHPControlBus     sigBusCHP
+    "Signal bus connector for the CHP power unit"
                              annotation (Placement(transformation(extent={{-26,68},
             {28,118}}), iconTransformation(extent={{-26,68},{28,118}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.SubmodelCooling submodelCooling(
@@ -204,7 +211,9 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
     m_flow=m_flow,
     GEngToCoo=GEngToCoo,
     allowFlowReversalCoolant=allowFlowReversalCoolant,
-    mCool_flow_small=mCool_flow_small) annotation (Placement(transformation(
+    mCool_flow_small=mCool_flow_small)
+    "Model of the main fluid components inside the cooling circuit of a CHP power unit"
+                                       annotation (Placement(transformation(
           rotation=0, extent={{14,-72},{42,-44}})));
   Modelica.Blocks.Sources.RealExpression specificFuelUse(y=b_e)
     annotation (Placement(transformation(extent={{-28,110},{-8,130}})));
@@ -291,7 +300,8 @@ equation
         points={{9,136},{1.135,136},{1.135,93.125}}, color={0,0,127}));
   connect(fuelUtilizationRate.y, sigBusCHP.calFueUtiChp) annotation (Line(
         points={{9,120},{1.135,120},{1.135,93.125}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-80,
+            -100},{80,100}}),                                   graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
           fillPattern=FillPattern.HorizontalCylinder,
@@ -345,7 +355,7 @@ CHP"),  Rectangle(
           lineColor={255,255,170},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid)}),                      Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+        coordinateSystem(preserveAspectRatio=false, extent={{-80,-100},{80,100}})),
             Documentation(info="<html><p>
   This model shows the implementation of a holistic overall model for a
   CHP power unit using the example of the Kirsch L4.12. The model is

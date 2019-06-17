@@ -66,14 +66,16 @@ class GasolineEngineChp_EngineHousing
   Modelica.SIunits.SpecificHeatCapacity meanCpExh
     "Mean specific heat capacity of the exhaust gas" annotation (Dialog(tab="Thermal"));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb
+    "Heat port to ambient"                                     annotation (
       Placement(transformation(extent={{-12,-112},{12,-88}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor innerWall(
     C=CEngWall,
     der_T(fixed=false, start=0),
     T(start=T_Amb,
-      fixed=true))       annotation (Placement(transformation(
+      fixed=true)) "Thermal capacity model of the cylinder wall"
+                         annotation (Placement(transformation(
         origin={-24,-58},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -84,11 +86,13 @@ class GasolineEngineChp_EngineHousing
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-106,-58})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor innerThermalCond2_1(G=GInnWall/2)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-                                                                   rotation=0,
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor innerThermalCond(G=
+        GInnWall/2) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
         origin={-10,0})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow actualHeatFlowEngine
+    "Heat flow from engine combustion"
     annotation (Placement(transformation(extent={{-56,-58},{-36,-38}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing_CylToInnerWall
     cylToInnerWall(
@@ -96,9 +100,11 @@ class GasolineEngineChp_EngineHousing
     dInn=dInn,
     lambda=lambda,
     A_WInn=A_WInn,
-    z=z) annotation (Placement(transformation(rotation=0, extent={{-84,-58},
+    z=z) "Thermal model of the cylinder wall"
+         annotation (Placement(transformation(rotation=0, extent={{-84,-58},
             {-64,-38}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_coo annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_coo
+    "Heat port to cooling circuit"                             annotation (
       Placement(transformation(extent={{88,-12},{112,12}}),
         iconTransformation(extent={{90,-10},{110,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor engHeatToCoolant
@@ -119,12 +125,14 @@ class GasolineEngineChp_EngineHousing
     mEng=mEng,
     mEngWall=mEngWall,
     GEngToAmb=GEngToAmb,
-    outerEngineBlock(T(start=T_Amb))) annotation (Placement(transformation(
+    outerEngineBlock(T(start=T_Amb))) "Thermal model of the engine block"
+                                      annotation (Placement(transformation(
           rotation=0, extent={{-6,-46},{14,-26}})));
 
   Modelica.Blocks.Sources.RealExpression calculatedExhaustTemp(y=T_Exh)
     annotation (Placement(transformation(extent={{28,40},{10,60}})));
   Modelica.Blocks.Interfaces.RealOutput exhaustGasTemperature
+    "Calculated exhaust gas temperature output to the mechanical engine model"
     annotation (Placement(transformation(extent={{12,-12},{-12,12}},
         rotation=270,
         origin={0,106}),
@@ -198,11 +206,11 @@ equation
                                         color={0,0,127}));
   connect(engineBlock.port_a1, port_amb)
     annotation (Line(points={{0,-45},{0,-100}}, color={191,0,0}));
-  connect(innerThermalCond2_1.port_a, innerWall.port)
+  connect(innerThermalCond.port_a, innerWall.port)
     annotation (Line(points={{-20,0},{-24,0},{-24,-48}}, color={191,0,0}));
   connect(port_coo, engHeatToCoolant.port_b)
     annotation (Line(points={{100,0},{50,0}}, color={191,0,0}));
-  connect(innerThermalCond2_1.port_b, engHeatToCoolant.port_a)
+  connect(innerThermalCond.port_b, engHeatToCoolant.port_a)
     annotation (Line(points={{0,0},{30,0}}, color={191,0,0}));
   connect(calculatedExhaustTemp.y, exhaustGasTemperature)
     annotation (Line(points={{9.1,50},{0,50},{0,106}}, color={0,0,127}));

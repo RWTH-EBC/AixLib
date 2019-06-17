@@ -123,27 +123,30 @@ model GasolineEngineChp_EngineModel
     redeclare package Medium = Medium3,
     X=Xi_Exh,
     use_X_in=false,
-    nPorts=1)
+    nPorts=1) "Flow source of the exhaust gas from the engine combustion"
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
   Modelica.Blocks.Sources.RealExpression massFlowExhaust(y=m_flow_Exh)
     annotation (Placement(transformation(extent={{28,-4},{50,20}})));
   Modelica.Blocks.Sources.RealExpression effectiveMechanicalTorque(y=Mmot)
     annotation (Placement(transformation(extent={{18,-12},{-6,12}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
+    "Mechanical port of the engines output drive"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Mechanics.Rotational.Sources.Torque engineTorque annotation (
+  Modelica.Mechanics.Rotational.Sources.Torque engineTorque
+    "Calculated engine torque"                              annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-30,0})));
   Modelica.Mechanics.Rotational.Components.Inertia inertia(J=0.5*CHPEngData.z/4)
-                                                                annotation (
+    "Inertia model of the engine"                               annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-68,0})));
 
   Modelica.Blocks.Interfaces.RealInput exhaustGasTemperature
+    "Exhaust gas temperature calculated in the thermal engine model"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=270,
         origin={0,-104}), iconTransformation(
@@ -151,6 +154,7 @@ model GasolineEngineChp_EngineModel
         rotation=270,
         origin={0,-70})));
   AixLib.Controls.Interfaces.CHPControlBus cHPEngineBus
+    "Signal bus of the mechanical combustion engine model"
     annotation (Placement(transformation(extent={{-20,76},{20,116}})));
   Modelica.Blocks.Sources.RealExpression engineSpeed(y=nEng)
     annotation (Placement(transformation(extent={{-42,66},{-22,86}})));

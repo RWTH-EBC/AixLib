@@ -28,15 +28,21 @@ model SubmodelCooling
   outer Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
+    "Heat port to engine"
     annotation (Placement(transformation(rotation=0, extent={{-10,-70},{10,-50}}),
         iconTransformation(extent={{-12,-66},{12,-42}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium_Coolant) annotation (Placement(transformation(rotation=0, extent=
+        Medium_Coolant)
+    "Fluid port for the return flow side of the cooling circuit model"
+                        annotation (Placement(transformation(rotation=0, extent=
            {{-110,-10},{-90,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium_Coolant) annotation (Placement(transformation(rotation=0, extent=
+        Medium_Coolant)
+    "Fluid port for the supply flow side of the cooling circuit model"
+                        annotation (Placement(transformation(rotation=0, extent=
            {{90,-10},{110,10}})));
-  AixLib.Controls.Interfaces.CHPControlBus sigBus_coo annotation (Placement(
+  AixLib.Controls.Interfaces.CHPControlBus sigBus_coo
+    "Signal bus of the cooling circuit components"    annotation (Placement(
         transformation(extent={{-28,26},{28,80}}), iconTransformation(extent=
             {{-28,26},{30,82}})));
   Movers.FlowControlled_m_flow                coolantPump(
@@ -46,7 +52,7 @@ model SubmodelCooling
     allowFlowReversal=allowFlowReversalCoolant,
     addPowerToMedium=false,
     m_flow_nominal=m_flow,
-    use_inputFilter=false)
+    use_inputFilter=false) "Model of a fluid pump or fan"
     annotation (Placement(transformation(extent={{-30,-12},{-10,12}})));
   AixLib.Utilities.Logical.SmoothSwitch switch1 annotation (Placement(
         transformation(
@@ -61,7 +67,8 @@ model SubmodelCooling
     redeclare package Medium = Medium_Coolant,
     allowFlowReversal=allowFlowReversalCoolant,
     m_flow_nominal=m_flow,
-    m_flow_small=mCool_flow_small) annotation (Placement(transformation(
+    m_flow_small=mCool_flow_small) "Temperature sensor of engine cooling inlet"
+                                   annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-60,0})));
@@ -86,6 +93,7 @@ model SubmodelCooling
     allowFlowReversal=allowFlowReversalCoolant,
     m_flow_nominal=m_flow,
     m_flow_small=mCool_flow_small)
+    "Temperature sensor of engine cooling outlet"
     annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
 equation

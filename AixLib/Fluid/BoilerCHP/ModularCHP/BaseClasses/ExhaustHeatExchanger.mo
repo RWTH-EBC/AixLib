@@ -140,6 +140,7 @@ model ExhaustHeatExchanger
     "Calculated heat from generator losses"
     annotation (Placement(transformation(extent={{142,-34},{98,-14}})));
   AixLib.Controls.Interfaces.CHPControlBus cHPExhHexBus
+    "Signal bus of the exhaust gas heat exchanger"
                                annotation (Placement(transformation(extent={{
             -28,72},{28,126}}), iconTransformation(extent={{-28,72},{28,126}})));
   AixLib.Utilities.Logical.SmoothSwitch switch2 annotation (Placement(
@@ -224,6 +225,7 @@ model ExhaustHeatExchanger
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           m_flow_nominal=m2_flow_nominal, dp_nominal=10))
+    "Pipe model for heat transfer to the cooling circuit"
     annotation (Placement(transformation(extent={{32,-70},{12,-50}})));
   Modelica.Fluid.Vessels.ClosedVolume volExhaust(
     redeclare final package Medium = Medium1,
@@ -236,7 +238,7 @@ model ExhaustHeatExchanger
     use_portsData=false,
     final m_flow_small=m1_flow_small,
     V=VExhHex,
-    nPorts=2)                          "Fluid volume"
+    nPorts=2) "Fluid volume of the exhaust gas inside the heat exchanger"
     annotation (Placement(transformation(extent={{-20,60},{-40,40}})));
   AixLib.Fluid.FixedResistances.HydraulicDiameter
                                 pressureDropExhaust(
@@ -247,7 +249,7 @@ model ExhaustHeatExchanger
     dh=d_iExh,
     rho_default=1.18,
     mu_default=1.82*10^(-5),
-    length=l_ExhHex)               "Pressure drop"
+    length=l_ExhHex) "Pressure drop of the exhaust gas"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
   AixLib.Utilities.HeatTransfer.HeatConvPipeInsideDynamic
     heatConvExhaustPipeInside(
@@ -258,6 +260,7 @@ model ExhaustHeatExchanger
     eta=eta1_in,
     c=cHPExhHexBus.calMeaCpExh,
     m_flow=cHPExhHexBus.meaMasFloFueEng + cHPExhHexBus.meaMasFloAirEng)
+    "Heat transfer model using convection calculation"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -271,11 +274,13 @@ model ExhaustHeatExchanger
     annotation (Placement(transformation(extent={{142,-8},{98,12}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
         CExhHex, T(start=T_Amb, fixed=true))
+    "Thermal capacity of the exhaust gas heat exchanger"
     annotation (Placement(transformation(extent={{10,-12},{30,8}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor ambientLoss(G=
         GAmb)
     annotation (Placement(transformation(extent={{-46,-22},{-66,-2}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb
+    "Heat port to ambient"                                     annotation (
       Placement(transformation(extent={{-110,-10},{-90,10}}),
         iconTransformation(extent={{-110,-10},{-90,10}})));
 

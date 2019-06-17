@@ -82,18 +82,23 @@ model CHP_ElectricMachine
     "Operation of electric machine (true=On, false=Off)";
 
   Modelica.Mechanics.Rotational.Components.Inertia inertia(       w(fixed=false), J=J_Gen)
+    "Inertia model of the electric machine"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Sources.RealExpression electricTorque1(y=M)
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque
+    "Calculated torque of the electric machine"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_genIn
+    "Mechanical port to the output drive"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
   Modelica.Mechanics.Rotational.Components.IdealGear gearEngineToGenerator(
       ratio=gearRatio)
+    "Model for mapping a possible transmission ratio between engine and generator"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
   AixLib.Controls.Interfaces.CHPControlBus cHPGenBus
+    "Signal bus of the electric machine"
                    annotation (Placement(transformation(extent={{-72,28},{-132,
             84}}), iconTransformation(
         extent={{-30,-28},{30,28}},

@@ -49,6 +49,7 @@ model GasolineEngineChp
     T_ExhCHPOut=T_ExhCHPOut,
     modFac=modFac,
     SwitchOnOff=cHPEngBus.isOn)
+    "Mean value combustion engine model with mechanical and fluid ports"
     annotation (Placement(transformation(extent={{-30,0},{30,56}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.BaseClassComponents.GasolineEngineChp_EngineHousing
     engineToCoolant(
@@ -74,20 +75,26 @@ model GasolineEngineChp
     GEngToAmb=GEngToAmb)
     "A physikal model for calculating the thermal, mass and mechanical output of an ice powered CHP"
     annotation (Placement(transformation(extent={{-22,-52},{22,-8}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_eng annotation (
+  Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_eng
+    "Mechanical port of the engines output drive"              annotation (
       Placement(transformation(rotation=0, extent={{-114,-6},{-94,14}}),
         iconTransformation(extent={{-114,-6},{-94,14}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_exh(redeclare package Medium =
-        Medium_Exhaust) annotation (Placement(transformation(rotation=0,
+        Medium_Exhaust)
+    "Fluid port of the exhaust gas comming from the combustion engine"
+                        annotation (Placement(transformation(rotation=0,
           extent={{92,-8},{112,12}}), iconTransformation(extent={{92,-8},{112,
             12}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_amb
+    "Heat port to ambient"                                     annotation (
       Placement(transformation(rotation=0, extent={{-10,-100},{10,-80}}),
         iconTransformation(extent={{-10,-100},{10,-80}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_cooCir annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_cooCir
+    "Heat port to cooling circuit"                                annotation (
      Placement(transformation(rotation=0, extent={{90,-98},{110,-78}}),
         iconTransformation(extent={{90,-98},{110,-78}})));
   AixLib.Controls.Interfaces.CHPControlBus cHPEngBus
+    "Signal bus of the combustion engine model"
                                                annotation (Placement(
         transformation(
         extent={{-30,-32},{30,32}},

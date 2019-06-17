@@ -1,5 +1,6 @@
 ﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
-model ModularCHP "Modular combined heat and power system model"
+model ModularCHPIntegrated
+  "Modular combined heat and power system model integrated into a heating circuit"
   import AixLib;
 
   replaceable package Medium_Fuel =
@@ -151,7 +152,8 @@ model ModularCHP "Modular combined heat and power system model"
     GAmb=GAmb,
     calFac=calFac,
     s_til=s_til)
-    annotation (Placement(transformation(extent={{-24,0},{24,48}})));
+    "Model of the main heat and power generating components of a CHP unit"
+    annotation (Placement(transformation(extent={{-20,0},{20,48}})));
   AixLib.Fluid.HeatExchangers.ConstantEffectiveness coolantHex(
     allowFlowReversal1=allowFlowReversalCoolant,
     allowFlowReversal2=allowFlowReversalCoolant,
@@ -163,28 +165,34 @@ model ModularCHP "Modular combined heat and power system model"
     redeclare package Medium2 = Medium_HeatingCircuit,
     dp1_nominal(displayUnit="kPa") = 10000,
     dp2_nominal(displayUnit="kPa") = 10000,
-    eps=0.9) annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
+    eps=0.9) "Heat exchanger between inner cooling and outer heating circuit"
+             annotation (Placement(transformation(extent={{20,-72},{-20,-32}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort temRetFlo(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
+    "Heating circuit return flow temperature sensor"
     annotation (Placement(transformation(extent={{-58,-72},{-42,-56}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort temSupFlo(
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
+    "Heating circuit supply flow temperature sensor"
     annotation (Placement(transformation(extent={{42,-72},{58,-56}})));
   AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ControllerOnOffModularCHP
     ControllerCHP(
     CHPEngineModel=CHPEngineModel,
     startTimeChp=3600,
-    modTab=modTab) annotation (Placement(transformation(rotation=0, extent={{-76,
+    modTab=modTab) "On/Off control with modulation factor setting"
+                   annotation (Placement(transformation(rotation=0, extent={{-76,
             64},{-44,96}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_retHea(redeclare package Medium =
         Medium_Coolant)
+    "Fluid port for the return flow side of the heating circuit"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_supHea(redeclare package Medium =
         Medium_Coolant)
+    "Fluid port for the supply flow side of the heating circuit"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
   Modelica.Fluid.Sources.FixedBoundary fixedPressureLevel(
@@ -212,27 +220,26 @@ protected
     "Total engine mass for heat capacity calculation"
     annotation (Dialog(tab="Calibration parameters",group="Advanced calibration parameters"));
 
-
 equation
   connect(coolantHex.port_a2, temRetFlo.port_b)
     annotation (Line(points={{-20,-64},{-42,-64}}, color={0,127,255}));
   connect(coolantHex.port_b2, temSupFlo.port_a)
     annotation (Line(points={{20,-64},{42,-64}}, color={0,127,255}));
   connect(ControllerCHP.modCHPConBus, cHP_PowerUnit.sigBusCHP) annotation (Line(
-      points={{-44,80},{0.24,80},{0.24,46.32}},
+      points={{-44,80},{0.25,80},{0.25,46.32}},
       color={255,204,51},
       thickness=0.5));
   connect(coolantHex.port_b1,cHP_PowerUnit.port_retCoo)  annotation (Line(
-        points={{-20,-40},{-60,-40},{-60,10.08},{-19.2,10.08}}, color={0,127,
+        points={{-20,-40},{-60,-40},{-60,10.08},{-20,10.08}},   color={0,127,
           255}));
   connect(cHP_PowerUnit.port_supCoo, coolantHex.port_a1) annotation (Line(
-        points={{19.2,10.08},{60,10.08},{60,-40},{20,-40}}, color={0,127,255}));
+        points={{20,10.08},{60,10.08},{60,-40},{20,-40}},   color={0,127,255}));
   connect(temSupFlo.port_b, port_supHea) annotation (Line(points={{58,-64},{90,
           -64},{90,0},{100,0}}, color={0,127,255}));
   connect(port_retHea, temRetFlo.port_a) annotation (Line(points={{-100,0},{-90,
           0},{-90,-64},{-58,-64}}, color={0,127,255}));
   connect(fixedPressureLevel.ports[1], cHP_PowerUnit.port_retCoo) annotation (
-      Line(points={{-64,-20},{-60,-20},{-60,10.08},{-19.2,10.08}}, color={0,127,
+      Line(points={{-64,-20},{-60,-20},{-60,10.08},{-20,10.08}},   color={0,127,
           255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
@@ -297,54 +304,10 @@ CHP"),  Rectangle(
           color={0,127,255},
           thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html><p>
-  This model of a gas engine CHP plant is aggregated from runnable and
-  closed submodels. The model is able to map different gas engine CHPs
-  of small and medium power classes (&lt; 200 kWel). It allows an
-  investigation of the thermal and electrical dynamics of the
-  individual components and the entire plant. In addition, a CO2
-  balance can be calculated for the comparison of different control
-  strategies.
-</p>
-<p>
-  The modular CHP model is aggregated from closed submodels that can be
-  run on their own. These are based on physical calculation approaches
-  and offer mechanical, material and thermal interfaces. The thermal
-  interconnection of the exhaust gas heat exchanger and combustion
-  engine in the internal primary circuit is freely selectable. Detailed
-  explanations of how the submodels work are provided in their
-  documentation. Parameterization and control are realized on the
-  highest model level using bus ports to transmit measured and
-  calculated signals throughout the different hierarchical model
-  levels.
-</p>
-<h4>
-  Calibration:
-</h4>
-<p>
-  If the calibration of the model is not to be performed for all listed
-  calibration quantities, a quick adaptation of the essential model
-  quantities for the use of are carried out. Setting the speed of the
-  generator and internal combustion engine for the nominal power point
-  using the calibration variables tilting slip, electrical calibration
-  factor and modulation factor results in a high correspondence for
-  electrical power and fuel input for each power stage of the CHP. The
-  thermal output can then be checked by checking the flue gas
-  temperature when the system exits. The examination of the data sheets
-  of some cogeneration units provides general comparative values for
-  the flue gas temperature in a range around 50 °C with and around 110
-  °C without condensing utilisation at rated output. The flue gas
-  temperature can mainly be adjusted using the heat transitions
-  G_CoolChannel and G_CooExhHex. Finally, the parameters of the heat
-  exchanger can be adapted to the heating circuit.
-</p>
-<h4>
-  Limitations:
-</h4>
-<p>
-  Supercharged internal combustion engines and diesel engines cannot be
-  completely mapped.
-</p>
+    Documentation(info="<html>
+<p>This model of a gas engine CHP plant is using the CHP power unit <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a> extended by a heat exchanger to the heating circuit. Also, a simple controller model is added to simulate different operation conditions by transferring an On-/Off-Signal and the modulation factor via the bus port.</p>
+<h4>Calibration and limitations: </h4>
+<p>Model calibration and limitations can be found in <a href=\"modelica://AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit\">AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ModularCHP_PowerUnit</a> </p>
 </html>", revisions="<html>
 <ul>
   <li>
@@ -354,4 +317,4 @@ CHP"),  Rectangle(
   </li>
 </ul>
 </html>"));
-end ModularCHP;
+end ModularCHPIntegrated;

@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.Examples;
+﻿within AixLib.Fluid.BoilerCHP.Examples;
 model ModularCHPSystem
   "Example of the modular CHP power unit model inside a heating circuit"
   extends Modelica.Icons.Example;
@@ -144,10 +144,10 @@ model ModularCHPSystem
     use_T_in=true,
     redeclare package Medium = Medium_HeatingCircuit,
     nPorts=1,
-    use_m_flow_in=true)
+    use_m_flow_in=true) "Flow source of heating circuit"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Fluid.Sources.FixedBoundary sink(redeclare package Medium =
-        Medium_HeatingCircuit, nPorts=1)
+        Medium_HeatingCircuit, nPorts=1) "Sink of the heating circuit"
     annotation (Placement(transformation(extent={{88,-10},{68,10}})));
 
   Modelica.Blocks.Sources.RealExpression tempFlowHeating(y=T_HeaRet)
@@ -156,11 +156,12 @@ model ModularCHPSystem
     m_flow_small=mCool_flow_small,
     m_flow_nominal=CHPEngineModel.m_floCooNominal,
     redeclare package Medium = Medium_HeatingCircuit)
+    "Density sensor for volume and mass flow calculation"
     annotation (Placement(transformation(extent={{-28,-8},{-12,8}})));
   Modelica.Blocks.Sources.RealExpression massFlowHeating(y=m_flow_HeaCir)
     annotation (Placement(transformation(extent={{-98,4},{-74,24}})));
 
-  AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHP cHP_PowerUnit(
+  AixLib.Fluid.BoilerCHP.ModularCHP.ModularCHPIntegrated cHP_PowerUnit(
     redeclare package Medium_Fuel = Medium_Fuel,
     CHPEngineModel=CHPEngineModel,
     EngMat=EngMat,
@@ -187,7 +188,7 @@ model ModularCHPSystem
     Cal_mEng=Cal_mEng,
     modTab=modTab,
     cHP_PowerUnit(inductionMachine(s_til=cHP_PowerUnit.cHP_PowerUnit.s_til)),
-    coolantHex(eps=eps))
+    coolantHex(eps=eps)) "Model of a CHP unit"
     annotation (Placement(transformation(extent={{0,-26},{52,26}})));
 
 protected

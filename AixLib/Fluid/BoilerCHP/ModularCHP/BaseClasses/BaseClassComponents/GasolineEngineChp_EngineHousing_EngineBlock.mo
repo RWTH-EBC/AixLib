@@ -38,15 +38,17 @@ model GasolineEngineChp_EngineHousing_EngineBlock
   annotation (Dialog(tab="Structure", group="Engine Properties"));
   parameter Modelica.SIunits.Mass mEngWall=A_WInn*rhoEngWall*dInn
     annotation (Dialog(tab="Structure Calculations"));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
+    "Heat port to engine block"                              annotation (
       Placement(transformation(rotation=0, extent={{-100,30},{-80,50}}),
         iconTransformation(extent={{-100,30},{-80,50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a1 annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a1
+    "Heat port to ambient"                                    annotation (
       Placement(transformation(rotation=0, extent={{-50,-100},{-30,-80}}),
         iconTransformation(extent={{-50,-100},{-30,-80}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
-    innerThermalCond2_2(G=GInnWall/2) annotation (Placement(transformation(
-          extent={{-42,-10},{-22,10}},rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor innerThermalCond2(G=
+        GInnWall/2) annotation (Placement(transformation(extent={{-42,-10},{-22,
+            10}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor outerThermalCond(
       G=GEngBlo/2) annotation (Placement(transformation(extent={{-10,-10},{10,
             10}},  rotation=0)));
@@ -54,7 +56,8 @@ model GasolineEngineChp_EngineHousing_EngineBlock
     der_T(fixed=false, start=0),
     C=CEngBlo,
     T(start=T_Amb,
-      fixed=true))      annotation (Placement(transformation(
+      fixed=true)) "Thermal capacity of the engine block"
+                        annotation (Placement(transformation(
         origin={22,-10},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -68,12 +71,12 @@ model GasolineEngineChp_EngineHousing_EngineBlock
 equation
   connect(outerThermalCond.port_b,outerEngineBlock. port)
     annotation (Line(points={{10,0},{22,0}},     color={191,0,0}));
-  connect(outerThermalCond.port_a,innerThermalCond2_2. port_b)
-    annotation (Line(points={{-10,0},{-22,0}},   color={191,0,0}));
+  connect(outerThermalCond.port_a, innerThermalCond2.port_b)
+    annotation (Line(points={{-10,0},{-22,0}}, color={191,0,0}));
   connect(outerEngineBlock.port,outerThermalCond2. port_a)
     annotation (Line(points={{22,0},{34,0}},     color={191,0,0}));
-  connect(port_a, innerThermalCond2_2.port_a) annotation (Line(points={{-90,40},
-          {-60,40},{-60,0},{-42,0}},         color={191,0,0}));
+  connect(port_a, innerThermalCond2.port_a) annotation (Line(points={{-90,40},{
+          -60,40},{-60,0},{-42,0}}, color={191,0,0}));
   connect(port_a1, toAmbient.port_a) annotation (Line(points={{-40,-90},{-40,
           -60},{0,-60}},  color={191,0,0}));
   connect(outerThermalCond2.port_b, toAmbient.port_b) annotation (Line(points={{54,0},{
