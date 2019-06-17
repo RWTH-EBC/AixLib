@@ -7,8 +7,7 @@ model ModularCHPSystem
       AixLib.DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
                                                                     constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-    "Fuel medium model used in the CHP plant"
-                                annotation(choicesAllMatching=true);
+    "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium_Coolant = Modelica.Media.Air.DryAirNasa
                                                            constrainedby
     Modelica.Media.Interfaces.PartialMedium
@@ -120,28 +119,6 @@ model ModularCHPSystem
   Modelica.SIunits.VolumeFlowRate V_flow_HeaCir=0.3/3600
     "Nominal volume flow rate inside the heating circuit" annotation (Dialog(tab=
           "Engine Cooling Circle"));
-  Modelica.SIunits.Temperature T_Ret=cHP_PowerUnit.temRetFlo.T
-    "Coolant return temperature";
-  Modelica.SIunits.Temperature T_Sup=cHP_PowerUnit.temSupFlo.T
-    "Coolant supply temperature";
-  Modelica.SIunits.Power Q_Therm_th=cHP_PowerUnit.Q_Therm_th "Thermal power output of the CHP unit to the coolant media";
-  Modelica.SIunits.Power Q_Therm=cHP_PowerUnit.Q_Therm "Effective thermal power output of the CHP unit to the heating circuit";
-  Modelica.SIunits.Power P_Mech=cHP_PowerUnit.P_Mech "Mechanical power output of the CHP unit";
-  Modelica.SIunits.Power P_El=cHP_PowerUnit.P_El "Electrical power output of the CHP unit";
-  Modelica.SIunits.Power P_Fuel=cHP_PowerUnit.P_Fuel "CHP fuel expenses";
-  Modelica.SIunits.Power Q_TotUnused=cHP_PowerUnit.Q_TotUnused "Total heat error of the CHP unit";
-  Modelica.SIunits.MassFlowRate m_flow_CO2=cHP_PowerUnit.m_flow_CO2
-    "CO2 emission output rate";
-  Modelica.SIunits.MassFlowRate m_flow_Fue=cHP_PowerUnit.m_flow_Fue
-    "Fuel consumption rate of CHP unit";
-  type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
-  SpecificEmission b_CO2=cHP_PowerUnit.b_CO2 "Specific CO2 emissions per kWh (heat and power)";
-  SpecificEmission b_e=cHP_PowerUnit.b_e "Specific fuel consumption per kWh (heat and power)";
-  Real FueUtiRate = cHP_PowerUnit.FueUtiRate "Fuel utilization rate of the CHP unit";
-  Real PowHeatRatio = cHP_PowerUnit.PowHeatRatio "Power to heat ration of the CHP unit";
-  Real eta_Therm = cHP_PowerUnit.eta_Therm "Thermal efficiency of the CHP unit";
-  Real eta_Mech = cHP_PowerUnit.eta_Mech "Mechanical efficiency of the CHP unit";
-  Real eta_El = cHP_PowerUnit.eta_El "Mechanical efficiency of the CHP unit";
 
   Modelica.Fluid.Sources.MassFlowSource_T source(
     use_T_in=true,
@@ -199,14 +176,12 @@ protected
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
                                                                constrainedby
     DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-    "Air medium model used in the CHP plant"
-                         annotation(choicesAllMatching=true);
+    "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   replaceable package Medium_Exhaust =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-    "Exhaust gas medium model used in the CHP plant"
-                                 annotation(choicesAllMatching=true);
+    "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   parameter Modelica.SIunits.Mass mEng=CHPEngineModel.mEng + Cal_mEng
     "Total engine mass for heat capacity calculation"
