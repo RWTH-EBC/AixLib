@@ -1,6 +1,7 @@
 within AixLib.PlugNHarvest.Components.SmartFacade;
 model SmartFacade
   extends BaseClasses.PartialSmartFassade;
+  replaceable package MyMedium = Modelica.Media.Air.DryAirNasa  ;
   // Mechanical ventilation
   parameter Boolean withMechVent = false "with mechanical ventilation" annotation (choices(checkBox=true));
   // PV
@@ -31,8 +32,8 @@ model SmartFacade
         origin={-28,-94})));
   Modelica.Blocks.Interfaces.RealInput Schedule_mechVent if withMechVent
     "schedule mechanical ventilation in x1/h over time"
-    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}}),
-        iconTransformation(extent={{-100,-60},{-80,-40}})));
+    annotation (Placement(visible = true,transformation(extent = {{-120, -80}, {-80, -40}}, rotation = 0),
+        iconTransformation(extent = {{-100, -60}, {-80, -40}}, rotation = 0)));
 
   sahaix                                     solarAirHeater(
     MassFlowSetPoint=MassFlowSetPoint,
@@ -43,7 +44,7 @@ model SmartFacade
     SAHLength2=SAHLength2,
     AbsorberHeatCapacity=AbsorberHeatCapacity,
     CoverTransmitance=CoverTransmitance,
-    CoverConductance=CoverConductance) if                      withSolAirHeat annotation (Placement(transformation(
+    CoverConductance=CoverConductance, redeclare package MyMedium = MyMedium) if                      withSolAirHeat annotation (Placement(transformation(
         extent={{-21,-21},{21,21}},
         rotation=180,
         origin={-9,-55})));
@@ -81,6 +82,7 @@ model SmartFacade
   parameter Modelica.SIunits.ThermalConductance CoverConductance=3.2
     "Cover Conductance for solar air heater" annotation(Dialog(tab = "Solar Air Heater", enable = withSolAirHeat));
 equation
+  
   if withMechVent then
     connect(weaBus, mechVent.weaBus) annotation (Line(
       points={{-90,6},{-40,6},{-40,14},{-30,14},{-30,14.22},{-21.32,14.22}},
@@ -124,6 +126,8 @@ equation
       extent={{6,3},{6,3}}));
     connect(solarAirHeater.heatOutput, heatOutput_SAH) annotation (Line(points={{-29.16,
           -39.6},{-40,-39.6},{-40,-76},{6,-76},{6,-100}}, color={0,0,127}));
+  connect(solarAirHeater.sahaix_switch, Schedule_mechVent) annotation(
+    Line(points = {{12, -40}, {22, -40}, {22, -30}, {-92, -30}, {-92, -60}, {-100, -60}}, color = {0, 0, 127}));
   end if;
 
   annotation (Icon(graphics={Rectangle(

@@ -2,15 +2,17 @@ within AixLib.PlugNHarvest.Components.SmartFacade.Examples;
 model SmartFacade
   import AixLib.PlugNHarvest;
   extends Modelica.Icons.Example;
-    package Medium = AixLib.Media.Air;
+  replaceable package Medium = AixLib.Media.Air;
+  replaceable package MyMedium=Modelica.Media.Air.DryAirNasa;
+  
   PlugNHarvest.Components.SmartFacade.SmartFacade smartFacade(
-    withPV=true,
-    withMechVent=true,
+    redeclare package AirModel = Medium,
+    redeclare package MyMedium= MyMedium,
     room_V=vol.V,
-    redeclare package AirModel = Medium)
+    withMechVent=true,withPV=true, withSolAirHeat = true)
     annotation (Placement(transformation(extent={{-24,-2},{14,36}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
+    filNam= "C:/Users/makis/Documents/Dymola/AixLib-issue520_PnH/AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-94,-2},{-74,18}})));
   Modelica.Blocks.Sources.Constant Solarradiation(k=0)

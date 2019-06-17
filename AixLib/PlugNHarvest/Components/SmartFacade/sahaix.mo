@@ -1,6 +1,8 @@
 ﻿within AixLib.PlugNHarvest.Components.SmartFacade;
 model sahaix
 
+replaceable package MyMedium = Modelica.Media.Air.DryAirNasa;
+    
   parameter Modelica.SIunits.MassFlowRate MassFlowSetPoint = 0.0306 "Mass Flow Set Point" annotation (Dialog(group = "Operational Parameters", descriptionLabel = true));
   parameter Modelica.SIunits.Area CoverArea = 1.2634 "Cover Area" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
   parameter Modelica.SIunits.Area InnerCrossSection = 0.01181 "Channel Cross Section" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
@@ -20,87 +22,72 @@ model sahaix
   Modelica.Blocks.Sources.RealExpression convenction_coefficient(y=25)
     annotation (Placement(transformation(extent={{32,24},{12,44}})));
   Modelica.Fluid.Sources.Boundary_pT environment_flow(
-    redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa,
+    redeclare package Medium = MyMedium,
     use_T_in=true,
     nPorts=1,
     p=101300)
-    annotation (Placement(transformation(extent={{90,42},{70,62}})));
-  Modelica.Fluid.Pipes.DynamicPipe air_heater_f(
-    isCircular=false,
-    use_HeatTransfer=true,
+    annotation (Placement(visible = true, transformation(extent = {{90, 42}, {70, 62}}, rotation = 0)));
+  Modelica.Fluid.Pipes.DynamicPipe air_heater_f(    
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer,
-    diameter=1,
-    m_flow_start=0.02,
-    redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa,
-    height_ab=0.45,
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer (redeclare package Medium = MyMedium),
+    redeclare package Medium = MyMedium,
     redeclare model FlowModel =
-        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (redeclare package Medium = MyMedium,
           dp_nominal(displayUnit="Pa") = 32, m_flow_nominal=0.028),
     crossArea=InnerCrossSection,
+    diameter=1,
+    height_ab=0.45,isCircular=false,
+    length=SAHLength1, m_flows(fixed = false), nNodes = 2,
     perimeter=Perimeter,
-    length=SAHLength1,
-    T_start=295.15)
+    use_HeatTransfer=true)
     annotation (Placement(transformation(extent={{-58,62},{-78,42}})));
 
-  Modelica.Fluid.Pipes.DynamicPipe air_heater_b(
-    isCircular=false,
-    use_HeatTransfer=true,
+  Modelica.Fluid.Pipes.DynamicPipe air_heater_b(    
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer,
-    diameter=1,
-    m_flow_start=0.02,
-    redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa,
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer (redeclare package Medium = MyMedium),
+    redeclare package Medium = MyMedium,
     redeclare model FlowModel =
-        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (redeclare package Medium = MyMedium,
           dp_nominal(displayUnit="Pa") = 32, m_flow_nominal=0.028),
-    height_ab=-0.45,
     crossArea=InnerCrossSection,
+    diameter=1,
+    height_ab=0.45,isCircular=false,
+    length=SAHLength2, m_flows(fixed = false), nNodes = 2,
     perimeter=Perimeter,
-    length=SAHLength2,
-    T_start=295.15)
+    use_HeatTransfer=true)
     annotation (Placement(transformation(extent={{-92,62},{-112,42}})));
 
-  Modelica.Fluid.Sensors.VolumeFlowRate volumeFlowRate(redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa)
+  Modelica.Fluid.Sensors.VolumeFlowRate volumeFlowRate(redeclare package Medium = MyMedium)
     annotation (Placement(transformation(extent={{-20,-14},{-4,-30}})));
-  Modelica.Fluid.Machines.PrescribedPump fan(
-    use_N_in=true,
-    redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa,
+ Modelica.Fluid.Machines.PrescribedPump fan(    
+    redeclare package Medium = MyMedium,
     redeclare function flowCharacteristic =
         Modelica.Fluid.Machines.BaseClasses.PumpCharacteristics.linearFlow (
           V_flow_nominal={0,0.04377}, head_nominal={12.626,0}),
-    N_nominal=1500)
+    N_nominal=1500,use_N_in=true)
     annotation (Placement(transformation(extent={{-66,-12},{-46,-32}})));
   Modelica.Blocks.Sources.RealExpression flow_set_point(y=MassFlowSetPoint)
-    annotation (Placement(transformation(extent={{-118,-66},{-98,-46}})));
+    annotation (Placement(visible = true, transformation(extent = {{-146, -80}, {-126, -60}}, rotation = 0)));
   Modelica.Blocks.Continuous.LimPID Controller(
-    limitsAtInit=false,
-    Ti=0.01,
-    k=15,
+    
     Td=0.2,
+    Ti=0.01,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=15,limitsAtInit= false, xi_start = 80,
     yMax=2500,
     yMin=1200)
     annotation (Placement(transformation(extent={{-78,-62},{-66,-50}})));
-  Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa)
+  Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium = MyMedium)
     annotation (Placement(transformation(extent={{20,-14},{36,-30}})));
   AixLib.Utilities.HeatTransfer.SolarRadToHeat solarRadToHeat(coeff=
         CoverTransmitance, A=CoverArea)
     annotation (Placement(transformation(extent={{-26,18},{-46,38}})));
   Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort specificEnthalpy(redeclare
-      package Medium =
-        Modelica.Media.Air.DryAirNasa)
+      package Medium = MyMedium)
     annotation (Placement(transformation(extent={{50,-12},{70,-32}})));
   Modelica.Fluid.Sources.Boundary_pT house(
     use_T_in=false,
-    redeclare package Medium =
-        Modelica.Media.Air.DryAirNasa,
+    redeclare package Medium = MyMedium,
     nPorts=1,
     p=101300)
     annotation (Placement(transformation(extent={{132,-32},{112,-12}})));
@@ -110,11 +97,11 @@ model sahaix
     prescribedAmbTemperature1
     annotation (Placement(transformation(extent={{46,4},{34,16}})));
   Modelica.Blocks.Interfaces.RealInput T_in annotation (Placement(
-        transformation(rotation=90,extent={{-20,-20},{20,20}},
-        origin={100,128}),
-        iconTransformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={60,102})));
+        visible = true,transformation(
+        origin={100,128},extent={{-20,-20},{20,20}},rotation=90),
+        iconTransformation(
+        origin={60,102},extent={{10, -10}, {-10, 10}},
+        rotation=90)));
   AixLib.Utilities.Interfaces.SolarRad_in solarRad_in annotation (Placement(
         transformation(
         rotation=90,
@@ -128,14 +115,30 @@ model sahaix
         CoverConductance)
     annotation (Placement(transformation(extent={{-62,-4},{-42,16}})));
   Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort specificEnthalpyEnv(redeclare
-      package Medium = Modelica.Media.Air.DryAirNasa)
+      package Medium = MyMedium)
     annotation (Placement(transformation(extent={{40,62},{60,42}})));
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{96,-70},{116,-50}})));
   Modelica.Blocks.Interfaces.RealOutput heatOutput
     "Connector of Real output signal"
     annotation (Placement(transformation(extent={{134,-120},{154,-100}})));
+  Modelica.Blocks.Interfaces.RealInput sahaix_switch annotation(
+    Placement(visible = true, transformation(origin = {-156, -110}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-156, -110}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Modelica.Blocks.Math.Product product1 annotation(
+    Placement(visible = true, transformation(origin = {-100, -104}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+ inner Modelica.Fluid.System system(m_flow_start = 0.03)  annotation(
+    Placement(visible = true, transformation(origin = {-110, 118}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(environment_flow.ports[1], specificEnthalpyEnv.port_b)
+    annotation (Line(points={{70,52},{60,52}}, color={0,127,255}));
+  connect(T_in, environment_flow.T_in) annotation (Line(points={{100,128},{100,
+          56},{92,56}},          color={0,0,127}));
+  connect(product1.y, Controller.u_s) annotation(
+    Line(points = {{-88, -104}, {-86, -104}, {-86, -56}, {-80, -56}, {-80, -56}}, color = {0, 0, 127}));
+  connect(flow_set_point.y, product1.u1) annotation(
+    Line(points = {{-125, -70}, {-116, -70}, {-116, -98}, {-112, -98}}, color = {0, 0, 127}));
+  connect(sahaix_switch, product1.u2) annotation(
+    Line(points = {{-156, -110}, {-112, -110}}, color = {0, 0, 127}));
   connect(convenction_coefficient.y,convection. Gc)
     annotation (Line(points={{11,34},{-2,34},{-2,20}},
                                                    color={0,0,127}));
@@ -146,8 +149,6 @@ equation
                                         color={0,127,255}));
   connect(fan.port_b,volumeFlowRate. port_a) annotation (Line(points={{-46,-22},
           {-20,-22}},                     color={0,127,255}));
-  connect(flow_set_point.y,Controller. u_s) annotation (Line(points={{-97,-56},
-          {-79.2,-56}},                       color={0,0,127}));
   connect(volumeFlowRate.port_b,massFlowRate. port_a) annotation (Line(points={{-4,-22},
           {20,-22}},                         color={0,127,255}));
   connect(massFlowRate.m_flow,Controller. u_m) annotation (Line(points={{28,
@@ -162,8 +163,6 @@ equation
           28,-116},{60,-116}},      color={0,0,127}));
   connect(prescribedAmbTemperature1.port, convection.fluid)
     annotation (Line(points={{34,10},{8,10}},      color={191,0,0}));
-  connect(T_in, environment_flow.T_in) annotation (Line(points={{100,128},{100,
-          56},{92,56}},          color={0,0,127}));
   connect(T_in, prescribedAmbTemperature1.T)
     annotation (Line(points={{100,128},{100,10},{47.2,10}}, color={0,0,127}));
   connect(solarRad_in, solarRadToHeat.solarRad_in) annotation (Line(points={{-18,133},
@@ -181,8 +180,6 @@ equation
                                                  color={191,0,0}));
   connect(solarRadToHeat.heatPort, absorber.port) annotation (Line(points={{-45,
           26},{-68,26},{-68,10},{-88,10}}, color={191,0,0}));
-  connect(environment_flow.ports[1], specificEnthalpyEnv.port_b)
-    annotation (Line(points={{70,52},{60,52}}, color={0,127,255}));
   connect(specificEnthalpyEnv.port_a, air_heater_f.port_a)
     annotation (Line(points={{40,52},{-58,52}}, color={0,127,255}));
   connect(specificEnthalpyEnv.h_out, add.u1) annotation (Line(points={{50,41},{
@@ -198,15 +195,10 @@ equation
       <p>The Solar Air Heater Model was developed by CPERI/CERTH in the framework of the European Union’s Horizon 2020 research and innovation programme under grant agreement No 768735 (PLUG-N-HARVEST)</p>
 
       
- </html>", Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-                    Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-      revisions="<html>
-<ul>
-<li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>Changed heat output of SAH to a normal real output</li>
+ </html>", revisions = "<html><head></head><body><ul>
+<li><i>April, 2019&nbsp;</i> by Ana Constantin:<br>Changed heat output of SAH to a normal real output</li><li>May 2019 by Avraam Kartalidis:&nbsp;</li><li>NewSwitch has been added</li>
 </ul>
-</html>"),             Dialog(group = "Dimensions", descriptionLabel = true),
+</body></html>"),             Dialog(group = "Dimensions", descriptionLabel = true),
     uses(Modelica(version="3.2.2"), AixLib(version="0.7.3")),
     Diagram(coordinateSystem(initialScale=0.1, extent={{-150,-150},{150,150}})),
     Icon(coordinateSystem(initialScale=0.1, extent={{-150,-150},{150,150}}),
