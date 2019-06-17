@@ -6,7 +6,7 @@ class GasolineEngineChp_EngineHousing
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
                                                            constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                 annotation(choicesAllMatching=true);
+    "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   parameter Modelica.SIunits.Thickness dInn=0.005
     "Typical value for the thickness of the cylinder wall (between combustion chamber and cooling circle)"

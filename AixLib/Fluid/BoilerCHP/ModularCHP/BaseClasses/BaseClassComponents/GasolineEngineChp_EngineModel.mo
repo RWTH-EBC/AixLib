@@ -7,18 +7,18 @@ model GasolineEngineChp_EngineModel
       DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
                                                                 constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                annotation(choicesAllMatching=true,
+    "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true,
       Documentation(revisions="<html>
 </html>"));
   replaceable package Medium2 =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
                                                             constrainedby
     DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                         annotation(choicesAllMatching=true);
+    "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium3 =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus constrainedby
     DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
-                                 annotation(choicesAllMatching=true);
+    "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
   parameter
     AixLib.DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
     CHPEngData=DataBase.CHP.ModularCHPEngineData.CHP_SenerTecDachsG5_5()

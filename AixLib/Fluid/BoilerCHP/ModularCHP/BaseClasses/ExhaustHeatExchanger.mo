@@ -13,12 +13,14 @@ model ExhaustHeatExchanger
 
   replaceable package Medium3 =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
-    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (
+    constrainedby Modelica.Media.Interfaces.PartialMedium
+    "Exhaust gas medium model used in the CHP plant"  annotation (
       __Dymola_choicesAllMatching=true);
   replaceable package Medium4 =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
                                       property_T=356, X_a=0.50) constrainedby
-    Modelica.Media.Interfaces.PartialMedium annotation (
+    Modelica.Media.Interfaces.PartialMedium
+    "Coolant medium model used in the CHP plant" annotation (
       __Dymola_choicesAllMatching=true);
 
   parameter

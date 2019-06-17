@@ -131,17 +131,17 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
     "Mechanical efficiency of the CHP unit";
 
   inner Modelica.Fluid.System system(p_ambient=p_amb, T_ambient=T_amb)
-    annotation (Placement(transformation(extent={{-100,-100},{-84,-84}})));
+    annotation (Placement(transformation(extent={{-80,-100},{-64,-84}})));
   Modelica.Fluid.Sources.FixedBoundary outletExhaustGas(
     redeclare package Medium = Medium_Exhaust,
     p=p_amb,
     nPorts=1)
-    annotation (Placement(transformation(extent={{112,30},{92,50}})));
+    annotation (Placement(transformation(extent={{110,30},{90,50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambientTemperature(T=
        T_amb) "Ambient temperature for thermal loss calculation"
-    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+    annotation (Placement(transformation(extent={{-80,-8},{-64,8}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
-    annotation (Placement(transformation(extent={{-42,-8},{-58,8}})));
+    annotation (Placement(transformation(extent={{-22,-8},{-38,8}})));
   AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses.ExhaustHeatExchanger
     exhaustHeatExchanger(
     pipeCoolant(
@@ -242,18 +242,18 @@ protected
 
 equation
   connect(ambientTemperature.port, heatFlowSensor.port_b)
-    annotation (Line(points={{-80,0},{-58,0}}, color={191,0,0}));
+    annotation (Line(points={{-64,0},{-38,0}}, color={191,0,0}));
   connect(inductionMachine.flange_genIn, gasolineEngineChp.flange_eng)
     annotation (Line(points={{-36,27},{-18.72,27},{-18.72,26.72}}, color={0,0,0}));
   connect(gasolineEngineChp.port_exh, exhaustHeatExchanger.port_a1) annotation (
      Line(points={{18.36,26.36},{28,26.36},{28,26.4},{40,26.4}}, color={0,127,255}));
   connect(gasolineEngineChp.port_amb, heatFlowSensor.port_a)
-    annotation (Line(points={{0,9.8},{0,0},{-42,0}}, color={191,0,0}));
+    annotation (Line(points={{0,9.8},{0,0},{-22,0}}, color={191,0,0}));
   connect(gasolineEngineChp.port_cooCir, submodelCooling.heatPort_outside)
     annotation (Line(points={{18,10.16},{18,-6},{-10,-6},{-10,-76},{28,-76},{28,
           -65.56}}, color={191,0,0}));
   connect(exhaustHeatExchanger.port_amb, heatFlowSensor.port_a) annotation (
-      Line(points={{40,18},{30,18},{30,0},{-42,0}}, color={191,0,0}));
+      Line(points={{40,18},{30,18},{30,0},{-22,0}}, color={191,0,0}));
   connect(inductionMachine.cHPGenBus, sigBusCHP) annotation (Line(
       points={{-62.4,27},{-70,27},{-70,93},{1,93}},
       color={255,204,51},
@@ -287,7 +287,7 @@ equation
   connect(port_retCoo, exhaustHeatExchanger.port_a2) annotation (Line(points={{-80,
           -58},{-40,-58},{-40,-90},{100,-90},{100,9.6},{68,9.6}}, color={0,127,255}));
   connect(exhaustHeatExchanger.port_b1, outletExhaustGas.ports[1]) annotation (
-      Line(points={{68,26.4},{80,26.4},{80,40},{92,40}}, color={0,127,255}));
+      Line(points={{68,26.4},{80,26.4},{80,40},{90,40}}, color={0,127,255}));
   connect(thermalPowerCHP.y, sigBusCHP.meaThePowChp) annotation (Line(points={{
           -7,152},{1.135,152},{1.135,93.125}}, color={0,0,127}));
   connect(specificCO2.y, sigBusCHP.calEmiCO2Chp) annotation (Line(points={{-7,
