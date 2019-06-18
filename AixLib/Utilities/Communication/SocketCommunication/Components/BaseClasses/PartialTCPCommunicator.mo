@@ -6,47 +6,35 @@ partial model PartialTCPCommunicator
 extends Modelica.Blocks.Interfaces.DiscreteMIMO;
 
 /**************** Required input ****************************/
-  parameter String  IP_Address="127.0.0.1" "IP address or name of Server";
-  parameter String  port="27015" "Port on server";
+  parameter String IP_Address="127.0.0.1" "IP address or name of server";
+  parameter Integer port(min=0)=27015 "Port on server";
 
  /**************** socket handle ***********************/
- Integer socketHandle(start = 0) "socket handle";
+protected
+  Modelica_DeviceDrivers.Communication.TCPIPSocketClient socketHandle = Modelica_DeviceDrivers.Communication.TCPIPSocketClient() "Socket handle";
 
-/**************** Error handling of C functions ***********************/
-   Integer state(start = 0)
-    "Variable to check state of external C-function, 0 corresponds to OK, 1 to failure. Error messages are reported.";
-
-initial algorithm
-  /**************** initialize TCP socket and connect to server**************/
-  // At start of simulation socket is created and connection to server is established
-  // socketHandle is variable to initialize and access multiple sockets
-
-(socketHandle,state) := Functions.TCP.TCPConstructor(IP_Address, port);
+  Boolean isConnected(start=false, fixed=true);
 
 equation
-
-algorithm
-
-// Insert here protocol specific send and receive functions
-
- when terminal() then
-/**************** Terminate connection to server at end of simulation  **************/
-    state := Functions.TCP.SocketDestruct(socketHandle);
-    socketHandle := 0;
+  when initial() then
+    isConnected = Modelica_DeviceDrivers.Communication.TCPIPSocketClient_.connect_(socketHandle, IP_Address, port);
   end when;
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                             graphics),
+            -100},{100,100}})),
             Documentation(info="<html>
-<p>This is a partial model for a model which handles TCP-Communication. It only establishes a connection to a server on a certain port and terminates it when the simulation ends. </p>
+<p>This is a partial model for a model which handles TCP communication. It only establishes a connection to a server on a certain port and terminates it when the simulation ends. </p>
 <p>Check <a href=\"modelica://AixLib.Utilities.Communication.SocketCommunication.Components.TCPCommunicatorExample\">TCPCommunicatorExample
-</a>  for an algorithm example for sending and receiving telegrams. </p>
-<p>Note a server needs to be accessible for communcation. </p>
+</a> for an algorithm example for sending and receiving telegrams. </p>
+<p>Note a server needs to be accessible for communication. </p>
 <p>Higher Level protocols (&gt;OSI-Level 5) need to be added depending on the specific application. </p>
 </html>",
 revisions="<HTML>
 <ul>
+<li><i>August 25, 2018&nbsp;</i>
+         by Thomas Beutlich:<br/>
+         Utilize TCPIPSocketClient from Modelica_DeviceDrivers library. This is for:<a href=\"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a></li>
+
 <li><i>January 25, 2016&nbsp;</i>
          by Ana Constantin:<br/>
          Added socketHandle to allow for more than one socket in a model</li>
@@ -59,11 +47,7 @@ revisions="<HTML>
          by Georg Ferdinand Schneider:<br/>
          First implementation
 </li>
-
-
-
 </ul>
 </HTML>"),
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-        graphics));
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
 end PartialTCPCommunicator;

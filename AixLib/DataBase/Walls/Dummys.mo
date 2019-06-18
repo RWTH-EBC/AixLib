@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls;
+within AixLib.DataBase.Walls;
 package Dummys
 
   record FloorForFloorHeating2Layers

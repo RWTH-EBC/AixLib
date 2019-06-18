@@ -54,11 +54,11 @@ record OPH_1_Office "Office zone of office building"
     wfWall = {0.2, 0.2, 0.2, 0.2, 0.1},
     wfWin = {0.25, 0.25, 0.25, 0.25, 0},
     wfGro = 0.1,
-    nrPeople = 83.75,
+    internalGainsPeopleSpecific = 3.5,
     ratioConvectiveHeatPeople = 0.5,
-    nrPeopleMachines = 117.25,
+    internalGainsMachinesSpecific = 7.0,
     ratioConvectiveHeatMachines = 0.6,
-    lightingPower = 12.5,
+    lightingPowerSpecific = 12.5,
     ratioConvectiveHeatLighting = 0.6,
     useConstantACHrate = false,
     baseACH = 0.2,
@@ -81,6 +81,10 @@ record OPH_1_Office "Office zone of office building"
     CoolerOn = false);
   annotation (Documentation(revisions="<html>
  <ul>
+  <li>
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  </li>
   <li>
   September 27, 2016, by Moritz Lauster:<br/>
   Reimplementation.
