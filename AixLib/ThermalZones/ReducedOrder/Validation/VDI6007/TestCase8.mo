@@ -4,18 +4,18 @@ model TestCase8 "VDI 6007 Test Case 8 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    alphaExt=2.7,
-    alphaWin=2.7,
+    hConvExt=2.7,
+    hConvWin=2.7,
     gWin=1,
     nExt=1,
-    alphaRad=5,
+    hRad=5,
     nInt=1,
     RWin=0.00000001,
     ratioWinConRad=0.09,
     RExt={0.0017362530106},
     CExt={5259932.23},
     AInt=60.5,
-    alphaInt=2.12,
+    hConvInt=2.12,
     RInt={0.000668895639141},
     CInt={12391363.8631},
     RExtRem=0.01913729904,
@@ -26,9 +26,7 @@ model TestCase8 "VDI 6007 Test Case 8 model"
     AExt={10.5,15},
     T_start=295.15,
     extWallRC(thermCapExt(each T(fixed=true))),
-    intWallRC(thermCapInt(each T(fixed=true))))
-    "Thermal zone"
-    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    intWallRC(thermCapInt(each T(fixed=true)))) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Components.Convection theConWall
     "Outdoor convective heat transfer"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
@@ -68,13 +66,8 @@ model TestCase8 "VDI 6007 Test Case 8 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow machines"
     annotation (Placement(transformation(extent={{48,-66},{68,-46}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=25*25.5)
-    "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(
-    transformation(
-    extent={{-4,-4},{4,4}},
-    rotation=90,
-    origin={30,-18})));
+  Modelica.Blocks.Sources.Constant hConvWall(k=25*25.5) "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp1(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     columns={2},
@@ -155,14 +148,12 @@ model TestCase8 "VDI 6007 Test Case 8 model"
     n=2,
     wfGro=0,
     aExt=0.7,
-    alphaWallOut=20,
-    alphaRad=5,
+    hConvWallOut=20,
+    hRad=5,
     withLongwave=false,
     wfWall={0.05796831135677373,0.13249899738691134},
     wfWin={0.4047663456281575,0.4047663456281575},
-    TGro=285.15)
-    "Equivalent air temperature"
-    annotation (Placement(transformation(extent={{-26,-16},{-6,2}})));
+    TGro=285.15) "Equivalent air temperature" annotation (Placement(transformation(extent={{-26,-16},{-6,2}})));
   Modelica.Blocks.Sources.Constant const(k=273.15)
     "Dummy black body sky temperature"
     annotation (Placement(transformation(extent={{-58,-8},{-52,-2}})));
@@ -237,8 +228,8 @@ model TestCase8 "VDI 6007 Test Case 8 model"
 equation
   connect(thermalZoneTwoElements.extWall, theConWall.solid)
     annotation (Line(points={{44,12},{40,12},{40,1},{36,1}},   color={191,0,0}));
-  connect(alphaWall.y, theConWall.Gc)
-    annotation (Line(points={{30,-13.6},{31,-13.6},{31,-4}}, color={0,0,127}));
+  connect(hConvWall.y, theConWall.Gc)
+    annotation (Line(points={{0,4.4},{31,4.4},{31,-4}},      color={0,0,127}));
   connect(perRad.port, thermalZoneTwoElements.intGainsRad)
     annotation (Line(
     points={{68,-92},{68,-92},{98,-92},{98,24},{92,24}},

@@ -5,8 +5,7 @@ model TwoElements
 
   parameter Modelica.SIunits.Area AInt "Area of interior walls"
     annotation(Dialog(group="Interior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInt
-    "Convective coefficient of heat transfer of interior walls (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInt "Convective coefficient of heat transfer of interior walls (indoor)"
     annotation(Dialog(group="Interior walls"));
   parameter Integer nInt(min = 1) "Number of RC-elements of interior walls"
     annotation(Dialog(group="Interior walls"));
@@ -38,22 +37,12 @@ protected
                                                                      AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
-  Modelica.Blocks.Sources.Constant alphaIntWall(k=AInt*alphaInt) if AInt > 0
-    "Coefficient of convective heat transfer for interior walls"
-    annotation (Placement(transformation(
-    extent={{5,-5},{-5,5}},
-    rotation=-90,
-    origin={138,-61})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallIntWall(
-    final G=min(ATotExt, AInt)*alphaRad, dT(start=0)) if
-                                             ATotExt > 0 and AInt > 0
-    "Resistor between exterior walls and interior walls"
-    annotation (Placement(transformation(extent={{138,-116},{158,-96}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallWin(
-    final G=min(ATotWin, AInt)*alphaRad, dT(start=0)) if
-                                             ATotWin > 0 and AInt > 0
-    "Resistor between interior walls and windows"
-    annotation (Placement(transformation(extent={{74,-118},{94,-98}})));
+  Modelica.Blocks.Sources.Constant hConvIntWall(k=AInt*hConvInt) "Coefficient of convective heat transfer for interior walls"
+    annotation (Placement(transformation(extent={{5,-5},{-5,5}}, rotation=-90)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallIntWall(final G=min(ATotExt, AInt)*hRad, dT(start=0)) if ATotExt > 0
+     and AInt > 0 "Resistor between exterior walls and interior walls" annotation (Placement(transformation(extent={{138,-116},{158,-96}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallWin(final G=min(ATotWin, AInt)*hRad, dT(start=0)) if ATotWin > 0 and
+    AInt > 0 "Resistor between interior walls and windows" annotation (Placement(transformation(extent={{74,-118},{94,-98}})));
 
 equation
   connect(resExtWallIntWall.port_a, convExtWall.solid)
@@ -102,8 +91,8 @@ equation
     {-116,40}},
     color={191,0,0},
     smooth=Smooth.None));
-  connect(alphaIntWall.y, convIntWall.Gc)
-    annotation (Line(points={{138,-55.5},{138,-53.75},{138,-50}},
+  connect(hConvIntWall.y, convIntWall.Gc)
+    annotation (Line(points={{0,5.5},{0,-50},{138,-50}},
     color={0,0,127}));
   connect(intWallRC.port_a, intWallIndoorSurface)
     annotation (Line(points={{182,-40},{168,-40},{168,-82},{-120,-82},{-120,-180}},

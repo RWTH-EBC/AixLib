@@ -1,28 +1,29 @@
 within AixLib.Utilities.HeatTransfer;
-model HeatConv_inside
+model HeatConvInside
   "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
-  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient alpha_custom
+  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient hConvCustom
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
-  parameter Integer calcMethod=2 "Calculation Method" annotation (Dialog(
+  parameter Integer calcMethodHConv=2 "Calculation Method"
+                                                      annotation (Dialog(
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant alpha",
+      choice=3 "Constant hConv",
       radioButtons=true),
       Evaluate=true);
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 2.5
-    "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 3 then true else false));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+                                         annotation (Dialog(descriptionLabel=true,
+        enable=if calcMethodHConv == 3 then true else false));
 
   parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethod == 1 then true else false));
+        enable=if calcMethodHConv == 1 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
-      Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
+      Dialog(descriptionLabel=true, enable=if calcMethodHConv == 3 then false else true),
       choices(
       choice=1 "vertical",
       choice=2 "horizontal facing up",
@@ -30,8 +31,7 @@ model HeatConv_inside
       radioButtons=true),
       Evaluate=true);
   parameter Modelica.SIunits.Area A(min=0) "Area of surface";
-  Modelica.SIunits.CoefficientOfHeatTransfer alpha
-    "variable heat transfer coefficient";
+  Modelica.SIunits.CoefficientOfHeatTransfer hConv "variable heat transfer coefficient";
 
 protected
   Modelica.SIunits.Temp_C posDiff=noEvent(abs(port_b.T - port_a.T))
@@ -44,54 +44,54 @@ equation
   */
 
   // ++++++++++++++++EN ISO 6946 Appendix A >>Flat Surfaces<<++++++++++++++++
-  // upward heat flow: alpha = 5, downward heat flow: alpha = 0.7, horizontal heat flow: alpha = 2.5
-  if calcMethod == 1 then
+  // upward heat flow: hConv = 5, downward heat flow: hConv = 0.7, horizontal heat flow: hConv = 2.5
+  if calcMethodHConv == 1 then
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      alpha = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+      hConv = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
         y1=5,
         y2=0.7,
         x_small=dT_small);
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      alpha = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+      hConv = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
         y1=0.7,
         y2=5,
         x_small=dT_small);
 
     // vertical
     else
-      alpha = 2.5;
+      hConv = 2.5;
     end if;
 
   // ++++++++++++++++Bernd Glueck++++++++++++++++
   // (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
-  // upward heat flow: alpha = 2*(posDiff^0.31)          - equation 1.27, page 26
-  // downward heat flow: alpha = 0.54*(posDiff^0.31)     - equation 1.28, page 26
-  // horizontal heat flow: alpha = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
-  elseif calcMethod == 2 then
+  // upward heat flow: hConv = 2*(posDiff^0.31)          - equation 1.27, page 26
+  // downward heat flow: hConv = 0.54*(posDiff^0.31)     - equation 1.28, page 26
+  // horizontal heat flow: hConv = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
+  elseif calcMethodHConv == 2 then
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
+      hConv = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      alpha = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
+      hConv = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
 
     // vertical plate
     else
-      alpha = 1.6*(posDiff^0.3);
+      hConv = 1.6*(posDiff^0.3);
     end if;
 
-  // ++++++++++++++++alpha_custom++++++++++++++++
+  // ++++++++++++++++hConvCustom++++++++++++++++
   else
-    alpha = alpha_custom;
+    hConv =hConvCustom;
   end if;
 
-  port_a.Q_flow = alpha*A*(port_a.T - port_b.T);
+  port_a.Q_flow =hConv *A*(port_a.T - port_b.T);
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -298,7 +298,7 @@ equation
 <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>
 Algorithm for HeatConv_inside is now selectable via parameters</li>
 <li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>
-Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
+Added EN ISO 6946 equations and corrected usage of constant hConvCustom </li>
 <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>
 Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
 <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>
@@ -309,4 +309,4 @@ Formatted documentation according to standards </li>
 Implemented. </li>
 </ul>
 </html>"));
-end HeatConv_inside;
+end HeatConvInside;

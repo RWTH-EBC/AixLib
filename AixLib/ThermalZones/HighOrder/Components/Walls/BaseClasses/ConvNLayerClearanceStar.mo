@@ -19,29 +19,29 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.SpecificHeatCapacity c[n] = if selectable then wallType.c else fill(1000, n)
     "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
   // which orientation of surface?
-  parameter Integer surfaceOrientation = 1 "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsAlphaConstant == true then false else true), choices(choice = 1
+  parameter Integer surfaceOrientation = 1 "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
         "vertical",                                                                                                    choice = 2
         "horizontal facing up",                                                                                                    choice = 3
         "horizontal facing down",                                                                                                    radioButtons = true));
-  parameter Integer calcMethod = 1
-    "Choose the model for calculation of heat convection at inside surface" annotation (Dialog(descriptionLabel = true), choices(
+  parameter Integer calcMethodHConv=1 "Choose the model for calculation of heat convection at inside surface"
+                                                                            annotation (Dialog(descriptionLabel = true), choices(
       choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant alpha",radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_constant = 2
-    "Constant heat transfer coefficient"                                                                     annotation(Dialog(group = "Convection", enable = calcMethod == 1));
+      choice=3 "Constant hConv",radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2 "Constant heat transfer coefficient"    annotation(Dialog(group="Convection",   enable=
+          calcMethodHConv == 1));
   parameter Modelica.SIunits.Emissivity eps = if selectable then wallType.eps else 0.95
     "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
   // n Loads
-  Utilities.HeatTransfer.HeatConv_inside HeatConv1(
+  Utilities.HeatTransfer.HeatConvInside HeatConv1(
     port_b(T(start=T0)),
-    alpha_custom=alpha_constant,
+    hConvCustom=hConv_const,
     A=A,
     surfaceOrientation=surfaceOrientation,
-    calcMethod=calcMethod)
+    calcMethodHConv=calcMethodHConv)
     annotation (Placement(transformation(
         origin={62,0},
         extent={{-10,-10},{10,10}},

@@ -6,12 +6,12 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     redeclare final package Medium = Modelica.Media.Air.SimpleAir,
     gWin=1,
     nExt=1,
-    alphaRad=5,
+    hRad=5,
     nInt=1,
     RWin=0.00000001,
     ratioWinConRad=0.09,
     AInt=58,
-    alphaWin=2.7,
+    hConvWin=2.7,
     VAir=0,
     nOrientations=1,
     AWin={0},
@@ -24,10 +24,9 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     CInt={12333949.4129606},
     intWallRC(thermCapInt(each T(fixed=true))),
     extWallRC(thermCapExt(each T(fixed=true))),
-    alphaInt=2.398,
+    hConvInt=2.398,
     T_start=290.75,
-    alphaExt=2.4)
-    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    hConvExt=2.4) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
@@ -132,16 +131,14 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     annotation (Placement(transformation(extent={{-90,-8},{-74,8}})));
   EquivalentAirTemperature.VDI6007 eqAirTemp(
     aExt=0.7,
-    alphaWallOut=20,
-    alphaRad=5,
+    hConvWallOut=20,
+    hRad=5,
     withLongwave=false,
     n=1,
     wfWall={0.04646093176283288},
     wfWin={0.32441554918476245},
     wfGro=0.6291235190524047,
-    TGro=288.15)
-    "Equivalent air temperature"
-    annotation (Placement(transformation(extent={{-24,-4},{-4,14}})));
+    TGro=288.15) "Equivalent air temperature" annotation (Placement(transformation(extent={{-24,-4},{-4,14}})));
   Modelica.Blocks.Sources.Constant const(k=273.15)
     "Dummy black body sky temperature"
     annotation (Placement(transformation(extent={{-56,4},{-50,10}})));
@@ -158,13 +155,8 @@ model TestCase10 "VDI 6007 Test Case 10 model"
   Modelica.Thermal.HeatTransfer.Components.Convection theConWall
     "Outdoor convective heat transfer"
     annotation (Placement(transformation(extent={{34,5},{24,-5}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=28*9.75)
-    "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(
-    transformation(
-    extent={{-4,-4},{4,4}},
-    rotation=90,
-    origin={28,-19})));
+  Modelica.Blocks.Sources.Constant hConvWall(k=28*9.75) "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   BaseClasses.VerifyDifferenceThreePeriods assEqu(
     startTime=3600,
     endTime=86400,
@@ -222,8 +214,8 @@ equation
   connect(sunblind.y, eqAirTemp.sunblind[1])
     annotation (Line(points={{-15,19.7},{-15,15.85},{-14,15.85},{-14,15.8}},
     color={0,0,127}));
-  connect(alphaWall.y,theConWall. Gc)
-    annotation (Line(points={{28,-14.6},{29,-14.6},{29,-5}}, color={0,0,127}));
+  connect(hConvWall.y,theConWall. Gc)
+    annotation (Line(points={{0,4.4},{29,4.4},{29,-5}},      color={0,0,127}));
   connect(preTem.port, theConWall.fluid)
     annotation (Line(points={{20,0},{24,0}}, color={191,0,0}));
   connect(theConWall.solid, thermalZoneTwoElements.extWall)
