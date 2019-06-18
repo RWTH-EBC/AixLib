@@ -135,7 +135,7 @@ public
     windowarea=windowarea,
     WindowType=WindowType) if          withWindow and outside
     annotation (Placement(transformation(extent={{-15,-48},{11,-22}})));
-  Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
     Model=Model,
     surfaceType=surfaceType,

@@ -36,7 +36,7 @@ model ConvNLayerClearanceStar
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
   // n Loads
-  Utilities.HeatTransfer.HeatConvInside HeatConv1(
+  Utilities.HeatTransfer.HeatConv_inside HeatConv1(
     port_b(T(start=T0)),
     alpha_custom=alpha_constant,
     A=A,

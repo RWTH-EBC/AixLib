@@ -86,7 +86,7 @@ model Wall
     U=if outside then U_door else U_door*2) if withDoor
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
-  BaseLib.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+  BaseLib.HeatTransfer.HeatConv_outside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
     Model=Model,
     surfaceType=surfaceType,

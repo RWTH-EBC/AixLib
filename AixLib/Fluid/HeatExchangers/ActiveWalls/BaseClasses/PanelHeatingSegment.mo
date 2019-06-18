@@ -60,7 +60,7 @@ parameter HeatCapacityPerArea cDown;
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
-  Utilities.HeatTransfer.HeatConvInside HeatConv(
+  Utilities.HeatTransfer.HeatConv_inside HeatConv(
     final A=A,
     final calcMethod=calcMethodConvection,
     final alpha_custom=convCoeffCustom,

@@ -1,5 +1,5 @@
 within AixLib.Utilities.HeatTransfer;
-model HeatConvInside
+model HeatConv_inside
   "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
   /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient alpha_custom
   */
@@ -309,4 +309,4 @@ Formatted documentation according to standards </li>
 Implemented. </li>
 </ul>
 </html>"));
-end HeatConvInside;
+end HeatConv_inside;

@@ -28,11 +28,11 @@ model Window_ASHRAE140
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
       Placement(transformation(extent={{-10,-20},{10,0}})));
-  Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
+  Utilities.HeatTransfer.HeatConv_outside heatConv_outside(
     A=windowarea,
     Model=2,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
-  Utilities.HeatTransfer.HeatConvInside heatConv_inside(
+  Utilities.HeatTransfer.HeatConv_inside heatConv_inside(
     calcMethod=2,
     alpha_custom=2,
     A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
