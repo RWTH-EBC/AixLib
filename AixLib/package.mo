@@ -27,18 +27,7 @@ package AixLib
     version="0.6.0", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.6.0_to_0.7.0.mos",
     version="0.7.3", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.3_to_0.7.4.mos",
  version="0.7.4", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.4_to_0.7.5.mos",
- version="0.7.5", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.5_to_0.7.6.mos"), from(
-      version="0.7.6",
-      to="Intermediate",
-      change(
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConv_inside", "AixLib.Utilities.HeatTransfer.HeatConvInside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConv_outside", "AixLib.Utilities.HeatTransfer.HeatConvOutside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConvInside", "AixLib.Utilities.HeatTransfer.HeatConv_inside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConvOutside", "AixLib.Utilities.HeatTransfer.HeatConv_outside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConv_inside", "AixLib.Utilities.HeatTransfer.HeatConvInside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConv_outside", "AixLib.Utilities.HeatTransfer.HeatConvOutside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConvInside", "AixLib.Utilities.HeatTransfer.HeatConv_inside"),
-        item=convertClass("AixLib.Utilities.HeatTransfer.HeatConvOutside", "AixLib.Utilities.HeatTransfer.HeatConv_outside")))),
+ version="0.7.5", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.7.5_to_0.7.6.mos")),
   Documentation(info = "<html>
     <p>The free open-source <code>AixLib</code> library is being developed for research and teaching purposes. It aims at dynamic simulations of thermal and hydraulic systems to develop control strategies for HVAC systems and analyse interactions in complex systems. It is used for simulations on component, building and city district level. As this library is developed mainly for academic purposes, user-friendliness and model robustness is not a main task. This research focus thus influences the layout and philosophy of the library. </p>
     <p>Various connectors of the Modelica Standard Library are used, e.g. <code>Modelica.Fluid</code> and <code>Modelica.HeatTransfer</code>. These are accompanied by own connectors for simplified hydraulics (no <code>fluid.media</code>, incompressible, one phase) , shortwave radiation (intensity), longwave radiation (heat flow combined with a virtual temperature) and combined longwave radiation and thermal. The pressure in the connectors is the total pressure. The used media models are simplified from the <code>Modelica.Media</code> library. If possible and necessary, components use continuously differentiable equations. In general, zero mass flow rate and reverse flow are supported.</p>
