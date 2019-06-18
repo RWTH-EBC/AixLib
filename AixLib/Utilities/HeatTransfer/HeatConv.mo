@@ -2,7 +2,7 @@ within AixLib.Utilities.HeatTransfer;
 model HeatConv
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv=2;
-  parameter Modelica.SIunits.Area A = 16;
+  parameter Modelica.SIunits.Area A(min=0);
 equation
   // no storage of heat
   port_a.Q_flow =hConv  * A * (port_a.T - port_b.T);

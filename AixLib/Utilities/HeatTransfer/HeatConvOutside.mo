@@ -1,12 +1,12 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvOutside "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Integer calcMethodHConv=1 "calculation Method"
+  parameter Integer calcMethodHConv=2 "calculation Method"
                                       annotation(Evaluate=true,   Dialog(group="Computational Models",   compact = true, descriptionLabel = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals (convective + radiative)",                                                                                                    choice = 3
         "Custom hConv",                                                                                                    radioButtons = true));
-  parameter Modelica.SIunits.Area A = 16 "Area of surface" annotation(Dialog(group = "Surface properties", descriptionLabel = true));
+  parameter Modelica.SIunits.Area A(min=0) "Area of surface" annotation(Dialog(group = "Surface properties", descriptionLabel = true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25 "Custom convection heat transfer coeffient"    annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=
           calcMethodHConv == 3));
   parameter

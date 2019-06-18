@@ -2,10 +2,10 @@ within AixLib.Utilities.HeatTransfer;
 model HeatConvPipeInside
   "Model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Modelica.SIunits.Length length = 1 "length of total pipe";
-  parameter Modelica.SIunits.Length d_i = 0.02 "inner diameter of pipe";
-  parameter Modelica.SIunits.Length d_a = 0.025 "outer diameter of pipe";
-  parameter Modelica.SIunits.Area A_sur = 2 "surfuce for heat transfer";
+  parameter Modelica.SIunits.Length length(min=0) "length of total pipe";
+  parameter Modelica.SIunits.Length d_i(min=0) "inner diameter of pipe";
+  parameter Modelica.SIunits.Length d_a(min=0) "outer diameter of pipe";
+  parameter Modelica.SIunits.Area A_sur(min=0) "surface for heat transfer";
   parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30   annotation(Dialog(enable=not calcHConv));
   parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
