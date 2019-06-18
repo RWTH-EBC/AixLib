@@ -93,6 +93,6 @@ equation
 <li>October 25, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for admix circuit.</p>
+<p>Simple controller for register with admix circuit.</p>
 </html>"));
 end CtrBasic;

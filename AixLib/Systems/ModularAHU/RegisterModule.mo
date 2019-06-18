@@ -337,5 +337,13 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Q")}),                                     Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
-            120}})));
+            120}})),
+    Documentation(info="<html>
+<p>The RegisterModule is a model for heating and cooling registers in air-handling units. It includes a simple heat exchanger and a replaceable hydraulic system (HydraulicModules) for the heat/cold supply with e.g. water.</p>
+<p>In order to exchange sensor measurements and actuator signals, the registerBus is used. The temperature sensor signal is multiplied with a first order element in order to cover the dynamic beahvior of the sensors.</p>
+</html>", revisions="<html>
+<ul>
+<li>Januar 09, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+</ul>
+</html>"));
 end RegisterModule;

@@ -52,8 +52,8 @@ model Heater "Heating register"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-82,38})));
-  Fluid.Sources.Boundary_pT boundaryAirSink(nPorts=1, redeclare package Medium
-      = MediumAir) annotation (Placement(transformation(
+  Fluid.Sources.Boundary_pT boundaryAirSink(nPorts=1, redeclare package Medium =
+        MediumAir) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={80,40})));
@@ -78,4 +78,7 @@ equation
       thickness=0.5));
   connect(ctrBasic.Tset, Tset.y)
     annotation (Line(points={{-70.2,-8},{-79,-8}}, color={0,0,127}));
+  annotation (Documentation(info="<html>
+<p>This examples demonstrates the use of the RigsterModule. The controller controls the outflow air temperature.</p>
+</html>"));
 end Heater;
