@@ -1,5 +1,5 @@
 ﻿within AixLib.Systems.HeatPumpSystems.Examples;
-model HeatPumpSystem "Example for a heat pump system"
+model SystemHeatPump "Example for a heat pump system"
   package Medium_sin = AixLib.Media.Water;
   package Medium_sou = AixLib.Media.Water;
   AixLib.Fluid.MixingVolumes.MixingVolume vol(
@@ -73,11 +73,8 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    perCon=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4(),
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
-    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     use_revHP=false,
     refIneFre_constant=0.01,
     dpEva_nominal=0,
@@ -88,7 +85,6 @@ model HeatPumpSystem "Example for a heat pump system"
     minIceFac=0,
     use_chiller=true,
     calcPel_deFro=100,
-    perEva=AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12(),
     use_minRunTime=true,
     minRunTime(displayUnit="min"),
     use_minLocTime=true,
@@ -124,8 +120,12 @@ model HeatPumpSystem "Example for a heat pump system"
     CEva=3000,
     use_secHeaGen=true,
     Q_flow_nominal=5000,
-    cpEva=4180,
-    cpCon=4180,
+    massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    fixed_TCon_start=true,
+    fixed_TEva_start=true,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     TCon_start=313.15,
     TEva_start=283.15,
     VCon=0.004,
@@ -214,7 +214,7 @@ equation
                                                      color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
-    experiment(StopTime=3600),
+    experiment(StopTime=3600, Tolerance=1e-06),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <p>Model for testing the model <a href=\"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.</p>
@@ -228,7 +228,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpsystem.mos" "Simulate and plot"),
+    __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/SystemHeatPump.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-120,-120},{120,120}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},
@@ -239,4 +239,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
                 pattern = LinePattern.None,
                 fillPattern = FillPattern.Solid,
                 points={{-38,64},{68,-2},{-38,-64},{-38,64}})}));
-end HeatPumpSystem;
+end SystemHeatPump;
