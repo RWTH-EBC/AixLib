@@ -8,18 +8,24 @@ model DynamicHX "Simple dynamic heat exchanger model"
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor[nNodes](
     each final C=Q_nom/dT_nom*tau_C/nNodes,
     each final T(fixed=true, start=TCapacity_start))
-    annotation (Placement(transformation(extent={{-10,0},{10,20}})));
+    annotation (Placement(transformation(extent={{-10,-2},{10,18}})));
   parameter Modelica.SIunits.HeatFlowRate Q_nom "Temperature difference at nominal conditions (used to calculate Gc)" annotation(Dialog(group = "Heat Transfer"));
   parameter Modelica.SIunits.Temperature TCapacity_start=(T1_start + T2_start)/2
     "Start value of temperature"
     annotation(Dialog(tab="Initialization",   group="Heat capacity"));
   parameter Modelica.Blocks.Interfaces.RealInput Gc1(unit="W/K") = Q_nom/dT_nom*2
     "Signal representing the convective thermal conductance in [W/K]" annotation(Dialog(group = "Heat Transfer"));
+
   parameter Modelica.Blocks.Interfaces.RealInput Gc2(unit="W/K") = Q_nom/dT_nom*2
     "Signal representing the convective thermal conductance in [W/K]"  annotation(Dialog(group = "Heat Transfer"));
+
   Modelica.Blocks.Sources.RealExpression Gc1_Expression[nNodes](
-  each final y=Gc1)
-    annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
+    each final y = (
+      Gc1))
+    annotation (Placement(transformation(extent={{-98,22},{-78,42}})));
+ //   if convection1[nNodes].solid.T-convection2[nNodes].solid.T<3 then
+  //     0
+  //  else
   Modelica.Thermal.HeatTransfer.Components.Convection convection1[nNodes]
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -38,19 +44,25 @@ model DynamicHX "Simple dynamic heat exchanger model"
         rotation=90,
         origin={30,-30})));
 equation
+
   connect(convection2.solid, vol2.heatPort)
     annotation (Line(points={{30,-40},{30,-50},{10,-50}}, color={191,0,0}));
   connect(convection1.solid, vol1.heatPort)
     annotation (Line(points={{-32,40},{-32,50},{-10,50}}, color={191,0,0}));
   connect(convection1.fluid, heatCapacitor.port)
-    annotation (Line(points={{-32,20},{-32,0},{0,0}}, color={191,0,0}));
+    annotation (Line(points={{-32,20},{-32,-2},{0,-2}},
+                                                      color={191,0,0}));
   connect(convection2.fluid, heatCapacitor.port)
-    annotation (Line(points={{30,-20},{30,0},{0,0}}, color={191,0,0}));
-  connect(Gc1_Expression.y, convection1.Gc)
-    annotation (Line(points={{-51,30},{-42,30}}, color={0,0,127}));
+    annotation (Line(points={{30,-20},{30,-2},{0,-2}},
+                                                     color={191,0,0}));
   connect(Gc2_Expression.y, convection2.Gc)
     annotation (Line(points={{47,-30},{40,-30}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
+
+  connect(Gc1_Expression.y, convection1.Gc) annotation (Line(points={{-77,32},{-60,
+          32},{-60,30},{-42,30}}, color={0,0,127}));
+  annotation (Line(points={{-58,-98},{-98,-98},{-98,8},
+          {-70,8}}, color={255,0,255}),
+              Documentation(revisions="<html>
 <ul>
 <li>
 December 12, 2018, by Alexander K&uuml;mpel:<br/>

@@ -1,5 +1,5 @@
 within AixLib.Fluid.Interfaces;
-model StaticFourPortHeatMassExchanger
+model StaticFourPortHeatMassExchangerUse
   "Partial model transporting two fluid streams between four ports without storing mass or energy"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface;
   extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
@@ -15,22 +15,21 @@ model StaticFourPortHeatMassExchanger
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   // Q1_flow is sensible plus latent heat flow rate
-  input Modelica.SIunits.HeatFlowRate Q1_flow
+  parameter  Modelica.SIunits.HeatFlowRate Q1_flow
     "Heat transferred into the medium 1";
-  input Medium1.MassFlowRate mWat1_flow
+  parameter  Medium1.MassFlowRate mWat1_flow
     "Moisture mass flow rate added to the medium 1";
   // Q2_flow is sensible plus latent heat flow rate
-  input Modelica.SIunits.HeatFlowRate Q2_flow
+  parameter  Modelica.SIunits.HeatFlowRate Q2_flow
     "Heat transferred into the medium 2";
-  input Medium2.MassFlowRate mWat2_flow
+  parameter  Medium2.MassFlowRate mWat2_flow
     "Moisture mass flow rate added to the medium 2";
   constant Boolean sensibleOnly1
     "Set to true if sensible exchange only for medium 1";
   constant Boolean sensibleOnly2
     "Set to true if sensible exchange only for medium 2";
 
-  Modelica.Blocks.Interfaces.RealInput Q
-    annotation (Placement(transformation(extent={{-126,-28},{-86,12}})));
+
 protected
   AixLib.Fluid.Interfaces.StaticTwoPortHeatMassExchanger bal1(
     redeclare final package Medium=Medium1,
@@ -67,6 +66,7 @@ equation
   connect(bal1.port_b, port_b1);
   connect(bal2.port_a, port_a2);
   connect(bal2.port_b, port_b2);
+
   annotation (
     preferredView="info",
     Documentation(info="<html>
@@ -211,4 +211,4 @@ First implementation.
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}));
-end StaticFourPortHeatMassExchanger;
+end StaticFourPortHeatMassExchangerUse;

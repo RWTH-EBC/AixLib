@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers;
 model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
-    final prescribedHeatFlowRate=true));
+    final prescribedHeatFlowRate=true, use_C_flow=false), show_T=true);
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
@@ -13,10 +13,10 @@ model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
     "Heat added to the fluid"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
 protected
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea(
-    final alpha=0)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea(final alpha=0)
     "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-40,50},{-20,70}})));
+
   Modelica.Blocks.Math.Gain gai(k=Q_flow_nominal) "Gain"
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
 equation

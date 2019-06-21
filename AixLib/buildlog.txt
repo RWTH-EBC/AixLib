@@ -1,0 +1,18 @@
+ 
+Compiling and linking the model (Visual C++). 
+ 
+**********************************************************************
+** Visual Studio 2017 Developer Command Prompt v15.9.12
+** Copyright (c) 2017 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x86'
+dsmodel.c
+   Bibliothek "dymosim.lib" und Objekt "dymosim.exp" werden erstellt.
+libds.lib(amat.obj) : warning LNK4049: Lokal definiertes Symbol "___iob_func" wurde importiert.
+libds.lib(dymosim2.obj) : warning LNK4217: Lokal definiertes Symbol "___iob_func" wurde in _dymosimMainModel-Funktion importiert.
+libds.lib(aprint.obj) : warning LNK4049: Lokal definiertes Symbol "___iob_func" wurde importiert.
+libds.lib(dsres.obj) : warning LNK4049: Lokal definiertes Symbol "___iob_func" wurde importiert.
+libds.lib(rsyaux.obj) : warning LNK4049: Lokal definiertes Symbol "___iob_func" wurde importiert.
+ 
+Successful generation of Dymosim. 
+ 

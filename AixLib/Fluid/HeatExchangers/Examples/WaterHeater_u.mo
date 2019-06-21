@@ -15,8 +15,8 @@ model WaterHeater_u
     m_flow_nominal=m_flow_nominal,
     dp_nominal=1000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=289.15,
-    Q_flow_nominal=10*Q_flow_nominal) "Heater"
+    Q_flow_nominal=10*Q_flow_nominal,
+    T_start=289.15)                   "Heater"
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
 equation
   connect(hea.port_b, THeaOut.port_a) annotation (Line(

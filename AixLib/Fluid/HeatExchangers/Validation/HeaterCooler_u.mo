@@ -12,8 +12,8 @@ model HeaterCooler_u "Model that demonstrates the ideal heater model"
     redeclare package Medium = Medium,
     use_T_in=false,
     p(displayUnit="Pa"),
-    T=293.15,
-    nPorts=2)
+    nPorts=2,
+    T=293.15)
     "Sink"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},rotation=180,origin={130,50})));
   AixLib.Fluid.HeatExchangers.HeaterCooler_u heaSte(

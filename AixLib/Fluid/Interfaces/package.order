@@ -28,3 +28,4 @@ FourPortFlowResistanceParameters
 LumpedVolumeDeclarations
 TwoPortFlowResistanceParameters
 Examples
+StaticFourPortHeatMassExchangerUse

@@ -73,7 +73,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(massFlowPulse.y, sinkSideMassFlowSource.m_flow_in) annotation (Line(
-      points={{-59,-50},{20,-50},{20,-40}},
+      points={{-59,-50},{18,-50},{18,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideFixedBoundary.ports[1], temperature.port_b) annotation (Line(

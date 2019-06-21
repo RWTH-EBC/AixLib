@@ -22,7 +22,7 @@ model DynamicHX
     offset=101325,
     startTime=50)
     "Ramp signal for pressure"
-    annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+    annotation (Placement(transformation(extent={{-22,-56},{-2,-36}})));
 
   AixLib.Fluid.Sources.Boundary_pT sou_2(
     redeclare package Medium = Medium2, T=273.15 + 5,
@@ -93,9 +93,11 @@ model DynamicHX
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-18,0})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
+    annotation (Placement(transformation(extent={{-74,-42},{-54,-22}})));
 equation
   connect(PIn.y,sou_2. p_in) annotation (Line(
-      points={{1,-40},{20,-40},{20,-52},{38,-52}},
+      points={{-1,-46},{20,-46},{20,-52},{38,-52}},
       color={0,0,127}));
   connect(TDb.y, sou_2.T_in) annotation (Line(points={{1,-80},{20,-80},{20,-56},
           {38,-56}}, color={0,0,127}));
@@ -120,6 +122,8 @@ equation
           -4,0},{-4,-1.22125e-015},{-8,-1.22125e-015}}, color={0,127,255}));
   connect(THeaOut2.port_b, sin_2.ports[1])
     annotation (Line(points={{-28,0},{-38,0}}, color={0,127,255}));
+  connect(booleanExpression.y, dynamicHX.u) annotation (Line(points={{-53,-32},
+          {-24,-32},{-24,-26},{6.2,-26},{6.2,-3.8}}, color={255,0,255}));
   annotation(experiment(Tolerance=1e-6, StopTime=360),
 Documentation(info="<html>
 <p>

@@ -1,5 +1,7 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model ValveControlled "Substation with variable dT"
+within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
+model PumpControlled "Substation with fixed dT and Heat Exchanger"
+
+
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
     final dp(start=0),
@@ -9,14 +11,14 @@ model ValveControlled "Substation with variable dT"
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(
     min=0) "Nominal heat flow rate added to medium (Q_flow_nominal > 0)";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
-    displayUnit="K")
-    "Design temperature difference for the substation's heat exchanger";
-
   parameter Modelica.SIunits.Temperature TReturn
     "Fixed return temperature";
 
-  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
+  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+    displayUnit="K")=60
+    "Design temperature difference for the substation's heat exchanger";
+
+  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=20000
     "Pressure difference at nominal flow rate"
     annotation(Dialog(group="Design parameter"));
 
@@ -33,96 +35,80 @@ model ValveControlled "Substation with variable dT"
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics"));
 
-protected
   final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
-    T=Medium.T_default,
     p=Medium.p_default,
+    T=Medium.T_default,
     X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
+
+protected
   final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
     Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
-
-  AixLib.Fluid.HeatExchangers.HeaterCooler_u hex(
-    final m_flow_nominal=m_flow_nominal,
-    final from_dp=false,
-    final linearizeFlowResistance=true,
-    final show_T=false,
-    final Q_flow_nominal=-1,
-    final dp_nominal=dp_nominal,
-    final deltaM=deltaM,
-    final tau=tau,
-    final energyDynamics=energyDynamics,
-    final massDynamics=massDynamics,
-    final allowFlowReversal=true,
-    redeclare final package Medium = Medium)
-    "Component to remove heat from or add heat to fluid"
-    annotation (Placement(transformation(extent={{34,-70},{54,-50}})));
-
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
-    annotation (Placement(transformation(extent={{-74,-70},{-54,-50}})));
+  Sensors.TemperatureTwoPort              senT_supply(
+                m_flow_nominal=m_flow_nominal, redeclare package Medium =
+        Medium)                                "Supply flow temperature sensor"
+    annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
-    annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
-  Modelica.Blocks.Math.Add deltaT(k2=-1)
-    "Differernce of flow and return line temperature in K" annotation (
-      Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=0,
-        origin={-50,40})));
-  Modelica.Blocks.Sources.Constant temperatureReturn(k=TReturn)
-    "Temperature of return line in °C"
-    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={-90,46})));
-  Modelica.Blocks.Math.Gain gain(k=cp_default)
-    annotation (Placement(transformation(extent={{-32,30},{-12,50}})));
-  Modelica.Blocks.Math.Division heat2massFlow
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={0,-2})));
-  Actuators.Valves.TwoWayPressureIndependent valve(
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  Modelica.Blocks.Interfaces.RealOutput dpOut
+    "Output signal of pressure difference"
+    annotation (Placement(transformation(extent={{96,78},{116,98}})));
+
+  Modelica.Blocks.Sources.Constant mflow_nominal(k=Q_flow_nominal/cp_default/
+        dTDesign)
+    annotation (Placement(transformation(extent={{-98,50},{-78,70}})));
+
+  Modelica.Blocks.Continuous.LimPID PID(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    yMax=1,
+    yMin=0.1)
+    annotation (Placement(transformation(extent={{-64,28},{-44,48}})));
+  Movers.SpeedControlled_y fan(
+    redeclare package Medium = Medium,
+    per(pressure(V_flow={0, m_flow_nominal/1000}, dp={2*dp_nominal,dp_nominal,0})),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
+    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+  Modelica.Blocks.Interfaces.RealOutput P
+    annotation (Placement(transformation(extent={{96,48},{116,68}})));
+  Sensors.MassFlowRate senMasFlo
+    annotation (Placement(transformation(extent={{24,-10},{44,10}})));
+  HeatExchangers.HeaterCooler_u hea(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
-    dpValve_nominal=50000,
-    l2=1e-9,
-    l=0.05) "Control valve"
-    annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
-  Modelica.Blocks.Math.Gain gain1(k=1/m_flow_nominal)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={0,-30})));
+    dp_nominal=300000,
+    Q_flow_nominal=1)
+    annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
 equation
 
-  connect(Q_flow_input, hex.u) annotation (Line(points={{-108,80},{28,80},{28,-54},
-          {32,-54}}, color={0,0,127}));
-  connect(port_a, senT_supply.port_a) annotation (Line(points={{-100,0},{-88,0},
-          {-88,-60},{-74,-60}}, color={0,127,255}));
-  connect(hex.port_b, senT_return.port_a)
-    annotation (Line(points={{54,-60},{60,-60}}, color={0,127,255}));
-  connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
-          -60},{80,-60}}, color={0,127,255}));
-  connect(temperatureReturn.y, deltaT.u2)
-    annotation (Line(points={{-79,46},{-62,46}}, color={0,0,127}));
-  connect(senT_supply.T, deltaT.u1)
-    annotation (Line(points={{-64,-49},{-64,34},{-62,34}}, color={0,0,127}));
-  connect(deltaT.y, gain.u)
-    annotation (Line(points={{-39,40},{-34,40}}, color={0,0,127}));
-  connect(gain.y, heat2massFlow.u2)
-    annotation (Line(points={{-11,40},{-6,40},{-6,10}}, color={0,0,127}));
-  connect(Q_flow_input, heat2massFlow.u1)
-    annotation (Line(points={{-108,80},{6,80},{6,10}}, color={0,0,127}));
-  connect(senT_supply.port_b, valve.port_a)
-    annotation (Line(points={{-54,-60},{-10,-60}}, color={0,127,255}));
-  connect(hex.port_a, valve.port_b)
-    annotation (Line(points={{34,-60},{10,-60}}, color={0,127,255}));
-  connect(heat2massFlow.y, gain1.u) annotation (Line(points={{-1.9984e-015,-13},
-          {0,-13},{0,-18},{2.22045e-015,-18}}, color={0,0,127}));
-  connect(valve.y, gain1.y) annotation (Line(points={{0,-48},{0,-41},{
-          -1.9984e-015,-41}}, color={0,0,127}));
+  dpOut = dp;
+
+  connect(port_a, senT_supply.port_a) annotation (Line(points={{-100,0},{-90,0}},
+                                color={0,127,255}));
+  connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{80,0}},
+                          color={0,127,255}));
+  connect(mflow_nominal.y, PID.u_s) annotation (Line(points={{-77,60},{-74,60},{
+          -74,38},{-66,38}}, color={0,0,127}));
+  connect(fan.P, P)
+    annotation (Line(points={{-19,9},{106,9},{106,58}}, color={0,0,127}));
+  connect(PID.y, fan.y)
+    annotation (Line(points={{-43,38},{-30,38},{-30,12}}, color={0,0,127}));
+  connect(senMasFlo.m_flow, PID.u_m)
+    annotation (Line(points={{34,11},{34,26},{-54,26}},
+                                                 color={0,0,127}));
+  connect(senT_supply.port_b, fan.port_a)
+    annotation (Line(points={{-70,0},{-40,0}}, color={0,127,255}));
+  connect(senMasFlo.port_b, senT_return.port_a)
+    annotation (Line(points={{44,0},{60,0}}, color={0,127,255}));
+  connect(fan.port_b, hea.port_a)
+    annotation (Line(points={{-20,0},{-8,0}}, color={0,127,255}));
+  connect(hea.port_b, senMasFlo.port_a)
+    annotation (Line(points={{12,0},{24,0}}, color={0,127,255}));
+  connect(Q_flow_input, hea.u)
+    annotation (Line(points={{-108,80},{-10,80},{-10,6}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
@@ -182,4 +168,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end ValveControlled;
+end PumpControlled;
