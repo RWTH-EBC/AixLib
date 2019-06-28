@@ -3,8 +3,8 @@ convertClass("AixLib.Utilities.HeatTransfer.HeatConv_inside", "AixLib.Utilities.
 convertClass("AixLib.Utilities.HeatTransfer.HeatConv_outside", "AixLib.Utilities.HeatTransfer.HeatConvOutside");
 
 // replace defaults
-convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv_inside", fill("",0), {"surfaceOrientation=1", "A=16"});
-convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv_outside", fill("",0), {"A=16"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv_inside", fill("",0), {"surfaceOrientation=1", "A=16", "calcMethodHConv=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv_outside", fill("",0), {"A=16", "calcMethodHConv=1"});
 convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv", fill("",0), {"A=16"});
 convertModifiers("AixLib.Utilities.HeatTransfer.CylindricHeatConduction", fill("",0), {"d_out=0.04", "d_in=0.02", "length=1"});
 convertModifiers("AixLib.Utilities.HeatTransfer.CylindricHeatTransfer", fill("",0), {"d_out=0.04", "d_in=0.02", "length=1"});
@@ -15,7 +15,8 @@ convertModifiers("AixLib.Utilities.HeatTransfer.SolarRadToHeat", fill("",0), {"A
 
 // refactoring calcMethod
 convertElement("AixLib.Utilities.HeatTransfer.HeatConv_inside", {"calcMethod"}, {"calcMethodHConv"});
-convertElement("AixLib.Utilities.HeatTransfer.HeatConv_outside", {"calcMethod"}, {"calcMethodHConv"});
+convertElement("AixLib.Utilities.HeatTransfer.HeatConv_outside", {"Model"}, {"calcMethodHConv"});
+
 
 // refactoring alpha, alphaWin, alphaExt, alphaInt, alphaFloor, alphaRoof, alphaWallOut, alphaRadWall, alphaWinOut, alphaRoofOut, alphaRadRoof, alphaRad, alphaInsideFix, alphaOutside, alpha_HC1, alpha_HC2, alphaHC1, alphaHC2, alpha_in, alpha_out, convCoeffCustom, alpha_t, alphaHC, alphaInside, alpha_constant, alphaRoofConst, alphaWinOut, alpha_custom, calculateAlpha, calcMethodConvection, calculateAlphaInside
 convertElement(
@@ -11891,7 +11892,7 @@ convertElement(
     "Room.outerWall_West.windowSimple.heatConv_outside.alpha_custom",
     "Room.outerWall_West.windowSimple.heatConv_outside.hConvCustom");
 convertElement(
-    "AixLib.Utilities.HeatTransfer.HeatConvOutside",
+    "AixLib.Utilities.HeatTransfer.HeatConv_outside",
     "alpha_custom",
     "hConvCustom");
 convertElement(
