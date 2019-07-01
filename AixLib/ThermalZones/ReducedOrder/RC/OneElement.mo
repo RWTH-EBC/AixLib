@@ -431,41 +431,37 @@ equation
     extent={{-67,60},{57,-64}},
     lineColor={0,0,0},
     textString="1")}),
-  Documentation(info="<html>
-<p>
-This model merges all thermal masses into one
-element, parameterized by the length of the RC-chain
-<code>nExt,</code> the vector of the capacities <code>CExt[nExt]</code> that is
-connected via the vector of resistances <code>RExt[nExt]</code> and
-<code>RExtRem</code> to the ambient and indoor air.
-By default, the model neglects all
-internal thermal masses that are not directly connected to the ambient.
-However, the thermal capacity of the room air can be increased by
-using the parameter <code>mSenFac</code>.
+  Documentation(info="<html><p>
+  This model merges all thermal masses into one element, parameterized
+  by the length of the RC-chain <code>nExt,</code> the vector of the
+  capacities <code>CExt[nExt]</code> that is connected via the vector
+  of resistances <code>RExt[nExt]</code> and <code>RExtRem</code> to
+  the ambient and indoor air. By default, the model neglects all
+  internal thermal masses that are not directly connected to the
+  ambient. However, the thermal capacity of the room air can be
+  increased by using the parameter <code>mSenFac</code>.
 </p>
 <p>
-The image below shows the RC-network of this model.
+  The image below shows the RC-network of this model.
 </p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
+  <img src=
+  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\"
+  alt=\"image\" />
 </p>
-  </html>",
-revisions="<html>
-  <ul>
-  <li>
-  January 25, 2019, by Michael Wetter:<br/>
-  Added start value to avoid warning in JModelica.
+</html>",
+revisions="<html><ul>
+  <li>January 25, 2019, by Michael Wetter:<br/>
+    Added start value to avoid warning in JModelica.
   </li>
-  <li>
-  September 26, 2016, by Moritz Lauster:<br/>
-  Added conditional statements to solar radiation part.<br/>
-  Deleted conditional statements of
-  <code>splitFactor</code> and <code>splitFactorSolRad</code>.
+  <li>September 26, 2016, by Moritz Lauster:<br/>
+    Added conditional statements to solar radiation part.<br/>
+    Deleted conditional statements of <code>splitFactor</code> and
+    <code>splitFactorSolRad</code>.
   </li>
-  <li>
-  April 17, 2015, by Moritz Lauster:<br/>
-  First implementation.
+  <li>April 17, 2015, by Moritz Lauster:<br/>
+    First implementation.
   </li>
-  </ul>
-  </html>"));
+</ul>
+</html>"));
 end OneElement;
