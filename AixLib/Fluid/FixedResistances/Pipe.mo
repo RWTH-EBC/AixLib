@@ -1,17 +1,13 @@
 within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
-
+  extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
 
   outer Modelica.Fluid.System system "System wide properties";
 
-   // Parameters Tab "General"
-    replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby Modelica.Media.Interfaces.PartialMedium
-                                            "Medium in the component"
-      annotation (choicesAllMatching = true);
 
-   parameter Real nParallel = 1 "Number of identical parallel pipes" annotation(Dialog(group = "Geometry"));
+
+   parameter Integer nParallel = 1 "Number of identical parallel pipes" annotation(Dialog(group = "Geometry"));
    parameter Modelica.SIunits.Length length=1 "Length"
                                            annotation(Dialog(group = "Geometry"));
    parameter Boolean isCircular = true
@@ -30,14 +26,10 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
    replaceable model FlowModel =
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow
-    constrainedby Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+    constrainedby
+    Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
-
-    // Parameter Tab "Assumptions"
-    parameter Boolean allowFlowReversal = system.allowFlowReversal
-    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
-    annotation(Dialog(tab="Assumptions"), Evaluate=true);
 
     parameter Modelica.Fluid.Types.Dynamics energyDynamics = system.energyDynamics
     "Formulation of energy balances"                                                                 annotation(Dialog(tab="Assumptions", group = "Dynamics"));
@@ -59,7 +51,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     "= true to use the convective HeatTransfer model"                                                      annotation(Dialog(tab="Heat transfer"));
     replaceable model HeatTransferConvective =
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (alpha0 = alpha_i)
-    constrainedby Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
+    constrainedby
+    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
@@ -79,7 +72,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     d_in=fill(parameterPipe.d_i, nNodes),
     length=fill(length/nNodes, nNodes),
     lambda=fill(parameterPipe.lambda, nNodes),
-    T0=fill(T_start, nNodes))
+    T0=fill(T_start, nNodes),
+    each nParallel=nParallel)
     annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
 
     Utilities.HeatTransfer.CylindricHeatTransfer                       Insulation[nNodes](
@@ -90,7 +84,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     length=fill(length/nNodes, nNodes),
     lambda=fill(parameterIso.lambda, nNodes),
     T0=fill(T_start, nNodes),
-    rho=fill(parameterIso.d, nNodes)) if withInsulation
+    rho=fill(parameterIso.d, nNodes),
+    each nParallel=nParallel) if              withInsulation
     annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 
   Modelica.Fluid.Pipes.DynamicPipe pipe(
@@ -122,19 +117,10 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (
-         alpha0=hConv_i))
+   Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (
+    alpha0=hConv_i))
+
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{94,-46},{114,-26}}),
-        iconTransformation(extent={{94,-10},{114,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-114,-46},{-94,-26}}),
-        iconTransformation(extent={{-114,-10},{-94,10}})));
 
     // Parameter Tab "Initialisation"
    parameter Medium.AbsolutePressure p_a_start=system.p_start
@@ -189,6 +175,7 @@ protected
     annotation (Placement(transformation(extent={{18,38},{58,46}}),
         iconTransformation(extent={{-46,20},{40,38}})));
 public
+
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hConv=fill(hConv,
         nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
                                      Heat_Loss_To_Ambient and not withInsulation and not isEmbedded
@@ -204,7 +191,7 @@ public
         rotation=270,
         origin={50,26})));
   AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps,
-        nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
+        nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
                                      Heat_Loss_To_Ambient and not isEmbedded
     "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -247,14 +234,6 @@ protected
         */
 equation
 
-  connect(pipe.port_b, port_b) annotation (Line(
-      points={{0,-36},{104,-36}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(pipe.port_a, port_a) annotation (Line(
-      points={{-20,-36},{-104,-36}},
-      color={0,127,255},
-      smooth=Smooth.None));
   connect(pipe.heatPorts,PipeWall.port_a);
   connect(heatPorts, thermalCollector.port_a);
   connect(heatPort_outside, thermalCollector.port_b);
@@ -303,6 +282,10 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
       */
+  connect(pipe.port_a, port_a) annotation (Line(points={{-20,-36},{-80,-36},{-80,
+          0},{-100,0}}, color={0,127,255}));
+  connect(pipe.port_b, port_b) annotation (Line(points={{0,-36},{80,-36},{80,0},
+          {100,0}}, color={0,127,255}));
   annotation (                   Icon(graphics={
         Rectangle(
           extent={{-100,40},{100,-40}},
