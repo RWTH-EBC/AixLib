@@ -117,9 +117,9 @@ equation
   </html>",
   revisions="<html>
 <ul>
-<li>September 26, 2016, by Moritz Lauster:<br>Removed deprecated parameters and values 0.93 and <span style=\"font-family: Courier New;\">eExt</span>.<br>Renamed <span style=\"font-family: Courier New;\">alphaRadWall</span> to <span style=\"font-family: Courier New;\">alphaRad</span>. Deleted <span style=\"font-family: Courier New;\">alphaRadWin</span>.<br>Moved calculations from <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007\">AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007</a> and <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a> to here. </li>
-<li>September 2015, by Moritz Lauster:<br>Got rid of cardinality and used assert for warnings.<br>Adapted to Annex 60 requirements. </li>
-<li>October 2014, by Peter Remmen:<br>Implemented. </li>
+<li>September 26, 2016, by Moritz Lauster:<br />Removed deprecated parameters and values 0.93 and <span style=\"font-family: Courier New;\">eExt</span>.<br />Renamed <span style=\"font-family: Courier New;\">alphaRadWall</span> to <span style=\"font-family: Courier New;\">alphaRad</span>. Deleted <span style=\"font-family: Courier New;\">alphaRadWin</span>.<br />Moved calculations from <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007\">AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007</a> and <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a> to here. </li>
+<li>September 2015, by Moritz Lauster:<br />Got rid of cardinality and used assert for warnings.<br />Adapted to Annex 60 requirements. </li>
+<li>October 2014, by Peter Remmen:<br />Implemented. </li>
 </ul>
 </html>"));
 end PartialVDI6007;
