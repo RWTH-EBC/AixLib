@@ -54,7 +54,8 @@ equation
 <p>It allows the choice between three different models: </p>
 <ul>
 <li>after DIN 6946:<span style=\"font-family: Courier New;\"> <i>h</i> = 4+4<i>v</i> </span>, where <i><span style=\"font-family: Courier New;\">h</span></i> <b>(hConv)</b> is the heat transfer coefficent and <i><b><span style=\"font-family: Courier New;\">v</span></b></i> is the wind speed </li>
-<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in EnergyPlus Engineering reference from 2011:<i><span style=\"font-family: Courier New;\"> h = D+Ev+Fv^2</span></i> , where <i><span style=\"font-family: Courier New;\">h</span></i> <b>(hConv)</b> and <i><b><span style=\"font-family: Courier New;\">v</span></b></i> are as above and the coefficients <i><b><span style=\"font-family: Courier New;\">D, E, F</span></b></i>  depend on the surface of the outer wall.<br><b><span style=\"color: #ff0000;\">Attention:</span></b> This is a combined coefficient for convective and radiative heat exchange.</li>
+<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in EnergyPlus Engineering reference from 2011:<i><span style=\"font-family: Courier New;\"> h = D+Ev+Fv^2</span></i> , where <i><span style=\"font-family: Courier New;\">h</span></i> <b>(hConv)</b> and <i><b><span style=\"font-family: Courier New;\">v</span></b></i> are as above and the coefficients <i><b><span style=\"font-family: Courier New;\">D, E, F</span></b></i>  depend on the surface of the outer wall.<br />
+<b><span style=\"color: #ff0000;\">Attention:</span></b> This is a combined coefficient for convective and radiative heat exchange.</li>
 <li>with a custom constant<i><span style=\"font-family: Courier New;\"> h</span></i> <b>(hConv)</b> value </li>
 </ul>
 <p><b><span style=\"color: #008000;\">References</span></b> </p>
