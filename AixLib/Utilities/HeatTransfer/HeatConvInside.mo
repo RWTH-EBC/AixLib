@@ -272,17 +272,14 @@ equation
 <p>In this model the surface orientation can be chosen from a menu for an easier adoption to new situations. Following methods to calculate the<b> heat convection coefficient </b><span style=\"font-family: Courier New;\">hConv</span> can be chosen:</p>
 <ol>
 <li>EN ISO 6946: <span style=\"font-family: Courier New;\">hConv</span> depends on the direction of heat transfer (horizontal: <span style=\"font-family: Courier New;\">hConv</span>= 2.5 m^2 K/W, upwards: <span style=\"font-family: Courier New;\">hConv</span>= 5 m^2 K/W, downwards: <span style=\"font-family: Courier New;\">hConv</span>=0.7 m^2 K/W, EN ISO 6946 table C.1). Switching the heat convection coefficient due to a chance of direction of heat transfer would lead to a state event. This would force the solver to solve a totally changed equation system and extend the calculation time. Therefore the <span style=\"font-family: Courier New;\">regStep</span> function is used to get a continous and differenciable expression. If the temperature difference between<span style=\"font-family: Courier New;\"> port_b</span> and <span style=\"font-family: Courier New;\">port_a</span> is between -<span style=\"font-family: Courier New;\">dT_small</span> and <span style=\"font-family: Courier New;\">dT_small</span> a 2nd order polynomial is used for a smooth transition from 5 to 0.7 (facing up) or from 0.7 to 5 (facing down).</li>
-<li>B. Glueck (default): The following equations are used to calculate the heat convection coefficient depending on the direction of heat transfer (p. 26):<br />
-horizontal: <span style=\"font-family: Courier New;\">hConv = 1.6 * |port_b.T - port_a.T|^0.3</span><br />
-upwards: <span style=\"font-family: Courier New;\">hConv = 2 * |port_b.T - port_a.T|^0.31</span><br />
-downwards: <span style=\"font-family: Courier New;\">hConv = 0.54 * |port_b.T - port_a.T|^0.31</span><br />
-The smooth function is used in case of changing direction of heat transfer.</li>
+<li>B. Glueck (default): The following equations are used to calculate the heat convection coefficient depending on the direction of heat transfer (p. 26):<br>horizontal: <span style=\"font-family: Courier New;\">hConv = 1.6 * |port_b.T - port_a.T|^0.3</span><br>upwards: <span style=\"font-family: Courier New;\">hConv = 2 * |port_b.T - port_a.T|^0.31</span><br>downwards: <span style=\"font-family: Courier New;\">hConv = 0.54 * |port_b.T - port_a.T|^0.31</span><br>The smooth function is used in case of changing direction of heat transfer.</li>
 <li>Constant heat convection coefficient: There is also the possibility of setting a constant<span style=\"font-family: Courier New;\"> hConv</span> value (<span style=\"font-family: Courier New;\">hConvCustom</span>).</li>
 </ol>
-<p>Limitations of the approaches calculating <span style=\"font-family: Courier New;\">hConv</span>:</p>
+<h4><span style=\"color: #008000\">Limitations</span></h4>
+<p>... of the approaches calculating <span style=\"font-family: Courier New;\">hConv</span>:</p>
 <ul>
-<li>EN ISO 6946 table C.1 specifies heat convection coefficients valid for internal or external surfaces next to highly ventilated air layers. An air layer is considered as highly ventilated if the openings between air layer and the environment are at least 1,500 m^2 per m length for vertical air layers and 1,500 m^2 per m^2 surface for horizontal air layers (EN ISO 6946, 6.9.4). Thus we recommend using the approach according to Glueck.</li>
-<li>The approach according to Glueck combines free with forced convection. Considering Figures 1.14, 1.15 and 1.16 from the cited reference the approach is suitable for TSurface-TAir from -10 K to +30 K.The surface length varies from 1 m to 3 m.</li>
+<li><b>EN ISO 6946</b> table C.1 specifies heat convection coefficients <b><span style=\"color: #ee2e2f;\">valid for internal or external surfaces next to highly ventilated air layers</span></b>. An air layer is considered as highly ventilated if the openings between air layer and the environment are at least 1.5 m^2 per m length for vertical air layers and 1.5 m^2 per m^2 surface for horizontal air layers (EN ISO 6946, 6.9.4). Thus, we recommend using the approach according to Glueck.</li>
+<li>The <b>approach according to Glueck combines free with forced convection</b>. Considering Figures 1.14, 1.15 and 1.16 from the cited reference the<b> approach is suitable for TSurface-TAir from -10 K to +30 K</b>.The surface length varies from 1 m to 3 m.</li>
 </ul>
 <p><b><span style=\"color: #008000;\">References</span></b> </p>
 <ul>
