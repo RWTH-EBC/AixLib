@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model StaticPipe "Pipe model using spatialDistribution for temperature delay"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortVector;
+  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
