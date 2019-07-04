@@ -2,7 +2,7 @@ within AixLib.Utilities.HeatTransfer;
 model SolarRadToHeat "Compute the heat flow caused by radiation on a surface"
   parameter Real coeff = 0.6 "Weight coefficient";
   // parameter Modelica.SIunits.Area A=6 "Area of surface";
-  parameter Real A = 10 "Area of surface";
+  parameter Real A(min=0) "Area of surface";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort annotation(Placement(transformation(extent = {{80, -30}, {100, -10}})));
   AixLib.Utilities.Interfaces.SolarRad_in solarRad_in annotation(Placement(transformation(extent = {{-122, -40}, {-80, 0}})));
 equation

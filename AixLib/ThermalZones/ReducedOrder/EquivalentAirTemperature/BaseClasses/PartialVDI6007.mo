@@ -11,10 +11,8 @@ partial model PartialVDI6007
     "Weight factor of the ground (0 if not considered)";
   parameter Modelica.SIunits.Temperature TGro
     "Temperature of the ground in contact with floor plate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
-    "Exterior walls convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad
-    "Coefficient of heat transfer for linearized radiation";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRad "Coefficient of heat transfer for linearized radiation";
   parameter Boolean withLongwave=true
     "Set to true to include longwave radiation exchange"
     annotation(choices(checkBox = true));
@@ -70,8 +68,8 @@ initial equation
    irrelevant.", level=AssertionLevel.warning);
 
 equation
-  delTEqLW=(TBlaSky-TDryBul)*alphaRad/(alphaRad+alphaWallOut);
-  delTEqSW=HSol*aExt/(alphaRad+alphaWallOut);
+  delTEqLW=(TBlaSky - TDryBul)*hRad/(hRad + hConvWallOut);
+  delTEqSW=HSol*aExt/(hRad + hConvWallOut);
   if withLongwave then
     TEqWin=TDryBul.+delTEqLWWin*(ones(n)-sunblind);
     TEqWall=TDryBul.+delTEqLW.+delTEqSW;
@@ -118,30 +116,10 @@ equation
   models.</p>
   </html>",
   revisions="<html>
-  <ul>
-  <li>
-  September 26, 2016, by Moritz Lauster:<br/>
-  Removed deprecated parameters and values
-  0.93 and <code>eExt</code>.<br/>
-  Renamed <code>alphaRadWall</code> to
-  <code>alphaRad</code>. Deleted
-  <code>alphaRadWin</code>.<br/>
-  Moved calculations from
-  <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007\">
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007</a> and
-  <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a> to here.
-  </li>
-  <li>
-  September 2015, by Moritz Lauster:<br/>
-  Got rid of cardinality
-  and used assert for warnings.<br/>
-  Adapted to Annex 60 requirements.
-  </li>
-  <li>
-  October 2014, by Peter Remmen:<br/>
-  Implemented.
-  </li>
-  </ul>
-  </html>"));
+<ul>
+<li>September 26, 2016, by Moritz Lauster:<br />Removed deprecated parameters and values 0.93 and <span style=\"font-family: Courier New;\">eExt</span>.<br />Renamed <span style=\"font-family: Courier New;\">alphaRadWall</span> to <span style=\"font-family: Courier New;\">alphaRad</span>. Deleted <span style=\"font-family: Courier New;\">alphaRadWin</span>.<br />Moved calculations from <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007\">AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007</a> and <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a> to here. </li>
+<li>September 2015, by Moritz Lauster:<br />Got rid of cardinality and used assert for warnings.<br />Adapted to Annex 60 requirements. </li>
+<li>October 2014, by Peter Remmen:<br />Implemented. </li>
+</ul>
+</html>"));
 end PartialVDI6007;
