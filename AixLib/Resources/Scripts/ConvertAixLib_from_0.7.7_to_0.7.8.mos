@@ -1,0 +1,17 @@
+// refactoring enthalpyPort_a, enthalpyPort_b, enthalpyPort_a1, enthalpyPort_b1 
+convertElement(
+    "AixLib.FastHVAC.Components.HeatGenerators.HeatPump.HeatPump",
+    "enthalpyPort_a",
+    "enthalpyPort_a1");
+convertElement(
+    "AixLib.FastHVAC.Components.HeatGenerators.HeatPump.HeatPump",
+    "enthalpyPort_b",
+    "enthalpyPort_b1");
+convertElement(
+    "AixLib.FastHVAC.Components.HeatGenerators.HeatPump.HeatPump",
+    "enthalpyPort_a1",
+    "enthalpyPort_a2");
+convertElement(
+    "AixLib.FastHVAC.Components.HeatGenerators.HeatPump.HeatPump",
+    "enthalpyPort_b1",
+    "enthalpyPort_b2");
