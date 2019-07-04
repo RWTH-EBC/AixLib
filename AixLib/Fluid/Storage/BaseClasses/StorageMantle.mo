@@ -15,10 +15,8 @@ model StorageMantle
     "Thermal Conductivity of wall";
     parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
     "Thermal Conductivity of insulation";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInside=2
-    "Coefficient of Heat Transfer water <-> wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaOutside=2
-    "Coefficient of Heat Transfer insulation <-> air";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInside=2 "Coefficient of Heat Transfer water <-> wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOutside=2 "Coefficient of Heat Transfer insulation <-> air";
   parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K";
   parameter Modelica.SIunits.Temperature TStartIns=293.15
@@ -61,12 +59,11 @@ model StorageMantle
     "Heat transfer through wall"
     annotation (Placement(transformation(extent={{-70,-12},{-22,32}})));
 
-  AixLib.Utilities.HeatTransfer.HeatConv convInside(alpha=alphaInside, A=
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(hConv=hConvInside, A=
         AInside)
         "Inner heat convection" annotation (Placement(transformation(extent={{-80,4},{-68,16}},
           rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatConv convOutside(A=AOutside, alpha=
-        alphaOutside)
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(A=AOutside, hConv=hConvOutside)
         "Outer heat convection" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
