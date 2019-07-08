@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators;
+within AixLib.FastHVAC.Examples.HeatGenerators;
 package Boiler 
   extends Modelica.Icons.ExamplesPackage;
 

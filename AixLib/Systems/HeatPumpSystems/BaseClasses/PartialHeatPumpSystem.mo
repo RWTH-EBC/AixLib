@@ -12,7 +12,9 @@ partial model PartialHeatPumpSystem
     final show_T=false,
     redeclare package Medium2 = Medium_eva);
   import Modelica.Blocks.Types.Init;
-
+  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters(
+   cpCon = Medium_con.heatCapacity_cp(stateCon_default),
+   cpEva = Medium_eva.heatCapacity_cp(stateEva_default));
 
 //General
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
@@ -25,6 +27,16 @@ partial model PartialHeatPumpSystem
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate"
     annotation (Dialog(group="Nominal condition"));
+  final parameter Medium_con.ThermodynamicState stateCon_default = Medium_con.setState_pTX(
+    T=Medium_con.T_default,
+    p=Medium_con.p_default,
+    X=Medium_con.X_default[1:Medium_con.nXi])
+    "Medium state in condenser at default values";
+  final parameter Medium_eva.ThermodynamicState stateEva_default = Medium_eva.setState_pTX(
+    T=Medium_eva.T_default,
+    p=Medium_eva.p_default,
+    X=Medium_eva.X_default[1:Medium_eva.nXi])
+    "Medium state in evaporator at default values";
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
@@ -39,11 +51,15 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(group="Source"),choices(checkBox=true));
-  parameter Fluid.Movers.Data.Generic perEva "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perEva
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Source",
       enable=use_evaPum));
-  parameter Fluid.Movers.Data.Generic perCon "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perCon
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Sink",
       enable=use_conPum));
@@ -275,8 +291,8 @@ partial model PartialHeatPumpSystem
       group="Evaporator",
       enable=transferHeat), Evaluate=true);
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
-    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
+                                              annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(
@@ -348,7 +364,9 @@ partial model PartialHeatPumpSystem
     final m_flow_nominal=mFlow_conNominal,
     final dp_nominal=0,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final Q_flow_nominal=Q_flow_nominal) if
+    final Q_flow_nominal=Q_flow_nominal,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics) if
                              use_secHeaGen annotation (Placement(transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
@@ -401,7 +419,8 @@ partial model PartialHeatPumpSystem
     final use_antFre=use_antFre,
     final TantFre=TantFre,
     final use_runPerHou=use_runPerHou,
-    final maxRunPerHou=maxRunPerHou)
+    final maxRunPerHou=maxRunPerHou,
+    final cp_con=cpCon)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
   Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
@@ -431,9 +450,8 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
-          -15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},

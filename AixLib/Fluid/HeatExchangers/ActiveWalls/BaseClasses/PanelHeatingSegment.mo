@@ -71,8 +71,7 @@ parameter HeatCapacityPerArea cDown;
         origin={1.77636e-015,74})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvRoom
     annotation (Placement(transformation(extent={{-12,90},{8,110}})));
-  AixLib.Utilities.Interfaces.Star starRad
-    annotation (Placement(transformation(extent={{-38,92},{-18,112}})));
+  AixLib.Utilities.Interfaces.RadPort starRad annotation (Placement(transformation(extent={{-38,92},{-18,112}})));
   HeatConductionSegment panel_Segment1(
     kA=kTop*A,
     mc_p=cTop*A,
