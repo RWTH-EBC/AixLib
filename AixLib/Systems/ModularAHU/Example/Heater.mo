@@ -19,7 +19,6 @@ model Heater "Heating register"
       Q_nom=30000,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol1,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol2),
-    T_amb=293.15,
     redeclare HydraulicModules.Admix partialHydraulicModule(
       dIns=0.01,
       kIns=0.028,
@@ -29,7 +28,9 @@ model Heater "Heating register"
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
+    hydraulicModuleIcon="Admix",
+    T_amb=293.15)
     annotation (Placement(transformation(extent={{-38,-40},{22,38}})));
   Fluid.Sources.Boundary_pT          boundary(
     nPorts=1,

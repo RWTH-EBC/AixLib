@@ -2,6 +2,15 @@ within AixLib.Systems.ModularAHU;
 model RegisterModule "AHU register module for heaters and coolers"
     extends AixLib.Fluid.Interfaces.PartialFourPortParallel;
 
+
+  parameter String hydraulicModuleIcon = "Admix" "Icon selection corresponding to module" annotation(choices(
+              choice="Admix",
+              choice="Injection",
+              choice="Injection2WayValve",
+              choice="Pump",
+              choice="Throttle",
+              choice="ThrottlePump"),Dialog(enable=true, group="Hydraulics"));
+
   parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));
@@ -18,7 +27,7 @@ model RegisterModule "AHU register module for heaters and coolers"
         Medium2,
     final m_flow_nominal=m2_flow_nominal,
     T_start=T_start,
-    final allowFlowReversal=allowFlowReversal2)
+    final allowFlowReversal=allowFlowReversal2) "Hydraulic module selection"
     annotation (Dialog(enable=true, group="Hydraulics"), Placement(transformation(extent={{-38,-38},{38,38}},
         rotation=90,
         origin={0,-40})), __Dymola_choicesAllMatching=true);
@@ -125,6 +134,8 @@ equation
           -78},{-58,-78},{-58,-72},{-100,-72},{-100,-60}}, color={0,127,255}));
   connect(partialHydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,
           -78},{100,-78},{100,-60}}, color={0,127,255}));
+                                               //"Admix" or "Injection" or "Injection2WayValve",
+//          visible=hydraulicModuleIcon <> "Throttle",
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -140},{100,120}}),
                          graphics={
@@ -146,7 +157,8 @@ equation
           color={28,108,200},
           thickness=1),
         Line(
-          points={{-34,-70},{34,-70}},
+          visible=hydraulicModuleIcon == "Admix" or hydraulicModuleIcon == "Injection",
+          points={{-34,-84},{34,-84}},
           color={28,108,200},
           thickness=1),
         Polygon(
@@ -156,57 +168,65 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           origin={-34,24},
-          rotation=360), Ellipse(
+          rotation=360),
+        Ellipse(
+          visible=hydraulicModuleIcon <> "Throttle",
           extent={{-20,20},{20,-20}},
           lineColor={135,135,135},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           origin={-34,-18},
-          rotation=360),                 Line(
+          rotation=360),
+        Line(visible=hydraulicModuleIcon <> "Throttle",
           points={{-10,20},{10,0},{-10,-20}},
           color={135,135,135},
           thickness=0.5,
           origin={-34,-8},
           rotation=90),
         Polygon(
+          visible=hydraulicModuleIcon == "Admix" or hydraulicModuleIcon == "Injection",
           points={{-10,-10},{-10,10},{10,0},{-10,-10}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          origin={-24,-70},
+          origin={-24,-84},
           rotation=180),
         Polygon(
           points={{10,-10},{10,10},{-10,0},{10,-10}},
           lineColor={95,95,95},
           lineThickness=0.5,
-          fillColor={255,255,255},
+          fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          origin={-34,-60},
-          rotation=90),
+          origin={-34,-74},
+          rotation=90,
+          visible=hydraulicModuleIcon <> "Pump"),
         Polygon(
           points={{10,-10},{-10,-10},{0,10},{10,-10}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          origin={-34,-80},
-          rotation=360),
+          origin={-34,-94},
+          rotation=360,
+          visible=hydraulicModuleIcon <> "Pump"),
         Ellipse(
           extent={{-6,6},{6,-6}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          origin={-48,-70},
-          rotation=360),
+          origin={-48,-84},
+          rotation=360,
+          visible=hydraulicModuleIcon <> "Pump"),
         Line(
           points={{0,4},{0,-4}},
           color={95,95,95},
           thickness=0.5,
-          origin={-38,-70},
-          rotation=90),
+          origin={-38,-84},
+          rotation=90,
+          visible=hydraulicModuleIcon <> "Pump"),
         Ellipse(
           extent={{-42,-112},{-26,-128}},
           lineColor={0,0,0},
@@ -259,12 +279,6 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="T"),
-        Ellipse(
-          extent={{32,-68},{36,-72}},
-          lineColor={28,108,200},
-          lineThickness=1,
-          fillColor={28,108,200},
-          fillPattern=FillPattern.Solid),
         Ellipse(
           extent={{74,94},{90,78}},
           lineColor={0,0,0},
@@ -335,7 +349,12 @@ equation
           lineColor={0,128,255},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="Q")}),                                     Diagram(
+          textString="Q"),
+        Line(
+          visible=hydraulicModuleIcon == "Injection" or hydraulicModuleIcon == "Injection2WayValve",
+          points={{-34,-50},{34,-50}},
+          color={28,108,200},
+          thickness=1)}),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
             120}})),
     Documentation(info="<html>
