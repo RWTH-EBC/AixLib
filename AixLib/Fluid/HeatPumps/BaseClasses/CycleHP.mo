@@ -20,8 +20,7 @@ protected
 public
   replaceable function data_poly =
   AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
-    constrainedby
-    AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
+    constrainedby AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 

@@ -4,8 +4,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
 
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone"
     annotation(Dialog(group="Thermal zone"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad
-    "Coefficient of heat transfer for linearized radiation exchange between walls"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRad "Coefficient of heat transfer for linearized radiation exchange between walls"
     annotation(Dialog(group="Thermal zone"));
   parameter Integer nOrientations(min=1) "Number of orientations"
     annotation(Dialog(group="Thermal zone"));
@@ -18,8 +17,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Modelica.SIunits.Area ATransparent[nOrientations] "Vector of areas of transparent (solar radiation transmittend) elements by
     orientations"
     annotation(Dialog(group="Windows"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWin
-    "Convective coefficient of heat transfer of windows (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWin "Convective coefficient of heat transfer of windows (indoor)"
     annotation(Dialog(group="Windows"));
   parameter Modelica.SIunits.ThermalResistance RWin "Resistor for windows"
     annotation(Dialog(group="Windows"));
@@ -35,8 +33,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Modelica.SIunits.Area AExt[nOrientations]
     "Vector of areas of exterior walls by orientations"
     annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaExt
-    "Convective coefficient of heat transfer of exterior walls (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvExt "Convective coefficient of heat transfer of exterior walls (indoor)"
     annotation(Dialog(group="Exterior walls"));
   parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls"
     annotation(Dialog(group="Exterior walls"));
@@ -181,25 +178,18 @@ protected
   parameter Real splitFactorSolRad[dimension, nOrientations]=
     BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin)
     "Share of each wall surface area that is non-zero, for each orientation separately";
-  Modelica.Thermal.HeatTransfer.Components.Convection convExtWall if ATotExt > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection convExtWall(dT(start=0)) if
+                                                                     ATotExt > 0
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
-  Modelica.Blocks.Sources.Constant alphaExtWallConst(
-    final k=ATotExt*alphaExt) if ATotExt > 0
+  Modelica.Blocks.Sources.Constant hConvExtWall_const(final k=ATotExt*hConvExt)
     "Coefficient of convective heat transfer for exterior walls"
-    annotation (Placement(transformation(
-    extent={{5,-5},{-5,5}},
-    rotation=-90,
-    origin={-104,-61})));
+    annotation (Placement(transformation(extent={{5,-5},{-5,5}}, rotation=-90)));
   Modelica.Thermal.HeatTransfer.Components.Convection convWin if ATotWin > 0
     "Convective heat transfer of windows"
     annotation (Placement(transformation(extent={{-116,30},{-96,50}})));
-  Modelica.Blocks.Sources.Constant alphaWinConst(final k=ATotWin*alphaWin) if
-    ATotWin > 0 "Coefficient of convective heat transfer for windows"
-    annotation (Placement(transformation(
-    extent={{-6,-6},{6,6}},
-    rotation=-90,
-    origin={-106,68})));
+  Modelica.Blocks.Sources.Constant hConvWin_const(final k=ATotWin*hConvWin) "Coefficient of convective heat transfer for windows"
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}}, rotation=-90)));
   Modelica.Blocks.Math.Gain eRadSol[nOrientations](
     final k=gWin*(1 - ratioWinConRad)*ATransparent) if sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as radiation"
@@ -209,14 +199,12 @@ protected
     ratioWinConRad > 0 and sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as convection"
     annotation (Placement(transformation(extent={{-206,119},{-196,129}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallWin(
-    final G=min(ATotExt, ATotWin)*alphaRad) if ATotExt > 0 and ATotWin > 0
-    "Resistor between exterior walls and windows"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    rotation=-90,
-    origin={-146,10})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallWin(final G=min(ATotExt, ATotWin)*hRad) if ATotExt > 0 and ATotWin >
+    0 "Resistor between exterior walls and windows"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-146,10})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir if
     ATot > 0 or VAir > 0 "Indoor air temperature sensor"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
@@ -308,12 +296,8 @@ equation
     color={191,0,0}));
   connect(resExtWallWin.port_a, convWin.solid)
     annotation (Line(points={{-146,20},{-146,40},{-116,40}}, color={191,0,0}));
-  connect(alphaWinConst.y, convWin.Gc)
-    annotation (Line(points={{-106,61.4},{-106,55.7},{-106,50}},
-    color={0,0,127}));
-  connect(alphaExtWallConst.y, convExtWall.Gc)
-    annotation (Line(points={{-104,-55.5},{-104,-50}},
-    color={0,0,127}));
+  connect(hConvWin_const.y, convWin.Gc) annotation (Line(points={{0,-6.6},{0,50},{-106,50}}, color={0,0,127}));
+  connect(hConvExtWall_const.y, convExtWall.Gc) annotation (Line(points={{0,5.5},{0,-22},{-104,-22},{-104,-50}}, color={0,0,127}));
   connect(convExtWall.fluid, senTAir.port)
     annotation (Line(points={{-94,-40},{66,-40},{66,0},{80,0}},
     color={191,0,0}));
@@ -447,37 +431,37 @@ equation
     extent={{-67,60},{57,-64}},
     lineColor={0,0,0},
     textString="1")}),
-  Documentation(info="<html>
-<p>
-This model merges all thermal masses into one
-element, parameterized by the length of the RC-chain
-<code>nExt,</code> the vector of the capacities <code>CExt[nExt]</code> that is
-connected via the vector of resistances <code>RExt[nExt]</code> and
-<code>RExtRem</code> to the ambient and indoor air.
-By default, the model neglects all
-internal thermal masses that are not directly connected to the ambient.
-However, the thermal capacity of the room air can be increased by
-using the parameter <code>mSenFac</code>.
+  Documentation(info="<html><p>
+  This model merges all thermal masses into one element, parameterized
+  by the length of the RC-chain <code>nExt,</code> the vector of the
+  capacities <code>CExt[nExt]</code> that is connected via the vector
+  of resistances <code>RExt[nExt]</code> and <code>RExtRem</code> to
+  the ambient and indoor air. By default, the model neglects all
+  internal thermal masses that are not directly connected to the
+  ambient. However, the thermal capacity of the room air can be
+  increased by using the parameter <code>mSenFac</code>.
 </p>
 <p>
-The image below shows the RC-network of this model.
+  The image below shows the RC-network of this model.
 </p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
+  <img src=
+  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\"
+  alt=\"image\" />
 </p>
-  </html>",
-revisions="<html>
-  <ul>
-  <li>
-  September 26, 2016, by Moritz Lauster:<br/>
-  Added conditional statements to solar radiation part.<br/>
-  Deleted conditional statements of
-  <code>splitFactor</code> and <code>splitFactorSolRad</code>.
+</html>",
+revisions="<html><ul>
+  <li>January 25, 2019, by Michael Wetter:<br/>
+    Added start value to avoid warning in JModelica.
   </li>
-  <li>
-  April 17, 2015, by Moritz Lauster:<br/>
-  First implementation.
+  <li>September 26, 2016, by Moritz Lauster:<br/>
+    Added conditional statements to solar radiation part.<br/>
+    Deleted conditional statements of <code>splitFactor</code> and
+    <code>splitFactorSolRad</code>.
   </li>
-  </ul>
-  </html>"));
+  <li>April 17, 2015, by Moritz Lauster:<br/>
+    First implementation.
+  </li>
+</ul>
+</html>"));
 end OneElement;

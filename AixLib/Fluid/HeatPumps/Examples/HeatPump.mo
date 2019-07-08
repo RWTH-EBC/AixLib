@@ -61,7 +61,9 @@ model HeatPump
     use_refIne=false,
     TAmbCon_nominal=288.15,
     TAmbEva_nominal=273.15,
-    TCon_start=303.15) annotation (Placement(transformation(
+    TCon_start=303.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                       annotation (Placement(transformation(
         extent={{-24,-29},{24,29}},
         rotation=270,
         origin={2,-21})));
@@ -105,7 +107,8 @@ model HeatPump
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
     final addPowerToMedium=false,
-    redeclare final package Medium = Medium_sin)
+    redeclare final package Medium = Medium_sin,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -117,7 +120,8 @@ model HeatPump
     final m_flow_nominal=heatPump.mFlow_conNominal,
     final V=5,
     final allowFlowReversal=true,
-    redeclare package Medium = Medium_sin)
+    redeclare package Medium = Medium_sin,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                                   "Volume of Condenser" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -201,8 +205,7 @@ equation
           -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-    experiment(StopTime=3600),
-    __Dymola_experimentSetupOutput,
+    experiment(StopTime=3600, Tolerance=1e-06),
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Simple test set-up for the HeatPumpDetailed model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. </p>

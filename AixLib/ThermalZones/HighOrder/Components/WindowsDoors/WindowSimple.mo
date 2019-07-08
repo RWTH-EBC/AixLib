@@ -26,8 +26,7 @@ model WindowSimple "Window with radiation and U-Value"
     annotation (Dialog(group="Window type", enable=not selectable));
 
   replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
-    BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(
         descriptionLabel=true), choicesAllMatching=true);
   Utilities.Interfaces.SolarRad_in solarRad_in
@@ -36,7 +35,8 @@ model WindowSimple "Window with radiation and U-Value"
     final Uw=Uw,
     final n=1)
     annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
-  Utilities.Interfaces.Star Star
+  Utilities.Interfaces.RadPort
+                            Star
     annotation (Placement(transformation(extent={{80,50},{100,70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside
     annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
