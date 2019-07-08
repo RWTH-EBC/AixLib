@@ -53,6 +53,6 @@ equation
 <li>October 25, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for unmixed circuit.</p>
+<p>Simple controller for unmixed circuit. Only the pump frequency has to be set.</p>
 </html>"));
 end CtrPump;

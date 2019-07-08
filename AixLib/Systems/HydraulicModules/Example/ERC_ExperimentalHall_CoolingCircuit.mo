@@ -42,10 +42,10 @@ model ERC_ExperimentalHall_CoolingCircuit
     T_start=293.15)
     annotation (Placement(transformation(extent={{-12,34},{18,64}})));
   SimpleConsumer simpleConsumer2(
-    kA=10000,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
     T_amb=T_amb,
+    kA=10000,
     T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
   AixLib.Systems.HydraulicModules.Controller.CtrMix ctr_admix(
@@ -56,8 +56,13 @@ model ERC_ExperimentalHall_CoolingCircuit
     initType=Modelica.Blocks.Types.InitPID.InitialState,
     reverseAction=true)
     annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
-  AixLib.Systems.HydraulicModules.Controller.CtrPump ctr_unmixed_simple
-    annotation (Placement(transformation(extent={{-142,80},{-118,104}})));
+  Controller.CtrThrottle ctr_unmixed_throttle(
+    reverseAction=true,
+    Td=0,
+    rpm_pump=3000,
+    TflowSet=291.15,
+    k=0.2,
+    Ti=60) annotation (Placement(transformation(extent={{-142,80},{-118,104}})));
   AixLib.Systems.HydraulicModules.Controller.CtrPump ctr_unmixed_simple1
     annotation (Placement(transformation(extent={{-142,58},{-118,82}})));
   AixLib.Fluid.Sources.Boundary_pT bou1(
@@ -87,12 +92,12 @@ model ERC_ExperimentalHall_CoolingCircuit
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,7})));
-  AixLib.Systems.HydraulicModules.Pump Unmixed1(
+  AixLib.Systems.HydraulicModules.ThrottlePump UnmixedThrottle(
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Unmixed1.energyDynamics)),
+          energyDynamics=UnmixedThrottle.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
@@ -103,7 +108,9 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe2(length=1),
     pipe3(length=1),
     energyDynamics=Admix.energyDynamics,
-    length=2)                            annotation (Placement(transformation(
+    length=2,
+    Kv=6.3,
+    pipe4(length=2)) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,7})));
@@ -113,7 +120,6 @@ model ERC_ExperimentalHall_CoolingCircuit
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
           energyDynamics=Admix.energyDynamics)),
-    valve(Kv=10),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
@@ -136,6 +142,8 @@ model ERC_ExperimentalHall_CoolingCircuit
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={-69,7})));
+  BaseClasses.HydraulicBus hydraulicBus
+    annotation (Placement(transformation(extent={{-124,94},{-104,114}})));
 equation
   connect(bou.ports[1],hex. port_a1) annotation (Line(points={{-162,-68},{-136,
           -68}},                         color={0,127,255}));
@@ -147,9 +155,9 @@ equation
     annotation (Line(points={{-12,32},{-12,49}}, color={0,127,255}));
   connect(Unmixed.port_a2, simpleConsumer1.port_b)
     annotation (Line(points={{18,32},{18,49}}, color={0,127,255}));
-  connect(Unmixed1.port_b1, simpleConsumer2.port_a)
+  connect(UnmixedThrottle.port_b1, simpleConsumer2.port_a)
     annotation (Line(points={{60,32},{60,49}}, color={0,127,255}));
-  connect(Unmixed1.port_a2, simpleConsumer2.port_b)
+  connect(UnmixedThrottle.port_a2, simpleConsumer2.port_b)
     annotation (Line(points={{90,32},{90,49}}, color={0,127,255}));
   connect(simpleConsumer.port_a, Admix.port_b1)
     annotation (Line(points={{-84,51},{-84,32}}, color={0,127,255}));
@@ -164,23 +172,38 @@ equation
       points={{-117.88,70},{-22,70},{-22,7}},
       color={255,204,51},
       thickness=0.5));
-  connect(ctr_unmixed_simple.hydraulicBus, Unmixed1.hydraulicBus) annotation (
-      Line(
-      points={{-117.88,92},{-50,92},{-50,86},{50,86},{50,7}},
+  connect(ctr_unmixed_throttle.hydraulicBus, UnmixedThrottle.hydraulicBus)
+    annotation (Line(
+      points={{-118.84,90.68},{-50,90.68},{-50,86},{50,86},{50,7}},
       color={255,204,51},
       thickness=0.5));
   connect(Admix.port_a1, hex.port_a2) annotation (Line(points={{-84,-18},{-84,-28},
           {-106,-28}}, color={0,127,255}));
   connect(Unmixed.port_a1, hex.port_a2) annotation (Line(points={{-12,-18},{-12,
           -28},{-106,-28}}, color={0,127,255}));
-  connect(Unmixed1.port_a1, hex.port_a2) annotation (Line(points={{60,-18},{62,-18},
-          {62,-28},{-106,-28}}, color={0,127,255}));
-  connect(Unmixed1.port_b2, hex.port_b2) annotation (Line(points={{90,-18},{90,-68},
-          {-106,-68}}, color={0,127,255}));
+  connect(UnmixedThrottle.port_a1, hex.port_a2) annotation (Line(points={{60,-18},
+          {62,-18},{62,-28},{-106,-28}}, color={0,127,255}));
+  connect(UnmixedThrottle.port_b2, hex.port_b2) annotation (Line(points={{90,-18},
+          {90,-68},{-106,-68}}, color={0,127,255}));
   connect(Unmixed.port_b2, hex.port_b2) annotation (Line(points={{18,-18},{18,-68},
           {-106,-68}}, color={0,127,255}));
   connect(Admix.port_b2, hex.port_b2) annotation (Line(points={{-54,-18},{-54,-68},
           {-106,-68}}, color={0,127,255}));
+  connect(ctr_unmixed_throttle.hydraulicBus, hydraulicBus) annotation (Line(
+      points={{-118.84,90.68},{-114.42,90.68},{-114.42,104},{-114,104}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctr_unmixed_throttle.Tact, hydraulicBus.TRtrn_in) annotation (Line(
+        points={{-144.4,99.2},{-152,99.2},{-152,104.05},{-113.95,104.05}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(extent={{-180,-100},{100,100}})), Icon(
         coordinateSystem(extent={{-180,-100},{100,100}})),
     Documentation(revisions="<html>
@@ -188,7 +211,7 @@ equation
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>This example demonstrates the use of the hydraulic modules. </p>
+<p>This example demonstrates the use of the hydraulic modules and the controllers. The model represents a cooling circuit with different hydraulic circuits. </p>
 </html>"),
     experiment(StopTime=3600));
 end ERC_ExperimentalHall_CoolingCircuit;
