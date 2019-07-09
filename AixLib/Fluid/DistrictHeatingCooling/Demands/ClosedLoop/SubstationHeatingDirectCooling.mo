@@ -10,7 +10,6 @@ model SubstationHeatingDirectCooling "Substation model for bidirctional low-temp
     parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
     parameter Modelica.SIunits.HeatFlowRate heatDemand_max "Maximum heat demand for scaling of heat pump";
-    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max "Maximum cooling demand for scaling of chiller (negative values)";
 
     parameter Modelica.SIunits.Temperature deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
