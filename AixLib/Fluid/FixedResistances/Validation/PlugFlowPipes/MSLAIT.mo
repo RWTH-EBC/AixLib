@@ -273,7 +273,7 @@ model MSLAIT
     m_flow_nominal=m_flow_nominal,
     transferHeat=true,
     tauHeaTra=tauHeaTra) "Temperature sensor"
-    annotation (Placement(transformation(extent={{-54,-6},{-74,14}})));
+    annotation (Placement(transformation(extent={{-68,-6},{-88,14}})));
   Fluid.Sensors.TemperatureTwoPort
                             senTem_p1(redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -358,9 +358,10 @@ equation
   connect(pip3.port_a, pip5.port_b) annotation (Line(points={{-48,-38},{-48,4},
           {-32,4}},                  color={0,127,255}));
   connect(senTemIn_p2.port_a, pip5.port_b)
-    annotation (Line(points={{-54,4},{-32,4}},   color={0,127,255}));
+    annotation (Line(points={{-68,4},{-60,4},{-60,10},{-50,10},{-50,4},{-32,4}},
+                                                 color={0,127,255}));
   connect(senTemIn_p2.port_b, pip2.port_a)
-    annotation (Line(points={{-74,4},{-104,4},{-104,30}}, color={0,127,255}));
+    annotation (Line(points={{-88,4},{-104,4},{-104,30}}, color={0,127,255}));
   connect(pip4.port_b, senTem_p4.port_a) annotation (Line(points={{42,48},{42,
           70}},             color={0,127,255}));
   connect(senTem_p4.port_b, Point4.ports[1])

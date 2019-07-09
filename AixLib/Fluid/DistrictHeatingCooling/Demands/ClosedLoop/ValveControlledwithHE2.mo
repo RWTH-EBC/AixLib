@@ -165,6 +165,11 @@ public
     allowFlowReversal=false,
     tau=0)
     annotation (Placement(transformation(extent={{46,-14},{26,6}})));
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=10)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={52,62})));
 equation
 
   dpOut = dp;
@@ -227,6 +232,10 @@ equation
           {36,-52}}, color={0,0,127}));
   connect(T_return_sec.y, max.u1) annotation (Line(points={{33,-78},{24,-78},{24,
           -70},{16,-70}}, color={0,0,127}));
+  connect(greaterThreshold.y, dynamicHX.u) annotation (Line(points={{52,51},{38,
+          51},{38,42},{20.4,42},{20.4,17.2}}, color={255,0,255}));
+  connect(Q_flow_input, greaterThreshold.u)
+    annotation (Line(points={{-86,88},{52,88},{52,74}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{120,
             100}}), graphics={

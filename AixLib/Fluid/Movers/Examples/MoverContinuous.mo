@@ -19,17 +19,17 @@ equation
   connect(gaiNrpm.y, pump_Nrpm.Nrpm)
     annotation (Line(points={{-19,70},{0,70},{0,52}}, color={0,0,127}));
   connect(gai_dp.y, pump_dp.dp_in) annotation (Line(points={{-19,-60},{-10,-60},
-          {-0.2,-60},{-0.2,-68}}, color={0,0,127}));
+          {0,-60},{0,-68}},       color={0,0,127}));
   connect(gai_m_flow.y, pump_m_flow.m_flow_in)
-    annotation (Line(points={{-19,20},{-0.2,20},{-0.2,12}}, color={0,0,127}));
+    annotation (Line(points={{-19,20},{0,20},{0,12}},       color={0,0,127}));
   connect(gaiNrpm.u, ramp.y)
     annotation (Line(points={{-42,70},{-59,70}}, color={0,0,127}));
   connect(gai_m_flow.u, ramp.y) annotation (Line(points={{-42,20},{-50,20},{-50,
           70},{-59,70}}, color={0,0,127}));
   connect(gai_dp.u, ramp.y) annotation (Line(points={{-42,-60},{-50,-60},{-50,
           70},{-59,70}}, color={0,0,127}));
-  connect(pump_y.y, ramp.y) annotation (Line(points={{-0.2,-28},{-0.2,-20},{-50,
-          -20},{-50,70},{-59,70}}, color={0,0,127}));
+  connect(pump_y.y, ramp.y) annotation (Line(points={{0,-28},{0,-20},{-50,-20},
+          {-50,70},{-59,70}},      color={0,0,127}));
   annotation (
     Documentation(info="<html>
 <p>

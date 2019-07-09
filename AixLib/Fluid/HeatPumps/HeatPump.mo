@@ -12,10 +12,10 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
     final show_T=show_TPort);
 
 //General
-  replaceable package Medium_con = 
+  replaceable package Medium_con =
     Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
     annotation (Dialog(tab = "Condenser"),choicesAllMatching=true);
-  replaceable package Medium_eva = 
+  replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(choices(choice=true "reversible HP",

@@ -7,9 +7,9 @@ model IdealSinksDynamicDemand
 
   Sources.Boundary_pT source(
     redeclare package Medium = Medium,
+    nPorts=3,
     p=1000000,
-    T=373.15,
-    nPorts=3)                "Ideal source supplying the demand nodes"
+    T=373.15)                "Ideal source supplying the demand nodes"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkHeat idealSinkHeat(
     dTDesign=30,

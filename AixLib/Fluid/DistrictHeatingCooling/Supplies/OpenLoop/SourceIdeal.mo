@@ -23,7 +23,8 @@ model SourceIdeal
   Sources.FixedBoundary sink(redeclare package Medium = Medium,
     p=pReturn,
     use_T=false,
-    nPorts=1)
+    nPorts=1,
+    use_p=true)
     "Ideal sink for return from the network" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -38,10 +39,10 @@ equation
   connect(TIn, source.T_in)
     annotation (Line(points={{-106,70},{2,70},{2,4},{8,4}},
                                                        color={0,0,127}));
-  connect(dpIn, source.p_in) annotation (Line(points={{-106,-70},{-2,-70},{-2,8},
-          {8,8}},             color={0,0,127}));
   connect(senT_return.port_a, sink.ports[1])
     annotation (Line(points={{-60,0},{-40,0}}, color={0,127,255}));
+  connect(dpIn, source.p_in) annotation (Line(points={{-106,-70},{-8,-70},{-8,8},
+          {8,8}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{98,50},{118,70}})),
               Icon(graphics={Ellipse(
           extent={{-78,40},{2,-40}},

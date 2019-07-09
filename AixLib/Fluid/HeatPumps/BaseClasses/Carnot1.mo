@@ -1,13 +1,11 @@
-within AixLib.Fluid.Chillers.BaseClasses;
-partial model Carnot
-  extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
-    m1_flow_nominal = QCon_flow_nominal/cp1_default/dTCon_nominal,
-    m2_flow_nominal = QEva_flow_nominal/cp2_default/dTEva_nominal);
+within AixLib.Fluid.HeatPumps.BaseClasses;
+partial model Carnot1
+  extends AixLib.Fluid.Interfaces.PartialFourPortInterface;
 
-  parameter Modelica.SIunits.HeatFlowRate QEva_flow_nominal(max=0)
+   Modelica.SIunits.HeatFlowRate QEva_flow_nominal(max=0)
     "Nominal cooling heat flow rate (QEva_flow_nominal < 0)"
     annotation (Dialog(group="Nominal condition"));
-  parameter Modelica.SIunits.HeatFlowRate QCon_flow_nominal(min=0)
+   Modelica.SIunits.HeatFlowRate QCon_flow_nominal(min=0)
     "Nominal heating flow rate"
     annotation (Dialog(group="Nominal condition"));
 
@@ -22,12 +20,12 @@ partial model Carnot
   parameter Boolean use_eta_Carnot_nominal = true
     "Set to true to use Carnot effectiveness etaCarnot_nominal rather than COP_nominal"
     annotation(Dialog(group="Efficiency"));
-  parameter Real etaCarnot_nominal(unit="1") = COP_nominal/
+   Real etaCarnot_nominal(unit="1") = COP_nominal/
     (TUseAct_nominal/(TCon_nominal+TAppCon_nominal - (TEva_nominal-TAppEva_nominal)))
     "Carnot effectiveness (=COP/COP_Carnot) used if use_eta_Carnot_nominal = true"
     annotation (Dialog(group="Efficiency", enable=use_eta_Carnot_nominal));
 
-  parameter Real COP_nominal(unit="1") = etaCarnot_nominal*TUseAct_nominal/
+   Real COP_nominal(unit="1") = etaCarnot_nominal*TUseAct_nominal/
     (TCon_nominal+TAppCon_nominal - (TEva_nominal-TAppEva_nominal))
     "Coefficient of performance at TEva_nominal and TCon_nominal, used if use_eta_Carnot_nominal = false"
     annotation (Dialog(group="Efficiency", enable=not use_eta_Carnot_nominal));
@@ -144,11 +142,11 @@ partial model Carnot
     Medium2.temperature(staB2) - QEva_flow/QEva_flow_nominal*TAppEva_nominal
     "Evaporator temperature used to compute efficiency, taking into account pinch temperature between fluid and refrigerant";
 
-protected
-  constant Boolean COP_is_for_cooling
-    "Set to true if the specified COP is for cooling";
 
-  parameter Real etaCarnot_nominal_internal(unit="1")=
+     Boolean COP_is_for_cooling
+    "Set to true if the specified COP is for cooling";
+protected
+   Real etaCarnot_nominal_internal(unit="1")=
     if use_eta_Carnot_nominal
       then etaCarnot_nominal
       else COP_nominal/
@@ -162,7 +160,7 @@ protected
     "Flag, true if etaPL should be computed as it depends on yPL"
     annotation(Evaluate=true);
 
-  final parameter Modelica.SIunits.Temperature TUseAct_nominal=
+  final  Modelica.SIunits.Temperature TUseAct_nominal=
     if COP_is_for_cooling
       then TEva_nominal - TAppEva_nominal
       else TCon_nominal + TAppCon_nominal
@@ -228,7 +226,6 @@ initial equation
   assert(abs(AixLib.Utilities.Math.Functions.polynomial(
          a=a, x=1)-1) < 0.01, "Efficiency curve is wrong. Need etaPL(y=1)=1.");
   assert(etaCarnot_nominal_internal < 1,   "Parameters lead to etaCarnot_nominal > 1. Check parameters.");
-
 
 equation
   connect(port_a2, eva.port_a)
@@ -409,4 +406,4 @@ First implementation of this base class.
 </li>
 </ul>
 </html>"));
-end Carnot;
+end Carnot1;

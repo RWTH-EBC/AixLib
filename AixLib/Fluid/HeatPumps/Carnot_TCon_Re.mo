@@ -1,22 +1,39 @@
 within AixLib.Fluid.HeatPumps;
-model Carnot_TCon
+model Carnot_TCon_RE
   "Heat pump with prescribed condenser leaving temperature and performance curve adjusted based on Carnot efficiency"
- extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_T(
-   final COP_is_for_cooling = false,
-   final QEva_flow_nominal = -QCon_flow_nominal*(COP_nominal-1)/COP_nominal,
-   PEle(y=QCon_flow/COP),
-   redeclare HeatExchangers.Heater_T con(
+ extends AixLib.Fluid.HeatPumps.BaseClasses.Carnot1(
+    COP_is_for_cooling =  is_cooling,
+    QEva_flow_nominal= if COP_is_for_cooling then Q_cooling_nominal else -  QCon_flow_nominal*(COP_nominal-1)/COP_nominal,
+    QCon_flow_nominal= if COP_is_for_cooling then -QEva_flow_nominal*(1 + COP_nominal)/COP_nominal else Q_heating_nominal,
+    TConAct(start=TCon_nominal + TAppCon_nominal)=
+          if COP_is_for_cooling then Medium2.temperature(staB2) + QCon_flow/QCon_flow_nominal*TAppCon_nominal else Medium1.temperature(staB1) + QCon_flow/QCon_flow_nominal*TAppCon_nominal,
+    TEvaAct(start=TEva_nominal - TAppEva_nominal)=
+          if COP_is_for_cooling then Medium1.temperature(staB1) - QEva_flow/QEva_flow_nominal*TAppEva_nominal else Medium2.temperature(staB2) - QEva_flow/QEva_flow_nominal*TAppEva_nominal,
+    QCon_flow= if COP_is_for_cooling then Q_flow_internal.y else con.Q_flow,
+    QEva_flow= if COP_is_for_cooling then con.Q_flow else Q_flow_internal.y,
+    redeclare HeatExchangers.PrescribedOutlet con(
+    final use_X_wSet=false,
+    final mWatMax_flow = 0,
+    final mWatMin_flow = 0,
     final from_dp=from_dp1,
     final dp_nominal=dp1_nominal,
+    final m_flow_nominal= 2,
+    final m_flow_small=0.0001,
     final linearizeFlowResistance=linearizeFlowResistance1,
     final deltaM=deltaM1,
-    final QMax_flow=QCon_flow_max,
     final tau=tau1,
     final T_start=T1_start,
     final energyDynamics=energyDynamics,
-    final homotopyInitialization=homotopyInitialization),
-   redeclare HeatExchangers.HeaterCooler_u eva(
+    final massDynamics = Modelica.Fluid.Types.Dynamics.SteadyState,
+    use_TSet=true,
+    final X_start=Medium1.X_default,
+    QMax_flow= QCon_flow_max,
+    QMin_flow= QEva_flow_min,
+      final homotopyInitialization=false),
+    redeclare  HeatExchangers.HeaterCooler_u eva(
     final from_dp=from_dp2,
+    final m_flow_nominal= 2,
+    final m_flow_small=0.0001,
     final dp_nominal=dp2_nominal,
     final linearizeFlowResistance=linearizeFlowResistance2,
     final deltaM=deltaM2,
@@ -24,44 +41,62 @@ model Carnot_TCon
     final T_start=T2_start,
     final energyDynamics=energyDynamics,
     final homotopyInitialization=homotopyInitialization,
-    final Q_flow_nominal=QEva_flow_nominal));
+      final Q_flow_nominal=1));
 
+  parameter Modelica.SIunits.HeatFlowRate QEva_flow_min(
+    max=0) = -Modelica.Constants.inf
+    "Maximum heat flow rate for cooling (negative)";
   parameter Modelica.SIunits.HeatFlowRate QCon_flow_max(
     min=0) = Modelica.Constants.inf
     "Maximum heat flow rate for heating (positive)";
+   parameter Modelica.SIunits.HeatFlowRate Q_heating_nominal(min = 0);
+   parameter Modelica.SIunits.HeatFlowRate Q_cooling_nominal(max = 0);
+
 
   Modelica.Blocks.Interfaces.RealInput TSet(unit="K")
     "Condenser leaving water temperature"
     annotation (Placement(transformation(extent={{-140,70},{-100,110}})));
 
+  Modelica.Blocks.Logical.LessThreshold modi(threshold=273.15 + 23)
+    annotation (Placement(transformation(extent={{-108,-28},{-88,-8}})));
+
+
+// QEva_flow_nominal = -  QCon_flow_nominal*(COP_nominal-1)/COP_nominal;
+
+
+
+
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=abs(con.Q_flow/COP))
+    annotation (Placement(transformation(extent={{30,-6},{50,14}})));
+  Modelica.Blocks.Interfaces.BooleanOutput is_cooling
+    annotation (Placement(transformation(extent={{-102,16},{-82,36}})));
 protected
-  Modelica.Blocks.Math.Gain yEva(final k=1/QEva_flow_nominal)
-    "Normalized evaporator heat flow rate"
-    annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
-  Modelica.Blocks.Math.Add QEva_flow_internal(final k1=-1, k2=+1)
-    "Heat removed by evaporator"
-    annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+  Modelica.Blocks.Math.Add Q_flow_internal(final k1=-1, k2=+1)
+    "Heat removed by evaporator" annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=-90,
+        origin={26,30})));
 initial equation
-  assert(QCon_flow_nominal > 0, "Parameter QCon_flow_nominal must be positive.");
-  assert(COP_nominal > 1, "The nominal COP of a heat pump must be bigger than one.");
+//  assert(QCon_flow_nominal > 0, "Parameter QCon_flow_nominal must be positive.");
+//  assert(COP_nominal > 1, "The nominal COP of a heat pump must be bigger than one.");
+//  assert(QEva_flow_nominal< 0, "Parameter QCon_flow_nominal must be negative.");
 
 
 equation
-  connect(TSet, con.TSet) annotation (Line(points={{-120,90},{-80,90},{-80,90},{
-          -80,68},{-12,68}}, color={0,0,127}));
-  connect(con.Q_flow, QCon_flow) annotation (Line(points={{11,68},{80,68},{80,90},
-          {110,90}}, color={0,0,127}));
-  connect(QEva_flow_internal.u1, con.Q_flow) annotation (Line(points={{-2,-24},{
-          -10,-24},{-10,0},{30,0},{30,68},{11,68}},   color={0,0,127}));
-  connect(QEva_flow_internal.u2, PEle.y) annotation (Line(points={{-2,-36},{-2,-36},
-          {-20,-36},{-20,-14},{90,-14},{90,0},{61,0}}, color={0,0,127}));
-  connect(QEva_flow_internal.y, yEva.u)
-    annotation (Line(points={{21,-30},{30,-30},{38,-30}},
-                                                 color={0,0,127}));
-  connect(QEva_flow, QEva_flow_internal.y) annotation (Line(points={{110,-90},{78,
-          -90},{28,-90},{28,-30},{21,-30}}, color={0,0,127}));
-  connect(yEva.y, eva.u) annotation (Line(points={{61,-30},{70,-30},{70,-54},{12,
-          -54}}, color={0,0,127}));
+  connect(TSet, modi.u) annotation (Line(points={{-120,90},{-120,-18},{-110,-18}},
+        color={0,0,127}));
+  connect(realExpression2.y, Q_flow_internal.u2)
+    annotation (Line(points={{51,4},{52,4},{52,42},{32,42}}, color={0,0,127}));
+  connect(TSet, con.TSet) annotation (Line(points={{-120,90},{-68,90},{-68,68},{
+          -12,68}}, color={0,0,127}));
+  connect(con.Q_flow, Q_flow_internal.u1) annotation (Line(points={{11,68},{16,68},
+          {16,42},{20,42}}, color={0,0,127}));
+  connect(realExpression2.y, P)
+    annotation (Line(points={{51,4},{80,4},{80,0},{110,0}}, color={0,0,127}));
+  connect(modi.y, is_cooling) annotation (Line(points={{-87,-18},{-82,-18},{-82,26},{-92,
+          26}}, color={255,0,255}));
+  connect(Q_flow_internal.y, eva.u)
+    annotation (Line(points={{26,19},{26,-54},{12,-54}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
             {100,100}}),
             graphics={
@@ -178,4 +213,4 @@ First implementation.
 </li>
 </ul>
 </html>"));
-end Carnot_TCon;
+end Carnot_TCon_RE;

@@ -13,9 +13,9 @@ model WaterHeater_T
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=1000,
-    T_start=289.15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    QMax_flow=Q_flow_nominal) "Heater"
+    QMax_flow=Q_flow_nominal,
+    T_start=289.15)           "Heater"
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Controls.SetPoints.Table tab(table=[0,273.15 + 10; 1,273.15 + 30])
     annotation (Placement(transformation(extent={{-30,20},{-10,40}})));

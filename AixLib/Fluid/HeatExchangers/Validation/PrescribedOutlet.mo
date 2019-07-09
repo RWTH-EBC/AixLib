@@ -19,7 +19,7 @@ model PrescribedOutlet
     QMax_flow=1e4,
     use_X_wSet=false)
     "Steady-state model of the heater with high capacity"
-    annotation (Placement(transformation(extent={{40,110},{60,130}})));
+    annotation (Placement(transformation(extent={{40,112},{60,132}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort heaHigPowOut(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal) "Temperature sensor"
@@ -97,10 +97,10 @@ model PrescribedOutlet
     annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
 equation
   connect(heaHigPow.port_b, heaHigPowOut.port_a) annotation (Line(
-      points={{60,120},{78,120}},
+      points={{60,122},{70,122},{70,120},{78,120}},
       color={0,127,255}));
   connect(TSetHeat.y, heaHigPow.TSet) annotation (Line(
-      points={{11,170},{20,170},{20,128},{38,128}},
+      points={{11,170},{20,170},{20,130},{38,130}},
       color={0,0,127}));
   connect(cooLimPow.port_b, cooLimPowOut.port_a) annotation (Line(
       points={{60,34},{80,34}},
@@ -115,7 +115,7 @@ equation
       points={{13,-10},{26,-10},{26,-42},{38,-42}},
       color={0,0,127}));
   connect(heaHigPowIn.port_b, heaHigPow.port_a) annotation (Line(
-      points={{12,120},{40,120}},
+      points={{12,120},{26,120},{26,122},{40,122}},
       color={0,127,255}));
   connect(cooLimPowIn.port_b, cooLimPow.port_a) annotation (Line(
       points={{14,34},{40,34}},

@@ -63,10 +63,11 @@ equation
           {-74,16},{-70,16}},          color={0,0,127}));
   connect(realExpression.y, switch1.u3) annotation (Line(points={{-75,-12},{-74,
           -12},{-74,0},{-70,0}},      color={0,0,127}));
-  connect(u, switch1[1].u2) annotation (Line(points={{44,92},{-98,92},{-98,8},{
-          -70,8}},  color={255,0,255}));
-  connect(switch1[2].u2, u) annotation (Line(points={{-70,8},{-98,8},{-98,92},{
-          44,92}}, color={255,0,255}));
+
+  for k in 1:nNodes loop
+    connect(switch1[k].u2, u);
+  end for;
+
   annotation (Line(points={{-58,-98},{-98,-98},{-98,8},
           {-70,8}}, color={255,0,255}),
               Documentation(revisions="<html>

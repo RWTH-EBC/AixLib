@@ -58,7 +58,7 @@ model BufferStorageCharging
         origin={62,38})));
 equation
   connect(boundary.m_flow_in, const.y)
-    annotation (Line(points={{32,38},{42,38},{51,38}}, color={0,0,127}));
+    annotation (Line(points={{34,38},{34,38},{51,38}}, color={0,0,127}));
   connect(boundary1.ports[1], storage_Aixlib.fluidportTop2) annotation (Line(
         points={{-34,46},{-14,46},{-14,24.12},{-13.125,24.12}}, color={0,127,
           255}));
