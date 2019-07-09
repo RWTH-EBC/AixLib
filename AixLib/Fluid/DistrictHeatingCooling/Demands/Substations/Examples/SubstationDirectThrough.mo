@@ -48,7 +48,7 @@ equation
   connect(source.ports[1], substationDirectThrough.port_a)
     annotation (Line(points={{-40,0},{-30,0}}, color={0,127,255}));
   connect(m_flow_set.y, source.m_flow_in) annotation (Line(points={{-79,30},{
-          -70,30},{-70,10},{-60,8}}, color={0,0,127}));
+          -70,30},{-70,8},{-62,8}},  color={0,0,127}));
   connect(T_set.y, source.T_in) annotation (Line(points={{-77,-30},{-70,-30},{
           -70,2},{-62,4}}, color={0,0,127}));
   connect(substationDirectThrough.port_b, senMasFlo.port_a)

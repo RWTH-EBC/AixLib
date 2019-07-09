@@ -203,19 +203,19 @@ protected
     constrainedby Interfaces.PartialTwoPortInterface(
       redeclare final package Medium = Medium1,
       final allowFlowReversal=allowFlowReversal1,
-      final m_flow_nominal=m1_flow_nominal,
-      final m_flow_small=m1_flow_small,
       final show_T=false) "Condenser"
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
+     // final m_flow_nominal=m1_flow_nominal,
+     // final m_flow_small=m1_flow_small,
 
   replaceable Interfaces.PartialTwoPortInterface eva
     constrainedby Interfaces.PartialTwoPortInterface(
       redeclare final package Medium = Medium2,
       final allowFlowReversal=allowFlowReversal2,
-      final m_flow_nominal=m2_flow_nominal,
-      final m_flow_small=m2_flow_small,
       final show_T=false) "Evaporator"
   annotation (Placement(transformation(extent={{10,-70},{-10,-50}})));
+    //  final m_flow_nominal=m2_flow_nominal,
+   //   final m_flow_small=m2_flow_small,
 
 initial equation
   assert(dTEva_nominal < 0,

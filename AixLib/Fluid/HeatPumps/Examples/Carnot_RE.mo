@@ -20,8 +20,8 @@ model Carnot_RE
     redeclare package Medium = Medium1,
     use_T_in=false,
     use_m_flow_in=true,
-    T=298.15,
-    nPorts=1)
+    nPorts=1,
+    T=298.15)
     annotation (Placement(transformation(extent={{-56,-36},{-36,-16}})));
   AixLib.Fluid.Sources.MassFlowSource_T sou2(
     redeclare package Medium = Medium2,
