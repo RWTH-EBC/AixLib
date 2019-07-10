@@ -19,7 +19,7 @@ model PartialHuman "Partial model for internal gains of humans"
             {2,-38}})));
   Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
   Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=1)
+  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
     annotation (Placement(transformation(extent={{-40,-6},{-20,14}})));
   Modelica.Blocks.Math.Gain PersonHeat(k=1/HeatPerPerson)
     "Divides total heat by the Heat Output per Person to get number of persons"
@@ -44,8 +44,9 @@ equation
   connect(SurfaceArea_People.y, RadiationConvertor.A) annotation (Line(
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
       color={0,0,127}));
-  connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,-20},
-          {-54,-20},{-54,4},{-40,4},{-40,4}}, color={0,0,127}));
+  connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,
+          -20},{-54,-20},{-54,4},{-40,4},{-40,7.5}},
+                                              color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(points={{-18.3,4},{-8,
           4},{-8,-8},{5.2,-8}}, color={0,0,127}));
   connect(productHeatOutput.y, gain.u) annotation (Line(points={{-18.3,4},{-8,4},
