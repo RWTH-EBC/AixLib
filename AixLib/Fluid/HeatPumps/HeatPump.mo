@@ -11,11 +11,11 @@ model HeatPump
 
 
   replaceable model PerDataMainHP =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRevHP =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={

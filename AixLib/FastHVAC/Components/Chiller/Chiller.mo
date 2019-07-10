@@ -14,11 +14,11 @@ model Chiller "Base model of FastHVAC Chiller"
   parameter Boolean use_revChi=true "True if the chiller is reversible"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   replaceable model PerDataMainChi =
-      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in cooling mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRevChi =
-      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in heating mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of chiller";
@@ -382,13 +382,13 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(innerCycle.sigBus, sigBus) annotation (Line(
       points={{-26.78,-0.73},{-32,-0.73},{-32,-42},{-32,-42},{-32,-43},{-105,-43}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+
   connect(mFlow_eva.dotm, sigBus.m_flow_ev) annotation (Line(points={{69,-51},{
           69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(

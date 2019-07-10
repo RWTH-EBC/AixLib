@@ -3,17 +3,17 @@ model InnerCycle_Chiller "Blackbox model of refrigerant cycle of a chiller"
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
 
   replaceable model PerDataMainChi =
-      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a chiller in main operation mode"
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataRevChi =
-      AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.Fluid.Chillers.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData(
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a chiller in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);

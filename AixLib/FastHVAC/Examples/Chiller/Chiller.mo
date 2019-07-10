@@ -9,10 +9,10 @@ model Chiller
   Components.Chiller.Chiller chiller(
     use_revChi=true,
     redeclare model PerDataMainChi =
-        AixLib.Fluid.Chillers.BaseClasses.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
           dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.Fluid.Chillers.BaseClasses.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     refIneFre_constant=1,

@@ -1,74 +1,10 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses;
-package PerformanceData "Different models used for a black box heat pump model"
-  model IcingBlock
-    "Block which decreases evaporator power by an icing factor"
-    AixLib.Utilities.Time.CalendarTime calTim(zerTim=zerTim, yearRef=yearRef);
-    parameter Integer hourDay=16
-                              "Hour of the day";
-    parameter AixLib.Utilities.Time.Types.ZeroTime zerTim=AixLib.Utilities.Time.Types.ZeroTime.NY2016
-      "Enumeration for choosing how reference time (time = 0) should be defined";
-    parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
-    replaceable function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach       constrainedby
-      AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct                                                                                     "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
-    Modelica.Blocks.Interfaces.RealInput T_flow_ev(unit="K", displayUnit="degC")
-      "Temperature at evaporator inlet"
-      annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
-          iconTransformation(extent={{-116,12},{-100,28}})));
-
-    Modelica.Blocks.Interfaces.RealInput T_ret_ev(unit="K", displayUnit="degC")
-      "Temperature at evaporator outlet" annotation (Placement(transformation(
-            extent={{-128,-40},{-100,-12}}),iconTransformation(extent={{-116,-28},
-              {-100,-12}})));
-    Modelica.Blocks.Interfaces.RealInput T_oda(unit="K", displayUnit="degC") "Outdoor air temperature"
-      annotation (Placement(transformation(extent={{-128,46},{-100,74}}),
-          iconTransformation(extent={{-116,52},{-100,68}})));
-    Modelica.Blocks.Interfaces.RealInput m_flow_ev(unit="kg/s") "Mass flow rate at evaporator"
-      annotation (Placement(transformation(extent={{-128,-80},{-100,-52}}),
-          iconTransformation(extent={{-116,-68},{-100,-52}})));
-    Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Output of current icing factor"
-      annotation (Placement(transformation(
-          extent={{-10,-10},{10,10}},
-          rotation=0,
-          origin={110,0})));
-  protected
-    Real iceFac_internal "Calculated value of icing factor";
-  equation
-    iceFac_internal = iceFunc(T_flow_ev,T_ret_ev,T_oda,m_flow_ev);
-    iceFac = iceFac_internal;
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Text(
-            lineColor={0,0,255},
-            extent={{-150,105},{150,145}},
-            textString="%name"),
-          Ellipse(
-            lineColor = {108,88,49},
-            fillColor = {255,215,136},
-            fillPattern = FillPattern.Solid,
-            extent = {{-100,-100},{100,100}}),
-          Text(
-            lineColor={108,88,49},
-            extent={{-90.0,-90.0},{90.0,90.0}},
-            textString="f")}),                                     Diagram(
-          coordinateSystem(preserveAspectRatio=false)),
-      Documentation(revisions="<html><ul>
-  <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
-    First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-  </li>
-</ul>
-</html>",   info="<html>
-<p>
-  Model for calculation of the icing factor. The replaceable function
-  uses the inputs to calculate the resulting icing factor.
-</p>
-</html>"));
-  end IcingBlock;
+within AixLib.DataBase.Chiller;
+package PerformanceData
+  "Different data models used for a black box chiller model"
 
   model LookUpTable2D "Performance data coming from manufacturer"
     extends
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
@@ -79,7 +15,7 @@ package PerformanceData "Different models used for a black box heat pump model"
       "WARNING: This will lead to a lot of state-events if extrapolation occurs frequently! If extrapolation is enabled, the user will get warnings when extrapolation occurs."
       annotation (Dialog(enable=extrapolation));
 
-    Utilities.Tables.CombiTable2DExtra  Qdot_ConTable(
+    Utilities.Tables.CombiTable2DExtra  Qdot_EvaTable(
       final smoothness=smoothness,
       final u1(unit="degC"),
       final u2(unit="degC"),
@@ -103,20 +39,20 @@ package PerformanceData "Different models used for a black box heat pump model"
           rotation=-90,
           origin={-60,36})));
 
-    Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
+    Modelica.Blocks.Math.UnitConversions.To_degC t_Co_in
       annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
               {6,6}},
           rotation=270,
           origin={52,72})));
-    Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
+    Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_ou annotation (extent=[-88,38;
           -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
           rotation=270,
           origin={-54,76})));
     Modelica.Blocks.Math.Product nTimesPel annotation (Placement(transformation(
           extent={{-7,-7},{7,7}},
           rotation=-90,
-          origin={-47,-3})));
-    Modelica.Blocks.Math.Product nTimesQCon annotation (Placement(transformation(
+          origin={-41,-11})));
+    Modelica.Blocks.Math.Product nTimesQEva annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=-90,
           origin={40,-10})));
@@ -125,20 +61,20 @@ package PerformanceData "Different models used for a black box heat pump model"
       annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=270,
-          origin={-78,-62})));
+          origin={68,-62})));
     Modelica.Blocks.Math.Add calcRedQCon
       "Based on redcued heat flow to the evaporator, the heat flow to the condenser is also reduced"
       annotation (Placement(transformation(
           extent={{-6,-6},{6,6}},
           rotation=270,
-          origin={82,-70})));
+          origin={-80,-80})));
 
     Modelica.Blocks.Math.Product nTimesSF
       "Create the product of the scaling factor and relative compressor speed"
       annotation (Placement(transformation(
           extent={{-7,-7},{7,7}},
           rotation=-90,
-          origin={-11,23})));
+          origin={-9,23})));
 
   protected
     parameter Real minSou = min(dataTable.tableP_ele[1,2:end]);
@@ -150,103 +86,92 @@ package PerformanceData "Different models used for a black box heat pump model"
       annotation (Placement(transformation(
           extent={{-3,-3},{3,3}},
           rotation=270,
-          origin={-15,43})));
-    Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-      "Calculates evaporator heat flow with total energy balance"                 annotation(Placement(transformation(extent={{-5,-5},
-              {5,5}},
-          rotation=270,
-          origin={-81,-43})));
+          origin={-13,43})));
 
   equation
     if printAsserts then
       assert(
-          minSou + 273.15 < sigBus.T_flow_ev,
-          "Current T_flow_ev is too low. Extrapolation of data will result in unrealistic results",
+          minSou + 273.15 < sigBus.T_flow_co,
+          "Current T_flow_co is too low. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
       assert(
-          maxSou + 273.15 > sigBus.T_flow_ev,
-          "Current T_flow_ev is too high. Extrapolation of data will result in unrealistic results",
+          maxSou + 273.15 > sigBus.T_flow_co,
+          "Current T_flow_co is too high. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
       assert(
-          minSup + 273.15 < sigBus.T_ret_co,
-          "Current T_ret_co is too low. Extrapolation of data will result in unrealistic results",
+          minSup + 273.15 < sigBus.T_ret_ev,
+          "Current T_ret_ev is too low. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
       assert(
-          maxSup + 273.15 > sigBus.T_ret_co,
-          "Current T_ret_co is too high. Extrapolation of data will result in unrealistic results",
+          maxSup + 273.15 > sigBus.T_ret_ev,
+          "Current T_ret_ev is too high. Extrapolation of data will result in unrealistic results",
           level=AssertionLevel.warning);
     else
     end if;
-    connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{52,65.4},{52,
+    connect(t_Co_in.y,Qdot_EvaTable. u2) annotation (Line(points={{52,65.4},{52,
             60},{37.6,60},{37.6,50.8}},      color={0,0,127}));
-    connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(points={{52,65.4},{-68.4,
+    connect(t_Co_in.y, P_eleTable.u2) annotation (Line(points={{52,65.4},{-68.4,
             65.4},{-68.4,52.8}},  color={0,0,127}));
-    connect(t_Co_ou.y, P_eleTable.u1) annotation (Line(points={{-54,69.4},{-54,
+    connect(t_Ev_ou.y, P_eleTable.u1) annotation (Line(points={{-54,69.4},{-54,
             52.8},{-51.6,52.8}},  color={0,0,127}));
-    connect(t_Co_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-54,69.4},{-54,
+    connect(t_Ev_ou.y,Qdot_EvaTable. u1) annotation (Line(points={{-54,69.4},{-54,
             60},{52,60},{52,50.8},{54.4,50.8}},
                                     color={0,0,127}));
-    connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
+    connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
         points={{1.075,104.07},{-54,104.07},{-54,83.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+    connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
         points={{1.075,104.07},{2,104.07},{2,104},{52,104},{52,79.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(P_eleTable.y, nTimesPel.u2) annotation (Line(points={{-60,20.6},{-60,
-            10},{-51.2,10},{-51.2,5.4}},
+    connect(P_eleTable.y, nTimesPel.u2) annotation (Line(points={{-60,20.6},{
+            -60,10},{-45.2,10},{-45.2,-2.6}},
                                        color={0,0,127}));
-    connect(Qdot_ConTable.y, nTimesQCon.u1) annotation (Line(points={{46,18.6},{
+    connect(Qdot_EvaTable.y,nTimesQEva. u1) annotation (Line(points={{46,18.6},{
             46,-2.8},{43.6,-2.8}},        color={0,0,127}));
-    connect(QCon, calcRedQCon.y)
-      annotation (Line(points={{-80,-110},{-80,-92},{82,-92},{82,-76.6}},
-                                                        color={0,0,127}));
-    connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{-78,-68.6},{
-            -78,-74},{-4,-74},{-4,-56},{85.6,-56},{85.6,-62.8}},            color=
+    connect(proRedQEva.y, calcRedQCon.u1) annotation (Line(points={{68,-68.6},{
+            68,-70},{-76.4,-70},{-76.4,-72.8}},                             color=
            {0,0,127}));
-    connect(proRedQEva.y, QEva)
-      annotation (Line(points={{-78,-68.6},{-78,-88},{80,-88},{80,-110}},
-                                                        color={0,0,127}));
-    connect(feedbackHeatFlowEvaporator.y, proRedQEva.u2) annotation (Line(points={{-81,
-            -47.5},{-81,-54},{-81.6,-54},{-81.6,-54.8}},           color={0,0,127}));
     connect(sigBus.iceFac, proRedQEva.u1) annotation (Line(
-        points={{1.075,104.07},{14,104.07},{14,60},{6,60},{6,-52},{-64,-52},{-64,
-            -54.8},{-74.4,-54.8}},
+        points={{1.075,104.07},{20,104.07},{20,-42},{72,-42},{72,-54.8},{71.6,
+            -54.8}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(nTimesQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points=
-            {{40,-16.6},{40,-34},{-81,-34},{-81,-39}}, color={0,0,127}));
-    connect(nTimesPel.y, feedbackHeatFlowEvaporator.u2) annotation (Line(points={
-            {-47,-10.7},{-47,-18},{-90,-18},{-90,-43},{-85,-43}}, color={0,0,127}));
-    connect(nTimesPel.y, calcRedQCon.u2) annotation (Line(points={{-47,-10.7},{
-            -48,-10.7},{-48,-48},{78.4,-48},{78.4,-62.8}}, color={0,0,127}));
-    connect(nTimesPel.y, Pel) annotation (Line(points={{-47,-10.7},{-47,-78},{0,
-            -78},{0,-110},{0,-110}}, color={0,0,127}));
-    connect(nTimesPel.u1, nTimesSF.y) annotation (Line(points={{-42.8,5.4},{-26,
-            5.4},{-26,15.3},{-11,15.3}}, color={0,0,127}));
-    connect(nTimesQCon.u2, nTimesSF.y) annotation (Line(points={{36.4,-2.8},{12,
-            -2.8},{12,15.3},{-11,15.3}}, color={0,0,127}));
-    connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-15,39.7},{-15,
-            31.4},{-15.2,31.4}}, color={0,0,127}));
+    connect(nTimesPel.y, Pel) annotation (Line(points={{-41,-18.7},{-41,-30},{0,
+            -30},{0,-110}},          color={0,0,127}));
+    connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-13,39.7},{-13,
+            31.4},{-13.2,31.4}}, color={0,0,127}));
     connect(sigBus.N, nTimesSF.u1) annotation (Line(
-        points={{1.075,104.07},{-2,104.07},{-2,31.4},{-6.8,31.4}},
+        points={{1.075,104.07},{-4,104.07},{-4,31.4},{-4.8,31.4}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(nTimesQEva.y, proRedQEva.u2) annotation (Line(points={{40,-16.6},{
+            40,-54.8},{64.4,-54.8}}, color={0,0,127}));
+    connect(proRedQEva.y, QEva) annotation (Line(points={{68,-68.6},{68,-80},{
+            80,-80},{80,-110}}, color={0,0,127}));
+    connect(calcRedQCon.y, QCon)
+      annotation (Line(points={{-80,-86.6},{-80,-110}}, color={0,0,127}));
+    connect(nTimesPel.y, calcRedQCon.u2) annotation (Line(points={{-41,-18.7},{
+            -41,-30},{-83.6,-30},{-83.6,-72.8}}, color={0,0,127}));
+    connect(nTimesSF.y, nTimesPel.u1) annotation (Line(points={{-9,15.3},{-9,10},
+            {-36.8,10},{-36.8,-2.6}}, color={0,0,127}));
+    connect(nTimesSF.y, nTimesQEva.u2) annotation (Line(points={{-9,15.3},{-9,
+            10},{36.4,10},{36.4,-2.8}}, color={0,0,127}));
     annotation (Icon(graphics={
       Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
       Line(points={{0.0,40.0},{0.0,-40.0}}),
@@ -263,65 +188,29 @@ package PerformanceData "Different models used for a black box heat pump model"
         fillPattern=FillPattern.Solid,
         extent={{-60.0,-40.0},{-30.0,-20.0}})}), Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
 </ul>
 </html>",   info="<html>
-<p>
-  This model uses the 2-dimensional table data given in the DIN EN
-  14511 (formerly EN255) to calculate <i>QCon</i> and <i>P_el</i>. To
-  model an inverter controlled heat pump, the relative <b>compressor
-  speed <i>n</i> is scaled linearly</b> with the ouput of the tables.
-  Furthermore, the design of a heat pump is modeled via a scaling
-  factor. As a result, the equations follow below:
-</p>
-<p align=\"center\">
-  <i>QCon,n = n * scalingFactor * TableQCon.y</i>
-</p>
-<p align=\"center\">
-  <i>P_el = n * scalingFactor * TablePel.y</i>
-</p>
-<p align=\"justify\">
-  To simulate possible icing of the evaporator on air-source heat
-  pumps, the icing factor is used to influence the output as well. As
-  the factor resembles the reduction of heat transfer between
-  refrigerant and source, the factor is implemented as follows:
-</p>
-<p align=\"center\">
-  <i>QEva = iceFac * (QCon,n-P_el,n)</i>
-</p>
-<p>
-  With <i>iceFac</i> as a relative value between 0 and 1:
-</p>
-<p align=\"center\">
-  <i>iceFac = kA/kA_noIce</i>
-</p>
-<p>
-  Finally, to follow the first law of thermodynamics:
-</p>
-<p align=\"center\">
-  <i>QCon = P_el,n + QEva</i>
-</p>
-<h4>
-  Known Limitations
-</h4>
-<p>
-  The model <a href=
-  \"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a>
-  is able to disallow extrapolation by holding the last value. If one
-  extrapolates the given perfomance data, warnings about occuring
-  extrapolations are emitted. <b>CAUTION: Checking for possible
-  extrapolations will trigger state events which results in higher
-  computing time.</b>
-</p>
+<p>This model uses the 2-dimensional table data given in the DIN EN 14511 (formerly EN255) to calculate <i>QEva</i> and <i>P_el</i>. To model an inverter controlled chiller, the relative <b>compressor speed <i>n</i> is scaled linearly</b> with the ouput of the tables. Furthermore, the design of a chiller is modeled via a scaling factor. As a result, the equations follow below: </p>
+<p align=\"center\"><i>QEva,n = n * scalingFactor * TableQEva.y</i> </p>
+<p align=\"center\"><i>P_el = n * scalingFactor * TablePel.y</i> </p>
+<p align=\"justify\">To simulate possible icing of the evaporator on air-source chillers, the icing factor is used to influence the output as well. As the factor resembles the reduction of heat transfer between refrigerant and source, the factor is implemented as follows: </p>
+<p align=\"center\"><i>QEva = iceFac * QEva,n</i> </p>
+<p>With <i>iceFac</i> as a relative value between 0 and 1: </p>
+<p align=\"center\"><i>iceFac = kA/kA_noIce</i> </p>
+<p>Finally, to follow the first law of thermodynamics: </p>
+<p align=\"center\"><i>QCon = P_el,n + QEva</i> </p>
+<h4>Known Limitations </h4>
+<p>The model <a href=\"modelica://AixLib.Utilities.Tables.CombiTable2DExtra\">CombiTable2DExtra</a> is able to disallow extrapolation by holding the last value. If one extrapolates the given perfomance data, warnings about occuring extrapolations are emitted. <b>CAUTION: Checking for possible extrapolations will trigger state events which results in higher computing time.</b> </p>
 </html>"));
   end LookUpTable2D;
 
   model LookUpTableND "N-dimensional table with data for heat pump"
     extends
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
     parameter Real nConv=100
       "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
     parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -361,27 +250,28 @@ package PerformanceData "Different models used for a black box heat pump model"
           extent={{-8,-8},{8,8}},
           rotation=-90,
           origin={0,68})));
-   Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
+   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_in
       annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
               {6,6}},
           rotation=-90,
           origin={46,44})));
-    Modelica.Blocks.Math.UnitConversions.To_degC t_Co_ou annotation (extent=[-88,38;
+    Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_ou annotation (extent=[-88,38;
           -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
           rotation=-90,
           origin={-40,46})));
-    Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-                      "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-6,-6},
-              {6,6}},
+    Modelica.Blocks.Math.Add calcRedQCon
+      "Calculates condenser heat flow with total energy balance" annotation (
+        Placement(transformation(
+          extent={{-6,6},{6,-6}},
           rotation=-90,
-          origin={80,-82})));
+          origin={-80,-86})));
     Utilities.Logical.SmoothSwitch switchPel
       "If HP is off, no heat will be exchanged"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=-90,
           origin={50,-60})));
-    Utilities.Logical.SmoothSwitch switchQCon
-      "If HP is off, no heat will be exchanged"
+    Utilities.Logical.SmoothSwitch switchQEva
+      "If chiller is off, no heat will be exchanged"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=-90,
           origin={-50,-56})));
@@ -390,7 +280,7 @@ package PerformanceData "Different models used for a black box heat pump model"
       annotation (Placement(transformation(extent={{-6,-6},{6,6}},
           rotation=-90,
           origin={-4,-18})));
-    SDF.NDTable nDTableQCon(
+    SDF.NDTable nDTableQEva(
       final nin=3,
       final readFromFile=true,
       final filename=filename_QCon,
@@ -398,7 +288,8 @@ package PerformanceData "Different models used for a black box heat pump model"
       final dataUnit=dataUnit_QCon,
       final scaleUnits=scaleUnits_QCon,
       final interpMethod=interpMethod,
-      final extrapMethod=extrapMethod) "SDF-Table data for condenser heat flow"
+      final extrapMethod=extrapMethod)
+      "SDF-Table data for evaporator heat flow"
       annotation (Placement(transformation(extent={{-12,-12},{12,12}},
           rotation=-90,
           origin={-42,-10})));
@@ -429,41 +320,35 @@ package PerformanceData "Different models used for a black box heat pump model"
           rotation=270,
           origin={-72,46})));
   equation
-    connect(feedbackHeatFlowEvaporator.y, QEva)
-      annotation (Line(points={{80,-87.4},{80,-110}},
-                                                  color={0,0,127}));
-    connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-76},{0,-76},
+    connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-82},{0,-82},
             {0,-110}},
                  color={0,0,127}));
-    connect(switchQCon.y, QCon) annotation (Line(points={{-50,-67},{-50,-76},{-80,
-            -76},{-80,-110}},
-                        color={0,0,127}));
 
-    connect(constZero.y, switchQCon.u3) annotation (Line(points={{-4,-24.6},{-4,
+    connect(constZero.y,switchQEva. u3) annotation (Line(points={{-4,-24.6},{-4,
             -24},{-4,-24},{-4,-28},{-4,-30},{-58,-30},{-58,-42},{-58,-42},{-58,
             -44},{-58,-44}},     color={0,0,127}));
     connect(constZero.y, switchPel.u3) annotation (Line(points={{-4,-24.6},{-4,
             -30},{42,-30},{42,-48}},
                             color={0,0,127}));
-    connect(nDTableQCon.y, switchQCon.u1)
+    connect(nDTableQEva.y,switchQEva. u1)
       annotation (Line(points={{-42,-23.2},{-42,-44}},
                                                   color={0,0,127}));
     connect(nDTablePel.y, switchPel.u1)
       annotation (Line(points={{50,-23.2},{50,-34},{58,-34},{58,-48}},
                                                     color={0,0,127}));
-    connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-1.55431e-15,
+    connect(multiplex3_1.y,nDTableQEva. u) annotation (Line(points={{-1.55431e-15,
             11.2},{-1.55431e-15,4.4},{-42,4.4}},
                                             color={0,0,127}));
     connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
             {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
-    connect(sigBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+    connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
         points={{1.075,104.07},{46,104.07},{46,51.2}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBus.T_ret_co, t_Co_ou.u) annotation (Line(
+    connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
         points={{1.075,104.07},{-40,104.07},{-40,53.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -478,8 +363,9 @@ package PerformanceData "Different models used for a black box heat pump model"
         index=-1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
-    connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-72,39.4},
-            {-72,-34},{-50,-34},{-50,-44}}, color={255,0,255}));
+    connect(greaterThreshold.y,switchQEva. u2) annotation (Line(points={{-72,
+            39.4},{-72,-36},{-50,-36},{-50,-44}},
+                                            color={255,0,255}));
     connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
             {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
     connect(sigBus.N, nConGain.u) annotation (Line(
@@ -492,14 +378,18 @@ package PerformanceData "Different models used for a black box heat pump model"
         horizontalAlignment=TextAlignment.Right));
     connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{
             -1.55431e-15,59.2},{-6,59.2},{-6,29.6},{-5.6,29.6}}, color={0,0,127}));
-    connect(t_Co_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
+    connect(t_Ev_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
             -40,36},{5.6,36},{5.6,29.6}}, color={0,0,127}));
-    connect(t_Ev_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
+    connect(t_Co_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
             32},{0,32},{0,29.6}}, color={0,0,127}));
-    connect(switchPel.y, feedbackHeatFlowEvaporator.u2)
-      annotation (Line(points={{50,-71},{50,-82},{75.2,-82}}, color={0,0,127}));
-    connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points=
-            {{-50,-67},{-50,-74},{80,-74},{80,-77.2}}, color={0,0,127}));
+    connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{50,-71},{50,
+            -76},{-76.4,-76},{-76.4,-78.8}}, color={0,0,127}));
+    connect(switchQEva.y, calcRedQCon.u1) annotation (Line(points={{-50,-67},{
+            -50,-72},{-83.6,-72},{-83.6,-78.8}}, color={0,0,127}));
+    connect(calcRedQCon.y, QCon)
+      annotation (Line(points={{-80,-92.6},{-80,-110}}, color={0,0,127}));
+    connect(switchQEva.y, QEva) annotation (Line(points={{-50,-67},{-50,-88},{
+            80,-88},{80,-110}}, color={0,0,127}));
     annotation (Icon(graphics={
       Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
       Line(points={{0.0,40.0},{0.0,-40.0}}),
@@ -580,9 +470,9 @@ package PerformanceData "Different models used for a black box heat pump model"
 </html>",   revisions="<html>
 <ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
 </ul>
 </html>"));
@@ -591,7 +481,7 @@ package PerformanceData "Different models used for a black box heat pump model"
   model PolynomalApproach
     "Calculating heat pump data based on a polynomal approach"
     extends
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData;
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
     replaceable function PolyData =
         AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
@@ -600,19 +490,19 @@ package PerformanceData "Different models used for a black box heat pump model"
   equation
     Char =PolyData(
         sigBus.N,
-        sigBus.T_ret_co,
-        sigBus.T_flow_ev,
-        sigBus.m_flow_co,
-        sigBus.m_flow_ev);
+        sigBus.T_ret_ev,
+        sigBus.T_flow_co,
+        sigBus.m_flow_ev,
+        sigBus.m_flow_co);
     if sigBus.N > Modelica.Constants.eps then
       //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
-      QCon = Char[2];
+      QEva = Char[2];
       Pel = Char[1];
     else //If heat pump is turned off, all values become zero.
       QCon = 0;
       Pel = 0;
     end if;
-    QEva = -(QCon - Pel);
+    QCon = -(QCon - Pel);
     annotation (Icon(graphics={
           Text(
             lineColor={0,0,255},
@@ -628,9 +518,9 @@ package PerformanceData "Different models used for a black box heat pump model"
             extent={{-90,-108},{90,72}},
             textString="f")}), Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
 </ul>
 </html>",   info="<html>
@@ -652,131 +542,12 @@ package PerformanceData "Different models used for a black box heat pump model"
 </html>"));
   end PolynomalApproach;
 
-  model calcCOP
-    "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
-
-    parameter Modelica.SIunits.Power lowBouPel "If P_el falls below this value, COP will not be calculated";
-    parameter Real T=60 "Time span for average";
-
-   Modelica.Blocks.Interfaces.RealInput Pel(final unit="W", final displayUnit=
-          "kW")
-      "Input for all electrical power consumed by the system"
-      annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}),
-          iconTransformation(extent={{-140,-60},{-100,-20}})));
-    Modelica.Blocks.Interfaces.RealInput QHeat(final unit="W", final displayUnit=
-          "kW")
-      "Input for all heating power delivered to the system"
-      annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
-          iconTransformation(extent={{-140,20},{-100,60}})));
-    Modelica.Blocks.Interfaces.RealOutput y_COP "Output for calculated COP value"
-      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  protected
-    AixLib.Utilities.Math.MovingAverage movAve(final T=T) "To calculate the moving average of the output values";
-  equation
-    //Check if any of the two sums are lower than the given threshold. If so, set COP to zero
-    if Pel < lowBouPel or QHeat < Modelica.Constants.eps then
-      movAve.u = 0;
-    else
-      movAve.u = QHeat/Pel;
-    end if;
-    connect(movAve.y, y_COP);
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Line(
-            points={{-82,0},{-12,0}},
-            color={28,108,200},
-            thickness=0.5),
-          Text(
-            extent={{-92,32},{-2,12}},
-            lineColor={28,108,200},
-            lineThickness=0.5,
-            textString="QHeat"),
-          Text(
-            extent={{-92,-8},{-2,-28}},
-            lineColor={28,108,200},
-            lineThickness=0.5,
-            textString="Pel"),
-          Line(points={{-6,6},{22,6}}, color={28,108,200}),
-          Line(points={{-6,-6},{22,-6}}, color={28,108,200}),
-          Text(
-            extent={{12,8},{102,-12}},
-            lineColor={28,108,200},
-            lineThickness=0.5,
-            textString="COP")}),                                   Diagram(
-          coordinateSystem(preserveAspectRatio=false)),
-      Documentation(revisions="<html><ul>
-  <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
-    First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-  </li>
-</ul>
-</html>",   info="<html>
-<p>
-  This model is used to calculate the COP or the EER of a device. As
-  the electrical power could get negative, a lower boundary is used to
-  avoid division by zero. A moving average ensure a stable calculation
-  of the COP or EER.
-</p>
-</html>"));
-  end calcCOP;
-
   package BaseClasses "Package with partial classes of Performance Data"
     partial model PartialPerformanceData
       "Model with a replaceable for different methods of data aggregation"
+      extends
+        AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
-      Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")
-                                                          "Electrical Power consumed by HP" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={0,-110})));
-      Modelica.Blocks.Interfaces.RealOutput QCon(final unit="W", final displayUnit="kW")
-        "Heat flow rate through Condenser" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-80,-110})));
-      AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus
-        "Bus-connector used in a thermal machine" annotation (Placement(
-            transformation(
-            extent={{-15,-14},{15,14}},
-            rotation=0,
-            origin={1,104})));
-      Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final displayUnit="kW")
-                                                                             "Heat flow rate through Condenser"  annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={80,-110})));
-    protected
-      parameter Real scalingFactor=1 "Scaling factor of heat pump";
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                                    Rectangle(
-            extent={{-100,-100},{100,100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),   Text(
-              extent={{-47.5,-26.5},{47.5,26.5}},
-              lineColor={0,0,127},
-              pattern=LinePattern.Dash,
-              textString="%name
-",            origin={0.5,60.5},
-              rotation=180)}),Diagram(coordinateSystem(preserveAspectRatio=false)),
-        Documentation(revisions="<html><ul>
-  <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
-    First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-  </li>
-</ul>
-</html>",     info="<html>
-<p>
-  Partial model for calculation of <span style=
-  \"font-family: Courier New;\">P_el</span>, <span style=
-  \"font-family: Courier New;\">QCon</span> and <span style=
-  \"font-family: Courier New;\">QEva</span> based on the values in the
-  <span style=\"font-family: Courier New;\">sigBusHP</span>.
-</p>
-</html>"));
     end PartialPerformanceData;
   annotation (Icon(graphics={
           Rectangle(
@@ -795,29 +566,29 @@ package PerformanceData "Different models used for a black box heat pump model"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
 </ul>
 </html>",   info="<html>
 <p>
   This package contains base classes for the package <a href=
-  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData</a>.
+  \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData\">AixLib.Fluid.Chillers.BaseClasses.PerformanceData</a>.
 </p>
 </html>"));
   end BaseClasses;
 annotation (Documentation(revisions="<html><ul>
   <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>
-  This package contains models for the grey box heat pump model
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>.
+  This package contains models for the grey box chiller model <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.Chillers.Chiller</a>.
 </p>
 </html>"));
 end PerformanceData;

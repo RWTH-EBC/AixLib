@@ -98,7 +98,7 @@ model SystemHeatPump "Example for a heat pump system"
     minTimeAntLeg(displayUnit="min") = 900,
     scalingFactor=1,
     redeclare model PerDataHea =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(tableP_ele=[0,
             -5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,
