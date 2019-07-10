@@ -9,9 +9,6 @@ model HPSystemController
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
     constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_con
-    "Gain with specific heat capacity in condenser medium"
-    annotation (Dialog(tab="Heat Pump Control", group="Controller", enable=use_secHeaGen));
   parameter Boolean use_bivPar=true
     "Switch between bivalent parallel and bivalent alternative control"
     annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
@@ -189,8 +186,7 @@ model HPSystemController
     final trigWeekDay=trigWeekDay,
     final trigHour=trigHour,
     final use_tableData=use_tableData,
-    redeclare final function HeatingCurveFunction = HeatingCurveFunction,
-    final cp_con=cp_con)
+    redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
   Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
@@ -235,8 +231,8 @@ model HPSystemController
         origin={-80,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare final function
-                     iceFunc =
+  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
+      final function iceFunc =
         DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
        use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));

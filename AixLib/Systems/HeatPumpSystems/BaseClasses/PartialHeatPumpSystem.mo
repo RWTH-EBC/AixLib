@@ -291,8 +291,8 @@ partial model PartialHeatPumpSystem
       group="Evaporator",
       enable=transferHeat), Evaluate=true);
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
-                                              annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
+    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(
@@ -419,8 +419,7 @@ partial model PartialHeatPumpSystem
     final use_antFre=use_antFre,
     final TantFre=TantFre,
     final use_runPerHou=use_runPerHou,
-    final maxRunPerHou=maxRunPerHou,
-    final cp_con=cpCon)
+    final maxRunPerHou=maxRunPerHou)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
   Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
