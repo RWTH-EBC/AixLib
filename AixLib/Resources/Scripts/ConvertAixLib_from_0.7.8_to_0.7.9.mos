@@ -1,0 +1,7 @@
+convertElement(
+	"AixLib.Utilities.Math.MovingAverage",
+	"T",
+	"aveTime");
+convertClass(
+	"AixLib.Systems.HeatPumpSystems.Examples.SystemHeatPump",
+	"AixLib.Systems.HeatPumpSystems.Examples.HeatPumpSystem");
