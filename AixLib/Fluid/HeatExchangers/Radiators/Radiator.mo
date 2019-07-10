@@ -473,7 +473,7 @@ appropriately</li>
 from older model.</li>
 <li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib. Delete
 EnergyMeter and additional output T_source</li>
-<li><i>July 10, 2019&nbsp;</i> by Katharina Brinkmann:<br>Changed temperature unit according to #734</li>
+<li><i>July 10, 2019&nbsp;</i> by Katharina Brinkmann:<br/>Changed temperature unit according to #734</li>
 </ul>
 </html>"));
 end Radiator;
