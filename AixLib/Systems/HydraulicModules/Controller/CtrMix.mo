@@ -22,7 +22,10 @@ block CtrMix "Controller for mixed and injection circuits "
     annotation(Dialog(group="PID"));
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
-  Controls.Continuous.LimPID        PID(
+  Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
+    "Connector of second Real input signal"
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  AixLib.Controls.Continuous.LimPID        PID(
     yMax=1,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PID,
@@ -35,21 +38,20 @@ block CtrMix "Controller for mixed and injection circuits "
     y_start=y_start,
     reverseAction=reverseAction)
             annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
-  BaseClasses.HydraulicBus  hydraulicBus
-    annotation (Placement(transformation(extent={{66,-38},{120,16}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(
                                                         y=rpm_pump)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=TflowSet)
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
-  Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
 equation
 
+public
+  BaseClasses.HydraulicBus  hydraulicBus
+    annotation (Placement(transformation(extent={{66,-38},{120,16}})));
+equation
   if useExternalTset then
     connect(PID.u_s, Tset) annotation (Line(points={{-18,-50},{-67.1,-50},{
             -67.1,0},{-120,0}},
