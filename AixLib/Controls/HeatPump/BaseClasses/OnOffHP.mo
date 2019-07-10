@@ -4,7 +4,7 @@ model OnOffHP "Converts a desired temperature to a certain compressor speed"
   parameter Real hys "Hysteresis of controller";
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=hys, pre_y_start=false) "Hysteresis controller for set temperature"
     annotation (Placement(transformation(extent={{-54,10},{-26,38}})));
-  Modelica.Blocks.Sources.Constant conOne(final k=1)
+  Modelica.Blocks.Sources.Constant conOne(final k=1.0)
                                                "Constant one for on off heat pump" annotation (Placement(transformation(extent={{38,14},{50,26}})));
 
 equation
