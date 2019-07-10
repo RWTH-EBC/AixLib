@@ -406,7 +406,8 @@ partial model PartialHeatPumpSystem
     final use_antFre=use_antFre,
     final TantFre=TantFre,
     final use_runPerHou=use_runPerHou,
-    final maxRunPerHou=maxRunPerHou)
+    final maxRunPerHou=maxRunPerHou,
+    final cp_con=cpCon)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
   Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));

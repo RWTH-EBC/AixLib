@@ -103,7 +103,6 @@ model SystemHeatPump "Example for a heat pump system"
     cpCon=4180,
     use_secHeaGen=false,
     redeclare model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP (hys=5),
-
     use_sec=true,
     QCon_nominal=10000,
     P_el_nominal=2500,
@@ -126,13 +125,15 @@ model SystemHeatPump "Example for a heat pump system"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     fixed_TCon_start=true,
     fixed_TEva_start=true,
-    redeclare Fluid.Movers.D
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
+    TCon_nominal=313.15,
     TCon_start=313.15,
     TEva_start=283.15,
-    TCon_nominal=313.15,
     VCon=0.004,
     VEva=0.004)
     annotation (Placement(transformation(extent={{8,-90},{62,-30}})));
+
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
     redeclare final package Medium = Medium_sin,

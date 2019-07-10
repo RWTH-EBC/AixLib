@@ -237,6 +237,8 @@ model HPSystemController
     use_sec "Pass through for mode signal"
     annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
 
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_con=4180
+    "specific heat capacity of condenser medium";
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
