@@ -12,9 +12,9 @@ model InnerCycle_HeatPump
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataRevHP =
-      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);

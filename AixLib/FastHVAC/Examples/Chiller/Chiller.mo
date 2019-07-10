@@ -12,7 +12,7 @@ model Chiller
         AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
           dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     refIneFre_constant=1,
@@ -106,7 +106,7 @@ model Chiller
     uLow=273.15 + 14)
     annotation (Placement(transformation(extent={{46,-98},{34,-86}})));
   Modelica.Blocks.Sources.BooleanStep     booleanStep(
-      startValue=true, startTime=15000)
+      startValue=true, startTime=10000)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=0,
         origin={32,-54})));

@@ -8,8 +8,8 @@ package PerformanceData
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
-    parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable = AixLib.DataBase.HeatPump.EN255.Vitocal350AWI114()
-      "Data Table of HP" annotation(choicesAllMatching = true);
+    parameter AixLib.DataBase.Chiller.ChillerBaseDataDefinition dataTable = AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()
+      "Data Table of Chiller" annotation(choicesAllMatching = true);
     parameter Boolean extrapolation=true "False to hold last value";
     parameter Boolean printAsserts=false
       "WARNING: This will lead to a lot of state-events if extrapolation occurs frequently! If extrapolation is enabled, the user will get warnings when extrapolation occurs."
@@ -21,7 +21,7 @@ package PerformanceData
       final u2(unit="degC"),
       final y(unit="W", displayUnit="kW"),
       final extrapolation=extrapolation,
-      final table=dataTable.tableQdot_con)
+      final table=dataTable.tableQdot_eva)
       annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-14,-14},
               {14,14}},
           rotation=-90,
@@ -81,7 +81,7 @@ package PerformanceData
     parameter Real minSup = min(dataTable.tableP_ele[2:end,1]);
     parameter Real maxSou = max(dataTable.tableP_ele[1,2:end]);
     parameter Real maxSup = max(dataTable.tableP_ele[2:end,1]);
-    Modelica.Blocks.Sources.Constant       realCorr(final k=scalingFactor)
+    Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
       "Calculates correction of table output based on scaling factor"
       annotation (Placement(transformation(
           extent={{-3,-3},{3,3}},

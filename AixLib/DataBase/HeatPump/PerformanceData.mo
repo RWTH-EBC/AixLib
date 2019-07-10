@@ -145,7 +145,7 @@ package PerformanceData "Different models used for a black box heat pump model"
     parameter Real minSup = min(dataTable.tableP_ele[2:end,1]);
     parameter Real maxSou = max(dataTable.tableP_ele[1,2:end]);
     parameter Real maxSup = max(dataTable.tableP_ele[2:end,1]);
-    Modelica.Blocks.Sources.Constant       realCorr(final k=scalingFactor)
+    Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
       "Calculates correction of table output based on scaling factor"
       annotation (Placement(transformation(
           extent={{-3,-3},{3,3}},

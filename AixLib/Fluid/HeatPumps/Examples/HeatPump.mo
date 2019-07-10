@@ -52,7 +52,7 @@ model HeatPump "Example for the reversible heat pump model."
         AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
          dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevHP =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     VEva=0.04,

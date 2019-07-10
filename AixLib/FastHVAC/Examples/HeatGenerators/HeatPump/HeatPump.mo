@@ -30,7 +30,7 @@ model HeatPump
         AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
          dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
          dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},

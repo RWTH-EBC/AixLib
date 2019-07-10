@@ -14,7 +14,7 @@ model Chiller
   "Performance data of a chiller in main operation mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRevChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a chiller in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
