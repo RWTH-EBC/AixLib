@@ -4,9 +4,9 @@ model CylindricHeatTransfer "Model for cylindric heat transfer"
   parameter Modelica.SIunits.Density rho=1600 "Density of material";
   parameter Modelica.SIunits.SpecificHeatCapacity c=1000
     "Specific heat capacity of material";
-  parameter Modelica.SIunits.Length d_out=0.04 "Outer diameter of pipe";
-  parameter Modelica.SIunits.Length d_in=0.02 "Inner diameter of pipe";
-  parameter Modelica.SIunits.Length length=1 " Length of pipe";
+  parameter Modelica.SIunits.Length d_out(min=0) "Outer diameter of pipe";
+  parameter Modelica.SIunits.Length d_in(min=0) "Inner diameter of pipe";
+  parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
   parameter Modelica.SIunits.ThermalConductivity lambda=373
     "Heat conductivity of pipe";
   parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature";

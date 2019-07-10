@@ -7,11 +7,11 @@ model CylindricHeatConduction "Heat conduction through cylindric material"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b
     annotation (Placement(transformation(extent={{-10,78},{10,98}},
           rotation=0)));
-  parameter Modelica.SIunits.Length d_out=0.04 "outer diameter of pipe";
+  parameter Modelica.SIunits.Length d_out(min=0) "outer diameter of pipe";
   parameter Modelica.SIunits.ThermalConductivity lambda=373
     "Heat conductivity of pipe";
-  parameter Modelica.SIunits.Length d_in=0.02 "inner diameter of pipe";
-  parameter Modelica.SIunits.Length length=1 " Length of pipe";
+  parameter Modelica.SIunits.Length d_in(min=0) "inner diameter of pipe";
+  parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
 
 equation

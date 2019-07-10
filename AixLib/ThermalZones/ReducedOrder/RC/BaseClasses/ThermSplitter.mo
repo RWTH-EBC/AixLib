@@ -49,28 +49,28 @@ equation
     extent={{-48,-82},{52,-100}},
     lineColor={0,0,255},
     textString="ThermSplitter")}),
-  Documentation(info="<html>
-  <p>This model is used to weight thermal ports (inputs) according to given split
-  factors per output port.</p>
-  <p>The model needs the dimensions of the splitted therm ports (for input and
-  output ports resp.) and the split factors, which are between 0 and 1. Each row
-  of the split factor matrix gives the split factors for one output
-  port. The number of columns need to align with the number of input ports.</p>
-  </html>", revisions="<html>
-  <ul>
-  <li>
-  May, 2016, by Moritz Lauster:<br/>
-  Extended to handle multiple input ports.
+  Documentation(info="<html><p>
+  This model is used to weight thermal ports (inputs) according to
+  given split factors per output port.
+</p>
+<p>
+  The model needs the dimensions of the splitted therm ports (for input
+  and output ports resp.) and the split factors, which are between 0
+  and 1. Each row of the split factor matrix gives the split factors
+  for one output port. The number of columns need to align with the
+  number of input ports.
+</p>
+</html>", revisions="<html>
+<ul>
+  <li>May, 2016, by Moritz Lauster:<br/>
+    Extended to handle multiple input ports.
   </li>
-  <li>
-  January, 2015, by Peter Remmen:<br/>
-  Changed name and vectorized
-  equation, added documentation
+  <li>January, 2015, by Peter Remmen:<br/>
+    Changed name and vectorized equation, added documentation
   </li>
-  <li>
-  October, 2014, by Peter Remmen:<br/>
-  Implemented.
+  <li>October, 2014, by Peter Remmen:<br/>
+    Implemented.
   </li>
-  </ul>
-  </html>"));
+</ul>
+</html>"));
 end ThermSplitter;
