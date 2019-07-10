@@ -21,12 +21,15 @@ model ThermalZoneEquipped
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
-  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeatAreaSpecific
+  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent
     humanSenHea(
     final T0=zoneParam.T_start,
-    final InternalGainsPeopleSpecific=zoneParam.internalGainsPeopleSpecific,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-    final RoomArea=zoneParam.AZone) if ATot > 0
+    final RoomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final ActivityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.InternalGainsPeopleSpecific) if
+                                                      ATot > 0
     "Internal gains from persons" annotation (choicesAllMatching=true,
       Placement(transformation(extent={{64,-36},{84,-16}})));
 
