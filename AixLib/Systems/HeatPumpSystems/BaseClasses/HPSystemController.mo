@@ -192,7 +192,7 @@ model HPSystemController
     redeclare final function HeatingCurveFunction = HeatingCurveFunction,
     final cp_con=cp_con)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
+  AixLib.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
     "Calculates the heat flow added to the source medium"
@@ -234,7 +234,7 @@ model HPSystemController
         origin={-80,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
+  AixLib.DataBase.HeatPump.PerformanceData.IcingBlock icingBlock(redeclare
       final function iceFunc =
         DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
        use_deFro
@@ -293,7 +293,7 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.nOut, nOut) annotation (Line(
-      points={{49.6667,8},{76,8},{76,-58},{1.77636e-015,-58},{1.77636e-015,-114}},
+      points={{49.6667,8},{76,8},{76,-58},{1.77636e-15,-58},{1.77636e-15,-114}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
