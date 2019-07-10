@@ -21,9 +21,6 @@ model PartialHuman "Partial model for internal gains of humans"
   Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=1)
     annotation (Placement(transformation(extent={{-40,-6},{-20,14}})));
-  Modelica.Blocks.Math.Gain PersonHeat(k=1/HeatPerPerson)
-    "Divides total heat by the Heat Output per Person to get number of persons"
-    annotation (Placement(transformation(extent={{-46,-54},{-34,-42}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=1)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -55,14 +52,12 @@ equation
           4},{-8,-8},{5.2,-8}}, color={0,0,127}));
   connect(productHeatOutput.y, gain.u) annotation (Line(points={{-18.3,4},{-8,4},
           {-8,32},{5.2,32}}, color={0,0,127}));
-  connect(PersonHeat.y, limiter.u)
-    annotation (Line(points={{-33.4,-48},{-20,-48}}, color={0,0,127}));
-  connect(productHeatOutput.y, PersonHeat.u) annotation (Line(points={{-18.3,4},
-          {-18,4},{-18,-32},{-52,-32},{-52,-48},{-47.2,-48}}, color={0,0,127}));
   connect(ConvectiveHeat.port, thermalCollector.port_a[1]) annotation (Line(
         points={{42,32},{48,32},{48,50},{52,50}}, color={191,0,0}));
   connect(thermalCollector.port_b, ConvHeat)
     annotation (Line(points={{72,50},{90,50}}, color={191,0,0}));
+  connect(nrPeople.y, limiter.u) annotation (Line(points={{-57.4,-20},{-52,-20},
+          {-52,-48},{-20,-48}}, color={0,0,127}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
@@ -70,26 +65,14 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color = {0, 0, 0}, thickness = 1)}), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>Model for heat output of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
+<p>Partial model for internal gains of a person. The model uses the specific value for <i>Persons/m<sup>2</sup></i> and the <i>RoomArea</i> to calculate the persons in the room considering the schedule. </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>It is possible to choose between several types of physical activity. </p>
-<p>The heat output depends on the air temperature in the room where the activity takes place. </p>
-<p>A schedule of the activity is also required as constant presence of people in a room is not realistic. The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
+<p>A schedule is used as constant presence of people in a room is not realistic. The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
 <p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero.For this reason a limitiation for the surface has been intoduced: as a minimum the surface area of one human and as a maximum a value of 1e+23 m2 (only needed for a complete parametrization of the model). </p>
-<p><b><font style=\"color: #008000; \">References</font></b> </p>
-<p>VDI 2078: Calculation of cooling load and room temperatures of rooms and buildings (VDI Cooling Load Code of Practice) - March 2012 </p>
-<p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
-<p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.Humans\">AixLib.Building.Components.Examples.Sources.InternalGains.Humans</a> </p>
-<p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice</a> </p>
 </html>",  revisions="<html>
  <ul>
- <li><i>March 01, 2019&nbsp;</i> by Niklas Huelsenbeck:<br/>Duplicated HumanSensibleHeat_VDI2078 Class and adapted it to a heat flux input value instead of a total number of persons</li>
- <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Set minimal surface to surface of one person</li>
- <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 10, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it won&apos;t lead to a division by zero</li>
- <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- <li><i>August 10, 2011</i> by Ana Constantin:<br/>implemented</li>
+ <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Implemented based on old human model</li>
  </ul>
  </html>"));
 end PartialHuman;
