@@ -1,5 +1,5 @@
-within AixLib.Fluid.DistrictHeatingCooling.Pipes;
-model StaticPipeExample "Simple example of plug flow pipe"
+within AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples;
+model StaticPipe "Simple example of plug flow pipe"
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
@@ -15,7 +15,7 @@ model StaticPipeExample "Simple example of plug flow pipe"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
-  StaticPipe                                 pip(
+  .AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe pip(
     redeclare package Medium = Medium,
     nPorts=1,
     dh=0.1,
@@ -80,4 +80,4 @@ This test includes an inlet temperature step under a constant mass flow rate.
 <li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
 </ul>
 </html>"));
-end StaticPipeExample;
+end StaticPipe;
