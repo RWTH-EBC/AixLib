@@ -28,10 +28,11 @@ model Wall_ASHRAE140
     "Choose the model for calculation of heat convection at outside surface"
     annotation(Dialog(tab = "Surface Parameters",  group = "Outside surface", enable = outside, compact = true), choices(choice=1
         "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals", choice = 3 "Custom alpha",radioButtons =  true));
+        "ASHRAE Fundamentals", choice = 3 "Custom hConv",radioButtons =  true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom=25
-    "Custom alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab="Surface Parameters", group = "Outside surface", enable= Model == 3 and outside));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25
+    "Custom hConv for convection (just for manual selection, not recommended)" annotation(Dialog(tab="Surface Parameters", group="Outside surface",   enable=Model ==
+          3 and outside));
     parameter
     AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     surfaceType =    AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
@@ -103,7 +104,8 @@ public
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
-    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
+    HeatConv1(calcMethodHConv=
+                         2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
@@ -135,24 +137,17 @@ public
     windowarea=windowarea,
     WindowType=WindowType) if          withWindow and outside
     annotation (Placement(transformation(extent={{-15,-48},{11,-22}})));
-  Utilities.HeatTransfer.HeatConv_outside
-                                        heatTransfer_Outside(
+  Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
-    Model=Model,
+    calcMethodHConv=Model,
     surfaceType=surfaceType,
-    alpha_custom=alpha_custom) if            outside
-    annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+    hConvCustom=hConvCustom) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
 
-  Utilities.Interfaces.Adaptors.HeatStarToComb
-                                             heatStarToComb annotation (
-      Placement(transformation(
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=180,
         origin={69,-1})));
-  Utilities.Interfaces.HeatStarComb
-                                  thermStarComb_inside annotation (Placement(
-        transformation(extent={{92,-10},{112,10}}), iconTransformation(extent=
-           {{10,-10},{30,10}})));
+  Utilities.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
   Modelica.Blocks.Interfaces.RealInput solarRadWin
     "solar raditaion through window" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -197,13 +192,11 @@ equation
 //******************************************************************
 // **********************standard connection************************
 //******************************************************************
-  connect(Wall.Star, heatStarToComb.star) annotation (Line(
+  connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
       points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.therm) annotation (Line(
-      points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}},
-      color={191,0,0}));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
 //******************************************************************
 // **********************standard connection for inside wall********
 //******************************************************************
@@ -251,10 +244,8 @@ if withDoor then
     connect(Door.port_a, port_outside) annotation (Line(
         points={{-19.4,-86},{-56,-86},{-56,23},{-24,23},{-24,4},{-98,4}},
         color={191,0,0}));
-    connect(Door.port_b, heatStarToComb.therm) annotation (Line(
-        points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}},
-        color={191,0,0}));
-    connect(Door.Star, heatStarToComb.star) annotation (Line(
+    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(Door.Star, heatStarToComb.portRad) annotation (Line(
         points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
         color={95,95,95},
         pattern=LinePattern.Solid));
@@ -266,13 +257,11 @@ end if;
 //******************************************************************
 
 if outside and withWindow then
-    connect(windowSimple.port_inside, heatStarToComb.therm) annotation (Line(
-      points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}},
-      color={191,0,0}));
-    connect(windowSimple.Star, heatStarToComb.star) annotation (Line(
-      points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
+    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
+        points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
+        color={95,95,95},
+        pattern=LinePattern.Solid));
     connect(windowSimple.port_outside, port_outside) annotation (Line(
         points={{-13.7,-36.3},{-56,-36.3},{-56,4},{-98,4}},
         color={191,0,0}));
@@ -313,10 +302,7 @@ end if;
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
  connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
-  connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation (
-      Line(
-      points={{78.4,-1.1},{78.4,-1.05},{102,-1.05},{102,0}},
-      color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
   connect(solarRadWin, solarDistrFraction.u) annotation (Line(
       points={{101,80},{69.2,80}},
       color={0,0,127}));

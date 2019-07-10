@@ -101,8 +101,8 @@ model HPControl
     final TRoom_nominal=293.15)
     annotation (Placement(transformation(extent={{-74,10},{-54,30}})));
 
-                                                                         TSetToNSet ConvTSetToNSet annotation (Placement(transformation(extent={{44,-8},
-            {76,26}})));
+  TSetToNSet ConvTSetToNSet
+   annotation (Placement(transformation(extent={{44,-8},{76,26}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrAntLeg if not use_antLeg
                                                            "No Anti Legionella"
                                            annotation (
@@ -116,7 +116,6 @@ model HPControl
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
         iconTransformation(extent={{-140,34},{-100,74}})));
-
 
 equation
 

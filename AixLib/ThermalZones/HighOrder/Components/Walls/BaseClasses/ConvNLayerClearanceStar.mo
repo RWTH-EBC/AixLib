@@ -19,25 +19,35 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.SpecificHeatCapacity c[n] = if selectable then wallType.c else fill(1000, n)
     "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
   // which orientation of surface?
-  parameter Integer surfaceOrientation = 1 "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsAlphaConstant == true then false else true), choices(choice = 1
+  parameter Integer surfaceOrientation = 1 "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
         "vertical",                                                                                                    choice = 2
         "horizontal facing up",                                                                                                    choice = 3
         "horizontal facing down",                                                                                                    radioButtons = true));
-  parameter Integer calcMethod = 1
-    "Choose the model for calculation of heat convection at inside surface" annotation (Dialog(descriptionLabel = true), choices(
+  parameter Integer calcMethodHConv=1 "Choose the model for calculation of heat convection at inside surface"
+                                                                            annotation (Dialog(descriptionLabel = true), choices(
       choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant alpha",radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_constant = 2
-    "Constant heat transfer coefficient"                                                                     annotation(Dialog(group = "Convection", enable = calcMethod == 1));
+      choice=3 "Constant hConv",radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2 "Constant heat transfer coefficient"    annotation(Dialog(group="Convection",   enable=
+          calcMethodHConv == 1));
   parameter Modelica.SIunits.Emissivity eps = if selectable then wallType.eps else 0.95
     "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
   // n Loads
-  Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_constant, A = A, surfaceOrientation = surfaceOrientation, calcMethod = calcMethod) annotation(Placement(transformation(origin={62,0},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent={{90,52},
+  Utilities.HeatTransfer.HeatConvInside HeatConv1(
+    port_b(T(start=T0)),
+    hConvCustom=hConv_const,
+    A=A,
+    surfaceOrientation=surfaceOrientation,
+    calcMethodHConv=calcMethodHConv)
+    annotation (Placement(transformation(
+        origin={62,0},
+        extent={{-10,-10},{10,10}},
+        rotation=180)));
+  Utilities.Interfaces.RadPort
+                            Star annotation(Placement(transformation(extent={{90,52},
             {110,72}})));
   Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent={{54,28},
             {74,48}})));
@@ -88,12 +98,12 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{8, 100}, {16, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, -30}, {80, -42}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, -32}, {80, -39}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent = {{-44, -40}, {52, -114}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info = "<html>
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent = {{-44, -40}, {52, -114}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info="<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>ConvNLayerClearanceStar</b> model represents a wall, consisting of n different layers with natural convection on one side and (window) clearance.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>There is one inner and one outer <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector to simulate one-dimensional heat transfer through the wall and heat storage within the wall.</p>
- <p>The <b>ConvNLayerClearanceStar</b> model extends the basic concept by adding the functionality of approximated longwave radiation exchange. Simply connect all radiation exchanging surfaces via their <b><a href=\"Modelica://AixLib.Utilities.Interfaces.Star\">Star</a></b>-connectors. </p>
+ <p>The <b>ConvNLayerClearanceStar</b> model extends the basic concept by adding the functionality of approximated longwave radiation exchange. Simply connect all radiation exchanging surfaces via their <b><a href=\"Modelica://AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b>-connectors. </p>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>HeatPort_a</code>, the last element represents the layer connected to <code>HeatPort_b</code>. </p>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a>  therefore also part of the corresponding examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>

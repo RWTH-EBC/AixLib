@@ -55,6 +55,7 @@ partial model PartialTSetToNSet
     annotation (Placement(transformation(extent={{-66,-34},{-52,-20}})));
 
 
+
 equation
   connect(conZer.y, swiNullHP.u3) annotation (Line(points={{50.6,-18},{58,-18},
           {58,-8},{64,-8}}, color={0,0,127}));

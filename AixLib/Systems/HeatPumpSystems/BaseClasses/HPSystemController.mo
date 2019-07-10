@@ -6,7 +6,7 @@ model HPSystemController
 
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
-    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
+    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
 
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
@@ -179,10 +179,9 @@ model HPSystemController
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
   Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
-  Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(
-        sigBusHP.T_ret_co - sigBusHP.T_flow_co)*4180)
+  Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
     "Calculates the heat flow added to the source medium"
-    annotation (Placement(transformation(extent={{-90,78},{-66,96}})));
+    annotation (Placement(transformation(extent={{-80,82},{-64,98}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
                                                                       "No 1. Layer"
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
@@ -270,9 +269,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(calcQHeat.y,calcCOP. QHeat) annotation (Line(points={{-64.8,87},{
-          -54.4,87},{-54.4,83.6},{-48.6,83.6}},
-                                           color={0,0,127}));
   connect(TSup, hPControls.TSup) annotation (Line(points={{-114,40},{-80,40},{
           -80,14.8},{-71.8,14.8}},
                                color={0,0,127}));
@@ -296,8 +292,8 @@ equation
           {-38,-40},{80,-40},{80,-114}}, color={0,0,127}));
   connect(hPControls.y_sou, y_sou) annotation (Line(points={{-61.16,-16},{-62,
           -16},{-62,-58},{-80,-58},{-80,-114}},       color={0,0,127}));
-  connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-48,70},
-          {-48,72.4},{-48.6,72.4}},
+  connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-56,70},
+          {-56,72},{-48,72},{-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
   connect(securityControl.Pel_deFro, multiSum.u[1]) annotation (Line(
       points={{49.6667,20},{54,20},{54,26},{-80,26},{-80,70},{-78,70}},
@@ -369,6 +365,32 @@ equation
       points={{34.6,-32},{62,-32},{62,-58},{-40,-58},{-40,-114}},
       color={255,0,255},
       pattern=LinePattern.Dash));
+  connect(calcQHeat.Q_flow, calcCOP.QHeat) annotation (Line(points={{-63.2,90},
+          {-56,90},{-56,83.6},{-48.6,83.6}}, color={0,0,127}));
+  connect(sigBusHP.m_flow_co, calcQHeat.m_flow) annotation (Line(
+      points={{-106.925,-52.915},{-94,-52.915},{-94,94.8},{-81.6,94.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.T_ret_co, calcQHeat.T_a) annotation (Line(
+      points={{-106.925,-52.915},{-94,-52.915},{-94,89.2},{-81.6,89.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.T_flow_co, calcQHeat.T_b) annotation (Line(
+      points={{-106.925,-52.915},{-94,-52.915},{-94,84.4},{-81.6,84.4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatExchangers.MultiRadiator;
+within AixLib.FastHVAC.Examples.HeatExchangers.MultiRadiator;
 model ValidationMultiRadiator
 
   extends Modelica.Icons.Example;

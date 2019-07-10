@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem;
+within AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem;
 model OneAppartment_Radiators
   "just one appartment (same appartment as in MFD, but hydraulic network fit to this one appartment)"
   import HouseModels = AixLib.ThermalZones.HighOrder;

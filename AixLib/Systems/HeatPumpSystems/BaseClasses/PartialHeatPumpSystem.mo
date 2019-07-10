@@ -12,7 +12,9 @@ partial model PartialHeatPumpSystem
     final show_T=false,
     redeclare package Medium2 = Medium_eva);
   import Modelica.Blocks.Types.Init;
-
+  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters(
+   cpCon = Medium_con.heatCapacity_cp(stateCon_default),
+   cpEva = Medium_eva.heatCapacity_cp(stateEva_default));
 
 //General
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
@@ -25,6 +27,16 @@ partial model PartialHeatPumpSystem
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate"
     annotation (Dialog(group="Nominal condition"));
+  final parameter Medium_con.ThermodynamicState stateCon_default = Medium_con.setState_pTX(
+    T=Medium_con.T_default,
+    p=Medium_con.p_default,
+    X=Medium_con.X_default[1:Medium_con.nXi])
+    "Medium state in condenser at default values";
+  final parameter Medium_eva.ThermodynamicState stateEva_default = Medium_eva.setState_pTX(
+    T=Medium_eva.T_default,
+    p=Medium_eva.p_default,
+    X=Medium_eva.X_default[1:Medium_eva.nXi])
+    "Medium state in evaporator at default values";
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
@@ -39,11 +51,15 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(group="Source"),choices(checkBox=true));
-  parameter Fluid.Movers.Data.Generic perEva "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perEva
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Source",
       enable=use_evaPum));
-  parameter Fluid.Movers.Data.Generic perCon "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perCon
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Sink",
       enable=use_conPum));

@@ -14,6 +14,8 @@ model EvaporatorCondenserWithCapacity
     annotation (Dialog(group="Heat losses"),choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
     annotation (Dialog(group="Heat losses", enable=use_cap));
+  parameter Boolean fixed_T_start "true if T_start of non-fluid capacity should be fixed at initialization"
+    annotation (Dialog(group="Heat losses", enable=use_cap));
   Modelica.SIunits.ThermalConductance GOut
     "Formular for calculation of heat transfer coefficient on the outside"
                                                            annotation (Dialog(group=
@@ -35,7 +37,8 @@ model EvaporatorCondenserWithCapacity
         origin={-12,78})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCap(
     final C=C,
-    final T(start=T_start),
+    final T(start=T_start,
+    final fixed=fixed_T_start),
     final der_T(start=0)) if use_cap
     "Heat Capacity"
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
