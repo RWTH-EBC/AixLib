@@ -19,11 +19,16 @@ model PartialHuman "Partial model for internal gains of humans"
             {2,-38}})));
   Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
   Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
+  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=1)
     annotation (Placement(transformation(extent={{-40,-6},{-20,14}})));
   Modelica.Blocks.Math.Gain PersonHeat(k=1/HeatPerPerson)
     "Divides total heat by the Heat Output per Person to get number of persons"
     annotation (Placement(transformation(extent={{-46,-54},{-34,-42}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=1)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={62,50})));
 protected
   parameter Modelica.SIunits.Area SurfaceArea_Human = 2;
   parameter Real Emissivity_Human = 0.98;
@@ -31,7 +36,6 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, 20}, {42, 44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
-  connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{42, 32}, {42, 50}, {90, 50}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(RadiationConvertor.Star, RadHeat) annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(Schedule, nrPeople.u)
@@ -45,7 +49,7 @@ equation
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
       color={0,0,127}));
   connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,
-          -20},{-54,-20},{-54,4},{-40,4},{-40,7.5}},
+          -20},{-54,-20},{-54,4},{-40,4},{-40,4}},
                                               color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(points={{-18.3,4},{-8,
           4},{-8,-8},{5.2,-8}}, color={0,0,127}));
@@ -55,6 +59,10 @@ equation
     annotation (Line(points={{-33.4,-48},{-20,-48}}, color={0,0,127}));
   connect(productHeatOutput.y, PersonHeat.u) annotation (Line(points={{-18.3,4},
           {-18,4},{-18,-32},{-52,-32},{-52,-48},{-47.2,-48}}, color={0,0,127}));
+  connect(ConvectiveHeat.port, thermalCollector.port_a[1]) annotation (Line(
+        points={{42,32},{48,32},{48,50},{52,50}}, color={191,0,0}));
+  connect(thermalCollector.port_b, ConvHeat)
+    annotation (Line(points={{72,50},{90,50}}, color={191,0,0}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
