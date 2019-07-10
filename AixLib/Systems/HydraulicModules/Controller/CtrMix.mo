@@ -25,18 +25,18 @@ block CtrMix "Controller for mixed and injection circuits "
   Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
     "Connector of second Real input signal"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  AixLib.Controls.Continuous.LimPID        PID(
-    yMax=1,
-    yMin=0,
-    controllerType=Modelica.Blocks.Types.SimpleController.PID,
-    k=k,
-    Ti=Ti,
-    Td=Td,
-    initType=initType,
-    xi_start=xi_start,
-    xd_start=xd_start,
-    y_start=y_start,
-    reverseAction=reverseAction)
+  AixLib.Controls.Continuous.LimPID PID(
+    final yMax=1,
+    final yMin=0,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    final k=k,
+    final Ti=Ti,
+    final Td=Td,
+    final initType=initType,
+    final xi_start=xi_start,
+    final xd_start=xd_start,
+    final y_start=y_start,
+    final reverseAction=reverseAction)
             annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(
                                                         y=rpm_pump)

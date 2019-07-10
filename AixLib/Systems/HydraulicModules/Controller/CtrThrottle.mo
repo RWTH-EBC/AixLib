@@ -22,38 +22,40 @@ block CtrThrottle "Controller for unmixed circuit with valve"
     annotation(Dialog(group="PID"));
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
-  Controls.Continuous.LimPID        PID(
-    yMax=1,
-    yMin=0,
-    controllerType=Modelica.Blocks.Types.SimpleController.PID,
-    k=k,
-    Ti=Ti,
-    Td=Td,
-    initType=initType,
-    xi_start=xi_start,
-    xd_start=xd_start,
-    y_start=y_start,
-    reverseAction=reverseAction)
+  Modelica.Blocks.Interfaces.RealInput Tact
+                "Connector of measurement input signal"
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
+    "Connector of second Real input signal"
+    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
+  AixLib.Controls.Continuous.LimPID PID(
+    final yMax=1,
+    final yMin=0,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    final k=k,
+    final Ti=Ti,
+    final Td=Td,
+    final initType=initType,
+    final xi_start=xi_start,
+    final xd_start=xd_start,
+    final y_start=y_start,
+    final reverseAction=reverseAction)
             annotation (Placement(transformation(extent={{-16,-40},{4,-60}})));
-  BaseClasses.HydraulicBus  hydraulicBus
-    annotation (Placement(transformation(extent={{66,-38},{120,16}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(
                                                         y=rpm_pump)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=TflowSet)
     annotation (Placement(transformation(extent={{-100,-30},{-80,-10}})));
-  Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
-    "Connector of second Real input signal"
-    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Modelica.Blocks.Interfaces.RealInput Tact
-                "Connector of measurement input signal"
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Logical.GreaterThreshold
                                         PumpSwitchOff(threshold=0)
     annotation (Placement(transformation(extent={{16,32},{32,48}})));
 equation
 
+public
+  BaseClasses.HydraulicBus  hydraulicBus
+    annotation (Placement(transformation(extent={{66,-38},{120,16}})));
+equation
   if useExternalTset then
     connect(PID.u_s, Tset) annotation (Line(points={{-18,-50},{-67.1,-50},{-67.1,
             -60},{-120,-60}},
