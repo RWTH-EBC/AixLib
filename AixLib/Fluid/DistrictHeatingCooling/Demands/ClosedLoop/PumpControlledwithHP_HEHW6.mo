@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model PumpControlledwithHP_HEHW3 "Substation model for  low-temperature networks for buildings with 
+model PumpControlledwithHP_HEHW6 "Substation model for  low-temperature networks for buildings with 
   heat pump and chiller"
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
@@ -113,18 +113,18 @@ public
     per(pressure(V_flow={0,m_flow_nominal/1000}, dp={2*dp_nominal,0})),
     p_start=1000000,
     T_start=283.15)
-    annotation (Placement(transformation(extent={{-138,-48},{-118,-28}})));
+    annotation (Placement(transformation(extent={{-164,-10},{-144,10}})));
   Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium,m_flow_nominal=2*m_flow_nominal, tau=0,
     T_start=283.15)
     annotation (Placement(transformation(extent={{46,-58},{66,-38}})));
   Modelica.Blocks.Sources.Constant const(k=1)
-    annotation (Placement(transformation(extent={{-72,-30},{-92,-10}})));
+    annotation (Placement(transformation(extent={{-116,46},{-136,66}})));
   Sources.FixedBoundary bou1(redeclare package Medium = Medium,          use_T=false,
     nPorts=1)
-    annotation (Placement(transformation(extent={{-158,-20},{-138,0}})));
+    annotation (Placement(transformation(extent={{-200,38},{-180,58}})));
   Sensors.TemperatureTwoPort senTem2(redeclare package Medium =Medium,allowFlowReversal=false, tau=0,
     m_flow_nominal=2*m_flow_nominal)
-    annotation (Placement(transformation(extent={{-76,-50},{-56,-30}})));
+    annotation (Placement(transformation(extent={{-130,-10},{-110,10}})));
   Sensors.TemperatureTwoPort senTem3(tau=0, m_flow_nominal=m_flow_nominal,
     redeclare package Medium = MediumBuilding,
     T_start=308.15)
@@ -287,8 +287,23 @@ public
     annotation (Placement(transformation(extent={{-48,-90},{-28,-70}})));
   Modelica.Blocks.Sources.RealExpression realExpression4(y=273.15 + 65)
     annotation (Placement(transformation(extent={{-44,-138},{-24,-118}})));
-  FixedResistances.Junction jun2
-    annotation (Placement(transformation(extent={{146,6},{166,26}})));
+  MixingVolumes.MixingVolume vol2(
+    nPorts=2,
+    m_flow_nominal=m_flow_nominal,
+    V=0.15) annotation (Placement(transformation(extent={{-76,4},{-56,24}})));
+  Sensors.TemperatureTwoPort senTem8(
+    m_flow_nominal=m_flow_nominal,
+    tau=0,
+    allowFlowReversal=false,
+    m_flow_small=0.0001,
+    T_start=283.15)
+    annotation (Placement(transformation(extent={{-48,-26},{-28,-6}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature2
+    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
+  Modelica.Blocks.Sources.RealExpression realExpression6(y=min(273.15 + 20,
+        senTem2.T - gain.y/m_flow_nomianl/cp_default))
+    annotation (Placement(transformation(extent={{-124,80},{-104,100}})));
 equation
 
   //Power Consumptin Calculation
@@ -305,14 +320,11 @@ equation
           -48},{110,0},{198,0}},
                               color={0,127,255}));
   connect(const.y, fan.y)
-    annotation (Line(points={{-93,-20},{-128,-20},{-128,-26}},
-                                                            color={0,0,127}));
-  connect(fan.port_b, senTem2.port_a) annotation (Line(points={{-118,-38},{-98,-38},
-          {-98,-40},{-76,-40}}, color={0,127,255}));
-  connect(senTem2.port_b, heaPum.port_a2) annotation (Line(points={{-56,-40},{-34,
-          -40},{-34,-56},{-12,-56}}, color={0,127,255}));
-  connect(port_a, fan.port_a) annotation (Line(points={{-260,0},{-184,0},{-184,-38},
-          {-138,-38}}, color={0,127,255}));
+    annotation (Line(points={{-137,56},{-154,56},{-154,12}},color={0,0,127}));
+  connect(fan.port_b, senTem2.port_a) annotation (Line(points={{-144,0},{-130,0}},
+                                color={0,127,255}));
+  connect(port_a, fan.port_a) annotation (Line(points={{-260,0},{-164,0}},
+                       color={0,127,255}));
   connect(jun1.port_2, heaPum.port_a1) annotation (Line(points={{82,-80},{82,-70},
           {8,-70},{8,-68}}, color={0,127,255}));
   connect(realExpression1.y, prescribedTemperature.T)
@@ -336,7 +348,8 @@ equation
   connect(tan.heaPorSid, fixedTemperature.port) annotation (Line(points={{-42,-167.6},
           {-46,-167.6},{-46,-176}}, color={191,0,0}));
   connect(bou1.ports[1], fan.port_a)
-    annotation (Line(points={{-138,-10},{-138,-38}}, color={0,127,255}));
+    annotation (Line(points={{-180,48},{-180,0},{-164,0}},
+                                                     color={0,127,255}));
   connect(bou.ports[1], fan5.port_a) annotation (Line(points={{-200,-42},{-174,-42},
           {-174,-54},{-100,-54},{-100,-72}}, color={0,127,255}));
   connect(senTem4.port_b, vol.ports[1]) annotation (Line(points={{130,-182},{160,
@@ -391,6 +404,17 @@ equation
           -20,-80},{-20,-96},{-12,-96}}, color={0,0,127}));
   connect(realExpression4.y, switch1.u3) annotation (Line(points={{-23,-128},{
           -23,-112},{-12,-112}}, color={0,0,127}));
+  connect(senTem2.port_b, vol2.ports[1]) annotation (Line(points={{-110,0},{-92,
+          0},{-92,4},{-68,4}}, color={0,127,255}));
+  connect(vol2.ports[2], senTem8.port_a) annotation (Line(points={{-64,4},{-62,
+          4},{-62,-16},{-48,-16}}, color={0,127,255}));
+  connect(senTem8.port_b, heaPum.port_a2) annotation (Line(points={{-28,-16},{
+          -28,-58},{-12,-58},{-12,-56}}, color={0,127,255}));
+  connect(prescribedTemperature2.port, vol2.heatPort) annotation (Line(points={
+          {-60,60},{-54,60},{-54,40},{-82,40},{-82,14},{-76,14}}, color={191,0,
+          0}));
+  connect(realExpression6.y, prescribedTemperature2.T) annotation (Line(points=
+          {{-103,90},{-90,90},{-90,60},{-82,60}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-180},
             {220,160}}), graphics={
         Rectangle(
@@ -432,4 +456,4 @@ Implemented </li>
 </html>", info="<html>
 <p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
 </html>"));
-end PumpControlledwithHP_HEHW3;
+end PumpControlledwithHP_HEHW6;
