@@ -69,7 +69,9 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real wfGro
     "Weight factor of the ground";
 
-  parameter Real internalGainsPeopleSpecific "Heat Flux of people";
+  parameter Real specificPeople "people per squaremetre";
+  parameter Real activityDegree "acitivity degree of people in met";
+  parameter Real InternalGainsPeopleSpecific "specific heat output per person";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
   parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
@@ -114,6 +116,10 @@ record ZoneBaseRecord "Base record definition for zone records"
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 </html>",  revisions="<html>
 <ul>
+  <li>
+  July 10, 2019, by Moritz Lauster:<br/>
+  Adds specificPeople (persons per squaremetre). Adds activityDegree.
+  </li>
   <li>
   September 27, 2016, by Moritz Lauster:<br/>
   Reimplementation.
