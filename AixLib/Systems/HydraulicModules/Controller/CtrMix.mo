@@ -38,12 +38,9 @@ block CtrMix "Controller for mixed and injection circuits "
     final y_start=y_start,
     final reverseAction=reverseAction)
             annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(
-                                                        y=rpm_pump)
-    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-  Modelica.Blocks.Sources.RealExpression realExpression(y=TflowSet)
-    annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+  Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
 equation
@@ -52,14 +49,14 @@ public
   BaseClasses.HydraulicBus  hydraulicBus
     annotation (Placement(transformation(extent={{66,-38},{120,16}})));
 equation
-  if useExternalTset then
-    connect(PID.u_s, Tset) annotation (Line(points={{-18,-50},{-67.1,-50},{
-            -67.1,0},{-120,0}},
-                            color={0,0,127}));
-  else
-    connect(realExpression.y, PID.u_s) annotation (Line(points={{-79,-50},{-18,
-            -50}},              color={0,0,127}));
-  end if;
+    connect(PID.u_s, Tset) annotation (Line(
+      points={{-18,-50},{-47.1,-50},{-47.1,0},{-120,0}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    connect(constTflowSet.y, PID.u_s) annotation (Line(
+      points={{-79,-50},{-18,-50}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
 
   connect(PID.y, hydraulicBus.valSet) annotation (Line(points={{5,-50},{48,-50},
           {48,-10.865},{93.135,-10.865}},
@@ -67,9 +64,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(realExpression1.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(
-        points={{41,0},{48,0},{48,-10.865},{93.135,-10.865}}, color={0,0,127}),
-      Text(
+  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{41,0},{48,0},{48,-10.865},{93.135,-10.865}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

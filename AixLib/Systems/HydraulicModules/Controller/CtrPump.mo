@@ -4,16 +4,14 @@ block CtrPump "controller for pump circuit"
 
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
 
-  Modelica.Blocks.Sources.RealExpression realExpression(y=rpm_pump)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
   BaseClasses.HydraulicBus hydraulicBus annotation (Placement(
         transformation(extent={{78,-24},{124,24}}), iconTransformation(extent={{
             78,-24},{124,24}})));
 equation
-  connect(realExpression.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(
-        points={{11,0},{101.115,0},{101.115,0.12}}, color={0,0,127}), Text(
+  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{11,0},{101.115,0},{101.115,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
