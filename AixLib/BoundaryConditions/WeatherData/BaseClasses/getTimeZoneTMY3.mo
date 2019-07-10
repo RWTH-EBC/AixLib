@@ -14,7 +14,7 @@ algorithm
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getHeaderElementTMY3(
       filNam=filNam,
       start="#LOCATION",
-      name=  "longitude",
+      name = "longitude",
       position=9);
    (nexInd, timZon) :=Modelica.Utilities.Strings.Advanced.scanReal(
     string=element,
@@ -34,7 +34,7 @@ This function returns the time zone of the TMY3 weather data file.
 <ul>
 <li>
 September 24, 2015, by Marcus Fuchs:<br/>
-Replace annotation <code>__Dymola_loadSelector</code> by <code>loadSelector</code>
+Replace Dymola specific annotation by <code>loadSelector</code>
 for MSL compliancy as reported by @tbeu at
 <a href=\"https://github.com/RWTH-EBC/AixLib/pull/107\">RWTH-EBC/AixLib#107</a>
 </li>

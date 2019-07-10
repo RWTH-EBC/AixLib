@@ -1,10 +1,11 @@
+CalcQFlow
 CylindricHeatConduction
 CylindricHeatTransfer
 CylindricLoad
 HeatConv
-HeatConv_inside
-HeatConv_outside
 HeatConvPipeInside
+HeatConvInside
+HeatConvOutside
 HeatToStar
 HeatToStar_Avar
 SolarRadToHeat

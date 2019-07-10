@@ -8,12 +8,12 @@ block WallSolarAzimuth
                                               displayUnit="rad")
     "Solar incidence angle"
     annotation (Placement(transformation(extent={{-140,-68},{-100,-28}})));
-Modelica.Blocks.Interfaces.RealInput alt(quantity="Angle",
+  Modelica.Blocks.Interfaces.RealInput alt(quantity="Angle",
                                          unit="rad",
                                          displayUnit="rad")
     "Solar altitude angle (angle between sun ray and horizontal surface)"
     annotation (Placement(transformation(extent={{-140,28},{-100,68}})));
-Modelica.Blocks.Interfaces.RealOutput verAzi(
+  Modelica.Blocks.Interfaces.RealOutput verAzi(
     final quantity="Angle",
     final unit="rad",
     displayUnit="deg")
@@ -37,7 +37,7 @@ equation
   verAzi=Modelica.Math.acos(
        AixLib.Utilities.Math.Functions.smoothLimit(x=rat, l=-1+deltaX, u=1-deltaX, deltaX=deltaX/10));
 
-  annotation (Icon(graphics={Bitmap(extent={{-92,92},{92,-92}}, fileName=
+  annotation (Icon(graphics={Bitmap(extent={{-90,-90},{90,90}}, fileName=
               "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/WallSolarAzimuth.png")}),
 defaultComponentName="wallSolAzi",
 Documentation(info="<html>

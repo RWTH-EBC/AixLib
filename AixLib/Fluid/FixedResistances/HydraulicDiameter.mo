@@ -155,8 +155,8 @@ AixLib.Fluid.FixedResistances.PressureDrop</a>.
 <h4>Implementation</h4>
 <p>
 The pressure drop is computed by calling a function in the package
-<a href=\"modelica://Buildings.Fluid.BaseClasses.FlowModels\">
-Buildings.Fluid.BaseClasses.FlowModels</a>,
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels\">
+AixLib.Fluid.BaseClasses.FlowModels</a>,
 This package contains regularized implementations of the equation
 </p>
 <p align=\"center\" style=\"font-style:italic;\">

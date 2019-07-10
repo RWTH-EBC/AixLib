@@ -67,12 +67,13 @@ public
 
 final parameter          Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = false));
- parameter   Modelica.SIunits.CoefficientOfHeatTransfer                                      alphaOutside=8
-    "Heat transfer coefficient to ambient"                      annotation (Dialog( enable = withConvection));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOutside=8 "Heat transfer coefficient to ambient"
+                                                                annotation (Dialog( enable=withConvection));
  parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
  annotation (Dialog( enable = withRadiation));
-         parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe" annotation(Dialog(enable = not calculateAlpha));
+  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coeffiecient inside pipe"     annotation(Dialog(enable=not
+          calcHConv));
 
   /* *******************************************************************
       Components
@@ -109,10 +110,9 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.Star star if withRadiationParam
-    annotation (Placement(transformation(extent={{78,42},{98,62}}),
-        iconTransformation(extent={{78,42},{98,62}})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv(alpha=alphaOutside, A=Modelica.Constants.pi
+  AixLib.Utilities.Interfaces.RadPort star if
+                                           withRadiationParam annotation (Placement(transformation(extent={{78,42},{98,62}}), iconTransformation(extent={{78,42},{98,62}})));
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv(hConv=hConvOutside, A=Modelica.Constants.pi
         *outerDiameter*length) if withConvection "Convection from pipe wall"
                                 annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -130,9 +130,8 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     T_0=T_0,
     nNodes=nNodes,
     length=length,
-    alphaInsideFix=alphaInsideFix,
-    calculateAlpha=calculateAlpha)
-    annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
+    hConvInsideFix=hConvInsideFix,
+    calcHConv=calcHConv) annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
    //Connect the heat ports from the pipe to the pipe wall
       for i in 1:nNodes loop
@@ -234,27 +233,87 @@ equation
     Documentation(info="
     
     
-<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model is based on  <a href=\"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The pipes parameter can be chosen from  <a href=\"DataBase\">DataBase</a> or entered manually . This model takes into account the heat loss due to convection and / or radiation and  insulation can also be chosen.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The fluid inside the pipe is represented by the model  <a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>. Two cilindrical layers with <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatConduction\">heat conduction</a> and <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricLoad\">heat storage</a> where added for the pipe wall and pipe insulation each.</p>
-<p>The model directly calculates radiation and convection instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe and the loss to ambient will be calculated within the pipe model. The purpose is to clean up bigger models and to simplify modeling systems with pipes outside building-walls.</p> 
-<p>Please note that it's not possible to consider radiation without considering convection.</p>
-<p>Also, be careful when using neither isolation nor convection, as this will result in ideal heat transfer to the outside of the pipe and so to a significant heat loss. Might be useful if used for example for CCA (concrete core activation).</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.Pipes\">Pipes</a></p>
+<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model is based on <a href=
+  \"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The
+  pipes parameter can be chosen from <a href=\"DataBase\">DataBase</a> or
+  entered manually . This model takes into account the heat loss due to
+  convection and / or radiation and insulation can also be chosen.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The fluid inside the pipe is represented by the model <a href=
+  \"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.
+  Two cilindrical layers with <a href=
+  \"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatConduction\">
+  heat conduction</a> and <a href=
+  \"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricLoad\">heat
+  storage</a> where added for the pipe wall and pipe insulation each.
+</p>
+<p>
+  The model directly calculates radiation and convection instead of
+  modeling these phenomena outside the pipe, an ambient temperature can
+  be prescribed at the heat-port and the star of the pipe and the loss
+  to ambient will be calculated within the pipe model. The purpose is
+  to clean up bigger models and to simplify modeling systems with pipes
+  outside building-walls.
+</p>
+<p>
+  Please note that it's not possible to consider radiation without
+  considering convection.
+</p>
+<p>
+  Also, be careful when using neither isolation nor convection, as this
+  will result in ideal heat transfer to the outside of the pipe and so
+  to a significant heat loss. Might be useful if used for example for
+  CCA (concrete core activation).
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=\"FastHVAC.Examples.Pipes\">Pipes</a>
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>November 17, 2017&nbsp; </i> David Jansen:<br />Reduced pipe models to two versions and moved to development</li>
-<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br />Moved into AixLib</li>
-<li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br />Addapted to FastHVAC</li>
-<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br />Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
-<li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br />Added to the HVAC library</li>
-<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br />Formatted documentation appropriately</li>
-<li><i>August 9, 2011</i> by Ana Constantin:<br />Introduced the possibility of neglecting the insulation wall</li>
-<li><i>April 11, 2011</i> by Ana Constantin:<br />Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>November 17, 2017&#160;</i> David Jansen:<br/>
+    Reduced pipe models to two versions and moved to development
+  </li>
+  <li>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br/>
+    Addapted to FastHVAC
+  </li>
+  <li>
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Updated connectors to EBC Library 2.2, Updated documentation, Added
+    example
+  </li>
+  <li>
+    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Added to the HVAC library
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>August 9, 2011</i> by Ana Constantin:<br/>
+    Introduced the possibility of neglecting the insulation wall
+  </li>
+  <li>
+    <i>April 11, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>
 

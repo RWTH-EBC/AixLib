@@ -1,24 +1,30 @@
 within AixLib.Utilities.Examples;
-
-
 model HeatTransfer_test "Test routine for heat transfer models"
   extends Modelica.Icons.Example;
-  HeatTransfer.HeatConv heatConv(alpha = 2, A = 16) annotation(Placement(transformation(extent = {{-10, 38}, {10, 58}})));
+  HeatTransfer.HeatConv heatConv(hConv = 2, A = 16) annotation(Placement(transformation(extent = {{-10, 38}, {10, 58}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor load(C = 1000 * 1600 * 16 * 0.2) annotation(Placement(transformation(extent = {{-10, 20}, {10, 40}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond(G = 16 * 2.4 / 0.1) annotation(Placement(transformation(extent = {{-10, 2}, {10, 22}})));
-  HeatTransfer.HeatConv_inside heatConv_inside(
+  HeatTransfer.HeatConvInside heatConv_inside(
     A=16,
-    alpha_custom=2,
-    surfaceOrientation=2)
-    annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
-  HeatTransfer.HeatConv_outside heatTransfer_Outside(Model = 1, A = 16, alpha_custom = 25, surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()) annotation(Placement(transformation(extent = {{-10, -38}, {10, -18}})));
+    hConvCustom=2,
+    surfaceOrientation=2,
+    calcMethodHConv=1) annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
+  HeatTransfer.HeatConvOutside heatTransfer_Outside(
+    calcMethodHConv=1,
+    A=16,
+    hConvCustom=25,
+    surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()) annotation (Placement(transformation(extent={{-10,-38},{10,-18}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTrans(G = 16 * 1.5) annotation(Placement(transformation(extent = {{-10, -56}, {10, -36}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempOutside annotation(Placement(transformation(extent = {{-80, 0}, {-60, 20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempInside annotation(Placement(transformation(extent = {{80, 0}, {60, 20}})));
   Modelica.Blocks.Sources.Sine sineWindSpeed(amplitude = 10, freqHz = 0.5) annotation(Placement(transformation(extent = {{-34, -24}, {-24, -14}})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow[6] annotation(Placement(transformation(extent = {{76, 50}, {94, 68}})));
-  Modelica.Blocks.Sources.Constant constTempOutside(k = 283) annotation(Placement(transformation(extent = {{-100, -20}, {-86, -6}})));
-  Modelica.Blocks.Sources.Constant constTempInside(k = 298) annotation(Placement(transformation(extent = {{7, -7}, {-7, 7}}, origin = {93, -15})));
+  Modelica.Blocks.Sources.Sine     sine(
+    amplitude=15,
+    freqHz=1/3600/12,
+    offset=273.15 + 15)                                      annotation(Placement(transformation(extent = {{-100, -20}, {-86, -6}})));
+  Modelica.Blocks.Sources.Constant constTempInside(k=273.15 + 20)
+                                                            annotation(Placement(transformation(extent = {{7, -7}, {-7, 7}}, origin = {93, -15})));
 equation
   //Connecting the Heat Flow Output, models as stated below in source code
   Q_flow[1] = heatConv.port_b.Q_flow;
@@ -39,7 +45,7 @@ equation
       color={191,0,0}));
   connect(sineWindSpeed.y, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-23.5, -19}, {-18, -19}, {-18, -35.2}, {-9.2, -35.2}}, color = {0, 0, 127}));
   connect(TempOutside.port, heatConv.port_a) annotation(Line(points = {{-60, 10}, {-40, 10}, {-40, 48}, {-10, 48}}, color = {191, 0, 0}));
-  connect(constTempOutside.y, TempOutside.T) annotation(Line(points = {{-85.3, -13}, {-82, -13}, {-82, 10}}, color = {0, 0, 127}));
+  connect(sine.y, TempOutside.T) annotation (Line(points={{-85.3,-13},{-82,-13},{-82,10}}, color={0,0,127}));
   connect(constTempInside.y, TempInside.T) annotation(Line(points = {{85.3, -15}, {84, -15}, {84, -16}, {84, -16}, {84, 10}, {82, 10}}, color = {0, 0, 127}));
   connect(TempOutside.port, heatTrans.port_a) annotation(Line(points = {{-60, 10}, {-40, 10}, {-40, -46}, {-10, -46}}, color = {191, 0, 0}));
   connect(heatTrans.port_b, TempInside.port) annotation(Line(points = {{10, -46}, {46, -46}, {46, 10}, {60, 10}}, color = {191, 0, 0}));
@@ -63,5 +69,9 @@ Implemented, added documentation and formatted appropriately
 </li>
 </ul>
 </html>
- "), experiment(StopTime = 100, __Dymola_Algorithm = "Dassl"));
+ "), experiment(
+      StopTime=86400,
+      Interval=60,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"));
 end HeatTransfer_test;

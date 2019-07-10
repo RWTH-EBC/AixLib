@@ -1,5 +1,6 @@
 CompareFixedResistances
-Pipe
 FlowJunction
 HydraulicDiameter
+Pipe
+PlugFlowPipe
 PressureDrop

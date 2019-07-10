@@ -2,8 +2,10 @@ within AixLib.Fluid.FMI.Adaptors;
 model Outlet "Adaptor for connecting a fluid outlet to the FMI interface"
 
   replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium model within the source"
-     annotation (choicesAllMatching=true);
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium = AixLib.Media.Water "Water")));
 
   parameter Boolean allowFlowReversal = true
     "= true to allow flow reversal, false restricts to design direction (inlet -> outlet)"
@@ -134,15 +136,15 @@ equation
 <p>
 Model that is used to connect a fluid port with an output signal.
 The model needs to be used in conjunction with an instance of
-<a href=\"modelica://AixLib.Fluid.FMI.InletAdaptor\">
-AixLib.Fluid.FMI.InletAdaptor</a> in order for
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Inlet\">
+AixLib.Fluid.FMI.Adaptors.Inlet</a> in order for
 fluid mass flow rate and pressure to be properly assigned to
 the acausal fluid models.
 </p>
 <p>
 See
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPortComponent\">
-AixLib.Fluid.FMI.ExportContainers.PartialTwoPortComponent</a>
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
 or
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
 AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
@@ -150,6 +152,11 @@ for how to use this model.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air and water.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
 <li>
 November 8, 2016, by Michael Wetter:<br/>
 Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.

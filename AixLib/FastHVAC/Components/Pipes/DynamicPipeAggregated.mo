@@ -67,12 +67,13 @@ public
 
 final parameter          Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = false));
- parameter   Modelica.SIunits.CoefficientOfHeatTransfer                                      alphaOutside=8
-    "Heat transfer coefficient to ambient"                      annotation (Dialog( enable = withConvection));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOutside=8 "Heat transfer coefficient to ambient"
+                                                                annotation (Dialog( enable=withConvection));
  parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
  annotation (Dialog( enable = withRadiation));
-         parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe" annotation(Dialog(enable = not calculateAlpha));
+  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coeffiecient inside pipe"     annotation(Dialog(enable=not
+          calcHConv));
     final parameter Modelica.SIunits.Area AOutside = if not withInsulation then Modelica.Constants.pi*outerDiameter*length else Modelica.Constants.pi*(outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
 
   /* *******************************************************************
@@ -110,11 +111,10 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.Star star if withRadiationParam
-    annotation (Placement(transformation(extent={{-70,86},{-50,106}}),
-        iconTransformation(extent={{-70,86},{-50,106}})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](alpha=fill(
-        alphaOutside, nNodes), A=AOutside/nNodes) if
+  AixLib.Utilities.Interfaces.RadPort star if
+                                           withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hConv=fill(hConvOutside,
+                      nNodes), A=AOutside/nNodes) if
                                   withConvection "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -133,9 +133,8 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     T_0=T_0,
     nNodes=nNodes,
     length=length,
-    alphaInsideFix=alphaInsideFix,
-    calculateAlpha=calculateAlpha)
-    annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
+    hConvInsideFix=hConvInsideFix,
+    calcHConv=calcHConv) annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
 protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{36,44},{76,52}}),
@@ -260,25 +259,69 @@ equation
           extent={{-68,-70},{76,-90}},
           lineColor={0,0,255},
           textString="%name")}),
-    Documentation(info="<html>
-
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model is based on  <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a>. The difference is that the aggregated pipe has pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Differently from <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.Pipes\">Pipes</a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model is based on <a href=
+  \"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a>. The
+  difference is that the aggregated pipe has pipe wall and insulation
+  wall which allows discretisation of pipe wall and pipe insulation.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Differently from <a href=
+  \"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each
+  discretisation of the pipe, there is a connector to the corresponding
+  element of the discretized pipe wall. Each element of the discretised
+  pipe wall is connected to a corresponding element of the discretized
+  insulation wall. The heat-ports and stars of all nodes are then
+  collected to form two single ports, which can be connected to an
+  ambient temperature.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=\"FastHVAC.Examples.Pipes\">Pipes</a>
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>November 17, 2017&nbsp; </i> David Jansen:<br />Reduced pipe models to two versions and moved to development</li>
-<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br />Moved into AixLib</li>
-<li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br />Addapted to FastHVAC</li>
-<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br />Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
-<li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br />Added to the HVAC library</li>
-<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br />Formatted documentation appropriately</li>
-<li><i>August 9, 2011</i> by Ana Constantin:<br />Introduced the possibility of neglecting the insulation wall</li>
-<li><i>April 11, 2011</i> by Ana Constantin:<br />Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>November 17, 2017&#160;</i> David Jansen:<br/>
+    Reduced pipe models to two versions and moved to development
+  </li>
+  <li>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br/>
+    Addapted to FastHVAC
+  </li>
+  <li>
+    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Updated connectors to EBC Library 2.2, Updated documentation, Added
+    example
+  </li>
+  <li>
+    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Added to the HVAC library
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>August 9, 2011</i> by Ana Constantin:<br/>
+    Introduced the possibility of neglecting the insulation wall
+  </li>
+  <li>
+    <i>April 11, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     experiment(

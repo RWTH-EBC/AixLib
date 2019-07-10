@@ -43,10 +43,12 @@ package PerfectGas "Model for air as a perfect gas"
     MassFraction X_steam "Mass fraction of steam water";
     MassFraction X_air "Mass fraction of air";
   equation
-    assert(T >= 200.0 and T <= 423.15, "
-Temperature T is not in the allowed range
-200.0 K <= (T =" + String(T) + " K) <= 423.15 K
-required from medium model \""     + mediumName + "\".");
+    assert(T >= 200.0, "
+In "   + getInstanceName() + ": Temperature T exceeded its minimum allowed value of -73.15 degC (200 Kelvin)
+as required from medium model \"" + mediumName + "\".");
+    assert(T <= 423.15, "
+In "   + getInstanceName() + ": Temperature T exceeded its maximum allowed value of 150 degC (423.15 Kelvin)
+as required from medium model \"" + mediumName + "\".");
 
     MM = 1/(Xi[Water]/MMX[Water]+(1.0-Xi[Water])/MMX[Air]);
 
@@ -72,7 +74,6 @@ required from medium model \""     + mediumName + "\".");
     "Steam water mass fraction of saturation boundary in kg_water/kg_moistair"
   annotation (
     Inline=true);
-
   redeclare function setState_pTX
     "Thermodynamic state as function of p, T and composition X"
       extends Modelica.Media.Air.MoistAir.setState_pTX;
@@ -182,13 +183,11 @@ end saturationPressureLiquid_der;
     "Saturation curve valid for 223.16 <= T <= 273.16. Outside of these limits a (less accurate) result is returned"
   annotation (
     Inline=true);
-
   function sublimationPressureIce_der =
       Modelica.Media.Air.MoistAir.sublimationPressureIce_der
     "Derivative function for 'sublimationPressureIce'"
   annotation (
     Inline=true);
-
 redeclare function extends saturationPressure
     "Saturation curve valid for 223.16 <= T <= 373.16 (and slightly outside with less accuracy)"
 
@@ -501,7 +500,6 @@ The pressure is input for compatibility with the medium models, but the temperat
 is independent of the pressure.
 </html>"));
 end temperature_phX;
-
 //////////////////////////////////////////////////////////////////////
 // Protected classes.
 // These classes are only of use within this medium model.
@@ -558,7 +556,6 @@ First implementation.
 </ul>
 </html>"));
   end GasProperties;
-
   // In the assignments below, we compute cv as OpenModelica
   // cannot evaluate cv=cp-R as defined in GasProperties.
   constant GasProperties dryair(
@@ -588,10 +585,8 @@ First implementation.
 
   function s_pTX = Modelica.Media.Air.MoistAir.s_pTX
     "Return specific entropy of moist air as a function of pressure p, temperature T and composition X (only valid for phi<1)";
-
   function s_pTX_der = Modelica.Media.Air.MoistAir.s_pTX_der
     "Return specific entropy of moist air as a function of pressure p, temperature T and composition X (only valid for phi<1)";
-
   annotation(preferredView="info", Documentation(info="<html>
 <p>
 This package contains a <i>thermally perfect</i> model of moist air.
@@ -643,6 +638,13 @@ space dimension</i>. CRC Press. 1998.
 </html>", revisions="<html>
 <ul>
 <li>
+October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
+Now printing different messages if temperature is above or below its limit,
+and adding instance name as JModelica does not print the full instance name in the assertion.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
+</li>
+<li>
 March 15, 2016, by Michael Wetter:<br/>
 Replaced <code>spliceFunction</code> with <code>regStep</code>.
 This is for
@@ -660,7 +662,7 @@ when models are checked in Dymola 2014 in the pedenatic mode.
 </li>
 <li>
 April 12, 2012, by Michael Wetter:<br/>
-Added keyword <code>each</code> to <code>Xi(stateSelect=...</code>.
+Added keyword <code>each</code> to <code>Xi(stateSelect=...)</code>.
 </li>
 <li>
 April 4, 2012, by Michael Wetter:<br/>

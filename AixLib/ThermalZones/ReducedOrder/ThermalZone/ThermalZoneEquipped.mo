@@ -17,11 +17,33 @@ model ThermalZoneEquipped
     ATot > 0 or zoneParam.VAir > 0
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-66,-28},{-46,-8}})));
-  Building.Components.DryAir.VarAirExchange airExc(
-    final V=zoneParam.VAir) if
-    ATot > 0 or zoneParam.VAir > 0
-    "Heat flow due to ventilation"
+  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
+    ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
+
+  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeatAreaSpecific
+    humanSenHea(
+    final T0=zoneParam.T_start,
+    final InternalGainsPeopleSpecific=zoneParam.internalGainsPeopleSpecific,
+    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final RoomArea=zoneParam.AZone) if ATot > 0
+    "Internal gains from persons" annotation (choicesAllMatching=true,
+      Placement(transformation(extent={{64,-36},{84,-16}})));
+
+  redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
+    machinesSenHea(
+    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+    final T0=zoneParam.T_start,
+    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
+    final RoomArea=zoneParam.AZone) if ATot > 0
+    "Internal gains from machines"
+    annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
+  redeclare Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
+    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
+    final T0=zoneParam.T_start,
+    final LightingPower=zoneParam.lightingPowerSpecific,
+    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
+    annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
@@ -96,6 +118,10 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
+  <li>
+  March 01, 2019, by Niklas Huelsenbeck:<br/>
+  Changes due to integration of new Internal Gains models in ThermalZone.
+  </li>
   <li>
   September 27, 2016, by Moritz Lauster:<br/>
   Reimplementation based on Annex60 and MSL models.

@@ -44,10 +44,8 @@ equation
     annotation (Line(points={{-10,0},{-20,0},{-40,0}}, color={0,127,255}));
 
   connect(pulse_m_flow.y, sou.m_flow_in)
-    annotation (Line(points={{-79,8},{-60,8}},           color={0,0,127}));
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
+    annotation (Line(points={{-79,8},{-62,8}},           color={0,0,127}));
+   annotation (    Documentation(revisions="<html>
 <ul>
 <li>
 May 26, 2017, by Filip Jorissen:<br/>
@@ -56,9 +54,9 @@ First implementation.
 </ul>
 </html>", info="<html>
 <p>
-Example model that demonstrates how translation statistics 
-depend on the type of boundary conditions, 
-the parallel or series configuration of the components 
+Example model that demonstrates how translation statistics
+depend on the type of boundary conditions,
+the parallel or series configuration of the components
 and the value of parameter <code>from_dp</code>.
 </p>
 </html>"),

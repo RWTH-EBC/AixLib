@@ -48,14 +48,12 @@ equation
     annotation (Line(points={{-10,0},{-20,0},{-40,0}}, color={0,127,255}));
 
   connect(pulse_m_flow.y, sou.m_flow_in)
-    annotation (Line(points={{-79,8},{-60,8}},           color={0,0,127}));
+    annotation (Line(points={{-79,8},{-62,8}},           color={0,0,127}));
   connect(resParallel[nRes].port_b, res2.port_a)
     annotation (Line(points={{10,0},{20,0},{30,0}}, color={0,127,255}));
   connect(res2.port_b, sin.ports[1])
     annotation (Line(points={{50,0},{65,0},{80,0}}, color={0,127,255}));
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
+   annotation (    Documentation(revisions="<html>
 <ul>
 <li>
 May 26, 2017, by Filip Jorissen:<br/>

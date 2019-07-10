@@ -10,7 +10,7 @@ model UDPSend_adapted "A block for sending UDP datagrams"
   //  "Sample time for update";
   parameter Boolean autoBufferSize = true
     "true, buffer size is deduced automatically, otherwise set it manually."
-    annotation(Dialog(group="Outgoing data"), choices(__Dymola_checkBox=true));
+    annotation(Dialog(group="Outgoing data"), choices(checkBox=true));
   parameter Integer userBufferSize=16*1024
     "Buffer size of message data in bytes (if not deduced automatically)." annotation(Dialog(enable=not autoBufferSize, group="Outgoing data"));
   parameter String IPAddress="127.0.0.1" "IP address of remote UDP server"
@@ -78,9 +78,10 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The model changes the model published in the Modelica_DeviceDrivers library by an input for the name of the receiver. The receiver is therefore no longer a parameter but now a variable of the model. This change is necessary as some agents need to communicate with a number of different recipents (the broker for example).</p>
-<h4><span style=\"color: #008000;\">References</span></h4>
+<h4><span style=\"color: #008000\">References</span></h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
+<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>
