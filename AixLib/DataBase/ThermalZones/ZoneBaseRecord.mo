@@ -75,7 +75,6 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.SIunits.DensityOfHeatFlowRate fixedHeatFlowRatePersons
     "Area specific heatflowrate by persons in case of temperature independent 
     calculation";
-  parameter Real InternalGainsPeopleSpecific "specific heat output per person";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
   parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
