@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
-model PartialHuman "Partial model for internal gains of humans"
+partial model PartialHuman "Partial model for internal gains of humans"
   //Internal Gains People
   parameter Real specificPersons(unit="1/(m.m)") = 1.0 "Specific persons per square metre" annotation(Dialog(descriptionLabel = true));
   parameter Real RatioConvectiveHeat = 0.5

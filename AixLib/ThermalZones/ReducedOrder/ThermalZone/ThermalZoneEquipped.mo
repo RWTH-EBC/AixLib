@@ -20,18 +20,24 @@ model ThermalZoneEquipped
   HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
+//     if zoneParam.Modus = 1 then
+//   redeclare model humanSenHeaModel =
+//       Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent;
+//   ifelse zoneParam.Modus = 2 then
+//    Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent;
+//   else
 
-  redeclare Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent
-    humanSenHea(
-    final T0=zoneParam.T_start,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-    final RoomArea=zoneParam.AZone,
-    final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.InternalGainsPeopleSpecific) if
-                                                      ATot > 0
-    "Internal gains from persons" annotation (choicesAllMatching=true,
-      Placement(transformation(extent={{64,-36},{84,-16}})));
+      //       (
+//     final T0=zoneParam.T_start,
+//     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+//     final RoomArea=zoneParam.AZone,
+//     final specificPersons=zoneParam.specificPeople,
+//     final ActivityDegree=zoneParam.activityDegree,
+//     final specificHeatPerPerson=zoneParam.InternalGainsPeopleSpecific)
+//     if
+//                                                       ATot > 0
+//     "Internal gains from persons" annotation (choicesAllMatching=true,
+      // Placement(transformation(extent={{64,-36},{84,-16}})))
 
   redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(

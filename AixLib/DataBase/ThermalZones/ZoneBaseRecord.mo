@@ -68,9 +68,13 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Weight factors of the windows";
   parameter Real wfGro
     "Weight factor of the ground";
-
-  parameter Real specificPeople "people per squaremetre";
+  parameter Real specificPeople "people per squaremeter";
   parameter Real activityDegree "acitivity degree of people in met";
+  parameter Integer internalGainsMode "mode to select the way of calculate the 
+    internal gains by human";
+  parameter Modelica.SIunits.DensityOfHeatFlowRate fixedHeatFlowRatePersons
+    "Area specific heatflowrate by persons in case of temperature independent 
+    calculation";
   parameter Real InternalGainsPeopleSpecific "specific heat output per person";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";

@@ -17,7 +17,7 @@ model TemperatureDependentMoistuerOutput_SIA2024
 protected
   constant Real heatPerMet(unit="W/(m.m)") = 58 "heat per m² for 1 met";
   constant Modelica.SIunits.Area bodySurface = 1.8 "body surface of one person";
-  constant Real moistGain(unit="g/h") = 10/7 "gain for moistuer output";
+  constant Real moistGain(unit="g/h") = 10/7 "gain for moisture output";
 equation
 
   moistOutput = moistGain*((ActivityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput);
