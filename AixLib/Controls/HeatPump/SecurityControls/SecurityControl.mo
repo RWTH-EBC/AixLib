@@ -23,9 +23,10 @@ block SecurityControl "Block including all security levels"
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (Dialog(group="Operational Envelope", enable=
-          use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (Dialog(group=
+          "Operational Envelope", enable=use_opeEnv and use_opeEnvFroRec),
+      choicesAllMatching=true);
   parameter Real tableLow[:,2] "Lower boundary of envelope"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv and not use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Upper boundary of envelope"

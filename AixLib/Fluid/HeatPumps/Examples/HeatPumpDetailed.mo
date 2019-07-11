@@ -12,7 +12,7 @@ model HeatPumpDetailed
     capCalcType=2,
     CorrFlowCo=false,
     CorrFlowEv=false,
-    dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(),
+    dataTable=DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113(),
     PT1_cycle=true,
     timeConstantCycle=1,
     mFlow_conNominal=1,
@@ -33,8 +33,8 @@ model HeatPumpDetailed
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
-  Sources.FixedBoundary                sourceSideFixedBoundary(redeclare package
-              Medium = Medium_sou, nPorts=
+  Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
+      package Medium = Medium_sou, nPorts=
        1) "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,

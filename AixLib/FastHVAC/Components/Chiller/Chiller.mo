@@ -14,11 +14,11 @@ model Chiller "Base model of FastHVAC Chiller"
   parameter Boolean use_revChi=true "True if the chiller is reversible"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   replaceable model PerDataMainChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in cooling mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRevChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in heating mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of chiller";

@@ -49,12 +49,14 @@ model HeatPump_BACKUP "Example for the reversible heat pump model."
     use_refIne=false,
     use_rev=true,
     redeclare model PerDataMainHP =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        (                                                       dataTable=
+            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevHP =
-        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (smoothness=
+        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
+                                                               smoothness=
             Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+            AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
     VEva=0.04,
     use_evaCap=false,
     scalingFactor=1,

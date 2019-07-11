@@ -17,11 +17,11 @@ package HeatPump
       "True if the HP is reversible"
       annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
     replaceable model PerDataHea =
-        AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
       "Performance data of HP in heating mode"
       annotation (choicesAllMatching=true);
     replaceable model PerDataChi =
-        AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
       "Performance data of HP in chilling mode"
       annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
     parameter Real scalingFactor=1 "Scaling-factor of HP";

@@ -9,8 +9,8 @@ model CycleHP
     annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true, enable=HPctrlType), choices(choice=1
         "Polynomial", choice = 2 "Table (only on/off heat pump)",   radioButtons = true));
 
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable=
-      AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113()
     "Look-up table data for on/off heat pump according to EN255/EN14511"
     annotation (choicesAllMatching=true, Dialog(enable=HPctrlType and (
           capCalcType == 2), group="Capacity data"));
@@ -19,15 +19,16 @@ protected
   final parameter Real tableP_ele[:,:]= dataTable.tableP_ele;
 public
   replaceable function data_poly =
-  AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
+  AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
+    AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby
-    AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+  AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel
+                                                                 constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));

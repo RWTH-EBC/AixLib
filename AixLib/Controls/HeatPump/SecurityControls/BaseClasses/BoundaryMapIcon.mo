@@ -3,9 +3,11 @@ partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
 
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable "Data Table of HP"
-                       annotation(choicesAllMatching = true, Dialog(tab="Security Control", group="Operational Envelope",enable=
-          use_opeEnvFroRec));
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
+      tab="Security Control",
+      group="Operational Envelope",
+      enable=use_opeEnvFroRec));
   parameter Real tableLow[:,2] "Table matrix (grid = first column; e.g., table=[0,2])" annotation(choicesAllMatchning=true, Dialog(tab="Security Control", group="Operational Envelope",
         enable=not use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"

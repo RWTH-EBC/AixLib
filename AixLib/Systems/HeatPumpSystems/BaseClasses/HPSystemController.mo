@@ -110,9 +110,11 @@ model HPSystemController
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable "Data Table of HP"
-                       annotation(choicesAllMatching = true, Dialog(tab="Security Control", group="Operational Envelope",enable=
-          use_opeEnvFroRec));
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
+      tab="Security Control",
+      group="Operational Envelope",
+      enable=use_opeEnvFroRec));
   parameter Real tableLow[:,2] "Table matrix (grid = first column; e.g., table=[0,2])" annotation(choicesAllMatchning=true, Dialog(tab="Security Control", group="Operational Envelope",
         enable=not use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
@@ -192,7 +194,8 @@ model HPSystemController
     redeclare final function HeatingCurveFunction = HeatingCurveFunction,
     final cp_con=cp_con)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  AixLib.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(final lowBouPel=200)
+  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.calcCOP calcCOP(
+      final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
     "Calculates the heat flow added to the source medium"
@@ -234,10 +237,10 @@ model HPSystemController
         origin={-80,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  AixLib.DataBase.HeatPump.PerformanceData.IcingBlock icingBlock(redeclare
-      final function iceFunc =
-        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach) if
-       use_deFro
+  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.IcingBlock
+    icingBlock(redeclare final function iceFunc =
+        DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.BasicIcingApproach)
+    if use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Interfaces.RealOutput iceFac_out
     "Output value of icing factor" annotation (Placement(transformation(

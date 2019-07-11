@@ -168,11 +168,12 @@ partial model PartialHeatPumpSystem
       group="Operational Envelope",
       enable=use_sec and use_opeEnv,
       descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (Dialog(
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
-      enable=use_sec and use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
+      enable=use_sec and use_opeEnv and use_opeEnvFroRec), choicesAllMatching=
+        true);
   parameter Real tableUpp[:,2]=[0,60; 5,70; 30,70]
                                "Upper boundary of envelope" annotation (Dialog(
       tab="Security Control",
