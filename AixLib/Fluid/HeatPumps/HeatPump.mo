@@ -3,6 +3,7 @@ model HeatPump
   "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(
   use_rev=true,
+  final machineType = true,
   redeclare AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
       final use_rev=use_rev,
       final scalingFactor=scalingFactor,
@@ -15,9 +16,10 @@ model HeatPump
   "Performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataRevHP =
-      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
+
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},

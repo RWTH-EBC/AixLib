@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.BaseClasses;
-partial model PartialReversibleThermalMachine
+partial model PartialReversibleThermalMachine_BACKUP
   "Grey-box model for reversible heat pumps and chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
     redeclare final package Medium1 = Medium_con,
@@ -30,15 +30,12 @@ partial model PartialReversibleThermalMachine
   parameter Boolean use_autCal=true
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-  parameter Modelica.SIunits.Power Q_useNominal(start=5000)
-    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
-    annotation (Dialog(enable=
-          use_autCal));
+  parameter Modelica.SIunits.Power Q_useNominal "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)" annotation (Dialog(enable=use_autCal));
   parameter Real scalingFactor=1 "Scaling-factor of thermal machine";
   parameter Boolean use_refIne=true
-    "Consider the inertia of the refrigerant cycle"
-    annotation(choices(checkBox=true), Dialog(
+    "Consider the inertia of the refrigerant cycle"                           annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
+
   parameter Modelica.SIunits.Frequency refIneFre_constant
     "Cut off frequency for inertia of refrigerant cycle"
     annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
@@ -46,13 +43,11 @@ partial model PartialReversibleThermalMachine
           use_refIne, group="Refrigerant inertia"));
 
 //Condenser
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal_Inp
-    "Manual input of the nominal mass flow rate (if not automatically calculated)"
-    annotation (Dialog(group="Parameters", tab="Condenser", enable=not
-          use_autCal), Evaluate=true);
-  parameter Modelica.SIunits.Volume VCon_Inp "Manual input of the condenser volume (if not automatically calculated)"
-    annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser", enable=not
-          use_autCal));
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
+    "Nominal mass flow rate"
+    annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
+  parameter Modelica.SIunits.Volume VCon "Volume in condenser"
+    annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
   parameter Modelica.SIunits.PressureDifference dpCon_nominal
     "Pressure drop at nominal mass flow rate"
     annotation (Dialog(group="Flow resistance", tab="Condenser"), Evaluate=true);
@@ -76,12 +71,11 @@ partial model PartialReversibleThermalMachine
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_conCap));
 //Evaporator
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal_Inp
-    "Manual input of the nominal mass flow rate (if not automatically calculated)"
-    annotation (Dialog(group="Parameters", tab="Evaporator", enable=not use_autCal), Evaluate=true);
-  parameter Modelica.SIunits.Volume VEva_Inp "Manual input of the evaporator volume (if not automatically calculated)"
-    annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator", enable=not
-          use_autCal));
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
+    "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
+
+  parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
+    annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
   parameter Modelica.SIunits.PressureDifference dpEva_nominal
     "Pressure drop at nominal mass flow rate"
     annotation (Dialog(group="Flow resistance", tab="Evaporator"),Evaluate=true);
@@ -108,6 +102,7 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.SIunits.Time tauSenT=1
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
+
   parameter Boolean transferHeat=true
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
@@ -117,6 +112,7 @@ partial model PartialReversibleThermalMachine
   parameter Boolean allowFlowReversalCon=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Condenser", tab="Assumptions"));
+
   parameter Modelica.SIunits.Time tauHeaTraEva=1200
     "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat), Evaluate=true);
@@ -174,8 +170,6 @@ partial model PartialReversibleThermalMachine
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics", group="Equation"));
 //Advanced
-  parameter Boolean machineType "=true if heat pump; =false if chiller"
-    annotation (Dialog(tab="Advanced", group="General machine information"));
   parameter Boolean show_TPort=false
     "= true, if actual temperature at port is computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
@@ -209,8 +203,7 @@ partial model PartialReversibleThermalMachine
     final m_flow_nominal=mFlow_conNominal*scalingFactor,
     final dp_nominal=dpCon_nominal*scalingFactor,
     final GInn=GConIns*scalingFactor,
-    final fixed_T_start=fixed_TCon_start)
-    "Heat exchanger model for the condenser"
+    final fixed_T_start=fixed_TCon_start) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,78},{16,110}})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
@@ -233,8 +226,7 @@ partial model PartialReversibleThermalMachine
     final dp_nominal=dpEva_nominal*scalingFactor,
     final GOut=GEvaOut*scalingFactor,
     GInn=GEvaIns*scalingFactor,
-    final fixed_T_start=fixed_TEva_start)
-    "Heat exchanger model for the evaporator"
+    final fixed_T_start=fixed_TEva_start) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
@@ -376,8 +368,8 @@ partial model PartialReversibleThermalMachine
     final TAmb=TAmbCon_nominal,
     final tau=tauSenT,
     final m_flow_nominal=mFlow_conNominal*scalingFactor,
-    final tauHeaTra=tauHeaTraCon) "Temperature at sink inlet" annotation (
-      Placement(transformation(
+    final tauHeaTra=tauHeaTraCon)
+    "Temperature at sink inlet" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-34,90})));
@@ -388,17 +380,8 @@ partial model PartialReversibleThermalMachine
         extent={{-10,10},{10,-10}},
         rotation=0)));
 
-  //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
 protected
-  parameter Modelica.SIunits.MassFlowRate autCalc_mFlow_eva = if machineType then max(0.00004*Q_useNominal - 0.3177, 0.3) else max(0.00005*Q_useNominal - 0.5662, 0.3);
-  parameter Modelica.SIunits.MassFlowRate autCalc_mFlow_con = if machineType then max(0.00004*Q_useNominal - 0.6162, 0.3) else max(0.00005*Q_useNominal + 0.3161, 0.3);
-  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal = if use_autCal then autCalc_mFlow_eva else mFlow_evaNominal_Inp;
-  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal = if use_autCal then autCalc_mFlow_con else mFlow_conNominal_Inp;
-  parameter Modelica.SIunits.Volume autCalc_VEva = if machineType then max(0.0000001*Q_useNominal - 0.0075, 0.003) else max(0.0000001*Q_useNominal - 0.0066, 0.003);
-  parameter Modelica.SIunits.Volume autCalc_VCon = if machineType then max(0.0000001*Q_useNominal - 0.0094, 0.003) else max(0.0000002*Q_useNominal - 0.0084, 0.003);
-  parameter Modelica.SIunits.Volume VEva = if use_autCal then autCalc_VEva else VEva_Inp;
-  parameter Modelica.SIunits.Volume VCon = if use_autCal then autCalc_VCon else VCon_Inp;
-
+  parameter Boolean machineType = true "true: heat pump; false: chiller";
 
 equation
 
@@ -754,4 +737,4 @@ equation
   </li>
 </ul>
 </html>"));
-end PartialReversibleThermalMachine;
+end PartialReversibleThermalMachine_BACKUP;

@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.HeatPumps.Examples;
-model HeatPump "Example for the reversible heat pump model."
+model HeatPump_BACKUP "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
 
   replaceable package Medium_sin = AixLib.Media.Water
@@ -14,10 +14,11 @@ model HeatPump "Example for the reversible heat pump model."
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
-  AixLib.Fluid.Sources.FixedBoundary sourceSideFixedBoundary(
-    nPorts=1,
-    redeclare package Medium = Medium_sou) "Fixed boundary at the outlet of the source side"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+  AixLib.Fluid.Sources.FixedBoundary                sourceSideFixedBoundary(
+                                                                         nPorts=
+       1, redeclare package Medium = Medium_sou)
+          "Fixed boundary at the outlet of the source side"
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-86,40})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
@@ -39,7 +40,9 @@ model HeatPump "Example for the reversible heat pump model."
     GConOut=5,
     dpEva_nominal=0,
     dpCon_nominal=0,
-    VCon_Inp=0.4,
+    mFlow_conNominal_Inp=0.5,
+    mFlow_evaNominal_Inp=0.5,
+    VCon=0.4,
     use_conCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
@@ -52,14 +55,10 @@ model HeatPump "Example for the reversible heat pump model."
         AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (smoothness=
             Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
-    VEva_Inp=0.04,
+    VEva=0.04,
     use_evaCap=false,
     scalingFactor=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    mFlow_conNominal_Inp=0.5,
-    mFlow_evaNominal_Inp=0.5,
-    use_autCal=false,
-    Q_useNominal=5000,
     TAmbEva_nominal=273.15,
     TAmbCon_nominal=288.15,
     TCon_start=303.15) annotation (Placement(transformation(
@@ -74,7 +73,7 @@ model HeatPump "Example for the reversible heat pump model."
         origin={-4,84})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTAct(
-    final m_flow_nominal=heatPump.m1_flow_nominal,
+    final m_flow_nominal=heatPump.mFlow_conNominal_Inp,
     final tau=1,
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final tauHeaTra=1200,
@@ -116,7 +115,7 @@ model HeatPump "Example for the reversible heat pump model."
   AixLib.Fluid.MixingVolumes.MixingVolume Room(
     nPorts=2,
     final use_C_flow=false,
-    final m_flow_nominal=heatPump.m1_flow_nominal,
+    final m_flow_nominal=heatPump.mFlow_conNominal_Inp,
     final V=5,
     final allowFlowReversal=true,
     redeclare package Medium = Medium_sin,
@@ -165,7 +164,6 @@ model HeatPump "Example for the reversible heat pump model."
     uHigh=273.15 + 19)
     annotation (Placement(transformation(extent={{58,40},{48,50}})));
 equation
-
 
   connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{2,-65},
           {4,-65},{4,-47.4},{26.1667,-47.4}}, color={0,0,127}));
@@ -253,4 +251,4 @@ equation
 </html>"),
     __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"),
     Icon(coordinateSystem(extent={{-100,-100},{100,80}})));
-end HeatPump;
+end HeatPump_BACKUP;
