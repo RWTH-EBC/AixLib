@@ -1,10 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(zone(
-        redeclare
-        Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent
-        humanSenHea));
+  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
     final quantity="ThermodynamicTemperature",

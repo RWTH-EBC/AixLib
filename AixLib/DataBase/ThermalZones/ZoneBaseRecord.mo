@@ -72,7 +72,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real activityDegree "acitivity degree of people in met";
   parameter Integer internalGainsMode "mode to select the way of calculate the 
     internal gains by human";
-  parameter Modelica.SIunits.DensityOfHeatFlowRate fixedHeatFlowRatePersons
+  parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
     "Area specific heatflowrate by persons in case of temperature independent 
     calculation";
   parameter Real ratioConvectiveHeatPeople
