@@ -39,7 +39,7 @@ model HeatPump "Example for the reversible heat pump model."
     GConOut=5,
     dpEva_nominal=0,
     dpCon_nominal=0,
-    VCon_Inp=0.4,
+    VCon=0.4,
     use_conCap=false,
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
@@ -47,21 +47,21 @@ model HeatPump "Example for the reversible heat pump model."
     use_rev=true,
     redeclare model PerDataMainHP =
         AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (                                                       dataTable=
+        (dataTable=
             AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+
     redeclare model PerDataRevHP =
         AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
-                                                               smoothness=
-            Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-            AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
-    VEva_Inp=0.04,
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable
+          =AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+
+    VEva=0.04,
     use_evaCap=false,
     scalingFactor=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    mFlow_conNominal_Inp=0.5,
-    mFlow_evaNominal_Inp=0.5,
-    use_autCal=false,
-    Q_useNominal=5000,
+    mFlow_conNominal=0.5,
+    mFlow_evaNominal=0.5,
+    use_autoCalc=false,
     TAmbEva_nominal=273.15,
     TAmbCon_nominal=288.15,
     TCon_start=303.15) annotation (Placement(transformation(

@@ -16,6 +16,12 @@ package HeatPump
     parameter Boolean use_revHP=true
       "True if the HP is reversible"
       annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+    parameter Boolean use_autoCalc=true
+      "Enable automatic estimation of volumes and mass flows?"
+      annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+    parameter Modelica.SIunits.Power Q_useNominal(start=0)
+      "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+      annotation (Dialog(enable=use_autoCalc));
     replaceable model PerDataHea =
         AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
       "Performance data of HP in heating mode"
