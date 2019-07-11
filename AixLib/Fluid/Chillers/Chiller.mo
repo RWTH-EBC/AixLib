@@ -3,6 +3,7 @@ model Chiller
   "Grey-box model for reversible chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(
   use_rev=true,
+  final machineType = false,
   redeclare AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
       final use_rev=use_rev,
       final scalingFactor=scalingFactor,

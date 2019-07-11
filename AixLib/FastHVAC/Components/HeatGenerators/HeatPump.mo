@@ -16,7 +16,7 @@ package HeatPump
     parameter Boolean use_revHP=true
       "True if the HP is reversible"
       annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-    parameter Boolean use_autoCalc=true
+    parameter Boolean use_autoCalc=false
       "Enable automatic estimation of volumes and mass flows?"
       annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
     parameter Modelica.SIunits.Power Q_useNominal(start=0)
@@ -46,7 +46,7 @@ package HeatPump
       annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
     parameter Modelica.SIunits.Volume VCon "Volume in condenser"
       annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
-    parameter Modelica.SIunits.Mass m_fluidCon = VCon * con.medium.rho "Mass of working fluid";
+    parameter Modelica.SIunits.Mass m_fluidCon = VCon_final * con.medium.rho "Mass of working fluid";
     parameter Real deltaM_con=0.1
       "Fraction of nominal mass flow rate where transition to turbulent occurs"
       annotation (Dialog(tab="Condenser", group="Flow resistance"));
@@ -72,7 +72,7 @@ package HeatPump
       "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
     parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
       annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
-    parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho "Mass of working fluid";
+    parameter Modelica.SIunits.Mass m_fluidEva = VEva_final * eva.medium.rho "Mass of working fluid";
     parameter Real deltaM_eva=0.1
       "Fraction of nominal mass flow rate where transition to turbulent occurs"
       annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -131,7 +131,7 @@ package HeatPump
   //Advanced
     parameter Boolean homotopyInitialization=false "= true, use homotopy method"
       annotation (Dialog(tab="Advanced", group="Flow resistance"));
-      Interfaces.EnthalpyPort_a             enthalpyPort_a(
+    Interfaces.EnthalpyPort_a             enthalpyPort_a(
                        m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0))
       "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
       annotation (Placement(transformation(extent={{-104,56},{-96,64}})));
@@ -153,12 +153,12 @@ package HeatPump
       final T_start=TCon_start,
       final use_cap=use_ConCap,
       final is_con=true,
-      final V=VCon*scalingFactor,
+      final V=VCon_final*scalingFactor,
       final C=CCon*scalingFactor,
-      final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal)^0.88,
+      final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal_final)^0.88,
       final medium=Medium_con,
-      final m_flow_small=1E-4*abs(mFlow_conNominal),
-      final m_flow_nominal=mFlow_conNominal)
+      final m_flow_small=1E-4*abs(mFlow_conNominal_final),
+      final m_flow_nominal=mFlow_conNominal_final)
       "Heat exchanger model for the condenser"
       annotation (Placement(transformation(extent={{-16,76},{16,108}})));
     BaseClasses.EvaporatorCondenserWithCapacity eva(
@@ -167,12 +167,12 @@ package HeatPump
       final kAOut_nominal=GEva,
       final m_fluid=m_fluidEva,
       final T_start=TEva_start,
-      final m_flow_small=1E-4*abs(mFlow_evaNominal),
+      final m_flow_small=1E-4*abs(mFlow_evaNominal_final),
       final is_con=false,
-      final V=VEva*scalingFactor,
+      final V=VEva_final*scalingFactor,
       final C=CEva*scalingFactor,
-      final m_flow_nominal=mFlow_evaNominal,
-      final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal)^0.88)
+      final m_flow_nominal=mFlow_evaNominal_final,
+      final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal_final)^0.88)
       "Heat exchanger model for the evaporator"
       annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
     Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
@@ -295,7 +295,34 @@ package HeatPump
           origin={-80,60},
           extent={{-10,10},{10,-10}},
           rotation=0)));
+
+    //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
+  protected
+    parameter Boolean machineType=true "=true if heat pump; =false if chiller";
+    parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
+    parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
+
+    parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_eva = if machineType then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max(0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
+    parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_con = if machineType then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max(0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
+    parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal_final=if use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
+    parameter Modelica.SIunits.MassFlowRate mFlow_conNominal_final=if use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
+    parameter Modelica.SIunits.Volume autoCalc_VEva = if machineType then max(0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001*Q_useNominal - 0.0066, autoCalc_Vmin);
+    parameter Modelica.SIunits.Volume autoCalc_VCon = if machineType then max(0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*Q_useNominal - 0.0084, autoCalc_Vmin);
+    parameter Modelica.SIunits.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
+    parameter Modelica.SIunits.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
+
+
   equation
+    //Control and feedback for the auto-calculation of condenser and evaporator data
+    assert(not use_autoCalc or (use_autoCalc and Q_useNominal>0), "Can't auto-calculate evaporator and condenser data without a given nominal power flow (Q_useNominal)!",
+    level = AssertionLevel.error);
+    assert(not use_autoCalc or (autoCalc_mFlow_eva>autoCalc_mFlow_min and autoCalc_mFlow_eva<90),
+    "Given nominal power (Q_useNominal) for auto-calculation of evaporator and condenser data is outside the range of data sheets considered. Please control the auto-calculated mass flows!",
+    level = AssertionLevel.warning);
+    assert(not use_autoCalc or (autoCalc_VEva>autoCalc_Vmin and autoCalc_VEva<0.43),
+    "Given nominal power (Q_useNominal) for auto-calculation of evaporator and condenser data is outside the range of data sheets considered. Please control the auto-calculated volumes!",
+    level = AssertionLevel.warning);
+
     connect(enthalpyPort_a, mFlow_con.enthalpyPort_a) annotation (Line(points={{-100,60},
             {-92,60},{-92,60.1},{-88.8,60.1}},     color={176,0,0}));
     connect(mFlow_con.enthalpyPort_b, senT_a1.enthalpyPort_a) annotation (Line(

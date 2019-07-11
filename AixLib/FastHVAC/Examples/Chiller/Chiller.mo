@@ -15,6 +15,8 @@ model Chiller
         AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
         ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+    Q_useNominal=0,
+    use_autoCalc=false,
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -106,7 +108,7 @@ model Chiller
     uLow=273.15 + 14)
     annotation (Placement(transformation(extent={{46,-98},{34,-86}})));
   Modelica.Blocks.Sources.BooleanStep     booleanStep(
-      startValue=true, startTime=10000)
+      startValue=true, startTime=15000)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=0,
         origin={32,-54})));

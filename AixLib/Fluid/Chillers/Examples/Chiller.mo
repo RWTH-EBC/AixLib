@@ -40,8 +40,8 @@ model Chiller "Example for the reversible chiller model."
     GConOut=5,
     dpEva_nominal=0,
     dpCon_nominal=0,
-    mFlow_conNominal_final=0.5,
-    mFlow_evaNominal_final=0.5,
+    mFlow_conNominal=0.5,
+    mFlow_evaNominal=0.5,
     use_conCap=false,
     use_evaCap=false,
     redeclare package Medium_con = Medium_sin,
@@ -51,15 +51,14 @@ model Chiller "Example for the reversible chiller model."
         AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
           dataTable=
             AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
-
     redeclare model PerDataRevChi =
         AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
         (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
-
     use_rev=true,
-    VEva_final=0.4,
-    VCon_final=0.04,
+    use_autoCalc=false,
+    VEva=0.4,
+    VCon=0.04,
     TAmbEva_nominal=288.15,
     TAmbCon_nominal=273.15,
     TEva_start=303.15) annotation (Placement(transformation(
@@ -68,7 +67,7 @@ model Chiller "Example for the reversible chiller model."
         origin={2,1})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTAct(
-    final m_flow_nominal=chiller.mFlow_conNominal_final,
+    final m_flow_nominal=chiller.m2_flow_nominal,
     final tau=1,
     final initType=Modelica.Blocks.Types.Init.InitialState,
     final tauHeaTra=1200,
@@ -101,7 +100,7 @@ model Chiller "Example for the reversible chiller model."
   AixLib.Fluid.MixingVolumes.MixingVolume Room(
     nPorts=2,
     final use_C_flow=false,
-    final m_flow_nominal=chiller.mFlow_conNominal_final,
+    final m_flow_nominal=chiller.m2_flow_nominal,
     final V=5,
     final allowFlowReversal=true,
     redeclare package Medium = Medium_sou) "Volume of Condenser" annotation (

@@ -32,6 +32,8 @@ model HeatPump
     redeclare model PerDataChi =
         AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
          dataTable=AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+    Q_useNominal=0,
+    use_autoCalc=false,
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=-90,
@@ -98,7 +100,7 @@ model HeatPump
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={36,20})));
-  Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
+  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=10000,
       startValue=true)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=270,
