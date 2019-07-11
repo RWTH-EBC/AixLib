@@ -27,7 +27,7 @@ partial model PartialReversibleThermalMachine
         origin={0,-1})));
 
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
-  parameter Boolean use_autoCalc=true
+  parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Modelica.SIunits.Power Q_useNominal(start=0)

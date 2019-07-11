@@ -15,16 +15,12 @@ model HeatPumpSystem
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
-      final mFlow_conNominal_final=mFlow_conNominal,
-      final VCon_final=VCon,
       final dpCon_nominal=dpCon_nominal,
       final deltaM_con=deltaM_con,
       final use_conCap=use_conCap,
       final CCon=CCon,
       final GConOut=GConOut,
       final GConIns=GConIns,
-      final mFlow_evaNominal_final=mFlow_evaNominal,
-      final VEva_final=VEva,
       final dpEva_nominal=dpEva_nominal,
       final deltaM_eva=deltaM_eva,
       final use_evaCap=use_evaCap,
@@ -51,7 +47,13 @@ model HeatPumpSystem
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
       final fixed_TCon_start=fixed_TCon_start,
-      final fixed_TEva_start=fixed_TEva_start));
+      final fixed_TEva_start=fixed_TEva_start,
+      mFlow_conNominal=mFlow_conNominal,
+      mFlow_evaNominal=mFlow_evaNominal));
+     // final VCon_final=VCon,
+     // final VEva_final=VEva,
+     // final mFlow_conNominal_final=mFlow_conNominal,
+     // final mFlow_evaNominal_final=mFlow_evaNominal,
 
 //Heat Pump
   replaceable model PerDataHea =

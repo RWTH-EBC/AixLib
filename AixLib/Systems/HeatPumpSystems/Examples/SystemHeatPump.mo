@@ -74,7 +74,6 @@ model SystemHeatPump "Example for a heat pump system"
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
     dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113(),
-
     use_deFro=false,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
@@ -136,6 +135,7 @@ model SystemHeatPump "Example for a heat pump system"
     VCon=0.004,
     VEva=0.004)
     annotation (Placement(transformation(extent={{8,-88},{62,-28}})));
+
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senT_a1(
     redeclare final package Medium = Medium_sin,
