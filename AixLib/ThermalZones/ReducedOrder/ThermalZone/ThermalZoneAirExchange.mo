@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneEquipped
+model ThermalZoneAirExchange
   "Thermal zone model with ventilation, infiltration and internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone;
 
@@ -45,6 +45,27 @@ model ThermalZoneEquipped
     final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
+  Modelica.Blocks.Interfaces.RealInput ventTemp(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) if ATot > 0 or zoneParam.VAir > 0
+    "Ventilation and infiltration temperature"
+    annotation (Placement(
+        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
+          extent={{-126,-52},{-100,-26}})));
+  Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate",
+      final unit="1/h") if
+                         ATot > 0 or zoneParam.VAir > 0
+    "Ventilation and infiltration rate"
+    annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-40,-100}), iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=90,
+        origin={-70,-84})));
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
     "Combines infiltration and ventilation"
@@ -146,4 +167,4 @@ equation
           textString="Ventilation
 Infiltration
 ")}));
-end ThermalZoneEquipped;
+end ThermalZoneAirExchange;
