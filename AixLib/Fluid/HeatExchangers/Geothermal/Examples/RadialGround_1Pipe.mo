@@ -43,14 +43,14 @@ public
     T=279.15,
     nPorts=1) annotation (Placement(transformation(extent={{-2,22},{18,42}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort ReturnTemperature(redeclare package
-      Medium =         Medium)
+      Medium=Medium)
     annotation(Placement(transformation(extent={{82,70},{62,90}})));
   Modelica.Fluid.Sources.FixedBoundary boundary1(
     nPorts=1,
     redeclare package Medium = Medium,
     T=281.15) annotation (Placement(transformation(extent={{30,70},{50,90}})));
   Modelica.Blocks.Interfaces.RealOutput
-  temperatureArrayGround[radialGround.n, radialGround.nRad]
+  temperatureArrayGround[radialGround.n, radialGround.nRad](unit="K", displayUnit="degC")
   "array of the ground temperatures, [length, width]- of pipe"
     annotation (Placement(transformation(extent={{24,-90},{44,-70}})));
 public
