@@ -51,7 +51,7 @@ public
     T=281.15) annotation (Placement(transformation(extent={{30,70},{50,90}})));
   Modelica.Blocks.Interfaces.RealOutput
   temperatureArrayGround[radialGround.n, radialGround.nRad](unit="K", displayUnit="degC")
-  "array of the ground temperatures, [length, width]- of pipe"
+  "array with the ground temperatures, [length, width]- of the ground volume"
     annotation (Placement(transformation(extent={{24,-90},{44,-70}})));
 public
 Modelica.Blocks.Sources.Constant Massflow_2Pipes(k=1.0)
