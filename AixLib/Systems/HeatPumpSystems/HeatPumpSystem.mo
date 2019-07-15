@@ -50,10 +50,6 @@ model HeatPumpSystem
       final fixed_TEva_start=fixed_TEva_start,
       mFlow_conNominal=mFlow_conNominal,
       mFlow_evaNominal=mFlow_evaNominal));
-     // final VCon_final=VCon,
-     // final VEva_final=VEva,
-     // final mFlow_conNominal_final=mFlow_conNominal,
-     // final mFlow_evaNominal_final=mFlow_evaNominal,
 
 //Heat Pump
   replaceable model PerDataHea =
