@@ -122,8 +122,6 @@ equation
     Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>A model that combined cylindric and axial heat transfer.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">References</span></h4>
 <p>Source:</p>
 <ul>

@@ -9,15 +9,16 @@ model RadialGround_1Pipe
     inner Modelica.Fluid.System system(T_ambient=281.15) annotation (Placement(transformation(extent={{-100,78},{-80,98}})));
 
 public
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature groundTopTemp(T=
-        284.15)
-    annotation (Placement(transformation(extent={{-38,60},{-58,80}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature groundTopTemp(T=284.15)
+    "top temperature of the ground at the surface"
+    annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     groundUndisturbedSurrounding(T=285.15)
-    annotation (Placement(transformation(extent={{-40,-26},{-60,-6}})));
+    "Fixed temperature which is uneffected from the pipe itself"
+    annotation (Placement(transformation(extent={{-60,-26},{-40,-6}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature groundBottomTemp(T=
        286.15)
-    annotation (Placement(transformation(extent={{-38,-76},{-58,-56}})));
+    annotation (Placement(transformation(extent={{-62,-78},{-42,-58}})));
 
   Ground.RadialGround                                 radialGround(
     lambda=6,
@@ -79,7 +80,7 @@ equation
 
   connect(groundUndisturbedSurrounding.port, radialGround.outerThermalBoundary)
     annotation (Line(
-      points={{-60,-16},{-40,-16},{-40,-18},{-20.9,-18}},
+      points={{-40,-16},{-40,-16},{-40,-18},{-20.9,-18}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(ReturnTemperature.port_b, boundary1.ports[1])
@@ -89,11 +90,11 @@ equation
       smooth=Smooth.None));
   connect(groundBottomTemp.port, radialGround.bottomBoundary) annotation (
       Line(
-      points={{-58,-66},{8,-66},{8,-46.8},{7.62,-46.8}},
+      points={{-42,-68},{8,-68},{8,-46.8},{7.62,-46.8}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(groundTopTemp.port, radialGround.topBoundary) annotation (Line(
-      points={{-58,70},{28,70},{28,20},{21.88,20},{21.88,6.96}},
+      points={{-40,70},{28,70},{28,20},{21.88,20},{21.88,6.96}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(FlowTemperature.y, toKelvin.Celsius) annotation (Line(
@@ -117,8 +118,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics),
+            -100},{100,100}})),
     experiment(
       StopTime=86400,
       Interval=60,
