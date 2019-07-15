@@ -79,13 +79,13 @@ model SubmodelCooling
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=CHPEngineModel.dp_Coo, m_flow_nominal=m_flow),
     Heat_Loss_To_Ambient=true,
-    alpha=engineHeatTransfer.alpha_i,
+    hConv=engineHeatTransfer.hConv_i,
     eps=0,
     isEmbedded=true,
     use_HeatTransferConvective=false,
     p_a_start=system.p_start,
     p_b_start=system.p_start,
-    alpha_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
+    hConv_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
     diameter=CHPEngineModel.dCoo,
     allowFlowReversal=allowFlowReversalCoolant)
     annotation (Placement(transformation(extent={{8,12},{32,-12}})));
@@ -99,7 +99,7 @@ model SubmodelCooling
 
 equation
   connect(engineHeatTransfer.port_b, senTCooEngOut.port_a)
-    annotation (Line(points={{32.48,0},{50,0}},     color={0,127,255}));
+    annotation (Line(points={{32,0},{50,0}},        color={0,127,255}));
   connect(heatPort_outside, engineHeatTransfer.heatPort_outside) annotation (
       Line(points={{0,-60},{21.92,-60},{21.92,-6.72}},          color={191,0,0}));
   connect(port_a, senTCooEngIn.port_a)
@@ -109,7 +109,7 @@ equation
   connect(senTCooEngIn.port_b, coolantPump.port_a)
     annotation (Line(points={{-50,0},{-30,0}}, color={0,127,255}));
   connect(engineHeatTransfer.port_a, coolantPump.port_b)
-    annotation (Line(points={{7.52,0},{-10,0}}, color={0,127,255}));
+    annotation (Line(points={{8,0},{-10,0}},    color={0,127,255}));
   connect(switch1.y, coolantPump.m_flow_in) annotation (Line(points={{-23.4,
           34},{-20,34},{-20,14.4}}, color={0,0,127}));
   connect(sigBus_coo.isOnPump, switch1.u2) annotation (Line(

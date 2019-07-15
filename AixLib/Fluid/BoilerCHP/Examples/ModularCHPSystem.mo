@@ -200,7 +200,6 @@ equation
     annotation (Line(points={{-12,0},{0,0}},   color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)), experiment(StopTime=18000, Interval=5),
-         __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/CHP/Examples/CHP_OverviewScript.mos" "QuickOverviewSimulateAndPlot"),
     Documentation(info="<html><p>
   An example of the use of modular CHP components combined as a power
   unit with interfaces to a controller and to the heating circuit.

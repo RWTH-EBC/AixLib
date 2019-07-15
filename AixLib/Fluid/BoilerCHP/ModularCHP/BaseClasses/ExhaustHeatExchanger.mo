@@ -221,8 +221,8 @@ model ExhaustHeatExchanger
     withInsulation=false,
     use_HeatTransferConvective=false,
     eps=0,
-    alpha=pipeCoolant.alpha_i,
-    alpha_i=GCoo/(pipeCoolant.perimeter*pipeCoolant.length),
+    hConv=pipeCoolant.hConv_i,
+    hConv_i=GCoo/(pipeCoolant.perimeter*pipeCoolant.length),
     diameter=0.03175,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -334,9 +334,9 @@ equation
   connect(port_amb, ambientLoss.port_b) annotation (Line(points={{-100,0},{-90,
           0},{-90,-12},{-66,-12}}, color={191,0,0}));
   connect(senTCooCold.port_a, pipeCoolant.port_a)
-    annotation (Line(points={{60,-60},{32.4,-60}}, color={0,127,255}));
+    annotation (Line(points={{60,-60},{32,-60}},   color={0,127,255}));
   connect(senTCooHot.port_b, pipeCoolant.port_b)
-    annotation (Line(points={{-20,-60},{11.6,-60}}, color={0,127,255}));
+    annotation (Line(points={{-20,-60},{12,-60}},   color={0,127,255}));
   connect(ambientLoss.port_a, heatCapacitor.port)
     annotation (Line(points={{-46,-12},{20,-12}},color={191,0,0}));
   connect(heatCapacitor.port, pipeCoolant.heatPort_outside) annotation (Line(

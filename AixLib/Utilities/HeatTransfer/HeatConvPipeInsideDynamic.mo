@@ -1,22 +1,23 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvPipeInsideDynamic
-  "Model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
+  "Dynamic model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
   parameter Modelica.SIunits.Length length = 1 "Length of total pipe";
   parameter Modelica.SIunits.Length d_i = 0.02 "Inner diameter of exhaust pipe";
   parameter Modelica.SIunits.Area A_sur = 2 "Surface for heat transfer";
-  parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 annotation(Dialog(enable = not calculateAlpha));
-  Modelica.SIunits.MassFlowRate m_flow "Mass flow rate of gas"
-    annotation (Dialog(group="Parameters"));
-  Modelica.SIunits.SpecificHeatCapacity c
+  parameter Boolean calculateHConv=true
+    "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30   annotation(Dialog(enable=not
+          calculateHConv));
+  input Modelica.SIunits.MassFlowRate m_flow "Mass flow rate of gas";
+  input Modelica.SIunits.SpecificHeatCapacity c
     "Heat capacity of considered medium" annotation(Dialog(group="Parameters"));
-  Modelica.SIunits.Density rho "Density of considered medium" annotation(Dialog(group="Parameters"));
-  Modelica.SIunits.ThermalConductivity lambda
+  input Modelica.SIunits.Density rho  "Density of considered medium" annotation(Dialog(group="Parameters"));
+  input Modelica.SIunits.ThermalConductivity lambda
     "Thermal conductivity of considered medium" annotation(Dialog(group="Parameters"));
-  Modelica.SIunits.DynamicViscosity eta
+  input Modelica.SIunits.DynamicViscosity eta
     "Dynamic viscosity of considered medium" annotation(Dialog(group="Parameters"));
-    Modelica.SIunits.ReynoldsNumber Re;
+  Modelica.SIunits.ReynoldsNumber Re;
   Modelica.SIunits.Velocity v;
   Modelica.SIunits.NusseltNumber Nu;
   Modelica.SIunits.NusseltNumber Nu_lam_1;
@@ -28,7 +29,7 @@ model HeatConvPipeInsideDynamic
   Real zeta "pressure loss coefficient";
 
 equation
-  if calculateAlpha then
+  if calculateHConv then
     v      =        4*m_flow/(Modelica.Constants.pi * d_i^2 * rho);
     Re     =    Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
       v,rho,eta, d_i)              "Reynolds numbers";
@@ -51,7 +52,7 @@ equation
     Nu_tur=0;
     Nu=0;
     end if;
-  alpha    =      if calculateAlpha then Nu  * lambda /d_i else alphaInsideFix;
+  alpha    =      if calculateHConv then Nu  * lambda /d_i else hConvInsideFix;
   port_a.Q_flow = alpha * A_sur * (port_a.T - port_b.T);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,   extent={{-100,
