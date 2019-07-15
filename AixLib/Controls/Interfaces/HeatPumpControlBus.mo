@@ -9,6 +9,11 @@ Boolean onOff "true: on" annotation (HideResult=false);
 
 Boolean mode "true: heat pump, false: chiller";
 
+Modelica.SIunits.HeatFlowRate QCon "Outgoing heatflow of condenser";
+
+Modelica.SIunits.HeatFlowRate QEva "Outgoing heatflow of evaporator";
+
+
 Modelica.SIunits.ThermodynamicTemperature T_flow_ev "temperature of flow into evaporator";
 
 Modelica.SIunits.ThermodynamicTemperature T_flow_co "temperature of flow into condenser";

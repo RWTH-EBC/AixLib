@@ -16,7 +16,9 @@ model ThreeWayValve
             10,-90}})));
   Modelica.Blocks.Interfaces.RealInput opening( unit="1")
     "Valve position [ab=b] 0...1 [ab=a]" annotation (Placement(
-        transformation(extent={{-22,40},{18,80}}), iconTransformation(
+        transformation(extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,104}),                           iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,90})));
@@ -35,8 +37,7 @@ equation
   enthalpyPort_a.h = enthalpyPort_ab.h;
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics), Icon(graphics={Polygon(
+            -100},{100,100}})),  Icon(graphics={Polygon(
                   points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},
             {-100,50}},
                   lineColor={0,0,0},
@@ -69,12 +70,6 @@ equation
 </h4>
 <p>
   Model for a three way valve
-</p>
-<h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
 </p>
 <h4>
   <span style=\"color:#008000\">Concept</span>

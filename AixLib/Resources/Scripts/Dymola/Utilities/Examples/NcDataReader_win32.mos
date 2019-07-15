@@ -1,0 +1,12 @@
+// Check if compilerSettings[9] is still the DDE setting.
+// If 64 bit compilation is used (if Dymola flag Advanced.CompileWith64 = 2 then change to folder win64 below).
+// Tested only under Windows.
+// If no DDE is used, Modelica should find the correct Include and Library folder anyway. 
+// Maybe in future Dymola versions DDE is not any longer in field 9 of the compilerSettings.
+(compiler,compilerSettings)=DymolaCommands.SimulatorAPI.GetDymolaCompiler();
+if compilerSettings[9] == "DDE=1" then
+  Modelica.Utilities.System.setEnvironmentVariable(
+	"PATH",
+	Modelica.Utilities.Files.loadResource("modelica://NcDataReader2/Resources/Library/win32")+";"+Modelica.Utilities.System.getEnvironmentVariable("PATH"),	
+	convertFromSlash=true);
+end if;

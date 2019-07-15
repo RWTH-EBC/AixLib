@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
+within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
 model CHP
  extends Modelica.Icons.Example;
   FastHVAC.Components.Pumps.FluidSource fluidSource
@@ -19,9 +19,9 @@ model CHP
         rotation=0,
         origin={-36,42})));
   FastHVAC.Components.HeatGenerators.CHP.CHP_PT1 cHP_PT1_1(
-    param=FastHVAC.Data.CHP.Ecopower_3_0(),
     selectable=true,
     sigma(start=0.4),
+    param=Data.CHP.Engine.AisinSeiki(),
     T0=293.15)
     annotation (Placement(transformation(extent={{-14,-18},{24,20}})));
   Modelica.Blocks.Sources.Ramp P_elRel(

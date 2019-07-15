@@ -16,7 +16,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-40,-100}), iconTransformation(
+        origin={-40,-120}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={-70,-84})));
@@ -27,7 +27,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     min=0) if ATot > 0 or zoneParam.VAir > 0
     "Ventilation and infiltration temperature"
     annotation (Placement(
-        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
+        transformation(extent={{-140,-60},{-100,-20}}),iconTransformation(
           extent={{-126,-52},{-100,-26}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
@@ -35,7 +35,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={80,-100}), iconTransformation(
+        origin={80,-120}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={80,-84})));
@@ -44,7 +44,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final unit="K",
     displayUnit="degC") if ATot > 0 or zoneParam.VAir > 0
     "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,46},{120,66}}),
+    annotation (Placement(transformation(extent={{114,46},{134,66}}),
         iconTransformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput TRad(
     final quantity="ThermodynamicTemperature",
@@ -52,26 +52,26 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     displayUnit="degC") if ATot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(
-          extent={{100,28},{120,48}}), iconTransformation(extent={{100,28},{120,
+          extent={{114,28},{134,48}}), iconTransformation(extent={{114,28},{134,
             48}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
-    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
+    transformation(extent={{-137,18},{-103,50}}),iconTransformation(
     extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare each final package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
+    annotation (Placement(transformation(extent={{-49,-126},{49,-102}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
     ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{94,-12},{114,8}}),
+    annotation (Placement(transformation(extent={{108,-12},{128,8}}),
                               iconTransformation(extent={{90,-60},{110,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
     "Radiative internal gains"
-    annotation (Placement(transformation(extent={{94,8},{114,28}}),
+    annotation (Placement(transformation(extent={{108,8},{128,28}}),
                             iconTransformation(extent={{90,-20},{110,0}})));
   RC.FourElements ROM(
     final nPorts=nPorts,
@@ -117,28 +117,31 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final C_nominal=C_nominal,
     final mSenFac=mSenFac)
     "RC calculation core"
-    annotation (Placement(transformation(extent={{38,28},{86,64}})));
+    annotation (Placement(transformation(extent={{50,28},{98,64}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
   zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
 
 equation
-  connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
-          56}}, color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{77,28.05},{77,-4},{48,-4},
-          {48,-44},{0,-44},{0,-94}},            color={0,127,255}));
-  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
-          {92,-2},{104,-2}},   color={191,0,0}));
-  connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,38},
-          {110,38}}, color={0,0,127}));
+  connect(ROM.TAir, TAir) annotation (Line(points={{99,62},{112,62},{112,56},{
+          124,56}},
+                color={0,0,127}));
+  connect(ROM.ports, ports) annotation (Line(points={{89,28.05},{89,-24},{48,
+          -24},{48,-64},{0,-64},{0,-114}},      color={0,127,255}));
+  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{98,50},{106,
+          50},{106,-2},{118,-2}},
+                               color={191,0,0}));
+  connect(ROM.TRad, TRad) annotation (Line(points={{99,58},{110,58},{110,38},{
+          124,38}},  color={0,0,127}));
   connect(TRad, TRad)
-    annotation (Line(points={{110,38},{110,38}}, color={0,0,127}));
-  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,54},{94,54},
-          {94,18},{104,18}},
+    annotation (Line(points={{124,38},{124,38}}, color={0,0,127}));
+  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{98,54},{108,
+          54},{108,18},{118,18}},
                            color={191,0,0}));
-  annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
-            {100,100}}),graphics={Text(extent={{
+  annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-120,
+            -120},{120,120}}),
+                        graphics={Text(extent={{
               -80,114},{92,64}},lineColor=
               {0,0,255},
           textString="%name"),
@@ -183,10 +186,11 @@ equation
   </li>
  </ul>
  </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}), graphics={
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,-120},{
+            120,120}}),
+                    graphics={
   Rectangle(
-    extent={{36,68},{88,28}},
+    extent={{48,68},{100,28}},
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid)}));
