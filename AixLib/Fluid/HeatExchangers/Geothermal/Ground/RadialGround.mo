@@ -10,8 +10,10 @@ model RadialGround
   ////////////////////////////////////
   ///// GENERAL MODEL PARAMETERS /////
   ////////////////////////////////////
-  parameter Integer n = 4 "Number of axial discretizations" annotation(Dialog(group="General"));
-  parameter Integer nRad = 8 "Number of radial discretizations" annotation(Dialog(group="General"));
+  parameter Integer n = 4 "Number of axial discretizations, 
+    n = 1 is the top one" annotation(Dialog(group="General"));
+  parameter Integer nRad = 8 "Number of radial discretizations, 
+    nRad=1 is the most inner one" annotation(Dialog(group="General"));
   parameter SI.Temperature T0 = 283.15 "Initial temperature of ground";
 
   ////////////////////

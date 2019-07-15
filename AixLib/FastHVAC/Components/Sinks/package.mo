@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Components;
 package Sinks
-    extends Modelica.Icons.Package;
+  extends Modelica.Icons.VariantsPackage;
 
 
 end Sinks;

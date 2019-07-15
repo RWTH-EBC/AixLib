@@ -54,7 +54,7 @@ public
   "array with the ground temperatures, [length, width]- of the ground volume"
     annotation (Placement(transformation(extent={{24,-90},{44,-70}})));
 public
-Modelica.Blocks.Sources.Constant Massflow_2Pipes(k=1.0)
+Modelica.Blocks.Sources.Constant Massflow_2Pipes(k=20.0)
   annotation (Placement(transformation(extent={{-66,42},{-58,50}})));
 Modelica.Blocks.Sources.Constant FlowTemperature(k=8.0)
   annotation (Placement(transformation(extent={{-66,22},{-58,30}})));
@@ -125,7 +125,7 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(
-      StopTime=86400,
+      StopTime=864000,
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
     experimentSetupOutput,

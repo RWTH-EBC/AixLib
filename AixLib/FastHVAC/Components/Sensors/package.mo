@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components;
-package Sensors 
-    extends Modelica.Icons.Package;
+package Sensors
+  extends Modelica.Icons.SensorsPackage;
 
 end Sensors;
