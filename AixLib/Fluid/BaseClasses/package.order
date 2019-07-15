@@ -3,7 +3,6 @@ MassFlowRateMultiplier
 PartialInnerCycle
 PartialResistance
 PartialReversibleThermalMachine
-PartialReversibleThermalMachine_BACKUP
 PartialThreeWayResistance
 FlowModels
 Validation

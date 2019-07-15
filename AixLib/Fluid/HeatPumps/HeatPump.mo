@@ -182,6 +182,22 @@ model HeatPump
   </li>
 </ol>
 <h4>
+  Parametrization
+</h4>
+<p>
+  To simplify the parametrization of the evaporator and condenser
+  volumes and nominal mass flows there exists an option of automatic
+  estimation based on the nominal usable heating power of the HeatPump.
+  This function uses a linear correlation of these parameters, which
+  was established from the linear regression of more than 20 data sets
+  of water-to-water heat pumps from different manufacturers (e.g.
+  Carrier, Trane, Lennox) ranging from about 25kW to 1MW nominal power.
+  The linear regressions with coefficients of determination above 91%
+  give a good approximation of these parameters. Nevertheless,
+  estimates for machines outside the given range should be checked for
+  plausibility during simulation.
+</p>
+<h4>
   Assumptions
 </h4>
 <p>
