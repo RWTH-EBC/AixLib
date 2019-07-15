@@ -118,7 +118,7 @@ equation
         Text(extent={{172,30},{172,-22}}, textString=
                                               "%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},
-            {100,100}}), graphics),
+            {100,100}})),
     Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>A model that combined cylindric and axial heat transfer.</p>
