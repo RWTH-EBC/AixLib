@@ -49,7 +49,8 @@ public
     nPorts=1,
     redeclare package Medium = Medium,
     T=281.15) annotation (Placement(transformation(extent={{30,70},{50,90}})));
-  Modelica.Blocks.Interfaces.RealOutput y[radialGround.nRad]
+  Modelica.Blocks.Interfaces.RealOutput
+  temperatureArrayGround[radialGround.n, radialGround.nRad]
     annotation (Placement(transformation(extent={{24,-90},{44,-70}})));
 public
 Modelica.Blocks.Sources.Constant Massflow_2Pipes(k=1.0)
@@ -69,8 +70,11 @@ Modelica.Blocks.Sources.Constant FlowTemperature(k=8.0)
     annotation (Placement(transformation(extent={{38,-56},{100,6}})));
 equation
 
-  for i in 1:radialGround.nRad loop
-    y[i] = radialGround.cylindricAxialHeatTransfer[2,i].innerTherm.T;
+    for i in 1:radialGround.nRad loop
+    for j in 1:radialGround.n loop
+      temperatureArrayGround[j, i] = radialGround.cylindricAxialHeatTransfer[j,
+        i].innerTherm.T;
+    end for;
   end for;
 
   for x in 1:radialGround.n loop
