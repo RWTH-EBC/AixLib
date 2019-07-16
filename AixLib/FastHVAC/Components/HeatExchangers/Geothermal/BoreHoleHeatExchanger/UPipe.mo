@@ -18,19 +18,11 @@ model UPipe "Discretized UPipe consisting of n UPipeElements"
 
     // Pipes
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType "Type of pipe" annotation (Dialog(group="Pipes"), choicesAllMatching=true);
-    parameter Integer nParallel = 2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
     parameter SI.Diameter pipeCentreReferenceCircle = boreholeDiameter/2
     "Diameter of the reference circle on which the centres of all the pipes are arranged"               annotation(Dialog(group="Pipes"));
-
-    // Deflection
-    parameter Real zeta = 0.237
-    "Pressure loss coefficient for pipe deflection at bottom of borehole"                                     annotation(Dialog(group="Deflection"));
-    parameter Real m_flow_nominal = 5
-    "nominal mass flow"                                     annotation(Dialog(group="Deflection"));
-
+    final parameter Integer nParallel = 1 "1: U-Pipe" annotation (Dialog(group="Pipes"));
 public
-    Fluid.HeatExchangers.Geothermal.BaseClasses.UPipeElement uPipeElement[n](
-    redeclare package Medium = Medium,
+    BaseClasses.UPipeElement                                 uPipeElement[n](
     each T_start=T_start,
     each fillingDensity=boreholeFilling.density,
     each fillingHeatCapacity=boreholeFilling.heatCapacity,
@@ -67,7 +59,9 @@ equation
   connect(enthalpyPort_a1, uPipeElement[1].portDownIn);
   connect(uPipeElement[1].portUpOut, enthalpyPort_b1);
 
-    // connecting the last element to the deflection
+    // connecting the last elements to each other
+  connect(uPipeElement[n].portDownOut,uPipeElement[n].portUpIn);
+
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-80,-80},
             {80,80}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-80,-80},{80,80}}), graphics={
@@ -133,8 +127,6 @@ equation
 <p>The model enables the creation of a borehole heat exchanger that is axially discretized. </p>
 <p>It&rsquo;s primarily based on a multiple instantiation of the <b>UPipeElement</b> model and one instance of the <b>HydResistance</b> model out of the HVAC Library. </p>
 <p>This model is created and thermally connected to a ground model to simulate one borehole heat exchanger. </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Assumptions </span></h4>
 <p>The deflection at the bottom of the heat exchanger is assumed by a hydraulic resistance with the pressure loss coefficient of a 180&deg; pipe bend. </p>
 <h4><span style=\"color:#008000\">Known Limitations </span></h4>

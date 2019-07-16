@@ -5,9 +5,7 @@ model UPipeElement
 
   /// Model parameters ///
     // General
-    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Used medium"                                                                      annotation (Dialog(group="General"), choicesAllMatching=true);
-    parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
+  parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
 
     // Borehole
     parameter SI.Diameter boreholeDiameter = 0.135 "Diameter of borehole" annotation(Dialog(group="Borehole"));
@@ -28,58 +26,35 @@ model UPipeElement
     parameter SI.Length length = 1 "Length of the pipe element" annotation(Dialog(group="Pipes"));
 
     // Implicit values
-
     Real pi = Modelica.Constants.pi;
 
   /// Object Generation ///
-  Fluid.FixedResistances.Pipe pipeDown(
-    redeclare package Medium = Medium,
+  Pipes.DynamicPipe           dynamicPipe1(
     length=length,
     diameter=pipeType.d_i,
-    height_ab=-length,
     parameterPipe=pipeType,
-    parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc(),
-    T_start=T_start,
-    nNodes=2,
-    modelStructure=Modelica.Fluid.Types.ModelStructure.av_vb,
-    nParallel=nParallel,
-    use_HeatTransferConvective=true,
-    Heat_Loss_To_Ambient=true,
-    redeclare model HeatTransferConvective =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
-    isEmbedded=true,
-    alpha_i=500) annotation (Placement(transformation(
+    parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc())
+                 annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=-90,
-        origin={-40,56})));
+        origin={-40,54})));
 
-  Fluid.FixedResistances.Pipe pipeUp(
-    redeclare package Medium = Medium,
+  Pipes.DynamicPipe           dynamicPipe2(
     each length=length,
     each diameter=pipeType.d_i,
-    each height_ab=length,
-    each use_HeatTransferConvective=true,
     each parameterPipe=pipeType,
-    each parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc(),
-    T_start=T_start,
-    nNodes=2,
-    modelStructure=Modelica.Fluid.Types.ModelStructure.av_vb,
-    nParallel=nParallel,
-    Heat_Loss_To_Ambient=true,
-    redeclare model HeatTransferConvective =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
-    isEmbedded=true,
-    alpha_i=500) annotation (Placement(transformation(
+    each parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc())
+                 annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
         origin={40,56})));
 
-  Modelica.Fluid.Interfaces.FluidPort_a portDownIn(redeclare package Medium =
-        Medium) "Inlet FluidPort of the downgoing pipe of the U-Pipe-Element"                                        annotation (Placement(transformation(extent={{-50,90},
+  Interfaces.EnthalpyPort_a             portDownIn
+                "Inlet FluidPort of the downgoing pipe of the U-Pipe-Element"                                        annotation (Placement(transformation(extent={{-50,90},
             {-30,110}}),
                        iconTransformation(extent={{-40,90},{-20,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portUpOut(redeclare package Medium =
-        Medium) "Outlet FluidPort of the upgoing pipe of the U-Pipe-Element"                                          annotation (Placement(transformation(extent={{30,90},
+  Interfaces.EnthalpyPort_b             portUpOut
+                "Outlet FluidPort of the upgoing pipe of the U-Pipe-Element"                                          annotation (Placement(transformation(extent={{30,90},
             {50,110}}),
         iconTransformation(extent={{0,90},{20,110}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a externalHeatPort
@@ -125,32 +100,15 @@ model UPipeElement
     d_out=pipeCentreReferenceCircle - pipeType.d_o)
     "From upwards pipe towards the centre of the borehole"
     annotation (Placement(transformation(extent={{0,68},{20,88}})));
-  Modelica.Fluid.Interfaces.FluidPort_a portUpIn(redeclare package Medium =
-        Medium) "Inlet FluidPort of the upgoing pipe of the U-Pipe-Element"
+  Interfaces.EnthalpyPort_a             portUpIn
+                "Inlet FluidPort of the upgoing pipe of the U-Pipe-Element"
     annotation (Placement(transformation(extent={{30,-30},{50,-10}}),
         iconTransformation(extent={{0,-20},{20,0}})));
-  Modelica.Fluid.Interfaces.FluidPort_b portDownOut(redeclare package Medium =
-        Medium) "Outlet FluidPort of the downgoing pipe of the U-Pipe-Element"
+  Interfaces.EnthalpyPort_b             portDownOut
+                "Outlet FluidPort of the downgoing pipe of the U-Pipe-Element"
     annotation (Placement(transformation(extent={{-50,-30},{-30,-10}}),
         iconTransformation(extent={{-40,-20},{-20,0}})));
 equation
-
-  connect(portDownIn, pipeDown.port_a) annotation (Line(
-      points={{-40,100},{-40,80.96}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(portUpOut, pipeUp.port_b) annotation (Line(
-      points={{40,100},{40,80.96}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(pipeDown.port_b, portDownOut) annotation (Line(
-      points={{-40,31.04},{-40,-20}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(portUpIn, pipeUp.port_a) annotation (Line(
-      points={{40,-20},{40,31.04}},
-      color={0,127,255},
-      smooth=Smooth.None));
 
   connect(cylindricHeatConduction1.port_a,cylindricLoad.port_a)  annotation (
       Line(
@@ -162,13 +120,14 @@ equation
       points={{10,78.4},{6,78.4},{6,36},{0,36}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(pipeDown.heatPort_outside, thermalCollector.port_a[1]) annotation (
-      Line(
-      points={{-26.56,52.16},{-26.56,34},{-26.56,10},{-61.5,10}},
+  connect(dynamicPipe1.heatPort_outside, thermalCollector.port_a[1])
+    annotation (Line(
+      points={{-27.52,75.12},{-27.52,10},{-61.5,10}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(pipeUp.heatPort_outside, thermalCollector.port_a[2]) annotation (Line(
-      points={{26.56,59.84},{18,59.84},{18,10},{-62.5,10}},
+  connect(dynamicPipe2.heatPort_outside, thermalCollector.port_a[2])
+    annotation (Line(
+      points={{27.52,34.88},{18,34.88},{18,10},{-62.5,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(thermalCollector.port_b,cylindricHeatTransfer.port_a)  annotation (
@@ -180,22 +139,31 @@ equation
       points={{-82,76.8},{-98,76.8},{-98,80},{-114,80}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(pipeDown.heatPort_outside,cylindricHeatConduction1.port_b)
+  connect(dynamicPipe1.heatPort_outside, cylindricHeatConduction1.port_b)
     annotation (Line(
-      points={{-26.56,52.16},{-26.56,94},{-10,94},{-10,86.8}},
+      points={{-27.52,75.12},{-27.52,94},{-10,94},{-10,86.8}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(pipeUp.heatPort_outside,cylindricHeatConduction2.port_b)
+  connect(dynamicPipe2.heatPort_outside, cylindricHeatConduction2.port_b)
     annotation (Line(
-      points={{26.56,59.84},{26.56,74},{26.56,94},{10,94},{10,86.8}},
+      points={{27.52,34.88},{27.52,74},{27.52,94},{10,94},{10,86.8}},
       color={191,0,0},
       smooth=Smooth.None));
+  connect(portDownIn, dynamicPipe1.enthalpyPort_a1)
+    annotation (Line(points={{-40,100},{-40,77.52}}, color={176,0,0}));
+  connect(dynamicPipe1.enthalpyPort_b1, portDownOut)
+    annotation (Line(points={{-40,30.48},{-40,-20}}, color={176,0,0}));
+  connect(portUpIn, dynamicPipe2.enthalpyPort_a1)
+    annotation (Line(points={{40,-20},{40,32.48}}, color={176,0,0}));
+  connect(dynamicPipe2.enthalpyPort_b1, portUpOut)
+    annotation (Line(points={{40,79.52},{40,100}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
             -20},{80,100}},
         initialScale=0.2), graphics={Text(
           extent={{-50,118},{50,114}},
           lineColor={255,0,0},
-          textString="Doppel-U über nParallel=2 abgebildet")}),
+          textString="Noch nicht für FastHVAC implementiert:
+Doppel-U über nParallel=2 abgebildet")}),
                                    Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-120,-20},{80,100}},
         initialScale=0.2), graphics={

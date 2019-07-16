@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers.Geothermal.Examples;
-model RadialGround_1Pipe
+within AixLib.FastHVAC.Examples.HeatExchangers;
+model RadialGround1Pipe
   "Simulation set-up for one pipe with a radial ground model"
   extends Modelica.Icons.Example;
 
@@ -20,7 +20,7 @@ public
        286.15)
     annotation (Placement(transformation(extent={{-62,-78},{-42,-58}})));
 
-  Ground.RadialGround                                 radialGround(
+  Fluid.HeatExchangers.Geothermal.Ground.RadialGround radialGround(
     lambda=6,
     rho=2000,
     n=4,
@@ -33,33 +33,26 @@ public
     annotation (Placement(transformation(extent={{-24,-50},{38,14}})));
 protected
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
-    annotation (Placement(transformation(extent={{-24,20},{-14,30}})));
+    annotation (Placement(transformation(extent={{-24,34},{-14,44}})));
 public
-  Modelica.Fluid.Sources.MassFlowSource_T boundary(
-    m_flow=0.7,
-    use_m_flow_in=true,
-    use_T_in=true,
-    redeclare package Medium = Medium,
-    T=279.15,
-    nPorts=1) annotation (Placement(transformation(extent={{-2,22},{18,42}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort ReturnTemperature(redeclare package
-      Medium=Medium)
-    annotation(Placement(transformation(extent={{82,70},{62,90}})));
-  Modelica.Fluid.Sources.FixedBoundary boundary1(
-    nPorts=1,
-    redeclare package Medium = Medium,
-    T=281.15) annotation (Placement(transformation(extent={{30,70},{50,90}})));
+  Components.Pumps.FluidSource            fluidSource
+              annotation (Placement(transformation(extent={{-2,22},{16,40}})));
+  Components.Sensors.TemperatureSensor      ReturnTemperature
+    annotation(Placement(transformation(extent={{78,70},{58,90}})));
+  Components.Sinks.Vessel              vessel
+              annotation (Placement(transformation(extent={{46,70},{26,90}})));
   Modelica.Blocks.Interfaces.RealOutput
   temperatureArrayGround[radialGround.n, radialGround.nRad](unit="K", displayUnit="degC")
   "array with the ground temperatures, [length, width]- of the ground volume"
-    annotation (Placement(transformation(extent={{96,-10},{116,10}}),
+    annotation (Placement(transformation(extent={{96,-8},{116,12}}),
         iconTransformation(extent={{24,-90},{44,-70}})));
 public
 Modelica.Blocks.Sources.Constant Massflow_2Pipes(k=1)
-  annotation (Placement(transformation(extent={{-66,42},{-58,50}})));
+  annotation (Placement(transformation(extent={{-66,20},{-58,28}})));
 Modelica.Blocks.Sources.Constant FlowTemperature(k=8.0)
-  annotation (Placement(transformation(extent={{-66,22},{-58,30}})));
-  BoreHoleHeatExchanger.UPipe                                 uPipe(
+  annotation (Placement(transformation(extent={{-66,36},{-58,44}})));
+  Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe
+                                                              uPipe(
     redeclare package Medium = Medium,
     T_start=radialGround.T0,
     n=radialGround.n,
@@ -67,7 +60,6 @@ Modelica.Blocks.Sources.Constant FlowTemperature(k=8.0)
     boreholeDiameter=0.2,
     boreholeFilling=AixLib.DataBase.Materials.FillingMaterials.Bentonite(),
     pipeType=AixLib.DataBase.Pipes.PE_X.DIN_16893_SDR11_d40(),
-    nParallel=2,
     pipeCentreReferenceCircle=sqrt(0.07*0.07 + 0.07*0.07))
     annotation (Placement(transformation(extent={{38,-56},{100,6}})));
 equation
@@ -89,11 +81,6 @@ equation
       points={{-40,-16},{-40,-16},{-40,-18},{-20.9,-18}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(ReturnTemperature.port_b, boundary1.ports[1])
-                                                  annotation (Line(
-      points={{62,80},{50,80}},
-      color={0,127,255},
-      smooth=Smooth.None));
   connect(groundBottomTemp.port, radialGround.bottomBoundary) annotation (
       Line(
       points={{-42,-68},{8,-68},{8,-46.8},{7.62,-46.8}},
@@ -104,25 +91,20 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(FlowTemperature.y, toKelvin.Celsius) annotation (Line(
-      points={{-57.6,26},{-52,26},{-52,25},{-25,25}},
+      points={{-57.6,40},{-52,40},{-52,39},{-25,39}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(Massflow_2Pipes.y, boundary.m_flow_in) annotation (Line(
-      points={{-57.6,46},{-2,46},{-2,40}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(toKelvin.Kelvin, boundary.T_in) annotation (Line(
-      points={{-13.5,25},{-4,25},{-4,36}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(boundary.ports[1], uPipe.fluidPortIn) annotation (Line(
-      points={{18,32},{62,32},{62,6},{61.25,6}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(uPipe.fluidPortOut, ReturnTemperature.port_a) annotation (Line(
-      points={{76.75,6},{76,6},{76,32},{84,32},{84,80},{82,80}},
-      color={0,127,255},
-      smooth=Smooth.None));
+  connect(toKelvin.Kelvin, fluidSource.T_fluid) annotation (Line(points={{-13.5,
+          39},{-6.75,39},{-6.75,34.78},{-0.2,34.78}}, color={0,0,127}));
+  connect(Massflow_2Pipes.y, fluidSource.dotm) annotation (Line(points={{-57.6,
+          24},{-28,24},{-28,28.66},{-0.2,28.66}}, color={0,0,127}));
+  connect(vessel.enthalpyPort_a, ReturnTemperature.enthalpyPort_b) annotation (
+      Line(points={{43,80},{56,80},{56,79.9},{59,79.9}}, color={176,0,0}));
+  connect(fluidSource.enthalpyPort_b, uPipe.enthalpyPort_a1) annotation (Line(
+        points={{16,31.9},{36,31.9},{36,32},{61.25,32},{61.25,6}}, color={176,0,
+          0}));
+  connect(uPipe.enthalpyPort_b1, ReturnTemperature.enthalpyPort_a) annotation (
+      Line(points={{76.75,6},{76.75,43},{76.8,43},{76.8,79.9}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(
@@ -144,4 +126,4 @@ equation
 <li><i>March 13, 2012&nbsp;</i> by Tim Comanns (supervisor: Ana Constantin):<br/>Implemented.</li>
 </ul></p>
 </html>"));
-end RadialGround_1Pipe;
+end RadialGround1Pipe;
