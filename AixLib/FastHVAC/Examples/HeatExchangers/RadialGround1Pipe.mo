@@ -108,7 +108,7 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(
-      StopTime=86400,
+      StopTime=864000,
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
     experimentSetupOutput,

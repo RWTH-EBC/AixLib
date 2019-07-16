@@ -132,7 +132,7 @@ equation
       points={{48,78},{48,68}},
       color={191,0,0},
       smooth=Smooth.None));
-  annotation (Diagram(graphics), Icon(graphics={
+  annotation (                   Icon(graphics={
         Ellipse(
           extent={{-100,-54},{100,-98}},
           lineColor={0,0,255},

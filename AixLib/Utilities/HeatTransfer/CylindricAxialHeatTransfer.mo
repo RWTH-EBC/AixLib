@@ -22,11 +22,13 @@ model CylindricAxialHeatTransfer "Combined Cylindric and Axial Heat Transfer"
     length=length,
     lambda=lambda,
     d_in=(d_out + d_in)/2,
-    d_out=d_out) annotation (Placement(transformation(
+    d_out=d_out,
+    T0=T0)       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-68,0})));
   CylindricLoad                                              CylindricLoad1(
+    T0=T0,
     port(T(start=T0)),
     rho=rho,
     c=c,
@@ -38,7 +40,8 @@ model CylindricAxialHeatTransfer "Combined Cylindric and Axial Heat Transfer"
     length=length,
     lambda=lambda,
     d_out=(d_out + d_in)/2,
-    d_in=d_in) annotation (Placement(transformation(
+    d_in=d_in,
+    T0=T0)     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-20,0})));
