@@ -24,19 +24,29 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     "Ventilation and infiltration humidity" annotation (Placement(
         transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
           extent={{-126,-80},{-100,-54}})));
-  Modelica.Blocks.Math.MultiSum SumMoistFlow(nu=1) if ATot > 0
+  Modelica.Blocks.Math.MultiSum SumMoistFlow(nu=2) if ATot > 0
     annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0
     "absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,64},{120,84}})));
+  Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains if ATot > 0
+    "internal moisture gains by plants, etc."
+    annotation (Placement(transformation(extent={{18,-72},{38,-52}})));
 equation
   connect(humanSenHea.MoistGain, SumMoistFlow.u[1]) annotation (Line(points={{83.6,
-          -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-30},{16,-30}},
+          -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-27.9},{16,-27.9}},
         color={0,0,127}));
   connect(SumMoistFlow.y, ROM.mWat_flow) annotation (Line(points={{29.02,-30},{34,
           -30},{34,35},{37,35}}, color={0,0,127}));
   connect(ROM.X_w, X_w) annotation (Line(points={{87,34},{92,34},{92,74},{110,74}},
         color={0,0,127}));
+  connect(moistureGains.MoistGain, SumMoistFlow.u[2]) annotation (Line(points={{
+          37.6,-58},{44,-58},{44,-40},{10,-40},{10,-32.1},{16,-32.1}}, color={0,
+          0,127}));
+  connect(moistureGains.ConvHeat, ROM.intGainsConv) annotation (Line(points={{37,
+          -66.8},{52,-66.8},{52,-4},{92,-4},{92,50},{86,50}}, color={191,0,0}));
+  connect(ROM.intGainsConv, moistureGains.TRoom) annotation (Line(points={{86,50},
+          {90,50},{90,-4},{48,-4},{48,-48},{20,-48},{20,-53.6}}, color={191,0,0}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
