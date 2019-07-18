@@ -3,9 +3,7 @@ model HumanTotalHeat_TemperatureDepdendent
   "Model for total heat and moisture output of humans depending on the room temperature"
   extends HumanSensibleHeat_TemperatureDependent(thermalCollector(m=2));
 
-  parameter Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=2500E3 "enthalpy of evaporation";
-
-  BaseClasses.TemperatureDependentMoistuerOutput_SIA2024
+  BaseClasses.TemperatureDependentMoistureOutput_SIA2024
     temperatureDependentMoistuerOutput_SIA2024_1
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
   Modelica.Blocks.Interfaces.RealOutput MoistGain
@@ -19,10 +17,13 @@ model HumanTotalHeat_TemperatureDepdendent
   Modelica.Blocks.Sources.RealExpression specificLatentHeat(y=
         enthalpyOfEvaporation + cp_steam*(temperatureSensor.T - 273.15))
     annotation (Placement(transformation(extent={{-88,14},{-68,34}})));
+protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeatLatent(T_ref=T0)
     annotation (Placement(transformation(extent={{18,40},{42,64}})));
-protected
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
+  constant Modelica.SIunits.SpecificHeatCapacity cp_steam = AixLib.Utilities.Psychrometrics.Constants.cpSte
+    "specific heat capacity of steam";
+  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
+    "enthalpy of evaporation";
 equation
   connect(to_degC.y, temperatureDependentMoistuerOutput_SIA2024_1.Temperature)
     annotation (Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-61,76}},
