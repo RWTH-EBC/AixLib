@@ -7,7 +7,7 @@ model OneOffice
   Utilities.Sources.InternalGains.Machines.Machines_DIN18599
     machines_SensibleHeat_DIN18599(NrPeople=2)
     annotation (Placement(transformation(extent={{-10,-6},{14,24}})));
-  Utilities.Sources.InternalGains.Lights.Lights_relative lights
+  AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights
     annotation (Placement(transformation(extent={{-8,-46},{12,-22}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RoomTemp annotation(Placement(transformation(extent = {{-58, 40}, {-38, 60}})));
   Modelica.Blocks.Sources.Ramp Evolution_RoomTemp(duration = 36000, offset = 293.15, startTime = 4000, height = 0) annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));

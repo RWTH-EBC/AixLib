@@ -21,20 +21,18 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
 parameter HeatCapacityPerArea cTop;
 parameter HeatCapacityPerArea cDown;
 
-  parameter Integer calcMethodConvection = 1
-    "Calculation Method for convection at surface"
-    annotation (Dialog(group = "Heat convection",
+  parameter Integer calcMethodHConv=1 "Calculation Method for convection at surface"
+    annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
         choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
         choice=2 "By Bernd Glueck",
         choice=3 "Constant alpha",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
-    "Constant heat transfer coefficient"
-    annotation (Dialog(group = "Heat convection",
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+    annotation (Dialog(group="Heat convection",
     descriptionLabel=true,
-        enable=if calcMethodConvection == 3 then true else false));
+        enable=if calcMethodHConv == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume vol(
     redeclare package Medium = Medium,
@@ -60,19 +58,18 @@ parameter HeatCapacityPerArea cDown;
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
-  Utilities.HeatTransfer.HeatConv_inside HeatConv(
-    final A = A,
-    final calcMethod = calcMethodConvection,
-    final alpha_custom = convCoeffCustom,
-    surfaceOrientation = if isFloor then 2 else 1)                 annotation (Placement(
-        transformation(
+  Utilities.HeatTransfer.HeatConvInside HeatConv(
+    final A=A,
+    final calcMethodHConv=calcMethodHConv,
+    final hConvCustom=hConvCustom,
+    surfaceOrientation=if isFloor then 2 else 1)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={1.77636e-015,74})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvRoom
     annotation (Placement(transformation(extent={{-12,90},{8,110}})));
-  AixLib.Utilities.Interfaces.Star starRad
-    annotation (Placement(transformation(extent={{-38,92},{-18,112}})));
+  AixLib.Utilities.Interfaces.RadPort starRad annotation (Placement(transformation(extent={{-38,92},{-18,112}})));
   HeatConductionSegment panel_Segment1(
     kA=kTop*A,
     mc_p=cTop*A,

@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Walls;
+within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
   import BaseLib = AixLib.Utilities;
@@ -19,26 +19,29 @@ model Wall
     "Choose the model for calculation of heat convection at outside surface"                           annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside, compact = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom alpha",                                                                                                    radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 25
-    "Custom alpha for convection (just for manual selection, not recommended)"                                                                      annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 3 and outside));
+        "Custom hConv",                                                                                                    radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25
+    "Custom hConv for convection (just for manual selection, not recommended)"                                                                      annotation(Dialog(tab=
+          "Surface Parameters",                                                                                                                                                                   group=
+          "Outside surface",                                                                                                                                                                                                 enable=Model ==
+          3 and outside));
  DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type of outside wall"                                                                                                     annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 2 and outside), choicesAllMatching = true);
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1
         "vertical wall",                                                                                                    choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
-  parameter Integer calculationMethod = 1
-    "Choose the model for calculation of heat convection at inside surface" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+  parameter Integer calcMethodHConv=1 "Choose the model for calculation of heat convection at inside surface"
+                                                                            annotation(Dialog(tab="Surface Parameters",   group="Inside surface",   compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant alpha",radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_constant = 2.5
-    "Constant alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", enable = calculationMethod == 3));
+      choice=3 "Constant hConv",radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2.5
+    "Constant hConv for convection (just for manual selection, not recommended)" annotation(Dialog(tab="Surface Parameters",   group="Inside surface",   enable=
+          calcMethodHConv == 3));
   // window parameters
   parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
   replaceable model Window =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
-  constrainedby
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
@@ -68,7 +71,17 @@ model Wall
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Advanced Parameters"));
   // COMPONENT PART
-  BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation, calcMethod = calculationMethod, alpha_constant = alpha_constant) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
+  BaseClasses.ConvNLayerClearanceStar Wall(
+    h=wall_height,
+    l=wall_length,
+    T0=T0,
+    clearance=clearance,
+    selectable=true,
+    eps=WallType.eps,
+    wallType=WallType,
+    surfaceOrientation=ISOrientation,
+    calcMethodHConv=calcMethodHConv,
+    hConv_const=hConv_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
   BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -87,9 +100,16 @@ model Wall
     U=if outside then U_door else U_door*2) if withDoor
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));
-  Utilities.Interfaces.HeatStarComb thermStarComb_inside annotation(Placement(transformation(extent = {{92, -10}, {112, 10}}), iconTransformation(extent = {{10, -10}, {30, 10}})));
+  BaseLib.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+    A=wall_length*wall_height - clearance,
+    calcMethodHConv=Model,
+    surfaceType=surfaceType,
+    hConvCustom=hConvCustom) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+  BaseLib.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=180,
+        origin={69,-1})));
+  BaseLib.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
@@ -100,10 +120,11 @@ equation
   //******************************************************************
   // **********************standard connection************************
   //******************************************************************
-  connect(Wall.Star, heatStarToComb.star) annotation(Line(points={{2,30.2},{48,30.2},
-          {48,4.8},{58.6,4.8}},                                                                                   color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.therm) annotation(Line(points={{2,24},{48,
-          24},{48,-6.1},{58.9,-6.1}},                                                                                  color = {191, 0, 0}));
+  connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
+      points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
+      color={95,95,95},
+      pattern=LinePattern.Solid));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
   //******************************************************************
   // **********************standard connection for inside wall********
   //******************************************************************
@@ -130,15 +151,21 @@ equation
   //******************************************************************
   if withDoor then
     connect(Door.port_a, port_outside) annotation(Line(points = {{-19.4, -86}, {-56, -86}, {-56, 24}, {-24, 24}, {-24, 4}, {-98, 4}}, color = {191, 0, 0}));
-    connect(Door.port_b, heatStarToComb.therm) annotation(Line(points = {{9.4, -86}, {48, -86}, {48, -6.1}, {58.9, -6.1}}, color = {191, 0, 0}));
-    connect(Door.Star, heatStarToComb.star) annotation(Line(points = {{9.4, -76.4}, {48, -76.4}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(Door.Star, heatStarToComb.portRad) annotation (Line(
+        points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
+        color={95,95,95},
+        pattern=LinePattern.Solid));
   end if;
   //******************************************************************
   // ****standard connections for outside wall with window***********
   //******************************************************************
   if outside and withWindow then
-    connect(windowSimple.Star, heatStarToComb.star) annotation(Line(points = {{9.7, -27.2}, {48, -27.2}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-    connect(windowSimple.port_inside, heatStarToComb.therm) annotation(Line(points = {{9.7, -36.3}, {48, -36.3}, {48, -6.1}, {58.9, -6.1}}, color = {191, 0, 0}));
+    connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
+        points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
+        color={95,95,95},
+        pattern=LinePattern.Solid));
+    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
     connect(windowSimple.port_outside, port_outside) annotation(Line(points = {{-13.7, -36.3}, {-56, -36.3}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
   end if;
   //******************************************************************
@@ -156,8 +183,7 @@ equation
     connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-42.85,
             -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}));
   end if;
-  connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
-  connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
           -14},{-54,-14},{-54,-13.2},{-45.84,-13.2}}, color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},

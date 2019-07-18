@@ -1,6 +1,4 @@
 within AixLib.DataBase.Weather.SurfaceOrientation;
-
-
 record SurfaceOrientationData_N_E_S_W_Hor
   "North, East, South, West, Horizontal"
   extends SurfaceOrientationBaseDataDefinition(nSurfaces = 5, name = {"N", "O", "S", "W", "Hor"}, Azimut = {180, -90, 0, 90, 0}, Tilt = {90, 90, 90, 90, 0});

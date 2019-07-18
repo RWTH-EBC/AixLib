@@ -89,9 +89,7 @@ model ML_thermal_delta "Multi layers of heat exchanger"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Sensors.TemperatureSensor                     temperatureOut
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
-  AixLib.Utilities.Interfaces.Star Radiative annotation (Placement(
-        transformation(extent={{36,70},{56,90}}), iconTransformation(extent={{
-            36,70},{56,90}})));
+  AixLib.Utilities.Interfaces.RadPort Radiative annotation (Placement(transformation(extent={{36,70},{56,90}}), iconTransformation(extent={{36,70},{56,90}})));
   FastHVAC.BaseClasses.WorkingFluid radiatorFluid(
     T0=T0,
     medium=medium,

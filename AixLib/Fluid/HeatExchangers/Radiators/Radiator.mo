@@ -74,7 +74,7 @@ model Radiator "Radiator multilayer model"
     "Initial temperature, in degrees Celsius"
     annotation (Dialog(group="Miscellaneous"));
   parameter SIunits.Temperature RT_nom[3]=
-    (if selectable then Modelica.SIunits.Conversions.from_degC(radiatorType.RT_nom)
+    (if selectable then radiatorType.RT_nom
     else Modelica.SIunits.Conversions.from_degC({75,65,20}))
     "Nominal temperatures (TIn, TOut, TAir) according to DIN-EN 442."
     annotation (Dialog(group="Miscellaneous",enable=not selectable));
@@ -92,11 +92,7 @@ model Radiator "Radiator multilayer model"
     "Convective heat port to room"
     annotation (Placement(transformation(extent={{-60,20},{-44,36}}, rotation=
            0), iconTransformation(extent={{-30,10},{-10,30}})));
-  AixLib.Utilities.Interfaces.Star RadiativeHeat
-    "Radiative heat port to room"
-    annotation (Placement(
-        transformation(extent={{30,12},{50,30}}, rotation=0),
-        iconTransformation(extent={{30,10},{50,30}})));
+  AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Radiative heat port to room" annotation (Placement(transformation(extent={{30,12},{50,30}}, rotation=0), iconTransformation(extent={{30,10},{50,30}})));
   Sensors.TemperatureTwoPort FlowTemperature(redeclare package
     Medium = Medium,
     m_flow_nominal=m_flow_nominal)
@@ -477,6 +473,7 @@ appropriately</li>
 from older model.</li>
 <li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib. Delete
 EnergyMeter and additional output T_source</li>
+<li><i>July 10, 2019&nbsp;</i> by Katharina Brinkmann:<br/>Changed temperature unit according to #734</li>
 </ul>
 </html>"));
 end Radiator;

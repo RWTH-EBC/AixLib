@@ -4,7 +4,7 @@ model Lights "Simulation to check the light models"
   Utilities.Sources.InternalGains.Lights.Lights_simple
     lights_sensibleHeat_simple
     annotation (Placement(transformation(extent={{-10,48},{10,68}})));
-  Utilities.Sources.InternalGains.Lights.Lights_relative lights
+  AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Utilities.Sources.InternalGains.Lights.Lights_Avar lights_sensibleHeat_Avar
     annotation (Placement(transformation(extent={{-10,-62},{10,-42}})));

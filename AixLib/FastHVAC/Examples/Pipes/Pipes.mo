@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.Pipes;
+within AixLib.FastHVAC.Examples.Pipes;
 model Pipes
   extends Modelica.Icons.Example;
   Components.Pipes.DynamicPipe PipeInsulationAndConvectionandRadiation(

@@ -4,15 +4,15 @@ model TestCase1 "VDI 6007 Test Case 1 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    alphaExt=2.7,
-    alphaWin=2.7,
+    hConvExt=2.7,
+    hConvWin=2.7,
     gWin=1,
     nExt=1,
-    alphaRad=5,
+    hRad=5,
     nInt=1,
     ratioWinConRad=0,
     AInt=75.5,
-    alphaInt=2.24,
+    hConvInt=2.24,
     RWin=0.00000001,
     RExt={0.00436791293674},
     RExtRem=0.03895919557,
@@ -26,9 +26,7 @@ model TestCase1 "VDI 6007 Test Case 1 model"
     AExt={10.5},
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
-    T_start=295.15)
-    "Thermal zone"
-    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    T_start=295.15) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature preTem(T=295.15)
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
@@ -69,13 +67,8 @@ model TestCase1 "VDI 6007 Test Case 1 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=25*10.5)
-    "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(
-    transformation(
-    extent={{-4,-4},{4,4}},
-    rotation=90,
-    origin={30,-18})));
+  Modelica.Blocks.Sources.Constant hConvWall(k=25*10.5) "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   Modelica.Blocks.Sources.Constant const(k=0)
     "Solar radiation"
     annotation (Placement(transformation(extent={{20,26},{30,36}})));
@@ -97,8 +90,8 @@ equation
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
   connect(thermalZoneTwoElements.extWall, theConWall.solid)
     annotation (Line(points={{44,12},{40,12},{40,1},{36,1}},  color={191,0,0}));
-  connect(alphaWall.y, theConWall.Gc)
-    annotation (Line(points={{30,-13.6},{31,-13.6},{31,-4}}, color={0,0,127}));
+  connect(hConvWall.y, theConWall.Gc)
+    annotation (Line(points={{0,4.4},{31,4.4},{31,-4}},      color={0,0,127}));
   connect(intGai.y[1], macConv.Q_flow)
     annotation (Line(points={{22.8,
     -50},{36,-50},{36,-74},{48,-74}},color={0,0,127}));
