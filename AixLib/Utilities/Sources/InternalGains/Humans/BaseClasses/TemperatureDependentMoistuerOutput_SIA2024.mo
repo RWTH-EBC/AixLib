@@ -20,7 +20,7 @@ protected
   constant Real moistGain(unit="g/h") = 10/7 "gain for moisture output";
 equation
 
-  moistOutput = moistGain*((ActivityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput);
+  moistOutput = max(0,moistGain*((ActivityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));
 
   connect(Temperature, temperatureDependentHeatOutput_SIA2024.Temperature)
     annotation (Line(points={{-120,0},{-86,0},{-86,42},{-75,42}}, color={0,0,127}));
