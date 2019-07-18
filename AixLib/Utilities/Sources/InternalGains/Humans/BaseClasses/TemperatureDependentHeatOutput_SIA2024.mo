@@ -18,7 +18,7 @@ protected
   constant Modelica.SIunits.HeatFlowRate minimumHeat = 35 "minimum heat output";
 equation
 
-  heatOutput = (0.865-(TemperatureCoefficient * Temperature))*(ActivityDegree*heatPerMet*bodySurface)+minimumHeat;
+  heatOutput = max(0,(0.865-(TemperatureCoefficient * Temperature))*(ActivityDegree*heatPerMet*bodySurface)+minimumHeat);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-58,22},{46,-26}},

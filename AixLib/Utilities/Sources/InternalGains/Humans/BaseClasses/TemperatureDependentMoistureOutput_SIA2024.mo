@@ -1,5 +1,5 @@
 ﻿within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
-model TemperatureDependentMoistuerOutput_SIA2024
+model TemperatureDependentMoistureOutput_SIA2024
   "Model for temperature dependent moisture output based on formulas of SIA 2024"
 
   parameter Real ActivityDegree = 1.0 "activity degree of persons in room in met";
@@ -51,4 +51,4 @@ equation
  <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Implemented</li>
  </ul>
 </html>"));
-end TemperatureDependentMoistuerOutput_SIA2024;
+end TemperatureDependentMoistureOutput_SIA2024;
