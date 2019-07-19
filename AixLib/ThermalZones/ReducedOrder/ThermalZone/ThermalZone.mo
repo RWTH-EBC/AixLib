@@ -33,7 +33,7 @@ model ThermalZone
     final specificPersons=zoneParam.specificPeople,
     final ActivityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot < 0 and zoneParam.internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+       ATot > 0 and zoneParam.internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDepdendent humanTotHeaDependent(
     final T0=zoneParam.T_start,
@@ -42,7 +42,7 @@ model ThermalZone
     final specificPersons=zoneParam.specificPeople,
     final ActivityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot < 0 and zoneParam.internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+       ATot > 0 and zoneParam.internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
