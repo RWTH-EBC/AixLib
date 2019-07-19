@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
-    redeclare final Utilities.Sources.InternalGains.Humans.HumanTotalHeat_VDI2078 humanSenHea,
     ROM(redeclare Fluid.MixingVolumes.MixingVolumeMoistAir volAir(
       redeclare final package Medium = Medium,
       final nPorts=nPorts,
@@ -32,16 +31,22 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains if ATot > 0
     "internal moisture gains by plants, etc."
     annotation (Placement(transformation(extent={{18,-72},{38,-52}})));
+  Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if zoneParam.internalGainsMode <> 3
+    annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
 equation
-  connect(humanSenHea.MoistGain, SumMoistFlow.u[1]) annotation (Line(points={{83.6,
-          -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-27.9},{16,-27.9}},
+  if zoneParam.internalGainsMode == 3 then
+    connect(humanTotHeaDependent.MoistGain, SumMoistFlow.u[1]) annotation (Line(points={{83.6,
+            -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-27.9},{16,-27.9}},
         color={0,0,127}));
+  else
+    connect(noMoisturePerson.y, SumMoistFlow.u[1]);
+  end if;
   connect(SumMoistFlow.y, ROM.mWat_flow) annotation (Line(points={{29.02,-30},{34,
           -30},{34,35},{37,35}}, color={0,0,127}));
   connect(ROM.X_w, X_w) annotation (Line(points={{87,34},{92,34},{92,74},{110,74}},
         color={0,0,127}));
-  connect(moistureGains.MoistGain, SumMoistFlow.u[2]) annotation (Line(points={{
-          37.6,-58},{44,-58},{44,-40},{10,-40},{10,-32.1},{16,-32.1}}, color={0,
+  connect(moistureGains.MoistGain, SumMoistFlow.u[2]) annotation (Line(points={{37.6,
+          -58},{44,-58},{44,-40},{10,-40},{10,-32.1},{16,-32.1}},      color={0,
           0,127}));
   connect(moistureGains.ConvHeat, ROM.intGainsConv) annotation (Line(points={{37,
           -66.8},{52,-66.8},{52,-4},{92,-4},{92,50},{86,50}}, color={191,0,0}));
@@ -49,6 +54,7 @@ equation
           {90,50},{90,-4},{48,-4},{48,-48},{20,-48},{20,-53.6}}, color={191,0,0}));
   annotation (Documentation(revisions="<html>
 <ul>
+  <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
   <li>
   April, 2019, by Martin Kremer:<br/>
   First implementation.
@@ -59,9 +65,13 @@ equation
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
+<p><b>Important!</b>: This model has to be combined with a zoneRecord that sets the parameter <i>internalGainsMode</i> to 3. Otherwise no moisture gain from persons will be considered.</p>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
 <p> There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture. This leads to a steady increase of moisture in the room, when there is no ventilation.</p>
+<p>The moisture balance was formulated considering the latent heat with the aim, that the temperature is not influenced by the moisture.For this reason every humidity source is assumed to be in gaseous state.</p>
+<h4>Accuracy</h4>
+<p>Due to usage of constant heat capacaty for steam and constant heat of evaporation, the temperature is slightly influenced. Comparing the ThermalZone with dry air to the ThermalZone with moist air, the maximum difference between the simulated air temperature in the zone is 0.07 K for weather data from San Francisco and using the zoneParam for office buildings. See therefore: <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir\">ExampleComparisonMoistAndDryAir</a></p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>

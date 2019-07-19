@@ -91,6 +91,7 @@ equation
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
+<p><b>Important!</b>: This model has to be combined with a zoneRecord that sets the parameter <i>internalGainsMode</i> to 3. Otherwise no moisture gain from persons will be considered.</p>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
@@ -102,10 +103,8 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
-  <li>
-  April, 2019, by Martin Kremer:<br/>
-  First implementation.
-  </li>
+  <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models.  See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
+  <li>April, 2019, by Martin Kremer:<br/>First implementation.</li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
