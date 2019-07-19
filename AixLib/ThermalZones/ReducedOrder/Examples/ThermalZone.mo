@@ -3,11 +3,12 @@ model ThermalZone "Illustrates the use of ThermalZone"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir, zoneParam=
+                                                             zoneParam=
     AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = Media.Air,
     T_start=293.15)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -21,7 +22,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Weather data bus"
     annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant const(k=0.2)
+  Modelica.Blocks.Sources.Constant const(k=0)
     "Infiltration rate"
     annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(

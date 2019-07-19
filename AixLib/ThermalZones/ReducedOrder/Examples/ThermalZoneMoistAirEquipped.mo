@@ -4,13 +4,13 @@ model ThermalZoneMoistAirEquipped
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped thermalZone(
-                                                             zoneParam=
-    AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
-    T_start=293.15)
+    T_start=293.15,
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

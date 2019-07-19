@@ -4,14 +4,13 @@ model ThermalZoneMoistAir
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir thermalZone(
-                                                             zoneParam=
-    AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
     nPorts=2,
-    T_start=293.15)
+    T_start=293.15,
+    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -146,6 +145,8 @@ model ThermalZoneMoistAir
   Fluid.Sources.FixedBoundary sinAir(redeclare package Medium = Media.Air,
       nPorts=1)
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi
+    annotation (Placement(transformation(extent={{-46,-26},{-26,-6}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
@@ -184,6 +185,20 @@ equation
           255}));
   connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{2.35,
           -7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,127,255}));
+  connect(weaBus.pAtm, x_pTphi.p_in) annotation (Line(
+      points={{-61,-4},{-62,-4},{-62,-10},{-48,-10}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.TDryBul, x_pTphi.T) annotation (Line(
+      points={{-61,-4},{-62,-4},{-62,-16},{-48,-16}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.relHum, x_pTphi.phi) annotation (Line(
+      points={{-61,-4},{-62,-4},{-62,-22},{-48,-22}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(x_pTphi.X[1], thermalZone.ventHum) annotation (Line(points={{-25,-16},
+          {-18,-16},{-18,-6.7},{-11.3,-6.7}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),
