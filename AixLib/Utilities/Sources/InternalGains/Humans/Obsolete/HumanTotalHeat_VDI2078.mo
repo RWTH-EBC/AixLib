@@ -1,7 +1,8 @@
-within AixLib.Utilities.Sources.InternalGains.Humans;
+within AixLib.Utilities.Sources.InternalGains.Humans.Obsolete;
 model HumanTotalHeat_VDI2078
-  "Model for sensible and latent heat output after VDI 2078 "
-  extends HumanSensibleHeat_VDI2078(thermalCollector(m=2));
+  "Model for sensible and latent heat output after VDI 2078"
+  extends Obsolete.HumanSensibleHeat_VDI2078(
+                                    thermalCollector(m=2));
   Modelica.Blocks.Math.MultiProduct productMoistureOutput(nu=2)
     annotation (Placement(transformation(extent={{-22,70},{-2,90}})));
   Modelica.Blocks.Interfaces.RealOutput MoistGain "in kg/s"
