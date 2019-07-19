@@ -38,8 +38,10 @@ model MoistureGains
         enthalpyOfEvaporation + cp_steam*(temperatureSensor.T - 273.15))
     annotation (Placement(transformation(extent={{56,-44},{36,-24}})));
 protected
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860;
-  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation = 2500E3;
+  constant Modelica.SIunits.SpecificHeatCapacity cp_steam = AixLib.Utilities.Psychrometrics.Constants.cpSte
+    "specific heat capacity of steam";
+  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation = AixLib.Utilities.Psychrometrics.Constants.h_fg
+    "enthalpy of vaporization";
 equation
   connect(MoistureGain.y, squareMetre.u)
     annotation (Line(points={{-59,10},{-32,10}}, color={0,0,127}));
