@@ -76,7 +76,6 @@ model Wall
     l=wall_length,
     T0=T0,
     clearance=clearance,
-    selectable=true,
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
@@ -110,7 +109,7 @@ model Wall
         rotation=180,
         origin={69,-1})));
   BaseLib.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor if outside and withWindow and withSunblind
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
 equation

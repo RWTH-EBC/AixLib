@@ -4,20 +4,19 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l = 4 "Length" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
-  parameter Boolean selectable = false
-    "Determines if wall type is set manually (false) or by definitions (true)"                                    annotation(Dialog(group = "Structure of wall layers"));
-  parameter DataBase.Walls.WallBaseDataDefinition wallType = DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
-    "Type of wall"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = selectable), choicesAllMatching = true);
-  parameter Integer n(min = 1) = if selectable then wallType.n else 8
-    "Number of layers"                                                                   annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.Thickness d[n] = if selectable then wallType.d else fill(0.1, n)
-    "Thickness"                                                                                           annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.Density rho[n] = if selectable then wallType.rho else fill(1600, n)
-    "Density"                                                                                              annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n] = if selectable then wallType.lambda else fill(2.4, n)
-    "Thermal conductivity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n] = if selectable then wallType.c else fill(1000, n)
-    "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
+    replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    wallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
+    "Type of wall"                                                                                                     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{48,-98},{68,-78}})));
+  final parameter Integer n(min = 1) = wallType.n
+    "Number of layers"                                                                   annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.Thickness d[n] = wallType.d
+    "Thickness"                                                                                           annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.Density rho[n] = wallType.rho
+    "Density"                                                                                              annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.ThermalConductivity lambda[n] = wallType.lambda
+    "Thermal conductivity"                                                                                                     annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.SpecificHeatCapacity c[n] = wallType.c
+    "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers"));
   // which orientation of surface?
   parameter Integer surfaceOrientation = 1 "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
         "vertical",                                                                                                    choice = 2
@@ -30,7 +29,7 @@ model ConvNLayerClearanceStar
       choice=3 "Constant hConv",radioButtons = true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2 "Constant heat transfer coefficient"    annotation(Dialog(group="Convection",   enable=
           calcMethodHConv == 1));
-  parameter Modelica.SIunits.Emissivity eps = if selectable then wallType.eps else 0.95
+  parameter Modelica.SIunits.Emissivity eps = wallType.eps
     "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
@@ -59,12 +58,8 @@ model ConvNLayerClearanceStar
             {110,10}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
     final A=A,
-    final n=n,
-    final d=d,
-    final rho=rho,
-    final lambda=lambda,
-    final c=c,
-    final T0=T0)
+    final T0=T0,
+    final wallRec=wallType)
     annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
 protected

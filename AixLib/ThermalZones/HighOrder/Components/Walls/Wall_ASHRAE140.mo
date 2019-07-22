@@ -100,7 +100,6 @@ public
     l=wall_length,
     T0=T0,
     clearance=clearance,
-    selectable=true,
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,

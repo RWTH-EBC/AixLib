@@ -12,11 +12,11 @@ package AixLib
 
   annotation (
   uses(
-    Modelica(version="3.2.2"),
     Modelica_DeviceDrivers(version="1.4.4"),
-    Modelica_Synchronous(version="0.92.1"),
     NcDataReader2(version="2.4.0"),
-    SDF(version="0.4.0")),
+    SDF(version="0.4.0"),
+    Modelica(version="3.2.3"),
+    Modelica_Synchronous(version="0.92.2")),
   version = "0.7.9",
   conversion(from(
     version="0.3.2", script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_0.3.2_to_0.4.mos",

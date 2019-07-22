@@ -2,12 +2,12 @@ within AixLib.DataBase.Walls;
 record WallBaseDataDefinition "Wall base data definition"
   extends Modelica.Icons.Record;
   // pma 2010-04-28: REMOVED THE BASE DEFINITIONS to get errors thrown when using unparameterised wall models
-  parameter Integer n(min = 1) = 3 "Number of wall layers" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.Length d[n] "Thickness of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
-  parameter Modelica.SIunits.Density rho[n] "Density of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n]
+  parameter Integer n(min = 1) "Number of wall layers" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
+  parameter Modelica.SIunits.Length d[:] "Thickness of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
+  parameter Modelica.SIunits.Density rho[:] "Density of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
+  parameter Modelica.SIunits.ThermalConductivity lambda[:]
     "Thermal conductivity of wall layers"                                                        annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n]
+  parameter Modelica.SIunits.SpecificHeatCapacity c[:]
     "Specific heat capacity of wall layers"                                                    annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
   parameter Modelica.SIunits.Emissivity eps = 0.95
     "Emissivity of inner wall surface"                                                annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));

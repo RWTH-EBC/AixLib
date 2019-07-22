@@ -25,8 +25,7 @@ public
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby
-    AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+  AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
