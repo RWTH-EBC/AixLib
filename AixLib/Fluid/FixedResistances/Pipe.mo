@@ -171,8 +171,8 @@ protected
         iconTransformation(extent={{-46,20},{40,38}})));
 
 public
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes)
-    if Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
+       Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

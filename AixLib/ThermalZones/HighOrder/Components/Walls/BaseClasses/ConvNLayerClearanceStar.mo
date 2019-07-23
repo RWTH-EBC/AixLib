@@ -23,13 +23,14 @@ model ConvNLayerClearanceStar
         "vertical",                                                                                                    choice = 2
         "horizontal facing up",                                                                                                    choice = 3
         "horizontal facing down",                                                                                                    radioButtons = true));
-  parameter Integer calcMethodHConv=1 "Choose the model for calculation of heat convection at inside surface"
-                                                                            annotation (Dialog(descriptionLabel = true), choices(
-      choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
+        descriptionLabel=true), choices(
+      choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant hConv",radioButtons = true));
+      choice=3 "Constant hCon (constant)",
+      radioButtons=true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
-          calcMethodHConv == 1));
+          calcMethod == 1));
   parameter Modelica.SIunits.Emissivity eps = if selectable then wallType.eps else 0.95
     "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
@@ -41,7 +42,7 @@ model ConvNLayerClearanceStar
     hCon_const=hCon_const,
     A=A,
     surfaceOrientation=surfaceOrientation,
-    calcMethodHConv=calcMethodHConv)
+    calcMethod=calcMethod)
     annotation (Placement(transformation(
         origin={62,0},
         extent={{-10,-10},{10,10}},

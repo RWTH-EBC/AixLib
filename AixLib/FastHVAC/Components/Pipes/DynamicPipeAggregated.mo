@@ -71,9 +71,9 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
                                                                 annotation (Dialog( enable=withConvection));
  parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
  annotation (Dialog( enable = withRadiation));
-  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+  parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"       annotation(Dialog(enable=not
-          calcHConv));
+          calcHCon));
     final parameter Modelica.SIunits.Area AOutside = if not withInsulation then Modelica.Constants.pi*outerDiameter*length else Modelica.Constants.pi*(outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
 
   /* *******************************************************************
@@ -133,7 +133,7 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     nNodes=nNodes,
     length=length,
     hConIn_const=hConIn_const,
-    calcHConv=calcHConv) annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
+    calcHCon=calcHCon) annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
 protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{36,44},{76,52}}),

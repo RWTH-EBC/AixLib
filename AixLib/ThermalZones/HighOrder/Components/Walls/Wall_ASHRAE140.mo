@@ -24,22 +24,27 @@ model Wall_ASHRAE140
   parameter Real solar_absorptance=0.25
     "Solar absorptance coefficient of outside wall surface"  annotation(Dialog(tab="Surface Parameters", group = "Outside surface", enable = outside));
 
-  parameter Integer Model =  1
-    "Choose the model for calculation of heat convection at outside surface"
-    annotation(Dialog(tab = "Surface Parameters",  group = "Outside surface", enable = outside, compact = true), choices(choice=1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals", choice = 3 "Custom hConv",radioButtons =  true));
+  parameter Integer calcMethod=1 "Calculation method for convectice heat transfer coeffient at outside surface"    annotation (Dialog(
+      tab="Surface Parameters",
+      group="Outside surface",
+      enable=outside,
+      compact=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=25
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
                                                                                annotation(Dialog(tab="Surface Parameters", group=
-          "Outside surface",                                                                                                                          enable=Model ==
-          3 and outside));
+          "Outside surface",                                                                                                                          enable=
+          calcMethod == 3 and outside));
     parameter
     AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     surfaceType =    AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type of outside wall"
-    annotation(Dialog(tab="Surface Parameters",group = "Outside surface",  enable= Model == 2 and outside), choicesAllMatching = true);
+    annotation(Dialog(tab="Surface Parameters",group = "Outside surface",  enable=calcMethod == 2 and outside),
+                                                                                                            choicesAllMatching = true);
 
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters",  group = "Inside surface", compact = true, descriptionLabel = true), choices(choice=1
         "vertical wall",                                                                                                    choice = 2 "floor",
@@ -106,8 +111,7 @@ public
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
-    HeatConv1(calcMethodHConv=
-                         2)) "Wall"          annotation (Placement(
+    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
@@ -117,7 +121,7 @@ public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside
     annotation (Placement(transformation(extent={{-108,-6},{-88,14}}), iconTransformation(extent={{-31,-10},{-11,10}})));
 
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model ==2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethod == 1 or calcMethod == 2)
     annotation (Placement(transformation(extent={{-113,54},{-93,74}}), iconTransformation(extent={{-31,78},{-11,98}})));
 
   AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind Sunblind(
@@ -141,7 +145,7 @@ public
     annotation (Placement(transformation(extent={{-15,-48},{11,-22}})));
   Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
-    calcMethodHConv=Model,
+    calcMethod=calcMethod,
     surfaceType=surfaceType,
     hCon_const=hCon_const) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
 
@@ -223,7 +227,7 @@ if (outside) then
       color={191,0,0}));
 
   //heat convection on the outside
-  if Model == 1 or Model == 2 then
+    if calcMethod == 1 or calcMethod == 2 then
     connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation (Line(
       points={{-103,64},{-68,64},{-68,50.8},{-46.2,50.8}},
       color={0,0,127}));

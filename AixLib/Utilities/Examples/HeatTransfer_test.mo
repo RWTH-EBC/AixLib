@@ -8,9 +8,9 @@ model HeatTransfer_test "Test routine for heat transfer models"
     A=16,
     hCon_const=2,
     surfaceOrientation=2,
-    calcMethodHConv=1) annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
+    calcMethod=1) annotation (Placement(transformation(extent={{-10,-18},{10,2}})));
   HeatTransfer.HeatConvOutside heatTransfer_Outside(
-    calcMethodHConv=1,
+    calcMethod=1,
     A=16,
     hCon_const=25,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()) annotation (Placement(transformation(extent={{-10,-38},{10,-18}})));

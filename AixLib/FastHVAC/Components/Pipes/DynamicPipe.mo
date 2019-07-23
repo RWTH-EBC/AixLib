@@ -71,9 +71,9 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
                                                                 annotation (Dialog( enable=withConvection));
  parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
  annotation (Dialog( enable = withRadiation));
-  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+  parameter Boolean calcHCon=true "Use calculated value for inside heat transfer coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"       annotation(Dialog(enable=not
-          calcHConv));
+          calcHCon));
 
   /* *******************************************************************
       Components
@@ -131,7 +131,7 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     nNodes=nNodes,
     length=length,
     hConIn_const=hConIn_const,
-    calcHConv=calcHConv) annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
+    calcHCon=calcHCon) annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
    //Connect the heat ports from the pipe to the pipe wall
       for i in 1:nNodes loop

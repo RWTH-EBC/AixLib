@@ -2,7 +2,7 @@ within AixLib.Utilities.Examples;
 model HeatConv_outside
   extends Modelica.Icons.Example;
   HeatTransfer.HeatConvOutside heatTransfer_Outside(
-    calcMethodHConv=3,
+    calcMethod=3,
     A=16,
     hCon_const=25) annotation (Placement(transformation(extent={{-24,-2},{2,24}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature Tinside annotation(Placement(transformation(extent = {{40, 20}, {20, 40}})));

@@ -1,29 +1,29 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvInside
   "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
-  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient hConvCustom
+  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient hCon_const
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
-  parameter Integer calcMethodHConv=2 "Calculation Method"
-                                                      annotation (Dialog(
-        descriptionLabel=true), choices(
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (
+    Dialog(descriptionLabel=true),
+    choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
-      choice=3 "Constant hConv",
+      choice=3 "Custom hCon (constant)",
       radioButtons=true),
-      Evaluate=true);
+    Evaluate=true);
 
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
                                          annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethodHConv == 3 then true else false));
+        enable=if calcMethod == 3 then true else false));
 
   parameter Modelica.SIunits.TemperatureDifference dT_small = 1 "Linearized function around dT = 0 K +/-" annotation (Dialog(descriptionLabel=true,
-        enable=if calcMethodHConv == 1 then true else false));
+        enable=if calcMethod == 1 then true else false));
 
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation (
-      Dialog(descriptionLabel=true, enable=if calcMethodHConv == 3 then false else true),
+      Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
       choices(
       choice=1 "vertical",
       choice=2 "horizontal facing up",
@@ -44,8 +44,8 @@ equation
   */
 
   // ++++++++++++++++EN ISO 6946 Appendix A >>Flat Surfaces<<++++++++++++++++
-  // upward heat flow: hConv = 5, downward heat flow: hConv = 0.7, horizontal heat flow: hConv = 2.5
-  if calcMethodHConv == 1 then
+  // upward heat flow: hCon = 5, downward heat flow: hCon = 0.7, horizontal heat flow: hCon = 2.5
+  if calcMethod == 1 then
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
@@ -70,10 +70,10 @@ equation
 
   // ++++++++++++++++Bernd Glueck++++++++++++++++
   // (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
-  // upward heat flow: hConv = 2*(posDiff^0.31)          - equation 1.27, page 26
-  // downward heat flow: hConv = 0.54*(posDiff^0.31)     - equation 1.28, page 26
-  // horizontal heat flow: hConv = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
-  elseif calcMethodHConv == 2 then
+  // upward heat flow: hCon = 2*(posDiff^0.31)          - equation 1.27, page 26
+  // downward heat flow: hCon = 0.54*(posDiff^0.31)     - equation 1.28, page 26
+  // horizontal heat flow: hCon = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
+  elseif calcMethod == 2 then
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
@@ -88,7 +88,7 @@ equation
       hCon = 1.6*(posDiff^0.3);
     end if;
 
-  // ++++++++++++++++hConvCustom++++++++++++++++
+  // ++++++++++++++++hCon_const++++++++++++++++
   else
     hCon = hCon_const;
   end if;
@@ -271,14 +271,14 @@ equation
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>The <b>HeatConvInside</b> model represents the phenomenon of heat convection at inside surfaces of walls, with different choice for surface orientation. </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>In this model the surface orientation can be chosen from a menu for an easier adoption to new situations. Following methods to calculate the<b> heat convection coefficient </b><span style=\"font-family: Courier New;\">hConv</span> can be chosen:</p>
+<p>In this model the surface orientation can be chosen from a menu for an easier adoption to new situations. Following methods to calculate the<b> heat convection coefficient </b><code>hCon</span> can be chosen:</p>
 <ol>
-<li>EN ISO 6946: <span style=\"font-family: Courier New;\">hConv</span> depends on the direction of heat transfer (horizontal: <span style=\"font-family: Courier New;\">hConv</span>= 2.5 m^2 K/W, upwards: <span style=\"font-family: Courier New;\">hConv</span>= 5 m^2 K/W, downwards: <span style=\"font-family: Courier New;\">hConv</span>=0.7 m^2 K/W, EN ISO 6946 table C.1). Switching the heat convection coefficient due to a chance of direction of heat transfer would lead to a state event. This would force the solver to solve a totally changed equation system and extend the calculation time. Therefore the <span style=\"font-family: Courier New;\">regStep</span> function is used to get a continous and differenciable expression. If the temperature difference between<span style=\"font-family: Courier New;\"> port_b</span> and <span style=\"font-family: Courier New;\">port_a</span> is between -<span style=\"font-family: Courier New;\">dT_small</span> and <span style=\"font-family: Courier New;\">dT_small</span> a 2nd order polynomial is used for a smooth transition from 5 to 0.7 (facing up) or from 0.7 to 5 (facing down).</li>
-<li>B. Glueck (default): The following equations are used to calculate the heat convection coefficient depending on the direction of heat transfer (p. 26):<br/>horizontal: <span style=\"font-family: Courier New;\">hConv = 1.6 * |port_b.T - port_a.T|^0.3</span><br/>upwards: <span style=\"font-family: Courier New;\">hConv = 2 * |port_b.T - port_a.T|^0.31</span><br/>downwards: <span style=\"font-family: Courier New;\">hConv = 0.54 * |port_b.T - port_a.T|^0.31</span><br/>The smooth function is used in case of changing direction of heat transfer.</li>
-<li>Constant heat convection coefficient: There is also the possibility of setting a constant<span style=\"font-family: Courier New;\"> hConv</span> value (<span style=\"font-family: Courier New;\">hConvCustom</span>).</li>
+<li>EN ISO 6946: <code>hCon</code> depends on the direction of heat transfer (horizontal: <code>hCon</code>= 2.5 m^2 K/W, upwards: <code>hCon</code>= 5 m^2 K/W, downwards: <code>hCon</code>=0.7 m^2 K/W, EN ISO 6946 table C.1). Switching the heat convection coefficient due to a chance of direction of heat transfer would lead to a state event. This would force the solver to solve a totally changed equation system and extend the calculation time. Therefore the <code>regStep</code> function is used to get a continous and differenciable expression. If the temperature difference between<code> port_b</code> and <code>port_a</code> is between -<code>dT_small</code> and <code>dT_small</code> a 2nd order polynomial is used for a smooth transition from 5 to 0.7 (facing up) or from 0.7 to 5 (facing down).</li>
+<li>B. Glueck (default): The following equations are used to calculate the heat convection coefficient depending on the direction of heat transfer (p. 26):<br/>horizontal: <code>hCon = 1.6 * |port_b.T - port_a.T|^0.3</code><br/>upwards: <code>hCon = 2 * |port_b.T - port_a.T|^0.31</code><br/>downwards: <code>hCon = 0.54 * |port_b.T - port_a.T|^0.31</code><br/>The smooth function is used in case of changing direction of heat transfer.</li>
+<li>Constant heat convection coefficient: There is also the possibility of setting a constant<code> hCon</code> value (<code>hCon_const</code>).</li>
 </ol>
 <h4><span style=\"color: #008000\">Limitations</span></h4>
-<p>... of the approaches calculating <span style=\"font-family: Courier New;\">hConv</span>:</p>
+<p>... of the approaches calculating <code>hCon</code>:</p>
 <ul>
 <li><b>EN ISO 6946</b> table C.1 specifies heat convection coefficients <b><span style=\"color: #ee2e2f;\">valid for internal or external surfaces next to highly ventilated air layers</span></b>. An air layer is considered as highly ventilated if the openings between air layer and the environment are at least 1.5 m^2 per m length for vertical air layers and 1.5 m^2 per m^2 surface for horizontal air layers (EN ISO 6946, 6.9.4). Thus, we recommend using the approach according to Glueck.</li>
 <li>The <b>approach according to Glueck combines free with forced convection</b>. Considering Figures 1.14, 1.15 and 1.16 from the cited reference the<b> approach is suitable for TSurface-TAir from -10 K to +30 K</b>.The surface length varies from 1 m to 3 m.</li>
@@ -301,7 +301,7 @@ equation
 <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br />
 Algorithm for HeatConv_inside is now selectable via parameters</li>
 <li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>
-Added EN ISO 6946 equations and corrected usage of constant hConvCustom </li>
+Added EN ISO 6946 equations and corrected usage of constant hCon_const </li>
 <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>
 Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
 <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>

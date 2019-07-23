@@ -11,8 +11,8 @@ model PipeBase
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"        annotation(Dialog(enable=not
-          calcHConv));
-  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
+          calcHCon));
+  parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
     final parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
 
     parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
@@ -55,7 +55,7 @@ model PipeBase
     d_a=fill(parameterPipe.d_o, nNodes),
     A_sur=fill(parameterPipe.d_o*Modelica.Constants.pi*length/nNodes, nNodes),
     medium=fill(medium, nNodes),
-    each calcHConv=calcHConv)
+    each calcHCon=calcHCon)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
