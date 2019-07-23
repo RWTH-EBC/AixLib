@@ -7,29 +7,29 @@ model HeatConvOutside "Model for heat transfer at outside surfaces. Choice betwe
         "ASHRAE Fundamentals (convective + radiative)",                                                                                                    choice = 3
         "Custom hConv",                                                                                                    radioButtons = true));
   parameter Modelica.SIunits.Area A(min=0) "Area of surface" annotation(Dialog(group = "Surface properties", descriptionLabel = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25 "Custom convection heat transfer coeffient"    annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=25 "Custom convective heat transfer coeffient"     annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=
           calcMethodHConv == 3));
   parameter
     DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable=
           calcMethodHConv == 2),                                                                                                                                                                                      choicesAllMatching = true);
   // Variables
-  Modelica.SIunits.CoefficientOfHeatTransfer hConv;
+  Modelica.SIunits.CoefficientOfHeatTransfer hCon "Convection heat transfer coeffient";
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethodHConv == 1 or calcMethodHConv == 2    annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput WindSpeed_internal(unit="m/s");
 equation
   // Main equation of heat transfer
-  port_a.Q_flow =hConv *A*(port_a.T - port_b.T);
+  port_a.Q_flow =hCon*A*(port_a.T - port_b.T);
 
   //Determine convection heat transfer coefficient hConv
   if calcMethodHConv == 1 then
-    hConv = (4 + 4*WindSpeed_internal);
+    hCon = (4 + 4*WindSpeed_internal);
   elseif calcMethodHConv == 2 then
-    hConv = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
+    hCon = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
   else
-    hConv =hConvCustom;
+    hCon = hCon_const;
     WindSpeed_internal = 0;
   end if;
 

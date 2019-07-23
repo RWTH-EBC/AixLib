@@ -8,7 +8,7 @@ model HeatingCoil
 
  parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC=20 "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC=20 "Model assumptions heat transfer coefficient HC <-> Heating Water";
 
   parameter Modelica.SIunits.Temperature T_start "Start Temperature of fluid";
 
@@ -22,7 +22,7 @@ model HeatingCoil
     T_0=T_start,
     length=lengthHC,
     nNodes=dis_HC,
-    hConvInsideFix=hConvInsideFix,
+    hConIn_const=hConIn_const,
     calcHConv=true) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -39,9 +39,8 @@ model HeatingCoil
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-2,50})));
-  AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each hConv=hConvHC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*
-        lengthHC/dis_HC, dis_HC))
-    annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each hCon=hConHC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/
+        dis_HC, dis_HC)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
         origin={-2,76})));
@@ -52,7 +51,7 @@ model HeatingCoil
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
   parameter Boolean calcHConvInside=true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coefficient inside pipe"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coefficient inside pipe"
                                                          annotation(Dialog(enable=not calcHConvInside));
 equation
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(

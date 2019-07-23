@@ -29,7 +29,7 @@ model PanelHeating
         choice=3 "Constant hConv",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
     annotation (Dialog(group="Heat convection",
     descriptionLabel=true,
         enable=if calcMethodHConv == 3 then true else false));
@@ -92,7 +92,7 @@ model PanelHeating
     each final cDown=cDown,
     each final isFloor=isFloor,
     each final calcMethodHConv=calcMethodHConv,
-    each final hConvCustom=hConvCustom) annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
+    each final hCon_const=hCon_const) annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
 
   BaseClasses.PressureDropPH pressureDrop(
     redeclare package Medium = Medium,

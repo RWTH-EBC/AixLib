@@ -30,8 +30,8 @@ model HeatStorage "Simple model of a heat storage"
   inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
   inner parameter Integer n(min=3) = 3 "Model assumptions Number of Layers";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvIn=1500 "Coefficient at the inner wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOut=15 "Coefficient at the outer wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=15 "Heat transfer coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
@@ -42,12 +42,10 @@ model HeatStorage "Simple model of a heat storage"
   parameter Boolean use_heatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC1=20 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
-                                                                           annotation(Dialog(enable=use_heatingCoil1,  tab=
-          "Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvHC2=400 "Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
-                                                                           annotation(Dialog(enable=use_heatingCoil2,  tab=
-          "Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC1=20 "Model assumptions heat transfer coefficient HC1 <-> Heating Water"
+                                                                           annotation(Dialog(enable=use_heatingCoil1,  tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC2=400 "Model assumptions heat transfer coefficient HC2 <-> Heating Water"
+                                                                           annotation(Dialog(enable=use_heatingCoil2,  tab="Heating Coils and Rod"));
   parameter Boolean Up_to_down_HC1 = true
     "Heating Coil 1 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
@@ -56,7 +54,7 @@ model HeatStorage "Simple model of a heat storage"
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
   parameter Boolean calcHConvInside=true "Use calculated value for inside heat coefficient"
                                                       annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coefficient inside pipe"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coefficient inside pipe"
                                                          annotation(Dialog(enable=not calcHConvInside,       tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                            annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
@@ -162,7 +160,7 @@ public
   AixLib.FastHVAC.Components.Storage.BaseClasses.HeatingCoil heatingCoil1(
     T_start=T_start,
     dis_HC=dis_HC1,
-    hConvHC=hConvHC1,
+    hConHC=hConHC1,
     medium_HC=mediumHC1,
     lengthHC=data.lengthHC1,
     pipeRecordHC=data.pipeHC1) if use_heatingCoil1
@@ -173,7 +171,7 @@ public
   AixLib.FastHVAC.Components.Storage.BaseClasses.HeatingCoil heatingCoil2(
     T_start=T_start,
     dis_HC=dis_HC2,
-    hConvHC=hConvHC2,
+    hConHC=hConHC2,
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
     pipeRecordHC=data.pipeHC2) if use_heatingCoil2

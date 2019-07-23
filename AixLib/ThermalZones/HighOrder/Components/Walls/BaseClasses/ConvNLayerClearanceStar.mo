@@ -28,7 +28,7 @@ model ConvNLayerClearanceStar
       choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
       choice=3 "Constant hConv",radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2 "Constant heat transfer coefficient"    annotation(Dialog(group="Convection",   enable=
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
           calcMethodHConv == 1));
   parameter Modelica.SIunits.Emissivity eps = if selectable then wallType.eps else 0.95
     "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
@@ -38,7 +38,7 @@ model ConvNLayerClearanceStar
   // n Loads
   Utilities.HeatTransfer.HeatConvInside HeatConv1(
     port_b(T(start=T0)),
-    hConvCustom=hConv_const,
+    hCon_const=hCon_const,
     A=A,
     surfaceOrientation=surfaceOrientation,
     calcMethodHConv=calcMethodHConv)

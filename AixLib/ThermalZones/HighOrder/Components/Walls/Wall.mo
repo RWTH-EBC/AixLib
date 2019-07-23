@@ -20,8 +20,8 @@ model Wall
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals",                                                                                                    choice = 3
         "Custom hConv",                                                                                                    radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25
-    "Custom hConv for convection (just for manual selection, not recommended)"                                                                      annotation(Dialog(tab=
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut_const=25
+    "Custom convective heat transfer coefficient (just for manual selection, not recommended)"                                                      annotation(Dialog(tab=
           "Surface Parameters",                                                                                                                                                                   group=
           "Outside surface",                                                                                                                                                                                                 enable=Model ==
           3 and outside));
@@ -33,8 +33,10 @@ model Wall
                                                                             annotation(Dialog(tab="Surface Parameters",   group="Inside surface",   compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
       choice=3 "Constant hConv",radioButtons = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_const=2.5
-    "Constant hConv for convection (just for manual selection, not recommended)" annotation(Dialog(tab="Surface Parameters",   group="Inside surface",   enable=
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=2.5
+    "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
+                                                                                 annotation(Dialog(tab="Surface Parameters",   group=
+          "Inside surface",                                                                                                                              enable=
           calcMethodHConv == 3));
   // window parameters
   parameter Boolean withWindow = false
@@ -81,7 +83,7 @@ model Wall
     wallType=WallType,
     surfaceOrientation=ISOrientation,
     calcMethodHConv=calcMethodHConv,
-    hConv_const=hConv_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
+    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
   BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -104,7 +106,7 @@ model Wall
     A=wall_length*wall_height - clearance,
     calcMethodHConv=Model,
     surfaceType=surfaceType,
-    hConvCustom=hConvCustom) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+    hCon_const=hConOut_const) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
   BaseLib.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=180,

@@ -7,7 +7,8 @@ model HeatConvPipeInside
   parameter Modelica.SIunits.Length d_a(min=0) "outer diameter of pipe";
   parameter Modelica.SIunits.Area A_sur(min=0) "surface for heat transfer";
   parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30   annotation(Dialog(enable=not calcHConv));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Constant convective heat transfer coefficient (Inside)"
+                                                                           annotation(Dialog(enable=not calcHConv));
   parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple();
     Modelica.SIunits.ReynoldsNumber Re;
@@ -50,7 +51,7 @@ equation
     Nu_tur=0;
     Nu=0;
     end if;
-  hConv    =if calcHConv then Nu*medium.lambda/d_i else hConvInsideFix;
+  hConv    =if calcHConv then Nu*medium.lambda/d_i else hConIn_const;
   port_a.Q_flow =hConv  * A_sur * (port_a.T - port_b.T);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,   extent={{-100,

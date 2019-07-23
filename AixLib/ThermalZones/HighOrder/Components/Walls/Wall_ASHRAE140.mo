@@ -30,8 +30,10 @@ model Wall_ASHRAE140
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals", choice = 3 "Custom hConv",radioButtons =  true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25
-    "Custom hConv for convection (just for manual selection, not recommended)" annotation(Dialog(tab="Surface Parameters", group="Outside surface",   enable=Model ==
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=25
+    "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
+                                                                               annotation(Dialog(tab="Surface Parameters", group=
+          "Outside surface",                                                                                                                          enable=Model ==
           3 and outside));
     parameter
     AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
@@ -141,7 +143,7 @@ public
     A=wall_length*wall_height - clearance,
     calcMethodHConv=Model,
     surfaceType=surfaceType,
-    hConvCustom=hConvCustom) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+    hCon_const=hCon_const) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
 
   Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},

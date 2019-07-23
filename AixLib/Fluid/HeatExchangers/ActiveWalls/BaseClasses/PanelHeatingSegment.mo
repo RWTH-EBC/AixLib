@@ -29,7 +29,7 @@ parameter HeatCapacityPerArea cDown;
         choice=3 "Constant alpha",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Constant heat transfer coefficient"
     annotation (Dialog(group="Heat convection",
     descriptionLabel=true,
         enable=if calcMethodHConv == 3 then true else false));
@@ -61,7 +61,7 @@ parameter HeatCapacityPerArea cDown;
   Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
     final calcMethodHConv=calcMethodHConv,
-    final hConvCustom=hConvCustom,
+    final hCon_const=hCon_const,
     surfaceOrientation=if isFloor then 2 else 1)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

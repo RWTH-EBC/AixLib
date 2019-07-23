@@ -14,7 +14,7 @@ model HeatConvInside
       radioButtons=true),
       Evaluate=true);
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
                                          annotation (Dialog(descriptionLabel=true,
         enable=if calcMethodHConv == 3 then true else false));
 
@@ -31,7 +31,7 @@ model HeatConvInside
       radioButtons=true),
       Evaluate=true);
   parameter Modelica.SIunits.Area A(min=0) "Area of surface";
-  Modelica.SIunits.CoefficientOfHeatTransfer hConv "variable heat transfer coefficient";
+  Modelica.SIunits.CoefficientOfHeatTransfer hCon "variable heat transfer coefficient";
 
 protected
   Modelica.SIunits.Temp_C posDiff=noEvent(abs(port_b.T - port_a.T))
@@ -49,21 +49,23 @@ equation
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      hConv = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
         y1=5,
         y2=0.7,
         x_small=dT_small);
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      hConv = Modelica.Fluid.Utilities.regStep(x=port_b.T - port_a.T,
+      hCon = Modelica.Fluid.Utilities.regStep(
+        x=port_b.T - port_a.T,
         y1=0.7,
         y2=5,
         x_small=dT_small);
 
     // vertical
     else
-      hConv = 2.5;
+      hCon = 2.5;
     end if;
 
   // ++++++++++++++++Bernd Glueck++++++++++++++++
@@ -75,23 +77,23 @@ equation
 
     // floor (horizontal facing up)
     if surfaceOrientation == 2 then
-      hConv = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
+      hCon = smooth(2, noEvent(if port_b.T >= port_a.T then 2*(posDiff^0.31) else 0.54*(posDiff^0.31)));
 
     // ceiling (horizontal facing down)
     elseif surfaceOrientation == 3 then
-      hConv = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
+      hCon = smooth(2, noEvent(if port_b.T >= port_a.T then 0.54*(posDiff^0.31) else 2*(posDiff^0.31)));
 
     // vertical plate
     else
-      hConv = 1.6*(posDiff^0.3);
+      hCon = 1.6*(posDiff^0.3);
     end if;
 
   // ++++++++++++++++hConvCustom++++++++++++++++
   else
-    hConv =hConvCustom;
+    hCon = hCon_const;
   end if;
 
-  port_a.Q_flow =hConv *A*(port_a.T - port_b.T);
+  port_a.Q_flow =hCon*A*(port_a.T - port_b.T);
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,

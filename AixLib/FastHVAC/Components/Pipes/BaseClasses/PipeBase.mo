@@ -10,7 +10,7 @@ model PipeBase
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coeffiecient inside pipe"      annotation(Dialog(enable=not
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"        annotation(Dialog(enable=not
           calcHConv));
   parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
     final parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
@@ -49,7 +49,7 @@ model PipeBase
     annotation (Placement(transformation(extent={{-18,58},{22,66}}),
         iconTransformation(extent={{-44,40},{42,58}})));
   Utilities.HeatTransfer.HeatConvPipeInside heatConvPipeInside[nNodes](
-    each hConvInsideFix=hConvInsideFix,
+    each hConIn_const=hConIn_const,
     d_i=fill(parameterPipe.d_i, nNodes),
     length=fill(length, nNodes),
     d_a=fill(parameterPipe.d_o, nNodes),
