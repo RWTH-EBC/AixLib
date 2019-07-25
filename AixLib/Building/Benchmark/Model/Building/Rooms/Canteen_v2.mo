@@ -75,11 +75,11 @@ model Canteen_v2
     windowarea=60,
     withSunblind=false,
     outside=false,
-    wall_length=20,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
     withDoor=false,
+    wall_length=30,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
