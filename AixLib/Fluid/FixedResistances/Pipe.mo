@@ -119,7 +119,6 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     redeclare model HeatTransfer =
    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (
     alpha0=hConv_i))
-
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
 
     // Parameter Tab "Initialisation"
@@ -174,8 +173,8 @@ protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{18,38},{58,46}}),
         iconTransformation(extent={{-46,20},{40,38}})));
-public
 
+public
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hConv=fill(hConv,
         nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
                                      Heat_Loss_To_Ambient and not withInsulation and not isEmbedded
