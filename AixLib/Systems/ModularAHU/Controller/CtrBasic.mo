@@ -1,17 +1,19 @@
 within AixLib.Systems.ModularAHU.Controller;
-block CtrBasic "controller for mixed cooling circuit "
+block CtrBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
+  parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
   parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer";
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Modelica.SIunits.Temperature T_amb = 293.15 "ambient temperature";
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
+  parameter Boolean reverseAction = false
+    "Set to true for throttling the water flow rate through a cooling coil controller";
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation(Dialog(group="PID"));
@@ -20,49 +22,68 @@ block CtrBasic "controller for mixed cooling circuit "
     annotation(Dialog(group="PID"));
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
-  Controls.Continuous.LimPID        PID(
-    yMax=1,
-    yMin=0,
-    controllerType=Modelica.Blocks.Types.SimpleController.PID,
-    k=k,
-    Ti=Ti,
-    Td=Td,
-    initType=initType,
-    xi_start=xi_start,
-    xd_start=xd_start,
-    y_start=y_start,
-    reverseAction=reverseAction)
+  Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
+    "Connector of second Real input signal"
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  AixLib.Controls.Continuous.LimPID PID(
+    final yMax=1,
+    final yMin=0,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+    final k=k,
+    final Ti=Ti,
+    final Td=Td,
+    final initType=initType,
+    final xi_start=xi_start,
+    final xd_start=xd_start,
+    final y_start=y_start,
+    final reverseAction=reverseAction)
             annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(
-                                                        y=rpm_pump)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-  Modelica.Blocks.Interfaces.RealInput Tset "Input signal connector"
-    annotation (Placement(transformation(extent={{-122,-40},{-82,0}})));
+  Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant
+    annotation (Placement(transformation(extent={{60,20},{80,40}})));
   BaseClasses.registerBus registerBus annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{68,-14},{96,
             14}})));
-  parameter Boolean reverseAction=false
-    "Set to true for throttling the water flow rate through a cooling coil controller";
 equation
-  connect(realExpression1.y, registerBus.hydraulicBus.pumpBus.rpm_Input)
-    annotation (Line(points={{11,0},{52,0},{52,0.13},{101.135,0.13}}, color={0,
-          0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
+
+    connect(PID.u_s, Tset) annotation (Line(
+      points={{-18,-50},{-47.1,-50},{-47.1,0},{-120,0}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+    connect(constTflowSet.y, PID.u_s) annotation (Line(
+      points={{-79,-50},{-18,-50}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+
   connect(PID.y, registerBus.hydraulicBus.valSet) annotation (Line(points={{5,
           -50},{101.135,-50},{101.135,0.13}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
-  connect(PID.u_s, Tset) annotation (Line(points={{-18,-50},{-56,-50},{-56,-20},
-          {-102,-20}}, color={0,0,127}));
-  connect(PID.u_m, registerBus.Tair_out) annotation (Line(points={{-6,-62},{-6,
-          -88},{101.135,-88},{101.135,0.13}}, color={0,0,127}), Text(
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpm_Input)
+    annotation (Line(points={{41,0},{72,0},{72,0.13},{101.135,0.13}}, color={0,
+          0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onOff_Input)
+    annotation (Line(points={{81,30},{86,30},{86,32},{101.135,32},{101.135,0.13}},
+        color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PID.u_m, registerBus.Tair_out) annotation (Line(points={{-6,-62},{-8,
+          -62},{-8,-80},{100,-80},{100,0.13},{101.135,0.13}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},
@@ -86,13 +107,15 @@ equation
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Admix")}),Diagram(coordinateSystem(preserveAspectRatio=
+          textString="Control")}),
+                                Diagram(coordinateSystem(preserveAspectRatio=
             false)),
     Documentation(revisions="<html>
 <ul>
-<li>October 25, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+<li>August 1, 2019, by Alexander K&uuml;mpel:<br/>Improvement.</li>
+<li>October 18, 2018, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for register with admix circuit.</p>
+<p>Simple controller for heating and cooling registers. The controlled variable is the air outflow temperature T_air_out. The pump (if existing in hydraulic circuit) operates at constant frequency and is always on.</p>
 </html>"));
 end CtrBasic;
