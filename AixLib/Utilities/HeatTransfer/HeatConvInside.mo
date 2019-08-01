@@ -271,7 +271,7 @@ equation
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>The <b>HeatConvInside</b> model represents the phenomenon of heat convection at inside surfaces of walls, with different choice for surface orientation. </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>In this model the surface orientation can be chosen from a menu for an easier adoption to new situations. Following methods to calculate the<b> heat convection coefficient </b><code>hCon</span> can be chosen:</p>
+<p>In this model the surface orientation can be chosen from a menu for an easier adoption to new situations. Following methods to calculate the<b> heat convection coefficient </b><code>hCon</code> can be chosen:</p>
 <ol>
 <li>EN ISO 6946: <code>hCon</code> depends on the direction of heat transfer (horizontal: <code>hCon</code>= 2.5 m^2 K/W, upwards: <code>hCon</code>= 5 m^2 K/W, downwards: <code>hCon</code>=0.7 m^2 K/W, EN ISO 6946 table C.1). Switching the heat convection coefficient due to a chance of direction of heat transfer would lead to a state event. This would force the solver to solve a totally changed equation system and extend the calculation time. Therefore the <code>regStep</code> function is used to get a continous and differenciable expression. If the temperature difference between<code> port_b</code> and <code>port_a</code> is between -<code>dT_small</code> and <code>dT_small</code> a 2nd order polynomial is used for a smooth transition from 5 to 0.7 (facing up) or from 0.7 to 5 (facing down).</li>
 <li>B. Glueck (default): The following equations are used to calculate the heat convection coefficient depending on the direction of heat transfer (p. 26):<br/>horizontal: <code>hCon = 1.6 * |port_b.T - port_a.T|^0.3</code><br/>upwards: <code>hCon = 2 * |port_b.T - port_a.T|^0.31</code><br/>downwards: <code>hCon = 0.54 * |port_b.T - port_a.T|^0.31</code><br/>The smooth function is used in case of changing direction of heat transfer.</li>
@@ -295,7 +295,7 @@ equation
 <li><i>May 30, 2019</i>  by Katharina Brinkmann / Philipp Mehrfeld:<br/>
 <a href=\"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br/>
 - add smooth + noEvent functions<br/>
-- ISO approach now linearized when heat flow reverses (depending on newly introduced <span style=\"font-family: Courier New;\">dT_small</span>)<br/>
+- ISO approach now linearized when heat flow reverses (depending on newly introduced <code>dT_small</code>)<br/>
 - Approach acc. to Glueck can change heat flow during simulation.<br/>
 - Standard Calculation Method now &quot;Glueck&quot; due to faster simulation speed</li>
 <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br />
