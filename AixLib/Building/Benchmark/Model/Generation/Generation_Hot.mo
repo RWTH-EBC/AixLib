@@ -38,10 +38,10 @@ model Generation_Hot
     TSetIn=true,
     redeclare package Medium = Medium_Water,
     minCapacity=24,
-    m_flow_nominal=m_flow_nominal_generation_hot,
     transferHeat=true,
     param=DataBase.CHP.CHP_FMB_31_GSK(),
     m_flow_small=0.0001,
+    final m_flow_nominal=m_flow_nominal_generation_hot,
     TAmb=298.15)
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
 

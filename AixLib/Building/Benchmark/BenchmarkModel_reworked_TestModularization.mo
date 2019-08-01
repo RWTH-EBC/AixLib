@@ -1,5 +1,6 @@
 within AixLib.Building.Benchmark;
 package BenchmarkModel_reworked_TestModularization
+  extends Modelica.Icons.ExamplesPackage;
   model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
 
     parameter Modelica.SIunits.Length Room_Lenght={30,30,5,5,30}
@@ -46,7 +47,7 @@ package BenchmarkModel_reworked_TestModularization
     parameter Modelica.SIunits.Volume Room_V=Room_Lenght*Room_Height*Room_Width;
 
   public
-    AixLib.Building.Components.Walls.Wall_ASHRAE140 outerWall_South(
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_South(
       withDoor=false,
       WallType=TypOW,
       T0=T0_OW,
@@ -129,7 +130,7 @@ package BenchmarkModel_reworked_TestModularization
                          airload(
       V=Room_V,
       c=1005) annotation (Placement(transformation(extent={{10,-18},{28,0}})));
-    Utilities.Interfaces.Adaptors.HeatStarToComb
+    Utilities.Interfaces.Adaptors.ConvRadToCombPort
                                                thermStar_Demux annotation (
         Placement(transformation(
           extent={{-10,8},{10,-8}},
@@ -223,8 +224,7 @@ package BenchmarkModel_reworked_TestModularization
         points={{-23.2,80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}},
         color={0,0,127}));
     connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(
-        points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,
-            28}},
+        points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,28}},
         color={0,0,127}));
 
     connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(
@@ -232,8 +232,7 @@ package BenchmarkModel_reworked_TestModularization
         color={0,0,127}));
 
     connect(outerWall_South.solarRadWinTrans, floor.solarRadWin) annotation (Line(
-        points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{-40.8,-56},{-40.8,
-            -61.8}},
+        points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{-40.8,-56},{-40.8,-61.8}},
         color={0,0,127}));
 
     connect(outerWall_South.solarRadWinTrans, outerWall_East.solarRadWin)
@@ -248,14 +247,13 @@ package BenchmarkModel_reworked_TestModularization
 
     connect(outerWall_South.solarRadWinTrans, ceiling.solarRadWin) annotation (
         Line(
-        points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,
-            75.8}},
+        points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,75.8}},
         color={0,0,127}));
 
     connect(outerWall_North.solarRadWin, outerWall_South.solarRadWinTrans)
       annotation (Line(
-        points={{59.3,33.3333},{46,33.3333},{46,60},{-54,60},{-54,-16.6667},{
-            -60.25,-16.6667}},
+        points={{59.3,33.3333},{46,33.3333},{46,60},{-54,60},{-54,-16.6667},{-60.25,
+            -16.6667}},
         color={0,0,127}));
     connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
       annotation (Line(
@@ -271,8 +269,7 @@ package BenchmarkModel_reworked_TestModularization
         color={255,128,0}));
     connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
       annotation (Line(
-        points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,
-            52}},
+        points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,52}},
         color={255,128,0}));
 
     connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
@@ -552,4 +549,13 @@ package BenchmarkModel_reworked_TestModularization
 </p>
 </html>"));
   end ReducedOrder_FourElements;
+
+  model HighOrder "Test of high order modeling"
+    extends Modelica.Icons.Example;
+    ThermalZones.ReducedOrder.RC.FourElements theZon
+      annotation (Placement(transformation(extent={{-26,40},{22,76}})));
+    ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows
+      southFacingWindows(Room_Lenght=1)
+      annotation (Placement(transformation(extent={{-26,-40},{28,6}})));
+  end HighOrder;
 end BenchmarkModel_reworked_TestModularization;
