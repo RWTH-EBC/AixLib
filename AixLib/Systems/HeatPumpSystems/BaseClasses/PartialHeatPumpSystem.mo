@@ -291,8 +291,8 @@ partial model PartialHeatPumpSystem
       group="Evaporator",
       enable=transferHeat), Evaluate=true);
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
-                                              annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
+    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(
