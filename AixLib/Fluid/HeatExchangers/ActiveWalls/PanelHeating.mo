@@ -21,7 +21,7 @@ model PanelHeating
   parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
-  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient at surface" annotation (Dialog(group="Heat convection",
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at surface" annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",

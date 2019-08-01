@@ -48,7 +48,7 @@ model Ow2IwL1IwS1Gr1Uf1
   // Outer wall properties
   parameter Real solar_absorptance_OW=0.25 "Solar absoptance outer walls "
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
-  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
       group="Outer wall properties",
       compact=true,
       descriptionLabel=true), choices(

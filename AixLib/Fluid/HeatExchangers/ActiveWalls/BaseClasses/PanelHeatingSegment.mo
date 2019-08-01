@@ -21,7 +21,7 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
 parameter HeatCapacityPerArea cTop;
 parameter HeatCapacityPerArea cDown;
 
-  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient at surface"
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at surface"
     annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
         choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",

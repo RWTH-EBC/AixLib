@@ -1,8 +1,8 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
-  parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Length l = 4 "Length" annotation(Dialog(group = "Geometry"));
+  parameter Modelica.SIunits.Height h "Height" annotation(Dialog(group = "Geometry"));
+  parameter Modelica.SIunits.Length l "Length" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
   parameter Boolean selectable = false
     "Determines if wall type is set manually (false) or by definitions (true)"                                    annotation(Dialog(group = "Structure of wall layers"));
@@ -19,11 +19,11 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.SpecificHeatCapacity c[n] = if selectable then wallType.c else fill(1000, n)
     "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
   // which orientation of surface?
-  parameter Integer surfaceOrientation = 1 "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
+  parameter Integer surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
         "vertical",                                                                                                    choice = 2
         "horizontal facing up",                                                                                                    choice = 3
         "horizontal facing down",                                                                                                    radioButtons = true));
-  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at inside surface" annotation (Dialog(
         descriptionLabel=true), choices(
       choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",

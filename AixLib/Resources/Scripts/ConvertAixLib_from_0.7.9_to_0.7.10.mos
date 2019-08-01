@@ -1,3 +1,10 @@
+// changed defaults of surfaceorientation and calcMethod
+convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar", fill("",0),{"surfaceOrientation=1", "calcMethod=1", h=3, l=4});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", fill("",0), {"calcMethod=1}");
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PanelHeatingSegment", fill("",0), {"calcMethod=1"});
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating", fill("",0), {"calcMethod=1"});
+
+
 // renaming calcMethodHConv, ModelConvOW, calcHConv
 convertElement("AixLib.FastHVAC.Components.Pipes.BaseClasses.PipeBase","calcHConv","calcHCon");
 convertElement("AixLib.FastHVAC.Components.Pipes.DynamicPipe","calcHConv","calcHCon");
