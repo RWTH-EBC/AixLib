@@ -1,15 +1,15 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
 
-  parameter Modelica.SIunits.Length Room_Lenght={30,30,5,5,30}
+  parameter Modelica.SIunits.Length Room_Length[:]={30,30,5,5,30}
                                                   "length" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Height Room_Height={3,3,3,3,3}
+  parameter Modelica.SIunits.Height Room_Height[:]={3,3,3,3,3}
                                                     "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Length Room_Width={20,30,10,20,50}
+  parameter Modelica.SIunits.Length Room_Width[:]={20,30,10,20,50}
                                                  "width"
                                                         annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
-  parameter Modelica.SIunits.Area Win_Area={40,1,1,1,1}
+  parameter Modelica.SIunits.Area Win_Area[:]={40,1,1,1,1}
                                                "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
 
   parameter Modelica.SIunits.Temperature T0=295.15 "Outside"
@@ -42,7 +42,7 @@ model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
     "choose a Window type" annotation(Dialog(group="Windows"),choicesAllMatching= true);
 
 protected
-  parameter Modelica.SIunits.Volume Room_V=Room_Lenght*Room_Height*Room_Width;
+  parameter Modelica.SIunits.Volume Room_V[:]=Room_Length*Room_Height*Room_Width;
 
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_South(
@@ -60,7 +60,7 @@ public
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140())
     annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
-    wall_length=Room_Lenght,
+    wall_length=Room_Length,
     wall_height=Room_Height,
     withDoor=false,
     T0=T0_IW,
@@ -73,7 +73,7 @@ public
         rotation=-90,
         origin={26,78})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
-    wall_length=Room_Lenght,
+    wall_length=Room_Length,
     wall_height=Room_Height,
     T0=T0_IW,
     outside=true,
@@ -98,7 +98,7 @@ public
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
     Model=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
-    wall_length=Room_Lenght,
+    wall_length=Room_Length,
     wall_height=Room_Width,
     ISOrientation=3,
     withDoor=false,
@@ -112,7 +112,7 @@ public
         rotation=270,
         origin={-32,78})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 floor(
-    wall_length=Room_Lenght,
+    wall_length=Room_Length,
     wall_height=Room_Width,
     withDoor=false,
     ISOrientation=2,
