@@ -7,12 +7,12 @@ model Generation_Hot
     parameter Real m_flow_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
 
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,28},{110,48}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{86,-48},{106,-28}})));
 

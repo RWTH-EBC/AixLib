@@ -26,8 +26,8 @@ model WestWing
       Medium = Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Air_in_Canteen(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in_Canteen(redeclare package Medium =
+        Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out_Workshop(redeclare package

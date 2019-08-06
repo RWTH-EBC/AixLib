@@ -1,16 +1,14 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
 
-  parameter Modelica.SIunits.Length Room_Length[:]={30,30,5,5,30}
+  parameter Modelica.SIunits.Length Room_Length=30
                                                   "length" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Height Room_Height[:]={3,3,3,3,3}
-                                                    "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Length Room_Width[:]={20,30,10,20,50}
+  parameter Modelica.SIunits.Height Room_Height=3   "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+  parameter Modelica.SIunits.Length Room_Width=20
                                                  "width"
                                                         annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
-  parameter Modelica.SIunits.Area Win_Area[:]={40,1,1,1,1}
-                                               "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
+  parameter Modelica.SIunits.Area Win_Area=80  "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
 
   parameter Modelica.SIunits.Temperature T0=295.15 "Outside"
                                                             annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
@@ -42,7 +40,7 @@ model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
     "choose a Window type" annotation(Dialog(group="Windows"),choicesAllMatching= true);
 
 protected
-  parameter Modelica.SIunits.Volume Room_V[:]=Room_Length*Room_Height*Room_Width;
+  parameter Modelica.SIunits.Volume Room_V=Room_Length*Room_Height*Room_Width;
 
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_South(
