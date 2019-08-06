@@ -1,11 +1,8 @@
-// changed defaults of surfaceorientation and calcMethod
-convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar", fill("",0),{"surfaceOrientation=1", "calcMethod=1", h=3, l=4});
-convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", fill("",0), {"calcMethod=1}");
-convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PanelHeatingSegment", fill("",0), {"calcMethod=1"});
-convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating", fill("",0), {"calcMethod=1"});
+// correct renaming of hRad
+convertElement("AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office","hConvRadWall","hRadWall");
+convertElement("AixLib.DataBase.ThermalZones.ZoneBaseRecord","hConvRadWall","hRadWall");
 
-
-// renaming calcMethodHConv, ModelConvOW, calcHConv
+// rename calcHConv
 convertElement("AixLib.FastHVAC.Components.Pipes.BaseClasses.PipeBase","calcHConv","calcHCon");
 convertElement("AixLib.FastHVAC.Components.Pipes.DynamicPipe","calcHConv","calcHCon");
 convertElement("AixLib.FastHVAC.Components.Pipes.DynamicPipeAggregated","calcHConv","calcHCon");
@@ -13,12 +10,19 @@ convertElement("AixLib.FastHVAC.Components.Storage.BaseClasses.HeatingCoil","cal
 convertElement("AixLib.FastHVAC.Components.Storage.HeatStorage","calcHConvInside","calcHCon");
 convertElement("AixLib.FastHVAC.Components.Storage.HeatStorageVariablePorts","calcHConvInside","calcHCon");
 convertElement("AixLib.FastHVAC.Components.Storage.StorageSimpleWall","calcHConvInside","calcHCon");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvPipeInside","calcHConv","calcHCon");
+
+// rename calcMethodHConv
 convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PanelHeatingSegment","calcMethodHConv","calcMethod");
 convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating","calcMethodHConv","calcMethod");
-convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar","calcMethodHConv","calcMethod");
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall","calcMethodHConv","calcMethodIn");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar","calcMethodHConv","calcMethod");
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall","Model","calcMethodOut");
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140","Model","calcMethod");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvInside","calcMethodHConv","calcMethod");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvOutside","calcMethodHConv","calcMethod");
+
+// rename ModelConvOW
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1","ModelConvOW","calcMethod");
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar","ModelConvOW","calcMethod");
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment.Bathroom_VoWo","ModelConvOW","calcMethod");
@@ -34,14 +38,8 @@ convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1","Mode
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1","ModelConvOW","calcMethod");
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1","ModelConvOW","calcMethod");
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1","ModelConvOW","calcMethod");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvInside","calcMethodHConv","calcMethod");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvOutside","calcMethodHConv","calcMethod");
 
-// correcting hRad
-convertElement("AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office","hConvRadWall","hRadWall");
-convertElement("AixLib.DataBase.ThermalZones.ZoneBaseRecord","hConvRadWall","hRadWall");
-
-// renaming hConv to hCon
+// rename hConv to hCon
 convertElement("AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office","hConvExt","hConExt");
 convertElement("AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office","hConvFloor","hConFloor");
 convertElement("AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office","hConvInt","hConInt");
@@ -176,6 +174,48 @@ convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElemen
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase920","hConvWall","hConWall");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase920","hConvWin","hConWin");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase940","hConvRoof","hConRoof");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF","hConvWin","hConWin");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase1","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase10","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase11","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase12","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase2","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase3","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase4","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase5","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase6","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase7","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase8","hConvWall","hConWall");
+convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase9","hConvWall","hConWall");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConv","hConv","hCon");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvInside","hConv","hCon");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvInside","hConvCustom","hCon_const");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvOutside","hConv","hCon");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvOutside","hConvCustom","hCon_const");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvPipeInside","hConv","hCon");
+convertElement("AixLib.Utilities.HeatTransfer.HeatConvPipeInside","hConvInsideFix","hConIn_const");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase940","hConvWall","hConWall");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase940","hConvWin","hConWin");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements.TestCase950","hConvRoof","hConRoof");
@@ -233,46 +273,3 @@ convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeEleme
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950FF","hConvWall","hConWall");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements.TestCase950FF","hConvWin","hConWin");
 convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase600FF","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase620","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase640","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase650FF","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase900FF","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase920","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase940","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements.TestCase950FF","hConvWin","hConWin");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase1","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase10","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase11","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase12","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase2","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase3","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase4","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase5","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase6","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase7","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase8","hConvWall","hConWall");
-convertElement("AixLib.ThermalZones.ReducedOrder.Validation.VDI6007.TestCase9","hConvWall","hConWall");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConv","hConv","hCon");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvInside","hConv","hCon");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvInside","hConvCustom","hCon_const");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvOutside","hConv","hCon");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvOutside","hConvCustom","hCon_const");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvPipeInside","calcHConv","calcHCon");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvPipeInside","hConv","hCon");
-convertElement("AixLib.Utilities.HeatTransfer.HeatConvPipeInside","hConvInsideFix","hConIn_const");
