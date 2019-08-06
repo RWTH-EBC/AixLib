@@ -2,7 +2,7 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model Canteen_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom(vol(V=1800),
       activeWallPipeBased(wall_height=30, solar_absorptance=0.24));
-  Components.Walls.Wall Wall_ToOpenplanoffice(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_ToOpenplanoffice(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -19,7 +19,7 @@ model Canteen_v2
         origin={70,-30})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenplanoffice
     annotation (Placement(transformation(extent={{90,-40},{110,-20}})));
-  Components.Walls.Wall FloorToGround(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
     withWindow=true,
     redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
@@ -38,7 +38,7 @@ model Canteen_v2
         origin={50,-70})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToGround
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
-  Components.Walls.Wall SouthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall SouthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -66,7 +66,7 @@ model Canteen_v2
         extent={{12,-12},{-12,12}},
         rotation=-90,
         origin={-40,-100})));
-  Components.Walls.Wall WestWallToWorkshop(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall WestWallToWorkshop(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -86,7 +86,7 @@ model Canteen_v2
         origin={-70,0})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToWorkshop
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Components.Walls.Wall NorthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall NorthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,

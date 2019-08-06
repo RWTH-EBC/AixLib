@@ -1,14 +1,12 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
 
-  parameter Modelica.SIunits.Length Room_Length=30
-                                                  "length" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Height Room_Height=3   "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Length Room_Width=20
-                                                 "width"
+  parameter Modelica.SIunits.Length Room_Length    "length" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+  parameter Modelica.SIunits.Height Room_Height    "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+  parameter Modelica.SIunits.Length Room_Width   "width"
                                                         annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
-  parameter Modelica.SIunits.Area Win_Area=80  "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
+  parameter Modelica.SIunits.Area Win_Area  "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
 
   parameter Modelica.SIunits.Temperature T0=295.15 "Outside"
                                                             annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
@@ -21,8 +19,8 @@ model HighOrder_ASHRAE140_SouthFacingWindows "windows facing south"
   parameter Modelica.SIunits.Temperature T0_Air=295.15 "Air"
                                                             annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
 
-  parameter Real solar_absorptance_OW = 0.6 "Solar absoptance outer walls " annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
+  parameter Real solar_absorptance_OW  "Solar absoptance outer walls " annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
+  parameter Real eps_out  "emissivity of the outer surface"
                                        annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
 
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition TypOW=
