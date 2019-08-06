@@ -10,10 +10,14 @@ model Children_VoWo "Children room from the VoWo appartment"
   parameter Integer Floor = 1 "Floor" annotation(Dialog(group = "Floor", compact = true, descriptionLabel = true), choices(choice = 1 "GF", choice = 2 "1F", choice = 3 "2F", radioButtons = true));
   // Outer walls properties
   parameter Real solar_absorptance_OW = 0.7 "Solar absoptance outer walls " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Integer ModelConvOW = 1 "Heat Convection Model" annotation(Dialog(group = "Outer wall properties", compact = true, descriptionLabel = true), choices(choice = 1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom hConv",                                                                                                    radioButtons = true));
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+      group="Outer wall properties",
+      compact=true,
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   //Initial temperatures
   parameter Modelica.SIunits.Temperature T0_air = 295.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_OW = 295.15 "OW" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));

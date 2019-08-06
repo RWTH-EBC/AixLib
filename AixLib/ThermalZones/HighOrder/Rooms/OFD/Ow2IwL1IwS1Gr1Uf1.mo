@@ -48,13 +48,13 @@ model Ow2IwL1IwS1Gr1Uf1
   // Outer wall properties
   parameter Real solar_absorptance_OW=0.25 "Solar absoptance outer walls "
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
-  parameter Integer ModelConvOW=1 "Heat Convection Model" annotation (Dialog(
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
       group="Outer wall properties",
       compact=true,
       descriptionLabel=true), choices(
       choice=1 "DIN 6946",
       choice=2 "ASHRAE Fundamentals",
-      choice=3 "Custom hConv",
+      choice=3 "Custom hCon (constant)",
       radioButtons=true));
   // Windows and Doors
   parameter Boolean withWindow1=true "Window 1" annotation (Dialog(
@@ -153,15 +153,14 @@ model Ow2IwL1IwS1Gr1Uf1
     withWindow=withWindow1,
     withDoor=withDoor1,
     WallType=Type_OW,
-    Model=ModelConvOW,
+    calcMethodOut=calcMethod,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
-    eps_door=eps_door_OD1)
-    annotation (Placement(transformation(extent={{-66,-22},{-56,42}})));
+    eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-66,-22},{-56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW2,
@@ -173,14 +172,15 @@ model Ow2IwL1IwS1Gr1Uf1
     withWindow=withWindow2,
     withDoor=withDoor2,
     WallType=Type_OW,
-    Model=ModelConvOW,
+    calcMethodOut=calcMethod,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD2,
-    eps_door=eps_door_OD2) annotation (Placement(transformation(
+    eps_door=eps_door_OD2)
+    annotation (Placement(transformation(
         origin={19,57},
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));

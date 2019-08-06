@@ -28,8 +28,8 @@ model SimpleRoomTwoElements
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   RC.TwoElements thermalZoneTwoElements(
     VAir=52.5,
-    hConvExt=2.7,
-    hConvWin=2.7,
+    hConExt=2.7,
+    hConWin=2.7,
     gWin=1,
     ratioWinConRad=0.09,
     nExt=1,
@@ -37,7 +37,7 @@ model SimpleRoomTwoElements
     CExt={5259932.23},
     hRad=5,
     AInt=60.5,
-    hConvInt=2.12,
+    hConInt=2.12,
     nInt=1,
     RInt={0.000668895639141},
     CInt={12391363.86},
@@ -59,9 +59,9 @@ model SimpleRoomTwoElements
     wfWin={0.5,0.5},
     withLongwave=true,
     aExt=0.7,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
-    hConvWinOut=20,
+    hConWinOut=20,
     TGro=285.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
   Modelica.Blocks.Math.Add solRad[2]
     "Sums up solar radiation of both directions"
@@ -105,9 +105,9 @@ model SimpleRoomTwoElements
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow of machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=25*11.5) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=25*11.5) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
-  Modelica.Blocks.Sources.Constant hConvWin(k=20*14) "Outdoor coefficient of heat transfer for windows"
+  Modelica.Blocks.Sources.Constant hConWin(k=20*14) "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
 
 equation
@@ -198,10 +198,8 @@ equation
     color={191,0,0}));
   connect(theConWall.fluid, preTem.port)
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
-  connect(hConvWall.y, theConWall.Gc)
-    annotation (Line(points={{0,4.4},{0,-4},{31,-4}},     color={0,0,127}));
-  connect(hConvWin.y, theConWin.Gc)
-    annotation (Line(points={{0,-4.4},{0,26},{33,26}},   color={0,0,127}));
+  connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{0,-4},{31,-4}}, color={0,0,127}));
+  connect(hConWin.y, theConWin.Gc) annotation (Line(points={{0,-4.4},{0,26},{33,26}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
     annotation (Line(
     points={{-83,6},{-58,6},{-58,2},{-32,2},{-32,-4},{-26,-4}},

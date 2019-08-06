@@ -10,8 +10,8 @@ model StorageWall "Sandwich wall construction for heat storages"
     "Thermal Conductivity of wall";
     parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
     "Thermal Conductivity of insulation";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInside=2 "Coefficient of Heat Transfer water <-> wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOutside=2 "Coefficient of Heat Transfer insulation <-> air";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Heat transfer coefficient water <-> wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Heat transfer coefficient insulation <-> air";
   parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K";
   parameter Modelica.SIunits.Temperature TStartIns=293.15
@@ -39,9 +39,8 @@ model StorageWall "Sandwich wall construction for heat storages"
         AIns)*(lambdaIns)/(sIns/2))
         "Heat conduction through second insulation layer" annotation (Placement(
         transformation(extent={{38,0},{58,20}}, rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatConv convOutside(hConv=hConvOutside, A=
-        AOutside)
-        "Outside heat convection" annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(hCon=hConOut, A=AOutside) "Outside heat convection"
+    annotation (Placement(transformation(
         origin={72,8},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -62,10 +61,8 @@ model StorageWall "Sandwich wall construction for heat storages"
         "Heat capacity of insulation" annotation (Placement(
         transformation(extent={{36,-28},{56,-8}}, rotation=0)));
 
-  AixLib.Utilities.HeatTransfer.HeatConv convInside(hConv=hConvInside, A=
-        AWall)
-        "Inside heat convection" annotation (Placement(transformation(extent={{-80,0},{-60,20}},
-          rotation=0)));
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(hCon=hConIn, A=AWall) "Inside heat convection"
+    annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
 
 protected
     parameter Modelica.SIunits.Area AHor = (D1/2)^2*Modelica.Constants.pi

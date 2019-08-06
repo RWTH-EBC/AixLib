@@ -1,35 +1,41 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvOutside "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Integer calcMethodHConv=2 "calculation Method"
-                                      annotation(Evaluate=true,   Dialog(group="Computational Models",   compact = true, descriptionLabel = true), choices(choice = 1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals (convective + radiative)",                                                                                                    choice = 3
-        "Custom hConv",                                                                                                    radioButtons = true));
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (
+    Evaluate=true,
+    Dialog(
+      group="Computational Models",
+      compact=true,
+      descriptionLabel=true),
+    choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals (convective + radiative)",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   parameter Modelica.SIunits.Area A(min=0) "Area of surface" annotation(Dialog(group = "Surface properties", descriptionLabel = true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=25 "Custom convection heat transfer coeffient"    annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=
-          calcMethodHConv == 3));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=25 "Custom convective heat transfer coeffient"     annotation(Dialog(group="Surface properties",   descriptionLabel = true, enable=
+          calcMethod == 3));
   parameter
     DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable=
-          calcMethodHConv == 2),                                                                                                                                                                                      choicesAllMatching = true);
+          calcMethod == 2),                                                                                                                                                                                           choicesAllMatching = true);
   // Variables
-  Modelica.SIunits.CoefficientOfHeatTransfer hConv;
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethodHConv == 1 or calcMethodHConv == 2    annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
+  Modelica.SIunits.CoefficientOfHeatTransfer hCon "Convection heat transfer coeffient";
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethod == 1 or calcMethod == 2              annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput WindSpeed_internal(unit="m/s");
 equation
   // Main equation of heat transfer
-  port_a.Q_flow =hConv *A*(port_a.T - port_b.T);
+  port_a.Q_flow =hCon*A*(port_a.T - port_b.T);
 
-  //Determine convection heat transfer coefficient hConv
-  if calcMethodHConv == 1 then
-    hConv = (4 + 4*WindSpeed_internal);
-  elseif calcMethodHConv == 2 then
-    hConv = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
+  //Determine convection heat transfer coefficient hCon
+  if calcMethod == 1 then
+    hCon = (4 + 4*WindSpeed_internal);
+  elseif calcMethod == 2 then
+    hCon = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
   else
-    hConv =hConvCustom;
+    hCon = hCon_const;
     WindSpeed_internal = 0;
   end if;
 
@@ -53,10 +59,10 @@ equation
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>It allows the choice between three different models: </p>
 <ul>
-<li>after DIN 6946:<span style=\"font-family: Courier New;\"> <i>h</i> = 4+4<i>v</i> </span>, where <i><span style=\"font-family: Courier New;\">h</span></i> <b>(hConv)</b> is the heat transfer coefficent and <i><b><span style=\"font-family: Courier New;\">v</span></b></i> is the wind speed </li>
-<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in EnergyPlus Engineering reference from 2011:<i><span style=\"font-family: Courier New;\"> h = D+Ev+Fv^2</span></i> , where <i><span style=\"font-family: Courier New;\">h</span></i> <b>(hConv)</b> and <i><b><span style=\"font-family: Courier New;\">v</span></b></i> are as above and the coefficients <i><b><span style=\"font-family: Courier New;\">D, E, F</span></b></i>  depend on the surface of the outer wall.<br />
+<li>after DIN 6946:<code> <i>h</i> = 4+4<i>v</i> </code>, where <i><code>h</code></i> <b>(hCon)</b> is the heat transfer coefficent and <i><b><code>v</code></b></i> is the wind speed </li>
+<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in EnergyPlus Engineering reference from 2011:<i><code> h = D+Ev+Fv^2</code></i> , where <i><code>h</code></i> <b>(hCon)</b> and <i><b><code>v</code></b></i> are as above and the coefficients <i><b><code>D, E, F</code></b></i>  depend on the surface of the outer wall.<br />
 <b><span style=\"color: #ff0000;\">Attention:</span></b> This is a combined coefficient for convective and radiative heat exchange.</li>
-<li>with a custom constant<i><span style=\"font-family: Courier New;\"> h</span></i> <b>(hConv)</b> value </li>
+<li>with a custom constant<i><code> h</code></i> <b>(hCon)</b> value </li>
 </ul>
 <p><b><span style=\"color: #008000;\">References</span></b> </p>
 <ul>
