@@ -8,16 +8,16 @@ model Carnot_TCon_RE
     TConAct(start=TCon_nominal + TAppCon_nominal)=
           if COP_is_for_cooling then Medium2.temperature(staB2) + QCon_flow/QCon_flow_nominal*TAppCon_nominal else Medium1.temperature(staB1) + QCon_flow/QCon_flow_nominal*TAppCon_nominal,
     TEvaAct(start=TEva_nominal - TAppEva_nominal)=
-          if COP_is_for_cooling then Medium1.temperature(staB1) - QEva_flow/QEva_flow_nominal*TAppEva_nominal else Medium2.temperature(staB2) - QEva_flow/QEva_flow_nominal*TAppEva_nominal,
-    QCon_flow= if COP_is_for_cooling then Q_flow_internal.y else con.Q_flow,
-    QEva_flow= if COP_is_for_cooling then con.Q_flow else Q_flow_internal.y,
+          if COP_is_for_cooling then min(TConAct-10, Medium1.temperature(staB1) - QEva_flow/QEva_flow_nominal*TAppEva_nominal) else Medium2.temperature(staB2) - QEva_flow/QEva_flow_nominal*TAppEva_nominal,
+    QCon_flow= if COP_is_for_cooling then min(QCon_flow_max, Q_flow_internal.y) else max(0,con.Q_flow),
+    QEva_flow= if COP_is_for_cooling then min(0,con.Q_flow) else max(QEva_flow_min,Q_flow_internal.y),
     redeclare HeatExchangers.PrescribedOutlet con(
     final use_X_wSet=false,
     final mWatMax_flow = 0,
     final mWatMin_flow = 0,
     final from_dp=from_dp1,
     final dp_nominal=dp1_nominal,
-    final m_flow_nominal= 2,
+    final m_flow_nominal=m1_flow_nominal,
     final m_flow_small=0.0001,
     final linearizeFlowResistance=linearizeFlowResistance1,
     final deltaM=deltaM1,
@@ -27,12 +27,12 @@ model Carnot_TCon_RE
     final massDynamics = Modelica.Fluid.Types.Dynamics.SteadyState,
     use_TSet=true,
     final X_start=Medium1.X_default,
-    QMax_flow= QCon_flow_max,
-    QMin_flow= QEva_flow_min,
+    QMax_flow = QCon_flow_max,
+    QMin_flow = QEva_flow_min,
       final homotopyInitialization=false),
     redeclare  HeatExchangers.HeaterCooler_u eva(
     final from_dp=from_dp2,
-    final m_flow_nominal= 2,
+    final m_flow_nominal=m2_flow_nominal,
     final m_flow_small=0.0001,
     final dp_nominal=dp2_nominal,
     final linearizeFlowResistance=linearizeFlowResistance2,
@@ -44,10 +44,10 @@ model Carnot_TCon_RE
       final Q_flow_nominal=1));
 
   parameter Modelica.SIunits.HeatFlowRate QEva_flow_min(
-    max=0) = -Modelica.Constants.inf
+    max=0) = -60000
     "Maximum heat flow rate for cooling (negative)";
   parameter Modelica.SIunits.HeatFlowRate QCon_flow_max(
-    min=0) = Modelica.Constants.inf
+    min=0) = 30000
     "Maximum heat flow rate for heating (positive)";
    parameter Modelica.SIunits.HeatFlowRate Q_heating_nominal(min = 0);
    parameter Modelica.SIunits.HeatFlowRate Q_cooling_nominal(max = 0);
@@ -57,7 +57,7 @@ model Carnot_TCon_RE
     "Condenser leaving water temperature"
     annotation (Placement(transformation(extent={{-140,70},{-100,110}})));
 
-  Modelica.Blocks.Logical.LessThreshold modi(threshold=273.15 + 23)
+  Modelica.Blocks.Logical.LessThreshold modi(threshold=273.15 + 11)
     annotation (Placement(transformation(extent={{-108,-28},{-88,-8}})));
 
 
@@ -66,16 +66,20 @@ model Carnot_TCon_RE
 
 
 
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=abs(con.Q_flow/COP))
-    annotation (Placement(transformation(extent={{30,-6},{50,14}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=if is_cooling then
+        abs(min(con.Q_flow, 0)/COP) else max(con.Q_flow, 0)/COP)
+    annotation (Placement(transformation(extent={{100,12},{80,32}})));
   Modelica.Blocks.Interfaces.BooleanOutput is_cooling
     annotation (Placement(transformation(extent={{-102,16},{-82,36}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=if is_cooling then
+        min(con.Q_flow, 0) else max(con.Q_flow, 0))
+    annotation (Placement(transformation(extent={{2,12},{22,32}})));
 protected
   Modelica.Blocks.Math.Add Q_flow_internal(final k1=-1, k2=+1)
     "Heat removed by evaporator" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=-90,
-        origin={26,30})));
+        origin={44,-4})));
 initial equation
 //  assert(QCon_flow_nominal > 0, "Parameter QCon_flow_nominal must be positive.");
 //  assert(COP_nominal > 1, "The nominal COP of a heat pump must be bigger than one.");
@@ -86,17 +90,18 @@ equation
   connect(TSet, modi.u) annotation (Line(points={{-120,90},{-120,-18},{-110,-18}},
         color={0,0,127}));
   connect(realExpression2.y, Q_flow_internal.u2)
-    annotation (Line(points={{51,4},{52,4},{52,42},{32,42}}, color={0,0,127}));
+    annotation (Line(points={{79,22},{66,22},{66,8},{50,8}}, color={0,0,127}));
   connect(TSet, con.TSet) annotation (Line(points={{-120,90},{-68,90},{-68,68},{
           -12,68}}, color={0,0,127}));
-  connect(con.Q_flow, Q_flow_internal.u1) annotation (Line(points={{11,68},{16,68},
-          {16,42},{20,42}}, color={0,0,127}));
   connect(realExpression2.y, P)
-    annotation (Line(points={{51,4},{80,4},{80,0},{110,0}}, color={0,0,127}));
+    annotation (Line(points={{79,22},{70,22},{70,0},{110,0}},
+                                                            color={0,0,127}));
   connect(modi.y, is_cooling) annotation (Line(points={{-87,-18},{-82,-18},{-82,26},{-92,
           26}}, color={255,0,255}));
   connect(Q_flow_internal.y, eva.u)
-    annotation (Line(points={{26,19},{26,-54},{12,-54}}, color={0,0,127}));
+    annotation (Line(points={{44,-15},{44,-54},{12,-54}},color={0,0,127}));
+  connect(realExpression.y, Q_flow_internal.u1)
+    annotation (Line(points={{23,22},{38,22},{38,8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
             {100,100}}),
             graphics={

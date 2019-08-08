@@ -280,13 +280,13 @@ equation
     annotation (Line(points={{23,58.5},{23,61.505},{35.27,61.505}},
                                                              color={0,0,127}));
   connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
-    annotation (Line(points={{12.4,12.25},{20,12.25},{20,31.75},{12.4,31.75}},
+    annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
         color={0,0,127}));
   connect(TAirAHUAvg.T, minTemp.u)
     annotation (Line(points={{34,-28},{34,-28},{31,-28}},
                                                color={0,0,127}));
   connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{19.5,
-          -28},{16,-28},{16,-16},{26,-16},{26,35.5},{12.4,35.5}},
+          -28},{16,-28},{16,-16},{26,-16},{26,33.25},{12.4,33.25}},
         color={0,0,127}));
   connect(zone.ventRate, airFlowRateSplit.airFlowOut) annotation (Line(points={{44.3,
           52.28},{44,52.28},{44,38},{44,38},{44,35.2}},         color={0,0,127}));

@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model PumpControlledwithHP "Substation model for  low-temperature networks for buildings with 
+model PumpControlledwithHP_pump_demandcontrol "Substation model for  low-temperature networks for buildings with 
   heat pump and chiller"
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
@@ -61,6 +61,9 @@ public
   Sensors.TemperatureTwoPort senTem(redeclare package Medium = Medium,m_flow_nominal=2*m_flow_nominal, tau=0,
     T_start=283.15)
     annotation (Placement(transformation(extent={{44,-20},{64,0}})));
+  Sources.FixedBoundary bou1(redeclare package Medium = Medium,          use_T=false,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-210,6},{-190,26}})));
   Sensors.TemperatureTwoPort senTem2(redeclare package Medium =Medium,allowFlowReversal=false, tau=0,
     m_flow_nominal=2*m_flow_nominal)
     annotation (Placement(transformation(extent={{-242,10},{-222,-10}})));
@@ -187,15 +190,14 @@ public
         origin={-176,-82})));
   Utilities.Sensors.FuelCounter pump
     annotation (Placement(transformation(extent={{-142,12},{-122,32}})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=0.25)
-    annotation (Placement(transformation(extent={{-128,42},{-148,62}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=max(0.2, max(abs(
+        Q_flow_input[1]), dhw_load.y)/3205/10))
+    annotation (Placement(transformation(extent={{-130,56},{-150,76}})));
   Modelica.Blocks.Interfaces.RealOutput P_el
     annotation (Placement(transformation(extent={{200,82},{220,102}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=pump.counter +
         fuelCounter.counter)
     annotation (Placement(transformation(extent={{154,80},{174,100}})));
-  Sources.FixedBoundary bou(redeclare package Medium =Medium,nPorts=1)
-    annotation (Placement(transformation(extent={{-216,38},{-196,58}})));
 equation
 
   //Power Consumptin Calculation
@@ -206,6 +208,9 @@ equation
                        color={0,127,255}));
   connect(senTem.port_b, del1.ports[2]) annotation (Line(points={{64,-10},{110,-10},
           {110,0},{198,0}},   color={0,127,255}));
+  connect(bou1.ports[1], fan.port_a) annotation (Line(points={{-190,16},{-164,
+          16},{-164,0}},
+                     color={0,127,255}));
   connect(senTem4.port_b, heaPum.port_a2) annotation (Line(points={{-28,-16},{-20,
           -16},{-20,-26},{-10,-26}}, color={0,127,255}));
   connect(heaPum.port_b2, senTem.port_a) annotation (Line(points={{10,-26},{28,-26},
@@ -274,9 +279,7 @@ equation
   connect(realExpression3.y, P_el) annotation (Line(points={{175,90},{192,90},{
           192,92},{210,92}}, color={0,0,127}));
   connect(realExpression2.y, fan.m_flow_in)
-    annotation (Line(points={{-149,52},{-154,52},{-154,12}}, color={0,0,127}));
-  connect(bou.ports[1], fan.port_a) annotation (Line(points={{-196,48},{-164,48},
-          {-164,0}}, color={0,127,255}));
+    annotation (Line(points={{-151,66},{-154,66},{-154,12}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,
             -120},{220,120}}),
@@ -321,4 +324,4 @@ Implemented </li>
 </html>", info="<html>
 <p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
 </html>"));
-end PumpControlledwithHP;
+end PumpControlledwithHP_pump_demandcontrol;
