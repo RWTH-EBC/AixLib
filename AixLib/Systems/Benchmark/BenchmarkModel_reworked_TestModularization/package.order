@@ -1,4 +1,4 @@
-HighOrder_ASHRAE140_SouthFacingWindows
-ReducedOrder_FourElements
 HighOrder
 ReducedOrder
+HighOrderModel_Connected
+ReducedOrderModel_Connected
