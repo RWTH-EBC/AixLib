@@ -5,14 +5,14 @@ model PipeBase
   /* *******************************************************************
       Medium
      ******************************************************************* */
-    parameter Integer nNodes( min=3)=3 "Number of discrete flow volumes";
+    parameter Integer nNodes(min=1)=1 "Number of discrete flow volumes";
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe"  annotation(Dialog(enable = not calculateAlpha));
     parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
+    final parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
 
     parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature of fluid";
@@ -119,17 +119,35 @@ equation
           extent={{-68,-70},{76,-90}},
           lineColor={0,0,255},
           textString="%name")}),
-    Documentation(info="<html>
-   
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p> Base model for a pipe.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>This model for a discrete pipe fluid represents just the fluid without a pipe wall. The outside heat port is a multiple heat port, this allows the heat transfer connection of each discrete fluid element with the environment. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Base model for a pipe.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  This model for a discrete pipe fluid represents just the fluid
+  without a pipe wall. The outside heat port is a multiple heat port,
+  this allows the heat transfer connection of each discrete fluid
+  element with the environment.
+</p>
 </html>",revisions="<html>
 <ul>
-<li><i>November 17, 2017&nbsp; </i> David Jansen:<br/>Added heat convection inside pipe, moved into development</li>
-<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br/>Implemented</li>
+  <li>
+    <i>November 17, 2017&#160;</i> David Jansen:<br/>
+    Added heat convection inside pipe, moved into development
+  </li>
+  <li>
+    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     experiment(

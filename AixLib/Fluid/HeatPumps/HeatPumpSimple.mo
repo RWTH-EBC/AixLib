@@ -59,10 +59,11 @@ model HeatPumpSimple
   parameter Modelica.SIunits.Volume VolumeEvaporator = 0.01 "Volume im m3";
   parameter Modelica.SIunits.Volume VolumeCondenser = 0.01 "Volume im m3";
   parameter Real tablePower[:, :] = fill(0.0, 0, 2)
-    "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
+    "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
   parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2)
-    "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
-  Modelica.Blocks.Math.Gain gain(k = -1) annotation(Placement(transformation(extent = {{-18, -60}, {-38, -40}})));
+    "Table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
+  Modelica.Blocks.Math.Gain gain(k=-1)
+                                         annotation(Placement(transformation(extent = {{-18, -60}, {-38, -40}})));
 equation
   connect(temperatureSourceIn.port_a, port_a_source) annotation(Line(points = {{-80, 46}, {-80, 70}, {-90, 70}}, color = {0, 127, 255}));
   connect(temperatureSinkOut.port_b, port_b_sink) annotation(Line(points = {{80, 60}, {80, 70}, {90, 70}}, color = {0, 127, 255}));

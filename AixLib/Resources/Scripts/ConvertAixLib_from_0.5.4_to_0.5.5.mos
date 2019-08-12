@@ -1,0 +1,3 @@
+convertClass("AixLib.DataBase.Profiles.Profile_BaseDataDefinition","AixLib.DataBase.Profiles.ProfileBaseDataDefinition");
+convertClass("AixLib.DataBase.Profiles.SetTemperatures_Ventilation2perDay","AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay");
+convertClass("AixLib.DataBase.Profiles.Ventilation_2perDay_Mean05perH","AixLib.DataBase.Profiles.Ventilation2perDayMean05perH");

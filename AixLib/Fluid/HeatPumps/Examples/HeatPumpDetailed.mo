@@ -3,122 +3,153 @@ model HeatPumpDetailed
   "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
-  Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
-    "Pulse signal for the on/off input of the heat pump"
-    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
+  replaceable package Medium_sin = AixLib.Media.Water
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+  replaceable package Medium_sou = AixLib.Media.Air
+    constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
+  .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
+    P_eleOutput=true,
+    capCalcType=2,
+    CorrFlowCo=false,
+    CorrFlowEv=false,
+    dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(),
+    PT1_cycle=true,
+    timeConstantCycle=1,
+    mFlow_conNominal=1,
+    mFlow_evaNominal=1,
+    T_evaIn(transferHeat=true, TAmb=291.15),
+    T_evaOut(transferHeat=true, TAmb=291.15),
+    T_conIn(transferHeat=true, TAmb=273.15),
+    T_conOut(transferHeat=true, TAmb=273.15),
+    redeclare package Medium_con = Medium_sin,
+    redeclare package Medium_eva = Medium_sou)
+    "Detailed heat pump mainly based on manufacturing data"
+    annotation (Placement(transformation(extent={{-16,14},{14,-6}})));
   Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=1,
+    redeclare package Medium = Medium_sou,
     nPorts=1,
     T=275.15) "Ideal mass flow source at the inlet of the source side"
-              annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
+              annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
-      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-      nPorts=1) "Fixed boundary at the outlet of the source side"
-          annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
-  Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
-    "Fixed boundary at the outlet of the sink side"
-    annotation (Placement(transformation(extent={{96,4},{76,24}})));
-  Sources.MassFlowSource_T                sinkSideMassFlowSource(
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    m_flow=0.5,
-    use_m_flow_in=true,
-    nPorts=1,
-    T=308.15) "Ideal mass flow source at the inlet of the sink side"
-              annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
-
+      package Medium = Medium_sou, nPorts=
+       1) "Fixed boundary at the outlet of the source side"
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+        rotation=0,
+        origin={-80,36})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
     height=25,
     offset=278)
     "Ramp signal for the temperature input of the source side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
-  Modelica.Blocks.Sources.Pulse massFlowPulse(
-    amplitude=0.5,
-    period=1000,
-    offset=0,
-    startTime=0,
-    width=51)
-    "Pulse signal for the mass flow input of the sink side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  Sensors.TemperatureTwoPort                temperature(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
-       heatPump.mFlow_conNominal)
-    "Temperature sensor at the outlet of the sink side"
-    annotation (Placement(transformation(extent={{42,4},{62,24}})));
-  Modelica.Blocks.Interfaces.RealOutput Pel
-    "Power consumption of the heat pump"
-    annotation (Placement(transformation(extent={{100,-20},{120,0}})));
-  Modelica.Blocks.Interfaces.RealOutput T_Co_out
-    "Temperature at the outlet of the sink side of the heat pump"
-    annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
-    redeclare package Medium_con =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package Medium_eva =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    P_eleOutput=true,
-    capCalcType=2,
-    CorrFlowCo=false,
-    CorrFlowEv=false,
-    dataTable=AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
-        tableQdot_con=[0,0,10; 35,4800,6300; 55,4400,5750],
-        tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
-        mFlow_conNom=0.01,
-        mFlow_evaNom=0.01))
-    "Detailed heat pump mainly based on manufacturing data"
-    annotation (Placement(transformation(extent={{-6,0},{24,20}})));
-equation
-  connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
-      points={{-59,10},{-54,10},{-54,18},{-46,18}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(massFlowPulse.y, sinkSideMassFlowSource.m_flow_in) annotation (Line(
-      points={{-59,-50},{20,-50},{20,-40}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(sinkSideFixedBoundary.ports[1], temperature.port_b) annotation (Line(
-      points={{76,14},{62,14}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(temperature.T, T_Co_out) annotation (Line(
-      points={{52,25},{52,50},{110,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
+    annotation (Placement(transformation(extent={{-94,-84},{-74,-64}})));
+  Sensors.TemperatureTwoPort senTAct(
+    final transferHeat=true,
+    final m_flow_nominal=heatPump.mFlow_conNominal,
+    final tau=1,
+    final initType=Modelica.Blocks.Types.Init.InitialState,
+    final tauHeaTra=1200,
+    redeclare final package Medium =
+        Medium_sin,
+    final T_start=303.15,
+    final TAmb=291.15) "Temperature at sink  inlet"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={54,-64})));
+  Modelica.Blocks.Logical.Hysteresis hys(
+    pre_y_start=true,
+    uLow=273.15 + 30,
+    uHigh=273.15 + 40)
+    annotation (Placement(transformation(extent={{64,50},{44,70}})));
+  Modelica.Blocks.Sources.Sine sine(
+    freqHz=1/3600,
+    amplitude=3000,
+    offset=3000)
+    annotation (Placement(transformation(extent={{76,26},{84,34}})));
+  Movers.SpeedControlled_Nrpm       pumSou(
+    redeclare final package Medium =
+        Medium_sin,
+    redeclare final Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    final allowFlowReversal=true,
+    final addPowerToMedium=false)
+    "Fan or pump at source side of HP" annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={50,12})));
+  MixingVolumes.MixingVolume              Room(
+    nPorts=2,
+    final use_C_flow=false,
+    final m_flow_nominal=heatPump.mFlow_conNominal,
+    final V=5,
+    redeclare package Medium = Medium_sin,
+    final allowFlowReversal=true) "Volume of Condenser" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={86,-20})));
 
-  connect(heatPump.P_eleOut, Pel) annotation (Line(
-      points={{4,1},{4,-10},{110,-10}},
+  Modelica.Blocks.Sources.Constant nIn(k=100) annotation (Placement(
+        transformation(
+        extent={{4,-4},{-4,4}},
+        rotation=90,
+        origin={50,34})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon
+    "Heat flow rate of the condenser" annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=270,
+        origin={94,6})));
+  Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=270,
+        origin={96,22})));
+  Modelica.Blocks.Logical.Not not2 "Negate output of hysteresis"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+        origin={32,62},
+        rotation=180)));
+  Sources.FixedBoundary              sinkSideFixedBoundary(redeclare package
+      Medium = Medium_sin, nPorts=1)
+    "Fixed boundary at the outlet of the sink side" annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={88,-64})));
+equation
+
+  connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
+      points={{-73,-74},{-68,-74},{-68,-66},{-56,-66}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(booleanPulse.y, heatPump.onOff_in) annotation (Line(
-      points={{-59,50},{4,50},{4,19}},
-      color={255,0,255},
-      smooth=Smooth.None));
+  connect(nIn.y,pumSou. Nrpm)
+    annotation (Line(points={{50,29.6},{50,24}}, color={0,0,127}));
+  connect(Room.heatPort,heatFlowRateCon. port)
+    annotation (Line(points={{86,-10},{86,0},{94,0}}, color={191,0,0}));
+  connect(sine.y,gain. u) annotation (Line(points={{84.4,30},{92,30},{92,26.8},
+          {96,26.8}}, color={0,0,127}));
+  connect(heatFlowRateCon.Q_flow,gain. y) annotation (Line(points={{94,12},{98,
+          12},{98,17.6},{96,17.6}}, color={0,0,127}));
+  connect(Room.ports[1],pumSou. port_a) annotation (Line(points={{76,-18},{76,4},
+          {60,4},{60,12}}, color={0,127,255}));
+  connect(senTAct.T,hys. u) annotation (Line(points={{54,-53},{58,-53},{58,-8},
+          {68,-8},{68,48},{74,48},{74,60},{66,60}}, color={0,0,127}));
+  connect(hys.y,not2. u) annotation (Line(points={{43,60},{44,60},{44,62},{36.8,
+          62}}, color={255,0,255}));
+  connect(senTAct.port_b,sinkSideFixedBoundary. ports[1]) annotation (Line(
+        points={{64,-64},{72,-64},{72,-64},{78,-64}}, color={0,127,255}));
+  connect(senTAct.port_b,Room. ports[2]) annotation (Line(points={{64,-64},{66,
+          -64},{66,-22},{76,-22}}, color={0,127,255}));
+  connect(not2.y, heatPump.onOff_in) annotation (Line(points={{27.6,62},{-18,62},
+          {-18,-12},{-6,-12},{-6,-5}}, color={255,0,255}));
+  connect(pumSou.port_b, heatPump.port_conIn) annotation (Line(points={{40,12},
+          {26,12},{26,11},{12,11}}, color={0,127,255}));
+  connect(heatPump.port_conOut, senTAct.port_a) annotation (Line(points={{12,-3},
+          {28,-3},{28,-64},{44,-64}}, color={0,127,255}));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_evaIn) annotation (
-     Line(
-      points={{-24,14},{-14,14},{-14,17},{-4,17}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(sourceSideFixedBoundary.ports[1], heatPump.port_evaOut) annotation (
-     Line(
-      points={{-26,-8},{-12,-8},{-12,3},{-4,3}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(heatPump.port_conOut, temperature.port_a) annotation (Line(
-      points={{22,17},{28,17},{28,14},{42,14}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(heatPump.port_conIn, sinkSideMassFlowSource.ports[1]) annotation (
-      Line(
-      points={{22,3},{36,3},{36,-18},{50,-18},{50,-48},{40,-48}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      Line(points={{-34,-70},{-24,-70},{-24,-3},{-14,-3}}, color={0,127,255}));
+  connect(heatPump.port_evaOut, sourceSideFixedBoundary.ports[1]) annotation (
+      Line(points={{-14,11},{-43,11},{-43,36},{-70,36}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),
