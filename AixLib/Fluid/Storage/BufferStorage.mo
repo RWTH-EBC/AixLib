@@ -68,12 +68,17 @@ model BufferStorage
  final parameter Integer nTS1=integer(AixLib.Utilities.Math.Functions.round(data.hTS1/(data.hTank/n) + 0.5,0));
  final parameter Integer nTS2=integer(AixLib.Utilities.Math.Functions.round(data.hTS2/(data.hTank/n) + 0.5,0));
 
- final parameter Integer nLowerPorts=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPorts/(data.hTank/n) + 0.5,0),1));
- final parameter Integer nUpperPorts=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPorts/(data.hTank/n) + 0.5,0),n));
- final parameter Boolean inpLowLay=(nLowerPorts == 1); //if there is an input at the lowest layer
- final parameter Boolean inpHigLay=(nUpperPorts == n);
+ final parameter Integer nLowerPort_Demand=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPort_Demand/(data.hTank/n) + 0.5,0),1));
+ final parameter Integer nUpperPort_Demand=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPort_Demand/(data.hTank/n) + 0.5,0),n));
+ final parameter Boolean inpLowLay_Demand=(nLowerPort_Demand == 1); //if there is an input at the lowest layer
+ final parameter Boolean inpHigLay_Demand=(nUpperPort_Demand == n);
 
- final parameter Integer[n] inpActLay = cat(1,{if (nLowerPorts==k) then (if (nUpperPorts==k) then 2 else 1) else (if (nUpperPorts==k) then 1 else 0) for k in 1:n});
+ final parameter Integer nLowerPort_Supply=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPort_Supply/(data.hTank/n) + 0.5,0),1));
+ final parameter Integer nUpperPort_Supply=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPort_Supply/(data.hTank/n) + 0.5,0),n));
+ final parameter Boolean inpLowLay_Supply=(nLowerPorts_Supply == 1); //if there is an input at the lowest layer
+ final parameter Boolean inpHigLay_Supply=(nUpperPorts_Supply == n);
+
+ final parameter Integer[n] inpActLay = cat(1,{if (nLowerPort_Demand==k or nLowerPort_Supply==k) then (if (nUpperPort_Demand==k or nUpperPort_Supply==k) then 2 else 1) else (if (nUpperPort_Demand==k or nUpperPort_Supply==k) then 1 else 0) for k in 1:n});
  final parameter Integer[n] portsLayer=cat(1,{if inpActLay[1]==1 then 3 else 1},{inpActLay[k]*2+2 for k in 2:n-1},{if inpActLay[n]==1 then 3 else 1});
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////components/////////////////////////////////////////////////////////////////////////////
@@ -114,14 +119,14 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
+      package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
+      package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -384,35 +389,50 @@ end if;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of inner layers//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  for i in 2:(n-1) loop
-    if nLowerPorts == i then
-       connect(layer[i].ports[3], fluidportBottom1);
+for i in 2:(n-1) loop
+    if nLowerPort_Demand == i then
        connect(layer[i].ports[4], fluidportBottom2);
-       if nUpperPorts == i then
-         connect(layer[i].ports[5],fluidportTop1);
+       if nUpperPort_Demand == i then
          connect(layer[i].ports[6],fluidportTop2);
        end if;
-    elseif nUpperPorts ==i then
-         connect(layer[i].ports[3],fluidportTop1);
+    elseif nUpperPort_Demand ==i then
          connect(layer[i].ports[4],fluidportTop2);
     end if;
 
    connect(layer[i].ports[2],layer[i+1].ports[1]);
   end for;
+
+    for i in 2:(n-1) loop
+    if nLowerPort_Supply == i then
+       connect(layer[i].ports[3], fluidportBottom1);
+       if nUpperPort_Supply == i then
+         connect(layer[i].ports[5],fluidportTop1);
+       end if;
+    elseif nUpperPort_Supply ==i then
+         connect(layer[i].ports[3],fluidportTop1);
+    end if;
+
+  end for;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of upper and lower layer/////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  if nLowerPorts == 1 then
-    connect(layer[1].ports[2],fluidportBottom1);
+  if nLowerPort_Demand == 1 then
     connect(layer[1].ports[3],fluidportBottom2);
   end if;
   connect(layer[1].ports[1],layer[2].ports[1]);
 
-  if nUpperPorts == n then
-    connect(layer[n].ports[2],fluidportTop1);
+  if nUpperPort_Demand == n then
     connect(layer[n].ports[3],fluidportTop2);
   end if;
 
+  if nLowerPort_Supply == 1 then
+    connect(layer[1].ports[2],fluidportBottom1);
+  end if;
+  connect(layer[1].ports[1],layer[2].ports[1]);
+
+  if nUpperPort_Supply == n then
+    connect(layer[n].ports[2],fluidportTop1);
+  end if;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of heat transfer model///////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
