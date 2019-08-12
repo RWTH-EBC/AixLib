@@ -1,0 +1,16 @@
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.EvaporatorCondenserWithCapacity","AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions","AixLib.DataBase.HeatPump.Functions");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics","AixLib.DataBase.HeatPump.Functions.Characteristics");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.ConstantCoP","AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantCoP");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.ConstantQualityGrade","AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.PartialBaseFct","AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection","AixLib.DataBase.HeatPump.Functions.DefrostCorrection");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.NoModel","AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.PartialBaseFct","AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.WetterAfjei1996","AixLib.DataBase.HeatPump.Functions.DefrostCorrection.WetterAfjei1996");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor","AixLib.DataBase.HeatPump.Functions.IcingFactor");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.BasicIcingApproach","AixLib.DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach");
+convertClass("AixLib.Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.PartialBaseFct","AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct");
+convertElement("AixLib.Fluid.HeatPumps.HeatPump", "GCon", "GConOut");
+convertElement("AixLib.Fluid.HeatPumps.HeatPump", "GEva", "GEvaOut");
+convertModifiers("AixLib.Fluid.HeatPumps.HeatPump", {"tauHeaTra"}, {"tauHeaTraCon=%tauHeaTra%", "tauHeaTraEva=%tauHeaTra%"});

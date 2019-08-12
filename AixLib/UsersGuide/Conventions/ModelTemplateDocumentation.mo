@@ -1,6 +1,4 @@
 within AixLib.UsersGuide.Conventions;
-
-
 model ModelTemplateDocumentation "Template documentation for AixLib models"
 
   annotation(Documentation(info="<html>

@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
+within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Cellar "Cellar completly under ground"
   import AixLib;
   ///////// construction parameters
@@ -13,10 +13,14 @@ model Cellar "Cellar completly under ground"
   parameter Modelica.SIunits.Height room_height = 2.5 "length" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
   // Outer walls properties
   parameter Modelica.SIunits.Temperature T_Ground = 283.15 "GroundTemperature" annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Integer ModelConvOW = 1 "Heat Convection Model" annotation(Dialog(group = "Outer wall properties", compact = true, descriptionLabel = true), choices(choice = 1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom alpha",                                                                                                    radioButtons = true));
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+      group="Outer wall properties",
+      compact=true,
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   //Initial temperatures
   parameter Modelica.SIunits.Temperature T0_air = 285.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_Walls = 284.95 "Walls" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
@@ -135,7 +139,10 @@ model Cellar "Cellar completly under ground"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, -100}, {-80, -80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCellar annotation(Placement(transformation(extent = {{100, 80}, {120, 100}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TGround(T = T_Ground) annotation(Placement(transformation(extent = {{118, -80}, {138, -60}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {4, -6})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={4,-6})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
@@ -149,23 +156,22 @@ protected
 equation
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-44, -87}, {-42, -87}, {-42, -90}, {-90, -90}}, color = {191, 0, 0}));
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-18, -87}, {-2, -87}, {-2, -64}, {-54, -64}, {-54, -24}, {-12, -24}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}));
-  connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,
-          64.1},{110,90}},                                                                           color = {191, 0, 0}));
+  connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,64.1},{110,90}},      color = {191, 0, 0}));
   connect(TGround.port, Wall3.port_outside) annotation(Line(points = {{138, -70}, {2, -70}, {2, -54.45}}, color = {191, 0, 0}));
   connect(Wall2.port_outside, TGround.port) annotation(Line(points = {{77.45, 13}, {100, 13}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
-  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,
-          29.9},{110,8},{100,8},{100,-70},{138,-70}},                                                                                color = {191, 0, 0}));
+  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,29.9},{110,8},{100,8},{100,-70},{138,-70}},            color = {191, 0, 0}));
   connect(Wall1.port_outside, TGround.port) annotation(Line(points = {{2, 74.45}, {2, 88}, {100, 88}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
   connect(Wall4.port_outside, TGround.port) annotation(Line(points = {{-79.45, 13}, {-86, 13}, {-86, -64}, {-2, -64}, {-2, -70}, {138, -70}}, color = {191, 0, 0}));
-  connect(Wall2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{59, 13}, {46, 13}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall3.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{2, -36}, {2, -25.1125}, {3.9, -25.1125}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{2, 56}, {2, 44}, {46, 44}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall4.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-61, 13}, {-48, 13}, {-48, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,34},
-          {110,34},{110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,60},
-          {110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}));
-  connect(thermStar_Demux.therm, airload.port) annotation(Line(points = {{-1.1, 4.1}, {-1.1, 12}, {-12, 12}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}));
+  connect(Wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{59,13},{46,13},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
+  connect(Wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,-36},{2,-25.1125},{5.3,-25.1125},{5.3,-15.8}}, color={191,0,0}));
+  connect(Wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,56},{2,44},{46,44},{46,-24},{5.3,-24},{5.3,
+          -15.8}},                                                                                                                                     color={191,0,0}));
+  connect(Wall4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-61,13},{-48,13},{-48,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,
+          -24},{5.3,-24},{5.3,-15.8}},                                                                                                                                   color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{
+          5.3,-24},{5.3,-15.8}},                                                                                                                                  color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,4},{-19,4}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>

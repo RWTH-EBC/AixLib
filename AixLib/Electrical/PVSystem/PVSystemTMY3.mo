@@ -77,10 +77,9 @@ NOC</p>
 <p>PV system data (DataBase Records) can be found: </p>
 <ul>
 <li><a href=\"http://www.eks-solar.de/pdfs/aleo_s24.pdf\">eks-solar</a></li>
-<li><a href=\"http://soehn-net.de/fileadmin/user_upload/pdf/module/canadian_solar/CS6P220-250P_engl..pdf\">soehn-net</a></li>
-<li><a href=\"http://www.abc-wagner.de/uploads/media/Datenblatt_Kid_SME-1_Serie_DE.pdf\">abc-wagner</a></li>
-<li><a href=\"http://www.renugen.co.uk/content/Solar_Panel_Brochures_part_4/Solar&amp;percnt;20Panel&amp;percnt;20Brochures&amp;percnt;20part&amp;percnt;204/symphony_brochure/symphony_energy_se-m225.pdf\">Renugen</a></li>
-<li><a href=\"http://sunelec.com/datasheet-library/download/SMA-SunnyBoy-3000_3800_4000.pdf\">sunelec</a></li>
+<li><a href=\"https://www.solarelectricsupply.com/canadian-solar-cs6p-250-solar-panels-117\">solar-electric</a></li>
+<li><a href=\"http://www.fl200.com/gourdinne/energie/Datenblatt_Kid_SME_1_Serie_DE.pdf\">schueco</a></li>
+<li><a href=\"https://solarco.en.ec21.com/Solar_Module_SE6M60-Series--7320291_7320754.html\">solarco</a></li>
 </ul>
 <p><br/>
 Source of literature for the calculation of the pv cell efficiency: </p>

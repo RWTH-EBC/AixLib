@@ -6,7 +6,10 @@ record StiebelEltron_WPL18 "Stiebel Eltron WPL 18"
     tableQdot_con=[0,-7,2,7,10,20; 35,9700,11600,13000,14800,16300; 50,10000,11200,
         12900,16700,17500],
     mFlow_conNom=13000/4180/5,
-    mFlow_evaNom=1);
+    mFlow_evaNom=1,
+    tableUppBou=[-25, 65; 40, 65],
+    tableLowBou=[-25, 0; 40, 0]);
+    //These boundary-tables are not from the datasheet but default values.
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,

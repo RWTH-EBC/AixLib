@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
-partial model PartialThermalZone "Partial model for thermal zone modelsl"
+partial model PartialThermalZone "Partial model for thermal zone models"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
@@ -77,33 +77,33 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final nPorts=nPorts,
     redeclare final package Medium = Medium,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
-    final alphaRad=zoneParam.alphaRad,
+    final hRad=zoneParam.hRad,
     final nOrientations=zoneParam.nOrientations,
     final AWin=zoneParam.AWin,
     final ATransparent=zoneParam.ATransparent,
-    final alphaWin=zoneParam.alphaWin,
+    final hConWin=zoneParam.hConWin,
     final RWin=zoneParam.RWin,
     final gWin=zoneParam.gWin,
     final ratioWinConRad=zoneParam.ratioWinConRad,
     final AExt=zoneParam.AExt,
-    final alphaExt=zoneParam.alphaExt,
+    final hConExt=zoneParam.hConExt,
     final nExt=zoneParam.nExt,
     final RExt=zoneParam.RExt,
     final RExtRem=zoneParam.RExtRem,
     final CExt=zoneParam.CExt,
     final AInt=zoneParam.AInt,
-    final alphaInt=zoneParam.alphaInt,
+    final hConInt=zoneParam.hConInt,
     final nInt=zoneParam.nInt,
     final RInt=zoneParam.RInt,
     final CInt=zoneParam.CInt,
     final AFloor=zoneParam.AFloor,
-    final alphaFloor=zoneParam.alphaFloor,
+    final hConFloor=zoneParam.hConFloor,
     final nFloor=zoneParam.nFloor,
     final RFloor=zoneParam.RFloor,
     final RFloorRem=zoneParam.RFloorRem,
     final CFloor=zoneParam.CFloor,
     final ARoof=zoneParam.ARoof,
-    final alphaRoof=zoneParam.alphaRoof,
+    final hConRoof=zoneParam.hConRoof,
     final nRoof=zoneParam.nRoof,
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,
@@ -115,9 +115,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final T_start=T_start,
     final C_start=C_start,
     final C_nominal=C_nominal,
-    final mSenFac=mSenFac)
-    "RC calculation core"
-    annotation (Placement(transformation(extent={{38,28},{86,64}})));
+    final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,28},{86,64}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

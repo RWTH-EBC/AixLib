@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 block SecurityControl "Block including all security levels"
   extends BaseClasses.PartialSecurityControl;
 
@@ -37,13 +37,14 @@ block SecurityControl "Block including all security levels"
     annotation (Dialog(group="Defrost"), choices(checkBox=true));
   parameter Real minIceFac "Minimal value above which no defrost is necessary"
     annotation (Dialog(group="Defrost", enable=use_deFro));
+  parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events." annotation (Dialog(group="Defrost", enable=use_deFro));
   parameter Boolean use_chiller=true
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
+    "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(group="Defrost", enable=use_deFro),
                                         choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
     "Calculate how much eletrical energy is used to melt ice"
-    annotation (Dialog(enable=use_chiller and use_deFro, group="Defrost"));
+    annotation (Dialog(enable=not use_chiller and use_deFro, group="Defrost"));
   parameter Boolean use_antFre=true
     "True if anti freeze control is part of security control"
     annotation (Dialog(group="Anti Freeze Control"), choices(checkBox=true));
@@ -61,11 +62,11 @@ block SecurityControl "Block including all security levels"
   OnOffControl onOffController(
     final minRunTime=minRunTime,
     final minLocTime=minLocTime,
-    use_minRunTime=use_minRunTime,
-    use_minLocTime=use_minLocTime,
-    use_runPerHou=use_runPerHou,
-    maxRunPerHou=maxRunPerHou,
-    pre_n_start=pre_n_start)
+    final use_minRunTime=use_minRunTime,
+    final use_minLocTime=use_minLocTime,
+    final use_runPerHou=use_runPerHou,
+    final maxRunPerHou=maxRunPerHou,
+    final pre_n_start=pre_n_start)
     annotation (Placement(transformation(extent={{-62,-18},{-26,18}})));
 
   DefrostControl defrostControl(
@@ -198,4 +199,22 @@ equation
           {100,-50},{100,-110}}, color={255,127,0}));
   connect(operationalEnvelope.ERR, ERR_opeEnv) annotation (Line(points={{2,-11.1},
           {2,-50},{60,-50},{60,-110}}, color={255,127,0}));
+  annotation (Documentation(revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
+</html>", info="<html>
+<p>Aggregation of the four main security measurements of a heat pump. The order is based on the relevance to the real system. Only the AntiFreeze-Control is put last because of the relevance for the simulation. If the medium temperature falls below the critical value, the simulation will fail.</p>
+<p>All used functions are optional. See the used models for more info on each security function:</p>
+<ul>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.DefrostControl\">DefrostControl</a></li>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.OnOffControl+\">OnOffControl</a></li>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.OperationalEnvelope\">OperationalEnvelope</a></li>
+<li><a href=\"modelica://AixLib.Controls.HeatPump.SecurityControls.AntiFreeze\">AntiFreeze</a></li>
+</ul>
+<p>The security function for the anti legionella control is placed inside the model <a href=\"modelica://AixLib.Controls.HeatPump.HPControl\">HPControl</a></p>
+</html>"));
 end SecurityControl;

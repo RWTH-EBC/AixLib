@@ -206,7 +206,9 @@ partial model PartialModularController
     Documentation(revisions="<html>
 <ul>
   <li>
-  October 17, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+
+  October 17, 2017, by Mirko Engelpracht:<br/>
+
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>

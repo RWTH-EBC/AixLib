@@ -1,6 +1,4 @@
 within AixLib.DataBase.Walls.EnEV2002.Ceiling;
-
-
 record CEattic_EnEV2002_SML_loHalf
   "Ceiling towards attic after EnEV 2002, for building of type S (schwer), M (mittel) and L (leicht), lower half"
   extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.08, 0.0125, 0.015}
