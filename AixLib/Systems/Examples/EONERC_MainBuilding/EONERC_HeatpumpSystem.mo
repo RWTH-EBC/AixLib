@@ -9,13 +9,13 @@ model EONERC_HeatpumpSystem
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(energyDynamics=ThrottlePump.energyDynamics, redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)),
-    T_amb=293.15) annotation (Placement(transformation(
+    T_amb=293.15,
+    d=0.125)      annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=0,
         origin={-60,0})));
@@ -25,13 +25,14 @@ model EONERC_HeatpumpSystem
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    length=1,
-    T_amb=293.15,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(energyDynamics=ThrottlePump.energyDynamics, redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)))
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)),
+    T_amb=293.15,
+    d=0.100,
+    length=4,
+    pipe3(length=8))
                   annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
@@ -124,12 +125,13 @@ model EONERC_HeatpumpSystem
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=293.15,
-    length=1,
-    Kv=6.3,
-    pipe3(length=2)) annotation (Placement(transformation(
+    d=0.125,
+    length=5,
+    Kv=160,
+    pipe3(length=10))
+                     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={-60,-80})));
@@ -145,12 +147,12 @@ model EONERC_HeatpumpSystem
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15,
     length=1,
-    Kv=6.3,
-    pipe3(length=2)) annotation (Placement(transformation(
+    pipe3(length=2),
+    T_amb=293.15,
+    d=0.100,
+    Kv=100)          annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=0,
         origin={-140,0})));
@@ -159,12 +161,12 @@ model EONERC_HeatpumpSystem
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15,
     length=1,
-    Kv=6.3,
-    pipe3(length=2)) annotation (Placement(transformation(
+    pipe3(length=2),
+    T_amb=293.15,
+    d=0.125,
+    Kv=160)          annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={160,0})));
@@ -173,12 +175,12 @@ model EONERC_HeatpumpSystem
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    d=0.032,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15,
     length=1,
-    Kv=6.3,
-    pipe3(length=2)) annotation (Placement(transformation(
+    pipe3(length=2),
+    T_amb=293.15,
+    d=0.100,
+    Kv=100)          annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={140,-80})));
