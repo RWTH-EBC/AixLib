@@ -51,16 +51,6 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
         origin={64,16})));
   Utilities.Sources.PrescribedSolarRad prescribedSolarRad [5](n=5)
     annotation (Placement(transformation(extent={{-60,24},{-40,44}})));
-  Modelica.Blocks.Sources.Constant const_I[5](each k=2.2) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-84,70})));
-  Modelica.Blocks.Sources.Constant const_I_dir [5](each k=2.2) annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-84,38})));
 equation
   connect(constantWindSpeed.y, southFacingWindows.WindSpeedPort)
     annotation (Line(points={{-48,-23},{-48,1},{-11,1}}, color={0,0,127}));
