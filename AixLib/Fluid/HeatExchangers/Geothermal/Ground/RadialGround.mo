@@ -41,7 +41,7 @@ model RadialGround
   /////////////////////////////
   ///// Object generation /////
   /////////////////////////////
-protected
+
   Utilities.HeatTransfer.CylindricAxialHeatTransfer                      cylindricAxialHeatTransfer[n,nRad](
     each rho=rho,
     each c=c,

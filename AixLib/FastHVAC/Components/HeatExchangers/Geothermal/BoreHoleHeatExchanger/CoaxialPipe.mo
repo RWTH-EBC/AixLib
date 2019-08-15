@@ -53,8 +53,8 @@ public
         Medium)
     annotation (Placement(transformation(extent={{-38,70},{-18,90}}),
         iconTransformation(extent={{-38,70},{-18,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidPortOut(redeclare package Medium
-      = Medium) annotation (Placement(transformation(extent={{6,70},{26,90}}),
+  Modelica.Fluid.Interfaces.FluidPort_b fluidPortOut(redeclare package Medium =
+        Medium) annotation (Placement(transformation(extent={{6,70},{26,90}}),
         iconTransformation(extent={{6,70},{26,90}})));
   AixLib.Fluid.FixedResistances.HydraulicResistance deflection(
     redeclare package Medium = Medium,

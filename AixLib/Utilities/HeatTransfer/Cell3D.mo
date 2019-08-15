@@ -146,8 +146,6 @@ qTop=ThermTop.Q_flow/(y*x);
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The <b>Cell3D</b> model represents a wall element consisting of one layer. There are 6 <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort\">HeatPort</a></b> Connector to connect several Cells for simulation of 3-dimensional heat transfer through a wall and heat storage within a wall.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 <p><a href=\"BaseLib.Examples.HeatTransfer3D_test\">BaseLib.Examples.HeatTransfer3D_test </a></p>
 </html>",

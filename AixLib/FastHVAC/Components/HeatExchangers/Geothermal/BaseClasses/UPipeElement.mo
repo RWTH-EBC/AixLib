@@ -6,6 +6,10 @@ model UPipeElement
   /// Model parameters ///
     // General
   parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
+  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
+      FastHVAC.Media.WaterSimple()
+    "Standard  charastics for water (heat capacity, density, thermal conductivity)"
+    annotation (choicesAllMatching);
 
     // Borehole
     parameter SI.Diameter boreholeDiameter = 0.135 "Diameter of borehole" annotation(Dialog(group="Borehole"));
@@ -30,6 +34,8 @@ model UPipeElement
 
   /// Object Generation ///
   Pipes.DynamicPipe           dynamicPipe1(
+    medium=medium,
+    T_0=T_start,
     length=length,
     diameter=pipeType.d_i,
     parameterPipe=pipeType,
@@ -40,6 +46,8 @@ model UPipeElement
         origin={-40,54})));
 
   Pipes.DynamicPipe           dynamicPipe2(
+    medium=medium,
+    T_0=T_start,
     each length=length,
     each diameter=pipeType.d_i,
     each parameterPipe=pipeType,

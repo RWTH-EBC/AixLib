@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.Geothermal.GeothermalField;
+within AixLib.FastHVAC.Components.HeatExchangers.Geothermal.GeothermalField;
 model UPipeField
   "Dynamic ground model, different pipe type for the pipes possible"
   ///////////////////////////////
@@ -91,26 +91,21 @@ model UPipeField
   /////////////////////////////
 
 public
-  Modelica.Fluid.Interfaces.FluidPort_a fieldFluidIn(redeclare package Medium = Medium)  annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fieldFluidOut(redeclare package Medium = Medium) annotation (Placement(transformation(extent={{30,90},{50,110}})));
+  Interfaces.EnthalpyPort_a enthalpyPort_a1
+    annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
+  Interfaces.EnthalpyPort_b enthalpyPort_b1
+    annotation (Placement(transformation(extent={{30,90},{50,110}})));
 protected
-  Modelica.Fluid.Vessels.ClosedVolume inputMixingVolume(
-    redeclare package Medium = Medium,
-    use_portsData=false,
-    nPorts=noOfPipes+1,
-    T_start=T0mixing,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    V=0.01)           annotation (Placement(transformation(extent={{-10,10},{10,-10}}, rotation=-90, origin={-54,80})));
+  Valves.Splitter SplitterInput(n=noOfPipes) annotation (Placement(
+        transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=-90,
+        origin={-60,74})));
 
-  Modelica.Fluid.Vessels.ClosedVolume outputMixingVolume(
-    redeclare package Medium = Medium,
-    use_portsData=false,
-    nPorts=noOfPipes+1,
-    T_start=T0mixing,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    V=0.01)           annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=-90, origin={54,80})));
+  Valves.Manifold ManifoldOutput annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={52,72})));
 
   //////////////////////////////////////
   ///// BEGIN: Create ground-cells /////
@@ -148,14 +143,11 @@ protected
   ///////////////////////////////
 protected
   BoreHoleHeatExchanger.UPipe uPipe[noOfPipes](
-    redeclare package Medium = Medium,
     each T_start=T0fluids,
     each n=n,
     each boreholeDepth=boreholeDepth,
     each boreholeDiameter=boreholeDiameter,
     pipeType=pipeType,
-    each zeta=zeta,
-    each nParallel=nParallel,
     each boreholeFilling=AixLib.DataBase.Materials.FillingMaterials.Bentonite())
     annotation (Placement(transformation(extent={{12,-26},{90,52}})));
   /////////////////////////////
@@ -216,14 +208,6 @@ protected
         rotation=-90,
         origin={-40,2})));
 equation
-  connect(fieldFluidIn, inputMixingVolume.ports[1]) annotation (Line(
-      points={{-40,100},{-40,80},{-44,80}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(fieldFluidOut, outputMixingVolume.ports[1]) annotation (Line(
-      points={{40,100},{40,80},{44,80}},
-      color={0,127,255},
-      smooth=Smooth.None));
 
   // Connect ground-elements to each other
   for i in 1:(xSteps-1) loop
@@ -240,8 +224,8 @@ equation
 
   for i in 1:noOfPipes loop
     // Connect pipes to input and output mixing volumes
-    connect(uPipe[i].fluidPortIn, inputMixingVolume.ports[i+1]);
-    connect(uPipe[i].fluidPortOut, outputMixingVolume.ports[i+1]);
+    connect(uPipe[i].enthalpyPort_a1, SplitterInput.enthalpyPort_b[i]);
+    connect(uPipe[i].enthalpyPort_b1, ManifoldOutput.enthalpyPort_a[i]);
     for j in 1:n loop
       // Connect pipes to ground
       connect(cell[boreholeGridPositions[i,1], boreholeGridPositions[i,2], j].Load1.port, uPipe[i].thermalConnectors2Ground[j]);
@@ -322,14 +306,20 @@ equation
       points={{-46,2},{-52,2},{-52,36},{-58.45,36}},
       color={191,0,0},
       smooth=Smooth.None));
+  connect(enthalpyPort_a1, SplitterInput.enthalpyPort_a)
+    annotation (Line(points={{-40,100},{-40,84},{-60,84}}, color={176,0,0}));
+  connect(ManifoldOutput.enthalpyPort_b, enthalpyPort_b1) annotation (Line(
+        points={{52,82},{46,82},{46,100},{40,100}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-80,-60},
-            {80,100}}),          graphics), Icon(coordinateSystem(
+            {80,100}})),                    Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-80,-60},{80,100}})),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview </span></h4>
 <p>This model is used to simulate a freely configurable field of U-Pipe borehole heat exchangers </p>
 <p>This model is primarily based und multiple objects of the <b>UPipe</b> class, multiple objects of the <b>Cell3D</b> class out of the BaseLib Library to represent the ground surrounding the boreholes and some basic thermal and hydraulic components out of the Modelica Library </p>
 <p>The model is used in a test case environment or in combination with further building technology models to represent a heat source or heat sink system </p>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://HVAC/Images/stars4.png\"/></p>
 <h4><span style=\"color:#008000\">Assumptions </span></h4>
 <p>This model assumes the ground surrounding the boreholes as a homogeneous volume with constant thermal properties such as heat capacity, density and thermal conductivity. Furthermore the number and size of the vertical discretizations of UPipe and the surrounding ground have to be the same. </p>
 <h4><span style=\"color:#008000\">Known Limitations </span></h4>
@@ -343,7 +333,7 @@ equation
 <li>Model developed as part of DA025 &QUOT;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&QUOT; by Tim Comanns</li>
 </ul>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.HeatExchangers.Geothermal.Examples.RectangularGround_2Pipes\">AixLib.Fluid.HeatExchangers.Geothermal.Examples.RectangularGround_2Pipes</a></p>
+<p><a href=\"HVAC.Examples.GeothermalField.Verification.RectangularGround_2Pipes\">HVAC.Examples.GeothermalField.Verification.RectangularGround_2Pipes</a></p>
 </html>",
       revisions="<html>
 <p><ul>

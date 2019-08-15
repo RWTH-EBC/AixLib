@@ -3,12 +3,12 @@ model RadialGround1Pipe
   "Simulation set-up for one pipe with a radial ground model"
   extends Modelica.Icons.Example;
 
-     replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"
-    annotation (choicesAllMatching=true);
-    inner Modelica.Fluid.System system(T_ambient=281.15) annotation (Placement(transformation(extent={{-100,78},{-80,98}})));
-
 public
+  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
+    FastHVAC.Media.WaterSimple()
+    "Standard  charastics for water (heat capacity, density, thermal conductivity)"
+    annotation (choicesAllMatching);
+
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature groundTopTemp(T=284.15)
     "top temperature of the ground at the surface"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
@@ -53,7 +53,7 @@ Modelica.Blocks.Sources.Constant FlowTemperature(k=8.0)
   annotation (Placement(transformation(extent={{-66,36},{-58,44}})));
   Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe
                                                               uPipe(
-    redeclare package Medium = Medium,
+    medium=medium,
     T_start=radialGround.T0,
     n=radialGround.n,
     boreholeDepth=108.45,
@@ -96,8 +96,8 @@ equation
       smooth=Smooth.None));
   connect(toKelvin.Kelvin, fluidSource.T_fluid) annotation (Line(points={{-13.5,
           39},{-6.75,39},{-6.75,34.78},{-0.2,34.78}}, color={0,0,127}));
-  connect(Massflow_2Pipes.y, fluidSource.dotm) annotation (Line(points={{-57.6,
-          24},{-28,24},{-28,28.66},{-0.2,28.66}}, color={0,0,127}));
+  connect(Massflow_2Pipes.y, fluidSource.dotm) annotation (Line(points={{-57.6,24},
+          {-28,24},{-28,28.66},{-0.2,28.66}}, color={0,0,127}));
   connect(vessel.enthalpyPort_a, ReturnTemperature.enthalpyPort_b) annotation (
       Line(points={{43,80},{56,80},{56,79.9},{59,79.9}}, color={176,0,0}));
   connect(fluidSource.enthalpyPort_b, uPipe.enthalpyPort_a1) annotation (Line(
