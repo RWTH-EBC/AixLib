@@ -1,15 +1,9 @@
 within AixLib.FastHVAC.Components.HeatExchangers.Geothermal.GeothermalField;
 model UPipeField
   "Dynamic ground model, different pipe type for the pipes possible"
-  ///////////////////////////////
-  ///// Import used classes /////
-  ///////////////////////////////
   import SI = Modelica.SIunits;
   import Modelica.Utilities.Streams;
 
-  ////////////////////////////////////
-  ///// General model parameters /////
-  ////////////////////////////////////
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Used medium"                                                                    annotation (Dialog(tab="General", group="General"), choicesAllMatching=true);
   parameter Integer n = 4 "Number of discretizations in axial direction" annotation(Dialog(tab="General", group="General"));
@@ -19,16 +13,10 @@ model UPipeField
   parameter SI.Temperature T0mixing = 288.15
     "Initial temperature in mixing/distribution volume"                                          annotation(Dialog(tab="General", group="General"));
 
-  /////////////////////////////
-  ///// Ground parameters /////
-  /////////////////////////////
   parameter SI.ThermalConductivity lambda=2.4 annotation(Dialog(group="Thermal Properties", tab="Ground"));
   parameter SI.Density rho=1600 annotation(Dialog(group="Thermal Properties", tab="Ground"));
   parameter SI.SpecificHeatCapacity c=1000 annotation(Dialog(group="Thermal Properties", tab="Ground"));
 
-  ///////////////////////////////
-  ///// Borehole parameters /////
-  ///////////////////////////////
   parameter SI.Length[:,2] boreholePositions = [0, 0; 5.5, 0; 5.5, 0; 5.5, 5.5]
     "Define number and positions of boreholes/pipes"                                                             annotation(Dialog(tab="Borehole"));
 
@@ -41,18 +29,10 @@ model UPipeField
     "Filling of the borehole"
     annotation (Dialog(tab="Borehole"), choicesAllMatching=true);
 
-  ///////////////////////////
-  ///// Pipe parameters /////
-  ///////////////////////////
+
   parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType[:] =  fill(AixLib.DataBase.Pipes.Copper.Copper_40x1(), 4)
     "Type of pipe"                                                                                                     annotation (Dialog(tab="Pipes"), choicesAllMatching=true);
-  parameter Integer nParallel = 2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(tab="Pipes"));
-  parameter Real zeta = 0.237
-    "Pressure loss coefficient for pipe deflection at bottom of borehole"                           annotation(Dialog(tab="Pipes"));
 
-  ///////////////////////////
-  ///// Grid parameters /////
-  ///////////////////////////
   parameter SI.Length gridBorderWidth = 10
     "Width of grid to surround the minimal outline derived from the pipe positions"                     annotation(Dialog(tab="Grid"));
   parameter SI.Length pipeCellSize = 1
@@ -60,13 +40,7 @@ model UPipeField
 
   parameter Real borderDistribution[:] = {1}
     "How to distribute the total gridBorderWidth among numerous elements"                                          annotation(Dialog(tab="Grid"));
-  ///////////////////////////////////////////////////////////////////////////
-  ////////////////////// END OF PARAMETER DECLARATIONS //////////////////////
-  ///////////////////////////////////////////////////////////////////////////
 
-  //////////////////////////////
-  ///// Implicit variables /////
-  //////////////////////////////
   Integer count = 1;
 
   final parameter Integer noOfPipes = size(boreholePositions, 1)
@@ -86,10 +60,6 @@ model UPipeField
   final parameter Real yGridMatrix[xSteps, ySteps, n] = AixLib.Fluid.HeatExchangers.Geothermal.BaseClasses.Functions.getGridSizeMatrix(
                                                                 boreholePositions, gridBorderWidth, borderDistribution, pipeCellSize, n, 2);
 
-  /////////////////////////////
-  ///// Object generation /////
-  /////////////////////////////
-
 public
   Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
@@ -107,9 +77,6 @@ protected
         rotation=-90,
         origin={52,72})));
 
-  //////////////////////////////////////
-  ///// BEGIN: Create ground-cells /////
-  //////////////////////////////////////
 protected
   Utilities.HeatTransfer.Cell3D
                               cell[xSteps,ySteps,n](
@@ -134,13 +101,6 @@ protected
     each T0=T0ground)
     annotation (Placement(transformation(extent={{-12,14},{8,34}})));
 
-  ////////////////////////////////////
-  ///// END: Create ground-cells /////
-  ////////////////////////////////////
-
-  ///////////////////////////////
-  ///// BEGIN: Create uPipe /////
-  ///////////////////////////////
 protected
   BoreHoleHeatExchanger.UPipe uPipe[noOfPipes](
     each T_start=T0fluids,
@@ -150,9 +110,6 @@ protected
     pipeType=pipeType,
     each boreholeFilling=AixLib.DataBase.Materials.FillingMaterials.Bentonite())
     annotation (Placement(transformation(extent={{12,-26},{90,52}})));
-  /////////////////////////////
-  ///// END: Create uPipe /////
-  /////////////////////////////
 
 public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemperature
@@ -314,26 +271,24 @@ equation
             {80,100}})),                    Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-80,-60},{80,100}})),
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview </span></h4>
+<h4><span style=\"color: #008000\">Overview </span></h4>
 <p>This model is used to simulate a freely configurable field of U-Pipe borehole heat exchangers </p>
 <p>This model is primarily based und multiple objects of the <b>UPipe</b> class, multiple objects of the <b>Cell3D</b> class out of the BaseLib Library to represent the ground surrounding the boreholes and some basic thermal and hydraulic components out of the Modelica Library </p>
 <p>The model is used in a test case environment or in combination with further building technology models to represent a heat source or heat sink system </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars4.png\"/></p>
-<h4><span style=\"color:#008000\">Assumptions </span></h4>
+<h4><span style=\"color: #008000\">Assumptions </span></h4>
 <p>This model assumes the ground surrounding the boreholes as a homogeneous volume with constant thermal properties such as heat capacity, density and thermal conductivity. Furthermore the number and size of the vertical discretizations of UPipe and the surrounding ground have to be the same. </p>
-<h4><span style=\"color:#008000\">Known Limitations </span></h4>
+<h4><span style=\"color: #008000\">Known Limitations </span></h4>
 <p>The large number of objects resulting from the multiple instances of the UPipe-model result in a considerably long time used for translation and compiling of the model. Even before Dymola prints out &ldquo;Translating&rdquo; or &ldquo;Compiling&rdquo; there might be a period of 10-20 minutes during which Dymola looks as if it had crashed. </p>
 <p>Therefore the capability of this model to be directly combined with an extensive building model is limited. In cases of complex U-Pipe-fields with numerous boreholes this model should be used to create a detailed simulation from which a simplified model should be configured. </p>
-<h4><span style=\"color:#008000\">Concept </span></h4>
+<h4><span style=\"color: #008000\">Concept </span></h4>
 <p>A set of parameters describes all used materials, fluids and the geometry of the borehole heat exchanger. The call of the function <i>getGridSizeMatrix</i> returns the specified horizontal grid for the ground cells. Each borehole heat exchanger is represented by a single object of the UPipe class that is thermally connected to the surrounding ground layers. </p>
-<h4><span style=\"color:#008000\">References</span></h4>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>Source:</p>
 <ul>
-<li>Model developed as part of DA025 &QUOT;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&QUOT; by Tim Comanns</li>
+<li>Model developed as part of DA025 &quot;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&quot; by Tim Comanns</li>
 </ul>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.GeothermalField.Verification.RectangularGround_2Pipes\">HVAC.Examples.GeothermalField.Verification.RectangularGround_2Pipes</a></p>
+<h4><span style=\"color: #008000\">Example Results</span></h4>
+<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes\">AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes</a></p>
 </html>",
       revisions="<html>
 <p><ul>
