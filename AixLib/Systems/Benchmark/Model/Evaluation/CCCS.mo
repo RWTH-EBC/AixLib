@@ -318,8 +318,32 @@ public
   end EnergyCosts;
 
   model EmissionsCosts "calculating the costs for emissions as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
+    Modelica.Blocks.Math.Gain EmissionsFactorHeat(k=0.2)
+      annotation (Placement(transformation(extent={{-38,24},{-18,44}})));
+    Modelica.Blocks.Math.Gain EmissionsFactorCold(k=0.527)
+      annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+    Modelica.Blocks.Math.Gain EmissionsFactorElectricity(k=0.626)
+      annotation (Placement(transformation(extent={{-38,-44},{-18,-24}})));
+    Modelica.Blocks.Math.Sum Emissions
+      annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
+    Modelica.Blocks.Math.Gain CostFactorEmissions(k=19.51)
+      annotation (Placement(transformation(extent={{28,-10},{48,10}})));
+  equation
+    connect(EmissionsFactorHeat.y,Emissions. u[1]) annotation (Line(points={{-17,34},
+            {-8,34},{-8,0}},        color={0,0,127}));
+    connect(EmissionsFactorCold.y,Emissions. u[1])
+      annotation (Line(points={{-19,0},{-8,0}},        color={0,0,127}));
+    connect(EmissionsFactorElectricity.y,Emissions. u[1]) annotation (Line(points={{-17,-34},
+            {-8,-34},{-8,0}},                  color={0,0,127}));
+    connect(Emissions.y,CostFactorEmissions. u)
+      annotation (Line(points={{15,0},{26,0}},        color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false), graphics={
+                                    Rectangle(
+              extent={{308,-308},{788,354}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
   end EmissionsCosts;
 
   model PerformanceReductionCosts
@@ -342,25 +366,41 @@ public
         Text(extent={{-100,52},{5,92}}, textString=\"\"),
         Text(extent={{-100,-92},{5,-52}}, textString=\"\")}));
   
+  
+parameter Real G;                // average salary of employee p.a.
+parameter Real C_Prod;           // factor of productivity according to CCCS evaulation mehtod  
+Real C_CO2_Canteen;             //level of CO2 in canteen
+Real C_CO2_Workshop;            //level of CO2 in workshop
+Real C_CO2_ConferenceRoom;      //level of CO2 in conference room
+Real C_CO2_MultiPersonOffice;   //level of CO2 in muliperson office
+Real C_CO2_OpenPlanOffice;      //level of CO2 in open plan office
+Real X_Canteen;                 //level of humidity in canteen
+Real X_Workshop;                //level of humidity in workshop
+Real X_ConferenceRoom;          //level of humidty in conference room
+Real X_MultiPersonOffice;       //level of humidty in multipersonoffice
+Real X_OpenPLanOffice;          //level of humidity in open plan opffice
+Real LRM_TX_Canteen;            //performance reduction coefficient due to temperature and humidity levels in canteen
+Real LRM_TX_Workshop;           //performance reduction coefficient due to temperature and humidity levels in workshop
+Real LRM_TX_ConferenceRoom;     //performance reduction coefficient due to temperature and humidity levels in conference room
+Real LRM_TX_MultiPersonOffice;  //performance reduction coefficient due to temperature and humidity levels in multipersonoffice
+Real LRM_TX_OpenPlanOffice;     //performance reduction coefficient due to temperature and humidity levels in open plan office
+Real LRM_CO2_Canteen;           //performance reduction coefficient due to CO2 level in canteen
+Real LRM_CO2_Workshop;          //performance reduction coefficient due to CO2 level in canteen
+Real LRM_CO2_ConferenceRoom;    //performance reduction coefficient due to CO2 level in canteen
+Real LRM_CO2_MultiPersonOffice; //performance reduction coefficient due to CO2 level in canteen
+Real LRM_CO2_OpenPlanOffice;    //performance reduction coefficient due to CO2 level in canteen
+Real K_LRM_Canteen;             //Costs for overall performance reduction in canteen
+Real K_LRM_Workshop;            //Costs for overall performance reduction in workshop
+Real K_LRM_ConferenceRoom;      //Costs for overall performance reduction in conference room
+Real K_LRM_MultiPersonOffice;   //Costs for overall performance reduction in multipersonoffice
+Real K_LRM_OpenPlanOffice;      //Costs for overall performance reduction in open plan office
+Real K_LRM;                     //Costs for overall performance reduction
 
-Real C_CO2_Canteen; \"level of CO2 in canteen\"
-Real C_CO2_Workshop; \"level of CO2 in workshop\"
-Real C_CO2_ConferenceRoom; \"level of CO2 in conference room\"
-Real C_CO2_MultiPersonOffice; \"level of CO2 in muliperson office\"
-Real C_CO2_OpenPlanOffice; \"level of CO2 in open plan office\"
-Real X_Canteen; \"level of humidity in canteen\"
-Real X_Workshop; \"level of humidity in workshop\"
-Real X_ConferenceRoom; \"level of humidty in conference room\"
-Real X_MultiPersonOffice; \"level of humidty in multipersonoffice\"
-Real X_OpenPLanOffice; \"level of humidity in open plan opffice\"
-Real LRM_TX_Canteen; \"performance reduction coefficient due to temperature and humidity levels in canteen\"
-Real LRM_CO2_Canteen; \"performance reduction coefficient due to CO2 level in canteen\"
-Real K_LRM; \"Costs for overall performance reduction\"
 
 equation
   
   
-  \"performance reduction due to temperature and humidity levels\"
+  //performance reduction due to temperature and humidity levels
   
 if humidty<0.25
 then 
@@ -396,20 +436,34 @@ else
                 
     ;
     
-   \"performance reduction due to CO2 level\"
+   //performance reduction due to CO2 level
+   //Performance reduction due to CO2 level might not be considered because there is no information about CO2 levels in the rooms
    
-   LRM_CO2=0.0000575*C_CO2-0.023;
+   LRM_CO2_Canteen=0.0000575*C_CO2_Canteen-0.023;
+   LRM_CO2_Workshop=0.0000575*C_CO2_Workshop-0.023;
+   LRM_CO2_ConferenceRoom=0.0000575*C_CO2_ConferenceRoom-0.023;
+   LRM_CO2_MultiPersonOffice=0.0000575*C_CO2_MultiPersonOffice-0.023;
+   LRM_CO2_OpenPlanOffice=0.0000575*C_CO2_OpenPlanOffice-0.023;
    
-   \"Performance reduction due to CO2 level is not considered because there is no information about CO2 levels in the rooms\"
    
+   //Performance reduction due to VOC level is not considered because there is no information about VOC levels in the rooms
  
    
-   \"Costs for overall performance reduction\"
+   //Costs due to performance reduction
    
-   K_LRM=1-((1-LRM_TX)*(1-LRM_CO2));
+   K_LRM_Canteen=G*C_Prod/(233*8*60)*sum ((t*(1-(1-LRM_TX_Canteen)*(1-LRM_CO2_Canteen))));
+   K_LRM_Workshop=G*C_Prod/(233*8*60)*sum ((t*(1-(1-LRM_TX_Workshop)*(1-LRM_CO2_Workshop))));
+   K_LRM_ConferenceRoom=G*C_Prod/(233*8*60)*sum ((t*(1-(1-LRM_TX_ConferenceRoom)*(1-LRM_CO2_ConferenceRoomn))));
+   K_LRM_MultiPersonOffice=G*C_Prod/(233*8*60)*sum ((t*(1-(1-LRM_TX_MultiPersonOffice)*(1-LRM_CO2_MultiPersonOffice))));
+   K_LRM_OpenPlanOffice=G*C_Prod/(233*8*60)*sum ((t*(1-(1-LRM_TX_OpenPlanOffice)*(1-LRM_CO2_OpenPlanOffice))));
    
    
-   \"Performance reduction due to VOC level is not considered because there is no information about VOC levels in the rooms\"
+   //toal costs due to performance reduction
+    
+   K_LRM = K_LRM_Canteen + K_LRM_Workshop + K_LRM_ConferenceRoom + K_LRM_MultiPersonOffice;
+   
+   
+   
     
 end PerformanceReductionCosts;
 "));
@@ -447,6 +501,39 @@ public
 
   model InvestmentCosts "calculating the investement costs to evaluate the performance of control strategies according to CCCS evaluation method"
 
+
+   parameter Real G; //Average salary of employee p.a.
+   Real E; //effort to implement control strategy in months
+   parameter Real EAF; //effor adjustment factor
+   parameter Real KLOC; //approximate number of lines of coe in thousands
+    Real K_Strat; // costs for implementing control strategy
+    Real K_Comp; //costs for components
+   Real K_Inv; // overall investement costs
+
+  equation
+
+    E = 2.8*KLOC^1.2*EAF;
+
+
+
+    //Investment costs for implementing control strategy
+
+    K_Strat = E*G/12;
+
+
+
+    //Investment costs for compopnents
+
+    K_Comp = 0;
+
+
+    //Investment costs for components are not considered. It is assuemd that all necessary components are already installed.
+
+
+  K_Inv = K_Strat + K_Comp;
+
+
+
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end InvestmentCosts;
@@ -459,7 +546,7 @@ public
           textString="CCCS")}),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-200,-200},{
             200,200}}), graphics={Rectangle(
-            extent={{-250,-414},{230,248}},
+            extent={{-230,-420},{250,242}},
             lineColor={0,0,255},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid),Text(
