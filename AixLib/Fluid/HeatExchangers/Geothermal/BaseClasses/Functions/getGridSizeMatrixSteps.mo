@@ -137,13 +137,11 @@ algorithm
   end if;
 
   annotation (Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<h4><span style=\"color:#008000\">References</span></h4>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>Source:</p>
 <ul>
-<li>Model developed as part of DA025 &QUOT;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&QUOT; by Tim Comanns</li>
+<li>Model developed as part of DA025 &quot;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&quot; by Tim Comanns</li>
 </ul>
 </html>",
     revisions="<html>

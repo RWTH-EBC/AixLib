@@ -39,7 +39,8 @@ model UPipeElement
     length=length,
     diameter=pipeType.d_i,
     parameterPipe=pipeType,
-    parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc())
+    parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc(),
+    withConvection=true)
                  annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=-90,
@@ -51,7 +52,8 @@ model UPipeElement
     each length=length,
     each diameter=pipeType.d_i,
     each parameterPipe=pipeType,
-    each parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc())
+    each parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc(),
+    withConvection=true)
                  annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
