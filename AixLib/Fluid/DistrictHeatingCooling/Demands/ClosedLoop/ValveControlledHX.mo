@@ -43,7 +43,7 @@ protected
     "Specific heat capacity of the fluid";
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
-    annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
+    annotation (Placement(transformation(extent={{-128,106},{-88,146}})));
   Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
@@ -61,13 +61,14 @@ public
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
-    annotation (Placement(transformation(extent={{98,70},{118,90}})));
+    annotation (Placement(transformation(extent={{98,110},{118,130}}),
+        iconTransformation(extent={{98,110},{118,130}})));
 
   Modelica.Blocks.Math.Gain Q_flow_max(k=cp_default, u=(senT_supply.T - TReturn)
         *port_a.m_flow) "Available Heat flow"
-    annotation (Placement(transformation(extent={{-90,-50},{-70,-30}})));
+    annotation (Placement(transformation(extent={{-94,72},{-74,92}})));
   Modelica.Blocks.Math.Min min
-    annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
+    annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Delays.DelayFirstOrder              vol1(
     redeclare package Medium = Medium,
     tau=600,
@@ -75,7 +76,7 @@ public
     nPorts=2)
              annotation (Placement(transformation(extent={{30,0},{50,20}})));
   Modelica.Blocks.Math.Division rel_Q_flow_cur
-    annotation (Placement(transformation(extent={{-40,64},{-20,84}})));
+    annotation (Placement(transformation(extent={{-40,100},{-20,120}})));
   Modelica.Blocks.Math.Feedback feedback(u2=1 - rel_Q_flow_cur.y)
                                          annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
@@ -88,9 +89,9 @@ public
         origin={-30,34})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow(
       Q_flow=-min.y) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{10,10},{-10,-10}},
         rotation=90,
-        origin={20,-28})));
+        origin={20,50})));
 equation
 
   dpOut = dp;
@@ -101,10 +102,10 @@ equation
                           color={0,127,255}));
   connect(senT_supply.port_b, valve.port_a)
     annotation (Line(points={{-70,0},{-20,0}},     color={0,127,255}));
-  connect(Q_flow_max.y, min.u2) annotation (Line(points={{-69,-40},{-60,-40},{-60,
-          -76},{-42,-76}}, color={0,0,127}));
-  connect(Q_flow_input, min.u1) annotation (Line(points={{-108,80},{-50,80},{-50,
-          -64},{-42,-64}},              color={0,0,127}));
+  connect(Q_flow_max.y, min.u2) annotation (Line(points={{-73,82},{-66,82},{-66,
+          64},{-42,64}},   color={0,0,127}));
+  connect(Q_flow_input, min.u1) annotation (Line(points={{-108,126},{-56,126},{
+          -56,76},{-42,76}},            color={0,0,127}));
   connect(senT_return.port_a, vol1.ports[1]) annotation (Line(points={{60,0},{38,
           0}},                    color={0,127,255}));
   connect(valve.y_actual, feedback.u1) annotation (Line(points={{-5,7},{-5,20},
@@ -114,52 +115,53 @@ equation
   connect(limiter.y, valve.y)
     annotation (Line(points={{-30,23},{-30,20},{-10,20},{-10,12}},
                                                  color={0,0,127}));
-  connect(rel_Q_flow_cur.u1, min.u1) annotation (Line(points={{-42,80},{-50,80},
-          {-50,-64},{-42,-64}}, color={0,0,127}));
+  connect(rel_Q_flow_cur.u1, min.u1) annotation (Line(points={{-42,116},{-56,
+          116},{-56,76},{-42,76}},
+                                color={0,0,127}));
   connect(valve.port_b, vol1.ports[2])
     annotation (Line(points={{0,0},{42,0}}, color={0,127,255}));
   connect(prescribedHeatFlow.port, vol1.heatPort)
-    annotation (Line(points={{20,-18},{20,10},{30,10}}, color={191,0,0}));
-  connect(Q_flow_max.y, rel_Q_flow_cur.u2) annotation (Line(points={{-69,-40},{
-          -56,-40},{-56,68},{-42,68}}, color={0,0,127}));
+    annotation (Line(points={{20,40},{20,10},{30,10}},  color={191,0,0}));
+  connect(Q_flow_max.y, rel_Q_flow_cur.u2) annotation (Line(points={{-73,82},{
+          -66,82},{-66,104},{-42,104}},color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}),
+          extent={{-100,-20},{100,140}}),
                                      graphics={
                                 Rectangle(
-        extent={{-100,-100},{100,100}},
+        extent={{-100,-60},{100,140}},
         lineColor={0,0,127},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{-42,-4},{-14,24}},
+        extent={{-42,36},{-14,64}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{16,-4},{44,24}},
+        extent={{16,36},{44,64}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{16,-54},{44,-26}},
+        extent={{16,-14},{44,14}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{-42,-54},{-14,-26}},
+        extent={{-42,-14},{-14,14}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
         Text(
-          extent={{52,70},{96,50}},
+          extent={{52,110},{96,90}},
           lineColor={0,0,127},
           textString="PPum"),             Polygon(
-          points={{-86,38},{-86,-42},{-26,-2},{-86,38}},
+          points={{-86,40},{-86,-40},{-26,0},{-86,40}},
           lineColor={28,108,200},
           fillColor={28,108,200},
           fillPattern=FillPattern.Solid),
                              Ellipse(
-          extent={{-8,40},{72,-40}},
+          extent={{-8,42},{72,-38}},
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
@@ -180,5 +182,6 @@ March 3, 2018, by Marcus Fuchs:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(extent={{-100,-20},{100,140}})));
 end ValveControlledHX;

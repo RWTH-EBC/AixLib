@@ -45,21 +45,22 @@ protected
 
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
-    annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
-    annotation (Placement(transformation(extent={{-74,-70},{-54,-50}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+    annotation (Placement(transformation(extent={{-132,120},{-92,160}}),
+        iconTransformation(extent={{-132,120},{-92,160}})));
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+    annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={94,-44})));
+        rotation=0,
+        origin={80,0})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
-    annotation (Placement(transformation(extent={{-36,44},{-16,64}})));
+    annotation (Placement(transformation(extent={{-40,104},{-20,124}})));
   Modelica.Blocks.Math.Division heat2massFlow
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={24,60})));
+        origin={20,120})));
   Sources.MassFlowSource_T              sink(
     redeclare package Medium = Medium,
     use_m_flow_in=true,
@@ -68,13 +69,13 @@ public
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={-30,-60})));
+        origin={-34,0})));
   Modelica.Blocks.Math.Gain changeSign(k=-1)
     "Changes sign of prescribed flow for extraction from network" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={0,-36})));
+        origin={-4,24})));
   Sources.MassFlowSource_T source(
     redeclare package Medium = Medium,
     use_m_flow_in=true,
@@ -83,119 +84,128 @@ public
      Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
-        origin={42,-60})));
+        origin={38,0})));
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
-    annotation (Placement(transformation(extent={{98,70},{118,90}})));
+    annotation (Placement(transformation(extent={{94,130},{114,150}}),
+        iconTransformation(extent={{94,130},{114,150}})));
   Modelica.Blocks.Sources.Constant deltaT(k=dTDesign)
     "Fixed temperature difference between supply and return" annotation (
       Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={-72,54})));
+        origin={-76,114})));
   Modelica.Blocks.Math.Add Treturn(k1=-1, k2=+1)
-    annotation (Placement(transformation(extent={{-46,10},{-26,30}})));
+    annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
   Utilities.Math.SmoothMax smoothMax(deltaX=0.001) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={0,-4})));
+        origin={-4,56})));
   Modelica.Blocks.Sources.RealExpression m_flo_min(y=m_flo_bypass)
-    annotation (Placement(transformation(extent={{80,34},{60,54}})));
+    annotation (Placement(transformation(extent={{76,94},{56,114}})));
   Utilities.Logical.SmoothSwitch switch1
-    annotation (Placement(transformation(extent={{60,6},{80,26}})));
+    annotation (Placement(transformation(extent={{56,66},{76,86}})));
   Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold=
         m_flo_bypass)
-    annotation (Placement(transformation(extent={{32,6},{52,26}})));
+    annotation (Placement(transformation(extent={{28,66},{48,86}})));
   MixingVolumes.MixingVolume vol(
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     V=m_flow_nominal*30/995.58)
-    annotation (Placement(transformation(extent={{66,-84},{86,-64}})));
+    annotation (Placement(transformation(extent={{50,0},{70,20}})));
 equation
 
   dpOut = dp;
 
-  connect(port_a, senT_supply.port_a) annotation (Line(points={{-100,0},{-88,0},
-          {-88,-60},{-74,-60}}, color={0,127,255}));
-  connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{94,0},{
-          94,-34}},       color={0,127,255}));
+  connect(port_a, senT_supply.port_a) annotation (Line(points={{-100,0},{-78,0}},
+                                color={0,127,255}));
+  connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0}},
+                          color={0,127,255}));
   connect(Q_flow_input, heat2massFlow.u1)
-    annotation (Line(points={{-108,80},{30,80},{30,72}},
+    annotation (Line(points={{-112,140},{26,140},{26,132}},
                                                        color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
-    annotation (Line(points={{0,-47},{0,-52},{-18,-52}}, color={0,0,127}));
+    annotation (Line(points={{-4,13},{-4,8},{-22,8}},    color={0,0,127}));
   connect(senT_supply.port_b, sink.ports[1])
-    annotation (Line(points={{-54,-60},{-40,-60}}, color={0,127,255}));
+    annotation (Line(points={{-58,0},{-44,0}},     color={0,127,255}));
   connect(deltaT.y, gain.u)
-    annotation (Line(points={{-61,54},{-38,54}}, color={0,0,127}));
-  connect(deltaT.y, Treturn.u1) annotation (Line(points={{-61,54},{-54,54},{-54,
-          26},{-48,26}}, color={0,0,127}));
-  connect(senT_supply.T, Treturn.u2) annotation (Line(points={{-64,-49},{-66,
-          -49},{-66,14},{-48,14}}, color={0,0,127}));
-  connect(gain.y, heat2massFlow.u2) annotation (Line(points={{-15,54},{-8,54},{-8,
-          78},{18,78},{18,72}}, color={0,0,127}));
+    annotation (Line(points={{-65,114},{-42,114}},
+                                                 color={0,0,127}));
+  connect(deltaT.y, Treturn.u1) annotation (Line(points={{-65,114},{-58,114},{
+          -58,86},{-52,86}},
+                         color={0,0,127}));
+  connect(senT_supply.T, Treturn.u2) annotation (Line(points={{-68,11},{-70,11},
+          {-70,74},{-52,74}},      color={0,0,127}));
+  connect(gain.y, heat2massFlow.u2) annotation (Line(points={{-19,114},{-12,114},
+          {-12,138},{14,138},{14,132}},
+                                color={0,0,127}));
   connect(smoothMax.y, changeSign.u)
-    annotation (Line(points={{0,-15},{0,-24}}, color={0,0,127}));
-  connect(smoothMax.y, source.m_flow_in) annotation (Line(points={{0,-15},{0,-20},
-          {20,-20},{20,-68},{30,-68}}, color={0,0,127}));
+    annotation (Line(points={{-4,45},{-4,36}}, color={0,0,127}));
+  connect(smoothMax.y, source.m_flow_in) annotation (Line(points={{-4,45},{-4,
+          40},{16,40},{16,-8},{26,-8}},color={0,0,127}));
   connect(smoothMax.u1, heat2massFlow.y)
-    annotation (Line(points={{6,8},{6,32},{24,32},{24,49}}, color={0,0,127}));
+    annotation (Line(points={{2,68},{2,92},{20,92},{20,109}},
+                                                            color={0,0,127}));
   connect(m_flo_min.y, smoothMax.u2)
-    annotation (Line(points={{59,44},{-6,44},{-6,8}}, color={0,0,127}));
+    annotation (Line(points={{55,104},{-10,104},{-10,68}},
+                                                      color={0,0,127}));
   connect(lessEqualThreshold.y, switch1.u2)
-    annotation (Line(points={{53,16},{58,16}}, color={255,0,255}));
-  connect(smoothMax.y, lessEqualThreshold.u) annotation (Line(points={{0,-15},{0,
-          -20},{20,-20},{20,16},{30,16}}, color={0,0,127}));
-  connect(senT_supply.T, switch1.u1) annotation (Line(points={{-64,-49},{-50,-49},
-          {-50,4},{-14,4},{-14,30},{58,30},{58,24}}, color={0,0,127}));
-  connect(Treturn.y, switch1.u3) annotation (Line(points={{-25,20},{16,20},{16,-6},
-          {58,-6},{58,8}}, color={0,0,127}));
-  connect(switch1.y, source.T_in) annotation (Line(points={{81,16},{86,16},{86,-32},
-          {30,-32},{30,-64}}, color={0,0,127}));
-  connect(source.ports[1], vol.ports[1]) annotation (Line(points={{52,-60},{62,
-          -60},{62,-84},{74,-84}}, color={0,127,255}));
+    annotation (Line(points={{49,76},{54,76}}, color={255,0,255}));
+  connect(smoothMax.y, lessEqualThreshold.u) annotation (Line(points={{-4,45},{
+          -4,40},{16,40},{16,76},{26,76}},color={0,0,127}));
+  connect(senT_supply.T, switch1.u1) annotation (Line(points={{-68,11},{-54,11},
+          {-54,64},{-18,64},{-18,90},{54,90},{54,84}},
+                                                     color={0,0,127}));
+  connect(Treturn.y, switch1.u3) annotation (Line(points={{-29,80},{12,80},{12,
+          54},{54,54},{54,68}},
+                           color={0,0,127}));
+  connect(switch1.y, source.T_in) annotation (Line(points={{77,76},{82,76},{82,
+          28},{26,28},{26,-4}},
+                              color={0,0,127}));
+  connect(source.ports[1], vol.ports[1]) annotation (Line(points={{48,0},{58,0}},
+                                   color={0,127,255}));
   connect(vol.ports[2], senT_return.port_a)
-    annotation (Line(points={{78,-84},{94,-84},{94,-54}}, color={0,127,255}));
+    annotation (Line(points={{62,0},{70,0}},              color={0,127,255}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}),
+          extent={{-100,-20},{100,160}}),
                                      graphics={
                                 Rectangle(
-        extent={{-100,-100},{100,100}},
+        extent={{-100,-40},{100,160}},
         lineColor={0,0,127},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{-42,-4},{-14,24}},
+        extent={{-42,56},{-14,84}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{16,-4},{44,24}},
+        extent={{16,56},{44,84}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{16,-54},{44,-26}},
+        extent={{16,6},{44,34}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
       Rectangle(
-        extent={{-42,-54},{-14,-26}},
+        extent={{-42,6},{-14,34}},
         lineColor={255,255,255},
         fillColor={255,255,255},
         fillPattern=FillPattern.Solid),
         Text(
-          extent={{52,70},{96,50}},
+          extent={{52,130},{96,110}},
           lineColor={0,0,127},
           textString="PPum"),             Polygon(
-          points={{-86,38},{-86,-42},{-26,-2},{-86,38}},
+          points={{-86,98},{-86,18},{-26,58},{-86,98}},
           lineColor={28,108,200},
           fillColor={28,108,200},
           fillPattern=FillPattern.Solid),
                              Ellipse(
-          extent={{-8,40},{72,-40}},
+          extent={{-8,100},{72,20}},
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
@@ -208,5 +218,6 @@ October 23, 2018, by Tobias Blacha:<br/>
 First implementation.
 </li>
 </ul>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(extent={{-100,-20},{100,160}})));
 end VarTSupplyDpFixedTempDifferenceBypass;
