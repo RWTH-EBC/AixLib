@@ -80,7 +80,7 @@ model FullModel_v4
     Area_Heatexchanger_Air=856.01,
     Earthtemperature_start=283.15)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
+ AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
     Model=1,
     A=169.594)                                                                                                                                                                              annotation(Placement(transformation(extent={{17,92},

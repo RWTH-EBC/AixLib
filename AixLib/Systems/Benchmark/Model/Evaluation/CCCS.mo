@@ -1,5 +1,8 @@
 within AixLib.Systems.Benchmark.Model.Evaluation;
-model CCCS
+package CCCS "calculating the overall costs  according to CCCS evaluation method to evaluate the performance of control strategies"
+  extends Modelica.Icons.Package;
+
+
   Modelica.Blocks.Math.Gain CostFactorHeat(k=49.41)
     annotation (Placement(transformation(extent={{-206,194},{-186,214}})));
   Modelica.Blocks.Math.Sum CostsHeat
@@ -47,7 +50,7 @@ model CCCS
     annotation (Placement(transformation(extent={{34,-92},{54,-72}})));
   Modelica.Blocks.Math.Sum TotalCosts
     annotation (Placement(transformation(extent={{194,-134},{214,-114}})));
-  Modelica.Blocks.Math.Sum InvestmentCosts
+  Modelica.Blocks.Math.Sum InvestmentCosts1
     annotation (Placement(transformation(extent={{42,-400},{62,-380}})));
   Modelica.Blocks.Sources.Constant InvestmentCostsImplementation(k=1)
     annotation (Placement(transformation(extent={{8,-360},{28,-340}})));
@@ -157,12 +160,12 @@ equation
                                                     color={0,0,127}));
   connect(EnergyCosts2.y, OperatingCosts.u[1]) annotation (Line(points={{31,100},
           {32,100},{32,-82}},    color={0,0,127}));
-  connect(InvestmentCosts.y, TotalCosts.u[1]) annotation (Line(points={{63,-390},
+  connect(InvestmentCosts1.y, TotalCosts.u[1]) annotation (Line(points={{63,-390},
           {192,-390},{192,-124}}, color={0,0,127}));
-  connect(InvestmentCostsImplementation.y, InvestmentCosts.u[1]) annotation (
-      Line(points={{29,-350},{40,-350},{40,-390}},    color={0,0,127}));
-  connect(InvestmentCostsComponents.y, InvestmentCosts.u[1]) annotation (Line(
-        points={{29,-390},{40,-390}},              color={0,0,127}));
+  connect(InvestmentCostsImplementation.y, InvestmentCosts1.u[1])
+    annotation (Line(points={{29,-350},{40,-350},{40,-390}}, color={0,0,127}));
+  connect(InvestmentCostsComponents.y, InvestmentCosts1.u[1])
+    annotation (Line(points={{29,-390},{40,-390}}, color={0,0,127}));
   connect(Rate.y, product.u2)
     annotation (Line(points={{87,-16},{108,-16}},            color={0,0,127}));
   connect(Constant3.y, add.u1)
@@ -178,7 +181,7 @@ equation
   connect(product1.y, TotalCosts.u[1]) annotation (Line(points={{163,-80},{192,-80},
           {192,-124}},       color={0,0,127}));
 public
-  block DiscountingFactor
+  block DiscountingFactor "discounting factor to be multiplied by the operational costs as part of the overall costs of a control strategy according to CCCS evaluation method"
     extends Modelica.Blocks.Interfaces.SI2SO;
 
     parameter Real k1=+1 "Gain of upper input";
@@ -217,7 +220,7 @@ equation
   connect(Constant.y, PowerConnectionCold.u[1]) annotation (Line(points={{-159,131},
           {-159,94.5},{-158,94.5},{-158,60}}, color={0,0,127}));
 public
-  model EnergyCosts
+  model EnergyCosts "calculating the energy costs as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
 
 
 
@@ -314,7 +317,7 @@ public
           Text(extent={{-100,-92},{5,-52}}, textString="")}));
   end EnergyCosts;
 
-  model EmissionsCosts
+  model EmissionsCosts "calculating the costs for emissions as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end EmissionsCosts;
@@ -325,7 +328,7 @@ public
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),
-      __Dymola_DymolaStoredErrors(thetext="model PerformanceReductionCosts
+      __Dymola_DymolaStoredErrors(thetext="model PerformanceReductionCosts \"calculating the costs due to reduced performance of employees caused by reduced air quality as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method\"
   
   annotation (
     Icon(coordinateSystem(
@@ -340,18 +343,32 @@ public
         Text(extent={{-100,-92},{5,-52}}, textString=\"\")}));
   
 
-Real humidity;
-Real LRM;
+Real C_CO2_Canteen; \"level of CO2 in canteen\"
+Real C_CO2_Workshop; \"level of CO2 in workshop\"
+Real C_CO2_ConferenceRoom; \"level of CO2 in conference room\"
+Real C_CO2_MultiPersonOffice; \"level of CO2 in muliperson office\"
+Real C_CO2_OpenPlanOffice; \"level of CO2 in open plan office\"
+Real X_Canteen; \"level of humidity in canteen\"
+Real X_Workshop; \"level of humidity in workshop\"
+Real X_ConferenceRoom; \"level of humidty in conference room\"
+Real X_MultiPersonOffice; \"level of humidty in multipersonoffice\"
+Real X_OpenPLanOffice; \"level of humidity in open plan opffice\"
+Real LRM_TX_Canteen; \"performance reduction coefficient due to temperature and humidity levels in canteen\"
+Real LRM_CO2_Canteen; \"performance reduction coefficient due to CO2 level in canteen\"
+Real K_LRM; \"Costs for overall performance reduction\"
 
 equation
+  
+  
+  \"performance reduction due to temperature and humidity levels\"
   
 if humidty<0.25
 then 
         if deltaT<-2
-        then LRM=0.2*(-4*humidity+1)+0.04*(abs(deltaT)-2);
+        then LRM_TX=0.2*(-4*humidity+1)+0.04*(abs(deltaT)-2);
         else   if (deltaT>2)
-              then LRM=0.2*(-4*humidity+1)+0.02*(abs(deltaT)-2);
-              else LRM=0.2*(-4*humidity+1);
+              then LRM_TX=0.2*(-4*humidity+1)+0.02*(abs(deltaT)-2);
+              else LRM_TX=0.2*(-4*humidity+1);
              ;
   
     ;
@@ -359,25 +376,41 @@ else
         if humidity>0.65
         then 
               if deltaT<-2
-              then LRM=(humidity-0.65)*0.42+0.04*(abs(deltaT)-2);
+              then LRM_TX=(humidity-0.65)*0.42+0.04*(abs(deltaT)-2);
               else   if (deltaT>2)
-                    then LRM=(humidity-0.65)*0.42+0.02*(abs(deltaT)-2);
-                    else LRM=(humidity-0.65)*0.42;  
+                    then LRM_TX=(humidity-0.65)*0.42+0.02*(abs(deltaT)-2);
+                    else LRM_TX=(humidity-0.65)*0.42;  
                   ; 
              ;
         else
                  
               if deltaT<-)
-              then LRM=0.04*(abs(deltaT)-2);
+              then LRM_TX=0.04*(abs(deltaT)-2);
               else 
                      if (deltaT>2)
-                    then(LRM=0.02*(deltaT-2));
-                    else(LRM=0);
+                    then(LRM_TX=0.02*(deltaT-2));
+                    else(LRM_TX=0);
                   
                   ;
             ;
                 
     ;
+    
+   \"performance reduction due to CO2 level\"
+   
+   LRM_CO2=0.0000575*C_CO2-0.023;
+   
+   \"Performance reduction due to CO2 level is not considered because there is no information about CO2 levels in the rooms\"
+   
+ 
+   
+   \"Costs for overall performance reduction\"
+   
+   K_LRM=1-((1-LRM_TX)*(1-LRM_CO2));
+   
+   
+   \"Performance reduction due to VOC level is not considered because there is no information about VOC levels in the rooms\"
+    
 end PerformanceReductionCosts;
 "));
   end PerformanceReductionCosts;
@@ -406,6 +439,17 @@ equation
     annotation (Line(points={{17,-204},{32,-204},{32,-82}}, color={0,0,127}));
   connect(OperationalLifetimeReductionCosts.y, OperatingCosts.u[1])
     annotation (Line(points={{-11,-302},{32,-302},{32,-82}}, color={0,0,127}));
+public
+  model LifespanReductionCosts "calculating costs of lifespan reduction due to wear as part of operating costs to evaluate the performance of a control strategy according to CCCS evaluation method"
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end LifespanReductionCosts;
+
+  model InvestmentCosts "calculating the investement costs to evaluate the performance of control strategies according to CCCS evaluation method"
+
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end InvestmentCosts;
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
