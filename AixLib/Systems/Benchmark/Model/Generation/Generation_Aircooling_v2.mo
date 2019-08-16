@@ -86,7 +86,7 @@ model Generation_Aircooling_v2
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-10,-64},{-2,-56}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
+  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
     Model=1,
     A=Area_Heatexchanger_Air)                                                                                                                                                               annotation(Placement(transformation(extent={{4,-40},
