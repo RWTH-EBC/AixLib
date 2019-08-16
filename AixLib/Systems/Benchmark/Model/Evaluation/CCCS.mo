@@ -224,6 +224,8 @@ public
 
 
 
+
+
     Modelica.Blocks.Math.Gain CostFactorHeat(k=49.41)
       annotation (Placement(transformation(extent={{-130,102},{-110,122}})));
     Modelica.Blocks.Math.Sum CostsHeat
@@ -292,13 +294,11 @@ public
             {-83,2.5},{-82,2.5},{-82,-32}},     color={0,0,127}));
 
     annotation (Diagram(graphics={  Rectangle(
-              extent={{-164,-148},{148,160}},
+              extent={{-188,-144},{124,164}},
               lineColor={0,0,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-106,86},{-1,126}},
-              lineColor={0,0,0},
-              textString=""),Text(
+              fillPattern=FillPattern.Solid),
+                             Text(
               extent={{-106,12},{-1,52}},
               lineColor={0,0,0},
               textString=""),Text(
@@ -346,13 +346,90 @@ public
               fillPattern=FillPattern.Solid)}));
   end EmissionsCosts;
 
-  model PerformanceReductionCosts
+  model PerformanceReductionCosts "calculating the costs due to reduced performance of employees caused by reduced air quality as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
 
-  Real humidity;
 
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)),
-      __Dymola_DymolaStoredErrors(thetext="model PerformanceReductionCosts \"calculating the costs due to reduced performance of employees caused by reduced air quality as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method\"
+  parameter Real G;                // average salary of employee p.a.
+  parameter Real C_Prod;           // factor of productivity according to CCCS evaulation mehtod
+  Real C_CO2_Canteen;             //level of CO2 in canteen
+  Real C_CO2_Workshop;            //level of CO2 in workshop
+  Real C_CO2_ConferenceRoom;      //level of CO2 in conference room
+  Real C_CO2_MultiPersonOffice;   //level of CO2 in muliperson office
+  Real C_CO2_OpenPlanOffice;      //level of CO2 in open plan office
+  Real X_Canteen;                 //level of humidity in canteen
+  Real X_Workshop;                //level of humidity in workshop
+  Real X_ConferenceRoom;          //level of humidty in conference room
+  Real X_MultiPersonOffice;       //level of humidty in multipersonoffice
+  Real X_OpenPLanOffice;          //level of humidity in open plan opffice
+  Real LRM_TX_Canteen;            //performance reduction coefficient due to temperature and humidity levels in canteen
+  Real LRM_TX_Workshop;           //performance reduction coefficient due to temperature and humidity levels in workshop
+  Real LRM_TX_ConferenceRoom;     //performance reduction coefficient due to temperature and humidity levels in conference room
+  Real LRM_TX_MultiPersonOffice;  //performance reduction coefficient due to temperature and humidity levels in multipersonoffice
+  Real LRM_TX_OpenPlanOffice;     //performance reduction coefficient due to temperature and humidity levels in open plan office
+  Real LRM_CO2_Canteen;           //performance reduction coefficient due to CO2 level in canteen
+  Real LRM_CO2_Workshop;          //performance reduction coefficient due to CO2 level in canteen
+  Real LRM_CO2_ConferenceRoom;    //performance reduction coefficient due to CO2 level in canteen
+  Real LRM_CO2_MultiPersonOffice; //performance reduction coefficient due to CO2 level in canteen
+  Real LRM_CO2_OpenPlanOffice;    //performance reduction coefficient due to CO2 level in canteen
+  Real K_LRM_Canteen;             //Costs for overall performance reduction in canteen
+  Real K_LRM_Workshop;            //Costs for overall performance reduction in workshop
+  Real K_LRM_ConferenceRoom;      //Costs for overall performance reduction in conference room
+  Real K_LRM_MultiPersonOffice;   //Costs for overall performance reduction in multipersonoffice
+  Real K_LRM_OpenPlanOffice;      //Costs for overall performance reduction in open plan office
+  Real K_LRM;                     //Costs for overall performance reduction
+
+
+  equation
+
+
+    //performance reduction due to temperature and humidity levels
+
+
+
+
+
+
+
+
+
+     //performance reduction due to CO2 level
+     //Performance reduction due to CO2 level might not be considered because there is no information about CO2 levels in the rooms
+
+     LRM_CO2_Canteen=0.0000575*C_CO2_Canteen-0.023;
+     LRM_CO2_Workshop=0.0000575*C_CO2_Workshop-0.023;
+     LRM_CO2_ConferenceRoom=0.0000575*C_CO2_ConferenceRoom-0.023;
+     LRM_CO2_MultiPersonOffice=0.0000575*C_CO2_MultiPersonOffice-0.023;
+     LRM_CO2_OpenPlanOffice=0.0000575*C_CO2_OpenPlanOffice-0.023;
+
+
+     //Performance reduction due to VOC level is not considered because there is no information about VOC levels in the rooms
+
+
+     //Costs due to performance reduction
+
+     K_LRM_Canteen=G*C_Prod/(233*8*60)*sum( (t*(1-(1-LRM_TX_Canteen)*(1-LRM_CO2_Canteen))));
+     K_LRM_Workshop=G*C_Prod/(233*8*60)*sum( (t*(1-(1-LRM_TX_Workshop)*(1-LRM_CO2_Workshop))));
+     K_LRM_ConferenceRoom=G*C_Prod/(233*8*60)*sum( (t*(1-(1-LRM_TX_ConferenceRoom)*(1-LRM_CO2_ConferenceRoomn))));
+     K_LRM_MultiPersonOffice=G*C_Prod/(233*8*60)*sum( (t*(1-(1-LRM_TX_MultiPersonOffice)*(1-LRM_CO2_MultiPersonOffice))));
+     K_LRM_OpenPlanOffice=G*C_Prod/(233*8*60)*sum( (t*(1-(1-LRM_TX_OpenPlanOffice)*(1-LRM_CO2_OpenPlanOffice))));
+
+
+     //overall costs due to performance reduction
+
+     K_LRM = K_LRM_Canteen + K_LRM_Workshop + K_LRM_ConferenceRoom + K_LRM_MultiPersonOffice;
+
+    annotation (
+      Icon(coordinateSystem(
+          preserveAspectRatio=true,
+          extent={{-100,-100},{100,100}}), graphics={
+          Text(
+            lineColor={0,0,255},
+            extent={{-150,110},{150,150}},
+            textString="EnergyCosts"),
+          Text(extent={{-38,-34},{38,34}}, textString="PerformanceReductionCosts"),
+          Text(extent={{-100,52},{5,92}}, textString=""),
+          Text(extent={{-100,-92},{5,-52}}, textString="")}),
+        __Dymola_DymolaStoredErrors(thetext="model PerformanceReductionCosts \"calculating the costs due to reduced performance of employees caused by reduced air quality as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method\"
   
   annotation (
     Icon(coordinateSystem(
@@ -361,87 +438,185 @@ public
         Text(
           lineColor={0,0,255},
           extent={{-150,110},{150,150}},
-          textString=\"EnergyCosts\"),
+          textString=\"PerformanceReductionCosts\"),
         Text(extent={{-38,-34},{38,34}}, textString=\"PerformanceReductionCosts\"),
         Text(extent={{-100,52},{5,92}}, textString=\"\"),
         Text(extent={{-100,-92},{5,-52}}, textString=\"\")}));
   
   
-parameter Real G;                // average salary of employee p.a.
-parameter Real C_Prod;           // factor of productivity according to CCCS evaulation mehtod  
-Real C_CO2_Canteen;             //level of CO2 in canteen
-Real C_CO2_Workshop;            //level of CO2 in workshop
-Real C_CO2_ConferenceRoom;      //level of CO2 in conference room
-Real C_CO2_MultiPersonOffice;   //level of CO2 in muliperson office
-Real C_CO2_OpenPlanOffice;      //level of CO2 in open plan office
-Real X_Canteen;                 //level of humidity in canteen
-Real X_Workshop;                //level of humidity in workshop
-Real X_ConferenceRoom;          //level of humidty in conference room
-Real X_MultiPersonOffice;       //level of humidty in multipersonoffice
-Real X_OpenPLanOffice;          //level of humidity in open plan opffice
-Real LRM_TX_Canteen;            //performance reduction coefficient due to temperature and humidity levels in canteen
-Real LRM_TX_Workshop;           //performance reduction coefficient due to temperature and humidity levels in workshop
-Real LRM_TX_ConferenceRoom;     //performance reduction coefficient due to temperature and humidity levels in conference room
-Real LRM_TX_MultiPersonOffice;  //performance reduction coefficient due to temperature and humidity levels in multipersonoffice
-Real LRM_TX_OpenPlanOffice;     //performance reduction coefficient due to temperature and humidity levels in open plan office
-Real LRM_CO2_Canteen;           //performance reduction coefficient due to CO2 level in canteen
-Real LRM_CO2_Workshop;          //performance reduction coefficient due to CO2 level in canteen
-Real LRM_CO2_ConferenceRoom;    //performance reduction coefficient due to CO2 level in canteen
-Real LRM_CO2_MultiPersonOffice; //performance reduction coefficient due to CO2 level in canteen
-Real LRM_CO2_OpenPlanOffice;    //performance reduction coefficient due to CO2 level in canteen
-Real K_LRM_Canteen;             //Costs for overall performance reduction in canteen
-Real K_LRM_Workshop;            //Costs for overall performance reduction in workshop
-Real K_LRM_ConferenceRoom;      //Costs for overall performance reduction in conference room
-Real K_LRM_MultiPersonOffice;   //Costs for overall performance reduction in multipersonoffice
-Real K_LRM_OpenPlanOffice;      //Costs for overall performance reduction in open plan office
-Real K_LRM;                     //Costs for overall performance reduction
+parameter Real G;                     // average salary of employee p.a.
+parameter Real C_Prod;                // factor of productivity according to CCCS evaulation mehtod
+parameter Real T_Canteen;             // set temperature canteen
+parameter Real T_Workshop;            // set temperature workshop
+parameter Real T_ConferenceRoom;      // set temperature conference room
+parameter Real T_MultiPersonOffice;   // set temperature multiperso noffice
+parameter Real T_OpenPlanOffice;       // set temperature open plan office
+Real deltaT_Canteen;                  //deviation from set temperature in canteen
+Real deltaT_Workshop;                 //deviation from set temperature in workshop
+Real deltaT_ConferenceRoom;           //deviation from set temperature in conference room
+Real deltaT_MultiPersonOffice;        //deviation from set temperature in multiperson office
+Real deltaT_OpenPlanOffice;           //deviation from set temperature in open plan office
+Real C_CO2_Canteen;                   //level of CO2 in canteen
+Real C_CO2_Workshop;                  //level of CO2 in workshop
+Real C_CO2_ConferenceRoom;            //level of CO2 in conference room
+Real C_CO2_MultiPersonOffice;         //level of CO2 in muliperson office
+Real C_CO2_OpenPlanOffice;            //level of CO2 in open plan office
+Real X_Canteen;                       //level of humidity in canteen
+Real X_Workshop;                      //level of humidity in workshop
+Real X_ConferenceRoom;                //level of humidty in conference room
+Real X_MultiPersonOffice;             //level of humidty in multiperson office
+Real X_OpenPLanOffice;                //level of humidity in open plan opffice
+Real LRM_TX_Canteen;                  //performance reduction coefficient due to temperature and humidity levels in canteen
+Real LRM_TX_Workshop;                 //performance reduction coefficient due to temperature and humidity levels in workshop
+Real LRM_TX_ConferenceRoom;           //performance reduction coefficient due to temperature and humidity levels in conference room
+Real LRM_TX_MultiPersonOffice;        //performance reduction coefficient due to temperature and humidity levels in multiperson office
+Real LRM_TX_OpenPlanOffice;           //performance reduction coefficient due to temperature and humidity levels in open plan office
+Real LRM_CO2_Canteen;                 //performance reduction coefficient due to CO2 level in canteen
+Real LRM_CO2_Workshop;                //performance reduction coefficient due to CO2 level in workshop
+Real LRM_CO2_ConferenceRoom;          //performance reduction coefficient due to CO2 level in conference room
+Real LRM_CO2_MultiPersonOffice;       //performance reduction coefficient due to CO2 level in multiperson office
+Real LRM_CO2_OpenPlanOffice;          //performance reduction coefficient due to CO2 level in open plan office
+Real K_LRM_Canteen;                   //Costs for overall performance reduction in canteen
+Real K_LRM_Workshop;                  //Costs for overall performance reduction in workshop
+Real K_LRM_ConferenceRoom;            //Costs for overall performance reduction in conference room
+Real K_LRM_MultiPersonOffice;         //Costs for overall performance reduction in multiperson office
+Real K_LRM_OpenPlanOffice;            //Costs for overall performance reduction in open plan office
+Real K_LRM;                           //Costs for overall performance reduction
 
 
 equation
   
+  //calclulating temperature deviations
+  
+  deltaT_Canteen= T - T_Canteen;
+  deltaT_Workshop= T - T_Workshop;
+  deltaT_ConferenceRoom= T - T_ConferenceRoom;
+  deltaT_MultiPersonOffice= T - T_MultiPersonOffice; 
+  deltaT_OpenPlanOffice= T - T_OpenPlanOffice;
+ 
   
   //performance reduction due to temperature and humidity levels
   
-if humidty<0.25
-then 
-        if deltaT<-2
-        then LRM_TX=0.2*(-4*humidity+1)+0.04*(abs(deltaT)-2);
-        else   if (deltaT>2)
-              then LRM_TX=0.2*(-4*humidity+1)+0.02*(abs(deltaT)-2);
-              else LRM_TX=0.2*(-4*humidity+1);
-             ;
   
-    ;
-else 
-        if humidity>0.65
-        then 
-              if deltaT<-2
-              then LRM_TX=(humidity-0.65)*0.42+0.04*(abs(deltaT)-2);
-              else   if (deltaT>2)
-                    then LRM_TX=(humidity-0.65)*0.42+0.02*(abs(deltaT)-2);
-                    else LRM_TX=(humidity-0.65)*0.42;  
-                  ; 
-             ;
-        else
-                 
-              if deltaT<-)
-              then LRM_TX=0.04*(abs(deltaT)-2);
-              else 
-                     if (deltaT>2)
-                    then(LRM_TX=0.02*(deltaT-2));
-                    else(LRM_TX=0);
-                  
-                  ;
-            ;
-                
-    ;
+  //Canteen
+  
+  if X<0.25
+  then if deltaT_Canteen<-2
+      then LRM_TX_Canteen = 0.2*(-4*X_Canteen+1) + 0.04*(abs(deltaT_Canteen)-2)
+      else if deltaT_Canteen>2  
+          then LRM_TX_Canteen = 0.2*(-4*X_Canteen+1) + 0.02*(abs(deltaT_Canteen)-2)
+          else LRM_TX_Canteen = 0.2*(-4*X_Canteen+1)
+  else if X>0.65
+       then  if deltaT_Canteen<-2
+            then LRM_TX_Canteen = (X_Canteen-0.65)*0.42 + 0.04*(abs(deltaT_Canteen)-2)
+            else if deltaT_Canteen>2  
+                 then LRM_TX_Canteen = (X_Canteen-0.65)*(0.42+deltaT_Canteen) + 0.02*(deltaT_Canteen-2)
+                 else LRM_TX_Canteen =  (X_Canteen-0.65)*0.42
+      else if deltaT_Canteen<-2
+           then LRM_TX_Canteen = 0.04*(abs(deltaT_Canteen)-2)
+           else if deltaT_Canteen>2  
+                then LRM_TX_Canteen = 0.02*(deltaT_Canteen-2)
+                else LRM_TX_Canteen =  0
+  
+  
+  
+  // workshop
+  
+  if X<0.25
+  then if deltaT_Workshop<-2
+      then LRM_TX_Workshop = 0.2*(-4*X_Workshop+1) + 0.04*(abs(deltaT_Workshop)-2)
+      else if deltaT_Workshop>2  
+          then LRM_TX_Workshop = 0.2*(-4*X_Workshop+1) + 0.02*(abs(deltaT_Workshop)-2)
+          else LRM_TX_Workshop = 0.2*(-4*X_Workshop+1)
+  else if X>0.65
+       then  if deltaT_Workshop<-2
+            then LRM_TX_Workshop = (X_Workshop-0.65)*0.42 + 0.04*(abs(deltaT_Workshop)-2)
+            else if deltaT_Workshop>2  
+                 then LRM_TX_Workshop = (X_Workshop-0.65)*(0.42+deltaT_Workshop) + 0.02*(deltaT_Workshop-2)
+                 else LRM_TX_Workshop =  (X_Workshop-0.65)*0.42
+      else if deltaT_Workshop<-2
+           then LRM_TX_Workshop = 0.04*(abs(deltaT_Workshop)-2)
+           else if deltaT_Workshop>2  
+                then LRM_TX_Workshop = 0.02*(deltaT_Workshop-2)
+                else LRM_TX_Workshop =  0
+  
+  
+  
+  // conference room
+  
+   if X<0.25
+  then if deltaT_ConferenceRoom<-2
+      then LRM_TX_ConferenceRoom = 0.2*(-4*X_ConferenceRoom+1) + 0.04*(abs(deltaT_ConferenceRoom)-2)
+      else if deltaT_ConferenceRoom>2  
+          then LRM_TX_ConferenceRoom = 0.2*(-4*X_ConferenceRoom+1) + 0.02*(abs(deltaT_ConferenceRoom)-2)
+          else LRM_TX_ConferenceRoom = 0.2*(-4*X_ConferenceRoom+1)
+  else if X>0.65
+       then  if deltaT_ConferenceRoom<-2
+            then LRM_TX_ConferenceRoom = (X_ConferenceRoom-0.65)*0.42 + 0.04*(abs(deltaT_ConferenceRoom)-2)
+            else if deltaT_ConferenceRoom>2  
+                 then LRM_TX_ConferenceRoom = (X_ConferenceRoom-0.65)*(0.42+deltaT_ConferenceRoom) + 0.02*(deltaT_ConferenceRoom-2)
+                 else LRM_TX_ConferenceRoom =  (X_ConferenceRoom-0.65)*0.42
+      else if deltaT_ConferenceRoom<-2
+           then LRM_TX_ConferenceRoom = 0.04*(abs(deltaT_ConferenceRoom)-2)
+           else if deltaT_ConferenceRoom>2  
+                then LRM_TX_ConferenceRoom = 0.02*(deltaT_ConferenceRoom-2)
+                else LRM_TX_ConferenceRoom =  0
+  
+  
+  
+  
+  // multiperson office
+  
+   if X<0.25
+  then if deltaT_MultiPersonOffice<-2
+      then LRM_TX_MultiPersonOffice = 0.2*(-4*X_MultiPersonOffice+1) + 0.04*(abs(deltaT_MultiPersonOffice)-2)
+      else if deltaT_MultiPersonOffice>2  
+          then LRM_TX_MultiPersonOffice = 0.2*(-4*X_MultiPersonOffice+1) + 0.02*(abs(deltaT_MultiPersonOffice)-2)
+          else LRM_TX_MultiPersonOffice = 0.2*(-4*X_MultiPersonOffice+1)
+  else if X>0.65
+       then  if deltaT_MultiPersonOffice<-2
+            then LRM_TX_MultiPersonOffice = (X_MultiPersonOffice-0.65)*0.42 + 0.04*(abs(deltaT_MultiPersonOffice)-2)
+            else if deltaT_MultiPersonOffice>2  
+                 then LRM_TX_MultiPersonOffice = (X_MultiPersonOffice-0.65)*(0.42+deltaT_MultiPersonOffice) + 0.02*(deltaT_MultiPersonOffice-2)
+                 else LRM_TX_MultiPersonOffice =  (X_MultiPersonOffice-0.65)*0.42
+      else if deltaT_MultiPersonOffice<-2
+           then LRM_TX_MultiPersonOffice = 0.04*(abs(deltaT_MultiPersonOffice)-2)
+           else if deltaT_MultiPersonOffice>2  
+                then LRM_TX_MultiPersonOffice = 0.02*(deltaT_MultiPersonOffice-2)
+                else LRM_TX_MultiPersonOffice =  0
+  
+  
+  
+  
+  // open plan office
+  
+  if X<0.25
+  then if deltaT_OpenPlanOffice<-2
+      then LRM_TX_OpenPlanOffice = 0.2*(-4*X_OpenPlanOffice+1) + 0.04*(abs(deltaT_OpenPlanOffice)-2)
+      else if deltaT_OpenPlanOffice>2  
+          then LRM_TX_OpenPlanOffice = 0.2*(-4*X_OpenPlanOffice+1) + 0.02*(abs(deltaT_OpenPlanOffice)-2)
+          else LRM_TX_OpenPlanOffice = 0.2*(-4*X_OpenPlanOffice+1)
+  else if X>0.65
+       then  if deltaT_OpenPlanOffice<-2
+            then LRM_TX_OpenPlanOffice = (X_OpenPlanOffice-0.65)*0.42 + 0.04*(abs(deltaT_OpenPlanOffice)-2)
+            else if deltaT_OpenPlanOffice>2  
+                 then LRM_TX_OpenPlanOffice = (X_OpenPlanOffice-0.65)*(0.42+deltaT_OpenPlanOffice) + 0.02*(deltaT_OpenPlanOffice-2)
+                 else LRM_TX_OpenPlanOffice =  (X_OpenPlanOffice-0.65)*0.42
+      else if deltaT_OpenPlanOffice<-2
+           then LRM_TX_OpenPlanOffice = 0.04*(abs(deltaT_OpenPlanOffice)-2)
+           else if deltaT_OpenPlanOffice>2  
+                then LRM_TX_OpenPlanOffice = 0.02*(deltaT_OpenPlanOffice-2)
+                else LRM_TX_OpenPlanOffice =  0
+  
+  
+  
     
    //performance reduction due to CO2 level
    //Performance reduction due to CO2 level might not be considered because there is no information about CO2 levels in the rooms
    
    LRM_CO2_Canteen=0.0000575*C_CO2_Canteen-0.023;
    LRM_CO2_Workshop=0.0000575*C_CO2_Workshop-0.023;
-   LRM_CO2_ConferenceRoom=0.0000575*C_CO2_ConferenceRoom-0.023;
+   LRM_" + "CO2_ConferenceRoom=0.0000575*C_CO2_ConferenceRoom-0.023;
    LRM_CO2_MultiPersonOffice=0.0000575*C_CO2_MultiPersonOffice-0.023;
    LRM_CO2_OpenPlanOffice=0.0000575*C_CO2_OpenPlanOffice-0.023;
    
@@ -458,7 +633,7 @@ else
    K_LRM_OpenPlanOffice=G*C_Prod/(233*8*60)*sum ((t*(1-(1-LRM_TX_OpenPlanOffice)*(1-LRM_CO2_OpenPlanOffice))));
    
    
-   //toal costs due to performance reduction
+   //overall costs due to performance reduction
     
    K_LRM = K_LRM_Canteen + K_LRM_Workshop + K_LRM_ConferenceRoom + K_LRM_MultiPersonOffice;
    
@@ -495,8 +670,79 @@ equation
     annotation (Line(points={{-11,-302},{32,-302},{32,-82}}, color={0,0,127}));
 public
   model LifespanReductionCosts "calculating costs of lifespan reduction due to wear as part of operating costs to evaluate the performance of a control strategy according to CCCS evaluation method"
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+
+
+   Real K_LDR_i;    // costs due to lifespan reduction of component i
+   Real K_LDR;      // overall costs due to lifespan reduction of components
+   parameter Real B=60000;  // number of cycles until minimal lifespan is reached
+   Real T;    // Average lifespan in years
+   parameter Real d_Op = 365; //operating time in days; assumption: whole year
+   parameter Real t_cycle = 10800; // duration of one cycle (fully closed to fully opened) in seconds
+   Real n;     // number of cycles during simulation period
+
+
+  equation
+
+   T = t_cycle*B/(d_Op*24*3600);
+
+
+
+
+
+
+
+         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)),
+      __Dymola_DymolaStoredErrors(thetext="model LifespanReductionCosts \"calculating costs of lifespan reduction due to wear as part of operating costs to evaluate the performance of a control strategy according to CCCS evaluation method\"
+
+ 
+ Real K_LDR_i;                     // costs due to lifespan reduction of component i
+ Real K_LDR;                       // overall costs due to lifespan reduction of components
+ parameter Real B=60000;           // number of cycles until minimal lifespan is reached
+ Real T;                           // average lifespan in years
+ parameter Real d_Op = 365;        // operating time in days; assumption: whole year
+ parameter Real t_cycle = 10800;   // duration of one cycle (fully closed to fully opened) in seconds
+ Real n_i;                         // number of cycles during simulation period
+ Real K_i;                         // costs for component i
+     
+ 
+equation
+  
+ T = t_cycle*B/(d_Op*24*3600);
+  
+  if n_i<B/T
+  then K_LDR_i = 0
+  else K_LDR_i = K_i*(n-B/T);
+      
+      
+   K_LDR = sum (K_LDR_i);   
+ 
+      
+   annotation (Diagram(graphics={  Rectangle(
+            extent={{-188,-144},{124,164}},
+            lineColor={0,0,255},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+                           Text(
+            extent={{-106,12},{-1,52}},
+            lineColor={0,0,0},
+            textString=\"\"),Text(
+            extent={{-106,-18},{-1,-58}},
+            lineColor={0,0,0},
+            textString=\"\")}),
+    Icon(coordinateSystem(
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}}), graphics={
+        Text(
+          lineColor={0,0,255},
+          extent={{-150,110},{150,150}},
+          textString=\"LifespanReductionCosts\"),
+        Text(extent={{-38,-34},{38,34}}, textString=\"LifespanReductionCosts\"),
+        Text(extent={{-100,52},{5,92}}, textString=\"\"),
+        Text(extent={{-100,-92},{5,-52}}, textString=\"\")}));     
+        
+end LifespanReductionCosts;
+"));
   end LifespanReductionCosts;
 
   model InvestmentCosts "calculating the investement costs to evaluate the performance of control strategies according to CCCS evaluation method"
@@ -529,6 +775,8 @@ public
 
     //Investment costs for components are not considered. It is assuemd that all necessary components are already installed.
 
+
+  //Overall investment costs
 
   K_Inv = K_Strat + K_Comp;
 
