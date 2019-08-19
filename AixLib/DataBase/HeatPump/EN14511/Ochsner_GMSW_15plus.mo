@@ -6,8 +6,7 @@ record Ochsner_GMSW_15plus "Ochsner GMSW 15 plus"
         13200,14900],
     mFlow_conNom=14500/4180/5,
     mFlow_evaNom=(14500 - 3300)/3600/3,
-    tableUppBou=[-8, 52; 0, 65; 20, 65],
-    tableLowBou=[-8, 10; 20, 27]);
+    tableUppBou=[-8, 52; 0, 65; 20, 65]);
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
