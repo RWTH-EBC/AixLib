@@ -30,7 +30,7 @@ model UPipeField
     annotation (Dialog(tab="Borehole"), choicesAllMatching=true);
 
 
-  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType[:] =  fill(AixLib.DataBase.Pipes.Copper.Copper_40x1(), 4)
+  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType[:] =  fill(AixLib.DataBase.Pipes.Copper.Copper_40x1(), noOfPipes)
     "Type of pipe"                                                                                                     annotation (Dialog(tab="Pipes"), choicesAllMatching=true);
 
   parameter SI.Length gridBorderWidth = 10

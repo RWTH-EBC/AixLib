@@ -28,10 +28,10 @@ Modelica.Fluid.Sources.FixedBoundary sink(
 
 public
   GeothermalField.UPipeField                                 uPipeField(
+    boreholePositions=[1,1; 5.5,1; 11,1],
     pipeCellSize=1,
     c=1000,
     T0mixing(displayUnit="degC") = uPipeField.T0fluids,
-    boreholePositions=[1,1; 5.5,1],
     rho=2000,
     lambda=6,
     boreholeDiameter=0.2,

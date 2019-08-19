@@ -7,6 +7,7 @@ model HeatPump
         FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
   Components.HeatGenerators.HeatPump.HeatPump heatPump2(
+    scalingFactor=1,
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -27,11 +28,21 @@ model HeatPump
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTableND (
+        interpMethod=SDF.Types.InterpolationMethod.Linear,
+        extrapMethod=SDF.Types.ExtrapolationMethod.Hold,
+        filename_Pel=ModelicaServices.ExternalReferences.loadResource(
+            "modelica://B13HVAC/ressources/30XWHP254.sdf"),
+        filename_QCon=ModelicaServices.ExternalReferences.loadResource(
+            "modelica://B13HVAC/ressources/30XWHP254.sdf")),
     redeclare model PerDataChi =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTableND (
+        interpMethod=SDF.Types.InterpolationMethod.Linear,
+        extrapMethod=SDF.Types.ExtrapolationMethod.Hold,
+        filename_Pel=ModelicaServices.ExternalReferences.loadResource(
+            "modelica://B13HVAC/ressources/30XWHP254.sdf"),
+        filename_QCon=ModelicaServices.ExternalReferences.loadResource(
+            "modelica://B13HVAC/ressources/30XWHP254.sdf")),
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
         extent={{-13,-16},{13,16}},
         rotation=-90,
@@ -105,6 +116,8 @@ model HeatPump
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={36,20})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression2(y=true)
+    annotation (Placement(transformation(extent={{-74,18},{-62,30}})));
 equation
   connect(dotm_source.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
@@ -126,8 +139,6 @@ equation
   connect(iceFac.y, heatPump2.iceFac_in) annotation (Line(points={{-33.5,9},{
           -15.1333,9},{-15.1333,7.88}},
                                color={0,0,127}));
-  connect(booleanStep.y, heatPump2.modeSet) annotation (Line(points={{-75.6,76},
-          {0.6,76},{0.6,13.08}}, color={255,0,255}));
   connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-79,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
   connect(pump.enthalpyPort_b, heatPump2.enthalpyPort_a)
@@ -148,6 +159,8 @@ equation
     annotation (Line(points={{96,-17},{96,20},{45.6,20}}, color={176,0,0}));
   connect(heatFlowRateCon.port, Room.heatPort)
     annotation (Line(points={{52,-24},{52,-26},{86.6,-26}}, color={191,0,0}));
+  connect(booleanExpression2.y, heatPump2.modeSet) annotation (Line(points={{
+          -61.4,24},{0.6,24},{0.6,13.08}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(

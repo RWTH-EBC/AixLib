@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Examples.HeatExchangers;
 model RectangularGround_2Pipes
   "Model with rectangular gorund and two pipes for testing the grid types"
-   extends Modelica.Icons.Example;
+   extends Modelica.Icons.ExamplesPackage;
 
    replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
@@ -15,10 +15,10 @@ inner Modelica.Fluid.System system(T_ambient=281.15) annotation (Placement(trans
 
 public
   Components.HeatExchangers.Geothermal.GeothermalField.UPipeField uPipeField(
+    boreholePositions=[1,1; 5.5,1; 11,1],
     pipeCellSize=1,
     c=1000,
     T0mixing(displayUnit="degC") = uPipeField.T0fluids,
-    boreholePositions=[1,1; 5.5,1],
     rho=2000,
     lambda=6,
     boreholeDiameter=0.2,
@@ -29,8 +29,6 @@ public
     boreholeFilling=AixLib.DataBase.Materials.FillingMaterials.Bentonite(),
     redeclare package Medium = Medium,
     boreholeDepth=100,
-    pipeType={AixLib.DataBase.Pipes.PE_X.DIN_16893_SDR11_d40(),
-        AixLib.DataBase.Pipes.PE_X.DIN_16893_SDR11_d40()},
     T0ground=284.15,
     T0fluids=281.15)
     annotation (Placement(transformation(extent={{32,-50},{90,8}})));
