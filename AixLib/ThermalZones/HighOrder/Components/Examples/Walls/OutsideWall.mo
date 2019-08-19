@@ -9,7 +9,7 @@ model OutsideWall
     withSunblind=true,
     outside=true,
     WallType=AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S(),
-    Model=2,
+    calcMethodOut=2,
     Blinding=0.2,
     LimitSolIrr=100,
     TOutAirLimit=282.15,

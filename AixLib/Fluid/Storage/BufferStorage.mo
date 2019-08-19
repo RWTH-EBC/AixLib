@@ -32,12 +32,12 @@ model BufferStorage
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  parameter SI.CoefficientOfHeatTransfer hConvInside=100 "Model assumptions Coefficient of Heat Transfer water <-> wall";
-  parameter SI.CoefficientOfHeatTransfer hConvOutside=10 "Model assumptions Coefficient of Heat Transfer insulation <-> air";
-  parameter SI.CoefficientOfHeatTransfer hConvHC1=100 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
+  parameter SI.CoefficientOfHeatTransfer hConIn=100 "Model assumptions heat transfer coefficient water <-> wall";
+  parameter SI.CoefficientOfHeatTransfer hConOut=10 "Model assumptions heat transfer coefficient insulation <-> air";
+  parameter SI.CoefficientOfHeatTransfer hConHC1=100 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
                                                                            annotation(Dialog(enable=useHeatingCoil1,  tab=
           "Heating Coils and Rod"));
-  parameter SI.CoefficientOfHeatTransfer hConvHC2=100 " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
+  parameter SI.CoefficientOfHeatTransfer hConHC2=100 " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
                                                                             annotation(Dialog(enable=useHeatingCoil2,  tab=
           "Heating Coils and Rod"));
   parameter Boolean upToDownHC1 = true
@@ -202,8 +202,8 @@ model BufferStorage
   AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
     lambdaWall=data.lambdaWall,
     lambdaIns=data.lambdaIns,
-    hConvInside=hConvInside,
-    hConvOutside=hConvOutside,
+    hConIn=hConIn,
+    hConOut=hConOut,
     TStartWall=TStartWall,
     TStartIns=TStartIns,
     rhoIns=data.rhoIns,
@@ -229,14 +229,13 @@ model BufferStorage
     each D1=data.dTank,
     each sWall=data.sWall,
     each sIns=data.sIns,
-    each hConvInside=hConvInside,
-    each hConvOutside=hConvOutside)
-    annotation (Placement(transformation(extent={{20,-2},{40,18}})));
+    each hConIn=hConIn,
+    each hConOut=hConOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
     lambdaWall=data.lambdaWall,
     lambdaIns=data.lambdaIns,
-    hConvInside=hConvInside,
-    hConvOutside=hConvOutside,
+    hConIn=hConIn,
+    hConOut=hConOut,
     TStartWall=TStartWall,
     TStartIns=TStartIns,
     rhoIns=data.rhoIns,
@@ -252,27 +251,27 @@ model BufferStorage
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
     disHC=disHC1,
-    hConvHC=hConvHC1,
+    hConHC=hConHC1,
     redeclare package Medium = MediumHC1,
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
     allowFlowReversal=true,
     m_flow_nominal=0.05,
-    TStart=TStart) if         useHeatingCoil1 annotation (Placement(
-        transformation(
+    TStart=TStart) if useHeatingCoil1
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
     disHC=disHC2,
     lengthHC=data.lengthHC2,
-    hConvHC=hConvHC2,
+    hConHC=hConHC2,
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
     allowFlowReversal=true,
     m_flow_nominal=0.05,
-    TStart=TStart) if                        useHeatingCoil2 annotation (
-      Placement(transformation(
+    TStart=TStart) if useHeatingCoil2
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
