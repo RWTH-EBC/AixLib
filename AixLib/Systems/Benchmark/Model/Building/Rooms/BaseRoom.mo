@@ -2,7 +2,7 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model BaseRoom
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent={{-13,10},
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation(Placement(transformation(extent={{-13,10},
             {13,-10}},                                                                                                            rotation = 90, origin={-10,-27})));
   Components.Walls.ActiveWallPipeBased activeWallPipeBased(
     withDoor=false,

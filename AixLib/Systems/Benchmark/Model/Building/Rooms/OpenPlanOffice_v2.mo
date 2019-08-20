@@ -2,11 +2,9 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model OpenPlanOffice_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom(vol(V=4050),
       activeWallPipeBased(wall_length=45, wall_height=30));
-  Components.Walls.Wall FloorToGround(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 FloorToGround(
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     withDoor=false,
@@ -19,19 +17,17 @@ model OpenPlanOffice_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={14,-80})));
-  Components.Walls.Wall WestWallToMultiPersonOffice(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallToMultiPersonOffice(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     outside=false,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    withDoor=false,
+    withDoor=true,
     wall_length=30,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
@@ -42,7 +38,7 @@ model OpenPlanOffice_v2
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     HeatPort_ToMultiPersonOffice
     annotation (Placement(transformation(extent={{60,-110},{80,-90}})));
-  Components.Walls.Wall EastWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 EastWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -71,37 +67,33 @@ model OpenPlanOffice_v2
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-70})));
-  Components.Walls.Wall WestWallToConferenceRoom(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallToConferenceRoom(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     outside=false,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    withDoor=false,
+    withDoor=true,
     wall_length=20,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
         origin={-70,20})));
-  Components.Walls.Wall WestWallToConferenceRoom1(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WestWallToCanteen(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     outside=false,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    withDoor=false,
+    withDoor=true,
     wall_length=30,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
@@ -111,7 +103,7 @@ model OpenPlanOffice_v2
     annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToCanteen
     annotation (Placement(transformation(extent={{-110,-40},{-90,-20}})));
-  Components.Walls.Wall SouthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 SouthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -140,7 +132,7 @@ model OpenPlanOffice_v2
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-10,-110})));
-  Components.Walls.Wall NorthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 NorthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -175,11 +167,11 @@ equation
   connect(FloorToGround.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{14,-76},{14,-52},{-10.125,-52},{-10.125,-39.22}},
         color={191,0,0}));
-  connect(WestWallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(WallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{70,-76},{60,-76},{60,-60},{50,-60},{50,-52},{-10,
           -52},{-10,-44},{-10.125,-44},{-10.125,-39.22}},
                           color={191,0,0}));
-  connect(WestWallToMultiPersonOffice.port_outside,HeatPort_ToMultiPersonOffice)
+  connect(WallToMultiPersonOffice.port_outside,HeatPort_ToMultiPersonOffice)
     annotation (Line(points={{70,-84.2},{70,-100}}, color={191,0,0}));
   connect(EastWall.WindSpeedPort, WindSpeedPort_EastWall) annotation (Line(
         points={{74.2,-57.6},{76,-57.6},{76,-58},{100,-58},{100,-40}},
@@ -197,15 +189,15 @@ equation
           -12.8},{82,0},{50,0},{50,-52},{-50,-52},{-50,-59.9},{-99.9,-59.9}},
                                                                          color=
           {0,0,127}));
-  connect(WestWallToConferenceRoom.port_outside,HeatPort_ToConferenceRoom)
+  connect(WallToConferenceRoom.port_outside,HeatPort_ToConferenceRoom)
     annotation (Line(points={{-74.2,20},{-100,20}},   color={191,0,0}));
-  connect(WestWallToConferenceRoom.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(WallToConferenceRoom.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-66,20},{-50,20},{-50,-52},{-10.125,-52},{-10.125,
           -39.22}},color={191,0,0}));
-  connect(WestWallToConferenceRoom1.port_outside,HeatPort_ToCanteen)
+  connect(WestWallToCanteen.port_outside,HeatPort_ToCanteen)
     annotation (Line(points={{-74.2,-30},{-100,-30}},
                        color={191,0,0}));
-  connect(WestWallToConferenceRoom1.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(WestWallToCanteen.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-66,-30},{-50,-30},{-50,-52},{-10.125,-52},{
           -10.125,-39.22}},
                    color={191,0,0}));

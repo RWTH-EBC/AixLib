@@ -244,9 +244,8 @@ model RLT_Central_v2
     V=0.01,
     nPorts=2)
            annotation (Placement(transformation(extent={{-56,-38},{-46,-48}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
+  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
     A=Area_Heatexchanger_AirWater_Hot)                                                                                                                                                      annotation(Placement(transformation(extent={{-5.5,-6},
             {5.5,6}},
         rotation=90,
@@ -257,9 +256,8 @@ model RLT_Central_v2
     V=0.01,
     nPorts=2)
            annotation (Placement(transformation(extent={{28,-38},{38,-48}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside1(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
+  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside1(
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
     A=Area_Heatexchanger_AirWater_Cold)                                                                                                                                                     annotation(Placement(transformation(extent={{-5.5,-6},
             {5.5,6}},
         rotation=90,

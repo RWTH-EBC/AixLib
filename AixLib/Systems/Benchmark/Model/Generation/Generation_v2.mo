@@ -76,8 +76,6 @@ model Generation_v2
     redeclare package Medium = Medium_Water,
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
-    alphaHC1=alphaHC1_warm,
-    alphaHC2=alphaHC2_warm,
     data=DataBase.Storage.Benchmark_22000l(),
     TStart=343.15)
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
@@ -101,9 +99,7 @@ model Generation_v2
     redeclare package Medium = Medium_Water,
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
-    alphaHC1=alphaHC1_cold,
     useHeatingCoil2=true,
-    alphaHC2=alphaHC1_cold,
     upToDownHC2=false,
     TStart=283.15,
     data=DataBase.Storage.Benchmark_46000l())
@@ -171,8 +167,6 @@ model Generation_v2
     redeclare package Medium = Medium_Water,
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
-    alphaHC1=alphaHC1_warm,
-    alphaHC2=alphaHC2_warm,
     TStart=308.15,
     data=DataBase.Storage.Benchmark_22000l())
     annotation (Placement(transformation(extent={{16,-18},{46,20}})));

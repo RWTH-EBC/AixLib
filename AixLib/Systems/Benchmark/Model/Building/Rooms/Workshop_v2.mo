@@ -8,12 +8,13 @@ model Workshop_v2
       T0=288.15), vol(V=2700, T_start=288.15))
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-  Components.Walls.Wall WestWallToCanteen(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall EastWallToCanteen(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
+    redeclare model Window =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
     outside=false,
@@ -21,14 +22,14 @@ model Workshop_v2
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
     wall_length=30,
-    withDoor=false,
+    withDoor=true,
     T0=288.15) annotation (Placement(transformation(
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=0,
         origin={70,-30})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToCanteen
     annotation (Placement(transformation(extent={{90,-40},{110,-20}})));
-  Components.Walls.Wall SouthWall(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall SouthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -41,10 +42,11 @@ model Workshop_v2
         extent={{-3.99999,24},{4.00002,-24}},
         rotation=90,
         origin={-50,-70})));
-  Components.Walls.Wall FloorToGround(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
+    withWindow=false,
+    redeclare model Window =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
@@ -70,7 +72,7 @@ model Workshop_v2
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-10,-110})));
-  Components.Walls.Wall NorthWall(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall NorthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -94,7 +96,7 @@ model Workshop_v2
         extent={{-12,-12},{12,12}},
         rotation=-90,
         origin={-40,100})));
-  Components.Walls.Wall WestWall(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall WestWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -135,10 +137,10 @@ model Workshop_v2
         rotation=-90,
         origin={-40,-100})));
 equation
-  connect(WestWallToCanteen.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(EastWallToCanteen.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{66,-30},{50,-30},{50,-52},{-10.125,-52},{-10.125,
           -39.22}},color={191,0,0}));
-  connect(HeatPort_ToCanteen,WestWallToCanteen. port_outside) annotation (Line(
+  connect(HeatPort_ToCanteen,EastWallToCanteen. port_outside) annotation (Line(
         points={{100,-30},{74.2,-30}},                   color={191,0,0}));
   connect(FloorToGround.port_outside,HeatPort_ToGround)
     annotation (Line(points={{50,-74.2},{50,-100}}, color={191,0,0}));

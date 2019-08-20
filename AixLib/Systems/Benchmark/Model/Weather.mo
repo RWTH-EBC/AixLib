@@ -207,7 +207,7 @@ equation
   connect(combiTable1Ds.y[2], measureBus.Fan_RLT) annotation (Line(points={{-11,
           -68},{0,-68},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
   connect(boundary.m_flow_in, firstOrder.y)
-    annotation (Line(points={{-44,-12},{-28.6,-12}}, color={0,0,127}));
+    annotation (Line(points={{-42,-12},{-28.6,-12}}, color={0,0,127}));
   connect(firstOrder.u, combiTable1Ds.y[1]) annotation (Line(points={{-14.8,-12},
           {-8,-12},{-8,-68},{-11,-68}}, color={0,0,127}));
   connect(realExpression1.y, switch1.u3) annotation (Line(points={{-63.4,-76},{

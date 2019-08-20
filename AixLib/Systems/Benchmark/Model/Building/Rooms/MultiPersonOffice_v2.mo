@@ -3,19 +3,17 @@ model MultiPersonOffice_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-  Components.Walls.Wall EastWallToOpenPlanOffice(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallsToOpenPlanOffice(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     outside=false,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    withDoor=false,
+    withDoor=true,
     wall_length=30,
     T0=293.15) annotation (Placement(transformation(
         extent={{3.99999,-24},{-4.00002,24}},
@@ -23,13 +21,13 @@ model MultiPersonOffice_v2
         origin={80,-30})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenPlanOffice
     annotation (Placement(transformation(extent={{90,-40},{110,-20}})));
-  Components.Walls.Wall SouthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 SouthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
     withSunblind=false,
     withDoor=false,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     T0(displayUnit="degC") = 293.15,
     wall_length=20,
     windowarea=40)
@@ -37,11 +35,9 @@ model MultiPersonOffice_v2
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=-90,
         origin={50,-70})));
-  Components.Walls.Wall FloorToGround(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 FloorToGround(
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     withDoor=false,
@@ -72,10 +68,10 @@ model MultiPersonOffice_v2
         rotation=-90,
         origin={90,-110})));
 equation
-  connect(EastWallToOpenPlanOffice.port_outside,HeatPort_ToOpenPlanOffice)
+  connect(WallsToOpenPlanOffice.port_outside,HeatPort_ToOpenPlanOffice)
     annotation (Line(points={{84.2,-30},{100,-30}},
                                                   color={191,0,0}));
-  connect(EastWallToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(WallsToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{76,-30},{50,-30},{50,-52},{-10.125,-52},{-10.125,
           -39.22}},            color={191,0,0}));
   connect(FloorToGround.port_outside,HeatPort_ToGround)

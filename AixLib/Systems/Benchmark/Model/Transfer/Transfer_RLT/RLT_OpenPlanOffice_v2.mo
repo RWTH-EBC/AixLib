@@ -218,30 +218,34 @@ model RLT_OpenPlanOffice_v2
     nPorts=2,
     tau=RLT_tau)
     annotation (Placement(transformation(extent={{-86,-66},{-74,-78}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
-    A=Area_Heatexchanger_AirWater_Hot)                                                                                                                                                      annotation(Placement(transformation(extent={{-5.5,-6},
+
+  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
+    A=Area_Heatexchanger_AirWater_Hot)                                                                                                                 annotation(Placement(transformation(extent={{-5.5,-6},
             {5.5,6}},
         rotation=90,
         origin={-60.5,-54})));
+
   Fluid.FixedResistances.PressureDrop res(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_hot,
     dp_nominal(displayUnit="bar") = 20000)
     annotation (Placement(transformation(extent={{-64,-40},{-74,-30}})));
+
   Fluid.MixingVolumes.MixingVolume vol2(
     redeclare package Medium = Medium_Water,
     nPorts=2,
     m_flow_nominal=m_flow_nominal_hot,
     V=0.01)
            annotation (Placement(transformation(extent={{-50,-42},{-40,-52}})));
+
   Fluid.MixingVolumes.MixingVolume vol4(
     nPorts=2,
     redeclare package Medium = Medium_Air,
     V=1,
     m_flow_nominal=RLT_m_flow_nominal)
            annotation (Placement(transformation(extent={{-50,-66},{-40,-56}})));
+
   Fluid.Sensors.MassFlowRate senMasFlo2(redeclare package Medium = Medium_Air)
     annotation (Placement(transformation(extent={{62,-76},{82,-56}})));
   Modelica.Blocks.Math.Gain gain(k=1/(1.2041*Area_pipe_air))
@@ -260,13 +264,13 @@ model RLT_OpenPlanOffice_v2
     m_flow_nominal=m_flow_nominal_cold,
     V=0.01)
            annotation (Placement(transformation(extent={{46,-42},{56,-52}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside1(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
+ AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside1(
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
     A=Area_Heatexchanger_AirWater_Cold)                                                                                                                                                     annotation(Placement(transformation(extent={{-5.5,-6},
             {5.5,6}},
         rotation=90,
         origin={33.5,-54})));
+
   Fluid.FixedResistances.PressureDrop res1(
     redeclare package Medium = Medium_Water,
     m_flow_nominal=m_flow_nominal_cold,

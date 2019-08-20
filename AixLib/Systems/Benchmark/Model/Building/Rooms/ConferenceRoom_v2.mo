@@ -2,11 +2,9 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model ConferenceRoom_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom(vol(V=150),
       activeWallPipeBased(wall_length=5, wall_height=10));
-  Components.Walls.Wall FloorToWorkshop(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 FloorToWorkshop(
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     withDoor=false,
@@ -19,12 +17,10 @@ model ConferenceRoom_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={-50,-70})));
-  Components.Walls.Wall WestWallToOpenPlanOffice(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallsToOpenPlanOffice(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
     windowarea=60,
     withSunblind=false,
     outside=false,
@@ -32,7 +28,7 @@ model ConferenceRoom_v2
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
     wall_length=20,
-    withDoor=false,
+    withDoor=true,
     T0=293.15) annotation (Placement(transformation(
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=-90,
@@ -41,11 +37,11 @@ model ConferenceRoom_v2
     annotation (Placement(transformation(extent={{-60,-110},{-40,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenPlanOffice
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
-  Components.Walls.Wall NorthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 NorthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     withSunblind=false,
     withDoor=false,
     wall_length=10,
@@ -77,9 +73,9 @@ equation
   connect(FloorToWorkshop.thermStarComb_inside,thermStar_Demux. thermStarComb)
     annotation (Line(points={{-50,-66},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
         color={191,0,0}));
-  connect(WestWallToOpenPlanOffice.port_outside,HeatPort_ToOpenPlanOffice)
+  connect(WallsToOpenPlanOffice.port_outside,HeatPort_ToOpenPlanOffice)
     annotation (Line(points={{50,-74.2},{50,-100}}, color={191,0,0}));
-  connect(WestWallToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(WallsToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{50,-66},{50,-52},{-10.125,-52},{-10.125,-39.22}},
                    color={191,0,0}));
   connect(NorthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)

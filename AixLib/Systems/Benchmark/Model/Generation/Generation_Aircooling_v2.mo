@@ -87,8 +87,7 @@ model Generation_Aircooling_v2
     prescribedTemperature
     annotation (Placement(transformation(extent={{-10,-64},{-2,-56}})));
   AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
     A=Area_Heatexchanger_Air)                                                                                                                                                               annotation(Placement(transformation(extent={{4,-40},
             {15,-28}})));
   Modelica.Blocks.Math.Gain gain(k=1/(6.41801*1.2041))

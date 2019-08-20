@@ -239,9 +239,8 @@ model RLT_v2
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=90,
         origin={72,-48})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside1(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
+  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside1(
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
     A=Area_Heatexchanger_AirWater_Cold)                                                                                                                                                     annotation(Placement(transformation(extent={{-5.5,-6},
             {5.5,6}},
         rotation=90,
@@ -256,9 +255,8 @@ model RLT_v2
     m_flow_nominal=m_flow_nominal_hot,
     dp_nominal(displayUnit="bar") = 20000)
     annotation (Placement(transformation(extent={{-68,-40},{-78,-30}})));
-  Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(
-    surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
+  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass(),
     A=Area_Heatexchanger_AirWater_Hot)                                                                                                                                                      annotation(Placement(transformation(extent={{-5.5,-6},
             {5.5,6}},
         rotation=90,

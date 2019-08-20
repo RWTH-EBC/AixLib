@@ -2,13 +2,13 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model Canteen_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom(vol(V=1800),
       activeWallPipeBased(wall_height=30, solar_absorptance=0.24));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_ToOpenplanoffice(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall EastWallToOpenplanoffice(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
+    withWindow=false,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     withSunblind=false,
-    withDoor=false,
+    withDoor=true,
     wall_length=30,
     windowarea=60,
     outside=false,
@@ -21,9 +21,10 @@ model Canteen_v2
     annotation (Placement(transformation(extent={{90,-40},{110,-20}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
+    redeclare model Window =
+        AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140,
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
     withDoor=false,
@@ -42,7 +43,7 @@ model Canteen_v2
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     withSunblind=false,
     withDoor=false,
     wall_length=20,
@@ -56,7 +57,7 @@ model Canteen_v2
         extent={{-6,6},{6,-6}},
         rotation=0,
         origin={-66,-88})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_SouthWall annotation (
+  AixLib.Utilities.Interfaces.SolarRad_in SolarRadiationPort_SouthWall annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -69,16 +70,17 @@ model Canteen_v2
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall WestWallToWorkshop(
     wall_height=3,
     solar_absorptance=0.48,
-    withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    withWindow=false,
+    redeclare model Window =
+        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
     outside=false,
     door_height=2.125,
     door_width=1,
     WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
-    withDoor=false,
+    withDoor=true,
     wall_length=30,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
@@ -92,7 +94,7 @@ model Canteen_v2
     withWindow=true,
     withSunblind=false,
     withDoor=false,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     T0(displayUnit="degC") = 293.15,
     wall_length=20,
     windowarea=40)
@@ -105,7 +107,7 @@ model Canteen_v2
         extent={{-12,-12},{12,12}},
         rotation=-90,
         origin={-40,100})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_NorthWall annotation (
+  AixLib.Utilities.Interfaces.SolarRad_in SolarRadiationPort_NorthWall annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -117,11 +119,11 @@ model Canteen_v2
         rotation=180,
         origin={-66,90})));
 equation
-  connect(Wall_ToOpenplanoffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
+  connect(EastWallToOpenplanoffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{66,-30},{50,-30},{50,-52},{-10.125,-52},{-10.125,
           -39.22}},
         color={191,0,0}));
-  connect(Wall_ToOpenplanoffice.port_outside,HeatPort_ToOpenplanoffice)
+  connect(EastWallToOpenplanoffice.port_outside,HeatPort_ToOpenplanoffice)
     annotation (Line(points={{74.2,-30},{100,-30}},               color={191,0,
           0}));
   connect(FloorToGround.port_outside,HeatPort_ToGround)
