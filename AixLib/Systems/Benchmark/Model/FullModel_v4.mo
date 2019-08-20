@@ -82,7 +82,6 @@ model FullModel_v4
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
  AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     surfaceType=DataBase.Surfaces.RoughnessForHT.Glass(),
-    Model=1,
     A=169.594)                                                                                                                                                                              annotation(Placement(transformation(extent={{17,92},
             {6,104}})));
   Modelica.Blocks.Math.Gain gain(k=2)
