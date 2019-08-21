@@ -44,8 +44,9 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         origin={30,-12})));
   Modelica.Blocks.Sources.Sine InternalGains(
     amplitude=21000,
-    freqHz=1/1200,
-    offset=21000) annotation (Placement(transformation(
+    offset=21000,
+    freqHz=1/3600)
+                  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={64,16})));
