@@ -41,11 +41,11 @@ model SubstationHeatingDirectCooling
     deltaT_heatingSet(displayUnit="K") = 10,
     deltaT_coolingGridSet(displayUnit="K") = 4,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=2,
     deltaT_heatingGridSet(displayUnit="K") = 4,
     T_supplyHeatingSet=318.15)
     annotation (Placement(transformation(extent={{-34,-2},{14,30}})));
+
 equation
   connect(const1.y, coo.T_in)
     annotation (Line(points={{-75,-74},{-60,-74},{-60,-56}}, color={0,0,127}));

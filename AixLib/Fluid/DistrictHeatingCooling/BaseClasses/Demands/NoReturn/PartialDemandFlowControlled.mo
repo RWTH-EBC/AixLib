@@ -8,8 +8,8 @@ partial model PartialDemandFlowControlled
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium) "Inlet port of demand node"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium
-      = Medium, m_flow_nominal=1) "Supply flow temperature sensor"
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=1) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   replaceable Demands.Substations.PartialSubstation substation(redeclare
       package Medium = Medium)
@@ -23,8 +23,8 @@ partial model PartialDemandFlowControlled
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={60,0})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=1) "Return flow temperature sensor"
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=1) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
 protected
