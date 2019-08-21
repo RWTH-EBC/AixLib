@@ -47,7 +47,8 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     AExt={{30,30,30},{20,20,0},{10,0,0},{20,0,0},{40,30,30}})
     annotation (Placement(transformation(extent={{-24,-18},{24,18}})));
 
-  Modelica.Blocks.Sources.Constant constsantSolarRadiationThroughWindow2 [15](each k=10)
+  Modelica.Blocks.Sources.Constant constsantSolarRadiationThroughWindow2 [15](each k=
+        2.2)
     annotation (Placement(transformation(extent={{-54,26},{-34,46}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowThroughRoof[5](Q_flow=
        {-4735,-3700,-308,-617,-8326}) annotation (Placement(transformation(
@@ -76,16 +77,16 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
         rotation=180,
         origin={48,8})));
   Modelica.Blocks.Sources.Sine InternalRadiativeGains[5](
-     amplitude={3600,10500,950,360,5100},
     each freqHz=1/3600,
-     offset={3600,10500,950,360,5100}) annotation (Placement(transformation(
+    amplitude={360,1050,95,36,510},
+    offset={360,1050,95,36,510})       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={88,8})));
   Modelica.Blocks.Sources.Sine InternalConvectiveGains[5](
-     amplitude={3600,10500,950,360,5100},
     each freqHz=1/3600,
-     offset={3600,10500,950,360,5100}) annotation (Placement(transformation(
+    amplitude={360,1050,90,36,510},
+    offset={360,1050,90,360,510})      annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={90,-24})));
