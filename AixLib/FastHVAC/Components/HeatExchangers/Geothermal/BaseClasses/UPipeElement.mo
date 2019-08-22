@@ -39,8 +39,11 @@ model UPipeElement
     length=length,
     diameter=pipeType.d_i,
     parameterPipe=pipeType,
+    withInsulation=false,
     parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc(),
-    withConvection=true)
+    withConvection=false,
+    withRadiation=false,
+    alphaOutside=0)
                  annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=-90,
@@ -52,8 +55,11 @@ model UPipeElement
     each length=length,
     each diameter=pipeType.d_i,
     each parameterPipe=pipeType,
+    withInsulation=false,
     each parameterIso=AixLib.DataBase.Pipes.Insulation.Iso0pc(),
-    withConvection=true)
+    withConvection=false,
+    withRadiation=false,
+    alphaOutside=0)
                  annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
@@ -189,21 +195,19 @@ Doppel-U über nParallel=2 abgebildet")}),
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={47,51,253})}),
     Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>This submodel is used to create an axially discretized model of a U-Pipe or Double-U-Pipe borehole heat exchanger </p>
 <p>It&rsquo;s based on two <b>DynamicPipeEBC</b> models as well as <b>CylindricLoad</b>, <b>CylindricHeatTransfer</b> and <b>CylindricHeatConduction</b> out of the HVAC Library. All other objects are standard Modelica models. </p>
 <p>This model is not used by itself but serves as one axial element in the bigger model UPipe </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<h4><span style=\"color:#008000\">Assumptions </span></h4>
+<h4><span style=\"color: #008000\">Assumptions </span></h4>
 <ol>
 <li>A Double-U-Pipe is created by using the parameter <i>nParallel</i> of <b>DynamicPipeEBC</b> </li>
 <li>The heat capacity or mass of the borehole filling is distributed between two areas. A smaller part is assumed between the pipes. The actual sizes derives from the <i>pipeReferenceCircle</i> as well as the diameter of the pipes. The correct corresponding second part is assumed between the outer diameter of the borehole and a calculated inner diameter that does not correspond with any real geometry. </li>
 </ol>
-<h4><span style=\"color:#008000\">References</span></h4>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>Source:</p>
 <ul>
-<li>Model developed as part of DA025 &QUOT;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&QUOT; by Tim Comanns</li>
+<li>Model developed as part of DA025 &quot;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&quot; by Tim Comanns</li>
 </ul>
 </html>",
       revisions="<html>

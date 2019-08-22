@@ -72,7 +72,8 @@ protected
         rotation=-90,
         origin={-60,74})));
 
-  Valves.Manifold ManifoldOutput annotation (Placement(transformation(
+  Valves.Manifold ManifoldOutput(n=noOfPipes)
+                                 annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={52,72})));

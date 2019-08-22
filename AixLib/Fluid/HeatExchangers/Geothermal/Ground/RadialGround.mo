@@ -14,7 +14,8 @@ model RadialGround
     n = 1 is the top one" annotation(Dialog(group="General"));
   parameter Integer nRad = 8 "Number of radial discretizations, 
     nRad=1 is the most inner one" annotation(Dialog(group="General"));
-  parameter SI.Temperature T0 = 283.15 "Initial temperature of ground";
+  parameter SI.Temperature T0[n, nRad] = fill(283.15, n, nRad)
+    "Initial temperature of ground for the different ground layers";
 
   ////////////////////
   ///// GEOMETRY /////
@@ -49,7 +50,7 @@ model RadialGround
     each lambda=lambda,
     d_out=fill(outerDiameters, n),
     d_in=fill(innerDiameters, n),
-    each T0=T0) annotation (Placement(transformation(extent={{2,-20},{60,38}})));
+    T0=T0) annotation (Placement(transformation(extent={{2,-20},{60,38}})));
 
 public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a outerThermalBoundary

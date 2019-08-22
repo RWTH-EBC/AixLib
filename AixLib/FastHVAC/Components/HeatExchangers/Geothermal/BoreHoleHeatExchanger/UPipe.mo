@@ -4,7 +4,7 @@ model UPipe "Discretized UPipe consisting of n UPipeElements"
 
   /// Model parameters ///
     // General
-    parameter SI.Temperature T_start "Initial Temperature of UPipe-System"          annotation(Dialog(group="General"));
+    parameter SI.Temperature T_start[n] "Initial Temperature of UPipe-System"          annotation(Dialog(group="General"));
     parameter Integer n = 5 "Number of discretizations in axial direction" annotation(Dialog(group="General"));
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
@@ -26,7 +26,7 @@ model UPipe "Discretized UPipe consisting of n UPipeElements"
 public
     BaseClasses.UPipeElement                                 uPipeElement[n](
     each medium=medium,
-    each T_start=T_start,
+    T_start=T_start,
     each fillingDensity=boreholeFilling.density,
     each fillingHeatCapacity=boreholeFilling.heatCapacity,
     each fillingThermalConductivity=boreholeFilling.thermalConductivity,
@@ -107,18 +107,6 @@ equation
           smooth=Smooth.None,
           color={0,0,0},
           thickness=1),
-        Rectangle(
-          extent={{-50,-12},{-30,8}},
-          fillPattern=FillPattern.Solid,
-          fillColor={184,0,0},
-          pattern=LinePattern.None,
-          lineColor={0,0,0}),
-        Rectangle(
-          extent={{-50,32},{-30,52}},
-          fillPattern=FillPattern.Solid,
-          fillColor={184,0,0},
-          pattern=LinePattern.None,
-          lineColor={0,0,0}),
         Text(
           extent={{12,36},{-12,68}},
           fillColor={184,0,0},
