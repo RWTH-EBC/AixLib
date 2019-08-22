@@ -1,0 +1,18 @@
+//// rename hLowerPorts
+convertElement("AixLib.DataBase.Storage.BufferStorageBaseDataDefinition", "hLowerPorts", "hLowerPort_Demand");
+convertElement("AixLib.DataBase.Storage.Generic_New_2000l", "hLowerPorts", "hLowerPort_Demand");
+
+//// rename hUpperPorts
+convertElement("AixLib.DataBase.Storage.BufferStorageBaseDataDefinition", "hUpperPorts", "hUpperPort_Demand");
+convertElement("AixLib.DataBase.Storage.Generic_New_2000l", "hUpperPorts", "hUpperPort_Demand");
+
+//// rename inpLowLay and inpHigLay
+convertElement("AixLib.Fluid.Storage.BufferStorage", "nLowerPorts", "nLowerPort_Demand");
+convertElement("AixLib.Fluid.Storage.BufferStorage", "nUpperPorts", "hUpperPort_Demand");
+
+//// rename inpLowLay and inpHigLay
+convertElement("AixLib.Fluid.Storage.BufferStorage", "inpLowLay", "inpLowLay_Demand");
+convertElement("AixLib.Fluid.Storage.BufferStorage", "inpHigLay", "inpHigLay_Demand");
+
+
+
