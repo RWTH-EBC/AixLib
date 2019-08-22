@@ -75,8 +75,8 @@ model BufferStorage
 
  final parameter Integer nLowerPort_Supply=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPort_Supply/(data.hTank/n) + 0.5,0),1));
  final parameter Integer nUpperPort_Supply=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPort_Supply/(data.hTank/n) + 0.5,0),n));
- final parameter Boolean inpLowLay_Supply=(nLowerPorts_Supply == 1); //if there is an input at the lowest layer
- final parameter Boolean inpHigLay_Supply=(nUpperPorts_Supply == n);
+ final parameter Boolean inpLowLay_Supply=(nLowerPort_Supply == 1); //if there is an input at the lowest layer
+ final parameter Boolean inpHigLay_Supply=(nUpperPort_Supply == n);
 
  final parameter Integer[n] inpActLay = cat(1,{if (nLowerPort_Demand==k or nLowerPort_Supply==k) then (if (nUpperPort_Demand==k or nUpperPort_Supply==k) then 2 else 1) else (if (nUpperPort_Demand==k or nUpperPort_Supply==k) then 1 else 0) for k in 1:n});
  final parameter Integer[n] portsLayer=cat(1,{if inpActLay[1]==1 then 3 else 1},{inpActLay[k]*2+2 for k in 2:n-1},{if inpActLay[n]==1 then 3 else 1});
