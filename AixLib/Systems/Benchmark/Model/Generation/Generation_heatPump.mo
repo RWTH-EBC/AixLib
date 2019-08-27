@@ -10,21 +10,21 @@ model Generation_heatPump
     parameter Modelica.SIunits.Volume vol_2 = 0.024 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.ThermalConductance R_loss_1 = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.ThermalConductance R_loss_2 = 0 annotation(Dialog(tab = "General"));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,50},{110,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Evaporator fluid input port"
     annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Evaporator fluid output port"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
   Fluid.HeatPumps.HeatPumpDetailed heatPumpDetailed_1(

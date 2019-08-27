@@ -4,7 +4,7 @@ model BaseRoom
     AixLib.Media.Air "Medium in the component";
   AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation(Placement(transformation(extent={{-13,10},
             {13,-10}},                                                                                                            rotation = 90, origin={-10,-27})));
-  Components.Walls.ActiveWallPipeBased activeWallPipeBased(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall activeWallPipeBased(
     withDoor=false,
     ISOrientation=3,
     outside=true,

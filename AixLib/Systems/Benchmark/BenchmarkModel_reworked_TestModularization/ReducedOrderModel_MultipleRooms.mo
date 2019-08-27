@@ -39,15 +39,15 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     RRoof={{0.4444,0.06957,0.02941,0.0001},{0.4444,0.06957,0.02941,0.0001},{0.4444,
         0.06957,0.02941,0.0001},{0.4444,0.06957,0.02941,0.0001},{0.4444,0.06957,
         0.02941,0.0001}},
-    RWin={0.01923,0.0128,0.03846,0.01923,0.01282},
     RInt={{0.175,0.0294},{0.175,0.0294},{0.175,0.0294},{0.175,0.029},{0.175,0.0294}},
-    nOrientations={3,3,3,3,3},
-    AWin={{60,60,60},{40,40,0},{20,0,0},{40,0,0},{80,60,60}},
-    ATransparent={{48,48,48},{32,32,0},{16,0,0},{32,0,0},{64,48,48}},
-    AExt={{30,30,30},{20,20,0},{10,0,0},{20,0,0},{40,30,30}})
+    nOrientations={4,4,4,4,4},
+    AWin={{60,0,60,60},{40,0,40,0},{20,0,0,0},{0,0,40,0},{80,60,60,0}},
+    ATransparent={{48,0,48,48},{32,0,32,0},{16,0,0,0},{0,32,0,0},{64,48,48,0}},
+    AExt={{30,0,30,30},{20,0,20,0},{10,0,0,0},{0,0,20,0},{40,30,30,0}},
+    RWin={0.01923,0.0128,0.03846,0.01923,0.01282})
     annotation (Placement(transformation(extent={{-24,-18},{24,18}})));
 
-  Modelica.Blocks.Sources.Constant constsantSolarRadiationThroughWindow2 [15](each k=
+  Modelica.Blocks.Sources.Constant constsantSolarRadiationThroughWindow2 [20](each k=
         2.2)
     annotation (Placement(transformation(extent={{-54,26},{-34,46}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowThroughRoof[5](Q_flow=
@@ -154,6 +154,22 @@ equation
           0,127}));
   connect(constsantSolarRadiationThroughWindow2[15].y, reducedOrderModel[5].solRad[
     3]) annotation (Line(points={{-33,36},{-28,36},{-28,15},{-25,15}}, color={0,
+          0,127}));
+     connect(constsantSolarRadiationThroughWindow2[16].y, reducedOrderModel[1].solRad[
+    4]) annotation (Line(points={{-33,36},{-28,36},{-28,15},{-25,15}}, color={0,
+          0,127}));
+     connect(constsantSolarRadiationThroughWindow2[17].y, reducedOrderModel[2].solRad[
+    4]) annotation (Line(points={{-33,36},{-28,36},{-28,15},{-25,15}}, color={0,
+          0,127}));
+
+       connect(constsantSolarRadiationThroughWindow2[18].y, reducedOrderModel[3].solRad[
+    4]) annotation (Line(points={{-33,36},{-28,36},{-28,15},{-25,15}}, color={0,
+          0,127}));
+           connect(constsantSolarRadiationThroughWindow2[19].y, reducedOrderModel[4].solRad[
+    4]) annotation (Line(points={{-33,36},{-28,36},{-28,15},{-25,15}}, color={0,
+          0,127}));
+           connect(constsantSolarRadiationThroughWindow2[20].y, reducedOrderModel[5].solRad[
+    4]) annotation (Line(points={{-33,36},{-28,36},{-28,15},{-25,15}}, color={0,
           0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
