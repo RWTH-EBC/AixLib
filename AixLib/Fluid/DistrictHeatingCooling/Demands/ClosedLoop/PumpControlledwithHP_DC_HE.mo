@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model PumpControlledwithHP_DC_backup "Substation model for  low-temperature networks for buildings with 
+model PumpControlledwithHP_DC_HE "Substation model for  low-temperature networks for buildings with 
   heat pump and chiller"
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
@@ -150,10 +150,10 @@ public
     allowFlowReversalHex=false,
     hHex_b=0.5,
     VTan=0.4,
-    hTan=2,
     hHex_a=1.5,
     hexSegMult=2,
-    Q_flow_nominal=m_flow_nominal*4180*30,
+    hTan=1.8476,
+    Q_flow_nominal=m_flow_nominal*4180*20,
     T_start=308.15,
     TTan_nominal=306.15,
     THex_nominal=338.15)
@@ -238,7 +238,7 @@ public
     m_flow_small=0.0001,
     T_start=283.15)
     annotation (Placement(transformation(extent={{-48,-26},{-28,-6}})));
-  Modelica.Blocks.Sources.RealExpression realExpression6(y=max(0, gain.y))
+  Modelica.Blocks.Sources.RealExpression cooling(y=max(0, gain.y))
     annotation (Placement(transformation(extent={{-2,58},{-22,78}})));
   Modelica.Blocks.Math.BooleanToReal opening(realTrue=1, realFalse=0)
     annotation (Placement(transformation(
@@ -261,27 +261,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-90,-188})));
-  Modelica.Blocks.Sources.RealExpression realExpression7(y=(gain.y - realinput.y))
+  Modelica.Blocks.Sources.RealExpression heatload(y=min(0, gain.y))
     annotation (Placement(transformation(extent={{-274,-132},{-254,-112}})));
-  Actuators.Valves.ThreeWayEqualPercentageLinear val1(
-  redeclare package Medium = MediumBuilding,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Entering,
-    portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Leaving,
-    riseTime=20,
-    m_flow_nominal=m_flow_nominal,
-    R=10,
-    dpValve_nominal=2000,
-    T_start=308.15)
-          annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-120,-168})));
-  Modelica.Blocks.Sources.RealExpression realExpression8(y=if gain.y >= 0 then 0
-         else 1)
-    annotation (Placement(transformation(extent={{-166,-178},{-146,-158}})));
   Movers.FlowControlled_m_flow fan(
    dp_nominal= dp_nominal,
      redeclare package Medium = Medium,
@@ -290,9 +271,11 @@ public
     use_inputFilter=true,
     y_start=1,
     m_flow_start=2*m_flow_nominal,
-    m_flow_nominal=2)
+    m_flow_nominal=2,
+    addPowerToMedium=false)
     annotation (Placement(transformation(extent={{-236,-10},{-216,10}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=1)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=max(0.2, max(cooling.y,
+        heaPum.QCon_flow)/3295/10))
     annotation (Placement(transformation(extent={{-252,18},{-232,38}})));
   Modelica.Blocks.Sources.TimeTable timeTable(table=[0,273.15 + 35; 7.0e+06,273.15
          + 35; 7.0e+06,273.15 + 35; 1.2e+07,273.15 + 35; 1.2e+07,273.15 + 50; 2.2e+07,
@@ -446,12 +429,6 @@ equation
           -204},{-52,-226}}, color={0,127,255}));
   connect(hysteresis.y, opening.u) annotation (Line(points={{2,-97},{2,-94},{-172,
           -94},{-172,-112}}, color={255,0,255}));
-  connect(senTem7.port_b, val1.port_2)
-    annotation (Line(points={{-120,-150},{-120,-158}}, color={0,127,255}));
-  connect(val1.port_1, senMasFlo.port_a)
-    annotation (Line(points={{-120,-178},{-90,-178}}, color={0,127,255}));
-  connect(realExpression8.y, val1.y)
-    annotation (Line(points={{-145,-168},{-132,-168}}, color={0,0,127}));
   connect(port_a, fan.port_a)
     annotation (Line(points={{-260,0},{-236,0}}, color={0,127,255}));
   connect(fan.port_b, senTem2.port_a)
@@ -470,8 +447,6 @@ equation
           -16},{-20,-26},{-10,-26}}, color={0,127,255}));
   connect(heaPum.port_b2, senTem.port_a) annotation (Line(points={{10,-26},{28,-26},
           {28,-10},{44,-10}}, color={0,127,255}));
-  connect(val1.port_3, senTem3.port_b) annotation (Line(points={{-110,-168},{
-          -32,-168},{-32,-226}}, color={0,127,255}));
   connect(realinput.y, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{-179,-216},{-142,-216}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, vol1.heatPort) annotation (Line(points={{
@@ -506,7 +481,7 @@ equation
                           color={0,0,127}));
   connect(timeTable1.y, PID.u_s)
     annotation (Line(points={{-167,60},{-140,60},{-140,56}}, color={0,0,127}));
-  connect(realExpression6.y, prescribedHeatFlow1.Q_flow)
+  connect(cooling.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{-23,68},{-30,68}}, color={0,0,127}));
   connect(prescribedHeatFlow1.port, vol2.heatPort)
     annotation (Line(points={{-50,68},{-52,68},{-52,56}}, color={191,0,0}));
@@ -522,6 +497,8 @@ equation
           -62,16},{-82,16},{-82,12}}, color={0,127,255}));
   connect(realExpression.y, val2.y)
     annotation (Line(points={{-151,18},{-138,18},{-138,12}}, color={0,0,127}));
+  connect(senTem7.port_b, senMasFlo.port_a) annotation (Line(points={{-120,-150},
+          {-90,-150},{-90,-178}}, color={0,127,255}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,-240},
             {220,120}}), graphics={
@@ -564,4 +541,4 @@ Implemented </li>
 </html>", info="<html>
 <p>Substation model for bidirctional low-temperature networks for buildings with heat pump and chiller. In the case of simultaneous cooling and heating demands, the return flows are used as supply flows for the other application. The mass flows are controlled equation-based. The mass flows are calculated using the heating and cooling demands and the specified temperature differences between flow and return (network side).</p>
 </html>"));
-end PumpControlledwithHP_DC_backup;
+end PumpControlledwithHP_DC_HE;

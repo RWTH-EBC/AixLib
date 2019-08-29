@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
-model IdealSourcewithT_supply
+model IdealSourcewithT_supply1
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
@@ -47,6 +47,17 @@ model IdealSourcewithT_supply
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Sources.FixedBoundary bou( redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-92,28},{-72,48}})));
+  Modelica.Blocks.Interfaces.RealInput dpIn
+    annotation (Placement(transformation(extent={{-124,34},{-84,74}})));
+  Movers.SpeedControlled_y fan(
+  redeclare package Medium = Medium,
+      addPowerToMedium=false,
+    allowFlowReversal=false,
+    use_inputFilter=true,
+    per(pressure(V_flow={0.00223,0.00278,0.00556,0.00833,0.01111,0.01389}, dp={
+            4800000,4650000,4500000,4200000,3900000,3450000})),
+    y_start=1)
+    annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
 equation
   connect(m_flow.port_b, port_b)
     annotation (Line(points={{88,0},{100,0}}, color={0,127,255}));
@@ -64,8 +75,12 @@ equation
     annotation (Line(points={{58,0},{68,0}}, color={0,127,255}));
   connect(bou.ports[1], senTem1.port_b) annotation (Line(points={{-72,38},{-66,38},
           {-66,0},{-68,0}},     color={0,127,255}));
-  connect(vol.ports[2], preOut.port_a)
-    annotation (Line(points={{-48,0},{10,0}}, color={0,127,255}));
+  connect(vol.ports[2], fan.port_a)
+    annotation (Line(points={{-48,0},{-28,0}}, color={0,127,255}));
+  connect(fan.port_b, preOut.port_a)
+    annotation (Line(points={{-8,0},{10,0}}, color={0,127,255}));
+  connect(dpIn, fan.y)
+    annotation (Line(points={{-104,54},{-18,54},{-18,12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}),                                  graphics={
         Rectangle(
@@ -91,4 +106,4 @@ equation
 Implemented </li>
 </ul>
 </html>"));
-end IdealSourcewithT_supply;
+end IdealSourcewithT_supply1;

@@ -9,8 +9,7 @@ model PumpControlledwithHP_RE1 "Substation model for  low-temperature networks f
       "Medium in the building heating system"
       annotation (choicesAllMatching = true);
 
-    final parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
-
+     parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
     parameter Modelica.SIunits.HeatFlowRate heatDemand_max "maximum heat demand for scaling of heatpump in Watt";
 //    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max=-5000
 //                                                              "maximum cooling demand for scaling of chiller in Watt (negative values)";

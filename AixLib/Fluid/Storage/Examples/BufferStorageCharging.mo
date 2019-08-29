@@ -46,8 +46,8 @@ model BufferStorageCharging
   AixLib.Fluid.Sources.MassFlowSource_T boundary2(
     m_flow=0,
     redeclare package Medium = Medium,
-    T=343.15,
-    nPorts=1) annotation (Placement(transformation(
+    nPorts=1,
+    T=343.15) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-46,-20})));

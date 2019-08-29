@@ -9,8 +9,12 @@ model PumpControlledwithHP_RE_D "Substation model for  low-temperature networks 
       "Medium in the building heating system"
       annotation (choicesAllMatching = true);
 
-    final parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
-
+   final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
+    T=Medium.T_default,
+    p=Medium.p_default,
+    X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
+    final parameter Modelica.SIunits.SpecificHeatCapacity cp_default =   Medium.specificHeatCapacityCp(sta_default)
+                                                                                  "Cp-value of Water";
     parameter Modelica.SIunits.HeatFlowRate heatDemand_max "maximum heat demand for scaling of heatpump in Watt";
 //    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max=-5000
 //                                                              "maximum cooling demand for scaling of chiller in Watt (negative values)";
@@ -186,8 +190,8 @@ public
     m_flow_nominal=m_flow_nominal,
     R=10,
     riseTime=5,
-    T_start=308.15,
-    dpValve_nominal=30000)
+    dpValve_nominal=30000,
+    T_start=308.15)
           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,

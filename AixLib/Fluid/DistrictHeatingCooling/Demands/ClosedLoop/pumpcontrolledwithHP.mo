@@ -9,7 +9,7 @@ model PumpControlledwithHP "Substation model for  low-temperature networks for b
       "Medium in the building heating system"
       annotation (choicesAllMatching = true);
 
-    final parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
 
     parameter Modelica.SIunits.HeatFlowRate heatDemand_max "maximum heat demand for scaling of heatpump in Watt";
 //    parameter Modelica.SIunits.HeatFlowRate coolingDemand_max=-5000
@@ -22,8 +22,8 @@ model PumpControlledwithHP "Substation model for  low-temperature networks for b
 
     parameter Modelica.SIunits.Pressure dp_nominal=400000                  "nominal pressure drop";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal=(heatDemand_max)/
-      cp_default/10
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal=(heatDemand_max)/4180
+      /10
     "Nominal mass flow rate";
 
 public
@@ -42,7 +42,7 @@ public
     annotation (Placement(transformation(extent={{-272,-68},{-232,-28}}),
         iconTransformation(extent={{232,76},{192,116}})));
 
-  Modelica.Blocks.Math.Gain dhw_load(k=cp_default*40/3600)
+  Modelica.Blocks.Math.Gain dhw_load(k=4180*40/3600)
     annotation (Placement(transformation(extent={{-250,-116},{-230,-96}})));
   Sensors.TemperatureTwoPort senTem1(redeclare package Medium = MediumBuilding,tau=0,
     m_flow_nominal=m_flow_nominal,
@@ -88,9 +88,10 @@ public
     m_flow_small=0.0001,
     T_start=283.15)
     annotation (Placement(transformation(extent={{-48,-26},{-28,-6}})));
-  Modelica.Blocks.Sources.RealExpression realExpression6(y=if free_cooling.y ==
-        true then 0 else -min(Q_flow_input[1], 0))
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Modelica.Blocks.Sources.RealExpression cooling(y=if free_cooling.y == true
+         then 0 else -min(Q_flow_input[1], 0)) annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-102,40})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
@@ -108,8 +109,9 @@ public
     y_start=1,
     m_flow_start=2*m_flow_nominal,
     nominalValuesDefineDefaultPressureCurve=false,
-    addPowerToMedium=true,
-    m_flow_nominal=1)
+    addPowerToMedium=false,
+    m_flow_nominal=2,
+    dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-164,-10},{-144,10}})));
   HeatPumps.Carnot_TCon_RE heaPum(
     redeclare package Medium2 = Medium,
@@ -138,8 +140,8 @@ public
     annotation (Placement(transformation(extent={{120,-48},{100,-28}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=m_flow_nominal)
     annotation (Placement(transformation(extent={{166,-38},{146,-18}})));
-  Modelica.Blocks.Sources.RealExpression T_room_r(y=switch1.y - heatload.y/(
-        cp_default*m_flow_nominal))
+  Modelica.Blocks.Sources.RealExpression T_room_r(y=T_room.y - heatload.y/(4180
+        *m_flow_nominal))
     annotation (Placement(transformation(extent={{168,-92},{148,-72}})));
   Utilities.Sensors.FuelCounter fuelCounter
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -161,10 +163,10 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={130,-64})));
-  Modelica.Blocks.Sources.RealExpression T_dhw_r(y=switch1.y - dhw_load.y/(
-        cp_default*m_flow_nominal))
+  Modelica.Blocks.Sources.RealExpression T_dhw_r(y=T_dhw.y - dhw_load.y/(4180*
+        m_flow_nominal))
     annotation (Placement(transformation(extent={{88,-88},{108,-68}})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=10)
+  Modelica.Blocks.Logical.GreaterThreshold dhw(threshold=10)
     annotation (Placement(transformation(extent={{-202,-116},{-182,-96}})));
   Modelica.Blocks.Sources.TimeTable T_set_free_cooling(table=[0,273.15 + 35; 7.0e+06,
         273.15 + 35; 7.0e+06,273.15 + 35; 1.2e+07,273.15 + 35; 1.2e+07,273.15 +
@@ -187,15 +189,14 @@ public
         origin={-176,-82})));
   Utilities.Sensors.FuelCounter pump
     annotation (Placement(transformation(extent={{-142,12},{-122,32}})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=0.25)
-    annotation (Placement(transformation(extent={{-128,42},{-148,62}})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=max(0.2, max(cooling.y,
+        heatload.y)/3295/10))
+    annotation (Placement(transformation(extent={{-130,36},{-150,56}})));
   Modelica.Blocks.Interfaces.RealOutput P_el
     annotation (Placement(transformation(extent={{200,82},{220,102}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=pump.counter +
         fuelCounter.counter)
     annotation (Placement(transformation(extent={{154,80},{174,100}})));
-  Sources.FixedBoundary bou(redeclare package Medium =Medium,nPorts=1)
-    annotation (Placement(transformation(extent={{-216,38},{-196,58}})));
 equation
 
   //Power Consumptin Calculation
@@ -237,18 +238,16 @@ equation
           -41},{12,-41}}, color={0,0,127}));
   connect(T_dhw.y, switch1.u1) annotation (Line(points={{31,-80},{26,-80},{26,-74},
           {22,-74}}, color={0,0,127}));
-  connect(greaterThreshold.y, switch1.u2) annotation (Line(points={{-181,-106},{
-          14,-106},{14,-74}},
-                          color={255,0,255}));
-  connect(greaterThreshold.y, switch2.u2) annotation (Line(points={{-181,-106},{
-          132,-106},{132,-84},{130,-84},{130,-76}},
-                                               color={255,0,255}));
+  connect(dhw.y, switch1.u2) annotation (Line(points={{-181,-106},{14,-106},{14,
+          -74}}, color={255,0,255}));
+  connect(dhw.y, switch2.u2) annotation (Line(points={{-181,-106},{132,-106},{
+          132,-84},{130,-84},{130,-76}}, color={255,0,255}));
   connect(T_dhw_r.y, switch2.u1) annotation (Line(points={{109,-78},{116,-78},{116,
           -76},{122,-76}}, color={0,0,127}));
   connect(T_room_r.y, switch2.u3) annotation (Line(points={{147,-82},{142,-82},{
           142,-76},{138,-76}}, color={0,0,127}));
-  connect(dhw_load.y, greaterThreshold.u) annotation (Line(points={{-229,-106},{
-          -204,-106}},                 color={0,0,127}));
+  connect(dhw_load.y, dhw.u)
+    annotation (Line(points={{-229,-106},{-204,-106}}, color={0,0,127}));
   connect(port_a, senTem2.port_a)
     annotation (Line(points={{-260,0},{-242,0}}, color={0,127,255}));
   connect(senTem2.port_b, fan.port_a)
@@ -257,7 +256,7 @@ equation
     annotation (Line(points={{-144,0},{-68,0},{-68,4}}, color={0,127,255}));
   connect(vol2.ports[2], senTem4.port_a) annotation (Line(points={{-64,4},{-64,4},
           {-64,-18},{-48,-18},{-48,-16}}, color={0,127,255}));
-  connect(realExpression6.y, prescribedHeatFlow1.Q_flow)
+  connect(cooling.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{-102,29},{-102,14}}, color={0,0,127}));
   connect(senTem2.T, free_cooling.u) annotation (Line(points={{-232,-11},{-214,-11},
           {-214,-10},{-194,-10},{-194,-22}}, color={0,0,127}));
@@ -274,9 +273,7 @@ equation
   connect(realExpression3.y, P_el) annotation (Line(points={{175,90},{192,90},{
           192,92},{210,92}}, color={0,0,127}));
   connect(realExpression2.y, fan.m_flow_in)
-    annotation (Line(points={{-149,52},{-154,52},{-154,12}}, color={0,0,127}));
-  connect(bou.ports[1], fan.port_a) annotation (Line(points={{-196,48},{-164,48},
-          {-164,0}}, color={0,127,255}));
+    annotation (Line(points={{-151,46},{-154,46},{-154,12}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,
             -120},{220,120}}),
