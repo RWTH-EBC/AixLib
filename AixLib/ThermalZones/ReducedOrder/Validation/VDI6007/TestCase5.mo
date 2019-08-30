@@ -4,14 +4,14 @@ model TestCase5 "VDI 6007 Test Case 5 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    hConvExt=2.7,
-    hConvWin=2.7,
+    hConExt=2.7,
+    hConWin=2.7,
     gWin=1,
     nExt=1,
     hRad=5,
     nInt=1,
     AInt=75.5,
-    hConvInt=2.24,
+    hConInt=2.24,
     RWin=0.00000001,
     RExt={0.00436791293674},
     RExtRem=0.03895919557,
@@ -69,7 +69,7 @@ model TestCase5 "VDI 6007 Test Case 5 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow machines"
     annotation (Placement(transformation(extent={{48,-66},{68,-46}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=25*10.5) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=25*10.5) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -152,8 +152,7 @@ equation
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
   connect(thermalZoneTwoElements.extWall, theConWall.solid)
     annotation (Line(points={{44,12},{40,12},{40,1},{36,1}}, color={191,0,0}));
-  connect(hConvWall.y, theConWall.Gc)
-    annotation (Line(points={{0,4.4},{31,4.4},{31,-4}},      color={0,0,127}));
+  connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{31,4.4},{31,-4}}, color={0,0,127}));
   connect(outdoorTemp.y[1], preTem.T)
     annotation (Line(points={{-11.2,0},{6.8,0}}, color={0,0,127}));
   connect(perRad.port, thermalZoneTwoElements.intGainsRad)

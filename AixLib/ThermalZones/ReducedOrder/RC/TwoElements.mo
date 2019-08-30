@@ -5,7 +5,7 @@ model TwoElements
 
   parameter Modelica.SIunits.Area AInt "Area of interior walls"
     annotation(Dialog(group="Interior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInt "Convective coefficient of heat transfer of interior walls (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Convective coefficient of heat transfer of interior walls (indoor)"
     annotation(Dialog(group="Interior walls"));
   parameter Integer nInt(min = 1) "Number of RC-elements of interior walls"
     annotation(Dialog(group="Interior walls"));
@@ -37,7 +37,7 @@ protected
                                                                      AInt > 0
     "Convective heat transfer of interior walls"
     annotation (Placement(transformation(extent={{148,-30},{128,-50}})));
-  Modelica.Blocks.Sources.Constant hConvIntWall(k=AInt*hConvInt) "Coefficient of convective heat transfer for interior walls"
+  Modelica.Blocks.Sources.Constant hConIntWall(k=AInt*hConInt) "Coefficient of convective heat transfer for interior walls"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}}, rotation=-90)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallIntWall(final G=min(ATotExt, AInt)*hRad, dT(start=0)) if ATotExt > 0
      and AInt > 0 "Resistor between exterior walls and interior walls" annotation (Placement(transformation(extent={{138,-116},{158,-96}})));
@@ -91,9 +91,7 @@ equation
     {-116,40}},
     color={191,0,0},
     smooth=Smooth.None));
-  connect(hConvIntWall.y, convIntWall.Gc)
-    annotation (Line(points={{0,5.5},{0,-50},{138,-50}},
-    color={0,0,127}));
+  connect(hConIntWall.y, convIntWall.Gc) annotation (Line(points={{0,5.5},{0,-50},{138,-50}}, color={0,0,127}));
   connect(intWallRC.port_a, intWallIndoorSurface)
     annotation (Line(points={{182,-40},{168,-40},{168,-82},{-120,-82},{-120,-180}},
     color={191,0,0}));

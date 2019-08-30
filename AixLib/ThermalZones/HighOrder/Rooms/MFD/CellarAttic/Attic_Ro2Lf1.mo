@@ -20,10 +20,14 @@ model Attic_Ro2Lf1
   parameter Modelica.SIunits.Temperature T0_FL = 284.15 "FL" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   // Outer walls properties
   parameter Real solar_absorptance_RO = 0.25 "Solar absoptance roof " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Integer ModelConvOW=1 "Heat Convection Model"   annotation(Dialog(group="Outer wall properties",   compact = true, descriptionLabel = true), choices(choice = 1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom hConv",                                                                                                    radioButtons = true));
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+      group="Outer wall properties",
+      compact=true,
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   // Windows and Doors
   parameter Boolean withWindow1 = false "Window 1 " annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox = true));
   parameter Modelica.SIunits.Area windowarea_RO1 = 0 "Window area" annotation(Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow1));
