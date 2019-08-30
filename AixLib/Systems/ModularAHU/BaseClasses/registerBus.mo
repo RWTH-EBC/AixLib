@@ -5,7 +5,7 @@ expandable connector registerBus "Data bus for modular ahu registers"
   Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus;
   SI.Temperature Tair_in "Inlet air temperature";
   SI.Temperature Tair_out "Outlet air temperatur";
-  SI.VolumeFlowRate  VF_air  "Air volume flow";
+  SI.VolumeFlowRate  V_flow_air  "Air volume flow";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

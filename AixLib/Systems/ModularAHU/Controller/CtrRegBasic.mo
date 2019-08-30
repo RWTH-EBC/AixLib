@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularAHU.Controller;
-block CtrBasic "Controller for heating and cooling registers"
+block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
@@ -71,14 +71,14 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onOff_Input)
-    annotation (Line(points={{81,30},{86,30},{86,32},{101.135,32},{101.135,0.13}},
+    annotation (Line(points={{81,30},{101.135,30},{101.135,0.13}},
         color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, registerBus.Tair_out) annotation (Line(points={{-6,-62},{-8,
-          -62},{-8,-80},{100,-80},{100,0.13},{101.135,0.13}}, color={0,0,127}),
+  connect(PID.u_m, registerBus.Tair_out) annotation (Line(points={{-6,-62},{-6,
+          -80},{102,-80},{102,0.13},{101.135,0.13}},          color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -118,4 +118,4 @@ equation
 </html>", info="<html>
 <p>Simple controller for heating and cooling registers. The controlled variable is the air outflow temperature T_air_out. The pump (if existing in hydraulic circuit) operates at constant frequency and is always on.</p>
 </html>"));
-end CtrBasic;
+end CtrRegBasic;

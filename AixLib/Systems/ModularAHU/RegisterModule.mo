@@ -111,7 +111,7 @@ equation
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
           {-20,60}},                       color={0,127,255}));
   connect(PT1_airIn.y, registerBus.Tair_in) annotation (Line(points={{-70,101},
-          {-86,101},{-86,102},{-93.94,102},{-93.94,-0.945}},color={0,0,127}),
+          {-70,110},{-93.94,110},{-93.94,-0.945}},          color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -121,21 +121,22 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(VFSen_out.V_flow, registerBus.VF_air) annotation (Line(points={{-38,49},
-          {-38,30},{-93.94,30},{-93.94,-0.945}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(senT_airIn.port_a, port_a1)
     annotation (Line(points={{-80,60},{-100,60}}, color={0,127,255}));
   connect(senT_airOut.port_b, port_b1)
     annotation (Line(points={{80,60},{100,60}}, color={0,127,255}));
   connect(partialHydraulicModule.port_a1, port_a2) annotation (Line(points={{-22.8,
-          -78},{-58,-78},{-58,-72},{-100,-72},{-100,-60}}, color={0,127,255}));
+          -78},{-100,-78},{-100,-60}},                     color={0,127,255}));
   connect(partialHydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,
           -78},{100,-78},{100,-60}}, color={0,127,255}));
                                                //"Admix" or "Injection" or "Injection2WayValve",
 //          visible=hydraulicModuleIcon <> "Throttle",
+  connect(VFSen_out.V_flow, registerBus.V_flow_air) annotation (Line(points={{
+          -38,49},{-38,34},{-93.94,34},{-93.94,-0.945}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -140},{100,120}}),
                          graphics={
@@ -358,8 +359,8 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-140},{100,
             120}})),
     Documentation(info="<html>
-<p>The RegisterModule is a model for heating and cooling registers in air-handling units. It includes a simple heat exchanger and a replaceable hydraulic system (HydraulicModules) for the heat/cold supply with e.g. water.</p>
-<p>In order to exchange sensor measurements and actuator signals, the registerBus is used. The temperature sensor signal is multiplied with a first order element in order to cover the dynamic beahvior of the sensors.</p>
+<p>The RegisterModule is a model for heating and cooling registers in air-handling units. It includes a simple heat exchanger and a replaceable hydraulic system (HydraulicModules) for the heat/cold supply with e.g. water. The Icon of the hydraulic circuit can be selected as well.</p>
+<p>In order to communicate sensor measurements and actuator signals, the registerBus is used. The air temperature sensor signal is multiplied with a first order element to simulate the dynamic beahvior of the sensors.</p>
 </html>", revisions="<html>
 <ul>
 <li>Januar 09, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>

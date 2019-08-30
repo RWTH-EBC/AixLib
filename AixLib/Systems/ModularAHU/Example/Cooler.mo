@@ -18,8 +18,9 @@ model Cooler "Cooler register example"
       Q_nom=30000,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol1,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol2),
+    hydraulicModuleIcon="ThrottlePump",
     T_amb=293.15,
-    redeclare HydraulicModules.Admix partialHydraulicModule(
+    redeclare HydraulicModules.ThrottlePump partialHydraulicModule(
       dIns=0.01,
       kIns=0.028,
       d=0.032,
@@ -28,21 +29,21 @@ model Cooler "Cooler register example"
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
         PumpInterface(pump(redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))))
-    annotation (Placement(transformation(extent={{-38,-40},{22,38}})));
-  Fluid.Sources.Boundary_pT          boundary(
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
+            per))))
+    annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
+  Fluid.Sources.Boundary_pT boundaryWaterSource(
     nPorts=1,
     redeclare package Medium = MediumWater,
     T=279.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={-42,-70})));
-  Fluid.Sources.Boundary_pT          boundary1(
-    nPorts=1, redeclare package Medium = MediumWater)
-              annotation (Placement(transformation(
+        origin={-60,-60})));
+  Fluid.Sources.Boundary_pT boundaryWaterSink(nPorts=1, redeclare package
+      Medium = MediumWater) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={22,-70})));
+        origin={40,-60})));
   Fluid.Sources.Boundary_pT boundaryAirSource(
     nPorts=1,
     redeclare package Medium = MediumAir,
@@ -50,36 +51,45 @@ model Cooler "Cooler register example"
     T=298.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={-82,38})));
-  Fluid.Sources.Boundary_pT boundaryAirSink(nPorts=1, redeclare package Medium
-      = MediumAir) annotation (Placement(transformation(
+        origin={-80,40})));
+  Fluid.Sources.Boundary_pT boundaryAirSink(nPorts=1, redeclare package Medium =
+        MediumAir) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={80,40})));
-  Controller.CtrBasic ctrBasic(
+  Controller.CtrRegBasic ctrBasic(
     k=0.04,
     Ti=100,
     Td=1,
-    reverseAction=true)
-          annotation (Placement(transformation(extent={{-70,-16},{-50,4}})));
-  Modelica.Blocks.Sources.Constant Tset(k=273.15 + 21)
-    annotation (Placement(transformation(extent={{-100,-18},{-80,2}})));
+    reverseAction=true,
+    useExternalTset=true,
+    TflowSet=289.15,
+    rpm_pump=4000)
+    annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
+  Modelica.Blocks.Sources.Constant Tset(k=273.15 + 19)
+    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 equation
-  connect(boundary1.ports[1], registerModule.port_b2) annotation (Line(points={
-          {22,-60},{24,-60},{24,-16},{22,-16}}, color={0,127,255}));
-  connect(boundary.ports[1], registerModule.port_a2) annotation (Line(points={{
-          -42,-60},{-42,-16},{-38,-16}}, color={0,127,255}));
+  connect(boundaryWaterSink.ports[1], registerModule.port_b2) annotation (Line(
+        points={{40,-50},{40,-19.5385},{26,-19.5385}}, color={0,127,255}));
+  connect(boundaryWaterSource.ports[1], registerModule.port_a2) annotation (
+      Line(points={{-60,-50},{-60,-19.5385},{-40,-19.5385}}, color={0,127,255}));
   connect(registerModule.port_b1, boundaryAirSink.ports[1]) annotation (Line(
-        points={{22,20},{44,20},{44,40},{70,40}}, color={0,127,255}));
+        points={{26,20.1538},{44,20.1538},{44,40},{70,40}},
+                                                  color={0,127,255}));
   connect(registerModule.port_a1, boundaryAirSource.ports[1]) annotation (Line(
-        points={{-38,20},{-46,20},{-46,36},{-72,36},{-72,38}}, color={0,127,255}));
+        points={{-40,20.1538},{-40,20},{-70,20},{-70,40}},     color={0,127,255}));
   connect(ctrBasic.registerBus, registerModule.registerBus) annotation (Line(
-      points={{-51.8,-6},{-46,-6},{-46,1.7},{-37.7,1.7}},
+      points={{-53.8,2.22045e-16},{-46,2.22045e-16},{-46,-0.0230769},{-39.67,
+          -0.0230769}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrBasic.Tset, Tset.y)
-    annotation (Line(points={{-70.2,-8},{-79,-8}}, color={0,0,127}));
+    annotation (Line(points={{-74,0},{-79,0}},     color={0,0,127}));
   annotation (Documentation(info="<html>
-<p>This examples demonstrates the use of the RigsterModule. The controller controls the outflow air temperature.</p>
+<p>This example demonstrates the use of the RegsterModule for a cooling register with throttle circuit. The controller gets an external set point temperature and controls the outflow air temperature.</p>
+</html>", revisions="<html>
+<ul>
+<li>August 30, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+</ul>
 </html>"));
 end Cooler;
