@@ -13,7 +13,7 @@ block OperationalEnvelope
   Modelica.Blocks.Math.UnitConversions.To_degC toDegCT_flow_ev annotation (
       extent=[-88,38; -76,50], Placement(transformation(extent={{-82,6},{-70,
             18}})));
-  BaseClasses.BoundaryMap boundaryMap(final tableLow=tableLow, final tableUpp=
+  BaseClasses.BoundaryMap boundaryMap(                         final tableUpp=
         tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable) if
