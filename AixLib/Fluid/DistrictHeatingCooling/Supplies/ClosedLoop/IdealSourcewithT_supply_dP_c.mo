@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
-model IdealSourcewithT_supply1
+model IdealSourcewithT_supply_dP_c
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
@@ -49,15 +49,22 @@ model IdealSourcewithT_supply1
     annotation (Placement(transformation(extent={{-92,28},{-72,48}})));
   Modelica.Blocks.Interfaces.RealInput dpIn
     annotation (Placement(transformation(extent={{-124,34},{-84,74}})));
-  Movers.SpeedControlled_y fan(
-  redeclare package Medium = Medium,
-      addPowerToMedium=false,
+  Movers.FlowControlled_dp fan(
+    redeclare package Medium = Medium,
     allowFlowReversal=false,
+    m_flow_nominal=11,
+    inputType=AixLib.Fluid.Types.InputType.Continuous,
+    addPowerToMedium=false,
     use_inputFilter=true,
-    per(pressure(V_flow={0.00223,0.00278,0.00556,0.00833,0.01111,0.01389}, dp={
-            4800000,4650000,4500000,4200000,3900000,3450000})),
-    y_start=1)
+    y_start=1,
+    dp_start=50000)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
+  Modelica.Blocks.Math.Max max
+    annotation (Placement(transformation(extent={{-42,46},{-22,66}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=450000)
+    annotation (Placement(transformation(extent={{-82,54},{-62,74}})));
+  Utilities.Sensors.FuelCounter fuelCounter
+    annotation (Placement(transformation(extent={{74,50},{94,70}})));
 equation
   connect(m_flow.port_b, port_b)
     annotation (Line(points={{88,0},{100,0}}, color={0,127,255}));
@@ -79,8 +86,14 @@ equation
     annotation (Line(points={{-48,0},{-28,0}}, color={0,127,255}));
   connect(fan.port_b, preOut.port_a)
     annotation (Line(points={{-8,0},{10,0}}, color={0,127,255}));
-  connect(dpIn, fan.y)
-    annotation (Line(points={{-104,54},{-18,54},{-18,12}}, color={0,0,127}));
+  connect(max.y, fan.dp_in)
+    annotation (Line(points={{-21,56},{-18,56},{-18,12}}, color={0,0,127}));
+  connect(dpIn, max.u2) annotation (Line(points={{-104,54},{-80,54},{-80,50},{
+          -44,50}}, color={0,0,127}));
+  connect(realExpression.y, max.u1) annotation (Line(points={{-61,64},{-52,64},
+          {-52,62},{-44,62}}, color={0,0,127}));
+  connect(fan.P, fuelCounter.fuel_in)
+    annotation (Line(points={{-7,9},{-7,60},{74,60}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}),                                  graphics={
         Rectangle(
@@ -106,4 +119,4 @@ equation
 Implemented </li>
 </ul>
 </html>"));
-end IdealSourcewithT_supply1;
+end IdealSourcewithT_supply_dP_c;
