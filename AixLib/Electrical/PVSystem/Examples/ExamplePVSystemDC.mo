@@ -28,42 +28,9 @@ model ExamplePVSystemDC
    annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
 
 
-
-
-
-
-// Weather input from TRY
-
-  parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments
-    "Smoothness of table interpolation";
-
-  parameter Real startTime[1] = {0}
-    "output = offset for time < startTime (same value for all columns)";
-
-  parameter Integer columns[:] = {5,8,12,13}
-    "Pos 1:T_a - Ambient temperature,
-     Pos 2:winVel - Wind velocity,
-     Pos 3:radHorBea - Beam(Direct) irradiance on horizontal plane,
-     Pos 4:radHorDif - Diffuse irradiance on horizontal plane
-     
-     for TRY:
-     Pos 1: Spalte t - Lufttemperatur in 2 m Hoehe ueber Grund,                        
-     Pos 2: Spalte WG - Windgeschwindigkeit in 10 m Hoehe ueber Grund,                 
-     Pos 3: Spalte B - Direkte Sonnenbestrahlungsstaerke (horiz. Ebene),              
-     Pos 4: Spalte D - Diffuse Sonnenbetrahlungsstaerke (horiz. Ebene)";
-
-  parameter String tableName = "wetter"
-  "Table name of the weaData file";
-
-  Modelica.Blocks.Sources.CombiTimeTable weaData(fileName = Modelica.Utilities.Files.loadResource(
-   "modelica://AixLib/Resources/weatherdata/TRY_Berlin_cold_winter.txt"),
-   smoothness=smoothness,extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, table = [0, 0; 1, 1],
-   columns = columns, tableName = tableName, tableOnFile = tableName <> "NoName")
-   "Weather data input file";
-
-
-
-
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
+    annotation (Placement(transformation(extent={{-96,30},{-76,50}})));
 
 
   Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
@@ -73,14 +40,15 @@ model ExamplePVSystemDC
   annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 
+
 equation
 
-  connect(pVSystemDC.radHorBea, weaData.y[3]);
-  connect(pVSystemDC.radHorDif, weaData.y[4]);
-  connect(pVSystemDC.T_a, weaData.y[1]);
-  connect(pVSystemDC.winVel, weaData.y[2]);
 
   connect(pVSystemDC.DCOutputPower, DCOutputPower) annotation (Line(points={{7,0},{110,0}}, color={0,0,127}));
 
+  connect(weaDat.weaBus, pVSystemDC.weaBus) annotation (Line(
+      points={{-76,40},{-34,40},{-34,0.6},{-19,0.6}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (experiment(StopTime=31536000, Interval=3600));
 end ExamplePVSystemDC;
