@@ -112,28 +112,36 @@ equation
     annotation (Line(points={{-18,66},{-6,66},{-6,-28},{8,-28}}, color={0,0,127}));
   connect(iVCharacteristics.DCOutputPower, DCOutputPower)
     annotation (Line(points={{31,-26},{66,-26},{66,0},{110,0}}, color={0,0,127}));
-  connect(cellTemperature.T_a, weaBus.TDryBul) annotation (Line(points={{-42,
-          75.4},{-78,75.4},{-78,-2},{-100,-2}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
+  connect(weaBus.HDirNor, pVRadiationHorizontalTRY.radHorBea) annotation (Line(
+      points={{-100,-2},{-90,-2},{-90,-34},{-80,-34}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cellTemperature.winVel, weaBus.winSpe) annotation (Line(points={{-42,
-          71.9},{-78,71.9},{-78,-2},{-100,-2}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
+  connect(weaBus.HDifHor, pVRadiationHorizontalTRY.radHorDif) annotation (Line(
+      points={{-100,-2},{-90,-2},{-90,-46},{-80,-46}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(pVRadiationHorizontalTRY.radHorBea, weaBus.HDirNor) annotation (Line(
-        points={{-80,-34},{-90,-34},{-90,-2},{-100,-2}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
+  connect(weaBus.winSpe, cellTemperature.winVel) annotation (Line(
+      points={{-100,-2},{-72,-2},{-72,71.9},{-42,71.9}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(pVRadiationHorizontalTRY.radHorDif, weaBus.HDifHor) annotation (Line(
-        points={{-80,-46},{-90,-46},{-90,-2},{-100,-2}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
+  connect(weaBus.TDryBul, cellTemperature.T_a) annotation (Line(
+      points={{-100,-2},{-72,-2},{-72,75.4},{-42,75.4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(graphics={
