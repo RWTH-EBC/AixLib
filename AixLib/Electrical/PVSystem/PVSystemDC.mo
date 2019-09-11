@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem;
+within AixLib.Electrical.PVSystem;
 model PVSystemDC
   "Model that determines the DC performance of a PV array"
 
@@ -45,25 +45,6 @@ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib
  parameter Real  groRef(final unit="1")
    "Ground reflectance"
    annotation (Dialog(tab="Geographical info"));
-
-// Guidance for value selection of groRef (PVSyst)
-
-    //Default 0.2
-    //Urban environment 0.14 – 0.22
-    //Grass 0.15 – 0.25 / Fresh grass 0.26
-    //Fresh snow 0.82
-    //Wet snow 0.55-0.75
-    //Dry asphalt 0.09-0.15
-    //Wet Asphalt 0.18
-    //Concrete 0.25-0.35
-    //Red tiles 0.33
-    //Aluminum 0.85
-    //Copper 0.74
-    //New galvanized steel 0.35
-    //Very dirty galvanized steel 0.08
-
-
-
 
 
  IVCharacteristics iVCharacteristics(
