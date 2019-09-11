@@ -4,15 +4,12 @@ model ExamplePVSystemDC
 
  extends Modelica.Icons.Example;
 
-
-
- parameter AixLib.DataBase.SolarElectric.QPlusBFRG41285 data
+ parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib.DataBase.SolarElectric.QPlusBFRG41285()
     "PV module record"
-    annotation (Dialog(group="Module type", tab="Array configuration"));
-
+    annotation (choicesAllMatching);
 
  Electrical.PVSystem.PVSystemDC pVSystemDC(
-  data=data,
+    data=data,
   n_mod=567,
   lat = 52.52*Modelica.Constants.pi/180,
   lon = 13.41*Modelica.Constants.pi/180,

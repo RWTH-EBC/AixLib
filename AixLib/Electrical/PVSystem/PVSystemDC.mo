@@ -3,9 +3,9 @@ model PVSystemDC
   "Model that determines the DC performance of a PV array"
 
 
- parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data
+replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib.DataBase.SolarElectric.QPlusBFRG41285()
     "Choose a PV module record"
-    annotation (Dialog(group="Module type", tab="Array configuration"));
+    annotation (choicesAllMatching);
 
  parameter Real n_mod
     "Number of connected PV modules"
@@ -43,7 +43,7 @@ model PVSystemDC
    annotation (Dialog(tab="Geographical info"));
 
  parameter Real  groRef(final unit="1")
-   "Ground refelctance"
+   "Ground reflectance"
    annotation (Dialog(tab="Geographical info"));
 
 // Guidance for value selection of groRef (PVSyst)
@@ -110,8 +110,8 @@ model PVSystemDC
     annotation (Placement(transformation(extent={{-78,-50},{-58,-30}})));
 
   BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-120,-22},{-80,18}}), iconTransformation(extent
-          ={{-160,-4},{-140,16}})));
+        transformation(extent={{-120,-22},{-80,18}}), iconTransformation(extent=
+           {{-160,-4},{-140,16}})));
 equation
 
 
@@ -164,5 +164,21 @@ equation
      Text(
       lineColor={0,0,0},
       extent={{-96,95},{97,-97}},
-           textString="PV")}));
+           textString="PV")}), Documentation(info="<html>
+<h4>Guidance&nbsp;for&nbsp;value&nbsp;selection&nbsp;of&nbsp;groRef&nbsp;(PVSyst):</h4>
+<p>Default:&nbsp;0.2</p>
+<p>Urban&nbsp;environment:&nbsp;0.14&nbsp;-&nbsp;0.22</p>
+<p>Grass:&nbsp;0.15&nbsp;-&nbsp;0.25</p>
+<p>Fresh&nbsp;grass:&nbsp;0.26</p>
+<p>Fresh&nbsp;snow:&nbsp;0.82</p>
+<p>Wet&nbsp;snow:&nbsp;0.55-0.75</p>
+<p>Dry&nbsp;asphalt:&nbsp;0.09-0.15</p>
+<p>Wet&nbsp;Asphalt:&nbsp;0.18</p>
+<p>Concrete:&nbsp;0.25-0.35</p>
+<p>Red&nbsp;tiles:&nbsp;0.33</p>
+<p>Aluminum:&nbsp;0.85</p>
+<p>Copper:&nbsp;0.74</p>
+<p>New&nbsp;galvanized&nbsp;steel:&nbsp;0.35</p>
+<p>Very&nbsp;dirty&nbsp;galvanized&nbsp;steel:&nbsp;0.08</p>
+</html>"));
 end PVSystemDC;
