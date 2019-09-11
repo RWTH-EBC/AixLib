@@ -146,7 +146,12 @@ equation
       lineColor={0,0,0},
       extent={{-96,95},{97,-97}},
            textString="PV")}), Documentation(info="<html>
-<h4>Guidance&nbsp;for&nbsp;value&nbsp;selection&nbsp;of&nbsp;groRef&nbsp;(PVSyst):</h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Model that determines the DC performance of a PV array </p>
+<h4><span style=\"color: #008000\">Concept</span></h4>
+<p><b>IVCharacteristics</b>: Model for determining the I-V characteristics of a PV array</p>
+<p><b>CellTemperature</b>: Model for determining the cell temperature of a PV array</p>
+<p><b>Value selection for groRef</b>: </p>
 <p>Default:&nbsp;0.2</p>
 <p>Urban&nbsp;environment:&nbsp;0.14&nbsp;-&nbsp;0.22</p>
 <p>Grass:&nbsp;0.15&nbsp;-&nbsp;0.25</p>
