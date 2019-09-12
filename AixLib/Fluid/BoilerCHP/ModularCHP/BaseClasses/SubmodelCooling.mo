@@ -79,13 +79,12 @@ model SubmodelCooling
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=CHPEngineModel.dp_Coo, m_flow_nominal=m_flow),
     Heat_Loss_To_Ambient=true,
-    hConv=engineHeatTransfer.hConv_i,
     eps=0,
     isEmbedded=true,
     use_HeatTransferConvective=false,
     p_a_start=system.p_start,
     p_b_start=system.p_start,
-    hConv_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
+    hCon_i=GEngToCoo/(engineHeatTransfer.perimeter*engineHeatTransfer.length),
     diameter=CHPEngineModel.dCoo,
     allowFlowReversal=allowFlowReversalCoolant)
     annotation (Placement(transformation(extent={{8,12},{32,-12}})));

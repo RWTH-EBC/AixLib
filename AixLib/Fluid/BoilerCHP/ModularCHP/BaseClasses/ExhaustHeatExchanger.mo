@@ -221,8 +221,7 @@ model ExhaustHeatExchanger
     withInsulation=false,
     use_HeatTransferConvective=false,
     eps=0,
-    hConv=pipeCoolant.hConv_i,
-    hConv_i=GCoo/(pipeCoolant.perimeter*pipeCoolant.length),
+    hCon_i=GCoo/(pipeCoolant.perimeter*pipeCoolant.length),
     diameter=0.03175,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
