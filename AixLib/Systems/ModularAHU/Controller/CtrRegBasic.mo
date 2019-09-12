@@ -3,7 +3,8 @@ block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer";
+  parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer" annotation (Dialog(enable=
+          useExternalTset == false));
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
@@ -36,7 +37,8 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=reverseAction)
+    final reverseAction=reverseAction,
+    final reset=AixLib.Types.Reset.Disabled)
             annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 

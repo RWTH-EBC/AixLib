@@ -52,8 +52,8 @@ model Heater "Heating register"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-80,40})));
-  Fluid.Sources.Boundary_pT boundaryAirSink(nPorts=1, redeclare package Medium
-      = MediumAir) annotation (Placement(transformation(
+  Fluid.Sources.Boundary_pT boundaryAirSink(nPorts=1, redeclare package Medium =
+        MediumAir) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={80,40})));
@@ -87,6 +87,9 @@ equation
 <li>August 30, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>"),
-    experiment(StopTime=3600),
+    experiment(
+      StopTime=3600,
+      __Dymola_fixedstepsize=1,
+      __Dymola_Algorithm="Dassl"),
     __Dymola_Commands);
 end Heater;

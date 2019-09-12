@@ -59,8 +59,8 @@ model Cooler "Cooler register example"
         origin={80,40})));
   Controller.CtrRegBasic ctrBasic(
     k=0.04,
-    Ti=100,
-    Td=1,
+    Ti=120,
+    Td=0.1,
     reverseAction=true,
     useExternalTset=true,
     TflowSet=289.15,

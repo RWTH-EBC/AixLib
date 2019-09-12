@@ -17,14 +17,14 @@ model RegisterModule "AHU register module for heaters and coolers"
   parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));
-    parameter Modelica.SIunits.Temperature T_start=303.15
+    parameter Modelica.SIunits.Temperature T_start=293.15
     "Initialization temperature" annotation(Dialog(tab="Initialization"));
   parameter Modelica.SIunits.Time tau=15
-    "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(group="Heat exchanger"));
+    "Time constant for PT1 behavior of temperature sensors in air canal" annotation(Dialog(group="Heat exchanger"));
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
   replaceable HydraulicModules.BaseClasses.PartialHydraulicModule
-    partialHydraulicModule(final T_amb=T_amb, redeclare package Medium =
-        Medium2,
+    partialHydraulicModule(final T_amb=T_amb,
+    redeclare final package Medium = Medium2,
     final m_flow_nominal=m2_flow_nominal,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal2) "Hydraulic module selection"
@@ -35,14 +35,14 @@ model RegisterModule "AHU register module for heaters and coolers"
         m1_flow_nominal, final m2_flow_nominal=m2_flow_nominal,
     final allowFlowReversal1=allowFlowReversal1,
     final allowFlowReversal2=allowFlowReversal2,
-    redeclare package Medium1 = Medium1,
-    redeclare package Medium2 = Medium2,
+    redeclare final package Medium1 = Medium1,
+    redeclare final package Medium2 = Medium2,
     T1_start=T_start,
     T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
   BaseClasses.registerBus registerBus
-    annotation (Placement(transformation(extent={{-106,-12},{-82,10}}),
+    annotation (Placement(transformation(extent={{-102,-12},{-78,10}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
 
 protected
@@ -51,7 +51,7 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m1_flow_nominal,
-    redeclare package Medium = Medium1,
+    redeclare final package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1)
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
@@ -62,6 +62,7 @@ protected
         rotation=270,
         origin={-70,90})));
   Fluid.Sensors.TemperatureTwoPort senT_airOut(
+    final tau=1,
     T_start=T_start,
     transferHeat=true,
     final TAmb=T_amb,
@@ -100,7 +101,7 @@ equation
           {60,60}},                   color={0,127,255}));
   connect(partialHydraulicModule.hydraulicBus, registerBus.hydraulicBus)
     annotation (Line(
-      points={{-38,-40},{-93.94,-40},{-93.94,-0.945}},
+      points={{-38,-40},{-89.94,-40},{-89.94,-0.945}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -111,13 +112,13 @@ equation
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
           {-20,60}},                       color={0,127,255}));
   connect(PT1_airIn.y, registerBus.Tair_in) annotation (Line(points={{-70,101},
-          {-70,110},{-93.94,110},{-93.94,-0.945}},          color={0,0,127}),
+          {-70,110},{-89.94,110},{-89.94,-0.945}},          color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(PT1_airOut.y, registerBus.Tair_out) annotation (Line(points={{70,101},
-          {70,110},{-93.94,110},{-93.94,-0.945}}, color={0,0,127}), Text(
+          {70,110},{-89.94,110},{-89.94,-0.945}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -131,8 +132,8 @@ equation
           -78},{100,-78},{100,-60}}, color={0,127,255}));
                                                //"Admix" or "Injection" or "Injection2WayValve",
 //          visible=hydraulicModuleIcon <> "Throttle",
-  connect(VFSen_out.V_flow, registerBus.V_flow_air) annotation (Line(points={{
-          -38,49},{-38,34},{-93.94,34},{-93.94,-0.945}}, color={0,0,127}), Text(
+  connect(VFSen_out.V_flow, registerBus.V_flow_air) annotation (Line(points={{-38,49},
+          {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
