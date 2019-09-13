@@ -295,8 +295,8 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
                            sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final model
-            PerDataHea =
+  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final
+      model PerDataHea =
       PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
     final use_revHP=use_revHP,
@@ -306,13 +306,15 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         rotation=90,
         origin={0,-1})));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
-      displayUnit="degC")
+      displayUnit="degC") if
+    use_evaCap
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
-      displayUnit="degC")
+      displayUnit="degC") if
+    use_conCap
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
