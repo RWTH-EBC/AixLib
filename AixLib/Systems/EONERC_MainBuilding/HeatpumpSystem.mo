@@ -44,7 +44,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Fluid.Storage.BufferStorage coldStorage(
     n=10,
     redeclare package Medium = Medium,
-    data=AixLib.DataBase.Storage.Generic_New_2000l(),
+    data=DataBase.Storage.Generic_5000l(),
     useHeatingCoil1=false,
     useHeatingCoil2=false,
     upToDownHC1=false,
@@ -59,7 +59,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Fluid.Storage.BufferStorage heatStorage(
     n=10,
     redeclare package Medium = Medium,
-    data=AixLib.DataBase.Storage.Generic_New_2000l(),
+    data=DataBase.Storage.Generic_4000l(),
     useHeatingCoil1=false,
     useHeatingCoil2=false,
     upToDownHC1=false,
@@ -155,14 +155,18 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={100,-80})));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBus1
-    annotation (Placement(transformation(extent={{-150,28},{-130,48}})));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBus2
-    annotation (Placement(transformation(extent={{-68,-58},{-48,-38}})));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBus3
-    annotation (Placement(transformation(extent={{130,-54},{150,-34}})));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBus4
-    annotation (Placement(transformation(extent={{150,24},{170,44}})));
+  HydraulicModules.BaseClasses.HydraulicBus bus_throttle_HS annotation (
+      Placement(transformation(extent={{-150,28},{-130,48}}),
+        iconTransformation(extent={{-150,90},{-130,110}})));
+  HydraulicModules.BaseClasses.HydraulicBus bus_throttle_recool annotation (
+      Placement(transformation(extent={{-68,-58},{-48,-38}}),
+        iconTransformation(extent={{-48,90},{-28,110}})));
+  HydraulicModules.BaseClasses.HydraulicBus bus_throttle_freecool annotation (
+      Placement(transformation(extent={{130,-54},{150,-34}}),
+        iconTransformation(extent={{110,90},{130,110}})));
+  HydraulicModules.BaseClasses.HydraulicBus bus_throttle_CS annotation (
+      Placement(transformation(extent={{150,24},{170,44}}), iconTransformation(
+          extent={{170,90},{190,110}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{-84,-52},{-74,-42}})));
   Modelica.Blocks.Sources.Constant const2(k=0)
@@ -233,6 +237,15 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     annotation (Placement(transformation(extent={{-20,-40},{-10,-30}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{0,-40},{10,-30}})));
+  HydraulicModules.BaseClasses.HydraulicBus bus_pump_hot annotation (Placement(
+        transformation(extent={{-68,-40},{-48,-20}}), iconTransformation(extent
+          ={{-92,90},{-72,110}})));
+  HydraulicModules.BaseClasses.HydraulicBus bus_pump_cold annotation (Placement(
+        transformation(extent={{50,22},{70,42}}), iconTransformation(extent={{
+            50,88},{70,108}})));
+  Controls.Interfaces.HeatPumpControlBus bus_HP annotation (Placement(
+        transformation(extent={{12,-44},{26,-26}}), iconTransformation(extent={
+            {-6,90},{8,108}})));
 equation
   connect(pump_cold.port_a1, coldStorage.fluidportTop2) annotation (Line(
         points={{80,12},{88,12},{88,20},{108,20},{108,14.15},{108.25,14.15}},
@@ -285,7 +298,7 @@ equation
           -82},{-30,-92},{-40,-92}}, color={0,127,255}));
   connect(throttle_recool.port_a1, vol.ports[2]) annotation (Line(points={{-40,
           -68},{-30,-68},{-30,-78}}, color={0,127,255}));
-  connect(throttle_HS.hydraulicBus, hydraulicBus1) annotation (Line(
+  connect(throttle_HS.hydraulicBus, bus_throttle_HS) annotation (Line(
       points={{-140,20},{-142,20},{-142,38},{-140,38}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -293,7 +306,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(throttle_recool.hydraulicBus, hydraulicBus2) annotation (Line(
+  connect(throttle_recool.hydraulicBus, bus_throttle_recool) annotation (Line(
       points={{-60,-60},{-60,-48},{-58,-48}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -301,7 +314,8 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(throttle_freecool.hydraulicBus, hydraulicBus3) annotation (Line(
+  connect(throttle_freecool.hydraulicBus, bus_throttle_freecool) annotation (
+      Line(
       points={{140,-60},{140,-44}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -309,7 +323,7 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(throttle_CS.hydraulicBus, hydraulicBus4) annotation (Line(
+  connect(throttle_CS.hydraulicBus, bus_throttle_CS) annotation (Line(
       points={{160,20},{160,34}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -317,27 +331,28 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(const.y, hydraulicBus1.valSet) annotation (Line(points={{-149.6,38},{
-          -140,38},{-140,40},{-139.95,40},{-139.95,38.05}}, color={0,0,127}),
+  connect(const.y, bus_throttle_HS.valSet) annotation (Line(points={{-149.6,38},
+          {-140,38},{-140,40},{-139.95,40},{-139.95,38.05}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const1.y, hydraulicBus2.valSet) annotation (Line(points={{-73.5,-47},
-          {-57.95,-47},{-57.95,-47.95}}, color={0,0,127}), Text(
+  connect(const1.y, bus_throttle_recool.valSet) annotation (Line(points={{-73.5,
+          -47},{-57.95,-47},{-57.95,-47.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const2.y, hydraulicBus3.valSet) annotation (Line(points={{120.4,-44},
-          {126,-44},{126,-43.95},{140.05,-43.95}}, color={0,0,127}), Text(
+  connect(const2.y, bus_throttle_freecool.valSet) annotation (Line(points={{
+          120.4,-44},{126,-44},{126,-43.95},{140.05,-43.95}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const3.y, hydraulicBus4.valSet) annotation (Line(points={{140.4,36},{
-          160.05,36},{160.05,34.05}}, color={0,0,127}), Text(
+  connect(const3.y, bus_throttle_CS.valSet) annotation (Line(points={{140.4,36},
+          {160.05,36},{160.05,34.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -370,6 +385,30 @@ equation
           -20.88},{-3.66667,-20.88}}, color={0,0,127}));
   connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{10.5,
           -35},{10.5,-29.5},{3.66667,-29.5},{3.66667,-20.88}}, color={255,0,255}));
+  connect(pump_hot.hydraulicBus, bus_pump_hot) annotation (Line(
+      points={{-60,-20},{-60,-30},{-58,-30}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(pump_cold.hydraulicBus, bus_pump_cold) annotation (Line(
+      points={{60,20},{60,32}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatPump.sigBusHP, bus_HP) annotation (Line(
+      points={{7.15,-17.82},{7.15,-24.91},{19,-24.91},{19,-35}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},
             {220,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-220,-100},{220,100}})));
