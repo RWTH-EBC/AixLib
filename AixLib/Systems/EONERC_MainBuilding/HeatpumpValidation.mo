@@ -61,7 +61,7 @@ model HeatpumpValidation
     redeclare model PerDataHea =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
             AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,
-            12.5,15; 26.5,291000,278000; 44.2,250000,254000], tableP_ele=[0,
+            12.5,15; 26.5,300000,288000; 44.2,250000,254000], tableP_ele=[0,
             12.5,15; 26.5,51000,51000; 44.2,51000,51000])),
     redeclare model PerDataChi =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=

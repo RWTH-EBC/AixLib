@@ -39,13 +39,6 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         origin={60,0})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{-158,34},{-150,42}})));
-  Fluid.HeatPumps.HeatPumpSimple heatPumpSimple(
-    redeclare package Medium = Medium,
-    tablePower=[0.0,273.15,283.15; 308.15,11000*5,11500*5; 328.15,16000*5,17500
-        *5],
-    tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,48000*5,63000*5; 328.15,
-        44000*5,57500*5])
-    annotation (Placement(transformation(extent={{20,-20},{-20,20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
         298.15) annotation (Placement(transformation(extent={{84,-4},{92,4}})));
   Fluid.Storage.BufferStorage coldStorage(
@@ -83,13 +76,6 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=
         298.15)
     annotation (Placement(transformation(extent={{-212,-2},{-204,6}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresis(uLow=273.15 + 31, uHigh=273.15
-         + 35)
-    annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
-  Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=270,
-        origin={8.88178e-16,34})));
   HydraulicModules.Throttle throttle_recool(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -195,15 +181,59 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Modelica.Fluid.Interfaces.FluidPort_a port_a1
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{210,10},{230,30}})));
+  Fluid.HeatPumps.HeatPump        heatPump(
+    refIneFre_constant=1,
+    scalingFactor=1,
+    VEva=0.1,
+    CEva=100,
+    GEvaOut=5,
+    CCon=100,
+    GConOut=5,
+    dpEva_nominal=42000,
+    dpCon_nominal=44000,
+    mFlow_conNominal=10,
+    mFlow_evaNominal=10,
+    VCon=0.176,
+    use_conCap=false,
+    use_evaCap=false,
+    redeclare package Medium_con = Medium,
+    redeclare package Medium_eva = Medium,
+    use_revHP=true,
+    redeclare model PerDataHea =
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
+            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,
+            12.5,15; 26.5,300000,288000; 44.2,250000,254000], tableP_ele=[0,
+            12.5,15; 26.5,51000,51000; 44.2,51000,51000])),
+    redeclare model PerDataChi =
+        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=
+            Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,
+            20,25,27,30,35; 7,203000,203000,203000,223000,203000; 18,203000,
+            203000,203000,203000,203000], tableP_ele=[0,20,25,27,30,35; 7,51000,
+            51000,51000,51000,51000; 18,51000,51000,51000,51000,51000])),
+    use_refIne=false,
+    TAmbCon_nominal=288.15,
+    TAmbEva_nominal=273.15,
+    TCon_start=303.15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+                       annotation (Placement(transformation(
+        extent={{-18,-22},{18,22}},
+        rotation=90,
+        origin={0,0})));
+  Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}},
+        rotation=-90,
+        origin={14,50})));
+  Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
+        transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=180,
+        origin={23,-1})));
+  Modelica.Blocks.Sources.Constant const4(k=0.6)
+    annotation (Placement(transformation(extent={{-20,-40},{-10,-30}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant
+    annotation (Placement(transformation(extent={{0,-40},{10,-30}})));
 equation
-  connect(pump_hot.port_b1, heatPumpSimple.port_a_sink) annotation (Line(
-        points={{-40,-12},{-28,-12},{-28,-14},{-18,-14}}, color={0,127,255}));
-  connect(heatPumpSimple.port_b_sink, pump_hot.port_a2) annotation (Line(
-        points={{-18,14},{-30,14},{-30,12},{-40,12}}, color={0,127,255}));
-  connect(heatPumpSimple.port_b_source, pump_cold.port_a2) annotation (Line(
-        points={{18,-14},{28.15,-14},{28.15,-12},{40,-12}}, color={0,127,255}));
-  connect(heatPumpSimple.port_a_source, pump_cold.port_b1) annotation (Line(
-        points={{18,14},{30,14},{30,12},{40,12}}, color={0,127,255}));
   connect(pump_cold.port_a1, coldStorage.fluidportTop2) annotation (Line(
         points={{80,12},{88,12},{88,20},{108,20},{108,14.15},{108.25,14.15}},
         color={0,127,255}));
@@ -215,12 +245,6 @@ equation
   connect(heatStorage.heatportOutside, fixedTemperature1.port) annotation (
       Line(points={{-199.7,-0.1},{-200,-0.1},{-200,2},{-204,2}}, color={191,0,
           0}));
-  connect(hysteresis.y, not1.u) annotation (Line(points={{-19,50},{0,50},{0,
-          41.2},{2.22045e-15,41.2}}, color={255,0,255}));
-  connect(not1.y, heatPumpSimple.OnOff) annotation (Line(points={{-2.22045e-16,
-          27.4},{0,27.4},{0,16}}, color={255,0,255}));
-  connect(heatStorage.TTop, hysteresis.u) annotation (Line(points={{-176,12.2},
-          {-176,50},{-42,50}}, color={0,0,127}));
   connect(pump_hot.hydraulicBus, ctrPump.hydraulicBus) annotation (Line(
       points={{-60,-20},{-60,-24},{-40.06,-24}},
       color={255,204,51},
@@ -327,6 +351,25 @@ equation
           220,-12},{220,-20}}, color={0,127,255}));
   connect(throttle_CS.port_a1, port_a1) annotation (Line(points={{180,12},{
           220,12},{220,20}}, color={0,127,255}));
+  connect(pump_hot.port_b1, heatPump.port_a1) annotation (Line(points={{-40,-12},
+          {-26,-12},{-26,-18},{-11,-18}}, color={0,127,255}));
+  connect(pump_hot.port_a2, heatPump.port_b1) annotation (Line(points={{-40,12},
+          {-25,12},{-25,18},{-11,18}}, color={0,127,255}));
+  connect(heatPump.port_b2, pump_cold.port_a2) annotation (Line(points={{11,-18},
+          {18,-18},{18,-22},{40,-22},{40,-12}}, color={0,127,255}));
+  connect(heatPump.port_a2, pump_cold.port_b1) annotation (Line(points={{11,18},
+          {26,18},{26,12},{40,12}}, color={0,127,255}));
+  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{14,54.4},
+          {10,54.4},{10,19.8},{-18.3333,19.8}}, color={0,0,127}));
+  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{14,54.4},
+          {14,19.8},{18.3333,19.8}},   color={0,0,127}));
+  connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{28.5,-1},{32,
+          -1},{32,-2},{34,-2},{34,-13.68},{24.9333,-13.68}},
+                                                 color={0,0,127}));
+  connect(const4.y, heatPump.nSet) annotation (Line(points={{-9.5,-35},{-9.5,
+          -20.88},{-3.66667,-20.88}}, color={0,0,127}));
+  connect(booleanConstant.y, heatPump.modeSet) annotation (Line(points={{10.5,
+          -35},{10.5,-29.5},{3.66667,-29.5},{3.66667,-20.88}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},
             {220,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-220,-100},{220,100}})));
