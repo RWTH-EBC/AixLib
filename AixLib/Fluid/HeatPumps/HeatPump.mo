@@ -41,7 +41,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
 
-  parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet and nSet input" annotation(choices(checkBox=true), Dialog(
+  parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input" annotation(choices(checkBox=true), Dialog(
         group="Input Connectors"));
 
 //Condenser
@@ -273,7 +273,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={16,-52})));
-  Modelica.Blocks.Interfaces.RealInput iceFac_in
+  Modelica.Blocks.Interfaces.RealInput iceFac_in if not useBusConnectorOnly
     "Input signal for icing factor" annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=90,
