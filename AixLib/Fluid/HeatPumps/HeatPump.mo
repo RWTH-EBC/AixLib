@@ -41,6 +41,9 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
 
+  parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet and nSet input" annotation(choices(checkBox=true), Dialog(
+        group="Input Connectors"));
+
 //Condenser
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate"
@@ -288,7 +291,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         rotation=180,
         origin={68,110})));
 
-  Modelica.Blocks.Interfaces.RealInput nSet
+  Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
   AixLib.Controls.Interfaces.HeatPumpControlBus
@@ -320,7 +323,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         rotation=180,
         origin={110,100})));
 
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
   Sensors.TemperatureTwoPort senT_a2(
