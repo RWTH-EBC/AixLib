@@ -3,10 +3,10 @@ CylindricHeatConduction
 CylindricHeatTransfer
 CylindricLoad
 HeatConv
-HeatConvPipeInside
-HeatConvPipeInsideDynamic
 HeatConvInside
 HeatConvOutside
+HeatConvPipeInside
+HeatConvPipeInsideDynamic
 HeatToStar
 HeatToStar_Avar
 SolarRadToHeat
