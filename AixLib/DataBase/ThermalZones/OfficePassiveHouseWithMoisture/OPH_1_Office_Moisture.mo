@@ -59,6 +59,7 @@ record OPH_1_Office_Moisture "Office zone of office building considering moistur
     internalGainsMode=3,
     fixedHeatFlowRatePersons=70,
     ratioConvectiveHeatPeople=0.5,
+    internalGainsMoisture=0.5,
     internalGainsMachinesSpecific=7.0,
     ratioConvectiveHeatMachines=0.6,
     lightingPowerSpecific=12.5,
