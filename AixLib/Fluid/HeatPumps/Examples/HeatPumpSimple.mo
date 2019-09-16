@@ -16,11 +16,11 @@ model HeatPumpSimple
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
 
-  Sources.FixedBoundary                sourceSideFixedBoundary(redeclare package
+  Sources.Boundary_pT                sourceSideFixedBoundary(redeclare package
               Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
        1) "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
-  Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
+  Sources.Boundary_pT                sinkSideFixedBoundary(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
     "Fixed boundary at the outlet of the sink side"
     annotation (Placement(transformation(extent={{96,4},{76,24}})));
@@ -73,7 +73,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(massFlowPulse.y, sinkSideMassFlowSource.m_flow_in) annotation (Line(
-      points={{-59,-50},{20,-50},{20,-40}},
+      points={{-59,-50},{18,-50},{18,-40}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideFixedBoundary.ports[1], temperature.port_b) annotation (Line(

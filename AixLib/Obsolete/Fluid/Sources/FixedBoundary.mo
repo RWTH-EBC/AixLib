@@ -1,7 +1,7 @@
 within AixLib.Obsolete.Fluid.Sources;
 model FixedBoundary "Boundary source component"
-  extends IBPSA.Obsolete.BaseClasses.ObsoleteModel;
-  extends IBPSA.Fluid.Sources.BaseClasses.PartialSource(final verifyInputs=true);
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+  extends AixLib.Fluid.Sources.BaseClasses.PartialSource(final verifyInputs=true);
   parameter Boolean use_p=true "select p or d"
     annotation (Evaluate = true,
                 Dialog(group = "Boundary pressure or Boundary density"));
@@ -89,7 +89,7 @@ equation
   end for;
 
 annotation (defaultComponentName="bou",
-  obsolete = "Obsolete model - use IBPSA.Fluid.Sources.Boundary_pT or IBPSA.Fluid.Sources.Boundary_ph instead",
+  obsolete = "Obsolete model - use AixLib.Fluid.Sources.Boundary_pT or AixLib.Fluid.Sources.Boundary_ph instead",
   Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -122,21 +122,21 @@ revisions="<html>
 <ul>
 <li>
 May 13, 2019 by Jianjun Hu:<br/>
-Moved from IBPSA.Fluid.Sources.FixedBoundary to here. This is for  
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+Moved from AixLib.Fluid.Sources.FixedBoundary to here. This is for  
+<a href=\"https://github.com/AixLib/modelica-AixLib/issues/1072\"> #1072</a>.
 </li>
 <li>
 January 14, 2019 by Jianjun Hu:<br/>
-Changed to extend <a href=\"modelica://IBPSA.Fluid.Sources.BaseClasses.PartialSource\">
-IBPSA.Fluid.Sources.BaseClasses.PartialSource</a>. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
+Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
+AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for 
+<a href=\"https://github.com/AixLib/modelica-AixLib/issues/1050\"> #1050</a>.
 </li>
 <li>
 April 18, 2017, by Filip Jorissen:<br/>
 Changed <code>checkBoundary</code> implementation
 such that it is run as an initial equation
 since it depends on parameters only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/728\">#728</a>.
+See <a href=\"https://github.com/AixLib/modelica-AixLib/issues/728\">#728</a>.
 </li>
 <li>
 January 26, 2016, by Michael Wetter:<br/>

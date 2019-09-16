@@ -33,7 +33,7 @@ model HeatPumpDetailed
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
-  Sources.FixedBoundary                sourceSideFixedBoundary(redeclare package
+  Sources.Boundary_pT                sourceSideFixedBoundary(redeclare package
               Medium = Medium_sou, nPorts=
        1) "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
@@ -109,7 +109,7 @@ model HeatPumpDetailed
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
         origin={32,62},
         rotation=180)));
-  Sources.FixedBoundary              sinkSideFixedBoundary(redeclare package
+  Sources.Boundary_pT              sinkSideFixedBoundary(redeclare package
       Medium = Medium_sin, nPorts=1)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(

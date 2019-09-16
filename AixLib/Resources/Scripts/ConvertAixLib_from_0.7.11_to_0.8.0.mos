@@ -1,12 +1,12 @@
 // Conversion script for AixLib library
-//  from: Version 3.0
-//  to:   Version 4.0
+//  from: Version 0.7.11
+//  to:   Version 0.8.0
 clear
 
 convertClear();
 
 convertClass("AixLib.Fluid.Sources.FixedBoundary",
-             "AixLib.Obsolete.Fluid.Sources.FixedBoundary");
+             "AixLib.Fluid.Sources.Boundary_pT");
 
 //refactoring of alpha to hCon or hRad
 convertElement(
