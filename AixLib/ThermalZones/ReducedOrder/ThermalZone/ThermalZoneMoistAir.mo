@@ -28,9 +28,13 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0
     "absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,64},{120,84}})));
-  Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains if ATot > 0
+  Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
+     final T0=zoneParam.T_start,
+     final RoomArea=zoneParam.AZone,
+     final specificMoistureProduction=zoneParam.internalGainsMoisture) if
+          ATot > 0
     "internal moisture gains by plants, etc."
-    annotation (Placement(transformation(extent={{18,-72},{38,-52}})));
+    annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{18,-72},{38,-52}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if zoneParam.internalGainsMode <> 3
     annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
 equation
