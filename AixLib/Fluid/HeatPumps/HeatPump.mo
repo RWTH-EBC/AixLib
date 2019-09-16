@@ -41,6 +41,9 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
 
+  parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input" annotation(choices(checkBox=true), Dialog(
+        group="Input Connectors"));
+
 //Condenser
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
     "Nominal mass flow rate"
@@ -270,7 +273,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={16,-52})));
-  Modelica.Blocks.Interfaces.RealInput iceFac_in
+  Modelica.Blocks.Interfaces.RealInput iceFac_in if not useBusConnectorOnly
     "Input signal for icing factor" annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=90,
@@ -288,15 +291,15 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         rotation=180,
         origin={68,110})));
 
-  Modelica.Blocks.Interfaces.RealInput nSet
+  Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
   AixLib.Controls.Interfaces.HeatPumpControlBus
                            sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final model
-            PerDataHea =
+  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final
+      model PerDataHea =
       PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
     final use_revHP=use_revHP,
@@ -306,19 +309,21 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
         rotation=90,
         origin={0,-1})));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K", final
-      displayUnit="degC")
+      displayUnit="degC") if
+    use_evaCap
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K", final
-      displayUnit="degC")
+      displayUnit="degC") if
+    use_conCap
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
 
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
   Sensors.TemperatureTwoPort senT_a2(
