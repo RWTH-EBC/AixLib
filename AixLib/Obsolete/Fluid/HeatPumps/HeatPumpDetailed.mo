@@ -451,7 +451,7 @@ equation
   connect(hydRes_eva.port_b, T_evaOut.port_a) annotation (Line(points={{-130,-30},
           {-130,-33},{-130,-36}}, color={0,127,255}));
   annotation (
-    Diagram(obsolete = "This model is obsolete and will be removed in later versions", coordinateSystem(preserveAspectRatio=false, extent={{-150,-100},{150,
+    Diagram(obsolete = "Obsolete model - use AixLib.Fluid.HeatPumps.HeatPump instead", coordinateSystem(preserveAspectRatio=false, extent={{-150,-100},{150,
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,100}}),
         graphics={
