@@ -31,7 +31,7 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
      final T0=zoneParam.T_start,
      final RoomArea=zoneParam.AZone,
-     final specificMoistureProduction=zoneParam.internalGainsMoisture) if
+     final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
           ATot > 0
     "internal moisture gains by plants, etc."
     annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{18,-72},{38,-52}})));
