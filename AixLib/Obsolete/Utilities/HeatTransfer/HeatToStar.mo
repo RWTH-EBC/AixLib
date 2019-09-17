@@ -1,5 +1,6 @@
 within AixLib.Obsolete.Utilities.HeatTransfer;
 model HeatToStar "Adaptor for approximative longwave radiation exchange"
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}})));
   AixLib.Utilities.Interfaces.RadPort Star annotation (Placement(transformation(extent={{81,-10},{101,10}})));
   parameter Modelica.SIunits.Area A(min=0) "Area of radiation exchange";
@@ -12,7 +13,7 @@ equation
   Therm.Q_flow = Modelica.Constants.sigma * eps * A * (
     max(Therm.T,1) * max(Therm.T,1) * max(Therm.T,1) * max(Therm.T,1) -
     max(Star.T,1) * max(Star.T,1) * max(Star.T,1) * max(Star.T,1));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
+  annotation(obsolete = "This model is obsolete and will be removed in later versions",Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},

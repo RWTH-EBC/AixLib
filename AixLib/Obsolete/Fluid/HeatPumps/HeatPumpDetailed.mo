@@ -1,6 +1,7 @@
 within AixLib.Obsolete.Fluid.HeatPumps;
 model HeatPumpDetailed
   "Heat pump model with good level of detail. Mainly fed with manufacturing data."
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   import SI = Modelica.SIunits;
   parameter Boolean HPctrlType=true "Capacity control type" annotation (Dialog(
       group="Heat Pump cycle",
@@ -311,8 +312,8 @@ public
     m_flow_nominal=mFlow_evaNominal,
     m_flow(start=mFlow_evaNominal),
     dp_nominal=dp_evaNominal)
-    "The pressure drop caused by flow resistance in the evaporator" annotation
-    (Placement(transformation(
+    "The pressure drop caused by flow resistance in the evaporator" annotation (
+     Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=90,
         origin={-130,-22})));
@@ -450,7 +451,7 @@ equation
   connect(hydRes_eva.port_b, T_evaOut.port_a) annotation (Line(points={{-130,-30},
           {-130,-33},{-130,-36}}, color={0,127,255}));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-150,-100},{150,
+    Diagram(obsolete = "This model is obsolete and will be removed in later versions", coordinateSystem(preserveAspectRatio=false, extent={{-150,-100},{150,
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,100}}),
         graphics={
