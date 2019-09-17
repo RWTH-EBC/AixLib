@@ -200,8 +200,9 @@ public
     m_flow_nominal=0.6,
     m_flow_start=0.6)
     annotation (Placement(transformation(extent={{-164,-10},{-144,10}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=max(0.2, max(cooling.y,
-        -heatload.y)/3295/10))
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=if cooling.y == 0
+         then (-1/9*(limiter.y - 273.15) + 1.25) else (1/11*(limiter1.y -
+        273.15) - 0.76))
     annotation (Placement(transformation(extent={{-210,6},{-190,26}})));
   Modelica.Blocks.Sources.TimeTable T_set_freeCooling(table=[0,273.15 + 35; 7.0e+06,
         273.15 + 35; 7.0e+06,273.15 + 35; 1.2e+07,273.15 + 35; 1.2e+07,273.15 +
@@ -299,7 +300,7 @@ public
         fuelCounter.counter)
     annotation (Placement(transformation(extent={{164,70},{184,90}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax=273.15 + 9.5, uMin=273.15 + 5)
-    annotation (Placement(transformation(extent={{-14,50},{-34,70}})));
+    annotation (Placement(transformation(extent={{-12,34},{-32,54}})));
   Modelica.Blocks.Logical.Switch switch3
     annotation (Placement(transformation(extent={{-178,30},{-158,50}})));
   Modelica.Blocks.Sources.RealExpression realExpression7(y=(-1/9*(limiter.y - 273.15)
@@ -311,6 +312,12 @@ public
   Modelica.Blocks.Sources.BooleanTable booleanTable(startValue=false, table={0,
         1.2e+07,2.205e+07})
     annotation (Placement(transformation(extent={{-240,30},{-220,50}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=273.15 + 15, uMin=273.15 + 10.5)
+    annotation (Placement(transformation(extent={{-12,72},{-32,92}})));
+  Modelica.Blocks.Interfaces.RealOutput dP_Out
+    annotation (Placement(transformation(extent={{210,90},{230,110}})));
+  Modelica.Blocks.Sources.RealExpression realExpression9(y=port_a.p - port_b.p)
+    annotation (Placement(transformation(extent={{164,90},{184,110}})));
 equation
 
   //Power Consumptin Calculation
@@ -422,11 +429,15 @@ equation
   connect(booleanTable.y, switch3.u2)
     annotation (Line(points={{-219,40},{-180,40}}, color={255,0,255}));
   connect(senTem.T, limiter.u)
-    annotation (Line(points={{54,1},{54,60},{-12,60}}, color={0,0,127}));
+    annotation (Line(points={{54,1},{54,44},{-10,44}}, color={0,0,127}));
   connect(realExpression1.y, switch3.u3)
     annotation (Line(points={{-189,16},{-180,16},{-180,32}}, color={0,0,127}));
-  connect(realExpression8.y, switch3.u1) annotation (Line(points={{-191,60},{
-          -191,54},{-180,54},{-180,48}}, color={0,0,127}));
+  connect(senTem.T, limiter1.u)
+    annotation (Line(points={{54,1},{54,82},{-10,82}}, color={0,0,127}));
+  connect(realExpression9.y, dP_Out)
+    annotation (Line(points={{185,100},{220,100}}, color={0,0,127}));
+  connect(realExpression7.y, switch3.u1) annotation (Line(points={{-191,78},{-186,
+          78},{-186,48},{-180,48}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{6,-26},{-14,-46}})),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-280,-240},
             {220,120}}), graphics={

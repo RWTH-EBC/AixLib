@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
-model IdealSourcewithT_supply_dP_c
+model IdealSourcewithT_supply_combi
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
@@ -49,8 +49,15 @@ model IdealSourcewithT_supply_dP_c
     annotation (Placement(transformation(extent={{-92,28},{-72,48}})));
   Modelica.Blocks.Interfaces.RealInput dpIn
     annotation (Placement(transformation(extent={{-124,34},{-84,74}})));
+  Utilities.Sensors.FuelCounter fuelCounter
+    annotation (Placement(transformation(extent={{84,-34},{104,-14}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMin=273.15 + 5, uMax=273.15 + 7)
+    annotation (Placement(transformation(extent={{-72,-44},{-52,-24}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=max(0, 100000*(-1*(
+        limiter.y - 273.15) + 7)))
+    annotation (Placement(transformation(extent={{36,-42},{16,-22}})));
   Movers.FlowControlled_dp fan(
-    redeclare package Medium = Medium,
+   redeclare package Medium = Medium,
     allowFlowReversal=false,
     m_flow_nominal=11,
     inputType=AixLib.Fluid.Types.InputType.Continuous,
@@ -58,13 +65,18 @@ model IdealSourcewithT_supply_dP_c
     use_inputFilter=true,
     y_start=1,
     dp_start=50000)
-    annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
-  Modelica.Blocks.Math.Max max
-    annotation (Placement(transformation(extent={{-42,46},{-22,66}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=450000)
-    annotation (Placement(transformation(extent={{-82,54},{-62,74}})));
-  Utilities.Sensors.FuelCounter fuelCounter
-    annotation (Placement(transformation(extent={{74,50},{94,70}})));
+    annotation (Placement(transformation(extent={{-28,10},{-8,-10}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=273.15 + 15, uMin=273.15 + 13)
+    annotation (Placement(transformation(extent={{-72,-80},{-52,-60}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=max(0, 100000*(1.5*(
+        limiter1.y - 273.15) - 12)))
+    annotation (Placement(transformation(extent={{38,-78},{18,-58}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{6,-56},{-14,-36}})));
+  Modelica.Blocks.Sources.BooleanTable booleanTable(
+  startValue=false, table={0,
+        1.2e+07,2.205e+07})
+    annotation (Placement(transformation(extent={{62,-56},{42,-36}})));
 equation
   connect(m_flow.port_b, port_b)
     annotation (Line(points={{88,0},{100,0}}, color={0,127,255}));
@@ -82,18 +94,24 @@ equation
     annotation (Line(points={{58,0},{68,0}}, color={0,127,255}));
   connect(bou.ports[1], senTem1.port_b) annotation (Line(points={{-72,38},{-66,38},
           {-66,0},{-68,0}},     color={0,127,255}));
+  connect(senTem1.T, limiter.u) annotation (Line(points={{-78,-11},{-78,-34},{-74,
+          -34}},           color={0,0,127}));
   connect(vol.ports[2], fan.port_a)
     annotation (Line(points={{-48,0},{-28,0}}, color={0,127,255}));
   connect(fan.port_b, preOut.port_a)
     annotation (Line(points={{-8,0},{10,0}}, color={0,127,255}));
-  connect(max.y, fan.dp_in)
-    annotation (Line(points={{-21,56},{-18,56},{-18,12}}, color={0,0,127}));
-  connect(dpIn, max.u2) annotation (Line(points={{-104,54},{-80,54},{-80,50},{
-          -44,50}}, color={0,0,127}));
-  connect(realExpression.y, max.u1) annotation (Line(points={{-61,64},{-52,64},
-          {-52,62},{-44,62}}, color={0,0,127}));
-  connect(fan.P, fuelCounter.fuel_in)
-    annotation (Line(points={{-7,9},{-7,60},{74,60}}, color={0,0,127}));
+  connect(fan.P, fuelCounter.fuel_in) annotation (Line(points={{-7,-9},{38.5,-9},
+          {38.5,-24},{84,-24}}, color={0,0,127}));
+  connect(senTem1.T, limiter1.u)
+    annotation (Line(points={{-78,-11},{-78,-70},{-74,-70}}, color={0,0,127}));
+  connect(switch1.y, fan.dp_in) annotation (Line(points={{-15,-46},{-16,-46},{-16,
+          -12},{-18,-12}}, color={0,0,127}));
+  connect(realExpression.y, switch1.u1) annotation (Line(points={{15,-32},{12,-32},
+          {12,-38},{8,-38}}, color={0,0,127}));
+  connect(realExpression1.y, switch1.u3) annotation (Line(points={{17,-68},{14,-68},
+          {14,-54},{8,-54}}, color={0,0,127}));
+  connect(booleanTable.y, switch1.u2)
+    annotation (Line(points={{41,-46},{8,-46}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}),                                  graphics={
         Rectangle(
@@ -119,4 +137,4 @@ equation
 Implemented </li>
 </ul>
 </html>"));
-end IdealSourcewithT_supply_dP_c;
+end IdealSourcewithT_supply_combi;

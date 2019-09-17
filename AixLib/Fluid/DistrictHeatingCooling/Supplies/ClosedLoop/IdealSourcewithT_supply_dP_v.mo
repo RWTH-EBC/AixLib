@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.ClosedLoop;
-model IdealSourcewithT_supply_dP_v
+model IdealSourcewithT_supply_dp_v
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
@@ -120,4 +120,4 @@ equation
 Implemented </li>
 </ul>
 </html>"));
-end IdealSourcewithT_supply_dP_v;
+end IdealSourcewithT_supply_dp_v;
