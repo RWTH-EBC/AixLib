@@ -4,8 +4,8 @@ model TestCase9 "VDI 6007 Test Case 9 model"
 
   RC.TwoElements thermalZoneTwoElements(
     redeclare final package Medium = Modelica.Media.Air.SimpleAir,
-    hConvExt=2.7,
-    hConvWin=2.7,
+    hConExt=2.7,
+    hConWin=2.7,
     gWin=1,
     nExt=1,
     hRad=5,
@@ -15,7 +15,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     RExt={0.0017362530106},
     CExt={5259932.23},
     AInt=60.5,
-    hConvInt=2.12,
+    hConInt=2.12,
     RInt={0.000668895639141},
     CInt={12391363.8631},
     RExtRem=0.01913729904,
@@ -66,7 +66,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow machines"
     annotation (Placement(transformation(extent={{48,-66},{68,-46}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=25*25.5) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=25*25.5) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -149,7 +149,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
     n=2,
     wfGro=0,
     aExt=0.7,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
     wfWall={0.05796831135677373,0.13249899738691134},
     wfWin={0.4047663456281575,0.4047663456281575},
@@ -248,8 +248,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
 equation
   connect(thermalZoneTwoElements.extWall, theConWall.solid)
     annotation (Line(points={{44,12},{40,12},{40,1},{36,1}},   color={191,0,0}));
-  connect(hConvWall.y, theConWall.Gc)
-    annotation (Line(points={{0,4.4},{31,4.4},{31,-4}},      color={0,0,127}));
+  connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{31,4.4},{31,-4}}, color={0,0,127}));
   connect(perRad.port, thermalZoneTwoElements.intGainsRad)
     annotation (Line(
     points={{68,-92},{68,-92},{98,-92},{98,24},{92,24}},

@@ -16,17 +16,17 @@ model Radiator "Example for EBC radiator"
     selectable=true,
     radiatorType=AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
         NominalPower=496,
-        RT_nom={55,45,20},
+        RT_nom=Modelica.SIunits.Conversions.from_degC({55,45,20}),
         PressureDrop=1017878,
         Exponent=1.2776,
         VolumeWater=3.6,
         MassSteel=17.01,
-        length=2.6,
-        height=0.3,
         DensitySteel=7900,
         CapacitySteel=551,
         LambdaSteel=60,
-        Type=BaseClasses.RadiatorTypes.PanelRadiator10),
+        Type=BaseClasses.RadiatorTypes.PanelRadiator10,
+        length=2.6,
+        height=0.3),
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
     "Radiator"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
