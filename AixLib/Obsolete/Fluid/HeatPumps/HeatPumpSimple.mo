@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps;
+within AixLib.Obsolete.Fluid.HeatPumps;
 model HeatPumpSimple
 
   replaceable package Medium =
@@ -17,24 +17,40 @@ model HeatPumpSimple
   Modelica.Fluid.Interfaces.FluidPort_b
                     port_b_sink(redeclare package Medium = Medium)
                     "Heat pump outlet on the sink side"    annotation(Placement(transformation(extent = {{80, 60}, {100, 80}})));
-  Fluid.MixingVolumes.MixingVolume
-                    volumeEvaporator(V = VolumeEvaporator, nPorts=2,
-                    redeclare package Medium = Medium, m_flow_nominal=0.01)
-                    "Water volume of the evaporator on the source side"  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-70,-60})));
-  Fluid.MixingVolumes.MixingVolume
-                    volumeCondenser(V = VolumeCondenser, nPorts=2,
-                    redeclare package Medium = Medium, m_flow_nominal=0.01)
-                    "Water volume of the condenser on the sink side"  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={70,-30})));
-  Fluid.Sensors.TemperatureTwoPort
-                    temperatureSinkOut(redeclare package Medium =
-                    Medium, m_flow_nominal=0.01)
-                    "Temperature sensor at outlet on the sink side"   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, 50})));
+  AixLib.Fluid.MixingVolumes.MixingVolume volumeEvaporator(
+    V=VolumeEvaporator,
+    nPorts=2,
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.01) "Water volume of the evaporator on the source side"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-70,-60})));
+  AixLib.Fluid.MixingVolumes.MixingVolume volumeCondenser(
+    V=VolumeCondenser,
+    nPorts=2,
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.01) "Water volume of the condenser on the sink side"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={70,-30})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSinkOut(redeclare package
+      Medium = Medium, m_flow_nominal=0.01)
+    "Temperature sensor at outlet on the sink side" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={80,50})));
   Modelica.Blocks.Interfaces.BooleanInput OnOff
                     "On Off input signal of the heat pump"      annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
-  Fluid.Sensors.TemperatureTwoPort
-                    temperatureSourceIn(redeclare package Medium =
-                    Medium, m_flow_nominal=0.01)
-                    "Temperature sensor at inlet on the source side"  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-80, 36})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSourceIn(redeclare package
+      Medium = Medium, m_flow_nominal=0.01)
+    "Temperature sensor at inlet on the source side" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-80,36})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowCondenser
                     "Heat flow on the sink side" annotation(Placement(transformation(extent={{-4,-4},
             {4,4}},                                                                                                    origin={48,-40})));

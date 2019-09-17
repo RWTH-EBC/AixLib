@@ -7,6 +7,5 @@ HeatConvInside
 HeatConvOutside
 HeatConvPipeInside
 HeatConvPipeInsideDynamic
-HeatToStar
 HeatToStar_Avar
 SolarRadToHeat

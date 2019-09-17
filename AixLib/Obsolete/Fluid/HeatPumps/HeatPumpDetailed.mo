@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps;
+within AixLib.Obsolete.Fluid.HeatPumps;
 model HeatPumpDetailed
   "Heat pump model with good level of detail. Mainly fed with manufacturing data."
   import SI = Modelica.SIunits;
@@ -146,7 +146,7 @@ model HeatPumpDetailed
   Modelica.Fluid.Interfaces.FluidPort_a port_evaIn(redeclare package Medium =
         Medium_eva) "Evaporator fluid input port" annotation (Placement(
         transformation(extent={{-140,60},{-120,80}}, rotation=0)));
-  Sensors.TemperatureTwoPort T_evaIn(
+  AixLib.Fluid.Sensors.TemperatureTwoPort T_evaIn(
     redeclare package Medium = Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
     T_start=T_startEva) "Temperature sensor at inlet of the evaporator"
@@ -154,7 +154,7 @@ model HeatPumpDetailed
         origin={-130,26},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Sensors.TemperatureTwoPort T_conIn(
+  AixLib.Fluid.Sensors.TemperatureTwoPort T_conIn(
     redeclare package Medium = Medium_con,
     m_flow_nominal=mFlow_conNominal,
     T_start=T_startCon) "Temperature sensor at inlet of the condenser"
@@ -168,7 +168,7 @@ model HeatPumpDetailed
   Modelica.Fluid.Interfaces.FluidPort_b port_conOut(redeclare package Medium =
         Medium_con) "Condenser fluid ouput port" annotation (Placement(
         transformation(extent={{120,60},{140,80}}, rotation=0)));
-  Sensors.TemperatureTwoPort T_conOut(
+  AixLib.Fluid.Sensors.TemperatureTwoPort T_conOut(
     redeclare package Medium = Medium_con,
     m_flow_nominal=mFlow_conNominal,
     T_start=T_startCon) "Temperature sensor at outlet of the condenser"
@@ -176,7 +176,7 @@ model HeatPumpDetailed
         origin={130,48},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Sensors.TemperatureTwoPort T_evaOut(
+  AixLib.Fluid.Sensors.TemperatureTwoPort T_evaOut(
     redeclare package Medium = Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
     T_start=T_startEva) "Temperature sensor at outlet of the evaporator"
@@ -184,8 +184,9 @@ model HeatPumpDetailed
         origin={-130,-46},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Sensors.MassFlowRate mFlow_con(redeclare package Medium = Medium_con)
-    "Mass flow sensor at the condenser" annotation (Placement(transformation(
+  AixLib.Fluid.Sensors.MassFlowRate mFlow_con(redeclare package Medium =
+        Medium_con) "Mass flow sensor at the condenser" annotation (Placement(
+        transformation(
         origin={130,-50},
         extent={{-10,-10},{10,10}},
         rotation=90)));
@@ -220,12 +221,13 @@ public
       tab="Advanced",
       enable=not (capCalcType == 1)));
 
-  Sensors.MassFlowRate mFlow_eva(redeclare package Medium = Medium_eva)
-    "Mass flow sensor at the evaporator" annotation (Placement(transformation(
+  AixLib.Fluid.Sensors.MassFlowRate mFlow_eva(redeclare package Medium =
+        Medium_eva) "Mass flow sensor at the evaporator" annotation (Placement(
+        transformation(
         origin={-130,52},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  HeatPumps.BaseClasses.CycleHP cycle(
+  AixLib.Fluid.HeatPumps.BaseClasses.CycleHP cycle(
     HPctrlType=HPctrlType,
     capCalcType=capCalcType,
     dataTable=dataTable,
@@ -295,7 +297,7 @@ public
         extent={{-5,-5},{5,5}},
         rotation=180,
         origin={-73,5})));
-  MixingVolumes.MixingVolume evaporator(
+  AixLib.Fluid.MixingVolumes.MixingVolume evaporator(
     nPorts=2,
     T_start(displayUnit="K") = T_startEva,
     m_flow_nominal=mFlow_evaNominal,
@@ -304,17 +306,17 @@ public
         extent={{-7,-6.75},{7,6.75}},
         rotation=-90,
         origin={-120.75,1})));
-  FixedResistances.PressureDrop hydRes_eva(
+  AixLib.Fluid.FixedResistances.PressureDrop hydRes_eva(
     redeclare package Medium = Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
     m_flow(start=mFlow_evaNominal),
     dp_nominal=dp_evaNominal)
-    "The pressure drop caused by flow resistance in the evaporator" annotation (
-     Placement(transformation(
+    "The pressure drop caused by flow resistance in the evaporator" annotation
+    (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=90,
         origin={-130,-22})));
-  MixingVolumes.MixingVolume condenser(
+  AixLib.Fluid.MixingVolumes.MixingVolume condenser(
     nPorts=2,
     redeclare package Medium = Medium_con,
     T_start(displayUnit="K") = T_startCon,
@@ -323,7 +325,7 @@ public
         extent={{7,6.75},{-7,-6.75}},
         rotation=-90,
         origin={121.25,-1})));
-  FixedResistances.PressureDrop hydRes_con(
+  AixLib.Fluid.FixedResistances.PressureDrop hydRes_con(
     redeclare package Medium = Medium_con,
     m_flow_nominal=mFlow_conNominal,
     m_flow(start=mFlow_conNominal),

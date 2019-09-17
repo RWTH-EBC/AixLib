@@ -7,7 +7,7 @@ model HeatPumpDetailed
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
   replaceable package Medium_sou = AixLib.Media.Air
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation (choicesAllMatching=true);
-  .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
+  .AixLib.Obsolete.Fluid.HeatPumps.HeatPumpDetailed heatPump(
     P_eleOutput=true,
     capCalcType=2,
     CorrFlowCo=false,

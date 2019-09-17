@@ -58,11 +58,12 @@ model HeatPumpSimple
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
     "Temperature at the outlet of the sink side of the heat pump"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  AixLib.Fluid.HeatPumps.HeatPumpSimple heatPump(
+  AixLib.Obsolete.Fluid.HeatPumps.HeatPumpSimple heatPump(
     tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
     tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
         5750],
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     VolumeEvaporator=0.004,
     VolumeCondenser=0.004) "Simple heat pump based on manufacturing data"
     annotation (Placement(transformation(extent={{-2,4},{18,24}})));
