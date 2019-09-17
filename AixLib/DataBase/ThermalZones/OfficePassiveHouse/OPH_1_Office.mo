@@ -59,7 +59,7 @@ record OPH_1_Office "Office zone of office building"
     internalGainsMode=1,
     fixedHeatFlowRatePersons=70,
     ratioConvectiveHeatPeople=0.5,
-    internalGainsMoisture=0.5,
+    internalGainsMoistureNoPeople=0.5,
     internalGainsMachinesSpecific=7.0,
     ratioConvectiveHeatMachines=0.6,
     lightingPowerSpecific=12.5,
