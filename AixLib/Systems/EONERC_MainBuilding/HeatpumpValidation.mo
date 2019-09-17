@@ -87,10 +87,6 @@ model HeatpumpValidation
         extent={{5,-5},{-5,5}},
         rotation=180,
         origin={25,-3})));
-  Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
-    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
-        rotation=-90,
-        origin={-10,54})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=Data.August2016,
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
@@ -122,10 +118,6 @@ equation
     annotation (Line(points={{70,20},{4,20}}, color={0,127,255}));
   connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{30.5,-3},{49,
           -3},{49,-15.2},{19.2,-15.2}},          color={0,0,127}));
-  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{-10,65},
-          {-8,65},{-8,22},{-28,22}},            color={0,0,127}));
-  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{-10,65},
-          {-10,22},{12,22}},           color={0,0,127}));
   connect(boundary5.m_flow_in, combiTimeTable.y[14]) annotation (Line(points={{-92,
           -12},{-96,-12},{-96,54},{-62,54},{-62,70},{-79,70}}, color={0,0,127}));
   connect(toKelvin.Kelvin, boundary5.T_in)

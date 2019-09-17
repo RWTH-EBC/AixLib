@@ -2,8 +2,8 @@ within AixLib.DataBase.Storage;
 record Generic_4000l "Pseudo storage with 4000 l (standing)"
   extends BufferStorageBaseDataDefinition(
     hTank=2.26,
-    hLowerPorts=0.5,
-    hUpperPorts=1.76,
+    hLowerPorts=0.3,
+    hUpperPorts=1.96,
     hHC1Up=1.60,
     hHC1Low=0.1,
     hHC2Up=0.7,
