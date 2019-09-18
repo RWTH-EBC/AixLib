@@ -4,7 +4,7 @@ model HumanTotalHeat_TemperatureDepdendent
   extends HumanSensibleHeat_TemperatureDependent(thermalCollector(m=2));
 
   BaseClasses.TemperatureDependentMoistureOutput_SIA2024
-    temperatureDependentMoistuerOutput_SIA2024_1
+    temperatureDependentMoistuerOutput_SIA2024_1(ActivityDegree=ActivityDegree)
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
   Modelica.Blocks.Interfaces.RealOutput MoistGain
     annotation (Placement(transformation(extent={{86,70},{106,90}})));

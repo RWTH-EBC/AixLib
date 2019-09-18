@@ -7,7 +7,6 @@ partial model PartialHuman "Partial model for internal gains of humans"
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
     "Initial temperature";
-  parameter Real ActivityDegree = 1.0 "activity degree of persons in room in met";
   parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70 "specific heat output per person";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
