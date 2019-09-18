@@ -56,7 +56,6 @@ record OPH_1_Office "Office zone of office building"
     wfGro=0.1,
     specificPeople=1/14,
     activityDegree=1.2,
-    internalGainsMode=1,
     fixedHeatFlowRatePersons=70,
     ratioConvectiveHeatPeople=0.5,
     internalGainsMoistureNoPeople=0.5,
