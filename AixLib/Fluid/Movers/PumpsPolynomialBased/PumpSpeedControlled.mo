@@ -512,7 +512,7 @@ equation
 </html>",
 revisions="<html>
 <ul>
-<li>2018-09-18 by Alexander Kümpel:<br />Renaming, restructuring and bug fixes.</li>
+<li>2019-09-18 by Alexander Kümpel:<br />Renaming, restructuring and bug fixes.</li>
 <li>2018-05-08 by Peter Matthes:<br />Changes initialization of criticalDamping to Types.Init.InitialOutput. &quot;Noinit&quot; could lead to always zero output.</li>
 <li>2018-03-12 by Peter Matthes:<br />* Adds start values for m_flow and Vflow_m3h. <br />* Removes assignment &quot;Vflow_m3h(y=if noEvent(port_b.m_flow &gt; 0) then 0 else -port_b.m_flow/medium.d*3600)&quot;.<br />* Comments out an assert statement for positive mass flow as that will provoke events when pump gets turned off and lead to stalled simulations.<br />* Adds min and max attribbutes to  dp_pump, head, headUnbound, criticalDamping.y and m_flow and Vflow_m3h should help to avoid negative pump delivery head or mass flow.</li>
 <li>2018-03-01 by Peter Matthes:<br />Improved parameter setup of pump model. Ordering in GUI, disabled some parameters that should be used not as input but rather as outputs (m_flow_start, p_a_start and p_b_start) and much more description in the parameter doc strings to help the user make better decisions.</li>

@@ -168,7 +168,7 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
-<li>2018-09-18 by Alexander Kümpel:<br />Renaming and extension from BasicPumpInterface.</li>
+<li>2019-09-18 by Alexander Kümpel:<br />Renaming and extension from BasicPumpInterface.</li>
 <li>2018-03-01 by Peter Matthes:<br />Improved parameter setup of pump model. Ordering in GUI, disabled some parameters that should be used not as input but rather as outputs (m_flow_start, p_a_start and p_b_start) and much more description in the parameter doc strings to help the user make better decisions.</li>
 <li>2018-02-01 by Peter Matthes:<br />Fixes option choicesAllMatching=true for controller. Needs to be __Dymola_choicesAllMatching=true. Sets standard control algorithm to dp_var (<code><span style=\"color: #ff0000;\">PumpControlDeltaPvar</span></code>).</li>
 <li>2018-01-30 by Peter Matthes:<br />* Renamed delivery head controlled pump model (blue) from Pump into PumpH as well as PumpPhysics into PumpPhysicsH. &quot;H&quot; stands for pump delivery head.<br />* Moved efficiencyCharacteristic package directly into BaseClasses. This is due to moving the older pump model and depencencies into the Deprecated folder.</li>

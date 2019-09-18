@@ -84,7 +84,7 @@ equation
     experiment(StopTime=200),
     Documentation(revisions="<html>
 <ul>
-<li>2018-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
+<li>2019-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
 <li>2018-05-08 by Peter Matthes:<br />Removes most advanced Dymola settings from plot script. This fixes a situation when Dymola didn&apos;t display anything in the plot windows and it removed the variables tree.</li>
 <li>2018-03-01 by Peter Matthes:<br />Adjusted parameter settings. From pump model removed m_flow_start (should be used as output from pump rather than a setting). Changed setting of system.m_flow_start to become pump.m_flow_start.</li>
 <li>2018-01-29 by Peter Matthes:<br />* The selectable function for efficiency calculation could be removed from the parameter dialog.<br />* Increases simulation time and table time settings.</li>
@@ -94,7 +94,7 @@ equation
 </html>", info="<html>
 <p>Tests the pump model with single parameter record that also uses the limitiation of the pump speed (<i>pumpParam.maxMinSpeedCurves</i>) instead of the pump head limitation (<i>maxMinHead</i>).</p>
 </html>"),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpSpeedControlledLimiterTest.mos"
         "Simulate and plot"),
     Diagram(graphics={Text(

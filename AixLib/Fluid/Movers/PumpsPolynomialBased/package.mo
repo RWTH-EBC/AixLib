@@ -32,7 +32,7 @@ extends Modelica.Icons.Package;
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>2018-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
+<li>2019-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
 <li>2018-05-14 by Peter Matthes:<br />Transfered package from internal &quot;Zugabe&quot; library into AixLib.</li>
 </ul>
 </html>"));
