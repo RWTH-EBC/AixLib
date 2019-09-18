@@ -11,7 +11,7 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     RWin=0.00000001,
     ratioWinConRad=0.09,
     AInt=58,
-    hConvWin=2.7,
+    hConWin=2.7,
     VAir=0,
     nOrientations=1,
     AWin={0},
@@ -24,9 +24,9 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     CInt={12333949.4129606},
     intWallRC(thermCapInt(each T(fixed=true))),
     extWallRC(thermCapExt(each T(fixed=true))),
-    hConvInt=2.398,
+    hConInt=2.398,
     T_start=290.75,
-    hConvExt=2.4) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    hConExt=2.4) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
@@ -131,7 +131,7 @@ model TestCase10 "VDI 6007 Test Case 10 model"
     annotation (Placement(transformation(extent={{-90,-8},{-74,8}})));
   EquivalentAirTemperature.VDI6007 eqAirTemp(
     aExt=0.7,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
     withLongwave=false,
     n=1,
@@ -155,7 +155,7 @@ model TestCase10 "VDI 6007 Test Case 10 model"
   Modelica.Thermal.HeatTransfer.Components.Convection theConWall
     "Outdoor convective heat transfer"
     annotation (Placement(transformation(extent={{34,5},{24,-5}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=28*9.75) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=28*9.75) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   BaseClasses.VerifyDifferenceThreePeriods assEqu(
     startTime=3600,
@@ -214,8 +214,7 @@ equation
   connect(sunblind.y, eqAirTemp.sunblind[1])
     annotation (Line(points={{-15,19.7},{-15,15.85},{-14,15.85},{-14,15.8}},
     color={0,0,127}));
-  connect(hConvWall.y,theConWall. Gc)
-    annotation (Line(points={{0,4.4},{29,4.4},{29,-5}},      color={0,0,127}));
+  connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{29,4.4},{29,-5}}, color={0,0,127}));
   connect(preTem.port, theConWall.fluid)
     annotation (Line(points={{20,0},{24,0}}, color={191,0,0}));
   connect(theConWall.solid, thermalZoneTwoElements.extWall)

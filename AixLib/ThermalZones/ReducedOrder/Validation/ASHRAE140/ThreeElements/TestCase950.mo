@@ -38,8 +38,8 @@ model TestCase950 "Test case 950"
   AixLib.ThermalZones.ReducedOrder.RC.ThreeElements thermalZoneThreeElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
-    hConvExt=2.2309677419354843,
-    hConvWin=3.16,
+    hConExt=2.2309677419354843,
+    hConWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
@@ -47,14 +47,14 @@ model TestCase950 "Test case 950"
     CExt={9152069.64734},
     hRad=5.13,
     AInt=48.0,
-    hConvInt=4.130000000000001,
+    hConInt=4.130000000000001,
     nInt=1,
     RInt={0.000491103488785},
     CInt={5373300.22817},
     RWin=0.0133333333333,
     RExtRem=0.0186378908278,
     AFloor=48.0,
-    hConvFloor=4.130000000000001,
+    hConFloor=4.130000000000001,
     nFloor=1,
     RFloor={0.17413196439},
     RFloorRem=0.348263868943,
@@ -76,9 +76,9 @@ model TestCase950 "Test case 950"
     wfWin={1.0,0.0,0.0,0.0,0.0},
     withLongwave=true,
     aExt=0.6,
-    hConvWallOut=24.670000000000005,
+    hConWallOut=24.670000000000005,
     hRad=4.63,
-    hConvWinOut=16.37,
+    hConWinOut=16.37,
     TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
@@ -104,9 +104,9 @@ model TestCase950 "Test case 950"
     annotation (Placement(
     transformation(extent={{-100,6},{-66,38}}),  iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=29.3*111.60000000000001) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=29.3*111.60000000000001) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
-  Modelica.Blocks.Sources.Constant hConvWin(k=21.0*12.0) "Outdoor coefficient of heat transfer for windows"
+  Modelica.Blocks.Sources.Constant hConWin(k=21.0*12.0) "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
     "Radiative heat flow of internal gains"
@@ -318,10 +318,8 @@ equation
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,17},{24,17},{24,16},{20,16}},
                                                            color={191,0,0}));
-  connect(hConvWall.y, thermalConductorWall.Gc)
-    annotation (Line(points={{0,4.4},{0,12},{31,12}},     color={0,0,127}));
-  connect(hConvWin.y, thermalConductorWin.Gc)
-    annotation (Line(points={{0,-4.4},{0,42},{33,42}},   color={0,0,127}));
+  connect(hConWall.y, thermalConductorWall.Gc) annotation (Line(points={{0,4.4},{0,12},{31,12}}, color={0,0,127}));
+  connect(hConWin.y, thermalConductorWin.Gc) annotation (Line(points={{0,-4.4},{0,42},{33,42}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
     annotation (Line(
     points={{-83,22},{-58,22},{-58,18},{-32,18},{-32,12},{-26,12}},
