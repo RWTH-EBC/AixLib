@@ -1,11 +1,16 @@
 Bouyancy
+Buoyancy
 HeatTransferBuoyancyWetter
 HeatTransferLambdaEff
 HeatTransferLambdaEffSmooth
 HeatTransferLambdaSimple
 HeatTransferOnlyConduction
 HeatingCoil
+IndirectTankHeatExchanger
 PartialHeatTransferLayers
+PartialStratified
 StorageCover
 StorageMantle
 StorageWall
+ThirdOrderStratifier
+Examples

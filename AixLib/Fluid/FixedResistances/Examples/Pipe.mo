@@ -30,11 +30,11 @@ model Pipe
         origin={79,1})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Sensors.Temperature temperatureAfter(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Sensors.Temperature temperatureAfter(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{14,-40},{34,-20}})));
-  Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-52,-40},{-32,-20}})));
   AixLib.Fluid.FixedResistances.Pipe dynamicPipeEBCAggregated_Ambient_Loss_UC(
     length=2,
@@ -61,18 +61,18 @@ equation
       smooth=Smooth.None));
   connect(Source.ports[1], dynamicPipeEBCAggregated_Ambient_Loss_UC.port_a)
     annotation (Line(
-      points={{-44,0},{-14.4,0}},
+      points={{-44,0},{-14,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(temperatureBefore.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.port_a)
     annotation (Line(
-      points={{-42,-40},{-30,-40},{-30,0},{-14.4,0}},
+      points={{-42,-40},{-30,-40},{-30,0},{-14,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(dynamicPipeEBCAggregated_Ambient_Loss_UC.port_b, Sink.ports[1])
-    annotation (Line(points={{6.4,0},{68,0},{68,1}}, color={0,127,255}));
+    annotation (Line(points={{6,0},{68,0},{68,1}},   color={0,127,255}));
   connect(temperatureAfter.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.port_b)
-    annotation (Line(points={{24,-40},{40,-40},{40,0},{6.4,0}}, color={0,127,255}));
+    annotation (Line(points={{24,-40},{40,-40},{40,0},{6,0}},   color={0,127,255}));
   connect(fixedTemp.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.heatPort_outside)
     annotation (Line(points={{-30,30},{-2.4,30},{-2.4,5.6}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

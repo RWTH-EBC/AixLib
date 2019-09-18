@@ -6,7 +6,9 @@ record AlphaInnotec_LW80MA "Alpha Innotec LW 80 M-A"
     tableQdot_con=[0,-7,2,7,10,15,20; 35,6300,8000,9400,10300,11850,13190; 45,6167,
         7733,9000,9750,11017,11730; 50,6100,7600,8800,9475,10600,11000],
     mFlow_conNom=9400/4180/5,
-    mFlow_evaNom=1);
+    mFlow_evaNom=1,
+    tableUppBou=[-25, 65; 40, 65]);
+    //These boundary-tables are not from the datasheet but default values.
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,

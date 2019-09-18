@@ -15,13 +15,12 @@ model StorageBoiler
     A_HE=20,
     lambda_ins=0.04,
     s_ins=0.1,
-    alpha_in=1500,
-    alpha_out=15,
+    hConIn=1500,
+    hConOut=15,
     d=1,
     h=2,
     k_HE=1500,
-    redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-18,12},{2,32}})));
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-18,12},{2,32}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-56,12},
             {-36,32}})));
   AixLib.Fluid.Movers.Pump

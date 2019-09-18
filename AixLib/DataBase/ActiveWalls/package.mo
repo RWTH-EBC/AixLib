@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase;
+within AixLib.DataBase;
 package ActiveWalls 
   extends Modelica.Icons.Package;
 

@@ -67,12 +67,13 @@ public
 
 final parameter          Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = false));
- parameter   Modelica.SIunits.CoefficientOfHeatTransfer                                      alphaOutside=8
-    "Heat transfer coefficient to ambient"                      annotation (Dialog( enable = withConvection));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=8 "Heat transfer coefficient to ambient"
+                                                                annotation (Dialog( enable=withConvection));
  parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
  annotation (Dialog( enable = withRadiation));
-         parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe" annotation(Dialog(enable = not calculateAlpha));
+  parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"       annotation(Dialog(enable=not
+          calcHCon));
     final parameter Modelica.SIunits.Area AOutside = if not withInsulation then Modelica.Constants.pi*outerDiameter*length else Modelica.Constants.pi*(outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
 
   /* *******************************************************************
@@ -110,12 +111,10 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.Star star if withRadiationParam
-    annotation (Placement(transformation(extent={{-70,86},{-50,106}}),
-        iconTransformation(extent={{-70,86},{-50,106}})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](alpha=fill(
-        alphaOutside, nNodes), A=AOutside/nNodes) if
-                                  withConvection "Convection from pipe wall"
+  AixLib.Utilities.Interfaces.RadPort star if
+                                           withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hConOut, nNodes), A=AOutside/nNodes) if withConvection
+    "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -133,9 +132,8 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     T_0=T_0,
     nNodes=nNodes,
     length=length,
-    alphaInsideFix=alphaInsideFix,
-    calculateAlpha=calculateAlpha)
-    annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
+    hConIn_const=hConIn_const,
+    calcHCon=calcHCon) annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
 protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{36,44},{76,52}}),

@@ -4,7 +4,6 @@ model StorageSimpleWall
   /* *******************************************************************
       Medium
      ******************************************************************* */
-
 public
   parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
@@ -28,13 +27,11 @@ public
       HeatStorage Parameters
      ******************************************************************* */
 
-  inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
-  inner parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
+  parameter Real tau(min=0) = 1000 "Time constant for mixing";
+  parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=1500
-    "Coefficient at the inner wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
-    "Coefficient at the outer wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=1500 "Heat transfer coefficient at the inner wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=15 "Heat transfer coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
@@ -57,16 +54,22 @@ public
   parameter Boolean use_heatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean use_heatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC1=20
-    "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water" annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC2=400
-    "Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water" annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC1=20 "Model assumptions heat transfer coefficient HC1 <-> Heating Water"
+                                                                           annotation(Dialog(enable=use_heatingCoil1,  tab=
+          "Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConHC2=400 "Model assumptions heat transfer coefficient HC2 <-> Heating Water"
+                                                                           annotation(Dialog(enable=use_heatingCoil2,  tab=
+          "Heating Coils and Rod"));
   parameter Boolean Up_to_down_HC1 = true
     "Heating Coil 1 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
   parameter Boolean Up_to_down_HC2 = true
     "Heating Coil 2 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
+  parameter Boolean calcHCon=true "Use calculated value for inside heat transfer coefficient"
+                                                      annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coefficient inside pipe"
+                                                         annotation(Dialog(enable=not calcHCon,              tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC1=0.02 "Inner diameter of HC1"
 //                             annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 //   parameter Modelica.SIunits.Length d_HC2=0.02 "Inner diameter of HC2"
@@ -85,43 +88,6 @@ public
 
  final parameter Integer dis_HC1 = n_HC1_up-n_HC1_low+1;
  final parameter Integer dis_HC2 = n_HC2_up-n_HC2_low+1;
-
-protected
-  parameter Real k_zyl(final unit="W/K") = 2*Modelica.Constants.pi
-    *data.hTank/n/(1/(alpha_in*data.dTank/2) + 1/data.lambdaIns*log(
-    (data.dTank/2 + data.sIns)/(data.dTank/2)) + 1/(alpha_out*(data.dTank
-    /2 + data.sIns)));
-    parameter Modelica.SIunits.Area A_cov = data.dTank^2/4*Modelica.Constants.pi
-    "Area cop/bottom cover";
-    parameter Modelica.SIunits.Area A_wall = (data.dTank+data.sIns+data.sWall)*Modelica.Constants.pi * data.hTank
-    "Area mantle";
-
-    //parameter Real k_cov(final unit="W/(m2.K)") =  {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank /2)^2 ;
-
-protected
-  parameter Real k_wall[n](final unit="W/(m2.K)") = cat(
-            1,
-            {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank
-      /2)^2 + k_zyl},
-            {k_zyl for k in 2:n - 1},
-            {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank
-      /2)^2 + k_zyl});
-
-  /* *******************************************************************
-      Components
-     ******************************************************************* */
-
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor layer[n](C=
-        fill(data.hTank*Modelica.Constants.pi*(data.dTank/2)^2*medium.rho*medium.c
-        /n, n), T(start=fill(T_start, n))) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-30,50})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
-                                                        heatTrans[n]( G=(k_wall))
-    annotation (Placement(transformation(extent={{20,38},{40,58}})));
-public
   FastHVAC.Interfaces.EnthalpyPort_a LoadingCycle_In[n_load_cycles] annotation (
      Placement(transformation(extent={{-30,90},{-10,110}}), iconTransformation(
           extent={{-30,90},{-10,110}})));
@@ -135,7 +101,6 @@ public
     annotation (Placement(transformation(extent={{10,-110},{30,-90}}),
         iconTransformation(extent={{10,-110},{30,-90}})));
 
-public
   FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n,n_load_cycles]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
@@ -193,52 +158,68 @@ public
   BaseClasses.HeatingCoil heatingCoil1(
     T_start=T_start,
     dis_HC=dis_HC1,
-    alpha_HC=alpha_HC1,
+    hConHC=hConHC1,
     medium_HC=mediumHC1,
     lengthHC=data.lengthHC1,
-    pipeRecordHC=data.pipeHC1) if use_heatingCoil1 annotation (Placement(
-        transformation(
+    pipeRecordHC=data.pipeHC1) if use_heatingCoil1
+    annotation (Placement(transformation(
         extent={{-15,-12},{15,12}},
         rotation=270,
         origin={-72,59})));
   BaseClasses.HeatingCoil heatingCoil2(
     T_start=T_start,
     dis_HC=dis_HC2,
-    alpha_HC=alpha_HC2,
+    hConHC=hConHC2,
     medium_HC=mediumHC2,
     lengthHC=data.lengthHC2,
-    pipeRecordHC=data.pipeHC2) if use_heatingCoil2 annotation (Placement(
-        transformation(
+    pipeRecordHC=data.pipeHC2,
+    calcHCon=calcHCon,
+    hConIn_const=hConIn_const) if use_heatingCoil2
+    annotation (Placement(transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,
         origin={-72,-60})));
 //   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransCover[2]
 //     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
 
-HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-10,-10},
+HeatTransfer heatTransfer(final Medium=medium,final data=data,
+    final n=n) annotation (Placement(transformation(extent={{-10,-10},
             {10,10}},  rotation=0)));
 
  replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction constrainedby
-    BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html><h4>
-  <font color=\"#008000\">Overview</font>
-</h4>
-<p>
-  Heat transfer model for heat transfer between two fluid layers.
-</p>
-</html>
-",
- revisions="<html><ul>
-  <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
-</html>
-"));
+     BaseClasses.HeatTransferOnlyConduction constrainedby BaseClasses.PartialHeatTransferLayers
+    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
+protected
+  parameter Real k_zyl(final unit="W/K") = 2*Modelica.Constants.pi*data.hTank/n/(1/(hConIn*data.dTank/2) + 1/data.lambdaIns*log((data.dTank
+    /2 + data.sIns)/(data.dTank/2)) + 1/(hConOut*(data.dTank/2 + data.sIns)));
+    parameter Modelica.SIunits.Area A_cov = data.dTank^2/4*Modelica.Constants.pi
+    "Area cop/bottom cover";
+    parameter Modelica.SIunits.Area A_wall = (data.dTank+data.sIns+data.sWall)*Modelica.Constants.pi * data.hTank
+    "Area mantle";
+    //parameter Real k_cov(final unit="W/(m2.K)") =  {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank /2)^2 ;
 
+  parameter Real k_wall[n](final unit="W/(m2.K)") = cat(
+            1,
+            {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank
+      /2)^2 + k_zyl},
+            {k_zyl for k in 2:n - 1},
+            {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank
+      /2)^2 + k_zyl});
+
+  /* *******************************************************************
+      Components
+     ******************************************************************* */
+
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor layer[n](C=
+        fill(data.hTank*Modelica.Constants.pi*(data.dTank/2)^2*medium.rho*medium.c
+        /n, n), T(start=fill(T_start, n))) annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-30,50})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
+                                                        heatTrans[n]( G=(k_wall))
+    annotation (Placement(transformation(extent={{20,38},{40,58}})));
 equation
   if use_heatingRod then
 

@@ -2,12 +2,13 @@ within AixLib.Utilities.HeatTransfer;
 model HeatConvPipeInside
   "Model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Modelica.SIunits.Length length = 1 "length of total pipe";
-  parameter Modelica.SIunits.Length d_i = 0.02 "inner diameter of pipe";
-  parameter Modelica.SIunits.Length d_a = 0.025 "outer diameter of pipe";
-  parameter Modelica.SIunits.Area A_sur = 2 "surfuce for heat transfer";
-  parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 annotation(Dialog(enable = not calculateAlpha));
+  parameter Modelica.SIunits.Length length(min=0) "length of total pipe";
+  parameter Modelica.SIunits.Length d_i(min=0) "inner diameter of pipe";
+  parameter Modelica.SIunits.Length d_a(min=0) "outer diameter of pipe";
+  parameter Modelica.SIunits.Area A_sur(min=0) "surface for heat transfer";
+  parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Constant convective heat transfer coefficient (Inside)"
+                                                                           annotation(Dialog(enable=not calcHCon));
   parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple();
     Modelica.SIunits.ReynoldsNumber Re;
@@ -18,7 +19,7 @@ model HeatConvPipeInside
   Modelica.SIunits.NusseltNumber Nu_lam;
   Modelica.SIunits.NusseltNumber Nu_tur;
   Modelica.SIunits.PrandtlNumber Pr;
-  Modelica.SIunits.CoefficientOfHeatTransfer alpha;
+  Modelica.SIunits.CoefficientOfHeatTransfer hCon "Convective heat transfer coefficient";
   Real zeta "pressure loss coefficient";
 
   Modelica.Blocks.Interfaces.RealInput m_flow annotation (Placement(transformation(
@@ -26,7 +27,7 @@ model HeatConvPipeInside
         rotation=-90,
         origin={-4,108})));
 equation
-  if calculateAlpha then
+  if calcHCon then
     v      =        4*m_flow/(Modelica.Constants.pi * d_i^2 * medium.rho);
     Re     =    Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
       v,medium.rho,medium.eta, d_i)
@@ -50,8 +51,8 @@ equation
     Nu_tur=0;
     Nu=0;
     end if;
-  alpha    =      if calculateAlpha then Nu  * medium.lambda /d_i else alphaInsideFix;
-  port_a.Q_flow = alpha * A_sur * (port_a.T - port_b.T);
+  hCon = if calcHCon then Nu*medium.lambda/d_i else hConIn_const;
+  port_a.Q_flow =hCon*A_sur*(port_a.T - port_b.T);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,   extent={{-100,
             -100},{100,100}}),                                                                                                                                                                                                        lineColor = {0, 0, 0}, pattern = LinePattern.Solid, fillColor = {211, 243, 255}, fillPattern = FillPattern.Solid, lineColor = {0, 0, 0}),                                                                                                                                                                                                        Icon(
@@ -64,10 +65,6 @@ equation
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model represents the phenomenon of heat convection inside a pipe by a flowing medium.</p>
  <p>The heat transfer coefficient at the inside could be calculated by formular from VDI-Waermeatlas or a fixed value can be choosen.</p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
- <h4><font color=\"#008000\">Example Results</font></h4>
- <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.HeatTransfer_test </a></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>August 11, 2017;</i> by David Jansen:<br/></li>

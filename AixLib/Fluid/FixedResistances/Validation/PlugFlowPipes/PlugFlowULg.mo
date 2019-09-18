@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
+﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes;
 model PlugFlowULg "Validation against data from Université de Liège"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
@@ -70,8 +70,7 @@ model PlugFlowULg "Validation against data from Université de Liège"
     "Input temperature into pipe"
     annotation (Placement(transformation(extent={{40,-80},{60,-60}})));
 
-  replaceable Data.PipeDataULg151202 pipeDataULg constrainedby
-    Data.BaseClasses.PipeDataULg
+  replaceable Data.PipeDataULg151202 pipeDataULg constrainedby Data.BaseClasses.PipeDataULg
     "Measurement dataset from ULg (use Change Class... to choose from different experiments)"
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
   Modelica.Blocks.Math.Gain gain(k=1)
@@ -135,7 +134,7 @@ equation
     annotation (Line(points={{40,-1.33227e-15},{40,0},{60,0}},
                                                     color={0,127,255}));
   connect(gain.y, WaterCityNetwork.m_flow_in) annotation (Line(points={{73,-40},
-          {104,-40},{104,8},{80,8}},
+          {104,-40},{104,8},{82,8}},
                                    color={0,0,127}));
   connect(Tin.y, Boiler.TSet) annotation (Line(points={{61,-70},{94,-70},{94,28},
           {52,28},{52,8},{42,8}},          color={0,0,127}));
