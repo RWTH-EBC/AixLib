@@ -18,7 +18,8 @@ model Multizone "Illustrates the use of Multizone"
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
-            thermCapInt(each der_T(fixed=true))))))
+            thermCapInt(each der_T(fixed=true))))),
+    internalGainsMode=1)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
@@ -101,9 +102,10 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(replicatorTemperatureVentilation.y, multizone.ventTemp) annotation (
-      Line(points={{-25.5,-13},{-20,-13},{-20,3.8},{33,3.8}}, color={0,0,127}));
-  connect(const.y, multizone.ventRate) annotation (Line(points={{-25.5,-33},{-18,
-          -33},{-18,1},{33,1}}, color={0,0,127}));
+      Line(points={{-25.5,-13},{-20,-13},{-20,2},{33,2}},     color={0,0,127}));
+  connect(const.y, multizone.ventRate) annotation (Line(points={{-25.5,-33},{
+          -18,-33},{-18,-0.6},{33,-0.6}},
+                                color={0,0,127}));
   connect(tableInternalGains.y, multizone.intGains)
     annotation (Line(points={{55.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
   connect(gain.y, replicator.u)
@@ -119,10 +121,11 @@ equation
   connect(replicator.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-23.4,
           -54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, multizone.intGainsRad) annotation (Line(
-        points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-1.6},{34,-1.6}},
+        points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-3},{34,-3}},
                                 color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
-        points={{6,-76},{18,-76},{26,-76},{26,-5},{34,-5}}, color={191,0,0}));
+        points={{6,-76},{18,-76},{26,-76},{26,-6.2},{34,-6.2}},
+                                                            color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),

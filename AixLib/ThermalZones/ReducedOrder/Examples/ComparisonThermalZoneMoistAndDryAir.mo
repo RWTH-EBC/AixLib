@@ -300,8 +300,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZoneMoistAir.ventTemp, weaBus.TDryBul) annotation (Line(points
-        ={{-11.3,-15.9},{-35.65,-15.9},{-35.65,-16},{-61,-16}}, color={0,0,127}),
+  connect(thermalZoneMoistAir.ventTemp, weaBus.TDryBul) annotation (Line(points=
+         {{-11.3,-15.9},{-35.65,-15.9},{-35.65,-16},{-61,-16}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -325,8 +325,8 @@ equation
           67.2,-30}},
                  color={0,0,127}));
   connect(sourcAir.ports[1], thermalZoneMoistAir.ports[1]) annotation (Line(
-        points={{-64,-82},{-46,-82},{-46,-48},{-2.35,-48},{-2.35,-19.2}}, color
-        ={0,127,255}));
+        points={{-64,-82},{-46,-82},{-46,-48},{-2.35,-48},{-2.35,-19.2}}, color=
+         {0,127,255}));
   connect(thermalZoneMoistAir.ports[2], sinAir.ports[1]) annotation (Line(
         points={{2.35,-19.2},{2.35,-52},{-38,-52},{-38,-88},{-32,-88}}, color={
           0,127,255}));

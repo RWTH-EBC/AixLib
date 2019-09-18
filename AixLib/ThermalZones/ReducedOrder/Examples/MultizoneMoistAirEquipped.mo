@@ -16,6 +16,7 @@ model MultizoneMoistAirEquipped
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    internalGainsMode=3,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
