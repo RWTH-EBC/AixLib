@@ -22,7 +22,7 @@ model ThermalZone
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
+    final activityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
        ATot > 0 and zoneParam.internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
@@ -31,7 +31,6 @@ model ThermalZone
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
        ATot > 0 and zoneParam.internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
@@ -40,7 +39,7 @@ model ThermalZone
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
+    final activityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
        ATot > 0 and zoneParam.internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 

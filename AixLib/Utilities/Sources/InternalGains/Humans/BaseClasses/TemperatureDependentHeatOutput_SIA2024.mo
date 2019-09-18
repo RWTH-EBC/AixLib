@@ -2,7 +2,7 @@
 model TemperatureDependentHeatOutput_SIA2024
   "Model for temperature dependent heat output based on formulas of SIA 2024"
 
-  parameter Real ActivityDegree = 1.0 "activity degree of persons in room in met";
+  parameter Real activityDegree=1.0 "activity degree of persons in room in met";
 
   Modelica.Blocks.Interfaces.RealInput Temperature
     "room temperature used for heat output calculation"
@@ -18,7 +18,8 @@ protected
   constant Modelica.SIunits.HeatFlowRate minimumHeat = 35 "minimum heat output";
 equation
 
-  heatOutput = max(0,(0.865-(TemperatureCoefficient * Temperature))*(ActivityDegree*heatPerMet*bodySurface)+minimumHeat);
+  heatOutput = max(0,(0.865-(TemperatureCoefficient * Temperature))*(
+    activityDegree                                                                 *heatPerMet*bodySurface)+minimumHeat);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-58,22},{46,-26}},
