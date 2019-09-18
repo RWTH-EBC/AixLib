@@ -45,7 +45,7 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
       smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   HydraulicModules.BaseClasses.HydraulicBus bus_throttle_HS1 annotation (
-      Placement(transformation(extent={{-66,30},{-46,50}}), iconTransformation(
+      Placement(transformation(extent={{-66,16},{-46,36}}), iconTransformation(
           extent={{-44,28},{-24,48}})));
   Controls.Interfaces.HeatPumpControlBus bus_HP1 annotation (Placement(
         transformation(extent={{-16,28},{4,50}}), iconTransformation(extent={{-18,
@@ -103,6 +103,9 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={30,-70})));
+  BaseClasses.HeatPumpSystemBus heatPumpSystemBus1 annotation (Placement(
+        transformation(extent={{-20,14},{0,34}}), iconTransformation(extent={{
+            -98,-62},{-78,-42}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.fluidportBottom1) annotation (Line(
         points={{-106,-30},{-80,-30},{-80,-19.5556}},          color={0,127,255}));
@@ -153,48 +156,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(heatpumpSystem.bus_throttle_HS, bus_throttle_HS1) annotation (Line(
-      points={{-54.5455,16.7111},{-56,16.7111},{-56,40}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(heatpumpSystem.bus_throttle_recool, bus_throttle_recool1) annotation (
-     Line(
-      points={{-22.0909,16.7111},{-22,16.7111},{-22,48}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(bus_throttle_freecool1, heatpumpSystem.bus_throttle_freecool)
-    annotation (Line(
-      points={{32,44},{30,44},{30,16.7111},{28.1818,16.7111}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(bus_throttle_CS1, heatpumpSystem.bus_throttle_CS) annotation (Line(
-      points={{56,46},{52,46},{52,16.7111},{47.2727,16.7111}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(bus_HP1, heatpumpSystem.bus_HP) annotation (Line(
-      points={{-6,39},{-6,28.5},{-9.68182,28.5},{-9.68182,16.3556}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(toKelvin.Kelvin, boundary5.T_in)
     annotation (Line(points={{-139.4,-26},{-128,-26}}, color={0,0,127}));
   connect(toKelvin1.Kelvin, boundary3.T_in) annotation (Line(points={{132,29.4},
@@ -203,14 +164,6 @@ equation
           132,43.2},{28,43.2},{28,70},{-79,70}}, color={0,0,127}));
   connect(toKelvin.Celsius, combiTimeTable.y[15]) annotation (Line(points={{
           -153.2,-26},{-160,-26},{-160,74},{-79,74},{-79,70}}, color={0,0,127}));
-  connect(heatpumpSystem.bus_pump_hot, bus_pump_hot1) annotation (Line(
-      points={{-36.0909,16.7111},{-36,16.7111},{-36,38},{-38,38}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(pumpHotSet.y, bus_pump_hot1.pumpBus.rpm_Input) annotation (Line(
         points={{-73.3,39},{-46,39},{-46,38.05},{-37.95,38.05}}, color={0,0,127}),
       Text(
@@ -227,14 +180,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(heatpumpSystem.bus_pump_cold, bus_pump_cold1) annotation (Line(
-      points={{9.09091,16},{9.09091,24.6},{10,24.6},{10,30}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(pumpHotSet.y, bus_pump_cold1.pumpBus.rpm_Input) annotation (Line(
         points={{-73.3,39},{-33.65,39},{-33.65,30.05},{10.05,30.05}}, color={0,
           0,127}), Text(
@@ -252,7 +197,7 @@ equation
   connect(realExpression1.y, limiter.u) annotation (Line(points={{-67,-96},{-62,
           -96},{-62,-84},{-58,-84}}, color={0,0,127}));
   connect(limiter.y, bus_throttle_HS1.valSet) annotation (Line(points={{-58,-61},
-          {-58,-10},{-58,40.05},{-55.95,40.05}}, color={0,0,127}), Text(
+          {-58,26.05},{-55.95,26.05}},           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -266,7 +211,16 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fixedTemperature.port, heatpumpSystem.fluid1) annotation (Line(points
-        ={{20,-70},{12,-70},{12,-44.4444},{-10,-44.4444}}, color={191,0,0}));
+  connect(fixedTemperature.port, heatpumpSystem.T_amb) annotation (Line(points=
+          {{20,-70},{12,-70},{12,-44.4444},{-10,-44.4444}}, color={191,0,0}));
+  connect(heatpumpSystem.heatPumpSystemBus, heatPumpSystemBus1) annotation (
+      Line(
+      points={{-10,16},{-10,24}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(StopTime=7200));
 end HeatPumpSystemValidation;
