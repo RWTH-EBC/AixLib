@@ -9,13 +9,7 @@ model ThermalZone
     AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
-//
-//   replaceable model  humanSenHeaModel =
-//   Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman constrainedby
-//     Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman
-//     "Internal gains from persons" annotation (choicesAllMatching=true);
 
-     // if  ATot > 0
 
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent humanSenHeaDependent(
     final T0=zoneParam.T_start,
