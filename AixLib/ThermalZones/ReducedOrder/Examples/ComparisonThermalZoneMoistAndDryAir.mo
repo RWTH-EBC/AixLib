@@ -8,6 +8,7 @@ model ComparisonThermalZoneMoistAndDryAir
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
+    internalGainsMode=3,
     nPorts=2,
     T_start=293.15,
     zoneParam=
@@ -153,6 +154,7 @@ model ComparisonThermalZoneMoistAndDryAir
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
+    internalGainsMode=1,
     nPorts=2,
     zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     T_start=293.15) "Thermal zone"
