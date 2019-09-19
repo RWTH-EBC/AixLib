@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchangers;
+﻿within AixLib.FastHVAC.Components.HeatExchangers;
 model RadiatorMultiLayer "Simple radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
@@ -145,9 +145,7 @@ public
                            ConvectiveHeat
     annotation (Placement(transformation(extent={{-64,48},{-44,68}}),
         iconTransformation(extent={{-64,48},{-44,68}})));
-  AixLib.Utilities.Interfaces.Star RadiativeHeat annotation (Placement(
-        transformation(extent={{46,50},{66,70}}), iconTransformation(extent={{
-            46,50},{66,70}})));
+  AixLib.Utilities.Interfaces.RadPort RadiativeHeat annotation (Placement(transformation(extent={{46,50},{66,70}}), iconTransformation(extent={{46,50},{66,70}})));
   Interfaces.EnthalpyPort_b enthalpyPort_b1 "radiator_Out" annotation (
       Placement(transformation(extent={{70,-12},{90,8}}), iconTransformation(
           extent={{70,-12},{90,8}})));

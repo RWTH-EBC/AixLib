@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
+within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
 model CHP
  extends Modelica.Icons.Example;
   FastHVAC.Components.Pumps.FluidSource fluidSource

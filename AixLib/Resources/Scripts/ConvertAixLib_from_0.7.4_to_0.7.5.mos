@@ -1,0 +1,17 @@
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "MAIN_FLOW", "mainFlow");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "MAIN_RETURN", "mainReturn");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_1", "returnPorts[1]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_1", "flowPorts[1]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_2", "returnPorts[2]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_2", "flowPorts[2]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_3", "returnPorts[3]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_3", "flowPorts[3]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_4", "returnPorts[4]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_4", "flowPorts[4]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_5", "returnPorts[5]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_5", "flowPorts[5]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Return_6", "returnPorts[6]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "Flow_6", "flowPorts[6]");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "volume", "vol_flow");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", "volume1", "vol_return");
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.Distributor", {""}, {"n=6"});
