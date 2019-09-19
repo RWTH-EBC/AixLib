@@ -17,8 +17,8 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
   parameter Real ReC=4000
     "Reynolds number where transition to turbulent starts";
 
-  parameter Modelica.SIunits.Height R_a=2.5e-5
-    "Roughness: Average height of surface asperities (default: smooth steel pipe)"
+  parameter Modelica.SIunits.Height roughness=2.5e-5
+    "Average height of surface asperities (default: smooth steel pipe)"
     annotation (Dialog(group="Material"));
 
   parameter Modelica.SIunits.Length length "Pipe length"
@@ -47,7 +47,7 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
     "Density of pipe wall material. 930 for PE, 8000 for steel"
     annotation (Dialog(group="Material"));
 
-  parameter Modelica.SIunits.Length dPip = 0.0035
+  parameter Modelica.SIunits.Length thickness = 0.0035
     "Pipe wall thickness"
     annotation (Dialog(group="Material"));
 
@@ -57,7 +57,7 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
   parameter Modelica.SIunits.Temperature T_start_out(start=Medium.T_default)=
     T_start_in "Initialization temperature at pipe outlet"
     annotation (Dialog(tab="Initialization"));
-  parameter Boolean iniDel(start=false) = false
+  parameter Boolean initDelay(start=false) = false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
     annotation (Dialog(tab="Initialization"));
   parameter Modelica.SIunits.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe"
@@ -71,10 +71,10 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
   parameter Real fac=1
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
 
-  parameter Boolean homIni = true "= true, use homotopy method"
+  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
-  parameter Boolean lin = false
+  parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
@@ -94,15 +94,15 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
     final T_start_in=T_start_in,
     final T_start_out=T_start_out,
     final m_flow_start=m_flow_start,
-    final iniDel=iniDel,
+    final initDelay=initDelay,
     final from_dp=from_dp,
     final fac=fac,
     final ReC=ReC,
-    final dPip=dPip,
-    final R_a=R_a,
+    final thickness=thickness,
+    final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
-    final homIni=homIni,
-    final lin=lin)
+    final homotopyInitialization=homotopyInitialization,
+    final linearized=linearized)
     "Describing the pipe behavior"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -125,7 +125,7 @@ model StaticPipe "Pipe model using spatialDistribution for temperature delay"
 
 protected
   parameter Modelica.SIunits.HeatCapacity CPip=
-    length*((dh + 2*dPip)^2 - dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
+    length*((dh + 2*thickness)^2 - dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
 
   final parameter Modelica.SIunits.Volume VEqu=CPip/(rho_default*cp_default)
     "Equivalent water volume to represent pipe wall thermal inertia";

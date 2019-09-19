@@ -128,17 +128,16 @@ model PlugFlowPipeEmbedded
     annotation (Placement(transformation(extent={{-10,94},{10,114}}),
         iconTransformation(extent={{-10,94},{10,114}})));
 
-  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer(
-  final rho = rho,
-  final c = c,
-  final d_in = dh + 2 * thickness,
-  final d_out = d_in + thickness_ground / 3,
-  final length = length,
-  final lambda = lambda,
-    T0=283.15)
-    annotation (Placement(transformation(extent={{-10,20},{10,40}})));
-
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_1(
+    final rho=rho,
+    final c=c,
+    final d_in=dh + 2*thickness,
+    final d_out=d_in + thickness_ground/3,
+    final length=length,
+    final lambda=lambda,
+    T0=283.15) annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_2(
     final rho=rho,
     final c=c,
     final d_in=dh + 2*thickness + thickness_ground/3,
@@ -146,7 +145,7 @@ model PlugFlowPipeEmbedded
     final length=length,
     final lambda=lambda,
     T0=283.15) annotation (Placement(transformation(extent={{-10,46},{10,66}})));
-  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_2(
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_3(
     final rho=rho,
     final c=c,
     final d_in=dh + 2*thickness + 2*thickness_ground/3,
@@ -186,13 +185,13 @@ equation
  //calculation of the flow velocity of water in the pipes
  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
-  connect(plugFlowPipe.heatPort, cylindricHeatTransfer.port_a)
+  connect(plugFlowPipe.heatPort, cylindricHeatTransfer_1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0}));
-  connect(cylindricHeatTransfer.port_b, cylindricHeatTransfer_1.port_a)
-    annotation (Line(points={{0,38.8},{0,56}}, color={191,0,0}));
   connect(cylindricHeatTransfer_1.port_b, cylindricHeatTransfer_2.port_a)
+    annotation (Line(points={{0,38.8},{0,56}}, color={191,0,0}));
+  connect(cylindricHeatTransfer_2.port_b,cylindricHeatTransfer_3. port_a)
     annotation (Line(points={{0,64.8},{0,82}}, color={191,0,0}));
-  connect(cylindricHeatTransfer_2.port_b, heatPort)
+  connect(cylindricHeatTransfer_3.port_b, heatPort)
     annotation (Line(points={{0,90.8},{0,104}}, color={191,0,0}));
   connect(port_a, plugFlowPipe.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));

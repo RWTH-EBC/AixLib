@@ -208,42 +208,17 @@ September, 2015 by Marcus Fuchs:<br/>First implementation.
 </li>
 </ul>
 </html>", info="<html>
-<p>
-Pipe with heat loss using the time delay based heat losses and plug flow
-for the transport delay of the fluid.
-</p>
+<p>Pipe with heat loss using the time delay based heat losses and plug flow for the transport delay of the fluid. </p>
 <h4>Implementation</h4>
-<p>
-The
-<code>spatialDistribution</code> operator is used for the temperature wave propagation
-through the length of the pipe. This operator is contained in 
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">BaseClasses.PlugFlow</a>.
-</p>
-<p>
-This model does not include thermal inertia of the pipe wall.
-The wall inertia is implemented in
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">PlugFlowPipe</a>, which uses this model.
-<br/>
-The removal of the thermal inertia with a mixing volume can be desirable in the 
-case where mixing volumes are added manually at the pipe junctions. 
-</p>
-<p>
-The model
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
-PlugFlowHeatLoss</a>
-implements a heat loss in design direction, but leaves the enthalpy unchanged
-in opposite flow direction. Therefore it is used in front of and behind the time delay.
-</p>
+<p>This model is based on <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">FixedResistances.BaseClasses.PlugFlowCore</a> but does not contain the <span style=\"font-family: Courier New;\">spatialDistribution</span> operator.</p>
+<p>The <span style=\"font-family: Courier New;\">spatialDistribution</span> operator is used for the temperature wave propagation through the length of the pipe. This operator is contained in <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">BaseClasses.PlugFlow</a>. </p>
+<p>This model does not include thermal inertia of the pipe wall. The wall inertia is implemented in <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">PlugFlowPipe</a>, which uses this model. </p>
+<p>The removal of the thermal inertia with a mixing volume can be desirable in the case where mixing volumes are added manually at the pipe junctions. </p>
+<p>The model <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">PlugFlowHeatLoss</a> implements a heat loss in design direction, but leaves the enthalpy unchanged in opposite flow direction. Therefore it is used in front of and behind the time delay. </p>
 <h4>References</h4>
-<p>
-Full details on the model implementation and experimental validation can be found
-in:
-</p>
-<p>
-van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K., Basciotti, D., M&uuml;ller, 
-D., Nytsch-Geusen, C., Wetter, M. and Helsen, L. (2017).<br/>
-Dynamic equation-based thermo-hydraulic pipe model for district heating and cooling systems.<br/>
-<i>Energy Conversion and Management</i>, vol. 151, p. 158-169. 
-<a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi: 10.1016/j.enconman.2017.08.072</a>.</p>
+<p>Full details on the model implementation and experimental validation can be found in: </p>
+<p>van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K., Basciotti, D., M&uuml;ller, D., Nytsch-Geusen, C., Wetter, M. and Helsen, L. (2017).</p>
+<p>Dynamic equation-based thermo-hydraulic pipe model for district heating and cooling systems.</p>
+<p><i>Energy Conversion and Management</i>, vol. 151, p. 158-169. <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi: 10.1016/j.enconman.2017.08.072</a>.</p>
 </html>"));
 end CoreStatic;
