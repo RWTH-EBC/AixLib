@@ -5,8 +5,9 @@ model UPipeElement
 
   /// Model parameters ///
     // General
-  parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
+    parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
+    parameter Integer n     "Number of discretizations in axial direction" annotation(Dialog(group="General"));
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Standard  charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
@@ -36,6 +37,7 @@ model UPipeElement
   Pipes.DynamicPipeAggregated dynamicPipeAggregated(
     medium=medium,
     T_0=T_start,
+    nNodes=n,
     nParallel=nParallel,
     length=length,
     diameter=pipeType.d_i,
@@ -53,6 +55,7 @@ model UPipeElement
   Pipes.DynamicPipeAggregated dynamicPipeAggregated1(
     medium=medium,
     T_0=T_start,
+    nNodes=n,
     nParallel=nParallel,
     each length=length,
     each diameter=pipeType.d_i,
