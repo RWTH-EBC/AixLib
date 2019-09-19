@@ -475,6 +475,8 @@ revisions="<html>
   Added conditional statements to solar radiation part.<br/>
   Deleted conditional statements of
   <code>splitFactor</code> and <code>splitFactorSolRad</code>.
+  </li>
+  </ul>
 </html>",
 revisions="<html><ul>
   <li>January 25, 2019, by Michael Wetter:<br/>

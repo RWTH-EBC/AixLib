@@ -39,7 +39,7 @@ equation
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Model for moisture output depending on temperature according to SIA 2024. This model calculates the moisture output depending on the room temperature. </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>This model uses the <a href=\"AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses.TemperatureDependentHeatOutput_SIA2024\">TemperatureDependenHeatOutput_SIA2024</a> to calculate the heat output </i>q<sub>Person</sub></i> of a person depending on the temperature. </p>
+<p>This model uses the <a href=\"AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses.TemperatureDependentHeatOutput_SIA2024\">TemperatureDependenHeatOutput_SIA2024</a> to calculate the heat output <i>q<sub>Person</sub></i> of a person depending on the temperature. </p>
 <p>The heat output is used to calculate the corresponding moisture output of a person. </p>
 <p>An activity degree <i>M</i> (in met) can be set to consider different types of acitivty of the person.</p>
 <p>The moisture output <i>m</i> is calculated by the following equation[1]:</p>
