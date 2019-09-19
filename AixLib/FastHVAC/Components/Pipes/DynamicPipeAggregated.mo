@@ -4,14 +4,14 @@ model DynamicPipeAggregated "DynamicPipe with heat loss to ambient"
   /* *******************************************************************
       Medium
      ******************************************************************* */
-parameter Boolean selectable=true "Pipe record";
+    parameter Boolean selectable=true "Pipe record";
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
 
 protected
-    parameter Modelica.SIunits.Volume  V_fluid= Modelica.Constants.pi*length*innerDiameter*innerDiameter/4;
+    parameter Modelica.SIunits.Volume  V_fluid= Modelica.Constants.pi*length*nParallel*innerDiameter*innerDiameter/4;
     parameter Modelica.SIunits.Diameter innerDiameter=(if selectable then parameterPipe.d_i else diameter)
     "Inner diameter of  pipe";
     parameter Modelica.SIunits.Diameter outerDiameter=(if selectable then parameterPipe.d_o else innerDiameter+2*s_pipeWall)
@@ -33,6 +33,8 @@ public
 
     parameter Integer nNodes(min=3)=3 "Number of discrete flow volumes";
 
+    parameter Real nParallel = 1 "Number of identical parallel pipes"
+    annotation(Dialog(group = "Geometry"));
     parameter Modelica.SIunits.Length length=1 "Length of pipe"
        annotation(Dialog(group = "Geometry"));
     parameter Modelica.SIunits.Diameter diameter= 0.01
@@ -55,25 +57,29 @@ public
     annotation (Dialog(enable=selectable), choicesAllMatching=true);
     parameter Boolean withInsulation = true
     "Option to add insulation of the pipe";
-    parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition
-                                                   parameterIso=
-                 AixLib.DataBase.Pipes.Insulation.Iso100pc() "Type of Insulation"
-                   annotation (choicesAllMatching=true, Dialog( enable = withInsulation));
+    parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
+    AixLib.DataBase.Pipes.Insulation.Iso100pc() "Type of Insulation"
+    annotation (choicesAllMatching=true, Dialog( enable = withInsulation));
     parameter Boolean withConvection = false
     "= true to internally simulate heat loss to ambient by convection ";
 
-        parameter Boolean withRadiation=false
-    "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = withConvection));
+    parameter Boolean withRadiation=false
+    "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)"
+    annotation (Dialog( enable = withConvection));
 
-final parameter          Boolean withRadiationParam=if not withConvection then false else withRadiation
-    "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = false));
- parameter   Modelica.SIunits.CoefficientOfHeatTransfer                                      alphaOutside=8
-    "Heat transfer coefficient to ambient"                      annotation (Dialog( enable = withConvection));
- parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
- annotation (Dialog( enable = withRadiation));
-         parameter Boolean calculateAlpha = true "Use calculated value for inside heat coefficient";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix = 30 "Fix value for heat transfer coeffiecient inside pipe" annotation(Dialog(enable = not calculateAlpha));
-    final parameter Modelica.SIunits.Area AOutside = if not withInsulation then Modelica.Constants.pi*outerDiameter*length else Modelica.Constants.pi*(outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
+    final parameter Boolean withRadiationParam=if not withConvection then false else withRadiation
+    "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)"
+    annotation (Dialog( enable = false));
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=8 "Heat transfer coefficient to ambient"
+    annotation (Dialog( enable=withConvection));
+    parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
+    annotation (Dialog( enable = withRadiation));
+    parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"
+    annotation(Dialog(enable=not
+          calcHCon));
+    final parameter Modelica.SIunits.Area AOutside = if not withInsulation then Modelica.Constants.pi*outerDiameter*length
+    else Modelica.Constants.pi*(outerDiameter*parameterIso.factor*2 + outerDiameter)*length;
 
   /* *******************************************************************
       Components
@@ -87,7 +93,7 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     length=fill(length/nNodes, nNodes),
     lambda=fill(lambda, nNodes),
     T0=fill(T_0, nNodes))
-            annotation (Placement(transformation(extent={{-10,-36},{10,-16}})));
+  annotation (Placement(transformation(extent={{-10,-36},{10,-16}})));
 
   Utilities.HeatTransfer.CylindricHeatTransfer insulation[nNodes](
     rho=fill(parameterIso.d, nNodes),
@@ -97,10 +103,10 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
     length=fill(length/nNodes, nNodes),
     lambda=fill(parameterIso.lambda, nNodes),
     T0=fill(T_0, nNodes)) if
-               withInsulation
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
-        annotation (Placement(transformation(extent={{46,82},{66,102}}),
+       withInsulation
+  annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside
+  annotation (Placement(transformation(extent={{46,82},{66,102}}),
         iconTransformation(extent={{46,82},{66,102}})));
 
   FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1 annotation (Placement(
@@ -110,49 +116,46 @@ final parameter          Boolean withRadiationParam=if not withConvection then f
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.Star star if withRadiationParam
-    annotation (Placement(transformation(extent={{-70,86},{-50,106}}),
-        iconTransformation(extent={{-70,86},{-50,106}})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](alpha=fill(
-        alphaOutside, nNodes), A=AOutside/nNodes) if
-                                  withConvection "Convection from pipe wall"
-    annotation (Placement(transformation(
+  AixLib.Utilities.Interfaces.RadPort star if
+                                           withRadiationParam annotation (Placement(transformation(extent={{-70,86},{-50,106}}), iconTransformation(extent={{-70,86},{-50,106}})));
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hConOut, nNodes), A=AOutside/nNodes) if withConvection
+    "Convection from pipe wall"
+  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={58,28})));
   AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](   eps=fill(
-        eps, nNodes), A=AOutside/nNodes) if
-                                  withRadiationParam annotation (Placement(
+        eps, nNodes), A=AOutside/nNodes) if withRadiationParam
+  annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-58,30})));
   FastHVAC.Components.Pipes.BaseClasses.PipeBase pipeBase(
     medium=medium,
+    nParallel=nParallel,
     parameterPipe=parameterPipe,
     T_0=T_0,
     nNodes=nNodes,
     length=length,
-    alphaInsideFix=alphaInsideFix,
-    calculateAlpha=calculateAlpha)
-    annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
+    hConIn_const=hConIn_const,
+    calcHCon=calcHCon) annotation (Placement(transformation(extent={{-20,-78},{20,-38}})));
 protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{36,44},{76,52}}),
         iconTransformation(extent={{-46,20},{40,38}})));
 public
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=nNodes)
-                annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={56,70})));
 protected
-  Modelica.Fluid.Interfaces.HeatPorts_a heatPorts1
-                                                 [nNodes] if withRadiationParam
+  Modelica.Fluid.Interfaces.HeatPorts_a heatPorts1[nNodes] if withRadiationParam
     annotation (Placement(transformation(extent={{-76,44},{-36,52}}),
         iconTransformation(extent={{-46,20},{40,38}})));
 public
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes) if
-    withRadiationParam                                                        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes) if withRadiationParam
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-60,68})));
 equation
