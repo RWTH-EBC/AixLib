@@ -153,9 +153,9 @@ protected
     "Intermediate temperature";
   parameter Modelica.SIunits.Efficiency eta_nom=BoilerType.eta_nom/100
     "Nominal net heating value efficiency";
-  parameter Modelica.SIunits.Efficiency eta_int=BoilerType.eta_int/100
+  parameter Modelica.SIunits.Efficiency eta_part=BoilerType.eta_part/100
     "Intermediate net heating value efficiency";
-  parameter Real PCSIa=BoilerType.PCSI
+  parameter Real eta_max=1.11
     "Ratio gross (high) heating value / net (low) heating value defined according to the fuel";
   parameter Modelica.SIunits.Power P_nom=BoilerType.P_nom "Nominal power";
   parameter SI.VolumeFlowRate V_flow=BoilerType.V_flow
@@ -180,9 +180,7 @@ algorithm
   //Determination of the efficiency for the law without condensation
   etaSens := eta_nom + ak*(senTCold.T - T_nom);
   //Determination of the efficiency for the law characterizing the condensation
-  etaCond30 := eta_int + (PCSIa - eta_int)*(1 - Psat(senTCold.T)/Psat(T_int)*T_int/senTCold.T);
-  etaCond := etaCond30 - PLR_delta*(Tc - senTCold.T)/(Tc - T_int)*(boilerBus.PLR -
-    PLR_int)/(PLR_nom - PLR_int);
+  etaCond := eta_part + (eta_max - eta_part)*(1 - Psat(senTCold.T)/Psat(T_int)*T_int/senTCold.T);
   //Determination of the efficiency in steady state
   sigmaCond := 1/(1 + exp(senTCold.T - Tc - lambda));
   sigmaSens := 1 - 1/(1 + exp(senTCold.T - Tc + lambda));
@@ -193,7 +191,7 @@ algorithm
   end if;
 
 equation
-  eta_nom + ak*(Tc - T_nom) = eta_int + (PCSIa - eta_int)*(1 - Psat(Tc)/Psat(T_int)*
+  eta_nom + ak*(Tc - T_nom) = eta_part + (eta_max - eta_part)*(1 - Psat(Tc)/Psat(T_int)*
     T_int/Tc);
 
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,

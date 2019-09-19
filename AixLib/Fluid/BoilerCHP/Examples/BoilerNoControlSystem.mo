@@ -8,8 +8,8 @@ model BoilerNoControlSystem
   Modelica.Fluid.Sources.MassFlowSource_T source(
     use_m_flow_in=false,
     redeclare package Medium = Medium,
-    m_flow=0.05,
-    T=293.15,
+    m_flow=0.1,
+    T=313.15,
     nPorts=1)
     "Source"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));

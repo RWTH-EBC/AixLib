@@ -29,17 +29,17 @@ model BoilerNoControl "Boiler model with physics only"
         rotation=180,
         origin={-30,-20})));
   Modelica.Blocks.Math.Product QgasCalculation
-    annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
+    annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0)
-    annotation (Placement(transformation(extent={{-74,54},{-62,66}})));
+    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
         eta_nom)
     "etaRP is calculated in the algorithm section"
-    annotation (Placement(transformation(extent={{-76,78},{-48,94}})));
+    annotation (Placement(transformation(extent={{-62,88},{-34,104}})));
   Modelica.Blocks.Interfaces.RealOutput fuelPower
     "Connector of Real output signal" annotation (Placement(transformation(
-          extent={{100,90},{120,110}}), iconTransformation(extent={{-10,-10},{
-            10,10}},
+          extent={{100,90},{120,110}}), iconTransformation(extent={{-10,-10},{10,
+            10}},
         rotation=0,
         origin={72,110})));
   Modelica.Blocks.Interfaces.RealOutput thermalPower "Value of Real output"
@@ -57,64 +57,84 @@ model BoilerNoControl "Boiler model with physics only"
       Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation(
           extent={{58,-60},{78,-40}})));
 
-  Modelica.Blocks.Tables.CombiTable1D efficiencyTable(
+  Modelica.Blocks.Tables.CombiTable1D efficiencyTableLoadDepending(
     final tableOnFile=false,
-    final table=paramBoiler.eta,
+    final table=etaLoadBased,
     final columns={2},
-    final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Table with efficiency parameters"
-    annotation (Placement(transformation(extent={{-40,40},{-19,61}})));
+    annotation (Placement(transformation(extent={{-40,50},{-19,71}})));
   Modelica.Blocks.Math.Product QflowCalculation annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-60,10})));
+        origin={-60,2})));
 
   parameter Real a=paramBoiler.pressureDrop
     "Coefficient for quadratic pressure drop term";
   Modelica.Blocks.Interfaces.RealOutput T_out
     "Temperature of the passing fluid" annotation (Placement(transformation(
-          extent={{100,50},{120,70}}), iconTransformation(extent={{62,22},{82,
-            42}})));
+          extent={{100,50},{120,70}}), iconTransformation(extent={{62,22},{82,42}})));
   Modelica.Blocks.Interfaces.RealOutput T_in "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{62,48},{82,68}})));
+  parameter Real etaLoadBased[:,2]=paramBoiler.eta
+    "Table matrix (grid = first column; e.g., table=[0, 0; 1, 1; 2, 4])";
+  parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99] "Table matrix (grid = first column; e.g., table=[0, 0; 1, 1; 2, 4])";
+  Modelica.Blocks.Math.Product eta annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={10,50})));
+  Modelica.Blocks.Tables.CombiTable1D efficiencyTableLoadDepending1(
+    final tableOnFile=false,
+    final table=etaTempBased,
+    final columns={2},
+    final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
+    "Table with efficiency parameters"
+    annotation (Placement(transformation(extent={{-40,20},{-19,41}})));
 equation
   connect(vol.heatPort, ConductanceToEnv.port_a)
     annotation (Line(points={{-50,-70},{-50,-20},{-40,-20}}, color={191,0,0}));
   connect(vol.heatPort, internalCapacity.port)
     annotation (Line(points={{-50,-70},{-50,-40},{-8,-40}}, color={191,0,0}));
-  connect(QgasCalculation.y, fuelPower) annotation (Line(points={{-19,80},{-18,80},
-          {-18,100},{110,100}}, color={0,0,127}));
+  connect(QgasCalculation.y, fuelPower) annotation (Line(points={{1,90},{8,90},{
+          8,100},{110,100}},    color={0,0,127}));
   connect(limiter.u, u_rel)
-    annotation (Line(points={{-75.2,60},{-80,60},{-80,120}}, color={0,0,127}));
+    annotation (Line(points={{-82,70},{-82,96},{-80,96},{-80,120}},
+                                                             color={0,0,127}));
   connect(ConductanceToEnv.port_b, T_amb)
     annotation (Line(points={{-20,-20},{40,-20}}, color={191,0,0}));
   connect(QgasCalculation.u1, NominalGasConsumption.y)
-    annotation (Line(points={{-42,86},{-46.6,86}}, color={0,0,127}));
-  connect(limiter.y, QgasCalculation.u2) annotation (Line(points={{-61.4,60},{-50,
-          60},{-50,74},{-42,74}}, color={0,0,127}));
-  connect(limiter.y, efficiencyTable.u[1]) annotation (Line(points={{-61.4,60},{
-          -50,60},{-50,50.5},{-42.1,50.5}}, color={0,0,127}));
+    annotation (Line(points={{-22,96},{-32.6,96}}, color={0,0,127}));
+  connect(limiter.y, QgasCalculation.u2) annotation (Line(points={{-59,70},{-50,
+          70},{-50,84},{-22,84}}, color={0,0,127}));
+  connect(limiter.y, efficiencyTableLoadDepending.u[1]) annotation (Line(points=
+         {{-59,70},{-50,70},{-50,60.5},{-42.1,60.5}}, color={0,0,127}));
   connect(QflowCalculation.y, heater.Q_flow)
-    annotation (Line(points={{-60,-1},{-60,-40}}, color={0,0,127}));
-  connect(QflowCalculation.y, thermalPower) annotation (Line(points={{-60,-1},{-18,
-          -1},{-18,0},{24,0},{24,80},{110,80}},color={0,0,127}));
-  connect(QgasCalculation.y, QflowCalculation.u2) annotation (Line(points={{-19,
-          80},{-18,80},{-18,134},{-100,134},{-100,22},{-66,22}}, color={0,0,127}));
-  connect(efficiencyTable.y[1], QflowCalculation.u1) annotation (Line(points={{-17.95,
-          50.5},{-8,50.5},{-8,22},{-54,22}}, color={0,0,127}));
+    annotation (Line(points={{-60,-9},{-60,-40}}, color={0,0,127}));
+  connect(QflowCalculation.y, thermalPower) annotation (Line(points={{-60,-9},{-18,
+          -9},{-18,0},{24,0},{24,80},{110,80}},color={0,0,127}));
+  connect(QgasCalculation.y, QflowCalculation.u2) annotation (Line(points={{1,90},{
+          8,90},{8,132},{-96,132},{-96,14},{-66,14}},            color={0,0,127}));
   connect(senTHot.T, T_out) annotation (Line(points={{40,-69},{52,-69},{52,-56},
           {60,-56},{60,60},{110,60}}, color={0,0,127}));
   connect(senTCold.T, T_in) annotation (Line(points={{-70,-69},{-70,-102},{110,-102},
           {110,40}}, color={0,0,127}));
   connect(port_b, port_b)
     annotation (Line(points={{100,0},{100,0}}, color={0,127,255}));
+  connect(efficiencyTableLoadDepending.y[1], eta.u1) annotation (Line(points={{-17.95,
+          60.5},{-10.975,60.5},{-10.975,56},{-2,56}}, color={0,0,127}));
+  connect(efficiencyTableLoadDepending1.y[1], eta.u2) annotation (Line(points={{
+          -17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,0,127}));
+  connect(senTCold.T, efficiencyTableLoadDepending1.u[1]) annotation (Line(
+        points={{-70,-69},{-72,-69},{-72,30.5},{-42.1,30.5}}, color={0,0,127}));
+  connect(QflowCalculation.u1, eta.y)
+    annotation (Line(points={{-54,14},{21,14},{21,50}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
-          points={{-32,-50},{-36,-38},{-28,-22},{-20,-32},{-22,-46},{-24,-50},{
-              -24,-50},{-24,-50},{-32,-50}},
+          points={{-32,-50},{-36,-38},{-28,-22},{-20,-32},{-22,-46},{-24,-50},{-24,
+              -50},{-24,-50},{-32,-50}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
           fillColor={255,127,0}),
@@ -129,8 +149,8 @@ equation
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={192,192,192}),
         Polygon(
-          points={{-4,-50},{-8,-38},{0,-22},{8,-32},{6,-46},{4,-50},{4,-50},{4,
-              -50},{-4,-50}},
+          points={{-4,-50},{-8,-38},{0,-22},{8,-32},{6,-46},{4,-50},{4,-50},{4,-50},
+              {-4,-50}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
           fillColor={255,127,0}),
@@ -156,8 +176,8 @@ equation
           thickness=0.5,
           pattern=LinePattern.Dot),
         Line(
-          points={{-90,0},{-38,0},{-38,-12},{36,-12},{36,2},{-30,2},{-30,16},{
-              36,16},{36,32},{-30,32},{-30,48},{50,48},{50,0},{90,0}},
+          points={{-90,0},{-38,0},{-38,-12},{36,-12},{36,2},{-30,2},{-30,16},{36,
+              16},{36,32},{-30,32},{-30,48},{50,48},{50,0},{90,0}},
           color={28,108,200},
           thickness=1)}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
