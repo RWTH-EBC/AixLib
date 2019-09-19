@@ -69,13 +69,13 @@ public
     final parameter Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)"
     annotation (Dialog( enable = false));
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=8 "Heat transfer coefficient to ambient"
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaOutside=8 "Heat transfer coefficient to ambient"
     annotation (Dialog( enable=withConvection));
     parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
     annotation (Dialog( enable = withRadiation));
-    parameter Boolean calcHCon=true "Use calculated value for inside heat transfer coefficient";
-    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"       annotation(Dialog(enable=not
-          calcHCon));
+    parameter Boolean calculateAlpha=true "Use calculated value for inside heat transfer coefficient";
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInsideFix=30 "Fix value for heat transfer coeffiecient inside pipe"       annotation(Dialog(enable=not
+          calculateAlpha));
 
   /* *******************************************************************
       Components
@@ -115,9 +115,9 @@ public
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  AixLib.Utilities.Interfaces.RadPort star if withRadiationParam
+  AixLib.Utilities.Interfaces.Star star if withRadiationParam
     annotation (Placement(transformation(extent={{78,42},{98,62}}), iconTransformation(extent={{78,42},{98,62}})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv(hCon=hConOut, A=Modelica.Constants.pi*outerDiameter*length) if withConvection
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv(alpha=alphaOutside, A=Modelica.Constants.pi*outerDiameter*length) if withConvection
     "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -136,8 +136,8 @@ public
     T_0=T_0,
     nNodes=nNodes,
     length=length,
-    hConIn_const=hConIn_const,
-    calcHCon=calcHCon)
+    alphaInsideFix=alphaInsideFix,
+    calculateAlpha=calculateAlpha)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 equation
    //Connect the heat ports from the pipe to the pipe wall
@@ -209,7 +209,8 @@ equation
 
   connect(twoStar_RadEx.Star, star) annotation (Line(points={{55.1,52},{88,52}}, color={95,95,95}));
      annotation (choicesAllMatching,
-              Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              Diagram(graphics,
+                      coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                       graphics={
