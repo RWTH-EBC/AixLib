@@ -17,7 +17,7 @@ equation
 <p>The heat ouput per person can be set and is multiplied with the number of persons in the room.</p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
 <p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero.For this reason a limitiation for the surface has been intoduced: as a minimum the surface area of one human and as a maximum a value of 1e+23 m2 (only needed for a complete parametrization of the model). </p>
-<p><b>The temperature of the heatPort is not used in this model<b></p>
+<p><b>The temperature of the heatPort is not used in this model</b></p>
 </html><html>
 </html>", revisions="<html>
  <ul>

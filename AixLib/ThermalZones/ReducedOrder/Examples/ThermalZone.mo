@@ -9,7 +9,8 @@ model ThermalZone "Illustrates the use of ThermalZone"
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
-    T_start=293.15)
+    T_start=293.15,
+    internalGainsMode=1)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

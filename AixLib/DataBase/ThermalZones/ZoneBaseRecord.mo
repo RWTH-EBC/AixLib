@@ -14,7 +14,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Areas of windows by orientations";
   parameter Modelica.SIunits.Area ATransparent[nOrientations]
     "Areas of transparent (solar radiation transmittend) elements by orientations";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWin "Convective coefficient of heat transfer of windows (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWin "Convective coefficient of heat transfer of windows (indoor)";
   parameter Modelica.SIunits.ThermalResistance RWin "Resistor for windows";
   parameter Modelica.SIunits.TransmissionCoefficient gWin
     "Total energy transmittance of windows";
@@ -23,24 +23,24 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real ratioWinConRad
     "Ratio for windows between convective and radiative heat emission";
   parameter Modelica.SIunits.Area AExt[nOrientations] "Areas of exterior walls by orientations";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvExt "Convective coefficient of heat transfer for exterior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Convective coefficient of heat transfer for exterior walls (indoor)";
   parameter Integer nExt(min=1) "Number of RC-elements of exterior walls";
   parameter Modelica.SIunits.ThermalResistance RExt[nExt] "Resistances of exterior walls, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RExtRem "Resistance of remaining resistor RExtRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CExt[nExt] "Heat capacities of exterior walls, from inside to outside";
   parameter Modelica.SIunits.Area AInt "Area of interior walls";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInt "Convective coefficient of heat transfer of interior walls (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConInt "Convective coefficient of heat transfer of interior walls (indoor)";
   parameter Integer nInt(min=1) "Number of RC-elements of interior walls";
   parameter Modelica.SIunits.ThermalResistance RInt[nInt] "Resistances of interior wall, from port to center";
   parameter Modelica.SIunits.HeatCapacity CInt[nInt] "Heat capacities of interior walls, from port to center";
   parameter Modelica.SIunits.Area AFloor "Area of floor plate";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvFloor "Convective coefficient of heat transfer of floor plate (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConFloor "Convective coefficient of heat transfer of floor plate (indoor)";
   parameter Integer nFloor(min=1) "Number of RC-elements of floor plate";
   parameter Modelica.SIunits.ThermalResistance RFloor[nFloor] "Resistances of floor plate, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RFloorRem "Resistance of remaining resistor RFloorRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CFloor[nFloor] "Heat capacities of floor plate, from inside to outside";
   parameter Modelica.SIunits.Area ARoof "Area of roof";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoof "Convective coefficient of heat transfer of roof (indoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoof "Convective coefficient of heat transfer of roof (indoor)";
   parameter Integer nRoof(min=1) "Number of RC-elements of roof";
   parameter Modelica.SIunits.ThermalResistance RRoof[nRoof] "Resistances of roof, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RRoofRem "Resistance of remaining resistor RRoofRem between capacity n and outside";
@@ -54,11 +54,10 @@ record ZoneBaseRecord "Base record definition for zone records"
 
   parameter Modelica.SIunits.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
   parameter Modelica.SIunits.Temperature TSoil "Temperature of soil";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRadWall
-    "Coefficient of heat transfer for linearized radiation for exterior walls";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWinOut "Windows' convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoofOut "Roof's convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWallOut "Exterior walls convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hRadWall "Coefficient of heat transfer for linearized radiation for exterior walls";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWinOut "Windows' convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoofOut "Roof's convective coefficient of heat transfer (outdoor)";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hRadRoof "Coefficient of heat transfer for linearized radiation for roof";
   parameter Modelica.SIunits.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
   parameter Modelica.SIunits.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
@@ -70,8 +69,6 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Weight factor of the ground";
   parameter Real specificPeople "people per squaremeter";
   parameter Real activityDegree "acitivity degree of people in met";
-  parameter Integer internalGainsMode "mode to select the way of calculate the 
-    internal gains by human";
   parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
     "Area specific heatflowrate by persons in case of temperature independent 
     calculation";

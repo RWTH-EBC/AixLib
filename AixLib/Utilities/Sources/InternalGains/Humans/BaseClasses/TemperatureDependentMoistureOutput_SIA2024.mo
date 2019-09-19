@@ -2,7 +2,7 @@
 model TemperatureDependentMoistureOutput_SIA2024
   "Model for temperature dependent moisture output based on formulas of SIA 2024"
 
-  parameter Real ActivityDegree = 1.0 "activity degree of persons in room in met";
+  parameter Real activityDegree=1.0 "activity degree of persons in room in met";
 
   Modelica.Blocks.Interfaces.RealInput Temperature
     "room temperature used for heat output calculation"
@@ -20,7 +20,7 @@ protected
   constant Real moistGain(unit="g/h") = 10/7 "gain for moisture output";
 equation
 
-  moistOutput = max(0,moistGain*((ActivityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));
+  moistOutput = max(0,moistGain*((activityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));
 
   connect(Temperature, temperatureDependentHeatOutput_SIA2024.Temperature)
     annotation (Line(points={{-120,0},{-86,0},{-86,42},{-75,42}}, color={0,0,127}));
@@ -39,7 +39,7 @@ equation
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Model for moisture output depending on temperature according to SIA 2024. This model calculates the moisture output depending on the room temperature. </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>This model uses the <a href=\"AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses.TemperatureDependentHeatOutput_SIA2024\">TemperatureDependenHeatOutput_SIA2024</a> to calculate the heat output </i>q<sub>Person</sub></i> of a person depending on the temperature. </p>
+<p>This model uses the <a href=\"AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses.TemperatureDependentHeatOutput_SIA2024\">TemperatureDependenHeatOutput_SIA2024</a> to calculate the heat output <i>q<sub>Person</sub></i> of a person depending on the temperature. </p>
 <p>The heat output is used to calculate the corresponding moisture output of a person. </p>
 <p>An activity degree <i>M</i> (in met) can be set to consider different types of acitivty of the person.</p>
 <p>The moisture output <i>m</i> is calculated by the following equation[1]:</p>

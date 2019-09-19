@@ -19,12 +19,14 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   replaceable model thermalZone =
       AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
-    constrainedby AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
     "Thermal zone model"
     annotation(choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
@@ -68,6 +70,7 @@ partial model PartialMultizone "Partial model for multizone models"
   thermalZone zone[numZones](
     final zoneParam=zoneParam,
     redeclare each final model corG=corG,
+    each final internalGainsMode=internalGainsMode,
     each final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -82,6 +85,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(transformation(extent={{38,49},{
     80,90}})));
 
+  parameter Integer internalGainsMode
+    "decides which internal gains model for persons is used";
 equation
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(

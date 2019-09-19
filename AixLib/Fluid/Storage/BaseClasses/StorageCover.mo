@@ -11,8 +11,8 @@ model StorageCover "Sandwich wall construction for heat storage cover"
     "Thermal Conductivity of wall";
     parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
     "Thermal Conductivity of insulation";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInside=2 "Coefficient of Heat Transfer water <-> wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOutside=2 "Coefficient of Heat Transfer insulation <-> air";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Heat transfer coefficientr water <-> wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Heat transfer coefficientr insulation <-> air";
   parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K";
   parameter Modelica.SIunits.Temperature TStartIns=293.15
@@ -40,9 +40,8 @@ model StorageCover "Sandwich wall construction for heat storage cover"
         AWall)*(lambdaIns)/(sIns/2))
         "Heat conduction through second insulation layer" annotation (Placement(
         transformation(extent={{38,0},{58,20}}, rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatConv convOutside(hConv=hConvOutside, A=
-        AWall)
-        "Outside heat convection" annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(hCon=hConOut, A=AWall) "Outside heat convection"
+    annotation (Placement(transformation(
         origin={72,8},
         extent={{-10,-10},{10,10}},
         rotation=180)));
@@ -63,10 +62,8 @@ model StorageCover "Sandwich wall construction for heat storage cover"
         "Heat capacity of insulation" annotation (Placement(transformation(
           extent={{36,-28},{56,-8}}, rotation=0)));
 
-  AixLib.Utilities.HeatTransfer.HeatConv convInside(hConv=hConvInside, A=
-        AWall)
-        "Inside heat convection" annotation (Placement(transformation(extent={{-80,0},{-60,20}},
-          rotation=0)));
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(hCon=hConIn, A=AWall) "Inside heat convection"
+    annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
 equation
   connect(convOutside.port_a, heatportOuter) annotation (Line(
       points={{82,8},{85.5,8},{85.5,10},{90,10}},

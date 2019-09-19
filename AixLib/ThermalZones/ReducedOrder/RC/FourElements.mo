@@ -6,7 +6,7 @@ model FourElements "Thermal Zone with four elements for exterior walls,
 
   parameter Modelica.SIunits.Area ARoof "Area of roof"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoof "Convective coefficient of heat transfer of roof (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoof "Convective heat transfer coefficient of roof (indoor)"
     annotation(Dialog(group="Roof"));
   parameter Integer nRoof(min = 1) "Number of RC-elements of roof"
     annotation(Dialog(group="Roof"));
@@ -54,8 +54,8 @@ protected
     extent={{10,10},{-10,-10}},
     rotation=90,
     origin={-12,120})));
-  Modelica.Blocks.Sources.Constant hConvRoof_const(final k=ARoof*hConvRoof) "Coefficient of convective heat transfer for roof"
-     annotation (Placement(transformation(extent={{-5,-5},{5,5}}, rotation=180)));
+  Modelica.Blocks.Sources.Constant hConRoof_const(final k=ARoof*hConRoof) "Constant convective heat transfer coefficient for roof"
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}}, rotation=180)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntRoof(final G=min(AInt, ARoof)*hRad) if AInt > 0 and ARoof > 0
     "Resistor between interior walls and roof"
     annotation (Placement(transformation(
@@ -144,7 +144,7 @@ equation
     annotation (Line(points={{190,86},{190,86},{190,138},{-11,138},{-11,145}},
     color={191,0,0}));
   end if;
-  connect(hConvRoof_const.y, convRoof.Gc) annotation (Line(points={{-5.5,0},{-2,0},{-2,120}}, color={0,0,127}));
+  connect(hConRoof_const.y, convRoof.Gc) annotation (Line(points={{-5.5,0},{-2,0},{-2,120}}, color={0,0,127}));
   connect(convRoof.fluid, senTAir.port)
     annotation (Line(points={{-12,110},{-12,110},{-12,96},{66,96},{66,0},{80,0}},
                                                  color={191,0,0}));

@@ -10,7 +10,8 @@ model ThermalZoneMoistAirEquipped
     redeclare package Medium = Media.Air,
     T_start=293.15,
     zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture())
+        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture(),
+    internalGainsMode=3)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

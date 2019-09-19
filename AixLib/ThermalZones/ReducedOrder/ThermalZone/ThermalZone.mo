@@ -9,40 +9,34 @@ model ThermalZone
     AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
-//
-//   replaceable model  humanSenHeaModel =
-//   Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman constrainedby
-//     Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman
-//     "Internal gains from persons" annotation (choicesAllMatching=true);
-
-     // if  ATot > 0
+   parameter Integer internalGainsMode
+     "decides which internal gains model for persons is used";
 
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent humanSenHeaDependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
+    final activityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot > 0 and zoneParam.internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+       ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent humanSenHeaIndependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot > 0 and zoneParam.internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+       ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDepdendent humanTotHeaDependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
+    final activityDegree=zoneParam.activityDegree,
     final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot > 0 and zoneParam.internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+       ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
@@ -69,9 +63,9 @@ model ThermalZone
     final wfWall=zoneParam.wfWall,
     final wfWin=zoneParam.wfWin,
     final wfGro=zoneParam.wfGro,
-    final hConvWallOut=zoneParam.hConvWallOut,
-    final hRad=zoneParam.hConvRadWall,
-    final hConvWinOut=zoneParam.hConvWinOut,
+    final hConWallOut=zoneParam.hConWallOut,
+    final hRad=zoneParam.hRadWall,
+    final hConWinOut=zoneParam.hConWinOut,
     final aExt=zoneParam.aExt,
     final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0 "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
@@ -88,7 +82,7 @@ model ThermalZone
     final n=zoneParam.nOrientationsRoof,
     final aExt=zoneParam.aRoof,
     final wfWall=zoneParam.wfRoof,
-    final hConvWallOut=zoneParam.hConvRoofOut,
+    final hConWallOut=zoneParam.hConRoofOut,
     final hRad=zoneParam.hRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
     final TGro=273.15) if zoneParam.ARoof > 0 "Computes equivalent air temperature for roof"
@@ -131,7 +125,7 @@ model ThermalZone
     annotation (Placement(transformation(extent={{-84,78},{-68,95}})));
 
 protected
-  Modelica.Blocks.Sources.Constant hConvRoof(final k=(zoneParam.hConvRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
+  Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{4,-4},{-4,4}})));
   Modelica.Thermal.HeatTransfer.Components.Convection theConRoof if
     zoneParam.ARoof > 0
@@ -153,16 +147,14 @@ protected
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={43,8})));
-  Modelica.Blocks.Sources.Constant hConvWall(final k=(zoneParam.hConvWallOut + zoneParam.hConvRadWall)*sum(zoneParam.AExt))
-    "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
+  Modelica.Blocks.Sources.Constant hConWall(final k=(zoneParam.hConWallOut + zoneParam.hRadWall)*sum(zoneParam.AExt))
+    "Outdoor coefficient of heat transfer for walls" annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.Convection theConWall if
     sum(zoneParam.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{30,18},{20,8}})));
-  Modelica.Blocks.Sources.Constant hConvWin(final k=(zoneParam.hConvWinOut + zoneParam.hConvRadWall)*sum(zoneParam.AWin))
-    "Outdoor coefficient of heat transfer for windows"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
+  Modelica.Blocks.Sources.Constant hConWin(final k=(zoneParam.hConWinOut + zoneParam.hRadWall)*sum(zoneParam.AWin))
+    "Outdoor coefficient of heat transfer for windows" annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.Convection theConWin if
     sum(zoneParam.AWin) > 0
     "Outdoor convective heat transfer of windows"
@@ -295,8 +287,7 @@ equation
     annotation (Line(points={{62,24},{62,28}}, color={191,0,0}));
   connect(preTemRoof.port,theConRoof. fluid)
     annotation (Line(points={{51,86},{61,86},{61,84}}, color={191,0,0}));
-  connect(theConRoof.Gc,hConvRoof.y)
-    annotation (Line(points={{66,79},{66,0},{-4.4,0}},  color={0,0,127}));
+  connect(theConRoof.Gc, hConRoof.y) annotation (Line(points={{66,79},{66,0},{-4.4,0}}, color={0,0,127}));
   connect(eqAirTempRoof.TEqAir,preTemRoof. T) annotation (Line(points={{-15,76},
           {-16,76},{24,76},{24,86},{37.8,86}},         color={0,0,127}));
   connect(theConRoof.solid, ROM.roof)
@@ -339,10 +330,8 @@ equation
     annotation (Line(points={{16,29},{20,29}}, color={191,0,0}));
   connect(corGMod.solarRadWinTrans, ROM.solRad) annotation (Line(points={{0.6,43},
           {12,43},{12,61},{37,61}}, color={0,0,127}));
-  connect(hConvWall.y, theConWall.Gc)
-    annotation (Line(points={{0,4.4},{25,4.4},{25,8}},  color={0,0,127}));
-  connect(hConvWin.y, theConWin.Gc) annotation (Line(points={{0,-4.4},{0,34},{25,34}},
-                              color={0,0,127}));
+  connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{25,4.4},{25,8}}, color={0,0,127}));
+  connect(hConWin.y, theConWin.Gc) annotation (Line(points={{0,-4.4},{0,34},{25,34}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>

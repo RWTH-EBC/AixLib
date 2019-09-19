@@ -13,10 +13,14 @@ model Cellar "Cellar completly under ground"
   parameter Modelica.SIunits.Height room_height = 2.5 "length" annotation(Dialog(group = "Room geometry", descriptionLabel = true));
   // Outer walls properties
   parameter Modelica.SIunits.Temperature T_Ground = 283.15 "GroundTemperature" annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Integer ModelConvOW=1 "Heat Convection Model"   annotation(Dialog(group="Outer wall properties",   compact = true, descriptionLabel = true), choices(choice = 1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom hConv",                                                                                                    radioButtons = true));
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+      group="Outer wall properties",
+      compact=true,
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   //Initial temperatures
   parameter Modelica.SIunits.Temperature T0_air = 285.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_Walls = 284.95 "Walls" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));

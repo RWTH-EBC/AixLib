@@ -17,7 +17,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Modelica.SIunits.Area ATransparent[nOrientations] "Vector of areas of transparent (solar radiation transmittend) elements by
     orientations"
     annotation(Dialog(group="Windows"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvWin "Convective coefficient of heat transfer of windows (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConWin "Convective heat transfer coefficient of windows (indoor)"
     annotation(Dialog(group="Windows"));
   parameter Modelica.SIunits.ThermalResistance RWin "Resistor for windows"
     annotation(Dialog(group="Windows"));
@@ -33,7 +33,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Modelica.SIunits.Area AExt[nOrientations]
     "Vector of areas of exterior walls by orientations"
     annotation(Dialog(group="Exterior walls"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvExt "Convective coefficient of heat transfer of exterior walls (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConExt "Convective heat transfer coefficient of exterior walls (indoor)"
     annotation(Dialog(group="Exterior walls"));
   parameter Integer nExt(min = 1) "Number of RC-elements of exterior walls"
     annotation(Dialog(group="Exterior walls"));
@@ -206,13 +206,12 @@ protected
                                                                      ATotExt > 0
     "Convective heat transfer of exterior walls"
     annotation (Placement(transformation(extent={{-114,-30},{-94,-50}})));
-  Modelica.Blocks.Sources.Constant hConvExtWall_const(final k=ATotExt*hConvExt)
-    "Coefficient of convective heat transfer for exterior walls"
+  Modelica.Blocks.Sources.Constant hConExtWall_const(final k=ATotExt*hConExt) "Convective heat transfer coefficient for exterior walls"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}}, rotation=-90)));
   Modelica.Thermal.HeatTransfer.Components.Convection convWin if ATotWin > 0
     "Convective heat transfer of windows"
     annotation (Placement(transformation(extent={{-116,30},{-96,50}})));
-  Modelica.Blocks.Sources.Constant hConvWin_const(final k=ATotWin*hConvWin) "Coefficient of convective heat transfer for windows"
+  Modelica.Blocks.Sources.Constant hConWin_const(final k=ATotWin*hConWin) "Convective heat transfer coefficient for windows"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}}, rotation=-90)));
   Modelica.Blocks.Math.Gain eRadSol[nOrientations](
     final k=gWin*(1 - ratioWinConRad)*ATransparent) if sum(ATransparent) > 0
@@ -325,8 +324,8 @@ equation
     color={191,0,0}));
   connect(resExtWallWin.port_a, convWin.solid)
     annotation (Line(points={{-146,20},{-146,40},{-116,40}}, color={191,0,0}));
-  connect(hConvWin_const.y, convWin.Gc) annotation (Line(points={{0,-6.6},{0,50},{-106,50}}, color={0,0,127}));
-  connect(hConvExtWall_const.y, convExtWall.Gc) annotation (Line(points={{0,5.5},{0,-22},{-104,-22},{-104,-50}}, color={0,0,127}));
+  connect(hConWin_const.y, convWin.Gc) annotation (Line(points={{0,-6.6},{0,50},{-106,50}}, color={0,0,127}));
+  connect(hConExtWall_const.y, convExtWall.Gc) annotation (Line(points={{0,5.5},{0,-22},{-104,-22},{-104,-50}}, color={0,0,127}));
   connect(convExtWall.fluid, senTAir.port)
     annotation (Line(points={{-94,-40},{66,-40},{66,0},{80,0}},
     color={191,0,0}));
@@ -496,6 +495,8 @@ revisions="<html>
   Added conditional statements to solar radiation part.<br/>
   Deleted conditional statements of
   <code>splitFactor</code> and <code>splitFactorSolRad</code>.
+  </li>
+  </ul>
 </html>",
 revisions="<html><ul>
   <li>January 25, 2019, by Michael Wetter:<br/>

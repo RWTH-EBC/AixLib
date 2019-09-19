@@ -16,6 +16,7 @@ model MultizoneMoistAirEquipped
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    internalGainsMode=3,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,
@@ -29,6 +30,8 @@ model MultizoneMoistAirEquipped
     effHRSAHU_disabled=0.2,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
+    redeclare model thermalZone =
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped,
     redeclare package Medium = AixLib.Media.Air,
     T_start=293.15,
     dpAHU_sup=80000000,

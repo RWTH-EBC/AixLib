@@ -6,8 +6,6 @@ partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
   parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable "Data Table of HP"
                        annotation(choicesAllMatching = true, Dialog(tab="Security Control", group="Operational Envelope",enable=
           use_opeEnvFroRec));
-  parameter Real tableLow[:,2] "Table matrix (grid = first column; e.g., table=[0,2])" annotation(choicesAllMatchning=true, Dialog(tab="Security Control", group="Operational Envelope",
-        enable=not use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
     annotation (Dialog(tab="Security Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
   parameter Real iconMin=-70
@@ -17,18 +15,17 @@ partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
     "Used to set the frame where the icon should appear"
     annotation (Dialog(tab="Dynamic Icon"));
 protected
-  parameter Real tableLow_internal[:,2] = if use_opeEnvFroRec then dataTable.tableLowBou else tableLow;
   parameter Real tableUpp_internal[:,2] = if use_opeEnvFroRec then dataTable.tableUppBou else tableUpp;
-  parameter Real xMax=min(tableLow_internal[end, 1], tableUpp_internal[end, 1])
-    "Minimal value of lower and upper table data";
-  parameter Real xMin=max(tableLow_internal[1, 1], tableUpp_internal[1, 1])
+  parameter Real xMax=tableUpp_internal[end, 1]
     "Maximal value of lower and upper table data";
+  parameter Real xMin=tableUpp_internal[1, 1]
+    "Minimal value of lower and upper table data";
   parameter Real yMax=max(tableUpp_internal[:, 2])
-    "Minimal value of lower and upper table data";
-  parameter Real yMin=min(tableLow_internal[:, 2])
     "Maximal value of lower and upper table data";
+  parameter Real yMin=0
+    "Minimal value of lower and upper table data";
   final Real[size(scaledX, 1), 2] points=transpose({unScaledX,unScaledY}) annotation(Hide=false);
-  Real tableMerge[:,2] = [tableLow_internal[1,1],tableLow_internal[1,2];tableUpp_internal;[Modelica.Math.Vectors.reverse(tableLow_internal[:,1]),Modelica.Math.Vectors.reverse(tableLow_internal[:,2])]];
+  Real tableMerge[:,2] = tableUpp_internal;
   input Real scaledX[:] = tableMerge[:,1];
   input Real scaledY[:] = tableMerge[:,2];
   Real unScaledX[size(scaledX, 1)](min=-100, max=100) = (scaledX - fill(xMin, size(scaledX, 1)))*(iconMax-iconMin)/(xMax - xMin) + fill(iconMin, size(scaledX,1));
