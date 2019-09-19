@@ -116,7 +116,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     transformation(extent={{-170,-190},{-150,-170}}), iconTransformation(
     extent={{-170,-190},{-150,-170}})));
 
-  replaceable Fluid.MixingVolumes.MixingVolume volAir(
+  Fluid.MixingVolumes.MixingVolume volAir(
     redeclare final package Medium = Medium,
     final nPorts=nPorts,
     m_flow_nominal=VAir*6/3600*1.2,
@@ -129,9 +129,22 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final use_C_flow=false) if VAir > 0
-    constrainedby Fluid.MixingVolumes.BaseClasses.PartialMixingVolume
-                                        "Indoor air volume"
+    final use_C_flow=false) if VAir > 0 and not use_moisture_balance "Indoor air volume"
+    annotation (Dialog(tab="Advanced"),Placement(transformation(extent={{38,-10},{18,10}})));
+  Fluid.MixingVolumes.MixingVolumeMoistAir volMoistAir(
+    redeclare final package Medium = Medium,
+    final nPorts=nPorts,
+    m_flow_nominal=VAir*6/3600*1.2,
+    final V=VAir,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final p_start=p_start,
+    final T_start=T_start,
+    final X_start=X_start,
+    final C_start=C_start,
+    final C_nominal=C_nominal,
+    final mSenFac=mSenFac,
+    final use_C_flow=false) if VAir > 0 and use_moisture_balance "Indoor air volume"
     annotation (Dialog(tab="Advanced"),Placement(transformation(extent={{38,-10},{18,10}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin) if
@@ -237,6 +250,11 @@ equation
     points={{28,-10},{28,-66},{56,-66},{56,-122},{86,-122},{86,-180},{85,-180}},
     color={0,127,255},
     smooth=Smooth.None));
+  connect(volMoistAir.ports, ports)
+    annotation (Line(
+    points={{28,-10},{28,-66},{56,-66},{56,-122},{86,-122},{86,-180},{85,-180}},
+    color={0,127,255},
+    smooth=Smooth.None));
   connect(resWin.port_a, window)
     annotation (Line(
     points={{-180,40},{-240,40}},
@@ -325,6 +343,8 @@ equation
     color={191,0,0}));
   connect(volAir.heatPort, senTAir.port)
     annotation (Line(points={{38,0},{58,0},{80,0}}, color={191,0,0}));
+  connect(volMoistAir.heatPort, senTAir.port)
+    annotation (Line(points={{38,0},{58,0},{80,0}}, color={191,0,0}));
   connect(senTAir.T, TAir)
     annotation (Line(points={{100,0},{108,0},{108,160},{250,160}},
     color={0,0,127}));
@@ -356,8 +376,8 @@ equation
   connect(sumSolRad.y, convHeatSol.Q_flow)
     annotation (Line(points={{-173.4,124},{-166,124}}, color={0,0,127}));
   if use_moisture_balance and ATot >0 then
-    connect(mWat_flow,volAir.mWat_flow);
-    connect(volAir.X_w,X_w);
+    connect(mWat_flow,volMoistAir.mWat_flow);
+    connect(volMoistAir.X_w,X_w);
   end if;
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},

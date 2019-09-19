@@ -1,21 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
-    ROM(redeclare Fluid.MixingVolumes.MixingVolumeMoistAir volAir(
-      redeclare final package Medium = Medium,
-      final nPorts=nPorts,
-      m_flow_nominal=ROM.VAir*6/3600*1.2,
-      final V=ROM.VAir,
-      final energyDynamics=ROM.energyDynamics,
-      final massDynamics=ROM.massDynamics,
-      final p_start=ROM.p_start,
-      final T_start=ROM.T_start,
-      final X_start=ROM.X_start,
-      final C_start=ROM.C_start,
-      final C_nominal=ROM.C_nominal,
-      final mSenFac=ROM.mSenFac,
-      final use_C_flow=false),
-    final use_moisture_balance=true));
+    ROM(final use_moisture_balance=true));
   Modelica.Blocks.Interfaces.RealInput ventHum(
     final quantity="MassFraction",
     final unit="kg/kg",
