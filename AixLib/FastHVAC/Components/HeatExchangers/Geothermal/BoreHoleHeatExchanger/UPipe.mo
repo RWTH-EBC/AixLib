@@ -20,9 +20,10 @@ model UPipe "Discretized UPipe consisting of n UPipeElements"
 
     // Pipes
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType "Type of pipe" annotation (Dialog(group="Pipes"), choicesAllMatching=true);
+    parameter Real nParallel = 2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
     parameter SI.Diameter pipeCentreReferenceCircle = boreholeDiameter/2
     "Diameter of the reference circle on which the centres of all the pipes are arranged"               annotation(Dialog(group="Pipes"));
-    final parameter Integer nParallel = 1 "1: U-Pipe" annotation (Dialog(group="Pipes"));
+
 public
     BaseClasses.UPipeElement                                 uPipeElement[n](
     each medium=medium,
@@ -118,15 +119,12 @@ equation
 <p>The model enables the creation of a borehole heat exchanger that is axially discretized. </p>
 <p>It&apos;s a FastHVAC porting of the existing <b>UPipe </b>from the Fluid Library.</p>
 <p>For detailed information please see the original model <a href=\"AixLib.Fluid.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe\">AixLib.Fluid.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe</a>.</p>
-<h4><span style=\"color: #008000\">Known Limitations </span></h4>
-<p>In contrast to the fluid model the FastHVAC version doesn&apos;t support multiple parallel pipes, so there is no double U-Pipe.</p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes\">AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes</a></p>
 <p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RadialGround1Pipe\">AixLib.FastHVAC.Examples.HeatExchangers.RadialGround1Pipe</a> </p>
-</html>
-
-",    revisions="<html>
+</html>",
+      revisions="<html>
 <p><ul>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>January 29, 2014&nbsp;</i> by Ana Constantin:<br/>Added to HVAC, formated and upgraded to current version of Dymola/Modelica</li>
