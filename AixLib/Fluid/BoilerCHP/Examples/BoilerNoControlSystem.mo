@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.Examples;
+﻿within AixLib.Fluid.BoilerCHP.Examples;
 model BoilerNoControlSystem
   "Example that illustrates use of boiler model without control"
   extends Modelica.Icons.Example;
@@ -8,7 +8,8 @@ model BoilerNoControlSystem
   Modelica.Fluid.Sources.MassFlowSource_T source(
     use_m_flow_in=false,
     redeclare package Medium = Medium,
-    m_flow=0.1,
+    use_T_in=true,
+    m_flow=0.2,
     T=313.15,
     nPorts=1)
     "Source"
@@ -29,18 +30,24 @@ model BoilerNoControlSystem
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
   Modelica.Blocks.Sources.Ramp ramp(
     height=1,
-    duration=3600,
+    duration=360,
     offset=0,
-    startTime=1200)
+    startTime=120)
     "Ambient air temperature"
     annotation (Placement(transformation(extent={{-60,62},{-40,82}})));
 
   BoilerNoControl boilerNoControl(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
-    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_18kW(),
-    G=100)
+    m_flow_nominal=0.2,
+    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_18kW())
     annotation (Placement(transformation(extent={{-24,-14},{2,14}})));
+  Modelica.Blocks.Sources.Ramp ramp1(
+    height=60,
+    duration=360,
+    offset=273.15,
+    startTime=520)
+    "Ambient air temperature"
+    annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
 equation
   connect(pipe.port_b, sink.ports[1])
     annotation (Line(points={{50,0},{50,0},{60,0}}, color={0,127,255}));
@@ -53,27 +60,21 @@ equation
   connect(boilerNoControl.u_rel, ramp.y) annotation (Line(points={{-20.1,9.8},{
           -19.8,9.8},{-19.8,72},{-39,72}},
                                   color={0,0,127}));
+  connect(source.T_in, ramp1.y)
+    annotation (Line(points={{-62,4},{-71,4}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> during a day.
-Flow temperature of the boiler can be compared to the heating curve produced by
-the internal controler of the boiler.
-Change the inlet water temperature, heat curve or day and night mode to see the
-reaction. </p>
+<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.BoilerNoControl\">AixLib.Fluid.BoilerCHP.BoilerNoControl</a>.
+The efficiency depends on the part load rate and the inflow temperature. </p>
 </html>",
         revisions="<html>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
- AixLib</li>
-<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated
-documentation.</li>
-<li>by Pooyan Jahangiri:<br/>First implementation.</li>
+<li><i>September 20, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
+
 </ul>
 </html>"),
-    experiment(StopTime=7200, __Dymola_Algorithm="Dassl"));
+    experiment(StopTime=3600, __Dymola_Algorithm="Dassl"));
 end BoilerNoControlSystem;

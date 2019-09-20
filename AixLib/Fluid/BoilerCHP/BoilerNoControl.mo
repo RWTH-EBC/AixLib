@@ -1,20 +1,20 @@
 ﻿within AixLib.Fluid.BoilerCHP;
 model BoilerNoControl "Boiler model with physics only"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(a=a),
-                                     vol(V=V));
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(final a=a),
+                                     vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+                                         final V=V));
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group=
          "Boiler type"), choicesAllMatching=true);
-  parameter Modelica.SIunits.ThermalConductance G
-    "Constant thermal conductance to environment";
-  parameter Modelica.SIunits.HeatCapacity C=10000
-    "Heat capacity of element (= cp*m)";
+  parameter Modelica.SIunits.ThermalConductance G=0.01*Q_nom/50
+    "Constant thermal conductance to environment(G=Q_loss/dT)";
+  parameter Modelica.SIunits.HeatCapacity C=0.5*Q_nom
+    "Heat capacity of metal (J/K)";
   parameter Modelica.SIunits.Volume V=paramBoiler.volume "Volume";
 
   parameter Modelica.SIunits.Power Q_nom=paramBoiler.Q_nom
     "Nominal heating power";
-  parameter Real eta_nom=1 "Nominal efficiency";
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(
       final C=C, T(start=T_start)) "Boiler thermal capacity (dry weight)"
@@ -33,8 +33,8 @@ model BoilerNoControl "Boiler model with physics only"
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0)
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
-        eta_nom)
-    "etaRP is calculated in the algorithm section"
+        max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
+    "Nominal gas power"
     annotation (Placement(transformation(extent={{-62,88},{-34,104}})));
   Modelica.Blocks.Interfaces.RealOutput fuelPower
     "Connector of Real output signal" annotation (Placement(transformation(
@@ -53,7 +53,7 @@ model BoilerNoControl "Boiler model with physics only"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,70})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb "Heat port for heat losses to ambient" annotation (
       Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation(
           extent={{58,-60},{78,-40}})));
 
@@ -73,14 +73,15 @@ model BoilerNoControl "Boiler model with physics only"
   parameter Real a=paramBoiler.pressureDrop
     "Coefficient for quadratic pressure drop term";
   Modelica.Blocks.Interfaces.RealOutput T_out
-    "Temperature of the passing fluid" annotation (Placement(transformation(
+    "Outflow temperature of the passing fluid" annotation (Placement(transformation(
           extent={{100,50},{120,70}}), iconTransformation(extent={{62,22},{82,42}})));
-  Modelica.Blocks.Interfaces.RealOutput T_in "Temperature of the passing fluid"
+  Modelica.Blocks.Interfaces.RealOutput T_in "Inflow temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{62,48},{82,68}})));
   parameter Real etaLoadBased[:,2]=paramBoiler.eta
-    "Table matrix (grid = first column; e.g., table=[0, 0; 1, 1; 2, 4])";
-  parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99] "Table matrix (grid = first column; e.g., table=[0, 0; 1, 1; 2, 4])";
+    "Table matrix for part load based efficiency (e.g. [0,0.99; 0.5, 0.98; 1, 0,97])";
+  parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99]
+  "Table matrix for temperature based efficiency";
   Modelica.Blocks.Math.Product eta annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -183,7 +184,7 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>A boiler model consisting of physical components. Temperature depending efficiency for condensing boilers can be activated.</p>
+<p>A boiler model consisting of physical components.The efficiency is based on the part load rate and the inflow water temperature.</p>
 </html>", revisions="<html>
 <ul>
 <li><i>September 19, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
