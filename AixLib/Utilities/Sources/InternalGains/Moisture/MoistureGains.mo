@@ -22,8 +22,6 @@ model MoistureGains
     "convective heat connector"                                                            annotation(Placement(transformation(extent={{80,-58},
             {100,-38}}),                                                                                                                                        iconTransformation(extent={{80,-58},
             {100,-38}})));
-  Modelica.Blocks.Math.Product LatentHeatOutput
-    annotation (Placement(transformation(extent={{-26,-66},{-6,-46}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, 64})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom
     "Air temperature in room"                                                         annotation(Placement(transformation(extent={{-90,74},
@@ -51,20 +49,16 @@ equation
           {62,40},{96,40}}, color={0,0,127}));
   connect(ConvectiveHeat.port,ConvHeat)  annotation(Line(points={{42,-56},{46,-56},
           {46,-48},{90,-48}},                                                                               color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(LatentHeatOutput.y, ConvectiveHeat.Q_flow)
-    annotation (Line(points={{-5,-56},{22,-56}}, color={0,0,127}));
   connect(TRoom,temperatureSensor. port) annotation(Line(points={{-80,84},{-80,82},
           {-90,82},{-90,74}},                                                             color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T, to_degC.u)
     annotation (Line(points={{-90,54},{-90,43.2}}, color={0,0,127}));
-  connect(to_degC.y, LatentHeatOutput.u2) annotation (Line(points={{-90,29.4},{-90,
-          -62},{-28,-62}}, color={0,0,127}));
   connect(toKgPerSeconds.y, toLatentHeat.u1) annotation (Line(points={{35,10},{48,
           10},{48,-18},{6,-18}}, color={0,0,127}));
   connect(specificLatentHeat.y, toLatentHeat.u2) annotation (Line(points={{35,-34},
           {22,-34},{22,-30},{6,-30}}, color={0,0,127}));
-  connect(toLatentHeat.y, LatentHeatOutput.u1) annotation (Line(points={{-17,-24},
-          {-42,-24},{-42,-50},{-28,-50}}, color={0,0,127}));
+  connect(toLatentHeat.y, ConvectiveHeat.Q_flow) annotation (Line(points={{-17,
+          -24},{-26,-24},{-26,-56},{22,-56}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>This model gives the output for moisture release and latent heat release by plants, cooking, showering, etc. (except from persons). The moisture output has to be set in g/(h m²). </p>
