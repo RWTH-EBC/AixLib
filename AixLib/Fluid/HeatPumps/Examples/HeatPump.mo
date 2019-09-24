@@ -164,10 +164,6 @@ equation
       points={{-73,-74},{-68,-74},{-68,-66},{-56,-66}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{2,-65},
-          {4,-65},{4,-47.4},{26.1667,-47.4}},   color={0,0,127}));
-  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{2,-65},
-          {2,-47.4},{-22.1667,-47.4}}, color={0,0,127}));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_a2) annotation (Line(
         points={{-34,-70},{-24,-70},{-24,-45},{-12.5,-45}}, color={0,127,255}));
   connect(nIn.y, pumSou.Nrpm)
