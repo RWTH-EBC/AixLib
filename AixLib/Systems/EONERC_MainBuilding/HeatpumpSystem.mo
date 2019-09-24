@@ -182,12 +182,12 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     redeclare package Medium_con = Medium,
     redeclare package Medium_eva = Medium,
     use_revHP=true,
-    redeclare model PerDataHea =
+    redeclare replaceable model PerDataHea =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
             AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,
             12.5,15; 26.5,300000,288000; 44.2,250000,254000], tableP_ele=[0,
             12.5,15; 26.5,51000,51000; 44.2,51000,51000])),
-    redeclare model PerDataChi =
+    redeclare replaceable model PerDataChi =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=
             Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,
@@ -287,10 +287,10 @@ equation
     annotation (Line(points={{12,-90},{38,-90}}, color={191,0,0}));
   connect(convection1.fluid, T_amb)
     annotation (Line(points={{66,-90},{38,-90}}, color={191,0,0}));
-  connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation
-    (Line(points={{120,-68},{110,-68},{110,-82}}, color={0,127,255}));
-  connect(throttle_freecool.port_b1, volAirCoolerFreecool.ports[2]) annotation
-    (Line(points={{120,-92},{110,-92},{110,-78}}, color={0,127,255}));
+  connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation (
+     Line(points={{120,-68},{110,-68},{110,-82}}, color={0,127,255}));
+  connect(throttle_freecool.port_b1, volAirCoolerFreecool.ports[2]) annotation (
+     Line(points={{120,-92},{110,-92},{110,-78}}, color={0,127,255}));
   connect(convection.Gc, convection1.Gc) annotation (Line(points={{2,-80},{2,
           -76},{76,-76},{76,-80}}, color={0,0,127}));
   connect(T_amb, T_amb) annotation (Line(points={{38,-90},{5,-90},{5,-90},{38,
@@ -339,13 +339,13 @@ equation
   connect(throttle_freecool.hydraulicBus, heatPumpSystemBus.busThrottleFreecool)
     annotation (Line(
       points={{140,-100},{160,-100},{160,-98},{226,-98},{226,60.07},{0.07,60.07}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+
   connect(throttle_recool.hydraulicBus, heatPumpSystemBus.busThrottleRecool)
     annotation (Line(
       points={{-60,-100},{-226,-100},{-226,60.07},{0.07,60.07}},
