@@ -34,11 +34,11 @@ model HighTemperatureSystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)),
-
     pipe3(length=2)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-40,20})));
+
   HydraulicModules.Pump pumpBoiler(
     redeclare package Medium = Medium,
     T_amb=298.15,
