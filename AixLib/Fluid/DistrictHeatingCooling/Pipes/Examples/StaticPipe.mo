@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples;
-model StaticPipe "Simple example of plug flow pipe"
+model StaticPipe "Simple example of StaticPipe"
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
@@ -72,8 +72,8 @@ equation
     experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html>
 <p>Basic test of model
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">
-AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.
+<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe\">
+AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe</a>.
 This test includes an inlet temperature step under a constant mass flow rate.
 </p>
 </html>", revisions="<html>
