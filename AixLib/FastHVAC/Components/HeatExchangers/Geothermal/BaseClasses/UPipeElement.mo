@@ -6,7 +6,7 @@ model UPipeElement
   /// Model parameters ///
     // General
     parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
-    parameter Integer n     "Number of discretizations in axial direction" annotation(Dialog(group="General"));
+    parameter Integer n=3   "Number of discretizations in axial direction" annotation(Dialog(group="General"));
     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Standard  charastics for water (heat capacity, density, thermal conductivity)"
