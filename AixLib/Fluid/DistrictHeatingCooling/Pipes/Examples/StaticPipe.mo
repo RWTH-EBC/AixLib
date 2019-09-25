@@ -78,7 +78,7 @@ This test includes an inlet temperature step under a constant mass flow rate.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>September 8, 2017 by Bram van der Heijde<br/>First implementation</li>
+<li>September 25, 2019 by Nils Neuland:<br>First implementation</li>
 </ul>
 </html>"));
 end StaticPipe;
