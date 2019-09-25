@@ -13,7 +13,7 @@ model OnOffControl
     annotation (Dialog(enable=use_minLocTime));
   parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered" annotation(choices(checkBox=true));
-  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
+  parameter Integer maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(enable=use_runPerHou));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time";
   Modelica.Blocks.Logical.GreaterThreshold

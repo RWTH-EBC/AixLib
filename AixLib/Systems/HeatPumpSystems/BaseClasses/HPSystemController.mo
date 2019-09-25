@@ -3,20 +3,11 @@ model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
-    "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
-    annotation (Dialog(group="System", enable=use_secHeaGen), Evaluate=false);
+
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
     constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_con
-    "Gain with specific heat capacity in condenser medium"
-    annotation (Dialog(tab="Heat Pump Control", group="Controller", enable=use_secHeaGen));
-  parameter Boolean use_bivPar=true
-    "Switch between bivalent parallel and bivalent alternative control"
-    annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
-      choice=false "Alternativ",
-      radioButtons=true));
+
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
@@ -94,7 +85,7 @@ model HPSystemController
   parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Real maxRunPerHou=3
+  parameter Integer maxRunPerHou=3
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_runPerHou), Evaluate=false);
@@ -115,8 +106,6 @@ model HPSystemController
       tab="Security Control",
       group="Operational Envelope",
       enable=use_opeEnvFroRec));
-  parameter Real tableLow[:,2] "Table matrix (grid = first column; e.g., table=[0,2])" annotation(choicesAllMatchning=true, Dialog(tab="Security Control", group="Operational Envelope",
-        enable=not use_opeEnvFroRec));
   parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
     annotation (Dialog(tab="Security Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
   parameter Boolean use_deFro=true "False if defrost in not considered"
@@ -170,16 +159,13 @@ model HPSystemController
     final calcPel_deFro=calcPel_deFro,
     final use_antFre=use_antFre,
     final TantFre=TantFre,
-    final tableLow=tableLow,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable) if         use_sec
     annotation (Placement(transformation(extent={{8,-16},{48,24}})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
-    final use_bivPar=use_bivPar,
     final use_secHeaGen=use_secHeaGen,
-    final Q_flow_nominal=Q_flow_nominal,
     redeclare final model TSetToNSet = TSetToNSet,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
@@ -191,8 +177,7 @@ model HPSystemController
     final trigWeekDay=trigWeekDay,
     final trigHour=trigHour,
     final use_tableData=use_tableData,
-    redeclare final function HeatingCurveFunction = HeatingCurveFunction,
-    final cp_con=cp_con)
+    redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
   AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.calcCOP calcCOP(
       final lowBouPel=200)
@@ -254,6 +239,8 @@ model HPSystemController
     use_sec "Pass through for mode signal"
     annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
 
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_con=4180
+    "specific heat capacity of condenser medium";
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},

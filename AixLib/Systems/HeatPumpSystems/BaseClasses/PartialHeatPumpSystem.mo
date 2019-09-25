@@ -67,11 +67,6 @@ partial model PartialHeatPumpSystem
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
     constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
-  parameter Boolean use_bivPar=true
-    "Switch between bivalent parallel and bivalent alternative control"
-    annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
-      choice=false "Alternativ",
-      radioButtons=true));
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
@@ -148,7 +143,7 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Real maxRunPerHou=3
+  parameter Integer maxRunPerHou=3
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_runPerHou), Evaluate=true);
@@ -176,11 +171,6 @@ partial model PartialHeatPumpSystem
         true);
   parameter Real tableUpp[:,2]=[0,60; 5,70; 30,70]
                                "Upper boundary of envelope" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
-  parameter Real tableLow[:,2]=[0,0; 30,0]
-                               "Lower boundary of envelope" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
@@ -285,7 +275,6 @@ partial model PartialHeatPumpSystem
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
-
   replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
     Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
@@ -381,8 +370,6 @@ partial model PartialHeatPumpSystem
 
   HPSystemController hPSystemController(
     final use_secHeaGen=use_secHeaGen,
-    final Q_flow_nominal=Q_flow_nominal,
-    final use_bivPar=use_bivPar,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
     final day_hour=day_hour,
@@ -406,7 +393,6 @@ partial model PartialHeatPumpSystem
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable,
     final tableUpp=tableUpp,
-    final tableLow=tableLow,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
     final use_chiller=use_chiller,
