@@ -142,10 +142,6 @@ equation
     annotation (Line(points={{52,-24},{52,-26},{80.6,-26}}, color={191,0,0}));
   connect(pump.enthalpyPort_b, chiller.enthalpyPort_a1)
     annotation (Line(points={{26.4,20},{11,20},{11,11}}, color={176,0,0}));
-  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{3,25.3},
-          {3,22},{-10.3333,22},{-10.3333,12.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{3,25.3},
-          {3,22},{16.3333,22},{16.3333,12.3}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, chiller.enthalpyPort_a)
     annotation (Line(points={{-30,-33},{-5,-33},{-5,-15}}, color={176,0,0}));
   connect(vessel_ev.enthalpyPort_a, chiller.enthalpyPort_b) annotation (Line(

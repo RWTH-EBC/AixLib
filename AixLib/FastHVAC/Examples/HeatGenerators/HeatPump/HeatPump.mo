@@ -124,10 +124,6 @@ model HeatPump
 equation
   connect(dotm_source.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
-  connect(T_amb_internal.y, heatPump.T_amb_eva) annotation (Line(points={{3,-27.3},
-          {-10.3333,-27.3},{-10.3333,-16.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, heatPump.T_amb_con) annotation (Line(points={{3,-27.3},
-          {16.3333,-27.3},{16.3333,-16.3}}, color={0,0,127}));
   connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-33.5,9},{
           -15.1333,9},{-15.1333,7.88}},
                                color={0,0,127}));
@@ -168,6 +164,12 @@ equation
   connect(heatPump.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
     annotation (Line(points={{11,-15},{22,-15},{22,-61.09},{49.08,-61.09}},
         color={176,0,0}));
+  connect(pump.enthalpyPort_b, heatPump.enthalpyPort_a)
+    annotation (Line(points={{26.4,20},{11,20},{11,11}}, color={176,0,0}));
+  connect(fluidSource.enthalpyPort_b, heatPump.enthalpyPort_a1)
+    annotation (Line(points={{-30,-33},{-30,-15},{-5,-15}}, color={176,0,0}));
+  connect(heatPump.enthalpyPort_b1, vessel_ev.enthalpyPort_a)
+    annotation (Line(points={{-5,11},{-5,57},{-27.3,57}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(

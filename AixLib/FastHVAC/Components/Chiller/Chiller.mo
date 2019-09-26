@@ -36,6 +36,8 @@ model Chiller "Base model of FastHVAC Chiller"
     annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
+  parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input"
+    annotation(choices(checkBox=true), Dialog(group="Input Connectors"));
 
 //Condenser
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
@@ -205,7 +207,7 @@ model Chiller "Base model of FastHVAC Chiller"
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={16,-52})));
-  Modelica.Blocks.Interfaces.RealInput iceFac_in
+  Modelica.Blocks.Interfaces.RealInput iceFac_in if not useBusConnectorOnly
     "Input signal for icing factor"
      annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
@@ -223,7 +225,7 @@ model Chiller "Base model of FastHVAC Chiller"
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,110})));
-  Modelica.Blocks.Interfaces.RealInput nSet
+  Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
   Controls.Interfaces.ThermalMachineControlBus sigBus annotation (Placement(
@@ -238,18 +240,18 @@ model Chiller "Base model of FastHVAC Chiller"
         rotation=90,
         origin={0,-1})));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K",
-    final displayUnit="degC")
+    final displayUnit="degC") if use_EvaCap
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K",
-    final displayUnit="degC")
+    final displayUnit="degC") if use_ConCap
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
   Sensors.TemperatureSensor        senT_a2
     "Temperature at sink inlet"
