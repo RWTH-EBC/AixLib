@@ -179,11 +179,7 @@ equation
           {66,0},{76,0}},          color={0,127,255}));
   connect(chiller.nSet, booleanToReal.y) annotation (Line(points={{-2.83333,
           -26.84},{-3,-26.84},{-3,-45.3}}, color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_con) annotation (Line(points={{0,53.2},
-          {0,44},{-22.1667,44},{-22.1667,27.4}}, color={0,0,127}));
-  connect(T_amb_internal.y, chiller.T_amb_eva) annotation (Line(points={{0,53.2},
-          {0,44},{26.1667,44},{26.1667,27.4}}, color={0,0,127}));
-  connect(sinkSideMassFlowSource.ports[1], chiller.port_a1) annotation (Line(
+          connect(sinkSideMassFlowSource.ports[1], chiller.port_a1) annotation (Line(
         points={{-34,-48},{-12.5,-48},{-12.5,-23}}, color={0,127,255}));
   connect(sinkSideFixedBoundary.ports[1], chiller.port_b1) annotation (Line(
         points={{-76,62},{-50,62},{-50,25},{-12.5,25}}, color={0,127,255}));
