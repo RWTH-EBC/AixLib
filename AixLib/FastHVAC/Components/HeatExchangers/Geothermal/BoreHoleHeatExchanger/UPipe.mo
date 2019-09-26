@@ -20,7 +20,7 @@ model UPipe "Discretized UPipe consisting of n UPipeElements"
 
     // Pipes
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType "Type of pipe" annotation (Dialog(group="Pipes"), choicesAllMatching=true);
-    parameter Real nParallel = 2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
+    parameter Integer nParallel(min=1, max=2)=2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
     parameter SI.Diameter pipeCentreReferenceCircle = boreholeDiameter/2
     "Diameter of the reference circle on which the centres of all the pipes are arranged"               annotation(Dialog(group="Pipes"));
 

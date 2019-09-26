@@ -22,7 +22,7 @@ model PipeBase
       Pipe Parameters
      ******************************************************************* */
 
-    parameter Real nParallel(min=1)=1 "Number of identical parallel pipes"
+    parameter Integer nParallel(min=1, max=2)=1 "Number of identical parallel pipes"
     annotation(Dialog(group="Geometry"));
     parameter Modelica.SIunits.Length length "Length of pipe"
     annotation(Dialog(group = "Geometry"));
@@ -67,7 +67,7 @@ model PipeBase
   Modelica.Blocks.Math.Division divideMassFlow
     "division block to take multiple parallel pipes into account" annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,10},{10,-10}},
         rotation=180,
         origin={32,38})));
   Modelica.Blocks.Sources.Constant nParallelConst(k=nParallel)
@@ -75,7 +75,7 @@ model PipeBase
         transformation(
         extent={{6,-6},{-6,6}},
         rotation=0,
-        origin={68,34})));
+        origin={68,32})));
 equation
 
   for i in 2:nNodes loop
@@ -100,10 +100,10 @@ equation
     annotation (Line(points={{0,48},{0,56},{0,62},{2,62}}, color={191,0,0}));
   connect(massFlowRate.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points=
          {{63,-0.1},{78.5,-0.1},{78.5,0},{98,0}}, color={176,0,0}));
-  connect(massFlowRate.dotm, divideMassFlow.u2) annotation (Line(points={{55,9},
-          {55,24},{80,24},{80,44},{44,44}}, color={0,0,127}));
-  connect(nParallelConst.y, divideMassFlow.u1) annotation (Line(points={{61.4,
-          34},{50,34},{50,32},{44,32}}, color={0,0,127}));
+  connect(massFlowRate.dotm, divideMassFlow.u1) annotation (Line(points={{55,9},
+          {55,20},{82,20},{82,44},{44,44}}, color={0,0,127}));
+  connect(nParallelConst.y, divideMassFlow.u2)
+    annotation (Line(points={{61.4,32},{44,32}}, color={0,0,127}));
     annotation (choicesAllMatching,
               Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,

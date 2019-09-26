@@ -33,7 +33,7 @@ public
 
     parameter Integer nNodes(min=3)=3 "Number of discrete flow volumes";
 
-    parameter Real nParallel = 1 "Number of identical parallel pipes"
+    parameter Integer nParallel(min=1, max=2)=1 "Number of identical parallel pipes"
     annotation(Dialog(group = "Geometry"));
     parameter Modelica.SIunits.Length length=1 "Length of pipe"
     annotation(Dialog(group = "Geometry"));

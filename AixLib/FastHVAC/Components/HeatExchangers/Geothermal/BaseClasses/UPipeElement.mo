@@ -27,7 +27,7 @@ model UPipeElement
     // Pipes
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType=pipeType
     "Type of pipe" annotation (Dialog(group="Pipes"), choicesAllMatching=true);
-    parameter Real nParallel = 2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
+    parameter Integer nParallel(min=1, max=2)=2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
     parameter SI.Length length = 1 "Length of the pipe element" annotation(Dialog(group="Pipes"));
 
     // Implicit values
