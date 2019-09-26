@@ -57,7 +57,6 @@ model PipeBase
     d_a=fill(parameterPipe.d_o, nNodes),
     A_sur=fill(nParallel*parameterPipe.d_o*Modelica.Constants.pi*length/nNodes, nNodes),
     medium=fill(medium, nNodes),
-    m_flow=fill(massFlowRate.dotm/nParallel, nNodes),
     each calcHCon=calcHCon)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -65,6 +64,19 @@ model PipeBase
         origin={0,38})));
   Sensors.MassFlowSensor massFlowRate
     annotation (Placement(transformation(extent={{44,-10},{64,10}})));
+  Modelica.Blocks.Math.Division divideMassFlow
+    "division block to take multiple parallel pipes into account" annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={32,38})));
+  Modelica.Blocks.Sources.Constant nParallelConst(k=nParallel)
+    "Constant for amount of parallel pipes" annotation (Placement(
+        transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=0,
+        origin={68,34})));
+
 equation
 
   for i in 2:nNodes loop
@@ -79,16 +91,20 @@ equation
       points={{-18,0},{-98,0}},
       color={176,0,0},
       smooth=Smooth.None));
-/*  for i in 1:nNodes loop
-      connect(massFlowRate.dotm,heatConvPipeInside[i].m_flow);
+  for i in 1:nNodes loop
+      connect(divideMassFlow.y,heatConvPipeInside[i].m_flow);
       end for;
-       */
+
   connect(pipeFluid.heatPort, heatConvPipeInside.port_b)
     annotation (Line(points={{0,18.8},{0,28}}, color={191,0,0}));
   connect(heatConvPipeInside.port_a, heatPorts)
     annotation (Line(points={{0,48},{0,56},{0,62},{2,62}}, color={191,0,0}));
   connect(massFlowRate.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points=
          {{63,-0.1},{78.5,-0.1},{78.5,0},{98,0}}, color={176,0,0}));
+  connect(massFlowRate.dotm, divideMassFlow.u2) annotation (Line(points={{55,9},
+          {55,24},{80,24},{80,44},{44,44}}, color={0,0,127}));
+  connect(nParallelConst.y, divideMassFlow.u1) annotation (Line(points={{61.4,
+          34},{50,34},{50,32},{44,32}}, color={0,0,127}));
     annotation (choicesAllMatching,
               Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,
