@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples;
-model PlugFlowPipeZeta "Simple example of PlugFlowPipeZeta"
+model PlugFlowPipe "Simple example of PlugFlowPipe"
   extends Modelica.Icons.Example;
   replaceable package Medium = AixLib.Media.Water "Medium in the pipe" annotation (
       choicesAllMatching=true);
@@ -15,8 +15,7 @@ model PlugFlowPipeZeta "Simple example of PlugFlowPipeZeta"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta
-                                             pip(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe pip(
     redeclare package Medium = Medium,
     nPorts=1,
     dh=0.1,
@@ -72,8 +71,8 @@ equation
     experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html>
 <p>Basic test of model
-<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta\">
-AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta</a>.
+<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe\">
+AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe</a>.
 This test includes an inlet temperature step under a constant mass flow rate.
 </p>
 </html>", revisions="<html>
@@ -81,4 +80,4 @@ This test includes an inlet temperature step under a constant mass flow rate.
 <li>September 25, 2019 by Nils Neuland:<br>First implementation</li>
 </ul>
 </html>"));
-end PlugFlowPipeZeta;
+end PlugFlowPipe;

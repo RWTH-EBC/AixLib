@@ -1,6 +1,11 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
-model StaticPipe "Static Pipe model with heat loss using the time delay based heat losses for the transport delay of the fluid"
+model StaticPipe
+  "Static Pipe model using conditional HydraulicResistance"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+
+  parameter Boolean use_zeta=true
+    "= true HydraulicResistance is implemented, zeta value has to be given next"
+    annotation(Dialog(group="Additional pressurelosses"));
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -69,7 +74,12 @@ model StaticPipe "Static Pipe model with heat loss using the time delay based he
     annotation (Dialog(group="Thermal resistance"));
 
   parameter Real fac=1
-    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
+    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
+    annotation(Dialog(group="Additional pressurelosses", enable=bla));
+
+  parameter Real sum_zetas=0
+    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
+    annotation(Dialog(group="Additional pressurelosses", enable=use_zeta));
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -78,11 +88,12 @@ model StaticPipe "Static Pipe model with heat loss using the time delay based he
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  BaseClassesStatic.StaticCore                           cor(
+  BaseClassesStatic.StaticCore staticCore(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
@@ -102,8 +113,7 @@ model StaticPipe "Static Pipe model with heat loss using the time delay based he
     final roughness=roughness,
     final allowFlowReversal=allowFlowReversal,
     final homotopyInitialization=homotopyInitialization,
-    final linearized=linearized)
-    "Describing the pipe behavior"
+    final linearized=linearized) "Describing the pipe behavior"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   // In the volume, below, we scale down V and use
@@ -150,20 +160,35 @@ protected
     "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
     annotation (Dialog(group="Advanced"));
 
+public
+  FixedResistances.HydraulicResistance hydraulicResistance(
+    diameter=dh,
+    m_flow_nominal=m_flow_nominal,
+    redeclare package Medium = Medium,
+    zeta=sum_zetas,
+    allowFlowReversal=allowFlowReversal,
+    from_dp=from_dp,
+    homotopyInitialization=homotopyInitialization,
+    linearized=linearized,
+    m_flow_start=m_flow_start) if use_zeta
+    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 equation
+
   for i in 1:nPorts loop
     connect(vol.ports[i + 1], ports_b[i])
     annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
   end for;
-  connect(cor.heatPort, heatPort)
+  connect(staticCore.heatPort, heatPort)
     annotation (Line(points={{0,10},{0,10},{0,100}}, color={191,0,0}));
 
-  connect(cor.port_b, vol.ports[1])
+  connect(staticCore.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
-
-  connect(cor.port_a, port_a)
-    annotation (Line(points={{-10,0},{-56,0},{-100,0}}, color={0,127,255}));
+  //Connect hydraulicResistance
+  connect(hydraulicResistance.port_b, staticCore.port_a)
+    annotation (Line(points={{-40,0},{-10,0}}, color={0,127,255}));
+  connect(hydraulicResistance.port_a, port_a) annotation (Line(points={{-60,0},{
+          -80,0},{-80,0},{-100,0}}, color={0,127,255}));
   annotation (
     Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
@@ -211,13 +236,17 @@ d = %dh")}),
 <li>September 25, 2019, by Nils Neuland:<br>Revised variable names and documentation to follow guidelines. Corrected malformed hyperlinks.</li>
 </ul>
 </html>", info="<html>
-<p>Pipe with heat loss using the time delay based heat losses for the transport delay of the fluid, applicable for simulation of long pipes such as in district heating and cooling systems.</p>
+<p>Pipe with heat loss using the time delay based heat losses for the transport delay of the fluid. This model determines the pressure drop either through a static factor or using the sum of zeta values.</p>
+<p>This Pipe model is applicable for simulation of long pipes such as in district heating and cooling systems.</p>
 <h4>Implementation</h4>
 <p>This model is based on <a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore\">AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore</a>.</p>
 <p>Heat losses are implemented by <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a> at each end of the pipe (see <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>). Depending on the flow direction, the temperature difference due to heat losses is subtracted at the right fluid port. </p>
 <p>The pressure drop is implemented using <a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">AixLib.Fluid.FixedResistances.HydraulicDiameter</a>. </p>
 <p>The thermal capacity of the pipe wall is implemented as a mixing volume of the fluid in the pipe, of which the thermal capacity is equal to that of the pipe wall material. In addition, this mixing volume allows the hydraulic separation of subsequent pipes. Thanks to the vectorized implementation of the (design) outlet port, splits and junctions of pipes can be handled in a numerically efficient way. </p>
-<p>This mixing volume is not present in the <a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore\">StaticCore</a> model, which can be used in cases where mixing volumes at pipe junctions need to be added manually. </p>
+<p>This mixing volume is not present in the <a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.BaseClassesStatic.StaticCore\">StaticCore</a> model, which can be used in cases where mixing volumes at pipe junctions need to be added manually.</p>
+<p>If Boolean use_zeta is set &quot;true&quot; <a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> is used.</p>
+<p><a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> takes into account additional pressure drops due to bends/valves/etc. Therefore the sum of zeta values has to be given prior.</p>
+<p>If Boolean use_zeta is set &quot;false&quot; the pressureloss is determine through a static factor which has to given prior.</p>
 <h4>Assumptions</h4>
 <ul>
 <li>Heat losses are for steady-state operation. </li>

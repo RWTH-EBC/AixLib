@@ -15,8 +15,7 @@ model StaticPipe "Simple example of StaticPipe"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe
-                                             pip(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe pip(
     redeclare package Medium = Medium,
     nPorts=1,
     dh=0.1,

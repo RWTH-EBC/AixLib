@@ -106,7 +106,7 @@ model PlugFlowPipeEmbedded
 
   Modelica.SIunits.Velocity v_water;
 
-  AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
+  PlugFlowPipe                               plugFlowPipe(
   redeclare final package Medium = Medium,
   final dh = dh,
   final v_nominal = v_nominal,
@@ -240,7 +240,7 @@ equation
           fillPattern=FillPattern.Forward)}), Diagram(coordinateSystem(
           preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model represents an extension of <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a> by modelling the thermal capacity of the surrounding soil. For the description of the cylindric heat transfer within the surrounding soil <a href=\"modelica://AixLib.Utilities.HeatTransfer.CylindricHeatTransfer\">AixLib.Utilities.HeatTransfer.CylindricHeatTransfer</a> is used. The considered layer thickness of the surrounding soil is set as a parameter and divided into three capacities. For the heat transfer calculation within the material/soil, the density, the specific heat capacity, the thickness of the considered soil layer and the thermal conductivity of the material are used. </p>
+<p>This model represents an extension of <a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe\">AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe</a> by modelling the thermal capacity of the surrounding soil. For the description of the cylindric heat transfer within the surrounding soil <a href=\"modelica://AixLib.Utilities.HeatTransfer.CylindricHeatTransfer\">AixLib.Utilities.HeatTransfer.CylindricHeatTransfer</a> is used. The considered layer thickness of the surrounding soil is set as a parameter and divided into three capacities. For the heat transfer calculation within the material/soil, the density, the specific heat capacity, the thickness of the considered soil layer and the thermal conductivity of the material are used. </p>
 <p>The default values for the soil are for sandy soil with clay content and based on: &quot;Simulationsmodell Erdw&auml;rmekollektor zur w&auml;rmetechnischen Beurteilung von W&auml;rmequellen, W&auml;rmesenken und W&auml;rme-/K&auml;ltespeicher&quot; by Berd Gl&uuml;ck </p>
 <h4>References</h4>
 <p>
