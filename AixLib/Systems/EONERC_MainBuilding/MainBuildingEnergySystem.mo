@@ -35,14 +35,17 @@ model MainBuildingEnergySystem
         rotation=180,
         origin={100,16})));
   HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-50,-30},{42,18}})));
+    annotation (Placement(transformation(extent={{-62,-30},{48,26}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.fluidportBottom1) annotation (Line(
-        points={{-106,-20},{-80,-20},{-80,-10.8},{-50,-10.8}}, color={0,127,255}));
+        points={{-106,-20},{-80,-20},{-80,-5.11111},{-62,-5.11111}},
+                                                               color={0,127,255}));
   connect(boundary.ports[1], heatpumpSystem.fluidportTop1) annotation (Line(
-        points={{-106,20},{-80,20},{-80,-1.2},{-50,-1.2}}, color={0,127,255}));
-  connect(heatpumpSystem.port_a1, boundary3.ports[1]) annotation (Line(points={{
-          42,-1.2},{64,-1.2},{64,16},{90,16}}, color={0,127,255}));
-  connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{
-          90,-8},{72,-8},{72,-14},{42,-14},{42,-10.8}}, color={0,127,255}));
+        points={{-106,20},{-80,20},{-80,7.33333},{-62,7.33333}},
+                                                           color={0,127,255}));
+  connect(heatpumpSystem.port_a1, boundary3.ports[1]) annotation (Line(points={{48,
+          7.33333},{64,7.33333},{64,16},{90,16}},
+                                               color={0,127,255}));
+  connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{90,-8},
+          {72,-8},{72,-14},{48,-14},{48,-5.11111}},     color={0,127,255}));
 end MainBuildingEnergySystem;

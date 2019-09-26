@@ -8,11 +8,11 @@ model HighTemperatureSystem
     pumpMaxVolumeFlow=0.01,
     DFlange=0.1)
     annotation (Placement(transformation(extent={{60,28},{86,56}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b_secondary1
-                       "Top-flange secondary circuit"
-    annotation (Placement(transformation(extent={{90,50},{110,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a_secondary1
-                       "Bottom-flange secondary circuit"
+  Modelica.Fluid.Interfaces.FluidPort_b port_b "Top-flange secondary circuit"
+    annotation (Placement(transformation(extent={{90,50},{110,70}}),
+        iconTransformation(extent={{90,50},{110,70}})));
+  Modelica.Fluid.Interfaces.FluidPort_a port_a
+    "Bottom-flange secondary circuit"
     annotation (Placement(transformation(extent={{90,10},{110,30}})));
   HydraulicModules.Admix admix2 annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -28,9 +28,9 @@ model HighTemperatureSystem
         rotation=270,
         origin={-80,3.55271e-15})));
 equation
-  connect(hydraulicSeparator.port_b_secondary, port_b_secondary1)
+  connect(hydraulicSeparator.port_b_secondary, port_b)
     annotation (Line(points={{86,49},{86,60},{100,60}}, color={0,127,255}));
-  connect(hydraulicSeparator.port_a_secondary, port_a_secondary1)
+  connect(hydraulicSeparator.port_a_secondary, port_a)
     annotation (Line(points={{86,35},{86,20},{100,20}}, color={0,127,255}));
   connect(admix1.port_a1, hydraulicSeparator.port_b_primary)
     annotation (Line(points={{52,20},{52,35},{60,35}}, color={0,127,255}));

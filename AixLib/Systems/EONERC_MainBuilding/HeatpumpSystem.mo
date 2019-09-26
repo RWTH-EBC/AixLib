@@ -164,8 +164,9 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     annotation (Placement(transformation(extent={{210,10},{230,30}}),
         iconTransformation(extent={{210,-10},{230,10}})));
   Fluid.HeatPumps.HeatPump        heatPump(
-    refIneFre_constant=1,
+    refIneFre_constant=0.1,
     scalingFactor=1,
+    nthOrder=2,
     useBusConnectorOnly=true,
     VEva=0.1,
     CEva=100,
@@ -184,20 +185,22 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     use_revHP=true,
     redeclare model PerDataHea =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,
-            12.5,15; 26.5,300000,288000; 44.2,250000,254000], tableP_ele=[0,
-            12.5,15; 26.5,51000,51000; 44.2,51000,51000])),
+            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
+            15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
+            26.5,51000,51000; 44.2,51000,51000])),
     redeclare model PerDataChi =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=
             Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,
-            20,25,27,30,35; 7,203000,203000,203000,223000,203000; 18,203000,
-            203000,203000,203000,203000], tableP_ele=[0,20,25,27,30,35; 7,51000,
-            51000,51000,51000,51000; 18,51000,51000,51000,51000,51000])),
-    use_refIne=false,
-    TAmbCon_nominal=288.15,
-    TAmbEva_nominal=273.15,
-    TCon_start=303.15,
+            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
+            15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
+            26.5,51000,51000; 44.2,51000,51000])),
+    use_refIne=true,
+    tauHeaTraEva=7200,
+    tauHeaTraCon=7200,
+    TAmbCon_nominal=298.15,
+    TAmbEva_nominal=298.15,
+    TCon_start=311.15,
+    TEva_start=284.15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                        annotation (Placement(transformation(
         extent={{-18,-22},{18,22}},
@@ -214,7 +217,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     annotation (Placement(transformation(extent={{22,-72},{30,-64}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb annotation (
       Placement(transformation(extent={{28,-100},{48,-80}}), iconTransformation(
-          extent={{-10,-120},{10,-100}})));
+          extent={{-8,-118},{8,-102}})));
   Modelica.Blocks.Sources.Constant zero(k=0)
     annotation (Placement(transformation(extent={{22,-56},{30,-48}})));
   Modelica.Blocks.Logical.Switch switch1
@@ -287,10 +290,10 @@ equation
     annotation (Line(points={{12,-90},{38,-90}}, color={191,0,0}));
   connect(convection1.fluid, T_amb)
     annotation (Line(points={{66,-90},{38,-90}}, color={191,0,0}));
-  connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation
-    (Line(points={{120,-68},{110,-68},{110,-82}}, color={0,127,255}));
-  connect(throttle_freecool.port_b1, volAirCoolerFreecool.ports[2]) annotation
-    (Line(points={{120,-92},{110,-92},{110,-78}}, color={0,127,255}));
+  connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation (
+     Line(points={{120,-68},{110,-68},{110,-82}}, color={0,127,255}));
+  connect(throttle_freecool.port_b1, volAirCoolerFreecool.ports[2]) annotation (
+     Line(points={{120,-92},{110,-92},{110,-78}}, color={0,127,255}));
   connect(convection.Gc, convection1.Gc) annotation (Line(points={{2,-80},{2,
           -76},{76,-76},{76,-80}}, color={0,0,127}));
   connect(T_amb, T_amb) annotation (Line(points={{38,-90},{5,-90},{5,-90},{38,
@@ -339,13 +342,13 @@ equation
   connect(throttle_freecool.hydraulicBus, heatPumpSystemBus.busThrottleFreecool)
     annotation (Line(
       points={{140,-100},{160,-100},{160,-98},{226,-98},{226,60.07},{0.07,60.07}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+
   connect(throttle_recool.hydraulicBus, heatPumpSystemBus.busThrottleRecool)
     annotation (Line(
       points={{-60,-100},{-226,-100},{-226,60.07},{0.07,60.07}},
@@ -399,28 +402,27 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
         Rectangle(
-          extent={{-192,36},{-132,-56}},
+          extent={{-192,24},{-132,-60}},
           lineColor={0,0,0},
           fillColor={238,46,47},
-          fillPattern=FillPattern.HorizontalCylinder,
-          lineThickness=1),
+          fillPattern=FillPattern.HorizontalCylinder),
         Rectangle(
-          extent={{100,36},{160,-56}},
+          extent={{100,24},{160,-60}},
           lineColor={0,0,0},
           fillColor={28,108,200},
           fillPattern=FillPattern.HorizontalCylinder),
         Rectangle(
-          extent={{20,20},{40,-40}},
+          extent={{20,10},{40,-50}},
           lineColor={28,108,200},
           fillColor={28,108,200},
           fillPattern=FillPattern.HorizontalCylinder),
         Rectangle(
-          extent={{-40,20},{-20,-40}},
+          extent={{-40,10},{-20,-50}},
           lineColor={238,46,47},
           fillColor={238,46,47},
           fillPattern=FillPattern.HorizontalCylinder),
         Rectangle(
-          extent={{-40,20},{40,-40}},
+          extent={{-40,10},{40,-50}},
           lineColor={0,0,0},
           lineThickness=0.5),
         Rectangle(
@@ -440,7 +442,7 @@ equation
           lineColor={0,0,0},
           lineThickness=0.5),
         Line(
-          points={{-40,-20},{-132,-20}},
+          points={{-40,-40},{-132,-40}},
           color={28,108,200},
           thickness=0.5),
         Line(
@@ -452,7 +454,7 @@ equation
           color={28,108,200},
           thickness=0.5),
         Line(
-          points={{-80,-20},{-80,-80},{-40,-80}},
+          points={{-80,-40},{-80,-80},{-40,-80}},
           color={28,108,200},
           thickness=0.5),
         Line(
@@ -464,17 +466,17 @@ equation
           color={28,108,200},
           thickness=0.5),
         Ellipse(
-          extent={{-68,-12},{-52,-28}},
+          extent={{-68,8},{-52,-8}},
           lineColor={0,0,0},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(
-          points={{-52,-20},{-60,-12}},
+          points={{-52,0},{-60,8}},
           color={0,0,0},
           thickness=0.5),
         Line(
-          points={{-52,-20},{-60,-28}},
+          points={{-52,0},{-60,-8}},
           color={0,0,0},
           thickness=0.5),
         Line(
@@ -482,7 +484,7 @@ equation
           color={28,108,200},
           thickness=0.5),
         Line(
-          points={{40,-20},{100,-20}},
+          points={{40,-40},{100,-40}},
           color={28,108,200},
           thickness=0.5),
         Line(
@@ -498,7 +500,7 @@ equation
           color={28,108,200},
           thickness=0.5),
         Line(
-          points={{180,0},{180,-80},{40,-80}},
+          points={{180,-40},{180,-80},{40,-80}},
           color={28,108,200},
           thickness=0.5),
         Ellipse(
@@ -551,47 +553,62 @@ equation
           color={0,0,0},
           thickness=0.5),
         Line(
-          points={{-28,-64},{-28,-100}},
+          points={{-28,-64},{-28,-102}},
           color={0,0,0},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{-10,-64},{-10,-100}},
+          points={{-10,-64},{-10,-102}},
           color={0,0,0},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{10,-64},{10,-100}},
+          points={{10,-64},{10,-102}},
           color={0,0,0},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{28,-64},{28,-100}},
+          points={{28,-64},{28,-102}},
           color={0,0,0},
           arrow={Arrow.None,Arrow.Filled}),
         Rectangle(
-          extent={{-40,20},{-20,-40}},
+          extent={{-40,10},{-20,-50}},
           lineColor={0,0,0},
           lineThickness=0.5),
         Rectangle(
-          extent={{20,20},{40,-40}},
+          extent={{20,10},{40,-50}},
           lineColor={0,0,0},
           lineThickness=0.5),
         Text(
-          extent={{-182,4},{-142,-26}},
+          extent={{-182,0},{-142,-30}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={28,108,200},
           textString="HS"),
         Text(
-          extent={{110,6},{152,-24}},
+          extent={{110,4},{152,-26}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={28,108,200},
           textString="CS"),
         Text(
-          extent={{-20,2},{20,-26}},
+          extent={{-18,-6},{20,-32}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={28,108,200},
-          textString="HP")}),
-                          Diagram(coordinateSystem(preserveAspectRatio=false,
+          textString="HP"),
+        Rectangle(
+          extent={{-192,24},{-132,-60}},
+          lineColor={0,0,0},
+          lineThickness=0.5),
+        Rectangle(
+          extent={{100,24},{160,-60}},
+          lineColor={0,0,0},
+          lineThickness=0.5),
+        Polygon(
+          points={{-4,7},{4,7},{-4,-7},{4,-7},{-4,7}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid,
+          origin={184,0},
+          rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-220,-120},{220,60}})));
 end HeatpumpSystem;

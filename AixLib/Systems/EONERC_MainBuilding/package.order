@@ -5,3 +5,5 @@ DataHPSystem
 HeatPumpSystemValidation
 HighTemperatureSystem
 BaseClasses
+HeatPumpSystemDataInput
+HeatPumpSystemConstantControl
