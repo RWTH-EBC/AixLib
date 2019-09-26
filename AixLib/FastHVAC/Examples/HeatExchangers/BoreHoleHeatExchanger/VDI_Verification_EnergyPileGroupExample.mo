@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.HeatExchangers.BoreHoleHeatExchanger;
-model EnergyPileGroupExample
+model VDI_Verification_EnergyPileGroupExample
   extends Modelica.Icons.Example;
   AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup
     energyPileGroup(
@@ -27,7 +27,6 @@ model EnergyPileGroupExample
         285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15;
         285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15;
         285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15],
-
     pipeCentreReferenceCircle=energyPileGroup.boreholeDiameter/2,
     nRad=10,
     medium=AixLib.FastHVAC.Media.DC20(),
@@ -101,5 +100,17 @@ equation
      Line(points={{-49.5,3},{-49.5,-6},{-7.2,-6},{-7.2,4}}, color={0,0,127}));
   connect(TUndisturbedSurface_input.y, toKelvin1.Celsius) annotation (Line(
         points={{-83.6,22},{-72,22},{-72,19},{-61,19}}, color={0,0,127}));
-  annotation (experiment(StopTime=31536000, Interval=86400));
-end EnergyPileGroupExample;
+  annotation (experiment(StopTime=31536000, Interval=86400), Documentation(info
+        ="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Simple test set-up for the EnergyPileGroup model: <a href=\"modelica://AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup\">AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup</a></p>
+<p>This model of a group of geothermal probes was validated using VDI 4640. The selected setup includes the geothermal probes and the forward and backward flow of the system. In addition, the following model parameters are taken from VDI 4640 for a comparison of the determined specific heat flow over the probe length:</p>
+<p>- 1 single double U-tube probe</p>
+<p>- Temperature over entire probe length: 11&deg;C</p>
+<p>- Probe input temperature: 1&deg;C (&gt; 0&deg;C -&gt; VDI Appendix B4)</p>
+<p>- Plausible flow conditions (Re=2400)</p>
+<p>- Probe parameter (d_i=0.032m; d_a=0.035m, lambda=0.8W/(m.K))</p>
+<p>- 100m probe depth with drill hole diameter D=0,15m</p>
+<p>- Heat conduction of soil with lambda=2W/(m.K)</p>
+</html>"));
+end VDI_Verification_EnergyPileGroupExample;
