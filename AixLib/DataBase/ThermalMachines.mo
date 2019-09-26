@@ -1355,7 +1355,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
 
         parameter Modelica.SIunits.Power lowBouPel "If P_el falls below this value, COP will not be calculated";
-        parameter Real T=60 "Time span for average";
+        parameter Modelica.SIunits.Time aveTime=60 "Time span for average";
 
        Modelica.Blocks.Interfaces.RealInput Pel(final unit="W", final displayUnit=
               "kW")
@@ -1370,7 +1370,8 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
         Modelica.Blocks.Interfaces.RealOutput y_COP "Output for calculated COP value"
           annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       protected
-        AixLib.Utilities.Math.MovingAverage movAve(final T=T) "To calculate the moving average of the output values";
+        AixLib.Utilities.Math.MovingAverage movAve(final aveTime=aveTime)
+          "To calculate the moving average of the output values";
       equation
         //Check if any of the two sums are lower than the given threshold. If so, set COP to zero
         if Pel < lowBouPel or QHeat < Modelica.Constants.eps then
@@ -1528,7 +1529,6 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
           tableP_ele=[0,-7,2,7,10,15,20; 35,2625,2424,2410,2395,2347,2322; 45,
               3136,3053,3000,2970,2912,2889; 50,3486,3535,3451,3414,3365,3385],
-
           tableQdot_con=[0,-7,2,7,10,15,20; 35,6300,8000,9400,10300,11850,13190;
               45,6167,7733,9000,9750,11017,11730; 50,6100,7600,8800,9475,10600,
               11000],
@@ -1536,6 +1536,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           mFlow_evaNom=1,
           tableUppBou=[-25,65; 40,65],
           tableLowBou=[-25,0; 40,0]);
+
           //These boundary-tables are not from the datasheet but default values.
 
         annotation(preferedView="text", DymolaStoredErrors,
@@ -1577,7 +1578,6 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
           AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
           tableP_ele=[0,-10,2,7; 35,4300,4400,4600; 50,6300,6400,6600],
           tableQdot_con=[0,-10,2,7; 35,11600,17000,20200; 50,10200,15600,18800],
-
           mFlow_conNom=20200/4180/5,
           mFlow_evaNom=1,
           tableUppBou=[-15,55; 40,55],
