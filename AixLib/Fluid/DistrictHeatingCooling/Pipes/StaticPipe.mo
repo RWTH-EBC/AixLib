@@ -75,7 +75,7 @@ model StaticPipe
 
   parameter Real fac=1
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
-    annotation(Dialog(group="Additional pressurelosses", enable=bla));
+    annotation(Dialog(group="Additional pressurelosses", disable=use_zeta));
 
   parameter Real sum_zetas=0
     "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
