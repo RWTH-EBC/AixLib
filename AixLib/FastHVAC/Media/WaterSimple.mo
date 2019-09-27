@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Media;
+within AixLib.FastHVAC.Media;
 record WaterSimple
 extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
     rho=999.7,

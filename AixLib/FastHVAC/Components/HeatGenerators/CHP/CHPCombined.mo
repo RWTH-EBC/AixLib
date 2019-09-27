@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatGenerators.CHP;
+within AixLib.FastHVAC.Components.HeatGenerators.CHP;
 model CHPCombined
   "CHP with internal combustion engine (ICE) including part load operation. To be used with dynamic mode controller (start/stop/OnOff/P_elRel)"
 
@@ -660,9 +660,10 @@ equation
 <p>
   There are two possibilities for parameterization. The first is based
   on records for CHP characteristics from the <a href=
-  \"AixLib.FastHVAC.Data.CHP.BaseDataDefinition\">FastHVAC.DataBase</a>. In this
-  case the electrical and thermal efficiency of the CHP is a function
-  of return temperature, water mass flow rate and electrical power.
+  \"AixLib.FastHVAC.Data.CHP.BaseDataDefinition\">FastHVAC.DataBase</a>.
+  In this case the electrical and thermal efficiency of the CHP is a
+  function of return temperature, water mass flow rate and electrical
+  power.
 </p>
 <p>
   The second possibility is to set the parameters manually (compare:
@@ -670,40 +671,38 @@ equation
   constant.
 </p>
 <p>
-  The control strategy is pretended from an external
-  controller. There is an ON/OFF switch to control the CHP. The start and stop can be either
-  controlled from an internal controller that uses 
-  start and stop times accroding to ROSATO, A. and SIBILIO, S. or can be pretended 
-  from the outside by setting the value \"withController\". Furthermore a switch counter is implemented.
-  </p>
-  <p>
-  The calculation of the thermal output is splitted into start and stop phase, 
-  because they have different time constants (see ROSATO, A. ; SIBILIO, S) which 
-  are taken into account by the two PT1 Elements.
-  The other two PT1 Elements for fuel and electric energy are only integrated to
-  avoid discrete changes to decrease simulation time.
-  </p>
-  <h4>
+  The control strategy is pretended from an external controller. There
+  is an ON/OFF switch to control the CHP. The start and stop can be
+  either controlled from an internal controller that uses start and
+  stop times accroding to ROSATO, A. and SIBILIO, S. or can be
+  pretended from the outside by setting the value \"withController\".
+  Furthermore a switch counter is implemented.
+</p>
+<p>
+  The calculation of the thermal output is splitted into start and stop
+  phase, because they have different time constants (see ROSATO, A. ;
+  SIBILIO, S) which are taken into account by the two PT1 Elements. The
+  other two PT1 Elements for fuel and electric energy are only
+  integrated to avoid discrete changes to decrease simulation time.
+</p>
+<h4>
   <span style=\"color:#008000\">References</span>
-  </h4>
-  
-  
-  <p>Operation range: 15-60C Tin Pac: 250-1000W</p>
+</h4>
+<p>
+  Operation range: 15-60C Tin Pac: 250-1000W
+</p>
 <ul>
   <li>ROSATO, A. ; SIBILIO, S.:: <i>Calibration and validation of a
-model for simulating thermal and electric performance of an internal combustion
-engine-based micro-cogeneration device.</i>. Applied Thermal Engineering 45-46 (2012),
-S. 79–98.  </li>
-  <li>ROSATO, A. ; SIBILIO, S.: <i>Energy performance of a microcogeneration
-device during transient and steady-state operation: Experiments and simulations.</i>.
-  Applied Thermal Engineering 52 (2013), Nr. 2, S. 478–491
+  model for simulating thermal and electric performance of an internal
+  combustion engine-based micro-cogeneration device.</i>. Applied
+  Thermal Engineering 45-46 (2012), S. 79–98.
+  </li>
+  <li>ROSATO, A. ; SIBILIO, S.: <i>Energy performance of a
+  microcogeneration device during transient and steady-state operation:
+  Experiments and simulations.</i>. Applied Thermal Engineering 52
+  (2013), Nr. 2, S. 478–491
   </li>
 </ul>
-  
-  
-  
-  
-  
 <h4>
   <span style=\"color:#008000\">Example Results</span>
 </h4>

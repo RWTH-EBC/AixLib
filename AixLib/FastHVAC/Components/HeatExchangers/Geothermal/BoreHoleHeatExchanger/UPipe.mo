@@ -115,21 +115,51 @@ equation
           fillPattern=FillPattern.Solid,
           textString="n",
           lineColor={0,0,0})}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview </span></h4>
-<p>The model enables the creation of a borehole heat exchanger that is axially discretized. </p>
-<p>It&apos;s a FastHVAC porting of the existing <b>UPipe </b>from the Fluid Library.</p>
-<p>For detailed information please see the original model <a href=\"AixLib.Fluid.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe\">AixLib.Fluid.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe</a>.</p>
-<h4><span style=\"color: #008000\">References</span></h4>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes\">AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes</a></p>
-<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RadialGround1Pipe\">AixLib.FastHVAC.Examples.HeatExchangers.RadialGround1Pipe</a> </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  The model enables the creation of a borehole heat exchanger that is
+  axially discretized.
+</p>
+<p>
+  It's a FastHVAC porting of the existing <b>UPipe</b> from the Fluid
+  Library.
+</p>
+<p>
+  For detailed information please see the original model <a href=
+  \"AixLib.Fluid.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe\">AixLib.Fluid.HeatExchangers.Geothermal.BoreHoleHeatExchanger.UPipe</a>.
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes\">AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes</a>
+</p>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.HeatExchangers.RadialGround1Pipe\">AixLib.FastHVAC.Examples.HeatExchangers.RadialGround1Pipe</a>
+</p>
 </html>",
-      revisions="<html>
-<p><ul>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>January 29, 2014&nbsp;</i> by Ana Constantin:<br/>Added to HVAC, formated and upgraded to current version of Dymola/Modelica</li>
-<li><i>March 13, 2012&nbsp;</i> by Tim Comanns (supervisor: Ana Constantin):<br/>Implemented.</li>
-</ul></p>
+      revisions="<html><ul>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>January 29, 2014&#160;</i> by Ana Constantin:<br/>
+    Added to HVAC, formated and upgraded to current version of
+    Dymola/Modelica
+  </li>
+  <li>
+    <i>March 13, 2012&#160;</i> by Tim Comanns (supervisor: Ana
+    Constantin):<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end UPipe;

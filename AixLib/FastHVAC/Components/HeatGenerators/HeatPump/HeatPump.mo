@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
+within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
 model HeatPump "Base model of FastHVAC Heat Pump"
 
 //General
@@ -480,16 +480,21 @@ equation
           origin={0,-74},
           rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
             -120},{100,120}})),
-  Documentation(info="<html>
-  <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>HeatPump model adapted to FastHAVC library.<br/>
-  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian Wüllhorst in 2018. </p>
-  </html>",
+  Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  HeatPump model adapted to FastHAVC library.<br/>
+  This model is based on the Fluid model <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>
+  created by Fabian Wüllhorst in 2018.
+</p>
+</html>",
   revisions="<html><ul>
-    <li>
+  <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib 
-    </li>
-  </ul>
-  </html>"));
+    Moved into AixLib
+  </li>
+</ul>
+</html>"));
 end HeatPump;

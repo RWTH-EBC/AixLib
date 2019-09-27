@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
+within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model HeatPump
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
@@ -177,17 +177,24 @@ equation
 ")}),
     experiment(StopTime=20000, Interval=60),
     __Dymola_experimentSetupOutput,
-  Documentation(info="<html>
-  <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>Simple test set-up for the HeatPump2 model.<br/>
-  The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. <br/> 
-  Example Setup is based on FastHVAC part of <a href=\"modelica://AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump</a> </p>
-  </html>",
+  Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Simple test set-up for the HeatPump2 model.<br/>
+  The heat pump is turned on and off while the source temperature
+  increases linearly. Outputs are the electric power consumption of the
+  heat pump and the supply temperature.<br/>
+  Example Setup is based on FastHVAC part of <a href=
+  \"modelica://AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">
+  AixLib.FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump</a>
+</p>
+</html>",
   revisions="<html><ul>
-    <li>
+  <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
     Moved into AixLib
-    </li>
-  </ul>
-  </html>"));
+  </li>
+</ul>
+</html>"));
 end HeatPump;

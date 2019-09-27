@@ -66,10 +66,11 @@ package FuelcellSOFC
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),Documentation(revisions="<html><ul>
   <li>
-  <i>Aug 09, 2018&#160;</i> by David Jansen:<br/>
-  Integrated and validated data from former master thesis by Steffen Brill
+    <i>Aug 09, 2018&#160;</i> by David Jansen:<br/>
+    Integrated and validated data from former master thesis by Steffen
+    Brill
   </li>
- </ul>
+</ul>
 </html>",   info="<html>
 <p>
   Record is used with <a href=
@@ -79,12 +80,15 @@ package FuelcellSOFC
   Source:
 </p>
 <ul>
-<li>
-<a href='https://www.sciencedirect.com/science/article/pii/S0378775308016650'> IanBeausoleil-Morrison, The calibration of a model for simulating the thermal and electrical
-performance of a 2.8kWAC solid-oxide fuel cell micro-cogeneration device
-fuel-cell micro-cogeneration device (2013) </a>
+  <li>
+    <a href=
+    'https://www.sciencedirect.com/science/article/pii/S0378775308016650'>
+    IanBeausoleil-Morrison, The calibration of a model for simulating
+    the thermal and electrical performance of a 2.8kWAC solid-oxide
+    fuel cell micro-cogeneration device fuel-cell micro-cogeneration
+    device (2013)</a>
   </li>
- </ul>
+</ul>
 </html>"));
   end MorrisonSOFC;
 end FuelcellSOFC;

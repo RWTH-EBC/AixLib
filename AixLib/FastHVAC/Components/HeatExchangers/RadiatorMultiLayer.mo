@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatExchangers;
+within AixLib.FastHVAC.Components.HeatExchangers;
 model RadiatorMultiLayer "Simple radiator multilayer model"
   import Modelica.SIunits;
   import calcT =

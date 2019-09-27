@@ -96,18 +96,45 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-80,-60}
   Icon(graphics,
        coordinateSystem(preserveAspectRatio=true, extent={{-80,-60},{100,
           100}})),
-    Documentation(revisions="<html>
-<p><ul>
-<li><i>January 29, 2014&nbsp;</i> by Ana Constantin:<br/>Added to HVAC, formated and upgraded to current version of Dymola/Modelica</li>
-<li><i>March 13, 2012&nbsp;</i> by Tim Comanns (supervisor: Ana Constantin):<br/>Implemented.</li>
-</ul></p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>January 29, 2014&#160;</i> by Ana Constantin:<br/>
+    Added to HVAC, formated and upgraded to current version of
+    Dymola/Modelica
+  </li>
+  <li>
+    <i>March 13, 2012&#160;</i> by Tim Comanns (supervisor: Ana
+    Constantin):<br/>
+    Implemented.
+  </li>
+</ul>
 </html>", info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Simulation model showing an exemplary set up for the model <a href=\"HVAC.Components.GeothermalField.GeothermalField.UPipeField\">UPipeField</a></p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>The massflow and the flow temperature for the medium can be set for the source and the return temperature from the field can be read over the temperature sensor ReturnTemperature.</p>
-<p>The set up is made for two U-pipes, but more pipes can be added. Pipes are added by setting up their coordinates in the boreholePositions vector.</p>
-<p>The border distribution can be parametrize differently to analyse the effects of each parameter.</p>
-<p>The medium is set on the level of the simulation model.</p>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation model showing an exemplary set up for the model <a href=
+  \"HVAC.Components.GeothermalField.GeothermalField.UPipeField\">UPipeField</a>
+</p>
+<p>
+  <b><font style=\"color: #008000;\">Concept</font></b>
+</p>
+<p>
+  The massflow and the flow temperature for the medium can be set for
+  the source and the return temperature from the field can be read over
+  the temperature sensor ReturnTemperature.
+</p>
+<p>
+  The set up is made for two U-pipes, but more pipes can be added.
+  Pipes are added by setting up their coordinates in the
+  boreholePositions vector.
+</p>
+<p>
+  The border distribution can be parametrize differently to analyse the
+  effects of each parameter.
+</p>
+<p>
+  The medium is set on the level of the simulation model.
+</p>
 </html>"));
 end RectangularGround_2Pipes;

@@ -271,31 +271,98 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-80,-60},
             {80,100}})),                    Icon(coordinateSystem(
           preserveAspectRatio=true, extent={{-80,-60},{80,100}})),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview </span></h4>
-<p>This model is used to simulate a freely configurable field of U-Pipe borehole heat exchangers </p>
-<p>This model is primarily based und multiple objects of the <b>UPipe</b> class, multiple objects of the <b>Cell3D</b> class out of the BaseLib Library to represent the ground surrounding the boreholes and some basic thermal and hydraulic components out of the Modelica Library </p>
-<p>The model is used in a test case environment or in combination with further building technology models to represent a heat source or heat sink system </p>
-<h4><span style=\"color: #008000\">Assumptions </span></h4>
-<p>This model assumes the ground surrounding the boreholes as a homogeneous volume with constant thermal properties such as heat capacity, density and thermal conductivity. Furthermore the number and size of the vertical discretizations of UPipe and the surrounding ground have to be the same. </p>
-<h4><span style=\"color: #008000\">Known Limitations </span></h4>
-<p>The large number of objects resulting from the multiple instances of the UPipe-model result in a considerably long time used for translation and compiling of the model. Even before Dymola prints out &ldquo;Translating&rdquo; or &ldquo;Compiling&rdquo; there might be a period of 10-20 minutes during which Dymola looks as if it had crashed. </p>
-<p>Therefore the capability of this model to be directly combined with an extensive building model is limited. In cases of complex U-Pipe-fields with numerous boreholes this model should be used to create a detailed simulation from which a simplified model should be configured. </p>
-<h4><span style=\"color: #008000\">Concept </span></h4>
-<p>A set of parameters describes all used materials, fluids and the geometry of the borehole heat exchanger. The call of the function <i>getGridSizeMatrix</i> returns the specified horizontal grid for the ground cells. Each borehole heat exchanger is represented by a single object of the UPipe class that is thermally connected to the surrounding ground layers. </p>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p>Source:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  This model is used to simulate a freely configurable field of U-Pipe
+  borehole heat exchangers
+</p>
+<p>
+  This model is primarily based und multiple objects of the
+  <b>UPipe</b> class, multiple objects of the <b>Cell3D</b> class out
+  of the BaseLib Library to represent the ground surrounding the
+  boreholes and some basic thermal and hydraulic components out of the
+  Modelica Library
+</p>
+<p>
+  The model is used in a test case environment or in combination with
+  further building technology models to represent a heat source or heat
+  sink system
+</p>
+<h4>
+  <span style=\"color: #008000\">Assumptions</span>
+</h4>
+<p>
+  This model assumes the ground surrounding the boreholes as a
+  homogeneous volume with constant thermal properties such as heat
+  capacity, density and thermal conductivity. Furthermore the number
+  and size of the vertical discretizations of UPipe and the surrounding
+  ground have to be the same.
+</p>
+<h4>
+  <span style=\"color: #008000\">Known Limitations</span>
+</h4>
+<p>
+  The large number of objects resulting from the multiple instances of
+  the UPipe-model result in a considerably long time used for
+  translation and compiling of the model. Even before Dymola prints out
+  “Translating” or “Compiling” there might be a period of 10-20 minutes
+  during which Dymola looks as if it had crashed.
+</p>
+<p>
+  Therefore the capability of this model to be directly combined with
+  an extensive building model is limited. In cases of complex
+  U-Pipe-fields with numerous boreholes this model should be used to
+  create a detailed simulation from which a simplified model should be
+  configured.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  A set of parameters describes all used materials, fluids and the
+  geometry of the borehole heat exchanger. The call of the function
+  <i>getGridSizeMatrix</i> returns the specified horizontal grid for
+  the ground cells. Each borehole heat exchanger is represented by a
+  single object of the UPipe class that is thermally connected to the
+  surrounding ground layers.
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  Source:
+</p>
 <ul>
-<li>Model developed as part of DA025 &quot;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&quot; by Tim Comanns</li>
+  <li>Model developed as part of DA025 \"Modellierung und Simulation
+  eines LowEx-Gebäudes in der objektorientierten Programmiersprache
+  Modelica\" by Tim Comanns
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes\">AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes</a></p>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes\">AixLib.FastHVAC.Examples.HeatExchangers.RectangularGround_2Pipes</a>
+</p>
 </html>",
-      revisions="<html>
-<p><ul>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>January 29, 2014&nbsp;</i> by Ana Constantin:<br/>Added to HVAC, formated and upgraded to current version of Dymola/Modelica</li>
-<li><i>March 13, 2012&nbsp;</i> by Tim Comanns (supervisor: Ana Constantin):<br/>Implemented.</li>
-</ul></p>
+      revisions="<html><ul>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>January 29, 2014&#160;</i> by Ana Constantin:<br/>
+    Added to HVAC, formated and upgraded to current version of
+    Dymola/Modelica
+  </li>
+  <li>
+    <i>March 13, 2012&#160;</i> by Tim Comanns (supervisor: Ana
+    Constantin):<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end UPipeField;

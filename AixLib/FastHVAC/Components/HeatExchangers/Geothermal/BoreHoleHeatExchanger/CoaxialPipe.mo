@@ -238,27 +238,65 @@ equation
           extent={{-80,-80},{80,-120}},
           lineColor={0,0,0},
           textString="%name")}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview </span></h4>
-<p>The model enables the creation of a coaxial pipe borehole heat exchanger that is axially discretized. </p>
-<h4><span style=\"color:#008000\">Assumptions </span></h4>
-<p>The deflection at the bottom of the heat exchanger is assumed by a hydraulic resistance with the pressure loss coefficient of a 180&deg; pipe bend. </p>
-<p>The heat transfer coefficient in the annular gap can be modeled according to different assumptions (see model BaseClasses.HeatTransfer.HeatConv_AnnularGap, VDI-Waermeatlas&nbsp;3.0,&nbsp;2006).</p>
-<p>The pressure drop in the annular gap is modeled according to Gnielinski2007. Chose between whole regime (laminar/turbulent) or turbulent regime.</p>
-<h4><span style=\"color:#008000\">Known Limitations </span></h4>
-<p>A thermal vertical connection between the borehole fillings of the different axial discretization layers is not provided. </p>
-<p>The pressure loss coefficient in the deflection has to be given explicitly, it is not calculated from the given geometry. </p>
-<h4><span style=\"color:#008000\">References</span></h4>
-<p>Source:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The model enables the creation of a coaxial pipe borehole heat
+  exchanger that is axially discretized.
+</p>
+<h4>
+  <span style=\"color:#008000\">Assumptions</span>
+</h4>
+<p>
+  The deflection at the bottom of the heat exchanger is assumed by a
+  hydraulic resistance with the pressure loss coefficient of a 180°
+  pipe bend.
+</p>
+<p>
+  The heat transfer coefficient in the annular gap can be modeled
+  according to different assumptions (see model
+  BaseClasses.HeatTransfer.HeatConv_AnnularGap,
+  VDI-Waermeatlas&#160;3.0,&#160;2006).
+</p>
+<p>
+  The pressure drop in the annular gap is modeled according to
+  Gnielinski2007. Chose between whole regime (laminar/turbulent) or
+  turbulent regime.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  A thermal vertical connection between the borehole fillings of the
+  different axial discretization layers is not provided.
+</p>
+<p>
+  The pressure loss coefficient in the deflection has to be given
+  explicitly, it is not calculated from the given geometry.
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Source:
+</p>
 <ul>
-<li>VDI-Waermeatlas&nbsp;3.0,&nbsp;2006</li>
-<li>Bibtex: Gnielinski2007 </li>
+  <li>VDI-Waermeatlas&#160;3.0,&#160;2006
+  </li>
+  <li>Bibtex: Gnielinski2007
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<p><ul>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>January 10, 2014&nbsp;</i> by Kristian Huchtemann:<br/>Implemented.</li>
-</ul></p>
+      revisions="<html><ul>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>January 10, 2014&#160;</i> by Kristian Huchtemann:<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end CoaxialPipe;

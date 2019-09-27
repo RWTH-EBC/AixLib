@@ -36,8 +36,9 @@ record MorrisonPEMFC
      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),Documentation(revisions="<html><ul>
   <li>
-  <i>Aug 09, 2018&#160;</i> by David Jansen:<br/>
-  Integrated and validated data from former master thesis by Steffen Brill
+    <i>Aug 09, 2018&#160;</i> by David Jansen:<br/>
+    Integrated and validated data from former master thesis by Steffen
+    Brill
   </li>
 </ul>
 </html>",   info="<html>
@@ -49,10 +50,13 @@ record MorrisonPEMFC
   Source:
 </p>
 <ul>
-<li>
-<a href='https://www.sciencedirect.com/science/article/pii/S0378775312013237?via%3Dihub'> Geoffrey Johnson, The calibration and validation of a model for simulating the thermal
-and electrical performance of a 1 kWAC proton-exchange membrane
-fuel-cell micro-cogeneration device (2013) </a>
+  <li>
+    <a href=
+    'https://www.sciencedirect.com/science/article/pii/S0378775312013237?via%3Dihub'>
+    Geoffrey Johnson, The calibration and validation of a model for
+    simulating the thermal and electrical performance of a 1 kWAC
+    proton-exchange membrane fuel-cell micro-cogeneration device
+    (2013)</a>
   </li>
 </ul>
 </html>"));

@@ -194,27 +194,66 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={47,51,253})}),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>This submodel is used to create an axially discretized model of a U-Pipe or Double-U-Pipe borehole heat exchanger </p>
-<p>It&rsquo;s based on two <b>DynamicPipeEBC</b> models as well as <b>CylindricLoad</b>, <b>CylindricHeatTransfer</b> and <b>CylindricHeatConduction</b> out of the HVAC Library. All other objects are standard Modelica models. </p>
-<p>This model is not used by itself but serves as one axial element in the bigger model UPipe </p>
-<h4><span style=\"color: #008000\">Assumptions </span></h4>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  This submodel is used to create an axially discretized model of a
+  U-Pipe or Double-U-Pipe borehole heat exchanger
+</p>
+<p>
+  It’s based on two <b>DynamicPipeEBC</b> models as well as
+  <b>CylindricLoad</b>, <b>CylindricHeatTransfer</b> and
+  <b>CylindricHeatConduction</b> out of the HVAC Library. All other
+  objects are standard Modelica models.
+</p>
+<p>
+  This model is not used by itself but serves as one axial element in
+  the bigger model UPipe
+</p>
+<h4>
+  <span style=\"color: #008000\">Assumptions</span>
+</h4>
 <ol>
-<li>A Double-U-Pipe is created by using the parameter <i>nParallel</i> of <b>DynamicPipeEBC</b> </li>
-<li>The heat capacity or mass of the borehole filling is distributed between two areas. A smaller part is assumed between the pipes. The actual sizes derives from the <i>pipeReferenceCircle</i> as well as the diameter of the pipes. The correct corresponding second part is assumed between the outer diameter of the borehole and a calculated inner diameter that does not correspond with any real geometry. </li>
+  <li>A Double-U-Pipe is created by using the parameter
+  <i>nParallel</i> of <b>DynamicPipeEBC</b>
+  </li>
+  <li>The heat capacity or mass of the borehole filling is distributed
+  between two areas. A smaller part is assumed between the pipes. The
+  actual sizes derives from the <i>pipeReferenceCircle</i> as well as
+  the diameter of the pipes. The correct corresponding second part is
+  assumed between the outer diameter of the borehole and a calculated
+  inner diameter that does not correspond with any real geometry.
+  </li>
 </ol>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p>Source:</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  Source:
+</p>
 <ul>
-<li>Model developed as part of DA025 &quot;Modellierung und Simulation eines LowEx-Geb&auml;udes in der objektorientierten Programmiersprache Modelica&quot; by Tim Comanns</li>
+  <li>Model developed as part of DA025 \"Modellierung und Simulation
+  eines LowEx-Gebäudes in der objektorientierten Programmiersprache
+  Modelica\" by Tim Comanns
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<p><ul>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>January 29, 2014&nbsp;</i> by Ana Constantin:<br/>Added to HVAC, formated and upgraded to current version of Dymola/Modelica</li>
-<li><i>March 13, 2012&nbsp;</i> by Tim Comanns (supervisor: Ana Constantin):<br/>Implemented.</li>
-</ul></p>
+      revisions="<html><ul>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>January 29, 2014&#160;</i> by Ana Constantin:<br/>
+    Added to HVAC, formated and upgraded to current version of
+    Dymola/Modelica
+  </li>
+  <li>
+    <i>March 13, 2012&#160;</i> by Tim Comanns (supervisor: Ana
+    Constantin):<br/>
+    Implemented.
+  </li>
+</ul>
 </html>"));
 end UPipeElement;

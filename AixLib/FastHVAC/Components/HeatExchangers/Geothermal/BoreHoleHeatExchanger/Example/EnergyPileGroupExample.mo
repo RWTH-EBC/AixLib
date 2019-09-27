@@ -154,11 +154,27 @@ equation
           82.78},{-60,82.78},{-60,83},{-65.5,83}}, color={0,0,127}));
   connect(FlowTemperature.y, toKelvin.Celsius) annotation (Line(points={{-87.6,
           86},{-82,86},{-82,83},{-77,83}}, color={0,0,127}));
-  annotation (experiment(StopTime=31536000, Interval=86400), Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Simple test set-up for the EnergyPileGroup model: <a href=\"modelica://AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup\">AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup</a></p>
-<p>This model of a group of geothermal probes was validated using VDI 4640. The selected setup includes the geothermal probes and the forward and backward flow of the system.</p>
-<p><b><span style=\"color: #008000;\">Exceptions</span> </b></p>
-<p>The model does not take into account the interactions of the geothermal probes in the ground, so that the specific heat flow does not change with increasing number of probes at the same mass flow per probe.</p>
+  annotation (experiment(StopTime=31536000, Interval=86400), Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Simple test set-up for the EnergyPileGroup model: <a href=
+  \"modelica://AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup\">
+  AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BoreHoleHeatExchanger.EnergyPileGroup</a>
+</p>
+<p>
+  This model of a group of geothermal probes was validated using VDI
+  4640. The selected setup includes the geothermal probes and the
+  forward and backward flow of the system.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Exceptions</span></b>
+</p>
+<p>
+  The model does not take into account the interactions of the
+  geothermal probes in the ground, so that the specific heat flow does
+  not change with increasing number of probes at the same mass flow per
+  probe.
+</p>
 </html>"));
 end EnergyPileGroupExample;
