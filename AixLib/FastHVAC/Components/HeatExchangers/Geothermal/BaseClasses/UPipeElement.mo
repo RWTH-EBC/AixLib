@@ -1,12 +1,13 @@
-﻿within AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BaseClasses;
+within AixLib.FastHVAC.Components.HeatExchangers.Geothermal.BaseClasses;
 model UPipeElement
   "Heat capacity distributed. Small inner part inside of pipes, rest outward up until boreholeDiameter"
   import SI = Modelica.SIunits;
 
   /// Model parameters ///
     // General
-  parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
+    parameter SI.Temperature T_start "Initial Temperature of system" annotation (Dialog(group="General"));
+    parameter Integer n=3   "Number of discretizations in axial direction" annotation(Dialog(group="General"));
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Standard  charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
@@ -26,16 +27,18 @@ model UPipeElement
     // Pipes
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeType=pipeType
     "Type of pipe" annotation (Dialog(group="Pipes"), choicesAllMatching=true);
-    parameter Integer nParallel = 2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
+    parameter Integer nParallel(min=1, max=2)=2 "1: U-Pipe, 2: Double-U-Pipe" annotation (Dialog(group="Pipes"));
     parameter SI.Length length = 1 "Length of the pipe element" annotation(Dialog(group="Pipes"));
 
     // Implicit values
     Real pi = Modelica.Constants.pi;
 
   /// Object Generation ///
-  Pipes.DynamicPipe           dynamicPipe1(
+  Pipes.DynamicPipeAggregated dynamicPipeAggregated(
     medium=medium,
     T_0=T_start,
+    nNodes=n,
+    nParallel=nParallel,
     length=length,
     diameter=pipeType.d_i,
     parameterPipe=pipeType,
@@ -49,9 +52,11 @@ model UPipeElement
         rotation=-90,
         origin={-40,54})));
 
-  Pipes.DynamicPipe           dynamicPipe2(
+  Pipes.DynamicPipeAggregated dynamicPipeAggregated1(
     medium=medium,
     T_0=T_start,
+    nNodes=n,
+    nParallel=nParallel,
     each length=length,
     each diameter=pipeType.d_i,
     each parameterPipe=pipeType,
@@ -136,14 +141,14 @@ equation
       points={{10,78.4},{6,78.4},{6,36},{0,36}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(dynamicPipe1.heatPort_outside, thermalCollector.port_a[1])
+  connect(dynamicPipeAggregated.heatPort_outside, thermalCollector.port_a[1])
     annotation (Line(
-      points={{-27.52,75.12},{-27.52,10},{-61.5,10}},
+      points={{-17.92,40.56},{-17.92,10},{-61.5,10}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(dynamicPipe2.heatPort_outside, thermalCollector.port_a[2])
+  connect(dynamicPipeAggregated1.heatPort_outside, thermalCollector.port_a[2])
     annotation (Line(
-      points={{27.52,34.88},{18,34.88},{18,10},{-62.5,10}},
+      points={{17.92,69.44},{18,69.44},{18,10},{-62.5,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(thermalCollector.port_b,cylindricHeatTransfer.port_a)  annotation (
@@ -155,32 +160,27 @@ equation
       points={{-82,76.8},{-98,76.8},{-98,80},{-114,80}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(dynamicPipe1.heatPort_outside, cylindricHeatConduction1.port_b)
+  connect(dynamicPipeAggregated.heatPort_outside, cylindricHeatConduction1.port_b)
     annotation (Line(
-      points={{-27.52,75.12},{-27.52,94},{-10,94},{-10,86.8}},
+      points={{-17.92,40.56},{-17.92,94},{-10,94},{-10,86.8}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(dynamicPipe2.heatPort_outside, cylindricHeatConduction2.port_b)
+  connect(dynamicPipeAggregated1.heatPort_outside, cylindricHeatConduction2.port_b)
     annotation (Line(
-      points={{27.52,34.88},{27.52,74},{27.52,94},{10,94},{10,86.8}},
+      points={{17.92,69.44},{17.92,74},{17.92,94},{10,94},{10,86.8}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(portDownIn, dynamicPipe1.enthalpyPort_a1)
+  connect(portDownIn, dynamicPipeAggregated.enthalpyPort_a1)
     annotation (Line(points={{-40,100},{-40,77.52}}, color={176,0,0}));
-  connect(dynamicPipe1.enthalpyPort_b1, portDownOut)
+  connect(dynamicPipeAggregated.enthalpyPort_b1, portDownOut)
     annotation (Line(points={{-40,30.48},{-40,-20}}, color={176,0,0}));
-  connect(portUpIn, dynamicPipe2.enthalpyPort_a1)
+  connect(portUpIn, dynamicPipeAggregated1.enthalpyPort_a1)
     annotation (Line(points={{40,-20},{40,32.48}}, color={176,0,0}));
-  connect(dynamicPipe2.enthalpyPort_b1, portUpOut)
+  connect(dynamicPipeAggregated1.enthalpyPort_b1, portUpOut)
     annotation (Line(points={{40,79.52},{40,100}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
             -20},{80,100}},
-        initialScale=0.2), graphics={Text(
-          extent={{-50,118},{50,114}},
-          lineColor={255,0,0},
-          textString="Noch nicht für FastHVAC implementiert:
-Doppel-U über nParallel=2 abgebildet")}),
-                                   Icon(coordinateSystem(preserveAspectRatio=true,
+        initialScale=0.2)),        Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-120,-20},{80,100}},
         initialScale=0.2), graphics={
         Rectangle(
