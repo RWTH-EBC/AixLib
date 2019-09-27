@@ -22,7 +22,7 @@ model PipeBase
       Pipe Parameters
      ******************************************************************* */
 
-    parameter Integer nParallel(min=1, max=2)=1 "Number of identical parallel pipes"
+    parameter Integer nParallel(min=1)=1 "Number of identical parallel pipes"
     annotation(Dialog(group="Geometry"));
     parameter Modelica.SIunits.Length length "Length of pipe"
     annotation(Dialog(group = "Geometry"));
