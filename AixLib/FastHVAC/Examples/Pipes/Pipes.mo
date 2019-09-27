@@ -50,6 +50,7 @@ model Pipes
   Components.Pumps.FluidSource fluidSource3
     annotation (Placement(transformation(extent={{-74,36},{-54,56}})));
   Components.Pipes.DynamicPipe PipeInsulation(
+    selectable=false,
     withInsulation=true,
     withRadiation=false,
     withConvection=false)

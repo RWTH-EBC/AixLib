@@ -12,7 +12,7 @@ model EnergyPileGroupExample
     boreholeDiameter=0.15,
     pipeType=AixLib.DataBase.Pipes.Copper.Copper_54x1(
         d_i=0.032,
-        d_o=0.035,
+        d_o=0.034,
         d=983,
         lambda=0.8,
         c=1500),
@@ -29,7 +29,7 @@ model EnergyPileGroupExample
         285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15,285.15],
     pipeCentreReferenceCircle=energyPileGroup.boreholeDiameter/2,
     nRad=10,
-    medium=AixLib.FastHVAC.Media.DC20(),
+    medium=Media.Brine(),
     groundVolumeDiamter=100) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
