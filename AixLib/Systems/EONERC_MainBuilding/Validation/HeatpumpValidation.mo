@@ -1,11 +1,11 @@
-within AixLib.Systems.EONERC_MainBuilding;
+within AixLib.Systems.EONERC_MainBuilding.Validation;
 model HeatpumpValidation
   "Validation of heatpump model of E.ON ERC main building"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
 
-   parameter DataHPSystem Data;
+  parameter BaseClasses.DataHPSystem Data;
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
     T=303.15,
@@ -73,11 +73,11 @@ model HeatpumpValidation
             26.5,51000,51000; 44.2,51000,51000])),
     use_refIne=true,
     transferHeat=true,
-    tauHeaTraEva=7200,
-    tauHeaTraCon=7200,
+    tauHeaTraEva(displayUnit="h") = 21600,
+    tauHeaTraCon(displayUnit="h") = 28800,
     TAmbCon_nominal=298.15,
     TAmbEva_nominal=298.15,
-    TCon_start=313.15,
+    TCon_start=311.15,
     TEva_start=284.15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                        annotation (Placement(transformation(
@@ -166,7 +166,8 @@ equation
           70},{54,70},{54,48},{100,48},{100,12},{92,12}}, color={0,0,127}));
   connect(combiTimeTable.y[9], division.u1)
     annotation (Line(points={{-79,70},{-42,70},{-42,-54}}, color={0,0,127}));
-  annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
-           true) = "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/HeatPumpValidation/Simulate and plot.mos"
+  annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated
+          =true) =
+        "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpValidation.mos"
         "Simulate and plot"));
 end HeatpumpValidation;

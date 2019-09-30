@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding;
+within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 model HeatPumpSystemConstantControl
   "Constant intput connected with heatPUmpSystemBus"
   parameter Real table[:,:]

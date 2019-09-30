@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding;
+within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 model HeatPumpSystemDataInput
   "Intput from table connected with heatPUmpSystemBus"
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=table, smoothness=

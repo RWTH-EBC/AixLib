@@ -6,8 +6,9 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   HydraulicModules.Pump pump_hot(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
+    T_start=T_start_hot,
     dIns=0.01,
-    kIns=0.028,
+    kIns=0.001,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=3,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -15,7 +16,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
           per)),
     d=0.125,
-    T_amb=293.15,
+    T_amb=T_amb,
     pipe3(length=6))
                   annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
@@ -25,8 +26,9 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   HydraulicModules.Pump pump_cold(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
+    T_start=T_start_cold,
     dIns=0.01,
-    kIns=0.028,
+    kIns=0.001,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(energyDynamics=pump_hot.energyDynamics, redeclare
@@ -35,11 +37,11 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     d=0.100,
     length=4,
     pipe3(length=8),
-    T_amb=293.15) annotation (Placement(transformation(
+    T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={60,0})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=293.15)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=T_amb)
                 annotation (Placement(transformation(extent={{84,-4},{92,4}})));
   Fluid.Storage.BufferStorage coldStorage(
     n=4,
@@ -50,11 +52,13 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     upToDownHC1=false,
     upToDownHC2=false,
     useHeatingRod=false,
+    TStartWall=T_start_cold,
+    TStartIns=T_start_cold,
     redeclare model HeatTransfer =
         Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=281.15)
+    TStart=T_start_cold)
     annotation (Placement(transformation(extent={{124,-16},{100,14}})));
   Fluid.Storage.BufferStorage heatStorage(
     n=4,
@@ -65,74 +69,86 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     upToDownHC1=false,
     upToDownHC2=false,
     useHeatingRod=false,
+    TStartWall=T_start_hot,
+    TStartIns=T_start_hot,
     redeclare model HeatTransfer =
         Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
-    TStart=303.15) annotation (Placement(transformation(
+    TStart=T_start_hot)
+                   annotation (Placement(transformation(
         extent={{12,-15},{-12,15}},
         rotation=0,
         origin={-188,-1})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=293.15)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=T_amb)
     annotation (Placement(transformation(extent={{-212,-2},{-204,6}})));
   HydraulicModules.Throttle throttle_recool(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
+    T_start=T_start_hot,
     dIns=0.01,
-    kIns=0.028,
+    kIns=0.001,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     d=0.125,
     length=6,
     Kv=160,
+    valve(riseTime=240),
     pipe3(length=12),
-    T_amb=293.15) annotation (Placement(transformation(
+    T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=0,
         origin={-60,-80})));
   HydraulicModules.Throttle throttle_HS(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
+    T_start=T_start_hot,
     dIns=0.01,
-    kIns=0.028,
+    kIns=0.001,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=3,
+    valve(riseTime=240),
     pipe3(length=6),
     d=0.100,
     Kv=100,
-    T_amb=293.15) annotation (Placement(transformation(
+    T_amb=T_amb)  annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=0,
         origin={-140,0})));
   HydraulicModules.Throttle throttle_CS(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
+    T_start=T_start_cold,
     dIns=0.01,
-    kIns=0.028,
+    kIns=0.001,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=2,
+    valve(riseTime=240),
     pipe3(length=4),
     d=0.125,
     Kv=160,
-    T_amb=293.15) annotation (Placement(transformation(
+    T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={160,0})));
   HydraulicModules.Throttle throttle_freecool(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
+    T_start=T_start_cold,
     dIns=0.01,
-    kIns=0.028,
+    kIns=0.001,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=6,
+    valve(riseTime=240),
     pipe3(length=12),
     d=0.100,
     Kv=100,
-    T_amb=293.15) annotation (Placement(transformation(
+    T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={140,-80})));
   Fluid.MixingVolumes.MixingVolume volAirCoolerRecool(
     redeclare package Medium = Medium,
+    T_start=T_start_hot,
     m_flow_nominal=10,
     V=0.04,
     nPorts=2) annotation (Placement(transformation(
@@ -141,6 +157,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         origin={-20,-80})));
   Fluid.MixingVolumes.MixingVolume volAirCoolerFreecool(
     redeclare package Medium = Medium,
+    T_start=T_start_cold,
     m_flow_nominal=10,
     V=0.04,
     nPorts=2) annotation (Placement(transformation(
@@ -195,12 +212,13 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
             15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
             26.5,51000,51000; 44.2,51000,51000])),
     use_refIne=true,
-    tauHeaTraEva=7200,
-    tauHeaTraCon=7200,
-    TAmbCon_nominal=298.15,
-    TAmbEva_nominal=298.15,
-    TCon_start=311.15,
-    TEva_start=284.15,
+    transferHeat=true,
+    tauHeaTraEva(displayUnit="h") = 21600,
+    tauHeaTraCon(displayUnit="h") = 28800,
+    TAmbCon_nominal=T_amb,
+    TAmbEva_nominal=T_amb,
+    TCon_start=T_start_hot,
+    TEva_start=T_start_cold,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                        annotation (Placement(transformation(
         extent={{-18,-22},{18,22}},
@@ -214,17 +232,23 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         rotation=180,
         origin={76,-90})));
   Modelica.Blocks.Sources.Constant const1(k=8340)
-    annotation (Placement(transformation(extent={{22,-72},{30,-64}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb annotation (
+    annotation (Placement(transformation(extent={{24,-56},{32,-48}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_outside annotation (
       Placement(transformation(extent={{28,-100},{48,-80}}), iconTransformation(
           extent={{-8,-118},{8,-102}})));
   Modelica.Blocks.Sources.Constant zero(k=0)
-    annotation (Placement(transformation(extent={{22,-56},{30,-48}})));
+    annotation (Placement(transformation(extent={{24,-72},{32,-64}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
   BaseClasses.HeatPumpSystemBus heatPumpSystemBus annotation (Placement(
         transformation(extent={{-14,46},{14,74}}), iconTransformation(extent={{
             -10,50},{10,70}})));
+  parameter Modelica.SIunits.Temperature T_start_hot=303.15
+    "Initialization temperature hot side";
+  parameter Modelica.SIunits.Temperature T_start_cold=288.15
+    "Initialization temperature hot side";
+  parameter Modelica.SIunits.Temperature T_amb=298.15
+    "Ambient temperature of technics room";
 equation
   connect(pump_cold.port_a1, coldStorage.fluidportTop2) annotation (Line(
         points={{80,12},{88,12},{88,20},{108,20},{108,14.15},{108.25,14.15}},
@@ -286,9 +310,9 @@ equation
           -80,-92},{-106,-92},{-106,12},{-80,12}}, color={0,127,255}));
   connect(throttle_recool.port_b2, pump_hot.port_a1) annotation (Line(points={{
           -80,-68},{-92,-68},{-92,-12},{-80,-12}}, color={0,127,255}));
-  connect(convection.fluid, T_amb)
+  connect(convection.fluid, T_outside)
     annotation (Line(points={{12,-90},{38,-90}}, color={191,0,0}));
-  connect(convection1.fluid, T_amb)
+  connect(convection1.fluid, T_outside)
     annotation (Line(points={{66,-90},{38,-90}}, color={191,0,0}));
   connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation (
      Line(points={{120,-68},{110,-68},{110,-82}}, color={0,127,255}));
@@ -296,12 +320,8 @@ equation
      Line(points={{120,-92},{110,-92},{110,-78}}, color={0,127,255}));
   connect(convection.Gc, convection1.Gc) annotation (Line(points={{2,-80},{2,
           -76},{76,-76},{76,-80}}, color={0,0,127}));
-  connect(T_amb, T_amb) annotation (Line(points={{38,-90},{5,-90},{5,-90},{38,
-          -90}}, color={191,0,0}));
-  connect(const1.y, switch1.u3)
-    annotation (Line(points={{30.4,-68},{38,-68}}, color={0,0,127}));
-  connect(zero.y, switch1.u1)
-    annotation (Line(points={{30.4,-52},{38,-52}}, color={0,0,127}));
+  connect(T_outside, T_outside) annotation (Line(points={{38,-90},{5,-90},{5,-90},
+          {38,-90}}, color={191,0,0}));
   connect(switch1.y, convection1.Gc)
     annotation (Line(points={{61,-60},{76,-60},{76,-80}}, color={0,0,127}));
   connect(throttle_HS.hydraulicBus, heatPumpSystemBus.busThrottleHS)
@@ -399,8 +419,19 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(const1.y, switch1.u1)
+    annotation (Line(points={{32.4,-52},{38,-52}}, color={0,0,127}));
+  connect(zero.y, switch1.u3)
+    annotation (Line(points={{32.4,-68},{38,-68}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
+        Rectangle(
+          extent={{-220,60},{220,-120}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          pattern=LinePattern.Dash,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-192,24},{-132,-60}},
           lineColor={0,0,0},
@@ -543,11 +574,6 @@ equation
           fillPattern=FillPattern.Solid,
           origin={76,-100},
           rotation=90),
-        Rectangle(
-          extent={{-220,60},{220,-120}},
-          lineColor={0,0,0},
-          lineThickness=0.5,
-          pattern=LinePattern.Dash),
         Line(
           points={{-22,-110}},
           color={0,0,0},
