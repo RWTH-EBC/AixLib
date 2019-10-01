@@ -14,7 +14,7 @@ model Weather
     Longitude=9.3138,
     SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor_PV(),
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Building/Benchmark/SimYear_Variante3_angepasst.mat"),
+        "D:\AixLib\AixLib\Systems\Benchmark\Model/SimYear_Variante3_angepasst.mat"),
     tableName="SimYearVar")
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
   Modelica.Blocks.Math.Gain gain(k=1/360)
