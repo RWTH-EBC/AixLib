@@ -12,11 +12,12 @@ model Weather
     Air_press=false,
     Latitude=48.0304,
     Longitude=9.3138,
-    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor_PV(),
+    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
     fileName=Modelica.Utilities.Files.loadResource(
-        "D:\AixLib\AixLib\Systems\Benchmark\Model/SimYear_Variante3_angepasst.mat"),
+        "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"),
     tableName="SimYearVar")
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
+
   Modelica.Blocks.Math.Gain gain(k=1/360)
     annotation (Placement(transformation(extent={{10,36},{20,46}})));
   Modelica.Blocks.Math.Product product
@@ -78,7 +79,7 @@ model Weather
             70,-92}})));
   Electrical.PVSystem.PVSystem pVSystem(
     NumberOfPanels=50*9,
-    data=DataBase.SolarElectric.CanadianSolarCS6P250P(),
+    data=DataBase.SolarElectric.SymphonyEnergySE6M181(),
     MaxOutputPower=50*9*250)
     annotation (Placement(transformation(extent={{-50,60},{-30,80}})));
   Modelica.Blocks.Math.Gain gain2(k=-1)

@@ -3,8 +3,8 @@ model ParametrizationRooms "Testing parametrization of high and reduced order ro
   ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows highOrderRoom [5](
     Room_Length={30,30,5,5,30},
     Room_Height={3,3,3,3,3},
-    Room_Width={20,30,10,20,50},
-    Win_Area={80,180,20,40,200},
+    Room_Width={30,20,10,20,50},
+    Win_Area={180,80,20,40,200},
     each use_sunblind=true,
     each ratioSunblind=0,
     each solIrrThreshold=1000,

@@ -1,497 +1,256 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model HighOrderModel_MultipleRooms  "Multiple instances of high order room with input paramaters"
   extends Modelica.Icons.Example;
-   ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows southFacingWindows[5](
-    Room_Length={30,30,5,5,30},
-    Room_Height={3,3,3,3,3},
-    Room_Width={30,20,10,20,50},
-    Win_Area={180,80,20,40,200},
-    each solar_absorptance_OW=0.48,
-    each eps_out=25,
-    each TypOW=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
-    each TypCE=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf(),
-    each TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
-    each Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    each use_sunblind=false,
-    each ratioSunblind=0,
-    each solIrrThreshold=1000,
-    each TOutAirLimit=1273.15)
-    annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
-  Modelica.Blocks.Sources.Constant constantWindSpeed [5](each k=2.2) annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad
+    "Radiative heat flow of persons"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-48,-34})));
-  Modelica.Blocks.Sources.Constant constantAirExchangeRate [5](each k=0.15) annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        origin={60,-60})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perCon
+    "Convective heat flow of persons"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-16,-34})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowInternal [5]
+        origin={78,-62})));
+  Modelica.Blocks.Sources.CombiTimeTable intGai(
+    table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+        0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
+        200; 50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200;
+        61200,0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,
+        0,0,0; 86400,0,0,0],
+    columns={2,3,4},
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
+    (convective)"
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+        rotation=90,
+        origin={78,-92})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
+    "Convective heat flow of machines"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={96,-62})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
+    "Prescribed temperature for floor plate outdoor surface temperature"
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+    rotation=90,origin={27,-28})));
+  Modelica.Blocks.Sources.Constant TSoil(k=283.15)
+    "Outdoor surface temperature for floor plate"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+    rotation=90, origin={26,-56})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={30,18})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowToOutside[5](Q_flow={-12285,-7634,-1292,-2584,-18161})
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={30,44})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowThroughFloorPlate[5](Q_flow={-4576,-3867,-480,-897,-7557})
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={30,-12})));
-  Modelica.Blocks.Sources.Sine InternalGains [5](
-    amplitude={7200,21000,1900,700,10000},
-    each freqHz=1/3600,
-    offset={7200,21000,1900,700,10000}) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={64,16})));
-  Utilities.Sources.PrescribedSolarRad prescribedSolarRad [5](each n=5)
-    annotation (Placement(transformation(extent={{-54,22},{-34,42}})));
-  Modelica.Blocks.Sources.Constant const [25]( each k=2.2)
-    annotation (Placement(transformation(extent={{-94,72},{-74,92}})));
-  Modelica.Blocks.Sources.Constant const1[25]( each k=2.2)
-    annotation (Placement(transformation(extent={{-94,38},{-74,58}})));
-  Modelica.Blocks.Sources.Constant const2[25]( each k=2.2)
-    annotation (Placement(transformation(extent={{-94,6},{-74,26}})));
-  Modelica.Blocks.Sources.Constant const3[25]( each k=2.2)
-    annotation (Placement(transformation(extent={{-94,-26},{-74,-6}})));
-  Modelica.Blocks.Sources.Constant const4 [25]( each k=2.2)
-    annotation (Placement(transformation(extent={{-94,-60},{-74,-40}})));
+        origin={78,-32})));
+  Modelica.Blocks.Sources.Constant const2(k=0.15)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,-70})));
+  ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows southFacingWindows(
+    Room_Length=30,
+    Room_Height=3,
+    Room_Width=30,
+    Win_Area=180,
+    use_sunblind=true,
+    ratioSunblind=0,
+    solIrrThreshold=10000,
+    TOutAirLimit=1273.15,
+    solar_absorptance_OW=0.48,
+    TypOW=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
+    TypCE=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf(),
+    TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
+    Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
+    annotation (Placement(transformation(extent={{2,-4},{22,16}})));
+  BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
+                             weather(
+    Wind_dir=true,
+    Wind_speed=true,
+    Air_temp=true,
+    Rel_hum=false,
+    Mass_frac=true,
+    Air_press=false,
+    Latitude=48.0304,
+    Longitude=9.3138,
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
+    fileName=Modelica.Utilities.Files.loadResource(
+        "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"),
+    tableName="SimYearVar")
+    annotation (Placement(transformation(extent={{-174,14},{-144,34}})));
+
+  Modelica.Blocks.Math.Product product
+    annotation (Placement(transformation(extent={{-70,102},{-62,110}})));
+  Modelica.Blocks.Math.Product product1
+    annotation (Placement(transformation(extent={{-70,62},{-62,70}})));
+  Modelica.Blocks.Math.Product product2
+    annotation (Placement(transformation(extent={{-70,22},{-62,30}})));
+  Modelica.Blocks.Math.Product product3
+    annotation (Placement(transformation(extent={{-70,-18},{-62,-10}})));
+  Modelica.Blocks.Tables.CombiTable1D combiTable1D(table=[0,1; 0.25,1; 0.26,0;
+        0.74,0; 0.75,1; 1,1], smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    annotation (Placement(transformation(extent={{-92,88},{-82,98}})));
+  Modelica.Blocks.Tables.CombiTable1D combiTable1D1(table=[0,1; 0.25,1; 0.5,1;
+        0.51,0; 0.99,0; 1,1])
+    annotation (Placement(transformation(extent={{-92,48},{-82,58}})));
+  Modelica.Blocks.Tables.CombiTable1D combiTable1D2(table=[0,0; 0.24,0; 0.25,1;
+        0.75,1; 0.76,0; 1,0])
+    annotation (Placement(transformation(extent={{-92,8},{-82,18}})));
+  Modelica.Blocks.Tables.CombiTable1D combiTable1D3(table=[0,1; 0.01,0; 0.49,0;
+        0.5,1; 1,1])
+    annotation (Placement(transformation(extent={{-92,-32},{-82,-22}})));
+  Modelica.Blocks.Math.Gain gain1(k=0)
+    annotation (Placement(transformation(extent={{-86,-60},{-74,-48}})));
+  Modelica.Blocks.Math.Gain gain(k=1/360)
+    annotation (Placement(transformation(extent={{-128,62},{-118,72}})));
+  Model.BusSystems.InternalBus
+                         internalBus annotation (Placement(transformation(
+          extent={{-108,-106},{-68,-66}}),
+                                        iconTransformation(extent={{-88,-86},{
+            -68,-66}})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_East
+    annotation (Placement(transformation(extent={{-38,46},{-18,66}})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_South
+    annotation (Placement(transformation(extent={{-38,6},{-18,26}})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_West
+    annotation (Placement(transformation(extent={{-38,-34},{-18,-14}})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_Hor
+    annotation (Placement(transformation(extent={{-38,-74},{-18,-54}})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_North5
+    annotation (Placement(transformation(extent={{-38,86},{-18,106}})));
 equation
-  connect(constantWindSpeed.y, southFacingWindows.WindSpeedPort)
-    annotation (Line(points={{-48,-23},{-48,1},{-11,1}}, color={0,0,127}));
-  connect(constantAirExchangeRate.y, southFacingWindows.AER)
-    annotation (Line(points={{-16,-23},{-16,-7},{-11,-7}}, color={0,0,127}));
-  connect(fixedHeatFlowThroughFloorPlate.port, southFacingWindows.Therm_ground)
-    annotation (Line(points={{20,-12},{20,-11.6},{-3.2,-11.6}}, color={191,0,0}));
-  connect(fixedHeatFlowToOutside.port, southFacingWindows.Therm_outside)
-    annotation (Line(points={{20,44},{-10.5,44},{-10.5,7.7}}, color={191,0,0}));
-  connect(prescribedHeatFlowInternal.port, southFacingWindows.thermRoom)
-    annotation (Line(points={{20,18},{-4,18},{-4,0.3},{-2.9,0.3}}, color={191,0,
+
+
+
+
+
+
+
+
+
+
+
+  connect(intGai.y[1],perRad. Q_flow)
+    annotation (Line(points={{78,-83.2},{60,-83.2},{60,-70}},
+    color={0,0,127}));
+  connect(intGai.y[2],perCon. Q_flow)
+    annotation (Line(points={{78,-83.2},{78,-72}},          color={0,0,127}));
+  connect(intGai.y[3],macConv. Q_flow)
+    annotation (Line(points={{78,-83.2},{96,-83.2},{96,-72}},
+    color={0,0,127}));
+  connect(TSoil.y,preTemFloor. T)
+  annotation (Line(points={{26,-51.6},{27,-51.6},{27,-35.2}},
+                                                            color={0,0,127}));
+  connect(perRad.port,thermalCollector. port_a[1]) annotation (Line(points={{60,-50},
+          {60,-42},{78,-42}},               color={191,0,0}));
+  connect(perCon.port,thermalCollector. port_a[1])
+    annotation (Line(points={{78,-52},{78,-42}}, color={191,0,0}));
+  connect(macConv.port,thermalCollector. port_a[2]) annotation (Line(points={{96,-52},
+          {96,-42},{78,-42}},               color={191,0,0}));
+  connect(const2.y, southFacingWindows.AER)
+    annotation (Line(points={{0,-59},{0,1},{1,1}}, color={0,0,127}));
+  connect(product.u1,product1. u1) annotation (Line(points={{-70.8,108.4},{-98,
+          108.4},{-98,68.4},{-70.8,68.4}},
+                                        color={0,0,127}));
+  connect(product2.u1,product1. u1) annotation (Line(points={{-70.8,28.4},{-98,
+          28.4},{-98,68.4},{-70.8,68.4}},color={0,0,127}));
+  connect(product3.u1,product1. u1) annotation (Line(points={{-70.8,-11.6},{-98,
+          -11.6},{-98,68.4},{-70.8,68.4}},
+                                         color={0,0,127}));
+  connect(gain.y,combiTable1D. u[1]) annotation (Line(points={{-117.5,67},{
+          -105.75,67},{-105.75,93},{-93,93}},
+                                   color={0,0,127}));
+  connect(combiTable1D.y[1],product. u2) annotation (Line(points={{-81.5,93},{
+          -75.75,93},{-75.75,103.6},{-70.8,103.6}},
+                                               color={0,0,127}));
+  connect(combiTable1D1.u[1],gain. y) annotation (Line(points={{-93,53},{-106,
+          53},{-106,67},{-117.5,67}},
+                             color={0,0,127}));
+  connect(combiTable1D2.u[1],gain. y) annotation (Line(points={{-93,13},{-106,
+          13},{-106,67},{-117.5,67}},
+                              color={0,0,127}));
+  connect(combiTable1D1.y[1],product1. u2) annotation (Line(points={{-81.5,53},
+          {-76,53},{-76,63.6},{-70.8,63.6}},
+                                        color={0,0,127}));
+  connect(combiTable1D2.y[1],product2. u2) annotation (Line(points={{-81.5,13},
+          {-76,13},{-76,23.6},{-70.8,23.6}}, color={0,0,127}));
+  connect(combiTable1D3.y[1],product3. u2) annotation (Line(points={{-81.5,-27},
+          {-76,-27},{-76,-16.4},{-70.8,-16.4}},
+                                             color={0,0,127}));
+  connect(gain1.u,product1. u1) annotation (Line(points={{-87.2,-54},{-98,-54},
+          {-98,68.4},{-70.8,68.4}},
+                                 color={0,0,127}));
+  connect(product.y,internalBus. InternalLoads_Wind_Speed_North) annotation (
+      Line(points={{-61.6,106},{-52,106},{-52,-85.9},{-87.9,-85.9}},
+                                                            color={0,0,127}));
+  connect(product1.y,internalBus. InternalLoads_Wind_Speed_East) annotation (
+      Line(points={{-61.6,66},{-52,66},{-52,-85.9},{-87.9,-85.9}},
+                                                            color={0,0,127}));
+  connect(product2.y,internalBus. InternalLoads_Wind_Speed_South) annotation (
+      Line(points={{-61.6,26},{-52,26},{-52,-86},{-70,-86},{-70,-85.9},{-87.9,
+          -85.9}},                                        color={0,0,127}));
+  connect(product3.y,internalBus. InternalLoads_Wind_Speed_West) annotation (
+      Line(points={{-61.6,-14},{-52,-14},{-52,-85.9},{-87.9,-85.9}},
+                                                              color={0,0,127}));
+  connect(gain1.y,internalBus. InternalLoads_Wind_Speed_Hor) annotation (Line(
+        points={{-73.4,-54},{-52,-54},{-52,-85.9},{-87.9,-85.9}},
+                                                           color={0,0,127}));
+  connect(weather.WindSpeed,product1. u1) annotation (Line(points={{-143,30},{
+          -98,30},{-98,68.4},{-70.8,68.4}},
+                                      color={0,0,127}));
+  connect(weather.SolarRadiation_OrientedSurfaces[2],SolarRadiation_East)
+    annotation (Line(points={{-166.8,13},{-166.8,12},{-118,12},{-118,26},{-48,
+          26},{-48,56},{-28,56}},
+                     color={255,128,0}));
+  connect(weather.SolarRadiation_OrientedSurfaces[1],SolarRadiation_North5)
+    annotation (Line(points={{-166.8,13},{-166.8,12},{-118,12},{-118,26},{-48,
+          26},{-48,96},{-28,96}},
+                     color={255,128,0}));
+  connect(weather.SolarRadiation_OrientedSurfaces[3],SolarRadiation_South)
+    annotation (Line(points={{-166.8,13},{-166.8,12},{-118,12},{-118,26},{-48,
+          26},{-48,16},{-28,16}},
+                           color={255,128,0}));
+  connect(weather.SolarRadiation_OrientedSurfaces[4],SolarRadiation_West)
+    annotation (Line(points={{-166.8,13},{-166.8,12},{-118,12},{-118,26},{-48,
+          26},{-48,-24},{-28,-24}},
+                           color={255,128,0}));
+  connect(weather.SolarRadiation_OrientedSurfaces[5],SolarRadiation_Hor)
+    annotation (Line(points={{-166.8,13},{-166.8,12},{-118,12},{-118,26},{-48,
+          26},{-48,-64},{-28,-64}},
+                           color={255,128,0}));
+  connect(weather.WindDirection,gain. u)
+    annotation (Line(points={{-143,33},{-138,33},{-138,67},{-129,67}},
+                                                             color={0,0,127}));
+  connect(gain.y,combiTable1D. u[1]) annotation (Line(points={{-117.5,67},{
+          -105.75,67},{-105.75,93},{-93,93}},
+                                   color={0,0,127}));
+  connect(combiTable1D1.u[1],gain. y) annotation (Line(points={{-93,53},{-106,
+          53},{-106,67},{-117.5,67}},
+                             color={0,0,127}));
+  connect(combiTable1D2.u[1],gain. y) annotation (Line(points={{-93,13},{-106,
+          13},{-106,67},{-117.5,67}},
+                              color={0,0,127}));
+  connect(combiTable1D3.u[1],gain. y) annotation (Line(points={{-93,-27},{-106,
+          -27},{-106,67},{-117.5,67}},
+                              color={0,0,127}));
+  connect(preTemFloor.port, southFacingWindows.Therm_ground) annotation (Line(
+        points={{27,-22},{10,-22},{10,-3.6},{8.8,-3.6}}, color={191,0,0}));
+  connect(thermalCollector.port_b, southFacingWindows.thermRoom)
+    annotation (Line(points={{78,-22},{78,8.3},{9.1,8.3}}, color={191,0,0}));
+  connect(weather.WindSpeed, southFacingWindows.WindSpeedPort) annotation (Line(
+        points={{-143,30},{-132,30},{-132,8},{-120,8},{-120,9},{1,9}}, color={0,
+          0,127}));
+  connect(SolarRadiation_North5, southFacingWindows.SolarRadiationPort[1])
+    annotation (Line(points={{-28,96},{-14,96},{-14,11.2},{1,11.2}}, color={255,
+          128,0}));
+  connect(SolarRadiation_East, southFacingWindows.SolarRadiationPort[2])
+    annotation (Line(points={{-28,56},{-14,56},{-14,11.6},{1,11.6}}, color={255,
+          128,0}));
+  connect(SolarRadiation_South, southFacingWindows.SolarRadiationPort[3])
+    annotation (Line(points={{-28,16},{-14,16},{-14,12},{1,12}}, color={255,128,
           0}));
-  connect(InternalGains.y, prescribedHeatFlowInternal.Q_flow) annotation (Line(
-        points={{53,16},{48,16},{48,18},{40,18}}, color={0,0,127}));
-  connect(prescribedSolarRad.solarRad_out, southFacingWindows.SolarRadiationPort)
-    annotation (Line(points={{-35,32},{-26,32},{-26,4},{-11,4}}, color={255,128,
-          0}));
-
-  connect(const[1].y, prescribedSolarRad[1].I[1])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.02},{-52.9,40.02}}, color={0,0,127}));
-
-  connect(const[2].y, prescribedSolarRad[1].I[2])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.46},{-52.9,40.46}},color={0,0,127}));
-
-  connect(const[3].y, prescribedSolarRad[1].I[3])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.9},{-52.9,40.9}},  color={0,0,127}));
-
-  connect(const[4].y, prescribedSolarRad[1].I[4])
-   annotation (Line(points={{-73,82},{-66,82},{-66,41.34},{-52.9,41.34}}, color={0,0,127}));
-
-  connect(const[5].y, prescribedSolarRad[1].I[5])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.78},{-52.9,41.78}}, color={0,0,127}));
-
-  connect(const[6].y, prescribedSolarRad[2].I[1])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.02},{-52.9,40.02}}, color={0,0,127}));
-
-  connect(const[7].y, prescribedSolarRad[2].I[2])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.46},{-52.9,40.46}},color={0,0,127}));
-
-  connect(const[8].y, prescribedSolarRad[2].I[3])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.9},{-52.9,40.9}}, color={0,0,127}));
-
-  connect(const[9].y, prescribedSolarRad[2].I[4])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.34},{-52.9,41.34}}, color={0,0,127}));
-
-  connect(const[10].y, prescribedSolarRad[2].I[5])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.78},{-52.9,41.78}}, color={0,0,127}));
-
-  connect(const[11].y, prescribedSolarRad[3].I[1])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.02},{-52.9,40.02}}, color={0,0,127}));
-
-  connect(const[12].y, prescribedSolarRad[3].I[2])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.46},{-52.9,40.46}},color={0,0,127}));
-
-  connect(const[13].y, prescribedSolarRad[3].I[3])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.9},{-52.9,40.9}}, color={0,0,127}));
-
-  connect(const[14].y, prescribedSolarRad[3].I[4])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.34},{-52.9,41.34}}, color={0,0,127}));
-
-  connect(const[15].y, prescribedSolarRad[3].I[5])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.78},{-52.9,41.78}}, color={0,0,127}));
-
-  connect(const[16].y, prescribedSolarRad[4].I[1])
-   annotation (Line(points={{-73,82},{-66,82},{-66,40.02},{-52.9,40.02}}, color={0,0,127}));
-
-  connect(const[17].y, prescribedSolarRad[4].I[2])
-   annotation (Line(points={{-73,82},{-66,82},{-66,40.46},{-52.9,40.46}},color={0,0,127}));
-
-  connect(const[18].y, prescribedSolarRad[4].I[3])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.9},{-52.9,40.9}}, color={0,0,127}));
-
-  connect(const[19].y, prescribedSolarRad[4].I[4])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.34},{-52.9,41.34}}, color={0,0,127}));
-
-  connect(const[20].y, prescribedSolarRad[4].I[5])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.78},{-52.9,41.78}}, color={0,0,127}));
-
-   connect(const[21].y, prescribedSolarRad[5].I[1])
-   annotation (Line(points={{-73,82},{-66,82},{-66,40.02},{-52.9,40.02}}, color={0,0,127}));
-
-  connect(const[22].y, prescribedSolarRad[5].I[2])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.46},{-52.9,40.46}},color={0,0,127}));
-
-  connect(const[23].y, prescribedSolarRad[5].I[3])
-  annotation (Line(points={{-73,82},{-66,82},{-66,40.9},{-52.9,40.9}}, color={0,0,127}));
-
-  connect(const[24].y, prescribedSolarRad[5].I[4])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.34},{-52.9,41.34}}, color={0,0,127}));
-
-  connect(const[25].y, prescribedSolarRad[5].I[5])
-  annotation (Line(points={{-73,82},{-66,82},{-66,41.78},{-52.9,41.78}}, color={0,0,127}));
-
-
-
-  connect(const1[1].y, prescribedSolarRad[1].I_dir[1])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.2},{-53,36.2}},     color={0,0,127}));
-
-  connect(const1[2].y, prescribedSolarRad[1].I_dir[2])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.6},{-53,36.6}},    color={0,0,127}));
-
-  connect(const1[3].y, prescribedSolarRad[1].I_dir[3])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37},{-53,37}},        color={0,0,127}));
-
-  connect(const1[4].y, prescribedSolarRad[1].I_dir[4])
-   annotation (Line(points={{-73,48},{-70,48},{-70,37.4},{-53,37.4}},     color={0,0,127}));
-
-  connect(const1[5].y, prescribedSolarRad[1].I_dir[5])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.8},{-53,37.8}},     color={0,0,127}));
-
-  connect(const1[6].y, prescribedSolarRad[2].I_dir[1])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.2},{-53,36.2}},     color={0,0,127}));
-
-  connect(const1[7].y, prescribedSolarRad[2].I_dir[2])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.6},{-53,36.6}},    color={0,0,127}));
-
-  connect(const1[8].y, prescribedSolarRad[2].I_dir[3])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37},{-53,37}},       color={0,0,127}));
-
-  connect(const1[9].y, prescribedSolarRad[2].I_dir[4])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.4},{-53,37.4}},     color={0,0,127}));
-
-  connect(const1[10].y, prescribedSolarRad[2].I_dir[5])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.8},{-53,37.8}},     color={0,0,127}));
-
-  connect(const1[11].y, prescribedSolarRad[3].I_dir[1])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.2},{-53,36.2}},     color={0,0,127}));
-
-  connect(const1[12].y, prescribedSolarRad[3].I_dir[2])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.6},{-53,36.6}},    color={0,0,127}));
-
-  connect(const1[13].y, prescribedSolarRad[3].I_dir[3])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37},{-53,37}},       color={0,0,127}));
-
-  connect(const1[14].y, prescribedSolarRad[3].I_dir[4])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.4},{-53,37.4}},     color={0,0,127}));
-
-  connect(const1[15].y, prescribedSolarRad[3].I_dir[5])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.8},{-53,37.8}},     color={0,0,127}));
-
-  connect(const1[16].y, prescribedSolarRad[4].I_dir[1])
-   annotation (Line(points={{-73,48},{-70,48},{-70,36.2},{-53,36.2}},     color={0,0,127}));
-
-  connect(const1[17].y, prescribedSolarRad[4].I_dir[2])
-   annotation (Line(points={{-73,48},{-70,48},{-70,36.6},{-53,36.6}},    color={0,0,127}));
-
-  connect(const1[18].y, prescribedSolarRad[4].I_dir[3])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37},{-53,37}},       color={0,0,127}));
-
-  connect(const1[19].y, prescribedSolarRad[4].I_dir[4])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.4},{-53,37.4}},     color={0,0,127}));
-
-  connect(const1[20].y, prescribedSolarRad[4].I_dir[5])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.8},{-53,37.8}},     color={0,0,127}));
-
-   connect(const1[21].y, prescribedSolarRad[5].I_dir[1])
-   annotation (Line(points={{-73,48},{-70,48},{-70,36.2},{-53,36.2}},     color={0,0,127}));
-
-  connect(const1[22].y, prescribedSolarRad[5].I_dir[2])
-  annotation (Line(points={{-73,48},{-70,48},{-70,36.6},{-53,36.6}},    color={0,0,127}));
-
-  connect(const1[23].y, prescribedSolarRad[5].I_dir[3])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37},{-53,37}},       color={0,0,127}));
-
-  connect(const1[24].y, prescribedSolarRad[5].I_dir[4])
-  annotation (Line(points={{-73,48},{-70,48},{-70,37.4},{-53,37.4}},     color={0,0,127}));
-
-  connect(const2[25].y, prescribedSolarRad[5].I_dir[5])
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-
-
-
-connect(const2[1].y, prescribedSolarRad[1].I_diff[1])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32.2},{-53,32.2}},     color={0,0,127}));
-
-  connect(const2[2].y, prescribedSolarRad[1].I_diff[2])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32.6},{-53,32.6}},    color={0,0,127}));
-
-  connect(const2[3].y, prescribedSolarRad[1].I_diff[3])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33},{-53,33}},        color={0,0,127}));
-
-  connect(const2[4].y, prescribedSolarRad[1].I_diff[4])
-   annotation (Line(points={{-73,16},{-70,16},{-70,33.4},{-53,33.4}},     color={0,0,127}));
-
-  connect(const2[5].y, prescribedSolarRad[1].I_diff[5])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.8},{-53,33.8}},     color={0,0,127}));
-
-  connect(const2[6].y, prescribedSolarRad[2].I_diff[1])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32.2},{-53,32.2}},     color={0,0,127}));
-
-  connect(const2[7].y, prescribedSolarRad[2].I_diff[2])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32.6},{-53,32.6}},    color={0,0,127}));
-
-  connect(const2[8].y, prescribedSolarRad[2].I_diff[3])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33},{-53,33}},       color={0,0,127}));
-
-  connect(const2[9].y, prescribedSolarRad[2].I_diff[4])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.4},{-53,33.4}},     color={0,0,127}));
-
-  connect(const2[10].y, prescribedSolarRad[2].I_diff[5])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.8},{-53,33.8}},     color={0,0,127}));
-
-  connect(const2[11].y, prescribedSolarRad[3].I_diff[1])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32},{-58,32},{-58,32.2},{-53,
-          32.2}},                                                        color={0,0,127}));
-
-  connect(const2[12].y, prescribedSolarRad[3].I_diff[2])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32.6},{-53,32.6}},    color={0,0,127}));
-
-  connect(const2[13].y, prescribedSolarRad[3].I_diff[3])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33},{-53,33}},       color={0,0,127}));
-
-  connect(const2[14].y, prescribedSolarRad[3].I_diff[4])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.4},{-53,33.4}},     color={0,0,127}));
-
-  connect(const2[15].y, prescribedSolarRad[3].I_diff[5])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.8},{-53,33.8}},     color={0,0,127}));
-
-  connect(const2[16].y, prescribedSolarRad[4].I_diff[1])
-   annotation (Line(points={{-73,16},{-70,16},{-70,32},{-60,32},{-60,32.2},{-53,
-          32.2}},                                                         color={0,0,127}));
-
-  connect(const2[17].y, prescribedSolarRad[4].I_diff[2])
-   annotation (Line(points={{-73,16},{-70,16},{-70,32.6},{-53,32.6}},    color={0,0,127}));
-
-  connect(const2[18].y, prescribedSolarRad[4].I_diff[3])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33},{-53,33}},       color={0,0,127}));
-
-  connect(const2[19].y, prescribedSolarRad[4].I_diff[4])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.4},{-53,33.4}},     color={0,0,127}));
-
-  connect(const2[20].y, prescribedSolarRad[4].I_diff[5])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.8},{-53,33.8}},     color={0,0,127}));
-
-   connect(const2[21].y, prescribedSolarRad[5].I_diff[1])
-   annotation (Line(points={{-73,16},{-70,16},{-70,32.2},{-53,32.2}},     color={0,0,127}));
-
-  connect(const2[22].y, prescribedSolarRad[5].I_diff[2])
-  annotation (Line(points={{-73,16},{-70,16},{-70,32.6},{-53,32.6}},    color={0,0,127}));
-
-  connect(const2[23].y, prescribedSolarRad[5].I_diff[3])
-  annotation (Line(points={{-73,16},{-70,16},{-70,34},{-62,34},{-62,33},{-53,33}},
-                                                                       color={0,0,127}));
-
-  connect(const2[24].y, prescribedSolarRad[5].I_diff[4])
-  annotation (Line(points={{-73,16},{-70,16},{-70,33.4},{-53,33.4}},     color={0,0,127}));
-
-  connect(const2[25].y, prescribedSolarRad[5].I_diff[5])
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-
-
-
-connect(const3[1].y, prescribedSolarRad[1].I_gr[1])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.02},{-52.9,28.02}},
-                                                                         color={0,0,127}));
-
-  connect(const3[2].y, prescribedSolarRad[1].I_gr[2])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.46},{-52.9,28.46}},
-                                                                        color={0,0,127}));
-
-  connect(const3[3].y, prescribedSolarRad[1].I_gr[3])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.9},{-52.9,28.9}},color={0,0,127}));
-
-  connect(const3[4].y, prescribedSolarRad[1].I_gr[4])
-   annotation (Line(points={{-73,-16},{-66,-16},{-66,29.34},{-52.9,29.34}},
-                                                                          color={0,0,127}));
-
-  connect(const3[5].y, prescribedSolarRad[1].I_gr[5])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.78},{-52.9,29.78}},
-                                                                         color={0,0,127}));
-
-  connect(const3[6].y, prescribedSolarRad[2].I_gr[1])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.02},{-52.9,28.02}},
-                                                                         color={0,0,127}));
-
-  connect(const3[7].y, prescribedSolarRad[2].I_gr[2])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.46},{-52.9,28.46}},
-                                                                        color={0,0,127}));
-
-  connect(const3[8].y, prescribedSolarRad[2].I_gr[3])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.9},{-52.9,28.9}},
-                                                                       color={0,0,127}));
-
-  connect(const3[9].y, prescribedSolarRad[2].I_gr[4])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.34},{-52.9,29.34}},
-                                                                         color={0,0,127}));
-
-  connect(const3[10].y, prescribedSolarRad[2].I_gr[5])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.78},{-52.9,29.78}},
-                                                                         color={0,0,127}));
-
-  connect(const3[11].y, prescribedSolarRad[3].I_gr[1])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.02},{-52.9,28.02}},
-                                                                         color={0,0,127}));
-
-  connect(const3[12].y, prescribedSolarRad[3].I_gr[2])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.46},{-52.9,28.46}},
-                                                                        color={0,0,127}));
-
-  connect(const3[13].y, prescribedSolarRad[3].I_gr[3])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.9},{-52.9,28.9}},
-                                                                       color={0,0,127}));
-
-  connect(const3[14].y, prescribedSolarRad[3].I_gr[4])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.34},{-52.9,29.34}},
-                                                                         color={0,0,127}));
-
-  connect(const3[15].y, prescribedSolarRad[3].I_gr[5])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.78},{-52.9,29.78}},
-                                                                         color={0,0,127}));
-
-  connect(const3[16].y, prescribedSolarRad[4].I_gr[1])
-   annotation (Line(points={{-73,-16},{-66,-16},{-66,28.02},{-52.9,28.02}},
-                                                                          color={0,0,127}));
-
-  connect(const3[17].y, prescribedSolarRad[4].I_gr[2])
-   annotation (Line(points={{-73,-16},{-66,-16},{-66,28.46},{-52.9,28.46}},
-                                                                         color={0,0,127}));
-
-  connect(const3[18].y, prescribedSolarRad[4].I_gr[3])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.9},{-52.9,28.9}},
-                                                                       color={0,0,127}));
-
-  connect(const3[19].y, prescribedSolarRad[4].I_gr[4])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.34},{-52.9,29.34}},
-                                                                         color={0,0,127}));
-
-  connect(const3[20].y, prescribedSolarRad[4].I_gr[5])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,29.78},{-52.9,29.78}},
-                                                                         color={0,0,127}));
-
-   connect(const3[21].y, prescribedSolarRad[5].I_gr[1])
-   annotation (Line(points={{-73,-16},{-66,-16},{-66,28.02},{-52.9,28.02}},
-                                                                          color={0,0,127}));
-
-  connect(const3[22].y, prescribedSolarRad[5].I_gr[2])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.46},{-52.9,28.46}},
-                                                                        color={0,0,127}));
-
-  connect(const3[23].y, prescribedSolarRad[5].I_gr[3])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,28.9},{-52.9,28.9}},
-                                                                       color={0,0,127}));
-
-  connect(const3[24].y, prescribedSolarRad[5].I_gr[4])
-  annotation (Line(points={{-73,-16},{-66,-16},{-66,30},{-56,30},{-56,29.34},{
-          -52.9,29.34}},                                                 color={0,0,127}));
-
-  connect(const3[25].y, prescribedSolarRad[5].I_gr[5])
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-
-
-
-connect(const4[1].y, prescribedSolarRad[1].AOI[1])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.2},{-53,24.2}},   color={0,0,127}));
-
-  connect(const4[2].y, prescribedSolarRad[1].AOI[2])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.6},{-53,24.6}},  color={0,0,127}));
-
-  connect(const4[3].y, prescribedSolarRad[1].AOI[3])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25},{-53,25}},      color={0,0,127}));
-
-  connect(const4[4].y, prescribedSolarRad[1].AOI[4])
-   annotation (Line(points={{-73,-50},{-64,-50},{-64,25.4},{-53,25.4}},   color={0,0,127}));
-
-  connect(const4[5].y, prescribedSolarRad[1].AOI[5])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.8},{-53,25.8}},   color={0,0,127}));
-
-  connect(const4[6].y, prescribedSolarRad[2].AOI[1])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.2},{-53,24.2}},   color={0,0,127}));
-
-  connect(const4[7].y, prescribedSolarRad[2].AOI[2])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.6},{-53,24.6}},  color={0,0,127}));
-
-  connect(const4[8].y, prescribedSolarRad[2].AOI[3])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25},{-53,25}},     color={0,0,127}));
-
-  connect(const4[9].y, prescribedSolarRad[2].AOI[4])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.4},{-53,25.4}},   color={0,0,127}));
-
-  connect(const4[10].y, prescribedSolarRad[2].AOI[5])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.8},{-53,25.8}},   color={0,0,127}));
-
-  connect(const4[11].y, prescribedSolarRad[3].AOI[1])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.2},{-53,24.2}},   color={0,0,127}));
-
-  connect(const4[12].y, prescribedSolarRad[3].AOI[2])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.6},{-53,24.6}},  color={0,0,127}));
-
-  connect(const4[13].y, prescribedSolarRad[3].AOI[3])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25},{-53,25}},     color={0,0,127}));
-
-  connect(const4[14].y, prescribedSolarRad[3].AOI[4])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.4},{-53,25.4}},   color={0,0,127}));
-
-  connect(const4[15].y, prescribedSolarRad[3].AOI[5])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.8},{-53,25.8}},   color={0,0,127}));
-
-  connect(const4[16].y, prescribedSolarRad[4].AOI[1])
-   annotation (Line(points={{-73,-50},{-64,-50},{-64,24.2},{-53,24.2}},   color={0,0,127}));
-
-  connect(const4[17].y, prescribedSolarRad[4].AOI[2])
-   annotation (Line(points={{-73,-50},{-64,-50},{-64,24.6},{-53,24.6}},  color={0,0,127}));
-
-  connect(const4[18].y, prescribedSolarRad[4].AOI[3])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25},{-53,25}},     color={0,0,127}));
-
-  connect(const4[19].y, prescribedSolarRad[4].AOI[4])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.4},{-53,25.4}},   color={0,0,127}));
-
-  connect(const4[20].y, prescribedSolarRad[4].AOI[5])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.8},{-53,25.8}},   color={0,0,127}));
-
-   connect(const4[21].y, prescribedSolarRad[5].AOI[1])
-   annotation (Line(points={{-73,-50},{-64,-50},{-64,24.2},{-53,24.2}},   color={0,0,127}));
-
-  connect(const4[22].y, prescribedSolarRad[5].AOI[2])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,24.6},{-53,24.6}},  color={0,0,127}));
-
-  connect(const4[23].y, prescribedSolarRad[5].AOI[3])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25},{-53,25}},     color={0,0,127}));
-
-  connect(const4[24].y, prescribedSolarRad[5].AOI[4])
-  annotation (Line(points={{-73,-50},{-64,-50},{-64,25.4},{-53,25.4}},   color={0,0,127}));
-
-  connect(const4[25].y, prescribedSolarRad[5].AOI[5])
-   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-
-
-
+  connect(SolarRadiation_West, southFacingWindows.SolarRadiationPort[4])
+    annotation (Line(points={{-28,-24},{-14,-24},{-14,12.4},{1,12.4}}, color={
+          255,128,0}));
+  connect(SolarRadiation_Hor, southFacingWindows.SolarRadiationPort[5])
+    annotation (Line(points={{-28,-64},{-14,-64},{-14,12.8},{1,12.8}}, color={
+          255,128,0}));
 end HighOrderModel_MultipleRooms;

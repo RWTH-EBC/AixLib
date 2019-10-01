@@ -3,7 +3,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir, zoneParam=
+    redeclare package Medium = Media.Air,                    zoneParam=
     AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
@@ -15,9 +15,9 @@ model ThermalZone "Illustrates the use of ThermalZone"
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=Modelica.Utilities.Files.loadResource(
-        "D:\AixLib\AixLib\Systems\Benchmark\Model/SimYear_Variante3_angepasst.mat"))
+        "D:\AixLib\AixLib\Resources\weatherdata\USA_CA_San.Francisco.Intl.AP724940_TMY3.mos"))
     "Weather data reader"
-    annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
+    annotation (Placement(transformation(extent={{-94,18},{-74,38}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
@@ -136,11 +136,11 @@ model ThermalZone "Illustrates the use of ThermalZone"
 
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
-      points={{-72,30},{-34,30},{-34,0},{-10,0}},
+      points={{-74,28},{-34,28},{-34,0},{-10,0}},
       color={255,204,51},
       thickness=0.5));
   connect(weaDat.weaBus, weaBus) annotation (Line(
-      points={{-72,30},{-61,30},{-61,-4}},
+      points={{-74,28},{-61,28},{-61,-4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
