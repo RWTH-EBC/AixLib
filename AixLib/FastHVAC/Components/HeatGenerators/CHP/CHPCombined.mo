@@ -215,7 +215,7 @@ public
   Modelica.Blocks.Continuous.FirstOrder firstOrderPel(T=tauP_el)
     annotation (Placement(transformation(extent={{-46,74},{-34,86}})));
 
-  Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2, Falling=-2554.2)
+  Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2)
     annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderEFuel(T=5)
     annotation (Placement(transformation(extent={{-46,54},{-34,66}})));
@@ -309,11 +309,13 @@ equation
   // fixed efficiencies
   else
     // Data for IFC below. PEM & SOFC data for fixed efficiency not implemented yet!
-    if PelRel > 0.1 then
-      eff_el =eta_el_prescribed*(0.261 + 0.161*Modelica.Math.log(PelRel*100));
-    else
-      eff_el = eta_el_prescribed * 0.261;
-    end if;
+    eff_el = smooth(1, if PelRel > 0.1 then eta_el_prescribed*(0.261 + 0.161*Modelica.Math.log(PelRel*100)) else eta_el_prescribed * 0.261);
+
+//     if PelRel > 0.1 then
+//       eff_el =eta_el_prescribed*(0.261 + 0.161*Modelica.Math.log(PelRel*100));
+//     else
+//       eff_el = eta_el_prescribed * 0.261;
+//     end if;
     eff_th = omega_prescribed - eff_el;
     eta_PCU = eta_PCU_presribed;
     sigma = eff_el/eff_th;
