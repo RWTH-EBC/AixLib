@@ -26,7 +26,7 @@ model UPipe "Discretized UPipe consisting of n UPipeElements"
 
 public
     BaseClasses.UPipeElement                                 uPipeElement[n](
-    n=n,
+    each n=n,
     each medium=medium,
     T_start=T_start,
     each fillingDensity=boreholeFilling.density,
