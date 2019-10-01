@@ -45,7 +45,7 @@ model BoilerNoControl "Boiler model with physics only"
   Modelica.Blocks.Interfaces.RealOutput thermalPower "Value of Real output"
     annotation (Placement(transformation(extent={{100,70},{120,90}}),
         iconTransformation(extent={{62,74},{82,94}})));
-  Modelica.Blocks.Interfaces.RealInput u_rel "Connector of Real input signal"
+  Modelica.Blocks.Interfaces.RealInput u_rel "Relative gas power [0,1]"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,

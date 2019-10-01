@@ -1,4 +1,4 @@
-within AixLib.Fluid.BoilerCHP.BaseClasses;
+﻿within AixLib.Fluid.BoilerCHP.BaseClasses;
 model CondensingBoilerEfficiency
   "Model for temperature depending efficiency of a condensing boiler"
   parameter Real lambda=0.01 "Offset variable of weighting coefficients sigmas";
@@ -38,7 +38,7 @@ algorithm
   //Determination of the efficiency for the law without condensation
   etaSens := eta_nom + ak*(T_in - T_nom);
   //Determination of the efficiency for the law characterizing the condensation
-  etaCond := eta_int + (eta_max - eta_int)*(1 - Psat(T_in)/Psat(T_part)*T_part/T_in);
+  etaCond := eta_int + (eta_max - eta_int)*(1 - AixLib.Utilities.Psychrometrics.Functions.saturationPressure(T_in)/AixLib.Utilities.Psychrometrics.Functions.saturationPressure(T_part)*T_part/T_in);
   sigmaCond := 1/(1 + exp(T_in - Tc - lambda));
   sigmaSens := 1 - 1/(1 + exp(T_in - Tc + lambda));
   etaRP := sigmaSens*etaSens + sigmaCond*etaCond;
@@ -46,10 +46,18 @@ algorithm
 
 equation
   //Calculation of Tc
-  eta_nom + ak*(Tc - T_nom) = eta_int + (eta_max - eta_int)*(1 - Psat(Tc)/Psat(T_part)*
+  eta_nom + ak*(Tc - T_nom) = eta_int + (eta_max - eta_int)*(1 - AixLib.Utilities.Psychrometrics.Functions.saturationPressure(Tc)/AixLib.Utilities.Psychrometrics.Functions.saturationPressure(T_part)*
     T_part/Tc);
 
   eta = etaRP;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>This model calculates the efficiency of a condensing boiler and is based upon the literature <i><a href=\"https://core.ac.uk/download/pdf/46816799.pdf\">R&egrave;gles de mod&eacute;lisation des syst&egrave;mes &eacute;nerg&eacute;tiques dans les b&acirc;timents basse consommation</a></i> </p>
+<p>The efficiency depends on the inflow temperature of the boiler (T_in).</p>
+</html>", revisions="<html>
+<ul>
+<li><i>September 19, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
+</ul>
+</html>"));
 end CondensingBoilerEfficiency;

@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.BoilerCHP.Examples;
 model BoilerNoControlSystem
-  "Example that illustrates use of boiler model without control"
+  "Example that illustrates the use of the boiler model without control"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
