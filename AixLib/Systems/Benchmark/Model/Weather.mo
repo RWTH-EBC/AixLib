@@ -2,7 +2,7 @@ within AixLib.Systems.Benchmark.Model;
 model Weather
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
-  Components.Weather.Weather_Benchmark
+  AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
     Wind_dir=true,
     Wind_speed=true,

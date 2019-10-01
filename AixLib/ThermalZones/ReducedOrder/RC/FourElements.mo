@@ -1,24 +1,54 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 model FourElements "Thermal Zone with four elements for exterior walls,
   interior walls, floor plate and roof"
-  extends ThreeElements(AArray={ATotExt,ATotWin,AInt,AFloor,ARoof});
+  extends ThreeElements(
+    CFloor={2472,368000,18000,1},
+    RFloorRem=0,
+    RFloor={1.5,0.1087,1.1429,0.0429},
+    nFloor=4,
+    hConvFloor=2.5,
+    AFloor={1000,1000},
+    CInt={1000,1000},
+    RInt={0.175,0.0294},
+    redeclare package Medium = Media.Antifreeze.PropyleneGlycolWater (
+          property_T=293.15, X_a=0.40),
+    nInt=2,
+    hConvInt=2.5,
+    AInt=90,
+    CExt={1000,1030,1000,1000},
+    RExtRem=0,
+    RExt={0.05,2.857,0.48,0.0294},
+    nExt=4,
+    hConvExt=2.5,
+    AExt={30,0,30,30},
+    ratioWinConRad=0.09,
+    gWin=1,
+    RWin=0.01923,
+    hConvWin=1.3,
+    ATransparent={48,0,48,48},
+    AWin={60,0,60,60},
+    nOrientations=4,
+    hRad=5,
+    VAir=2700,          AArray={ATotExt,ATotWin,AInt,AFloor,ARoof});
 
-  parameter Modelica.SIunits.Area ARoof "Area of roof"
+  parameter Modelica.SIunits.Area ARoof=900
+                                        "Area of roof"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoof "Convective coefficient of heat transfer of roof (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvRoof=2.5
+                                                                 "Convective coefficient of heat transfer of roof (indoor)"
     annotation(Dialog(group="Roof"));
-  parameter Integer nRoof(min = 1) "Number of RC-elements of roof"
+  parameter Integer nRoof(min = 1)=4
+                                   "Number of RC-elements of roof"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.ThermalResistance RRoof[nExt](
-    each min=Modelica.Constants.small)
+  parameter Modelica.SIunits.ThermalResistance RRoof[nExt]={0.4444,0.06957,
+      0.02941,0.0001}
     "Vector of resistances of roof, from inside to outside"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.ThermalResistance RRoofRem(
-    min=Modelica.Constants.small)
+  parameter Modelica.SIunits.ThermalResistance RRoofRem(min=Modelica.Constants.small)
+    =0
     "Resistance of remaining resistor RRoofRem between capacity n and outside"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.HeatCapacity CRoof[nExt](
-    each min=Modelica.Constants.small)
+  parameter Modelica.SIunits.HeatCapacity CRoof[nExt]={2472,368000,18000,1}
     "Vector of heat capacities of roof, from inside to outside"
     annotation(Dialog(group="Roof"));
   parameter Boolean indoorPortRoof = false

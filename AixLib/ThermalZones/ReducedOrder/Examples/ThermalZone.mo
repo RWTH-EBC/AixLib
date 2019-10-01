@@ -14,7 +14,8 @@ model ThermalZone "Illustrates the use of ThermalZone"
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    filNam=Modelica.Utilities.Files.loadResource(
+        "D:\AixLib\AixLib\Systems\Benchmark\Model/SimYear_Variante3_angepasst.mat"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
