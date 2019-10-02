@@ -137,9 +137,6 @@ model Workshop_v2
         rotation=-90,
         origin={-40,-100})));
 equation
-  connect(EastWallToCanteen.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{66,-30},{50,-30},{50,-52},{-10.125,-52},{-10.125,
-          -39.22}},color={191,0,0}));
   connect(HeatPort_ToCanteen,EastWallToCanteen. port_outside) annotation (Line(
         points={{100,-30},{74.2,-30}},                   color={191,0,0}));
   connect(FloorToGround.port_outside,HeatPort_ToGround)
@@ -147,12 +144,6 @@ equation
   connect(SouthWall.SolarRadiationPort,SolarRadiationPort_SouthWall)
     annotation (Line(points={{-28,-75.2},{-28,-80},{-10,-80},{-10,-110}}, color=
          {255,128,0}));
-  connect(SouthWall.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{-50,-66},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
-  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{50,-66},{50,-52},{-10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(prescribedTemperature.port,SouthWall. port_outside)
     annotation (Line(points={{-60,-88},{-50,-88},{-50,-74.2}},
                                                      color={191,0,0}));
@@ -163,9 +154,6 @@ equation
     annotation (Line(points={{-28,65.2},{-28,80},{-10,80},{-10,110}},
                                                                     color={255,
           128,0}));
-  connect(NorthWall.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{-50,56},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
-                         color={191,0,0}));
   connect(NorthWall.WindSpeedPort,WindSpeedPort_NorthWall)  annotation (Line(
         points={{-32.4,64.2},{-32.4,80},{-40,80},{-40,100}}, color={0,0,127}));
   connect(WestWall.WindSpeedPort,WindSpeedPort_WestWall)  annotation (Line(
@@ -174,10 +162,6 @@ equation
   connect(WestWall.SolarRadiationPort,SolarRadiationPort_WestWall)  annotation (
      Line(points={{-75.2,-22},{-90,-22},{-90,-30},{-110,-30}},
                                                            color={255,128,0}));
-  connect(WestWall.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{-66,-4.44089e-16},{-50,-4.44089e-16},{-50,-52},{
-          -10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(prescribedTemperature2.port,WestWall. port_outside) annotation (Line(
         points={{-84,30},{-80,30},{-80,0},{-78,0},{-78,4.44089e-16},{-74.2,4.44089e-16}},
                                                       color={191,0,0}));
@@ -192,4 +176,22 @@ equation
   connect(SouthWall.WindSpeedPort,WindSpeedPort_SouthWall)  annotation (Line(
         points={{-32.4,-74.2},{-32.4,-74},{-32,-74},{-32,-80},{-40,-80},{-40,-100}},
                                                                  color={0,0,127}));
+  connect(thermStar_Demux.portConv, thermStar_Demux.portRad) annotation (Line(
+        points={{-28.375,-19.87},{-28.375,-20},{-10,-20},{-10,-19.48},{-14.75,
+          -19.48}}, color={191,0,0}));
+  connect(WestWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-66,-4.44089e-16},{-44,-4.44089e-16},{-44,-45.74},
+          {-20.375,-45.74}}, color={191,0,0}));
+  connect(NorthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,56},{-36,56},{-36,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{50,-66},{42,-66},{42,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(SouthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,-66},{-35,-66},{-35,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(EastWallToCanteen.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{66,-30},{24,-30},{24,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
 end Workshop_v2;

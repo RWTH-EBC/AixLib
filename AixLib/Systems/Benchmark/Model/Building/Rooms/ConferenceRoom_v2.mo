@@ -70,17 +70,8 @@ equation
   connect(FloorToWorkshop.port_outside,HeatPort_ToGround)  annotation (Line(
         points={{-50,-74.2},{-50,-100}},
         color={191,0,0}));
-  connect(FloorToWorkshop.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{-50,-66},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(WallsToOpenPlanOffice.port_outside,HeatPort_ToOpenPlanOffice)
     annotation (Line(points={{50,-74.2},{50,-100}}, color={191,0,0}));
-  connect(WallsToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{50,-66},{50,-52},{-10.125,-52},{-10.125,-39.22}},
-                   color={191,0,0}));
-  connect(NorthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-50,56},{-50,-40},{-10.125,-40},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(prescribedTemperature2.port,NorthWall. port_outside)
     annotation (Line(points={{-50,84},{-50,64.2}}, color={191,0,0}));
   connect(NorthWall.WindSpeedPort, WindSpeedPort_NorthWall) annotation (Line(
@@ -92,6 +83,15 @@ equation
   connect(NorthWall.SolarRadiationPort, SolarRadiationPort_NorthWall)
     annotation (Line(points={{-28,65.2},{-28,80},{-10,80},{-10,110}},
                                   color={255,128,0}));
+  connect(NorthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,56},{-34,56},{-34,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(WallsToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{50,-66},{16,-66},{16,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(FloorToWorkshop.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,-66},{-34,-66},{-34,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end ConferenceRoom_v2;

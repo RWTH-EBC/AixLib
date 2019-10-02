@@ -3,14 +3,14 @@ model BaseRoom
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
   AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation(Placement(transformation(extent={{-13,10},
-            {13,-10}},                                                                                                            rotation = 90, origin={-10,-27})));
+            {13,-10}},                                                                                                            rotation = 90, origin={-22,-33})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall activeWallPipeBased(
     withDoor=false,
     ISOrientation=3,
     outside=true,
     wall_length=20,
     wall_height=5,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA(),
+    WallType=AixLib.Systems.Benchmark.Benchmark_DataBase.CE_RO_EnEV2009_SM_TBA(),
     solar_absorptance=0.48)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
@@ -67,10 +67,6 @@ model BaseRoom
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
     annotation (Placement(transformation(extent={{20,-50},{40,-30}})));
 equation
-  connect(activeWallPipeBased.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{40,56},{40,48},{-50,48},{-50,-52},{-10,-52},{-10,
-          -40},{-10.125,-40},{-10.125,-39.22}},
-                         color={191,0,0}));
   connect(WindSpeedPort_Roof,activeWallPipeBased. WindSpeedPort) annotation (
       Line(points={{60,100},{60,80},{57.6,80},{57.6,64.2}}, color={0,0,127}));
   connect(activeWallPipeBased.SolarRadiationPort,SolarRadiationPort_Hor)
@@ -83,35 +79,35 @@ equation
           {28,-20}},                           color={0,127,255}));
   connect(Air_out,vol. ports[2]) annotation (Line(points={{100,40},{50,40},{50,
           -20},{32,-20}},          color={0,127,255}));
-  connect(vol.heatPort,thermStar_Demux. therm) annotation (Line(points={{20,-10},
-          {-16.375,-10},{-16.375,-13.87}},
-                                     color={191,0,0}));
   connect(vol.mWat_flow, mFlow_Water) annotation (Line(points={{18,-2},{-10,-2},
           {-10,80},{-80,80},{-80,90},{-100,90}}, color={0,0,127}));
-  connect(thermStar_Demux.therm, AddPower_System) annotation (Line(points={{
-          -16.375,-13.87},{-16.375,80},{-80,80},{-80,60},{-100,60}}, color={191,
-          0,0}));
   connect(temperatureSensor.T, measureBus.RoomTemp_Multipersonoffice)
     annotation (Line(points={{40,20},{50,20},{50,-52},{-50,-52},{-50,-59.9},{
           -99.9,-59.9}},         color={0,0,127}));
   connect(vol.X_w, measureBus.X_Multipersonoffice) annotation (Line(points={{42,-14},
           {50,-14},{50,-52},{-50,-52},{-50,-59.9},{-99.9,-59.9}},
         color={0,0,127}));
-  connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
-        points={{20,20},{-16.375,20},{-16.375,-13.87}},           color={191,0,
-          0}));
   connect(prescribedTemperature1.port, activeWallPipeBased.port_outside)
     annotation (Line(points={{36,80},{40,80},{40,64.2}},
                                                  color={191,0,0}));
   connect(prescribedTemperature1.T, measureBus.AirTemp) annotation (Line(points={{22.8,80},
           {10,80},{10,48},{-50,48},{-50,-59.9},{-99.9,-59.9}},
         color={0,0,127}));
-  connect(temperatureSensor1.port, thermStar_Demux.star) annotation (Line(
-        points={{20,-40},{10,-40},{10,-13.48},{-2.75,-13.48}},
-                                                       color={191,0,0}));
   connect(temperatureSensor1.T, measureBus.StrahlungTemp_Multipersonoffice)
     annotation (Line(points={{40,-40},{50,-40},{50,-52},{-50,-52},{-50,-59.9},{
           -99.9,-59.9}},                       color={0,0,127}));
+  connect(temperatureSensor1.port, thermStar_Demux.portRad) annotation (Line(
+        points={{20,-40},{4,-40},{4,-19.48},{-14.75,-19.48}}, color={191,0,0}));
+  connect(vol.heatPort, thermStar_Demux.portConv) annotation (Line(points={{20,
+          -10},{-4,-10},{-4,-19.87},{-28.375,-19.87}}, color={191,0,0}));
+  connect(temperatureSensor.port, thermStar_Demux.portConv) annotation (Line(
+        points={{20,20},{-4,20},{-4,-19.87},{-28.375,-19.87}}, color={191,0,0}));
+  connect(thermStar_Demux.portConv, AddPower_System) annotation (Line(points={{
+          -28.375,-19.87},{-28.375,19.065},{-100,19.065},{-100,60}}, color={191,
+          0,0}));
+  connect(thermStar_Demux.portConvRadComb, activeWallPipeBased.thermStarComb_inside)
+    annotation (Line(points={{-20.375,-45.74},{-20.375,6.13},{40,6.13},{40,56}},
+        color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BaseRoom;

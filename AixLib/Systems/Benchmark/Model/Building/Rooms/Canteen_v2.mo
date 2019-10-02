@@ -119,18 +119,11 @@ model Canteen_v2
         rotation=180,
         origin={-66,90})));
 equation
-  connect(EastWallToOpenplanoffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{66,-30},{50,-30},{50,-52},{-10.125,-52},{-10.125,
-          -39.22}},
-        color={191,0,0}));
   connect(EastWallToOpenplanoffice.port_outside,HeatPort_ToOpenplanoffice)
     annotation (Line(points={{74.2,-30},{100,-30}},               color={191,0,
           0}));
   connect(FloorToGround.port_outside,HeatPort_ToGround)
     annotation (Line(points={{50,-74.2},{50,-100}}, color={191,0,0}));
-  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{50,-66},{50,-52},{-10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(SouthWall.SolarRadiationPort,SolarRadiationPort_SouthWall)
     annotation (Line(points={{-28,-75.2},{-28,-80},{-10,-80},{-10,-110}}, color=
          {255,128,0}));
@@ -140,20 +133,10 @@ equation
   connect(prescribedTemperature.T, measureBus.AirTemp) annotation (Line(points={{-73.2,
           -88},{-80,-88},{-80,-59.9},{-99.9,-59.9}},
                          color={0,0,127}));
-  connect(SouthWall.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{-50,-66},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(SouthWall.WindSpeedPort,WindSpeedPort_SouthWall)  annotation (Line(
         points={{-32.4,-74.2},{-32.4,-80},{-40,-80},{-40,-100}}, color={0,0,127}));
   connect(WestWallToWorkshop.port_outside,HeatPort_ToWorkshop)
     annotation (Line(points={{-74.2,0},{-100,0}}, color={191,0,0}));
-  connect(WestWallToWorkshop.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-66,0},{-50,0},{-50,-52},{-10.125,-52},{-10.125,
-          -39.22}},
-        color={191,0,0}));
-  connect(NorthWall.thermStarComb_inside,thermStar_Demux. thermStarComb)
-    annotation (Line(points={{-50,56},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
-                         color={191,0,0}));
   connect(NorthWall.WindSpeedPort,WindSpeedPort_NorthWall)  annotation (Line(
         points={{-32.4,64.2},{-32.4,80},{-40,80},{-40,100}}, color={0,0,127}));
   connect(prescribedTemperature2.port, NorthWall.port_outside)
@@ -165,8 +148,21 @@ equation
     annotation (Line(points={{-28,65.2},{-28,80},{-10,80},{-10,110}},
                                                                     color={255,
           128,0}));
+  connect(NorthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,56},{-36,56},{-36,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(WestWallToWorkshop.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-66,0},{-44,0},{-44,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(SouthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,-66},{-36,-66},{-36,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{50,-66},{16,-66},{16,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(EastWallToOpenplanoffice.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{66,-30},{24,-30},{24,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Line(points={{
-              -14.75,-19.48},{-14.75,-26},{-228,-26},{-228,50}}, color={95,95,
-              95})}));
+        coordinateSystem(preserveAspectRatio=false)));
 end Canteen_v2;

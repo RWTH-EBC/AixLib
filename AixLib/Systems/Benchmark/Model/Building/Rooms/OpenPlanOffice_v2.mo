@@ -164,13 +164,6 @@ model OpenPlanOffice_v2
 equation
   connect(FloorToGround.port_outside,HeatPort_ToGround)
     annotation (Line(points={{14,-84.2},{14,-100}}, color={191,0,0}));
-  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{14,-76},{14,-52},{-10.125,-52},{-10.125,-39.22}},
-        color={191,0,0}));
-  connect(WallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{70,-76},{60,-76},{60,-60},{50,-60},{50,-52},{-10,
-          -52},{-10,-44},{-10.125,-44},{-10.125,-39.22}},
-                          color={191,0,0}));
   connect(WallToMultiPersonOffice.port_outside,HeatPort_ToMultiPersonOffice)
     annotation (Line(points={{70,-84.2},{70,-100}}, color={191,0,0}));
   connect(EastWall.WindSpeedPort, WindSpeedPort_EastWall) annotation (Line(
@@ -178,10 +171,6 @@ equation
                                                                  color={0,0,127}));
   connect(EastWall.SolarRadiationPort, SolarRadiationPort_EastWall) annotation (
      Line(points={{75.2,-62},{90,-62},{90,-70},{110,-70}}, color={255,128,0}));
-  connect(EastWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{66,-40},{50,-40},{50,-52},{-10,-52},{-10,-46},{
-          -10.125,-46},{-10.125,-39.22}},
-        color={191,0,0}));
   connect(prescribedTemperature3.port,EastWall. port_outside)
     annotation (Line(points={{82,-26},{82,-40},{74.2,-40}},
                                                color={191,0,0}));
@@ -191,16 +180,9 @@ equation
           {0,0,127}));
   connect(WallToConferenceRoom.port_outside,HeatPort_ToConferenceRoom)
     annotation (Line(points={{-74.2,20},{-100,20}},   color={191,0,0}));
-  connect(WallToConferenceRoom.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-66,20},{-50,20},{-50,-52},{-10.125,-52},{-10.125,
-          -39.22}},color={191,0,0}));
   connect(WestWallToCanteen.port_outside,HeatPort_ToCanteen)
     annotation (Line(points={{-74.2,-30},{-100,-30}},
                        color={191,0,0}));
-  connect(WestWallToCanteen.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-66,-30},{-50,-30},{-50,-52},{-10.125,-52},{
-          -10.125,-39.22}},
-                   color={191,0,0}));
   connect(SouthWall.WindSpeedPort,WindSpeedPort_SouthWall)  annotation (Line(
         points={{-32.4,-74.2},{-32.4,-80},{-40,-80},{-40,-100}}, color={0,0,127}));
   connect(SouthWall.SolarRadiationPort,SolarRadiationPort_SouthWall)
@@ -212,13 +194,6 @@ equation
   connect(prescribedTemperature2.T, measureBus.AirTemp) annotation (Line(points={{-73.2,
           -88},{-80,-88},{-80,-59.9},{-99.9,-59.9}},
                          color={0,0,127}));
-  connect(SouthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-50,-66},{-50,-52},{-10,-52},{-10,-40},{-10.125,
-          -40},{-10.125,-39.22}},
-                             color={191,0,0}));
-  connect(NorthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-50,56},{-50,-52},{-10.125,-52},{-10.125,-39.22}},
-                         color={191,0,0}));
   connect(NorthWall.WindSpeedPort, WindSpeedPort_NorthWall) annotation (Line(
         points={{-32.4,64.2},{-32.4,80},{-40,80},{-40,100}}, color={0,0,127}));
   connect(prescribedTemperature.port,NorthWall. port_outside)
@@ -235,6 +210,27 @@ equation
     annotation (Line(points={{-28,65.2},{-28,80},{-10,80},{-10,110}},
                                                                     color={255,
           128,0}));
+  connect(NorthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,56},{-36,56},{-36,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(SouthWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-50,-66},{-36,-66},{-36,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(WestWallToCanteen.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-66,-30},{-44,-30},{-44,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(WallToConferenceRoom.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{-66,20},{-44,20},{-44,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(EastWall.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{66,-40},{24,-40},{24,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(WallToMultiPersonOffice.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{70,-76},{26,-76},{26,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
+  connect(FloorToGround.thermStarComb_inside, thermStar_Demux.portConvRadComb)
+    annotation (Line(points={{14,-76},{-4,-76},{-4,-45.74},{-20.375,-45.74}},
+        color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end OpenPlanOffice_v2;
