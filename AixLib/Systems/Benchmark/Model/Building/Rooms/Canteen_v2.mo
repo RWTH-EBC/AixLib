@@ -166,5 +166,7 @@ equation
                                                                     color={255,
           128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false), graphics={Line(points={{
+              -14.75,-19.48},{-14.75,-26},{-228,-26},{-228,50}}, color={95,95,
+              95})}));
 end Canteen_v2;
