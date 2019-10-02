@@ -2,7 +2,7 @@ within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model ReducedOrderModel_OneRoom
   "Single instance of reduced order room with input paramaters"
    extends Modelica.Icons.Example;
- package  Medium = AixLib.Media.Air;
+
 
  ThermalZones.ReducedOrder.RC.FourElements thermalZoneFourElements(
     each hRad=5,

@@ -181,26 +181,25 @@ equation
           70},{0,42},{0,-84},{-32,-84},{-32,-92},{-31.9,-92},{-31.9,-99.9}},
         color={0,0,127}));
   connect(weather.SolarRadiation_OrientedSurfaces[2], SolarRadiation_East)
-    annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,30},
-          {110,30}}, color={255,128,0}));
+    annotation (Line(points={{-42.8,13},{-42.8,-2},{20,-2},{20,12},{90,12},{90,
+          30},{110,30}},
+                     color={255,128,0}));
   connect(weather.SolarRadiation_OrientedSurfaces[1], SolarRadiation_North5)
-    annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,70},
-          {110,70}}, color={255,128,0}));
+    annotation (Line(points={{-42.8,13},{-42.8,-2},{20,-2},{20,12},{90,12},{90,
+          70},{110,70}},
+                     color={255,128,0}));
   connect(weather.SolarRadiation_OrientedSurfaces[3], SolarRadiation_South)
-    annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,
+    annotation (Line(points={{-42.8,13},{-42.8,-2},{20,-2},{20,12},{90,12},{90,
           -10},{110,-10}}, color={255,128,0}));
   connect(weather.SolarRadiation_OrientedSurfaces[4], SolarRadiation_West)
-    annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,
+    annotation (Line(points={{-42.8,13},{-42.8,-2},{20,-2},{20,12},{90,12},{90,
           -50},{110,-50}}, color={255,128,0}));
   connect(weather.SolarRadiation_OrientedSurfaces[5], SolarRadiation_Hor)
-    annotation (Line(points={{-42.8,13},{-42.8,0},{20,0},{20,14},{90,14},{90,
+    annotation (Line(points={{-42.8,13},{-42.8,-2},{20,-2},{20,12},{90,12},{90,
           -90},{110,-90}}, color={255,128,0}));
   connect(pVSystem.TOutside, boundary.T_in) annotation (Line(points={{-52,77.6},
           {-60,77.6},{-60,0},{0,0},{0,26},{0,26},{0,-16},{-42,-16}}, color={0,0,
           127}));
-  connect(pVSystem.IcTotalRad, weather.SolarRadiation_OrientedSurfaces[6])
-    annotation (Line(points={{-51.8,69.5},{-60,69.5},{-60,0},{-42.8,0},{-42.8,
-          13}}, color={255,128,0}));
   connect(RLT_Velocity, gain3.y)
     annotation (Line(points={{-110,80},{-86.4,80}}, color={0,0,127}));
   connect(gain3.u, combiTable1Ds.y[1]) annotation (Line(points={{-77.2,80},{-60,
@@ -219,6 +218,9 @@ equation
           -58,-60},{-58,-63.2},{-55.2,-63.2}}, color={0,0,127}));
   connect(switch1.u2, controlBus.OnOff_RLT) annotation (Line(points={{-55.2,-68},
           {-88,-68},{-88,-99.9},{-69.9,-99.9}}, color={255,0,255}));
+  connect(weather.SolarRadiation_OrientedSurfaces[5], pVSystem.IcTotalRad)
+    annotation (Line(points={{-42.8,13},{-42.8,40.5},{-51.8,40.5},{-51.8,69.5}},
+        color={255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;
