@@ -76,7 +76,7 @@ model Generation_v2
     redeclare package Medium = Medium_Water,
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
-    data=DataBase.Storage.Benchmark_22000l(),
+    data=AixLib.Systems.Benchmark.Benchmark_DataBase.Benchmark_22000l(),
     TStart=343.15)
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
   Generation_heatPump generation_heatPump1(
@@ -102,7 +102,7 @@ model Generation_v2
     useHeatingCoil2=true,
     upToDownHC2=false,
     TStart=283.15,
-    data=DataBase.Storage.Benchmark_46000l())
+    data=AixLib.Systems.Benchmark.Benchmark_DataBase.Benchmark_46000l())
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve4(
     y_start=0,
@@ -168,7 +168,7 @@ model Generation_v2
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water,
     TStart=308.15,
-    data=DataBase.Storage.Benchmark_22000l())
+    data=AixLib.Systems.Benchmark.Benchmark_DataBase.Benchmark_22000l())
     annotation (Placement(transformation(extent={{16,-18},{46,20}})));
   Fluid.Sources.Boundary_pT bou4(
     redeclare package Medium = Medium_Water,
