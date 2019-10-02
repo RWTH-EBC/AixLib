@@ -4,6 +4,7 @@
 1. [Building Physics](#buildingphysics)
 2. [Building Systems](#buildingsystems)
 3. [District Heating and Cooling](#dhc)
+4. [Moisture Recovery Systems](#mrs)
 4. [Fast HVAC](#fasthvac)
 
 
@@ -54,6 +55,10 @@ Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Remmen, Peter; Streblow, Rita; 
 Mans, Michael; Blacha, Tobias; Remmen, Peter; Müller, Dirk; Modelica Conference 2019, p. 179-186, March 2019, [pdf](http://www.ep.liu.se/ecp/157/ecp19157.pdf), [DOI: 10.3384/ecp19157179](http://dx.doi.org/10.3384/ecp19157179)
 
 
+## Moisture Recovery <a name ="mrs"></a>
+
+##### Moisture Recovery - A Dynamic Modelling Approach
+Kremer, Martin; Mathis, Paul; Müller, Dirk; Clima 2019, May 2019,[pdf](https://www.e3s-conferences.org/articles/e3sconf/pdf/2019/37/e3sconf_clima2019_01099.pdf), [DOI:10.1051/e3sconf/2019111101099](https://doi.org/10.1051/e3sconf/201911101099)
 
 ## Fast HVAC <a name="fasthvac"></a>
 ```enter publications here```
