@@ -6,8 +6,7 @@ record Vitocal200AWO201
     tableQdot_con=[0, -15, -7, 2, 7, 10, 20, 30; 35, 3020, 3810, 2610, 3960, 4340, 5350, 6610; 45, 3020, 3780, 2220, 3870, 4120, 5110, 6310; 55, 3120, 3790, 2430, 3610, 3910, 4850, 6000],
     mFlow_conNom=3960/4180/5,
     mFlow_evaNom=(2250*1.2)/3600,
-    tableUppBou=[-20, 50;-10, 60;30, 60;35,55],
-    tableLowBou=[-20, 25; 25,25;35, 35]);
+    tableUppBou=[-20, 50;-10, 60;30, 60;35,55]);
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
