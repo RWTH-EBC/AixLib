@@ -599,3 +599,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 <li>Second heat generator: Any two port interface. This model should represent an auxiliar heater or a boiler in order to simulate a bivalent or hybrid heat pump system.</li>
 </ol>
 </html>"));
+end PartialHeatPumpSystem;
