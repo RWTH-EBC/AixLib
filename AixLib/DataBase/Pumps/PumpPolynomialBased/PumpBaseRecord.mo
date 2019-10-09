@@ -100,9 +100,9 @@ record PumpBaseRecord "Definition of pump data"
 <h5>Coefficients (Special Case of ABC-Formula)</h5>
 <p>A special type of formula has been &quot;developed&quot; for stability reasons. High order polynomials showed a good agreement with real pump data but lead to instable simulations (especially initialization) in certain situations. It was not clear what exactly would cause initialization problems with the high order polynomials but that low order polynomials could solve that problem with the disadvantage of lower acuracy of the pump curves. For example:</p>
 <p>H= a*n^2+b*Q*n+c*Q^2&quot;</p>
-<p><br>Using the c[i,j]-matrix this would become:</p>
+<p><br/>Using the c[i,j]-matrix this would become:</p>
 <p>H= c(0,2)*n^2+c(1,1)*Q*n+c(2,0)*Q^2</p>
-<p><br>Therefore, the ABC-Formula emerges as a special case out of the general formulation. In order to implement the latter formula directly to speed up the computation and also allow to switch between the precise and the not so precise pump curves without creating a second record for the same pump, there is a second set of coefficients:</p>
+<p><br/>Therefore, the ABC-Formula emerges as a special case out of the general formulation. In order to implement the latter formula directly to speed up the computation and also allow to switch between the precise and the not so precise pump curves without creating a second record for the same pump, there is a second set of coefficients:</p>
 <ul>
 <li><b>cABCeq</b>: coefficients for H = f(Q,n) with only three elements</li>
 </ul>
