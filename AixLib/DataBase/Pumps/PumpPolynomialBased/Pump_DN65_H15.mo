@@ -1,8 +1,6 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
 record Pump_DN65_H15 "Pump with head 15m and 52.21m^3/h volume flow"
   extends PumpBaseRecord(
-    pumpManufacturerString = "WetRunner",
-    pumpModelString = "Solar 65-15",
     maxMinHeight=[
            0.00, 14.44, 12.426;
            1.80, 14.26, 12.205;
@@ -81,7 +79,7 @@ record Pump_DN65_H15 "Pump with head 15m and 52.21m^3/h volume flow"
 
   annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-07-02 by Luca Vedda:<br>Generated</li>
+<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 65 mm, pump head 15 m and maximum volume flow rate of 52.21 m&sup3;/h.</p>

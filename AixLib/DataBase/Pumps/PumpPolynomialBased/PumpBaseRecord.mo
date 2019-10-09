@@ -4,8 +4,6 @@ record PumpBaseRecord "Definition of pump data"
   // *****************************************************
   // pumpTableFlowHeadCharacteristicRecord (paramFlowHead)
   // *****************************************************
-  parameter String pumpManufacturerString="no manufatcurer";
-  parameter String pumpModelString="no pump model";
   parameter Real[:, :] maxMinHeight=[
     -1, 16, 1;
      0, 16, 1;
@@ -165,14 +163,14 @@ In notepad++ (editor that can handle regular expressions. Don&apos;t write the &
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>2018-05-08 by Peter Matthes:<br />Adds AixLib info template for records to the already existing documentation. Has to be finished.</li>
-<li>2018-02-15 by Peter Matthes:<br />Deletes &apos;zero&apos; rows from maxMinSpeedCurves and maxMinHeight tables. Reformats tables. </li>
-<li>2017-12-01 by Peter Matthes:<br />* Adds parameter pumpManufacturerString to separate model type and manufacturer information.<br />* Removes parameter cABCeq as that is included in cHQN already (if computed correctly).<br />* Removes parameter cNQH as that is not necessary any more for the n_set algorithm (new pump model). For the old pump model the we can use the ABC coefficients and compute the inverse via p-q-formula.<br />* Removes last column (H from ABC-formula) in referenceDataQHPN.</li>
-<li>2017-11-30 by Peter Matthes:<br />Adds new parameter maxMinSpeedCurves for control of pump speed instead of pump head.</li>
-<li>2017-11-23 by Peter Matthes:<br />Updates documentation for table formatting and cPQN coefficient order.</li>
-<li>2017-11-21 by Peter Matthes:<br />Removed the full field table parameters HQnTable and PQnTable. Instead reference data from measurements will be stored in matrix referenceDataQHPN.</li>
-<li>2017-11-16 by Peter Matthes:<br />Changed name of cHQNabc to cABCeq and deleted cNQHabc parameter. Updated documentation. Added nMin and nMax parameter. Adds default for maxMinHeight parameter</li>
-<li>2017-11-13 by Peter Matthes:<br />Implemented</li>
+<li>2018-05-08 by Peter Matthes:<br/>Adds AixLib info template for records to the already existing documentation. Has to be finished.</li>
+<li>2018-02-15 by Peter Matthes:<br/>Deletes &apos;zero&apos; rows from maxMinSpeedCurves and maxMinHeight tables. Reformats tables. </li>
+<li>2017-12-01 by Peter Matthes:<br/>* Adds parameter pumpManufacturerString to separate model type and manufacturer information.<br />* Removes parameter cABCeq as that is included in cHQN already (if computed correctly).<br />* Removes parameter cNQH as that is not necessary any more for the n_set algorithm (new pump model). For the old pump model the we can use the ABC coefficients and compute the inverse via p-q-formula.<br />* Removes last column (H from ABC-formula) in referenceDataQHPN.</li>
+<li>2017-11-30 by Peter Matthes:<br/>Adds new parameter maxMinSpeedCurves for control of pump speed instead of pump head.</li>
+<li>2017-11-23 by Peter Matthes:<br/>Updates documentation for table formatting and cPQN coefficient order.</li>
+<li>2017-11-21 by Peter Matthes:<br/>Removed the full field table parameters HQnTable and PQnTable. Instead reference data from measurements will be stored in matrix referenceDataQHPN.</li>
+<li>2017-11-16 by Peter Matthes:<br/>Changed name of cHQNabc to cABCeq and deleted cNQHabc parameter. Updated documentation. Added nMin and nMax parameter. Adds default for maxMinHeight parameter</li>
+<li>2017-11-13 by Peter Matthes:<br/>Implemented</li>
 </ul>
 </html>"));
 end PumpBaseRecord;

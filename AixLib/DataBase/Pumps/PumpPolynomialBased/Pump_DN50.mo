@@ -1,8 +1,6 @@
 within AixLib.DataBase.Pumps.PumpPolynomialBased;
 record Pump_DN50 "Pump with head 1 to 12m and 43m^3/h volume flow"
   extends PumpBaseRecord(
-    pumpManufacturerString = "DryRunner",
-    pumpModelString = "HeatingCooling 50",
     maxMinHeight=[
       -0.010, 11.735, 0.767;
        0.000, 11.735, 0.767;
@@ -42,7 +40,7 @@ record Pump_DN50 "Pump with head 1 to 12m and 43m^3/h volume flow"
 
   annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-09-24 by Luca Vedda:<br>Implemented</li>
+<li>2018-09-24 by Luca Vedda:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 50 mm, pump head range between 1 m and 12  m and maximum volume flow rate of 43 m&sup3;/h.</p>

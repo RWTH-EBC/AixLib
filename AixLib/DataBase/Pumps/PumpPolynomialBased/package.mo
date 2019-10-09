@@ -2,8 +2,6 @@ within AixLib.DataBase.Pumps;
 package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.PumpPolynomialBased package"
   record Pump_DN25_H1_4_V3 "Pump with head 1 to 4m and 3.17m^3/h volume flow"
     extends PumpBaseRecord(
-      pumpManufacturerString = "WetRunner",
-      pumpModelString = "HeatingCooling 25 1-4",
       maxMinHeight=[
              0.00,  0.49,  4.098;
              0.11,  0.48,  3.924;
@@ -102,8 +100,6 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
   record Pump_DN40_H1_12_V24 "Pump with head 1 to 12m and 24m^3/h volume flow"
     extends PumpBaseRecord(
-      pumpManufacturerString = "WetRunner",
-      pumpModelString = "HeatingCooling 40 1-12",
       maxMinHeight=[
              0.00, 12.39,  1.142;
              0.83, 12.49,  1.179;
@@ -182,7 +178,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
     annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-07-02 by Luca Vedda:<br>Generated</li>
+<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 40 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 24 m&sup3;/h.</p>
@@ -202,8 +198,6 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
   record Pump_DN40_H1_16_V29 "Pump with head 1 to 16m and 28.9m^3/h volume flow"
     extends PumpBaseRecord(
-      pumpManufacturerString = "WetRunner",
-      pumpModelString = "HeatingCooling 40 1-16",
       maxMinHeight=[
              0.00, 17.21,  1.244;
              1.00, 17.31,  1.264;
@@ -282,7 +276,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
     annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-07-02 by Luca Vedda:<br>Generated</li>
+<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 40 mm, pump head range between 1 m and 16 m and maximum volume flow rate of 28.9 m&sup3;/h.</p>
@@ -302,8 +296,6 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
   record Pump_DN50_H1_9_V29 "Pump with head 1 to 9m and 29.24m^3/h volume flow"
     extends PumpBaseRecord(
-      pumpManufacturerString = "WetRunner",
-      pumpModelString = "HeatingCooling 50 1-9",
       maxMinHeight=[
              0.00, 11.57,  1.132;
              1.01, 11.80,  1.130;
@@ -382,7 +374,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
     annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-07-02 by Luca Vedda:<br>Generated</li>
+<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 50 mm, pump head range between 1 m and 9 m and maximum volume flow rate of 29.24 m&sup3;/h.</p>
@@ -402,8 +394,6 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
   record Pump_DN65_H1_12_V48 "Pump with head 1 to 12m and 47.88m^3/h volume flow"
     extends PumpBaseRecord(
-      pumpManufacturerString = "WetRunner",
-      pumpModelString = "HeatingCooling 65 1-12",
       maxMinHeight=[
              0.00, 12.43,  1.216;
              1.65, 12.44,  1.218;
@@ -482,7 +472,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
     annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-07-02 by Luca Vedda:<br>Generated</li>
+<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 65 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 47.88  m&sup3;/h.</p>
@@ -502,8 +492,6 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
   record Pump_DN65_H1_16_V26 "Pump with head 1 to 16m and 26.23m^3/h volume flow"
     extends PumpBaseRecord(
-      pumpManufacturerString = "WetRunner",
-      pumpModelString = "HeatingCooling 65 1-16",
       maxMinHeight=[
              0.00,  1.92,  1.315;
              0.90,  1.92,  1.326;
@@ -582,7 +570,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
     annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-09-21 by Luca Vedda:<br>Generated</li>
+<li>2018-09-21 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 65 mm, pump head range between 1 m and 16 m and maximum volume flow rate of 26.23 m&sup3;/h.</p>
@@ -602,7 +590,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
   annotation (Documentation(revisions="<html>
 <ul>
-<li>2018-05-14 by Peter Matthes:<br />Transfered package from internal &quot;Zugabe&quot; library into AixLib.</li>
+<li>2018-05-14 by Peter Matthes:<br/>Transfered package from internal &quot;Zugabe&quot; library into AixLib.</li>
 </ul>
 </html>"));
 end PumpPolynomialBased;
