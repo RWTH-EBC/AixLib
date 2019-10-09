@@ -1,7 +1,7 @@
 within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses;
 partial model PumpController "Pump controller base class"
 
-  parameter AixLib.DataBase.Pumps.ControlPump.PumpBaseRecord pumpParam "pump parameter record"
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam "pump parameter record"
     annotation (choicesAllMatching=true);
   AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus pumpControllerBus
     annotation (Placement(transformation(extent={{-20,80},{20,120}})));

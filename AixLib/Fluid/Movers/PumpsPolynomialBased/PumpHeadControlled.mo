@@ -8,8 +8,8 @@ model PumpHeadControlled
   // -----------------------
   // Flow Characteristic
   // -----------------------
-  parameter AixLib.DataBase.Pumps.ControlPump.PumpBaseRecord pumpParam=
-      AixLib.DataBase.Pumps.ControlPump.PumpBaseRecord() "pump parameter record"
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=
+      AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
     annotation (choicesAllMatching=true);
 
   // -------------------------------------------
@@ -177,17 +177,9 @@ public
     annotation (Placement(transformation(extent={{9,34},{29,54}})));
 initial equation
   assert(
-    pumpParam.pumpManufacturerString <> "no manufatcurer" and pumpParam.pumpModelString
-       <> "no pump model",
-    "Warning:
-    It seems that you want use Pump.PumpBaseRecord as pump dataset. 
-    That is the default, however, it will produce useless results as its 
-    parameters have no meaningful values.",
-    level=AssertionLevel.warning) "testing for default pump record";
-  assert(
     m_flow_start >= 0,
     "Warning:
-    In a pump model (" + pumpParam.pumpModelString + ") 
+    In a pump model 
     parameter 'm_flow_start' (" + String(m_flow_start) + ") has a negative value.
     But this pump model cannot produce a reverse flow. Consider changing the 
     initialization setup.",
@@ -195,7 +187,7 @@ initial equation
   assert(
     p_b_start >= p_a_start,
     "Warning:
-    In a pump model (" + pumpParam.pumpModelString + ") 
+    In a pump model  
     parameter 'p_a_start' (" + String(p_a_start) + ") is bigger than 'p_b_start'
     (" + String(p_b_start) + "). But this pump model can only produce a positive
     pump head. Consider changing the initialization setup.",
@@ -206,7 +198,7 @@ initial equation
       pumpParam.cHQN[3, 1],pumpParam.cHQN[2, 2],pumpParam.cHQN[1, 3]}))) else
       true,
     "Warning:
-    In a pump model (" + pumpParam.pumpModelString + ") 
+    In a pump model 
     parameter 'calculatePower' was set true but the corresponding coefficients
     in pumpParam.cHQN ([3,1], [2,2] and [1,3]) seem all to be zero OR there are 
     more than those 3 coefficients defined in cHQN. This pump model needs to 

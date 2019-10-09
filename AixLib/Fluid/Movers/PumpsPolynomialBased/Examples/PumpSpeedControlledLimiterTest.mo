@@ -18,7 +18,7 @@ model PumpSpeedControlledLimiterTest
     redeclare function efficiencyCharacteristic =
         AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency,
     redeclare package Medium = Medium,
-    pumpParam=AixLib.DataBase.Pumps.ControlPump.Pump_DN25_1_6_4())
+    pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4())
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus pumpBus

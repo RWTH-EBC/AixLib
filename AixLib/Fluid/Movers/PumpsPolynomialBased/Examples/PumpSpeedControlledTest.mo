@@ -14,12 +14,12 @@ model PumpSpeedControlledTest
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   PumpSpeedControlled pump(
+    pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4(),
     calculatePower=true,
     calculateEfficiency=true,
     redeclare function efficiencyCharacteristic =
         AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency,
     redeclare package Medium = Medium,
-    pumpParam=AixLib.DataBase.Pumps.ControlPump.Pump_DN25_1_6_4(),
     T_start=system.T_start)
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 

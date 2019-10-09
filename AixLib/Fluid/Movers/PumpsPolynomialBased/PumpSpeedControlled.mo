@@ -8,8 +8,7 @@ model PumpSpeedControlled
   // -----------------------
   // Flow Characteristic
   // -----------------------
-  parameter AixLib.DataBase.Pumps.ControlPump.PumpBaseRecord pumpParam=
-      AixLib.DataBase.Pumps.ControlPump.PumpBaseRecord() "pump parameter record"
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam= AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
     annotation (choicesAllMatching=true);
 
   parameter Real Qnom(
@@ -227,17 +226,9 @@ public
     annotation (Placement(transformation(extent={{-40,-42},{-17,-22}})));
 initial equation
   assert(
-    pumpParam.pumpManufacturerString <> "no manufatcurer" and pumpParam.pumpModelString
-       <> "no pump model",
-    "Warning:
-    It seems that you want use Pump.PumpBaseRecord as pump dataset. 
-    That is the default, however, it will produce useless results as its 
-    parameters have no meaningful values.",
-    level=AssertionLevel.warning) "testing for default pump record";
-  assert(
     sum(abs(pumpParam.cHQN)) <> 0,
     "Warning:
-    In a pump model (" + pumpParam.pumpModelString + ") 
+    In a pump model 
     the coefficients in pumpParam.cHQN, which define pump head as polynomial 
     function of volume flow rate and pump speed, seem all to be zero. 
     This cannot work - please redefine.",
@@ -245,7 +236,7 @@ initial equation
   assert(
     m_flow_start >= 0,
     "Warning:
-    In a pump model (" + pumpParam.pumpModelString + ") 
+    In a pump model
     parameter 'm_flow_start' (" + String(m_flow_start) + ") has a negative value.
     But this pump model cannot produce a reverse flow. Consider changing the 
     initialization setup.",
@@ -253,7 +244,7 @@ initial equation
   assert(
     p_b_start >= p_a_start,
     "Warning:
-    In a pump model (" + pumpParam.pumpModelString + ") 
+    In a pump model 
     parameter 'p_a_start' (" + String(p_a_start) + ") is bigger than 'p_b_start'
     (" + String(p_b_start) + "). But this pump model can only produce a positive
     pump head. Consider changing the initialization setup.",

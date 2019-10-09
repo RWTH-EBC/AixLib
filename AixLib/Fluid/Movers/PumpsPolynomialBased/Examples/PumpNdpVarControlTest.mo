@@ -16,7 +16,7 @@ model PumpNdpVarControlTest
     calculatePower=true,
     calculateEfficiency=true,
     redeclare package Medium = Medium,
-    pumpParam=AixLib.DataBase.Pumps.ControlPump.Pump_DN25_1_6_4())
+    pumpParam=DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4())
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
 
   Modelica.Blocks.Sources.BooleanPulse PumpOn(period=600, width=500/600*100)
@@ -44,7 +44,7 @@ model PumpNdpVarControlTest
         rotation=-90,
         origin={-36,20})));
   Controls.CtrlDpVarN ctrlDpVarN(pumpParam=
-        DataBase.Pumps.ControlPump.Pump_DN25_1_6_4())
+        DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4())
     annotation (Placement(transformation(extent={{-10,26},{10,46}})));
   BaseClasses.PumpBus pumpControllerBus1 annotation (Placement(transformation(
           extent={{-10,50},{10,70}}), iconTransformation(extent={{-24,34},{-4,
