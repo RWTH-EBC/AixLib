@@ -12,7 +12,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         rotation=90,
         origin={78,-62})));
   Modelica.Blocks.Sources.CombiTimeTable intGai(
-    tableOnFile=true,
+    tableOnFile=false,
     table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
         0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
         80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
