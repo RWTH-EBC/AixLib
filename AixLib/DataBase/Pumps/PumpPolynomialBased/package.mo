@@ -85,7 +85,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 25 mm, pump head range between 1 m and 4 m and maximum volume flow rate of 3.17 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H1_4_V3.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H1_4_V3.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 3.36913e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 2.26535e-05, 0.00000e+00;</span></p>
@@ -183,7 +183,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 40 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 24 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN40_H1_12_V24.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN40_H1_12_V24.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 5.73723e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 6.28260e-05, 0.00000e+00;</span></p>
@@ -281,7 +281,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 40 mm, pump head range between 1 m and 16 m and maximum volume flow rate of 28.9 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN40_H1_16_V29.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN40_H1_16_V29.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.37376e-06;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 5.53270e-05, 0.00000e+00;</span></p>
@@ -379,7 +379,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 50 mm, pump head range between 1 m and 9 m and maximum volume flow rate of 29.24 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H1_9_V29.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN50_H1_9_V29.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 5.39062e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 4.08623e-05, 0.00000e+00;</span></p>
@@ -477,7 +477,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 65 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 47.88  m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN65_H1_12_V48.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN65_H1_12_V48.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.42201e-06;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 4.24097e-05, 0.00000e+00;</span></p>
@@ -575,7 +575,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 65 mm, pump head range between 1 m and 16 m and maximum volume flow rate of 26.23 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN65_H1_16_V26.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN65_H1_16_V26.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.38419e-06;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 4.69154e-05, 0.00000e+00;</span></p>

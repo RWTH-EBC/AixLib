@@ -84,7 +84,7 @@ record Pump_DN100 "Pump with head 1 to 34m and 378.24m^3/h volume flow"
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 100 mm, pump head range between 1 m and 34 m and maximum volume flow rate of 378.24 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN100.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN100.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 3.80934e-06;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 1.28859e-05, 0.00000e+00;</span></p>

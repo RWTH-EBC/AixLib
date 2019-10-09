@@ -85,7 +85,7 @@ record Pump_DN30_H1_12_V13
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 30 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 13.5 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN30_H1_12_V13.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN30_H1_12_V13.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 4.88348e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 1.15190e-04, 0.00000e+00;</span></p>

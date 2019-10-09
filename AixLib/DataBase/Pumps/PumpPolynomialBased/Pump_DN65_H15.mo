@@ -84,7 +84,7 @@ record Pump_DN65_H15 "Pump with head 15m and 52.21m^3/h volume flow"
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 65 mm, pump head 15 m and maximum volume flow rate of 52.21 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/WetRunner_Solar_65_15.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/WetRunner_Solar_65_15.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.63907e-06;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 1.78063e-05, 0.00000e+00;</span></p>

@@ -67,8 +67,6 @@ record PumpBaseRecord "Definition of pump data"
     Documentation(info="<html>
 <h4>Parameters</h4>
 <p>The following section contains a list of parameters and descriptions.</p>
-<h5>pumpModelString</h5>
-<p>A string parameter that can be used to define the pump model. It is currently used to display the chosen pump model in the graphical model view.</p>
 <h5>maxMinHeight table</h5>
 <p>The table was taken from the original record <i>pumpTableFlowHeadCharacteristicRecord.</i>&nbsp;&nbsp;It defines the maximum and minimum pump curves for a given volume flow rate in m&sup3;/h. The columns are as follows:</p>
 <ol>
@@ -85,14 +83,14 @@ record PumpBaseRecord "Definition of pump data"
 </ol>
 <p>In order to limit the electric power consumption of the pump the speed needs to be reduced for high volume flow rates.</p>
 <p>&quot;maxMinSpeed&quot; refers to the original &quot;maxMinHeight&quot; parameter name. The Addition &quot;Curves&quot; should reflect that this is a matrix/table and not a scalar. This should reduce confusion in the presence of the two parameters <i>nMin</i> and <i>nMax</i> which only contain the absolute minumum and maximum speeds. Those parameters can be used in a controller where limits are given as scalar parameters for example.</p>
-<p>Notice that the default data have a range of 0 &lt;= Q &lt;= 10 m&sup3;/h! These values might be used in the models, for example in the form <code><span style=\"color: #00aaff;\">max(pumpParam.maxMinSpeedCurves[:,1])</span></code> for initialization or nominal values. So take care that the table data really fit to your pump to avoid strange behaviour.</p>
+<p>Notice that the default data have a range of 0 &lt;= Q &lt;= 10 m&sup3;/h! These values might be used in the models, for example in the form <span style=\"font-family: Courier New; color: #00aaff;\">max(pumpParam.maxMinSpeedCurves[:,1])</span> for initialization or nominal values. So take care that the table data really fit to your pump to avoid strange behaviour.</p>
 <h5>referenceDataQHPN</h5>
 <p>This table contains measurement data of volume flow (Q), pump head (H), power consumption (P), pump speeds real and setpoint (N) as well as the corresponding pump head as calculated by the abc-formula for reference. From this data the coefficients can be calculated and it can be verified that the pump data in the record all belong together. From this data one can also directly derive the maxMinHeight table.</p>
 <h5>Coefficients</h5>
 <p>The original pump model used polynomial functions of higher order in two dimensional space. For example the pump head could be calculated as a function of volume flow rate and pump speed:</p>
-<p><img src=\"modelica://Zugabe/Resources/Images/equations/equation-dnpNDYbm.png\" alt=\"H = f(Q, n)=sum(c(i,j)*Q^i*n^j)\"/></p>
+<p>H = f(Q, n)=sum(c(i,j)*Q^i*n^j)</p>
 <p>with i and j being non-negative Integers. The functions were written down directly for each pump type as a replaceble function for example:</p>
-<pre>H&nbsp;:=&nbsp;0.1041&nbsp;-&nbsp;1.168*Q&nbsp;-&nbsp;0.0002526*n&nbsp;-&nbsp;0.01049*Q^2&nbsp;+&nbsp;0.002589*Q*n&nbsp;+&nbsp;5.614e-007*n^2 ...</pre>
+<p><span style=\"font-family: Courier New;\">H&nbsp;:=&nbsp;0.1041&nbsp;-&nbsp;1.168*Q&nbsp;-&nbsp;0.0002526*n&nbsp;-&nbsp;0.01049*Q^2&nbsp;+&nbsp;0.002589*Q*n&nbsp;+&nbsp;5.614e-007*n^2 ...</span></p>
 <p>In the current record only stores the coefficients for the functions:</p>
 <ul>
 <li><b>cHQN</b>:&nbsp;coefficients&nbsp;for&nbsp;H&nbsp;=&nbsp;f(Q,n)</li>
@@ -101,66 +99,17 @@ record PumpBaseRecord "Definition of pump data"
 </ul>
 <h5>Coefficients (Special Case of ABC-Formula)</h5>
 <p>A special type of formula has been &quot;developed&quot; for stability reasons. High order polynomials showed a good agreement with real pump data but lead to instable simulations (especially initialization) in certain situations. It was not clear what exactly would cause initialization problems with the high order polynomials but that low order polynomials could solve that problem with the disadvantage of lower acuracy of the pump curves. For example:</p>
-<p><img src=\"modelica://Zugabe/Resources/Images/equations/equation-tq1CzM4d.png\" alt=\"H= a*n^2+b*Q*n+c*Q^2\"/></p>
-<p><br />Using the c[i,j]-matrix this would become:</p>
-<p><img src=\"modelica://Zugabe/Resources/Images/equations/equation-M9SIrmbT.png\" alt=\"H= c(0,2)*n^2+c(1,1)*Q*n+c(2,0)*Q^2\"/></p>
-<p><br />Therefore, the ABC-Formula emerges as a special case out of the general formulation. In order to implement the latter formula directly to speed up the computation and also allow to switch between the precise and the not so precise pump curves without creating a second record for the same pump, there is a second set of coefficients:</p>
+<p>H= a*n^2+b*Q*n+c*Q^2&quot;</p>
+<p><br>Using the c[i,j]-matrix this would become:</p>
+<p>H= c(0,2)*n^2+c(1,1)*Q*n+c(2,0)*Q^2</p>
+<p><br>Therefore, the ABC-Formula emerges as a special case out of the general formulation. In order to implement the latter formula directly to speed up the computation and also allow to switch between the precise and the not so precise pump curves without creating a second record for the same pump, there is a second set of coefficients:</p>
 <ul>
 <li><b>cABCeq</b>: coefficients for H = f(Q,n) with only three elements</li>
 </ul>
 <p>Note that the computation of power must not be simplified as this is only a display variable in our simulations - no other states depend on power. Setting the default to [0,0,0] allows to check upon initialization if the selected coefficients can be used for simulation. So if the record misses a redeclaration of cABCeq and those coefficiens were selected be used, then an assert-warning will inform the user that with this record the selected calculation method (abc-formula) cannot be used. The same holds true for the matrix cHQN for example - it cannot be used if all the coefficients are at the default of zero.</p>
 <p>There are no coefficients for the inverse function N = f(Q, H) as the inverse can be calculated with the p-q-formula from cABCeq:</p>
-<p><img src=\"modelica://Zugabe/Resources/Images/equations/equation-4E3Ptd70.png\" alt=\"n_1 = -b*Q/(2*a)+sqrt((b*Q/(2*a))^2 +(H-c*Q^2)/a)\"/></p>
-<p><img src=\"modelica://Zugabe/Resources/Images/equations/equation-XPTxHAqK.png\" alt=\"n_2 = -b*Q/(2*a)-sqrt((b*Q/(2*a))^2 +(H-c*Q^2)/a)\"/></p>
-<h4>How to Format Tables</h4>
-<p>In order to make the tables look nice and also to be able to make sense of the data at a glance format them with spaces. You could use this procedure by using Excel to produce a preformatted, space seperated table:</p>
-<pre>In Excel:
-1. Save table in nicely set columns as prn
-   * Make sure that you have wide enough columns so that all numbers will be seperated by at least one space.
-   * Better format the numbers to a specific precision to make it look nicer.
-
-
-In notepad++ (editor that can handle regular expressions. Don&apos;t write the &quot;)
-2. Put semikola at line endings
-   find:    &quot;$&quot;
-   replace: &quot;;&quot;
-
-3. put comma between numbers
-   find:    &quot;([0-9]+?)\\ &quot;
-   replace: &quot;\\1,\\ &quot;
-
-4. clean empty lines with a number (0.0000;) at the end
-   find:    &quot;^\\ +0\\.[0]+;$&quot; or &quot;^\\s+0\\.0000;$&quot;
-   replace: &quot;&quot;
-
-5. remove any empty line
-   Edit/Line Operations/Remove Empty Lines </pre>
-<h4>Power Formula from Wilo</h4>
-<p>Wilo will provide new coefficients c[8] for the power calculation. In regard to the polynomial2D function we need to use them this way:</p>
-<pre>cPQN=[
-  c4,  c5,  c6,  c7,  c8;
-   0,   0,  c1,   0,   0;
-   0,  c2,   0,   0,   0;
-  c3,   0,   0,   0,   0
-  ];</pre>
-
-<p>AixLib convention:</p>
-<h4>Assumption and limitations</h4>
-<p>Note assumptions such as a specific definition ranges for the data, etc. </p>
-<h4>Typical use</h4>
-<p>xxx </p>
-<h4>Options</h4>
-<p>xxx </p>
-<h4>Implementation</h4>
-<p>How were certain parameter values / tables calculated, e.g. extrapolation for power values for heat pumps </p>
-<h4>References</h4>
-<p>Record is used in model .... </p>
-<p>Source: </p>
-<ul>
-<li>Manufacturer: </li>
-<li>Booklet: </li>
-<li>URL (accessed XX.XX.XXX): </li>
-</ul>
+<p>n_1 = -b*Q/(2*a)+sqrt((b*Q/(2*a))^2 +(H-c*Q^2)/a)</p>
+<p>n_2 = -b*Q/(2*a)-sqrt((b*Q/(2*a))^2 +(H-c*Q^2)/a)</p>
 </html>", revisions="<html>
 <ul>
 <li>2018-05-08 by Peter Matthes:<br/>Adds AixLib info template for records to the already existing documentation. Has to be finished.</li>

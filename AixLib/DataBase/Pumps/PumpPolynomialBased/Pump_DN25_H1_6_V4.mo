@@ -59,7 +59,7 @@ record Pump_DN25_H1_6_V4 "Pump with head 1 to 6m and 4.25m^3/h volume flow"
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 25 mm, pump head range between 1 m and 6 m and maximum volume flow rate of 4.25m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H1_6_V4.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN25_H1_6_V4.png\" alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 3.25798e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 2.73726e-05, 0.00000e+00;</span></p>

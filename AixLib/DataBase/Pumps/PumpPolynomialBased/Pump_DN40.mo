@@ -84,7 +84,7 @@ record Pump_DN40 "Pump with head 1 to 12m and 21m^3/h volume flow"
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 40 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 21 m&sup3;/h.</p>
 <h4>Measurement Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN40.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/PumpsPolynomialBased/Pump_DN40.png\"  alt=\"Pump Characterisistcs\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 1.38228e-06;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 2.99931e-05, 0.00000e+00;</span></p>
