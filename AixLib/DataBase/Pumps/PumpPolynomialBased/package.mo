@@ -80,7 +80,7 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
     annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-07-02 by Luca Vedda:<br>Generated</li>
+<li>2018-07-02 by Luca Vedda:<br/>Generated</li>
 </ul>
 </html>",   info="<html>
 <p>Pump for nominal pipe diameter of 25 mm, pump head range between 1 m and 4 m and maximum volume flow rate of 3.17 m&sup3;/h.</p>
