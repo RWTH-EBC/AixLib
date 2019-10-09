@@ -116,6 +116,19 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     annotation (Placement(transformation(extent={{-38,-74},{-18,-54}})));
   Utilities.Interfaces.SolarRad_out SolarRadiation_North5
     annotation (Placement(transformation(extent={{-38,86},{-18,106}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof
+    "Prescribed temperature for roof outdoor surface temperature"
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},rotation=-90,
+    origin={9,50})));
+  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof
+    "Outdoor convective heat transfer of roof"
+    annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
+    origin={7,31})));
+  Modelica.Blocks.Sources.Constant Gc(k=25*11.5) annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={44,30})));
 equation
   connect(intGai.y[1],perRad. Q_flow)
     annotation (Line(points={{78,-83.2},{60,-83.2},{60,-70}},
@@ -242,7 +255,15 @@ equation
   connect(SolarRadiation_Hor, southFacingWindows.SolarRadiationPort[5])
     annotation (Line(points={{-28,-64},{-14,-64},{-14,12.8},{1,12.8}}, color={
           255,128,0}));
+  connect(theConRoof.solid, southFacingWindows.Therm_outside) annotation (Line(
+        points={{7,26},{4,26},{4,15.7},{1.5,15.7}}, color={191,0,0}));
+  connect(theConRoof.fluid, preTemRoof.port)
+    annotation (Line(points={{7,36},{8,36},{8,44},{9,44}}, color={191,0,0}));
+  connect(weather.AirTemp, preTemRoof.T) annotation (Line(points={{-143,27},{
+          -67.5,27},{-67.5,57.2},{9,57.2}}, color={0,0,127}));
+  connect(Gc.y, theConRoof.Gc) annotation (Line(points={{33,30},{24,30},{24,31},
+          {12,31}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=31536000, Interval=300));
+    experiment(StopTime=15552000, Interval=300));
 end HighOrderModel_OneRoom;

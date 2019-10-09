@@ -281,8 +281,8 @@ equation
   connect(corGDouPan.solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
     annotation (Line(points={{27,55.5},{36,55.5},{36,30.5},{43,30.5}}, color={0,
           0,127}));
-  connect(corGDouPan.solarRadWinTrans[2], thermalZoneFourElements.solRad[2])
-    annotation (Line(points={{27,56.5},{36,56.5},{36,31.5},{43,31.5}}, color={0,
+  connect(corGDouPan.solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
+    annotation (Line(points={{27,55.5},{36,55.5},{36,30.5},{43,30.5}}, color={0,
           0,127}));
   annotation (Line(points={{79.6,-22},{65,-22},{65,-25.2}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
