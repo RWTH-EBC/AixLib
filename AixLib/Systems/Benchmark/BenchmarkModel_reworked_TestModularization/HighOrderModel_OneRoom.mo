@@ -12,12 +12,16 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         rotation=90,
         origin={78,-62})));
   Modelica.Blocks.Sources.CombiTimeTable intGai(
+    tableOnFile=true,
     table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
         0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
         80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
         200; 50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200;
         61200,0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,
         0,0,0; 86400,0,0,0],
+    tableName="final",
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"),
     columns={2,3,4},
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
     (convective)"

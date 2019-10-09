@@ -12,12 +12,16 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
         rotation=90,
         origin={78,-62})));
   Modelica.Blocks.Sources.CombiTimeTable intGai(
+    tableOnFile=true,
     table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
         0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
         80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
         200; 50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200;
         61200,0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,
         0,0,0; 86400,0,0,0],
+    tableName="final",
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"),
     columns={2,3,4},
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
     (convective)"
@@ -310,12 +314,12 @@ equation
       Line(points={{27,-22},{18,-22},{18,-3.6},{8.8,-3.6}}, color={191,0,0}));
   connect(preTemFloor.port, southFacingWindows[5].Therm_ground) annotation (
       Line(points={{27,-22},{18,-22},{18,-3.6},{8.8,-3.6}}, color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[3].thermRoom) annotation
-    (Line(points={{78,-22},{44,-22},{44,8.3},{9.1,8.3}}, color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[4].thermRoom) annotation
-    (Line(points={{78,-22},{44,-22},{44,8.3},{9.1,8.3}}, color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[5].thermRoom) annotation
-    (Line(points={{78,-22},{44,-22},{44,8.3},{9.1,8.3}}, color={191,0,0}));
+  connect(thermalCollector.port_b, southFacingWindows[3].thermRoom) annotation (
+     Line(points={{78,-22},{44,-22},{44,8.3},{9.1,8.3}}, color={191,0,0}));
+  connect(thermalCollector.port_b, southFacingWindows[4].thermRoom) annotation (
+     Line(points={{78,-22},{44,-22},{44,8.3},{9.1,8.3}}, color={191,0,0}));
+  connect(thermalCollector.port_b, southFacingWindows[5].thermRoom) annotation (
+     Line(points={{78,-22},{44,-22},{44,8.3},{9.1,8.3}}, color={191,0,0}));
   connect(theConRoof.solid, southFacingWindows[3].Therm_outside) annotation (
       Line(points={{7,26},{4,26},{4,15.7},{1.5,15.7}}, color={191,0,0}));
   connect(theConRoof.solid, southFacingWindows[4].Therm_outside) annotation (
