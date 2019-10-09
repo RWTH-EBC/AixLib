@@ -141,7 +141,7 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser",
-      enable=use_conCap));
+      enable=true));
   parameter Boolean fixed_TCon_start
     "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
     annotation (Evaluate=true,Dialog(tab="Condenser",      group="Heat Losses",

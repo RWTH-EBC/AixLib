@@ -13,7 +13,7 @@ model HeatPump
     nPorts=1,
     redeclare package Medium = Medium_sou,
     T=275.15) "Ideal mass flow source at the inlet of the source side"
-              annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
+              annotation (Placement(transformation(extent={{-68,-72},{-48,-52}})));
 
   AixLib.Fluid.Sources.FixedBoundary                sourceSideFixedBoundary(
                                                                          nPorts=
@@ -21,21 +21,22 @@ model HeatPump
           "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
-        origin={-86,40})));
+        origin={-80,0})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
     height=25,
     offset=278)
     "Ramp signal for the temperature input of the source side's ideal mass flow source"
-    annotation (Placement(transformation(extent={{-94,-84},{-74,-64}})));
+    annotation (Placement(transformation(extent={{-100,-68},{-80,-48}})));
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={2,-76})));
+        origin={0,-70})));
   AixLib.Fluid.HeatPumps.HeatPump heatPump(
     refIneFre_constant=1,
     scalingFactor=1,
+    useBusConnectorOnly=true,
     VEva=0.04,
     CEva=100,
     GEvaOut=5,
@@ -64,17 +65,17 @@ model HeatPump
     TCon_start=303.15,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                        annotation (Placement(transformation(
-        extent={{-24,-29},{24,29}},
+        extent={{-23.5,-27.5},{23.5,27.5}},
         rotation=270,
-        origin={2,-21})));
+        origin={-0.5,-23.5})));
 
 
 
   Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
       startValue=true)
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}},
-        rotation=270,
-        origin={-10,82})));
+    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={-50,50})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort
                              senTAct(
@@ -89,19 +90,19 @@ model HeatPump
     final TAmb=291.15) "Temperature at sink inlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={54,-64})));
+        origin={50,-60})));
   Modelica.Blocks.Logical.Hysteresis hys(
     pre_y_start=true,
     uLow=273.15 + 35,
     uHigh=273.15 + 40)
-    annotation (Placement(transformation(extent={{64,50},{44,70}})));
+    annotation (Placement(transformation(extent={{62,50},{42,70}})));
   Modelica.Blocks.Math.BooleanToReal booleanToReal
-    annotation (Placement(transformation(extent={{24,28},{4,48}})));
+    annotation (Placement(transformation(extent={{22,50},{2,70}})));
   Modelica.Blocks.Sources.Sine sine(
     freqHz=1/3600,
     amplitude=3000,
     offset=3000)
-    annotation (Placement(transformation(extent={{76,26},{84,34}})));
+    annotation (Placement(transformation(extent={{98,34},{86,46}})));
   AixLib.Fluid.Movers.SpeedControlled_Nrpm
                                     pumSou(
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
@@ -112,7 +113,7 @@ model HeatPump
     "Fan or pump at source side of HP" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={50,12})));
+        origin={50,0})));
 
   AixLib.Fluid.MixingVolumes.MixingVolume Room(
     nPorts=2,
@@ -126,25 +127,25 @@ model HeatPump
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={86,-20})));
+        origin={80,-20})));
 
   Modelica.Blocks.Sources.Constant nIn(k=100) annotation (Placement(
         transformation(
         extent={{4,-4},{-4,4}},
         rotation=90,
-        origin={50,34})));
+        origin={50,24})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon
     "Heat flow rate of the condenser" annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=270,
-        origin={94,6})));
+        origin={80,4})));
   Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=270,
-        origin={96,22})));
+        origin={80,22})));
   Modelica.Blocks.Logical.Not not2 "Negate output of hysteresis"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
-        origin={32,62},
+        origin={32,60},
         rotation=180)));
   AixLib.Fluid.Sources.FixedBoundary sinkSideFixedBoundary(      nPorts=1,
       redeclare package Medium = Medium_sin)
@@ -152,53 +153,76 @@ model HeatPump
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
-        origin={88,-64})));
+        origin={80,-60})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
         transformation(
-        extent={{5,-5},{-5,5}},
+        extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={-71,-3})));
+        origin={-50,20})));
+  AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP1 annotation (Placement(
+        transformation(extent={{-12,6},{12,34}}), iconTransformation(extent={{
+            -32,4},{8,44}})));
 equation
 
   connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
-      points={{-73,-74},{-68,-74},{-68,-66},{-56,-66}},
+      points={{-79,-58},{-70,-58}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_a2) annotation (Line(
-        points={{-34,-70},{-24,-70},{-24,-45},{-12.5,-45}}, color={0,127,255}));
+        points={{-48,-62},{-24,-62},{-24,-47},{-14.25,-47}},color={0,127,255}));
   connect(nIn.y, pumSou.Nrpm)
-    annotation (Line(points={{50,29.6},{50,24}}, color={0,0,127}));
+    annotation (Line(points={{50,19.6},{50,12}}, color={0,0,127}));
   connect(Room.heatPort, heatFlowRateCon.port)
-    annotation (Line(points={{86,-10},{86,0},{94,0}}, color={191,0,0}));
-  connect(sine.y, gain.u) annotation (Line(points={{84.4,30},{92,30},{92,26.8},
-          {96,26.8}}, color={0,0,127}));
-  connect(heatFlowRateCon.Q_flow, gain.y) annotation (Line(points={{94,12},{98,
-          12},{98,17.6},{96,17.6}}, color={0,0,127}));
+    annotation (Line(points={{80,-10},{80,-2}},       color={191,0,0}));
+  connect(sine.y, gain.u) annotation (Line(points={{85.4,40},{80,40},{80,26.8}},
+                      color={0,0,127}));
+  connect(heatFlowRateCon.Q_flow, gain.y) annotation (Line(points={{80,10},{80,
+          17.6}},                   color={0,0,127}));
   connect(heatPump.port_b2, sourceSideFixedBoundary.ports[1])
-    annotation (Line(points={{-12.5,3},{-62,3},{-62,40},{-76,40}},
-                                                          color={0,127,255}));
-  connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{16.5,-45},
-          {30,-45},{30,-64},{44,-64}}, color={0,127,255}));
-  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{76,-18},{76,4},
-          {60,4},{60,12}}, color={0,127,255}));
-  connect(pumSou.port_b, heatPump.port_a1) annotation (Line(points={{40,12},{28,
-          12},{28,3},{16.5,3}}, color={0,127,255}));
-  connect(senTAct.T, hys.u) annotation (Line(points={{54,-53},{58,-53},{58,-8},
-          {68,-8},{68,48},{74,48},{74,60},{66,60}}, color={0,0,127}));
-  connect(hys.y, not2.u) annotation (Line(points={{43,60},{44,60},{44,62},{36.8,
-          62}}, color={255,0,255}));
-  connect(booleanToReal.u, not2.y) annotation (Line(points={{26,38},{26,62},{
-          27.6,62}},      color={255,0,255}));
+    annotation (Line(points={{-14.25,0},{-70,0}},         color={0,127,255}));
+  connect(heatPump.port_b1, senTAct.port_a) annotation (Line(points={{13.25,-47},
+          {30,-47},{30,-60},{40,-60}}, color={0,127,255}));
+  connect(Room.ports[1], pumSou.port_a) annotation (Line(points={{70,-18},{70,0},
+          {60,0}},         color={0,127,255}));
+  connect(pumSou.port_b, heatPump.port_a1) annotation (Line(points={{40,0},{28,
+          0},{28,-7.10543e-15},{13.25,-7.10543e-15}},
+                                color={0,127,255}));
+  connect(senTAct.T, hys.u) annotation (Line(points={{50,-49},{58,-49},{58,-8},
+          {68,-8},{68,60},{64,60}},                 color={0,0,127}));
+  connect(hys.y, not2.u) annotation (Line(points={{41,60},{36.8,60}},
+                color={255,0,255}));
+  connect(booleanToReal.u, not2.y) annotation (Line(points={{24,60},{27.6,60}},
+                          color={255,0,255}));
   connect(senTAct.port_b, sinkSideFixedBoundary.ports[1]) annotation (Line(
-        points={{64,-64},{72,-64},{72,-64},{78,-64}}, color={0,127,255}));
-  connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{64,-64},{66,
-          -64},{66,-22},{76,-22}}, color={0,127,255}));
-  connect(booleanToReal.y, heatPump.nSet) annotation (Line(points={{3,38},{4,38},
-          {4,6.84},{6.83333,6.84}},       color={0,0,127}));
-  connect(booleanStep.y, heatPump.modeSet) annotation (Line(points={{-10,77.6},
-          {-4,77.6},{-4,6.84},{-2.83333,6.84}}, color={255,0,255}));
-  connect(iceFac.y, heatPump.iceFac_in) annotation (Line(points={{-65.5,-3},{
-          -47,-3},{-47,-2.76},{-30.8667,-2.76}}, color={0,0,127}));
+        points={{60,-60},{70,-60}},                   color={0,127,255}));
+  connect(senTAct.port_b, Room.ports[2]) annotation (Line(points={{60,-60},{66,
+          -60},{66,-22},{70,-22}}, color={0,127,255}));
+  connect(heatPump.sigBusHP, sigBusHP1) annotation (Line(
+      points={{-9.4375,-0.235},{-9.4375,13.38},{0,13.38},{0,20}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(iceFac.y, sigBusHP1.iceFac) annotation (Line(points={{-39,20},{-38,20},
+          {-38,20.07},{0.06,20.07}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(booleanStep.y, sigBusHP1.mode) annotation (Line(points={{-39,50},{-20,
+          50},{-20,30},{0.06,30},{0.06,20.07}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(booleanToReal.y, sigBusHP1.N) annotation (Line(points={{1,60},{0,60},
+          {0,20.07},{0.06,20.07}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600, Tolerance=1e-06),
