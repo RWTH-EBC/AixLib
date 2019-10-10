@@ -4,6 +4,7 @@ CylindricHeatTransfer
 CylindricLoad
 HeatConv
 HeatConvPipeInside
+HeatConvPipeInsideDynamic
 HeatConvInside
 HeatConvOutside
 HeatToStar

@@ -39,7 +39,7 @@ DOI: URL: http://dx.doi.org/10.5075/epfl-infoscience-190601
 ### HOM and ROM
 
 #### Not published yet
-Currently only an internal report.
+Currently only an internal report with the title "*Verification and Comparison of High and Low Order Building Models from the Modelica Library AixLib using ASHRAE Standard 140*".
 
 
 ## Building Systems <a name="buildingsystems"></a>
