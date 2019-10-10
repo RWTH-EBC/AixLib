@@ -7,9 +7,9 @@ model CellTemperatureMountingCloseToGround
 equation
 
  T_c = if radTil >= 0.01 then
- radTil*(exp(-2.98-0.0471*winVel))+(T_a+273.15)+radTil/1000*1
+ radTil*(exp(-2.98-0.0471*winVel))+(T_a)+radTil/1000*1
  else
- (T_a+273.15);
+ (T_a);
 
 
 
