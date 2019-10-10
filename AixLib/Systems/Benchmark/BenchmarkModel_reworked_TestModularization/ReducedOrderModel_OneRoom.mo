@@ -4,51 +4,10 @@ model ReducedOrderModel_OneRoom
    extends Modelica.Icons.Example;
 
 
- ThermalZones.ReducedOrder.RC.FourElements thermalZoneFourElements(
-    each hRad=5,
-    each hConvWin=1.3,
-    each gWin=1,
-    each ratioWinConRad=0.09,
-    each hConvExt=2.5,
-    each nExt=4,
-    each RExtRem=0,
-    each hConvInt=2.5,
-    each nInt=2,
-    each hConvFloor=2.5,
-    each nFloor=4,
-    each RFloorRem=0,
-    each hConvRoof=2.5,
-    each RRoofRem=0,
-    each nRoof=4,
-    RExt={0.05,2.857,0.48,0.0294},
-    CExt={1000,1030,1000,1000},
-    CInt={1000,1000},
-    RFloor={1.5,0.1087,1.1429,0.0429},
-    CFloor={8400,575000,4944,120000},
-    CRoof={2472,368000,18000,1},
-    each indoorPortWin=false,
-    each indoorPortExtWalls=false,
-    each indoorPortIntWalls=false,
-    each indoorPortFloor=false,
-    each indoorPortRoof=false,
-    VAir=2700,
-    AInt=90,
-    AFloor=900,
-    ARoof=900,
-    RRoof={0.4444,0.06957,0.02941,0.0001},
-    RWin=0.01923,
-    RInt={0.175,0.0294},
-    nOrientations=2,
-    AWin={90,90},
-    ATransparent={72,72},
-    AExt={45,45})
-    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
-
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"))
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
 
@@ -66,18 +25,58 @@ model ReducedOrderModel_OneRoom
     azi={3.1415926535898,4.7123889803847})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-                                  corGDouPan(UWin=2.1, n=2)
-    "Correction factor for solar transmission"
+  ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDouPan[2](each UWin=2.1,
+     each n=2) "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,46},{26,66}})));
+  ThermalZones.ReducedOrder.RC.FourElements
+                  thermalZoneFourElements(
+    VAir=2700,
+    hConExt=2.5,
+    hConWin=1.3,
+    gWin=1,
+    ratioWinConRad=0.09,
+    nExt=4,
+    RExt={0.05,2.857,0.48,0.0294},
+    CExt={1000,1030,1000,1000},
+    hRad=5,
+    AInt=90,
+    hConInt=2.5,
+    nInt=2,
+    RInt={0.175,0.0294},
+    CInt={1000,1000},
+    RWin=0.01282,
+    RExtRem=0.00001,
+    AFloor=900,
+    hConFloor=2.5,
+    nFloor=4,
+    RFloor={1.5,0.1087,1.1429,0.0429},
+    RFloorRem=0.00001,
+    CFloor={8400,575000,4944,120000},
+    ARoof=900,
+    hConRoof=2.5,
+    nRoof=4,
+    RRoof={0.44444,0.06957,0.02941,0.00001},
+    RRoofRem=0.0001,
+    CRoof={2472,368000,18000,0.000001},
+    nOrientations=4,
+    AWin={60,0,60,60},
+    ATransparent={48,0,48,48},
+    AExt={30,0,30,30},
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    extWallRC(thermCapExt(each der_T(fixed=true))),
+    intWallRC(thermCapInt(each der_T(fixed=true))),
+    floorRC(thermCapExt(each der_T(fixed=true))),
+    T_start=295.15,
+    roofRC(thermCapExt(each der_T(fixed=true)))) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
                                              eqAirTemp(
     wfGro=0,
     withLongwave=true,
     aExt=0.7,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
-    hConvWinOut=20,
+    hConWinOut=20,
     n=2,
     wfWall={0.3043478260869566,0.6956521739130435},
     wfWin={0.5,0.5},
@@ -104,16 +103,12 @@ model ReducedOrderModel_OneRoom
     "Convective heat flow of persons"
     annotation (Placement(transformation(extent={{48,-62},{68,-42}})));
   Modelica.Blocks.Sources.CombiTimeTable intGai(
-    tableOnFile=false,
     table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
         0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
-        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
-        200; 50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200;
-        61200,0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,
-        0,0,0; 86400,0,0,0],
-    tableName="final",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"),
+        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+        50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+        0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+        86400,0,0,0],
     columns={2,3,4},
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
     (convective)"
@@ -124,14 +119,14 @@ model ReducedOrderModel_OneRoom
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow of machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=25*11.5) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=25*11.5) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
-  Modelica.Blocks.Sources.Constant hConvWin(k=20*14) "Outdoor coefficient of heat transfer for windows"
+  Modelica.Blocks.Sources.Constant hConWin(k=20*14) "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
-    rotation=90,origin={69,-14})));
+    rotation=90,origin={67,-12})));
   Modelica.Blocks.Sources.Constant TSoil(k=283.15)
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
@@ -143,7 +138,7 @@ model ReducedOrderModel_OneRoom
     wfWall={1},
     wfWin={0},
     wfGro=0,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
     TGro=285.15) "Computes equivalent air temperature for roof" annotation (Placement(transformation(extent={{30,74},{50,94}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof
@@ -154,7 +149,7 @@ model ReducedOrderModel_OneRoom
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={67,47})));
-  Modelica.Blocks.Sources.Constant hConvRoof(k=25*11.5) "Outdoor coefficient of heat transfer for roof"
+  Modelica.Blocks.Sources.Constant hConRoof(k=25*11.5) "Outdoor coefficient of heat transfer for roof"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     "Sets sunblind signal to zero (open)"
@@ -189,20 +184,11 @@ equation
   connect(const.y,eqAirTemp. sunblind)
     annotation (Line(points={{-13.7,17},{-12,17},{-12,8},{-14,8}},
     color={0,0,127}));
-  connect(HDifTil.HSkyDifTil,corGDouPan. HSkyDifTil)
-    annotation (Line(points={{-47,36},{-28,36},{-6,36},{-6,58},{0,58},{0,57.8},{
-    4,57.8},{4,58}},
-    color={0,0,127}));
-  connect(HDirTil.H,corGDouPan. HDirTil)
-    annotation (Line(points={{-47,62},{4,62},{4,62}},  color={0,0,127}));
   connect(HDirTil.H,solRad. u1)
     annotation (Line(points={{-47,62},{-42,62},{-42,14},{-39,14}},
     color={0,0,127}));
   connect(HDifTil.H,solRad. u2)
     annotation (Line(points={{-47,30},{-44,30},{-44,8},{-39,8}},
-    color={0,0,127}));
-  connect(HDifTil.HGroDifTil,corGDouPan. HGroDifTil)
-    annotation (Line(points={{-47,24},{-4,24},{-4,54},{4,54}},
     color={0,0,127}));
   connect(solRad.y,eqAirTemp. HSol)
     annotation (Line(points={{-27.5,11},{-26,11},{-26,2}},
@@ -223,14 +209,22 @@ equation
     points={{-76,62},{-76,62},{-68,62}},
     color={255,204,51},
     thickness=0.5));
+  connect(perRad.port,thermalZoneFourElements. intGainsRad)
+    annotation (
+    Line(points={{68,-32},{84,-32},{100,-32},{100,24},{92,24}},
+    color={191,0,0}));
+  connect(theConWin.solid,thermalZoneFourElements. window)
+    annotation (Line(points={{38,21},{40,21},{40,20},{44,20}},   color=
+    {191,0,0}));
   connect(preTem1.port,theConWin. fluid)
     annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
+  connect(thermalZoneFourElements.extWall,theConWall. solid)
+    annotation (Line(points={{44,12},{40,12},{40,1},{36,1}},
+    color={191,0,0}));
   connect(theConWall.fluid,preTem. port)
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
-  connect(hConvWall.y,theConWall. Gc)
-    annotation (Line(points={{0,4.4},{0,-4},{31,-4}},     color={0,0,127}));
-  connect(hConvWin.y,theConWin. Gc)
-    annotation (Line(points={{0,-4.4},{0,26},{33,26}},   color={0,0,127}));
+  connect(hConWall.y,theConWall. Gc) annotation (Line(points={{0,4.4},{0,-4},{31,-4}}, color={0,0,127}));
+  connect(hConWin.y,theConWin. Gc) annotation (Line(points={{0,-4.4},{0,26},{33,26}}, color={0,0,127}));
   connect(weaBus.TBlaSky,eqAirTemp. TBlaSky)
     annotation (Line(
     points={{-83,6},{-58,6},{-58,2},{-32,2},{-32,-4},{-26,-4}},
@@ -239,16 +233,25 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
+  connect(macConv.port,thermalZoneFourElements. intGainsConv)
+    annotation (
+    Line(points={{68,-74},{82,-74},{96,-74},{96,20},{92,20}}, color={191,
+    0,0}));
+  connect(perCon.port,thermalZoneFourElements. intGainsConv)
+    annotation (
+    Line(points={{68,-52},{96,-52},{96,20},{92,20}}, color={191,0,0}));
+  connect(preTemFloor.port,thermalZoneFourElements. floor)
+    annotation (Line(points={{67,-6},{68,-6},{68,-2}}, color={191,0,0}));
   connect(TSoil.y,preTemFloor. T)
-  annotation (Line(points={{79.6,-22},{69,-22},{69,-21.2}}, color={0,0,127}));
+  annotation (Line(points={{79.6,-22},{67,-22},{67,-19.2}}, color={0,0,127}));
   connect(preTemRoof.port,theConRoof. fluid)
     annotation (Line(points={{67,58},{67,58},{67,52}}, color={191,0,0}));
+  connect(theConRoof.solid,thermalZoneFourElements. roof)
+    annotation (Line(points={{67,42},{66.9,42},{66.9,34}}, color={191,0,0}));
   connect(eqAirTempVDI.TEqAir,preTemRoof. T)
     annotation (Line(
     points={{51,84},{67,84},{67,71.2}}, color={0,0,127}));
-  connect(theConRoof.Gc,hConvRoof.y)
-    annotation (Line(points={{72,47},{-4.4,47},{-4.4,0}},
-                                                        color={0,0,127}));
+  connect(theConRoof.Gc,hConRoof. y) annotation (Line(points={{72,47},{-4.4,47},{-4.4,0}}, color={0,0,127}));
   connect(eqAirTempVDI.TDryBul,eqAirTemp. TDryBul)
     annotation (Line(points={{28,78},{-96,78},{-96,-2},{-38,-2},{-38,-10},{-26,-10}},
     color={0,0,127}));
@@ -262,33 +265,39 @@ equation
     string="%second",
     index=1,
     extent={{6,3},{6,3}}));
-  connect(HDirTil.inc,corGDouPan. inc)
-    annotation (Line(points={{-47,58},{-28,58},{-10,58},{-10,50},{4,50}},
-    color={0,0,127}));
   connect(const1.y,eqAirTempVDI. sunblind[1])
     annotation (Line(points={{61.7,93},{56,93},{56,98},{40,98},{40,96}},
                                       color={0,0,127}));
-  connect(preTemFloor.port, thermalZoneFourElements.floor)
-    annotation (Line(points={{69,-8},{68,-8},{68,-2}}, color={191,0,0}));
-  connect(thermalZoneFourElements.intGainsRad, perRad.port) annotation (Line(
-        points={{92,24},{96,24},{96,-32},{68,-32}}, color={191,0,0}));
-  connect(perCon.port, thermalZoneFourElements.intGainsConv) annotation (Line(
-        points={{68,-52},{96,-52},{96,20},{92,20}}, color={191,0,0}));
-  connect(macConv.port, thermalZoneFourElements.intGainsConv) annotation (Line(
-        points={{68,-74},{96,-74},{96,20},{92,20}}, color={191,0,0}));
-  connect(theConWin.solid, thermalZoneFourElements.window) annotation (Line(
-        points={{38,21},{42,21},{42,20},{44,20}}, color={191,0,0}));
-  connect(theConWall.solid, thermalZoneFourElements.extWall)
-    annotation (Line(points={{36,1},{40,1},{40,12},{44,12}}, color={191,0,0}));
-  connect(theConRoof.solid, thermalZoneFourElements.roof)
-    annotation (Line(points={{67,42},{66.9,42},{66.9,34}}, color={191,0,0}));
-  connect(corGDouPan.solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
-    annotation (Line(points={{27,55.5},{36,55.5},{36,30.5},{43,30.5}}, color={0,
-          0,127}));
-  connect(corGDouPan.solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
-    annotation (Line(points={{27,55.5},{36,55.5},{36,30.5},{43,30.5}}, color={0,
-          0,127}));
+  connect(HDirTil.H, corGDouPan[1].HDirTil) annotation (Line(points={{-47,62},{-22,
+          62},{-22,62},{4,62}},          color={0,0,127}));
+  connect(HDirTil.H, corGDouPan[2].HDirTil) annotation (Line(points={{-47,62},{-22,
+          62},{-22,62},{4,62}},          color={0,0,127}));
+  connect(HDirTil.inc, corGDouPan[1].inc) annotation (Line(points={{-47,58},{-22,
+          58},{-22,50},{4,50}},      color={0,0,127}));
+  connect(HDirTil.inc, corGDouPan[2].inc) annotation (Line(points={{-47,58},{-22,
+          58},{-22,50},{4,50}},      color={0,0,127}));
+  connect(HDifTil.HSkyDifTil, corGDouPan[1].HSkyDifTil) annotation (Line(points=
+         {{-47,36},{-22,36},{-22,58},{4,58}}, color={0,0,127}));
+  connect(HDifTil.HSkyDifTil, corGDouPan[2].HSkyDifTil) annotation (Line(points=
+         {{-47,36},{-22,36},{-22,58},{4,58}}, color={0,0,127}));
+  connect(HDifTil.HGroDifTil, corGDouPan[1].HGroDifTil) annotation (Line(points=
+         {{-47,24},{-22,24},{-22,54},{4,54}}, color={0,0,127}));
+  connect(HDifTil.HGroDifTil, corGDouPan[2].HGroDifTil) annotation (Line(points=
+         {{-47,24},{-22,24},{-22,54},{4,54}}, color={0,0,127}));
+  connect(corGDouPan[1].solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
+    annotation (Line(points={{27,55.5},{36,55.5},{36,30.25},{43,30.25}}, color={
+          0,0,127}));
+  connect(corGDouPan[1].solarRadWinTrans[2], thermalZoneFourElements.solRad[2])
+    annotation (Line(points={{27,56.5},{36,56.5},{36,30.75},{43,30.75}}, color={
+          0,0,127}));
+  connect(corGDouPan[2].solarRadWinTrans[1], thermalZoneFourElements.solRad[3])
+    annotation (Line(points={{27,55.5},{36,55.5},{36,31.25},{43,31.25}}, color=
+          {0,0,127}));
+  connect(corGDouPan[2].solarRadWinTrans[2], thermalZoneFourElements.solRad[4])
+    annotation (Line(points={{27,56.5},{36,56.5},{36,31.75},{43,31.75}}, color=
+          {0,0,127}));
   annotation (Line(points={{79.6,-22},{65,-22},{65,-25.2}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=2592000, Interval=300));
 end ReducedOrderModel_OneRoom;

@@ -50,21 +50,6 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-70})));
-  ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows southFacingWindows(
-    Room_Length=30,
-    Room_Height=3,
-    Room_Width=30,
-    Win_Area=180,
-    use_sunblind=true,
-    ratioSunblind=0,
-    solIrrThreshold=10000,
-    TOutAirLimit=1273.15,
-    solar_absorptance_OW=0.48,
-    TypOW=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
-    TypCE=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf(),
-    TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
-    Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
-    annotation (Placement(transformation(extent={{2,-4},{22,16}})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
     Wind_dir=true,
@@ -77,7 +62,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
     fileName=Modelica.Utilities.Files.loadResource(
-        "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"),
+        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"),
     tableName="SimYearVar")
     annotation (Placement(transformation(extent={{-174,14},{-144,34}})));
 
@@ -133,6 +118,22 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={44,30})));
+  ThermalZones.HighOrder.Rooms.ASHRAE140.SouthFacingWindows southFacingWindows(
+    Room_Lenght=30,
+    Room_Height=3,
+    Room_Width=30,
+    Win_Area=180,
+    use_sunblind=true,
+    ratioSunblind=0,
+    solIrrThreshold=10000,
+    TOutAirLimit=10273.15,
+    solar_absorptance_OW=0.48,
+    eps_out=25,
+    TypOW=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
+    TypCE=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf(),
+    TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
+    Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
+    annotation (Placement(transformation(extent={{16,-10},{36,10}})));
 equation
   connect(intGai.y[1],perRad. Q_flow)
     annotation (Line(points={{78,-83.2},{60,-83.2},{60,-70}},
@@ -151,8 +152,6 @@ equation
     annotation (Line(points={{78,-52},{78,-42}}, color={191,0,0}));
   connect(macConv.port,thermalCollector. port_a[2]) annotation (Line(points={{96,-52},
           {96,-42},{78,-42}},               color={191,0,0}));
-  connect(const2.y, southFacingWindows.AER)
-    annotation (Line(points={{0,-59},{0,1},{1,1}}, color={0,0,127}));
   connect(product.u1,product1. u1) annotation (Line(points={{-70.8,108.4},{-98,
           108.4},{-98,68.4},{-70.8,68.4}},
                                         color={0,0,127}));
@@ -237,36 +236,36 @@ equation
   connect(combiTable1D3.u[1],gain. y) annotation (Line(points={{-93,-27},{-106,
           -27},{-106,67},{-117.5,67}},
                               color={0,0,127}));
-  connect(preTemFloor.port, southFacingWindows.Therm_ground) annotation (Line(
-        points={{27,-22},{10,-22},{10,-3.6},{8.8,-3.6}}, color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows.thermRoom)
-    annotation (Line(points={{78,-22},{78,8.3},{9.1,8.3}}, color={191,0,0}));
-  connect(weather.WindSpeed, southFacingWindows.WindSpeedPort) annotation (Line(
-        points={{-143,30},{-132,30},{-132,8},{-120,8},{-120,9},{1,9}}, color={0,
-          0,127}));
-  connect(SolarRadiation_North5, southFacingWindows.SolarRadiationPort[1])
-    annotation (Line(points={{-28,96},{-14,96},{-14,11.2},{1,11.2}}, color={255,
-          128,0}));
-  connect(SolarRadiation_East, southFacingWindows.SolarRadiationPort[2])
-    annotation (Line(points={{-28,56},{-14,56},{-14,11.6},{1,11.6}}, color={255,
-          128,0}));
-  connect(SolarRadiation_South, southFacingWindows.SolarRadiationPort[3])
-    annotation (Line(points={{-28,16},{-14,16},{-14,12},{1,12}}, color={255,128,
-          0}));
-  connect(SolarRadiation_West, southFacingWindows.SolarRadiationPort[4])
-    annotation (Line(points={{-28,-24},{-14,-24},{-14,12.4},{1,12.4}}, color={
-          255,128,0}));
-  connect(SolarRadiation_Hor, southFacingWindows.SolarRadiationPort[5])
-    annotation (Line(points={{-28,-64},{-14,-64},{-14,12.8},{1,12.8}}, color={
-          255,128,0}));
-  connect(theConRoof.solid, southFacingWindows.Therm_outside) annotation (Line(
-        points={{7,26},{4,26},{4,15.7},{1.5,15.7}}, color={191,0,0}));
   connect(theConRoof.fluid, preTemRoof.port)
     annotation (Line(points={{7,36},{8,36},{8,44},{9,44}}, color={191,0,0}));
   connect(weather.AirTemp, preTemRoof.T) annotation (Line(points={{-143,27},{
           -67.5,27},{-67.5,57.2},{9,57.2}}, color={0,0,127}));
   connect(Gc.y, theConRoof.Gc) annotation (Line(points={{33,30},{24,30},{24,31},
           {12,31}}, color={0,0,127}));
+  connect(thermalCollector.port_b, southFacingWindows.thermRoom) annotation (
+      Line(points={{78,-22},{52,-22},{52,2.3},{23.1,2.3}}, color={191,0,0}));
+  connect(preTemFloor.port, southFacingWindows.Therm_ground) annotation (Line(
+        points={{27,-22},{24,-22},{24,-9.6},{22.8,-9.6}}, color={191,0,0}));
+  connect(const2.y, southFacingWindows.AER) annotation (Line(points={{0,-59},{8,
+          -59},{8,-5},{15,-5}}, color={0,0,127}));
+  connect(weather.WindSpeed, southFacingWindows.WindSpeedPort) annotation (Line(
+        points={{-143,30},{-64,30},{-64,3},{15,3}}, color={0,0,127}));
+  connect(theConRoof.solid, southFacingWindows.Therm_outside) annotation (Line(
+        points={{7,26},{12,26},{12,9.7},{15.5,9.7}}, color={191,0,0}));
+  connect(SolarRadiation_North5, southFacingWindows.SolarRadiationPort[1])
+    annotation (Line(points={{-28,96},{-6,96},{-6,5.2},{15,5.2}}, color={255,
+          128,0}));
+  connect(SolarRadiation_East, southFacingWindows.SolarRadiationPort[2])
+    annotation (Line(points={{-28,56},{-6,56},{-6,5.6},{15,5.6}}, color={255,
+          128,0}));
+  connect(SolarRadiation_South, southFacingWindows.SolarRadiationPort[3])
+    annotation (Line(points={{-28,16},{-6,16},{-6,6},{15,6}}, color={255,128,0}));
+  connect(SolarRadiation_West, southFacingWindows.SolarRadiationPort[4])
+    annotation (Line(points={{-28,-24},{-6,-24},{-6,6.4},{15,6.4}}, color={255,
+          128,0}));
+  connect(SolarRadiation_Hor, southFacingWindows.SolarRadiationPort[5])
+    annotation (Line(points={{-28,-64},{-6,-64},{-6,6.8},{15,6.8}}, color={255,
+          128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=15552000, Interval=300));
