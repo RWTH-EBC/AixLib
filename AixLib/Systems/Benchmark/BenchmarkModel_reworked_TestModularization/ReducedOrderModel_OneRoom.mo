@@ -64,7 +64,7 @@ model ReducedOrderModel_OneRoom
     ATransparent={48,0,48,48},
     AExt={30,0,30,30},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial);
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 
 
 

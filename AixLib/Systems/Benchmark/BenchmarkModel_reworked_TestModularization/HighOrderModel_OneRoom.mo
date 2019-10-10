@@ -134,8 +134,6 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{16,-10},{36,10}})));
-  BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather1
-    annotation (Placement(transformation(extent={{-258,-54},{-228,-34}})));
 equation
   connect(intGai.y[1],perRad. Q_flow)
     annotation (Line(points={{78,-83.2},{60,-83.2},{60,-70}},

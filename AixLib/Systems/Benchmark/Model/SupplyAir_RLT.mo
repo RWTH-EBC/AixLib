@@ -1,7 +1,7 @@
 within AixLib.Systems.Benchmark.Model;
 model SupplyAir_RLT
   Fluid.Sources.Boundary_pT Air_in_bou(
-    redeclare package Medium = Medium_Air,
+    redeclare package Medium =AixLib.Media.Air,
     p=100000,
     T=293.15,
     nPorts=1) annotation (Placement(transformation(
@@ -13,7 +13,7 @@ model SupplyAir_RLT
     use_T_in=true,
     use_X_in=true,
     nPorts=1,
-    redeclare package Medium = Medium_Air)
+    redeclare package Medium = AixLib.Media.Air)
     annotation (Placement(transformation(extent={{-44,-30},{-64,-10}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-14,-30},{-34,-50}})));
@@ -33,11 +33,11 @@ model SupplyAir_RLT
   Modelica.Blocks.Sources.RealExpression realExpression2(y=1)
     annotation (Placement(transformation(extent={{-76,-68},{-64,-52}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
-        Medium_Air)
+        AixLib.Media.Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
-        Medium_Air)
+        AixLib.Media.Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
   BusSystems.Bus_Control controlBus annotation (Placement(transformation(extent=
@@ -58,16 +58,9 @@ model SupplyAir_RLT
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={104,22})));
-  Modelica.Blocks.Interfaces.RealInput PVSystem_TOutside annotation (Placement(
-        transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=180,
-        origin={106,-68})));
 equation
   connect(boundary.ports[1],Air_out)
     annotation (Line(points={{-64,-20},{-100,-20}}, color={0,127,255}));
-  connect(feedback.y,boundary. X_in[2]) annotation (Line(points={{-33,-40},{-36,
-          -40},{-36,-24},{-42,-24}}, color={0,0,127}));
   connect(realExpression.y,feedback. u1)
     annotation (Line(points={{9.4,-40},{-16,-40}}, color={0,0,127}));
   connect(Air_in,Air_in_bou. ports[1])
@@ -109,8 +102,10 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(WaterInAir, feedback.u2) annotation (Line(points={{104,22},{30,22},{
           30,-32},{-24,-32}}, color={0,0,127}));
-  connect(PVSystem_TOutside, boundary.T_in) annotation (Line(points={{106,-68},
-          {30,-68},{30,-16},{-42,-16}}, color={0,0,127}));
+  connect(feedback.y, boundary.X_in[2]) annotation (Line(points={{-33,-40},{-38,
+          -40},{-38,-24},{-42,-24}}, color={0,0,127}));
+  connect(WaterInAir, boundary.X_in[1]) annotation (Line(points={{104,22},{30,
+          22},{30,-24},{-42,-24}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SupplyAir_RLT;

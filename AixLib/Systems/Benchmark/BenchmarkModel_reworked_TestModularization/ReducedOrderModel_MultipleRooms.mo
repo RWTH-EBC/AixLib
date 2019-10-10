@@ -69,13 +69,8 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     ATransparent={{48,0,48,48},{32,0,32,0},{16,0,0,0},{0,0,32,0},{64,48,48,0}},
     AExt={{30,0,30,30},{20,0,20,0},{30,0,0,0},{0,0,60,0},{70,30,90,0}},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-   each  energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    each extWallRC(thermCapExt(each der_T(fixed=true))),
-   each  intWallRC(thermCapInt(each der_T(fixed=true))),
-   each  floorRC(thermCapExt(each der_T(fixed=true))),
-    T_start=295.15,
-    each roofRC(thermCapExt(each der_T(fixed=true)))) "Thermal zone"
-    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    T_start=295.15);
+
 
   ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
                                              eqAirTemp(

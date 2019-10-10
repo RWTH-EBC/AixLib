@@ -25,8 +25,6 @@ model PVSystem
     annotation (Placement(transformation(extent={{76,70},{88,82}})));
   BusSystems.Bus_measure measureBus annotation (Placement(transformation(extent=
            {{-52,-120},{-12,-80}}), iconTransformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Blocks.Interfaces.RealInput boundary_Tin
-    annotation (Placement(transformation(extent={{-124,60},{-84,100}})));
 equation
   connect(pVSystem.PVPowerW,gain2. u)
     annotation (Line(points={{-5,76},{74.8,76}},   color={0,0,127}));
@@ -36,8 +34,8 @@ equation
   connect(weather.SolarRadiation_OrientedSurfaces[5],pVSystem. IcTotalRad)
     annotation (Line(points={{-82.8,43},{-82.8,40.5},{-27.8,40.5},{-27.8,75.5}},
         color={255,128,0}));
-  connect(boundary_Tin, pVSystem.TOutside) annotation (Line(points={{-104,80},{
-          -66,80},{-66,83.6},{-28,83.6}}, color={0,0,127}));
+  connect(weather.AirTemp, pVSystem.TOutside) annotation (Line(points={{-59,57},
+          {-44.5,57},{-44.5,83.6},{-28,83.6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end PVSystem;
