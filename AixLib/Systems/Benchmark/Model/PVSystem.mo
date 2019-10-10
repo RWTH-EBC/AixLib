@@ -11,12 +11,11 @@ model PVSystem
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-
     fileName=Modelica.Utilities.Files.loadResource(
         "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"),
-
     tableName="SimYearVar")
     annotation (Placement(transformation(extent={{-90,44},{-60,64}})));
+
   Electrical.PVSystem.PVSystem pVSystem(
     NumberOfPanels=50*9,
     data=DataBase.SolarElectric.SymphonyEnergySE6M181(),

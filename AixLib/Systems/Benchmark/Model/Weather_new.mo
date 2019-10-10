@@ -103,6 +103,8 @@ model Weather_new
     annotation (Placement(transformation(extent={{94,-46},{114,-26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b therm_floor
     annotation (Placement(transformation(extent={{92,-98},{112,-78}})));
+  Modelica.Blocks.Interfaces.RealOutput SolarRad[2]
+    annotation (Placement(transformation(extent={{0,-108},{20,-88}})));
 equation
   connect(eqAirTemp.TEqAirWin,preTem1. T)
     annotation (Line(points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},
@@ -210,6 +212,10 @@ equation
           -36},{86,-88},{102,-88}}, color={191,0,0}));
   connect(therm_wall, therm_wall)
     annotation (Line(points={{104,-36},{104,-36}}, color={191,0,0}));
+  connect(corGDouPan.solarRadWinTrans[1], SolarRad[1]) annotation (Line(points=
+          {{27,55.5},{14,55.5},{14,-103},{10,-103}}, color={0,0,127}));
+  connect(corGDouPan.solarRadWinTrans[2], SolarRad[2]) annotation (Line(points=
+          {{27,56.5},{16,56.5},{16,-93},{10,-93}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather_new;
