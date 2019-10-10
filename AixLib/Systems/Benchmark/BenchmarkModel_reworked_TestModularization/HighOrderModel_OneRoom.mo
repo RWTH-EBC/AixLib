@@ -52,6 +52,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         origin={0,-70})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
+    tableName="USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos",
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
@@ -62,8 +63,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"),
-    tableName="SimYearVar")
+        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     annotation (Placement(transformation(extent={{-174,14},{-144,34}})));
 
   Modelica.Blocks.Math.Product product
@@ -134,6 +134,8 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{16,-10},{36,10}})));
+  BoundaryConditions.WeatherData.Old.WeatherTRY.Weather weather1
+    annotation (Placement(transformation(extent={{-258,-54},{-228,-34}})));
 equation
   connect(intGai.y[1],perRad. Q_flow)
     annotation (Line(points={{78,-83.2},{60,-83.2},{60,-70}},

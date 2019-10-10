@@ -63,12 +63,10 @@ model ReducedOrderModel_OneRoom
     ATransparent={48,0,48,48},
     AExt={30,0,30,30},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    extWallRC(thermCapExt(each der_T(fixed=true))),
-    intWallRC(thermCapInt(each der_T(fixed=true))),
-    floorRC(thermCapExt(each der_T(fixed=true))),
-    T_start=295.15,
-    roofRC(thermCapExt(each der_T(fixed=true)))) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial);
+
+
+
   ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
                                              eqAirTemp(
     wfGro=0,

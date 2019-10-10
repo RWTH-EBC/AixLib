@@ -402,5 +402,6 @@ equation
     4]) annotation (Line(points={{27,56.5},{36,56.5},{36,31.75},{43,31.75}},
         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=2592000, Interval=300));
 end ReducedOrderModel_MultipleRooms;
