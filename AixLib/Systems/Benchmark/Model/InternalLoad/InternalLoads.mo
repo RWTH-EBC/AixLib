@@ -22,8 +22,8 @@ model InternalLoads
 equation
   connect(internalLoads_Power.AddPower, AddPower)
     annotation (Line(points={{10,60},{94,60}}, color={191,0,0}));
-  connect(internalLoads_Power.u1, combiTimeTable1.y) annotation (Line(points={{
-          -10,60},{-40,60},{-40,0},{-59,0}}, color={0,0,127}));
+  connect(internalLoads_Power.u1, combiTimeTable1.y) annotation (Line(points={{-10,60},
+          {-40,60},{-40,0},{-59,0}},         color={0,0,127}));
   connect(internalLoads_Water.u1, combiTimeTable1.y) annotation (Line(points={{-10,-60},
           {-40,-60},{-40,0},{-59,0}},          color={0,0,127}));
   connect(internalLoads_Water.WaterPerRoom[1], internalBus.InternalLoads_MFlow_Openplanoffice)

@@ -2,12 +2,12 @@ within AixLib.Systems.Benchmark.Model;
 model Weather_new
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-
     computeWetBulbTemperature=false,
     filNam=Modelica.Utilities.Files.loadResource(
         "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
+
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[2](
     each outSkyCon=true,
     each outGroCon=true,
