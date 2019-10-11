@@ -166,8 +166,8 @@ equation
           70},{54,70},{54,48},{100,48},{100,12},{92,12}}, color={0,0,127}));
   connect(combiTimeTable.y[9], division.u1)
     annotation (Line(points={{-79,70},{-42,70},{-42,-54}}, color={0,0,127}));
-  annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated
-          =true) =
+  annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
+           true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpValidation.mos"
         "Simulate and plot"));
 end HeatpumpValidation;

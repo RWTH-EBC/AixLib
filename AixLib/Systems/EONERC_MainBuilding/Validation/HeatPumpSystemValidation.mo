@@ -55,7 +55,7 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  BaseClasses.HeatPumpSystemDataInput heatPumpSystemDataInput(table=Data.October2015)
+  Controller.HeatPumpSystemDataInput heatPumpSystemDataInput(table=Data.October2015)
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin2
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
@@ -100,7 +100,7 @@ equation
   connect(toKelvin2.Kelvin, prescribedTemperature.T)
     annotation (Line(points={{-61.2,-70},{-42,-70}}, color={0,0,127}));
   annotation (experiment(StopTime=23400), __Dymola_Commands(file(
-          ensureSimulated=true) =
+          ensureSimulated=true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpSystemValidation.mos"
         "Simulate and plot"));
 end HeatPumpSystemValidation;
