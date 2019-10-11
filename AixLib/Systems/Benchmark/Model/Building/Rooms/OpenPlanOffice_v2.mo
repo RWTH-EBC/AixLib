@@ -2,7 +2,7 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model OpenPlanOffice_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom(vol(V=4050),
       activeWallPipeBased(wall_length=45, wall_height=30));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 FloorToGround(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
     withWindow=false,
     windowarea=60,
@@ -17,7 +17,7 @@ model OpenPlanOffice_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={14,-80})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallToMultiPersonOffice(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall WallToMultiPersonOffice(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=false,
@@ -38,7 +38,7 @@ model OpenPlanOffice_v2
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     HeatPort_ToMultiPersonOffice
     annotation (Placement(transformation(extent={{60,-110},{80,-90}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 EastWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall EastWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -67,7 +67,7 @@ model OpenPlanOffice_v2
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-70})));
- AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallToConferenceRoom(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall WallToConferenceRoom(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=false,
@@ -83,7 +83,7 @@ model OpenPlanOffice_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
         origin={-70,20})));
- AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WestWallToCanteen(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall WestWallToCanteen(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=false,
@@ -103,7 +103,7 @@ model OpenPlanOffice_v2
     annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToCanteen
     annotation (Placement(transformation(extent={{-110,-40},{-90,-20}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 SouthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall SouthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -132,7 +132,7 @@ model OpenPlanOffice_v2
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-10,-110})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 NorthWall(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall NorthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -141,8 +141,8 @@ model OpenPlanOffice_v2
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     T0(displayUnit="degC") = 293.15,
     wall_length=40,
-    windowarea=80,
-    Model=1)   annotation (Placement(transformation(
+    windowarea=80)
+        annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=-90,
         origin={-50,60})));

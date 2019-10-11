@@ -23,7 +23,7 @@ model Canteen_v2
     solar_absorptance=0.48,
     withWindow=false,
     redeclare model Window =
-        AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140,
+        AixLib.ThermalZones.HighOrder.Components.Walls.Wall,
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
@@ -72,7 +72,7 @@ model Canteen_v2
     solar_absorptance=0.48,
     withWindow=false,
     redeclare model Window =
-        AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+        AixLib.ThermalZones.HighOrder.Components.Walls.Wall,
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,

@@ -3,7 +3,7 @@ model MultiPersonOffice_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallsToOpenPlanOffice(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall WallsToOpenPlanOffice(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=false,
@@ -21,7 +21,7 @@ model MultiPersonOffice_v2
         origin={80,-30})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenPlanOffice
     annotation (Placement(transformation(extent={{90,-40},{110,-20}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 SouthWall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall SouthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
@@ -35,7 +35,7 @@ model MultiPersonOffice_v2
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=-90,
         origin={50,-70})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 FloorToGround(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
     withWindow=false,
     windowarea=60,

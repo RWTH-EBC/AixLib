@@ -72,9 +72,6 @@ equation
   connect(activeWallPipeBased.SolarRadiationPort,SolarRadiationPort_Hor)
     annotation (Line(points={{62,65.2},{62,84},{90,84},{90,110}}, color={255,
           128,0}));
-  connect(activeWallPipeBased.Heatport_TBA,Heatport_TBA)  annotation (Line(
-        points={{57.6,55.8},{57.6,48},{80,48},{80,70},{100,70}},
-                                                 color={191,0,0}));
   connect(Air_in,vol. ports[1]) annotation (Line(points={{100,0},{50,0},{50,-20},
           {28,-20}},                           color={0,127,255}));
   connect(Air_out,vol. ports[2]) annotation (Line(points={{100,40},{50,40},{50,
@@ -108,6 +105,8 @@ equation
   connect(thermStar_Demux.portConvRadComb, activeWallPipeBased.thermStarComb_inside)
     annotation (Line(points={{-20.375,-45.74},{-20.375,6.13},{40,6.13},{40,56}},
         color={191,0,0}));
+  connect(Heatport_TBA, activeWallPipeBased.port_outside) annotation (Line(
+        points={{100,70},{72,70},{72,64.2},{40,64.2}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BaseRoom;

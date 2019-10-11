@@ -7,9 +7,9 @@ model FullModel_new
   Evaluation.Evaluation                                evaluation
     annotation (Placement(transformation(extent={{-40,-16},{-20,4}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium =AixLib.Media.Air)
-    annotation (Placement(transformation(extent={{-34,52},{-22,64}})));
+    annotation (Placement(transformation(extent={{-34,46},{-22,58}})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = AixLib.Media.Air)
-    annotation (Placement(transformation(extent={{62,64},{74,76}})));
+    annotation (Placement(transformation(extent={{62,50},{74,62}})));
   Transfer.Transfer_TBA.Full_Transfer_TBA_Heatexchanger_v2
     full_Transfer_TBA_Heatexchanger(
     m_flow_nominal_openplanoffice=2.394,
@@ -67,10 +67,10 @@ model FullModel_new
     Earthtemperature_start=283.15)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
  Utilities.HeatTransfer.HeatConvOutside        heatTransfer_Outside(surfaceType=
-       DataBase.Surfaces.RoughnessForHT.Glass(), A=169.594)                                                                                                                                 annotation(Placement(transformation(extent={{17,92},
-            {6,104}})));
+       DataBase.Surfaces.RoughnessForHT.Glass(), A=169.594)                                                                                                                                 annotation(Placement(transformation(extent={{17,84},
+            {6,96}})));
   Modelica.Blocks.Math.Gain gain(k=2)
-    annotation (Placement(transformation(extent={{36,92},{28,100}})));
+    annotation (Placement(transformation(extent={{34,88},{26,96}})));
   Fluid.MixingVolumes.MixingVolume vol2(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=30,
@@ -78,15 +78,15 @@ model FullModel_new
     nPorts=3)
            annotation (Placement(transformation(extent={{5,-5},{-5,5}},
         rotation=90,
-        origin={1,67})));
+        origin={-1,57})));
   Fluid.MixingVolumes.MixingVolume vol1(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=30,
     V=5,
-    nPorts=2)
+    nPorts=3)
            annotation (Placement(transformation(extent={{-5,-5},{5,5}},
         rotation=-90,
-        origin={21,67})));
+        origin={21,57})));
   Infiltration infiltration(
     room_V_openplanoffice=4050,
     room_V_conferenceroom=150,
@@ -107,11 +107,11 @@ model FullModel_new
   InternalLoad.InternalLoads_new internalLoads_new
     annotation (Placement(transformation(extent={{-40,18},{-20,38}})));
   Transfer.SupplyAir_RLT supplyAir_RLT
-    annotation (Placement(transformation(extent={{48,86},{68,106}})));
+    annotation (Placement(transformation(extent={{42,80},{62,100}})));
   Weather_new weather_new
-    annotation (Placement(transformation(extent={{84,84},{104,104}})));
+    annotation (Placement(transformation(extent={{70,80},{90,100}})));
   Generation.PVSystem pVSystem
-    annotation (Placement(transformation(extent={{-42,84},{-22,104}})));
+    annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
 equation
   connect(full_Transfer_RLT.measureBus,Measure)  annotation (Line(
       points={{20.2,-53},{28,-53},{28,-36},{-74,-36},{-74,20},{-100,20}},
@@ -125,10 +125,10 @@ equation
       points={{-40,-6},{-74,-6},{-74,20},{-100,20}},
       color={255,204,51},
       thickness=0.5));
-  connect(senTem1.T,Measure. Air_out) annotation (Line(points={{72.2,70},{76,70},
-          {76,80},{-74,80},{-74,20.1},{-99.9,20.1}}, color={0,0,127}));
-  connect(senTem2.T,Measure. Air_in) annotation (Line(points={{-23.8,58},{-20,
-          58},{-20,80},{-74,80},{-74,20.1},{-99.9,20.1}},
+  connect(senTem1.T,Measure. Air_out) annotation (Line(points={{72.2,56},{76,56},
+          {76,72},{-74,72},{-74,20.1},{-99.9,20.1}}, color={0,0,127}));
+  connect(senTem2.T,Measure. Air_in) annotation (Line(points={{-23.8,52},{-20,
+          52},{-20,72},{-74,72},{-74,20.1},{-99.9,20.1}},
                                                     color={0,0,127}));
   connect(full_Transfer_TBA_Heatexchanger.controlBus,Control)  annotation (Line(
       points={{80,-46},{84,-46},{84,-32},{-66,-32},{-66,-28},{-100,-28}},
@@ -176,17 +176,18 @@ equation
     annotation (Line(points={{60,-58},{36,-58},{36,-66},{-18,-66},{-18,-54},{
           -60,-54}},
                  color={0,127,255}));
-  connect(heatTransfer_Outside.WindSpeedPort,gain. y) annotation (Line(points={
-          {16.56,93.68},{25.28,93.68},{25.28,96},{27.6,96}}, color={0,0,127}));
+  connect(heatTransfer_Outside.WindSpeedPort,gain. y) annotation (Line(points={{16.56,
+          85.68},{25.28,85.68},{25.28,92},{25.6,92}},        color={0,0,127}));
   connect(heatTransfer_Outside.port_b,vol2. heatPort)
-    annotation (Line(points={{6,98},{1,98},{1,72}}, color={191,0,0}));
+    annotation (Line(points={{6,90},{-1,90},{-1,62}},
+                                                    color={191,0,0}));
   connect(heatTransfer_Outside.port_a,vol1. heatPort)
-    annotation (Line(points={{17,98},{21,98},{21,72}}, color={191,0,0}));
+    annotation (Line(points={{17,90},{21,90},{21,62}}, color={191,0,0}));
   connect(vol2.ports[1],full_Transfer_RLT. Air_in)
-    annotation (Line(points={{6,68.3333},{6,-40}},
+    annotation (Line(points={{4,58.3333},{4,10},{6,10},{6,-40}},
                                               color={0,127,255}));
   connect(senTem2.port,vol2. ports[2])
-    annotation (Line(points={{-28,52},{6,52},{6,67}},      color={0,127,255}));
+    annotation (Line(points={{-28,46},{4,46},{4,57}},      color={0,127,255}));
   connect(full_Transfer_RLT.Fluid_in_hot,generation_v2_1. Fluid_out_hot)
     annotation (Line(points={{0,-42},{-60,-42}}, color={0,127,255}));
   connect(infiltration.measureBus,Measure)  annotation (Line(
@@ -194,9 +195,11 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(office_new.Air_out, vol1.ports[1])
-    annotation (Line(points={{55.2,2},{16,2},{16,68}}, color={0,127,255}));
-  connect(office_new.Air_out, senTem1.port) annotation (Line(points={{55.2,2},{16,
-          2},{16,44},{68,44},{68,64}}, color={0,127,255}));
+    annotation (Line(points={{55.2,2},{54,2},{54,-6},{16,-6},{16,58.3333}},
+                                                       color={0,127,255}));
+  connect(office_new.Air_out, senTem1.port) annotation (Line(points={{55.2,2},{
+          54,2},{54,-6},{16,-6},{16,46},{68,46},{68,50}},
+                                       color={0,127,255}));
   connect(internalLoads_new.macConv_port, office_new.port_IntConvGains)
     annotation (Line(points={{-19.6,28.8},{74.2,28.8},{74.2,10.2},{62,10.2}},
         color={191,0,0}));
@@ -207,20 +210,27 @@ equation
     annotation (Line(points={{-19.6,37},{28,37},{28,38},{74,38},{74,13.6},{62,
           13.6}},                                                         color=
          {191,0,0}));
-  connect(weather_new.therm_roof, office_new.port_roof) annotation (Line(points=
-         {{104.6,103.6},{104.6,22},{52,22}}, color={191,0,0}));
+  connect(weather_new.therm_roof, office_new.port_roof) annotation (Line(points={{90.6,
+          99.6},{90,99.6},{90,100},{100,100},{100,26},{52,26},{52,22}},
+                                             color={191,0,0}));
   connect(weather_new.therm_window, office_new.port_windows) annotation (Line(
-        points={{104.4,97.6},{104.4,21.8},{42,21.8},{42,13.6}}, color={191,0,0}));
+        points={{90.4,93.6},{90,93.6},{90,94},{100,94},{100,26},{18,26},{18,12},
+          {42,12},{42,13.6}},                                   color={191,0,0}));
   connect(weather_new.therm_wall, office_new.port_walls) annotation (Line(
-        points={{104.4,90.4},{104.4,22.2},{42,22.2},{42,10.2}}, color={191,0,0}));
+        points={{90.4,86.4},{90,86.4},{90,86},{100,86},{100,26},{18,26},{18,
+          10.2},{42,10.2}},                                     color={191,0,0}));
   connect(weather_new.therm_floor, office_new.port_floor) annotation (Line(
-        points={{104.2,85.2},{104.2,1.6},{52,1.6},{52,2}}, color={191,0,0}));
-  connect(supplyAir_RLT.RLT_Velocity, gain.u) annotation (Line(points={{47.4,97.4},
-          {42.7,97.4},{42.7,96},{36.8,96}}, color={0,0,127}));
-  connect(supplyAir_RLT.Air_out, vol2.ports[3]) annotation (Line(points={{48,94},
-          {48,84},{6,84},{6,65.6667}}, color={0,127,255}));
-  connect(supplyAir_RLT.Air_in, vol1.ports[2]) annotation (Line(points={{48,90},
-          {48,80},{16,80},{16,66}}, color={0,127,255}));
+        points={{90.2,81.2},{90.2,82},{100,82},{100,-10},{52,-10},{52,2}},
+                                                           color={191,0,0}));
+  connect(supplyAir_RLT.RLT_Velocity, gain.u) annotation (Line(points={{41.4,
+          91.4},{42.7,91.4},{42.7,92},{34.8,92}},
+                                            color={0,0,127}));
+  connect(supplyAir_RLT.Air_out, vol2.ports[3]) annotation (Line(points={{42,88},
+          {42,74},{4,74},{4,55.6667}}, color={0,127,255}));
+  connect(supplyAir_RLT.Air_in, vol1.ports[2]) annotation (Line(points={{42,84},
+          {42,74},{16,74},{16,57}}, color={0,127,255}));
+  connect(office_new.Air_out, vol1.ports[3]) annotation (Line(points={{55.2,2},
+          {54,2},{54,-6},{16,-6},{16,55.6667}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel_new;

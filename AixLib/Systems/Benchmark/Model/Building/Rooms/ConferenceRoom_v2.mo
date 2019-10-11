@@ -2,7 +2,7 @@ within AixLib.Systems.Benchmark.Model.Building.Rooms;
 model ConferenceRoom_v2
   extends AixLib.Systems.Benchmark.Model.Building.Rooms.BaseRoom(vol(V=150),
       activeWallPipeBased(wall_length=5, wall_height=10));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 FloorToWorkshop(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToWorkshop(
     solar_absorptance=0.48,
     withWindow=false,
     windowarea=60,
@@ -17,7 +17,7 @@ model ConferenceRoom_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={-50,-70})));
- AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 WallsToOpenPlanOffice(
+AixLib.ThermalZones.HighOrder.Components.Walls.Wall WallsToOpenPlanOffice(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=false,
@@ -37,7 +37,7 @@ model ConferenceRoom_v2
     annotation (Placement(transformation(extent={{-60,-110},{-40,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenPlanOffice
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 NorthWall(
+ AixLib.ThermalZones.HighOrder.Components.Walls.Wall NorthWall(
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,

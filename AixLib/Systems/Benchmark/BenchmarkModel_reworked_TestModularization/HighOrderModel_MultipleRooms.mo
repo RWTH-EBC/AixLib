@@ -62,8 +62,7 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"),
-    tableName="SimYearVar")
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     annotation (Placement(transformation(extent={{-174,14},{-144,34}})));
 
   Modelica.Blocks.Math.Product product
@@ -374,4 +373,5 @@ equation
   connect(SolarRadiation_Hor, southFacingWindows[5].SolarRadiationPort[5])
     annotation (Line(points={{-28,-64},{-8,-64},{-8,6.8},{15,6.8}}, color={255,
           128,0}));
+  annotation (experiment(StopTime=2592000, Interval=300));
 end HighOrderModel_MultipleRooms;

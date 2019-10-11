@@ -88,7 +88,7 @@ model Weather_new
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{68,90},{62,96}})));
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
-    annotation (Placement(transformation(extent={{-100,-10},{-66,22}}),
+    annotation (Placement(transformation(extent={{-118,-84},{-84,-52}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
     "Prescribed temperature for floor plate outdoor surface temperature"
@@ -113,11 +113,12 @@ equation
     annotation (Line(points={{-3,-4},{4,-4},{4,0},{6.8,0}},
     color={0,0,127}));
   connect(weaDat.weaBus,weaBus)
-    annotation (Line(points={{-76,62},{-74,62},{-74,18},{-84,18},{-84,12},
-    {-83,12},{-83,6}},color={255,204,51},
+    annotation (Line(points={{-76,62},{-74,62},{-74,18},{-84,18},{-84,12},{-101,
+          12},{-101,-68}},
+                      color={255,204,51},
     thickness=0.5), Text(string="%second",index=1,extent={{6,3},{6,3}}));
   connect(weaBus.TDryBul,eqAirTemp. TDryBul)
-    annotation (Line(points={{-83,6},{-83,-2},{-38,-2},{-38,-10},{-26,-10}},
+    annotation (Line(points={{-101,-68},{-101,-6},{-38,-6},{-38,-10},{-26,-10}},
     color={255,204,51},
     thickness=0.5), Text(string="%first",index=-1,extent={{-6,3},{-6,3}}));
   connect(const.y,eqAirTemp. sunblind)
@@ -167,7 +168,7 @@ equation
     annotation (Line(points={{0,-4.4},{0,26},{33,26}},   color={0,0,127}));
   connect(weaBus.TBlaSky,eqAirTemp. TBlaSky)
     annotation (Line(
-    points={{-83,6},{-58,6},{-58,2},{-32,2},{-32,-4},{-26,-4}},
+    points={{-101,-68},{-58,-68},{-58,2},{-32,2},{-32,-4},{-26,-4}},
     color={255,204,51},
     thickness=0.5), Text(
     string="%first",
@@ -189,7 +190,7 @@ equation
           {-32,2},{-32,-4},{-26,-4}},
     color={0,0,127}));
   connect(eqAirTempVDI.HSol[1],weaBus. HGloHor)
-    annotation (Line(points={{28,90},{-100,90},{-100,6},{-83,6}},
+    annotation (Line(points={{28,90},{-100,90},{-100,-68},{-101,-68}},
     color={0,0,127}),Text(
     string="%second",
     index=1,
