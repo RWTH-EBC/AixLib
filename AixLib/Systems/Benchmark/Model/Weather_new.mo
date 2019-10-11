@@ -83,7 +83,7 @@ model Weather_new
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={67,47})));
   Modelica.Blocks.Sources.Constant hConvRoof(k=25*11.5) "Outdoor coefficient of heat transfer for roof"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}})));
+    annotation (Placement(transformation(extent={{6,2},{-2,10}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{68,90},{62,96}})));
@@ -104,7 +104,19 @@ model Weather_new
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b therm_floor
     annotation (Placement(transformation(extent={{92,-98},{112,-78}})));
   Modelica.Blocks.Interfaces.RealOutput SolarRad[2]
-    annotation (Placement(transformation(extent={{0,-108},{20,-88}})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={42,-106})));
+  Modelica.Blocks.Interfaces.RealOutput WaterInAir annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-82,-106})));
+  Modelica.Blocks.Interfaces.RealOutput AirTemp annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-22,-106})));
 equation
   connect(eqAirTemp.TEqAirWin,preTem1. T)
     annotation (Line(points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},
@@ -180,7 +192,7 @@ equation
     annotation (Line(
     points={{51,84},{67,84},{67,71.2}}, color={0,0,127}));
   connect(theConRoof.Gc,hConvRoof.y)
-    annotation (Line(points={{72,47},{-4.4,47},{-4.4,0}},
+    annotation (Line(points={{72,47},{-2.4,47},{-2.4,6}},
                                                         color={0,0,127}));
   connect(eqAirTempVDI.TDryBul,eqAirTemp. TDryBul)
     annotation (Line(points={{28,78},{-96,78},{-96,-2},{-38,-2},{-38,-10},{-26,-10}},
@@ -213,10 +225,14 @@ equation
           -36},{86,-88},{102,-88}}, color={191,0,0}));
   connect(therm_wall, therm_wall)
     annotation (Line(points={{104,-36},{104,-36}}, color={191,0,0}));
-  connect(corGDouPan.solarRadWinTrans[1], SolarRad[1]) annotation (Line(points=
-          {{27,55.5},{14,55.5},{14,-103},{10,-103}}, color={0,0,127}));
-  connect(corGDouPan.solarRadWinTrans[2], SolarRad[2]) annotation (Line(points=
-          {{27,56.5},{16,56.5},{16,-93},{10,-93}}, color={0,0,127}));
+  connect(corGDouPan.solarRadWinTrans[1], SolarRad[1]) annotation (Line(points={{27,55.5},
+          {42,55.5},{42,-101}},                      color={0,0,127}));
+  connect(eqAirTemp.TEqAir, AirTemp) annotation (Line(points={{-3,-4},{-2,-4},{
+          -2,-64},{-22,-64},{-22,-106}}, color={0,0,127}));
+  connect(corGDouPan.solarRadWinTrans[2], SolarRad[1])
+    annotation (Line(points={{27,56.5},{42,56.5},{42,-101}}, color={0,0,127}));
+  connect(AirTemp, AirTemp)
+    annotation (Line(points={{-22,-106},{-22,-106}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather_new;

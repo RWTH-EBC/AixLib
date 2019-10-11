@@ -1,5 +1,7 @@
 within AixLib.Systems.Benchmark.Model.Transfer.Transfer_TBA;
 model TBA_Pipe_Openplanoffice_v2
+
+
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
   import BaseLib = AixLib.Utilities;
@@ -17,6 +19,8 @@ model TBA_Pipe_Openplanoffice_v2
     parameter Modelica.SIunits.Length TBA_pipe_diameter = 0.02 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Length TBA_wall_length = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Length TBA_wall_height = 0 annotation(Dialog(tab = "General"));
+
+
 
   Fluid.MixingVolumes.MixingVolume vol(
     m_flow_nominal=1,
@@ -82,17 +86,9 @@ model TBA_Pipe_Openplanoffice_v2
         origin={-60,-6})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
-       AixLib.Media.Water)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-70,-110},{-50,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
-       AixLib.Media.Water)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
   Modelica.Blocks.Interfaces.RealInput valve_temp
     "Actuator position (0: closed, 1: open)"
-    annotation (Placement(transformation(extent={{-112,-12},{-88,12}})));
+    annotation (Placement(transformation(extent={{-116,-30},{-92,-6}})));
   Modelica.Blocks.Interfaces.RealInput pump
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{-112,48},{-88,72}})));
@@ -137,16 +133,22 @@ model TBA_Pipe_Openplanoffice_v2
     annotation (Placement(transformation(extent={{-112,-72},{-88,-48}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-100,78},{-80,98}})));
+
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        AixLib.Media.Water)
+    annotation (Placement(transformation(extent={{-64,-108},{-44,-88}})));
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        AixLib.Media.Water)
+    annotation (Placement(transformation(extent={{38,-110},{58,-90}})));
 equation
   connect(vol.heatPort,HeatPort_TBA)  annotation (Line(points={{-8,56},{-24,56},
           {-24,56},{-40,56},{-40,100},{-40,100}},
                                     color={191,0,0}));
-  connect(Fluid_in_cold, val1.port_1)
-    annotation (Line(points={{-60,-100},{-60,-46}}, color={0,127,255}));
   connect(fan2.port_b,vol. ports[1])
     annotation (Line(points={{-60,36},{-60,46},{0,46}}, color={0,127,255}));
   connect(val1.y, valve_temp) annotation (Line(points={{-67.2,-40},{-80,-40},{-80,
-          0},{-100,0}}, color={0,0,127}));
+          -18},{-104,-18}},
+                        color={0,0,127}));
   connect(fan2.y,pump)
     annotation (Line(points={{-69.6,28},{-80,28},{-80,60},{-100,60}},
                                                     color={0,0,127}));
@@ -176,8 +178,6 @@ equation
     annotation (Line(points={{60,-18},{60,-40.6}}, color={0,127,255}));
   connect(Ext_Warm.port_a1, vol1.ports[3]) annotation (Line(points={{0,-40},{30,
           -40},{30,-39.4},{60,-39.4}}, color={0,127,255}));
-  connect(vol1.ports[4], Fluid_out_cold)
-    annotation (Line(points={{60,-38.2},{60,-100}}, color={0,127,255}));
   connect(val.port_a, Fluid_in_warm)
     annotation (Line(points={{-20,-76},{-20,-100}}, color={0,127,255}));
   connect(val.port_b, Ext_Warm.port_a2) annotation (Line(points={{-20,-64},{-20,
@@ -187,6 +187,11 @@ equation
   connect(val.y, Valve_warm) annotation (Line(points={{-27.2,-70},{-80,-70},{
           -80,-60},{-100,-60}},
                             color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  connect(val1.port_1, Fluid_in_cold) annotation (Line(points={{-60,-46},{-56,-46},
+          {-56,-98},{-54,-98}}, color={0,127,255}));
+  connect(Fluid_out_cold, vol1.ports[4]) annotation (Line(points={{48,-100},{54,
+          -100},{54,-38.2},{60,-38.2}}, color={0,127,255}));
+    annotation (Placement(transformation(extent={{-92,-104},{-72,-84}})),
+              Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end TBA_Pipe_Openplanoffice_v2;

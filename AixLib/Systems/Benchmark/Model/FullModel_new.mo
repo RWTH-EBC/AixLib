@@ -109,7 +109,9 @@ model FullModel_new
   Transfer.SupplyAir_RLT supplyAir_RLT
     annotation (Placement(transformation(extent={{42,80},{62,100}})));
   Weather_new weather_new
-    annotation (Placement(transformation(extent={{70,80},{90,100}})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={80,90})));
   Generation.PVSystem pVSystem
     annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
 equation
@@ -231,6 +233,11 @@ equation
           {42,74},{16,74},{16,57}}, color={0,127,255}));
   connect(office_new.Air_out, vol1.ports[3]) annotation (Line(points={{55.2,2},
           {54,2},{54,-6},{16,-6},{16,55.6667}}, color={0,127,255}));
+  connect(weather_new.AirTemp, supplyAir_RLT.AirTemp) annotation (Line(points={
+          {77.8,79.4},{70.9,79.4},{70.9,88.4},{62.4,88.4}}, color={0,0,127}));
+  connect(weather_new.WaterInAir, supplyAir_RLT.WaterInAir) annotation (Line(
+        points={{71.8,79.4},{71.8,85.7},{62.4,85.7},{62.4,92.2}}, color={0,0,
+          127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel_new;
