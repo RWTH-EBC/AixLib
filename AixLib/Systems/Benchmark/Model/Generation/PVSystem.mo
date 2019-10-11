@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model;
+within AixLib.Systems.Benchmark.Model.Generation;
 model PVSystem
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(

@@ -20,12 +20,12 @@ model TBA_Pipe_v2
 
   Fluid.MixingVolumes.MixingVolume vol(
     m_flow_nominal=1,
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     nPorts=2,
     V=TBA_wall_length*TBA_wall_height*5.8*3.14159*(TBA_pipe_diameter/2)^2)
     annotation (Placement(transformation(extent={{-8,46},{12,66}})));
   Fluid.Actuators.Valves.ThreeWayLinear val1(
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=dp_Valve_nominal,
@@ -34,29 +34,33 @@ model TBA_Pipe_v2
         rotation=-90,
         origin={-60,-40})));
   Fluid.MixingVolumes.MixingVolume vol1(
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominal,
     V=V_mixing,
     nPorts=4) annotation (Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=90,
         origin={66,-40})));
-  Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
+  Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium =
+        AixLib.Media.Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     y_start=1)
     annotation (Placement(transformation(extent={{8,8},{-8,-8}},
         rotation=-90,
         origin={-60,28})));
-  Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem2(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-42,-30},{-22,-10}})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{10,10},{-10,-10}},
         rotation=90,
         origin={60,26})));
-  Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem1(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{22,-30},{42,-10}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe1(
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     height_ab=pipe_height,
     nNodes=pipe_nodes,
     diameter=pipe_diameter,
@@ -66,7 +70,7 @@ model TBA_Pipe_v2
         rotation=90,
         origin={-60,-6})));
   Modelica.Fluid.Pipes.DynamicPipe pipe(
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     height_ab=pipe_height,
     nNodes=pipe_nodes,
     diameter=pipe_diameter,
@@ -77,7 +81,7 @@ model TBA_Pipe_v2
         origin={60,-8})));
   Fluid.Actuators.Valves.TwoWayLinear val(
     use_inputFilter=false,
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=dp_Valve_nominal)             annotation (Placement(
         transformation(
@@ -85,8 +89,8 @@ model TBA_Pipe_v2
         rotation=-90,
         origin={-20,-70})));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
-    redeclare package Medium1 = Medium_Water,
-    redeclare package Medium2 = Medium_Water,
+    redeclare package Medium1 = AixLib.Media.Water,
+    redeclare package Medium2 = AixLib.Media.Water,
     dp1_nominal(displayUnit="bar") = dp_Heatexchanger_nominal,
     dp2_nominal=dp_Heatexchanger_nominal,
     m1_flow_nominal=m_flow_nominal,
@@ -97,11 +101,11 @@ model TBA_Pipe_v2
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
-        Medium_Water)
+        AixLib.Media.Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-70,-110},{-50,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
-        Medium_Water)
+        AixLib.Media.Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
   Modelica.Blocks.Interfaces.RealOutput m_flow
@@ -114,11 +118,11 @@ model TBA_Pipe_v2
   Modelica.Blocks.Interfaces.RealOutput Temp_in "Temperature in port medium"
     annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
-        Medium_Water)
+        AixLib.Media.Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{10,-110},{30,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
-        Medium_Water)
+        AixLib.Media.Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-30,-110},{-10,-90}})));
   Modelica.Blocks.Interfaces.RealInput Valve_warm
@@ -130,6 +134,8 @@ model TBA_Pipe_v2
   Modelica.Blocks.Interfaces.RealInput pump
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{-112,48},{-88,72}})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-98,78},{-78,98}})));
 equation
   connect(vol.heatPort,HeatPort_TBA)  annotation (Line(points={{-8,56},{-24,56},
           {-24,56},{-40,56},{-40,100},{-40,100}},

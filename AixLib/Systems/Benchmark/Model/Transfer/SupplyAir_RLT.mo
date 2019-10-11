@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model;
+within AixLib.Systems.Benchmark.Model.Transfer;
 model SupplyAir_RLT
   Fluid.Sources.Boundary_pT Air_in_bou(
     redeclare package Medium =AixLib.Media.Air,

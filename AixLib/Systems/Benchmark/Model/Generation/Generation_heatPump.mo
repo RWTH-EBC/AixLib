@@ -31,8 +31,8 @@ model Generation_heatPump
     capCalcType=2,
     P_eleOutput=true,
     CoP_output=true,
-    redeclare package Medium_con = Medium_Water,
-    redeclare package Medium_eva = Medium_Water,
+    redeclare package Medium_con = AixLib.Media.Water,
+    redeclare package Medium_eva = AixLib.Media.Water,
     heatLosses_con=true,
     dataTable=AixLib.Systems.Benchmark.Benchmark_DataBase.Benchmark_Heatpump_Big(),
     factorScale=1,
@@ -58,7 +58,8 @@ model Generation_heatPump
         origin={50,-22})));
   BusSystems.Bus_Control controlBus annotation (Placement(transformation(extent=
            {{-60,80},{-20,120}}), iconTransformation(extent={{-50,90},{-30,110}})));
-  Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium = Medium_Water,
+  Fluid.Movers.SpeedControlled_y fan4(redeclare package Medium =
+        AixLib.Media.Water,
     y_start=1,
     redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
@@ -68,8 +69,8 @@ model Generation_heatPump
     capCalcType=2,
     P_eleOutput=true,
     CoP_output=true,
-    redeclare package Medium_con = Medium_Water,
-    redeclare package Medium_eva = Medium_Water,
+    redeclare package Medium_con = AixLib.Media.Water,
+    redeclare package Medium_eva = AixLib.Media.Water,
     heatLosses_con=true,
     factorScale=1,
     CorrFlowEv=false,
@@ -89,19 +90,26 @@ model Generation_heatPump
     annotation (Placement(transformation(extent={{-76,-24},{-56,-4}})));
   BusSystems.Bus_measure measureBus annotation (Placement(transformation(extent=
            {{10,70},{50,110}}), iconTransformation(extent={{30,90},{50,110}})));
-  Fluid.Sensors.Temperature senTem(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-68,-60},{-48,-40}})));
-  Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem1(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-70,60},{-50,80}})));
-  Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem2(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{6,48},{26,68}})));
-  Fluid.Sensors.Temperature senTem3(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem3(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{30,-18},{50,2}})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-88,50},{-68,70}})));
-  Fluid.Sensors.MassFlowRate senMasFlo1(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo1(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
-  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
+  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium =
+        AixLib.Media.Water,
     y_start=1,
     redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
       per)

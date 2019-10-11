@@ -282,6 +282,8 @@ model RLT_OpenPlanOffice_v2
     dp_nominal(displayUnit="bar") = RLT_dp_Heatexchanger*2,
     allowFlowReversal=false)
     annotation (Placement(transformation(extent={{12,-72},{24,-60}})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-98,78},{-78,98}})));
 equation
   connect(val1.port_3, vol.ports[1]) annotation (Line(points={{-46,60},{-64,60},
           {-64,58.2},{-80,58.2}},

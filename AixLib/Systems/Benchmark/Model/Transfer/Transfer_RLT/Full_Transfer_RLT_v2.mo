@@ -150,6 +150,8 @@ model Full_Transfer_RLT_v2
     dpValve_nominal_hot=7000,
     dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{78,78},{98,98}})));
 equation
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{66,68.6},
           {66,68},{74,68},{74,80},{40,80},{40,96}},

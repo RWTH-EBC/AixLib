@@ -281,6 +281,8 @@ model RLT_Central_v2
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-52,-60})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-98,80},{-78,100}})));
 equation
   connect(hum.X_w, X_w) annotation (Line(points={{48,-60},{40,-60},{40,-40},{0,
           -40},{0,100}}, color={0,0,127}));

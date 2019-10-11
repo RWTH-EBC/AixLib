@@ -8,16 +8,16 @@ model Generation_Hot
     parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
 
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
-        Medium_Water)
+        AixLib.Media.Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,28},{110,48}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
-        Medium_Water)
+        AixLib.Media.Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{86,-48},{106,-28}})));
 
   Boiler_Benchmark boiler_Benchmark(
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominal_generation_hot,
     transferHeat=true,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(),
@@ -26,7 +26,7 @@ model Generation_Hot
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve6(
     y_start=1,
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominal_generation_hot,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=dpValve_nominal_generation_hot,
@@ -36,10 +36,10 @@ model Generation_Hot
   Fluid.BoilerCHP.CHP cHP(
     electricityDriven=true,
     TSetIn=true,
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     minCapacity=24,
     transferHeat=true,
-    param=DataBase.CHP.CHP_FMB_31_GSK(),
+    param=AixLib.DataBase.CHP.CHPDataSimple.CHP_FMB_31_GSK(),
     m_flow_small=0.0001,
     final m_flow_nominal=m_flow_nominal_generation_hot,
     TAmb=298.15)
@@ -47,17 +47,21 @@ model Generation_Hot
 
   BusSystems.Bus_Control controlBus annotation (Placement(transformation(extent=
            {{-60,80},{-20,120}}), iconTransformation(extent={{-50,90},{-30,110}})));
-  Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
+  Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium =
+        AixLib.Media.Water,
       redeclare Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
     y_start=1)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-38,16})));
-  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-10,-30},{-30,-10}})));
-  Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem1(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{-52,-20},{-32,0}})));
-  Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
+  Fluid.Sensors.Temperature senTem2(redeclare package Medium =
+        AixLib.Media.Water)
     annotation (Placement(transformation(extent={{70,38},{90,58}})));
   BusSystems.Bus_measure measureBus annotation (Placement(transformation(extent=
            {{10,70},{50,110}}), iconTransformation(extent={{30,88},{50,110}})));
@@ -66,7 +70,8 @@ model Generation_Hot
         extent={{-3,-3},{3,3}},
         rotation=90,
         origin={-81,33})));
-  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
+  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium =
+        AixLib.Media.Water,
       redeclare
       Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
     y_start=1)
@@ -75,11 +80,13 @@ model Generation_Hot
         origin={-2,48})));
   Fluid.Sources.Boundary_pT bou3(
     p=100000,
-    redeclare package Medium = Medium_Water,
+    redeclare package Medium = AixLib.Media.Water,
     nPorts=1) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={-62,54})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-100,78},{-80,98}})));
 equation
   connect(Valve6.port_1, Fluid_out_Hot) annotation (Line(points={{8,16},{70,16},
           {70,38},{100,38}}, color={0,127,255}));

@@ -122,9 +122,9 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
           79200,89400],
       mFlow_conNom=12,
       mFlow_evaNom=1000,
-       tableUppBou=[-25, 65; 40, 65],
-      tableLowBou=[-25, 0; 40, 0]);
-      //These boundary-tables are not from the datasheet but default values.
+       tableUppBou=[-25, 65; 40, 65]);
+
+
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));

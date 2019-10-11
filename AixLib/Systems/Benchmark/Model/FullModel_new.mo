@@ -106,11 +106,11 @@ model FullModel_new
     annotation (Placement(transformation(extent={{42,2},{62,22}})));
   InternalLoad.InternalLoads_new internalLoads_new
     annotation (Placement(transformation(extent={{-40,18},{-20,38}})));
-  SupplyAir_RLT supplyAir_RLT
+  Transfer.SupplyAir_RLT supplyAir_RLT
     annotation (Placement(transformation(extent={{48,86},{68,106}})));
   Weather_new weather_new
     annotation (Placement(transformation(extent={{84,84},{104,104}})));
-  PVSystem pVSystem
+  Generation.PVSystem pVSystem
     annotation (Placement(transformation(extent={{-42,84},{-22,104}})));
 equation
   connect(full_Transfer_RLT.measureBus,Measure)  annotation (Line(
