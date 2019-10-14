@@ -7,7 +7,7 @@ model VarMoistAirExchange
     "Specific heat capacity of air";
   parameter Modelica.SIunits.Density rho = 1.25 "Air density";
   Modelica.Blocks.Interfaces.RealInput InPort1 annotation(Placement(transformation(extent = {{-100, -54}, {-80, -74}})));
-  Modelica.Blocks.Interfaces.RealOutput MoistFlow
+  Modelica.Blocks.Interfaces.RealOutput QLat_flow
     annotation (Placement(transformation(extent={{94,-72},{114,-52}})));
   Modelica.Blocks.Interfaces.RealInput HumIn(
     final quantity="MassFraction",
@@ -25,9 +25,11 @@ protected
     "enthalpy of evaporation";
   constant Modelica.SIunits.SpecificHeatCapacity cp_steam = AixLib.Utilities.Psychrometrics.Constants.cpSte
     "specific heat capacity of steam";
+   constant Modelica.SIunits.SpecificEnergy h_fg=
+    Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
-   port_a.Q_flow = InPort1 * V * c * rho * (port_a.T - port_b.T) / 3600 + MoistFlow * (enthalpyOfEvaporation + cp_steam * (port_a.T - 273.15));
-  MoistFlow = InPort1 * V * rho * (HumIn-HumOut) / 3600;
+   port_a.Q_flow = InPort1 * V * c * rho * (port_a.T - port_b.T) / 3600;
+   QLat_flow = InPort1 * V * rho * (HumIn-HumOut) / 3600 * h_fg;
   annotation (Documentation(info="<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>VarMoistAirExchange</b> model describes heat and moisture transfer by air exchange (e.g. due to opening a window). It needs the air exchange rate (in <img src=\"modelica://AixLib/Resources/Images/Building/Components/DryAir/VarAirExchange/equation-fHlz87wz.png\" alt=\"h^(-1)\"/>) as input value. </p>
