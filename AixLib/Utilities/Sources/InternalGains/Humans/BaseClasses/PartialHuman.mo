@@ -23,11 +23,6 @@ partial model PartialHuman "Partial model for internal gains of humans"
   Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=1)
     annotation (Placement(transformation(extent={{-40,-6},{-20,14}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=1)
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={62,50})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, 64})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC annotation(Placement(transformation(extent = {{-82, 46}, {-72, 56}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom
@@ -57,14 +52,12 @@ equation
           4},{-8,-8},{5.2,-8}}, color={0,0,127}));
   connect(productHeatOutput.y, gain.u) annotation (Line(points={{-18.3,4},{-8,4},
           {-8,32},{5.2,32}}, color={0,0,127}));
-  connect(ConvectiveHeat.port, thermalCollector.port_a[1]) annotation (Line(
-        points={{42,32},{48,32},{48,50},{52,50}}, color={191,0,0}));
-  connect(thermalCollector.port_b, ConvHeat)
-    annotation (Line(points={{72,50},{90,50}}, color={191,0,0}));
   connect(nrPeople.y, limiter.u) annotation (Line(points={{-57.4,-20},{-52,-20},
           {-52,-48},{-20,-48}}, color={0,0,127}));
   connect(TRoom,temperatureSensor. port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T,to_degC. u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
+  connect(ConvectiveHeat.port, ConvHeat) annotation (Line(points={{42,32},{64,
+          32},{64,50},{90,50}}, color={191,0,0}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
