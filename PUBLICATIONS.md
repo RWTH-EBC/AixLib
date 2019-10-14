@@ -6,8 +6,41 @@
 3. [District Heating and Cooling](#dhc)
 4. [Fast HVAC](#fasthvac)
 
+
 ## Building Physics <a name="buildingphysics"></a>
-```enter publications here```
+
+### HOM (High Order Model)
+
+#### The Modelica HouseModels Library: Presentation and Evaluation of a Room Model with the ASHRAE Standard 140
+Constantin, Ana; Streblow, Rita; Müller, Dirk (2014)
+In: Proceedings of the 10th International Modelica Conference, March 10 - 12, 2014, Lund, Sweden / ed.: Hubertus Tummescheit and Karl-Erik Arzen, Pages: 293-299  
+[Info](http://www.ebc.eonerc.rwth-aachen.de/go/id/dncb/lidx/1/file/225819)  
+ISBN: 978-91-7519-380-9     
+DOI: 10.3384/ECP14096293   
+URL: http://dx.doi.org/10.3384/ecp14096
+
+### ROM (Reduced Order Model)
+
+#### Verification of a Low Order Building Model for the Modelica Library AixLib using ASHRAE Standard 140
+Lauster, Moritz Robert; Constantin, Ana; Remmen, Peter; Fuchs, Marcus; Müller, Dirk
+In: Proceedings of Building Simulation 2017: 15th Conference of IBPSA, BS2017, 2017-08-07 - 2017-08-09, San Francisco, USA / Editors: Charles S. Barnaby and Michael Wetter, Pages: 1149-1158  
+[Info](http://www.ebc.eonerc.rwth-aachen.de/go/id/dncb/lidx/1/file/712453)    
+ISBN: 978-1-7750520-0-5  
+DOI: 10.26868/25222708.2017.303  
+
+#### Comparison of Two Standard Simplified Thermal Building Models
+Lauster, Moritz Robert; Constantin, Ana; Remmen, Peter; Fuchs, Marcus; Müller, Dirk (2013). Lausanne / Ecole Polytechnique Fédérale de Lausanne (2013). CISBAT 2013 - Cleantech for Smart Cities & Buildings. Page(s): 885-890.  
+[Info](http://www.ebc.eonerc.rwth-aachen.de/go/id/dncb/lidx/1/file/225169)    
+ISBN: 2839912805, 978-2-8399-1280-8, 978-2-8399-1281-5, 2839912813  
+DOI: URL: http://dx.doi.org/10.5075/epfl-infoscience-190601
+
+*Compariston between to approches according to ISO 13790 and VDI 6007*
+
+### HOM and ROM
+
+#### Not published yet
+Currently only an internal report with the title "*Verification and Comparison of High and Low Order Building Models from the Modelica Library AixLib using ASHRAE Standard 140*".
+
 
 ## Building Systems <a name="buildingsystems"></a>
 

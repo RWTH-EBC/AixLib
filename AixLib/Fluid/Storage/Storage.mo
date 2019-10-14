@@ -11,8 +11,8 @@ model Storage
   parameter Modelica.SIunits.ThermalConductivity lambda_ins
     "thermal conductivity of insulation"                                                         annotation(Dialog(group = "Heat losses"));
   parameter Modelica.SIunits.Length s_ins "thickness of insulation" annotation(Dialog(group = "Heat losses"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvIn "internal heat transfer coefficient"  annotation(Dialog(group="Heat losses"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvOut "external heat transfer coefficient"  annotation(Dialog(group="Heat losses"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn "Iinternal heat transfer coefficient"  annotation(Dialog(group="Heat losses"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut "External heat transfer coefficient"   annotation(Dialog(group="Heat losses"));
   parameter Modelica.SIunits.Volume V_HE "heat exchanger volume" annotation(Dialog(group = "Heat exchanger"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer k_HE
     "heat exchanger heat transfer coefficient"                                                         annotation(Dialog(group = "Heat exchanger"));
@@ -67,8 +67,8 @@ protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
   parameter Modelica.SIunits.Length dx = V / A / n;
-  parameter Modelica.SIunits.ThermalConductance G_middle=2*Modelica.Constants.pi*h/n/(1/(hConvIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2))
-       + 1/(hConvOut*(d/2 + s_ins)));
+  parameter Modelica.SIunits.ThermalConductance G_middle=2*Modelica.Constants.pi*h/n/(1/(hConIn*d/2) + 1/lambda_ins*log((d/2 + s_ins)/(d/2))
+       + 1/(hConOut*(d/2 + s_ins)));
   parameter Modelica.SIunits.ThermalConductance G_top_bottom = G_middle + lambda_ins / s_ins * A;
 equation
   //Connect layers to the upper and lower ports

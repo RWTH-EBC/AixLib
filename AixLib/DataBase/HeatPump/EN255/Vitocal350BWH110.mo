@@ -8,8 +8,7 @@ record Vitocal350BWH110 "Vitocal 350 BWH 110"
         12740,13910,15090,16220],
     mFlow_conNom=11000/4180/10,
     mFlow_evaNom=8400/3600/3,
-    tableUppBou=[-5, 55; 25, 55],
-    tableLowBou=[-5, 0; 25, 0]);
+    tableUppBou=[-5, 55; 25, 55]);
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,

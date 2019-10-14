@@ -21,18 +21,17 @@ model PanelHeating
   parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
-  parameter Integer calcMethodHConv=1 "Calculation Method for convection at surface"
-    annotation (Dialog(group="Heat convection",
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at surface" annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
-        choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
-        choice=2 "By Bernd Glueck",
-        choice=3 "Constant hConv",
-        radioButtons=true));
+      choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+      choice=2 "By Bernd Glueck",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Custom convective heat transfer coefficient"
     annotation (Dialog(group="Heat convection",
     descriptionLabel=true,
-        enable=if calcMethodHConv == 3 then true else false));
+        enable=if calcMethod == 3 then true else false));
 
   final parameter Modelica.SIunits.Emissivity eps=floorHeatingType.eps
     "Emissivity";
@@ -91,8 +90,8 @@ model PanelHeating
     each final cTop=cTop,
     each final cDown=cDown,
     each final isFloor=isFloor,
-    each final calcMethodHConv=calcMethodHConv,
-    each final hConvCustom=hConvCustom) annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
+    each final calcMethod=calcMethod,
+    each final hCon_const=hCon_const) annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
 
   BaseClasses.PressureDropPH pressureDrop(
     redeclare package Medium = Medium,
