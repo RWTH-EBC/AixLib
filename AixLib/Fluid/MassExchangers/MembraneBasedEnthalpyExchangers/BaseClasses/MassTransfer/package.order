@@ -1,0 +1,6 @@
+LocalDuctConvectiveMassFlow
+PartialDuctMassTransfer
+PartialMassTransfer
+SherwoodNumberMuzychka
+DiffusionCoefficient
+CollisionIntegral
