@@ -2,10 +2,10 @@ within AixLib.DataBase.Storage;
 record Generic_New_2000l "Pseudo storage with 2000 l (standing)"
   extends BufferStorageBaseDataDefinition(
     hTank=2.145,
-    hLowerPort_Demand=0.1,
-    hUpperPort_Demand=2.1,
-    hLowerPort_Supply=0.1,
-    hUpperPort_Supply=2.1,
+    hLowerPortDemand=0.1,
+    hUpperPortDemand=2.1,
+    hLowerPortSupply=0.1,
+    hUpperPortSupply=2.1,
     hHC1Up=1.60,
     hHC1Low=0.1,
     hHC2Up=0.7,
