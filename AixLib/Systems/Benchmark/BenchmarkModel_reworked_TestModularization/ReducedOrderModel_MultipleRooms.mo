@@ -69,7 +69,7 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     ATransparent={{48,0,48,48},{32,0,32,0},{16,0,0,0},{0,0,32,0},{64,48,48,0}},
     AExt={{30,0,30,30},{20,0,20,0},{30,0,0,0},{0,0,60,0},{70,30,90,0}},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    T_start=295.15);
+    each T_start=295.15) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 
 
   ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
