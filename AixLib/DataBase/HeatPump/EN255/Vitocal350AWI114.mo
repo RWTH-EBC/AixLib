@@ -18,8 +18,7 @@ record Vitocal350AWI114 "Vitocal 350 AWI 114"
         24886.40],
     mFlow_conNom=15400/4180/10,
     mFlow_evaNom=1,
-    tableUppBou=[-20, 55;-5, 65;35, 65],
-    tableLowBou=[-20, 0; 35, 0]);
+    tableUppBou=[-20, 55;-5, 65;35, 65]);
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,

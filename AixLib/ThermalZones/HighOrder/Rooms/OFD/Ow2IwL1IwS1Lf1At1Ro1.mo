@@ -59,13 +59,13 @@ model Ow2IwL1IwS1Lf1At1Ro1
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
-  parameter Integer ModelConvOW=1 "Heat Convection Model" annotation (Dialog(
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
       group="Outer wall properties",
       compact=true,
       descriptionLabel=true), choices(
       choice=1 "DIN 6946",
       choice=2 "ASHRAE Fundamentals",
-      choice=3 "Custom hConv",
+      choice=3 "Custom hCon (constant)",
       radioButtons=true));
   // Windows and Doors
   parameter Boolean withWindow2=true "Window 2" annotation (Dialog(
