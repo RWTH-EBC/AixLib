@@ -277,7 +277,7 @@ model Generation_v2
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
         Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{90,10},{110,30}})));
+    annotation (Placement(transformation(extent={{92,10},{112,30}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
         Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -313,6 +313,8 @@ model Generation_v2
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature2
     annotation (Placement(transformation(extent={{72,-74},{60,-62}})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-122,78},{-102,98}})));
 equation
   connect(generation_Hot.Fluid_in_Hot,HotWater. portHC1Out) annotation (Line(
         points={{-60.4,66.2},{-32,66.2},{-32,67.94},{17.8125,67.94}},
@@ -448,7 +450,7 @@ equation
   connect(fan1.port_b,pipe1. port_a) annotation (Line(points={{64,28},{68,28}},
                         color={0,127,255}));
   connect(pipe1.port_b,Fluid_out_warm)  annotation (Line(points={{88,28},{90,28},
-          {90,20},{100,20}}, color={0,127,255}));
+          {90,20},{102,20}}, color={0,127,255}));
   connect(fan3.port_b,pipe2. port_a) annotation (Line(points={{64,-96},{68,-96},
           {68,-94},{70,-94}}, color={0,127,255}));
   connect(pipe2.port_b,Fluid_out_cold)  annotation (Line(points={{90,-94},{96,-94},

@@ -22,8 +22,6 @@ model Canteen_v2
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall FloorToGround(
     solar_absorptance=0.48,
     withWindow=false,
-    redeclare model Window =
-        AixLib.ThermalZones.HighOrder.Components.Walls.Wall,
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
@@ -37,6 +35,7 @@ model Canteen_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
         origin={50,-70})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToGround
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall SouthWall(
@@ -71,8 +70,6 @@ model Canteen_v2
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=false,
-    redeclare model Window =
-        AixLib.ThermalZones.HighOrder.Components.Walls.Wall,
     WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
@@ -86,6 +83,7 @@ model Canteen_v2
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=0,
         origin={-70,0})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToWorkshop
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall NorthWall(

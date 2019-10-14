@@ -52,7 +52,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         origin={0,-70})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
-    tableName="USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos",
+    tableName="final",
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
@@ -62,8 +62,8 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-174,14},{-144,34}})));
 
   Modelica.Blocks.Math.Product product

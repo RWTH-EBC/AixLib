@@ -7,7 +7,7 @@ model InternalLoads_new
     "Convective heat flow of persons"
     annotation (Placement(transformation(extent={{18,38},{38,58}})));
   Modelica.Blocks.Sources.CombiTimeTable intGai(
-    tableOnFile=false,
+    tableOnFile=true,
     table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
         0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
         80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
@@ -40,7 +40,7 @@ model InternalLoads_new
   BusSystems.InternalBus internalBus
     annotation (Placement(transformation(extent={{86,-110},{126,-70}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(
-    tableOnFile=true,
+    tableOnFile=false,
     tableName="final",
     timeScale=1,
     columns={2,3,4,5,6,7,8,9,10,11},

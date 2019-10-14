@@ -67,6 +67,8 @@ model Generation_geothermalProbe
     annotation (Placement(transformation(extent={{36,60},{56,80}})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{38,-60},{58,-40}})));
+  inner Modelica.Fluid.System system
+    annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 equation
   connect(pipe2.port_b, Fulid_out_Geothermal) annotation (Line(points={{6,-8},{
           46,-8},{46,60},{100,60}}, color={0,127,255}));
