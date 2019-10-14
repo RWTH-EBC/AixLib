@@ -4,7 +4,7 @@ model NetworkCommunication2
 
   BookBuyerAgent bookBuyerAgent1(
     name=10002,
-    ISBN=3551555559,
+    ISBN=3551555559.0,
     sampleTime=10,
     uDPSend_adapted(IPAddress="134.130.49.160"),
     knownSellers=[10002],
