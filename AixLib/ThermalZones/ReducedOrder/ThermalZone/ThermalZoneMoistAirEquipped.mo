@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAirEquipped
   "Thermal zone model considering moisture balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(SumMoistFlow(nu=3));
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
 
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,
@@ -21,6 +21,9 @@ model ThermalZoneMoistAirEquipped
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
+  Modelica.Blocks.Sources.RealExpression realExpression(y=ROM.volMoiAir.X_w) if
+       ATot > 0 or zoneParam.VAir >0
+    annotation (Placement(transformation(extent={{20,-20},{10,-6}})));
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
     "Combines infiltration and ventilation"
@@ -83,10 +86,10 @@ equation
   connect(ventHum, airExc.HumIn) annotation (Line(points={{-100,-70},{-80,-70},
           {-80,-38},{-46,-38},{-46,-28},{-24,-28},{-24,-22},{-21.2,-22}}, color=
          {0,0,127}));
-  connect(ROM.X_w, airExc.HumOut) annotation (Line(points={{87,34},{88,34},{88,
-          -6},{48,-6},{48,-13.84},{-6.8,-13.84}}, color={0,0,127}));
-  connect(airExc.MoistFlow, SumMoistFlow.u[3]) annotation (Line(points={{-5.68,
+  connect(airExc.QLat_flow,SumQLat_flow.u[3])  annotation (Line(points={{-5.68,
           -22.96},{4,-22.96},{4,-30},{16,-30}}, color={0,0,127}));
+  connect(realExpression.y, airExc.HumOut) annotation (Line(points={{9.5,-13},
+          {0.75,-13},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>

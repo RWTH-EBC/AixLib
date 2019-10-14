@@ -9,11 +9,8 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     "Ventilation and infiltration humidity" annotation (Placement(
         transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
           extent={{-126,-80},{-100,-54}})));
-  Modelica.Blocks.Math.MultiSum SumMoistFlow(nu=2) if ATot > 0
+  Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0
     annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
-  Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0
-    "absolute humidity in thermal zone"
-    annotation (Placement(transformation(extent={{100,64},{120,84}})));
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
      final T0=zoneParam.T_start,
      final RoomArea=zoneParam.AZone,
@@ -25,23 +22,17 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
 equation
   if internalGainsMode == 3 then
-    connect(humanTotHeaDependent.MoistGain, SumMoistFlow.u[1]) annotation (Line(points={{83.6,
+    connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,
             -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-27.9},{16,-27.9}},
         color={0,0,127}));
   else
-    connect(noMoisturePerson.y, SumMoistFlow.u[1]);
+    connect(noMoisturePerson.y,SumQLat_flow. u[1]);
   end if;
-  connect(SumMoistFlow.y, ROM.mWat_flow) annotation (Line(points={{29.02,-30},{34,
-          -30},{34,35},{37,35}}, color={0,0,127}));
-  connect(ROM.X_w, X_w) annotation (Line(points={{87,34},{92,34},{92,74},{110,74}},
-        color={0,0,127}));
-  connect(moistureGains.MoistGain, SumMoistFlow.u[2]) annotation (Line(points={{37.6,
-          -58},{44,-58},{44,-40},{10,-40},{10,-32.1},{16,-32.1}},      color={0,
+  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{39,-62},
+          {44,-62},{44,-40},{10,-40},{10,-32.1},{16,-32.1}},           color={0,
           0,127}));
-  connect(moistureGains.ConvHeat, ROM.intGainsConv) annotation (Line(points={{37,
-          -66.8},{52,-66.8},{52,-4},{92,-4},{92,50},{86,50}}, color={191,0,0}));
-  connect(ROM.intGainsConv, moistureGains.TRoom) annotation (Line(points={{86,50},
-          {90,50},{90,-4},{48,-4},{48,-48},{20,-48},{20,-53.6}}, color={191,0,0}));
+  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-30},{
+          34,-30},{34,34},{37,34}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
