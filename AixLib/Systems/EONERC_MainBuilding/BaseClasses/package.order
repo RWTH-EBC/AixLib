@@ -1,3 +1,4 @@
 HeatPumpSystemBus
 DataHPSystem
-SWUBus
+SwitchingUnitBus
+HighTemperatureSystemBus

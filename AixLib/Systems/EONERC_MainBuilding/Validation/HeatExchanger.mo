@@ -82,8 +82,8 @@ equation
       thickness=0.5));
   connect(ramp.y, ctrHXSsystem.Tset) annotation (Line(points={{-79,50},{-72,50},
           {-72,50},{-62,50}}, color={0,0,127}));
-  annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated
-          =true) =
+  annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
+           true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatExchanger.mos"
         "Simulate and plot"));
 end HeatExchanger;

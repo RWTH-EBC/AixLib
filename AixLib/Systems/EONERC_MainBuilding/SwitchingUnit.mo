@@ -79,8 +79,9 @@ model SwitchingUnit
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-90})));
-  BaseClasses.SWUBus sWUBus annotation (Placement(transformation(extent={{-20,60},
-            {20,100}}),iconTransformation(extent={{-18,64},{16,100}})));
+  BaseClasses.SwitchingUnitBus sWUBus annotation (Placement(transformation(
+          extent={{-20,60},{20,100}}), iconTransformation(extent={{-18,64},{16,
+            100}})));
   HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
     pumpInterface_SpeedControlledNrpm(
     redeclare package Medium = Medium,

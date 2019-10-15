@@ -169,8 +169,8 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-230,-30},{-210,-10}}),
         iconTransformation(extent={{-230,-50},{-210,-30}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop1(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop1(redeclare package Medium =
+        Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-230,10},{-210,30}}),
         iconTransformation(extent={{-230,-10},{-210,10}})));

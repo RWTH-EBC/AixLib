@@ -3,7 +3,6 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
-  parameter BaseClasses.DataHPSystem Data;
 
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
@@ -55,12 +54,14 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  Controller.HeatPumpSystemDataInput heatPumpSystemDataInput(table=Data.October2015)
+  Controller.HeatPumpSystemDataInput heatPumpSystemDataInput
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin2
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-70,-70})));
+  BaseClasses.DataHPSystem dataHPSystem
+    annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.fluidportBottom1) annotation (Line(
         points={{-90,-20},{-80,-20},{-80,-9.77778}},           color={0,127,255}));
