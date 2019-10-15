@@ -8,7 +8,7 @@ model ReducedOrderModel_OneRoom
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/ASHRAE140.mos"))
+        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
 
@@ -26,8 +26,8 @@ model ReducedOrderModel_OneRoom
     azi={3.1415926535898,4.7123889803847})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDouPan[2](each UWin=2.1,
-     each n=2) "Correction factor for solar transmission"
+  ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDouPan(each UWin=
+       2.1, each n=2) "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,46},{26,66}})));
   ThermalZones.ReducedOrder.RC.FourElements
                   thermalZoneFourElements(
@@ -59,10 +59,10 @@ model ReducedOrderModel_OneRoom
     RRoof={0.44444,0.06957,0.02941,0.00001},
     RRoofRem=0.0001,
     CRoof={2472,368000,18000,0.000001},
-    nOrientations=4,
-    AWin={60,0,60,60},
-    ATransparent={48,0,48,48},
-    AExt={30,0,30,30},
+    nOrientations=2,
+    AWin={90,90},
+    ATransparent={72,72},
+    AExt={45,45},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 
@@ -267,34 +267,23 @@ equation
   connect(const1.y,eqAirTempVDI. sunblind[1])
     annotation (Line(points={{61.7,93},{56,93},{56,98},{40,98},{40,96}},
                                       color={0,0,127}));
-  connect(HDirTil.H, corGDouPan[1].HDirTil) annotation (Line(points={{-47,62},{-22,
-          62},{-22,62},{4,62}},          color={0,0,127}));
-  connect(HDirTil.H, corGDouPan[2].HDirTil) annotation (Line(points={{-47,62},{-22,
-          62},{-22,62},{4,62}},          color={0,0,127}));
-  connect(HDirTil.inc, corGDouPan[1].inc) annotation (Line(points={{-47,58},{-22,
+  connect(HDirTil.inc, corGDouPan.inc) annotation (Line(points={{-47,58},{-22,
           58},{-22,50},{4,50}},      color={0,0,127}));
-  connect(HDirTil.inc, corGDouPan[2].inc) annotation (Line(points={{-47,58},{-22,
-          58},{-22,50},{4,50}},      color={0,0,127}));
-  connect(HDifTil.HSkyDifTil, corGDouPan[1].HSkyDifTil) annotation (Line(points=
+
+  connect(HDifTil.HSkyDifTil, corGDouPan.HSkyDifTil) annotation (Line(points=
          {{-47,36},{-22,36},{-22,58},{4,58}}, color={0,0,127}));
-  connect(HDifTil.HSkyDifTil, corGDouPan[2].HSkyDifTil) annotation (Line(points=
-         {{-47,36},{-22,36},{-22,58},{4,58}}, color={0,0,127}));
-  connect(HDifTil.HGroDifTil, corGDouPan[1].HGroDifTil) annotation (Line(points=
+
+  connect(HDifTil.HGroDifTil, corGDouPan.HGroDifTil) annotation (Line(points=
          {{-47,24},{-22,24},{-22,54},{4,54}}, color={0,0,127}));
-  connect(HDifTil.HGroDifTil, corGDouPan[2].HGroDifTil) annotation (Line(points=
-         {{-47,24},{-22,24},{-22,54},{4,54}}, color={0,0,127}));
-  connect(corGDouPan[1].solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
-    annotation (Line(points={{27,55.5},{36,55.5},{36,30.25},{43,30.25}}, color={
-          0,0,127}));
-  connect(corGDouPan[1].solarRadWinTrans[2], thermalZoneFourElements.solRad[2])
-    annotation (Line(points={{27,56.5},{36,56.5},{36,30.75},{43,30.75}}, color={
-          0,0,127}));
-  connect(corGDouPan[2].solarRadWinTrans[1], thermalZoneFourElements.solRad[3])
-    annotation (Line(points={{27,55.5},{36,55.5},{36,31.25},{43,31.25}}, color=
-          {0,0,127}));
-  connect(corGDouPan[2].solarRadWinTrans[2], thermalZoneFourElements.solRad[4])
-    annotation (Line(points={{27,56.5},{36,56.5},{36,31.75},{43,31.75}}, color=
-          {0,0,127}));
+
+  connect(corGDouPan.solarRadWinTrans[1], thermalZoneFourElements.solRad[1])
+    annotation (Line(points={{27,55.5},{34,55.5},{34,30.5},{43,30.5}}, color={0,
+          0,127}));
+  connect(corGDouPan.solarRadWinTrans[2], thermalZoneFourElements.solRad[2])
+    annotation (Line(points={{27,56.5},{34,56.5},{34,31.5},{43,31.5}}, color={0,
+          0,127}));
+  connect(HDirTil.H, corGDouPan.HDirTil) annotation (Line(points={{-47,62},{-22,
+          62},{-22,62},{4,62}},      color={0,0,127}));
   annotation (Line(points={{79.6,-22},{65,-22},{65,-25.2}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
