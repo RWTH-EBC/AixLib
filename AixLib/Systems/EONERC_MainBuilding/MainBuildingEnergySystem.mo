@@ -85,9 +85,9 @@ model MainBuildingEnergySystem
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=10)                                                     annotation (Placement(transformation(
-        extent={{-10.5,-10.5},{10.5,10.5}},
+        extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-170.5,70.5})));
+        origin={-170,70})));
   HydraulicModules.Controller.CtrMix
                     ctrMix(
     TflowSet=313.15,
@@ -97,7 +97,7 @@ model MainBuildingEnergySystem
     xi_start=0.5,
     initType=Modelica.Blocks.Types.InitPID.InitialState,
     reverseAction=false)
-    annotation (Placement(transformation(extent={{-210,56},{-192,72}})));
+    annotation (Placement(transformation(extent={{-204,64},{-188,78}})));
   HydraulicModules.SimpleConsumer
                  simpleConsumer(
     kA=2000,
@@ -105,7 +105,7 @@ model MainBuildingEnergySystem
     redeclare package Medium = Medium,
     T_amb=298.15,
     T_start=293.15)
-    annotation (Placement(transformation(extent={{-178,82},{-164,96}})));
+    annotation (Placement(transformation(extent={{-176,82},{-164,94}})));
   Controller.HeatPumpSystemDataInput heatPumpSystemDataInput
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Controller.CtrSWU ctrSWU
@@ -153,17 +153,17 @@ equation
     annotation (Line(points={{-183.2,-48},{-182,-48},{-182,-6.8},{-150,-6.8}},
         color={0,127,255}));
   connect(ctrMix.hydraulicBus, admix.hydraulicBus) annotation (Line(
-      points={{-192.63,63.12},{-186.315,63.12},{-186.315,70.5},{-181,70.5}},
+      points={{-188.56,70.23},{-186.315,70.23},{-186.315,70},{-180,70}},
       color={255,204,51},
       thickness=0.5));
-  connect(admix.port_b1, simpleConsumer.port_a) annotation (Line(points={{
-          -176.8,81},{-176.8,85.5},{-178,85.5},{-178,89}}, color={0,127,255}));
-  connect(admix.port_a2, simpleConsumer.port_b) annotation (Line(points={{
-          -164.2,81},{-164.2,85.5},{-164,85.5},{-164,89}}, color={0,127,255}));
+  connect(admix.port_b1, simpleConsumer.port_a)
+    annotation (Line(points={{-176,80},{-176,88}}, color={0,127,255}));
+  connect(admix.port_a2, simpleConsumer.port_b)
+    annotation (Line(points={{-164,80},{-164,88}}, color={0,127,255}));
   connect(admix.port_a1, highTemperatureSystem.port_b) annotation (Line(points=
-          {{-176.8,60},{-182,60},{-182,-48},{-183.2,-48}}, color={0,127,255}));
+          {{-176,60},{-182,60},{-182,-48},{-183.2,-48}}, color={0,127,255}));
   connect(admix.port_b2, highTemperatureSystem.port_a) annotation (Line(points=
-          {{-164.2,60},{-172,60},{-172,-48},{-172.4,-48}}, color={0,127,255}));
+          {{-164,60},{-172,60},{-172,-48},{-172.4,-48}}, color={0,127,255}));
   connect(boundary1.ports[1], highTemperatureSystem.port_b)
     annotation (Line(points={{-202,-48},{-183.2,-48}}, color={0,127,255}));
   connect(heatPumpSystemDataInput.heatPumpSystemBus1, heatpumpSystem.heatPumpSystemBus)
