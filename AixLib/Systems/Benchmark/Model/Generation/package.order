@@ -1,8 +1,8 @@
 HighTemperatureSystem
 Generation_heatPump
-Generation_geothermalProbe
-Boiler_Benchmark
+GeothermalProbe
 Generation_v2
 Generation_Aircooling_v2
 BaseClasses
 HeatpumpSystem
+GoethermalProbe

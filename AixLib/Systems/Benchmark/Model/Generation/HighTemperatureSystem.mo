@@ -2,18 +2,31 @@ within AixLib.Systems.Benchmark.Model.Generation;
 model HighTemperatureSystem
   "Boiler and chp system for high temperature generation"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+    parameter Boolean allowFlowReversal=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate";
+  parameter Modelica.SIunits.Temperature T_start
+    "Initial or guess value of output (= state)"
+    annotation (Dialog(tab="Initialization"));
 
 
-  Boiler_Benchmark boiler(
+  Fluid.BoilerCHP.BoilerNoControl
+                   boilerNoControl(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
     transferHeat=true,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(),
     TAmb=298.15)
-    annotation (Placement(transformation(extent={{28,116},{52,140}})));
+    annotation (Placement(transformation(extent={{28,108},{52,132}})));
 
   Fluid.BoilerCHP.CHP cHP(
-    electricityDriven=true,
+    allowFlowReversal=allowFlowReversal,
+    T_start=T_start,
+    electricityDriven=false,
     TSetIn=true,
     redeclare package Medium = Medium,
     minCapacity=24,
@@ -21,12 +34,14 @@ model HighTemperatureSystem
     param=DataBase.CHP.CHPDataSimple.CHP_FMB_31_GSK(),
     final m_flow_nominal=m_flow_nominal,
     TAmb=298.15)
-    annotation (Placement(transformation(extent={{-52,116},{-28,140}})));
+    annotation (Placement(transformation(extent={{-52,108},{-28,132}})));
 
   HydraulicModules.Pump pumpCHP(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     T_amb=298.15,
     final m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
     dIns=0.01,
     kIns=0.028,
     d=0.32,
@@ -41,8 +56,10 @@ model HighTemperatureSystem
 
   HydraulicModules.Pump pumpBoiler(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     T_amb=298.15,
     final m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
     dIns=0.01,
     kIns=0.028,
     d=0.32,
@@ -54,9 +71,6 @@ model HighTemperatureSystem
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={40,80})));
-  BaseClasses.HighTempSysBus highTempSysBus annotation (Placement(
-        transformation(extent={{-14,146},{14,174}}),iconTransformation(extent={{-14,128},
-            {12,154}})));
   Fluid.Storage.BufferStorage HotWater(
     useHeatingCoil1=false,
     useHeatingRod=false,
@@ -69,62 +83,133 @@ model HighTemperatureSystem
     redeclare package MediumHC2 = Medium,
     data=DataBase.Storage.Generic_22000l(),
     TStart=343.15)
-    annotation (Placement(transformation(extent={{-16,0},{16,40}})));
+    annotation (Placement(transformation(extent={{-16,-12},{16,28}})));
+  BaseClasses.HighTemperatureSystemBus highTemperatureSystemBus annotation (
+      Placement(transformation(extent={{-18,126},{14,156}}), iconTransformation(
+          extent={{-14,124},{16,156}})));
+protected
+  Fluid.Sensors.TemperatureTwoPort senT_a(
+    T_start=T_start,
+    redeclare package Medium = Medium,
+    transferHeat=true,
+    final TAmb=298.15,
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
+    annotation (Placement(transformation(extent={{-80,-26},{-68,-14}})));
+  Fluid.Sensors.TemperatureTwoPort senT_b(
+    T_start=T_start,
+    redeclare package Medium = Medium,
+    transferHeat=true,
+    final TAmb=298.15,
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
+    annotation (Placement(transformation(extent={{64,-6},{76,6}})));
 equation
   connect(pumpCHP.port_b1, cHP.port_a)
-    annotation (Line(points={{-52,100},{-52,128}},
+    annotation (Line(points={{-52,100},{-52,120}},
                                                  color={0,127,255}));
   connect(pumpCHP.port_a2, cHP.port_b)
-    annotation (Line(points={{-28,100},{-28,128}},
+    annotation (Line(points={{-28,100},{-28,120}},
                                                  color={0,127,255}));
-  connect(pumpBoiler.port_b1, boiler.port_a)
-    annotation (Line(points={{28,100},{28,128}},
-                                               color={0,127,255}));
-  connect(pumpBoiler.port_a2, boiler.port_b)
-    annotation (Line(points={{52,100},{52,128}},
-                                               color={0,127,255}));
-  connect(pumpCHP.hydraulicBus, highTempSysBus.pumpCHPBus) annotation (Line(
-      points={{-60,80},{-74,80},{-74,160.07},{0.07,160.07}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(pumpBoiler.hydraulicBus, highTempSysBus.pumpBoilerBus) annotation (
-      Line(
-      points={{20,80},{10,80},{10,84},{0.07,84},{0.07,160.07}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(cHP.TSet, highTempSysBus.Tset_chp) annotation (Line(points={{-48.4,
-          120.8},{-64,120.8},{-64,160.07},{0.07,160.07}},
-                                                        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(boiler.TSet, highTempSysBus.Tset_boiler) annotation (Line(points={{31.6,
-          136.4},{0.07,136.4},{0.07,160.07}},    color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(HotWater.fluidportTop2, port_b) annotation (Line(points={{5,40.2},{5,
-          46},{30,46},{30,0},{100,0}}, color={0,127,255}));
-  connect(HotWater.fluidportBottom2, port_a) annotation (Line(points={{4.6,-0.2},
-          {4.6,-20},{-80,-20},{-80,0},{-100,0}}, color={0,127,255}));
+  connect(pumpBoiler.port_b1, boilerNoControl.port_a)
+    annotation (Line(points={{28,100},{28,120}}, color={0,127,255}));
+  connect(pumpBoiler.port_a2, boilerNoControl.port_b)
+    annotation (Line(points={{52,100},{52,120}}, color={0,127,255}));
   connect(pumpBoiler.port_a1, pumpCHP.port_a1) annotation (Line(points={{28,60},
-          {28,50},{-52,50},{-52,60}}, color={0,127,255}));
-  connect(pumpCHP.port_a1, HotWater.fluidportBottom1) annotation (Line(points={
-          {-52,60},{-52,-0.4},{-5.4,-0.4}}, color={0,127,255}));
+          {28,36},{-52,36},{-52,60}}, color={0,127,255}));
+  connect(pumpCHP.port_a1, HotWater.fluidportBottom1) annotation (Line(points={{-52,60},
+          {-52,-12.4},{-5.4,-12.4}},        color={0,127,255}));
   connect(pumpCHP.port_b2, pumpBoiler.port_b2) annotation (Line(points={{-28,60},
           {-28,54},{52,54},{52,60}}, color={0,127,255}));
-  connect(pumpCHP.port_b2, HotWater.fluidportTop1) annotation (Line(points={{
-          -28,60},{-28,54},{-5.6,54},{-5.6,40.2}}, color={0,127,255}));
+  connect(pumpCHP.port_b2, HotWater.fluidportTop1) annotation (Line(points={{-28,60},
+          {-28,54},{-5.6,54},{-5.6,28.2}},         color={0,127,255}));
+  connect(HotWater.fluidportBottom2, senT_a.port_b) annotation (Line(points={{
+          4.6,-12.2},{4.6,-20},{-68,-20}}, color={0,127,255}));
+  connect(senT_a.port_a, port_a)
+    annotation (Line(points={{-80,-20},{-80,0},{-100,0}}, color={0,127,255}));
+  connect(senT_b.T, highTemperatureSystemBus.T_out) annotation (Line(points={{
+          70,6.6},{70,141.075},{-1.92,141.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(senT_a.T, highTemperatureSystemBus.T_in) annotation (Line(points={{
+          -74,-13.4},{-74,141.075},{-1.92,141.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boilerNoControl.u_rel, highTemperatureSystemBus.uRelBoilerSet)
+    annotation (Line(points={{31.6,128.4},{-1.92,128.4},{-1.92,141.075}}, color
+        ={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(boilerNoControl.fuelPower, highTemperatureSystemBus.fuelPowerBoilerMea)
+    annotation (Line(points={{48.64,133.2},{56,133.2},{56,141.075},{-1.92,
+          141.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(cHP.TSet, highTemperatureSystemBus.TChpSet) annotation (Line(points={
+          {-48.4,112.8},{-62,112.8},{-62,112},{-74,112},{-74,141.075},{-1.92,
+          141.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHP.on, highTemperatureSystemBus.onOffChpSet) annotation (Line(points
+        ={{-36.4,109.2},{-36.4,108},{-1.92,108},{-1.92,141.075}}, color={255,0,
+          255}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHP.fuelInput, highTemperatureSystemBus.fuelPowerChpMea) annotation (
+      Line(points={{-37.6,130.8},{-37.6,141.075},{-1.92,141.075}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHP.thermalPower, highTemperatureSystemBus.thermalPowerChpMea)
+    annotation (Line(points={{-42.4,130.8},{-42.4,141.075},{-1.92,141.075}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHP.electricalPower, highTemperatureSystemBus.electricalPowerChpMea)
+    annotation (Line(points={{-46,130.8},{-46,141.075},{-1.92,141.075}}, color=
+          {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(pumpBoiler.hydraulicBus, highTemperatureSystemBus.pumpBoilerBus)
+    annotation (Line(
+      points={{20,80},{-1.92,80},{-1.92,141.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(pumpCHP.hydraulicBus, highTemperatureSystemBus.pumpChpBus)
+    annotation (Line(
+      points={{-60,80},{-74,80},{-74,141.075},{-1.92,141.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senT_b.port_b, port_b)
+    annotation (Line(points={{76,0},{100,0}}, color={0,127,255}));
+  connect(senT_b.port_a, HotWater.fluidportTop2) annotation (Line(points={{64,0},
+          {62,0},{62,28.2},{5,28.2}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -60},{100,140}}), graphics={
         Rectangle(

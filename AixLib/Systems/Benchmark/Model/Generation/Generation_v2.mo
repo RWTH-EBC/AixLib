@@ -112,11 +112,11 @@ model Generation_v2
     dpValve_nominal=dpValve_nominal_warmwater,
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{-20,8},{-36,24}})));
-  Generation_geothermalProbe generation_geothermalProbe(
+  GeothermalProbe generation_geothermalProbe(
     Probe_depth=Probe_depth,
     n_probes=n_probes,
     Earthtemperature_start=Earthtemperature_start,
-    redeclare package Medium_Water = Medium_Water)      annotation (Placement(
+    redeclare package Medium_Water = Medium_Water) annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=90,
