@@ -199,5 +199,6 @@ equation
     experiment(
       StopTime=36000,
       Tolerance=0.001,
+      __Dymola_fixedstepsize=0.5,
       __Dymola_Algorithm="Cvode"));
 end MainBuildingEnergySystem;

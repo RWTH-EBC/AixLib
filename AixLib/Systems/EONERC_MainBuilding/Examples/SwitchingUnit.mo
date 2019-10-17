@@ -59,7 +59,7 @@ equation
   connect(boundary3.ports[1], switchingUnit.port_a2)
     annotation (Line(points={{70,-16},{30,-16}}, color={0,127,255}));
   connect(switchingUnit.sWUBus, sWUController.sWUBus) annotation (Line(
-      points={{-0.3,26.6},{0,26.6},{0,70},{-8.72,70}},
+      points={{-0.3,26.6},{0,26.6},{0,70},{-8,70}},
       color={255,204,51},
       thickness=0.5));
   connect(sWUController.mode, integerConstant.y)

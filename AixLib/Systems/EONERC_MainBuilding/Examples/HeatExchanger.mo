@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding.Validation;
+within AixLib.Systems.EONERC_MainBuilding.Examples;
 model HeatExchanger "Test of heat exachgner model of E.ON ERC main building"
   extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water

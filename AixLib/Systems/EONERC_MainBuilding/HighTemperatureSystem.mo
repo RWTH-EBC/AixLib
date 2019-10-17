@@ -1,27 +1,37 @@
 within AixLib.Systems.EONERC_MainBuilding;
 model HighTemperatureSystem
   "High temperature generation system of the E.ON ERC main building"
-   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
+  parameter Boolean allowFlowReversal=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate";
+  parameter Modelica.SIunits.Temperature T_start
+    "Initial or guess value of output (= state)"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
   Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     pumpMaxVolumeFlow=0.01,
     DFlange=0.1,
     T_top=T_start,
     T_bottom=T_start)
     annotation (Placement(transformation(extent={{76,28},{98,54}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)                                "Top-flange secondary circuit"
-    annotation (Placement(transformation(extent={{110,50},{130,70}}),
-        iconTransformation(extent={{110,50},{130,70}})));
+        Medium) "Top-flange secondary circuit" annotation (Placement(
+        transformation(extent={{110,50},{130,70}}), iconTransformation(extent={{
+            110,50},{130,70}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Bottom-flange secondary circuit"
-    annotation (Placement(transformation(extent={{110,10},{130,30}}),
-        iconTransformation(extent={{110,10},{130,30}})));
+        Medium) "Bottom-flange secondary circuit" annotation (Placement(
+        transformation(extent={{110,10},{130,30}}), iconTransformation(extent={{
+            110,10},{130,30}})));
   HydraulicModules.Admix admix2(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     T_amb=T_amb,
@@ -33,12 +43,13 @@ model HighTemperatureSystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))
-                                annotation (Placement(transformation(
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={-20,3.55271e-15})));
   HydraulicModules.Admix admix1(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     T_amb=T_amb,
@@ -50,12 +61,13 @@ model HighTemperatureSystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))
-                                annotation (Placement(transformation(
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={60,3.55271e-15})));
   HydraulicModules.ThrottlePump throttlePump(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     T_start=T_start,
     T_amb=T_amb,
     m_flow_nominal=m_flow_nominal,
@@ -67,13 +79,13 @@ model HighTemperatureSystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
-    pipe4(length=9))                         annotation (Placement(
-        transformation(
+    pipe4(length=9)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={-100,0})));
   Fluid.BoilerCHP.BoilerNoControl boiler2(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
@@ -81,6 +93,7 @@ model HighTemperatureSystem
     annotation (Placement(transformation(extent={{-8,-72},{-32,-48}})));
   Fluid.BoilerCHP.BoilerNoControl boiler1(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_60kW(Q_nom=120000,
@@ -88,6 +101,7 @@ model HighTemperatureSystem
     annotation (Placement(transformation(extent={{72,-72},{48,-48}})));
   Fluid.BoilerCHP.CHP cHP(
     redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     param=DataBase.CHP.CHPDataSimple.CHP_Cleanergy_C9G(),
@@ -96,14 +110,11 @@ model HighTemperatureSystem
   BaseClasses.HighTemperatureSystemBus hTCBus annotation (Placement(
         transformation(extent={{-18,82},{18,116}}), iconTransformation(extent={{
             -14,84},{16,114}})));
-  parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
+
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
         T_amb)
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start
-    "Initial or guess value of output (= state)";
+
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -111,7 +122,7 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=true)
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{100,54},{112,66}})));
   Fluid.Sensors.TemperatureTwoPort senT_b(
     T_start=T_start,
@@ -119,27 +130,21 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=true)
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{112,14},{100,26}})));
 equation
   connect(admix1.port_a1, hydraulicSeparator.port_b_primary)
-    annotation (Line(points={{72,20},{72,34.5},{76,34.5}},
-                                                       color={0,127,255}));
+    annotation (Line(points={{72,20},{72,34.5},{76,34.5}}, color={0,127,255}));
   connect(admix2.port_a1, hydraulicSeparator.port_b_primary)
-    annotation (Line(points={{-8,20},{-8,34.5},{76,34.5}},
-                                                       color={0,127,255}));
+    annotation (Line(points={{-8,20},{-8,34.5},{76,34.5}}, color={0,127,255}));
   connect(admix1.port_b2, hydraulicSeparator.port_a_primary)
-    annotation (Line(points={{48,20},{48,47.5},{76,47.5}},
-                                                       color={0,127,255}));
-  connect(admix2.port_b2, hydraulicSeparator.port_a_primary)
-    annotation (Line(points={{-32,20},{-32,47.5},{76,47.5}},
-                                                         color={0,127,255}));
-  connect(throttlePump.port_a1, hydraulicSeparator.port_b_primary)
-    annotation (Line(points={{-88,20},{-88,34.5},{76,34.5}},
-                                                         color={0,127,255}));
-  connect(throttlePump.port_b2, hydraulicSeparator.port_a_primary)
-    annotation (Line(points={{-112,20},{-112,47.5},{76,47.5}},
-                                                         color={0,127,255}));
+    annotation (Line(points={{48,20},{48,47.5},{76,47.5}}, color={0,127,255}));
+  connect(admix2.port_b2, hydraulicSeparator.port_a_primary) annotation (Line(
+        points={{-32,20},{-32,47.5},{76,47.5}}, color={0,127,255}));
+  connect(throttlePump.port_a1, hydraulicSeparator.port_b_primary) annotation (
+      Line(points={{-88,20},{-88,34.5},{76,34.5}}, color={0,127,255}));
+  connect(throttlePump.port_b2, hydraulicSeparator.port_a_primary) annotation (
+      Line(points={{-112,20},{-112,47.5},{76,47.5}}, color={0,127,255}));
   connect(boiler1.port_a, admix1.port_b1)
     annotation (Line(points={{72,-60},{72,-20}}, color={0,127,255}));
   connect(boiler1.port_b, admix1.port_a2)
@@ -241,14 +246,14 @@ equation
           {0,-90},{0,-66},{-28.16,-66}}, color={191,0,0}));
   connect(fixedTemperature.port, boiler1.T_amb) annotation (Line(points={{20,-90},
           {34,-90},{34,-66},{51.84,-66}}, color={191,0,0}));
-  connect(senT_a.T, hTCBus.T_out) annotation (Line(points={{106,66.6},{106,
-          99.085},{0.09,99.085}},                        color={0,0,127}), Text(
+  connect(senT_a.T, hTCBus.T_out) annotation (Line(points={{106,66.6},{106,99.085},
+          {0.09,99.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(senT_b.T, hTCBus.T_in) annotation (Line(points={{106,26.6},{154,26.6},
-          {154,99.085},{0.09,99.085}},       color={0,0,127}), Text(
+          {154,99.085},{0.09,99.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -312,6 +317,6 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.Solid),
         Line(points={{96,60},{110,60}}, color={28,108,200}),
-        Line(points={{96,20},{110,20}}, color={28,108,200})}),   Diagram(
+        Line(points={{96,20},{110,20}}, color={28,108,200})}), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{120,100}})));
 end HighTemperatureSystem;

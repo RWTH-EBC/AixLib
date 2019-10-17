@@ -28,6 +28,8 @@ model HeatExchangerSystem
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
+    allowFlowReversal1=allowFlowReversal,
+    allowFlowReversal2=allowFlowReversal,
     m1_flow_nominal=22.6,
     m2_flow_nominal=40.2,
     dp1_nominal=14000,
@@ -110,7 +112,7 @@ model HeatExchangerSystem
     annotation (Placement(transformation(extent={{110,-110},{130,-90}}),
         iconTransformation(extent={{110,-108},{130,-88}})));
   parameter Modelica.SIunits.Temperature T_start=303.15
-    "Initialization temperature";
+    "Initialization temperature" annotation (Dialog(tab="Initialization"));
   HydraulicModules.BaseClasses.HydraulicBus hydraulicBusHTC annotation (
       Placement(transformation(extent={{-90,90},{-70,110}}), iconTransformation(
           extent={{-70,90},{-50,110}})));

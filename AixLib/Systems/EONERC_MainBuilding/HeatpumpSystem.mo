@@ -3,15 +3,27 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
+    parameter Boolean allowFlowReversal = true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+    annotation(Dialog(tab="Assumptions"), Evaluate=true);
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal=10
+    "Nominal mass flow rate";
+    parameter Modelica.SIunits.Temperature T_start_hot=303.15
+    "Initialization temperature hot side" annotation(Dialog(tab = "Initialization"));
+    parameter Modelica.SIunits.Temperature T_start_cold=288.15
+    "Initialization temperature hot side" annotation(Dialog(tab = "Initialization"));
+    parameter Modelica.SIunits.Temperature T_amb=298.15
+    "Ambient temperature of technics room";
+
   HydraulicModules.Pump pump_hot(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
     dIns=0.01,
     kIns=0.001,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=3,
-    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+    redeclare replaceable HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(energyDynamics=pump_hot.energyDynamics, redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
           per)),
@@ -25,12 +37,12 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
 
   HydraulicModules.Pump pump_cold(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     T_start=T_start_cold,
     dIns=0.01,
     kIns=0.001,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+    redeclare replaceable HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(energyDynamics=pump_hot.energyDynamics, redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
           per)),
@@ -84,11 +96,11 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     annotation (Placement(transformation(extent={{-212,-2},{-204,6}})));
   HydraulicModules.Throttle throttle_recool(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
     dIns=0.01,
     kIns=0.001,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     d=0.125,
     length=6,
     Kv=160,
@@ -100,11 +112,11 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         origin={-60,-80})));
   HydraulicModules.Throttle throttle_HS(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
     dIns=0.01,
     kIns=0.001,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=3,
     valve(riseTime=240),
     pipe3(length=6),
@@ -116,11 +128,11 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         origin={-140,0})));
   HydraulicModules.Throttle throttle_CS(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     T_start=T_start_cold,
     dIns=0.01,
     kIns=0.001,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=2,
     valve(riseTime=240),
     pipe3(length=4),
@@ -132,11 +144,11 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         origin={160,0})));
   HydraulicModules.Throttle throttle_freecool(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m_flow_nominal,
     T_start=T_start_cold,
     dIns=0.01,
     kIns=0.001,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=6,
     valve(riseTime=240),
     pipe3(length=12),
@@ -149,7 +161,8 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Fluid.MixingVolumes.MixingVolume volAirCoolerRecool(
     redeclare package Medium = Medium,
     T_start=T_start_hot,
-    m_flow_nominal=10,
+    m_flow_nominal=m_flow_nominal,
+    allowFlowReversal=allowFlowReversal,
     V=0.04,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
@@ -158,7 +171,8 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   Fluid.MixingVolumes.MixingVolume volAirCoolerFreecool(
     redeclare package Medium = Medium,
     T_start=T_start_cold,
-    m_flow_nominal=10,
+    m_flow_nominal=m_flow_nominal,
+    allowFlowReversal=allowFlowReversal,
     V=0.04,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -196,20 +210,20 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     GConOut=5,
     dpEva_nominal=42000,
     dpCon_nominal=44000,
-    mFlow_conNominal=10,
-    mFlow_evaNominal=10,
+    mFlow_conNominal=m_flow_nominal,
+    mFlow_evaNominal=m_flow_nominal,
     VCon=0.176,
     use_conCap=false,
     use_evaCap=false,
     redeclare package Medium_con = Medium,
     redeclare package Medium_eva = Medium,
     use_revHP=true,
-    redeclare model PerDataHea =
+    redeclare replaceable model PerDataHea =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
             AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
             15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
             26.5,51000,51000; 44.2,51000,51000])),
-    redeclare model PerDataChi =
+    redeclare replaceable model PerDataChi =
         Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=
             Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
@@ -217,13 +231,14 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
             26.5,51000,51000; 44.2,51000,51000])),
     use_refIne=true,
     transferHeat=true,
+    allowFlowReversalEva=allowFlowReversal,
+    allowFlowReversalCon=allowFlowReversal,
     tauHeaTraEva(displayUnit="h") = 21600,
     tauHeaTraCon(displayUnit="h") = 28800,
     TAmbCon_nominal=T_amb,
     TAmbEva_nominal=T_amb,
     TCon_start=T_start_hot,
-    TEva_start=T_start_cold,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    TEva_start=T_start_cold)
                        annotation (Placement(transformation(
         extent={{-18,-22},{18,22}},
         rotation=90,
@@ -247,12 +262,8 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
   BaseClasses.HeatPumpSystemBus heatPumpSystemBus annotation (Placement(
         transformation(extent={{-14,46},{14,74}}), iconTransformation(extent={{
             -10,50},{10,70}})));
-  parameter Modelica.SIunits.Temperature T_start_hot=303.15
-    "Initialization temperature hot side";
-  parameter Modelica.SIunits.Temperature T_start_cold=288.15
-    "Initialization temperature hot side";
-  parameter Modelica.SIunits.Temperature T_amb=298.15
-    "Ambient temperature of technics room";
+
+
 equation
   connect(pump_cold.port_a1, coldStorage.fluidportTop2) annotation (Line(
         points={{80,12},{88,12},{88,20},{108,20},{108,14.15},{108.25,14.15}},
