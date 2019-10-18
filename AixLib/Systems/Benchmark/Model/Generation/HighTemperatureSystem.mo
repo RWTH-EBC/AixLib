@@ -7,7 +7,7 @@ model HighTemperatureSystem
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start
+  parameter Modelica.SIunits.Temperature T_start = 303.15
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
 

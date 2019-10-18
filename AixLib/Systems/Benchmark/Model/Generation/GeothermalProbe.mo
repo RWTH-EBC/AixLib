@@ -4,7 +4,7 @@ model GeothermalProbe "Geothermal probe"
     parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.Temperature T_start
+  parameter Modelica.SIunits.Temperature T_start = 283.15
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
   parameter Integer nParallel=2 "Number of identical parallel pipes";
