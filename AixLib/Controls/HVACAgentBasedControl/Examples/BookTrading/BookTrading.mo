@@ -5,26 +5,26 @@ model BookTrading
   BookBuyerAgent bookBuyerAgent(name=10001, ISBN=0618640150,
     sampleRate=1)
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
-  BookSellerAgent bookSellerAgent(name=30001, bookList(start=[3551555559,30;
-          3551555577,20; 3551555588,20]),
+  BookSellerAgent bookSellerAgent(name=30001, bookList(start=[3551555559.0,30;
+          3551555577.0,20; 3551555588.0,20]),
     sampleRate=1)
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-  BookSellerAgent bookSellerAgent1(name=30002, bookList(start=[3551555589,
-          30; 3551555559,40; 3551555556,20]),
+  BookSellerAgent bookSellerAgent1(name=30002, bookList(start=[3551555589.0,
+          30; 3551555559.0,40; 3551555556.0,20]),
     sampleRate=1)
     annotation (Placement(transformation(extent={{-20,40},{0,60}})));
-  BookSellerAgent bookSellerAgent2(name=30003, bookList(start=[3551555555,
-          30; 3551555554,20; 3551555553,20; 3551555580,15]),
+  BookSellerAgent bookSellerAgent2(name=30003, bookList(start=[3551555555.0,
+          30; 3551555554.0,20; 3551555553.0,20; 3551555580.0,15]),
     sampleRate=1)
     annotation (Placement(transformation(extent={{20,40},{40,60}})));
   BookBuyerAgent bookBuyerAgent1(
     name=10002,
-    ISBN=3551555559,
+    ISBN=3551555559.0,
     sampleRate=1,
     sampleTime=40)
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   BookBuyerAgent bookBuyerAgent2(
-    ISBN=3551555559,
+    ISBN=3551555559.0,
     name=10003,
     sampleRate=1,
     sampleTime=55)
