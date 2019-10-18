@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model.Generation;
+within AixLib.Systems.Benchmark.Model.Generation.Examples;
 model GoethermalProbe "Test of geothermal probe"
   extends Modelica.Icons.Example;
       package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);

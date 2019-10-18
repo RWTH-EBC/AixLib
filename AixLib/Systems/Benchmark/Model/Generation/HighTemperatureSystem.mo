@@ -140,8 +140,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(boilerNoControl.u_rel, highTemperatureSystemBus.uRelBoilerSet)
-    annotation (Line(points={{31.6,128.4},{-1.92,128.4},{-1.92,141.075}}, color
-        ={0,0,127}), Text(
+    annotation (Line(points={{31.6,128.4},{-1.92,128.4},{-1.92,141.075}}, color=
+         {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -160,8 +160,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHP.on, highTemperatureSystemBus.onOffChpSet) annotation (Line(points
-        ={{-36.4,109.2},{-36.4,108},{-1.92,108},{-1.92,141.075}}, color={255,0,
+  connect(cHP.on, highTemperatureSystemBus.onOffChpSet) annotation (Line(points=
+         {{-36.4,109.2},{-36.4,108},{-1.92,108},{-1.92,141.075}}, color={255,0,
           255}), Text(
       string="%second",
       index=1,

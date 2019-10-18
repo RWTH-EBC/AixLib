@@ -4,8 +4,6 @@ model GeothermalProbe "Geothermal probe"
     parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate";
   parameter Modelica.SIunits.Temperature T_start
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
