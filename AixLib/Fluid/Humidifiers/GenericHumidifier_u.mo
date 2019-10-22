@@ -164,9 +164,15 @@ equation
           textString="powerEva")}),
 defaultComponentName="hum",
 Documentation(info="<html>
-<p>Model for an air humidifier. </p>
-<p>This model adds moisture to the air stream. The moisture can be either liquid (adiabatic) or steam. If steam is chosen, the vaporization temperature can be fixed or calculated from the pressure.</p>
-<p>The amount of added moisture is equal to </p></p>
+<p>
+Model for an air humidifier.
+</p>
+<p>
+This model adds moisture to the air stream. The moisture can be either liquid (adiabatic) or steam. If steam is chosen, the vaporization temperature can be fixed or calculated from the pressure.
+</p>
+<p>
+The amount of added moisture is equal to 
+</p>
 <p align=\"center\" style=\"font-style:italic;\">
 m&#775;<sub>wat</sub> = u  m&#775;<sub>wat,nom</sub>,
 </p>
