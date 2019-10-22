@@ -175,7 +175,6 @@ where <i>u</i> is the control input signal and
 <i>m&#775;<sub>wat,nom</sub></i> is equal to the parameter <code>mWat_flow_nominal</code>.
 The parameter <code>mWat_flow_nominal</code> must be positive.
 </p>
-<p>
 <p>Twater_in is used to calculate the thermal power for the vaporization (sensible and latent heat) of the steam humidifier and to calculate the enthalpy for the liquid in the adiabatic case.</p>
 </html>",
 revisions="<html>
