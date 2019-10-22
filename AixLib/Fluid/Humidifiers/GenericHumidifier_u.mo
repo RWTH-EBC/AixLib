@@ -166,9 +166,16 @@ defaultComponentName="hum",
 Documentation(info="<html>
 <p>Model for an air humidifier. </p>
 <p>This model adds moisture to the air stream. The moisture can be either liquid (adiabatic) or steam. If steam is chosen, the vaporization temperature can be fixed or calculated from the pressure.</p>
-<p>The amount of added moisture is equal to </p>
-<p align=\"center\"><i>ṁ<sub>wat</sub> = u ṁ<sub>wat,nom</sub>, </i></p>
-<p>where <i>u</i> is the control input signal and <i>ṁ<sub>wat,nom</i></sub> is equal to the parameter <span style=\"font-family: Courier New;\">mWat_flow_nominal</span>. The parameter <span style=\"font-family: Courier New;\">mWat_flow_nominal</span> must be positive.</p>
+<p>The amount of added moisture is equal to </p></p>
+<p align=\"center\" style=\"font-style:italic;\">
+m&#775;<sub>wat</sub> = u  m&#775;<sub>wat,nom</sub>,
+</p>
+<p>
+where <i>u</i> is the control input signal and
+<i>m&#775;<sub>wat,nom</sub></i> is equal to the parameter <code>mWat_flow_nominal</code>.
+The parameter <code>mWat_flow_nominal</code> must be positive.
+</p>
+<p>
 <p>Twater_in is used to calculate the thermal power for the vaporization (sensible and latent heat) of the steam humidifier and to calculate the enthalpy for the liquid in the adiabatic case.</p>
 </html>",
 revisions="<html>
