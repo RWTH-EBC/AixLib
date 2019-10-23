@@ -1,12 +1,12 @@
 ﻿within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model HeatPump
   extends Modelica.Icons.Example;
-  FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource(medium=
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple()) "Fluidsource for source"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  Components.HeatGenerators.HeatPump.HeatPump heatPump(
+  AixLib.FastHVAC.HeatGenerators.HeatPump.HeatPump heatPump(
     refIneFre_constant=1,
     Medium_con=Media.WaterSimple(),
     Medium_eva=Media.WaterSimple(),
@@ -36,9 +36,8 @@ model HeatPump
         extent={{-13,-16},{13,16}},
         rotation=-90,
         origin={3,-2})));
-  FastHVAC.Components.Sinks.Vessel vessel_ev
-    "vessel for open evaporator circuit"     annotation (Placement(
-        transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel_ev "vessel for open evaporator circuit"
+    annotation (Placement(transformation(
         extent={{-11,-9},{11,9}},
         rotation=180,
         origin={-35,57})));
@@ -108,8 +107,8 @@ model HeatPump
     amplitude=3000,
     offset=3000) "hourly sine "
     annotation (Placement(transformation(extent={{66,8},{58,16}})));
-  Components.Pumps.Pump pump "sink pump"
-                             annotation (Placement(transformation(
+  AixLib.FastHVAC.Pumps.Pump pump "sink pump" annotation (Placement(
+        transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={36,20})));

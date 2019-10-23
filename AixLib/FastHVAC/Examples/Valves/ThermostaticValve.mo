@@ -3,12 +3,11 @@ model ThermostaticValve
   extends Modelica.Icons.Example;
    Modelica.Blocks.Sources.Constant T_setRoom(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-88,-14},{-70,4}})));
-  Components.Valves.ThermostaticValve thermostaticValve(
+  AixLib.FastHVAC.Valves.ThermostaticValve thermostaticValve(
     riseTime=5,
     k=1,
     dotm_nominal=0.2,
-    filteredOpening=false)
-                      annotation (Placement(transformation(
+    filteredOpening=false) annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=0,
         origin={-44,0})));

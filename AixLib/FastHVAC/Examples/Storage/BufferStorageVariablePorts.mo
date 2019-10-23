@@ -17,7 +17,7 @@ model BufferStorageVariablePorts
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-42,28})));
-  Components.Storage.HeatStorageVariablePorts heatStorageVariablePorts(
+  AixLib.FastHVAC.Storage.HeatStorageVariablePorts heatStorageVariablePorts(
     load_cycles=[10,4; 6,1],
     n_HC1_up=10,
     n_HC1_low=6,
@@ -26,9 +26,8 @@ model BufferStorageVariablePorts
     unload_cycles=[1,10; 4,10],
     T_start_wall=323.15,
     T_start_ins=323.15,
-    n=10)
-    annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource
+    n=10) annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
   Modelica.Blocks.Sources.Constant dotmLoad1(k=0.007)
     annotation (Placement(transformation(extent={{-100,42},{-80,62}})));
@@ -56,28 +55,28 @@ model BufferStorageVariablePorts
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={52,-90})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource1 annotation (Placement(
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource1 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={58,-44})));
-  FastHVAC.Components.Sinks.Vessel vessel annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=270,
         origin={-19,-82})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource2 annotation (Placement(
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource2 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={28,-62})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource3 annotation (Placement(
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource3 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-2,60})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource4
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource4
     annotation (Placement(transformation(extent={{-68,-8},{-48,12}})));
-  FastHVAC.Components.Pumps.FluidSource fluidSource5
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource5
     annotation (Placement(transformation(extent={{-68,-80},{-48,-60}})));
   Modelica.Blocks.Sources.Constant T_HC1(k=273.15 + 90)
     annotation (Placement(transformation(extent={{-100,8},{-80,28}})));
@@ -87,23 +86,23 @@ model BufferStorageVariablePorts
     annotation (Placement(transformation(extent={{-100,-62},{-80,-42}})));
   Modelica.Blocks.Sources.Constant dotmHC2(k=0.01)
     annotation (Placement(transformation(extent={{-100,-96},{-80,-76}})));
-  FastHVAC.Components.Sinks.Vessel vessel1 annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel1 annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=270,
         origin={-29,-82})));
-  FastHVAC.Components.Sinks.Vessel vessel2 annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel2 annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=90,
         origin={67,82})));
-  FastHVAC.Components.Sinks.Vessel vessel3 annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel3 annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=90,
         origin={57,82})));
-  FastHVAC.Components.Sinks.Vessel vessel4 annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel4 annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=180,
         origin={-25,-4})));
-  FastHVAC.Components.Sinks.Vessel vessel5 annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel5 annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=180,
         origin={-25,-28})));

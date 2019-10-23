@@ -49,7 +49,7 @@ model ValidationRadiator
 
   Modelica.Blocks.Sources.Constant T_source(k=348.15)
     annotation (Placement(transformation(extent={{-110,-56},{-90,-36}})));
-  Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{44,-68},{66,-50}})));
 
   Modelica.Blocks.Sources.Constant dotm_source(k=0.0405)
@@ -59,17 +59,18 @@ model ValidationRadiator
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-58,-30})));
-  Components.Sensors.TemperatureSensor temperatureSensor
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{14,-68},{32,-50}})));
-  Components.HeatExchangers.RadiatorMultiLayer radiatorFastHvac(
+  AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiatorFastHvac(
     selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
+
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
     annotation (Placement(transformation(extent={{-32,-76},{2,-42}})));
 
-  Components.Pumps.FluidSource fluidSource(medium=
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple(c=4119, rho=995))
     annotation (Placement(transformation(extent={{-64,-70},{-44,-50}})));
 equation

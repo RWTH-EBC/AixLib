@@ -11,15 +11,15 @@ model ThermostaticValveRadiator
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={90,30})));
-  Components.Valves.ThermostaticValve thermostaticValve(
+  AixLib.FastHVAC.Valves.ThermostaticValve thermostaticValve(
     riseTime=5,
     filteredOpening=true,
     k=1,
-  dotm_nominal=0.3)   annotation (Placement(transformation(
+    dotm_nominal=0.3) annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=0,
         origin={-52,-28})));
-  Components.Pumps.FluidSource fluidSource annotation (Placement(
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -29,7 +29,7 @@ model ThermostaticValveRadiator
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-49,11})));
-  Components.Sinks.Vessel vessel annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={80,-8})));
@@ -43,15 +43,16 @@ model ThermostaticValveRadiator
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={64,30})));
-  Components.HeatExchangers.RadiatorMultiLayer radiatorMultiLayer(
-  selectable=true,
-  calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log,
-  radiatorType=
-      DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(
-      length=5)) annotation (Placement(transformation(
-      extent={{-21,-20},{21,20}},
-      rotation=0,
-      origin={24,-7})));
+  AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiatorMultiLayer(
+    selectable=true,
+    calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log,
+
+    radiatorType=
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(
+        length=5)) annotation (Placement(transformation(
+        extent={{-21,-20},{21,20}},
+        rotation=0,
+        origin={24,-7})));
 
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor roomTemperature
     annotation (Placement(transformation(extent={{54,56},{74,76}})));

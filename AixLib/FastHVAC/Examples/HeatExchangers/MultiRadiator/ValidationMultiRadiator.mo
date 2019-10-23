@@ -2,9 +2,9 @@ within AixLib.FastHVAC.Examples.HeatExchangers.MultiRadiator;
 model ValidationMultiRadiator
 
   extends Modelica.Icons.Example;
-  Components.Valves.Splitter          splitter(n=3)
+  AixLib.FastHVAC.Valves.Splitter splitter(n=3)
     annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
-  Components.Valves.Manifold          manifold(n=3)
+  AixLib.FastHVAC.Valves.Manifold manifold(n=3)
     annotation (Placement(transformation(extent={{32,-60},{52,-40}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedConvHeatFlow(Q_flow=-4500)
     annotation (Placement(transformation(extent={{-36,80},{-16,100}})));
@@ -22,42 +22,42 @@ model ValidationMultiRadiator
     annotation (Placement(transformation(extent={{66,-22},{46,-2}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedRadHeatFlow3(Q_flow=-50)
     annotation (Placement(transformation(extent={{66,-2},{46,18}})));
-  Components.Sinks.Vessel          vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{70,58},{90,78}})));
-  Components.Sinks.Vessel          vessel1
+  AixLib.FastHVAC.Sinks.Vessel vessel1
     annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
-  Components.Pumps.FluidSource          fluidSource(medium=
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
         FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{-42,56},{-22,76}})));
-  Components.Pumps.FluidSource          fluidSource1(medium=
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource1(medium=
         FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{-52,-76},{-32,-56}})));
-  Components.Sensors.TemperatureSensor       temperatureSensor
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{34,74},{52,56}})));
-  Components.Sensors.TemperatureSensor       temperatureSensor1
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor1
     annotation (Placement(transformation(extent={{56,-46},{76,-66}})));
-  Components.HeatExchangers.RadiatorMultiLayer
-                                       radiator_ML(selectable=true,
+  AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML(
+    selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
-  Components.HeatExchangers.RadiatorMultiLayer
-                                       radiator_ML1(selectable=true,
+  AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML1(
+    selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{0,-36},{20,-16}})));
-  Components.HeatExchangers.RadiatorMultiLayer
-                                       radiator_ML2(selectable=true,
+  AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML2(
+    selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{0,-84},{20,-64}})));
   Modelica.Blocks.Sources.Constant Tset(k=273.15 + 75)
     annotation (Placement(transformation(extent={{-114,10},{-94,30}})));
-  Components.HeatExchangers.MultiRadiator multiRadiator1(
-                                                        selectable=true,
+  AixLib.FastHVAC.HeatExchangers.MultiRadiator multiRadiator1(
+    selectable=true,
     medium=FastHVAC.Media.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())

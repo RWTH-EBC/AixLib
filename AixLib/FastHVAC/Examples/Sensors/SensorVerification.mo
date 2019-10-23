@@ -2,17 +2,17 @@ within AixLib.FastHVAC.Examples.Sensors;
 model SensorVerification
   extends Modelica.Icons.Example;
 
-  Components.Sensors.MassFlowSensor massFlowFastHVAC
+  AixLib.FastHVAC.Sensors.MassFlowSensor massFlowFastHVAC
     annotation (Placement(transformation(extent={{-8,34},{14,56}})));
-  Components.Sensors.TemperatureSensor TemperatureFastHVAC
+  AixLib.FastHVAC.Sensors.TemperatureSensor TemperatureFastHVAC
     annotation (Placement(transformation(extent={{42,36},{60,54}})));
-  Components.Pumps.FluidSource fluidSource1
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource1
     annotation (Placement(transformation(extent={{-54,34},{-34,54}})));
   Modelica.Blocks.Sources.Constant m_flow(k=2)
     annotation (Placement(transformation(extent={{-98,18},{-78,38}})));
   Modelica.Blocks.Sources.Constant T_fluid(k=333.15)
     annotation (Placement(transformation(extent={{-98,54},{-78,74}})));
-  Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{76,34},{98,56}})));
   Modelica.Fluid.Sources.MassFlowSource_T boundary(
     use_m_flow_in=true,

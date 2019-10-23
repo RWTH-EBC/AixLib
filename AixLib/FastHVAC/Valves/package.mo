@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components;
+within AixLib.FastHVAC;
 package Valves 
    extends Modelica.Icons.Package;
 

@@ -1,14 +1,14 @@
 within AixLib.FastHVAC.Examples.Pipes;
 model Pipes
   extends Modelica.Icons.Example;
-  Components.Pipes.DynamicPipe PipeInsulationAndConvectionandRadiation(
+  AixLib.FastHVAC.Pipes.DynamicPipe PipeInsulationAndConvectionandRadiation(
     withInsulation=true,
     withConvection=true,
     withRadiation=true)
     annotation (Placement(transformation(extent={{-14,-96},{6,-76}})));
-  Components.Pumps.FluidSource fluidSource1
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource1
     annotation (Placement(transformation(extent={{-76,-96},{-56,-76}})));
-  Components.Sinks.Vessel vessel1
+  AixLib.FastHVAC.Sinks.Vessel vessel1
     annotation (Placement(transformation(extent={{66,-94},{86,-74}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperatureSurroundingAir2(
@@ -23,14 +23,14 @@ model Pipes
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperatureSurroundingAir3(T=288.15)
     annotation (Placement(transformation(extent={{-32,-76},{-16,-60}})));
-  Components.Pipes.DynamicPipe PipeInsulationAndConvection(
+  AixLib.FastHVAC.Pipes.DynamicPipe PipeInsulationAndConvection(
     withInsulation=true,
     withConvection=true,
     withRadiation=false)
     annotation (Placement(transformation(extent={{-16,-28},{4,-8}})));
-  Components.Pumps.FluidSource fluidSource2
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource2
     annotation (Placement(transformation(extent={{-74,-28},{-54,-8}})));
-  Components.Sinks.Vessel vessel2
+  AixLib.FastHVAC.Sinks.Vessel vessel2
     annotation (Placement(transformation(extent={{68,-28},{88,-8}})));
   Modelica.Blocks.Sources.Constant TFlow2(
                                          k=273.15 + 60)
@@ -47,9 +47,9 @@ model Pipes
   Modelica.Blocks.Sources.Ramp mFlow3(
                                      height=1, duration=5000)
     annotation (Placement(transformation(extent={{-96,38},{-82,52}})));
-  Components.Pumps.FluidSource fluidSource3
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource3
     annotation (Placement(transformation(extent={{-74,36},{-54,56}})));
-  Components.Pipes.DynamicPipe PipeInsulation(
+  AixLib.FastHVAC.Pipes.DynamicPipe PipeInsulation(
     withInsulation=true,
     withRadiation=false,
     withConvection=false)
@@ -57,7 +57,7 @@ model Pipes
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperatureSurroundingAir1(T=288.15)
     annotation (Placement(transformation(extent={{-32,54},{-16,70}})));
-  Components.Sinks.Vessel vessel3
+  AixLib.FastHVAC.Sinks.Vessel vessel3
     annotation (Placement(transformation(extent={{68,32},{88,52}})));
 equation
   connect(TFlow1.y, fluidSource1.T_fluid) annotation (Line(points={{-83.2,-65},

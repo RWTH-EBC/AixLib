@@ -2,13 +2,13 @@ within AixLib.FastHVAC.Examples.HeatGenerators.Boiler;
 model Boiler
 
  extends Modelica.Icons.Example;
-  FastHVAC.Components.Pumps.FluidSource fluidSource
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-56,-12},{-36,8}})));
-  FastHVAC.Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{72,-10},{92,8}})));
-  FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor_before
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor_before
     annotation (Placement(transformation(extent={{-24,-8},{-8,6}})));
-  FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor_after
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor_after
     annotation (Placement(transformation(extent={{42,-8},{58,6}})));
   Modelica.Blocks.Sources.Constant T_source(k=283.15)
     annotation (Placement(transformation(extent={{-84,10},{-64,30}})));
@@ -24,7 +24,7 @@ model Boiler
     duration=36000,
     offset=0.2)
     annotation (Placement(transformation(extent={{-28,20},{-8,40}})));
-  FastHVAC.Components.HeatGenerators.Boiler.Boiler boiler
+  AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boiler
     annotation (Placement(transformation(extent={{-6,-20},{34,18}})));
 equation
 

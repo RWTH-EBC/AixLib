@@ -1,9 +1,9 @@
 within AixLib.FastHVAC.Examples.HeatExchangers.DHWHeatExchanger;
 model DHWHeatExchanger
 extends Modelica.Icons.Example;
-  Components.HeatGenerators.Boiler.Boiler     boilerBase
+  AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boilerBase
     annotation (Placement(transformation(extent={{-72,-30},{-46,-4}})));
-  Components.Pumps.Pump pump annotation (Placement(transformation(
+  AixLib.FastHVAC.Pumps.Pump pump annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-60,-42})));
@@ -22,13 +22,14 @@ extends Modelica.Icons.Example;
         origin={89,-59})));
   Modelica.Blocks.Sources.Constant dotQ_rel(k=1)
     annotation (Placement(transformation(extent={{-88,-8},{-74,6}})));
-  Components.HeatExchangers.DHWHeatExchanger dHWHeatExchanger
+  AixLib.FastHVAC.HeatExchangers.DHWHeatExchanger dHWHeatExchanger
     annotation (Placement(transformation(extent={{-16,-46},{24,-4}})));
-  Components.Pumps.FluidSource fluidSource annotation (Placement(transformation(
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={62,-42})));
-  Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{54,-26},{74,-6}})));
 equation
   connect(pump.enthalpyPort_b, boilerBase.enthalpyPort_a1) annotation (Line(

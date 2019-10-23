@@ -2,13 +2,13 @@ within AixLib.FastHVAC.Examples.Sinks;
 model SinkSourceVesselTest
   extends Modelica.Icons.Example;
 
-  Components.Sinks.Sink sink
+  AixLib.FastHVAC.Sinks.Sink sink
     annotation (Placement(transformation(extent={{-28,0},{-8,20}})));
-  Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{80,-18},{100,2}})));
-  Components.Pumps.FluidSource fluidSource
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-68,-16},{-48,4}})));
-  Components.Sinks.Sink source(isSource=true)
+  AixLib.FastHVAC.Sinks.Sink source(isSource=true)
     annotation (Placement(transformation(extent={{32,-70},{52,-50}})));
   Modelica.Blocks.Sources.Constant dotm(k=0.05)
     annotation (Placement(transformation(extent={{-96,-26},{-82,-12}})));
@@ -18,12 +18,12 @@ model SinkSourceVesselTest
     annotation (Placement(transformation(extent={{26,-40},{40,-26}})));
   Modelica.Blocks.Sources.Constant sink_heatFlow(k=1000)
     annotation (Placement(transformation(extent={{-34,34},{-20,48}})));
-  Components.Sensors.TemperatureSensor T_afterSink annotation (Placement(
+  AixLib.FastHVAC.Sensors.TemperatureSensor T_afterSink annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={12,-2})));
-  Components.Sensors.TemperatureSensor T_afterSource annotation (Placement(
+  AixLib.FastHVAC.Sensors.TemperatureSensor T_afterSource annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,

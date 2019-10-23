@@ -2,9 +2,9 @@ within AixLib.FastHVAC.Examples.Pumps;
 model FluidSource
   extends Modelica.Icons.Example;
 
-  Components.Pumps.FluidSource fluidSource
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-10,-36},{10,-16}})));
-  Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{60,-36},{82,-14}})));
   Modelica.Blocks.Sources.Constant dotm_source(k=2)
     annotation (Placement(transformation(extent={{-84,-52},{-64,-32}})));

@@ -2,19 +2,18 @@ within AixLib.FastHVAC.Examples.Pumps;
 model Pump
     extends Modelica.Icons.Example;
 
-  Components.Pumps.Pump pump
+  AixLib.FastHVAC.Pumps.Pump pump
     annotation (Placement(transformation(extent={{-14,-4},{10,18}})));
   Modelica.Blocks.Sources.RealExpression mdot(y=2) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-16,26})));
-  Components.HeatExchangers.RadiatorMultiLayer
-                                       radiator_ML(selectable=true,
+  AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML(selectable=true,
       radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{60,-2},{80,16}})));
-  Components.HeatGenerators.Boiler.Boiler     boilerBase(paramBoiler=
+  AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boilerBase(paramBoiler=
         Data.Boiler.General.Boiler_Vitogas200F_11kW(), T_start=333.15)
     annotation (Placement(transformation(extent={{-68,-4},{-46,18}})));
   Modelica.Blocks.Sources.BooleanExpression booleanOnOffBoiler(y=true)

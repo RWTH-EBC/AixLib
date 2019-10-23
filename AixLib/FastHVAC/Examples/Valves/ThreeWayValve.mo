@@ -1,13 +1,13 @@
 within AixLib.FastHVAC.Examples.Valves;
 model ThreeWayValve
   extends Modelica.Icons.Example;
-  Components.Valves.ThreeWayValve threeWayValve
+  AixLib.FastHVAC.Valves.ThreeWayValve threeWayValve
     annotation (Placement(transformation(extent={{-6,-6},{14,14}})));
-  Components.Pumps.FluidSource fluidSource
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-58,-8},{-38,12}})));
-  Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{74,-6},{94,14}})));
-  Components.Sinks.Vessel vessel1 annotation (Placement(transformation(
+  AixLib.FastHVAC.Sinks.Vessel vessel1 annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=-90,
         origin={8,-54})));

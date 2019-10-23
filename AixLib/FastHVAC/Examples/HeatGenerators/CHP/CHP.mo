@@ -1,13 +1,13 @@
 within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
 model CHP
  extends Modelica.Icons.Example;
-  FastHVAC.Components.Pumps.FluidSource fluidSource
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
-  FastHVAC.Components.Sinks.Vessel vessel
+  AixLib.FastHVAC.Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{68,-8},{88,10}})));
-  FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor_before
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor_before
     annotation (Placement(transformation(extent={{-44,-6},{-28,8}})));
-  FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor_after
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor_after
     annotation (Placement(transformation(extent={{38,-6},{54,8}})));
   Modelica.Blocks.Sources.Constant T_source(k=313.15)
     annotation (Placement(transformation(extent={{-100,12},{-80,32}})));
@@ -18,7 +18,7 @@ model CHP
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-36,42})));
-  FastHVAC.Components.HeatGenerators.CHP.CHP_PT1 cHP_PT1_1(
+  AixLib.FastHVAC.HeatGenerators.CHP.CHP_PT1 cHP_PT1_1(
     param=FastHVAC.Data.CHP.Ecopower_3_0(),
     selectable=true,
     sigma(start=0.4),

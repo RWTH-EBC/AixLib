@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components;
+within AixLib.FastHVAC;
 package HeatExchangers
     extends Modelica.Icons.Package;
 
