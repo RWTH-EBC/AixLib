@@ -28,9 +28,10 @@ model BoilerNoControl "Boiler model with physics only"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-30,-20})));
-  Modelica.Blocks.Math.Product QgasCalculation
+  Modelica.Blocks.Math.Product QgasCalculation "Calculate gas usage"
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0)
+    "Limits the rel power between 0 and 1"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
         max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
@@ -83,7 +84,9 @@ model BoilerNoControl "Boiler model with physics only"
     "Table matrix for part load based efficiency (e.g. [0,0.99; 0.5, 0.98; 1, 0,97])";
   parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99]
   "Table matrix for temperature based efficiency";
-  Modelica.Blocks.Math.Product eta annotation (Placement(transformation(
+  Modelica.Blocks.Math.Product etaCalculation
+    "calculates the efficiency of the boiler" annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={10,50})));
@@ -124,13 +127,15 @@ equation
           {110,40}}, color={0,0,127}));
   connect(port_b, port_b)
     annotation (Line(points={{100,0},{100,0}}, color={0,127,255}));
-  connect(efficiencyTableLoadDepending.y[1], eta.u1) annotation (Line(points={{-17.95,
-          60.5},{-10.975,60.5},{-10.975,56},{-2,56}}, color={0,0,127}));
-  connect(efficiencyTableLoadDepending1.y[1], eta.u2) annotation (Line(points={{
-          -17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,0,127}));
+  connect(efficiencyTableLoadDepending.y[1], etaCalculation.u1) annotation (
+      Line(points={{-17.95,60.5},{-10.975,60.5},{-10.975,56},{-2,56}}, color={0,
+          0,127}));
+  connect(efficiencyTableLoadDepending1.y[1], etaCalculation.u2) annotation (
+      Line(points={{-17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,
+          0,127}));
   connect(senTCold.T, efficiencyTableLoadDepending1.u[1]) annotation (Line(
         points={{-70,-69},{-72,-69},{-72,30.5},{-42.1,30.5}}, color={0,0,127}));
-  connect(QflowCalculation.u1, eta.y)
+  connect(QflowCalculation.u1, etaCalculation.y)
     annotation (Line(points={{-54,14},{21,14},{21,50}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
