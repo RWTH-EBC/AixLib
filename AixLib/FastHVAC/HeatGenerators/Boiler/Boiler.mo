@@ -9,8 +9,8 @@ model Boiler "Simple boiler model"
   /* *******************************************************************
     Boiler Parameters
      ******************************************************************* */
-  parameter AixLib.FastHVAC.Data.Boiler.General.BoilerTwoPointBaseDataDefinition
-    paramBoiler= AixLib.FastHVAC.Data.Boiler.General.Boiler_Vitogas200F_11kW()
+  parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
+    paramBoiler= AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW()
     "Parameters for Boiler" annotation (Dialog(tab="General", group=
           "Boiler type"), choicesAllMatching=true);
 
