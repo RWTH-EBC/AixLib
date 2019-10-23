@@ -64,7 +64,8 @@ model BoilerNoControl "Boiler model with physics only"
     final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Table with efficiency parameters"
     annotation (Placement(transformation(extent={{-40,50},{-19,71}})));
-  Modelica.Blocks.Math.Product QflowCalculation annotation (Placement(
+  Modelica.Blocks.Math.Product QflowCalculation
+    "Calculation of the produced heatflow"      annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
