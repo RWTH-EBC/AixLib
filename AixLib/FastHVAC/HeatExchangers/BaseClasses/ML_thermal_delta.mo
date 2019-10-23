@@ -8,8 +8,8 @@ model ML_thermal_delta "Multi layers of heat exchanger"
      Parameters
      ******************************************************************* */
 
-     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Standard charastics for fluid (heat capacity, density, thermal conductivity)";
 
   parameter Modelica.SIunits.Mass m_radiator=20;

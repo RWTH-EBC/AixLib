@@ -5,10 +5,10 @@ model DynamicPipe "DynamicPipe with heat loss to ambient"
       Medium
      ******************************************************************* */
 parameter Boolean selectable=true "Pipe record";
-    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
-    annotation(choicesAllMatching);
+    annotation (choicesAllMatching);
 
 protected
     parameter Modelica.SIunits.Volume  V_fluid= Modelica.Constants.pi*length*innerDiameter*innerDiameter/4;

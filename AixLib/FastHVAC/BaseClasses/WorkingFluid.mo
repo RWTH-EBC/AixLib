@@ -1,7 +1,8 @@
 within AixLib.FastHVAC.BaseClasses;
 model WorkingFluid
 
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=AixLib.FastHVAC.Media.WaterSimple()
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)";
    parameter Modelica.SIunits.Temperature T0 " Initial temperature";
    parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";

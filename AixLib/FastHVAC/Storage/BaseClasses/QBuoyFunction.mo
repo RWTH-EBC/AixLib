@@ -5,8 +5,8 @@ function QBuoyFunction
   input Modelica.SIunits.Length height;
   input Modelica.SIunits.Area A;
   input Modelica.SIunits.Temperature[n] T;
-  input AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
-      AixLib.FastHVAC.Media.WaterSimple();
+  input AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple();
   input Modelica.SIunits.Time tau;
   input Modelica.SIunits.TemperatureDifference dTref;
   output Modelica.SIunits.HeatFlowRate[n] Q_buoy_abs

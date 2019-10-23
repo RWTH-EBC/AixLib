@@ -63,7 +63,7 @@ model ValidationRadiator
     annotation (Placement(transformation(extent={{14,-68},{32,-50}})));
   AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiatorFastHvac(
     selectable=true,
-    medium=FastHVAC.Media.WaterSimple(),
+    medium=Media.FastHvac.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
 
@@ -71,7 +71,7 @@ model ValidationRadiator
     annotation (Placement(transformation(extent={{-32,-76},{2,-42}})));
 
   AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
-        FastHVAC.Media.WaterSimple(c=4119, rho=995))
+        Media.FastHvac.WaterSimple(c=4119, rho=995))
     annotation (Placement(transformation(extent={{-64,-70},{-44,-50}})));
 equation
 

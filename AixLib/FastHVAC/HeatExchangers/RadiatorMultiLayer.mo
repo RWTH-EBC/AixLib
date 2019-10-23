@@ -4,7 +4,8 @@ model RadiatorMultiLayer "Simple radiator multilayer model"
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
 
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium= AixLib.FastHVAC.Media.WaterSimple()
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 

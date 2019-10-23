@@ -25,8 +25,8 @@ protected
     "Temperature difference between adjoining volumes";
 
   parameter Modelica.SIunits.ThermalConductivity lambda_water=0.64;
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
-      AixLib.FastHVAC.Media.WaterSimple();
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple();
 
 equation
   //buoyancy heat distribution to the different layers

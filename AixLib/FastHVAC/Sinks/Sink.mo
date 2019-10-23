@@ -1,8 +1,8 @@
 within AixLib.FastHVAC.Sinks;
 model Sink "Simple sink model"
 
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
     parameter Boolean isSource = false "For application as source enable true";

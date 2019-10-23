@@ -2,14 +2,12 @@
 model HeatPump "Base model of FastHVAC Heat Pump"
 
 //General
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
-      AixLib.FastHVAC.Media.WaterSimple()
-    "Medium at sink side"
-    annotation (Dialog(tab = "Condenser"),choicesAllMatching=true);
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_eva=
-      AixLib.FastHVAC.Media.WaterSimple()
-    "Medium at source side"
-    annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple Medium_con=
+      AixLib.Media.FastHvac.WaterSimple() "Medium at sink side"
+    annotation (Dialog(tab="Condenser"), choicesAllMatching=true);
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple Medium_eva=
+      AixLib.Media.FastHvac.WaterSimple() "Medium at source side"
+    annotation (Dialog(tab="Evaporator"), choicesAllMatching=true);
   parameter Boolean use_revHP=true
     "True if the HP is reversible"
     annotation(choices(choice=true "reversible HP",

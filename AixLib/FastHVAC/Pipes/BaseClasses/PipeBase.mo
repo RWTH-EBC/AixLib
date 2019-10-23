@@ -5,10 +5,10 @@ model PipeBase
       Medium
      ******************************************************************* */
     parameter Integer nNodes(min=1)=1 "Number of discrete flow volumes";
-    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
-    annotation(choicesAllMatching);
+    annotation (choicesAllMatching);
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"        annotation(Dialog(enable=not
           calcHCon));
   parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";

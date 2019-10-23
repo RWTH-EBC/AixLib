@@ -1,9 +1,10 @@
 within AixLib.FastHVAC.HeatGenerators.Boiler;
 model Boiler "Simple boiler model"
 
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
-    "Standard fluid charastics  (heat capacity, density, thermal conductivity)"            annotation (choicesAllMatching);
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
+    "Standard fluid charastics  (heat capacity, density, thermal conductivity)"
+    annotation (choicesAllMatching);
 
   /* *******************************************************************
     Boiler Parameters

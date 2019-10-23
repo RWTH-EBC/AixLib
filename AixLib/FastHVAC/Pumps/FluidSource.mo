@@ -5,8 +5,8 @@ model FluidSource " Ideal fluid source "
       Medium
      ******************************************************************* */
 
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Standard  charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 protected

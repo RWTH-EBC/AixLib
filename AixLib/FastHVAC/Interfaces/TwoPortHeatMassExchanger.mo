@@ -3,8 +3,8 @@ model TwoPortHeatMassExchanger
   "Model transporting one enthalpy stream with storing mass or energy"
   parameter Modelica.Media.Interfaces.Types.Temperature T_start = workingFluid.T0;
   parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
-  parameter Media.BaseClasses.MediumSimple medium=
-      AixLib.FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
      "Nominal mass flow rate"

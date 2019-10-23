@@ -6,20 +6,20 @@ model HeatStorageVariablePorts "Simple model of a heat storage"
      ******************************************************************* */
 
 public
-    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
-    annotation(Dialog(group="Medium"),choicesAllMatching);
+    annotation (Dialog(group="Medium"), choicesAllMatching);
 
-    parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple mediumHC1=
+      Media.FastHvac.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
-    annotation(Dialog(group="Medium"),choicesAllMatching);
+    annotation (Dialog(group="Medium"), choicesAllMatching);
 
-     parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
-      FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple mediumHC2=
+      Media.FastHvac.WaterSimple()
     "Mediums charastics HC2 (heat capacity, density, thermal conductivity)"
-    annotation(Dialog(group="Medium"),choicesAllMatching);
+    annotation (Dialog(group="Medium"), choicesAllMatching);
 
   parameter Modelica.SIunits.Temperature[n] T_start=fill(293.15, n)
     "Start temperature of medium" annotation(Dialog(tab="Initialisation"));

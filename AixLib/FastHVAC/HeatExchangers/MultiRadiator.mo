@@ -10,7 +10,8 @@ parameter Boolean selectable=false "Radiator record" annotation(Dialog(group="Ra
   parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
     "Choose a radiator" annotation (Dialog(group="Radiator Data", enable=
           selectable), choicesAllMatching=true);
-parameter FastHVAC.Media.BaseClasses.MediumSimple medium= FastHVAC.Media.WaterSimple()
+  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
+      Media.FastHvac.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 

@@ -4,18 +4,18 @@ model HeatStorage "Simple model of a heat storage"
       Medium
      ******************************************************************* */
 
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
-      AixLib.FastHVAC.Media.WaterSimple()
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
-    annotation(Dialog(group="Medium"),choicesAllMatching);
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
-      AixLib.FastHVAC.Media.WaterSimple()
+    annotation (Dialog(group="Medium"), choicesAllMatching);
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple mediumHC1=
+      AixLib.Media.FastHvac.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
-    annotation(Dialog(group="Medium"),choicesAllMatching);
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
-      AixLib.FastHVAC.Media.WaterSimple()
+    annotation (Dialog(group="Medium"), choicesAllMatching);
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple mediumHC2=
+      AixLib.Media.FastHvac.WaterSimple()
     "Mediums charastics for HC2 (heat capacity, density, thermal conductivity)"
-    annotation(Dialog(group="Medium"),choicesAllMatching);
+    annotation (Dialog(group="Medium"), choicesAllMatching);
   parameter Modelica.SIunits.Temperature T_start=323.15
     "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
   parameter Modelica.SIunits.Temperature T_start_wall=293.15

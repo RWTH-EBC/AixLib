@@ -4,12 +4,12 @@ model HeatPump
   AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{26,-82},{44,-64}})));
   AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
-        FastHVAC.Media.WaterSimple()) "Fluidsource for source"
+        Media.FastHvac.WaterSimple()) "Fluidsource for source"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
   AixLib.FastHVAC.HeatGenerators.HeatPump.HeatPump heatPump(
     refIneFre_constant=1,
-    Medium_con=Media.WaterSimple(),
-    Medium_eva=Media.WaterSimple(),
+    Medium_con=Media.FastHvac.WaterSimple(),
+    Medium_eva=Media.FastHvac.WaterSimple(),
     mFlow_conNominal=0.5,
     VCon=0.4,
     deltaM_con=0.1,

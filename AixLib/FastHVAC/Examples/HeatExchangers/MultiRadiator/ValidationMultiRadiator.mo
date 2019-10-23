@@ -27,10 +27,10 @@ model ValidationMultiRadiator
   AixLib.FastHVAC.Sinks.Vessel vessel1
     annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
   AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
-        FastHVAC.Media.WaterSimple())
+        Media.FastHvac.WaterSimple())
     annotation (Placement(transformation(extent={{-42,56},{-22,76}})));
   AixLib.FastHVAC.Pumps.FluidSource fluidSource1(medium=
-        FastHVAC.Media.WaterSimple())
+        Media.FastHvac.WaterSimple())
     annotation (Placement(transformation(extent={{-52,-76},{-32,-56}})));
   AixLib.FastHVAC.Sensors.TemperatureSensor temperatureSensor
     annotation (Placement(transformation(extent={{34,74},{52,56}})));
@@ -38,19 +38,19 @@ model ValidationMultiRadiator
     annotation (Placement(transformation(extent={{56,-46},{76,-66}})));
   AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML(
     selectable=true,
-    medium=FastHVAC.Media.WaterSimple(),
+    medium=Media.FastHvac.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML1(
     selectable=true,
-    medium=FastHVAC.Media.WaterSimple(),
+    medium=Media.FastHvac.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{0,-36},{20,-16}})));
   AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML2(
     selectable=true,
-    medium=FastHVAC.Media.WaterSimple(),
+    medium=Media.FastHvac.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{0,-84},{20,-64}})));
@@ -58,7 +58,7 @@ model ValidationMultiRadiator
     annotation (Placement(transformation(extent={{-114,10},{-94,30}})));
   AixLib.FastHVAC.HeatExchangers.MultiRadiator multiRadiator1(
     selectable=true,
-    medium=FastHVAC.Media.WaterSimple(),
+    medium=Media.FastHvac.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{-10,52},{12,78}})));
