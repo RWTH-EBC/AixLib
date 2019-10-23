@@ -67,11 +67,11 @@ model GenericAHU
     annotation (Placement(transformation(extent={{-210,70},{-230,90}}),
         iconTransformation(extent={{-210,70},{-230,90}})));
   RegisterModule perheater if usePreheater
-    annotation (Placement(transformation(extent={{-160,-46},{-116,14}})));
+    annotation (Placement(transformation(extent={{-154,-46},{-110,14}})));
   RegisterModule cooler
     annotation (Placement(transformation(extent={{2,-46},{46,14}})));
   RegisterModule heater
-    annotation (Placement(transformation(extent={{80,-46},{124,14}})));
+    annotation (Placement(transformation(extent={{76,-46},{120,14}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX
     annotation (Placement(transformation(extent={{-20,-10},{-62,42}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
@@ -84,18 +84,18 @@ model GenericAHU
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-130,-110},{-110,-90}}),
         iconTransformation(extent={{-130,-110},{-110,-90}})));
-  Fluid.Actuators.Dampers.Exponential dam
-    annotation (Placement(transformation(extent={{-200,-10},{-180,10}})));
-  Fluid.Actuators.Dampers.Exponential dam1
-    annotation (Placement(transformation(extent={{160,70},{140,90}})));
+  Fluid.Actuators.Dampers.Exponential flapSup
+    annotation (Placement(transformation(extent={{-190,-10},{-170,10}})));
+  Fluid.Actuators.Dampers.Exponential flapRet
+    annotation (Placement(transformation(extent={{200,70},{180,90}})));
   Fluid.Actuators.Dampers.Exponential dampHX
-    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
+    annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Fluid.Actuators.Dampers.Exponential dampByPass
     annotation (Placement(transformation(extent={{-80,-10},{-60,-30}})));
   Modelica.Blocks.Sources.Constant const(k=1)
-    annotation (Placement(transformation(extent={{-96,-54},{-88,-46}})));
+    annotation (Placement(transformation(extent={{-100,30},{-94,36}})));
   Modelica.Blocks.Math.Add add(k1=-1)
-    annotation (Placement(transformation(extent={{-82,-52},{-72,-42}})));
+    annotation (Placement(transformation(extent={{-88,34},{-80,42}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a4
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
@@ -112,49 +112,60 @@ model GenericAHU
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{110,-110},{130,-90}}),
         iconTransformation(extent={{108,-110},{128,-90}})));
-  Fluid.Movers.FlowControlled_dp fan
-    annotation (Placement(transformation(extent={{180,-10},{200,10}})));
-  Fluid.Movers.FlowControlled_dp fan1 annotation (Placement(transformation(
+  Fluid.Movers.FlowControlled_dp fanSup
+    annotation (Placement(transformation(extent={{156,-10},{176,10}})));
+  Fluid.Movers.FlowControlled_dp fanRet annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={110,80})));
+        origin={90,80})));
   Fluid.Humidifiers.GenericHumidifier_u
                                  humidifier(redeclare package Medium =
         MediumAir)
-    annotation (Placement(transformation(extent={{140,-10},{160,10}})));
+    annotation (Placement(transformation(extent={{130,-10},{150,10}})));
   Fluid.Humidifiers.GenericHumidifier_u
                                  humidifier1(redeclare package Medium =
         MediumAir, steamHumidifier=false)
     annotation (Placement(transformation(extent={{60,70},{40,90}})));
+  Fluid.Sensors.TemperatureTwoPort senTRet
+    annotation (Placement(transformation(extent={{160,70},{140,90}})));
+  Fluid.Sensors.TemperatureTwoPort senTExh
+    annotation (Placement(transformation(extent={{-140,70},{-160,90}})));
+  Fluid.Sensors.TemperatureTwoPort senTSup annotation (Placement(transformation(
+        extent={{-5,-6},{5,6}},
+        rotation=0,
+        origin={205,0})));
+  Fluid.Sensors.TemperatureTwoPort senTOA annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-204,0})));
+  Fluid.Sensors.VolumeFlowRate senVolFlo annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={-110,80})));
+  Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup
+    annotation (Placement(transformation(extent={{184,-6},{196,6}})));
+  Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup1
+    annotation (Placement(transformation(extent={{130,74},{118,86}})));
 equation
-  connect(perheater.port_a2, port_a3) annotation (Line(points={{-160,-27.5385},
-          {-164,-27.5385},{-164,-100},{-160,-100}},color={0,127,255}));
-  connect(perheater.port_b2, port_b3) annotation (Line(points={{-116,-27.5385},
-          {-112,-27.5385},{-112,-100},{-120,-100}},
-                                             color={0,127,255}));
+  connect(perheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
+          {-160,-27.5385},{-160,-100}},            color={0,127,255}));
+  connect(perheater.port_b2, port_b3) annotation (Line(points={{-110,-27.5385},
+          {-110,-100},{-120,-100}},          color={0,127,255}));
   connect(const.y, add.u2)
-    annotation (Line(points={{-87.6,-50},{-83,-50}}, color={0,0,127}));
-  connect(add.y, dampByPass.y) annotation (Line(points={{-71.5,-47},{-71.5,
-          -46.5},{-70,-46.5},{-70,-32}},
-                                  color={0,0,127}));
-  connect(add.u1, dampHX.y)
-    annotation (Line(points={{-83,-44},{-90,-44},{-90,12}}, color={0,0,127}));
-  connect(dampHX.port_b, dynamicHX.port_a2) annotation (Line(points={{-80,0},{
+    annotation (Line(points={{-93.7,33},{-94,33},{-94,35.6},{-88.8,35.6}},
+                                                     color={0,0,127}));
+  connect(dampHX.port_b, dynamicHX.port_a2) annotation (Line(points={{-70,0},{
           -64,0},{-64,0.4},{-62,0.4}},
                                    color={0,127,255}));
-  connect(perheater.port_b1, dampHX.port_a) annotation (Line(points={{-116,
-          0.153846},{-112,0.153846},{-112,0},{-100,0}},
+  connect(perheater.port_b1, dampHX.port_a) annotation (Line(points={{-110,
+          0.153846},{-112,0.153846},{-112,0},{-90,0}},
                                            color={0,127,255}));
-  connect(dam.port_b, perheater.port_a1) annotation (Line(points={{-180,0},{
-          -164,0},{-164,0.153846},{-160,0.153846}},
-                                               color={0,127,255}));
-  connect(port_a1, dam.port_a)
-    annotation (Line(points={{-220,0},{-200,0}}, color={0,127,255}));
+  connect(flapSup.port_b, perheater.port_a1) annotation (Line(points={{-170,0},
+          {-164,0},{-164,0.153846},{-154,0.153846}}, color={0,127,255}));
   connect(cooler.port_b1, heater.port_a1)
-    annotation (Line(points={{46,0.153846},{80,0.153846}}, color={0,127,255}));
+    annotation (Line(points={{46,0.153846},{76,0.153846}}, color={0,127,255}));
   connect(dampHX.port_a, dampByPass.port_a)
-    annotation (Line(points={{-100,0},{-100,-20},{-80,-20}},
-                                                           color={0,127,255}));
+    annotation (Line(points={{-90,0},{-90,-20},{-80,-20}}, color={0,127,255}));
   connect(dampByPass.port_b, dynamicHX.port_b2) annotation (Line(points={{-60,-20},
           {-20,-20},{-20,0.4}}, color={0,127,255}));
   connect(cooler.port_a2, port_a4) annotation (Line(points={{2,-27.5385},{-4,
@@ -163,35 +174,53 @@ equation
   connect(cooler.port_b2, port_b4) annotation (Line(points={{46,-27.5385},{46,
           -28},{48,-28},{48,-100},{40,-100}},
                                          color={0,127,255}));
-  connect(heater.port_a2, port_a5) annotation (Line(points={{80,-27.5385},{78,
-          -27.5385},{78,-28},{74,-28},{74,-100},{80,-100}},
-                                                  color={0,127,255}));
-  connect(heater.port_b2, port_b5) annotation (Line(points={{124,-27.5385},{128,
+  connect(heater.port_a2, port_a5) annotation (Line(points={{76,-27.5385},{76,
+          -100},{80,-100}},                       color={0,127,255}));
+  connect(heater.port_b2, port_b5) annotation (Line(points={{120,-27.5385},{128,
           -27.5385},{128,-28},{132,-28},{132,-100},{120,-100}}, color={0,127,255}));
-  connect(fan1.port_a, dam1.port_b)
-    annotation (Line(points={{120,80},{140,80}},color={0,127,255}));
-  connect(dynamicHX.port_b1, port_b2) annotation (Line(points={{-62,31.6},{-84,
-          31.6},{-84,80},{-220,80}},
-                               color={0,127,255}));
-  connect(dam1.port_a, port_a2)
-    annotation (Line(points={{160,80},{220,80}}, color={0,127,255}));
   connect(dynamicHX.port_b2, cooler.port_a1) annotation (Line(points={{-20,0.4},
           {-8,0.4},{-8,0.153846},{2,0.153846}}, color={0,127,255}));
-  connect(heater.port_b1, humidifier.port_a) annotation (Line(points={{124,0.153846},
-          {130,0.153846},{130,0},{140,0}}, color={0,127,255}));
-  connect(humidifier.port_b, fan.port_a)
-    annotation (Line(points={{160,0},{180,0}}, color={0,127,255}));
+  connect(heater.port_b1, humidifier.port_a) annotation (Line(points={{120,
+          0.153846},{130,0.153846},{130,0}},
+                                           color={0,127,255}));
+  connect(humidifier.port_b, fanSup.port_a)
+    annotation (Line(points={{150,0},{156,0}}, color={0,127,255}));
   if usePreheater==false then
-    connect(dam.port_b, dampHX.port_a) annotation (Line(points={{-180,0},{-170,
-            0},{-170,28},{-100,28},{-100,0}},
-                                       color={0,127,255}));
+    connect(flapSup.port_b, dampHX.port_a) annotation (Line(points={{-170,0},{
+            -166,0},{-166,22},{-90,22},{-90,0}}, color={0,127,255}));
   end if;
-  connect(fan1.port_b, humidifier1.port_a)
-    annotation (Line(points={{100,80},{60,80}}, color={0,127,255}));
+  connect(fanRet.port_b, humidifier1.port_a)
+    annotation (Line(points={{80,80},{60,80}}, color={0,127,255}));
   connect(humidifier1.port_b, dynamicHX.port_a1) annotation (Line(points={{40,80},
           {24,80},{24,31.6},{-20,31.6}},     color={0,127,255}));
-  connect(fan.port_b, port_b1)
-    annotation (Line(points={{200,0},{220,0}}, color={0,127,255}));
+  connect(senTExh.port_b, port_b2)
+    annotation (Line(points={{-160,80},{-220,80}}, color={0,127,255}));
+  connect(senTSup.port_b, port_b1)
+    annotation (Line(points={{210,0},{220,0}}, color={0,127,255}));
+  connect(port_a1, senTOA.port_a)
+    annotation (Line(points={{-220,0},{-214,0}}, color={0,127,255}));
+  connect(senTOA.port_b, flapSup.port_a)
+    annotation (Line(points={{-194,0},{-190,0}}, color={0,127,255}));
+  connect(dynamicHX.port_b1, senVolFlo.port_a) annotation (Line(points={{-62,
+          31.6},{-62,80},{-100,80}}, color={0,127,255}));
+  connect(senVolFlo.port_b, senTExh.port_a)
+    annotation (Line(points={{-120,80},{-140,80}}, color={0,127,255}));
+  connect(add.y, dampHX.y) annotation (Line(points={{-79.6,38},{-79.6,26.5},{
+          -80,26.5},{-80,12}}, color={0,0,127}));
+  connect(dampByPass.y, add.u1) annotation (Line(points={{-70,-32},{-104,-32},{
+          -104,40.4},{-88.8,40.4}}, color={0,0,127}));
+  connect(fanSup.port_b, senRelHumSup.port_a)
+    annotation (Line(points={{176,0},{184,0}}, color={0,127,255}));
+  connect(senRelHumSup.port_b, senTSup.port_a)
+    annotation (Line(points={{196,0},{200,0}}, color={0,127,255}));
+  connect(senTRet.port_b, senRelHumSup1.port_a)
+    annotation (Line(points={{140,80},{130,80}}, color={0,127,255}));
+  connect(port_a2, flapRet.port_a)
+    annotation (Line(points={{220,80},{200,80}}, color={0,127,255}));
+  connect(flapRet.port_b, senTRet.port_a)
+    annotation (Line(points={{180,80},{160,80}}, color={0,127,255}));
+  connect(senRelHumSup1.port_b, fanRet.port_a)
+    annotation (Line(points={{118,80},{100,80}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -100},{220,100}}), graphics={
         Rectangle(extent={{-164,38},{-116,-40}}, lineColor={0,0,0}),
