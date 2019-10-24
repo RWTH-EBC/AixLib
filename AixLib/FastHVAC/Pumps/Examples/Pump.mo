@@ -14,7 +14,7 @@ model Pump
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{60,-2},{80,16}})));
   AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boilerBase(paramBoiler=
-        Data.Boiler.General.Boiler_Vitogas200F_11kW(), T_start=333.15)
+        DataBase.Boiler.General.Boiler_Vitogas200F_11kW(), T_start=333.15)
     annotation (Placement(transformation(extent={{-68,-4},{-46,18}})));
   Modelica.Blocks.Sources.BooleanExpression booleanOnOffBoiler(y=true)
     annotation (Placement(transformation(extent={{-90,20},{-70,40}})));

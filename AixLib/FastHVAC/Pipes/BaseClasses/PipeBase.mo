@@ -76,7 +76,7 @@ equation
       color={176,0,0},
       smooth=Smooth.None));
   for i in 1:nNodes loop
-      connect(massFlowRate.dotm,heatConvPipeInside[i].m_flow);
+    connect(massFlowRate.m_flow, heatConvPipeInside[i].m_flow);
   end for;
   connect(pipeFluid.heatPort, heatConvPipeInside.port_b)
     annotation (Line(points={{0,18.8},{0,28}}, color={191,0,0}));

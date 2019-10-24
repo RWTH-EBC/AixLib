@@ -16,8 +16,6 @@ model EnergyBalance "Base class depicts energy and mass balances"
     "Heat port includes the parameter temperature and heat flow" annotation (Placement(
         transformation(extent={{-20,60},{20,100}}), iconTransformation(extent={{
             -20,60},{20,100}})));
-  Modelica.SIunits.EnthalpyFlowRate H_a "Enthalpy flow rate at port a";
-  Modelica.SIunits.EnthalpyFlowRate H_b "Enthalpy flow rate at port b";
 protected
   parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
     "medium's specific heat capacity";
@@ -26,20 +24,16 @@ equation
   // Mass and energy balances
   m_flow = enthalpyPort_a.m_flow;
   enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
-  // H_a = port_a.m_flow * actualStream(port_a.h_outflow);
-  // H_b = port_b.m_flow * actualStream(port_b.h_outflow);
-  // H_a + H_b = heatPort_a.Q_flow
-
-  enthalpyPort_b.T_outflow = heatPort_a.T;
-  enthalpyPort_a.T_outflow = heatPort_a.T;
+//   enthalpyPort_b.T_outflow = heatPort_a.T;
+//   enthalpyPort_a.T_outflow = heatPort_a.T;
   enthalpyPort_b.h_outflow = cp * heatPort_a.T;
-  enthalpyPort_a.h_outflow = cp * heatPort_a.T;
+  enthalpyPort_a.h_outflow = 0;
 
 //   enthalpyPort_b.c_outflow = inStream(enthalpyPort_a.c_outflow);
 //   enthalpyPort_a.c_outflow = inStream(enthalpyPort_b.c_outflow);
 
-  enthalpyPort_a.dummy_potential = 1;
-  enthalpyPort_b.dummy_potential = 1;
+  enthalpyPort_a.dummy_potential = enthalpyPort_b.dummy_potential;
+
 
   heatPort_a.Q_flow = - m_flow * (actualStream(enthalpyPort_a.h_outflow) - actualStream(enthalpyPort_b.h_outflow))
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,

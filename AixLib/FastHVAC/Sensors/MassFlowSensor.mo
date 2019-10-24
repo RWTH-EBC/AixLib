@@ -1,15 +1,10 @@
 within AixLib.FastHVAC.Sensors;
 model MassFlowSensor "Mass flow sensor"
 
-  Modelica.Blocks.Interfaces.RealOutput dotm( unit="kg/s")
+  Modelica.Blocks.Interfaces.RealOutput m_flow(unit="kg/s")
     "Output value which contains the measured mass flow of the fluid"
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,90}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={10,90})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=
+            90)));
   Interfaces.EnthalpyPort_a enthalpyPort_a "Input connector"
     annotation (Placement(transformation(extent={{-100,-12},{-78,10}}),
         iconTransformation(extent={{-100,-12},{-76,10}})));
@@ -17,7 +12,7 @@ model MassFlowSensor "Mass flow sensor"
     annotation (Placement(transformation(extent={{80,-12},{102,10}}),
         iconTransformation(extent={{78,-12},{102,10}})));
 equation
-  dotm = enthalpyPort_a.m_flow;
+  m_flow = enthalpyPort_a.m_flow;
 
   connect(enthalpyPort_a, enthalpyPort_b) annotation (Line(
       points={{-89,-1},{91,-1}},
