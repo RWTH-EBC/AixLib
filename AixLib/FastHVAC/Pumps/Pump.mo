@@ -5,8 +5,8 @@ model Pump " Ideal pump "
       Medium
      ******************************************************************* */
 
-  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
-      Media.FastHvac.WaterSimple()
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 protected
@@ -37,12 +37,15 @@ public
 equation
   // balances
   enthalpyPort_b.m_flow = dotm_setValue " set value of outlet port ";
-  enthalpyPort_b.c = cp " set value of outlet port ";
+//   enthalpyPort_b.c_outflow = cp " set value of outlet port ";
 
   // constant values
-  enthalpyPort_a.T = enthalpyPort_b.T;
-  enthalpyPort_a.h = enthalpyPort_b.h;
 
+  enthalpyPort_b.T_outflow = inStream(enthalpyPort_a.T_outflow);
+  enthalpyPort_b.h_outflow = inStream(enthalpyPort_a.h_outflow);
+  enthalpyPort_a.h_outflow = 0;
+  enthalpyPort_a.T_outflow = 273.15;
+  enthalpyPort_b.dummy_potential = 1;
     annotation (
     defaultComponentName="pump",
     choicesAllMatching, Documentation(info="<html><h4>

@@ -1,6 +1,8 @@
 within AixLib.FastHVAC.Sensors;
 model TemperatureSensor " Temperature sensor"
-
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
+      "Mediums charastics (heat capacity, density, thermal conductivity)";
   Modelica.Blocks.Interfaces.RealOutput T( final quantity="ThermodynamicTemperature",
                                           final unit = "K", displayUnit = "degC", min=0)
     "Output value which contains the measured temperature of the fluid"
@@ -18,8 +20,11 @@ model TemperatureSensor " Temperature sensor"
   FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b "Output connector"
     annotation (Placement(transformation(extent={{80,-12},{102,10}}),
         iconTransformation(extent={{78,-12},{102,10}})));
+protected
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
+    "medium's specific heat capacity";
 equation
-  T = enthalpyPort_a.T;
+  T =inStream(enthalpyPort_a.h_outflow) / cp;
 
   connect(enthalpyPort_a, enthalpyPort_b) annotation (Line(
       points={{-89,-1},{91,-1}},

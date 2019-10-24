@@ -4,11 +4,13 @@ model Vessel "Vessel model"
         transformation(extent={{-88,-18},{-52,18}}), iconTransformation(extent={
             {-88,-18},{-52,18}})));
 
+
 equation
-  enthalpyPort_a.p = 1000;
+  enthalpyPort_a.dummy_potential = 1;
   enthalpyPort_a.h_outflow = 0;
-  enthalpyPort_a.T_outflow = 0;
-  enthalpyPort_a.c_outflow = 0;
+  // enthalpyPort_a.T_outflow = 273.15;
+
+//   enthalpyPort_a.c_outflow = 0;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=
             false, extent={{-100,-100},{100,100}}), graphics={Rectangle(

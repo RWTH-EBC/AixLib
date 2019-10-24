@@ -53,16 +53,14 @@ public
     parameter Boolean withInsulation = true
     "Option to add insulation of the pipe";
     parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition
-                                                   parameterIso=
-                 AixLib.DataBase.Pipes.Insulation.Iso100pc() "Type of Insulation"
-                   annotation (choicesAllMatching=true, Dialog( enable = withInsulation));
+      parameterIso=AixLib.DataBase.Pipes.Insulation.Iso100pc()
+      "Type of Insulation" annotation (choicesAllMatching=true, Dialog( enable = withInsulation));
     parameter Boolean withConvection = false
     "= true to internally simulate heat loss to ambient by convection ";
-
-        parameter Boolean withRadiation=false
+    parameter Boolean withRadiation=false
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = withConvection));
 
-final parameter          Boolean withRadiationParam=if not withConvection then false else withRadiation
+  final parameter Boolean withRadiationParam=if not withConvection then false else withRadiation
     "= true to internally simulate heat loss to ambient by radiation (only works with convection = true)" annotation (Dialog( enable = false));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=8 "Heat transfer coefficient to ambient"
                                                                 annotation (Dialog( enable=withConvection));

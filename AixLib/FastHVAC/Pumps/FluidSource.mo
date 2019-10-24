@@ -1,22 +1,9 @@
 within AixLib.FastHVAC.Pumps;
 model FluidSource " Ideal fluid source "
-
-
-  /* *******************************************************************
-      Medium
-     ******************************************************************* */
-  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
-      Media.FastHvac.WaterSimple()
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Standard  charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
-protected
-  parameter Modelica.SIunits.SpecificHeatCapacity cp=medium.c
-    "medium's specific heat capacity";
-  /* *******************************************************************
-      Components
-     ******************************************************************* */
-
-public
   Modelica.Blocks.Interfaces.RealInput T_fluid( unit="K")
     "External real input to set the temperature of the fluid"
     annotation (Placement(transformation(extent={{-100,22},{-60,62}})));
@@ -25,15 +12,18 @@ public
     annotation (Placement(transformation(extent={{-100,-46},{-60,-6}})));
   Interfaces.EnthalpyPort_b enthalpyPort_b annotation (Placement(transformation(
           extent={{90,-10},{110,10}}), iconTransformation(extent={{80,10},{100,30}})));
+protected
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
+    "medium's specific heat capacity";
+
+
+
 equation
   // balances
   enthalpyPort_b.m_flow = - dotm " set value of outlet port ";
-  enthalpyPort_b.c_outflow = cp " set value of outlet port ";
-  enthalpyPort_b.T_outflow = T_fluid " set value of outlet port ";
+//   enthalpyPort_b.c_outflow = cp " set value of outlet port ";
+  // enthalpyPort_b.T_outflow = T_fluid " set value of outlet port ";
   enthalpyPort_b.h_outflow = cp * T_fluid " set value of outlet port ";
-
-
-
     annotation (
     defaultComponentName="fluidSource",
     choicesAllMatching, Documentation(info="<html><h4>
