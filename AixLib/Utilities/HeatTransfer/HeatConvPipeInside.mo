@@ -9,8 +9,8 @@ model HeatConvPipeInside
   parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Constant convective heat transfer coefficient (Inside)"
                                                                            annotation(Dialog(enable=not calcHCon));
-  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
-      FastHVAC.Media.WaterSimple();
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple();
     Modelica.SIunits.ReynoldsNumber Re;
   Modelica.SIunits.Velocity v;
   Modelica.SIunits.NusseltNumber Nu;

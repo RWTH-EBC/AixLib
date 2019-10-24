@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.BaseClasses;
 model EnergyBalance "Base class depicts energy and mass balances"
-
+  Modelica.SIunits.MassFlowRate m_flow "";
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     "Enthalpie input port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"
     annotation (Placement(transformation(extent={{-100,-20},{-40,38}}),
@@ -17,12 +17,19 @@ model EnergyBalance "Base class depicts energy and mass balances"
 
 equation
   // Mass and energy balances
-  enthalpyPort_a.m_flow - enthalpyPort_b.m_flow = 0;
-  enthalpyPort_b.T = heatPort_a.T;
-  enthalpyPort_b.h = enthalpyPort_a.c*heatPort_a.T;
-  enthalpyPort_b.c = enthalpyPort_a.c;
-  heatPort_a.Q_flow = -(enthalpyPort_a.h*enthalpyPort_a.m_flow - enthalpyPort_b.h*enthalpyPort_b.m_flow);
+  m_flow = enthalpyPort_a.m_flow;
+  enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
+  enthalpyPort_b.T_outflow = heatPort_a.T;
+  enthalpyPort_a.T_outflow = heatPort_a.T;
+  enthalpyPort_b.h_outflow = inStream(enthalpyPort_a.c_outflow) * heatPort_a.T;
+  enthalpyPort_a.h_outflow = inStream(enthalpyPort_b.c_outflow) * heatPort_a.T;
 
+  actualStream(enthalpyPort_b.c_outflow) = actualStream(enthalpyPort_a.c_outflow);
+
+  enthalpyPort_a.p = 1000;
+  enthalpyPort_b.p = 1000;
+
+  heatPort_a.Q_flow = - m_flow * (actualStream(enthalpyPort_a.h_outflow) - actualStream(enthalpyPort_b.h_outflow))
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Rectangle(
           extent={{-60,60},{60,-60}},
@@ -57,4 +64,5 @@ equation
   </li>
 </ul>
 </html>"));
+
 end EnergyBalance;

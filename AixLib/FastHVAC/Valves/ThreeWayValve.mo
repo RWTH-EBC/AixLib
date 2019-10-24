@@ -23,9 +23,8 @@ model ThreeWayValve
 
 equation
   // mass balance
-  enthalpyPort_a.m_flow = enthalpyPort_ab.m_flow*opening;
-  - enthalpyPort_ab.m_flow + enthalpyPort_a.m_flow + enthalpyPort_b.m_flow =
-    0;
+   enthalpyPort_a.m_flow = -enthalpyPort_ab.m_flow*opening;
+  enthalpyPort_ab.m_flow + enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
   // constant values
   enthalpyPort_a.T = enthalpyPort_ab.T;
   enthalpyPort_ab.T = enthalpyPort_b.T;

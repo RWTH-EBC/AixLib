@@ -1,17 +1,14 @@
 within AixLib.FastHVAC.Pipes;
 model DynamicPipe "DynamicPipe with heat loss to ambient"
-
-  /* *******************************************************************
-      Medium
-     ******************************************************************* */
-parameter Boolean selectable=true "Pipe record";
-  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
-      Media.FastHvac.WaterSimple()
+  parameter Boolean selectable=true "Pipe record";
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 
 protected
-    parameter Modelica.SIunits.Volume  V_fluid= Modelica.Constants.pi*length*innerDiameter*innerDiameter/4;
+    parameter Modelica.SIunits.Volume  V_fluid = Modelica.Constants.pi * length
+      * innerDiameter * innerDiameter / 4;
     parameter Modelica.SIunits.Diameter innerDiameter=(if selectable then parameterPipe.d_i else diameter)
     "Inner diameter of  pipe";
     parameter Modelica.SIunits.Diameter outerDiameter=(if selectable then parameterPipe.d_o else innerDiameter+2*s_pipeWall)

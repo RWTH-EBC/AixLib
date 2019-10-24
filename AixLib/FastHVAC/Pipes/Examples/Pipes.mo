@@ -43,12 +43,12 @@ model Pipes
     annotation (Placement(transformation(extent={{-32,-10},{-16,6}})));
   Modelica.Blocks.Sources.Constant TFlow3(
                                          k=273.15 + 60)
-    annotation (Placement(transformation(extent={{-98,62},{-82,76}})));
+    annotation (Placement(transformation(extent={{-96,62},{-80,76}})));
   Modelica.Blocks.Sources.Ramp mFlow3(
                                      height=1, duration=5000)
-    annotation (Placement(transformation(extent={{-96,38},{-82,52}})));
+    annotation (Placement(transformation(extent={{-94,38},{-80,52}})));
   AixLib.FastHVAC.Pumps.FluidSource fluidSource3
-    annotation (Placement(transformation(extent={{-74,36},{-54,56}})));
+    annotation (Placement(transformation(extent={{-72,36},{-52,56}})));
   AixLib.FastHVAC.Pipes.DynamicPipe PipeInsulation(
     withInsulation=true,
     withRadiation=false,
@@ -56,7 +56,7 @@ model Pipes
     annotation (Placement(transformation(extent={{-16,32},{4,52}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperatureSurroundingAir1(T=288.15)
-    annotation (Placement(transformation(extent={{-32,54},{-16,70}})));
+    annotation (Placement(transformation(extent={{-30,54},{-14,70}})));
   AixLib.FastHVAC.Sinks.Vessel vessel3
     annotation (Placement(transformation(extent={{68,32},{88,52}})));
 equation
@@ -74,15 +74,15 @@ equation
     annotation (Line(points={{-16,-2},{-16,-12.8},{-14.8,-12.8}}, color={191,
           0,0}));
   connect(fluidSource2.enthalpyPort_b, PipeInsulationAndConvection.enthalpyPort_a1)
-    annotation (Line(points={{-54,-17},{-43,-17},{-43,-18},{-15.8,-18}},
+    annotation (Line(points={{-55,-16},{-43,-16},{-43,-18},{-15.8,-18}},
         color={176,0,0}));
   connect(fixedTemperatureSurroundingAir1.port, PipeInsulation.heatPort_outside)
-    annotation (Line(points={{-16,62},{-16,47.2},{-14.8,47.2}}, color={191,0,
+    annotation (Line(points={{-14,62},{-14,47.2},{-14.8,47.2}}, color={191,0,
           0}));
-  connect(TFlow3.y, fluidSource3.T_fluid) annotation (Line(points={{-81.2,69},
-          {-81.2,59.5},{-72,59.5},{-72,50.2}}, color={0,0,127}));
+  connect(TFlow3.y, fluidSource3.T_fluid) annotation (Line(points={{-79.2,69},{
+          -79.2,59.5},{-70,59.5},{-70,50.2}},  color={0,0,127}));
   connect(fluidSource3.enthalpyPort_b, PipeInsulation.enthalpyPort_a1)
-    annotation (Line(points={{-54,47},{-36,47},{-36,42},{-15.8,42}}, color={
+    annotation (Line(points={{-53,48},{-34,48},{-34,42},{-15.8,42}}, color={
           176,0,0}));
   connect(PipeInsulation.enthalpyPort_b1, vessel3.enthalpyPort_a)
     annotation (Line(points={{3.8,42},{71,42}}, color={176,0,0}));
@@ -90,12 +90,12 @@ equation
     annotation (Line(points={{3.8,-18},{71,-18}}, color={176,0,0}));
   connect(fluidSource1.enthalpyPort_b,
     PipeInsulationAndConvectionandRadiation.enthalpyPort_a1) annotation (Line(
-        points={{-56,-85},{-34,-85},{-34,-86},{-13.8,-86}}, color={176,0,0}));
+        points={{-57,-84},{-34,-84},{-34,-86},{-13.8,-86}}, color={176,0,0}));
   connect(PipeInsulationAndConvectionandRadiation.enthalpyPort_b1, vessel1.enthalpyPort_a)
     annotation (Line(points={{5.8,-86},{36,-86},{36,-84},{69,-84}}, color={
           176,0,0}));
-  connect(mFlow3.y, fluidSource3.dotm) annotation (Line(points={{-81.3,45},{
-          -77.65,45},{-77.65,43.4},{-72,43.4}}, color={0,0,127}));
+  connect(mFlow3.y, fluidSource3.dotm) annotation (Line(points={{-79.3,45},{
+          -75.65,45},{-75.65,43.4},{-70,43.4}}, color={0,0,127}));
   connect(mFlow2.y, fluidSource2.dotm) annotation (Line(points={{-81.3,-19},{
           -77.65,-19},{-77.65,-20.6},{-72,-20.6}}, color={0,0,127}));
   connect(mFlow1.y, fluidSource1.dotm) annotation (Line(points={{-83.3,-87},{
