@@ -24,17 +24,9 @@ equation
   // Mass and energy balances
   m_flow = enthalpyPort_a.m_flow;
   enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
-//   enthalpyPort_b.T_outflow = heatPort_a.T;
-//   enthalpyPort_a.T_outflow = heatPort_a.T;
   enthalpyPort_b.h_outflow = cp * heatPort_a.T;
   enthalpyPort_a.h_outflow = 0;
-
-//   enthalpyPort_b.c_outflow = inStream(enthalpyPort_a.c_outflow);
-//   enthalpyPort_a.c_outflow = inStream(enthalpyPort_b.c_outflow);
-
   enthalpyPort_a.dummy_potential = enthalpyPort_b.dummy_potential;
-
-
   heatPort_a.Q_flow = - m_flow * (actualStream(enthalpyPort_a.h_outflow) - actualStream(enthalpyPort_b.h_outflow))
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Rectangle(
@@ -71,4 +63,17 @@ equation
 </ul>
 </html>"));
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    <i>Ocotober 24, 2019</i>, by David Jansen:<br/>
+    Reworked for using massflow as flow variable
+  </li>  
+  <li>
+    <br/>
+    April 25, 2017, by Michael Mans:<br/>
+    Moved to AixLib
+  </li>
+</ul>
+</html>"));
 end EnergyBalance;

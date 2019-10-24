@@ -66,7 +66,6 @@ model ValidationRadiator
     medium=Media.FastHvac.WaterSimple(),
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(),
-
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
     annotation (Placement(transformation(extent={{-32,-76},{2,-42}})));
 
@@ -102,7 +101,7 @@ equation
       points={{-48,-30},{-24.18,-30},{-24.18,-49.14}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(dotm_source.y, fluidSource.dotm) annotation (Line(
+  connect(dotm_source.y, fluidSource.m_flow) annotation (Line(
       points={{-89,-78},{-62,-78},{-62,-62.6}},
       color={0,0,127},
       smooth=Smooth.None));

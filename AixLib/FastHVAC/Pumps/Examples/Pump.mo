@@ -12,7 +12,7 @@ model Pump
   AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiator_ML(selectable=true,
       radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
-    annotation (Placement(transformation(extent={{60,-2},{80,16}})));
+    annotation (Placement(transformation(extent={{94,-82},{114,-64}})));
   AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boilerBase(paramBoiler=
         DataBase.Boiler.General.Boiler_Vitogas200F_11kW(), T_start=333.15)
     annotation (Placement(transformation(extent={{-68,-4},{-46,18}})));
@@ -24,19 +24,24 @@ model Pump
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={46,34})));
+        origin={80,-46})));
+  HeatExchangers.RadiatorMultiLayer                 radiator_ML1(selectable=
+        true, radiatorType=
+        DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+    annotation (Placement(transformation(extent={{98,10},{118,28}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature idealSink1(T=294.15)
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={84,46})));
 equation
   connect(boilerBase.enthalpyPort_b1, pump.enthalpyPort_a) annotation (Line(
       points={{-51.5,7},{-13.52,7}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(pump.enthalpyPort_b, radiator_ML.enthalpyPort_a1) annotation (Line(
-      points={{9.52,7},{30,7},{30,6.82},{62,6.82}},
-      color={176,0,0},
-      smooth=Smooth.None));
   connect(radiator_ML.enthalpyPort_b1, boilerBase.enthalpyPort_a1)
     annotation (Line(
-      points={{78,6.82},{78,-20},{-62.5,-20},{-62.5,6.78}},
+      points={{112,-73.18},{112,-20},{-62.5,-20},{-62.5,6.78}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(mdot.y, pump.dotm_setValue) annotation (Line(
@@ -51,10 +56,21 @@ equation
       points={{-69,30},{-53.7,30},{-53.7,14.7}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(radiator_ML.ConvectiveHeat, idealSink.port) annotation (Line(points={
-          {64.6,12.22},{64.6,14},{32,14},{32,34},{36,34}}, color={191,0,0}));
-  connect(radiator_ML.RadiativeHeat, idealSink.port) annotation (Line(points={{
-          75.6,12.4},{75.6,18},{36,18},{36,34}}, color={95,95,95}));
+  connect(radiator_ML.ConvectiveHeat, idealSink.port) annotation (Line(points={{98.6,
+          -67.78},{98.6,-66},{66,-66},{66,-46},{70,-46}},  color={191,0,0}));
+  connect(radiator_ML.RadiativeHeat, idealSink.port) annotation (Line(points={{109.6,
+          -67.6},{109.6,-62},{70,-62},{70,-46}}, color={95,95,95}));
+  connect(radiator_ML1.ConvectiveHeat, idealSink1.port) annotation (Line(points
+        ={{102.6,24.22},{102.6,26},{70,26},{70,46},{74,46}}, color={191,0,0}));
+  connect(radiator_ML1.RadiativeHeat, idealSink1.port) annotation (Line(points=
+          {{113.6,24.4},{113.6,30},{74,30},{74,46}}, color={95,95,95}));
+  connect(pump.enthalpyPort_b, radiator_ML1.enthalpyPort_a1) annotation (Line(
+        points={{9.52,7},{53.76,7},{53.76,18.82},{100,18.82}}, color={176,0,0}));
+  connect(radiator_ML1.enthalpyPort_b1, boilerBase.enthalpyPort_a1) annotation
+    (Line(points={{116,18.82},{122,18.82},{122,18},{126,18},{126,-94},{-84,-94},
+          {-84,6.78},{-62.5,6.78}}, color={176,0,0}));
+  connect(pump.enthalpyPort_b, radiator_ML.enthalpyPort_a1) annotation (Line(
+        points={{9.52,7},{52.76,7},{52.76,-73.18},{96,-73.18}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(

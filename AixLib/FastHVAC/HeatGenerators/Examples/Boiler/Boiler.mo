@@ -43,7 +43,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(dotm_source.y, fluidSource.dotm) annotation (Line(
+  connect(dotm_source.y, fluidSource.m_flow) annotation (Line(
       points={{-63,-20},{-54,-20},{-54,-4.6}},
       color={0,0,127},
       smooth=Smooth.None));

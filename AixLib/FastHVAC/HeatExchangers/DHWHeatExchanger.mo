@@ -111,9 +111,9 @@ equation
   //Entering and leaving the heat exchanger
 
   T_DHW= to_degC1.y;
-  to_degC1.u= enthalpyPort_dHWOut.T;
+  to_degC1.u=enthalpyPort_dHWOut.T_outflow;
   T_return =to_degC.y;
-  to_degC.u= enthalpyPort_heaterOut.T;
+  to_degC.u=enthalpyPort_heaterOut.T_outflow;
   dotQ = sum(heat_transfer.Q_flow);
 
   connect(layer_heater[1].enthalpyPort_a, enthalpyPort_heaterIn);

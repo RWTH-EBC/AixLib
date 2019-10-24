@@ -94,11 +94,11 @@ equation
   connect(PipeInsulationAndConvectionandRadiation.enthalpyPort_b1, vessel1.enthalpyPort_a)
     annotation (Line(points={{5.8,-86},{36,-86},{36,-84},{69,-84}}, color={
           176,0,0}));
-  connect(mFlow3.y, fluidSource3.dotm) annotation (Line(points={{-79.3,45},{
+  connect(mFlow3.y, fluidSource3.m_flow) annotation (Line(points={{-79.3,45},{
           -75.65,45},{-75.65,43.4},{-70,43.4}}, color={0,0,127}));
-  connect(mFlow2.y, fluidSource2.dotm) annotation (Line(points={{-81.3,-19},{
+  connect(mFlow2.y, fluidSource2.m_flow) annotation (Line(points={{-81.3,-19},{
           -77.65,-19},{-77.65,-20.6},{-72,-20.6}}, color={0,0,127}));
-  connect(mFlow1.y, fluidSource1.dotm) annotation (Line(points={{-83.3,-87},{
+  connect(mFlow1.y, fluidSource1.m_flow) annotation (Line(points={{-83.3,-87},{
           -78.65,-87},{-78.65,-88.6},{-74,-88.6}}, color={0,0,127}));
   annotation (experiment(StopTime=5000), Diagram(graphics={
         Rectangle(

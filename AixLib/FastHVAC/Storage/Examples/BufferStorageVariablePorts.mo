@@ -116,7 +116,7 @@ equation
       points={{66,-48.2},{66,-48},{79,-48}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(dotmUnload1.y, fluidSource1.dotm) annotation (Line(
+  connect(dotmUnload1.y, fluidSource1.m_flow) annotation (Line(
       points={{79,-12},{66,-12},{66,-41.4}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -124,7 +124,7 @@ equation
       points={{18,-79},{18,-70},{23.8,-70}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(dotmUnload2.y, fluidSource2.dotm) annotation (Line(
+  connect(dotmUnload2.y, fluidSource2.m_flow) annotation (Line(
       points={{52,-79},{52,-70},{30.6,-70}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -132,7 +132,7 @@ equation
       points={{-79,18},{-66,18},{-66,6.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(dotmHC1.y, fluidSource4.dotm) annotation (Line(
+  connect(dotmHC1.y, fluidSource4.m_flow) annotation (Line(
       points={{-79,-14},{-66,-14},{-66,-0.6}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -140,11 +140,11 @@ equation
       points={{-79,-52},{-66,-52},{-66,-65.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(dotmHC2.y, fluidSource5.dotm) annotation (Line(
+  connect(dotmHC2.y, fluidSource5.m_flow) annotation (Line(
       points={{-79,-86},{-66,-86},{-66,-72.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(dotmLoad1.y, fluidSource.dotm) annotation (Line(
+  connect(dotmLoad1.y, fluidSource.m_flow) annotation (Line(
       points={{-79,52},{-68,52},{-68,57.4}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -157,7 +157,7 @@ equation
         color={176,0,0}));
   connect(heatStorageVariablePorts.out, ambient.port) annotation (Line(points={
           {37.2,14},{56,14},{56,16},{76,16}}, color={191,0,0}));
-  connect(dotmLoad2.y, fluidSource3.dotm) annotation (Line(points={{-24,79},{
+  connect(dotmLoad2.y, fluidSource3.m_flow) annotation (Line(points={{-24,79},{
           -24,79},{-24,72},{-24,72},{-4.6,72},{-4.6,68}}, color={0,0,127}));
   connect(vessel4.enthalpyPort_a, heatStorageVariablePorts.port_HC1_out)
     annotation (Line(points={{-16.6,-4},{-1.14,-4}}, color={176,0,0}));

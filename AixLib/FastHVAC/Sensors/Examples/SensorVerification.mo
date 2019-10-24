@@ -49,7 +49,7 @@ equation
       smooth=Smooth.None));
   connect(fluidSource1.enthalpyPort_b, massFlowFastHVAC.enthalpyPort_a)
     annotation (Line(
-      points={{-34,45},{-18,45},{-18,44.89},{-6.68,44.89}},
+      points={{-35,46},{-18,46},{-18,44.89},{-6.68,44.89}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(massFlowFastHVAC.enthalpyPort_b, TemperatureFastHVAC.enthalpyPort_a)
@@ -82,7 +82,7 @@ equation
       points={{62,-38},{78,-38}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(m_flow.y, fluidSource1.dotm) annotation (Line(
+  connect(m_flow.y, fluidSource1.m_flow) annotation (Line(
       points={{-77,28},{-62,28},{-62,41.4},{-52,41.4}},
       color={0,0,127},
       smooth=Smooth.None));

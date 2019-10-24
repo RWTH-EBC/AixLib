@@ -3,14 +3,9 @@ model Vessel "Vessel model"
   FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a annotation (Placement(
         transformation(extent={{-88,-18},{-52,18}}), iconTransformation(extent={
             {-88,-18},{-52,18}})));
-
-
 equation
   enthalpyPort_a.dummy_potential = 1;
   enthalpyPort_a.h_outflow = 0;
-  // enthalpyPort_a.T_outflow = 273.15;
-
-//   enthalpyPort_a.c_outflow = 0;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=
             false, extent={{-100,-100},{100,100}}), graphics={Rectangle(
@@ -43,7 +38,11 @@ equation
 </p>
 </html>",
   revisions="<html><ul>
-  <li>
+ <li>
+    <i>Ocotober 24, 2019</i>, by David Jansen:<br/>
+    Reworked for using massflow as flow variable
+ </li> 
+ <li>
     <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
   </li>

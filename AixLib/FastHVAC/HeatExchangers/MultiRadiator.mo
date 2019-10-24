@@ -52,9 +52,9 @@ equation
 
   for k in 1:(n-1) loop
 
-     pseudoRadiator.enthalpyPort_b[k].T = radiator.enthalpyPort_b1.T;
-     pseudoRadiator.enthalpyPort_b[k].c = radiator.enthalpyPort_b1.c;
-     pseudoRadiator.enthalpyPort_b[k].h = radiator.enthalpyPort_b1.h;
+    pseudoRadiator.enthalpyPort_b[k].T_outflow = radiator.enthalpyPort_b1.T_outflow;
+    pseudoRadiator.enthalpyPort_b[k].c_outflow = radiator.enthalpyPort_b1.c_outflow;
+    pseudoRadiator.enthalpyPort_b[k].h_outflow = radiator.enthalpyPort_b1.h_outflow;
      pseudoRadiator.enthalpyPort_b[k].m_flow = radiator.enthalpyPort_b1.m_flow;
      connect(splitter.enthalpyPort_b[k+1],pseudoRadiator.enthalpyPort_a[k]);
      connect(pseudoRadiator.enthalpyPort_b[k],manifold.enthalpyPort_a[k+1]);

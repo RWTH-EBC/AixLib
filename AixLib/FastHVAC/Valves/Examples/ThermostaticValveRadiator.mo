@@ -46,7 +46,6 @@ model ThermostaticValveRadiator
   AixLib.FastHVAC.HeatExchangers.RadiatorMultiLayer radiatorMultiLayer(
     selectable=true,
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log,
-
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(
         length=5)) annotation (Placement(transformation(
@@ -81,7 +80,7 @@ connect(fluidSource.enthalpyPort_b, radiatorMultiLayer.enthalpyPort_a1)
     points={{-10,-5},{8,-5},{8,-7.4},{7.2,-7.4}},
     color={176,0,0},
     smooth=Smooth.None));
-  connect(thermostaticValve.dotm_set, fluidSource.dotm) annotation (Line(
+  connect(thermostaticValve.dotm_set, fluidSource.m_flow) annotation (Line(
       points={{-37.6,-28},{-28,-28},{-28,-8.6}},
       color={0,0,127},
       smooth=Smooth.None));

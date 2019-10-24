@@ -62,13 +62,13 @@ equation
       points={{81.3,-59},{70,-59},{70,-46.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(dotm_dHW.y, fluidSource.dotm) annotation (Line(
+  connect(dotm_dHW.y, fluidSource.m_flow) annotation (Line(
       points={{81.3,-29},{70,-29},{70,-39.4}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(dHWHeatExchanger.enthalpyPort_dHWIn, fluidSource.enthalpyPort_b)
     annotation (Line(
-      points={{23.5556,-40.12},{34.7778,-40.12},{34.7778,-43},{52,-43}},
+      points={{23.5556,-40.12},{34.7778,-40.12},{34.7778,-44},{53,-44}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(dHWHeatExchanger.enthalpyPort_dHWOut, vessel.enthalpyPort_a)

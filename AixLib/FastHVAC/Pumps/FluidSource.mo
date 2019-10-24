@@ -7,7 +7,7 @@ model FluidSource " Ideal fluid source "
   Modelica.Blocks.Interfaces.RealInput T_fluid( unit="K")
     "External real input to set the temperature of the fluid"
     annotation (Placement(transformation(extent={{-100,22},{-60,62}})));
-  Modelica.Blocks.Interfaces.RealInput dotm( unit="kg/s")
+  Modelica.Blocks.Interfaces.RealInput m_flow(unit="kg/s")
     "External real input to set the mass flow rate"
     annotation (Placement(transformation(extent={{-100,-46},{-60,-6}})));
   Interfaces.EnthalpyPort_b enthalpyPort_b annotation (Placement(transformation(
@@ -16,14 +16,9 @@ protected
   parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
     "medium's specific heat capacity";
 
-
-
 equation
-  // balances
-  enthalpyPort_b.m_flow = - dotm " set value of outlet port ";
-//   enthalpyPort_b.c_outflow = cp " set value of outlet port ";
-  // enthalpyPort_b.T_outflow = T_fluid " set value of outlet port ";
-  enthalpyPort_b.h_outflow = cp * T_fluid " set value of outlet port ";
+  enthalpyPort_b.m_flow = - m_flow "set value of outlet port";
+  enthalpyPort_b.h_outflow = cp * T_fluid "set value of outlet port";
     annotation (
     defaultComponentName="fluidSource",
     choicesAllMatching, Documentation(info="<html><h4>
@@ -65,6 +60,10 @@ equation
 </p>
 </html>",
 revisions="<html><ul>
+  <li>
+    <i>Ocotober 24, 2019</i>, by David Jansen:<br/>
+    Reworked for using massflow as flow variable
+  </li>  
   <li>
     <i>April 25, 2017&#160;</i> by Tobias Blacha:<br/>
     Moved into AixLib

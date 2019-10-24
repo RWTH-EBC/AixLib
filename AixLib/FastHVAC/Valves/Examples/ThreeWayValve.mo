@@ -29,7 +29,7 @@ equation
     annotation (Line(points={{-38,3},{-38,4},{-5.8,4}}, color={176,0,0}));
   connect(temp.y, fluidSource.T_fluid) annotation (Line(points={{-73,12},{-66,
           12},{-66,6.2},{-56,6.2}}, color={0,0,127}));
-  connect(dotm.y, fluidSource.dotm) annotation (Line(points={{-73,-18},{-73,-9},
+  connect(dotm.y, fluidSource.m_flow) annotation (Line(points={{-73,-18},{-73,-9},
           {-56,-9},{-56,-0.6}}, color={0,0,127}));
   connect(sine.y, threeWayValve.opening)
     annotation (Line(points={{-15,54},{4,54},{4,13}}, color={0,0,127}));

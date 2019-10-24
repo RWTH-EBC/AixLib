@@ -138,7 +138,8 @@ model HeatPump "Base model of FastHVAC Heat Pump"
                      m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));
-  BaseClasses.EvaporatorCondenserWithCapacity con(
+  .AixLib.FastHVAC.HeatGenerators.HeatPump.BaseClasses.EvaporatorCondenserWithCapacity
+    con(
     final kAOut_nominal=GCon,
     final m_fluid=m_fluidCon,
     final T_start=TCon_start,
@@ -146,13 +147,14 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     final is_con=true,
     final V=VCon*scalingFactor,
     final C=CCon*scalingFactor,
-    final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal)^0.88,
+    final kAInn=GCon + GConIns*abs(mFlow_con.m_flow/mFlow_conNominal)^0.88,
     final medium=Medium_con,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
     final m_flow_nominal=mFlow_conNominal)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
-  BaseClasses.EvaporatorCondenserWithCapacity eva(
+  .AixLib.FastHVAC.HeatGenerators.HeatPump.BaseClasses.EvaporatorCondenserWithCapacity
+    eva(
     final medium=Medium_eva,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
@@ -163,7 +165,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     final V=VEva*scalingFactor,
     final C=CEva*scalingFactor,
     final m_flow_nominal=mFlow_evaNominal,
-    final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal)^0.88)
+    final kAInn=GEva + GEvaIns*abs(mFlow_eva.m_flow/mFlow_evaNominal)^0.88)
     "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
@@ -328,8 +330,8 @@ equation
                              color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
-  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
-          {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(mFlow_con.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-79,
+          51},{-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -379,7 +381,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
+  connect(mFlow_eva.m_flow, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
           {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",

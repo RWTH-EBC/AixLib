@@ -123,8 +123,14 @@ equation
       Q_th = firstOrderQ_th.y;
 
        if onOff and selectable then
-       eff_el = param.a_0 + param.a_1*(P_el/1000)^2 + param.a_2*(P_el/1000) + param.a_3*massFlowRate.dotm^2 + param.a_4*massFlowRate.dotm + param.a_5* Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.a_6*Modelica.SIunits.Conversions.to_degC(T_return.T);
-       eff_th = param.b_0 + param.b_1*(P_el/1000)^2 + param.b_2*(P_el/1000) + param.b_3*massFlowRate.dotm^2 + param.b_4*massFlowRate.dotm + param.b_5* Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.b_6*Modelica.SIunits.Conversions.to_degC(T_return.T);
+       eff_el =param.a_0 + param.a_1*(P_el/1000)^2 + param.a_2*(P_el/1000) +
+      param.a_3*massFlowRate.m_flow^2 + param.a_4*massFlowRate.m_flow + param.a_5
+      *Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.a_6*
+      Modelica.SIunits.Conversions.to_degC(T_return.T);
+       eff_th =param.b_0 + param.b_1*(P_el/1000)^2 + param.b_2*(P_el/1000) +
+      param.b_3*massFlowRate.m_flow^2 + param.b_4*massFlowRate.m_flow + param.b_5
+      *Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.b_6*
+      Modelica.SIunits.Conversions.to_degC(T_return.T);
        firstOrderQ_th.u = param.P_elRated*P_elRel / sigma;
        firstOrderP_el.u=param.P_elRated*P_elRel;
        sigma=eff_el/eff_th;

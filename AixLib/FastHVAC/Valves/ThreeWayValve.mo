@@ -26,12 +26,12 @@ equation
    enthalpyPort_a.m_flow = -enthalpyPort_ab.m_flow*opening;
   enthalpyPort_ab.m_flow + enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
   // constant values
-  enthalpyPort_a.T = enthalpyPort_ab.T;
-  enthalpyPort_ab.T = enthalpyPort_b.T;
-  enthalpyPort_a.c = enthalpyPort_ab.c;
-  enthalpyPort_ab.c = enthalpyPort_b.c;
-  enthalpyPort_ab.h = enthalpyPort_b.h;
-  enthalpyPort_a.h = enthalpyPort_ab.h;
+  enthalpyPort_a.T_outflow = enthalpyPort_ab.T_outflow;
+  enthalpyPort_ab.T_outflow = enthalpyPort_b.T_outflow;
+  enthalpyPort_a.c_outflow = enthalpyPort_ab.c_outflow;
+  enthalpyPort_ab.c_outflow = enthalpyPort_b.c_outflow;
+  enthalpyPort_ab.h_outflow = enthalpyPort_b.h_outflow;
+  enthalpyPort_a.h_outflow = enthalpyPort_ab.h_outflow;
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

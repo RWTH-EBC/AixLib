@@ -91,6 +91,10 @@ equation
 </html>",
     revisions="<html><ul>
   <li>
+    <i>Ocotober 24, 2019</i>, by David Jansen:<br/>
+    Reworked for using massflow as flow variable
+  </li>  
+  <li>
     <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
     Implemented
   </li>

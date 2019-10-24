@@ -258,7 +258,7 @@ connect(heatingRod, layer[n_HR].port);
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
       varTemp_load[2].T = 323.15;
     else
-      varTemp_load[2].T = LoadingCycle_In.T;
+      varTemp_load[2].T =LoadingCycle_In.T_outflow;
     end if;
 
   /* ***************Umloading Cycles********************************/
@@ -284,7 +284,7 @@ connect(heatingRod, layer[n_HR].port);
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
     varTemp_unload[1].T = 323.15;
      else
-    varTemp_unload[1].T = UnloadingCycle_In.T;
+    varTemp_unload[1].T =UnloadingCycle_In.T_outflow;
      end if;
 
   /* *************Setting of the upper temperature********************************/

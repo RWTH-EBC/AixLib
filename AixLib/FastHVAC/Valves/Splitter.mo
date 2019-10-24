@@ -1,31 +1,24 @@
 ﻿within AixLib.FastHVAC.Valves;
 model Splitter
-
-  /* *******************************************************************
-      Splitter Parameters
-     ******************************************************************* */
-
   parameter Integer n(min=1) = 1 "Number of output flows";
-
-  /* *******************************************************************
-      Components
-     ******************************************************************* */
-
+  parameter Real dummy_potential_start = 1;
+  Modelica.SIunits.MassFlowRate m_flow;
   Interfaces.EnthalpyPort_a enthalpyPort_a
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-
   Interfaces.EnthalpyPort_b enthalpyPort_b[n]
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));  //1-dimensional imput port // n-dimensional output port
+  "1-dimensional imput port n-dimensional output port" annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+//  Real dummy_potential = if n > 0 then enthalpyPort_b[1].dummy_potential else dummy_potential_start;
 
 equation
-  for
-  k in 1:n loop
- enthalpyPort_b[k].m_flow = enthalpyPort_a.m_flow/n;
- enthalpyPort_b[k].T = enthalpyPort_a.T;
- enthalpyPort_b[k].h = enthalpyPort_a.h;
- enthalpyPort_b[k].c = enthalpyPort_a.c;
-  end for;
 
+  //   sum(enthalpyPort_b.dummy_potential)/n = enthalpyPort_a.dummy_potential;
+//    enthalpyPort_b[1].dummy_potential = enthalpyPort_a.dummy_potential;
+dummy_potential = enthalpyPort_a.dummy_potential;
+  for k in 1:n loop
+    enthalpyPort_a.m_flow / n = - enthalpyPort_b[k].m_flow;
+    enthalpyPort_b[k].h_outflow = inStream(enthalpyPort_a.h_outflow);
+    enthalpyPort_a.h_outflow = 0;
+  end for;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                            graphics), Icon(coordinateSystem(preserveAspectRatio=
@@ -57,7 +50,11 @@ equation
 </p>
 </html>",
 revisions="<html><ul>
-  <li>
+ <li>
+    <i>Ocotober 24, 2019</i>, by David Jansen:<br/>
+    Reworked for using massflow as flow variable
+ </li>   
+ <li>
     <i>April 13, 2017&#160;</i> Tobias Blacha:<br/>
     Moved into AixLib
   </li>

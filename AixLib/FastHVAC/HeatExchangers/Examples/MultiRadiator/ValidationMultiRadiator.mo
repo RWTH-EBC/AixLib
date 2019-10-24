@@ -67,7 +67,7 @@ model ValidationMultiRadiator
 equation
   connect(splitter.enthalpyPort_a, fluidSource1.enthalpyPort_b) annotation (
       Line(
-      points={{-30,-50},{-30,-65},{-32,-65}},
+      points={{-30,-50},{-30,-64},{-33,-64}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(manifold.enthalpyPort_b, temperatureSensor1.enthalpyPort_a)
@@ -156,7 +156,7 @@ equation
       smooth=Smooth.None));
   connect(fluidSource.enthalpyPort_b, multiRadiator1.enthalpyPort_a)
     annotation (Line(
-      points={{-22,67},{-16,67},{-16,65},{-10,65}},
+      points={{-23,68},{-16,68},{-16,65},{-10,65}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(multiRadiator1.ConvectiveHeat, fixedConvHeatFlow.port) annotation (
@@ -167,9 +167,9 @@ equation
 
   connect(fixedRadHeatFlow.port, multiRadiator1.RadiativeHeat)
     annotation (Line(points={{16,92},{5.4,92},{5.4,75.4}}, color={191,0,0}));
-  connect(dotMSet.y, fluidSource.dotm) annotation (Line(points={{-93,-10},{-68,
+  connect(dotMSet.y, fluidSource.m_flow) annotation (Line(points={{-93,-10},{-68,
           -10},{-68,63.4},{-40,63.4}}, color={0,0,127}));
-  connect(dotMSet.y, fluidSource1.dotm) annotation (Line(points={{-93,-10},{-70,
+  connect(dotMSet.y, fluidSource1.m_flow) annotation (Line(points={{-93,-10},{-70,
           -10},{-70,-68.6},{-50,-68.6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), experiment(StopTime=86400));

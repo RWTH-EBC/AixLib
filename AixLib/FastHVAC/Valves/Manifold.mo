@@ -1,28 +1,18 @@
 ﻿within AixLib.FastHVAC.Valves;
 model Manifold
-
-  /* *******************************************************************
-      Manifold Parameters
-     ******************************************************************* */
-
 parameter Integer n(min=1) = 1 "Number of input flows";
-
-  /* *******************************************************************
-      Components
-     ******************************************************************* */
-
   Interfaces.EnthalpyPort_a enthalpyPort_a[n]
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 
   Interfaces.EnthalpyPort_b enthalpyPort_b
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));   //n-dimensional imput port // 1-dimensional output port
+  "n-dimensional imput port 1-dimensional output port" annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
 equation
-     enthalpyPort_b.m_flow + sum(enthalpyPort_a.m_flow) = 0;  //mass balance
-    enthalpyPort_b.m_flow*enthalpyPort_b.h + enthalpyPort_a.m_flow*enthalpyPort_a.h = 0; //enthalpy balance
-     enthalpyPort_b.c = enthalpyPort_a[1].c;  //cp remains unchanged
-     enthalpyPort_b.h = enthalpyPort_b.c*enthalpyPort_b.T; //h=c*T
-
+  enthalpyPort_b.m_flow + sum(enthalpyPort_a.m_flow) = 0;  //mass balance
+  enthalpyPort_b.m_flow*enthalpyPort_b.h_outflow + enthalpyPort_a.m_flow*
+  enthalpyPort_a.h_outflow = 0;                                                        //enthalpy balance
+  enthalpyPort_b.h_outflow = enthalpyPort_b.c_outflow*enthalpyPort_b.T_outflow;
+                                                           //h=c*T
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics), Icon(graphics={Polygon(
           points={{100,20},{20,20},{-20,60},{-100,60},{-100,60},{-100,40},{-30,
