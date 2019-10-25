@@ -207,6 +207,10 @@ protected
   parameter Real[ 2] unload_cycles = {data.hLowerPorts,data.hUpperPorts}
     "Unloading cycle connection pairs (lower position first)"
     annotation (Dialog(tab="Connections"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
+    "medium's specific heat capacity";
+
+
 equation
 
   if use_heatingRod then
@@ -258,7 +262,7 @@ connect(heatingRod, layer[n_HR].port);
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
       varTemp_load[2].T = 323.15;
     else
-      varTemp_load[2].T =LoadingCycle_In.T_outflow;
+      varTemp_load[2].T = inStream(LoadingCycle_In.h_outflow) / cp;
     end if;
 
   /* ***************Umloading Cycles********************************/
@@ -284,7 +288,7 @@ connect(heatingRod, layer[n_HR].port);
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
     varTemp_unload[1].T = 323.15;
      else
-    varTemp_unload[1].T =UnloadingCycle_In.T_outflow;
+    varTemp_unload[1].T = inStream(UnloadingCycle_In.h_outflow) / cp;
      end if;
 
   /* *************Setting of the upper temperature********************************/

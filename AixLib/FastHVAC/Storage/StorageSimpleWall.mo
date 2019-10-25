@@ -221,6 +221,11 @@ protected
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                                                         heatTrans[n]( G=(k_wall))
     annotation (Placement(transformation(extent={{20,38},{40,58}})));
+
+protected
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
+    "medium's specific heat capacity";
+
 equation
   if use_heatingRod then
 
@@ -264,9 +269,9 @@ connect(heatingRod, layer[n_HR].port);
   /* *************Setting of the upper temperature********************************/
      if load_cycles[k,1]==n then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-       varTemp_load[k,2].T=323.15;
+       varTemp_load[k,2].T = 323.15;
      else
-       varTemp_load[k,2].T=LoadingCycle_In[k].T_outflow;
+       varTemp_load[k,2].T = inStream(LoadingCycle_In[k].h_outflow) / cp;
      end if;
 
   end for;
@@ -293,9 +298,9 @@ connect(heatingRod, layer[n_HR].port);
   /* *************Setting of the lower temperature********************************/
      if unload_cycles[k, 1]==1 then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-       varTemp_unload[k,1].T=323.15;
+       varTemp_unload[k,1].T = 323.15;
      else
-       varTemp_unload[k,1].T=UnloadingCycle_In[k].T_outflow;
+       varTemp_unload[k,1].T = inStream(UnloadingCycle_In[k].h_outflow) / cp;
      end if;
 
   /* *************Setting of the upper temperature********************************/
