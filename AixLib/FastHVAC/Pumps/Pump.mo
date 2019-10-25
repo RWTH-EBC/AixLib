@@ -17,15 +17,9 @@ protected
      ******************************************************************* */
 
 public
-  Modelica.Blocks.Interfaces.RealInput dotm_setValue( unit="kg/s")
+  Modelica.Blocks.Interfaces.RealInput m_flowSet(unit="kg/s")
     "External real input to set the mass flow rate" annotation (Placement(
-        transformation(
-        extent={{-27,-27},{27,27}},
-        rotation=270,
-        origin={3,67}), iconTransformation(
-        extent={{-20,-20},{20,20}},
-        rotation=270,
-        origin={0,80})));
+        transformation(extent={{-27,-27},{27,27}}, rotation=270)));
   FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     "Thermal port for input values (temperature, mass flow rate, specific enthalpy, constant specific heat capacity)"
     annotation (Placement(transformation(extent={{-86,-10},{-66,10}}),
@@ -35,12 +29,7 @@ public
     annotation (Placement(transformation(extent={{64,-12},{84,8}}),
         iconTransformation(extent={{76,-20},{116,20}})));
 equation
-  // balances
-  enthalpyPort_b.m_flow = dotm_setValue " set value of outlet port ";
-//   enthalpyPort_b.c_outflow = cp " set value of outlet port ";
-
-  // constant values
-
+  enthalpyPort_b.m_flow =-m_flowSet "set value of outlet port";
   enthalpyPort_b.h_outflow = inStream(enthalpyPort_a.h_outflow);
   enthalpyPort_a.h_outflow = 0;
   enthalpyPort_b.dummy_potential = 1;

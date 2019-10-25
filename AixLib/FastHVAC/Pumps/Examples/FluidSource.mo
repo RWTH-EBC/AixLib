@@ -7,32 +7,57 @@ model FluidSource
   Modelica.Blocks.Sources.Constant T_source(k=333.15)
     annotation (Placement(transformation(extent={{-84,-22},{-64,-2}})));
   AixLib.FastHVAC.Pumps.FluidSource fluidSource
-    annotation (Placement(transformation(extent={{-36,-34},{-16,-14}})));
-  AixLib.FastHVAC.Pumps.FluidSource fluidSource1
-    annotation (Placement(transformation(extent={{-40,-96},{-20,-76}})));
-  Modelica.Blocks.Sources.Constant T_source1(k=310.15)
-    annotation (Placement(transformation(extent={{-88,-84},{-68,-64}})));
-  Modelica.Blocks.Sources.Constant dotm_source1(k=2)
-    annotation (Placement(transformation(extent={{-88,-114},{-68,-94}})));
-  Sinks.Vessel vessel2
+    annotation (Placement(transformation(extent={{-42,-34},{-22,-14}})));
+  Sinks.Vessel vessel
     annotation (Placement(transformation(extent={{80,-18},{100,2}})));
-  BaseClasses.WorkingFluid workingFluid(T0=293.15, m_fluid=1)
-    annotation (Placement(transformation(extent={{-6,-34},{14,-14}})));
+  Sinks.Vessel vessel1
+    annotation (Placement(transformation(extent={{78,-44},{98,-24}})));
+  Valves.Splitter splitterNew(nOut=3, nIn=2)
+    annotation (Placement(transformation(extent={{12,-30},{32,-10}})));
+  Sinks.Vessel vessel2
+    annotation (Placement(transformation(extent={{80,-72},{100,-52}})));
+  Sensors.TemperatureSensor temperature
+    annotation (Placement(transformation(extent={{50,-20},{70,0}})));
+  Sensors.TemperatureSensor temperature1
+    annotation (Placement(transformation(extent={{54,-46},{74,-26}})));
+  Sensors.TemperatureSensor temperature2
+    annotation (Placement(transformation(extent={{54,-72},{74,-52}})));
+  AixLib.FastHVAC.Pumps.FluidSource fluidSource1
+    annotation (Placement(transformation(extent={{-34,-98},{-14,-78}})));
+  Modelica.Blocks.Sources.Constant T_source1(k=313.15)
+    annotation (Placement(transformation(extent={{-82,-86},{-62,-66}})));
+  Modelica.Blocks.Sources.Constant dotm_source1(k=5)
+    annotation (Placement(transformation(extent={{-82,-116},{-62,-96}})));
 equation
   connect(T_source.y, fluidSource.T_fluid) annotation (Line(points={{-63,-12},{
-          -48,-12},{-48,-19.8},{-34,-19.8}}, color={0,0,127}));
+          -48,-12},{-48,-19.8},{-40,-19.8}}, color={0,0,127}));
   connect(dotm_source.y, fluidSource.m_flow) annotation (Line(points={{-63,-42},
-          {-50,-42},{-50,-26.6},{-34,-26.6}}, color={0,0,127}));
-  connect(dotm_source1.y, fluidSource1.m_flow) annotation (Line(points={{-67,
-          -104},{-54,-104},{-54,-88.6},{-38,-88.6}}, color={0,0,127}));
-  connect(T_source1.y, fluidSource1.T_fluid) annotation (Line(points={{-67,-74},
-          {-52,-74},{-52,-81.8},{-38,-81.8}}, color={0,0,127}));
-  connect(fluidSource.enthalpyPort_b, workingFluid.enthalpyPort_a) annotation (
-      Line(points={{-17,-22},{-12,-22},{-12,-24},{-5,-24}}, color={176,0,0}));
-  connect(fluidSource1.enthalpyPort_b, workingFluid.enthalpyPort_a) annotation
-    (Line(points={{-21,-84},{-14,-84},{-14,-24},{-5,-24}}, color={176,0,0}));
-  connect(workingFluid.enthalpyPort_b, vessel2.enthalpyPort_a) annotation (Line(
-        points={{13,-24},{48,-24},{48,-8},{83,-8}}, color={176,0,0}));
+          {-50,-42},{-50,-26.6},{-40,-26.6}}, color={0,0,127}));
+  connect(temperature.enthalpyPort_b, vessel.enthalpyPort_a) annotation (Line(
+        points={{69,-10.1},{76.5,-10.1},{76.5,-8},{83,-8}}, color={176,0,0}));
+  connect(splitterNew.enthalpyPort_b[1], temperature.enthalpyPort_a)
+    annotation (Line(points={{32,-20.6667},{42,-20.6667},{42,-10.1},{51.2,-10.1}},
+        color={176,0,0}));
+  connect(temperature2.enthalpyPort_b, vessel2.enthalpyPort_a) annotation (Line(
+        points={{73,-62.1},{77.5,-62.1},{77.5,-62},{83,-62}}, color={176,0,0}));
+  connect(temperature1.enthalpyPort_b, vessel1.enthalpyPort_a) annotation (Line(
+        points={{73,-36.1},{77.5,-36.1},{77.5,-34},{81,-34}}, color={176,0,0}));
+  connect(splitterNew.enthalpyPort_b[2], temperature1.enthalpyPort_a)
+    annotation (Line(points={{32,-20},{44,-20},{44,-36.1},{55.2,-36.1}}, color=
+          {176,0,0}));
+  connect(splitterNew.enthalpyPort_b[3], temperature2.enthalpyPort_a)
+    annotation (Line(points={{32,-19.3333},{44,-19.3333},{44,-62.1},{55.2,-62.1}},
+        color={176,0,0}));
+  connect(dotm_source1.y, fluidSource1.m_flow) annotation (Line(points={{-61,
+          -106},{-48,-106},{-48,-90.6},{-32,-90.6}}, color={0,0,127}));
+  connect(T_source1.y, fluidSource1.T_fluid) annotation (Line(points={{-61,-76},
+          {-46,-76},{-46,-83.8},{-32,-83.8}}, color={0,0,127}));
+  connect(fluidSource.enthalpyPort_b, splitterNew.enthalpyPort_a[1])
+    annotation (Line(points={{-23,-22},{-6,-22},{-6,-20.5},{12,-20.5}}, color={
+          176,0,0}));
+  connect(fluidSource1.enthalpyPort_b, splitterNew.enthalpyPort_a[2])
+    annotation (Line(points={{-15,-86},{-2,-86},{-2,-19.5},{12,-19.5}}, color={
+          176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(

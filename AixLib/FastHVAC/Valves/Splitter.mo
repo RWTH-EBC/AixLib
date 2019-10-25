@@ -1,27 +1,29 @@
 ﻿within AixLib.FastHVAC.Valves;
 model Splitter
-  parameter Integer n(min=1) = 1 "Number of output flows";
-  parameter Real dummy_potential_start = 1;
-  Modelica.SIunits.MassFlowRate m_flow;
-  Interfaces.EnthalpyPort_a enthalpyPort_a
+
+  parameter Integer nOut = 2 "Number of splitter outputs";
+  parameter Integer nIn = 1 "Number of splitter inputs";
+  parameter Real splitFactor[nOut, nIn]= fill(1/nOut, nOut, nIn)
+    "Matrix of split factor for outputs (between 0 and 1 for each row)";
+  Modelica.SIunits.SpecificEnthalpy h_outflow_mixed
+    "mixed specific enthalpy leaving port b";
+  Interfaces.EnthalpyPort_a enthalpyPort_a[nIn]
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Interfaces.EnthalpyPort_b enthalpyPort_b[n]
+  Interfaces.EnthalpyPort_b enthalpyPort_b[nOut]
   "1-dimensional imput port n-dimensional output port" annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-//  Real dummy_potential = if n > 0 then enthalpyPort_b[1].dummy_potential else dummy_potential_start;
 
 equation
-
-  //   sum(enthalpyPort_b.dummy_potential)/n = enthalpyPort_a.dummy_potential;
-//    enthalpyPort_b[1].dummy_potential = enthalpyPort_a.dummy_potential;
-dummy_potential = enthalpyPort_a.dummy_potential;
-  for k in 1:n loop
-    enthalpyPort_a.m_flow / n = - enthalpyPort_b[k].m_flow;
-    enthalpyPort_b[k].h_outflow = inStream(enthalpyPort_a.h_outflow);
-    enthalpyPort_a.h_outflow = 0;
-  end for;
+  enthalpyPort_b.m_flow = - enthalpyPort_a.m_flow * transpose(splitFactor)
+    "Connecting the output vector according to desired dimension";
+  enthalpyPort_a.dummy_potential = enthalpyPort_b.dummy_potential * splitFactor
+    "Equivalent building temperature rerouted to SignalInput";
+  h_outflow_mixed =
+   sum(inStream(enthalpyPort_a.h_outflow) * enthalpyPort_a.m_flow)
+   / sum(enthalpyPort_a.m_flow);
+  enthalpyPort_a.h_outflow = fill(0, nIn);
+  enthalpyPort_b.h_outflow = fill(h_outflow_mixed, nOut);
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                           graphics), Icon(coordinateSystem(preserveAspectRatio=
+            -100},{100,100}})),       Icon(coordinateSystem(preserveAspectRatio=
            false, extent={{-100,-100},{100,100}}), graphics={Polygon(
           points={{-100,20},{-20,20},{20,60},{100,60},{100,60},{100,40},{30,40},
               {0,10},{100,10},{100,-10},{96,-10},{0,-10},{30,-40},{100,-40},{

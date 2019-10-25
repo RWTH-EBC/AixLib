@@ -34,6 +34,8 @@ model Pump
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={84,46})));
+  Valves.Splitter splitterNew
+    annotation (Placement(transformation(extent={{44,-2},{64,18}})));
 equation
   connect(boilerBase.enthalpyPort_b1, pump.enthalpyPort_a) annotation (Line(
       points={{-51.5,7},{-13.52,7}},
@@ -44,8 +46,8 @@ equation
       points={{112,-73.18},{112,-20},{-62.5,-20},{-62.5,6.78}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(mdot.y, pump.dotm_setValue) annotation (Line(
-      points={{-5,26},{-2,26},{-2,15.8}},
+  connect(mdot.y, pump.m_flowSet) annotation (Line(
+      points={{-5,26},{-2,26},{-2,7}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(dotQ_rel.y, boilerBase.dotQ_rel) annotation (Line(
@@ -64,13 +66,17 @@ equation
         ={{102.6,24.22},{102.6,26},{70,26},{70,46},{74,46}}, color={191,0,0}));
   connect(radiator_ML1.RadiativeHeat, idealSink1.port) annotation (Line(points=
           {{113.6,24.4},{113.6,30},{74,30},{74,46}}, color={95,95,95}));
-  connect(pump.enthalpyPort_b, radiator_ML1.enthalpyPort_a1) annotation (Line(
-        points={{9.52,7},{53.76,7},{53.76,18.82},{100,18.82}}, color={176,0,0}));
   connect(radiator_ML1.enthalpyPort_b1, boilerBase.enthalpyPort_a1) annotation
     (Line(points={{116,18.82},{122,18.82},{122,18},{126,18},{126,-94},{-84,-94},
           {-84,6.78},{-62.5,6.78}}, color={176,0,0}));
-  connect(pump.enthalpyPort_b, radiator_ML.enthalpyPort_a1) annotation (Line(
-        points={{9.52,7},{52.76,7},{52.76,-73.18},{96,-73.18}}, color={176,0,0}));
+  connect(splitterNew.enthalpyPort_b[1], radiator_ML1.enthalpyPort_a1)
+    annotation (Line(points={{64,8},{82,8},{82,18.82},{100,18.82}}, color={176,
+          0,0}));
+  connect(splitterNew.enthalpyPort_b[2], radiator_ML.enthalpyPort_a1)
+    annotation (Line(points={{64,8},{80,8},{80,-73.18},{96,-73.18}}, color={176,
+          0,0}));
+  connect(pump.enthalpyPort_b, splitterNew.enthalpyPort_a[1]) annotation (Line(
+        points={{9.52,7},{26.76,7},{26.76,8},{44,8}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(
