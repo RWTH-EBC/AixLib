@@ -3,6 +3,8 @@ model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
 
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
+
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
                  annotation (Dialog(group="Medium"),choicesAllMatching = true);
@@ -19,7 +21,7 @@ model BufferStorage
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
+  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
   parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
     AixLib.DataBase.Storage.Generic_New_2000l()
@@ -48,9 +50,9 @@ model BufferStorage
                                                  annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
 
   parameter Modelica.SIunits.Temperature TStartWall=293.15
-    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
+    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
   parameter Modelica.SIunits.Temperature TStartIns=293.15
-    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
+    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////final parameters////////////////////////////////////////////////////////////////////////
@@ -140,6 +142,7 @@ model BufferStorage
             {-14,20}}, rotation=0)));
 
   AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
+    each final p_start=p_start,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
@@ -200,51 +203,54 @@ model BufferStorage
 ////////////////////////////////////////////////////////////////////////////////////////
 
   AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
-    lambdaWall=data.lambdaWall,
-    lambdaIns=data.lambdaIns,
-    hConIn=hConIn,
-    hConOut=hConOut,
-    TStartWall=TStartWall,
-    TStartIns=TStartIns,
-    rhoIns=data.rhoIns,
-    cIns=data.cIns,
-    rhoWall=data.rhoWall,
-    cWall=data.cWall,
-    D1=data.dTank,
-    sWall=data.sWall,
-    sIns=data.sIns) annotation (Placement(transformation(
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={8,56})));
   AixLib.Fluid.Storage.BaseClasses.StorageMantle storageMantle[n](
-    each lambdaWall=data.lambdaWall,
-    each lambdaIns=data.lambdaIns,
-    each TStartWall=TStartWall,
-    each TStartIns=TStartIns,
-    each rhoIns=data.rhoIns,
-    each cIns=data.cIns,
-    each rhoWall=data.rhoWall,
-    each cWall=data.cWall,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
     each height=data.hTank/n,
-    each D1=data.dTank,
-    each sWall=data.sWall,
-    each sIns=data.sIns,
-    each hConIn=hConIn,
-    each hConOut=hConOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut)
+                          annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
-    lambdaWall=data.lambdaWall,
-    lambdaIns=data.lambdaIns,
-    hConIn=hConIn,
-    hConOut=hConOut,
-    TStartWall=TStartWall,
-    TStartIns=TStartIns,
-    rhoIns=data.rhoIns,
-    cIns=data.cIns,
-    rhoWall=data.rhoWall,
-    cWall=data.cWall,
-    D1=data.dTank,
-    sWall=data.sWall,
-    sIns=data.sIns) annotation (Placement(transformation(
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,-44})));
