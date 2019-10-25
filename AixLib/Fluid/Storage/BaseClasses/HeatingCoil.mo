@@ -14,59 +14,64 @@ model HeatingCoil "Heating coil for heat storage model"
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
 
- AixLib.Utilities.HeatTransfer.CylindricHeatTransfer pipeWallHC1[disHC](
-    each T0=TStart,
-    rho=fill(pipeHC.d, disHC),
-    c=fill(pipeHC.c, disHC),
-    d_out=fill(pipeHC.d_o, disHC),
-    d_in=fill(pipeHC.d_i, disHC),
-    length=fill(lengthHC/disHC, disHC),
-    lambda=fill(pipeHC.lambda, disHC))
-    "Heat transfer of pipe wall" annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-4,26})));
   AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each hCon=hConHC, A=fill(pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC,
         disHC)) "Outer heat convection"
     annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
+        extent={{-12,-12},{12,12}},
         rotation=270,
-        origin={-4,52})));
+        origin={1.77636e-15,52})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1[disHC]
     "Vectorized heat port"
-    annotation (Placement(transformation(extent={{-14,94},{6,114}})));
-Modelica.Fluid.Pipes.DynamicPipe pipe(
-use_HeatTransfer=true,
-    modelStructure=Modelica.Fluid.Types.ModelStructure.a_v_b,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer,
-    length=lengthHC,
-    diameter=pipeHC.d_i,
-    nNodes=disHC,
-    redeclare package Medium = Medium)                      annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-4,0})));
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
+  FixedResistances.PlugFlowPipe pipe[disHC](
+    redeclare each final package Medium = Medium,
+    each final allowFlowReversal=allowFlowReversal,
+    each final dh=pipeHC.d_i,
+    each final v_nominal=4*m_flow_nominal/den_default/pipeHC.d_i/pipeHC.d_i/Modelica.Constants.pi,
+    each final length=lengthHC/disHC,
+    each final m_flow_nominal=m_flow_nominal,
+    each final m_flow_small=m_flow_small,
+    each final dIns=0.00,
+    each final kIns=pipeHC.lambda,
+    each final cPip=pipeHC.c,
+    each final rhoPip=pipeHC.d,
+    each final thickness=0.5*(pipeHC.d_o - pipeHC.d_i),
+    each final T_start_in=TStart,
+    each final T_start_out=TStart,
+    each final nPorts=1) annotation (Placement(transformation(extent={{-18,-16},{18,16}})));
+
+protected
+  parameter Medium.ThermodynamicState sta_default=
+     Medium.setState_pTX(T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
+  parameter Modelica.SIunits.Density den_default=Medium.density(sta_default) "Density of Medium in default state";
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_default=Medium.heatCapacity_cp(sta_default) "Specific heat capacity of Medium in default state";
 
 equation
 
 
   connect(convHC1Outside.port_a, Therm1) annotation (Line(
-      points={{-4,58},{-4,70.7},{-4,70.7},{-4,104}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(pipeWallHC1.port_b,convHC1Outside.port_b)  annotation (Line(
-      points={{-4,31.28},{-4,46}},
+      points={{3.9968e-15,64},{3.9968e-15,100},{0,100}},
       color={191,0,0},
       smooth=Smooth.None));
 
 
-  connect(pipe.heatPorts, pipeWallHC1.port_a) annotation (Line(points={{-3.9,4.4},
-          {-3.9,15.2},{-4,15.2},{-4,26}}, color={127,0,0}));
-  connect(port_a, pipe.port_a)
-    annotation (Line(points={{-100,0},{-57,0},{-14,0}}, color={0,127,255}));
-  connect(pipe.port_b, port_b)
-    annotation (Line(points={{6,0},{54,0},{100,0}}, color={0,127,255}));
+  connect(convHC1Outside.port_b, pipe.heatPort) annotation (Line(points={{0,40},{0,16}}, color={191,0,0}));
+  connect(port_a, pipe[1].port_a) annotation (Line(
+      points={{-100,0},{-18,0}},
+      color={0,127,255},
+      pattern=LinePattern.DashDotDot));
+  for i in 1:disHC-1 loop
+    connect(pipe[i].ports_b[1], pipe[i + 1].port_a) annotation (Line(
+        points={{18,0},{24,0},{24,26},{-28,26},{-28,0},{-18,0}},
+        color={0,127,255},
+        pattern=LinePattern.DashDotDot));
+  end for;
+  connect(pipe[disHC].ports_b[1], port_b) annotation (Line(
+      points={{18,0},{60,0},{60,0},{100,0}},
+      color={0,127,255},
+      pattern=LinePattern.DashDotDot));
+
   annotation (                   Icon(graphics={
         Line(
           points={{-94,0},{-80,80}},
@@ -153,5 +158,8 @@ coefficient.</p>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>
-"));
+"), Diagram(graphics={Text(
+          extent={{-172,32},{164,-94}},
+          lineColor={238,46,47},
+          textString="Need to chang dIns in PlugFlowPipe")}));
 end HeatingCoil;

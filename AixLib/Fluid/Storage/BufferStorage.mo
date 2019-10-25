@@ -23,6 +23,13 @@ model BufferStorage
     "Nominal mass flow rate of fluid 2 ports"
     annotation(Dialog(group = "Nominal condition"));
 
+  parameter Modelica.SIunits.MassFlowRate mHC1_flow_nominal(min=0) if useHeatingCoil1
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil1));
+  parameter Modelica.SIunits.MassFlowRate mHC2_flow_nominal(min=0) if useHeatingCoil2
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil2));
+
   parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
@@ -234,21 +241,21 @@ model BufferStorage
         rotation=90,
         origin={8,56})));
   AixLib.Fluid.Storage.BaseClasses.StorageMantle storageMantle[n](
-    energyDynamics=energyDynamics,
-    final lambdaWall=data.lambdaWall,
-    final lambdaIns=data.lambdaIns,
-    final TStartWall=TStartWall,
-    final TStartIns=TStartIns,
-    final rhoIns=data.rhoIns,
-    final cIns=data.cIns,
-    final rhoWall=data.rhoWall,
-    final cWall=data.cWall,
-    each height=data.hTank/n,
-    final D1=data.dTank,
-    final sWall=data.sWall,
-    final sIns=data.sIns,
-    final hConIn=hConIn,
-    final hConOut=hConOut)
+    each final energyDynamics=energyDynamics,
+    each final lambdaWall=data.lambdaWall,
+    each final lambdaIns=data.lambdaIns,
+    each final TStartWall=TStartWall,
+    each final TStartIns=TStartIns,
+    each final rhoIns=data.rhoIns,
+    each final cIns=data.cIns,
+    each final rhoWall=data.rhoWall,
+    each final cWall=data.cWall,
+    each final height=data.hTank/n,
+    each final D1=data.dTank,
+    each final sWall=data.sWall,
+    each final sIns=data.sIns,
+    each final hConIn=hConIn,
+    each final hConOut=hConOut)
                           annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
     final energyDynamics=energyDynamics,
@@ -277,7 +284,7 @@ model BufferStorage
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
     allowFlowReversal=true,
-    m_flow_nominal=0.05,
+    final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -290,7 +297,7 @@ model BufferStorage
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
     allowFlowReversal=true,
-    m_flow_nominal=0.05,
+    final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
