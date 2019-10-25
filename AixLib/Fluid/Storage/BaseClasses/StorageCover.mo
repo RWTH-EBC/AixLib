@@ -42,7 +42,7 @@ model StorageCover "Sandwich wall construction for heat storage cover"
         transformation(extent={{38,0},{58,20}}, rotation=0)));
   AixLib.Utilities.HeatTransfer.HeatConv convOutside(hCon=hConOut, A=AWall) "Outside heat convection"
     annotation (Placement(transformation(
-        origin={72,8},
+        origin={72,10},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
@@ -53,8 +53,15 @@ model StorageCover "Sandwich wall construction for heat storage cover"
     "Inner heat port"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadWall(C=(
-        cWall)*(rhoWall)*(AWall)*(sWall))
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadWall(
+    final C=(cWall)*(rhoWall)*(AWall)*(sWall),
+    final T(
+      stateSelect=StateSelect.always,
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      start=TStartWall),
+    final der_T(
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      start=0)) if not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
         "Heat capacity of wall" annotation (Placement(
         transformation(extent={{-20,-26},{0,-6}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=(cIns)
@@ -66,7 +73,7 @@ model StorageCover "Sandwich wall construction for heat storage cover"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
 equation
   connect(convOutside.port_a, heatportOuter) annotation (Line(
-      points={{82,8},{85.5,8},{85.5,10},{90,10}},
+      points={{82,10},{90,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(condWall1.port_b,condWall2.port_a)  annotation (Line(
@@ -74,7 +81,7 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(condWall2.port_b,condIns1.port_a)  annotation (Line(
-      points={{0,10},{2,10},{2,12.2},{5,12.2},{5,10},{10,10}},
+      points={{0,10},{10,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(condIns1.port_b,condIns2.port_a)  annotation (Line(
@@ -82,7 +89,7 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(condIns2.port_b,convOutside.port_b)  annotation (Line(
-      points={{58,10},{58,8},{62,8}},
+      points={{58,10},{62,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(loadWall.port, condWall1.port_b) annotation (Line(
@@ -94,17 +101,14 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(convInside.port_a, heatportInner) annotation (Line(
-      points={{-80,10},{-83.5,10},{-83.5,10},{-90,10}},
+      points={{-80,10},{-90,10}},
       color={191,0,0},
-      pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(convInside.port_b,condWall1.port_a)  annotation (Line(
-      points={{-60,10},{-55,10},{-55,10},{-50,10}},
+      points={{-60,10},{-50,10}},
       color={191,0,0},
-      pattern=LinePattern.None,
       smooth=Smooth.None));
-  annotation (Diagram(graphics),
-                       Icon(coordinateSystem(preserveAspectRatio=false,
+  annotation (         Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
           extent={{40,100},{60,-100}},
