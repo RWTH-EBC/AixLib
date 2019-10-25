@@ -16,6 +16,12 @@ model BufferStorage
   replaceable package MediumHC2 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
+  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(group = "Nominal condition"));
+  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
+    "Nominal mass flow rate of fluid 2 ports"
+    annotation(Dialog(group = "Nominal condition"));
 
   parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
@@ -142,12 +148,18 @@ model BufferStorage
             {-14,20}}, rotation=0)));
 
   AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
+    each final energyDynamics=energyDynamics,
+    each final massDynamics=massDynamics,
     each final p_start=p_start,
+    each final X_start=X_start,
+    each final C_start=C_start,
+    each final C_nominal=C_nominal,
+    each final mSenFac=mSenFac,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
     redeclare each final package Medium = Medium,
-    each m_flow_nominal=0.05)
+    each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
     replaceable model HeatTransfer =
@@ -203,6 +215,7 @@ model BufferStorage
 ////////////////////////////////////////////////////////////////////////////////////////
 
   AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
+    final energyDynamics=energyDynamics,
     final lambdaWall=data.lambdaWall,
     final lambdaIns=data.lambdaIns,
     final hConIn=hConIn,
@@ -221,6 +234,7 @@ model BufferStorage
         rotation=90,
         origin={8,56})));
   AixLib.Fluid.Storage.BaseClasses.StorageMantle storageMantle[n](
+    energyDynamics=energyDynamics,
     final lambdaWall=data.lambdaWall,
     final lambdaIns=data.lambdaIns,
     final TStartWall=TStartWall,
@@ -237,6 +251,7 @@ model BufferStorage
     final hConOut=hConOut)
                           annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
+    final energyDynamics=energyDynamics,
     final lambdaWall=data.lambdaWall,
     final lambdaIns=data.lambdaIns,
     final hConIn=hConIn,

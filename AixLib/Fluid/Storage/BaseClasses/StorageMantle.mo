@@ -1,6 +1,11 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model StorageMantle
 
+  // Assumptions
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
   parameter Modelica.SIunits.Length height=0.15 "Height of layer"  annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
@@ -38,6 +43,7 @@ model StorageMantle
           rotation=0)));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer Insulation(
+    final energyDynamics=energyDynamics,
     rho=rhoIns,
     c=cIns,
     lambda=lambdaIns,
@@ -49,6 +55,7 @@ model StorageMantle
     annotation (Placement(transformation(extent={{-4,-12},{44,32}})));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer Wall(
+    final energyDynamics=energyDynamics,
     rho=rhoWall,
     c=cWall,
     lambda=lambdaWall,
