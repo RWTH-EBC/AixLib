@@ -79,7 +79,7 @@ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib
   "DC output power of the PV array" annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 
-  BaseClasses.PVRadiationHorizontalTRY pVRadiationHorizontalTRY(
+  BaseClasses.PVRadiationHorizontal    pVRadiationHorizontalTRY(
    final lat = lat,
    final lon = lon,
    final alt = alt,
@@ -112,22 +112,6 @@ equation
     annotation (Line(points={{-18,66},{-6,66},{-6,-28},{8,-28}}, color={0,0,127}));
   connect(iVCharacteristics.DCOutputPower, DCOutputPower)
     annotation (Line(points={{31,-26},{66,-26},{66,0},{110,0}}, color={0,0,127}));
-  connect(weaBus.HDirNor, pVRadiationHorizontalTRY.radHorBea) annotation (Line(
-      points={{-100,-2},{-90,-2},{-90,-34},{-80,-34}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(weaBus.HDifHor, pVRadiationHorizontalTRY.radHorDif) annotation (Line(
-      points={{-100,-2},{-90,-2},{-90,-46},{-80,-46}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(weaBus.winSpe, cellTemperature.winVel) annotation (Line(
       points={{-100,-2},{-72,-2},{-72,71.9},{-42,71.9}},
       color={255,204,51},
@@ -138,6 +122,14 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.TDryBul, cellTemperature.T_a) annotation (Line(
       points={{-100,-2},{-72,-2},{-72,75.4},{-42,75.4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(weaBus.HGloHor, pVRadiationHorizontalTRY.radHor) annotation (Line(
+      points={{-100,-2},{-90,-2},{-90,-34},{-80,-34}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
