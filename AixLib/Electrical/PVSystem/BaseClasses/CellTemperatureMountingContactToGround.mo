@@ -7,9 +7,9 @@ model CellTemperatureMountingContactToGround
 equation
 
  T_c = if radTil >= 0.01 then
- radTil*(exp(-2.81-0.0455*winVel))+(T_a+273.15)
+ radTil*(exp(-2.81-0.0455*winVel))+(T_a)
  else
- (T_a+273.15);
+ (T_a);
 
 
  annotation (

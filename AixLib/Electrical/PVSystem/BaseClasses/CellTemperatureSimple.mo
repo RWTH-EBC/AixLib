@@ -7,9 +7,9 @@ model CellTemperatureSimple
 equation
 
  T_c = if radTil >= 0.01 then
- (T_a+273.15)+(T_NOCT-293.15)*radTil/radNOCT
+ (T_a)+(T_NOCT-293.15)*radTil/radNOCT
  else
- (T_a+273.15);
+ (T_a);
 
  annotation (
   Documentation(info="<html>
