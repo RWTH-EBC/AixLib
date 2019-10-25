@@ -12,7 +12,7 @@ model FluidSource
     annotation (Placement(transformation(extent={{80,-18},{100,2}})));
   Sinks.Vessel vessel1
     annotation (Placement(transformation(extent={{78,-44},{98,-24}})));
-  Valves.Splitter splitterNew(nOut=3, nIn=2)
+  Valves.Splitter splitterNew(nOut=3, nIn=1)
     annotation (Placement(transformation(extent={{12,-30},{32,-10}})));
   Sinks.Vessel vessel2
     annotation (Placement(transformation(extent={{80,-72},{100,-52}})));
@@ -22,12 +22,6 @@ model FluidSource
     annotation (Placement(transformation(extent={{54,-46},{74,-26}})));
   Sensors.TemperatureSensor temperature2
     annotation (Placement(transformation(extent={{54,-72},{74,-52}})));
-  AixLib.FastHVAC.Pumps.FluidSource fluidSource1
-    annotation (Placement(transformation(extent={{-34,-98},{-14,-78}})));
-  Modelica.Blocks.Sources.Constant T_source1(k=313.15)
-    annotation (Placement(transformation(extent={{-82,-86},{-62,-66}})));
-  Modelica.Blocks.Sources.Constant dotm_source1(k=5)
-    annotation (Placement(transformation(extent={{-82,-116},{-62,-96}})));
 equation
   connect(T_source.y, fluidSource.T_fluid) annotation (Line(points={{-63,-12},{
           -48,-12},{-48,-19.8},{-40,-19.8}}, color={0,0,127}));
@@ -48,15 +42,8 @@ equation
   connect(splitterNew.enthalpyPort_b[3], temperature2.enthalpyPort_a)
     annotation (Line(points={{32,-19.3333},{44,-19.3333},{44,-62.1},{55.2,-62.1}},
         color={176,0,0}));
-  connect(dotm_source1.y, fluidSource1.m_flow) annotation (Line(points={{-61,
-          -106},{-48,-106},{-48,-90.6},{-32,-90.6}}, color={0,0,127}));
-  connect(T_source1.y, fluidSource1.T_fluid) annotation (Line(points={{-61,-76},
-          {-46,-76},{-46,-83.8},{-32,-83.8}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, splitterNew.enthalpyPort_a[1])
-    annotation (Line(points={{-23,-22},{-6,-22},{-6,-20.5},{12,-20.5}}, color={
-          176,0,0}));
-  connect(fluidSource1.enthalpyPort_b, splitterNew.enthalpyPort_a[2])
-    annotation (Line(points={{-15,-86},{-2,-86},{-2,-19.5},{12,-19.5}}, color={
+    annotation (Line(points={{-23,-22},{-6,-22},{-6,-20},{12,-20}},     color={
           176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={

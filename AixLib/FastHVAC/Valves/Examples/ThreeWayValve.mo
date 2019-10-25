@@ -26,7 +26,7 @@ equation
   connect(threeWayValve.enthalpyPort_a, vessel.enthalpyPort_a)
     annotation (Line(points={{14,4},{77,4}}, color={176,0,0}));
   connect(fluidSource.enthalpyPort_b, threeWayValve.enthalpyPort_ab)
-    annotation (Line(points={{-38,3},{-38,4},{-5.8,4}}, color={176,0,0}));
+    annotation (Line(points={{-39,4},{-39,4},{-5.8,4}}, color={176,0,0}));
   connect(temp.y, fluidSource.T_fluid) annotation (Line(points={{-73,12},{-66,
           12},{-66,6.2},{-56,6.2}}, color={0,0,127}));
   connect(dotm.y, fluidSource.m_flow) annotation (Line(points={{-73,-18},{-73,-9},

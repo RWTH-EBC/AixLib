@@ -3,7 +3,7 @@ model Splitter
 
   parameter Integer nOut = 2 "Number of splitter outputs";
   parameter Integer nIn = 1 "Number of splitter inputs";
-  parameter Real splitFactor[nOut, nIn]= fill(1/nOut, nOut, nIn)
+  parameter Real splitFactor[nOut, nIn] = fill(1/nOut, nOut, nIn)
     "Matrix of split factor for outputs (between 0 and 1 for each row)";
   Modelica.SIunits.SpecificEnthalpy h_outflow_mixed
     "mixed specific enthalpy leaving port b";
