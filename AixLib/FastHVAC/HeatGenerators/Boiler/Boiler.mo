@@ -1,14 +1,9 @@
 within AixLib.FastHVAC.HeatGenerators.Boiler;
 model Boiler "Simple boiler model"
-
   parameter Media.FastHvac.BaseClasses.MediumSimple medium=
       Media.FastHvac.WaterSimple()
     "Standard fluid charastics  (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
-
-  /* *******************************************************************
-    Boiler Parameters
-     ******************************************************************* */
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler= AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW()
     "Parameters for Boiler" annotation (Dialog(tab="General", group=
@@ -19,16 +14,11 @@ model Boiler "Simple boiler model"
     "Initial temperature of heat source" annotation (Evaluate=true,
       Dialog(tab="General", group="Simulation"));
 
-  /* *******************************************************************
-      Components
-      ******************************************************************* */
-
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
                               heater
     annotation (Placement(transformation(extent={{-13.25,-12},{13.25,12}},
         rotation=180,
         origin={-3.25,-30})));
-
   Modelica.Blocks.Tables.CombiTable1D tableEfficiency(
     tableOnFile=false,
     table=paramBoiler.eta,
@@ -94,8 +84,6 @@ model Boiler "Simple boiler model"
         origin={-71,74})));
 equation
 
-  //  OutputPower = -port_b.m_flow * 4184 * (ControlerHeater.Therm1.T - Tcold.T);
-  //  eEnergyMeter_S.p=OutputPower;
 
   connect(integrator.y, E_gas) annotation (Line(
       points={{95,0},{108,0}},
@@ -165,7 +153,7 @@ equation
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
+        grid={2,2})),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

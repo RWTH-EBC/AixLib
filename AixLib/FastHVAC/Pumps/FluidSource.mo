@@ -11,7 +11,7 @@ model FluidSource " Ideal fluid source "
     "External real input to set the mass flow rate"
     annotation (Placement(transformation(extent={{-100,-46},{-60,-6}})));
   Interfaces.EnthalpyPort_b enthalpyPort_b annotation (Placement(transformation(
-          extent={{90,-10},{110,10}}), iconTransformation(extent={{80,10},{100,30}})));
+          extent={{86,-16},{116,14}}), iconTransformation(extent={{80,10},{100,30}})));
 protected
   parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
     "medium's specific heat capacity";

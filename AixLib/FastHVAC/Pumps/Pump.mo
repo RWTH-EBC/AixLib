@@ -19,7 +19,11 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput m_flowSet(unit="kg/s")
     "External real input to set the mass flow rate" annotation (Placement(
-        transformation(extent={{-27,-27},{27,27}}, rotation=270)));
+        transformation(extent={{-27,-27},{27,27}}, rotation=270),
+        iconTransformation(
+        extent={{-27,-27},{27,27}},
+        rotation=270,
+        origin={0,106})));
   FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     "Thermal port for input values (temperature, mass flow rate, specific enthalpy, constant specific heat capacity)"
     annotation (Placement(transformation(extent={{-86,-10},{-66,10}}),

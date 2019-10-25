@@ -130,8 +130,8 @@ equation
           0.6,76},{0.6,13.08}}, color={255,0,255}));
   connect(TsuSourceRamp.y, fluidSource.T_fluid) annotation (Line(points={{-75,-24},
           {-54,-24},{-54,-29.8},{-48,-29.8}}, color={0,0,127}));
-  connect(dotm_sink.y, pump.dotm_setValue)
-    annotation (Line(points={{67.5,77},{36,77},{36,28}}, color={0,0,127}));
+  connect(dotm_sink.y, pump.m_flowSet)
+    annotation (Line(points={{67.5,77},{36,77},{36,30.6}}, color={0,0,127}));
   connect(sine.y, gain.u)
     annotation (Line(points={{57.6,12},{54,12},{54,2.8}}, color={0,0,127}));
   connect(gain.y, heatFlowRateCon.Q_flow)
@@ -147,7 +147,7 @@ equation
   connect(heatPump.enthalpyPort_b2, vessel_ev.enthalpyPort_a)
     annotation (Line(points={{-5,11},{-5,57},{-27.3,57}}, color={176,0,0}));
   connect(fluidSource.enthalpyPort_b, heatPump.enthalpyPort_a2) annotation (
-      Line(points={{-30,-33},{-18,-33},{-18,-15},{-5,-15}}, color={176,0,0}));
+      Line(points={{-31,-32},{-18,-32},{-18,-15},{-5,-15}}, color={176,0,0}));
   connect(temperatureSensor.enthalpyPort_a, heatPump.enthalpyPort_b1)
     annotation (Line(points={{27.08,-73.09},{11,-73.09},{11,-15}}, color={176,0,
           0}));

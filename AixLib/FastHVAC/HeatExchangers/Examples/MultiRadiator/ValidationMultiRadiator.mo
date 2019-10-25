@@ -2,8 +2,6 @@ within AixLib.FastHVAC.HeatExchangers.Examples.MultiRadiator;
 model ValidationMultiRadiator
 
   extends Modelica.Icons.Example;
-  AixLib.FastHVAC.Valves.Splitter splitter(n=3)
-    annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
   AixLib.FastHVAC.Valves.Manifold manifold(n=3)
     annotation (Placement(transformation(extent={{32,-60},{52,-40}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedConvHeatFlow(Q_flow=-4500)

@@ -39,21 +39,18 @@ public
     annotation (Placement(transformation(extent={{-50,70},{-30,90}}),
         iconTransformation(extent={{-50,70},{-30,90}})));
   AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Port for radiative heat into the environment" annotation (Placement(transformation(extent={{30,70},{50,90}})));
-  Valves.Splitter splitter(n=n)
-    annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
   Valves.Manifold manifold(n=n)
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   BaseClasses.PseudoRadiator pseudoRadiator(n=n - 1)
     annotation (Placement(transformation(extent={{-10,28},{12,48}})));
 
+  Valves.Splitter splitter
+    annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
 equation
      pseudoRadiator.dotQ_conv = -(n-1)*radiator.ConvectiveHeat.Q_flow;
      pseudoRadiator.dotQ_rad = -(n-1)*radiator.RadiativeHeat.Q_flow;
 
   for k in 1:(n-1) loop
-
-    pseudoRadiator.enthalpyPort_b[k].T_outflow = radiator.enthalpyPort_b1.T_outflow;
-    pseudoRadiator.enthalpyPort_b[k].c_outflow = radiator.enthalpyPort_b1.c_outflow;
     pseudoRadiator.enthalpyPort_b[k].h_outflow = radiator.enthalpyPort_b1.h_outflow;
      pseudoRadiator.enthalpyPort_b[k].m_flow = radiator.enthalpyPort_b1.m_flow;
      connect(splitter.enthalpyPort_b[k+1],pseudoRadiator.enthalpyPort_a[k]);
@@ -79,7 +76,7 @@ equation
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(splitter.enthalpyPort_a, enthalpyPort_a) annotation (Line(
-      points={{-66,0},{-100,0}},
+      points={{-58,0},{-100,0}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(manifold.enthalpyPort_b, enthalpyPort_b) annotation (Line(
@@ -88,7 +85,7 @@ equation
       smooth=Smooth.None));
   connect(splitter.enthalpyPort_b[1], radiator.enthalpyPort_a1) annotation (
       Line(
-      points={{-46,0},{-8,0},{-8,-0.2}},
+      points={{-38,0},{-8,0},{-8,-0.2}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(radiator.enthalpyPort_b1, manifold.enthalpyPort_a[1]) annotation (
