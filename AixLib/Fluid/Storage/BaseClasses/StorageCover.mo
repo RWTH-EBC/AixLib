@@ -1,6 +1,11 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model StorageCover "Sandwich wall construction for heat storage cover"
 
+  // Assumptions
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
   parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
@@ -14,42 +19,26 @@ model StorageCover "Sandwich wall construction for heat storage cover"
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Heat transfer coefficientr water <-> wall";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Heat transfer coefficientr insulation <-> air";
   parameter Modelica.SIunits.Temperature TStartWall=293.15
-    "Starting Temperature of wall in K";
+    "Starting Temperature of wall in K" annotation(Dialog(tab = "Initialization"));
   parameter Modelica.SIunits.Temperature TStartIns=293.15
-    "Starting Temperature of insulation in K";
+    "Starting Temperature of insulation in K" annotation(Dialog(tab = "Initialization"));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
+    "Inner heat port"
+    annotation (Placement(transformation(extent={{-100,0},{-80,20}},
+          rotation=0)));
     parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
     parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
       "Specific heat capacity of insulation";
     parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(final hCon=hConIn, final A=AWall)
+                                                                          "Inside heat convection"
+    annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
     parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
       "Specific heat capacity of wall";
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall1(final G=(AWall)*(lambdaWall)/(sWall/2))
         "Heat conduction through first wall layer" annotation (Placement(
         transformation(extent={{-50,0},{-30,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall2(final G=(AWall)*(lambdaWall)/(sWall/2))
-        "Heat conduction through second wall layer" annotation (Placement(
-        transformation(extent={{-20,0},{0,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(AWall)*(lambdaIns)/(sIns/2))
-        "Heat conduction through first insulation layer" annotation (Placement(
-        transformation(extent={{10,0},{30,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(AWall)*(lambdaIns)/(sIns/2))
-        "Heat conduction through second insulation layer" annotation (Placement(
-        transformation(extent={{38,0},{58,20}}, rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatConv convOutside(final hCon=hConOut, A=AWall)
-                                                                            "Outside heat convection"
-    annotation (Placement(transformation(
-        origin={72,10},
-        extent={{-10,-10},{10,10}},
-        rotation=180)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
-    "Outer heat port"
-    annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
-           0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
-    "Inner heat port"
-    annotation (Placement(transformation(extent={{-100,0},{-80,20}},
-          rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadWall(
     final C=(cWall)*(rhoWall)*(AWall)*(sWall),
     final T(
@@ -61,13 +50,29 @@ model StorageCover "Sandwich wall construction for heat storage cover"
       start=0)) if not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
         "Heat capacity of wall" annotation (Placement(
         transformation(extent={{-20,-26},{0,-6}}, rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall2(final G=(AWall)*(lambdaWall)/(sWall/2))
+        "Heat conduction through second wall layer" annotation (Placement(
+        transformation(extent={{-20,0},{0,20}}, rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(AWall)*(lambdaIns)/(sIns/2))
+        "Heat conduction through first insulation layer" annotation (Placement(
+        transformation(extent={{10,0},{30,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=cIns*rhoIns*AWall*sIns)
         "Heat capacity of insulation" annotation (Placement(transformation(
           extent={{36,-28},{56,-8}}, rotation=0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(AWall)*(lambdaIns)/(sIns/2))
+        "Heat conduction through second insulation layer" annotation (Placement(
+        transformation(extent={{38,0},{58,20}}, rotation=0)));
 
-  AixLib.Utilities.HeatTransfer.HeatConv convInside(final hCon=hConIn, final A=AWall)
-                                                                          "Inside heat convection"
-    annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(final hCon=hConOut, A=AWall)
+                                                                            "Outside heat convection"
+    annotation (Placement(transformation(
+        origin={72,10},
+        extent={{-10,-10},{10,10}},
+        rotation=180)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
+    "Outer heat port"
+    annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
+           0)));
 equation
   connect(convOutside.port_a, heatportOuter) annotation (Line(
       points={{82,10},{90,10}},
