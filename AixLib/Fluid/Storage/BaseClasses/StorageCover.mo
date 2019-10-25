@@ -5,7 +5,7 @@ model StorageCover "Sandwich wall construction for heat storage cover"
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
 
-  final parameter Modelica.SIunits.Area AWall = D1^2/4*Modelica.Constants.pi "Area";
+  parameter Modelica.SIunits.Area AWall=D1^2/4*Modelica.Constants.pi "Area";
 
   parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
     "Thermal Conductivity of wall";
@@ -24,23 +24,20 @@ model StorageCover "Sandwich wall construction for heat storage cover"
     parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
       "Specific heat capacity of wall";
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall1(G=(
-        AWall)*(lambdaWall)/(sWall/2))
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall1(final G=(AWall)*(lambdaWall)/(sWall/2))
         "Heat conduction through first wall layer" annotation (Placement(
         transformation(extent={{-50,0},{-30,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall2(G=(
-        AWall)*(lambdaWall)/(sWall/2))
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall2(final G=(AWall)*(lambdaWall)/(sWall/2))
         "Heat conduction through second wall layer" annotation (Placement(
         transformation(extent={{-20,0},{0,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(
-        AWall)*(lambdaIns)/(sIns/2))
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(AWall)*(lambdaIns)/(sIns/2))
         "Heat conduction through first insulation layer" annotation (Placement(
         transformation(extent={{10,0},{30,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(
-        AWall)*(lambdaIns)/(sIns/2))
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(AWall)*(lambdaIns)/(sIns/2))
         "Heat conduction through second insulation layer" annotation (Placement(
         transformation(extent={{38,0},{58,20}}, rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatConv convOutside(hCon=hConOut, A=AWall) "Outside heat convection"
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(final hCon=hConOut, A=AWall)
+                                                                            "Outside heat convection"
     annotation (Placement(transformation(
         origin={72,10},
         extent={{-10,-10},{10,10}},
@@ -64,12 +61,12 @@ model StorageCover "Sandwich wall construction for heat storage cover"
       start=0)) if not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
         "Heat capacity of wall" annotation (Placement(
         transformation(extent={{-20,-26},{0,-6}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=(cIns)
-        *(rhoIns)*(AWall)*(sIns))
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=cIns*rhoIns*AWall*sIns)
         "Heat capacity of insulation" annotation (Placement(transformation(
           extent={{36,-28},{56,-8}}, rotation=0)));
 
-  AixLib.Utilities.HeatTransfer.HeatConv convInside(hCon=hConIn, A=AWall) "Inside heat convection"
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(final hCon=hConIn, final A=AWall)
+                                                                          "Inside heat convection"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
 equation
   connect(convOutside.port_a, heatportOuter) annotation (Line(
@@ -142,12 +139,10 @@ equation
           fillPattern=FillPattern.CrossDiag,
           textString="%name")}),
     Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Model of a sandwich wall construction for a cover wall for heat storages.</p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>The heat transfer is implemented consisting of the insulation material and
-the tank material. Only the material data is used for the calculation of losses.
-No additional losses are included.</p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Model of a sandwich wall construction as cover of a hot water tank (thermal storage).</p>
+<h4><span style=\"color: #008000\">Concept</span></h4>
+<p>The heat transfer is implemented consisting of the insulation material and the tank material. Only the material data is used for the calculation of losses. No additional losses are included.</p>
 </html>",
       revisions="<html>
 <ul>
