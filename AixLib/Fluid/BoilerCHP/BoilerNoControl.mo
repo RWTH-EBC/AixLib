@@ -7,9 +7,9 @@ model BoilerNoControl "Boiler model with physics only"
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group=
          "Boiler type"), choicesAllMatching=true);
-  parameter Modelica.SIunits.ThermalConductance G=0.01*Q_nom/50
+  parameter Modelica.SIunits.ThermalConductance G=0.003*Q_nom/50
     "Constant thermal conductance to environment(G=Q_loss/dT)";
-  parameter Modelica.SIunits.HeatCapacity C=0.5*Q_nom
+  parameter Modelica.SIunits.HeatCapacity C=1.5*Q_nom
     "Heat capacity of metal (J/K)";
   parameter Modelica.SIunits.Volume V=paramBoiler.volume "Volume";
 
@@ -191,6 +191,11 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>A boiler model consisting of physical components.The efficiency is based on the part load rate and the inflow water temperature.</p>
+<p>
+<br>Assumptions for predefined parameter values (based on <i><a href=\"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">Vissmann data cheat</a></i>): 
+</p>
+<p>G: a heat loss of 0.3 &percnt; of nominal power at a temperature difference of 50 K to ambient is assumed.</p>
+<p>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.</p>
 </html>", revisions="<html>
 <ul>
 <li><i>September 19, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
