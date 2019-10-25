@@ -30,7 +30,7 @@ equation
 
   connect(fluidSource.enthalpyPort_b, temperatureSensor_before.enthalpyPort_a)
     annotation (Line(
-      points={{-36,-1},{-35,-1},{-35,-1.07},{-23.04,-1.07}},
+      points={{-37,0},{-35,0},{-35,-1.07},{-23.04,-1.07}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(temperatureSensor_after.enthalpyPort_b, vessel.enthalpyPort_a)

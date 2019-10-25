@@ -153,7 +153,8 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(fluidSource5.enthalpyPort_b, heatStorageVariablePorts.port_HC2_in)
-    annotation (Line(points={{-48,-69},{-46,-69},{-46,-18},{-46,-15.7},{-1.41,-15.7}},
+    annotation (Line(points={{-49,-68},{-46,-68},{-46,-18},{-46,-15.7},{-1.41,
+          -15.7}},
         color={176,0,0}));
   connect(heatStorageVariablePorts.out, ambient.port) annotation (Line(points={
           {37.2,14},{56,14},{56,16},{76,16}}, color={191,0,0}));
@@ -167,7 +168,7 @@ equation
   connect(heatingRod.port, heatStorageVariablePorts.heatingRod) annotation (
       Line(points={{-52,28},{-24,28},{4.8,28},{4.8,14}}, color={191,0,0}));
   connect(fluidSource4.enthalpyPort_b, heatStorageVariablePorts.port_HC1_in)
-    annotation (Line(points={{-48,3},{-48,8},{-0.6,8}}, color={176,0,0}));
+    annotation (Line(points={{-49,4},{-49,8},{-0.6,8}}, color={176,0,0}));
   connect(vessel3.enthalpyPort_a, heatStorageVariablePorts.UnloadingCycle_Out[1])
     annotation (Line(points={{57,73.6},{57,56},{26,56},{26,38},{26,22},{26,20},
           {26.4,20}}, color={176,0,0}));
@@ -181,16 +182,17 @@ equation
     annotation (Line(points={{-29,-73.6},{-29,-52},{16,-52},{16,-46},{15.6,-46},
           {15.6,-40}}, color={176,0,0}));
   connect(fluidSource.enthalpyPort_b, heatStorageVariablePorts.LoadingCycle_In[
-    1]) annotation (Line(points={{-50,61},{-40,61},{-40,40},{15.6,40},{15.6,20}},
+    1]) annotation (Line(points={{-51,62},{-40,62},{-40,40},{15.6,40},{15.6,20}},
         color={176,0,0}));
   connect(fluidSource3.enthalpyPort_b, heatStorageVariablePorts.LoadingCycle_In[
-    2]) annotation (Line(points={{-1,50},{-1,40},{16,40},{16,30},{15.6,30},{
-          15.6,20}}, color={176,0,0}));
+    2]) annotation (Line(points={{-1.55431e-15,51},{-1.55431e-15,40},{16,40},{
+          16,30},{15.6,30},{15.6,20}},
+                     color={176,0,0}));
   connect(heatStorageVariablePorts.UnloadingCycle_In[1], fluidSource1.enthalpyPort_b)
-    annotation (Line(points={{26.4,-40},{26,-40},{26,-45},{48,-45}}, color={176,
+    annotation (Line(points={{26.4,-40},{26,-40},{26,-46},{49,-46}}, color={176,
           0,0}));
   connect(fluidSource2.enthalpyPort_b, heatStorageVariablePorts.UnloadingCycle_In[
-    2]) annotation (Line(points={{27,-52},{26.4,-52},{26.4,-40}}, color={176,0,
+    2]) annotation (Line(points={{26,-53},{26.4,-53},{26.4,-40}}, color={176,0,
           0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),

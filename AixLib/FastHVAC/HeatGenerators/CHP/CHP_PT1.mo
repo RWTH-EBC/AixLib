@@ -5,7 +5,9 @@ model CHP_PT1 "Simple general CHP model"
       BHKW Parameters
       ******************************************************************* */
     parameter Boolean selectable=true "CHP record";
-
+    parameter AixLib.DataBase.CHP.FastHVAC.BaseDataDefinition param=
+      AixLib.DataBase.CHP.FastHVAC.Ecopower() "Paramter contains data from CHP records"
+    annotation (Dialog(enable=selectable), choicesAllMatching=true, group="Unit properties");
     parameter Modelica.SIunits.Efficiency eta_el= 0.25
     "CHP's electrical efficiency "
     annotation (Dialog(group = "Unit properties",enable=not selectable));

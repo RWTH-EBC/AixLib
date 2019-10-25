@@ -19,7 +19,7 @@ model CHP
         rotation=0,
         origin={-36,42})));
   AixLib.FastHVAC.HeatGenerators.CHP.CHP_PT1 cHP_PT1_1(
-    param=FastHVAC.Data.CHP.Ecopower_3_0(),
+    param=DataBase.CHP.FastHVAC.Ecopower_3_0(),
     selectable=true,
     sigma(start=0.4),
     T0=293.15)
@@ -34,7 +34,7 @@ model CHP
 equation
   connect(fluidSource.enthalpyPort_b, temperatureSensor_before.enthalpyPort_a)
     annotation (Line(
-      points={{-52,1},{-51,1},{-51,0.93},{-43.04,0.93}},
+      points={{-53,2},{-51,2},{-51,0.93},{-43.04,0.93}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(temperatureSensor_after.enthalpyPort_b, vessel.enthalpyPort_a)
