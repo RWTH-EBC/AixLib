@@ -65,8 +65,6 @@ model StorageWall "Sandwich wall construction for heat storages"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
 
 protected
-    parameter Modelica.SIunits.Area AHor = (D1/2)^2*Modelica.Constants.pi
-      "Horizontal area of water in layer";
     parameter Modelica.SIunits.Area AWall= D1*Modelica.Constants.pi * height
       "Vertical outlining area of water in layer";
     parameter Modelica.SIunits.Area AIns=(D1+2*sWall)*Modelica.Constants.pi * height;
