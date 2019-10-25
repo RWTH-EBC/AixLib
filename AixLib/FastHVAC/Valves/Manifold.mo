@@ -1,6 +1,9 @@
 ﻿within AixLib.FastHVAC.Valves;
 model Manifold
-parameter Integer n(min=1) = 1 "Number of input flows";
+  parameter Integer n(min=1) = 1 "Number of input flows";
+    Modelica.SIunits.SpecificEnthalpy h_outflow_mixed
+    "mixed specific enthalpy leaving port b";
+
   Interfaces.EnthalpyPort_a enthalpyPort_a[n]
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 
@@ -8,11 +11,18 @@ parameter Integer n(min=1) = 1 "Number of input flows";
   "n-dimensional imput port 1-dimensional output port" annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
 equation
-  enthalpyPort_b.m_flow + sum(enthalpyPort_a.m_flow) = 0;  //mass balance
-  enthalpyPort_b.m_flow*enthalpyPort_b.h_outflow + enthalpyPort_a.m_flow*
-  enthalpyPort_a.h_outflow = 0;                                                        //enthalpy balance
-  enthalpyPort_b.h_outflow = enthalpyPort_b.c_outflow*enthalpyPort_b.T_outflow;
-                                                           //h=c*T
+    h_outflow_mixed =
+   sum(inStream(enthalpyPort_a.h_outflow) * enthalpyPort_a.m_flow)
+   / sum(enthalpyPort_a.m_flow);
+
+//   enthalpyPort_b.m_flow = - sum(enthalpyPort_a.m_flow);  //mass balance
+//   sum(inStream(enthalpyPort_a.h_outflow) * enthalpyPort_a.m_flow) =
+//    / sum(enthalpyPort_a.m_flow);
+//
+//   enthalpyPort_b.m_flow * enthalpyPort_b.h_outflow
+//   + enthalpyPort_a.m_flow * inStream(enthalpyPort_a.h_outflow) = 0;                                                        //enthalpy balance
+//   enthalpyPort_b.h_outflow = enthalpyPort_b.c_outflow*enthalpyPort_b.T_outflow;
+//                                                            //h=c*T
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics), Icon(graphics={Polygon(
           points={{100,20},{20,20},{-20,60},{-100,60},{-100,60},{-100,40},{-30,
