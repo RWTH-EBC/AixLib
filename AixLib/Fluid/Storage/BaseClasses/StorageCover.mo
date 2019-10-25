@@ -10,14 +10,14 @@ model StorageCover "Sandwich wall construction for heat storage cover"
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
 
-  parameter Modelica.SIunits.Area AWall=D1^2/4*Modelica.Constants.pi "Area";
+  parameter Modelica.SIunits.Area AWall=D1^2/4*Modelica.Constants.pi "Area" annotation(Dialog(tab="Geometrical Parameters"));
 
   parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
-    "Thermal Conductivity of wall";
+    "Thermal Conductivity of wall" annotation(Dialog(group="Thermal properties"));
     parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
-    "Thermal Conductivity of insulation";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Heat transfer coefficientr water <-> wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Heat transfer coefficientr insulation <-> air";
+    "Thermal Conductivity of insulation" annotation(Dialog(group="Thermal properties"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn=2 "Convective heat transfer coefficient water <-> wall" annotation(Dialog(group="Thermal properties"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut=2 "Convective heat transfer coefficient insulation <-> air" annotation(Dialog(group="Thermal properties"));
   parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K" annotation(Dialog(tab = "Initialization"));
   parameter Modelica.SIunits.Temperature TStartIns=293.15
@@ -26,21 +26,25 @@ model StorageCover "Sandwich wall construction for heat storage cover"
     "Inner heat port"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
-    parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
-    parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
-      "Specific heat capacity of insulation";
-    parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+  parameter Modelica.SIunits.Density rhoIns=1600
+    "Density of insulation" annotation(Dialog(group="Material properties"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
+    "Specific heat capacity of insulation" annotation(Dialog(group="Material properties"));
+  parameter Modelica.SIunits.Density rhoWall=1600
+    "Density of Insulation" annotation(Dialog(group="Material properties"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
+    "Specific heat capacity of wall" annotation(Dialog(group="Material properties"));
+
   AixLib.Utilities.HeatTransfer.HeatConv convInside(final hCon=hConIn, final A=AWall)
                                                                           "Inside heat convection"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}}, rotation=0)));
-    parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
-      "Specific heat capacity of wall";
+
 
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall1(final G=(AWall)*(lambdaWall)/(sWall/2))
         "Heat conduction through first wall layer" annotation (Placement(
         transformation(extent={{-50,0},{-30,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadWall(
-    final C=(cWall)*(rhoWall)*(AWall)*(sWall),
+    final C=cWall*rhoWall*AWall*sWall,
     final T(
       stateSelect=StateSelect.always,
       fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
@@ -56,7 +60,15 @@ model StorageCover "Sandwich wall construction for heat storage cover"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(AWall)*(lambdaIns)/(sIns/2))
         "Heat conduction through first insulation layer" annotation (Placement(
         transformation(extent={{10,0},{30,20}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=cIns*rhoIns*AWall*sIns)
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(
+    C=cIns*rhoIns*AWall*sIns,
+    final T(
+      stateSelect=StateSelect.always,
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      start=TStartIns),
+    final der_T(
+      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      start=0)) if not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
         "Heat capacity of insulation" annotation (Placement(transformation(
           extent={{36,-28},{56,-8}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(AWall)*(lambdaIns)/(sIns/2))
