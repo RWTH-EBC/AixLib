@@ -16,7 +16,7 @@ extends Modelica.Icons.Package;
         fillPattern=FillPattern.Solid)}),
   Documentation(info="<html>
 <p>This packages contains pump models with a different, not so sophisitcated, mathematical approach than the original IBPSA models in Fluid.Movers.</p>
-<p>The models PumpN and PumpH were developed in the Zugabe project at the E.ON Energy Research Center. The main advantage to users might be</p>
+<p>The models PumpSpeedControlled and PumpHeadControlled were developed in the Zugabe project at the E.ON Energy Research Center. The main advantage to users might be</p>
 <ul>
 <li>the way how to generate pump curves (performance data). </li>
 <li>That the model respects power limitation that manufacturers impose on most of their pumps.</li>

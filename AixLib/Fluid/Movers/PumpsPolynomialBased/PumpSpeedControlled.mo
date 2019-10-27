@@ -15,26 +15,26 @@ model PumpSpeedControlled
     quantity="VolumeFlowRate",
     unit="m3/h",
     displayUnit="m3/h") = 0.67*max(pumpParam.maxMinSpeedCurves[:, 1])
-    "<html>Nominal volume flow rate in m³/h (~0.67*Qmax).<br />
-    Qmax is taken from pumpParam.maxMinSpeedCurves.</html>"
+    "Nominal volume flow rate in m³/h (~0.67*Qmax).
+    Qmax is taken from pumpParam.maxMinSpeedCurves."
     annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
   parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm Nnom=
       Modelica.Math.Vectors.interpolate(
         x=pumpParam.maxMinSpeedCurves[:,1],
         y=pumpParam.maxMinSpeedCurves[:,2],
         xi=Qnom)
-    "<html><br />Pump speed in design point (Qnom,Hnom).<br />
-    Default is maximum speed at Qnom from pumpParam.maxMinSpeedCurves.<br />
-    Note that N is defined only on [nMin, nMax]. Due to power limitation<br />
-    N might be smaller than nMax for higher Q.</html>"
+    "Pump speed in design point (Qnom,Hnom).
+    Default is maximum speed at Qnom from pumpParam.maxMinSpeedCurves.
+    Note that N is defined only on [nMin, nMax]. Due to power limitation
+    N might be smaller than nMax for higher Q."
     annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
   parameter Modelica.SIunits.Height Hnom=
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cHQN,
       Qnom,
-      Nnom) "<html><br />Nominal pump head in m (water).<br /> 
-      Will by default be calculated automatically from Qnom and Nnom.<br />
-      If you change the value make sure to also set a feasible Qnom.</html>"
+      Nnom) "Nominal pump head in m (water).
+      Will by default be calculated automatically from Qnom and Nnom.
+      If you change the value make sure to also set a feasible Qnom."
     annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort(
@@ -52,40 +52,40 @@ model PumpSpeedControlled
   parameter Real Qstart(
     quantity="VolumeFlowRate",
     unit="m3/h",
-    displayUnit="m3/h")=Qnom "<html>Volume flow rate in m³/h at start of simulation.<br />
-  Default is design point (Qnom).</html>"
+    displayUnit="m3/h")=Qnom "Volume flow rate in m³/h at start of simulation.
+  Default is design point (Qnom)."
     annotation (Dialog(tab="Initialization", group="Volume flow"));
   parameter Medium.MassFlowRate m_flow_start=Qstart*Medium.density_pTX(
       p_a_start,
       T_start,
-      X_start)/3600 "<html><br />Start value of m_flow in port_a.m_flow<br />
-      Used to initialize ports a and b and for initial checks of model.<br />
-      Use it to conveniently initialize upper level models' start mass flow rate.<br />
-      Default is to convert Qnom value. Disabled for user change by default.</html>"
+      X_start)/3600 "Start value of m_flow in port_a.m_flow
+      Used to initialize ports a and b and for initial checks of model.
+      Use it to conveniently initialize upper level models' start mass flow rate.
+      Default is to convert Qnom value. Disabled for user change by default."
     annotation (Dialog(tab="Initialization", group="Volume flow", enable=false));
   parameter Modelica.SIunits.Height Hstart=max(0,
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cHQN,
       Qstart,
-      Nnom)) "<html><br />
-      Start value of pump head. Will be used to initialize criticalDamping block<br />
-      and pressure in ports a and b.<br />
-      Default is to calculate it from Qstart and Nnom.  If you change the value<br />
-      make sure to also set Qstart to a suitable value.</html>"
+      Nnom)) "
+      Start value of pump head. Will be used to initialize criticalDamping block
+      and pressure in ports a and b.
+      Default is to calculate it from Qstart and Nnom.  If you change the value
+      make sure to also set Qstart to a suitable value."
     annotation (Dialog(tab="Initialization", group="Pressure"));
-  parameter Medium.AbsolutePressure p_a_start=system.p_start "<html><br />
-  Start value for inlet pressure. Use it to set a defined absolute pressure<br />
-  in the circuit. For example system.p_start. Also use it to initialize<br />
-  upper level models properly. It will affect p_b_start.</html>"
+  parameter Medium.AbsolutePressure p_a_start=system.p_start "
+  Start value for inlet pressure. Use it to set a defined absolute pressure
+  in the circuit. For example system.p_start. Also use it to initialize
+  upper level models properly. It will affect p_b_start."
     annotation (Dialog(tab="Initialization", group="Pressure"));
   parameter Medium.AbsolutePressure p_b_start=p_a_start + Hstart*system.g*
       Medium.density_pTX(
       p_a_start,
       T_start,
-      X_start) "<html><br />
-      Start value for outlet pressure. It depends on p_a_start and Hstart.<br />
-      It is deactivated for user input by default. Use it in an upper level model<br />
-      for proper initialization of other pressure states in that circuit.</html>"
+      X_start) "
+      Start value for outlet pressure. It depends on p_a_start and Hstart.
+      It is deactivated for user input by default. Use it in an upper level model
+      for proper initialization of other pressure states in that circuit."
       annotation (Dialog(
       tab="Initialization",
       group="Pressure",
@@ -477,29 +477,19 @@ equation
 <p>The pump must be controlled by setting the pump speed (pumpBus.rpm_Input).</p>
 <h4>Power and Efficiency calculation</h4>
 <p>The power and the efficiency of the pump can be calculated, with the help of polynomial aproximations. <b>Only use them if you have correct / complete data about the pump. </b></p>
-<p><br />See the examples under package &quot;Examples&quot;.</p>
+<p><br>See the examples under package &quot;Examples&quot;.</p>
 <h4>Hints</h4>
 <h5>Qnom</h5>
-<p>Qnom, the nominal or design volume flow rate of the pump, is given in m&sup3;/h and should be selected by the engineer. A good default value would be 67&#37; of Qmax .The default value, however, is set to <code>0.5*<span style=\"color: #ff0000;\">max</span>(pumpParam.maxMinSpeedCurves[:,&nbsp;1]). max(pumpParam.maxMinSpeedCurves[:, 1]) </code>is the maximum value found in column 1 of table maxMinSpeedCurves. This however, is more than the real maximum volume flow rate of the pump as the the table is extended by additional rows for proper extrapolation of table values. In order to compensate for this excess value Qnom is by default only at 50&#37; of the maxMinSpeedCurves value. Please refer to the referenceDataQHPN matrix to find the real Qmax value. A simple alternative for the given assumption could be to introduce a parameter Qmax in the pump record that contains the exact value.</p>
+<p>Qnom, the nominal or design volume flow rate of the pump, is given in m&sup3;/h and should be selected by the engineer. A good default value would be 67&percnt; of Qmax .The default value, however, is set to <span style=\"font-family: Courier New;\">0.5*<span style=\"color: #ff0000;\">max</span>(pumpParam.maxMinSpeedCurves[:,&nbsp;1]). max(pumpParam.maxMinSpeedCurves[:, 1]) is the maximum value found in column 1 of table maxMinSpeedCurves. This however, is more than the real maximum volume flow rate of the pump as the the table is extended by additional rows for proper extrapolation of table values. In order to compensate for this excess value Qnom is by default only at 50&percnt; of the maxMinSpeedCurves value. Please refer to the referenceDataQHPN matrix to find the real Qmax value. A simple alternative for the given assumption could be to introduce a parameter Qmax in the pump record that contains the exact value.</p>
 <h5>Nstart</h5>
 <p>The start speed of the pump will be determined from interpolation in the maxMinSpeedCurves table, providing the maximum speed possible at a given volume flow rate:</p>
-<p><code>Nstart =<span style=\"color: #ff0000;\"> Modelica.Math.Vectors.interpolate</span>(x=pumpParam.maxMinSpeedCurves[:,1], y=pumpParam.maxMinSpeedCurves[:,2], xi=Qstart)</code></p>
-<br /><h4>Main equations</h4>
-<p>xxx </p>
-<h4>Assumption and limitations</h4>
+<p><span style=\"font-family: Courier New;\">Nstart =<span style=\"color: #ff0000;\"> Modelica.Math.Vectors.interpolate</span>(x=pumpParam.maxMinSpeedCurves[:,1], y=pumpParam.maxMinSpeedCurves[:,2], xi=Qstart)</p>
+<p><br><b>Assumption and limitations</b></p>
 <p>Note assumptions such as a specific definition ranges for the model, possible medium models, allowed combinations with other models etc. There might be limitations of the model such as reduced accuracy under specific circumstances. Please note all those limitations you know of so a potential user won&apos;t make too serious mistakes </p>
-<h4>Typical use and important parameters</h4>
-<p>xxx </p>
-<h4>Options</h4>
-<p>xxx </p>
 <h4>Dynamics</h4>
 <p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
 <h4>Validation</h4>
 <p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
-<h4>Implementation</h4>
-<p>xxx </p>
-<h4>References</h4>
-<p>xxx </p>
 </html>",
 revisions="<html>
 <ul>

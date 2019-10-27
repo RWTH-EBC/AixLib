@@ -7,7 +7,7 @@ model testPumpPowerCalculation
   //           Select pump record here:
   //
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord param=
-      AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_1_6_4()
+      AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_6_V4()
     "new pump record with coefficients.";
   //
   // **************************************************

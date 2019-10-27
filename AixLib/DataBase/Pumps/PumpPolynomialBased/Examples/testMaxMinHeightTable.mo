@@ -3,7 +3,7 @@ model testMaxMinHeightTable
   "Testing the max and min height curves from that table."
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord param=
-      AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN30_1_12_13()
+      AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN30_H1_12_V13()
     "select the parameter record that you want to check here";
   parameter Real maxQ(unit="m3/h", displayUnit="m3/h") = param.maxMinHeight[
     size(param.maxMinHeight, 1), 1];
@@ -27,7 +27,7 @@ model testMaxMinHeightTable
 initial equation
   assert(
     (sum(abs(param.maxMinHeight)) <> 0),
-    "In a pump model parameter record (" + param.pumpModelString + ") 
+    "In a pump model parameter record
     parameter matrix 'maxMinHeight' was all zero.",
     level=AssertionLevel.error);
 equation
