@@ -477,7 +477,7 @@ equation
 <p>The pump must be controlled by setting the pump speed (pumpBus.rpm_Input).</p>
 <h4>Power and Efficiency calculation</h4>
 <p>The power and the efficiency of the pump can be calculated, with the help of polynomial aproximations. <b>Only use them if you have correct / complete data about the pump. </b></p>
-<p></br>See the examples under package &quot;Examples&quot;.</p>
+<p><br/>See the examples under package &quot;Examples&quot;.</p>
 <h4>Hints</h4>
 <h5>Qnom</h5>
 <p>Qnom, the nominal or design volume flow rate of the pump, is given in m&sup3;/h and should be selected by the engineer. A good default value would be 67 % of Qmax .The default value, however, is set to <span style=\"font-family: Courier New;\">0.5*</span><span style=\"color: #ff0000;\">max(pumpParam.maxMinSpeedCurves[:,&nbsp;1]). max(pumpParam.maxMinSpeedCurves[:, 1])</span> is the maximum value found in column 1 of table maxMinSpeedCurves. This however, is more than the real maximum volume flow rate of the pump as the the table is extended by additional rows for proper extrapolation of table values. In order to compensate for this excess value Qnom is by default only at 50 5 of the maxMinSpeedCurves value. Please refer to the referenceDataQHPN matrix to find the real Qmax value. A simple alternative for the given assumption could be to introduce a parameter Qmax in the pump record that contains the exact value.</p>
