@@ -1,26 +1,18 @@
 within AixLib.Systems.ModularAHU;
 model GenericAHU
   "Generic air-handling unit with heat recovery system"
-  replaceable package MediumAir =
-    Modelica.Media.Interfaces.PartialMedium "Medium in air canal in the component"
-      annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
-            AixLib.Media.Antifreeze.PropyleneGlycolWater (
-          property_T=293.15,
-          X_a=0.40)
-          "Propylene glycol water, 40% mass fraction")));
-  replaceable package MediumWater =
-    Modelica.Media.Interfaces.PartialMedium "Medium in hydraulic circuits"
-      annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
-            AixLib.Media.Antifreeze.PropyleneGlycolWater (
-          property_T=293.15,
-          X_a=0.40)
-          "Propylene glycol water, 40% mass fraction")));
+  replaceable package Medium1 =
+    AixLib.Media.Air "Medium in air canal in the component";
+
+
+replaceable package Medium2 =
+      Modelica.Media.Interfaces.PartialMedium "Medium in hydraulic circuits"
+    annotation (choices(
+      choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
+      choice(redeclare package Medium = AixLib.Media.Water "Water"),
+      choice(redeclare package Medium =
+            AixLib.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15,
+              X_a=0.40) "Propylene glycol water, 40% mass fraction")));
 
   parameter Boolean allowFlowReversal = true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for all mediums"
@@ -33,119 +25,197 @@ model GenericAHU
 
 
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_air(min=0)
-    "Nominal mass flow rate";
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal_water(min=0)
-    "Nominal mass flow rate";
+  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
+    "Nominal mass flow rate in air canal";
+  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
+    "Nominal mass flow rate in hydraulics";
   parameter Modelica.SIunits.Temperature T_start=303.15
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
 
   parameter Boolean usePreheater = true "If true, a preaheater is included";
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a1(redeclare final package Medium =
-        MediumAir,
+  Modelica.Fluid.Interfaces.FluidPort_a port_a1(redeclare package Medium =
+        Medium1,
     h_outflow(start=Medium1.h_default, nominal=Medium1.h_default))
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-230,-10},{-210,10}}),
         iconTransformation(extent={{-230,-10},{-210,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare final package Medium =
-        MediumAir,
+  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare package Medium =
+        Medium1,
     h_outflow(start=Medium1.h_default, nominal=Medium1.h_default))
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{230,-10},{210,10}}),
         iconTransformation(extent={{232,-10},{212,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare final package Medium =
-        MediumAir,
+  Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
+        Medium1,
     h_outflow(start=Medium1.h_default, nominal=Medium1.h_default))
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{210,70},{230,90}}),
         iconTransformation(extent={{212,70},{232,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare final package Medium =
-        MediumAir,
+  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare package Medium =
+        Medium1,
     h_outflow(start=Medium1.h_default, nominal=Medium1.h_default))
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-210,70},{-230,90}}),
         iconTransformation(extent={{-210,70},{-230,90}})));
-  RegisterModule perheater if usePreheater
+  RegisterModule perheater(
+    redeclare package Medium2 = Medium2,
+    final allowFlowReversal1=allowFlowReversal1,
+    final allowFlowReversal2=allowFlowReversal2,
+    final m1_flow_nominal=m1_flow_nominal,
+    m2_flow_nominal=m2_flow_nominal) if
+                              usePreheater
     annotation (Placement(transformation(extent={{-154,-46},{-110,14}})));
-  RegisterModule cooler
+  RegisterModule cooler(
+    redeclare package Medium1 = Medium1,
+    redeclare package Medium2 = Medium2,
+    final allowFlowReversal1=allowFlowReversal1,
+    final allowFlowReversal2=allowFlowReversal2,
+    final m1_flow_nominal=m1_flow_nominal,
+    m2_flow_nominal=m2_flow_nominal,
+    T_amb=T_amb)
     annotation (Placement(transformation(extent={{2,-46},{46,14}})));
-  RegisterModule heater
+  RegisterModule heater(
+    redeclare package Medium1 = Medium1,
+    redeclare package Medium2 = Medium2,
+    final allowFlowReversal1=allowFlowReversal1,
+    final allowFlowReversal2=allowFlowReversal2,
+    final m1_flow_nominal=m1_flow_nominal,
+    m2_flow_nominal=m2_flow_nominal,
+    T_amb=T_amb)
     annotation (Placement(transformation(extent={{76,-46},{120,14}})));
-  Fluid.HeatExchangers.DynamicHX dynamicHX
+  Fluid.HeatExchangers.DynamicHX dynamicHX(
+    redeclare package Medium1 = Medium1,
+    redeclare package Medium2 = Medium1,
+    final allowFlowReversal1=allowFlowReversal1,
+    final allowFlowReversal2=allowFlowReversal1,
+    final m1_flow_nominal=m1_flow_nominal,
+    final m2_flow_nominal=m2_flow_nominal)
     annotation (Placement(transformation(extent={{-20,-10},{-62,42}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
-        MediumWater) if usePreheater
+        Medium2) if     usePreheater
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-170,-110},{-150,-90}}),
         iconTransformation(extent={{-170,-110},{-150,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare package Medium =
-        MediumWater) if usePreheater
+        Medium2) if     usePreheater
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-130,-110},{-110,-90}}),
         iconTransformation(extent={{-130,-110},{-110,-90}})));
-  Fluid.Actuators.Dampers.Exponential flapSup
+  Fluid.Actuators.Dampers.Exponential flapSup(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-190,-10},{-170,10}})));
-  Fluid.Actuators.Dampers.Exponential flapRet
+  Fluid.Actuators.Dampers.Exponential flapRet(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{200,70},{180,90}})));
-  Fluid.Actuators.Dampers.Exponential dampHX
+  Fluid.Actuators.Dampers.Exponential dampHX(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  Fluid.Actuators.Dampers.Exponential dampByPass
+  Fluid.Actuators.Dampers.Exponential dampByPass(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-80,-10},{-60,-30}})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{-100,30},{-94,36}})));
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{-88,34},{-80,42}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a4
+  Modelica.Fluid.Interfaces.FluidPort_a port_a4(redeclare package Medium =
+        Medium2)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b4
+  Modelica.Fluid.Interfaces.FluidPort_b port_b4(redeclare package Medium =
+        Medium2)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{30,-110},{50,-90}}),
         iconTransformation(extent={{30,-110},{50,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a5
+  Modelica.Fluid.Interfaces.FluidPort_a port_a5(redeclare package Medium =
+        Medium2)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{70,-110},{90,-90}}),
         iconTransformation(extent={{70,-110},{90,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b5
+  Modelica.Fluid.Interfaces.FluidPort_b port_b5(redeclare package Medium =
+        Medium2)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{110,-110},{130,-90}}),
         iconTransformation(extent={{108,-110},{128,-90}})));
-  Fluid.Movers.FlowControlled_dp fanSup
+  Fluid.Movers.FlowControlled_dp fanSup(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
-  Fluid.Movers.FlowControlled_dp fanRet annotation (Placement(transformation(
+  Fluid.Movers.FlowControlled_dp fanRet(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m1_flow_nominal)     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={90,80})));
   Fluid.Humidifiers.GenericHumidifier_u
-                                 humidifier(redeclare package Medium =
-        MediumAir)
+                                 humidifier(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{130,-10},{150,10}})));
   Fluid.Humidifiers.GenericHumidifier_u
-                                 humidifier1(redeclare package Medium =
-        MediumAir, steamHumidifier=false)
+                                 humidifier1(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal,
+                   steamHumidifier=false)
     annotation (Placement(transformation(extent={{60,70},{40,90}})));
-  Fluid.Sensors.TemperatureTwoPort senTRet
+  Fluid.Sensors.TemperatureTwoPort senTRet(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{160,70},{140,90}})));
-  Fluid.Sensors.TemperatureTwoPort senTExh
+  Fluid.Sensors.TemperatureTwoPort senTExh(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-140,70},{-160,90}})));
-  Fluid.Sensors.TemperatureTwoPort senTSup annotation (Placement(transformation(
+  Fluid.Sensors.TemperatureTwoPort senTSup(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal)  annotation (Placement(transformation(
         extent={{-5,-6},{5,6}},
         rotation=0,
         origin={205,0})));
-  Fluid.Sensors.TemperatureTwoPort senTOA annotation (Placement(transformation(
+  Fluid.Sensors.TemperatureTwoPort senTOA(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m1_flow_nominal) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-204,0})));
-  Fluid.Sensors.VolumeFlowRate senVolFlo annotation (Placement(transformation(
+  Fluid.Sensors.VolumeFlowRate senVolFlo(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m1_flow_nominal)      annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-110,80})));
-  Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup
+  Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{184,-6},{196,6}})));
-  Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup1
+  Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup1(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal,
+    m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{130,74},{118,86}})));
+  parameter Boolean allowFlowReversal1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium in air canal";
+  parameter Boolean allowFlowReversal2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium in hydraulics";
 equation
   connect(perheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
           {-160,-27.5385},{-160,-100}},            color={0,127,255}));
