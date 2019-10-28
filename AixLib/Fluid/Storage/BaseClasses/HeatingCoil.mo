@@ -32,7 +32,7 @@ model HeatingCoil "Heating coil for heat storage model"
     each final length=lengthHC/disHC,
     each final m_flow_nominal=m_flow_nominal,
     each final m_flow_small=m_flow_small,
-    each final dIns=Modelica.Constants.eps,
+    each final dIns=0.5*(pipeHC.d_o - pipeHC.d_i),
     each final kIns=pipeHC.lambda,
     each final cPip=pipeHC.c,
     each final rhoPip=pipeHC.d,
@@ -158,9 +158,5 @@ coefficient.</p>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>
-"), Diagram(graphics={Text(
-          extent={{-172,32},{164,-94}},
-          lineColor={238,46,47},
-          textString="Need to chang dIns in PlugFlowPipe:
-cPip, rhoPip important for consideration of thermal capacity. insulation = e.g. copper pipe, since actually no insulation")}));
+"));
 end HeatingCoil;
