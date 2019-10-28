@@ -1,11 +1,11 @@
 ﻿within AixLib.Systems.ModularAHU.BaseClasses;
-expandable connector registerBus "Data bus for modular ahu registers"
+expandable connector RegisterBus "Data bus for modular ahu registers"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
   Systems.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus;
-  SI.Temperature Tair_in "Inlet air temperature";
-  SI.Temperature Tair_out "Outlet air temperatur";
-  SI.VolumeFlowRate  V_flow_air  "Air volume flow";
+  SI.Temperature TAirInMea "Inlet air temperature";
+  SI.Temperature TAirOutMea "Outlet air temperatur";
+  SI.VolumeFlowRate  VFlowAirMea  "Air volume flow";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
@@ -18,4 +18,4 @@ expandable connector registerBus "Data bus for modular ahu registers"
 <li>January 23, 2018, by Alexander Kümpel:<br/>First implementation. </li>
 </ul>
 </html>"));
-end registerBus;
+end RegisterBus;

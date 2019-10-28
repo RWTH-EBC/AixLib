@@ -45,7 +45,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
-  BaseClasses.registerBus registerBus annotation (Placement(transformation(
+  BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{68,-14},{96,
             14}})));
 equation
@@ -79,8 +79,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, registerBus.Tair_out) annotation (Line(points={{-6,-62},{-6,
-          -80},{102,-80},{102,0.13},{101.135,0.13}},          color={0,0,127}),
+  connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{-6,-62},{
+          -6,-80},{102,-80},{102,0.13},{101.135,0.13}},       color={0,0,127}),
       Text(
       string="%second",
       index=1,
