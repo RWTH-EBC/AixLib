@@ -7,3 +7,4 @@ ValveControlledHeatPump
 ValveControlledHX
 SubstationHeatingDirectCooling
 SubstationDirectHeatingDirectCooling
+ValveControlledHeatPumpFixDeltaT
