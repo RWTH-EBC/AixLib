@@ -14,8 +14,8 @@ model HeatingCoil "Heating coil for heat storage model"
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
 
-  AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each hCon=hConHC, A=fill(pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC,
-        disHC)) "Outer heat convection"
+  AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each final hCon=hConHC, each final A=pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC)
+                "Outer heat convection"
     annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=270,
@@ -32,7 +32,7 @@ model HeatingCoil "Heating coil for heat storage model"
     each final length=lengthHC/disHC,
     each final m_flow_nominal=m_flow_nominal,
     each final m_flow_small=m_flow_small,
-    each final dIns=0.00,
+    each final dIns=Modelica.Constants.eps,
     each final kIns=pipeHC.lambda,
     each final cPip=pipeHC.c,
     each final rhoPip=pipeHC.d,
@@ -161,5 +161,6 @@ coefficient.</p>
 "), Diagram(graphics={Text(
           extent={{-172,32},{164,-94}},
           lineColor={238,46,47},
-          textString="Need to chang dIns in PlugFlowPipe")}));
+          textString="Need to chang dIns in PlugFlowPipe:
+cPip, rhoPip important for consideration of thermal capacity. insulation = e.g. copper pipe, since actually no insulation")}));
 end HeatingCoil;

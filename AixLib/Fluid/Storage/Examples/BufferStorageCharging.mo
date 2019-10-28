@@ -11,7 +11,7 @@ model BufferStorageCharging
     massDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     m1_flow_nominal=const.k,
     m2_flow_nominal=boundary1.m_flow,
-    mHC1_flow_nominal=0.05,
+    mHC1_flow_nominal=boundary3.m_flow,
     n=10,
     redeclare package Medium = Medium,
     data=AixLib.DataBase.Storage.Generic_New_2000l(),
@@ -61,9 +61,9 @@ model BufferStorageCharging
         rotation=180,
         origin={62,38})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary3(
-    m_flow=0,
+    m_flow=0.5*const.k,
     redeclare package Medium = Medium,
-    T=343.15,
+    T=298.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=0,
