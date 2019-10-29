@@ -7,8 +7,8 @@ model ReducedOrderModel_OneRoom
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"))
+    filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
 
@@ -37,28 +37,28 @@ model ReducedOrderModel_OneRoom
     gWin=1,
     ratioWinConRad=0.09,
     nExt=4,
-    RExt={0.05,2.857,0.48,0.0294},
-    CExt={1000,1030,1000,1000},
+    RExt={0.00056,0.03175,0.00533,0.00033},
+    CExt={8100000,1112400,21600000,1620000},
     hRad=5,
     AInt=90,
     hConInt=2.5,
     nInt=2,
-    RInt={0.175,0.0294},
-    CInt={1000,1000},
+    RInt={0.00194,0.00033},
+    CInt={7875000,1620000},
     RWin=0.01282,
     RExtRem=0.00001,
     AFloor=900,
     hConFloor=2.5,
     nFloor=4,
-    RFloor={1.5,0.1087,1.1429,0.0429},
+    RFloor={0.00167,0.00012,0.00127,0.00005},
     RFloorRem=0.00001,
-    CFloor={8400,575000,4944,120000},
+    CFloor={756000,817500000,4449600,108000000},
     ARoof=900,
     hConRoof=2.5,
     nRoof=4,
-    RRoof={0.44444,0.06957,0.02941,0.00001},
+    RRoof={0.00049,0.00008,0.00003,0.00001},
     RRoofRem=0.0001,
-    CRoof={2472,368000,18000,0.000001},
+    CRoof={2224800,331200000,16200000,0.09},
     nOrientations=2,
     AWin={90,90},
     ATransparent={72,72},
