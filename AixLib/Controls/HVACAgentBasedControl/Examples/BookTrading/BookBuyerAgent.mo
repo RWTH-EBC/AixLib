@@ -4,7 +4,7 @@ model BookBuyerAgent
   parameter Real[:,1] knownSellers = [30001; 30002; 30003]
     "List of known BookSellerAgents (their adresses)";
   Real[3,2] proposals(start=[9999,9999;9999,9999;9999,9999]);
-  parameter Real ISBN = 3551551677
+  parameter Real ISBN = 3551551677.0
     "ISBN number of the book that the agent tries to buy";
   Integer counter( start=1);
   Integer counterProposals( start=1);
