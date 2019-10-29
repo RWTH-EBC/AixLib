@@ -53,6 +53,7 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
         origin={-78,-40})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
+    tableName="SimYearVar",
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
@@ -62,7 +63,8 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"))
     annotation (Placement(transformation(extent={{-98,80},{-68,100}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof
