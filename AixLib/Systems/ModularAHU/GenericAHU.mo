@@ -132,7 +132,7 @@ replaceable package Medium2 =
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal)
-    annotation (Placement(transformation(extent={{-80,-10},{-60,-30}})));
+    annotation (Placement(transformation(extent={{-90,-10},{-70,-30}})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{-100,30},{-94,36}})));
   Modelica.Blocks.Math.Add add(k1=-1)
@@ -161,13 +161,15 @@ replaceable package Medium2 =
     redeclare package Medium = Medium1,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal)
+    final m_flow_nominal=m1_flow_nominal,
+    final inputType=AixLib.Fluid.Types.InputType.Continuous)
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
   Fluid.Movers.FlowControlled_dp fanRet(
     redeclare package Medium = Medium1,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal)
+    final m_flow_nominal=m1_flow_nominal,
+    final inputType=AixLib.Fluid.Types.InputType.Continuous)
                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -237,6 +239,24 @@ replaceable package Medium2 =
   BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
           extent={{-18,100},{18,136}}), iconTransformation(extent={{-14,108},{14,
             134}})));
+  Fluid.Interfaces.PassThroughMedium passThroughPreheater(
+    redeclare package Medium = Medium1,
+    allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal) if usePreheater == false
+    annotation (Placement(transformation(extent={{-144,32},{-124,52}})));
+  Fluid.Interfaces.PassThroughMedium passThroughHumidifer(
+    redeclare package Medium = Medium1,
+    allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal) if useHumidifier == false
+    annotation (Placement(transformation(extent={{132,-38},{152,-18}})));
+  Fluid.Interfaces.PassThroughMedium passThroughHumidiferRet(
+    redeclare package Medium = Medium1,
+    allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal) if useHumidifierRet == false
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={50,48})));
 equation
   connect(perheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
           {-160,-27.5385},{-160,-100}},            color={0,127,255}));
@@ -256,8 +276,8 @@ equation
   connect(cooler.port_b1, heater.port_a1)
     annotation (Line(points={{46,0.153846},{76,0.153846}}, color={0,127,255}));
   connect(dampHX.port_a, dampByPass.port_a)
-    annotation (Line(points={{-90,0},{-90,-20},{-80,-20}}, color={0,127,255}));
-  connect(dampByPass.port_b, dynamicHX.port_b2) annotation (Line(points={{-60,-20},
+    annotation (Line(points={{-90,0},{-90,-20}},           color={0,127,255}));
+  connect(dampByPass.port_b, dynamicHX.port_b2) annotation (Line(points={{-70,-20},
           {-20,-20},{-20,0.4}}, color={0,127,255}));
   connect(cooler.port_a2, port_a4) annotation (Line(points={{2,-27.5385},{-4,
           -27.5385},{-4,-100},{0,-100}},
@@ -267,8 +287,8 @@ equation
                                          color={0,127,255}));
   connect(heater.port_a2, port_a5) annotation (Line(points={{76,-27.5385},{76,
           -100},{80,-100}},                       color={0,127,255}));
-  connect(heater.port_b2, port_b5) annotation (Line(points={{120,-27.5385},{128,
-          -27.5385},{128,-28},{132,-28},{132,-100},{120,-100}}, color={0,127,255}));
+  connect(heater.port_b2, port_b5) annotation (Line(points={{120,-27.5385},{122,
+          -27.5385},{122,-100},{120,-100}},                     color={0,127,255}));
   connect(dynamicHX.port_b2, cooler.port_a1) annotation (Line(points={{-20,0.4},
           {-8,0.4},{-8,0.153846},{2,0.153846}}, color={0,127,255}));
   connect(heater.port_b1, humidifier.port_a) annotation (Line(points={{120,
@@ -276,15 +296,11 @@ equation
                                            color={0,127,255}));
   connect(humidifier.port_b, fanSup.port_a)
     annotation (Line(points={{150,0},{156,0}}, color={0,127,255}));
-  if usePreheater==false then
-    connect(flapSup.port_b, dampHX.port_a) annotation (Line(points={{-170,0},{
-            -166,0},{-166,22},{-90,22},{-90,0}}, color={0,127,255},
-        pattern=LinePattern.Dash));
-end if;
+
   connect(fanRet.port_b, humidifierRet.port_a)
     annotation (Line(points={{80,80},{60,80}}, color={0,127,255}));
   connect(humidifierRet.port_b, dynamicHX.port_a1) annotation (Line(points={{40,80},
-          {0,80},{0,31.6},{-20,31.6}},       color={0,127,255}));
+          {-10,80},{-10,31.6},{-20,31.6}},   color={0,127,255}));
   connect(senTExh.port_b, port_b2)
     annotation (Line(points={{-160,80},{-220,80}}, color={0,127,255}));
   connect(senTSup.port_b, port_b1)
@@ -299,7 +315,7 @@ end if;
     annotation (Line(points={{-120,80},{-140,80}}, color={0,127,255}));
   connect(add.y, dampHX.y) annotation (Line(points={{-79.6,38},{-79.6,26.5},{
           -80,26.5},{-80,12}}, color={0,0,127}));
-  connect(dampByPass.y, add.u1) annotation (Line(points={{-70,-32},{-104,-32},{
+  connect(dampByPass.y, add.u1) annotation (Line(points={{-80,-32},{-104,-32},{
           -104,40.4},{-88.8,40.4}}, color={0,0,127}));
   connect(fanSup.port_b, senRelHumSup.port_a)
     annotation (Line(points={{176,0},{184,0}}, color={0,127,255}));
@@ -439,15 +455,15 @@ end if;
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(dampByPass.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{-70,
-          -32},{-68,-32},{-68,-130},{-250,-130},{-250,118.09},{0.09,118.09}},
+  connect(dampByPass.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{-80,-32},
+          {-68,-32},{-68,-130},{-250,-130},{-250,118.09},{0.09,118.09}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(dampByPass.y_actual, genericAHUBus.bypassHrsMea) annotation (Line(
-        points={{-65,-27},{-65,-116},{-242,-116},{-242,118.09},{0.09,118.09}},
+        points={{-75,-27},{-75,-116},{-242,-116},{-242,118.09},{0.09,118.09}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -487,17 +503,32 @@ end if;
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  if useHumidifierRet==false then
-  connect(fanRet.port_b, dynamicHX.port_a1) annotation (Line(points={{80,80},{80,
-          32},{-20,32},{-20,31.6}}, color={0,127,255},
-        pattern=LinePattern.Dash));
-  end if;
-  if useHumidifier==false then
-  connect(heater.port_b1, fanSup.port_a) annotation (Line(
-      points={{120,0.153846},{126,0.153846},{126,-24},{156,-24},{156,0}},
+
+  connect(fanRet.port_b, passThroughHumidiferRet.port_a) annotation (Line(
+      points={{80,80},{74,80},{74,48},{60,48}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  end if;
+  connect(passThroughHumidiferRet.port_b, dynamicHX.port_a1) annotation (Line(
+      points={{40,48},{0,48},{0,31.6},{-20,31.6}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(heater.port_b1, passThroughHumidifer.port_a) annotation (Line(
+      points={{120,0.153846},{122,0.153846},{122,0},{126,0},{126,-28},{132,-28}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+
+  connect(passThroughHumidifer.port_b, fanSup.port_a) annotation (Line(
+      points={{152,-28},{156,-28},{156,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(flapSup.port_b, passThroughPreheater.port_a) annotation (Line(
+      points={{-170,0},{-168,0},{-168,42},{-144,42}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  connect(passThroughPreheater.port_b, dampHX.port_a) annotation (Line(
+      points={{-124,42},{-106,42},{-106,0},{-90,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},
             {220,120}}),       graphics={
         Rectangle(
@@ -506,69 +537,78 @@ end if;
           pattern=LinePattern.Dash,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Rectangle(extent={{-164,38},{-116,-40}}, lineColor={0,0,0}),
+        Line(points={{-210,0},{-166,0},{-90,0}},  color={28,108,200}),
+        Rectangle(visible=usePreheater, extent={{-164,38},{-116,-40}}, lineColor=
+              {0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(extent={{-4,38},{44,-40}}, lineColor={0,0,0}),
         Rectangle(extent={{74,38},{122,-40}}, lineColor={0,0,0}),
         Rectangle(extent={{-90,100},{-30,-40}}, lineColor={0,0,0}),
-        Line(points={{-164,-40},{-116,38}}, color={0,0,0}),
+        Line(visible=usePreheater,points={{-164,-40},{-116,38}}, color={0,0,0}),
         Line(points={{-4,-40},{44,38}}, color={0,0,0}),
         Line(points={{74,-40},{122,38}}, color={0,0,0}),
         Line(points={{-4,36},{44,-40}}, color={0,0,0}),
         Line(points={{-90,-34},{-38,100}}, color={0,0,0}),
         Line(points={{-84,-40},{-30,94}}, color={0,0,0}),
         Line(points={{-88,98},{-30,-40}}, color={0,0,0}),
+        Line(points={{122,0},{166,0}}, color={28,108,200}),
+        Line(points={{144,80},{-30,80}},color={28,108,200}),
         Ellipse(extent={{202,-18},{166,18}}, lineColor={0,0,0}),
         Line(points={{176,16},{200,8}}, color={0,0,0}),
         Line(points={{200,-8},{176,-16}}, color={0,0,0}),
         Ellipse(
           extent={{18,-18},{-18,18}},
           lineColor={0,0,0},
-          origin={162,78},
+          origin={162,80},
           rotation=180),
         Line(
           points={{-12,4},{12,-4}},
           color={0,0,0},
-          origin={158,66},
+          origin={158,68},
           rotation=180),
         Line(
           points={{12,4},{-12,-4}},
           color={0,0,0},
-          origin={158,90},
+          origin={158,92},
           rotation=180),
         Line(points={{212,80},{180,80}}, color={28,108,200}),
-        Rectangle(extent={{138,38},{160,-40}}, lineColor={0,0,0}),
-        Line(points={{146,24},{152,28}}, color={0,0,0}),
-        Line(points={{152,24},{146,24}}, color={0,0,0}),
-        Line(points={{152,20},{146,24}}, color={0,0,0}),
-        Line(points={{146,0},{152,4}}, color={0,0,0}),
-        Line(points={{152,0},{146,0}}, color={0,0,0}),
-        Line(points={{152,-4},{146,0}}, color={0,0,0}),
-        Line(points={{146,-20},{152,-16}}, color={0,0,0}),
-        Line(points={{152,-20},{146,-20}}, color={0,0,0}),
-        Line(points={{152,-24},{146,-20}}, color={0,0,0}),
-        Rectangle(extent={{0,100},{20,58}}, lineColor={0,0,0}),
-        Line(points={{8,86},{14,90}}, color={0,0,0}),
-        Line(points={{14,90},{8,90}}, color={0,0,0}),
-        Line(points={{14,90},{8,94}}, color={0,0,0}),
-        Line(points={{8,66},{14,70}}, color={0,0,0}),
-        Line(points={{14,70},{8,70}}, color={0,0,0}),
-        Line(points={{14,70},{8,74}}, color={0,0,0}),
-        Line(points={{144,80},{20,80}}, color={28,108,200}),
+        Rectangle(visible=useHumidifier, extent={{138,38},{160,-40}}, lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(visible=useHumidifier, points={{146,24},{152,28}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{152,24},{146,24}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{152,20},{146,24}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{146,0},{152,4}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{152,0},{146,0}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{152,-4},{146,0}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{146,-20},{152,-16}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{152,-20},{146,-20}}, color={0,0,0}),
+        Line(visible=useHumidifier, points={{152,-24},{146,-20}}, color={0,0,0}),
+        Rectangle(visible=useHumidifierRet, extent={{0,100},{20,58}}, lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(visible=useHumidifierRet, points={{8,86},{14,90}}, color={0,0,0}),
+        Line(visible=useHumidifierRet, points={{14,90},{8,90}}, color={0,0,0}),
+        Line(visible=useHumidifierRet, points={{14,90},{8,94}}, color={0,0,0}),
+        Line(visible=useHumidifierRet, points={{8,66},{14,70}}, color={0,0,0}),
+        Line(visible=useHumidifierRet, points={{14,70},{8,70}}, color={0,0,0}),
+        Line(visible=useHumidifierRet, points={{14,70},{8,74}}, color={0,0,0}),
         Line(points={{0,78}}, color={28,108,200}),
-        Line(points={{0,80},{-30,80}}, color={28,108,200}),
         Line(points={{-90,80},{-210,80}}, color={28,108,200}),
-        Line(points={{-210,0},{-166,0},{-164,0}}, color={28,108,200}),
-        Line(points={{-116,0},{-90,0}}, color={28,108,200}),
         Line(points={{-30,0},{-4,0}}, color={28,108,200}),
         Line(points={{44,0},{74,0}}, color={28,108,200}),
-        Line(points={{122,0},{138,0}}, color={28,108,200}),
         Line(points={{202,0},{218,0}}, color={28,108,200}),
-        Line(points={{160,0},{166,0}}, color={28,108,200}),
-        Line(points={{-160,-40},{-160,-90}}, color={28,108,200}),
-        Line(points={{-120,-40},{-120,-90}}, color={28,108,200}),
+        Line(visible=usePreheater, points={{-160,-40},{-160,-90}}, color={28,108,200}),
+        Line(visible=usePreheater, points={{-120,-40},{-120,-90}}, color={28,108,200}),
         Line(points={{0,-40},{0,-90}}, color={28,108,200}),
         Line(points={{40,-40},{40,-90}}, color={28,108,200}),
         Line(points={{80,-40},{80,-90}}, color={28,108,200}),
         Line(points={{118,-40},{118,-90}}, color={28,108,200})}),Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},{220,120}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},{220,120}})),
+    Documentation(revisions="<html>
+<ul>
+<li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+</ul>
+</html>"));
 end GenericAHU;

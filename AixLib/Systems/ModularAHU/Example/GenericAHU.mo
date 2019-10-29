@@ -8,6 +8,8 @@ model GenericAHU "Example of generic ahu model"
     m1_flow_nominal=1,
     m2_flow_nominal=0.5,
     usePreheater=true,
+    useHumidifierRet=true,
+    useHumidifier=true,
     perheater(redeclare AixLib.Systems.HydraulicModules.Admix
         partialHydraulicModule(
         dIns=0.01,
@@ -135,10 +137,8 @@ model GenericAHU "Example of generic ahu model"
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={48,-40})));
-  BaseClasses.GenericAHUBus genericAHUBus1
+  BaseClasses.GenericAHUBus genericAHUBus
     annotation (Placement(transformation(extent={{-10,74},{10,94}})));
-  AixLib.Systems.ModularAHU.GenericAHU genericAHU1
-    annotation (Placement(transformation(extent={{-154,4},{-110,26}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
     annotation (Line(points={{70,40},{60.5455,40}}, color={0,127,255}));
@@ -161,7 +161,7 @@ equation
           127,255}));
   connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{48,
           -32},{48,-26},{32.1818,-26},{32.1818,-14}}, color={0,127,255}));
-  connect(genericAHU.genericAHUBus, genericAHUBus1) annotation (Line(
+  connect(genericAHU.genericAHUBus, genericAHUBus) annotation (Line(
       points={{0,52.3},{0,84}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -169,5 +169,9 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  annotation (experiment(StopTime=3600));
+  annotation (experiment(StopTime=3600), Documentation(revisions="<html>
+<ul>
+<li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+</ul>
+</html>"));
 end GenericAHU;
