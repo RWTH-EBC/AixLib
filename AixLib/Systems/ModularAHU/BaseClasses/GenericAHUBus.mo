@@ -3,9 +3,9 @@ expandable connector GenericAHUBus
   "Data bus for generic air-handling unit"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  Systems.HydraulicModules.BaseClasses.registerBus preheaterBus;
-  Systems.HydraulicModules.BaseClasses.registerBus coolerBus;
-  Systems.HydraulicModules.BaseClasses.registerBus heaterBus;
+  Systems.ModularAHU.BaseClasses.RegisterBus preheaterBus;
+  Systems.ModularAHU.BaseClasses.RegisterBus coolerBus;
+  Systems.ModularAHU.BaseClasses.RegisterBus heaterBus;
   SI.Temperature TOutsAirMea "Outside air temperature";
   SI.Temperature TSupAirMea "Supply air temperature";
   SI.Temperature TRetAirMea "Return air temperature";
@@ -17,9 +17,9 @@ expandable connector GenericAHUBus
   Real  dpFanSupSet "Pressure difference for fan in return air canal";
   Real  dpFanSupMea "Pressure difference for fan in return air canal";
   Real  powerSupRetMea "Power of fan in return air canal";
-  Real flapRetSet "Flap opening of flap in return air canal [0..1]";
+  Real flapRetSet(start=1) "Flap opening of flap in return air canal [0..1]";
   Real flapRetMea "Actual flap opening of flap in return air canal";
-  Real flapSupSet "Flap opening of flap in supply air canal [0..1]";
+  Real flapSupSet(start=1) "Flap opening of flap in supply air canal [0..1]";
   Real flapSupMea "Actual flap opening of flap in supply air canal";
   Real bypassHrsSet "Flap opening of bypass of heat recovery system [0..1]";
   Real bypassHrsMea "Actual flap opening of bypass of heat recovery system";
@@ -28,7 +28,6 @@ expandable connector GenericAHUBus
   Real adiabHumSet "Set value for adiabatic humidifier [0..1]";
   Real relHumSupMea "Relative humidity of supply air";
   Real relHumRetMea "Relative humidity of return air";
-
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

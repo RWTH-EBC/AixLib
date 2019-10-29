@@ -2,7 +2,8 @@ within AixLib.Systems.ModularAHU;
 model GenericAHU
   "Generic air-handling unit with heat recovery system"
   replaceable package Medium1 =
-    AixLib.Media.Air "Medium in air canal in the component";
+    Modelica.Media.Interfaces.PartialCondensingGases "Medium in air canal in the component"    annotation (choices(
+      choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
 
 
 replaceable package Medium2 =
@@ -14,9 +15,7 @@ replaceable package Medium2 =
             AixLib.Media.Antifreeze.PropyleneGlycolWater (property_T=293.15,
               X_a=0.40) "Propylene glycol water, 40% mass fraction")));
 
-  parameter Boolean allowFlowReversal = true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for all mediums"
-    annotation(Dialog(tab="Assumptions"), Evaluate=true);
+
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -30,9 +29,15 @@ replaceable package Medium2 =
   parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
     "Nominal mass flow rate in hydraulics";
   parameter Modelica.SIunits.Temperature T_start=303.15
-    "Initialization temperature" annotation(Dialog(tab="Advanced"));
+    "Initialization temperature" annotation(Dialog(tab="Advanced", group="Initialization"));
 
-  parameter Boolean usePreheater = true "If true, a preaheater is included";
+  parameter Boolean usePreheater = true "If true, a preaheater is used" annotation (choices(checkBox=true), Dialog(group="Preheater"));
+  parameter Boolean useHumidifierRet = true "If true, a humidifier in return canal is used" annotation (choices(checkBox=true), Dialog(group="Humidifiers"));
+  parameter Boolean useHumidifier = true "If true, a humidifier in supply canal is used" annotation (choices(checkBox=true), Dialog(group="Humidifiers"));
+  parameter Boolean allowFlowReversal1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium in air canal" annotation(Dialog(tab="Assumptions"), Evaluate=true);
+  parameter Boolean allowFlowReversal2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium in hydraulics" annotation(Dialog(tab="Assumptions"), Evaluate=true);
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(redeclare package Medium =
         Medium1,
@@ -59,13 +64,15 @@ replaceable package Medium2 =
     annotation (Placement(transformation(extent={{-210,70},{-230,90}}),
         iconTransformation(extent={{-210,70},{-230,90}})));
   RegisterModule perheater(
+    redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium2,
     final allowFlowReversal1=allowFlowReversal1,
     final allowFlowReversal2=allowFlowReversal2,
     final m1_flow_nominal=m1_flow_nominal,
-    m2_flow_nominal=m2_flow_nominal) if
-                              usePreheater
-    annotation (Placement(transformation(extent={{-154,-46},{-110,14}})));
+    m2_flow_nominal=m2_flow_nominal,
+    T_start=T_start,
+    T_amb=T_amb) if usePreheater
+    annotation (Dialog(enable=usePreheater, group="Preheater"),Placement(transformation(extent={{-154,-46},{-110,14}})));
   RegisterModule cooler(
     redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium2,
@@ -73,8 +80,9 @@ replaceable package Medium2 =
     final allowFlowReversal2=allowFlowReversal2,
     final m1_flow_nominal=m1_flow_nominal,
     m2_flow_nominal=m2_flow_nominal,
+    T_start=T_start,
     T_amb=T_amb)
-    annotation (Placement(transformation(extent={{2,-46},{46,14}})));
+    annotation (Dialog(enable=true, group="Cooler"),Placement(transformation(extent={{2,-46},{46,14}})));
   RegisterModule heater(
     redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium2,
@@ -82,16 +90,19 @@ replaceable package Medium2 =
     final allowFlowReversal2=allowFlowReversal2,
     final m1_flow_nominal=m1_flow_nominal,
     m2_flow_nominal=m2_flow_nominal,
+    T_start=T_start,
     T_amb=T_amb)
-    annotation (Placement(transformation(extent={{76,-46},{120,14}})));
+    annotation (Dialog(enable=true, group="Heater"),Placement(transformation(extent={{76,-46},{120,14}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium1,
     redeclare package Medium2 = Medium1,
     final allowFlowReversal1=allowFlowReversal1,
     final allowFlowReversal2=allowFlowReversal1,
     final m1_flow_nominal=m1_flow_nominal,
-    final m2_flow_nominal=m2_flow_nominal)
-    annotation (Placement(transformation(extent={{-20,-10},{-62,42}})));
+    final m2_flow_nominal=m2_flow_nominal,
+    final T1_start=T_start,
+    final T2_start=T_start)
+    annotation (Dialog(enable=true, group="Heat recovery heat exchanger"),Placement(transformation(extent={{-20,-10},{-62,42}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
         Medium2) if     usePreheater
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
@@ -104,22 +115,22 @@ replaceable package Medium2 =
         iconTransformation(extent={{-130,-110},{-110,-90}})));
   Fluid.Actuators.Dampers.Exponential flapSup(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-190,-10},{-170,10}})));
   Fluid.Actuators.Dampers.Exponential flapRet(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{200,70},{180,90}})));
   Fluid.Actuators.Dampers.Exponential dampHX(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Fluid.Actuators.Dampers.Exponential dampByPass(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{-80,-10},{-60,-30}})));
   Modelica.Blocks.Sources.Constant const(k=1)
@@ -148,74 +159,84 @@ replaceable package Medium2 =
         iconTransformation(extent={{108,-110},{128,-90}})));
   Fluid.Movers.FlowControlled_dp fanSup(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    m_flow_nominal=m1_flow_nominal)
+    T_start=T_start,
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
   Fluid.Movers.FlowControlled_dp fanRet(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    m_flow_nominal=m1_flow_nominal)     annotation (Placement(transformation(
+    T_start=T_start,
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal)
+                                        annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={90,80})));
   Fluid.Humidifiers.GenericHumidifier_u
                                  humidifier(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m1_flow_nominal)
-    annotation (Placement(transformation(extent={{130,-10},{150,10}})));
-  Fluid.Humidifiers.GenericHumidifier_u
-                                 humidifier1(
-    redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
-                   steamHumidifier=false)
-    annotation (Placement(transformation(extent={{60,70},{40,90}})));
+    T_start=T_start) if
+                       useHumidifier "Steam or adiabatic humdifier in supply canal"
+    annotation (Dialog(enable=useHumidifier, group="Humidifiers"), Placement(transformation(extent={{130,-10},{150,10}})));
+  Fluid.Humidifiers.GenericHumidifier_u humidifierRet(
+    redeclare package Medium = Medium1,
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal,
+    steamHumidifier=false) if useHumidifierRet
+    "Adiabatic humidifier in retrun canal: cools inlet air of heat recovery system"
+    annotation (Dialog(enable=useHumidifierRet, group="Humidifiers"), Placement(
+        transformation(extent={{60,70},{40,90}})));
   Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m1_flow_nominal)
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal,
+    T_start=T_start)
     annotation (Placement(transformation(extent={{160,70},{140,90}})));
   Fluid.Sensors.TemperatureTwoPort senTExh(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m1_flow_nominal)
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal,
+    T_start=T_start)
     annotation (Placement(transformation(extent={{-140,70},{-160,90}})));
   Fluid.Sensors.TemperatureTwoPort senTSup(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m1_flow_nominal)  annotation (Placement(transformation(
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal,
+    T_start=T_start)                       annotation (Placement(transformation(
         extent={{-5,-6},{5,6}},
         rotation=0,
         origin={205,0})));
   Fluid.Sensors.TemperatureTwoPort senTOA(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m1_flow_nominal) annotation (Placement(transformation(
+    final allowFlowReversal=allowFlowReversal1,
+    final m_flow_nominal=m1_flow_nominal,
+    T_start=T_start)                      annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-204,0})));
   Fluid.Sensors.VolumeFlowRate senVolFlo(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     m_flow_nominal=m1_flow_nominal)      annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-110,80})));
   Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{184,-6},{196,6}})));
   Fluid.Sensors.RelativeHumidityTwoPort senRelHumSup1(
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal,
+    final allowFlowReversal=allowFlowReversal1,
     m_flow_nominal=m1_flow_nominal)
     annotation (Placement(transformation(extent={{130,74},{118,86}})));
-  parameter Boolean allowFlowReversal1=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium in air canal";
-  parameter Boolean allowFlowReversal2=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium in hydraulics";
+
+  BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
+          extent={{-18,100},{18,136}}), iconTransformation(extent={{-14,108},{14,
+            134}})));
 equation
   connect(perheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
           {-160,-27.5385},{-160,-100}},            color={0,127,255}));
@@ -257,12 +278,13 @@ equation
     annotation (Line(points={{150,0},{156,0}}, color={0,127,255}));
   if usePreheater==false then
     connect(flapSup.port_b, dampHX.port_a) annotation (Line(points={{-170,0},{
-            -166,0},{-166,22},{-90,22},{-90,0}}, color={0,127,255}));
-  end if;
-  connect(fanRet.port_b, humidifier1.port_a)
+            -166,0},{-166,22},{-90,22},{-90,0}}, color={0,127,255},
+        pattern=LinePattern.Dash));
+end if;
+  connect(fanRet.port_b, humidifierRet.port_a)
     annotation (Line(points={{80,80},{60,80}}, color={0,127,255}));
-  connect(humidifier1.port_b, dynamicHX.port_a1) annotation (Line(points={{40,80},
-          {24,80},{24,31.6},{-20,31.6}},     color={0,127,255}));
+  connect(humidifierRet.port_b, dynamicHX.port_a1) annotation (Line(points={{40,80},
+          {0,80},{0,31.6},{-20,31.6}},       color={0,127,255}));
   connect(senTExh.port_b, port_b2)
     annotation (Line(points={{-160,80},{-220,80}}, color={0,127,255}));
   connect(senTSup.port_b, port_b1)
@@ -291,8 +313,199 @@ equation
     annotation (Line(points={{180,80},{160,80}}, color={0,127,255}));
   connect(senRelHumSup1.port_b, fanRet.port_a)
     annotation (Line(points={{118,80},{100,80}}, color={0,127,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
-            -100},{220,100}}), graphics={
+  connect(senTExh.T, genericAHUBus.TExhAirMea) annotation (Line(points={{-150,91},
+          {-150,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senTRet.T, genericAHUBus.TRetAirMea) annotation (Line(points={{150,91},
+          {150,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senTOA.T, genericAHUBus.TOutsAirMea) annotation (Line(points={{-204,11},
+          {-206,11},{-206,20},{-226,20},{-226,118.09},{0.09,118.09}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senTSup.T, genericAHUBus.TSupAirMea) annotation (Line(points={{205,6.6},
+          {205,24},{232,24},{232,116},{0.09,116},{0.09,118.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(fanRet.dp_in, genericAHUBus.dpFanRetSet) annotation (Line(points={{90,
+          92},{90,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(fanRet.dp_actual, genericAHUBus.dpFanRetMea) annotation (Line(points={
+          {79,85},{72,85},{72,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(fanRet.P, genericAHUBus.powerFanRetMea) annotation (Line(points={{79,89},
+          {79,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(fanSup.dp_in, genericAHUBus.dpFanSupSet) annotation (Line(points={{166,
+          12},{166,20},{248,20},{248,118.09},{0.09,118.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(fanSup.P, genericAHUBus.powerSupRetMea) annotation (Line(points={{177,
+          9},{177,34},{260,34},{260,118},{0.09,118},{0.09,118.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(fanSup.dp_actual, genericAHUBus.dpFanSupMea) annotation (Line(points={
+          {177,5},{180,5},{180,52},{266,52},{266,118.09},{0.09,118.09}}, color={
+          0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(senRelHumSup1.phi, genericAHUBus.relHumRetMea) annotation (Line(
+        points={{123.94,86.6},{123.94,108},{0.09,108},{0.09,118.09}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senRelHumSup.phi, genericAHUBus.relHumSupMea) annotation (Line(points=
+         {{190.06,6.6},{190.06,28},{270,28},{270,116},{0.09,116},{0.09,118.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(humidifierRet.u, genericAHUBus.adiabHumSet) annotation (Line(points={{
+          61,86},{62,86},{62,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(humidifier.u, genericAHUBus.steamHumSet) annotation (Line(points={{129,
+          6},{128,6},{128,28},{274,28},{274,118.09},{0.09,118.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(humidifier.powerEva, genericAHUBus.powerSteamHumMea) annotation (Line(
+        points={{151,10},{150,10},{150,38},{278,38},{278,124},{0.09,124},{0.09,118.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(flapRet.y, genericAHUBus.flapRetSet) annotation (Line(points={{190,92},
+          {190,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(flapRet.y_actual, genericAHUBus.flapRetMea) annotation (Line(points={{
+          185,87},{185,108},{182,108},{182,118.09},{0.09,118.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(flapSup.y, genericAHUBus.flapSupSet) annotation (Line(points={{-180,12},
+          {-190,12},{-190,38},{-238,38},{-238,118.09},{0.09,118.09}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(flapSup.y_actual, genericAHUBus.flapSupMea) annotation (Line(points={{
+          -175,7},{-175,52},{-242,52},{-242,98},{0.09,98},{0.09,118.09}}, color=
+         {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(dampByPass.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{-70,
+          -32},{-68,-32},{-68,-130},{-250,-130},{-250,118.09},{0.09,118.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(dampByPass.y_actual, genericAHUBus.bypassHrsMea) annotation (Line(
+        points={{-65,-27},{-65,-116},{-242,-116},{-242,118.09},{0.09,118.09}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senVolFlo.V_flow, genericAHUBus.V_flow_RetAirMea) annotation (Line(
+        points={{-110,91},{-112,91},{-112,118.09},{0.09,118.09}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(perheater.registerBus, genericAHUBus.preheaterBus) annotation (Line(
+      points={{-153.78,-13.9231},{-174,-13.9231},{-174,-86},{-260,-86},{-260,
+          118.09},{0.09,118.09}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cooler.registerBus, genericAHUBus.coolerBus) annotation (Line(
+      points={{2.22,-13.9231},{-16,-13.9231},{-16,-120},{254,-120},{254,118.09},
+          {0.09,118.09}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heater.registerBus, genericAHUBus.heaterBus) annotation (Line(
+      points={{76.22,-13.9231},{68,-13.9231},{68,-146},{252,-146},{252,134},{
+          0.09,134},{0.09,118.09}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  if useHumidifierRet==false then
+  connect(fanRet.port_b, dynamicHX.port_a1) annotation (Line(points={{80,80},{80,
+          32},{-20,32},{-20,31.6}}, color={0,127,255},
+        pattern=LinePattern.Dash));
+  end if;
+  if useHumidifier==false then
+  connect(heater.port_b1, fanSup.port_a) annotation (Line(
+      points={{120,0.153846},{126,0.153846},{126,-24},{156,-24},{156,0}},
+      color={0,127,255},
+      pattern=LinePattern.Dash));
+  end if;
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},
+            {220,120}}),       graphics={
+        Rectangle(
+          extent={{-220,120},{220,-100}},
+          lineColor={0,0,0},
+          pattern=LinePattern.Dash,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(extent={{-164,38},{-116,-40}}, lineColor={0,0,0}),
         Rectangle(extent={{-4,38},{44,-40}}, lineColor={0,0,0}),
         Rectangle(extent={{74,38},{122,-40}}, lineColor={0,0,0}),
@@ -334,12 +547,12 @@ equation
         Line(points={{152,-20},{146,-20}}, color={0,0,0}),
         Line(points={{152,-24},{146,-20}}, color={0,0,0}),
         Rectangle(extent={{0,100},{20,58}}, lineColor={0,0,0}),
-        Line(points={{8,90},{14,94}}, color={0,0,0}),
+        Line(points={{8,86},{14,90}}, color={0,0,0}),
         Line(points={{14,90},{8,90}}, color={0,0,0}),
-        Line(points={{14,86},{8,90}}, color={0,0,0}),
-        Line(points={{8,70},{14,74}}, color={0,0,0}),
+        Line(points={{14,90},{8,94}}, color={0,0,0}),
+        Line(points={{8,66},{14,70}}, color={0,0,0}),
         Line(points={{14,70},{8,70}}, color={0,0,0}),
-        Line(points={{14,66},{8,70}}, color={0,0,0}),
+        Line(points={{14,70},{8,74}}, color={0,0,0}),
         Line(points={{144,80},{20,80}}, color={28,108,200}),
         Line(points={{0,78}}, color={28,108,200}),
         Line(points={{0,80},{-30,80}}, color={28,108,200}),
@@ -357,6 +570,5 @@ equation
         Line(points={{40,-40},{40,-90}}, color={28,108,200}),
         Line(points={{80,-40},{80,-90}}, color={28,108,200}),
         Line(points={{118,-40},{118,-90}}, color={28,108,200})}),Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},{220,
-            100}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},{220,120}})));
 end GenericAHU;
