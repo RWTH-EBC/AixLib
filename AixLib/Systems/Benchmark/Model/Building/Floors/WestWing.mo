@@ -62,10 +62,6 @@ model WestWing
     HeatPort_ToOpenplanoffice1
     annotation (Placement(transformation(extent={{90,-18},{110,2}})));
 equation
-  connect(canteen.measureBus, measureBus) annotation (Line(
-      points={{20,-12},{4,-12},{4,-80},{80,-80},{80,20},{102,20}},
-      color={255,204,51},
-      thickness=0.5));
   connect(canteen.Heatport_TBA, Heatport_TBA_Canteen) annotation (Line(points={{60,14},
           {80,14},{80,10},{80,10},{80,-40},{100,-40}},           color={191,0,0}));
   connect(workshop.Heatport_TBA, Heatport_TBA_Workshop) annotation (Line(points={{-20,14},
@@ -136,7 +132,15 @@ equation
   connect(workshop.HeatPort_ToCanteen, canteen.HeatPort_ToWorkshop) annotation (
      Line(points={{-20,-6},{-2,-6},{-2,0},{20,0}}, color={191,0,0}));
   connect(workshop.measureBus, measureBus) annotation (Line(
-      points={{-60,-12},{24,-12},{24,20},{102,20}},
+      points={{-60,-12},{18,-12},{18,20},{102,20}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(canteen.measureBus, measureBus) annotation (Line(
+      points={{20,-12},{62,-12},{62,20},{102,20}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

@@ -86,6 +86,8 @@ model Office_new
     each T_start=295.15,
     each nPorts=2)            "Thermal zone" annotation (Placement(transformation(extent={{-24,-18},
             {24,18}})));
+  BusSystems.Bus_measure bus_measure
+    annotation (Placement(transformation(extent={{68,58},{108,98}})));
 equation
   connect(vol1.ports[1],Air_out)   annotation (Line(points={{2.66454e-15,-60.4},
           {2.66454e-15,-100},{0,-100}},
@@ -209,6 +211,41 @@ equation
            connect(Air_in[5], thermalZoneFourElements[5].ports[2]) annotation (Line(points={{60,-92},
           {40,-92},{40,-17.95},{16.525,-17.95}},            color={0,127,255}));
 
+  connect(thermalZoneFourElements[1].TAir, bus_measure.RoomTemp_Workshop)
+    annotation (Line(points={{25,16},{52,16},{52,78.1},{88.1,78.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalZoneFourElements[2].TAir, bus_measure.RoomTemp_Canteen)
+    annotation (Line(points={{25,16},{52,16},{52,78.1},{88.1,78.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalZoneFourElements[3].TAir, bus_measure.RoomTemp_Conferenceroom)
+    annotation (Line(points={{25,16},{52,16},{52,78.1},{88.1,78.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalZoneFourElements[4].TAir, bus_measure.RoomTemp_Multipersonoffice)
+    annotation (Line(points={{25,16},{52,16},{52,78.1},{88.1,78.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalZoneFourElements[5].TAir, bus_measure.RoomTemp_Openplanoffice)
+    annotation (Line(points={{25,16},{52,16},{52,78.1},{88.1,78.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office_new;

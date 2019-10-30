@@ -58,7 +58,8 @@ equation
   connect(eastWing.AddPower_OpenPlanOffice, AddPower[1]) annotation (Line(
         points={{40,20},{40,40},{-80,40},{-80,-48},{-100,-48}}, color={191,0,0}));
   connect(westWing.internalBus, internalBus) annotation (Line(
-      points={{-20,12},{0,12},{0,40},{-100,40}},
+      points={{-20,12},{0,12},{0,40},{-70,40},{-70,52},{-86,52},{-86,40},{-100,
+          40}},
       color={255,204,51},
       thickness=0.5));
   connect(westWing.measureBus, measureBus) annotation (Line(
@@ -66,7 +67,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(eastWing.internalBus, internalBus) annotation (Line(
-      points={{60,12},{80,12},{80,40},{-100,40}},
+      points={{60,12},{74,12},{74,40},{-100,40}},
       color={255,204,51},
       thickness=0.5));
   connect(eastWing.measureBus, measureBus) annotation (Line(
