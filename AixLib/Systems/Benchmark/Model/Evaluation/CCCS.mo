@@ -39,8 +39,8 @@ public
               lineColor={0,0,0},
               textString="t")}));
   end DiscountingFactor;
-public
 
+public
   model EnergyCosts "calculating the energy costs as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
 
 
@@ -573,8 +573,8 @@ else
 end PerformanceReductionCosts;
 "));
   end PerformanceReductionCosts;
-public
 
+public
   model LifespanReductionCosts "calculating costs of lifespan reduction due to wear as part of operating costs to evaluate the performance of a control strategy according to CCCS evaluation method"
 
 

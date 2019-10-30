@@ -238,6 +238,9 @@ equation
   connect(weather_new.WaterInAir, supplyAir_RLT.WaterInAir) annotation (Line(
         points={{71.8,79.4},{71.8,85.7},{62.4,85.7},{62.4,92.2}}, color={0,0,
           127}));
+  connect(weather_new.AirTemp, pVSystem.AirTemp) annotation (Line(points={{77.8,
+          79.4},{77.8,80},{78,80},{78,76},{-56,76},{-56,96.4},{-40.8,96.4}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel_new;

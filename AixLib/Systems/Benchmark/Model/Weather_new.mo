@@ -3,8 +3,8 @@ model Weather_new
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"))
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
 
@@ -31,9 +31,9 @@ model Weather_new
     wfGro=0,
     withLongwave=true,
     aExt=0.7,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
-    hConvWinOut=20,
+    hConWinOut=20,
     n=2,
     wfWall={0.3043478260869566,0.6956521739130435},
     wfWin={0.5,0.5},
@@ -71,7 +71,7 @@ model Weather_new
     wfWall={1},
     wfWin={0},
     wfGro=0,
-    hConvWallOut=20,
+    hConWallOut=20,
     hRad=5,
     TGro=285.15) "Computes equivalent air temperature for roof" annotation (Placement(transformation(extent={{30,74},{50,94}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof
@@ -88,7 +88,7 @@ model Weather_new
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{68,90},{62,96}})));
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
-    annotation (Placement(transformation(extent={{-118,-84},{-84,-52}}),
+    annotation (Placement(transformation(extent={{-110,-78},{-76,-46}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
     "Prescribed temperature for floor plate outdoor surface temperature"
@@ -107,11 +107,6 @@ model Weather_new
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={42,-106})));
-  Modelica.Blocks.Interfaces.RealOutput WaterInAir annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-82,-106})));
   Modelica.Blocks.Interfaces.RealOutput AirTemp annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -125,12 +120,11 @@ equation
     annotation (Line(points={{-3,-4},{4,-4},{4,0},{6.8,0}},
     color={0,0,127}));
   connect(weaDat.weaBus,weaBus)
-    annotation (Line(points={{-76,62},{-74,62},{-74,18},{-84,18},{-84,12},{-101,
-          12},{-101,-68}},
-                      color={255,204,51},
+    annotation (Line(points={{-76,62},{-74,62},{-74,18},{-84,18},{-84,12},{-93,12},
+          {-93,-62}}, color={255,204,51},
     thickness=0.5), Text(string="%second",index=1,extent={{6,3},{6,3}}));
   connect(weaBus.TDryBul,eqAirTemp. TDryBul)
-    annotation (Line(points={{-101,-68},{-101,-6},{-38,-6},{-38,-10},{-26,-10}},
+    annotation (Line(points={{-93,-62},{-93,-6},{-38,-6},{-38,-10},{-26,-10}},
     color={255,204,51},
     thickness=0.5), Text(string="%first",index=-1,extent={{-6,3},{-6,3}}));
   connect(const.y,eqAirTemp. sunblind)
@@ -180,7 +174,7 @@ equation
     annotation (Line(points={{0,-4.4},{0,26},{33,26}},   color={0,0,127}));
   connect(weaBus.TBlaSky,eqAirTemp. TBlaSky)
     annotation (Line(
-    points={{-101,-68},{-58,-68},{-58,2},{-32,2},{-32,-4},{-26,-4}},
+    points={{-93,-62},{-58,-62},{-58,2},{-32,2},{-32,-4},{-26,-4}},
     color={255,204,51},
     thickness=0.5), Text(
     string="%first",
@@ -202,7 +196,7 @@ equation
           {-32,2},{-32,-4},{-26,-4}},
     color={0,0,127}));
   connect(eqAirTempVDI.HSol[1],weaBus. HGloHor)
-    annotation (Line(points={{28,90},{-100,90},{-100,-68},{-101,-68}},
+    annotation (Line(points={{28,90},{-100,90},{-100,-62},{-93,-62}},
     color={0,0,127}),Text(
     string="%second",
     index=1,
@@ -225,14 +219,14 @@ equation
           -36},{86,-88},{102,-88}}, color={191,0,0}));
   connect(therm_wall, therm_wall)
     annotation (Line(points={{104,-36},{104,-36}}, color={191,0,0}));
-  connect(corGDouPan.solarRadWinTrans[1], SolarRad[1]) annotation (Line(points={{27,55.5},
-          {42,55.5},{42,-101}},                      color={0,0,127}));
   connect(eqAirTemp.TEqAir, AirTemp) annotation (Line(points={{-3,-4},{-2,-4},{
           -2,-64},{-22,-64},{-22,-106}}, color={0,0,127}));
-  connect(corGDouPan.solarRadWinTrans[2], SolarRad[1])
-    annotation (Line(points={{27,56.5},{42,56.5},{42,-101}}, color={0,0,127}));
   connect(AirTemp, AirTemp)
     annotation (Line(points={{-22,-106},{-22,-106}}, color={0,0,127}));
+  connect(corGDouPan.solarRadWinTrans[1], SolarRad[1]) annotation (Line(points=
+          {{27,55.5},{36,55.5},{36,-101},{42,-101}}, color={0,0,127}));
+  connect(corGDouPan.solarRadWinTrans[2], SolarRad[2]) annotation (Line(points=
+          {{27,56.5},{34,56.5},{34,-111},{42,-111}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather_new;
