@@ -210,7 +210,7 @@ equation
     annotation (Line(points={{-60,-54},{-34,-54},{-34,-58},{0,-58}}, color={0,127,
           255}));
   connect(generation_v2_1.Fluid_out_warm, full_Transfer_TBA_Heatexchanger.Fluid_in_warm)
-    annotation (Line(points={{-60,-48},{-18,-48},{-18,-66},{36,-66},{36,-47.4},
+    annotation (Line(points={{-59.8,-48},{-18,-48},{-18,-66},{36,-66},{36,-47.4},
           {60,-47.4}},color={0,127,255}));
   connect(full_Transfer_TBA_Heatexchanger.Fluid_out_warm, generation_v2_1.Fluid_in_warm)
     annotation (Line(points={{60,-51.4},{36,-51.4},{36,-66},{-18,-66},{-18,-52},

@@ -112,6 +112,11 @@ model Weather_new
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-22,-106})));
+  Modelica.Blocks.Interfaces.RealOutput WaterInAir annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-68,-106})));
 equation
   connect(eqAirTemp.TEqAirWin,preTem1. T)
     annotation (Line(points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},
@@ -227,6 +232,14 @@ equation
           {{27,55.5},{36,55.5},{36,-101},{42,-101}}, color={0,0,127}));
   connect(corGDouPan.solarRadWinTrans[2], SolarRad[2]) annotation (Line(points=
           {{27,56.5},{34,56.5},{34,-111},{42,-111}}, color={0,0,127}));
+  connect(weaBus.relHum, WaterInAir) annotation (Line(
+      points={{-93,-62},{-82,-62},{-82,-106},{-68,-106}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather_new;
