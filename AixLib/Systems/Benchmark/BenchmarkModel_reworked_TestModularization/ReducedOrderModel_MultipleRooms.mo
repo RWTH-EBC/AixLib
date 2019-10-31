@@ -7,7 +7,7 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mos"))
+        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
 
@@ -177,11 +177,13 @@ equation
     annotation (Line(points={{-3,-4},{4,-4},{4,0},{6.8,0}},
     color={0,0,127}));
   connect(weaDat.weaBus,weaBus)
-    annotation (Line(points={{-76,62},{-74,62},{-74,18},{-84,18},{-84,12},
-    {-83,12},{-83,6}},color={255,204,51},
+    annotation (Line(points={{-76,62},{-74,62},{-74,18},{-84,18},{-84,12},{-83,
+          12},{-83,6}},
+                      color={255,204,51},
     thickness=0.5), Text(string="%second",index=1,extent={{6,3},{6,3}}));
   connect(weaBus.TDryBul,eqAirTemp. TDryBul)
-    annotation (Line(points={{-83,6},{-83,-2},{-38,-2},{-38,-10},{-26,-10}},
+    annotation (Line(points={{-83,6},{-83,2},{-84,2},{-84,-2},{-38,-2},{-38,-10},
+          {-26,-10}},
     color={255,204,51},
     thickness=0.5), Text(string="%first",index=-1,extent={{-6,3},{-6,3}}));
   connect(intGai.y[1],perRad. Q_flow)
@@ -212,12 +214,12 @@ equation
     color={255,204,51},thickness=0.5));
   connect(weaDat.weaBus,HDirTil [1].weaBus)
     annotation (Line(
-    points={{-76,62},{-76,62},{-68,62}},
+    points={{-76,62},{-68,62}},
     color={255,204,51},
     thickness=0.5));
   connect(weaDat.weaBus,HDirTil [2].weaBus)
     annotation (Line(
-    points={{-76,62},{-76,62},{-68,62}},
+    points={{-76,62},{-68,62}},
     color={255,204,51},
     thickness=0.5));
   connect(preTem1.port,theConWin. fluid)

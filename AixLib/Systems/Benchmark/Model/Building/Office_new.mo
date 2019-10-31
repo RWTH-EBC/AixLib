@@ -1,7 +1,7 @@
 within AixLib.Systems.Benchmark.Model.Building;
 model Office_new
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_roof
-    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_roof2
+    annotation (Placement(transformation(extent={{-34,90},{-14,110}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_walls
     annotation (Placement(transformation(extent={{-108,-50},{-88,-30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_windows
@@ -88,6 +88,14 @@ model Office_new
             {24,18}})));
   BusSystems.Bus_measure bus_measure
     annotation (Placement(transformation(extent={{68,58},{108,98}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_roof1
+    annotation (Placement(transformation(extent={{-58,90},{-38,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_roof3
+    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_roof4
+    annotation (Placement(transformation(extent={{14,90},{34,110}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_roof5
+    annotation (Placement(transformation(extent={{38,90},{58,110}})));
 equation
   connect(vol1.ports[1],Air_out)   annotation (Line(points={{2.66454e-15,-60.4},
           {2.66454e-15,-100},{0,-100}},
@@ -174,16 +182,6 @@ equation
      Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
   connect(port_IntRadGains, thermalZoneFourElements[5].intGainsRad) annotation (
      Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
-  connect(port_roof, thermalZoneFourElements[1].roof) annotation (Line(points={{
-          0,100},{0,60},{0,18},{-1.1,18}}, color={191,0,0}));
-  connect(port_roof, thermalZoneFourElements[2].roof) annotation (Line(points={{
-          0,100},{0,60},{0,18},{-1.1,18}}, color={191,0,0}));
-  connect(port_roof, thermalZoneFourElements[3].roof) annotation (Line(points={{
-          0,100},{0,60},{0,18},{-1.1,18}}, color={191,0,0}));
-  connect(port_roof, thermalZoneFourElements[4].roof)
-    annotation (Line(points={{0,100},{-1.1,100},{-1.1,18}}, color={191,0,0}));
-  connect(port_roof, thermalZoneFourElements[5].roof)
-    annotation (Line(points={{0,100},{-1.1,100},{-1.1,18}}, color={191,0,0}));
   connect(thermalZoneFourElements[1].ports[1], vol1.ports[2]) annotation (Line(
         points={{13.475,-17.95},{13.475,-36.975},{0,-36.975},{0,-57.6}},
                                                                  color={0,127,255}));
@@ -246,6 +244,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(port_roof1, thermalZoneFourElements[1].roof)
+    annotation (Line(points={{-48,100},{-48,18},{-1.1,18}}, color={191,0,0}));
+  connect(port_roof2, thermalZoneFourElements[2].roof)
+    annotation (Line(points={{-24,100},{-24,18},{-1.1,18}}, color={191,0,0}));
+  connect(port_roof3, thermalZoneFourElements[3].roof) annotation (Line(points=
+          {{0,100},{0,60},{0,18},{-1.1,18}}, color={191,0,0}));
+  connect(port_roof4, thermalZoneFourElements[4].roof)
+    annotation (Line(points={{24,100},{24,18},{-1.1,18}}, color={191,0,0}));
+  connect(port_roof5, thermalZoneFourElements[5].roof) annotation (Line(points=
+          {{48,100},{50,100},{50,18},{-1.1,18}}, color={191,0,0}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office_new;

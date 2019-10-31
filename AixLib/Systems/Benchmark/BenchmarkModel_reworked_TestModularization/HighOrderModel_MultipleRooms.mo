@@ -54,17 +54,20 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
     tableName="SimYearVar",
+    Cloud_cover=true,
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
-    Rel_hum=false,
+    Rel_hum=true,
     Mass_frac=true,
-    Air_press=false,
+    Air_press=true,
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"))
+        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"),
+    Sky_rad=true,
+    Ter_rad=true)
     annotation (Placement(transformation(extent={{-98,80},{-68,100}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof

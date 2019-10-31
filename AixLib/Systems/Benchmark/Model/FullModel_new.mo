@@ -218,8 +218,6 @@ equation
         points={{84.2,79.9},{84.2,49.7},{41.6,49.7},{41.6,18}}, color={0,0,127}));
   connect(weather_new.SolarRad[2], office_new.SolarRadIn[2]) annotation (Line(
         points={{84.2,78.9},{84.2,49.7},{41.6,49.7},{41.6,20}}, color={0,0,127}));
-  connect(weather_new.therm_roof, office_new.port_roof) annotation (Line(points=
-         {{90.6,99.6},{90.6,19.8},{52,19.8},{52,20}}, color={191,0,0}));
   connect(weather_new.therm_window, office_new.port_windows) annotation (Line(
         points={{90.4,93.6},{90.4,-14.2},{42.2,-14.2},{42.2,14}}, color={191,0,0}));
   connect(weather_new.therm_wall, office_new.port_walls) annotation (Line(
@@ -294,6 +292,30 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  connect(weather_new.therm_roof, office_new.port_roof1) annotation (Line(
+        points={{90.6,99.6},{90.6,20},{47.2,20}}, color={191,0,0}));
+  connect(weather_new.therm_roof, office_new.port_roof2) annotation (Line(
+        points={{90.6,99.6},{90.6,20},{49.6,20}}, color={191,0,0}));
+ connect(weather_new.therm_roof, office_new.port_roof3) annotation (Line(
+        points={{90.6,99.6},{90.6,20},{52,20}},   color={191,0,0}));
+  connect(weather_new.therm_roof, office_new.port_roof4) annotation (Line(
+        points={{90.6,99.6},{90.6,20},{54.4,20}}, color={191,0,0}));
+   connect(weather_new.therm_roof, office_new.port_roof5) annotation (Line(
+        points={{90.6,99.6},{90.6,20},{56.8,20}}, color={191,0,0}));
+
+  connect(full_Transfer_TBA_Heatexchanger.HeatPort_TBA[1], office_new.port_roof1)
+    annotation (Line(points={{74,-40.8},{74,20},{47.2,20}}, color={191,0,0}));
+     connect(full_Transfer_TBA_Heatexchanger.HeatPort_TBA[2], office_new.port_roof2)
+    annotation (Line(points={{74,-40.4},{74,20},{49.6,20}}, color={191,0,0}));
+    connect(full_Transfer_TBA_Heatexchanger.HeatPort_TBA[3], office_new.port_roof3)
+    annotation (Line(points={{74,-40},{74,20},{52,20}},     color={191,0,0}));
+    connect(full_Transfer_TBA_Heatexchanger.HeatPort_TBA[4], office_new.port_roof4)
+    annotation (Line(points={{74,-39.6},{74,20},{54.4,20}}, color={191,0,0}));
+    connect(full_Transfer_TBA_Heatexchanger.HeatPort_TBA[5], office_new.port_roof5)
+    annotation (Line(points={{74,-39.2},{74,20},{56.8,20}}, color={191,0,0}));
+
+
+
+         annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel_new;
