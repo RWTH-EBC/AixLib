@@ -40,10 +40,10 @@ model DynamicHX "Simple dynamic heat exchanger model"
 equation
   connect(convection2.solid, vol2.heatPort)
     annotation (Line(points={{30,-40},{30,-50},{10,-50}}, color={191,0,0}));
-  for i in 1:nNodes loop
-    connect(convection1[nNodes-i+1].solid, vol1[i].heatPort)
+
+  connect(convection1[nNodes:-1:1].solid, vol1[1:nNodes].heatPort)
     annotation (Line(points={{-32,40},{-32,50},{-10,50}}, color={191,0,0}));
-  end for;
+
   connect(convection1.fluid, heatCapacitor.port)
     annotation (Line(points={{-32,20},{-32,0},{0,0}}, color={191,0,0}));
   connect(convection2.fluid, heatCapacitor.port)
