@@ -34,7 +34,8 @@ model Cellar "Cellar completly under ground"
   parameter Modelica.SIunits.Temperature TOutAirLimit
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
+    final T0=T0_air,                                              V=room_V, T(
         start=T0_air))
     annotation (Placement(transformation(extent={{-18,-4},{-38,16}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
@@ -151,7 +152,7 @@ protected
   parameter Modelica.SIunits.Volume room_V = room_length * room_width * room_height;
 equation
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-44, -87}, {-42, -87}, {-42, -90}, {-90, -90}}, color = {191, 0, 0}));
-  connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-18, -87}, {-2, -87}, {-2, -64}, {-54, -64}, {-54, -24}, {-12, -24}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}));
+  connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-18,-87},{-2,-87},{-2,-64},{-54,-64},{-54,-24},{-12,-24},{-12,-4},{-28,-4}},                color = {191, 0, 0}));
   connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,64.1},{110,90}},      color = {191, 0, 0}));
   connect(TGround.port, Wall3.port_outside) annotation(Line(points = {{138, -70}, {2, -70}, {2, -54.45}}, color = {191, 0, 0}));
   connect(Wall2.port_outside, TGround.port) annotation(Line(points = {{77.45, 13}, {100, 13}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
@@ -163,11 +164,10 @@ equation
   connect(Wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,56},{2,44},{46,44},{46,-24},{5.3,-24},{5.3,
           -15.8}},                                                                                                                                     color={191,0,0}));
   connect(Wall4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-61,13},{-48,13},{-48,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,
-          -24},{5.3,-24},{5.3,-15.8}},                                                                                                                                   color={191,0,0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{
-          5.3,-24},{5.3,-15.8}},                                                                                                                                  color={191,0,0}));
-  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,4},{-19,4}}, color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,-4},{-28,-4}},
+                                                                                                                           color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>
