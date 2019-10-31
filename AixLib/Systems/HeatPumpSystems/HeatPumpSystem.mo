@@ -14,6 +14,7 @@ model HeatPumpSystem
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
+      useBusConnectorOnly=true,
       final mFlow_conNominal=mFlow_conNominal,
       final VCon=VCon,
       final dpCon_nominal=dpCon_nominal,
@@ -166,17 +167,8 @@ equation
                                                     color={0,0,127}));
   connect(port_a1, port_a1)
     annotation (Line(points={{-100,60},{-100,60}}, color={0,127,255}));
-  connect(hPSystemController.modeOut, heatPump.modeSet) annotation (Line(points=
-         {{-20.6,93.1},{-20.6,32},{-48,32},{-48,-5.66667},{-29.52,-5.66667}},
-        color={255,0,255}));
-  connect(hPSystemController.nOut, heatPump.nSet) annotation (Line(points={{-1,93.1},
-          {-1,30},{-40,30},{-40,1.66667},{-29.52,1.66667}}, color={0,0,127}));
-  connect(hPSystemController.iceFac_out, heatPump.iceFac_in) annotation (Line(
-        points={{54.86,161},{58,161},{58,-2},{36,-2},{36,-54},{-20.72,-54},{
-          -20.72,-26.9333}},
-                      color={0,0,127}));
   connect(heatPump.sigBusHP, hPSystemController.sigBusHP) annotation (Line(
-      points={{-25.78,-9.15},{-84,-9.15},{-84,115.85},{-50.49,115.85}},
+      points={{-25.78,-9.15},{-84,-9.15},{-84,112.35},{-49.51,112.35}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
@@ -184,6 +176,8 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>
+<i>October 31, 2018&nbsp;</i> by Alexander Kümpel: <br/>
+Connection between controller and heat pump only via bus connector
 <i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
 First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
 </li>
