@@ -1,19 +1,28 @@
 within AixLib.Systems.HydraulicModules;
 model SimpleConsumer "Simple Consumer"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
-  parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]";
-  parameter Modelica.SIunits.Length dPipe= 0.032 "Pipe diameter";
-  parameter Modelica.SIunits.Length len = 1.0 "Average total pipe length";
-  parameter Modelica.SIunits.Temperature T_amb = 303.15 "Ambient temperature for convection";
-  parameter Modelica.SIunits.HeatCapacity capacity=1 "Capacity of the material";
-  parameter Modelica.SIunits.Volume V=0.001 "Volume of water";
+  import SI=Modelica.SIunits;
+
+  parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]" annotation (Dialog(enable = functionality=="T_fixed" or functionality=="T_input"));
+  parameter SI.Length dPipe= 0.032 "Pipe diameter";
+  parameter SI.Length len = 1.0 "Average total pipe length";
+  parameter SI.Temperature T_fixed = 293.15
+                                           "Ambient temperature for convection" annotation (Dialog(enable = functionality=="T_fixed"));
+  parameter SI.HeatCapacity capacity=1 "Capacity of the material";
+  parameter SI.Volume V=0.001 "Volume of water";
+  parameter SI.HeatFlowRate Q_flow_fixed = 0 "Prescribed heat flow" annotation (Dialog(enable = functionality=="Q_flow_fixed"));
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start=303.15
+  parameter Modelica.SIunits.Temperature T_start=293.15
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
+  parameter String functionality "Choose between different functionalities" annotation (choices(
+              choice="T_fixed",
+              choice="T_input",
+              choice="Q_flow_fixed",
+              choice="Q_flow_input"),Dialog(enable=true));
 
   Fluid.MixingVolumes.MixingVolume volume(
     V=V,
@@ -24,28 +33,31 @@ model SimpleConsumer "Simple Consumer"
     redeclare package Medium = Medium) annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={-20,10})));
+        origin={0,10})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
                           T(start=T_start, fixed=true), C=capacity)
     annotation (Placement(transformation(
-        origin={8,22},
+        origin={28,34},
         extent={{-10,10},{10,-10}},
-        rotation=0)));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection
+        rotation=90)));
+  Modelica.Thermal.HeatTransfer.Components.Convection convection if
+    functionality == "T_input" or functionality == "T_fixed"
     annotation (Placement(transformation(
-        origin={34,32},
+        origin={10,54},
         extent={{-10,-10},{10,10}},
-        rotation=0)));
+        rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature annotation (Placement(transformation(
+    prescribedTemperature if functionality == "T_input" or functionality == "T_fixed"
+                          annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={64,32})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=kA) annotation (
+        origin={42,70})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=kA) if functionality == "T_input"
+     or functionality == "T_fixed"                            annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={34,76})));
+        rotation=0,
+        origin={-30,54})));
   Fluid.FixedResistances.PlugFlowPipe pipe1(
     final allowFlowReversal=allowFlowReversal,
     dh=dPipe,
@@ -57,8 +69,7 @@ model SimpleConsumer "Simple Consumer"
     dIns=0.01,
     kIns=0.028,
     nPorts=1,
-    redeclare package Medium = Medium) annotation (Dialog(enable=true),
-      Placement(transformation(extent={{-80,-10},{-60,10}})));
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Fluid.FixedResistances.PlugFlowPipe pipe2(
     allowFlowReversal=allowFlowReversal,
     dh=dPipe,
@@ -70,33 +81,69 @@ model SimpleConsumer "Simple Consumer"
     dIns=0.01,
     kIns=0.028,
     redeclare package Medium = Medium,
-    nPorts=1)                          annotation (Dialog(enable=true),
-      Placement(transformation(extent={{40,-10},{60,10}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_amb)
-                                                              annotation (
+    nPorts=1)                          annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed) if
+    functionality == "T_fixed"                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={90,70})));
+  Modelica.Blocks.Interfaces.RealInput T if functionality == "T_input"
+                                         annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={80,76})));
+        origin={60,120}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={80,100})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow if
+    functionality == "Q_flow_input" or functionality == "Q_flow_fixed"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-60,50})));
+  Modelica.Blocks.Sources.RealExpression realExpression2(y=Q_flow_fixed) if
+    functionality == "Q_flow_fixed"                           annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-90,80})));
+  Modelica.Blocks.Interfaces.RealInput Q_flow if functionality == "Q_flow_input"
+                                              annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={-60,120}), iconTransformation(extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={-60,100})));
 equation
-  connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{-10,10},
-          {-10,32},{8,32}},               color={191,0,0}));
-  connect(heatCapacitor.port,convection. solid) annotation (Line(points={{8,32},{
-          24,32}},                       color={191,0,0}));
+  connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
+          {10,34},{18,34}},               color={191,0,0}));
+  connect(heatCapacitor.port,convection. solid) annotation (Line(points={{18,34},
+          {10,34},{10,44}},              color={191,0,0}));
   connect(convection.fluid,prescribedTemperature. port)
-    annotation (Line(points={{44,32},{54,32}},   color={191,0,0}));
+    annotation (Line(points={{10,64},{10,70},{32,70}},
+                                                 color={191,0,0}));
   connect(realExpression.y,convection. Gc)
-    annotation (Line(points={{34,65},{34,42}}, color={0,0,127}));
+    annotation (Line(points={{-19,54},{0,54}}, color={0,0,127}));
   connect(realExpression1.y, prescribedTemperature.T)
-    annotation (Line(points={{80,65},{80,32},{76,32}}, color={0,0,127}));
-  connect(pipe1.ports_b[1], volume.ports[1]) annotation (Line(points={{-60,0},{-18,
+    annotation (Line(points={{79,70},{54,70}},         color={0,0,127}));
+  connect(pipe1.ports_b[1], volume.ports[1]) annotation (Line(points={{-60,0},{2,
           0}},                     color={0,127,255}));
-  connect(volume.ports[2], pipe2.port_a) annotation (Line(points={{-22,0},{40,0}},
+  connect(volume.ports[2], pipe2.port_a) annotation (Line(points={{-2,0},{40,0}},
                           color={0,127,255}));
   connect(pipe1.port_a, port_a)
     annotation (Line(points={{-80,0},{-100,0}}, color={0,127,255}));
   connect(pipe2.ports_b[1], port_b)
     annotation (Line(points={{60,0},{100,0}}, color={0,127,255}));
+  connect(prescribedTemperature.T, T)
+    annotation (Line(points={{54,70},{60,70},{60,120}}, color={0,0,127}));
+  connect(prescribedHeatFlow.Q_flow, realExpression2.y)
+    annotation (Line(points={{-60,60},{-60,80},{-79,80}},
+                                                 color={0,0,127}));
+  connect(prescribedHeatFlow.Q_flow, Q_flow)
+    annotation (Line(points={{-60,60},{-60,120}},          color={0,0,127}));
+  connect(prescribedHeatFlow.port, heatCapacitor.port)
+    annotation (Line(points={{-60,40},{-60,34},{18,34}}, color={191,0,0}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
@@ -118,9 +165,10 @@ equation
           textString="CONSUMER")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>Model with a simple consumer. The consumed power depends on the ambient temperature and the convective coefficient kA.</p>
+<p>Model with a simple consumer. The consumed power depends either on the temperature (T_fixed or T_input) and the convective coefficient kA or the power is prescribed (Q_flow_input or _Q_flow_fixed). It is possible to choose between these options with the parameter &quot;functionality&quot;.</p>
 </html>", revisions="<html>
 <ul>
+<li>October 31, 2019, by Alexander K&uuml;mpel:<br/>Add more options</li>
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
 <li><i>2016-03-06 &nbsp;</i> by Peter Matthes:<br/>added documentation</li>
 <li><i>2016-02-17 &nbsp;</i> by Rohit Lad:<br/>implemented simple consumers model</li>
