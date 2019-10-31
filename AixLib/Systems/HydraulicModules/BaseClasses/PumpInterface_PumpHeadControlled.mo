@@ -1,10 +1,10 @@
 ﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_PumpHeadControlled
-  "Pump with physics model that uses pressure head as input and replaceable controller"
+  "Head controlled polynomial based pump with controller"
   extends BasicPumpInterface;
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     annotation (__Dymola_choicesAllMatching=true);
-  parameter AixLib.DataBase.Pumps.ControlPump.PumpBaseRecord pumpParam
+  parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam
     "pump parameter record" annotation (choicesAllMatching=true);
 
   replaceable
@@ -137,6 +137,14 @@ equation
           -66,0},{-100,0}}, color={0,127,255}));
   connect(physics.port_b, port_b) annotation (Line(points={{30,-20},{66,-20},{66,
           0},{100,0}}, color={0,127,255}));
+  connect(pumpController.pumpControllerBus, pumpBus) annotation (Line(
+      points={{0,80},{0,89},{0,89},{0,100}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

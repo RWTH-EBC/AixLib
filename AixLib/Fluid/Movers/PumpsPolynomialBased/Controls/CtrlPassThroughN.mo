@@ -1,5 +1,5 @@
 ﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
-model CtrlPassThroughN "'n_set' for PumpSpeedControlled"
+model CtrlPassThroughN "'n_set' passhrough for PumpSpeedControlled"
   extends BaseClasses.PumpController;
 equation
   connect(pumpBus, pumpControllerBus) annotation (Line(
