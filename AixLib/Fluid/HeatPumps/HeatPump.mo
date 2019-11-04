@@ -295,8 +295,8 @@ model HeatPump "Grey-box heat pump model using a black-box to simulate the refri
                            sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final model
-            PerDataHea =
+  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(redeclare final
+      model PerDataHea =
       PerDataHea,
       redeclare final model PerDataChi = PerDataChi,
     final use_revHP=use_revHP,
