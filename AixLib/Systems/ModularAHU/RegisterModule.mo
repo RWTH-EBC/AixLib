@@ -90,9 +90,10 @@ protected
         origin={-38,60})));
 equation
   connect(partialHydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(
-        points={{-22.8,-2},{0,-2},{0,28},{20,28},{20,36}},   color={0,127,255}));
+        points={{-22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}},
+                                                             color={0,127,255}));
   connect(partialHydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(
-        points={{22.8,-2},{18,-2},{18,12},{-20,12},{-20,36}}, color={0,127,255}));
+        points={{22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}},   color={0,127,255}));
   connect(senT_airIn.T, PT1_airIn.u)
     annotation (Line(points={{-70,71},{-70,78}}, color={0,0,127}));
   connect(senT_airOut.T, PT1_airOut.u)
