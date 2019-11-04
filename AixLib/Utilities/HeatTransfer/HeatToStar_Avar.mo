@@ -7,7 +7,11 @@ model HeatToStar_Avar
   AixLib.Utilities.Interfaces.RadPort Star annotation (Placement(transformation(extent={{81,-10},{101,10}})));
 equation
   Therm.Q_flow + Star.Q_flow = 0;
-  Therm.Q_flow = Modelica.Constants.sigma * eps * A * (Therm.T * Therm.T * Therm.T * Therm.T - Star.T * Star.T * Star.T * Star.T);
+  // To prevent negative solutions for T, the max() expression is used.
+  // Negative solutions also occur when using max(T,0), therefore, 1 K is used.
+  Therm.Q_flow = Modelica.Constants.sigma * eps * A * (
+    max(Therm.T,1) * max(Therm.T,1) * max(Therm.T,1) * max(Therm.T,1) -
+    max(Star.T,1) * max(Star.T,1) * max(Star.T,1) * max(Star.T,1));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
