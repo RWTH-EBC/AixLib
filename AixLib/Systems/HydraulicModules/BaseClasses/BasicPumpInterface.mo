@@ -2,9 +2,9 @@ within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
-  PumpBus pumpBus annotation (
-      Placement(transformation(extent={{-20,80},{20,120}}), iconTransformation(
-          extent={{-20,80},{20,120}})));
+  AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus
+    pumpBus annotation (Placement(transformation(extent={{-20,80},{20,120}}),
+        iconTransformation(extent={{-20,80},{20,120}})));
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
