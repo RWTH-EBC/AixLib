@@ -79,7 +79,7 @@ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib
   "DC output power of the PV array" annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 
-  BaseClasses.PVRadiationHorizontal    pVRadiationHorizontalTRY(
+  BaseClasses.PVRadiationHorizontalTRY pVRadiationHorizontalTRY(
    final lat = lat,
    final lon = lon,
    final alt = alt,
@@ -91,8 +91,10 @@ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib
     annotation (Placement(transformation(extent={{-78,-50},{-58,-30}})));
 
   BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-120,-22},{-80,18}}), iconTransformation(extent=
+        transformation(extent={{-122,-4},{-82,36}}),  iconTransformation(extent=
            {{-160,-4},{-140,16}})));
+  Modelica.Blocks.Math.Add add(k2=-1)
+    annotation (Placement(transformation(extent={{-60,-94},{-40,-74}})));
 equation
 
 
@@ -113,7 +115,7 @@ equation
   connect(iVCharacteristics.DCOutputPower, DCOutputPower)
     annotation (Line(points={{31,-26},{66,-26},{66,0},{110,0}}, color={0,0,127}));
   connect(weaBus.winSpe, cellTemperature.winVel) annotation (Line(
-      points={{-100,-2},{-72,-2},{-72,71.9},{-42,71.9}},
+      points={{-102,16},{-72,16},{-72,71.9},{-42,71.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -121,21 +123,33 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.TDryBul, cellTemperature.T_a) annotation (Line(
-      points={{-100,-2},{-72,-2},{-72,75.4},{-42,75.4}},
+      points={{-102,16},{-72,16},{-72,75.4},{-42,75.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(weaBus.HGloHor, pVRadiationHorizontalTRY.radHor) annotation (Line(
-      points={{-100,-2},{-90,-2},{-90,-34},{-80,-34}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
+  connect(pVRadiationHorizontalTRY.radHorDif, weaBus.HDifHor) annotation (Line(
+        points={{-80,-46},{-94,-46},{-94,16},{-102,16}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(add.u1, weaBus.HGloHor) annotation (Line(points={{-62,-78},{-80,-78},
+          {-80,16},{-102,16}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.u2, weaBus.HDifHor) annotation (Line(points={{-62,-90},{-84,-90},
+          {-84,16},{-102,16}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.y, pVRadiationHorizontalTRY.radHorBea) annotation (Line(points={{
+          -39,-84},{-60,-84},{-60,-34},{-80,-34}}, color={0,0,127}));
   annotation (Icon(graphics={
      Rectangle(
       lineColor={0,0,0},
