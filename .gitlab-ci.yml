@@ -166,6 +166,7 @@ test_dymola_Controls:
 test_dymola_Fluid:
   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
+  timeout: 8h 0m
   services:
     -  docker
 
