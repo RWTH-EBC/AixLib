@@ -108,7 +108,7 @@ test_dymola_Controls:
 
 
 # test_dymola_Electrical:
-#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
 #   stage: test
 #   services:
 #     -  docker
@@ -136,7 +136,7 @@ test_dymola_Controls:
 
 
 # test_dymola_FastHVAC:
-#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+#   image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
 #   stage: test
 #   services:
 #     -  docker
