@@ -24,7 +24,7 @@ test_overall_coverage:
     when: runner_system_failure
 
 test_dymola_Airflow:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
@@ -52,7 +52,7 @@ test_dymola_Airflow:
 
 
 test_dymola_BoundaryConditions:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
@@ -80,7 +80,7 @@ test_dymola_BoundaryConditions:
 
 
 test_dymola_Controls:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
@@ -164,7 +164,7 @@ test_dymola_Controls:
 
 
 test_dymola_Fluid:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
@@ -192,7 +192,7 @@ test_dymola_Fluid:
 
 
 test_dymola_Media:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
@@ -220,7 +220,7 @@ test_dymola_Media:
 
 
 test_dymola_Systems:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
@@ -248,7 +248,7 @@ test_dymola_Systems:
 
 
 test_dymola_ThermalZones:
-  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:conda-integration
+  image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:aixlibCITesting2020-miniconda-aixlib
   stage: test
   services:
     -  docker
