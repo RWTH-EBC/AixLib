@@ -2,7 +2,9 @@ within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAirEquipped
   "Multizone model with ideal heater and cooler and AHU considering moisture balance"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
+      redeclare final model thermalZone =
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped);
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -158,7 +160,7 @@ model MultizoneMoistAirEquipped
   Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if ASurTot > 0 or VAir > 0
     "absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
-        iconTransformation(extent={{80,40},{92,52}})));
+        iconTransformation(extent={{80,40},{100,60}})));
 protected
   BaseClasses.MoistSplitter moistSplitter(
     nOut=1,

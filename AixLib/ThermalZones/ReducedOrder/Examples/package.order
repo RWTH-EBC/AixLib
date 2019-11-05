@@ -8,5 +8,6 @@ ThermalZone
 ThermalZoneEquipped
 ThermalZoneMoistAir
 ThermalZoneMoistAirEquipped
+MultizoneMoistAir
 MultizoneMoistAirEquipped
 ComparisonThermalZoneMoistAndDryAir

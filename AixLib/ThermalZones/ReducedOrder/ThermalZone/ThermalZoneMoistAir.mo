@@ -20,6 +20,11 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{18,-72},{38,-52}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
     annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
+  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
+    ATot > 0 annotation (Placement(transformation(extent={{20,-22},{30,-6}})));
+  Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 "Humidity output"
+    annotation (Placement(transformation(extent={{100,64},{120,84}}),
+        iconTransformation(extent={{100,6},{120,26}})));
 equation
   if internalGainsMode == 3 then
     connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,
@@ -33,6 +38,8 @@ equation
           0,127}));
   connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-30},{
           34,-30},{34,34},{37,34}}, color={0,0,127}));
+  connect(humVolAirROM.y, X_w) annotation (Line(points={{30.5,-14},{58,-14},{58,
+          -4},{98,-4},{98,74},{110,74}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
