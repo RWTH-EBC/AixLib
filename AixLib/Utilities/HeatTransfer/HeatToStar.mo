@@ -1,11 +1,12 @@
 within AixLib.Utilities.HeatTransfer;
-model HeatToStar_Avar
+model HeatToStar
   "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
   parameter Boolean use_A_in = false
-    "Get the area from the input connector" annotation(Evaluate=true, HideResult=true);
-  parameter Modelica.SIunits.Area prescribedA
-  "Fixed value of prescribed area" annotation (Dialog(enable = not use_A_in));
+    "Get the area from the input connector"
+    annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
+  parameter Modelica.SIunits.Area A=-1 "Fixed value of prescribed area"
+                                   annotation (Dialog(enable=not use_A_in));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
@@ -16,7 +17,10 @@ model HeatToStar_Avar
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";
-
+initial equation
+  if not use_A_in then
+    assert(A > 0, "The area for heattransfer must be positive");
+  end if;
 equation
   Therm.Q_flow + Star.Q_flow = 0;
   // To prevent negative solutions for T, the max() expression is used.
@@ -25,7 +29,7 @@ equation
     1)*max(Therm.T, 1)*max(Therm.T, 1) - max(Star.T, 1)*max(Star.T, 1)*max(Star.T,
     1)*max(Star.T, 1));
   if not use_A_in then
-    A_in_internal = prescribedA;
+    A_in_internal =A;
   end if;
   connect(A_in, A_in_internal);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
@@ -46,4 +50,4 @@ equation
  <li><i>June 21, 2007&nbsp;</i> by Peter Mattes:<br/>Extended model based on TwoStar_RadEx.</li>
  </ul>
  </html>"));
-end HeatToStar_Avar;
+end HeatToStar;
