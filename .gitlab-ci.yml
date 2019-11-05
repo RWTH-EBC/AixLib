@@ -180,7 +180,7 @@ test_dymola_Fluid:
     - export PYTHONIOENCODING=UTF8 # just in case
 
   script:
-    - cd AixLib && python ../bin/runUnitTests.py -n 8 --batch --single-package AixLib.Fluid --tool dymola
+    - cd AixLib && python ../bin/runUnitTests.py -n 2 --batch --single-package AixLib.Fluid --tool dymola
 
   artifacts:
     when: on_failure
