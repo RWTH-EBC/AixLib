@@ -87,7 +87,8 @@ def _runUnitTests(batch, tool, package, path, n_pro, show_gui):
     # Run the regression tests
 
     retVal = ut.run()
-    # ut.get_test_example_coverage()
+    # comment out this line for local usage
+    ut.get_test_example_coverage()
     return retVal
 
 
