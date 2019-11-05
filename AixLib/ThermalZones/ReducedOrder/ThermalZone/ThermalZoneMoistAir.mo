@@ -9,7 +9,8 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     "Ventilation and infiltration humidity" annotation (Placement(
         transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
           extent={{-126,-80},{-100,-54}})));
-  Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0
+  Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
+    zoneParam.VAir > 0
     annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
      final T0=zoneParam.T_start,
@@ -20,11 +21,14 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{18,-72},{38,-52}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
     annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
-  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
-    ATot > 0 annotation (Placement(transformation(extent={{20,-22},{30,-6}})));
-  Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 "Humidity output"
+  Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 or zoneParam.VAir > 0
+    "Humidity output"
     annotation (Placement(transformation(extent={{100,64},{120,84}}),
         iconTransformation(extent={{100,6},{120,26}})));
+protected
+  Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
+    ATot > 0 or zoneParam.VAir > 0
+    annotation (Placement(transformation(extent={{20,-22},{30,-6}})));
 equation
   if internalGainsMode == 3 then
     connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,

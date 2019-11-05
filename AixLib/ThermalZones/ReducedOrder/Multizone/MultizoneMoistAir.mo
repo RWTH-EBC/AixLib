@@ -2,8 +2,9 @@ within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAir "Multizone model with humidity balance"
   extends Multizone(redeclare final model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped);
-  Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or VAir > 0
-    "Ventilation and infiltration humidity" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
+    VAir > 0 "Ventilation and infiltration humidity"
+     annotation (Placement(
         transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
@@ -11,17 +12,16 @@ model MultizoneMoistAir "Multizone model with humidity balance"
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-90,24})));
-  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)] if ASurTot > 0 or VAir > 0
-    "Humidity output"
+  Modelica.Blocks.Interfaces.RealOutput X_w[size(zone, 1)] if ASurTot > 0 or
+    VAir > 0 "Humidity output"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,42},{100,62}})));
 equation
   connect(zone.ventHum, ventHum) annotation (Line(points={{35.27,55.765},{10,
           55.765},{10,56},{-18,56},{-18,36},{-100,36}},             color={0,0,
           127}));
-  connect(zone.X_w, X_w) annotation (Line(points={{82.1,84.67},{94,84.67},{94,
-          94},{110,94}},
-                     color={0,0,127}));
+  connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,94},
+          {110,94}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>This model enhances the existing multi-zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>This is a ready-to-use multizone model with a variable number of thermal zones. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
