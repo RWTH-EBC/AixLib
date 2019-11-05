@@ -13,7 +13,7 @@ model OpenLoopHeatPumpCarnot
 
   Supplies.OpenLoop.SourceIdeal sourceIdeal(
     redeclare package Medium = Medium,
-    TReturn=273.15 + 10,
+    T_return=273.15 + 10,
     pReturn=200000)      "Simple suppy model"
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
   .AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.HeatPumpCarnot demand(
@@ -23,7 +23,7 @@ model OpenLoopHeatPumpCarnot
     dTBuilding=10,
     Q_flow_nominal=78239.1,
     dTDesign=10,
-    TReturn=283.15,
+    T_return=283.15,
     TSupplyBuilding=313.15) "Simple demand model" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},

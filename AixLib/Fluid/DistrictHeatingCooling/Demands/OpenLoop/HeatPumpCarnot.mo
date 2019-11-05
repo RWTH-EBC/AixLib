@@ -18,7 +18,7 @@ model HeatPumpCarnot "Substation with a heat pump carnot model"
     displayUnit="K")
     "Design temperature difference for the heat pump on its district heating side";
 
-  parameter Modelica.SIunits.Temperature TReturn
+  parameter Modelica.SIunits.Temperature T_return
     "Fixed return temperature";
 
   parameter Modelica.SIunits.TemperatureDifference dTBuilding(
@@ -76,15 +76,16 @@ public
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-40,-10})));
-  Modelica.Blocks.Sources.Constant temperatureDropHP(k=dTDesign)
-    "Temperature drop over heat pump in K"
-    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+  Modelica.Blocks.Sources.Constant TDropHeatPump(k=dTDesign)
+    "Temperature drop over heat pump in K" annotation (Placement(transformation(
+        extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-90,50})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-32,40},{-12,60}})));
-  Modelica.Blocks.Math.Division heat2massFlow
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Modelica.Blocks.Math.Division heat2m_flow annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,32})));
   Sources.MassFlowSource_T              sink(
@@ -106,7 +107,7 @@ public
     redeclare package Medium = Medium,
     use_m_flow_in=true,
     nPorts=1,
-    T=TReturn,
+    T=T_return,
     use_T_in=true)
                "Source sending prescribed flow back to the network" annotation (
      Placement(transformation(
@@ -116,7 +117,7 @@ public
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
-  HeatPumps.Carnot_TCon              heaPum(
+  HeatPumps.Carnot_TCon heatPump(
     redeclare package Medium1 = MediumBuilding,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
@@ -140,13 +141,13 @@ public
   Sources.FixedBoundary              sinkHeating(
                           redeclare package Medium = MediumBuilding, nPorts=1)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
-  Modelica.Blocks.Math.Gain mFlowBuilding(k=1/(cp_default_building*dTBuilding))
+  Modelica.Blocks.Math.Gain m_flowBuilding(k=1/(cp_default_building*dTBuilding))
     "Changes sign of prescribed flow for extraction from network" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,50})));
-  Modelica.Blocks.Sources.Constant temperatureSupplyBuilding(k=TSupplyBuilding)
+  Modelica.Blocks.Sources.Constant T_supplyBuilding(k=TSupplyBuilding)
     "Temperature of supply line" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -157,7 +158,7 @@ public
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={90,-70})));
-  Modelica.Blocks.Math.Add temperatureReturnBuilding(k2=-1)
+  Modelica.Blocks.Math.Add T_returnBuilding(k2=-1)
     "Temperature returning from building heating system" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -180,51 +181,50 @@ equation
           {-88,-10}},           color={0,127,255}));
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
           -10}},          color={0,127,255}));
-  connect(gain.y, heat2massFlow.u2)
+  connect(gain.y, heat2m_flow.u2)
     annotation (Line(points={{-11,50},{18,50},{18,44}}, color={0,0,127}));
   connect(source.ports[1], senT_return.port_a)
     annotation (Line(points={{80,-40},{90,-40},{90,-30}},
                                                  color={0,127,255}));
-  connect(heat2massFlow.y, changeSign.u) annotation (Line(points={{24,21},{24,12}},
-                                 color={0,0,127}));
+  connect(heat2m_flow.y, changeSign.u)
+    annotation (Line(points={{24,21},{24,12}}, color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
     annotation (Line(points={{24,-11},{24,-42},{22,-42}},color={0,0,127}));
-  connect(heat2massFlow.y, source.m_flow_in) annotation (Line(points={{24,21},{
-          24,16},{54,16},{54,-48},{58,-48}},  color={0,0,127}));
-  connect(senT_supply.port_b, heaPum.port_a2) annotation (Line(points={{-88,-30},
+  connect(heat2m_flow.y, source.m_flow_in) annotation (Line(points={{24,21},{24,
+          16},{54,16},{54,-48},{58,-48}}, color={0,0,127}));
+  connect(senT_supply.port_b, heatPump.port_a2) annotation (Line(points={{-88,-30},
           {-88,-50},{-50,-50}}, color={0,127,255}));
-  connect(sink.ports[1], heaPum.port_b2)
+  connect(sink.ports[1], heatPump.port_b2)
     annotation (Line(points={{0,-50},{-30,-50}}, color={0,127,255}));
-  connect(Q_con.y, heat2massFlow.u1)
+  connect(Q_con.y, heat2m_flow.u1)
     annotation (Line(points={{21,74},{30,74},{30,44}}, color={0,0,127}));
-  connect(heaPum.P, Q_con.u2) annotation (Line(points={{-51,-56},{-70,-56},{-70,
+  connect(heatPump.P, Q_con.u2) annotation (Line(points={{-51,-56},{-70,-56},{-70,
           68},{-2,68}}, color={0,0,127}));
-  connect(mFlowBuilding.y, sourceHeating.m_flow_in) annotation (Line(points={{60,39},
-          {60,-20},{30,-20},{30,-72},{22,-72}},        color={0,0,127}));
-  connect(temperatureSupplyBuilding.y, heaPum.TSet) annotation (Line(points={{
-          59,-90},{-22,-90},{-22,-65},{-28,-65}}, color={0,0,127}));
-  connect(sourceHeating.T_in, temperatureReturnBuilding.y)
+  connect(m_flowBuilding.y, sourceHeating.m_flow_in) annotation (Line(points={{
+          60,39},{60,-20},{30,-20},{30,-72},{22,-72}}, color={0,0,127}));
+  connect(T_supplyBuilding.y, heatPump.TSet) annotation (Line(points={{59,-90},
+          {-22,-90},{-22,-65},{-28,-65}}, color={0,0,127}));
+  connect(sourceHeating.T_in, T_returnBuilding.y)
     annotation (Line(points={{22,-76},{31,-76}}, color={0,0,127}));
-  connect(temperatureSupplyBuilding.y, temperatureReturnBuilding.u1)
-    annotation (Line(points={{59,-90},{58,-90},{58,-82},{54,-82}}, color={0,0,
-          127}));
-  connect(deltaTBuilding.y, temperatureReturnBuilding.u2)
+  connect(T_supplyBuilding.y, T_returnBuilding.u1) annotation (Line(points={{59,
+          -90},{58,-90},{58,-82},{54,-82}}, color={0,0,127}));
+  connect(deltaTBuilding.y, T_returnBuilding.u2)
     annotation (Line(points={{79,-70},{54,-70}}, color={0,0,127}));
-  connect(sinkHeating.ports[1], heaPum.port_b1) annotation (Line(points={{-70,
+  connect(sinkHeating.ports[1], heatPump.port_b1) annotation (Line(points={{-70,
           -80},{-60,-80},{-60,-62},{-50,-62}}, color={0,127,255}));
-  connect(heaPum.port_a1, sourceHeating.ports[1]) annotation (Line(points={{-30,
+  connect(heatPump.port_a1, sourceHeating.ports[1]) annotation (Line(points={{-30,
           -62},{-12,-62},{-12,-80},{0,-80}}, color={0,127,255}));
-  connect(temperatureDropHP.y, gain.u)
+  connect(TDropHeatPump.y, gain.u)
     annotation (Line(points={{-79,50},{-34,50}}, color={0,0,127}));
   connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-77,-20},{-58,-20},
           {-58,-16},{-52,-16}}, color={0,0,127}));
-  connect(temperatureDropHP.y, deltaT.u2) annotation (Line(points={{-79,50},{
-          -58,50},{-58,-4},{-52,-4}}, color={0,0,127}));
+  connect(TDropHeatPump.y, deltaT.u2) annotation (Line(points={{-79,50},{-58,50},
+          {-58,-4},{-52,-4}}, color={0,0,127}));
   connect(Q_flow_input, gainInput.u)
     annotation (Line(points={{-108,80},{-62,80}}, color={0,0,127}));
   connect(Q_con.u1, gainInput.y)
     annotation (Line(points={{-2,80},{-39,80}}, color={0,0,127}));
-  connect(gainInput.y, mFlowBuilding.u) annotation (Line(points={{-39,80},{-20,
+  connect(gainInput.y, m_flowBuilding.u) annotation (Line(points={{-39,80},{-20,
           80},{-20,94},{60,94},{60,62}}, color={0,0,127}));
   connect(deltaT.y, max.u2) annotation (Line(points={{-29,-10},{-18,-10},{-18,
           -28},{-4,-28}}, color={0,0,127}));
