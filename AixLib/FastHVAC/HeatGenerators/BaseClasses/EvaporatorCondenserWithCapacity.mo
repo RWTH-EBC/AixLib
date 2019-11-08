@@ -12,14 +12,12 @@ model EvaporatorCondenserWithCapacity
   parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
   annotation (Dialog(group="Heat losses", enable=use_cap));
   parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
-  parameter Modelica.SIunits.ThermalConductance kAOut_nominal
-    "Nominal value for thermal conductance to the ambient"
-  annotation (Dialog(group="Heat losses", enable=
-          use_cap));
-  Modelica.Blocks.Interfaces.RealOutput kAInn
+  Modelica.SIunits.ThermalConductance GOut
+    "Formular for calculation of heat transfer coefficient on the outside"
+  annotation (Dialog(group="Heat losses", enable=use_cap));
+  Modelica.Blocks.Interfaces.RealOutput GInn
     "Formular for calculation of heat transfer coefficient on the inside"
-  annotation (Dialog(group="Heat losses", enable=
-          use_cap));
+  annotation (Dialog(group="Heat losses", enable=use_cap));
   Modelica.Thermal.HeatTransfer.Components.Convection conIns if use_cap
     "Convection between fluid and solid" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
@@ -40,8 +38,7 @@ model EvaporatorCondenserWithCapacity
         rotation=270,
         origin={12,52})));
 
-  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=kAInn) if
-                                               use_cap
+  Modelica.Blocks.Sources.RealExpression heatLossIns(final y=GInn) if use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},
@@ -51,7 +48,7 @@ model EvaporatorCondenserWithCapacity
     "Temperature and heat flow to the ambient"
     annotation (Placement(transformation(extent={{-5,105},{5,95}}),
         iconTransformation(extent={{-5,105},{5,95}})));
-  Modelica.Blocks.Sources.RealExpression heatLossOut(final y=kAOut_nominal) if use_cap
+  Modelica.Blocks.Sources.RealExpression heatLossOut(final y=GOut) if use_cap
     "Nominal heat loss coefficient to the inside" annotation (Placement(
         transformation(
         extent={{-15,-10},{15,10}},
