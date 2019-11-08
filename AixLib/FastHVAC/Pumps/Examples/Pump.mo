@@ -13,7 +13,7 @@ model Pump
       radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
     annotation (Placement(transformation(extent={{94,-82},{114,-64}})));
-  AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boilerBase(paramBoiler=
+  AixLib.FastHVAC.HeatGenerators.Boiler boilerBase(paramBoiler=
         DataBase.Boiler.General.Boiler_Vitogas200F_11kW(), T_start=333.15)
     annotation (Placement(transformation(extent={{-68,-4},{-46,18}})));
   Modelica.Blocks.Sources.BooleanExpression booleanOnOffBoiler(y=true)
@@ -62,12 +62,12 @@ equation
           -67.78},{98.6,-66},{66,-66},{66,-46},{70,-46}},  color={191,0,0}));
   connect(radiator_ML.RadiativeHeat, idealSink.port) annotation (Line(points={{109.6,
           -67.6},{109.6,-62},{70,-62},{70,-46}}, color={95,95,95}));
-  connect(radiator_ML1.ConvectiveHeat, idealSink1.port) annotation (Line(points
-        ={{102.6,24.22},{102.6,26},{70,26},{70,46},{74,46}}, color={191,0,0}));
+  connect(radiator_ML1.ConvectiveHeat, idealSink1.port) annotation (Line(points=
+         {{102.6,24.22},{102.6,26},{70,26},{70,46},{74,46}}, color={191,0,0}));
   connect(radiator_ML1.RadiativeHeat, idealSink1.port) annotation (Line(points=
           {{113.6,24.4},{113.6,30},{74,30},{74,46}}, color={95,95,95}));
-  connect(radiator_ML1.enthalpyPort_b1, boilerBase.enthalpyPort_a1) annotation
-    (Line(points={{116,18.82},{122,18.82},{122,18},{126,18},{126,-94},{-84,-94},
+  connect(radiator_ML1.enthalpyPort_b1, boilerBase.enthalpyPort_a1) annotation (
+     Line(points={{116,18.82},{122,18.82},{122,18},{126,18},{126,-94},{-84,-94},
           {-84,6.78},{-62.5,6.78}}, color={176,0,0}));
   connect(splitterNew.enthalpyPort_b[1], radiator_ML1.enthalpyPort_a1)
     annotation (Line(points={{64,8},{82,8},{82,18.82},{100,18.82}}, color={176,

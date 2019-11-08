@@ -59,7 +59,7 @@ model PipeBase
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,38})));
-  Sensors.MassFlowSensor massFlowRate
+  AixLib.FastHVAC.Sensors.MassFlowSensor massFlowRate
     annotation (Placement(transformation(extent={{44,-10},{64,10}})));
 equation
 

@@ -1,6 +1,6 @@
 within AixLib.FastHVAC;
 package HeatExchangers
-    extends Modelica.Icons.Package;
+  extends Modelica.Icons.VariantsPackage;
 
 
 

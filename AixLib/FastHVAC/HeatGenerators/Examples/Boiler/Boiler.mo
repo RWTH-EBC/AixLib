@@ -24,7 +24,7 @@ model Boiler
     duration=36000,
     offset=0.2)
     annotation (Placement(transformation(extent={{-28,20},{-8,40}})));
-  AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boiler
+  AixLib.FastHVAC.HeatGenerators.Boiler boiler
     annotation (Placement(transformation(extent={{-6,-20},{34,18}})));
 equation
 

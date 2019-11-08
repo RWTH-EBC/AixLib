@@ -1,3 +1,4 @@
 within AixLib.FastHVAC.Valves;
-package BaseClases 
+package BaseClases
+  extends Modelica.Icons.BasesPackage;
 end BaseClases;

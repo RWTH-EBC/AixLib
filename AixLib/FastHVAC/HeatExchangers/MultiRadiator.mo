@@ -6,8 +6,8 @@ model MultiRadiator "Simple multi radiator model"
   parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
     "Choose a radiator" annotation (Dialog(group="Radiator Data", enable=
           selectable), choicesAllMatching=true);
-  parameter Media.FastHvac.BaseClasses.MediumSimple medium=
-      Media.FastHvac.WaterSimple()
+  parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple medium=
+      AixLib.Media.FastHvac.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 
@@ -37,15 +37,15 @@ model MultiRadiator "Simple multi radiator model"
     "Initial temperature, in degrees Celsius";
   Pumps.FluidSource fluidSource( medium=medium) "Fluidsource to create enthalpy flow behind n radiators"
     annotation (Placement(transformation(extent={{62,-12},{82,8}})));
-  Sensors.MassFlowSensor massFlowRate
-    "Massflow sensor to get massflow through real radiator" annotation (Placement(
-        transformation(
+  AixLib.FastHVAC.Sensors.MassFlowSensor massFlowRate
+    "Massflow sensor to get massflow through real radiator" annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-2,-14})));
-  Sensors.TemperatureSensor temperature(medium=medium)
-    "Temperature sensor to get temperature through after radiator" annotation (Placement(
-        transformation(
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperature(medium=medium)
+    "Temperature sensor to get temperature through after radiator" annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-2,-44})));
@@ -87,8 +87,8 @@ equation
   connect(ConstN.y, product.u1)
     annotation (Line(points={{22.6,0},{28,0}}, color={0,0,127}));
 
-  connect(radiator.ConvectiveHeat, pseudoRadiator.ConvectiveHeatIn) annotation
-    (Line(points={{-30.48,6.96},{-30.48,18},{-3.8,18},{-3.8,31}}, color={191,0,
+  connect(radiator.ConvectiveHeat, pseudoRadiator.ConvectiveHeatIn) annotation (
+     Line(points={{-30.48,6.96},{-30.48,18},{-3.8,18},{-3.8,31}}, color={191,0,
           0}));
   connect(pseudoRadiator.ConvectiveHeat, ConvectiveHeat)
     annotation (Line(points={{-3.8,49},{-40,49},{-40,80}}, color={191,0,0}));

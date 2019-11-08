@@ -1,5 +1,8 @@
 within AixLib.FastHVAC.Pumps.Examples;
 model FluidSource
+  import AixLib;
+  import AixLib;
+  import AixLib;
   extends Modelica.Icons.Example;
 
   Modelica.Blocks.Sources.Constant dotm_source(k=2)
@@ -16,11 +19,11 @@ model FluidSource
     annotation (Placement(transformation(extent={{12,-30},{32,-10}})));
   Sinks.Vessel vessel2
     annotation (Placement(transformation(extent={{80,-72},{100,-52}})));
-  Sensors.TemperatureSensor temperature
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperature
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
-  Sensors.TemperatureSensor temperature1
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperature1
     annotation (Placement(transformation(extent={{54,-46},{74,-26}})));
-  Sensors.TemperatureSensor temperature2
+  AixLib.FastHVAC.Sensors.TemperatureSensor temperature2
     annotation (Placement(transformation(extent={{54,-72},{74,-52}})));
 equation
   connect(T_source.y, fluidSource.T_fluid) annotation (Line(points={{-63,-12},{

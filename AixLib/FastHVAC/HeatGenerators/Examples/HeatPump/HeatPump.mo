@@ -6,7 +6,7 @@ model HeatPump
   AixLib.FastHVAC.Pumps.FluidSource fluidSource(medium=
         Media.FastHvac.WaterSimple()) "Fluidsource for source"
     annotation (Placement(transformation(extent={{-50,-44},{-30,-24}})));
-  AixLib.FastHVAC.HeatGenerators.HeatPump.HeatPump heatPump(
+  AixLib.FastHVAC.HeatGenerators.HeatPump heatPump(
     refIneFre_constant=1,
     Medium_con=Media.FastHvac.WaterSimple(),
     Medium_eva=Media.FastHvac.WaterSimple(),
@@ -86,9 +86,8 @@ model HeatPump
     offset=278)
     "Ramp signal for the temperature input of the source side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-96,-34},{-76,-14}})));
-  BaseClasses.WorkingFluid Room(m_fluid=5*1000, T0=293.15) "Volume"
-                                                           annotation (
-      Placement(transformation(
+  .AixLib.FastHVAC.BaseClasses.WorkingFluid Room(m_fluid=5*1000, T0=293.15)
+    "Volume" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={90,-26})));

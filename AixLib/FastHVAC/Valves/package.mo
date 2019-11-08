@@ -1,5 +1,5 @@
 within AixLib.FastHVAC;
-package Valves 
-   extends Modelica.Icons.Package;
+package Valves
+  extends Modelica.Icons.VariantsPackage;
 
 end Valves;

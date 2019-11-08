@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.HeatExchangers.Examples.DHWHeatExchanger;
 model DHWHeatExchanger
 extends Modelica.Icons.Example;
-  AixLib.FastHVAC.HeatGenerators.Boiler.Boiler boilerBase
+  AixLib.FastHVAC.HeatGenerators.Boiler boilerBase
     annotation (Placement(transformation(extent={{-72,-30},{-46,-4}})));
   AixLib.FastHVAC.Pumps.Pump pump annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

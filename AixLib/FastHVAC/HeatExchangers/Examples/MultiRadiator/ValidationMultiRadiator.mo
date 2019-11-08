@@ -128,8 +128,8 @@ equation
       points={{12,65},{32,65},{32,65.09},{35.08,65.09}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(fluidSource.enthalpyPort_b, multiRadiator.enthalpyPort_a) annotation
-    (Line(
+  connect(fluidSource.enthalpyPort_b, multiRadiator.enthalpyPort_a) annotation (
+     Line(
       points={{-23,68},{-16,68},{-16,65},{-10,65}},
       color={176,0,0},
       smooth=Smooth.None));

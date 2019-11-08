@@ -18,7 +18,7 @@ model CHP
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-36,42})));
-  AixLib.FastHVAC.HeatGenerators.CHP.CHP_PT1 cHP_PT1_1(
+  AixLib.FastHVAC.HeatGenerators.CHP_PT1 cHP_PT1_1(
     param=DataBase.CHP.FastHVAC.Ecopower_3_0(),
     selectable=true,
     sigma(start=0.4),

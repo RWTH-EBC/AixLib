@@ -138,9 +138,9 @@ public
     annotation (Placement(transformation(extent={{-28,-64},{30,12}})));
 // densityWater=fill(densityWater, N),
 //     capacityWater=fill(capacityWater, N),
-  Sensors.TemperatureSensor flowTemperature
+  AixLib.FastHVAC.Sensors.TemperatureSensor flowTemperature
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  Sensors.TemperatureSensor returnTemperature
+  AixLib.FastHVAC.Sensors.TemperatureSensor returnTemperature
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
                            ConvectiveHeat
