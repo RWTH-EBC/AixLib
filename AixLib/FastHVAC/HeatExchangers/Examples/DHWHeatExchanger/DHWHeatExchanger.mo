@@ -36,10 +36,6 @@ equation
       points={{-69.6,-42},{-78,-42},{-78,-17.26},{-65.5,-17.26}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(dotm_heatingCircuit.y, pump.dotm_setValue) annotation (Line(
-      points={{-77.3,-61},{-60,-61},{-60,-50}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(booleanOnOffBoiler.y, boilerBase.onOff_boiler) annotation (Line(
       points={{-73.2,17},{-55.1,17},{-55.1,-7.9}},
       color={255,0,255},
@@ -76,6 +72,8 @@ equation
       points={{24,-19.12},{34,-19.12},{34,-16},{57,-16}},
       color={176,0,0},
       smooth=Smooth.None));
+  connect(dotm_heatingCircuit.y, pump.m_flowSet) annotation (Line(points={{
+          -77.3,-61},{-60,-61},{-60,-52.6}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Rectangle(

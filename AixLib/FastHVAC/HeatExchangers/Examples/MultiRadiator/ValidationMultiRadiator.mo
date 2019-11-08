@@ -2,8 +2,6 @@ within AixLib.FastHVAC.HeatExchangers.Examples.MultiRadiator;
 model ValidationMultiRadiator
 
   extends Modelica.Icons.Example;
-  AixLib.FastHVAC.Valves.Manifold manifold(n=3)
-    annotation (Placement(transformation(extent={{32,-60},{52,-40}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedConvHeatFlow(Q_flow=-4500)
     annotation (Placement(transformation(extent={{-36,80},{-16,100}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedConvHeatFlow1(Q_flow=-1500)
@@ -54,7 +52,8 @@ model ValidationMultiRadiator
     annotation (Placement(transformation(extent={{0,-84},{20,-64}})));
   Modelica.Blocks.Sources.Constant Tset(k=273.15 + 75)
     annotation (Placement(transformation(extent={{-114,10},{-94,30}})));
-  AixLib.FastHVAC.HeatExchangers.MultiRadiator multiRadiator1(
+  AixLib.FastHVAC.HeatExchangers.MultiRadiator multiRadiator(
+    n=3,
     selectable=true,
     medium=Media.FastHvac.WaterSimple(),
     radiatorType=
@@ -62,17 +61,9 @@ model ValidationMultiRadiator
     annotation (Placement(transformation(extent={{-10,52},{12,78}})));
   Modelica.Blocks.Sources.Constant dotMSet(k=0.111)
     annotation (Placement(transformation(extent={{-114,-20},{-94,0}})));
+  Valves.Splitter splitter(nOut=3, nIn=1)
+    annotation (Placement(transformation(extent={{-32,-60},{-12,-40}})));
 equation
-  connect(splitter.enthalpyPort_a, fluidSource1.enthalpyPort_b) annotation (
-      Line(
-      points={{-30,-50},{-30,-64},{-33,-64}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(manifold.enthalpyPort_b, temperatureSensor1.enthalpyPort_a)
-    annotation (Line(
-      points={{52,-50},{54,-50},{54,-55.9},{57.2,-55.9}},
-      color={176,0,0},
-      smooth=Smooth.None));
   connect(temperatureSensor1.enthalpyPort_b, vessel1.enthalpyPort_a)
     annotation (Line(
       points={{75,-55.9},{78.5,-55.9},{78.5,-50},{83,-50}},
@@ -85,32 +76,17 @@ equation
       smooth=Smooth.None));
   connect(splitter.enthalpyPort_b[2], radiator_ML.enthalpyPort_a1) annotation (
       Line(
-      points={{-10,-50},{-4,-50},{-4,-50.2},{2,-50.2}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(radiator_ML.enthalpyPort_b1, manifold.enthalpyPort_a[2]) annotation (
-      Line(
-      points={{18,-50.2},{24,-50.2},{24,-50},{32,-50}},
+      points={{-12,-50},{-4,-50},{-4,-50.2},{2,-50.2}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(splitter.enthalpyPort_b[1], radiator_ML2.enthalpyPort_a1) annotation (
      Line(
-      points={{-10,-50.6667},{-4,-50.6667},{-4,-74.2},{2,-74.2}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(radiator_ML2.enthalpyPort_b1, manifold.enthalpyPort_a[1]) annotation (
-     Line(
-      points={{18,-74.2},{26,-74.2},{26,-50.6667},{32,-50.6667}},
+      points={{-12,-50.6667},{-4,-50.6667},{-4,-74.2},{2,-74.2}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(splitter.enthalpyPort_b[3], radiator_ML1.enthalpyPort_a1) annotation (
      Line(
-      points={{-10,-49.3333},{-4,-49.3333},{-4,-26.2},{2,-26.2}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(radiator_ML1.enthalpyPort_b1, manifold.enthalpyPort_a[3]) annotation (
-     Line(
-      points={{18,-26.2},{26,-26.2},{26,-49.3333},{32,-49.3333}},
+      points={{-12,-49.3333},{-4,-49.3333},{-4,-26.2},{2,-26.2}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(fixedConvHeatFlow1.port, radiator_ML2.ConvectiveHeat) annotation (
@@ -147,28 +123,39 @@ equation
       points={{-93,20},{-54,20},{-54,-62},{-50,-62},{-50,-61.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(multiRadiator1.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
+  connect(multiRadiator.enthalpyPort_b, temperatureSensor.enthalpyPort_a)
     annotation (Line(
       points={{12,65},{32,65},{32,65.09},{35.08,65.09}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(fluidSource.enthalpyPort_b, multiRadiator1.enthalpyPort_a)
-    annotation (Line(
+  connect(fluidSource.enthalpyPort_b, multiRadiator.enthalpyPort_a) annotation
+    (Line(
       points={{-23,68},{-16,68},{-16,65},{-10,65}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(multiRadiator1.ConvectiveHeat, fixedConvHeatFlow.port) annotation (
+  connect(multiRadiator.ConvectiveHeat, fixedConvHeatFlow.port) annotation (
       Line(
       points={{-3.4,75.4},{-9.7,75.4},{-9.7,90},{-16,90}},
       color={191,0,0},
       smooth=Smooth.None));
 
-  connect(fixedRadHeatFlow.port, multiRadiator1.RadiativeHeat)
+  connect(fixedRadHeatFlow.port, multiRadiator.RadiativeHeat)
     annotation (Line(points={{16,92},{5.4,92},{5.4,75.4}}, color={191,0,0}));
   connect(dotMSet.y, fluidSource.m_flow) annotation (Line(points={{-93,-10},{-68,
           -10},{-68,63.4},{-40,63.4}}, color={0,0,127}));
   connect(dotMSet.y, fluidSource1.m_flow) annotation (Line(points={{-93,-10},{-70,
           -10},{-70,-68.6},{-50,-68.6}}, color={0,0,127}));
+  connect(fluidSource1.enthalpyPort_b, splitter.enthalpyPort_a[1])
+    annotation (Line(points={{-33,-64},{-32,-64},{-32,-50}}, color={176,0,0}));
+  connect(radiator_ML.enthalpyPort_b1, temperatureSensor1.enthalpyPort_a)
+    annotation (Line(points={{18,-50.2},{28,-50.2},{28,-50},{38,-50},{38,-55.9},
+          {57.2,-55.9}}, color={176,0,0}));
+  connect(radiator_ML2.enthalpyPort_b1, temperatureSensor1.enthalpyPort_a)
+    annotation (Line(points={{18,-74.2},{38,-74.2},{38,-55.9},{57.2,-55.9}},
+        color={176,0,0}));
+  connect(radiator_ML1.enthalpyPort_b1, temperatureSensor1.enthalpyPort_a)
+    annotation (Line(points={{18,-26.2},{38,-26.2},{38,-55.9},{57.2,-55.9}},
+        color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), experiment(StopTime=86400));
 end ValidationMultiRadiator;

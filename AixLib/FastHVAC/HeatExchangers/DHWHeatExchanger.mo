@@ -37,6 +37,7 @@ public
       Components
      ******************************************************************* */
 
+
   Modelica.Blocks.Interfaces.RealOutput T_DHW( unit="degC")
     "output temperature of domestic hot water"                                           annotation (Placement(
         transformation(extent={{80,-30},{120,10}}),   iconTransformation(
@@ -88,6 +89,9 @@ public
         origin={-30,90})));
    Modelica.Blocks.Math.UnitConversions.To_degC to_degC1
      annotation (Placement(transformation(extent={{20,80},{40,100}})));
+protected
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = medium.c
+    "medium's specific heat capacity";
 equation
   //Heater layers numbered from left to right, DHW layers numbered from right to left (both are numbered from entering to leaving the heat exchanger)
 
@@ -111,9 +115,9 @@ equation
   //Entering and leaving the heat exchanger
 
   T_DHW= to_degC1.y;
-  to_degC1.u=enthalpyPort_dHWOut.T_outflow;
+  to_degC1.u= enthalpyPort_dHWOut.h_outflow / cp;
   T_return =to_degC.y;
-  to_degC.u=enthalpyPort_heaterOut.T_outflow;
+  to_degC.u= enthalpyPort_heaterOut.h_outflow / cp;
   dotQ = sum(heat_transfer.Q_flow);
 
   connect(layer_heater[1].enthalpyPort_a, enthalpyPort_heaterIn);

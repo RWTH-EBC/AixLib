@@ -4,7 +4,11 @@ model MassFlowSensor "Mass flow sensor"
   Modelica.Blocks.Interfaces.RealOutput m_flow(unit="kg/s")
     "Output value which contains the measured mass flow of the fluid"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=
-            90)));
+            90,
+        origin={0,100}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,90})));
   Interfaces.EnthalpyPort_a enthalpyPort_a "Input connector"
     annotation (Placement(transformation(extent={{-100,-12},{-78,10}}),
         iconTransformation(extent={{-100,-12},{-76,10}})));

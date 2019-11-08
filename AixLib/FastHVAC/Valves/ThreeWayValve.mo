@@ -60,10 +60,9 @@ equation
 <p>Model for a three way valve. The opening value describes the separation of the incoming massflow. </p>
 <p>Valve opening positions:</p>
 <ul>
-	<li>0 := [ab=b] </li>
-	<li>1 := [ab=a] </li>
+        <li>0 := [ab=b] </li>
+        <li>1 := [ab=a] </li>
 </ul>
-<p> </p>
 <p><b><span style=\"color: #008000;\">Concept</span> </b></p>
 <p>The instreaming flow can be divided into two flows. The ratio of the two flows is controlled by the external input. </p>
 </html>",
