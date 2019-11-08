@@ -37,7 +37,7 @@ model HeatPumpSystem "Example for a heat pump system"
     TRad_nominal=293.15)         "Radiator"
     annotation (Placement(transformation(extent={{40,2},{20,22}})));
 
-  AixLib.Fluid.Sources.FixedBoundary preSou(
+  AixLib.Fluid.Sources.Boundary_pT preSou(
     redeclare package Medium = Medium_sin,
     nPorts=1,
     T=313.15)
@@ -55,17 +55,14 @@ model HeatPumpSystem "Example for a heat pump system"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TOut
     "Outside temperature"
     annotation (Placement(transformation(extent={{-2,54},{18,74}})));
-  AixLib.Fluid.Sources.FixedBoundary sou(
-    use_T=true,
+  AixLib.Fluid.Sources.Boundary_pT sou(
     nPorts=1,
     redeclare package Medium = Medium_sou,
-    use_p=true,
     p=200000,
     T=283.15) "Fluid source on source side"
     annotation (Placement(transformation(extent={{102,-100},{82,-80}})));
 
-  AixLib.Fluid.Sources.FixedBoundary sin(
-    use_T=true,
+  AixLib.Fluid.Sources.Boundary_pT sin(
     nPorts=1,
     redeclare package Medium = Medium_sou,
     p=200000,
@@ -219,7 +216,7 @@ equation
     annotation (Line(points={{20,12},{-28,12}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
-    experiment(StopTime=3600, Tolerance=1e-06),
+    experiment(StopTime=86400, Tolerance=1e-06),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html><p>
   Model for testing the model <a href=

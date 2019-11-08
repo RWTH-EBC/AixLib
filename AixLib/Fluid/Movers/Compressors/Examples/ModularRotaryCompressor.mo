@@ -24,10 +24,8 @@ model ModularRotaryCompressor
 
   // Definition of models
   //
-  Sources.FixedBoundary source(
+  Sources.Boundary_pT   source(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     p=pInl,
     T=TOut,
     nPorts=1) "Source with constant pressure and temperature"
@@ -76,10 +74,8 @@ model ModularRotaryCompressor
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
                 rotation=-90,
                 origin={40,-40})));
-  Sources.FixedBoundary sink(
+  Sources.Boundary_pT   sink(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     nPorts=1,
     p=pInl,
     T=TInl) "Sink with constant pressure and temperature"

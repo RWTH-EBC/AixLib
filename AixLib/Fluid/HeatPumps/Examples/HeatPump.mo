@@ -14,10 +14,11 @@ model HeatPump "Example for the reversible heat pump model."
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
 
-  AixLib.Fluid.Sources.FixedBoundary sourceSideFixedBoundary(
-    nPorts=1,
-    redeclare package Medium = Medium_sou) "Fixed boundary at the outlet of the source side"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+  AixLib.Fluid.Sources.Boundary_pT                  sourceSideFixedBoundary(
+                                                                         nPorts=
+       1, redeclare package Medium = Medium_sou)
+          "Fixed boundary at the outlet of the source side"
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=0,
         origin={-86,40})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
@@ -144,8 +145,7 @@ model HeatPump "Example for the reversible heat pump model."
     annotation (Placement(transformation(extent={{-5,-5},{5,5}},
         origin={45,63},
         rotation=180)));
-  AixLib.Fluid.Sources.FixedBoundary sinkSideFixedBoundary(
-      nPorts=1,
+  AixLib.Fluid.Sources.Boundary_pT   sinkSideFixedBoundary(      nPorts=1,
       redeclare package Medium = Medium_sin)
     "Fixed boundary at the outlet of the sink side" annotation (Placement(
         transformation(
