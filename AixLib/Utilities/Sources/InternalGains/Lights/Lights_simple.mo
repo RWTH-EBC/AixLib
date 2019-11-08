@@ -4,10 +4,8 @@ model Lights_simple "simple light heat source model"
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
   parameter Real Emissivity_Lighting = 0.98;
 
-  Utilities.HeatTransfer.HeatToStar
-                                  RadiationConvertor(
-                              eps=Emissivity_Lighting, A=max(1e-4,
-        SurfaceArea_Lighting))
+  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Lighting, A=max(
+        1e-4, SurfaceArea_Lighting))
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(

@@ -59,7 +59,7 @@ model ExpansionValveMassFlowRate
     dp_nominal=7.5e5)
     " Simple pipe to provide pressure loss"
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-  AixLib.Fluid.Sources.FixedBoundary sink(
+  Sources.Boundary_pT                sink(
     redeclare package Medium = Medium,
     p=pOut,
     T=TOut,
