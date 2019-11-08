@@ -5,7 +5,8 @@ model FourElements "Thermal Zone with four elements for exterior walls,
 
   parameter Modelica.SIunits.Area ARoof "Area of roof"
     annotation(Dialog(group="Roof"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoof "Convective heat transfer coefficient of roof (indoor)"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoof
+    "Convective coefficient of heat transfer of roof (indoor)"
     annotation(Dialog(group="Roof"));
   parameter Integer nRoof(min = 1) "Number of RC-elements of roof"
     annotation(Dialog(group="Roof"));
@@ -53,24 +54,42 @@ protected
     extent={{10,10},{-10,-10}},
     rotation=90,
     origin={-12,120})));
-  Modelica.Blocks.Sources.Constant hConRoof_const(final k=ARoof*hConRoof) "Constant convective heat transfer coefficient for roof"
-    annotation (Placement(transformation(extent={{-5,-5},{5,5}}, rotation=180)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntRoof(final G=min(AInt, ARoof)*hRad) if AInt > 0 and ARoof > 0
-    "Resistor between interior walls and roof"
+  Modelica.Blocks.Sources.Constant hConRoof_const(
+  final k=ARoof*hConRoof) if
+       ARoof > 0 "Coefficient of convective heat transfer for roof"
+     annotation (Placement(transformation(
+       extent={{-5,-5},{5,5}},
+       rotation=180,
+       origin={22,120})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntRoof(
+    final G=min(AInt, ARoof)*hRad) if
+       AInt > 0 and ARoof > 0 "Resistor between interior walls and roof"
+    annotation (Placement(
+      transformation(
+      extent={{-10,-10},{10,10}},
+      rotation=-90,
+      origin={186,10})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofWin(
+    final G=min(ARoof, ATotWin)*hRad) if
+       ARoof > 0 and ATotWin > 0 "Resistor between roof and windows"
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={186,10})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofWin(final G=min(ARoof, ATotWin)*hRad) if ARoof > 0 and ATotWin > 0
-    "Resistor between roof and windows" annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-154,100})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofFloor(final G=min(ARoof, AFloor)*hRad) if ARoof > 0 and AFloor > 0
-    "Resistor between floor plate and roof"
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-56,-112})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallRoof(final G=min(ATotExt, ARoof)*hRad) if ATotExt > 0 and ARoof > 0
-    "Resistor between exterior walls and roof" annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-108,6})));
+      extent={{-10,-10},{10,10}},
+      origin={-154,100})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofFloor(
+    final G=min(ARoof, AFloor)*hRad) if
+       ARoof > 0 and AFloor > 0 "Resistor between floor plate and roof"
+    annotation (Placement(
+      transformation(
+      extent={{-10,-10},{10,10}},
+      rotation=-90,
+      origin={-56,-112})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallRoof(
+    final G=min(ATotExt, ARoof)*hRad) if
+      ATotExt > 0 and ARoof > 0 "Resistor between exterior walls and roof"
+    annotation (Placement(
+      transformation(
+      extent={{-10,-10},{10,10}},
+      origin={-108,6})));
 
 equation
   connect(convRoof.solid, roofRC.port_a)
@@ -143,7 +162,8 @@ equation
     annotation (Line(points={{190,86},{190,86},{190,138},{-11,138},{-11,145}},
     color={191,0,0}));
   end if;
-  connect(hConRoof_const.y, convRoof.Gc) annotation (Line(points={{-5.5,0},{-2,0},{-2,120}}, color={0,0,127}));
+  connect(hConRoof_const.y, convRoof.Gc)
+    annotation (Line(points={{16.5,120},{-2,120},{-2,120}},color={0,0,127}));
   connect(convRoof.fluid, senTAir.port)
     annotation (Line(points={{-12,110},{-12,110},{-12,96},{66,96},{66,0},{80,0}},
                                                  color={191,0,0}));
@@ -175,35 +195,41 @@ equation
   extent={{-60,60},{64,-64}},
   lineColor={0,0,0},
   textString="4")}),
-  Documentation(revisions="<html><ul>
-  <li>August 31, 2018 by Moritz Lauster:<br/>
-    Updated schema in documentation and fixes orientation and
-    connections of roofRC for <a href=
-    \"https://github.com/ibpsa/modelica-ibpsa/issues/997\">issue 997</a>.
+  Documentation(revisions="<html>
+  <ul>
+  <li>
+  July 11, 2019, by Katharina Brinkmann:<br/>
+  Renamed <code>alphaRoof</code> to <code>hConRoof</code>,
+  <code>alphaRoofConst</code> to <code>hConRoof_const</code>
   </li>
-  <li>September 11, 2015 by Moritz Lauster:<br/>
-    First Implementation.
+  <li>
+  August 31, 2018 by Moritz Lauster:<br/>
+  Updated schema in documentation and fixes
+  orientation and connections of roofRC for
+  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/997\">
+  issue 997</a>.
   </li>
-</ul>
-</html>", info="<html>
-<p>
-  This model adds another element for the roof. Roofs commonly exhibit
-  the same excitations as exterior walls but have different
-  coefficients of heat transfer due to their orientation. Adding an
-  extra element for the roof might lead to a finer resolution of the
-  dynamic behaviour but increases calculation times. The roof is
-  parameterized via the length of the RC-chain <code>nRoof</code>, the
-  vector of capacities <code>CRoof[nRoof]</code>, the vector of
-  resistances <code>RRoof[nRoof]</code> and remaining resistances
-  <code>RRoofRem</code>.
-</p>
-<p>
+  <li>
+  September 11, 2015 by Moritz Lauster:<br/>
+  First Implementation.
+  </li>
+  </ul>
+</html>",   info="<html>
+  <p>
+  This model adds another element for the roof. Roofs commonly
+  exhibit the same excitations as exterior walls but have different coefficients
+  of heat transfer due to their orientation. Adding an extra element for the roof
+  might lead to a finer resolution of the dynamic behaviour but increases
+  calculation times. The roof is parameterized via the length of the RC-chain
+  <code>nRoof</code>,
+  the vector of capacities <code>CRoof[nRoof]</code>, the vector of resistances
+  <code>RRoof[nRoof]</code> and remaining resistances <code>RRoofRem</code>.
+  </p>
+  <p>
   The image below shows the RC-network of this model.
-</p>
-<p align=\"center\">
-  <img src=
-  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/FourElements.png\"
-  alt=\"image\" />
-</p>
-</html>"));
+  </p>
+  <p align=\"center\">
+  <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/FourElements.png\" alt=\"image\"/>
+  </p>
+  </html>"));
 end FourElements;

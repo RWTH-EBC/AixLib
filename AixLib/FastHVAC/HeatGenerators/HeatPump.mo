@@ -1,8 +1,7 @@
 ﻿within AixLib.FastHVAC.HeatGenerators;
 model HeatPump "Base model of FastHVAC Heat Pump"
 
-
-//General
+  //General
   parameter AixLib.Media.FastHvac.BaseClasses.MediumSimple Medium_con=
       AixLib.Media.FastHvac.WaterSimple() "Medium at sink side"
     annotation (Dialog(tab="Condenser"), choicesAllMatching=true);

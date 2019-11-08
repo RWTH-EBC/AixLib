@@ -1,7 +1,7 @@
 ControllerOnOff
+ControllerOnOffModularCHP
 DelayedOnOffController
 ExternalControlNightDayHC
 InternalControl
 PIController
 PartialExternalControl
-ControllerOnOffModularCHP
