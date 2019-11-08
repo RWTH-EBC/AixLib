@@ -2,10 +2,10 @@
 model EvaporatorCondenserWithCapacity
   extends AixLib.FastHVAC.Interfaces.TwoPortHeatMassExchanger( workingFluid(m_fluid=m_fluid,
     medium=medium));
-  parameter Boolean is_con "Type of heat exchanger"
-  annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
-      choice=false "Evaporator",
-      radioButtons=true));
+   parameter Boolean is_con "Type of heat exchanger"
+   annotation (Dialog( descriptionLabel = true),choices(choice=true "Condenser",
+       choice=false "Evaporator",
+       radioButtons=true));
   parameter Modelica.SIunits.Volume V "Volume in condenser";
   parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
   annotation (Dialog(group="Heat losses"),choices(checkBox=true));

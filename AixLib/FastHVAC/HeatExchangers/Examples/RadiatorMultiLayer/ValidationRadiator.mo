@@ -86,7 +86,7 @@ equation
       smooth=Smooth.None));
   connect(fluidSource.enthalpyPort_b, radiatorFastHvac.enthalpyPort_a1)
     annotation (Line(
-      points={{-44,-59},{-29,-59},{-29,-59.34},{-28.6,-59.34}},
+      points={{-45,-58},{-29,-58},{-29,-59.34},{-28.6,-59.34}},
       color={176,0,0},
       smooth=Smooth.None));
   connect(T_source.y, fluidSource.T_fluid) annotation (Line(
