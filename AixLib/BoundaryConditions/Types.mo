@@ -44,8 +44,8 @@ First implementation.
         "Use horizontal irradiation",
       TemperaturesAndSkyCover
         "Use dry-bulb and dew-point temperatures and sky cover")
-    "Enumeration for computation of sky temperature" annotation (Documentation(info=
-                               "<html>
+    "Enumeration for computation of sky temperature" annotation (Documentation(
+        info =                 "<html>
 <p>
 Enumeration to define the method used to compute the sky temperature.
 </p>

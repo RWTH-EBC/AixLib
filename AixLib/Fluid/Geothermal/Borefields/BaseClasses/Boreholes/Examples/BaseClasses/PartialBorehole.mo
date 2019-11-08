@@ -72,8 +72,8 @@ equation
   annotation(Documentation(info="<html>
 <p>
 This partial model is used for examples using boreholes models which extend
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.partialBorehole\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.partialBorehole</a>.
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole</a>.
 </p>
 </html>", revisions="<html>
 <ul>
