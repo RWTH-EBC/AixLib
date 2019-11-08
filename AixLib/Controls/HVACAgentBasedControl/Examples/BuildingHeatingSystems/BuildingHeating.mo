@@ -5,8 +5,8 @@ model BuildingHeating
 
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare package
-              Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare
+      package Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-138,40},
             {-124,54}})));
@@ -37,7 +37,7 @@ model BuildingHeating
     Q_flow_nominal=1)
     annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
 
-  AixLib.Fluid.Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT          bou(nPorts=1, redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{142,-80},{122,-60}})));
   Agents.RoomAgent roomAgent(              startTime=60,

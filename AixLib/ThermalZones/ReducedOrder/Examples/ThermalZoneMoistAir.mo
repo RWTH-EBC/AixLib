@@ -143,7 +143,7 @@ model ThermalZoneMoistAir
     T=283.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{-84,-80},{-64,-60}})));
-  Fluid.Sources.FixedBoundary sinAir(redeclare package Medium = Media.Air,
+  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
       nPorts=1)
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
   Utilities.Psychrometrics.X_pTphi x_pTphi
