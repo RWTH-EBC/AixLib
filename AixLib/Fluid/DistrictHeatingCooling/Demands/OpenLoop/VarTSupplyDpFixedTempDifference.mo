@@ -1,6 +1,6 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
-model VarTSupplyDpBypass
-  "Substation with variable dT for fixed return temperature"
+within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
+model VarTSupplyDpFixedTempDifference
+  "Substation with variable supply temperature and fixed dT"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
     final dp(start=0),
@@ -12,10 +12,7 @@ model VarTSupplyDpBypass
 
   parameter Modelica.SIunits.TemperatureDifference dTDesign(
     displayUnit="K")
-    "Design temperature difference for the substation's heat exchanger";
-
-  parameter Modelica.SIunits.Temperature T_return
-    "Fixed return temperature";
+    "Constant temperature difference for the substation's heat exchanger";
 
   parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
@@ -52,24 +49,13 @@ public
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
-  Modelica.Blocks.Math.Add deltaT(k1=+1, k2=-1)
-    "Differernce of flow and return line temperature in K" annotation (
-      Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=0,
-        origin={-50,40})));
-  Modelica.Blocks.Sources.Constant TReturn(k=T_return)
-    "Temperature of return line in °C" annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={-90,46})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
-    annotation (Placement(transformation(extent={{-26,54},{-6,74}})));
+    annotation (Placement(transformation(extent={{-36,44},{-16,64}})));
   Modelica.Blocks.Math.Division heat2m_flow annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={4,46})));
+        origin={0,-2})));
   Sources.MassFlowSource_T              sink(
     redeclare package Medium = Medium,
     use_m_flow_in=true,
@@ -89,7 +75,6 @@ public
     redeclare package Medium = Medium,
     use_m_flow_in=true,
     nPorts=1,
-    T=T_return,
     use_T_in=true)
                "Source sending prescribed flow back to the network" annotation (
      Placement(transformation(
@@ -99,40 +84,14 @@ public
   Modelica.Blocks.Interfaces.RealOutput dpOut
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
-  Modelica.Blocks.Sources.Constant mindeltaT(k=20)
-    "Temperature of return line in °C" annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={-114,-28})));
-  Modelica.Blocks.Math.Max max
-    annotation (Placement(transformation(extent={{-50,-4},{-30,16}})));
-  Modelica.Blocks.Math.Min min annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={80,12})));
-  Modelica.Blocks.Sources.Constant T_returnNominal(k=T_return)
-    "Temperature of return line in °C" annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={24,72})));
-  Modelica.Blocks.Math.Add deltaT1(k1=+1, k2=-1)
-    "Differernce of flow and return line temperature in K" annotation (
+  Modelica.Blocks.Sources.Constant deltaT(k=dTDesign)
+    "Fixed temperature difference between supply and return" annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=0,
-        origin={36,22})));
-  Modelica.Blocks.Sources.RealExpression m_flo_min(y=m_flo_bypass)
-    annotation (Placement(transformation(extent={{100,52},{80,72}})));
-  Utilities.Math.SmoothMax smoothMax(deltaX=0.001) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={0,-4})));
-  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold=
-        m_flo_bypass)
-    annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-  Utilities.Logical.SmoothSwitch switch1
-    annotation (Placement(transformation(extent={{96,22},{116,42}})));
+        extent={{10,10},{-10,-10}},
+        rotation=180,
+        origin={-72,54})));
+  Modelica.Blocks.Math.Add TReturn(k1=-1, k2=+1)
+    annotation (Placement(transformation(extent={{-46,10},{-26,30}})));
 equation
 
   dpOut = dp;
@@ -141,49 +100,27 @@ equation
           {-88,-60},{-74,-60}}, color={0,127,255}));
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
           -60},{80,-60}}, color={0,127,255}));
-  connect(TReturn.y, deltaT.u2)
-    annotation (Line(points={{-79,46},{-62,46}}, color={0,0,127}));
   connect(gain.y, heat2m_flow.u2)
-    annotation (Line(points={{-5,64},{-2,64},{-2,58}}, color={0,0,127}));
+    annotation (Line(points={{-15,54},{-6,54},{-6,10}}, color={0,0,127}));
   connect(Q_flow_input, heat2m_flow.u1)
-    annotation (Line(points={{-108,80},{10,80},{10,58}}, color={0,0,127}));
+    annotation (Line(points={{-108,80},{6,80},{6,10}}, color={0,0,127}));
   connect(source.ports[1], senT_return.port_a)
     annotation (Line(points={{52,-60},{60,-60}}, color={0,127,255}));
+  connect(heat2m_flow.y, changeSign.u) annotation (Line(points={{-1.9984e-015,-13},
+          {0,-13},{0,-24}}, color={0,0,127}));
   connect(changeSign.y, sink.m_flow_in)
     annotation (Line(points={{0,-47},{0,-52},{-18,-52}}, color={0,0,127}));
+  connect(heat2m_flow.y, source.m_flow_in) annotation (Line(points={{0,-13},{0,
+          -20},{20,-20},{20,-68},{30,-68}}, color={0,0,127}));
   connect(senT_supply.port_b, sink.ports[1])
     annotation (Line(points={{-54,-60},{-40,-60}}, color={0,127,255}));
-  connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-64,-49},{-64,-8},
-          {-64,34},{-62,34}}, color={0,0,127}));
-  connect(max.y, gain.u)
-    annotation (Line(points={{-29,6},{-28,6},{-28,64}}, color={0,0,127}));
-  connect(deltaT.y, max.u1) annotation (Line(points={{-39,40},{-46,40},{-46,12},
-          {-52,12}}, color={0,0,127}));
-  connect(mindeltaT.y, max.u2) annotation (Line(points={{-103,-28},{-78,-28},{
-          -78,0},{-52,0}}, color={0,0,127}));
-  connect(T_returnNominal.y, min.u1)
-    annotation (Line(points={{35,72},{68,72},{68,18}}, color={0,0,127}));
-  connect(deltaT1.y, min.u2)
-    annotation (Line(points={{47,22},{68,22},{68,6}},  color={0,0,127}));
-  connect(senT_supply.T, deltaT1.u1)
-    annotation (Line(points={{-64,-49},{-64,16},{24,16}}, color={0,0,127}));
-  connect(mindeltaT.y, deltaT1.u2) annotation (Line(points={{-103,-28},{-20,-28},
-          {-20,28},{24,28}}, color={0,0,127}));
-  connect(smoothMax.y, changeSign.u)
-    annotation (Line(points={{0,-15},{0,-24}}, color={0,0,127}));
-  connect(heat2m_flow.y, smoothMax.u2)
-    annotation (Line(points={{4,35},{4,32},{-6,32},{-6,8}}, color={0,0,127}));
-  connect(m_flo_min.y, smoothMax.u1) annotation (Line(points={{79,62},{50,62},{
-          50,34},{6,34},{6,8}}, color={0,0,127}));
-  connect(smoothMax.y, lessEqualThreshold.u) annotation (Line(points={{0,-15},{
-          2,-15},{2,-20},{22,-20}}, color={0,0,127}));
-  connect(lessEqualThreshold.y, switch1.u2) annotation (Line(points={{45,-20},{
-          60,-20},{60,32},{94,32}}, color={255,0,255}));
-  connect(min.y, switch1.u3) annotation (Line(points={{91,12},{92,12},{92,24},{
-          94,24}}, color={0,0,127}));
-  connect(senT_supply.T, switch1.u1) annotation (Line(points={{-64,-49},{16,-49},
-          {16,40},{94,40}}, color={0,0,127}));
-  connect(switch1.y, source.T_in) annotation (Line(points={{117,32},{74,32},{74,
+  connect(deltaT.y, gain.u)
+    annotation (Line(points={{-61,54},{-38,54}}, color={0,0,127}));
+  connect(deltaT.y,TReturn. u1) annotation (Line(points={{-61,54},{-54,54},{-54,
+          26},{-48,26}}, color={0,0,127}));
+  connect(senT_supply.T,TReturn. u2) annotation (Line(points={{-64,-49},{-66,
+          -49},{-66,14},{-48,14}}, color={0,0,127}));
+  connect(TReturn.y, source.T_in) annotation (Line(points={{-25,20},{24,20},{24,
           -64},{30,-64}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
@@ -227,17 +164,13 @@ equation
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
-<p>
-A simple substation model using a fixed return temperature and the actual supply temperature
-to calculate the mass flow rate drawn from the network. This model uses an open loop design
-to prescribe the required flow rate.
-</p>
+<p>A simple substation model using a fixed temperature difference and the actual supply temperature to calculate the mass flow rate drawn from the network. This model uses an open loop design to prescribe the required flow rate. </p>
 </html>", revisions="<html>
 <ul>
 <li>
-March 4, 2018, by Marcus Fuchs:<br/>
+October 23, 2018, by Tobias Blacha:<br/>
 First implementation.
 </li>
 </ul>
 </html>"));
-end VarTSupplyDpBypass;
+end VarTSupplyDpFixedTempDifference;
