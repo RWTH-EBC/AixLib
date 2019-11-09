@@ -69,9 +69,9 @@ model ML_thermal_delta "Multi layers of heat exchanger"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-52,48})));
-  Utilities.HeatTransfer.HeatToStar                           twoStar_RadEx(A=(
-        s_eff*dotQ_nomLayer)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1)
-    annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(eps=1, A=(s_eff*dotQ_nomLayer)
+        /((delta_nom)*Modelica.Constants.sigma*eps)) annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={32,46})));
@@ -155,8 +155,7 @@ dT_R=Tout - Tair;
       color={191,0,0},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics), Icon(coordinateSystem(preserveAspectRatio=false,
+            -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,
                    extent={{-100,-100},{100,100}}),
                                       graphics={
         Polygon(
