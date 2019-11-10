@@ -2,7 +2,7 @@ within AixLib.Systems.ModularAHU.Validation.MeasuredData;
 record AHU2_Preheater_ControlTest
   "Results of a control test of the preheater (mixing circuit)"
 
-  parameter Real ControlTest[:,:]=[
+  parameter Real AC_3000[:,:]=[
 0,64.48,65.5,24.57,23.36,17.56,32.43,2978.21,3.54,0.17,26.65,29.59,35.25,3438;
 9,62.54,67.4,25.33,23.16,17.42,31.47,2999.75,3.12,0.33,26.43,29.14,44.03,3555;
 20,36.08,68.8,27.44,23.57,17.28,31.09,3050.86,2.98,0.51,26.87,28.97,47.63,3589;
