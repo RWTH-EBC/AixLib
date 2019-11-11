@@ -37,7 +37,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={80,40})));
-  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=data.AC_1000)
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=data.AC_3000)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Modelica.Blocks.Sources.RealExpression Simulation_VF_in_m3h(y=registerBus1.hydraulicBus.VF_in
         *3600)
@@ -58,8 +58,8 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     redeclare package Medium2 = MediumWater,
     m1_flow_nominal=3000/3600,
     m2_flow_nominal=8832/3600,
-    T_start=316.15,
-    tau=60,
+    T_start=296.15,
+    tau=60 + 30,
     T_amb=293.15,
     redeclare HydraulicModules.Admix partialHydraulicModule(
       tau=5,
@@ -83,18 +83,26 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     dynamicHX(
       dp1_nominal(displayUnit="bar") = 138,
       dp2_nominal(displayUnit="bar") = 70600,
-      nNodes=1,
+      nNodes=2,
       tau1=2,
-      tau2=10,
+      tau2=8,
       dT_nom=13.31,
       Q_nom=53400))
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0; 0.20,
-        0.0; 0.28,0.005; 0.35,0.17; 0.45,0.42; 0.57,0.65; 0.80,0.96; 0.90,0.99;
-        1.0,1.0])
+  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0;
+        0.15,0.0; 0.22,0.01; 0.30,0.15; 0.60,0.65; 0.70,0.76; 0.80,0.88; 0.90,
+        0.92; 1.0,1.0])
     annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
+    redeclare package Medium = MediumWater,
+    m_flow_nominal=0.5,
+    zeta=20,
+    diameter=0.032) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-22,-52})));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
@@ -125,9 +133,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(boundaryWaterSource.ports[1], registerModule.port_a2) annotation (
-      Line(points={{-20,-70},{-22,-70},{-22,0.461538},{-22,0.461538}}, color={0,
-          127,255}));
   connect(boundaryWaterSink.ports[1], registerModule.port_b2)
     annotation (Line(points={{40,-70},{40,0.461538}}, color={0,127,255}));
   connect(boundaryAirSource.ports[1], registerModule.port_a1) annotation (Line(
@@ -136,9 +141,13 @@ equation
         points={{40,40.1538},{55,40.1538},{55,40},{70,40}}, color={0,127,255}));
   connect(gain.y, valveCharacteristics.u)
     annotation (Line(points={{-71.6,0},{-61.2,0}}, color={0,0,127}));
+  connect(boundaryWaterSource.ports[1], hydraulicResistance.port_a) annotation (
+     Line(points={{-20,-70},{-22,-70},{-22,-62}}, color={0,127,255}));
+  connect(hydraulicResistance.port_b, registerModule.port_a2)
+    annotation (Line(points={{-22,-42},{-22,0.461538}}, color={0,127,255}));
   connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
-    annotation (Line(points={{-47.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,127}),
-      Text(
+    annotation (Line(points={{-47.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
