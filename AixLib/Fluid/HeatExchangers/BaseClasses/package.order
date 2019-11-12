@@ -1,9 +1,12 @@
 HACoilInside
+HADryCoil
 HANaturalCylinder
 Internal
 PartialEffectiveness
+PartialEffectivenessNTU
 PartialPrescribedOutlet
 dynamicViscosityWater
+epsilon_C
 epsilon_ntuZ
 isobaricExpansionCoefficientWater
 ntu_epsilonZ

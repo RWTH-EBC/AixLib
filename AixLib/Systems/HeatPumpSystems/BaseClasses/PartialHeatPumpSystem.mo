@@ -12,7 +12,9 @@ partial model PartialHeatPumpSystem
     final show_T=false,
     redeclare package Medium2 = Medium_eva);
   import Modelica.Blocks.Types.Init;
-
+  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters(
+   cpCon = Medium_con.heatCapacity_cp(stateCon_default),
+   cpEva = Medium_eva.heatCapacity_cp(stateEva_default));
 
 //General
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
@@ -25,6 +27,16 @@ partial model PartialHeatPumpSystem
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate"
     annotation (Dialog(group="Nominal condition"));
+  final parameter Medium_con.ThermodynamicState stateCon_default = Medium_con.setState_pTX(
+    T=Medium_con.T_default,
+    p=Medium_con.p_default,
+    X=Medium_con.X_default[1:Medium_con.nXi])
+    "Medium state in condenser at default values";
+  final parameter Medium_eva.ThermodynamicState stateEva_default = Medium_eva.setState_pTX(
+    T=Medium_eva.T_default,
+    p=Medium_eva.p_default,
+    X=Medium_eva.X_default[1:Medium_eva.nXi])
+    "Medium state in evaporator at default values";
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
 
@@ -39,11 +51,15 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_evaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(group="Source"),choices(checkBox=true));
-  parameter Fluid.Movers.Data.Generic perEva "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perEva
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Source",
       enable=use_evaPum));
-  parameter Fluid.Movers.Data.Generic perCon "Record with performance data"
+  replaceable parameter Fluid.Movers.Data.Generic perCon
+    constrainedby AixLib.Fluid.Movers.Data.Generic
+    "Record with performance data"
     annotation (choicesAllMatching=true, Dialog(
       group="Sink",
       enable=use_conPum));
@@ -51,11 +67,6 @@ partial model PartialHeatPumpSystem
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
     constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
-  parameter Boolean use_bivPar=true
-    "Switch between bivalent parallel and bivalent alternative control"
-    annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
-      choice=false "Alternativ",
-      radioButtons=true));
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
@@ -133,7 +144,7 @@ partial model PartialHeatPumpSystem
   parameter Boolean use_runPerHou=false
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Real maxRunPerHou=3
+  parameter Integer maxRunPerHou=3
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_runPerHou), Evaluate=true);
@@ -160,11 +171,6 @@ partial model PartialHeatPumpSystem
       enable=use_sec and use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
   parameter Real tableUpp[:,2]=[0,60; 5,70; 30,70]
                                "Upper boundary of envelope" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
-  parameter Real tableLow[:,2]=[0,0; 30,0]
-                               "Lower boundary of envelope" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
       enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
@@ -348,7 +354,9 @@ partial model PartialHeatPumpSystem
     final m_flow_nominal=mFlow_conNominal,
     final dp_nominal=0,
     final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final Q_flow_nominal=Q_flow_nominal) if
+    final Q_flow_nominal=Q_flow_nominal,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics) if
                              use_secHeaGen annotation (Placement(transformation(
         extent={{8,9},{-8,-9}},
         rotation=180,
@@ -368,8 +376,6 @@ partial model PartialHeatPumpSystem
 
   HPSystemController hPSystemController(
     final use_secHeaGen=use_secHeaGen,
-    final Q_flow_nominal=Q_flow_nominal,
-    final use_bivPar=use_bivPar,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
     final day_hour=day_hour,
@@ -393,7 +399,6 @@ partial model PartialHeatPumpSystem
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable,
     final tableUpp=tableUpp,
-    final tableLow=tableLow,
     final use_deFro=use_deFro,
     final minIceFac=minIceFac,
     final use_chiller=use_chiller,
@@ -401,7 +406,8 @@ partial model PartialHeatPumpSystem
     final use_antFre=use_antFre,
     final TantFre=TantFre,
     final use_runPerHou=use_runPerHou,
-    final maxRunPerHou=maxRunPerHou)
+    final maxRunPerHou=maxRunPerHou,
+    final cp_con=cpCon)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
   Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
@@ -431,9 +437,8 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
-          -15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
   connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},

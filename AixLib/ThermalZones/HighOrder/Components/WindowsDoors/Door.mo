@@ -8,11 +8,21 @@ model Door "Simple door"
   parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material" annotation(Dialog(group = "Properties"));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{80, -10}, {100, 10}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(Therm(T(start = T0)), Star(T(start = T0)), A = door_area, eps = eps) annotation(Placement(transformation(extent = {{30, 50}, {50, 70}})));
-  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+    Therm(T(start=T0)),
+    Star(T(start=T0)),
+    A=door_area,
+    eps=eps) annotation (Placement(transformation(extent={{30,50},{50,70}})));
+  Utilities.Interfaces.RadPort
+                            Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = door_area * U) annotation(Placement(transformation(extent = {{-10, -8}, {10, 12}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx1(Therm(T(start = T0)), Star(T(start = T0)), A = door_area, eps = eps) annotation(Placement(transformation(extent = {{-32, 50}, {-52, 70}})));
-  Utilities.Interfaces.Star Star1 annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx1(
+    Therm(T(start=T0)),
+    Star(T(start=T0)),
+    A=door_area,
+    eps=eps) annotation (Placement(transformation(extent={{-32,50},{-52,70}})));
+  Utilities.Interfaces.RadPort
+                            Star1 annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}})));
 equation
   connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{49.1, 60}, {90, 60}}, pattern = LinePattern.Solid));
   connect(port_a, HeatTrans.port_a) annotation(Line(points = {{-90, 0}, {-49.5, 0}, {-49.5, 2}, {-10, 2}}));
@@ -61,5 +71,5 @@ equation
           by Corinna Leonhardt and Ana Constantin:<br/>
           Implemented.</li>
  </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}));
+ </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}));
 end Door;

@@ -7,8 +7,9 @@ model HeatPumpSystem
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
     redeclare Fluid.HeatPumps.HeatPump heatPump(
       redeclare final model PerDataHea = PerDataHea,
-      redeclare final package Medium_con = Medium_con,
       redeclare final model PerDataChi = PerDataChi,
+      redeclare final package Medium_con = Medium_con,
+      redeclare final package Medium_eva = Medium_eva,
       final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
@@ -48,8 +49,8 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-      redeclare final package Medium_eva = Medium_eva));
-  extends AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters;
+      final fixed_TCon_start=fixed_TCon_start,
+      final fixed_TEva_start=fixed_TEva_start));
 
 //Heat Pump
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
@@ -136,7 +137,20 @@ model HeatPumpSystem
     annotation (Dialog(tab="Initialization", group="System inertia", enable=use_refIne));
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
-          Init.InitialOutput and use_refIne));
+          Modelica.Blocks.Types.Init.InitialOutput and use_refIne));
+  parameter Boolean fixed_TCon_start
+    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
+    annotation (Dialog(
+      tab="Initialization",
+      group="Condenser",
+      enable=use_conCap));
+  parameter Boolean fixed_TEva_start
+    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
+    annotation (Dialog(
+      tab="Initialization",
+      group="Evaporator",
+      enable=use_evaCap));
+
   Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
       Placement(transformation(
         extent={{-7,7},{7,-7}},

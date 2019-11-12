@@ -69,7 +69,7 @@ model RoomAgent
   Modelica.StateGraph.TransitionWithSignal rightMessage "confirmation"
     annotation (Placement(transformation(extent={{106,52},{126,32}})));
   Modelica.StateGraph.Transition repeat1(enableTimer=true, waitTime=
-        100000000000)
+        100000000000.0)
     annotation (Placement(transformation(extent={{-8,-38},{-28,-18}})));
   Modelica.StateGraph.Step composeNotUnderstood
     annotation (Placement(transformation(extent={{-56,-240},{-36,-220}})));

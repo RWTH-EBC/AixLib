@@ -5,8 +5,10 @@ record BufferStorageBaseDataDefinition
 ///////////input parameters////////////
   import SI = Modelica.SIunits;
   parameter SI.Height hTank "Height of storage";
-  parameter SI.Height hLowerPorts "Height of lower ports";
-  parameter SI.Height hUpperPorts "Height of upper ports";
+  parameter SI.Height hLowerPortDemand "Height of lower demand port";
+  parameter SI.Height hUpperPortDemand "Height of upper demand port";
+  parameter SI.Height hLowerPortSupply "Height of lower supply port";
+  parameter SI.Height hUpperPortSupply "Height of upper supply port";
   parameter SI.Height hHC1Up "Height of heating Coil";
   parameter SI.Height hHC1Low "Height of heating Coil";
   parameter SI.Height hHC2Up "Height of heating Coil";

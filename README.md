@@ -37,6 +37,10 @@ We continuously improve **AixLib** and try to keep the community up-to-date with
   BauSIM 2016, p.3–9, September 2016.
   [link](http://www.iea-annex60.org/downloads/2016-bausim-aixlib.pdf)
 
+### Publications using AixLib
+
+Please see the [publications list](https://github.com/RWTH-EBC/AixLib/blob/master/PUBLICATIONS.md)
+
 ### How to contribute to the development of AixLib
 
 You are invited to contribute to the development of **AixLib**.

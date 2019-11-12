@@ -6,8 +6,8 @@ model PanelHeatingMultiple
 
   parameter Modelica.SIunits.Area panelHeatingArea = 10 "Area of heating panels";
 
-  Distributor distributor(redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-44,-20},{36,20}})));
+  Distributor distributor(redeclare package Medium = Medium, m_flow_nominal=0.5, n=6)
+    annotation (Placement(transformation(extent={{-32,-20},{8,20}})));
   AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis1(redeclare
       package Medium =                                                                                 Medium, A=
         panelHeatingArea)
@@ -61,60 +61,12 @@ model PanelHeatingMultiple
         rotation=90,
         origin={-4,-90})));
 equation
-  connect(boundary.ports[1],distributor. MAIN_FLOW) annotation (Line(
-      points={{-60,12},{-54,12},{-54,8},{-44.8,8}},
+  connect(boundary.ports[1], distributor.mainFlow) annotation (Line(
+      points={{-60,12},{-54,12},{-54,10.6667},{-32,10.6667}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(boundary1.ports[1],distributor. MAIN_RETURN) annotation (Line(
-      points={{-60,-14},{-54,-14},{-54,-8},{-44,-8}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Flow_1, panelheating_1D_Dis1.port_a) annotation (Line(
-      points={{-28.8,20},{-26,20},{-26,69},{56,69}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Flow_2, panelheating_1D_Dis2.port_a) annotation (Line(
-      points={{-16,20},{-16,39},{56,39}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Flow_3, panelheating_1D_Dis3.port_a) annotation (Line(
-      points={{-3.2,20},{-4,20},{-4,30},{46,30},{46,11},{56,11}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Flow_4, panelheating_1D_Dis4.port_a) annotation (Line(
-      points={{8.8,20},{8,20},{8,0},{46,0},{46,-17},{56,-17}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Flow_5, panelheating_1D_Dis5.port_a) annotation (Line(
-      points={{21.6,20},{21.6,-4},{42,-4},{42,-47},{56,-47}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Flow_6, panelheating_1D_Dis6.port_a) annotation (Line(
-      points={{32.8,20},{40,20},{40,-75},{56,-75}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Return_1, panelheating_1D_Dis1.port_b) annotation (Line(
-      points={{-28.8,-20.8},{-28.8,-34},{94,-34},{94,69},{84,69}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Return_2, panelheating_1D_Dis2.port_b) annotation (Line(
-      points={{-16,-20.8},{-16,-30},{90,-30},{90,39},{84,39}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Return_3, panelheating_1D_Dis3.port_b) annotation (Line(
-      points={{-3.2,-20.8},{-3.2,-42},{98,-42},{98,11},{84,11}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Return_4, panelheating_1D_Dis4.port_b) annotation (Line(
-      points={{8.8,-20.8},{8.8,-28},{88,-28},{88,-17},{84,-17}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Return_5, panelheating_1D_Dis5.port_b) annotation (Line(
-      points={{20.8,-20.8},{20.8,-58},{94,-58},{94,-47},{84,-47}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(distributor.Return_6, panelheating_1D_Dis6.port_b) annotation (Line(
-      points={{31.2,-20.8},{31.2,-88},{94,-88},{94,-75},{84,-75}},
+  connect(boundary1.ports[1], distributor.mainReturn) annotation (Line(
+      points={{-60,-14},{-54,-14},{-54,-10},{-32,-10}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(panelheating_1D_Dis2.thermConv, FixedTemp.port) annotation (Line(
@@ -200,6 +152,46 @@ equation
           {-4,-80}},
       color={191,0,0},
       smooth=Smooth.None));
+  connect(distributor.flowPorts[1], panelheating_1D_Dis1.port_a)
+    annotation (Line(points={{-5.33333,20},{-5.33333,69},{56,69}},
+                                                         color={0,127,255}));
+  connect(panelheating_1D_Dis2.port_a, distributor.flowPorts[2])
+    annotation (Line(points={{56,39},{-8,39},{-8,20}},   color={0,127,255}));
+  connect(panelheating_1D_Dis3.port_a, distributor.flowPorts[3]) annotation (
+      Line(points={{56,11},{40,11},{40,20},{-10.6667,20}},
+                                                      color={0,127,255}));
+  connect(panelheating_1D_Dis4.port_a, distributor.flowPorts[4]) annotation (
+      Line(points={{56,-17},{40,-17},{40,20},{-13.3333,20}},
+                                                        color={0,127,255}));
+  connect(panelheating_1D_Dis5.port_a, distributor.flowPorts[5]) annotation (
+      Line(points={{56,-47},{40,-47},{40,20},{-16,20}}, color={0,127,255}));
+  connect(panelheating_1D_Dis6.port_a, distributor.flowPorts[6]) annotation (
+      Line(points={{56,-75},{40,-75},{40,20},{-18.6667,20}},
+                                                        color={0,127,255}));
+  connect(panelheating_1D_Dis1.port_b, distributor.returnPorts[1]) annotation (
+      Line(points={{84,69},{96,69},{96,-92},{20,-92},{20,-40},{-5.33333,-40},{
+          -5.33333,-20.6667}},
+        color={0,127,255}));
+  connect(panelheating_1D_Dis2.port_b, distributor.returnPorts[2]) annotation (
+      Line(points={{84,39},{96,39},{96,-92},{20,-92},{20,-40},{-8,-40},{-8,
+          -20.6667}},
+        color={0,127,255}));
+  connect(panelheating_1D_Dis3.port_b, distributor.returnPorts[3]) annotation (
+      Line(points={{84,11},{96,11},{96,-92},{20,-92},{20,-40},{-10.6667,-40},{
+          -10.6667,-20.6667}},
+        color={0,127,255}));
+  connect(panelheating_1D_Dis4.port_b, distributor.returnPorts[4]) annotation (
+      Line(points={{84,-17},{96,-17},{96,-92},{20,-92},{20,-40},{-13.3333,-40},
+          {-13.3333,-20.6667}},
+                 color={0,127,255}));
+  connect(panelheating_1D_Dis5.port_b, distributor.returnPorts[5]) annotation (
+      Line(points={{84,-47},{96,-47},{96,-92},{20,-92},{20,-40},{-16,-40},{-16,
+          -20.6667}},
+                 color={0,127,255}));
+  connect(panelheating_1D_Dis6.port_b, distributor.returnPorts[6]) annotation (
+      Line(points={{84,-75},{96,-75},{96,-92},{20,-92},{20,-40},{-18.6667,-40},
+          {-18.6667,-20.6667}},
+                 color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Documentation(info="<html>
 <p>A simple example to test the models <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis\">panelheating_1D_Dis1</a> and <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Contributor\">contributor</a>.</p>

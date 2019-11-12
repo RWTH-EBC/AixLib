@@ -8,8 +8,9 @@ model HumanSensibleHeat_VDI2078
   parameter Real RatioConvectiveHeat = 0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
-  Utilities.Interfaces.Star RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
+  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Human, use_A_in=
+        true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
+  Interfaces.RadPort        RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)   annotation(Placement(transformation(extent = {{-24, 10}, {-4, 30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom
     "Air temperature in room"                                                         annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
@@ -49,7 +50,7 @@ equation
   connect(limiter.y, SurfaceArea_People.u) annotation (Line(
       points={{3,-48},{14.8,-48}},
       color={0,0,127}));
-  connect(SurfaceArea_People.y, RadiationConvertor.A) annotation (Line(
+  connect(SurfaceArea_People.y, RadiationConvertor.A_in) annotation (Line(
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
       color={0,0,127}));
   connect(HeatOutput.y, productHeatOutput.u[1:1]) annotation (Line(

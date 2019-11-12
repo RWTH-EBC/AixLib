@@ -28,18 +28,14 @@ model Window_ASHRAE140
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
       Placement(transformation(extent={{-10,-20},{10,0}})));
-  Utilities.HeatTransfer.HeatConv_outside
-                                        heatConv_outside(
-A=windowarea,
-Model=2,
-    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass())
-annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
-  Utilities.HeatTransfer.HeatConv_inside
-                                       heatConv_inside(
-calcMethod=2,
-alpha_custom=2,
-A=windowarea)
-annotation (Placement(transformation(extent={{68,-20},{48,2}})));
+  Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
+    A=windowarea,
+    calcMethod=2,
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
+  Utilities.HeatTransfer.HeatConvInside heatConv_inside(
+    calcMethod=2,
+    hCon_const=2,
+    A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
     n=1,
     lambda={1.06},
@@ -51,13 +47,12 @@ annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar
-                                  twoStar_RadEx(
-Therm(T(start=T0)),
-Star(T(start=T0)),
-eps=WindowType.Emissivity,
-A=windowarea)              annotation (Placement(transformation(extent={{36,22},
-        {56,42}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+    Therm(T(start=T0)),
+    Star(T(start=T0)),
+    eps=WindowType.Emissivity,
+    A=windowarea)
+    annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     n=1,
     lambda={1.06},
