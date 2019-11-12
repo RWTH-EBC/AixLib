@@ -66,7 +66,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
       kIns=0.028,
       d=0.025,
       length=1,
-      Kv=6.3,
+      Kv=10,
       valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
