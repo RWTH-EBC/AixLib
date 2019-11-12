@@ -544,13 +544,11 @@ Refactored addition of moisture to also account for the energy content of the
 water vapor.<br/>
 This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
 </li>
-  <li>
-  September 24, 2019, by Martin Kremer:<br/>
-  Added possibility to consider moisture balance. <br/>
-  Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
-  </li>
-=======
->>>>>>> remotes/origin/development
+<li>
+September 24, 2019, by Martin Kremer:<br/>
+Added possibility to consider moisture balance. <br/>
+Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
+</li>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>
   Renamed <code>alphaRad</code> to <code>hRad</code>,
