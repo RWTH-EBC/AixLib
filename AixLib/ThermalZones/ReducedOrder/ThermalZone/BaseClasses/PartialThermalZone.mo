@@ -74,8 +74,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     annotation (Placement(transformation(extent={{94,8},{114,28}}),
                             iconTransformation(extent={{90,-20},{110,0}})));
   RC.FourElements ROM(
-    final nPorts=nPorts,
     redeclare final package Medium = Medium,
+    final nPorts=nPorts,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
     final nOrientations=zoneParam.nOrientations,
@@ -116,6 +116,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,28},{86,64}})));
+
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +

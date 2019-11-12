@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneEquipped
-  "Thermal zone model with ventilation, infiltration and internal gains"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone;
+model ThermalZoneMoistAirEquipped
+  "Thermal zone model considering moisture balance with ventilation, infiltration and internal gains"
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
 
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,
@@ -17,42 +17,9 @@ model ThermalZoneEquipped
     ATot > 0 or zoneParam.VAir > 0
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-66,-28},{-46,-8}})));
-  HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
+  HighOrder.Components.MoistAir.VarMoistAirExchange airExc(final V=zoneParam.VAir) if
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
-//     if zoneParam.Modus = 1 then
-//   redeclare model humanSenHeaModel =
-//       Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent;
-//   ifelse zoneParam.Modus = 2 then
-//    Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent;
-//   else
-
-      //       (
-//     final T0=zoneParam.T_start,
-//     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-//     final RoomArea=zoneParam.AZone,
-//     final specificPersons=zoneParam.specificPeople,
-//     final ActivityDegree=zoneParam.activityDegree,
-//     final specificHeatPerPerson=zoneParam.InternalGainsPeopleSpecific)
-//     if
-//                                                       ATot > 0
-//     "Internal gains from persons" annotation (choicesAllMatching=true,
-      // Placement(transformation(extent={{64,-36},{84,-16}})))
-
-  redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
-    machinesSenHea(
-    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-    final T0=zoneParam.T_start,
-    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0
-    "Internal gains from machines"
-    annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  redeclare Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
-    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    final T0=zoneParam.T_start,
-    final LightingPower=zoneParam.lightingPowerSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
-    annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
@@ -113,9 +80,18 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(ventHum, airExc.HumIn) annotation (Line(points={{-100,-70},{-80,-70},
+          {-80,-38},{-46,-38},{-46,-28},{-24,-28},{-24,-22},{-21.2,-22}}, color=
+         {0,0,127}));
+  connect(airExc.QLat_flow,SumQLat_flow.u[3])  annotation (Line(points={{-5.68,
+          -22.96},{4,-22.96},{4,-30},{16,-30}}, color={0,0,127}));
+  connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{30.5,-14},{
+          0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
   annotation(Documentation(info="<html>
+<p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
+<p><b>Important!</b>: This model has to be combined with a zoneRecord that sets the parameter <i>internalGainsMode</i> to 3. Otherwise no moisture gain from persons will be considered.</p>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
@@ -127,18 +103,8 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
-  <li>
-  March 01, 2019, by Niklas Huelsenbeck:<br/>
-  Changes due to integration of new Internal Gains models in ThermalZone.
-  </li>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation based on Annex60 and MSL models.
-  </li>
-  <li>
-  March, 2012, by Moritz Lauster:<br/>
-  First implementation.
-  </li>
+  <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models.  See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
+  <li>April, 2019, by Martin Kremer:<br/>First implementation.</li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
@@ -155,4 +121,4 @@ equation
           textString="Ventilation
 Infiltration
 ")}));
-end ThermalZoneEquipped;
+end ThermalZoneMoistAirEquipped;
