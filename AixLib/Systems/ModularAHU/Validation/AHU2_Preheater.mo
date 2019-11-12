@@ -6,7 +6,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
   package MediumAir = AixLib.Media.Air
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Preheater_StepResponse data "Measured data";
+  AixLib.Systems.ModularAHU.Validation.MeasuredData.AHU2_Preheater_RampValve data "Measured data";
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     redeclare package Medium = MediumWater,
     use_T_in=true,
@@ -160,7 +160,7 @@ equation
 </ul>
 </html>"),
     experiment(
-      StopTime=6120,
+      StopTime=3600,
       __Dymola_fixedstepsize=1,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Preheater.mos"

@@ -77,11 +77,11 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
-            AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9(),
+            AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V5(),
           calculatePower=true)),
     dynamicHX(
       dp1_nominal=33,
-      dp2_nominal=4500 + 50000,
+      dp2_nominal=4500 + 50500,
       nNodes=1,
       tau1=3,
       tau2=15,
@@ -90,14 +90,14 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0; 0.20,
-        0.0; 0.32,0.004; 0.37,0.07; 0.45,0.3; 0.57,0.49; 0.80,0.91; 0.90,1; 1.0,
+  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0; 0.34,
+        0.0; 0.4,0.003; 0.44,0.05; 0.52,0.22; 0.72,0.56; 0.89,0.95; 0.96,1; 1.0,
         1])
     annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
     redeclare package Medium = MediumWater,
     m_flow_nominal=0.5,
-    zeta=180,
+    zeta=200,
     diameter=0.032) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -140,17 +140,17 @@ equation
         points={{40,40.1538},{55,40.1538},{55,40},{70,40}}, color={0,127,255}));
   connect(gain.y, valveCharacteristics.u)
     annotation (Line(points={{-71.6,0},{-61.2,0}}, color={0,0,127}));
-  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
-    annotation (Line(points={{-47.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(boundaryWaterSource.ports[1], hydraulicResistance.port_a) annotation (
      Line(points={{-20,-70},{-22,-70},{-22,-62}}, color={0,127,255}));
   connect(hydraulicResistance.port_b, registerModule.port_a2)
     annotation (Line(points={{-22,-42},{-22,0.461538}}, color={0,127,255}));
+  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
+    annotation (Line(points={{-47.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Documentation(info="<html>
 <p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
 </html>", revisions="<html>
@@ -159,7 +159,7 @@ equation
 </ul>
 </html>"),
     experiment(
-      StopTime=7560,
+      StopTime=4320,
       __Dymola_fixedstepsize=1,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true)=

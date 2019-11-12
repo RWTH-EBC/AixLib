@@ -1446,7 +1446,7 @@ record AHU2_Preheater_StepResponse
 <p>The heating register is supplied by a mixing circuit with a three-way-valve. </p>
 <p>During the experiment the three-way-valve is fully openend until a steady-state is reached and closed afterwards.</p>
 <p>The experiment is performed for three different volume flow rates in the air canal of the air handling unit: 1000m^3/h, 2000m^3/h, 3000m^3/h</p>
-<p><br>The record contains the following data points for each experiment (columns): </p>
+<p><br>The record contains the following data points (columns): </p>
 <p>[1: Timestep | 2: &apos;AHU2.Ph.SenTempReFE.T&apos; | 3: &apos;AHU2.Ph.SenTempFlFe.T&apos; | 4: &apos;AHU2.Ph.SenTempFlHeBel.T&apos; | 5: &apos;AHU2.Ph.SenTempReHeBel.T&apos; | 6: &apos;AHU2.Ph.SenPTHEn.T&apos; | 7: &apos;AHU2.Ph.SenPTHEx.T&apos; | 8: &apos;AHU2.Ac.SenVFSupA.VFout&apos; | 9: &apos;AHU2.Ph.SenBelVFWa.VF&apos; | 10: &apos;AHU2.Ph.SenMFM.VF&apos; | 11: &apos;AHU2.Ph.TempF.T33&apos; | 12: &apos;AHU2.Ph.TempF.T12&apos; | 13: &apos;AHU2.Ph.Valve3W.ValvePosAct | 14: &apos;AHU2.Ph.PumpComp.RevcAct&apos;]</p>
 </html>"));
 end AHU2_Preheater_StepResponse;
