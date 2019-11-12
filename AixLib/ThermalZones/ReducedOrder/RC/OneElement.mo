@@ -528,16 +528,12 @@ using the parameter <code>mSenFac</code>.
 The image below shows the RC-network of this model.
 </p>
 <p align=\"center\">
-<<<<<<< HEAD
 <img src=\"modelica://IBPSA/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
-=======
 <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
->>>>>>> remotes/origin/development
 </p>
   </html>",
 revisions="<html>
 <ul>
-<<<<<<< HEAD
 <li>
 October 9, 2019, by Michael Wetter:<br/>
 Refactored addition of moisture to also account for the energy content of the
