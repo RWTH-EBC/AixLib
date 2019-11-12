@@ -47,7 +47,7 @@ equation
 <p>The latent heat output depends on the air temperature in the room where the moisture sources are located. </p>
 </html>", revisions="<html>
 <ul>
-  <li> Oktober 14, 2019, by Martin Kremer:</br>Adapted model to latest changes in IBPSA. Providing latent heat of moisture at 37 degree Celsius.</li>
+  <li> Oktober 14, 2019, by Martin Kremer:<br/>Adapted model to latest changes in IBPSA. Providing latent heat of moisture at 37 degree Celsius.</li>
   <li>
   July, 2019, by Martin Kremer:<br/>
   First implementation.
