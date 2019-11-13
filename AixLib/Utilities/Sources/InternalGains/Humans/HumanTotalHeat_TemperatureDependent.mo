@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Humans;
-model HumanTotalHeat_TemperatureDepdendent
+model HumanTotalHeat_TemperatureDependent
   "Model for total heat and moisture output of humans depending on the room temperature"
   extends HumanSensibleHeat_TemperatureDependent;
 
@@ -61,4 +61,4 @@ equation
  <li><i>March, 2019&nbsp;</i> by Martin Kremer:<br/>First implementation on issue #695.</li>
  </ul>
 </html>"));
-end HumanTotalHeat_TemperatureDepdendent;
+end HumanTotalHeat_TemperatureDependent;
