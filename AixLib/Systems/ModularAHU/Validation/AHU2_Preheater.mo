@@ -70,7 +70,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
       valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
-      pipe3(dh=0.032, length=1.06),
+      pipe3(length=1.06),
       pipe4(dh=0.032, length=0.48),
       pipe5(length=1.42),
       pipe6(length=0.52),
@@ -81,7 +81,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
           calculatePower=true)),
     dynamicHX(
       dp1_nominal=66,
-      dp2_nominal=6000,
+      dp2_nominal=6000 + 8000,
       nNodes=2,
       tau1=4,
       tau2=15,
@@ -91,8 +91,8 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-22,-26},{40,60}})));
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0; 0.20,
-        0.0; 0.28,0.005; 0.35,0.19; 0.45,0.44; 0.57,0.66; 0.80,0.97; 0.90,1; 1.0,
+  Modelica.Blocks.Tables.CombiTable1Ds valveCharacteristics(table=[0.0,0.0; 0.2,
+        0.0; 0.28,0.005; 0.37,0.19; 0.48,0.44; 0.61,0.67; 0.84,0.97; 0.9,1.0; 1.0,
         1.0])
     annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
@@ -141,17 +141,17 @@ equation
         points={{40,40.1538},{55,40.1538},{55,40},{70,40}}, color={0,127,255}));
   connect(gain.y, valveCharacteristics.u)
     annotation (Line(points={{-79.6,0},{-69.2,0}}, color={0,0,127}));
-  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
-    annotation (Line(points={{-55.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(boundaryWaterSource.ports[1], hydraulicResistance.port_a) annotation (
      Line(points={{-20,-70},{-22,-70},{-22,-62}}, color={0,127,255}));
   connect(hydraulicResistance.port_b, registerModule.port_a2)
     annotation (Line(points={{-22,-42},{-22,0.461538}}, color={0,127,255}));
+  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
+    annotation (Line(points={{-55.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Documentation(info="<html>
 <p>This example compares the simulated behavior with measured data. The input filter of the valve is deactivated because the measured actual opening (includes opening delay already) is used.</p>
 </html>", revisions="<html>
@@ -160,7 +160,7 @@ equation
 </ul>
 </html>"),
     experiment(
-      StopTime=3600,
+      StopTime=7200,
       __Dymola_fixedstepsize=1,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Preheater.mos"
