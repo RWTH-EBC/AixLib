@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneMoistAirEquipped
+model ThermalZoneMoistAirExchange
   "Thermal zone model considering moisture balance with ventilation, infiltration and internal gains"
   extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
 
@@ -21,6 +21,34 @@ model ThermalZoneMoistAirEquipped
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
+  Modelica.Blocks.Interfaces.RealInput ventTemp(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) if ATot > 0 or zoneParam.VAir > 0
+    "Ventilation and infiltration temperature"
+    annotation (Placement(
+        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
+          extent={{-126,-52},{-100,-26}})));
+  Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate",
+      final unit="1/h") if
+                         ATot > 0 or zoneParam.VAir > 0
+    "Ventilation and infiltration rate"
+    annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-40,-100}), iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=90,
+        origin={-70,-84})));
+  Modelica.Blocks.Interfaces.RealInput ventHum(
+    final quantity="MassFraction",
+    final unit="kg/kg",
+    min=0) if ATot > 0 or zoneParam.VAir > 0
+    "Ventilation and infiltration humidity" annotation (Placement(
+        transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
+          extent={{-126,-80},{-100,-54}})));
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
     "Combines infiltration and ventilation"
@@ -121,4 +149,4 @@ equation
           textString="Ventilation
 Infiltration
 ")}));
-end ThermalZoneMoistAirEquipped;
+end ThermalZoneMoistAirExchange;

@@ -7,7 +7,7 @@ SimpleRoomTwoElements
 ThermalZone
 ThermalZoneEquipped
 ThermalZoneMoistAir
-ThermalZoneMoistAirEquipped
+ThermalZoneMoistAirExchange
 MultizoneMoistAir
 MultizoneMoistAirEquipped
 ComparisonThermalZoneMoistAndDryAir

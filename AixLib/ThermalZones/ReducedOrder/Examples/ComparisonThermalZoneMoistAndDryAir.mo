@@ -5,7 +5,7 @@ model ComparisonThermalZoneMoistAndDryAir
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir thermalZoneMoistAir(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
+    each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
     internalGainsMode=3,
@@ -21,13 +21,6 @@ model ComparisonThermalZoneMoistAndDryAir
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,-18},{-78,2}})));
-  AixLib.BoundaryConditions.WeatherData.Bus weaBus
-    "Weather data bus"
-    annotation (Placement(transformation(extent={{-78,-32},{-44,0}}),
-    iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant const(k=0.2)
-    "Infiltration rate"
-    annotation (Placement(transformation(extent={{-92,-52},{-72,-32}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName = "UserProfiles",
@@ -144,14 +137,12 @@ model ComparisonThermalZoneMoistAndDryAir
     T=283.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{-84,-92},{-64,-72}})));
-  Fluid.Sources.FixedBoundary sinAir(redeclare package Medium = Media.Air,
+  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
       nPorts=1)
     annotation (Placement(transformation(extent={{-12,-98},{-32,-78}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi
-    annotation (Placement(transformation(extent={{-46,-38},{-26,-18}})));
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
+    each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
     internalGainsMode=1,
@@ -166,9 +157,6 @@ model ComparisonThermalZoneMoistAndDryAir
     "Weather data reader"
     annotation (Placement(transformation(extent={{-100,78},{-80,98}})));
 
-  Modelica.Blocks.Sources.Constant const1(k=0.2)
-    "Infiltration rate"
-    annotation (Placement(transformation(extent={{-94,44},{-74,64}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains1(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="UserProfiles",
@@ -283,33 +271,14 @@ model ComparisonThermalZoneMoistAndDryAir
     T=283.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{-86,4},{-66,24}})));
-  Fluid.Sources.FixedBoundary sinAir1(redeclare package Medium = Media.Air,
+  Fluid.Sources.Boundary_pT sinAir1(redeclare package Medium = Media.Air,
       nPorts=1)
     annotation (Placement(transformation(extent={{-14,-2},{-34,18}})));
-  BoundaryConditions.WeatherData.Bus        weaBus1
-    "Weather data bus"
-    annotation (Placement(transformation(extent={{-80,64},{-46,96}}),
-    iconTransformation(extent={{-70,-12},{-50,8}})));
 equation
   connect(weaDat.weaBus, thermalZoneMoistAir.weaBus) annotation (Line(
       points={{-78,-8},{-34,-8},{-34,-12},{-10,-12}},
       color={255,204,51},
       thickness=0.5));
-  connect(weaDat.weaBus, weaBus) annotation (Line(
-      points={{-78,-8},{-61,-8},{-61,-16}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(thermalZoneMoistAir.ventTemp, weaBus.TDryBul) annotation (Line(points=
-         {{-11.3,-15.9},{-35.65,-15.9},{-35.65,-16},{-61,-16}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(const.y, thermalZoneMoistAir.ventRate)
-    annotation (Line(points={{-71,-42},{-7,-42},{-7,-20.4}}, color={0,0,127}));
   connect(internalGains.y, thermalZoneMoistAir.intGains)
     annotation (Line(points={{0.7,-64},{8,-64},{8,-20.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZoneMoistAir.intGainsRad)
@@ -332,38 +301,10 @@ equation
   connect(thermalZoneMoistAir.ports[2], sinAir.ports[1]) annotation (Line(
         points={{2.35,-19.2},{2.35,-52},{-38,-52},{-38,-88},{-32,-88}}, color={
           0,127,255}));
-  connect(weaBus.pAtm, x_pTphi.p_in) annotation (Line(
-      points={{-61,-16},{-62,-16},{-62,-22},{-48,-22}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.TDryBul, x_pTphi.T) annotation (Line(
-      points={{-61,-16},{-62,-16},{-62,-28},{-48,-28}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.relHum, x_pTphi.phi) annotation (Line(
-      points={{-61,-16},{-62,-16},{-62,-34},{-48,-34}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(x_pTphi.X[1], thermalZoneMoistAir.ventHum) annotation (Line(points={{
-          -25,-28},{-18,-28},{-18,-18.7},{-11.3,-18.7}}, color={0,0,127}));
   connect(weaDat1.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-80,88},{-36,88},{-36,84},{-12,84}},
       color={255,204,51},
       thickness=0.5));
-  connect(weaDat1.weaBus, weaBus1) annotation (Line(
-      points={{-80,88},{-63,88},{-63,80}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp, weaBus1.TDryBul) annotation (Line(points={{-13.3,
-          80.1},{-37.65,80.1},{-37.65,80},{-63,80}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(const1.y, thermalZone.ventRate)
-    annotation (Line(points={{-73,54},{-9,54},{-9,75.6}}, color={0,0,127}));
   connect(internalGains1.y, thermalZone.intGains)
     annotation (Line(points={{-1.3,32},{6,32},{6,75.6}}, color={0,0,127}));
   connect(prescribedHeatFlow2.port, thermalZone.intGainsRad)

@@ -4,7 +4,7 @@ model MultizoneMoistAirEquipped
   extends
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
       redeclare final model thermalZone =
-      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped);
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange);
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -344,8 +344,9 @@ equation
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,
           31}},
         color={0,0,127}));
-  connect(zone.X_w, X_w) annotation (Line(points={{82.1,84.67},{94,84.67},{94,94},
-          {110,94}}, color={0,0,127}));
+  connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,
+          94},{110,94}},
+                     color={0,0,127}));
   connect(minTemp.y, absToRelHum.TDryBul) annotation (Line(points={{19.5,-28},{-100,
           -28},{-100,72},{-42,72},{-42,78.2},{-37,78.2}}, color={0,0,127}));
   connect(AirHandlingUnit.T_supplyAirOut, relToAbsHum1.TDryBul) annotation (
@@ -356,8 +357,8 @@ equation
   connect(replicatorHumidityVentilation.y, zone.ventHum) annotation (Line(
         points={{65,42.5},{65,44},{30,44},{30,55.765},{35.27,55.765}}, color={0,
           0,127}));
-  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.1,84.67},
-          {94,84.67},{94,100},{-76,100},{-76,86},{-68,86}}, color={0,0,127}));
+  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.1,72.78},
+          {94,72.78},{94,100},{-76,100},{-76,86},{-68,86}}, color={0,0,127}));
   connect(moistSplitter.portOut[1], absToRelHum.absHum) annotation (Line(points=
          {{-48,86},{-44,86},{-44,83.6},{-37,83.6}}, color={0,0,127}));
   connect(AirHandlingUnit.phi_supply, relToAbsHum1.relHum) annotation (Line(
