@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
-partial model PartialThermalZone "Partial model for thermal zone modelsl"
+partial model PartialThermalZone "Partial model for thermal zone models"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
@@ -60,29 +60,29 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final nOrientations=zoneParam.nOrientations,
     final AWin=zoneParam.AWin,
     final ATransparent=zoneParam.ATransparent,
-    final hConvWin=zoneParam.hConvWin,
+    final hConWin=zoneParam.hConWin,
     final RWin=zoneParam.RWin,
     final gWin=zoneParam.gWin,
     final ratioWinConRad=zoneParam.ratioWinConRad,
     final AExt=zoneParam.AExt,
-    final hConvExt=zoneParam.hConvExt,
+    final hConExt=zoneParam.hConExt,
     final nExt=zoneParam.nExt,
     final RExt=zoneParam.RExt,
     final RExtRem=zoneParam.RExtRem,
     final CExt=zoneParam.CExt,
     final AInt=zoneParam.AInt,
-    final hConvInt=zoneParam.hConvInt,
+    final hConInt=zoneParam.hConInt,
     final nInt=zoneParam.nInt,
     final RInt=zoneParam.RInt,
     final CInt=zoneParam.CInt,
     final AFloor=zoneParam.AFloor,
-    final hConvFloor=zoneParam.hConvFloor,
+    final hConFloor=zoneParam.hConFloor,
     final nFloor=zoneParam.nFloor,
     final RFloor=zoneParam.RFloor,
     final RFloorRem=zoneParam.RFloorRem,
     final CFloor=zoneParam.CFloor,
     final ARoof=zoneParam.ARoof,
-    final hConvRoof=zoneParam.hConvRoof,
+    final hConRoof=zoneParam.hConRoof,
     final nRoof=zoneParam.nRoof,
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,

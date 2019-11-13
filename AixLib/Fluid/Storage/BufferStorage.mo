@@ -32,12 +32,12 @@ model BufferStorage
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  parameter SI.CoefficientOfHeatTransfer hConvInside=100 "Model assumptions Coefficient of Heat Transfer water <-> wall";
-  parameter SI.CoefficientOfHeatTransfer hConvOutside=10 "Model assumptions Coefficient of Heat Transfer insulation <-> air";
-  parameter SI.CoefficientOfHeatTransfer hConvHC1=100 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
+  parameter SI.CoefficientOfHeatTransfer hConIn=100 "Model assumptions heat transfer coefficient water <-> wall";
+  parameter SI.CoefficientOfHeatTransfer hConOut=10 "Model assumptions heat transfer coefficient insulation <-> air";
+  parameter SI.CoefficientOfHeatTransfer hConHC1=100 "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water"
                                                                            annotation(Dialog(enable=useHeatingCoil1,  tab=
           "Heating Coils and Rod"));
-  parameter SI.CoefficientOfHeatTransfer hConvHC2=100 " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
+  parameter SI.CoefficientOfHeatTransfer hConHC2=100 " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water"
                                                                             annotation(Dialog(enable=useHeatingCoil2,  tab=
           "Heating Coils and Rod"));
   parameter Boolean upToDownHC1 = true
@@ -68,12 +68,17 @@ model BufferStorage
  final parameter Integer nTS1=integer(AixLib.Utilities.Math.Functions.round(data.hTS1/(data.hTank/n) + 0.5,0));
  final parameter Integer nTS2=integer(AixLib.Utilities.Math.Functions.round(data.hTS2/(data.hTank/n) + 0.5,0));
 
- final parameter Integer nLowerPorts=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPorts/(data.hTank/n) + 0.5,0),1));
- final parameter Integer nUpperPorts=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPorts/(data.hTank/n) + 0.5,0),n));
- final parameter Boolean inpLowLay=(nLowerPorts == 1); //if there is an input at the lowest layer
- final parameter Boolean inpHigLay=(nUpperPorts == n);
+ final parameter Integer nLowerPortDemand=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPortDemand/(data.hTank/n) + 0.5,0),1));
+ final parameter Integer nUpperPortDemand=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPortDemand/(data.hTank/n) + 0.5,0),n));
+ final parameter Boolean inpLowLayDemand=(nLowerPortDemand == 1); //if there is an input at the lowest layer
+ final parameter Boolean inpHigLayDemand=(nUpperPortDemand == n);
 
- final parameter Integer[n] inpActLay = cat(1,{if (nLowerPorts==k) then (if (nUpperPorts==k) then 2 else 1) else (if (nUpperPorts==k) then 1 else 0) for k in 1:n});
+ final parameter Integer nLowerPortSupply=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPortSupply/(data.hTank/n) + 0.5,0),1));
+ final parameter Integer nUpperPortSupply=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPortSupply/(data.hTank/n) + 0.5,0),n));
+ final parameter Boolean inpLowLaySupply=(nLowerPortSupply == 1); //if there is an input at the lowest layer
+ final parameter Boolean inpHigLaySupply=(nUpperPortSupply == n);
+
+ final parameter Integer[n] inpActLay = cat(1,{if (nLowerPortDemand==k or nLowerPortSupply==k) then (if (nUpperPortDemand==k or nUpperPortSupply==k) then 2 else 1) else (if (nUpperPortDemand==k or nUpperPortSupply==k) then 1 else 0) for k in 1:n});
  final parameter Integer[n] portsLayer=cat(1,{if inpActLay[1]==1 then 3 else 1},{inpActLay[k]*2+2 for k in 2:n-1},{if inpActLay[n]==1 then 3 else 1});
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////components/////////////////////////////////////////////////////////////////////////////
@@ -114,14 +119,14 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
+      package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
+      package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -202,8 +207,8 @@ model BufferStorage
   AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
     lambdaWall=data.lambdaWall,
     lambdaIns=data.lambdaIns,
-    hConvInside=hConvInside,
-    hConvOutside=hConvOutside,
+    hConIn=hConIn,
+    hConOut=hConOut,
     TStartWall=TStartWall,
     TStartIns=TStartIns,
     rhoIns=data.rhoIns,
@@ -229,14 +234,13 @@ model BufferStorage
     each D1=data.dTank,
     each sWall=data.sWall,
     each sIns=data.sIns,
-    each hConvInside=hConvInside,
-    each hConvOutside=hConvOutside)
-    annotation (Placement(transformation(extent={{20,-2},{40,18}})));
+    each hConIn=hConIn,
+    each hConOut=hConOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
     lambdaWall=data.lambdaWall,
     lambdaIns=data.lambdaIns,
-    hConvInside=hConvInside,
-    hConvOutside=hConvOutside,
+    hConIn=hConIn,
+    hConOut=hConOut,
     TStartWall=TStartWall,
     TStartIns=TStartIns,
     rhoIns=data.rhoIns,
@@ -252,27 +256,27 @@ model BufferStorage
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
     disHC=disHC1,
-    hConvHC=hConvHC1,
+    hConHC=hConHC1,
     redeclare package Medium = MediumHC1,
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
     allowFlowReversal=true,
     m_flow_nominal=0.05,
-    TStart=TStart) if         useHeatingCoil1 annotation (Placement(
-        transformation(
+    TStart=TStart) if useHeatingCoil1
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
     disHC=disHC2,
     lengthHC=data.lengthHC2,
-    hConvHC=hConvHC2,
+    hConHC=hConHC2,
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
     allowFlowReversal=true,
     m_flow_nominal=0.05,
-    TStart=TStart) if                        useHeatingCoil2 annotation (
-      Placement(transformation(
+    TStart=TStart) if useHeatingCoil2
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
@@ -385,35 +389,50 @@ end if;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of inner layers//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  for i in 2:(n-1) loop
-    if nLowerPorts == i then
-       connect(layer[i].ports[3], fluidportBottom1);
+for i in 2:(n-1) loop
+    if nLowerPortDemand == i then
        connect(layer[i].ports[4], fluidportBottom2);
-       if nUpperPorts == i then
-         connect(layer[i].ports[5],fluidportTop1);
+       if nUpperPortDemand == i then
          connect(layer[i].ports[6],fluidportTop2);
        end if;
-    elseif nUpperPorts ==i then
-         connect(layer[i].ports[3],fluidportTop1);
+    elseif nUpperPortDemand ==i then
          connect(layer[i].ports[4],fluidportTop2);
     end if;
 
    connect(layer[i].ports[2],layer[i+1].ports[1]);
   end for;
+
+    for i in 2:(n-1) loop
+    if nLowerPortSupply == i then
+       connect(layer[i].ports[3], fluidportBottom1);
+       if nUpperPortSupply == i then
+         connect(layer[i].ports[5],fluidportTop1);
+       end if;
+    elseif nUpperPortSupply ==i then
+         connect(layer[i].ports[3],fluidportTop1);
+    end if;
+
+  end for;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of upper and lower layer/////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  if nLowerPorts == 1 then
-    connect(layer[1].ports[2],fluidportBottom1);
+  if nLowerPortDemand == 1 then
     connect(layer[1].ports[3],fluidportBottom2);
   end if;
   connect(layer[1].ports[1],layer[2].ports[1]);
 
-  if nUpperPorts == n then
-    connect(layer[n].ports[2],fluidportTop1);
+  if nUpperPortDemand == n then
     connect(layer[n].ports[3],fluidportTop2);
   end if;
 
+  if nLowerPortSupply == 1 then
+    connect(layer[1].ports[2],fluidportBottom1);
+  end if;
+  connect(layer[1].ports[1],layer[2].ports[1]);
+
+  if nUpperPortSupply == n then
+    connect(layer[n].ports[2],fluidportTop1);
+  end if;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of heat transfer model///////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////

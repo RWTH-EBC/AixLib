@@ -7,8 +7,7 @@ record StiebelEltron_WPL18 "Stiebel Eltron WPL 18"
         12900,16700,17500],
     mFlow_conNom=13000/4180/5,
     mFlow_evaNom=1,
-    tableUppBou=[-25, 65; 40, 65],
-    tableLowBou=[-25, 0; 40, 0]);
+    tableUppBou=[-25, 65; 40, 65]);
     //These boundary-tables are not from the datasheet but default values.
 
   annotation(preferedView="text", DymolaStoredErrors,

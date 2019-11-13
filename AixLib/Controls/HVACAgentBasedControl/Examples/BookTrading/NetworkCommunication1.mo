@@ -2,8 +2,8 @@ within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model NetworkCommunication1
     extends Modelica.Icons.Example;
 
-  BookSellerAgent bookSellerAgent1(            bookList(start=[3551555589,
-          30; 3551555559,40; 3551555556,20]),
+  BookSellerAgent bookSellerAgent1(            bookList(start=[3551555589.0,
+          30; 3551555559.0,40; 3551555556.0,20]),
     uDPSend_adapted(IPAddress="134.130.49.128"),
     name=10003,
     sampleRate=1)

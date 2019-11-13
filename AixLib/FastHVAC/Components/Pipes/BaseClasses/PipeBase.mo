@@ -10,10 +10,10 @@ model PipeBase
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvInsideFix=30 "Fix value for heat transfer coeffiecient inside pipe"      annotation(Dialog(enable=not
-          calcHConv));
-  parameter Boolean calcHConv=true "Use calculated value for inside heat coefficient";
-    final parameter Modelica.SIunits.Volume  V_fluid=Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConIn_const=30 "Fix value for heat transfer coeffiecient inside pipe"        annotation(Dialog(enable=not
+          calcHCon));
+    parameter Boolean calcHCon=true "Use calculated value for inside heat coefficient";
+    final parameter Modelica.SIunits.Volume V_fluid=nParallel*Modelica.Constants.pi* length*parameterPipe.d_i*parameterPipe.d_i/4;
 
     parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature of fluid";
@@ -22,8 +22,10 @@ model PipeBase
       Pipe Parameters
      ******************************************************************* */
 
+    parameter Integer nParallel(min=1)=1 "Number of identical parallel pipes"
+    annotation(Dialog(group="Geometry"));
     parameter Modelica.SIunits.Length length "Length of pipe"
-       annotation(Dialog(group = "Geometry"));
+    annotation(Dialog(group = "Geometry"));
 
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Type of pipe"
@@ -49,19 +51,32 @@ model PipeBase
     annotation (Placement(transformation(extent={{-18,58},{22,66}}),
         iconTransformation(extent={{-44,40},{42,58}})));
   Utilities.HeatTransfer.HeatConvPipeInside heatConvPipeInside[nNodes](
-    each hConvInsideFix=hConvInsideFix,
+    each hConIn_const=hConIn_const,
     d_i=fill(parameterPipe.d_i, nNodes),
     length=fill(length, nNodes),
     d_a=fill(parameterPipe.d_o, nNodes),
-    A_sur=fill(parameterPipe.d_o*Modelica.Constants.pi*length/nNodes, nNodes),
+    A_sur=fill(nParallel*parameterPipe.d_o*Modelica.Constants.pi*length/nNodes, nNodes),
     medium=fill(medium, nNodes),
-    each calcHConv=calcHConv)
+    each calcHCon=calcHCon)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,38})));
   Sensors.MassFlowSensor massFlowRate
     annotation (Placement(transformation(extent={{44,-10},{64,10}})));
+  Modelica.Blocks.Math.Division divideMassFlow
+    "division block to take multiple parallel pipes into account" annotation (
+      Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=180,
+        origin={32,38})));
+  Modelica.Blocks.Sources.Constant nParallelConst(k=nParallel)
+    "Constant for amount of parallel pipes" annotation (Placement(
+        transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=0,
+        origin={68,32})));
+
 equation
 
   for i in 2:nNodes loop
@@ -77,14 +92,19 @@ equation
       color={176,0,0},
       smooth=Smooth.None));
   for i in 1:nNodes loop
-      connect(massFlowRate.dotm,heatConvPipeInside[i].m_flow);
-  end for;
+      connect(divideMassFlow.y,heatConvPipeInside[i].m_flow);
+      end for;
+
   connect(pipeFluid.heatPort, heatConvPipeInside.port_b)
     annotation (Line(points={{0,18.8},{0,28}}, color={191,0,0}));
   connect(heatConvPipeInside.port_a, heatPorts)
     annotation (Line(points={{0,48},{0,56},{0,62},{2,62}}, color={191,0,0}));
   connect(massFlowRate.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points=
          {{63,-0.1},{78.5,-0.1},{78.5,0},{98,0}}, color={176,0,0}));
+  connect(massFlowRate.dotm, divideMassFlow.u1) annotation (Line(points={{55,9},
+          {55,20},{82,20},{82,44},{44,44}}, color={0,0,127}));
+  connect(nParallelConst.y, divideMassFlow.u2)
+    annotation (Line(points={{61.4,32},{44,32}}, color={0,0,127}));
     annotation (choicesAllMatching,
               Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,

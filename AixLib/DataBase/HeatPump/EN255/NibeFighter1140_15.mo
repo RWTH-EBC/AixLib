@@ -7,8 +7,7 @@ record NibeFighter1140_15 "Nibe Fighter 1140-15"
         14490,15330,16590,18900],
     mFlow_conNom=15420/4180/10,
     mFlow_evaNom=(15420 - 3380)/3600/3,
-    tableUppBou=[-35, 65; 50, 65],
-    tableLowBou=[-35, 0; 50, 0]);
+    tableUppBou=[-35, 65; 50, 65]);
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
