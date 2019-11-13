@@ -55,7 +55,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
@@ -63,7 +63,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
       AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConv=8 "Heat transfer coefficient to ambient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon=8 "Heat transfer coefficient to ambient"
                                                                 annotation (Dialog(tab="Heat transfer", enable=Heat_Loss_To_Ambient));
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall[nNodes](
     rho=fill(parameterPipe.d, nNodes),
@@ -117,9 +117,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
     redeclare model HeatTransfer =
-   Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (
-    alpha0=hConv_i))
-
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
+        (                                                                                                  alpha0=hCon_i))
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
 
     // Parameter Tab "Initialisation"
@@ -174,24 +173,22 @@ protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{18,38},{58,46}}),
         iconTransformation(extent={{-46,20},{40,38}})));
-public
 
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hConv=fill(hConv,
-        nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
-                                     Heat_Loss_To_Ambient and not withInsulation and not isEmbedded
-    "Convection from pipe wall" annotation (Placement(transformation(
+public
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
+       Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,26})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hConv=
-        fill(hConv, nNodes), A=Modelica.Constants.pi*Insulation.d_out*length/
-        nNodes) if                   (Heat_Loss_To_Ambient and withInsulation and not isEmbedded)
-    "Convection from insulation" annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*Insulation.d_out*
+        length/nNodes) if (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,26})));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps,
-        nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps, nNodes),
+      A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
                                      Heat_Loss_To_Ambient and not isEmbedded
     "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

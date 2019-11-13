@@ -1,12 +1,13 @@
 ﻿within AixLib.Utilities.Sources.InternalGains.Humans;
 model HumanTotalHeat_TemperatureDepdendent
   "Model for total heat and moisture output of humans depending on the room temperature"
-  extends HumanSensibleHeat_TemperatureDependent(thermalCollector(m=2));
+  extends HumanSensibleHeat_TemperatureDependent;
 
   BaseClasses.TemperatureDependentMoistureOutput_SIA2024
     temperatureDependentMoistuerOutput_SIA2024_1
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
-  Modelica.Blocks.Interfaces.RealOutput MoistGain
+  Modelica.Blocks.Interfaces.RealOutput QLat_flow
+    "latent heat of moisture gains"
     annotation (Placement(transformation(extent={{86,70},{106,90}})));
   Modelica.Blocks.Math.Gain toKgPerSecond(k=1/(3600*1000))
     annotation (Placement(transformation(extent={{14,70},{34,90}})));
@@ -14,16 +15,15 @@ model HumanTotalHeat_TemperatureDepdendent
     annotation (Placement(transformation(extent={{-28,70},{-8,90}})));
   Modelica.Blocks.Math.Product latentHeat
     annotation (Placement(transformation(extent={{-10,42},{10,62}})));
-  Modelica.Blocks.Sources.RealExpression specificLatentHeat(y=
-        enthalpyOfEvaporation + cp_steam*(temperatureSensor.T - 273.15))
+  Modelica.Blocks.Sources.RealExpression specificLatentHeat(y=h_fg)
     annotation (Placement(transformation(extent={{-88,14},{-68,34}})));
 protected
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeatLatent(T_ref=T0)
-    annotation (Placement(transformation(extent={{18,40},{42,64}})));
   constant Modelica.SIunits.SpecificHeatCapacity cp_steam = AixLib.Utilities.Psychrometrics.Constants.cpSte
     "specific heat capacity of steam";
   constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
     "enthalpy of evaporation";
+  constant Modelica.SIunits.SpecificEnergy h_fg=
+    Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
   connect(to_degC.y, temperatureDependentMoistuerOutput_SIA2024_1.Temperature)
     annotation (Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-61,76}},
@@ -36,16 +36,12 @@ equation
         color={0,0,127}));
   connect(productMoistureOutput.y, toKgPerSecond.u)
     annotation (Line(points={{-6.3,80},{12,80}}, color={0,0,127}));
-  connect(toKgPerSecond.y, MoistGain)
-    annotation (Line(points={{35,80},{96,80}}, color={0,0,127}));
-  connect(ConvectiveHeatLatent.port, thermalCollector.port_a[2])
-    annotation (Line(points={{42,52},{52,52},{52,50}}, color={191,0,0}));
-  connect(latentHeat.y, ConvectiveHeatLatent.Q_flow)
-    annotation (Line(points={{11,52},{18,52}}, color={0,0,127}));
   connect(toKgPerSecond.y, latentHeat.u1) annotation (Line(points={{35,80},{44,
           80},{44,64},{-18,64},{-18,58},{-12,58}}, color={0,0,127}));
   connect(specificLatentHeat.y, latentHeat.u2) annotation (Line(points={{-67,24},
           {-20,24},{-20,46},{-12,46}}, color={0,0,127}));
+  connect(latentHeat.y, QLat_flow) annotation (Line(points={{11,52},{60,52},{60,
+          80},{96,80}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>This model enhances the existing human model by moisture release and latent heat release. It is based on the SIA 2024 and uses the same temperature dependent heat output. </p>

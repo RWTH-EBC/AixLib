@@ -39,8 +39,8 @@ model TestCase620 "Test case 620"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
   AixLib.ThermalZones.ReducedOrder.RC.ThreeElements thermalZoneThreeElements(
     VAir=129.60000000000002,
-    hConvExt=2.2309677419354843,
-    hConvWin=3.16,
+    hConExt=2.2309677419354843,
+    hConWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
@@ -48,7 +48,7 @@ model TestCase620 "Test case 620"
     CExt={1002578.02625},
     hRad=5.129999999999999,
     AInt=48.0,
-    hConvInt=4.130000000000001,
+    hConInt=4.130000000000001,
     nInt=1,
     RInt={0.00123677311011},
     CInt={935138.308506},
@@ -61,7 +61,7 @@ model TestCase620 "Test case 620"
     nPorts=2,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     AFloor=0,
-    hConvFloor=0,
+    hConFloor=0,
     nFloor=1,
     RFloor={0.1},
     RFloorRem=0.1,
@@ -75,9 +75,9 @@ model TestCase620 "Test case 620"
     wfGro=0,
     withLongwave=true,
     aExt=0.6,
-    hConvWallOut=24.670000000000005,
+    hConWallOut=24.670000000000005,
     hRad=4.63,
-    hConvWinOut=16.37,
+    hConWinOut=16.37,
     wfWin={0.0,0.5,0.0,0.0,0.5},
     wfWall={0.23263907377078896,0.10985734039176147,0.23263907377078896,0.31500717167489906,0.10985734039176147},
     TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
@@ -105,9 +105,9 @@ model TestCase620 "Test case 620"
     annotation (Placement(
     transformation(extent={{-100,6},{-66,38}}),  iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant hConvWall(k=29.3*111.60000000000001) "Outdoor coefficient of heat transfer for walls"
+  Modelica.Blocks.Sources.Constant hConWall(k=29.3*111.60000000000001) "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
-  Modelica.Blocks.Sources.Constant hConvWin(k=21.0*12.0) "Outdoor coefficient of heat transfer for windows"
+  Modelica.Blocks.Sources.Constant hConWin(k=21.0*12.0) "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
     "Radiative heat flow of internal gains"
@@ -330,10 +330,8 @@ equation
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,17},{24,17},{24,16},{20,16}},
                                                            color={191,0,0}));
-  connect(hConvWall.y, thermalConductorWall.Gc)
-    annotation (Line(points={{0,4.4},{0,12},{31,12}},     color={0,0,127}));
-  connect(hConvWin.y, thermalConductorWin.Gc)
-    annotation (Line(points={{0,-4.4},{0,42},{33,42}},   color={0,0,127}));
+  connect(hConWall.y, thermalConductorWall.Gc) annotation (Line(points={{0,4.4},{0,12},{31,12}}, color={0,0,127}));
+  connect(hConWin.y, thermalConductorWin.Gc) annotation (Line(points={{0,-4.4},{0,42},{33,42}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
     annotation (Line(
     points={{-83,22},{-58,22},{-58,18},{-32,18},{-32,12},{-26,12}},

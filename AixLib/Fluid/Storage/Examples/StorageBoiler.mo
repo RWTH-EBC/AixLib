@@ -15,8 +15,8 @@ model StorageBoiler
     A_HE=20,
     lambda_ins=0.04,
     s_ins=0.1,
-    hConvIn=1500,
-    hConvOut=15,
+    hConIn=1500,
+    hConOut=15,
     d=1,
     h=2,
     k_HE=1500,
@@ -26,7 +26,7 @@ model StorageBoiler
   AixLib.Fluid.Movers.Pump
              pump(redeclare package Medium = Medium, m_flow_small=1e-4)
                   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={6,60})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent={{-48,68},
             {-28,88}})));
@@ -51,7 +51,7 @@ model StorageBoiler
   Modelica.Blocks.Sources.Ramp ramp(duration = 1000,               height = 0.00001e5,
     offset=101325)                                                                     annotation(Placement(transformation(extent={{-96,-14},
             {-76,6}})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-34,44})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe1(

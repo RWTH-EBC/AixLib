@@ -21,18 +21,18 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer kDown;
 parameter HeatCapacityPerArea cTop;
 parameter HeatCapacityPerArea cDown;
 
-  parameter Integer calcMethodHConv=1 "Calculation Method for convection at surface"
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient at surface"
     annotation (Dialog(group="Heat convection",
         descriptionLabel=true), choices(
         choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
         choice=2 "By Bernd Glueck",
-        choice=3 "Constant alpha",
+        choice=3 "Custom hCon (constant)",
         radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConvCustom=2.5 "Constant heat transfer coefficient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2.5 "Constant heat transfer coefficient"
     annotation (Dialog(group="Heat convection",
     descriptionLabel=true,
-        enable=if calcMethodHConv == 3 then true else false));
+        enable=if calcMethod == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume vol(
     redeclare package Medium = Medium,
@@ -53,15 +53,15 @@ parameter HeatCapacityPerArea cDown;
     annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvWall
     annotation (Placement(transformation(extent={{-22,-110},{-2,-90}})));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=A, eps=eps)
-    annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=A, eps=eps) annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
   Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
-    final calcMethodHConv=calcMethodHConv,
-    final hConvCustom=hConvCustom,
+    final calcMethod=calcMethod,
+    final hCon_const=hCon_const,
     surfaceOrientation=if isFloor then 2 else 1)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
