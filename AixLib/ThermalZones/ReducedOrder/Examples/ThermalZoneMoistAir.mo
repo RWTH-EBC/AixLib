@@ -1,16 +1,17 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZone "Illustrates the use of ThermalZone"
+model ThermalZoneMoistAir
+  "Illustrates the use of ThermalZoneMoistAir"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
-                                                             zoneParam=
-    AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
+    internalGainsMode=3,
+    nPorts=2,
     T_start=293.15,
-    internalGainsMode=1)
+    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -23,7 +24,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Weather data bus"
     annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant const(k=0)
+  Modelica.Blocks.Sources.Constant const(k=0.2)
     "Infiltration rate"
     annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
@@ -135,6 +136,18 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
+  Fluid.Sources.MassFlowSource_T sourcAir(
+    redeclare package Medium = Media.Air,
+    m_flow=3000/3600*1.17,
+    X={0.004,1 - 0.004},
+    T=283.15,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-84,-80},{-64,-60}})));
+  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
+      nPorts=1)
+    annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi
+    annotation (Placement(transformation(extent={{-46,-26},{-26,-6}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
@@ -168,16 +181,35 @@ equation
     annotation (Line(points={{73,0},{67.2,0}},          color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
+  connect(sourcAir.ports[1], thermalZone.ports[1]) annotation (Line(points={{
+          -64,-70},{-46,-70},{-46,-36},{-2.35,-36},{-2.35,-7.2}}, color={0,127,
+          255}));
+  connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{2.35,
+          -7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,127,255}));
+  connect(weaBus.pAtm, x_pTphi.p_in) annotation (Line(
+      points={{-61,-4},{-62,-4},{-62,-10},{-48,-10}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.TDryBul, x_pTphi.T) annotation (Line(
+      points={{-61,-4},{-62,-4},{-62,-16},{-48,-16}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaBus.relHum, x_pTphi.phi) annotation (Line(
+      points={{-61,-4},{-62,-4},{-62,-22},{-48,-22}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(x_pTphi.X[1], thermalZone.ventHum) annotation (Line(points={{-25,-16},
+          {-18,-16},{-18,-6.7},{-11.3,-6.7}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),
     Documentation(revisions="<html>
   <ul>
-  <li>September 29, 2016, by Moritz Lauster:<br/>
-  Implemented.
+  <li>April, 2019, by Martin Kremer:<br/>
+  First Implementation.
   </li>
   </ul>
 </html>", info="<html>
-<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
+<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
 </html>"));
-end ThermalZone;
+end ThermalZoneMoistAir;

@@ -45,14 +45,14 @@ partial model PartialMultizone "Partial model for multizone models"
     displayUnit="degC") if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
-    iconTransformation(extent={{80,29},{100,48}})));
+        iconTransformation(extent={{80,19},{100,40}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ASurTot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
-    iconTransformation(extent={{80,7},{100,26}})));
+        iconTransformation(extent={{80,0},{100,20}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
@@ -62,14 +62,15 @@ partial model PartialMultizone "Partial model for multizone models"
        ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
-    iconTransformation(extent={{-90,-80},{-70,-60}})));
+        iconTransformation(extent={{-90,-92},{-70,-72}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
        ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
-    iconTransformation(extent={{-90,-46},{-70,-26}})));
+        iconTransformation(extent={{-90,-60},{-70,-40}})));
   thermalZone zone[numZones](
     final zoneParam=zoneParam,
     redeclare each final model corG=corG,
+    each final internalGainsMode=internalGainsMode,
     each final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -84,6 +85,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(transformation(extent={{38,49},{
     80,90}})));
 
+  parameter Integer internalGainsMode
+    "decides which internal gains model for persons is used";
 equation
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(

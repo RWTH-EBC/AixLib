@@ -2,6 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.RC;
 model FourElements "Thermal Zone with four elements for exterior walls,
   interior walls, floor plate and roof"
   extends ThreeElements(AArray={ATotExt,ATotWin,AInt,AFloor,ARoof});
+//       final use_C_flow=OneElement.use_C_flow));
 
   parameter Modelica.SIunits.Area ARoof "Area of roof"
     annotation(Dialog(group="Roof"));

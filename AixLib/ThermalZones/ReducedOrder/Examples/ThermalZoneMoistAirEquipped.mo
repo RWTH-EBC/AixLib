@@ -1,16 +1,17 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZone "Illustrates the use of ThermalZone"
+model ThermalZoneMoistAirEquipped
+  "Illustrates the use of ThermalZoneMoistAirEquipped"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
-                                                             zoneParam=
-    AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Media.Air,
     T_start=293.15,
-    internalGainsMode=1)
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture(),
+    internalGainsMode=3)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -23,9 +24,9 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Weather data bus"
     annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant const(k=0)
+  Modelica.Blocks.Sources.Constant const(k=0.2)
     "Infiltration rate"
-    annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
+    annotation (Placement(transformation(extent={{-88,-66},{-68,-46}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName = "UserProfiles",
@@ -135,6 +136,10 @@ model ThermalZone "Illustrates the use of ThermalZone"
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
+  Utilities.Psychrometrics.X_pW humRat
+    annotation (Placement(transformation(extent={{-44,-30},{-24,-10}})));
+  Utilities.Psychrometrics.pW_TDewPoi pWat
+    annotation (Placement(transformation(extent={{-86,-34},{-66,-14}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
@@ -152,8 +157,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const.y, thermalZone.ventRate) annotation (Line(points={{-71,-30},{-40,
-          -30},{-8,-30},{-7,-30},{-7,-20},{-7,-8.4}}, color={0,0,127}));
+  connect(const.y, thermalZone.ventRate) annotation (Line(points={{-67,-56},{
+          -20,-56},{-20,-32},{-7,-32},{-7,-8.4}},     color={0,0,127}));
   connect(internalGains.y, thermalZone.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
@@ -168,16 +173,36 @@ equation
     annotation (Line(points={{73,0},{67.2,0}},          color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
+  connect(weaBus.pAtm, humRat.p_in) annotation (Line(
+      points={{-61,-4},{-60,-4},{-60,-14},{-46,-14}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(weaBus.TDewPoi, pWat.T) annotation (Line(
+      points={{-61,-4},{-94,-4},{-94,-24},{-87,-24}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(pWat.p_w, humRat.p_w) annotation (Line(points={{-65,-24},{-56,-24},{
+          -56,-20},{-45,-20}}, color={0,0,127}));
+  connect(humRat.X_w, thermalZone.ventHum) annotation (Line(points={{-23,-20},{
+          -20,-20},{-20,-6.7},{-11.3,-6.7}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),
-    Documentation(revisions="<html>
+    Documentation(info="<html>
+<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
+</html>", revisions="<html>
   <ul>
-  <li>September 29, 2016, by Moritz Lauster:<br/>
-  Implemented.
+  <li>April, 2019, by Martin Kremer:<br/>
+  First Implementation.
   </li>
   </ul>
-</html>", info="<html>
-<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
 </html>"));
-end ThermalZone;
+end ThermalZoneMoistAirEquipped;

@@ -1,6 +1,5 @@
-within AixLib.Utilities.Sources.InternalGains.Humans;
-model HumanSensibleHeat_VDI2078
-  "Model for sensible heat output after VDI 2078 "
+within AixLib.Utilities.Sources.InternalGains.Humans.Obsolete;
+model HumanSensibleHeat_VDI2078 "Model for sensible heat output after VDI 2078"
   // Number of Persons
   parameter Integer ActivityType = 2 "Physical activity" annotation(Dialog(compact = true, descriptionLabel = true), choices(choice = 2 "light", choice = 3
         "moderate",                                                                                                    choice = 4 "heavy ", radioButtons = true));
@@ -26,21 +25,25 @@ model HumanSensibleHeat_VDI2078
             {2,-38}})));
   Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
   Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=
+        1) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={60,32})));
 protected
   parameter Modelica.SIunits.Area SurfaceArea_Human = 2;
   parameter Real Emissivity_Human = 0.98;
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, 20}, {42, 44}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent={{18,20},
+            {42,44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
   Modelica.Blocks.Tables.CombiTable1D HeatOutput(table = [10, 100, 125, 155; 18, 100, 125, 155; 20, 95, 115, 140; 22, 90, 105, 120; 23, 85, 100, 115; 24, 75, 95, 110; 25, 75, 85, 105; 26, 70, 85, 95; 35, 70, 85, 95], smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, tableOnFile = false, columns = {ActivityType}) annotation(Placement(transformation(extent = {{-60, 40}, {-40, 60}})));
 equation
-  connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{42, 32}, {42, 50}, {90, 50}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(RadiationConvertor.Star, RadHeat) annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(TRoom, temperatureSensor.port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T, to_degC.u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
   connect(to_degC.y, HeatOutput.u[1]) annotation(Line(points = {{-71.5, 51}, {-67.75, 51}, {-67.75, 50}, {-62, 50}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
   connect(Schedule, Nr_People.u) annotation(Line(points = {{-100, -20}, {-67.2, -20}}, color = {0, 0, 127}));
-  connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));
   connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
   connect(productHeatOutput.y, gain.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, 32}, {5.2, 32}}, color = {0, 0, 127}));
   connect(productHeatOutput.y, gain1.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, -8}, {5.2, -8}}, color = {0, 0, 127}));
@@ -59,6 +62,12 @@ equation
   connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(
       points={{-53.4,-20},{-36,-20},{-36,16.5},{-24,16.5}},
       color={0,0,127}));
+  connect(gain.y, ConvectiveHeat.Q_flow)
+    annotation (Line(points={{14.4,32},{18,32}}, color={0,0,127}));
+  connect(ConvectiveHeat.port, thermalCollector.port_a[1])
+    annotation (Line(points={{42,32},{50,32}}, color={191,0,0}));
+  connect(thermalCollector.port_b, ConvHeat) annotation (Line(points={{70,32},{
+          76,32},{76,50},{90,50}}, color={191,0,0}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
