@@ -6,7 +6,7 @@ model Radiator "Example for EBC radiator"
     nPorts=1,
     m_flow=0.02761,
     T=328.15) annotation (Placement(transformation(extent={{-70,-8},{-50,12}})));
-  Sources.FixedBoundary sink(redeclare package Medium = Medium,
+  Sources.Boundary_pT   sink(redeclare package Medium = Medium,
     nPorts=1)
     "Sink"
     annotation (Placement(transformation(extent={{98,-10},{78,10}})));
