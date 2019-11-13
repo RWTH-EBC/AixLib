@@ -1,10 +1,10 @@
-﻿within AixLib.Utilities.Sources.InternalGains.Humans;
+within AixLib.Utilities.Sources.InternalGains.Humans;
 model HumanTotalHeat_TemperatureDepdendent
   "Model for total heat and moisture output of humans depending on the room temperature"
   extends HumanSensibleHeat_TemperatureDependent;
 
   BaseClasses.TemperatureDependentMoistureOutput_SIA2024
-    temperatureDependentMoistuerOutput_SIA2024_1
+    temperatureDependentMoistuerOutput_SIA2024_1(activityDegree=activityDegree)
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
     "latent heat of moisture gains"
@@ -40,7 +40,7 @@ equation
           80},{44,64},{-18,64},{-18,58},{-12,58}}, color={0,0,127}));
   connect(specificLatentHeat.y, latentHeat.u2) annotation (Line(points={{-67,24},
           {-20,24},{-20,46},{-12,46}}, color={0,0,127}));
-  connect(latentHeat.y, QLat_flow) annotation (Line(points={{11,52},{60,52},{60,
+  connect(latentHeat.y, QLat_flow) annotation (Line(points={{11,52},{56,52},{56,
           80},{96,80}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
@@ -51,11 +51,11 @@ equation
 <p>A schedule of the activity is also required as constant presence of people in a room is not realistic. The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
 <p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero.For this reason a limitiation for the surface has been intoduced: as a minimum the surface area of one human and as a maximum a value of 1e+23 m2 (only needed for a complete parametrization of the model). </p>
-<p>The latent heat release is assumed to be convective only.The moisture production is multiplied with the heat of evaporation (at 0 °C) and the specific heat capacity of steam multiplied with the temperature difference between the room temperature and 0 °C. In consequence the moisture output will not affect the room temperature.</p>
 <p><b><font style=\"color: #008000; \">References</font></b> </p>
 <p>[1]: SIA 2024: Space usage data for energy and building services engineering - 2015 </p>
 </html>", revisions="<html>
  <ul>
+ <li><i>Oktober 14, 2019&nbsp;</i> by Martin Kremer:<br/>Adapted to latest changes in IPBSA providing latent heat output at 37 degree Celsius</li>
  <li><i>July 18, 2019&nbsp;</i> by Martin Kremer:<br/>Revision of latent heat output due to influence on room temperature.</li>
  <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Revised due to changes on human model</li>
  <li><i>March, 2019&nbsp;</i> by Martin Kremer:<br/>First implementation on issue #695.</li>

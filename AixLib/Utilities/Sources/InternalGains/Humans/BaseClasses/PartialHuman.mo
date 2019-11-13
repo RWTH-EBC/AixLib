@@ -7,11 +7,10 @@ partial model PartialHuman "Partial model for internal gains of humans"
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
     "Initial temperature";
-  parameter Real ActivityDegree = 1.0 "activity degree of persons in room in met";
   parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70 "specific heat output per person";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
+  Utilities.HeatTransfer.HeatToStar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
   Interfaces.RadPort        RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -40}, {-80, 0}}), iconTransformation(extent = {{-102, -22}, {-80, 0}})));
   Modelica.Blocks.Math.Gain nrPeople(k=specificPersons*RoomArea)
@@ -44,7 +43,7 @@ equation
   connect(limiter.y, SurfaceArea_People.u) annotation (Line(
       points={{3,-48},{14.8,-48}},
       color={0,0,127}));
-  connect(SurfaceArea_People.y, RadiationConvertor.A) annotation (Line(
+  connect(SurfaceArea_People.y, RadiationConvertor.A_in) annotation (Line(
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
       color={0,0,127}));
   connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,-20},
@@ -57,8 +56,8 @@ equation
           {-52,-48},{-20,-48}}, color={0,0,127}));
   connect(TRoom,temperatureSensor. port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T,to_degC. u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
-  connect(ConvectiveHeat.port, ConvHeat) annotation (Line(points={{42,32},{66,
-          32},{66,50},{90,50}}, color={191,0,0}));
+  connect(ConvectiveHeat.port, ConvHeat) annotation (Line(points={{42,32},{64,
+          32},{64,50},{90,50}}, color={191,0,0}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},

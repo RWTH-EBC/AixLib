@@ -8,40 +8,37 @@ model ThermalZone
     AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
-//
-//   replaceable model  humanSenHeaModel =
-//   Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman constrainedby
-//     Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman
-//     "Internal gains from persons" annotation (choicesAllMatching=true);
-
-     // if  ATot > 0
+   parameter Integer internalGainsMode
+     "decides which internal gains model for persons is used";
 
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent humanSenHeaDependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot > 0 and zoneParam.internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    final activityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+    final RadiationConvertor(use_A_in=true)) if
+       ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent humanSenHeaIndependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot > 0 and zoneParam.internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+    final RadiationConvertor(use_A_in=true)) if
+       ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDepdendent humanTotHeaDependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final ActivityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-       ATot > 0 and zoneParam.internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    final activityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+    final RadiationConvertor(use_A_in=true)) if
+       ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(

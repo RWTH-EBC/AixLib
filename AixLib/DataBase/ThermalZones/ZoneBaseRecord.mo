@@ -1,4 +1,4 @@
-within AixLib.DataBase.ThermalZones;
+﻿within AixLib.DataBase.ThermalZones;
 record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
@@ -69,13 +69,13 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Weight factor of the ground";
   parameter Real specificPeople "people per squaremeter";
   parameter Real activityDegree "acitivity degree of people in met";
-  parameter Integer internalGainsMode "mode to select the way of calculate the 
-    internal gains by human";
   parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
     "Area specific heatflowrate by persons in case of temperature independent 
     calculation";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
+  parameter Real internalGainsMoistureNoPeople
+    "internal moisture production of plants, etc. except from people in g/(h m²)";
   parameter Real internalGainsMachinesSpecific "Heat Flux of machines";
   parameter Real ratioConvectiveHeatMachines
     "Ratio of convective heat from overall heat output for machines";
