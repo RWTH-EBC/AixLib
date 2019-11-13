@@ -1,9 +1,9 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZoneMoistAirEquipped
+model ThermalZoneMoistAirExchange
   "Illustrates the use of ThermalZoneMoistAirEquipped"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -205,4 +205,4 @@ equation
   </li>
   </ul>
 </html>"));
-end ThermalZoneMoistAirEquipped;
+end ThermalZoneMoistAirExchange;

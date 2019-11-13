@@ -24,7 +24,7 @@ partial model PartialMultizone "Partial model for multizone models"
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   replaceable model thermalZone =
-      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange
     constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
     "Thermal zone model"

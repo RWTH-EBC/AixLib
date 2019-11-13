@@ -18,7 +18,8 @@ model ThermalZone
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
     final activityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+    final RadiationConvertor(use_A_in=true)) if
        ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent humanSenHeaIndependent(
@@ -26,7 +27,8 @@ model ThermalZone
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+    final RadiationConvertor(use_A_in=true)) if
        ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDepdendent humanTotHeaDependent(
@@ -35,7 +37,8 @@ model ThermalZone
     final RoomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
     final activityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+    final RadiationConvertor(use_A_in=true)) if
        ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific

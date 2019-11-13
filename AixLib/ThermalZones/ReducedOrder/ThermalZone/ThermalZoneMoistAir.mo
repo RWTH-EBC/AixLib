@@ -2,13 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
     ROM(final use_moisture_balance=true));
-  Modelica.Blocks.Interfaces.RealInput ventHum(
-    final quantity="MassFraction",
-    final unit="kg/kg",
-    min=0) if ATot > 0 or zoneParam.VAir > 0
-    "Ventilation and infiltration humidity" annotation (Placement(
-        transformation(extent={{-120,-90},{-80,-50}}), iconTransformation(
-          extent={{-126,-80},{-100,-54}})));
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
     annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
