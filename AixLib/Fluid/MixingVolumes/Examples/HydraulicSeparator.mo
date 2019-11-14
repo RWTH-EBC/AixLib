@@ -19,8 +19,7 @@ model HydraulicSeparator
     redeclare package Medium = Medium,
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
-  AixLib.Fluid.Sources.FixedBoundary
-                                   boundary_p(
+  Sources.Boundary_pT              boundary_p(
     nPorts=1,
     redeclare package Medium = Medium,
     p=150000)                               annotation (Placement(
@@ -110,8 +109,8 @@ model HydraulicSeparator
     offset=0.2)
     annotation (Placement(transformation(extent={{48,-42},{68,-22}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureMixedBottom(redeclare package
-              Medium = Medium, m_flow_nominal=1)
+                                        temperatureMixedBottom(redeclare
+      package Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-8,-26},{-28,-6}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                         temperatureTop(redeclare package Medium =

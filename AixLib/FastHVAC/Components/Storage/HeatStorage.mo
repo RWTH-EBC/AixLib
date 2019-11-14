@@ -198,14 +198,15 @@ public
         transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
   replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction  constrainedby BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
 protected
-   parameter Real[ 2] load_cycles= {data.hUpperPorts,data.hLowerPorts}
+   parameter Real[ 2] load_cycles= {data.hUpperPortSupply,data.hLowerPortSupply}
     "Loading cycle connection pairs (upper position first)"
     annotation (Dialog(tab="Connections"));
-  parameter Real[ 2] unload_cycles = {data.hLowerPorts,data.hUpperPorts}
+  parameter Real[ 2] unload_cycles = {data.hLowerPortDemand,data.hUpperPortDemand}
     "Unloading cycle connection pairs (lower position first)"
     annotation (Dialog(tab="Connections"));
 equation
