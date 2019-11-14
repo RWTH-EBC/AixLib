@@ -4,6 +4,10 @@ model PlugFlowPipeEmbedded
 
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
+  parameter Boolean use_zeta=false
+    "= true HydraulicResistance is implemented, zeta value has to be given next"
+    annotation(Dialog(group="Additional pressurelosses"));
+
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation (Dialog(tab="Advanced"));
@@ -71,7 +75,12 @@ model PlugFlowPipeEmbedded
     annotation (Dialog(group="Thermal resistance"));
 
   parameter Real fac=1
-    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
+    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
+    annotation (Dialog(group="Additional pressurelosses", enable=not use_zeta));
+
+  parameter Real sum_zetas=0
+    "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc."
+    annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -120,7 +129,10 @@ model PlugFlowPipeEmbedded
   final rhoPip = rhoPip,
   final thickness = thickness,
   final R = R,
-    nPorts=nPorts)
+  final fac = fac,
+  final sum_zetas = sum_zetas,
+    nPorts=nPorts,
+    final use_zeta=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
