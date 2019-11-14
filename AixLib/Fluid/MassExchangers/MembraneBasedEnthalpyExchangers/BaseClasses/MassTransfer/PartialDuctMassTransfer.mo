@@ -55,7 +55,7 @@ equation
       M_1=M_air,
       M_2=M_steam,
       T=Medium.temperature(states[i]),
-      p = Medium.pressure(states[i]),
+      p = 1,
       sigma1=sigmaAir,
       sigma2=sigmaSteam,
       omega=omegas[i]);

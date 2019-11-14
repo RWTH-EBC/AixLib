@@ -12,6 +12,11 @@ model EnthalpyExchanger
   parameter Integer nParallel(min=1)
     "number of parallel membranes";
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=
+    Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
   //----------------------Air Ducts------------------------------------
 
   // Geometry
@@ -31,7 +36,10 @@ model EnthalpyExchanger
     annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
   parameter Boolean local
     "true if heat and mass transfer are locally resolved"
-    annotation(Dialog(tab="AirdDucts",group="Heat and mass transfer"));
+    annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
+  parameter Integer nWidth(min=1) = 1
+    "number of segments in width direction"
+    annotation(Dialog(tab="AirDucts",group="Heat and mass transfer"));
 
   // pressure losses
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
@@ -123,11 +131,13 @@ model EnthalpyExchanger
     final dp_nominal=dp_nominal,
     final nNodes=n,
     final nParallel=nParallel,
+    final nWidth=nWidth,
     final lengthDuct=lengthDuct,
     final widthDuct=widthDuct,
     final heightDuct=heightDuct,
     final UWT=UWT,
     final local=local,
+    final energyDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -138,11 +148,13 @@ model EnthalpyExchanger
     final dp_nominal=dp_nominal,
     final nNodes=n,
     final nParallel=nParallel,
+    final nWidth=nWidth,
     final lengthDuct=lengthDuct,
     final widthDuct=widthDuct,
     final heightDuct=heightDuct,
     final UWT=UWT,
     final local=local,
+    final energyDynamics=energyDynamics,
     final p_start=p_start,
     final T_start=T_start,
     final X_start=X_start,
@@ -164,7 +176,8 @@ model EnthalpyExchanger
     annotation (Placement(transformation(extent={{-36,-28},{22,28}})));
   Modelica.Blocks.Interfaces.RealInput PMembrane
     "membrane permeability in Barrer"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
+        iconTransformation(extent={{-120,-10},{-100,10}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium=Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -193,16 +206,16 @@ equation
           -14},{-4,-14},{-4,-32.28},{-17.48,-32.28}},               color={0,140,
           72}));
   connect(PMembrane, membrane.PMembrane)
-    annotation (Line(points={{-120,0},{-82,0},{-82,3.55271e-15},{-41.8,
-          3.55271e-15}},                        color={0,0,127}));
+    annotation (Line(points={{-120,0},{-82,0},{-82,3.55271e-15},{-41.8,3.55271e-15}},
+                                                color={0,0,127}));
   connect(airDuct1.port_a, port_a1) annotation (Line(points={{-34,60},{-100,60}},
                               color={0,127,255}));
   connect(airDuct1.port_b, port_b1)
     annotation (Line(points={{22,60},{100,60}},          color={0,127,255}));
   connect(airDuct2.port_a, port_a2) annotation (Line(points={{22,-60},{100,-60}},
                       color={0,127,255}));
-  connect(airDuct2.port_b, port_b2) annotation (Line(points={{-34,-60},{-100,
-          -60}},                 color={0,127,255}));
+  connect(airDuct2.port_b, port_b2) annotation (Line(points={{-34,-60},{-100,-60}},
+                                 color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,20}},

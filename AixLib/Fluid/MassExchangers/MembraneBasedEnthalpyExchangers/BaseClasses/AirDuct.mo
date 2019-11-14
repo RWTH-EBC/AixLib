@@ -9,9 +9,6 @@ model AirDuct "model of the air duct"
     final computeFlowResistance=true);
 
   // General
-  parameter Modelica.SIunits.Time tau = 30
-    "Time constant at nominal flow (if energyDynamics <> SteadyState)"
-     annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
   parameter Integer nNodes = 2
     "number of discrete volumes (over length) in the air duct";
   parameter Integer nParallel = 2
@@ -126,7 +123,7 @@ model AirDuct "model of the air duct"
   AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol[nNodes](
     redeclare each final package Medium = Medium,
     each nPorts=2,
-    each V=m_flow_nominal*tau/rho_default,
+    each V=lengthDuct/nNodes*widthDuct*heightDuct,
     each final allowFlowReversal=allowFlowReversal,
     each final mSenFac=1,
     each final m_flow_nominal=m_flow_nominal,
@@ -195,18 +192,6 @@ protected
     redeclare final package Medium=Medium,
     final m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-
-initial algorithm
-  assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau > Modelica.Constants.eps,
-"The parameter tau, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau = " + String(tau) + "\n");
-  assert((massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
-          tau > Modelica.Constants.eps,
-"The parameter tau, or the volume of the model from which tau may be derived, is unreasonably small.
- You need to set massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState to model steady-state.
- Received tau = " + String(tau) + "\n");
 
 equation
   massPorts.p = vol.p;
