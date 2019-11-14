@@ -43,7 +43,8 @@ model AirDuct "model of the air duct"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   // Dynamics
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=
+    Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
@@ -75,10 +76,14 @@ model AirDuct "model of the air duct"
     /crossSections[i] for i in 1:nNodes}/nParallel
     "velocity in air duct segments";
 
-  Medium.ThermodynamicState[nNodes] states=fill(sta_default,nNodes);
+  Medium.ThermodynamicState[nNodes] states={Medium.setState_pTX(
+    vol[i].p,
+    vol[i].T,
+    vol[i].Xi) for i in 1:nNodes};
 
-  // Inputs
-  input Modelica.SIunits.SpecificEnthalpy dhAds "adsorption enthalpy";
+  // variables
+  Modelica.SIunits.SpecificEnthalpy dhAds=adsorptionEnthalpy.dhAds
+    "adsorption enthalpy";
 
   // Heat and mass transfer models
   replaceable model HeatTransfer =
@@ -174,6 +179,23 @@ protected
   parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
     "Start value for outflowing enthalpy";
 
+  BaseClasses.HeatTransfer.AdsorptionEnthalpy
+    adsorptionEnthalpy(
+    F=5E-6,
+    n=2,
+    v_0=5.5E-5,
+    T=senTem.T,
+    phi=senRelHum.phi)
+    annotation (Placement(transformation(extent={{-66,42},{-46,62}})));
+  Sensors.TemperatureTwoPort senTem(
+    redeclare final package Medium=Medium,
+    m_flow_nominal=m_flow_nominal)
+    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+  Sensors.RelativeHumidityTwoPort senRelHum(
+    redeclare final package Medium=Medium,
+    final m_flow_nominal=m_flow_nominal)
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+
 initial algorithm
   assert((energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState) or
           tau > Modelica.Constants.eps,
@@ -187,11 +209,10 @@ initial algorithm
  Received tau = " + String(tau) + "\n");
 
 equation
+  massPorts.p = vol.p;
+
   connect(heatPorts, heatTransfer.heatPorts);
   connect(massPorts, massTransfer.massPorts);
-  connect(vol[nNodes].ports[2], port_b) annotation (Line(
-      points={{3,0},{100,0}},
-      color={0,127,255}));
   connect(port_a, preDro.port_a) annotation (Line(
       points={{-100,0},{-90,0},{-90,0},{-80,0},{-80,0},{-60,0}},
       color={0,127,255}));
@@ -208,6 +229,12 @@ equation
     annotation (Line(points={{-86,-49},{-86,-30},{-62,-30}}, color={0,0,127}));
   connect(mWat_flow.y, vol.mWat_flow)
     annotation (Line(points={{-22,-51},{-22,-18},{-11,-18}}, color={0,0,127}));
+  connect(vol[nNodes].ports[2], senTem.port_a)
+    annotation (Line(points={{3,0},{30,0}},       color={0,127,255}));
+  connect(senTem.port_b, senRelHum.port_a)
+    annotation (Line(points={{50,0},{60,0}}, color={0,127,255}));
+  connect(senRelHum.port_b, port_b)
+    annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-100,90},{100,-100}},

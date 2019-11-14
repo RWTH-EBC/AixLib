@@ -27,9 +27,6 @@ partial model PartialHeatTransfer
   // Outputs defined by heat transfer model
   output Modelica.SIunits.HeatFlowRate[n] Q_flows "Heat flow rates";
 
-  // Parameters
-  outer Modelica.Fluid.System system "System wide properties";
-
   // Heat ports
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] heatPorts
     "Heat port to component boundary" annotation (Placement(transformation(

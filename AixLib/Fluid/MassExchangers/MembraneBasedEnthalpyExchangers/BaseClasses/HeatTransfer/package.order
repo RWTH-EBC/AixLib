@@ -4,3 +4,4 @@ PartialDuctHeatTransfer
 LocalDuctConvectiveHeatFlow
 MembraneHeatTransfer
 NusseltNumberMuzychka
+AdsorptionEnthalpy

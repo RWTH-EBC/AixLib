@@ -4,7 +4,7 @@ model Membrane "model of membrane"
   parameter Integer nNodes = 2
     "number of discrete volumes";
   parameter Integer nParallel = 1
-    "number of parallel air ducts";
+    "number of parallel membranes";
 
   // Parameters
   parameter Modelica.SIunits.Length lengthMembrane
@@ -82,15 +82,17 @@ model Membrane "model of membrane"
 
   // Ports
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPorts_a[nNodes]
-    annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
+    annotation (Placement(transformation(extent={{-50,40},{-30,60}}),
+        iconTransformation(extent={{-50,40},{-30,60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPorts_b[nNodes]
-    annotation (Placement(transformation(extent={{-50,-90},{-30,-70}})));
+    annotation (Placement(transformation(extent={{-50,-60},{-30,-40}}),
+        iconTransformation(extent={{-50,-60},{-30,-40}})));
   Utilities.MassTransfer.MassPort massPorts_a[nNodes] annotation (Placement(
-        transformation(extent={{28,68},{52,92}}), iconTransformation(extent={{14,
-            50},{68,104}})));
+        transformation(extent={{28,68},{52,92}}), iconTransformation(extent={{16,24},
+            {66,76}})));
   Utilities.MassTransfer.MassPort massPorts_b[nNodes] annotation (Placement(
-        transformation(extent={{28,-92},{52,-68}}), iconTransformation(extent={{14,-108},
-            {68,-54}})));
+        transformation(extent={{28,-92},{52,-68}}), iconTransformation(extent={{14,-76},
+            {64,-24}})));
 
 equation
   connect(heatPorts_a,heatTransfer.heatPorts_a);
@@ -105,5 +107,14 @@ equation
           lineColor={0,0,0},
           fillColor={0,127,0},
           fillPattern=FillPattern.Backward)}),                   Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>This model provides a thin membrane layer. Here the coupled heat and mass transfer through the membrane is calculated using the heat transfer model LocalMembraneHeatTransfer and the mass transfer model LocalMembraneMassTransfer.</p>
+<p>The geometry and specification of the membrane are set in this model. By using the parameter <code>nParallel</code> the parallel arrangement of several membranes is possible.</p>
+</html>", revisions="<html>
+<ul>
+<li>November 20, 2018, by Martin Kremer:<br>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
+<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+</ul>
+</html>"));
 end Membrane;

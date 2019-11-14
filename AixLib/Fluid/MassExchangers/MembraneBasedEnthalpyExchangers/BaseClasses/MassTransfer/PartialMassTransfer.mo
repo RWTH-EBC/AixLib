@@ -27,9 +27,6 @@ partial model PartialMassTransfer
   // Outputs defined by heat transfer model
   output Modelica.SIunits.MassFlowRate[n] m_flows "Mass flow rates";
 
-  // Parameters
-  outer Modelica.Fluid.System system "System wide properties";
-
   // Heat ports
   AixLib.Utilities.MassTransfer.MassPort[n] massPorts
     "Heat port to component boundary" annotation (Placement(transformation(
