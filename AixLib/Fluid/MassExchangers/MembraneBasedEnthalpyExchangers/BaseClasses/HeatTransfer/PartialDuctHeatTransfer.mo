@@ -1,61 +1,56 @@
 within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
 partial model PartialDuctHeatTransfer
-  "Base class for duct heat transfer correlation in terms of Nusselt number heat transfer in a rectangular duct for laminar flow"
-  extends Modelica.Fluid.Interfaces.PartialHeatTransfer;
+  "partial model for rectangular duct heat transfer models"
+  extends PartialFlowHeatTransfer;
 
-  parameter Modelica.SIunits.Length[n] heightsDuct "heights of duct";
-  parameter Modelica.SIunits.Length[n] widthsDuct "widths of duct";
+  parameter Integer nWidth(min=1) "number of parallel segments in width direction";
 
-  input Modelica.SIunits.Velocity[n] vs
-    "Mean velocities of fluid flow in segments";
+  parameter Modelica.SIunits.Length[n] heights "height of duct";
+  parameter Modelica.SIunits.Length[n] widths "width of duct";
 
-  input Modelica.SIunits.Length[n] lengths "Lengths along flow path";
+  Real[n] aspectRatios "aspect ratio between duct height and width";
+  parameter Boolean UWT "true if UWT (uniform wall temperature) boundary conditions";
+  input Boolean local "true if local nusslet number or false if average shall be calculated";
 
-  Real[n] aspectRatios "aspect ratios between duct height and width";
-  parameter Boolean UWT "true if UWT boundary conditions";
-  parameter Real C1 "constant C1";
-  parameter Real C2 "constant C2";
-  parameter Real C3 "constant C3";
-  parameter Real C4 "constant C4";
+  Modelica.SIunits.CoefficientOfHeatTransfer[n] alphas;
 
-  Modelica.SIunits.CoefficientOfHeatTransfer[n] alphas "convective heat flow coefficients";
-
-  Modelica.SIunits.ThermalConductivity[n] lambdas "thermal conductivities of medium";
-  Modelica.SIunits.Density[n] rhos "densities of medium";
-  Modelica.SIunits.DynamicViscosity[n] mus "dynamic viscosities of medium";
-  Real[n] Prs "Prandtl numbers";
-  Real[n] Res "Reynolds numbers";
-  Real[n] Nus "Nusselt numbers";
+  // Variables
+  Modelica.SIunits.ThermalConductivity[n] lambdas "thermal conductivity of medium";
+  Modelica.SIunits.Density[n] rhos "density of medium";
+  Modelica.SIunits.DynamicViscosity[n] mus "dynamic viscosity of medium";
+  Real[n] Prs "Prandtl number";
+  Real[n] Res "Reynolds number";
+  Real[n] Nus "Nusselt number";
   Modelica.SIunits.Area[n] crossSections "cross section of duct";
-  Real[n] zsStern "dimensionless lengths";
+  Real[n] zsStern "dimensionless length";
 
 equation
+
   rhos = Medium.density(states);
   mus = Medium.dynamicViscosity(states);
   lambdas = Medium.thermalConductivity(states);
   Prs = Medium.prandtlNumber(states);
 
   for i in 1:n loop
-    aspectRatios[i] = heightsDuct[i]/widthsDuct[i];
-    crossSections[i] = heightsDuct[i] * widthsDuct[i];
-    Res[i] = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
+    crossSections[i] = heights[i]*(widths[i]/nWidth);
+    aspectRatios[i] = heights[i]/widths[i];
+    Res[i] =
+      Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
       rho=rhos[i],
       mu=mus[i],
       v=vs[i],
-      D=2*heightsDuct[i]);
-    zsStern[i] = (lengths[i]/sqrt(crossSections[i]))/(max(0.001,Res[i]) * Prs[i]);
+      D=crossSections[i]);
+    //zsStern[i] = (lengths[i]/sqrt(crossSections[i]))/max(0.001,Res[i]*Prs[i]);
+    zsStern[i] = (sum(lengths)/sqrt(crossSections[i]))/max(0.001,Res[i]*Prs[i]);
     Nus[i] = NusseltNumberMuzychka(
-      Re=Res[i],
-      Pr=Prs[i],
-      aspectRatio=aspectRatios[i],
-      zStern=zsStern[i],
-      UWT=UWT,
-      C1=C1,
-      C2=C2,
-      C3=C3,
-      C4=C4,
-      gamma=0.1);
-    alphas[i] = (Nus[i] * lambdas[i])/sqrt(crossSections[i]);
+              Re=Res[i],
+              Pr=Prs[i],
+              aspectRatio=aspectRatios[i],
+              zStern=zsStern[i],
+              UWT=UWT,
+              local=local,
+              gamma=0.1);
+    alphas[i] = (Nus[i]*lambdas[i])/sqrt(crossSections[i]);
   end for;
 
   annotation (Documentation(info="<html>
@@ -66,13 +61,7 @@ equation
 <p><br><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
 </html>", revisions="<html>
 <ul>
-<li>April 23, 2019, by Martin Kremer:<br>Changes function to model.</li>
 <li>August 21, 2018, by Martin Kremer:<br>First implementation.</li>
 </ul>
-</html>"), Icon(graphics={           Rectangle(
-            extent={{-80,60},{80,-60}},
-            pattern=LinePattern.None,
-            lineColor={0,0,0},
-            fillColor={255,0,0},
-            fillPattern=FillPattern.HorizontalCylinder)}));
+</html>"));
 end PartialDuctHeatTransfer;

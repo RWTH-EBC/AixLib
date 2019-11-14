@@ -1,5 +1,5 @@
 within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses;
-model AirDuct "model of the air duct"
+model AirDuct_withThermalElements "model of the air duct"
   extends Interfaces.PartialTwoPortInterface(
     redeclare final package Medium = AixLib.Media.Air,
     port_a(h_outflow(start=h_outflow_start)),
@@ -8,7 +8,6 @@ model AirDuct "model of the air duct"
   extends AixLib.Fluid.Interfaces.TwoPortFlowResistanceParameters(
     final computeFlowResistance=true);
 
-  // General
   parameter Modelica.SIunits.Time tau = 30
     "Time constant at nominal flow (if energyDynamics <> SteadyState)"
      annotation (Dialog(tab = "Dynamics", group="Nominal condition"));
@@ -16,27 +15,6 @@ model AirDuct "model of the air duct"
     "number of discrete volumes (over length) in the air duct";
   parameter Integer nParallel = 2
     "number of parallel air ducts";
-  parameter Integer nWidth(min=1) = 1
-    "number of segments in width direction";
-
-  // Geometry
-  parameter Modelica.SIunits.Length lengthDuct
-    "length in flow direction of duct"
-    annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length widthDuct
-    "width of duct"
-     annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length heightDuct
-    "height of duct"
-     annotation(Dialog(tab="Geometry"));
-
-  // Heat and Mass transfer
-  parameter Boolean UWT
-    "true if uniform wall temperature, else uniform wall heat flux"
-     annotation(Dialog(tab="Heat and Mass transfer"));
-  parameter Boolean local
-    "true if local Nusselt/Sherwood number, else average"
-     annotation(Dialog(tab="Heat and Mass transfer"));
 
   // Advanced
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
@@ -66,58 +44,6 @@ model AirDuct "model of the air duct"
     "Start value of trace substances"
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
 
-  // Variables
-  Modelica.SIunits.Length lengths[nNodes] = fill(lengthDuct/nNodes,nNodes)
-    "length of segements in flow direction";
-  Modelica.SIunits.Area crossSections[nNodes] = fill(heightDuct*widthDuct,nNodes)
-    "cross section of duct segments";
-  Modelica.SIunits.Velocity vs[nNodes]={port_a.m_flow/Medium.density(states[i])
-    /crossSections[i] for i in 1:nNodes}/nParallel
-    "velocity in air duct segments";
-
-  Medium.ThermodynamicState[nNodes] states=fill(sta_default,nNodes);
-
-  // Inputs
-  input Modelica.SIunits.SpecificEnthalpy dhAds "adsorption enthalpy";
-
-  // Heat and mass transfer models
-  replaceable model HeatTransfer =
-    BaseClasses.HeatTransfer.LocalDuctConvectiveHeatFlow;
-
-  replaceable model MassTransfer =
-    BaseClasses.MassTransfer.LocalDuctConvectiveMassFlow;
-
-
-  HeatTransfer heatTransfer(
-    redeclare package Medium=Medium,
-    n=nNodes,
-    nWidth=nWidth,
-    lengths=lengths,
-    states=states,
-    surfaceAreas={lengths[i] * widthDuct for i in 1:nNodes},
-    vs=vs,
-    heights=fill(heightDuct,nNodes),
-    widths=fill(widthDuct,nNodes),
-    nParallel=nParallel,
-    UWT=UWT,
-    local=local);
-
-  MassTransfer massTransfer(
-    redeclare package Medium=Medium,
-    n=nNodes,
-    nWidth=nWidth,
-    lengths=lengths,
-    states=states,
-    surfaceAreas={lengths[i] * widthDuct for i in 1:nNodes},
-    vs=vs,
-    Xs=vol.X_w,
-    heights=fill(heightDuct,nNodes),
-    widths=fill(widthDuct,nNodes),
-    nParallel=nParallel,
-    UWT=UWT,
-    local=local);
-
-
   AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol[nNodes](
     redeclare each final package Medium = Medium,
     each nPorts=2,
@@ -146,24 +72,38 @@ model AirDuct "model of the air duct"
     final dp_nominal=dp_nominal) "Flow resistance"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 
+  Modelica.Thermal.HeatTransfer.Components.Convection heaCon[nNodes]
+    annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={-40,52})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPorts[nNodes]
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-    prescribedHeatFlow[nNodes]
-     annotation (Placement(transformation(extent={{-62,-40},{-42,-20}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[
+    nNodes] annotation (Placement(transformation(extent={{-72,-40},{-52,-20}})));
+  Utilities.MassTransfer.Convection masCon[nNodes] annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={34,54})));
   Utilities.MassTransfer.MassPort massPorts[nNodes]
     annotation (Placement(transformation(extent={{28,88},{52,112}}),
         iconTransformation(extent={{14,72},{68,126}})));
-  Modelica.Blocks.Sources.RealExpression Q_flow[nNodes](
-    y=heatTransfer.heatPorts.Q_flow-massTransfer.massPorts.m_flow*dhAds)
-     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,origin={-86,-60})));
-  Modelica.Blocks.Sources.RealExpression mWat_flow[nNodes](
-    y=massTransfer.massPorts.m_flow)
-    annotation (Placement(transformation(
+  Utilities.MassTransfer.PrescribedMassFraction prescribedMassFraction[nNodes]
+    annotation (Placement(transformation(extent={{82,12},{62,32}})));
+  Utilities.MassTransfer.MassFlowSensor massFlowSensor[nNodes] annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={46,22})));
+  Modelica.Blocks.Sources.RealExpression massTransfer[nNodes](each y=200)
+    annotation (Placement(transformation(extent={{-2,44},{18,64}})));
+  Modelica.Blocks.Sources.RealExpression heatTransfer[nNodes](each y=200)
+    annotation (Placement(transformation(extent={{-82,42},{-62,62}})));
+  Modelica.Blocks.Sources.RealExpression adsorptionHeat[nNodes](each y=200)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-22,-62})));
+        origin={-92,-60})));
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default, p=Medium.p_default, X=Medium.X_default);
@@ -187,8 +127,6 @@ initial algorithm
  Received tau = " + String(tau) + "\n");
 
 equation
-  connect(heatPorts, heatTransfer.heatPorts);
-  connect(massPorts, massTransfer.massPorts);
   connect(vol[nNodes].ports[2], port_b) annotation (Line(
       points={{3,0},{100,0}},
       color={0,127,255}));
@@ -202,12 +140,33 @@ equation
   for i in 1:nNodes-1 loop
     connect(vol[i].ports[2],vol[i+1].ports[1]);
   end for;
-  connect(prescribedHeatFlow.port, vol.heatPort) annotation (Line(points={{-42,-30},
+  connect(heaCon.fluid, vol.heatPort)
+    annotation (Line(points={{-40,42},{-40,16},{-28,16},{-28,-10},{-9,-10}},
+                                                            color={191,0,0}));
+  connect(heaCon.solid, heatPorts)
+    annotation (Line(points={{-40,62},{-40,100}},   color={191,0,0}));
+  connect(prescribedHeatFlow.port, vol.heatPort) annotation (Line(points={{-52,-30},
           {-28,-30},{-28,-10},{-9,-10}}, color={191,0,0}));
-  connect(Q_flow.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-86,-49},{-86,-30},{-62,-30}}, color={0,0,127}));
-  connect(mWat_flow.y, vol.mWat_flow)
-    annotation (Line(points={{-22,-51},{-22,-18},{-11,-18}}, color={0,0,127}));
+  connect(massPorts, masCon.solid)
+    annotation (Line(points={{40,100},{40,74},{34,74},{34,64}},
+                                                  color={0,140,72}));
+  connect(vol.X_w, prescribedMassFraction.X) annotation (Line(points={{13,-6},{
+          90,-6},{90,22},{84,22}},color={0,0,127}));
+  connect(prescribedMassFraction.port, massFlowSensor.port_a) annotation (Line(
+        points={{62.1,22.1},{55.9,22.1},{55.9,21.9}},    color={0,140,72}));
+  connect(masCon.fluid, massFlowSensor.port_b)
+    annotation (Line(points={{34,44},{34,22},{36,22}},
+                                                 color={0,140,72}));
+  connect(massFlowSensor.m_flow, vol.mWat_flow) annotation (Line(points={{46,32},
+          {46,34},{-16,34},{-16,-18},{-11,-18}},
+                                          color={0,0,127}));
+  connect(massTransfer.y, masCon.Gc)
+    annotation (Line(points={{19,54},{24,54}},  color={0,0,127}));
+  connect(heatTransfer.y, heaCon.Gc)
+    annotation (Line(points={{-61,52},{-50,52}},   color={0,0,127}));
+  connect(adsorptionHeat.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-92,-49},
+          {-92,-30},{-72,-30}},                                         color={0,
+          0,127}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-100,90},{100,-100}},
@@ -220,13 +179,5 @@ equation
         Line(
           points={{100,90},{100,100}},
           color={0,0,0},
-          pattern=LinePattern.Dash)}), Documentation(info="<html>
-<p>This model provides the definition of the air duct in a parallel membrane enthalpy exchanger. It is based on the <a href=\"AixLib.Fluid.Interfaces.PartialTwoPortInterface\">PartialTwoPortInterface</a> model.</p>
-<p>This model defines the geometry of the air duct, as well as the convective heat and mass transfer processes in the air duct. The model can be discretized in flow direction using finite volumes.</p>
-</html>", revisions="<html>
-<ul>
-<li>November 23, 2018, by Martin Kremer:<br>Changing adsorption enthalpy dhAds from parameter to input for usage of adsorption enthalpy model.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First Implementation</li>
-</ul>
-</html>"));
-end AirDuct;
+          pattern=LinePattern.Dash)}));
+end AirDuct_withThermalElements;

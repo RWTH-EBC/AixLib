@@ -1,6 +1,6 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
-partial model PartialMassTransfer
-  "Common interface for mass transfer models"
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+partial model PartialHeatTransfer
+  "Common interface for heat transfer models"
 
   // Parameters
   replaceable package Medium=Modelica.Media.Interfaces.PartialMedium
@@ -25,33 +25,35 @@ partial model PartialMassTransfer
   input Modelica.SIunits.Area[n] surfaceAreas "Heat transfer areas";
 
   // Outputs defined by heat transfer model
-  output Modelica.SIunits.MassFlowRate[n] m_flows "Mass flow rates";
+  output Modelica.SIunits.HeatFlowRate[n] Q_flows "Heat flow rates";
 
   // Parameters
   outer Modelica.Fluid.System system "System wide properties";
 
   // Heat ports
-  AixLib.Utilities.MassTransfer.MassPort[n] massPorts
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] heatPorts
     "Heat port to component boundary" annotation (Placement(transformation(
           extent={{-10,60},{10,80}}), iconTransformation(extent={{-10,60},{10,80}})));
 
   // Variables
-  input Modelica.SIunits.MassFraction[n] Xs "mass fraction of states";
-
+  Modelica.SIunits.Temperature[n] Ts = Medium.temperature(states) "Temperature at states";
 equation
-  m_flows =massPorts.m_flow;
+  Q_flows =heatPorts.Q_flow;
   annotation (Documentation(info="<html>
 <p>
-This component is a common interface for mass transfer models. The mass flow rates <code>m_flows[n]</code> through the boundaries of n flow segments
+This component is a common interface for heat transfer models. The heat flow rates <code>Q_flows[n]</code> through the boundaries of n flow segments
 are obtained as function of the thermodynamic <code>states</code> of the flow segments for a given fluid <code>Medium</code>,
-the <code>surfaceAreas[n]</code> and the boundary mass fractions <code>massPorts[n].X</code>.
+the <code>surfaceAreas[n]</code> and the boundary temperatures <code>heatPorts[n].T</code>.
 </p>
-An extending model implementing this interface needs to define one equation: the relation between the predefined fluid mass fractions <code>Xs[n]</code>,
-the boundary mass fractions <code>massPorts[n].X</code>, and the mass flow rates <code>m_flows[n]</code>.
+<p>
+The heat loss coefficient <code>k</code> can be used to model a thermal isolation between <code>heatPorts.T</code> and <code>T_ambient</code>.</p>
+<p>
+An extending model implementing this interface needs to define one equation: the relation between the predefined fluid temperatures <code>Ts[n]</code>,
+the boundary temperatures <code>heatPorts[n].T</code>, and the heat flow rates <code>Q_flows[n]</code>.
 </p>
 </html>", revisions="<html>
 <ul>
 <li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
 </ul>
 </html>"));
-end PartialMassTransfer;
+end PartialHeatTransfer;

@@ -1,22 +1,21 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.HeatTransfer;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.obsolete.BaseClasses.HeatTransfer;
 function NusseltNumberMuzychka
   "claculates nusselt number out of reynolds and prandtl number according to Muzychka et. al"
   input Real Re "Reynolds number";
   input Real Pr "Prandtl number";
   input Real aspectRatio "aspect ratio between duct height and width";
   input Real zStern "dimensionless length";
-  input Boolean UWT "true if UWT (uniform wall temperature) boundary conditions";
-  input Boolean local "true if local nusslet number or false if average shall be calculated";
+  input Boolean UWT "true if UWT boundary conditions";
+  input Real C1 "constant C1";
+  input Real C2 "constant C2";
+  input Real C3 "constant C3";
+  input Real C4 "constant C4";
   input Real gamma "shape parameter (rectangular duct: 0.1)";
 
   output Real Nu "Nusselt number";
 
 protected
   Real m "exponent";
-  Real C1 "constant C1: 3.24 for UWT(uniform wall temperature), 3.86 for UWF(uniform wall flux)";
-  Real C2 "constant C2: 1 for local Nusselt number, 1.5 for average Nusselt number";
-  Real C3 "constant C3: 0.409 for UWT, 0.501 for UWF";
-  Real C4 "constant C4: 1 for local Nusselt number, 2 for average Nusselt number";
   Real fPr "function for boundary conditions";
   Real fRe "product of Reynolds and friction factor";
   constant Real pi = Modelica.Constants.pi;
@@ -27,20 +26,8 @@ algorithm
   // Defintion for boundary function
   if UWT == true then
     fPr := 0.564/(1+(1.644*Pr^(1/6))^(9/2))^(2/9);
-    C1 := 3.24;
-    C3 := 0.409;
   else
     fPr := 0.886/(1+(1.909*Pr^(1/6))^(9/2))^(2/9);
-    C1 := 3.86;
-    C3 := 0.501;
-  end if;
-
-  if local == true then
-    C2 := 1;
-    C4 := 1;
-  else
-    C2 := 1.5;
-    C4 := 2;
   end if;
 
   // Definition of product of reynolds and friciton factor

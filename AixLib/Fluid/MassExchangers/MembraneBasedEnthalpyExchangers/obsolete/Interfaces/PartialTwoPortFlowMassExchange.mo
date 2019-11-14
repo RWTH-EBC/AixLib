@@ -1,4 +1,4 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.Interfaces;
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.obsolete.Interfaces;
 partial model PartialTwoPortFlowMassExchange
   "Base class for distributed flow models with water vapor exchange"
 

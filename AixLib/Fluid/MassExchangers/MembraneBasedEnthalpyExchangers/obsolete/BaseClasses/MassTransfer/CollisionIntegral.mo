@@ -1,22 +1,21 @@
-within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
-function CollisionIntegral
-  "calculates collision integral for water in air"
-
+within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.obsolete.BaseClasses.MassTransfer;
+function CollisionIntegral "Calculates collision integral for water in air"
+  import MembraneBasedEnthalpyExchanger;
   input Modelica.SIunits.Temperature T;
+  input Real eps_1 "lennard-Jones potential component 1";
+  input Real eps_2 "lennard-Jones potential component 2";
+  //input Real eps_12;
 
   output Real Omega_D;
 
-  constant Real kB(unit="J/K") = 1.38064852E-23 "Stefan-Boltzmann-Constant";
-  constant Real epsAir = 78.6 * kB "Lennard-Jones potential of air";
-  constant Real epsSteam = 363 * kB "Lennard-Jones potential of steam";
-
+  constant Real k_B(unit="J/K") = 1.38064852E-23 "Stefan-Boltzmann-Constant";
 protected
   Real omegas[:];
   Real epsis[:];
   Real interp[:,2];
 
-  Real eps12;
-  Real epsInternal;
+  Real eps_12;
+  Real eps_internal;
 algorithm
 
   omegas :={2.662,2.476,2.318,2.184,2.066,1.966,1.877,1.789,1.729,1.667,1.612,1.562,
@@ -32,20 +31,20 @@ algorithm
     200,300,400};
   interp :=[epsis,omegas];
 
-  eps12 :=(epsAir*epsSteam)^(1/2);
+  eps_12 :=(eps_1*eps_2)^(1/2);
 
-  epsInternal :=kB*T/eps12;
+  eps_internal :=k_B*T/eps_12;
 
-  Omega_D := AixLib.Utilities.Math.Functions.linearInterpolation(
-    x=epsInternal, y_1=interp);
+  Omega_D :=
+    MembraneBasedEnthalpyExchanger.CrossCounterFlow.LumpedVolumes.BaseClasses.Functions.Interpolation(
+    x=eps_internal, y_1=interp);
 
-  annotation (Documentation(info="<html>
-<p>This funtions interpolates the collision integral of a water vapour/ air mixture for the lennard-jones potentials of air and water vapour, which are the inputs of the function.</p>
-<p align=\"center\"><i>&epsilon;<sub>12</sub> = &radic;(&epsilon;<sub>air</sub> &epsilon;<sub>steam</sub>)</i></p>
-<p align=\"center\"><i>&Omega; = f(k<sub>B</sub> T &frasl; &epsilon;<sub>12</sub>)</i></p>
-</html>", revisions="<html>
+  annotation (Documentation(revisions="<html>
 <ul>
-<li>June 15, 2018, by Martin Kremer:<br>First Implementation</li>
+<li>
+August 21, 2018, by Martin Kremer:<br/>
+First implementation.
+</li>
 </ul>
 </html>"));
 end CollisionIntegral;

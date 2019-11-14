@@ -1,3 +1,6 @@
-LocalDuctConvectiveHeatFlow
+PartialHeatTransfer
+PartialFlowHeatTransfer
 PartialDuctHeatTransfer
+LocalDuctConvectiveHeatFlow
+MembraneHeatTransfer
 NusseltNumberMuzychka
