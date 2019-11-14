@@ -25,7 +25,7 @@ model StorageSolarCollector
              pump(ControlStrategy = 1,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-8,70})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent = {{-86, 70}, {-66, 90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={36,70})));
@@ -40,7 +40,7 @@ model StorageSolarCollector
     nPorts=1,
     redeclare package Medium = Medium)                        annotation(Placement(transformation(extent={{-66,-26},
             {-46,-6}})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
   Modelica.Fluid.Pipes.DynamicPipe
