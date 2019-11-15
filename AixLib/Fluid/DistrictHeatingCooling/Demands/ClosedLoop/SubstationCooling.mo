@@ -14,6 +14,8 @@ model SubstationCooling
     parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
+    "Nominal mass flow rate";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)
@@ -27,17 +29,18 @@ model SubstationCooling
     nPorts=2,
     redeclare package Medium = Medium,
     tau=600,
-    m_flow_nominal=2)
+    m_flow_nominal=m_flow_nominal)
              annotation (Placement(transformation(extent={{-90,6},{-70,26}})));
   AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
     tau=600,
-    m_flow_nominal=2,
+    m_flow_nominal=m_flow_nominal,
     T_start=288.15)
              annotation (Placement(transformation(extent={{70,6},{90,26}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(redeclare package
-      Medium = Medium, m_flow_nominal=2,
+      Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
     addPowerToMedium=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     use_inputFilter=false)
@@ -53,7 +56,8 @@ model SubstationCooling
     dTEva_nominal=-5,
     dTCon_nominal=6,
     etaCarnot_nominal=0.3,
-    QEva_flow_nominal=coolingDemand_max)
+    QEva_flow_nominal=coolingDemand_max,
+    QEva_flow_min=coolingDemand_max)
                       annotation (Placement(transformation(
         extent={{-15,10},{15,-10}},
         rotation=180,
@@ -82,7 +86,7 @@ model SubstationCooling
     "Input for cooling demand profile of substation (negative values for cooling)"
     annotation (Placement(transformation(extent={{-166,60},{-126,100}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
-        Medium, m_flow_nominal=2)
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-34,-10},{-14,12}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
   "Supply temperature of the cooling circuit in the building"

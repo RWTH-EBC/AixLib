@@ -43,29 +43,29 @@ model SubstationCooling
     annotation (Placement(transformation(extent={{22,2},{42,22}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationCooling
     substationCooling(
-    CoolingDemand_max=-3000,
-    redeclare package Medium = Medium,
+    coolingDemand_max=-3000,
     deltaT_coolingSet(displayUnit="K") = 6,
-    deltaT_coolingGridSet(displayUnit="K") = 4)
+    deltaT_coolingGridSet(displayUnit="K") = 4,
+    m_flow_nominal=5,
+    redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-16,-10},{8,12}})));
 equation
   connect(ramp.y, coo.T_in)
     annotation (Line(points={{-79,-74},{-60,-74},{-60,-56}}, color={0,0,127}));
   connect(coo.ports[1], senTem.port_a) annotation (Line(points={{-56,-34},{-56,-34},
           {-56,-8}}, color={0,127,255}));
-  connect(senTem.port_b, substationCooling.port_a) annotation (Line(points={{-36,
-          -8},{-28,-8},{-28,0},{-16.2,0}}, color={0,127,255}));
+  connect(senTem.port_b,substationCooling. port_a) annotation (Line(points={{-36,-8},
+          {-28,-8},{-28,0},{-16.2,0}},     color={0,127,255}));
   connect(substationCooling.port_b, senTem1.port_a) annotation (Line(points={{8,
           0},{16,0},{16,12},{22,12}}, color={0,127,255}));
   connect(const.y, coo1.T_in)
     annotation (Line(points={{-23,82},{40,82}}, color={0,0,127}));
   connect(coo1.ports[1], senTem1.port_b)
     annotation (Line(points={{44,60},{44,12},{42,12}}, color={0,127,255}));
-  connect(sine.y, substationCooling.coolingDemand) annotation (Line(points={{-77,
-          46},{-28,46},{-28,8},{-16.6,8}}, color={0,0,127}));
-  connect(step.y, substationCooling.T_supplyCoolingSet) annotation (Line(
-        points={{-77,14},{-58,14},{-58,16},{-32,16},{-32,3},{-16.6,3}},
-        color={0,0,127}));
+  connect(sine.y, substationCooling.coolingDemand) annotation (Line(points={{
+          -77,46},{-40,46},{-40,8},{-16.6,8}}, color={0,0,127}));
+  connect(step.y, substationCooling.T_supplyCoolingSet) annotation (Line(points
+        ={{-77,14},{-52,14},{-52,3},{-16.6,3}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=86400, Interval=60));
