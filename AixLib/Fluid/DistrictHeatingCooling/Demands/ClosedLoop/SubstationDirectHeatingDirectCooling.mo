@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model SubstationDirectHeatingDirectCooling "Substation model for bidirctional low-temperature networks for buildings with 
-  heat pump and direct cooling. For simultaneous cooling and heat demands, 
+  direct heating and direct cooling. For simultaneous cooling and heat demands, 
   the return flows are used as supply flows for the other application. "
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
@@ -131,13 +131,10 @@ public
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-40,-84})));
-  Modelica.Blocks.Interfaces.RealOutput pumping_work
-    annotation (Placement(transformation(extent={{216,-76},{236,-54}})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     annotation (Placement(transformation(extent={{-178,-132},{-158,-112}})));
 equation
 
-  pumping_work = abs(port_a.m_flow) * abs(port_a.p - port_b.p);
 
   connect(port_a,vol. ports[1])
     annotation (Line(points={{-260,0},{-234,0},{-234,4}},

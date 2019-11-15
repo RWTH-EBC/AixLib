@@ -1,7 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
 model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-temperature networks for buildings with 
-  heat pump and chiller. for simultaneous cooling and heating demands, 
-  the return flows are used as supply flows for the other application. "
+  heat pump and chiller."
 
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
@@ -308,5 +307,10 @@ equation
 <li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
 Implemented </li>
 </ul>
+</html>", info="<html>
+Substation model for bidirectional low-temperature networks with heat pump and chiller and fixed temperature difference (parameter) on network side.
+This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a> 
+and the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>
+In case of simultanious heating and coolling operation the return flows are used as supply flows for the other application.
 </html>"));
 end SubstationHeatingCoolingFixDeltaT;

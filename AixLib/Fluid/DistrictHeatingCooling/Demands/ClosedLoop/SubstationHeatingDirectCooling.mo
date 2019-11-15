@@ -23,7 +23,6 @@ model SubstationHeatingDirectCooling "Substation model for bidirctional low-temp
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
-    Modelica.Blocks.Interfaces.RealOutput pumping_work;
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
@@ -156,11 +155,11 @@ public
   Sensors.TemperatureTwoPort senTem3(redeclare package Medium = Medium,
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{38,-92},{18,-70}})));
-  Modelica.Blocks.Interfaces.RealOutput P_el_WP
+  Modelica.Blocks.Interfaces.RealOutput P_el_HP( unit = "W")
+    "Electrical power consumed by heat pump"
     annotation (Placement(transformation(extent={{216,-30},{236,-10}})));
 equation
 
-  pumping_work = abs(port_a.m_flow) * abs(port_a.p - port_b.p);
 
 
 
@@ -245,7 +244,7 @@ equation
           -18,-86},{-18,-36},{-10,-36}}, color={0,127,255}));
   connect(senTem2.port_b, sinkHeating.ports[1]) annotation (Line(points={{-36,
           -86},{-44,-86},{-44,-84},{-54,-84},{-54,-104}}, color={0,127,255}));
-  connect(heaPum.P, P_el_WP) annotation (Line(points={{-11,-30},{-20,-30},{-20,-20},
+  connect(heaPum.P,P_el_HP)  annotation (Line(points={{-11,-30},{-20,-30},{-20,-20},
           {226,-20}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -160},{220,160}}),
