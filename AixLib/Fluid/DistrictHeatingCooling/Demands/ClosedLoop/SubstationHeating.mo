@@ -78,7 +78,7 @@ public
   Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet))
     annotation (Placement(transformation(extent={{8,48},{-4,60}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem_supHeating(redeclare package
-      Medium = Medium, m_flow_nominal=2)
+      Medium = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-36,-26},{-56,-46}})));
   Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
   "Input for heat demand profile of substation"
