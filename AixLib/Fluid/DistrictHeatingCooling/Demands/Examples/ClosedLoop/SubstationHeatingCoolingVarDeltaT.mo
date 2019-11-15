@@ -35,11 +35,11 @@ model SubstationHeatingCoolingVarDeltaT
   AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT
     substationHeatingCooling(
     redeclare package Medium = Medium,
+    heatDemand_max=4000,
+    coolingDemand_max=-2000,
     deltaT_coolingSet(displayUnit="K") = 4,
-    HeatDemand_max=4000,
-    CoolingDemand_max=-2000,
     deltaT_heatingSet(displayUnit="K") = 4,
-    m_flow_nominal=3)
+    m_flow_nominal=5)
     annotation (Placement(transformation(extent={{-22,-10},{8,22}})));
   Modelica.Blocks.Sources.TimeTable timeTable1(table=[0,0; 3600,0; 3600,1500;
         7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000])
@@ -87,12 +87,12 @@ equation
   connect(substationHeatingCooling.heatDemand, timeTable.y) annotation (
       Line(points={{7.5,15.9765},{12,15.9765},{12,-20},{55,-20}},
                                                             color={0,0,127}));
-  connect(substationHeatingCooling.deltaT_coolingGridSet, pulse.y) annotation (
-      Line(points={{-22,11.4588},{-22,-14.1882},{-19,-14.1882},{-19,-34}},
-        color={0,0,127}));
-  connect(substationHeatingCooling.deltaT_heatingGridSet, pulse1.y) annotation (
-     Line(points={{7.5,11.8353},{7.5,-14.4},{19,-14.4},{19,-38}},
-                                                                color={0,0,127}));
+  connect(pulse.y, substationHeatingCooling.deltaT_coolingGridSet) annotation (
+      Line(points={{-19,-34},{-20,-34},{-20,11.4588},{-22,11.4588}}, color={0,0,
+          127}));
+  connect(substationHeatingCooling.deltaT_heatingGridSet, pulse1.y) annotation
+    (Line(points={{7.5,11.8353},{7.5,-13.0823},{19,-13.0823},{19,-38}}, color={
+          0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(

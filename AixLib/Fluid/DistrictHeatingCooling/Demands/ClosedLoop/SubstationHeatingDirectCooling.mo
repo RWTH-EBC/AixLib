@@ -51,7 +51,7 @@ model SubstationHeatingDirectCooling "Substation model for bidirctional low-temp
     nPorts=1) annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
   Modelica.Blocks.Sources.Constant T_return(k=deltaT_heatingSet)
     annotation (Placement(transformation(extent={{118,-102},{104,-88}})));
-  AixLib.Fluid.Sources.FixedBoundary sinkHeating(redeclare package Medium =
+  Sources.Boundary_pT                sinkHeating(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-74,-114},{-54,-94}})));
   Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet))

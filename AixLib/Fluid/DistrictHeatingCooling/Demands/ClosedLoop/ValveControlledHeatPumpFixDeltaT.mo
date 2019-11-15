@@ -60,11 +60,11 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Sources.Constant deltaT(k=deltaT)
     "Temperature difference of substation" annotation (Placement(transformation(
@@ -78,7 +78,7 @@ public
     l2=1e-9,
     l=0.05) "Control valve"
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
-  Sources.FixedBoundary              sinkHeating(redeclare package Medium =
+  Sources.Boundary_pT                sinkHeating(redeclare package Medium =
         MediumBuilding, nPorts=1)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,

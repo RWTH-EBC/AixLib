@@ -45,7 +45,7 @@ model SubstationHeatingCoolingVarDeltaT "Substation model for bidirctional low-t
     nPorts=1) annotation (Placement(transformation(extent={{62,-64},{42,-44}})));
   Modelica.Blocks.Sources.Constant T_return(k=deltaT_heatingSet)
     annotation (Placement(transformation(extent={{118,-102},{104,-88}})));
-  AixLib.Fluid.Sources.FixedBoundary sinkHeating(redeclare package Medium =
+  Sources.Boundary_pT                sinkHeating(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-48,-64},{-28,-44}})));
   Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet))
@@ -69,7 +69,8 @@ public
     use_eta_Carnot_nominal=true,
     show_T=true,
     etaCarnot_nominal=0.5,
-    QCon_flow_nominal=heatDemand_max)
+    QCon_flow_nominal=heatDemand_max,
+    QCon_flow_max=heatDemand_max)
     annotation (Placement(transformation(extent={{10,-20},{-10,-40}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-96,-78},{-80,-62}})));
@@ -116,7 +117,8 @@ public
     dTEva_nominal=-5,
     dTCon_nominal=6,
     etaCarnot_nominal=0.4,
-    QEva_flow_nominal=coolingDemand_max)
+    QEva_flow_nominal=coolingDemand_max,
+    QEva_flow_min=coolingDemand_max)
     annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
@@ -140,7 +142,7 @@ public
     use_T_in=true,
     redeclare package Medium = Medium,
     nPorts=1) annotation (Placement(transformation(extent={{-70,44},{-50,64}})));
-  AixLib.Fluid.Sources.FixedBoundary sinkCooling(redeclare package Medium =
+  Sources.Boundary_pT                sinkCooling(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{30,46},{10,66}})));
   Modelica.Blocks.Math.Add add2(k2=-1)

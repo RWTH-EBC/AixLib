@@ -79,7 +79,7 @@ public
     l2=1e-9,
     l=0.05) "Control valve"
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
-  Sources.FixedBoundary              sinkHeating(redeclare package Medium =
+  Sources.Boundary_pT                sinkHeating(redeclare package Medium =
         MediumBuilding, nPorts=1)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,

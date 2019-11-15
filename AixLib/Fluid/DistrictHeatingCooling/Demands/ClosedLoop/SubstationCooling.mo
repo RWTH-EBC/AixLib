@@ -67,7 +67,7 @@ model SubstationCooling
   Modelica.Blocks.Sources.Constant deltaT_coolingBuildingSite(k=
         deltaT_coolingSet)
     annotation (Placement(transformation(extent={{-126,-100},{-106,-80}})));
-  AixLib.Fluid.Sources.FixedBoundary bou1(redeclare package Medium = Medium,
+  Sources.Boundary_pT                bou1(redeclare package Medium = Medium,
       nPorts=1)
     annotation (Placement(transformation(extent={{60,-70},{40,-50}})));
   Modelica.Blocks.Sources.Constant const(k=-(cp_default*deltaT_coolingSet))
