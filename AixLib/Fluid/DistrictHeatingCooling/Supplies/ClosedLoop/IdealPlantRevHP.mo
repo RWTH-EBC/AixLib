@@ -13,6 +13,7 @@ model IdealPlantRevHP
      Modelica.SIunits.MassFlowRate m_flow_HeatSink "Mass flow from heat sink (chiller)";
 
      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
+     parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
      parameter Modelica.SIunits.TemperatureDifference dT_HeatSource "Temperature difference of heat source for mass flow calculation (heat pump operation)";
      parameter Modelica.SIunits.TemperatureDifference dT_HeatSink "Temperature difference of heat sink for mass flow calculation (chiller operation)";
@@ -27,7 +28,7 @@ model IdealPlantRevHP
         Medium) "Inlet/Outlet of supply node"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
-        Medium, m_flow_nominal=2)
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
   Modelica.Blocks.Interfaces.RealInput T_coolingSet
     "Maximum outlet temperature, if port_b is outlet (max. outlet temperature of cold line, chiller operation)"
@@ -35,7 +36,7 @@ model IdealPlantRevHP
   Modelica.Blocks.Interfaces.RealInput T_heatingSet "Maximum outlet temperature, if port_b is outlet (min. outlet temperature of hot line, heat pump operation)"
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium =
-        Medium, m_flow_nominal=2)
+        Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{48,-10},{68,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
