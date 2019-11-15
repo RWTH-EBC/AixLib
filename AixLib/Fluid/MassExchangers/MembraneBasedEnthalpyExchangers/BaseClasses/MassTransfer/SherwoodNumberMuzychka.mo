@@ -1,6 +1,6 @@
 within AixLib.Fluid.MassExchangers.MembraneBasedEnthalpyExchangers.BaseClasses.MassTransfer;
 function SherwoodNumberMuzychka
-  "claculates sherwood number out of reynolds and prandtl number according to Muzychka et. al"
+  "calculates sherwood number out of reynolds and prandtl number according to Muzychka et. al"
   input Real Re "Reynolds number";
   input Real Sc "Schmidt number";
   input Real aspectRatio "aspect ratio between duct height and width";

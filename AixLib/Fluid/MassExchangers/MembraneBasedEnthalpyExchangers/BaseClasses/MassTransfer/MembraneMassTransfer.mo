@@ -30,12 +30,12 @@ model MembraneMassTransfer "model for mass transfer through membrane"
   // Inputs
   input Real PMembrane(unit="mol/(m.s.Pa)") "membrane's permeability in Barrer";
 
-  // partial pressures
-  Modelica.SIunits.PartialPressure[n] p_b(each start=p_start+0.5*dp_start);
-  Modelica.SIunits.PartialPressure[n] p_a(each start=p_start-0.5*dp_start);
-
-  Modelica.SIunits.MolarMass[n] M_a "molar mass of moist air at side a";
-  Modelica.SIunits.MolarMass[n] M_b "molar mass of moist air at side b";
+//   // partial pressures
+//   Modelica.SIunits.PartialPressure[n] p_b(each start=p_start+0.5*dp_start);
+//   Modelica.SIunits.PartialPressure[n] p_a(each start=p_start-0.5*dp_start);
+//
+//   Modelica.SIunits.MolarMass[n] M_a "molar mass of moist air at side a";
+//   Modelica.SIunits.MolarMass[n] M_b "molar mass of moist air at side b";
 
   // Ports
   Utilities.MassTransfer.MassPort[n] massPorts_a
@@ -52,22 +52,22 @@ protected
   // 1 Barrer = 3.33*10^(-16) (mol*m)/(m²*s*Pa)
   // calculated from: Stern, S.A.: The "Barrer" Permeability Unit.
   //                  J. of Polym. Sci. Vol. 6. 1968
-  constant Modelica.SIunits.MolarMass M_steam = 0.01802;
-  constant Modelica.SIunits.MolarMass M_air = 0.028949;
+   constant Modelica.SIunits.MolarMass M_steam = 0.01802;
+//   constant Modelica.SIunits.MolarMass M_air = 0.028949;
   // source: Detlev Möller: Luft: Chemie, Physik, Biologie, Reinhaltung, Recht.
   //         Walter de Gruyter, 2003, ISBN 3-11-016431-0, S. 173
 
 equation
   for i in 1:n loop
     0 = massPorts_a[i].m_flow + massPorts_b[i].m_flow;
-    massPorts_a[i].m_flow = (PMembrane * cCon * M_steam) * (p_b[i] - p_a[i]) /
-      deltaMembrane * areaMembrane/n;
+    massPorts_a[i].m_flow = (PMembrane * cCon * M_steam) *
+      (massPorts_a[i].p - massPorts_b[i].p) / deltaMembrane * areaMembrane/n;
 
-    p_a[i] = massPorts_a[i].p * massPorts_a[i].X * (M_a[i]/M_steam);
-    p_b[i] = massPorts_b[i].p * massPorts_b[i].X * (M_b[i]/M_steam);
+//     p_a[i] = massPorts_a[i].p * massPorts_a[i].X * (M_a[i]/M_steam);
+//     p_b[i] = massPorts_b[i].p * massPorts_b[i].X * (M_b[i]/M_steam);
 
-    M_a[i] = 1/(massPorts_a[i].X / M_steam + (1 - massPorts_a[i].X) / M_air);
-    M_b[i] = 1/(massPorts_b[i].X / M_steam + (1 - massPorts_b[i].X) / M_air);
+//     M_a[i] = 1/(massPorts_a[i].X / M_steam + (1 - massPorts_a[i].X) / M_air);
+//     M_b[i] = 1/(massPorts_b[i].X / M_steam + (1 - massPorts_b[i].X) / M_air);
   end for;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

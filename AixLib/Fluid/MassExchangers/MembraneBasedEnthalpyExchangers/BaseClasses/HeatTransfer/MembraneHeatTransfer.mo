@@ -103,7 +103,7 @@ equation
 <p align=\"center\"><i>m<sub>Membrane</sub>[i] c<sub>p,Membrane</sub> dT<sub>Membrane</sub>[i] = heatPorts_a[i].Q̇ + heatPorts_b[i].Q̇ </i></p>
 </html>", revisions="<html>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end MembraneHeatTransfer;

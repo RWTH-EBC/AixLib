@@ -34,6 +34,9 @@ model AirDuct "model of the air duct"
   parameter Boolean local
     "true if local Nusselt/Sherwood number, else average"
      annotation(Dialog(tab="Heat and Mass transfer"));
+  parameter Boolean rectangularDuct
+    "true if rectangular duct is used for Nusselt/Sherwood number calculation, else flat gap is used."
+     annotation(Dialog(tab="Heat and Mass transfer"));
 
   // Advanced
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
@@ -65,13 +68,17 @@ model AirDuct "model of the air duct"
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
 
   // Variables
-  Modelica.SIunits.Length lengths[nNodes] = fill(lengthDuct/nNodes,nNodes)
+  Modelica.SIunits.Length[nNodes] lengths = fill(lengthDuct/nNodes,nNodes)
     "length of segements in flow direction";
-  Modelica.SIunits.Area crossSections[nNodes] = fill(heightDuct*widthDuct,nNodes)
+  Modelica.SIunits.Area[nNodes] crossSections = fill(heightDuct*widthDuct,nNodes)
     "cross section of duct segments";
-  Modelica.SIunits.Velocity vs[nNodes]={port_a.m_flow/Medium.density(states[i])
+  Modelica.SIunits.Velocity[nNodes] vs={port_a.m_flow/Medium.density(states[i])
     /crossSections[i] for i in 1:nNodes}/nParallel
     "velocity in air duct segments";
+  Modelica.SIunits.PartialPressure[nNodes] ps={vol[i].p*vol[i].X_w*(Ms[i]/
+    M_steam) for i in 1:nNodes};
+  Modelica.SIunits.MolarMass[nNodes] Ms={1/(vol[i].X_w/M_steam+(1-vol[i].X_w)/
+    M_air) for i in 1:nNodes};
 
   Medium.ThermodynamicState[nNodes] states={Medium.setState_pTX(
     vol[i].p,
@@ -89,7 +96,6 @@ model AirDuct "model of the air duct"
   replaceable model MassTransfer =
     BaseClasses.MassTransfer.LocalDuctConvectiveMassFlow;
 
-
   HeatTransfer heatTransfer(
     redeclare package Medium=Medium,
     n=nNodes,
@@ -102,7 +108,8 @@ model AirDuct "model of the air duct"
     widths=fill(widthDuct,nNodes),
     nParallel=nParallel,
     UWT=UWT,
-    local=local);
+    local=local,
+    rectangularDuct=rectangularDuct);
 
   MassTransfer massTransfer(
     redeclare package Medium=Medium,
@@ -112,12 +119,13 @@ model AirDuct "model of the air duct"
     states=states,
     surfaceAreas={lengths[i] * widthDuct for i in 1:nNodes},
     vs=vs,
-    Xs=vol.X_w,
+    ps=ps,
     heights=fill(heightDuct,nNodes),
     widths=fill(widthDuct,nNodes),
     nParallel=nParallel,
     UWT=UWT,
-    local=local);
+    local=local,
+    rectangularDuct=rectangularDuct);
 
 
   AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol[nNodes](
@@ -173,8 +181,15 @@ protected
     "Density, used to compute fluid volume";
   parameter Medium.ThermodynamicState sta_start=Medium.setState_pTX(
       T=T_start, p=p_start, X=X_start);
-  parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start = Medium.specificEnthalpy(sta_start)
+  parameter Modelica.SIunits.SpecificEnthalpy h_outflow_start=
+    Medium.specificEnthalpy(sta_start)
     "Start value for outflowing enthalpy";
+  constant Modelica.SIunits.MolarMass M_steam = 0.01802 "Molar mass of steam";
+  constant Modelica.SIunits.MolarMass M_air = 0.028949 "Molar mass of dry air";
+
+  replaceable function SherwoodNumber =
+    BaseClasses.MassTransfer.SherwoodNumberStephan
+    "Sherwood number function";
 
   BaseClasses.HeatTransfer.AdsorptionEnthalpy
     adsorptionEnthalpy(
@@ -194,8 +209,6 @@ protected
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
 
 equation
-  massPorts.p = vol.p;
-
   connect(heatPorts, heatTransfer.heatPorts);
   connect(massPorts, massTransfer.massPorts);
   connect(port_a, preDro.port_a) annotation (Line(
@@ -237,8 +250,8 @@ equation
 <p>This model defines the geometry of the air duct, as well as the convective heat and mass transfer processes in the air duct. The model can be discretized in flow direction using finite volumes.</p>
 </html>", revisions="<html>
 <ul>
-<li>November 23, 2018, by Martin Kremer:<br>Changing adsorption enthalpy dhAds from parameter to input for usage of adsorption enthalpy model.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First Implementation</li>
+<li>November 23, 2018, by Martin Kremer:<br/>Changing adsorption enthalpy dhAds from parameter to input for usage of adsorption enthalpy model.</li>
+<li>August 21, 2018, by Martin Kremer:<br/>First Implementation</li>
 </ul>
 </html>"));
 end AirDuct;

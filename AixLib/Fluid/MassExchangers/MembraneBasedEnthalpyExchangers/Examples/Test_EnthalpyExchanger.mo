@@ -10,6 +10,7 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     UWT=true,
     local=false,
     nWidth=10,
+    rectangularDuct=false,
     m_flow_nominal=400/3600*1.18,
     dp_nominal(displayUnit="Pa") = 120,
     deltaMembrane=110E-6,

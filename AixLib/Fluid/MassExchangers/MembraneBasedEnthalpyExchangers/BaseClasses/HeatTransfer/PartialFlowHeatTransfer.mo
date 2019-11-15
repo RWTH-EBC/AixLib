@@ -17,7 +17,7 @@ Moreover the fluid flow is characterized for different types of devices by the a
 </p>
 </html>", revisions="<html>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end PartialFlowHeatTransfer;

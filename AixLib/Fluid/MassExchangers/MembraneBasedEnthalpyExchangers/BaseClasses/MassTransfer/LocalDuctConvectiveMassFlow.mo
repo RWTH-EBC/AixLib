@@ -6,7 +6,8 @@ model LocalDuctConvectiveMassFlow
   parameter Real nParallel "number of parallel ducts";
 
 equation
-  m_flows={betas[i]*surfaceAreas[i]*(massPorts[i].X - Xs[i])*nParallel for i in 1:n};
+  m_flows={betas[i]*surfaceAreas[i]*(massPorts[i].p - ps[i])*nParallel
+    for i in 1:n};
 
   annotation (Documentation(info="<html>
 <p>This mass transfer model calculates the convective mass flow for local distribution using the function convectiveMassTransferCoefficient. The mass flow is calculated as follows.</p>

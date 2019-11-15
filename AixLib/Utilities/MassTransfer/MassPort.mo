@@ -1,9 +1,8 @@
 within AixLib.Utilities.MassTransfer;
 connector MassPort "connector for mass transfer"
 
-  Modelica.SIunits.MassFlowRate m_flow "mass flow rate";
-  Modelica.SIunits.MassFraction X "mass fraction";
-  Modelica.SIunits.Pressure p "pressure";
+  flow Modelica.SIunits.MassFlowRate m_flow "mass flow rate of sub-component";
+  Modelica.SIunits.PartialPressure p "partial pressure of sub-component";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
@@ -26,5 +25,12 @@ connector MassPort "connector for mass transfer"
           fillColor={0,140,72},
           fillPattern=FillPattern.None,
           textString="%name",
-          textStyle={TextStyle.Bold})}));
+          textStyle={TextStyle.Bold})}),
+    Documentation(info="<html>
+Connector for mass transfer of one component of a multicomponent mixture.
+</html>", revisions="<html>
+<ul>
+<li>November 15, 2019, by Martin Kremer:<br/>First implementation.</li>
+</ul>
+</html>"));
 end MassPort;

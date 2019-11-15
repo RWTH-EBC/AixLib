@@ -113,8 +113,8 @@ equation
 <p>The geometry and specification of the membrane are set in this model. By using the parameter <code>nParallel</code> the parallel arrangement of several membranes is possible.</p>
 </html>", revisions="<html>
 <ul>
-<li>November 20, 2018, by Martin Kremer:<br>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>November 20, 2018, by Martin Kremer:<br/>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end Membrane;

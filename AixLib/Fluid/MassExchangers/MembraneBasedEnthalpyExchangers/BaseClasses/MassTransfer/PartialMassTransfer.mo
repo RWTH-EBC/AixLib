@@ -33,7 +33,7 @@ partial model PartialMassTransfer
           extent={{-10,60},{10,80}}), iconTransformation(extent={{-10,60},{10,80}})));
 
   // Variables
-  input Modelica.SIunits.MassFraction[n] Xs "mass fraction of states";
+  input Modelica.SIunits.PartialPressure[n] ps "partial pressure at states";
 
 equation
   m_flows =massPorts.m_flow;

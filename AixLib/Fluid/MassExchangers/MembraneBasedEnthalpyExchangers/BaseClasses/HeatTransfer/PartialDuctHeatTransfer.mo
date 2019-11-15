@@ -9,8 +9,12 @@ partial model PartialDuctHeatTransfer
   parameter Modelica.SIunits.Length[n] widths "width of duct";
 
   Real[n] aspectRatios "aspect ratio between duct height and width";
-  parameter Boolean UWT "true if UWT (uniform wall temperature) boundary conditions";
-  input Boolean local "true if local nusslet number or false if average shall be calculated";
+  parameter Boolean UWT
+    "true if UWT (uniform wall temperature) boundary conditions";
+  parameter Boolean local
+    "true if local nusslet number or false if average shall be calculated";
+  parameter Boolean rectangularDuct
+    "true if rectangular duct is used for Sherwood number calculation, else flat gap is used.";
 
   Modelica.SIunits.CoefficientOfHeatTransfer[n] alphas;
 
@@ -34,15 +38,15 @@ equation
   for i in 1:n loop
     crossSections[i] = heights[i]*(widths[i]/nWidth);
     aspectRatios[i] = heights[i]/widths[i];
-    Res[i] =
-      Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
-      rho=rhos[i],
-      mu=mus[i],
-      v=vs[i],
-      D=crossSections[i]);
-    //zsStern[i] = (lengths[i]/sqrt(crossSections[i]))/max(0.001,Res[i]*Prs[i]);
     zsStern[i] = (sum(lengths)/sqrt(crossSections[i]))/max(0.001,Res[i]*Prs[i]);
-    Nus[i] = NusseltNumberMuzychka(
+    if rectangularDuct then
+      Res[i] =
+        Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
+          rho=rhos[i],
+          mu=mus[i],
+          v=vs[i],
+          D=crossSections[i]);
+      Nus[i] = NusseltNumberMuzychka(
               Re=Res[i],
               Pr=Prs[i],
               aspectRatio=aspectRatios[i],
@@ -50,7 +54,21 @@ equation
               UWT=UWT,
               local=local,
               gamma=0.1);
-    alphas[i] = (Nus[i]*lambdas[i])/sqrt(crossSections[i]);
+      alphas[i] = (Nus[i]*lambdas[i])/sqrt(crossSections[i]);
+    else
+      Res[i] =
+        Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
+          rho=rhos[i],
+          mu=mus[i],
+          v=vs[i],
+          D=2*heights[i]);
+      Nus[i] = NusseltNumberStephan(
+              Re=Res[i],
+              Pr=Prs[i],
+              length=lengths[i],
+              dimension=2*heights[i]);
+      alphas[i] = (Nus[i]*lambdas[i])/(2*heights[i]);
+    end if;
   end for;
 
   annotation (Documentation(info="<html>
@@ -61,7 +79,7 @@ equation
 <p><br><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
 </html>", revisions="<html>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation.</li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation.</li>
 </ul>
 </html>"));
 end PartialDuctHeatTransfer;
