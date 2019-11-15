@@ -20,9 +20,8 @@ model SourceIdealPowerIn
         rotation=0,
         origin={0,0})));
 
-  Sources.FixedBoundary sink(redeclare package Medium = Medium,
+  Sources.Boundary_pT   sink(redeclare package Medium = Medium,
     p=pReturn,
-    use_T=false,
     nPorts=1)
     "Ideal sink for return from the network" annotation (Placement(
         transformation(

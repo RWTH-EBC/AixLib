@@ -16,7 +16,7 @@ model SourcePower "Open loop supply source with prescribed power feed-in"
         rotation=0,
         origin={18,0})));
 
-  Sources.FixedBoundary sink(redeclare package Medium = Medium,
+  Sources.Boundary_pT   sink(redeclare package Medium = Medium,
     p=pReturn,
     nPorts=1)
     "Ideal sink for return from the network" annotation (Placement(

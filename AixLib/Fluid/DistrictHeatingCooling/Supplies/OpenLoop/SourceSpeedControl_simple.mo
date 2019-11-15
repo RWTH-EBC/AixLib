@@ -19,10 +19,9 @@ model SourceSpeedControl_simple
         rotation=0,
         origin={-24,40})));
 
-  AixLib.Fluid.Sources.FixedBoundary sink(
+  Sources.Boundary_pT                sink(
     redeclare package Medium = Medium,
     p=pReturn,
-    use_T=false,
     nPorts=1) "Ideal sink for return from the network" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
