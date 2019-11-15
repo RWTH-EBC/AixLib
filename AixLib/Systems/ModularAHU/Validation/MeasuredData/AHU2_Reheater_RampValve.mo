@@ -409,7 +409,7 @@ record AHU2_Reheater_RampValve
 <p>The heating register is supplied by a mixing circuit with a three-way-valve. </p>
 <p>During the experiment the three-way-valve is lowly openend.</p>
 <p>The experiment is performed with an air volume flow of 3000m^3/h and maximal pump frequency.</p>
-<p><br>The record contains the following data points (columns): </p>
+<p>The record contains the following data points (columns): </p>
 <p>[1: Timestep | 2: &apos;AHU2.Rh.SenTempReFE.T&apos; | 3: &apos;AHU2.Rh.SenTempFlFe.T&apos; | 4: &apos;AHU2.Rh.SenTempFlHeBel.T&apos; | 5: &apos;AHU2.Rh.SenTempReHeBel.T&apos; | 6: &apos;AHU2.Rh.SenPTHEn.T&apos; | 7: &apos;AHU2.Rh.SenPTHEx.T&apos; | 8: &apos;AHU2.Ac.SenVFSupA.VFout&apos; | 9: &apos;AHU2.Rh.SenBelVF.VF&apos; | 10: &apos;AHU2.Rh.SenMFM.VF&apos; | 11: &apos;AHU2.Rh.Valve3W.ValvePosAct | 12: &apos;AHU2.Rh.PumpHe.RevcAct&apos;]</p>
 </html>"));
 end AHU2_Reheater_RampValve;
