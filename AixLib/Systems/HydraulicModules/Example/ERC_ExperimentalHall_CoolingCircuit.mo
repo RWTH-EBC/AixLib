@@ -29,25 +29,28 @@ model ERC_ExperimentalHall_CoolingCircuit
 
   SimpleConsumer simpleConsumer(
     kA=2000,
+    T_fixed=303.15,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    T_amb=T_amb,
+    functionality="T_fixed",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-84,36},{-54,66}})));
   SimpleConsumer simpleConsumer1(
     kA=20000,
+    T_fixed=303.15,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    T_amb=T_amb,
+    functionality="T_fixed",
     T_start=293.15)
-    annotation (Placement(transformation(extent={{-12,34},{18,64}})));
+    annotation (Placement(transformation(extent={{-10,36},{20,66}})));
   SimpleConsumer simpleConsumer2(
+    T_fixed=303.15,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    T_amb=T_amb,
+    functionality="T_fixed",
     kA=10000,
     T_start=293.15)
-    annotation (Placement(transformation(extent={{60,34},{90,64}})));
+    annotation (Placement(transformation(extent={{60,36},{90,66}})));
   Controller.CtrMix ctrMix(
     Td=0,
     Ti=180,
@@ -87,7 +90,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     length=2)                            annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
-        origin={4,4})));
+        origin={6,4})));
   AixLib.Systems.HydraulicModules.ThrottlePump unmixedThrottle(
     redeclare AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm PumpInterface(pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per, energyDynamics=unmixedThrottle.energyDynamics)),
     redeclare package Medium = Medium,
@@ -139,16 +142,16 @@ equation
   connect(bou1.ports[1], hex.port_b2)
     annotation (Line(points={{-106,-76},{-106,-68}}, color={0,127,255}));
   connect(unmixed.port_b1, simpleConsumer1.port_a)
-    annotation (Line(points={{-11,29},{-11,38},{-12,38},{-12,49}},
+    annotation (Line(points={{-9,29},{-9,38},{-10,38},{-10,51}},
                                                  color={0,127,255}));
   connect(unmixed.port_a2, simpleConsumer1.port_b)
-    annotation (Line(points={{19,29},{19,38},{18,38},{18,49}},
+    annotation (Line(points={{21,29},{21,38},{20,38},{20,51}},
                                                color={0,127,255}));
   connect(unmixedThrottle.port_b1, simpleConsumer2.port_a)
-    annotation (Line(points={{59,29},{59,38},{60,38},{60,49}},
+    annotation (Line(points={{59,29},{59,38},{60,38},{60,51}},
                                                color={0,127,255}));
   connect(unmixedThrottle.port_a2, simpleConsumer2.port_b)
-    annotation (Line(points={{89,29},{89,38},{90,38},{90,49}},
+    annotation (Line(points={{89,29},{89,38},{90,38},{90,51}},
                                                color={0,127,255}));
   connect(simpleConsumer.port_a,admix.port_b1)
     annotation (Line(points={{-84,51},{-84,29},{-83,29}},
@@ -161,7 +164,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedSimple.hydraulicBus, unmixed.hydraulicBus) annotation (Line(
-      points={{-117.88,70},{-21,70},{-21,4}},
+      points={{-117.88,70},{-19,70},{-19,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedThrottle.hydraulicBus, unmixedThrottle.hydraulicBus) annotation (Line(
@@ -170,13 +173,14 @@ equation
       thickness=0.5));
   connect(admix.port_a1, hex.port_a2) annotation (Line(points={{-83,-21},{-83,-28},{-106,-28}},
                        color={0,127,255}));
-  connect(unmixed.port_a1, hex.port_a2) annotation (Line(points={{-11,-21},{-11,-28},{-106,-28}},
-                            color={0,127,255}));
-  connect(unmixedThrottle.port_a1, hex.port_a2) annotation (Line(points={{59,-21},{60,-21},{60,-28},{-106,-28}},
-                                         color={0,127,255}));
-  connect(unmixedThrottle.port_b2, hex.port_b2) annotation (Line(points={{89,-21},{89,-68},{-106,-68}},
-                                color={0,127,255}));
-  connect(unmixed.port_b2, hex.port_b2) annotation (Line(points={{19,-21},{19,-68},{-106,-68}},
+  connect(unmixed.port_a1, hex.port_a2) annotation (Line(points={{-9,-21},{-9,
+          -28},{-106,-28}}, color={0,127,255}));
+  connect(unmixedThrottle.port_a1, hex.port_a2) annotation (Line(points={{59,-21},
+          {60,-21},{60,-28},{-106,-28}}, color={0,127,255}));
+  connect(unmixedThrottle.port_b2, hex.port_b2) annotation (Line(points={{89,-21},
+          {89,-68},{-106,-68}}, color={0,127,255}));
+  connect(unmixed.port_b2, hex.port_b2) annotation (Line(points={{21,-21},{21,
+          -68},{-106,-68}},
                        color={0,127,255}));
   connect(admix.port_b2, hex.port_b2) annotation (Line(points={{-53,-21},{-53,-68},{-106,-68}},
                        color={0,127,255}));

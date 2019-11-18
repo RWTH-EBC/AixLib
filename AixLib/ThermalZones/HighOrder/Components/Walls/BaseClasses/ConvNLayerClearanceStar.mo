@@ -50,8 +50,12 @@ model ConvNLayerClearanceStar
   Utilities.Interfaces.RadPort
                             Star annotation(Placement(transformation(extent={{90,52},
             {110,72}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent={{54,28},
-            {74,48}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+    A=A,
+    eps=eps,
+    Therm(T(start=T0)),
+    Star(T(start=T0)))
+    annotation (Placement(transformation(extent={{54,28},{74,48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent={{-110,
             -10},{-90,10}}),                                                                                                        iconTransformation(extent={{-110,
             -10},{-90,10}})));

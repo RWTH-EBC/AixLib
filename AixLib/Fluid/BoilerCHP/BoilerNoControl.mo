@@ -7,9 +7,9 @@ model BoilerNoControl "Boiler model with physics only"
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group=
          "Boiler type"), choicesAllMatching=true);
-  parameter Modelica.SIunits.ThermalConductance G=0.01*Q_nom/50
+  parameter Modelica.SIunits.ThermalConductance G=0.003*Q_nom/50
     "Constant thermal conductance to environment(G=Q_loss/dT)";
-  parameter Modelica.SIunits.HeatCapacity C=0.5*Q_nom
+  parameter Modelica.SIunits.HeatCapacity C=1.5*Q_nom
     "Heat capacity of metal (J/K)";
   parameter Modelica.SIunits.Volume V=paramBoiler.volume "Volume";
 
@@ -28,9 +28,10 @@ model BoilerNoControl "Boiler model with physics only"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-30,-20})));
-  Modelica.Blocks.Math.Product QgasCalculation
+  Modelica.Blocks.Math.Product QgasCalculation "Calculate gas usage"
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0)
+    "Limits the rel power between 0 and 1"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y=Q_nom/
         max(etaLoadBased[:,2]*max(etaTempBased[:,2])))
@@ -64,7 +65,8 @@ model BoilerNoControl "Boiler model with physics only"
     final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Table with efficiency parameters"
     annotation (Placement(transformation(extent={{-40,50},{-19,71}})));
-  Modelica.Blocks.Math.Product QflowCalculation annotation (Placement(
+  Modelica.Blocks.Math.Product QflowCalculation
+    "Calculation of the produced heatflow"      annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -82,7 +84,9 @@ model BoilerNoControl "Boiler model with physics only"
     "Table matrix for part load based efficiency (e.g. [0,0.99; 0.5, 0.98; 1, 0,97])";
   parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99]
   "Table matrix for temperature based efficiency";
-  Modelica.Blocks.Math.Product eta annotation (Placement(transformation(
+  Modelica.Blocks.Math.Product etaCalculation
+    "calculates the efficiency of the boiler" annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={10,50})));
@@ -123,13 +127,15 @@ equation
           {110,40}}, color={0,0,127}));
   connect(port_b, port_b)
     annotation (Line(points={{100,0},{100,0}}, color={0,127,255}));
-  connect(efficiencyTableLoadDepending.y[1], eta.u1) annotation (Line(points={{-17.95,
-          60.5},{-10.975,60.5},{-10.975,56},{-2,56}}, color={0,0,127}));
-  connect(efficiencyTableLoadDepending1.y[1], eta.u2) annotation (Line(points={{
-          -17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,0,127}));
+  connect(efficiencyTableLoadDepending.y[1], etaCalculation.u1) annotation (
+      Line(points={{-17.95,60.5},{-10.975,60.5},{-10.975,56},{-2,56}}, color={0,
+          0,127}));
+  connect(efficiencyTableLoadDepending1.y[1], etaCalculation.u2) annotation (
+      Line(points={{-17.95,30.5},{-10.975,30.5},{-10.975,44},{-2,44}}, color={0,
+          0,127}));
   connect(senTCold.T, efficiencyTableLoadDepending1.u[1]) annotation (Line(
         points={{-70,-69},{-72,-69},{-72,30.5},{-42.1,30.5}}, color={0,0,127}));
-  connect(QflowCalculation.u1, eta.y)
+  connect(QflowCalculation.u1, etaCalculation.y)
     annotation (Line(points={{-54,14},{21,14},{21,50}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -185,6 +191,11 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>A boiler model consisting of physical components.The efficiency is based on the part load rate and the inflow water temperature.</p>
+<p>
+<br/>Assumptions for predefined parameter values (based on <i><a href=\"http://www.viessmann.com/web/netherlands/nl_tdis.nsf/39085ab6c8b4f206c1257195003fd054/8A84BA9E240BA23DC12575210055DB56/$file/5811_009-DE_Simplex-PS.pdf\">Vissmann data cheat</a></i>): 
+</p>
+<p>G: a heat loss of 0.3 % of nominal power at a temperature difference of 50 K to ambient is assumed.</p>
+<p>C: factor C/Q_nom is in range of 1.2 to 2 for boilers with nominal power between 460 kW and 80 kW (with c of 500J/kgK for steel). Thus, a value of 1.5 is used as default.</p>
 </html>", revisions="<html>
 <ul>
 <li><i>September 19, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
