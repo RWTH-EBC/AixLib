@@ -6,10 +6,8 @@ model Machines_simple
     "surface area of radiative heat source";
   parameter Real Emissivity_Machines = 0.98;
 
-  Utilities.HeatTransfer.HeatToStar
-                                  RadiationConvertor(
-                              eps=Emissivity_Machines, A=max(1e-4,
-        SurfaceArea_Machines))
+  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Machines, A=max(
+        1e-4, SurfaceArea_Machines))
     annotation (Placement(transformation(extent={{52,-70},{72,-50}})));
 equation
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(

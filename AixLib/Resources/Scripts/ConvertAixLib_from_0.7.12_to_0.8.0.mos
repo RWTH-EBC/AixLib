@@ -1,0 +1,67 @@
+// Conversion script for AixLib library
+//  from: Version 0.7.12
+//  to:   Version 0.8.0
+clear
+
+convertClear();
+
+convertClass("AixLib.Fluid.Sources.FixedBoundary",
+             "AixLib.Fluid.Sources.Boundary_pT");
+
+//refactoring of alpha to hCon or hRad
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaWin",
+    "hConWin");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaExt",
+    "hConExt");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaExtWallConst",
+    "hConExtWall_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaWinConst",
+    "hConWin_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.ThreeElements",
+    "alphaFloor",
+    "hConFloor");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.ThreeElements",
+    "alphaFloorConst",
+    "hConFloor_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.TwoElements",
+    "alphaInt",
+    "hConInt");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.TwoElements",
+    "alphaIntWall",
+    "hConIntWall");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.FourElements",
+    "alphaRoof",
+    "hConRoof");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.FourElements",
+    "alphaRoofConst",
+    "hConRoof_const");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.RC.OneElement",
+    "alphaRad",
+    "hRad");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.BaseClasses.PartialVDI6007",
+    "alphaWallOut",
+    "hConWallOut");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.BaseClasses.PartialVDI6007",
+    "alphaRad",
+    "hRad");
+convertElement(
+    "AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow",
+    "alphaWinOut",
+    "hConWinOut");
