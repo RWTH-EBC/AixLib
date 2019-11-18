@@ -1361,7 +1361,7 @@ record AHU2_Cooler_RampValve
 <p>This record contains the measured data of an step response. The investigated system is a cooler of an air handling unit (air handling unit 2 of the E.ON ERC test hall; Data:&apos;ZUGABE_20170808_121203_measurement&apos;).</p>
 <p>The heating register is supplied by a mixing circuit with a three-way-valve. </p>
 <p>During the experiment the three-way-valve is slowly openend.</p>
-<p><br>The record contains the following data points for each experiment (columns): </p>
+<p>The record contains the following data points for each experiment (columns): </p>
 <p>[ 1: Timestep | 2: &apos;AHU2.Co.SenTempReFE.T&apos; | 3: &apos;AHU2.Co.SenTempFlFe.T&apos; | 4: &apos;AHU2.Co.SenTempFlHeBel.T&apos; | 5: &apos;AHU2.Co.SenTempReHeBel.T&apos; | 6: &apos;AHU2.Co.SenPTHEn.T&apos; | 7: &apos;AHU2.Co.SenPTHEx.T&apos; | 8: &apos;AHU2.Ac.SenVFSupA.VFout&apos; | 9: &apos;AHU2.Co.SenBelVFWa.VF&apos; | 10: &apos;AHU2.Co.SenMFM.VF&apos; | 11: &apos;AHU2.Co.TempF.T33&apos; | 12: &apos;AHU2.Co.TempF.T12&apos; | 13: &apos;AHU2.Co.Valve3W.ValvePosAct&apos; | 14: &apos;AHU2.Co.PumpComp.RevcAct&apos;]</p>
 </html>"));
 

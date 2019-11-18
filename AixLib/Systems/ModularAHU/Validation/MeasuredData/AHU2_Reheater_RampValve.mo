@@ -397,7 +397,7 @@ record AHU2_Reheater_RampValve
 <p>This record contains the measured data of a ramp of the three way valve. The investigated system is a reheater of an air handling unit (air handling unit 2 of the E.ON ERC test hall; &apos;ZUGABE_20170830_124909_measurement&apos; ).</p>
 <p>The heating register is supplied by a mixing circuit with a three-way-valve. </p>
 <p>During the experiment the three-way-valve is slowly opened.</p>
-<p><br>The record contains the following data points for each experiment (columns): </p>
+<p>The record contains the following data points for each experiment (columns): </p>
 <p>[1: Timestep | 2: &apos;AHU2.Rh.SenTempReFE.T&apos; | 3: &apos;AHU2.Rh.SenTempFlFe.T&apos; | 4: &apos;AHU2.Rh.SenTempFlHeBel.T&apos; | 5: &apos;AHU2.Rh.SenTempReHeBel.T&apos; | 6: &apos;AHU2.Rh.SenPTHEn.T&apos; | 7: &apos;AHU2.Rh.SenPTHEx.T&apos; | 8: &apos;AHU2.Ac.SenVFSupA.VFout&apos; | 9: &apos;AHU2.Rh.SenBelVF.VF&apos; | 10: &apos;AHU2.Rh.SenMFM.VF&apos; | 11: &apos;AHU2.Rh.Valve3W.ValvePosAct | 12: &apos;AHU2.Rh.Pump.RevcAct&apos;]</p>
 </html>"));
 
