@@ -1,75 +1,121 @@
 within AixLib.Systems.ModularAHU.Example;
-model GenericAHU "Example of generic ahu model"
+model GenericAHU_AHU2
+  "GenericAHU model with parameters of air-handling unit 2 of the E.ON ERC test hall"
   extends Modelica.Icons.Example;
   AixLib.Systems.ModularAHU.GenericAHU genericAHU(
     redeclare package Medium1 = Media.Air,
     redeclare package Medium2 = Media.Water,
     T_amb=293.15,
-    m1_flow_nominal=3000/3600,
+    m1_flow_nominal=1,
     m2_flow_nominal=0.5,
-    T_start=293.15,
     usePreheater=true,
     useHumidifierRet=true,
     useHumidifier=true,
-    perheater(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.32,
-        length=1,
-        Kv=6.3,
-        redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
-        dynamicHX(
-        dp1_nominal=50,
-        dp2_nominal=1000,
-        dT_nom=30,
-        Q_nom=30000)),
-    cooler(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.32,
-        length=1,
-        Kv=6.3,
-        redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
-        dynamicHX(
-        dp1_nominal=100,
-        dp2_nominal=1000,
-        dT_nom=30,
-        Q_nom=50000)),
-    heater(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
-        dIns=0.01,
-        kIns=0.028,
-        d=0.32,
-        length=1,
-        Kv=6.3,
-        redeclare
-          AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-          PumpInterface(pump(redeclare
-              AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
-        dynamicHX(
-        dp1_nominal=100,
-        dp2_nominal=5000,
-        dT_nom=30,
-        Q_nom=30000)),
+    perheater(
+    m2_flow_nominal=2.866/3600*1000,
+    tau=150,
+    T_amb=293.15,
+    redeclare HydraulicModules.Admix partialHydraulicModule(
+      tau=5,
+      dIns=0.01,
+      kIns=0.028,
+      d=0.025,
+      length=1,
+      Kv=10,
+      valve(use_inputFilter=false),
+      pipe1(length=1.53),
+      pipe2(length=0.54),
+      pipe3(length=1.06),
+      pipe4(dh=0.032, length=0.48),
+      pipe5(length=1.42),
+      pipe6(length=0.52),
+      redeclare
+        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+        PumpInterface(pumpParam=
+            AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9(),
+          calculatePower=true)),
     dynamicHX(
-      dp1_nominal=100,
-      dp2_nominal=100,
-      dT_nom=10,
-      Q_nom=30000),
+      dp1_nominal=66,
+      dp2_nominal=6000 + 8000,
+      nNodes=2,
+      tau1=4,
+      tau2=15,
+      tau_C=15,
+      dT_nom=29.53,
+      Q_nom=57700)),
+    cooler(m2_flow_nominal=8832/3600,
+    T_start=296.15,
+    tau=60 + 30,
+    T_amb=293.15,
+    redeclare HydraulicModules.Admix partialHydraulicModule(
+      tau=5,
+      dIns=0.01,
+      kIns=0.028,
+      d=0.032,
+      length=1,
+      Kv=10,
+      valve(use_inputFilter=false),
+      pipe1(dh=0.05, length=4.5),
+      pipe2(length=2.15),
+      pipe3(dh=0.032, length=1.7),
+      pipe4(dh=0.032, length=0.5),
+      pipe5(length=2.95),
+      pipe6(dh=0.025, length=0.8),
+      redeclare
+        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+        PumpInterface(pumpParam=
+            AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN32(),
+          calculatePower=true)),
+    dynamicHX(
+      dp1_nominal(displayUnit="bar") = 138,
+      dp2_nominal(displayUnit="bar") = 70600,
+      nNodes=2,
+      tau1=2,
+      tau2=8,
+      dT_nom=13.31,
+      Q_nom=53400)),
+    heater(
+    m2_flow_nominal=1106/3600,
+    tau=60 + 20,
+    T_amb=293.15,
+    redeclare HydraulicModules.Admix partialHydraulicModule(
+      tau=5,
+      dIns=0.01,
+      kIns=0.028,
+      d=0.025,
+      length=1,
+      Kv=6.3,
+      valve(use_inputFilter=false),
+      pipe1(length=3),
+      pipe2(length=0.63),
+      pipe3(dh=0.032, length=1.85),
+      pipe4(dh=0.032, length=0.4),
+      pipe5(length=2.8),
+      pipe6(dh=0.015, length=0.82),
+      redeclare
+        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
+        PumpInterface(pumpParam=
+            AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V5(),
+          calculatePower=true)),
+    dynamicHX(
+      dp1_nominal=33,
+      dp2_nominal=4500 + 50500,
+      nNodes=1,
+      tau1=3,
+      tau2=15,
+      dT_nom=20.8,
+      Q_nom=22300)),
+    dynamicHX(
+      dp1_nominal=220,
+      dp2_nominal=220,
+      dT_nom=1,
+      Q_nom=1100),
     humidifier(
-      dp_nominal=20,
+      dp_nominal=100,
       mWat_flow_nominal=1,
       Twater_in=288.15),
     humidifierRet(
-      dp_nominal=20,
+      dp_nominal=100,
       mWat_flow_nominal=0.5,
       Twater_in=288.15))
     annotation (Placement(transformation(extent={{-60,-14},{60,52}})));
@@ -91,7 +137,7 @@ model GenericAHU "Example of generic ahu model"
         rotation=180,
         origin={-80,40})));
   Fluid.Sources.Boundary_pT boundaryReturnAir(
-    T=294.15,
+    T=293.15,
     nPorts=1,
     redeclare package Medium = Media.Air) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
@@ -138,8 +184,8 @@ model GenericAHU "Example of generic ahu model"
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={48,-40})));
-  Controller.CtrAHUBasic ctrAHUBasic(TFlowSet=293.15)
-    annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
+  BaseClasses.GenericAHUBus genericAHUBus
+    annotation (Placement(transformation(extent={{-10,74},{10,94}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
     annotation (Line(points={{70,40},{60.5455,40}}, color={0,127,255}));
@@ -162,13 +208,17 @@ equation
           127,255}));
   connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{48,-32},
           {48,-26},{32.1818,-26},{32.1818,-14}},      color={0,127,255}));
-  connect(ctrAHUBasic.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
-      points={{-20,72.1},{0,72.1},{0,52.3},{-6.66134e-15,52.3}},
+  connect(genericAHU.genericAHUBus, genericAHUBus) annotation (Line(
+      points={{0,52.3},{0,84}},
       color={255,204,51},
-      thickness=0.5));
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(StopTime=3600), Documentation(revisions="<html>
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"));
-end GenericAHU;
+end GenericAHU_AHU2;

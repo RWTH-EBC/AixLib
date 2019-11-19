@@ -46,7 +46,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
   BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
-          extent={{74,-26},{128,26}}), iconTransformation(extent={{68,-14},{96,
+          extent={{74,-26},{128,26}}), iconTransformation(extent={{88,-14},{116,
             14}})));
 equation
 
@@ -95,12 +95,12 @@ equation
           fillPattern=FillPattern.Solid,
           textString="HCMI"),
           Rectangle(
-          extent={{-90,80},{70,-80}},
+          extent={{-100,100},{100,-100}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Line(
-          points={{10,80},{70,0},{30,-80}},
+          points={{20,100},{100,0},{20,-100}},
           color={95,95,95},
           thickness=0.5),
           Text(
