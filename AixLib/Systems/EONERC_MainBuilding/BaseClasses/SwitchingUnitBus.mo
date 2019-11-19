@@ -2,7 +2,7 @@ within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
 expandable connector SwitchingUnitBus "Data bus for switching unit system"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  HydraulicModules.BaseClasses.PumpBus pumpBus;
+  AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.PumpBus pumpBus;
   Real Y2valSet(min=0, max=1) "Valve opening 0..1";
   Real Y2valSetAct(min=0, max=1) "Actual valve opening 0..1";
   Real Y3valSet(min=0, max=1) "Valve opening 0..1";
