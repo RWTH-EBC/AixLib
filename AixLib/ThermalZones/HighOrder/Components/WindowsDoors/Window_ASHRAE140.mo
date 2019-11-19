@@ -47,13 +47,12 @@ model Window_ASHRAE140
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar
-                                  twoStar_RadEx(
-Therm(T(start=T0)),
-Star(T(start=T0)),
-eps=WindowType.Emissivity,
-A=windowarea)              annotation (Placement(transformation(extent={{36,22},
-        {56,42}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+    Therm(T(start=T0)),
+    Star(T(start=T0)),
+    eps=WindowType.Emissivity,
+    A=windowarea)
+    annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     n=1,
     lambda={1.06},

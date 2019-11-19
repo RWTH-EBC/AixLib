@@ -30,7 +30,9 @@ model TestCase12 "VDI 6007 Test Case 12 model"
     extWallRC(thermCapExt(each T(fixed=true))),
     intWallRC(thermCapInt(each T(fixed=true))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=295.15) "Thermal zone" annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    T_start=295.15)
+    "Thermal zone"
+    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem(port(T(
     start=300)))
     "Outdoor air temperature"
@@ -74,8 +76,13 @@ model TestCase12 "VDI 6007 Test Case 12 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
     "Convective heat flow machines"
     annotation (Placement(transformation(extent={{48,-66},{68,-46}})));
-  Modelica.Blocks.Sources.Constant hConWall(k=25*10.5) "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
+  Modelica.Blocks.Sources.Constant hConWall(k=25*10.5)
+    "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(
+    transformation(
+    extent={{-4,-4},{4,4}},
+    rotation=90,
+    origin={30,-18})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     columns={2},
@@ -187,7 +194,8 @@ equation
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
   connect(thermalZoneTwoElements.extWall, theConWall.solid)
     annotation (Line(points={{44,12},{40,12},{40,1},{36,1}}, color={191,0,0}));
-  connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{31,4.4},{31,-4}}, color={0,0,127}));
+  connect(hConWall.y, theConWall.Gc)
+    annotation (Line(points={{30,-13.6},{31,-13.6},{31,-4}}, color={0,0,127}));
   connect(outdoorTemp.y[1], preTem.T)
     annotation (Line(points={{-11.2,0},{6.8,0}}, color={0,0,127}));
   connect(perRad.port, thermalZoneTwoElements.intGainsRad)
@@ -272,6 +280,10 @@ equation
   <p>This test validates infiltration and ventilation.</p>
   </html>", revisions="<html>
   <ul>
+  <li>
+  July 11, 2019, by Katharina Brinkmann:<br/>
+  Renamed <code>alphaWall</code> to <code>hConWall</code>
+  </li>
   <li>
   July 7, 2016, by Moritz Lauster:<br/>
   Added automatic check against validation thresholds.

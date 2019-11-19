@@ -28,7 +28,7 @@ model PumpHydraulicResistance_closedLoop
     dp_nominal=200)
     annotation (Placement(transformation(extent={{-12,-20},{-32,0}})));
   Modelica.Blocks.Sources.BooleanPulse NightSignal(period = 86400) annotation(Placement(transformation(extent = {{-60, 60}, {-40, 80}})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-100, 20}, {-80, 40}})));
 equation
