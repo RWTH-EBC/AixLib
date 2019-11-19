@@ -26,10 +26,8 @@ model ExpansionValvePressureDifference
 
   // Define components
   //
-  AixLib.Fluid.Sources.FixedBoundary source(
+  Sources.Boundary_pT                source(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     nPorts=1,
     p=pInl,
     T=TInl)
@@ -56,7 +54,7 @@ model ExpansionValvePressureDifference
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-  AixLib.Fluid.Sources.FixedBoundary sink(
+  Sources.Boundary_pT                sink(
     redeclare package Medium = Medium,
     p=pOut,
     T=TOut,
