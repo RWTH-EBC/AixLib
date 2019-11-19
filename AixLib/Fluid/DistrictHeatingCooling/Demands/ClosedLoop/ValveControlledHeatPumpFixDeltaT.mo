@@ -15,10 +15,6 @@ model ValveControlledHeatPumpFixDeltaT
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(
     min=0) "Nominal heat flow rate added to medium (Q_flow_nominal > 0)";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
-    displayUnit="K")
-    "Design temperature difference for the substation's heat exchanger";
-
   parameter Modelica.SIunits.TemperatureDifference dTBuilding(
     displayUnit="K")
     "Design temperature difference for the building's heating system";
@@ -28,6 +24,10 @@ model ValveControlledHeatPumpFixDeltaT
 
   parameter Modelica.SIunits.Temperature TReturn
     "Fixed return temperature";
+
+  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+    displayUnit="K")
+    "Design temperature difference for the heat pump on its district heating side";
 
   parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
@@ -66,7 +66,7 @@ public
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-  Modelica.Blocks.Sources.Constant deltaT(k=deltaT)
+  Modelica.Blocks.Sources.Constant delT(k=dTDesign)
     "Temperature difference of substation" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -169,12 +169,12 @@ equation
           {36,11},{70,11}}, color={0,0,127}));
   connect(pControl.y, valve.y)
     annotation (Line(points={{-7,42},{-38,42},{-38,12}}, color={0,0,127}));
-  connect(add.u1, deltaT.y) annotation (Line(points={{66,38},{72,38},{72,50},{
-          79,50}}, color={0,0,127}));
   connect(add.y, pControl.u_s) annotation (Line(points={{43,32},{30,32},{30,42},
           {16,42}}, color={0,0,127}));
   connect(senT_supply.T, add.u2) annotation (Line(points={{-70,11},{-70,24},{66,
           24},{66,26}}, color={0,0,127}));
+  connect(delT.y, add.u1) annotation (Line(points={{79,50},{72,50},{72,38},{66,
+          38}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
