@@ -178,12 +178,12 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={100,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom1(redeclare package
-      Medium = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
+        Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-230,-30},{-210,-10}}),
         iconTransformation(extent={{-230,-50},{-210,-30}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop1(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare package Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-230,10},{-210,30}}),
@@ -296,11 +296,10 @@ equation
         points={{160,-92},{202,-92},{202,12},{180,12}}, color={0,127,255}));
   connect(throttle_freecool.port_b2, throttle_CS.port_b2) annotation (Line(
         points={{160,-68},{188,-68},{188,-12},{180,-12}}, color={0,127,255}));
-  connect(heatStorage.fluidportBottom2, fluidportBottom1) annotation (Line(
-        points={{-191.45,-16.15},{-192,-16.15},{-192,-20},{-220,-20}}, color=
-          {0,127,255}));
-  connect(heatStorage.fluidportTop2, fluidportTop1) annotation (Line(points={
-          {-191.75,14.15},{-191.75,20},{-220,20}}, color={0,127,255}));
+  connect(heatStorage.fluidportBottom2, port_a2) annotation (Line(points={{-191.45,
+          -16.15},{-192,-16.15},{-192,-20},{-220,-20}}, color={0,127,255}));
+  connect(heatStorage.fluidportTop2, port_b2) annotation (Line(points={{-191.75,
+          14.15},{-191.75,20},{-220,20}}, color={0,127,255}));
   connect(throttle_CS.port_b2, port_b1) annotation (Line(points={{180,-12},{
           220,-12},{220,-20}}, color={0,127,255}));
   connect(throttle_CS.port_a1, port_a1) annotation (Line(points={{180,12},{

@@ -12,15 +12,6 @@ model HighTemperatureSystem
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
   parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
-  Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(
-    redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
-    m_flow_nominal=m_flow_nominal,
-    pumpMaxVolumeFlow=0.01,
-    DFlange=0.1,
-    T_top=T_start,
-    T_bottom=T_start)
-    annotation (Placement(transformation(extent={{76,28},{98,54}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium) "Top-flange secondary circuit" annotation (Placement(
         transformation(extent={{110,50},{130,70}}), iconTransformation(extent={{
@@ -115,6 +106,20 @@ model HighTemperatureSystem
         T_amb)
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
 
+  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    dh=0.2,
+    length=0.5,
+    m_flow_nominal=m_flow_nominal,
+    dIns=0.02,
+    kIns=0.028,
+    T_start_in=T_start,
+    T_start_out=T_start,
+    nPorts=3) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={90,42})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -133,18 +138,6 @@ protected
     final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{112,14},{100,26}})));
 equation
-  connect(admix1.port_a1, hydraulicSeparator.port_b_primary)
-    annotation (Line(points={{72,20},{72,34.5},{76,34.5}}, color={0,127,255}));
-  connect(admix2.port_a1, hydraulicSeparator.port_b_primary)
-    annotation (Line(points={{-8,20},{-8,34.5},{76,34.5}}, color={0,127,255}));
-  connect(admix1.port_b2, hydraulicSeparator.port_a_primary)
-    annotation (Line(points={{48,20},{48,47.5},{76,47.5}}, color={0,127,255}));
-  connect(admix2.port_b2, hydraulicSeparator.port_a_primary) annotation (Line(
-        points={{-32,20},{-32,47.5},{76,47.5}}, color={0,127,255}));
-  connect(throttlePump.port_a1, hydraulicSeparator.port_b_primary) annotation (
-      Line(points={{-88,20},{-88,34.5},{76,34.5}}, color={0,127,255}));
-  connect(throttlePump.port_b2, hydraulicSeparator.port_a_primary) annotation (
-      Line(points={{-112,20},{-112,47.5},{76,47.5}}, color={0,127,255}));
   connect(boiler1.port_a, admix1.port_b1)
     annotation (Line(points={{72,-60},{72,-20}}, color={0,127,255}));
   connect(boiler1.port_b, admix1.port_a2)
@@ -262,10 +255,24 @@ equation
     annotation (Line(points={{120,60},{112,60}}, color={0,127,255}));
   connect(port_a, senT_b.port_a)
     annotation (Line(points={{120,20},{112,20}}, color={0,127,255}));
-  connect(senT_b.port_b, hydraulicSeparator.port_a_secondary) annotation (Line(
-        points={{100,20},{100,34.5},{98,34.5}}, color={0,127,255}));
-  connect(senT_a.port_a, hydraulicSeparator.port_b_secondary) annotation (Line(
-        points={{100,60},{100,47.5},{98,47.5}}, color={0,127,255}));
+  connect(plugFlowPipe.ports_b[1], senT_a.port_a) annotation (Line(points={{
+          92.6667,52},{92,52},{92,60},{100,60}}, color={0,127,255}));
+  connect(plugFlowPipe.port_a, senT_b.port_b)
+    annotation (Line(points={{90,32},{90,20},{100,20}}, color={0,127,255}));
+  connect(admix1.port_a1, plugFlowPipe.port_a)
+    annotation (Line(points={{72,20},{72,32},{90,32}}, color={0,127,255}));
+  connect(admix1.port_b2, senT_a.port_a) annotation (Line(points={{48,20},{48,
+          52},{92,52},{92,60},{100,60}}, color={0,127,255}));
+  connect(admix2.port_a1, plugFlowPipe.port_a) annotation (Line(points={{-8,20},
+          {-6,20},{-6,32},{90,32}}, color={0,127,255}));
+  connect(admix2.port_b2, plugFlowPipe.ports_b[2]) annotation (Line(points={{
+          -32,20},{-34,20},{-34,52},{90,52}}, color={0,127,255}));
+  connect(throttlePump.port_a1, plugFlowPipe.port_a) annotation (Line(points={{
+          -88,20},{-90,20},{-90,32},{90,32}}, color={0,127,255}));
+  connect(throttlePump.port_b2, plugFlowPipe.ports_b[3]) annotation (Line(
+        points={{-112,20},{-114,20},{-114,52},{87.3333,52}}, color={0,127,255}));
+  connect(plugFlowPipe.heatPort, fixedTemperature.port) annotation (Line(points
+        ={{80,42},{32,42},{32,-90},{20,-90}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(

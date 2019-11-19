@@ -63,10 +63,10 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
   BaseClasses.DataHPSystem dataHPSystem
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 equation
-  connect(boundary5.ports[1], heatpumpSystem.fluidportBottom1) annotation (Line(
-        points={{-90,-20},{-80,-20},{-80,-9.77778}},           color={0,127,255}));
-  connect(boundary.ports[1], heatpumpSystem.fluidportTop1) annotation (Line(
-        points={{-90,20},{-80,20},{-80,5.33333}},          color={0,127,255}));
+  connect(boundary5.ports[1], heatpumpSystem.port_a2) annotation (Line(points={
+          {-90,-20},{-80,-20},{-80,-9.77778}}, color={0,127,255}));
+  connect(boundary.ports[1], heatpumpSystem.port_b2) annotation (Line(points={{
+          -90,20},{-80,20},{-80,5.33333}}, color={0,127,255}));
   connect(toKelvin.Kelvin, boundary5.T_in)
     annotation (Line(points={{-126,-20.6},{-116,-20.6},{-116,-16},{-112,-16}},
                                                        color={0,0,127}));

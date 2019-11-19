@@ -7,11 +7,10 @@ model Machines_Avar
   parameter Real Emissivity_Machines = 0.98;
   parameter Modelica.SIunits.RadiantEnergyFluenceRate specificPower=10
     "radiative power per m2";
-  Utilities.HeatTransfer.HeatToStar_Avar         RadiationConvertor(eps=
-        Emissivity_Machines)
-    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
+  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Machines, use_A_in=
+        true) annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
-  RadiationConvertor.A = max(1e-4,Schedule / specificPower);
+  RadiationConvertor.A_in = max(1e-4,Schedule / specificPower);
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
