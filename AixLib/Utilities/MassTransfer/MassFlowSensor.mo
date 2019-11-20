@@ -12,7 +12,7 @@ model MassFlowSensor "Mass flow rate sensor"
   MassPort port_b
     annotation (Placement(transformation(extent={{86,-14},{114,14}})));
 equation
-  port_a.X = port_b.X;
+  port_a.p = port_b.p;
   port_a.m_flow + port_b.m_flow = 0;
   m_flow = port_a.m_flow;
   annotation (
@@ -36,12 +36,16 @@ equation
           lineColor={0,0,255})}),
     Documentation(info="<html>
 <p>
-This model is capable of monitoring the heat flow rate flowing through
-this component. The sensed value of heat flow rate is the amount that
-passes through this sensor while keeping the temperature drop across the
-sensor zero.  This is an ideal model so it does not absorb any energy
-and it has no direct effect on the thermal response of a system it is included in.
-The output signal is positive, if the heat flows from port_a to port_b.
+This model is capable of monitoring the mass flow rate flowing through
+this component. The sensed value of mass flow rate is the amount that
+passes through this sensor while keeping the partial pressure drop across the
+sensor zero.  This is an ideal model so it does not absorb any mass
+and it has no direct effect on the mass transfer response of a system it is included in.
+The output signal is positive, if the mass flows from port_a to port_b.
 </p>
+</html>", revisions="<html>
+<ul>
+<li>November 20, 2019, by Martin Kremer:<br/>First Implementation.</li>
+</ul>
 </html>"));
 end MassFlowSensor;

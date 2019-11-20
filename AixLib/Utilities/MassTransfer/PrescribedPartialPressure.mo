@@ -1,13 +1,13 @@
 within AixLib.Utilities.MassTransfer;
-model PrescribedMassFraction
-  "Variable mass fraction boundary condition in kg/kg"
+model PrescribedPartialPressure
+  "Variable partial pressure boundary condition in Pa"
 
   MassPort port
     annotation (Placement(transformation(extent={{84,-14},{114,16}})));
-  Modelica.Blocks.Interfaces.RealInput X(unit="kg/kg") annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput p(unit="Pa") annotation (Placement(transformation(
           extent={{-140,-20},{-100,20}})));
 equation
-  port.X = X;
+  port.p = p;
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
@@ -35,12 +35,16 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p>
-This model represents a variable temperature boundary condition.
-The temperature in [K] is given as input signal <strong>T</strong>
+This model represents a variable partial pressure boundary condition.
+The partial pressure in [Pa] is given as input signal <strong>p</strong>
 to the model. The effect is that an instance of this model acts as
-an infinite reservoir able to absorb or generate as much energy
-as required to keep the temperature at the specified value.
+an infinite reservoir able to absorb or generate as much mass
+as required to keep the partial pressure at the specified value.
 </p>
+</html>", revisions="<html>
+<ul>
+<li>November 20, 2019, by Martin Kremer:<br/>First Implementation.</li>
+</ul>
 </html>"),
        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
@@ -62,4 +66,4 @@ as required to keep the temperature at the specified value.
           lineColor={0,140,72},
           fillColor={0,140,72},
           fillPattern=FillPattern.Solid)}));
-end PrescribedMassFraction;
+end PrescribedPartialPressure;
