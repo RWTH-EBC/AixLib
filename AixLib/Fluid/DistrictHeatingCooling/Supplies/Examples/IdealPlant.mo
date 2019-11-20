@@ -59,9 +59,6 @@ model IdealPlant
     redeclare package Medium = Medium,
     nPorts=1)
     annotation (Placement(transformation(extent={{-40,-54},{-60,-34}})));
-  Sources.Boundary_pT bou(redeclare package Medium = Medium,
-                          nPorts=2)
-    annotation (Placement(transformation(extent={{-158,6},{-138,26}})));
   Modelica.Blocks.Sources.Constant T_setHotLine(k=16 + 273.15)
     annotation (Placement(transformation(extent={{-126,58},{-106,78}})));
   Modelica.Blocks.Sources.Constant T_setColdLine(k=22 + 273.15)
@@ -117,10 +114,8 @@ equation
     annotation (Line(points={{-40,-44},{0,-44}}, color={0,127,255}));
   connect(substation1.port_b, plugFlowPipe3.port_a) annotation (Line(points={{
           -15.4118,-26},{-14,-26},{-14,-44},{-40,-44}}, color={0,127,255}));
-  connect(bou.ports[1], plugFlowPipe3.ports_b[1]) annotation (Line(points={{
-          -138,18},{-136,18},{-136,-42},{-60,-42},{-60,-44}}, color={0,127,255}));
-  connect(bou.ports[2], idealPlant.port_a) annotation (Line(points={{-138,14},{
-          -116,14},{-116,14},{-92,14}}, color={0,127,255}));
+  connect(idealPlant.port_a, plugFlowPipe3.ports_b[1]) annotation (Line(points=
+          {{-92,14},{-126,14},{-126,-44},{-60,-44}}, color={0,127,255}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
