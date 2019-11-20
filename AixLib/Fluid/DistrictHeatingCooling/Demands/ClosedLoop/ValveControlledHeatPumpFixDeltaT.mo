@@ -128,6 +128,9 @@ public
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=0.02,
+    Ti=5,
+    Td=0.1,
     yMax=1,
     yMin=0.1)         "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
