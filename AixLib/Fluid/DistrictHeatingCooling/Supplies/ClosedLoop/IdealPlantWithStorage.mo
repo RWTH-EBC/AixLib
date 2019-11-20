@@ -67,6 +67,8 @@ model IdealPlantWithStorage
     annotation (Placement(transformation(extent={{-44,28},{-56,40}})));
   Modelica.Blocks.Math.Max max
     annotation (Placement(transformation(extent={{20,28},{32,40}})));
+  Sources.Boundary_pT bou(nPorts=1, redeclare package Medium = Medium)
+    annotation (Placement(transformation(extent={{-90,-50},{-70,-30}})));
 equation
   connect(port_b, senTem1.port_a)
     annotation (Line(points={{100,0},{90,0}}, color={0,127,255}));
@@ -96,6 +98,8 @@ equation
           -34,37.6},{-42.8,37.6}}, color={0,0,127}));
   connect(T_heatingSet, max.u1) annotation (Line(points={{-128,80},{12,80},{12,
           37.6},{18.8,37.6}}, color={0,0,127}));
+  connect(bou.ports[1], cooler.port_a) annotation (Line(points={{-70,-40},{-58,
+          -40},{-58,0},{-66,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}),                                  graphics={
         Rectangle(
