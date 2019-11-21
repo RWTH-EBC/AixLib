@@ -28,6 +28,7 @@ model StaticPipe "Simple example of StaticPipe"
     initDelay=true,
     m_flow_start=1,
     rhoPip=8000,
+    use_zeta=true,
     T_start_in=323.15,
     T_start_out=323.15) "Pipe"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
