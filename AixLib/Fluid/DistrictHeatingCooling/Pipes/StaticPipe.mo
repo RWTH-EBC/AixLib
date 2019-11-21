@@ -245,7 +245,10 @@ equation
 d = %dh")}),
     Documentation(revisions="<html>
 <ul>
-<li>September 25, 2019, by Nils Neuland:<br>Revised variable names and documentation to follow guidelines. Corrected malformed hyperlinks.</li>
+<li>
+September 25, 2019, by Nils Neuland:<br/>
+Revised variable names and documentation to follow guidelines. Corrected malformed hyperlinks.
+</li>
 </ul>
 </html>", info="<html>
 <p>Pipe with heat loss using the time delay based heat losses for the transport delay of the fluid. This model determines the pressure drop either through a static factor or using the sum of zeta values.</p>
