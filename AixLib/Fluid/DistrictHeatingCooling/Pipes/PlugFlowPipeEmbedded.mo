@@ -270,6 +270,7 @@ cooling systems.<br/>
 10.1016/j.enconman.2017.08.072</a>.</p>
 </html>", revisions="<html>
 <ul>
+<li>November 21, 2019, by Nils Neuland:<br>Model is now using PlugFlowPipe model from DistrictHeatingCooling </li>
 <li>July, 2018 by Tobias Blacha:<br/>
 First implementation.
 </li>

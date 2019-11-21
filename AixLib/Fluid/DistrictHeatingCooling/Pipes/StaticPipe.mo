@@ -173,7 +173,7 @@ public
     homotopyInitialization=homotopyInitialization,
     linearized=linearized,
     m_flow_start=m_flow_start) if use_zeta
-    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+    annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
 equation
   //calculation of the flow velocity of water in the pipes
  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
@@ -191,10 +191,11 @@ equation
   //Connect hydraulicResistance
   if use_zeta then
   connect(hydraulicResistance.port_b, staticCore.port_a)
-    annotation (Line(points={{-40,0},{-10,0}}, color={0,127,255}));
+    annotation (Line(points={{-40,20},{-20,20},{-20,0},{-10,0}},
+                                               color={0,127,255}, pattern=LinePattern.Dash));
   connect(hydraulicResistance.port_a, port_a)
-   annotation (Line(points={{-60,0},{
-          -80,0},{-80,0},{-100,0}}, color={0,127,255}));
+   annotation (Line(points={{-60,20},{-80,20},{-80,0},{-100,0}},
+                                    color={0,127,255}, pattern=LinePattern.Dash));
   else
   connect(port_a, staticCore.port_a)
    annotation (Line(points={{-100,0},{-80,0},{
