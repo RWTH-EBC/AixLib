@@ -9,14 +9,14 @@ model IdealPlantRevHP
      Modelica.SIunits.Temperature T_HpIn "Set outlet temperature of heat pump condenser";
      Modelica.SIunits.Temperature T_ChIn "Set outlet temperature of chiller evaporator";
 
-     Modelica.SIunits.MassFlowRate m_flow_HeatSource "Mass flow from heat source (heat pump operation)";
-     Modelica.SIunits.MassFlowRate m_flow_HeatSink "Mass flow from heat sink (chiller)";
+     Modelica.SIunits.MassFlowRate m_flow_heatSource "Mass flow from heat source (heat pump operation)";
+     Modelica.SIunits.MassFlowRate m_flow_heatSink "Mass flow from heat sink (chiller)";
 
      parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
      parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
 
-     parameter Modelica.SIunits.TemperatureDifference dT_HeatSource "Temperature difference of heat source for mass flow calculation (heat pump operation)";
-     parameter Modelica.SIunits.TemperatureDifference dT_HeatSink "Temperature difference of heat sink for mass flow calculation (chiller operation)";
+     parameter Modelica.SIunits.TemperatureDifference dT_heatSource "Temperature difference of heat source for mass flow calculation (heat pump operation)";
+     parameter Modelica.SIunits.TemperatureDifference dT_heatSink "Temperature difference of heat sink for mass flow calculation (chiller operation)";
 
      parameter Modelica.SIunits.Power Q_flow_nominal_HP "Nominal heating flow rate (Q_flow_nominal_HP > 0)";
      parameter Modelica.SIunits.Power Q_flow_nominal_CH "Nominal cooling flow rate (Q_flow_nominal_CH < 0)";
@@ -81,9 +81,9 @@ model IdealPlantRevHP
     use_T_in=true,
     T=288.15) annotation (Placement(transformation(extent={{-32,50},{-12,70}})));
   Modelica.Blocks.Sources.RealExpression MassFlow_HeatSource(y=
-        m_flow_HeatSource)
+        m_flow_heatSource)
     annotation (Placement(transformation(extent={{46,-36},{26,-16}})));
-  Modelica.Blocks.Sources.RealExpression MassFlow_HeatSink(y=m_flow_HeatSink)
+  Modelica.Blocks.Sources.RealExpression MassFlow_HeatSink(y=m_flow_heatSink)
     annotation (Placement(transformation(extent={{-72,66},{-52,86}})));
 
 protected
@@ -116,6 +116,11 @@ public
   Modelica.Blocks.Sources.RealExpression InletTemperature_ColdSource(y=
         T_inlet_coldSource)
     annotation (Placement(transformation(extent={{-72,48},{-52,68}})));
+  Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=90,
+        origin={-8,-10})));
 equation
 
   // Control of the operations mode by flow direction
@@ -123,17 +128,17 @@ equation
   if (port_a.m_flow >= 0) then
     T_HpIn = T_heatingSet;
     T_ChIn = 110 + 273.15;
-    m_flow_HeatSink = 0;
-    m_flow_HeatSource = port_a.m_flow;
+    m_flow_heatSink = 0;
+    m_flow_heatSource = port_a.m_flow;
     //m_flow_HeatSource = (port_a.m_flow * (T_heatingSet - senTem.T))/(cp_default * dT_HeatSource);
 
   // port_a.m_flow < 0: Chiller operation
   else
     T_ChIn = T_coolingSet;
     T_HpIn = 273.15 - 20;
-    m_flow_HeatSink = port_b.m_flow;
+    m_flow_heatSink = port_b.m_flow;
     //m_flow_HeatSink = (port_b.m_flow * (senTem1.T - T_coolingSet))/(cp_default * dT_HeatSink);
-    m_flow_HeatSource =0;
+    m_flow_heatSource =0;
   end if;
 
   connect(port_a, senTem.port_a)
@@ -168,6 +173,8 @@ equation
         points={{12,-36},{20,-36},{20,-44},{25,-44}}, color={0,0,127}));
   connect(InletTemperature_ColdSource.y, sourceCooling.T_in) annotation (Line(
         points={{-51,58},{-44,58},{-44,64},{-34,64}}, color={0,0,127}));
+  connect(bou.ports[1], chi.port_b2)
+    annotation (Line(points={{-8,-6},{-8,0},{6,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},
