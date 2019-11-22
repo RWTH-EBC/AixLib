@@ -185,8 +185,11 @@ equation
           94,24}}, color={0,0,127}));
   connect(senT_supply.T, switch1.u1) annotation (Line(points={{-64,-49},{16,-49},
           {16,40},{94,40}}, color={0,0,127}));
-  connect(switch1.y, source.T_in) annotation (Line(points={{117,32},{74,32},{74,
-          -64},{30,-64}}, color={0,0,127}));
+  connect(switch1.y, source.T_in) annotation (Line(points={{117,32},{124,32},{
+          124,-64},{30,-64}},
+                          color={0,0,127}));
+  connect(changeSign.y, source.m_flow_in)
+    annotation (Line(points={{0,-47},{0,-68},{30,-68}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={

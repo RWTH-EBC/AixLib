@@ -119,7 +119,9 @@ First implementation.
 </li>
 </ul>
 </html>", info="<html>
-This is similar to the OpenLoopCooling example, but demonstrates a very simple
-pressure control.
+<p>This is an OpenLoop example of 
+<a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp\">AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp</a> 
+which is a simple substation model using a fixed return temperature and the actual supply temperature to calculate the mass flow rate drawn from the network. 
+This model uses an open loop design to prescribe the required flow rate.</p>
 </html>"));
 end OpenLoopVarTSupplyDp;
