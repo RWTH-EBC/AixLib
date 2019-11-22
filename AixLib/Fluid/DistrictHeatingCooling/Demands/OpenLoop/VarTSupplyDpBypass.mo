@@ -34,6 +34,8 @@ model VarTSupplyDpBypass
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics"));
 
+  parameter Modelica.SIunits.MassFlowRate m_flo_bypass
+    "Minimum bypass flow through substation";
 
 protected
   final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
@@ -47,11 +49,11 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-74,-70},{-54,-50}})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-70},{80,-50}})));
   Modelica.Blocks.Math.Add deltaT(k1=+1, k2=-1)
     "Differernce of flow and return line temperature in K" annotation (
