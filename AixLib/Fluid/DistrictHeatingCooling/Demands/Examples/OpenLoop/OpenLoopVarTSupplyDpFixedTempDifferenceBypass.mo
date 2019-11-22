@@ -21,7 +21,8 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
     redeclare package Medium = Medium,
     dp_nominal=50000,
     Q_flow_nominal=78239.1,
-    dTDesign=10)            "Simple demand model" annotation (Placement(
+    dTDesign=10,
+    m_flo_bypass=0.003)     "Simple demand model" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
