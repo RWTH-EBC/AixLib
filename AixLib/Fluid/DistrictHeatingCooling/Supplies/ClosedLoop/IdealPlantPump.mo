@@ -18,28 +18,40 @@ model IdealPlantPump
         Medium)
     "Fluid connector for connecting the ideal plant to the warm line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
-        Medium, use_X_wSet=false,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium
+      = Medium,
+    allowFlowReversal=false,
+                use_X_wSet=false,
     dp_nominal=dp_nominal,
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
     annotation (Placement(transformation(extent={{14,-10},{34,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
-        Medium, m_flow_nominal=2)
+        Medium,
+    allowFlowReversal=false,
+                m_flow_nominal=2)
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
   Modelica.Blocks.Interfaces.RealInput T_Set(unit="K")
     "Minimum supply temperature of the hot line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
-  Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
+  Sources.Boundary_pT bou(redeclare package Medium = Medium,
+    use_p_in=false,
+    p=300000,                                                nPorts=1)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-54,-42})));
   Sensors.TemperatureTwoPort senTemReturn(redeclare package Medium = Medium,
+    allowFlowReversal=false,
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
   Movers.FlowControlled_dp fan(redeclare package Medium = Medium,
+    p_start=500000,
+    allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
       addPowerToMedium=false,
+    tau=1,
+    y_start=1,
+    dp_start=3e5,
     dp_nominal=dp_nominal)
     annotation (Placement(transformation(extent={{-40,10},{-20,-10}})));
   Modelica.Blocks.Interfaces.RealInput dpIn(unit="Pa")
@@ -78,11 +90,17 @@ equation
           extent={{-100,100},{100,-100}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.None)}),                       Diagram(
+          fillPattern=FillPattern.None),
+              Ellipse(extent={{-58,60},{60,-60}},
+  lineColor = {0, 0, 0}, fillColor = {0, 127, 0},
+            fillPattern=FillPattern.Solid),
+            Polygon(points={{-30,46},{52,0},{-30,-44},{-30,46}},
+            lineColor = {0, 0, 0}, fillColor = {175, 175, 175},
+            fillPattern=FillPattern.Solid)}),                    Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
-<li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
+<li><i>November 23, 2019</i> ,by Michael Mans:<br/>
 Implemented </li>
 </ul>
 </html>", info="<html>

@@ -61,10 +61,14 @@ public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
   Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+        Medium,
+    allowFlowReversal=false,
+                m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+        Medium,
+    allowFlowReversal=false,
+                m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Sources.Constant delT(k=dTDesign)
     "Temperature difference of substation" annotation (Placement(transformation(
@@ -73,6 +77,7 @@ public
         origin={90,50})));
   Actuators.Valves.TwoWayPressureIndependent valve(
     redeclare package Medium = Medium,
+    allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=50000,
     l2=1e-9,
@@ -85,6 +90,8 @@ public
         origin={-20,-38})));
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
+    allowFlowReversal1=false,
+    allowFlowReversal2=false,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
@@ -132,7 +139,9 @@ public
     Ti=5,
     Td=0.1,
     yMax=1,
-    yMin=0.1)         "Pressure controller" annotation (Placement(transformation(
+    yMin=0.1,
+    initType=Modelica.Blocks.Types.InitPID.SteadyState,
+    y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={4,42})));
