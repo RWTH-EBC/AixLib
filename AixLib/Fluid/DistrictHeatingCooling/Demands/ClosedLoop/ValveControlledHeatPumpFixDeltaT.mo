@@ -15,10 +15,6 @@ model ValveControlledHeatPumpFixDeltaT
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(
     min=0) "Nominal heat flow rate added to medium (Q_flow_nominal > 0)";
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
-    displayUnit="K")
-    "Design temperature difference for the substation's heat exchanger";
-
   parameter Modelica.SIunits.TemperatureDifference dTBuilding(
     displayUnit="K")
     "Design temperature difference for the building's heating system";
@@ -28,6 +24,10 @@ model ValveControlledHeatPumpFixDeltaT
 
   parameter Modelica.SIunits.Temperature TReturn
     "Fixed return temperature";
+
+  parameter Modelica.SIunits.TemperatureDifference dTDesign(
+    displayUnit="K")
+    "Design temperature difference for the heat pump on its district heating side";
 
   parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000
     "Pressure difference at nominal flow rate"
@@ -61,18 +61,23 @@ public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
   Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+        Medium,
+    allowFlowReversal=false,
+                m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+        Medium,
+    allowFlowReversal=false,
+                m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-  Modelica.Blocks.Sources.Constant deltaT(k=deltaT)
+  Modelica.Blocks.Sources.Constant delT(k=dTDesign)
     "Temperature difference of substation" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={90,50})));
   Actuators.Valves.TwoWayPressureIndependent valve(
     redeclare package Medium = Medium,
+    allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=50000,
     l2=1e-9,
@@ -85,6 +90,8 @@ public
         origin={-20,-38})));
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
+    allowFlowReversal1=false,
+    allowFlowReversal2=false,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
@@ -128,8 +135,13 @@ public
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=0.02,
+    Ti=5,
+    Td=0.1,
     yMax=1,
-    yMin=0.1)         "Pressure controller" annotation (Placement(transformation(
+    yMin=0.1,
+    initType=Modelica.Blocks.Types.InitPID.SteadyState,
+    y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={4,42})));
@@ -169,12 +181,12 @@ equation
           {36,11},{70,11}}, color={0,0,127}));
   connect(pControl.y, valve.y)
     annotation (Line(points={{-7,42},{-38,42},{-38,12}}, color={0,0,127}));
-  connect(add.u1, deltaT.y) annotation (Line(points={{66,38},{72,38},{72,50},{
-          79,50}}, color={0,0,127}));
   connect(add.y, pControl.u_s) annotation (Line(points={{43,32},{30,32},{30,42},
           {16,42}}, color={0,0,127}));
   connect(senT_supply.T, add.u2) annotation (Line(points={{-70,11},{-70,24},{66,
           24},{66,26}}, color={0,0,127}));
+  connect(delT.y, add.u1) annotation (Line(points={{79,50},{72,50},{72,38},{66,
+          38}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={

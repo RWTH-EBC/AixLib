@@ -39,6 +39,8 @@ model IdealPlant
   Modelica.Blocks.Interfaces.RealInput T_heatingSet(unit = "K")
   "Minimum supply temperature of the hot line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
+  Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
+    annotation (Placement(transformation(extent={{-60,36},{-40,56}})));
 equation
   connect(port_b, cooler.port_a)
     annotation (Line(points={{100,0},{46,0}}, color={0,127,255}));
@@ -52,6 +54,8 @@ equation
           {-90,42},{-74,42},{-74,8},{-60,8}}, color={0,0,127}));
   connect(T_coolingSet, cooler.TSet) annotation (Line(points={{-106,80},{60,80},
           {60,8},{48,8}}, color={0,0,127}));
+  connect(bou.ports[1], senTem.port_a) annotation (Line(points={{-40,46},{-26,
+          46},{-26,0},{-12,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},

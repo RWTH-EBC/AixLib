@@ -137,7 +137,7 @@ public
     redeclare package Medium = MediumBuilding,
     use_T_in=true,
     nPorts=1) annotation (Placement(transformation(extent={{20,-90},{0,-70}})));
-  Sources.FixedBoundary              sinkHeating(
+  Sources.Boundary_pT                sinkHeating(
                           redeclare package Medium = MediumBuilding, nPorts=1)
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
   Modelica.Blocks.Math.Gain mFlowBuilding(k=1/(cp_default_building*dTBuilding))
