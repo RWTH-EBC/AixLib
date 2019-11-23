@@ -4,18 +4,17 @@ model Weather
     AixLib.Media.Air "Medium in the component";
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
-    Wind_dir=true,
-    Wind_speed=true,
-    Air_temp=true,
-    Rel_hum=false,
-    Mass_frac=true,
+    
     Air_press=false,
+    Air_temp=true,
     Latitude=48.0304,
     Longitude=9.3138,
-    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    fileName=Modelica.Utilities.Files.loadResource(
-        "D:\AixLib\AixLib\Systems\Benchmark\Model\SimYear_Variante3_angepasst.mat"),
-    tableName="SimYearVar")
+    Mass_frac=true,
+    Rel_hum=false,
+    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),Wind_dir=true,
+    Wind_speed=true,
+    fileName="C:/Users/fabab/Desktop/BA_SoSe2019_Fabian_Bekemeier/Sciebo_fb/Simulation/SimInput/Weathdata_benchmark.mat",
+    tableName= "Benchmark")
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
 
   Modelica.Blocks.Math.Gain gain(k=1/360)

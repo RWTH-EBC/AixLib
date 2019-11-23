@@ -50,7 +50,7 @@ model Weather "Complex weather model"
     DiffWeatherDataTime=DiffWeatherDataTime) annotation (Placement(
         transformation(extent={{-62,18},{-38,42}})));
   RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, each WeatherFormat=1) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}})));
-  Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = Modelica.Utilities.Files.loadResource(fileName), columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(transformation(extent = {{-60, -70}, {-40, -50}})));
+  Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = Modelica.Utilities.Files.loadResource(fileName), columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(visible = true, transformation(extent = {{-104, -60}, {-84, -40}}, rotation = 0)));
   Modelica.Blocks.Routing.DeMultiplex3 deMultiplex(n3 = 9) annotation(Placement(transformation(extent = {{-26, -70}, {-6, -50}})));
   Modelica.Blocks.Interfaces.RealOutput WeatherDataVector[m] if Outopt == 1 and (Cloud_cover or Wind_dir or Wind_speed or Air_temp or Air_press or Mass_frac or Rel_hum or Sky_rad or Ter_rad) annotation(Placement(transformation(origin = {-1, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Blocks.Interfaces.RealOutput CloudCover if Cloud_cover and Outopt == 2 "[0..8]" annotation(Placement(transformation(extent = {{114, 74}, {134, 94}}), iconTransformation(extent = {{150, 110}, {170, 130}})));
@@ -83,6 +83,7 @@ initial equation
   assert(SOD.nSurfaces == size(SOD.Azimut, 1), "Azimut has to have the nSurfaces Elements (see Surface orientation data in the Weather Model)");
   assert(SOD.nSurfaces == size(SOD.Tilt, 1), "Tilt has to have the nSurfaces Elements (see Surface orientation data in the Weather Model)");
 equation
+  connect(WeatherData.y, deMultiplex.u) annotation(Line(points = {{-83, -50}, {-34.5, -50}, {-34.5, -60}, {-28, -60}}, color = {0, 0, 127}));
   // cloud cover
   if Cloud_cover then
     if Outopt == 1 then
@@ -163,7 +164,6 @@ equation
       connect(TerrestrialRadiation, deMultiplex.y3[9]);
     end if;
   end if;
-  connect(WeatherData.y, deMultiplex.u) annotation(Line(points = {{-39, -60}, {-28, -60}}, color = {0, 0, 127}));
  // Connecting n RadOnTiltedSurf
   for i in 1:SOD.nSurfaces loop
     connect(Sun.OutDayAngleSun, RadOnTiltedSurf[i].InDayAngleSun);
