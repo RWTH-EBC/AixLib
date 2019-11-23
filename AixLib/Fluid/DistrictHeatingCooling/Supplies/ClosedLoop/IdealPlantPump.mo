@@ -18,8 +18,8 @@ model IdealPlantPump
         Medium)
     "Fluid connector for connecting the ideal plant to the warm line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium
-      = Medium,
+  AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
+        Medium,
     allowFlowReversal=false,
                 use_X_wSet=false,
     dp_nominal=dp_nominal,
@@ -31,7 +31,7 @@ model IdealPlantPump
     allowFlowReversal=false,
                 m_flow_nominal=2)
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
-  Modelica.Blocks.Interfaces.RealInput T_Set(unit="K")
+  Modelica.Blocks.Interfaces.RealInput TIn(unit="K")
     "Minimum supply temperature of the hot line of the bidirectional low-temperature network"
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
   Sources.Boundary_pT bou(redeclare package Medium = Medium,
@@ -58,7 +58,7 @@ model IdealPlantPump
     "Input of pressure head for the pump"
     annotation (Placement(transformation(extent={{-126,-100},{-86,-60}})));
 equation
-  connect(T_Set, heater.TSet)
+  connect(TIn, heater.TSet)
     annotation (Line(points={{-106,42},{12,42},{12,8}}, color={0,0,127}));
   connect(port_a, senTemReturn.port_a)
     annotation (Line(points={{-100,0},{-86,0}}, color={0,127,255}));
