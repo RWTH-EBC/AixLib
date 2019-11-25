@@ -139,12 +139,13 @@ model BenchmarkBuilding "Benchmark building model"
         transformation(extent={{518,128},{538,148}}), iconTransformation(extent=
            {{-48,46},{-28,66}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    redeclare package Medium = Media.Air,
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15)
+    T_start=293.15,
+    nPorts=2)
     "Thermal zone"
     annotation (Placement(transformation(extent={{122,272},{142,292}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
@@ -315,7 +316,7 @@ model BenchmarkBuilding "Benchmark building model"
         tau1=5,
         tau2=15,
         dT_nom=30,
-        Q_nom=30000)),
+        Q_nom=60000)),
     cooler(redeclare HydraulicModules.Admix partialHydraulicModule(
         dIns=0.01,
         kIns=0.028,
@@ -332,7 +333,7 @@ model BenchmarkBuilding "Benchmark building model"
         tau1=5,
         tau2=10,
         dT_nom=30,
-        Q_nom=50000)),
+        Q_nom=100000)),
     heater(redeclare HydraulicModules.Admix partialHydraulicModule(
         dIns=0.01,
         kIns=0.028,
@@ -348,7 +349,7 @@ model BenchmarkBuilding "Benchmark building model"
         tau1=5,
         tau2=15,
         dT_nom=30,
-        Q_nom=30000)),
+        Q_nom=60000)),
     dynamicHX(
       dp1_nominal=100,
       dp2_nominal=100,
@@ -364,6 +365,7 @@ model BenchmarkBuilding "Benchmark building model"
       Twater_in=288.15))
     annotation (Placement(transformation(extent={{-120,154},{0,220}})));
   Fluid.Sources.Boundary_pT boundaryOutsideAir(
+    use_T_in=true,
     nPorts=1,
     redeclare package Medium = Media.Air,
     T=283.15) annotation (Placement(transformation(
@@ -376,20 +378,11 @@ model BenchmarkBuilding "Benchmark building model"
         rotation=180,
         origin={-140,208})));
   ModularAHU.Controller.CtrAHUBasic
-                         ctrAHUBasic(TFlowSet=293.15, ctrRh(k=0.01))
+                         ctrAHUBasic(
+    TFlowSet=297.15,
+    VFlowSet=16000/3600,
+    ctrPh(k=0.01),                                    ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-100,230},{-80,250}})));
-  Fluid.Sources.Boundary_pT boundarySupplyAir(nPorts=1, redeclare package
-      Medium = Media.Air) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=0,
-        origin={52,186})));
-  Fluid.Sources.Boundary_pT boundaryReturnAir(
-    T=294.15,
-    nPorts=1,
-    redeclare package Medium = Media.Air) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=0,
-        origin={52,210})));
 equation
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
         points={{100,-60},{80,-60},{80,-59.5556},{70,-59.5556}},
@@ -719,17 +712,21 @@ equation
           {-62,154},{-62,100},{152,100},{152,120}}, color={0,127,255}));
   connect(genericAHU.port_b4, tabs.port_b2) annotation (Line(points={{-49.0909,
           154},{-49.0909,80},{176,80},{176,120.364}}, color={0,127,255}));
-  connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
-    annotation (Line(points={{42,210},{8,210},{8,208},{0.545455,208}},
-                                                    color={0,127,255}));
-  connect(boundarySupplyAir.ports[1], genericAHU.port_b1)
-    annotation (Line(points={{42,186},{8,186},{8,184},{0.545455,184}},
-                                                    color={0,127,255}));
+  connect(genericAHU.port_b1, thermalZone.ports[1]) annotation (Line(points={{
+          0.545455,184},{129.65,184},{129.65,274.8}}, color={0,127,255}));
+  connect(genericAHU.port_a2, thermalZone.ports[2]) annotation (Line(points={{
+          0.545455,208},{134.35,208},{134.35,274.8}}, color={0,127,255}));
+  connect(boundaryOutsideAir.T_in, weaBus.TDryBul) annotation (Line(points={{
+          -152,180},{-186,180},{-186,278},{71,278}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{360,200}})), Icon(
         coordinateSystem(extent={{-200,-120},{360,200}})),
     experiment(
       StopTime=86400,
       Tolerance=0.001,
       __Dymola_fixedstepsize=0.5,
-      __Dymola_Algorithm="Cvode"));
+      __Dymola_Algorithm="Dassl"));
 end BenchmarkBuilding;
