@@ -90,7 +90,7 @@ model PlugFlowPipeEmbeddedDis
   parameter Modelica.SIunits.SpecificHeatCapacity c = 1046
     "Specific heat capacity of material/soil"
     annotation(Dialog(tab="Ground"));
-  parameter Modelica.SIunits.Length thickness_ground = 0.6 "thickness of soil layer for heat loss calulcation"
+  parameter Modelica.SIunits.Length thickness_ground = 1.5 "thickness of soil layer for heat loss calulcation"
   annotation(Dialog(tab="Ground"));
 
   parameter Modelica.SIunits.ThermalConductivity lambda = 1.5
@@ -99,7 +99,7 @@ model PlugFlowPipeEmbeddedDis
   final parameter Modelica.SIunits.Length d_out = d_in + thickness_ground;
   final parameter Modelica.SIunits.Length d_in = dh + 2 * thickness "Inner diameter of pipe"
   annotation(Dialog(tab="Ground"));
-  parameter Integer dis = 1 "Number of discretization layer of sourrounding soil"
+  parameter Integer dis = 5 "Number of discretization layer of sourrounding soil"
   annotation(Dialog(tab="Ground"));
   final parameter Modelica.SIunits.Temperature T0=289.15 "Initial temperature"
   annotation(Dialog(tab="Ground"));
@@ -199,11 +199,6 @@ equation
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
   connect(plugFlowPipe.ports_b, ports_b) annotation (Line(points={{10,0},{56,0},
           {56,0},{100,0}}, color={0,127,255}));
-  connect(cylindricHeatTransfer[1].port_b, heatPort)
-    annotation (Line(points={{2,52.8},{0,52.8},{0,104}}, color={191,0,0}));
-  connect(plugFlowPipe.heatPort, cylindricHeatTransfer[1].port_a)
-    annotation (Line(points={{0,10},{0,44},{2,44}},
-                                             color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-48}},
