@@ -36,7 +36,7 @@ model IdealPlantPump
     annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
   Sources.Boundary_pT bou(redeclare package Medium = Medium,
     use_p_in=false,
-    p=300000,                                                nPorts=1)
+    p=200000,                                                nPorts=1)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-54,-42})));
@@ -45,7 +45,8 @@ model IdealPlantPump
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
   Movers.FlowControlled_dp fan(redeclare package Medium = Medium,
-    p_start=500000,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+    p_start=300000,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
       addPowerToMedium=false,

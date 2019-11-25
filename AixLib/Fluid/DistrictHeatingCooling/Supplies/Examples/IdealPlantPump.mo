@@ -3,11 +3,11 @@ model IdealPlantPump
    extends Modelica.Icons.ExamplesPackage;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   ClosedLoop.IdealPlantPump                                         idealPlantPump(
-    redeclare package Medium = Medium,
-    m_flow_nominal=5)
+    redeclare package Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
   Demands.ClosedLoop.ValveControlledHeatPumpFixDeltaT
     valveControlledHeatPumpFixDeltaT(
+    m_flow_nominal=0.5,
     redeclare package MediumBuilding = Medium,
     dTBuilding=20,
     TSupplyBuilding=333.15,
@@ -21,6 +21,7 @@ model IdealPlantPump
         origin={24,-20})));
   Demands.ClosedLoop.ValveControlledHeatPumpFixDeltaT
     valveControlledHeatPumpFixDeltaT1(
+    m_flow_nominal=0.5,
     redeclare package MediumBuilding = Medium,
     Q_flow_nominal=6500,
     dTBuilding=20,
@@ -70,19 +71,19 @@ model IdealPlantPump
     annotation (Placement(transformation(extent={{0,-58},{-20,-38}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=2000,
-    freqHz=86400,
+    freqHz=1/900,
     offset=5000,
     startTime=0) annotation (Placement(transformation(extent={{0,30},{20,50}})));
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=2500,
-    freqHz=86400,
+    freqHz=1/900,
     offset=4000,
     phase=0.5235987755983,
     startTime=0)
     annotation (Placement(transformation(extent={{56,30},{76,50}})));
   Modelica.Blocks.Sources.Constant const(k=5e5)
     annotation (Placement(transformation(extent={{-90,-22},{-70,-2}})));
-  Modelica.Blocks.Sources.Constant T_flow(k=273.15 + 25)
+  Modelica.Blocks.Sources.Constant T_flow(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
 equation
   connect(idealPlantPump.port_b, plugFlowPipe.port_a)
@@ -107,8 +108,8 @@ equation
     annotation (Line(points={{77,40},{88,40},{88,-9.2}}, color={0,0,127}));
   connect(const.y, idealPlantPump.dpIn) annotation (Line(points={{-69,-12},{-60,
           -12},{-60,2},{-52.6,2}}, color={0,0,127}));
-  connect(T_flow.y, idealPlantPump.T_Set) annotation (Line(points={{-79,50},{
-          -66,50},{-66,14.2},{-52.6,14.2}}, color={0,0,127}));
+  connect(T_flow.y, idealPlantPump.TIn) annotation (Line(points={{-79,50},{-66,
+          50},{-66,14.2},{-52.6,14.2}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
