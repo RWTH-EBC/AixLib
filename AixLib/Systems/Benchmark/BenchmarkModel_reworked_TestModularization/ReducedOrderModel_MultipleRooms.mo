@@ -7,7 +7,7 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
+        "modelica://AixLib/Resources/weatherdata/Weatherdata_benchmark_new.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-96,52},{-76,72}})));
 
@@ -352,5 +352,5 @@ equation
         points={{68,-32},{98,-32},{98,24},{92,24}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=2592000, Interval=300));
+    experiment(StopTime=4838400, Interval=3600));
 end ReducedOrderModel_MultipleRooms;

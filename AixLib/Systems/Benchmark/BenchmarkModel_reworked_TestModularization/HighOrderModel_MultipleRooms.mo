@@ -42,18 +42,13 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
     rotation=0,  origin={-80,-66})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={24,10})));
   Modelica.Blocks.Sources.Constant const2(k=0.15)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-78,-40})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
-    tableName="SimYearVar",
+    tableName="Benchmark",
     Cloud_cover=true,
     Wind_dir=true,
     Wind_speed=true,
@@ -65,7 +60,7 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"),
+        "modelica://AixLib/Resources/weatherdata/Weathdata_benchmark_old.mat"),
     Sky_rad=true,
     Ter_rad=true)
     annotation (Placement(transformation(extent={{-98,80},{-68,100}})));
@@ -132,13 +127,6 @@ equation
   connect(TSoil.y,preTemFloor. T)
   annotation (Line(points={{-75.6,-66},{-13,-66},{-13,-37.2}},
                                                             color={0,0,127}));
-  connect(perRad.port,thermalCollector. port_a[1]) annotation (Line(points={{42,-28},
-          {42,10},{34,10}},                 color={191,0,0}));
-  connect(perCon.port,thermalCollector. port_a[1])
-    annotation (Line(points={{60,-30},{60,10},{34,10}},
-                                                 color={191,0,0}));
-  connect(macConv.port,thermalCollector. port_a[2]) annotation (Line(points={{78,-30},
-          {78,10},{34,10}},                 color={191,0,0}));
   connect(theConRoof.fluid,preTemRoof. port)
     annotation (Line(points={{-19,50},{-20,50},{-20,66},{-19,66}},
                                                            color={191,0,0}));
@@ -161,16 +149,6 @@ equation
   connect(preTemFloor.port, southFacingWindows[5].Therm_ground) annotation (
       Line(points={{-13,-24},{-14,-24},{-14,-1.6},{-13.2,-1.6}},
                                                              color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[1].thermRoom) annotation (
-     Line(points={{14,10},{32,10},{32,10.3},{-12.9,10.3}},color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[2].thermRoom) annotation (
-     Line(points={{14,10},{76,10},{76,10.3},{-12.9,10.3}},color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[3].thermRoom) annotation (
-     Line(points={{14,10},{78,10},{78,10.3},{-12.9,10.3}},color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[4].thermRoom) annotation (
-     Line(points={{14,10},{78,10},{78,10.3},{-12.9,10.3}},color={191,0,0}));
-  connect(thermalCollector.port_b, southFacingWindows[5].thermRoom) annotation (
-     Line(points={{14,10},{12,10},{12,10.3},{-12.9,10.3}},color={191,0,0}));
   connect(theConRoof.solid, southFacingWindows[1].Therm_outside) annotation (
       Line(points={{-19,40},{-18,40},{-18,17.7},{-20.5,17.7}},
                                                         color={191,0,0}));
@@ -306,5 +284,35 @@ equation
   connect(SolarRadiation_East, southFacingWindows[5].SolarRadiationPort[2])
     annotation (Line(points={{-70,50},{-46,50},{-46,13.6},{-21,13.6}}, color={255,
           128,0}));
-  annotation (experiment(StopTime=2592000, Interval=300));
+  connect(perRad.port, southFacingWindows[1].thermRoom) annotation (Line(points
+        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[2].thermRoom) annotation (Line(points
+        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[3].thermRoom) annotation (Line(points
+        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[4].thermRoom) annotation (Line(points
+        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[5].thermRoom) annotation (Line(points
+        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[1].thermRoom) annotation (Line(points
+        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[2].thermRoom) annotation (Line(points
+        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[3].thermRoom) annotation (Line(points
+        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[4].thermRoom) annotation (Line(points
+        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[5].thermRoom) annotation (Line(points
+        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(macConv.port, southFacingWindows[1].thermRoom) annotation (Line(
+        points={{78,-30},{78,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(macConv.port, southFacingWindows[2].thermRoom) annotation (Line(
+        points={{78,-30},{78,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(macConv.port, southFacingWindows[3].thermRoom) annotation (Line(
+        points={{78,-30},{78,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(macConv.port, southFacingWindows[4].thermRoom) annotation (Line(
+        points={{78,-30},{78,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(macConv.port, southFacingWindows[5].thermRoom) annotation (Line(
+        points={{78,-30},{78,10.3},{-12.9,10.3}}, color={191,0,0}));
+  annotation (experiment(StopTime=4838400, Interval=3600));
 end HighOrderModel_MultipleRooms;
