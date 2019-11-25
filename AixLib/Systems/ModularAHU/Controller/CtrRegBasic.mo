@@ -49,7 +49,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
   BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{88,-14},{116,
             14}})));
-  Modelica.Blocks.Interfaces.RealInput TMea if useExternalTset
+  Modelica.Blocks.Interfaces.RealInput TMea if useExternalTMea
     "Connector of second Real input signal" annotation (Placement(
         transformation(extent={{-20,-20},{20,20}},
         rotation=90,
