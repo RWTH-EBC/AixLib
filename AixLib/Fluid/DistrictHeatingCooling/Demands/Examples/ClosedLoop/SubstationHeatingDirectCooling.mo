@@ -3,17 +3,17 @@ model SubstationHeatingDirectCooling
   import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
-  AixLib.Fluid.Sources.Boundary_pT    coo(
+  AixLib.Fluid.Sources.Boundary_pT cooPip(
     redeclare package Medium = Medium,
     use_T_in=true,
-    nPorts=1)      "Cool pipe" annotation (Placement(transformation(
+    nPorts=1) "Cool pipe" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-56,-44})));
-  AixLib.Fluid.Sources.Boundary_pT    coo1(
+  AixLib.Fluid.Sources.Boundary_pT cooPip1(
     redeclare package Medium = Medium,
     use_T_in=true,
-    nPorts=1)      "Cool pipe" annotation (Placement(transformation(
+    nPorts=1) "Cool pipe" annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={44,70})));
@@ -47,14 +47,14 @@ model SubstationHeatingDirectCooling
     annotation (Placement(transformation(extent={{-34,-2},{14,30}})));
 
 equation
-  connect(const1.y, coo.T_in)
+  connect(const1.y, cooPip.T_in)
     annotation (Line(points={{-75,-74},{-60,-74},{-60,-56}}, color={0,0,127}));
-  connect(senTem1.port_b, coo1.ports[1])
+  connect(senTem1.port_b, cooPip1.ports[1])
     annotation (Line(points={{42,12},{44,12},{44,60}}, color={0,127,255}));
-  connect(coo.ports[1], senTem.port_a)
+  connect(cooPip.ports[1], senTem.port_a)
     annotation (Line(points={{-56,-34},{-56,-8}}, color={0,127,255}));
-  connect(const.y, coo1.T_in) annotation (Line(points={{-31,82},{4,82},{4,82},{
-          40,82}}, color={0,0,127}));
+  connect(const.y, cooPip1.T_in) annotation (Line(points={{-31,82},{4,82},{4,82},
+          {40,82}}, color={0,0,127}));
   connect(substationHeatingDirectCooling.port_b, senTem1.port_a) annotation (
       Line(points={{14,14},{18,14},{18,12},{22,12}}, color={0,127,255}));
   connect(senTem.port_b, substationHeatingDirectCooling.port_a)
