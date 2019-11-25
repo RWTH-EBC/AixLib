@@ -3,6 +3,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
   //Boolean choice;
 
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
+  parameter Boolean useExternalTMea = false "If True, measured temperature can be given externally";
   parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer" annotation (Dialog(enable=
           useExternalTset == false));
   parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
@@ -39,7 +40,7 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final y_start=y_start,
     final reverseAction=reverseAction,
     final reset=AixLib.Types.Reset.Disabled)
-            annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
+            annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
@@ -48,19 +49,27 @@ block CtrRegBasic "Controller for heating and cooling registers"
   BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
           extent={{74,-26},{128,26}}), iconTransformation(extent={{88,-14},{116,
             14}})));
+  Modelica.Blocks.Interfaces.RealInput TMea if useExternalTset
+    "Connector of second Real input signal" annotation (Placement(
+        transformation(extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={0,-120}),                              iconTransformation(
+          extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={0,-120})));
 equation
 
     connect(PID.u_s, Tset) annotation (Line(
-      points={{-18,-50},{-47.1,-50},{-47.1,0},{-120,0}},
+      points={{-12,-50},{-47.1,-50},{-47.1,0},{-120,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(constTflowSet.y, PID.u_s) annotation (Line(
-      points={{-79,-50},{-18,-50}},
+      points={{-79,-50},{-12,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, registerBus.hydraulicBus.valSet) annotation (Line(points={{5,
-          -50},{101.135,-50},{101.135,0.13}}, color={0,0,127}), Text(
+  connect(PID.y, registerBus.hydraulicBus.valSet) annotation (Line(points={{11,-50},
+          {101.135,-50},{101.135,0.13}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -79,13 +88,19 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{-6,-62},{
-          -6,-80},{102,-80},{102,0.13},{101.135,0.13}},       color={0,0,127}),
+  if useExternalTMea==false then
+  connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{0,-62},{0,
+            -80},{102,-80},{102,0.13},{101.135,0.13}},        color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  end if;
+  connect(PID.u_m, TMea) annotation (Line(
+      points={{0,-62},{0,-120}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},

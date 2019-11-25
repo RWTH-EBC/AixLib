@@ -9,7 +9,7 @@ model GenericAHU_AHU2
     m1_flow_nominal=1,
     m2_flow_nominal=0.5,
     usePreheater=true,
-    useHumidifierRet=true,
+    useHumidifierRet=false,
     useHumidifier=true,
     perheater(
     m2_flow_nominal=2.866/3600*1000,
@@ -184,8 +184,8 @@ model GenericAHU_AHU2
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={48,-40})));
-  BaseClasses.GenericAHUBus genericAHUBus
-    annotation (Placement(transformation(extent={{-10,74},{10,94}})));
+  Controller.CtrAHUBasic ctrAHUBasic(TFlowSet=293.15, ctrRh(k=0.01))
+    annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
     annotation (Line(points={{70,40},{60.5455,40}}, color={0,127,255}));
@@ -208,15 +208,11 @@ equation
           127,255}));
   connect(SinkHeater.ports[1], genericAHU.port_b5) annotation (Line(points={{48,-32},
           {48,-26},{32.1818,-26},{32.1818,-14}},      color={0,127,255}));
-  connect(genericAHU.genericAHUBus, genericAHUBus) annotation (Line(
-      points={{0,52.3},{0,84}},
+  connect(ctrAHUBasic.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
+      points={{-20,72.1},{-8,72.1},{-8,72},{0,72},{0,52.3}},
       color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  annotation (experiment(StopTime=3600), Documentation(revisions="<html>
+      thickness=0.5));
+  annotation (experiment(StopTime=7200), Documentation(revisions="<html>
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>

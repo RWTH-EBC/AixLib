@@ -71,6 +71,7 @@ replaceable package Medium2 =
     final m1_flow_nominal=m1_flow_nominal,
     m2_flow_nominal=m2_flow_nominal,
     T_start=T_start,
+    tau=tau,
     T_amb=T_amb) if usePreheater
     annotation (Dialog(enable=usePreheater, group="Preheater"),Placement(transformation(extent={{-154,-46},{-110,14}})));
   RegisterModule cooler(
@@ -81,6 +82,7 @@ replaceable package Medium2 =
     final m1_flow_nominal=m1_flow_nominal,
     m2_flow_nominal=m2_flow_nominal,
     T_start=T_start,
+    tau=tau,
     T_amb=T_amb)
     annotation (Dialog(enable=true, group="Cooler"),Placement(transformation(extent={{2,-46},{46,14}})));
   RegisterModule heater(
@@ -91,6 +93,7 @@ replaceable package Medium2 =
     final m1_flow_nominal=m1_flow_nominal,
     m2_flow_nominal=m2_flow_nominal,
     T_start=T_start,
+    tau=tau,
     T_amb=T_amb)
     annotation (Dialog(enable=true, group="Heater"),Placement(transformation(extent={{76,-46},{120,14}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
@@ -257,6 +260,35 @@ replaceable package Medium2 =
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={50,48})));
+protected
+  Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    y_start=T_start,
+    final T=tau) annotation (Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=270,
+        origin={205,17})));
+  Modelica.Blocks.Continuous.FirstOrder PT1_airIn1(
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    y_start=T_start,
+    final T=tau) annotation (Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=270,
+        origin={-207,23})));
+  Modelica.Blocks.Continuous.FirstOrder PT1_airIn2(
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    y_start=T_start,
+    final T=tau) annotation (Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=270,
+        origin={-149,107})));
+  Modelica.Blocks.Continuous.FirstOrder PT1_airIn3(
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    y_start=T_start,
+    final T=tau) annotation (Placement(transformation(
+        extent={{5,-5},{-5,5}},
+        rotation=270,
+        origin={151,103})));
 equation
   connect(perheater.port_a2, port_a3) annotation (Line(points={{-154,-27.5385},
           {-160,-27.5385},{-160,-100}},            color={0,127,255}));
@@ -329,32 +361,6 @@ equation
     annotation (Line(points={{180,80},{160,80}}, color={0,127,255}));
   connect(senRelHumSup1.port_b, fanRet.port_a)
     annotation (Line(points={{118,80},{100,80}}, color={0,127,255}));
-  connect(senTExh.T, genericAHUBus.TExhAirMea) annotation (Line(points={{-150,91},
-          {-150,118.09},{0.09,118.09}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senTRet.T, genericAHUBus.TRetAirMea) annotation (Line(points={{150,91},
-          {150,118.09},{0.09,118.09}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senTOA.T, genericAHUBus.TOutsAirMea) annotation (Line(points={{-204,11},
-          {-206,11},{-206,20},{-226,20},{-226,118.09},{0.09,118.09}}, color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(senTSup.T, genericAHUBus.TSupAirMea) annotation (Line(points={{205,6.6},
-          {205,24},{232,24},{232,116},{0.09,116},{0.09,118.09}}, color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(fanRet.dp_in, genericAHUBus.dpFanRetSet) annotation (Line(points={{90,
           92},{90,118.09},{0.09,118.09}}, color={0,0,127}), Text(
       string="%second",
@@ -373,8 +379,8 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fanSup.dp_in, genericAHUBus.dpFanSupSet) annotation (Line(points={{166,
-          12},{166,20},{248,20},{248,118.09},{0.09,118.09}}, color={0,0,127}),
+  connect(fanSup.dp_in, genericAHUBus.dpFanSupSet) annotation (Line(points={{166,12},
+          {166,26},{248,26},{248,118.09},{0.09,118.09}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -529,6 +535,39 @@ equation
       points={{-124,42},{-106,42},{-106,0},{-90,0}},
       color={0,127,255},
       pattern=LinePattern.Dash));
+  connect(senTSup.T, PT1_airIn.u)
+    annotation (Line(points={{205,6.6},{205,11}}, color={0,0,127}));
+  connect(PT1_airIn.y, genericAHUBus.TSupAirMea) annotation (Line(points={{205,
+          22.5},{238,22.5},{238,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(senTOA.T, PT1_airIn1.u) annotation (Line(points={{-204,11},{-206,11},
+          {-206,20},{-207,20},{-207,17}}, color={0,0,127}));
+  connect(PT1_airIn1.y, genericAHUBus.TOutsAirMea) annotation (Line(points={{
+          -207,28.5},{-234,28.5},{-234,132},{0.09,132},{0.09,118.09}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senTExh.T, PT1_airIn2.u) annotation (Line(points={{-150,91},{-150,96},
+          {-149,96},{-149,101}}, color={0,0,127}));
+  connect(PT1_airIn2.y, genericAHUBus.TExhAirMea) annotation (Line(points={{
+          -149,112.5},{-149,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senTRet.T, PT1_airIn3.u) annotation (Line(points={{150,91},{150,94},{
+          151,94},{151,97}}, color={0,0,127}));
+  connect(PT1_airIn3.y, genericAHUBus.TRetAirMea) annotation (Line(points={{151,
+          108.5},{151,118.09},{0.09,118.09}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-100},
             {220,120}}),       graphics={
         Rectangle(

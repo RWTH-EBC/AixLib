@@ -15,7 +15,7 @@ model GenericAHU "Example of generic ahu model"
         partialHydraulicModule(
         dIns=0.01,
         kIns=0.028,
-        d=0.32,
+        d=0.032,
         length=1,
         Kv=6.3,
         redeclare
@@ -25,13 +25,15 @@ model GenericAHU "Example of generic ahu model"
         dynamicHX(
         dp1_nominal=50,
         dp2_nominal=1000,
+        tau1=5,
+        tau2=15,
         dT_nom=30,
         Q_nom=30000)),
     cooler(redeclare AixLib.Systems.HydraulicModules.Admix
         partialHydraulicModule(
         dIns=0.01,
         kIns=0.028,
-        d=0.32,
+        d=0.032,
         length=1,
         Kv=6.3,
         redeclare
@@ -41,13 +43,15 @@ model GenericAHU "Example of generic ahu model"
         dynamicHX(
         dp1_nominal=100,
         dp2_nominal=1000,
+        tau1=5,
+        tau2=10,
         dT_nom=30,
         Q_nom=50000)),
     heater(redeclare AixLib.Systems.HydraulicModules.Admix
         partialHydraulicModule(
         dIns=0.01,
         kIns=0.028,
-        d=0.32,
+        d=0.032,
         length=1,
         Kv=6.3,
         redeclare
@@ -57,6 +61,8 @@ model GenericAHU "Example of generic ahu model"
         dynamicHX(
         dp1_nominal=100,
         dp2_nominal=5000,
+        tau1=5,
+        tau2=15,
         dT_nom=30,
         Q_nom=30000)),
     dynamicHX(
@@ -138,7 +144,7 @@ model GenericAHU "Example of generic ahu model"
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={48,-40})));
-  Controller.CtrAHUBasic ctrAHUBasic(TFlowSet=293.15)
+  Controller.CtrAHUBasic ctrAHUBasic(TFlowSet=293.15, ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
@@ -166,7 +172,7 @@ equation
       points={{-20,72.1},{0,72.1},{0,52.3},{-6.66134e-15,52.3}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=3600), Documentation(revisions="<html>
+  annotation (experiment(StopTime=7200), Documentation(revisions="<html>
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
