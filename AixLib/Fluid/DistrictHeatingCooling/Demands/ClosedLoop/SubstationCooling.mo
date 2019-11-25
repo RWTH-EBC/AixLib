@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.ClosedLoop;
-model SubstationCooling
+model SubstationCooling "Substation cooling model"
 
     replaceable package Medium =
     Modelica.Media.Interfaces.PartialMedium "Medium model for water"
@@ -196,6 +196,10 @@ equation
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{100,120}})),
     Documentation(revisions="<html>
+<ul>
+<li><i>November 25, 2019</i> ,by Nils Neuland:<br/>
+Adapted to Aixlib conventions. </li>
+</ul>
 <ul>
 <li><i>August 09, 2018</i> ,by Tobias Blacha:<br/>
 Implemented </li>
