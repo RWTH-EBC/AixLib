@@ -2,3 +2,4 @@ SubstationCooling
 SubstationHeating
 SubstationHeatingCoolingVarDeltaT
 SubstationHeatingDirectCooling
+ValveControlledHeatPumpFixDeltaT
