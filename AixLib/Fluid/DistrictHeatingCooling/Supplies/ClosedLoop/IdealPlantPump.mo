@@ -46,18 +46,21 @@ model IdealPlantPump
     annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
   Movers.FlowControlled_dp fan(redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-    p_start=300000,
+    p_start=bou.p,
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
       addPowerToMedium=false,
     tau=1,
     y_start=1,
-    dp_start=3e5,
-    dp_nominal=dp_nominal)
+    dp_start=fan.dp_nominal,
+    dp_nominal=dpPump_nominal)
     annotation (Placement(transformation(extent={{-40,10},{-20,-10}})));
   Modelica.Blocks.Interfaces.RealInput dpIn(unit="Pa")
     "Input of pressure head for the pump"
     annotation (Placement(transformation(extent={{-126,-100},{-86,-60}})));
+  parameter Modelica.SIunits.PressureDifference dpPump_nominal=3e5 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
+        to set default values of constantHead and heads, and
+        and for default pressure curve if not specified in record per";
 equation
   connect(TIn, heater.TSet)
     annotation (Line(points={{-106,42},{12,42},{12,8}}, color={0,0,127}));

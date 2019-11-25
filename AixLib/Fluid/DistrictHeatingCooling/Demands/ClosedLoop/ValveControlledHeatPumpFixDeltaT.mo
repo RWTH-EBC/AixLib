@@ -82,7 +82,7 @@ public
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=1.2e5,
-    y_start=0.3,
+    y_start=pControl.y_start,
     l2=1e-9,
     l=0.05) "Control valve"
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
