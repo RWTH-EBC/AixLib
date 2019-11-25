@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.ClosedLoop;
-model SubstationHeatingDirectCooling
+model SubstationHeatingDirectCooling "Example of the SubstationHeatingDirectCooling model"
   import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
