@@ -41,7 +41,7 @@ model RegisterModule "AHU register module for heaters and coolers"
     T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
-  BaseClasses.registerBus registerBus
+  BaseClasses.RegisterBus registerBus
     annotation (Placement(transformation(extent={{-102,-12},{-78,10}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
 
@@ -90,9 +90,10 @@ protected
         origin={-38,60})));
 equation
   connect(partialHydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(
-        points={{-22.8,-2},{0,-2},{0,28},{20,28},{20,36}},   color={0,127,255}));
+        points={{-22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}},
+                                                             color={0,127,255}));
   connect(partialHydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(
-        points={{22.8,-2},{18,-2},{18,12},{-20,12},{-20,36}}, color={0,127,255}));
+        points={{22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}},   color={0,127,255}));
   connect(senT_airIn.T, PT1_airIn.u)
     annotation (Line(points={{-70,71},{-70,78}}, color={0,0,127}));
   connect(senT_airOut.T, PT1_airOut.u)
@@ -111,13 +112,13 @@ equation
     annotation (Line(points={{-60,60},{-48,60}}, color={0,127,255}));
   connect(VFSen_out.port_b, dynamicHX.port_a1) annotation (Line(points={{-28,60},
           {-20,60}},                       color={0,127,255}));
-  connect(PT1_airIn.y, registerBus.Tair_in) annotation (Line(points={{-70,101},
+  connect(PT1_airIn.y, registerBus.TAirInMea) annotation (Line(points={{-70,101},
           {-70,110},{-89.94,110},{-89.94,-0.945}},          color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(PT1_airOut.y, registerBus.Tair_out) annotation (Line(points={{70,101},
+  connect(PT1_airOut.y, registerBus.TAirOutMea) annotation (Line(points={{70,101},
           {70,110},{-89.94,110},{-89.94,-0.945}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -132,7 +133,7 @@ equation
           -78},{100,-78},{100,-60}}, color={0,127,255}));
                                                //"Admix" or "Injection" or "Injection2WayValve",
 //          visible=hydraulicModuleIcon <> "Throttle",
-  connect(VFSen_out.V_flow, registerBus.V_flow_air) annotation (Line(points={{-38,49},
+  connect(VFSen_out.V_flow, registerBus.VFlowAirMea) annotation (Line(points={{-38,49},
           {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
       string="%second",
       index=1,
