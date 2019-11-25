@@ -1,114 +1,84 @@
 within AixLib.Systems.Benchmark.Model.InternalLoad;
 model InternalLoads_new
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad
-    "Radiative heat flow of persons"
-    annotation (Placement(transformation(extent={{18,80},{38,100}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perCon
-    "Convective heat flow of persons"
-    annotation (Placement(transformation(extent={{18,38},{38,58}})));
-  Modelica.Blocks.Sources.CombiTimeTable intGai(
-    tableOnFile=true,
-    table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
-        0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
-        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
-        200; 50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200;
-        61200,0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,
-        0,0,0; 86400,0,0,0],
-    tableName="final",
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"),
-    columns={2,3,4},
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
-    (convective)"
-    annotation (Placement(transformation(extent={{-68,40},{-52,56}})));
-
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
-    "Convective heat flow of machines"
-    annotation (Placement(transformation(extent={{18,-2},{38,18}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a perConv_port
-    annotation (Placement(transformation(extent={{94,38},{114,58}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a macConv_port
-    annotation (Placement(transformation(extent={{94,-2},{114,18}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a perRad_port
-    annotation (Placement(transformation(extent={{94,80},{114,100}})));
   InternalLoads_Water internalLoads_Water
-    annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
-  BusSystems.Bus_measure bus_measure
-    annotation (Placement(transformation(extent={{86,-50},{126,-10}})));
-  InternalLoadsPower_new internalLoadsPower_new
-    annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  BusSystems.InternalBus internalBus
-    annotation (Placement(transformation(extent={{86,-110},{126,-70}})));
+    annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(
-    tableOnFile=false,
+    tableOnFile=true,
     tableName="final",
     timeScale=1,
     columns={2,3,4,5,6,7,8,9,10,11},
-    final fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"))
-    annotation (Placement(transformation(extent={{-72,-70},{-52,-50}})));
+    final fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Building/Benchmark/InternalLoads/InternalLoads_v2.mat"))
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b PerCon[5]
+    annotation (Placement(transformation(extent={{88,74},{108,94}})));
+  BusSystems.InternalBus internalBus
+    annotation (Placement(transformation(extent={{72,-40},{112,-80}})));
+  BusSystems.Bus_measure measureBus
+    annotation (Placement(transformation(extent={{76,-10},{116,-50}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b PerRad[5]
+    annotation (Placement(transformation(extent={{88,32},{108,52}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b MacCon[5]
+    annotation (Placement(transformation(extent={{90,-2},{110,18}})));
+  InternalLoads_Power_new internalLoads_Power_new
+    annotation (Placement(transformation(extent={{-8,50},{12,70}})));
 equation
-  connect(intGai.y[1],perRad. Q_flow)
-    annotation (Line(points={{-51.2,48},{-26,48},{-26,90},{18,90}},
-    color={0,0,127}));
-  connect(intGai.y[2],perCon. Q_flow)
-    annotation (Line(points={{-51.2,48},{18,48}},           color={0,0,127}));
-  connect(intGai.y[3],macConv. Q_flow)
-    annotation (Line(points={{-51.2,48},{-26,48},{-26,8},{18,8}},
-    color={0,0,127}));
-  connect(macConv.port, macConv_port)
-    annotation (Line(points={{38,8},{104,8}},     color={191,0,0}));
-  connect(perCon.port, perConv_port)
-    annotation (Line(points={{38,48},{104,48}},
-                                              color={191,0,0}));
-  connect(perRad.port, perRad_port)
-    annotation (Line(points={{38,90},{104,90}}, color={191,0,0}));
-  connect(internalLoadsPower_new.Power_Sum, bus_measure.InternalLoad_Power)
-    annotation (Line(points={{20,-28.8},{74,-28.8},{74,-29.9},{106.1,-29.9}},
-                                                                          color=
-         {0,0,127}), Text(
+  connect(internalLoads_Water.u1,combiTimeTable1. y) annotation (Line(points={{-10,-60},
+          {-40,-60},{-40,0},{-59,0}},          color={0,0,127}));
+  connect(internalLoads_Water.WaterPerRoom[1],internalBus. InternalLoads_MFlow_Openplanoffice)
+    annotation (Line(points={{10,-60.8},{32,-60.8},{32,-60},{54.1,-60},{54.1,-60.1},
+          {92.1,-60.1}}, color={0,0,127}));
+  connect(internalLoads_Water.WaterPerRoom[2],internalBus. InternalLoads_MFlow_Conferenceroom)
+    annotation (Line(points={{10,-60.4},{34,-60.4},{34,-60},{56.1,-60},{56.1,-60.1},
+          {92.1,-60.1}}, color={0,0,127}));
+  connect(internalLoads_Water.WaterPerRoom[3],internalBus. InternalLoads_MFlow_Multipersonoffice)
+    annotation (Line(points={{10,-60},{56,-60},{56,-60.1},{92.1,-60.1}}, color=
+          {0,0,127}));
+  connect(internalLoads_Water.WaterPerRoom[4],internalBus. InternalLoads_MFlow_Canteen)
+    annotation (Line(points={{10,-59.6},{36,-59.6},{36,-60},{60.1,-60},{60.1,-60.1},
+          {92.1,-60.1}}, color={0,0,127}));
+  connect(internalLoads_Water.WaterPerRoom[5],internalBus. InternalLoads_MFlow_Workshop)
+    annotation (Line(points={{10,-59.2},{34,-59.2},{34,-60},{56.1,-60},{56.1,-60.1},
+          {92.1,-60.1}}, color={0,0,127}));
+  connect(combiTimeTable1.y, internalLoads_Power_new.u1) annotation (Line(
+        points={{-59,0},{-40,0},{-40,60},{-8,60}}, color={0,0,127}));
+  connect(internalLoads_Power_new.Machine_power[1], MacCon[1]) annotation (Line(
+        points={{12.4,57.8},{54,57.8},{54,0},{100,0}}, color={191,0,0}));
+  connect(internalLoads_Power_new.Machine_power[2], MacCon[2]) annotation (Line(
+        points={{12.4,58.2},{54,58.2},{54,4},{100,4}}, color={191,0,0}));
+  connect(internalLoads_Power_new.Machine_power[3], MacCon[3]) annotation (Line(
+        points={{12.4,58.6},{54,58.6},{54,8},{100,8}}, color={191,0,0}));
+  connect(internalLoads_Power_new.Machine_power[4], MacCon[4]) annotation (Line(
+        points={{12.4,59},{54,59},{54,12},{100,12}}, color={191,0,0}));
+  connect(internalLoads_Power_new.Machine_power[5], MacCon[5]) annotation (Line(
+        points={{12.4,59.4},{54,59.4},{54,16},{100,16}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonRad[1], PerRad[1]) annotation (Line(
+        points={{12.4,61.8},{74,61.8},{74,34},{98,34}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonRad[2], PerRad[2]) annotation (Line(
+        points={{12.4,62.2},{74,62.2},{74,38},{98,38}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonRad[3], PerRad[3]) annotation (Line(
+        points={{12.4,62.6},{74,62.6},{74,42},{98,42}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonRad[4], PerRad[4]) annotation (Line(
+        points={{12.4,63},{74,63},{74,46},{98,46}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonRad[5], PerRad[5]) annotation (Line(
+        points={{12.4,63.4},{74,63.4},{74,50},{98,50}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonCon[1], PerCon[1]) annotation (Line(
+        points={{12.4,66.4},{74,66.4},{74,76},{98,76}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonCon[2], PerCon[2]) annotation (Line(
+        points={{12.4,66.8},{74,66.8},{74,80},{98,80}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonCon[3], PerCon[3]) annotation (Line(
+        points={{12.4,67.2},{74,67.2},{74,84},{98,84}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonCon[4], PerCon[4]) annotation (Line(
+        points={{12.4,67.6},{74,67.6},{74,88},{98,88}}, color={191,0,0}));
+  connect(internalLoads_Power_new.PersonCon[5], PerCon[5]) annotation (Line(
+        points={{12.4,68},{74,68},{74,92},{98,92}}, color={191,0,0}));
+  connect(internalLoads_Power_new.Power_Sum, measureBus.Sum_Power) annotation (
+      Line(points={{12,53.8},{16,53.8},{16,54},{36,54},{36,-34},{96.1,-34},{
+          96.1,-30.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(internalLoads_Water.WaterPerRoom[1], internalBus.InternalLoads_MFlow_Openplanoffice)
-    annotation (Line(points={{20,-90.8},{72,-90.8},{72,-89.9},{106.1,-89.9}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(internalLoads_Water.WaterPerRoom[2], internalBus.InternalLoads_MFlow_Conferenceroom)
-    annotation (Line(points={{20,-90.4},{72,-90.4},{72,-89.9},{106.1,-89.9}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(internalLoads_Water.WaterPerRoom[3], internalBus.InternalLoads_MFlow_Multipersonoffice)
-    annotation (Line(points={{20,-90},{72,-90},{72,-89.9},{106.1,-89.9}}, color=
-         {0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(internalLoads_Water.WaterPerRoom[4], internalBus.InternalLoads_MFlow_Canteen)
-    annotation (Line(points={{20,-89.6},{76,-89.6},{76,-89.9},{106.1,-89.9}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(internalLoads_Water.WaterPerRoom[5], internalBus.InternalLoads_QFlow_Workshop)
-    annotation (Line(points={{20,-89.2},{72,-89.2},{72,-89.9},{106.1,-89.9}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(combiTimeTable1.y, internalLoadsPower_new.u1) annotation (Line(
-        points={{-51,-60},{-26,-60},{-26,-30},{0,-30}},     color={0,0,127}));
-  connect(combiTimeTable1.y, internalLoads_Water.u1) annotation (Line(
-        points={{-51,-60},{-26,-60},{-26,-90},{0,-90}},     color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end InternalLoads_new;

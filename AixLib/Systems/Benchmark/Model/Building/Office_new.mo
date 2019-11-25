@@ -8,9 +8,9 @@ model Office_new
     annotation (Placement(transformation(extent={{-108,30},{-88,50}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_floor
     annotation (Placement(transformation(extent={{-70,-108},{-50,-88}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_IntConvGains
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_IntConvGains[5]
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_IntRadGains
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_IntRadGains[5]
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
   Modelica.Blocks.Interfaces.RealInput SolarRadIn[2] annotation (Placement(
         transformation(
@@ -162,26 +162,6 @@ equation
          {{-60,-98},{-30,-98},{-30,-18},{0,-18}}, color={191,0,0}));
   connect(port_floor, thermalZoneFourElements[5].floor) annotation (Line(points=
          {{-60,-98},{-30,-98},{-30,-18},{0,-18}}, color={191,0,0}));
-  connect(port_IntConvGains, thermalZoneFourElements[1].intGainsConv)
-    annotation (Line(points={{100,-40},{64,-40},{64,4},{24,4}}, color={191,0,0}));
-  connect(port_IntConvGains, thermalZoneFourElements[2].intGainsConv)
-    annotation (Line(points={{100,-40},{64,-40},{64,4},{24,4}}, color={191,0,0}));
-  connect(port_IntConvGains, thermalZoneFourElements[3].intGainsConv)
-    annotation (Line(points={{100,-40},{64,-40},{64,4},{24,4}}, color={191,0,0}));
-  connect(port_IntConvGains, thermalZoneFourElements[4].intGainsConv)
-    annotation (Line(points={{100,-40},{64,-40},{64,4},{24,4}}, color={191,0,0}));
-  connect(port_IntConvGains, thermalZoneFourElements[5].intGainsConv)
-    annotation (Line(points={{100,-40},{64,-40},{64,4},{24,4}}, color={191,0,0}));
-  connect(port_IntRadGains, thermalZoneFourElements[1].intGainsRad) annotation (
-     Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
-  connect(port_IntRadGains, thermalZoneFourElements[2].intGainsRad) annotation (
-     Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
-  connect(port_IntRadGains, thermalZoneFourElements[3].intGainsRad) annotation (
-     Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
-  connect(port_IntRadGains, thermalZoneFourElements[4].intGainsRad) annotation (
-     Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
-  connect(port_IntRadGains, thermalZoneFourElements[5].intGainsRad) annotation (
-     Line(points={{100,40},{64,40},{64,8},{24,8}}, color={191,0,0}));
   connect(thermalZoneFourElements[1].ports[1], vol1.ports[2]) annotation (Line(
         points={{13.475,-17.95},{13.475,-36.975},{0,-36.975},{0,-57.6}},
                                                                  color={0,127,255}));
@@ -254,6 +234,30 @@ equation
     annotation (Line(points={{24,100},{24,18},{-1.1,18}}, color={191,0,0}));
   connect(port_roof5, thermalZoneFourElements[5].roof) annotation (Line(points=
           {{48,100},{50,100},{50,18},{-1.1,18}}, color={191,0,0}));
+  connect(thermalZoneFourElements[1].intGainsRad, port_IntRadGains[1])
+    annotation (Line(points={{24,8},{80,8},{80,32},{100,32}}, color={191,0,0}));
+  connect(thermalZoneFourElements[2].intGainsRad, port_IntRadGains[2])
+    annotation (Line(points={{24,8},{80,8},{80,42},{100,42},{100,36}}, color={
+          191,0,0}));
+  connect(thermalZoneFourElements[3].intGainsRad, port_IntRadGains[3])
+    annotation (Line(points={{24,8},{80,8},{80,40},{100,40}}, color={191,0,0}));
+  connect(thermalZoneFourElements[4].intGainsRad, port_IntRadGains[4])
+    annotation (Line(points={{24,8},{80,8},{80,44},{100,44}}, color={191,0,0}));
+  connect(thermalZoneFourElements[5].intGainsRad, port_IntRadGains[5])
+    annotation (Line(points={{24,8},{80,8},{80,48},{100,48}}, color={191,0,0}));
+  connect(thermalZoneFourElements[1].intGainsConv, port_IntConvGains[1])
+    annotation (Line(points={{24,4},{30,4},{30,2},{80,2},{80,-42},{100,-42},{
+          100,-48}}, color={191,0,0}));
+  connect(thermalZoneFourElements[3].intGainsConv, port_IntConvGains[3])
+    annotation (Line(points={{24,4},{80,4},{80,-40},{100,-40}}, color={191,0,0}));
+  connect(thermalZoneFourElements[4].intGainsConv, port_IntConvGains[4])
+    annotation (Line(points={{24,4},{26,4},{26,2},{80,2},{80,-36},{100,-36}},
+        color={191,0,0}));
+  connect(thermalZoneFourElements[5].intGainsConv, port_IntConvGains[5])
+    annotation (Line(points={{24,4},{78,4},{78,-32},{100,-32}}, color={191,0,0}));
+  connect(port_IntConvGains[2], thermalZoneFourElements[2].intGainsConv)
+    annotation (Line(points={{100,-44},{96,-44},{96,-38},{80,-38},{80,4},{24,4}},
+        color={191,0,0}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office_new;

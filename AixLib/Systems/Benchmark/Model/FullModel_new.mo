@@ -4,8 +4,6 @@ model FullModel_new
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  Evaluation.Evaluation                                evaluation
-    annotation (Placement(transformation(extent={{-40,-16},{-20,4}})));
   Fluid.Sensors.Temperature senTem2(redeclare package Medium =AixLib.Media.Air)
     annotation (Placement(transformation(extent={{-34,46},{-22,58}})));
   Fluid.Sensors.Temperature senTem1(redeclare package Medium = AixLib.Media.Air)
@@ -102,8 +100,6 @@ model FullModel_new
     annotation (Placement(transformation(extent={{-120,0},{-80,40}})));
   BusSystems.Bus_Control                                Control
     annotation (Placement(transformation(extent={{-120,-48},{-80,-8}})));
-  InternalLoad.InternalLoads_new internalLoads_new
-    annotation (Placement(transformation(extent={{-40,18},{-20,38}})));
   Transfer.SupplyAir_RLT supplyAir_RLT
     annotation (Placement(transformation(extent={{42,80},{62,100}})));
   Weather_new weather_new
@@ -118,6 +114,10 @@ model FullModel_new
     MaxOutputPower=50*9*250)
     annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
 
+  InternalLoad.InternalLoads_new internalLoads_new
+    annotation (Placement(transformation(extent={{-38,22},{-18,42}})));
+  Evaluation.Evaluation_CCCS evaluation_CCCS
+    annotation (Placement(transformation(extent={{-40,-22},{-20,-2}})));
 equation
   connect(full_Transfer_RLT.measureBus,Measure)  annotation (Line(
       points={{20.2,-53},{28,-53},{28,-36},{-74,-36},{-74,20},{-100,20}},
@@ -125,10 +125,6 @@ equation
       thickness=0.5));
   connect(full_Transfer_RLT.controlBus,Control)  annotation (Line(
       points={{20.2,-47.2},{24,-47.2},{24,-32},{-66,-32},{-66,-28},{-100,-28}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(evaluation.measureBus,Measure)  annotation (Line(
-      points={{-40,-6},{-74,-6},{-74,20},{-100,20}},
       color={255,204,51},
       thickness=0.5));
   connect(senTem1.T,Measure. Air_out) annotation (Line(points={{72.2,56},{76,56},
@@ -224,15 +220,6 @@ equation
         points={{90.4,86.4},{90.4,-13.8},{42.2,-13.8},{42.2,6}}, color={191,0,0}));
   connect(weather_new.therm_floor, office_new.port_floor) annotation (Line(
         points={{90.2,81.2},{90.2,-14.4},{46,-14.4},{46,0.2}}, color={191,0,0}));
-  connect(internalLoads_new.perRad_port, office_new.port_IntRadGains)
-    annotation (Line(points={{-19.6,37},{67.2,37},{67.2,14},{62,14}}, color={191,
-          0,0}));
-  connect(internalLoads_new.perConv_port, office_new.port_IntConvGains)
-    annotation (Line(points={{-19.6,32.8},{67.2,32.8},{67.2,6},{62,6}}, color={191,
-          0,0}));
-  connect(internalLoads_new.macConv_port, office_new.port_IntConvGains)
-    annotation (Line(points={{-19.6,28.8},{67.2,28.8},{67.2,6},{62,6}}, color={191,
-          0,0}));
   connect(office_new.Air_out, vol1.ports[2]) annotation (Line(points={{52,0},{52,
           -14},{16,-14},{16,56}}, color={0,127,255}));
   connect(office_new.Air_out, senTem1.port) annotation (Line(points={{52,0},{52,
@@ -316,6 +303,75 @@ equation
 
 
 
+  connect(Control, evaluation_CCCS.bus_Control1) annotation (Line(
+      points={{-100,-28},{-44,-28},{-44,-15},{-40,-15}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(Measure, evaluation_CCCS.bus_measure) annotation (Line(
+      points={{-100,20},{-40.3,20},{-40.3,-12.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(internalLoads_new.PerCon[1], office_new.port_IntConvGains[1])
+    annotation (Line(points={{-18.2,39.6},{-18.2,40},{68,40},{68,5.2},{62,5.2}},
+        color={191,0,0}));
+  connect(internalLoads_new.PerCon[2], office_new.port_IntConvGains[2])
+    annotation (Line(points={{-18.2,40},{68,40},{68,5.6},{62,5.6}}, color={191,
+          0,0}));
+  connect(internalLoads_new.PerCon[3], office_new.port_IntConvGains[3])
+    annotation (Line(points={{-18.2,40.4},{68,40.4},{68,6},{62,6}}, color={191,
+          0,0}));
+  connect(internalLoads_new.PerCon[4], office_new.port_IntConvGains[4])
+    annotation (Line(points={{-18.2,40.8},{68,40.8},{68,6.4},{62,6.4}}, color={
+          191,0,0}));
+  connect(internalLoads_new.PerCon[5], office_new.port_IntConvGains[5])
+    annotation (Line(points={{-18.2,41.2},{68,41.2},{68,6.8},{62,6.8}}, color={
+          191,0,0}));
+  connect(internalLoads_new.PerRad[1], office_new.port_IntRadGains[1])
+    annotation (Line(points={{-18.2,35.4},{-18.2,36},{66,36},{66,13.2},{62,13.2}},
+        color={191,0,0}));
+  connect(internalLoads_new.PerRad[2], office_new.port_IntRadGains[2])
+    annotation (Line(points={{-18.2,35.8},{66,35.8},{66,13.6},{62,13.6}}, color
+        ={191,0,0}));
+  connect(internalLoads_new.PerRad[3], office_new.port_IntRadGains[3])
+    annotation (Line(points={{-18.2,36.2},{66,36.2},{66,14},{62,14}}, color={
+          191,0,0}));
+  connect(internalLoads_new.PerRad[4], office_new.port_IntRadGains[4])
+    annotation (Line(points={{-18.2,36.6},{66,36.6},{66,14.4},{62,14.4}}, color
+        ={191,0,0}));
+  connect(internalLoads_new.PerRad[5], office_new.port_IntRadGains[5])
+    annotation (Line(points={{-18.2,37},{66,37},{66,14.8},{62,14.8}}, color={
+          191,0,0}));
+  connect(internalLoads_new.MacCon[1], office_new.port_IntConvGains[1])
+    annotation (Line(points={{-18,32},{-14,32},{-14,32},{68,32},{68,5.2},{62,
+          5.2}}, color={191,0,0}));
+  connect(internalLoads_new.MacCon[2], office_new.port_IntConvGains[2])
+    annotation (Line(points={{-18,32.4},{-16,32.4},{-16,32},{68,32},{68,5.6},{
+          62,5.6}}, color={191,0,0}));
+  connect(internalLoads_new.MacCon[3], office_new.port_IntConvGains[3])
+    annotation (Line(points={{-18,32.8},{-16,32.8},{-16,32},{68,32},{68,6},{62,
+          6}}, color={191,0,0}));
+  connect(internalLoads_new.MacCon[4], office_new.port_IntConvGains[4])
+    annotation (Line(points={{-18,33.2},{-18,32},{68,32},{68,6.4},{62,6.4}},
+        color={191,0,0}));
+  connect(internalLoads_new.MacCon[5], office_new.port_IntConvGains[5])
+    annotation (Line(points={{-18,33.6},{-16,33.6},{-16,32},{68,32},{68,6.8},{
+          62,6.8}}, color={191,0,0}));
+  connect(Measure, internalLoads_new.measureBus) annotation (Line(
+      points={{-100,20},{-12,20},{-12,28},{-18.4,28},{-18.4,29}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel_new;
