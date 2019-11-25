@@ -37,17 +37,15 @@ model SubstationHeating "Substation heating model"
     use_inputFilter=false,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-66,-10},{-46,10}})));
-  AixLib.Fluid.Sources.MassFlowSource_T boundary1(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
-    nPorts=1)
-    annotation (Placement(transformation(extent={{50,-46},{30,-26}})));
+    nPorts=1) annotation (Placement(transformation(extent={{50,-46},{30,-26}})));
   Modelica.Blocks.Sources.Constant deltaT_heatingBuildingSite(k=
         deltaT_heatingSet)
     annotation (Placement(transformation(extent={{114,-74},{100,-60}})));
-  Sources.Boundary_pT                bou1(redeclare package Medium = Medium,
-      nPorts=1)
+  Sources.Boundary_pT sinkHeating(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-86,-46},{-66,-26}})));
   Modelica.Blocks.Sources.Constant const(k=(cp_default*deltaT_heatingSet))
     annotation (Placement(transformation(extent={{112,-46},{100,-34}})));
@@ -114,11 +112,10 @@ equation
           -30,0},{-30,-24},{-14,-24}}, color={0,127,255}));
   connect(heaPum.port_b2, vol1.ports[2]) annotation (Line(points={{6,-24},{24,-24},
           {24,0},{82,0},{82,6}}, color={0,127,255}));
-  connect(boundary1.ports[1], heaPum.port_a1)
+  connect(sourceHeating.ports[1], heaPum.port_a1)
     annotation (Line(points={{30,-36},{6,-36}}, color={0,127,255}));
-  connect(boundary1.m_flow_in, division.y) annotation (Line(points={{52,-28},{
-          60,-28},{60,-29},{71.3,-29}},
-                                     color={0,0,127}));
+  connect(sourceHeating.m_flow_in, division.y) annotation (Line(points={{52,-28},
+          {60,-28},{60,-29},{71.3,-29}}, color={0,0,127}));
   connect(division.u2, const.y) annotation (Line(points={{87.4,-33.2},{94,
           -33.2},{94,-40},{99.4,-40}},
                                   color={0,0,127}));
@@ -128,7 +125,7 @@ equation
     annotation (Line(points={{-40.7,69},{-56,69},{-56,12}},color={0,0,127}));
   connect(senTem_supHeating.port_a, heaPum.port_b1)
     annotation (Line(points={{-36,-36},{-14,-36}}, color={0,127,255}));
-  connect(senTem_supHeating.port_b, bou1.ports[1])
+  connect(senTem_supHeating.port_b, sinkHeating.ports[1])
     annotation (Line(points={{-56,-36},{-66,-36}}, color={0,127,255}));
   connect(division.u1,heatDemand)  annotation (Line(points={{87.4,-24.8},{129.7,
           -24.8},{129.7,-38},{136,-38}}, color={0,0,127}));
@@ -138,8 +135,8 @@ equation
           99.3,-67},{97.65,-67},{97.65,-66},{86,-66}}, color={0,0,127}));
   connect(T_supplyHeatingSet, add.u1) annotation (Line(points={{136,-82},{154,-82},
           {154,-54},{86,-54}}, color={0,0,127}));
-  connect(add.y, boundary1.T_in) annotation (Line(points={{63,-60},{58,-60},{58,
-          -32},{52,-32}}, color={0,0,127}));
+  connect(add.y, sourceHeating.T_in) annotation (Line(points={{63,-60},{58,-60},
+          {58,-32},{52,-32}}, color={0,0,127}));
   connect(heatDemand, add1.u1) annotation (Line(points={{136,-38},{136,-38},{
           136,80},{58,80}},
                         color={0,0,127}));

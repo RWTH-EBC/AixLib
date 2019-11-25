@@ -45,7 +45,7 @@ model SubstationCooling "Substation cooling model"
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     use_inputFilter=false)
     annotation (Placement(transformation(extent={{48,-10},{28,10}})));
-  AixLib.Fluid.Chillers.Carnot_TEva       chiller(
+  AixLib.Fluid.Chillers.Carnot_TEva chi(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
     allowFlowReversal1=true,
@@ -57,12 +57,11 @@ model SubstationCooling "Substation cooling model"
     dTCon_nominal=6,
     etaCarnot_nominal=0.3,
     QEva_flow_nominal=coolingDemand_max,
-    QEva_flow_min=coolingDemand_max)
-                      annotation (Placement(transformation(
+    QEva_flow_min=coolingDemand_max) annotation (Placement(transformation(
         extent={{-15,10},{15,-10}},
         rotation=180,
         origin={5,-48})));
-  AixLib.Fluid.Sources.MassFlowSource_T boundary1(
+  AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
     use_m_flow_in=true,
     use_T_in=true,
     redeclare package Medium = Medium,
@@ -71,8 +70,7 @@ model SubstationCooling "Substation cooling model"
   Modelica.Blocks.Sources.Constant deltaT_coolingBuildingSite(k=
         deltaT_coolingSet)
     annotation (Placement(transformation(extent={{-126,-100},{-106,-80}})));
-  Sources.Boundary_pT                bou1(redeclare package Medium = Medium,
-      nPorts=1)
+  Sources.Boundary_pT sinkCooling(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{60,-70},{40,-50}})));
   Modelica.Blocks.Sources.Constant const(k=-(cp_default*deltaT_coolingSet))
     annotation (Placement(transformation(extent={{-90,-38},{-78,-26}})));
@@ -116,45 +114,44 @@ equation
     annotation (Line(points={{48,0},{82,0},{82,6}}, color={0,127,255}));
   connect(const.y, division.u2) annotation (Line(points={{-77.4,-32},{-68,-32},{
           -68,-31.2},{-49.4,-31.2}}, color={0,0,127}));
-  connect(division.y, boundary1.m_flow_in) annotation (Line(points={{-33.3,-27},
-          {-20,-27},{-20,-40},{-62,-40},{-62,-52},{-52,-52}}, color={0,0,127}));
+  connect(division.y, sourceCooling.m_flow_in) annotation (Line(points={{-33.3,
+          -27},{-20,-27},{-20,-40},{-62,-40},{-62,-52},{-52,-52}}, color={0,0,
+          127}));
   connect(const1.y, division1.u2) annotation (Line(points={{-11.4,48},{-10,48},{
           -10,66},{-10,66},{-9.4,66},{-9.4,66.8}},
                                    color={0,0,127}));
-  connect(boundary1.ports[1], chiller.port_a2) annotation (Line(points={{-30,-60},
+  connect(sourceCooling.ports[1], chi.port_a2) annotation (Line(points={{-30,-60},
           {-26,-60},{-26,-62},{-20,-62},{-20,-54},{-10,-54}}, color={0,127,255}));
-  connect(chiller.port_b2, bou1.ports[1]) annotation (Line(points={{20,-54},{
-          28,-54},{28,-60},{40,-60}},
-                                   color={0,127,255}));
-  connect(pumpCooling.port_b, chiller.port_a1)
+  connect(chi.port_b2, sinkCooling.ports[1]) annotation (Line(points={{20,-54},
+          {28,-54},{28,-60},{40,-60}}, color={0,127,255}));
+  connect(pumpCooling.port_b, chi.port_a1)
     annotation (Line(points={{28,0},{20,0},{20,-42}}, color={0,127,255}));
-  connect(chiller.port_b1, senTem.port_b)
+  connect(chi.port_b1, senTem.port_b)
     annotation (Line(points={{-10,-42},{-10,1},{-14,1}}, color={0,0,127}));
   connect(senTem.port_a, vol.ports[2])
     annotation (Line(points={{-34,1},{-78,1},{-78,6}}, color={0,127,255}));
-  connect(add.y, boundary1.T_in) annotation (Line(points={{-71,-70},{-68,-70},{-68,
-          -56},{-52,-56}}, color={0,0,127}));
+  connect(add.y, sourceCooling.T_in) annotation (Line(points={{-71,-70},{-68,-70},
+          {-68,-56},{-52,-56}}, color={0,0,127}));
   connect(deltaT_coolingBuildingSite.y, add.u2) annotation (Line(points={{-105,
           -90},{-100,-90},{-100,-76},{-94,-76}}, color={0,0,127}));
   connect(T_supplyCoolingSet, add.u1) annotation (Line(points={{-146,30},{-106,30},
           {-106,-64},{-94,-64}}, color={0,0,127}));
   connect(add1.y, division1.u1) annotation (Line(points={{-23,74},{-16,74},{-16,
           75.2},{-9.4,75.2}}, color={0,0,127}));
-  connect(chiller.P, add1.u2) annotation (Line(points={{-11.5,-48},{-54,-48},
-          {-54,68},{-46,68}},
-                         color={0,0,127}));
-  connect(T_supplyCoolingSet, chiller.TSet) annotation (Line(points={{-146,30},
-          {60,30},{60,-39},{23,-39}},color={0,0,127}));
+  connect(chi.P, add1.u2) annotation (Line(points={{-11.5,-48},{-54,-48},{-54,
+          68},{-46,68}}, color={0,0,127}));
+  connect(T_supplyCoolingSet, chi.TSet) annotation (Line(points={{-146,30},{60,
+          30},{60,-39},{23,-39}}, color={0,0,127}));
   connect(division1.y, pumpCooling.m_flow_in)
     annotation (Line(points={{6.7,71},{38,71},{38,12}}, color={0,0,127}));
-  connect(chiller.P, powerDemandChiller) annotation (Line(points={{-11.5,
-          -48},{-54,-48},{-54,96},{110,96}},                 color={0,0,127}));
+  connect(chi.P, powerDemandChiller) annotation (Line(points={{-11.5,-48},{-54,
+          -48},{-54,96},{110,96}}, color={0,0,127}));
   connect(pumpCooling.P, powerDemandPump) annotation (Line(points={{27,9},
           {20,9},{20,76},{110,76}}, color={0,0,127}));
   connect(sum1.y, powerDemandSubstation)
     annotation (Line(points={{81,56},{110,56}}, color={0,0,127}));
-  connect(chiller.P, sum1.u[1]) annotation (Line(points={{-11.5,-48},{-54,-48},{
-          -54,56},{58,56}},  color={0,0,127}));
+  connect(chi.P, sum1.u[1]) annotation (Line(points={{-11.5,-48},{-54,-48},{-54,
+          56},{58,56}}, color={0,0,127}));
   connect(coolingDemand, gain.u)
     annotation (Line(points={{-146,80},{-110,80}}, color={0,0,127}));
   connect(gain.y, add1.u1)
