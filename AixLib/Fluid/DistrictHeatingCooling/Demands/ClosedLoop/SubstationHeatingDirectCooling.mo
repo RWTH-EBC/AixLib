@@ -88,7 +88,8 @@ public
     annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}),
         iconTransformation(extent={{152,68},{112,108}})));
 
-  Modelica.Blocks.Math.Add add(k2=-1)
+  Modelica.Blocks.Math.Add temperatureReturnBuilding(k2=-1)
+    "Temperature returning from building heating circiut"
     annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-134,-76},{-114,-56}})));
@@ -191,10 +192,11 @@ equation
   connect(division.y, sourceHeating.m_flow_in) annotation (Line(points={{89.3,
           -37},{76.65,-37},{76.65,-46},{64,-46}},
                                              color={0,0,127}));
-  connect(deltaT_heatingBuildingSite.y, add.u2) annotation (Line(points={{103.3,
-          -95},{100,-95},{100,-84},{94,-84}}, color={0,0,127}));
-  connect(add.y, sourceHeating.T_in) annotation (Line(points={{71,-78},{68,-78},
-          {68,-50},{64,-50}}, color={0,0,127}));
+  connect(deltaT_heatingBuildingSite.y, temperatureReturnBuilding.u2)
+    annotation (Line(points={{103.3,-95},{100,-95},{100,-84},{94,-84}}, color={
+          0,0,127}));
+  connect(temperatureReturnBuilding.y, sourceHeating.T_in) annotation (Line(
+        points={{71,-78},{68,-78},{68,-50},{64,-50}}, color={0,0,127}));
   connect(division2.u2, const1.y) annotation (Line(points={{49.4,102.8},{57.7,
           102.8},{57.7,90},{65.4,90}}, color={0,0,127}));
   connect(division2.y, pumpCooling.m_flow_in) annotation (Line(points={{33.3,
@@ -217,8 +219,8 @@ equation
     annotation (Line(points={{58,24},{48,24}}, color={0,127,255}));
   connect(port_a, port_a)
     annotation (Line(points={{-260,0},{-260,0}}, color={0,127,255}));
-  connect(const4.y, add.u1) annotation (Line(points={{-11,-140},{148,-140},{148,
-          -72},{94,-72}}, color={0,0,127}));
+  connect(const4.y, temperatureReturnBuilding.u1) annotation (Line(points={{-11,
+          -140},{148,-140},{148,-72},{94,-72}}, color={0,0,127}));
   connect(const4.y, heaPum.TSet) annotation (Line(points={{-11,-140},{12,-140},{
           12,-39},{12,-39}}, color={0,0,127}));
   connect(vol2.ports[1], pumpCooling.port_b)

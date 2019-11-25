@@ -101,7 +101,8 @@ public
         rotation=-90,
         origin={20,-40})));
   Modelica.Blocks.Math.Add temperatureReturnBuilding(k2=-1)
-    "Temperature returning from building heating system" annotation (Placement(
+    "Temperature returning from building heating circiut"
+                                                         annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,

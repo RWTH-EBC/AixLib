@@ -87,7 +87,8 @@ public
    annotation (Placement(
         transformation(extent={{156,-102},{116,-62}}), iconTransformation(
           extent={{156,-102},{116,-62}})));
-  Modelica.Blocks.Math.Add add(k2=-1)
+  Modelica.Blocks.Math.Add temperatureReturnBuilding(k2=-1)
+    "Temperature returning from building heating circiut"
     annotation (Placement(transformation(extent={{84,-70},{64,-50}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{56,64},{36,84}})));
@@ -131,12 +132,13 @@ equation
           -24.8},{129.7,-38},{136,-38}}, color={0,0,127}));
   connect(T_supplyHeatingSet, heaPum.TSet) annotation (Line(points={{136,-82},{16,
           -82},{16,-39},{8,-39}}, color={0,0,127}));
-  connect(deltaT_heatingBuildingSite.y, add.u2) annotation (Line(points={{
-          99.3,-67},{97.65,-67},{97.65,-66},{86,-66}}, color={0,0,127}));
-  connect(T_supplyHeatingSet, add.u1) annotation (Line(points={{136,-82},{154,-82},
-          {154,-54},{86,-54}}, color={0,0,127}));
-  connect(add.y, sourceHeating.T_in) annotation (Line(points={{63,-60},{58,-60},
-          {58,-32},{52,-32}}, color={0,0,127}));
+  connect(deltaT_heatingBuildingSite.y, temperatureReturnBuilding.u2)
+    annotation (Line(points={{99.3,-67},{97.65,-67},{97.65,-66},{86,-66}},
+        color={0,0,127}));
+  connect(T_supplyHeatingSet, temperatureReturnBuilding.u1) annotation (Line(
+        points={{136,-82},{154,-82},{154,-54},{86,-54}}, color={0,0,127}));
+  connect(temperatureReturnBuilding.y, sourceHeating.T_in) annotation (Line(
+        points={{63,-60},{58,-60},{58,-32},{52,-32}}, color={0,0,127}));
   connect(heatDemand, add1.u1) annotation (Line(points={{136,-38},{136,-38},{
           136,80},{58,80}},
                         color={0,0,127}));

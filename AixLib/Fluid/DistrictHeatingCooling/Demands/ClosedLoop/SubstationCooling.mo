@@ -89,7 +89,8 @@ model SubstationCooling "Substation cooling model"
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
   "Supply temperature of the cooling circuit in the building"
     annotation (Placement(transformation(extent={{-166,10},{-126,50}})));
-  Modelica.Blocks.Math.Add add(k2=+1)
+  Modelica.Blocks.Math.Add temperatureReturnBuilding(k2=+1)
+    "Temperature returning from building cooling circiut"
     annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
@@ -130,12 +131,13 @@ equation
     annotation (Line(points={{-10,-42},{-10,1},{-14,1}}, color={0,0,127}));
   connect(senTem.port_a, vol.ports[2])
     annotation (Line(points={{-34,1},{-78,1},{-78,6}}, color={0,127,255}));
-  connect(add.y, sourceCooling.T_in) annotation (Line(points={{-71,-70},{-68,-70},
-          {-68,-56},{-52,-56}}, color={0,0,127}));
-  connect(deltaT_coolingBuildingSite.y, add.u2) annotation (Line(points={{-105,
-          -90},{-100,-90},{-100,-76},{-94,-76}}, color={0,0,127}));
-  connect(T_supplyCoolingSet, add.u1) annotation (Line(points={{-146,30},{-106,30},
-          {-106,-64},{-94,-64}}, color={0,0,127}));
+  connect(temperatureReturnBuilding.y, sourceCooling.T_in) annotation (Line(
+        points={{-71,-70},{-68,-70},{-68,-56},{-52,-56}}, color={0,0,127}));
+  connect(deltaT_coolingBuildingSite.y, temperatureReturnBuilding.u2)
+    annotation (Line(points={{-105,-90},{-100,-90},{-100,-76},{-94,-76}}, color
+        ={0,0,127}));
+  connect(T_supplyCoolingSet, temperatureReturnBuilding.u1) annotation (Line(
+        points={{-146,30},{-106,30},{-106,-64},{-94,-64}}, color={0,0,127}));
   connect(add1.y, division1.u1) annotation (Line(points={{-23,74},{-16,74},{-16,
           75.2},{-9.4,75.2}}, color={0,0,127}));
   connect(chi.P, add1.u2) annotation (Line(points={{-11.5,-48},{-54,-48},{-54,

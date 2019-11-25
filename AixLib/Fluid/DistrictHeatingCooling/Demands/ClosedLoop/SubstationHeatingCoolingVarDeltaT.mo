@@ -88,7 +88,8 @@ public
         extent={{20,20},{-20,-20}},
         rotation=180,
         origin={-270,-130}), iconTransformation(extent={{232,124},{192,164}})));
-  Modelica.Blocks.Math.Add add(k2=-1)
+  Modelica.Blocks.Math.Add temperatureReturnBuilding_heating(k2=-1)
+    "Temperature returning from building heating circiut"
     annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-134,-76},{-114,-56}})));
@@ -152,8 +153,8 @@ public
     annotation (Placement(transformation(extent={{48,100},{34,114}})));
   Modelica.Blocks.Math.Gain        const1(k=-cp_default)
     annotation (Placement(transformation(extent={{78,84},{66,96}})));
-  Modelica.Blocks.Math.Add add3(
-                               k2=+1)
+  Modelica.Blocks.Math.Add temperatureReturnBuilding_cooling(k2=+1)
+    "Temperature returning from building cooling circiut"
     annotation (Placement(transformation(extent={{-120,100},{-100,120}})));
   Modelica.Blocks.Sources.Constant deltaT_coolingBuildingSite(k=
         deltaT_coolingSet)
@@ -243,12 +244,13 @@ equation
   connect(division.y, sourceHeating.m_flow_in) annotation (Line(points={{89.3,
           -37},{76.65,-37},{76.65,-46},{64,-46}},
                                              color={0,0,127}));
-  connect(T_supplyHeatingSet, add.u1) annotation (Line(points={{-270,-130},{124,
-          -130},{124,-72},{94,-72}},     color={0,0,127}));
-  connect(deltaT_heatingBuildingSite.y, add.u2) annotation (Line(points={{103.3,
-          -95},{100,-95},{100,-84},{94,-84}}, color={0,0,127}));
-  connect(add.y, sourceHeating.T_in) annotation (Line(points={{71,-78},{68,-78},
-          {68,-50},{64,-50}}, color={0,0,127}));
+  connect(T_supplyHeatingSet, temperatureReturnBuilding_heating.u1) annotation
+    (Line(points={{-270,-130},{124,-130},{124,-72},{94,-72}}, color={0,0,127}));
+  connect(deltaT_heatingBuildingSite.y, temperatureReturnBuilding_heating.u2)
+    annotation (Line(points={{103.3,-95},{100,-95},{100,-84},{94,-84}}, color={
+          0,0,127}));
+  connect(temperatureReturnBuilding_heating.y, sourceHeating.T_in) annotation (
+      Line(points={{71,-78},{68,-78},{68,-50},{64,-50}}, color={0,0,127}));
   connect(sourceCooling.ports[1], chi.port_a2) annotation (Line(points={{-50,54},
           {-30,54},{-30,36},{-24,36}}, color={0,127,255}));
   connect(chi.port_b2, sinkCooling.ports[1]) annotation (Line(points={{-4,36},{
@@ -261,13 +263,14 @@ equation
           102.8},{57.7,90},{65.4,90}}, color={0,0,127}));
   connect(division2.y, pumpCooling.m_flow_in) annotation (Line(points={{33.3,
           107},{32,107},{32,66},{38,66},{38,36}}, color={0,0,127}));
-  connect(deltaT_coolingBuildingSite.y, add3.u2) annotation (Line(points={{-137,
-          86},{-130,86},{-130,104},{-122,104}}, color={0,0,127}));
-  connect(T_supplyCoolingSet, add3.u1) annotation (Line(points={{228,102},{
-          106,102},{106,146},{-150,146},{-150,116},{-122,116}},
-                 color={0,0,127}));
-  connect(add3.y, sourceCooling.T_in) annotation (Line(points={{-99,110},{-94,
-          110},{-94,58},{-72,58}}, color={0,0,127}));
+  connect(deltaT_coolingBuildingSite.y, temperatureReturnBuilding_cooling.u2)
+    annotation (Line(points={{-137,86},{-130,86},{-130,104},{-122,104}}, color=
+          {0,0,127}));
+  connect(T_supplyCoolingSet, temperatureReturnBuilding_cooling.u1) annotation
+    (Line(points={{228,102},{106,102},{106,146},{-150,146},{-150,116},{-122,116}},
+        color={0,0,127}));
+  connect(temperatureReturnBuilding_cooling.y, sourceCooling.T_in) annotation (
+      Line(points={{-99,110},{-94,110},{-94,58},{-72,58}}, color={0,0,127}));
   connect(const2.y, division3.u2) annotation (Line(points={{-44.6,100},{-50,100},
           {-50,122.8},{-56.6,122.8}}, color={0,0,127}));
   connect(division3.y, sourceCooling.m_flow_in) annotation (Line(points={{-72.7,
