@@ -2,8 +2,10 @@ within AixLib.DataBase.Storage;
 record Generic_46000l
   extends BufferStorageBaseDataDefinition(
     hTank=3,
-    hLowerPorts=0.05,
-    hUpperPorts=2.95,
+    hLowerPortDemand=0.3,
+    hLowerPortSupply=0.3,
+    hUpperPortDemand=2.9,
+    hUpperPortSupply=2.9,
     hHC1Up=2.9,
     hHC1Low=0.1,
     hHC2Up=2.9,
