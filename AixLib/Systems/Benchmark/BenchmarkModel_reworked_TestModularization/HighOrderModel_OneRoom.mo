@@ -1,37 +1,6 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model HighOrderModel_OneRoom "Single instance of high order room with input paramaters"
    extends Modelica.Icons.Example;
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad
-    "Radiative heat flow of persons"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={42,-32})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perCon
-    "Convective heat flow of persons"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={60,-34})));
-  Modelica.Blocks.Sources.CombiTimeTable intGai(
-    tableOnFile=true,
-    table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
-        0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
-        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,
-        200; 50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200;
-        61200,0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,
-        0,0,0; 86400,0,0,0],
-    tableName="final",
-    fileName="D:/sciebo_fb/BA/InternalLoads_v2.mat",
-    columns={2,3,4},
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
-    (convective)"
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
-        rotation=90,
-        origin={58,-88})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow macConv
-    "Convective heat flow of machines"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={78,-34})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
@@ -40,18 +9,13 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{-4,-4},{4,4}},
     rotation=0,  origin={-76,-80})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={12,8})));
   Modelica.Blocks.Sources.Constant const2(k=0.15)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-74,-48})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
-    tableName="SimYearVar",
+    tableName="Benchmark",
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
@@ -62,7 +26,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/SimYear_Variante3_angepasst.mat"))
+        "modelica://AixLib/Resources/weatherdata/Weathdata_benchmark_old.mat"))
     annotation (Placement(transformation(extent={{-98,80},{-68,100}})));
 
   Utilities.Interfaces.SolarRad_out SolarRadiation_East
@@ -104,26 +68,21 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{-32,-4},{-12,16}})));
+  Modelica.Blocks.Sources.Pulse pulse(
+    amplitude=2000,
+    width=50,
+    period=86400,
+    startTime=28800)
+    annotation (Placement(transformation(extent={{2,-84},{22,-64}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad
+    "Radiative heat flow of persons" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={36,-56})));
 equation
-  connect(intGai.y[1],perRad. Q_flow)
-    annotation (Line(points={{58,-79.2},{42,-79.2},{42,-42}},
-    color={0,0,127}));
-  connect(intGai.y[2],perCon. Q_flow)
-    annotation (Line(points={{58,-79.2},{58,-60},{60,-60},{60,-44}},
-                                                            color={0,0,127}));
-  connect(intGai.y[3],macConv. Q_flow)
-    annotation (Line(points={{58,-79.2},{78,-79.2},{78,-44}},
-    color={0,0,127}));
   connect(TSoil.y,preTemFloor. T)
   annotation (Line(points={{-71.6,-80},{-23,-80},{-23,-37.2}},
                                                             color={0,0,127}));
-  connect(perRad.port,thermalCollector. port_a[1]) annotation (Line(points={{42,-22},
-          {42,8},{22,8}},                   color={191,0,0}));
-  connect(perCon.port,thermalCollector. port_a[1])
-    annotation (Line(points={{60,-24},{54,-24},{54,8},{22,8}},
-                                                 color={191,0,0}));
-  connect(macConv.port,thermalCollector. port_a[2]) annotation (Line(points={{78,-24},
-          {78,8},{22,8}},                   color={191,0,0}));
   connect(weather.SolarRadiation_OrientedSurfaces[2],SolarRadiation_East)
     annotation (Line(points={{-90.8,79},{-90.8,18},{-90,18},{-90,50},{-70,50}},
                      color={255,128,0}));
@@ -148,8 +107,6 @@ equation
   connect(Gc.y, theConRoof.Gc) annotation (Line(points={{-11,36},{-12,36},{-12,
           37},{-28,37}},
                     color={0,0,127}));
-  connect(thermalCollector.port_b, southFacingWindows.thermRoom) annotation (
-      Line(points={{2,8},{54,8},{54,8.3},{-24.9,8.3}},     color={191,0,0}));
   connect(preTemFloor.port, southFacingWindows.Therm_ground) annotation (Line(
         points={{-23,-24},{-26,-24},{-26,-3.6},{-25.2,-3.6}},
                                                           color={191,0,0}));
@@ -180,7 +137,11 @@ equation
     annotation (Line(points={{-70,-8},{-56,-8},{-56,12.8},{-33,12.8}},
                                                                     color={255,
           128,0}));
+  connect(pulse.y, perRad.Q_flow) annotation (Line(points={{23,-74},{24,-74},{
+          24,-56},{26,-56}}, color={0,0,127}));
+  connect(perRad.port, southFacingWindows.thermRoom)
+    annotation (Line(points={{46,-56},{46,8.3},{-24.9,8.3}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=15552000, Interval=300));
+    experiment(StopTime=4838400, Interval=3600));
 end HighOrderModel_OneRoom;

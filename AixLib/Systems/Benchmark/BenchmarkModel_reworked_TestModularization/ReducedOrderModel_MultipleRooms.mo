@@ -81,9 +81,11 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     "Convective heat flow of machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
   Modelica.Blocks.Sources.Constant hConWall(k=25*11.5) "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90,
+        origin={34,-22})));
   Modelica.Blocks.Sources.Constant hConWin(k=20*14) "Outdoor coefficient of heat transfer for windows"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90,
+        origin={16,-22})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
@@ -111,7 +113,7 @@ model ReducedOrderModel_MultipleRooms  "Multiple instances of reduced order room
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={67,47})));
   Modelica.Blocks.Sources.Constant hConRoof(k=25*11.5) "Outdoor coefficient of heat transfer for roof"
-    annotation (Placement(transformation(extent={{4,-4},{-4,4}})));
+    annotation (Placement(transformation(extent={{-2,-38},{-10,-30}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{68,90},{62,96}})));
@@ -226,8 +228,10 @@ equation
     annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
   connect(theConWall.fluid,preTem. port)
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
-  connect(hConWall.y,theConWall. Gc) annotation (Line(points={{0,4.4},{0,-4},{31,-4}}, color={0,0,127}));
-  connect(hConWin.y,theConWin. Gc) annotation (Line(points={{0,-4.4},{0,26},{33,26}}, color={0,0,127}));
+  connect(hConWall.y,theConWall. Gc) annotation (Line(points={{34,-17.6},{34,-4},
+          {31,-4}},                                                                    color={0,0,127}));
+  connect(hConWin.y,theConWin. Gc) annotation (Line(points={{16,-26.4},{16,26},
+          {33,26}},                                                                   color={0,0,127}));
   connect(weaBus.TBlaSky,eqAirTemp. TBlaSky)
     annotation (Line(
     points={{-83,6},{-58,6},{-58,2},{-32,2},{-32,-4},{-26,-4}},
@@ -243,7 +247,8 @@ equation
   connect(eqAirTempVDI.TEqAir,preTemRoof. T)
     annotation (Line(
     points={{51,84},{67,84},{67,71.2}}, color={0,0,127}));
-  connect(theConRoof.Gc,hConRoof. y) annotation (Line(points={{72,47},{-4.4,47},{-4.4,0}}, color={0,0,127}));
+  connect(theConRoof.Gc,hConRoof. y) annotation (Line(points={{72,47},{-10.4,47},
+          {-10.4,-34}},                                                                    color={0,0,127}));
   connect(eqAirTempVDI.TDryBul,eqAirTemp. TDryBul)
     annotation (Line(points={{28,78},{-96,78},{-96,-2},{-38,-2},{-38,-10},{-26,-10}},
     color={0,0,127}));

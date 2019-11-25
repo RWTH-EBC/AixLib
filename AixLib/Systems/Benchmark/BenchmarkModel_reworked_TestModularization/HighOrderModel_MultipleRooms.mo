@@ -85,14 +85,13 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
     Win_Area={180,80,20,40,200},
     each use_sunblind=true,
     each ratioSunblind=0,
-    each solIrrThreshold=10000,
-     each TOutAirLimit=10273.15,
+    each solIrrThreshold=100000,
+    each TOutAirLimit=10273.15,
      each solar_absorptance_OW=0.48,
      each eps_out=25,
      each TypOW=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
      each TypCE=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf(),
-     each TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
-     each Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
+     each TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML())
     annotation (Placement(transformation(extent={{-20,-2},{0,18}})));
   Utilities.Interfaces.SolarRad_out SolarRadiation_East
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
@@ -284,26 +283,26 @@ equation
   connect(SolarRadiation_East, southFacingWindows[5].SolarRadiationPort[2])
     annotation (Line(points={{-70,50},{-46,50},{-46,13.6},{-21,13.6}}, color={255,
           128,0}));
-  connect(perRad.port, southFacingWindows[1].thermRoom) annotation (Line(points
-        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perRad.port, southFacingWindows[2].thermRoom) annotation (Line(points
-        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perRad.port, southFacingWindows[3].thermRoom) annotation (Line(points
-        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perRad.port, southFacingWindows[4].thermRoom) annotation (Line(points
-        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perRad.port, southFacingWindows[5].thermRoom) annotation (Line(points
-        ={{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perCon.port, southFacingWindows[1].thermRoom) annotation (Line(points
-        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perCon.port, southFacingWindows[2].thermRoom) annotation (Line(points
-        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perCon.port, southFacingWindows[3].thermRoom) annotation (Line(points
-        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perCon.port, southFacingWindows[4].thermRoom) annotation (Line(points
-        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
-  connect(perCon.port, southFacingWindows[5].thermRoom) annotation (Line(points
-        ={{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[1].thermRoom) annotation (Line(points=
+         {{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[2].thermRoom) annotation (Line(points=
+         {{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[3].thermRoom) annotation (Line(points=
+         {{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[4].thermRoom) annotation (Line(points=
+         {{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perRad.port, southFacingWindows[5].thermRoom) annotation (Line(points=
+         {{42,-28},{42,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[1].thermRoom) annotation (Line(points=
+         {{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[2].thermRoom) annotation (Line(points=
+         {{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[3].thermRoom) annotation (Line(points=
+         {{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[4].thermRoom) annotation (Line(points=
+         {{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
+  connect(perCon.port, southFacingWindows[5].thermRoom) annotation (Line(points=
+         {{60,-30},{60,10.3},{-12.9,10.3}}, color={191,0,0}));
   connect(macConv.port, southFacingWindows[1].thermRoom) annotation (Line(
         points={{78,-30},{78,10.3},{-12.9,10.3}}, color={191,0,0}));
   connect(macConv.port, southFacingWindows[2].thermRoom) annotation (Line(
