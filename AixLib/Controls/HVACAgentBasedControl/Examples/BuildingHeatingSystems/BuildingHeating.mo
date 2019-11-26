@@ -37,7 +37,7 @@ model BuildingHeating
     Q_flow_nominal=1)
     annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
 
-  AixLib.Fluid.Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT          bou(nPorts=1, redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{142,-80},{122,-60}})));
   Agents.RoomAgent roomAgent(              startTime=60,

@@ -124,10 +124,9 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={58,28})));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](   eps=fill(
-        eps, nNodes), A=AOutside/nNodes) if withRadiationParam
-  annotation (Placement(
-        transformation(
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps, nNodes),
+      A=AOutside/nNodes) if                 withRadiationParam annotation (
+      Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-58,30})));
