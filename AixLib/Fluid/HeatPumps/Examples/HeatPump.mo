@@ -22,8 +22,8 @@ model HeatPump "Example for the reversible heat pump model."
         rotation=0,
         origin={-86,40})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
-    duration=1000,
-    startTime=1000,
+    duration=500,
+    startTime=500,
     height=25,
     offset=278)
     "Ramp signal for the temperature input of the source side's ideal mass flow source"
@@ -68,7 +68,7 @@ model HeatPump "Example for the reversible heat pump model."
         rotation=270,
         origin={2,-21})));
 
-  Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=10000,
+  Modelica.Blocks.Sources.BooleanStep     booleanStep(startTime=1800,
       startValue=true)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=270,
@@ -216,7 +216,9 @@ equation
     annotation (Line(points={{13.5,53},{7,53},{7,35}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-    experiment(StopTime=20000),
+    experiment(Tolerance=1e-6, StopTime=3600),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos"
+        "Simulate and plot"),
     Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>

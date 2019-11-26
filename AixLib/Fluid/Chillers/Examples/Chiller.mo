@@ -22,16 +22,12 @@ model Chiller "Example for the reversible chiller model."
         rotation=0,
         origin={-86,62})));
   Modelica.Blocks.Sources.Ramp TsuSinkRamp(
-    duration=1000,
-    startTime=1000,
+    duration=500,
+    startTime=500,
     height=25,
     offset=278)
     "Ramp signal for the temperature input of the sink side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-94,-76},{-74,-56}})));
-  Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
-    annotation (Placement(transformation(extent={{8,-8},{-8,8}},
-        rotation=90,
-        origin={0,62})));
   AixLib.Fluid.Chillers.Chiller chiller(
     refIneFre_constant=1,
     CEva=100,
@@ -146,7 +142,7 @@ model Chiller "Example for the reversible chiller model."
     uLow=273.15 + 14)
     annotation (Placement(transformation(extent={{46,-98},{34,-86}})));
   Modelica.Blocks.Sources.BooleanStep     booleanStep(
-      startValue=true, startTime=15000)
+      startValue=true, startTime=1800)
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=0,
         origin={32,-54})));
@@ -209,8 +205,9 @@ equation
           14,-54},{14,-83},{11,-83}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-    experiment(StopTime=30000),
-    __Dymola_experimentSetupOutput,
+    experiment(Tolerance=1e-6, StopTime=3600),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Examples/Chiller.mos"
+        "Simulate and plot"),
     Documentation(info="<html><h4>
   <span style=\"color: #008000\">Overview</span>
 </h4>
