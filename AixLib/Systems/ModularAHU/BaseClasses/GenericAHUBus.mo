@@ -11,12 +11,12 @@ expandable connector GenericAHUBus
   SI.Temperature TRetAirMea "Return air temperature";
   SI.Temperature TExhAirMea "Return air temperature";
   SI.VolumeFlowRate  V_flow_RetAirMea  "Return air volume flow";
-  Real  dpFanRetSet "Pressure difference for fan in return air canal";
-  Real  dpFanRetMea "Pressure difference for fan in return air canal";
-  Real  powerFanRetMea "Power of fan in return air canal";
-  Real  dpFanSupSet "Pressure difference for fan in return air canal";
-  Real  dpFanSupMea "Pressure difference for fan in return air canal";
-  Real  powerSupRetMea "Power of fan in return air canal";
+  Real dpFanRetSet "Set pressure difference for fan in return air canal";
+  Real dpFanRetMea "Measured pressure difference for fan in return air canal";
+  Real powerFanRetMea "Power of fan in return air canal";
+  Real dpFanSupSet "Set pressure difference for fan in supply air canal";
+  Real dpFanSupMea "Measured pressure difference for fan in supply air canal";
+  Real powerFanSupMea "Power of fan in supply air canal";
   Real flapRetSet(start=1) "Flap opening of flap in return air canal [0..1]";
   Real flapRetMea "Actual flap opening of flap in return air canal";
   Real flapSupSet(start=1) "Flap opening of flap in supply air canal [0..1]";

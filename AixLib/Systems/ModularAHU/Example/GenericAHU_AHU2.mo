@@ -184,7 +184,9 @@ model GenericAHU_AHU2
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={48,-40})));
-  Controller.CtrAHUBasic ctrAHUBasic(TFlowSet=293.15, ctrRh(k=0.01))
+  Controller.CtrAHUBasic ctrAHUBasic(
+    TFlowSet=293.15,
+    useTwoFanCont=true,                               ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
