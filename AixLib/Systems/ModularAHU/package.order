@@ -1,4 +1,5 @@
 RegisterModule
+VentilationUnit
 GenericAHU
 BaseClasses
 Controller

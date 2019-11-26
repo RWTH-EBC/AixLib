@@ -13,15 +13,18 @@ model CtrAHUBasic "Simple controller for AHU"
           extent={{90,-10},{110,10}}), iconTransformation(extent={{84,-14},{116,
             16}})));
   CtrRegBasic ctrPh(final useExternalTset=true,
-                                          Td=0)
+                                          Td=0,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput)
     annotation (dialog(enable=True), Placement(transformation(extent={{0,80},{20,100}})));
   CtrRegBasic ctrRh(
     final useExternalTset=true,
-    final useExternalTMea=true,           Td=0)
+    final useExternalTMea=true,           Td=0,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput)
     annotation (dialog(enable=True),Placement(transformation(extent={{0,0},{20,20}})));
   CtrRegBasic ctrCo(
     final useExternalTset=true,
     Td=0,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     final reverseAction=true)
     annotation (dialog(enable=True),Placement(transformation(extent={{0,40},{20,60}})));
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,40},
@@ -40,6 +43,7 @@ model CtrAHUBasic "Simple controller for AHU"
     final k=50,
     final Ti=5,
     final Td=0,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled)
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
@@ -61,6 +65,7 @@ model CtrAHUBasic "Simple controller for AHU"
     final k=50,
     final Ti=5,
     final Td=0,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     final reverseAction=false,
     final reset=AixLib.Types.Reset.Disabled) if useTwoFanCont
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));

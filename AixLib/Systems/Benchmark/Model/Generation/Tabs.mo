@@ -116,8 +116,6 @@ equation
 
   connect(admix.port_b1, pipe.port_a)
     annotation (Line(points={{-24,30},{-24,46},{-10,46}}, color={0,127,255}));
-  connect(pipe.ports_b[1], admix.port_a2)
-    annotation (Line(points={{10,46},{24,46},{24,30}}, color={0,127,255}));
   connect(port_a2, val.port_1)
     annotation (Line(points={{-40,-100},{-40,-80}}, color={0,127,255}));
   connect(port_a1, val.port_3) annotation (Line(points={{-80,-100},{-80,-70},{-50,
@@ -160,6 +158,8 @@ equation
           {26,-66},{40,-66}}, color={0,127,255}));
   connect(res2.port_b, port_b1)
     annotation (Line(points={{40,-86},{40,-100}}, color={0,127,255}));
+  connect(pipe.ports_b[1], admix.port_a2)
+    annotation (Line(points={{10,46},{24,46},{24,30}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,120}}),                                        graphics={
         Rectangle(
