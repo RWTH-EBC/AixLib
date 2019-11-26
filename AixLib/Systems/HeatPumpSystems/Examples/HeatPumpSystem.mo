@@ -216,8 +216,9 @@ equation
     annotation (Line(points={{20,12},{-28,12}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),
-    experiment(StopTime=86400, Tolerance=1e-06),
-    __Dymola_experimentSetupOutput,
+    experiment(Tolerance=1e-6, StopTime=86400),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/HeatPumpSystems/Examples/HeatPumpSystem.mos"
+        "Simulate and plot"),
     Documentation(info="<html><p>
   Model for testing the model <a href=
   \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">AixLib.Systems.HeatPumpSystems.HeatPumpSystem</a>.
