@@ -21,7 +21,10 @@ replaceable package Medium2 =
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
-
+  parameter Fluid.Movers.BaseClasses.Characteristics.efficiencyParameters
+    hydraulicEfficiency(
+      V_flow={0},
+      eta={0.7}) "Hydraulic efficiency of the fans" annotation (dialog(group="Fans"));
 
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
   parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
@@ -102,7 +105,7 @@ replaceable package Medium2 =
     final allowFlowReversal1=allowFlowReversal1,
     final allowFlowReversal2=allowFlowReversal1,
     final m1_flow_nominal=m1_flow_nominal,
-    final m2_flow_nominal=m2_flow_nominal,
+    final m2_flow_nominal=m1_flow_nominal,
     final T1_start=T_start,
     final T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat recovery heat exchanger"),Placement(transformation(extent={{-20,-10},{-62,42}})));
@@ -165,6 +168,10 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
+    per(
+      use_powerCharacteristic=false,
+      final hydraulicEfficiency=hydraulicEfficiency,
+      final motorEfficiency(eta={0.95})),
     final inputType=AixLib.Fluid.Types.InputType.Continuous)
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
   Fluid.Movers.FlowControlled_dp fanRet(
@@ -172,6 +179,10 @@ replaceable package Medium2 =
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
+    per(
+      use_powerCharacteristic=false,
+      final hydraulicEfficiency=hydraulicEfficiency,
+      motorEfficiency(eta={0.95})),
     final inputType=AixLib.Fluid.Types.InputType.Continuous)
                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -260,6 +271,7 @@ replaceable package Medium2 =
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={50,48})));
+
 protected
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
     initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -386,8 +398,8 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fanSup.P, genericAHUBus.powerSupRetMea) annotation (Line(points={{177,
-          9},{177,34},{260,34},{260,118},{0.09,118},{0.09,118.09}}, color={0,0,127}),
+  connect(fanSup.P, genericAHUBus.powerFanSupMea) annotation (Line(points={{177,9},
+          {177,34},{260,34},{260,118},{0.09,118},{0.09,118.09}},    color={0,0,127}),
       Text(
       string="%second",
       index=1,

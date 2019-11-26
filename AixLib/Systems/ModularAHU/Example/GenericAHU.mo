@@ -5,7 +5,7 @@ model GenericAHU "Example of generic ahu model"
     redeclare package Medium1 = Media.Air,
     redeclare package Medium2 = Media.Water,
     T_amb=293.15,
-    m1_flow_nominal=3000/3600,
+    m1_flow_nominal=3000/3600*1.2,
     m2_flow_nominal=0.5,
     T_start=293.15,
     usePreheater=true,
@@ -24,7 +24,7 @@ model GenericAHU "Example of generic ahu model"
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
         dynamicHX(
         dp1_nominal=50,
-        dp2_nominal=1000,
+        dp2_nominal=5000,
         tau1=5,
         tau2=15,
         dT_nom=30,
@@ -41,7 +41,7 @@ model GenericAHU "Example of generic ahu model"
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per))),
         dynamicHX(
-        dp1_nominal=100,
+        dp1_nominal=80,
         dp2_nominal=1000,
         tau1=5,
         tau2=10,
@@ -59,16 +59,16 @@ model GenericAHU "Example of generic ahu model"
           PumpInterface(pump(redeclare
               AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per))),
         dynamicHX(
-        dp1_nominal=100,
+        dp1_nominal=50,
         dp2_nominal=5000,
         tau1=5,
         tau2=15,
         dT_nom=30,
         Q_nom=30000)),
     dynamicHX(
-      dp1_nominal=100,
-      dp2_nominal=100,
-      dT_nom=10,
+      dp1_nominal=200,
+      dp2_nominal=200,
+      dT_nom=2,
       Q_nom=30000),
     humidifier(
       dp_nominal=20,
@@ -144,7 +144,10 @@ model GenericAHU "Example of generic ahu model"
         extent={{8,-8},{-8,8}},
         rotation=270,
         origin={48,-40})));
-  Controller.CtrAHUBasic ctrAHUBasic(TFlowSet=293.15, ctrRh(k=0.01))
+  Controller.CtrAHUBasic ctrAHUBasic(
+    TFlowSet=293.15,
+    useTwoFanCont=true,
+    VFlowSet=3000/3600,                               ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)

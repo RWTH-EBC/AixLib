@@ -4,8 +4,10 @@ model CtrAHUBasic "Simple controller for AHU"
   parameter Modelica.SIunits.Temperature TFlowSet = 289.15 "Flow temperature set point of consumer" annotation (Dialog(enable=
           useExternalTset == false));
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
+  parameter Boolean useTwoFanCont = false "If True, a PID for each of the two fans is used. Use two PID controllers for open systems (if the air canal is not closed).";
   parameter Modelica.SIunits.VolumeFlowRate VFlowSet=3000/3600
                                                              "Set value of volume flow [m^3/s]";
+  parameter Real dpMax = 5000 "Maximal pressure difference of the fans [Pa]";
 
   BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
           extent={{90,-10},{110,10}}), iconTransformation(extent={{84,-14},{116,
@@ -32,7 +34,7 @@ model CtrAHUBasic "Simple controller for AHU"
                                                                       not useExternalTset
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Controls.Continuous.LimPID PID_Vflow(
-    final yMax=2000,
+    final yMax=dpMax,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
     final k=50,
@@ -53,14 +55,14 @@ model CtrAHUBasic "Simple controller for AHU"
         rotation=0,
         origin={66,-36})));
   Controls.Continuous.LimPID PID_Vflow1(
-    final yMax=2000,
+    final yMax=dpMax,
     final yMin=0,
     final controllerType=Modelica.Blocks.Types.SimpleController.PID,
     final k=50,
     final Ti=5,
     final Td=0,
     final reverseAction=false,
-    final reset=AixLib.Types.Reset.Disabled)
+    final reset=AixLib.Types.Reset.Disabled) if useTwoFanCont
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
 equation
   connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
@@ -176,6 +178,14 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  if not useTwoFanCont then
+    connect(PID_Vflow.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{21,-50},
+          {100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},
