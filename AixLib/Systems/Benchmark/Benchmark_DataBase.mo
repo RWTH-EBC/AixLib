@@ -130,4 +130,105 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
           coordinateSystem(preserveAspectRatio=false)));
 
   end Benchmark_Heatpump_Big;
+
+  record ThermalZone_Record
+    extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+      T_start=293.15,
+      VAir=2700,
+      AZone=900,
+      hRad=5,
+      lat=0.8386499043,
+      nOrientations=2,
+      AWin={90,90},
+      ATransparent={72,72},
+      hConWin=1.3,
+      RWin=0.01282,
+      gWin=1,
+      UWin=1.08337,
+      ratioWinConRad=0.09,
+      AExt={45,45},
+      hConExt=2.5,
+      nExt=4,
+      RExt={0.00056,0.03175,0.00533,0.00033},
+      RExtRem=0.0001,
+      CExt={8100000,1112400,21600000,1620000},
+      AInt=90,
+      hConInt=2.5,
+      nInt=2,
+      RInt={0.00194,0.00033},
+      CInt={7875000,1620000},
+      AFloor=900,
+      hConFloor=2.5,
+      nFloor=4,
+      RFloor={0.00167,0.00012,0.00127,0.00005},
+      RFloorRem=0.00001,
+      CFloor={756000,817500000,4449600,108000000},
+      ARoof=900,
+      hConRoof=2.5,
+      nRoof=4,
+      RRoof={0.00049,0.00008,0.00003,0.00001},
+      RRoofRem=0.00001,
+      CRoof={2224800,331200000,16200000,0.09},
+      nOrientationsRoof=1,
+      tiltRoof={0},
+      aziRoof={0},
+      wfRoof={1},
+      aRoof=0.7,
+      aExt=0.7,
+      TSoil=283.15,
+      hConWallOut=25.0,
+      hRadWall=5,
+      hConWinOut=25.0,
+      hConRoofOut=25,
+      hRadRoof=5,
+      tiltExtWalls={1.5707963267949,1.5707963267949},
+      aziExtWalls={0,1.5707963267949},
+      wfWall={0.5,0.5},
+      wfWin={0.5,0.5},
+      wfGro=0.1,
+      internalGainsPeopleSpecific=3.5,
+      ratioConvectiveHeatPeople=0.5,
+      internalGainsMachinesSpecific=7.0,
+      ratioConvectiveHeatMachines=0.6,
+      lightingPowerSpecific=12.5,
+      ratioConvectiveHeatLighting=0.6,
+      useConstantACHrate=false,
+      baseACH=0.2,
+      maxUserACH=1,
+      maxOverheatingACH={3.0,2.0},
+      maxSummerACH={1.0,273.15 + 10,273.15 + 17},
+      winterReduction={0.2,273.15,273.15 + 10},
+      withAHU=true,
+      minAHU=0,
+      maxAHU=12,
+      hHeat=167500,
+      lHeat=0,
+      KRHeat=1000,
+      TNHeat=1,
+      HeaterOn=true,
+      hCool=0,
+      lCool=-1,
+      KRCool=1000,
+      TNCool=1,
+      CoolerOn=false);
+    annotation (Documentation(revisions="<html>
+ <ul>
+  <li>
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  June, 2015, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+ </ul>
+ </html>",   info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"),      Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end ThermalZone_Record;
 end Benchmark_DataBase;

@@ -59,8 +59,7 @@ model HighOrderModel_MultipleRooms  "Multiple instances of high order room with 
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/Weathdata_benchmark_old.mat"),
+    fileName="D:/sciebo_fb/BA/Simulation/SimInput/Weathdata_benchmark_old.mat",
     Sky_rad=true,
     Ter_rad=true)
     annotation (Placement(transformation(extent={{-98,80},{-68,100}})));

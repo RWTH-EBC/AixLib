@@ -63,8 +63,9 @@ model ReducedOrderModel_OneRoom
     AWin={90,90},
     ATransparent={72,72},
     AExt={45,45},
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+    redeclare package Medium = Media.Air,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    nPorts=1)                                                  annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 
 
 
@@ -136,17 +137,11 @@ model ReducedOrderModel_OneRoom
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(transformation(extent={{-100,-10},{-66,22}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Pulse pulse(
-    amplitude=1000,
-    width=50,
-    period=86400,
-    startTime=28800)
-    annotation (Placement(transformation(extent={{-28,-64},{-8,-44}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad[2]
-    "Radiative heat flow of persons" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={36,-56})));
+  Fluid.Sources.MassFlowSource_WeatherData bou(
+    redeclare package Medium = Media.Air,
+    m_flow=2700^1.02*0.15/3600,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-64,-56},{-44,-36}})));
 equation
 
   connect(eqAirTemp.TEqAirWin,preTem1. T)
@@ -256,14 +251,17 @@ equation
           0,127}));
   connect(HDirTil.H, corGDouPan.HDirTil) annotation (Line(points={{-47,62},{-22,
           62},{-22,62},{4,62}},      color={0,0,127}));
-  connect(perRad[1].port, thermalZoneFourElements.intGainsRad)
-    annotation (Line(points={{46,-56},{92,-56},{92,24}}, color={191,0,0}));
-  connect(perRad[2].port, thermalZoneFourElements.intGainsConv) annotation (
-      Line(points={{46,-56},{94,-56},{94,20},{92,20}}, color={191,0,0}));
-  connect(pulse.y, perRad[1].Q_flow)
-    annotation (Line(points={{-7,-54},{26,-54},{26,-56}}, color={0,0,127}));
-  connect(pulse.y, perRad[2].Q_flow)
-    annotation (Line(points={{-7,-54},{26,-54},{26,-56}}, color={0,0,127}));
+  connect(weaBus, bou.weaBus) annotation (Line(
+      points={{-83,6},{-83,-22},{-64,-22},{-64,-45.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(bou.ports[1], thermalZoneFourElements.ports[1]) annotation (Line(
+        points={{-44,-46},{-40,-46},{-40,-40},{83,-40},{83,-1.95}}, color={0,
+          127,255}));
   annotation (Line(points={{79.6,-22},{65,-22},{65,-25.2}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
