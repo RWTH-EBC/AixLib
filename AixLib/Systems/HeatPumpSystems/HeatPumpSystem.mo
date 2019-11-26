@@ -6,6 +6,8 @@ model HeatPumpSystem
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
     redeclare AixLib.Fluid.HeatPumps.HeatPump heatPump(
+      use_autoCalc=false,
+      Q_useNominal=0,
       redeclare final model PerDataMainHP = PerDataHea,
       redeclare final model PerDataRevHP = PerDataChi,
       redeclare final package Medium_con = Medium_con,
