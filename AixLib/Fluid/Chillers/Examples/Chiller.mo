@@ -43,6 +43,7 @@ model Chiller "Example for the reversible chiller model."
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
     use_refIne=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model PerDataMainChi =
         AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
           dataTable=
@@ -84,6 +85,7 @@ model Chiller "Example for the reversible chiller model."
     annotation (Placement(transformation(extent={{76,56},{84,64}})));
   AixLib.Fluid.Movers.SpeedControlled_Nrpm
                                     pumSou(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     final allowFlowReversal=true,
     final addPowerToMedium=false,
@@ -94,6 +96,7 @@ model Chiller "Example for the reversible chiller model."
         origin={50,34})));
 
   AixLib.Fluid.MixingVolumes.MixingVolume Room(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     nPorts=2,
     final use_C_flow=false,
     final m_flow_nominal=chiller.m2_flow_nominal,
