@@ -131,9 +131,20 @@ model MultizoneEquipped
     Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
     extent={{80,-100},{100,-80}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
+    each h_heater=h_heater,
+    each l_heater=l_heater,
+    each KR_heater=KR_heater,
+    each TN_heater=TN_heater,
+    each h_cooler=h_cooler,
+    each l_cooler=l_cooler,
+    each KR_cooler=KR_cooler,
+    each TN_cooler=TN_cooler,
     final zoneParam=zoneParam,
-    each recOrSep=true,
-    each staOrDyn=true) if ASurTot > 0 or VAir > 0
+    each recOrSep=recOrSep,
+    each Heater_on=Heater_on,
+    each Cooler_on=Cooler_on,
+    each staOrDyn=staOrDyn) if
+                           ASurTot > 0 or VAir > 0
     "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
   AHUMod AirHandlingUnit(
@@ -154,6 +165,38 @@ model MultizoneEquipped
     "Air Handling Unit"
     annotation (
     Placement(transformation(extent={{-52,10},{18,40}})));
+
+  Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController[numZones](
+     zoneParam=zoneParam) if not staOrDyn
+    annotation (Placement(transformation(extent={{-78,-70},{-58,-50}})));
+  parameter Boolean recOrSep=true "Use record or seperate parameters"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
+        "Seperate",choice = true "Record",radioButtons = true));
+  parameter Boolean staOrDyn=false "Static or dynamic activation of heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice = true "Static", choice =  false "Dynamic",
+                  radioButtons = true));
+  parameter Boolean Heater_on=true "Activates the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real KR_heater=1000 "Gain of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater=1
+    "Time constant of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Boolean Cooler_on=true "Activates the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real KR_cooler=1000 "Gain of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler=1
+    "Time constant of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
 
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)
@@ -233,6 +276,15 @@ equation
        Line(points={{76,-100},{74,-100},{74,0},{47.24,0},{47.24,20.8}},
                                                                      color={0,0,
             127}));
+    connect(weaBus, heaterCoolerController[i].weaBus) annotation (Line(
+      points={{-100,69},{-100,-34},{-84,-34},{-84,-55.7},{-75.7,-55.7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+
   end for;
 
   connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
@@ -280,13 +332,13 @@ equation
     annotation (Line(points={{23,58.5},{23,61.505},{35.27,61.505}},
                                                              color={0,0,127}));
   connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
-    annotation (Line(points={{12.4,12.25},{20,12.25},{20,31.75},{12.4,31.75}},
+    annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
         color={0,0,127}));
   connect(TAirAHUAvg.T, minTemp.u)
     annotation (Line(points={{34,-28},{34,-28},{31,-28}},
                                                color={0,0,127}));
   connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{19.5,
-          -28},{16,-28},{16,-16},{26,-16},{26,35.5},{12.4,35.5}},
+          -28},{16,-28},{16,-16},{26,-16},{26,33.25},{12.4,33.25}},
         color={0,0,127}));
   connect(zone.ventRate, airFlowRateSplit.airFlowOut) annotation (Line(points={{44.3,
           52.28},{44,52.28},{44,38},{44,38},{44,35.2}},         color={0,0,127}));
@@ -324,6 +376,12 @@ equation
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,
           31}},
         color={0,0,127}));
+  connect(heaterCoolerController.heaterActive, heaterCooler.heaterActive)
+    annotation (Line(points={{-59.8,-58},{-54,-58},{-54,-72},{-26.16,-72},{
+          -26.16,-66.36}}, color={255,0,255}));
+  connect(heaterCoolerController.coolerActive, heaterCooler.coolerActive)
+    annotation (Line(points={{-59.8,-62},{-56,-62},{-56,-72},{-44.1,-72},{-44.1,
+          -66.36}}, color={255,0,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
@@ -340,7 +398,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Air Conditioning"),
         Text(
-          extent={{-80,-50},{-56,-56}},
+          extent={{-62,-46},{-38,-54}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,

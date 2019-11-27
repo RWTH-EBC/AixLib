@@ -87,7 +87,10 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Additional ACH in summer, Tmin, Tmax";
   parameter Real winterReduction[3]
     "Reduction factor of userACH for cold weather";
-
+  parameter Modelica.SIunits.Temperature T_threshold_IdealCooler
+    "Threshold temperature above cooling will be used";
+  parameter Modelica.SIunits.Temperature T_threshold_IdealHeater
+    "Threshold temperature below heating will be used";
   parameter Boolean withAHU
     "Zone is connected to central air handling unit";
   parameter Real minAHU(unit = "m3/(h.m2)")
@@ -113,6 +116,10 @@ record ZoneBaseRecord "Base record definition for zone records"
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 </html>",  revisions="<html>
 <ul>
+  <li>
+  November 27, 2019, by David Jansen:<br/>
+  Integrate threshold for heater and cooler.
+  </li>
   <li>
   September 27, 2016, by Moritz Lauster:<br/>
   Reimplementation.

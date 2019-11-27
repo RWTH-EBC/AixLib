@@ -66,6 +66,8 @@ record OPH_1_Office "Office zone of office building"
     maxOverheatingACH={3.0,2.0},
     maxSummerACH={1.0,273.15 + 10,273.15 + 17},
     winterReduction={0.2,273.15,273.15 + 10},
+    T_threshold_IdealCooler = 273.15 + 23,
+    T_threshold_IdealHeater = 273.15 + 15,
     withAHU=true,
     minAHU=0,
     maxAHU=12,
@@ -81,6 +83,10 @@ record OPH_1_Office "Office zone of office building"
     CoolerOn=false);
   annotation (Documentation(revisions="<html>
  <ul>
+  <li>
+  November 27, 2019, by David Jansen:<br/>
+  Integrate threshold for heater and cooler.
+  </li>
   <li>
   February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
   Adapting nrPeople and nrPeopleMachines to area specific approach 
