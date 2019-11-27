@@ -35,7 +35,7 @@ model BufferStorage
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={22,46})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph5(          redeclare package Medium = Medium,
       nPorts=1)                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={12,-20})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary1(
@@ -67,7 +67,7 @@ model BufferStorage
         extent={{6,-6},{-6,6}},
         rotation=0,
         origin={14,20})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph1(redeclare package Medium = Medium, nPorts=1)
                                                      annotation(Placement(transformation(extent={{5,-5},{-5,5}},          rotation=0,     origin={13,7})));
 equation
@@ -90,6 +90,9 @@ equation
 <p>This is a simple example of a buffer storage that is charged with a mass flow with a higher temperature than the initial temperature.</p>
 </html>",  revisions="<html>
  <ul>
+<li>November 27, 2019, by Philipp Mehrfeld:<br>
+<a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>: Add one heating coil to example.
+</li>
  <li><i>October 11,2016</i>
        by Sebastian Stinner:<br/>
       implemented</li>

@@ -132,14 +132,14 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package
+              Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package
+              Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -746,12 +746,17 @@ for i in 2:(n-1) loop
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html>
 <ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>Added documentation of storage and new heat transfer models.</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-<li><i>February 19, 2013 </i>by Sebastian Stinner: <br/>mistake in losses calculation corrected (thickness of &quot;wall&quot; and &quot;insulation&quot; was only considered once but has to be considered twice, additionally the components &quot;wall&quot; and &quot;insulation&quot; were exchanged )<br/>and mistake in bouyancy model &quot;Wetter&quot; corrected (bouyancy flows were flowing in the wrong direction)</li>
+<li>November 27, 2019, by Philipp Mehrfeld:<br>
+- <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a> <br>
+- Replace MSL pipe by <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br>
+- Add energyDynamics and tidy up with heat transfer models.
+</li>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br>Added to AixLib</li>
+<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br>Uses components from MSL</li>
+<li><i>December 10, 2013</i> by Kristian Huchtemann:<br>Added documentation of storage and new heat transfer models.</li>
+<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br>Added documentation and formatted appropriately</li>
+<li><i>February 19, 2013 </i>by Sebastian Stinner: <br>mistake in losses calculation corrected (thickness of &quot;wall&quot; and &quot;insulation&quot; was only considered once but has to be considered twice, additionally the components &quot;wall&quot; and &quot;insulation&quot; were exchanged )<br>and mistake in bouyancy model &quot;Wetter&quot; corrected (bouyancy flows were flowing in the wrong direction)</li>
 </ul>
 </html>",
         info="<html>
