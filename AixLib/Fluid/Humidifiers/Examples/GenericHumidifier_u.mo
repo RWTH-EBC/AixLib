@@ -68,8 +68,8 @@ equation
   connect(adiabHum.port_b, senTem2.port_a)
     annotation (Line(points={{20,-10},{40,-10}}, color={0,127,255}));
 
-  connect(sou.ports[1], steamHum.port_a) annotation (Line(points={{-62,52.6667},{-50,52.6667},{-50,52},{-38,52},{-38,100},{0,100}},
-                                                              color={0,127,255}));
+  connect(sou.ports[1], steamHum.port_a) annotation (Line(points={{-62,52.6667},
+          {-50,52.6667},{-50,52},{-38,52},{-38,100},{0,100}}, color={0,127,255}));
   connect(ramp.y, steamHum.u)
     annotation (Line(points={{-39,130},{-1,130},{-1,106}}, color={0,0,127}));
   connect(ramp.y, adiabHum.u) annotation (Line(points={{-39,130},{-14,130},{-14,
@@ -86,14 +86,14 @@ equation
     annotation (Line(points={{58,50},{72,50}}, color={0,127,255}));
   connect(steamHum1.port_a, sou.ports[2])
     annotation (Line(points={{-2,50},{-62,50}}, color={0,127,255}));
-  connect(adiabHum.port_a, sou.ports[3]) annotation (Line(points={{0,-10},{-38,-10},{-38,52},{-62,52},{-62,47.3333}},
-                                                 color={0,127,255}));
-  connect(senRelHum.port_b, sin.ports[1]) annotation (Line(points={{94,100},{158,100},{158,52.6667}},
-                                   color={0,127,255}));
+  connect(adiabHum.port_a, sou.ports[3]) annotation (Line(points={{0,-10},{-38,
+          -10},{-38,52},{-62,52},{-62,47.3333}}, color={0,127,255}));
+  connect(senRelHum.port_b, sin.ports[1]) annotation (Line(points={{94,100},{
+          158,100},{158,52.6667}}, color={0,127,255}));
   connect(senRelHum1.port_b, sin.ports[2])
     annotation (Line(points={{92,50},{158,50}}, color={0,127,255}));
-  connect(senRelHum2.port_b, sin.ports[3]) annotation (Line(points={{94,-10},{158,-10},{158,47.3333}},
-                                   color={0,127,255}));
+  connect(senRelHum2.port_b, sin.ports[3]) annotation (Line(points={{94,-10},{
+          158,-10},{158,47.3333}}, color={0,127,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{200,
             200}})),
