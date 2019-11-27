@@ -11,6 +11,7 @@ model Cooler "Cooler register example"
     m1_flow_nominal=1,
     m2_flow_nominal=0.1,
     redeclare package Medium1 = MediumAir,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     dynamicHX(
       dp1_nominal=100,
       dp2_nominal=6000,
@@ -28,7 +29,8 @@ model Cooler "Cooler register example"
       Kv=6.3,
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(redeclare
+        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+            redeclare
             AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
             per))))
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
@@ -61,6 +63,7 @@ model Cooler "Cooler register example"
     k=0.04,
     Ti=120,
     Td=0.1,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     reverseAction=true,
     useExternalTset=true,
     TflowSet=289.15,
