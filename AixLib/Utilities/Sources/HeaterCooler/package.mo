@@ -11,9 +11,9 @@ package HeaterCooler "HeaterCooler"
       annotation (Placement(
       transformation(extent={{-115,51},{-81,83}}), iconTransformation(
       extent={{-92,28},{-62,58}})));
-    Modelica.Blocks.Sources.Constant TAirThresholdHeating(k=zoneParam.T_threshold_IdealHeater)
+  Modelica.Blocks.Sources.Constant TAirThresholdHeating(k=zoneParam.TThresholdHeater)
     "Threshold temperature below which heating is activated"
-      annotation (Placement(transformation(extent={{-56,6},{-44,18}})));
+    annotation (Placement(transformation(extent={{-56,6},{-44,18}})));
     Modelica.Blocks.Logical.Less less
     "check if outside temperature below threshold"
                                       annotation (Placement(transformation(
@@ -32,9 +32,9 @@ package HeaterCooler "HeaterCooler"
           extent={{-10,-10},{10,10}},
           rotation=0,
           origin={-2,-20})));
-    Modelica.Blocks.Sources.Constant TAirThresholdCooling(k=zoneParam.T_threshold_IdealCooler)
+  Modelica.Blocks.Sources.Constant TAirThresholdCooling(k=zoneParam.TThresholdCooler)
     "Threshold temperature above which cooling is activated"
-      annotation (Placement(transformation(extent={{-56,-34},{-44,-22}})));
+    annotation (Placement(transformation(extent={{-56,-34},{-44,-22}})));
   equation
     connect(TAirThresholdHeating.y, less.u2)
       annotation (Line(points={{-43.4,12},{-14,12}}, color={0,0,127}));
