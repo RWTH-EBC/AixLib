@@ -23,7 +23,7 @@ model PumpRadiatorThermostaticValve
   Modelica.Blocks.Sources.BooleanConstant NightSignal(k = false) annotation(Placement(transformation(extent = {{-76, 50}, {-56, 70}})));
   inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
   AixLib.Fluid.Actuators.Valves.ThermostaticValve simpleValve(

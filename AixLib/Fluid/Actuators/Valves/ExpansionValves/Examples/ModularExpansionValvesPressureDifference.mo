@@ -25,15 +25,13 @@ model ModularExpansionValvesPressureDifference
 
   // Definition of models
   //
-  Sources.FixedBoundary source(
+Sources.MassFlowSource_T source(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
+    T=TInl,
     nPorts=1,
-    p=pInl,
-    T=TInl) "Source of constant pressure and temperature"
+    m_flow=1) "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=-90,
+        rotation=270,
         origin={-40,70})));
   replaceable ModularExpansionValves.ModularExpansionValvesSensors modVal(
     redeclare package Medium = Medium,
@@ -62,7 +60,7 @@ model ModularExpansionValvesPressureDifference
       extent={{-10,-10},{10,10}},
       rotation=-90,
       origin={-40,-40})));
-  AixLib.Fluid.Sources.FixedBoundary sink(
+  AixLib.Fluid.Sources.Boundary_pT sink(
     redeclare package Medium = Medium,
     p=pOut,
     T=TOut,

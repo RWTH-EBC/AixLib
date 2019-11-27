@@ -64,3 +64,5 @@ success
 *simulator*.log
 *unitTests*.log
 *comparison*.log
+# Ignore files created by PyCharm
+.idea/
