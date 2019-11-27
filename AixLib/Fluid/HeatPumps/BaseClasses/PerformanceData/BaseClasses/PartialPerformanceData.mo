@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
+within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
 partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
 
@@ -38,14 +38,20 @@ protected
           textString="%name
 ",        origin={0.5,60.5},
           rotation=180)}),Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Partial model for calculation of <span style=\"font-family: Courier New;\">P_el</span>, <span style=\"font-family: Courier New;\">QCon</span> and <span style=\"font-family: Courier New;\">QEva</span> based on the values in the <span style=\"font-family: Courier New;\">sigBusHP</span>.</p>
+<p>
+  Partial model for calculation of <span style=
+  \"font-family: Courier New;\">P_el</span>, <span style=
+  \"font-family: Courier New;\">QCon</span> and <span style=
+  \"font-family: Courier New;\">QEva</span> based on the values in the
+  <span style=\"font-family: Courier New;\">sigBusHP</span>.
+</p>
 </html>"));
 end PartialPerformanceData;
