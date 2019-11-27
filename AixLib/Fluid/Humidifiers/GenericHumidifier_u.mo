@@ -13,11 +13,11 @@ model GenericHumidifier_u
   parameter Modelica.SIunits.Temperature Twater_in
     "Temperature of liquid water that is vaporized";
 
-  parameter Boolean steamHumidifier = true "True: steam humidifier, false: adiabatic (water) humidifier";
+  parameter Boolean steamHumidifier=true   "True: steam humidifier, false: adiabatic (water) humidifier";
 
   parameter Boolean TVapFixed = true "True: fixed vaporization temperature, false: vaporization temperature from pressure" annotation (Dialog(enable=steamHumidifier, tab = "Advanced", group = "Vaporization"));
 
-  parameter Modelica.SIunits.Temperature TVap = 373.15 "Vaporization temperature of steam" annotation (Dialog(enable=TVapFixed and steamHumidifier,tab = "Advanced", group = "Vaporization"));
+  parameter Modelica.SIunits.Temperature TVap=373.15   "Vaporization temperature of steam" annotation (Dialog(enable=TVapFixed and steamHumidifier,tab = "Advanced", group = "Vaporization"));
 
   Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
     annotation (Placement(transformation(
@@ -158,10 +158,10 @@ equation
           lineColor={255,255,255},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Text(visible=steamHumidifer == true,
-          extent={{30,130},{96,76}},
+        Text(extent={{30,130},{96,76}},
           lineColor={0,0,127},
-          textString="powerEva")}),
+          textString="powerEva",
+          visible=steamHumidifier)}),
 defaultComponentName="hum",
 Documentation(info="<html>
 <p>
