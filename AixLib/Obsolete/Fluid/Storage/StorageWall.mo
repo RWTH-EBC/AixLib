@@ -1,20 +1,20 @@
-within AixLib.Fluid.Storage.BaseClasses;
+within AixLib.Obsolete.Fluid.Storage;
 model StorageWall "Sandwich wall construction for heat storages"
 
-extends AixLib.Fluid.Storage.BaseClasses.StorageCover(AWall= D1*Modelica.Constants.pi * height,
-  condIns1(G=(AIns)*(lambdaIns)/(sIns/2)),
-  condIns2(G=(AIns)*(lambdaIns)/(sIns/2)),
-  convOutside(hCon=hConOut, A=AOutside),
-  loadIns(C=cIns*(rhoIns)*(AIns)*(sIns)));
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+  extends AixLib.Fluid.Storage.BaseClasses.StorageCover(AWall= D1*Modelica.Constants.pi * height,
+    condIns1(G=(AIns)*(lambdaIns)/(sIns/2)),
+    condIns2(G=(AIns)*(lambdaIns)/(sIns/2)),
+    convOutside(hCon=hConOut, A=AOutside),
+    loadIns(C=cIns*(rhoIns)*(AIns)*(sIns)));
 
   parameter Modelica.SIunits.Length height=0.15 "Height of layer"  annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Area AIns=(D1+2*sWall)*Modelica.Constants.pi * height;
   parameter Modelica.SIunits.Area AOutside=(D1+2*(sWall+sIns))*Modelica.Constants.pi * height;
 
-
 equation
 
-  annotation (Diagram(graphics),
+  annotation (obsolete = "Obsolete model - Almost same behavior as AixLib.Fluid.Storage.BaseClasses.StorageCover.", Diagram(graphics),
                        Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
     Documentation(info="<html>
