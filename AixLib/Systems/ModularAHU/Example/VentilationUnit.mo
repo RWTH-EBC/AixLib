@@ -3,17 +3,12 @@ model VentilationUnit "Example of the ventilation unit"
   extends Modelica.Icons.Example;
   Fluid.Sources.Boundary_pT boundaryOutsideAir(
     redeclare package Medium = Media.Air,
+    p=105000,
     T=283.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-80,16})));
-  Fluid.Sources.Boundary_pT boundarySupplyAir(          redeclare package
-      Medium = Media.Air, nPorts=1)
-                          annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=0,
-        origin={80,16})));
   Fluid.Sources.Boundary_pT SourceCooler(
     redeclare package Medium = Media.Water,
     T=283.15,
@@ -80,15 +75,6 @@ model VentilationUnit "Example of the ventilation unit"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{-18,-6},{44,54}})));
-  BaseClasses.GenericAHUBus genericAHUBus1
-    annotation (Placement(transformation(extent={{2,66},{22,86}})));
-  Fluid.Sources.Boundary_pT boundaryReturnAir(
-    redeclare package Medium = Media.Air,
-    T=293.15,
-    nPorts=1) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=0,
-        origin={78,46})));
   Fluid.Sources.Boundary_pT boundaryExhAir(
     redeclare package Medium = Media.Air,
     T=293.15,
@@ -96,6 +82,9 @@ model VentilationUnit "Example of the ventilation unit"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-76,44})));
+  Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic(TFlowSet=293.15,
+      VFlowSet=1000/3600)
+    annotation (Placement(transformation(extent={{-56,70},{-36,90}})));
 equation
   connect(ventilationUnit.port_a3, SourceCooler.ports[1])
     annotation (Line(points={{-5.6,-6},{-6,-6},{-6,-44}}, color={0,127,255}));
@@ -107,20 +96,15 @@ equation
     annotation (Line(points={{30.98,-6},{42,-6},{42,-34}}, color={0,127,255}));
   connect(boundaryOutsideAir.ports[1], ventilationUnit.port_a1) annotation (
       Line(points={{-70,16},{-44,16},{-44,24},{-18,24}}, color={0,127,255}));
-  connect(ventilationUnit.port_b1, boundarySupplyAir.ports[1]) annotation (Line(
-        points={{44.62,24},{58,24},{58,16},{70,16}}, color={0,127,255}));
-  connect(ventilationUnit.genericAHUBus, genericAHUBus1) annotation (Line(
-      points={{13,60.3},{13,76},{12,76}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(boundaryReturnAir.ports[1], ventilationUnit.port_a2) annotation (Line(
-        points={{68,46},{58,46},{58,42},{44,42}}, color={0,127,255}));
   connect(boundaryExhAir.ports[1], ventilationUnit.port_b2) annotation (Line(
         points={{-66,44},{-42,44},{-42,42},{-17.38,42}}, color={0,127,255}));
+  connect(ventilationUnit.port_b1, ventilationUnit.port_a2) annotation (Line(
+        points={{44.62,24},{52,24},{52,42},{44,42}}, color={0,127,255}));
+  connect(ctrVentilationUnitBasic.genericAHUBus, ventilationUnit.genericAHUBus)
+    annotation (Line(
+      points={{-36,80.1},{-14,80.1},{-14,82},{13,82},{13,60.3}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (experiment(StopTime=7200), Documentation(revisions="<html>
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
