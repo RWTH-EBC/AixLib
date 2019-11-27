@@ -19,6 +19,7 @@ model GenericHumidifier_u
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=6000,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     mWat_flow_nominal=m_flow_nominal*0.005,
     TLiqWat_in=293.15) "Steam humidifier" annotation (Placement(transformation(extent={{0,90},{20,110}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
@@ -28,6 +29,7 @@ model GenericHumidifier_u
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=6000,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     mWat_flow_nominal=m_flow_nominal*0.005,
     TLiqWat_in=293.15,
     steamHumidifier=false) "Adiabatic humidifier" annotation (Placement(transformation(extent={{0,-20},{20,0}})));
@@ -53,9 +55,11 @@ model GenericHumidifier_u
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=6000,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     mWat_flow_nominal=m_flow_nominal*0.005,
     TLiqWat_in=293.15,
-    TVapFixed=false) "Steam humidifier" annotation (Placement(transformation(extent={{-2,40},{18,60}})));
+    TVapFixed=false) "Steam humidifier" annotation (Placement(transformation(extent={{0,40},{
+            20,60}})));
   Sensors.TemperatureTwoPort              senTem1(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal) "Temperature sensor"
     annotation (Placement(transformation(extent={{38,40},{58,60}})));
@@ -79,13 +83,13 @@ equation
   connect(senTem2.port_b, senRelHum2.port_a)
     annotation (Line(points={{60,-10},{74,-10}}, color={0,127,255}));
   connect(steamHum1.port_b, senTem1.port_a)
-    annotation (Line(points={{18,50},{38,50}}, color={0,127,255}));
+    annotation (Line(points={{20,50},{38,50}}, color={0,127,255}));
   connect(ramp.y, steamHum1.u) annotation (Line(points={{-39,130},{-14,130},{
-          -14,56},{-3,56}}, color={0,0,127}));
+          -14,56},{-1,56}}, color={0,0,127}));
   connect(senTem1.port_b, senRelHum1.port_a)
     annotation (Line(points={{58,50},{72,50}}, color={0,127,255}));
   connect(steamHum1.port_a, sou.ports[2])
-    annotation (Line(points={{-2,50},{-62,50}}, color={0,127,255}));
+    annotation (Line(points={{0,50},{-62,50}},  color={0,127,255}));
   connect(adiabHum.port_a, sou.ports[3]) annotation (Line(points={{0,-10},{-38,
           -10},{-38,52},{-62,52},{-62,47.3333}}, color={0,127,255}));
   connect(senRelHum.port_b, sin.ports[1]) annotation (Line(points={{94,100},{
