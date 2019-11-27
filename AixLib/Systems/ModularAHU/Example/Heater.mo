@@ -12,6 +12,7 @@ model Heater "Heating register"
     m1_flow_nominal=1,
     m2_flow_nominal=0.1,
     redeclare package Medium1 = MediumAir,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     dynamicHX(
       dp1_nominal=100,
       dp2_nominal=6000,
@@ -27,8 +28,9 @@ model Heater "Heating register"
       Kv=6.3,
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))),
+        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+            redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4
+            per))),
     hydraulicModuleIcon="Admix",
     T_amb=293.15)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
@@ -62,7 +64,8 @@ model Heater "Heating register"
     Ti=100,
     Td=1,
     useExternalTset=false,
-    TflowSet=293.15)
+    TflowSet=293.15,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput)
     annotation (Placement(transformation(extent={{-72,-10},{-52,10}})));
 equation
   connect(boundaryWaterSink.ports[1], registerModule.port_b2) annotation (Line(

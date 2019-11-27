@@ -10,14 +10,13 @@ model GenericHumidifier_u
   parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal
     "Water mass flow rate at u=1, positive for humidification";
 
-  parameter Modelica.SIunits.Temperature Twater_in
-    "Temperature of liquid water that is vaporized";
+  parameter Modelica.SIunits.Temperature TLiqWat_in "Temperature of liquid water that is vaporized";
 
-  parameter Boolean steamHumidifier = true "True: steam humidifier, false: adiabatic (water) humidifier";
+  parameter Boolean steamHumidifier=true  "True: steam humidifier, false: adiabatic (water) humidifier";
 
   parameter Boolean TVapFixed = true "True: fixed vaporization temperature, false: vaporization temperature from pressure" annotation (Dialog(enable=steamHumidifier, tab = "Advanced", group = "Vaporization"));
 
-  parameter Modelica.SIunits.Temperature TVap = 373.15 "Vaporization temperature of steam" annotation (Dialog(enable=TVapFixed and steamHumidifier,tab = "Advanced", group = "Vaporization"));
+  parameter Modelica.SIunits.Temperature TVap=373.15   "Vaporization temperature of steam" annotation (Dialog(enable=TVapFixed and steamHumidifier,tab = "Advanced", group = "Vaporization"));
 
   Modelica.Blocks.Interfaces.RealInput u(unit="1") "Control input"
     annotation (Placement(transformation(
@@ -28,34 +27,33 @@ model GenericHumidifier_u
     "Water added to the fluid"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
 
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
-    annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
-  Modelica.Blocks.Sources.RealExpression steamEnthalpyFlow(y=
-        Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow)
-    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
-  Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=
-        Medium.enthalpyOfLiquid(T=Twater_in)*mWat_flow)
-    annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
-  Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
-    annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
   Modelica.Blocks.Interfaces.RealOutput powerEva if steamHumidifier
     "Consumed power for evaporization" annotation (Placement(transformation(
           extent={{100,90},{120,110}}), iconTransformation(extent={{100,90},{120,
             110}})));
+  Modelica.Blocks.Sources.RealExpression steamEnthalpyFlow(y=
+        Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow) if steamHumidifier
+    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
+  Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=Medium.enthalpyOfLiquid(T=TLiqWat_in)*mWat_flow) annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+    annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
   Modelica.Blocks.Sources.RealExpression TVapPoint(y=
-        AixLib.Utilities.Psychrometrics.Functions.TDewPoi_pW(vol.p)) if not
-    TVapFixed
+        AixLib.Utilities.Psychrometrics.Functions.TDewPoi_pW(vol.p)) if not TVapFixed and steamHumidifier
     annotation (Placement(transformation(extent={{-100,-90},{-80,-70}})));
-  Modelica.Blocks.Sources.RealExpression TVapPointFix(y=TVap) if TVapFixed
+  Modelica.Blocks.Sources.RealExpression TVapPointFix(y=TVap) if TVapFixed and steamHumidifier
     annotation (Placement(transformation(extent={{-100,-104},{-80,-84}})));
-  Modelica.Blocks.Routing.RealPassThrough Tsteam
+  Modelica.Blocks.Routing.RealPassThrough Tsteam if steamHumidifier
     annotation (Placement(transformation(extent={{-60,-98},{-40,-78}})));
+
 protected
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
+    annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
+
   Modelica.Blocks.Math.Gain gai(final k=mWat_flow_nominal) "Gain"
     annotation (Placement(transformation(extent={{-58,50},{-38,70}})));
 
+  Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
+    annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
 equation
   connect(gai.y, vol.mWat_flow) annotation (Line(
       points={{-37,60},{-30,60},{-30,-18},{-11,-18}},
@@ -110,7 +108,7 @@ equation
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{-114,104},{-70,76}},
+          extent={{-118,104},{-74,76}},
           lineColor={0,0,127},
           textString="u"),
         Rectangle(
@@ -123,7 +121,7 @@ equation
           extent={{-70,60},{70,-60}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
-          fillColor={0,62,0},
+          fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{42,42},{54,34},{54,34},{42,28},{42,30},{50,34},{50,34},{42,
@@ -158,10 +156,80 @@ equation
           lineColor={255,255,255},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Text(visible=steamHumidifer == true,
-          extent={{30,130},{96,76}},
+        Text(extent={{30,130},{96,76}},
           lineColor={0,0,127},
-          textString="powerEva")}),
+          textString="powerEva",
+          visible=steamHumidifier),
+        Ellipse(visible=steamHumidifier,
+          extent={{-14,44},{10,30}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{24,38},{34,32}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{26,30},{8,42}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{-28,12},{-4,-2}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{12,-2},{-6,10}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{10,6},{20,0}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{-12,-24},{12,-38}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{28,-38},{10,-26}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(visible=steamHumidifier,
+          extent={{26,-30},{36,-36}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(visible=not steamHumidifier,
+         points={{28,40},{14,40}}, color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{-6,36},{-20,30}},color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{30,4},{16,6}},   color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{0,4},{-14,-2}},  color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{30,-32},{16,-30}},  color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{0,-34},{-14,-40}},  color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{-32,-24},{-42,-38}},color={28,
+              108,200},
+          thickness=0.5),
+        Line(visible=not steamHumidifier,points={{-32,10},{-42,-4}},  color={28,
+              108,200},
+          thickness=0.5)}),
 defaultComponentName="hum",
 Documentation(info="<html>
 <p>
