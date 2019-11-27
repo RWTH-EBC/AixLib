@@ -20,7 +20,7 @@ model GenericHumidifier_u
     m_flow_nominal=m_flow_nominal,
     dp_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-    mWat_flow_nominal=m_flow_nominal*0.005,
+    mWat_flow_nominal=m_flow_nominal*0.003,
     TLiqWat_in=293.15) "Steam humidifier" annotation (Placement(transformation(extent={{0,90},{20,110}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal) "Temperature sensor"
@@ -30,7 +30,7 @@ model GenericHumidifier_u
     m_flow_nominal=m_flow_nominal,
     dp_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-    mWat_flow_nominal=m_flow_nominal*0.005,
+    mWat_flow_nominal=m_flow_nominal*0.003,
     TLiqWat_in=293.15,
     steamHumidifier=false) "Adiabatic humidifier" annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem2(redeclare package Medium =
@@ -56,7 +56,7 @@ model GenericHumidifier_u
     m_flow_nominal=m_flow_nominal,
     dp_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-    mWat_flow_nominal=m_flow_nominal*0.005,
+    mWat_flow_nominal=m_flow_nominal*0.003,
     TLiqWat_in=293.15,
     TVapFixed=false) "Steam humidifier" annotation (Placement(transformation(extent={{0,40},{
             20,60}})));
