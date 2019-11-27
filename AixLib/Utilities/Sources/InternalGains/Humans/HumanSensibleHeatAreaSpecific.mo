@@ -9,7 +9,8 @@ model HumanSensibleHeatAreaSpecific
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
     "Initial temperature";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
+  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Human, use_A_in=
+        true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   Interfaces.RadPort        RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -40}, {-80, 0}}), iconTransformation(extent = {{-102, -22}, {-80, 0}})));
   Modelica.Blocks.Math.Gain internalGainsPeopleSpecific(k=
@@ -45,7 +46,7 @@ equation
   connect(limiter.y, SurfaceArea_People.u) annotation (Line(
       points={{3,-48},{14.8,-48}},
       color={0,0,127}));
-  connect(SurfaceArea_People.y, RadiationConvertor.A) annotation (Line(
+  connect(SurfaceArea_People.y, RadiationConvertor.A_in) annotation (Line(
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
       color={0,0,127}));
   connect(internalGainsPeopleSpecific.y, productHeatOutput.u[1]) annotation (

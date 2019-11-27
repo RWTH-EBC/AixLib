@@ -26,7 +26,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
    replaceable model FlowModel =
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow
-    constrainedby Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+    constrainedby
+    Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
 
@@ -50,7 +51,8 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     "= true to use the convective HeatTransfer model"                                                      annotation(Dialog(tab="Heat transfer"));
     replaceable model HeatTransferConvective =
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (alpha0 = alpha_i)
-    constrainedby Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
+    constrainedby
+    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
@@ -114,7 +116,9 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     modelStructure=modelStructure,
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
-    redeclare model HeatTransfer = Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (alpha0=hCon_i))
+    redeclare model HeatTransfer =
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
+        (                                                                                                  alpha0=hCon_i))
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
 
     // Parameter Tab "Initialisation"
@@ -183,8 +187,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,26})));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps,
-        nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps, nNodes),
+      A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
                                      Heat_Loss_To_Ambient and not isEmbedded
     "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
