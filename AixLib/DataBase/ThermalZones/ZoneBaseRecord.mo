@@ -98,16 +98,19 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real KRHeat "Gain of the controller";
   parameter Modelica.SIunits.Time TNHeat "Time constant of the controller";
   parameter Boolean HeaterOn "Use heater component";
-  parameter Modelica.SIunits.Temperature TThresholdHeater
-    "Threshold temperature below ideal heater is used";
   parameter Real hCool "Upper limit controller output";
   parameter Real lCool "Lower limit controller output";
   parameter Real KRCool "Gain of the controller";
   parameter Modelica.SIunits.Time TNCool
     "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";
+  parameter Modelica.SIunits.Temperature TThresholdHeater
+    "Threshold temperature below ideal heater is used";
   parameter Modelica.SIunits.Temperature TThresholdCooler
     "Threshold temperature above ideal cooler is used";
+  parameter Boolean withIdealThresholds
+    "Sets if the threshold temperatures for ideal heater and cooler should
+        be used";
   annotation(Documentation(info="<html>
 <p>This is the base definition of zone records used in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. It aggregates all parameters at one record to enhance usability, exchanging entire datasets and automatic generation of these datasets.</p>
 <h4>References</h4>

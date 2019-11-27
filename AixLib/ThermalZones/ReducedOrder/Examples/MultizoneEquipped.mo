@@ -31,8 +31,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
             thermCapInt(each der_T(fixed=true))))),
     T_start=293.15,
     dpAHU_sup=80000000,
-    dpAHU_eta=80000000,
-    staOrDyn=false)
+    dpAHU_eta=80000000)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

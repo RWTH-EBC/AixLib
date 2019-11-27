@@ -75,13 +75,14 @@ record OPH_1_Office "Office zone of office building"
     KRHeat=1000,
     TNHeat=1,
     HeaterOn=true,
-    TThresholdHeater=273.15 + 15,
     hCool=0,
     lCool=-1,
     KRCool=1000,
     TNCool=1,
     CoolerOn=false,
-    TThresholdCooler=273.15 + 23);
+    TThresholdHeater=273.15 + 15,
+    TThresholdCooler=273.15 + 23,
+    withIdealThresholds=true);
   annotation (Documentation(revisions="<html>
  <ul>
   <li>
