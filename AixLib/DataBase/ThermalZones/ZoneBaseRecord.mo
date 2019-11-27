@@ -107,7 +107,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";
   parameter Modelica.SIunits.Temperature TThresholdCooler
-    "Threshold temperature above idealer cooler is used";
+    "Threshold temperature above ideal cooler is used";
   annotation(Documentation(info="<html>
 <p>This is the base definition of zone records used in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. It aggregates all parameters at one record to enhance usability, exchanging entire datasets and automatic generation of these datasets.</p>
 <h4>References</h4>
