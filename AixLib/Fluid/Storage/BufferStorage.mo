@@ -36,9 +36,7 @@ model BufferStorage
 
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-    AixLib.DataBase.Storage.Generic_New_2000l()
-    "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
