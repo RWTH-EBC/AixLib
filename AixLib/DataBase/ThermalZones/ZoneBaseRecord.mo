@@ -87,29 +87,27 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Additional ACH in summer, Tmin, Tmax";
   parameter Real winterReduction[3]
     "Reduction factor of userACH for cold weather";
-  parameter Modelica.SIunits.Temperature T_threshold_IdealCooler
-    "Threshold temperature above cooling will be used";
-  parameter Modelica.SIunits.Temperature T_threshold_IdealHeater
-    "Threshold temperature below heating will be used";
   parameter Boolean withAHU
     "Zone is connected to central air handling unit";
   parameter Real minAHU(unit = "m3/(h.m2)")
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
-
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
   parameter Modelica.SIunits.Time TNHeat "Time constant of the controller";
   parameter Boolean HeaterOn "Use heater component";
+  parameter Modelica.SIunits.Temperature TThresholdHeater
+    "Threshold temperature below ideal heater is used";
   parameter Real hCool "Upper limit controller output";
   parameter Real lCool "Lower limit controller output";
   parameter Real KRCool "Gain of the controller";
   parameter Modelica.SIunits.Time TNCool
     "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";
-
+  parameter Modelica.SIunits.Temperature TThresholdCooler
+    "Threshold temperature above idealer cooler is used";
   annotation(Documentation(info="<html>
 <p>This is the base definition of zone records used in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. It aggregates all parameters at one record to enhance usability, exchanging entire datasets and automatic generation of these datasets.</p>
 <h4>References</h4>

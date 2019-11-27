@@ -49,7 +49,8 @@ record OPH_1_Office "Office zone of office building"
     hConWinOut=20.0,
     hConRoofOut=20,
     hRadRoof=5,
-    tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949,0},
+    tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949,
+        0},
     aziExtWalls={0,1.5707963267949,3.1415926535898,4.7123889803847,0},
     wfWall={0.2,0.2,0.2,0.2,0.1},
     wfWin={0.25,0.25,0.25,0.25,0},
@@ -66,8 +67,6 @@ record OPH_1_Office "Office zone of office building"
     maxOverheatingACH={3.0,2.0},
     maxSummerACH={1.0,273.15 + 10,273.15 + 17},
     winterReduction={0.2,273.15,273.15 + 10},
-    T_threshold_IdealCooler = 273.15 + 23,
-    T_threshold_IdealHeater = 273.15 + 15,
     withAHU=true,
     minAHU=0,
     maxAHU=12,
@@ -76,11 +75,13 @@ record OPH_1_Office "Office zone of office building"
     KRHeat=1000,
     TNHeat=1,
     HeaterOn=true,
+    TThresholdHeater=273.15 + 15,
     hCool=0,
     lCool=-1,
     KRCool=1000,
     TNCool=1,
-    CoolerOn=false);
+    CoolerOn=false,
+    TThresholdCooler=273.15 + 23);
   annotation (Documentation(revisions="<html>
  <ul>
   <li>
