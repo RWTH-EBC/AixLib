@@ -73,11 +73,11 @@ model GenericAHU "Example of generic ahu model"
     humidifier(
       dp_nominal=20,
       mWat_flow_nominal=1,
-      Twater_in=288.15),
+      TLiqWat_in=288.15),
     humidifierRet(
       dp_nominal=20,
       mWat_flow_nominal=0.5,
-      Twater_in=288.15))
+      TLiqWat_in=288.15))
     annotation (Placement(transformation(extent={{-60,-14},{60,52}})));
   Fluid.Sources.Boundary_pT boundaryOutsideAir(
     nPorts=1,
