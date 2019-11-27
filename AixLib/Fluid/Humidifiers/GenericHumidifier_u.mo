@@ -10,8 +10,7 @@ model GenericHumidifier_u
   parameter Modelica.SIunits.MassFlowRate mWat_flow_nominal
     "Water mass flow rate at u=1, positive for humidification";
 
-  parameter Modelica.SIunits.Temperature Twater_in
-    "Temperature of liquid water that is vaporized";
+  parameter Modelica.SIunits.Temperature TLiqWat_in "Temperature of liquid water that is vaporized";
 
   parameter Boolean steamHumidifier=true   "True: steam humidifier, false: adiabatic (water) humidifier";
 
@@ -41,9 +40,7 @@ public
   Modelica.Blocks.Sources.RealExpression steamEnthalpyFlow(y=
         Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow) if steamHumidifier
     annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
-  Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=
-        Medium.enthalpyOfLiquid(T=Twater_in)*mWat_flow)
-    annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
+  Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=Medium.enthalpyOfLiquid(T=TLiqWat_in)*mWat_flow) annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
   Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
