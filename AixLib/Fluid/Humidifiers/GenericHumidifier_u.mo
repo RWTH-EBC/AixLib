@@ -39,7 +39,7 @@ protected
     annotation (Placement(transformation(extent={{-58,50},{-38,70}})));
 public
   Modelica.Blocks.Sources.RealExpression steamEnthalpyFlow(y=
-        Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow)
+        Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow) if steamHumidifier
     annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
   Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=
         Medium.enthalpyOfLiquid(T=Twater_in)*mWat_flow)
@@ -49,12 +49,11 @@ public
   Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
     annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
   Modelica.Blocks.Sources.RealExpression TVapPoint(y=
-        AixLib.Utilities.Psychrometrics.Functions.TDewPoi_pW(vol.p)) if not
-    TVapFixed
+        AixLib.Utilities.Psychrometrics.Functions.TDewPoi_pW(vol.p)) if not TVapFixed and steamHumidifier
     annotation (Placement(transformation(extent={{-100,-90},{-80,-70}})));
-  Modelica.Blocks.Sources.RealExpression TVapPointFix(y=TVap) if TVapFixed
+  Modelica.Blocks.Sources.RealExpression TVapPointFix(y=TVap) if TVapFixed and steamHumidifier
     annotation (Placement(transformation(extent={{-100,-104},{-80,-84}})));
-  Modelica.Blocks.Routing.RealPassThrough Tsteam
+  Modelica.Blocks.Routing.RealPassThrough Tsteam if steamHumidifier
     annotation (Placement(transformation(extent={{-60,-98},{-40,-78}})));
 
 equation
