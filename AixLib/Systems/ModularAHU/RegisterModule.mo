@@ -22,8 +22,14 @@ model RegisterModule "AHU register module for heaters and coolers"
   parameter Modelica.SIunits.Time tau=15
     "Time constant for PT1 behavior of temperature sensors in air canal" annotation(Dialog(group="Heat exchanger"));
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
+  parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
+    "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   replaceable HydraulicModules.BaseClasses.PartialHydraulicModule
-    partialHydraulicModule(final T_amb=T_amb,
+    partialHydraulicModule(
+    final energyDynamics=energyDynamics,
+                           final T_amb=T_amb,
     redeclare final package Medium = Medium2,
     final m_flow_nominal=m2_flow_nominal,
     T_start=T_start,
@@ -37,6 +43,9 @@ model RegisterModule "AHU register module for heaters and coolers"
     final allowFlowReversal2=allowFlowReversal2,
     redeclare final package Medium1 = Medium1,
     redeclare final package Medium2 = Medium2,
+    tau1=5,
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
     T1_start=T_start,
     T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
@@ -44,6 +53,7 @@ model RegisterModule "AHU register module for heaters and coolers"
   BaseClasses.RegisterBus registerBus
     annotation (Placement(transformation(extent={{-102,-12},{-78,10}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
+
 
 protected
   Fluid.Sensors.TemperatureTwoPort senT_airIn(
@@ -55,8 +65,8 @@ protected
     final allowFlowReversal=allowFlowReversal1)
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
-    initType=Modelica.Blocks.Types.Init.SteadyState,
-    y_start=T_start,
+    final initType=Modelica.Blocks.Types.Init.SteadyState,
+    final y_start=T_start,
     final T=tau) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -71,8 +81,8 @@ protected
     final allowFlowReversal=allowFlowReversal1)
     annotation (Placement(transformation(extent={{60,50},{80,70}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_airOut(
-    initType=Modelica.Blocks.Types.Init.SteadyState,
-    y_start=T_start,
+    final initType=Modelica.Blocks.Types.Init.SteadyState,
+    final y_start=T_start,
     final T=tau) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
