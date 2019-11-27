@@ -54,22 +54,22 @@ replaceable package Medium2 =
     T_amb=T_amb)
     annotation (Dialog(enable=true, group="Heater"),Placement(transformation(extent={{16,-46},
             {60,14}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
         Medium2)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-70,-110},{-50,-90}}),
         iconTransformation(extent={{-70,-110},{-50,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare package Medium =
         Medium2)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-30,-110},{-10,-90}}),
         iconTransformation(extent={{-30,-110},{-10,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a port_a4(redeclare package Medium =
         Medium2)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{10,-110},{30,-90}}),
         iconTransformation(extent={{10,-110},{30,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b port_b4(redeclare package Medium =
         Medium2)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{50,-110},{70,-90}}),
@@ -87,18 +87,36 @@ replaceable package Medium2 =
         Medium1)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+  Fluid.FixedResistances.HydraulicDiameter res(
+    redeclare package Medium = Medium1,
+    allowFlowReversal=allowFlowReversal1,
+    m_flow_nominal=m1_flow_nominal,
+    length=1) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-6,60})));
+  Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
+        Medium1)
+    "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{90,50},{110,70}}),
+        iconTransformation(extent={{90,50},{110,70}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare package Medium =
+        Medium1)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,50},{-90,70}}),
+        iconTransformation(extent={{-108,50},{-88,70}})));
 equation
   connect(cooler.port_b1,heater. port_a1)
     annotation (Line(points={{-14,0.15385},{16,0.15385}},  color={0,127,255}));
-  connect(cooler.port_a2,port_a2)  annotation (Line(points={{-58,-27.5385},{-64,
+  connect(cooler.port_a2,port_a3)  annotation (Line(points={{-58,-27.5385},{-64,
           -27.5385},{-64,-100},{-60,-100}},
                                color={0,127,255}));
-  connect(cooler.port_b2,port_b2)  annotation (Line(points={{-14,-27.5385},{-14,
+  connect(cooler.port_b2,port_b3)  annotation (Line(points={{-14,-27.5385},{-14,
           -28},{-12,-28},{-12,-100},{-20,-100}},
                                          color={0,127,255}));
-  connect(heater.port_a2,port_a3)  annotation (Line(points={{16,-27.5385},{16,
+  connect(heater.port_a2,port_a4)  annotation (Line(points={{16,-27.5385},{16,
           -100},{20,-100}},                       color={0,127,255}));
-  connect(heater.port_b2,port_b3)  annotation (Line(points={{60,-27.5385},{62,
+  connect(heater.port_b2,port_b4)  annotation (Line(points={{60,-27.5385},{62,
           -27.5385},{62,-100},{60,-100}},                       color={0,127,255}));
   connect(cooler.registerBus, genericAHUBus.coolerBus) annotation (Line(
       points={{-57.78,-13.9231},{-76,-13.9231},{-76,-120},{194,-120},{194,
@@ -136,6 +154,10 @@ equation
     annotation (Line(points={{86,0},{102,0}}, color={0,127,255}));
   connect(cooler.port_a1, port_a1) annotation (Line(points={{-58,0.153846},{-80,
           0.153846},{-80,0},{-100,0}}, color={0,127,255}));
+  connect(res.port_b, port_b2)
+    annotation (Line(points={{-16,60},{-100,60}}, color={0,127,255}));
+  connect(res.port_a, port_a2)
+    annotation (Line(points={{4,60},{100,60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

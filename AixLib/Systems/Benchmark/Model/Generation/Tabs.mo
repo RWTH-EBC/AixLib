@@ -99,16 +99,16 @@ model Tabs "Concrete core activation"
   Modelica.Blocks.Sources.Constant const(k=Gc)
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
   parameter Real Gc "Heat flow rate from concrete to fluid";
-  Fluid.FixedResistances.HydraulicDiameter res1(
+  Fluid.FixedResistances.PressureDrop      res1(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dh=0.05,
-    length=1) annotation (Placement(transformation(extent={{58,-70},{78,-50}})));
-  Fluid.FixedResistances.HydraulicDiameter res2(
+    dp_nominal=1000)
+              annotation (Placement(transformation(extent={{58,-70},{78,-50}})));
+  Fluid.FixedResistances.PressureDrop      res2(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    dh=0.05,
-    length=1) annotation (Placement(transformation(
+    dp_nominal=1000)
+              annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={40,-76})));

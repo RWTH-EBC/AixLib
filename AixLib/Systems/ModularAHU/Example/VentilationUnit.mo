@@ -82,14 +82,28 @@ model VentilationUnit "Example of the ventilation unit"
     annotation (Placement(transformation(extent={{-18,-6},{44,54}})));
   BaseClasses.GenericAHUBus genericAHUBus1
     annotation (Placement(transformation(extent={{2,66},{22,86}})));
+  Fluid.Sources.Boundary_pT boundaryReturnAir(
+    redeclare package Medium = Media.Air,
+    T=293.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={78,46})));
+  Fluid.Sources.Boundary_pT boundaryExhAir(
+    redeclare package Medium = Media.Air,
+    T=293.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=180,
+        origin={-76,44})));
 equation
-  connect(ventilationUnit.port_a2, SourceCooler.ports[1])
+  connect(ventilationUnit.port_a3, SourceCooler.ports[1])
     annotation (Line(points={{-5.6,-6},{-6,-6},{-6,-44}}, color={0,127,255}));
-  connect(ventilationUnit.port_b2, SinkSink.ports[1]) annotation (Line(points={
+  connect(ventilationUnit.port_b3, SinkSink.ports[1]) annotation (Line(points={
           {6.8,-6},{8,-6},{8,-54},{14,-54}}, color={0,127,255}));
-  connect(SourceHeater.ports[1], ventilationUnit.port_a3)
+  connect(SourceHeater.ports[1],ventilationUnit.port_a4)
     annotation (Line(points={{20,-34},{20,-6},{19.2,-6}}, color={0,127,255}));
-  connect(ventilationUnit.port_b3, SinkHeater.ports[1])
+  connect(ventilationUnit.port_b4, SinkHeater.ports[1])
     annotation (Line(points={{30.98,-6},{42,-6},{42,-34}}, color={0,127,255}));
   connect(boundaryOutsideAir.ports[1], ventilationUnit.port_a1) annotation (
       Line(points={{-70,16},{-44,16},{-44,24},{-18,24}}, color={0,127,255}));
@@ -103,6 +117,10 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(boundaryReturnAir.ports[1], ventilationUnit.port_a2) annotation (Line(
+        points={{68,46},{58,46},{58,42},{44,42}}, color={0,127,255}));
+  connect(boundaryExhAir.ports[1], ventilationUnit.port_b2) annotation (Line(
+        points={{-66,44},{-42,44},{-42,42},{-17.38,42}}, color={0,127,255}));
   annotation (experiment(StopTime=7200), Documentation(revisions="<html>
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
