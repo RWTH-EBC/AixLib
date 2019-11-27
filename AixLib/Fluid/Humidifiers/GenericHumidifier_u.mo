@@ -31,20 +31,12 @@ model GenericHumidifier_u
     "Consumed power for evaporization" annotation (Placement(transformation(
           extent={{100,90},{120,110}}), iconTransformation(extent={{100,90},{120,
             110}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
-    annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
-protected
-  Modelica.Blocks.Math.Gain gai(final k=mWat_flow_nominal) "Gain"
-    annotation (Placement(transformation(extent={{-58,50},{-38,70}})));
-public
   Modelica.Blocks.Sources.RealExpression steamEnthalpyFlow(y=
         Medium.enthalpyOfCondensingGas(T=Tsteam.y)*mWat_flow) if steamHumidifier
     annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
   Modelica.Blocks.Sources.RealExpression waterEnthalpyFlow(y=Medium.enthalpyOfLiquid(T=TLiqWat_in)*mWat_flow) annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
-  Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
-    annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
   Modelica.Blocks.Sources.RealExpression TVapPoint(y=
         AixLib.Utilities.Psychrometrics.Functions.TDewPoi_pW(vol.p)) if not TVapFixed and steamHumidifier
     annotation (Placement(transformation(extent={{-100,-90},{-80,-70}})));
@@ -53,6 +45,15 @@ public
   Modelica.Blocks.Routing.RealPassThrough Tsteam if steamHumidifier
     annotation (Placement(transformation(extent={{-60,-98},{-40,-78}})));
 
+protected
+  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
+    annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
+
+  Modelica.Blocks.Math.Gain gai(final k=mWat_flow_nominal) "Gain"
+    annotation (Placement(transformation(extent={{-58,50},{-38,70}})));
+
+  Modelica.Blocks.Math.Add add(k2=-1) if steamHumidifier
+    annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
 equation
   connect(gai.y, vol.mWat_flow) annotation (Line(
       points={{-37,60},{-30,60},{-30,-18},{-11,-18}},
