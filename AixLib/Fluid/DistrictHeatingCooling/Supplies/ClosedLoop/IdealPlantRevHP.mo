@@ -55,9 +55,9 @@ model IdealPlantRevHP
     QEva_flow_nominal=Q_flow_nominal_CH,
     etaCarnot_nominal=0.3)
     annotation (Placement(transformation(extent={{6,-4},{26,16}})));
-  Modelica.Blocks.Sources.RealExpression Input_HP(y=T_HpIn)
+  Modelica.Blocks.Sources.RealExpression input_heaPum(y=T_HpIn)
     annotation (Placement(transformation(extent={{-78,12},{-58,32}})));
-  Modelica.Blocks.Sources.RealExpression Input_CH(y=T_ChIn)
+  Modelica.Blocks.Sources.RealExpression input_chi(y=T_ChIn)
     annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceHeating(
     use_m_flow_in=true,
@@ -80,10 +80,9 @@ model IdealPlantRevHP
     nPorts=1,
     use_T_in=true,
     T=288.15) annotation (Placement(transformation(extent={{-32,50},{-12,70}})));
-  Modelica.Blocks.Sources.RealExpression MassFlow_HeatSource(y=
-        m_flow_HeatSource)
+  Modelica.Blocks.Sources.RealExpression masFlo_heatSource(y=m_flow_HeatSource)
     annotation (Placement(transformation(extent={{46,-36},{26,-16}})));
-  Modelica.Blocks.Sources.RealExpression MassFlow_HeatSink(y=m_flow_HeatSink)
+  Modelica.Blocks.Sources.RealExpression masFlo_heatSink(y=m_flow_HeatSink)
     annotation (Placement(transformation(extent={{-72,66},{-52,86}})));
 
 protected
@@ -100,7 +99,7 @@ public
     quantity="Power",
     final unit="W") "Electrical power consumed by reversible heat pump"
     annotation (Placement(transformation(extent={{98,50},{118,70}})));
-  Modelica.Blocks.Sources.RealExpression MassFlow_HeatSink1(y=chi.P + heaPum.P)
+  Modelica.Blocks.Sources.RealExpression masFlo_HeatSink1(y=chi.P + heaPum.P)
     annotation (Placement(transformation(extent={{66,50},{86,70}})));
   Modelica.Blocks.Interfaces.RealInput T_inlet_heatSource(
     quantity="Temperature",
@@ -110,10 +109,10 @@ public
     quantity="Temperature",
     final unit="K") "Inlet temperature of source for chiller operation"
     annotation (Placement(transformation(extent={{-128,-98},{-88,-58}})));
-  Modelica.Blocks.Sources.RealExpression InletTemperature_HeatSource(y=
+  Modelica.Blocks.Sources.RealExpression inletTemperature_heatSource(y=
         T_inlet_heatSource)
     annotation (Placement(transformation(extent={{46,-54},{26,-34}})));
-  Modelica.Blocks.Sources.RealExpression InletTemperature_ColdSource(y=
+  Modelica.Blocks.Sources.RealExpression inletTemperature_coldSource(y=
         T_inlet_coldSource)
     annotation (Placement(transformation(extent={{-72,48},{-52,68}})));
 equation
@@ -146,10 +145,10 @@ equation
     annotation (Line(points={{26,0},{48,0}}, color={0,127,255}));
   connect(heaPum.port_b1, chi.port_b2)
     annotation (Line(points={{-24,0},{6,0}}, color={0,127,255}));
-  connect(Input_HP.y, heaPum.TSet) annotation (Line(points={{-57,22},{-52,22},{-52,
-          3},{-46,3}}, color={0,0,127}));
-  connect(Input_CH.y, chi.TSet) annotation (Line(points={{-9,20},{-4,20},{-4,15},
-          {4,15}}, color={0,0,127}));
+  connect(input_heaPum.y, heaPum.TSet) annotation (Line(points={{-57,22},{-52,
+          22},{-52,3},{-46,3}}, color={0,0,127}));
+  connect(input_chi.y, chi.TSet) annotation (Line(points={{-9,20},{-4,20},{-4,
+          15},{4,15}}, color={0,0,127}));
   connect(sinkHeating.ports[1], heaPum.port_b2) annotation (Line(points={{-58,-40},
           {-50,-40},{-50,-12},{-44,-12}}, color={0,127,255}));
   connect(heaPum.port_a2, sourceHeating.ports[1]) annotation (Line(points={{-24,
@@ -158,15 +157,15 @@ equation
           {-2,60},{-2,12},{6,12}}, color={0,127,255}));
   connect(chi.port_b1, sinkCooling.ports[1]) annotation (Line(points={{26,12},{
           30,12},{30,60},{36,60}}, color={0,127,255}));
-  connect(MassFlow_HeatSink.y, sourceCooling.m_flow_in) annotation (Line(points={{-51,76},
-          {-44,76},{-44,68},{-34,68}},          color={0,0,127}));
-  connect(sourceHeating.m_flow_in, MassFlow_HeatSource.y) annotation (Line(
-        points={{12,-32},{20,-32},{20,-26},{25,-26}}, color={0,0,127}));
-  connect(MassFlow_HeatSink1.y, Pel_Hp)
+  connect(masFlo_heatSink.y, sourceCooling.m_flow_in) annotation (Line(points={
+          {-51,76},{-44,76},{-44,68},{-34,68}}, color={0,0,127}));
+  connect(sourceHeating.m_flow_in, masFlo_heatSource.y) annotation (Line(points
+        ={{12,-32},{20,-32},{20,-26},{25,-26}}, color={0,0,127}));
+  connect(masFlo_HeatSink1.y, Pel_Hp)
     annotation (Line(points={{87,60},{108,60}}, color={0,0,127}));
-  connect(sourceHeating.T_in, InletTemperature_HeatSource.y) annotation (Line(
+  connect(sourceHeating.T_in,inletTemperature_heatSource. y) annotation (Line(
         points={{12,-36},{20,-36},{20,-44},{25,-44}}, color={0,0,127}));
-  connect(InletTemperature_ColdSource.y, sourceCooling.T_in) annotation (Line(
+  connect(inletTemperature_coldSource.y, sourceCooling.T_in) annotation (Line(
         points={{-51,58},{-44,58},{-44,64},{-34,64}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
