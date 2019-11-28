@@ -1,4 +1,4 @@
-within AixLib.Utilities.Sources.InternalGains.Humans;
+within AixLib.Utilities.Sources.InternalGains.Humans.Obsolete;
 model HumanSensibleHeatAreaSpecific
   "Model for sensible heat output area specific"
   //Internal Gains People

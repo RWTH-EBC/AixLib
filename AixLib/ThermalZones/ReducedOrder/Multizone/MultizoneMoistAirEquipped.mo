@@ -1,8 +1,10 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
-model MultizoneEquipped
-  "Multizone model with ideal heater and cooler and AHU"
+model MultizoneMoistAirEquipped
+  "Multizone model with ideal heater and cooler and AHU considering moisture balance"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
+      redeclare final model thermalZone =
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange);
 
   parameter Boolean heatAHU
     "Status of heating of AHU"
@@ -155,14 +157,23 @@ model MultizoneEquipped
     annotation (
     Placement(transformation(extent={{-52,10},{18,40}})));
 
+  Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if ASurTot > 0 or VAir > 0
+    "absolute humidity in thermal zone"
+    annotation (Placement(transformation(extent={{100,84},{120,104}}),
+        iconTransformation(extent={{80,40},{100,60}})));
 protected
+  BaseClasses.MoistSplitter moistSplitter(
+    nOut=1,
+    nIn=numZones,
+    splitFactor=zoneFactor) if
+       ASurTot > 0 or VAir > 0
+    annotation (Placement(transformation(extent={{-68,76},{-48,96}})));
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
   parameter Real VAirRes(fixed=false)
     "Resulting air volume in zones supplied by the AHU";
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(
-    final nout=numZones) if ASurTot > 0 or VAir > 0
-    "Replicates scalar temperature of AHU into a vector[numZones] of identical
+    final nout=numZones) if ASurTot > 0 or VAir > 0 "Replicates scalar temperature of AHU into a vector[numZones] of identical
     temperatures"
     annotation (Placement(transformation(
     extent={{-5,-5},{5,5}},
@@ -203,7 +214,19 @@ protected
     final zoneParam=zoneParam)
     "Pre-processor for AHU inputs"
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
-
+  BaseClasses.AbsToRelHum absToRelHum if ASurTot > 0 or VAir > 0
+    annotation (Placement(transformation(extent={{-36,76},{-26,86}})));
+  BaseClasses.RelToAbsHum relToAbsHum1 if ASurTot > 0 or VAir > 0
+    "Converter from relative humidity to absolute humidity"
+    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={65,21})));
+  Modelica.Blocks.Routing.Replicator replicatorHumidityVentilation(final nout=
+        numZones) if        ASurTot > 0 or VAir > 0 "Replicates scalar temperature of AHU into a vector[numZones] of identical
+    temperatures" annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={65,37})));
 initial algorithm
   for i in 1:numZones loop
     if zoneParam[i].withAHU then
@@ -279,9 +302,6 @@ equation
   connect(replicatorTemperatureVentilation.y, zone.ventTemp)
     annotation (Line(points={{23,58.5},{23,61.505},{35.27,61.505}},
                                                              color={0,0,127}));
-  connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
-    annotation (Line(points={{12.4,12.25},{20,12.25},{20,29.5},{12.4,29.5}},
-        color={0,0,127}));
   connect(TAirAHUAvg.T, minTemp.u)
     annotation (Line(points={{34,-28},{34,-28},{31,-28}},
                                                color={0,0,127}));
@@ -324,6 +344,29 @@ equation
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,
           31}},
         color={0,0,127}));
+  connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,
+          94},{110,94}},
+                     color={0,0,127}));
+  connect(minTemp.y, absToRelHum.TDryBul) annotation (Line(points={{19.5,-28},{-100,
+          -28},{-100,72},{-42,72},{-42,78.2},{-37,78.2}}, color={0,0,127}));
+  connect(AirHandlingUnit.T_supplyAirOut, relToAbsHum1.TDryBul) annotation (
+      Line(points={{12.4,23.5},{28,23.5},{28,12},{67.8,12},{67.8,15}}, color={0,
+          0,127}));
+  connect(relToAbsHum1.absHum, replicatorHumidityVentilation.u)
+    annotation (Line(points={{65,27},{65,31}}, color={0,0,127}));
+  connect(replicatorHumidityVentilation.y, zone.ventHum) annotation (Line(
+        points={{65,42.5},{65,44},{30,44},{30,55.765},{35.27,55.765}}, color={0,
+          0,127}));
+  connect(zone.X_w, moistSplitter.portIn) annotation (Line(points={{82.1,72.78},
+          {94,72.78},{94,100},{-76,100},{-76,86},{-68,86}}, color={0,0,127}));
+  connect(moistSplitter.portOut[1], absToRelHum.absHum) annotation (Line(points=
+         {{-48,86},{-44,86},{-44,83.6},{-37,83.6}}, color={0,0,127}));
+  connect(AirHandlingUnit.phi_supply, relToAbsHum1.relHum) annotation (Line(
+        points={{12.4,12.25},{38,12.25},{38,12},{62,12},{62,15},{62.4,15}},
+        color={0,0,127}));
+  connect(absToRelHum.relHum, AirHandlingUnit.phi_extractAir) annotation (Line(
+        points={{-25,81},{10,81},{10,44},{18,44},{18,29.5},{12.4,29.5}}, color={
+          0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
@@ -361,20 +404,12 @@ Cooling"),
     Documentation(revisions="<html>
 <ul>
   <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation based on Annex60 and AixLib models.
-  </li>
-  <li>
-  February 26, 2016, by Moritz Lauster:<br/>
-  Fixed bug in share of
-  AHU volume flow.
-  </li>
-  <li>
-  April 25, 2015, by Ole Odendahl:<br/>
-  Implemented.
+  April, 2019, by Martin Kremer:<br/>
+  First implementation
   </li>
 </ul>
 </html>", info="<html>
+<p>This model enhances the existing multi-zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>This is a ready-to-use multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit to <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
 <h4>Typical use and important parameters</h4>
 <p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties and heater/cooler properties. An additional tab allows configuring the air handling unit. The air handling unit facilitates heating, cooling, humidification, dehumidification and heat recovery modes. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a simulation of a multizone building for district simulations. The multizone model calculates heat load and indoor air profiles. </p>
@@ -385,6 +420,6 @@ Cooling"),
 <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
 </ul>
 <h4>Examples</h4>
-<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.</p>
+<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirEquipped</a>.</p>
 </html>"));
-end MultizoneEquipped;
+end MultizoneMoistAirEquipped;

@@ -6,3 +6,8 @@ SimpleRoomThreeElements
 SimpleRoomTwoElements
 ThermalZone
 ThermalZoneEquipped
+ThermalZoneMoistAir
+ThermalZoneMoistAirExchange
+MultizoneMoistAir
+MultizoneMoistAirEquipped
+ComparisonThermalZoneMoistAndDryAir
