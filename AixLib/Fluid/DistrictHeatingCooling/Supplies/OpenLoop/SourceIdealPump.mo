@@ -8,7 +8,13 @@ model SourceIdealPump
   parameter Modelica.SIunits.AbsolutePressure pReturn
     "Fixed return pressure";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal "Nominal mass flow rate";
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 5 "Nominal mass flow rate";
+
+  parameter Modelica.SIunits.PressureDifference dp_heater = 30000;
+
+  parameter Modelica.SIunits.PressureDifference dp_pump = 300000;
+
+
 
   AixLib.Fluid.Sources.Boundary_pT source(          redeclare package Medium =
         Medium,
