@@ -8,43 +8,37 @@ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecordNew data= AixLib
     annotation (choicesAllMatching);
 
  parameter Real n_mod
-    "Number of connected PV modules"
-    annotation (Dialog(group="Array size", tab="Array configuration"));
+    "Number of connected PV modules";
 
- parameter Real til(final quantity = "Angle",
-   final unit = "rad",
-   displayUnit = "deg")
-   "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
-   annotation (Dialog(group="Module orientation", tab="Array configuration"));
+ parameter Modelica.SIunits.Angle til = 0.34906585039887
+ "Surface's tilt angle (0:flat)"
+  annotation (Dialog(group="Geometry"));
 
- parameter Real azi(final quantity = "Angle",
-   final unit = "rad",
-   displayUnit = "deg")
-   "Module surface azimuth. azi=-90 degree if normal of surface outward unit points towards east; azi=0 if it points towards south"
-   annotation (Dialog(group="Module orientation", tab="Array configuration"));
 
- parameter Real lat(final quantity = "Angle",
-   final unit = "rad",
-   displayUnit = "deg") "Latitude"
-   annotation (Dialog(tab="Geographical info"));
+ parameter Modelica.SIunits.Angle azi = -0.78539816339745
+   "Surface's azimut angle (0:South)"
+   annotation (Dialog(group="Geometry"));
 
- parameter Real lon(final quantity = "Angle",
-   final unit = "rad",
-   displayUnit = "deg") "Longitude"
-   annotation (Dialog(tab="Geographical info"));
+ parameter  Modelica.SIunits.Angle lat = 0.73268921998722
+ "Location's Latitude"
+   annotation (Dialog(group="Location"));
+
+ parameter  Modelica.SIunits.Angle lon = -1.53449347835341
+ "Location's Longitude"
+   annotation (Dialog(group="Location"));
 
  parameter Real alt(final quantity="Length", final unit="m")
    "Site altitude in Meters, default= 1"
-   annotation (Dialog(tab="Geographical info"));
+   annotation (Dialog(group="Location"));
 
  parameter Real timZon(final quantity="Time",
-   final unit="s", displayUnit="h")
+   final unit="s", displayUnit="h") = -6*3600
    "Time zone in seconds relative to GMT"
-   annotation (Dialog(tab="Geographical info"));
+   annotation (Dialog(group="Location"));
 
- parameter Real  groRef(final unit="1")
-   "Ground reflectance"
-   annotation (Dialog(tab="Geographical info"));
+ parameter Real  groRef(final unit="1") = 0.2
+   "Ground reflectance (default=0.2)"
+  annotation (Dialog(group="Location"));
 
 
  IVCharacteristics iVCharacteristics(
