@@ -1,23 +1,14 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model test
   extends Modelica.Icons.Example;
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone(
-    redeclare package Medium = Media.Air,
-    zoneParam=Benchmark_DataBase.ThermalZone_Record(),
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
-            each der_T(fixed=true)))),
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15)
-    "Thermal zone"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-
     computeWetBulbTemperature=false,
     filNam=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/Weatherdata_benchmark_new.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-94,18},{-74,38}})));
+
   Modelica.Blocks.Sources.Constant const(k=0.15)
     "Infiltration rate"
     annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
@@ -30,7 +21,6 @@ model test
     tableName="UserProfiles",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"),
-
     columns={2,3,4},
     tableOnFile=false,
     table=[0,0,0.1,0,0; 3540,0,0.1,0,0; 3600,0,0.1,0,0; 7140,0,0.1,0,0; 7200,0,
@@ -117,11 +107,11 @@ model test
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])
     "Table with profiles for internal gains"
     annotation(Placement(transformation(extent={{-14,-59},{0,-45}})));
+
+  Benchmark_DataBase.thermalZone_2 thermalZone_2_1(redeclare package Medium =
+        Media.Air)
+    annotation (Placement(transformation(extent={{-20,-6},{0,14}})));
 equation
-  connect(weaDat.weaBus,thermalZone. weaBus) annotation (Line(
-      points={{-74,28},{-34,28},{-34,0},{-10,0}},
-      color={255,204,51},
-      thickness=0.5));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-74,28},{-61,28},{-61,-4}},
       color={255,204,51},
@@ -129,15 +119,26 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp,weaBus. TDryBul) annotation (Line(points={{-11.3,
-          -3.9},{-35.65,-3.9},{-35.65,-4},{-61,-4}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(const.y,thermalZone. ventRate) annotation (Line(points={{-71,-30},{-40,
-          -30},{-8,-30},{-7,-30},{-7,-20},{-7,-8.4}}, color={0,0,127}));
-  connect(internalGains.y, thermalZone.intGains) annotation (Line(points={{0.7,
-          -52},{4,-52},{4,-48},{8,-48},{8,-8.4}}, color={0,0,127}));
+  connect(weaBus.TDryBul, thermalZone_2_1.ventTemp) annotation (Line(
+      points={{-61,-4},{-21.3,-4},{-21.3,0.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(weaBus, thermalZone_2_1.weaBus) annotation (Line(
+      points={{-61,-4},{-46,-4},{-46,-2},{-20,-2},{-20,4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(const.y, thermalZone_2_1.ventRate) annotation (Line(points={{-71,-30},
+          {-17,-30},{-17,-4.4}}, color={0,0,127}));
+  connect(internalGains.y, thermalZone_2_1.intGains) annotation (Line(points={{
+          0.7,-52},{4,-52},{4,-4.4},{-2,-4.4}}, color={0,0,127}));
   annotation (experiment(
       StopTime=4838400,
       Interval=3600,
