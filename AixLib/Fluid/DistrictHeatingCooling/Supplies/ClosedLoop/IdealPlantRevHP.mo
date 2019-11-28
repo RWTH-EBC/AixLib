@@ -159,8 +159,8 @@ equation
           30,12},{30,60},{36,60}}, color={0,127,255}));
   connect(masFlo_heatSink.y, sourceCooling.m_flow_in) annotation (Line(points={
           {-51,76},{-44,76},{-44,68},{-34,68}}, color={0,0,127}));
-  connect(sourceHeating.m_flow_in, masFlo_heatSource.y) annotation (Line(points
-        ={{12,-32},{20,-32},{20,-26},{25,-26}}, color={0,0,127}));
+  connect(sourceHeating.m_flow_in, masFlo_heatSource.y) annotation (Line(points=
+         {{12,-32},{20,-32},{20,-26},{25,-26}}, color={0,0,127}));
   connect(masFlo_HeatSink1.y, Pel_Hp)
     annotation (Line(points={{87,60},{108,60}}, color={0,0,127}));
   connect(sourceHeating.T_in,inletTemperature_heatSource. y) annotation (Line(
@@ -185,6 +185,10 @@ equation
           fillPattern=FillPattern.None)}),                       Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
+<ul>
+<li><i>November 28, 2019</i> ,by Nils Neuland:<br/>
+Adjusted to Aixlib conventions </li>
+</ul>
 <ul>
 <li><i>November 15, 2019</i> ,by Tobias Blacha:<br/>
 Implemented </li>
