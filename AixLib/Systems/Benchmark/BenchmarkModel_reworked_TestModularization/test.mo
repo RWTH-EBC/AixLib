@@ -1,6 +1,7 @@
 within AixLib.Systems.Benchmark.BenchmarkModel_reworked_TestModularization;
 model test
   extends Modelica.Icons.Example;
+
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -109,7 +110,7 @@ model test
     annotation(Placement(transformation(extent={{-14,-59},{0,-45}})));
 
   Benchmark_DataBase.thermalZone_2 thermalZone_2_1(redeclare package Medium =
-        Media.Air)
+        AixLib.Media.Air)
     annotation (Placement(transformation(extent={{-20,-6},{0,14}})));
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(

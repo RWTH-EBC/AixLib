@@ -133,6 +133,7 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
 
   record ThermalZone_Record
     extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+      useConstantACHrate=true,
       T_start=293.15,
       VAir=2700,
       AZone=900,
@@ -141,34 +142,34 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
       nOrientations=3,
       AWin={60,60,60},
       ATransparent={48,48,48},
-      hConWin=1.3,
-      RWin=0.01282,
+      hConWin=2.5,
+      RWin=0.00641,
       gWin=1,
-      UWin=1.08337,
+      UWin=1.3,
       ratioWinConRad=0.09,
       AExt={30,30,30},
       hConExt=2.5,
       nExt=4,
-      RExt={0.00056,0.03175,0.00533,0.00033},
-      RExtRem=0.0001,
+      RExt={0.000555,0.03174,0.00533,0.0003267},
+      RExtRem=1,
       CExt={8100000,1112400,21600000,1620000},
       AInt=90,
       hConInt=2.5,
       nInt=2,
       RInt={0.00194,0.00033},
-      CInt={7875000,1620000},
+      CInt={7875,1620},
       AFloor=900,
       hConFloor=2.5,
       nFloor=4,
       RFloor={0.00167,0.00012,0.00127,0.00005},
-      RFloorRem=0.00001,
-      CFloor={756000,817500000,4449600,108000000},
+      RFloorRem=0.000000001,
+      CFloor={756,817500,4450,108000},
       ARoof=900,
       hConRoof=2.5,
       nRoof=4,
       RRoof={0.00049,0.00008,0.00003,0.00001},
-      RRoofRem=0.00001,
-      CRoof={2224800,331200000,16200000,0.09},
+      RRoofRem=1,
+      CRoof={22249,331200,16200,0.09},
       nOrientationsRoof=1,
       tiltRoof={0},
       aziRoof={0},
@@ -185,14 +186,13 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
       aziExtWalls={0,3.1415926535898,4.7123889803847},
       wfWall={0.33,0.33,0.33},
       wfWin={0.33,0.33,0.33},
-      wfGro=0.1,
+      wfGro=0.01,
       internalGainsPeopleSpecific=3.5,
       ratioConvectiveHeatPeople=0.5,
       internalGainsMachinesSpecific=7.0,
       ratioConvectiveHeatMachines=0.6,
       lightingPowerSpecific=12.5,
       ratioConvectiveHeatLighting=0.6,
-      useConstantACHrate=false,
       baseACH=0.2,
       maxUserACH=1,
       maxOverheatingACH={3.0,2.0},
@@ -842,8 +842,8 @@ First implementation.
     connect(HDifTill[1].HSkyDifTil, corGMod.HSkyDifTil[1]) annotation (Line(
           points={{-127,16},{-13.2,16},{-13.2,44.2}}, color={0,0,127}));
     connect(HDifTill[2].HSkyDifTil, corGMod.HSkyDifTil[2]) annotation (Line(
-          points={{-127,16},{-116,16},{-116,14},{-13.2,14},{-13.2,44.2}}, color
-          ={0,0,127}));
+          points={{-127,16},{-116,16},{-116,14},{-13.2,14},{-13.2,44.2}}, color=
+           {0,0,127}));
     connect(HDifTill[3].H, solRadWall[3].u2)
       annotation (Line(points={{-127,10},{-55,10},{-55,16}}, color={0,0,127}));
     connect(HDifTill[3].HSkyDifTil, corGMod.HSkyDifTil[3]) annotation (Line(
