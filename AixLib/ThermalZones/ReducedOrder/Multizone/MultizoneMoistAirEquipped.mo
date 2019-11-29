@@ -161,6 +161,10 @@ model MultizoneMoistAirEquipped
     "absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,40},{100,60}})));
+  Modelica.Blocks.Interfaces.RealOutput CO2[size(zone, 1)] if ASurTot > 0 or VAir > 0
+    "Indoor Air CO2 concentration in ppm"
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
+        iconTransformation(extent={{80,60},{100,80}})));
 protected
   BaseClasses.MoistSplitter moistSplitter(
     nOut=1,
@@ -367,6 +371,8 @@ equation
   connect(absToRelHum.relHum, AirHandlingUnit.phi_extractAir) annotation (Line(
         points={{-25,81},{10,81},{10,44},{18,44},{18,29.5},{12.4,29.5}}, color={
           0,0,127}));
+  connect(zone.CO2, CO2) annotation (Line(points={{82.1,85.9},{94,85.9},{94,40},
+          {110,40}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

@@ -16,12 +16,19 @@ model MultizoneMoistAir "Multizone model with humidity balance"
     VAir > 0 "Humidity output"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,42},{100,62}})));
+  Modelica.Blocks.Interfaces.RealOutput CO2[size(zone, 1)] if ASurTot > 0 or
+    VAir > 0 "Indoor Air CO2 concentration in ppm"
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
+        iconTransformation(extent={{80,-20},{100,0}})));
 equation
   connect(zone.ventHum, ventHum) annotation (Line(points={{35.27,55.765},{10,
           55.765},{10,56},{-18,56},{-18,36},{-100,36}},             color={0,0,
           127}));
   connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,94},
           {110,94}}, color={0,0,127}));
+  connect(zone.CO2, CO2) annotation (Line(points={{82.1,88.36},{94,88.36},{94,
+          40},{110,40}},
+                     color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>This model enhances the existing multi-zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>This is a ready-to-use multizone model with a variable number of thermal zones. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>

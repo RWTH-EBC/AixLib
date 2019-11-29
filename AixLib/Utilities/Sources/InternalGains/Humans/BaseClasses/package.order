@@ -1,3 +1,6 @@
 PartialHuman
 TemperatureDependentHeatOutput_SIA2024
 TemperatureDependentMoistureOutput_SIA2024
+BodySurfaceArea
+CO2emissionAdult
+CO2Balance

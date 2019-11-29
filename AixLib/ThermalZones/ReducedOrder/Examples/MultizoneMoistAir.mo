@@ -3,6 +3,11 @@ model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
   import AixLib;
   extends Modelica.Icons.Example;
 
+
+   package Medium=Modelica.Media.Air.MoistAir(extraPropertiesNames={"CO2"});
+
+
+
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAir multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -18,7 +23,7 @@ model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
     internalGainsMode=3,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
-    redeclare package Medium = AixLib.Media.Air,
+    redeclare package Medium = Medium,
     T_start=293.15)
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));

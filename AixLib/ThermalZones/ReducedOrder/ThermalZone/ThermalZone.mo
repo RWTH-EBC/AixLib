@@ -30,7 +30,7 @@ model ThermalZone
     final RadiationConvertor(use_A_in=true)) if
        ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDepdendent humanTotHeaDependent(
+  Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDependent humanTotHeaDependent(
     final T0=zoneParam.T_start,
     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final RoomArea=zoneParam.AZone,

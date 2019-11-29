@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAirExchange
   "Thermal zone model considering moisture balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(SumQLat_flow(nu=3));
+  extends ThermalZoneMoistAir(SumQLat_flow(nu=3), ventSum(nu=1));
 
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,
@@ -115,6 +115,8 @@ equation
           -22.96},{4,-22.96},{4,-30},{16,-30}}, color={0,0,127}));
   connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{30.5,-14},{
           0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
+  connect(addInfVen.y, ventSum.u[1]) annotation (Line(points={{-34,-31.4},{-34,
+          -28},{-24,-28},{-24,-68},{-6,-68},{-6,-70},{22,-70}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>

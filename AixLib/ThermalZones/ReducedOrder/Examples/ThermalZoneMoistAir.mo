@@ -3,11 +3,14 @@ model ThermalZoneMoistAir
   "Illustrates the use of ThermalZoneMoistAir"
   extends Modelica.Icons.Example;
 
+  package Medium=Modelica.Media.Air.MoistAir(extraPropertiesNames={"CO2"});
+
+
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir thermalZone(
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = Medium,
     internalGainsMode=3,
     nPorts=2,
     T_start=293.15,

@@ -4,6 +4,11 @@ model MultizoneMoistAirEquipped
   import AixLib;
   extends Modelica.Icons.Example;
 
+
+  package Medium=Modelica.Media.Air.MoistAir(extraPropertiesNames={"CO2"});
+
+
+
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -30,7 +35,7 @@ model MultizoneMoistAirEquipped
     effHRSAHU_disabled=0.2,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
-    redeclare package Medium = AixLib.Media.Air,
+    redeclare package Medium = Medium,
     T_start=293.15,
     dpAHU_sup=80000000,
     dpAHU_eta=80000000)
