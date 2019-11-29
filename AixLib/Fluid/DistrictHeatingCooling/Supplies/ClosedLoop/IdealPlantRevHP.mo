@@ -29,7 +29,7 @@ model IdealPlantRevHP
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal)
-    annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
+    annotation (Placement(transformation(extent={{-86,-10},{-66,10}})));
   Modelica.Blocks.Interfaces.RealInput T_coolingSet
     "Maximum outlet temperature, if port_b is outlet (max. outlet temperature of cold line, chiller operation)"
     annotation (Placement(transformation(extent={{-126,60},{-86,100}})));
@@ -46,7 +46,7 @@ model IdealPlantRevHP
     QCon_flow_max=Q_flow_nominal_HP,
     use_eta_Carnot_nominal=true,
     etaCarnot_nominal=0.3)
-    annotation (Placement(transformation(extent={{-44,-16},{-24,4}})));
+    annotation (Placement(transformation(extent={{-58,-16},{-38,4}})));
   AixLib.Fluid.Chillers.Carnot_TEva chi(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
     dp1_nominal=dp_nominal,
@@ -116,11 +116,19 @@ public
   Modelica.Blocks.Sources.RealExpression InletTemperature_ColdSource(y=
         T_inlet_coldSource)
     annotation (Placement(transformation(extent={{-72,48},{-52,68}})));
-  Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
+  Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1,
+    use_T_in=false,
+    T=303.15)
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={-8,-10})));
+  Sensors.TemperatureTwoPort senTem2(redeclare package Medium = Medium,
+      m_flow_nominal=2)
+    annotation (Placement(transformation(extent={{-34,-6},{-14,14}})));
+  Sensors.TemperatureTwoPort senTem3(redeclare package Medium = Medium,
+      m_flow_nominal=2)
+    annotation (Placement(transformation(extent={{0,40},{20,60}})));
 equation
 
   // Control of the operations mode by flow direction
@@ -128,7 +136,7 @@ equation
   if (port_a.m_flow >= 0) then
     T_HpIn = T_heatingSet;
     T_ChIn = 110 + 273.15;
-    m_flow_heatSink = 0;
+    m_flow_heatSink = 0.1;
     m_flow_heatSource = port_a.m_flow;
     //m_flow_HeatSource = (port_a.m_flow * (T_heatingSet - senTem.T))/(cp_default * dT_HeatSource);
 
@@ -138,27 +146,25 @@ equation
     T_HpIn = 273.15 - 20;
     m_flow_heatSink = port_b.m_flow;
     //m_flow_HeatSink = (port_b.m_flow * (senTem1.T - T_coolingSet))/(cp_default * dT_HeatSink);
-    m_flow_heatSource =0;
+    m_flow_heatSource =0.1;
   end if;
 
   connect(port_a, senTem.port_a)
-    annotation (Line(points={{-100,0},{-78,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-86,0}}, color={0,127,255}));
   connect(senTem1.port_b, port_b)
     annotation (Line(points={{68,0},{100,0}}, color={0,127,255}));
   connect(senTem.port_b, heaPum.port_a1)
-    annotation (Line(points={{-58,0},{-44,0}}, color={0,127,255}));
+    annotation (Line(points={{-66,0},{-58,0}}, color={0,127,255}));
   connect(chi.port_a2, senTem1.port_a)
     annotation (Line(points={{26,0},{48,0}}, color={0,127,255}));
-  connect(heaPum.port_b1, chi.port_b2)
-    annotation (Line(points={{-24,0},{6,0}}, color={0,127,255}));
   connect(Input_HP.y, heaPum.TSet) annotation (Line(points={{-57,22},{-52,22},{-52,
-          3},{-46,3}}, color={0,0,127}));
+          3},{-60,3}}, color={0,0,127}));
   connect(Input_CH.y, chi.TSet) annotation (Line(points={{-9,20},{-4,20},{-4,15},
           {4,15}}, color={0,0,127}));
   connect(sinkHeating.ports[1], heaPum.port_b2) annotation (Line(points={{-58,-40},
-          {-50,-40},{-50,-12},{-44,-12}}, color={0,127,255}));
-  connect(heaPum.port_a2, sourceHeating.ports[1]) annotation (Line(points={{-24,
-          -12},{-18,-12},{-18,-40},{-10,-40}}, color={0,127,255}));
+          {-50,-40},{-50,-12},{-58,-12}}, color={0,127,255}));
+  connect(heaPum.port_a2, sourceHeating.ports[1]) annotation (Line(points={{-38,-12},
+          {-18,-12},{-18,-40},{-10,-40}},      color={0,127,255}));
   connect(sourceCooling.ports[1], chi.port_a1) annotation (Line(points={{-12,60},
           {-2,60},{-2,12},{6,12}}, color={0,127,255}));
   connect(chi.port_b1, sinkCooling.ports[1]) annotation (Line(points={{26,12},{
@@ -173,8 +179,15 @@ equation
         points={{12,-36},{20,-36},{20,-44},{25,-44}}, color={0,0,127}));
   connect(InletTemperature_ColdSource.y, sourceCooling.T_in) annotation (Line(
         points={{-51,58},{-44,58},{-44,64},{-34,64}}, color={0,0,127}));
-  connect(bou.ports[1], chi.port_b2)
-    annotation (Line(points={{-8,-6},{-8,0},{6,0}}, color={0,127,255}));
+  connect(heaPum.port_b1, senTem2.port_a) annotation (Line(points={{-38,0},{-36,
+          0},{-36,4},{-34,4}}, color={0,127,255}));
+  connect(senTem3.port_b, chi.port_b2) annotation (Line(points={{20,50},{14,50},
+          {14,0},{6,0}}, color={0,127,255}));
+  connect(senTem2.port_b, senTem3.port_a) annotation (Line(points={{-14,4},{-8,
+          4},{-8,50},{0,50}},
+                            color={0,127,255}));
+  connect(bou.ports[1], senTem3.port_a)
+    annotation (Line(points={{-8,-6},{-8,50},{0,50}},  color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-80,80},{80,0}},

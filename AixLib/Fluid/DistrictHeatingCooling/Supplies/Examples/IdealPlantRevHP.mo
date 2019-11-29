@@ -4,10 +4,10 @@ model IdealPlantRevHP
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   ClosedLoop.IdealPlantRevHP                                        idealPlantRevHP(
     redeclare package Medium = Medium, m_flow_nominal=5,
-    dT_HeatSource=5,
-    dT_HeatSink=5,
+    dT_heatSource=5,
+    dT_heatSink=5,
     Q_flow_nominal_HP=20000,
-    Q_flow_nominal_CH=-30000)
+    Q_flow_nominal_CH=-20000)
     annotation (Placement(transformation(extent={{-92,4},{-72,24}})));
   Demands.ClosedLoop.SubstationHeatingCoolingVarDeltaT substation1(redeclare
       package Medium = Medium,
@@ -36,7 +36,7 @@ model IdealPlantRevHP
     dIns=0.001,
     kIns=0.04,
     redeclare package Medium = Medium,
-    nPorts=2)  annotation (Placement(transformation(extent={{-60,4},{-40,24}})));
+    nPorts=2)  annotation (Placement(transformation(extent={{-46,4},{-26,24}})));
   AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
     dh=0.2,
     length=5,
@@ -63,9 +63,6 @@ model IdealPlantRevHP
     redeclare package Medium = Medium,
     nPorts=1)
     annotation (Placement(transformation(extent={{-40,-54},{-60,-34}})));
-  Sources.Boundary_pT bou(redeclare package Medium = Medium,
-                          nPorts=2)
-    annotation (Placement(transformation(extent={{-158,6},{-138,26}})));
   Modelica.Blocks.Sources.Constant T_setHotLine(k=16 + 273.15)
     annotation (Placement(transformation(extent={{-126,58},{-106,78}})));
   Modelica.Blocks.Sources.Constant T_setColdLine(k=22 + 273.15)
@@ -87,6 +84,12 @@ model IdealPlantRevHP
     annotation (Placement(transformation(extent={{-92,-92},{-72,-72}})));
   Modelica.Blocks.Sources.Constant sourceTemperature(k=273.15 + 15)
     annotation (Placement(transformation(extent={{-126,-18},{-106,2}})));
+  Sensors.TemperatureTwoPort senTem(m_flow_nominal=2, redeclare package Medium
+      = Medium)
+    annotation (Placement(transformation(extent={{-152,4},{-132,24}})));
+  Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium,
+      m_flow_nominal=2)
+    annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
 equation
 
   connect(dT_coolingGrid.y, substation1.deltaT_coolingGridSet);
@@ -103,8 +106,6 @@ equation
   connect(coldDemand.y, substation1.coolingDemand);
   connect(coldDemand.y, substation2.coolingDemand);
 
-  connect(idealPlantRevHP.port_b, plugFlowPipe.port_a)
-    annotation (Line(points={{-72,14},{-60,14}}, color={0,127,255}));
   connect(T_setColdLine.y, idealPlantRevHP.T_heatingSet) annotation (Line(
         points={{-105,38},{-104,38},{-104,18.2},{-92.6,18.2}}, color={0,0,127}));
   connect(T_setHotLine.y, idealPlantRevHP.T_coolingSet) annotation (Line(points
@@ -114,22 +115,26 @@ equation
   connect(plugFlowPipe2.port_a, substation2.port_b) annotation (Line(points={{20,-44},
           {40.5882,-44},{40.5882,-26}},         color={0,127,255}));
   connect(plugFlowPipe.ports_b[1], plugFlowPipe1.port_a) annotation (Line(
-        points={{-40,12},{-22,12},{-22,16},{-2,16}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b[2], substation1.port_a) annotation (Line(points={{-40,16},
+        points={{-26,12},{-22,12},{-22,16},{-2,16}}, color={0,127,255}));
+  connect(plugFlowPipe.ports_b[2], substation1.port_a) annotation (Line(points={{-26,16},
           {-30,16},{-30,12},{-15.4118,12},{-15.4118,-6}},           color={0,
           127,255}));
   connect(plugFlowPipe3.port_a, plugFlowPipe2.ports_b[1])
     annotation (Line(points={{-40,-44},{0,-44}}, color={0,127,255}));
   connect(substation1.port_b, plugFlowPipe3.port_a) annotation (Line(points={{
           -15.4118,-26},{-14,-26},{-14,-44},{-40,-44}}, color={0,127,255}));
-  connect(bou.ports[1], plugFlowPipe3.ports_b[1]) annotation (Line(points={{
-          -138,18},{-136,18},{-136,-42},{-60,-42},{-60,-44}}, color={0,127,255}));
-  connect(bou.ports[2], idealPlantRevHP.port_a) annotation (Line(points={{-138,
-          14},{-116,14},{-116,14},{-92,14}}, color={0,127,255}));
+  connect(senTem.port_a, plugFlowPipe3.ports_b[1]) annotation (Line(points={{
+          -152,14},{-156,14},{-156,-44},{-60,-44}}, color={0,127,255}));
+  connect(senTem.port_b, idealPlantRevHP.port_a)
+    annotation (Line(points={{-132,14},{-92,14}}, color={0,127,255}));
+  connect(idealPlantRevHP.port_b, senTem1.port_a) annotation (Line(points={{-72,
+          14},{-70,14},{-70,40},{-70,40}}, color={0,127,255}));
+  connect(senTem1.port_b, plugFlowPipe.port_a)
+    annotation (Line(points={{-50,40},{-50,14},{-46,14}}, color={0,127,255}));
   connect(sourceTemperature.y, idealPlantRevHP.T_inlet_heatSource) annotation (
       Line(points={{-105,-8},{-100,-8},{-100,9.2},{-92.8,9.2}}, color={0,0,127}));
   connect(sourceTemperature.y, idealPlantRevHP.T_inlet_coldSource) annotation (
-      Line(points={{-105,-8},{-98,-8},{-98,6.2},{-92.8,6.2}}, color={0,0,127}));
+      Line(points={{-105,-8},{-100,-8},{-100,6.2},{-92.8,6.2}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-160,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-160,-100},{100,100}})),
