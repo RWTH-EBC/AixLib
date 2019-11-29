@@ -128,7 +128,7 @@ equation
  a*(w-1)-R_s*I_mp;
 
  V_oc = if I_ph >= 0.01  then
- a*log(I_ph/I_s+1)
+ a*log(abs((I_ph/I_s+1)))
  else
  0;
 
