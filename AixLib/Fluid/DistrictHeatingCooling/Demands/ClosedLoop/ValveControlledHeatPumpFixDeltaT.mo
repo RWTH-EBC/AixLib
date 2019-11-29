@@ -4,7 +4,7 @@ model ValveControlledHeatPumpFixDeltaT
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
     final dp(start=0),
-    final allowFlowReversal=false,
+    final allowFlowReversal=true,
     m_flow_nominal = (Q_flow_nominal*(1 - 1 / 3.5))/(cp_default * dTDesign));
 
   replaceable package MediumBuilding =
@@ -114,7 +114,7 @@ public
         transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={40,-74})));
+        origin={48,-74})));
   Modelica.Blocks.Sources.Constant temperatureSupplyBuilding(k=TSupplyBuilding)
     "Temperature of supply line" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -137,11 +137,11 @@ public
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
   Modelica.Blocks.Continuous.LimPID pControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.02,
-    Ti=5,
+    k=0.002,
+    Ti=7,
     Td=0.1,
     yMax=1,
-    yMin=0.01,
+    yMin=0.02,
     initType=Modelica.Blocks.Types.InitPID.SteadyState,
     y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -149,6 +149,21 @@ public
         origin={4,42})));
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{64,22},{44,42}})));
+  Modelica.Blocks.Sources.Constant T_HeaPumpOff(k=-20)
+    annotation (Placement(transformation(extent={{-38,-72},{-30,-64}})));
+  Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(
+        extent={{8,-8},{-8,8}},
+        rotation=-90,
+        origin={-8,-66})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=mFlowBuilding.y
+         >= 0.0068)
+    annotation (Placement(transformation(extent={{-46,-96},{-26,-76}})));
+  Modelica.Blocks.Logical.Switch switch2 annotation (Placement(transformation(
+        extent={{8,-8},{-8,8}},
+        rotation=-90,
+        origin={20,-90})));
+  Modelica.Blocks.Sources.Constant T_HeaPumpOff1(k=0.01)
+    annotation (Placement(transformation(extent={{-22,-100},{-14,-92}})));
 equation
 
   dpOut = dp;
@@ -163,20 +178,14 @@ equation
           {-21,-28},{-21,-12},{-12,-12}}, color={0,127,255}));
   connect(sourceHeating.ports[1], heaPum.port_a1)
     annotation (Line(points={{20,-30},{20,-12},{8,-12}}, color={0,127,255}));
-  connect(sourceHeating.T_in, temperatureReturnBuilding.y)
-    annotation (Line(points={{24,-52},{24,-74},{29,-74}}, color={0,0,127}));
   connect(deltaTBuilding.y, temperatureReturnBuilding.u2)
-    annotation (Line(points={{71,-80},{52,-80}}, color={0,0,127}));
+    annotation (Line(points={{71,-80},{60,-80}}, color={0,0,127}));
   connect(temperatureSupplyBuilding.y, temperatureReturnBuilding.u1)
-    annotation (Line(points={{71,-40},{60,-40},{60,-68},{52,-68}}, color={0,0,127}));
+    annotation (Line(points={{71,-40},{60,-40},{60,-68}},          color={0,0,127}));
   connect(heaPum.port_a2, valve.port_b)
     annotation (Line(points={{-12,0},{-28,0}}, color={0,127,255}));
   connect(heaPum.port_b2, senT_return.port_a)
     annotation (Line(points={{8,0},{60,0}}, color={0,127,255}));
-  connect(temperatureSupplyBuilding.y, heaPum.TSet) annotation (Line(points={{71,
-          -40},{59.5,-40},{59.5,-15},{10,-15}}, color={0,0,127}));
-  connect(sourceHeating.m_flow_in, mFlowBuilding.y) annotation (Line(points={{28,
-          -52},{28,-56},{40,-56},{40,80},{-45,80}}, color={0,0,127}));
   connect(Q_flow_input, mFlowBuilding.u)
     annotation (Line(points={{-108,80},{-68,80}}, color={0,0,127}));
   connect(pControl.u_m, senT_return.T) annotation (Line(points={{4,30},{36,30},
@@ -189,6 +198,26 @@ equation
           24},{66,26}}, color={0,0,127}));
   connect(delT.y, add.u1) annotation (Line(points={{79,50},{72,50},{72,38},{66,
           38}}, color={0,0,127}));
+  connect(switch1.u3, T_HeaPumpOff.y) annotation (Line(points={{-14.4,-75.6},{
+          -14.4,-68},{-29.6,-68}},
+                            color={0,0,127}));
+  connect(booleanExpression.y, switch1.u2) annotation (Line(points={{-25,-86},{
+          -8,-86},{-8,-75.6}},
+                            color={255,0,255}));
+  connect(mFlowBuilding.y, switch2.u1) annotation (Line(points={{-45,80},{36,80},
+          {36,-99.6},{26.4,-99.6}}, color={0,0,127}));
+  connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-25,-86},{
+          -8,-86},{-8,-99.6},{20,-99.6}}, color={255,0,255}));
+  connect(T_HeaPumpOff1.y, switch2.u3) annotation (Line(points={{-13.6,-96},{0,
+          -96},{0,-99.6},{13.6,-99.6}}, color={0,0,127}));
+  connect(switch2.y, sourceHeating.m_flow_in) annotation (Line(points={{20,
+          -81.2},{28,-81.2},{28,-52}}, color={0,0,127}));
+  connect(temperatureSupplyBuilding.y, switch1.u1) annotation (Line(points={{71,
+          -40},{-1.6,-40},{-1.6,-75.6}}, color={0,0,127}));
+  connect(switch1.y, heaPum.TSet) annotation (Line(points={{-8,-57.2},{2,-57.2},
+          {2,-15},{10,-15}}, color={0,0,127}));
+  connect(temperatureReturnBuilding.y, sourceHeating.T_in) annotation (Line(
+        points={{37,-74},{30,-74},{30,-52},{24,-52}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
