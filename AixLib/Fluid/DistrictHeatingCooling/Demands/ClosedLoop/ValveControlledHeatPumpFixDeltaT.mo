@@ -4,15 +4,13 @@ model ValveControlledHeatPumpFixDeltaT
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
     final dp(start=0),
-    final allowFlowReversal=false);
+    final allowFlowReversal=false,
+    m_flow_nominal = (Q_flow_nominal*(1 - 1 / 3.5))/(cp_default * dTDesign));
 
   replaceable package MediumBuilding =
     Modelica.Media.Interfaces.PartialMedium
       "Medium in the building heating system"
       annotation (choicesAllMatching = true);
-
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
-    "Nominal mass flow rate";
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal(
     min=0) "Nominal heat flow rate added to medium (Q_flow_nominal > 0)";
@@ -48,6 +46,7 @@ model ValveControlledHeatPumpFixDeltaT
     "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation (Dialog(tab="Dynamics"));
 
+
 protected
   final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
     T=Medium.T_default,
@@ -82,7 +81,7 @@ public
     allowFlowReversal=false,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=1.2e5,
-    y_start=0.3,
+    y_start=pControl.y_start,
     l2=1e-9,
     l=0.05) "Control valve"
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
