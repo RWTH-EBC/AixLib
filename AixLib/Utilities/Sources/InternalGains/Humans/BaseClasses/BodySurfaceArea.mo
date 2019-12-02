@@ -1,15 +1,15 @@
 within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
-function BodySurfaceArea "function for human body surface area"
+function BodySurfaceArea "function for calculating human body surface area"
   extends Modelica.Icons.Function;
   input Modelica.SIunits.Length height "Body height";
   input Modelica.SIunits.Mass weight "Body mass";
   output Modelica.SIunits.Area A "Surface area";
 
 algorithm
-  A := 0.202 * weight^0.425*height^0.725 "DuBois and DuBois formula (see Ruch1965)";
+  A := 0.202 * weight^0.425*height^0.725 "formula Ruch and Patton (1965)";
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>Function for human body surface area depending on body weight and height.</p>
+<p>Function for calculating human body surface area depending on body weight and height.</p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>The body surface area is calculated by the following equation[1]:</p>
 <p align=\"center\"><i>A = 0.202&middot;(weight^0.425)&middot;(height^0.725)</i></p>

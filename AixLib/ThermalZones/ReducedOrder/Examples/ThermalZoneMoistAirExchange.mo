@@ -197,8 +197,8 @@ equation
   connect(humRat.X_w, thermalZone.ventHum) annotation (Line(points={{-23,-20},{
           -20,-20},{-20,-6.7},{-11.3,-6.7}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600),
+        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=172800,
+        Interval=3600.00288),
     Documentation(info="<html>
 <p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
 </html>", revisions="<html>

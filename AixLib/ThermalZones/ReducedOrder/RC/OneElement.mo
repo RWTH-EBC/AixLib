@@ -197,7 +197,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
        use_moisture_balance and ATot >0 "Indoor Air CO2 concentration in ppm"
     annotation (Placement(transformation(extent={{240,-10},{260,10}})));
   Modelica.Blocks.Interfaces.RealInput CO2_flow if
-       use_moisture_balance and ATot >0 "Incoming CO2 in kg/s" annotation (
+       use_moisture_balance and ATot >0
+    "Incoming and outgoing CO2 massflow [kg/s]"                annotation (
       Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=-90,
@@ -223,7 +224,7 @@ protected
   parameter Real splitFactorSolRad[dimension, nOrientations]=
     BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin)
     "Share of each wall surface area that is non-zero, for each orientation separately";
-  Modelica.Blocks.Sources.RealExpression CO2_ppm(y=volMoiAir.C[1]*(28.949/44.01)
+  Modelica.Blocks.Sources.RealExpression CO2PPM(y=volMoiAir.C[1]*(28.949/44.01)
         *1E6) if
     use_moisture_balance and ATot >0 "Calculation of CO2 in ppm inside zone"
     annotation (Placement(transformation(
@@ -445,7 +446,7 @@ equation
   connect(conQLat_flow.Q_flow, QLat_flow)
     annotation (Line(points={{-202,-120},{-232,-120},{-232,-130},{-260,-130}},
                                                        color={0,0,127}));
-  connect(CO2_ppm.y,CO2)
+  connect(CO2PPM.y, CO2)
     annotation (Line(points={{229,0},{250,0}}, color={0,0,127}));
   connect(CO2_flow, volMoiAir.C_flow[1]) annotation (Line(points={{180,-200},{
           180,-90},{-28,-90},{-28,-22},{-22,-22}}, color={0,0,127}));

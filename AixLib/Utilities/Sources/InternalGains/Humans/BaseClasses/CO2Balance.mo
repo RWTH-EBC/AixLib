@@ -2,26 +2,25 @@ within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
 model CO2Balance
   "This model tracks the incoming and outgoing CO2 massflow in the volume"
 
-  parameter Modelica.SIunits.Density rho;
-  parameter Modelica.SIunits.Volume V;
-  parameter Modelica.SIunits.Concentration CO2_vent = 6.12157E-4 "CO2 Concentration in atmosphere (equals 403ppm)";
+  parameter Modelica.SIunits.Density rho "Air Density";
+  parameter Modelica.SIunits.Volume V "Zone volume";
+  parameter Modelica.SIunits.MassFraction XCO2_amb = 6.12157E-4 "Massfraction of CO2 in atmosphere (equals 403ppm)";
 
-  Modelica.SIunits.MassFlowRate massFlowVent "MassFlowRate of ventilation";
+  Modelica.SIunits.MassFlowRate mAir_flow "Massflowrate of ventilation and infiltration [kg/s]";
 
-  Modelica.Blocks.Interfaces.RealOutput CO2_flow "Change of CO2 mass in Volume"
+  Modelica.Blocks.Interfaces.RealOutput CO2_flow "Incoming and outgoing CO2 massflow [kg/s]"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
-  Modelica.Blocks.Interfaces.RealInput massFlowTracerPeople
-    "CO2 massflow of people in room"
+  Modelica.Blocks.Interfaces.RealInput CO2People_flow "CO2 massflow of people in zone [kg/s]"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Blocks.Interfaces.RealInput ventSum "Total ventilation rate"
+  Modelica.Blocks.Interfaces.RealInput airExchange "Total ventilation and infiltration rate [1/h]"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Blocks.Interfaces.RealInput C "concentration of CO2 in room"
+  Modelica.Blocks.Interfaces.RealInput XCO2 "Massfraction of CO2 in room [kgCO2/kgTotalAir]"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
 equation
 
-   massFlowVent = ventSum * rho * V/3600;
-   CO2_flow = massFlowVent * (CO2_vent - C) + massFlowTracerPeople;
+   mAir_flow = airExchange * rho * V/3600;
+   CO2_flow = mAir_flow * (XCO2_amb - XCO2) +CO2People_flow;
 
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
@@ -29,7 +28,7 @@ equation
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>The CO2 massflow is calculated with a simple mass balance around the Volume. The equation looks like this:
 </p>
-<p align=\"center\"><i>CO2_flow = massFlowVent * (CO2_vent - C) + massFlowTracerPeople;</i></p>
+<p align=\"center\"><i>CO2_flow = mAir_flow * (XCO2_amb - XCO2) +CO2People_flow</i></p>
 <p>The output is positive or negative depending on the balance.</p>
 </html>", revisions="<html>
 <ul>
