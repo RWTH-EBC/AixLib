@@ -94,6 +94,8 @@ public
     redeclare package Medium1 = MediumBuilding,
     allowFlowReversal1=false,
     allowFlowReversal2=false,
+    dTEva_nominal=dTEva_nominal,
+    dTCon_nominal=dTCon_nominal,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
@@ -169,6 +171,10 @@ public
  else
      0.0
     annotation (Placement(transformation(extent={{98,84},{118,104}})));
+  parameter Modelica.SIunits.TemperatureDifference dTEva_nominal=-10
+    "Temperature difference evaporator outlet-inlet";
+  parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
+    "Temperature difference condenser outlet-inlet";
 equation
 
   dpOut = dp;
