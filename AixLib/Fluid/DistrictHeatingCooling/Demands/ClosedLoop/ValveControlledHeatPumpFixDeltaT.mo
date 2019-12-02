@@ -151,19 +151,24 @@ public
     annotation (Placement(transformation(extent={{64,22},{44,42}})));
   Modelica.Blocks.Sources.Constant T_HeaPumpOff(k=-20)
     annotation (Placement(transformation(extent={{-38,-72},{-30,-64}})));
-  Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(
+  Utilities.Logical.SmoothSwitch switch1 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={-8,-66})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=mFlowBuilding.y
          >= 0.0068)
     annotation (Placement(transformation(extent={{-46,-96},{-26,-76}})));
-  Modelica.Blocks.Logical.Switch switch2 annotation (Placement(transformation(
+  Utilities.Logical.SmoothSwitch switch2 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={20,-90})));
-  Modelica.Blocks.Sources.Constant T_HeaPumpOff1(k=0.01)
+  Modelica.Blocks.Sources.Constant T_HeaPumpOff1(k=0.0068)
     annotation (Placement(transformation(extent={{-22,-100},{-14,-92}})));
+  Modelica.Blocks.Interfaces.RealOutput COP = if heaPum.P > 0.0
+    then heaPum.COP
+ else
+     0.0
+    annotation (Placement(transformation(extent={{98,84},{118,104}})));
 equation
 
   dpOut = dp;
@@ -217,7 +222,7 @@ equation
   connect(switch1.y, heaPum.TSet) annotation (Line(points={{-8,-57.2},{2,-57.2},
           {2,-15},{10,-15}}, color={0,0,127}));
   connect(temperatureReturnBuilding.y, sourceHeating.T_in) annotation (Line(
-        points={{37,-74},{30,-74},{30,-52},{24,-52}}, color={0,0,127}));
+        points={{37,-74},{24,-74},{24,-52}},          color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
