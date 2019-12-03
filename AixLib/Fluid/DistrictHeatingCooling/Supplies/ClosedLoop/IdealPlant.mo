@@ -19,13 +19,15 @@ model IdealPlant
     "Fluid connector for connecting the ideal plant to the warm line of the network"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   AixLib.Fluid.HeatExchangers.PrescribedOutlet heater(redeclare package Medium =
-        Medium, use_X_wSet=false,
+        Medium,
+    QMin_flow=0,use_X_wSet=false,
     dp_nominal=dp_nominal,
     m_flow_nominal=m_flow_nominal,
     use_TSet=true)
     annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
   AixLib.Fluid.HeatExchangers.PrescribedOutlet cooler(
     redeclare package Medium = Medium,
+    QMax_flow=0,
     use_X_wSet=false,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dp_nominal)
