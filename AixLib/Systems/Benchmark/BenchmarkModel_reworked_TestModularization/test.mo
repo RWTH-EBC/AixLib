@@ -3,8 +3,20 @@ model test
   extends Modelica.Icons.Example;
 
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+    pAtmSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    ceiHeiSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    totSkyCovSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    opaSkyCovSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    TDewPoiSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    TBlaSkySou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
+    relHumSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    winSpeSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    winDirSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    HInfHorSou=AixLib.BoundaryConditions.Types.DataSource.File,
+    HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor,
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-    computeWetBulbTemperature=false,
+    computeWetBulbTemperature=true,
     filNam=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/Weatherdata_benchmark_new.mos"))
     "Weather data reader"
@@ -112,6 +124,12 @@ model test
   Benchmark_DataBase.thermalZone_2 thermalZone_2_1(redeclare package Medium =
         AixLib.Media.Air)
     annotation (Placement(transformation(extent={{-20,-6},{0,14}})));
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(
+    tableOnFile=true,
+    tableName="DIffDir",
+    fileName="D:/sciebo_fb/Simulation/SimInput/DiffDir.mat",
+    columns={2,3})
+    annotation (Placement(transformation(extent={{-88,58},{-68,78}})));
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-74,28},{-61,28},{-61,-4}},
@@ -140,6 +158,10 @@ equation
           {-17,-30},{-17,-4.4}}, color={0,0,127}));
   connect(internalGains.y, thermalZone_2_1.intGains) annotation (Line(points={{
           0.7,-52},{4,-52},{4,-4.4},{-2,-4.4}}, color={0,0,127}));
+  connect(combiTimeTable.y[1], weaDat.HDirNor_in) annotation (Line(points={{-67,
+          68},{-62,68},{-62,17},{-95,17}}, color={0,0,127}));
+  connect(combiTimeTable.y[2], weaDat.HDifHor_in) annotation (Line(points={{-67,
+          68},{-64,68},{-64,28},{-95,28},{-95,20.4}}, color={0,0,127}));
   annotation (experiment(
       StopTime=4838400,
       Interval=3600,

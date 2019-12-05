@@ -15,6 +15,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
         origin={-74,-48})));
   BoundaryConditions.WeatherData.Old.WeatherTRY.Weather
                              weather(
+    DiffWeatherDataTime=1,
     tableName="Benchmark",
     Wind_dir=true,
     Wind_speed=true,
@@ -25,8 +26,8 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     Latitude=48.0304,
     Longitude=9.3138,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://AixLib/Resources/weatherdata/Weathdata_benchmark_old.mat"))
+    fileName=
+        "D:/sciebo_fb/Simulation/SimInput/WeatherData/Benchmark_old/Weathdata_benchmark_old_2.mat")
     annotation (Placement(transformation(extent={{-98,80},{-68,100}})));
 
   Utilities.Interfaces.SolarRad_out SolarRadiation_East
@@ -47,7 +48,7 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={-33,37})));
-  Modelica.Blocks.Sources.Constant Gc(k=25*11.5) annotation (Placement(
+  Modelica.Blocks.Sources.Constant Gc(k=25*1170) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -68,17 +69,6 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{-32,-4},{-12,16}})));
-  Modelica.Blocks.Sources.Pulse pulse(
-    amplitude=2000,
-    width=50,
-    period=86400,
-    startTime=28800)
-    annotation (Placement(transformation(extent={{2,-84},{22,-64}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow perRad
-    "Radiative heat flow of persons" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={36,-56})));
 equation
   connect(TSoil.y,preTemFloor. T)
   annotation (Line(points={{-71.6,-80},{-23,-80},{-23,-37.2}},
@@ -137,10 +127,6 @@ equation
     annotation (Line(points={{-70,-8},{-56,-8},{-56,12.8},{-33,12.8}},
                                                                     color={255,
           128,0}));
-  connect(pulse.y, perRad.Q_flow) annotation (Line(points={{23,-74},{24,-74},{
-          24,-56},{26,-56}}, color={0,0,127}));
-  connect(perRad.port, southFacingWindows.thermRoom)
-    annotation (Line(points={{46,-56},{46,8.3},{-24.9,8.3}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=4838400, Interval=3600));
