@@ -3,19 +3,20 @@ expandable connector HeatPumpSystemBus
   "Data bus for ERC Heatpump system"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  AixLib.Controls.Interfaces.HeatPumpControlBus busHP;
+  AixLib.Controls.Interfaces.ThermalMachineControlBus busHP;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleHS;
   HydraulicModules.BaseClasses.HydraulicBus busPumpHot;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleRecool;
   HydraulicModules.BaseClasses.HydraulicBus busPumpCold;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleCS;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleFreecool;
-  Boolean AirCoolerOn "Cooler for reccoling or freecooling";
+  Boolean AirCoolerOnSet "Cooler for reccoling or freecooling";
 
-  SI.Temperature TTopHS "Temperature in top layer of heat storage";
-  SI.Temperature TBottomHS "Temperature in bottom layer of heat storage";
-  SI.Temperature TTopCS "Temperature in top layer of cold storage";
-  SI.Temperature TBottomCS "Temperature in bottom layer of cold storage";
+  SI.Power PelAirCoolerMea "Electrica Power consumption of air cool";
+  SI.Temperature TTopHSMea "Temperature in top layer of heat storage";
+  SI.Temperature TBottomHSMea "Temperature in bottom layer of heat storage";
+  SI.Temperature TTopCSMea "Temperature in top layer of cold storage";
+  SI.Temperature TBottomCSMea "Temperature in bottom layer of cold storage";
 
   annotation (
     Icon(graphics,

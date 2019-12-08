@@ -59,18 +59,20 @@ model HeatpumpValidation
     use_evaCap=false,
     redeclare package Medium_con = Medium,
     redeclare package Medium_eva = Medium,
-    use_revHP=true,
-    redeclare model PerDataHea =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
-            15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
-            26.5,51000,51000; 44.2,51000,51000])),
-    redeclare model PerDataChi =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=
-            Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
-            15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
-            26.5,51000,51000; 44.2,51000,51000])),
+    redeclare model PerDataMainHP =
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        (dataTable=
+            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201(
+            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
+            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000]),
+          extrapolation=true),
+    redeclare model PerDataRevHP =
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        (dataTable=
+            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201(
+            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
+            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000]),
+          extrapolation=true),
     use_refIne=true,
     transferHeat=true,
     tauHeaTraEva(displayUnit="h") = 21600,
@@ -106,7 +108,7 @@ model HeatpumpValidation
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={74,70})));
-  Controls.Interfaces.HeatPumpControlBus
+  AixLib.Controls.Interfaces.ThermalMachineControlBus
                            sigBusHP
     annotation (Placement(transformation(extent={{-16,-78},{16,-42}}),
         iconTransformation(extent={{6,-64},{24,-38}})));
@@ -124,7 +126,7 @@ equation
                                                      color={0,0,127}));
   connect(toKelvin1.Kelvin, boundary3.T_in) annotation (Line(points={{80.6,70},{
           108,70},{108,16},{92,16}},                    color={0,0,127}));
-  connect(sigBusHP, heatPump.sigBusHP) annotation (Line(
+  connect(sigBusHP, heatPump.sigBus) annotation (Line(
       points={{0,-60},{0,-37.5},{-0.2,-37.5},{-0.2,-19.8}},
       color={255,204,51},
       thickness=0.5), Text(

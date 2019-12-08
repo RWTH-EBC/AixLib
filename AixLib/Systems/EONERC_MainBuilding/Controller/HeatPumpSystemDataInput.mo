@@ -181,7 +181,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(gain4.u, greaterThreshold2.u) annotation (Line(points={{-2.6,-53},{-4.3,
           -53},{-4.3,-67},{18.6,-67}}, color={0,0,127}));
-  connect(greaterThreshold2.y, heatPumpSystemBus1.AirCoolerOn) annotation (Line(
+  connect(greaterThreshold2.y, heatPumpSystemBus1.AirCoolerOnSet) annotation (Line(
         points={{34.7,-67},{100.05,-67},{100.05,0.05}}, color={255,0,255}),
       Text(
       string="%second",

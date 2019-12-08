@@ -271,8 +271,8 @@ equation
           -88,20},{-90,20},{-90,32},{90,32}}, color={0,127,255}));
   connect(throttlePump.port_b2, plugFlowPipe.ports_b[3]) annotation (Line(
         points={{-112,20},{-114,20},{-114,52},{87.3333,52}}, color={0,127,255}));
-  connect(plugFlowPipe.heatPort, fixedTemperature.port) annotation (Line(points
-        ={{80,42},{32,42},{32,-90},{20,-90}}, color={191,0,0}));
+  connect(plugFlowPipe.heatPort, fixedTemperature.port) annotation (Line(points=
+         {{80,42},{32,42},{32,-90},{20,-90}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(

@@ -109,7 +109,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=0,
-        origin={-60,-80})));
+        origin={-60,-100})));
   HydraulicModules.Throttle throttle_HS(
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
@@ -157,7 +157,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=180,
-        origin={140,-80})));
+        origin={140,-100})));
   Fluid.MixingVolumes.MixingVolume volAirCoolerRecool(
     redeclare package Medium = Medium,
     T_start=T_start_hot,
@@ -167,7 +167,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
-        origin={-20,-80})));
+        origin={-20,-100})));
   Fluid.MixingVolumes.MixingVolume volAirCoolerFreecool(
     redeclare package Medium = Medium,
     T_start=T_start_cold,
@@ -177,7 +177,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={100,-80})));
+        origin={104,-100})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
         Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -217,18 +217,20 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     use_evaCap=false,
     redeclare package Medium_con = Medium,
     redeclare package Medium_eva = Medium,
-    use_revHP=true,
-    redeclare replaceable model PerDataHea =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (dataTable=
-            AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
-            15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
-            26.5,51000,51000; 44.2,51000,51000])),
-    redeclare replaceable model PerDataChi =
-        Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (smoothness=
-            Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-            AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201(tableQdot_con=[0,12.5,
-            15; 26.5,310000,318000; 44.2,251000,254000], tableP_ele=[0,12.5,15;
-            26.5,51000,51000; 44.2,51000,51000])),
+    redeclare model PerDataMainHP =
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        (dataTable=
+            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201(
+            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
+            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000]),
+          extrapolation=true),
+    redeclare model PerDataRevHP =
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        (dataTable=
+            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201(
+            tableQdot_con=[0,12.5,15; 26.5,310000,318000; 44.2,251000,254000],
+            tableP_ele=[0,12.5,15; 26.5,51000,51000; 44.2,51000,51000]),
+          extrapolation=true),
     use_refIne=true,
     transferHeat=true,
     allowFlowReversalEva=allowFlowReversal,
@@ -244,26 +246,30 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         rotation=90,
         origin={0,0})));
   Modelica.Thermal.HeatTransfer.Components.Convection convection
-    annotation (Placement(transformation(extent={{-8,-100},{12,-80}})));
+    annotation (Placement(transformation(extent={{0,-118},{20,-98}})));
   Modelica.Thermal.HeatTransfer.Components.Convection convection1 annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
-        origin={76,-90})));
+        origin={70,-108})));
   Modelica.Blocks.Sources.Constant const1(k=8340)
-    annotation (Placement(transformation(extent={{24,-56},{32,-48}})));
+    annotation (Placement(transformation(extent={{24,-68},{32,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_outside annotation (
-      Placement(transformation(extent={{28,-100},{48,-80}}), iconTransformation(
+      Placement(transformation(extent={{30,-118},{50,-98}}), iconTransformation(
           extent={{-8,-118},{8,-102}})));
   Modelica.Blocks.Sources.Constant zero(k=0)
-    annotation (Placement(transformation(extent={{24,-72},{32,-64}})));
+    annotation (Placement(transformation(extent={{24,-84},{32,-76}})));
   Modelica.Blocks.Logical.Switch switch1
-    annotation (Placement(transformation(extent={{40,-70},{60,-50}})));
+    annotation (Placement(transformation(extent={{42,-80},{54,-68}})));
   BaseClasses.HeatPumpSystemBus heatPumpSystemBus annotation (Placement(
         transformation(extent={{-14,46},{14,74}}), iconTransformation(extent={{
             -10,50},{10,70}})));
 
 
+  Modelica.Blocks.Logical.Switch switch2
+    annotation (Placement(transformation(extent={{42,-58},{54,-46}})));
+  Modelica.Blocks.Sources.Constant const2(k=1800)
+    annotation (Placement(transformation(extent={{24,-50},{32,-42}})));
 equation
   connect(pump_cold.port_a1, coldStorage.fluidportTop2) annotation (Line(
         points={{80,12},{88,12},{88,20},{108,20},{108,14.15},{108.25,14.15}},
@@ -293,9 +299,10 @@ equation
         points={{140,12},{136,12},{136,20},{116.2,20},{116.2,14.15}}, color={
           0,127,255}));
   connect(throttle_freecool.port_a1, throttle_CS.port_a1) annotation (Line(
-        points={{160,-92},{202,-92},{202,12},{180,12}}, color={0,127,255}));
+        points={{160,-112},{202,-112},{202,12},{180,12}},
+                                                        color={0,127,255}));
   connect(throttle_freecool.port_b2, throttle_CS.port_b2) annotation (Line(
-        points={{160,-68},{188,-68},{188,-12},{180,-12}}, color={0,127,255}));
+        points={{160,-88},{188,-88},{188,-12},{180,-12}}, color={0,127,255}));
   connect(heatStorage.fluidportBottom2, port_a2) annotation (Line(points={{-191.45,
           -16.15},{-192,-16.15},{-192,-20},{-220,-20}}, color={0,127,255}));
   connect(heatStorage.fluidportTop2, port_b2) annotation (Line(points={{-191.75,
@@ -313,31 +320,38 @@ equation
   connect(heatPump.port_a2, pump_cold.port_b1) annotation (Line(points={{11,18},
           {40,18},{40,12}},         color={0,127,255}));
   connect(volAirCoolerRecool.heatPort, convection.solid)
-    annotation (Line(points={{-20,-90},{-8,-90}}, color={191,0,0}));
+    annotation (Line(points={{-20,-110},{-14,-110},{-14,-108},{0,-108}},
+                                                  color={191,0,0}));
   connect(convection1.solid, volAirCoolerFreecool.heatPort)
-    annotation (Line(points={{86,-90},{100,-90}}, color={191,0,0}));
+    annotation (Line(points={{80,-108},{92,-108},{92,-110},{104,-110}},
+                                                  color={191,0,0}));
   connect(throttle_recool.port_a2, volAirCoolerRecool.ports[1]) annotation (
-      Line(points={{-40,-68},{-30,-68},{-30,-82}}, color={0,127,255}));
+      Line(points={{-40,-88},{-30,-88},{-30,-102}},color={0,127,255}));
   connect(throttle_recool.port_b1, volAirCoolerRecool.ports[2]) annotation (
-      Line(points={{-40,-92},{-30,-92},{-30,-78}}, color={0,127,255}));
-  connect(throttle_recool.port_a1, pump_hot.port_b2) annotation (Line(points={{
-          -80,-92},{-106,-92},{-106,12},{-80,12}}, color={0,127,255}));
-  connect(throttle_recool.port_b2, pump_hot.port_a1) annotation (Line(points={{
-          -80,-68},{-92,-68},{-92,-12},{-80,-12}}, color={0,127,255}));
+      Line(points={{-40,-112},{-30,-112},{-30,-98}},
+                                                   color={0,127,255}));
+  connect(throttle_recool.port_a1, pump_hot.port_b2) annotation (Line(points={{-80,
+          -112},{-106,-112},{-106,12},{-80,12}},   color={0,127,255}));
+  connect(throttle_recool.port_b2, pump_hot.port_a1) annotation (Line(points={{-80,-88},
+          {-92,-88},{-92,-12},{-80,-12}},          color={0,127,255}));
   connect(convection.fluid, T_outside)
-    annotation (Line(points={{12,-90},{38,-90}}, color={191,0,0}));
+    annotation (Line(points={{20,-108},{40,-108}},
+                                                 color={191,0,0}));
   connect(convection1.fluid, T_outside)
-    annotation (Line(points={{66,-90},{38,-90}}, color={191,0,0}));
+    annotation (Line(points={{60,-108},{40,-108}},
+                                                 color={191,0,0}));
   connect(throttle_freecool.port_a2, volAirCoolerFreecool.ports[1]) annotation (
-     Line(points={{120,-68},{110,-68},{110,-82}}, color={0,127,255}));
+     Line(points={{120,-88},{114,-88},{114,-102}},color={0,127,255}));
   connect(throttle_freecool.port_b1, volAirCoolerFreecool.ports[2]) annotation (
-     Line(points={{120,-92},{110,-92},{110,-78}}, color={0,127,255}));
-  connect(convection.Gc, convection1.Gc) annotation (Line(points={{2,-80},{2,
-          -76},{76,-76},{76,-80}}, color={0,0,127}));
-  connect(T_outside, T_outside) annotation (Line(points={{38,-90},{5,-90},{5,-90},
-          {38,-90}}, color={191,0,0}));
+     Line(points={{120,-112},{114,-112},{114,-98}},
+                                                  color={0,127,255}));
+  connect(convection.Gc, convection1.Gc) annotation (Line(points={{10,-98},{10,-90},
+          {70,-90},{70,-98}},      color={0,0,127}));
+  connect(T_outside, T_outside) annotation (Line(points={{40,-108},{40,-108}},
+                     color={191,0,0}));
   connect(switch1.y, convection1.Gc)
-    annotation (Line(points={{61,-60},{76,-60},{76,-80}}, color={0,0,127}));
+    annotation (Line(points={{54.6,-74},{70,-74},{70,-98}},
+                                                          color={0,0,127}));
   connect(throttle_HS.hydraulicBus, heatPumpSystemBus.busThrottleHS)
     annotation (Line(
       points={{-140,20},{-140,60},{0.07,60},{0.07,60.07}},
@@ -375,7 +389,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(throttle_freecool.hydraulicBus, heatPumpSystemBus.busThrottleFreecool)
     annotation (Line(
-      points={{140,-100},{160,-100},{160,-98},{226,-98},{226,60.07},{0.07,60.07}},
+      points={{140,-120},{226,-120},{226,60.07},{0.07,60.07}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -385,14 +399,14 @@ equation
 
   connect(throttle_recool.hydraulicBus, heatPumpSystemBus.busThrottleRecool)
     annotation (Line(
-      points={{-60,-100},{-226,-100},{-226,60.07},{0.07,60.07}},
+      points={{-60,-120},{-226,-120},{-226,60.07},{0.07,60.07}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heatPump.sigBusHP, heatPumpSystemBus.busHP) annotation (Line(
+  connect(heatPump.sigBus, heatPumpSystemBus.busHP) annotation (Line(
       points={{7.15,-17.82},{7.15,-16.91},{0.07,-16.91},{0.07,60.07}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -400,33 +414,33 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switch1.u2, heatPumpSystemBus.AirCoolerOn) annotation (Line(points={{
-          38,-60},{20,-60},{20,60.07},{0.07,60.07}}, color={255,0,255}), Text(
+  connect(switch1.u2, heatPumpSystemBus.AirCoolerOnSet) annotation (Line(points={{40.8,
+          -74},{20,-74},{20,60.07},{0.07,60.07}},    color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heatStorage.TTop, heatPumpSystemBus.TTopHS) annotation (Line(points={
-          {-176,12.2},{-174,12.2},{-174,60.07},{0.07,60.07}}, color={0,0,127}),
+  connect(heatStorage.TTop, heatPumpSystemBus.TTopHSMea) annotation (Line(points={{-176,
+          12.2},{-174,12.2},{-174,60.07},{0.07,60.07}},       color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(heatStorage.TBottom, heatPumpSystemBus.TBottomHS) annotation (Line(
+  connect(heatStorage.TBottom, heatPumpSystemBus.TBottomHSMea) annotation (Line(
         points={{-176,-13},{-174,-13},{-174,60},{0.07,60},{0.07,60.07}}, color=
           {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(coldStorage.TTop, heatPumpSystemBus.TTopCS) annotation (Line(points={
-          {124,12.2},{124,60.07},{0.07,60.07}}, color={0,0,127}), Text(
+  connect(coldStorage.TTop, heatPumpSystemBus.TTopCSMea) annotation (Line(points={{124,
+          12.2},{124,60.07},{0.07,60.07}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(coldStorage.TBottom, heatPumpSystemBus.TBottomCS) annotation (Line(
+  connect(coldStorage.TBottom, heatPumpSystemBus.TBottomCSMea) annotation (Line(
         points={{124,-13},{126,-13},{126,60.07},{0.07,60.07}}, color={0,0,127}),
       Text(
       string="%second",
@@ -434,9 +448,17 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(const1.y, switch1.u1)
-    annotation (Line(points={{32.4,-52},{38,-52}}, color={0,0,127}));
+    annotation (Line(points={{32.4,-64},{36,-64},{36,-69.2},{40.8,-69.2}},
+                                                   color={0,0,127}));
   connect(zero.y, switch1.u3)
-    annotation (Line(points={{32.4,-68},{38,-68}}, color={0,0,127}));
+    annotation (Line(points={{32.4,-80},{36,-80},{36,-78.8},{40.8,-78.8}},
+                                                   color={0,0,127}));
+  connect(switch2.u3, switch1.u3)
+    annotation (Line(points={{40.8,-56.8},{40.8,-78.8}}, color={0,0,127}));
+  connect(const2.y, switch2.u1) annotation (Line(points={{32.4,-46},{36,-46},{36,
+          -47.2},{40.8,-47.2}}, color={0,0,127}));
+  connect(switch1.u2, switch2.u2) annotation (Line(points={{40.8,-74},{20,-74},{
+          20,-52},{40.8,-52}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
         Rectangle(

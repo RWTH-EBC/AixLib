@@ -237,8 +237,8 @@ equation
   connect(vol.ports[2], switchingUnit.port_b3) annotation (Line(points={{38,26},
           {46,26},{46,40},{48,40}}, color={0,127,255}));
   connect(heatpumpSystem.port_a2, heatExchangerSystem.port_b3) annotation (Line(
-        points={{-60,-52.6667},{-86,-52.6667},{-86,-25.52},{-85,-25.52}}, color
-        ={0,127,255}));
+        points={{-60,-52.6667},{-86,-52.6667},{-86,-25.52},{-85,-25.52}}, color=
+         {0,127,255}));
   connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
         points={{-60,-42},{-95,-42},{-95,-26}}, color={0,127,255}));
   connect(ctrMix.hydraulicBus, admix.hydraulicBus) annotation (Line(
