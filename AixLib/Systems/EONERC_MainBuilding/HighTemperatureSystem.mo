@@ -8,7 +8,7 @@ model HighTemperatureSystem
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start
+  parameter Modelica.SIunits.Temperature T_start = 60
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
   parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
@@ -255,8 +255,8 @@ equation
     annotation (Line(points={{120,60},{112,60}}, color={0,127,255}));
   connect(port_a, senT_b.port_a)
     annotation (Line(points={{120,20},{112,20}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b[1], senT_a.port_a) annotation (Line(points={{
-          92.6667,52},{92,52},{92,60},{100,60}}, color={0,127,255}));
+  connect(plugFlowPipe.ports_b[1], senT_a.port_a) annotation (Line(points={{92.6667,
+          52},{92,52},{92,60},{100,60}},         color={0,127,255}));
   connect(plugFlowPipe.port_a, senT_b.port_b)
     annotation (Line(points={{90,32},{90,20},{100,20}}, color={0,127,255}));
   connect(admix1.port_a1, plugFlowPipe.port_a)

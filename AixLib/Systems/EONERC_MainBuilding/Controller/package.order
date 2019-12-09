@@ -5,3 +5,5 @@ CtrHXSsystem
 HTSConstantControl
 CtrHighTemperatureSystem
 HeatPumpSystemSimpleControl
+CtrGTFSimple
+EonERCModeControl

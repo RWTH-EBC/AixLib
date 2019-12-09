@@ -200,8 +200,8 @@ equation
           -123},{-40,-100}}, color={0,0,127}));
   connect(hysteresis.y, switch1.u2) annotation (Line(points={{-37.5,11},{-26,11},
           {-26,14},{-24,14}}, color={255,0,255}));
-  connect(hysteresis.u, heatPumpSystemBus1.TBottomCS) annotation (Line(points={{-49,11},
-          {-49,18},{100,18},{100,0}},                   color={0,0,127}), Text(
+  connect(hysteresis.u, heatPumpSystemBus1.TBottomCSMea) annotation (Line(points={{-49,11},
+          {-49,18},{100.05,18},{100.05,0.05}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},

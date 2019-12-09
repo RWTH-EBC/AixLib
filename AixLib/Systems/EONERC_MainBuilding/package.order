@@ -3,6 +3,7 @@ HeatpumpSystem
 HighTemperatureSystem
 SwitchingUnit
 HeatExchangerSystem
+GeothermalFieldSimple
 Controller
 BaseClasses
 Validation
