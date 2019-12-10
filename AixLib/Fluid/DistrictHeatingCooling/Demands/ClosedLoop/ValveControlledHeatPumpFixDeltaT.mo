@@ -78,7 +78,7 @@ public
         origin={90,50})));
   Actuators.Valves.TwoWayPressureIndependent valve(
     redeclare package Medium = Medium,
-    allowFlowReversal=false,
+    allowFlowReversal=true,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=1.2e5,
     y_start=pControl.y_start,
@@ -92,7 +92,7 @@ public
         origin={-20,-38})));
   HeatPumps.Carnot_TCon              heaPum(
     redeclare package Medium1 = MediumBuilding,
-    allowFlowReversal1=false,
+    allowFlowReversal1=true,
     allowFlowReversal2=false,
     dTEva_nominal=dTEva_nominal,
     dTCon_nominal=dTCon_nominal,
@@ -144,7 +144,7 @@ public
     Td=0.1,
     yMax=1,
     yMin=0.02,
-    initType=Modelica.Blocks.Types.InitPID.SteadyState,
+    initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=0.3)      "Pressure controller" annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
