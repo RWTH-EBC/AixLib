@@ -15,7 +15,7 @@ model test
     winDirSou=AixLib.BoundaryConditions.Types.DataSource.File,
     HInfHorSou=AixLib.BoundaryConditions.Types.DataSource.File,
     HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HDifHor,
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.TemperaturesAndSkyCover,
     computeWetBulbTemperature=true,
     filNam=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/Weatherdata_benchmark_new.mos"))
