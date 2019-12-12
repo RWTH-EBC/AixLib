@@ -87,13 +87,9 @@ model MainBuildingEnergySystem
     T_start=293.15)
     annotation (Placement(transformation(extent={{-176,84},{-164,96}})));
   Controller.EonERCModeControl.EonERCModeBasedControl eonERCModeBasedControl
-    annotation (Placement(transformation(extent={{-40,-46},{-20,-26}})));
-  Controller.CtrSWU ctrSWU
-    annotation (Placement(transformation(extent={{80,80},{60,100}})));
-  Modelica.Blocks.Sources.IntegerExpression integerExpression(y=4)
-    annotation (Placement(transformation(extent={{108,80},{88,100}})));
+    annotation (Placement(transformation(extent={{-48,-2},{-28,18}})));
   Controller.CtrHXSsystem ctrHXSsystem(
-    TflowSet=305.15,
+    TflowSet=298.15,
     Ti=60,
     Td=0,
     rpm_pump=1000,
@@ -106,7 +102,7 @@ model MainBuildingEnergySystem
     annotation (Placement(transformation(extent={{-218,-90},{-198,-70}})));
   HydraulicModules.SimpleConsumer
                  simpleConsumer1(
-    kA=60000,
+    kA=50000,
     V=0.1,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
@@ -126,7 +122,7 @@ model MainBuildingEnergySystem
         origin={-28,92})));
   HydraulicModules.Controller.CtrMix ctrMix1(
     useExternalTset=false,
-    TflowSet=306.15,
+    TflowSet=301.15,
     k=0.05,
     Td=0,
     rpm_pump=2000)
@@ -185,10 +181,10 @@ model MainBuildingEnergySystem
   Modelica.Blocks.Sources.Sine sine1(
     amplitude=2,
     freqHz=1/(3600*24),
-    offset=273.15 + 30)
+    offset=273.15 + 23)
     annotation (Placement(transformation(extent={{-112,94},{-102,104}})));
   Modelica.Blocks.Sources.Sine sine2(
-    amplitude=3,
+    amplitude=2,
     freqHz=1/(3600*24),
     offset=273.15 + 18)
     annotation (Placement(transformation(extent={{-52,94},{-42,104}})));
@@ -210,7 +206,7 @@ model MainBuildingEnergySystem
     annotation (Placement(transformation(extent={{-252,-46},{-232,-26}})));
   HydraulicModules.Controller.CtrMix ctrMix2(
     useExternalTset=false,
-    TflowSet=285.15,
+    TflowSet=289.15,
     k=0.05,
     Td=0,
     rpm_pump=2000,
@@ -219,12 +215,9 @@ model MainBuildingEnergySystem
   GeothermalFieldSimple geothermalFieldSimple(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
-    T_amb=293.15,
+    T_start=285.15,
+    T_amb=288.15,
     G=5000) annotation (Placement(transformation(extent={{52,-18},{32,16}})));
-  Controller.CtrGTFSimple ctrGTFSimple
-    annotation (Placement(transformation(extent={{-2,-4},{18,16}})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
-    annotation (Placement(transformation(extent={{-26,-4},{-6,16}})));
 equation
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
         points={{60,40.6667},{80,40.6667},{80,-78.6667},{52,-78.6667}},
@@ -249,15 +242,9 @@ equation
     annotation (Line(points={{-164,80},{-164,90}}, color={0,127,255}));
   connect(eonERCModeBasedControl.heatPumpSystemBus1, heatpumpSystem.heatPumpSystemBus)
     annotation (Line(
-      points={{-20,-38.2308},{-6,-38.2308},{-6,-52},{-3,-52}},
+      points={{-28,15},{-6,15},{-6,-52},{-3,-52}},
       color={255,204,51},
       thickness=0.5));
-  connect(ctrSWU.sWUBus, switchingUnit.sWUBus) annotation (Line(
-      points={{60,90},{40,90},{40,64.3333},{42.83,64.3333}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ctrSWU.mode, integerExpression.y)
-    annotation (Line(points={{80,90},{87,90}},   color={255,127,0}));
   connect(ctrHXSsystem.hydraulicBusHTC, heatExchangerSystem.hydraulicBusHTC)
     annotation (Line(
       points={{-128.7,33.4},{-118,33.4},{-118,18},{-127.143,18}},
@@ -343,21 +330,24 @@ equation
         points={{50.3333,16},{50,16},{50,24},{49.8,24}}, color={0,127,255}));
   connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
         points={{33.6667,16},{33.6667,24},{36.2,24}}, color={0,127,255}));
-  connect(ctrGTFSimple.busPump, geothermalFieldSimple.busPump) annotation (Line(
-      points={{18.3,1.6},{18.15,1.6},{18.15,3.0375},{32.0833,3.0375}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ctrGTFSimple.busThrottle, geothermalFieldSimple.busThrottle)
-    annotation (Line(
-      points={{18.1,10.4},{19.05,10.4},{19.05,11.1125},{32.0833,11.1125}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(booleanExpression.y, ctrGTFSimple.on)
-    annotation (Line(points={{-5,6},{-2,6}}, color={255,0,255}));
-  connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={
-          {80,-96},{80,-78.6667},{52,-78.6667}}, color={0,127,255}));
+  connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{80,-96},
+          {80,-78.6667},{52,-78.6667}},          color={0,127,255}));
   connect(ctrMix2.hydraulicBus, admix2.hydraulicBus) annotation (Line(
       points={{-44.56,70.01},{-41.28,70.01},{-41.28,70},{-38,70}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(eonERCModeBasedControl.sWUBus, switchingUnit.sWUBus) annotation (Line(
+      points={{-27.8571,8.69231},{6,8.69231},{6,64.3333},{42.83,64.3333}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(eonERCModeBasedControl.busThrottle, geothermalFieldSimple.busThrottle)
+    annotation (Line(
+      points={{-27.9286,4},{20,4},{20,11.1125},{32.0833,11.1125}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(eonERCModeBasedControl.busPump, geothermalFieldSimple.busPump)
+    annotation (Line(
+      points={{-27.9286,-0.615385},{32.0833,-0.615385},{32.0833,3.0375}},
       color={255,204,51},
       thickness=0.5));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,100}})), Icon(

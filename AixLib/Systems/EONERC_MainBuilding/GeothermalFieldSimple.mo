@@ -46,8 +46,8 @@ model GeothermalFieldSimple "Geothermal probe"
     length=40,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4
-          per(motorCooledByFluid=false), addPowerToMedium=false)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per(
+            motorCooledByFluid=false), addPowerToMedium=false)),
     pipe3(length=80)) annotation (Placement(transformation(
         extent={{-40,40},{40,-40}},
         rotation=90,
@@ -57,8 +57,8 @@ model GeothermalFieldSimple "Geothermal probe"
     redeclare package Medium2 = Medium,
     allowFlowReversal1=allowFlowReversal,
     allowFlowReversal2=allowFlowReversal,
-    m1_flow_nominal=22.6,
-    m2_flow_nominal=40.2,
+    m1_flow_nominal=12,
+    m2_flow_nominal=10,
     dp1_nominal=14000,
     dp2_nominal=48000,
     tau1=2,
@@ -69,8 +69,8 @@ model GeothermalFieldSimple "Geothermal probe"
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
     redeclare Fluid.MixingVolumes.MixingVolume vol2,
     tau_C=10,
-    dT_nom=20,
-    Q_nom=256000)                          annotation (Placement(transformation(
+    dT_nom=4,
+    Q_nom=300000)                          annotation (Placement(transformation(
         extent={{21,22},{-21,-22}},
         rotation=0,
         origin={0,-117})));

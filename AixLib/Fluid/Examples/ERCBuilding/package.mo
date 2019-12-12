@@ -1198,7 +1198,6 @@ Conversion"),
           h_TS1=0.307,
           h_TS2=1.957),
       redeclare model HeatTransfer =
-
         HVAC.Components.BufferStorage.BaseClasses.HeatTransfer_buoyancy_Wetter,
       n=4) annotation (Placement(transformation(extent={{90,26},{62,62}})));
 

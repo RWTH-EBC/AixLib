@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.ERCBuilding.Control.SupervisoryControl.StateMachine;
+ï»¿within AixLib.Fluid.Examples.ERCBuilding.Control.SupervisoryControl.StateMachine;
 model StateMachine
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -882,7 +882,7 @@ public
       transmit_massFlowHK13P1=0.001;
 
       //The hysterisis indicates that there is a heat demand in the building
-      //(average storage temperature < 30 °C). So the mode is changed to heat mode.
+      //(average storage temperature < 30 Â°C). So the mode is changed to heat mode.
       if noHeatDemand.y then
 
         changeMode = false;
@@ -1084,7 +1084,7 @@ public
     transmit_HPCommand = false;
 
     //The hysterisis indicates that there is a heat demand in the building
-    //(average storage temperature < 30 °C). So the mode is changed to heat mode.
+    //(average storage temperature < 30 Â°C). So the mode is changed to heat mode.
     if hysteresis.y then
 
       changeMode = false;
