@@ -96,9 +96,12 @@ public
     allowFlowReversal2=false,
     dTEva_nominal=dTEva_nominal,
     dTCon_nominal=dTCon_nominal,
+    COP_nominal=3.8,
+    TCon_nominal=306.15,
+    TEva_nominal=277.65,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
-    use_eta_Carnot_nominal=true,
+    use_eta_Carnot_nominal=false,
     etaCarnot_nominal=0.3,
     show_T=true,
     redeclare package Medium2 = Medium,
@@ -157,15 +160,13 @@ public
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={-8,-66})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=mFlowBuilding.y
-         >= 0.0068)
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=Q_flow_input >
+        500.0)
     annotation (Placement(transformation(extent={{-46,-96},{-26,-76}})));
   Utilities.Logical.SmoothSwitch switch2 annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=-90,
         origin={20,-90})));
-  Modelica.Blocks.Sources.Constant T_HeaPumpOff1(k=0.0068)
-    annotation (Placement(transformation(extent={{-22,-100},{-14,-92}})));
   Modelica.Blocks.Interfaces.RealOutput COP = if heaPum.P > 0.0
     then heaPum.COP
  else
@@ -175,6 +176,9 @@ public
     "Temperature difference evaporator outlet-inlet";
   parameter Modelica.SIunits.TemperatureDifference dTCon_nominal=10
     "Temperature difference condenser outlet-inlet";
+  Modelica.Blocks.Sources.RealExpression realExpression(y=0.5/(
+        cp_default_building*dTBuilding))
+    annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
 equation
 
   dpOut = dp;
@@ -219,8 +223,6 @@ equation
           {36,-99.6},{26.4,-99.6}}, color={0,0,127}));
   connect(booleanExpression.y, switch2.u2) annotation (Line(points={{-25,-86},{
           -8,-86},{-8,-99.6},{20,-99.6}}, color={255,0,255}));
-  connect(T_HeaPumpOff1.y, switch2.u3) annotation (Line(points={{-13.6,-96},{0,
-          -96},{0,-99.6},{13.6,-99.6}}, color={0,0,127}));
   connect(switch2.y, sourceHeating.m_flow_in) annotation (Line(points={{20,
           -81.2},{28,-81.2},{28,-52}}, color={0,0,127}));
   connect(temperatureSupplyBuilding.y, switch1.u1) annotation (Line(points={{71,
@@ -229,6 +231,8 @@ equation
           {2,-15},{10,-15}}, color={0,0,127}));
   connect(temperatureReturnBuilding.y, sourceHeating.T_in) annotation (Line(
         points={{37,-74},{24,-74},{24,-52}},          color={0,0,127}));
+  connect(realExpression.y, switch2.u3) annotation (Line(points={{-29,-100},{-8,
+          -100},{-8,-99.6},{13.6,-99.6}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
