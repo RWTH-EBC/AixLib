@@ -103,19 +103,19 @@ model MainBuildingEnergySystem
   HydraulicModules.SimpleConsumer
                  simpleConsumer1(
     kA=50000,
-    V=0.1,
+    V=5,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    functionality="T_input",
+    functionality="Q_flow_input",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-96,84},{-84,96}})));
   HydraulicModules.SimpleConsumer
                  simpleConsumer2(
-    kA=312000/6/10,
-    V=0.1,
+    kA=312000/6,
+    V=5,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    functionality="T_input",
+    functionality="Q_flow_input",
     T_start=293.15)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=0,
@@ -179,15 +179,15 @@ model MainBuildingEnergySystem
     offset=273.15 + 75)
     annotation (Placement(transformation(extent={{-192,92},{-182,102}})));
   Modelica.Blocks.Sources.Sine sine1(
-    amplitude=2,
+    amplitude=1,
     freqHz=1/(3600*24),
-    offset=273.15 + 23)
-    annotation (Placement(transformation(extent={{-112,94},{-102,104}})));
+    offset=273.15 + 25)
+    annotation (Placement(transformation(extent={{-122,100},{-112,110}})));
   Modelica.Blocks.Sources.Sine sine2(
-    amplitude=2,
+    amplitude=1,
     freqHz=1/(3600*24),
-    offset=273.15 + 18)
-    annotation (Placement(transformation(extent={{-52,94},{-42,104}})));
+    offset=273.15 + 19)
+    annotation (Placement(transformation(extent={{-66,128},{-56,138}})));
   HydraulicModules.Throttle throttle(
     redeclare package Medium = Medium,
     T_amb=293.15,
@@ -217,7 +217,80 @@ model MainBuildingEnergySystem
     m_flow_nominal=10,
     T_start=285.15,
     T_amb=288.15,
-    G=5000) annotation (Placement(transformation(extent={{52,-18},{32,16}})));
+    G=5000) annotation (Placement(transformation(extent={{32,-18},{52,16}})));
+  HydraulicModules.Admix                admix3(
+    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
+          energyDynamics=admix.energyDynamics)),
+    redeclare package Medium = Medium,
+    m_flow_nominal=1,
+    T_amb=298.15,
+    dIns=0.01,
+    kIns=0.028,
+    d=0.1,
+    pipe1(length=5),
+    pipe2(length=1),
+    pipe3(length=4),
+    pipe4(length=5),
+    pipe5(length=5),
+    pipe6(length=0.5),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    length=1,
+    Kv=63)                                                     annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={110,70})));
+  HydraulicModules.SimpleConsumer
+                 simpleConsumer3(
+    kA=1000,
+    V=0.1,
+    m_flow_nominal=1,
+    redeclare package Medium = Medium,
+    functionality="T_input",
+    T_start=293.15)
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={110,92})));
+  Modelica.Blocks.Sources.Sine sine3(
+    amplitude=1,
+    freqHz=1/(3600*24),
+    offset=273.15 + 17)
+    annotation (Placement(transformation(extent={{86,94},{96,104}})));
+  Modelica.Blocks.Math.Add add
+    annotation (Placement(transformation(extent={{-106,96},{-96,106}})));
+  Modelica.Blocks.Sources.Sine sine4(
+    amplitude=2,
+    freqHz=1/(3600*24*365),
+    offset=0)
+    annotation (Placement(transformation(extent={{-122,86},{-112,96}})));
+  Modelica.Blocks.Sources.Sine sine5(
+    amplitude=2,
+    freqHz=1/(3600*24*365),
+    phase=0,
+    offset=0)
+    annotation (Placement(transformation(extent={{-64,112},{-54,122}})));
+  Modelica.Blocks.Math.Add add1
+    annotation (Placement(transformation(extent={{-48,122},{-38,132}})));
+  HydraulicModules.Controller.CtrMix ctrMix3(
+    useExternalTset=false,
+    TflowSet=287.15,
+    k=0.05,
+    Td=0,
+    rpm_pump=2000,
+    reverseAction=true)
+    annotation (Placement(transformation(extent={{74,62},{90,80}})));
+  Modelica.Blocks.Sources.Sine sine6(
+    amplitude=5000,
+    freqHz=1/(3600*24*365),
+    offset=-5000)
+    annotation (Placement(transformation(extent={{-116,132},{-106,142}})));
+  Modelica.Blocks.Sources.Sine sine7(
+    amplitude=50000,
+    freqHz=1/(3600*24*365),
+    phase=0,
+    offset=50000)
+    annotation (Placement(transformation(extent={{-58,90},{-48,100}})));
 equation
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
         points={{60,40.6667},{80,40.6667},{80,-78.6667},{52,-78.6667}},
@@ -322,14 +395,6 @@ equation
   connect(sine.y, simpleConsumer.T) annotation (Line(points={{-181.5,97},{
           -165.2,97},{-165.2,96}},
                              color={0,0,127}));
-  connect(sine1.y, simpleConsumer1.T) annotation (Line(points={{-101.5,99},{
-          -85.2,99},{-85.2,96}},   color={0,0,127}));
-  connect(sine2.y, simpleConsumer2.T) annotation (Line(points={{-41.5,99},{
-          -41.5,98},{-23.2,98}},   color={0,0,127}));
-  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
-        points={{50.3333,16},{50,16},{50,24},{49.8,24}}, color={0,127,255}));
-  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
-        points={{33.6667,16},{33.6667,24},{36.2,24}}, color={0,127,255}));
   connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{80,-96},
           {80,-78.6667},{52,-78.6667}},          color={0,127,255}));
   connect(ctrMix2.hydraulicBus, admix2.hydraulicBus) annotation (Line(
@@ -342,18 +407,49 @@ equation
       thickness=0.5));
   connect(eonERCModeBasedControl.busThrottle, geothermalFieldSimple.busThrottle)
     annotation (Line(
-      points={{-27.9286,4},{20,4},{20,11.1125},{32.0833,11.1125}},
+      points={{-27.9286,4},{20,4},{20,11.325},{32.0833,11.325}},
       color={255,204,51},
       thickness=0.5));
   connect(eonERCModeBasedControl.busPump, geothermalFieldSimple.busPump)
     annotation (Line(
-      points={{-27.9286,-0.615385},{32.0833,-0.615385},{32.0833,3.0375}},
+      points={{-27.9286,-0.615385},{32.0833,-0.615385},{32.0833,3.25}},
       color={255,204,51},
       thickness=0.5));
+  connect(heatpumpSystem.port_a1, admix3.port_b2)
+    annotation (Line(points={{52,-68},{116,-68},{116,60}}, color={0,127,255}));
+  connect(heatpumpSystem.port_b1, admix3.port_a1) annotation (Line(points={{52,
+          -78.6667},{82,-78.6667},{82,-78},{104,-78},{104,60}}, color={0,127,
+          255}));
+  connect(sine3.y,simpleConsumer3. T) annotation (Line(points={{96.5,99},{96.5,
+          98},{114.8,98}},         color={0,0,127}));
+  connect(sine1.y, add.u1) annotation (Line(points={{-111.5,105},{-108.75,105},
+          {-108.75,104},{-107,104}}, color={0,0,127}));
+  connect(sine4.y, add.u2) annotation (Line(points={{-111.5,91},{-111.5,94.5},{
+          -107,94.5},{-107,98}}, color={0,0,127}));
+  connect(sine2.y, add1.u1) annotation (Line(points={{-55.5,133},{-52.75,133},{
+          -52.75,130},{-49,130}}, color={0,0,127}));
+  connect(sine5.y, add1.u2) annotation (Line(points={{-53.5,117},{-53.5,120.5},
+          {-49,120.5},{-49,124}}, color={0,0,127}));
+  connect(simpleConsumer3.port_a, admix3.port_b1)
+    annotation (Line(points={{104,92},{104,80}}, color={0,127,255}));
+  connect(simpleConsumer3.port_b, admix3.port_a2)
+    annotation (Line(points={{116,92},{116,80}}, color={0,127,255}));
+  connect(ctrMix3.hydraulicBus, admix3.hydraulicBus) annotation (Line(
+      points={{89.44,70.01},{94.72,70.01},{94.72,70},{100,70}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(sine6.y, simpleConsumer1.Q_flow) annotation (Line(points={{-105.5,137},
+          {-93.6,137},{-93.6,96}}, color={0,0,127}));
+  connect(sine7.y, simpleConsumer2.Q_flow) annotation (Line(points={{-47.5,95},
+          {-40,95},{-40,106},{-31.6,106},{-31.6,98}}, color={0,0,127}));
+  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
+        points={{33.6667,16},{34,16},{34,24},{36.2,24}}, color={0,127,255}));
+  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
+        points={{50.3333,16},{49.8,16},{49.8,24}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,100}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,100}})),
     experiment(
-      StopTime=172800,
+      StopTime=432000,
       Tolerance=0.001,
       __Dymola_fixedstepsize=0.5,
       __Dymola_Algorithm="Dassl"));

@@ -55,7 +55,7 @@ model modeStateSelector "Selects sub modes for heating and cooling"
 
   Real dT_HS "Energy change of heat storage";
   Real dT_CS "Energy change of cold storage";
-
+  Boolean heatingModeInt "Internal variable for heating mode";
   Modelica.Blocks.Interfaces.BooleanInput hpOn
     "Connector of Boolean input signal" annotation (Placement(transformation(
           extent={{-140,-20},{-100,20}}), iconTransformation(extent={{-136,-18},
@@ -102,28 +102,30 @@ model modeStateSelector "Selects sub modes for heating and cooling"
     annotation (Placement(transformation(extent={{10,-60},{22,-48}})));
   Modelica.StateGraph.StepWithSignal mode8 "To reset integrator"
     annotation (Placement(transformation(extent={{36,-60},{48,-48}})));
-  Modelica.Blocks.Sources.BooleanExpression hpOnly(y=heatingMode and T_CS[1] > 273.15
-         + 12) annotation (Placement(transformation(extent={{-14,68},{6,86}})));
-  Modelica.Blocks.Sources.BooleanExpression HPandGTF(y=heatingMode and T_CS[1] <
-        273.15 + 12)
+  Modelica.Blocks.Sources.BooleanExpression hpOnly(y=heatingModeInt and T_CS[1]
+         > 273.15 + 12)
+               annotation (Placement(transformation(extent={{-14,68},{6,86}})));
+  Modelica.Blocks.Sources.BooleanExpression HPandGTF(y=heatingModeInt and T_CS[
+        1] < 273.15 + 12)
     annotation (Placement(transformation(extent={{-14,48},{6,66}})));
-  Modelica.Blocks.Sources.BooleanExpression GC_only(y=not heatingMode and T_air <
-        10 + 273.15)
+  Modelica.Blocks.Sources.BooleanExpression GC_only(y=not heatingModeInt and
+        T_air < 10 + 273.15)
     annotation (Placement(transformation(extent={{-14,28},{6,46}})));
-  Modelica.Blocks.Sources.BooleanExpression GTF_only(y=not heatingMode and
+  Modelica.Blocks.Sources.BooleanExpression GTF_only(y=not heatingModeInt and
         T_geo < 12 + 273.15)
     annotation (Placement(transformation(extent={{-14,8},{6,26}})));
-  Modelica.Blocks.Sources.BooleanExpression GTF_and_HP(y=not heatingMode and
-        T_geo < 17 + 273.15)
+  Modelica.Blocks.Sources.BooleanExpression GTF_and_HP(y=not heatingModeInt
+         and T_geo < 17 + 273.15)
     annotation (Placement(transformation(extent={{-14,-12},{6,6}})));
-  Modelica.Blocks.Sources.BooleanExpression GTF_HP_ReCooler(y=not heatingMode
-         and T_geo < 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) > 273.15 + 33)
+  Modelica.Blocks.Sources.BooleanExpression GTF_HP_ReCooler(y=not
+        heatingModeInt and T_geo < 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) >
+        273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-32},{6,-14}})));
-  Modelica.Blocks.Sources.BooleanExpression HP(y=not heatingMode and T_geo > 17 +
-        273.15 and 0.5*(T_HS[1] + T_HS[2]) < 273.15 + 33)
+  Modelica.Blocks.Sources.BooleanExpression HP(y=not heatingModeInt and T_geo
+         > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) < 273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-52},{6,-34}})));
-  Modelica.Blocks.Sources.BooleanExpression HP_reCooler(y=not heatingMode and
-        T_geo > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) > 273.15 + 33)
+  Modelica.Blocks.Sources.BooleanExpression HP_reCooler(y=not heatingModeInt
+         and T_geo > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) > 273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-72},{6,-54}})));
   Modelica.StateGraph.Transition tran9(enableTimer=true, waitTime=1800)
     annotation (Placement(transformation(extent={{50,80},{62,92}})));
@@ -168,9 +170,9 @@ equation
   end if;
 
   if int_HS.y < int_CS.y and 0.5*(T_HS[1] + T_HS[2])>273.15+29 then
-    heatingMode = false;
+    heatingModeInt = false;
   else
-    heatingMode = true;
+    heatingModeInt = true;
   end if;
 
 
@@ -182,6 +184,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = false;
     useGTF = false;
+    heatingMode = true;
     case = 1;
   //HP + GTF
   elseif mode2.active then
@@ -190,6 +193,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = false;
     useGTF = true;
+    heatingMode = true;
     case = 2;
 //cooling modes
   //free cooling glycol cooler only
@@ -199,6 +203,7 @@ equation
     freeCoolingGC = true;
     reCoolingGC = false;
     useGTF = false;
+    heatingMode = false;
     case = 3;
   //all cooling by gtf
   elseif mode4.active then
@@ -207,6 +212,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = false;
     useGTF = true;
+    heatingMode = false;
     case = 4;
   //gtf for cca, cooling network by HP
   elseif mode5.active then
@@ -215,6 +221,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = false;
     useGTF = true;
+    heatingMode = false;
     case = 5;
     //gtf for cca, cooling network by HP and recooler
   elseif mode6.active then
@@ -223,6 +230,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = true;
     useGTF = true;
+    heatingMode = false;
     case = 6;
   // cooling network by HP
   elseif mode7.active then
@@ -231,6 +239,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = false;
     useGTF = false;
+    heatingMode = false;
     case = 7;
   elseif mode8.active then
     modeSWU = 4;
@@ -238,6 +247,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = true;
     useGTF = false;
+    heatingMode = false;
     case = 8;
   else
     modeSWU = 4;
@@ -245,6 +255,7 @@ equation
     freeCoolingGC = false;
     reCoolingGC = false;
     useGTF = false;
+    heatingMode = true;
     case = 0;
   end if;
 

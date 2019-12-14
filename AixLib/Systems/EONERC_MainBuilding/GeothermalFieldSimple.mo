@@ -31,7 +31,7 @@ model GeothermalFieldSimple "Geothermal probe"
     final Kv=160,
     pipe3(length=10))                annotation (Placement(transformation(
         extent={{-30,30},{30,-30}},
-        rotation=90,
+        rotation=270,
         origin={2,-50})));
   HydraulicModules.Pump pump(
     redeclare package Medium = Medium,
@@ -92,11 +92,11 @@ model GeothermalFieldSimple "Geothermal probe"
   parameter Modelica.SIunits.ThermalConductance G
     "Constant thermal conductance of material";
   HydraulicModules.BaseClasses.HydraulicBus busThrottle "Bus on secondary side"
-    annotation (Placement(transformation(extent={{110,-90},{130,-70}}),
-        iconTransformation(extent={{102,-66},{136,-26}})));
+    annotation (Placement(transformation(extent={{-128,-110},{-108,-90}}),
+        iconTransformation(extent={{-136,-64},{-102,-24}})));
   HydraulicModules.BaseClasses.HydraulicBus busPump
-    annotation (Placement(transformation(extent={{110,-132},{130,-112}}),
-        iconTransformation(extent={{102,-144},{136,-100}})));
+    annotation (Placement(transformation(extent={{-128,-152},{-108,-132}}),
+        iconTransformation(extent={{-136,-142},{-102,-98}})));
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
     p=200000,
@@ -108,10 +108,6 @@ model GeothermalFieldSimple "Geothermal probe"
     "Fixed temperature of ground far away";
 equation
 
-  connect(throttle.port_b2, dynamicHX.port_a2) annotation (Line(points={{-16,-80},
-          {-16,-69},{-21,-69},{-21,-103.8}},color={0,127,255}));
-  connect(dynamicHX.port_b2, throttle.port_a1) annotation (Line(points={{21,-103.8},
-          {21,-68.9},{20,-68.9},{20,-80}},        color={0,127,255}));
   connect(dynamicHX.port_b1, pump.port_a2) annotation (Line(points={{-21,-130.2},
           {-22,-130.2},{-22,-130},{-24,-130},{-24,-160}},
                                                   color={0,127,255}));
@@ -121,12 +117,8 @@ equation
     annotation (Line(points={{64,-290},{84,-290}},           color={191,0,0}));
   connect(thermalConductor.port_a, vol.heatPort) annotation (Line(points={{44,-290},
           {32,-290},{32,-287},{18,-287}}, color={191,0,0}));
-  connect(throttle.port_a2, port_a) annotation (Line(points={{-16,-20},{-100,-20},
-          {-100,0}},                      color={0,127,255}));
-  connect(throttle.port_b1, port_b) annotation (Line(points={{20,-20},{56,-20},{
-          56,-18},{100,-18},{100,0}},  color={0,127,255}));
   connect(throttle.hydraulicBus, busThrottle) annotation (Line(
-      points={{32,-50},{70,-50},{70,-80},{120,-80}},
+      points={{-28,-50},{-116,-50},{-116,-100},{-118,-100}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -134,7 +126,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(pump.hydraulicBus, busPump) annotation (Line(
-      points={{40,-200},{120,-200},{120,-122}},
+      points={{40,-200},{-118,-200},{-118,-142}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -149,6 +141,14 @@ equation
           {2.4,-266},{2.4,-274}}, color={0,127,255}));
   connect(boundary.ports[1], pump.port_b2) annotation (Line(points={{-50,-262},{
           -44,-262},{-44,-260},{-24,-260},{-24,-240}}, color={0,127,255}));
+  connect(port_a, throttle.port_a1)
+    annotation (Line(points={{-100,0},{-16,0},{-16,-20}}, color={0,127,255}));
+  connect(throttle.port_b2, port_b)
+    annotation (Line(points={{20,-20},{20,0},{100,0}}, color={0,127,255}));
+  connect(throttle.port_b1, dynamicHX.port_a2) annotation (Line(points={{-16,
+          -80},{-20,-80},{-20,-103.8},{-21,-103.8}}, color={0,127,255}));
+  connect(throttle.port_a2, dynamicHX.port_b2) annotation (Line(points={{20,-80},
+          {20,-92},{20,-103.8},{21,-103.8}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-320},
             {120,0}}),                                          graphics={
         Rectangle(
@@ -244,7 +244,7 @@ equation
           lineThickness=0.5,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid,
-          origin={50,-34},
+          origin={-50,-36},
           rotation=270),
         Rectangle(
           extent={{-17,58},{17,-58}},

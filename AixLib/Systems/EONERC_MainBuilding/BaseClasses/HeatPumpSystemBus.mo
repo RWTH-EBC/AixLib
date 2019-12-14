@@ -17,7 +17,12 @@ expandable connector HeatPumpSystemBus
   SI.Temperature TBottomHSMea "Temperature in bottom layer of heat storage";
   SI.Temperature TTopCSMea "Temperature in top layer of cold storage";
   SI.Temperature TBottomCSMea "Temperature in bottom layer of cold storage";
-
+  SI.Temperature THotInMea "Inflow temperature hot side";
+  SI.Temperature THotOutMea "Outflow temperature hot side";
+  SI.Temperature TColdInMea "Inflow temperature hot side";
+  SI.Temperature TColdOutMea "Outflow temperature cold side";
+  SI.VolumeFlowRate  VFlowHotMea  "Volume flow hot side of heatpump system";
+  SI.VolumeFlowRate  VFlowColdMea "Volume flow cold side of heatpump system";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
