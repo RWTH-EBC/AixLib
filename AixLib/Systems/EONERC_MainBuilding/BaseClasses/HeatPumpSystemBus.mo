@@ -23,6 +23,7 @@ expandable connector HeatPumpSystemBus
   SI.Temperature TColdOutMea "Outflow temperature cold side";
   SI.VolumeFlowRate  VFlowHotMea  "Volume flow hot side of heatpump system";
   SI.VolumeFlowRate  VFlowColdMea "Volume flow cold side of heatpump system";
+  SI.Temperature TOutsideMea "Outside air temperature";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

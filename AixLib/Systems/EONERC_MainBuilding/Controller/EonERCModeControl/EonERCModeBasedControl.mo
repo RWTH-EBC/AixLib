@@ -10,14 +10,10 @@ model EonERCModeBasedControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{78,-10},{86,-2}})));
   Modelica.Blocks.Sources.Constant ice(k=1)
     annotation (Placement(transformation(extent={{78,-52},{86,-44}})));
-  Modelica.Blocks.Sources.Constant one(k=1)
-    annotation (Placement(transformation(extent={{-176,88},{-162,102}})));
   Modelica.Blocks.Sources.Constant valveOpening(k=100)
     annotation (Placement(transformation(extent={{130,50},{144,64}})));
   Modelica.Blocks.Sources.Constant valveOpeningClosed(k=0)
     annotation (Placement(transformation(extent={{130,26},{144,40}})));
-  Modelica.Blocks.Sources.Constant TcoldIn(k=273.15 + 20)
-    annotation (Placement(transformation(extent={{-114,-40},{-100,-26}})));
   BaseClasses.HeatPumpSystemBus heatPumpSystemBus1 annotation (Placement(
         transformation(extent={{86,66},{114,92}}),iconTransformation(extent={{80,100},
             {120,142}})));
@@ -139,9 +135,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(TcoldIn.y, modeStateSelector.T_air) annotation (Line(points={{-99.3,
-          -33},{-119.2,-33},{-119.2,4.22}},
-                                  color={0,0,127}));
   connect(modeStateSelector.modeSWU, ctrSWU.mode) annotation (Line(points={{-103.8,
           12.2},{-82,12.2},{-82,-70},{-2,-70}},
                                             color={255,127,0}));
@@ -247,8 +240,8 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(modeStateSelector.T_CS[2], heatPumpSystemBus1.TBottomCSMea)
-    annotation (Line(points={{-153.96,18.29},{-164,18.29},{-164,44},{-192,44},{
-          -192,152},{100.07,152},{100.07,79.065}},
+    annotation (Line(points={{-153.96,18.29},{-164,18.29},{-164,44},{-182,44},{
+          -182,152},{100.07,152},{100.07,79.065}},
                                               color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -260,6 +253,13 @@ equation
   connect(modeStateSelector.T_geo, busThrottle.TRtrn_in) annotation (Line(
         points={{-136.8,4.22},{-136.8,-99.95},{96.05,-99.95}}, color={0,0,127}),
       Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(modeStateSelector.T_air, heatPumpSystemBus1.TOutsideMea) annotation (
+      Line(points={{-119.2,4.22},{-119.2,-54},{100.07,-54},{100.07,79.065}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},

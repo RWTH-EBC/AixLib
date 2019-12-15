@@ -102,11 +102,11 @@ model modeStateSelector "Selects sub modes for heating and cooling"
     annotation (Placement(transformation(extent={{10,-60},{22,-48}})));
   Modelica.StateGraph.StepWithSignal mode8 "To reset integrator"
     annotation (Placement(transformation(extent={{36,-60},{48,-48}})));
-  Modelica.Blocks.Sources.BooleanExpression hpOnly(y=heatingModeInt and T_CS[1]
-         > 273.15 + 12)
+  Modelica.Blocks.Sources.BooleanExpression hpOnly(y=heatingModeInt and T_CS[1] >
+        273.15 + 12)
                annotation (Placement(transformation(extent={{-14,68},{6,86}})));
-  Modelica.Blocks.Sources.BooleanExpression HPandGTF(y=heatingModeInt and T_CS[
-        1] < 273.15 + 12)
+  Modelica.Blocks.Sources.BooleanExpression HPandGTF(y=heatingModeInt and T_CS[1] <
+        273.15 + 12)
     annotation (Placement(transformation(extent={{-14,48},{6,66}})));
   Modelica.Blocks.Sources.BooleanExpression GC_only(y=not heatingModeInt and
         T_air < 10 + 273.15)
@@ -115,14 +115,15 @@ model modeStateSelector "Selects sub modes for heating and cooling"
         T_geo < 12 + 273.15)
     annotation (Placement(transformation(extent={{-14,8},{6,26}})));
   Modelica.Blocks.Sources.BooleanExpression GTF_and_HP(y=not heatingModeInt
-         and T_geo < 17 + 273.15)
+         and T_geo < 17 + 273.15 and T_geo > 12 + 273.15 and 0.5*(T_HS[1] +
+        T_HS[2]) < 273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-12},{6,6}})));
   Modelica.Blocks.Sources.BooleanExpression GTF_HP_ReCooler(y=not
-        heatingModeInt and T_geo < 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) >
-        273.15 + 33)
+        heatingModeInt and T_geo > 12 + 273.15 and T_geo < 17 + 273.15 and 0.5*
+        (T_HS[1] + T_HS[2]) > 273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-32},{6,-14}})));
-  Modelica.Blocks.Sources.BooleanExpression HP(y=not heatingModeInt and T_geo
-         > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) < 273.15 + 33)
+  Modelica.Blocks.Sources.BooleanExpression HP(y=not heatingModeInt and T_geo >
+        17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) < 273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-52},{6,-34}})));
   Modelica.Blocks.Sources.BooleanExpression HP_reCooler(y=not heatingModeInt
          and T_geo > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) > 273.15 + 33)
@@ -223,7 +224,7 @@ equation
     useGTF = true;
     heatingMode = false;
     case = 5;
-    //gtf for cca, cooling network by HP and recooler
+  //gtf for cca, cooling network by HP and recooler
   elseif mode6.active then
     modeSWU = 3;
     useHP = true;

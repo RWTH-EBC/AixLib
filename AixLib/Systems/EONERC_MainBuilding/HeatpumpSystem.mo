@@ -270,10 +270,15 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     annotation (Placement(transformation(extent={{42,-58},{54,-46}})));
   Modelica.Blocks.Sources.Constant const2(k=1800)
     annotation (Placement(transformation(extent={{24,-50},{32,-42}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={40,-132})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a2(
     tau(displayUnit="s"),
-    T_start=T_start,
+    T_start=T_start_hot,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
@@ -290,7 +295,7 @@ protected
         origin={-198,-36})));
   Fluid.Sensors.TemperatureTwoPort senT_b1(
     tau(displayUnit="s"),
-    T_start=T_start,
+    T_start=T_start_cold,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
@@ -299,7 +304,7 @@ protected
     annotation (Placement(transformation(extent={{200,-6},{212,-18}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a2(
     initType=Modelica.Blocks.Types.Init.SteadyState,
-    y_start=T_start_hot,
+    y_start=T_start_cold,
     final T(displayUnit="s") = 15)
                  annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -307,7 +312,7 @@ protected
         origin={206,-28})));
   Fluid.Sensors.TemperatureTwoPort senT_a1(
     tau(displayUnit="s"),
-    T_start=T_start,
+    T_start=T_start_cold,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
@@ -316,7 +321,7 @@ protected
     annotation (Placement(transformation(extent={{206,6},{194,18}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a3(
     initType=Modelica.Blocks.Types.Init.SteadyState,
-    y_start=T_start_hot,
+    y_start=T_start_cold,
     final T(displayUnit="s") = 15)
                  annotation (Placement(transformation(
         extent={{4,-4},{-4,4}},
@@ -324,7 +329,7 @@ protected
         origin={200,28})));
   Fluid.Sensors.TemperatureTwoPort senT_b2(
     tau(displayUnit="s"),
-    T_start=T_start,
+    T_start=T_start_hot,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
@@ -344,7 +349,7 @@ protected
 protected
   Fluid.Sensors.VolumeFlowRate VFSen_hot(
     redeclare package Medium = Medium,
-    T_start=T_start,
+    T_start=T_start_hot,
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal)
     "Inflow into admix module in forward line" annotation (Placement(
@@ -355,7 +360,7 @@ protected
 protected
   Fluid.Sensors.VolumeFlowRate VFSen_cold(
     redeclare package Medium = Medium,
-    T_start=T_start,
+    T_start=T_start_cold,
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal)
     "Inflow into admix module in forward line" annotation (Placement(
@@ -609,6 +614,15 @@ equation
   connect(VFSen_hot.V_flow, heatPumpSystemBus.VFlowHotMea) annotation (Line(
         points={{-204,24.4},{-206,24.4},{-206,60.07},{0.07,60.07}}, color={0,0,
           127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(temperatureSensor.port, T_outside)
+    annotation (Line(points={{40,-122},{40,-108}}, color={191,0,0}));
+  connect(temperatureSensor.T, heatPumpSystemBus.TOutsideMea) annotation (Line(
+        points={{40,-142},{-92,-142},{-92,-130},{-224,-130},{-224,60.07},{0.07,
+          60.07}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
