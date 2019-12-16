@@ -185,7 +185,7 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
       hConRoofOut=25,
       hRadRoof=5,
       tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949},
-      aziExtWalls={0,3.1415926535898,4.7123889803847},
+      aziExtWalls={0,1.5707963267949,3.1415926535898},
       wfWall={0.33,0.33,0.33},
       wfWin={0.33,0.33,0.33},
       wfGro=0.01,
@@ -1292,12 +1292,12 @@ First implementation.
     connect(outerWall_East.WindSpeedPort, outerWall_South.WindSpeedPort)
       annotation (Line(points={{8.4,-68.2},{8.4,-80},{-86,-80},{-86,33.3333},{
             -76.35,33.3333},{-76.35,33.3333}}, color={0,0,127}));
-    connect(WindSpeedPort, floor.WindSpeedPort) annotation (Line(points={{-112,
-            28},{-108,28},{-108,20},{-40.8,20},{-40.8,-66.1003}}, color={0,0,
+    connect(WindSpeedPort, floor.WindSpeedPort) annotation (Line(points={{-112,28},
+            {-108,28},{-108,20},{-40.8,20},{-40.8,-66.1003}},     color={0,0,
             127}));
     connect(SolarRadiationPort[5], floor.SolarRadiationPort) annotation (Line(
-          points={{-110,68},{-102,68},{-102,58},{-43,58},{-43,-66.6004}}, color
-          ={255,128,0}));
+          points={{-110,68},{-102,68},{-102,58},{-43,58},{-43,-66.6004}}, color=
+           {255,128,0}));
       annotation ( Icon(coordinateSystem(extent={{-100,-100},
                 {100,100}}, preserveAspectRatio=false),
                                           graphics={

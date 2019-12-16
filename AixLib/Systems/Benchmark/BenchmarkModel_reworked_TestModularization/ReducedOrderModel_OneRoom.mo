@@ -251,17 +251,17 @@ equation
           0,127}));
   connect(HDirTil.H, corGDouPan.HDirTil) annotation (Line(points={{-47,62},{-22,
           62},{-22,62},{4,62}},      color={0,0,127}));
+  connect(bou.ports[1], thermalZoneFourElements.ports[1]) annotation (Line(
+        points={{-44,-46},{-40,-46},{-40,-40},{83,-40},{83,-1.95}}, color={0,
+          127,255}));
   connect(weaBus, bou.weaBus) annotation (Line(
-      points={{-83,6},{-83,-22},{-64,-22},{-64,-45.8}},
+      points={{-83,6},{-83,-45.8},{-64,-45.8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
-      extent={{-3,6},{-3,6}},
+      extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(bou.ports[1], thermalZoneFourElements.ports[1]) annotation (Line(
-        points={{-44,-46},{-40,-46},{-40,-40},{83,-40},{83,-1.95}}, color={0,
-          127,255}));
   annotation (Line(points={{79.6,-22},{65,-22},{65,-25.2}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
