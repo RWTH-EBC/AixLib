@@ -5,7 +5,7 @@ model HeatpumpValidation
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
 
-  parameter BaseClasses.DataHPSystem Data;
+  parameter DataHPSystem Data;
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
     T=303.15,

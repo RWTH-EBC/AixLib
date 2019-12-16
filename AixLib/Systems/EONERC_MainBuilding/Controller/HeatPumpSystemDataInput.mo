@@ -77,7 +77,7 @@ model HeatPumpSystemDataInput
     annotation (Placement(transformation(extent={{60,-14},{74,0}})));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold2
     annotation (Placement(transformation(extent={{20,-74},{34,-60}})));
-  BaseClasses.DataHPSystem dataHPSystem
+  Validation.DataHPSystem dataHPSystem
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
 equation
   connect(combiTimeTable.y[4], greaterThreshold.u) annotation (Line(points={{-79,0},

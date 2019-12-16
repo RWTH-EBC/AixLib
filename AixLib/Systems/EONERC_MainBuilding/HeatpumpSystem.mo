@@ -54,7 +54,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         rotation=180,
         origin={60,0})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=T_amb)
-                annotation (Placement(transformation(extent={{84,-4},{92,4}})));
+                annotation (Placement(transformation(extent={{88,-4},{96,4}})));
   Fluid.Storage.BufferStorage coldStorage(
     n=4,
     redeclare package Medium = Medium,
@@ -376,7 +376,7 @@ equation
         points={{80,-12},{90,-12},{90,-20},{108,-20},{108,-16},{108.55,-16},{
           108.55,-16.15}}, color={0,127,255}));
   connect(fixedTemperature.port, coldStorage.heatportOutside) annotation (
-      Line(points={{92,0},{100.3,0},{100.3,-0.1}}, color={191,0,0}));
+      Line(points={{96,0},{100.3,0},{100.3,-0.1}}, color={191,0,0}));
   connect(heatStorage.heatportOutside, fixedTemperature1.port) annotation (
       Line(points={{-177.7,-0.1},{-178,-0.1},{-178,-2},{-188,-2}},
                                                                  color={191,0,
@@ -552,8 +552,8 @@ equation
           20,-52},{40.8,-52}}, color={255,0,255}));
   connect(senT_a2.T,PT1_a1. u) annotation (Line(points={{-198,-26.6},{-198,
           -31.2}},       color={0,0,127}));
-  connect(heatStorage.fluidportBottom2, senT_a2.port_b) annotation (Line(points
-        ={{-169.45,-16.15},{-192,-16.15},{-192,-20}}, color={0,127,255}));
+  connect(heatStorage.fluidportBottom2, senT_a2.port_b) annotation (Line(points=
+         {{-169.45,-16.15},{-192,-16.15},{-192,-20}}, color={0,127,255}));
   connect(senT_a2.port_a, port_a2)
     annotation (Line(points={{-204,-20},{-220,-20}}, color={0,127,255}));
   connect(senT_b1.T,PT1_a2. u) annotation (Line(points={{206,-18.6},{206,-23.2}},
@@ -627,6 +627,13 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(switch2.y, heatPumpSystemBus.PelAirCoolerMea) annotation (Line(points
+        ={{54.6,-52},{84,-52},{84,60},{0.07,60},{0.07,60.07}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
         Rectangle(

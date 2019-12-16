@@ -50,6 +50,8 @@ model HeatExchanger "Test of heat exachgner model of E.ON ERC main building"
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   Controller.CtrHXsimple ctrHXsimple(useExternalTset=true)
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
+  BaseClasses.TwoCircuitBus hxBus1
+    annotation (Placement(transformation(extent={{10,54},{30,74}})));
 equation
   connect(heatExchangerSystem.port_a1, boundary.ports[1]) annotation (Line(
         points={{-40,-8},{-56,-8},{-56,-20},{-70,-20}},
@@ -70,6 +72,14 @@ equation
       points={{-38.9,70.1},{9.37143,70.1},{9.37143,40}},
       color={255,204,51},
       thickness=0.5));
+  connect(heatExchangerSystem.hxBus, hxBus1) annotation (Line(
+      points={{9.37143,40},{12,40},{12,64},{20,64}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
            true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatExchanger.mos"

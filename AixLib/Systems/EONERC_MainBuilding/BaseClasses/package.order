@@ -2,5 +2,6 @@ HeatPumpSystemBus
 SwitchingUnitBus
 HighTempSystemBus
 TwoCircuitBus
-DataHPSystem
 MainBus
+EvaluationBus
+EnergyCounter

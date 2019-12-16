@@ -7,6 +7,11 @@ expandable connector MainBus
   HighTempSystemBus htsBus "High temoerature system bus";
   TwoCircuitBus gtfBus "Geothermalfield bus";
   TwoCircuitBus hxBus "Heat exchanger system bus";
+  Systems.HydraulicModules.BaseClasses.HydraulicBus consHtcBus "Consumer bus high temperature cycle";
+  Systems.HydraulicModules.BaseClasses.HydraulicBus consLtcBus "Consumer bus low temperature heating cycle";
+  Systems.HydraulicModules.BaseClasses.HydraulicBus consCold1Bus "Consumer bus cold temperature cycle 1";
+  Systems.HydraulicModules.BaseClasses.HydraulicBus consCold2Bus "Consumer bus cold temperature cycle 2";
+  EvaluationBus evaBus "Bus for energy consumption measurement";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

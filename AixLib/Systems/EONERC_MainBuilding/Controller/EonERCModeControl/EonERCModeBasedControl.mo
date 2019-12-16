@@ -204,14 +204,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(ctrHP.On, modeStateSelector.hpOn) annotation (Line(points={{-38,74},{
           -20,74},{-20,38},{-76,38},{-76,-1},{-59.96,-1}}, color={255,0,255}));
-  connect(modeStateSelector.T_air, bus.TOutsideMea) annotation (Line(points={{-25.2,
-          -25.78},{-25.2,-48},{-24,-48},{-24,-100},{100,-100},{100,-1}},
-                                                            color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(ctrSWU.sWUBus, bus.swuBus) annotation (Line(
       points={{20,-70},{62,-70},{62,-68},{100.07,-68},{100.07,-0.935}},
       color={255,204,51},
@@ -254,6 +246,13 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(modeStateSelector.freeCoolingGC, gcOn.u2) annotation (Line(points={{
           -9.8,-1},{18.1,-1},{18.1,-0.6},{44.6,-0.6}}, color={255,0,255}));
+  connect(modeStateSelector.T_air, bus.hpSystemBus.TOutsideMea) annotation (
+      Line(points={{-25.2,-25.78},{-25.2,-106},{100.07,-106},{100.07,-0.935}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Line(
           points={{20,80},{80,0},{40,-80}},
