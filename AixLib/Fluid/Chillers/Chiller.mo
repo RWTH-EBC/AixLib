@@ -1,23 +1,22 @@
-﻿within AixLib.Fluid.HeatPumps;
-model HeatPump
-  "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
+within AixLib.Fluid.Chillers;
+model Chiller
+  "Grey-box model for reversible chillers using a black-box to simulate the refrigeration cycle"
   extends AixLib.Fluid.BaseClasses.PartialReversibleThermalMachine(
   use_rev=true,
-  final machineType = true,
-  redeclare AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
+  final machineType = false,
+  redeclare AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
       final use_rev=use_rev,
       final scalingFactor=scalingFactor,
-      redeclare model PerDataMainHP = PerDataMainHP,
-      redeclare model PerDataRevHP = PerDataRevHP));
+      redeclare model PerDataMainChi = PerDataMainChi,
+      redeclare model PerDataRevChi = PerDataRevChi));
 
-
-  replaceable model PerDataMainHP =
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of a heat pump in main operation mode"
-    annotation (choicesAllMatching=true);
-  replaceable model PerDataRevHP =
+  replaceable model PerDataMainChi =
       AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of a heat pump in reversible operation mode"
+  "Performance data of a chiller in main operation mode"
+    annotation (choicesAllMatching=true);
+  replaceable model PerDataRevChi =
+      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of a chiller in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);
 
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
@@ -40,8 +39,8 @@ model HeatPump
           lineColor={28,108,200},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="%name"),
-        Line(
+          textString="%name
+"),     Line(
           points={{-9,40},{9,40},{-5,-2},{9,-40},{-9,-40}},
           color={0,0,0},
           smooth=Smooth.None,
@@ -98,22 +97,16 @@ model HeatPump
             -120},{100,120}})),
     Documentation(revisions="<html><ul>
   <li>
-    <i>May 22, 2019</i> by Julian Matthes:<br/>
-    Rebuild due to the introducion of the thermal machine partial model
-    (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
-  </li>
-  <li>
-    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    <i>May 22, 2019&#160;</i> by Julian Matthes:<br/>
     First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
   </li>
 </ul>
 </html>", info="<html>
 <p>
-  This generic grey-box heat pump model uses empirical data to model
-  the refrigerant cycle. The modelling of system inertias and heat
-  losses allow the simulation of transient states.
+  This generic grey-box chiller model uses empirical data to model the
+  refrigerant cycle. The modelling of system inertias and heat losses
+  allow the simulation of transient states.
 </p>
 <p>
   Resulting in the choosen model structure, several configurations are
@@ -122,7 +115,7 @@ model HeatPump
 <ol>
   <li>Compressor type: on/off or inverter controlled
   </li>
-  <li>Reversible heat pump / only heating
+  <li>Reversible chiller / only cooling
   </li>
   <li>Source/Sink: Any combination of mediums is possible
   </li>
@@ -133,25 +126,23 @@ model HeatPump
   Concept
 </h4>
 <p>
-  Using a signal bus as a connector, this heat pump model can be easily
-  combined with the new <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>
-  or several control or security blocks from <a href=
+  Using a signal bus as a connector, this chiller model can be easily
+  combined within a chiller system model including several control or
+  security blocks analogous to <a href=
   \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a>.
-  The relevant data is aggregated. In order to control both chillers
-  and heat pumps, both flow and return temperature are aggregated. The
-  mode signal chooses the type of the heat pump operation. As a result,
-  this model can also be used as a chiller:
+  The relevant data is aggregated. The mode signal chooses the type of
+  the chiller operation. As a result, this model can also be used as a
+  heat pump:
 </p>
 <ul>
-  <li>mode = true: Heating
+  <li>mode = true: Chilling
   </li>
-  <li>mode = false: Chilling
+  <li>mode = false: Heating
   </li>
 </ul>
 <p>
-  To model both on/off and inverter controlled heat pumps, the
-  compressor speed is normalizd to a relative value between 0 and 1.
+  To model both on/off and inverter controlled chillers, the compressor
+  speed is normalizd to a relative value between 0 and 1.
 </p>
 <p>
   Possible icing of the evaporator is modelled with an input value
@@ -187,10 +178,10 @@ model HeatPump
 <p>
   To simplify the parametrization of the evaporator and condenser
   volumes and nominal mass flows there exists an option of automatic
-  estimation based on the nominal usable heating power of the HeatPump.
+  estimation based on the nominal usable cooling power of the Chiller.
   This function uses a linear correlation of these parameters, which
   was established from the linear regression of more than 20 data sets
-  of water-to-water heat pumps from different manufacturers (e.g.
+  of water-to-water chillers from different manufacturers (e.g.
   Carrier, Trane, Lennox) ranging from about 25kW to 1MW nominal power.
   The linear regressions with coefficients of determination above 91%
   give a good approximation of these parameters. Nevertheless,
@@ -201,15 +192,15 @@ model HeatPump
   Assumptions
 </h4>
 <p>
-  Several assumptions where made in order to model the heat pump. For a
+  Several assumptions where made in order to model the chiller. For a
   detailed description see the corresponding model.
 </p>
 <ol>
   <li>
     <a href=
     \"modelica://AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D\">
-    Performance data 2D</a>: In order to model inverter controlled heat
-    pumps, the compressor speed is scaled <b>linearly</b>
+    Performance data 2D</a>: In order to model inverter controlled
+    chillers, the compressor speed is scaled <b>linearly</b>
   </li>
   <li>
     <a href=
@@ -219,19 +210,16 @@ model HeatPump
   </li>
   <li>
     <b>Inertia</b>: The default value of the n-th order element is set
-    to 3. This follows comparisons with experimental data. Previous
-    heat pump models are using n = 1 as a default. However, it was
-    pointed out that a higher order element fits a real heat pump
-    better in.
+    to 3. This follows comparisons with experimental data.
   </li>
   <li>
     <b>Scaling factor</b>: A scaling facor is implemented for scaling
-    of the heat pump power and capacity. The factor scales the
-    parameters V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a
-    result, the heat pump can supply more heat with the COP staying
-    nearly constant. However, one has to make sure that the supplied
-    pressure difference or mass flow is also scaled with this factor,
-    as the nominal values do not increase said mass flow.
+    of the chiller power and capacity. The factor scales the parameters
+    V, m_flow_nominal, C, GIns, GOut and dp_nominal. As a result, the
+    chiller can supply more heat with the COP staying nearly constant.
+    However, one has to make sure that the supplied pressure difference
+    or mass flow is also scaled with this factor, as the nominal values
+    do not increase said mass flow.
   </li>
 </ol>
 <h4>
@@ -248,4 +236,4 @@ model HeatPump
   </li>
 </ul>
 </html>"));
-end HeatPump;
+end Chiller;

@@ -1,5 +1,6 @@
-﻿within AixLib.FastHVAC.Components.HeatGenerators.HeatPump;
-model HeatPump "Base model of FastHVAC Heat Pump"
+﻿within AixLib.FastHVAC.Components.Chiller;
+model Chiller "Base model of FastHVAC Chiller"
+  import AixLib;
 
 //General
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple Medium_con=
@@ -10,8 +11,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
       AixLib.FastHVAC.Media.WaterSimple()
     "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  parameter Boolean use_revHP=true
-    "True if the HP is reversible"
+  parameter Boolean use_revChi=true "True if the chiller is reversible"
     annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
@@ -19,15 +19,15 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   parameter Modelica.SIunits.Power Q_useNominal(start=0)
     "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
-  replaceable model PerDataHea =
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-    "Performance data of HP in heating mode"
-    annotation (choicesAllMatching=true);
-  replaceable model PerDataChi =
+  replaceable model PerDataMainChi =
       AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
-    "Performance data of HP in chilling mode"
+    "Performance data of chiller in cooling mode"
+    annotation (choicesAllMatching=true);
+  replaceable model PerDataRevChi =
+      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+    "Performance data of chiller in heating mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
-  parameter Real scalingFactor=1 "Scaling-factor of HP";
+  parameter Real scalingFactor=1 "Scaling-factor of chiller";
   parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
         group="Refrigerant inertia"));
@@ -117,10 +117,10 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.InitialState
     "Type of initialization (InitialState and InitialOutput are identical)"
     annotation (Dialog(tab="Initialization", group="Parameters"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=30+273.15
+  parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=10 + 273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=10+273.15
+  parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=30 + 273.15
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
@@ -130,7 +130,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
 //Advanced
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-  Interfaces.EnthalpyPort_a             enthalpyPort_a(
+    Interfaces.EnthalpyPort_a             enthalpyPort_a(
                      m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0))
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-104,56},{-96,64}})));
@@ -146,7 +146,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
                      m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));
-  BaseClasses.EvaporatorCondenserWithCapacity con(
+  AixLib.FastHVAC.BaseClasses.EvaporatorCondenserWithCapacity con(
     final kAOut_nominal=GCon,
     final m_fluid=m_fluidCon,
     final T_start=TCon_start,
@@ -160,7 +160,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     final m_flow_nominal=mFlow_conNominal_final)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
-  BaseClasses.EvaporatorCondenserWithCapacity eva(
+  AixLib.FastHVAC.BaseClasses.EvaporatorCondenserWithCapacity eva(
     final medium=Medium_eva,
     final use_cap=use_EvaCap,
     final kAOut_nominal=GEva,
@@ -228,16 +228,14 @@ model HeatPump "Base model of FastHVAC Heat Pump"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.ThermalMachineControlBus sigBusHP
-    annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
-        iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
-    redeclare final model PerDataMainHP =PerDataHea,
-    redeclare final model PerDataRevHP = PerDataChi,
-    final use_rev=use_revHP,
-    final scalingFactor=scalingFactor)
-    annotation (
-      Placement(transformation(
+  Controls.Interfaces.ThermalMachineControlBus sigBus annotation (Placement(
+        transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
+          extent={{-108,-52},{-90,-26}})));
+  AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
+    redeclare final model PerDataMainChi = PerDataMainChi,
+    redeclare final model PerDataRevChi = PerDataRevChi,
+    final use_rev=use_revChi,
+    final scalingFactor=scalingFactor) annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
@@ -298,7 +296,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
 
   //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
 protected
-  parameter Boolean machineType=true "=true if heat pump; =false if chiller";
+  parameter Boolean machineType=false "=true if heat pump; =false if chiller";
   parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
   parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
 
@@ -310,6 +308,7 @@ protected
   parameter Modelica.SIunits.Volume autoCalc_VCon = if machineType then max(0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*Q_useNominal - 0.0084, autoCalc_Vmin);
   parameter Modelica.SIunits.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
   parameter Modelica.SIunits.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
+
 
 equation
   //Control and feedback for the auto-calculation of condenser and evaporator data
@@ -350,7 +349,7 @@ equation
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
   connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
-  connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
+  connect(iceFac_in, sigBus.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -373,50 +372,50 @@ equation
                              color={0,0,127}));
   connect(realPassThroughnSetCon.y, con.QFlow_in) annotation (Line(points={{16,64.6},
           {16,75.04},{0,75.04}}, color={0,0,127}));
-  connect(mFlow_con.dotm, sigBusHP.m_flow_co) annotation (Line(points={{-79,51},
-          {-79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(mFlow_con.dotm, sigBus.m_flow_co) annotation (Line(points={{-79,51},{
+          -79,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
+  connect(nSet, sigBus.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-84,-18},
-          {-84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(modeSet, sigBus.mode) annotation (Line(points={{-116,-18},{-84,-18},{
+          -84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_a1.T, sigBusHP.T_flow_co) annotation (Line(points={{-33,81},{-33,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_a1.T, sigBus.T_flow_co) annotation (Line(points={{-33,81},{-33,-42.915},
+          {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
+  connect(senT_a2.T, sigBus.T_flow_ev) annotation (Line(points={{39,-75},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_ret_co) annotation (Line(points={{39,81},{39,-36},
+  connect(senT_b1.T, sigBus.T_ret_co) annotation (Line(points={{39,81},{39,-36},
           {-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
-          {42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+  connect(innerCycle.Pel, sigBus.Pel) annotation (Line(points={{28.73,-0.865},{
+          42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.sigBus, sigBusHP) annotation (Line(
+  connect(innerCycle.sigBus, sigBus) annotation (Line(
       points={{-26.78,-0.73},{-32,-0.73},{-32,-42},{-32,-42},{-32,-43},{-105,-43}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -424,15 +423,16 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_eva.dotm, sigBusHP.m_flow_ev) annotation (Line(points={{69,-51},
-          {69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
+
+  connect(mFlow_eva.dotm, sigBus.m_flow_ev) annotation (Line(points={{69,-51},{
+          69,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-53,-75},{-53,
-          -42.915},{-104.925,-42.915}}, color={0,0,127}), Text(
+  connect(senT_b2.T, sigBus.T_ret_ev) annotation (Line(points={{-53,-75},{-53,-42.915},
+          {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
@@ -514,12 +514,11 @@ equation
           rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
             -120},{100,120}})),
   Documentation(info="<html>
-  <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>HeatPump model adapted to FastHAVC library.<br/>
-  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">
-  AixLib.Fluid.HeatPumps.HeatPump</a> created by Fabian 
-  Wüllhorst in 2018. </p>
-  </html>",
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Chiller model adapted to FastHAVC library.</p>
+<p>  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.Chiller.Chiller\">
+  AixLib.Fluid.Chiller.Chiller</a> created by Julian Matthes in 2019. </p>
+</html>",
   revisions="<html><ul>
     <li>
     <i>May 22, 2019</i>  by Julian Matthes: <br/>
@@ -531,4 +530,4 @@ equation
     </li>
   </ul>
   </html>"));
-end HeatPump;
+end Chiller;
