@@ -26,7 +26,7 @@ model Chiller "Base model of FastHVAC Chiller"
   replaceable model PerDataRevChi =
       AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in heating mode"
-    annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
+    annotation (Dialog(enable=use_revChi),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of chiller";
   parameter Boolean use_refIne=true "Consider the inertia of the refrigerant cycle"
     annotation(choices(checkBox=true), Dialog(
