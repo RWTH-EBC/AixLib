@@ -1,5 +1,5 @@
 within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
-expandable connector HighTemperatureSystemBus
+expandable connector HighTempSystemBus
   "Data bus for ERC high temperature circuit"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
@@ -30,4 +30,4 @@ expandable connector HighTemperatureSystemBus
 <li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
 </ul>
 </html>"));
-end HighTemperatureSystemBus;
+end HighTempSystemBus;

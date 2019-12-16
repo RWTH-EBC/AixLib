@@ -91,12 +91,6 @@ model GeothermalFieldSimple "Geothermal probe"
            annotation (Placement(transformation(extent={{44,-300},{64,-280}})));
   parameter Modelica.SIunits.ThermalConductance G
     "Constant thermal conductance of material";
-  HydraulicModules.BaseClasses.HydraulicBus busThrottle "Bus on secondary side"
-    annotation (Placement(transformation(extent={{-128,-110},{-108,-90}}),
-        iconTransformation(extent={{-136,-64},{-102,-24}})));
-  HydraulicModules.BaseClasses.HydraulicBus busPump
-    annotation (Placement(transformation(extent={{-128,-152},{-108,-132}}),
-        iconTransformation(extent={{-136,-142},{-102,-98}})));
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
     p=200000,
@@ -106,6 +100,9 @@ model GeothermalFieldSimple "Geothermal probe"
         origin={-60,-262})));
   parameter Modelica.SIunits.Temperature T_ground=285.15
     "Fixed temperature of ground far away";
+  BaseClasses.TwoCircuitBus twoCircuitBus annotation (Placement(transformation(
+          extent={{-148,-148},{-92,-94}}), iconTransformation(extent={{-144,
+            -126},{-98,-76}})));
 equation
 
   connect(dynamicHX.port_b1, pump.port_a2) annotation (Line(points={{-21,-130.2},
@@ -117,22 +114,6 @@ equation
     annotation (Line(points={{64,-290},{84,-290}},           color={191,0,0}));
   connect(thermalConductor.port_a, vol.heatPort) annotation (Line(points={{44,-290},
           {32,-290},{32,-287},{18,-287}}, color={191,0,0}));
-  connect(throttle.hydraulicBus, busThrottle) annotation (Line(
-      points={{-28,-50},{-116,-50},{-116,-100},{-118,-100}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(pump.hydraulicBus, busPump) annotation (Line(
-      points={{40,-200},{-118,-200},{-118,-142}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
   connect(pump.port_b2, vol.ports[1]) annotation (Line(points={{-24,-240},{-24,-274},
@@ -149,6 +130,22 @@ equation
           -80},{-20,-80},{-20,-103.8},{-21,-103.8}}, color={0,127,255}));
   connect(throttle.port_a2, dynamicHX.port_b2) annotation (Line(points={{20,-80},
           {20,-92},{20,-103.8},{21,-103.8}}, color={0,127,255}));
+  connect(throttle.hydraulicBus, twoCircuitBus.secBus) annotation (Line(
+      points={{-28,-50},{-68,-50},{-68,-48},{-119.86,-48},{-119.86,-120.865}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(pump.hydraulicBus, twoCircuitBus.primBus) annotation (Line(
+      points={{40,-200},{-119.86,-200},{-119.86,-120.865}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-320},
             {120,0}}),                                          graphics={
         Rectangle(
@@ -259,6 +256,18 @@ equation
           color={0,0,0},
           thickness=0.5,
           origin={28,-71},
-          rotation=90)}),                                        Diagram(
+          rotation=90),
+        Line(
+          points={{-204,-82}},
+          color={0,0,0},
+          pattern=LinePattern.Dash),
+        Line(
+          points={{-98,-102},{-80,-102},{-80,-38},{-52,-38}},
+          color={0,0,0},
+          pattern=LinePattern.Dash),
+        Line(
+          points={{-80,-102},{-80,-118},{28,-118}},
+          color={0,0,0},
+          pattern=LinePattern.Dash)}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-120,-320},{120,0}})));
 end GeothermalFieldSimple;

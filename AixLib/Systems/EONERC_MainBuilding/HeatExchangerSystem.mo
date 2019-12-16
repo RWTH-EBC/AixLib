@@ -113,12 +113,6 @@ model HeatExchangerSystem
         iconTransformation(extent={{110,-108},{130,-88}})));
   parameter Modelica.SIunits.Temperature T_start=303.15
     "Initialization temperature" annotation (Dialog(tab="Initialization"));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBusHTC annotation (
-      Placement(transformation(extent={{-90,90},{-70,110}}), iconTransformation(
-          extent={{-70,90},{-50,110}})));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBusLTC annotation (
-      Placement(transformation(extent={{10,90},{30,110}}),   iconTransformation(
-          extent={{30,90},{50,110}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
@@ -128,6 +122,8 @@ model HeatExchangerSystem
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=270,
         origin={100,-52})));
+  BaseClasses.TwoCircuitBus hxBus annotation (Placement(transformation(extent={
+            {-32,86},{-6,114}}), iconTransformation(extent={{-22,90},{-2,110}})));
 equation
   connect(throttlePump.port_b1, dynamicHX.port_a1) annotation (Line(points={{-60,-12},
           {-28,-12},{-28,20},{-17.2,20}},    color={0,127,255}));
@@ -145,22 +141,6 @@ equation
                                     color={0,127,255}));
   connect(port_b3, pipe1.ports_b[1]) annotation (Line(points={{120,-100},{120,-10}},
                       color={0,127,255}));
-  connect(throttlePump.hydraulicBus, hydraulicBusHTC) annotation (Line(
-      points={{-80,-20},{-80,100}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(admix.hydraulicBus, hydraulicBusLTC) annotation (Line(
-      points={{60,20},{60,40},{20,40},{20,100}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(throttlePump.port_a1, port_a1) annotation (Line(points={{-100,-12},{
           -120,-12},{-120,-20},{-140,-20}}, color={0,127,255}));
   connect(throttlePump.port_b2, port_b1) annotation (Line(points={{-100,12},{
@@ -170,6 +150,22 @@ equation
                                                      color={0,0,127}));
   connect(prescribedTemperature.port, pipe1.heatPort) annotation (Line(points={
           {100,-20},{100,0},{110,0},{110,1.77636e-15}}, color={191,0,0}));
+  connect(throttlePump.hydraulicBus, hxBus.primBus) annotation (Line(
+      points={{-80,-20},{-80,100},{-18.935,100},{-18.935,100.07}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(admix.hydraulicBus, hxBus.secBus) annotation (Line(
+      points={{60,20},{60,100.07},{-18.935,100.07}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {140,100}}), graphics={
         Rectangle(
@@ -282,15 +278,19 @@ equation
           lineColor={0,0,0},
           lineThickness=0.5),
         Line(
-          points={{-60,-12},{-60,94}},
+          points={{-60,-12},{-60,98}},
           color={0,0,0},
           pattern=LinePattern.Dash),
         Line(
-          points={{40,96},{40,-60},{70,-60}},
+          points={{40,98},{40,-60},{70,-60}},
           color={0,0,0},
           pattern=LinePattern.Dash),
         Line(
           points={{82,-20},{92,-20},{92,52},{40,52}},
+          color={0,0,0},
+          pattern=LinePattern.Dash),
+        Line(
+          points={{-60,98},{40,98}},
           color={0,0,0},
           pattern=LinePattern.Dash)}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{140,100}})));

@@ -352,5 +352,11 @@ equation
         points={{77.04,0},{80,0},{80,118},{-92,118},{-92,0},{-90.8,0}}, color={0,
           0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false), graphics={Text(
+          extent={{-96,-20},{-24,-54}},
+          lineColor={0,0,0},
+          pattern=LinePattern.Dash,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Outputs calculated in text code")}));
 end modeStateSelector;

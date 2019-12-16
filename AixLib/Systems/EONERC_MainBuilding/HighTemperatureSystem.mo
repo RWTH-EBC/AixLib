@@ -98,9 +98,9 @@ model HighTemperatureSystem
     param=DataBase.CHP.CHPDataSimple.CHP_Cleanergy_C9G(),
     minCapacity=0.3)
     annotation (Placement(transformation(extent={{-88,-72},{-112,-48}})));
-  BaseClasses.HighTemperatureSystemBus hTCBus annotation (Placement(
-        transformation(extent={{-18,82},{18,116}}), iconTransformation(extent={{
-            -14,84},{16,114}})));
+  BaseClasses.HighTempSystemBus hTCBus annotation (Placement(transformation(
+          extent={{-18,82},{18,116}}), iconTransformation(extent={{-14,84},{16,
+            114}})));
 
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
         T_amb)

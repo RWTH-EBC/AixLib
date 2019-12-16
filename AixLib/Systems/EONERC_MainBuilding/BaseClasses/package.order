@@ -1,4 +1,6 @@
 HeatPumpSystemBus
-DataHPSystem
 SwitchingUnitBus
-HighTemperatureSystemBus
+HighTempSystemBus
+TwoCircuitBus
+DataHPSystem
+MainBus
