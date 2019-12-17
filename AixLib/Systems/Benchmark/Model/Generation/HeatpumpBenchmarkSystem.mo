@@ -1,4 +1,4 @@
-within AixLib.DataBase.HeatPump.EN14511;
+within AixLib.Systems.Benchmark.Model.Generation;
 record HeatpumpBenchmarkSystem "Benchmark Heatpump Big"
   extends AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
     tableP_ele=[0,-5,0,5; 35,19350,19800,19800; 45,24000,24000,24000; 55,28950,29400,29400],
