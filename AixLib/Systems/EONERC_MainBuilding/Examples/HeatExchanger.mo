@@ -42,20 +42,16 @@ model HeatExchanger "Test of heat exachgner model of E.ON ERC main building"
     m_flow_nominal=2,
     V=0.1,
     nPorts=2) annotation (Placement(transformation(extent={{70,58},{50,78}})));
-  Controller.CtrHXSsystem ctrHXSsystem(
-    useExternalTset=true,
-    TflowSet=308.15,
-    Ti=60,
-    Td=0,
-    rpm_pump=1000,
-    rpm_pump_htc=1500)
-    annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
   Modelica.Blocks.Sources.Ramp ramp(
     height=10,
     duration=1800,
     offset=298.15,
     startTime=900)
-    annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
+    annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
+  Controller.CtrHXsimple ctrHXsimple(useExternalTset=true)
+    annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
+  BaseClasses.TwoCircuitBus hxBus1
+    annotation (Placement(transformation(extent={{10,54},{30,74}})));
 equation
   connect(heatExchangerSystem.port_a1, boundary.ports[1]) annotation (Line(
         points={{-40,-8},{-56,-8},{-56,-20},{-70,-20}},
@@ -70,18 +66,20 @@ equation
           40},{46,40},{46,60},{62,60},{62,58}},         color={0,127,255}));
   connect(heatExchangerSystem.port_a3, vol.ports[2]) annotation (Line(points={{60.2857,
           40},{60,40},{60,58},{58,58}},         color={0,127,255}));
-  connect(ctrHXSsystem.hydraulicBus, heatExchangerSystem.hydraulicBusLTC)
-    annotation (Line(
-      points={{-40.7,48.9},{29.4286,48.9},{29.4286,40}},
+  connect(ctrHXsimple.Tset, ramp.y)
+    annotation (Line(points={{-62,70},{-79,70}}, color={0,0,127}));
+  connect(ctrHXsimple.hxBus, heatExchangerSystem.hxBus) annotation (Line(
+      points={{-38.9,70.1},{9.37143,70.1},{9.37143,40}},
       color={255,204,51},
       thickness=0.5));
-  connect(ctrHXSsystem.hydraulicBusHTC, heatExchangerSystem.hydraulicBusHTC)
-    annotation (Line(
-      points={{-40.7,54.6},{-9.14286,54.6},{-9.14286,40}},
+  connect(heatExchangerSystem.hxBus, hxBus1) annotation (Line(
+      points={{9.37143,40},{12,40},{12,64},{20,64}},
       color={255,204,51},
-      thickness=0.5));
-  connect(ramp.y, ctrHXSsystem.Tset) annotation (Line(points={{-79,50},{-72,50},
-          {-72,50},{-62,50}}, color={0,0,127}));
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (experiment(StopTime=23400),__Dymola_Commands(file(ensureSimulated=
            true)=
         "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatExchanger.mos"

@@ -34,25 +34,25 @@ model SwitchingUnit
         rotation=270,
         extent={{-10,-10},{10,10}},
         origin={110,140})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{90,-70},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{90,-70},
             {110,-50}})));
   Modelica.Blocks.Interfaces.RealInput openingHK13Y2 annotation (Placement(
         transformation(
         rotation=270,
         extent={{-10,-10},{10,10}},
         origin={0,140})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{-10,-70},
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{-10,-70},
             {10,-50}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{-30,90},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{-30,90},
             {-10,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{170,90},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{170,90},
             {190,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium
-      = Medium) annotation (Placement(transformation(rotation=0, extent={{170,10},
+  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium =
+        Medium) annotation (Placement(transformation(rotation=0, extent={{170,10},
             {190,30}})));
   Modelica.Blocks.Interfaces.RealInput openingHK13Y3 annotation (Placement(
         transformation(

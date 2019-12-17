@@ -1,7 +1,6 @@
 within AixLib.Systems.EONERC_MainBuilding;
 model MainBuildingEnergySystem
   "Energy system of E.ON ERC main building"
-  extends Modelica.Icons.Example;
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
   Fluid.Sources.Boundary_pT          boundary2(
@@ -11,30 +10,22 @@ model MainBuildingEnergySystem
     nPorts=1) annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=270,
-        origin={8,44})));
-  HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-60,-74},{50,-26}})));
+        origin={80,-102})));
+  HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium, T_amb=293.15)
+    annotation (Placement(transformation(extent={{-58,-100},{52,-52}})));
   SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal=
-       2) annotation (Placement(transformation(extent={{20,40},{60,88}})));
-  Fluid.MixingVolumes.MixingVolume vol(
-    redeclare package Medium = Medium,
-    m_flow_nominal=4,
-    V=0.1,
-    nPorts=2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={40,16})));
+       2) annotation (Placement(transformation(extent={{32,22},{66,62}})));
   HeatExchangerSystem heatExchangerSystem(redeclare package Medium = Medium,
       m_flow_nominal=2)
-    annotation (Placement(transformation(extent={{-150,-26},{-80,22}})));
+    annotation (Placement(transformation(extent={{-146,-26},{-80,18}})));
   Fluid.Sources.Boundary_pT          boundary1(
     redeclare package Medium = Medium,
     p=300000,
     T=343.15,
     nPorts=1) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{6,-6},{-6,6}},
         rotation=180,
-        origin={-218,-10})));
+        origin={-196,-12})));
   Fluid.Sources.Boundary_pT          boundary4(
     redeclare package Medium = Medium,
     p=300000,
@@ -42,19 +33,20 @@ model MainBuildingEnergySystem
     nPorts=1) annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=270,
-        origin={-86,-64})));
+        origin={-86,-100})));
   HighTemperatureSystem highTemperatureSystem(
     redeclare package Medium = Medium,
+    T_start=333.15,
     T_amb=293.15,
     m_flow_nominal=2) annotation (Placement(transformation(
-        extent={{-36,-27},{36,27}},
+        extent={{-37,-29},{37,29}},
         rotation=90,
-        origin={-167,-84})));
-  HydraulicModules.Admix                admix(
+        origin={-159,-83})));
+  HydraulicModules.Admix admixHTC(
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admix.energyDynamics)),
+          per, energyDynamics=admixHTC.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -69,12 +61,11 @@ model MainBuildingEnergySystem
     pipe6(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
-    Kv=63)                                                     annotation (Placement(transformation(
+    Kv=63) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-170,70})));
-  HydraulicModules.Controller.CtrMix
-                    ctrMix(
+  HydraulicModules.Controller.CtrMix ctrMixHTC(
     TflowSet=313.15,
     Td=0,
     Ti=150,
@@ -84,66 +75,47 @@ model MainBuildingEnergySystem
     initType=Modelica.Blocks.Types.InitPID.InitialState,
     reverseAction=false)
     annotation (Placement(transformation(extent={{-204,64},{-188,78}})));
-  HydraulicModules.SimpleConsumer
-                 simpleConsumer(
+  HydraulicModules.SimpleConsumer consumerHTC(
     kA=20000,
     V=0.1,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
     functionality="T_input",
     T_start=293.15)
-    annotation (Placement(transformation(extent={{-176,82},{-164,94}})));
-  Controller.HeatPumpSystemSimpleControl
-                                     heatPumpSystemSimpleControl
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Controller.CtrSWU ctrSWU
-    annotation (Placement(transformation(extent={{76,98},{56,118}})));
-  Modelica.Blocks.Sources.IntegerExpression integerExpression(y=4)
-    annotation (Placement(transformation(extent={{110,96},{90,116}})));
-  Controller.CtrHXSsystem ctrHXSsystem(
-    TflowSet=305.15,
-    Ti=60,
-    Td=0,
-    rpm_pump=1000,
-    rpm_pump_htc=1500)
-    annotation (Placement(transformation(extent={{-148,48},{-128,28}})));
+    annotation (Placement(transformation(extent={{-176,84},{-164,96}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperature(T=293.15)
-    annotation (Placement(transformation(extent={{-20,-120},{0,-100}})));
-  Controller.CtrHighTemperatureSystem ctrHighTemperatureSystem
-    annotation (Placement(transformation(extent={{-226,-92},{-206,-72}})));
-  HydraulicModules.SimpleConsumer
-                 simpleConsumer1(
-    kA=60000,
-    V=0.1,
+    annotation (Placement(transformation(extent={{-40,-120},{-28,-108}})));
+  HydraulicModules.SimpleConsumer consumerLTC(
+    kA=50000,
+    V=5,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    functionality="T_input",
+    functionality="Q_flow_input",
     T_start=293.15)
-    annotation (Placement(transformation(extent={{-96,92},{-84,104}})));
-  HydraulicModules.SimpleConsumer
-                 simpleConsumer2(
+    annotation (Placement(transformation(extent={{-96,84},{-84,96}})));
+  HydraulicModules.SimpleConsumer consumerCold1(
     kA=312000/6,
-    V=0.1,
+    V=5,
     m_flow_nominal=1,
     redeclare package Medium = Medium,
-    functionality="T_input",
-    T_start=293.15)
-    annotation (Placement(transformation(extent={{-6,-6},{6,6}},
-        rotation=90,
-        origin={-40,70})));
-  HydraulicModules.Controller.CtrMix ctrMix1(
+    functionality="Q_flow_input",
+    T_start=293.15) annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={10,90})));
+  HydraulicModules.Controller.CtrMix ctrMixLTC(
     useExternalTset=false,
-    TflowSet=306.15,
+    TflowSet=301.15,
     k=0.05,
     Td=0,
     rpm_pump=2000)
     annotation (Placement(transformation(extent={{-126,62},{-110,80}})));
-  HydraulicModules.Admix                admix1(
+  HydraulicModules.Admix admixLTC(
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admix.energyDynamics)),
+          per, energyDynamics=admixHTC.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -158,15 +130,15 @@ model MainBuildingEnergySystem
     pipe6(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
-    Kv=63)                                                     annotation (Placement(transformation(
+    Kv=63) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-90,70})));
-  HydraulicModules.Admix                admix2(
+  HydraulicModules.Admix admixCold1(
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admix.energyDynamics)),
+          per, energyDynamics=admixHTC.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -181,25 +153,25 @@ model MainBuildingEnergySystem
     pipe6(length=0.5),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
-    Kv=63)                                                     annotation (Placement(transformation(
+    Kv=63) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-18,70})));
+        rotation=90,
+        origin={10,70})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=5,
     freqHz=1/(3600*24),
     offset=273.15 + 75)
-    annotation (Placement(transformation(extent={{-202,90},{-182,110}})));
+    annotation (Placement(transformation(extent={{-192,92},{-182,102}})));
   Modelica.Blocks.Sources.Sine sine1(
-    amplitude=2,
+    amplitude=1,
     freqHz=1/(3600*24),
-    offset=273.15 + 30)
-    annotation (Placement(transformation(extent={{-122,102},{-102,122}})));
+    offset=273.15 + 25)
+    annotation (Placement(transformation(extent={{-122,100},{-112,110}})));
   Modelica.Blocks.Sources.Sine sine2(
-    amplitude=3,
+    amplitude=1,
     freqHz=1/(3600*24),
-    offset=273.15 + 18)
-    annotation (Placement(transformation(extent={{-64,60},{-50,74}})));
+    offset=273.15 + 19)
+    annotation (Placement(transformation(extent={{-18,126},{-8,136}})));
   HydraulicModules.Throttle throttle(
     redeclare package Medium = Medium,
     T_amb=293.15,
@@ -211,140 +183,311 @@ model MainBuildingEnergySystem
     Kv=100) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-176,-22})));
+        origin={-170,-22})));
   HydraulicModules.BaseClasses.HydraulicBus hydraulicBus3
     annotation (Placement(transformation(extent={{-212,-36},{-192,-16}})));
   Modelica.Blocks.Sources.Constant const(k=1)
-    annotation (Placement(transformation(extent={{-244,-48},{-224,-28}})));
-  HydraulicModules.Controller.CtrMix ctrMix2(
+    annotation (Placement(transformation(extent={{-252,-46},{-232,-26}})));
+  HydraulicModules.Controller.CtrMix ctrMixCold1(
     useExternalTset=false,
-    TflowSet=285.15,
+    TflowSet=289.15,
     k=0.05,
     Td=0,
     rpm_pump=2000,
     reverseAction=true)
-    annotation (Placement(transformation(extent={{-40,38},{-24,56}})));
+    annotation (Placement(transformation(extent={{-24,62},{-8,80}})));
+  GeothermalFieldSimple geothermalFieldSimple(
+    redeclare package Medium = Medium,
+    m_flow_nominal=10,
+    T_start=285.15,
+    T_amb=288.15,
+    G=5000) annotation (Placement(transformation(extent={{36,-22},{62,16}})));
+  HydraulicModules.Admix admixCold2(
+    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
+          energyDynamics=admixHTC.energyDynamics)),
+    redeclare package Medium = Medium,
+    m_flow_nominal=1,
+    T_amb=298.15,
+    dIns=0.01,
+    kIns=0.028,
+    d=0.1,
+    pipe1(length=5),
+    pipe2(length=1),
+    pipe3(length=4),
+    pipe4(length=5),
+    pipe5(length=5),
+    pipe6(length=0.5),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    length=1,
+    Kv=63) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={110,70})));
+  HydraulicModules.SimpleConsumer consumerCold2(
+    kA=1000,
+    V=0.1,
+    m_flow_nominal=1,
+    redeclare package Medium = Medium,
+    functionality="T_input",
+    T_start=293.15) annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={110,92})));
+  Modelica.Blocks.Sources.Sine sine3(
+    amplitude=1,
+    freqHz=1/(3600*24),
+    offset=273.15 + 17)
+    annotation (Placement(transformation(extent={{86,94},{96,104}})));
+  Modelica.Blocks.Math.Add add
+    annotation (Placement(transformation(extent={{-106,96},{-96,106}})));
+  Modelica.Blocks.Sources.Sine sine4(
+    amplitude=2,
+    freqHz=1/(3600*24*365),
+    offset=0)
+    annotation (Placement(transformation(extent={{-122,86},{-112,96}})));
+  Modelica.Blocks.Sources.Sine sine5(
+    amplitude=2,
+    freqHz=1/(3600*24*365),
+    phase=0,
+    offset=0)
+    annotation (Placement(transformation(extent={{-16,110},{-6,120}})));
+  Modelica.Blocks.Math.Add add1
+    annotation (Placement(transformation(extent={{0,120},{10,130}})));
+  HydraulicModules.Controller.CtrMix ctrMixCold2(
+    useExternalTset=false,
+    TflowSet=287.15,
+    k=0.05,
+    Td=0,
+    rpm_pump=2000,
+    reverseAction=true)
+    annotation (Placement(transformation(extent={{74,62},{90,80}})));
+  Modelica.Blocks.Sources.Sine sine6(
+    amplitude=5000,
+    freqHz=1/(3600*24*365),
+    offset=-5000)
+    annotation (Placement(transformation(extent={{-116,132},{-106,142}})));
+  Modelica.Blocks.Sources.Sine sine7(
+    amplitude=50000,
+    freqHz=1/(3600*24*365),
+    phase=0,
+    offset=50000)
+    annotation (Placement(transformation(extent={{-12,92},{-2,102}})));
+  BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-56,
+            104},{-26,134}}), iconTransformation(extent={{-30,110},{-10,130}})));
 equation
-  connect(boundary2.ports[1], switchingUnit.port_b2)
-    annotation (Line(points={{8,50},{8,60},{20,60}},
-                                                color={0,127,255}));
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
-        points={{60,60},{80,60},{80,-52.6667},{50,-52.6667}}, color={0,127,255}));
+        points={{66,38.6667},{80,38.6667},{80,-78.6667},{52,-78.6667}},
+                                                              color={0,127,255}));
   connect(heatpumpSystem.port_a1, switchingUnit.port_b1) annotation (Line(
-        points={{50,-42},{94,-42},{94,84},{60,84}}, color={0,127,255}));
-  connect(vol.ports[1], switchingUnit.port_a3) annotation (Line(points={{42,26},
-          {36,26},{36,40},{32,40}}, color={0,127,255}));
-  connect(vol.ports[2], switchingUnit.port_b3) annotation (Line(points={{38,26},
-          {46,26},{46,40},{48,40}}, color={0,127,255}));
+        points={{52,-68},{94,-68},{94,58.6667},{66,58.6667}},
+                                                    color={0,127,255}));
   connect(heatpumpSystem.port_a2, heatExchangerSystem.port_b3) annotation (Line(
-        points={{-60,-52.6667},{-86,-52.6667},{-86,-25.52},{-85,-25.52}}, color
-        ={0,127,255}));
+        points={{-58,-78.6667},{-86,-78.6667},{-86,-25.56},{-84.7143,-25.56}},
+                                                                          color=
+         {0,127,255}));
   connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
-        points={{-60,-42},{-95,-42},{-95,-26}}, color={0,127,255}));
-  connect(ctrMix.hydraulicBus, admix.hydraulicBus) annotation (Line(
+        points={{-58,-68},{-94.1429,-68},{-94.1429,-26}},
+                                                color={0,127,255}));
+  connect(ctrMixHTC.hydraulicBus, admixHTC.hydraulicBus) annotation (Line(
       points={{-188.56,70.23},{-186.315,70.23},{-186.315,70},{-180,70}},
       color={255,204,51},
       thickness=0.5));
-  connect(admix.port_b1, simpleConsumer.port_a)
-    annotation (Line(points={{-176,80},{-176,88}}, color={0,127,255}));
-  connect(admix.port_a2, simpleConsumer.port_b)
-    annotation (Line(points={{-164,80},{-164,88}}, color={0,127,255}));
-  connect(heatPumpSystemSimpleControl.heatPumpSystemBus1, heatpumpSystem.heatPumpSystemBus)
-    annotation (Line(
-      points={{-20,0.1},{-6,0.1},{-6,-26},{-5,-26}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ctrSWU.sWUBus, switchingUnit.sWUBus) annotation (Line(
-      points={{56,108},{40,108},{40,88.4},{39.8,88.4}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ctrSWU.mode, integerExpression.y)
-    annotation (Line(points={{76,108},{86,108},{86,106},{89,106}},
-                                                 color={255,127,0}));
-  connect(ctrHXSsystem.hydraulicBusHTC, heatExchangerSystem.hydraulicBusHTC)
-    annotation (Line(
-      points={{-128.7,33.4},{-118,33.4},{-118,22},{-130,22}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ctrHXSsystem.hydraulicBus, heatExchangerSystem.hydraulicBusLTC)
-    annotation (Line(
-      points={{-128.7,39.1},{-105,39.1},{-105,22}},
-      color={255,204,51},
-      thickness=0.5));
+  connect(admixHTC.port_b1, consumerHTC.port_a)
+    annotation (Line(points={{-176,80},{-176,90}}, color={0,127,255}));
+  connect(admixHTC.port_a2, consumerHTC.port_b)
+    annotation (Line(points={{-164,80},{-164,90}}, color={0,127,255}));
   connect(fixedTemperature.port, heatpumpSystem.T_outside) annotation (Line(
-        points={{0,-110},{-2,-110},{-2,-71.3333},{-5,-71.3333}}, color={191,0,0}));
-  connect(ctrHighTemperatureSystem.highTemperatureSystemBus,
-    highTemperatureSystem.hTCBus) annotation (Line(
-      points={{-206,-81.9},{-203,-81.9},{-203,-80.9538},{-193.73,-80.9538}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(boundary4.ports[1], heatpumpSystem.port_a2) annotation (Line(points={
-          {-86,-58},{-86,-52.6667},{-60,-52.6667}}, color={0,127,255}));
-  connect(admix1.port_b1, simpleConsumer1.port_a)
-    annotation (Line(points={{-96,80},{-96,98}}, color={0,127,255}));
-  connect(admix1.port_a2, simpleConsumer1.port_b)
-    annotation (Line(points={{-84,80},{-84,98}}, color={0,127,255}));
-  connect(admix1.port_a1, heatExchangerSystem.port_b2)
-    annotation (Line(points={{-96,60},{-96,22},{-95,22}}, color={0,127,255}));
-  connect(admix1.port_b2, heatExchangerSystem.port_a3)
-    annotation (Line(points={{-84,60},{-84,22},{-85,22}}, color={0,127,255}));
-  connect(admix2.port_b2, switchingUnit.port_a1) annotation (Line(points={{-8,
-          76},{6,76},{6,84},{20,84}}, color={0,127,255}));
-  connect(admix2.port_a1, switchingUnit.port_b2) annotation (Line(points={{-8,
-          64},{6,64},{6,60},{20,60}}, color={0,127,255}));
-  connect(admix2.port_b1, simpleConsumer2.port_a)
-    annotation (Line(points={{-28,64},{-40,64}}, color={0,127,255}));
-  connect(simpleConsumer2.port_b, admix2.port_a2)
-    annotation (Line(points={{-40,76},{-28,76}}, color={0,127,255}));
+        points={{-28,-114},{-2,-114},{-2,-97.3333},{-3,-97.3333}},
+                                                                 color={191,0,0}));
+  connect(boundary4.ports[1], heatpumpSystem.port_a2) annotation (Line(points={{-86,-94},
+          {-86,-78.6667},{-58,-78.6667}},           color={0,127,255}));
+  connect(admixLTC.port_b1, consumerLTC.port_a)
+    annotation (Line(points={{-96,80},{-96,90}}, color={0,127,255}));
+  connect(admixLTC.port_a2, consumerLTC.port_b)
+    annotation (Line(points={{-84,80},{-84,90}}, color={0,127,255}));
+  connect(admixLTC.port_a1, heatExchangerSystem.port_b2) annotation (Line(
+        points={{-96,60},{-96,18},{-94.1429,18}}, color={0,127,255}));
+  connect(admixLTC.port_b2, heatExchangerSystem.port_a3) annotation (Line(
+        points={{-84,60},{-84,18},{-84.7143,18}}, color={0,127,255}));
+  connect(admixCold1.port_b2, switchingUnit.port_a1) annotation (Line(points={{
+          16,60},{20,60},{20,58.6667},{32,58.6667}}, color={0,127,255}));
+  connect(admixCold1.port_a1, switchingUnit.port_b2) annotation (Line(points={{
+          4,60},{4,38.6667},{32,38.6667}}, color={0,127,255}));
+  connect(admixCold1.port_b1, consumerCold1.port_a)
+    annotation (Line(points={{4,80},{4,90}}, color={0,127,255}));
+  connect(consumerCold1.port_b, admixCold1.port_a2)
+    annotation (Line(points={{16,90},{16,80}}, color={0,127,255}));
   connect(highTemperatureSystem.port_b, throttle.port_a1) annotation (Line(
-        points={{-183.2,-48},{-183.2,-40},{-182,-40},{-182,-32}}, color={0,127,
+        points={{-176.4,-46},{-176.4,-40},{-176,-40},{-176,-32}}, color={0,127,
           255}));
   connect(highTemperatureSystem.port_a, throttle.port_b2) annotation (Line(
-        points={{-172.4,-48},{-172,-48},{-172,-32},{-170,-32}}, color={0,127,
+        points={{-164.8,-46},{-164,-46},{-164,-32}},            color={0,127,
           255}));
-  connect(boundary1.ports[1], throttle.port_b1) annotation (Line(points={{-208,
-          -10},{-196,-10},{-196,-12},{-182,-12}}, color={0,127,255}));
-  connect(throttle.port_b1, admix.port_a1) annotation (Line(points={{-182,-12},
-          {-180,-12},{-180,60},{-176,60}}, color={0,127,255}));
-  connect(throttle.port_a2, admix.port_b2) annotation (Line(points={{-170,-12},
-          {-168,-12},{-168,60},{-164,60}}, color={0,127,255}));
+  connect(boundary1.ports[1], throttle.port_b1) annotation (Line(points={{-190,
+          -12},{-176,-12}},                       color={0,127,255}));
+  connect(throttle.port_b1, admixHTC.port_a1)
+    annotation (Line(points={{-176,-12},{-176,60}}, color={0,127,255}));
+  connect(throttle.port_a2, admixHTC.port_b2)
+    annotation (Line(points={{-164,-12},{-164,60}}, color={0,127,255}));
   connect(throttle.port_a2, heatExchangerSystem.port_b1) annotation (Line(
-        points={{-170,-12},{-168,-12},{-168,2.8},{-150,2.8}}, color={0,127,255}));
+        points={{-164,-12},{-164,0.4},{-146,0.4}},            color={0,127,255}));
   connect(throttle.port_b1, heatExchangerSystem.port_a1) annotation (Line(
-        points={{-182,-12},{-182,-6.8},{-150,-6.8}}, color={0,127,255}));
+        points={{-176,-12},{-176,-8.4},{-146,-8.4}}, color={0,127,255}));
   connect(throttle.hydraulicBus, hydraulicBus3) annotation (Line(
-      points={{-186,-22},{-194,-22},{-194,-26},{-202,-26}},
+      points={{-180,-22},{-194,-22},{-194,-26},{-202,-26}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(const.y, hydraulicBus3.valSet) annotation (Line(points={{-223,-38},{
-          -216,-38},{-216,-36},{-201.95,-36},{-201.95,-25.95}}, color={0,0,127}),
+  connect(const.y, hydraulicBus3.valSet) annotation (Line(points={{-231,-36},{
+          -201.95,-36},{-201.95,-25.95}},                       color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrMix1.hydraulicBus, admix1.hydraulicBus) annotation (Line(
+  connect(ctrMixLTC.hydraulicBus, admixLTC.hydraulicBus) annotation (Line(
       points={{-110.56,70.01},{-106.28,70.01},{-106.28,70},{-100,70}},
       color={255,204,51},
       thickness=0.5));
-  connect(ctrMix2.hydraulicBus, admix2.hydraulicBus) annotation (Line(
-      points={{-24.56,46.01},{-24.56,46},{-18,46},{-18,60}},
+  connect(sine.y, consumerHTC.T) annotation (Line(points={{-181.5,97},{-165.2,
+          97},{-165.2,96}}, color={0,0,127}));
+  connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{80,-96},
+          {80,-78.6667},{52,-78.6667}},          color={0,127,255}));
+  connect(heatpumpSystem.port_a1, admixCold2.port_b2)
+    annotation (Line(points={{52,-68},{116,-68},{116,60}}, color={0,127,255}));
+  connect(heatpumpSystem.port_b1, admixCold2.port_a1) annotation (Line(points={
+          {52,-78.6667},{80,-78.6667},{80,38},{104,38},{104,60}}, color={0,127,
+          255}));
+  connect(sine3.y, consumerCold2.T) annotation (Line(points={{96.5,99},{96.5,98},
+          {114.8,98}}, color={0,0,127}));
+  connect(sine1.y, add.u1) annotation (Line(points={{-111.5,105},{-108.75,105},{
+          -108.75,104},{-107,104}}, color={0,0,127}));
+  connect(sine4.y, add.u2) annotation (Line(points={{-111.5,91},{-111.5,94.5},{-107,
+          94.5},{-107,98}}, color={0,0,127}));
+  connect(sine2.y, add1.u1) annotation (Line(points={{-7.5,131},{-4.75,131},{-4.75,
+          128},{-1,128}}, color={0,0,127}));
+  connect(sine5.y, add1.u2) annotation (Line(points={{-5.5,115},{-5.5,118.5},{-1,
+          118.5},{-1,122}}, color={0,0,127}));
+  connect(consumerCold2.port_a, admixCold2.port_b1)
+    annotation (Line(points={{104,92},{104,80}}, color={0,127,255}));
+  connect(consumerCold2.port_b, admixCold2.port_a2)
+    annotation (Line(points={{116,92},{116,80}}, color={0,127,255}));
+  connect(ctrMixCold2.hydraulicBus, admixCold2.hydraulicBus) annotation (Line(
+      points={{89.44,70.01},{94.72,70.01},{94.72,70},{100,70}},
       color={255,204,51},
       thickness=0.5));
-  connect(sine.y, simpleConsumer.T) annotation (Line(points={{-181,100},{-165.2,
-          100},{-165.2,94}}, color={0,0,127}));
-  connect(sine1.y, simpleConsumer1.T) annotation (Line(points={{-101,112},{
-          -85.2,112},{-85.2,104}}, color={0,0,127}));
-  connect(sine2.y, simpleConsumer2.T) annotation (Line(points={{-49.3,67},{
-          -49.3,74.8},{-46,74.8}}, color={0,0,127}));
-  annotation (Diagram(coordinateSystem(extent={{-200,-120},{100,100}})), Icon(
-        coordinateSystem(extent={{-200,-120},{100,100}})),
+  connect(sine6.y, consumerLTC.Q_flow) annotation (Line(points={{-105.5,137},{-93.6,
+          137},{-93.6,96}}, color={0,0,127}));
+  connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
+        points={{38.1667,16},{40,16},{40,22},{42.2,22}}, color={0,127,255}));
+  connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
+        points={{59.8333,16},{55.8,16},{55.8,22}}, color={0,127,255}));
+  connect(ctrMixCold1.hydraulicBus, admixCold1.hydraulicBus) annotation (Line(
+      points={{-8.56,70.01},{-3.28,70.01},{-3.28,70},{0,70}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(sine7.y, consumerCold1.Q_flow) annotation (Line(points={{-1.5,97},{
+          2.25,97},{2.25,96},{6.4,96}}, color={0,0,127}));
+  connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
+      Line(
+      points={{-3,-52},{-4,-52},{-4,-28},{-40.925,-28},{-40.925,119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(geothermalFieldSimple.twoCircuitBus, mainBus.gtfBus) annotation (Line(
+      points={{35.8917,4.00625},{-40.925,4.00625},{-40.925,119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(switchingUnit.sWUBus, mainBus.swuBus) annotation (Line(
+      points={{48.83,62.3333},{48.83,119.075},{-40.925,119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatExchangerSystem.hxBus, mainBus.hxBus) annotation (Line(
+      points={{-115.829,18},{-116,18},{-116,38},{-40.925,38},{-40.925,119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+
+  connect(highTemperatureSystem.hTCBus, mainBus.htsBus) annotation (Line(
+      points={{-187.71,-79.8692},{-208,-79.8692},{-208,119.075},{-40.925,
+          119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(admixLTC.hydraulicBus, mainBus.consLtcBus) annotation (Line(
+      points={{-100,70},{-80,70},{-80,68},{-108,68},{-108,119.075},{-40.925,
+          119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(admixHTC.hydraulicBus, mainBus.consHtcBus) annotation (Line(
+      points={{-180,70},{-184,70},{-184,76},{-208,76},{-208,119.075},{-40.925,
+          119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(admixCold1.hydraulicBus, mainBus.consCold1Bus) annotation (Line(
+      points={{0,70},{-2,70},{-2,82},{-24,82},{-24,119.075},{-40.925,119.075}},
+
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(admixCold2.hydraulicBus, mainBus.consCold2Bus) annotation (Line(
+      points={{100,70},{98,70},{98,76},{96,76},{96,84},{74,84},{74,119.075},{
+          -40.925,119.075}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
+        coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
+          extent={{-200,120},{120,-120}},
+          lineColor={0,0,0},
+          pattern=LinePattern.Dash,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-166,106},{106,-126}},
+          lineColor={0,0,0},
+          pattern=LinePattern.Dash,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="E.ON ERC Main building energy system")}),
     experiment(
-      StopTime=604800,
+      StopTime=432000,
       Tolerance=0.001,
       __Dymola_fixedstepsize=0.5,
       __Dymola_Algorithm="Dassl"));

@@ -1,4 +1,4 @@
-within AixLib.Systems.EONERC_MainBuilding.BaseClasses;
+within AixLib.Systems.EONERC_MainBuilding.Validation;
 record DataHPSystem "Measured data of heat pump system"
 
   parameter Real October2015[:,:] = [

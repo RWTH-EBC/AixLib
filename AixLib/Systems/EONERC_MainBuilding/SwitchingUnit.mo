@@ -27,13 +27,12 @@ model SwitchingUnit
         origin={-20,-60})));
 
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare final package Medium =
         Medium) annotation (Placement(transformation(rotation=0, extent={{30,-170},
             {50,-150}}), iconTransformation(extent={{30,-170},{50,-150}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a3(redeclare final package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b port_b3(redeclare final package Medium =
         Medium) annotation (Placement(transformation(rotation=0, extent={{-50,-170},
-            {-30,-150}}),
-                        iconTransformation(extent={{-50,-170},{-30,-150}})));
+            {-30,-150}}), iconTransformation(extent={{-50,-170},{-30,-150}})));
 
   Fluid.Actuators.Valves.TwoWayLinear              K2(
     redeclare package Medium = Medium,
@@ -111,11 +110,11 @@ equation
     annotation (Line(points={{-10,-60},{100,-60}}, color={0,127,255}));
   connect(K4.port_b, port_b1)
     annotation (Line(points={{60,-80},{60,60},{100,60}}, color={0,127,255}));
-  connect(port_b3, Y2.port_a) annotation (Line(points={{40,-160},{40,-124},{-80,
+  connect(port_a3, Y2.port_a) annotation (Line(points={{40,-160},{40,-124},{-80,
           -124},{-80,-100}}, color={0,127,255}));
-  connect(port_a3, K3.port_a) annotation (Line(points={{-40,-160},{-40,-140},{-4.44089e-16,
+  connect(port_b3, K3.port_a) annotation (Line(points={{-40,-160},{-40,-140},{-4.44089e-16,
           -140},{-4.44089e-16,-100}}, color={0,127,255}));
-  connect(K2.port_a, port_a3)
+  connect(K2.port_a, port_b3)
     annotation (Line(points={{-40,-100},{-40,-160}}, color={0,127,255}));
   connect(K3.port_b, port_a2)
     annotation (Line(points={{0,-80},{0,-60},{100,-60}}, color={0,127,255}));
@@ -185,7 +184,7 @@ equation
 
   connect(K4.port_a, pumpInterface_SpeedControlledNrpm.port_b) annotation (Line(
         points={{60,-100},{50,-100},{50,-118}}, color={0,127,255}));
-  connect(pumpInterface_SpeedControlledNrpm.port_a, port_b3) annotation (Line(
+  connect(pumpInterface_SpeedControlledNrpm.port_a, port_a3) annotation (Line(
         points={{50,-138},{50,-160},{40,-160}}, color={0,127,255}));
   connect(pumpInterface_SpeedControlledNrpm.pumpBus, sWUBus.pumpBus)
     annotation (Line(

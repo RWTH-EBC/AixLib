@@ -1,7 +1,12 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller;
-model CtrSWU "Mode based controller for switching unit"
+model CtrSWU "Mode based controller for switching unit 
+Mode 1: GTF for heating mode
+Mode 2: GTF and Consumer for heating mode
+Mode 3: free cooling of consumers with GTF
+Mode 4: No GTF, cooling of consumers with HP
+Mode 5: Cooling with GTF and HP"
 
-  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
+  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the pump";
   BaseClasses.SwitchingUnitBus sWUBus annotation (Placement(transformation(
           extent={{80,-18},{120,18}}), iconTransformation(extent={{84,-16},{
             116,16}})));
@@ -121,14 +126,14 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(booleanExpression.y, sWUBus.pumpBus.onOff_Input) annotation (Line(
-        points={{1,64},{44,64},{44,60},{100,60},{100,0}},        color={255,0,255}),
+        points={{1,64},{44,64},{44,60},{100.1,60},{100.1,0.09}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const.y, sWUBus.pumpBus.rpm_Input) annotation (Line(points={{1,90},{
-          100,90},{100,0}},  color={0,0,127}), Text(
+  connect(const.y, sWUBus.pumpBus.rpm_Input) annotation (Line(points={{1,90},{100.1,
+          90},{100.1,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -157,5 +162,13 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}),                               Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>Controller for switchung unit: routing between consumer, geothermal field (gtf) and heatpump (HP)</p>
+<p><br>Mode 1: GTF for heating mode</p>
+<p>Mode 2: GTF and Consumer for heating mode</p>
+<p>Mode 3: free cooling of consumers with GTF</p>
+<p>Mode 4: No GTF, cooling of consumers with HP</p>
+<p>Mode 5: Cooling with GTF and HP</p>
+</html>"));
 end CtrSWU;

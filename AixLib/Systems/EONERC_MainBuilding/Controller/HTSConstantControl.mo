@@ -1,9 +1,9 @@
 within AixLib.Systems.EONERC_MainBuilding.Controller;
 model HTSConstantControl
   "Constant input for test purposes of high termperature system"
-  BaseClasses.HighTemperatureSystemBus highTemperatureSystemBus annotation (
-      Placement(transformation(extent={{82,-16},{118,18}}), iconTransformation(
-          extent={{84,-14},{116,16}})));
+  BaseClasses.HighTempSystemBus highTemperatureSystemBus annotation (Placement(
+        transformation(extent={{82,-16},{118,18}}), iconTransformation(extent={
+            {84,-14},{116,16}})));
   Modelica.Blocks.Sources.Constant rpmPumps(k=2000)
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   Modelica.Blocks.Sources.Constant valveOpening(k=0.5)

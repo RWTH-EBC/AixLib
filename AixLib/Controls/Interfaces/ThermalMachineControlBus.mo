@@ -1,13 +1,13 @@
 within AixLib.Controls.Interfaces;
-expandable connector HeatPumpControlBus
-"Standard data bus with heat pump information"
+expandable connector ThermalMachineControlBus
+  "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;
 
 Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm N "rotational speed compressor"
   annotation (HideResult=false);
 Boolean onOff "true: on" annotation (HideResult=false);
 
-Boolean mode "true: heat pump, false: chiller";
+Boolean mode "true: main operation mode, false: reversible operation mode";
 
 Modelica.SIunits.ThermodynamicTemperature T_flow_ev "temperature of flow into evaporator";
 
@@ -44,4 +44,4 @@ annotation (
 <p>First implementation. </p>
 </html>"));
 
-end HeatPumpControlBus;
+end ThermalMachineControlBus;

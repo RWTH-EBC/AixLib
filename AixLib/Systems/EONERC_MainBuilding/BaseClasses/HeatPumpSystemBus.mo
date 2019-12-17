@@ -3,20 +3,27 @@ expandable connector HeatPumpSystemBus
   "Data bus for ERC Heatpump system"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  AixLib.Controls.Interfaces.HeatPumpControlBus busHP;
+  AixLib.Controls.Interfaces.ThermalMachineControlBus busHP;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleHS;
   HydraulicModules.BaseClasses.HydraulicBus busPumpHot;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleRecool;
   HydraulicModules.BaseClasses.HydraulicBus busPumpCold;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleCS;
   HydraulicModules.BaseClasses.HydraulicBus busThrottleFreecool;
-  Boolean AirCoolerOn "Cooler for reccoling or freecooling";
+  Boolean AirCoolerOnSet "Cooler for reccoling or freecooling";
 
-  SI.Temperature TTopHS "Temperature in top layer of heat storage";
-  SI.Temperature TBottomHS "Temperature in bottom layer of heat storage";
-  SI.Temperature TTopCS "Temperature in top layer of cold storage";
-  SI.Temperature TBottomCS "Temperature in bottom layer of cold storage";
-
+  SI.Power PelAirCoolerMea "Electrica Power consumption of air cool";
+  SI.Temperature TTopHSMea "Temperature in top layer of heat storage";
+  SI.Temperature TBottomHSMea "Temperature in bottom layer of heat storage";
+  SI.Temperature TTopCSMea "Temperature in top layer of cold storage";
+  SI.Temperature TBottomCSMea "Temperature in bottom layer of cold storage";
+  SI.Temperature THotInMea "Inflow temperature hot side";
+  SI.Temperature THotOutMea "Outflow temperature hot side";
+  SI.Temperature TColdInMea "Inflow temperature hot side";
+  SI.Temperature TColdOutMea "Outflow temperature cold side";
+  SI.VolumeFlowRate  VFlowHotMea  "Volume flow hot side of heatpump system";
+  SI.VolumeFlowRate  VFlowColdMea "Volume flow cold side of heatpump system";
+  SI.Temperature TOutsideMea "Outside air temperature";
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

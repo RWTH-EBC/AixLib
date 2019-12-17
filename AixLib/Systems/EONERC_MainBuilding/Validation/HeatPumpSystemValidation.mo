@@ -60,7 +60,7 @@ model HeatPumpSystemValidation "Validation of HeatpumpSystem"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-70,-70})));
-  BaseClasses.DataHPSystem dataHPSystem
+  DataHPSystem dataHPSystem
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 equation
   connect(boundary5.ports[1], heatpumpSystem.port_a2) annotation (Line(points={

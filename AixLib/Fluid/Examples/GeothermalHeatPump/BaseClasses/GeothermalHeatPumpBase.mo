@@ -205,7 +205,7 @@ partial model GeothermalHeatPumpBase
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-89,-54})));
-  Controls.Interfaces.HeatPumpControlBus        heatPumpControlBus
+  Controls.Interfaces.ThermalMachineControlBus heatPumpControlBus
     annotation (Placement(transformation(extent={{-21,60},{20,98}})));
 equation
 

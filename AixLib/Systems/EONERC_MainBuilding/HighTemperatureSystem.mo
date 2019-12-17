@@ -8,7 +8,7 @@ model HighTemperatureSystem
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start
+  parameter Modelica.SIunits.Temperature T_start = 60
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
   parameter Modelica.SIunits.Temperature T_amb "Ambient temperature";
@@ -98,9 +98,9 @@ model HighTemperatureSystem
     param=DataBase.CHP.CHPDataSimple.CHP_Cleanergy_C9G(),
     minCapacity=0.3)
     annotation (Placement(transformation(extent={{-88,-72},{-112,-48}})));
-  BaseClasses.HighTemperatureSystemBus hTCBus annotation (Placement(
-        transformation(extent={{-18,82},{18,116}}), iconTransformation(extent={{
-            -14,84},{16,114}})));
+  BaseClasses.HighTempSystemBus hTCBus annotation (Placement(transformation(
+          extent={{-18,82},{18,116}}), iconTransformation(extent={{-14,84},{16,
+            114}})));
 
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
         T_amb)
@@ -255,8 +255,8 @@ equation
     annotation (Line(points={{120,60},{112,60}}, color={0,127,255}));
   connect(port_a, senT_b.port_a)
     annotation (Line(points={{120,20},{112,20}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b[1], senT_a.port_a) annotation (Line(points={{
-          92.6667,52},{92,52},{92,60},{100,60}}, color={0,127,255}));
+  connect(plugFlowPipe.ports_b[1], senT_a.port_a) annotation (Line(points={{92.6667,
+          52},{92,52},{92,60},{100,60}},         color={0,127,255}));
   connect(plugFlowPipe.port_a, senT_b.port_b)
     annotation (Line(points={{90,32},{90,20},{100,20}}, color={0,127,255}));
   connect(admix1.port_a1, plugFlowPipe.port_a)
@@ -271,8 +271,8 @@ equation
           -88,20},{-90,20},{-90,32},{90,32}}, color={0,127,255}));
   connect(throttlePump.port_b2, plugFlowPipe.ports_b[3]) annotation (Line(
         points={{-112,20},{-114,20},{-114,52},{87.3333,52}}, color={0,127,255}));
-  connect(plugFlowPipe.heatPort, fixedTemperature.port) annotation (Line(points
-        ={{80,42},{32,42},{32,-90},{20,-90}}, color={191,0,0}));
+  connect(plugFlowPipe.heatPort, fixedTemperature.port) annotation (Line(points=
+         {{80,42},{32,42},{32,-90},{20,-90}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(

@@ -1,7 +1,9 @@
 HeatPumpSystemDataInput
 HeatPumpSystemConstantControl
 CtrSWU
-CtrHXSsystem
 HTSConstantControl
 CtrHighTemperatureSystem
 HeatPumpSystemSimpleControl
+CtrGTFSimple
+CtrHXsimple
+EonERCModeControl
