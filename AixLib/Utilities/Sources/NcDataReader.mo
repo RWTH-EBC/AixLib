@@ -96,7 +96,6 @@ equation
     end for;
   end if;
   annotation (
-    uses(NcDataReader2(version="2.4.0")),
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           lineColor={200,200,200},
