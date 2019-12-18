@@ -1,5 +1,6 @@
 within AixLib.Systems.Benchmark.Controller;
-model BenchmarkBaseControl "Mode based control for HP system, and GTF"
+model BenchmarkBaseControl
+  "Mode based control for HP system, and GTF"
   parameter Real rpmC=1750 "RPM for pump on cold side";
   parameter Real rpmH=2820 "RPM for pump hot side";
   Modelica.Blocks.Sources.Constant rpmPumpCold(k=rpmC)
@@ -62,6 +63,18 @@ model BenchmarkBaseControl "Mode based control for HP system, and GTF"
   ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic4(
       TFlowSet=294.15)
     annotation (Placement(transformation(extent={{-100,-160},{-80,-140}})));
+  CtrTabs ctrTabs
+    annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
+  CtrTabs ctrTabs1
+    annotation (Placement(transformation(extent={{-40,-100},{-20,-80}})));
+  CtrTabs ctrTabs2
+    annotation (Placement(transformation(extent={{-40,-120},{-20,-100}})));
+  CtrTabs ctrTabs3
+    annotation (Placement(transformation(extent={{-40,-140},{-20,-120}})));
+  CtrTabs ctrTabs4
+    annotation (Placement(transformation(extent={{-40,-160},{-20,-140}})));
+  CtrHTSSystem ctrHTSSystem
+    annotation (Placement(transformation(extent={{0,-140},{20,-120}})));
 equation
   connect(rpmPumpCold.y, bus.hpSystemBus.busPumpCold.pumpBus.rpm_Input) annotation (Line(
         points={{86.4,-18},{100.07,-18},{100.07,-0.935}}, color={0,0,127}),
@@ -105,8 +118,9 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrHP.T_con, bus.busHP.T_ret_co) annotation (Line(points={{-83.6,76},
-          {-96,76},{-96,108},{100,108},{100,-1}},           color={0,0,127}),
+  connect(ctrHP.T_con, bus.hpSystemBus.busHP.T_ret_co) annotation (Line(points={{-83.6,
+          76},{-96,76},{-96,108},{100.07,108},{100.07,-0.935}},
+                                                            color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -227,7 +241,7 @@ equation
   connect(ctrHP.On, modeStateSelector.hpOn) annotation (Line(points={{-38,74},{
           -20,74},{-20,38},{-76,38},{-76,-1},{-59.96,-1}}, color={255,0,255}));
   connect(ctrSWU.sWUBus, bus.swuBus) annotation (Line(
-      points={{20,-70},{62,-70},{62,-68},{100.07,-68},{100.07,-0.935}},
+      points={{20,-70},{100.07,-70},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -235,7 +249,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrGTFSimple.gtfBus, bus.gtfBus) annotation (Line(
-      points={{21.3,-90},{60,-90},{60,-92},{100.07,-92},{100.07,-0.935}},
+      points={{21.3,-90},{100.07,-90},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -243,8 +257,9 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(modeStateSelector.T_geo, bus.gtfBus.secBus.TRtrn_in) annotation (Line(
-        points={{-42.8,-25.78},{-42.8,-160},{102,-160},{102,-0.935},{100.07,
-          -0.935}}, color={0,0,127}), Text(
+        points={{-42.8,-25.78},{-42.8,-40},{-100,-40},{-100,-160},{100,-160},{100,
+          -0.935},{100.07,-0.935}},
+                    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -260,24 +275,25 @@ equation
   connect(modeStateSelector.freeCoolingGC, gcOn.u2) annotation (Line(points={{
           -9.8,-1},{18.1,-1},{18.1,-0.6},{44.6,-0.6}}, color={255,0,255}));
   connect(modeStateSelector.T_air, bus.hpSystemBus.TOutsideMea) annotation (
-      Line(points={{-25.2,-25.78},{-25.2,-160},{100.07,-160},{100.07,-0.935}},
+      Line(points={{-25.2,-25.78},{-25.2,-40},{-100,-40},{-100,-158},{100.07,-158},
+          {100.07,-0.935}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ctrAHUBasic.genericAHUBus, bus.ahuBus) annotation (Line(
-      points={{20,-109.9},{54,-109.9},{54,-108},{100.07,-108},{100.07,-0.935}},
-
+      points={{20,-109.9},{52,-109.9},{52,-110},{100.07,-110},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+
   connect(ctrVentilationUnitBasic.genericAHUBus, bus.vu1Bus) annotation (Line(
-      points={{-80,-69.9},{-68,-69.9},{-68,-70},{-60,-70},{-60,-160},{100.07,
-          -160},{100.07,-0.935}},
+      points={{-80,-69.9},{-68,-69.9},{-68,-70},{-60,-70},{-60,-160},{100.07,-160},
+          {100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -285,8 +301,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrVentilationUnitBasic1.genericAHUBus, bus.vu2Bus) annotation (Line(
-      points={{-80,-89.9},{-70,-89.9},{-70,-90},{-60,-90},{-60,-158},{100.07,
-          -158},{100.07,-0.935}},
+      points={{-80,-89.9},{-70,-89.9},{-70,-90},{-60,-90},{-60,-158},{100.07,-158},
+          {100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -294,8 +310,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrVentilationUnitBasic2.genericAHUBus, bus.vu3Bus) annotation (Line(
-      points={{-80,-109.9},{-74,-109.9},{-74,-110},{-60,-110},{-60,-160},{
-          100.07,-160},{100.07,-0.935}},
+      points={{-80,-109.9},{-74,-109.9},{-74,-110},{-60,-110},{-60,-160},{100.07,
+          -160},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -303,8 +319,8 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrVentilationUnitBasic3.genericAHUBus, bus.vu4Bus) annotation (Line(
-      points={{-80,-129.9},{-72,-129.9},{-72,-130},{-60,-130},{-60,-160},{
-          100.07,-160},{100.07,-0.935}},
+      points={{-80,-129.9},{-72,-129.9},{-72,-130},{-60,-130},{-60,-160},{100.07,
+          -160},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -312,16 +328,70 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrVentilationUnitBasic4.genericAHUBus, bus.vu5Bus) annotation (Line(
-      points={{-80,-149.9},{-70,-149.9},{-70,-150},{-60,-150},{-60,-160},{
-          100.07,-160},{100.07,-0.935}},
+      points={{-80,-149.9},{-70,-149.9},{-70,-150},{-60,-150},{-60,-160},{100.07,
+          -160},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -160},{100,100}}), graphics={Line(
+  connect(ctrTabs.tabsBus, bus.tabs1Bus) annotation (Line(
+      points={{-19.8,-69.8},{-8,-69.8},{-8,-158},{100.07,-158},{100.07,-0.935}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+
+  connect(ctrTabs1.tabsBus, bus.tabs2Bus) annotation (Line(
+      points={{-19.8,-89.8},{-8,-89.8},{-8,-160},{100,-160},{100,-80},{100.07,-80},
+          {100.07,-0.935}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrTabs2.tabsBus, bus.tabs3Bus) annotation (Line(
+      points={{-19.8,-109.8},{-8,-109.8},{-8,-160},{100,-160},{100,-80},{100.07,
+          -80},{100.07,-0.935}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrTabs3.tabsBus, bus.tabs4Bus) annotation (Line(
+      points={{-19.8,-129.8},{-8,-129.8},{-8,-158},{100,-158},{100,-80},{100.07,
+          -80},{100.07,-0.935}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrTabs4.tabsBus, bus.tabs5Bus) annotation (Line(
+      points={{-19.8,-149.8},{-8,-149.8},{-8,-160},{100,-160},{100,-80},{100.07,
+          -80},{100.07,-0.935}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ctrHTSSystem.htsBus, bus.htsBus) annotation (Line(
+      points={{20,-129.9},{56,-129.9},{56,-130},{100.07,-130},{100.07,-0.935}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},
+            {100,100}}),       graphics={Line(
           points={{20,80},{80,0},{40,-80}},
           color={95,95,95},
           thickness=0.5),
@@ -349,6 +419,5 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}),                               Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},{100,
-            100}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-160},{100,100}})));
 end BenchmarkBaseControl;

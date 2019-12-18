@@ -1,12 +1,12 @@
 within AixLib.Systems.Benchmark.Controller;
 model CtrTabs "Controller for concrete core activation"
   parameter Boolean useExternalTset = false "If True, set temperature can be given externally";
-  parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer";
-  parameter Real k(min=0, unit="1") = 0.025 "Gain of controller";
+  parameter Modelica.SIunits.Temperature TflowSet = 293.15 "Flow temperature set point of consumer";
+  parameter Real k(min=0, unit="1") = 0.02 "Gain of controller";
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
-  parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
+  parameter Modelica.SIunits.Time Td(min=0)= 0 "Time constant of Derivative block";
+  parameter Real rpm_pump(min=0, unit="1") = 1000 "Rpm of the Pump";
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
@@ -21,8 +21,8 @@ model CtrTabs "Controller for concrete core activation"
   parameter Real y_start=0 "Initial value of output"
     annotation(Dialog(group="PID"));
 
-  BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{82,
-            -20},{120,20}}), iconTransformation(extent={{86,-16},{118,20}})));
+  BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{82,-20},
+            {120,20}}), iconTransformation(extent={{86,-16},{118,20}})));
   Controls.Continuous.LimPID        PID(
     final yMax=1,
     final yMin=0,
@@ -62,7 +62,9 @@ model CtrTabs "Controller for concrete core activation"
   Modelica.Blocks.Logical.Greater heatingMode
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
   Modelica.Blocks.Math.BooleanToReal booleanToReal
-    annotation (Placement(transformation(extent={{-20,60},{0,80}})));
+    annotation (Placement(transformation(extent={{0,60},{20,80}})));
+  Modelica.Blocks.Logical.Not not1
+    annotation (Placement(transformation(extent={{-20,64},{-8,76}})));
 equation
     connect(PID.u_s,Tset)  annotation (Line(
       points={{-22,-30},{-47.1,-30},{-47.1,0},{-120,0}},
@@ -86,23 +88,23 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID1.u_m, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{-10,
-          18},{100,18},{100,0.1},{101.095,0.1}}, color={0,0,127}), Text(
+  connect(PID1.u_m, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{-10,18},
+          {100,18},{100,0.1},{101.095,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{-10,
-          -42},{100,-42},{100,-22},{101.095,-22},{101.095,0.1}}, color={0,0,127}),
+  connect(PID.u_m, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{-10,-42},
+          {100,-42},{100,-22},{101.095,-22},{101.095,0.1}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID1.y, switch1.u1) annotation (Line(points={{1,30},{14,30},{14,-2},{
-          18,-2}}, color={0,0,127}));
-  connect(PID.y, switch1.u3) annotation (Line(points={{1,-30},{6,-30},{6,-22},{
-          18,-22},{18,-18}}, color={0,0,127}));
+  connect(PID1.y, switch1.u1) annotation (Line(points={{1,30},{14,30},{14,-2},{18,
+          -2}}, color={0,0,127}));
+  connect(PID.y, switch1.u3) annotation (Line(points={{1,-30},{6,-30},{6,-22},{18,
+          -22},{18,-18}}, color={0,0,127}));
   connect(switch1.y, tabsBus.admixBus.valSet) annotation (Line(points={{41,-10},
           {58,-10},{58,-8},{101.095,-8},{101.095,0.1}}, color={0,0,127}), Text(
       string="%second",
@@ -117,30 +119,33 @@ equation
       points={{-79,-50},{-48,-50},{-48,30},{-22,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(heatingMode.u1, tabsBus.admixBus.TFwrd_out) annotation (Line(points={
-          {-62,70},{-100,70},{-100,100},{101.095,100},{101.095,0.1}}, color={0,
-          0,127}), Text(
+  connect(heatingMode.u1, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{
+          -62,70},{-100,70},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(heatingMode.u2, tabsBus.admixBus.TRtrn_in) annotation (Line(points={{
-          -62,62},{-100,62},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,
-          127}), Text(
+  connect(heatingMode.u2, tabsBus.admixBus.TRtrn_in) annotation (Line(points={{-62,
+          62},{-100,62},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(heatingMode.y, switch1.u2) annotation (Line(points={{-39,70},{-32,70},
           {-32,-10},{18,-10}}, color={255,0,255}));
-  connect(heatingMode.y, booleanToReal.u)
-    annotation (Line(points={{-39,70},{-22,70}}, color={255,0,255}));
-  connect(booleanToReal.y, tabsBus.valSet) annotation (Line(points={{1,70},{8,
-          70},{8,100},{101.095,100},{101.095,0.1}}, color={0,0,127}), Text(
+  connect(booleanToReal.y, tabsBus.valSet) annotation (Line(points={{21,70},{32,
+          70},{32,100},{101.095,100},{101.095,0.1}},
+                                                color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(heatingMode.y, not1.u)
+    annotation (Line(points={{-39,70},{-21.2,70}}, color={255,0,255}));
+  connect(not1.y, booleanToReal.u)
+    annotation (Line(points={{-7.4,70},{-2,70}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-80,20},{66,-20}},

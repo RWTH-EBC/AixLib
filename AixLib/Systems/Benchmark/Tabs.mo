@@ -55,7 +55,8 @@ model Tabs "Concrete core activation"
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare package Medium =
         Medium)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
-    annotation (Placement(transformation(extent={{30,-110},{50,-90}})));
+    annotation (Placement(transformation(extent={{70,-110},{90,-90}}),
+        iconTransformation(extent={{70,-108},{90,-88}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a2(redeclare package Medium =
         Medium)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
@@ -64,8 +65,8 @@ model Tabs "Concrete core activation"
   Modelica.Fluid.Interfaces.FluidPort_b port_b2(redeclare package Medium =
         Medium)
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
-    annotation (Placement(transformation(extent={{70,-110},{90,-90}}),
-        iconTransformation(extent={{70,-108},{90,-88}})));
+    annotation (Placement(transformation(extent={{30,-110},{50,-90}}),
+        iconTransformation(extent={{30,-108},{50,-88}})));
   Fluid.Actuators.Valves.ThreeWayLinear val(
     redeclare package Medium = Medium,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -150,16 +151,16 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(convection.Gc, const.y)
     annotation (Line(points={{-10,80},{-19,80}}, color={0,0,127}));
-  connect(port_b2, res1.port_b) annotation (Line(points={{80,-100},{82,-100},{
-          82,-60},{78,-60}}, color={0,127,255}));
   connect(admix.port_b2, res1.port_a)
     annotation (Line(points={{24,-50},{24,-60},{58,-60}}, color={0,127,255}));
   connect(admix.port_b2, res2.port_a) annotation (Line(points={{24,-50},{26,-50},
           {26,-66},{40,-66}}, color={0,127,255}));
-  connect(res2.port_b, port_b1)
-    annotation (Line(points={{40,-86},{40,-100}}, color={0,127,255}));
   connect(pipe.ports_b[1], admix.port_a2)
     annotation (Line(points={{10,46},{24,46},{24,30}}, color={0,127,255}));
+  connect(res2.port_b, port_b2)
+    annotation (Line(points={{40,-86},{40,-100}}, color={0,127,255}));
+  connect(res1.port_b, port_b1)
+    annotation (Line(points={{78,-60},{80,-60},{80,-100}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,120}}),                                        graphics={
         Rectangle(
@@ -225,7 +226,7 @@ equation
           thickness=0.5),
         Line(
           points={{-80,-90},{-80,-60},{-50,-60},{-48,-60}},
-          color={28,108,200},
+          color={244,125,35},
           thickness=0.5),
         Line(
           points={{-40,-52},{-40,70},{40,70},{40,-90}},
@@ -233,7 +234,7 @@ equation
           thickness=0.5),
         Line(
           points={{40,-60},{80,-60},{80,-88}},
-          color={28,108,200},
+          color={244,125,35},
           thickness=0.5),
         Ellipse(
           extent={{-8,8},{8,-8}},
