@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model.Generation.Examples;
+within AixLib.Systems.Benchmark.Examples;
 model Tabs "Test of Tabs"
   extends Modelica.Icons.Example;
       package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
@@ -10,7 +10,7 @@ model Tabs "Test of Tabs"
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={80,0})));
-  AixLib.Systems.Benchmark.Model.Generation.Tabs tabs(
+  AixLib.Systems.Benchmark.Tabs tabs(
     redeclare package Medium = Medium,
     C=1000*4*2000,
     Gc=10*20) annotation (Placement(transformation(extent={{-20,38},{20,78}})));

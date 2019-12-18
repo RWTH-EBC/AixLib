@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model.Generation;
+within AixLib.Systems.Benchmark;
 model HighTemperatureSystem
   "Boiler and chp system for high temperature generation"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
@@ -10,7 +10,6 @@ model HighTemperatureSystem
   parameter Modelica.SIunits.Temperature T_start = 303.15
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
-
 
   Fluid.BoilerCHP.BoilerNoControl
                    boilerNoControl(
@@ -84,9 +83,9 @@ model HighTemperatureSystem
     data=DataBase.Storage.Generic_22000l(),
     TStart=343.15)
     annotation (Placement(transformation(extent={{-16,-12},{16,28}})));
-  BaseClasses.HighTemperatureSystemBus highTemperatureSystemBus annotation (
-      Placement(transformation(extent={{-18,126},{14,156}}), iconTransformation(
-          extent={{-14,124},{16,156}})));
+  BaseClasses.HighTempSystemBus highTemperatureSystemBus annotation (Placement(
+        transformation(extent={{-18,126},{14,156}}), iconTransformation(extent=
+            {{-14,124},{16,156}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,

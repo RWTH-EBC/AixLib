@@ -62,7 +62,7 @@ model Generation_v2
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC2_warm = 0 annotation(Dialog(tab = "Storage"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC1_cold = 0 annotation(Dialog(tab = "Storage"));
 
-  HighTemperatureSystem generation_Hot(
+  AixLib.Systems.Benchmark.HighTemperatureSystem generation_Hot(
     m_flow_nominal_generation_hot=m_flow_nominal_generation_hot,
     redeclare package Medium_Water = Medium_Water,
     dpValve_nominal_generation_hot=dpValve_nominal_generation_hot)

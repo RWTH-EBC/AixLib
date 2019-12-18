@@ -22,12 +22,15 @@ model CtrVentilationUnitBasic "Simple controller for Ventilation Unit"
   CtrRegBasic ctrCo(
     final useExternalTset=true,
     Td=0,
+    initType=Modelica.Blocks.Types.InitPID.NoInit,
     final reverseAction=true) annotation (dialog(enable=True), Placement(
         transformation(extent={{0,40},{20,60}})));
   CtrRegBasic ctrRh(
     final useExternalTset=true,
     final useExternalTMea=false,
-    Td=0) annotation (dialog(enable=True), Placement(transformation(extent={{0,0},
+    Td=0,
+    initType=Modelica.Blocks.Types.InitPID.NoInit)
+          annotation (dialog(enable=True), Placement(transformation(extent={{0,0},
             {20,20}})));
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));

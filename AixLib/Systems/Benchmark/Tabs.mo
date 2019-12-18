@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model.Generation;
+within AixLib.Systems.Benchmark;
 model Tabs "Concrete core activation"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);

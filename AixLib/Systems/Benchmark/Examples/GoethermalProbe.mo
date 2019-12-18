@@ -1,4 +1,4 @@
-within AixLib.Systems.Benchmark.Model.Generation.Examples;
+within AixLib.Systems.Benchmark.Examples;
 model GoethermalProbe "Test of geothermal probe"
   extends Modelica.Icons.Example;
       package Medium = AixLib.Media.Water annotation (choicesAllMatching=true);
@@ -18,8 +18,9 @@ model GoethermalProbe "Test of geothermal probe"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-80,0})));
-  GeothermalProbe geothermalProbe(redeclare package Medium = Medium,
-      m_flow_nominal=2,
+  Model.Generation.GeothermalProbe geothermalProbe(
+    redeclare package Medium = Medium,
+    m_flow_nominal=2,
     nParallel=5)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Fluid.Sensors.TemperatureTwoPort senT_b(

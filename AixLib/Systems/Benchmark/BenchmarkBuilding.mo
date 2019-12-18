@@ -1,140 +1,84 @@
 within AixLib.Systems.Benchmark;
 model BenchmarkBuilding "Benchmark building model"
-  extends Modelica.Icons.Example;
-    package Medium = AixLib.Media.Water
+    package MediumWater = AixLib.Media.Water
+    annotation (choicesAllMatching=true);
+    package MediumAir = AixLib.Media.AirIncompressible
     annotation (choicesAllMatching=true);
   Fluid.Sources.Boundary_pT          boundary2(
-    redeclare package Medium = Medium,
+    redeclare package Medium = MediumWater,
     T=285.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={200,-60})));
-  Model.Generation.HeatpumpSystem heatpumpSystem(redeclare package Medium =
-        Medium)
+  HeatpumpSystem heatpumpSystem(redeclare package Medium = MediumWater)
     annotation (Placement(transformation(extent={{-40,-80},{70,-34}})));
   EONERC_MainBuilding.SwitchingUnit switchingUnit(redeclare package Medium =
-        Medium, m_flow_nominal=2) annotation (Placement(transformation(
+        MediumWater,
+                m_flow_nominal=2) annotation (Placement(transformation(
         extent={{20,-24},{-20,24}},
         rotation=0,
         origin={120,-56})));
   EONERC_MainBuilding.HeatExchangerSystem heatExchangerSystem(redeclare package
-      Medium = Medium, m_flow_nominal=2)
+      Medium = MediumWater,
+                       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-130,-40},{-60,8}})));
   Fluid.Sources.Boundary_pT          boundary1(
-    redeclare package Medium = Medium,
+    redeclare package Medium = MediumWater,
     T=343.15,
     nPorts=1) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{8,-8},{-8,8}},
         rotation=180,
-        origin={-208,-66})));
+        origin={-204,-66})));
   Fluid.Sources.Boundary_pT          boundary4(
-    redeclare package Medium = Medium,
+    redeclare package Medium = MediumWater,
     T=293.15,
     nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-86,62})));
-  EONERC_MainBuilding.Controller.CtrSWU ctrSWU
-    annotation (Placement(transformation(extent={{80,-20},{100,0}})));
-  Modelica.Blocks.Sources.IntegerExpression integerExpression(y=4)
-    annotation (Placement(transformation(extent={{52,-20},{72,0}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
     fixedTemperature(T=293.15)
     annotation (Placement(transformation(extent={{-20,-120},{0,-100}})));
-  Model.Generation.HighTemperatureSystem highTemperatureSystem(redeclare
-      package Medium = Medium, m_flow_nominal=10,
+  HighTemperatureSystem highTemperatureSystem(
+    redeclare package Medium = MediumWater,
+    m_flow_nominal=10,
     T_start=323.15)
     annotation (Placement(transformation(extent={{-188,-80},{-144,-34}})));
-  EONERC_MainBuilding.BaseClasses.HeatPumpSystemBus heatPumpSystemBus1
-    annotation (Placement(transformation(extent={{6,-34},{26,-14}})));
-  Model.Generation.BaseClasses.HighTemperatureSystemBus
-    highTemperatureSystemBus1
-    annotation (Placement(transformation(extent={{-178,-36},{-158,-16}})));
-  Model.Generation.Tabs tabs(
-    redeclare package Medium = Medium,
+  Tabs tabs(
+    redeclare package Medium = MediumWater,
     C=1000*4*2000,
     Gc=10*1000)
     annotation (Placement(transformation(extent={{140,120},{180,160}})));
-  Model.Generation.BaseClasses.TabsBus tabsBus1 annotation (Placement(
-        transformation(extent={{118,128},{138,148}}), iconTransformation(extent=
-           {{-48,46},{-28,66}})));
-  HydraulicModules.Controller.CtrMix ctrMix1(
-    TflowSet=298.15,
-    k=0.01,
-    Ti=60,
-    Td=0) annotation (Placement(transformation(extent={{96,130},{116,150}})));
-  Modelica.Blocks.Sources.Constant const(k=0)
-    annotation (Placement(transformation(extent={{100,120},{110,130}})));
-  Model.Generation.Tabs tabs1(
-    redeclare package Medium = Medium,
+  Tabs tabs1(
+    redeclare package Medium = MediumWater,
     C=1000*4*2000,
     Gc=10*1000)
     annotation (Placement(transformation(extent={{240,120},{280,160}})));
-  HydraulicModules.Controller.CtrMix ctrMix2(
-    TflowSet=298.15,
-    k=0.01,
-    Ti=60,
-    Td=0) annotation (Placement(transformation(extent={{196,130},{216,150}})));
-  Modelica.Blocks.Sources.Constant const1(k=0)
-    annotation (Placement(transformation(extent={{200,120},{210,130}})));
-  Model.Generation.BaseClasses.TabsBus tabsBus2 annotation (Placement(
-        transformation(extent={{218,128},{238,148}}), iconTransformation(extent=
-           {{-48,46},{-28,66}})));
-  Model.Generation.Tabs tabs2(
-    redeclare package Medium = Medium,
+  Tabs tabs2(
+    redeclare package Medium = MediumWater,
     C=1000*4*2000,
     Gc=10*1000)
     annotation (Placement(transformation(extent={{344,120},{384,160}})));
-  HydraulicModules.Controller.CtrMix ctrMix3(
-    TflowSet=298.15,
-    k=0.01,
-    Ti=60,
-    Td=0) annotation (Placement(transformation(extent={{296,130},{316,150}})));
-  Modelica.Blocks.Sources.Constant const2(k=0)
-    annotation (Placement(transformation(extent={{300,120},{310,130}})));
-  Model.Generation.BaseClasses.TabsBus tabsBus3 annotation (Placement(
-        transformation(extent={{318,128},{338,148}}), iconTransformation(extent=
-           {{-48,46},{-28,66}})));
-  Model.Generation.Tabs tabs3(
-    redeclare package Medium = Medium,
+  Tabs tabs3(
+    redeclare package Medium = MediumWater,
     C=1000*4*2000,
     Gc=10*1000)
     annotation (Placement(transformation(extent={{440,120},{480,160}})));
-  HydraulicModules.Controller.CtrMix ctrMix4(
-    TflowSet=298.15,
-    k=0.01,
-    Ti=60,
-    Td=0) annotation (Placement(transformation(extent={{396,130},{416,150}})));
-  Modelica.Blocks.Sources.Constant const3(k=0)
-    annotation (Placement(transformation(extent={{400,120},{410,130}})));
-  Model.Generation.BaseClasses.TabsBus tabsBus4 annotation (Placement(
-        transformation(extent={{418,128},{438,148}}), iconTransformation(extent=
-           {{-48,46},{-28,66}})));
-  Model.Generation.Tabs tabs4(
-    redeclare package Medium = Medium,
+  Tabs tabs4(
+    redeclare package Medium = MediumWater,
     C=1000*4*2000,
     Gc=10*1000)
     annotation (Placement(transformation(extent={{540,120},{580,160}})));
-  HydraulicModules.Controller.CtrMix ctrMix5(
-    TflowSet=298.15,
-    k=0.01,
-    Ti=60,
-    Td=0) annotation (Placement(transformation(extent={{496,130},{516,150}})));
-  Modelica.Blocks.Sources.Constant const4(k=0)
-    annotation (Placement(transformation(extent={{500,120},{510,130}})));
-  Model.Generation.BaseClasses.TabsBus tabsBus5 annotation (Placement(
-        transformation(extent={{518,128},{538,148}}), iconTransformation(extent=
-           {{-48,46},{-28,66}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone(
-    redeclare package Medium = Media.Air,
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
+    redeclare package Medium = MediumAir,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=293.15,
-    nPorts=2)
-    "Thermal zone"
+    nPorts=2) "Thermal zone"
     annotation (Placement(transformation(extent={{122,338},{154,366}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -242,9 +186,10 @@ model BenchmarkBuilding "Benchmark building model"
   BoundaryConditions.WeatherData.Bus        weaBus
     "Weather data bus"
     annotation (Placement(transformation(extent={{54,328},{88,360}}),
-    iconTransformation(extent={{-70,-12},{-50,8}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone1(
-    redeclare package Medium = Media.Air,
+    iconTransformation(extent={{-150,388},{-130,408}})));
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
+    redeclare package Medium = MediumAir,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -253,8 +198,9 @@ model BenchmarkBuilding "Benchmark building model"
     nPorts=2)
     "Thermal zone"
     annotation (Placement(transformation(extent={{240,338},{272,364}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
-    redeclare package Medium = Media.Air,
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone3(
+    redeclare package Medium = MediumAir,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -263,8 +209,9 @@ model BenchmarkBuilding "Benchmark building model"
     nPorts=2)
     "Thermal zone"
     annotation (Placement(transformation(extent={{346,338},{374,364}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone3(
-    redeclare package Medium = Media.Air,
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone4(
+    redeclare package Medium = MediumAir,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -273,8 +220,9 @@ model BenchmarkBuilding "Benchmark building model"
     nPorts=2)
     "Thermal zone"
     annotation (Placement(transformation(extent={{444,338},{470,366}})));
-  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone4(
-    redeclare package Medium = Media.Air,
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone5(
+    redeclare package Medium = MediumAir,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
@@ -284,8 +232,8 @@ model BenchmarkBuilding "Benchmark building model"
     "Thermal zone"
     annotation (Placement(transformation(extent={{538,340},{568,370}})));
   ModularAHU.GenericAHU                genericAHU(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Medium,
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=3000/3600*1.2,
     m2_flow_nominal=0.5,
@@ -369,25 +317,9 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-140,274})));
-  ModularAHU.Controller.CtrAHUBasic ctrAHUBasic(
-    TFlowSet=293.15,
-    k=1,
-    ctrPh(
-      k=0.01,
-      rpm_pump=4000,
-      initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrRh(
-      k=0.01,
-      rpm_pump=4000,
-      initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrCo(
-      k=0.01,
-      rpm_pump=4000,
-      initType=Modelica.Blocks.Types.InitPID.InitialOutput))
-    annotation (Placement(transformation(extent={{-100,306},{-80,326}})));
-  ModularAHU.VentilationUnit                ventilationUnit(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+  ModularAHU.VentilationUnit ventilationUnit1(
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
@@ -420,15 +352,9 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{32,236},{70,276}})));
-  ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic(
-    TFlowSet=293.15,
-    k=0.001,
-    ctrCo(initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrRh(initType=Modelica.Blocks.Types.InitPID.InitialOutput))
-    annotation (Placement(transformation(extent={{22,286},{36,300}})));
-  ModularAHU.VentilationUnit                ventilationUnit1(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+  ModularAHU.VentilationUnit                ventilationUnit2(
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
@@ -461,15 +387,9 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{202,236},{240,276}})));
-  ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic1(
-    TFlowSet=293.15,
-    k=0.001,
-    ctrCo(initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrRh(initType=Modelica.Blocks.Types.InitPID.InitialOutput))
-    annotation (Placement(transformation(extent={{194,286},{208,300}})));
-  ModularAHU.VentilationUnit                ventilationUnit2(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+  ModularAHU.VentilationUnit                ventilationUnit3(
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
@@ -502,15 +422,9 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{300,236},{338,276}})));
-  ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic2(
-    TFlowSet=293.15,
-    k=0.001,
-    ctrCo(initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrRh(initType=Modelica.Blocks.Types.InitPID.InitialOutput))
-    annotation (Placement(transformation(extent={{292,286},{306,300}})));
-  ModularAHU.VentilationUnit                ventilationUnit3(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+  ModularAHU.VentilationUnit                ventilationUnit4(
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
@@ -543,15 +457,9 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{400,236},{438,276}})));
-  ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic3(
-    TFlowSet=293.15,
-    k=0.001,
-    ctrCo(initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrRh(initType=Modelica.Blocks.Types.InitPID.InitialOutput))
-    annotation (Placement(transformation(extent={{394,286},{408,300}})));
-  ModularAHU.VentilationUnit                ventilationUnit4(
-    redeclare package Medium1 = Media.Air,
-    redeclare package Medium2 = Media.Water,
+  ModularAHU.VentilationUnit                ventilationUnit5(
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
@@ -584,25 +492,15 @@ model BenchmarkBuilding "Benchmark building model"
         dT_nom=10,
         Q_nom=2000)))
     annotation (Placement(transformation(extent={{510,242},{548,282}})));
-  ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic4(
-    TFlowSet=293.15,
-    k=0.001,
-    ctrCo(initType=Modelica.Blocks.Types.InitPID.InitialOutput),
-    ctrRh(initType=Modelica.Blocks.Types.InitPID.InitialOutput))
-    annotation (Placement(transformation(extent={{502,286},{516,300}})));
   EONERC_MainBuilding.GeothermalFieldSimple geothermalFieldSimple(
-    redeclare package Medium = Medium,
+    redeclare package Medium = MediumWater,
     m_flow_nominal=2,
     T_amb=293.15,
     V=7000,
     G=2000)
     annotation (Placement(transformation(extent={{132,-120},{108,-88}})));
-  EONERC_MainBuilding.Controller.CtrGTFSimple ctrGTFSimple
-    annotation (Placement(transformation(extent={{178,-108},{158,-88}})));
-  EONERC_MainBuilding.Controller.CtrHXsimple ctrHXsimple
-    annotation (Placement(transformation(extent={{-126,16},{-106,36}})));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant
-    annotation (Placement(transformation(extent={{216,-108},{196,-88}})));
+  BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{152,
+            394},{198,452}}), iconTransformation(extent={{110,388},{170,444}})));
 equation
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
         points={{100,-60},{80,-60},{80,-59.5556},{70,-59.5556}},
@@ -612,154 +510,20 @@ equation
                                                     color={0,127,255}));
   connect(boundary4.ports[1], heatExchangerSystem.port_b2)
     annotation (Line(points={{-76,62},{-76,8},{-75,8}},   color={0,127,255}));
-  connect(ctrSWU.sWUBus, switchingUnit.sWUBus) annotation (Line(
-      points={{100,-10},{120,-10},{120,-31.6},{120.2,-31.6}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ctrSWU.mode, integerExpression.y)
-    annotation (Line(points={{80,-10},{73,-10}}, color={255,127,0}));
   connect(fixedTemperature.port, heatpumpSystem.T_outside) annotation (Line(
         points={{0,-110},{14,-110},{14,-77.4444},{15,-77.4444}}, color={191,0,0}));
   connect(highTemperatureSystem.port_b, heatExchangerSystem.port_a1)
     annotation (Line(points={{-144,-66.2},{-142,-66.2},{-142,-66},{-138,-66},{
-          -138,-20.8},{-130,-20.8}}, color={0,127,255}));
+          -138,-20.8},{-130,-20.8}}, color={238,46,47}));
   connect(highTemperatureSystem.port_a, heatExchangerSystem.port_b1)
     annotation (Line(points={{-188,-66.2},{-188,-66},{-194,-66},{-194,-11.2},{
-          -130,-11.2}}, color={0,127,255}));
+          -130,-11.2}}, color={238,46,47}));
   connect(boundary1.ports[1], highTemperatureSystem.port_a) annotation (Line(
-        points={{-198,-66},{-196,-66},{-196,-66.2},{-188,-66.2}}, color={0,127,
+        points={{-196,-66},{-196,-66.2},{-188,-66.2}},            color={0,127,
           255}));
   connect(boundary2.ports[1], switchingUnit.port_b2)
     annotation (Line(points={{190,-60},{166,-60},{166,-60},{140,-60}},
                                                    color={0,127,255}));
-  connect(heatpumpSystem.heatPumpSystemBus, heatPumpSystemBus1) annotation (
-      Line(
-      points={{15,-34},{16,-34},{16,-24}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(highTemperatureSystem.highTemperatureSystemBus,
-    highTemperatureSystemBus1) annotation (Line(
-      points={{-165.78,-34},{-165.78,-30},{-168,-30},{-168,-26}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(tabs.tabsBus, tabsBus1) annotation (Line(
-      points={{139.8,138.364},{130.9,138.364},{130.9,138},{128,138}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(ctrMix1.hydraulicBus, tabsBus1.admixBus) annotation (Line(
-      points={{115.3,138.9},{115.65,138.9},{115.65,138.05},{128.05,138.05}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(const.y, tabsBus1.valSet) annotation (Line(points={{110.5,125},{128,
-          125},{128,126},{128.05,126},{128.05,138.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(tabs1.tabsBus, tabsBus2) annotation (Line(
-      points={{239.8,138.364},{230.9,138.364},{230.9,138},{228,138}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(ctrMix2.hydraulicBus, tabsBus2.admixBus) annotation (Line(
-      points={{215.3,138.9},{215.65,138.9},{215.65,138.05},{228.05,138.05}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(const1.y, tabsBus2.valSet) annotation (Line(points={{210.5,125},{228,
-          125},{228,126},{228.05,126},{228.05,138.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(tabs2.tabsBus, tabsBus3) annotation (Line(
-      points={{343.8,138.364},{330.9,138.364},{330.9,138},{328,138}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(ctrMix3.hydraulicBus, tabsBus3.admixBus) annotation (Line(
-      points={{315.3,138.9},{315.65,138.9},{315.65,138.05},{328.05,138.05}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(const2.y, tabsBus3.valSet) annotation (Line(points={{310.5,125},{328,
-          125},{328,126},{328.05,126},{328.05,138.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(tabs3.tabsBus, tabsBus4) annotation (Line(
-      points={{439.8,138.364},{430.9,138.364},{430.9,138},{428,138}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(ctrMix4.hydraulicBus, tabsBus4.admixBus) annotation (Line(
-      points={{415.3,138.9},{415.65,138.9},{415.65,138.05},{428.05,138.05}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(const3.y, tabsBus4.valSet) annotation (Line(points={{410.5,125},{428,
-          125},{428,126},{428.05,126},{428.05,138.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(tabs4.tabsBus, tabsBus5) annotation (Line(
-      points={{539.8,138.364},{530.9,138.364},{530.9,138},{528,138}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(ctrMix5.hydraulicBus, tabsBus5.admixBus) annotation (Line(
-      points={{515.3,138.9},{515.65,138.9},{515.65,138.05},{528.05,138.05}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(const4.y, tabsBus5.valSet) annotation (Line(points={{510.5,125},{528,
-          125},{528,126},{528.05,126},{528.05,138.05}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(switchingUnit.port_b2, tabs.port_a2) annotation (Line(points={{140,
           -60},{152,-60},{152,120}}, color={0,127,255}));
   connect(tabs4.port_a2, tabs.port_a2) annotation (Line(points={{552,120},{552,
@@ -781,26 +545,26 @@ equation
   connect(tabs3.port_b2, tabs.port_b2) annotation (Line(points={{476,120.364},{
           476,80},{176,80},{176,120.364}}, color={0,127,255}));
   connect(heatExchangerSystem.port_a3, tabs4.port_b1) annotation (Line(points={
-          {-65,8},{-64,8},{-64,40},{568,40},{568,120}}, color={238,46,47}));
+          {-65,8},{-64,8},{-64,40},{568,40},{568,120}}, color={244,125,35}));
   connect(heatExchangerSystem.port_b2, tabs4.port_a1) annotation (Line(points={
-          {-75,8},{-75,60},{544,60},{544,120}}, color={238,46,47}));
+          {-75,8},{-75,60},{544,60},{544,120}}, color={244,125,35}));
   connect(tabs.port_a1, tabs4.port_a1) annotation (Line(points={{144,120},{144,
-          60},{544,60},{544,120}}, color={238,46,47}));
+          60},{544,60},{544,120}}, color={244,125,35}));
   connect(tabs1.port_a1, tabs4.port_a1) annotation (Line(points={{244,120},{244,
-          60},{544,60},{544,120}}, color={238,46,47}));
+          60},{544,60},{544,120}}, color={244,125,35}));
   connect(tabs2.port_a1, tabs4.port_a1) annotation (Line(points={{348,120},{348,
-          60},{544,60},{544,120}}, color={238,46,47}));
+          60},{544,60},{544,120}}, color={244,125,35}));
   connect(tabs3.port_a1, tabs4.port_a1) annotation (Line(points={{444,120},{444,
-          60},{544,60},{544,120}}, color={238,46,47}));
+          60},{544,60},{544,120}}, color={244,125,35}));
   connect(tabs.port_b1, tabs4.port_b1) annotation (Line(points={{168,120},{168,
-          40},{568,40},{568,120}}, color={238,46,47}));
+          40},{568,40},{568,120}}, color={244,125,35}));
   connect(tabs1.port_b1, tabs4.port_b1) annotation (Line(points={{268,120},{268,
-          40},{568,40},{568,120}}, color={238,46,47}));
+          40},{568,40},{568,120}}, color={244,125,35}));
   connect(tabs2.port_b1, tabs4.port_b1) annotation (Line(points={{372,120},{370,
-          120},{370,40},{568,40},{568,120}}, color={238,46,47}));
+          120},{370,40},{568,40},{568,120}}, color={244,125,35}));
   connect(tabs3.port_b1, tabs4.port_b1) annotation (Line(points={{468,120},{470,
-          120},{470,40},{568,40},{568,120}}, color={238,46,47}));
-  connect(weaDat.weaBus,thermalZone. weaBus) annotation (Line(
+          120},{470,40},{568,40},{568,120}}, color={244,125,35}));
+  connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
       points={{60,378},{98,378},{98,352},{122,352}},
       color={255,204,51},
       thickness=0.5));
@@ -811,93 +575,90 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp,weaBus. TDryBul) annotation (Line(points={{119.92,
-          346.54},{96.35,346.54},{96.35,344},{71,344}},
-                                                     color={0,0,127}), Text(
+  connect(thermalZone1.ventTemp, weaBus.TDryBul) annotation (Line(points={{119.92,
+          346.54},{96.35,346.54},{96.35,344},{71,344}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const5.y, thermalZone.ventRate) annotation (Line(points={{61,318},{
-          126.8,318},{126.8,340.24}},
-                                 color={0,0,127}));
-  connect(internalGains.y,thermalZone. intGains)
-    annotation (Line(points={{102.7,328},{150.8,328},{150.8,340.24}},
-                                                          color={0,0,127}));
-  connect(tabs.heatPort, thermalZone.intGainsConv) annotation (Line(points={{160,
-          161.818},{162,161.818},{162,345},{154,345}},     color={191,0,0}));
-  connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
+  connect(const5.y, thermalZone1.ventRate) annotation (Line(points={{61,318},{126.8,
+          318},{126.8,340.24}}, color={0,0,127}));
+  connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{102.7,
+          328},{150.8,328},{150.8,340.24}}, color={0,0,127}));
+  connect(tabs.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{160,
+          161.818},{162,161.818},{162,345},{154,345}}, color={191,0,0}));
+  connect(weaDat.weaBus,thermalZone2. weaBus) annotation (Line(
       points={{60,378},{216,378},{216,351},{240,351}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone1.ventTemp, weaBus.TDryBul) annotation (Line(points={{237.92,
+  connect(thermalZone2.ventTemp, weaBus.TDryBul) annotation (Line(points={{237.92,
           345.93},{214.35,345.93},{214.35,344},{71,344}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const5.y, thermalZone1.ventRate) annotation (Line(points={{61,318},{
+  connect(const5.y,thermalZone2. ventRate) annotation (Line(points={{61,318},{
           244.8,318},{244.8,340.08}},
                                  color={0,0,127}));
-  connect(internalGains.y, thermalZone1.intGains) annotation (Line(points={{102.7,
+  connect(internalGains.y,thermalZone2. intGains) annotation (Line(points={{102.7,
           328},{268.8,328},{268.8,340.08}},  color={0,0,127}));
-  connect(weaDat.weaBus, thermalZone2.weaBus) annotation (Line(
+  connect(weaDat.weaBus,thermalZone3. weaBus) annotation (Line(
       points={{60,378},{322,378},{322,351},{346,351}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone2.ventTemp, weaBus.TDryBul) annotation (Line(points={{344.18,
+  connect(thermalZone3.ventTemp, weaBus.TDryBul) annotation (Line(points={{344.18,
           345.93},{320.35,345.93},{320.35,344},{71,344}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const5.y, thermalZone2.ventRate) annotation (Line(points={{61,318},{
+  connect(const5.y,thermalZone3. ventRate) annotation (Line(points={{61,318},{
           350.2,318},{350.2,340.08}},
                                  color={0,0,127}));
-  connect(internalGains.y, thermalZone2.intGains) annotation (Line(points={{102.7,
+  connect(internalGains.y,thermalZone3. intGains) annotation (Line(points={{102.7,
           328},{371.2,328},{371.2,340.08}},  color={0,0,127}));
-  connect(weaDat.weaBus, thermalZone3.weaBus) annotation (Line(
+  connect(weaDat.weaBus,thermalZone4. weaBus) annotation (Line(
       points={{60,378},{420,378},{420,352},{444,352}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone3.ventTemp, weaBus.TDryBul) annotation (Line(points={{442.31,
+  connect(thermalZone4.ventTemp, weaBus.TDryBul) annotation (Line(points={{442.31,
           346.54},{418.35,346.54},{418.35,344},{71,344}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const5.y, thermalZone3.ventRate) annotation (Line(points={{61,318},{
+  connect(const5.y,thermalZone4. ventRate) annotation (Line(points={{61,318},{
           447.9,318},{447.9,340.24}},
                                  color={0,0,127}));
-  connect(internalGains.y, thermalZone3.intGains) annotation (Line(points={{102.7,
+  connect(internalGains.y,thermalZone4. intGains) annotation (Line(points={{102.7,
           328},{467.4,328},{467.4,340.24}},  color={0,0,127}));
-  connect(weaDat.weaBus, thermalZone4.weaBus) annotation (Line(
+  connect(weaDat.weaBus,thermalZone5. weaBus) annotation (Line(
       points={{60,378},{514,378},{514,355},{538,355}},
       color={255,204,51},
       thickness=0.5));
-  connect(thermalZone4.ventTemp, weaBus.TDryBul) annotation (Line(points={{536.05,
+  connect(thermalZone5.ventTemp, weaBus.TDryBul) annotation (Line(points={{536.05,
           349.15},{512.35,349.15},{512.35,344},{71,344}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const5.y, thermalZone4.ventRate) annotation (Line(points={{61,318},{
+  connect(const5.y,thermalZone5. ventRate) annotation (Line(points={{61,318},{
           542.5,318},{542.5,342.4}},
                                  color={0,0,127}));
-  connect(internalGains.y, thermalZone4.intGains) annotation (Line(points={{102.7,
+  connect(internalGains.y,thermalZone5. intGains) annotation (Line(points={{102.7,
           328},{565,328},{565,342.4}},       color={0,0,127}));
-  connect(thermalZone1.intGainsConv, tabs1.heatPort) annotation (Line(points={{272,
+  connect(thermalZone2.intGainsConv, tabs1.heatPort) annotation (Line(points={{272,
           344.5},{270,344.5},{270,161.818},{260,161.818}}, color={191,0,0}));
-  connect(thermalZone2.intGainsConv, tabs2.heatPort) annotation (Line(points={{374,
+  connect(thermalZone3.intGainsConv, tabs2.heatPort) annotation (Line(points={{374,
           344.5},{378,344.5},{378,326},{364,326},{364,161.818}}, color={191,0,0}));
-  connect(thermalZone3.intGainsConv, tabs3.heatPort) annotation (Line(points={{470,345},
+  connect(thermalZone4.intGainsConv, tabs3.heatPort) annotation (Line(points={{470,345},
           {468,345},{468,342},{472,342},{472,161.818},{460,161.818}},
         color={191,0,0}));
-  connect(thermalZone4.intGainsConv, tabs4.heatPort) annotation (Line(points={{568,
+  connect(thermalZone5.intGainsConv, tabs4.heatPort) annotation (Line(points={{568,
           347.5},{570,347.5},{570,161.818},{560,161.818}}, color={191,0,0}));
   connect(heatpumpSystem.port_b2, heatExchangerSystem.port_a2) annotation (Line(
-        points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={0,127,255}));
+        points={{-40,-49.3333},{-75,-49.3333},{-75,-40}}, color={244,125,35}));
   connect(heatExchangerSystem.port_b3, heatpumpSystem.port_a2) annotation (Line(
-        points={{-65,-39.52},{-65,-59.5556},{-40,-59.5556}}, color={0,127,255}));
+        points={{-65,-39.52},{-65,-59.5556},{-40,-59.5556}}, color={244,125,35}));
   connect(boundaryOutsideAir.ports[1],genericAHU. port_a1)
     annotation (Line(points={{-130,250},{-120,250}},
                                                  color={0,127,255}));
@@ -906,16 +667,16 @@ equation
                                                  color={0,127,255}));
   connect(highTemperatureSystem.port_b, genericAHU.port_a5) annotation (Line(
         points={{-144,-66.2},{-140,-66.2},{-140,130},{-38.1818,130},{-38.1818,
-          220}}, color={0,127,255}));
+          220}}, color={238,46,47}));
   connect(highTemperatureSystem.port_a, genericAHU.port_b5) annotation (Line(
         points={{-188,-66.2},{-192,-66.2},{-192,140},{-27.8182,140},{-27.8182,
-          220}}, color={0,127,255}));
+          220}}, color={238,46,47}));
   connect(genericAHU.port_a3, genericAHU.port_a5) annotation (Line(points={{
-          -103.636,220},{-103.636,130},{-38.1818,130},{-38.1818,220}}, color={0,
-          127,255}));
+          -103.636,220},{-103.636,130},{-38.1818,130},{-38.1818,220}}, color={238,46,
+          47}));
   connect(genericAHU.port_b3, genericAHU.port_b5) annotation (Line(points={{
           -92.7273,220},{-92.7273,140},{-27.8182,140},{-27.8182,220}},
-                 color={0,127,255}));
+                 color={238,46,47}));
   connect(genericAHU.port_a4, tabs.port_a2) annotation (Line(points={{-60,220},
           {-62,220},{-62,100},{152,100},{152,120}}, color={0,127,255}));
   connect(genericAHU.port_b4, tabs.port_b2) annotation (Line(points={{-49.0909,
@@ -926,149 +687,300 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrAHUBasic.genericAHUBus, genericAHU.genericAHUBus) annotation (Line(
-      points={{-80,316.1},{-60,316.1},{-60,286.3}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ventilationUnit.port_a3, tabs.port_a2) annotation (Line(points={{39.6,
+  connect(ventilationUnit1.port_a3, tabs.port_a2) annotation (Line(points={{39.6,
           236},{39.6,100},{152,100},{152,120}}, color={0,127,255}));
-  connect(ventilationUnit.port_b3, tabs.port_b2) annotation (Line(points={{47.2,
+  connect(ventilationUnit1.port_b3, tabs.port_b2) annotation (Line(points={{47.2,
           236},{44,236},{44,80},{176,80},{176,120.364}}, color={0,127,255}));
-  connect(genericAHU.port_a2, ventilationUnit.port_b2) annotation (Line(points=
-          {{0.545455,274},{14,274},{14,268},{32.38,268}}, color={0,127,255}));
-  connect(genericAHU.port_b1, ventilationUnit.port_a1) annotation (Line(points=
-          {{0.545455,250},{32,250},{32,256}}, color={0,127,255}));
-  connect(ventilationUnit.port_a4, genericAHU.port_a5) annotation (Line(points={{54.8,
-          236},{52,236},{52,174},{-38.1818,174},{-38.1818,220}},        color={
-          0,127,255}));
-  connect(ventilationUnit.port_b4, genericAHU.port_b5) annotation (Line(points={{62.02,
-          236},{60,236},{60,184},{-27.8182,184},{-27.8182,220}},         color=
-          {0,127,255}));
-  connect(ctrVentilationUnitBasic.genericAHUBus, ventilationUnit.genericAHUBus)
-    annotation (Line(
-      points={{36,293.07},{51,293.07},{51,280.2}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ventilationUnit1.port_a3, tabs.port_a2) annotation (Line(points={{
+  connect(genericAHU.port_a2, ventilationUnit1.port_b2) annotation (Line(points=
+         {{0.545455,274},{14,274},{14,268},{32.38,268}}, color={0,127,255}));
+  connect(genericAHU.port_b1, ventilationUnit1.port_a1) annotation (Line(points=
+         {{0.545455,250},{32,250},{32,256}}, color={0,127,255}));
+  connect(ventilationUnit1.port_a4, genericAHU.port_a5) annotation (Line(points={{54.8,
+          236},{52,236},{52,174},{-38.1818,174},{-38.1818,220}},       color={238,
+          46,47}));
+  connect(ventilationUnit1.port_b4, genericAHU.port_b5) annotation (Line(points={{62.02,
+          236},{60,236},{60,184},{-27.8182,184},{-27.8182,220}},        color={238,
+          46,47}));
+  connect(ventilationUnit2.port_a3, tabs.port_a2) annotation (Line(points={{
           209.6,236},{209.6,100},{152,100},{152,120}}, color={0,127,255}));
-  connect(ventilationUnit1.port_b3, tabs.port_b2) annotation (Line(points={{217.2,
+  connect(ventilationUnit2.port_b3, tabs.port_b2) annotation (Line(points={{217.2,
           236},{216,236},{216,80},{176,80},{176,120.364}},       color={0,127,
           255}));
-  connect(genericAHU.port_a2, ventilationUnit1.port_b2) annotation (Line(points=
+  connect(genericAHU.port_a2,ventilationUnit2. port_b2) annotation (Line(points=
          {{0.545455,274},{102,274},{102,268},{202.38,268}}, color={0,127,255}));
-  connect(genericAHU.port_b1, ventilationUnit1.port_a1) annotation (Line(points=
+  connect(genericAHU.port_b1,ventilationUnit2. port_a1) annotation (Line(points=
          {{0.545455,250},{202,250},{202,256}}, color={0,127,255}));
-  connect(ventilationUnit1.port_a4, genericAHU.port_a5) annotation (Line(points={{224.8,
-          236},{224,236},{224,174},{-38.1818,174},{-38.1818,220}},        color=
-         {0,127,255}));
-  connect(ventilationUnit1.port_b4, genericAHU.port_b5) annotation (Line(points={{232.02,
+  connect(ventilationUnit2.port_a4, genericAHU.port_a5) annotation (Line(points={{224.8,
+          236},{224,236},{224,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
+          47}));
+  connect(ventilationUnit2.port_b4, genericAHU.port_b5) annotation (Line(points={{232.02,
           236},{232,236},{232,184},{-27.8182,184},{-27.8182,220}},
-        color={0,127,255}));
-  connect(ctrVentilationUnitBasic1.genericAHUBus, ventilationUnit1.genericAHUBus)
-    annotation (Line(
-      points={{208,293.07},{221,293.07},{221,280.2}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ventilationUnit2.port_a3, tabs.port_a2) annotation (Line(points={{
+        color={238,46,47}));
+  connect(ventilationUnit3.port_a3, tabs.port_a2) annotation (Line(points={{
           307.6,236},{307.6,100},{152,100},{152,120}}, color={0,127,255}));
-  connect(ventilationUnit2.port_b3, tabs.port_b2) annotation (Line(points={{315.2,
+  connect(ventilationUnit3.port_b3, tabs.port_b2) annotation (Line(points={{315.2,
           236},{314,236},{314,80},{176,80},{176,120.364}},       color={0,127,
           255}));
-  connect(genericAHU.port_a2, ventilationUnit2.port_b2) annotation (Line(points=
+  connect(genericAHU.port_a2,ventilationUnit3. port_b2) annotation (Line(points=
          {{0.545455,274},{150,274},{150,268},{300.38,268}}, color={0,127,255}));
-  connect(genericAHU.port_b1, ventilationUnit2.port_a1) annotation (Line(points=
+  connect(genericAHU.port_b1,ventilationUnit3. port_a1) annotation (Line(points=
          {{0.545455,250},{300,250},{300,256}}, color={0,127,255}));
-  connect(ventilationUnit2.port_a4, genericAHU.port_a5) annotation (Line(points={{322.8,
-          236},{322,236},{322,174},{-38.1818,174},{-38.1818,220}},        color=
-         {0,127,255}));
-  connect(ventilationUnit2.port_b4, genericAHU.port_b5) annotation (Line(points={{330.02,
+  connect(ventilationUnit3.port_a4, genericAHU.port_a5) annotation (Line(points={{322.8,
+          236},{322,236},{322,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
+          47}));
+  connect(ventilationUnit3.port_b4, genericAHU.port_b5) annotation (Line(points={{330.02,
           236},{330,236},{330,184},{-27.8182,184},{-27.8182,220}},
-        color={0,127,255}));
-  connect(ctrVentilationUnitBasic2.genericAHUBus, ventilationUnit2.genericAHUBus)
-    annotation (Line(
-      points={{306,293.07},{319,293.07},{319,280.2}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ventilationUnit3.port_a3, tabs.port_a2) annotation (Line(points={{
+        color={238,46,47}));
+  connect(ventilationUnit4.port_a3, tabs.port_a2) annotation (Line(points={{
           407.6,236},{407.6,100},{152,100},{152,120}}, color={0,127,255}));
-  connect(ventilationUnit3.port_b3, tabs.port_b2) annotation (Line(points={{415.2,
+  connect(ventilationUnit4.port_b3, tabs.port_b2) annotation (Line(points={{415.2,
           236},{416,236},{416,80},{176,80},{176,120.364}},       color={0,127,
           255}));
-  connect(genericAHU.port_a2, ventilationUnit3.port_b2) annotation (Line(points=
+  connect(genericAHU.port_a2,ventilationUnit4. port_b2) annotation (Line(points=
          {{0.545455,274},{202,274},{202,268},{400.38,268}}, color={0,127,255}));
-  connect(genericAHU.port_b1, ventilationUnit3.port_a1) annotation (Line(points=
+  connect(genericAHU.port_b1,ventilationUnit4. port_a1) annotation (Line(points=
          {{0.545455,250},{400,250},{400,256}}, color={0,127,255}));
-  connect(ventilationUnit3.port_a4, genericAHU.port_a5) annotation (Line(points={{422.8,
-          236},{424,236},{424,174},{-38.1818,174},{-38.1818,220}},        color=
-         {0,127,255}));
-  connect(ventilationUnit3.port_b4, genericAHU.port_b5) annotation (Line(points={{430.02,
+  connect(ventilationUnit4.port_a4, genericAHU.port_a5) annotation (Line(points={{422.8,
+          236},{424,236},{424,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
+          47}));
+  connect(ventilationUnit4.port_b4, genericAHU.port_b5) annotation (Line(points={{430.02,
           236},{432,236},{432,184},{-27.8182,184},{-27.8182,220}},
-        color={0,127,255}));
-  connect(ctrVentilationUnitBasic3.genericAHUBus, ventilationUnit3.genericAHUBus)
-    annotation (Line(
-      points={{408,293.07},{419,293.07},{419,280.2}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ventilationUnit4.port_a3, tabs.port_a2) annotation (Line(points={{
+        color={238,46,47}));
+  connect(ventilationUnit5.port_a3, tabs.port_a2) annotation (Line(points={{
           517.6,242},{517.6,100},{152,100},{152,120}}, color={0,127,255}));
-  connect(ventilationUnit4.port_b3, tabs.port_b2) annotation (Line(points={{525.2,
+  connect(ventilationUnit5.port_b3, tabs.port_b2) annotation (Line(points={{525.2,
           242},{524,242},{524,80},{176,80},{176,120.364}},       color={0,127,
           255}));
-  connect(genericAHU.port_a2, ventilationUnit4.port_b2)
+  connect(genericAHU.port_a2,ventilationUnit5. port_b2)
     annotation (Line(points={{0.545455,274},{510.38,274}}, color={0,127,255}));
-  connect(genericAHU.port_b1, ventilationUnit4.port_a1) annotation (Line(points=
+  connect(genericAHU.port_b1,ventilationUnit5. port_a1) annotation (Line(points=
          {{0.545455,250},{510,250},{510,262}}, color={0,127,255}));
-  connect(ventilationUnit4.port_a4, genericAHU.port_a5) annotation (Line(points={{532.8,
-          242},{532,242},{532,174},{-38.1818,174},{-38.1818,220}},        color=
-         {0,127,255}));
-  connect(ventilationUnit4.port_b4, genericAHU.port_b5) annotation (Line(points={{540.02,
+  connect(ventilationUnit5.port_a4, genericAHU.port_a5) annotation (Line(points={{532.8,
+          242},{532,242},{532,174},{-38.1818,174},{-38.1818,220}},        color={238,46,
+          47}));
+  connect(ventilationUnit5.port_b4, genericAHU.port_b5) annotation (Line(points={{540.02,
           242},{540,242},{540,184},{-27.8182,184},{-27.8182,220}},
-        color={0,127,255}));
-  connect(ctrVentilationUnitBasic4.genericAHUBus, ventilationUnit4.genericAHUBus)
-    annotation (Line(
-      points={{516,293.07},{529,293.07},{529,286.2}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(ventilationUnit.port_b1, thermalZone.ports[1]) annotation (Line(
+        color={238,46,47}));
+  connect(ventilationUnit1.port_b1, thermalZone1.ports[1]) annotation (Line(
         points={{70.38,256},{134.24,256},{134.24,341.92}}, color={0,127,255}));
-  connect(ventilationUnit.port_a2, thermalZone.ports[2]) annotation (Line(
+  connect(ventilationUnit1.port_a2, thermalZone1.ports[2]) annotation (Line(
         points={{70,268},{92,268},{92,266},{141.76,266},{141.76,341.92}}, color=
          {0,127,255}));
-  connect(ventilationUnit1.port_b1, thermalZone1.ports[1]) annotation (Line(
+  connect(ventilationUnit2.port_b1,thermalZone2. ports[1]) annotation (Line(
         points={{240.38,256},{252.24,256},{252.24,341.64}}, color={0,127,255}));
-  connect(ventilationUnit1.port_a2, thermalZone1.ports[2]) annotation (Line(
+  connect(ventilationUnit2.port_a2,thermalZone2. ports[2]) annotation (Line(
         points={{240,268},{259.76,268},{259.76,341.64}}, color={0,127,255}));
-  connect(ventilationUnit2.port_b1, thermalZone2.ports[1]) annotation (Line(
+  connect(ventilationUnit3.port_b1,thermalZone3. ports[1]) annotation (Line(
         points={{338.38,256},{356.71,256},{356.71,341.64}}, color={0,127,255}));
-  connect(ventilationUnit2.port_a2, thermalZone2.ports[2]) annotation (Line(
+  connect(ventilationUnit3.port_a2,thermalZone3. ports[2]) annotation (Line(
         points={{338,268},{363.29,268},{363.29,341.64}}, color={0,127,255}));
-  connect(ventilationUnit3.port_b1, thermalZone3.ports[1]) annotation (Line(
+  connect(ventilationUnit4.port_b1,thermalZone4. ports[1]) annotation (Line(
         points={{438.38,256},{453.945,256},{453.945,341.92}}, color={0,127,255}));
-  connect(ventilationUnit3.port_a2, thermalZone3.ports[2]) annotation (Line(
+  connect(ventilationUnit4.port_a2,thermalZone4. ports[2]) annotation (Line(
         points={{438,268},{460.055,268},{460.055,341.92}}, color={0,127,255}));
-  connect(ventilationUnit4.port_b1, thermalZone4.ports[1]) annotation (Line(
+  connect(ventilationUnit5.port_b1,thermalZone5. ports[1]) annotation (Line(
         points={{548.38,262},{552,262},{552,344.2},{549.475,344.2}}, color={0,
           127,255}));
-  connect(ventilationUnit4.port_a2, thermalZone4.ports[2]) annotation (Line(
+  connect(ventilationUnit5.port_a2,thermalZone5. ports[2]) annotation (Line(
         points={{548,274},{548,310},{548,344.2},{556.525,344.2}}, color={0,127,
           255}));
   connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
         points={{110,-88},{112,-88},{112,-80}}, color={0,127,255}));
   connect(geothermalFieldSimple.port_a, switchingUnit.port_b3) annotation (Line(
         points={{130,-88},{130,-80},{128,-80}}, color={0,127,255}));
-  connect(ctrGTFSimple.gtfBus, geothermalFieldSimple.twoCircuitBus) annotation (
-     Line(
-      points={{156.7,-98},{132.1,-98},{132.1,-98.1}},
+  connect(genericAHU.genericAHUBus, mainBus.ahuBus) annotation (Line(
+      points={{-60,286.3},{-60,423.145},{175.115,423.145}},
       color={255,204,51},
-      thickness=0.5));
-  connect(ctrHXsimple.hxBus, heatExchangerSystem.hxBus) annotation (Line(
-      points={{-104.9,26.1},{-98,26.1},{-98,8}},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(ventilationUnit1.genericAHUBus, mainBus.vu1Bus) annotation (Line(
+      points={{51,280.2},{51,294},{-10,294},{-10,424},{82,424},{82,423.145},{175.115,
+          423.145}},
       color={255,204,51},
-      thickness=0.5));
-  connect(booleanConstant.y, ctrGTFSimple.on)
-    annotation (Line(points={{195,-98},{180,-98}}, color={255,0,255}));
-  annotation (Diagram(coordinateSystem(extent={{-200,-120},{360,200}})), Icon(
-        coordinateSystem(extent={{-200,-120},{360,200}})),
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(ventilationUnit2.genericAHUBus, mainBus.vu2Bus) annotation (Line(
+      points={{221,280.2},{221,288},{222,288},{222,294},{-10,294},{-10,423.145},
+          {175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(ventilationUnit3.genericAHUBus, mainBus.vu3Bus) annotation (Line(
+      points={{319,280.2},{319,294},{-10,294},{-10,424},{82,424},{82,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(ventilationUnit4.genericAHUBus, mainBus.vu4Bus) annotation (Line(
+      points={{419,280.2},{419,294},{-10,294},{-10,423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(ventilationUnit5.genericAHUBus, mainBus.vu5Bus) annotation (Line(
+      points={{529,286.2},{529,294},{-10,294},{-10,423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(tabs4.tabsBus, mainBus.tabs5Bus) annotation (Line(
+      points={{539.8,138.364},{539.8,176},{580,176},{580,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(tabs3.tabsBus, mainBus.tabs4Bus) annotation (Line(
+      points={{439.8,138.364},{439.8,176},{580,176},{580,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(tabs2.tabsBus, mainBus.tabs3Bus) annotation (Line(
+      points={{343.8,138.364},{343.8,176},{580,176},{580,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(tabs1.tabsBus, mainBus.tabs2Bus) annotation (Line(
+      points={{239.8,138.364},{239.8,176},{580,176},{580,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+
+  connect(tabs.tabsBus, mainBus.tabs1Bus) annotation (Line(
+      points={{139.8,138.364},{120,138.364},{120,176},{580,176},{580,423.145},{
+          175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(thermalZone1.TAir, mainBus.TRoom1Mea) annotation (Line(points={{155.6,
+          360.4},{156,360.4},{156,423.145},{175.115,423.145}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalZone2.TAir, mainBus.TRoom2Mea) annotation (Line(points={{273.6,
+          358.8},{273.6,423.145},{175.115,423.145}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(thermalZone3.TAir, mainBus.TRoom3Mea) annotation (Line(points={{375.4,
+          358.8},{388,358.8},{388,423.145},{175.115,423.145}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(thermalZone4.TAir, mainBus.TRoom4Mea) annotation (Line(points={{471.3,
+          360.4},{471.3,423.145},{175.115,423.145}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(thermalZone5.TAir, mainBus.TRoom5Mea) annotation (Line(points={{569.5,
+          364},{569.5,423.145},{175.115,423.145}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(highTemperatureSystem.highTemperatureSystemBus, mainBus.htsBus)
+    annotation (Line(
+      points={{-165.78,-34},{-165.78,-6},{-166,-6},{-166,22},{-218,22},{-218,423.145},
+          {175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatExchangerSystem.hxBus, mainBus.hxBus) annotation (Line(
+      points={{-98,8},{-98,22},{-218,22},{-218,423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heatpumpSystem.heatPumpSystemBus, mainBus.hpSystemBus) annotation (
+      Line(
+      points={{15,-34},{16,-34},{16,22},{-218,22},{-218,423.145},{175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+
+  connect(switchingUnit.sWUBus, mainBus.swuBus) annotation (Line(
+      points={{120.2,-31.6},{120.2,-4},{120,-4},{120,22},{-218,22},{-218,423.145},
+          {175.115,423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(geothermalFieldSimple.twoCircuitBus, mainBus.gtfBus) annotation (Line(
+      points={{132.1,-98.1},{160,-98.1},{160,-138},{-218,-138},{-218,423.145},{175.115,
+          423.145}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
+        coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
+          extent={{-220,420},{580,-120}},
+          lineColor={0,0,127},
+          pattern=LinePattern.Dash,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-166,316},{512,-6}},
+          lineColor={0,0,0},
+          pattern=LinePattern.Dash,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Benchmark Building")}),
     experiment(
       StopTime=86400,
       Tolerance=0.001,
