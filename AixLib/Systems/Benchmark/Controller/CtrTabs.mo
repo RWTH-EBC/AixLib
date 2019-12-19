@@ -34,7 +34,8 @@ model CtrTabs "Controller for concrete core activation"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=true)
+    final reverseAction=true,
+    y_reset=0)
             annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{60,70},
             {80,90}})));
@@ -55,7 +56,8 @@ model CtrTabs "Controller for concrete core activation"
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
-    final reverseAction=false)
+    final reverseAction=false,
+    y_reset=0)
             annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
@@ -119,13 +121,6 @@ equation
       points={{-79,-50},{-48,-50},{-48,30},{-22,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(heatingMode.u1, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{
-          -62,70},{-100,70},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(heatingMode.u2, tabsBus.admixBus.TRtrn_in) annotation (Line(points={{-62,
           62},{-100,62},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,127}),
       Text(
@@ -146,6 +141,14 @@ equation
     annotation (Line(points={{-39,70},{-21.2,70}}, color={255,0,255}));
   connect(not1.y, booleanToReal.u)
     annotation (Line(points={{-7.4,70},{-2,70}}, color={255,0,255}));
+  connect(constTflowSet.y, heatingMode.u1) annotation (Line(
+      points={{-79,-50},{-76,-50},{-76,70},{-62,70}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(heatingMode.u1, Tset) annotation (Line(
+      points={{-62,70},{-76,70},{-76,0},{-120,0}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-80,20},{66,-20}},

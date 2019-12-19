@@ -1,5 +1,6 @@
 within AixLib.Systems.Benchmark;
 model Tabs "Concrete core activation"
+  import SI=Modelica.SIunits;
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
     parameter Boolean allowFlowReversal=true
@@ -8,8 +9,22 @@ model Tabs "Concrete core activation"
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
     "Nominal mass flow rate";
   parameter Modelica.SIunits.Temperature T_start=293.15
-    "Initial or guess value of output (= state)"
-    annotation (Dialog(tab="Initialization"));
+    "Initial or guess value of output (= state)";
+
+    parameter SI.Area area "Area of activated concrete";
+    parameter SI.Length thickness "Thickness of aactivated concrete";
+    parameter SI.SpecificHeatCapacity cp = 0.278 "Specific heat capacity of concrete";
+    parameter SI.Density rho = 2100 "Density of activated concrete";
+    parameter Real alpha = 10 "Heat transfer coefficient concrete to air";
+
+
+
+  parameter Modelica.SIunits.Length length=100 "Pipe length";
+  parameter Modelica.SIunits.Length dh=0.032
+    "Hydraulic diameter (assuming a round cross section area)";
+  parameter Real R=0.002
+    "Thermal resistance per unit length from fluid to boundary temperature";
+
 
   Fluid.FixedResistances.PlugFlowPipe pipe(
     redeclare package Medium = Medium,
@@ -69,6 +84,7 @@ model Tabs "Concrete core activation"
         iconTransformation(extent={{30,-108},{50,-88}})));
   Fluid.Actuators.Valves.ThreeWayLinear val(
     redeclare package Medium = Medium,
+    riseTime=10,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     Kv=63,
     m_flow_nominal=m_flow_nominal,
@@ -76,7 +92,8 @@ model Tabs "Concrete core activation"
         extent={{-10,10},{10,-10}},
         rotation=90,
         origin={-40,-70})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=C, T(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=rho*
+        area*thickness*cp,                                                  T(
         start=T_start, fixed=true)) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -89,30 +106,23 @@ model Tabs "Concrete core activation"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
     annotation (Placement(transformation(extent={{-10,90},{10,110}}),
         iconTransformation(extent={{-10,120},{10,140}})));
-  parameter Modelica.SIunits.Length length=100 "Pipe length";
-  parameter Modelica.SIunits.Length dh=0.05
-    "Hydraulic diameter (assuming a round cross section area)";
-  parameter Real R=0.002
-    "Thermal resistance per unit length from fluid to boundary temperature";
+
   BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{-120,
             -20},{-80,20}}), iconTransformation(extent={{-116,-14},{-86,16}})));
-  parameter Modelica.SIunits.HeatCapacity C "Heat capacity of element (= cp*m)";
-  Modelica.Blocks.Sources.Constant const(k=Gc)
+
+  Modelica.Blocks.Sources.Constant const(k=area*alpha)
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  parameter Real Gc "Heat flow rate from concrete to fluid";
-  Fluid.FixedResistances.PressureDrop      res1(
+
+  Fluid.Actuators.Valves.ThreeWayLinear val1(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
-    dp_nominal=1000)
-              annotation (Placement(transformation(extent={{58,-70},{78,-50}})));
-  Fluid.FixedResistances.PressureDrop      res2(
-    redeclare package Medium = Medium,
-    m_flow_nominal=1,
-    dp_nominal=1000)
-              annotation (Placement(transformation(
+    riseTime=10,
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    Kv=63,
+    m_flow_nominal=m_flow_nominal,
+    dpFixed_nominal={10,10}) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={40,-76})));
+        rotation=90,
+        origin={40,-70})));
 equation
 
   connect(admix.port_b1, pipe.port_a)
@@ -151,17 +161,18 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(convection.Gc, const.y)
     annotation (Line(points={{-10,80},{-19,80}}, color={0,0,127}));
-  connect(admix.port_b2, res1.port_a)
-    annotation (Line(points={{24,-50},{24,-60},{58,-60}}, color={0,127,255}));
-  connect(admix.port_b2, res2.port_a) annotation (Line(points={{24,-50},{26,-50},
-          {26,-66},{40,-66}}, color={0,127,255}));
   connect(pipe.ports_b[1], admix.port_a2)
     annotation (Line(points={{10,46},{24,46},{24,30}}, color={0,127,255}));
-  connect(res2.port_b, port_b2)
-    annotation (Line(points={{40,-86},{40,-100}}, color={0,127,255}));
-  connect(res1.port_b, port_b1)
-    annotation (Line(points={{78,-60},{80,-60},{80,-100}}, color={0,127,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+  connect(admix.port_b2, val1.port_2)
+    annotation (Line(points={{24,-50},{24,-60},{40,-60}}, color={0,127,255}));
+  connect(val1.port_3, port_b1)
+    annotation (Line(points={{50,-70},{80,-70},{80,-100}}, color={0,127,255}));
+  connect(val1.port_1, port_b2)
+    annotation (Line(points={{40,-80},{40,-100}}, color={0,127,255}));
+  connect(val1.y, val.y)
+    annotation (Line(points={{28,-70},{-28,-70}}, color={0,0,127}));
+    annotation (Dialog(tab="Initialization"),
+              Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,120}}),                                        graphics={
         Rectangle(
           extent={{-100,120},{100,-100}},

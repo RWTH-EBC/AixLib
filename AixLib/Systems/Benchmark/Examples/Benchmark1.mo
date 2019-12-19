@@ -12,5 +12,6 @@ equation
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=7200));
 end Benchmark1;

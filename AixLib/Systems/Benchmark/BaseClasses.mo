@@ -487,8 +487,8 @@ package BaseClasses "Base class package"
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
     connect(integrator8.y, mainBus.evaBus.IseRoom1) annotation (Line(points={{
-            122.5,111},{130,111},{130,130},{-98.905,130},{-98.905,0.09}}, color
-          ={0,0,127}), Text(
+            122.5,111},{130,111},{130,130},{-98.905,130},{-98.905,0.09}}, color=
+           {0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},

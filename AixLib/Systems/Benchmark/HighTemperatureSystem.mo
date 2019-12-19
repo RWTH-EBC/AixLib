@@ -84,7 +84,7 @@ model HighTemperatureSystem
     TStart=343.15)
     annotation (Placement(transformation(extent={{-16,-12},{16,28}})));
   BaseClasses.HighTempSystemBus highTemperatureSystemBus annotation (Placement(
-        transformation(extent={{-18,126},{14,156}}), iconTransformation(extent=
+        transformation(extent={{-16,126},{16,156}}), iconTransformation(extent=
             {{-14,124},{16,156}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
@@ -126,62 +126,62 @@ equation
           4.6,-12.2},{4.6,-20},{-68,-20}}, color={0,127,255}));
   connect(senT_a.port_a, port_a)
     annotation (Line(points={{-80,-20},{-80,0},{-100,0}}, color={0,127,255}));
-  connect(senT_b.T, highTemperatureSystemBus.T_out) annotation (Line(points={{
-          70,6.6},{70,141.075},{-1.92,141.075}}, color={0,0,127}), Text(
+  connect(senT_b.T, highTemperatureSystemBus.T_out) annotation (Line(points={{70,6.6},
+          {70,141},{0,141}},                     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(senT_a.T, highTemperatureSystemBus.T_in) annotation (Line(points={{
-          -74,-13.4},{-74,141.075},{-1.92,141.075}}, color={0,0,127}), Text(
+  connect(senT_a.T, highTemperatureSystemBus.T_in) annotation (Line(points={{-74,
+          -13.4},{-74,141},{0,141}},                 color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(boilerNoControl.u_rel, highTemperatureSystemBus.uRelBoilerSet)
-    annotation (Line(points={{31.6,128.4},{-1.92,128.4},{-1.92,141.075}}, color=
+    annotation (Line(points={{31.6,128.4},{0.08,128.4},{0.08,141.075}},   color=
          {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(boilerNoControl.fuelPower, highTemperatureSystemBus.fuelPowerBoilerMea)
-    annotation (Line(points={{48.64,133.2},{56,133.2},{56,141.075},{-1.92,
+    annotation (Line(points={{48.64,133.2},{56,133.2},{56,141.075},{0.08,
           141.075}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(cHP.TSet, highTemperatureSystemBus.TChpSet) annotation (Line(points={
-          {-48.4,112.8},{-62,112.8},{-62,112},{-74,112},{-74,141.075},{-1.92,
-          141.075}}, color={0,0,127}), Text(
+  connect(cHP.TSet, highTemperatureSystemBus.TChpSet) annotation (Line(points={{-48.4,
+          112.8},{-62,112.8},{-62,112},{-74,112},{-74,141.075},{0.08,141.075}},
+                     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHP.on, highTemperatureSystemBus.onOffChpSet) annotation (Line(points=
-         {{-36.4,109.2},{-36.4,108},{-1.92,108},{-1.92,141.075}}, color={255,0,
+  connect(cHP.on, highTemperatureSystemBus.onOffChpSet) annotation (Line(points={{-36.4,
+          109.2},{-36.4,108},{0.08,108},{0.08,141.075}},          color={255,0,
           255}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(cHP.fuelInput, highTemperatureSystemBus.fuelPowerChpMea) annotation (
-      Line(points={{-37.6,130.8},{-37.6,141.075},{-1.92,141.075}}, color={0,0,
+      Line(points={{-37.6,130.8},{-37.6,141.075},{0.08,141.075}},  color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(cHP.thermalPower, highTemperatureSystemBus.thermalPowerChpMea)
-    annotation (Line(points={{-42.4,130.8},{-42.4,141.075},{-1.92,141.075}},
+    annotation (Line(points={{-42.4,130.8},{-42.4,141.075},{0.08,141.075}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(cHP.electricalPower, highTemperatureSystemBus.electricalPowerChpMea)
-    annotation (Line(points={{-46,130.8},{-46,141.075},{-1.92,141.075}}, color=
+    annotation (Line(points={{-46,130.8},{-46,141.075},{0.08,141.075}},  color=
           {0,0,127}), Text(
       string="%second",
       index=1,
@@ -189,7 +189,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(pumpBoiler.hydraulicBus, highTemperatureSystemBus.pumpBoilerBus)
     annotation (Line(
-      points={{20,80},{-1.92,80},{-1.92,141.075}},
+      points={{20,80},{0.08,80},{0.08,141.075}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -198,7 +198,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(pumpCHP.hydraulicBus, highTemperatureSystemBus.pumpChpBus)
     annotation (Line(
-      points={{-60,80},{-74,80},{-74,141.075},{-1.92,141.075}},
+      points={{-60,80},{-74,80},{-74,141.075},{0.08,141.075}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

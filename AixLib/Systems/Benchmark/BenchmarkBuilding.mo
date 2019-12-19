@@ -47,33 +47,37 @@ model BenchmarkBuilding "Benchmark building model"
     annotation (Placement(transformation(extent={{-188,-80},{-144,-34}})));
   Tabs tabs(
     redeclare package Medium = MediumWater,
-    C=1000*4*2000,
-    Gc=10*1000)
+    area=30*20,
+    thickness=0.3)
     annotation (Placement(transformation(extent={{140,120},{180,160}})));
   Tabs tabs1(
     redeclare package Medium = MediumWater,
-    C=1000*4*2000,
-    Gc=10*1000)
+    area=30*30,
+    thickness=0.3)
     annotation (Placement(transformation(extent={{240,120},{280,160}})));
   Tabs tabs2(
     redeclare package Medium = MediumWater,
-    C=1000*4*2000,
-    Gc=10*1000)
+    area=10*5,
+    thickness=0.3)
     annotation (Placement(transformation(extent={{344,120},{384,160}})));
   Tabs tabs3(
     redeclare package Medium = MediumWater,
-    C=1000*4*2000,
-    Gc=10*1000)
+    area=20*5,
+    thickness=0.3)
     annotation (Placement(transformation(extent={{440,120},{480,160}})));
   Tabs tabs4(
     redeclare package Medium = MediumWater,
-    C=1000*4*2000,
-    Gc=10*1000)
+    area=30*45,
+    thickness=0.3)
     annotation (Placement(transformation(extent={{540,120},{580,160}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
+        VAir=1800,
+        AZone=30*20,
+        AWin={20.5,4.0,20.5,4.0,0},
+        ATransparent={20.5,4.0,20.5,4.0,0}),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -190,7 +194,11 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
+        VAir=2700,
+        AZone=30*30,
+        AWin={20.5,4.0,20.5,4.0,0},
+        ATransparent={20.5,4.0,20.5,4.0,0}),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -201,7 +209,10 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone3(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
+        VAir=150,
+        AZone=50,
+        AWin={4.5,2.0,4.5,2.0,0}),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -212,7 +223,11 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone4(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
+        VAir=300,
+        AZone=100,
+        AWin={10.5,4.0,10.5,4.0,0},
+        ATransparent={10.5,4.0,10.5,4.0,0}),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -223,7 +238,11 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone5(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
+        VAir=4050,
+        AZone=30*45,
+        AWin={20.5,4.0,20.5,4.0,0},
+        ATransparent={20.5,4.0,20.5,4.0,0}),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -305,6 +324,8 @@ model BenchmarkBuilding "Benchmark building model"
       TLiqWat_in=288.15))
     annotation (Placement(transformation(extent={{-120,220},{0,286}})));
   Fluid.Sources.Boundary_pT boundaryOutsideAir(
+    use_X_in=true,
+    use_Xi_in=false,
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Media.Air,
@@ -501,6 +522,8 @@ model BenchmarkBuilding "Benchmark building model"
     annotation (Placement(transformation(extent={{132,-120},{108,-88}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{152,
             394},{198,452}}), iconTransformation(extent={{110,388},{170,444}})));
+  Utilities.Psychrometrics.X_pTphi x_pTphi
+    annotation (Placement(transformation(extent={{-182,260},{-162,280}})));
 equation
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
         points={{100,-60},{80,-60},{80,-59.5556},{70,-59.5556}},
@@ -686,7 +709,7 @@ equation
   connect(genericAHU.port_b4, tabs.port_b2) annotation (Line(points={{-49.0909,
           220},{-49.0909,80},{168,80},{168,120.364}}, color={0,127,255}));
   connect(boundaryOutsideAir.T_in, weaBus.TDryBul) annotation (Line(points={{-152,
-          246},{-186,246},{-186,344},{71,344}},      color={0,0,127}), Text(
+          246},{-218,246},{-218,344},{71,344}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -846,7 +869,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs4.tabsBus, mainBus.tabs5Bus) annotation (Line(
-      points={{539.8,138.364},{539.8,176},{580,176},{580,423.145},{175.115,
+      points={{539.8,138.364},{539.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -856,7 +879,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs3.tabsBus, mainBus.tabs4Bus) annotation (Line(
-      points={{439.8,138.364},{439.8,176},{580,176},{580,423.145},{175.115,
+      points={{439.8,138.364},{439.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -866,7 +889,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs2.tabsBus, mainBus.tabs3Bus) annotation (Line(
-      points={{343.8,138.364},{343.8,176},{580,176},{580,423.145},{175.115,
+      points={{343.8,138.364},{343.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -876,7 +899,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs1.tabsBus, mainBus.tabs2Bus) annotation (Line(
-      points={{239.8,138.364},{239.8,176},{580,176},{580,423.145},{175.115,
+      points={{239.8,138.364},{239.8,166},{580,166},{580,423.145},{175.115,
           423.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -886,7 +909,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(tabs.tabsBus, mainBus.tabs1Bus) annotation (Line(
-      points={{139.8,138.364},{120,138.364},{120,176},{580,176},{580,423.145},{
+      points={{139.8,138.364},{120,138.364},{120,166},{580,166},{580,423.145},{
           175.115,423.145}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -972,6 +995,25 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(boundaryOutsideAir.T_in, x_pTphi.T) annotation (Line(points={{-152,
+          246},{-194,246},{-194,264},{-190,264},{-190,270},{-184,270}}, color={
+          0,0,127}));
+  connect(x_pTphi.phi, weaBus.relHum) annotation (Line(points={{-184,264},{-210,
+          264},{-210,270},{-238,270},{-238,344},{71,344}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(x_pTphi.p_in, weaBus.pAtm) annotation (Line(points={{-184,276},{-206,
+          276},{-206,284},{-226,284},{-226,344},{71,344}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(x_pTphi.X, boundaryOutsideAir.X_in) annotation (Line(points={{-161,
+          270},{-158,270},{-158,254},{-152,254}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

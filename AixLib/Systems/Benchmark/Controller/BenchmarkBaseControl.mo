@@ -19,12 +19,12 @@ model BenchmarkBaseControl
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={10,-70})));
+        origin={30,-70})));
   AixLib.Systems.EONERC_MainBuilding.Controller.EonERCModeControl.modeStateSelector
     modeStateSelector
     annotation (Placement(transformation(extent={{-56,-22},{-12,20}})));
   EONERC_MainBuilding.Controller.CtrGTFSimple ctrGTFSimple
-    annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
+    annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Blocks.Math.BooleanToReal flapRecooler
     annotation (Placement(transformation(extent={{46,40},{62,56}})));
   Modelica.Blocks.Math.BooleanToReal flapFreeCooler
@@ -39,7 +39,7 @@ model BenchmarkBaseControl
     rpmPumpPrim=130,
     TflowSet=298.15,
     Ti(displayUnit="s") = 60)
-    annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
+    annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
   ModularAHU.Controller.CtrAHUBasic
                          ctrAHUBasic(
     TFlowSet=293.15,
@@ -47,7 +47,7 @@ model BenchmarkBaseControl
     useTwoFanCont=true,
     VFlowSet=3000/3600,
     ctrRh(k=0.01))
-    annotation (Placement(transformation(extent={{0,-120},{20,-100}})));
+    annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
   ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic(
       TFlowSet=294.15)
     annotation (Placement(transformation(extent={{-100,-80},{-80,-60}})));
@@ -73,8 +73,8 @@ model BenchmarkBaseControl
     annotation (Placement(transformation(extent={{-40,-140},{-20,-120}})));
   CtrTabs ctrTabs4
     annotation (Placement(transformation(extent={{-40,-160},{-20,-140}})));
-  CtrHTSSystem ctrHTSSystem
-    annotation (Placement(transformation(extent={{0,-140},{20,-120}})));
+  CtrHTSSystem ctrHTSSystem(T_boi_set=273.15 + 65)
+    annotation (Placement(transformation(extent={{20,-140},{40,-120}})));
 equation
   connect(rpmPumpCold.y, bus.hpSystemBus.busPumpCold.pumpBus.rpm_Input) annotation (Line(
         points={{86.4,-18},{100.07,-18},{100.07,-0.935}}, color={0,0,127}),
@@ -156,10 +156,10 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(modeStateSelector.modeSWU, ctrSWU.mode) annotation (Line(points={{-9.8,
-          -17.8},{-8,-17.8},{-8,-70},{0,-70}},
+          -17.8},{4,-17.8},{4,-70},{20,-70}},
                                             color={255,127,0}));
   connect(modeStateSelector.useGTF, ctrGTFSimple.on) annotation (Line(points={{-9.8,
-          -9.4},{-4,-9.4},{-4,-90},{-2,-90}}, color={255,0,255}));
+          -9.4},{10,-9.4},{10,-90},{18,-90}}, color={255,0,255}));
   connect(modeStateSelector.useHP, ctrHP.allowOperation) annotation (Line(
         points={{-9.8,15.8},{14,15.8},{14,132},{-60,132},{-60,90}},       color=
          {255,0,255}));
@@ -241,7 +241,7 @@ equation
   connect(ctrHP.On, modeStateSelector.hpOn) annotation (Line(points={{-38,74},{
           -20,74},{-20,38},{-76,38},{-76,-1},{-59.96,-1}}, color={255,0,255}));
   connect(ctrSWU.sWUBus, bus.swuBus) annotation (Line(
-      points={{20,-70},{100.07,-70},{100.07,-0.935}},
+      points={{40,-70},{100.07,-70},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -249,7 +249,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrGTFSimple.gtfBus, bus.gtfBus) annotation (Line(
-      points={{21.3,-90},{100.07,-90},{100.07,-0.935}},
+      points={{41.3,-90},{100.07,-90},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -265,7 +265,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ctrHXsimple.hxBus, bus.hxBus) annotation (Line(
-      points={{21.1,-49.9},{100.07,-49.9},{100.07,-0.935}},
+      points={{41.1,-49.9},{100.07,-49.9},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -283,7 +283,7 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(ctrAHUBasic.genericAHUBus, bus.ahuBus) annotation (Line(
-      points={{20,-109.9},{52,-109.9},{52,-110},{100.07,-110},{100.07,-0.935}},
+      points={{40,-109.9},{72,-109.9},{72,-110},{100.07,-110},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -382,7 +382,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrHTSSystem.htsBus, bus.htsBus) annotation (Line(
-      points={{20,-129.9},{56,-129.9},{56,-130},{100.07,-130},{100.07,-0.935}},
+      points={{40,-129.9},{76,-129.9},{76,-130},{100.07,-130},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
