@@ -37,8 +37,8 @@ model BenchmarkBuilding "Benchmark building model"
         extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-86,62})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
-    fixedTemperature(T=293.15)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature
     annotation (Placement(transformation(extent={{-20,-120},{0,-100}})));
   HighTemperatureSystem highTemperatureSystem(
     redeclare package Medium = MediumWater,
@@ -48,36 +48,37 @@ model BenchmarkBuilding "Benchmark building model"
   Tabs tabs(
     redeclare package Medium = MediumWater,
     area=30*20,
-    thickness=0.3)
+    thickness=0.3,
+    alpha=15)
     annotation (Placement(transformation(extent={{140,120},{180,160}})));
   Tabs tabs1(
     redeclare package Medium = MediumWater,
     area=30*30,
-    thickness=0.3)
+    thickness=0.3,
+    alpha=15)
     annotation (Placement(transformation(extent={{240,120},{280,160}})));
   Tabs tabs2(
     redeclare package Medium = MediumWater,
     area=10*5,
-    thickness=0.3)
+    thickness=0.3,
+    alpha=15)
     annotation (Placement(transformation(extent={{344,120},{384,160}})));
   Tabs tabs3(
     redeclare package Medium = MediumWater,
     area=20*5,
-    thickness=0.3)
+    thickness=0.3,
+    alpha=15)
     annotation (Placement(transformation(extent={{440,120},{480,160}})));
   Tabs tabs4(
     redeclare package Medium = MediumWater,
     area=30*45,
-    thickness=0.3)
+    thickness=0.3,
+    alpha=15)
     annotation (Placement(transformation(extent={{540,120},{580,160}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
-        VAir=1800,
-        AZone=30*20,
-        AWin={20.5,4.0,20.5,4.0,0},
-        ATransparent={20.5,4.0,20.5,4.0,0}),
+    zoneParam=BaseClasses.BenchmarkWorkshop(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -198,7 +199,8 @@ model BenchmarkBuilding "Benchmark building model"
         VAir=2700,
         AZone=30*30,
         AWin={20.5,4.0,20.5,4.0,0},
-        ATransparent={20.5,4.0,20.5,4.0,0}),
+        ATransparent={20.5,4.0,20.5,4.0,0},
+        lightingPowerSpecific=5),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -212,7 +214,8 @@ model BenchmarkBuilding "Benchmark building model"
     zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
         VAir=150,
         AZone=50,
-        AWin={4.5,2.0,4.5,2.0,0}),
+        AWin={4.5,2.0,4.5,2.0,0},
+        lightingPowerSpecific=5),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -227,7 +230,8 @@ model BenchmarkBuilding "Benchmark building model"
         VAir=300,
         AZone=100,
         AWin={10.5,4.0,10.5,4.0,0},
-        ATransparent={10.5,4.0,10.5,4.0,0}),
+        ATransparent={10.5,4.0,10.5,4.0,0},
+        lightingPowerSpecific=5),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -242,7 +246,8 @@ model BenchmarkBuilding "Benchmark building model"
         VAir=4050,
         AZone=30*45,
         AWin={20.5,4.0,20.5,4.0,0},
-        ATransparent={20.5,4.0,20.5,4.0,0}),
+        ATransparent={20.5,4.0,20.5,4.0,0},
+        lightingPowerSpecific=5),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -533,8 +538,9 @@ equation
                                                     color={0,127,255}));
   connect(boundary4.ports[1], heatExchangerSystem.port_b2)
     annotation (Line(points={{-76,62},{-76,8},{-75,8}},   color={0,127,255}));
-  connect(fixedTemperature.port, heatpumpSystem.T_outside) annotation (Line(
-        points={{0,-110},{14,-110},{14,-77.4444},{15,-77.4444}}, color={191,0,0}));
+  connect(prescribedTemperature.port, heatpumpSystem.T_outside) annotation (
+      Line(points={{0,-110},{14,-110},{14,-77.4444},{15,-77.4444}}, color={191,
+          0,0}));
   connect(highTemperatureSystem.port_b, heatExchangerSystem.port_a1)
     annotation (Line(points={{-144,-66.2},{-142,-66.2},{-142,-66},{-138,-66},{
           -138,-20.8},{-130,-20.8}}, color={238,46,47}));
@@ -1014,6 +1020,8 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(x_pTphi.X, boundaryOutsideAir.X_in) annotation (Line(points={{-161,
           270},{-158,270},{-158,254},{-152,254}}, color={0,0,127}));
+  connect(boundaryOutsideAir.T_in, prescribedTemperature.T) annotation (Line(
+        points={{-152,246},{-218,246},{-218,-110},{-22,-110}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-220,-120},{580,420}})), Icon(
         coordinateSystem(extent={{-220,-120},{580,420}}), graphics={Rectangle(
           extent={{-220,420},{580,-120}},

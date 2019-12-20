@@ -12,8 +12,8 @@ model Tabs "Test of Tabs"
         origin={80,0})));
   AixLib.Systems.Benchmark.Tabs tabs(
     redeclare package Medium = Medium,
-    C=1000*4*2000,
-    Gc=10*20) annotation (Placement(transformation(extent={{-20,38},{20,78}})));
+    area=3000,
+    thickness=0.3)                     annotation (Placement(transformation(extent={{-20,38},{20,78}})));
   Fluid.Sources.Boundary_pT          boundary1(
     redeclare package Medium = Medium,
     T=303.15,

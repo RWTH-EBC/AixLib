@@ -97,8 +97,8 @@ equation
       points={{-120,0},{-28,0},{-28,10},{-2,10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(ConstVflow1.y, genericAHUBus.flapSupSet) annotation (Line(points={{67,
-          -32},{100.05,-32},{100.05,0.05}}, color={0,0,127}), Text(
+  connect(PID_VflowSup.y, genericAHUBus.flapSupSet) annotation (Line(points={{
+          21,-50},{100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
