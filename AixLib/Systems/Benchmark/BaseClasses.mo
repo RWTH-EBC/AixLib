@@ -64,11 +64,11 @@ package BaseClasses "Base class package"
     EONERC_MainBuilding.BaseClasses.TwoCircuitBus gtfBus "Geothermalfield bus";
     EONERC_MainBuilding.BaseClasses.TwoCircuitBus hxBus
       "Heat exchanger system bus";
-    TabsBus tabs1Bus "Bus for concrete core activation 1";
-    TabsBus tabs2Bus "Bus for concrete core activation 2";
-    TabsBus tabs3Bus "Bus for concrete core activation 3";
-    TabsBus tabs4Bus "Bus for concrete core activation 4";
-    TabsBus tabs5Bus "Bus for concrete core activation 5";
+    TabsBus2 tabs1Bus "Bus for concrete core activation 1";
+    TabsBus2 tabs2Bus "Bus for concrete core activation 2";
+    TabsBus2 tabs3Bus "Bus for concrete core activation 3";
+    TabsBus2 tabs4Bus "Bus for concrete core activation 4";
+    TabsBus2 tabs5Bus "Bus for concrete core activation 5";
     ModularAHU.BaseClasses.GenericAHUBus ahuBus "Bus for AHU";
     ModularAHU.BaseClasses.GenericAHUBus vu1Bus "Ventilation unit 1";
     ModularAHU.BaseClasses.GenericAHUBus vu2Bus "Ventilation unit 2";
@@ -651,4 +651,25 @@ package BaseClasses "Base class package"
 <p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
 </html>"));
   end BenchmarkWorkshop;
+
+  expandable connector TabsBus2 "Data bus for concrete cora activation"
+    extends Modelica.Icons.SignalBus;
+    import SI = Modelica.SIunits;
+    HydraulicModules.BaseClasses.HydraulicBus pumpBus  "Hydraulic circuit of concrete core activation";
+    HydraulicModules.BaseClasses.HydraulicBus hotThrottleBus  "Hydraulic circuit of hot supply";
+    HydraulicModules.BaseClasses.HydraulicBus coldThrottleBus "Hydraulic circuit of cold supply";
+    annotation (
+      Icon(graphics,
+           coordinateSystem(preserveAspectRatio=false)),
+      Diagram(graphics,
+              coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Definition of a bus connector for the ERC Heatpump System.</p>
+</html>",   revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
+</ul>
+</html>"));
+  end TabsBus2;
 end BaseClasses;

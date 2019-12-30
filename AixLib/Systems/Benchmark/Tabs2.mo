@@ -41,8 +41,7 @@ model Tabs2 "Concrete core activation"
         rotation=180,
         origin={0,52})));
 
-  HydraulicModules.ThrottlePump
-                         throttlePump(
+  HydraulicModules.Pump  pump(
     redeclare package Medium = Medium,
     allowFlowReversal=allowFlowReversal,
     T_amb=293.15,
@@ -52,14 +51,13 @@ model Tabs2 "Concrete core activation"
     kIns=0.02,
     d=0.032,
     length=1,
-    Kv=10,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per)))
                                annotation (Placement(transformation(
-        extent={{-33,-33},{33,33}},
+        extent={{-24,-24},{24,24}},
         rotation=90,
-        origin={-1,7})));
+        origin={-2,16})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(redeclare package Medium =
         Medium)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
@@ -94,32 +92,12 @@ model Tabs2 "Concrete core activation"
     annotation (Placement(transformation(extent={{-10,90},{10,110}}),
         iconTransformation(extent={{-10,120},{10,140}})));
 
-  BaseClasses.TabsBus tabsBus annotation (Placement(transformation(extent={{-120,
+  BaseClasses.TabsBus2 tabsBus annotation (Placement(transformation(extent={{-120,
             -20},{-80,20}}), iconTransformation(extent={{-116,-14},{-86,16}})));
 
   Modelica.Blocks.Sources.Constant const(k=area*alpha)
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
 
-  Fluid.Actuators.Valves.TwoWayLinear val(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    Kv=10) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-80,-80})));
-  Fluid.Actuators.Valves.TwoWayLinear val1(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    Kv=10) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-40,-80})));
-  Modelica.Blocks.Sources.Constant const1(k=1)
-    annotation (Placement(transformation(extent={{-104,-58},{-96,-50}})));
-  Modelica.Blocks.Math.Add add(k2=-1)
-    annotation (Placement(transformation(extent={{-88,-62},{-78,-52}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
@@ -132,7 +110,7 @@ model Tabs2 "Concrete core activation"
     tau_C=2,
     dT_nom=5,
     Q_nom=20000)
-    annotation (Placement(transformation(extent={{8,-68},{-12,-48}})));
+    annotation (Placement(transformation(extent={{14,-38},{-6,-18}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX1(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
@@ -145,13 +123,49 @@ model Tabs2 "Concrete core activation"
     tau_C=2,
     dT_nom=5,
     Q_nom=20000)
-    annotation (Placement(transformation(extent={{-22,-62},{-42,-42}})));
+    annotation (Placement(transformation(extent={{-16,-38},{-36,-18}})));
   Fluid.Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
-    annotation (Placement(transformation(extent={{-66,-52},{-54,-40}})));
+    annotation (Placement(transformation(extent={{-60,-28},{-48,-16}})));
+  HydraulicModules.ThrottlePump throttlePumpHot(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    T_amb=293.15,
+    m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
+    dIns=0.01,
+    kIns=0.02,
+    d=0.032,
+    length=1,
+    Kv=10,
+    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))) annotation (
+      Placement(transformation(
+        extent={{-15,-15},{15,15}},
+        rotation=90,
+        origin={-25,-59})));
+  HydraulicModules.ThrottlePump throttlePumpCold(
+    redeclare package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    T_amb=293.15,
+    m_flow_nominal=m_flow_nominal,
+    T_start=T_start,
+    dIns=0.01,
+    kIns=0.02,
+    d=0.032,
+    length=1,
+    Kv=10,
+    redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          Fluid.Movers.Data.Pumps.Wilo.Stratos32slash1to12 per))) annotation (
+      Placement(transformation(
+        extent={{-15,-15},{15,15}},
+        rotation=90,
+        origin={15,-61})));
 equation
 
-  connect(throttlePump.port_b1, pipe.port_a) annotation (Line(points={{-20.8,40},
-          {-20.8,52},{-10,52}}, color={0,127,255}));
+  connect(pump.port_b1, pipe.port_a) annotation (Line(points={{-16.4,40},{-16.4,
+          52},{-10,52}}, color={0,127,255}));
   connect(pipe.heatPort, heatCapacitor.port)
     annotation (Line(points={{8.88178e-16,62},{0,62},{0,66},{20,66}},
                                                      color={191,0,0}));
@@ -159,50 +173,62 @@ equation
           {0,66},{0,70},{-6.66134e-16,70}}, color={191,0,0}));
   connect(convection.fluid, heatPort)
     annotation (Line(points={{0,90},{0,100}}, color={191,0,0}));
-  connect(throttlePump.hydraulicBus, tabsBus.admixBus) annotation (Line(
-      points={{-34,7},{-34,0.1},{-99.9,0.1}},
+  connect(convection.Gc, const.y)
+    annotation (Line(points={{-10,80},{-19,80}}, color={0,0,127}));
+  connect(pipe.ports_b[1], pump.port_a2)
+    annotation (Line(points={{10,52},{12.4,52},{12.4,40}}, color={0,127,255}));
+  connect(dynamicHX1.port_a1, dynamicHX.port_b1)
+    annotation (Line(points={{-16,-22},{-6,-22}}, color={0,127,255}));
+  connect(dynamicHX.port_a1, pump.port_b2) annotation (Line(points={{14,-22},{
+          12.4,-22},{12.4,-8}}, color={0,127,255}));
+  connect(dynamicHX1.port_b1, pump.port_a1) annotation (Line(points={{-36,-22},
+          {-36,-8},{-16.4,-8}}, color={0,127,255}));
+  connect(bou.ports[1], dynamicHX1.port_b1)
+    annotation (Line(points={{-48,-22},{-36,-22}}, color={0,127,255}));
+  connect(throttlePumpHot.port_b1, dynamicHX1.port_a2) annotation (Line(points=
+          {{-34,-44},{-34,-40},{-36,-40},{-36,-34}}, color={0,127,255}));
+  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2)
+    annotation (Line(points={{-16,-44},{-16,-34}}, color={0,127,255}));
+  connect(throttlePumpCold.port_b1, dynamicHX.port_a2) annotation (Line(points=
+          {{6,-46},{6,-42},{-6,-42},{-6,-34}}, color={0,127,255}));
+  connect(throttlePumpCold.port_a2, dynamicHX.port_b2) annotation (Line(points=
+          {{24,-46},{26,-46},{26,-34},{14,-34}}, color={0,127,255}));
+  connect(throttlePumpHot.port_a1, port_a1) annotation (Line(points={{-34,-74},
+          {-76,-74},{-76,-100},{-80,-100}}, color={0,127,255}));
+  connect(throttlePumpHot.port_b2, port_b2) annotation (Line(points={{-16,-74},
+          {-16,-100},{40,-100}}, color={0,127,255}));
+  connect(port_a2, port_a2) annotation (Line(points={{-40,-100},{-40,-100},{-40,
+          -100}}, color={0,127,255}));
+  connect(port_a2, throttlePumpCold.port_a1) annotation (Line(points={{-40,-100},
+          {-40,-94},{6,-94},{6,-76}}, color={0,127,255}));
+  connect(throttlePumpCold.port_b2, port_b1)
+    annotation (Line(points={{24,-76},{80,-76},{80,-100}}, color={0,127,255}));
+  connect(pump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
+      points={{-26,16},{-99.9,16},{-99.9,0.1}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
-      extent={{-3,6},{-3,6}},
+      extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(convection.Gc, const.y)
-    annotation (Line(points={{-10,80},{-19,80}}, color={0,0,127}));
-  connect(pipe.ports_b[1], throttlePump.port_a2)
-    annotation (Line(points={{10,52},{18.8,52},{18.8,40}}, color={0,127,255}));
-  connect(port_a1, val.port_a)
-    annotation (Line(points={{-80,-100},{-80,-90}}, color={0,127,255}));
-  connect(port_a2, val1.port_a)
-    annotation (Line(points={{-40,-100},{-40,-90}}, color={0,127,255}));
-  connect(val.y, add.u2) annotation (Line(points={{-92,-80},{-92,-66},{-89,-66},
-          {-89,-60}}, color={0,0,127}));
-  connect(add.u1, const1.y)
-    annotation (Line(points={{-89,-54},{-95.6,-54}}, color={0,0,127}));
-  connect(add.y, val1.y) annotation (Line(points={{-77.5,-57},{-68,-57},{-68,
-          -80},{-52,-80}}, color={0,0,127}));
-  connect(val.y, tabsBus.valSet) annotation (Line(points={{-92,-80},{-99.9,-80},
-          {-99.9,0.1}}, color={0,0,127}), Text(
+  connect(throttlePumpHot.hydraulicBus, tabsBus.hotThrottleBus) annotation (
+      Line(
+      points={{-40,-59},{-68,-59},{-68,-60},{-99.9,-60},{-99.9,0.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(val1.port_b, dynamicHX.port_a2) annotation (Line(points={{-40,-70},{
-          -40,-62},{-12,-62},{-12,-64}}, color={0,127,255}));
-  connect(dynamicHX.port_b2, port_b2) annotation (Line(points={{8,-64},{20,-64},
-          {20,-66},{40,-66},{40,-100}}, color={0,127,255}));
-  connect(val.port_b, dynamicHX1.port_a2) annotation (Line(points={{-80,-70},{
-          -78,-70},{-78,-58},{-42,-58}}, color={0,127,255}));
-  connect(dynamicHX1.port_b2, port_b1) annotation (Line(points={{-22,-58},{2,
-          -58},{2,-60},{80,-60},{80,-100}}, color={0,127,255}));
-  connect(dynamicHX1.port_a1, dynamicHX.port_b1) annotation (Line(points={{-22,
-          -46},{-18,-46},{-18,-52},{-12,-52}}, color={0,127,255}));
-  connect(dynamicHX.port_a1, throttlePump.port_b2) annotation (Line(points={{8,
-          -52},{14,-52},{14,-48},{18.8,-48},{18.8,-26}}, color={0,127,255}));
-  connect(dynamicHX1.port_b1, throttlePump.port_a1) annotation (Line(points={{
-          -42,-46},{-42,-26},{-20.8,-26}}, color={0,127,255}));
-  connect(bou.ports[1], dynamicHX1.port_b1)
-    annotation (Line(points={{-54,-46},{-42,-46}}, color={0,127,255}));
+  connect(throttlePumpCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
+      Line(
+      points={{0,-61},{-99.9,-61},{-99.9,0.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
     annotation (Dialog(tab="Initialization"),
               Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,120}}),                                        graphics={

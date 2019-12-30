@@ -63,15 +63,20 @@ model BenchmarkBaseControl
   ModularAHU.Controller.CtrVentilationUnitBasic ctrVentilationUnitBasic4(TFlowSet=
         295.15, VFlowSet=4050)
     annotation (Placement(transformation(extent={{-116,-160},{-96,-140}})));
-  CtrTabs ctrTabs(useExternalTset=true)
+  CtrTabs2 ctrTabs2_1(
+                  useExternalTset=true)
     annotation (Placement(transformation(extent={{-36,-80},{-16,-60}})));
-  CtrTabs ctrTabs1(useExternalTset=true)
+  CtrTabs2 ctrTabs2_2(
+                   useExternalTset=true)
     annotation (Placement(transformation(extent={{-36,-100},{-16,-80}})));
-  CtrTabs ctrTabs2(useExternalTset=true)
+  CtrTabs2 ctrTabs2(
+                   useExternalTset=true)
     annotation (Placement(transformation(extent={{-36,-120},{-16,-100}})));
-  CtrTabs ctrTabs3(useExternalTset=true)
+  CtrTabs2 ctrTabs2_4(
+                   useExternalTset=true)
     annotation (Placement(transformation(extent={{-36,-140},{-16,-120}})));
-  CtrTabs ctrTabs4(useExternalTset=true)
+  CtrTabs2 ctrTabs2_3(
+                   useExternalTset=true)
     annotation (Placement(transformation(extent={{-36,-160},{-16,-140}})));
   CtrHTSSystem ctrHTSSystem(T_boi_set=273.15 + 65)
     annotation (Placement(transformation(extent={{20,-140},{40,-120}})));
@@ -340,8 +345,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrTabs.tabsBus, bus.tabs1Bus) annotation (Line(
-      points={{-15.8,-69.8},{-8,-69.8},{-8,-158},{100.07,-158},{100.07,-0.935}},
+  connect(ctrTabs2_1.tabsBus, bus.tabs1Bus) annotation (Line(
+      points={{-16,-70},{-8,-70},{-8,-158},{100.07,-158},{100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -349,9 +354,9 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 
-  connect(ctrTabs1.tabsBus, bus.tabs2Bus) annotation (Line(
-      points={{-15.8,-89.8},{-8,-89.8},{-8,-160},{100,-160},{100,-80},{100.07,
-          -80},{100.07,-0.935}},
+  connect(ctrTabs2_2.tabsBus, bus.tabs2Bus) annotation (Line(
+      points={{-16,-90},{-8,-90},{-8,-160},{100,-160},{100,-80},{100.07,-80},{
+          100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -359,26 +364,26 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrTabs2.tabsBus, bus.tabs3Bus) annotation (Line(
-      points={{-15.8,-109.8},{-8,-109.8},{-8,-160},{100,-160},{100,-80},{100.07,
-          -80},{100.07,-0.935}},
+      points={{-16,-110},{-8,-110},{-8,-160},{100,-160},{100,-80},{100.07,-80},
+          {100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrTabs3.tabsBus, bus.tabs4Bus) annotation (Line(
-      points={{-15.8,-129.8},{-8,-129.8},{-8,-158},{100,-158},{100,-80},{100.07,
-          -80},{100.07,-0.935}},
+  connect(ctrTabs2_4.tabsBus, bus.tabs4Bus) annotation (Line(
+      points={{-16,-130},{-8,-130},{-8,-158},{100,-158},{100,-80},{100.07,-80},
+          {100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrTabs4.tabsBus, bus.tabs5Bus) annotation (Line(
-      points={{-15.8,-149.8},{-8,-149.8},{-8,-160},{100,-160},{100,-80},{100.07,
-          -80},{100.07,-0.935}},
+  connect(ctrTabs2_3.tabsBus, bus.tabs5Bus) annotation (Line(
+      points={{-16,-150},{-8,-150},{-8,-160},{100,-160},{100,-80},{100.07,-80},
+          {100.07,-0.935}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -394,16 +399,16 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
 
-  connect(combiTable1D.y[1], ctrTabs.Tset) annotation (Line(points={{-53,-110},
+  connect(combiTable1D.y[1], ctrTabs2_1.Tset) annotation (Line(points={{-53,-110},
           {-50,-110},{-50,-70},{-38,-70}}, color={0,0,127}));
-  connect(ctrTabs.Tset, ctrTabs1.Tset) annotation (Line(points={{-38,-70},{-42,
-          -70},{-42,-90},{-38,-90}}, color={0,0,127}));
-  connect(ctrTabs1.Tset, ctrTabs2.Tset) annotation (Line(points={{-38,-90},{-38,
+  connect(ctrTabs2_1.Tset, ctrTabs2_2.Tset) annotation (Line(points={{-38,-70},
+          {-42,-70},{-42,-90},{-38,-90}}, color={0,0,127}));
+  connect(ctrTabs2_2.Tset, ctrTabs2.Tset) annotation (Line(points={{-38,-90},{-38,
           -90},{-38,-110}}, color={0,0,127}));
-  connect(ctrTabs2.Tset, ctrTabs3.Tset) annotation (Line(points={{-38,-110},{
+  connect(ctrTabs2.Tset, ctrTabs2_4.Tset) annotation (Line(points={{-38,-110},{
           -42,-110},{-42,-130},{-38,-130}}, color={0,0,127}));
-  connect(ctrTabs3.Tset, ctrTabs4.Tset) annotation (Line(points={{-38,-130},{
-          -44,-130},{-44,-150},{-38,-150}}, color={0,0,127}));
+  connect(ctrTabs2_4.Tset, ctrTabs2_3.Tset) annotation (Line(points={{-38,-130},
+          {-44,-130},{-44,-150},{-38,-150}}, color={0,0,127}));
   connect(combiTable1D.u[1], modeStateSelector.T_air) annotation (Line(points={
           {-76,-110},{-80,-110},{-80,-50},{-25.2,-50},{-25.2,-25.78}}, color={0,
           0,127}));
