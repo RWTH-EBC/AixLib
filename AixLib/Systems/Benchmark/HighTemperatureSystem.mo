@@ -10,6 +10,8 @@ model HighTemperatureSystem
   parameter Modelica.SIunits.Temperature T_start = 303.15
     "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization"));
+        parameter Modelica.SIunits.Temperature T_amb=298.15
+    "Ambient temperature of technics room";
 
   Fluid.BoilerCHP.BoilerNoControl
                    boilerNoControl(
@@ -47,7 +49,7 @@ model HighTemperatureSystem
     length=1,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
     pipe3(length=2)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -65,7 +67,7 @@ model HighTemperatureSystem
     length=1,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
     pipe3(length=2)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -86,6 +88,8 @@ model HighTemperatureSystem
   BaseClasses.HighTempSystemBus highTemperatureSystemBus annotation (Placement(
         transformation(extent={{-16,126},{16,156}}), iconTransformation(extent=
             {{-14,124},{16,156}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=T_amb)
+    annotation (Placement(transformation(extent={{32,8},{40,16}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -209,6 +213,8 @@ equation
     annotation (Line(points={{76,0},{100,0}}, color={0,127,255}));
   connect(senT_b.port_a, HotWater.fluidportTop2) annotation (Line(points={{64,0},
           {62,0},{62,28.2},{5,28.2}}, color={0,127,255}));
+  connect(fixedTemperature1.port, HotWater.heatportOutside) annotation (Line(
+        points={{40,12},{40,8},{15.6,8},{15.6,9.2}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -60},{100,140}}), graphics={
         Rectangle(

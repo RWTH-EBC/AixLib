@@ -1,17 +1,19 @@
 within AixLib.Systems.ModularAHU.Controller;
 model CtrVentilationUnitTsetRoom
   "Controller for ventilation unit that controlls the room temperature"
-  CtrVentilationUnitBasic ctrVentilationUnitBasic(final useExternalTset=true)
+  CtrVentilationUnitBasic ctrVentilationUnitBasic(final useExternalTset=true, final
+      VFlowSet=VFlowSet)
     annotation (Dialog(enable = true), Placement(transformation(extent={{40,-10},{60,10}})));
-  BaseClasses.GenericAHUBus genericAHUBus1
-    annotation (Placement(transformation(extent={{92,-10},{112,10}})));
+  BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
+          extent={{92,-10},{112,10}}), iconTransformation(extent={{86,-18},{118,
+            16}})));
   Modelica.Blocks.Continuous.LimPID PID(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=k,
     Ti=Ti,
     yMax=yMax,
     yMin=yMin) annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-      parameter Modelica.SIunits.Temperature TRoomSet=289.15
+      parameter Modelica.SIunits.Temperature TRoomSet=295.15
     "Flow temperature set point of room"
     annotation (Dialog(enable=useExternalTset == false));
   parameter Real k=0.2 "Gain of controller";
@@ -23,9 +25,11 @@ model CtrVentilationUnitTsetRoom
   Modelica.Blocks.Interfaces.RealInput T_act
     "Connector of measurement input signal" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
-          extent={{-120,-20},{-80,20}})));
+          extent={{-140,-20},{-100,20}})));
+  parameter Modelica.SIunits.VolumeFlowRate VFlowSet=1000/3600
+    "Set value of volume flow [m^3/s]";
 equation
-  connect(ctrVentilationUnitBasic.genericAHUBus, genericAHUBus1) annotation (
+  connect(ctrVentilationUnitBasic.genericAHUBus, genericAHUBus) annotation (
       Line(
       points={{60,0.1},{81,0.1},{81,0},{102,0}},
       color={255,204,51},
@@ -40,6 +44,30 @@ equation
     annotation (Line(points={{-39,0},{-22,0}}, color={0,0,127}));
   connect(PID.u_m, T_act) annotation (Line(points={{-10,-12},{-10,-38},{-92,-38},
           {-92,0},{-120,0}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Text(
+          extent={{-90,20},{56,-20}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="HCMI"),
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{20,100},{100,0},{20,-100}},
+          color={95,95,95},
+          thickness=0.5),
+        Text(
+          extent={{-90,20},{56,-20}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Control")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CtrVentilationUnitTsetRoom;

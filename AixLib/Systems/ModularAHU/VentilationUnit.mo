@@ -205,8 +205,8 @@ equation
     annotation (Line(points={{68,0},{76,0}}, color={0,127,255}));
   connect(flapSup.port_b, port_b1)
     annotation (Line(points={{92,0},{102,0}}, color={0,127,255}));
-  connect(senRelHumSup.phi, genericAHUBus.relHumSupMea) annotation (Line(points
-        ={{62.06,6.6},{62.06,100.09},{0.09,100.09}}, color={0,0,127}), Text(
+  connect(senRelHumSup.phi, genericAHUBus.relHumSupMea) annotation (Line(points=
+         {{62.06,6.6},{62.06,100.09},{0.09,100.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},

@@ -70,7 +70,7 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone1(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=BaseClasses.BenchmarkWorkshop(),
+    zoneParam=BaseClasses.BenchmarkCanteen(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -187,12 +187,7 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone2(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
-        VAir=2700,
-        AZone=30*30,
-        AWin={20.5,4.0,20.5,4.0,0},
-        ATransparent={20.5,4.0,20.5,4.0,0},
-        lightingPowerSpecific=5),
+    zoneParam=BaseClasses.BenchmarkWorkshop(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -203,11 +198,7 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone3(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
-        VAir=150,
-        AZone=50,
-        AWin={4.5,2.0,4.5,2.0,0},
-        lightingPowerSpecific=5),
+    zoneParam=BaseClasses.BenchmarkConferenceRoom(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -218,12 +209,7 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone4(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
-        VAir=300,
-        AZone=100,
-        AWin={10.5,4.0,10.5,4.0,0},
-        ATransparent={10.5,4.0,10.5,4.0,0},
-        lightingPowerSpecific=5),
+    zoneParam=BaseClasses.BenchmarkSharedOffice(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -234,12 +220,7 @@ model BenchmarkBuilding "Benchmark building model"
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone        thermalZone5(
     redeclare package Medium = MediumAir,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(
-        VAir=4050,
-        AZone=30*45,
-        AWin={20.5,4.0,20.5,4.0,0},
-        ATransparent={20.5,4.0,20.5,4.0,0},
-        lightingPowerSpecific=5),
+    zoneParam=BaseClasses.BenchmarkOpenPlanOffice(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -251,7 +232,7 @@ model BenchmarkBuilding "Benchmark building model"
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumWater,
     T_amb=293.15,
-    m1_flow_nominal=3000/3600*1.2,
+    m1_flow_nominal=15000/3600*1.2,
     m2_flow_nominal=0.5,
     T_start=293.15,
     usePreheater=true,

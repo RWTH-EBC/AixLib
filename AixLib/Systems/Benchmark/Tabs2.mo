@@ -101,29 +101,29 @@ model Tabs2 "Concrete core activation"
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
-    m1_flow_nominal=0.5,
-    m2_flow_nominal=0.5,
+    m1_flow_nominal=1,
+    m2_flow_nominal=1,
     dp1_nominal=1000,
     dp2_nominal=1000,
     tau1=10,
     tau2=10,
     tau_C=2,
-    dT_nom=5,
+    dT_nom=1,
     Q_nom=20000)
     annotation (Placement(transformation(extent={{14,-38},{-6,-18}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX1(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
-    m1_flow_nominal=0.5,
-    m2_flow_nominal=0.5,
+    m1_flow_nominal=1,
+    m2_flow_nominal=1,
     dp1_nominal=1000,
     dp2_nominal=1000,
     tau1=10,
     tau2=10,
     tau_C=2,
-    dT_nom=5,
+    dT_nom=1,
     Q_nom=20000)
-    annotation (Placement(transformation(extent={{-16,-38},{-36,-18}})));
+    annotation (Placement(transformation(extent={{-14,-38},{-34,-18}})));
   Fluid.Sources.Boundary_pT bou(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-60,-28},{-48,-16}})));
   HydraulicModules.ThrottlePump throttlePumpHot(
@@ -178,17 +178,17 @@ equation
   connect(pipe.ports_b[1], pump.port_a2)
     annotation (Line(points={{10,52},{12.4,52},{12.4,40}}, color={0,127,255}));
   connect(dynamicHX1.port_a1, dynamicHX.port_b1)
-    annotation (Line(points={{-16,-22},{-6,-22}}, color={0,127,255}));
+    annotation (Line(points={{-14,-22},{-6,-22}}, color={0,127,255}));
   connect(dynamicHX.port_a1, pump.port_b2) annotation (Line(points={{14,-22},{
           12.4,-22},{12.4,-8}}, color={0,127,255}));
-  connect(dynamicHX1.port_b1, pump.port_a1) annotation (Line(points={{-36,-22},
-          {-36,-8},{-16.4,-8}}, color={0,127,255}));
+  connect(dynamicHX1.port_b1, pump.port_a1) annotation (Line(points={{-34,-22},
+          {-34,-8},{-16.4,-8}}, color={0,127,255}));
   connect(bou.ports[1], dynamicHX1.port_b1)
-    annotation (Line(points={{-48,-22},{-36,-22}}, color={0,127,255}));
-  connect(throttlePumpHot.port_b1, dynamicHX1.port_a2) annotation (Line(points=
-          {{-34,-44},{-34,-40},{-36,-40},{-36,-34}}, color={0,127,255}));
-  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2)
-    annotation (Line(points={{-16,-44},{-16,-34}}, color={0,127,255}));
+    annotation (Line(points={{-48,-22},{-34,-22}}, color={0,127,255}));
+  connect(throttlePumpHot.port_b1, dynamicHX1.port_a2)
+    annotation (Line(points={{-34,-44},{-34,-34}}, color={0,127,255}));
+  connect(throttlePumpHot.port_a2, dynamicHX1.port_b2) annotation (Line(points=
+          {{-16,-44},{-16,-34},{-14,-34}}, color={0,127,255}));
   connect(throttlePumpCold.port_b1, dynamicHX.port_a2) annotation (Line(points=
           {{6,-46},{6,-42},{-6,-42},{-6,-34}}, color={0,127,255}));
   connect(throttlePumpCold.port_a2, dynamicHX.port_b2) annotation (Line(points=

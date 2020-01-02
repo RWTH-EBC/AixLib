@@ -177,10 +177,10 @@ package BaseClasses "Base class package"
       annotation (Placement(transformation(extent={{-10,-80},{0,-70}})));
     Modelica.Blocks.Continuous.Integrator integrator10
       annotation (Placement(transformation(extent={{-10,-100},{0,-90}})));
-    Modelica.Blocks.Math.Sum sum1(nin=3)
+    Modelica.Blocks.Math.Sum sum1(nin=2)
       annotation (Placement(transformation(extent={{-30,-22},{-20,-12}})));
     Modelica.Blocks.Math.Sum sumWel(nin=7)
-      annotation (Placement(transformation(extent={{60,4},{70,14}})));
+      annotation (Placement(transformation(extent={{58,4},{68,14}})));
     Modelica.Blocks.Math.Sum sumQbr(nin=2)
       annotation (Placement(transformation(extent={{60,-40},{70,-30}})));
     Modelica.Blocks.Continuous.Integrator integrator11
@@ -358,44 +358,42 @@ package BaseClasses "Base class package"
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(sum1.u[1], mainBus.htsBus.admixBus1.pumpBus.power) annotation (Line(
-          points={{-31,-17.6667},{-98.905,-17.6667},{-98.905,0.09}}, color={0,0,
+    connect(sum1.u[1], mainBus.htsBus.pumpBoilerBus.pumpBus.power) annotation (Line(
+          points={{-31,-17.5},{-98.905,-17.5},{-98.905,0.09}},       color={0,0,
             127}), Text(
         string="%second",
         index=1,
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
-    connect(sum1.u[2], mainBus.htsBus.admixBus2.pumpBus.power) annotation (Line(
-          points={{-31,-17},{-98.905,-17},{-98.905,0.09}}, color={0,0,127}), Text(
+    connect(sum1.u[2], mainBus.htsBus.pumpChpBus.pumpBus.power) annotation (Line(
+          points={{-31,-16.5},{-98.905,-16.5},{-98.905,0.09}},
+                                                           color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
-    connect(sum1.u[3], mainBus.htsBus.throttlePumpBus.pumpBus.power) annotation (
-        Line(points={{-31,-16.3333},{-98.905,-16.3333},{-98.905,0.09}}, color={0,
-            0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
+
     connect(sum1.y, integrator6.u) annotation (Line(points={{-19.5,-17},{-14.75,
             -17},{-14.75,-17},{-11,-17}}, color={0,0,127}));
     connect(integrator.y, sumWel.u[1])
-      annotation (Line(points={{0.5,95},{59,95},{59,8.14286}}, color={0,0,127}));
+      annotation (Line(points={{0.5,95},{57,95},{57,8.14286}}, color={0,0,127}));
     connect(integrator1.y, sumWel.u[2])
-      annotation (Line(points={{0.5,79},{59,79},{59,8.42857}}, color={0,0,127}));
-    connect(integrator2.y, sumWel.u[3]) annotation (Line(points={{0.5,61},{32,61},
-            {32,10},{59,10},{59,8.71429}}, color={0,0,127}));
-    connect(integrator3.y, sumWel.u[4]) annotation (Line(points={{0.5,45},{16,45},
-            {16,46},{32,46},{32,9},{59,9}}, color={0,0,127}));
-    connect(integrator4.y, sumWel.u[5]) annotation (Line(points={{0.5,25},{32.25,
-            25},{32.25,9.28571},{59,9.28571}}, color={0,0,127}));
+      annotation (Line(points={{0.5,79},{57,79},{57,8.42857}}, color={0,0,127}));
+    connect(integrator2.y, sumWel.u[3]) annotation (Line(points={{0.5,61},{32,
+            61},{32,10},{57,10},{57,8.71429}},
+                                           color={0,0,127}));
+    connect(integrator3.y, sumWel.u[4]) annotation (Line(points={{0.5,45},{16,
+            45},{16,46},{32,46},{32,9},{57,9}},
+                                            color={0,0,127}));
+    connect(integrator4.y, sumWel.u[5]) annotation (Line(points={{0.5,25},{
+            32.25,25},{32.25,9.28571},{57,9.28571}},
+                                               color={0,0,127}));
     connect(integrator5.y, sumWel.u[6])
-      annotation (Line(points={{0.5,9},{59,9},{59,9.57143}}, color={0,0,127}));
-    connect(integrator6.y, sumWel.u[7]) annotation (Line(points={{0.5,-17},{59,-17},
-            {59,9.85714}},      color={0,0,127}));
-    connect(sumWel.y, mainBus.evaBus.WelTotalMea) annotation (Line(points={{70.5,
-            9},{80,9},{80,0.09},{-98.905,0.09}}, color={0,0,127}), Text(
+      annotation (Line(points={{0.5,9},{57,9},{57,9.57143}}, color={0,0,127}));
+    connect(integrator6.y, sumWel.u[7]) annotation (Line(points={{0.5,-17},{57,
+            -17},{57,9.85714}}, color={0,0,127}));
+    connect(sumWel.y, mainBus.evaBus.WelTotalMea) annotation (Line(points={{68.5,9},
+            {80,9},{80,0.09},{-98.905,0.09}},    color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
@@ -552,6 +550,27 @@ package BaseClasses "Base class package"
           coordinateSystem(preserveAspectRatio=false)));
   end EnergyCounter;
 
+  expandable connector TabsBus2 "Data bus for concrete cora activation"
+    extends Modelica.Icons.SignalBus;
+    import SI = Modelica.SIunits;
+    HydraulicModules.BaseClasses.HydraulicBus pumpBus  "Hydraulic circuit of concrete core activation";
+    HydraulicModules.BaseClasses.HydraulicBus hotThrottleBus  "Hydraulic circuit of hot supply";
+    HydraulicModules.BaseClasses.HydraulicBus coldThrottleBus "Hydraulic circuit of cold supply";
+    annotation (
+      Icon(graphics,
+           coordinateSystem(preserveAspectRatio=false)),
+      Diagram(graphics,
+              coordinateSystem(preserveAspectRatio=false)),
+      Documentation(info="<html>
+<p>Definition of a bus connector for the ERC Heatpump System.</p>
+</html>",   revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
+</ul>
+</html>"));
+  end TabsBus2;
+
   record BenchmarkWorkshop "Workshop zone of  benchmark building"
     extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
       T_start=293.15,
@@ -564,15 +583,15 @@ package BaseClasses "Base class package"
       ATransparent={60,60,60},
       hConWin=12,
       RWin=1/(1.3*180),
-      gWin=0.2,
+      gWin=0.25,
       UWin=1.3,
       ratioWinConRad=0.09,
       AExt={30,30,30},
       hConExt=20,
       nExt=1,
       RExt={1/(0.3*90)},
-      RExtRem=0.000380773816236,
-      CExt={3*30*3*0.3*2100*880},
+      RExtRem=0.1,
+      CExt={3*30*0.3*2100*880},
       AInt=90,
       hConInt=20,
       nInt=1,
@@ -581,14 +600,14 @@ package BaseClasses "Base class package"
       AFloor=900,
       hConFloor=10,
       nFloor=1,
-      RFloor={0.001},
-      RFloorRem=0.001,
+      RFloor={1/(0.16*100)},
+      RFloorRem=1,
       CFloor={0.001},
       ARoof=900,
       hConRoof=30,
       nRoof=1,
       RRoof={1/(0.1814*900)},
-      RRoofRem=0.00001,
+      RRoofRem=1,
       CRoof={30*30*0.3*2100*880},
       nOrientationsRoof=1,
       tiltRoof={0},
@@ -652,24 +671,406 @@ package BaseClasses "Base class package"
 </html>"));
   end BenchmarkWorkshop;
 
-  expandable connector TabsBus2 "Data bus for concrete cora activation"
-    extends Modelica.Icons.SignalBus;
-    import SI = Modelica.SIunits;
-    HydraulicModules.BaseClasses.HydraulicBus pumpBus  "Hydraulic circuit of concrete core activation";
-    HydraulicModules.BaseClasses.HydraulicBus hotThrottleBus  "Hydraulic circuit of hot supply";
-    HydraulicModules.BaseClasses.HydraulicBus coldThrottleBus "Hydraulic circuit of cold supply";
-    annotation (
-      Icon(graphics,
-           coordinateSystem(preserveAspectRatio=false)),
-      Diagram(graphics,
-              coordinateSystem(preserveAspectRatio=false)),
-      Documentation(info="<html>
-<p>Definition of a bus connector for the ERC Heatpump System.</p>
-</html>",   revisions="<html>
-<ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
-<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
-</ul>
+  record BenchmarkCanteen "Canteen zone of  benchmark building"
+    extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+      T_start=293.15,
+      VAir=1800.0,
+      AZone=600.0,
+      hRad=5,
+      lat=0.87266462599716,
+      nOrientations=2,
+      AWin={40,40},
+      ATransparent={40,40},
+      hConWin=12,
+      RWin=1/(1.3*80),
+      gWin=0.25,
+      UWin=1.3,
+      ratioWinConRad=0.09,
+      AExt={20,20},
+      hConExt=20,
+      nExt=1,
+      RExt={1/(0.3*40)},
+      RExtRem=0.000380773816236,
+      CExt={2*20*0.3*2100*880},
+      AInt=2*30*3,
+      hConInt=20,
+      nInt=1,
+      RInt={1/(2*0.3*30*3)},
+      CInt={2*30*3*0.3*2100*880},
+      AFloor=600,
+      hConFloor=10,
+      nFloor=1,
+      RFloor={1/(0.16*600)},
+      RFloorRem=1,
+      CFloor={0.001},
+      ARoof=600,
+      hConRoof=30,
+      nRoof=1,
+      RRoof={1/(0.1814*600)},
+      RRoofRem=0.00001,
+      CRoof={20*30*0.3*2100*880},
+      nOrientationsRoof=1,
+      tiltRoof={0},
+      aziRoof={0},
+      wfRoof={1},
+      aRoof=0.7,
+      aExt=0.7,
+      TSoil=283.15,
+      hConWallOut=20.0,
+      hRadWall=5,
+      hConWinOut=20.0,
+      hConRoofOut=20,
+      hRadRoof=5,
+      tiltExtWalls={1.5707963267949,1.5707963267949},
+      aziExtWalls={3.1415926535898,0},
+      wfWall={0.45,0.45},
+      wfWin={0.5,0.5},
+      wfGro=0.1,
+      internalGainsPeopleSpecific=125/600,
+      ratioConvectiveHeatPeople=0.5,
+      internalGainsMachinesSpecific=213/600,
+      ratioConvectiveHeatMachines=0.6,
+      lightingPowerSpecific=2210/600,
+      ratioConvectiveHeatLighting=0.6,
+      useConstantACHrate=false,
+      baseACH=0.2,
+      maxUserACH=1,
+      maxOverheatingACH={3.0,2.0},
+      maxSummerACH={1.0,273.15 + 10,273.15 + 17},
+      winterReduction={0.2,273.15,273.15 + 10},
+      withAHU=false,
+      minAHU=0,
+      maxAHU=12,
+      hHeat=167500,
+      lHeat=0,
+      KRHeat=1000,
+      TNHeat=1,
+      HeaterOn=false,
+      hCool=0,
+      lCool=-1,
+      KRCool=1000,
+      TNCool=1,
+      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+    annotation (Documentation(revisions="<html>
+ <ul>
+  <li>
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  June, 2015, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+ </ul>
+ </html>",   info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
 </html>"));
-  end TabsBus2;
+  end BenchmarkCanteen;
+
+  record BenchmarkOpenPlanOffice
+    "Open plan office zone of  benchmark building"
+    extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+      T_start=293.15,
+      VAir=4050.0,
+      AZone=1350.0,
+      hRad=5,
+      lat=0.87266462599716,
+      nOrientations=3,
+      AWin={80,60,60},
+      ATransparent={80,60,60},
+      hConWin=12,
+      RWin=1/(1.3*200),
+      gWin=0.25,
+      UWin=1.3,
+      ratioWinConRad=0.09,
+      AExt={40,30,30},
+      hConExt=20,
+      nExt=1,
+      RExt={1/(0.3*100)},
+      RExtRem=1,
+      CExt={100*0.3*2100*880},
+      AInt=30*3,
+      hConInt=20,
+      nInt=1,
+      RInt={1/(0.3*30*3)},
+      CInt={30*3*0.3*2100*880},
+      AFloor=1350,
+      hConFloor=10,
+      nFloor=1,
+      RFloor={1/(0.16*1350)},
+      RFloorRem=1,
+      CFloor={0.001},
+      ARoof=1350,
+      hConRoof=30,
+      nRoof=1,
+      RRoof={1/(0.1814*1350)},
+      RRoofRem=1,
+      CRoof={1350*0.3*2100*880},
+      nOrientationsRoof=1,
+      tiltRoof={0},
+      aziRoof={0},
+      wfRoof={1},
+      aRoof=0.7,
+      aExt=0.7,
+      TSoil=283.15,
+      hConWallOut=20.0,
+      hRadWall=5,
+      hConWinOut=20.0,
+      hConRoofOut=20,
+      hRadRoof=5,
+      tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949},
+      aziExtWalls={3.1415926535898,0, 4.712},
+      wfWall={0.3,0.3, 0.3},
+      wfWin={0.333,0.333, 0.333},
+      wfGro=0.1,
+      internalGainsPeopleSpecific=125/1350,
+      ratioConvectiveHeatPeople=0.5,
+      internalGainsMachinesSpecific=50/1350,
+      ratioConvectiveHeatMachines=0.6,
+      lightingPowerSpecific=5684/1350,
+      ratioConvectiveHeatLighting=0.6,
+      useConstantACHrate=false,
+      baseACH=0.2,
+      maxUserACH=1,
+      maxOverheatingACH={3.0,2.0},
+      maxSummerACH={1.0,273.15 + 10,273.15 + 17},
+      winterReduction={0.2,273.15,273.15 + 10},
+      withAHU=false,
+      minAHU=0,
+      maxAHU=12,
+      hHeat=167500,
+      lHeat=0,
+      KRHeat=1000,
+      TNHeat=1,
+      HeaterOn=false,
+      hCool=0,
+      lCool=-1,
+      KRCool=1000,
+      TNCool=1,
+      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+    annotation (Documentation(revisions="<html>
+ <ul>
+  <li>
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  June, 2015, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+ </ul>
+ </html>",   info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
+  end BenchmarkOpenPlanOffice;
+
+  record BenchmarkSharedOffice
+    "Shared office zone of  benchmark building"
+    extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+      T_start=293.15,
+      VAir=300,
+      AZone=100.0,
+      hRad=5,
+      lat=0.87266462599716,
+      nOrientations=1,
+      AWin={40},
+      ATransparent={40},
+      hConWin=12,
+      RWin=1/(1.3*40),
+      gWin=0.1,
+      UWin=1.3,
+      ratioWinConRad=0.09,
+      AExt={20},
+      hConExt=20,
+      nExt=1,
+      RExt={1/(0.3*20)},
+      RExtRem=0.000380773816236,
+      CExt={20*0.3*2100*880},
+      AInt=90,
+      hConInt=20,
+      nInt=1,
+      RInt={1/(0.3*90)},
+      CInt={90*0.3*2100*880},
+      AFloor=100,
+      hConFloor=10,
+      nFloor=1,
+      RFloor={1/(0.16*100)},
+      RFloorRem=1,
+      CFloor={1},
+      ARoof=100,
+      hConRoof=30,
+      nRoof=1,
+      RRoof={1/(0.1814*100)},
+      RRoofRem=0.00001,
+      CRoof={100*0.3*2100*880},
+      nOrientationsRoof=1,
+      tiltRoof={0},
+      aziRoof={0},
+      wfRoof={1},
+      aRoof=0.7,
+      aExt=0.7,
+      TSoil=283.15,
+      hConWallOut=20.0,
+      hRadWall=5,
+      hConWinOut=20.0,
+      hConRoofOut=20,
+      hRadRoof=5,
+      tiltExtWalls={1.5707963267949},
+      aziExtWalls={0},
+      wfWall={0.9},
+      wfWin={1},
+      wfGro=0.1,
+      internalGainsPeopleSpecific=125/100,
+      ratioConvectiveHeatPeople=0.5,
+      internalGainsMachinesSpecific=20/100,
+      ratioConvectiveHeatMachines=0.6,
+      lightingPowerSpecific=420/100,
+      ratioConvectiveHeatLighting=0.6,
+      useConstantACHrate=false,
+      baseACH=0.2,
+      maxUserACH=1,
+      maxOverheatingACH={3.0,2.0},
+      maxSummerACH={1.0,273.15 + 10,273.15 + 17},
+      winterReduction={0.2,273.15,273.15 + 10},
+      withAHU=false,
+      minAHU=0,
+      maxAHU=12,
+      hHeat=167500,
+      lHeat=0,
+      KRHeat=1000,
+      TNHeat=1,
+      HeaterOn=false,
+      hCool=0,
+      lCool=-1,
+      KRCool=1000,
+      TNCool=1,
+      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+    annotation (Documentation(revisions="<html>
+ <ul>
+  <li>
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  June, 2015, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+ </ul>
+ </html>",   info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
+  end BenchmarkSharedOffice;
+
+  record BenchmarkConferenceRoom
+    "Conference room zone of  benchmark building"
+    extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+      T_start=293.15,
+      VAir=150,
+      AZone=50.0,
+      hRad=5,
+      lat=0.87266462599716,
+      nOrientations=1,
+      AWin={20},
+      ATransparent={20},
+      hConWin=12,
+      RWin=1/(1.3*20),
+      gWin=0.25,
+      UWin=1.3,
+      ratioWinConRad=0.09,
+      AExt={10},
+      hConExt=20,
+      nExt=1,
+      RExt={1/(0.3*10)},
+      RExtRem=1,
+      CExt={10*0.3*2100*880},
+      AInt=60,
+      hConInt=20,
+      nInt=1,
+      RInt={1/(0.3*60)},
+      CInt={60*0.3*2100*880},
+      AFloor=50,
+      hConFloor=10,
+      nFloor=1,
+      RFloor={1/(0.16*50)},
+      RFloorRem=1,
+      CFloor={1},
+      ARoof=50,
+      hConRoof=30,
+      nRoof=1,
+      RRoof={1/(0.1814*50)},
+      RRoofRem=1,
+      CRoof={50*0.3*2100*880},
+      nOrientationsRoof=1,
+      tiltRoof={0},
+      aziRoof={0},
+      wfRoof={1},
+      aRoof=0.7,
+      aExt=0.7,
+      TSoil=283.15,
+      hConWallOut=20.0,
+      hRadWall=5,
+      hConWinOut=20.0,
+      hConRoofOut=20,
+      hRadRoof=5,
+      tiltExtWalls={1.5707963267949},
+      aziExtWalls={3.1415926535898},
+      wfWall={0.9},
+      wfWin={1},
+      wfGro=0.1,
+      internalGainsPeopleSpecific=125/100,
+      ratioConvectiveHeatPeople=0.5,
+      internalGainsMachinesSpecific=50/100,
+      ratioConvectiveHeatMachines=0.6,
+      lightingPowerSpecific=210/100,
+      ratioConvectiveHeatLighting=0.6,
+      useConstantACHrate=false,
+      baseACH=0.2,
+      maxUserACH=1,
+      maxOverheatingACH={3.0,2.0},
+      maxSummerACH={1.0,273.15 + 10,273.15 + 17},
+      winterReduction={0.2,273.15,273.15 + 10},
+      withAHU=false,
+      minAHU=0,
+      maxAHU=12,
+      hHeat=167500,
+      lHeat=0,
+      KRHeat=1000,
+      TNHeat=1,
+      HeaterOn=false,
+      hCool=0,
+      lCool=-1,
+      KRCool=1000,
+      TNCool=1,
+      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+    annotation (Documentation(revisions="<html>
+ <ul>
+  <li>
+  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
+  Adapting nrPeople and nrPeopleMachines to area specific approach 
+  </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  June, 2015, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+ </ul>
+ </html>",   info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
+  end BenchmarkConferenceRoom;
 end BaseClasses;

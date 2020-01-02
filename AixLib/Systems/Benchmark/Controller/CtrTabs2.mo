@@ -33,8 +33,16 @@ model CtrTabs2 "Controller for concrete core activation"
   HydraulicModules.Controller.CtrThrottle ctrThrottleCold(useExternalTset=true,
       reverseAction=true)
     annotation (Placement(transformation(extent={{-18,-40},{2,-20}})));
-  HydraulicModules.Controller.CtrPump ctrPump
+  HydraulicModules.Controller.CtrPump ctrPump(rpm_pump=2500)
     annotation (Placement(transformation(extent={{-18,60},{2,80}})));
+  Modelica.Blocks.Math.Add add(k2=-1)
+    annotation (Placement(transformation(extent={{-48,20},{-38,30}})));
+  Modelica.Blocks.Sources.Constant constTflowSet1(final k=0.25)  annotation (Placement(transformation(extent={{-62,18},
+            {-54,26}})));
+  Modelica.Blocks.Math.Add add1(k2=+1)
+    annotation (Placement(transformation(extent={{-42,-42},{-32,-32}})));
+  Modelica.Blocks.Sources.Constant constTflowSet2(final k=0.25) annotation (Placement(transformation(extent={{-56,-44},
+            {-48,-36}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
       points={{2.1,70},{40,70},{40,72},{99.085,72},{99.085,0.09}},
@@ -44,22 +52,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constTflowSet.y, ctrThrottleCold.Tset) annotation (Line(
-      points={{-79,-50},{-40,-50},{-40,-36},{-20,-36}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(constTflowSet.y, ctrThrottleHot.Tset) annotation (Line(
-      points={{-79,-50},{-40,-50},{-40,26},{-22,26}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(Tset, ctrThrottleHot.Tset) annotation (Line(
-      points={{-120,0},{-60,0},{-60,26},{-22,26}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
-  connect(Tset, ctrThrottleCold.Tset) annotation (Line(
-      points={{-120,0},{-60,0},{-60,-36},{-20,-36}},
-      color={0,0,127},
-      pattern=LinePattern.Dash));
   connect(ctrThrottleHot.Tact, tabsBus.pumpBus.TFwrd_out) annotation (Line(
         points={{-22,38},{-22,52},{99.085,52},{99.085,0.09}}, color={0,0,127}),
       Text(
@@ -91,6 +83,30 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(constTflowSet1.y, add.u2)
+    annotation (Line(points={{-53.6,22},{-49,22}}, color={0,0,127}));
+  connect(add.y, ctrThrottleHot.Tset) annotation (Line(points={{-37.5,25},{-29.75,
+          25},{-29.75,26},{-22,26}}, color={0,0,127}));
+  connect(constTflowSet2.y, add1.u2)
+    annotation (Line(points={{-47.6,-40},{-43,-40}}, color={0,0,127}));
+  connect(add1.y, ctrThrottleCold.Tset) annotation (Line(points={{-31.5,-37},{-26.75,
+          -37},{-26.75,-36},{-20,-36}}, color={0,0,127}));
+  connect(constTflowSet.y, add1.u1) annotation (Line(
+      points={{-79,-50},{-76,-50},{-76,-34},{-43,-34}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(constTflowSet.y, add.u1) annotation (Line(
+      points={{-79,-50},{-72,-50},{-72,28},{-49,28}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(Tset, add.u1) annotation (Line(
+      points={{-120,0},{-76,0},{-76,28},{-49,28}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(Tset, add1.u1) annotation (Line(
+      points={{-120,0},{-76,0},{-76,-34},{-43,-34}},
+      color={0,0,127},
+      pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-80,20},{66,-20}},
