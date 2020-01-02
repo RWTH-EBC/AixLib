@@ -64,7 +64,8 @@ model modeStateSelector "Selects sub modes for heating and cooling"
   Modelica.Blocks.Continuous.Integrator int_CS(use_reset = true);
   Modelica.StateGraph.InitialStepWithSignal demandEstimation(nOut=1)
     annotation (Placement(transformation(extent={{-90,-8},{-74,8}})));
-  Modelica.StateGraph.Transition tran(enableTimer=true, waitTime=120)
+  Modelica.StateGraph.Transition tran(enableTimer=true, waitTime=
+        waitTimeEstimation)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-62,0})));
@@ -128,24 +129,36 @@ model modeStateSelector "Selects sub modes for heating and cooling"
   Modelica.Blocks.Sources.BooleanExpression HP_reCooler(y=not heatingModeInt
          and T_geo > 17 + 273.15 and 0.5*(T_HS[1] + T_HS[2]) > 273.15 + 33)
     annotation (Placement(transformation(extent={{-14,-72},{6,-54}})));
-  Modelica.StateGraph.Transition tran9(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran9(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,80},{62,92}})));
-  Modelica.StateGraph.Transition tran10(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran10(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,60},{62,72}})));
-  Modelica.StateGraph.Transition tran11(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran11(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,40},{62,52}})));
-  Modelica.StateGraph.Transition tran12(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran12(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,20},{62,32}})));
-  Modelica.StateGraph.Transition tran13(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran13(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,0},{62,12}})));
-  Modelica.StateGraph.Transition tran14(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran14(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,-20},{62,-8}})));
-  Modelica.StateGraph.Transition tran15(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran15(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,-40},{62,-28}})));
-  Modelica.StateGraph.Transition tran16(enableTimer=true, waitTime=1800)
+  Modelica.StateGraph.Transition tran16(enableTimer=true, waitTime=
+        timeModeActive)
     annotation (Placement(transformation(extent={{50,-60},{62,-48}})));
   Modelica.StateGraph.Step step
     annotation (Placement(transformation(extent={{-52,-8},{-36,8}})));
+  parameter Modelica.SIunits.Time waitTimeEstimation=300
+    "Wait time for demand estaimation";
+  parameter Modelica.SIunits.Time timeModeActive=1800
+    "Time before mode estimation in which one mode is active";
 equation
 //determine heating or cooling mode
 
@@ -250,6 +263,14 @@ equation
     useGTF = false;
     heatingMode = false;
     case = 8;
+  elseif demandEstimation.active then
+    modeSWU = 4;
+    useHP = false;
+    freeCoolingGC = false;
+    reCoolingGC = true;
+    useGTF = false;
+    heatingMode = false;
+    case = 0;
   else
     modeSWU = 4;
     useHP = true;
@@ -257,7 +278,7 @@ equation
     reCoolingGC = false;
     useGTF = false;
     heatingMode = true;
-    case = 0;
+    case = -1;
   end if;
 
   connect(tran1.outPort, mode1.inPort[1])
@@ -351,7 +372,24 @@ equation
   connect(alternative.outPort, demandEstimation.inPort[1]) annotation (Line(
         points={{77.04,0},{80,0},{80,118},{-92,118},{-92,0},{-90.8,0}}, color={0,
           0,0}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+          Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-100,100},{-38,0},{-100,-100}},
+          color={95,95,95},
+          thickness=0.5),
+          Text(
+          extent={{-48,24},{98,-16}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Control")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-96,-20},{-24,-54}},
           lineColor={0,0,0},
