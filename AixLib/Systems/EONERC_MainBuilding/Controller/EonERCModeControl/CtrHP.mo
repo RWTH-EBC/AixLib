@@ -190,6 +190,23 @@ equation
     annotation (Line(points={{-51.4,80},{-44.8,80}}, color={255,0,255}));
   connect(not3.y, logicalSwitch.u1) annotation (Line(points={{-35.6,80},{-4,80},
           {-4,-28},{4,-28}}, color={255,0,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+          Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-100,100},{-38,0},{-100,-100}},
+          color={95,95,95},
+          thickness=0.5),
+          Text(
+          extent={{-48,24},{98,-16}},
+          lineColor={95,95,95},
+          lineThickness=0.5,
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Control")}),                               Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end CtrHP;

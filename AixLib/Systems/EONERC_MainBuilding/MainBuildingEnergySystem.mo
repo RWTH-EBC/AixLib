@@ -71,8 +71,6 @@ model MainBuildingEnergySystem
     Ti=150,
     k=0.05,
     rpm_pump=2000,
-    xi_start=0.5,
-    initType=Modelica.Blocks.Types.InitPID.InitialState,
     reverseAction=false)
     annotation (Placement(transformation(extent={{-204,64},{-188,78}})));
   HydraulicModules.SimpleConsumer consumerHTC(
@@ -115,7 +113,7 @@ model MainBuildingEnergySystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admixHTC.energyDynamics)),
+          per, energyDynamics=admixLTC.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -138,7 +136,7 @@ model MainBuildingEnergySystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admixHTC.energyDynamics)),
+          per, energyDynamics=admixCold1.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -206,7 +204,7 @@ model MainBuildingEnergySystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
-          energyDynamics=admixHTC.energyDynamics)),
+          energyDynamics=admixCold2.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -311,10 +309,10 @@ equation
         points={{-96,60},{-96,18},{-94.1429,18}}, color={0,127,255}));
   connect(admixLTC.port_b2, heatExchangerSystem.port_a3) annotation (Line(
         points={{-84,60},{-84,18},{-84.7143,18}}, color={0,127,255}));
-  connect(admixCold1.port_b2, switchingUnit.port_a1) annotation (Line(points={{
-          16,60},{20,60},{20,58.6667},{32,58.6667}}, color={0,127,255}));
-  connect(admixCold1.port_a1, switchingUnit.port_b2) annotation (Line(points={{
-          4,60},{4,38.6667},{32,38.6667}}, color={0,127,255}));
+  connect(admixCold1.port_b2, switchingUnit.port_a1) annotation (Line(points={{16,60},
+          {20,60},{20,58.6667},{32,58.6667}},        color={0,127,255}));
+  connect(admixCold1.port_a1, switchingUnit.port_b2) annotation (Line(points={{4,60},{
+          4,38.6667},{32,38.6667}},        color={0,127,255}));
   connect(admixCold1.port_b1, consumerCold1.port_a)
     annotation (Line(points={{4,80},{4,90}}, color={0,127,255}));
   connect(consumerCold1.port_b, admixCold1.port_a2)
@@ -360,8 +358,8 @@ equation
           {80,-78.6667},{52,-78.6667}},          color={0,127,255}));
   connect(heatpumpSystem.port_a1, admixCold2.port_b2)
     annotation (Line(points={{52,-68},{116,-68},{116,60}}, color={0,127,255}));
-  connect(heatpumpSystem.port_b1, admixCold2.port_a1) annotation (Line(points={
-          {52,-78.6667},{80,-78.6667},{80,38},{104,38},{104,60}}, color={0,127,
+  connect(heatpumpSystem.port_b1, admixCold2.port_a1) annotation (Line(points={{52,
+          -78.6667},{80,-78.6667},{80,38},{104,38},{104,60}},     color={0,127,
           255}));
   connect(sine3.y, consumerCold2.T) annotation (Line(points={{96.5,99},{96.5,98},
           {114.8,98}}, color={0,0,127}));
@@ -438,8 +436,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(admixLTC.hydraulicBus, mainBus.consLtcBus) annotation (Line(
-      points={{-100,70},{-80,70},{-80,68},{-108,68},{-108,119.075},{-40.925,
-          119.075}},
+      points={{-100,70},{-106,70},{-106,119.075},{-40.925,119.075}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -457,13 +454,13 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(admixCold1.hydraulicBus, mainBus.consCold1Bus) annotation (Line(
       points={{0,70},{-2,70},{-2,82},{-24,82},{-24,119.075},{-40.925,119.075}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+
   connect(admixCold2.hydraulicBus, mainBus.consCold2Bus) annotation (Line(
       points={{100,70},{98,70},{98,76},{96,76},{96,84},{74,84},{74,119.075},{
           -40.925,119.075}},
