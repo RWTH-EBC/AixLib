@@ -20,7 +20,7 @@ model PI_Regler_RLT
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=200,
     k=0.01)
-           annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
+           annotation (Placement(visible = true, transformation(extent = {{-80, 44}, {-60, 64}}, rotation = 0)));
   Modelica.Blocks.Continuous.LimPID PID_RLT_Multipersonoffice_Hot(
     yMax=1,
     yMin=0,
@@ -123,14 +123,17 @@ model PI_Regler_RLT
   Modelica.Blocks.Sources.RealExpression realExpression6(y=273.15 + 18)
     annotation (Placement(transformation(extent={{-136,22},{-116,42}})));
 equation
+  connect(PID_RLT_Canteen_Hot.u_m, measureBus.RoomTemp_Canteen) annotation(
+    Line(points = {{-70, 42}, {-70, 36}, {-99.9, 36}, {-99.9, 0.1}}, color = {0, 0, 127}));
+  connect(PID_RLT_Canteen_Hot.y, Canteen.hot) annotation(
+    Line(points = {{-59, 54}, {-54, 54}, {-54, 28}, {-10, 28}, {-10, 24}}, color = {0, 0, 127}));
+  connect(PID_RLT_Canteen_Hot.u_s, PID_RLT_Openplanoffice_Hot.u_s) annotation(
+    Line(points = {{-82, 54}, {-100, 54}, {-100, 90}, {-82, 90}}, color = {0, 0, 127}));
   connect(realExpression2.y, PID_RLT_Openplanoffice_Hot.u_s)
     annotation (Line(points={{-119,90},{-82,90}}, color={0,0,127}));
   connect(PID_RLT_Conferenceroom_Hot.u_s, PID_RLT_Openplanoffice_Hot.u_s)
     annotation (Line(points={{-32,90},{-40,90},{-40,70},{-100,70},{-100,90},{-82,
           90}}, color={0,0,127}));
-  connect(PID_RLT_Canteen_Hot.u_s, PID_RLT_Openplanoffice_Hot.u_s)
-    annotation (Line(points={{-82,50},{-100,50},{-100,90},{-82,90}}, color={0,0,
-          127}));
   connect(PID_RLT_Multipersonoffice_Hot.u_s, PID_RLT_Openplanoffice_Hot.u_s)
     annotation (Line(points={{18,90},{10,90},{10,70},{-100,70},{-100,90},{-82,90}},
         color={0,0,127}));
@@ -160,8 +163,6 @@ equation
     annotation (Line(points={{-59,90},{-52,90},{-52,24}}, color={0,0,127}));
   connect(gain1.y, Openplanoffice.cold) annotation (Line(points={{-47.6,-90},{
           -44,-90},{-44,-22},{-52,-22},{-52,4}}, color={0,0,127}));
-  connect(PID_RLT_Canteen_Hot.y, Canteen.hot) annotation (Line(points={{-59,50},
-          {-54,50},{-54,28},{-10,28},{-10,24}}, color={0,0,127}));
   connect(gain.y, Canteen.cold) annotation (Line(points={{-47.6,-50},{-44,-50},
           {-44,-22},{-10,-22},{-10,4}}, color={0,0,127}));
   connect(gain2.y, Central.cold) annotation (Line(points={{2.4,-50},{4,-50},{4,
@@ -234,8 +235,6 @@ equation
   connect(PID_RLT_Multipersonoffice_Hot.u_m, measureBus.RoomTemp_Multipersonoffice)
     annotation (Line(points={{30,78},{30,74},{-99.9,74},{-99.9,0.1}}, color={0,
           0,127}));
-  connect(PID_RLT_Canteen_Hot.u_m, measureBus.RoomTemp_Canteen) annotation (
-      Line(points={{-70,38},{-70,36},{-99.9,36},{-99.9,0.1}}, color={0,0,127}));
   connect(PID_RLT_Central_Hot.u_m, measureBus.Air_RLT_Central_out) annotation (
       Line(points={{-20,38},{-20,38},{-20,36},{-99.9,36},{-99.9,0.1}}, color={0,
           0,127}));
