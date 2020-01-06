@@ -16,8 +16,8 @@ equation
 <p>Idea is based on the model <a href=\"Modelica.Blocks.Routing.RealPassThrough\">RealPassThrough</a> of the standard library.</p>
 </html>", revisions="<html>
 <ul>
-<li>January 06, 2020, by Fabian Wuellhorst:<br>Change extend to TwoPort instead of TwoPortInterface (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/833\">833</a>). </li>
-<li>August 08, 2018, by Fabian Wuellhorst, Philipp Mehrfeld:<br>First implementation </li>
+<li>January 06, 2020, by Fabian Wuellhorst:<br/>Change extend to TwoPort instead of TwoPortInterface (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/833\">833</a>). </li>
+<li>August 08, 2018, by Fabian Wuellhorst, Philipp Mehrfeld:<br/>First implementation </li>
 </ul>
 </html>"));
 end PassThroughMedium;
