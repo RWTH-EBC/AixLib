@@ -1,2 +1,2 @@
-// changed defaults of surfaceorientation, calcMethod and geometrie parameters
+// remove modifiers for PassThroughMedium-Model
 convertModifiers("AixLib.Fluid.Interfaces.PassThroughMedium", {"m_flow_nominal", "show_T", "m_flow_small"}, fill("",0));
