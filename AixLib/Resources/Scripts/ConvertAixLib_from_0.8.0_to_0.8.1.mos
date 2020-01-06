@@ -1,0 +1,2 @@
+// changed defaults of surfaceorientation, calcMethod and geometrie parameters
+convertModifiers("AixLib.Fluid.Interfaces.PassThroughMedium", {"m_flow_nominal=m_flow_nominal", "show_T=True", "m_flow_small=1E-4*abs(m_flow_nominal)"}, fill("",0));
