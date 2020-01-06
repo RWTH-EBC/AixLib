@@ -13,7 +13,7 @@ model OnOffControl
     annotation (Dialog(enable=use_minLocTime));
   parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered" annotation(choices(checkBox=true));
-  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
+  parameter Integer maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(enable=use_runPerHou));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time";
   Modelica.Blocks.Logical.GreaterThreshold
@@ -68,7 +68,7 @@ model OnOffControl
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{120,-10},{140,10}})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Interfaces.ThermalMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
   Utilities.Logical.SmoothSwitch swinOutnSet
     "If any of the ornSet conditions is true, nSet will be passed. Else nOut will stay the same"

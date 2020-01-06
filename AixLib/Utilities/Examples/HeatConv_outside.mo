@@ -2,9 +2,9 @@ within AixLib.Utilities.Examples;
 model HeatConv_outside
   extends Modelica.Icons.Example;
   HeatTransfer.HeatConvOutside heatTransfer_Outside(
-    calcMethodHConv=3,
+    calcMethod=3,
     A=16,
-    hConvCustom=25) annotation (Placement(transformation(extent={{-24,-2},{2,24}})));
+    hCon_const=25) annotation (Placement(transformation(extent={{-24,-2},{2,24}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature Tinside annotation(Placement(transformation(extent = {{40, 20}, {20, 40}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature Toutside annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-50, 30})));
   Modelica.Blocks.Sources.RealExpression Windspeed(y = 4) annotation(Placement(transformation(extent = {{-60, -26}, {-40, -6}})));

@@ -1,7 +1,8 @@
 BoilerControlBus
+CHPControlBus
 FVUControlBus
-HeatPumpControlBus
 ModularCompressorControlBus
 ModularExpansionValveControlBus
 ModularHeatPumpControlBus
 ModularSensorControlBus
+ThermalMachineControlBus

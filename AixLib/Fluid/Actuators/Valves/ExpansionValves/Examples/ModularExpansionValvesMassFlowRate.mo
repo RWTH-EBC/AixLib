@@ -62,7 +62,7 @@ model ModularExpansionValvesMassFlowRate
       extent={{-10,-10},{10,10}},
       rotation=-90,
       origin={-40,-40})));
-  AixLib.Fluid.Sources.FixedBoundary sink(
+  AixLib.Fluid.Sources.Boundary_pT                sink(
     redeclare package Medium = Medium,
     p=pOut,
     T=TOut,

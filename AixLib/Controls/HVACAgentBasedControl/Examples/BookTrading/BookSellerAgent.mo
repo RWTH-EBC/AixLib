@@ -1,7 +1,7 @@
 ﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookSellerAgent
   extends BaseClasses.PartialAgent;
-  Real[:,2] bookList( start= [3551551677,30; 3551551679,20; 3551551616, 20]);
+  Real[:,2] bookList( start= [3551551677.0,30; 3551551679.0,20; 3551551616.0, 20]);
   Real searchedBook(start=0);
   Integer counter(start=1);
   Boolean bookInStock(start=false);

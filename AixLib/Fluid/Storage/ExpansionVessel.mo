@@ -95,16 +95,16 @@ the thermal expansion of the liquid.
 </p>
 <p>
 Note that alternatively, the model
-<a href=\"modelica://AixLib.Fluid.Sources.FixedBoundary\">
-AixLib.Fluid.Sources.FixedBoundary</a> may be used to set
+<a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a> may be used to set
 a reference pressure. The main difference between these two models
 is that in this model, there is an energy and mass balance for the volume.
 In contrast, for
-<a href=\"modelica://AixLib.Fluid.Sources.FixedBoundary\">
-AixLib.Fluid.Sources.FixedBoundary</a>,
+<a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a>,
 any mass flow rate that flows out of the model will be at a user-specified temperature.
-Therefore, <a href=\"modelica://AixLib.Fluid.Sources.FixedBoundary\">
-AixLib.Fluid.Sources.FixedBoundary</a> leads to smaller systems
+Therefore, <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+AixLib.Fluid.Sources.Boundary_pT</a> leads to smaller systems
 of equations, which may result in faster simulation.
 </p>
 </html>", revisions="<html>

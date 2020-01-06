@@ -6,7 +6,7 @@ model Radiator "Example for EBC radiator"
     nPorts=1,
     m_flow=0.02761,
     T=328.15) annotation (Placement(transformation(extent={{-70,-8},{-50,12}})));
-  Sources.FixedBoundary sink(redeclare package Medium = Medium,
+  Sources.Boundary_pT   sink(redeclare package Medium = Medium,
     nPorts=1)
     "Sink"
     annotation (Placement(transformation(extent={{98,-10},{78,10}})));
@@ -16,17 +16,17 @@ model Radiator "Example for EBC radiator"
     selectable=true,
     radiatorType=AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
         NominalPower=496,
-        RT_nom={55,45,20},
+        RT_nom=Modelica.SIunits.Conversions.from_degC({55,45,20}),
         PressureDrop=1017878,
         Exponent=1.2776,
         VolumeWater=3.6,
         MassSteel=17.01,
-        length=2.6,
-        height=0.3,
         DensitySteel=7900,
         CapacitySteel=551,
         LambdaSteel=60,
-        Type=BaseClasses.RadiatorTypes.PanelRadiator10),
+        Type=BaseClasses.RadiatorTypes.PanelRadiator10,
+        length=2.6,
+        height=0.3),
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
     "Radiator"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));

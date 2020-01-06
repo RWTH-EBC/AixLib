@@ -1,4 +1,5 @@
 ControllerOnOff
+ControllerOnOffModularCHP
 DelayedOnOffController
 ExternalControlNightDayHC
 InternalControl
