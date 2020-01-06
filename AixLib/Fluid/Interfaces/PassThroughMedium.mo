@@ -1,6 +1,6 @@
 within AixLib.Fluid.Interfaces;
 model PassThroughMedium "To make medium connectors conditional"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+  extends AixLib.Fluid.Interfaces.PartialTwoPort;
 equation
   connect(port_a, port_b)
     annotation (Line(points={{-100,0},{100,0}}, color={0,127,255}));
