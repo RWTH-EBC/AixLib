@@ -321,9 +321,6 @@ partial model PartialHeatPumpSystem
     annotation (Placement(transformation(extent={{-130,104},{-100,134}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=false,
-    final m_flow_nominal=mFlow_conNominal,
     redeclare final package Medium = Medium_con) if
                                               not use_conPum
                                                             annotation (
@@ -333,9 +330,6 @@ partial model PartialHeatPumpSystem
         origin={-70,12})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final show_T=false,
-    final m_flow_nominal=mFlow_evaNominal,
     redeclare final package Medium = Medium_eva) if
                                               not use_evaPum
                                                             annotation (
@@ -358,9 +352,6 @@ partial model PartialHeatPumpSystem
 
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=false,
-    final m_flow_nominal=mFlow_conNominal,
     redeclare final package Medium = Medium_con) if
                                               not use_secHeaGen
     "Used if monovalent HP System" annotation (Placement(transformation(
@@ -431,9 +422,8 @@ equation
       points={{18,11.2},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,
-          -15.2},{-60,-60},{-100,-60}},
-                                 color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
+          {-60,-60},{-100,-60}}, color={0,127,255}));
 connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
