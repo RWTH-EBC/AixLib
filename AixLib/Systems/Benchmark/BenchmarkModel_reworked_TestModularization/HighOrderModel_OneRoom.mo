@@ -19,7 +19,6 @@ model HighOrderModel_OneRoom "Single instance of high order room with input para
     tableName="Benchmark",
     redeclare model RadOnTiltedSurface =
         BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu,
-
     Cloud_cover=true,
     Wind_dir=true,
     Wind_speed=true,

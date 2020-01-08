@@ -233,326 +233,6 @@ href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</
           coordinateSystem(preserveAspectRatio=false)));
   end ThermalZone_Record;
 
-  block HDiff_2
-  "Hemispherical diffuse irradiation on a tilted surface using Perez's anisotropic sky model"
-    extends
-      AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.PartialSolarIrradiation;
-
-    parameter Real rho(min=0, max=1, final unit="1")=0.2 "Ground reflectance";
-    parameter Modelica.SIunits.Angle lat "Latitude";
-    parameter Modelica.SIunits.Angle azi "Surface azimuth";
-    parameter Boolean outSkyCon=false
-      "Output contribution of diffuse irradiation from sky";
-    parameter Boolean outGroCon=false
-      "Output contribution of diffuse irradiation from ground";
-
-    Modelica.Blocks.Math.Add add "Block to add radiations"
-      annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-    Modelica.Blocks.Interfaces.RealOutput HSkyDifTil if outSkyCon
-      "Hemispherical diffuse solar irradiation on a tilted surface from the sky"
-      annotation (Placement(transformation(extent={{100,50},{120,70}})));
-    Modelica.Blocks.Interfaces.RealOutput HGroDifTil if outGroCon
-      "Hemispherical diffuse solar irradiation on a tilted surface from the ground"
-      annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-
-    HDiff_calc_2 HDifTil(til=1.5707963267949)
-      annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
-  protected
-     AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.SkyClearness skyCle "Sky clearness"
-      annotation (Placement(transformation(extent={{-62,16},{-54,24}})));
-     AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.BrighteningCoefficient briCoe "Brightening coefficient"
-      annotation (Placement(transformation(extent={{-40,-34},{-32,-26}})));
-     AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.RelativeAirMass relAirMas "Relative air mass"
-      annotation (Placement(transformation(extent={{-80,-44},{-72,-36}})));
-     AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.SkyBrightness skyBri "Sky brightness"
-      annotation (Placement(transformation(extent={{-60,-54},{-52,-46}})));
-     AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng(
-      final lat=lat,
-      final azi=azi,
-      final til=til) "Incidence angle"
-      annotation (Placement(transformation(extent={{-86,-96},{-76,-86}})));
-
-  equation
-    connect(relAirMas.relAirMas, skyBri.relAirMas) annotation (Line(
-        points={{-71.6,-40},{-66,-40},{-66,-48.4},{-60.8,-48.4}},
-        color={0,0,127}));
-    connect(skyBri.skyBri, briCoe.skyBri) annotation (Line(
-        points={{-51.6,-50},{-46,-50},{-46,-30},{-40.8,-30}},
-        color={0,0,127}));
-    connect(skyCle.skyCle, briCoe.skyCle) annotation (Line(
-        points={{-53.6,20},{-46,20},{-46,-27.6},{-40.8,-27.6}},
-        color={0,0,127}));
-    connect(weaBus.solZen, skyCle.zen) annotation (Line(
-        points={{-100,5.55112e-16},{-86,5.55112e-16},{-86,17.6},{-62.8,17.6}},
-        color={0,0,127}));
-    connect(weaBus.solZen, relAirMas.zen) annotation (Line(
-        points={{-100,5.55112e-16},{-86,5.55112e-16},{-86,-40},{-80.8,-40}},
-        color={0,0,127}));
-    connect(weaBus.solZen, briCoe.zen) annotation (Line(
-        points={{-100,5.55112e-16},{-86,5.55112e-16},{-86,-20},{-66,-20},{-66,-32},
-            {-40.8,-32},{-40.8,-32.4}},
-        color={0,0,127}));
-    connect(weaBus.HGloHor, skyCle.HGloHor) annotation (Line(
-        points={{-100,5.55112e-16},{-92,5.55112e-16},{-92,22.4},{-62.8,22.4}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}}));
-    connect(weaBus.HDifHor, skyCle.HDifHor) annotation (Line(
-        points={{-100,5.55112e-16},{-92,5.55112e-16},{-92,20},{-62.8,20}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}}));
-    connect(weaBus.HDifHor, skyBri.HDifHor) annotation (Line(
-        points={{-100,5.55112e-16},{-92,5.55112e-16},{-92,-51.6},{-60.8,-51.6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}}));
-
-    connect(weaBus, incAng.weaBus) annotation (Line(
-        points={{-100,5.55112e-16},{-92,5.55112e-16},{-92,-91},{-86,-91}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}}));
-    connect(add.y, H) annotation (Line(
-        points={{81,6.10623e-16},{90.5,6.10623e-16},{90.5,5.55112e-16},{110,
-            5.55112e-16}},
-        color={0,0,127}));
-
-    connect(HDifTil.HSkyDifTil, add.u1)
-      annotation (Line(points={{9,4},{58,4},{58,6}}, color={0,0,127}));
-    connect(HDifTil.HGroDifTil, add.u2)
-      annotation (Line(points={{9,-4},{58,-4},{58,-6}}, color={0,0,127}));
-    connect(incAng.y, HDifTil.incAng) annotation (Line(points={{-75.5,-91},{
-            -75.5,-7},{-14,-7}}, color={0,0,127}));
-    connect(weaBus.solZen, HDifTil.zen) annotation (Line(
-        points={{-100,0},{-14,0},{-14,-4}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,6},{-3,6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(briCoe.F2, HDifTil.briCof2) annotation (Line(points={{-31.6,-31.6},
-            {-31.6,-1},{-14,-1}}, color={0,0,127}));
-    connect(briCoe.F1, HDifTil.briCof1) annotation (Line(points={{-31.6,-28.4},
-            {-14,-28.4},{-14,2}}, color={0,0,127}));
-    connect(weaBus.HGloHor, HDifTil.HGloHor) annotation (Line(
-        points={{-100,0},{-90,0},{-90,8},{-14,8}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(weaBus.HDifHor, HDifTil.HDifHor) annotation (Line(
-        points={{-100,0},{-14,0},{-14,5}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(HDifTil.HGroDifTil, HGroDifTil) annotation (Line(points={{9,-4},{10,
-            -4},{10,-60},{110,-60}}, color={0,0,127}));
-    connect(HDifTil.HSkyDifTil, HSkyDifTil) annotation (Line(points={{9,4},{10,
-            4},{10,60},{110,60}}, color={0,0,127}));
-    annotation (
-      defaultComponentName="HDifTil",
-      Documentation(info="<html>
-<p>
-This component computes the hemispherical diffuse irradiation on a tilted surface using an anisotropic
-sky model proposed by Perez.
-For a definition of the parameters, see the
-<a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">User's Guide</a>.
-</p>
-<h4>References</h4>
-<ul>
-<li>
-P. Ineichen, R. Perez and R. Seals (1987).
-<i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
-Solar Energy, 39(4): 301-305.
-</li>
-<li>
-R. Perez, R. Seals, P. Ineichen, R. Stewart and D. Menicucci (1987).
-<i>A New Simplified Version of the Perez Diffuse Irradiance Model for Tilted Surface</i>,
-Solar Energy, 39(3): 221-231.
-</li>
-<li>
-R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
-<i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
-Solar Energy, 44(5):271-289.
-</li>
-</ul>
-</html>",   revisions="<html>
-<ul>
-<li>
-November 14, 2015, by Michael Wetter:<br/>
-Added <code>min</code>, <code>max</code> and <code>unit</code>
-attributes for <code>rho</code>.
-</li>
-<li>
-June 6, 2012, by Wangda Zuo:<br/>
-Added contributions from sky and ground that were separated in base class.
-</li>
-<li>
-February 25, 2012, by Michael Wetter:<br/>
-Changed component to get zenith angle from weather bus.
-</li>
-<li>
-May 24, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Text(
-            extent={{-150,110},{150,150}},
-            textString="%name",
-            lineColor={0,0,255})}),
-                Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
-  end HDiff_2;
-
-  block HDiff_calc_2
-     "Hemispherical diffuse irradiation on a tilted surface with Perez's anisotropic model"
-    extends Modelica.Blocks.Icons.Block;
-    parameter Real rho=0.2 "Ground reflectance";
-    parameter Modelica.SIunits.Angle til(displayUnit="deg") "Surface tilt angle";
-    Modelica.Blocks.Interfaces.RealInput briCof1 "Brightening Coeffcient F1"
-      annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
-    Modelica.Blocks.Interfaces.RealInput briCof2 "Brightening Coeffcient F2"
-      annotation (Placement(transformation(extent={{-140,-30},{-100,10}})));
-    Modelica.Blocks.Interfaces.RealInput HDifHor(quantity=
-          "RadiantEnergyFluenceRate", unit="W/m2")
-      "Diffuse horizontal solar radiation"
-      annotation (Placement(transformation(extent={{-140,30},{-100,70}})));
-    Modelica.Blocks.Interfaces.RealInput HGloHor(quantity=
-          "RadiantEnergyFluenceRate", unit="W/m2") "Global horizontal radiation"
-      annotation (Placement(transformation(extent={{-140,60},{-100,100}})));
-
-    Modelica.Blocks.Interfaces.RealInput zen(
-      quantity="Angle",
-      unit="rad",
-      displayUnit="deg") "Zenith angle of the sun beam"
-      annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
-    Modelica.Blocks.Interfaces.RealInput incAng(
-      quantity="Angle",
-      unit="rad",
-      displayUnit="deg") "Solar incidence angle on the surface"
-      annotation (Placement(transformation(extent={{-140,-90},{-100,-50}})));
-
-    Modelica.Blocks.Interfaces.RealOutput HGroDifTil(final quantity=
-          "RadiantEnergyFluenceRate", final unit="W/m2")
-      "Hemispherical diffuse solar irradiation on a tilted surface from the ground"
-      annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
-    Modelica.Blocks.Interfaces.RealOutput HSkyDifTil(final quantity=
-          "RadiantEnergyFluenceRate", final unit="W/m2")
-      "Hemispherical diffuse solar irradiation on a tilted surface from the sky"
-      annotation (Placement(transformation(extent={{100,30},{120,50}})));
-  protected
-    Real a;
-    Real b;
-    constant Real bMin=Modelica.Math.cos(Modelica.Constants.pi*65/180)
-      "Lower bound for b";
-  equation
-    a = AixLib.Utilities.Math.Functions.smoothMax(
-      0,
-      Modelica.Math.cos(incAng),
-      0.01);
-    b = AixLib.Utilities.Math.Functions.smoothMax(
-      bMin,
-      Modelica.Math.cos(zen),
-      0.01);
-    HSkyDifTil = HDifHor*(0.5*(1 - briCof1)*(1 + Modelica.Math.cos(til)) +
-      briCof1*a/b + briCof2*Modelica.Math.sin(til));
-    HGroDifTil = HGloHor*0.5*rho*(1 - Modelica.Math.cos(til));
-
-    annotation (
-      defaultComponentName="HDifTil",
-      Documentation(info="<html>
-<p>
-This component computes the hemispherical diffuse irradiation on a tilted surface by using an anisotropic model proposed by Perez.
-</p>
-<h4>References</h4>
-<ul>
-<li>
-P. Ineichen, R. Perez and R. Seals (1987).
-<i>The Importance of Correct Albedo Determination for Adequately Modeling Energy Received by Tilted Surface</i>,
-Solar Energy, 39(4): 301-305.
-</li>
-<li>
-R. Perez, R. Seals, P. Ineichen, R. Stewart and D. Menicucci (1987).
-<i>A New Simplified Version of the Perez Diffuse Irradiance Model for Tilted Surface</i>,
-Solar Energy, 39(3): 221-231.
-</li>
-<li>
-R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
-<i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
-Solar Energy, 44(5):271-289.
-</li>
-</ul>
-</html>",   revisions="<html>
-<ul>
-<li>
-April 27, 2018, by Michael Wetter:<br/>
-Corrected <code>displayUnit</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">AixLib, issue 912</a>.
-</li>
-<li>
-June 6, 2012, by Wangda Zuo:<br/>
-Separated the contribution from the sky and the ground.
-</li>
-</ul>
-<ul>
-<li>
-May 24, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Text(
-            extent={{-150,110},{150,150}},
-            textString="%name",
-            lineColor={0,0,255}),
-          Text(
-            extent={{-48,74},{-100,86}},
-            lineColor={0,0,127},
-            textString="HGloHor"),
-          Text(
-            extent={{-50,44},{-102,56}},
-            lineColor={0,0,127},
-            textString="HDifHor"),
-          Text(
-            extent={{-50,14},{-102,26}},
-            lineColor={0,0,127},
-            textString="briCof1"),
-          Text(
-            extent={{-50,-16},{-102,-4}},
-            lineColor={0,0,127},
-            textString="briCof2"),
-          Text(
-            extent={{-50,-46},{-102,-34}},
-            lineColor={0,0,127},
-            textString="zen"),
-          Text(
-            extent={{-52,-76},{-104,-64}},
-            lineColor={0,0,127},
-            textString="incAng")}),
-                Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
-  end HDiff_calc_2;
-
   model thermalZone_2
    "Thermal zone model with internal gains"
     extends
@@ -651,7 +331,7 @@ First implementation.
       "Calculates direct solar radiation on titled surface for roof"
       annotation (Placement(transformation(extent={{-84,78},{-68,95}})));
 
-    HDiff_2 HDifTill[3](
+    AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTill[3](
       til=1.5707963267949,
       lat=zoneParam.lat,
       azi=zoneParam.aziExtWalls,
@@ -1050,9 +730,12 @@ First implementation.
     AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
       wall_length=Room_Lenght,
       wall_height=Room_Height,
+      withWindow=true,
+      WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+      windowarea=60,
       withDoor=false,
       T0=T0_IW,
-      outside=false,
+      outside=true,
       final withSunblind=use_sunblind,
       final Blinding=1 - ratioSunblind,
       final LimitSolIrr=solIrrThreshold,
@@ -1067,15 +750,15 @@ First implementation.
     AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
       wall_length=Room_Lenght,
       wall_height=Room_Height,
-      withWindow=true,
+      withWindow=false,
       windowarea=60,
       T0=T0_IW,
-      outside=true,
+      outside=false,
       final withSunblind=use_sunblind,
       final Blinding=1 - ratioSunblind,
       final LimitSolIrr=solIrrThreshold,
       final TOutAirLimit=TOutAirLimit,
-      WallType=TypOW,
+      WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
       calcMethod=2)
