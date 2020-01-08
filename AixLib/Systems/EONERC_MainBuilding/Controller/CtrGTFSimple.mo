@@ -9,7 +9,7 @@ block CtrGTFSimple "Controller for geothermal field"
         iconTransformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.Constant rpm(k=rpmPump)
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  parameter Real rpmPump(min=0, unit="1") = 3000 "Rpm of the pump";
+  parameter Real rpmPump(min=0, unit="1") = 2100 "Rpm of the pump";
   BaseClasses.TwoCircuitBus gtfBus annotation (Placement(transformation(extent=
             {{80,-18},{120,18}}), iconTransformation(extent={{96,-18},{130,18}})));
 equation

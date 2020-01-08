@@ -24,9 +24,8 @@ model GeothermalFieldSimple
   AixLib.Systems.EONERC_MainBuilding.GeothermalFieldSimple gtf(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
-    T_amb=293.15,
-    V=8000,
-    G=10000) annotation (Placement(transformation(extent={{-20,-58},{20,-2}})));
+    T_amb=293.15)
+             annotation (Placement(transformation(extent={{-20,-58},{20,-2}})));
   Controller.CtrGTFSimple ctrGTFSimple
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 equation

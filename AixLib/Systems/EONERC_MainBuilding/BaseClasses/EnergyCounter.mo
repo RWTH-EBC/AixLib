@@ -310,8 +310,8 @@ equation
   connect(limiter1.y, product1.u1) annotation (Line(points={{98.5,71},{98.5,
           72.8},{101.4,72.8}}, color={0,0,127}));
   connect(add3.u1, mainBus.consLtcBus.TFwrd_in) annotation (Line(points={{73,74},
-          {68,74},{68,76},{62,76},{62,108},{-98.905,108},{-98.905,0.09}}, color
-        ={0,0,127}), Text(
+          {68,74},{68,76},{62,76},{62,108},{-98.905,108},{-98.905,0.09}}, color=
+         {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
