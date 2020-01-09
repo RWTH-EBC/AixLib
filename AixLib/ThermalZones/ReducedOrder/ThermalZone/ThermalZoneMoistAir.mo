@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
-    ROM(final use_moisture_balance=true));
+    ROM(final use_moisture_co2_balance=
+                                   true));
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
     annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
@@ -19,12 +20,12 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
     "Humidity output"
     annotation (Placement(transformation(extent={{100,64},{120,84}}),
         iconTransformation(extent={{100,6},{120,26}})));
-  Utilities.Sources.InternalGains.Humans.CO2Source CO2Source if
+  Utilities.Sources.InternalGains.Co2.HumanCO2Source CO2Source(activityDegree=
+        zoneParam.activityDegree) if
           ATot > 0
     annotation (Placement(transformation(extent={{22,-64},{28,-58}})));
-  Utilities.Sources.InternalGains.Humans.BaseClasses.CO2Balance CO2Balance(rho(
-        displayUnit="kg/m3") = 1.25,
-      V=ROM.volMoiAir.V) if
+  Utilities.Sources.InternalGains.Co2.CO2Balance CO2Balance(rho(displayUnit=
+          "kg/m3") = 1.25, V=ROM.volMoiAir.V) if
           ATot > 0
     annotation (Placement(transformation(extent={{32,-72},{36,-68}})));
   Modelica.Blocks.Math.MultiSum airExchange(nu=1) if
@@ -50,9 +51,10 @@ protected
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if
           ATot > 0 "CO2 massfraction in zone"
     annotation (Placement(transformation(extent={{22,-84},{26,-76}})));
-  Modelica.Blocks.Sources.RealExpression activityDegree(y=zoneParam.activityDegree)
-    if    ATot > 0 "activityDegree (Met Units)"
-    annotation (Placement(transformation(extent={{6,-78},{10,-70}})));
+  Modelica.Blocks.Sources.RealExpression co2PPM(y=ROM.volMoiAir.C[1]*(28.949/
+        44.01)*1E6) if
+          ATot > 0 "CO2 massfraction in zone"
+    annotation (Placement(transformation(extent={{84,84},{92,96}})));
 equation
   if internalGainsMode == 3 then
     connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,
@@ -76,11 +78,6 @@ equation
                                                         color={0,0,127}));
   connect(CO2Balance.CO2_flow, ROM.CO2_flow) annotation (Line(points={{36,-70},
           {50,-70},{50,-2},{84,-2},{84,27}}, color={0,0,127}));
-  connect(ROM.CO2, CO2) annotation (Line(points={{87,46},{90,46},{90,89},{110,
-          89}},
-        color={0,0,127}));
-  connect(activityDegree.y, CO2Source.activityDegree) annotation (Line(points={
-          {10.2,-74},{18,-74},{18,-62.2},{22,-62.2}}, color={0,0,127}));
   connect(XCO2.y, CO2Balance.XCO2) annotation (Line(points={{26.2,-80},{28,-80},
           {28,-70.8},{32,-70.8}}, color={0,0,127}));
   connect(airExchange.y, CO2Balance.airExchange)
@@ -89,6 +86,8 @@ equation
         points={{28,-61},{30,-61},{30,-69.2},{32,-69.2}}, color={0,0,127}));
   connect(ROM.TAir, CO2Source.TRoom) annotation (Line(points={{87,62},{94,62},{
           94,-4},{52,-4},{52,-50},{16,-50},{16,-61},{22,-61}}, color={0,0,127}));
+  connect(co2PPM.y, CO2) annotation (Line(points={{92.4,90},{98,90},{98,89},{
+          110,89}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>

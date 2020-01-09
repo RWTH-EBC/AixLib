@@ -55,7 +55,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
   parameter Boolean indoorPortExtWalls = false
     "Additional heat port at indoor surface of exterior walls"
     annotation(Dialog(group="Exterior walls"),choices(checkBox = true));
-  parameter Boolean use_moisture_balance = false
+  parameter Boolean use_moisture_co2_balance=false
     "If true, input connector QLat_flow is enabled and room air computes moisture balance"
     annotation(choices(checkBox = true));
 
@@ -68,7 +68,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     iconTransformation(extent={{-260,140},{-240,160}})));
 
   Modelica.Blocks.Interfaces.RealInput QLat_flow(final unit="W") if
-    use_moisture_balance and ATot >0
+    use_moisture_co2_balance and ATot > 0
     "Latent heat gains for the room"
     annotation (Placement(transformation(extent={{-280,-150},{-240,-110}}),
         iconTransformation(extent={{-260,-130},{-240,-110}})));
@@ -139,7 +139,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final use_C_flow=false) if VAir > 0 and not use_moisture_balance
+    final use_C_flow=false) if VAir > 0 and not use_moisture_co2_balance
     "Indoor air volume"
     annotation (Placement(transformation(extent={{42,-26},{22,-6}})));
   Fluid.MixingVolumes.MixingVolumeMoistAir volMoiAir(
@@ -155,7 +155,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final use_C_flow=true) if  VAir > 0 and use_moisture_balance
+    final use_C_flow=true) if VAir > 0 and use_moisture_co2_balance
     "Indoor air volume"
     annotation (Placement(transformation(extent={{-20,-26},{0,-6}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin) if
@@ -193,11 +193,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
     annotation (Placement(transformation(extent={{-158,-50},{-178,-28}})));
 
 
-  Modelica.Blocks.Interfaces.RealOutput CO2 if
-       use_moisture_balance and ATot >0 "Indoor Air CO2 concentration in ppm"
-    annotation (Placement(transformation(extent={{240,-10},{260,10}})));
-  Modelica.Blocks.Interfaces.RealInput CO2_flow if
-       use_moisture_balance and ATot >0
+  Modelica.Blocks.Interfaces.RealInput CO2_flow if use_moisture_co2_balance
+     and ATot > 0
     "Incoming and outgoing CO2 massflow [kg/s]"                annotation (
       Placement(transformation(
         extent={{20,-20},{-20,20}},
@@ -224,13 +221,6 @@ protected
   parameter Real splitFactorSolRad[dimension, nOrientations]=
     BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin)
     "Share of each wall surface area that is non-zero, for each orientation separately";
-  Modelica.Blocks.Sources.RealExpression CO2PPM(y=volMoiAir.C[1]*(28.949/44.01)
-        *1E6) if
-    use_moisture_balance and ATot >0 "Calculation of CO2 in ppm inside zone"
-    annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=180,
-        origin={218,0})));
   Modelica.Thermal.HeatTransfer.Components.Convection convExtWall(dT(start=0)) if
                                                                      ATotExt > 0
     "Convective heat transfer of exterior walls"
@@ -286,12 +276,12 @@ protected
   Modelica.Blocks.Math.Gain mWat_flow(
     final k(unit="kg/J") = 1/h_fg,
     u(final unit="W"),
-    y(final unit="kg/s")) if
-       use_moisture_balance and ATot >0 "Water flow rate due to latent heat gain"
+    y(final unit="kg/s")) if use_moisture_co2_balance and ATot > 0
+                                        "Water flow rate due to latent heat gain"
     annotation (Placement(transformation(extent={{-200,-100},{-180,-80}})));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow conQLat_flow if
-    use_moisture_balance and ATot >0
+    use_moisture_co2_balance and ATot > 0
     "Converter for latent heat flow rate"
     annotation (Placement(transformation(extent={{-202,-130},{-182,-110}})));
 equation
@@ -431,7 +421,7 @@ equation
     pattern=LinePattern.Dash));
   connect(sumSolRad.y, convHeatSol.Q_flow)
     annotation (Line(points={{-173.4,124},{-166,124}}, color={0,0,127}));
-  if use_moisture_balance then
+  if use_moisture_co2_balance then
     connect(mWat_flow.y, volMoiAir.mWat_flow) annotation (Line(
         points={{-179,-90},{-168,-90},{-168,-80},{-34,-80},{-34,-8},{-22,-8}},
         color={0,0,127},
@@ -446,8 +436,6 @@ equation
   connect(conQLat_flow.Q_flow, QLat_flow)
     annotation (Line(points={{-202,-120},{-232,-120},{-232,-130},{-260,-130}},
                                                        color={0,0,127}));
-  connect(CO2PPM.y, CO2)
-    annotation (Line(points={{229,0},{250,0}}, color={0,0,127}));
   connect(CO2_flow, volMoiAir.C_flow[1]) annotation (Line(points={{180,-200},{
           180,-90},{-28,-90},{-28,-22},{-22,-22}}, color={0,0,127}));
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
