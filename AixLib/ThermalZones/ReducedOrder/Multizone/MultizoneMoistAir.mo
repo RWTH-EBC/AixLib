@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneMoistAir "Multizone model with humidity balance"
-  extends Multizone(redeclare final model thermalZone =
+  extends Multizone(redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange);
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
     VAir > 0 "Ventilation and infiltration humidity"

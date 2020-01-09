@@ -7,7 +7,7 @@ model ThermalZoneMoistAir
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
     nPorts=2,
     T_start=293.15,
@@ -130,13 +130,13 @@ model ThermalZoneMoistAir
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
   Fluid.Sources.MassFlowSource_T sourcAir(
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = AixLib.Media.Air,
     m_flow=3000/3600*1.17,
     X={0.004,1 - 0.004},
     T=283.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{-84,-80},{-64,-60}})));
-  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
+  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = AixLib.Media.Air,
       nPorts=1)
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
 equation

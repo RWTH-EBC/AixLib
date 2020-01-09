@@ -7,7 +7,7 @@ model ThermalZoneMoistAirExchange
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = AixLib.Media.Air,
     T_start=293.15,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture(),
