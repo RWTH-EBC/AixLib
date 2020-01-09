@@ -1,9 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZoneEquipped
-  "Illustrates the use of ThermalZoneEquipped"
+model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange thermalZone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir, zoneParam=
     AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
@@ -180,4 +179,4 @@ equation
   </li>
   </ul>
 </html>"));
-end ThermalZoneEquipped;
+end ThermalZoneAirExchange;
