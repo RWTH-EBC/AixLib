@@ -899,214 +899,24 @@ algorithm
     Inline=true);
 end der_specificHeatCapacityCv;
   annotation(preferredView="info", Documentation(info="<html>
-<p>
-This medium package models moist air using a gas law in which pressure and temperature
-are independent, which often leads to significantly faster and more robust computations.
-The specific heat capacities at constant pressure and at constant volume are constant.
-The air is assumed to be not saturated.
-</p>
-<p>
-This medium uses the gas law
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-&rho;/&rho;<sub>stp</sub> = p/p<sub>stp</sub>,
-</p>
-<p>
-where
-<i>p<sub>std</sub></i> and <i>&rho;<sub>stp</sub></i> are constant reference
-temperature and density, rathern than the ideal gas law
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-&rho; = p &frasl;(R T),
-</p>
-<p>
-where <i>R</i> is the gas constant and <i>T</i> is the temperature.
-</p>
-<p>
-This formulation often leads to smaller systems of nonlinear equations
-because equations for pressure and temperature are decoupled.
-Therefore, if air inside a control volume such as room air is heated, it
-does not increase its specific volume. Consequently, merely heating or cooling
-a control volume does not affect the air flow calculations in a duct network
-that may be connected to that volume.
-Note that multizone air exchange simulation in which buoyancy drives the
-air flow is still possible as the models in
-<a href=\"modelica://AixLib.Airflow.Multizone\">
-AixLib.Airflow.Multizone</a> compute the mass density using the function
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
-AixLib.Utilities.Psychrometrics.Functions.density_pTX</a> in which density
-is a function of temperature.
-</p>
-<p>
-Note that models in this package implement the equation for the internal energy as
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  u = h - p<sub>stp</sub> &frasl; &rho;<sub>stp</sub>,
-</p>
-<p>
-where
-<i>u</i> is the internal energy per unit mass,
-<i>h</i> is the enthalpy per unit mass,
-<i>p<sub>stp</sub></i> is the static pressure and
-<i>&rho;<sub>stp</sub></i> is the mass density at standard pressure and temperature.
-The reason for this implementation is that in general,
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  h = u + p v,
-</p>
-<p>
-from which follows that
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  u = h - p v = h - p &frasl; &rho; = h - p<sub>stp</sub> &frasl; &rho;<sub>std</sub>,
-</p>
-<p>
-because <i>p &frasl; &rho; = p<sub>stp</sub> &frasl; &rho;<sub>stp</sub></i> in this medium model.
-</p>
-<p>
-The enthalpy is computed using the convention that <i>h=0</i>
-if <i>T=0</i> &deg;C and no water vapor is present.
-</p>
+<p>This medium package models moist air using a gas law in which pressure and temperature are independent, which often leads to significantly faster and more robust computations. Additionally, the density is constant to improve the simulation stability and speed.</p>
+<p>This medium uses the gas law </p>
+<p align=\"center\"><i>&rho; = &rho;<sub>stp</sub> </i></p>
+<p><i>&rho;<sub>stp</i></sub> is a constant reference density.</p>
+<p align=\"center\"><i>&rho; = p &frasl;(R T), </i></p>
+<p>where <i>R</i> is the gas constant and <i>T</i> is the temperature. </p>
+<p><br>The medium model can be used for air duct simulations, where the pressures and temperatures are close to the reference values.</p>
+<p><br>Note that models in this package implement the equation for the internal energy as </p>
+<p align=\"center\"><i>u = h - p<sub>stp</sub> &frasl; &rho;<sub>stp</sub>, </i></p>
+<p>where <i>u</i> is the internal energy per unit mass, <i>h</i> is the enthalpy per unit mass, <i>p<sub>stp</i></sub> is the static pressure and <i>&rho;<sub>stp</i></sub> is the mass density at standard pressure and temperature. The reason for this implementation is that in general, </p>
+<p align=\"center\"><i>h = u + p v, </i></p>
+<p>from which follows that </p>
+<p align=\"center\"><i>u = h - p v = h - p &frasl; &rho; = h - p<sub>stp</sub> &frasl; &rho;<sub>std</sub>, </i></p>
+<p>because <i>p &frasl; &rho; = p<sub>stp</sub> &frasl; &rho;<sub>stp</i></sub> in this medium model. </p>
+<p>The enthalpy is computed using the convention that <i>h=0</i> if <i>T=0</i> &deg;C and no water vapor is present. </p>
 </html>", revisions="<html>
 <ul>
-<li>
-January 11, 2019 by Michael Wetter:<br/>
-Reforulated assignment of <code>X_int</code> in <code>setState_psX</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1079\">#1079</a>.
-</li>
-<li>
-October 26, 2018, by Filip Jorissen and Michael Wetter:<br/>
-Now printing different messages if temperature is above or below its limit,
-and adding instance name as JModelica does not print the full instance name in the assertion.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1045\">#1045</a>.
-</li>
-<li>
-November 4, 2016, by Michael Wetter:<br/>
-Set default value for <code>dT.start</code> in base properties.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/575\">#575</a>.
-</li>
-<li>
-June 6, 2015, by Michael Wetter:<br/>
-Set <code>AbsolutePressure(start=p_default)</code> to avoid
-a translation error if
-<a href=\"modelica://AixLib.Fluid.Sources.Examples.TraceSubstancesFlowSource\">
-AixLib.Fluid.Sources.Examples.TraceSubstancesFlowSource</a>
-is translated in pedantic mode in Dymola 2016.
-The reason is that pressures use <code>Medium.p_default</code> as start values,
-but
-<a href=\"modelica://Modelica.Media.Interfaces.Types\">
-Modelica.Media.Interfaces.Types</a>
-sets a default value of <i>1E-5</i>.
-A similar change has been done for pressure.
-This fixes
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
-</li>
-<li>
-June 5, 2015, by Michael Wetter:<br/>
-Added <code>stateSelect</code> attribute in <code>BaseProperties.T</code>
-to allow correct use of <code>preferredMediumState</code> as
-described in
-<a href=\"modelica://Modelica.Media.Interfaces.PartialMedium\">
-Modelica.Media.Interfaces.PartialMedium</a>.
-Note that the default is <code>preferredMediumState=false</code>
-and hence the same states are used as were used before.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/260\">#260</a>.
-</li>
-<li>
-May 11, 2015, by Michael Wetter:<br/>
-Removed
-<code>p(stateSelect=if preferredMediumStates then StateSelect.prefer else StateSelect.default)</code>
-in declaration of <code>BaseProperties</code>.
-Otherwise, when models that contain a fluid volume
-are exported as an FMU, their pressure would be
-differentiated with respect to time. This would require
-the time derivative of the inlet pressure, which is not available,
-causing the translation to stop with an error.
-</li>
-<li>
-May 1, 2015, by Michael Wetter:<br/>
-Added <code>Inline=true</code> for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
-issue 227</a>.
-</li>
-<li>
-March 20, 2015, by Michael Wetter:<br/>
-Added missing term <code>state.p/reference_p</code> in function
-<code>specificEntropy</code>.
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/193\">#193</a>.
-</li>
-<li>
-February 3, 2015, by Michael Wetter:<br/>
-Removed <code>stateSelect.prefer</code> for temperature.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/160\">#160</a>.
-</li>
-<li>
-July 24, 2014, by Michael Wetter:<br/>
-Changed implementation to use
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Constants\">
-AixLib.Utilities.Psychrometrics.Constants</a>.
-This was done to use consistent values throughout the library.
-</li>
-<li>
-November 16, 2013, by Michael Wetter:<br/>
-Revised and simplified the implementation.
-</li>
-<li>
-November 14, 2013, by Michael Wetter:<br/>
-Removed function
-<code>HeatCapacityOfWater</code>
-which is neither needed nor implemented in the
-Modelica Standard Library.
-</li>
-<li>
-November 13, 2013, by Michael Wetter:<br/>
-Removed non-used computations in <code>specificEnthalpy_pTX</code> and
-in <code>temperature_phX</code>.
-</li>
-<li>
-March 29, 2013, by Michael Wetter:<br/>
-Added <code>final standardOrderComponents=true</code> in the
-<code>BaseProperties</code> declaration. This avoids an error
-when models are checked in Dymola 2014 in the pedenatic mode.
-</li>
-<li>
-April 12, 2012, by Michael Wetter:<br/>
-Added keyword <code>each</code> to <code>Xi(stateSelect=...)</code>.
-</li>
-<li>
-April 4, 2012, by Michael Wetter:<br/>
-Added redeclaration of <code>ThermodynamicState</code> to avoid a warning
-during model check and translation.
-</li>
-<li>
-August 3, 2011, by Michael Wetter:<br/>
-Fixed bug in <code>u=h-R*T</code>, which is only valid for ideal gases.
-For this medium, the function is <code>u=h-pStd/dStp</code>.
-</li>
-<li>
-January 27, 2010, by Michael Wetter:<br/>
-Fixed bug in <code>else</code> branch of function <code>setState_phX</code>
-that lead to a run-time error when the constructor of this function was called.
-</li>
-<li>
-January 22, 2010, by Michael Wetter:<br/>
-Added implementation of function
-<a href=\"modelica://AixLib.Media.GasesPTDecoupled.MoistAirUnsaturated.enthalpyOfNonCondensingGas\">
-enthalpyOfNonCondensingGas</a> and its derivative.
-</li>
-<li>
-January 13, 2010, by Michael Wetter:<br/>
-Fixed implementation of derivative functions.
-</li>
-<li>
-August 28, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
+<li>January 09, 2020 by Alexander K&uuml;mpel:<br>Copy from <a href=\"modelica://AixLib/Media/Air.mo\">Air</a> and density set constant</li>
 </ul>
 </html>"),
     Icon(graphics={
