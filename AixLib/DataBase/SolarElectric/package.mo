@@ -1,7 +1,7 @@
 within AixLib.DataBase;
 package SolarElectric
   record QPlusBFRG41285
-   extends AixLib.DataBase.SolarElectric.PVBaseRecordNew(
+   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
      n_ser=60,
      n_par=1,
      A_cel=((V_mp0*I_mp0)/(1000*eta_0))/n_ser,

@@ -1,6 +1,6 @@
 within AixLib.DataBase.SolarElectric;
 record ShellSP70
-  extends AixLib.DataBase.SolarElectric.PVBaseRecordNew(
+  extends AixLib.DataBase.SolarElectric.PVBaseRecord(
    n_ser=36,
    n_par=1,
    A_cel=(0.125)*(0.125),
