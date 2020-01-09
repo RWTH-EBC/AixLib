@@ -5,17 +5,9 @@ model SimpleNLayer "Wall consisting of n layers"
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
     wallRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
     annotation (choicesAllMatching=true, Placement(transformation(extent={{48,-98},{68,-78}})));
-
-//   parameter Integer n(min = 1) "Number of layers" annotation(Dialog(group = "Structure of wall layers"));
-//   parameter Modelica.SIunits.Thickness d[n] "Thickness" annotation(Dialog(group = "Structure of wall layers"));
-//   parameter Modelica.SIunits.Density rho[n] "Density" annotation(Dialog(group = "Structure of wall layers"));
-//   parameter Modelica.SIunits.ThermalConductivity lambda[n]
-//     "Thermal conductivity"                                                                       annotation(Dialog(group = "Structure of wall layers"));
-//   parameter Modelica.SIunits.SpecificHeatCapacity c[n]
-//     "Specific heat capacity"                                                                    annotation(Dialog(group = "Structure of wall layers"));
-   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
-     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
-//   // 2n HeatConds
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
+    "Initial temperature" annotation(Dialog(group = "Thermal"));
+  // 2n HeatConds
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[wallRec.n](G = A .* wallRec.lambda ./ (wallRec.d / 2)) annotation(Placement(transformation(extent={{30,-10},
             {50,10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[wallRec.n](G = A .* wallRec.lambda ./ (wallRec.d / 2)) annotation(Placement(transformation(extent={{-52,-10},
