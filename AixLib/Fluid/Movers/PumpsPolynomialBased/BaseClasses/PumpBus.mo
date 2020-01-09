@@ -2,9 +2,9 @@
 expandable connector PumpBus "Standard data bus with pump information"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  Real rpmSet "Pump speed setpoint"
+  SI.Conversions.NonSIunits.AngularVelocity_rpm rpmSet "Pump speed setpoint"
     annotation (HideResult=false);
-  Real rpmMea "Pump speed actor signal"
+  SI.Conversions.NonSIunits.AngularVelocity_rpm rpmMea "Pump speed actor signal"
     annotation (HideResult=false);
   SI.Power PelMea "Electrical pump power"
                                          annotation (HideResult=false);
