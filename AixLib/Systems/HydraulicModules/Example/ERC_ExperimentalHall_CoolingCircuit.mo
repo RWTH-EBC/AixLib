@@ -160,15 +160,16 @@ equation
     annotation (Line(points={{-54,51},{-54,29},{-53,29}},
                                                  color={0,127,255}));
   connect(ctrMix.hydraulicBus, admix.hydraulicBus) annotation (Line(
-      points={{-116.91,9.57},{-104.455,9.57},{-104.455,4},{-93,4}},
+      points={{-114.18,11.26},{-104.455,11.26},{-104.455,4},{-93,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedSimple.hydraulicBus, unmixed.hydraulicBus) annotation (Line(
-      points={{-117.88,70},{-19,70},{-19,4}},
+      points={{-116.32,70.24},{-21,70.24},{-21,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedThrottle.hydraulicBus, unmixedThrottle.hydraulicBus) annotation (Line(
-      points={{-118.84,90.68},{-50,90.68},{-50,86},{49,86},{49,4}},
+      points={{-116.32,92.24},{-50,92.24},{-50,92},{50,92},{50,50},{49,50},{49,
+          4}},
       color={255,204,51},
       thickness=0.5));
   connect(admix.port_a1, hex.port_a2) annotation (Line(points={{-83,-21},{-83,-28},{-106,-28}},
@@ -185,14 +186,16 @@ equation
   connect(admix.port_b2, hex.port_b2) annotation (Line(points={{-53,-21},{-53,-68},{-106,-68}},
                        color={0,127,255}));
   connect(ctrUnmixedThrottle.hydraulicBus, hydraulicBus) annotation (Line(
-      points={{-118.84,90.68},{-114.42,90.68},{-114.42,104},{-114,104}},
+      points={{-116.32,92.24},{-114.42,92.24},{-114.42,104},{-114,104}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrUnmixedThrottle.Tact, hydraulicBus.TRtrn_in) annotation (Line(points={{-144.4,99.2},{-152,99.2},{-152,104.05},{-113.95,104.05}}, color={0,0,127}), Text(
+  connect(ctrUnmixedThrottle.Tact, hydraulicBus.TRtrnInMea) annotation (Line(
+        points={{-144.4,99.2},{-152,99.2},{-152,104.05},{-113.95,104.05}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
