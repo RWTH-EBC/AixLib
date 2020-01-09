@@ -2,6 +2,8 @@ within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow1IwL2IwS1Gr1Uf1
   "1 outer wall, 2 inner walls load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
+  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom;
+
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
       group="Construction parameters",
