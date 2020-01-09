@@ -8,5 +8,12 @@ record Default "Default ASHRAE140 double pane glazing"
     c={750} "Specific heat capacity of wall layers",
     eps=0.5 "DUMMY FOR WINDOWS. Emissivity of inner wall surface");
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+<li>January 9, 2020
+    by Philipp Mehrfeld:<br/>
+       Model added to the AixLib library.
+</ul>
+</html>"));
 end Default;
