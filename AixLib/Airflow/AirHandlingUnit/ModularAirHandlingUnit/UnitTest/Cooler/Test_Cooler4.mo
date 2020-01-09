@@ -63,6 +63,10 @@ model Test_Cooler4
     annotation (Placement(transformation(extent={{38,66},{58,86}})));
   Modelica.Blocks.Sources.RealExpression Q_flow(y=cooler.Q_flow)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Cooler cooler(
+    redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-2,2},{18,22}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=280.15)
     annotation (Placement(transformation(extent={{-34,-18},{-14,2}})));
 equation

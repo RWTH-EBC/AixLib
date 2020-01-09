@@ -8,6 +8,12 @@ model Test_Heater4
     yMax=10) annotation (Placement(transformation(extent={{60,40},{80,60}})));
   Modelica.Blocks.Sources.Constant T_airSet(k=286.15)
     annotation (Placement(transformation(extent={{26,40},{46,60}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Heater heater(
+    use_T_set=false,
+    redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple,
+    use_constant_heatTransferCoefficient=false)
+    annotation (Placement(transformation(extent={{-2,12},{18,32}})));
   Modelica.Blocks.Sources.Ramp m_airIn(
     duration=600,
     offset=2000/3600*1.18,
@@ -56,7 +62,8 @@ model Test_Heater4
     annotation (Placement(transformation(extent={{-34,86},{-14,106}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource("modelica://SimpleAHU/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
 

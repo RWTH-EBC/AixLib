@@ -39,6 +39,12 @@ model Test_Cooler2
     m_flow_nominal=2000/3600*1.18,
     dp_nominal=0)
     annotation (Placement(transformation(extent={{12,58},{32,78}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Cooler cooler(
+    use_T_set=true,
+    use_X_set=true,
+    redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-28,-34},{-8,-14}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=280.15)
     annotation (Placement(transformation(extent={{-62,-60},{-42,-40}})));
   Modelica.Blocks.Sources.Constant X_set_equation(k=0.011)

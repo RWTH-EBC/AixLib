@@ -1,5 +1,11 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SensibleCooler;
 model Test_SensibleCooler
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SensibleCooler cooler(
+    redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDrop
+        (b=3),
+      use_constant_heatTransferCoefficient=false)
+    annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
   Modelica.Blocks.Sources.Ramp m_airIn(
     height=1000/3600*1.18,
     duration=600,

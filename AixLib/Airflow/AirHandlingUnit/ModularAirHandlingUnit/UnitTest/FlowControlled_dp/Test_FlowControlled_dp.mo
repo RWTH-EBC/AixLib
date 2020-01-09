@@ -1,5 +1,12 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp;
 model Test_FlowControlled_dp
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.FlowControlled_dp
+    flowControlled_dp(
+      use_WeatherData=false,
+      use_inputFilter=true,
+      m_flow_nominal=2000/3600*1.18,
+      use_defaultElectricalPower=false)
+    annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
   Modelica.Blocks.Sources.Constant T_airIn(k=298.15)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Sources.Constant X_airIn(k=0.005)

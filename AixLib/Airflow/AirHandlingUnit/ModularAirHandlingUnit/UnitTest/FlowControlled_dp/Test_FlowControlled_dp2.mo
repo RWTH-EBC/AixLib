@@ -1,5 +1,12 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.FlowControlled_dp;
 model Test_FlowControlled_dp2
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.FlowControlled_dp
+    flowControlled_dp(
+      use_WeatherData=true,
+      use_inputFilter=true,
+      m_flow_nominal=2000/3600*1.18,
+      use_defaultElectricalPower=false)
+    annotation (Placement(transformation(extent={{-30,-22},{-10,-2}})));
   AixLib.Fluid.Movers.FlowControlled_dp fan(redeclare package Medium =
         AixLib.Media.Air, m_flow_nominal=2000/3600*1.18)
     annotation (Placement(transformation(extent={{0,-52},{20,-32}})));
@@ -33,8 +40,8 @@ model Test_FlowControlled_dp2
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://SimpleAHU/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 

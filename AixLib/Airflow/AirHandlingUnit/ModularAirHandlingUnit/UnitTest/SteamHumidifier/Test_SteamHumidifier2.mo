@@ -37,10 +37,15 @@ model Test_SteamHumidifier2
   AixLib.Fluid.Sensors.MassFractionTwoPort X_airOut_fluid(redeclare package
       Medium = AixLib.Media.Air, m_flow_nominal=2000/3600*1.18)
     annotation (Placement(transformation(extent={{92,34},{112,54}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SteamHumidifier
+    steamHumidifier(use_X_set=true,
+      redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-24,-30},{-4,-10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://SimpleAHU/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
     annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
 

@@ -2,7 +2,8 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedContr
 model Test_SpeedControlledFan_Nrpm2
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource("modelica://SimpleAHU/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
 
@@ -11,6 +12,12 @@ model Test_SpeedControlledFan_Nrpm2
             {-200,40}})));
   AixLib.Utilities.Psychrometrics.X_pTphi x_pTphi
     annotation (Placement(transformation(extent={{-92,-100},{-72,-80}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SpeedControlledFan_Nrpm
+    speedControlledFan_Nrpm(
+      use_WeatherData=true,
+      use_inputFilter=true,
+      redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.TopS25slash10 per)
+    annotation (Placement(transformation(extent={{-20,40},{0,60}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     redeclare package Medium = AixLib.Media.Air,
     use_Xi_in=true,

@@ -1,5 +1,9 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.SpeedControlledFan_Nrpm;
 model Test_SpeedControlledFan_Nrpm
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SpeedControlledFan_Nrpm
+    speedControlledFan_Nrpm(use_inputFilter=true,
+    redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.TopS25slash10 per)
+    annotation (Placement(transformation(extent={{-20,40},{0,60}})));
   Modelica.Blocks.Sources.Constant T_airIn(k=298.15)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Sources.Constant X_airIn(k=0.005)

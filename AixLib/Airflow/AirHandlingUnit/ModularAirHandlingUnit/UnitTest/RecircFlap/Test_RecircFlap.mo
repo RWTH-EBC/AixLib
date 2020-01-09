@@ -1,5 +1,9 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.RecircFlap;
 model Test_RecircFlap
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.RecircFlap
+    recircFlap(redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Sources.Constant T_OdaIn(k=273.15)
     annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
   Modelica.Blocks.Sources.Constant X_OdaIn(k=0.002)

@@ -38,6 +38,10 @@ model Test_Cooler
   AixLib.Fluid.Sensors.TemperatureTwoPort T_airOut_fluid(redeclare package
       Medium = AixLib.Media.Air, m_flow_nominal=2000/3600*1.18)
     annotation (Placement(transformation(extent={{26,58},{46,78}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Cooler cooler(
+    redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=280.15)
     annotation (Placement(transformation(extent={{-46,-52},{-26,-32}})));
 equation

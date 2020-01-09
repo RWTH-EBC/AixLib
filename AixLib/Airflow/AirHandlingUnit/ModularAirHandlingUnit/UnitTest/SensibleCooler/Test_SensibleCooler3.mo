@@ -55,6 +55,11 @@ model Test_SensibleCooler3
     annotation (Placement(transformation(extent={{34,58},{54,78}})));
   Modelica.Blocks.Sources.RealExpression Q_flow(y=sensibleCooler.Q_flow)
     annotation (Placement(transformation(extent={{-30,76},{-10,96}})));
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SensibleCooler
+    sensibleCooler(
+      redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-6,-16},{20,10}})));
   AixLib.Fluid.HeatExchangers.HeaterCooler_u hea(
     redeclare package Medium = AixLib.Media.Air,
     m_flow_nominal=2000/3600*1.18,

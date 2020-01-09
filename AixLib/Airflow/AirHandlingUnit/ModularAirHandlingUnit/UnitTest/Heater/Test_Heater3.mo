@@ -1,5 +1,9 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.Heater;
 model Test_Heater3
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Heater heater(
+    redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-16,-24},{30,22}})));
   Modelica.Blocks.Sources.Ramp m_airIn(
     height=1000/3600*1.18,
     duration=600,

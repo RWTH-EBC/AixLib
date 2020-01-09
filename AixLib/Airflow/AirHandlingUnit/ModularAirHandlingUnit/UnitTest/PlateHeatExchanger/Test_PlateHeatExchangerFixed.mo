@@ -1,5 +1,9 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.UnitTest.PlateHeatExchanger;
 model Test_PlateHeatExchangerFixed
+  AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PlateHeatExchangerFixedEfficiency
+    plateHeatExchanger(redeclare model PartialPressureDrop =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.PressureDrop.PressureDropSimple)
+    annotation (Placement(transformation(extent={{-8,-52},{12,-32}})));
   Modelica.Blocks.Sources.Ramp m_flow(
     height=0,
     duration=600,
@@ -51,8 +55,7 @@ model Test_PlateHeatExchangerFixed
     annotation (Placement(transformation(extent={{-14,62},{6,82}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://SimpleAHU/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
+    filNam=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Resources/TRY2015_507931060546_Jahr_City_Aachen.mos"),
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
     annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
 
