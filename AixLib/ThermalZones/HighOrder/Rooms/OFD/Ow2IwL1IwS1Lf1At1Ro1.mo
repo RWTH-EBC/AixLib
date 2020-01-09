@@ -209,8 +209,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,                                              V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
@@ -323,13 +323,10 @@ model Ow2IwL1IwS1Lf1At1Ro1
     annotation (Placement(transformation(extent={{-70,-42},{-50,-22}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
     floor_FH(
-    A=room_width_long*room_length,
-    n=Type_FL.n,
-    d=Type_FL.d,
-    rho=Type_FL.rho,
-    lambda=Type_FL.lambda,
-    c=Type_FL.c,
-    T0=T0_FL) if withFloorHeating "floor component if using Floor heating"
+    final A=room_width_long*room_length,
+    final wallRec=Type_FL,
+    final T0=T0_FL) if
+                 withFloorHeating "floor component if using Floor heating"
     annotation (Placement(transformation(
         origin={-30,-85},
         extent={{3.00007,16},{-3,-16}},

@@ -9,13 +9,12 @@ model DryAir_test "Simulation to test the dry air models"
     Max_VR=0.15,
     Tset=295.15)
     annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    T0=303.15,                                                    V=100, T(
-        start=303.15))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(T0=303.15,
+    V=100)
     annotation (Placement(transformation(extent={{32,-12},{52,8}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload1(T0=289.15,
-                                                                   T(start=
-          289.15))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload1(
+    T0=289.15,
+    V=48)
     annotation (Placement(transformation(extent={{-12,70},{8,90}})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange varAirExchange
     annotation (Placement(transformation(extent={{-12,38},{8,58}})));

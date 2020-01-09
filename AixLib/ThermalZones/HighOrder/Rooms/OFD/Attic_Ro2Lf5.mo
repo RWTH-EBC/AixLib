@@ -198,8 +198,8 @@ model Attic_Ro2Lf5
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    T0=T0_air,                                                    V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom1(
     T0=T0_FL1,

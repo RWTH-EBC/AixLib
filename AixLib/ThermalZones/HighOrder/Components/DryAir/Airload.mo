@@ -4,10 +4,10 @@ model Airload "Air volume"
   extends Modelica.Thermal.HeatTransfer.Components.HeatCapacitor(final C=rho*V*c,
     final T(
       stateSelect=StateSelect.always,
-      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
+      fixed=(initDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
       start=T0),
     final der_T(
-      fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      fixed=(initDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
       start=0));
 
   parameter Modelica.Fluid.Types.Dynamics initDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
