@@ -2,18 +2,21 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
     ROM(final use_moisture_balance=true));
+
+
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
-    annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
+    annotation (Placement(transformation(extent={{16,-28},{28,-16}})));
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
      final T0=zoneParam.T_start,
      final RoomArea=zoneParam.AZone,
      final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
           ATot > 0
     "internal moisture gains by plants, etc."
-    annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{18,-72},{38,-52}})));
+    annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{0,-56},
+            {20,-36}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
-    annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
+    annotation (Placement(transformation(extent={{0,-28},{8,-20}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 or zoneParam.VAir > 0
     "Humidity output"
     annotation (Placement(transformation(extent={{100,64},{120,84}}),
@@ -21,22 +24,25 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
 protected
   Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
     ATot > 0 or zoneParam.VAir > 0
-    annotation (Placement(transformation(extent={{20,-22},{30,-6}})));
+    annotation (Placement(transformation(extent={{0,-22},{10,-6}})));
 equation
   if internalGainsMode == 3 then
     connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,
-            -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-27.9},{16,-27.9}},
+            -18},{92,-18},{92,-4},{52,-4},{52,-34},{14,-34},{14,-19.9},{16,
+            -19.9}},
         color={0,0,127}));
   else
-    connect(noMoisturePerson.y,SumQLat_flow. u[1]);
+    connect(noMoisturePerson.y,SumQLat_flow. u[1]) annotation (Line(points={{8.4,-24},
+            {10,-24},{10,-19.9},{16,-19.9}},                      color={0,0,127}));
   end if;
-  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{39,-62},
-          {44,-62},{44,-40},{10,-40},{10,-32.1},{16,-32.1}},           color={0,
+  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{21,-46},
+          {48,-46},{48,-34},{14,-34},{14,-24.1},{16,-24.1}},           color={0,
           0,127}));
-  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-30},{
-          34,-30},{34,34},{37,34}}, color={0,0,127}));
-  connect(humVolAirROM.y, X_w) annotation (Line(points={{30.5,-14},{58,-14},{58,
-          -4},{98,-4},{98,74},{110,74}}, color={0,0,127}));
+  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-22},{34,
+          -22},{34,34},{37,34}},    color={0,0,127}));
+  connect(humVolAirROM.y, X_w) annotation (Line(points={{10.5,-14},{48,-14},{48,
+          -4},{88,-4},{88,74},{110,74}}, color={0,0,127}));
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
@@ -64,5 +70,16 @@ equation
 </ul>
 <h4>Examples</h4>
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.</p>
-</html>"));
+</html>"), Diagram(graphics={
+        Rectangle(
+          extent={{0,-10},{48,-58}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{28,-52},{42,-56}},
+          lineColor={0,0,255},
+          fillColor={212,221,253},
+          fillPattern=FillPattern.Solid,
+          textString="Moisture")}));
 end ThermalZoneMoistAir;

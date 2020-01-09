@@ -17,7 +17,8 @@ partial model PartialHeaterCoolerPI
         "Seperate",choice = true "Record",radioButtons = true));
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling if zoneParam.CoolerOn
+                                                                   annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
   Controls.Continuous.PITemp
                  pITempCool(
@@ -25,10 +26,11 @@ partial model PartialHeaterCoolerPI
     h=if not recOrSep then h_cooler else zoneParam.hCool,
     l=if not recOrSep then l_cooler else zoneParam.lCool,
     KR=if not recOrSep then KR_cooler else zoneParam.KRCool,
-    TN=if not recOrSep then TN_cooler else zoneParam.TNCool)
+    TN=if not recOrSep then TN_cooler else zoneParam.TNCool) if zoneParam.CoolerOn
     "PI control for cooler"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating if zoneParam.HeaterOn
+                                                                   annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
   Controls.Continuous.PITemp
                  pITempHeat(
@@ -36,16 +38,18 @@ partial model PartialHeaterCoolerPI
     h=if not recOrSep then h_heater else zoneParam.hHeat,
     l=if not recOrSep then l_heater else zoneParam.lHeat,
     KR=if not recOrSep then KR_heater else zoneParam.KRHeat,
-    TN=if not recOrSep then TN_heater else zoneParam.TNHeat)
+    TN=if not recOrSep then TN_heater else zoneParam.TNHeat) if zoneParam.HeaterOn
     "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower(
    final quantity="HeatFlowRate",
-   final unit="W") "Power for heating"
+   final unit="W") if zoneParam.HeaterOn
+                   "Power for heating"
     annotation (Placement(transformation(extent={{80,20},{120,60}}),
         iconTransformation(extent={{80,20},{120,60}})));
   Modelica.Blocks.Interfaces.RealOutput coolingPower(
    final quantity="HeatFlowRate",
-   final unit="W") "Power for cooling"
+   final unit="W") if zoneParam.CoolerOn
+                   "Power for cooling"
     annotation (Placement(transformation(extent={{80,-26},{120,14}}),
         iconTransformation(extent={{80,-26},{120,14}})));
 equation

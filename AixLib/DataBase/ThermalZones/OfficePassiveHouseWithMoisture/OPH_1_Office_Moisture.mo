@@ -76,7 +76,7 @@ record OPH_1_Office_Moisture "Office zone of office building considering moistur
     lHeat=0,
     KRHeat=1000,
     TNHeat=1,
-    HeaterOn=true,
+    HeaterOn=false,
     hCool=0,
     lCool=-1,
     KRCool=1000,

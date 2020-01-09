@@ -12,7 +12,7 @@ model ComparisonThermalZoneMoistAndDryAir
     nPorts=2,
     T_start=293.15,
     zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture())
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-22},{10,-2}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -147,7 +147,8 @@ model ComparisonThermalZoneMoistAndDryAir
     redeclare package Medium = Media.Air,
     internalGainsMode=1,
     nPorts=2,
-    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     T_start=293.15) "Thermal zone"
     annotation (Placement(transformation(extent={{-12,74},{8,94}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat1(

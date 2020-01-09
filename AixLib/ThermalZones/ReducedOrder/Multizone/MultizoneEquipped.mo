@@ -86,30 +86,6 @@ model MultizoneEquipped
     extent={{10,-10},{-10,10}},
     rotation=180,
     origin={-90,0})));
-  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0) "Set point for heater"
-    annotation (Placement(transformation(
-    extent={{20,-20},{-20,20}},
-    rotation=270,
-    origin={-46,-100}), iconTransformation(
-    extent={{10,-10},{-10,10}},
-    rotation=270,
-    origin={-52,-110})));
-  Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0) "Set point for cooler"
-    annotation (Placement(transformation(
-    extent={{20,-20},{-20,20}},
-    rotation=270,
-    origin={-86,-100}), iconTransformation(
-    extent={{10,-10},{-10,10}},
-    rotation=270,
-    origin={-74,-110})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
     final quantity="Power",
     final unit="W") if ASurTot > 0 or VAir > 0
@@ -332,10 +308,6 @@ equation
       Line(points={{44,20.8},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,
           31}},
         color={0,0,127}));
-  connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-46,-100},{69.5,-100},
-          {69.5,51.05}}, color={0,0,127}));
-  connect(TSetCool, zone.TSetCool) annotation (Line(points={{-86,-100},{64.88,-100},
-          {64.88,51.05}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

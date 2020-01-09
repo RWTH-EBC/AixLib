@@ -135,7 +135,10 @@ equation
           34.6,-82},{34.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=3.1536e+007, Interval=3600),
+    experiment(
+      StopTime=31536000,
+      Interval=3600,
+      __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html>
   <ul>
   <li>September 29, 2016, by Moritz Lauster:<br/>

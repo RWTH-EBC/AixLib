@@ -112,8 +112,9 @@ equation
           {-80,-38},{-46,-38},{-46,-28},{-24,-28},{-24,-22},{-21.2,-22}}, color=
          {0,0,127}));
   connect(airExc.QLat_flow,SumQLat_flow.u[3])  annotation (Line(points={{-5.68,
-          -22.96},{4,-22.96},{4,-30},{16,-30}}, color={0,0,127}));
-  connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{30.5,-14},{
+          -22.96},{4,-22.96},{4,-24.8},{16,-24.8}},
+                                                color={0,0,127}));
+  connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{10.5,-14},{
           0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>

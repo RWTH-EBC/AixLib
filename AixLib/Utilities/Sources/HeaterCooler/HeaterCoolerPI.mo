@@ -8,7 +8,8 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
   Modelica.Blocks.Interfaces.RealInput setPointCool(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") annotation (
+    displayUnit="degC") if zoneParam.CoolerOn
+                        annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(
         extent={{-20,-20},{20,20}},
@@ -17,7 +18,8 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
   Modelica.Blocks.Interfaces.RealInput setPointHeat(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") annotation (
+    displayUnit="degC") if zoneParam.HeaterOn
+                        annotation (
       Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

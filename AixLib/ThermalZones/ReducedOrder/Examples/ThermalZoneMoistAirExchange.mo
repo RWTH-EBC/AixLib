@@ -10,7 +10,7 @@ model ThermalZoneMoistAirExchange
     redeclare package Medium = AixLib.Media.Air,
     T_start=293.15,
     zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture(),
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     internalGainsMode=3)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));

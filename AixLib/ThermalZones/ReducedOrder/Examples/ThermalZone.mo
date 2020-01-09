@@ -3,8 +3,8 @@ model ThermalZone "Illustrates the use of ThermalZone"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
-                                                             zoneParam=
-    AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,

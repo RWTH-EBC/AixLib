@@ -3,8 +3,9 @@ model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange thermalZone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir, zoneParam=
-    AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,

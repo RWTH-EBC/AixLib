@@ -87,6 +87,30 @@ partial model PartialMultizone "Partial model for multizone models"
 
   parameter Integer internalGainsMode
     "decides which internal gains model for persons is used";
+  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) "Set point for heater - used only if zoneParam[i].HeaterOn is true"
+    annotation (Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=270,
+    origin={-40,-100}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=270,
+    origin={-52,-110})));
+  Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) "Set point for cooler - used only if zoneParam[i].CoolerOn is true"
+    annotation (Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=270,
+    origin={-80,-100}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=270,
+    origin={-74,-110})));
 equation
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
@@ -114,6 +138,12 @@ equation
           90,67.45},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
                                                                    color={191,0,
           0}));
+  connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{69.5,
+          -100},{69.5,51.05}},
+                         color={0,0,127}));
+  connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{64.88,
+          -100},{64.88,51.05}},
+                          color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
