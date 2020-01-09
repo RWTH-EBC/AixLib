@@ -5,25 +5,24 @@ model HeatPumpSystem
     transferHeat=true,
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
-    redeclare Fluid.HeatPumps.HeatPump heatPump(
-      redeclare final model PerDataHea = PerDataHea,
-      redeclare final model PerDataChi = PerDataChi,
+    redeclare AixLib.Fluid.HeatPumps.HeatPump heatPump(
+      use_autoCalc=false,
+      Q_useNominal=0,
+      redeclare final model PerDataMainHP = PerDataHea,
+      redeclare final model PerDataRevHP = PerDataChi,
       redeclare final package Medium_con = Medium_con,
       redeclare final package Medium_eva = Medium_eva,
+      final use_rev=use_revHP,
       final scalingFactor=scalingFactor,
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
-      final mFlow_conNominal=mFlow_conNominal,
-      final VCon=VCon,
       final dpCon_nominal=dpCon_nominal,
       final deltaM_con=deltaM_con,
       final use_conCap=use_conCap,
       final CCon=CCon,
       final GConOut=GConOut,
       final GConIns=GConIns,
-      final mFlow_evaNominal=mFlow_evaNominal,
-      final VEva=VEva,
       final dpEva_nominal=dpEva_nominal,
       final deltaM_eva=deltaM_eva,
       final use_evaCap=use_evaCap,
@@ -50,23 +49,25 @@ model HeatPumpSystem
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
       final fixed_TCon_start=fixed_TCon_start,
-      final fixed_TEva_start=fixed_TEva_start));
+      final fixed_TEva_start=fixed_TEva_start,
+      mFlow_conNominal=mFlow_conNominal,
+      mFlow_evaNominal=mFlow_evaNominal));
 
 //Heat Pump
+  replaceable model PerDataHea =
+      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of HP in heating mode"
+    annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
+  replaceable model PerDataChi =
+      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+  "Performance data of HP in chilling mode"
+    annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
+
   parameter Boolean use_revHP=true "True if the HP is reversible" annotation(Dialog(tab="Heat Pump"),choices(choice=true "reversible HP",
       choice=false "only heating",
       radioButtons=true));
-  replaceable model PerDataHea =
-      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of HP in heating mode"
-    annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
-
-  replaceable model PerDataChi =
-      Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-  "Performance data of HP in chilling mode"
-    annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP" annotation(Dialog(tab="Heat Pump"), Evaluate=true);
   parameter Boolean use_refIne=true  "Consider the inertia of the refrigerant cycle"
     annotation (Dialog(tab="Heat Pump",group="Refrigerant cycle inertia"), choices(checkBox=true));
@@ -175,22 +176,42 @@ equation
         points={{54.86,161},{58,161},{58,-2},{36,-2},{36,-54},{-20.72,-54},{
           -20.72,-26.9333}},
                       color={0,0,127}));
-  connect(heatPump.sigBusHP, hPSystemController.sigBusHP) annotation (Line(
+  connect(heatPump.sigBus, hPSystemController.sigBusHP) annotation (Line(
       points={{-25.78,-9.15},{-84,-9.15},{-84,115.85},{-50.49,115.85}},
       color={255,204,51},
       thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model uses the heat pump model <a href=\"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a> to simulate a whole system, including controls, pumps and second heat generator. </p>
-<p>A <a href=\"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters\">set of parameters</a> is used to estimate the model parameters.</p>
-<p>See <a href=\"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem\">AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem</a> for information about the features of the heat pump system.</p>
+<p>
+  This model uses the heat pump model <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.HeatPump\">AixLib.Fluid.HeatPumps.HeatPump</a>
+  to simulate a whole system, including controls, pumps and second heat
+  generator.
+</p>
+<p>
+  A <a href=
+  \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HeatPumpSystemParameters\">
+  set of parameters</a> is used to estimate the model parameters.
+</p>
+<p>
+  See <a href=
+  \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem\">
+  AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem</a>
+  for information about the features of the heat pump system.
+</p>
 </html>"));
 end HeatPumpSystem;
