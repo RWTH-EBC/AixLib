@@ -167,9 +167,10 @@ public
         origin={-32,-64})));
     Components.DryAir.Airload
                          airload(
-    final T0=T0_air,
+    final T0=T0_Air,
       V=Room_V,
       c=1005) annotation (Placement(transformation(extent={{10,-18},{28,0}})));
+
   Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
         extent={{-10,8},{10,-8}},
         rotation=90,
