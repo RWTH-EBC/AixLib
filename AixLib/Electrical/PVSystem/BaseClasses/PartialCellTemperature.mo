@@ -1,37 +1,18 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
-partial model PartialCellTemperature "Partial model for determining the cell temperature of a PV module"
+partial model PartialCellTemperature "Partial model for determining the cell temperature of a PV moduleConnector for PV record data"
 
+// Parameters from module data sheet
+ parameter AixLib.DataBase.SolarElectric.PVBaseRecord data = AixLib.DataBase.SolarElectric.QPlusBFRG41285() "PV Panel data definition";
 
- connector PVModuleData = input AixLib.DataBase.SolarElectric.PVBaseRecordNew
-    "Connector for PV record data" annotation (
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
-        Rectangle(
-          origin={0.0,-25.0},
-          lineColor={64,64,64},
-          fillColor={255,215,136},
-          fillPattern=FillPattern.Solid,
-          extent={{-100.0,-75.0},{100.0,75.0}},
-          radius=25.0),
-        Line(
-          points={{-100.0,0.0},{100.0,0.0}},
-          color={64,64,64}),
-        Line(
-          origin={0.0,-50.0},
-          points={{-100.0,0.0},{100.0,0.0}},
-          color={64,64,64}),
-        Line(
-          origin={0.0,-25.0},
-          points={{0.0,75.0},{0.0,-75.0}},
-          color={64,64,64})}));
+ parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
+    "Efficiency under standard conditions";
 
+ parameter Modelica.SIunits.Temp_K T_NOCT=data.T_NOCT
+    "Cell temperature under NOCT conditions";
 
-// Adjustable input parameters
-
- PVModuleData data
-    "PV module record"
-    annotation (Placement(transformation(extent={{-140,-16},{-100,24}}),
-    iconTransformation(extent={{-142,-22},{-100,24}})));
-
+ final parameter Real radNOCT(final quantity="Irradiance",
+    final unit="W/m2")= 800
+    "Irradiance under NOCT conditions";
  Modelica.Blocks.Interfaces.RealInput T_a(final quantity=
     "Temp_C", final unit="K")
     "Ambient temperature"
@@ -56,18 +37,6 @@ partial model PartialCellTemperature "Partial model for determining the cell tem
             -62}})));
 
 
-// Parameters from module data sheet
-
- parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
-    "Efficiency under standard conditions";
-
- parameter Modelica.SIunits.Temp_K T_NOCT=data.T_NOCT
-    "Cell temperature under NOCT conditions";
-
- final parameter Real radNOCT(final quantity="Irradiance",
-    final unit="W/m2")= 800
-    "Irradiance under NOCT conditions";
-
 
 
  Modelica.Blocks.Interfaces.RealOutput T_c(final quantity=
@@ -80,15 +49,57 @@ partial model PartialCellTemperature "Partial model for determining the cell tem
 
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-     Rectangle(
-      lineColor={0,0,0},
-      fillColor={255,255,255},
-      fillPattern=FillPattern.Solid,
-      extent={{-100,100},{100,-100}}),
-     Text(
-      lineColor={0,0,0},
-      extent={{-96,95},{97,-97}},
-          textString="Tc")}),
+        Rectangle(
+          lineColor={200,200,200},
+          fillColor={248,248,248},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-100.0,-100.0},{100.0,100.0}},
+          radius=25.0),
+        Rectangle(
+          lineColor={128,128,128},
+          extent={{-100.0,-100.0},{100.0,100.0}},
+          radius=25.0),      Polygon(points={{-80,-80},{-40,80},{80,80},{40,-80},
+              {-80,-80}}, lineColor={0,0,0}),
+        Line(points={{-60,-76},{-20,76}}, color={0,0,0}),
+        Line(points={{-34,-76},{6,76}}, color={0,0,0}),
+        Line(points={{-8,-76},{32,76}}, color={0,0,0}),
+        Line(points={{16,-76},{56,76}}, color={0,0,0}),
+        Line(points={{-38,60},{68,60}}, color={0,0,0}),
+        Line(points={{-44,40},{62,40}}, color={0,0,0}),
+        Line(points={{-48,20},{58,20}}, color={0,0,0}),
+        Line(points={{-54,0},{52,0}}, color={0,0,0}),
+        Line(points={{-60,-20},{46,-20}}, color={0,0,0}),
+        Line(points={{-64,-40},{42,-40}}, color={0,0,0}),
+        Line(points={{-70,-60},{36,-60}}, color={0,0,0}),
+        Ellipse(
+          extent={{-20,-88},{20,-50}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={191,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-12,50},{12,-58}},
+          lineColor={191,0,0},
+          fillColor={191,0,0},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-12,50},{-12,90},{-10,96},{-6,98},{0,100},{6,98},{10,96},{12,
+              90},{12,50},{-12,50}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-12,50},{-12,-54}},
+          thickness=0.5),
+        Line(
+          points={{12,50},{12,-54}},
+          thickness=0.5),
+        Text(
+          extent={{126,-30},{6,-60}},
+          lineColor={0,0,0},
+          textString="T"),
+        Line(points={{12,0},{60,0}}, color={0,0,127})}),
      Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end PartialCellTemperature;

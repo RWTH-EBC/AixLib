@@ -8,19 +8,14 @@ extends PartialIVCharacteristics;
 
  Modelica.SIunits.ElectricCurrent I_ph0
     "Photo current under standard conditions";
-
  Modelica.SIunits.ElectricCurrent I_s0
     "Saturation current under standard conditions";
-
  Modelica.SIunits.Resistance R_s0
     "Series resistance under standard conditions";
-
  Modelica.SIunits.Resistance R_sh0
     "Shunt resistance under standard conditions";
-
  Real a_0(unit = "V")
     "Modified diode ideality factor under standard conditions";
-
  Real w_0(final unit = "1")
     "MPP auxiliary correlation coefficient under standard conditions";
 
@@ -29,19 +24,14 @@ extends PartialIVCharacteristics;
 
  constant Real e=Modelica.Math.exp(1.0)
    "Euler's constant";
-
  constant Real pi=Modelica.Constants.pi
    "Pi";
-
  constant Real k(final unit="J/K") = 1.3806503e-23
    "Boltzmann's constant";
-
  constant Real q( unit = "A.s")= 1.602176620924561e-19
    "Electron charge";
-
  parameter Modelica.SIunits.Energy E_g0=1.79604e-19
     "Band gap energy under standard conditions for Si";
-
  parameter Real C=0.0002677
     "band gap temperature coefficient for Si";
 
@@ -158,24 +148,12 @@ equation
     coordinateSystem(extent={{-100,-100},{100,100}})),
      Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Analytical 5-p model for determining the I-V characteristics of a PV array (Batzelis et al.,2016) with temp. dependency of the 5 parameters after (DeSoto et al.,2006).
-The final output of this model is the DC performance of the PV array</p>
-<p><br/>    
-<p>Recommended model for designing PV arrays.</p>
-<p><br/> 
-<p>Validated with experimental data from NIST (Boyd, 2017)</p>
-<p><br/>  
-<p>Approx. 0.3 percent less accurate than the numerical 5-p model, but more robust and faster. Approx. 6 percent more accurate than the simple approach using the performance factor.</p>
-<p><br/>   
-<p>Module calibration is based on manufactory data</p>
-<p><br/>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p><br/>
-Sources of literature: </p>
-<p><q>A Method for the analytical
-extraction of the Single-Diode PV model parameters.</q> by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.</p>
-<p><q>Improvement and validation of a model
-for photovoltaic array performance.</q> by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
-<p><q>Performance Data from the NIST Photovoltaic Arrays and Weather
-Station.</q> by Boyd, M.:</p> "));
+<p><br>Analytical 5-p model for determining the I-V characteristics of a PV array (Batzelis et al.,2016) with temp. dependency of the 5 parameters after (DeSoto et al.,2006). The final output of this model is the DC performance of the PV array.</p>
+<p><br>Validated with experimental data from NIST (Boyd, 2017).</p>
+<p>Module calibration is based on manufactory data.</p>
+<p><br><h4><span style=\"color: #008000\">References</span></h4></p>
+<p>A Method for the analytical extraction of the Single-Diode PV model parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.</p>
+<p>Improvement and validation of a model for photovoltaic array performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
+<p>Performance Data from the NIST Photovoltaic Arrays and Weather Station. by Boyd, M.: </p>
+</html>"));
 end PVModule5pAnalytical;
