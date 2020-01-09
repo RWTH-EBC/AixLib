@@ -33,7 +33,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     OFD(TIR=3, withDynamicVentilation=true)
-    annotation (Placement(transformation(extent={{-35,-48},{60,47}})));
+    annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
@@ -76,45 +76,47 @@ equation
   SolarRadiation[4] = Weather.SolarRadiation_OrientedSurfaces[4].I;
   SolarRadiation[5] = Weather.SolarRadiation_OrientedSurfaces[5].I;
   SolarRadiation[6] = Weather.SolarRadiation_OrientedSurfaces[6].I;
-  connect(Weather.WindSpeed, OFD.WindSpeedPort) annotation (Line(points={{75.4,80.6},
-          {-58,80.6},{-58,25},{-32.15,25},{-32.15,24.2}}, color={0,0,127}));
-  connect(tempOutside.port, OFD.thermOutside) annotation (Line(points={{-16.5,59.5},
-          {-30.25,59.5},{-30.25,42.25}}, color={191,0,0}));
+  connect(Weather.WindSpeed, OFD.WindSpeedPort) annotation (Line(points={{75.4,80.6},{-58,80.6},{-58,25},{-32.15,25},{-32.15,23.2}},
+                                                          color={0,0,127}));
+  connect(tempOutside.port, OFD.thermOutside) annotation (Line(points={{-16.5,59.5},{-30.25,59.5},{-30.25,41.25}},
+                                         color={191,0,0}));
   connect(tempOutside.T, Weather.AirTemp) annotation (Line(points={{-2.75,59.5},
           {22,59.5},{22,75.8},{75.4,75.8}}, color={0,0,127}));
   connect(Weather.SolarRadiation_OrientedSurfaces[1], OFD.North) annotation (
-      Line(points={{113.48,53.4},{113.48,8.05},{55.25,8.05}}, color={255,128,0}));
+      Line(points={{113.48,53.4},{113.48,7.05},{55.25,7.05}}, color={255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[2], OFD.East) annotation (
-      Line(points={{113.48,53.4},{113.48,-9.05},{55.25,-9.05}}, color={255,128,0}));
+      Line(points={{113.48,53.4},{113.48,-10.05},{55.25,-10.05}},
+                                                                color={255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[3], OFD.South) annotation (
-      Line(points={{113.48,53.4},{113.48,-27.1},{55.25,-27.1}}, color={255,128,0}));
+      Line(points={{113.48,53.4},{113.48,-28.1},{55.25,-28.1}}, color={255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[4], OFD.West) annotation (
-      Line(points={{113.48,53.4},{113.48,-43.25},{55.25,-43.25}}, color={255,128,
+      Line(points={{113.48,53.4},{113.48,-44.25},{55.25,-44.25}}, color={255,128,
           0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[5], OFD.SolarRadiationPort_RoofN)
-    annotation (Line(points={{113.48,53.4},{113.48,42.25},{55.25,42.25}}, color=
+    annotation (Line(points={{113.48,53.4},{113.48,41.25},{55.25,41.25}}, color=
          {255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[6], OFD.SolarRadiationPort_RoofS)
-    annotation (Line(points={{113.48,53.4},{113.48,27.05},{55.25,27.05}}, color=
+    annotation (Line(points={{113.48,53.4},{113.48,26.05},{55.25,26.05}}, color=
          {255,128,0}));
   connect(NaturalVentilation.y[1], OFD.AirExchangePort[1]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,-1.56875},{-32.15,-1.56875}}, color={0,0,
+        points={{-93,71},{-78,71},{-78,-2.56875},{-32.15,-2.56875}}, color={0,0,
           127}));
   connect(NaturalVentilation.y[1], OFD.AirExchangePort[5]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,5.08125},{-32.15,5.08125}}, color={0,0,127}));
+        points={{-93,71},{-78,71},{-78,4.08125},{-32.15,4.08125}}, color={0,0,127}));
   connect(NaturalVentilation.y[2], OFD.AirExchangePort[2]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,0.09375},{-32.15,0.09375}}, color={0,0,127}));
+        points={{-93,71},{-78,71},{-78,-0.90625},{-32.15,-0.90625}},
+                                                                   color={0,0,127}));
   connect(NaturalVentilation.y[2], OFD.AirExchangePort[6]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,6.74375},{-32.15,6.74375}}, color={0,0,127}));
+        points={{-93,71},{-78,71},{-78,5.74375},{-32.15,5.74375}}, color={0,0,127}));
   connect(NaturalVentilation.y[3], OFD.AirExchangePort[3]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,1.75625},{-32.15,1.75625}}, color={0,0,127}));
+        points={{-93,71},{-78,71},{-78,0.75625},{-32.15,0.75625}}, color={0,0,127}));
   connect(NaturalVentilation.y[3], OFD.AirExchangePort[7]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,8.40625},{-32.15,8.40625}}, color={0,0,127}));
+        points={{-93,71},{-78,71},{-78,7.40625},{-32.15,7.40625}}, color={0,0,127}));
   connect(NaturalVentilation.y[4], OFD.AirExchangePort[4]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,3.41875},{-32.15,3.41875}}, color={0,0,127}));
+        points={{-93,71},{-78,71},{-78,2.41875},{-32.15,2.41875}}, color={0,0,127}));
   connect(NaturalVentilation.y[4], OFD.AirExchangePort[8]) annotation (Line(
-        points={{-93,71},{-78,71},{-78,10.0687},{-32.15,10.0687}}, color={0,0,127}));
-  connect(heatStarToCombHeaters.portConvRadComb, OFD.heatingToRooms) annotation (Line(points={{-42.14,-16.6062},{-36.68,-16.6062},{-36.68,-17.6},{-30.25,-17.6}}, color={191,0,0}));
+        points={{-93,71},{-78,71},{-78,9.06875},{-32.15,9.06875}}, color={0,0,127}));
+  connect(heatStarToCombHeaters.portConvRadComb, OFD.heatingToRooms) annotation (Line(points={{-42.14,-16.6062},{-36.68,-16.6062},{-36.68,-18.6},{-30.25,-18.6}}, color={191,0,0}));
   connect(groundFloor.Con_Livingroom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-117,-67.5725},{-121,-67.5725},{-121,-67},{-124,-67},{-124,-21.0063},{-56.07,-21.0063}}, color={191,0,0}));
   connect(groundFloor.Rad_Livingroom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-117.077,-64.1625},{-121,-64.1625},{-121,-13.5125},{-56.28,-13.5125}}, color={95,95,95}));
   connect(groundFloor.Con_Hobby, heatStarToCombHeaters[2].portConv) annotation (Line(points={{-74.7692,-67.185},{-62,-67.185},{-62,-21.0063},{-56.07,-21.0063}}, color={191,0,0}));
@@ -133,8 +135,8 @@ equation
   connect(upperFloor.Rad_Bath, heatStarToCombHeaters[8].portRad) annotation (Line(points={{-73.4615,-48.7},{-66,-48.7},{-66,-13.5125},{-56.28,-13.5125}}, color={95,95,95}));
   connect(upperFloor.Con_Children2, heatStarToCombHeaters[9].portConv) annotation (Line(points={{-116.692,-50.405},{-124,-50.405},{-124,-21.0063},{-56.07,-21.0063}}, color={191,0,0}));
   connect(upperFloor.Rad_Children2, heatStarToCombHeaters[9].portRad) annotation (Line(points={{-116.385,-44.825},{-121,-44.825},{-121,-13.5125},{-56.28,-13.5125}}, color={95,95,95}));
-  connect(tempGround.port, OFD.groundTemp) annotation (Line(points={{0,-45.5},{12.5,
-          -45.5},{12.5,-29}}, color={191,0,0}));
+  connect(tempGround.port, OFD.groundTemp) annotation (Line(points={{0,-45.5},{12.5,-45.5},{12.5,-30}},
+                              color={191,0,0}));
   connect(TSet.y[1], upperFloor.TSet_UF[1]) annotation (Line(points={{-93,36},{-88,36},{-88,-5},{-136,-5},{-136,-28.1238},{-105.308,-28.1238}},
                                                                        color={0,
           0,127}));

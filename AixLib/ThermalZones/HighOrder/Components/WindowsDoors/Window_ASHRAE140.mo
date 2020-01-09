@@ -1,6 +1,7 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
+  import DataBase;
   extends
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
@@ -38,6 +39,7 @@ model Window_ASHRAE140
     A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
     A=windowarea,
+    redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default wallRec,
     T0=T0) annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
@@ -49,6 +51,7 @@ annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     A=windowarea)
     annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
+    redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default wallRec,
     T0=T0,
     A=windowarea)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
@@ -69,7 +72,7 @@ equation
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
   connect(twoStar_RadEx.Therm, pane2.port_b) annotation (Line(
-  points={{36.8,32},{36,32},{36,-8},{38,-8}},
+  points={{36.8,32},{38,32},{38,-8}},
   color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
