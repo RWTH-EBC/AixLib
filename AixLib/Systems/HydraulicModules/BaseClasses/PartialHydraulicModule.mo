@@ -49,6 +49,8 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   // -------------------------------------------------
   // Sensors
   // -------------------------------------------------
+  parameter Modelica.SIunits.Time tauHeaTra=1200
+    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
 protected
   Fluid.Sensors.VolumeFlowRate VFSen_out(
     redeclare package Medium = Medium,
@@ -71,36 +73,44 @@ protected
         origin={100,42})));
 
   Fluid.Sensors.TemperatureTwoPort senT_a1(
+    tau=0.01,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{-100,14},{-88,26}})));
   Fluid.Sensors.TemperatureTwoPort senT_a2(
     redeclare package Medium = Medium,
+    tau=0.01,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{84,-66},{72,-54}})));
   Fluid.Sensors.TemperatureTwoPort senT_b1(
     final m_flow_nominal=m_flow_nominal,
+    tau=0.01,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Fluid.Sensors.TemperatureTwoPort senT_b2(
+    tau=0.01,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{-78,-66},{-90,-54}})));
 
   Modelica.Blocks.Continuous.FirstOrder PT1_b2(
