@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Attic_Ro2Lf1
   "Attic with two saddle roofs and on floor towards the rooms on the lower floors"
-  import AixLib;
   ///////// construction parameters
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/MFD_Attic.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
@@ -65,8 +64,8 @@ model Attic_Ro2Lf1
         rotation=270,
         origin={-42,63})));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,                                              V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-109.5, -10}, {-89.5, 10}}), iconTransformation(extent = {{-109.5, -10}, {-89.5, 10}})));

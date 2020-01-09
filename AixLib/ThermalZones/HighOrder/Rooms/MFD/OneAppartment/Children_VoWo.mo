@@ -85,8 +85,8 @@ model Children_VoWo "Children room from the VoWo appartment"
         extent={{-2,-35.0769},{10,36.9231}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,                                              V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{-38,16},{-58,36}})));
   Utilities.Interfaces.SolarRad_in Strahlung_SE annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-82, 110}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-30, 110})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(

@@ -84,8 +84,8 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
         extent={{-7.00003,-39.0244},{7.00003,40.9756}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,                                              V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{-28,0},{-48,20}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outsideWall(
     wall_length=4.645,

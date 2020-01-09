@@ -39,8 +39,8 @@ model Cellar "Cellar completly under ground"
     "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,                                              V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{-18,-4},{-38,16}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_Ceiling,

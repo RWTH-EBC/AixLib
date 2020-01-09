@@ -149,8 +149,8 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
         extent={{-3.99999,-24},{3.99999,24}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,                                              V=room_V, T(
-        start=T0_air))
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{-12,-12},{-32,8}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_CE,
