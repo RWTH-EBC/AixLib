@@ -11,11 +11,11 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   Modelica.Blocks.Sources.CombiTimeTable TSet(columns = {2, 3, 4, 5, 6, 7}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = TSetProfile.Profile) annotation(Placement(transformation(extent={{-114,26},
             {-94,46}})));
   Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](unit = "degC") annotation(Placement(transformation(extent={{181,-75},
-            {201,-55}}),                                                                                                                   iconTransformation(extent = {{171, -29}, {187, -13}})));
-  Modelica.Blocks.Interfaces.RealOutput Toutside(unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={142,-94}),     iconTransformation(extent = {{172, -95}, {188, -79}})));
-  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={186,-95}),     iconTransformation(extent = {{172, -95}, {188, -79}})));
-  Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={100,-94}),     iconTransformation(extent = {{171, -29}, {187, -13}})));
-  Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={121,-94}),     iconTransformation(extent = {{171, -29}, {187, -13}})));
+            {201,-55}}),                                                                                                                   iconTransformation(extent={{101,-7},{117,9}})));
+  Modelica.Blocks.Interfaces.RealOutput Toutside(unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={142,-94}),     iconTransformation(extent={{100,83},{116,99}})));
+  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={186,-95}),     iconTransformation(extent={{100,63},{116,79}})));
+  Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={100,-94}),     iconTransformation(extent={{101,-79},{117,-63}})));
+  Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={121,-94}),     iconTransformation(extent={{101,-99},{117,-83}})));
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
     Latitude=49.5,
     Longitude=8.5,
@@ -114,7 +114,7 @@ equation
         points={{-93,71},{-78,71},{-78,3.41875},{-32.15,3.41875}}, color={0,0,127}));
   connect(NaturalVentilation.y[4], OFD.AirExchangePort[8]) annotation (Line(
         points={{-93,71},{-78,71},{-78,10.0687},{-32.15,10.0687}}, color={0,0,127}));
-  connect(heatStarToCombHeaters.portConvRadComb, OFD.heatingToRooms) annotation (Line(points={{-42.42,-17.5688},{-36.68,-17.5688},{-36.68,-17.6},{-30.25,-17.6}}, color={191,0,0}));
+  connect(heatStarToCombHeaters.portConvRadComb, OFD.heatingToRooms) annotation (Line(points={{-42.14,-16.6062},{-36.68,-16.6062},{-36.68,-17.6},{-30.25,-17.6}}, color={191,0,0}));
   connect(groundFloor.Con_Livingroom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-117,-67.5725},{-121,-67.5725},{-121,-67},{-124,-67},{-124,-21.0063},{-56.07,-21.0063}}, color={191,0,0}));
   connect(groundFloor.Rad_Livingroom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-117.077,-64.1625},{-121,-64.1625},{-121,-13.5125},{-56.28,-13.5125}}, color={95,95,95}));
   connect(groundFloor.Con_Hobby, heatStarToCombHeaters[2].portConv) annotation (Line(points={{-74.7692,-67.185},{-62,-67.185},{-62,-21.0063},{-56.07,-21.0063}}, color={191,0,0}));
@@ -135,35 +135,31 @@ equation
   connect(upperFloor.Rad_Children2, heatStarToCombHeaters[9].portRad) annotation (Line(points={{-116.385,-44.825},{-121,-44.825},{-121,-13.5125},{-56.28,-13.5125}}, color={95,95,95}));
   connect(tempGround.port, OFD.groundTemp) annotation (Line(points={{0,-45.5},{12.5,
           -45.5},{12.5,-29}}, color={191,0,0}));
-  connect(TSet.y[1], upperFloor.TSet_UF[1]) annotation (Line(points={{-93,36},{
-          -88,36},{-88,-5},{-136,-5},{-136,-28.1238},{-105.308,-28.1238}},
+  connect(TSet.y[1], upperFloor.TSet_UF[1]) annotation (Line(points={{-93,36},{-88,36},{-88,-5},{-136,-5},{-136,-28.1238},{-105.308,-28.1238}},
                                                                        color={0,
           0,127}));
-  connect(TSet.y[1], groundFloor.TSet_GF[1]) annotation (Line(points={{-93,36},
-          {-89,36},{-89,-4},{-137,-4},{-137,-64.023},{-106.538,-64.023}},color={
+  connect(TSet.y[1], groundFloor.TSet_GF[1]) annotation (Line(points={{-93,36},{-89,36},{-89,-4},{-137,-4},{-137,-64.023},{-106.538,-64.023}},
+                                                                         color={
           0,0,127}));
-  connect(TSet.y[2], upperFloor.TSet_UF[2]) annotation (Line(points={{-93,36},{
-          -88,36},{-88,-5},{-136,-5},{-136,-27.2712},{-105.308,-27.2712}},
+  connect(TSet.y[2], upperFloor.TSet_UF[2]) annotation (Line(points={{-93,36},{-88,36},{-88,-5},{-136,-5},{-136,-27.2712},{-105.308,-27.2712}},
                                                                        color={0,
           0,127}));
-  connect(TSet.y[2], groundFloor.TSet_GF[2]) annotation (Line(points={{-93,36},
-          {-89,36},{-89,-4},{-137,-4},{-137,-63.279},{-106.538,-63.279}},color={
+  connect(TSet.y[2], groundFloor.TSet_GF[2]) annotation (Line(points={{-93,36},{-89,36},{-89,-4},{-137,-4},{-137,-63.279},{-106.538,-63.279}},
+                                                                         color={
           0,0,127}));
-  connect(TSet.y[6], groundFloor.TSet_GF[3]) annotation (Line(points={{-93,36},
-          {-89,36},{-89,-4},{-137,-4},{-137,-62.535},{-106.538,-62.535}},color={
+  connect(TSet.y[6], groundFloor.TSet_GF[3]) annotation (Line(points={{-93,36},{-89,36},{-89,-4},{-137,-4},{-137,-62.535},{-106.538,-62.535}},
+                                                                         color={
           0,0,127}));
-  connect(TSet.y[4], upperFloor.TSet_UF[3]) annotation (Line(points={{-93,36},{
-          -88,36},{-88,-5},{-136,-5},{-136,-26.4187},{-105.308,-26.4187}},
+  connect(TSet.y[4], upperFloor.TSet_UF[3]) annotation (Line(points={{-93,36},{-88,36},{-88,-5},{-136,-5},{-136,-26.4187},{-105.308,-26.4187}},
                                                                        color={0,
           0,127}));
-  connect(TSet.y[5], groundFloor.TSet_GF[4]) annotation (Line(points={{-93,36},
-          {-89,36},{-89,-4},{-137,-4},{-137,-61.791},{-106.538,-61.791}}, color=
+  connect(TSet.y[5], groundFloor.TSet_GF[4]) annotation (Line(points={{-93,36},{-89,36},{-89,-4},{-137,-4},{-137,-61.791},{-106.538,-61.791}},
+                                                                          color=
          {0,0,127}));
-  connect(TSet.y[3], upperFloor.TSet_UF[4]) annotation (Line(points={{-93,36},{
-          -88,36},{-88,-5},{-136,-5},{-136,-25.5663},{-105.308,-25.5663}},
+  connect(TSet.y[3], upperFloor.TSet_UF[4]) annotation (Line(points={{-93,36},{-88,36},{-88,-5},{-136,-5},{-136,-25.5663},{-105.308,-25.5663}},
         color={0,0,127}));
-  connect(TSet.y[3], groundFloor.TSet_GF[5]) annotation (Line(points={{-93,36},
-          {-89,36},{-89,-4},{-137,-4},{-137,-61.047},{-106.538,-61.047}}, color=
+  connect(TSet.y[3], groundFloor.TSet_GF[5]) annotation (Line(points={{-93,36},{-89,36},{-89,-4},{-137,-4},{-137,-61.047},{-106.538,-61.047}},
+                                                                          color=
          {0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}}, grid = {1, 1}), graphics={  Rectangle(extent={{
               -195,51},{-160,23}},                                                                                                                                              lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
@@ -198,7 +194,7 @@ equation
               -164,46},{-114,44}},                                                                                                                                                                     lineColor = {0, 0, 255}, textString = "1-Bedroom"), Text(extent={{
               -164,40},{-114,38}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "2-Children1"), Text(extent={{
               -164,34},{-114,32}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "3-Bath"), Text(extent={{
-              -164,28},{-114,26}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "4-Children2")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-200, -100}, {200, 100}}, grid = {1, 1}), graphics), experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
+              -164,28},{-114,26}},                                                                                                                                                                                                        lineColor = {0, 0, 255}, textString = "4-Children2")}), Icon(coordinateSystem(preserveAspectRatio = true, extent={{-100,-100},{100,100}})),                               experiment(StopTime = 86400, Interval = 15, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for a one family dwelling.</p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
