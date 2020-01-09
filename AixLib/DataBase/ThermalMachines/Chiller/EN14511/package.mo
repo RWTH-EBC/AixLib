@@ -1,8 +1,5 @@
-﻿within AixLib.DataBase;
-package Chiller "Collection of Chiller Database Records"
-   extends Modelica.Icons.Package;
-
-
+﻿within AixLib.DataBase.ThermalMachines.Chiller;
+package EN14511
 
 annotation (Documentation(revisions="<html>
 <ul>
@@ -12,4 +9,4 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 </li>
 </ul>
 </html>"));
-end Chiller;
+end EN14511;
