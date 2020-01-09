@@ -1,2 +1,2 @@
 // Change wall and window record parametrization
-convertModifier("AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow", fill("",0), {"windowarea=2");
+convertModifier("AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow", fill("",0), {"windowarea=2"});
