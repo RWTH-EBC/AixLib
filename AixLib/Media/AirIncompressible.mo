@@ -901,11 +901,9 @@ end der_specificHeatCapacityCv;
   annotation(preferredView="info", Documentation(info="<html>
 <p>This medium package models moist air using a gas law in which pressure and temperature are independent, which often leads to significantly faster and more robust computations. Additionally, the density is constant to improve the simulation stability and speed.</p>
 <p>This medium uses the gas law </p>
-<p align=\"center\"><i>&rho; = &rho;<sub>stp</sub> </i></p>
-<p><i>&rho;<sub>stp</i></sub> is a constant reference density.</p>
-<p align=\"center\"><i>&rho; = p &frasl;(R T), </i></p>
-<p>where <i>R</i> is the gas constant and <i>T</i> is the temperature. </p>
-<p><br>The medium model can be used for air duct simulations, where the pressures and temperatures are close to the reference values.</p>
+<p align=\"center\"><i>&rho; = &rho;<sub>stp</sub>, </i></p>
+<p>where <i>p<sub>std</i></sub> is a constant reference density. </p>
+<p><br>The medium model can be used for air duct simulations, where the pressures and temperatures are close to the reference values. </p>
 <p><br>Note that models in this package implement the equation for the internal energy as </p>
 <p align=\"center\"><i>u = h - p<sub>stp</sub> &frasl; &rho;<sub>stp</sub>, </i></p>
 <p>where <i>u</i> is the internal energy per unit mass, <i>h</i> is the enthalpy per unit mass, <i>p<sub>stp</i></sub> is the static pressure and <i>&rho;<sub>stp</i></sub> is the mass density at standard pressure and temperature. The reason for this implementation is that in general, </p>
