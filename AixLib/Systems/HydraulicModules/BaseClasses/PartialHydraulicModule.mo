@@ -22,6 +22,8 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Time tauHeaTra=1200
+    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Length dIns
     "Thickness of insulation of all pipes (can be overwritten in each pipe) "
     annotation (Dialog(group="Pipes"));
@@ -49,8 +51,7 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   // -------------------------------------------------
   // Sensors
   // -------------------------------------------------
-  parameter Modelica.SIunits.Time tauHeaTra=1200
-    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
+
 protected
   Fluid.Sensors.VolumeFlowRate VFSen_out(
     redeclare package Medium = Medium,
