@@ -294,12 +294,13 @@ equation
           -52},{52,-46},{32,-46},{32,-20}}, color={191,0,0}));
   connect(pipe6.heatPort, prescribedTemperature.port) annotation (Line(points={{-8,
           -52},{-8,-46},{32,-46},{32,-20}}, color={191,0,0}));
-  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-40,-69.6},{-40,
-          -82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(valve.y, hydraulicBus.valveSet) annotation (Line(points={{-40,-69.6},
+          {-40,-82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-44,
+  connect(valve.y_actual, hydraulicBus.valveMea) annotation (Line(points={{-44,
           -65.6},{-44,-82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}),
       Text(
       string="%second",

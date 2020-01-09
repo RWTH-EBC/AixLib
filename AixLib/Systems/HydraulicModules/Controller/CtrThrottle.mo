@@ -62,9 +62,8 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, hydraulicBus.valSet) annotation (Line(points={{5,-50},{48,-50},
-          {48,-10.865},{93.135,-10.865}},
-                                      color={0,0,127}), Text(
+  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{5,-50},{48,-50},
+          {48,-10.865},{93.135,-10.865}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

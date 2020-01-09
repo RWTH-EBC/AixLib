@@ -211,12 +211,13 @@ equation
     annotation (Line(points={{60,-60},{72,-60}}, color={0,127,255}));
   connect(pipe3.ports_b[1], senT_b1.port_a)
     annotation (Line(points={{84,20},{88,20}}, color={0,127,255}));
-  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-42,-69.6},{-42,
-          -80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(valve.y, hydraulicBus.valveSet) annotation (Line(points={{-42,-69.6},
+          {-42,-80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-46,
+  connect(valve.y_actual, hydraulicBus.valveMea) annotation (Line(points={{-46,
           -65.6},{-46,-80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}),
       Text(
       string="%second",

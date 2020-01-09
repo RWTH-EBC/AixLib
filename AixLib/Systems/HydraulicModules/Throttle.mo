@@ -61,13 +61,13 @@ model Throttle "Throttle circuit with two way valve"
 equation
   connect(valve.port_b, pipe2.port_a)
     annotation (Line(points={{8,20},{40,20}}, color={0,127,255}));
-  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-2,32},{-2,
+  connect(valve.y, hydraulicBus.valveSet) annotation (Line(points={{-2,32},{-2,
           100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{3,
-          27},{3,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(valve.y_actual, hydraulicBus.valveMea) annotation (Line(points={{3,27},
+          {3,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

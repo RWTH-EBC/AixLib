@@ -188,7 +188,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrUnmixedThrottle.Tact, hydraulicBus.TRtrn_in) annotation (Line(points={{-144.4,99.2},{-152,99.2},{-152,104.05},{-113.95,104.05}}, color={0,0,127}), Text(
+  connect(ctrUnmixedThrottle.Tact, hydraulicBus.TRtrnInMea) annotation (Line(
+        points={{-144.4,99.2},{-152,99.2},{-152,104.05},{-113.95,104.05}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

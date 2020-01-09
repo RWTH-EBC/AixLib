@@ -140,12 +140,12 @@ equation
     annotation (Line(points={{55.2,-20},{49.6,-20}}, color={0,0,127}));
   connect(valve.port_2, pipe2.port_a)
     annotation (Line(points={{-20,20},{-8,20}}, color={0,127,255}));
-  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-30,32},{-30,100},
-          {-14,100},{-14,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(valve.y, hydraulicBus.valveSet) annotation (Line(points={{-30,32},{-30,
+          100},{-14,100},{-14,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-25,
+  connect(valve.y_actual, hydraulicBus.valveMea) annotation (Line(points={{-25,
           27},{-25,100.5},{0.1,100.5},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,

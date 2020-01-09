@@ -134,14 +134,14 @@ protected
 
 equation
 
-  connect(VFSen_out.V_flow, hydraulicBus.VF_in) annotation (Line(
+  connect(VFSen_out.V_flow, hydraulicBus.VFlowInMea) annotation (Line(
       points={{-111,40},{-112,40},{-112,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(VFSen_in.V_flow, hydraulicBus.VF_out) annotation (Line(
+  connect(VFSen_in.V_flow, hydraulicBus.VflowOutMea) annotation (Line(
       points={{111,42},{116,42},{116,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
@@ -166,26 +166,26 @@ equation
           58},{-70,58}}, color={0,0,127}));
   connect(senT_b1.T, PT1_b1.u) annotation (Line(points={{94,26.6},{86,26.6},{86,
           58},{70,58}}, color={0,0,127}));
-  connect(PT1_b1.y, hydraulicBus.TFwrd_out) annotation (Line(points={{70,81},{70,
-          100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(PT1_b1.y, hydraulicBus.TFwrdOutMea) annotation (Line(points={{70,81},
+          {70,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(PT1_a1.y, hydraulicBus.TFwrd_in) annotation (Line(points={{-70,81},{-70,
-          100},{0.1,100},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(PT1_a1.y, hydraulicBus.TFwrdInMea) annotation (Line(points={{-70,81},
+          {-70,100},{0.1,100},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(PT1_b2.y, hydraulicBus.TRtrn_out) annotation (Line(points={{-121,-30},
+  connect(PT1_b2.y, hydraulicBus.TRtrnOutMea) annotation (Line(points={{-121,-30},
           {-122,-30},{-122,100},{0.1,100},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(senT_a2.T, PT1_a2.u)
     annotation (Line(points={{78,-53.4},{78,-30},{98,-30}}, color={0,0,127}));
-  connect(PT1_a2.y, hydraulicBus.TRtrn_in) annotation (Line(points={{121,-30},{130,
-          -30},{130,100},{116,100},{116,100.1},{0.1,100.1}}, color={0,0,127}),
-      Text(
+  connect(PT1_a2.y, hydraulicBus.TRtrnInMea) annotation (Line(points={{121,-30},
+          {130,-30},{130,100},{116,100},{116,100.1},{0.1,100.1}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
