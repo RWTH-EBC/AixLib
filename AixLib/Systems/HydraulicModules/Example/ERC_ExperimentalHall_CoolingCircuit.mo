@@ -157,15 +157,15 @@ equation
     annotation (Line(points={{-54,51},{-54,29},{-53,29}},
                                                  color={0,127,255}));
   connect(ctrMix.hydraulicBus, admix.hydraulicBus) annotation (Line(
-      points={{-116.91,9.57},{-104.455,9.57},{-104.455,4},{-93,4}},
+      points={{-114.18,11.26},{-104.455,11.26},{-104.455,4},{-93,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedSimple.hydraulicBus, unmixed.hydraulicBus) annotation (Line(
-      points={{-117.88,70},{-21,70},{-21,4}},
+      points={{-116.32,70.24},{-21,70.24},{-21,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedThrottle.hydraulicBus, unmixedThrottle.hydraulicBus) annotation (Line(
-      points={{-118.84,90.68},{-50,90.68},{-50,90},{50,90},{50,48},{49,48},{49,
+      points={{-116.32,92.24},{-50,92.24},{-50,92},{50,92},{50,50},{49,50},{49,
           4}},
       color={255,204,51},
       thickness=0.5));
@@ -182,7 +182,7 @@ equation
   connect(admix.port_b2, hex.port_b2) annotation (Line(points={{-53,-21},{-53,-68},{-106,-68}},
                        color={0,127,255}));
   connect(ctrUnmixedThrottle.hydraulicBus, hydraulicBus) annotation (Line(
-      points={{-118.84,90.68},{-114.42,90.68},{-114.42,104},{-114,104}},
+      points={{-116.32,92.24},{-114.42,92.24},{-114.42,104},{-114,104}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

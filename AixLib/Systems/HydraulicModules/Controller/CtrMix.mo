@@ -8,7 +8,7 @@ block CtrMix "Controller for mixed and injection circuits "
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
+  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
@@ -64,21 +64,23 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{41,0},{
-          48,0},{48,0.12},{100.12,0.12}},                                                                                        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(PID.u_m, hydraulicBus.TFwrdOutMea) annotation (Line(points={{-6,-62},
           {-6,-80},{100.12,-80},{100.12,0.12}},    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(booleanConstant.y, hydraulicBus.pumpBus.onOff_Input) annotation (Line(
-        points={{81,30},{100.12,30},{100.12,0.12}},    color={255,0,255}), Text(
+  connect(constRpmPump.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
+          {41,0},{70,0},{70,0.12},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(booleanConstant.y, hydraulicBus.pumpBus.onSet) annotation (Line(
+        points={{81,30},{100.12,30},{100.12,0.12}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},
