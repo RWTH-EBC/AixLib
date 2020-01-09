@@ -5,8 +5,7 @@ record Vaillant_VWL_101 "Vaillant VWL10-1"
     tableQdot_con=[0,-15,-7,2,7; 35,5842,7523,9776,10807; 45,5842,7332,9050,10387; 55, 5728,7179,9050,10043],
     mFlow_conNom=9776/4180/5,
     mFlow_evaNom=1,
-    tableUppBou=[-25, 65; 40, 65],
-    tableLowBou=[-25, 0; 40, 0]);
+    tableUppBou=[-25, 65; 40, 65]);
     //These boundary-tables are not from the datasheet but default values.
 
   annotation(preferedView="text", DymolaStoredErrors,

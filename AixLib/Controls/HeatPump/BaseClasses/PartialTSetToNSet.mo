@@ -1,17 +1,28 @@
 ﻿within AixLib.Controls.HeatPump.BaseClasses;
 partial model PartialTSetToNSet
   "Partial model to convert set temperature to compressor speed of heat pump"
-  parameter Modelica.SIunits.SpecificHeatCapacity cp
-    "Gain with specific heat capacity" annotation (Dialog(enable=use_secHeaGen));
+  parameter Boolean use_secHeaGen=false
+                                       "True to choose a bivalent system" annotation(choices(checkBox=true));
+
+  // Heating limit temperature
+  parameter Modelica.SIunits.Temperature T_heaLim=293.15
+    "Heating limit temperature. If the filtered outdoor air temperature surpasses this threshold, the device will be shut down" annotation(Dialog(group="Heating limit temperature"));
+  parameter Modelica.SIunits.Time movAveTime=300
+    "Time span for building the average of the outdoor air temperature. Used for heating limit temperature" annotation (Dialog(group="Heating limit temperature"));
+
  Utilities.Logical.SmoothSwitch swiNullHP "If HP is off, zero is passed"
     annotation (Placement(transformation(extent={{66,-10},{86,10}})));
-  Modelica.Blocks.Sources.Constant conZer(k=0) "If an error occurs, the compressor speed is set to zero"
+  Modelica.Blocks.Sources.Constant conZer(final k=0)
+                                               "If an error occurs, the compressor speed is set to zero"
     annotation (Placement(transformation(extent={{38,-24},{50,-12}})));
-  Modelica.Blocks.Interfaces.RealInput TSet "Set temperature"
+  Modelica.Blocks.Interfaces.RealInput TSet(
+      final quantity="ThermodynamicTemperature",
+      final unit="K",
+      final displayUnit="degC") "Set temperature"
     annotation (Placement(transformation(extent={{-132,44},{-100,76}})));
   Modelica.Blocks.Interfaces.RealOutput nOut "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Interfaces.ThermalMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-124,-42},{-90,-12}})));
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
@@ -19,7 +30,10 @@ partial model PartialTSetToNSet
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={12,-108})));
-  Modelica.Blocks.Interfaces.RealInput TAct "Actual temperature, control variable"
+  Modelica.Blocks.Interfaces.RealInput TAct(
+      final quantity="ThermodynamicTemperature",
+      final unit="K",
+      final displayUnit="degC") "Actual temperature, control variable"
     annotation (Placement(transformation(
         extent={{16,16},{-16,-16}},
         rotation=180,
@@ -30,20 +44,17 @@ partial model PartialTSetToNSet
         extent={{8,-8},{-8,8}},
         rotation=90,
         origin={12,-84})));
-  Modelica.Blocks.Math.Gain gain(final k=1/Q_flow_nominal) if
-                                    use_secHeaGen
-    annotation (Placement(transformation(extent={{-16,-60},{-4,-72}})));
+  Utilities.Math.MovingAverage movAve(final aveTime=movAveTime)
+    "Moving average to account for fluctuations in the outdoor air temperature"
+    annotation (Placement(transformation(extent={{-88,-34},{-76,-20}})));
+  Modelica.Blocks.Logical.And andHeaLim
+    "Check if control and heating limit temperature yield true to turn the device on"
+    annotation (Placement(transformation(extent={{38,-6},{50,6}})));
+  Modelica.Blocks.Logical.LessThreshold      lessThreshold(final threshold=
+        T_heaLim)
+    annotation (Placement(transformation(extent={{-66,-34},{-52,-20}})));
 
-  Utilities.HeatTransfer.CalcQFlow calcQFlow(final cp=cp)
-    annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
-protected
-  parameter Boolean use_secHeaGen=true "True to choose a bivalent system" annotation(choices(checkBox=true));
-  parameter Boolean use_bivPar=true "Switch between bivalent parallel and bivalent alternative control" annotation (Dialog(enable=use_secHeaGen), choices(choice=true "Parallel",
-      choice=false "Alternativ",
-      radioButtons=true));
 
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal=2000
-    "Nominal heat flow rate of second heat generator. Used to calculate input singal y";
 
 equation
   connect(conZer.y, swiNullHP.u3) annotation (Line(points={{50.6,-18},{58,-18},
@@ -56,35 +67,20 @@ equation
   connect(conZer.y, swiNullsecHeaGen.u3) annotation (Line(points={{50.6,-18},{
           70,-18},{70,-74.4},{18.4,-74.4}},
                                           color={0,0,127}));
-  connect(gain.y, swiNullsecHeaGen.u1) annotation (Line(points={{-3.4,-66},{6,
-          -66},{6,-74.4},{5.6,-74.4}},
-                                color={0,0,127}));
-  connect(calcQFlow.Q_flow, gain.u) annotation (Line(points={{-39,-70},{-28,-70},
-          {-28,-66},{-17.2,-66}}, color={0,0,127}));
-  connect(sigBusHP.m_flow_co, calcQFlow.m_flow) annotation (Line(
-      points={{-106.915,-26.925},{-90,-26.925},{-90,-64},{-62,-64}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.T_ret_co, calcQFlow.T_a) annotation (Line(
-      points={{-106.915,-26.925},{-90,-26.925},{-90,-71},{-62,-71}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.T_flow_co, calcQFlow.T_b) annotation (Line(
-      points={{-106.915,-26.925},{-90,-26.925},{-90,-78},{-62,-78},{-62,-77}},
+  connect(sigBusHP.T_oda, movAve.u) annotation (Line(
+      points={{-106.915,-26.925},{-94,-26.925},{-94,-27},{-89.2,-27}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(movAve.y, lessThreshold.u)
+    annotation (Line(points={{-75.4,-27},{-67.4,-27}}, color={0,0,127}));
+  connect(lessThreshold.y, andHeaLim.u2) annotation (Line(points={{-51.3,-27},{-26,
+          -27},{-26,-4.8},{36.8,-4.8}}, color={255,0,255}));
+  connect(andHeaLim.y, swiNullHP.u2)
+    annotation (Line(points={{50.6,0},{64,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                             Rectangle(
           extent={{-100,100},{100,-100}},

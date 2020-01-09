@@ -28,7 +28,8 @@ partial model GeothermalHeatPumpBase
     annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
-      redeclare package Medium = Medium)                                       constrainedby AixLib.Fluid.Interfaces.PartialTwoPort
+      redeclare package Medium = Medium)                                       constrainedby
+    AixLib.Fluid.Interfaces.PartialTwoPort
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
   Storage.Storage coldStorage(
@@ -38,8 +39,8 @@ partial model GeothermalHeatPumpBase
     n=5,
     lambda_ins=0.075,
     s_ins=0.2,
-    hConvIn=100,
-    hConvOut=10,
+    hConIn=100,
+    hConOut=10,
     k_HE=300,
     h=1.5,
     V_HE=0.02,
@@ -97,8 +98,8 @@ partial model GeothermalHeatPumpBase
     n=5,
     lambda_ins=0.075,
     s_ins=0.2,
-    hConvIn=100,
-    hConvOut=10,
+    hConIn=100,
+    hConOut=10,
     k_HE=300,
     A_HE=3,
     h=1,
@@ -204,7 +205,7 @@ partial model GeothermalHeatPumpBase
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-89,-54})));
-  Controls.Interfaces.HeatPumpControlBus        heatPumpControlBus
+  Controls.Interfaces.ThermalMachineControlBus heatPumpControlBus
     annotation (Placement(transformation(extent={{-21,60},{20,98}})));
 equation
 

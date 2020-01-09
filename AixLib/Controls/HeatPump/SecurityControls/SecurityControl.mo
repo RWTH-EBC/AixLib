@@ -15,7 +15,7 @@ block SecurityControl "Block including all security levels"
   parameter Boolean use_runPerHou=true
     "False if maximal runs per hour HP are not considered"
     annotation (Dialog(group="OnOffControl"), choices(checkBox=true));
-  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
+  parameter Integer maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(group="OnOffControl",enable=use_runPerHou));
   parameter Boolean use_opeEnv=true
     "False to allow HP to run out of operational envelope"
@@ -23,11 +23,10 @@ block SecurityControl "Block including all security levels"
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (Dialog(group="Operational Envelope", enable=
-          use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
-  parameter Real tableLow[:,2] "Lower boundary of envelope"
-    annotation (Dialog(group="Operational Envelope", enable=use_opeEnv and not use_opeEnvFroRec));
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (Dialog(group=
+          "Operational Envelope", enable=use_opeEnv and use_opeEnvFroRec),
+      choicesAllMatching=true);
   parameter Real tableUpp[:,2] "Upper boundary of envelope"
     annotation (Dialog(group="Operational Envelope", enable=use_opeEnv and not use_opeEnvFroRec));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time"
@@ -54,7 +53,6 @@ block SecurityControl "Block including all security levels"
 
   OperationalEnvelope operationalEnvelope(
     final use_opeEnv=use_opeEnv,
-    final tableLow=tableLow,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable)

@@ -2,9 +2,10 @@
 
 ## Table of contents
 1. [Building Physics](#buildingphysics)
-2. [Building Systems](#buildingsystems)
-3. [District Heating and Cooling](#dhc)
-4. [Fast HVAC](#fasthvac)
+1. [Building Systems](#buildingsystems)
+1. [District Heating and Cooling](#dhc)
+1. [Fast HVAC](#fasthvac)
+1. [Building Automation Systems](#bas)
 
 
 ## Building Physics <a name="buildingphysics"></a>
@@ -39,13 +40,17 @@ DOI: URL: http://dx.doi.org/10.5075/epfl-infoscience-190601
 ### HOM and ROM
 
 #### Not published yet
-Currently only an internal report.
+Currently only an internal report with the title "*Verification and Comparison of High and Low Order Building Models from the Modelica Library AixLib using ASHRAE Standard 140*".
 
 
 ## Building Systems <a name="buildingsystems"></a>
 
 #### Structuring the building performance modelica library AixLib for open collaborative development
-Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Remmen, Peter; Streblow, Rita; Müller, Dirk (2015). 14th International Conference of the International Building Performance Simulation Association , 14th IBPSA, 07.12.2015-09.12.2015, Hyderabad, India. [PDF](http://www.ibpsa.org/proceedings/BS2015/p2202.pdf), [Info](http://www.ebc.eonerc.rwth-aachen.de/cms/E-ON-ERC-EBC/Forschung/Publikationen/~dncb/Details/?file=540827&lidx=1).
+Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Remmen, Peter; Streblow, Rita; Müller, Dirk (2015). 14th International Conference of the International Building Performance Simulation Association , 14th IBPSA, 07.12.2015-09.12.2015, Hyderabad, India. [PDF](http://www.ibpsa.org/proceedings/BS2015/p2202.pdf), [Info](http://www.ebc.eonerc.rwth-aachen.de/cms/E-ON-ERC-EBC/Forschung/Publikationen/~dncb/Details/?file=540827&lidx=1)
+
+
+##### Moisture Recovery - A Dynamic Modelling Approach
+Kremer, Martin; Mathis, Paul; Müller, Dirk; Clima 2019, May 2019,[pdf](https://www.e3s-conferences.org/articles/e3sconf/pdf/2019/37/e3sconf_clima2019_01099.pdf), [DOI:10.1051/e3sconf/2019111101099](https://doi.org/10.1051/e3sconf/201911101099)
 
 
 ## District Heating and Cooling <a name="dhc"></a>
@@ -54,6 +59,11 @@ Fuchs, Marcus; Constantin, Ana; Lauster, Moritz; Remmen, Peter; Streblow, Rita; 
 Mans, Michael; Blacha, Tobias; Remmen, Peter; Müller, Dirk; Modelica Conference 2019, p. 179-186, March 2019, [pdf](http://www.ep.liu.se/ecp/157/ecp19157.pdf), [DOI: 10.3384/ecp19157179](http://dx.doi.org/10.3384/ecp19157179)
 
 
-
 ## Fast HVAC <a name="fasthvac"></a>
 ```enter publications here```
+
+
+## Building Automation Systems <a name="bas"></a>
+
+#### Hardware-in-the-Loop-Simulation of a Building Energy and Control System to Investigate Circulating Pump Control Using Modelica
+Schneider, G. F., Oppermann, J., Constantin, A., Streblow, R., & Müller, D. (2015). In: Proceedings of the International Modelica Conference, Versailles, France, September 21-23, pp. 225-233, DOI: [DOI: 10.3384/ecp15118225](http://dx.doi.org/10.3384/ecp15118225)

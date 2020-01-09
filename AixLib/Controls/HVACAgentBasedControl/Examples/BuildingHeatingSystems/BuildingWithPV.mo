@@ -117,7 +117,7 @@ model BuildingWithPV
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-96})));
-  AixLib.Fluid.Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT          bou(nPorts=1, redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{100,-140},{80,-120}})));
   inner Modelica.Fluid.System system
