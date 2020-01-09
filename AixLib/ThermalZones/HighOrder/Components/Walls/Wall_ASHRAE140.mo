@@ -217,12 +217,12 @@ end if;
 
 if (outside) then
   //absorbtion of solar radition in wall
-  connect(SolarRadTotal.y, AbscoeffA.u);
+  connect(SolarRadTotal.y, AbscoeffA.u) annotation (Line(points={{-59,96},{-54,96},{-54,88},{-50.2,88}}, color={0,0,127}));
   connect(AbscoeffA.y, absSolarRadWall.Q_flow) annotation (Line(
       points={{-36.4,88},{-30,88}},
       color={0,0,127}));
   connect(Wall.port_a, absSolarRadWall.port) annotation (Line(
-      points={{-20,24},{-24,24},{-24,66},{-3,66},{-3,88},{-10,88}},
+      points={{-20,24},{-24,24},{-24,66},{-5,66},{-5,88},{-10,88}},
       color={191,0,0}));
 
   //heat convection on the outside
@@ -319,6 +319,7 @@ end if;
           {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
           -14},{-54,-14},{-54,-14.2},{-45.84,-14.2}}, color={0,0,127}));
+
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
