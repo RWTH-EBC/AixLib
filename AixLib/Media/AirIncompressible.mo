@@ -100,8 +100,8 @@ algorithm
   d :=dStp;
   annotation(smoothOrder=5,
   Inline=true,
-  Documentation(info="<html>
-Density is computed from pressure, temperature and composition in the thermodynamic state record applying the ideal gas law.
+  Documentation(info="<html>Density is computed from pressure, temperature and composition in the
+thermodynamic state record applying the ideal gas law.
 </html>"));
 end density;
 
@@ -112,32 +112,27 @@ algorithm
   annotation (
   smoothOrder=99,
   Inline=true,
-Documentation(info="<html>
-<p>
-This function returns the dynamic viscosity.
+Documentation(info="<html><p>
+  This function returns the dynamic viscosity.
 </p>
-<h4>Implementation</h4>
+<h4>
+  Implementation
+</h4>
 <p>
-The function is based on the 5th order polynomial
-of
-<a href=\"modelica://Modelica.Media.Air.MoistAir.dynamicViscosity\">
-Modelica.Media.Air.MoistAir.dynamicViscosity</a>.
-However, for the typical range of temperatures encountered
-in building applications, a linear function sufficies.
-This implementation is therefore the above 5th order polynomial,
-linearized around <i>20</i>&deg;C.
-The relative error of this linearization is
-<i>0.4</i>% at <i>-20</i>&deg;C,
-and less then
-<i>0.2</i>% between  <i>-5</i>&deg;C and  <i>+50</i>&deg;C.
+  The function is based on the 5th order polynomial of <a href=
+  \"modelica://Modelica.Media.Air.MoistAir.dynamicViscosity\">Modelica.Media.Air.MoistAir.dynamicViscosity</a>.
+  However, for the typical range of temperatures encountered in
+  building applications, a linear function sufficies. This
+  implementation is therefore the above 5th order polynomial,
+  linearized around <i>20</i>°C. The relative error of this
+  linearization is <i>0.4</i>% at <i>-20</i>°C, and less then
+  <i>0.2</i>% between <i>-5</i>°C and <i>+50</i>°C.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 19, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 19, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end dynamicViscosity;
@@ -204,8 +199,9 @@ algorithm
   annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
-The ideal gas constant for moist air is computed from <a href=\"modelica://Modelica.Media.Air.MoistAir.ThermodynamicState\">thermodynamic state</a> assuming that all water is in the gas phase.
+    Documentation(info="<html>The ideal gas constant for moist air is computed from <a href=
+\"modelica://Modelica.Media.Air.MoistAir.ThermodynamicState\">thermodynamic
+state</a> assuming that all water is in the gas phase.
 </html>"));
 end gasConstant;
 
@@ -217,8 +213,8 @@ algorithm
   annotation (
   smoothOrder=2,
   Inline=true,
-  Documentation(info="<html>
-Pressure is returned from the thermodynamic state record input as a simple assignment.
+  Documentation(info="<html>Pressure is returned from the thermodynamic state record input as a
+simple assignment.
 </html>"));
 end pressure;
 
@@ -229,28 +225,23 @@ algorithm
   annotation (
     smoothOrder=5,
     Inline=true,
-Documentation(info="<html>
-<p>
-This function returns the isobaric expansion coefficient at constant pressure,
-which is zero for this medium.
-The isobaric expansion coefficient at constant pressure is
+Documentation(info="<html><p>
+  This function returns the isobaric expansion coefficient at constant
+  pressure, which is zero for this medium. The isobaric expansion
+  coefficient at constant pressure is
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&beta;<sub>p</sub> = - 1 &frasl; v &nbsp; (&part; v &frasl; &part; T)<sub>p</sub> = 0,
+  β<sub>p</sub> = - 1 ⁄ v &#160; (∂ v ⁄ ∂ T)<sub>p</sub> = 0,
 </p>
 <p>
-where
-<i>v</i> is the specific volume,
-<i>T</i> is the temperature and
-<i>p</i> is the pressure.
+  where <i>v</i> is the specific volume, <i>T</i> is the temperature
+  and <i>p</i> is the pressure.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end isobaricExpansionCoefficient;
@@ -262,28 +253,22 @@ algorithm
   annotation (
     smoothOrder=5,
     Inline=true,
-    Documentation(info="<html>
-<p>
-This function returns the isothermal compressibility coefficient.
-The isothermal compressibility is
+    Documentation(info="<html><p>
+  This function returns the isothermal compressibility coefficient. The
+  isothermal compressibility is
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&kappa;<sub>T</sub> = -1 &frasl; v &nbsp; (&part; v &frasl; &part; p)<sub>T</sub>
-  = -1 &frasl; p,
+  κ<sub>T</sub> = -1 ⁄ v &#160; (∂ v ⁄ ∂ p)<sub>T</sub> = -1 ⁄ p,
 </p>
 <p>
-where
-<i>v</i> is the specific volume,
-<i>T</i> is the temperature and
-<i>p</i> is the pressure.
+  where <i>v</i> is the specific volume, <i>T</i> is the temperature
+  and <i>p</i> is the pressure.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end isothermalCompressibility;
@@ -312,67 +297,66 @@ algorithm
              Modelica.Math.log(max(Y[i], Modelica.Constants.eps)*state.p/reference_p) for i in 1:2);
   annotation (
   Inline=true,
-    Documentation(info="<html>
-<p>
-This function computes the specific entropy.
+    Documentation(info="<html><p>
+  This function computes the specific entropy.
 </p>
 <p>
-The specific entropy of the mixture is obtained from
+  The specific entropy of the mixture is obtained from
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-s = s<sub>s</sub> + s<sub>m</sub>,
+  s = s<sub>s</sub> + s<sub>m</sub>,
 </p>
 <p>
-where
-<i>s<sub>s</sub></i> is the entropy change due to the state change
-(relative to the reference temperature) and
-<i>s<sub>m</sub></i> is the entropy change due to mixing
-of the dry air and water vapor.
+  where <i>s<sub>s</sub></i> is the entropy change due to the state
+  change (relative to the reference temperature) and
+  <i>s<sub>m</sub></i> is the entropy change due to mixing of the dry
+  air and water vapor.
 </p>
 <p>
-The entropy change due to change in state is obtained from
+  The entropy change due to change in state is obtained from
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R ln(v/v<sub>0</sub>) <br/>
-= c<sub>v</sub> ln(T/T<sub>0</sub>) + R ln(&rho;<sub>0</sub>/&rho;)
-</p>
-<p>If we assume <i>&rho; = p<sub>0</sub>/(R T)</i>,
-and because <i>c<sub>p</sub> = c<sub>v</sub> + R</i>,
-we can write
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R ln(T/T<sub>0</sub>) <br/>
-=c<sub>p</sub> ln(T/T<sub>0</sub>).
+  s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R
+  ln(v/v<sub>0</sub>)<br/>
+  = c<sub>v</sub> ln(T/T<sub>0</sub>) + R ln(ρ<sub>0</sub>/ρ)
 </p>
 <p>
-Next, the entropy of mixing is obtained from a reversible isothermal
-expansion process. Hence,
+  If we assume <i>ρ = p<sub>0</sub>/(R T)</i>, and because
+  <i>c<sub>p</sub> = c<sub>v</sub> + R</i>, we can write
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-  s<sub>m</sub> = -R &sum;<sub>i</sub>( X<sub>i</sub> &frasl; M<sub>i</sub>
+  s<sub>s</sub> = c<sub>v</sub> ln(T/T<sub>0</sub>) + R
+  ln(T/T<sub>0</sub>)<br/>
+  =c<sub>p</sub> ln(T/T<sub>0</sub>).
+</p>
+<p>
+  Next, the entropy of mixing is obtained from a reversible isothermal
+  expansion process. Hence,
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+  s<sub>m</sub> = -R ∑<sub>i</sub>( X<sub>i</sub> ⁄ M<sub>i</sub>
   ln(Y<sub>i</sub> p/p<sub>0</sub>)),
 </p>
 <p>
-where <i>R</i> is the gas constant,
-<i>X</i> is the mass fraction,
-<i>M</i> is the molar mass, and
-<i>Y</i> is the mole fraction.
+  where <i>R</i> is the gas constant, <i>X</i> is the mass fraction,
+  <i>M</i> is the molar mass, and <i>Y</i> is the mole fraction.
 </p>
 <p>
-To obtain the state for a given pressure, entropy and mass fraction, use
-<a href=\"modelica://AixLib.Media.Air.setState_psX\">
-AixLib.Media.Air.setState_psX</a>.
+  To obtain the state for a given pressure, entropy and mass fraction,
+  use <a href=
+  \"modelica://AixLib.Media.Air.setState_psX\">AixLib.Media.Air.setState_psX</a>.
 </p>
-<h4>Limitations</h4>
+<h4>
+  Limitations
+</h4>
 <p>
-This function is only valid for a relative humidity below 100%.
+  This function is only valid for a relative humidity below 100%.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-November 27, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+  <li>November 27, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end specificEntropy;
@@ -383,18 +367,15 @@ algorithm
   ddpT := 0;
   annotation (
   Inline=true,
-Documentation(info="<html>
-<p>
-This function returns the partial derivative of density
-with respect to pressure at constant temperature.
+Documentation(info="<html><p>
+  This function returns the partial derivative of density with respect
+  to pressure at constant temperature.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end density_derp_T;
@@ -408,19 +389,16 @@ algorithm
   smoothOrder=99,
   Inline=true,
   Documentation(info=
-"<html>
-<p>
-This function computes the derivative of density with respect to temperature
-at constant pressure.
-</p>
+"<html><p>
+  This function computes the derivative of density with respect to
+  temperature at constant pressure.
+</p>/html
 </html>", revisions=
-"<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
+"<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
+</ul>/html
 </html>"));
 end density_derT_p;
 
@@ -431,20 +409,17 @@ algorithm
 annotation (
   smoothOrder=99,
   Inline=true,
-  Documentation(info="<html>
-<p>
-This function returns the partial derivative of density
-with respect to mass fraction.
-This value is zero because in this medium, density is proportional
-to pressure, but independent of the species concentration.
+  Documentation(info="<html><p>
+  This function returns the partial derivative of density with respect
+  to mass fraction. This value is zero because in this medium, density
+  is proportional to pressure, but independent of the species
+  concentration.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end density_derX;
@@ -488,10 +463,12 @@ algorithm
     annotation (
     smoothOrder=2,
     Inline=true,
-    Documentation(info="<html>
-<p>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
-    is computed from density <code>d</code>, temperature <code>T</code> and composition <code>X</code>.
+    Documentation(info="<html><p>
+  The <a href=
+  \"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
+  thermodynamic state record</a> is computed from density
+  <code>d</code>, temperature <code>T</code> and composition
+  <code>X</code>.
 </p>
 </html>"));
 end setState_dTX;
@@ -506,9 +483,10 @@ algorithm
   annotation (
   smoothOrder=2,
   Inline=true,
-  Documentation(info="<html>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
-thermodynamic state record</a> is computed from pressure p, specific enthalpy h and composition X.
+  Documentation(info="<html>The <a href=
+\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
+thermodynamic state record</a> is computed from pressure p, specific
+enthalpy h and composition X.
 </html>"));
 end setState_phX;
 
@@ -522,9 +500,10 @@ algorithm
     annotation (
   smoothOrder=2,
   Inline=true,
-  Documentation(info="<html>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
-thermodynamic state record</a> is computed from pressure p, temperature T and composition X.
+  Documentation(info="<html>The <a href=
+\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">
+thermodynamic state record</a> is computed from pressure p, temperature
+T and composition X.
 </html>"));
 end setState_pTX;
 
@@ -562,23 +541,20 @@ algorithm
 
 annotation (
 Inline=true,
-Documentation(info="<html>
-<p>
-This function returns the thermodynamic state based on pressure,
-specific entropy and mass fraction.
+Documentation(info="<html><p>
+  This function returns the thermodynamic state based on pressure,
+  specific entropy and mass fraction.
 </p>
 <p>
-The state is computed by symbolically solving
-<a href=\"modelica://AixLib.Media.Air.specificEntropy\">
-AixLib.Media.Air.specificEntropy</a>
-for temperature.
+  The state is computed by symbolically solving <a href=
+  \"modelica://AixLib.Media.Air.specificEntropy\">AixLib.Media.Air.specificEntropy</a>
+  for temperature.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-November 27, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+  <li>November 27, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end setState_psX;
@@ -605,19 +581,15 @@ algorithm
   annotation(smoothOrder=5,
              Inline=true,
              inverse(T=temperature_phX(p, h, X)),
-             Documentation(info="<html>
-Specific enthalpy as a function of temperature and species concentration.
-The pressure is input for compatibility with the medium models, but the specific enthalpy
-is independent of the pressure.
+             Documentation(info="<html>Specific enthalpy as a function of temperature and species
+concentration. The pressure is input for compatibility with the medium
+models, but the specific enthalpy is independent of the pressure.
 </html>",
-revisions="<html>
-<ul>
-<li>
-April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
-Added <code>Inline=true</code> for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
-issue 227</a>.
-</li>
+revisions="<html><ul>
+  <li>April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
+    Added <code>Inline=true</code> for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/227\">issue 227</a>.
+  </li>
 </ul>
 </html>"));
 end specificEnthalpy_pTX;
@@ -646,20 +618,16 @@ algorithm
             X=refState.X));
 annotation (
   Inline=true,
-  Documentation(info="<html>
-<p>
-This function computes the specific enthalpy for
-an isentropic state change from the temperature
-that corresponds to the state <code>refState</code>
-to <code>reference_T</code>.
+  Documentation(info="<html><p>
+  This function computes the specific enthalpy for an isentropic state
+  change from the temperature that corresponds to the state
+  <code>refState</code> to <code>reference_T</code>.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end isentropicEnthalpy;
@@ -679,8 +647,8 @@ algorithm
   annotation (
   smoothOrder=2,
   Inline=true,
-  Documentation(info="<html>
-Temperature is returned from the thermodynamic state record input as a simple assignment.
+  Documentation(info="<html>Temperature is returned from the thermodynamic state record input as a
+simple assignment.
 </html>"));
 end temperature;
 
@@ -690,17 +658,14 @@ algorithm
     annotation (
 Inline=true,
 smoothOrder=99,
-Documentation(info="<html>
-<p>
-This function returns the molar mass.
+Documentation(info="<html><p>
+  This function returns the molar mass.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-December 18, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+revisions="<html><ul>
+  <li>December 18, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end molarMass;
@@ -718,19 +683,15 @@ algorithm
   annotation(smoothOrder=5,
              Inline=true,
              inverse(h=specificEnthalpy_pTX(p, T, X)),
-             Documentation(info="<html>
-Temperature as a function of specific enthalpy and species concentration.
-The pressure is input for compatibility with the medium models, but the temperature
-is independent of the pressure.
+             Documentation(info="<html>Temperature as a function of specific enthalpy and species
+concentration. The pressure is input for compatibility with the medium
+models, but the temperature is independent of the pressure.
 </html>",
-revisions="<html>
-<ul>
-<li>
-April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
-Added <code>Inline=true</code> for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
-issue 227</a>.
-</li>
+revisions="<html><ul>
+  <li>April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
+    Added <code>Inline=true</code> for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/227\">issue 227</a>.
+  </li>
 </ul>
 </html>"));
 end temperature_phX;
@@ -764,21 +725,18 @@ protected
     annotation (
       preferredView="info",
       defaultComponentName="gas",
-      Documentation(info="<html>
-<p>
-This data record contains the coefficients for perfect gases.
+      Documentation(info="<html><p>
+  This data record contains the coefficients for perfect gases.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-September 12, 2014, by Michael Wetter:<br/>
-Corrected the wrong location of the <code>preferredView</code>
-and the <code>revisions</code> annotation.
-</li>
-<li>
-November 21, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
+  <li>September 12, 2014, by Michael Wetter:<br/>
+    Corrected the wrong location of the <code>preferredView</code> and
+    the <code>revisions</code> annotation.
+  </li>
+  <li>November 21, 2013, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
   end GasProperties;
@@ -898,23 +856,65 @@ algorithm
   annotation (
     Inline=true);
 end der_specificHeatCapacityCv;
-  annotation(preferredView="info", Documentation(info="<html>
-<p>This medium package models moist air using a gas law in which pressure and temperature are independent, which often leads to significantly faster and more robust computations. Additionally, the density is constant to improve the simulation stability and speed.</p>
-<p>This medium uses the gas law </p>
-<p align=\"center\"><i>&rho; = &rho;<sub>stp</sub>, </i></p>
-<p>where <i>p<sub>std</i></sub> is a constant reference density. </p>
-<p><br>The medium model can be used for air duct simulations, where the pressures and temperatures are close to the reference values. </p>
-<p><br>Note that models in this package implement the equation for the internal energy as </p>
-<p align=\"center\"><i>u = h - p<sub>stp</sub> &frasl; &rho;<sub>stp</sub>, </i></p>
-<p>where <i>u</i> is the internal energy per unit mass, <i>h</i> is the enthalpy per unit mass, <i>p<sub>stp</i></sub> is the static pressure and <i>&rho;<sub>stp</i></sub> is the mass density at standard pressure and temperature. The reason for this implementation is that in general, </p>
-<p align=\"center\"><i>h = u + p v, </i></p>
-<p>from which follows that </p>
-<p align=\"center\"><i>u = h - p v = h - p &frasl; &rho; = h - p<sub>stp</sub> &frasl; &rho;<sub>std</sub>, </i></p>
-<p>because <i>p &frasl; &rho; = p<sub>stp</sub> &frasl; &rho;<sub>stp</i></sub> in this medium model. </p>
-<p>The enthalpy is computed using the convention that <i>h=0</i> if <i>T=0</i> &deg;C and no water vapor is present. </p>
+  annotation(preferredView="info", Documentation(info="<html><p>
+  This medium package models moist air using a gas law in which
+  pressure and temperature are independent, which often leads to
+  significantly faster and more robust computations. Additionally, the
+  density is constant to improve the simulation stability and speed.
+</p>
+<p>
+  This medium uses the gas law
+</p>
+<p align=\"center\">
+  <i>ρ = ρ<sub>stp</sub>,</i>
+</p>
+<p>
+  where <i>p<sub>std</sub></i> is a constant reference density.
+</p>
+<p>
+  <br/>
+  The medium model can be used for air duct simulations, where the
+  pressures and temperatures are close to the reference values.
+</p>
+<p>
+  <br/>
+  Note that models in this package implement the equation for the
+  internal energy as
+</p>
+<p align=\"center\">
+  <i>u = h - p<sub>stp</sub> ⁄ ρ<sub>stp</sub>,</i>
+</p>
+<p>
+  where <i>u</i> is the internal energy per unit mass, <i>h</i> is the
+  enthalpy per unit mass, <i>p<sub>stp</sub></i> is the static pressure
+  and <i>ρ<sub>stp</sub></i> is the mass density at standard pressure
+  and temperature. The reason for this implementation is that in
+  general,
+</p>
+<p align=\"center\">
+  <i>h = u + p v,</i>
+</p>
+<p>
+  from which follows that
+</p>
+<p align=\"center\">
+  <i>u = h - p v = h - p ⁄ ρ = h - p<sub>stp</sub> ⁄
+  ρ<sub>std</sub>,</i>
+</p>
+<p>
+  because <i>p ⁄ ρ = p<sub>stp</sub> ⁄ ρ<sub>stp</sub></i> in this
+  medium model.
+</p>
+<p>
+  The enthalpy is computed using the convention that <i>h=0</i> if
+  <i>T=0</i> °C and no water vapor is present.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>January 09, 2020 by Alexander K&uuml;mpel:<br>Copy from <a href=\"modelica://AixLib/Media/Air.mo\">Air</a> and density set constant</li>
+  <li>January 09, 2020 by Alexander Kümpel:<br/>
+    Copy from <a href=\"modelica://AixLib/Media/Air.mo\">Air</a> and
+    density set constant
+  </li>
 </ul>
 </html>"),
     Icon(graphics={
