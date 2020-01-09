@@ -8,7 +8,7 @@ block CtrThrottle "Controller for unmixed circuit with valve"
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
+  parameter Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_pump(min=0) = 2000 "Rpm of the Pump";
   parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation(Dialog(group="PID"));
@@ -51,7 +51,8 @@ equation
 
 public
   BaseClasses.HydraulicBus  hydraulicBus
-    annotation (Placement(transformation(extent={{66,-38},{120,16}})));
+    annotation (Placement(transformation(extent={{76,-24},{124,24}}),
+        iconTransformation(extent={{90,-22},{138,26}})));
 equation
     connect(PID.u_s, Tset) annotation (Line(
       points={{-18,-50},{-67.1,-50},{-67.1,-60},{-120,-60}},
@@ -62,13 +63,8 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, hydraulicBus.valSet) annotation (Line(points={{5,-50},{48,-50},
-          {48,-10.865},{93.135,-10.865}},
-                                      color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{41,0},{48,0},{48,-10.865},{93.135,-10.865}}, color={0,0,127}), Text(
+  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{5,-50},{48,
+          -50},{48,0.12},{100.12,0.12}},  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -76,30 +72,30 @@ equation
     annotation (Line(points={{-6,-38},{-8,-38},{-8,60},{-120,60}}, color={0,0,127}));
   connect(PID.y,pumpSwitchOff. u)
     annotation (Line(points={{5,-50},{4,-50},{4,40},{14.4,40}}, color={0,0,127}));
-  connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onOff_Input) annotation (Line(points={{32.8,40},
-          {93.135,40},{93.135,-10.865}},                     color={255,0,255}), Text(
+  connect(constRpmPump.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={
+          {41,0},{100.12,0},{100.12,0.12}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(pumpSwitchOff.y, hydraulicBus.pumpBus.onSet) annotation (Line(points=
+          {{32.8,40},{100.12,40},{100.12,0.12}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Text(
-          extent={{-90,20},{56,-20}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
-          textString="HCMI"),
           Rectangle(
-          extent={{-90,80},{70,-80}},
+          extent={{-100,100},{100,-100}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Line(
-          points={{10,80},{70,0},{30,-80}},
+          points={{-100,100},{-36,-2},{-100,-100}},
           color={95,95,95},
           thickness=0.5),
           Text(
-          extent={{-90,20},{56,-20}},
+          extent={{-48,20},{98,-20}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},

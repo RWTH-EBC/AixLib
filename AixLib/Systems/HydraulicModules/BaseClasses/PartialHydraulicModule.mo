@@ -134,14 +134,14 @@ protected
 
 equation
 
-  connect(VFSen_out.V_flow, hydraulicBus.VF_in) annotation (Line(
+  connect(VFSen_out.V_flow, hydraulicBus.VFlowInMea) annotation (Line(
       points={{-111,40},{-112,40},{-112,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(VFSen_in.V_flow, hydraulicBus.VF_out) annotation (Line(
+  connect(VFSen_in.V_flow, hydraulicBus.VflowOutMea) annotation (Line(
       points={{111,42},{116,42},{116,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
@@ -166,26 +166,26 @@ equation
           58},{-70,58}}, color={0,0,127}));
   connect(senT_b1.T, PT1_b1.u) annotation (Line(points={{94,26.6},{86,26.6},{86,
           58},{70,58}}, color={0,0,127}));
-  connect(PT1_b1.y, hydraulicBus.TFwrd_out) annotation (Line(points={{70,81},{70,
-          100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(PT1_b1.y, hydraulicBus.TFwrdOutMea) annotation (Line(points={{70,81},
+          {70,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(PT1_a1.y, hydraulicBus.TFwrd_in) annotation (Line(points={{-70,81},{-70,
-          100},{0.1,100},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(PT1_a1.y, hydraulicBus.TFwrdInMea) annotation (Line(points={{-70,81},
+          {-70,100},{0.1,100},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(PT1_b2.y, hydraulicBus.TRtrn_out) annotation (Line(points={{-121,-30},
+  connect(PT1_b2.y, hydraulicBus.TRtrnOutMea) annotation (Line(points={{-121,-30},
           {-122,-30},{-122,100},{0.1,100},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(senT_a2.T, PT1_a2.u)
     annotation (Line(points={{78,-53.4},{78,-30},{98,-30}}, color={0,0,127}));
-  connect(PT1_a2.y, hydraulicBus.TRtrn_in) annotation (Line(points={{121,-30},{130,
-          -30},{130,100},{116,100},{116,100.1},{0.1,100.1}}, color={0,0,127}),
-      Text(
+  connect(PT1_a2.y, hydraulicBus.TRtrnInMea) annotation (Line(points={{121,-30},
+          {130,-30},{130,100},{116,100},{116,100.1},{0.1,100.1}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -206,9 +206,112 @@ equation
     experiment(StopTime=86400),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
          graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={175,175,175},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dash),
         Line(
           points={{0,100}},
           color={95,95,95},
-          thickness=0.5)}),
+          thickness=0.5),
+        Line(
+          points={{-92,60},{98,60}},
+          color={0,127,255},
+          thickness=0.5),
+        Line(
+          points={{-94,-60},{96,-60}},
+          color={0,127,255},
+          thickness=0.5),
+        Ellipse(
+          extent={{-78,-38},{-62,-54}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-78,68},{-62,52}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-78,84},{-62,68}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{62,84},{78,68}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{62,68},{78,52}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{62,-38},{78,-54}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(points={{70,-54},{70,-60}}, color={0,0,0}),
+        Line(points={{-70,-54},{-70,-60}}, color={0,0,0}),
+        Text(
+          extent={{-78,-38},{-62,-54}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Text(
+          extent={{-78,68},{-62,52}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q"),
+        Text(
+          extent={{-78,84},{-62,68}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Text(
+          extent={{62,84},{78,68}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Text(
+          extent={{62,68},{78,52}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q"),
+        Text(
+          extent={{62,-38},{78,-54}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Line(points={{-40,86},{88,86},{82,90}}, color={0,0,0}),
+        Line(points={{88,86},{82,82}}, color={0,0,0}),
+        Text(
+          extent={{34,98},{80,88}},
+          lineColor={95,95,95},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Fwrd"),
+        Line(
+          points={{-64,-2},{64,-2},{58,2}},
+          color={0,0,0},
+          origin={-16,-76},
+          rotation=180),
+        Line(points={{-74,-70},{-80,-74}}, color={0,0,0}),
+        Text(
+          extent={{-76,-76},{-30,-86}},
+          lineColor={95,95,95},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Rtrn")}),
     Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, initialScale=0.1)));
 end PartialHydraulicModule;
