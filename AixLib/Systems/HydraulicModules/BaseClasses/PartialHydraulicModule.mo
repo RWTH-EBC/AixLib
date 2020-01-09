@@ -206,9 +206,112 @@ equation
     experiment(StopTime=86400),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
          graphics={
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={175,175,175},
+          lineThickness=0.5,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dash),
         Line(
           points={{0,100}},
           color={95,95,95},
-          thickness=0.5)}),
+          thickness=0.5),
+        Line(
+          points={{-92,60},{98,60}},
+          color={0,127,255},
+          thickness=0.5),
+        Line(
+          points={{-94,-60},{96,-60}},
+          color={0,127,255},
+          thickness=0.5),
+        Ellipse(
+          extent={{-78,-38},{-62,-54}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-78,68},{-62,52}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-78,84},{-62,68}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{62,84},{78,68}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{62,68},{78,52}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{62,-38},{78,-54}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(points={{70,-54},{70,-60}}, color={0,0,0}),
+        Line(points={{-70,-54},{-70,-60}}, color={0,0,0}),
+        Text(
+          extent={{-78,-38},{-62,-54}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Text(
+          extent={{-78,68},{-62,52}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q"),
+        Text(
+          extent={{-78,84},{-62,68}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Text(
+          extent={{62,84},{78,68}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Text(
+          extent={{62,68},{78,52}},
+          lineColor={0,128,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Q"),
+        Text(
+          extent={{62,-38},{78,-54}},
+          lineColor={216,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="T"),
+        Line(points={{-40,86},{88,86},{82,90}}, color={0,0,0}),
+        Line(points={{88,86},{82,82}}, color={0,0,0}),
+        Text(
+          extent={{34,98},{80,88}},
+          lineColor={95,95,95},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Fwrd"),
+        Line(
+          points={{-64,-2},{64,-2},{58,2}},
+          color={0,0,0},
+          origin={-16,-76},
+          rotation=180),
+        Line(points={{-74,-70},{-80,-74}}, color={0,0,0}),
+        Text(
+          extent={{-76,-76},{-30,-86}},
+          lineColor={95,95,95},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="Rtrn")}),
     Diagram(coordinateSystem(extent={{-120,-120},{120,120}}, initialScale=0.1)));
 end PartialHydraulicModule;

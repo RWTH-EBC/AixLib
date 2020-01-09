@@ -8,37 +8,31 @@ block CtrPump "controller for pump circuit"
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
   BaseClasses.HydraulicBus hydraulicBus annotation (Placement(
-        transformation(extent={{78,-24},{124,24}}), iconTransformation(extent={{
-            78,-24},{124,24}})));
+        transformation(extent={{76,-24},{124,24}}), iconTransformation(extent={{90,-22},
+            {138,26}})));
 equation
-  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{11,0},{101.115,0},{101.115,0.12}}, color={0,0,127}), Text(
+  connect(constRpmPump.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{11,0},{
+          100.12,0},{100.12,0.12}},                                                                                    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(booleanConstant.y, hydraulicBus.pumpBus.onOff_Input) annotation (Line(
-        points={{81,30},{101.115,30},{101.115,0.12}}, color={255,0,255}), Text(
+        points={{81,30},{100.12,30},{100.12,0.12}},   color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-          Text(
-          extent={{-90,20},{56,-20}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid,
-          textString="HCMI"),
           Rectangle(
-          extent={{-90,80},{80,-80}},
+          extent={{-100,100},{100,-100}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Line(
-          points={{10,80},{78,0},{30,-80}},
+          points={{-100,100},{-36,-2},{-100,-100}},
           color={95,95,95},
           thickness=0.5),
           Text(
-          extent={{-90,20},{56,-20}},
+          extent={{-48,20},{98,-20}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},

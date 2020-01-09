@@ -165,7 +165,8 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedThrottle.hydraulicBus, unmixedThrottle.hydraulicBus) annotation (Line(
-      points={{-118.84,90.68},{-50,90.68},{-50,86},{49,86},{49,4}},
+      points={{-118.84,90.68},{-50,90.68},{-50,90},{50,90},{50,48},{49,48},{49,
+          4}},
       color={255,204,51},
       thickness=0.5));
   connect(admix.port_a1, hex.port_a2) annotation (Line(points={{-83,-21},{-83,-28},{-106,-28}},
