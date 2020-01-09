@@ -426,18 +426,18 @@ equation
         points={{-179,-90},{-168,-90},{-168,-80},{-34,-80},{-34,-8},{-22,-8}},
         color={0,0,127},
         pattern=LinePattern.Dash));
-
-  end if;
-  connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-182,
+    connect(conQLat_flow.port, volMoiAir.heatPort) annotation (Line(points={{-182,
           -120},{-166,-120},{-166,-82},{-32,-82},{-32,-16},{-20,-16}}, color={191,
           0,0}));
-  connect(mWat_flow.u, QLat_flow) annotation (Line(points={{-202,-90},{-232,-90},
+    connect(mWat_flow.u, QLat_flow) annotation (Line(points={{-202,-90},{-232,-90},
           {-232,-130},{-260,-130}}, color={0,0,127}));
-  connect(conQLat_flow.Q_flow, QLat_flow)
+    connect(conQLat_flow.Q_flow, QLat_flow)
     annotation (Line(points={{-202,-120},{-232,-120},{-232,-130},{-260,-130}},
                                                        color={0,0,127}));
-  connect(CO2_flow, volMoiAir.C_flow[1]) annotation (Line(points={{180,-200},{
+    connect(CO2_flow, volMoiAir.C_flow[1]) annotation (Line(points={{180,-200},{
           180,-90},{-28,-90},{-28,-22},{-22,-22}}, color={0,0,127}));
+  end if;
+
   annotation (defaultComponentName="theZon",Diagram(coordinateSystem(
   preserveAspectRatio=false, extent={{-240,-180},{240,180}},
   grid={2,2}),  graphics={
