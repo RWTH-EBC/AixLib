@@ -10,10 +10,10 @@ model Wall_ASHRAE140
 
   // general wall parameters
 
-   parameter AixLib.DataBase.Walls.WallBaseDataDefinition WallType=
-      AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
-    "Choose an outside wall type from the database"
-    annotation (Dialog(group="Room Geometry"), choicesAllMatching=true);
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    WallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
+    "Type of wall"
+    annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{2,76},{22,96}})));
 
    parameter Modelica.SIunits.Length wall_length=2 "Length of wall"
                       annotation(Dialog(group="Room Geometry"));

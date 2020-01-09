@@ -10,7 +10,7 @@ model Wall
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
     WallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
     "Type of wall"
-    annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-10,76},{10,96}})));
+    annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{2,76},{22,96}})));
 
 
   parameter Modelica.SIunits.Length wall_length = 2 "Length of wall" annotation(Dialog(group = "Room Geometry"));
