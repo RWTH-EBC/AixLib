@@ -455,213 +455,785 @@ end EnergyCosts;
     Real i_Valve6 "counter of Valve6 (Hotwater boiler)";
     Real i_Valve7 "counter of Valve7 (Hotwater warmwater bufferstorage)";
     Real i_Valve8 "counter of Valve8 (Aircooler)";
-    Real i_Valve_RLT_Hot_Central "counter of valve to control the hotwater-temperatur to the Central";
-    Real i_Valve_RLT_Hot_OpenPlanOffice "counter of valve to control the hotwater-temperatur to the OpenPlanOffice";
-    Real i_Valve_RLT_Hot_ConferenceRoom "counter of valve to control the hotwater-temperatur to the ConferenceRoom";
-    Real i_Valve_RLT_Hot_MultiPersonOffice "counter of valve to control the hotwater-temperatur to the MultiPersonOffice";
-    Real i_Valve_RLT_Hot_Canteen "counter of valve to control the hotwater-temperatur to the canteen";
-    Real i_Valve_RLT_Hot_Workshop "counter of valve to control the hotwater-temperatur to the workshop";
-    Real i_Valve_RLT_Cold_Central "counter of valve to control the coldwater-temperatur to the Central";
-    Real i_Valve_RLT_Cold_OpenPlanOffice "counter of valve to control the coldwater-temperatur to the OpenPlanOffice";
-    Real i_Valve_RLT_Cold_ConferenceRoom "counter of valve to control the coldwater-temperatur to the ConferenceRoom";
-    Real i_Valve_RLT_Cold_MultiPersonOffice "counter of valve to control the coldwater-temperatur to the MultiPersonOffice";
-    Real i_Valve_RLT_Cold_Canteen "counter of valve to control the coldwater-temperatur to the canteen";
-    Real i_Valve_RLT_Cold_Workshop "counter of valve to control the coldwater-temperatur to the workshop";
+    Real i_Valve_RLT_Hot_Central "counter of valve to control the hotwater-temperature to the Central";
+    Real i_Valve_RLT_Hot_OpenPlanOffice "counter of valve to control the hotwater-temperature to the OpenPlanOffice";
+    Real i_Valve_RLT_Hot_ConferenceRoom "counter of valve to control the hotwater-temperature to the ConferenceRoom";
+    Real i_Valve_RLT_Hot_MultiPersonOffice "counter of valve to control the hotwater-temperature to the MultiPersonOffice";
+    Real i_Valve_RLT_Hot_Canteen "counter of valve to control the hotwater-temperature to the canteen";
+    Real i_Valve_RLT_Hot_Workshop "counter of valve to control the hotwater-temperature to the workshop";
+    Real i_Valve_RLT_Cold_Central "counter of valve to control the coldwater-temperature to the Central";
+    Real i_Valve_RLT_Cold_OpenPlanOffice "counter of valve to control the coldwater-temperature to the OpenPlanOffice";
+    Real i_Valve_RLT_Cold_ConferenceRoom "counter of valve to control the coldwater-temperature to the ConferenceRoom";
+    Real i_Valve_RLT_Cold_MultiPersonOffice "counter of valve to control the coldwater-temperature to the MultiPersonOffice";
+    Real i_Valve_RLT_Cold_Canteen "counter of valve to control the coldwater-temperature to the canteen";
+    Real i_Valve_RLT_Cold_Workshop "counter of valve to control the coldwater-temperature to the workshop";
     Real i_Valve_TBA_Warm_OpenPlanOffice "counter of valve for warm or cold of the openplanoffice";
     Real i_Valve_TBA_Warm_conferenceroom "counter of valve for warm or cold of the conferenceroom";
     Real i_Valve_TBA_Warm_multipersonoffice "counter of valve for warm or cold of the multipersonoffice";
     Real i_Valve_TBA_Warm_canteen "Vcounter of valve for warm or cold of the canteen";
     Real i_Valve_TBA_Warm_workshop "counter of valve for warm or cold of the workshop";
-    Real i_Valve_TBA_OpenPlanOffice_Temp "counter of valve to control the temperatur to the OpenPlanOffice";
-    Real i_Valve_TBA_ConferenceRoom_Temp "counter of valve to control the temperatur to the ConferenceRoom";
+    Real i_Valve_TBA_OpenPlanOffice_Temp "counter of valve to control the temperature to the OpenPlanOffice";
+    Real i_Valve_TBA_ConferenceRoom_Temp "counter of valve to control the temperature to the ConferenceRoom";
     Real i_Valve_TBA_MultiPersonOffice_Temp "counter of valve to control the temperatur to the MultiPersonOffice";
-    Real i_Valve_TBA_Canteen_Temp "counter of valve to control the temperatur to the canteen";
-    Real i_Valve_TBA_Workshop_Temp "counter of valve to control the temperatur to the workshop";
+    Real i_Valve_TBA_Canteen_Temp "counter of valve to control the temperature to the canteen";
+    Real i_Valve_TBA_Workshop_Temp "counter of valve to control the temperature to the workshop";
     Modelica.Blocks.Interfaces.RealOutput y annotation (
       Placement(visible = true, transformation(origin = {96, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {96, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     BusSystems.Bus_Control bus_Control1 annotation (
-      Placement(visible = true, transformation(origin = {-104, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-104, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={-100,-2},    extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin={-100,-2},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     //overall number of switches of pumps
+
+     Modelica.Blocks.Routing.RealPassThrough Speed_Pumps[26]
+      annotation (Placement(transformation(extent={{-42,-62},{-16,-36}})));
+
+
+    Modelica.Blocks.Routing.RealPassThrough Pos_Valves[30]
+      annotation (Placement(transformation(extent={{-30,-4},{-10,16}})));
   equation
-    if (I_valve_ges / 58) * 365 - 30 * k > 0 and (I_pump_ges / 56) * 365 - 26 * k > 0 then
+    when (I_valve_ges / 56) * 365 - 30 * k > 0 and (I_pump_ges / 56) * 365 - 26 * k > 0 then
       y = K_valve * ((I_valve_ges / 56) * 365 - 30 * k) + K_pump * ((I_pump_ges / 56) * 365 - 26 * k);
-    else
-      y = pre(y);
-    end if;
+    end when;
 
     I_pump_ges = i_Pump_Hotwater_y + i_Pump_Warmwater_y + i_Pump_Coldwater_y + i_Pump_Coldwater_heatpump_y + i_Pump_Warmwater_heatpump_1_y + i_Pump_Warmwater_heatpump_2_y + i_Pump_Aircooler_y + i_Pump_Hotwater_CHP_y + i_Pump_Hotwater_Boiler_y + i_Pump_TBA_OpenPlanOffice_y + i_Pump_TBA_ConferenceRoom_y + i_Pump_TBA_MultiPersonOffice_y + i_Pump_TBA_Canteen_y + i_Pump_TBA_Workshop_y + i_Pump_RLT_Central_hot_y + i_Pump_RLT_OpenPlanOffice_hot_y + i_Pump_RLT_ConferenceRoom_hot_y + i_Pump_RLT_MultiPersonOffice_hot_y + i_Pump_RLT_Canteen_hot_y + i_Pump_RLT_Workshop_hot_y + i_Pump_RLT_Central_cold_y + i_Pump_RLT_OpenPlanOffice_cold_y + i_Pump_RLT_ConferenceRoom_cold_y + i_Pump_RLT_MultiPersonOffice_cold_y + i_Pump_RLT_Canteen_cold_y + i_Pump_RLT_Workshop_cold_y;
     I_valve_ges = i_Valve1 + i_Valve2 + i_Valve3 + i_Valve4 + i_Valve5 + i_Valve6 + i_Valve7 + i_Valve8 + i_Valve_RLT_Hot_Central + i_Valve_RLT_Hot_OpenPlanOffice + i_Valve_RLT_Hot_ConferenceRoom + i_Valve_RLT_Hot_MultiPersonOffice + i_Valve_RLT_Hot_Canteen + i_Valve_RLT_Hot_Workshop + i_Valve_RLT_Cold_Central + i_Valve_RLT_Cold_OpenPlanOffice + i_Valve_RLT_Cold_ConferenceRoom + i_Valve_RLT_Cold_MultiPersonOffice + i_Valve_RLT_Cold_Canteen + i_Valve_RLT_Cold_Workshop + i_Valve_TBA_Warm_OpenPlanOffice + i_Valve_TBA_Warm_conferenceroom + i_Valve_TBA_Warm_multipersonoffice + i_Valve_TBA_Warm_canteen + i_Valve_TBA_Warm_workshop + i_Valve_TBA_OpenPlanOffice_Temp + i_Valve_TBA_ConferenceRoom_Temp + i_Valve_TBA_MultiPersonOffice_Temp + i_Valve_TBA_Canteen_Temp + i_Valve_TBA_Workshop_Temp;
 
-      when bus_Control1.Pump_Hotwater_y <> pre(bus_Control1.Pump_Hotwater_y) then
+      when abs(der(Speed_Pumps[1].y))>0 then
       i_Pump_Hotwater_y = pre(i_Pump_Hotwater_y) + 1;end when;
-    when bus_Control1.Pump_Warmwater_y <> pre(bus_Control1.Pump_Warmwater_y) then
+
+      when abs(der(Speed_Pumps[2].y))>0 then
       i_Pump_Warmwater_y = pre(i_Pump_Warmwater_y) + 1;
     end when;
-    when bus_Control1.Pump_Coldwater_y <> pre(bus_Control1.Pump_Coldwater_y) then
+
+      when abs(der(Speed_Pumps[3].y))>0 then
       i_Pump_Coldwater_y = pre(i_Pump_Coldwater_y) + 1;
     end when;
-    when bus_Control1.Pump_Coldwater_y <> pre(bus_Control1.Pump_Coldwater_y) then
-      i_Pump_Coldwater_y = pre(i_Pump_Coldwater_y) + 1;
-    end when;
-    when bus_Control1.Pump_Coldwater_heatpump_y <> pre(bus_Control1.Pump_Coldwater_heatpump_y) then
+
+
+      when abs(der(Speed_Pumps[4].y))>0 then
       i_Pump_Coldwater_heatpump_y = pre(i_Pump_Coldwater_heatpump_y) + 1;
     end when;
-    when bus_Control1.Pump_Warmwater_heatpump_1_y <> pre(bus_Control1.Pump_Warmwater_heatpump_1_y) then
+
+      when abs(der(Speed_Pumps[5].y))>0 then
       i_Pump_Warmwater_heatpump_1_y = pre(i_Pump_Warmwater_heatpump_1_y) + 1;
     end when;
-    when bus_Control1.Pump_Warmwater_heatpump_2_y <> pre(bus_Control1.Pump_Warmwater_heatpump_2_y) then
+
+      when abs(der(Speed_Pumps[6].y))>0 then
       i_Pump_Warmwater_heatpump_2_y = pre(i_Pump_Warmwater_heatpump_2_y) + 1;
     end when;
-    when bus_Control1.Pump_Aircooler_y <> pre(bus_Control1.Pump_Aircooler_y) then
+
+      when abs(der(Speed_Pumps[7].y))>0 then
       i_Pump_Aircooler_y = pre(i_Pump_Aircooler_y) + 1;
     end when;
-    when bus_Control1.Pump_Hotwater_CHP_y <> pre(bus_Control1.Pump_Hotwater_CHP_y) then
+
+      when abs(der(Speed_Pumps[8].y))>0 then
       i_Pump_Hotwater_CHP_y = pre(i_Pump_Hotwater_CHP_y) + 1;
     end when;
-    when bus_Control1.Pump_Hotwater_Boiler_y <> pre(bus_Control1.Pump_Hotwater_Boiler_y) then
+
+      when abs(der(Speed_Pumps[9].y))>0 then
       i_Pump_Hotwater_Boiler_y = pre(i_Pump_Hotwater_Boiler_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_Central_hot_y <> pre(bus_Control1.Pump_RLT_Central_hot_y) then
+
+      when abs(der(Speed_Pumps[10].y))>0 then
       i_Pump_RLT_Central_hot_y = pre(i_Pump_RLT_Central_hot_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_OpenPlanOffice_hot_y <> pre(bus_Control1.Pump_RLT_OpenPlanOffice_hot_y) then
+
+      when abs(der(Speed_Pumps[11].y))>0 then
       i_Pump_RLT_OpenPlanOffice_hot_y = pre(i_Pump_RLT_OpenPlanOffice_hot_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_MultiPersonOffice_hot_y <> pre(bus_Control1.Pump_RLT_MultiPersonOffice_hot_y) then
+
+      when abs(der(Speed_Pumps[12].y))>0 then
       i_Pump_RLT_MultiPersonOffice_hot_y = pre(i_Pump_RLT_MultiPersonOffice_hot_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_ConferenceRoom_hot_y <> pre(bus_Control1.Pump_RLT_ConferenceRoom_hot_y) then
+
+      when abs(der(Speed_Pumps[13].y))>0 then
       i_Pump_RLT_ConferenceRoom_hot_y = pre(i_Pump_RLT_ConferenceRoom_hot_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_Canteen_hot_y <> pre(bus_Control1.Pump_RLT_Canteen_hot_y) then
+
+      when abs(der(Speed_Pumps[14].y))>0 then
       i_Pump_RLT_Canteen_hot_y = pre(i_Pump_RLT_Canteen_hot_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_Workshop_hot_y <> pre(bus_Control1.Pump_RLT_Workshop_hot_y) then
+
+      when abs(der(Speed_Pumps[15].y))>0 then
       i_Pump_RLT_Workshop_hot_y = pre(i_Pump_RLT_Workshop_hot_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_Workshop_cold_y <> pre(bus_Control1.Pump_RLT_Workshop_cold_y) then
+
+      when abs(der(Speed_Pumps[16].y))>0 then
       i_Pump_RLT_Workshop_cold_y = pre(i_Pump_RLT_Workshop_cold_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_Canteen_cold_y <> pre(bus_Control1.Pump_RLT_Canteen_cold_y) then
+
+      when abs(der(Speed_Pumps[17].y))>0 then
       i_Pump_RLT_Canteen_cold_y = pre(i_Pump_RLT_Canteen_cold_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_ConferenceRoom_cold_y <> pre(bus_Control1.Pump_RLT_ConferenceRoom_cold_y) then
+
+      when abs(der(Speed_Pumps[18].y))>0 then
       i_Pump_RLT_ConferenceRoom_cold_y = pre(i_Pump_RLT_ConferenceRoom_cold_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_OpenPlanOffice_cold_y <> pre(bus_Control1.Pump_RLT_OpenPlanOffice_cold_y) then
+
+      when abs(der(Speed_Pumps[19].y))>0 then
       i_Pump_RLT_OpenPlanOffice_cold_y = pre(i_Pump_RLT_OpenPlanOffice_cold_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_MultiPersonOffice_cold_y <> pre(bus_Control1.Pump_RLT_MultiPersonOffice_cold_y) then
+
+      when abs(der(Speed_Pumps[20].y))>0 then
       i_Pump_RLT_MultiPersonOffice_cold_y = pre(i_Pump_RLT_MultiPersonOffice_cold_y) + 1;
     end when;
-    when bus_Control1.Pump_RLT_Central_cold_y <> pre(bus_Control1.Pump_RLT_Central_cold_y) then
+
+      when abs(der(Speed_Pumps[21].y))>0 then
       i_Pump_RLT_Central_cold_y = pre(i_Pump_Hotwater_y) + 1;
     end when;
-    when bus_Control1.Pump_TBA_OpenPlanOffice_y <> pre(bus_Control1.Pump_TBA_OpenPlanOffice_y) then
+
+      when abs(der(Speed_Pumps[22].y))>0 then
       i_Pump_TBA_OpenPlanOffice_y = pre(i_Pump_TBA_OpenPlanOffice_y) + 1;
     end when;
-    when bus_Control1.Pump_TBA_ConferenceRoom_y <> pre(bus_Control1.Pump_TBA_ConferenceRoom_y) then
+
+      when abs(der(Speed_Pumps[23].y))>0 then
       i_Pump_TBA_ConferenceRoom_y = pre(i_Pump_TBA_ConferenceRoom_y) + 1;
     end when;
-    when bus_Control1.Pump_TBA_MultiPersonOffice_y <> pre(bus_Control1.Pump_TBA_MultiPersonOffice_y) then
+
+      when abs(der(Speed_Pumps[24].y))>0 then
       i_Pump_TBA_MultiPersonOffice_y = pre(i_Pump_TBA_MultiPersonOffice_y) + 1;
     end when;
-    when bus_Control1.Pump_TBA_Canteen_y <> pre(bus_Control1.Pump_TBA_Canteen_y) then
+
+      when abs(der(Speed_Pumps[25].y))>0 then
       i_Pump_TBA_Canteen_y = pre(i_Pump_TBA_Canteen_y) + 1;
     end when;
-    when bus_Control1.Pump_TBA_Workshop_y <> pre(bus_Control1.Pump_TBA_Workshop_y) then
+
+      when abs(der(Speed_Pumps[26].y))>0 then
       i_Pump_TBA_Workshop_y = pre(i_Pump_TBA_Workshop_y) + 1;
     end when;
-    when bus_Control1.Valve1 <> pre(bus_Control1.Valve1) then
-      i_Valve1 = pre(i_Valve1) + 1;
+
+    when abs(der(Pos_Valves[1].y))>0 then
+      i_Valve1=pre(i_Valve1)+1;
     end when;
-    when bus_Control1.Valve2 <> pre(bus_Control1.Valve2) then
+
+    when abs(der(Pos_Valves[2].y))>0 then
       i_Valve2 = pre(i_Valve2) + 1;
     end when;
-    when bus_Control1.Valve3 <> pre(bus_Control1.Valve3) then
+
+    when abs(der(Pos_Valves[3].y))>0 then
       i_Valve3 = pre(i_Valve3) + 1;
     end when;
-    when bus_Control1.Valve4 <> pre(bus_Control1.Valve4) then
+
+    when abs(der(Pos_Valves[4].y))>0 then
       i_Valve4 = pre(i_Valve4) + 1;
     end when;
-    when bus_Control1.Valve5 <> pre(bus_Control1.Valve5) then
+
+    when abs(der(Pos_Valves[5].y))>0 then
       i_Valve5 = pre(i_Valve5) + 1;
     end when;
-    when bus_Control1.Valve6 <> pre(bus_Control1.Valve6) then
+
+    when abs(der(Pos_Valves[6].y))>0 then
       i_Valve6 = pre(i_Valve6) + 1;
     end when;
-    when bus_Control1.Valve7 <> pre(bus_Control1.Valve7) then
+
+    when abs(der(Pos_Valves[7].y))>0 then
       i_Valve7 = pre(i_Valve7) + 1;
     end when;
-    when bus_Control1.Valve8 <> pre(bus_Control1.Valve8) then
+    when abs(der(Pos_Valves[8].y))>0 then
       i_Valve8 = pre(i_Valve8) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Hot_Central <> pre(bus_Control1.Valve_RLT_Hot_Central) then
+
+    when abs(der(Pos_Valves[9].y))>0 then
       i_Valve_RLT_Hot_Central = pre(i_Valve_RLT_Hot_Central) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Hot_OpenPlanOffice <> pre(bus_Control1.Valve_RLT_Hot_OpenPlanOffice) then
+
+    when abs(der(Pos_Valves[10].y))>0 then
       i_Valve_RLT_Hot_OpenPlanOffice = pre(i_Valve_RLT_Hot_OpenPlanOffice) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Hot_ConferenceRoom <> pre(bus_Control1.Valve_RLT_Hot_ConferenceRoom) then
+
+    when abs(der(Pos_Valves[11].y))>0 then
       i_Valve_RLT_Hot_ConferenceRoom = pre(i_Valve_RLT_Hot_ConferenceRoom) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Hot_MultiPersonOffice <> pre(bus_Control1.Valve_RLT_Hot_MultiPersonOffice) then
+
+    when abs(der(Pos_Valves[12].y))>0 then
       i_Valve_RLT_Hot_MultiPersonOffice = pre(i_Valve_RLT_Hot_MultiPersonOffice) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Hot_Workshop <> pre(bus_Control1.Valve_RLT_Hot_Workshop) then
+
+    when abs(der(Pos_Valves[13].y))>0 then
       i_Valve_RLT_Hot_Workshop = pre(i_Valve_RLT_Hot_Workshop) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Hot_Canteen <> pre(bus_Control1.Valve_RLT_Hot_Canteen) then
+
+    when abs(der(Pos_Valves[14].y))>0 then
       i_Valve_RLT_Hot_Canteen = pre(i_Valve_RLT_Hot_Canteen) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Cold_Canteen <> pre(bus_Control1.Valve_RLT_Cold_Canteen) then
+
+    when abs(der(Pos_Valves[15].y))>0 then
       i_Valve_RLT_Cold_Canteen = pre(i_Valve_RLT_Cold_Canteen) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Cold_Workshop <> pre(bus_Control1.Valve_RLT_Cold_Workshop) then
+
+    when abs(der(Pos_Valves[16].y))>0 then
       i_Valve_RLT_Cold_Workshop = pre(i_Valve_RLT_Cold_Workshop) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Cold_MultiPersonOffice <> pre(bus_Control1.Valve_RLT_Cold_MultiPersonOffice) then
+
+    when abs(der(Pos_Valves[17].y))>0 then
       i_Valve_RLT_Cold_MultiPersonOffice = pre(i_Valve_RLT_Cold_MultiPersonOffice) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Cold_ConferenceRoom <> pre(bus_Control1.Valve_RLT_Cold_ConferenceRoom) then
+
+      when abs(der(Pos_Valves[18].y))>0 then
       i_Valve_RLT_Cold_ConferenceRoom = pre(i_Valve_RLT_Cold_ConferenceRoom) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Cold_OpenPlanOffice <> pre(bus_Control1.Valve_RLT_Cold_OpenPlanOffice) then
+
+    when abs(der(Pos_Valves[19].y))>0 then
       i_Valve_RLT_Cold_OpenPlanOffice = pre(i_Valve_RLT_Cold_OpenPlanOffice) + 1;
     end when;
-    when bus_Control1.Valve_RLT_Cold_Central <> pre(bus_Control1.Valve_RLT_Cold_Central) then
+
+    when abs(der(Pos_Valves[20].y))>0 then
       i_Valve_RLT_Cold_Central = pre(i_Valve_RLT_Cold_Central) + 1;
     end when;
-    when bus_Control1.Valve_TBA_Warm_OpenPlanOffice <> pre(bus_Control1.Valve_TBA_Warm_OpenPlanOffice) then
+
+    when abs(der(Pos_Valves[21].y))>0 then
       i_Valve_TBA_Warm_OpenPlanOffice = pre(i_Valve_TBA_Warm_OpenPlanOffice) + 1;
     end when;
-    when bus_Control1.Valve_TBA_Warm_conferenceroom <> pre(bus_Control1.Valve_TBA_Warm_conferenceroom) then
+
+      when abs(der(Pos_Valves[22].y))>0 then
       i_Valve_TBA_Warm_conferenceroom = pre(i_Valve_TBA_Warm_conferenceroom) + 1;
-    end when;
-    when bus_Control1.Valve_TBA_Warm_multipersonoffice <> pre(bus_Control1.Valve_TBA_Warm_multipersonoffice) then
+      end when;
+
+    when abs(der(Pos_Valves[23].y))>0 then
       i_Valve_TBA_Warm_multipersonoffice = pre(i_Valve_TBA_Warm_multipersonoffice) + 1;
     end when;
-    when bus_Control1.Valve_TBA_Warm_canteen <> pre(bus_Control1.Valve_TBA_Warm_canteen) then
+
+    when abs(der(Pos_Valves[24].y))>0 then
       i_Valve_TBA_Warm_canteen = pre(i_Valve_TBA_Warm_canteen) + 1;
     end when;
-    when bus_Control1.Valve_TBA_Warm_workshop <> pre(bus_Control1.Valve_TBA_Warm_workshop) then
+
+    when abs(der(Pos_Valves[25].y))>0 then
       i_Valve_TBA_Warm_workshop = pre(i_Valve_TBA_Warm_workshop) + 1;
     end when;
-    when bus_Control1.Valve_TBA_OpenPlanOffice_Temp <> pre(bus_Control1.Valve_TBA_OpenPlanOffice_Temp) then
+
+    when abs(der(Pos_Valves[26].y))>0 then
       i_Valve_TBA_OpenPlanOffice_Temp = pre(i_Valve_TBA_OpenPlanOffice_Temp) + 1;
     end when;
-    when bus_Control1.Valve_TBA_ConferenceRoom_Temp <> pre(bus_Control1.Valve_TBA_ConferenceRoom_Temp) then
+
+    when abs(der(Pos_Valves[27].y))>0 then
       i_Valve_TBA_ConferenceRoom_Temp = pre(i_Valve_TBA_ConferenceRoom_Temp) + 1;
     end when;
-    when bus_Control1.Valve_TBA_MultiPersonOffice_Temp <> pre(bus_Control1.Valve_TBA_MultiPersonOffice_Temp) then
+
+    when abs(der(Pos_Valves[28].y))>0 then
       i_Valve_TBA_MultiPersonOffice_Temp = pre(i_Valve_TBA_MultiPersonOffice_Temp) + 1;
     end when;
-    when bus_Control1.Valve_TBA_Canteen_Temp <> pre(bus_Control1.Valve_TBA_Canteen_Temp) then
+
+    when abs(der(Pos_Valves[29].y))>0 then
       i_Valve_TBA_Canteen_Temp = pre(i_Valve_TBA_Canteen_Temp) + 1;
     end when;
-    when bus_Control1.Valve_TBA_Workshop_Temp <> pre(bus_Control1.Valve_TBA_Workshop_Temp) then
+
+    when abs(der(Pos_Valves[30].y))>0 then
       i_Valve_TBA_Workshop_Temp = pre(i_Valve_TBA_Workshop_Temp) + 1;
     end when;
+
+
+
+    connect(bus_Control1.Valve1, Pos_Valves[1].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve2, Pos_Valves[2].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve3, Pos_Valves[3].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve4, Pos_Valves[4].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve5, Pos_Valves[5].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve6, Pos_Valves[6].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Valve7, Pos_Valves[7].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve8, Pos_Valves[8].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve_RLT_Hot_Central, Pos_Valves[9].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+      connect(bus_Control1.Valve_RLT_Hot_OpenPlanOffice, Pos_Valves[10].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+        connect(bus_Control1.Valve_RLT_Hot_ConferenceRoom, Pos_Valves[11].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+        connect(bus_Control1.Valve_RLT_Hot_MultiPersonOffice, Pos_Valves[12].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+        connect(bus_Control1.Valve_RLT_Hot_Canteen, Pos_Valves[13].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+   connect(bus_Control1.Valve_RLT_Hot_Workshop, Pos_Valves[14].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Valve_RLT_Cold_Central, Pos_Valves[15].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+      connect(bus_Control1.Valve_RLT_Cold_OpenPlanOffice, Pos_Valves[16].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+         connect(bus_Control1.Valve_RLT_Cold_ConferenceRoom, Pos_Valves[17].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+         connect(bus_Control1.Valve_RLT_Cold_MultiPersonOffice, Pos_Valves[18].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+         connect(bus_Control1.Valve_RLT_Cold_Canteen, Pos_Valves[19].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+         connect(bus_Control1.Valve_RLT_Cold_Workshop, Pos_Valves[20].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve_TBA_Warm_OpenPlanOffice, Pos_Valves[21].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+        connect(bus_Control1.Valve_TBA_Warm_conferenceroom, Pos_Valves[22].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+        connect(bus_Control1.Valve_TBA_Warm_multipersonoffice, Pos_Valves[23].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+        connect(bus_Control1.Valve_TBA_Warm_canteen, Pos_Valves[24].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+        connect(bus_Control1.Valve_TBA_Warm_workshop, Pos_Valves[25].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Valve_TBA_OpenPlanOffice_Temp, Pos_Valves[26].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+         connect(bus_Control1.Valve_TBA_ConferenceRoom_Temp, Pos_Valves[27].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,8},{-32,8},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+         connect(bus_Control1.Valve_TBA_MultiPersonOffice_Temp, Pos_Valves[28].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+         connect(bus_Control1.Valve_TBA_Canteen_Temp, Pos_Valves[29].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+        connect(bus_Control1.Valve_TBA_Workshop_Temp, Pos_Valves[30].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Hotwater_y, Speed_Pumps[1].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Warmwater_y, Speed_Pumps[2].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Coldwater_y, Speed_Pumps[3].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Coldwater_heatpump_y, Speed_Pumps[4].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Warmwater_heatpump_1_y, Speed_Pumps[5].u) annotation (
+       Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Warmwater_heatpump_2_y, Speed_Pumps[6].u) annotation (
+       Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Aircooler_y, Speed_Pumps[7].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Hotwater_CHP_y, Speed_Pumps[8].u) annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_Hotwater_Boiler_y, Speed_Pumps[9].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_RLT_Central_hot_y, Speed_Pumps[10].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_OpenPlanOffice_hot_y, Speed_Pumps[11].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_ConferenceRoom_hot_y, Speed_Pumps[12].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-102,-1.95},{-102,-48},{-44.6,-48},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_MultiPersonOffice_hot_y, Speed_Pumps[13].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-24},{-100,-24},{-100,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_Canteen_hot_y, Speed_Pumps[14].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-24},{-102,-24},{-102,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_Workshop_hot_y, Speed_Pumps[15].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_Central_cold_y, Speed_Pumps[16].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_OpenPlanOffice_cold_y, Speed_Pumps[17].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_ConferenceRoom_cold_y, Speed_Pumps[18].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_MultiPersonOffice_cold_y, Speed_Pumps[19].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_RLT_Canteen_cold_y, Speed_Pumps[20].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_RLT_Workshop_cold_y, Speed_Pumps[21].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_TBA_OpenPlanOffice_y, Speed_Pumps[22].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_TBA_ConferenceRoom_y, Speed_Pumps[23].u) annotation (
+        Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_TBA_MultiPersonOffice_y, Speed_Pumps[24].u)
+      annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+
+    connect(bus_Control1.Pump_TBA_Canteen_y, Speed_Pumps[25].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(bus_Control1.Pump_TBA_Workshop_y, Speed_Pumps[26].u) annotation (Line(
+        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+
+
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Text(
             extent={{-56,24},{56,-18}},
