@@ -223,7 +223,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanToReal.y, sigBus1.N) annotation (Line(points={{7,23.5},{
+  connect(booleanToReal.y,sigBus1.n)  annotation (Line(points={{7,23.5},{
           -18.925,23.5},{-18.925,39.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,

@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
@@ -386,7 +386,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(securityControl.nOut, sigBusHP.N) annotation (Line(
+  connect(securityControl.nOut,sigBusHP.n)  annotation (Line(
       points={{49.6667,8},{90,8},{90,-58.915},{-99.92,-58.915}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
@@ -394,7 +394,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(realPasThrSec.y, sigBusHP.N) annotation (Line(
+  connect(realPasThrSec.y,sigBusHP.n)  annotation (Line(
       points={{34.7,41},{90,41},{90,-58.915},{-99.92,-58.915}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(

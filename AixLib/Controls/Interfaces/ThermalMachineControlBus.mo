@@ -3,8 +3,9 @@ expandable connector ThermalMachineControlBus
   "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;
 
-Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm N "rotational speed compressor"
+Real n "relative rotational speed of compressor between 0 and 1"
   annotation (HideResult=false);
+
 Boolean onOff "true: on" annotation (HideResult=false);
 
 Boolean mode "true: main operation mode, false: reversible operation mode";

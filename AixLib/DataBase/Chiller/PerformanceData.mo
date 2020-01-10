@@ -152,7 +152,7 @@ package PerformanceData
             -30},{0,-110}},          color={0,0,127}));
     connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-13,39.7},{-13,
             31.4},{-13.2,31.4}}, color={0,0,127}));
-    connect(sigBus.N, nTimesSF.u1) annotation (Line(
+    connect(sigBus.n, nTimesSF.u1) annotation (Line(
         points={{1.075,104.07},{-4,104.07},{-4,31.4},{-4.8,31.4}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -355,7 +355,7 @@ package PerformanceData
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBus.N, greaterThreshold.u) annotation (Line(
+    connect(sigBus.n, greaterThreshold.u) annotation (Line(
         points={{1.075,104.07},{-72,104.07},{-72,53.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -368,7 +368,7 @@ package PerformanceData
                                             color={255,0,255}));
     connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
             {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
-    connect(sigBus.N, nConGain.u) annotation (Line(
+    connect(sigBus.n, nConGain.u) annotation (Line(
         points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -489,12 +489,12 @@ package PerformanceData
     Real Char[2];
   equation
     Char =PolyData(
-        sigBus.N,
+        sigBus.n,
         sigBus.T_ret_ev,
         sigBus.T_flow_co,
         sigBus.m_flow_ev,
         sigBus.m_flow_co);
-    if sigBus.N > Modelica.Constants.eps then
+    if sigBus.n > Modelica.Constants.eps then
       //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
       QEva = Char[2];
       Pel = Char[1];

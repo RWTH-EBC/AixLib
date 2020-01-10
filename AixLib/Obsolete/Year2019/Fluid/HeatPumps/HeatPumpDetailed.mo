@@ -52,7 +52,8 @@ model HeatPumpDetailed
 
   replaceable function data_poly =
       AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.ConstantQualityGrade
-    constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
+    constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics for inverter heat pump" annotation (
       choicesAllMatching=true, Dialog(enable=(capCalcType == 1), group="Capacity data"));
 
@@ -68,7 +69,8 @@ model HeatPumpDetailed
       enable=initCondenserVol));
   replaceable function Corr_icing =
       AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel
-    constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+    constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)" annotation (
       choicesAllMatching=true, Dialog(
       enable=(capCalcType == 1),

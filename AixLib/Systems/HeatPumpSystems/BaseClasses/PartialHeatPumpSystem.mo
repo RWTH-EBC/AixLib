@@ -398,32 +398,33 @@ partial model PartialHeatPumpSystem
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
 equation
   connect(pumSin.port_b, heatPump.port_a1) annotation (Line(
-      points={{-62,40},{-62,11.2},{-26,11.2}},
+      points={{-62,40},{-62,9},{-26,9}},
       color={0,127,255},
       pattern=LinePattern.Dash));
 
   connect(pumSou.port_b, heatPump.port_a2) annotation (Line(
-      points={{52,-42},{30,-42},{30,-15.2},{18,-15.2}},
+      points={{52,-42},{30,-42},{30,-13},{18,-13}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSin.port_b, heatPump.port_a1) annotation (Line(
-      points={{-64,12},{-26,12},{-26,11.2}},
+      points={{-64,12},{-26,12},{-26,9}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(mediumPassThroughSou.port_b, heatPump.port_a2) annotation (Line(
-      points={{54,-16},{18,-16},{18,-15.2}},
+      points={{54,-16},{18,-16},{18,-13}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, secHeaGen.port_a) annotation (Line(
-      points={{18,11.2},{18,60},{32,60},{32,61}},
+      points={{18,9},{18,60},{32,60},{32,61}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   connect(heatPump.port_b1, mediumPassThroughSecHeaGen.port_a) annotation (Line(
-      points={{18,11.2},{18,34},{32,34}},
+      points={{18,9},{18,34},{32,34}},
       color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
-          {-60,-60},{-100,-60}}, color={0,127,255}));
+  connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-13},{-60,
+          -13},{-60,-60},{-100,-60}},
+                                 color={0,127,255}));
 connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
@@ -444,12 +445,13 @@ connect(pumSou.port_a, port_a2) annotation (Line(
           {100,60}}, color={0,127,255}));
   connect(T_oda, hPSystemController.T_oda) annotation (Line(points={{-115,119},{
           -90,119},{-90,133},{-56.86,133}}, color={0,0,127}));
-  connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-40.2,93.1},
-          {-40.2,66},{-70,66},{-70,49.6}}, color={0,0,127}));
-  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{18.6,
-          93.1},{18.6,66.4},{30.4,66.4}},      color={0,0,127}));
-  connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{38.2,93.1},
-          {38.2,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
+  connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-30.4,
+          93.1},{-30.4,66},{-70,66},{-70,49.6}},
+                                           color={0,0,127}));
+  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{-1,93.1},
+          {-1,66.4},{30.4,66.4}},              color={0,0,127}));
+  connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{28.4,
+          93.1},{28.4,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
         color={0,0,127}));
   connect(secHeaGen.port_b, port_b1) annotation (Line(
       points={{48,61},{82,61},{82,60},{100,60}},

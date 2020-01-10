@@ -146,7 +146,7 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(sigBus.N, greaterThreshold.u) annotation (Line(
+  connect(sigBus.n, greaterThreshold.u) annotation (Line(
       points={{1.075,104.07},{-72,104.07},{-72,53.2}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -159,7 +159,7 @@ equation
                                           color={255,0,255}));
   connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
           {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
-  connect(sigBus.N, nConGain.u) annotation (Line(
+  connect(sigBus.n, nConGain.u) annotation (Line(
       points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
       color={255,204,51},
       thickness=0.5), Text(

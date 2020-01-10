@@ -18,3 +18,7 @@ convertModifiers(
 	"AixLib.Systems.HeatPumpSystems.HeatPumpSystem", 
 	{"fixed_TCon_start", "fixed_TEva_start"},
 	fill("",0));
+convertElement(
+	"AixLib.Controls.Interfaces.ThermalMachineControlBus",
+	{"N"},
+	{"n"});

@@ -233,7 +233,7 @@ package PerformanceData "Different models used for a black box heat pump model"
             -80},{0,-110}},          color={0,0,127}));
     connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-15,39.7},{-15,
             31.4},{-15.2,31.4}}, color={0,0,127}));
-    connect(sigBus.N, nTimesSF.u1) annotation (Line(
+    connect(sigBus.n, nTimesSF.u1) annotation (Line(
         points={{1.075,104.07},{-2,104.07},{-2,31.4},{-6.8,31.4}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -470,7 +470,7 @@ package PerformanceData "Different models used for a black box heat pump model"
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
-    connect(sigBus.N, greaterThreshold.u) annotation (Line(
+    connect(sigBus.n, greaterThreshold.u) annotation (Line(
         points={{1.075,104.07},{-72,104.07},{-72,53.2}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -483,7 +483,7 @@ package PerformanceData "Different models used for a black box heat pump model"
                                             color={255,0,255}));
     connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
             {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
-    connect(sigBus.N, nConGain.u) annotation (Line(
+    connect(sigBus.n, nConGain.u) annotation (Line(
         points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
         color={255,204,51},
         thickness=0.5), Text(
@@ -600,13 +600,12 @@ package PerformanceData "Different models used for a black box heat pump model"
   protected
     Real Char[2];
   equation
-    Char =PolyData(
-        sigBus.N,
+    Char =PolyData(sigBus.n,
         sigBus.T_ret_co,
         sigBus.T_flow_ev,
         sigBus.m_flow_co,
         sigBus.m_flow_ev);
-    if sigBus.N > Modelica.Constants.eps then
+    if sigBus.n > Modelica.Constants.eps then
       //Get's the data from the signal Bus and calculates the power and heat flow based on the function one chooses.
       QCon = Char[2];
       Pel = Char[1];

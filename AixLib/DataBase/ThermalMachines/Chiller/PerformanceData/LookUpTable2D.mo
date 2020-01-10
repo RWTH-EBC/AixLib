@@ -151,7 +151,7 @@ equation
           -30},{0,-110}},          color={0,0,127}));
   connect(realCorr.y, nTimesSF.u2) annotation (Line(points={{-13,39.7},{-13,
           31.4},{-13.2,31.4}}, color={0,0,127}));
-  connect(sigBus.N, nTimesSF.u1) annotation (Line(
+  connect(sigBus.n, nTimesSF.u1) annotation (Line(
       points={{1.075,104.07},{-4,104.07},{-4,31.4},{-4.8,31.4}},
       color={255,204,51},
       thickness=0.5), Text(
