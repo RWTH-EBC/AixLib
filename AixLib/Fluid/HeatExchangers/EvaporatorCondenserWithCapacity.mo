@@ -40,8 +40,8 @@ model EvaporatorCondenserWithCapacity
     final C=C,
     final T(
       final fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
-      start=TCap_start),
-    final der_T(fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      final start=TCap_start),
+    final der_T(final fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
         start=0)) if use_cap "Heat Capacity" annotation (Placement(
         transformation(
         extent={{-12,-12},{12,12}},
