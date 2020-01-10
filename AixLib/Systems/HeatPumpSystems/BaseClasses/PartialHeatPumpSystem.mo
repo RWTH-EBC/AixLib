@@ -126,7 +126,6 @@ partial model PartialHeatPumpSystem
     "False if the Security block should be disabled"
                                      annotation (choices(checkBox=true), Dialog(
         tab="Security Control", group="General", descriptionLabel = true));
-
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(enable=use_sec, tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
@@ -164,11 +163,12 @@ partial model PartialHeatPumpSystem
       group="Operational Envelope",
       enable=use_sec and use_opeEnv,
       descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (Dialog(
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
-      enable=use_sec and use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
+      enable=use_sec and use_opeEnv and use_opeEnvFroRec), choicesAllMatching=
+        true);
   parameter Real tableUpp[:,2]=[0,60; 5,70; 30,70]
                                "Upper boundary of envelope" annotation (Dialog(
       tab="Security Control",
@@ -246,7 +246,7 @@ partial model PartialHeatPumpSystem
     annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
   parameter Boolean transferHeat=true
     "If true, temperature T converges towards TAmb when no flow"
-    annotation (Dialog(tab="Assumptions", group="Temperature sensors"));
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors"),choices(checkBox=true));
   parameter Boolean allowFlowReversalEva=false
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions", group="Evaporator"),            choices(checkBox=true));
@@ -264,22 +264,16 @@ partial model PartialHeatPumpSystem
 
   parameter Modelica.SIunits.Time tauHeaTraEva=1200
     "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Evaporator",enable=transferHeat),         Evaluate=true);
-  parameter Modelica.SIunits.Time tauHeaTraCon=1200
-    "Time constant for heat transfer in temperature sensors in evaporator, default 20 minutes"
-    annotation (Dialog(tab="Assumptions", group="Condenser",enable=transferHeat),Evaluate=true);
-  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
-    "Fixed ambient temperature for heat transfer of sensors at the condenser side"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Condenser",
-      enable=transferHeat), Evaluate=true);
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat), Evaluate=true);
   parameter Modelica.SIunits.Temperature TAmbEva_nominal=273.15
     "Fixed ambient temperature for heat transfer of sensors at the evaporator side"
-    annotation (Dialog(
-      tab="Assumptions",
-      group="Evaporator",
-      enable=transferHeat), Evaluate=true);
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
+  parameter Modelica.SIunits.Time tauHeaTraCon=1200
+    "Time constant for heat transfer in temperature sensors in condenser, default 20 minutes"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat),Evaluate=true);
+  parameter Modelica.SIunits.Temperature TAmbCon_nominal=291.15
+    "Fixed ambient temperature for heat transfer of sensors at the condenser side"
+    annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
   replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
     Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
@@ -287,7 +281,7 @@ partial model PartialHeatPumpSystem
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(
     redeclare final package Medium = Medium_con,
-    final energyDynamics=energyDynamics,
+    final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final massDynamics=massDynamics,
     final p_start=pCon_start,
     final T_start=TCon_start,
@@ -305,7 +299,7 @@ partial model PartialHeatPumpSystem
         origin={-70,40})));
   Fluid.Movers.SpeedControlled_y      pumSou(
     redeclare package Medium = Medium_eva,
-    energyDynamics=energyDynamics,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     massDynamics=massDynamics,
     final p_start=pEva_start,
     final T_start=TEva_start,
@@ -327,9 +321,6 @@ partial model PartialHeatPumpSystem
     annotation (Placement(transformation(extent={{-130,104},{-100,134}})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSin(
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=false,
-    final m_flow_nominal=mFlow_conNominal,
     redeclare final package Medium = Medium_con) if
                                               not use_conPum
                                                             annotation (
@@ -339,9 +330,6 @@ partial model PartialHeatPumpSystem
         origin={-70,12})));
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSou(
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final show_T=false,
-    final m_flow_nominal=mFlow_evaNominal,
     redeclare final package Medium = Medium_eva) if
                                               not use_evaPum
                                                             annotation (
@@ -364,9 +352,6 @@ partial model PartialHeatPumpSystem
 
   Fluid.Interfaces.PassThroughMedium mediumPassThroughSecHeaGen(
     final allowFlowReversal=allowFlowReversalEva,
-    final m_flow_small=1E-4*abs(mFlow_evaNominal),
-    final show_T=false,
-    final m_flow_nominal=mFlow_conNominal,
     redeclare final package Medium = Medium_con) if
                                               not use_secHeaGen
     "Used if monovalent HP System" annotation (Placement(transformation(
@@ -439,7 +424,7 @@ equation
       pattern=LinePattern.Dash));
   connect(heatPump.port_b2, port_b2) annotation (Line(points={{-26,-15.2},{-60,-15.2},
           {-60,-60},{-100,-60}}, color={0,127,255}));
-  connect(pumSou.port_a, port_a2) annotation (Line(
+connect(pumSou.port_a, port_a2) annotation (Line(
       points={{68,-42},{86,-42},{86,-16},{100,-16},{100,-60}},
       color={0,127,255},
       pattern=LinePattern.Dash));
@@ -582,21 +567,48 @@ equation
           fillPattern=FillPattern.None)}),
                           Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,180}})),
-    Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Partial heat pump system. This model is used to enable the use of different heat pump models in the resulting heat pump system.</p>
-<h4>Characteristics</h4>
+<p>
+  Partial heat pump system. This model is used to enable the use of
+  different heat pump models in the resulting heat pump system.
+</p>
+<h4>
+  Characteristics
+</h4>
 <ol>
-<li><a href=\"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HPSystemController\">HPSystemController</a>: Model used to calculate a relative compressor speed and heat pump mode based on the ambient temperature and current supply temperature.</li>
-<li>HeatPump: Any model out of <a href=\"modelica://AixLib.Fluid.HeatPumps\">AixLib.Fluid.HeatPumps</a>. Only restrain is the use of the signal bus. One has to first add the sigBusHP to the existing heat pump model.</li>
-<li>Movers: Any model out of <a href=\"modelica://AixLib.Fluid.Movers\">AixLib.Fluid.Movers</a> to move the used sink or source medium through the heat exchanger.</li>
-<li>Second heat generator: Any two port interface. This model should represent an auxiliar heater or a boiler in order to simulate a bivalent or hybrid heat pump system.</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Systems.HeatPumpSystems.BaseClasses.HPSystemController\">
+    HPSystemController</a>: Model used to calculate a relative
+    compressor speed and heat pump mode based on the ambient
+    temperature and current supply temperature.
+  </li>
+  <li>HeatPump: Any model out of <a href=
+  \"modelica://AixLib.Fluid.HeatPumps\">AixLib.Fluid.HeatPumps</a>. Only
+  restrain is the use of the signal bus. One has to first add the
+  sigBus to the existing heat pump model.
+  </li>
+  <li>Movers: Any model out of <a href=
+  \"modelica://AixLib.Fluid.Movers\">AixLib.Fluid.Movers</a> to move the
+  used sink or source medium through the heat exchanger.
+  </li>
+  <li>Second heat generator: Any two port interface. This model should
+  represent an auxiliar heater or a boiler in order to simulate a
+  bivalent or hybrid heat pump system.
+  </li>
 </ol>
 </html>"));
 end PartialHeatPumpSystem;

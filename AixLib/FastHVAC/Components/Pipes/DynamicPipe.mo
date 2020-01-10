@@ -123,9 +123,9 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-38,52})));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx(eps=eps, A=Modelica.Constants.pi
-        *outerDiameter*length) if withRadiationParam
-    annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(eps=eps, A=Modelica.Constants.pi
+        *outerDiameter*length) if withRadiationParam annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={46,52})));

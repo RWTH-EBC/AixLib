@@ -211,33 +211,19 @@ equation
     annotation (Line(points={{60,-60},{72,-60}}, color={0,127,255}));
   connect(pipe3.ports_b[1], senT_b1.port_a)
     annotation (Line(points={{84,20},{88,20}}, color={0,127,255}));
-  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-42,-69.6},{-42,
-          -80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(valve.y, hydraulicBus.valveSet) annotation (Line(points={{-42,-69.6},
+          {-42,-80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-46,
+  connect(valve.y_actual, hydraulicBus.valveMea) annotation (Line(points={{-46,
           -65.6},{-46,-80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
-                          Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={175,175,175},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Dash),
-        Line(
-          points={{-90,60},{-78,60},{-78,60},{90,60},{90,60},{100,60}},
-          color={0,128,255},
-          thickness=0.5),
-        Line(
-          points={{-92,-60},{-84,-60},{-84,-60},{84,-60},{84,-60},{90,-60}},
-          color={0,128,255},
-          thickness=0.5),
         Polygon(
           points={{-66,-50},{-66,-50}},
           lineColor={95,95,95},
@@ -256,10 +242,6 @@ equation
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
-        Line(
-          points={{-40,-60},{-40,-68}},
-          color={95,95,95},
-          thickness=0.5),
         Line(
           points={{-4,60},{-4,-58}},
           color={0,128,255},
@@ -288,87 +270,6 @@ equation
           thickness=0.5),
         Polygon(
           points={{-64,70},{-64,70}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid),
-        Ellipse(
-          extent={{-78,68},{-62,52}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-78,68},{-62,52}},
-          lineColor={0,128,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="Q"),
-        Ellipse(
-          extent={{-78,84},{-62,68}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-78,84},{-62,68}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Ellipse(
-          extent={{62,68},{78,52}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{62,68},{78,52}},
-          lineColor={0,128,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="Q"),
-        Ellipse(
-          extent={{62,84},{78,68}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{62,84},{78,68}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Ellipse(
-          extent={{-78,-38},{-62,-54}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-78,-38},{-62,-54}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Line(points={{-70,-54},{-70,-60}}, color={0,0,0}),
-        Ellipse(
-          extent={{62,-38},{78,-54}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{62,-38},{78,-54}},
-          lineColor={216,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="T"),
-        Line(points={{70,-54},{70,-60}}, color={0,0,0}),
-        Text(
-          extent={{-30,-68},{94,-98}},
-          lineColor={95,95,95},
-          lineThickness=0.5,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="Injection 2 Way"),
-        Ellipse(
-          extent={{-46,-68},{-34,-80}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},

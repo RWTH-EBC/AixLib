@@ -1,6 +1,5 @@
 ActiveWalls
 Boiler
-Chiller
 CHP
 HeatPump
 Media
@@ -12,6 +11,7 @@ SolarElectric
 SolarThermal
 Storage
 Surfaces
+ThermalMachines
 ThermalZones
 Walls
 Weather

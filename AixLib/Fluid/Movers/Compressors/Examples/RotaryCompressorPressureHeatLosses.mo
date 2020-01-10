@@ -23,10 +23,8 @@ model RotaryCompressorPressureHeatLosses
 
   // Definition of models
   //
-  Sources.FixedBoundary source(
+  Sources.Boundary_pT   source(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     nPorts=1,
     p=pInl,
     T=TOut) "Source with constant pressure and temperature"
