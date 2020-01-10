@@ -6,8 +6,10 @@ model HeatPumpSystem
     mFlow_conNominal=QCon_nominal/(cpCon*dTCon),
     mFlow_evaNominal=QEva_nominal/(cpEva*dTEva),
     redeclare AixLib.Fluid.HeatPumps.HeatPump heatPump(
-      use_autoCalc=false,
-      Q_useNominal=0,
+      final use_autoCalc=false,
+      final Q_useNominal=0,
+      final mFlow_evaNominal=mFlow_evaNominal,
+      final VEva=VEva,
       redeclare final model PerDataMainHP = PerDataHea,
       redeclare final model PerDataRevHP = PerDataChi,
       redeclare final package Medium_con = Medium_con,
@@ -17,7 +19,7 @@ model HeatPumpSystem
       final use_refIne=use_refIne,
       final refIneFre_constant=refIneFre_constant,
       final nthOrder=nthOrder,
-      useBusConnectorOnly=true,
+      final useBusConnectorOnly=true,
       final mFlow_conNominal=mFlow_conNominal,
       final VCon=VCon,
       final dpCon_nominal=dpCon_nominal,
@@ -52,9 +54,7 @@ model HeatPumpSystem
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
       final fixed_TCon_start=fixed_TCon_start,
-      final fixed_TEva_start=fixed_TEva_start,
-      mFlow_conNominal=mFlow_conNominal,
-      mFlow_evaNominal=mFlow_evaNominal));
+      final fixed_TEva_start=fixed_TEva_start));
 
 //Heat Pump
   replaceable model PerDataHea =
