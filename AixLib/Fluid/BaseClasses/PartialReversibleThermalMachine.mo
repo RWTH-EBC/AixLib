@@ -19,13 +19,6 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
-    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
-    annotation (Placement(transformation(
-        extent={{-27,-26},{27,26}},
-        rotation=90,
-        origin={0,-1})));
-
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"
@@ -146,9 +139,9 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Boolean fixed_TCon_start
-    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
-    annotation (Evaluate=true,Dialog(tab="Condenser", group="Heat Losses",
+  parameter Modelica.SIunits.Temperature TConCap_start=Medium_con.T_default
+    "Initial temperature of heat capacity of condenser"
+    annotation (Dialog(tab="Initialization", group="Condenser",
       enable=use_conCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
@@ -159,9 +152,9 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
-  parameter Boolean fixed_TEva_start
-    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
-    annotation (Evaluate=true,Dialog(tab="Evaporator",     group="Heat Losses",
+  parameter Modelica.SIunits.Temperature TEvaCap_start=Medium_eva.T_default
+    "Initial temperature of heat capacity at evaporator"
+    annotation (Dialog(tab="Initialization", group="Evaporator",
       enable=use_evaCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
@@ -193,6 +186,12 @@ partial model PartialReversibleThermalMachine
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
+    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
+    annotation (Placement(transformation(
+        extent={{-27,-26},{27,26}},
+        rotation=90,
+        origin={0,-1})));
 
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity con(
     redeclare final package Medium = Medium_con,
@@ -211,12 +210,11 @@ partial model PartialReversibleThermalMachine
     final is_con=true,
     final V=VCon_final*scalingFactor,
     final C=CCon*scalingFactor,
+    final TCap_start=TConCap_start,
     final GOut=GConOut*scalingFactor,
     final m_flow_nominal=mFlow_conNominal_final*scalingFactor,
     final dp_nominal=dpCon_nominal*scalingFactor,
-    final GInn=GConIns*scalingFactor,
-    final fixed_T_start=fixed_TCon_start)
-    "Heat exchanger model for the condenser"
+    final GInn=GConIns*scalingFactor) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,78},{16,110}})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
@@ -237,10 +235,9 @@ partial model PartialReversibleThermalMachine
     final C=CEva*scalingFactor,
     final m_flow_nominal=mFlow_evaNominal_final*scalingFactor,
     final dp_nominal=dpEva_nominal*scalingFactor,
+    final TCap_start=TEvaCap_start,
     final GOut=GEvaOut*scalingFactor,
-    GInn=GEvaIns*scalingFactor,
-    final fixed_T_start=fixed_TEva_start)
-    "Heat exchanger model for the evaporator"
+    GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
@@ -396,6 +393,7 @@ partial model PartialReversibleThermalMachine
         rotation=0)));
 
   //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
+
 protected
   parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
   parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
