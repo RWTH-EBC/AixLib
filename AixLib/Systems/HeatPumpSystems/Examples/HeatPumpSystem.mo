@@ -121,8 +121,6 @@ model HeatPumpSystem "Example for a heat pump system"
     use_minLocTime=true,
     use_runPerHou=true,
     pre_n_start=true,
-    fixed_TCon_start=true,
-    fixed_TEva_start=true,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
     TCon_nominal=313.15,

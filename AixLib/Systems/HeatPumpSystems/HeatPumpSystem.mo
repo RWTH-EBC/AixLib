@@ -48,8 +48,6 @@ model HeatPumpSystem
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
       final energyDynamics=energyDynamics,
-      final fixed_TCon_start=fixed_TCon_start,
-      final fixed_TEva_start=fixed_TEva_start,
       mFlow_conNominal=mFlow_conNominal,
       mFlow_evaNominal=mFlow_evaNominal));
 
@@ -139,19 +137,15 @@ model HeatPumpSystem
   parameter Real yRefIne_start=0 "Initial or guess value of output (= state)"
     annotation (Dialog(tab="Initialization", group="System inertia",enable=initType ==
           Modelica.Blocks.Types.Init.InitialOutput and use_refIne));
-  parameter Boolean fixed_TCon_start
-    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
-    annotation (Dialog(
-      tab="Initialization",
-      group="Condenser",
+//Initialization
+  parameter Modelica.SIunits.Temperature TConCap_start=Medium_con.T_default
+    "Initial temperature of heat capacity of condenser"
+    annotation (Dialog(tab="Initialization", group="Condenser",
       enable=use_conCap));
-  parameter Boolean fixed_TEva_start
-    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
-    annotation (Dialog(
-      tab="Initialization",
-      group="Evaporator",
+  parameter Modelica.SIunits.Temperature TEvaCap_start=Medium_eva.T_default
+    "Initial temperature of heat capacity at evaporator"
+    annotation (Dialog(tab="Initialization", group="Evaporator",
       enable=use_evaCap));
-
   Modelica.Blocks.Sources.Constant constTAmb(final k=273.15 + 20) annotation (
       Placement(transformation(
         extent={{-7,7},{7,-7}},
