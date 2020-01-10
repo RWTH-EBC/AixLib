@@ -108,12 +108,12 @@ model HeatPumpSystem
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
-    "Heat capacity of Evaporator (= cp*m)"
+    "Heat capacity of Evaporator (= cp*m). If you want to neglace the dry mass of the evaporator, you can set this value to zero"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
       enable=use_evaCap), Evaluate=true);
   parameter Modelica.SIunits.ThermalConductance GEvaOut=percHeatLoss*
       QEva_nominal/(TEva_nominal - TAmbEva_nominal)
-    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a evaporator with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true,Dialog(group="Evaporator", tab="Evaporator/ Condenser",
       enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaIns=QEva_nominal/dTPinchEva
@@ -121,12 +121,12 @@ model HeatPumpSystem
     annotation (Evaluate=true,Dialog(group="Evaporator", tab="Evaporator/ Condenser",
       enable=use_evaCap));
   parameter Modelica.SIunits.HeatCapacity CCon
-    "Heat capacity of Condenser (= cp*m)"
+    "Heat capacity of Condenser (= cp*m). If you want to neglace the dry mass of the condenser, you can set this value to zero"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
       enable=use_conCap), Evaluate=true);
   parameter Modelica.SIunits.ThermalConductance GConOut=percHeatLoss*
       QCon_nominal/(TCon_nominal - TAmbCon_nominal)
-    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a condenser with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true, Dialog(
       group="Condenser",
       tab="Evaporator/ Condenser",

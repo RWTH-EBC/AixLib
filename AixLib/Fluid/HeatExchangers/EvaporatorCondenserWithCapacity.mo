@@ -12,13 +12,13 @@ model EvaporatorCondenserWithCapacity
   parameter Modelica.SIunits.Volume V "Volume in condenser";
   parameter Boolean use_cap=true "False if capacity and heat losses are neglected"
     annotation (Dialog(group="Heat losses"),choices(checkBox=true));
-  parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger"
+  parameter Modelica.SIunits.HeatCapacity C "Capacity of heat exchanger. If you want to neglace the dry mass of the heat exchanger, you can set this value to zero"
     annotation (Dialog(group="Heat losses", enable=use_cap));
   parameter Modelica.SIunits.Temperature TCap_start=Medium.T_default
     "Initial temperature of heat capacity"
     annotation (Dialog(tab="Initialization", group="Capacity"));
   Modelica.SIunits.ThermalConductance GOut
-    "Formular for calculation of heat transfer coefficient on the outside"
+    "Formular for calculation of heat transfer coefficient on the outside. If you want to simulate a heat exchanger with additional dry mass but without external heat losses, set the value to zero"
                                                            annotation (Dialog(group=
           "Heat losses",                                                                           enable=use_cap));
   Modelica.Blocks.Interfaces.RealOutput GInn

@@ -61,11 +61,11 @@ partial model PartialReversibleThermalMachine
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CCon
-    "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true,Dialog(group="Heat Losses",
+    "Heat capacity of Condenser (= cp*m). If you want to neglace the dry mass of the condenser, you can set this value to zero" annotation (Evaluate=true,Dialog(group="Heat Losses",
         tab="Condenser",
       enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GConOut
-    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a condenser with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GConIns
@@ -92,11 +92,11 @@ partial model PartialReversibleThermalMachine
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
-    "Heat capacity of Evaporator (= cp*m)"
+    "Heat capacity of Evaporator (= cp*m). If you want to neglace the dry mass of the evaporator, you can set this value to zero"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaOut
-    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a evaporator with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaIns
@@ -167,10 +167,10 @@ partial model PartialReversibleThermalMachine
           Init.InitialOutput and use_refIne));
 //Dynamics
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    "Type of mass balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    "Type of energy balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
 //Advanced
   parameter Boolean machineType "=true if heat pump; =false if chiller"
@@ -237,7 +237,7 @@ partial model PartialReversibleThermalMachine
     final dp_nominal=dpEva_nominal*scalingFactor,
     final TCap_start=TEvaCap_start,
     final GOut=GEvaOut*scalingFactor,
-    GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
+    final GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
