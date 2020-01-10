@@ -112,8 +112,7 @@ equation
           {-80,-38},{-46,-38},{-46,-28},{-24,-28},{-24,-22},{-21.2,-22}}, color=
          {0,0,127}));
   connect(airExc.QLat_flow,SumQLat_flow.u[3])  annotation (Line(points={{-5.68,
-          -22.96},{4,-22.96},{4,-24.8},{16,-24.8}},
-                                                color={0,0,127}));
+          -22.96},{4,-22.96},{4,-22},{16,-22}}, color={0,0,127}));
   connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{10.5,-14},{
           0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
   annotation(Documentation(info="<html>
@@ -132,8 +131,15 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
-  <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models.  See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
-  <li>April, 2019, by Martin Kremer:<br/>First implementation.</li>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
+  </li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+  Adapting to new internalGains models.  See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.
+  </li>
+  <li>April, 2019, by Martin Kremer:<br/>
+  First implementation.
+  </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

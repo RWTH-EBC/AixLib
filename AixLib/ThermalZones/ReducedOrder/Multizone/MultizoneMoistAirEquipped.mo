@@ -126,7 +126,7 @@ model MultizoneMoistAirEquipped
     Placement(transformation(extent={{-52,10},{18,40}})));
 
   Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if ASurTot > 0 or VAir > 0
-    "absolute humidity in thermal zone"
+    "Absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,40},{100,60}})));
 protected
@@ -135,13 +135,15 @@ protected
     nIn=numZones,
     splitFactor=zoneFactor) if
        ASurTot > 0 or VAir > 0
+    "Sums up a vector[numZones] of identical humidities to an average humidity"
     annotation (Placement(transformation(extent={{-68,76},{-48,96}})));
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
   parameter Real VAirRes(fixed=false)
     "Resulting air volume in zones supplied by the AHU";
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(
-    final nout=numZones) if ASurTot > 0 or VAir > 0 "Replicates scalar temperature of AHU into a vector[numZones] of identical
+    final nout=numZones) if ASurTot > 0 or VAir > 0
+    "Replicates scalar temperature of AHU into a vector[numZones] of identical
     temperatures"
     annotation (Placement(transformation(
     extent={{-5,-5},{5,5}},
@@ -183,6 +185,7 @@ protected
     "Pre-processor for AHU inputs"
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
   BaseClasses.AbsToRelHum absToRelHum if ASurTot > 0 or VAir > 0
+    "Converter from absolute humidity to relative humidity"
     annotation (Placement(transformation(extent={{-36,76},{-26,86}})));
   BaseClasses.RelToAbsHum relToAbsHum1 if ASurTot > 0 or VAir > 0
     "Converter from relative humidity to absolute humidity"
@@ -190,8 +193,9 @@ protected
         rotation=90,
         origin={65,21})));
   Modelica.Blocks.Routing.Replicator replicatorHumidityVentilation(final nout=
-        numZones) if        ASurTot > 0 or VAir > 0 "Replicates scalar temperature of AHU into a vector[numZones] of identical
-    temperatures" annotation (Placement(transformation(
+        numZones) if ASurTot > 0 or VAir > 0
+    "Replicates scalar humidity of AHU into a vector[numZones] of identical
+    humidities" annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={65,37})));

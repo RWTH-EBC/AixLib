@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 model OneElement "Thermal Zone with one element for exterior walls"
-  extends Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone"
     annotation(Dialog(group="Thermal zone"));
@@ -126,7 +126,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     transformation(extent={{-170,-190},{-150,-170}}), iconTransformation(
     extent={{-170,-190},{-150,-170}})));
 
-  Fluid.MixingVolumes.MixingVolume volAir(
+  AixLib.Fluid.MixingVolumes.MixingVolume volAir(
     redeclare final package Medium = Medium,
     final nPorts=nPorts,
     m_flow_nominal=VAir*6/3600*1.2,
@@ -142,7 +142,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final use_C_flow=false) if VAir > 0 and not use_moisture_balance
     "Indoor air volume"
     annotation (Placement(transformation(extent={{42,-26},{22,-6}})));
-  Fluid.MixingVolumes.MixingVolumeMoistAir volMoiAir(
+  AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir volMoiAir(
     redeclare final package Medium = Medium,
     final nPorts=nPorts,
     m_flow_nominal=VAir*6/3600*1.2,

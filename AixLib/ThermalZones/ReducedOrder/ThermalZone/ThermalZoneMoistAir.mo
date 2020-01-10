@@ -12,7 +12,7 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
      final RoomArea=zoneParam.AZone,
      final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
           ATot > 0
-    "internal moisture gains by plants, etc."
+    "Internal moisture gains by plants, etc."
     annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{0,-56},
             {20,-36}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
@@ -45,7 +45,12 @@ equation
 
   annotation (Documentation(revisions="<html>
 <ul>
-  <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
+  </li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+  Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.
+  </li>
   <li>
   April, 2019, by Martin Kremer:<br/>
   First implementation.
@@ -57,6 +62,7 @@ equation
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
+<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used. For a correct moisture balance the paramter should be set to <code>3</code>.</p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
 <p> There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture. This leads to a steady increase of moisture in the room, when there is no ventilation.</p>
 <p>The moisture balance was formulated considering the latent heat with the aim, that the temperature is not influenced by the moisture.For this reason every humidity source is assumed to be in gaseous state.</p>

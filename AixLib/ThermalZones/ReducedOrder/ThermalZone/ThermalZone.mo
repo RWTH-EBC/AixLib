@@ -36,48 +36,52 @@ model ThermalZone
   parameter Modelica.SIunits.Time TN_cooler=1
     "Time constant of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent humanSenHeaDependent(
-    final T0=zoneParam.T_start,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-    final RoomArea=zoneParam.AZone,
-    final specificPersons=zoneParam.specificPeople,
-    final activityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
-    final RadiationConvertor(use_A_in=true)) if
-       ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent
+    humanSenHeaDependent(
+      final T0=zoneParam.T_start,
+      final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+      final RoomArea=zoneParam.AZone,
+      final specificPersons=zoneParam.specificPeople,
+      final activityDegree=zoneParam.activityDegree,
+      final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+      final RadiationConvertor(use_A_in=true)) if
+         ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent humanSenHeaIndependent(
-    final T0=zoneParam.T_start,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-    final RoomArea=zoneParam.AZone,
-    final specificPersons=zoneParam.specificPeople,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
-    final RadiationConvertor(use_A_in=true)) if
-       ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent
+    humanSenHeaIndependent(
+      final T0=zoneParam.T_start,
+      final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+      final RoomArea=zoneParam.AZone,
+      final specificPersons=zoneParam.specificPeople,
+      final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+      final RadiationConvertor(use_A_in=true)) if
+         ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDependent humanTotHeaDependent(
-    final T0=zoneParam.T_start,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-    final RoomArea=zoneParam.AZone,
-    final specificPersons=zoneParam.specificPeople,
-    final activityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
-    final RadiationConvertor(use_A_in=true)) if
-       ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDependent
+    humanTotHeaDependent(
+      final T0=zoneParam.T_start,
+      final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+      final RoomArea=zoneParam.AZone,
+      final specificPersons=zoneParam.specificPeople,
+      final activityDegree=zoneParam.activityDegree,
+      final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons,
+      final RadiationConvertor(use_A_in=true)) if
+         ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
+  replaceable AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
-    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-    final T0=zoneParam.T_start,
-    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0
+      final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+      final T0=zoneParam.T_start,
+      final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
+      final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  replaceable Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
-    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    final T0=zoneParam.T_start,
-    final LightingPower=zoneParam.lightingPowerSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
+  replaceable AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific
+    lights(
+      final ratioConv=zoneParam.ratioConvectiveHeatLighting,
+      final T0=zoneParam.T_start,
+      final LightingPower=zoneParam.lightingPowerSpecific,
+      final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   corG corGMod(
     final n=zoneParam.nOrientations,
@@ -94,7 +98,8 @@ model ThermalZone
     final hRad=zoneParam.hRadWall,
     final hConWinOut=zoneParam.hConWinOut,
     final aExt=zoneParam.aExt,
-    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0 "Computes equivalent air temperature"
+    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
     each k=0)
@@ -112,7 +117,8 @@ model ThermalZone
     final hConWallOut=zoneParam.hConRoofOut,
     final hRad=zoneParam.hRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
-    final TGro=273.15) if zoneParam.ARoof > 0 "Computes equivalent air temperature for roof"
+    final TGro=273.15) if zoneParam.ARoof > 0
+    "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{-36,66},{-16,86}})));
   Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
      each k=0)
@@ -444,6 +450,7 @@ equation
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
+<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used.</p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>
@@ -454,6 +461,12 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.</p>
 </html>",  revisions="<html>
  <ul>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
+  </li>
+  <li> July 10, 2019, by David Jansen and Martin Kremer:<br/>
+  Integration of changeable internal gain models for humans.
+  </li>
   <li>
   March 01, 2019, by Niklas Huelsenbeck:<br/>
   Integration of new Internal Gains models, HumanSensibleHeatAreaSpecific and MachinesAreaSpecific

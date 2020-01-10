@@ -5,6 +5,7 @@ model HumanSensibleHeat_TemperatureDependent
   parameter Real activityDegree=1.0 "activity degree of persons in room in met";
   BaseClasses.TemperatureDependentHeatOutput_SIA2024
     temperatureDependentHeatOutput_SIA2024_1(activityDegree=activityDegree)
+    "Temperature dependent heat output per person"
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
 equation
   connect(TRoom,temperatureSensor. port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));

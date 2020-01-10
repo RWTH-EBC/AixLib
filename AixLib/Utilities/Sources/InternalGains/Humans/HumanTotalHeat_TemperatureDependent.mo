@@ -5,23 +5,30 @@ model HumanTotalHeat_TemperatureDependent
 
   BaseClasses.TemperatureDependentMoistureOutput_SIA2024
     temperatureDependentMoistuerOutput_SIA2024_1(activityDegree=activityDegree)
+    "Temperature dependent moisture output per person"
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
     "latent heat of moisture gains"
     annotation (Placement(transformation(extent={{86,70},{106,90}})));
   Modelica.Blocks.Math.Gain toKgPerSecond(k=1/(3600*1000))
+    "Converter from g/h to kg/s"
     annotation (Placement(transformation(extent={{14,70},{34,90}})));
   Modelica.Blocks.Math.MultiProduct productMoistureOutput(nu=2)
+    "Product of moisture output per person and number of people"
     annotation (Placement(transformation(extent={{-28,70},{-8,90}})));
   Modelica.Blocks.Math.Product latentHeat
+    "Converter from mass flow moisture to latent heat"
     annotation (Placement(transformation(extent={{-10,42},{10,62}})));
   Modelica.Blocks.Sources.RealExpression specificLatentHeat(y=h_fg)
+    "Latent heat per kg moisture"
     annotation (Placement(transformation(extent={{-88,14},{-68,34}})));
 protected
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam = AixLib.Utilities.Psychrometrics.Constants.cpSte
-    "specific heat capacity of steam";
-  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
-    "enthalpy of evaporation";
+  constant Modelica.SIunits.SpecificHeatCapacity cp_steam=
+    AixLib.Utilities.Psychrometrics.Constants.cpSte
+    "Specific heat capacity of steam";
+  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=
+    AixLib.Utilities.Psychrometrics.Constants.h_fg
+    "Enthalpy of evaporation";
   constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation

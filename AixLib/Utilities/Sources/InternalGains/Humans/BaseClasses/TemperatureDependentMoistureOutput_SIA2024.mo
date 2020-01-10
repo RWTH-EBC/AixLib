@@ -2,22 +2,22 @@
 model TemperatureDependentMoistureOutput_SIA2024
   "Model for temperature dependent moisture output based on formulas of SIA 2024"
 
-  parameter Real activityDegree=1.0 "activity degree of persons in room in met";
+  parameter Real activityDegree=1.0 "Activity degree of persons in room in met";
 
   Modelica.Blocks.Interfaces.RealInput Temperature
-    "room temperature used for heat output calculation"
+    "Room temperature used for heat output calculation"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
 
-  Modelica.Blocks.Interfaces.RealOutput moistOutput "moisture output in g/h"
+  Modelica.Blocks.Interfaces.RealOutput moistOutput "Moisture output in g/h"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   TemperatureDependentHeatOutput_SIA2024
-    temperatureDependentHeatOutput_SIA2024
+    temperatureDependentHeatOutput_SIA2024 "Temperature dependent heat output"
     annotation (Placement(transformation(extent={{-74,32},{-54,52}})));
 protected
-  constant Real heatPerMet(unit="W/(m.m)") = 58 "heat per m² for 1 met";
-  constant Modelica.SIunits.Area bodySurface = 1.8 "body surface of one person";
-  constant Real moistGain(unit="g/h") = 10/7 "gain for moisture output";
+  constant Real heatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
+  constant Modelica.SIunits.Area bodySurface = 1.8 "Body surface of one person";
+  constant Real moistGain(unit="g/h") = 10/7 "Gain for moisture output";
 equation
 
   moistOutput = max(0,moistGain*((activityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));

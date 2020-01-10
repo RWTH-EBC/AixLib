@@ -8,7 +8,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
     internalGainsMode=1)
     "Thermal zone"

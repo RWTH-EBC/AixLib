@@ -3,8 +3,9 @@ model HumanSensibleHeat_TemperatureIndependent
   "Model for sensible heat output of humans not depending on the room temperature"
   extends BaseClasses.PartialHuman(productHeatOutput(nu=2));
 
-  Modelica.Blocks.Sources.RealExpression specificHeatOutput(y=
-        specificHeatPerPerson)
+  Modelica.Blocks.Sources.RealExpression specificHeatOutput(
+    y=specificHeatPerPerson)
+    "Specific heat output per person"
     annotation (Placement(transformation(extent={{-88,22},{-68,42}})));
 equation
   connect(specificHeatOutput.y, productHeatOutput.u[2]) annotation (Line(points={{-67,32},
@@ -21,7 +22,9 @@ equation
 </html><html>
 </html>", revisions="<html>
  <ul>
- <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Implemented</li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+  Implemented
+  </li>
  </ul>
 </html>"));
 end HumanSensibleHeat_TemperatureIndependent;

@@ -2,24 +2,25 @@
 model TemperatureDependentHeatOutput_SIA2024
   "Model for temperature dependent heat output based on formulas of SIA 2024"
 
-  parameter Real activityDegree=1.0 "activity degree of persons in room in met";
+  parameter Real activityDegree=1.0 "Activity degree of persons in room in met";
 
   Modelica.Blocks.Interfaces.RealInput Temperature
-    "room temperature used for heat output calculation"
+    "Room temperature used for heat output calculation"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
 
   Modelica.Blocks.Interfaces.RealOutput heatOutput
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-  constant Real heatPerMet(unit="W/(m.m)") = 58 "heat per m² for 1 met";
-  constant Modelica.SIunits.Area bodySurface = 1.8 "body surface of one person";
-  constant Real TemperatureCoefficient(unit="1/K") = 0.025 "parameter for temperature dependency";
-  constant Modelica.SIunits.HeatFlowRate minimumHeat = 35 "minimum heat output";
+  constant Real heatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
+  constant Modelica.SIunits.Area bodySurface = 1.8 "Body surface of one person";
+  constant Real TemperatureCoefficient(unit="1/K") = 0.025
+    "Parameter for temperature dependency";
+  constant Modelica.SIunits.HeatFlowRate minimumHeat = 35 "Minimum heat output";
 equation
 
   heatOutput = max(0,(0.865-(TemperatureCoefficient * Temperature))*(
-    activityDegree                                                                 *heatPerMet*bodySurface)+minimumHeat);
+    activityDegree*heatPerMet*bodySurface)+minimumHeat);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-58,22},{46,-26}},
@@ -44,7 +45,9 @@ equation
 <p>[1]: SIA 2024: Space usage data for energy and building services engineering - 2015 </p>
 </html>", revisions="<html>
  <ul>
- <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Implemented</li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+  Implemented
+  </li>
  </ul>
 </html>"));
 end TemperatureDependentHeatOutput_SIA2024;
