@@ -52,14 +52,16 @@ model HeatPumpSystem
       final x_start=x_start,
       final yRefIne_start=yRefIne_start,
       final massDynamics=massDynamics,
-      final energyDynamics=energyDynamics,
+      final energyDynamics=energyDynamics));
 
 //Heat Pump
+
   replaceable model PerDataHea =
       AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D              constrainedby
     AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in heating mode"
     annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
+
   replaceable model PerDataChi =
       AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D              constrainedby
     AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
