@@ -318,6 +318,7 @@ partial model PartialReversibleThermalMachine
         origin={110,100})));
 
   Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly
+     and use_rev
     "Set value of operation mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
