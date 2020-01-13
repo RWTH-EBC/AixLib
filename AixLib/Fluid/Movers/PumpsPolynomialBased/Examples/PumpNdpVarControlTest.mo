@@ -70,8 +70,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(PumpOn.y, pumpControllerBus1.onOff_Input) annotation (Line(points={{
-          -59,50},{-30,50},{-30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
+  connect(PumpOn.y, pumpControllerBus1.onSet) annotation (Line(points={{-59,50},
+          {-30,50},{-30,60.05},{0.05,60.05}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

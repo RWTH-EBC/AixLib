@@ -14,9 +14,9 @@ model SimpleConsumer "Simple Consumer"
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start=293.15
+  parameter SI.Temperature T_start=293.15
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
