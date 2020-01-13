@@ -39,48 +39,48 @@ block CtrRegBasic "Controller for heating and cooling registers"
     final y_start=y_start,
     final reverseAction=reverseAction,
     final reset=AixLib.Types.Reset.Disabled)
-            annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
+            annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
   Modelica.Blocks.Sources.Constant constRpmPump(final k=rpm_pump) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
   Modelica.Blocks.Sources.Constant constTflowSet(final k=TflowSet) if not useExternalTset annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant
     annotation (Placement(transformation(extent={{60,20},{80,40}})));
   BaseClasses.RegisterBus registerBus annotation (Placement(transformation(
-          extent={{74,-26},{128,26}}), iconTransformation(extent={{68,-14},{96,
+          extent={{76,-22},{124,22}}), iconTransformation(extent={{92,-14},{120,
             14}})));
 equation
 
     connect(PID.u_s, Tset) annotation (Line(
-      points={{-18,-50},{-47.1,-50},{-47.1,0},{-120,0}},
+      points={{-22,-50},{-47.1,-50},{-47.1,0},{-120,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
     connect(constTflowSet.y, PID.u_s) annotation (Line(
-      points={{-79,-50},{-18,-50}},
+      points={{-79,-50},{-22,-50}},
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, registerBus.hydraulicBus.valSet) annotation (Line(points={{5,
-          -50},{101.135,-50},{101.135,0.13}}, color={0,0,127}), Text(
+  connect(PID.y, registerBus.hydraulicBus.valveSet) annotation (Line(points={{1,-50},
+          {100.12,-50},{100.12,0.11}},        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpm_Input)
-    annotation (Line(points={{41,0},{72,0},{72,0.13},{101.135,0.13}}, color={0,
+  connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpmSet)
+    annotation (Line(points={{41,0},{72,0},{72,0.11},{100.12,0.11}},  color={0,
           0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onOff_Input)
-    annotation (Line(points={{81,30},{101.135,30},{101.135,0.13}},
+  connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onSet)
+    annotation (Line(points={{81,30},{100.12,30},{100.12,0.11}},
         color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{-6,-62},{
-          -6,-80},{102,-80},{102,0.13},{101.135,0.13}},       color={0,0,127}),
+  connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{-10,-62},{-10,
+          -80},{100,-80},{100,0.11},{100.12,0.11}},           color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -95,16 +95,16 @@ equation
           fillPattern=FillPattern.Solid,
           textString="HCMI"),
           Rectangle(
-          extent={{-90,80},{70,-80}},
+          extent={{-100,100},{100,-100}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),Line(
-          points={{10,80},{70,0},{30,-80}},
+          points={{-100,100},{-36,-2},{-100,-100}},
           color={95,95,95},
           thickness=0.5),
           Text(
-          extent={{-90,20},{56,-20}},
+          extent={{-48,20},{98,-20}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={215,215,215},

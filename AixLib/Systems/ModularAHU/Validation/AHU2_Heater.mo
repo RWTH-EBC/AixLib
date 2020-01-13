@@ -125,7 +125,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(combiTimeTable.y[11], registerBus1.hydraulicBus.pumpBus.rpm_Input)
+  connect(combiTimeTable.y[11], registerBus1.hydraulicBus.pumpBus.rpmSet)
     annotation (Line(points={{-79,90},{-58,90},{-58,70},{-106,70},{-106,10.05},{
           -37.95,10.05}}, color={0,0,127}), Text(
       string="%second",
@@ -144,7 +144,7 @@ equation
      Line(points={{-20,-70},{-22,-70},{-22,-62}}, color={0,127,255}));
   connect(hydraulicResistance.port_b, registerModule.port_a2)
     annotation (Line(points={{-22,-42},{-22,0.461538}}, color={0,127,255}));
-  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
+  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valveSet)
     annotation (Line(points={{-47.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,
           127}), Text(
       string="%second",
