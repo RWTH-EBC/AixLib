@@ -5,7 +5,7 @@ model Admix "Test for admix circuit"
   package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
 
-  AixLib.Systems.HydraulicModules.Admix Admix1(
+  AixLib.Systems.HydraulicModules.Admix Admix(
     redeclare
       AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
@@ -60,27 +60,33 @@ model Admix "Test for admix circuit"
   BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-52,0},{-32,20}})));
 equation
-  connect(Admix1.port_b1, hydRes.port_a) annotation (
-    Line(points = {{-8, 40}, {-8, 60}, {0, 60}}, color = {0, 127, 255}));
-  connect(Admix1.port_a2, hydRes.port_b) annotation (
-    Line(points = {{28, 40}, {28, 60}, {20, 60}}, color = {0, 127, 255}));
-  connect(Admix1.port_a1, boundary.ports[1]) annotation (
-    Line(points = {{-8, -20}, {-8, -40}}, color = {0, 127, 255}));
-  connect(Admix1.port_b2, boundary1.ports[1]) annotation (
-    Line(points = {{28, -20}, {28, -40}}, color = {0, 127, 255}));
-  connect(Admix1.hydraulicBus, hydraulicBus) annotation (
-    Line(points = {{-20, 10}, {-42, 10}}, color = {255, 204, 51}, thickness = 0.5),
-    Text(string = "%second", index = 1, extent = {{-25, 3}, {-25, 3}}));
-  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,50},
-          {-41.95,50},{-41.95,10.05}},     color={0,0,127}), Text(
+
+  connect(Admix.port_b1, hydRes.port_a)
+    annotation (Line(points={{-8,40},{-8,60},{0,60}},     color={0,127,255}));
+  connect(Admix.port_a2, hydRes.port_b) annotation (Line(points={{28,40},{28,60},
+          {20,60}},                color={0,127,255}));
+  connect(Admix.port_a1, boundary.ports[1])
+    annotation (Line(points={{-8,-20},{-8,-40}},         color={0,127,255}));
+  connect(Admix.port_b2, boundary1.ports[1])
+    annotation (Line(points={{28,-20},{28,-40}},           color={0,127,255}));
+  connect(Admix.hydraulicBus, hydraulicBus) annotation (Line(
+      points={{-20,10},{-42,10}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{-25,3},{-25,3}}));
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-60,10},{-60,10.05},{-41.95,10.05}}, color={0,0,127}), Text(
+  connect(RPM.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{-79,50},
+          {-41.95,50},{-41.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}}));
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),

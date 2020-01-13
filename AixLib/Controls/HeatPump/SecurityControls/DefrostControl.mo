@@ -51,7 +51,7 @@ block DefrostControl
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Interfaces.ThermalMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-76},{-92,-48}})));
   Utilities.Logical.SmoothSwitch swiPel if not use_chiller
     "If defrost is on, output will be positive" annotation (Placement(

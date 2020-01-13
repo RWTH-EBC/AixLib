@@ -12,15 +12,19 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
   parameter Boolean use_revHP=true
     "True if the HP is reversible"
-    annotation(choices(choice=true "reversible HP",
-      choice=false "only heating",
-      radioButtons=true), Dialog(descriptionLabel=true));
+    annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+  parameter Boolean use_autoCalc=false
+    "Enable automatic estimation of volumes and mass flows?"
+    annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
+  parameter Modelica.SIunits.Power Q_useNominal(start=0)
+    "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
+    annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP";
@@ -32,6 +36,8 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     annotation (Dialog(enable=use_refIne, group="Refrigerant inertia"),Evaluate=true);
   parameter Integer nthOrder=3 "Order of refrigerant cycle interia" annotation (Dialog(enable=
           use_refIne, group="Refrigerant inertia"));
+  parameter Boolean useBusConnectorOnly = false "Set true to use bus connector for modeSet, nSet and iceFac input"
+    annotation(choices(checkBox=true), Dialog(group="Input Connectors"));
 
 //Condenser
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
@@ -39,7 +45,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     annotation (Dialog(group="Parameters", tab="Condenser"),Evaluate=true);
   parameter Modelica.SIunits.Volume VCon "Volume in condenser"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Condenser"));
-  parameter Modelica.SIunits.Mass m_fluidCon = VCon * con.medium.rho "Mass of working fluid";
+  parameter Modelica.SIunits.Mass m_fluidCon = VCon_final * con.medium.rho "Mass of working fluid";
   parameter Real deltaM_con=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Condenser", group="Flow resistance"));
@@ -65,7 +71,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "Nominal mass flow rate" annotation (Dialog(group="Parameters", tab="Evaporator"),Evaluate=true);
   parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
     annotation (Evaluate=true,Dialog(group="Parameters", tab="Evaporator"));
-  parameter Modelica.SIunits.Mass m_fluidEva = VEva * eva.medium.rho "Mass of working fluid";
+  parameter Modelica.SIunits.Mass m_fluidEva = VEva_final * eva.medium.rho "Mass of working fluid";
   parameter Real deltaM_eva=0.1
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Evaporator", group="Flow resistance"));
@@ -124,19 +130,19 @@ model HeatPump "Base model of FastHVAC Heat Pump"
 //Advanced
   parameter Boolean homotopyInitialization=false "= true, use homotopy method"
     annotation (Dialog(tab="Advanced", group="Flow resistance"));
-    Interfaces.EnthalpyPort_a enthalpyPort_a1(m_flow(min=if
-          allowFlowReversalCon then -Modelica.Constants.inf else 0))
+  Interfaces.EnthalpyPort_a             enthalpyPort_a(
+                     m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0))
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-104,56},{-96,64}})));
-  Interfaces.EnthalpyPort_b enthalpyPort_b1(m_flow(max=if allowFlowReversalCon
-           then +Modelica.Constants.inf else 0))
+  Interfaces.EnthalpyPort_b             enthalpyPort_b(
+                     m_flow(max=if allowFlowReversalCon then +Modelica.Constants.inf else 0))
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{104,56},{96,64}})));
-  Interfaces.EnthalpyPort_a             enthalpyPort_a2(
+  Interfaces.EnthalpyPort_a             enthalpyPort_a1(
                      m_flow(min=if allowFlowReversalEva then -Modelica.Constants.inf else 0))
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{96,-64},{104,-56}})));
-  Interfaces.EnthalpyPort_b             enthalpyPort_b2(
+  Interfaces.EnthalpyPort_b             enthalpyPort_b1(
                      m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-96,-64},{-104,-56}})));
@@ -146,12 +152,12 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     final T_start=TCon_start,
     final use_cap=use_ConCap,
     final is_con=true,
-    final V=VCon*scalingFactor,
+    final V=VCon_final*scalingFactor,
     final C=CCon*scalingFactor,
-    final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal)^0.88,
+    final kAInn=GCon + GConIns*abs(mFlow_con.dotm/mFlow_conNominal_final)^0.88,
     final medium=Medium_con,
-    final m_flow_small=1E-4*abs(mFlow_conNominal),
-    final m_flow_nominal=mFlow_conNominal)
+    final m_flow_small=1E-4*abs(mFlow_conNominal_final),
+    final m_flow_nominal=mFlow_conNominal_final)
     "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,76},{16,108}})));
   BaseClasses.EvaporatorCondenserWithCapacity eva(
@@ -160,12 +166,12 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     final kAOut_nominal=GEva,
     final m_fluid=m_fluidEva,
     final T_start=TEva_start,
-    final m_flow_small=1E-4*abs(mFlow_evaNominal),
+    final m_flow_small=1E-4*abs(mFlow_evaNominal_final),
     final is_con=false,
-    final V=VEva*scalingFactor,
+    final V=VEva_final*scalingFactor,
     final C=CEva*scalingFactor,
-    final m_flow_nominal=mFlow_evaNominal,
-    final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal)^0.88)
+    final m_flow_nominal=mFlow_evaNominal_final,
+    final kAInn=GEva + GEvaIns*abs(mFlow_eva.dotm/mFlow_evaNominal_final)^0.88)
     "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
@@ -201,7 +207,7 @@ model HeatPump "Base model of FastHVAC Heat Pump"
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={16,-52})));
-  Modelica.Blocks.Interfaces.RealInput iceFac_in
+  Modelica.Blocks.Interfaces.RealInput iceFac_in if not useBusConnectorOnly
     "Input signal for icing factor"
      annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
@@ -219,34 +225,35 @@ model HeatPump "Base model of FastHVAC Heat Pump"
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={68,110})));
-  Modelica.Blocks.Interfaces.RealInput nSet
+  Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  AixLib.Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Controls.Interfaces.ThermalMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-120,-60},{-90,-26}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle innerCycle(
-    redeclare final model PerDataHea =PerDataHea,
-    redeclare final model PerDataChi = PerDataChi,
-    final use_revHP=use_revHP,
-    final scalingFactor=scalingFactor)                                                   annotation (
+  AixLib.Fluid.HeatPumps.BaseClasses.InnerCycle_HeatPump innerCycle(
+    redeclare final model PerDataMainHP =PerDataHea,
+    redeclare final model PerDataRevHP = PerDataChi,
+    final use_rev=use_revHP,
+    final scalingFactor=scalingFactor)
+    annotation (
       Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
         origin={0,-1})));
   Modelica.Blocks.Interfaces.RealInput T_amb_eva(final unit="K",
-    final displayUnit="degC")
+    final displayUnit="degC") if use_EvaCap
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={110,-100})));
   Modelica.Blocks.Interfaces.RealInput T_amb_con(final unit="K",
-    final displayUnit="degC")
+    final displayUnit="degC") if use_ConCap
     "Ambient temperature on the condenser side"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
-  Modelica.Blocks.Interfaces.BooleanInput modeSet "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
   Sensors.TemperatureSensor        senT_a2
     "Temperature at sink inlet"
@@ -288,17 +295,43 @@ model HeatPump "Base model of FastHVAC Heat Pump"
         origin={-80,60},
         extent={{-10,10},{10,-10}},
         rotation=0)));
+
+  //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
+protected
+  parameter Boolean machineType=true "=true if heat pump; =false if chiller";
+  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
+  parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
+
+  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_eva = if machineType then max(0.00004*Q_useNominal - 0.3177, autoCalc_mFlow_min) else max(0.00005*Q_useNominal - 0.5662, autoCalc_mFlow_min);
+  parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_con = if machineType then max(0.00004*Q_useNominal - 0.6162, autoCalc_mFlow_min) else max(0.00005*Q_useNominal + 0.3161, autoCalc_mFlow_min);
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal_final=if use_autoCalc then autoCalc_mFlow_eva else mFlow_evaNominal;
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal_final=if use_autoCalc then autoCalc_mFlow_con else mFlow_conNominal;
+  parameter Modelica.SIunits.Volume autoCalc_VEva = if machineType then max(0.0000001*Q_useNominal - 0.0075, autoCalc_Vmin) else max(0.0000001*Q_useNominal - 0.0066, autoCalc_Vmin);
+  parameter Modelica.SIunits.Volume autoCalc_VCon = if machineType then max(0.0000001*Q_useNominal - 0.0094, autoCalc_Vmin) else max(0.0000002*Q_useNominal - 0.0084, autoCalc_Vmin);
+  parameter Modelica.SIunits.Volume VEva_final=if use_autoCalc then autoCalc_VEva else VEva;
+  parameter Modelica.SIunits.Volume VCon_final=if use_autoCalc then autoCalc_VCon else VCon;
+
 equation
-  connect(enthalpyPort_a1, mFlow_con.enthalpyPort_a) annotation (Line(points={{
-          -100,60},{-92,60},{-92,60.1},{-88.8,60.1}}, color={176,0,0}));
+  //Control and feedback for the auto-calculation of condenser and evaporator data
+  assert(not use_autoCalc or (use_autoCalc and Q_useNominal>0), "Can't auto-calculate evaporator and condenser data without a given nominal power flow (Q_useNominal)!",
+  level = AssertionLevel.error);
+  assert(not use_autoCalc or (autoCalc_mFlow_eva>autoCalc_mFlow_min and autoCalc_mFlow_eva<90),
+  "Given nominal power (Q_useNominal) for auto-calculation of evaporator and condenser data is outside the range of data sheets considered. Please control the auto-calculated mass flows!",
+  level = AssertionLevel.warning);
+  assert(not use_autoCalc or (autoCalc_VEva>autoCalc_Vmin and autoCalc_VEva<0.43),
+  "Given nominal power (Q_useNominal) for auto-calculation of evaporator and condenser data is outside the range of data sheets considered. Please control the auto-calculated volumes!",
+  level = AssertionLevel.warning);
+
+  connect(enthalpyPort_a, mFlow_con.enthalpyPort_a) annotation (Line(points={{-100,60},
+          {-92,60},{-92,60.1},{-88.8,60.1}},     color={176,0,0}));
   connect(mFlow_con.enthalpyPort_b, senT_a1.enthalpyPort_a) annotation (Line(
         points={{-71,60.1},{-52,60.1},{-52,92.1},{-42.8,92.1}}, color={176,0,0}));
   connect(senT_a1.enthalpyPort_b, con.enthalpyPort_a) annotation (Line(points={{-25,
           92.1},{-21.5,92.1},{-21.5,92},{-16,92}},     color={176,0,0}));
   connect(con.enthalpyPort_b, senT_b1.enthalpyPort_a) annotation (Line(points={{16,92},
           {22,92},{22,92.1},{29.2,92.1}},        color={176,0,0}));
-  connect(senT_b1.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{47,
-          92.1},{84,92.1},{84,60},{100,60}}, color={176,0,0}));
+  connect(senT_b1.enthalpyPort_b, enthalpyPort_b) annotation (Line(points={{47,92.1},
+          {84,92.1},{84,60},{100,60}}, color={176,0,0}));
   connect(T_amb_con, varTempOutCon.T) annotation (Line(points={{110,100},{82,100},
           {82,110},{77.6,110}}, color={0,0,127}));
   connect(varTempOutCon.port, con.port_out)
@@ -309,13 +342,13 @@ equation
           {82,-108},{77.6,-108}}, color={0,0,127}));
   connect(senT_a2.enthalpyPort_a, mFlow_eva.enthalpyPort_b) annotation (Line(
         points={{48.8,-86.1},{52,-86.1},{52,-60.1},{61,-60.1}}, color={176,0,0}));
-  connect(mFlow_eva.enthalpyPort_a,enthalpyPort_a2)  annotation (Line(points={{78.8,
+  connect(mFlow_eva.enthalpyPort_a, enthalpyPort_a1) annotation (Line(points={{78.8,
           -60.1},{92,-60.1},{92,-60},{100,-60}}, color={176,0,0}));
   connect(senT_a2.enthalpyPort_b, eva.enthalpyPort_a) annotation (Line(points={{
           31,-86.1},{16,-86.1},{16,-86}}, color={176,0,0}));
   connect(eva.enthalpyPort_b, senT_b2.enthalpyPort_a) annotation (Line(points={{
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
-  connect(senT_b2.enthalpyPort_b,enthalpyPort_b2)  annotation (Line(points={{-61,
+  connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
   connect(iceFac_in, sigBusHP.iceFac) annotation (Line(points={{-76,-136},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
@@ -352,8 +385,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-88,-18},
-          {-88,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
+  connect(modeSet, sigBusHP.mode) annotation (Line(points={{-116,-18},{-84,-18},
+          {-84,-42.915},{-104.925,-42.915}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -377,14 +410,14 @@ equation
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
   connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{28.73,-0.865},
-          {52,-0.865},{52,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
+          {42,-0.865},{42,-36},{-30,-36},{-30,-42.915},{-104.925,-42.915}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(innerCycle.sigBusHP, sigBusHP) annotation (Line(
-      points={{-26.78,-0.73},{-38,-0.73},{-38,-44},{-72,-44},{-72,-43},{-105,-43}},
+  connect(innerCycle.sigBus, sigBusHP) annotation (Line(
+      points={{-26.78,-0.73},{-32,-0.73},{-32,-42},{-32,-42},{-32,-43},{-105,-43}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -488,6 +521,10 @@ equation
   Wüllhorst in 2018. </p>
   </html>",
   revisions="<html><ul>
+    <li>
+    <i>May 22, 2019</i>  by Julian Matthes: <br/>
+    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+    </li>
     <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
     Moved into AixLib 

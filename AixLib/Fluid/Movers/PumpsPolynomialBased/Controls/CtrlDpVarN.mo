@@ -78,32 +78,32 @@ public
   Modelica.Blocks.Routing.BooleanPassThrough onOffPassThrough1
     annotation (Placement(transformation(extent={{-88,-96},{-74,-82}})));
 equation
-  connect(pumpBus.power, powerPassThrough.u) annotation (Line(
+  connect(pumpBus.PelMea, powerPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-53},{-72.6,-53}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-5,3},{-5,3}}));
-  connect(powerPassThrough.y, pumpControllerBus.power) annotation (Line(points={{-88.7,
-          -53},{-98,-53},{-98,100.1},{0.1,100.1}},             color={0,0,127}));
-  connect(pumpBus.efficiency, efficiencyPassThrough.u) annotation (Line(
+  connect(powerPassThrough.y, pumpControllerBus.PelMea) annotation (Line(points
+        ={{-88.7,-53},{-98,-53},{-98,100.1},{0.1,100.1}}, color={0,0,127}));
+  connect(pumpBus.efficiencyMea, efficiencyPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-71},{-72.6,-71}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,3},{-3,3}}));
-  connect(efficiencyPassThrough.y, pumpControllerBus.efficiency) annotation (
-      Line(points={{-88.7,-71},{-98,-71},{-98,100.1},{0.1,100.1}},
-                                                             color={0,0,127}));
+  connect(efficiencyPassThrough.y, pumpControllerBus.efficiencyMea) annotation
+    (Line(points={{-88.7,-71},{-98,-71},{-98,100.1},{0.1,100.1}}, color={0,0,
+          127}));
   connect(PID.y, pumpSpeedSwitch.u1) annotation (Line(points={{15,-14},{38,-14},
           {38,-22},{58,-22}}, color={0,0,127}));
   connect(pumpBus.vFRcur_m3h, Q.u) annotation (Line(
       points={{0,-100},{-2,-100},{-2,-76},{-53,-76},{-53,-39.4}},
       color={255,204,51},
       thickness=0.5));
-  connect(pumpBus.head, PID.u_m) annotation (Line(
+  connect(pumpBus.dpMea, PID.u_m) annotation (Line(
       points={{0.1,-99.9},{4,-99.9},{4,-26}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -120,13 +120,12 @@ equation
           {10,8},{52,8},{52,-30},{58,-30}}, color={255,0,255}));
   connect(notOn.y,noDemand. condition)
     annotation (Line(points={{34,36.4},{34,36.4},{34,46}}, color={255,0,255}));
-  connect(pumpOn.condition, pumpControllerBus.onOff_Input) annotation (Line(
-        points={{-20,46},{-98,46},{-98,100.1},{0.1,100.1}},
-                                                      color={255,0,255}), Text(
+  connect(pumpOn.condition, pumpControllerBus.onSet) annotation (Line(points={{
+          -20,46},{-98,46},{-98,100.1},{0.1,100.1}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pumpSpeedSwitch.y, pumpBus.rpm_Input) annotation (Line(points={{81,-30},
+  connect(pumpSpeedSwitch.y, pumpBus.rpmSet) annotation (Line(points={{81,-30},
           {86,-30},{86,-99.9},{0.1,-99.9}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -139,21 +138,21 @@ equation
     annotation (Line(points={{-18.5,58},{-1,58}}, color={0,0,0}));
   connect(noDemand.outPort,Standby. inPort[1]) annotation (Line(points={{35.5,58},
           {50,58},{50,80},{-66,80},{-66,58},{-57,58}}, color={0,0,0}));
-  connect(pumpBus.rpm_Act, nActPassThrough.u) annotation (Line(
+  connect(pumpBus.rpmMea, nActPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-35},{-72.6,-35}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,3},{-3,3}}));
-  connect(nActPassThrough.y, pumpControllerBus.rpm_Act) annotation (Line(points={{-88.7,
-          -35},{-98,-35},{-98,100.1},{0.1,100.1}},  color={0,0,127}));
-  connect(pumpControllerBus.onOff_Input, onOffPassThrough1.u) annotation (Line(
+  connect(nActPassThrough.y, pumpControllerBus.rpmMea) annotation (Line(points=
+          {{-88.7,-35},{-98,-35},{-98,100.1},{0.1,100.1}}, color={0,0,127}));
+  connect(pumpControllerBus.onSet, onOffPassThrough1.u) annotation (Line(
       points={{0.1,100.1},{-98,100.1},{-98,-89},{-89.4,-89}},
       color={255,204,51},
       thickness=0.5));
-  connect(onOffPassThrough1.y, pumpBus.onOff_Input) annotation (Line(points={{-73.3,
-          -89},{-62,-89},{-62,-100},{0.1,-99.9}}, color={255,0,255}));
+  connect(onOffPassThrough1.y, pumpBus.onSet) annotation (Line(points={{-73.3,-89},
+          {-62,-89},{-62,-100},{0.1,-99.9}}, color={255,0,255}));
   annotation (
     Dialog(group="Heating curves"),
     choicesAllMatching=true,
