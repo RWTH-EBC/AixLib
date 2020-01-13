@@ -39,10 +39,10 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
         origin={80,40})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=data.AC_3000)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  Modelica.Blocks.Sources.RealExpression Simulation_VF_in_m3h(y=registerBus1.hydraulicBus.VF_in
+  Modelica.Blocks.Sources.RealExpression Simulation_VF_in_m3h(y=registerBus1.hydraulicBus.VFlowInMea
         *3600)
     annotation (Placement(transformation(extent={{80,-26},{100,-6}})));
-  Modelica.Blocks.Sources.RealExpression Simulation_VF_out_m3h(y=registerBus1.hydraulicBus.VF_out
+  Modelica.Blocks.Sources.RealExpression Simulation_VF_out_m3h(y=registerBus1.hydraulicBus.VFlowOutMea
         *3600)
     annotation (Placement(transformation(extent={{80,-46},{100,-26}})));
   Modelica.Blocks.Math.Gain gain(k=0.01)
