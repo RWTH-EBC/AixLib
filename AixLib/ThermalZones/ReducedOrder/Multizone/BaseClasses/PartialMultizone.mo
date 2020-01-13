@@ -87,6 +87,7 @@ partial model PartialMultizone "Partial model for multizone models"
 
   parameter Integer internalGainsMode
     "Decides which internal gains model for persons is used";
+
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
