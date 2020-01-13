@@ -62,6 +62,7 @@ model GeothermalFieldSimple "Geothermal probe"
     m2_flow_nominal=10,
     dp1_nominal=14000,
     dp2_nominal=48000,
+    nNodes=3,
     tau1=5,
     tau2=5,
     energyDynamics=energyDynamics,
@@ -70,8 +71,8 @@ model GeothermalFieldSimple "Geothermal probe"
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
     redeclare Fluid.MixingVolumes.MixingVolume vol2,
     tau_C=10,
-    dT_nom=4,
-    Q_nom=400000)                          annotation (Placement(transformation(
+    dT_nom=1,
+    Q_nom=800000)                          annotation (Placement(transformation(
         extent={{21,22},{-21,-22}},
         rotation=0,
         origin={0,-117})));
@@ -91,9 +92,9 @@ model GeothermalFieldSimple "Geothermal probe"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(final G=
         G_groundFar)
            annotation (Placement(transformation(extent={{76,-280},{96,-260}})));
-  parameter Modelica.SIunits.ThermalConductance G_groundFar = 10000
+  parameter Modelica.SIunits.ThermalConductance G_groundFar = 6000
     "Constant thermal conductance of ground";
-  parameter Modelica.SIunits.ThermalConductance G_groundNear = 30000
+  parameter Modelica.SIunits.ThermalConductance G_groundNear = 22000
     "Constant thermal conductance of ground";
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
@@ -110,7 +111,7 @@ model GeothermalFieldSimple "Geothermal probe"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor1(final G=
         G_pipe)
            annotation (Placement(transformation(extent={{18,-280},{38,-260}})));
-  parameter Modelica.SIunits.ThermalConductance G_pipe=0.026*3.1415*400*40 * 100
+  parameter Modelica.SIunits.ThermalConductance G_pipe=0.026*3.1415*400*40 * 300
     "Constant thermal conductance of pipe material and near ground";
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
         C_groundNear,                                                       T(
@@ -120,7 +121,7 @@ model GeothermalFieldSimple "Geothermal probe"
         origin={36,-296})));
   parameter Modelica.SIunits.HeatCapacity C_groundFar=2*2*3.1415*100*1000*2000*40
     "Heat capacity of near ground (= cp*m)";
-  parameter Modelica.SIunits.HeatCapacity C_groundNear=0.13*0.13*3.1415*100*1000*2000*40
+  parameter Modelica.SIunits.HeatCapacity C_groundNear=(0.11*0.11)*3.1415*100*1000*2000*40
     "Heat capacity of near ground (= cp*m)";
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor1(C=
