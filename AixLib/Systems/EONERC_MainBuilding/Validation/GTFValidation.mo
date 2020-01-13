@@ -71,14 +71,14 @@ equation
           {-14,84},{-76,84},{-76,70},{-79,70}},         color={0,0,127}));
   connect(combiTimeTable.y[1], toKelvin1.Celsius)
     annotation (Line(points={{-79,70},{-57.2,70}}, color={0,0,127}));
-  connect(const1.y, twoCircuitBus1.primBus.pumpBus.rpm_Input) annotation (Line(
+  connect(const1.y, twoCircuitBus1.primBus.pumpBus.rpmSet) annotation (Line(
         points={{-39,10},{-19.95,10},{-19.95,-19.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const.y, twoCircuitBus1.secBus.valSet) annotation (Line(points={{-39,-20},
-          {-26,-20},{-26,-19.95},{-19.95,-19.95}},      color={0,0,127}), Text(
+  connect(const.y, twoCircuitBus1.secBus.valveSet) annotation (Line(points={{-39,
+          -20},{-26,-20},{-26,-19.95},{-19.95,-19.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -93,7 +93,7 @@ equation
           -64.75,-57},{-64.75,-58},{-62,-58}}, color={255,0,255}));
   connect(greaterThreshold1.y, or1.u1) annotation (Line(points={{-69.5,-45},{
           -64.75,-45},{-64.75,-50},{-62,-50}}, color={255,0,255}));
-  connect(or1.y, twoCircuitBus1.primBus.pumpBus.onOff_Input) annotation (Line(
+  connect(or1.y, twoCircuitBus1.primBus.pumpBus.onSet) annotation (Line(
         points={{-39,-50},{-19.95,-50},{-19.95,-19.95}}, color={255,0,255}),
       Text(
       string="%second",

@@ -141,8 +141,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(integrator4.u, mainBus.swuBus.pumpBus.power) annotation (Line(points={{-11,25},
-          {-98.905,25},{-98.905,0.09}},          color={0,0,127}), Text(
+  connect(integrator4.u, mainBus.swuBus.pumpBus.PelMea) annotation (Line(points
+        ={{-11,25},{-98.905,25},{-98.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -285,8 +285,8 @@ equation
           109.15,93},{109.15,93},{111,93}}, color={0,0,127}));
   connect(const.y, add2.u2) annotation (Line(points={{68.3,89},{70.15,89},{
           70.15,90},{73,90}}, color={0,0,127}));
-  connect(add2.u1, mainBus.consHtcBus.TFwrd_in) annotation (Line(points={{73,96},
-          {68,96},{68,112},{-98.905,112},{-98.905,0.09}}, color={0,0,127}),
+  connect(add2.u1, mainBus.consHtcBus.TFwrdInMea) annotation (Line(points={{73,
+          96},{68,96},{68,112},{-98.905,112},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -309,9 +309,9 @@ equation
           71},{100.25,69.2},{101.4,69.2}}, color={0,0,127}));
   connect(limiter1.y, product1.u1) annotation (Line(points={{98.5,71},{98.5,
           72.8},{101.4,72.8}}, color={0,0,127}));
-  connect(add3.u1, mainBus.consLtcBus.TFwrd_in) annotation (Line(points={{73,74},
-          {68,74},{68,76},{62,76},{62,108},{-98.905,108},{-98.905,0.09}}, color=
-         {0,0,127}), Text(
+  connect(add3.u1, mainBus.consLtcBus.TFwrdInMea) annotation (Line(points={{73,
+          74},{68,74},{68,76},{62,76},{62,108},{-98.905,108},{-98.905,0.09}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -333,8 +333,8 @@ equation
           45},{102.25,43.2},{103.4,43.2}}, color={0,0,127}));
   connect(limiter2.y, product2.u1) annotation (Line(points={{100.5,45},{100.5,
           46.8},{103.4,46.8}}, color={0,0,127}));
-  connect(add4.u1, mainBus.consCold1Bus.TFwrd_in) annotation (Line(points={{75,
-          48},{68,48},{68,50},{60,50},{60,114},{-98.905,114},{-98.905,0.09}},
+  connect(add4.u1, mainBus.consCold1Bus.TFwrdInMea) annotation (Line(points={{
+          75,48},{68,48},{68,50},{60,50},{60,114},{-98.905,114},{-98.905,0.09}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -357,8 +357,8 @@ equation
           25},{102.25,23.2},{103.4,23.2}}, color={0,0,127}));
   connect(limiter3.y, product3.u1) annotation (Line(points={{100.5,25},{100.5,
           26.8},{103.4,26.8}}, color={0,0,127}));
-  connect(add5.u1, mainBus.consCold2Bus.TFwrd_in) annotation (Line(points={{75,
-          28},{64,28},{64,116},{-98.905,116},{-98.905,0.09}}, color={0,0,127}),
+  connect(add5.u1, mainBus.consCold2Bus.TFwrdInMea) annotation (Line(points={{
+          75,28},{64,28},{64,116},{-98.905,116},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,

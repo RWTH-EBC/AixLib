@@ -289,7 +289,7 @@ equation
         points={{-58,-68},{-94.1429,-68},{-94.1429,-26}},
                                                 color={0,127,255}));
   connect(ctrMixHTC.hydraulicBus, admixHTC.hydraulicBus) annotation (Line(
-      points={{-188.56,70.23},{-186.315,70.23},{-186.315,70},{-180,70}},
+      points={{-186.88,71.14},{-186.315,71.14},{-186.315,70},{-180,70}},
       color={255,204,51},
       thickness=0.5));
   connect(admixHTC.port_b1, consumerHTC.port_a)
@@ -341,15 +341,14 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(const.y, hydraulicBus3.valSet) annotation (Line(points={{-231,-36},{
-          -201.95,-36},{-201.95,-25.95}},                       color={0,0,127}),
-      Text(
+  connect(const.y, hydraulicBus3.valveSet) annotation (Line(points={{-231,-36},
+          {-201.95,-36},{-201.95,-25.95}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrMixLTC.hydraulicBus, admixLTC.hydraulicBus) annotation (Line(
-      points={{-110.56,70.01},{-106.28,70.01},{-106.28,70},{-100,70}},
+      points={{-108.88,71.18},{-106.28,71.18},{-106.28,70},{-100,70}},
       color={255,204,51},
       thickness=0.5));
   connect(sine.y, consumerHTC.T) annotation (Line(points={{-181.5,97},{-165.2,
@@ -376,7 +375,7 @@ equation
   connect(consumerCold2.port_b, admixCold2.port_a2)
     annotation (Line(points={{116,92},{116,80}}, color={0,127,255}));
   connect(ctrMixCold2.hydraulicBus, admixCold2.hydraulicBus) annotation (Line(
-      points={{89.44,70.01},{94.72,70.01},{94.72,70},{100,70}},
+      points={{91.12,71.18},{94.72,71.18},{94.72,70},{100,70}},
       color={255,204,51},
       thickness=0.5));
   connect(sine6.y, consumerLTC.Q_flow) annotation (Line(points={{-105.5,137},{-93.6,
@@ -386,7 +385,7 @@ equation
   connect(geothermalFieldSimple.port_b, switchingUnit.port_a3) annotation (Line(
         points={{59.8333,16},{55.8,16},{55.8,22}}, color={0,127,255}));
   connect(ctrMixCold1.hydraulicBus, admixCold1.hydraulicBus) annotation (Line(
-      points={{-8.56,70.01},{-3.28,70.01},{-3.28,70},{0,70}},
+      points={{-6.88,71.18},{-3.28,71.18},{-3.28,70},{0,70}},
       color={255,204,51},
       thickness=0.5));
   connect(sine7.y, consumerCold1.Q_flow) annotation (Line(points={{-1.5,97},{

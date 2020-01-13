@@ -60,42 +60,42 @@ model CtrHighTemperatureSystem
   parameter Real T_set=273.15 + 80 "Set point temperature of boiler";
   parameter Real T_chp_set=333.15 "Set point temperature of chp";
 equation
-  connect(rpmPumps.y, highTemperatureSystemBus.admixBus1.pumpBus.rpm_Input)
+  connect(rpmPumps.y, highTemperatureSystemBus.admixBus1.pumpBus.rpmSet)
     annotation (Line(points={{61,90},{100.09,90},{100.09,1.085}},color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumps.y, highTemperatureSystemBus.admixBus2.pumpBus.rpm_Input)
+  connect(rpmPumps.y, highTemperatureSystemBus.admixBus2.pumpBus.rpmSet)
     annotation (Line(points={{61,90},{100.09,90},{100.09,1.085}},color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumps.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.rpm_Input)
+  connect(rpmPumps.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.rpmSet)
     annotation (Line(points={{61,90},{100.09,90},{100.09,1.085}},color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, highTemperatureSystemBus.admixBus2.pumpBus.onOff_Input)
+  connect(booleanConstant.y, highTemperatureSystemBus.admixBus2.pumpBus.onSet)
     annotation (Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, highTemperatureSystemBus.admixBus1.pumpBus.onOff_Input)
+  connect(booleanConstant.y, highTemperatureSystemBus.admixBus1.pumpBus.onSet)
     annotation (Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.onOff_Input)
+  connect(booleanConstant.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.onSet)
     annotation (Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}),
       Text(
       string="%second",
@@ -113,32 +113,32 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(TBoiler1Set_in.y, PIDadmix1.u_s) annotation (Line(points={{-79,90},{
           -42,90}},                        color={0,0,127}));
-  connect(PIDadmix1.y, highTemperatureSystemBus.admixBus1.valSet) annotation (
-     Line(points={{-19,90},{10,90},{10,1.085},{100.09,1.085}},   color={0,0,
-          127}), Text(
+  connect(PIDadmix1.y, highTemperatureSystemBus.admixBus1.valveSet) annotation (
+     Line(points={{-19,90},{10,90},{10,1.085},{100.09,1.085}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(TBoiler1Set_in.y, PIDadmix2.u_s) annotation (Line(points={{-79,90},{
           -66,90},{-66,-10},{-62,-10}},  color={0,0,127}));
-  connect(PIDadmix2.y, highTemperatureSystemBus.admixBus2.valSet) annotation (
-     Line(points={{-39,-10},{100,-10},{100,1.085},{100.09,1.085}}, color={0,0,
+  connect(PIDadmix2.y, highTemperatureSystemBus.admixBus2.valveSet) annotation (
+     Line(points={{-39,-10},{100,-10},{100,1.085},{100.09,1.085}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PIDadmix1.u_m, highTemperatureSystemBus.admixBus1.TFwrdOutMea)
+    annotation (Line(points={{-30,78},{-10,78},{-10,2},{10,2},{10,1.085},{100.09,
+          1.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PIDadmix2.u_m, highTemperatureSystemBus.admixBus2.TFwrdOutMea)
+    annotation (Line(points={{-50,-22},{100.09,-22},{100.09,1.085}}, color={0,0,
           127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(PIDadmix1.u_m, highTemperatureSystemBus.admixBus1.TFwrd_out)
-    annotation (Line(points={{-30,78},{-10,78},{-10,2},{10,2},{10,1.085},{
-          100.09,1.085}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(PIDadmix2.u_m, highTemperatureSystemBus.admixBus2.TFwrd_out)
-    annotation (Line(points={{-50,-22},{100.09,-22},{100.09,1.085}}, color={0,
-          0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -161,16 +161,16 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PIDBoiler2.u_m, highTemperatureSystemBus.admixBus2.TRtrn_in)
-    annotation (Line(points={{-10,-62},{100.09,-62},{100.09,1.085}}, color={0,
-          0,127}), Text(
+  connect(PIDBoiler2.u_m, highTemperatureSystemBus.admixBus2.TRtrnInMea)
+    annotation (Line(points={{-10,-62},{100.09,-62},{100.09,1.085}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PIDBoiler1.u_m, highTemperatureSystemBus.admixBus1.TRtrn_in)
-    annotation (Line(points={{-30,38},{-30,1.085},{100.09,1.085}}, color={0,0,
-          127}), Text(
+  connect(PIDBoiler1.u_m, highTemperatureSystemBus.admixBus1.TRtrnInMea)
+    annotation (Line(points={{-30,38},{-30,1.085},{100.09,1.085}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -182,9 +182,9 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(One.y, highTemperatureSystemBus.throttlePumpBus.valSet) annotation (
-     Line(points={{83,-90},{100,-90},{100,1.085},{100.09,1.085}},  color={0,0,
-          127}), Text(
+  connect(One.y, highTemperatureSystemBus.throttlePumpBus.valveSet) annotation (
+     Line(points={{83,-90},{100,-90},{100,1.085},{100.09,1.085}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},

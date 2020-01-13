@@ -15,42 +15,42 @@ model HTSConstantControl
   Modelica.Blocks.Sources.Constant uRelBoilerSet(k=333.15)
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
 equation
-  connect(rpmPumps.y, highTemperatureSystemBus.admixBus1.pumpBus.rpm_Input)
+  connect(rpmPumps.y, highTemperatureSystemBus.admixBus1.pumpBus.rpmSet)
     annotation (Line(points={{1,70},{100.09,70},{100.09,1.085}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumps.y, highTemperatureSystemBus.admixBus2.pumpBus.rpm_Input)
+  connect(rpmPumps.y, highTemperatureSystemBus.admixBus2.pumpBus.rpmSet)
     annotation (Line(points={{1,70},{100.09,70},{100.09,1.085}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumps.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.rpm_Input)
+  connect(rpmPumps.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.rpmSet)
     annotation (Line(points={{1,70},{100.09,70},{100.09,1.085}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, highTemperatureSystemBus.admixBus2.pumpBus.onOff_Input)
+  connect(booleanConstant.y, highTemperatureSystemBus.admixBus2.pumpBus.onSet)
     annotation (Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, highTemperatureSystemBus.admixBus1.pumpBus.onOff_Input)
+  connect(booleanConstant.y, highTemperatureSystemBus.admixBus1.pumpBus.onSet)
     annotation (Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.onOff_Input)
+  connect(booleanConstant.y, highTemperatureSystemBus.throttlePumpBus.pumpBus.onSet)
     annotation (Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}),
       Text(
       string="%second",
@@ -65,21 +65,21 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(valveOpening.y, highTemperatureSystemBus.admixBus1.valSet)
+  connect(valveOpening.y, highTemperatureSystemBus.admixBus1.valveSet)
     annotation (Line(points={{1,0},{46,0},{46,1.085},{100.09,1.085}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(valveOpening.y, highTemperatureSystemBus.admixBus2.valSet)
+  connect(valveOpening.y, highTemperatureSystemBus.admixBus2.valveSet)
     annotation (Line(points={{1,0},{46,0},{46,1.085},{100.09,1.085}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(valveOpening.y, highTemperatureSystemBus.throttlePumpBus.valSet)
+  connect(valveOpening.y, highTemperatureSystemBus.throttlePumpBus.valveSet)
     annotation (Line(points={{1,0},{46,0},{46,1.085},{100.09,1.085}}, color={0,0,
           127}), Text(
       string="%second",
