@@ -152,7 +152,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(VFSen_in.V_flow, hydraulicBus.VflowOutMea) annotation (Line(
+  connect(VFSen_in.V_flow,hydraulicBus.VFlowOutMea)  annotation (Line(
       points={{111,42},{116,42},{116,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
