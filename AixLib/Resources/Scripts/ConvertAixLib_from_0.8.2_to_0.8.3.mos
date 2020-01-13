@@ -2555,120 +2555,240 @@ convertElement(
 convertElement(
               "AixLib.Systems.HydraulicModules.Admix",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Injection",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Injection2WayValve",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Pump",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Throttle",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.ThrottlePump",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Controller.CtrMix",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Controller.CtrPump",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Admix",
               "Admix.hydraulicBus.VF_out",
-              "Admix.hydraulicBus.VflowOutMea");
+              "Admix.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Admix",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "admix.hydraulicBus.VF_out",
-              "admix.hydraulicBus.VflowOutMea");
+              "admix.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "ctrMix.hydraulicBus.VF_out",
-              "ctrMix.hydraulicBus.VflowOutMea");
+              "ctrMix.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "ctrUnmixedSimple.hydraulicBus.VF_out",
-              "ctrUnmixedSimple.hydraulicBus.VflowOutMea");
+              "ctrUnmixedSimple.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "ctrUnmixedThrottle.hydraulicBus.VF_out",
-              "ctrUnmixedThrottle.hydraulicBus.VflowOutMea");
+              "ctrUnmixedThrottle.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "unmixed.hydraulicBus.VF_out",
-              "unmixed.hydraulicBus.VflowOutMea");
+              "unmixed.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
               "unmixedThrottle.hydraulicBus.VF_out",
-              "unmixedThrottle.hydraulicBus.VflowOutMea");
+              "unmixedThrottle.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Injection",
               "Injection.hydraulicBus.VF_out",
-              "Injection.hydraulicBus.VflowOutMea");
+              "Injection.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Injection",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
               "Injection.hydraulicBus.VF_out",
-              "Injection.hydraulicBus.VflowOutMea");
+              "Injection.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Pump",
               "Unmixed.hydraulicBus.VF_out",
-              "Unmixed.hydraulicBus.VflowOutMea");
+              "Unmixed.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Pump",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Throttle",
               "Throttle.hydraulicBus.VF_out",
-              "Throttle.hydraulicBus.VflowOutMea");
+              "Throttle.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.Throttle",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
               "ThrottlePump.hydraulicBus.VF_out",
-              "ThrottlePump.hydraulicBus.VflowOutMea");
+              "ThrottlePump.hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
               "VF_out",
-              "VflowOutMea");
+              "VFlowOutMea");
 convertElement(
               "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
               "hydraulicBus.VF_out",
-              "hydraulicBus.VflowOutMea");
+              "hydraulicBus.VFlowOutMea");
+convertElement(
+              "AixLib.Systems.HydraulicModules.Admix",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Injection2WayValve",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Pump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Throttle",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.ThrottlePump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "Admix.hydraulicBus.VflowOutMea",
+              "Admix.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Admix",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "admix.hydraulicBus.VflowOutMea",
+              "admix.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrMix.hydraulicBus.VflowOutMea",
+              "ctrMix.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedSimple.hydraulicBus.VflowOutMea",
+              "ctrUnmixedSimple.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "ctrUnmixedThrottle.hydraulicBus.VflowOutMea",
+              "ctrUnmixedThrottle.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixed.hydraulicBus.VflowOutMea",
+              "unmixed.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+              "unmixedThrottle.hydraulicBus.VflowOutMea",
+              "unmixedThrottle.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "Injection.hydraulicBus.VflowOutMea",
+              "Injection.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "Injection.hydraulicBus.VflowOutMea",
+              "Injection.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Injection2WayValve",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "Unmixed.hydraulicBus.VflowOutMea",
+              "Unmixed.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Pump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "Throttle.hydraulicBus.VflowOutMea",
+              "Throttle.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.Throttle",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "ThrottlePump.hydraulicBus.VflowOutMea",
+              "ThrottlePump.hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.Example.ThrottlePump",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.HydraulicBus",
+              "VflowOutMea",
+              "VFlowOutMea"); 
+convertElement(
+              "AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule",
+              "hydraulicBus.VflowOutMea",
+              "hydraulicBus.VFlowOutMea");			  
