@@ -13,9 +13,9 @@ partial model PartialHuman "Partial model for internal gains of humans"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat
     "Convective heat output"
    annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar radiationConvertor(eps=emissivity_Human)
+  Utilities.HeatTransfer.HeatToStar radiationConvertor(eps=emissivityHuman)
     "Converter for HeatPort to RadPort"
-   annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
+    annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   Interfaces.RadPort radHeat "Radiative heat output"
    annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Interfaces.RealInput schedule "Occupancy schedule"
@@ -23,10 +23,9 @@ partial model PartialHuman "Partial model for internal gains of humans"
   Modelica.Blocks.Math.Gain nrPeople(k=specificPersons*roomArea)
     "Number of people"
    annotation (Placement(transformation(extent={{-70,-26},{-58,-14}})));
-  Modelica.Blocks.Math.Gain surfaceArea_People(k=surfaceArea_Human)
+  Modelica.Blocks.Math.Gain surfaceAreaPeople(k=surfaceArea_Human)
     "Human surface"
-   annotation(Placement(transformation(extent={{16,-54},
-            {28,-42}})));
+   annotation (Placement(transformation(extent={{16,-54},{28,-42}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax = 1e+23, uMin=1)
     "Limiter for number of people"
    annotation(Placement(transformation(extent={{-18,-58},
@@ -51,7 +50,7 @@ partial model PartialHuman "Partial model for internal gains of humans"
      annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
 protected
   parameter Modelica.SIunits.Area surfaceArea_Human=2 "Human Surface";
-  parameter Real emissivity_Human=0.98 "Human emission coefficient";
+  parameter Real emissivityHuman=0.98 "Human emission coefficient";
   parameter Modelica.SIunits.HeatFlowRate heatPerPerson=70
     "Average Heat Flow per person taken from DIN V 18599-10"
    annotation(Dialog(descriptionLabel = true));
@@ -70,12 +69,10 @@ equation
     annotation (Line(points={{-100,-20},{-71.2,-20}}, color={0,0,127}));
   connect(gain.y,convectiveHeat. Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));
   connect(gain1.y,radiativeHeat. Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
-  connect(limiter.y,surfaceArea_People. u) annotation (Line(
-      points={{3,-48},{14.8,-48}},
-      color={0,0,127}));
-  connect(surfaceArea_People.y,radiationConvertor. A_in) annotation (Line(
-      points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
-      color={0,0,127}));
+  connect(limiter.y, surfaceAreaPeople.u)
+    annotation (Line(points={{3,-48},{14.8,-48}}, color={0,0,127}));
+  connect(surfaceAreaPeople.y, radiationConvertor.A_in) annotation (Line(points
+        ={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}}, color={0,0,127}));
   connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,-20},
           {-54,-20},{-54,4},{-40,4},{-40,4}}, color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(points={{-18.3,4},{-8,
