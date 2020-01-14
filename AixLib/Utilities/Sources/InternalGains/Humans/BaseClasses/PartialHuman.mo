@@ -4,26 +4,26 @@ partial model PartialHuman "Partial model for internal gains of humans"
   parameter Real specificPersons(unit="1/(m.m)") = 1.0 "Specific persons per square metre" annotation(Dialog(descriptionLabel = true));
   parameter Real ratioConvectiveHeat=0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.Area roomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
     "Initial temperature";
   parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70
     "Specific heat output per person";
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat
     "Convective heat output"
    annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar RadiationConvertor(eps = Emissivity_Human)
+  Utilities.HeatTransfer.HeatToStar radiationConvertor(eps=emissivity_Human)
     "Converter for HeatPort to RadPort"
    annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
-  Interfaces.RadPort RadHeat "Radiative heat output"
+  Interfaces.RadPort radHeat "Radiative heat output"
    annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
-  Modelica.Blocks.Interfaces.RealInput Schedule "Occupancy schedule"
+  Modelica.Blocks.Interfaces.RealInput schedule "Occupancy schedule"
    annotation(Placement(transformation(extent = {{-120, -40}, {-80, 0}}), iconTransformation(extent = {{-102, -22}, {-80, 0}})));
-  Modelica.Blocks.Math.Gain nrPeople(k=specificPersons*RoomArea)
+  Modelica.Blocks.Math.Gain nrPeople(k=specificPersons*roomArea)
     "Number of people"
    annotation (Placement(transformation(extent={{-70,-26},{-58,-14}})));
-  Modelica.Blocks.Math.Gain SurfaceArea_People(k = SurfaceArea_Human)
+  Modelica.Blocks.Math.Gain surfaceArea_People(k=surfaceArea_Human)
     "Human surface"
    annotation(Placement(transformation(extent={{16,-54},
             {28,-42}})));
@@ -50,30 +50,30 @@ partial model PartialHuman "Partial model for internal gains of humans"
     "Air temperature in room"
      annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
 protected
-  parameter Modelica.SIunits.Area SurfaceArea_Human = 2 "Human Surface";
-  parameter Real Emissivity_Human = 0.98 "Human emission coefficient";
-  parameter Modelica.SIunits.HeatFlowRate HeatPerPerson = 70
+  parameter Modelica.SIunits.Area surfaceArea_Human=2 "Human Surface";
+  parameter Real emissivity_Human=0.98 "Human emission coefficient";
+  parameter Modelica.SIunits.HeatFlowRate heatPerPerson=70
     "Average Heat Flow per person taken from DIN V 18599-10"
    annotation(Dialog(descriptionLabel = true));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convectiveHeat(
     T_ref = T0)
     "Convective heat output"
    annotation(Placement(transformation(extent = {{18, 20}, {42, 44}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radiativeHeat(
     T_ref = T0)
     "Radiative heat output"
    annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(RadiationConvertor.Star, RadHeat) annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(Schedule, nrPeople.u)
+  connect(radiativeHeat.port,radiationConvertor. Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(radiationConvertor.Star,radHeat)  annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(schedule, nrPeople.u)
     annotation (Line(points={{-100,-20},{-71.2,-20}}, color={0,0,127}));
-  connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));
-  connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
-  connect(limiter.y, SurfaceArea_People.u) annotation (Line(
+  connect(gain.y,convectiveHeat. Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));
+  connect(gain1.y,radiativeHeat. Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
+  connect(limiter.y,surfaceArea_People. u) annotation (Line(
       points={{3,-48},{14.8,-48}},
       color={0,0,127}));
-  connect(SurfaceArea_People.y, RadiationConvertor.A_in) annotation (Line(
+  connect(surfaceArea_People.y,radiationConvertor. A_in) annotation (Line(
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
       color={0,0,127}));
   connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,-20},
@@ -86,7 +86,7 @@ equation
           {-52,-48},{-20,-48}}, color={0,0,127}));
   connect(TRoom,temperatureSensor. port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T,to_degC. u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
-  connect(ConvectiveHeat.port, ConvHeat) annotation (Line(points={{42,32},{64,
+  connect(convectiveHeat.port,convHeat)  annotation (Line(points={{42,32},{64,
           32},{64,50},{90,50}}, color={191,0,0}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
