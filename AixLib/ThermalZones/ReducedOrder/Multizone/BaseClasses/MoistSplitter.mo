@@ -7,10 +7,10 @@ model MoistSplitter "A simple model which weights a given set of mass fraction i
   parameter Real splitFactor[nIn, nOut]= fill(1/nOut, nOut, nIn)
     "Matrix of split factor for outputs (between 0 and 1 for each row)";
   Modelica.Blocks.Interfaces.RealInput portIn[nIn]
-    "Single thermal input"
+    "Single mass fraction input"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Interfaces.RealOutput portOut[nOut]
-    "Set of thermal outputs" annotation (Placement(transformation(extent={{80,-20},
+    "Set of mass fraction outputs" annotation (Placement(transformation(extent={{80,-20},
             {120,20}}), iconTransformation(extent={{80,-20},{120,20}})));
 
 equation
