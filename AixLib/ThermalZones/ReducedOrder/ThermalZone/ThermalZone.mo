@@ -183,7 +183,7 @@ model ThermalZone
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) if zoneParam.CoolerOn
+    min=0) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
            "Set point for cooler" annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
@@ -195,7 +195,7 @@ model ThermalZone
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) if zoneParam.HeaterOn
+    min=0) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
            "Set point for heater" annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,

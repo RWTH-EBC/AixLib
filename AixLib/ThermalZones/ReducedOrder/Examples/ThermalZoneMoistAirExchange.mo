@@ -11,7 +11,8 @@ model ThermalZoneMoistAirExchange
     T_start=293.15,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
-    internalGainsMode=3)
+    internalGainsMode=3,
+    recOrSep=true)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

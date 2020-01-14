@@ -9,6 +9,7 @@ model ThermalZoneMoistAir
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = AixLib.Media.Air,
     internalGainsMode=3,
+    recOrSep=true,
     nPorts=2,
     T_start=293.15,
     zoneParam=
