@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Humans;
-model HumanSensibleHeat_TemperatureIndependent
+model HumanSensibleHeatTemperatureIndependent
   "Model for sensible heat output of humans not depending on the room temperature"
   extends BaseClasses.PartialHuman(productHeatOutput(nu=2));
 
@@ -27,4 +27,4 @@ equation
   </li>
  </ul>
 </html>"));
-end HumanSensibleHeat_TemperatureIndependent;
+end HumanSensibleHeatTemperatureIndependent;

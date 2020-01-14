@@ -1,26 +1,25 @@
 ﻿within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
-model TemperatureDependentHeatOutput_SIA2024
+model TemperatureDependentHeatOutputSIA2024
   "Model for temperature dependent heat output based on formulas of SIA 2024"
 
   parameter Real activityDegree=1.0 "Activity degree of persons in room in met";
 
-  Modelica.Blocks.Interfaces.RealInput Temperature
+  Modelica.Blocks.Interfaces.RealInput T
     "Room temperature used for heat output calculation"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
-        iconTransformation(extent={{-120,-10},{-100,10}})));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
   Modelica.Blocks.Interfaces.RealOutput heatOutput
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-  constant Real heatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
-  constant Modelica.SIunits.Area bodySurface = 1.8 "Body surface of one person";
+  constant Real HeatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
+  constant Modelica.SIunits.Area BodySurface=1.8 "Body surface of one person";
   constant Real TemperatureCoefficient(unit="1/K") = 0.025
     "Parameter for temperature dependency";
-  constant Modelica.SIunits.HeatFlowRate minimumHeat = 35 "Minimum heat output";
+  constant Modelica.SIunits.HeatFlowRate MinimumHeat=35 "Minimum heat output";
 equation
 
-  heatOutput = max(0,(0.865-(TemperatureCoefficient * Temperature))*(
-    activityDegree*heatPerMet*bodySurface)+minimumHeat);
+  heatOutput =max(0, (0.865 - (TemperatureCoefficient*T))*(activityDegree*
+    HeatPerMet*BodySurface) + MinimumHeat);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-58,22},{46,-26}},
@@ -50,4 +49,4 @@ equation
   </li>
  </ul>
 </html>"));
-end TemperatureDependentHeatOutput_SIA2024;
+end TemperatureDependentHeatOutputSIA2024;

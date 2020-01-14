@@ -1,5 +1,5 @@
 ﻿within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
-model TemperatureDependentMoistureOutput_SIA2024
+model TemperatureDependentMoistureOutputSIA2024
   "Model for temperature dependent moisture output based on formulas of SIA 2024"
 
   parameter Real activityDegree=1.0 "Activity degree of persons in room in met";
@@ -11,19 +11,19 @@ model TemperatureDependentMoistureOutput_SIA2024
 
   Modelica.Blocks.Interfaces.RealOutput moistOutput "Moisture output in g/h"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  TemperatureDependentHeatOutput_SIA2024
-    temperatureDependentHeatOutput_SIA2024 "Temperature dependent heat output"
+  TemperatureDependentHeatOutputSIA2024 temperatureDependentHeatOutput_SIA2024
+    "Temperature dependent heat output"
     annotation (Placement(transformation(extent={{-74,32},{-54,52}})));
 protected
-  constant Real heatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
-  constant Modelica.SIunits.Area bodySurface = 1.8 "Body surface of one person";
-  constant Real moistGain(unit="g/h") = 10/7 "Gain for moisture output";
+  constant Real HeatPerMet(unit="W/(m.m)") = 58 "Heat per m² for 1 met";
+  constant Modelica.SIunits.Area BodySurface=1.8 "Body surface of one person";
+  constant Real MoistGain(unit="g/h") = 10/7 "Gain for moisture output";
 equation
 
-  moistOutput = max(0,moistGain*((activityDegree*heatPerMet*bodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));
+  moistOutput = max(0,MoistGain*((activityDegree*HeatPerMet*BodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));
 
-  connect(Temperature, temperatureDependentHeatOutput_SIA2024.Temperature)
-    annotation (Line(points={{-120,0},{-86,0},{-86,42},{-75,42}}, color={0,0,127}));
+  connect(Temperature, temperatureDependentHeatOutput_SIA2024.T) annotation (
+      Line(points={{-120,0},{-86,0},{-86,42},{-76,42}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-58,22},{46,-26}},
           lineColor={0,0,0},
@@ -51,4 +51,4 @@ equation
  <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Implemented</li>
  </ul>
 </html>"));
-end TemperatureDependentMoistureOutput_SIA2024;
+end TemperatureDependentMoistureOutputSIA2024;

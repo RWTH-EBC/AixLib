@@ -1,9 +1,9 @@
 within AixLib.Utilities.Sources.InternalGains.Humans;
-model HumanTotalHeat_TemperatureDependent
+model HumanTotalHeatTemperatureDependent
   "Model for total heat and moisture output of humans depending on the room temperature"
-  extends HumanSensibleHeat_TemperatureDependent;
+  extends HumanSensibleHeatTemperatureDependent;
 
-  BaseClasses.TemperatureDependentMoistureOutput_SIA2024
+  BaseClasses.TemperatureDependentMoistureOutputSIA2024
     temperatureDependentMoistuerOutput_SIA2024_1(activityDegree=activityDegree)
     "Temperature dependent moisture output per person"
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
@@ -68,4 +68,4 @@ equation
  <li><i>March, 2019&nbsp;</i> by Martin Kremer:<br/>First implementation on issue #695.</li>
  </ul>
 </html>"));
-end HumanTotalHeat_TemperatureDependent;
+end HumanTotalHeatTemperatureDependent;

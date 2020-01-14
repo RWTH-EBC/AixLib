@@ -36,37 +36,40 @@ model ThermalZone
   parameter Modelica.SIunits.Time TN_cooler=1
     "Time constant of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent
     humanSenHeaDependent(
-    radiationConvertor(        use_A_in=true),
-      final T0=zoneParam.T_start,
-      final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-      final roomArea=zoneParam.AZone,
-      final specificPersons=zoneParam.specificPeople,
-      final activityDegree=zoneParam.activityDegree,
-      final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-         ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    radiationConvertor(use_A_in=true),
+    final T0=zoneParam.T_start,
+    final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final roomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final activityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+         ATot > 0 and internalGainsMode == 1
+    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent
     humanSenHeaIndependent(
-    radiationConvertor(        use_A_in=true),
-      final T0=zoneParam.T_start,
-      final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-      final roomArea=zoneParam.AZone,
-      final specificPersons=zoneParam.specificPeople,
-      final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-         ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    radiationConvertor(use_A_in=true),
+    final T0=zoneParam.T_start,
+    final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final roomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+         ATot > 0 and internalGainsMode == 2
+    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanTotalHeat_TemperatureDependent
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanTotalHeatTemperatureDependent
     humanTotHeaDependent(
-    radiationConvertor(        use_A_in=true),
-      final T0=zoneParam.T_start,
-      final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-      final roomArea=zoneParam.AZone,
-      final specificPersons=zoneParam.specificPeople,
-      final activityDegree=zoneParam.activityDegree,
-      final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-         ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    radiationConvertor(use_A_in=true),
+    final T0=zoneParam.T_start,
+    final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final roomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final activityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+         ATot > 0 and internalGainsMode == 3
+    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
   replaceable AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
