@@ -1,10 +1,10 @@
 within AixLib.Utilities.Sources.InternalGains.Humans;
-model HumanTotalHeat_TemperatureDependent
+model HumanTotalHeatTemperatureDependent
   "Model for total heat and moisture output of humans depending on the room temperature"
-  extends HumanSensibleHeat_TemperatureDependent;
+  extends HumanSensibleHeatTemperatureDependent;
 
-  BaseClasses.TemperatureDependentMoistureOutput_SIA2024
-    temperatureDependentMoistuerOutput_SIA2024_1(activityDegree=activityDegree)
+  BaseClasses.TemperatureDependentMoistureOutputSIA2024
+    temperatureDependentMoistuerOutputSIA2024_1(activityDegree=activityDegree)
     "Temperature dependent moisture output per person"
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
@@ -26,16 +26,15 @@ protected
   constant Modelica.SIunits.SpecificHeatCapacity cp_steam=
     AixLib.Utilities.Psychrometrics.Constants.cpSte
     "Specific heat capacity of steam";
-  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation=
-    AixLib.Utilities.Psychrometrics.Constants.h_fg
+  constant Modelica.SIunits.SpecificEnthalpy EnthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
     "Enthalpy of evaporation";
   constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
-  connect(to_degC.y, temperatureDependentMoistuerOutput_SIA2024_1.Temperature)
-    annotation (Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-61,76}},
-        color={0,0,127}));
-  connect(temperatureDependentMoistuerOutput_SIA2024_1.moistOutput,
+  connect(to_degC.y, temperatureDependentMoistuerOutputSIA2024_1.T) annotation
+    (Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-62,76}}, color={0,0,
+          127}));
+  connect(temperatureDependentMoistuerOutputSIA2024_1.moistOutput,
     productMoistureOutput.u[1]) annotation (Line(points={{-39,76},{-36,76},{-36,
           83.5},{-28,83.5}}, color={0,0,127}));
   connect(nrPeople.y, productMoistureOutput.u[2]) annotation (Line(points={{-57.4,
@@ -68,4 +67,4 @@ equation
  <li><i>March, 2019&nbsp;</i> by Martin Kremer:<br/>First implementation on issue #695.</li>
  </ul>
 </html>"));
-end HumanTotalHeat_TemperatureDependent;
+end HumanTotalHeatTemperatureDependent;
