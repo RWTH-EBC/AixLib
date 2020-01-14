@@ -136,10 +136,10 @@ model ThermalZoneMoistAir
     m_flow=3000/3600*1.17,
     X={0.004,1 - 0.004},
     T=283.15,
-    nPorts=1)
+    nPorts=1) "mass flow rate of air into thermal zone"
     annotation (Placement(transformation(extent={{-84,-80},{-64,-60}})));
   Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = AixLib.Media.Air,
-      nPorts=1)
+      nPorts=1) "sink of air"
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(

@@ -138,8 +138,10 @@ model ThermalZoneMoistAirExchange
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
   Utilities.Psychrometrics.X_pW humRat
+    "absolute humidity exchanged by ventilation rate"
     annotation (Placement(transformation(extent={{-44,-30},{-24,-10}})));
   Utilities.Psychrometrics.pW_TDewPoi pWat
+    "partial pressure of water vapour in outdoor air"
     annotation (Placement(transformation(extent={{-86,-34},{-66,-14}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(

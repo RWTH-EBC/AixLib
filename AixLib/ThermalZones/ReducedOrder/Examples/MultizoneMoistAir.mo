@@ -69,12 +69,12 @@ model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-30,-76})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0.2)
-    "Set point for cooler"
+  Modelica.Blocks.Sources.Constant ventRate[5](each k=0.2) "ventilation rate"
     annotation (Placement(transformation(extent={{-36,-28},{-20,-12}})));
 
   AixLib.Utilities.Psychrometrics.X_pTphi
                                    x_pTphi
+    "Converter for relative humidity to absolute humidity"
     annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
@@ -120,8 +120,8 @@ equation
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
         points={{6,-76},{18,-76},{26,-76},{26,-6.2},{34,-6.2}},
                                                             color={191,0,0}));
-  connect(const.y, multizone.ventRate) annotation (Line(points={{-19.2,-20},{-2,
-          -20},{-2,-0.6},{33,-0.6}}, color={0,0,127}));
+  connect(ventRate.y, multizone.ventRate) annotation (Line(points={{-19.2,-20},
+          {-2,-20},{-2,-0.6},{33,-0.6}}, color={0,0,127}));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-72,66},{-95,66},{-95,-8}},
       color={255,204,51},
