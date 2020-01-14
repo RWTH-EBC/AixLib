@@ -24,7 +24,18 @@ partial model PartialMultizone "Partial model for multizone models"
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   replaceable model thermalZone =
-      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange (
+      each recOrSep=recOrSep,
+      each Heater_on=Heater_on,
+      each h_heater=h_heater,
+      each l_heater=l_heater,
+      each KR_heater=KR_heater,
+      each TN_heater=TN_heater,
+      each Cooler_on=Cooler_on,
+      each h_cooler=h_cooler,
+      each l_cooler=l_cooler,
+      each KR_cooler=KR_cooler,
+      each TN_cooler=TN_cooler)
     constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
     "Thermal zone model"
@@ -87,6 +98,31 @@ partial model PartialMultizone "Partial model for multizone models"
 
   parameter Integer internalGainsMode
     "Decides which internal gains model for persons is used";
+  parameter Boolean recOrSep=true "Use record or seperate parameters"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
+        "Seperate",choice = true "Record",radioButtons = true));
+  parameter Boolean Heater_on=true "Activates the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real KR_heater=1000 "Gain of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater=1
+    "Time constant of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Boolean Cooler_on=true "Activates the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real KR_cooler=1000 "Gain of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler=1
+    "Time constant of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",
@@ -112,7 +148,55 @@ partial model PartialMultizone "Partial model for multizone models"
     extent={{10,-10},{-10,10}},
     rotation=270,
     origin={-74,-110})));
+  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final quantity="HeatFlowRate",
+      final unit="W")
+    "Power for heating"
+    annotation (
+    Placement(transformation(extent={{100,-56},{120,-36}}),
+    iconTransformation(extent={{80,-80},{100,-60}})));
+  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final quantity="HeatFlowRate",
+      final unit="W")
+    "Power for cooling"
+    annotation (
+    Placement(transformation(extent={{100,-70},{120,-50}}),iconTransformation(
+    extent={{80,-100},{100,-80}})));
 equation
+  // if ASurTot or VAir < 0 PHeater and PCooler are set to dummy value zero
+  if not (ASurTot > 0 or VAir > 0) then
+    PHeater[:] = fill(0, numZones);
+    PCooler[:] = fill(0, numZones);
+  end if;
+  // if ideal heating and/or cooling is set by seperate values
+  if (ASurTot > 0 or VAir > 0) and not recOrSep then
+    if Heater_on then
+      connect(zone.PHeater, PHeater);
+    else
+      PHeater[:] = fill(0, numZones);
+    end if;
+    if Cooler_on then
+      connect(zone.PCooler, PCooler);
+    else
+      PCooler[:] = fill(0, numZones);
+    end if;
+  // if ideal heating or cooling is set by record
+  elseif (ASurTot > 0 or VAir > 0) and recOrSep then
+    for i in 1:numZones loop
+      if zoneParam[i].HeaterOn then
+        connect(zone[i].PHeater, PHeater[i]);
+      else
+        PHeater[i] = 0;
+      end if;
+      if zoneParam[i].CoolerOn then
+        connect(zone[i].PCooler, PCooler[i]);
+      else
+        PCooler[i] = 0;
+      end if;
+    end for;
+  end if;
+
+
+
+
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
         points={{76,-100},{76,50.64},{75.8,50.64}},

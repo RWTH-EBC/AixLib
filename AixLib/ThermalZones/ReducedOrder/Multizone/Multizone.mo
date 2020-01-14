@@ -2,45 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
-      zone(
-      each recOrSep=recOrSep,
-      each Heater_on=Heater_on,
-      each h_heater=h_heater,
-      each l_heater=l_heater,
-      each KR_heater=KR_heater,
-      each TN_heater=TN_heater,
-      each Cooler_on=Cooler_on,
-      each h_cooler=h_cooler,
-      each l_cooler=l_cooler,
-      each KR_cooler=KR_cooler,
-      each TN_cooler=TN_cooler));
-
-  parameter Boolean recOrSep=true "Use record or seperate parameters"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
-        "Seperate",choice = true "Record",radioButtons = true));
-  parameter Boolean Heater_on=true "Activates the heater"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Real h_heater=0 "Upper limit controller output of the heater"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Real l_heater=0 "Lower limit controller output of the heater"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Real KR_heater=1000 "Gain of the heating controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater=1
-    "Time constant of the heating controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
-  parameter Boolean Cooler_on=true "Activates the cooler"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Real h_cooler=0 "Upper limit controller output of the cooler"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Real l_cooler=0 "Lower limit controller output of the cooler"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Real KR_cooler=1000 "Gain of the cooling controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler=1
-    "Time constant of the cooling controller"
-    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
     final quantity="ThermodynamicTemperature",
@@ -60,6 +22,7 @@ model Multizone
         iconTransformation(extent={{-100,-36},{-80,-16}})));
 
 equation
+
   connect(zone.ventRate, ventRate) annotation (Line(points={{44.3,52.28},{44.3,
           52.28},{44.3,-20},{-100,-20}},
                                 color={0,0,127}));

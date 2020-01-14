@@ -65,6 +65,7 @@ model MultizoneMoistAirEquipped
     constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU
     "Air handling unit model"
     annotation(Dialog(tab="AirHandlingUnit"),choicesAllMatching=true);
+
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:
@@ -94,18 +95,6 @@ model MultizoneMoistAirEquipped
     annotation (
     Placement(transformation(extent={{100,-40},{120,-20}}),iconTransformation(
     extent={{80,-60},{100,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final
-    quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
-    "Power for heating"
-    annotation (
-    Placement(transformation(extent={{100,-54},{120,-34}}),
-    iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final
-    quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
-    "Power for cooling"
-    annotation (
-    Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
-    extent={{80,-100},{100,-80}})));
   AHUMod AirHandlingUnit(
     final cooling=coolAHU,
     final dehumidificationSet=dehuAHU,
@@ -328,10 +317,6 @@ equation
   connect(absToRelHum.relHum, AirHandlingUnit.phi_extractAir) annotation (Line(
         points={{-25,81},{10,81},{10,44},{18,44},{18,29.5},{12.4,29.5}}, color={
           0,0,127}));
-  connect(zone.PHeater, PHeater) annotation (Line(points={{77.9,55.15},{96,
-          55.15},{96,-44},{110,-44}}, color={0,0,127}));
-  connect(zone.PCooler, PCooler) annotation (Line(points={{77.9,51.05},{96,
-          51.05},{96,-58},{110,-58}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

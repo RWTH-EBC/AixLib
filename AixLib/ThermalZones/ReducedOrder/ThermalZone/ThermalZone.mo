@@ -174,7 +174,8 @@ model ThermalZone
     each Heater_on=Heater_on,
     each Cooler_on=Cooler_on,
     each staOrDyn=not zoneParam.withIdealThresholds) if (ATot > 0 or zoneParam.VAir
-     > 0) and (zoneParam.HeaterOn or zoneParam.CoolerOn)
+     > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or (
+    not recOrSep and (Heater_on or Cooler_on))
                                       "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{16,-82},{42,-56}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam=
@@ -207,11 +208,13 @@ model ThermalZone
         rotation=270,
         origin={50,-90})));
   Modelica.Blocks.Interfaces.RealOutput PHeater(final quantity="HeatFlowRate",
-      final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and zoneParam.HeaterOn
+      final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and ((recOrSep and
+    zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "Power for heating" annotation (Placement(transformation(extent={{100,-90},
             {120,-70}}),iconTransformation(extent={{80,-80},{100,-60}})));
   Modelica.Blocks.Interfaces.RealOutput PCooler(final quantity="HeatFlowRate",
-      final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and zoneParam.CoolerOn
+      final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and ((recOrSep and
+    zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Power for cooling" annotation (Placement(transformation(extent={{100,-104},
             {120,-84}}), iconTransformation(extent={{80,-100},{100,-80}})));
 protected
