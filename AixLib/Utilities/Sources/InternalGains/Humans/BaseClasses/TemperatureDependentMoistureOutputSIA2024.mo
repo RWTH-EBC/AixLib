@@ -4,10 +4,9 @@ model TemperatureDependentMoistureOutputSIA2024
 
   parameter Real activityDegree=1.0 "Activity degree of persons in room in met";
 
-  Modelica.Blocks.Interfaces.RealInput Temperature
+  Modelica.Blocks.Interfaces.RealInput T
     "Room temperature used for heat output calculation"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
-        iconTransformation(extent={{-120,-10},{-100,10}})));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
   Modelica.Blocks.Interfaces.RealOutput moistOutput "Moisture output in g/h"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
@@ -22,8 +21,8 @@ equation
 
   moistOutput = max(0,MoistGain*((activityDegree*HeatPerMet*BodySurface)-temperatureDependentHeatOutput_SIA2024.heatOutput));
 
-  connect(Temperature, temperatureDependentHeatOutput_SIA2024.T) annotation (
-      Line(points={{-120,0},{-86,0},{-86,42},{-76,42}}, color={0,0,127}));
+  connect(T, temperatureDependentHeatOutput_SIA2024.T) annotation (Line(points=
+          {{-120,0},{-86,0},{-86,42},{-76,42}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-58,22},{46,-26}},
           lineColor={0,0,0},
