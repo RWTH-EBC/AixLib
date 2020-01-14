@@ -2,7 +2,7 @@ within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
 partial model PartialHuman "Partial model for internal gains of humans"
   //Internal Gains People
   parameter Real specificPersons(unit="1/(m.m)") = 1.0 "Specific persons per square metre" annotation(Dialog(descriptionLabel = true));
-  parameter Real RatioConvectiveHeat = 0.5
+  parameter Real ratioConvectiveHeat=0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
@@ -31,10 +31,10 @@ partial model PartialHuman "Partial model for internal gains of humans"
     "Limiter for number of people"
    annotation(Placement(transformation(extent={{-18,-58},
             {2,-38}})));
-  Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat)
+  Modelica.Blocks.Math.Gain gain(k=ratioConvectiveHeat)
     "Ratio convective heat"
    annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
-  Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat)
+  Modelica.Blocks.Math.Gain gain1(k = 1 -ratioConvectiveHeat)
     "Ratio radiative heat"
    annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=1)
