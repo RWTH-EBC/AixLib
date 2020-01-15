@@ -170,12 +170,12 @@ model BuildingWithPV
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{-18,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{-18,70},
             {8,96}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{64,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{64,70},
             {90,96}})));
   BoundaryConditions.WeatherData.Bus        weaBus
     "Weather data bus"

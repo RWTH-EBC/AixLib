@@ -9,7 +9,7 @@ model ThermalZone
     AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
-  parameter Integer internalGainsMode
+  parameter Integer internalGainsMode = 1
      "decides which internal gains model for persons is used";
   parameter Boolean recOrSep=true "Use record or seperate parameters"
     annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
