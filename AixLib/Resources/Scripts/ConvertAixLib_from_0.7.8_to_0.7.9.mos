@@ -121,3 +121,5 @@ convertElement(
     "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
     "ctrUnmixedThrottle.const",
     "ctrUnmixedThrottle.constTflowSet");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped",
+              "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange")
