@@ -4,8 +4,8 @@ model OneOpenDoor "Model with one open and one closed door"
 
   package Medium = Modelica.Media.Air.SimpleAir;
 
-  AixLib.Airflow.Multizone.DoorDiscretizedOpen dooOpe(redeclare package Medium =
-        Medium) "Discretized door"
+  AixLib.Airflow.Multizone.DoorDiscretizedOpen dooOpe(redeclare package Medium
+      = Medium) "Discretized door"
     annotation (Placement(transformation(extent={{10,-8},{30,12}})));
 
   AixLib.Fluid.MixingVolumes.MixingVolume volA(
