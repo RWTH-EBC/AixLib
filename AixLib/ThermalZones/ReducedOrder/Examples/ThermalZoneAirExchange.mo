@@ -1,14 +1,14 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZone "Illustrates the use of ThermalZone"
+model ThermalZoneAirExchange "Illustrates the use of ThermalZoneAirExchange"
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange thermalZone(
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
     zoneParam=
         DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
     each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
     internalGainsMode=1)
     "Thermal zone"
@@ -19,6 +19,13 @@ model ThermalZone "Illustrates the use of ThermalZone"
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
+    annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
+    iconTransformation(extent={{-70,-12},{-50,8}})));
+  Modelica.Blocks.Sources.Constant const(k=0.2)
+    "Infiltration rate"
+    annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName = "UserProfiles",
@@ -133,6 +140,20 @@ equation
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
       color={255,204,51},
       thickness=0.5));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-72,30},{-61,30},{-61,-4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-11.3,
+          -3.9},{-35.65,-3.9},{-35.65,-4},{-61,-4}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(const.y, thermalZone.ventRate) annotation (Line(points={{-71,-30},{-40,
+          -30},{-8,-30},{-7,-30},{-7,-20},{-7,-8.4}}, color={0,0,127}));
   connect(internalGains.y, thermalZone.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
@@ -150,13 +171,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),
-    Documentation(revisions="<html>
+    Documentation(info="<html>
+<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
+</html>", revisions="<html>
   <ul>
   <li>September 29, 2016, by Moritz Lauster:<br/>
   Implemented.
   </li>
   </ul>
-</html>", info="<html>
-<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
 </html>"));
-end ThermalZone;
+end ThermalZoneAirExchange;
