@@ -22,10 +22,8 @@ model RotaryCompressorPressureLosses
 
   // Definition of models
   //
-  Sources.FixedBoundary source(
+  Sources.Boundary_pT   source(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     nPorts=1,
     p=pInl,
     T=TOut) "Source with constant pressure and temperature"
@@ -65,10 +63,8 @@ model RotaryCompressorPressureLosses
     m_flow_small=1e-6,
     Kvs=1.4) "Model of a simple valve to simulate pressure losses"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Sources.FixedBoundary sink(
+  Sources.Boundary_pT   sink(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     nPorts=1,
     p=pInl,
     T=TInl) "Sink with constant pressure and temperature"

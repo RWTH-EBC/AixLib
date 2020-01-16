@@ -1,2 +1,5 @@
-HumanSensibleHeat_VDI2078
-HumanSensibleHeatAreaSpecific
+HumanSensibleHeatTemperatureIndependent
+HumanSensibleHeatTemperatureDependent
+HumanTotalHeatTemperatureDependent
+BaseClasses
+Obsolete

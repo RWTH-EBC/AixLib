@@ -22,9 +22,8 @@ public
     annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
   Modelica.Blocks.Sources.Constant Activity(k=ActivityType)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
-  Utilities.HeatTransfer.HeatToStar
-                                  RadiationConvertor(eps=
-        Emissivity_Machines, A=max(1e-4, SurfaceArea_Machines*NrPeople))
+  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Machines, A=max(
+        1e-4, SurfaceArea_Machines*NrPeople))
     annotation (Placement(transformation(extent={{48,-70},{68,-50}})));
 equation
   connect(HeatOutput.y[1], productHeatOutput.u[1]) annotation (Line(

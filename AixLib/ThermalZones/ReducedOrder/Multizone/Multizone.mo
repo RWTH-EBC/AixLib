@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
   "Multizone model"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+  extends
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
     final quantity="ThermodynamicTemperature",
@@ -9,19 +10,19 @@ model Multizone
     displayUnit="degC",
     min=0)
     "Ventilation and infiltration temperature"
-    annotation (Placement(
-    transformation(extent={{-120,-12},{-80,28}}),iconTransformation(
-    extent={{-10,-10},{10,10}},
-    rotation=0,
-    origin={-90,18})));
+    annotation (Placement(transformation(extent={{-120,-12},{-80,28}}),
+        iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-90,0})));
   Modelica.Blocks.Interfaces.RealInput ventRate[numZones](final
     quantity="VolumeFlowRate", final unit="1/h")
     "Ventilation and infiltration rate"
-    annotation (Placement(transformation(
-    extent={{-120,-40},{-80,0}}),  iconTransformation(extent={{-100,-20},
-    {-80,0}})));
+    annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
+        iconTransformation(extent={{-100,-36},{-80,-16}})));
 
 equation
+
   connect(zone.ventRate, ventRate) annotation (Line(points={{44.3,52.28},{44.3,
           52.28},{44.3,-20},{-100,-20}},
                                 color={0,0,127}));
