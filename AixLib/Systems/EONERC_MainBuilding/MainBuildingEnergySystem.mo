@@ -238,22 +238,23 @@ model MainBuildingEnergySystem
     annotation (Placement(transformation(extent={{74,62},{90,80}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{-56,
             104},{-26,134}}), iconTransformation(extent={{-30,110},{-10,130}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=0, uMin=-160000)
-    annotation (Placement(transformation(extent={{-118,92},{-108,102}})));
+  Modelica.Blocks.Nonlinear.Limiter limiterCCAHot(uMax=0, uMin=-100000)
+    annotation (Placement(transformation(extent={{-130,98},{-122,106}})));
   Modelica.Blocks.Sources.RealExpression Q_flow_AHU(y=(12000*2 + 3000 + 17*73)/
-        3600*1.2*1005*(Tair - 293.15))
+        3600*1.2*1005*(Tair - 293.15)*0.2)
     annotation (Placement(transformation(extent={{-150,84},{-134,100}})));
   Modelica.Blocks.Sources.RealExpression Q_flow_CCA_hot(y=4000*(Tair - 288.15))
     annotation (Placement(transformation(extent={{-150,94},{-134,110}})));
   Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{-128,94},{-122,100}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=200000, uMin=0) annotation (
-      Placement(transformation(
+    annotation (Placement(transformation(extent={{-116,92},{-108,100}})));
+  Modelica.Blocks.Nonlinear.Limiter limiterFVUCold(uMax=100000, uMin=0)
+    annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={10,106})));
-  Modelica.Blocks.Sources.RealExpression Q_flow_FVU_cold(y=(20*73)*1.2*1005*(
-        Tair - 11)) annotation (Placement(transformation(
+        origin={24,112})));
+  Modelica.Blocks.Sources.RealExpression Q_flow_FVU_cold(y=(20*73)/3600*1.2*
+        1005*(Tair - 284.15)*0.8)
+                    annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=180,
         origin={38,112})));
@@ -265,7 +266,7 @@ model MainBuildingEnergySystem
   Modelica.Blocks.Math.Add add1 annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={20,106})));
+        origin={12,106})));
   Modelica.Blocks.Interfaces.RealOutput Tair
     annotation (Placement(transformation(extent={{-138,-150},{-118,-130}})));
   Modelica.Blocks.Sources.Sine sine1(
@@ -273,6 +274,24 @@ model MainBuildingEnergySystem
     freqHz=1/(3600*24),
     offset=273.15 + 15)
     annotation (Placement(transformation(extent={{-186,-140},{-176,-130}})));
+  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+
+    computeWetBulbTemperature=false,
+    filNam=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-216,-142},{-196,-122}})));
+  BoundaryConditions.WeatherData.Bus weaBus1
+             "Weather data bus"
+    annotation (Placement(transformation(extent={{-170,-140},{-150,-120}})));
+  Modelica.Blocks.Nonlinear.Limiter limiterAHU(uMax=0, uMin=-100000)
+    annotation (Placement(transformation(extent={{-130,88},{-122,96}})));
+  Modelica.Blocks.Nonlinear.Limiter limiterCCACold(uMax=100000, uMin=0)
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=180,
+        origin={24,102})));
 equation
   connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
         points={{66,38.6667},{80,38.6667},{80,-78.6667},{52,-78.6667}},
@@ -420,7 +439,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
 
   connect(admixLTC.hydraulicBus, mainBus.consLtcBus) annotation (Line(
-      points={{-100,70},{-106,70},{-106,119.075},{-40.925,119.075}},
+      points={{-100,70},{-62,70},{-62,119.075},{-40.925,119.075}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -454,29 +473,45 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(limiter.u, add.y)
-    annotation (Line(points={{-119,97},{-121.7,97}}, color={0,0,127}));
-  connect(Q_flow_AHU.y, add.u2) annotation (Line(points={{-133.2,92},{-128.6,92},
-          {-128.6,95.2}}, color={0,0,127}));
-  connect(Q_flow_CCA_hot.y, add.u1) annotation (Line(points={{-133.2,102},{
-          -133.2,98.8},{-128.6,98.8}}, color={0,0,127}));
-  connect(limiter.y, consumerLTC.Q_flow) annotation (Line(points={{-107.5,97},{
-          -100.75,97},{-100.75,96},{-93.6,96}}, color={0,0,127}));
-  connect(limiter1.y, consumerCold1.Q_flow) annotation (Line(points={{5.6,106},
-          {6,106},{6,96},{6.4,96}}, color={0,0,127}));
-  connect(limiter1.u, add1.y)
-    annotation (Line(points={{14.8,106},{15.6,106}}, color={0,0,127}));
-  connect(add1.u1, Q_flow_CCA_cold.y) annotation (Line(points={{24.8,103.6},{
-          27.4,103.6},{27.4,102},{29.2,102}}, color={0,0,127}));
-  connect(add1.u2, Q_flow_FVU_cold.y) annotation (Line(points={{24.8,108.4},{
-          24.8,110.2},{29.2,110.2},{29.2,112}}, color={0,0,127}));
   connect(sine3.y, consumerCold2.Q_flow) annotation (Line(points={{96.5,99},{
           101.25,99},{101.25,98},{106.4,98}}, color={0,0,127}));
   connect(Tair, prescribedTemperature.T) annotation (Line(points={{-128,-140},{
           -108,-140},{-108,-144},{-54,-144},{-54,-114},{-41.2,-114}}, color={0,
           0,127}));
-  connect(sine1.y, Tair) annotation (Line(points={{-175.5,-135},{-128,-135},{
-          -128,-140}}, color={0,0,127}));
+  connect(weaDat.weaBus, weaBus1) annotation (Line(
+      points={{-196,-132},{-180,-132},{-180,-130},{-160,-130}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(Tair, weaBus1.TDryBul) annotation (Line(points={{-128,-140},{-144,
+          -140},{-144,-130},{-160,-130}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(add.y, consumerLTC.Q_flow)
+    annotation (Line(points={{-107.6,96},{-93.6,96}}, color={0,0,127}));
+  connect(Q_flow_CCA_hot.y, limiterCCAHot.u)
+    annotation (Line(points={{-133.2,102},{-130.8,102}}, color={0,0,127}));
+  connect(Q_flow_AHU.y, limiterAHU.u)
+    annotation (Line(points={{-133.2,92},{-130.8,92}}, color={0,0,127}));
+  connect(limiterAHU.y, add.u2) annotation (Line(points={{-121.6,92},{-120,92},
+          {-120,93.6},{-116.8,93.6}}, color={0,0,127}));
+  connect(limiterCCAHot.y, add.u1) annotation (Line(points={{-121.6,102},{-118,
+          102},{-118,98.4},{-116.8,98.4}}, color={0,0,127}));
+  connect(Q_flow_FVU_cold.y, limiterFVUCold.u)
+    annotation (Line(points={{29.2,112},{28.8,112}}, color={0,0,127}));
+  connect(add1.y, consumerCold1.Q_flow)
+    annotation (Line(points={{7.6,106},{6.4,106},{6.4,96}}, color={0,0,127}));
+  connect(add1.u2, limiterFVUCold.y) annotation (Line(points={{16.8,108.4},{
+          16.8,110.2},{19.6,110.2},{19.6,112}}, color={0,0,127}));
+  connect(add1.u1, limiterCCACold.y) annotation (Line(points={{16.8,103.6},{18,
+          103.6},{18,102},{19.6,102}}, color={0,0,127}));
+  connect(Q_flow_CCA_cold.y, limiterCCACold.u)
+    annotation (Line(points={{29.2,102},{28.8,102}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},
