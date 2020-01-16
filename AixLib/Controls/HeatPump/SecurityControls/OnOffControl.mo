@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPump.SecurityControls;
+﻿within AixLib.Controls.HeatPump.SecurityControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   parameter Boolean use_minRunTime
@@ -13,7 +13,7 @@ model OnOffControl
     annotation (Dialog(enable=use_minLocTime));
   parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered" annotation(choices(checkBox=true));
-  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
+  parameter Integer maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(enable=use_runPerHou));
   parameter Boolean pre_n_start=true "Start value of pre(n) at initial time";
   Modelica.Blocks.Logical.GreaterThreshold
@@ -68,7 +68,7 @@ model OnOffControl
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{120,-10},{140,10}})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Interfaces.ThermalMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
   Utilities.Logical.SmoothSwitch swinOutnSet
     "If any of the ornSet conditions is true, nSet will be passed. Else nOut will stay the same"
@@ -178,6 +178,13 @@ equation
   annotation (Documentation(info="<html>
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
 <p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-120,-120},{120,100}})),
     Icon(coordinateSystem(extent={{-120,-120},{120,100}}), graphics={

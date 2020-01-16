@@ -1,10 +1,10 @@
-within AixLib.FastHVAC.Data.Boiler.General;
+﻿within AixLib.FastHVAC.Data.Boiler.General;
 record Boiler_Vitodens300W_13kW
   "Condesing boiler Viessmann Vitodens 300W 13kW, for Tv/Tr = 50/30 °C"
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitodens300W_13kW",
     volume=0.0076,
-    PressureDrop=10218000000,
+    PressureDrop=10218000000.0,
     Q_nom=16700,
     Q_min=3600,
     eta=[0.3,1.061; 1.0,0.954]);

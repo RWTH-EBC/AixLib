@@ -113,7 +113,7 @@ to avoid a warning during model check in Dymola 2015.
 August 10, 2011, by Michael Wetter:<br/>
 Changed implementation to use
 <code>Modelica.Media.Common.OneNonLinearEquation</code> instead of
-<code>Buildings.Utilities.Math.BaseClasses.OneNonLinearEquation</code>.
+<code>AixLib.Utilities.Math.BaseClasses.OneNonLinearEquation</code>.
 </li>
 <li>
 February 11, 2010, by Michael Wetter:<br/>

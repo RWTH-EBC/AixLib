@@ -55,14 +55,13 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   Modelica.SIunits.Temperature TOut;
   Modelica.SIunits.Temperature TRad;
   Modelica.SIunits.Temperature TAir;
-  AixLib.Utilities.Interfaces.Star radiative annotation (Placement(
-        transformation(extent={{22,73},{40,89}}, rotation=0)));
+  AixLib.Utilities.Interfaces.RadPort radiative annotation (Placement(transformation(extent={{22,73},{40,89}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convective
     annotation (Placement(transformation(extent={{-48,74},{-32,88}},
           rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
-    A=(s_eff*Q_dot_nom_i)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1)
-    annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=(s_eff*Q_dot_nom_i)/((
+        delta_nom)*Modelica.Constants.sigma*eps), eps=1) annotation (Placement(
+        transformation(
         origin={41,51},
         extent={{-11,-23},{11,23}},
         rotation=90)));

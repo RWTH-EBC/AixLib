@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
+﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends
@@ -21,10 +21,6 @@ model Window_ASHRAE140
 
   parameter Real g= if selectable then WindowType.g else 0.60
     "Coefficient of solar energy transmission"                                                            annotation (Dialog(group="Window type", enable = not selectable));
-  parameter Real eps_out=0.9 "emissivity of the outer surface"
-                                       annotation(Dialog(group = "Outside surface", enable = outside));
-                                       parameter Real phi= 90
-    "surface tilted angle in [degree]"                                                           annotation(Dialog(group = "Outside surface", enable = outside));
 
   BaseClasses.CorrectionSolarGain.CorG_VDI6007
     RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
@@ -32,18 +28,14 @@ model Window_ASHRAE140
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
       Placement(transformation(extent={{-10,-20},{10,0}})));
-  Utilities.HeatTransfer.HeatConv_outside
-                                        heatConv_outside(
-A=windowarea,
-Model=2,
-    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass())
-annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
-  Utilities.HeatTransfer.HeatConv_inside
-                                       heatConv_inside(
-calcMethod=2,
-alpha_custom=2,
-A=windowarea)
-annotation (Placement(transformation(extent={{68,-20},{48,2}})));
+  Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
+    A=windowarea,
+    calcMethod=2,
+    surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
+  Utilities.HeatTransfer.HeatConvInside heatConv_inside(
+    calcMethod=2,
+    hCon_const=2,
+    A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
     n=1,
     lambda={1.06},
@@ -55,13 +47,12 @@ annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar
-                                  twoStar_RadEx(
-Therm(T(start=T0)),
-Star(T(start=T0)),
-eps=WindowType.Emissivity,
-A=windowarea)              annotation (Placement(transformation(extent={{36,22},
-        {56,42}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+    Therm(T(start=T0)),
+    Star(T(start=T0)),
+    eps=WindowType.Emissivity,
+    A=windowarea)
+    annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     n=1,
     lambda={1.06},
@@ -195,7 +186,8 @@ equation
 </html>",
  revisions="<html>
  <ul>
- <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:Improved implementation of transmitted solar radiation<br/></li>
+ <li><i>November 11, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>Removed parameters phi and eps_out. This is for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/651\">#651</a>.</li>
+ <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Improved implementation of transmitted solar radiation</li>
  <li><i>February 24, 2014&nbsp;</i> by Reza Tavakoli:<br/>First implementation</li>
 </ul>
 </html>"),

@@ -11,18 +11,15 @@ model NcDataReader
     attNameReal={"float_ex"},
     attNameInt={"Region","TRY"})
     annotation (Placement(transformation(extent={{-100,-20},{-40,40}})));
+
   annotation (
     experiment(
       StopTime=3.1536e+007,
-      Interval=1800,
-      __Dymola_fixedstepsize=0.5,
-      __Dymola_Algorithm="Dassl"),
-    __Dymola_experimentSetupOutput(events=false),
-    __Dymola_experimentFlags(
-      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=true,
-      OutputCPUtime=true,
-      OutputFlatModelica=false),
+      Interval=1800),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Examples/NcDataReader_win32.mos"
+      "Add win32 binaries to PATH env variable (important with DDE)",
+      file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Examples/NcDataReader_win64.mos"
+      "Add win64 binaries to PATH env variable (important with DDE)"),
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

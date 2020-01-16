@@ -10,12 +10,18 @@ initial algorithm
     str :="# time" + delimiter;
     for i in 1:nin-1 loop
       str :=str + headerNames[i] + delimiter;
+      if mod(i+1,10)==0 then // write out buffer every 10 entries to avoid overflow
+        writeLine(filWri, str, 1);
+        str:="";
+      end if;
     end for;
     str :=str + headerNames[nin] + "\n";
     writeLine(filWri, str, 1);
   end if;
 
-  annotation (Documentation(info="<html>
+  annotation (
+  defaultComponentName="tabWri",
+  Documentation(info="<html>
 <p>This model samples the model inputs <code>u</code> and saves them to a .csv file,
 which can be read by a 
 <a href=\"modelica://Modelica.Blocks.Sources.CombiTimeTable\">
@@ -29,16 +35,16 @@ AixLib.Utilities.IO.Files.Examples.CSVReader</a>.
 <h4>Typical use and important parameters</h4>
 <p>
 The parameter <code>nin</code> defines the number of variables that are stored.
-In Dymola this variable is updated automatically when inputs are connected to the component.
+In Dymola, this parameter is updated automatically when inputs are connected to the component.
 </p>
 <p>
 The parameter <code>fileName</code> defines to what file name the results
-are stored. Results are saved in the current working directory
+are saved. The file is in the current working directory,
 unless an absolute path is provided.
 </p>
 <p>
-The parameter <code>samplePeriod</code> defines every how may seconds
-the inputs are saved to the file. 
+The parameter <code>samplePeriod</code> defines every how many seconds
+the inputs are saved to the file.
 </p>
 <h4>Options</h4>
 <p>
@@ -53,6 +59,11 @@ hence disregards the simulation tool output interval settings.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+October 17, 2019 by Filip Jorissen:<br/>
+Avoiding overflow of string buffer in dymola.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1219\">#1219</a>.
+</li>
 <li>
 July 7, 2018 by Filip Jorissen:<br/>
 First implementation.

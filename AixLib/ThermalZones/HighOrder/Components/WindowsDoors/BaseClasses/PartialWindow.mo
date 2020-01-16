@@ -9,7 +9,7 @@ partial model PartialWindow "Partial model for windows"
 annotation (Placement(
     transformation(extent={{-100,50},{-80,70}}),
         iconTransformation(extent={{-100,50},{-80,70}})));
-  Utilities.Interfaces.Star
+  Utilities.Interfaces.RadPort
                           Star
                        annotation (Placement(transformation(extent={{80,50},{
             100,70}}), iconTransformation(extent={{80,50},{100,70}})));

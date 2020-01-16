@@ -2,8 +2,10 @@ within AixLib.Fluid.FMI.ExportContainers;
 partial block ThermalZones
   "Partial block to export a model of multiple thermal zones as an FMU"
 
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    "Medium model" annotation (choicesAllMatching=true);
+  replaceable package Medium =
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
 
   parameter Integer nZon(min=1)
     "Number of thermal zones in this container";
@@ -135,11 +137,13 @@ The example
 AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ThermalZones</a>
 shows how multiple simple thermal zones can be implemented and exported as
 an FMU.
+<!-- @include_Buildings
 The example
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC\">
 AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC</a>
 shows how such an FMU can be connected
 to an HVAC system that has signal flow.
+-->
 </p>
 
 <p>
@@ -176,10 +180,13 @@ the port <code>fluPor</code> (which is negative if it is an exhaust),
 <i>T<sub>air,zon</sub></i> is the zone air temperature.
 Note that without the <i>max(&middot;, &middot;)</i>, the energy
 balance would be wrong.
-Models in the package
+For example,
+<!-- @include_Buildings
+models in the package
 <a href=\"modelica://AixLib.ThermalZones.Detailed\">
-AixLib.ThermalZones.Detailed</a>
-as well as the control volumes in
+AixLib.ThermalZones.Detailed</a> as well as
+-->
+the control volumes in
 <a href=\"modelica://AixLib.Fluid.MixingVolumes\">
 AixLib.Fluid.MixingVolumes</a>
 implement such a <i>max(&middot;, &middot;)</i> function.
@@ -206,14 +213,21 @@ All <code>nPorts</code>
 AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ThermalZones</a>.
 </p>
 <p>
+<!-- @include_Buildings
 The example
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC\">
 AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC</a>
 shows conceptually how such an FMU can then be connected to a HVAC system
 that has signal flow.
+-->
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
 <li>
 September 20, 2016, by Thierry S. Nouidui:<br/>
 Revised documentation to explain the rationale

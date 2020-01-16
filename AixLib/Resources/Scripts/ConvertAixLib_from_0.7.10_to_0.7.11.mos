@@ -1,0 +1,16 @@
+// changed defaults of surfaceorientation, calcMethod and geometrie parameters
+convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar", fill("",0),{"surfaceOrientation=1", "calcMethod=1", "h=3", "l=4"});
+convertModifiers("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", fill("",0), {"calcMethod=1"});
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.PanelHeatingSegment", fill("",0), {"calcMethod=1"});
+convertModifiers("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating", fill("",0), {"calcMethod=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv_inside", fill("",0), {"surfaceOrientation=1", "A=16", "calcMethod=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv_outside", fill("",0), {"A=16", "calcMethod=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConvInside", fill("",0), {"surfaceOrientation=1", "A=16", "calcMethod=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConvOutside", fill("",0), {"A=16", "calcMethod=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConv", fill("",0), {"A=16"});
+convertModifiers("AixLib.Utilities.HeatTransfer.CylindricHeatConduction", fill("",0), {"d_out=0.04", "d_in=0.02", "length=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.CylindricHeatTransfer", fill("",0), {"d_out=0.04", "d_in=0.02", "length=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.CylindricLoad", fill("",0), {"d_out=0.04", "d_in=0.02", "length=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatConvPipeInside", fill("",0), {"d_a=0.025", "d_i=0.02", "A_sur=2", "length=1"});
+convertModifiers("AixLib.Utilities.HeatTransfer.HeatToStar", fill("",0), {"A=12"});
+convertModifiers("AixLib.Utilities.HeatTransfer.SolarRadToHeat", fill("",0), {"A=10"});

@@ -1,19 +1,13 @@
-within AixLib.Systems.HeatPumpSystems.BaseClasses;
+﻿within AixLib.Systems.HeatPumpSystems.BaseClasses;
 model HPSystemController
   "Model including both security and HP controller"
   parameter Boolean use_secHeaGen=true "True if a bivalent setup is required" annotation(choices(checkBox=true), Dialog(
         group="System"));
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
-    "Nominal heat flow rate of second heat generator. Used to calculate input singal y."
-    annotation (Dialog(group="System", enable=use_secHeaGen), Evaluate=false);
+
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
-    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
-  parameter Boolean use_bivPar=true
-    "Switch between bivalent parallel and bivalent alternative control"
-    annotation (Dialog(group="System",enable=use_secHeaGen),choices(choice=true "Parallel",
-      choice=false "Alternativ",
-      radioButtons=true));
+    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control", group="Controller"),choicesAllMatching=true);
+
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
@@ -51,11 +45,18 @@ model HPSystemController
       tab="Heat Pump Control",
       group="Anti Legionella",
       enable=use_antLeg));
+  parameter Boolean weekly=true
+    "Switch between a daily or weekly trigger approach" annotation(Dialog(
+      tab="Heat Pump Control",
+      group="Anti Legionella",
+      enable=use_antLeg,descriptionLabel=true), choices(choice=true "Weekly",
+      choice=false "Daily",
+      radioButtons=true));
   parameter Integer trigWeekDay=5
     "Day of the week at which control is triggered" annotation (Dialog(
       tab="Heat Pump Control",
       group="Anti Legionella",
-      enable=use_antLeg));
+      enable=use_antLeg and weekly));
   parameter Integer trigHour=3 "Hour of the day at which control is triggered"
     annotation (Dialog(
       tab="Heat Pump Control",
@@ -70,21 +71,21 @@ model HPSystemController
   parameter Boolean use_minRunTime=false
     "False if minimal runtime of HP is not considered"
     annotation (Dialog(enable=use_sec, tab="Security Control", group="On-/Off Control", descriptionLabel = true), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minRunTime=12000
+  parameter Modelica.SIunits.Time minRunTime=300
     "Minimum runtime of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minRunTime), Evaluate=false);
   parameter Boolean use_minLocTime=false
     "False if minimal locktime of HP is not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Modelica.SIunits.Time minLocTime=600
+  parameter Modelica.SIunits.Time minLocTime=300
     "Minimum lock time of heat pump"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_minLocTime), Evaluate=false);
-  parameter Boolean use_runPerHou=use_runPerHou
+  parameter Boolean use_runPerHou
     "False if maximal runs per hour of HP are not considered"
     annotation (Dialog(tab="Security Control", group="On-/Off Control", descriptionLabel = true, enable=use_sec), choices(checkBox=true));
-  parameter Real maxRunPerHou=5
+  parameter Integer maxRunPerHou=3
                               "Maximal number of on/off cycles in one hour"
     annotation (Dialog(tab="Security Control", group="On-/Off Control",
       enable=use_sec and use_runPerHou), Evaluate=false);
@@ -99,24 +100,14 @@ model HPSystemController
     annotation (Dialog(tab="Security Control", group="Operational Envelope",
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
   parameter Boolean use_opeEnvFroRec=true
-    "Use a the operational envelope given in the datasheet" annotation (Dialog(
+    "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
+  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+    dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
       tab="Security Control",
       group="Operational Envelope",
-      enable=use_sec and use_opeEnv,
-      descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable
-    "Data Table of HP" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and use_opeEnvFroRec),choicesAllMatching=true);
-  parameter Real tableUpp[:,2] "Upper boundary of envelope" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
-  parameter Real tableLow[:,2] "Lower boundary of envelope" annotation (Dialog(
-      tab="Security Control",
-      group="Operational Envelope",
-      enable=use_sec and use_opeEnv and not use_opeEnvFroRec));
+      enable=use_opeEnvFroRec));
+  parameter Real tableUpp[:,2] "Table matrix (grid = first column; e.g., table=[0,2])"
+    annotation (Dialog(tab="Security Control", group="Operational Envelope", enable=not use_opeEnvFroRec));
   parameter Boolean use_deFro=true "False if defrost in not considered"
                                     annotation (choices(checkBox=true), Dialog(
         tab="Security Control",group="Defrost", descriptionLabel = true, enable=use_sec));
@@ -125,18 +116,23 @@ model HPSystemController
       tab="Security Control",
       group="Defrost",
       enable=use_sec and use_deFro));
+  parameter Real deltaIceFac = 0.1 "Bandwitdth for hystereses. If the icing factor is based on the duration of defrost, this value is necessary to avoid state-events."
+  annotation (Dialog(
+      tab="Security Control",
+      group="Defrost",
+      enable=use_sec and use_deFro));
   parameter Boolean use_chiller=false
-    "True if ice is defrost operates by changing mode to cooling. False to use an electrical heater"
+    "True if defrost operates by changing mode to cooling. False to use an electrical heater"
     annotation (Dialog(
       tab="Security Control",
       group="Defrost",
       enable=use_sec and use_deFro), choices(checkBox=true));
   parameter Modelica.SIunits.Power calcPel_deFro
-    "Calculate how much eletrical energy is used to melt ice. Insert a formular"
+    "Calculate how much eletrical energy is used to melt ice"
     annotation (Dialog(
       tab="Security Control",
       group="Defrost",
-      enable=use_sec and use_deFro and use_chiller));
+      enable=use_sec and use_deFro and not use_chiller));
   parameter Boolean use_antFre=false
     "True if anti freeze control is part of security control" annotation (
       Dialog(
@@ -163,16 +159,13 @@ model HPSystemController
     final calcPel_deFro=calcPel_deFro,
     final use_antFre=use_antFre,
     final TantFre=TantFre,
-    final tableLow=tableLow,
     final tableUpp=tableUpp,
     final use_opeEnvFroRec=use_opeEnvFroRec,
     final dataTable=dataTable) if         use_sec
     annotation (Placement(transformation(extent={{8,-16},{48,24}})));
   Controls.HeatPump.HPControl hPControls(
     final use_antLeg=use_antLeg,
-    final use_bivPar=use_bivPar,
     final use_secHeaGen=use_secHeaGen,
-    final Q_flow_nominal=Q_flow_nominal,
     redeclare final model TSetToNSet = TSetToNSet,
     final heatingCurveRecord=heatingCurveRecord,
     final declination=declination,
@@ -186,22 +179,20 @@ model HPSystemController
     final use_tableData=use_tableData,
     redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.calcCOP calcCOP(final lowBouPel=200) if
-    use_calcCOP
+  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.calcCOP calcCOP(
+      final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
-  Modelica.Blocks.Sources.RealExpression calcQHeat(y=sigBusHP.m_flow_co*(TSup
-         - sigBusHP.T_flow_co)*4180) if use_calcCOP
+  Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
     "Calculates the heat flow added to the source medium"
-    annotation (Placement(transformation(extent={{-90,78},{-66,96}})));
+    annotation (Placement(transformation(extent={{-80,82},{-64,98}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not use_sec
                                                                       "No 1. Layer"
     annotation (Placement(transformation(extent={{20,34},{34,48}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}})));
-  Controls.Interfaces.HeatPumpControlBus
-                           sigBusHP
-    annotation (Placement(transformation(extent={{-122,-70},{-92,-36}}),
-        iconTransformation(extent={{-110,-62},{-92,-36}})));
+  Controls.Interfaces.ThermalMachineControlBus sigBusHP annotation (Placement(
+        transformation(extent={{-122,-70},{-92,-36}}), iconTransformation(
+          extent={{-110,-62},{-92,-36}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature of HP system"
     annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
@@ -229,11 +220,11 @@ model HPSystemController
     annotation (Placement(transformation(extent={{14,-14},{-14,14}},
         rotation=90,
         origin={-80,-114})));
-  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1) if use_calcCOP
+  Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  Fluid.HeatPumps.BaseClasses.PerformanceData.IcingBlock icingBlock(redeclare
-      final function iceFunc =
-        Fluid.HeatPumps.BaseClasses.Functions.IcingFactor.BasicIcingApproach)
+  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.IcingBlock
+    icingBlock(redeclare final function iceFunc =
+        DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.BasicIcingApproach)
     if use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Interfaces.RealOutput iceFac_out
@@ -243,8 +234,13 @@ model HPSystemController
         origin={114,80})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
     annotation (Placement(transformation(extent={{44,56},{60,72}})));
-  parameter Boolean use_calcCOP=true
-    "Only relevant for Carnot system simulation";
+
+  Modelica.Blocks.Routing.BooleanPassThrough booleanPassThroughMode if not
+    use_sec "Pass through for mode signal"
+    annotation (Placement(transformation(extent={{22,-38},{34,-26}})));
+
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_con=4180
+    "specific heat capacity of condenser medium";
 equation
   connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-114,1.77636e-15},
           {-92,1.77636e-15},{-92,2.8},{-71.8,2.8}},
@@ -258,8 +254,9 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(hPControls.modeOut,securityControl. modeSet) annotation (Line(points={{-27.34,
-          0},{5.33333,0}},                                               color={
-          255,0,255}));
+          0},{5.33333,0}},                                               color={255,0,
+          255},
+      pattern=LinePattern.Dash));
   connect(sigBusHP,hPControls. sigBusHP) annotation (Line(
       points={{-107,-53},{-80,-53},{-80,-7.6},{-68.38,-7.6}},
       color={255,204,51},
@@ -276,9 +273,6 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(calcQHeat.y,calcCOP. QHeat) annotation (Line(points={{-64.8,87},{
-          -54.4,87},{-54.4,83.6},{-48.6,83.6}},
-                                           color={0,0,127}));
   connect(TSup, hPControls.TSup) annotation (Line(points={{-114,40},{-80,40},{
           -80,14.8},{-71.8,14.8}},
                                color={0,0,127}));
@@ -293,7 +287,8 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(securityControl.modeOut, modeOut) annotation (Line(points={{49.6667,0},
-          {62,0},{62,-58},{-40,-58},{-40,-114}}, color={255,0,255}));
+          {62,0},{62,-58},{-40,-58},{-40,-114}}, color={255,0,255},
+      pattern=LinePattern.Dash));
   connect(hPControls.ySecHeaGen, ySecHeaGen) annotation (Line(points={{-49.76,
           -16.8},{-49.76,-44},{40,-44},{40,-114}},
                                             color={0,0,127}));
@@ -301,8 +296,8 @@ equation
           {-38,-40},{80,-40},{80,-114}}, color={0,0,127}));
   connect(hPControls.y_sou, y_sou) annotation (Line(points={{-61.16,-16},{-62,
           -16},{-62,-58},{-80,-58},{-80,-114}},       color={0,0,127}));
-  connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-48,70},
-          {-48,72.4},{-48.6,72.4}},
+  connect(multiSum.y, calcCOP.Pel) annotation (Line(points={{-64.98,70},{-56,70},
+          {-56,72},{-48,72},{-48,72.4},{-48.6,72.4}},
                                  color={0,0,127}));
   connect(securityControl.Pel_deFro, multiSum.u[1]) annotation (Line(
       points={{49.6667,20},{54,20},{54,26},{-80,26},{-80,70},{-78,70}},
@@ -366,14 +361,48 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(hPControls.modeOut, booleanPassThroughMode.u) annotation (Line(
+      points={{-27.34,0},{-10,0},{-10,-32},{20.8,-32}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(booleanPassThroughMode.y, modeOut) annotation (Line(
+      points={{34.6,-32},{62,-32},{62,-58},{-40,-58},{-40,-114}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(calcQHeat.Q_flow, calcCOP.QHeat) annotation (Line(points={{-63.2,90},
+          {-56,90},{-56,83.6},{-48.6,83.6}}, color={0,0,127}));
+  connect(sigBusHP.m_flow_co, calcQHeat.m_flow) annotation (Line(
+      points={{-106.925,-52.915},{-94,-52.915},{-94,94.8},{-81.6,94.8}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.T_ret_co, calcQHeat.T_a) annotation (Line(
+      points={{-106.925,-52.915},{-94,-52.915},{-94,89.2},{-81.6,89.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.T_flow_co, calcQHeat.T_b) annotation (Line(
+      points={{-106.925,-52.915},{-94,-52.915},{-94,84.4},{-81.6,84.4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                                                     Rectangle(
-          extent={{100,100},{-100,-100}},
-          lineColor={135,135,135},
+        Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={28,108,200},
           fillColor={255,255,170},
-          fillPattern=FillPattern.Solid,
-          lineThickness=1), Text(
-          extent={{-100,28},{100,-16}},
+          fillPattern=FillPattern.Solid),
+                            Text(
+          extent={{-100,26},{100,-18}},
           lineColor={0,0,127},
           pattern=LinePattern.Dash,
           fillColor={255,255,170},
@@ -398,5 +427,25 @@ equation
           pattern=LinePattern.Dash,
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
-          textString="Icing Factor")}));
+          textString="Icing Factor")}),
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+  This system controller aggregates the heat pump controller and
+  relevant security controls from <a href=
+  \"modelica://AixLib.Controls.HeatPump\">AixLib.Controls.HeatPump</a> to
+  control the heat pump based on an ambient temperature and the current
+  supply temperature.
+</p>
+<p>
+  Further, the COP is calculated. The icing factor used for air-source
+  heat pumps is added to simulate defrost cycles.
+</p>
+</html>"));
 end HPSystemController;

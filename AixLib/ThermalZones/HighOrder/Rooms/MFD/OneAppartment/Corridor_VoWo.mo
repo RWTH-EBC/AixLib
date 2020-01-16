@@ -1,6 +1,5 @@
-﻿within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment;
+within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneAppartment;
 model Corridor_VoWo "Corridor from the VoWo appartment"
-  import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Corridor.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
@@ -11,10 +10,14 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
   parameter Integer Floor = 1 "Floor" annotation(Dialog(group = "Floor", compact = true, descriptionLabel = true), choices(choice = 1 "GF", choice = 2 "1F", choice = 3 "2F", radioButtons = true));
   // Outer walls properties
   parameter Real solar_absorptance_OW = 0.7 "Solar absoptance outer walls " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Integer ModelConvOW = 1 "Heat Convection Model" annotation(Dialog(group = "Outer wall properties", compact = true, descriptionLabel = true), choices(choice = 1
-        "DIN 6946",                                                                                                    choice = 2
-        "ASHRAE Fundamentals",                                                                                                    choice = 3
-        "Custom alpha",                                                                                                    radioButtons = true));
+  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+      group="Outer wall properties",
+      compact=true,
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   //Initial temperatures
   parameter Modelica.SIunits.Temperature T0_air = 290.15 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_Staircase = 288.15 "IWStaircase" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
@@ -194,7 +197,10 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-110, -140}, {-90, -120}}), iconTransformation(extent = {{-110, -140}, {-90, -120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermLivingroom annotation(Placement(transformation(extent = {{-112, 10}, {-92, 30}}), iconTransformation(extent = {{-112, 10}, {-92, 30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermChild annotation(Placement(transformation(extent = {{-112, -20}, {-92, 0}}), iconTransformation(extent = {{-112, -20}, {-92, 0}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {46, -26})));
+  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+        extent={{-10,8},{10,-8}},
+        rotation=90,
+        origin={46,-26})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
@@ -214,39 +220,32 @@ protected
   parameter Modelica.SIunits.Volume room_V = 5.73 * 2.46;
 equation
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-18, 73}, {0, 73}, {0, -4}, {-13, -4}}, color = {191, 0, 0}));
-  connect(Wall_Staircase.port_outside, thermStaircase) annotation(Line(points={{112.2,
-          -32},{140,-32},{140,-130},{-80,-130},{-80,80},{-102,80}},                                                                                          color = {191, 0, 0}));
-  connect(Wall_Kitchen2.port_outside, thermKitchen) annotation(Line(points={{52,
-          -68.25},{52,-130},{-80,-130},{-80,50},{-102,50}},                                                                                  color = {191, 0, 0}));
+  connect(Wall_Staircase.port_outside, thermStaircase) annotation(Line(points={{112.2,-32},{140,-32},{140,-130},{-80,-130},{-80,80},{-102,
+          80}},                                                                                                                                              color = {191, 0, 0}));
+  connect(Wall_Kitchen2.port_outside, thermKitchen) annotation(Line(points={{52,-68.25},{52,-130},{-80,-130},{-80,50},{-102,50}},            color = {191, 0, 0}));
   connect(infiltrationRate.port_a, thermStaircase) annotation(Line(points = {{-44, 73}, {-80, 73}, {-80, 80}, {-102, 80}}, color = {191, 0, 0}));
   connect(Wall_Kitchen1.port_outside, thermKitchen) annotation(Line(points = {{0.1, -74}, {20, -74}, {20, -130}, {-80, -130}, {-80, 50}, {-102, 50}}, color = {191, 0, 0}));
-  connect(Wall_Bath.port_outside, thermBath) annotation(Line(points={{-20,
-          -102.15},{-20,-130},{-80,-130},{-80,-40},{-100,-40}},                                                                            color = {191, 0, 0}));
+  connect(Wall_Bath.port_outside, thermBath) annotation(Line(points={{-20,-102.15},{-20,-130},{-80,-130},{-80,-40},{-100,-40}},            color = {191, 0, 0}));
   connect(Wall_Bedroom.port_outside, thermBedroom) annotation(Line(points = {{-66.3, -34}, {-80, -34}, {-80, -70}, {-100, -70}}, color = {191, 0, 0}));
   connect(Wall_Ceiling.port_outside, thermCeiling) annotation(Line(points = {{117, 82.1}, {117, 96}, {140, 96}, {140, -130}, {-80, -130}, {-80, -100}, {-100, -100}}, color = {191, 0, 0}));
-  connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points={{118,
-          51.85},{118,36},{140,36},{140,-130},{-100,-130}},                                                                              color = {191, 0, 0}));
-  connect(Wall_Livingroom.port_outside, thermLivingroom) annotation(Line(points={{-28,
-          28.2},{-28,52},{-80,52},{-80,20},{-102,20}},                                                                                        color = {191, 0, 0}));
-  connect(Wall_Children.port_outside, thermChild) annotation(Line(points={{46,28.2},
-          {46,52},{-80,52},{-80,-10},{-102,-10}},                                                                                      color = {191, 0, 0}));
-  connect(Wall_Kitchen2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{52,-58},
-          {52,-44.0875},{45.9,-44.0875},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{104,-32},
-          {94,-32},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Kitchen1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-4, -74}, {-14, -74}, {-14, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}));
-  connect(Wall_Bath.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-20,-96},
-          {-20,-80},{-14,-80},{-14,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Bedroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-54, -34}, {-40, -34}, {-40, -80}, {-14, -80}, {-14, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}));
-  connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-28,20},
-          {-28,12},{-40,12},{-40,-80},{-14,-80},{-14,-44},{45.9,-44},{45.9,
-          -35.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Children.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{46,20},
-          {46,10},{94,10},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{118,58},
-          {118,64},{94,64},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{117, 78}, {117, 64}, {94, 64}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}));
-  connect(airload.port, thermStar_Demux.therm) annotation(Line(points = {{-13, -4}, {40.9, -4}, {40.9, -15.9}}, color = {191, 0, 0}));
+  connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points={{118,51.85},{118,36},{140,36},{140,-130},{-100,-130}},            color = {191, 0, 0}));
+  connect(Wall_Livingroom.port_outside, thermLivingroom) annotation(Line(points={{-28,28.2},{-28,52},{-80,52},{-80,20},{-102,20}},            color = {191, 0, 0}));
+  connect(Wall_Children.port_outside, thermChild) annotation(Line(points={{46,28.2},{46,52},{-80,52},{-80,-10},{-102,-10}},            color = {191, 0, 0}));
+  connect(Wall_Kitchen2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{52,-58},{52,-44.0875},{47.3,
+          -44.0875},{47.3,-35.8}},                                                                                                                            color={191,0,0}));
+  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{104,-32},{94,-32},{94,-44},{47.3,
+          -44},{47.3,-35.8}},                                                                                                                                  color={191,0,0}));
+  connect(Wall_Kitchen1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-4,-74},{-14,-74},{-14,-44},{47.3,-44},{47.3,-35.8}}, color={191,0,0}));
+  connect(Wall_Bath.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-20,-96},{-20,-80},{-14,-80},{-14,-44},
+          {47.3,-44},{47.3,-35.8}},                                                                                                                                   color={191,0,0}));
+  connect(Wall_Bedroom.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-54,-34},{-40,-34},{-40,-80},{-14,-80},{-14,-44},{47.3,-44},{47.3,-35.8}}, color={191,0,0}));
+  connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-28,20},{-28,12},{-40,12},{-40,-80},{-14,-80},{-14,-44},{47.3,-44},{47.3,-35.8}}, color={191,0,0}));
+  connect(Wall_Children.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{46,20},{46,10},{94,10},{94,-44},{
+          47.3,-44},{47.3,-35.8}},                                                                                                                                 color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{118,58},{118,64},{94,64},{94,-44},{
+          47.3,-44},{47.3,-35.8}},                                                                                                                                color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{117,78},{117,64},{94,64},{94,-44},{47.3,-44},{47.3,-35.8}}, color={191,0,0}));
+  connect(airload.port, thermStar_Demux.portConv) annotation (Line(points={{-13,-4},{40.9,-4},{40.9,-15.9}}, color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-26, 6}, {82, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Corridor"), Rectangle(extent = {{-110, -120}, {-90, -140}}, lineColor = {0, 0, 0},

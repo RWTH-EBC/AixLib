@@ -388,7 +388,7 @@ algorithm
        heatSupplierTable[cheapest,2] := 1;
        heatingCalculationSum := heatingCalculationSum + heatSupplierTable[cheapest,6];
        heatingPriceSum := heatingPriceSum + heatSupplierTable[cheapest,6]*heatSupplierTable[cheapest,5];
-       heatSupplierTable[cheapest,7] := 9999999999;
+       heatSupplierTable[cheapest,7] := 9999999999.0;
        restHeat := heatingRequestSum - heatingCalculationSum;
 
      end while;
@@ -469,7 +469,7 @@ algorithm
        heatSupplierTable[cheapest,2] := 1; //setting approve for supplier
        heatingCalculationSum := heatingCalculationSum + heatSupplierTable[cheapest,6]; //saving the amount of heat that is approved already
        heatingPriceSum := heatingPriceSum + heatSupplierTable[cheapest,6]*heatSupplierTable[cheapest,5]; //saving the the total price of the heat so far
-       heatSupplierTable[cheapest,7] := 9999999999; //setting the price high, so the next cheapest producer can be found in the next loop
+       heatSupplierTable[cheapest,7] := 9999999999.0; //setting the price high, so the next cheapest producer can be found in the next loop
        restHeat := heatingRequestSum - heatingCalculationSum; //calculating the amount of heat that still needs to be approved in the next loop
 
      end while;

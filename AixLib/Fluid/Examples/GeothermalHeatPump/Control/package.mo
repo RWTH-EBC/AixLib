@@ -1,6 +1,6 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump;
 package Control "Contains controllers that are specific for this example"
-  
+
 annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},

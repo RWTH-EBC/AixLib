@@ -18,8 +18,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
     annotation (Placement(transformation(extent={{-54,-96},{-42,-84}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature[9]
     annotation (Placement(transformation(extent={{-36,-58},{-24,-46}})));
-  Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb[9] annotation (
-      Placement(transformation(
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[9] annotation (Placement(transformation(
         extent={{10,-8},{-10,8}},
         rotation=0,
         origin={-24,-16})));
@@ -53,7 +52,7 @@ equation
       points={{-49,-52},{-37.2,-52}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(prescribedTemperature.port,heatStarToComb. therm) annotation (Line(
+  connect(prescribedTemperature.port, heatStarToComb.portConv) annotation (Line(
       points={{-24,-52},{-16,-52},{-16,-30},{-38,-30},{-38,-21.1},{-34.1,-21.1}},
       color={191,0,0},
       smooth=Smooth.None));
@@ -115,13 +114,10 @@ equation
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
     annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.24},{39.2,34.24}},
         color={255,128,0}));
-  connect(heatStarToComb.thermStarComb, wholeHouseBuildingEnvelope.heatingToRooms)
-    annotation (Line(points={{-14.6,-16.1},{-6,-16.1},{-6,-8},{-11.2,-8},{-11.2,
-          7.92}}, color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-14.6,-16.1},{-6,-16.1},{-6,-8},{-11.2,-8},{-11.2,7.92}}, color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
      Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
-  connect(prescribedHeatFlowRad.port, heatStarToComb.star) annotation (Line(
-        points={{-48,-18},{-44,-18},{-44,-10.2},{-34.4,-10.2}}, color={191,0,0}));
+  connect(prescribedHeatFlowRad.port, heatStarToComb.portRad) annotation (Line(points={{-48,-18},{-44,-18},{-44,-10.2},{-34.4,-10.2}}, color={191,0,0}));
   connect(adiabaticRadRooms.y, prescribedHeatFlowRad.Q_flow)
     annotation (Line(points={{-73.2,-18},{-60,-18}}, color={0,0,127}));
   annotation (Diagram(graphics={

@@ -19,11 +19,11 @@ protected
     "Square of normalised mass flow rate";
 
 algorithm
- dp :=if noEvent(abs(m_flow)>m_flow_turbulent)
+ dp := smooth(2, if noEvent(abs(m_flow)>m_flow_turbulent)
       then sign(m_flow)*(m_flow/k)^2
-      else (0.375 + (0.75-0.125*m_flowNormSq)*m_flowNormSq)*dp_turbulent*m_flowNorm;
+      else (0.375 + (0.75-0.125*m_flowNormSq)*m_flowNormSq)*dp_turbulent*m_flowNorm);
 
- annotation (LateInline=true,
+ annotation (Inline=false,
              smoothOrder=2,
              derivative(order=1, zeroDerivative=k, zeroDerivative=m_flow_turbulent)=
                AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der,
@@ -59,6 +59,18 @@ The input <code>m_flow_turbulent</code> determines the location of the regulariz
 </html>",
 revisions="<html>
 <ul>
+<li>
+December 9, 2019, by Michael Wetter:<br/>
+Added <code>smooth(2, . )</code>, similar to
+<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp\">
+AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp</a>.<br/>
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1240\">#1240</a>.
+</li>
+<li>
+January 4, 2019, by Michael Wetter:<br/>
+Set `Inline=false`.<br/>
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1070\">#1070</a>.
+</li>
 <li>
 May 1, 2017, by Filip Jorissen:<br/>
 Revised implementation such that

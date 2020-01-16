@@ -1,15 +1,13 @@
-within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
-  parameter Real maxRunPer_h "Number of maximal on/off cycles per hour";
+  parameter Integer maxRunPer_h "Number of maximal on/off cycles per hour";
   parameter Modelica.SIunits.Time delayTime(displayUnit="h") = 3600
     "Delay time of output with respect to input signal";
- Modelica.Blocks.Logical.Less runCouLesMax
+ Modelica.Blocks.Logical.LessThreshold
+                              runCouLesMax(threshold=maxRunPer_h)
     "Checks if the count of total runs is lower than the maximal value"
     annotation (Placement(transformation(extent={{74,-8},{90,8}})));
-  Modelica.Blocks.Sources.Constant inputRunPerHou(final k=maxRunPer_h)
-    "Maximal number of on/off cycles in one hour"
-    annotation (Placement(transformation(extent={{44,-22},{60,-6}})));
   Modelica.Blocks.MathInteger.TriggeredAdd triggeredAdd
     annotation (Placement(transformation(extent={{-36,6},{-24,-6}})));
   Modelica.Blocks.Sources.IntegerConstant intConPluOne(final k=1)
@@ -23,16 +21,12 @@ block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
           "h") = delayTime)
                annotation (Placement(transformation(extent={{14,-14},{24,-4}})));
 equation
-  connect(inputRunPerHou.y, runCouLesMax.u2) annotation (Line(points={{60.8,-14},
-          {66,-14},{66,-6.4},{72.4,-6.4}}, color={0,0,127}));
   connect(intConPluOne.y, triggeredAdd.u)
     annotation (Line(points={{-49.4,0},{-38.4,0}}, color={255,127,0}));
   connect(intToReal.u, triggeredAdd.y)
     annotation (Line(points={{-15.2,0},{-22.8,0}}, color={255,127,0}));
   connect(intToReal.y, sub.u1) annotation (Line(points={{-1.4,0},{0.15,0},{0.15,
           12.8},{42.4,12.8}}, color={0,0,127}));
-  connect(sub.y, runCouLesMax.u1) annotation (Line(points={{60.8,8},{66,8},{66,
-          0},{72.4,0}}, color={0,0,127}));
   connect(intToReal.y, fixedDelay.u)
     annotation (Line(points={{-1.4,0},{0,0},{0,-9},{13,-9}}, color={0,0,127}));
   connect(fixedDelay.y, sub.u2) annotation (Line(points={{24.5,-9},{34,-9},{34,3.2},
@@ -41,6 +35,8 @@ equation
     annotation (Line(points={{90.8,0},{110,0},{110,0}}, color={255,0,255}));
   connect(u, triggeredAdd.trigger) annotation (Line(points={{-120,0},{-82,0},{
           -82,24},{-33.6,24},{-33.6,7.2}}, color={255,0,255}));
+  connect(sub.y, runCouLesMax.u) annotation (Line(points={{60.8,8},{68,8},{68,0},
+          {72.4,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                 Rectangle(
         extent={{-100,-100},{100,100}},
@@ -69,5 +65,12 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>Everytime the boolean input signal has a rising edge, a counter is triggered and adds 1 to the total sum. This represents an on-turning of a certain device. With a delay this number is being substracted again, as this block counts the number of rising edges in a given amount of time(e.g. 1 hour). If this value is higher than a given maximal value, the output turns to false.</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
+First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+</li>
+</ul>
 </html>"));
 end RunPerHouBoundary;
