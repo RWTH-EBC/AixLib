@@ -60,6 +60,7 @@ First implementation.
 <p>This function calculates the Sherwood number for a rectangular duct according to Muzychka and Yovanovich [1].</p>
 <p><br>The dimensionless length zStern as input has to be calculated as follows.</p>
 <p align=\"center\"><i>zStern = (s<sub>duct</sub> &frasl; &radic;A<sub>cross-section</sub> ) &frasl; (Re Pr ) </i></p>
-<p><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts ; Transactions of the ASME; Vol. 126; February 2004</p>
+<h4>References</h4>
+<p>[1]: Muzychka, Y. S.; Yovanovich, M. M. : Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts ; Transactions of the ASME; Vol. 126; February 2004</p>
 </html>"));
 end SherwoodNumberMuzychka;

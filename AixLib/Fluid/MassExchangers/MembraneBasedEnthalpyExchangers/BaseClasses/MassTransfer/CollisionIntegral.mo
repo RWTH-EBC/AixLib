@@ -45,7 +45,7 @@ algorithm
 <p align=\"center\"><i>&Omega; = f(k<sub>B</sub> T &frasl; &epsilon;<sub>12</sub>)</i></p>
 </html>", revisions="<html>
 <ul>
-<li>June 15, 2018, by Martin Kremer:<br>First Implementation</li>
+<li>June 15, 2018, by Martin Kremer:<br/>First Implementation</li>
 </ul>
 </html>"));
 end CollisionIntegral;

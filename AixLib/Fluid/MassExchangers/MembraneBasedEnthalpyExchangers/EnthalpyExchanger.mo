@@ -25,7 +25,7 @@ model EnthalpyExchanger
 
   // Geometry
   parameter Modelica.SIunits.Length lengthDuct
-    "length of airDucts in flow direction"
+    "length of ducts in flow direction"
     annotation(Dialog(tab="AirDucts",group="Geometry"));
   parameter Modelica.SIunits.Length heightDuct
     "height of ducts"
@@ -63,7 +63,7 @@ model EnthalpyExchanger
   parameter Modelica.SIunits.Length widthMembrane=widthDuct
     "width of membranes"
     annotation(Dialog(enable=false,tab="Membranes",group="Geometry"));
-  parameter Modelica.SIunits.Length deltaMembrane
+  parameter Modelica.SIunits.Length thicknessMembrane
     "thickness of membranes"
     annotation(Dialog(tab="Membranes",group="Geometry"));
   parameter Modelica.SIunits.SpecificHeatCapacity heatCapacityMembrane
@@ -108,7 +108,7 @@ model EnthalpyExchanger
 
   parameter Medium.Temperature T_start=Medium.T_default
     "Start value of temperature"
-    annotation(Evaluate=true, Dialog(tab = "Initialization", enable = use_T_start));
+    annotation(Evaluate=true, Dialog(tab = "Initialization"));
   parameter Modelica.SIunits.Pressure p_start = Medium.p_default
     "reference pressure"
     annotation(Evaluate=true, Dialog(tab = "Initialization"));
@@ -174,7 +174,7 @@ model EnthalpyExchanger
     final nParallel=nParallel,
     final lengthMembrane=lengthMembrane,
     final widthMembrane=widthMembrane,
-    final deltaMembrane=deltaMembrane,
+    final thicknessMembrane=thicknessMembrane,
     final heatCapacityMembrane=heatCapacityMembrane,
     final lambdaMembrane=lambdaMembrane,
     final rhoMembrane=rhoMembrane,
@@ -256,7 +256,7 @@ equation
 <li>Heat and mass transfer are resolved locally by defining the paramter <span style=\"font-family: Courier New;\">n</span>. <br>The higher the number of segments are, the better the accuracy, but also the higher the simulation time.<br>Please note, that using a highly distributed air duct the Nusselt/ Sherwood number needs to be calculated locally (see parameters for heat and mass transfer).</li>
 <li>By using the parameter <span style=\"font-family: Courier New;\">nParallel</span> a parallel arrangement of several membrane and air ducts can be realized.</li>
 <li>The air ducts in membrane-based enthalpy exchangers are normally divided in width by webs that provide mechanical stability.<br>This subdivision influences the heat and mass transfer. This is represented by the parameter <span style=\"font-family: Courier New;\">nWidth</span>. If this effect should be neglected set <span style=\"font-family: Courier New;\">nWidth</span> to one.</li>
-<li>The membrane model summarizes the complete membrane structure consisting of the thin membrane layer and the supportive layer as producers normally declare the overall thickness.<br>Therefore, reasonable values for the parameter <span style=\"font-family: Courier New;\">deltaMembrane</span> lie in between 10 to 300 &mu;m. </li>
+<li>The membrane model summarizes the complete membrane structure consisting of the thin membrane layer and the supportive layer as producers normally declare the overall thickness.<br>Therefore, reasonable values for the parameter <span style=\"font-family: Courier New;\">thicknessMembrane</span> lie in between 10 to 300 &mu;m. </li>
 <li>The permeability describes the water transport through the membrane. It is given in the unit <i>Barrer</i>. Values in the order of <i>1E5</i> till <i>1E8</i> are reasonable.</li>
 </ul>
 <h4>References</h4>
@@ -267,12 +267,12 @@ equation
 <p>Please note, that the heat and mass transfer models implemented in this model only provide accurate transfer models for laminar flow, which is common for enthalpy exchangers.</p>
 </html>", revisions="<html>
 <ul>
-<li>April 23, 2019, by Martin Kremer:<br>Adding heat capacitor for the housing of the enthalpy exchangers.</li>
-<li>January 16, 2019, by Martin Kremer:<br>Redeclaring sub model parameters as final. Enabling air duct models for changes on top level.</li>
-<li>November 23, 2018, by Martin Kremer:<br>Adding model for adsorption enthalpy. Adding humidity sensor needed for adsoprtion model.</li>
-<li>November 20, 2018, by Martin Kremer:<br>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
-<li>November 5,2018 by Martin Kremer:<br>Correcting error in calculation of heat and mass flow with cross flow coefficient.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>April 23, 2019, by Martin Kremer:<br/>Adding heat capacitor for the housing of the enthalpy exchangers.</li>
+<li>January 16, 2019, by Martin Kremer:<br/>Redeclaring sub model parameters as final. Enabling air duct models for changes on top level.</li>
+<li>November 23, 2018, by Martin Kremer:<br/>Adding model for adsorption enthalpy. Adding humidity sensor needed for adsoprtion model.</li>
+<li>November 20, 2018, by Martin Kremer:<br/>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
+<li>November 5,2018 by Martin Kremer:<br/>Correcting error in calculation of heat and mass flow with cross flow coefficient.</li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end EnthalpyExchanger;

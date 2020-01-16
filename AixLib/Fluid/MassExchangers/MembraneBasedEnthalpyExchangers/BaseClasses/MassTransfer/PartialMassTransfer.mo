@@ -48,7 +48,7 @@ the boundary mass fractions <code>massPorts[n].X</code>, and the mass flow rates
 </p>
 </html>", revisions="<html>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end PartialMassTransfer;

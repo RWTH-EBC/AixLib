@@ -13,7 +13,7 @@ model Membrane "model of membrane"
   parameter Modelica.SIunits.Length widthMembrane
     "width of membrane"
     annotation(Dialog(tab="Geometry"));
-  parameter Modelica.SIunits.Length deltaMembrane
+  parameter Modelica.SIunits.Length thicknessMembrane
     "thickness of membrane"
     annotation(Dialog(tab="Geometry"));
   parameter Modelica.SIunits.SpecificHeatCapacity heatCapacityMembrane
@@ -58,7 +58,7 @@ model Membrane "model of membrane"
     "mass transfer model in membrane";
 
   HeatTransfer heatTransfer(
-    deltaMembrane=deltaMembrane,
+    thicknessMembrane=thicknessMembrane,
     lambdaMembrane=lambdaMembrane,
     lengthMembrane=lengthMembrane,
     widthMembrane=widthMembrane,
@@ -70,7 +70,7 @@ model Membrane "model of membrane"
     n=nNodes);
 
   MassTransfer massTransfer(
-    deltaMembrane=deltaMembrane,
+    thicknessMembrane=thicknessMembrane,
     lengthMembrane=lengthMembrane,
     widthMembrane=widthMembrane,
     rhoMembrane=rhoMembrane,

@@ -13,7 +13,7 @@ model MembraneHeatTransfer
     "length of membrane in flow direction";
   parameter Modelica.SIunits.Length widthMembrane
     "width of membrane";
-  parameter Modelica.SIunits.Length deltaMembrane
+  parameter Modelica.SIunits.Length thicknessMembrane
     "thickness of membrane";
   parameter Modelica.SIunits.ThermalConductivity lambdaMembrane
     "thermal conductivity of membrane";
@@ -23,7 +23,7 @@ model MembraneHeatTransfer
     "mass weighted heat capacity of membrane";
 
   parameter Modelica.SIunits.Mass massMembrane=
-    rhoMembrane*(lengthMembrane*widthMembrane*deltaMembrane)*nParallel
+    rhoMembrane*(lengthMembrane*widthMembrane*thicknessMembrane)*nParallel
     "mass of membrane"
     annotation (Dialog(enable=false));
   parameter Modelica.SIunits.Area areaMembrane=
@@ -81,9 +81,9 @@ equation
       heatCapacityMembrane*m[i]*der(Ts[i]) =
         heatPorts_a[i].Q_flow + heatPorts_b[i].Q_flow;
     end if;
-    heatPorts_a[i].Q_flow = lambdaMembrane / deltaMembrane * (Ta[i]-Ts[i]) *
+    heatPorts_a[i].Q_flow = lambdaMembrane / thicknessMembrane * (Ta[i]-Ts[i]) *
       areaMembrane/n;
-    heatPorts_b[i].Q_flow = lambdaMembrane / deltaMembrane * (Tb[i]-Ts[i]) *
+    heatPorts_b[i].Q_flow = lambdaMembrane / thicknessMembrane * (Tb[i]-Ts[i]) *
       areaMembrane/n;
   end for;
 

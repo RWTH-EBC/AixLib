@@ -89,8 +89,8 @@ model AirDuct_withThermalElements "model of the air duct"
   Utilities.MassTransfer.MassPort massPorts[nNodes]
     annotation (Placement(transformation(extent={{28,88},{52,112}}),
         iconTransformation(extent={{14,72},{68,126}})));
-  Utilities.MassTransfer.PrescribedMassFraction prescribedMassFraction[nNodes]
-    annotation (Placement(transformation(extent={{82,12},{62,32}})));
+  Utilities.MassTransfer.PrescribedPartialPressure prescribedMassFraction[
+    nNodes] annotation (Placement(transformation(extent={{82,12},{62,32}})));
   Utilities.MassTransfer.MassFlowSensor massFlowSensor[nNodes] annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},

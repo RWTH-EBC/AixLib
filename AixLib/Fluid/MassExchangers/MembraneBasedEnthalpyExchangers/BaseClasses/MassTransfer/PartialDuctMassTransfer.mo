@@ -98,11 +98,12 @@ equation
 <p align=\"center\"><i>Sc = &mu; &frasl; (&rho; D ) </i></p>
 <p>The convective heat transfer coefficient is calculated as follows.</p>
 <p align=\"center\"><i>&beta; = (Sh &rho; D ) &frasl; &radic;A<sub>cross-section</sub> </i></p>
-<p><br>The diffusion coefficient of water vapour into air <i>D</i> is calculated using the function DiffusionCoefficient.</p>
-<p><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
+<p>The diffusion coefficient of water vapour into air <i>D</i> is calculated using the function DiffusionCoefficient.</p>
+<h4>References</h4>
+<p>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
 </html>", revisions="<html>
 <ul>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end PartialDuctMassTransfer;

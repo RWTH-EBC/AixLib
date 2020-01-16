@@ -33,7 +33,7 @@ and the collision integral <i>&Omega;</i> are used as inputs.</p>
 <p align=\"center\"><i>D<sub>12</sub> = 1.8583 10<sup>(-7)</sup> T<sup>3 &frasl; 2</sup> &frasl; (p &Omega;<sub>12</sub>) &radic;(1 &frasl; M<sub>1</sub> + 1 &frasl; M<sub>2</sub>)</i></p>
 </html>", revisions="<html>
 <ul>
-<li>June 15, 2018, by Martin Kremer:<br>First implementation. </li>
+<li>June 15, 2018, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end DiffusionCoefficient;

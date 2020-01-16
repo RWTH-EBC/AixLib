@@ -13,7 +13,7 @@ model Test_EnthalpyExchanger "example test for enthalpy exchanger"
     rectangularDuct=false,
     m_flow_nominal=400/3600*1.18,
     dp_nominal(displayUnit="Pa") = 120,
-    deltaMembrane=110E-6,
+    thicknessMembrane=110E-6,
     heatCapacityMembrane=1900,
     lambdaMembrane=0.34,
     rhoMembrane(displayUnit="kg/m3") = 920,

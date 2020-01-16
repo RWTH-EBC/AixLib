@@ -76,7 +76,8 @@ equation
 <p>The air density, dynamic viscosity, thermal conductivity and Prandtl number are calculated as state variables. The Reynolds number is calculated using the density, dynmaic viscosity, flow velocity and the duct&apos;s cross section as characteristic length. The cross section is calculated using the duct&apos;s height and width.</p>
 <p>The convective heat transfer coefficient is calculated as follows.</p>
 <p align=\"center\"><i>&alpha; = (Nu &lambda; ) &frasl; &radic;A<sub>cross-section</sub> </i></p>
-<p><br><br><br><br>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
+<h4>References</h4>
+<p>[1]: Muzychka, Y. S.; Yovanovich, M. M. : <i>Laminar Forced Convection Heat Transfer in the Combined Entry Region of Non-Circular Ducts</i> ; Transactions of the ASME; Vol. 126; February 2004</p>
 </html>", revisions="<html>
 <ul>
 <li>August 21, 2018, by Martin Kremer:<br/>First implementation.</li>

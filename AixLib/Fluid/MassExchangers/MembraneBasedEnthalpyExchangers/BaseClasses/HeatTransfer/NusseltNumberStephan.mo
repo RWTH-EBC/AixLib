@@ -22,6 +22,7 @@ algorithm
 </ul>
 </html>", info="<html>
 <p>This function calculates the Nusselt number for a flat gap according to Stephan [1].</p>
+<h4>References</h4>
 <p>[1]: Stephan, K.: Waermeuebergang und Druckabfall bei nicht ausgebildeter Laminarstroemung in Rohren und ebenen Spalten. Chemie-Ing.-Techn. Vol. 31, no. 12, 1959 pp. 773-778</p>
 </html>"));
 end NusseltNumberStephan;

@@ -12,7 +12,7 @@ model MembraneMassTransfer "model for mass transfer through membrane"
     "length of membrane in flow direction";
   parameter Modelica.SIunits.Length widthMembrane
     "width of membrane";
-  parameter Modelica.SIunits.Length deltaMembrane
+  parameter Modelica.SIunits.Length thicknessMembrane
     "thickness of membrane";
   parameter Modelica.SIunits.Density rhoMembrane
     "density of membrane";
@@ -61,7 +61,7 @@ equation
   for i in 1:n loop
     0 = massPorts_a[i].m_flow + massPorts_b[i].m_flow;
     massPorts_a[i].m_flow = (PMembrane * cCon * M_steam) *
-      (massPorts_a[i].p - massPorts_b[i].p) / deltaMembrane * areaMembrane/n;
+      (massPorts_a[i].p - massPorts_b[i].p) / thicknessMembrane * areaMembrane/n;
 
 //     p_a[i] = massPorts_a[i].p * massPorts_a[i].X * (M_a[i]/M_steam);
 //     p_b[i] = massPorts_b[i].p * massPorts_b[i].X * (M_b[i]/M_steam);
@@ -74,12 +74,12 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This model calculates the locally distributed mass transfer through a thin membrane. The model is based on the Solution-Diffusion model. It uses the permeability to describe the process of sorption, diffusion and desorption of the water vapour. For detailed information see [1].</p>
-<p>Therfore the mass fraction at each surface of the membrane is converted into a partial pressure of the water vapour.</p>
-<p><br>[1]: Koester, S.; Roghmans, F.; Wessling, M.: <i>Water vapor permeance: The interplay of feed and permeate activity</i> ; Journal of Membrane Science; Vol. 485 (2015) pp. 69-78</p>
+<h4>References</h4>
+<p>[1]: Koester, S.; Roghmans, F.; Wessling, M.: <i>Water vapor permeance: The interplay of feed and permeate activity</i> ; Journal of Membrane Science; Vol. 485 (2015) pp. 69-78</p>
 </html>", revisions="<html>
 <ul>
-<li>November 20, 2018, by Martin Kremer:<br>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
-<li>August 21, 2018, by Martin Kremer:<br>First implementation.</li>
+<li>November 20, 2018, by Martin Kremer:<br/>Changing mass transfer calculation: Now using permeability and thickness of membrane instead of permeance.</li>
+<li>August 21, 2018, by Martin Kremer:<br/>First implementation.</li>
 </ul>
 </html>"));
 end MembraneMassTransfer;
