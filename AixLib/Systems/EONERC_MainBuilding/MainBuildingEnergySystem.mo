@@ -158,7 +158,7 @@ model MainBuildingEnergySystem
   Modelica.Blocks.Sources.Sine sine(
     amplitude=5,
     freqHz=1/(3600*24),
-    offset=273.15 + 75)
+    offset=273.15 + 60)
     annotation (Placement(transformation(extent={{-192,92},{-182,102}})));
   HydraulicModules.Controller.CtrMix ctrMixCold1(
     useExternalTset=false,
@@ -260,12 +260,12 @@ model MainBuildingEnergySystem
     annotation (Placement(transformation(extent={{-186,-140},{-176,-130}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-
     computeWetBulbTemperature=false,
     filNam=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-216,-142},{-196,-122}})));
+
   BoundaryConditions.WeatherData.Bus weaBus1
              "Weather data bus"
     annotation (Placement(transformation(extent={{-170,-140},{-150,-120}})));
