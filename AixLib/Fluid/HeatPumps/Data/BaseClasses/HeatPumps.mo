@@ -26,14 +26,17 @@ partial record HeatPumps
   annotation (
     defaultComponentName="datHeaPum",
     preferredView="info",
-  Documentation(info="<html><p>
-  This is the base record for heat pump models.
+  Documentation(info="<html>
+<p>
+This is the base record for heat pump models.
 </p>
 </html>",
-revisions="<html><ul>
-  <li>December 6, 2016, by Massimo Cimmino:<br/>
-    First implementation.
-  </li>
+revisions="<html>
+<ul>
+<li>
+December 6, 2016, by Massimo Cimmino:<br/>
+First implementation.
+</li>
 </ul>
 </html>"),
     Icon(graphics={
