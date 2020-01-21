@@ -70,7 +70,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real specificPeople "people per squaremeter";
   parameter Real activityDegree "acitivity degree of people in met";
   parameter Modelica.SIunits.HeatFlowRate fixedHeatFlowRatePersons
-    "Area specific heatflowrate by persons in case of temperature independent 
+    "Area specific heatflowrate by persons in case of temperature independent
     calculation";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
@@ -98,8 +98,8 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
-parameter Real shadingFactor[nOrientations] "Upper limit controller output";
-  parameter Real maxIrr[nOrientations] "Lower limit controller output";
+  parameter Real shadingFactor[nOrientations] "Reduction for soalr gains through windows with external shading";
+  parameter Real maxIrr[nOrientations] "Threshold for external shading";
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
@@ -145,14 +145,14 @@ parameter Real shadingFactor[nOrientations] "Upper limit controller output";
   </li>
   <li>
   February 4, 2014, by Ole Odendahl:<br/>
-  Added new parameters for the setup of the ACH. It is 
-  now possible to assign different values to the ACH for 
+  Added new parameters for the setup of the ACH. It is
+  now possible to assign different values to the ACH for
   each zone based on this record.
   </li>
   <li>
   January 27, 2014, by Ole Odendahl:<br/>
   Added new parameter withAHU to choose whether the zone
-  is connected to a central air handling unit. Default 
+  is connected to a central air handling unit. Default
   is false.
   </li>
   <li>
