@@ -1,4 +1,4 @@
-RotaryCompressor
-RotaryCompressorPressureLosses
-RotaryCompressorPressureHeatLosses
 ModularRotaryCompressor
+RotaryCompressor
+RotaryCompressorPressureHeatLosses
+RotaryCompressorPressureLosses

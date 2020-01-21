@@ -70,14 +70,8 @@ equation
     annotation (Line(points={{20,60},{28,60},{28,40}},     color={0,127,255}));
   connect(hydRes.port_a, Injection.port_b1)
     annotation (Line(points={{0,60},{-8,60},{-8,40}},    color={0,127,255}));
-  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,50},
-          {-39.95,50},{-39.95,10.05}},                       color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(valveOpening.y, hydraulicBus.valSet) annotation (Line(points={{-79,10},
-          {-62,10},{-62,10.05},{-39.95,10.05}}, color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-79,
+          10},{-62,10},{-62,10.05},{-39.95,10.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -85,6 +79,12 @@ equation
     annotation (Line(points={{-8,-40},{-8,-20}}, color={0,127,255}));
   connect(boundary1.ports[1], Injection.port_b2)
     annotation (Line(points={{28,-40},{28,-20},{28,-20}}, color={0,127,255}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpmSet) annotation (Line(points={{-79,50},
+          {-39.95,50},{-39.95,10.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
                            annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
