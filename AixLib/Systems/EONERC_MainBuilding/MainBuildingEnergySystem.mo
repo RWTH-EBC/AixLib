@@ -25,7 +25,7 @@ model MainBuildingEnergySystem
     nPorts=1) annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
-        origin={-196,-12})));
+        origin={-194,-34})));
   Fluid.Sources.Boundary_pT          boundary4(
     redeclare package Medium = Medium,
     p=300000,
@@ -160,22 +160,6 @@ model MainBuildingEnergySystem
     freqHz=1/(3600*24),
     offset=273.15 + 75)
     annotation (Placement(transformation(extent={{-192,92},{-182,102}})));
-  HydraulicModules.Throttle throttle(
-    redeclare package Medium = Medium,
-    T_amb=293.15,
-    m_flow_nominal=0.5,
-    dIns=0.01,
-    kIns=0.028,
-    d=0.1,
-    length=2,
-    Kv=100) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-170,-22})));
-  HydraulicModules.BaseClasses.HydraulicBus hydraulicBus3
-    annotation (Placement(transformation(extent={{-212,-36},{-192,-16}})));
-  Modelica.Blocks.Sources.Constant const(k=1)
-    annotation (Placement(transformation(extent={{-196,-40},{-188,-32}})));
   HydraulicModules.Controller.CtrMix ctrMixCold1(
     useExternalTset=false,
     TflowSet=289.15,
@@ -335,36 +319,6 @@ equation
     annotation (Line(points={{4,80},{4,90}}, color={0,127,255}));
   connect(consumerCold1.port_b, admixCold1.port_a2)
     annotation (Line(points={{16,90},{16,80}}, color={0,127,255}));
-  connect(highTemperatureSystem.port_b, throttle.port_a1) annotation (Line(
-        points={{-176.4,-46},{-176.4,-40},{-176,-40},{-176,-32}}, color={0,127,
-          255}));
-  connect(highTemperatureSystem.port_a, throttle.port_b2) annotation (Line(
-        points={{-164.8,-46},{-164,-46},{-164,-32}},            color={0,127,
-          255}));
-  connect(boundary1.ports[1], throttle.port_b1) annotation (Line(points={{-190,
-          -12},{-176,-12}},                       color={0,127,255}));
-  connect(throttle.port_b1, admixHTC.port_a1)
-    annotation (Line(points={{-176,-12},{-176,60}}, color={0,127,255}));
-  connect(throttle.port_a2, admixHTC.port_b2)
-    annotation (Line(points={{-164,-12},{-164,60}}, color={0,127,255}));
-  connect(throttle.port_a2, heatExchangerSystem.port_b1) annotation (Line(
-        points={{-164,-12},{-164,0.4},{-146,0.4}},            color={0,127,255}));
-  connect(throttle.port_b1, heatExchangerSystem.port_a1) annotation (Line(
-        points={{-176,-12},{-176,-8.4},{-146,-8.4}}, color={0,127,255}));
-  connect(throttle.hydraulicBus, hydraulicBus3) annotation (Line(
-      points={{-180,-22},{-194,-22},{-194,-26},{-202,-26}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(const.y, hydraulicBus3.valveSet) annotation (Line(points={{-187.6,-36},
-          {-201.95,-36},{-201.95,-25.95}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(ctrMixLTC.hydraulicBus, admixLTC.hydraulicBus) annotation (Line(
       points={{-113.02,71.14},{-106.28,71.14},{-106.28,70},{-100,70}},
       color={255,204,51},
@@ -512,6 +466,18 @@ equation
           103.6},{18,102},{19.6,102}}, color={0,0,127}));
   connect(Q_flow_CCA_cold.y, limiterCCACold.u)
     annotation (Line(points={{29.2,102},{28.8,102}}, color={0,0,127}));
+  connect(highTemperatureSystem.port_b, admixHTC.port_a1) annotation (Line(
+        points={{-176.4,-46},{-176.4,7},{-176,7},{-176,60}}, color={0,127,255}));
+  connect(highTemperatureSystem.port_a, admixHTC.port_b2) annotation (Line(
+        points={{-164.8,-46},{-164.8,7},{-164,7},{-164,60}}, color={0,127,255}));
+  connect(boundary1.ports[1], highTemperatureSystem.port_b) annotation (Line(
+        points={{-188,-34},{-176.4,-34},{-176.4,-46}}, color={0,127,255}));
+  connect(heatExchangerSystem.port_b1, admixHTC.port_b2) annotation (Line(
+        points={{-146,0.4},{-156,0.4},{-156,0},{-164.8,0},{-164.8,7},{-164,7},{
+          -164,60}}, color={0,127,255}));
+  connect(heatExchangerSystem.port_a1, admixHTC.port_a1) annotation (Line(
+        points={{-146,-8.4},{-162,-8.4},{-162,-8},{-176.4,-8},{-176.4,5},{-176,
+          5},{-176,60}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},
