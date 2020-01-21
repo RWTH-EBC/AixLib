@@ -217,6 +217,11 @@ model ThermalZone
     zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Power for cooling" annotation (Placement(transformation(extent={{100,-104},
             {120,-84}}), iconTransformation(extent={{80,-100},{100,-80}})));
+  SolarGain.SimpleExternalShading simpleExternalShading(
+    final nOrientations=zoneParam.nOrientations,
+    final maxIrrs=zoneParam.maxIrr,
+    final gValues=zoneParam.shadingFactor)
+    annotation (Placement(transformation(extent={{14,42},{20,48}})));
 protected
   Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{4,-4},{-4,4}})));
@@ -421,8 +426,6 @@ equation
     annotation (Line(points={{16,8},{18,8},{18,13},{20,13}}, color={191,0,0}));
   connect(preTemWin.port, theConWin.fluid)
     annotation (Line(points={{16,29},{20,29}}, color={191,0,0}));
-  connect(corGMod.solarRadWinTrans, ROM.solRad) annotation (Line(points={{0.6,43},
-          {12,43},{12,61},{37,61}}, color={0,0,127}));
   connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{25,4.4},{25,8}}, color={0,0,127}));
   connect(hConWin.y, theConWin.Gc) annotation (Line(points={{0,-4.4},{0,34},{25,34}}, color={0,0,127}));
   connect(heaterCoolerController.heaterActive,heaterCooler. heaterActive)
@@ -452,6 +455,12 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(heaterCooler.heatCoolRoom, intGainsConv) annotation (Line(points={{40.7,
           -74.2},{68,-74.2},{68,-2},{104,-2}}, color={191,0,0}));
+  connect(simpleExternalShading.y1, ROM.solRad) annotation (Line(points={{19.94,
+          45.24},{27.97,45.24},{27.97,61},{37,61}}, color={0,0,127}));
+  connect(solRadWall.y, simpleExternalShading.u1) annotation (Line(points={{-43.5,
+          19},{-43.5,34},{4,34},{4,45.06},{13.94,45.06}}, color={0,0,127}));
+  connect(corGMod.solarRadWinTrans, simpleExternalShading.u2) annotation (Line(
+        points={{0.6,43},{2,43},{2,46.8},{14,46.8}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>

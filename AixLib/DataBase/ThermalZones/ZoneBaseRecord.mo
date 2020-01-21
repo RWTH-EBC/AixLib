@@ -98,6 +98,8 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
+parameter Real shadingFactor[nOrientations] "Upper limit controller output";
+  parameter Real maxIrr[nOrientations] "Lower limit controller output";
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";

@@ -1,0 +1,58 @@
+within AixLib.ThermalZones.ReducedOrder.SolarGain;
+model SimpleExternalShading
+  "Simple model to account for external shading for windows."
+
+  parameter Integer nOrientations = 1 "Number of orientations (without ground)";
+  parameter Real maxIrrs[nOrientations](each final unit="W/m2") "";
+  parameter Real gValues[nOrientations](each final unit="1") "Weight factors of the windows";
+  Modelica.Blocks.Logical.Switch switchShading[nOrientations]
+    "Switches external shading."
+    annotation (Placement(transformation(extent={{-12,-8},{8,12}})));
+  Modelica.Blocks.Logical.Greater greater[nOrientations]
+    "If irradiation is greater then threshold (u2) shading is applied."
+    annotation (Placement(transformation(extent={{-48,-8},{-28,12}})));
+  Modelica.Blocks.Sources.Constant thresholdShading[nOrientations](k=maxIrrs)
+    "Irradiation threshold at that shading is applied."
+    annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
+  Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=0)
+    "Constant zero for that no shading is applied."
+    annotation (Placement(transformation(extent={{-40,-28},{-28,-16}})));
+  Modelica.Blocks.Sources.Constant gValueShading[nOrientations](k=gValues)
+    "Factor to that the solar irradiation of the window is reduced by external shading (0 means no shading - 1 means no solar gains)."
+    annotation (Placement(transformation(extent={{-40,24},{-28,36}})));
+  Modelica.Blocks.Math.Product product[nOrientations]
+    annotation (Placement(transformation(extent={{34,-2},{54,18}})));
+  Modelica.Blocks.Interfaces.RealOutput corrIrr[nOrientations]
+               "Corrected solar irradiation with external shading."
+    annotation (Placement(transformation(extent={{88,-2},{108,18}})));
+  Modelica.Blocks.Interfaces.RealInput solRadTot[nOrientations]
+                                 "Total solar irradiation on tilted surface."
+    annotation (Placement(transformation(extent={{-122,-18},{-82,22}})));
+  Modelica.Blocks.Interfaces.RealInput solRadWin[nOrientations]
+               "Solar irradiation to be corrected with external shading."
+    annotation (Placement(transformation(extent={{-124,44},{-84,84}})));
+  Modelica.Blocks.Interfaces.RealOutput shadingFactor[nOrientations]
+                                 "Shading factors with external shading."
+    annotation (Placement(transformation(extent={{92,-90},{112,-70}})));
+equation
+  connect(greater.y, switchShading.u2)
+    annotation (Line(points={{-27,2},{-14,2}}, color={255,0,255}));
+  connect(thresholdShading.y, greater.u2) annotation (Line(points={{-73.4,-20},{-64,
+          -20},{-64,-6},{-50,-6}}, color={0,0,127}));
+  connect(noShading.y, switchShading.u3) annotation (Line(points={{-27.4,-22},{-22,
+          -22},{-22,-6},{-14,-6}}, color={0,0,127}));
+  connect(gValueShading.y, switchShading.u1) annotation (Line(points={{-27.4,30},
+          {-22,30},{-22,10},{-14,10}}, color={0,0,127}));
+  connect(switchShading.y, product.u2)
+    annotation (Line(points={{9,2},{32,2}}, color={0,0,127}));
+  connect(product.y, corrIrr)
+    annotation (Line(points={{55,8},{98,8}}, color={0,0,127}));
+  connect(greater.u1, solRadTot)
+    annotation (Line(points={{-50,2},{-102,2}}, color={0,0,127}));
+  connect(product.u1, solRadWin) annotation (Line(points={{32,14},{28,14},{28,16},{20,16},
+          {20,64},{-104,64}}, color={0,0,127}));
+  connect(switchShading.y, shadingFactor) annotation (Line(points={{9,2},{22,2},{22,-80},{102,
+          -80}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end SimpleExternalShading;
