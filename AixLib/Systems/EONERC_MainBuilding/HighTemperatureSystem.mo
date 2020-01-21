@@ -106,6 +106,11 @@ model HighTemperatureSystem
         T_amb)
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
 
+  Fluid.MixingVolumes.MixingVolume vol(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    V=0.1,
+    nPorts=2) annotation (Placement(transformation(extent={{80,36},{100,56}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -253,6 +258,10 @@ equation
           {-112,60},{-112,20}}, color={0,127,255}));
   connect(fixedTemperature.port, boiler1.T_amb) annotation (Line(points={{20,
           -90},{32,-90},{32,-88},{48,-88},{48,-66},{51.84,-66}}, color={191,0,0}));
+  connect(senT_b.port_b, vol.ports[1]) annotation (Line(points={{100,20},{94,20},
+          {94,36},{88,36}}, color={0,127,255}));
+  connect(vol.ports[2], senT_a.port_a) annotation (Line(points={{92,36},{96,36},
+          {96,60},{100,60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(
