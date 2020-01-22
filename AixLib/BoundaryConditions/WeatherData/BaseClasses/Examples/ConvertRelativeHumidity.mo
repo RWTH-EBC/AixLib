@@ -8,7 +8,9 @@ model ConvertRelativeHumidity
   AixLib.Utilities.Time.ModelTime modTim
     "Block that outputs simulation time"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim(
+    weaDatStaTim=0,
+    weaDatEndTim=31536000)
     "Block that converts time"
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 protected
@@ -16,7 +18,7 @@ protected
     tableOnFile=true,
     tableName="tab1",
     fileName=Modelica.Utilities.Files.loadResource(
-       "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
+       Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")),
     columns=2:30,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Data reader"
@@ -24,7 +26,7 @@ protected
 
 equation
   connect(datRea.y[3], conRelHum.relHumIn) annotation (Line(
-      points={{21,-0.827586},{30,-0.827586},{30,0},{38,0}},
+      points={{21,0},{30,0},{30,0},{38,0}},
       color={0,0,127}));
   connect(modTim.y, conTim.modTim) annotation (Line(
       points={{-59,0},{-42,0}},

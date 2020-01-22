@@ -6,7 +6,7 @@ model DiffusePerez
   parameter Modelica.SIunits.Angle azi=0.3 "Azi angle";
   parameter Modelica.SIunits.Angle til=0.5 "Tilted angle";
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
         transformation(extent={{1,-1},{21,21}}), iconTransformation(extent={{20,
@@ -31,14 +31,14 @@ equation
       points={{-20,10},{11,10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(weaBus,HDifRoo. weaBus) annotation (Line(
       points={{11,10},{40,10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
 
@@ -46,14 +46,14 @@ equation
       points={{11,10},{30,10},{30,-70},{40,-70}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus, HDifWal.weaBus) annotation (Line(
       points={{11,10},{30,10},{30,-30},{40,-30}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (

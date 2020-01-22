@@ -7,7 +7,9 @@ model CheckWindSpeed "Test model for wind speed check"
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckWindSpeed cheWinSpe
     "Block that constrains the wind speed"
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
-  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim(
+    weaDatStaTim=0,
+    weaDatEndTim=31536000)
     "Block that converts time"
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
 protected
@@ -15,14 +17,14 @@ protected
     tableOnFile=true,
     tableName="tab1",
     fileName=Modelica.Utilities.Files.loadResource(
-       "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
+       Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")),
     columns=2:30,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Data reader"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));
 equation
   connect(datRea.y[16], cheWinSpe.winSpeIn) annotation (Line(
-      points={{41,10.069},{50,10.069},{50,10},{58,10}},
+      points={{41,10},{50,10},{50,10},{58,10}},
       color={0,0,127}));
   connect(modTim.y, conTim.modTim) annotation (Line(
       points={{-39,10},{-22,10}},

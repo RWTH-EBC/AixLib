@@ -1,5 +1,8 @@
 AirHeater_T
 AirHeater_u
+DryCoilEffectivenessNTUMassFlow
+DryCoilEffectivenessNTUPControl
+DynamicHX
 WaterCooler_T
 WaterHeater_T
 WaterHeater_u

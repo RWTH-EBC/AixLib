@@ -11,7 +11,7 @@ model SkyBrightness "Test model for sky brightness"
     "Sky brightness"
     annotation (Placement(transformation(extent={{60,-16},{80,4}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-    "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data"
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
@@ -29,21 +29,21 @@ equation
       points={{-60,-10},{-40,-10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(weaBus.HDifHor, skyBri.HDifHor) annotation (Line(
       points={{-40,-10},{58,-10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(zen.weaBus, weaBus) annotation (Line(
       points={{-20,30},{-30,30},{-30,-10},{-40,-10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   annotation (

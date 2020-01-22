@@ -1,7 +1,7 @@
 within AixLib.Fluid.Movers.BaseClasses;
 model FlowMachineInterface
   "Partial model with performance curves for fans or pumps"
-  extends Modelica.Blocks.Interfaces.BlockIcon;
+  extends Modelica.Blocks.Icons.Block;
 
   import cha = AixLib.Fluid.Movers.BaseClasses.Characteristics;
 
@@ -762,7 +762,5 @@ March 23 2010, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end FlowMachineInterface;

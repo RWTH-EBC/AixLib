@@ -3,7 +3,7 @@ model BlackBody "Test model for black body sky temperature"
   extends Modelica.Icons.Example;
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   AixLib.BoundaryConditions.SkyTemperature.BlackBody TBlaSky
     "Black body sky temperature computed from temperature and sky cover"
@@ -22,7 +22,7 @@ equation
       points={{10,10},{-20,10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDewPoi, TBlaSky.TDewPoi) annotation (Line(
@@ -42,7 +42,7 @@ equation
       points={{10,10},{24,10},{24,22},{38,22}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDewPoi, TBlaSkyIrr.TDewPoi) annotation (Line(
@@ -61,7 +61,7 @@ equation
       points={{10,10},{24,10},{24,-18},{38,-18}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (
@@ -94,7 +94,5 @@ First implementation.
 </html>"),
 experiment(Tolerance=1e-6, StartTime=0, StopTime=86400),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SkyTemperature/Examples/BlackBody.mos"
-        "Simulate and plot"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+        "Simulate and plot"));
 end BlackBody;

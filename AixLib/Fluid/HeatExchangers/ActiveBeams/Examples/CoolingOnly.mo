@@ -6,7 +6,7 @@ model CoolingOnly
 
   package MediumW = AixLib.Media.Water "Medium model for water";
 
-  AixLib.Fluid.Sources.FixedBoundary sin_1(
+  AixLib.Fluid.Sources.Boundary_pT sin_1(
     redeclare package Medium = MediumW,
     nPorts=1) "Sink for water"
     annotation (Placement(transformation(extent={{100,56},{80,76}})));
@@ -17,7 +17,7 @@ model CoolingOnly
     nPorts=1,
     T=285.85) "Source for air"
     annotation (Placement(transformation(extent={{100,10},{80,30}})));
-  AixLib.Fluid.Sources.FixedBoundary bou(
+  AixLib.Fluid.Sources.Boundary_pT bou(
     redeclare package Medium = MediumA,
     nPorts=1) "Sink for air"
     annotation (Placement(transformation(extent={{100,-110},{80,-90}})));
@@ -101,7 +101,7 @@ equation
           {12,-80},{62,-80},{62,-70}}, color={0,127,255}));
   connect(pum.ports[1], beaCoo.watCoo_a)
     annotation (Line(points={{-2,66},{12,66},{26,66}}, color={0,127,255}));
-  connect(pum.m_flow_in, conPID.y) annotation (Line(points={{-22,74},{-40,74},{
+  connect(pum.m_flow_in, conPID.y) annotation (Line(points={{-24,74},{-40,74},{
           -40,-10},{-49,-10}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),experiment(Tolerance=1e-6, StopTime=172800),
@@ -117,6 +117,11 @@ that regulates the water flow rate in the active beam.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
 <li>
 June 14, 2016, by Michael Wetter:<br/>
 Revised implementation.

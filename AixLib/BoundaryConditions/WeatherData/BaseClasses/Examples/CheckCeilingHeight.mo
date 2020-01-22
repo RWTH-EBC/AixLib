@@ -6,7 +6,9 @@ model CheckCeilingHeight "Test model for ceiling height check"
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckCeilingHeight
     cheCeiHei "Block that constrains the ceiling height"
      annotation (Placement(transformation(extent={{40,-20},{60,0}})));
-  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim(
+    weaDatStaTim=0,
+    weaDatEndTim=31536000)
     "Block that converts time"
     annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
 protected
@@ -14,14 +16,14 @@ protected
     tableOnFile=true,
     tableName="tab1",
     fileName=Modelica.Utilities.Files.loadResource(
-       "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
+       Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")),
     columns=2:30,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Data reader"
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
 equation
   connect(datRea.y[20], cheCeiHei.ceiHeiIn) annotation (Line(
-      points={{21,-9.65517},{30,-9.65517},{30,-10},{38,-10}},
+      points={{21,-10},{30,-10},{30,-10},{38,-10}},
       color={0,0,127}));
   connect(modTim.y, conTim.modTim) annotation (Line(
       points={{-59,-10},{-42,-10}},

@@ -6,7 +6,7 @@ model HeatingOnly
 
   package MediumW = AixLib.Media.Water "Medium model for water";
 
-  AixLib.Fluid.Sources.FixedBoundary sin_1(
+  AixLib.Fluid.Sources.Boundary_pT sin_1(
     redeclare package Medium = MediumW,
     nPorts=1) "Sink for chilled water"
     annotation (Placement(transformation(extent={{100,90},{80,110}})));
@@ -17,7 +17,7 @@ model HeatingOnly
     nPorts=1,
     T=285.85) "Source for air"
     annotation (Placement(transformation(extent={{100,10},{80,30}})));
-  AixLib.Fluid.Sources.FixedBoundary bou(
+  AixLib.Fluid.Sources.Boundary_pT bou(
     redeclare package Medium = MediumA,
     nPorts=1) "Sink for air"
     annotation (Placement(transformation(extent={{100,-110},{80,-90}})));
@@ -41,7 +41,7 @@ model HeatingOnly
     k=0.1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI) "Controller"
          annotation (Placement(transformation(extent={{-70,-20},{-50,0}})));
-  AixLib.Fluid.Sources.FixedBoundary sou_1(
+  AixLib.Fluid.Sources.Boundary_pT sou_1(
     redeclare package Medium = MediumW,
     T=288.15,
     nPorts=1) "Soure chilled water"
@@ -57,7 +57,7 @@ model HeatingOnly
     nPorts=1,
     T=320.95) "Source for heating"
     annotation (Placement(transformation(extent={{-20,50},{0,70}})));
-  AixLib.Fluid.Sources.FixedBoundary sin_2(
+  AixLib.Fluid.Sources.Boundary_pT sin_2(
     redeclare package Medium = MediumW,
     nPorts=1) "Sink for hot water"
     annotation (Placement(transformation(extent={{100,50},{80,70}})));
@@ -116,7 +116,7 @@ equation
           54},{12,-80},{62,-80},{62,-70}}, color={0,127,255}));
   connect(pumHea.ports[1], beaCooHea.watHea_a)
     annotation (Line(points={{0,60},{0,60},{26,60}}, color={0,127,255}));
-  connect(pumHea.m_flow_in, conPID.y) annotation (Line(points={{-20,68},{-40,68},
+  connect(pumHea.m_flow_in, conPID.y) annotation (Line(points={{-22,68},{-40,68},
           {-40,-10},{-49,-10}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -120},{120,120}})),experiment(Tolerance=1e-6, StopTime=172800),__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/Examples/HeatingOnly.mos"
@@ -131,6 +131,11 @@ that regulates the water flow rate in the active beam.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
 <li>
 June 14, 2016, by Michael Wetter:<br/>
 Revised implementation.

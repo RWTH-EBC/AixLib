@@ -9,7 +9,7 @@ model BufferStorageCharging
   AixLib.Fluid.Storage.BufferStorage storage_Aixlib(
     n=10,
     redeclare package Medium = Medium,
-    data=AixLib.DataBase.Storage.Generic_500l(),
+    data=AixLib.DataBase.Storage.Generic_New_2000l(),
     useHeatingCoil1=false,
     useHeatingCoil2=false,
     upToDownHC1=false,
@@ -21,8 +21,7 @@ model BufferStorageCharging
     redeclare package MediumHC2 = Medium,
     TStart=303.15)
     annotation (Placement(transformation(extent={{0,0},{-20,24}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)
-                                                                                      annotation(Placement(transformation(extent={{-58,4},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)   annotation(Placement(transformation(extent={{-58,4},
             {-38,24}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     m_flow=0.2,
@@ -33,7 +32,7 @@ model BufferStorageCharging
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={22,46})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph5(          redeclare package Medium = Medium,
       nPorts=1)                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation=0,     origin={12,-20})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary1(
@@ -59,7 +58,7 @@ model BufferStorageCharging
         origin={62,38})));
 equation
   connect(boundary.m_flow_in, const.y)
-    annotation (Line(points={{32,38},{42,38},{51,38}}, color={0,0,127}));
+    annotation (Line(points={{34,38},{34,38},{51,38}}, color={0,0,127}));
   connect(boundary1.ports[1], storage_Aixlib.fluidportTop2) annotation (Line(
         points={{-34,46},{-14,46},{-14,24.12},{-13.125,24.12}}, color={0,127,
           255}));

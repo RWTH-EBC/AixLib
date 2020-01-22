@@ -1,4 +1,12 @@
+BesselJ0
+BesselJ1
+BesselY0
+BesselY1
+Binomial
 CubicHermite
+ExponentialIntegralE1
+Factorial
+FallingFactorial
 InverseXDerivativeCheck
 InverseXDerivative_2_Check
 InverseXRegularized
@@ -11,6 +19,7 @@ RegNonZeroPowerDerivativeCheck
 RegNonZeroPowerDerivative_2_Check
 RegStep
 SmoothExponentialDerivativeCheck
+SmoothHeavisideDerivatives
 SpliceFunction
 SpliceFunctionDerivativeCheck
 TrapezoidalIntegration

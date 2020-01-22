@@ -40,14 +40,14 @@ equation
       points={{-100,0},{-80,0},{-80,40},{-42,40}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.solTim, solHouAng.solTim) annotation (Line(
       points={{-100,0},{-80,0},{-80,-40},{-42,-40}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (
@@ -78,6 +78,6 @@ First implementation.
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          lineColor={0,0,255}), Bitmap(extent={{-90,90},{90,-92}}, fileName=
+          lineColor={0,0,255}), Bitmap(extent={{-90,-90},{90,90}}, fileName=
               "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/IncidenceAngle.png")}));
 end IncidenceAngle;

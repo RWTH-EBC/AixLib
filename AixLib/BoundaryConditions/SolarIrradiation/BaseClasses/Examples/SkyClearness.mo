@@ -9,7 +9,7 @@ model SkyClearness "Test model for sky clearness"
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     annotation (Placement(transformation(extent={{-2,20},{18,40}})));
@@ -22,21 +22,21 @@ equation
       points={{-20,30},{8,30}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(weaBus.HGloHor, skyCle.HGloHor) annotation (Line(
       points={{8,30},{24,30},{24,16},{38,16}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.HDifHor, skyCle.HDifHor) annotation (Line(
       points={{8,30},{24,30},{24,10},{38,10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
 
@@ -44,7 +44,7 @@ equation
       points={{8,30},{8,12},{-54,12},{-54,-10},{-40,-10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (

@@ -2,12 +2,12 @@ within AixLib.Controls.HVACAgentBasedControl.Agents;
 model IntermediateAgent
   extends BaseClasses.PartialAgent;
   parameter Integer broker = 10003 "Name of the corresponding broker-agent";
-  parameter Real maxCapacity = 10000;
-  Integer currentClient(start=0);
-  Real currentCost( start= 0);
-  Real setCapacity(start=0);
-  Real newCost(start=0);
-  Real ownCost(start=0);
+  parameter Real maxCapacity = 10000 "maximum capacity";
+  Integer currentClient(start=0) "Integer variable to define currentClient";
+  Real currentCost( start= 0) "Real variable to define currentCost";
+  Real setCapacity(start=0) "Real variable to define setCapacity";
+  Real newCost(start=0) "Real variable to define newCost";
+  Real ownCost(start=0) "Real variable to define ownCost";
 
 // CostFunction related components
 
@@ -670,9 +670,10 @@ equation
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/IntermediateAgent.png\" alt=\"Intermediate agent\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
 <li>FIPA ACL Message Structure Specification</li>
 <li>FIPA Communicative Act Library Specification </li>
+<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>

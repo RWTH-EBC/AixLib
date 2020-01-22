@@ -32,7 +32,7 @@ model ThermalZone
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
     TDryBul=TOut_nominal,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
     computeWetBulbTemperature=false) "Weather data reader"
     annotation (Placement(transformation(extent={{100,150},{80,170}})));
@@ -80,7 +80,7 @@ equation
       color={255,204,51},
       thickness=0.5,
       smooth=Smooth.None), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(theCon.port_b,vol. heatPort)
@@ -91,7 +91,7 @@ equation
                                                             color={191,0,0}));
   connect(TAirOut.T, weaBus.TDryBul) annotation (Line(points={{-32,120},{-40,120},
           {-40,160},{-10,160}}, color={0,0,127}), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(TAirOut.port, theCon.port_a)
@@ -139,11 +139,13 @@ This example demonstrates how to export a model
 that contains one thermal zone with convective heat input from the
 HVAC system only. The thermal zone is connected to an adaptor so that
 it can be coupled
-to an air-based HVAC system. The thermal zone is
+to an air-based HVAC system.
+<!-- @include_Buildings
+The thermal zone is
 taken from
 <a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
-AixLib.Examples.Tutorial.SpaceCooling.System3
-</a>.
+AixLib.Examples.Tutorial.SpaceCooling.System3</a>.
+-->
 </p>
 <p>
 The example extends from
@@ -161,6 +163,13 @@ exposed at the FMU interface.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+December 4, 2017, by Michael Wetter:<br/>
+Added call to <code>Modelica.Utilities.Files.loadResource</code>
+for weather data file.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/867\">#867</a>.
+</li>
 <li>
 April 12, 2017, by Michael Wetter:<br/>
 Removed temperature that is no longer needed.<br/>

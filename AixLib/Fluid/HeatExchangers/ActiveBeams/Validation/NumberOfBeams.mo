@@ -8,7 +8,7 @@ model NumberOfBeams
 
   parameter Integer nBeams(min=1) = 10 "Number of beams";
 
-  AixLib.Fluid.Sources.FixedBoundary sin_1(
+  AixLib.Fluid.Sources.Boundary_pT sin_1(
     redeclare package Medium = MediumW,
     nPorts=2) "Sink for chilled water"
     annotation (Placement(transformation(extent={{80,70},{60,90}})));
@@ -19,11 +19,11 @@ model NumberOfBeams
     m_flow=0.0792,
     T=285.85) "Source for air"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-  AixLib.Fluid.Sources.FixedBoundary sin_3(
+  AixLib.Fluid.Sources.Boundary_pT sin_3(
     redeclare package Medium = MediumA,
     nPorts=2)
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
-  AixLib.Fluid.Sources.FixedBoundary sou_1(
+  AixLib.Fluid.Sources.Boundary_pT sou_1(
     redeclare package Medium = MediumW,
     nPorts=2,
     T=288.15) "Source for chilled water"
@@ -36,11 +36,11 @@ model NumberOfBeams
     use_inputFilter=false,
     nominalValuesDefineDefaultPressureCurve=true) "Pump for hot water"
     annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
-  AixLib.Fluid.Sources.FixedBoundary sou_2(
+  AixLib.Fluid.Sources.Boundary_pT sou_2(
     redeclare package Medium = MediumW,
     nPorts=2,
     T=320.95) "Source for hot water" annotation (Placement(transformation(extent={{-120,28},{-100,48}})));
-  AixLib.Fluid.Sources.FixedBoundary sin_2(
+  AixLib.Fluid.Sources.Boundary_pT sin_2(
     redeclare package Medium = MediumW,
     nPorts=2) "Sink for hot water"
     annotation (Placement(transformation(extent={{80,30},{60,50}})));
@@ -164,14 +164,14 @@ equation
           {28,-74},{28,78},{60,78}}, color={0,127,255}));
   connect(beaCooHea10.watHea_b, sin_2.ports[2]) annotation (Line(points={{14,-80},
           {28,-80},{40,-80},{40,38},{60,38}}, color={0,127,255}));
-  connect(step.y, pumChiWat.m_flow_in) annotation (Line(points={{-159,100},{-108,
-          100},{-50.2,100},{-50.2,92}}, color={0,0,127}));
-  connect(step1.y, pumHotWat.m_flow_in) annotation (Line(points={{-159,60},{-110,
-          60},{-50.2,60},{-50.2,52}}, color={0,0,127}));
+  connect(step.y, pumChiWat.m_flow_in) annotation (Line(points={{-159,100},{
+          -108,100},{-50,100},{-50,92}},color={0,0,127}));
+  connect(step1.y, pumHotWat.m_flow_in) annotation (Line(points={{-159,60},{
+          -110,60},{-50,60},{-50,52}},color={0,0,127}));
   connect(step3.y, pumChiWat10.m_flow_in) annotation (Line(points={{-159,-20},{
-          -104,-20},{-50.2,-20},{-50.2,-28}}, color={0,0,127}));
+          -104,-20},{-50,-20},{-50,-28}},     color={0,0,127}));
   connect(step2.y, pumHotWat10.m_flow_in) annotation (Line(points={{-159,-60},{
-          -104,-60},{-50.2,-60},{-50.2,-68}}, color={0,0,127}));
+          -104,-60},{-50,-60},{-50,-68}},     color={0,0,127}));
   connect(step4.y, prescribedTemperature.T)
     annotation (Line(points={{-99,-150},{-62,-150}}, color={0,0,127}));
   connect(prescribedTemperature.port, beaCooHea10.heaPor) annotation (Line(
@@ -198,6 +198,11 @@ one with
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
 <li>
 June 14, 2016, by Michael Wetter:<br/>
 Revised implementation.

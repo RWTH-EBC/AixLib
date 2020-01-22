@@ -11,7 +11,7 @@ model TestCase900FF "Test case 900 free floating"
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.Input,
     HInfHorSou=AixLib.BoundaryConditions.Types.DataSource.Input,
     HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HGloHor,
-    filNam="modelica://AixLib/Resources/WeatherData/ASHRAE140.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/ASHRAE140.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,68},{-78,88}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[5](
@@ -37,42 +37,35 @@ model TestCase900FF "Test case 900 free floating"
   AixLib.ThermalZones.ReducedOrder.RC.OneElement thermalZoneOneElement(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
-    alphaExt=2.2309677419354843,
-    alphaWin=3.16,
+    hConExt=2.2309677419354843,
+    hConWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
     RExt={0.0009058311925},
     CExt={9152069.64734},
-    alphaRad=5.13,
+    hRad=5.13,
     RWin=0.0133333333333,
     RExtRem=0.0186378908278,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=5,
-    AWin={12.0, 0.0, 0.0, 0.0, 0.0},
-    ATransparent={12.0, 0.0, 0.0, 0.0, 0.0},
+    AWin={12.0,0.0,0.0,0.0,0.0},
+    ATransparent={12.0,0.0,0.0,0.0,0.0},
     nPorts=2,
-    AExt={9.600000000000001, 16.200000000000003, 21.6, 48.0, 16.200000000000003})
-    "Thermal zone"
+    AExt={9.600000000000001,16.200000000000003,21.6,48.0,16.200000000000003}) "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
-    eqAirTemp(
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=5,
     wfGro=0,
-    wfWall={0.10304320094174112,
-            0.1738854015891881,
-            0.23184720211891743,
-            0.3173387937609652,
-            0.1738854015891881},
-    wfWin={1.0, 0.0, 0.0, 0.0, 0.0},
+    wfWall={0.10304320094174112,0.1738854015891881,0.23184720211891743,0.3173387937609652,0.1738854015891881},
+    wfWin={1.0,0.0,0.0,0.0,0.0},
     withLongwave=true,
     aExt=0.6,
-    alphaWallOut=24.670000000000005,
-    alphaRad=4.63,
-    alphaWinOut=16.37,
-    TGro=286.15) "Computes equivalent air temperature"
-    annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
+    hConWallOut=24.670000000000005,
+    hRad=4.63,
+    hConWinOut=16.37,
+    TGro=286.15) "Computes equivalent air temperature" annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
@@ -97,20 +90,10 @@ model TestCase900FF "Test case 900 free floating"
     annotation (Placement(
     transformation(extent={{-100,6},{-66,38}}),  iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=29.3*111.60000000000001)
-    "Outdoor coefficient of heat transfer for walls"
-    annotation (Placement(
-    transformation(
-    extent={{-4,-4},{4,4}},
-    rotation=90,
-    origin={30,0})));
-  Modelica.Blocks.Sources.Constant alphaWin(k=21.0*12.0)
-    "Outdoor coefficient of heat transfer for windows"
-    annotation (Placement(
-    transformation(
-    extent={{4,-4},{-4,4}},
-    rotation=90,
-    origin={32,54})));
+  Modelica.Blocks.Sources.Constant hConWall(k=29.3*111.60000000000001) "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(transformation(extent={{-4,-4},{4,4}}, rotation=90)));
+  Modelica.Blocks.Sources.Constant hConWin(k=21.0*12.0) "Outdoor coefficient of heat transfer for windows"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}}, rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
     "Radiative heat flow of internal gains"
     annotation (Placement(transformation(extent={{68,-34},{88,-14}})));
@@ -278,10 +261,8 @@ equation
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,17},{24,17},{24,16},{20,16}},
                                                            color={191,0,0}));
-  connect(alphaWall.y, thermalConductorWall.Gc)
-    annotation (Line(points={{30,4.4},{30,12},{31,12}},   color={0,0,127}));
-  connect(alphaWin.y, thermalConductorWin.Gc)
-    annotation (Line(points={{32,49.6},{32,42},{33,42}}, color={0,0,127}));
+  connect(hConWall.y, thermalConductorWall.Gc) annotation (Line(points={{0,4.4},{0,12},{31,12}}, color={0,0,127}));
+  connect(hConWin.y, thermalConductorWin.Gc) annotation (Line(points={{0,-4.4},{0,42},{33,42}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
     annotation (Line(
     points={{-83,22},{-58,22},{-58,18},{-32,18},{-32,12},{-26,12}},
@@ -305,12 +286,12 @@ equation
   connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-24},{37,-24}}, color={0,0,127}));
   connect(gain.y,ventilationIn. m_flow_in)
-    annotation (Line(points={{-65.3,-30},{-54,-30}}, color={0,0,127}));
+    annotation (Line(points={{-65.3,-30},{-56,-30}}, color={0,0,127}));
   connect(gain.y,gain1. u)
     annotation (Line(points={{-65.3,-30},{-64,-30},{-64,-46},{-90,-46},{-90,-62},
           {-83.4,-62}},                    color={0,0,127}));
   connect(gain1.y,ventilationOut. m_flow_in)
-    annotation (Line(points={{-67.3,-62},{-54,-62}}, color={0,0,127}));
+    annotation (Line(points={{-67.3,-62},{-56,-62}}, color={0,0,127}));
   connect(weaBus.TDryBul, ventilationIn.T_in) annotation (Line(
       points={{-83,22},{-83,-14},{-60,-14},{-60,-34},{-56,-34}},
       color={255,204,51},

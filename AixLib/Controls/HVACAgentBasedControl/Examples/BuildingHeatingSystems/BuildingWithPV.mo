@@ -53,9 +53,9 @@ model BuildingWithPV
     currentCapacityDiscrete(start=0),
     maxCapacity=3000)
     annotation (Placement(transformation(extent={{-48,-106},{-28,-86}})));
-  HVACAgentBasedControl.CostFunctions.Economic.ConstantFactor constantFactor(p=0.067)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor(p=0.067)
     annotation (Placement(transformation(extent={{-48,-84},{-28,-64}})));
-  HVACAgentBasedControl.CostFunctions.Economic.PV_varCost constantFactor1(
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.PV_Variable_Economic_Cost variableFactorPV(
     rad_treshold=310,
     p=0.29,
     eta=1) annotation (Placement(transformation(extent={{32,-84},{52,-64}})));
@@ -117,7 +117,7 @@ model BuildingWithPV
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-96})));
-  AixLib.Fluid.Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT          bou(nPorts=1, redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{100,-140},{80,-120}})));
   inner Modelica.Fluid.System system
@@ -164,27 +164,23 @@ model BuildingWithPV
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-60,118},{-40,138}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{-18,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{-18,70},
             {8,96}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{64,70},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{64,70},
             {90,96}})));
   BoundaryConditions.WeatherData.Bus        weaBus
     "Weather data bus"
     annotation (Placement(transformation(extent={{18,112},{52,144}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-92,60},
-            {-78,74}})));
-  Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-92,82},
-            {-78,96}})));
   Modelica.Blocks.Sources.Constant internalGains[3](k={0,0,0})
     annotation (Placement(transformation(extent={{-92,36},{-78,50}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance1(
@@ -232,10 +228,10 @@ equation
   connect(hea1.Q_flow, heatProducerAgent1.currentCapacity) annotation (Line(
         points={{43,-116},{44,-116},{44,-108},{34,-108},{34,-104}},
                                                                color={0,0,127}));
-  connect(heatProducerAgent1.calcCapacity, constantFactor1.capacity)
-    annotation (Line(points={{36,-87},{36,-82}},            color={0,0,127}));
-  connect(constantFactor1.cost, heatProducerAgent1.calcCost) annotation (Line(
-        points={{48,-83},{48,-85.5},{48,-88}},                color={0,0,127}));
+  connect(heatProducerAgent1.calcCapacity, variableFactorPV.capacity)
+    annotation (Line(points={{36,-87},{36,-82}}, color={0,0,127}));
+  connect(variableFactorPV.cost, heatProducerAgent1.calcCost)
+    annotation (Line(points={{48,-83},{48,-85.5},{48,-88}}, color={0,0,127}));
 
   connect(PID1.u_m, roomAgent1.T) annotation (Line(points={{150,26},{150,20},{122,
           20},{122,48},{108,48},{108,32}}, color={0,0,127}));
@@ -247,8 +243,8 @@ equation
           -6}}, color={0,0,127}));
   connect(PID1.y, val.y) annotation (Line(points={{161,38},{170,38},{170,-6},{46,
           -6}}, color={0,0,127}));
-  connect(fan.m_flow_in, zero2.y) annotation (Line(points={{84,-96.2},{92,-96.2},
-          {92,-96},{99,-96}}, color={0,0,127}));
+  connect(fan.m_flow_in, zero2.y) annotation (Line(points={{84,-96},{92,-96},{
+          92,-96},{99,-96}},  color={0,0,127}));
   connect(fixedHeatFlow.port, fan.heatPort) annotation (Line(points={{-78,128},{
           -74,128},{-68,128},{-68,100},{60,100},{60,-96},{65.2,-96}},
         color={191,0,0}));
@@ -284,7 +280,7 @@ equation
                                                           color={0,0,127}));
   connect(to_degC3.y, T_air) annotation (Line(points={{-139,108},{-158,108}},
                       color={0,0,127}));
-  connect(constantFactor1.electricity_free, electricity_free) annotation (Line(
+  connect(variableFactorPV.electricity_free, electricity_free) annotation (Line(
         points={{51,-68.8},{92,-68.8},{92,-80},{104,-80},{104,-70},{174,-70}},
         color={255,0,255}));
   connect(and1.u1, lessThreshold.y) annotation (Line(points={{-12,-64},{-22,-64},
@@ -317,9 +313,9 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(constantFactor1.rad, weaBus.HGloHor) annotation (Line(points={{50,
-          -74.2},{66,-74.2},{66,-76},{120,-76},{120,108},{68,108},{68,128},{35,
-          128}}, color={0,0,127}), Text(
+  connect(variableFactorPV.rad, weaBus.HGloHor) annotation (Line(points={{50,-74.2},
+          {66,-74.2},{66,-76},{120,-76},{120,108},{68,108},{68,128},{35,128}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -332,14 +328,6 @@ equation
           38,20},{50,20},{50,68},{96,68},{96,76.5},{90,76.5}}, color={191,0,0}));
   connect(vol1.heatPort, thermalZone1.intGainsRad) annotation (Line(points={{38,
           20},{50,20},{50,68},{98,68},{98,81.7},{90,81.7}}, color={191,0,0}));
-  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{-19.69,77.93},{-47.845,77.93},{-47.845,89},{-77.3,89}}, color=
-          {0,0,127}));
-  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{62.31,77.93},{20,77.93},{20,106},{-28,106},{-28,89},{-77.3,89}},
-        color={0,0,127}));
-  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
-          -77.3,67},{-42,67},{-42,76},{-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   connect(thermalZone.intGains, internalGains.y) annotation (Line(points={{5.4,
           72.08},{5.4,68},{-40,68},{-40,58},{-70,58},{-70,43},{-77.3,43}},
         color={0,0,127}));
@@ -361,9 +349,6 @@ equation
           {-102,-4},{-102,36},{-116,36},{-116,30}}, color={0,0,127}));
   connect(to_degC2.u, roomAgent1.T) annotation (Line(points={{-120,-36},{-108,
           -36},{-108,-28},{80,-28},{80,40},{108,40},{108,32}}, color={0,0,127}));
-  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
-          {{67.9,72.08},{28,72.08},{28,64},{-42,64},{-42,68},{-42,68},{-42,76},
-          {-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   connect(fan.port_b, hydraulicResistance1.port_a) annotation (Line(points={{72,
           -86},{72,-86},{72,-38},{-40,-38}}, color={0,127,255}));
   connect(hydraulicResistance1.port_b, hea.port_a) annotation (Line(points={{
@@ -397,6 +382,6 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The system has two heat sources, which are a boiler and a heating rod. The heating rod is connected to a PV system. During the times the PV panel is able to provide electricity, the cost function of the heating rod considers the electricity free. During all other times the boiler is more cost efficient than the heating rod and is selected for heat generation first.</p>
-<p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
+<p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
 </html>"));
 end BuildingWithPV;

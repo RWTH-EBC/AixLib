@@ -105,7 +105,7 @@ block HVACZone
     use_m_flow_in=true,
     T=TWSup_nominal) "Source for water flow rate"
     annotation (Placement(transformation(extent={{-30,6},{-10,26}})));
-  Sources.FixedBoundary sinWat(
+  AixLib.Fluid.Sources.Boundary_pT sinWat(
     redeclare package Medium = MediumW, nPorts=1) "Sink for water circuit"
     annotation (Placement(transformation(extent={{-72,40},{-52,60}})));
   Modelica.Blocks.Sources.Constant mAir_flow(k=mA_flow_nominal)
@@ -136,7 +136,7 @@ block HVACZone
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
     TDryBul=TOut_nominal,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
     computeWetBulbTemperature=false) "Weather data reader"
     annotation (Placement(transformation(extent={{-152,130},{-132,150}})));
@@ -184,7 +184,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(fan.m_flow_in,mAir_flow. y) annotation (Line(
-      points={{59.8,112},{59.8,140},{21,140}},
+      points={{60,112},{60,140},{21,140}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(hex.port_b1,senTemHXOut. port_a) annotation (Line(
@@ -212,7 +212,7 @@ equation
       color={255,0,255},
       smooth=Smooth.None));
   connect(mWat_flow.y,souWat. m_flow_in) annotation (Line(
-      points={{-51,16},{-42,16},{-42,24},{-30,24}},
+      points={{-51,16},{-42,16},{-42,24},{-32,24}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -220,7 +220,7 @@ equation
       color={255,204,51},
       thickness=0.5,
       smooth=Smooth.None), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(TOut,weaBus. TDryBul)
@@ -254,15 +254,19 @@ equation
 <p>
 This example demonstrates how to export a model of an HVAC system
 that only provides convective cooling to a single thermal zone.
+<!-- @include_Buildings
 The HVAC system is adapted from
 <a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
 AixLib.Examples.Tutorial.SpaceCooling.System3</a>,
 but flow resistances have been added to have the same configuration as
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones\">
 AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones</a>.
+-->
+<!-- @include_Buildings
 Having the same configuration is needed for the validation test
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC\">
 AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC</a>.
+-->
 </p>
 <p>
 The example extends from
@@ -278,6 +282,11 @@ ports which are exposed at the FMU interface.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
 <li>
 November 11, 2016, by Michael Wetter:<br/>
 Made the cooling coil replaceable because the Buildings library

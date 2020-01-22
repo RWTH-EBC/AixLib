@@ -29,11 +29,14 @@ protected
     "Wind direction from weather bus";
   Modelica.SIunits.Angle surOut = azi-Modelica.Constants.pi
     "Angle of surface that is used to compute angle of attack of wind";
+  Modelica.Blocks.Interfaces.RealInput d = Medium.density(
+    Medium.setState_pTX(p_in_internal, T_in_internal, X_in_internal));
+
 equation
   alpha = winDir-surOut;
   CpAct = AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise(
             Cp0=Cp0, incAng=alpha, G=G);
-  pWin = 0.5*CpAct*medium.d*vWin*vWin;
+  pWin = 0.5*CpAct*d*vWin*vWin;
   pTot = pWea + pWin;
 
   connect(weaBus.winDir, winDir);
@@ -47,18 +50,20 @@ equation
 This model describes boundary conditions for
 pressure, enthalpy, and species concentration that can be obtained
 from weather data. The model is identical to
-<a href=\"modelica://Buildings.Fluid.Sources.Outside\">
-Buildings.Fluid.Sources.Outside</a>,
+<a href=\"modelica://AixLib.Fluid.Sources.Outside\">
+AixLib.Fluid.Sources.Outside</a>,
 except that it adds the wind pressure to the
 pressure at the fluid port <code>ports</code>.
 The correlation that is used to compute the wind pressure is based
 on Swami and Chandra (1987) and valid for low-rise buildings
 with rectangular shape.
 The same correlation is also implemented in CONTAM (Persily and Ivy, 2001).
+<!-- @include_Buildings
 For other buildings, the model
-<a href=\"modelica://Buildings.Fluid.Sources.Outside_Cp\">
-Buildings.Fluid.Sources.Outside_Cp</a> should be used that takes
+<a href=\"modelica://AixLib.Fluid.Sources.Outside_Cp\">
+AixLib.Fluid.Sources.Outside_Cp</a> should be used that takes
 the wind pressure coefficient as an input or parameter.
+-->
 </p>
 <p>
 The wind pressure coefficient is computed based on the
@@ -90,7 +95,7 @@ all low-rise buildings as this represents the average of
 various values reported in the literature.
 The computation of the actual wind pressure coefficient <i>C<sub>p</sub></i>
 is explained in the function
-<a href=\"modelica://Buildings.Airflow.Multizone.BaseClasses.windPressureLowRise\">
+<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise\">
 Buildings.Airflow.Multizone.BaseClasses.windPressureLowRise</a>
 that is called by this model.
 </p>
@@ -124,7 +129,7 @@ Cape Canaveral, Florida.
 <li>
 Andrew K. Persily and Elizabeth M. Ivy.
 <i>
-<a href=\"www.bfrl.nist.gov/IAQanalysis/docs/NISTIR6585.pdf\">
+<a href=\"http://ws680.nist.gov/publication/get_pdf.cfm?pub_id=860831\">
 Input Data for Multizone Airflow and IAQ Analysis.</a></i>
 NIST, NISTIR 6585.
 January, 2001.

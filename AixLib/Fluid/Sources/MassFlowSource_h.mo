@@ -1,110 +1,149 @@
 within AixLib.Fluid.Sources;
 model MassFlowSource_h
-  "Ideal flow source that produces a prescribed mass flow with prescribed specific enthalpy, mass fraction and trace substances"
-  extends Modelica.Fluid.Sources.BaseClasses.PartialSource;
+  "Ideal flow source that produces a prescribed mass flow with prescribed specific enthalpy, composition and trace substances"
+  extends AixLib.Fluid.Sources.BaseClasses.PartialSource_Xi_C;
+
   parameter Boolean use_m_flow_in = false
     "Get the mass flow rate from the input connector"
-    annotation(Evaluate=true, HideResult=true);
-  parameter Boolean use_h_in= false
-    "Get the specific enthalpy from the input connector"
-    annotation(Evaluate=true, HideResult=true);
-  parameter Boolean use_X_in = false
-    "Get the composition from the input connector"
-    annotation(Evaluate=true, HideResult=true);
-  parameter Boolean use_C_in = false
-    "Get the trace substances from the input connector"
-    annotation(Evaluate=true, HideResult=true);
-
+    annotation(Evaluate=true, HideResult=true, Dialog(group="Conditional inputs"));
   parameter Modelica.SIunits.MassFlowRate m_flow = 0
     "Fixed mass flow rate going out of the fluid port"
-    annotation (Dialog(enable = not use_m_flow_in));
+    annotation (Dialog(enable = not use_m_flow_in,group="Fixed inputs"));
+
+  parameter Boolean use_h_in= false
+    "Get the specific enthalpy from the input connector"
+    annotation(Evaluate=true, HideResult=true, Dialog(group="Conditional inputs"));
   parameter Medium.SpecificEnthalpy h = Medium.h_default
     "Fixed value of specific enthalpy"
-    annotation (Dialog(enable = not use_h_in));
-  parameter Medium.MassFraction X[Medium.nX](
-    final quantity=Medium.substanceNames) = Medium.X_default
-    "Fixed value of composition"
-    annotation (Dialog(enable = (not use_X_in) and Medium.nXi > 0));
-  parameter Medium.ExtraProperty C[Medium.nC](
-    final quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
-    "Fixed values of trace substances"
-    annotation (Dialog(enable = (not use_C_in) and Medium.nC > 0));
+    annotation (Dialog(enable = not use_h_in, group="Fixed inputs"));
 
   Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s") if use_m_flow_in
     "Prescribed mass flow rate"
-    annotation (Placement(transformation(extent={{-120,60},{-80,100}})));
+    annotation (Placement(transformation(extent={{-140,60},{-100,100}}),iconTransformation(extent={{-140,60},
+            {-100,100}})));
+
   Modelica.Blocks.Interfaces.RealInput h_in(final unit="J/kg") if use_h_in
-    "Prescribed fluid specific enthalpy"
-    annotation (Placement(transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent={{-140,20},{-100,60}})));
-  Modelica.Blocks.Interfaces.RealInput X_in[Medium.nX](
-    each final unit = "kg/kg",
-    final quantity=Medium.substanceNames) if use_X_in "Prescribed fluid composition"
-    annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
-  Modelica.Blocks.Interfaces.RealInput C_in[Medium.nC](
-    final quantity=Medium.extraPropertiesNames) if use_C_in
-    "Prescribed boundary trace substances"
-    annotation (Placement(transformation(extent={{-120,-100},{-80,-60}}), iconTransformation(extent={{-120,-100},{-80,-60}})));
+    "Prescribed boundary specific enthalpy"
+    annotation (Placement(transformation(extent={{-140,20},{-100,60}})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput m_flow_in_internal(final unit="kg/s")
     "Needed to connect to conditional connector";
   Modelica.Blocks.Interfaces.RealInput h_in_internal(final unit="J/kg")
     "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealInput X_in_internal[Medium.nX](
-    each final unit = "kg/kg",
-    final quantity=Medium.substanceNames)
-    "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealInput C_in_internal[Medium.nC](
-    final quantity=Medium.extraPropertiesNames)
-    "Needed to connect to conditional connector";
-initial equation
-  if not use_X_in then
-    Modelica.Fluid.Utilities.checkBoundary(
-      Medium.mediumName,
-      Medium.substanceNames,
-      Medium.singleState,
-      true,
-      X_in_internal,
-      "MassFlowSource_h");
-  end if;
 
 equation
-  if use_X_in then
-    Modelica.Fluid.Utilities.checkBoundary(
-      Medium.mediumName,
-      Medium.substanceNames,
-      Medium.singleState,
-      true,
-      X_in_internal,
-      "MassFlowSource_h");
-  end if;
+  // Mass flow rate
   connect(m_flow_in, m_flow_in_internal);
-  connect(h_in, h_in_internal);
-  connect(X_in, X_in_internal);
-  connect(C_in, C_in_internal);
   if not use_m_flow_in then
     m_flow_in_internal = m_flow;
   end if;
+  for i in 1:nPorts loop
+    ports[i].p = p_in_internal;
+  end for;
+  sum(ports.m_flow) = -m_flow_in_internal;
+  // Enthalpy
+  connect(h_in, h_in_internal);
   if not use_h_in then
     h_in_internal = h;
   end if;
-  if not use_X_in then
-    X_in_internal = X;
-  end if;
-  if not use_C_in then
-    C_in_internal = C;
-  end if;
-  sum(ports.m_flow) = -m_flow_in_internal;
-  medium.h = h_in_internal;
-  medium.Xi = X_in_internal[1:Medium.nXi];
-  ports.C_outflow = fill(C_in_internal, nPorts);
+  for i in 1:nPorts loop
+     ports[i].h_outflow  = h_in_internal;
+  end for;
+  connect(medium.h, h_in_internal);
+
   annotation (defaultComponentName="boundary",
-    Icon(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={
+    Documentation(info="<html>
+<p>
+Models an ideal flow source, with prescribed values of flow rate, specific enthalpy, composition and trace substances:
+</p>
+<ul>
+<li> Prescribed mass flow rate.</li>
+<li> Prescribed specific enthalpy.</li>
+<li> Boundary composition (only for multi-substance or trace-substance flow).</li>
+</ul>
+<p>
+If <code>use_m_flow_in</code> is false (default option),
+the <code>m_flow</code> parameter
+is used as boundary pressure, and the <code>m_flow_in</code>
+input connector is disabled; if <code>use_m_flow_in</code>
+is true, then the <code>m_flow</code> parameter is ignored,
+and the value provided by the input connector is used instead.
+</p>
+<p>
+The same applies to the specific enthalpy <i>h</i>, composition <i>X<sub>i</sub></i> or <i>X</i> and trace substances <i>C</i>.
+</p>
+<h4>Options</h4>
+<p>
+Instead of using <code>Xi_in</code> (the <i>independent</i> composition fractions),
+the advanced tab provides an option for setting all
+composition fractions using <code>X_in</code>.
+<code>use_X_in</code> and <code>use_Xi_in</code> cannot be used
+at the same time.
+</p>
+<p>
+Parameter <code>verifyInputs</code> can be set to <code>true</code>
+to enable a check that verifies the validity of the used specific enthalpy
+and pressures.
+This removes the corresponding overhead from the model, which is
+a substantial part of the overhead of this model.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>
+for more information.
+</p>
+<p>
+Note, that boundary specific enthalpy,
+mass fractions and trace substances have only an effect if the mass flow
+is from the boundary into the port. If mass is flowing from
+the port into the boundary, the boundary definitions,
+with exception of boundary flow rate, do not have an effect.
+</p>
+</html>",
+revisions="<html>
+<ul>
+<li>
+February 2nd, 2018 by Filip Jorissen<br/>
+Made <code>medium</code> conditional and refactored inputs.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/882\">#882</a>.
+</li>
+<li>
+April 18, 2017, by Filip Jorissen:<br/>
+Changed <code>checkBoundary</code> implementation
+such that it is run as an initial equation
+when it depends on parameters only.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/728\">#728</a>.
+</li>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Added <code>unit</code> and <code>quantity</code> attributes.
+</li>
+<li>
+May 29, 2014, by Michael Wetter:<br/>
+Removed undesirable annotation <code>Evaluate=true</code>.
+</li>
+<li>
+September 29, 2009, by Michael Wetter:<br/>
+First implementation.
+Implemenation is based on <code>Modelica.Fluid</code>.
+</li>
+</ul>
+</html>"),
+    Icon(graphics={
+        Text(
+          visible=use_m_flow_in,
+          extent={{-185,132},{-45,100}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="m_flow"),
+        Text(
+          visible=use_h_in,
+          extent={{-162,34},{-60,-6}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          textString="h"),
         Rectangle(
-          extent={{36,45},{100,-45}},
+          extent={{35,45},{100,-45}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,255}),
@@ -129,80 +168,8 @@ equation
           lineColor={255,0,0},
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid),
-        Text(
-          visible=use_m_flow_in,
-          extent={{-185,132},{-45,100}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="m_flow"),
-        Text(
-          visible=use_h_in,
-          extent={{-113,72},{-73,38}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="h"),
-        Text(
-          visible=use_X_in,
-          extent={{-153,-44},{-33,-72}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="X"),
-        Text(
-          visible=use_X_in,
-          extent={{-155,-98},{-35,-126}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          textString="C"),
-        Text(
-          extent={{-150,110},{150,150}},
+                                  Text(
+          extent={{-161,110},{139,150}},
           textString="%name",
-          lineColor={0,0,255})}),
-    Documentation(info="<html>
-<p>
-Models an ideal flow source, with prescribed values of flow rate, temperature and composition:
-</p>
-<ul>
-<li> Prescribed mass flow rate.</li>
-<li> Prescribed specific enthalpy.</li>
-<li> Boundary composition (only for multi-substance or trace-substance flow).</li>
-</ul>
-<p>If <code>use_m_flow_in</code> is false (default option), the <code>m_flow</code> parameter
-is used as boundary pressure, and the <code>m_flow_in</code> input connector is disabled; if <code>use_m_flow_in</code> is true, then the <code>m_flow</code> parameter is ignored, and the value provided by the input connector is used instead.</p>
-<p>The same applies to the temperature, composition and trace substances.</p>
-<p>
-Note, that boundary temperature,
-mass fractions and trace substances have only an effect if the mass flow
-is from the boundary into the port. If mass is flowing from
-the port into the boundary, the boundary definitions,
-with exception of boundary flow rate, do not have an effect.
-</p>
-</html>",
-revisions="<html>
-<ul>
-<li>
-April 18, 2017, by Filip Jorissen:<br/>
-Changed <code>checkBoundary</code> implementation
-such that it is run as an initial equation
-when it depends on parameters only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/728\">#728</a>.
-</li>
-<li>
-January 26, 2016, by Michael Wetter:<br/>
-Added <code>unit</code> and <code>quantity</code> attributes.
-</li>
-<li>
-May 29, 2014, by Michael Wetter:<br/>
-Removed undesirable annotation <code>Evaluate=true</code>.
-</li>
-<li>
-September 29, 2009, by Michael Wetter:<br/>
-First implementation.
-Implemenation is based on <code>Modelica.Fluid</code>.
-</li>
-</ul>
-</html>"));
+          lineColor={0,0,255})}));
 end MassFlowSource_h;

@@ -3,8 +3,9 @@ partial block HVACZones
   "Partial block to export an HVAC system that has no radiative component and that serves multiple zones as an FMU"
 
   replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-      annotation (choicesAllMatching = true);
+    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
+      annotation (choices(
+        choice(redeclare package Medium = AixLib.Media.Air "Moist air")));
   parameter Integer nZon(min=1)
     "Number of thermal zones served by the HVAC system";
 
@@ -171,11 +172,13 @@ The example
 AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.HVACZones</a>
 shows how a simple HVAC system that serves two rooms can be implemented and exported as
 an FMU.
+<!-- @include_Buildings
 The example
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC\">
 AixLib.Fluid.FMI.ExportContainers.Validation.RoomHVAC</a>
 shows how such an FMU can be connected
 to a room model that has signal flow.
+-->
 </p>
 <p>
 The following two parameters need to be assigned by the user:
@@ -283,6 +286,11 @@ in models that are connected to <code>ports</code>.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice to moist air only.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+</li>
 <li>
 May 25, 2016, by Michael Wetter:<br/>
 First implementation.

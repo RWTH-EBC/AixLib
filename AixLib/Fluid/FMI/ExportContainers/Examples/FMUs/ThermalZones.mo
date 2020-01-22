@@ -33,7 +33,7 @@ model ThermalZones
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
     TDryBul=TOut_nominal,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
     computeWetBulbTemperature=false) "Weather data reader"
     annotation (Placement(transformation(extent={{150,130},{130,150}})));
@@ -70,8 +70,7 @@ model ThermalZones
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     nPorts=3) "Room volume"
     annotation (Placement(transformation(extent={{80,30},{100,50}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon2(
-                                                                   G=10000/30)
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon2(G=10000/30)
     "Thermal conductance with the ambient"
     annotation (Placement(transformation(extent={{30,-26},{50,-6}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow preHea2(Q_flow=
@@ -105,7 +104,7 @@ equation
       color={255,204,51},
       thickness=0.5,
       smooth=Smooth.None), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(theCon1.port_b, vol1.heatPort) annotation (Line(points={{50,120},{50,120},
@@ -114,7 +113,7 @@ equation
           {60,40},{80,40}}, color={191,0,0}));
   connect(TAirOut.T, weaBus.TDryBul) annotation (Line(points={{-32,120},{-40,120},
           {-40,140},{120,140}}, color={0,0,127}), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(TAirOut.port, theCon1.port_a)
@@ -192,11 +191,13 @@ This example demonstrates how to export a model
 that contains two thermal zones with convective heat input from the
 HVAC system only. The thermal zones are connected to an adaptor so that
 they can be coupled
-to an air-based HVAC system. The thermal zone is
+to an air-based HVAC system.
+<!-- @include_Buildings
+The thermal zone is
 taken from
 <a href=\"modelica://AixLib.Examples.Tutorial.SpaceCooling.System3\">
-AixLib.Examples.Tutorial.SpaceCooling.System3
-</a>.
+AixLib.Examples.Tutorial.SpaceCooling.System3</a>.
+-->
 </p>
 <p>
 The example extends from
@@ -213,6 +214,13 @@ exposed at the FMU interface.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+December 4, 2017, by Michael Wetter:<br/>
+Added call to <code>Modelica.Utilities.Files.loadResource</code>
+for weather data file.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/867\">#867</a>.
+</li>
 <li>
 September 14, 2016, by Michael Wetter:<br/>
 First implementation.

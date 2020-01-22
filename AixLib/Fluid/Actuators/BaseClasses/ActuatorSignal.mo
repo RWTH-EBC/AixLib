@@ -8,6 +8,8 @@ model ActuatorSignal
   parameter Modelica.SIunits.Time riseTime=120
     "Rise time of the filter (time to reach 99.6 % of an opening step)"
     annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
+  parameter Integer order(min=1) = 2 "Order of filter"
+    annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
   parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
     "Type of initialization (no init/steady state/initial state/initial output)"
     annotation(Dialog(tab="Dynamics", group="Filtered opening",enable=use_inputFilter));
@@ -34,13 +36,14 @@ protected
         iconTransformation(extent={{60,50},{80,70}})));
 
   Modelica.Blocks.Continuous.Filter filter(
-     order=2,
+     final order=order,
      f_cut=5/(2*Modelica.Constants.pi*riseTime),
      final init=init,
      final y_start=y_start,
      final analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
      final filterType=Modelica.Blocks.Types.FilterType.LowPass,
-     x(each stateSelect=StateSelect.always)) if
+     x(each stateSelect=StateSelect.always,
+       each start=0)) if
         use_inputFilter
     "Second order filter to approximate valve opening time, and to improve numerics"
     annotation (Placement(transformation(extent={{6,81},{20,95}})));
@@ -70,13 +73,13 @@ equation
           points={{0,70},{40,70}}),
         Rectangle(
           visible=use_inputFilter,
-          extent={{-32,40},{32,100}},
+          extent={{-30,40},{30,100}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Ellipse(
           visible=use_inputFilter,
-          extent={{-32,100},{32,40}},
+          extent={{-30,100},{30,40}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
@@ -97,6 +100,10 @@ Models that extend this model use the signal
 current position of the actuator.
 </p>
 <p>
+The filter order can be changed to modify the transient response
+of the actuator.
+</p>
+<p>
 See
 <a href=\"modelica://AixLib.Fluid.Actuators.UsersGuide\">
 AixLib.Fluid.Actuators.UsersGuide</a>
@@ -104,6 +111,23 @@ for a description of the filter.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+November 14, 2019, by Michael Wetter:<br/>
+Set <code>start</code> attribute for <code>filter.x</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1252\">#1252</a>.
+</li>
+<li>
+October 25, 2019, by Jianjun Hu:<br/>
+Improved icon graphics annotation. This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1225\">#1225</a>.
+</li>
+<li>
+February 16, 2018, by Filip Jorissen:<br/>
+Propagated parameter <code>order</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/891\">#891</a>.
+</li>
 <li>
 March 24, 2017, by Michael Wetter:<br/>
 Renamed <code>filteredInput</code> to <code>use_inputFilter</code>.<br/>

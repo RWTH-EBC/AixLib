@@ -46,7 +46,7 @@ model Carnot_TEva_2ndLaw
     final m2_flow_nominal=m2_flow_nominal,
     final m1_flow_nominal=m1_flow_nominal)
     "Chiller model that uses port_b to compute Carnot efficiency" annotation (
-      Placement(transformation(rotation=0, extent={{60,-40},{80,-20}})));
+      Placement(transformation(extent={{60,-40},{80,-20}})));
 
 protected
   model Chiller "Subsystem model with the chiller"
@@ -75,7 +75,7 @@ protected
       m_flow=m1_flow_nominal)
                      "Mass flow rate source"
       annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-    AixLib.Fluid.Sources.FixedBoundary sin1(redeclare package Medium = Medium2, nPorts=1)
+    AixLib.Fluid.Sources.Boundary_pT sin1(redeclare package Medium = Medium2, nPorts=1)
       "Pressure source" annotation (Placement(transformation(extent={{-10,-10},{
               10,10}}, origin={-88,-50})));
     AixLib.Fluid.Chillers.Carnot_TEva chi(
@@ -121,7 +121,7 @@ protected
       m_flow_nominal=m1_flow_nominal,
       tau=0) "Entropy flow rate sensor"
       annotation (Placement(transformation(extent={{38,-20},{58,0}})));
-    AixLib.Fluid.Sources.FixedBoundary sin2(redeclare package Medium = Medium2, nPorts=1)
+    AixLib.Fluid.Sources.Boundary_pT sin2(redeclare package Medium = Medium2, nPorts=1)
       "Pressure source" annotation (Placement(transformation(extent={{10,-10},{-10,
               10}}, origin={88,-10})));
     Modelica.Blocks.Math.Add SIn_flow
@@ -136,12 +136,12 @@ protected
 
     Modelica.Blocks.Interfaces.RealInput TSetEvaLea(unit="K")
       "Set point for evaporator leaving temperature" annotation (Placement(
-          transformation(rotation=0, extent={{-144,10},{-120,30}})));
+          transformation(extent={{-144,10},{-120,30}})));
     Modelica.Blocks.Interfaces.RealOutput SGen_flow "Entropy generated"
-      annotation (Placement(transformation(rotation=0, extent={{140,30},{164,50}})));
+      annotation (Placement(transformation(extent={{140,30},{164,50}})));
     Modelica.Blocks.Interfaces.RealInput TConIn(final unit="K", displayUnit=
           "degC") "Condenser inlet temperature" annotation (Placement(
-          transformation(rotation=0, extent={{-144,-30},{-120,-10}})));
+          transformation(extent={{-144,-30},{-120,-10}})));
     Modelica.Blocks.Interfaces.RealInput TEvaIn(final unit="K", displayUnit=
           "degC") "Evaporator inlet temperature" annotation (Placement(
           transformation(
@@ -225,6 +225,11 @@ despite of a very small temperature lift.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
 <li>
 January 9, 2017, by Michael Wetter:<br/>
 Renamed internal protected class <code>Chiller</code> to be upper-case.

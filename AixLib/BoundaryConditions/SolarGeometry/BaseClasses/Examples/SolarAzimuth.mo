@@ -16,7 +16,7 @@ model SolarAzimuth "Test model for zenith angle"
     "Solar azimuth"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
   WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   WeatherData.Bus weaBus "Weather bus"
@@ -38,28 +38,28 @@ equation
       points={{-60,10},{-44,10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(weaBus.cloTim, decAng.nDay) annotation (Line(
       points={{-44,10},{-28,10},{-28,50},{-22,50}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.solTim, solHouAng.solTim) annotation (Line(
       points={{-44,10},{-28,10},{-28,-10},{18,-10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.solTim, solAzi.solTim) annotation (Line(
       points={{-44,10},{-28,10},{-28,-28},{92,-28},{92,14},{98,14}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (

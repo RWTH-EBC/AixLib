@@ -6,7 +6,7 @@ model CoolingAndHeating
 
   package MediumW = AixLib.Media.Water "Medium model for water";
 
-  AixLib.Fluid.Sources.FixedBoundary sin_1(
+  AixLib.Fluid.Sources.Boundary_pT sin_1(
     redeclare package Medium = MediumW,
     nPorts=1) "Sink chilled water"
     annotation (Placement(transformation(extent={{100,90},{80,110}})));
@@ -17,7 +17,7 @@ model CoolingAndHeating
     nPorts=1,
     T=285.85) "Source air"
     annotation (Placement(transformation(extent={{100,10},{80,30}})));
-  AixLib.Fluid.Sources.FixedBoundary bou(
+  AixLib.Fluid.Sources.Boundary_pT bou(
     redeclare package Medium = MediumA,
     nPorts=1) "Sink air"
     annotation (Placement(transformation(extent={{100,-110},{80,-90}})));
@@ -59,7 +59,7 @@ model CoolingAndHeating
     nPorts=1,
     T=320.95) "Source hot water"
     annotation (Placement(transformation(extent={{-20,50},{0,70}})));
-  AixLib.Fluid.Sources.FixedBoundary sin_2(
+  AixLib.Fluid.Sources.Boundary_pT sin_2(
     redeclare package Medium = MediumW,
     nPorts=1) "Sink hot water"
     annotation (Placement(transformation(extent={{100,50},{80,70}})));
@@ -132,9 +132,9 @@ equation
   connect(beaCooHea.heaPor, vol.heatPort) annotation (Line(points={{40,48},{40,
           48},{40,16},{40,-60},{50,-60}}, color={191,0,0}));
   connect(conCoo.y, pumCoo.m_flow_in) annotation (Line(points={{-49,30},{-40,30},
-          {-40,108},{-20,108}}, color={0,0,127}));
+          {-40,108},{-22,108}}, color={0,0,127}));
   connect(conHea.y, pumHea.m_flow_in) annotation (Line(points={{-49,-10},{-32,
-          -10},{-32,68},{-20,68}}, color={0,0,127}));
+          -10},{-32,68},{-22,68}}, color={0,0,127}));
   connect(pumCoo.ports[1], beaCooHea.watCoo_a) annotation (Line(points={{0,100},
           {12,100},{20,100},{20,66},{26,66}}, color={0,127,255}));
   connect(pumHea.ports[1], beaCooHea.watHea_a)
@@ -153,6 +153,11 @@ for both heating and cooling mode. An air volume is maintained at a temperature 
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
 <li>
 June 25, 2016, by Michael Wetter:<br/>
 Changed medium start temperature to avoid conflicting

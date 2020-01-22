@@ -6,7 +6,7 @@ model DiffuseIsotropic
     HDifTilIso(til=1.5707963267949)
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     annotation (Placement(transformation(extent={{-11,-1},{9,21}})));
@@ -15,21 +15,21 @@ equation
       points={{-40,10},{-1,10}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%second",
+      textString="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(weaBus.HGloHor, HDifTilIso.HGloHor) annotation (Line(
       points={{-1,10},{24,10},{24,14},{38,14}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.HDifHor, HDifTilIso.HDifHor) annotation (Line(
       points={{-1,10},{24,10},{24,6},{38,6}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
+      textString="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (

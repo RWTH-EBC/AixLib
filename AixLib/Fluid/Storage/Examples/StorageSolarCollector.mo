@@ -13,20 +13,19 @@ model StorageSolarCollector
     A_HE=20,
     lambda_ins=0.04,
     s_ins=0.1,
-    alpha_in=1500,
-    alpha_out=15,
+    hConIn=1500,
+    hConOut=15,
     k_HE=1500,
     d=1.5,
     h=2.5,
-    redeclare package Medium = Medium)
-    annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-30,14},{-10,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-60,14},
             {-40,34}})));
   AixLib.Fluid.Movers.Pump
              pump(ControlStrategy = 1,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-8,70})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent = {{-86, 70}, {-66, 90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={36,70})));
@@ -41,7 +40,7 @@ model StorageSolarCollector
     nPorts=1,
     redeclare package Medium = Medium)                        annotation(Placement(transformation(extent={{-66,-26},
             {-46,-6}})));
-  AixLib.Fluid.Sources.FixedBoundary
+  AixLib.Fluid.Sources.Boundary_pT
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
   Modelica.Fluid.Pipes.DynamicPipe
@@ -54,7 +53,8 @@ model StorageSolarCollector
     Collector=AixLib.DataBase.SolarThermal.FlatCollector(),
     A=20,
     redeclare package Medium = Medium,
-    m_flow_nominal=0.01)
+    m_flow_nominal=0.01,
+    volPip=1)
     annotation (Placement(transformation(extent={{24,-10},{44,10}})));
   Modelica.Blocks.Sources.Pulse pulse(period = 3600,               width = 1, amplitude = 60,
     offset=101325)                                                                            annotation(Placement(transformation(extent={{-96,-18},
@@ -77,7 +77,6 @@ model StorageSolarCollector
   Modelica.Blocks.Math.Add add(k2 = -1) annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation = 90, origin={88,30})));
   Modelica.Blocks.Sources.Constant const1(k = 1) annotation(Placement(transformation(extent={{70,20},
             {78,28}})));
-  Modelica.SIunits.Conversions.NonSIunits.Energy_kWh Q_ges;
   Modelica.Blocks.Sources.CombiTimeTable hotSummerDay(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     table=[0,21,0; 3600,20.6,0; 7200,20.5,0; 10800,20.4,0; 14400,20,6; 18000,20.5,
@@ -88,7 +87,6 @@ model StorageSolarCollector
     offset={273.15,0.01})
     annotation (Placement(transformation(extent={{10,32},{30,52}})));
 equation
-  der(Q_ges) = (solarThermal.volume.heatPort.Q_flow - fixedTemperature.port.Q_flow) / 3.6e6;
   connect(fixedTemperature.port, storage.heatPort) annotation(Line(points={{-40,24},
           {-28,24}},                                                                                color = {191, 0, 0}));
   connect(booleanExpression.y, pump.IsNight) annotation(Line(points={{25,70},{
@@ -100,9 +98,9 @@ equation
   connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points={{-20,-16},
           {-20,14}},                                                                                           color = {0, 127, 255}));
   connect(hotSummerDay.y[2], solarThermal.Irradiation) annotation(Line(points={{31,42},
-          {31,10.8},{35,10.8}},                                                                                       color = {0, 0, 127}));
+          {31,10},{34,10}},                                                                                           color = {0, 0, 127}));
   connect(hotSummerDay.y[1], solarThermal.T_air) annotation(Line(points={{31,42},
-          {31,22},{28,22},{28,10.8}},                                                               color = {0, 0, 127}));
+          {31,22},{28,22},{28,10}},                                                                 color = {0, 0, 127}));
   connect(pulse.y, boundary_ph1.p_in) annotation(Line(points={{-75,-8},{-68,-8}},        color = {0, 0, 127}));
   connect(simpleValve.port_b, pump.port_a) annotation(Line(points={{69,52},{68,
           52},{68,80},{-8,80}},                                                                                color = {0, 127, 255}));

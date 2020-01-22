@@ -15,13 +15,15 @@ protected
     tableOnFile=true,
     tableName="tab1",
     fileName=Modelica.Utilities.Files.loadResource(
-       "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
+       Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")),
     columns=2:30,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Data reader"
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
 
-  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim(
+    weaDatStaTim=0,
+    weaDatEndTim=31536000)
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
 
   Modelica.Blocks.Math.Gain conTotSkyCov(final k=0.1)
@@ -38,10 +40,10 @@ equation
       points={{-39,10},{-22,10}},
       color={0,0,127}));
   connect(datRea.y[17], conTotSkyCov.u) annotation (Line(
-      points={{1,10.1379},{1,10},{10,10},{10,30},{18,30},{18,30}},
+      points={{1,10},{1,10},{10,10},{10,30},{18,30},{18,30}},
       color={0,0,127}));
   connect(datRea.y[18], conOpaSkyCov1.u) annotation (Line(
-      points={{1,10.2069},{10,10.2069},{10,-10},{18,-10}},
+      points={{1,10},{10,10},{10,-10},{18,-10}},
       color={0,0,127}));
   connect(conTotSkyCov.y, cheTotSkyCov.nIn) annotation (Line(
       points={{41,30},{58,30}},

@@ -1,0 +1,125 @@
+convertClass("AixLib.Systems.HydraulicModules.Controller.CtrAdmix", "AixLib.Systems.HydraulicModules.Controller.CtrMix");
+convertClass("AixLib.Systems.HydraulicModules.Controller.CtrUnmixed", "AixLib.Systems.HydraulicModules.Controller.CtrPump");
+
+convertElement(
+    "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+    "switch1",
+    "switchToZero");
+convertElement(
+    "AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm",
+    "ConstZero",
+    "constZero");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "Admix",
+    "admix");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "UnmixedThrottle",
+    "unmixedThrottle");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "Unmixed",
+    "unmixed");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctr_unmixed_simple1",
+    "ctrUnmixedSimple");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctr_unmixed_throttle",
+    "ctrUnmixedThrottle");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctr_admix",
+    "ctrMix");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+    "realExpression",
+    "const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrMix.realExpression",
+    "ctrMix.const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+    "const",
+    "constTflowSet");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrMix.const",
+    "ctrMix.constTflowSet");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+    "realExpression1",
+    "const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrMix.realExpression1",
+    "ctrMix.const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrMix",
+    "const",
+    "constRpmPump");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrMix.const",
+    "ctrMix.constRpmPump");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+    "realExpression",
+    "const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedSimple.realExpression",
+    "ctrUnmixedSimple.const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrPump",
+    "const",
+    "constRpmPump");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedSimple.const",
+    "ctrUnmixedSimple.constRpmPump");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+    "realExpression1",
+    "const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedThrottle.realExpression1",
+    "ctrUnmixedThrottle.const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+    "const",
+    "constRpmPump");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedThrottle.const",
+    "ctrUnmixedThrottle.constRpmPump");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+    "PumpSwitchOff",
+    "pumpSwitchOff");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedThrottle.PumpSwitchOff",
+    "ctrUnmixedThrottle.pumpSwitchOff");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+    "realExpression",
+    "const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedThrottle.realExpression",
+    "ctrUnmixedThrottle.const");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Controller.CtrThrottle",
+    "const",
+    "constTflowSet");
+convertElement(
+    "AixLib.Systems.HydraulicModules.Example.ERC_ExperimentalHall_CoolingCircuit",
+    "ctrUnmixedThrottle.const",
+    "ctrUnmixedThrottle.constTflowSet");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped",
+              "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneAirExchange")

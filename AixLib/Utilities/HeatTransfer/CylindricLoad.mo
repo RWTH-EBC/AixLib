@@ -4,9 +4,9 @@ class CylindricLoad "Model for a cylindric heat capacity"
   parameter Modelica.SIunits.Density rho=1600 "Density of material";
   parameter Modelica.SIunits.SpecificHeatCapacity c=1000
     "Specific heat capacity of material";
-  parameter Modelica.SIunits.Length d_out=0.04 "outer diameter of pipe";
-  parameter Modelica.SIunits.Length d_in=0.02 "inner diameter of pipe";
-  parameter Modelica.SIunits.Length length=1 " Length of pipe";
+  parameter Modelica.SIunits.Length d_out(min=0) "outer diameter of pipe";
+  parameter Modelica.SIunits.Length d_in(min=0) "inner diameter of pipe";
+  parameter Modelica.SIunits.Length length(min=0) " Length of pipe";
   parameter Modelica.SIunits.Temperature T0=289.15 "initial temperature";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
   Modelica.SIunits.Mass m "Mass of material";

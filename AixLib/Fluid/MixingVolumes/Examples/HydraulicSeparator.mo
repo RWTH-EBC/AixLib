@@ -19,8 +19,7 @@ model HydraulicSeparator
     redeclare package Medium = Medium,
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
-  AixLib.Fluid.Sources.FixedBoundary
-                                   boundary_p(
+  Sources.Boundary_pT              boundary_p(
     nPorts=1,
     redeclare package Medium = Medium,
     p=150000)                               annotation (Placement(

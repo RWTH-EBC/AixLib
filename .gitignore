@@ -1,3 +1,37 @@
+# Ignore Dymola output, log and temporary files (in alphabetical order)
 *.bak-mo
-*.pyc
-*.log
+*.mat
+*.mof
+buildlog.txt
+diagnostics.txt
+diagnostics_summary.txt
+dsfinal.txt
+dsin.txt
+dslog.txt
+dsmodel_fmuconf.h
+dsmodel.c
+dsmodelext*.c
+dsmodelext*.obj
+dsres.txt
+dymosim
+dymosim.exe
+dymosim.exp
+dymosim.lib
+empty.txt
+eventlog.txt
+failure
+fmiModelIdentifier.h
+help/
+modelDescription.xml
+request
+stat
+status
+stop
+success
+# Ignore files created by BuildingsPy
+*.py[cod]
+*simulator*.log
+*unitTests*.log
+*comparison*.log
+# Ignore files created by PyCharm
+.idea/

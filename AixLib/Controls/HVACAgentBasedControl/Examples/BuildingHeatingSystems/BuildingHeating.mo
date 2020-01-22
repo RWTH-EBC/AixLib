@@ -5,17 +5,14 @@ model BuildingHeating
 
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+                                                                 redeclare
       package Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
-  Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-138,40},
-            {-124,54}})));
-  Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-138,62},
-            {-124,76}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(redeclare package Medium =
         Modelica.Media.Air.SimpleAir, zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{22,58},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())                      annotation(Placement(transformation(extent={{22,58},
             {48,84}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow fan(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=2)
@@ -37,7 +34,7 @@ model BuildingHeating
     Q_flow_nominal=1)
     annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
 
-  AixLib.Fluid.Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
+  Fluid.Sources.Boundary_pT          bou(nPorts=1, redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{142,-80},{122,-60}})));
   Agents.RoomAgent roomAgent(              startTime=60,
@@ -72,9 +69,9 @@ model BuildingHeating
     setCapacity(start=1),
     currentCapacityDiscrete(start=1))
     annotation (Placement(transformation(extent={{-20,-138},{0,-118}})));
-  CostFunctions.Economic.ConstantFactor constantFactor(eta=1)
+  CostFunctions.Economic.Constant_Economic_Cost constantFactor(eta=1)
     annotation (Placement(transformation(extent={{-100,-112},{-80,-92}})));
-  CostFunctions.Economic.ConstantFactor constantFactor1(p=0.60, eta=1)
+  CostFunctions.Economic.Constant_Economic_Cost constantFactor1(p=0.60, eta=1)
     annotation (Placement(transformation(extent={{-20,-112},{0,-92}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
     annotation (Placement(transformation(extent={{-140,-142},{-120,-122}})));
@@ -144,7 +141,7 @@ model BuildingHeating
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-122,92},{-102,112}})));
   inner Modelica.Fluid.System system
@@ -276,7 +273,7 @@ equation
       Line(points={{-119,-132},{-110,-132},{-110,-148},{-26,-148},{-26,-131.4},{
           -18,-131.4}},  color={255,0,255}));
   connect(massFlowRate.y, fan.m_flow_in) annotation (Line(points={{138.7,-21},{
-          148,-21},{148,-50.2},{112,-50.2}}, color={0,0,127}));
+          148,-21},{148,-50},{112,-50}},     color={0,0,127}));
   connect(volume.ports[1], hea.port_a) annotation (Line(points={{-72,-6},{-72,-6},
           {-72,-10},{-114,-10},{-114,-80},{-60,-80}}, color={0,127,255}));
   connect(volume1.ports[1], hea.port_a) annotation (Line(points={{20,-6},{20,-6},
@@ -316,17 +313,6 @@ equation
   connect(thermalZone1.intGainsRad, thermalZone1.intGainsConv) annotation (Line(
         points={{48,69.7},{52,69.7},{52,70},{54,70},{54,64.5},{48,64.5}}, color=
          {191,0,0}));
-  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{-61.69,65.93},{-91.845,65.93},{-91.845,69},{-123.3,69}}, color=
-         {0,0,127}));
-  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{20.31,65.93},{-24,65.93},{-24,86},{-72,86},{-72,69},{-100,69},
-          {-123.3,69}}, color={0,0,127}));
-  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
-          -123.3,47},{-86,47},{-86,56},{-56.1,56},{-56.1,60.08}}, color={0,0,
-          127}));
-  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
-          {{25.9,60.08},{25.9,56},{-56.1,56},{-56.1,60.08}}, color={0,0,127}));
   connect(thermalZone1.intGains, internalGains.y) annotation (Line(points={{
           45.4,60.08},{45.4,48},{-62,48},{-84,48},{-84,38},{-114,38},{-114,23},
           {-123.3,23}}, color={0,0,127}));
