@@ -104,14 +104,6 @@ model ThermalZone
     final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
-  Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
-    each k=0)
-    "Sets sunblind signal to zero (open)"
-    annotation (Placement(
-        transformation(
-        extent={{3,-3},{-3,3}},
-        rotation=90,
-        origin={-26,27})));
   EquivalentAirTemperature.VDI6007 eqAirTempRoof(
     final wfGro=0,
     final n=zoneParam.nOrientationsRoof,
@@ -220,7 +212,8 @@ model ThermalZone
   SolarGain.SimpleExternalShading simpleExternalShading(
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
-    final gValues=zoneParam.shadingFactor)
+    final gValues=zoneParam.shadingFactor) if
+    sum(zoneParam.ATransparent) > 0
     annotation (Placement(transformation(extent={{14,42},{20,48}})));
 protected
   Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
@@ -354,8 +347,6 @@ equation
           {32,50},{38,50}},   color={191,0,0}));
   connect(theConWall.solid, ROM.extWall) annotation (Line(points={{30,13},{33,13},
           {33,42},{38,42}},   color={191,0,0}));
-  connect(constSunblindWall.y, eqAirTempWall.sunblind) annotation (Line(points={{-26,
-          23.7},{-26,23.7},{-26,20}},        color={0,0,127}));
   connect(weaBus.TDryBul,eqAirTempRoof. TDryBul) annotation (Line(
       points={{-100,34},{-86,34},{-86,76},{-48,76},{-48,70},{-38,70}},
       color={255,204,51},
@@ -455,12 +446,18 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(heaterCooler.heatCoolRoom, intGainsConv) annotation (Line(points={{40.7,
           -74.2},{68,-74.2},{68,-2},{104,-2}}, color={191,0,0}));
-  connect(simpleExternalShading.y1, ROM.solRad) annotation (Line(points={{19.94,
-          45.24},{27.97,45.24},{27.97,61},{37,61}}, color={0,0,127}));
-  connect(solRadWall.y, simpleExternalShading.u1) annotation (Line(points={{-43.5,
-          19},{-43.5,34},{4,34},{4,45.06},{13.94,45.06}}, color={0,0,127}));
-  connect(corGMod.solarRadWinTrans, simpleExternalShading.u2) annotation (Line(
-        points={{0.6,43},{2,43},{2,46.8},{14,46.8}}, color={0,0,127}));
+  connect(simpleExternalShading.corrIrr, ROM.solRad) annotation (Line(points={{19.94,
+          45.24},{19.94,53.62},{37,53.62},{37,61}}, color={0,0,127}));
+  connect(simpleExternalShading.shadingFactor, eqAirTempWall.sunblind)
+    annotation (Line(points={{20.06,42.6},{23.03,42.6},{23.03,20},{-26,20}},
+        color={0,0,127}));
+
+  connect(solRadWall.y, simpleExternalShading.solRadTot) annotation (Line(
+        points={{-43.5,19},{-36,19},{-36,32},{13.94,32},{13.94,45.06}}, color={0,
+          0,127}));
+  connect(corGMod.solarRadWinTrans, simpleExternalShading.solRadWin)
+    annotation (Line(points={{0.6,43},{6.3,43},{6.3,46.92},{13.88,46.92}},
+        color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
