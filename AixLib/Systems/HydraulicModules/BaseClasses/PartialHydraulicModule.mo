@@ -208,7 +208,7 @@ equation
 <h4>Characteristics</h4>
 <p>There is a connecting pipe between distributer and collector of manifold so that the pressure difference between them becomes insignificant. The main pump only works against the resistance in the main circuit.</p>
 <p>The mass flow in primary and secondary circuits stay constant.</p>
-<p>The scondary circuits do not affect each other when switching operational modes.</p>
+<p>The secondary circuits do not affect each other when switching operational modes.</p>
 </html>", revisions="<html>
 <ul>
 <li>August, 2018, by Alexander K&uuml;mpel:<br/>First implementation</li>
