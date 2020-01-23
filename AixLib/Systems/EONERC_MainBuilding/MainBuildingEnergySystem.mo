@@ -13,8 +13,8 @@ model MainBuildingEnergySystem
         origin={80,-102})));
   HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium, T_amb=293.15)
     annotation (Placement(transformation(extent={{-58,-100},{52,-52}})));
-  SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal=
-       2) annotation (Placement(transformation(extent={{32,22},{66,62}})));
+  SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal
+      =5) annotation (Placement(transformation(extent={{32,22},{66,62}})));
   HeatExchangerSystem heatExchangerSystem(redeclare package Medium = Medium,
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-146,-26},{-80,18}})));
@@ -66,7 +66,7 @@ model MainBuildingEnergySystem
         rotation=90,
         origin={-170,70})));
   HydraulicModules.Controller.CtrMix ctrMixHTC(
-    TflowSet=333.15,
+    TflowSet=338.15,
     Td=0,
     Ti=150,
     k=0.05,
@@ -138,17 +138,17 @@ model MainBuildingEnergySystem
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
           per, energyDynamics=admixCold1.energyDynamics)),
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    m_flow_nominal=5,
     T_amb=298.15,
     dIns=0.01,
     kIns=0.028,
     d=0.1,
     pipe1(length=5),
-    pipe2(length=1),
+    pipe2(length=5),
     pipe3(length=4),
     pipe4(length=5),
     pipe5(length=5),
-    pipe6(length=0.5),
+    pipe6(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=63) annotation (Placement(transformation(
@@ -180,17 +180,17 @@ model MainBuildingEnergySystem
           Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
           energyDynamics=admixCold2.energyDynamics)),
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
+    m_flow_nominal=5,
     T_amb=298.15,
     dIns=0.01,
     kIns=0.028,
     d=0.1,
     pipe1(length=5),
-    pipe2(length=1),
+    pipe2(length=5),
     pipe3(length=4),
     pipe4(length=5),
     pipe5(length=5),
-    pipe6(length=0.5),
+    pipe6(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     length=1,
     Kv=63) annotation (Placement(transformation(
@@ -276,13 +276,29 @@ model MainBuildingEnergySystem
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={24,102})));
+  Fluid.MixingVolumes.MixingVolume vol(
+    redeclare package Medium = Medium,
+    m_flow_nominal=2,
+    V=0.01,
+    nPorts=3)
+    annotation (Placement(transformation(extent={{-180,-10},{-172,-2}})));
+  Fluid.MixingVolumes.MixingVolume vol1(
+    redeclare package Medium = Medium,
+    m_flow_nominal=2,
+    V=0.01,
+    nPorts=3)
+    annotation (Placement(transformation(extent={{-168,6},{-160,14}})));
+  Fluid.MixingVolumes.MixingVolume vol2(
+    redeclare package Medium = Medium,
+    m_flow_nominal=2,
+    V=0.01,
+    nPorts=3) annotation (Placement(transformation(extent={{100,28},{108,36}})));
+  Fluid.MixingVolumes.MixingVolume vol3(
+    redeclare package Medium = Medium,
+    m_flow_nominal=2,
+    V=0.01,
+    nPorts=3) annotation (Placement(transformation(extent={{112,46},{120,54}})));
 equation
-  connect(switchingUnit.port_a2, heatpumpSystem.port_b1) annotation (Line(
-        points={{66,38.6667},{80,38.6667},{80,-78.6667},{52,-78.6667}},
-                                                              color={0,127,255}));
-  connect(heatpumpSystem.port_a1, switchingUnit.port_b1) annotation (Line(
-        points={{52,-68},{94,-68},{94,58.6667},{66,58.6667}},
-                                                    color={0,127,255}));
   connect(heatpumpSystem.port_a2, heatExchangerSystem.port_b3) annotation (Line(
         points={{-58,-78.6667},{-86,-78.6667},{-86,-25.56},{-84.7143,-25.56}},
                                                                           color=
@@ -327,11 +343,6 @@ equation
           97},{-165.2,96}}, color={0,0,127}));
   connect(boundary2.ports[1], heatpumpSystem.port_b1) annotation (Line(points={{80,-96},
           {80,-78.6667},{52,-78.6667}},          color={0,127,255}));
-  connect(heatpumpSystem.port_a1, admixCold2.port_b2)
-    annotation (Line(points={{52,-68},{116,-68},{116,60}}, color={0,127,255}));
-  connect(heatpumpSystem.port_b1, admixCold2.port_a1) annotation (Line(points={{52,
-          -78.6667},{80,-78.6667},{80,38},{104,38},{104,60}},     color={0,127,
-          255}));
   connect(consumerCold2.port_a, admixCold2.port_b1)
     annotation (Line(points={{104,92},{104,80}}, color={0,127,255}));
   connect(consumerCold2.port_b, admixCold2.port_a2)
@@ -466,18 +477,33 @@ equation
           103.6},{18,102},{19.6,102}}, color={0,0,127}));
   connect(Q_flow_CCA_cold.y, limiterCCACold.u)
     annotation (Line(points={{29.2,102},{28.8,102}}, color={0,0,127}));
-  connect(highTemperatureSystem.port_b, admixHTC.port_a1) annotation (Line(
-        points={{-176.4,-46},{-176.4,7},{-176,7},{-176,60}}, color={0,127,255}));
-  connect(highTemperatureSystem.port_a, admixHTC.port_b2) annotation (Line(
-        points={{-164.8,-46},{-164.8,7},{-164,7},{-164,60}}, color={0,127,255}));
   connect(boundary1.ports[1], highTemperatureSystem.port_b) annotation (Line(
         points={{-188,-34},{-176.4,-34},{-176.4,-46}}, color={0,127,255}));
-  connect(heatExchangerSystem.port_b1, admixHTC.port_b2) annotation (Line(
-        points={{-146,0.4},{-156,0.4},{-156,0},{-164.8,0},{-164.8,7},{-164,7},{
-          -164,60}}, color={0,127,255}));
-  connect(heatExchangerSystem.port_a1, admixHTC.port_a1) annotation (Line(
-        points={{-146,-8.4},{-162,-8.4},{-162,-8},{-176.4,-8},{-176.4,5},{-176,
-          5},{-176,60}}, color={0,127,255}));
+  connect(highTemperatureSystem.port_a, vol1.ports[1]) annotation (Line(points=
+          {{-164.8,-46},{-164.8,6},{-165.067,6}}, color={0,127,255}));
+  connect(vol1.ports[2], heatExchangerSystem.port_b1) annotation (Line(points={
+          {-164,6},{-164,0.4},{-146,0.4}}, color={0,127,255}));
+  connect(admixHTC.port_b2, vol1.ports[3]) annotation (Line(points={{-164,60},{
+          -164,6},{-162.933,6}}, color={0,127,255}));
+  connect(highTemperatureSystem.port_b, vol.ports[1]) annotation (Line(points={
+          {-176.4,-46},{-177.067,-46},{-177.067,-10}}, color={0,127,255}));
+  connect(vol.ports[2], heatExchangerSystem.port_a1) annotation (Line(points={{
+          -176,-10},{-160,-10},{-160,-8.4},{-146,-8.4}}, color={0,127,255}));
+  connect(vol.ports[3], admixHTC.port_a1) annotation (Line(points={{-174.933,
+          -10},{-174.933,24},{-176,24},{-176,60}}, color={0,127,255}));
+  connect(heatpumpSystem.port_b1, vol2.ports[1]) annotation (Line(points={{52,
+          -78.6667},{102.933,-78.6667},{102.933,28}}, color={0,127,255}));
+  connect(vol2.ports[2], switchingUnit.port_a2) annotation (Line(points={{104,
+          28},{102,28},{102,40},{66,40},{66,38.6667}}, color={0,127,255}));
+  connect(vol2.ports[3], admixCold2.port_a1) annotation (Line(points={{105.067,
+          28},{105.067,44},{104,44},{104,60}}, color={0,127,255}));
+  connect(switchingUnit.port_b1, vol3.ports[1]) annotation (Line(points={{66,
+          58.6667},{72,58.6667},{72,58},{80,58},{80,46},{114.933,46}}, color={0,
+          127,255}));
+  connect(vol3.ports[2], admixCold2.port_b2)
+    annotation (Line(points={{116,46},{116,60},{116,60}}, color={0,127,255}));
+  connect(vol3.ports[3], heatpumpSystem.port_a1) annotation (Line(points={{
+          117.067,46},{118,46},{118,-68},{52,-68}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},

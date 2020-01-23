@@ -92,7 +92,7 @@ model GeothermalFieldSimple "Geothermal probe"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(final G=
         G_groundFar)
            annotation (Placement(transformation(extent={{76,-280},{96,-260}})));
-  parameter Modelica.SIunits.ThermalConductance G_groundFar = 6000
+  parameter Modelica.SIunits.ThermalConductance G_groundFar = 1000
     "Constant thermal conductance of ground";
   parameter Modelica.SIunits.ThermalConductance G_groundNear = 22000
     "Constant thermal conductance of ground";
