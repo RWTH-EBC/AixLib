@@ -100,9 +100,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  annotation (experiment(StopTime=2073600, __Dymola_NumberOfIntervals=5000),
-                                         __Dymola_Commands(file(ensureSimulated=
-           true)=
-        "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_HeatpumpValidation.mos"
+  annotation (experiment(StopTime=259200),
+                                         __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Systems/EONERC_MainBuilding/Validation/Simulate_and_plot_GTFValidation.mos"
         "Simulate and plot"));
 end GTFValidation;
