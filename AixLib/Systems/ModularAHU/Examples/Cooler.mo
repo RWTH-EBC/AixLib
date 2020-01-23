@@ -7,6 +7,18 @@ model Cooler "Cooler register example"
     annotation (choicesAllMatching=true);
 
   RegisterModule registerModule(
+    redeclare HydraulicModules.ThrottlePump hydraulicModule(
+      dIns=0.01,
+      kIns=0.028,
+      d=0.032,
+      length=1,
+      Kv=6.3,
+      redeclare
+        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+            redeclare
+            AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
+            per))),
     redeclare package Medium2 = MediumWater,
     m1_flow_nominal=1,
     m2_flow_nominal=0.1,
@@ -20,19 +32,7 @@ model Cooler "Cooler register example"
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol1,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol2),
     hydraulicModuleIcon="ThrottlePump",
-    T_amb=293.15,
-    redeclare HydraulicModules.ThrottlePump partialHydraulicModule(
-      dIns=0.01,
-      kIns=0.028,
-      d=0.032,
-      length=1,
-      Kv=6.3,
-      redeclare
-        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-            redeclare
-            AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
-            per))))
+    T_amb=293.15)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
   Fluid.Sources.Boundary_pT boundaryWaterSource(
     nPorts=1,
@@ -94,5 +94,5 @@ equation
 <ul>
 <li>August 30, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
-</html>"));
+</html>"), experiment(StopTime=3600));
 end Cooler;

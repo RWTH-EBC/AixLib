@@ -54,13 +54,7 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
-    redeclare package Medium1 = MediumAir,
-    redeclare package Medium2 = MediumWater,
-    m1_flow_nominal=3000/3600,
-    m2_flow_nominal=2.866/3600*1000,
-    tau=150,
-    T_amb=293.15,
-    redeclare HydraulicModules.Admix partialHydraulicModule(
+    redeclare HydraulicModules.Admix hydraulicModule(
       tau=5,
       dIns=0.01,
       kIns=0.028,
@@ -79,6 +73,12 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
         PumpInterface(pumpParam=
             AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN25_H1_8_V9(),
           calculatePower=true)),
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
+    m1_flow_nominal=3000/3600,
+    m2_flow_nominal=2.866/3600*1000,
+    tau=150,
+    T_amb=293.15,
     dynamicHX(
       dp1_nominal=66,
       dp2_nominal=6000 + 8000,

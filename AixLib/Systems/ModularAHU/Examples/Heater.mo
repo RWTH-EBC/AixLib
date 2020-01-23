@@ -8,6 +8,17 @@ model Heater "Heating register"
 
 
   RegisterModule registerModule(
+    redeclare HydraulicModules.Admix hydraulicModule(
+      dIns=0.01,
+      kIns=0.028,
+      d=0.032,
+      length=1,
+      Kv=6.3,
+      redeclare
+        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
+            redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4
+            per))),
     redeclare package Medium2 = MediumWater,
     m1_flow_nominal=1,
     m2_flow_nominal=0.1,
@@ -20,17 +31,6 @@ model Heater "Heating register"
       Q_nom=30000,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol1,
       redeclare AixLib.Fluid.MixingVolumes.MixingVolume vol2),
-    redeclare HydraulicModules.Admix partialHydraulicModule(
-      dIns=0.01,
-      kIns=0.028,
-      d=0.032,
-      length=1,
-      Kv=6.3,
-      redeclare
-        AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-        PumpInterface(pump(energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
-            redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4
-            per))),
     hydraulicModuleIcon="Admix",
     T_amb=293.15)
     annotation (Placement(transformation(extent={{-40,-46},{26,40}})));
@@ -84,7 +84,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   annotation (Documentation(info="<html>
-<p>This example demonstrates the use of the RegsterModule for a heating register with an admix circuit. The controller controls the outflow air temperature to 20&deg;C.</p>
+<p>This example demonstrates the use of the RegisterModule for a heating register with an admix circuit. The controller controls the outflow air temperature to 20&deg;C.</p>
 </html>", revisions="<html>
 <ul>
 <li>August 30, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>

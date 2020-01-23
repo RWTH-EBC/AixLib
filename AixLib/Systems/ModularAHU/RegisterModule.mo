@@ -28,7 +28,7 @@ model RegisterModule "AHU register module for heaters and coolers"
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
-  replaceable HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
+  replaceable AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
     final energyDynamics=energyDynamics,
     final T_amb=T_amb,
     redeclare final package Medium = Medium2,
@@ -42,7 +42,7 @@ model RegisterModule "AHU register module for heaters and coolers"
         rotation=90,
         origin={0,-40})),
     __Dymola_choicesAllMatching=true);
-  Fluid.HeatExchangers.DynamicHX dynamicHX(final m1_flow_nominal=
+  AixLib.Fluid.HeatExchangers.DynamicHX dynamicHX(final m1_flow_nominal=
         m1_flow_nominal, final m2_flow_nominal=m2_flow_nominal,
     final allowFlowReversal1=allowFlowReversal1,
     final allowFlowReversal2=allowFlowReversal2,
@@ -55,13 +55,13 @@ model RegisterModule "AHU register module for heaters and coolers"
     T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat exchanger"), Placement(transformation(extent={{-20,28},
             {20,68}})));
-  BaseClasses.RegisterBus registerBus
+  AixLib.Systems.ModularAHU.BaseClasses.RegisterBus registerBus
     annotation (Placement(transformation(extent={{-102,-12},{-78,10}}),
         iconTransformation(extent={{-112,-14},{-86,12}})));
 
 
 protected
-  Fluid.Sensors.TemperatureTwoPort senT_airIn(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_airIn(
     final tau=0.1,
     final T_start=T_start,
     final transferHeat=true,
@@ -78,7 +78,7 @@ protected
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={-70,90})));
-  Fluid.Sensors.TemperatureTwoPort senT_airOut(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_airOut(
     tau=0.1,
     T_start=T_start,
     transferHeat=true,
@@ -96,7 +96,7 @@ protected
         rotation=270,
         origin={70,90})));
 
-  Fluid.Sensors.VolumeFlowRate VFSen_out(
+  AixLib.Fluid.Sensors.VolumeFlowRate VFSen_out(
     T_start=T_start,
     final m_flow_nominal=m1_flow_nominal,
     redeclare package Medium = Medium1,
@@ -107,10 +107,10 @@ protected
         rotation=0,
         origin={-38,60})));
 equation
-  connect(hydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(points={
-          {-22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}}, color={0,127,255}));
-  connect(hydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(points={
-          {22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}}, color={0,127,255}));
+  connect(hydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(points={{
+          -22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}}, color={0,127,255}));
+  connect(hydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(points={{
+          22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}}, color={0,127,255}));
   connect(senT_airIn.T, PT1_airIn.u)
     annotation (Line(points={{-70,71},{-70,78}}, color={0,0,127}));
   connect(senT_airOut.T, PT1_airOut.u)
