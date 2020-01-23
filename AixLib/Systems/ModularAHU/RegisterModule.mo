@@ -26,17 +26,22 @@ model RegisterModule "AHU register module for heaters and coolers"
     "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab = "Dynamics"));
-  replaceable HydraulicModules.BaseClasses.PartialHydraulicModule
-    partialHydraulicModule(
+  parameter Modelica.SIunits.Time tauHeaTra=1200
+    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
+  replaceable HydraulicModules.BaseClasses.PartialHydraulicModule hydraulicModule(
     final energyDynamics=energyDynamics,
-                           final T_amb=T_amb,
+    final T_amb=T_amb,
     redeclare final package Medium = Medium2,
     final m_flow_nominal=m2_flow_nominal,
     T_start=T_start,
-    final allowFlowReversal=allowFlowReversal2) "Hydraulic module selection"
-    annotation (Dialog(enable=true, group="Hydraulics"), Placement(transformation(extent={{-38,-38},{38,38}},
+    final allowFlowReversal=allowFlowReversal2,
+    final tauHeaTra=tauHeaTra) "Hydraulic module selection" annotation (
+    Dialog(enable=true, group="Hydraulics"),
+    Placement(transformation(
+        extent={{-38,-38},{38,38}},
         rotation=90,
-        origin={0,-40})), __Dymola_choicesAllMatching=true);
+        origin={0,-40})),
+    __Dymola_choicesAllMatching=true);
   Fluid.HeatExchangers.DynamicHX dynamicHX(final m1_flow_nominal=
         m1_flow_nominal, final m2_flow_nominal=m2_flow_nominal,
     final allowFlowReversal1=allowFlowReversal1,
@@ -57,13 +62,14 @@ model RegisterModule "AHU register module for heaters and coolers"
 
 protected
   Fluid.Sensors.TemperatureTwoPort senT_airIn(
-    tau=0.1,
-    T_start=T_start,
-    transferHeat=true,
+    final tau=0.1,
+    final T_start=T_start,
+    final transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m1_flow_nominal,
     redeclare final package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal1)
+    final allowFlowReversal=allowFlowReversal1,
+    final tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_airIn(
     final initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -79,7 +85,8 @@ protected
     final TAmb=T_amb,
     final m_flow_nominal=m1_flow_nominal,
     redeclare package Medium = Medium1,
-    final allowFlowReversal=allowFlowReversal1)
+    final allowFlowReversal=allowFlowReversal1,
+    final tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{60,50},{80,70}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_airOut(
     final initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -100,19 +107,18 @@ protected
         rotation=0,
         origin={-38,60})));
 equation
-  connect(partialHydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(
-        points={{-22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}},
-                                                             color={0,127,255}));
-  connect(partialHydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(
-        points={{22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}},   color={0,127,255}));
+  connect(hydraulicModule.port_b1, dynamicHX.port_a2) annotation (Line(points={
+          {-22.8,-2},{-22,-2},{-22,20},{20,20},{20,36}}, color={0,127,255}));
+  connect(hydraulicModule.port_a2, dynamicHX.port_b2) annotation (Line(points={
+          {22.8,-2},{18,-2},{18,6},{-20,6},{-20,36}}, color={0,127,255}));
   connect(senT_airIn.T, PT1_airIn.u)
     annotation (Line(points={{-70,71},{-70,78}}, color={0,0,127}));
   connect(senT_airOut.T, PT1_airOut.u)
     annotation (Line(points={{70,71},{70,78}}, color={0,0,127}));
   connect(dynamicHX.port_b1, senT_airOut.port_a) annotation (Line(points={{20,60},
           {60,60}},                   color={0,127,255}));
-  connect(partialHydraulicModule.hydraulicBus, registerBus.hydraulicBus)
-    annotation (Line(
+  connect(hydraulicModule.hydraulicBus, registerBus.hydraulicBus) annotation (
+      Line(
       points={{-38,-40},{-89.94,-40},{-89.94,-0.945}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -138,10 +144,10 @@ equation
     annotation (Line(points={{-80,60},{-100,60}}, color={0,127,255}));
   connect(senT_airOut.port_b, port_b1)
     annotation (Line(points={{80,60},{100,60}}, color={0,127,255}));
-  connect(partialHydraulicModule.port_a1, port_a2) annotation (Line(points={{-22.8,
-          -78},{-100,-78},{-100,-60}},                     color={0,127,255}));
-  connect(partialHydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,
-          -78},{100,-78},{100,-60}}, color={0,127,255}));
+  connect(hydraulicModule.port_a1, port_a2) annotation (Line(points={{-22.8,-78},
+          {-100,-78},{-100,-60}}, color={0,127,255}));
+  connect(hydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,-78},
+          {100,-78},{100,-60}}, color={0,127,255}));
   connect(VFSen_out.V_flow, registerBus.VFlowAirMea) annotation (Line(points={{-38,49},
           {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
       string="%second",
