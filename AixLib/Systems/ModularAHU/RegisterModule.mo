@@ -141,8 +141,6 @@ equation
           -78},{-100,-78},{-100,-60}},                     color={0,127,255}));
   connect(partialHydraulicModule.port_b2, port_b2) annotation (Line(points={{22.8,
           -78},{100,-78},{100,-60}}, color={0,127,255}));
-                                               //"Admix" or "Injection" or "Injection2WayValve",
-//          visible=hydraulicModuleIcon <> "Throttle",
   connect(VFSen_out.V_flow, registerBus.VFlowAirMea) annotation (Line(points={{-38,49},
           {-38,34},{-89.94,34},{-89.94,-0.945}},         color={0,0,127}), Text(
       string="%second",
