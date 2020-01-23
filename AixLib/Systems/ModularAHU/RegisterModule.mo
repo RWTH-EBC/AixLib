@@ -57,6 +57,7 @@ model RegisterModule "AHU register module for heaters and coolers"
 
 protected
   Fluid.Sensors.TemperatureTwoPort senT_airIn(
+    tau=0.1,
     T_start=T_start,
     transferHeat=true,
     final TAmb=T_amb,
@@ -72,7 +73,7 @@ protected
         rotation=270,
         origin={-70,90})));
   Fluid.Sensors.TemperatureTwoPort senT_airOut(
-    final tau=1,
+    tau=0.1,
     T_start=T_start,
     transferHeat=true,
     final TAmb=T_amb,
@@ -370,7 +371,7 @@ equation
             120}})),
     Documentation(info="<html>
 <p>The RegisterModule is a model for heating and cooling registers in air-handling units. It includes a simple heat exchanger and a replaceable hydraulic system (HydraulicModules) for the heat/cold supply with e.g. water. The Icon of the hydraulic circuit can be selected as well.</p>
-<p>In order to communicate sensor measurements and actuator signals, the registerBus is used. The air temperature sensor signal is multiplied with a first order element to simulate the dynamic beahvior of the sensors.</p>
+<p>In order to communicate sensor measurements and actuator signals, the registerBus is used. The air temperature sensor signal is multiplied with a first order element to simulate the dynamic behavior of the sensors.</p>
 </html>", revisions="<html>
 <ul>
 <li>Januar 09, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
