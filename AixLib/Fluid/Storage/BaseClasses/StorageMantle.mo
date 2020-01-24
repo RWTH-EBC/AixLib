@@ -140,6 +140,10 @@ calculation of losses. No additional losses are included.</p>
 </html>",
       revisions="<html>
 <ul>
+<li>
+January 24, 2020 by Philipp Mehrfeld:<br/>
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a> Switch to Dynamics enumerator to control init and energy conversion during simulation.
+</li>
 <li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
 <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>

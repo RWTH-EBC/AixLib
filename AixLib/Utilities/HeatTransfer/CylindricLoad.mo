@@ -54,6 +54,10 @@ equation
       height=0.6),
     Documentation(revisions="<html>
 <ul>
+<li>
+January 24, 2020 by Philipp Mehrfeld:<br/>
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a> Switch to MSL capacity model and to Dynamics enumerator to control init and energy conversion during simulation.
+</li>
 <li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
 <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Transferred to AixLib</li>
 <li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

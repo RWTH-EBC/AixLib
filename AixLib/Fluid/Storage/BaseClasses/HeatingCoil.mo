@@ -39,7 +39,7 @@ model HeatingCoil "Heating coil for heat storage model"
     each final thickness=0.5*(pipeHC.d_o - pipeHC.d_i),
     each final T_start_in=TStart,
     each final T_start_out=TStart,
-    each final nPorts=1) annotation (Placement(transformation(extent={{-18,-16},{18,16}})));
+    each final nPorts=1) annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
 
 protected
   parameter Medium.ThermodynamicState sta_default=
@@ -58,17 +58,17 @@ equation
 
   connect(convHC1Outside.port_b, pipe.heatPort) annotation (Line(points={{0,40},{0,16}}, color={191,0,0}));
   connect(port_a, pipe[1].port_a) annotation (Line(
-      points={{-100,0},{-18,0}},
+      points={{-100,0},{-16,0}},
       color={0,127,255},
       pattern=LinePattern.DashDotDot));
   for i in 1:disHC-1 loop
     connect(pipe[i].ports_b[1], pipe[i + 1].port_a) annotation (Line(
-        points={{18,0},{24,0},{24,26},{-28,26},{-28,0},{-18,0}},
+        points={{16,0},{28,0},{28,26},{-28,26},{-28,0},{-16,0}},
         color={0,127,255},
         pattern=LinePattern.DashDotDot));
   end for;
   connect(pipe[disHC].ports_b[1], port_b) annotation (Line(
-      points={{18,0},{60,0},{60,0},{100,0}},
+      points={{16,0},{100,0}},
       color={0,127,255},
       pattern=LinePattern.DashDotDot));
 
@@ -152,6 +152,10 @@ coefficient.</p>
 </html>",
       revisions="<html>
 <ul>
+<li>
+January 24, 2020 by Philipp Mehrfeld:<br/>
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a> Use AixLib PlugFlowPipe instead of MSL pipe to use the IBPSA fluid core.
+</li>
 <li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
 <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
