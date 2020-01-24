@@ -4,8 +4,8 @@ FlowControlled_m_flow
 Pump
 SpeedControlled_Nrpm
 SpeedControlled_y
-PumpsPolynomialBased
 Compressors
+PumpsPolynomialBased
 Data
 Examples
 Validation

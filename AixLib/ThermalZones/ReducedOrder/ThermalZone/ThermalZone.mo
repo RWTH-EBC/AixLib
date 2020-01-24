@@ -1,34 +1,90 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone
   "Thermal zone model with internal gains"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
+  extends
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
     constrainedby
     AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
+  parameter Integer internalGainsMode = 1
+     "decides which internal gains model for persons is used";
+  parameter Boolean recOrSep=true "Use record or seperate parameters"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Modes"), choices(choice =  false
+        "Seperate",choice = true "Record",radioButtons = true));
+  parameter Boolean Heater_on=true "Activates the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real h_heater=0 "Upper limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real l_heater=0 "Lower limit controller output of the heater"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Real KR_heater=1000 "Gain of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater=1
+    "Time constant of the heating controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Heater", enable=not recOrSep));
+  parameter Boolean Cooler_on=true "Activates the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real h_cooler=0 "Upper limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real l_cooler=0 "Lower limit controller output of the cooler"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Real KR_cooler=1000 "Gain of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler=1
+    "Time constant of the cooling controller"
+    annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent
+    humanSenHeaDependent(
+    radiationConvertor(use_A_in=true),
+    final T0=zoneParam.T_start,
+    final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final roomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final activityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+         ATot > 0 and internalGainsMode == 1
+    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  replaceable Utilities.Sources.InternalGains.Humans.HumanSensibleHeatAreaSpecific
-    humanSenHea(
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent
+    humanSenHeaIndependent(
+    radiationConvertor(use_A_in=true),
     final T0=zoneParam.T_start,
-    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-    final RoomArea=zoneParam.AZone) if ATot > 0
-    "Internal gains from persons" annotation (choicesAllMatching=true,
-      Placement(transformation(extent={{64,-36},{84,-16}})));
-  replaceable Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
+    final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final roomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+         ATot > 0 and internalGainsMode == 2
+    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanTotalHeatTemperatureDependent
+    humanTotHeaDependent(
+    radiationConvertor(use_A_in=true),
+    final T0=zoneParam.T_start,
+    final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
+    final roomArea=zoneParam.AZone,
+    final specificPersons=zoneParam.specificPeople,
+    final activityDegree=zoneParam.activityDegree,
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
+         ATot > 0 and internalGainsMode == 3
+    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+
+  replaceable AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
-    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-    final T0=zoneParam.T_start,
-    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0
+      final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+      final T0=zoneParam.T_start,
+      final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
+      final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  replaceable Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
-    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    final T0=zoneParam.T_start,
-    final LightingPower=zoneParam.lightingPowerSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
+  replaceable AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific
+    lights(
+      final ratioConv=zoneParam.ratioConvectiveHeatLighting,
+      final T0=zoneParam.T_start,
+      final LightingPower=zoneParam.lightingPowerSpecific,
+      final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   corG corGMod(
     final n=zoneParam.nOrientations,
@@ -45,7 +101,8 @@ model ThermalZone
     final hRad=zoneParam.hRadWall,
     final hConWinOut=zoneParam.hConWinOut,
     final aExt=zoneParam.aExt,
-    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0 "Computes equivalent air temperature"
+    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
     each k=0)
@@ -63,7 +120,8 @@ model ThermalZone
     final hConWallOut=zoneParam.hConRoofOut,
     final hRad=zoneParam.hRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
-    final TGro=273.15) if zoneParam.ARoof > 0 "Computes equivalent air temperature for roof"
+    final TGro=273.15) if zoneParam.ARoof > 0
+    "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{-36,66},{-16,86}})));
   Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
      each k=0)
@@ -102,6 +160,63 @@ model ThermalZone
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,78},{-68,95}})));
 
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler(
+    each h_heater=h_heater,
+    each l_heater=l_heater,
+    each KR_heater=KR_heater,
+    each TN_heater=TN_heater,
+    each h_cooler=h_cooler,
+    each l_cooler=l_cooler,
+    each KR_cooler=KR_cooler,
+    each TN_cooler=TN_cooler,
+    final zoneParam=zoneParam,
+    each recOrSep=recOrSep,
+    each Heater_on=Heater_on,
+    each Cooler_on=Cooler_on,
+    each staOrDyn=not zoneParam.withIdealThresholds) if (ATot > 0 or zoneParam.VAir
+     > 0) and (recOrSep and (zoneParam.HeaterOn or zoneParam.CoolerOn)) or (
+    not recOrSep and (Heater_on or Cooler_on))
+                                      "Heater Cooler with PI control"
+    annotation (Placement(transformation(extent={{16,-82},{42,-56}})));
+  Utilities.Sources.HeaterCooler.HeaterCoolerController heaterCoolerController(zoneParam=
+       zoneParam) if zoneParam.withIdealThresholds
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={30,-90})));
+  Modelica.Blocks.Interfaces.RealInput TSetCool(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
+           "Set point for cooler" annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=270,
+        origin={18,-118}),iconTransformation(
+        extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={28,-90})));
+  Modelica.Blocks.Interfaces.RealInput TSetHeat(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+           "Set point for heater" annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=270,
+        origin={50,-118}), iconTransformation(
+        extent={{10,-10},{-10,10}},
+        rotation=270,
+        origin={50,-90})));
+  Modelica.Blocks.Interfaces.RealOutput PHeater(final quantity="HeatFlowRate",
+      final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and ((recOrSep and
+    zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+    "Power for heating" annotation (Placement(transformation(extent={{100,-90},
+            {120,-70}}),iconTransformation(extent={{80,-80},{100,-60}})));
+  Modelica.Blocks.Interfaces.RealOutput PCooler(final quantity="HeatFlowRate",
+      final unit="W") if (ATot > 0 or zoneParam.VAir > 0) and ((recOrSep and
+    zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
+    "Power for cooling" annotation (Placement(transformation(extent={{100,-104},
+            {120,-84}}), iconTransformation(extent={{80,-100},{100,-80}})));
 protected
   Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{4,-4},{-4,4}})));
@@ -153,19 +268,45 @@ protected
     annotation (Placement(transformation(extent={{4,23},{16,35}})));
 
 equation
-  connect(intGains[1],humanSenHea. Schedule) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
-        color={0,0,127}));
   connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-100},
           {80,-100},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
-  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},{80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},
-                                                                 color={0,0,127}));
+  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},
+          {80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
   connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
           {92,-60.8},{92,-60},{92,-60},{92,50},{86,50},{86,50}},
                                        color={191,0,0}));
   connect(machinesSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
           -40.8},{92,-40.8},{92,-40},{92,-40},{92,50},{86,50},{86,50}},
                                                  color={191,0,0}));
-  connect(humanSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
+  connect(intGains[1],humanSenHeaDependent.schedule)  annotation (Line(points={{80,
+          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
+        color={0,0,127}));
+  connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
+          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
+        color={191,0,0}));
+  connect(ROM.intGainsConv, humanSenHeaDependent.TRoom) annotation (Line(points={{86,50},
+          {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
+  connect(humanSenHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
+          {94,-27},{94,54},{86,54}},   color={95,95,95}));
+  connect(intGains[1],humanSenHeaIndependent.schedule)  annotation (Line(points={{80,
+          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
+        color={0,0,127}));
+  connect(humanSenHeaIndependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
+          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
+        color={191,0,0}));
+  connect(ROM.intGainsConv, humanSenHeaIndependent.TRoom) annotation (Line(points={{86,50},
+          {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
+  connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
+          {94,-27},{94,54},{86,54}},   color={95,95,95}));
+  connect(intGains[1],humanTotHeaDependent.schedule)  annotation (Line(points={{80,
+          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
+        color={0,0,127}));
+  connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
+          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
+        color={191,0,0}));
+  connect(ROM.intGainsConv, humanTotHeaDependent.TRoom) annotation (Line(points={{86,50},
+          {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
+  connect(humanTotHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
           {94,-27},{94,54},{86,54}},   color={95,95,95}));
   connect(machinesSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,
           -52.01},{94,-52.01},{94,54},{86,54}},   color={95,95,95}));
@@ -284,13 +425,38 @@ equation
           {12,43},{12,61},{37,61}}, color={0,0,127}));
   connect(hConWall.y, theConWall.Gc) annotation (Line(points={{0,4.4},{25,4.4},{25,8}}, color={0,0,127}));
   connect(hConWin.y, theConWin.Gc) annotation (Line(points={{0,-4.4},{0,34},{25,34}}, color={0,0,127}));
-  connect(humanSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
-          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
-        color={191,0,0}));
+  connect(heaterCoolerController.heaterActive,heaterCooler. heaterActive)
+    annotation (Line(points={{21.8,-88},{10,-88},{10,-80},{37.84,-80},{37.84,
+          -78.36}},        color={255,0,255}));
+  connect(heaterCoolerController.coolerActive,heaterCooler. coolerActive)
+    annotation (Line(points={{21.8,-92},{8,-92},{8,-80},{19.9,-80},{19.9,-78.36}},
+                    color={255,0,255}));
+  connect(TSetHeat,heaterCooler. setPointHeat) annotation (Line(points={{50,-118},
+          {50,-109},{31.86,-109},{31.86,-78.36}},
+                                                color={0,0,127}));
+  connect(TSetCool,heaterCooler. setPointCool) annotation (Line(points={{18,-118},
+          {18,-108},{25.88,-108},{25.88,-78.36}},
+                                               color={0,0,127}));
+  connect(heaterCooler.coolingPower,PCooler)  annotation (Line(points={{42,
+          -69.78},{42,-92},{100,-92},{100,-94},{110,-94}},
+                                                 color={0,0,127}));
+  connect(heaterCooler.heatingPower,PHeater)  annotation (Line(points={{42,
+          -63.8},{42,-80},{110,-80}},            color={0,0,127}));
+  connect(weaBus, heaterCoolerController.weaBus) annotation (Line(
+      points={{-100,34},{-100,-86},{28,-86},{28,-85.7},{37.7,-85.7}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(heaterCooler.heatCoolRoom, intGainsConv) annotation (Line(points={{40.7,
+          -74.2},{68,-74.2},{68,-2},{104,-2}}, color={191,0,0}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
+<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used.</p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>
@@ -301,6 +467,12 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.</p>
 </html>",  revisions="<html>
  <ul>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
+  </li>
+  <li> July 10, 2019, by David Jansen and Martin Kremer:<br/>
+  Integration of changeable internal gain models for humans.
+  </li>
   <li>
   March 01, 2019, by Niklas Huelsenbeck:<br/>
   Integration of new Internal Gains models, HumanSensibleHeatAreaSpecific and MachinesAreaSpecific
@@ -376,5 +548,17 @@ equation
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
-          textString="Windows")}));
+          textString="Windows"),
+        Text(
+          extent={{2,-58},{26,-66}},
+          lineColor={0,0,255},
+          fillColor={212,221,253},
+          fillPattern=FillPattern.Solid,
+          textString="Heating
+Cooling"),
+        Rectangle(
+          extent={{6,-58},{48,-98}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid)}));
 end ThermalZone;
