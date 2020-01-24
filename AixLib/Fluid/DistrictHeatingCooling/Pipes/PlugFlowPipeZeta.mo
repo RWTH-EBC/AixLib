@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
-model PlugFlowPipe
+model PlugFlowPipeZeta
   "Pipe model using spatialDistribution for temperature delay and conditional HydraulicResistance"
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
@@ -73,7 +73,7 @@ model PlugFlowPipe
     "Thermal resistance per unit length from fluid to boundary temperature"
     annotation (Dialog(group="Thermal resistance"));
 
-  parameter Real fac=1
+  parameter Real fac= 1.0
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal"
     annotation (Dialog(group="Additional pressurelosses", enable=not use_zeta));
 
@@ -108,7 +108,7 @@ model PlugFlowPipe
     final m_flow_start=m_flow_start,
     final initDelay=initDelay,
     final from_dp=from_dp,
-    final fac=fac,
+    final fac=if not use_zeta then fac else 1.0,
     final ReC=ReC,
     final thickness=thickness,
     final roughness=roughness,
@@ -284,4 +284,4 @@ First implementation.
 <li>The thermal inertia of the pipe wall material is lumped on the side of the pipe that is connected to <span style=\"font-family: Courier New;\">ports_b</span>. </li>
 </ul>
 </html>"));
-end PlugFlowPipe;
+end PlugFlowPipeZeta;

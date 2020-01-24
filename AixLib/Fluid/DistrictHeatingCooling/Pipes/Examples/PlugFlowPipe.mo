@@ -15,7 +15,7 @@ model PlugFlowPipe "Simple example of PlugFlowPipe"
     nPorts=1,
     p(displayUnit="Pa") = 101325) "Pressure boundary condition"
     annotation (Placement(transformation(extent={{82,-10},{62,10}})));
-  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipe pip(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta pip(
     redeclare package Medium = Medium,
     nPorts=1,
     dh=0.1,

@@ -115,22 +115,22 @@ model PlugFlowPipeEmbedded
 
   Modelica.SIunits.Velocity v_water;
 
-  PlugFlowPipe                               plugFlowPipe(
-  redeclare final package Medium = Medium,
-  final dh = dh,
-  final v_nominal = v_nominal,
-  final ReC = ReC,
-  final roughness = roughness,
-  final length = length,
-  final m_flow_nominal = m_flow_nominal,
-  final dIns = dIns,
-  final kIns = kIns,
-  final cPip = cPip,
-  final rhoPip = rhoPip,
-  final thickness = thickness,
-  final R = R,
-  final fac = fac,
-  final sum_zetas = sum_zetas,
+  PlugFlowPipeZeta plugFlowPipe(
+    redeclare final package Medium = Medium,
+    final dh=dh,
+    final v_nominal=v_nominal,
+    final ReC=ReC,
+    final roughness=roughness,
+    final length=length,
+    final m_flow_nominal=m_flow_nominal,
+    final dIns=dIns,
+    final kIns=kIns,
+    final cPip=cPip,
+    final rhoPip=rhoPip,
+    final thickness=thickness,
+    final R=R,
+    final fac=fac,
+    final sum_zetas=sum_zetas,
     nPorts=nPorts,
     final use_zeta=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
