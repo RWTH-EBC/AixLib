@@ -11,7 +11,7 @@ expandable connector HydraulicBus "Data bus for hydraulic circuits"
   SI.Temperature TRtrnInMea "Temperature into return line";
   SI.Temperature TRtrnOutMea "Temperature out of return line";
   SI.VolumeFlowRate VFlowInMea "Volume flow into forward line";
-  SI.VolumeFlowRate VflowOutMea "Volume flow out of forward line";
+  SI.VolumeFlowRate VFlowOutMea "Volume flow out of forward line";
   annotation (
     Icon(graphics, coordinateSystem(preserveAspectRatio=false)),
     Diagram(graphics, coordinateSystem(preserveAspectRatio=false)),
