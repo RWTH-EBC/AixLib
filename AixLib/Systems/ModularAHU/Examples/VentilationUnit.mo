@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Example;
+within AixLib.Systems.ModularAHU.Examples;
 model VentilationUnit "Example of the ventilation unit"
   extends Modelica.Icons.Example;
   Fluid.Sources.Boundary_pT boundaryOutsideAir(
