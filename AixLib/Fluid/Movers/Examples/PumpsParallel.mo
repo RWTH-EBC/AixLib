@@ -107,7 +107,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(const1.y, floMac1.y) annotation (Line(
-      points={{21,140},{30,140},{30,122}},
+      points={{21,140},{29.8,140},{29.8,122}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (

@@ -39,10 +39,10 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
         origin={80,40})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=data.AC_3000)
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  Modelica.Blocks.Sources.RealExpression Simulation_VF_in_m3h(y=registerBus1.hydraulicBus.VF_in
+  Modelica.Blocks.Sources.RealExpression Simulation_VF_in_m3h(y=registerBus1.hydraulicBus.VFlowInMea
         *3600)
     annotation (Placement(transformation(extent={{80,-26},{100,-6}})));
-  Modelica.Blocks.Sources.RealExpression Simulation_VF_out_m3h(y=registerBus1.hydraulicBus.VF_out
+  Modelica.Blocks.Sources.RealExpression Simulation_VF_out_m3h(y=registerBus1.hydraulicBus.VFlowOutMea
         *3600)
     annotation (Placement(transformation(extent={{80,-46},{100,-26}})));
   Modelica.Blocks.Math.Gain gain(k=0.01)
@@ -54,14 +54,7 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
   Modelica.Blocks.Math.Gain gain1(k=1.1839/3600)
     annotation (Placement(transformation(extent={{-94,20},{-86,28}})));
   RegisterModule registerModule(
-    redeclare package Medium1 = MediumAir,
-    redeclare package Medium2 = MediumWater,
-    m1_flow_nominal=3000/3600,
-    m2_flow_nominal=8832/3600,
-    T_start=296.15,
-    tau=60 + 30,
-    T_amb=293.15,
-    redeclare HydraulicModules.Admix partialHydraulicModule(
+    redeclare HydraulicModules.Admix hydraulicModule(
       tau=5,
       dIns=0.01,
       kIns=0.028,
@@ -80,6 +73,13 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
         PumpInterface(pumpParam=
             AixLib.DataBase.Pumps.PumpPolynomialBased.Pump_DN32(),
           calculatePower=true)),
+    redeclare package Medium1 = MediumAir,
+    redeclare package Medium2 = MediumWater,
+    m1_flow_nominal=3000/3600,
+    m2_flow_nominal=8832/3600,
+    T_start=296.15,
+    tau=60 + 30,
+    T_amb=293.15,
     dynamicHX(
       dp1_nominal(displayUnit="bar") = 138,
       dp2_nominal(displayUnit="bar") = 70600,
@@ -126,7 +126,7 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(combiTimeTable.y[13], registerBus1.hydraulicBus.pumpBus.rpm_Input)
+  connect(combiTimeTable.y[13], registerBus1.hydraulicBus.pumpBus.rpmSet)
     annotation (Line(points={{-79,90},{-58,90},{-58,70},{-106,70},{-106,10.05},{
           -37.95,10.05}}, color={0,0,127}), Text(
       string="%second",
@@ -145,7 +145,7 @@ equation
      Line(points={{-20,-70},{-22,-70},{-22,-62}}, color={0,127,255}));
   connect(hydraulicResistance.port_b, registerModule.port_a2)
     annotation (Line(points={{-22,-42},{-22,0.461538}}, color={0,127,255}));
-  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valSet)
+  connect(valveCharacteristics.y[1], registerBus1.hydraulicBus.valveSet)
     annotation (Line(points={{-47.4,0},{-37.95,0},{-37.95,10.05}}, color={0,0,
           127}), Text(
       string="%second",
