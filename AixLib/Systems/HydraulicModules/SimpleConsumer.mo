@@ -14,9 +14,9 @@ model SimpleConsumer "Simple Consumer"
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
+  parameter SI.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Temperature T_start=293.15
+  parameter SI.Temperature T_start=293.15
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter String functionality "Choose between different functionalities" annotation (choices(
               choice="T_fixed",
@@ -25,8 +25,8 @@ model SimpleConsumer "Simple Consumer"
               choice="Q_flow_input"),Dialog(enable=true));
 
   Fluid.MixingVolumes.MixingVolume volume(
-    V=V,
-    T_start=T_start,
+    final V=V,
+    final T_start=T_start,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal,
     nPorts=2,
@@ -60,26 +60,27 @@ model SimpleConsumer "Simple Consumer"
         origin={-30,54})));
   Fluid.FixedResistances.PlugFlowPipe pipe1(
     final allowFlowReversal=allowFlowReversal,
-    dh=dPipe,
+    final dh=dPipe,
     final v_nominal=1.5,
     final m_flow_nominal=m_flow_nominal,
-    T_start_in=T_start,
-    T_start_out=T_start,
-    length=len/2,
-    dIns=0.01,
-    kIns=0.028,
+    final T_start_in=T_start,
+    final T_start_out=T_start,
+    final length=len/2,
+    final dIns=0.01,
+    final kIns=0.028,
     nPorts=1,
-    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    redeclare package Medium = Medium) annotation (Placement(transformation(extent={{-60,-10},
+            {-40,10}})));
   Fluid.FixedResistances.PlugFlowPipe pipe2(
     allowFlowReversal=allowFlowReversal,
-    dh=dPipe,
+    final dh=dPipe,
     final v_nominal=1.5,
     final m_flow_nominal=m_flow_nominal,
     T_start_in=T_start,
     T_start_out=T_start,
-    length=len/2,
-    dIns=0.01,
-    kIns=0.028,
+    final length=len/2,
+    final dIns=0.01,
+    final kIns=0.028,
     redeclare package Medium = Medium,
     nPorts=1)                          annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=T_fixed) if
@@ -117,33 +118,40 @@ model SimpleConsumer "Simple Consumer"
         origin={-60,100})));
 equation
   connect(volume.heatPort,heatCapacitor. port) annotation (Line(points={{10,10},
-          {10,34},{18,34}},               color={191,0,0}));
+          {10,34},{18,34}},               color={191,0,0},
+      pattern=LinePattern.Dash));
   connect(heatCapacitor.port,convection. solid) annotation (Line(points={{18,34},
           {10,34},{10,44}},              color={191,0,0}));
   connect(convection.fluid,prescribedTemperature. port)
     annotation (Line(points={{10,64},{10,70},{32,70}},
-                                                 color={191,0,0}));
+                                                 color={191,0,0},
+      pattern=LinePattern.Dash));
   connect(realExpression.y,convection. Gc)
     annotation (Line(points={{-19,54},{0,54}}, color={0,0,127}));
   connect(realExpression1.y, prescribedTemperature.T)
-    annotation (Line(points={{79,70},{54,70}},         color={0,0,127}));
-  connect(pipe1.ports_b[1], volume.ports[1]) annotation (Line(points={{-60,0},{2,
-          0}},                     color={0,127,255}));
+    annotation (Line(points={{79,70},{54,70}},         color={0,0,127},
+      pattern=LinePattern.Dash));
+  connect(pipe1.ports_b[1], volume.ports[1]) annotation (Line(points={{-40,0},{
+          2,0}},                   color={0,127,255}));
   connect(volume.ports[2], pipe2.port_a) annotation (Line(points={{-2,0},{40,0}},
                           color={0,127,255}));
   connect(pipe1.port_a, port_a)
-    annotation (Line(points={{-80,0},{-100,0}}, color={0,127,255}));
+    annotation (Line(points={{-60,0},{-100,0}}, color={0,127,255}));
   connect(pipe2.ports_b[1], port_b)
     annotation (Line(points={{60,0},{100,0}}, color={0,127,255}));
   connect(prescribedTemperature.T, T)
-    annotation (Line(points={{54,70},{60,70},{60,120}}, color={0,0,127}));
+    annotation (Line(points={{54,70},{60,70},{60,120}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(prescribedHeatFlow.Q_flow, realExpression2.y)
     annotation (Line(points={{-60,60},{-60,80},{-79,80}},
-                                                 color={0,0,127}));
+                                                 color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(prescribedHeatFlow.Q_flow, Q_flow)
-    annotation (Line(points={{-60,60},{-60,120}},          color={0,0,127}));
+    annotation (Line(points={{-60,60},{-60,120}},          color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(prescribedHeatFlow.port, heatCapacitor.port)
-    annotation (Line(points={{-60,40},{-60,34},{18,34}}, color={191,0,0}));
+    annotation (Line(points={{-60,40},{-60,34},{18,34}}, color={191,0,0},
+      pattern=LinePattern.Dash));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                    Ellipse(
