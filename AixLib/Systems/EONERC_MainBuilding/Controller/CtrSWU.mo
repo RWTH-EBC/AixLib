@@ -125,15 +125,15 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanExpression.y, sWUBus.pumpBus.onOff_Input) annotation (Line(
-        points={{1,64},{44,64},{44,60},{100.1,60},{100.1,0.09}}, color={255,0,255}),
+  connect(booleanExpression.y, sWUBus.pumpBus.onSet) annotation (Line(points={{
+          1,64},{44,64},{44,60},{100.1,60},{100.1,0.09}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(const.y, sWUBus.pumpBus.rpm_Input) annotation (Line(points={{1,90},{100.1,
-          90},{100.1,0.09}}, color={0,0,127}), Text(
+  connect(const.y, sWUBus.pumpBus.rpmSet) annotation (Line(points={{1,90},{
+          100.1,90},{100.1,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

@@ -2,3 +2,4 @@ EonERCModeBasedControl
 CtrHP
 CtrHeatingCoolingMode
 modeStateSelector
+EonERCSimpleControl

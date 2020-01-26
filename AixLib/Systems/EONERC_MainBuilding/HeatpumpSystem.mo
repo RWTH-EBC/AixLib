@@ -627,8 +627,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(switch2.y, heatPumpSystemBus.PelAirCoolerMea) annotation (Line(points
-        ={{54.6,-52},{84,-52},{84,60},{0.07,60},{0.07,60.07}}, color={0,0,127}),
+  connect(switch2.y, heatPumpSystemBus.PelAirCoolerMea) annotation (Line(points=
+         {{54.6,-52},{84,-52},{84,60},{0.07,60},{0.07,60.07}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,

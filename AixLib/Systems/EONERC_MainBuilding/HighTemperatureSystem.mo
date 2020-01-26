@@ -106,20 +106,11 @@ model HighTemperatureSystem
         T_amb)
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
 
-  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
+  Fluid.MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
-    dh=0.2,
-    length=0.5,
     m_flow_nominal=m_flow_nominal,
-    dIns=0.02,
-    kIns=0.028,
-    T_start_in=T_start,
-    T_start_out=T_start,
-    nPorts=3) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={90,42})));
+    V=0.1,
+    nPorts=2) annotation (Placement(transformation(extent={{80,36},{100,56}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -237,8 +228,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(fixedTemperature.port, boiler2.T_amb) annotation (Line(points={{20,-90},
           {0,-90},{0,-66},{-28.16,-66}}, color={191,0,0}));
-  connect(fixedTemperature.port, boiler1.T_amb) annotation (Line(points={{20,-90},
-          {34,-90},{34,-66},{51.84,-66}}, color={191,0,0}));
   connect(senT_a.T, hTCBus.T_out) annotation (Line(points={{106,66.6},{106,99.085},
           {0.09,99.085}}, color={0,0,127}), Text(
       string="%second",
@@ -255,24 +244,24 @@ equation
     annotation (Line(points={{120,60},{112,60}}, color={0,127,255}));
   connect(port_a, senT_b.port_a)
     annotation (Line(points={{120,20},{112,20}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b[1], senT_a.port_a) annotation (Line(points={{92.6667,
-          52},{92,52},{92,60},{100,60}},         color={0,127,255}));
-  connect(plugFlowPipe.port_a, senT_b.port_b)
-    annotation (Line(points={{90,32},{90,20},{100,20}}, color={0,127,255}));
-  connect(admix1.port_a1, plugFlowPipe.port_a)
-    annotation (Line(points={{72,20},{72,32},{90,32}}, color={0,127,255}));
-  connect(admix1.port_b2, senT_a.port_a) annotation (Line(points={{48,20},{48,
-          52},{92,52},{92,60},{100,60}}, color={0,127,255}));
-  connect(admix2.port_a1, plugFlowPipe.port_a) annotation (Line(points={{-8,20},
-          {-6,20},{-6,32},{90,32}}, color={0,127,255}));
-  connect(admix2.port_b2, plugFlowPipe.ports_b[2]) annotation (Line(points={{
-          -32,20},{-34,20},{-34,52},{90,52}}, color={0,127,255}));
-  connect(throttlePump.port_a1, plugFlowPipe.port_a) annotation (Line(points={{
-          -88,20},{-90,20},{-90,32},{90,32}}, color={0,127,255}));
-  connect(throttlePump.port_b2, plugFlowPipe.ports_b[3]) annotation (Line(
-        points={{-112,20},{-114,20},{-114,52},{87.3333,52}}, color={0,127,255}));
-  connect(plugFlowPipe.heatPort, fixedTemperature.port) annotation (Line(points=
-         {{80,42},{32,42},{32,-90},{20,-90}}, color={191,0,0}));
+  connect(admix1.port_a1, senT_b.port_b) annotation (Line(points={{72,20},{72,
+          30},{100,30},{100,20}}, color={0,127,255}));
+  connect(admix2.port_a1, senT_b.port_b) annotation (Line(points={{-8,20},{-10,
+          20},{-10,30},{100,30},{100,20}}, color={0,127,255}));
+  connect(throttlePump.port_a1, senT_b.port_b) annotation (Line(points={{-88,20},
+          {-88,30},{100,30},{100,20}}, color={0,127,255}));
+  connect(senT_a.port_a, admix1.port_b2)
+    annotation (Line(points={{100,60},{48,60},{48,20}}, color={0,127,255}));
+  connect(senT_a.port_a, admix2.port_b2)
+    annotation (Line(points={{100,60},{-32,60},{-32,20}}, color={0,127,255}));
+  connect(senT_a.port_a, throttlePump.port_b2) annotation (Line(points={{100,60},
+          {-112,60},{-112,20}}, color={0,127,255}));
+  connect(fixedTemperature.port, boiler1.T_amb) annotation (Line(points={{20,
+          -90},{32,-90},{32,-88},{48,-88},{48,-66},{51.84,-66}}, color={191,0,0}));
+  connect(senT_b.port_b, vol.ports[1]) annotation (Line(points={{100,20},{94,20},
+          {94,36},{88,36}}, color={0,127,255}));
+  connect(vol.ports[2], senT_a.port_a) annotation (Line(points={{92,36},{96,36},
+          {96,60},{100,60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(
@@ -296,9 +285,8 @@ equation
           extent={{74,-60},{48,-44}},
           lineColor={0,0,0},
           textString="Boiler2"),
-        Rectangle(extent={{86,72},{96,6}}, lineColor={28,108,200}),
-        Line(points={{-110,-20},{-110,60},{86,60}}, color={28,108,200}),
-        Line(points={{-70,-20},{-70,20},{86,20}}, color={28,108,200}),
+        Line(points={{-110,-20},{-110,60},{110,60}},color={28,108,200}),
+        Line(points={{-70,-20},{-70,20},{112,20}},color={28,108,200}),
         Line(points={{-12,-20},{-12,60}}, color={28,108,200}),
         Line(points={{12,-20},{12,20}}, color={28,108,200}),
         Line(points={{50,-20},{50,60}}, color={28,108,200}),
@@ -322,8 +310,6 @@ equation
           extent={{72,22},{76,18}},
           lineColor={28,108,200},
           fillColor={28,108,200},
-          fillPattern=FillPattern.Solid),
-        Line(points={{96,60},{110,60}}, color={28,108,200}),
-        Line(points={{96,20},{110,20}}, color={28,108,200})}), Diagram(
+          fillPattern=FillPattern.Solid)}),                    Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{120,100}})));
 end HighTemperatureSystem;

@@ -91,28 +91,28 @@ model HeatPumpSystemConstantControl
   Modelica.Blocks.Sources.Constant const2(k=5)
     annotation (Placement(transformation(extent={{-80,-130},{-66,-116}})));
 equation
-  connect(greaterThreshold.y, heatPumpSystemBus1.busPumpCold.pumpBus.onOff_Input)
+  connect(greaterThreshold.y, heatPumpSystemBus1.busPumpCold.pumpBus.onSet)
     annotation (Line(points={{14.7,93},{80,93},{80,92},{100.05,92},{100.05,0.05}},
         color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumpCold.y, heatPumpSystemBus1.busPumpCold.pumpBus.rpm_Input)
+  connect(rpmPumpCold.y, heatPumpSystemBus1.busPumpCold.pumpBus.rpmSet)
     annotation (Line(points={{14.7,73},{100.05,73},{100.05,0.05}},  color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumpHot.y, heatPumpSystemBus1.busPumpHot.pumpBus.rpm_Input)
+  connect(rpmPumpHot.y, heatPumpSystemBus1.busPumpHot.pumpBus.rpmSet)
     annotation (Line(points={{14.7,55},{100.05,55},{100.05,0.05}},  color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(greaterThreshold1.y, heatPumpSystemBus1.busPumpHot.pumpBus.onOff_Input)
+  connect(greaterThreshold1.y, heatPumpSystemBus1.busPumpHot.pumpBus.onSet)
     annotation (Line(points={{14.7,33},{100.05,33},{100.05,0.05}},  color={255,0,
           255}), Text(
       string="%second",
@@ -134,26 +134,25 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(gain1.y, heatPumpSystemBus1.busThrottleHS.valSet) annotation (Line(
+  connect(gain1.y, heatPumpSystemBus1.busThrottleHS.valveSet) annotation (Line(
         points={{4.3,-21},{100.05,-21},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(gain2.y, heatPumpSystemBus1.busThrottleCS.valSet) annotation (Line(
+  connect(gain2.y, heatPumpSystemBus1.busThrottleCS.valveSet) annotation (Line(
         points={{4.3,-33},{100.05,-33},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(gain3.y, heatPumpSystemBus1.busThrottleFreecool.valSet) annotation (
-      Line(points={{4.3,-43},{100.05,-43},{100.05,0.05}}, color={0,0,127}),
-      Text(
+  connect(gain3.y, heatPumpSystemBus1.busThrottleFreecool.valveSet) annotation (
+     Line(points={{4.3,-43},{100.05,-43},{100.05,0.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(gain4.y, heatPumpSystemBus1.busThrottleRecool.valSet) annotation (
+  connect(gain4.y, heatPumpSystemBus1.busThrottleRecool.valveSet) annotation (
       Line(points={{4.3,-53},{100.05,-53},{100.05,0.05}}, color={0,0,127}),
       Text(
       string="%second",

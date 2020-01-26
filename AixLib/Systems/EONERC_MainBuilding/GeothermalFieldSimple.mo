@@ -10,12 +10,11 @@ model GeothermalFieldSimple "Geothermal probe"
 
 
 
-
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=
         T_ground)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={94,-290})));
+        origin={110,-270})));
 
   HydraulicModules.Throttle throttle(
     redeclare package Medium = Medium,
@@ -24,6 +23,7 @@ model GeothermalFieldSimple "Geothermal probe"
     final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
+    tauHeaTra=1800,
     dIns=0.01,
     kIns=0.028,
     d=0.125,
@@ -40,6 +40,7 @@ model GeothermalFieldSimple "Geothermal probe"
     final T_amb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
+    tauHeaTra=1800,
     dIns=0.028,
     kIns=0.01,
     d=0.125,
@@ -57,20 +58,21 @@ model GeothermalFieldSimple "Geothermal probe"
     redeclare package Medium2 = Medium,
     allowFlowReversal1=allowFlowReversal,
     allowFlowReversal2=allowFlowReversal,
-    m1_flow_nominal=12,
+    m1_flow_nominal=16,
     m2_flow_nominal=10,
     dp1_nominal=14000,
     dp2_nominal=48000,
-    tau1=2,
-    tau2=2,
+    nNodes=3,
+    tau1=5,
+    tau2=5,
     energyDynamics=energyDynamics,
     T1_start=T_start,
     T2_start=T_start,
     redeclare Fluid.MixingVolumes.MixingVolume vol1,
     redeclare Fluid.MixingVolumes.MixingVolume vol2,
     tau_C=10,
-    dT_nom=4,
-    Q_nom=300000)                          annotation (Placement(transformation(
+    dT_nom=1,
+    Q_nom=800000)                          annotation (Placement(transformation(
         extent={{21,22},{-21,-22}},
         rotation=0,
         origin={0,-117})));
@@ -85,12 +87,15 @@ model GeothermalFieldSimple "Geothermal probe"
     nPorts=2) annotation (Placement(transformation(
         extent={{-13,-13},{13,13}},
         rotation=180,
-        origin={5,-287})));
-  parameter Modelica.SIunits.Volume V=15000 "Volume";
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(final G=G)
-           annotation (Placement(transformation(extent={{44,-300},{64,-280}})));
-  parameter Modelica.SIunits.ThermalConductance G
-    "Constant thermal conductance of material";
+        origin={-5,-271})));
+  parameter Modelica.SIunits.Volume V=0.013*0.013*3.1415*400*40 "Volume of water in pipes in bore hole";
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(final G=
+        G_groundFar)
+           annotation (Placement(transformation(extent={{76,-280},{96,-260}})));
+  parameter Modelica.SIunits.ThermalConductance G_groundFar = 1000
+    "Constant thermal conductance of ground";
+  parameter Modelica.SIunits.ThermalConductance G_groundNear = 22000
+    "Constant thermal conductance of ground";
   Fluid.Sources.Boundary_pT          boundary(
     redeclare package Medium = Medium,
     p=200000,
@@ -103,6 +108,31 @@ model GeothermalFieldSimple "Geothermal probe"
   BaseClasses.TwoCircuitBus twoCircuitBus annotation (Placement(transformation(
           extent={{-148,-148},{-92,-94}}), iconTransformation(extent={{-144,
             -126},{-98,-76}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor1(final G=
+        G_pipe)
+           annotation (Placement(transformation(extent={{18,-280},{38,-260}})));
+  parameter Modelica.SIunits.ThermalConductance G_pipe=0.026*3.1415*400*40 * 300
+    "Constant thermal conductance of pipe material and near ground";
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=
+        C_groundNear,                                                       T(
+        fixed=true, start=T_start))
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={36,-296})));
+  parameter Modelica.SIunits.HeatCapacity C_groundFar=2*2*3.1415*100*1000*2000*40
+    "Heat capacity of near ground (= cp*m)";
+  parameter Modelica.SIunits.HeatCapacity C_groundNear=(0.11*0.11)*3.1415*100*1000*2000*40
+    "Heat capacity of near ground (= cp*m)";
+
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor1(C=
+        C_groundFar,
+      T(fixed=true, start=T_start))
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={72,-296})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor2(final G=
+        G_groundNear)
+           annotation (Placement(transformation(extent={{44,-280},{64,-260}})));
 equation
 
   connect(dynamicHX.port_b1, pump.port_a2) annotation (Line(points={{-21,-130.2},
@@ -111,15 +141,13 @@ equation
   connect(pump.port_b1, dynamicHX.port_a1) annotation (Line(points={{24,-160},{22.2,
           -160},{22.2,-130.2},{21,-130.2}},      color={0,127,255}));
   connect(thermalConductor.port_b, fixedTemperature.port)
-    annotation (Line(points={{64,-290},{84,-290}},           color={191,0,0}));
-  connect(thermalConductor.port_a, vol.heatPort) annotation (Line(points={{44,-290},
-          {32,-290},{32,-287},{18,-287}}, color={191,0,0}));
+    annotation (Line(points={{96,-270},{100,-270}},          color={191,0,0}));
   connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
-  connect(pump.port_b2, vol.ports[1]) annotation (Line(points={{-24,-240},{-24,-274},
-          {7.6,-274}}, color={0,127,255}));
-  connect(pump.port_a1, vol.ports[2]) annotation (Line(points={{24,-240},{24,-266},
-          {2.4,-266},{2.4,-274}}, color={0,127,255}));
+  connect(pump.port_b2, vol.ports[1]) annotation (Line(points={{-24,-240},{-24,-258},
+          {-2.4,-258}},color={0,127,255}));
+  connect(pump.port_a1, vol.ports[2]) annotation (Line(points={{24,-240},{24,-258},
+          {-7.6,-258}},           color={0,127,255}));
   connect(boundary.ports[1], pump.port_b2) annotation (Line(points={{-50,-262},{
           -44,-262},{-44,-260},{-24,-260},{-24,-240}}, color={0,127,255}));
   connect(port_a, throttle.port_a1)
@@ -146,6 +174,16 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(thermalConductor1.port_a, vol.heatPort)
+    annotation (Line(points={{18,-270},{18,-271},{8,-271}},  color={191,0,0}));
+  connect(thermalConductor1.port_b, heatCapacitor.port)
+    annotation (Line(points={{38,-270},{38,-286},{36,-286}}, color={191,0,0}));
+  connect(heatCapacitor1.port, thermalConductor2.port_b)
+    annotation (Line(points={{72,-286},{72,-270},{64,-270}}, color={191,0,0}));
+  connect(thermalConductor1.port_b, thermalConductor2.port_a)
+    annotation (Line(points={{38,-270},{44,-270}}, color={191,0,0}));
+  connect(thermalConductor2.port_b, thermalConductor.port_a)
+    annotation (Line(points={{64,-270},{76,-270}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-320},
             {120,0}}),                                          graphics={
         Rectangle(

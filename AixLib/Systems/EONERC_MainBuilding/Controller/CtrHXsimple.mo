@@ -60,25 +60,25 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, hxBus.secBus.valSet) annotation (Line(points={{1,-50},{100.08,-50},
-          {100.08,0.08}}, color={0,0,127}), Text(
+  connect(PID.y, hxBus.secBus.valveSet) annotation (Line(points={{1,-50},{100.08,
+          -50},{100.08,0.08}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, hxBus.secBus.TFwrd_out) annotation (Line(points={{-10,-62},{-10,
-          -80},{100.08,-80},{100.08,0.08}}, color={0,0,127}), Text(
+  connect(PID.u_m, hxBus.secBus.TFwrdOutMea) annotation (Line(points={{-10,-62},
+          {-10,-80},{100.08,-80},{100.08,0.08}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(constRpmPump.y, hxBus.secBus.pumpBus.rpm_Input) annotation (Line(
+  connect(constRpmPump.y, hxBus.secBus.pumpBus.rpmSet) annotation (Line(
         points={{41,0},{72,0},{72,0.08},{100.08,0.08}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, hxBus.secBus.pumpBus.onOff_Input) annotation (Line(
+  connect(booleanConstant.y, hxBus.secBus.pumpBus.onSet) annotation (Line(
         points={{81,30},{100.08,30},{100.08,0.08}}, color={255,0,255}), Text(
       string="%second",
       index=1,
@@ -86,7 +86,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(greaterThreshold.u, PID.y) annotation (Line(points={{-2,50},{2,50},{2,
           -50},{1,-50}}, color={0,0,127}));
-  connect(constRpmPump1.y, hxBus.primBus.pumpBus.rpm_Input) annotation (Line(
+  connect(constRpmPump1.y, hxBus.primBus.pumpBus.rpmSet) annotation (Line(
         points={{21,90},{100.08,90},{100.08,0.08}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -94,14 +94,14 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(greaterThreshold.y, booleanToReal.u)
     annotation (Line(points={{21,50},{38,50},{38,80}}, color={255,0,255}));
-  connect(greaterThreshold.y, hxBus.primBus.pumpBus.onOff_Input) annotation (
+  connect(greaterThreshold.y, hxBus.primBus.pumpBus.onSet) annotation (
       Line(points={{21,50},{100.08,50},{100.08,0.08}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanToReal.y, hxBus.primBus.valSet) annotation (Line(points={{61,80},
-          {100.08,80},{100.08,0.08}}, color={0,0,127}), Text(
+  connect(booleanToReal.y, hxBus.primBus.valveSet) annotation (Line(points={{61,
+          80},{100.08,80},{100.08,0.08}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

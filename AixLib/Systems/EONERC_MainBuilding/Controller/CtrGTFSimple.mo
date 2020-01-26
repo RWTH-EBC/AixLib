@@ -9,25 +9,25 @@ block CtrGTFSimple "Controller for geothermal field"
         iconTransformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Sources.Constant rpm(k=rpmPump)
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  parameter Real rpmPump(min=0, unit="1") = 3000 "Rpm of the pump";
+  parameter Real rpmPump(min=0, unit="1") = 2100 "Rpm of the pump";
   BaseClasses.TwoCircuitBus gtfBus annotation (Placement(transformation(extent=
             {{80,-18},{120,18}}), iconTransformation(extent={{96,-18},{130,18}})));
 equation
   connect(booleanToReal.u, on) annotation (Line(points={{38,80},{-50,80},{-50,0},
           {-120,0}},                  color={255,0,255}));
-  connect(booleanToReal.y, gtfBus.secBus.valSet) annotation (Line(points={{61,
+  connect(booleanToReal.y, gtfBus.secBus.valveSet) annotation (Line(points={{61,
           80},{78,80},{78,82},{100.1,82},{100.1,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpm.y, gtfBus.primBus.pumpBus.rpm_Input) annotation (Line(points={{21,
+  connect(rpm.y, gtfBus.primBus.pumpBus.rpmSet) annotation (Line(points={{21,
           -30},{100.1,-30},{100.1,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(on, gtfBus.primBus.pumpBus.onOff_Input) annotation (Line(points={{
+  connect(on, gtfBus.primBus.pumpBus.onSet) annotation (Line(points={{
           -120,0},{-12,0},{-12,0.09},{100.1,0.09}}, color={255,0,255}), Text(
       string="%second",
       index=1,
