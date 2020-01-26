@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Example;
+within AixLib.Systems.ModularAHU.Examples;
 model GenericAHU "Example of generic ahu model"
   extends Modelica.Icons.Example;
   AixLib.Systems.ModularAHU.GenericAHU genericAHU(

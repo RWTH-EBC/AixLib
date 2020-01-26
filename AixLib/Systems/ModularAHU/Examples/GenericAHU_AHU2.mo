@@ -1,4 +1,4 @@
-within AixLib.Systems.ModularAHU.Example;
+within AixLib.Systems.ModularAHU.Examples;
 model GenericAHU_AHU2
   "GenericAHU model with parameters of air-handling unit 2 of the E.ON ERC test hall"
   extends Modelica.Icons.Example;
