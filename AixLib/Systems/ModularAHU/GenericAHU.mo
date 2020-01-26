@@ -255,18 +255,15 @@ replaceable package Medium2 =
             134}})));
   Fluid.Interfaces.PassThroughMedium passThroughPreheater(
     redeclare package Medium = Medium1,
-    allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) if usePreheater == false
+    allowFlowReversal=allowFlowReversal1) if usePreheater == false
     annotation (Placement(transformation(extent={{-144,32},{-124,52}})));
   Fluid.Interfaces.PassThroughMedium passThroughHumidifer(
     redeclare package Medium = Medium1,
-    allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) if useHumidifier == false
+    allowFlowReversal=allowFlowReversal1) if useHumidifier == false
     annotation (Placement(transformation(extent={{132,-38},{152,-18}})));
   Fluid.Interfaces.PassThroughMedium passThroughHumidiferRet(
     redeclare package Medium = Medium1,
-    allowFlowReversal=allowFlowReversal1,
-    final m_flow_nominal=m1_flow_nominal) if useHumidifierRet == false
+    allowFlowReversal=allowFlowReversal1) if useHumidifierRet == false
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,

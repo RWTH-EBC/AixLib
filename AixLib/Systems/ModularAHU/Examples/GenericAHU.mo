@@ -12,7 +12,7 @@ model GenericAHU "Example of generic ahu model"
     useHumidifierRet=true,
     useHumidifier=true,
     perheater(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
+        hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -30,7 +30,7 @@ model GenericAHU "Example of generic ahu model"
         dT_nom=30,
         Q_nom=30000)),
     cooler(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
+        hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -48,7 +48,7 @@ model GenericAHU "Example of generic ahu model"
         dT_nom=30,
         Q_nom=50000)),
     heater(redeclare AixLib.Systems.HydraulicModules.Admix
-        partialHydraulicModule(
+        hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,

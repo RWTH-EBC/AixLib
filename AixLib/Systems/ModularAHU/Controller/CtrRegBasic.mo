@@ -68,26 +68,6 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(PID.y, registerBus.hydraulicBus.valSet) annotation (Line(points={{11,-50},
-          {101.135,-50},{101.135,0.13}},      color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpm_Input)
-    annotation (Line(points={{41,0},{72,0},{72,0.13},{101.135,0.13}}, color={0,
-          0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onOff_Input)
-    annotation (Line(points={{81,30},{101.135,30},{101.135,0.13}},
-        color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   if useExternalTMea==false then
   connect(PID.u_m, registerBus.TAirOutMea) annotation (Line(points={{0,-62},{0,
             -80},{102,-80},{102,0.13},{101.135,0.13}},        color={0,0,127}),
@@ -101,6 +81,26 @@ equation
       points={{0,-62},{0,-120}},
       color={0,0,127},
       pattern=LinePattern.Dash));
+  connect(booleanConstant.y, registerBus.hydraulicBus.pumpBus.onSet)
+    annotation (Line(points={{81,30},{101.135,30},{101.135,0.13}}, color={255,0,
+          255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constRpmPump.y, registerBus.hydraulicBus.pumpBus.rpmSet) annotation (
+      Line(points={{41,0},{68,0},{68,0.13},{101.135,0.13}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PID.y, registerBus.hydraulicBus.valveSet) annotation (Line(points={{
+          11,-50},{101.135,-50},{101.135,0.13}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Text(
           extent={{-90,20},{56,-20}},

@@ -15,7 +15,7 @@ model GenericAHU_AHU2
     m2_flow_nominal=2.866/3600*1000,
     tau=150,
     T_amb=293.15,
-    redeclare HydraulicModules.Admix partialHydraulicModule(
+    redeclare HydraulicModules.Admix hydraulicModule(
       tau=5,
       dIns=0.01,
       kIns=0.028,
@@ -47,7 +47,7 @@ model GenericAHU_AHU2
     T_start=296.15,
     tau=60 + 30,
     T_amb=293.15,
-    redeclare HydraulicModules.Admix partialHydraulicModule(
+    redeclare HydraulicModules.Admix hydraulicModule(
       tau=5,
       dIns=0.01,
       kIns=0.028,
@@ -78,7 +78,7 @@ model GenericAHU_AHU2
     m2_flow_nominal=1106/3600,
     tau=60 + 20,
     T_amb=293.15,
-    redeclare HydraulicModules.Admix partialHydraulicModule(
+    redeclare HydraulicModules.Admix hydraulicModule(
       tau=5,
       dIns=0.01,
       kIns=0.028,
