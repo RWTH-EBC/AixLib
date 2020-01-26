@@ -45,21 +45,21 @@ model CtrTabs2 "Controller for concrete core activation"
             {-48,-36}})));
 equation
   connect(ctrPump.hydraulicBus, tabsBus.pumpBus) annotation (Line(
-      points={{2.1,70},{40,70},{40,72},{99.085,72},{99.085,0.09}},
+      points={{3.4,70.2},{40,70.2},{40,72},{99.085,72},{99.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ctrThrottleHot.Tact, tabsBus.pumpBus.TFwrd_out) annotation (Line(
+  connect(ctrThrottleHot.Tact, tabsBus.pumpBus.TFwrdOutMea) annotation (Line(
         points={{-22,38},{-22,52},{99.085,52},{99.085,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(ctrThrottleCold.Tact, tabsBus.pumpBus.TFwrd_out) annotation (Line(
+  connect(ctrThrottleCold.Tact, tabsBus.pumpBus.TFwrdOutMea) annotation (Line(
         points={{-20,-24},{-20,-4},{99.085,-4},{99.085,0.09}}, color={0,0,127}),
       Text(
       string="%second",
@@ -68,7 +68,7 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(ctrThrottleCold.hydraulicBus, tabsBus.coldThrottleBus) annotation (
       Line(
-      points={{1.3,-31.1},{99.085,-31.1},{99.085,0.09}},
+      points={{3.4,-29.8},{99.085,-29.8},{99.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
@@ -76,7 +76,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ctrThrottleHot.hydraulicBus, tabsBus.hotThrottleBus) annotation (Line(
-      points={{-0.7,30.9},{99.085,30.9},{99.085,0.09}},
+      points={{1.4,32.2},{99.085,32.2},{99.085,0.09}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",

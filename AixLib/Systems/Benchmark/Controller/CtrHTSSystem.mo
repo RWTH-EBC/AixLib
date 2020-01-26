@@ -47,34 +47,34 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumps.y, htsBus.pumpBoilerBus.pumpBus.rpm_Input) annotation (Line(
+  connect(rpmPumps.y, htsBus.pumpBoilerBus.pumpBus.rpmSet) annotation (Line(
         points={{61,90},{82,90},{82,92},{100.09,92},{100.09,1.085}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(rpmPumps.y, htsBus.pumpChpBus.pumpBus.rpm_Input) annotation (Line(
+  connect(rpmPumps.y, htsBus.pumpChpBus.pumpBus.rpmSet) annotation (Line(
         points={{61,90},{100.09,90},{100.09,1.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, htsBus.pumpBoilerBus.pumpBus.onOff_Input)
+  connect(booleanConstant.y, htsBus.pumpBoilerBus.pumpBus.onSet)
     annotation (Line(points={{61,50},{76,50},{76,52},{100.09,52},{100.09,1.085}},
         color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(booleanConstant.y, htsBus.pumpChpBus.pumpBus.onOff_Input) annotation (
+  connect(booleanConstant.y, htsBus.pumpChpBus.pumpBus.onSet) annotation (
      Line(points={{61,50},{100.09,50},{100.09,1.085}}, color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PIDBoiler.u_m, htsBus.pumpBoilerBus.TRtrn_in) annotation (Line(points=
-         {{-30,8},{-30,1.085},{100.09,1.085}}, color={0,0,127}), Text(
+  connect(PIDBoiler.u_m, htsBus.pumpBoilerBus.TRtrnInMea) annotation (Line(
+        points={{-30,8},{-30,1.085},{100.09,1.085}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},

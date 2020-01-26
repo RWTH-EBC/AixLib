@@ -167,7 +167,7 @@ model BenchmarkBuildingSimple "Benchmark building model"
     usePreheater=true,
     useHumidifierRet=false,
     useHumidifier=true,
-    perheater(redeclare HydraulicModules.Admix partialHydraulicModule(
+    perheater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -183,7 +183,7 @@ model BenchmarkBuildingSimple "Benchmark building model"
         tau2=15,
         dT_nom=30,
         Q_nom=60000)),
-    cooler(redeclare HydraulicModules.Admix partialHydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -200,7 +200,7 @@ model BenchmarkBuildingSimple "Benchmark building model"
         tau2=10,
         dT_nom=15,
         Q_nom=150000)),
-    heater(redeclare HydraulicModules.Admix partialHydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -251,7 +251,7 @@ model BenchmarkBuildingSimple "Benchmark building model"
     T_amb=293.15,
     m1_flow_nominal=1,
     m2_flow_nominal=1,
-    cooler(redeclare HydraulicModules.Admix partialHydraulicModule(
+    cooler(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -265,7 +265,7 @@ model BenchmarkBuildingSimple "Benchmark building model"
         dp2_nominal=1000,
         dT_nom=10,
         Q_nom=10000)),
-    heater(redeclare HydraulicModules.Admix partialHydraulicModule(
+    heater(redeclare HydraulicModules.Admix hydraulicModule(
         dIns=0.01,
         kIns=0.028,
         d=0.032,
@@ -284,8 +284,7 @@ model BenchmarkBuildingSimple "Benchmark building model"
     redeclare package Medium = MediumWater,
     m_flow_nominal=2,
     T_amb=293.15,
-    V=7000,
-    G=2000)
+    V=7000)
     annotation (Placement(transformation(extent={{132,-120},{108,-88}})));
   BaseClasses.MainBus mainBus annotation (Placement(transformation(extent={{152,
             394},{198,452}}), iconTransformation(extent={{110,388},{170,444}})));

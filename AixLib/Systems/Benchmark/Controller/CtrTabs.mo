@@ -76,27 +76,27 @@ equation
       points={{-79,-50},{-48,-50},{-48,-30},{-22,-30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(booleanConstant.y, tabsBus.admixBus.pumpBus.onOff_Input) annotation (
+  connect(booleanConstant.y, tabsBus.admixBus.pumpBus.onSet) annotation (
       Line(points={{81,50},{100,50},{100,0.1},{101.095,0.1}}, color={255,0,255}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(constRpmPump.y, tabsBus.admixBus.pumpBus.rpm_Input) annotation (Line(
+  connect(constRpmPump.y, tabsBus.admixBus.pumpBus.rpmSet) annotation (Line(
         points={{81,80},{100,80},{100,20},{101.095,20},{101.095,0.1}}, color={0,
           0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID1.u_m, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{-10,18},
-          {100,18},{100,0.1},{101.095,0.1}}, color={0,0,127}), Text(
+  connect(PID1.u_m, tabsBus.admixBus.TFwrdOutMea) annotation (Line(points={{-10,
+          18},{100,18},{100,0.1},{101.095,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(PID.u_m, tabsBus.admixBus.TFwrd_out) annotation (Line(points={{-10,-42},
+  connect(PID.u_m, tabsBus.admixBus.TFwrdOutMea) annotation (Line(points={{-10,-42},
           {100,-42},{100,-22},{101.095,-22},{101.095,0.1}}, color={0,0,127}),
       Text(
       string="%second",
@@ -107,7 +107,7 @@ equation
           -2}}, color={0,0,127}));
   connect(PID.y, switch1.u3) annotation (Line(points={{1,-30},{6,-30},{6,-22},{18,
           -22},{18,-18}}, color={0,0,127}));
-  connect(switch1.y, tabsBus.admixBus.valSet) annotation (Line(points={{41,-10},
+  connect(switch1.y, tabsBus.admixBus.valveSet) annotation (Line(points={{41,-10},
           {58,-10},{58,-8},{101.095,-8},{101.095,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -121,18 +121,17 @@ equation
       points={{-79,-50},{-48,-50},{-48,30},{-22,30}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(heatingMode.u2, tabsBus.admixBus.TRtrn_in) annotation (Line(points={{-62,
-          62},{-100,62},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,127}),
-      Text(
+  connect(heatingMode.u2, tabsBus.admixBus.TRtrnInMea) annotation (Line(points={
+          {-62,62},{-100,62},{-100,100},{101.095,100},{101.095,0.1}}, color={0,0,
+          127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(heatingMode.y, switch1.u2) annotation (Line(points={{-39,70},{-32,70},
           {-32,-10},{18,-10}}, color={255,0,255}));
-  connect(booleanToReal.y, tabsBus.valSet) annotation (Line(points={{21,70},{32,
-          70},{32,100},{101.095,100},{101.095,0.1}},
-                                                color={0,0,127}), Text(
+  connect(booleanToReal.y, tabsBus.valveSet) annotation (Line(points={{21,70},{
+          32,70},{32,100},{101,100},{101,0}},   color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

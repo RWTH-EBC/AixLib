@@ -130,18 +130,6 @@ equation
           4.6,-12.2},{4.6,-20},{-68,-20}}, color={0,127,255}));
   connect(senT_a.port_a, port_a)
     annotation (Line(points={{-80,-20},{-80,0},{-100,0}}, color={0,127,255}));
-  connect(senT_b.T, highTemperatureSystemBus.T_out) annotation (Line(points={{70,6.6},
-          {70,141},{0,141}},                     color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(senT_a.T, highTemperatureSystemBus.T_in) annotation (Line(points={{-74,
-          -13.4},{-74,141},{0,141}},                 color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(boilerNoControl.u_rel, highTemperatureSystemBus.uRelBoilerSet)
     annotation (Line(points={{31.6,128.4},{0.08,128.4},{0.08,141.075}},   color=
          {0,0,127}), Text(
@@ -215,6 +203,19 @@ equation
           {62,0},{62,28.2},{5,28.2}}, color={0,127,255}));
   connect(fixedTemperature1.port, HotWater.heatportOutside) annotation (Line(
         points={{40,12},{40,8},{15.6,8},{15.6,9.2}}, color={191,0,0}));
+  connect(senT_b.T, highTemperatureSystemBus.TOutMea) annotation (Line(points={
+          {70,6.6},{70,142},{0.08,142},{0.08,141.075}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(senT_a.T, highTemperatureSystemBus.TInMea) annotation (Line(points={{
+          -74,-13.4},{-74,134},{0.08,134},{0.08,141.075}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -60},{100,140}}), graphics={
         Rectangle(

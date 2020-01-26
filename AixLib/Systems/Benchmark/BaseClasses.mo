@@ -626,8 +626,11 @@ package BaseClasses "Base class package"
       wfWall={0.3,0.3,0.3},
       wfWin={0.333,0.333,0.333},
       wfGro=0.1,
-      internalGainsPeopleSpecific=209/900,
+      specificPeople=1/14,
+      activityDegree=1.2,
+      fixedHeatFlowRatePersons=209/900,
       ratioConvectiveHeatPeople=0.5,
+      internalGainsMoistureNoPeople=0.5,
       internalGainsMachinesSpecific=200/900,
       ratioConvectiveHeatMachines=0.6,
       lightingPowerSpecific=4737/900,
@@ -650,7 +653,10 @@ package BaseClasses "Base class package"
       lCool=-1,
       KRCool=1000,
       TNCool=1,
-      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+      CoolerOn=false,
+      TThresholdHeater=273.15 + 15,
+      TThresholdCooler=273.15 + 22,
+      withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
     annotation (Documentation(revisions="<html>
  <ul>
   <li>
@@ -726,8 +732,11 @@ package BaseClasses "Base class package"
       wfWall={0.45,0.45},
       wfWin={0.5,0.5},
       wfGro=0.1,
-      internalGainsPeopleSpecific=125/600,
+      specificPeople=1/14,
+      activityDegree=1.2,
+      fixedHeatFlowRatePersons=125/600,
       ratioConvectiveHeatPeople=0.5,
+      internalGainsMoistureNoPeople=0.5,
       internalGainsMachinesSpecific=213/600,
       ratioConvectiveHeatMachines=0.6,
       lightingPowerSpecific=2210/600,
@@ -750,7 +759,10 @@ package BaseClasses "Base class package"
       lCool=-1,
       KRCool=1000,
       TNCool=1,
-      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+      CoolerOn=false,
+          TThresholdHeater=273.15 + 15,
+      TThresholdCooler=273.15 + 22,
+      withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
     annotation (Documentation(revisions="<html>
  <ul>
   <li>
@@ -827,8 +839,11 @@ package BaseClasses "Base class package"
       wfWall={0.3,0.3, 0.3},
       wfWin={0.333,0.333, 0.333},
       wfGro=0.1,
-      internalGainsPeopleSpecific=125/1350,
+      specificPeople=1/14,
+      activityDegree=1.2,
+      fixedHeatFlowRatePersons=125/1350,
       ratioConvectiveHeatPeople=0.5,
+      internalGainsMoistureNoPeople=0.5,
       internalGainsMachinesSpecific=50/1350,
       ratioConvectiveHeatMachines=0.6,
       lightingPowerSpecific=5684/1350,
@@ -851,7 +866,10 @@ package BaseClasses "Base class package"
       lCool=-1,
       KRCool=1000,
       TNCool=1,
-      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+      CoolerOn=false,
+      TThresholdHeater=273.15 + 15,
+      TThresholdCooler=273.15 + 22,
+      withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
     annotation (Documentation(revisions="<html>
  <ul>
   <li>
@@ -928,8 +946,11 @@ package BaseClasses "Base class package"
       wfWall={0.9},
       wfWin={1},
       wfGro=0.1,
-      internalGainsPeopleSpecific=125/100,
+      specificPeople=1/14,
+      activityDegree=1.2,
+      fixedHeatFlowRatePersons=125/100,
       ratioConvectiveHeatPeople=0.5,
+      internalGainsMoistureNoPeople=0.5,
       internalGainsMachinesSpecific=20/100,
       ratioConvectiveHeatMachines=0.6,
       lightingPowerSpecific=420/100,
@@ -952,7 +973,10 @@ package BaseClasses "Base class package"
       lCool=-1,
       KRCool=1000,
       TNCool=1,
-      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+      CoolerOn=false,
+      TThresholdHeater=273.15 + 15,
+      TThresholdCooler=273.15 + 22,
+      withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
     annotation (Documentation(revisions="<html>
  <ul>
   <li>
@@ -1029,8 +1053,11 @@ package BaseClasses "Base class package"
       wfWall={0.9},
       wfWin={1},
       wfGro=0.1,
-      internalGainsPeopleSpecific=125/100,
+      specificPeople=1/14,
+      activityDegree=1.2,
+      fixedHeatFlowRatePersons=125/100,
       ratioConvectiveHeatPeople=0.5,
+      internalGainsMoistureNoPeople=0.5,
       internalGainsMachinesSpecific=50/100,
       ratioConvectiveHeatMachines=0.6,
       lightingPowerSpecific=210/100,
@@ -1053,7 +1080,10 @@ package BaseClasses "Base class package"
       lCool=-1,
       KRCool=1000,
       TNCool=1,
-      CoolerOn=false);                     //not area specific: W_per_person/area => input will be number of persons
+      CoolerOn=false,
+      TThresholdHeater=273.15 + 15,
+      TThresholdCooler=273.15 + 22,
+      withIdealThresholds=false);                     //not area specific: W_per_person/area => input will be number of persons
     annotation (Documentation(revisions="<html>
  <ul>
   <li>
