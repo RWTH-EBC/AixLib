@@ -3,7 +3,7 @@ model MultizoneMoistAirEquipped
   "Multizone model with ideal heater and cooler and AHU considering moisture balance"
   extends
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
-      redeclare final model thermalZone =
+      redeclare model thermalZone =
       AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange);
 
   parameter Boolean heatAHU
@@ -65,6 +65,7 @@ model MultizoneMoistAirEquipped
     constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU
     "Air handling unit model"
     annotation(Dialog(tab="AirHandlingUnit"),choicesAllMatching=true);
+
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:
@@ -76,32 +77,6 @@ model MultizoneMoistAirEquipped
     extent={{10,-10},{-10,10}},
     rotation=180,
     origin={-90,0})));
-  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0)
-    "Set point for heater"
-    annotation (Placement(transformation(
-    extent={{20,-20},{-20,20}},
-    rotation=270,
-    origin={-46,-100}), iconTransformation(
-    extent={{10,-10},{-10,10}},
-    rotation=270,
-    origin={-52,-110})));
-  Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0)
-    "Set point for cooler"
-    annotation (Placement(transformation(
-    extent={{20,-20},{-20,20}},
-    rotation=270,
-    origin={-86,-100}), iconTransformation(
-    extent={{10,-10},{-10,10}},
-    rotation=270,
-    origin={-74,-110})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
     final quantity="Power",
     final unit="W") if ASurTot > 0 or VAir > 0
@@ -120,24 +95,6 @@ model MultizoneMoistAirEquipped
     annotation (
     Placement(transformation(extent={{100,-40},{120,-20}}),iconTransformation(
     extent={{80,-60},{100,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final
-    quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
-    "Power for heating"
-    annotation (
-    Placement(transformation(extent={{100,-54},{120,-34}}),
-    iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final
-    quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
-    "Power for cooling"
-    annotation (
-    Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
-    extent={{80,-100},{100,-80}})));
-  Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
-    final zoneParam=zoneParam,
-    each recOrSep=true,
-    each staOrDyn=true) if ASurTot > 0 or VAir > 0
-    "Heater Cooler with PI control"
-    annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
   AHUMod AirHandlingUnit(
     final cooling=coolAHU,
     final dehumidificationSet=dehuAHU,
@@ -158,7 +115,7 @@ model MultizoneMoistAirEquipped
     Placement(transformation(extent={{-52,10},{18,40}})));
 
   Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if ASurTot > 0 or VAir > 0
-    "absolute humidity in thermal zone"
+    "Absolute humidity in thermal zone"
     annotation (Placement(transformation(extent={{100,84},{120,104}}),
         iconTransformation(extent={{80,40},{100,60}})));
   Modelica.Blocks.Interfaces.RealOutput CO2[size(zone, 1)] if ASurTot > 0 or VAir > 0
@@ -171,13 +128,15 @@ protected
     nIn=numZones,
     splitFactor=zoneFactor) if
        ASurTot > 0 or VAir > 0
+    "Sums up a vector[numZones] of identical humidities to an average humidity"
     annotation (Placement(transformation(extent={{-68,76},{-48,96}})));
   parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
   parameter Real VAirRes(fixed=false)
     "Resulting air volume in zones supplied by the AHU";
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(
-    final nout=numZones) if ASurTot > 0 or VAir > 0 "Replicates scalar temperature of AHU into a vector[numZones] of identical
+    final nout=numZones) if ASurTot > 0 or VAir > 0
+    "Replicates scalar temperature of AHU into a vector[numZones] of identical
     temperatures"
     annotation (Placement(transformation(
     extent={{-5,-5},{5,5}},
@@ -219,6 +178,7 @@ protected
     "Pre-processor for AHU inputs"
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
   BaseClasses.AbsToRelHum absToRelHum if ASurTot > 0 or VAir > 0
+    "Converter from absolute humidity to relative humidity"
     annotation (Placement(transformation(extent={{-36,76},{-26,86}})));
   BaseClasses.RelToAbsHum relToAbsHum1 if ASurTot > 0 or VAir > 0
     "Converter from relative humidity to absolute humidity"
@@ -226,8 +186,9 @@ protected
         rotation=90,
         origin={65,21})));
   Modelica.Blocks.Routing.Replicator replicatorHumidityVentilation(final nout=
-        numZones) if        ASurTot > 0 or VAir > 0 "Replicates scalar temperature of AHU into a vector[numZones] of identical
-    temperatures" annotation (Placement(transformation(
+        numZones) if ASurTot > 0 or VAir > 0
+    "Replicates scalar humidity of AHU into a vector[numZones] of identical
+    humidities" annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={65,37})));
@@ -285,10 +246,6 @@ equation
           {12.4,15.25}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(TSetCool, heaterCooler.setPointCool) annotation (Line(points={{-86,-100},
-          {-86,-72},{-48,-72},{-38.12,-72},{-38.12,-66.36}}, color={0,0,127}));
-  connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-46,-100},
-          {-46,-100},{-46,-74},{-32.14,-74},{-32.14,-66.36}}, color={0,0,127}));
   connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{0.15,11.875},{
           0.15,-4.125},{56,-4.125},{92,-4.125},{92,-4},{110,-4}},
                                                  color={0,0,127}));
@@ -298,11 +255,6 @@ equation
   connect(AirHandlingUnit.QflowC, PCoolAHU) annotation (Line(points={{-20.85,
           11.875},{-20.85,-38},{-18,-38},{92,-38},{92,-30},{110,-30}},   color={
           0,0,127}));
-  connect(heaterCooler.heatingPower, PHeater) annotation (Line(points={{-22,
-          -51.8},{38,-51.8},{92,-51.8},{92,-50},{92,-44},{110,-44}},
-                                                              color={0,0,127}));
-  connect(heaterCooler.coolingPower, PCooler) annotation (Line(points={{-22,
-          -57.78},{12,-57.78},{12,-58},{92,-58},{110,-58}},  color={0,0,127}));
   connect(replicatorTemperatureVentilation.y, zone.ventTemp)
     annotation (Line(points={{23,58.5},{23,61.505},{35.27,61.505}},
                                                              color={0,0,127}));
@@ -321,8 +273,6 @@ equation
   connect(AirHandlingUnit.T_supplyAirOut, replicatorTemperatureVentilation.u)
     annotation (Line(points={{12.4,23.5},{23,23.5},{23,47}},
                                                          color={0,0,127}));
-  connect(heaterCooler.heatCoolRoom, zone.intGainsConv) annotation (Line(points={{-23.3,
-          -62.2},{86,-62.2},{86,59.25},{80,59.25}},        color={191,0,0}));
   connect(AirHandlingUnit.T_outdoorAir, weaBus.TDryBul) annotation (Line(points={{-47.8,
           19},{-100,19},{-100,69}},      color={0,0,127}), Text(
       string="%second",
@@ -377,11 +327,6 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
             graphics={
-        Rectangle(
-          extent={{-80,-46},{-2,-70}},
-          lineColor={0,0,255},
-          fillColor={215,215,215},
-          fillPattern=FillPattern.Solid),
         Text(
           extent={{-62,-12},{-20,-26}},
           lineColor={0,0,255},

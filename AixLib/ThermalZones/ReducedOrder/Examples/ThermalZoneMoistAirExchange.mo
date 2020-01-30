@@ -13,8 +13,9 @@ model ThermalZoneMoistAirExchange
     redeclare package Medium = Medium,
     T_start=293.15,
     zoneParam=
-        DataBase.ThermalZones.OfficePassiveHouseWithMoisture.OPH_1_Office_Moisture(),
-    internalGainsMode=3)
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
+    internalGainsMode=3,
+    recOrSep=true)
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -140,8 +141,10 @@ model ThermalZoneMoistAirExchange
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
   Utilities.Psychrometrics.X_pW humRat
+    "absolute humidity exchanged by ventilation rate"
     annotation (Placement(transformation(extent={{-44,-30},{-24,-10}})));
   Utilities.Psychrometrics.pW_TDewPoi pWat
+    "partial pressure of water vapour in outdoor air"
     annotation (Placement(transformation(extent={{-86,-34},{-66,-14}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(

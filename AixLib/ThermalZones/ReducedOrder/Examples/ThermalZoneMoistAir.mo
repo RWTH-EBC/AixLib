@@ -12,9 +12,11 @@ model ThermalZoneMoistAir
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Medium,
     internalGainsMode=3,
+    recOrSep=true,
     nPorts=2,
     T_start=293.15,
-    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler())
     "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -23,13 +25,6 @@ model ThermalZoneMoistAir
     filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
-  AixLib.BoundaryConditions.WeatherData.Bus weaBus
-    "Weather data bus"
-    annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
-    iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant const(k=0.2)
-    "Infiltration rate"
-    annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
     extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName = "UserProfiles",
@@ -140,36 +135,20 @@ model ThermalZoneMoistAir
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 
   Fluid.Sources.MassFlowSource_T sourcAir(
-    redeclare package Medium = Media.Air,
+    redeclare package Medium = AixLib.Media.Air,
     m_flow=3000/3600*1.17,
     X={0.004,1 - 0.004},
     T=283.15,
-    nPorts=1)
+    nPorts=1) "mass flow rate of air into thermal zone"
     annotation (Placement(transformation(extent={{-84,-80},{-64,-60}})));
-  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = Media.Air,
-      nPorts=1)
+  Fluid.Sources.Boundary_pT sinAir(redeclare package Medium = AixLib.Media.Air,
+      nPorts=1) "sink of air"
     annotation (Placement(transformation(extent={{-12,-86},{-32,-66}})));
-  Utilities.Psychrometrics.X_pTphi x_pTphi
-    annotation (Placement(transformation(extent={{-46,-26},{-26,-6}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
       color={255,204,51},
       thickness=0.5));
-  connect(weaDat.weaBus, weaBus) annotation (Line(
-      points={{-72,30},{-61,30},{-61,-4}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-11.3,
-          -3.9},{-35.65,-3.9},{-35.65,-4},{-61,-4}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(const.y, thermalZone.ventRate) annotation (Line(points={{-71,-30},{-40,
-          -30},{-8,-30},{-7,-30},{-7,-20},{-7,-8.4}}, color={0,0,127}));
   connect(internalGains.y, thermalZone.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
@@ -189,20 +168,6 @@ equation
           255}));
   connect(thermalZone.ports[2], sinAir.ports[1]) annotation (Line(points={{2.35,
           -7.2},{2.35,-40},{-38,-40},{-38,-76},{-32,-76}}, color={0,127,255}));
-  connect(weaBus.pAtm, x_pTphi.p_in) annotation (Line(
-      points={{-61,-4},{-62,-4},{-62,-10},{-48,-10}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.TDryBul, x_pTphi.T) annotation (Line(
-      points={{-61,-4},{-62,-4},{-62,-16},{-48,-16}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(weaBus.relHum, x_pTphi.phi) annotation (Line(
-      points={{-61,-4},{-62,-4},{-62,-22},{-48,-22}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(x_pTphi.X[1], thermalZone.ventHum) annotation (Line(points={{-25,-16},
-          {-18,-16},{-18,-6.7},{-11.3,-6.7}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
           3.1536e+007, Interval=3600),

@@ -39,8 +39,7 @@ model Multizone "Illustrates the use of Multizone"
     extent={{-5,-5},{5,5}},
     rotation=0,
     origin={-31,-13})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0.2)
-    "Infiltration rate"
+  Modelica.Blocks.Sources.Constant const[5](each k=0.2) "Infiltration rate"
     annotation (Placement(transformation(extent={{-36,-38},{-26,-28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
@@ -82,6 +81,9 @@ model Multizone "Illustrates the use of Multizone"
         rotation=0,
         origin={-30,-76})));
 
+  Modelica.Blocks.Sources.Constant TSet[5](each k=0)
+    "Dummy for heater cooler (not existing in record)"
+    annotation (Placement(transformation(extent={{66,-60},{56,-50}})));
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-62,40},{-51,40},{-51,6}},
@@ -126,6 +128,10 @@ equation
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
         points={{6,-76},{18,-76},{26,-76},{26,-6.2},{34,-6.2}},
                                                             color={191,0,0}));
+  connect(TSet.y, multizone.TSetCool) annotation (Line(points={{55.5,-55},{34.6,
+          -55},{34.6,-9}}, color={0,0,127}));
+  connect(TSet.y, multizone.TSetHeat) annotation (Line(points={{55.5,-55},{36.8,
+          -55},{36.8,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),

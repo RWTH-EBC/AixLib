@@ -41,7 +41,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare each final package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
+    annotation (Placement(transformation(extent={{-83,-106},{15,-82}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
     ATot > 0 or zoneParam.VAir > 0
@@ -105,7 +105,7 @@ equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));
   connect(ROM.ports, ports) annotation (Line(points={{77,28.05},{77,-4},{48,-4},
-          {48,-44},{0,-44},{0,-94}},            color={0,127,255}));
+          {48,-84},{-34,-84},{-34,-94}},        color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
           {92,-2},{104,-2}},   color={191,0,0}));
   connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,38},

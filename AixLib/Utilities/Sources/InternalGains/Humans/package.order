@@ -1,5 +1,5 @@
-HumanSensibleHeat_TemperatureIndependent
-HumanSensibleHeat_TemperatureDependent
-HumanTotalHeat_TemperatureDependent
+HumanSensibleHeatTemperatureDependent
+HumanSensibleHeatTemperatureIndependent
+HumanTotalHeatTemperatureDependent
 BaseClasses
 Obsolete

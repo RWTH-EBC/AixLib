@@ -22,6 +22,7 @@ model Multizone
         iconTransformation(extent={{-100,-36},{-80,-16}})));
 
 equation
+
   connect(zone.ventRate, ventRate) annotation (Line(points={{44.3,52.28},{44.3,
           52.28},{44.3,-20},{-100,-20}},
                                 color={0,0,127}));

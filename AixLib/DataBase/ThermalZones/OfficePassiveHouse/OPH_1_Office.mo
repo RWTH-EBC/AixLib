@@ -81,9 +81,16 @@ record OPH_1_Office "Office zone of office building"
     lCool=-1,
     KRCool=1000,
     TNCool=1,
-    CoolerOn=false);
+    CoolerOn=false,
+    TThresholdHeater=273.15 + 15,
+    TThresholdCooler=273.15 + 22,
+    withIdealThresholds=false);
   annotation (Documentation(revisions="<html>
  <ul>
+  <li>
+  November 27, 2019, by David Jansen:<br/>
+  Integrate threshold for heater and cooler.
+  </li>
   <li>
   February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
   Adapting nrPeople and nrPeopleMachines to area specific approach 

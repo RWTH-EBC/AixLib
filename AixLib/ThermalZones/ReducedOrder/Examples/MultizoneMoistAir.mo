@@ -74,12 +74,12 @@ model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-30,-76})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0.2)
-    "Set point for cooler"
+  Modelica.Blocks.Sources.Constant ventRate[5](each k=0.2) "ventilation rate"
     annotation (Placement(transformation(extent={{-36,-28},{-20,-12}})));
 
   AixLib.Utilities.Psychrometrics.X_pTphi
                                    x_pTphi
+    "Converter for relative humidity to absolute humidity"
     annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
@@ -97,6 +97,9 @@ model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-46,-10})));
+  Modelica.Blocks.Sources.Constant TSet[5](each k=0)
+    "Dummy for heater cooler (not existing in record)"
+    annotation (Placement(transformation(extent={{68,-64},{58,-54}})));
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-72,66},{-32,66},{-32,6},{34,6}},
@@ -122,8 +125,8 @@ equation
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
         points={{6,-76},{18,-76},{26,-76},{26,-6.2},{34,-6.2}},
                                                             color={191,0,0}));
-  connect(const.y, multizone.ventRate) annotation (Line(points={{-19.2,-20},{-2,
-          -20},{-2,-0.6},{33,-0.6}}, color={0,0,127}));
+  connect(ventRate.y, multizone.ventRate) annotation (Line(points={{-19.2,-20},
+          {-2,-20},{-2,-0.6},{33,-0.6}}, color={0,0,127}));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-72,66},{-95,66},{-95,-8}},
       color={255,204,51},
@@ -153,6 +156,10 @@ equation
           -20},{-56,-10},{-53.2,-10}}, color={0,0,127}));
   connect(multizone.ventHum, replicator3.y) annotation (Line(points={{33,4.4},{
           -28,4.4},{-28,-10},{-39.4,-10}}, color={0,0,127}));
+  connect(TSet.y, multizone.TSetHeat) annotation (Line(points={{57.5,-59},{36.8,
+          -59},{36.8,-9}}, color={0,0,127}));
+  connect(TSet.y, multizone.TSetCool) annotation (Line(points={{57.5,-59},{34.6,
+          -59},{34.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),

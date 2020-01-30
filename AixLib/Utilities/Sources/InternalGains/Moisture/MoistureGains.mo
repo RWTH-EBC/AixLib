@@ -1,35 +1,40 @@
 ﻿within AixLib.Utilities.Sources.InternalGains.Moisture;
 model MoistureGains
-  "model for moisture gains that are produced by plants, cooking, etc."
+  "Model for moisture gains that are produced by plants, cooking, etc."
 
   parameter Real specificMoistureProduction(unit="g/(h.m.m)") = 0.5
-    "specific moisture production without persons in the room due to plants, cooking, showering, etc.";
-  parameter Modelica.SIunits.Area RoomArea = 20 "Area of room";
+    "Specific moisture production without persons in the room due to plants, cooking, showering, etc.";
+  parameter Modelica.SIunits.Area roomArea=20 "Area of room";
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
     "Initial temperature";
 
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
-    "latent heat of moisture gain"
+    "Latent heat of moisture gain"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Sources.Constant MoistureGain(k=specificMoistureProduction)
+  Modelica.Blocks.Sources.Constant moistureGain(k=specificMoistureProduction)
+    "Specific moisture production"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
-  Modelica.Blocks.Math.Gain squareMetre(k=RoomArea)
+  Modelica.Blocks.Math.Gain squareMetre(k=roomArea) "Room area"
     annotation (Placement(transformation(extent={{-30,0},{-10,20}})));
   Modelica.Blocks.Math.Gain toKgPerSeconds(k=1/(1000*3600))
+    "Converter from g/h to kg/s"
     annotation (Placement(transformation(extent={{14,0},{34,20}})));
   Modelica.Blocks.Math.Product toLatentHeat
+    "Converter from kg/s moisture to latent heat flow"
     annotation (Placement(transformation(extent={{4,-34},{-16,-14}})));
   Modelica.Blocks.Sources.RealExpression specificLatentHeat(y=h_fg)
+  "Specific latent heat of moisture"
     annotation (Placement(transformation(extent={{56,-44},{36,-24}})));
 protected
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam = AixLib.Utilities.Psychrometrics.Constants.cpSte
-    "specific heat capacity of steam";
-  constant Modelica.SIunits.SpecificEnthalpy enthalpyOfEvaporation = AixLib.Utilities.Psychrometrics.Constants.h_fg
-    "enthalpy of vaporization";
+  constant Modelica.SIunits.SpecificHeatCapacity cp_steam=
+    AixLib.Utilities.Psychrometrics.Constants.cpSte
+    "Specific heat capacity of steam";
+  constant Modelica.SIunits.SpecificEnthalpy EnthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
+    "Enthalpy of vaporization";
   constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
-  connect(MoistureGain.y, squareMetre.u)
+  connect(moistureGain.y, squareMetre.u)
     annotation (Line(points={{-59,10},{-32,10}}, color={0,0,127}));
   connect(squareMetre.y, toKgPerSeconds.u)
     annotation (Line(points={{-9,10},{12,10}}, color={0,0,127}));

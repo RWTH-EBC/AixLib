@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 model OneElement "Thermal Zone with one element for exterior walls"
-  extends Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone"
     annotation(Dialog(group="Thermal zone"));
@@ -205,7 +205,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
         origin={220,-190})));
 protected
   constant Modelica.SIunits.SpecificEnergy h_fg=
-    Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
+    AixLib.Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
   parameter Modelica.SIunits.Area ATot=sum(AArray) "Sum of wall surface areas";
   parameter Modelica.SIunits.Area ATotExt=sum(AExt)
     "Sum of exterior wall surface areas";
@@ -541,7 +541,6 @@ using the parameter <code>mSenFac</code>.
 The image below shows the RC-network of this model.
 </p>
 <p align=\"center\">
-<img src=\"modelica://IBPSA/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
 <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/OneElement.png\" alt=\"image\"/>
 </p>
   </html>",
@@ -551,13 +550,13 @@ revisions="<html>
 October 9, 2019, by Michael Wetter:<br/>
 Refactored addition of moisture to also account for the energy content of the
 water vapor.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">AixLib, issue 1209</a>.
 </li>
-<li>
-September 24, 2019, by Martin Kremer:<br/>
-Added possibility to consider moisture balance. <br/>
-Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
-</li>
+  <li>
+  September 24, 2019, by Martin Kremer:<br/>
+  Added possibility to consider moisture balance. <br/>
+  Defined <code>volAir</code> conditional. Added conditional <code>volMoistAir</code> and corresponding in- and output connectors.
+  </li>
   <li>
   July 11, 2019, by Katharina Brinkmann:<br/>
   Renamed <code>alphaRad</code> to <code>hRad</code>,

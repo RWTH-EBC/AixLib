@@ -20,24 +20,7 @@ model ThermalZoneAirExchange
   HighOrder.Components.DryAir.VarAirExchange airExc(final V=zoneParam.VAir) if
     ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
-//     if zoneParam.Modus = 1 then
-//   redeclare model humanSenHeaModel =
-//       Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureDependent;
-//   ifelse zoneParam.Modus = 2 then
-//    Utilities.Sources.InternalGains.Humans.HumanSensibleHeat_TemperatureIndependent;
-//   else
 
-      //       (
-//     final T0=zoneParam.T_start,
-//     final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
-//     final RoomArea=zoneParam.AZone,
-//     final specificPersons=zoneParam.specificPeople,
-//     final ActivityDegree=zoneParam.activityDegree,
-//     final specificHeatPerPerson=zoneParam.InternalGainsPeopleSpecific)
-//     if
-//                                                       ATot > 0
-//     "Internal gains from persons" annotation (choicesAllMatching=true,
-      // Placement(transformation(extent={{64,-36},{84,-16}})))
 
   redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
     machinesSenHea(
@@ -138,6 +121,7 @@ equation
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
+<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used.</p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>
@@ -148,6 +132,14 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
+  </li>
+  <li> October 14, 2019 by David Jansen and Martin Kremer:<br/>
+  Renaming ThermalZoneEquipped to ThermalZoneAirExchange to avoid misunderstanding.
+  <li> July 10, 2019, by David Jansen and Martin Kremer:<br/>
+  Integration of changeable internal gain models for humans.
+  </li>
   <li>
   March 01, 2019, by Niklas Huelsenbeck:<br/>
   Changes due to integration of new Internal Gains models in ThermalZone.

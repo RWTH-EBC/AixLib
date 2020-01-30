@@ -3,19 +3,21 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   extends ThermalZone(
     ROM(final use_moisture_co2_balance=
                                    true));
+
+
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
-    annotation (Placement(transformation(extent={{16,-36},{28,-24}})));
+    annotation (Placement(transformation(extent={{16,-28},{28,-16}})));
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
      final T0=zoneParam.T_start,
-     final RoomArea=zoneParam.AZone,
+     final roomArea=zoneParam.AZone,
      final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
           ATot > 0
     "internal moisture gains by plants, etc."
     annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{32,-58},
             {38,-52}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
-    annotation (Placement(transformation(extent={{46,-34},{38,-26}})));
+    annotation (Placement(transformation(extent={{0,-28},{8,-20}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 or zoneParam.VAir > 0
     "Humidity output"
     annotation (Placement(transformation(extent={{100,64},{120,84}}),
@@ -47,7 +49,7 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
 protected
   Modelica.Blocks.Sources.RealExpression humVolAirROM(y=ROM.volMoiAir.X_w) if
     ATot > 0 or zoneParam.VAir > 0
-    annotation (Placement(transformation(extent={{20,-22},{30,-6}})));
+    annotation (Placement(transformation(extent={{0,-22},{10,-6}})));
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if
           ATot > 0 "CO2 massfraction in zone"
     annotation (Placement(transformation(extent={{22,-84},{26,-76}})));
@@ -58,18 +60,21 @@ protected
 equation
   if internalGainsMode == 3 then
     connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,
-            -18},{88,-18},{88,-6},{48,-6},{48,-40},{10,-40},{10,-27.9},{16,-27.9}},
+            -18},{92,-18},{92,-4},{52,-4},{52,-34},{14,-34},{14,-19.9},{16,
+            -19.9}},
         color={0,0,127}));
   else
-    connect(noMoisturePerson.y,SumQLat_flow. u[1]);
+    connect(noMoisturePerson.y,SumQLat_flow. u[1]) annotation (Line(points={{8.4,-24},
+            {10,-24},{10,-19.9},{16,-19.9}},                      color={0,0,127}));
   end if;
   connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{38.3,
           -55},{44,-55},{44,-40},{10,-40},{10,-32.1},{16,-32.1}},      color={0,
           0,127}));
-  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-30},{
-          34,-30},{34,34},{37,34}}, color={0,0,127}));
-  connect(humVolAirROM.y, X_w) annotation (Line(points={{30.5,-14},{58,-14},{58,
-          -4},{98,-4},{98,74},{110,74}}, color={0,0,127}));
+  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-22},{34,
+          -22},{34,34},{37,34}},    color={0,0,127}));
+  connect(humVolAirROM.y, X_w) annotation (Line(points={{10.5,-14},{48,-14},{48,
+          -4},{88,-4},{88,74},{110,74}}, color={0,0,127}));
+
   connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{10.2,-66},{12,-66},
           {12,-59.8},{22,-59.8}},
                               color={0,0,127}));
@@ -90,7 +95,12 @@ equation
           110,89}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
-  <li>July, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.</li>
+  <li> January 09, 2020, by David Jansen:<br/>
+  Integration of ideal heater and cooler into the thermal zone. 
+  </li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+  Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.
+  </li>
   <li>
   April, 2019, by Martin Kremer:<br/>
   First implementation.
@@ -102,6 +112,7 @@ equation
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
+<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used. For a correct moisture balance the paramter should be set to <code>3</code>.</p>
 <p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
 <p> There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture. This leads to a steady increase of moisture in the room, when there is no ventilation.</p>
 <p>The moisture balance was formulated considering the latent heat with the aim, that the temperature is not influenced by the moisture.For this reason every humidity source is assumed to be in gaseous state.</p>
@@ -115,5 +126,16 @@ equation
 </ul>
 <h4>Examples</h4>
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.</p>
-</html>"));
+</html>"), Diagram(graphics={
+        Rectangle(
+          extent={{0,-10},{48,-58}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{28,-52},{42,-56}},
+          lineColor={0,0,255},
+          fillColor={212,221,253},
+          fillPattern=FillPattern.Solid,
+          textString="Moisture")}));
 end ThermalZoneMoistAir;
