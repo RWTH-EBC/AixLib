@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneMoistAirCo2 "Thermal zone containing moisture and co2  balance"
   extends ThermalZone(
-    ROM(final use_moisture_co2_balance=
-                                   true));
+    ROM(final use_moisture_balance=true, final use_C_flow=true));
 
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
@@ -70,11 +69,11 @@ equation
   connect(humVolAirROM.y, X_w) annotation (Line(points={{10.5,-14},{48,-14},{48,
           -4},{88,-4},{88,74},{110,74}}, color={0,0,127}));
 
-  connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{10.3,-45},{14,-45},{14,-44},{22,-44},{22,-40.2},{26,-40.2}},
+  connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{10.3,-45},{14,-45},{14,-44},{22,-44},{22,-37.8},{26,-37.8}},
                               color={0,0,127}));
   connect(intGains[1], nrPeople.u) annotation (Line(points={{80,-133.333},{80,-78},{54,-78},{54,-54},{2,-54},{2,-45},{3.4,-45}},
                                                         color={0,0,127}));
-  connect(CO2Balance.CO2_flow, ROM.CO2_flow) annotation (Line(points={{50,-42},{50,-2},{84,-2},{84,27}},
+  connect(CO2Balance.CO2_flow, ROM.C_flow) annotation (Line(points={{50,-42},{50,-2},{37,-2},{37,56}},
                                              color={0,0,127}));
   connect(XCO2.y, CO2Balance.XCO2) annotation (Line(points={{34.5,-52},{36,-52},{36,-44},{38,-44},{38,-43.6}},
                                   color={0,0,127}));
@@ -86,7 +85,7 @@ equation
   connect(co2PPM.y, CO2) annotation (Line(points={{92.4,90},{98,90},{98,89},{
           110,89}}, color={0,0,127}));
   connect(CO2Source.TRoom, ROM.TAir)
-    annotation (Line(points={{26,-37.8},{26,-36},{44,-36},{44,-6},{90,-6},{90,62},{87,62}}, color={0,0,127}));
+    annotation (Line(points={{26,-39},{26,-36},{44,-36},{44,-6},{90,-6},{90,62},{87,62}},   color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li>January 30, 2020, by Katharina Brinkmann:<br>Integration of CO2 balance and renaming</li>
