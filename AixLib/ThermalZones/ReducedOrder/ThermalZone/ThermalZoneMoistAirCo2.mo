@@ -1,9 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneMoistAir "Thermal zone containing moisture balance"
+model ThermalZoneMoistAirCo2 "Thermal zone containing moisture and co2  balance"
   extends ThermalZone(
     ROM(final use_moisture_co2_balance=
                                    true));
-
 
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
@@ -32,8 +31,6 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   Modelica.Blocks.Math.MultiSum airExchange(nu=1) if ATot > 0
                    "Ventilation rate total"
     annotation (Placement(transformation(extent={{12,-52},{16,-48}})));
-
-
 
   Modelica.Blocks.Math.Gain nrPeople(k=zoneParam.specificPeople*zoneParam.AZone) if
           ATot > 0 "Number of people in Zone"
@@ -92,17 +89,11 @@ equation
     annotation (Line(points={{26,-37.8},{26,-36},{44,-36},{44,-6},{90,-6},{90,62},{87,62}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
-  <li> January 09, 2020, by David Jansen:<br/>
-  Integration of ideal heater and cooler into the thermal zone. 
-  </li>
-  <li>July 10, 2019, by Martin Kremer:<br/>
-  Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.
-  </li>
-  <li>
-  April, 2019, by Martin Kremer:<br/>
-  First implementation.
-  </li>
- </ul>
+<li>January 30, 2020, by Katharina Brinkmann:<br>Integration of CO2 balance and renaming</li>
+<li>January 09, 2020, by David Jansen:<br>Integration of ideal heater and cooler into the thermal zone. </li>
+<li>July 10, 2019, by Martin Kremer:<br>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
+<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
+</ul>
 </html>", info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
@@ -135,4 +126,4 @@ equation
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="Moisture and CO2")}));
-end ThermalZoneMoistAir;
+end ThermalZoneMoistAirCo2;

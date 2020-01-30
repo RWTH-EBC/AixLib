@@ -1,7 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneMoistAirExchange
-  "Thermal zone model considering moisture balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAir(airExchange(nu=1), SumQLat_flow(nu=3));
+model ThermalZoneMoistAirCo2Exchange
+  "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
+  extends ThermalZoneMoistAirCo2(
+                              airExchange(nu=1), SumQLat_flow(nu=3));
 
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,
@@ -134,15 +135,10 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
-  <li> January 09, 2020, by David Jansen:<br/>
-  Integration of ideal heater and cooler into the thermal zone. 
-  </li>
-  <li>July 10, 2019, by Martin Kremer:<br/>
-  Adapting to new internalGains models.  See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>.
-  </li>
-  <li>April, 2019, by Martin Kremer:<br/>
-  First implementation.
-  </li>
+<li>January 30, 2020, by Katharina Brinkmann:<br>Integration of CO2 balance and renaming</li>
+<li>January 09, 2020, by David Jansen:<br>Integration of ideal heater and cooler into the thermal zone. </li>
+<li>July 10, 2019, by Martin Kremer:<br>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
+<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
@@ -159,4 +155,4 @@ equation
           textString="Ventilation
 Infiltration
 ")}));
-end ThermalZoneMoistAirExchange;
+end ThermalZoneMoistAirCo2Exchange;
