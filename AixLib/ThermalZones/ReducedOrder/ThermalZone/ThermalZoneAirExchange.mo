@@ -44,7 +44,7 @@ model ThermalZoneAirExchange
     min=0) if ATot > 0 or zoneParam.VAir > 0
     "Ventilation and infiltration temperature"
     annotation (Placement(
-        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
+        transformation(extent={{-140,-30},{-100,10}}), iconTransformation(
           extent={{-126,-52},{-100,-26}})));
   Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate",
       final unit="1/h") if
@@ -54,7 +54,7 @@ model ThermalZoneAirExchange
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-40,-100}), iconTransformation(
+        origin={-80,-120}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={-70,-84})));
@@ -79,17 +79,17 @@ equation
       points={{-51,-62},{-37.6,-62},{-37.6,-45.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{0,-78},{-70,-78},{-70,-68}}, color=
+  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,-133.333},{80,-78},{-70,-78},{-70,-68}},
+                                                                         color=
           {0,0,127}));
-  connect(ventRate, addInfVen.u2) annotation (Line(points={{-40,-100},{-40,-76},
-          {-30.4,-76},{-30.4,-45.2}}, color={0,0,127}));
+  connect(ventRate, addInfVen.u2) annotation (Line(points={{-80,-120},{-80,-76},{-30.4,-76},{-30.4,-45.2}},
+                                      color={0,0,127}));
   connect(ventCont.y, mixedTemp.flowRate_flow2) annotation (Line(points={{-51,-62},
           {-49,-62},{-49,-30},{-70,-30},{-70,-25},{-65.6,-25}}, color={0,0,127}));
-  connect(ventRate, mixedTemp.flowRate_flow1) annotation (Line(points={{-40,-100},
-          {-74,-100},{-74,-15},{-65.6,-15}}, color={0,0,127}));
-  connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-100,
-          -40},{-76,-40},{-76,-10.2},{-65.6,-10.2}}, color={0,0,127}));
+  connect(ventRate, mixedTemp.flowRate_flow1) annotation (Line(points={{-80,-120},{-80,-15},{-65.6,-15}},
+                                             color={0,0,127}));
+  connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-120,-10},{-76,-10},{-76,-10.2},{-65.6,-10.2}},
+                                                     color={0,0,127}));
   connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{87,62},{90,62},{
           90,-6},{52,-6},{52,-50},{-70,-50},{-70,-54},{-70,-56}}, color={0,0,
           127}));

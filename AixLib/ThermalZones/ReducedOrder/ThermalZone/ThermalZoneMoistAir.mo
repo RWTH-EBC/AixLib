@@ -7,15 +7,14 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
 
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
-    annotation (Placement(transformation(extent={{16,-28},{28,-16}})));
+    annotation (Placement(transformation(extent={{24,-28},{32,-20}})));
   Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
      final T0=zoneParam.T_start,
      final roomArea=zoneParam.AZone,
      final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
           ATot > 0
     "internal moisture gains by plants, etc."
-    annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{32,-58},
-            {38,-52}})));
+    annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{0,-38},{6,-32}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
     annotation (Placement(transformation(extent={{0,-28},{8,-20}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 or zoneParam.VAir > 0
@@ -25,23 +24,23 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   Utilities.Sources.InternalGains.Co2.HumanCO2Source CO2Source(activityDegree=
         zoneParam.activityDegree) if
           ATot > 0
-    annotation (Placement(transformation(extent={{22,-64},{28,-58}})));
+    annotation (Placement(transformation(extent={{26,-42},{32,-36}})));
   Utilities.Sources.InternalGains.Co2.CO2Balance CO2Balance(rho(displayUnit=
           "kg/m3") = 1.25, V=ROM.volMoiAir.V) if
           ATot > 0
-    annotation (Placement(transformation(extent={{32,-72},{36,-68}})));
-  Modelica.Blocks.Math.MultiSum airExchange(nu=1) if
-          ATot > 0 "Ventilation rate total"
-    annotation (Placement(transformation(extent={{22,-72},{26,-68}})));
+    annotation (Placement(transformation(extent={{38,-46},{50,-38}})));
+  Modelica.Blocks.Math.MultiSum airExchange(nu=1) if ATot > 0
+                   "Ventilation rate total"
+    annotation (Placement(transformation(extent={{12,-52},{16,-48}})));
 
 
 
   Modelica.Blocks.Math.Gain nrPeople(k=zoneParam.specificPeople*zoneParam.AZone) if
           ATot > 0 "Number of people in Zone"
     annotation (Placement(transformation(
-        extent={{-2,-2},{2,2}},
+        extent={{-3,-3},{3,3}},
         rotation=0,
-        origin={8,-66})));
+        origin={7,-45})));
   Modelica.Blocks.Interfaces.RealOutput CO2 if ATot > 0 or zoneParam.VAir > 0
     "Indoor Air CO2 concentration in ppm"
     annotation (Placement(transformation(extent={{100,79},{120,99}}),
@@ -52,47 +51,45 @@ protected
     annotation (Placement(transformation(extent={{0,-22},{10,-6}})));
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if
           ATot > 0 "CO2 massfraction in zone"
-    annotation (Placement(transformation(extent={{22,-84},{26,-76}})));
+    annotation (Placement(transformation(extent={{24,-56},{34,-48}})));
   Modelica.Blocks.Sources.RealExpression co2PPM(y=ROM.volMoiAir.C[1]*(28.949/
         44.01)*1E6) if
           ATot > 0 "CO2 massfraction in zone"
     annotation (Placement(transformation(extent={{84,84},{92,96}})));
 equation
   if internalGainsMode == 3 then
-    connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,
-            -18},{92,-18},{92,-4},{52,-4},{52,-34},{14,-34},{14,-19.9},{16,
-            -19.9}},
+    connect(humanTotHeaDependent.QLat_flow,SumQLat_flow. u[1]) annotation (Line(points={{83.6,-18},{92,-18},{92,-4},{52,-4},{52,-34},{14,
+            -34},{14,-22.6},{24,-22.6}},
         color={0,0,127}));
   else
-    connect(noMoisturePerson.y,SumQLat_flow. u[1]) annotation (Line(points={{8.4,-24},
-            {10,-24},{10,-19.9},{16,-19.9}},                      color={0,0,127}));
+    connect(noMoisturePerson.y,SumQLat_flow. u[1]) annotation (Line(points={{8.4,-24},{10,-24},{10,-22.6},{24,-22.6}},
+                                                                  color={0,0,127}));
   end if;
-  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{38.3,
-          -55},{44,-55},{44,-40},{10,-40},{10,-32.1},{16,-32.1}},      color={0,
+  connect(moistureGains.QLat_flow,SumQLat_flow. u[2]) annotation (Line(points={{6.3,-35},{10,-35},{10,-25.4},{24,-25.4}},
+                                                                       color={0,
           0,127}));
-  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{29.02,-22},{34,
-          -22},{34,34},{37,34}},    color={0,0,127}));
+  connect(SumQLat_flow.y, ROM.QLat_flow) annotation (Line(points={{32.68,-24},{36,-24},{36,34},{37,34}},
+                                    color={0,0,127}));
   connect(humVolAirROM.y, X_w) annotation (Line(points={{10.5,-14},{48,-14},{48,
           -4},{88,-4},{88,74},{110,74}}, color={0,0,127}));
 
-  connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{10.2,-66},{12,-66},
-          {12,-59.8},{22,-59.8}},
+  connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{10.3,-45},{14,-45},{14,-44},{22,-44},{22,-40.2},{26,-40.2}},
                               color={0,0,127}));
-  connect(intGains[1], nrPeople.u) annotation (Line(points={{80,-113.333},{80,
-          -78},{30,-78},{30,-84},{2,-84},{2,-66},{5.6,-66}},
+  connect(intGains[1], nrPeople.u) annotation (Line(points={{80,-133.333},{80,-78},{54,-78},{54,-54},{2,-54},{2,-45},{3.4,-45}},
                                                         color={0,0,127}));
-  connect(CO2Balance.CO2_flow, ROM.CO2_flow) annotation (Line(points={{36,-70},
-          {50,-70},{50,-2},{84,-2},{84,27}}, color={0,0,127}));
-  connect(XCO2.y, CO2Balance.XCO2) annotation (Line(points={{26.2,-80},{28,-80},
-          {28,-70.8},{32,-70.8}}, color={0,0,127}));
+  connect(CO2Balance.CO2_flow, ROM.CO2_flow) annotation (Line(points={{50,-42},{50,-2},{84,-2},{84,27}},
+                                             color={0,0,127}));
+  connect(XCO2.y, CO2Balance.XCO2) annotation (Line(points={{34.5,-52},{36,-52},{36,-44},{38,-44},{38,-43.6}},
+                                  color={0,0,127}));
   connect(airExchange.y, CO2Balance.airExchange)
-    annotation (Line(points={{26.34,-70},{32,-70}}, color={0,0,127}));
+    annotation (Line(points={{16.34,-50},{24,-50},{24,-42},{38,-42}},
+                                                    color={0,0,127}));
   connect(CO2Source.CO2People_flow, CO2Balance.CO2People_flow) annotation (Line(
-        points={{28,-61},{30,-61},{30,-69.2},{32,-69.2}}, color={0,0,127}));
-  connect(ROM.TAir, CO2Source.TRoom) annotation (Line(points={{87,62},{94,62},{
-          94,-4},{52,-4},{52,-50},{16,-50},{16,-61},{22,-61}}, color={0,0,127}));
+        points={{32,-39},{34,-39},{34,-40.4},{38,-40.4}}, color={0,0,127}));
   connect(co2PPM.y, CO2) annotation (Line(points={{92.4,90},{98,90},{98,89},{
           110,89}}, color={0,0,127}));
+  connect(CO2Source.TRoom, ROM.TAir)
+    annotation (Line(points={{26,-37.8},{26,-36},{44,-36},{44,-6},{90,-6},{90,62},{87,62}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li> January 09, 2020, by David Jansen:<br/>
@@ -128,14 +125,14 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>.</p>
 </html>"), Diagram(graphics={
         Rectangle(
-          extent={{0,-10},{48,-58}},
+          extent={{0,-8},{52,-56}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{28,-52},{42,-56}},
+          extent={{12,-8},{38,-12}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
-          textString="Moisture")}));
+          textString="Moisture and CO2")}));
 end ThermalZoneMoistAir;

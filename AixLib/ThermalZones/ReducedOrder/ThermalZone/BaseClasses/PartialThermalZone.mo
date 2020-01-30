@@ -14,7 +14,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={80,-100}), iconTransformation(
+        origin={80,-120}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={80,-84})));
