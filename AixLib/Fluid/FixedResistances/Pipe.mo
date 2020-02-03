@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -175,14 +175,16 @@ protected
         iconTransformation(extent={{-46,20},{40,38}})));
 
 public
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=
+        Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
        Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,26})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*Insulation.d_out*
-        length/nNodes) if (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=
+        Modelica.Constants.pi*Insulation.d_out*length/nNodes*nParallel) if
+                          (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -317,6 +319,8 @@ equation
 </html>",
         revisions="<html>
 <ul>
+<li><i>February 03, 2020 </i>by Alexander Kümpel:<br/>
+Multiplication with nParallel in heatConv</li>
 <li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
 Parameter isEmbedded added and correction of connections for different applications</li>
 <li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
