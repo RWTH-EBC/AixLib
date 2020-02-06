@@ -3,6 +3,8 @@ model MainBuildingEnergySystem
   "Energy system of E.ON ERC main building"
     package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
+  parameter BaseClasses.WeatherAC weather=BaseClasses.WeatherAC();
+
   Fluid.Sources.Boundary_pT          boundary2(
     redeclare package Medium = Medium,
     p=300000,
@@ -13,8 +15,8 @@ model MainBuildingEnergySystem
         origin={80,-102})));
   HeatpumpSystem heatpumpSystem(redeclare package Medium = Medium, T_amb=293.15)
     annotation (Placement(transformation(extent={{-58,-100},{52,-52}})));
-  SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal
-      =5) annotation (Placement(transformation(extent={{32,22},{66,62}})));
+  SwitchingUnit switchingUnit(redeclare package Medium = Medium, m_flow_nominal=
+       5) annotation (Placement(transformation(extent={{32,22},{66,62}})));
   HeatExchangerSystem heatExchangerSystem(redeclare package Medium = Medium,
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-146,-26},{-80,18}})));
@@ -253,22 +255,7 @@ model MainBuildingEnergySystem
         origin={12,106})));
   Modelica.Blocks.Interfaces.RealOutput Tair
     annotation (Placement(transformation(extent={{-138,-150},{-118,-130}})));
-  Modelica.Blocks.Sources.Sine sine1(
-    amplitude=5,
-    freqHz=1/(3600*24),
-    offset=273.15 + 15)
-    annotation (Placement(transformation(extent={{-186,-140},{-176,-130}})));
-  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
-    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
-    computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
-    "Weather data reader"
-    annotation (Placement(transformation(extent={{-216,-142},{-196,-122}})));
 
-  BoundaryConditions.WeatherData.Bus weaBus1
-             "Weather data bus"
-    annotation (Placement(transformation(extent={{-170,-140},{-150,-120}})));
   Modelica.Blocks.Nonlinear.Limiter limiterAHU(uMax=0, uMin=-100000)
     annotation (Placement(transformation(extent={{-130,88},{-122,96}})));
   Modelica.Blocks.Nonlinear.Limiter limiterCCACold(uMax=100000, uMin=0)
@@ -298,6 +285,8 @@ model MainBuildingEnergySystem
     m_flow_nominal=2,
     V=0.01,
     nPorts=3) annotation (Placement(transformation(extent={{112,46},{120,54}})));
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=weather.Temperature)
+    annotation (Placement(transformation(extent={{-180,-150},{-160,-130}})));
 equation
   connect(heatpumpSystem.port_a2, heatExchangerSystem.port_b3) annotation (Line(
         points={{-58,-78.6667},{-86,-78.6667},{-86,-25.56},{-84.7143,-25.56}},
@@ -443,20 +432,6 @@ equation
   connect(Tair, prescribedTemperature.T) annotation (Line(points={{-128,-140},{
           -108,-140},{-108,-144},{-54,-144},{-54,-114},{-41.2,-114}}, color={0,
           0,127}));
-  connect(weaDat.weaBus, weaBus1) annotation (Line(
-      points={{-196,-132},{-180,-132},{-180,-130},{-160,-130}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(Tair, weaBus1.TDryBul) annotation (Line(points={{-128,-140},{-144,
-          -140},{-144,-130},{-160,-130}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(add.y, consumerLTC.Q_flow)
     annotation (Line(points={{-107.6,96},{-93.6,96}}, color={0,0,127}));
   connect(Q_flow_CCA_hot.y, limiterCCAHot.u)
@@ -479,22 +454,22 @@ equation
     annotation (Line(points={{29.2,102},{28.8,102}}, color={0,0,127}));
   connect(boundary1.ports[1], highTemperatureSystem.port_b) annotation (Line(
         points={{-188,-34},{-176.4,-34},{-176.4,-46}}, color={0,127,255}));
-  connect(highTemperatureSystem.port_a, vol1.ports[1]) annotation (Line(points=
-          {{-164.8,-46},{-164.8,6},{-165.067,6}}, color={0,127,255}));
+  connect(highTemperatureSystem.port_a, vol1.ports[1]) annotation (Line(points={{-164.8,
+          -46},{-164.8,6},{-165.067,6}},          color={0,127,255}));
   connect(vol1.ports[2], heatExchangerSystem.port_b1) annotation (Line(points={
           {-164,6},{-164,0.4},{-146,0.4}}, color={0,127,255}));
   connect(admixHTC.port_b2, vol1.ports[3]) annotation (Line(points={{-164,60},{
           -164,6},{-162.933,6}}, color={0,127,255}));
-  connect(highTemperatureSystem.port_b, vol.ports[1]) annotation (Line(points={
-          {-176.4,-46},{-177.067,-46},{-177.067,-10}}, color={0,127,255}));
+  connect(highTemperatureSystem.port_b, vol.ports[1]) annotation (Line(points={{-176.4,
+          -46},{-177.067,-46},{-177.067,-10}},         color={0,127,255}));
   connect(vol.ports[2], heatExchangerSystem.port_a1) annotation (Line(points={{
           -176,-10},{-160,-10},{-160,-8.4},{-146,-8.4}}, color={0,127,255}));
   connect(vol.ports[3], admixHTC.port_a1) annotation (Line(points={{-174.933,
           -10},{-174.933,24},{-176,24},{-176,60}}, color={0,127,255}));
   connect(heatpumpSystem.port_b1, vol2.ports[1]) annotation (Line(points={{52,
           -78.6667},{102.933,-78.6667},{102.933,28}}, color={0,127,255}));
-  connect(vol2.ports[2], switchingUnit.port_a2) annotation (Line(points={{104,
-          28},{102,28},{102,40},{66,40},{66,38.6667}}, color={0,127,255}));
+  connect(vol2.ports[2], switchingUnit.port_a2) annotation (Line(points={{104,28},
+          {102,28},{102,40},{66,40},{66,38.6667}},     color={0,127,255}));
   connect(vol2.ports[3], admixCold2.port_a1) annotation (Line(points={{105.067,
           28},{105.067,44},{104,44},{104,60}}, color={0,127,255}));
   connect(switchingUnit.port_b1, vol3.ports[1]) annotation (Line(points={{66,
@@ -502,8 +477,10 @@ equation
           127,255}));
   connect(vol3.ports[2], admixCold2.port_b2)
     annotation (Line(points={{116,46},{116,60},{116,60}}, color={0,127,255}));
-  connect(vol3.ports[3], heatpumpSystem.port_a1) annotation (Line(points={{
-          117.067,46},{118,46},{118,-68},{52,-68}}, color={0,127,255}));
+  connect(vol3.ports[3], heatpumpSystem.port_a1) annotation (Line(points={{117.067,
+          46},{118,46},{118,-68},{52,-68}},         color={0,127,255}));
+  connect(combiTimeTable.y[1], Tair)
+    annotation (Line(points={{-159,-140},{-128,-140}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-200,-120},{120,120}})), Icon(
         coordinateSystem(extent={{-200,-120},{120,120}}), graphics={Rectangle(
           extent={{-200,120},{120,-120}},
