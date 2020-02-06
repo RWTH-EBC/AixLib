@@ -28,5 +28,5 @@ equation
       points={{49.9,67.6},{49.9,58},{10,58},{10,40}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=31536000, Interval=59.9999616));
+  annotation (experiment(StopTime=172800, Interval=59.9999616));
 end EONERC_MainBuilding;

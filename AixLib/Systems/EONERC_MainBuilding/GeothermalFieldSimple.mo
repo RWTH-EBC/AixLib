@@ -29,6 +29,7 @@ model GeothermalFieldSimple "Geothermal probe"
     d=0.125,
     length=5,
     final Kv=160,
+    valve(order=1),
     pipe3(length=10))                annotation (Placement(transformation(
         extent={{-30,30},{30,-30}},
         rotation=270,

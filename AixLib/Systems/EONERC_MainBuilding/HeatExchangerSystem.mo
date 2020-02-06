@@ -23,6 +23,7 @@ model HeatExchangerSystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)),
+    valve(order=1),
     pipe4(length=15))
     annotation (Placement(transformation(extent={{-100,20},{-60,-20}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
@@ -57,6 +58,7 @@ model HeatExchangerSystem
     d=0.125,
     length=2,
     Kv=160,
+    valve(order=1),
     pipe2(length=5),
     pipe3(length=10),
     pipe4(length=15),

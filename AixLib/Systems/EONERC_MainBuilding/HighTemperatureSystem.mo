@@ -31,6 +31,7 @@ model HighTemperatureSystem
     d=0.65,
     length=1,
     Kv=25,
+    valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))
@@ -49,6 +50,7 @@ model HighTemperatureSystem
     d=0.65,
     length=1,
     Kv=25,
+    valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)))
@@ -70,6 +72,7 @@ model HighTemperatureSystem
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)),
+    valve(order=1),
     pipe4(length=9)) annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,

@@ -45,6 +45,7 @@ model MainBuildingEnergySystem
         rotation=90,
         origin={-159,-83})));
   HydraulicModules.Admix admixHTC(
+    valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
@@ -112,6 +113,7 @@ model MainBuildingEnergySystem
     rpm_pump=2000)
     annotation (Placement(transformation(extent={{-128,64},{-114,78}})));
   HydraulicModules.Admix admixLTC(
+    valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
@@ -135,6 +137,7 @@ model MainBuildingEnergySystem
         rotation=90,
         origin={-90,70})));
   HydraulicModules.Admix admixCold1(
+    valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
@@ -177,6 +180,7 @@ model MainBuildingEnergySystem
     T_amb=288.15)
             annotation (Placement(transformation(extent={{36,-22},{62,16}})));
   HydraulicModules.Admix admixCold2(
+    valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
           Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
