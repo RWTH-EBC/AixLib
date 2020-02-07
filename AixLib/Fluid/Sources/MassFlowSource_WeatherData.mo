@@ -50,13 +50,6 @@ protected
   Modelica.Blocks.Interfaces.RealInput h_in_internal(
     final unit="J/kg")
     "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealOutput X_in_internal[Medium.nX](
-    each final unit = "kg/kg",
-    final quantity=Medium.substanceNames)
-    "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealOutput C_in_internal[Medium.nC](
-    final quantity=Medium.extraPropertiesNames)
-    "Needed to connect to conditional connector";
 
 equation
   Modelica.Fluid.Utilities.checkBoundary(
@@ -139,10 +132,6 @@ equation
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid,
           textString="m"),
-        Text(
-          extent={{-150,130},{150,170}},
-          textString="%name",
-          lineColor={0,0,255}),
         Ellipse(
           extent={{-26,30},{-18,22}},
           lineColor={255,0,0},
@@ -161,7 +150,10 @@ equation
           lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="C")}),
+          textString="C"),        Text(
+          extent={{-161,110},{139,150}},
+          textString="%name",
+          lineColor={0,0,255})}),
     Documentation(info="<html>
 <p>
 Models an ideal flow source, with prescribed values of flow rate and trace
@@ -195,9 +187,15 @@ with exception of boundary flow rate, do not have an effect.
 revisions="<html>
 <ul>
 <li>
+November 14, 2019, by Michael Wetter:<br/>
+Removed duplicate connector.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1248\"> #1248</a>.
+</li>
+<li>
 January 14, 2019 by Jianjun Hu:<br/>
 Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
-AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for 
+AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\"> #1050</a>.
 </li>
 <li>

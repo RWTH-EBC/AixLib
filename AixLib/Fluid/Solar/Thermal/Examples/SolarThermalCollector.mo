@@ -6,14 +6,13 @@ model SolarThermalCollector
   replaceable package Medium = AixLib.Media.Water constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium model";
 
-  AixLib.Fluid.Sources.FixedBoundary source(
-    h=125823,
+  Sources.Boundary_pT                source(
     nPorts=1,
     redeclare package Medium = Medium,
     p=system.p_ambient + solarThermal.pressureDropCoeff*(solarThermal.m_flow_nominal
         /995)^2+pipe.dp_nominal)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  AixLib.Fluid.Sources.FixedBoundary sink(nPorts=1, redeclare package Medium =
+  Sources.Boundary_pT                sink(nPorts=1, redeclare package Medium =
         Medium,
     p=system.p_ambient)
     annotation (Placement(transformation(extent={{100,-10},{80,10}})));

@@ -54,8 +54,11 @@ record OPH_1_Office "Office zone of office building"
     wfWall={0.2,0.2,0.2,0.2,0.1},
     wfWin={0.25,0.25,0.25,0.25,0},
     wfGro=0.1,
-    internalGainsPeopleSpecific=3.5,
+    specificPeople=1/14,
+    activityDegree=1.2,
+    fixedHeatFlowRatePersons=70,
     ratioConvectiveHeatPeople=0.5,
+    internalGainsMoistureNoPeople=0.5,
     internalGainsMachinesSpecific=7.0,
     ratioConvectiveHeatMachines=0.6,
     lightingPowerSpecific=12.5,
@@ -78,9 +81,16 @@ record OPH_1_Office "Office zone of office building"
     lCool=-1,
     KRCool=1000,
     TNCool=1,
-    CoolerOn=false);
+    CoolerOn=false,
+    TThresholdHeater=273.15 + 15,
+    TThresholdCooler=273.15 + 22,
+    withIdealThresholds=false);
   annotation (Documentation(revisions="<html>
  <ul>
+  <li>
+  November 27, 2019, by David Jansen:<br/>
+  Integrate threshold for heater and cooler.
+  </li>
   <li>
   February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
   Adapting nrPeople and nrPeopleMachines to area specific approach 

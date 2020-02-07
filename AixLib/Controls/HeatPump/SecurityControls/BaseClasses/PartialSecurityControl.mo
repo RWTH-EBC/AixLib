@@ -12,7 +12,7 @@ partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Sources.Constant conZer(final k=0)
     "If an error occurs, the compressor speed is set to zero"
     annotation (Placement(transformation(extent={{58,-24},{70,-12}})));
-  Controls.Interfaces.HeatPumpControlBus sigBusHP
+  Interfaces.ThermalMachineControlBus sigBusHP
     "Bus-connector for the heat pump"
     annotation (Placement(transformation(extent={{-152,-84},{-118,-54}})));
   Modelica.Blocks.Interfaces.BooleanOutput modeOut

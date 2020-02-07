@@ -5,6 +5,7 @@ Pump
 SpeedControlled_Nrpm
 SpeedControlled_y
 Compressors
+PumpsPolynomialBased
 Data
 Examples
 Validation

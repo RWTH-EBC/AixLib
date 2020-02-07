@@ -1,5 +1,6 @@
-BasicPumpInterface
-HydraulicBus
 PartialHydraulicModule
-PumpBus
+HydraulicBus
+BasicPumpInterface
+PumpInterface_PumpHeadControlled
+PumpInterface_PumpSpeedControlled
 PumpInterface_SpeedControlledNrpm

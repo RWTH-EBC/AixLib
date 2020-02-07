@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
+within AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.Data;
 record PipeDataAIT151218
   "Experimental data from AIT monitoring data December 18, 2015"
     extends BaseClasses.PipeDataBaseDefinition(final n=9, data=[0,
@@ -630,7 +630,7 @@ First implementation.
 </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>This record contains data of a real disitrict heating network for week-long period (23-29 Januar 2009) monitored by the Austrian Institut for Technology.</p>
-<p> Pipes are layed underground 
+<p> Pipes are layed underground
 
 <p><b><span style=\"color: #008000;\">Data structure</span></b> </p>
 <p>Column 1: Time in s </p>
@@ -646,9 +646,9 @@ First implementation.
 
 <p><b><span style=\"color: #008000;\">Test procedure</span></b> </p>
 Information at several points of the district heating network is recorded during a week.
- 
+
 <p><b><span style=\"color: #008000;\">Test bench schematic</span></b> </p>
-<p><img alt=\"Schematic of test district heating network in Pongau\" src=\"modelica://AixLib/Resources/Images/Experimental/AITTestBench.png\" border=\"1\"/>
+<p><img alt=\"Schematic of test district heating network in Pongau\" src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Validation/PlugFlowPipes/AITTestBench.png\" border=\"1\"/>
 </p>
 
 <p>

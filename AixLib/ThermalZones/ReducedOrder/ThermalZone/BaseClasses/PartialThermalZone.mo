@@ -8,27 +8,6 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  Modelica.Blocks.Interfaces.RealInput ventRate(
-    final quantity="VolumeFlowRate",
-    final unit="1/h") if ATot > 0 or zoneParam.VAir > 0
-    "Ventilation and infiltration rate"
-    annotation (
-      Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={-40,-100}), iconTransformation(
-        extent={{-12,-12},{12,12}},
-        rotation=90,
-        origin={-70,-84})));
-  Modelica.Blocks.Interfaces.RealInput ventTemp(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC",
-    min=0) if ATot > 0 or zoneParam.VAir > 0
-    "Ventilation and infiltration temperature"
-    annotation (Placement(
-        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
-          extent={{-126,-52},{-100,-26}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3]
     "Input profiles for internal gains persons, machines, light"
     annotation (
@@ -62,7 +41,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare each final package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
+    annotation (Placement(transformation(extent={{-83,-106},{15,-82}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
     ATot > 0 or zoneParam.VAir > 0
@@ -74,8 +53,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     annotation (Placement(transformation(extent={{94,8},{114,28}}),
                             iconTransformation(extent={{90,-20},{110,0}})));
   RC.FourElements ROM(
-    final nPorts=nPorts,
     redeclare final package Medium = Medium,
+    final nPorts=nPorts,
     final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
     final nOrientations=zoneParam.nOrientations,
@@ -117,6 +96,7 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final C_nominal=C_nominal,
     final mSenFac=mSenFac) "RC calculation core" annotation (Placement(transformation(extent={{38,28},{86,64}})));
 
+
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
   zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
@@ -125,7 +105,7 @@ equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));
   connect(ROM.ports, ports) annotation (Line(points={{77,28.05},{77,-4},{48,-4},
-          {48,-44},{0,-44},{0,-94}},            color={0,127,255}));
+          {48,-84},{-34,-84},{-34,-94}},        color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
           {92,-2},{104,-2}},   color={191,0,0}));
   connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,38},
