@@ -38,7 +38,7 @@ package Co2 "Co2 balance models"
     annotation (Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>This model calculates the CO2 production of all people in the room (Volume)[1]. </p>
-<p><br>Human CO2 output (kg/s) per person is calculated depending on metabolic heat production rate and body surface area.</p>
+<p>Human CO2 output (kg/s) per person is calculated depending on metabolic heat production rate and body surface area.</p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>The CO2 output k (liter/h) is calculated by the following equation[2]:</p>
 <p><i>k = 0.83 * M*A/5.617 * TRoom/273.15</i></p>
