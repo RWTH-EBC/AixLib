@@ -1,5 +1,5 @@
 ThermalZone
 ThermalZoneAirExchange
-ThermalZoneMoistAirCo2
-ThermalZoneMoistAirCo2Exchange
+ThermalZoneMoistCo2
+ThermalZoneMoistCo2AirExchange
 BaseClasses

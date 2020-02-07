@@ -1,2 +1,2 @@
-convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirCo2");
-convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirCo2Exchange");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAir", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCo2");
+convertClass("AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange", "AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCo2AirExchange");

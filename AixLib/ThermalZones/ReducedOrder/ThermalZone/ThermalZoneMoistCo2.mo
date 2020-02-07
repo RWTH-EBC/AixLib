@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneMoistAirCo2 "Thermal zone containing moisture and co2  balance"
+model ThermalZoneMoistCo2 "Thermal zone containing moisture and co2  balance"
   extends ThermalZone(
     ROM(final use_moisture_balance=true, final use_C_flow=true));
 
@@ -27,16 +27,16 @@ model ThermalZoneMoistAirCo2 "Thermal zone containing moisture and co2  balance"
           "kg/m3") = 1.25, V=ROM.volMoiAir.V) if
           ATot > 0
     annotation (Placement(transformation(extent={{38,-46},{50,-38}})));
-  Modelica.Blocks.Math.MultiSum airExchange(nu=1) if ATot > 0
+  Modelica.Blocks.Math.MultiSum airExchange if       ATot > 0
                    "Ventilation rate total"
-    annotation (Placement(transformation(extent={{12,-52},{16,-48}})));
+    annotation (Placement(transformation(extent={{18,-52},{22,-48}})));
 
   Modelica.Blocks.Math.Gain nrPeople(k=zoneParam.specificPeople*zoneParam.AZone) if
           ATot > 0 "Number of people in Zone"
     annotation (Placement(transformation(
         extent={{-3,-3},{3,3}},
         rotation=0,
-        origin={7,-45})));
+        origin={9,-41})));
   Modelica.Blocks.Interfaces.RealOutput CO2 if ATot > 0 or zoneParam.VAir > 0
     "Indoor Air CO2 concentration in ppm"
     annotation (Placement(transformation(extent={{100,79},{120,99}}),
@@ -47,7 +47,7 @@ protected
     annotation (Placement(transformation(extent={{0,-22},{10,-6}})));
   Modelica.Blocks.Sources.RealExpression XCO2(y=ROM.volMoiAir.C[1]) if
           ATot > 0 "CO2 massfraction in zone"
-    annotation (Placement(transformation(extent={{24,-56},{34,-48}})));
+    annotation (Placement(transformation(extent={{24,-56},{36,-48}})));
   Modelica.Blocks.Sources.RealExpression co2PPM(y=ROM.volMoiAir.C[1]*(28.949/
         44.01)*1E6) if
           ATot > 0 "CO2 massfraction in zone"
@@ -69,23 +69,24 @@ equation
   connect(humVolAirROM.y, X_w) annotation (Line(points={{10.5,-14},{48,-14},{48,
           -4},{88,-4},{88,74},{110,74}}, color={0,0,127}));
 
-  connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{10.3,-45},{14,-45},{14,-44},{22,-44},{22,-37.8},{26,-37.8}},
+  connect(nrPeople.y, CO2Source.nP) annotation (Line(points={{12.3,-41},{14,-41},{14,-38},{22,-38},{22,-37.8},{26,-37.8}},
                               color={0,0,127}));
-  connect(intGains[1], nrPeople.u) annotation (Line(points={{80,-133.333},{80,-78},{54,-78},{54,-54},{2,-54},{2,-45},{3.4,-45}},
+  connect(intGains[1], nrPeople.u) annotation (Line(points={{80,-133.333},{80,-80},{54,-80},{54,-56},{2,-56},{2,-41},{5.4,-41}},
                                                         color={0,0,127}));
-  connect(CO2Balance.CO2_flow, ROM.C_flow) annotation (Line(points={{50,-42},{50,-2},{37,-2},{37,56}},
-                                             color={0,0,127}));
-  connect(XCO2.y, CO2Balance.XCO2) annotation (Line(points={{34.5,-52},{36,-52},{36,-44},{38,-44},{38,-43.6}},
+  connect(XCO2.y, CO2Balance.XCO2) annotation (Line(points={{36.6,-52},{36,-52},{36,-44},{38,-44},{38,-43.6}},
                                   color={0,0,127}));
   connect(airExchange.y, CO2Balance.airExchange)
-    annotation (Line(points={{16.34,-50},{24,-50},{24,-42},{38,-42}},
+    annotation (Line(points={{22.34,-50},{24,-50},{24,-42},{38,-42}},
                                                     color={0,0,127}));
   connect(CO2Source.CO2People_flow, CO2Balance.CO2People_flow) annotation (Line(
         points={{32,-39},{34,-39},{34,-40.4},{38,-40.4}}, color={0,0,127}));
   connect(co2PPM.y, CO2) annotation (Line(points={{92.4,90},{98,90},{98,89},{
           110,89}}, color={0,0,127}));
   connect(CO2Source.TRoom, ROM.TAir)
-    annotation (Line(points={{26,-39},{26,-36},{44,-36},{44,-6},{90,-6},{90,62},{87,62}},   color={0,0,127}));
+    annotation (Line(points={{26,-39},{26,-40},{24,-40},{24,-36},{44,-36},{44,-6},{90,-6},{90,62},{87,62}},
+                                                                                            color={0,0,127}));
+  connect(CO2Balance.CO2_flow, ROM.C_flow[1])
+    annotation (Line(points={{50,-42},{56,-42},{56,-4},{36,-4},{36,57},{37,57}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li>January 30, 2020, by Katharina Brinkmann:<br>Integration of CO2 balance and renaming</li>
@@ -125,4 +126,4 @@ equation
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="Moisture and CO2")}));
-end ThermalZoneMoistAirCo2;
+end ThermalZoneMoistCo2;

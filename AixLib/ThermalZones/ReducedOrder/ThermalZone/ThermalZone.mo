@@ -289,8 +289,9 @@ equation
         color={191,0,0}));
   connect(ROM.intGainsConv, humanSenHeaIndependent.TRoom) annotation (Line(points={{86,50},
           {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
-  connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
-          {94,-27},{94,54},{86,54}},   color={95,95,95}));
+  connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},{94,-27},{94,54},{86,54}}, color={95,95,95}));
+  connect(intGains[1], humanTotHeaDependent.schedule)
+    annotation (Line(points={{80,-133.333},{80,-133.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}}, color={0,0,127}));
   connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
           -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
         color={191,0,0}));

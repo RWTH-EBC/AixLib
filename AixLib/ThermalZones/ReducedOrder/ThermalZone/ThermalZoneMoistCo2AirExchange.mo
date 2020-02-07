@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
-model ThermalZoneMoistAirCo2Exchange
+model ThermalZoneMoistCo2AirExchange
   "Thermal zone model considering moisture and co2 balance with ventilation, infiltration and internal gains"
-  extends ThermalZoneMoistAirCo2(
-                              airExchange(nu=1), SumQLat_flow(nu=3));
+  extends ThermalZoneMoistCo2(airExchange(nu=1), SumQLat_flow(nu=3));
 
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,
@@ -116,7 +115,7 @@ equation
                                                 color={0,0,127}));
   connect(humVolAirROM.y, airExc.HumOut) annotation (Line(points={{10.5,-14},{
           0.75,-14},{0.75,-13.84},{-6.8,-13.84}}, color={0,0,127}));
-  connect(addInfVen.y, airExchange.u[1]) annotation (Line(points={{-34,-31.4},{-34,-28},{-24,-28},{-24,-50},{12,-50}},
+  connect(addInfVen.y, airExchange.u[1]) annotation (Line(points={{-34,-31.4},{-34,-28},{-24,-28},{-24,-50},{18,-50}},
                                                                     color={0,0,
           127}));
   annotation(Documentation(info="<html>
@@ -155,4 +154,4 @@ equation
           textString="Ventilation
 Infiltration
 ")}));
-end ThermalZoneMoistAirCo2Exchange;
+end ThermalZoneMoistCo2AirExchange;
