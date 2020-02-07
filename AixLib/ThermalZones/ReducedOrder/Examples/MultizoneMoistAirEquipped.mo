@@ -149,6 +149,6 @@ equation
   </li>
   </ul>
 </html>", info="<html>
-<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped</a>. Parameter set is for an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show typical profiles for indoor air temperatures, but are not related to a specific building or measurement data.</p>
+<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistCo2AirEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped</a>. Parameter set is for an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show typical profiles for indoor air temperatures, but are not related to a specific building or measurement data.</p>
 </html>"));
 end MultizoneMoistAirEquipped;

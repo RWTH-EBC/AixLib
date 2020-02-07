@@ -89,20 +89,20 @@ equation
     annotation (Line(points={{50,-42},{56,-42},{56,-4},{36,-4},{36,57},{37,57}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
-<li>January 30, 2020, by Katharina Brinkmann:<br>Integration of CO2 balance and renaming</li>
-<li>January 09, 2020, by David Jansen:<br>Integration of ideal heater and cooler into the thermal zone. </li>
-<li>July 10, 2019, by Martin Kremer:<br>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
-<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
+<li>January 30, 2020, by Katharina Brinkmann:<br/>Integration of CO2 balance and renaming</li>
+<li>January 09, 2020, by David Jansen:<br/>Integration of ideal heater and cooler into the thermal zone. </li>
+<li>July 10, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
+<li>April, 2019, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>", info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>This model enhances the existing thermal zone model considering moisture and co2 balance in the zone. Moisture and co2 are considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
-<p>Dependent on the paramter <code>internalGainsMode</code> different models for internal gains by humans will be used. For a correct moisture balance the paramter should be set to <code>3</code>.</p>
-<p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
-<p> There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture. This leads to a steady increase of moisture in the room, when there is no ventilation.</p>
+<p>Dependent on the paramter <span style=\"font-family: Courier New;\">internalGainsMode</span> different models for internal gains by humans will be used. For a correct moisture and co2 balance the paramter should be set to <span style=\"font-family: Courier New;\">3</span>.</p>
+<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
+<p>There is no moisture exchange through the walls or windows. Only moisture exchange is realized by the internal gains, through the fluid ports and over the ventilation moisture. This leads to a steady increase of moisture in the room, when there is no ventilation.</p>
 <p>The moisture balance was formulated considering the latent heat with the aim, that the temperature is not influenced by the moisture.For this reason every humidity source is assumed to be in gaseous state.</p>
 <h4>Accuracy</h4>
 <p>Due to usage of constant heat capacaty for steam and constant heat of evaporation, the temperature is slightly influenced. Comparing the ThermalZone with dry air to the ThermalZone with moist air, the maximum difference between the simulated air temperature in the zone is 0.07 K for weather data from San Francisco and using the zoneParam for office buildings. See therefore: <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ComparisonThermalZoneMoistAndDryAir\">ExampleComparisonMoistAndDryAir</a></p>

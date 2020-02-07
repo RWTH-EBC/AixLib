@@ -41,8 +41,8 @@ equation
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>February 2020, by Katharina Brinkmann:<br>Rename to MultizoneMoistCo2</li>
-<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
+<li>February 2020, by Katharina Brinkmann:<br>/Rename to MultizoneMoistCo2</li>
+<li>April, 2019, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"));
 end MultizoneMoistCo2;

@@ -119,7 +119,7 @@ equation
                                                                     color={0,0,
           127}));
   annotation(Documentation(info="<html>
-<p>This model enhances the existing thermal zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
+<p>This model enhances the existing thermal zone model considering moisture and co2 balance in the zone. Moisture and co2 are considered in internal gains. </p>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
 <p><b>Important!</b>: This model has to be combined with a zoneRecord that sets the parameter <i>internalGainsMode</i> to 3. Otherwise no moisture gain from persons will be considered.</p>
@@ -134,10 +134,10 @@ equation
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneEquipped</a>. </p>
 </html>",  revisions="<html>
 <ul>
-<li>January 30, 2020, by Katharina Brinkmann:<br>Integration of CO2 balance and renaming</li>
-<li>January 09, 2020, by David Jansen:<br>Integration of ideal heater and cooler into the thermal zone. </li>
-<li>July 10, 2019, by Martin Kremer:<br>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
-<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
+<li>January 30, 2020, by Katharina Brinkmann:<br/>Integration of CO2 balance and renaming</li>
+<li>January 09, 2020, by David Jansen:<br/>Integration of ideal heater and cooler into the thermal zone. </li>
+<li>July 10, 2019, by Martin Kremer:<br/>Adapting to new internalGains models. See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/690\">AixLib, issue #690</a>. </li>
+<li>April, 2019, by Martin Kremer:<br/>First implementation. </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
