@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
-model MultizoneMoistAir "Multizone model with humidity balance"
+model MultizoneMoistCo2 "Multizone model with humidity and co2 balance"
   extends Multizone(redeclare model thermalZone =
-        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirExchange);
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistCo2AirExchange);
   Modelica.Blocks.Interfaces.RealInput ventHum[numZones] if ASurTot > 0 or
     VAir > 0 "Ventilation and infiltration humidity"
      annotation (Placement(
@@ -26,11 +26,10 @@ equation
           127}));
   connect(zone.X_w, X_w) annotation (Line(points={{82.1,72.78},{94,72.78},{94,94},
           {110,94}}, color={0,0,127}));
-  connect(zone.CO2, CO2) annotation (Line(points={{82.1,88.36},{94,88.36},{94,
-          40},{110,40}},
+  connect(zone.CO2, CO2) annotation (Line(points={{82.1,85.9},{94,85.9},{94,40},{110,40}},
                      color={0,0,127}));
   annotation (Documentation(info="<html>
-<p>This model enhances the existing multi-zone model considering moisture balance in the zone. Moisture is considered in internal gains. </p>
+<p>This model enhances the existing multi-zone model considering moisture and co2 balance in the zone. Moisture and co2 are considered in internal gains. </p>
 <p>This is a ready-to-use multizone model with a variable number of thermal zones. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
 <h4>Typical use and important parameters</h4>
 <p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a simulation of a multizone building for district simulations where the model is connected via heat ports and fluid ports to a heating system. The multizone model serves as boundary condition for the heating system and calculates the building&apos;s reaction to external and internal heat sources. </p>
@@ -42,10 +41,8 @@ equation
 </ul>
 </html>", revisions="<html>
 <ul>
-  <li>
-  April, 2019, by Martin Kremer:<br/>
-  First implementation.
-  </li>
+<li>February 2020, by Katharina Brinkmann:<br>Rename to MultizoneMoistCo2</li>
+<li>April, 2019, by Martin Kremer:<br>First implementation. </li>
 </ul>
 </html>"));
-end MultizoneMoistAir;
+end MultizoneMoistCo2;
