@@ -141,7 +141,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final use_C_flow=false) if VAir > 0 and not use_moisture_balance
+    final use_C_flow=use_C_flow) if VAir > 0 and not use_moisture_balance
     "Indoor air volume"
     annotation (Placement(transformation(extent={{42,-26},{22,-6}})));
   Fluid.MixingVolumes.MixingVolumeMoistAir volMoiAir(
@@ -157,7 +157,7 @@ model OneElement "Thermal Zone with one element for exterior walls"
     final C_start=C_start,
     final C_nominal=C_nominal,
     final mSenFac=mSenFac,
-    final use_C_flow=true) if VAir > 0 and use_moisture_balance
+    final use_C_flow=use_C_flow) if VAir > 0 and use_moisture_balance
     "Indoor air volume"
     annotation (Placement(transformation(extent={{-20,-26},{0,-6}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor resWin(final R=RWin) if
