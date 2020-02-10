@@ -3,6 +3,8 @@ model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
 
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(final T_start = TStart);
+
   replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
                  annotation (Dialog(group="Medium"),choicesAllMatching = true);
@@ -14,16 +16,27 @@ model BufferStorage
   replaceable package MediumHC2 =
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
+  parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(group = "Nominal condition"));
+  parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
+    "Nominal mass flow rate of fluid 2 ports"
+    annotation(Dialog(group = "Nominal condition"));
+
+  parameter Modelica.SIunits.MassFlowRate mHC1_flow_nominal(min=0) if useHeatingCoil1
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil1));
+  parameter Modelica.SIunits.MassFlowRate mHC2_flow_nominal(min=0) if useHeatingCoil2
+    "Nominal mass flow rate of fluid 1 ports"
+    annotation(Dialog(tab="Heating Coils and Rod", group = "Nominal condition", enable=useHeatingCoil2));
 
   parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
+  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialization", group="Storage specific"));
 
-  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-    AixLib.DataBase.Storage.Generic_New_2000l()
-    "Data record for Storage"
+  replaceable parameter DataBase.Storage.BufferStorageBaseDataDefinition data constrainedby DataBase.Storage.BufferStorageBaseDataDefinition "Data record for Storage"
   annotation (choicesAllMatching);
 
   parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -48,9 +61,9 @@ model BufferStorage
                                                  annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
 
   parameter Modelica.SIunits.Temperature TStartWall=293.15
-    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
+    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
   parameter Modelica.SIunits.Temperature TStartIns=293.15
-    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
+    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////final parameters////////////////////////////////////////////////////////////////////////
@@ -119,14 +132,14 @@ model BufferStorage
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package
+              Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package
+              Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
@@ -145,11 +158,18 @@ model BufferStorage
             {-14,20}}, rotation=0)));
 
   AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
+    each final energyDynamics=energyDynamics,
+    each final massDynamics=massDynamics,
+    each final p_start=p_start,
+    each final X_start=X_start,
+    each final C_start=C_start,
+    each final C_nominal=C_nominal,
+    each final mSenFac=mSenFac,
     final V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     final nPorts = portsLayer,
     final T_start=fill(TStart,n),
     redeclare each final package Medium = Medium,
-    each m_flow_nominal=0.05)
+    each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
     replaceable model HeatTransfer =
@@ -205,51 +225,57 @@ model BufferStorage
 ////////////////////////////////////////////////////////////////////////////////////////
 
   AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
-    lambdaWall=data.lambdaWall,
-    lambdaIns=data.lambdaIns,
-    hConIn=hConIn,
-    hConOut=hConOut,
-    TStartWall=TStartWall,
-    TStartIns=TStartIns,
-    rhoIns=data.rhoIns,
-    cIns=data.cIns,
-    rhoWall=data.rhoWall,
-    cWall=data.cWall,
-    D1=data.dTank,
-    sWall=data.sWall,
-    sIns=data.sIns) annotation (Placement(transformation(
+    final energyDynamics=energyDynamics,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={8,56})));
   AixLib.Fluid.Storage.BaseClasses.StorageMantle storageMantle[n](
-    each lambdaWall=data.lambdaWall,
-    each lambdaIns=data.lambdaIns,
-    each TStartWall=TStartWall,
-    each TStartIns=TStartIns,
-    each rhoIns=data.rhoIns,
-    each cIns=data.cIns,
-    each rhoWall=data.rhoWall,
-    each cWall=data.cWall,
-    each height=data.hTank/n,
-    each D1=data.dTank,
-    each sWall=data.sWall,
-    each sIns=data.sIns,
-    each hConIn=hConIn,
-    each hConOut=hConOut) annotation (Placement(transformation(extent={{20,-2},{40,18}})));
+    each final energyDynamics=energyDynamics,
+    each final lambdaWall=data.lambdaWall,
+    each final lambdaIns=data.lambdaIns,
+    each final TStartWall=TStartWall,
+    each final TStartIns=TStartIns,
+    each final rhoIns=data.rhoIns,
+    each final cIns=data.cIns,
+    each final rhoWall=data.rhoWall,
+    each final cWall=data.cWall,
+    each final height=data.hTank/n,
+    each final D1=data.dTank,
+    each final sWall=data.sWall,
+    each final sIns=data.sIns,
+    each final hConIn=hConIn,
+    each final hConOut=hConOut)
+                          annotation (Placement(transformation(extent={{20,-2},{40,18}})));
   AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
-    lambdaWall=data.lambdaWall,
-    lambdaIns=data.lambdaIns,
-    hConIn=hConIn,
-    hConOut=hConOut,
-    TStartWall=TStartWall,
-    TStartIns=TStartIns,
-    rhoIns=data.rhoIns,
-    cIns=data.cIns,
-    rhoWall=data.rhoWall,
-    cWall=data.cWall,
-    D1=data.dTank,
-    sWall=data.sWall,
-    sIns=data.sIns) annotation (Placement(transformation(
+    final energyDynamics=energyDynamics,
+    final lambdaWall=data.lambdaWall,
+    final lambdaIns=data.lambdaIns,
+    final hConIn=hConIn,
+    final hConOut=hConOut,
+    final TStartWall=TStartWall,
+    final TStartIns=TStartIns,
+    final rhoIns=data.rhoIns,
+    final cIns=data.cIns,
+    final rhoWall=data.rhoWall,
+    final cWall=data.cWall,
+    final D1=data.dTank,
+    final sWall=data.sWall,
+    final sIns=data.sIns)
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,-44})));
@@ -261,7 +287,7 @@ model BufferStorage
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
     allowFlowReversal=true,
-    m_flow_nominal=0.05,
+    final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -274,7 +300,7 @@ model BufferStorage
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
     allowFlowReversal=true,
-    m_flow_nominal=0.05,
+    final m_flow_nominal=mHC1_flow_nominal,
     TStart=TStart) if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -720,6 +746,11 @@ for i in 2:(n-1) loop
           extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html>
 <ul>
+<li>November 27, 2019, by Philipp Mehrfeld:<br/>
+- <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a> <br/>
+- Replace MSL pipe by <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>.<br/>
+- Add energyDynamics and tidy up with heat transfer models.
+</li>
 <li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
 <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
