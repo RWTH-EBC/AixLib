@@ -1,3 +1,0 @@
-within AixLib.Systems.Benchmark_fb.Model.Transfer;
-package Transfer_RLT
-end Transfer_RLT;

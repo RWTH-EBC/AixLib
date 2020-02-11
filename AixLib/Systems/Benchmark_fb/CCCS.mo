@@ -57,7 +57,7 @@ parameter Real cConDisCoolFix=1690 "fixed costs for district cooling connection 
     Placement(visible = true, transformation(origin = {-124, 9}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
 
     Benchmark_aku.BaseClasses.MainBus mainBus
-      annotation (Placement(transformation(extent={{-112,-88},{-92,-68}})));
+      annotation (Placement(transformation(extent={{-172,-92},{-152,-72}})));
 equation
   connect(Cost_DistrictHeating.y, Sum_EnergyCost.u[3]) annotation (
     Line(points = {{65.02, 76}, {66, 76}, {66, -1.05}, {68, -1.05}}, color = {0, 0, 127}));
@@ -102,7 +102,7 @@ equation
   connect(NominalPowerOfDistrictCooling.y, PowerConnection_DistrictCooling.u[2]) annotation (
     Line(points = {{-113, 9}, {-78, 9}, {-78, 23.9}, {-74, 23.9}}, color = {0, 0, 127}));
     connect(mainBus.evaBus.QbrTotalMea, CostFactor_Fuel.u) annotation (Line(
-        points={{-101.95,-77.95},{-78,-77.95},{-78,-80},{12,-80},{12,-76}},
+        points={{-161.95,-81.95},{-78,-81.95},{-78,-80},{12,-80},{12,-76}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
@@ -111,7 +111,7 @@ equation
         horizontalAlignment=TextAlignment.Right));
     connect(mainBus.evaBus.WelTotalMea, CostFactorElectricity.u) annotation (
         Line(
-        points={{-101.95,-77.95},{10,-77.95},{10,-36}},
+        points={{-161.95,-81.95},{10,-81.95},{10,-36}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
@@ -242,8 +242,6 @@ end EnergyCosts;
     Modelica.Blocks.Continuous.Integrator integrator1[5](k={1,1,1,1,1}, each use_reset=
          true)                                           annotation (
       Placement(visible = true, transformation(origin={0,-20},    extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-    LRM lrm[5] annotation (
-      Placement(visible = true, transformation(origin = {2, 80}, extent = {{-40, -18}, {40, 18}}, rotation = 0)));
   parameter Real prodFac = 1.2 "productivity factor [-]";
   parameter Real sal = 50000 "average salary of employee per annum [€]";
   parameter Real TSet=293.14 "set room temperature [K]";
@@ -256,6 +254,10 @@ end EnergyCosts;
           extent={{-6,-6},{6,6}},
           rotation=270,
           origin={0,-56})));
+    LRM_Temp lRM_Temp[5]
+      annotation (Placement(transformation(extent={{-28,72},{-8,92}})));
+    Benchmark_aku.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   equation
 
     connect(multiSum1.y, PRC) annotation (
@@ -290,46 +292,6 @@ end EnergyCosts;
       Line(points = {{79, 90}, {44, 90}, {44, 40}, {8, 40}}, color = {0, 0, 127}));
     connect(const.y, feedback1[1].u1) annotation (
       Line(points = {{79, 90}, {44, 90}, {44, 40}, {8, 40}}, color = {0, 0, 127}));
-  connect(lrm[5].PRC, feedback1[5].u2) annotation (
-      Line(points={{0.6,61.2},{0.6,61.2},{0.6,48},{0,48}},color = {0, 0, 127}, thickness = 0.5));
-  connect(lrm[4].PRC, feedback1[4].u2) annotation (
-      Line(points={{0.6,61.2},{0.6,61.2},{0.6,48},{0,48}},color = {0, 0, 127}, thickness = 0.5));
-  connect(lrm[3].PRC, feedback1[3].u2) annotation (
-      Line(points={{0.6,61.2},{0.6,61.2},{0.6,48},{0,48}},color = {0, 0, 127}, thickness = 0.5));
-  connect(lrm[2].PRC, feedback1[2].u2) annotation (
-      Line(points={{0.6,61.2},{0.6,61.2},{0.6,48},{0,48}},color = {0, 0, 127}, thickness = 0.5));
-  connect(lrm[1].PRC, feedback1[1].u2) annotation (
-      Line(points={{0.6,61.2},{0.6,61.2},{0.6,48},{0,48}},color = {0, 0, 127}, thickness = 0.5));
-  connect(bus_measure.X_OpenplanOffice, lrm[5].X) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,72},{-38,72},{-38,73},{-38,73}},      color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.X_Multipersonoffice, lrm[4].X) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,72},{-38,72},{-38,73},{-38,73}},      color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.X_Conferenceroom, lrm[3].X) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,72},{-40,72},{-40,73},{-38,73}},      color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.X_Workshop, lrm[2].X) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,72},{-40,72},{-40,73},{-38,73}},      color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.X_Canteen, lrm[1].X) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,72},{-38,72},{-38,73},{-38,73}},      color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.RoomTemp_Openplanoffice, lrm[5].T) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,88},{-38,88},{-38,87.2},{-38,87.2}},  color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.RoomTemp_Multipersonoffice, lrm[4].T) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,88},{-40,88},{-40,87.2},{-38,87.2}},  color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.RoomTemp_Conferenceroom, lrm[3].T) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,88},{-38,88},{-38,87.2},{-38,87.2}},  color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.RoomTemp_Workshop, lrm[2].T) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,88},{-38,88},{-38,87.2},{-38,87.2}},  color = {255, 204, 51}, thickness = 0.5));
-  connect(bus_measure.RoomTemp_Canteen, lrm[1].T) annotation (
-      Line(points={{-99.95,-1.95},{-56,-1.95},{-56,88},{-38,88},{-38,87.2},{-38,87.2}},  color = {255, 204, 51}, thickness = 0.5));
-  connect(Tset.y, lrm[5].Tset) annotation (
-      Line(points={{-79,90},{-56,90},{-56,80},{-38,80},{-38,80},{-38,80}},              color = {0, 0, 127}));
-  connect(Tset.y, lrm[4].Tset) annotation (
-      Line(points={{-79,90},{-56,90},{-56,80},{-38,80},{-38,80},{-38,80}},              color = {0, 0, 127}));
-  connect(Tset_workshop.y, lrm[2].Tset) annotation (
-      Line(points={{-79,50},{-56,50},{-56,80},{-38,80},{-38,80},{-38,80},{-38,80}},                color = {0, 0, 127}));
-  connect(Tset.y, lrm[3].Tset) annotation (
-      Line(points={{-79,90},{-56,90},{-56,80},{-38,80},{-38,80},{-38,80}},              color = {0, 0, 127}));
-  connect(Tset.y, lrm[1].Tset) annotation (
-      Line(points={{-79,90},{-56,90},{-56,80},{-38,80},{-38,80}},            color = {0, 0, 127}));
     connect(booleanExpression[1].y, integrator1[1].reset) annotation (Line(points={{-63,-26},
             {-12,-26}},                              color={255,0,255}));
     connect(booleanExpression[2].y, integrator1[2].reset) annotation (Line(points={{-63,-26},
@@ -414,6 +376,73 @@ end EnergyCosts;
                                          color={0,0,127}));
             connect(multiProduct[5].y, multiSum1.u[5]) annotation (Line(points={{0,-63.02},
             {0,-68},{0,-74},{-5.6,-74}}, color={0,0,127}));
+    connect(lRM_Temp[1].y, feedback1[1].u2)
+      annotation (Line(points={{-7.4,80.8},{0,80.8},{0,48}}, color={0,0,127}));
+    connect(lRM_Temp[2].y, feedback1[2].u2)
+      annotation (Line(points={{-7.4,80.8},{0,80.8},{0,48}}, color={0,0,127}));
+    connect(lRM_Temp[3].y, feedback1[3].u2)
+      annotation (Line(points={{-7.4,80.8},{0,80.8},{0,48}}, color={0,0,127}));
+    connect(lRM_Temp[4].y, feedback1[4].u2)
+      annotation (Line(points={{-7.4,80.8},{0,80.8},{0,48}}, color={0,0,127}));
+    connect(lRM_Temp[5].y, feedback1[5].u2)
+      annotation (Line(points={{-7.4,80.8},{0,80.8},{0,48}}, color={0,0,127}));
+    connect(Tset_workshop.y, lRM_Temp[1].Tset) annotation (Line(points={{-79,50},
+            {-28,50},{-28,77.2}}, color={0,0,127}));
+    connect(Tset.y, lRM_Temp[2].Tset) annotation (Line(points={{-79,90},{-74,90},
+            {-74,77.2},{-28,77.2}}, color={0,0,127}));
+    connect(Tset.y, lRM_Temp[3].Tset) annotation (Line(points={{-79,90},{-74,90},
+            {-74,76},{-28,76},{-28,77.2}}, color={0,0,127}));
+    connect(Tset.y, lRM_Temp[3].Tset) annotation (Line(points={{-79,90},{-74,90},
+            {-74,76},{-28,76},{-28,77.2}}, color={0,0,127}));
+    connect(Tset.y, lRM_Temp[4].Tset) annotation (Line(points={{-79,90},{-74,90},
+            {-74,78},{-30,78},{-30,77.2},{-28,77.2}}, color={0,0,127}));
+    connect(Tset.y, lRM_Temp[5].Tset) annotation (Line(points={{-79,90},{-74,90},
+            {-74,78},{-30,78},{-30,77.2},{-28,77.2}}, color={0,0,127}));
+    connect(mainBus.TRoom1Mea, lRM_Temp[1].T) annotation (Line(
+        points={{-101.95,0.05},{-88,0.05},{-88,0},{-40,0},{-40,88.8},{-28,88.8}},
+
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(mainBus.TRoom2Mea, lRM_Temp[2].T) annotation (Line(
+        points={{-101.95,0.05},{-70,0.05},{-70,0},{-40,0},{-40,88},{-28,88},{
+            -28,88.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(mainBus.TRoom3Mea, lRM_Temp[3].T) annotation (Line(
+        points={{-101.95,0.05},{-70,0.05},{-70,0},{-40,0},{-40,88},{-28,88},{
+            -28,88.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(mainBus.TRoom4Mea, lRM_Temp[4].T) annotation (Line(
+        points={{-101.95,0.05},{-70,0.05},{-70,0},{-40,0},{-40,88},{-28,88},{
+            -28,88.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(mainBus.TRoom5Mea, lRM_Temp[5].T) annotation (Line(
+        points={{-101.95,0.05},{-96,0.05},{-96,0},{-40,0},{-40,88},{-28,88},{
+            -28,88.8}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
       annotation (Line(points={{79,-32},{74,-32},{74,-34},{60,-34},{60,-52},{-2.4,
             -52},{-2.4,-50},{0.525,-50}}, color={0,0,127}), Icon(
           coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
@@ -507,6 +536,8 @@ end EnergyCosts;
 
     Modelica.Blocks.Routing.RealPassThrough Pos_Valves[30]
       annotation (Placement(transformation(extent={{-30,-4},{-10,16}})));
+    Benchmark_aku.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{-108,48},{-88,68}})));
   equation
     when (I_valve_ges / 56) * 365 - 30 * k > 0 and (I_pump_ges / 56) * 365 - 26 * k > 0 then
       y = K_valve * ((I_valve_ges / 56) * 365 - 30 * k) + K_pump * ((I_pump_ges / 56) * 365 - 26 * k);
@@ -737,517 +768,6 @@ end EnergyCosts;
       i_Valve_TBA_Workshop_Temp = pre(i_Valve_TBA_Workshop_Temp) + 1;
     end when;
 
-    connect(bus_Control1.Valve1, Pos_Valves[1].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve2, Pos_Valves[2].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve3, Pos_Valves[3].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve4, Pos_Valves[4].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve5, Pos_Valves[5].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve6, Pos_Valves[6].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Valve7, Pos_Valves[7].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve8, Pos_Valves[8].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve_RLT_Hot_Central, Pos_Valves[9].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-      connect(bus_Control1.Valve_RLT_Hot_OpenPlanOffice, Pos_Valves[10].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-        connect(bus_Control1.Valve_RLT_Hot_ConferenceRoom, Pos_Valves[11].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-        connect(bus_Control1.Valve_RLT_Hot_MultiPersonOffice, Pos_Valves[12].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-        connect(bus_Control1.Valve_RLT_Hot_Canteen, Pos_Valves[13].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-   connect(bus_Control1.Valve_RLT_Hot_Workshop, Pos_Valves[14].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Valve_RLT_Cold_Central, Pos_Valves[15].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-      connect(bus_Control1.Valve_RLT_Cold_OpenPlanOffice, Pos_Valves[16].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-         connect(bus_Control1.Valve_RLT_Cold_ConferenceRoom, Pos_Valves[17].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-         connect(bus_Control1.Valve_RLT_Cold_MultiPersonOffice, Pos_Valves[18].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-         connect(bus_Control1.Valve_RLT_Cold_Canteen, Pos_Valves[19].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-         connect(bus_Control1.Valve_RLT_Cold_Workshop, Pos_Valves[20].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve_TBA_Warm_OpenPlanOffice, Pos_Valves[21].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-        connect(bus_Control1.Valve_TBA_Warm_conferenceroom, Pos_Valves[22].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-        connect(bus_Control1.Valve_TBA_Warm_multipersonoffice, Pos_Valves[23].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-        connect(bus_Control1.Valve_TBA_Warm_canteen, Pos_Valves[24].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-        connect(bus_Control1.Valve_TBA_Warm_workshop, Pos_Valves[25].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Valve_TBA_OpenPlanOffice_Temp, Pos_Valves[26].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-         connect(bus_Control1.Valve_TBA_ConferenceRoom_Temp, Pos_Valves[27].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,8},{-32,8},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-         connect(bus_Control1.Valve_TBA_MultiPersonOffice_Temp, Pos_Valves[28].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-         connect(bus_Control1.Valve_TBA_Canteen_Temp, Pos_Valves[29].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-        connect(bus_Control1.Valve_TBA_Workshop_Temp, Pos_Valves[30].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,6},{-32,6}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Hotwater_y, Speed_Pumps[1].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Warmwater_y, Speed_Pumps[2].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Coldwater_y, Speed_Pumps[3].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Coldwater_heatpump_y, Speed_Pumps[4].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Warmwater_heatpump_1_y, Speed_Pumps[5].u) annotation (
-       Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Warmwater_heatpump_2_y, Speed_Pumps[6].u) annotation (
-       Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Aircooler_y, Speed_Pumps[7].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Hotwater_CHP_y, Speed_Pumps[8].u) annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_Hotwater_Boiler_y, Speed_Pumps[9].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_RLT_Central_hot_y, Speed_Pumps[10].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_OpenPlanOffice_hot_y, Speed_Pumps[11].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_ConferenceRoom_hot_y, Speed_Pumps[12].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-102,-1.95},{-102,-48},{-44.6,-48},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_MultiPersonOffice_hot_y, Speed_Pumps[13].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-24},{-100,-24},{-100,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_Canteen_hot_y, Speed_Pumps[14].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-24},{-102,-24},{-102,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_Workshop_hot_y, Speed_Pumps[15].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_Central_cold_y, Speed_Pumps[16].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_OpenPlanOffice_cold_y, Speed_Pumps[17].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,6},{-3,6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_ConferenceRoom_cold_y, Speed_Pumps[18].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_MultiPersonOffice_cold_y, Speed_Pumps[19].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_RLT_Canteen_cold_y, Speed_Pumps[20].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_RLT_Workshop_cold_y, Speed_Pumps[21].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_TBA_OpenPlanOffice_y, Speed_Pumps[22].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_TBA_ConferenceRoom_y, Speed_Pumps[23].u) annotation (
-        Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_TBA_MultiPersonOffice_y, Speed_Pumps[24].u)
-      annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-50},{-44.6,-50},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-3,-6},{-3,-6}},
-        horizontalAlignment=TextAlignment.Right));
-
-    connect(bus_Control1.Pump_TBA_Canteen_y, Speed_Pumps[25].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-    connect(bus_Control1.Pump_TBA_Workshop_y, Speed_Pumps[26].u) annotation (Line(
-        points={{-99.95,-1.95},{-99.95,-49},{-44.6,-49}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
-
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Text(
             extent={{-56,24},{56,-18}},
@@ -1343,7 +863,7 @@ end EnergyCosts;
       Diagram(coordinateSystem(preserveAspectRatio = false)));
   end RBF;
 
-  model LRM
+  model LRM_TempAndHum "performance reduction due to room temperature and humidity"
     Modelica.Blocks.Logical.And and1 annotation (
       Placement(visible = true, transformation(origin = {-218, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold = 0.25) annotation (
@@ -1955,7 +1475,7 @@ end EnergyCosts;
       Diagram(coordinateSystem(extent = {{-400, -180}, {400, 180}})),
       Icon(coordinateSystem(extent = {{-400, -180}, {400, 180}})),
       __OpenModelica_commandLineOptions = "");
-  end LRM;
+  end LRM_TempAndHum;
 
   block discountingFactor "u1 is the discounting factor, u2 is the duration in years"
     Modelica.Blocks.Interfaces.RealInput duration annotation (
@@ -2008,9 +1528,9 @@ end EnergyCosts;
       annotation (Placement(transformation(extent={{98,-10},{118,10}})));
     CCCS.LifespanReductionCosts lifespanReductionCosts
       annotation (Placement(transformation(extent={{-74,-26},{-54,-6}})));
+    Benchmark_aku.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   equation
-    connect(bus_measure, EmissionsCosts.bus_measure) annotation (
-      Line(points={{-103,-1},{-100,-1},{-100,50},{-80,50}},                   color = {255, 204, 51}, thickness = 0.5));
     connect(investmentCostsStrategy1.kStrat, InvestmentCosts.u1) annotation (
       Line(points={{-57.8,-50},{-20,-50},{-20,-60}},            color = {0, 0, 127}));
     connect(RBF.RBF, product1.u1) annotation (
@@ -2029,39 +1549,134 @@ end EnergyCosts;
                                                                color = {0, 0, 127}));
     connect(product1.y, OverallCost.u1) annotation (
       Line(points={{49,36},{56,36},{56,6}},        color = {0, 0, 127}));
-    connect(bus_measure, energyCosts.bus_measure) annotation (Line(
-        points={{-103,-1},{-103,80},{-81.04,80}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
     connect(energyCosts.EnergyCost, OperationalCosts.u[3]) annotation (Line(
           points={{-52.96,80},{-20,80},{-20,30.95}},
                                                    color={0,0,127}));
     connect(OverallCost.y, OverallCosts_Output)
       annotation (Line(points={{79,0},{108,0}}, color={0,0,127}));
-    connect(bus_measure, performanceReductionCosts1.bus_measure) annotation (Line(
-        points={{-103,-1},{-86,-1},{-86,17.8},{-80,17.8}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
     connect(lifespanReductionCosts.y, OperationalCosts.u[4]) annotation (Line(
           points={{-54.4,-16},{-20,-16},{-20,28.85}}, color={0,0,127}));
 
-    connect(bus_Control, lifespanReductionCosts.bus_Control1) annotation (Line(
-        points={{-100,-22},{-78,-22},{-78,-16.2},{-74,-16.2}},
+    connect(mainBus, performanceReductionCosts1.mainBus) annotation (Line(
+        points={{-100,0},{-100,18},{-80.2,18}},
         color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
+        thickness=0.5));
+    connect(mainBus, EmissionsCosts.mainBus) annotation (Line(
+        points={{-100,0},{-100,50},{-80,50}},
+        color={255,204,51},
+        thickness=0.5));
+    connect(mainBus, energyCosts.mainBus) annotation (Line(
+        points={{-100,0},{-100,71.8},{-81.248,71.8}},
+        color={255,204,51},
+        thickness=0.5));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end Evaluation_CCCS;
+
+  model LRM_Temp "performance reduction due to room temperature"
+    Modelica.Blocks.Math.Feedback feedback1 annotation (
+      Placement(visible = true, transformation(origin={-60,0},      extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput T annotation (
+      Placement(visible = true, transformation(origin={-100,68},    extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin={-100,68},    extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput Tset annotation (
+      Placement(visible = true, transformation(origin={-100,-48},  extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin={-100,-48},  extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Modelica.Blocks.Logical.Switch switch12 annotation (
+      Placement(visible = true, transformation(origin={6,32},       extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=-2)
+      annotation (Placement(transformation(extent={{-36,22},{-16,42}})));
+    Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=2)
+      annotation (Placement(transformation(extent={{-36,-44},{-16,-24}})));
+    Modelica.Blocks.Logical.Switch switch1  annotation (
+      Placement(visible = true, transformation(origin={6,-34},      extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealOutput y
+      annotation (Placement(transformation(extent={{96,-22},{116,-2}})));
+    Modelica.Blocks.Sources.Constant const(k=0.02) annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={88,-90})));
+    Modelica.Blocks.Sources.Constant const1(k=0.04) annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={90,90})));
+    Modelica.Blocks.Sources.Constant const2(k=-2) annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={90,56})));
+    Modelica.Blocks.Math.Product product annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={46,86})));
+    Modelica.Blocks.Math.Add add annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={10,80})));
+    Modelica.Blocks.Sources.Constant const3(k=0) annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=0,
+          origin={-28,0})));
+    Modelica.Blocks.Math.Add add1
+      annotation (Placement(transformation(extent={{62,-22},{82,-2}})));
+    Modelica.Blocks.Sources.Constant const4(k=-2) annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={90,-60})));
+    Modelica.Blocks.Math.Product product1 annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={46,-88})));
+    Modelica.Blocks.Math.Add add2 annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={10,-82})));
+  equation
+    connect(T,feedback1. u1) annotation (
+      Line(points={{-100,68},{-74,68},{-74,0},{-68,0}},               color = {0, 0, 127}));
+    connect(Tset,feedback1. u2) annotation (
+      Line(points={{-100,-48},{-60,-48},{-60,-8}},      color = {0, 0, 127}));
+    connect(feedback1.y, lessThreshold.u) annotation (Line(points={{-51,0},{-46,
+            0},{-46,32},{-38,32}}, color={0,0,127}));
+    connect(feedback1.y, greaterThreshold.u) annotation (Line(points={{-51,0},{
+            -46,0},{-46,-34},{-38,-34}}, color={0,0,127}));
+    connect(lessThreshold.y, switch12.u2)
+      annotation (Line(points={{-15,32},{-6,32}}, color={255,0,255}));
+    connect(greaterThreshold.y, switch1.u2)
+      annotation (Line(points={{-15,-34},{-6,-34}}, color={255,0,255}));
+    connect(const1.y, product.u1) annotation (Line(points={{79,90},{66,90},{66,
+            80},{58,80}}, color={0,0,127}));
+    connect(feedback1.y, product.u2) annotation (Line(points={{-51,0},{-46,0},{
+            -46,100},{66,100},{66,98},{62,98},{62,92},{58,92}}, color={0,0,127}));
+    connect(const3.y, switch12.u3) annotation (Line(points={{-17,0},{-14,0},{
+            -14,6},{-6,6},{-6,24}}, color={0,0,127}));
+    connect(const3.y, switch1.u3) annotation (Line(points={{-17,0},{-12,0},{-12,
+            -2},{-14,-2},{-14,-42},{-6,-42}}, color={0,0,127}));
+    connect(add.y, switch12.u1) annotation (Line(points={{-1,80},{-12,80},{-12,
+            40},{-6,40}}, color={0,0,127}));
+    connect(product.y, add.u2)
+      annotation (Line(points={{35,86},{22,86}}, color={0,0,127}));
+    connect(const2.y, add.u1) annotation (Line(points={{79,56},{72,56},{72,66},
+            {32,66},{32,74},{22,74}}, color={0,0,127}));
+    connect(add1.y, y)
+      annotation (Line(points={{83,-12},{106,-12}}, color={0,0,127}));
+    connect(switch1.y, add1.u2)
+      annotation (Line(points={{17,-34},{60,-34},{60,-18}}, color={0,0,127}));
+    connect(switch12.y, add1.u1)
+      annotation (Line(points={{17,32},{60,32},{60,-6}}, color={0,0,127}));
+    connect(const.y, product1.u2) annotation (Line(points={{77,-90},{72,-90},{
+            72,-82},{58,-82}}, color={0,0,127}));
+    connect(feedback1.y, product1.u1) annotation (Line(points={{-51,0},{-46,0},
+            {-46,-100},{66,-100},{66,-94},{58,-94}}, color={0,0,127}));
+    connect(product1.y, add2.u1)
+      annotation (Line(points={{35,-88},{22,-88}}, color={0,0,127}));
+    connect(const4.y, add2.u2) annotation (Line(points={{79,-60},{30,-60},{30,
+            -76},{22,-76}}, color={0,0,127}));
+    connect(add2.y, switch1.u1) annotation (Line(points={{-1,-82},{-14,-82},{
+            -14,-26},{-6,-26}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end LRM_Temp;
 end CCCS;
