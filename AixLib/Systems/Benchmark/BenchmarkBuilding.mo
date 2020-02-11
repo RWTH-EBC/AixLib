@@ -83,8 +83,8 @@ model BenchmarkBuilding "Benchmark building model"
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
+    filNam=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/Weatherdata_benchmark_new.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{40,368},{60,388}})));
 

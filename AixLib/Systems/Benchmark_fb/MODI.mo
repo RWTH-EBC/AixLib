@@ -18,8 +18,6 @@ package MODI
       Placement(visible = true, transformation(extent = {{-154, 20}, {-134, 40}}, rotation = 0)));
     Modelica.Blocks.Interfaces.IntegerOutput MODI_Temperature[15] annotation (
       Placement(visible = true, transformation(origin = {-100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(origin = {-100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-    Benchmark_fb.Model.BusSystems.Bus_measure bus_measure
-      annotation (Placement(transformation(extent={{-18,60},{22,100}})));
   PNlib.Components.PD Dehumidifying[5](nIn = 1, nOut = 1)  annotation (
       Placement(visible = true, transformation(origin = {20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   PNlib.Components.PD Off_Humidity[5](nIn = 2, nOut = 2, reStartTokens = 1, startTokens = 1)  annotation (
@@ -36,6 +34,8 @@ package MODI
       Placement(visible = true, transformation(origin = {144, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   Modelica.Blocks.Interfaces.IntegerOutput MODI_Humidity[15] annotation (
       Placement(visible = true, transformation(origin = {100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    Benchmark.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{-10,86},{10,106}})));
   equation
     connect(Dehumidifying[5].pd_t, MODI_Humidity[15]) annotation (
       Line(points={{9.4,0},{4,0},{4,-80},{100,-80},{100,-102},{100,-119.333},{
@@ -322,7 +322,17 @@ package MODI
       annotation (Line(points={{184,-10.8},{184,-30},{148.8,-30}}, color={0,0,0}));
     annotation (
       Line(points = {{-60, -106}, {-60, -106}}, color = {255, 127, 0}),
-      Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}})),
+      Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}}),
+          graphics={Rectangle(
+            extent={{-200,100},{200,-100}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-162,34},{152,-28}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Management-Ebene")}),
       Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}})),
       Documentation(info = "<html><head></head><body>Struktur des MODI_Temperature-Output-Vektors (Einträge von oben nach unten):<div><br></div><div>Workshop_Off</div><div>Canteen_Off</div><div>ConferenceRoom_Off</div><div>MultipersonOffice_Off</div><div>OpenplanOffice_Off</div><div><div>Workshop_Heating</div><div>Canteen_Heating</div><div>ConferenceRoom_Heating</div><div>MultipersonOffice_Heating</div><div>OpenplanOffice_Heating</div></div><div><div>Workshop_Cooling</div><div>Canteen_Cooling</div><div>ConferenceRoom_Cooling</div><div>MultipersonOffice_Cooling</div><div>OpenplanOffice_Cooling</div></div><div><br></div><div>Struktur des MODI_Humidity-Output-Vektors (Einträge von oben nach unten):<div><br></div><div>Workshop_Off</div><div>Canteen_Off</div><div>ConferenceRoom_Off</div><div>MultipersonOffice_Off</div><div>OpenplanOffice_Off</div><div><div>Workshop_Humidifying</div><div>Canteen_Humidifying</div><div>ConferenceRoom_Humidifying</div><div>MultipersonOffice_Humidifying</div><div>OpenplanOffice_Humidifying</div></div><div><div>Workshop_Dehumidifying</div><div>Canteen_Dehumidifying</div><div>ConferenceRoom_Dehumidifying</div><div>MultipersonOffice_Dehumidifying</div><div>OpenplanOffice_Dehumidifying</div></div></div></body></html>"),
   __OpenModelica_commandLineOptions = "");
@@ -1775,31 +1785,63 @@ package MODI
 
   model Feldebene "Auswahl der Aktoren basierend auf den ausgewählten Aktorsätzen"
     import Benchmark_fb;
-    Benchmark_fb.Model.BusSystems.Bus_Control bus_Control
-      annotation (Placement(transformation(extent={{-20,-114},{20,-74}})));
     Modelica.Blocks.Interfaces.IntegerInput u annotation (
       Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 100})));
+    Benchmark.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{-10,-108},{10,-88}})));
     annotation (
-      Icon(coordinateSystem(preserveAspectRatio = false)),
+      Icon(coordinateSystem(preserveAspectRatio = false), graphics={Rectangle(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-74,24},{74,-24}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Feldebene")}),
       Diagram(coordinateSystem(preserveAspectRatio = false)));
   end Feldebene;
 
   model Controlling_MODI
     import Benchmark_fb;
     Feldebene feldebene annotation (
-      Placement(transformation(extent = {{-40, -40}, {-20, -20}})));
-    Benchmark_fb.Model.BusSystems.Bus_measure bus_measure
-      annotation (Placement(transformation(extent={{50,50},{90,90}})));
-    Benchmark_fb.Model.BusSystems.Bus_Control bus_Control
-      annotation (Placement(transformation(extent={{52,-92},{92,-52}})));
+      Placement(transformation(extent={{-80,-80},{-20,-60}})));
   ManagementEbene managementEbene1 annotation (
-      Placement(visible = true, transformation(origin = {-22, 60}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={-50,70},    extent={{-30,-10},
+              {30,10}},                                                                             rotation = 0)));
+    AutomatisierungsebeneV2 automatisierungsebeneV2_1
+      annotation (Placement(transformation(extent={{-72,-24},{-28,20}})));
+    Benchmark.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{86,-10},{106,10}})));
   equation
-    connect(feldebene.bus_Control, bus_Control) annotation (
-      Line(points = {{-30, -39.4}, {-30, -72}, {72, -72}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%second", index = 1, extent = {{-3, -6}, {-3, -6}}, horizontalAlignment = TextAlignment.Right));
+    connect(mainBus, managementEbene1.mainBus) annotation (Line(
+        points={{96,0},{60,0},{60,92},{-50,92},{-50,79.6}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(feldebene.mainBus, mainBus) annotation (Line(
+        points={{-50,-79.8},{-50,-86},{60,-86},{60,0},{96,0}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%second",
+        index=1,
+        extent={{-3,-6},{-3,-6}},
+        horizontalAlignment=TextAlignment.Right));
     annotation (
-      Icon(coordinateSystem(preserveAspectRatio = false)),
+      Icon(coordinateSystem(preserveAspectRatio = false), graphics={Rectangle(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-66,28},{58,-30}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="MODI")}),
       Diagram(coordinateSystem(preserveAspectRatio = false)));
   end Controlling_MODI;
 
@@ -3196,5 +3238,16 @@ package MODI
             -134.8}}, color={0,0,0}));
     connect(T23.outPlaces[1], Generation_Cold_I.inTransition[3]) annotation (
         Line(points={{260,-125.2},{260,-78.8},{219.333,-78.8}}, color={0,0,0}));
+    annotation (Icon(graphics={Rectangle(
+            extent={{-100,100},{100,-98}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-68,30},{74,-26}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Automatisierungs-
+Ebene")}));
   end AutomatisierungsebeneV2;
 end MODI;
