@@ -1,14 +1,11 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model MultizoneMoistAir "Illustrates the use of MultizoneMoistAir"
+model MultizoneMoistCo2 "Illustrates the use of MultizoneMoistAir"
   import AixLib;
   extends Modelica.Icons.Example;
 
+   package Medium=Modelica.Media.Air.MoistAir (extraPropertiesNames={"CO2"});
 
-   package Medium=Modelica.Media.Air.MoistAir(extraPropertiesNames={"CO2"});
-
-
-
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAir multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistCo2 multizone(
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     VAir=33500,
@@ -172,4 +169,4 @@ equation
 </html>", info="<html>
 <p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistCo2\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneMoistAirEquipped</a>. Parameter set is for an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show typical profiles for indoor air temperatures, but are not related to a specific building or measurement data.</p>
 </html>"));
-end MultizoneMoistAir;
+end MultizoneMoistCo2;
