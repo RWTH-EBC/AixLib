@@ -732,8 +732,8 @@ Strategy")}),
       Placement(visible = true, transformation(origin = {-70, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.Add InvestmentCosts annotation(
       Placement(visible = true, transformation(origin = {-8, -66}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    CCCS.InvestmentCostsStrategy investmentCostsStrategy1 annotation(
-      Placement(visible = true, transformation(origin = {-70, -48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    AixLib.Systems.Benchmark_fb.CCCS.InvestmentCostsStrategy investmentCostsStrategy1 annotation(
+      Placement(visible = true, transformation(origin = {-70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     CCCS.EnergyCosts energyCosts annotation(
       Placement(transformation(extent = {{-80, 80}, {-60, 100}})));
     Modelica.Blocks.Interfaces.RealOutput OverallCosts_Output annotation(
@@ -742,9 +742,17 @@ Strategy")}),
       Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
     InvestmentCostsComponents investmentCostsComponents(k_Investment = 0)  annotation(
       Placement(transformation(extent = {{-80, -100}, {-60, -80}})));
+  AixLib.Systems.Benchmark_fb.CCCS.LifespanReductionCosts_2 lifespanReductionCosts_21 annotation(
+      Placement(visible = true, transformation(origin = {-70, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(investmentCostsStrategy1.kStrat, InvestmentCosts.u1) annotation(
-      Line(points = {{-59.8, -48}, {-30, -48}, {-30, -60}, {-20, -60}}, color = {0, 0, 127}));
+      Line(points = {{-60, -50}, {-30, -50}, {-30, -60}, {-20, -60}}, color = {0, 0, 127}));
+    connect(energyCosts.EnergyCost, OperationalCosts.u[3]) annotation(
+      Line(points = {{-59.84, 90}, {-34, 90}, {-34, 32}, {-20, 32}, {-20, 30.95}}, color = {0, 0, 127}));
+    connect(mainBus, lifespanReductionCosts_21.mainBus) annotation(
+      Line(points = {{-100, 0}, {-100, 0}, {-100, -10}, {-80, -10}, {-80, -10}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(lifespanReductionCosts_21.y, OperationalCosts.u[4]) annotation(
+      Line(points = {{-60, -10}, {-34, -10}, {-34, 34}, {-20, 34}, {-20, 32}, {-20, 32}}, color = {0, 0, 127}));
     connect(RBF.RBF, product1.u1) annotation(
       Line(points = {{18.6, 64.4}, {18.6, 38.5}, {26, 38.5}, {26, 42}}, color = {0, 0, 127}));
     connect(InvestmentCosts.y, OverallCost.u2) annotation(
@@ -757,8 +765,6 @@ Strategy")}),
       Line(points = {{-59.2, 15}, {-46, 15}, {-46, 14}, {-34, 14}, {-34, 34}, {-28, 34}, {-28, 33.05}, {-20, 33.05}}, color = {0, 0, 127}));
     connect(product1.y, OverallCost.u1) annotation(
       Line(points = {{49, 36}, {56, 36}, {56, 6}}, color = {0, 0, 127}));
-    connect(energyCosts.EnergyCost, OperationalCosts.u[3]) annotation(
-      Line(points = {{-59.84, 90}, {-28, 90}, {-28, 32}, {-20, 32}, {-20, 30.95}}, color = {0, 0, 127}));
     connect(OverallCost.y, OverallCosts_Output) annotation(
       Line(points = {{79, 0}, {108, 0}}, color = {0, 0, 127}));
     connect(mainBus, performanceReductionCosts1.mainBus) annotation(
@@ -783,8 +789,8 @@ Strategy")}),
     Modelica.Blocks.Routing.RealPassThrough HP_ThrottleHS_rpmSet annotation(
       Placement(transformation(extent = {{-88, 112}, {-74, 126}})));
     parameter Real i_HP_ThrottleHS_rpmSet;
-    Benchmark.BaseClasses.MainBus mainBus annotation(
-      Placement(transformation(extent = {{-112, -10}, {-92, 10}})));
+    AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation(
+      Placement(visible = true, transformation(extent = {{-110, -10}, {-90, 10}}, rotation = 0), iconTransformation(extent = {{-110, -10}, {-90, 10}}, rotation = 0)));
     Modelica.Blocks.Routing.RealPassThrough HP_PumpHot_rpmSet annotation(
       Placement(transformation(extent = {{-88, 90}, {-72, 106}})));
     Modelica.Blocks.Routing.RealPassThrough HP_ThrottleRecool_rpmSet annotation(
@@ -807,46 +813,42 @@ Strategy")}),
       Placement(transformation(extent = {{-88, -128}, {-72, -112}})));
     Modelica.Blocks.Routing.RealPassThrough HP_ThrottleCS_valveSet annotation(
       Placement(transformation(extent = {{-88, -106}, {-72, -90}})));
+  AixLib.Systems.Benchmark_fb.CCCS.lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Pumps(cost_component = 3000, sim_time = 4838400)  annotation(
+      Placement(visible = true, transformation(origin = {50, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.MultiSum multiSum1 annotation(
+      Placement(visible = true, transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.CCCS.lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Valves(cost_component = 1000, sim_time = 4838400)  annotation(
+      Placement(visible = true, transformation(origin = {50, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
+    connect(mainBus.hpSystemBus.busThrottleRecool.valveSet, HP_ThrottleRecool_valveSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, -56}, {-89.6, -56}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busPumpCold.valveSet, HP_PumpCold_valveSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, -76}, {-89.6, -76}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleFreecool.valveSet, HP_ThrottleFreecool_valveSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, -120}, {-89.6, -120}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleCS.pumpBus.rpmSet, HP_ThrottleCS_rpmSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, 32}, {-89.6, 32}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busPumpHot.pumpBus.rpmSet, HP_PumpHot_rpmSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, 98}, {-89.6, 98}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleCS.valveSet, HP_ThrottleCS_valveSet.u) annotation(
+      Line(points = {{-100, 0}, {-102, 0}, {-102, -98}, {-89.6, -98}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busPumpHot.valveSet, HP_PumpHot_valveSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, -34}, {-89.6, -34}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleHS.valveSet, HP_ThrottleHS_valveSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, -12}, {-89.6, -12}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleFreecool.pumpBus.rpmSet, HP_ThrottleFreecool_rpmSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, 10}, {-89.6, 10}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busPumpCold.pumpBus.rpmSet, HP_PumpCold_rpmSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, 54}, {-89.6, 54}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleRecool.pumpBus.rpmSet, HP_ThrottleRecool_rpmSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, 76}, {-89.6, 76}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.hpSystemBus.busThrottleHS.pumpBus.rpmSet, HP_ThrottleHS_rpmSet.u) annotation(
+      Line(points = {{-100, 0}, {-100, 119}, {-89.4, 119}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(multiSum1.y, y) annotation(
+      Line(points = {{92, 0}, {100, 0}, {100, 0}, {106, 0}}, color = {0, 0, 127}));
     when abs(der(HP_ThrottleHS_rpmSet.y))>0 then
     i_HP_ThrottleHS_rpmSet=pre(i_HP_ThrottleHS_rpmSet)+1;
     end when;
-    connect(mainBus.hpSystemBus.busThrottleHS.pumpBus.rpmSet, HP_ThrottleHS_rpmSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, 119}, {-89.4, 119}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busPumpHot.pumpBus.rpmSet, HP_PumpHot_rpmSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-102, 0.05}, {-102, 98}, {-89.6, 98}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleRecool.pumpBus.rpmSet, HP_ThrottleRecool_rpmSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, 76}, {-89.6, 76}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busPumpCold.pumpBus.rpmSet, HP_PumpCold_rpmSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, 54}, {-89.6, 54}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleCS.pumpBus.rpmSet, HP_ThrottleCS_rpmSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-102, 0.05}, {-102, 32}, {-89.6, 32}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-3, -6}, {-3, -6}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleFreecool.pumpBus.rpmSet, HP_ThrottleFreecool_rpmSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, 10}, {-89.6, 10}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleHS.valveSet, HP_ThrottleHS_valveSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, -12}, {-89.6, -12}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busPumpHot.valveSet, HP_PumpHot_valveSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, -34}, {-89.6, -34}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleRecool.valveSet, HP_ThrottleRecool_valveSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-102, 0.05}, {-102, -56}, {-89.6, -56}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busPumpCold.valveSet, HP_PumpCold_valveSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-102, 0.05}, {-102, -76}, {-89.6, -76}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleCS.valveSet, HP_ThrottleCS_valveSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-102, 0.05}, {-102, -98}, {-89.6, -98}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
-    connect(mainBus.hpSystemBus.busThrottleFreecool.valveSet, HP_ThrottleFreecool_valveSet.u) annotation(
-      Line(points = {{-101.95, 0.05}, {-101.95, 2}, {-102, 2}, {-102, -120}, {-89.6, -120}}, color = {255, 204, 51}, thickness = 0.5),
-      Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}, horizontalAlignment = TextAlignment.Right));
     annotation(
       Icon(coordinateSystem(preserveAspectRatio = false), graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{-64, 38}, {64, -32}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, textString = "Lifespan-
 Reduction-
@@ -1723,4 +1725,91 @@ Factor")}));
     connect(fuel_consumption.y, mainBus.evaBus.QbrTotalMea) annotation(
       Line(points = {{-58, 72}, {-4, 72}, {-4, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
   end test_CCCS;
+
+  model lifespan_Reduction_Cost_Component
+  Modelica.Blocks.Continuous.Derivative derivative1 annotation(
+      Placement(visible = true, transformation(origin = {-70, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Abs abs1(generateEvent = true)  annotation(
+      Placement(visible = true, transformation(origin = {-40, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold1(threshold = 0.000001)  annotation(
+      Placement(visible = true, transformation(origin = {-10, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.Integrator integrator1 annotation(
+      Placement(visible = true, transformation(origin = { 50, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const(k = 0)  annotation(
+      Placement(visible = true, transformation(origin = {-10, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const1(k = 1)  annotation(
+      Placement(visible = true, transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.Switch switch1 annotation(
+      Placement(visible = true, transformation(origin = {20, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const2(k = 0)  annotation(
+      Placement(visible = true, transformation(origin = {30, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression1 annotation(
+      Placement(visible = true, transformation(origin = {30, 24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealInput u annotation(
+      Placement(visible = true, transformation(origin = {-104, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-104, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Product product1 annotation(
+      Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const3(k = 365*24*3600/sim_time) annotation(
+      Placement(visible = true, transformation(origin = {-70, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Real cost_component "cost for one component";
+  parameter Real sim_time "simulated interval in s";
+  Modelica.Blocks.Sources.Constant const4(k = 60000 / 20.55) annotation(
+      Placement(visible = true, transformation(origin = {-70, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.Switch switch11 annotation(
+      Placement(visible = true, transformation(origin = {26, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.Less less1 annotation(
+      Placement(visible = true, transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Feedback feedback1 annotation(
+      Placement(visible = true, transformation(origin = {-42, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Product product2 annotation(
+      Placement(visible = true, transformation(origin = {-10, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const5(k = cost_component) annotation(
+      Placement(visible = true, transformation(origin = {-70, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealOutput y annotation(
+      Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(const5.y, product2.u2) annotation(
+      Line(points = {{-59, -90}, {-28, -90}, {-28, -66}, {-22, -66}}, color = {0, 0, 127}));
+    connect(switch11.y, y) annotation(
+      Line(points = {{38, 0}, {92, 0}, {92, 0}, {100, 0}}, color = {0, 0, 127}));
+    connect(const1.y, switch1.u1) annotation(
+      Line(points = {{1, 90}, {1, 89.5}, {7, 89.5}, {7, 89}, {8, 89}, {8, 68}}, color = {0, 0, 127}));
+    connect(product2.y, switch11.u3) annotation(
+      Line(points = {{2, -60}, {8, -60}, {8, -8}, {12, -8}, {12, -8}, {14, -8}}, color = {0, 0, 127}));
+    connect(feedback1.y, product2.u1) annotation(
+      Line(points = {{-32, -60}, {-28, -60}, {-28, -54}, {-22, -54}, {-22, -54}}, color = {0, 0, 127}));
+    connect(integrator1.y, feedback1.u1) annotation(
+      Line(points = {{62, 60}, {68, 60}, {68, 12}, {-86, 12}, {-86, -60}, {-52, -60}, {-52, -60}, {-50, -60}}, color = {0, 0, 127}));
+    connect(const4.y, feedback1.u2) annotation(
+      Line(points = {{-58, -30}, {-54, -30}, {-54, -74}, {-42, -74}, {-42, -68}}, color = {0, 0, 127}));
+    connect(const.y, switch11.u1) annotation(
+      Line(points = {{2, 30}, {8, 30}, {8, 8}, {14, 8}}, color = {0, 0, 127}));
+    connect(less1.y, switch11.u2) annotation(
+      Line(points = {{2, 0}, {14, 0}, {14, 0}, {14, 0}}, color = {255, 0, 255}));
+    connect(const4.y, less1.u2) annotation(
+      Line(points = {{-58, -30}, {-26, -30}, {-26, -8}, {-22, -8}, {-22, -8}}, color = {0, 0, 127}));
+    connect(product1.y, less1.u1) annotation(
+      Line(points = {{-28, 0}, {-24, 0}, {-24, 0}, {-22, 0}}, color = {0, 0, 127}));
+    connect(integrator1.y, product1.u2) annotation(
+      Line(points = {{62, 60}, {68, 60}, {68, 12}, {-60, 12}, {-60, -6}, {-52, -6}}, color = {0, 0, 127}));
+    connect(const3.y, product1.u1) annotation(
+      Line(points = {{-59, 30}, {-59, 7}, {-52, 7}, {-52, 6}}, color = {0, 0, 127}));
+    connect(booleanExpression1.y, integrator1.reset) annotation(
+      Line(points = {{41, 24}, {48.5, 24}, {48.5, 24}, {56, 24}, {56, 48}}, color = {255, 0, 255}));
+    connect(greaterThreshold1.y, switch1.u2) annotation(
+      Line(points = {{1, 60}, {8, 60}}, color = {255, 0, 255}));
+    connect(switch1.y, integrator1.u) annotation(
+      Line(points = {{31, 60}, {38, 60}}, color = {0, 0, 127}));
+    connect(const.y, switch1.u3) annotation(
+      Line(points = {{1, 30}, {8, 30}, {8, 52}}, color = {0, 0, 127}));
+    connect(const2.y, integrator1.set) annotation(
+      Line(points = {{41, 90}, {41, 86}, {56, 86}, {56, 72}}, color = {0, 0, 127}));
+    connect(abs1.y, greaterThreshold1.u) annotation(
+      Line(points = {{-29, 60}, {-22, 60}}, color = {0, 0, 127}));
+    connect(derivative1.y, abs1.u) annotation(
+      Line(points = {{-59, 60}, {-52, 60}}, color = {0, 0, 127}));
+    connect(u, derivative1.u) annotation(
+      Line(points = {{-104, 0}, {-92, 0}, {-92, 60}, {-82, 60}}, color = {0, 0, 127}));
+    annotation(
+      Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {1, 2}, extent = {{-63, 30}, {63, -30}}, textString = "lifespan reduction cost one component")}, coordinateSystem(initialScale = 0.1)));end lifespan_Reduction_Cost_Component;
 end CCCS;
