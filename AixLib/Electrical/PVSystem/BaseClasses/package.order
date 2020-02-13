@@ -1,16 +1,7 @@
 PartialIVCharacteristics
 PVModule5pAnalytical
-PVModule5pNumerical
-PVModule5pNumericalPreCalc
 PartialCellTemperature
-CellTemperatureSimple
 CellTemperatureOpenRack
 CellTemperatureMountingCloseToGround
-CellTemperatureMountingContactToGround
-PVRadiationHorizontal
 PVRadiationHorizontalTRY
 Wsimple
-W
-PVInverterRMS
-PartialPVSystem
-PVModuleDC
