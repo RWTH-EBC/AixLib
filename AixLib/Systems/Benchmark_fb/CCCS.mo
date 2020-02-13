@@ -511,263 +511,6 @@ Reduction-
 Costs")}));
   end PerformanceReductionCosts;
 
-  model LifespanReductionCosts "calculating costs of lifespan reduction due to wear as part of operating costs to evaluate the performance of a control strategy according to CCCS evaluation method"
-    Real k = 60000 / 20.55 "number of switches per p.a. without wear";
-    parameter Real K_valve = 1000 "cost of a valve [€]";
-    parameter Real K_pump = 3000 "cost of a pump [€]";
-    Real I_valve_ges;
-    //overall number of switches of valves
-    Real I_pump_ges;
-    //overall number of switches of pumps
-    Real i_Pump_Hotwater_y;
-    //counter of hotwaterpump
-    Real i_Pump_Warmwater_y "counter of warmwaterpump";
-    Real i_Pump_Coldwater_y "counter of coldwaterpump";
-    Real i_Pump_Coldwater_heatpump_y "counter of coldwaterpump on heatpumpside";
-    Real i_Pump_Warmwater_heatpump_1_y "counter of warmwaterpump on heatpumpside";
-    Real i_Pump_Warmwater_heatpump_2_y "counter of warmwaterpump on heatpumpside";
-    Real i_Pump_Aircooler_y "counter of aircoolerpump";
-    Real i_Pump_Hotwater_CHP_y "counter  of aircoolerpump";
-    Real i_Pump_Hotwater_Boiler_y "counter of aircoolerpump";
-    Real i_Pump_RLT_Central_hot_y "counter of hotwaterpump of the central RLT";
-    Real i_Pump_RLT_OpenPlanOffice_hot_y "counter of hotwaterpump of the openplanoffice RLT";
-    Real i_Pump_RLT_ConferenceRoom_hot_y "counter speed of hotwaterpump of the conferenceroom RLT";
-    Real i_Pump_RLT_MultiPersonOffice_hot_y "counter of hotwaterpump of the multipersonoffice RLT";
-    Real i_Pump_RLT_Canteen_hot_y "counter of hotwaterpump of the canteen RLT";
-    Real i_Pump_RLT_Workshop_hot_y "counter of hotwaterpump of the workshop RLT";
-    Real i_Pump_RLT_Central_cold_y "counter of coldwaterpump of the central RLT";
-    Real i_Pump_RLT_OpenPlanOffice_cold_y "counter of coldwaterpump of the openplanoffice RLT";
-    Real i_Pump_RLT_ConferenceRoom_cold_y "counter of coldwaterpump of the conferenceroom RLT";
-    Real i_Pump_RLT_MultiPersonOffice_cold_y "counter of coldwaterpump of the multipersonoffice";
-    Real i_Pump_RLT_Canteen_cold_y "counter of coldwaterpump of the canteen RLT";
-    Real i_Pump_RLT_Workshop_cold_y "counter of coldwaterpump of the workshop RLT";
-    Real i_Pump_TBA_OpenPlanOffice_y "counter of waterpump of the openplanoffice TBA";
-    Real i_Pump_TBA_ConferenceRoom_y "counter of waterpump of the conferenceroom TBA";
-    Real i_Pump_TBA_MultiPersonOffice_y "counter of waterpump of the multipersonoffice TBA";
-    Real i_Pump_TBA_Canteen_y "counter of waterpump of the canteen TBA";
-    Real i_Pump_TBA_Workshop_y "counter of waterpump of the workshop TBA";
-    Real i_Valve1 "counter of Valve1 (Coldwater geothermalprobe)";
-    Real i_Valve2 "counter of Valve2 (Coldwater coldwater bufferstorage)";
-    Real i_Valve3 "counter of Valve3 (Coldwater heatexchanger)";
-    Real i_Valve4 "counter of Valve4 (Warmwater heatexchanger)";
-    Real i_Valve5 "counter of Valve5 (Warmwater warmwater bufferstorage)";
-    Real i_Valve6 "counter of Valve6 (Hotwater boiler)";
-    Real i_Valve7 "counter of Valve7 (Hotwater warmwater bufferstorage)";
-    Real i_Valve8 "counter of Valve8 (Aircooler)";
-    Real i_Valve_RLT_Hot_Central "counter of valve to control the hotwater-temperature to the Central";
-    Real i_Valve_RLT_Hot_OpenPlanOffice "counter of valve to control the hotwater-temperature to the OpenPlanOffice";
-    Real i_Valve_RLT_Hot_ConferenceRoom "counter of valve to control the hotwater-temperature to the ConferenceRoom";
-    Real i_Valve_RLT_Hot_MultiPersonOffice "counter of valve to control the hotwater-temperature to the MultiPersonOffice";
-    Real i_Valve_RLT_Hot_Canteen "counter of valve to control the hotwater-temperature to the canteen";
-    Real i_Valve_RLT_Hot_Workshop "counter of valve to control the hotwater-temperature to the workshop";
-    Real i_Valve_RLT_Cold_Central "counter of valve to control the coldwater-temperature to the Central";
-    Real i_Valve_RLT_Cold_OpenPlanOffice "counter of valve to control the coldwater-temperature to the OpenPlanOffice";
-    Real i_Valve_RLT_Cold_ConferenceRoom "counter of valve to control the coldwater-temperature to the ConferenceRoom";
-    Real i_Valve_RLT_Cold_MultiPersonOffice "counter of valve to control the coldwater-temperature to the MultiPersonOffice";
-    Real i_Valve_RLT_Cold_Canteen "counter of valve to control the coldwater-temperature to the canteen";
-    Real i_Valve_RLT_Cold_Workshop "counter of valve to control the coldwater-temperature to the workshop";
-    Real i_Valve_TBA_Warm_OpenPlanOffice "counter of valve for warm or cold of the openplanoffice";
-    Real i_Valve_TBA_Warm_conferenceroom "counter of valve for warm or cold of the conferenceroom";
-    Real i_Valve_TBA_Warm_multipersonoffice "counter of valve for warm or cold of the multipersonoffice";
-    Real i_Valve_TBA_Warm_canteen "Vcounter of valve for warm or cold of the canteen";
-    Real i_Valve_TBA_Warm_workshop "counter of valve for warm or cold of the workshop";
-    Real i_Valve_TBA_OpenPlanOffice_Temp "counter of valve to control the temperature to the OpenPlanOffice";
-    Real i_Valve_TBA_ConferenceRoom_Temp "counter of valve to control the temperature to the ConferenceRoom";
-    Real i_Valve_TBA_MultiPersonOffice_Temp "counter of valve to control the temperatur to the MultiPersonOffice";
-    Real i_Valve_TBA_Canteen_Temp "counter of valve to control the temperature to the canteen";
-    Real i_Valve_TBA_Workshop_Temp "counter of valve to control the temperature to the workshop";
-    Modelica.Blocks.Interfaces.RealOutput y annotation (
-      Placement(visible = true, transformation(origin = {106, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {106, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    //overall number of switches of pumps
-    Modelica.Blocks.Routing.RealPassThrough Speed_Pumps[26] annotation (
-      Placement(transformation(extent = {{-42, -62}, {-16, -36}})));
-    Modelica.Blocks.Routing.RealPassThrough Pos_Valves[30] annotation (
-      Placement(transformation(extent = {{-30, -4}, {-10, 16}})));
-    Benchmark.BaseClasses.MainBus mainBus annotation (
-      Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
-  equation
-    when I_valve_ges / 56 * 365 - 30 * k > 0 and I_pump_ges / 56 * 365 - 26 * k > 0 then
-      y = K_valve * (I_valve_ges / 56 * 365 - 30 * k) + K_pump * (I_pump_ges / 56 * 365 - 26 * k);
-    end when;
-    I_pump_ges = i_Pump_Hotwater_y + i_Pump_Warmwater_y + i_Pump_Coldwater_y + i_Pump_Coldwater_heatpump_y + i_Pump_Warmwater_heatpump_1_y + i_Pump_Warmwater_heatpump_2_y + i_Pump_Aircooler_y + i_Pump_Hotwater_CHP_y + i_Pump_Hotwater_Boiler_y + i_Pump_TBA_OpenPlanOffice_y + i_Pump_TBA_ConferenceRoom_y + i_Pump_TBA_MultiPersonOffice_y + i_Pump_TBA_Canteen_y + i_Pump_TBA_Workshop_y + i_Pump_RLT_Central_hot_y + i_Pump_RLT_OpenPlanOffice_hot_y + i_Pump_RLT_ConferenceRoom_hot_y + i_Pump_RLT_MultiPersonOffice_hot_y + i_Pump_RLT_Canteen_hot_y + i_Pump_RLT_Workshop_hot_y + i_Pump_RLT_Central_cold_y + i_Pump_RLT_OpenPlanOffice_cold_y + i_Pump_RLT_ConferenceRoom_cold_y + i_Pump_RLT_MultiPersonOffice_cold_y + i_Pump_RLT_Canteen_cold_y + i_Pump_RLT_Workshop_cold_y;
-    I_valve_ges = i_Valve1 + i_Valve2 + i_Valve3 + i_Valve4 + i_Valve5 + i_Valve6 + i_Valve7 + i_Valve8 + i_Valve_RLT_Hot_Central + i_Valve_RLT_Hot_OpenPlanOffice + i_Valve_RLT_Hot_ConferenceRoom + i_Valve_RLT_Hot_MultiPersonOffice + i_Valve_RLT_Hot_Canteen + i_Valve_RLT_Hot_Workshop + i_Valve_RLT_Cold_Central + i_Valve_RLT_Cold_OpenPlanOffice + i_Valve_RLT_Cold_ConferenceRoom + i_Valve_RLT_Cold_MultiPersonOffice + i_Valve_RLT_Cold_Canteen + i_Valve_RLT_Cold_Workshop + i_Valve_TBA_Warm_OpenPlanOffice + i_Valve_TBA_Warm_conferenceroom + i_Valve_TBA_Warm_multipersonoffice + i_Valve_TBA_Warm_canteen + i_Valve_TBA_Warm_workshop + i_Valve_TBA_OpenPlanOffice_Temp + i_Valve_TBA_ConferenceRoom_Temp + i_Valve_TBA_MultiPersonOffice_Temp + i_Valve_TBA_Canteen_Temp + i_Valve_TBA_Workshop_Temp;
-    when abs(der(Speed_Pumps[1].y)) > 0 then
-      i_Pump_Hotwater_y = pre(i_Pump_Hotwater_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[2].y)) > 0 then
-      i_Pump_Warmwater_y = pre(i_Pump_Warmwater_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[3].y)) > 0 then
-      i_Pump_Coldwater_y = pre(i_Pump_Coldwater_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[4].y)) > 0 then
-      i_Pump_Coldwater_heatpump_y = pre(i_Pump_Coldwater_heatpump_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[5].y)) > 0 then
-      i_Pump_Warmwater_heatpump_1_y = pre(i_Pump_Warmwater_heatpump_1_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[6].y)) > 0 then
-      i_Pump_Warmwater_heatpump_2_y = pre(i_Pump_Warmwater_heatpump_2_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[7].y)) > 0 then
-      i_Pump_Aircooler_y = pre(i_Pump_Aircooler_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[8].y)) > 0 then
-      i_Pump_Hotwater_CHP_y = pre(i_Pump_Hotwater_CHP_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[9].y)) > 0 then
-      i_Pump_Hotwater_Boiler_y = pre(i_Pump_Hotwater_Boiler_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[10].y)) > 0 then
-      i_Pump_RLT_Central_hot_y = pre(i_Pump_RLT_Central_hot_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[11].y)) > 0 then
-      i_Pump_RLT_OpenPlanOffice_hot_y = pre(i_Pump_RLT_OpenPlanOffice_hot_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[12].y)) > 0 then
-      i_Pump_RLT_MultiPersonOffice_hot_y = pre(i_Pump_RLT_MultiPersonOffice_hot_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[13].y)) > 0 then
-      i_Pump_RLT_ConferenceRoom_hot_y = pre(i_Pump_RLT_ConferenceRoom_hot_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[14].y)) > 0 then
-      i_Pump_RLT_Canteen_hot_y = pre(i_Pump_RLT_Canteen_hot_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[15].y)) > 0 then
-      i_Pump_RLT_Workshop_hot_y = pre(i_Pump_RLT_Workshop_hot_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[16].y)) > 0 then
-      i_Pump_RLT_Workshop_cold_y = pre(i_Pump_RLT_Workshop_cold_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[17].y)) > 0 then
-      i_Pump_RLT_Canteen_cold_y = pre(i_Pump_RLT_Canteen_cold_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[18].y)) > 0 then
-      i_Pump_RLT_ConferenceRoom_cold_y = pre(i_Pump_RLT_ConferenceRoom_cold_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[19].y)) > 0 then
-      i_Pump_RLT_OpenPlanOffice_cold_y = pre(i_Pump_RLT_OpenPlanOffice_cold_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[20].y)) > 0 then
-      i_Pump_RLT_MultiPersonOffice_cold_y = pre(i_Pump_RLT_MultiPersonOffice_cold_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[21].y)) > 0 then
-      i_Pump_RLT_Central_cold_y = pre(i_Pump_Hotwater_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[22].y)) > 0 then
-      i_Pump_TBA_OpenPlanOffice_y = pre(i_Pump_TBA_OpenPlanOffice_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[23].y)) > 0 then
-      i_Pump_TBA_ConferenceRoom_y = pre(i_Pump_TBA_ConferenceRoom_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[24].y)) > 0 then
-      i_Pump_TBA_MultiPersonOffice_y = pre(i_Pump_TBA_MultiPersonOffice_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[25].y)) > 0 then
-      i_Pump_TBA_Canteen_y = pre(i_Pump_TBA_Canteen_y) + 1;
-    end when;
-    when abs(der(Speed_Pumps[26].y)) > 0 then
-      i_Pump_TBA_Workshop_y = pre(i_Pump_TBA_Workshop_y) + 1;
-    end when;
-    when abs(der(Pos_Valves[1].y)) > 0 then
-      i_Valve1 = pre(i_Valve1) + 1;
-    end when;
-    when abs(der(Pos_Valves[2].y)) > 0 then
-      i_Valve2 = pre(i_Valve2) + 1;
-    end when;
-    when abs(der(Pos_Valves[3].y)) > 0 then
-      i_Valve3 = pre(i_Valve3) + 1;
-    end when;
-    when abs(der(Pos_Valves[4].y)) > 0 then
-      i_Valve4 = pre(i_Valve4) + 1;
-    end when;
-    when abs(der(Pos_Valves[5].y)) > 0 then
-      i_Valve5 = pre(i_Valve5) + 1;
-    end when;
-    when abs(der(Pos_Valves[6].y)) > 0 then
-      i_Valve6 = pre(i_Valve6) + 1;
-    end when;
-    when abs(der(Pos_Valves[7].y)) > 0 then
-      i_Valve7 = pre(i_Valve7) + 1;
-    end when;
-    when abs(der(Pos_Valves[8].y)) > 0 then
-      i_Valve8 = pre(i_Valve8) + 1;
-    end when;
-    when abs(der(Pos_Valves[9].y)) > 0 then
-      i_Valve_RLT_Hot_Central = pre(i_Valve_RLT_Hot_Central) + 1;
-    end when;
-    when abs(der(Pos_Valves[10].y)) > 0 then
-      i_Valve_RLT_Hot_OpenPlanOffice = pre(i_Valve_RLT_Hot_OpenPlanOffice) + 1;
-    end when;
-    when abs(der(Pos_Valves[11].y)) > 0 then
-      i_Valve_RLT_Hot_ConferenceRoom = pre(i_Valve_RLT_Hot_ConferenceRoom) + 1;
-    end when;
-    when abs(der(Pos_Valves[12].y)) > 0 then
-      i_Valve_RLT_Hot_MultiPersonOffice = pre(i_Valve_RLT_Hot_MultiPersonOffice) + 1;
-    end when;
-    when abs(der(Pos_Valves[13].y)) > 0 then
-      i_Valve_RLT_Hot_Workshop = pre(i_Valve_RLT_Hot_Workshop) + 1;
-    end when;
-    when abs(der(Pos_Valves[14].y)) > 0 then
-      i_Valve_RLT_Hot_Canteen = pre(i_Valve_RLT_Hot_Canteen) + 1;
-    end when;
-    when abs(der(Pos_Valves[15].y)) > 0 then
-      i_Valve_RLT_Cold_Canteen = pre(i_Valve_RLT_Cold_Canteen) + 1;
-    end when;
-    when abs(der(Pos_Valves[16].y)) > 0 then
-      i_Valve_RLT_Cold_Workshop = pre(i_Valve_RLT_Cold_Workshop) + 1;
-    end when;
-    when abs(der(Pos_Valves[17].y)) > 0 then
-      i_Valve_RLT_Cold_MultiPersonOffice = pre(i_Valve_RLT_Cold_MultiPersonOffice) + 1;
-    end when;
-    when abs(der(Pos_Valves[18].y)) > 0 then
-      i_Valve_RLT_Cold_ConferenceRoom = pre(i_Valve_RLT_Cold_ConferenceRoom) + 1;
-    end when;
-    when abs(der(Pos_Valves[19].y)) > 0 then
-      i_Valve_RLT_Cold_OpenPlanOffice = pre(i_Valve_RLT_Cold_OpenPlanOffice) + 1;
-    end when;
-    when abs(der(Pos_Valves[20].y)) > 0 then
-      i_Valve_RLT_Cold_Central = pre(i_Valve_RLT_Cold_Central) + 1;
-    end when;
-    when abs(der(Pos_Valves[21].y)) > 0 then
-      i_Valve_TBA_Warm_OpenPlanOffice = pre(i_Valve_TBA_Warm_OpenPlanOffice) + 1;
-    end when;
-    when abs(der(Pos_Valves[22].y)) > 0 then
-      i_Valve_TBA_Warm_conferenceroom = pre(i_Valve_TBA_Warm_conferenceroom) + 1;
-    end when;
-    when abs(der(Pos_Valves[23].y)) > 0 then
-      i_Valve_TBA_Warm_multipersonoffice = pre(i_Valve_TBA_Warm_multipersonoffice) + 1;
-    end when;
-    when abs(der(Pos_Valves[24].y)) > 0 then
-      i_Valve_TBA_Warm_canteen = pre(i_Valve_TBA_Warm_canteen) + 1;
-    end when;
-    when abs(der(Pos_Valves[25].y)) > 0 then
-      i_Valve_TBA_Warm_workshop = pre(i_Valve_TBA_Warm_workshop) + 1;
-    end when;
-    when abs(der(Pos_Valves[26].y)) > 0 then
-      i_Valve_TBA_OpenPlanOffice_Temp = pre(i_Valve_TBA_OpenPlanOffice_Temp) + 1;
-    end when;
-    when abs(der(Pos_Valves[27].y)) > 0 then
-      i_Valve_TBA_ConferenceRoom_Temp = pre(i_Valve_TBA_ConferenceRoom_Temp) + 1;
-    end when;
-    when abs(der(Pos_Valves[28].y)) > 0 then
-      i_Valve_TBA_MultiPersonOffice_Temp = pre(i_Valve_TBA_MultiPersonOffice_Temp) + 1;
-    end when;
-    when abs(der(Pos_Valves[29].y)) > 0 then
-      i_Valve_TBA_Canteen_Temp = pre(i_Valve_TBA_Canteen_Temp) + 1;
-    end when;
-    when abs(der(Pos_Valves[30].y)) > 0 then
-      i_Valve_TBA_Workshop_Temp = pre(i_Valve_TBA_Workshop_Temp) + 1;
-    end when;
-    annotation (
-      Icon(coordinateSystem(preserveAspectRatio = false), graphics={  Rectangle(extent = {{-100, 100}, {102, -102}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
-              fillPattern =                                                                                                                                                            FillPattern.Solid), Text(extent = {{-62, 30}, {70, -32}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
-              fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "Lifespan-
-Reduction-
-Costs")}),
-      Diagram(coordinateSystem(preserveAspectRatio = false)));
-  end LifespanReductionCosts;
-
   model InvestmentCostsStrategy "calculating the investement costs to evaluate the performance of control strategies according to CCCS evaluation method"
     parameter Real G = 50000 "Average salary of employee per annum [€]";
     Real E "effort to implement control strategy in months";
@@ -816,7 +559,7 @@ Strategy")}),
       Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
     InvestmentCostsComponents investmentCostsComponents(k_Investment = 0)  annotation (
       Placement(transformation(extent = {{-80, -100}, {-60, -80}})));
-    LifespanReductionCosts_2 lifespanReductionCosts_2_1
+    LifespanReductionCosts lifespanReductionCosts_2_1
       annotation (Placement(transformation(extent={{-84,-30},{-58,0}})));
   equation
     connect(investmentCostsStrategy1.kStrat, InvestmentCosts.u1) annotation (
@@ -860,7 +603,7 @@ Strategy")}),
       Diagram(coordinateSystem(preserveAspectRatio = false)));
   end Evaluation_CCCS;
 
-  model LifespanReductionCosts_2
+  model LifespanReductionCosts
 
     Modelica.Blocks.Interfaces.RealOutput y annotation (
       Placement(visible = true, transformation(origin={152,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin={152,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -1382,7 +1125,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
     connect(mainBus.tabs1Bus.hotThrottleBus.pumpBus.rpmSet,
       tabs_hotThrottle_rpmSet[1].u) annotation (Line(
         points={{-99.95,6.05},{-99.95,156},{-40,156},{-40,81},{-29.4,81}},
@@ -1406,7 +1148,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
          connect(mainBus.tabs2Bus.pumpBus.pumpBus.rpmSet, tabs_pump_rpmSet[2].u)
       annotation (Line(
         points={{-99.95,6.05},{-99.95,156},{-40,156},{-40,127},{-29.4,127}},
@@ -1418,7 +1159,6 @@ Strategy")}),
             {-29.4,103}},
         color={255,204,51},
         thickness=0.5));
-
 
     connect(mainBus.tabs2Bus.hotThrottleBus.pumpBus.rpmSet,
       tabs_hotThrottle_rpmSet[2].u) annotation (Line(
@@ -1455,7 +1195,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
     connect(mainBus.tabs3Bus.hotThrottleBus.pumpBus.rpmSet,
       tabs_hotThrottle_rpmSet[3].u) annotation (Line(
         points={{-99.95,6.05},{-99.95,156},{-40,156},{-40,81},{-29.4,81}},
@@ -1490,7 +1229,6 @@ Strategy")}),
             {-29.4,103}},
         color={255,204,51},
         thickness=0.5));
-
 
     connect(mainBus.tabs4Bus.hotThrottleBus.pumpBus.rpmSet,
       tabs_hotThrottle_rpmSet[4].u) annotation (Line(
@@ -1527,7 +1265,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
     connect(mainBus.tabs5Bus.hotThrottleBus.pumpBus.rpmSet,
       tabs_hotThrottle_rpmSet[5].u) annotation (Line(
         points={{-99.95,6.05},{-99.95,156},{-40,156},{-40,81},{-29.4,81}},
@@ -1558,7 +1295,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
     connect(mainBus.vu1Bus.preheaterBus.hydraulicBus.valveSet,
       vu_preheat_valveSet[1].u) annotation (Line(
         points={{-99.95,6.05},{-99.95,-150},{-40,-150},{-40,-48},{-29.4,-48},{-29.4,
@@ -1588,14 +1324,12 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
         connect(mainBus.vu2Bus.preheaterBus.hydraulicBus.pumpBus.rpmSet,
       vu_preheat_rpmSet[2].u) annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,-150},{-40,-150},{-40,-25},{-29.4,
             -25}},
         color={255,204,51},
         thickness=0.5));
-
 
     connect(mainBus.vu2Bus.preheaterBus.hydraulicBus.valveSet,
       vu_preheat_valveSet[2].u) annotation (Line(
@@ -1633,7 +1367,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
     connect(mainBus.vu3Bus.preheaterBus.hydraulicBus.valveSet,
       vu_preheat_valveSet[3].u) annotation (Line(
         points={{-99.95,6.05},{-99.95,-150},{-40,-150},{-40,-48},{-29.4,-48},{-29.4,
@@ -1670,7 +1403,6 @@ Strategy")}),
         color={255,204,51},
         thickness=0.5));
 
-
     connect(mainBus.vu4Bus.preheaterBus.hydraulicBus.valveSet,
       vu_preheat_valveSet[4].u) annotation (Line(
         points={{-99.95,6.05},{-99.95,-150},{-40,-150},{-40,-48},{-29.4,-48},{-29.4,
@@ -1706,7 +1438,6 @@ Strategy")}),
             -25}},
         color={255,204,51},
         thickness=0.5));
-
 
     connect(mainBus.vu5Bus.preheaterBus.hydraulicBus.valveSet,
       vu_preheat_valveSet[5].u) annotation (Line(
@@ -1875,7 +1606,7 @@ Costs")}),
             textString="vuSystems")}),
       Icon(coordinateSystem(preserveAspectRatio = false)),
       Diagram(coordinateSystem(preserveAspectRatio = false)));
-  end LifespanReductionCosts_2;
+  end LifespanReductionCosts;
 
   model InvestmentCostsComponents
     Modelica.Blocks.Sources.Constant InvestmentCostsComponents(k = k_Investment) "it is assumed that the control strategy only utilizes components which are already installed - if new components are required, respective costs have to be added" annotation (

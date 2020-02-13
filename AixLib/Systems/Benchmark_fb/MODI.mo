@@ -1,10 +1,17 @@
 ﻿within AixLib.Systems.Benchmark_fb;
 package MODI
   model ManagementEbene "Auswahl des Betriebsmodus für jeden einzelnen Raum basierend auf den Messwerten für die Temperature und relative Luftfeuchtigkeit im Raum"
-    import Benchmark_fb;
-    PNlib.Components.T disableHeating[5](each nIn = 1, each nOut = 1, firingCon = {bus_measure.RoomTemp_Workshop > 273.15 + 15, bus_measure.RoomTemp_Canteen > 273.15 + 20, bus_measure.RoomTemp_Conferenceroom > 273.15 + 20, bus_measure.RoomTemp_Multipersonoffice > 273.15 + 20, bus_measure.RoomTemp_Openplanoffice > 273.15 + 20}) annotation (
+    PNlib.Components.T disableHeating[5](each nIn = 1, each nOut = 1, firingCon={mainBus.TRoom1Mea>273.15+15,
+    mainBus.TRoom2Mea>273.15+20,
+    mainBus.TRoom3Mea>273.15+20,
+    mainBus.TRoom4Mea>273.15+20,
+    mainBus.TRoom5Mea>273.15+20})   annotation (
       Placement(visible = true, transformation(origin = {-56, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-    PNlib.Components.T enableHeating[5](each nIn = 1, each nOut = 1, firingCon = {bus_measure.RoomTemp_Workshop < 273.15 + 15, bus_measure.RoomTemp_Canteen < 273.15 + 20, bus_measure.RoomTemp_Conferenceroom < 273.15 + 20, bus_measure.RoomTemp_Multipersonoffice < 273.15 + 20, bus_measure.RoomTemp_Openplanoffice < 273.15 + 20}) annotation (
+    PNlib.Components.T enableHeating[5](each nIn = 1, each nOut = 1,  firingCon={mainBus.TRoom1Mea<273.15+13,
+    mainBus.TRoom2Mea<273.15+18,
+    mainBus.TRoom3Mea<273.15+18,
+    mainBus.TRoom4Mea<273.15+18,
+    mainBus.TRoom5Mea<273.15+18})  annotation (
       Placement(visible = true, transformation(extent = {{-66, 20}, {-46, 40}}, rotation = 0)));
     PNlib.Components.PD Heating[5](each nIn = 1, each nOut = 1, each startTokens = 0, each minTokens = 0, each maxTokens = 1) annotation (
       Placement(visible = true, transformation(origin = {-16, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -12,25 +19,33 @@ package MODI
       Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.PD Cooling[5](each nIn = 1, each nOut = 1, each maxTokens = 1) annotation (
       Placement(visible = true, transformation(origin = {-182, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-    PNlib.Components.T enableCooling[5](each nIn = 1, each nOut = 1, firingCon = {bus_measure.RoomTemp_Workshop > 273.15 + 17, bus_measure.RoomTemp_Canteen > 273.15 + 22, bus_measure.RoomTemp_Conferenceroom > 273.15 + 22, bus_measure.RoomTemp_Multipersonoffice > 273.15 + 22, bus_measure.RoomTemp_Openplanoffice > 273.15 + 22}) annotation (
+    PNlib.Components.T enableCooling[5](each nIn = 1, each nOut = 1, firingCon={mainBus.TRoom1Mea>273.15+17,
+    mainBus.TRoom2Mea>273.15+22,
+    mainBus.TRoom3Mea>273.15+22,
+    mainBus.TRoom4Mea>273.15+22,
+    mainBus.TRoom5Mea>273.15+22})  annotation (
       Placement(visible = true, transformation(origin = {-144, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-    PNlib.Components.T disableCooling[5](each nIn = 1, each nOut = 1, firingCon = {bus_measure.RoomTemp_Workshop < 273.15 + 17, bus_measure.RoomTemp_Canteen < 273.15 + 22, bus_measure.RoomTemp_Conferenceroom < 273.15 + 22, bus_measure.RoomTemp_Multipersonoffice < 273.15 + 22, bus_measure.RoomTemp_Openplanoffice < 273.15 + 22}) annotation (
+    PNlib.Components.T disableCooling[5](each nIn = 1, each nOut = 1, firingCon={mainBus.TRoom1Mea<273.15+15,
+    mainBus.TRoom2Mea<273.15+20,
+     mainBus.TRoom3Mea<273.15+20,
+     mainBus.TRoom4Mea<273.15+20,
+     mainBus.TRoom5Mea<273.15+20})  annotation (
       Placement(visible = true, transformation(extent = {{-154, 20}, {-134, 40}}, rotation = 0)));
     Modelica.Blocks.Interfaces.IntegerOutput MODI_Temperature[15] annotation (
       Placement(visible = true, transformation(origin = {-100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(origin = {-100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-  PNlib.Components.PD Dehumidifying[5](nIn = 1, nOut = 1)  annotation (
+      PNlib.Components.PD Dehumidifying[5](each nIn = 1, each nOut = 1)  annotation (
       Placement(visible = true, transformation(origin = {20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  PNlib.Components.PD Off_Humidity[5](nIn = 2, nOut = 2, reStartTokens = 1, startTokens = 1)  annotation (
+      PNlib.Components.PD Off_Humidity[5](each nIn = 2, each nOut = 2, each reStartTokens = 1, each startTokens = 1)  annotation (
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  PNlib.Components.PD Humidifying[5](nIn = 1, nOut = 1, reStartTokens = 1, startTokens = 1)  annotation (
+      PNlib.Components.PD Humidifying[5](each nIn = 1, each nOut = 1, each reStartTokens = 1, each startTokens = 1)  annotation (
       Placement(visible = true, transformation(origin = {184, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  PNlib.Components.T enableHumidifying[5](nIn = 1, nOut = 1)  annotation (
+      PNlib.Components.T enableHumidifying[5](each nIn = 1, each nOut = 1)  annotation (
       Placement(visible = true, transformation(origin = {146, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PNlib.Components.T enableDehumidifying[5](nIn = 1, nOut = 1)  annotation (
+      PNlib.Components.T enableDehumidifying[5](each nIn = 1, each nOut = 1)  annotation (
       Placement(visible = true, transformation(origin = {58, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  PNlib.Components.T disableDehumidifying[5](nIn = 1, nOut = 1)  annotation (
+      PNlib.Components.T disableDehumidifying[5](each nIn = 1,each  nOut = 1)  annotation (
       Placement(visible = true, transformation(origin = {56, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PNlib.Components.T disableHumidifying[5](nIn = 1, nOut = 1)  annotation (
+      PNlib.Components.T disableHumidifying[5](each nIn = 1, each nOut = 1)  annotation (
       Placement(visible = true, transformation(origin = {144, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   Modelica.Blocks.Interfaces.IntegerOutput MODI_Humidity[15] annotation (
       Placement(visible = true, transformation(origin = {100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {100, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
@@ -2538,7 +2553,7 @@ package MODI
       annotation (Line(points={{77.2,-32.5},{78,-32.5},{78,-49.2}},
                                                                  thickness=0.5));
     connect(T15[4].outPlaces[1], RLT_Heating_I[4].inTransition[2]) annotation (Line(
-          points={{98,-49.2},{98,-14},{100,-14},{100,-18},{98,-18},{98,-26},{
+          points={{98,-49.2},{98,-32},{102,-32},{102,-14},{100,-14},{100,-26},{
             98.8,-26},{98.8,-32.5}},
           thickness=0.5));
     connect(T1[4].outPlaces[1], RLT_Heating_I[4].inTransition[1]) annotation (Line(
@@ -3057,7 +3072,7 @@ package MODI
           points={{98.8,-163.5},{100,-163.5},{100,-42},{98,-42},{98,-146.8}},
           thickness=0.5));
     connect(T119[5].outPlaces[1], BKT_Heating_I[5].inTransition[2]) annotation (Line(
-          points={{98,-137.2},{98,-22},{100,-22},{100,-120.5},{98.8,-120.5}},
+          points={{98,-137.2},{98,-120.5},{98.8,-120.5}},
           thickness=0.5));
     connect(BKT_Cooling_II[5].outTransition[1], T113[5].inPlaces[1]) annotation (Line(
           points={{-90.8,-163.5},{-94,-163.5},{-94,-178},{-58,-178},{-58,-172},
