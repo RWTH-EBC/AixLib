@@ -2,31 +2,63 @@
 package CCCS
   model test_CCCS
     extends Modelica.Icons.Example;
-  AixLib.Systems.Benchmark_fb.CCCS.Evaluation_CCCS evaluation_CCCS1 annotation (
-      Placement(visible = true, transformation(origin = {18, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Pulse fuel_consumption(amplitude = 10, offset = 0, period = 86400, startTime = 28800, width = 43200)  annotation (
-      Placement(visible = true, transformation(origin = {-70, 72}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Pulse electricity_consumption(amplitude = 10, offset = 0, period = 86400, startTime = 28800, width = 43200)  annotation (
+  Modelica.Blocks.Sources.Pulse fuel_consumption(amplitude = 10, offset = 0, period = 86400, startTime = 28800,
+      width=50)                                                                                                                 annotation (
+      Placement(visible = true, transformation(origin={-70,70},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Pulse electricity_consumption(amplitude = 10, offset = 0, period = 86400, startTime = 28800,
+      width=50)                                                                                                                        annotation (
       Placement(visible = true, transformation(origin = {-70, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Sine TMea(amplitude = 3, freqHz = 1 / 86400, offset = 293.15, startTime = 28800)  annotation (
       Placement(visible = true, transformation(origin = {-70, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Sine TMea_workshop(amplitude = 3, freqHz = 1 / 86400, offset = 288.15, startTime = 28800) annotation (
       Placement(visible = true, transformation(origin = {-72, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Evaluation_CCCS evaluation_CCCS
+      annotation (Placement(transformation(extent={{64,-10},{84,10}})));
+    Modelica.Blocks.Routing.RealPassThrough realPassThrough[4]
+      annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
+    Benchmark.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{28,-10},{48,10}})));
+    Modelica.Blocks.Routing.RealPassThrough realPassThrough1
+      annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    Modelica.Blocks.Routing.RealPassThrough realPassThrough2
+      annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
+    Modelica.Blocks.Routing.RealPassThrough realPassThrough3
+      annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
   equation
-    connect(TMea_workshop.y, mainBus.TRoom1Mea) annotation (
-      Line(points = {{-60, -50}, {-4, -50}, {-4, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
-    connect(TMea.y, mainBus.TRoom5Mea) annotation (
-      Line(points = {{-58, -10}, {-4, -10}, {-4, 0}, {8, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
-    connect(TMea.y, mainBus.TRoom4Mea) annotation (
-      Line(points = {{-58, -10}, {-4, -10}, {-4, 0}, {8, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
-    connect(TMea.y, mainBus.TRoom3Mea) annotation (
-      Line(points = {{-58, -10}, {-4, -10}, {-4, 0}, {8, 0}}, color = {0, 0, 127}));
-    connect(TMea.y, mainBus.TRoom2Mea) annotation (
-      Line(points = {{-58, -10}, {-4, -10}, {-4, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
-    connect(electricity_consumption.y, mainBus.evaBus.WelTotalMea) annotation (
-      Line(points = {{-58, 30}, {-4, 30}, {-4, 0}, {8, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
-    connect(fuel_consumption.y, mainBus.evaBus.QbrTotalMea) annotation (
-      Line(points = {{-58, 72}, {-4, 72}, {-4, 0}, {8, 0}, {8, 0}}, color = {0, 0, 127}));
+    connect(mainBus, evaluation_CCCS.mainBus) annotation (Line(
+        points={{38,0},{64,0}},
+        color={255,204,51},
+        thickness=0.5));
+    connect(fuel_consumption.y, realPassThrough2.u) annotation (Line(points={{
+            -59,70},{-56,70},{-56,68},{-42,68},{-42,70}}, color={0,0,127}));
+    connect(electricity_consumption.y, realPassThrough1.u)
+      annotation (Line(points={{-59,30},{-42,30}}, color={0,0,127}));
+    connect(realPassThrough2.y, mainBus.evaBus.QbrTotalMea) annotation (Line(
+          points={{-19,70},{-16,70},{-16,68},{20,68},{20,0.05},{38.05,0.05}},
+          color={0,0,127}));
+    connect(realPassThrough1.y, mainBus.evaBus.WelTotalMea) annotation (Line(
+          points={{-19,30},{20,30},{20,0.05},{38.05,0.05}}, color={0,0,127}));
+    connect(TMea_workshop.y, realPassThrough3.u) annotation (Line(points={{-61,
+            -50},{-56,-50},{-56,-52},{-42,-52},{-42,-50}}, color={0,0,127}));
+    connect(TMea.y, realPassThrough[1].u)
+      annotation (Line(points={{-59,-10},{-42,-10}}, color={0,0,127}));
+    connect(TMea.y, realPassThrough[2].u)
+      annotation (Line(points={{-59,-10},{-42,-10}}, color={0,0,127}));
+    connect(TMea.y, realPassThrough[3].u)
+      annotation (Line(points={{-59,-10},{-42,-10}}, color={0,0,127}));
+    connect(TMea.y, realPassThrough[4].u)
+      annotation (Line(points={{-59,-10},{-42,-10}}, color={0,0,127}));
+    connect(realPassThrough[1].y, mainBus.TRoom2Mea) annotation (Line(points={{
+            -19,-10},{20,-10},{20,0.05},{38.05,0.05}}, color={0,0,127}));
+    connect(realPassThrough[2].y, mainBus.TRoom3Mea) annotation (Line(points={{
+            -19,-10},{20,-10},{20,0.05},{38.05,0.05}}, color={0,0,127}));
+    connect(realPassThrough[3].y, mainBus.TRoom4Mea) annotation (Line(points={{
+            -19,-10},{20,-10},{20,0.05},{38.05,0.05}}, color={0,0,127}));
+    connect(realPassThrough[4].y, mainBus.TRoom5Mea) annotation (Line(points={{
+            -19,-10},{20,-10},{20,0.05},{38.05,0.05}}, color={0,0,127}));
+    connect(realPassThrough3.y, mainBus.TRoom1Mea) annotation (Line(points={{
+            -19,-50},{20,-50},{20,0.05},{38.05,0.05}}, color={0,0,127}));
+    annotation (experiment(StopTime=259200, Interval=60));
   end test_CCCS;
   extends Modelica.Icons.Package;
 
@@ -135,7 +167,7 @@ package CCCS
       Line(points = {{-147.95, 0.05}, {-154, 0.05}, {-154, -36}, {10, -36}}, color = {255, 204, 51}, thickness = 0.5),
       Text(string = "%first", index = -1, extent = {{-3, -6}, {-3, -6}}, horizontalAlignment = TextAlignment.Right));
     annotation (
-      Diagram(graphics = {Text(extent = {{-106, 12}, {-1, 52}}, lineColor = {0, 0, 255}, textString = ""), Text(extent = {{-106, -18}, {-1, -58}}, lineColor = {0, 0, 255}, textString = "")}),
+      Diagram(graphics={  Text(extent = {{-106, 12}, {-1, 52}}, lineColor = {0, 0, 255}, textString = ""), Text(extent = {{-106, -18}, {-1, -58}}, lineColor = {0, 0, 255}, textString = "")}),
       Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {100, 100}}), graphics={  Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(lineColor = {0, 0, 255}, extent = {{-38, -34}, {38, 34}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(extent = {{-150, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
               fillPattern =                                                                                                                                                                                                        FillPattern.Solid), Text(extent = {{-118, 32}, {60, -34}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
               fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "Energy-
@@ -1708,15 +1740,15 @@ Strategy")}),
     connect(mainBus.hxBus.primBus.valveSet, hx_prim_valveSet.u) annotation (
         Line(
         points={{-99.95,6.05},{-100,6.05},{-100,156},{-6,156},{-6,93},{0.6,93}},
-
         color={255,204,51},
         thickness=0.5));
+
     connect(mainBus.hxBus.secBus.pumpBus.rpmSet, hx_sec_rpmSet.u) annotation (
         Line(
         points={{-99.95,6.05},{-100,6.05},{-100,156},{-6,156},{-6,71},{0.6,71}},
-
         color={255,204,51},
         thickness=0.5));
+
     connect(mainBus.hxBus.secBus.valveSet, hx_sec_valveSet.u) annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,156},{-6,156},{-6,48},{0.6,48},
             {0.6,49}},
@@ -1737,26 +1769,26 @@ Strategy")}),
     connect(mainBus.ahuBus.heaterBus.hydraulicBus.valveSet, ahu_heater_valveSet.u)
       annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,156},{24,156},{24,61},{32.6,61}},
-
         color={255,204,51},
         thickness=0.5));
+
     connect(mainBus.ahuBus.coolerBus.hydraulicBus.pumpBus.rpmSet,
       ahu_cooler_rpmSet.u) annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,156},{24,156},{24,39},{32.6,39}},
-
         color={255,204,51},
         thickness=0.5));
+
     connect(mainBus.ahuBus.coolerBus.hydraulicBus.valveSet, ahu_cooler_valveSet.u)
       annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,156},{24,156},{24,17},{32.6,17}},
-
         color={255,204,51},
         thickness=0.5));
+
     connect(mainBus.swuBus.pumpBus.rpmSet, swu_pump_rpmSet.u) annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,-150},{-6,-150},{-6,7},{0.6,7}},
-
         color={255,204,51},
         thickness=0.5));
+
     connect(mainBus.swuBus.Y2valSet, swu_Y2valveSet.u) annotation (Line(
         points={{-99.95,6.05},{-100,6.05},{-100,-150},{-6,-150},{-6,-15},{0.6,
             -15}},
@@ -2521,25 +2553,27 @@ Factor")}));
       Modelica.Blocks.Interfaces.RealOutput y annotation (
         Placement(transformation(extent = {{98, -10}, {118, 10}})));
       Modelica.Blocks.Sources.Constant const(k = 0.02) annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {88, -90})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={90,-60})));
       Modelica.Blocks.Sources.Constant const1(k = 0.04) annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, 90})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={90,50})));
       Modelica.Blocks.Sources.Constant const2(k = -2) annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, 56})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={90,80})));
       Modelica.Blocks.Math.Product product annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {46, 86})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={20,60})));
       Modelica.Blocks.Math.Add add annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, 80})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={54,74})));
       Modelica.Blocks.Sources.Constant const3(k = 0) annotation (
         Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-28, 0})));
       Modelica.Blocks.Math.Add add1 annotation (
         Placement(transformation(extent = {{60, -10}, {80, 10}})));
       Modelica.Blocks.Sources.Constant const4(k = -2) annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, -60})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={90,-90})));
       Modelica.Blocks.Math.Product product1 annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {46, -88})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={18,-74})));
       Modelica.Blocks.Math.Add add2 annotation (
-        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -82})));
+        Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={52,-80})));
+      Modelica.Blocks.Math.Abs abs1
+        annotation (Placement(transformation(extent={{0,80},{20,100}})));
     equation
       connect(T, feedback1.u1) annotation (
         Line(points = {{-100, 68}, {-74, 68}, {-74, 0}, {-68, 0}}, color = {0, 0, 127}));
@@ -2553,36 +2587,38 @@ Factor")}));
         Line(points = {{-15, 32}, {-6, 32}}, color = {255, 0, 255}));
       connect(greaterThreshold.y, switch1.u2) annotation (
         Line(points = {{-15, -34}, {-6, -34}}, color = {255, 0, 255}));
-      connect(const1.y, product.u1) annotation (
-        Line(points = {{79, 90}, {66, 90}, {66, 80}, {58, 80}}, color = {0, 0, 127}));
-      connect(feedback1.y, product.u2) annotation (
-        Line(points = {{-51, 0}, {-46, 0}, {-46, 100}, {66, 100}, {66, 98}, {62, 98}, {62, 92}, {58, 92}}, color = {0, 0, 127}));
       connect(const3.y, switch12.u3) annotation (
-        Line(points = {{-17, 0}, {-14, 0}, {-14, 6}, {-6, 6}, {-6, 24}}, color = {0, 0, 127}));
+        Line(points={{-17,0},{-12,0},{-12,24},{-6,24}},                  color = {0, 0, 127}));
       connect(const3.y, switch1.u3) annotation (
-        Line(points = {{-17, 0}, {-12, 0}, {-12, -2}, {-14, -2}, {-14, -42}, {-6, -42}}, color = {0, 0, 127}));
-      connect(add.y, switch12.u1) annotation (
-        Line(points = {{-1, 80}, {-12, 80}, {-12, 40}, {-6, 40}}, color = {0, 0, 127}));
-      connect(product.y, add.u2) annotation (
-        Line(points = {{35, 86}, {22, 86}}, color = {0, 0, 127}));
-      connect(const2.y, add.u1) annotation (
-        Line(points = {{79, 56}, {72, 56}, {72, 66}, {32, 66}, {32, 74}, {22, 74}}, color = {0, 0, 127}));
+        Line(points={{-17,0},{-12,0},{-12,-42},{-6,-42}},                                color = {0, 0, 127}));
       connect(add1.y, y) annotation (
         Line(points = {{81, 0}, {108, 0}}, color = {0, 0, 127}));
       connect(switch1.y, add1.u2) annotation (
         Line(points = {{17, -34}, {58, -34}, {58, -6}}, color = {0, 0, 127}));
       connect(switch12.y, add1.u1) annotation (
         Line(points = {{17, 32}, {58, 32}, {58, 6}}, color = {0, 0, 127}));
-      connect(const.y, product1.u2) annotation (
-        Line(points = {{77, -90}, {72, -90}, {72, -82}, {58, -82}}, color = {0, 0, 127}));
-      connect(feedback1.y, product1.u1) annotation (
-        Line(points = {{-51, 0}, {-46, 0}, {-46, -100}, {66, -100}, {66, -94}, {58, -94}}, color = {0, 0, 127}));
-      connect(product1.y, add2.u1) annotation (
-        Line(points = {{35, -88}, {22, -88}}, color = {0, 0, 127}));
-      connect(const4.y, add2.u2) annotation (
-        Line(points = {{79, -60}, {30, -60}, {30, -76}, {22, -76}}, color = {0, 0, 127}));
-      connect(add2.y, switch1.u1) annotation (
-        Line(points = {{-1, -82}, {-14, -82}, {-14, -26}, {-6, -26}}, color = {0, 0, 127}));
+      connect(const2.y, add.u1) annotation (Line(points={{79,80},{74,80},{74,68},
+              {66,68}}, color={0,0,127}));
+      connect(add.y, product.u2) annotation (Line(points={{43,74},{38,74},{38,
+              66},{32,66}}, color={0,0,127}));
+      connect(const1.y, product.u1) annotation (Line(points={{79,50},{40,50},{
+              40,54},{32,54}}, color={0,0,127}));
+      connect(product.y, switch12.u1) annotation (Line(points={{9,60},{-12,60},
+              {-12,40},{-6,40}}, color={0,0,127}));
+      connect(const4.y, add2.u2) annotation (Line(points={{79,-90},{72,-90},{72,
+              -74},{64,-74}}, color={0,0,127}));
+      connect(feedback1.y, add2.u1) annotation (Line(points={{-51,0},{-46,0},{
+              -46,-100},{72,-100},{72,-86},{64,-86}}, color={0,0,127}));
+      connect(add2.y, product1.u1)
+        annotation (Line(points={{41,-80},{30,-80}}, color={0,0,127}));
+      connect(const.y, product1.u2) annotation (Line(points={{79,-60},{38,-60},
+              {38,-68},{30,-68}}, color={0,0,127}));
+      connect(product1.y, switch1.u1) annotation (Line(points={{7,-74},{-12,-74},
+              {-12,-26},{-6,-26}}, color={0,0,127}));
+      connect(feedback1.y, abs1.u) annotation (Line(points={{-51,0},{-46,0},{
+              -46,90},{-2,90}}, color={0,0,127}));
+      connect(abs1.y, add.u2) annotation (Line(points={{21,90},{74,90},{74,80},
+              {66,80}}, color={0,0,127}));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(fillColor = {215, 215, 215},
@@ -2708,8 +2744,7 @@ Factor")}));
         Placement(visible = true, transformation(origin = {-70, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.Abs abs1(generateEvent = true)  annotation (
         Placement(visible = true, transformation(origin = {-40, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Logical.GreaterThreshold greaterThreshold1(threshold=0.001)
-                                                                                      annotation (
+    Modelica.Blocks.Logical.GreaterThreshold greaterThreshold1(threshold=0.001)       annotation (
         Placement(visible = true, transformation(origin = {-10, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Continuous.Integrator integrator1 annotation (
         Placement(visible = true, transformation(origin = { 50, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
