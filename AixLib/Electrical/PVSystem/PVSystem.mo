@@ -32,10 +32,8 @@ replaceable model CellTemperature =
  parameter Real alt(final quantity="Length", final unit="m")
    "Site altitude in Meters, default= 1"
    annotation (Dialog(group="Location"));
- parameter Real timZon(final quantity="Time",
-   final unit="s", displayUnit="h")
-   "Time zone relative to GMT"
-   annotation (Dialog(group="Location"));
+ parameter Modelica.SIunits.Time timZon(displayUnit="h")
+    "Time zone" annotation (Dialog(group="Location"));
  parameter Real groRef(final unit="1") = 0.2
   "Ground reflectance (default=0.2)
   Urban environment: 0.14 - 0.22
