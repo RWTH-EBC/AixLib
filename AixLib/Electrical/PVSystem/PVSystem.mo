@@ -33,7 +33,7 @@ replaceable model CellTemperature =
    "Site altitude in Meters, default= 1"
    annotation (Dialog(group="Location"));
  parameter Modelica.SIunits.Time timZon(displayUnit="h")
-    "Time zone" annotation (Dialog(group="Location"));
+    "Time zone. Has to be equal with timZon in ReaderTMY3, if PVSystem and ReaderTMY3 are used together." annotation (Dialog(group="Location"));
  parameter Real groRef(final unit="1") = 0.2
   "Ground reflectance (default=0.2)
   Urban environment: 0.14 - 0.22
