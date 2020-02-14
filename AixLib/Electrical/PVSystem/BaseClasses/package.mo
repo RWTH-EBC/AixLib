@@ -22,7 +22,7 @@ package BaseClasses
       annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}), iconTransformation(extent={{-140,-60},{-100,-20}})));
 
    Modelica.Blocks.Interfaces.RealInput radTil(final unit="W/m2")
-      "total solar irradiance on the tilted surface"
+      "Total solar irradiance on the tilted surface"
       annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}), iconTransformation(extent={{-140,-100},{-100,
               -60}})));
 

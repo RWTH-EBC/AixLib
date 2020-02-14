@@ -32,7 +32,7 @@ partial model PartialCellTemperature "Partial model for determining the cell tem
 
  Modelica.Blocks.Interfaces.RealInput radTil(final quantity="Irradiance",
     final unit="W/m2")
-    "total solar irradiance on the tilted surface"
+    "Total solar irradiance on the tilted surface"
     annotation (Placement(transformation(extent={{-140,-102},{-100,-62}}), iconTransformation(extent={{-140,-102},{-100,
             -62}})));
 

@@ -29,7 +29,7 @@ model PVRadiationHorizontalTRY
    annotation (Dialog(group="Location and orientation"));
 
  parameter Real groRef(final unit="1")
-   "Ground refelctance"
+   "Ground reflectance"
    annotation (Dialog(tab="Irradiation"));
 
 // Air mass parameters for mono-SI which are also applicable to poly-SI cells
@@ -87,7 +87,7 @@ model PVRadiationHorizontalTRY
  Real incAngMod(final unit="1", min=0)
   "Incidence angle modifier";
  Real incAngModGro(final unit="1", min=0)
-  "Incidence angle modifier for ground refelction";
+  "Incidence angle modifier for ground reflection";
  Real incAngModDif(final unit="1", min=0)
   "Incidence angle modifier for diffuse radiation";
  Modelica.SIunits.Angle refAng

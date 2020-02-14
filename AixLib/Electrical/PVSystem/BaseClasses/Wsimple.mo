@@ -1,6 +1,6 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
 function Wsimple
-  "simple aproxximation for Lambert W function for x >= 2,
+  "Simple approximation for Lambert W function for x >= 2,
   should only be used for large input values as error decreases for increasing input values (Batzelis, 2016)"
 
    input Real x(min=2);

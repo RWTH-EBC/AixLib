@@ -33,7 +33,7 @@ extends PartialIVCharacteristics;
  parameter Modelica.SIunits.Energy E_g0=1.79604e-19
     "Band gap energy under standard conditions for Si";
  parameter Real C=0.0002677
-    "band gap temperature coefficient for Si";
+    "Band gap temperature coefficient for Si";
 
  Modelica.SIunits.ElectricCurrent I_mp
     "MPP current";
