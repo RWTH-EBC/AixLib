@@ -376,22 +376,22 @@ package PerformanceData "Different models used for a black box heat pump model"
                       "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{-6,-6},
               {6,6}},
           rotation=-90,
-          origin={80,-82})));
+          origin={80,-92})));
     Utilities.Logical.SmoothSwitch switchPel
       "If HP is off, no heat will be exchanged"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=-90,
-          origin={50,-60})));
+          origin={50,-72})));
     Utilities.Logical.SmoothSwitch switchQCon
       "If HP is off, no heat will be exchanged"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=-90,
-          origin={-50,-56})));
+          origin={-50,-72})));
     Modelica.Blocks.Sources.Constant constZero(final k=0)
       "Power if HP is turned off"
       annotation (Placement(transformation(extent={{-6,-6},{6,6}},
           rotation=-90,
-          origin={-4,-18})));
+          origin={0,-6})));
     SDF.NDTable nDTableQCon(
       final nin=3,
       final readFromFile=true,
@@ -430,29 +430,42 @@ package PerformanceData "Different models used for a black box heat pump model"
           extent={{-6,-6},{6,6}},
           rotation=270,
           origin={-72,46})));
+    Modelica.Blocks.Math.Product nTimesSFelectric
+      "Create the product of the scaling factor and the electric power"
+      annotation (Placement(transformation(
+          extent={{-7,-7},{7,7}},
+          rotation=-90,
+          origin={25,-49})));
+    Modelica.Blocks.Math.Product nTimesSFcondensor
+      "Create the product of the scaling factor and the condensor power"
+      annotation (Placement(transformation(
+          extent={{-7,-7},{7,7}},
+          rotation=-90,
+          origin={-23,-49})));
+  protected
+    Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
+      "Calculates correction of table output based on scaling factor"
+      annotation (Placement(transformation(
+          extent={{-5,-5},{5,5}},
+          rotation=270,
+          origin={15,-21})));
   equation
     connect(feedbackHeatFlowEvaporator.y, QEva)
-      annotation (Line(points={{80,-87.4},{80,-110}},
+      annotation (Line(points={{80,-97.4},{80,-110}},
                                                   color={0,0,127}));
-    connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-82},{0,-82},
+    connect(switchPel.y, Pel) annotation (Line(points={{50,-83},{50,-92},{0,-92},
             {0,-110}},
                  color={0,0,127}));
-    connect(switchQCon.y, QCon) annotation (Line(points={{-50,-67},{-50,-74},{
-            -80,-74},{-80,-110}},
+    connect(switchQCon.y, QCon) annotation (Line(points={{-50,-83},{-50,-92},{
+            -80,-92},{-80,-110}},
                         color={0,0,127}));
 
-    connect(constZero.y, switchQCon.u3) annotation (Line(points={{-4,-24.6},{-4,
-            -24},{-4,-24},{-4,-28},{-4,-30},{-58,-30},{-58,-42},{-58,-42},{-58,
-            -44},{-58,-44}},     color={0,0,127}));
-    connect(constZero.y, switchPel.u3) annotation (Line(points={{-4,-24.6},{-4,
-            -30},{42,-30},{42,-48}},
+    connect(constZero.y, switchQCon.u3) annotation (Line(points={{-1.11022e-15,
+            -12.6},{-1.11022e-15,-30},{-58,-30},{-58,-60}},
+                                 color={0,0,127}));
+    connect(constZero.y, switchPel.u3) annotation (Line(points={{-1.11022e-15,
+            -12.6},{-1.11022e-15,-30},{42,-30},{42,-60}},
                             color={0,0,127}));
-    connect(nDTableQCon.y, switchQCon.u1)
-      annotation (Line(points={{-42,-23.2},{-42,-44}},
-                                                  color={0,0,127}));
-    connect(nDTablePel.y, switchPel.u1)
-      annotation (Line(points={{50,-23.2},{50,-34},{58,-34},{58,-48}},
-                                                    color={0,0,127}));
     connect(multiplex3_1.y, nDTableQCon.u) annotation (Line(points={{-1.55431e-15,
             11.2},{-1.55431e-15,4.4},{-42,4.4}},
                                             color={0,0,127}));
@@ -481,10 +494,11 @@ package PerformanceData "Different models used for a black box heat pump model"
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
     connect(greaterThreshold.y, switchQCon.u2) annotation (Line(points={{-72,
-            39.4},{-72,-36},{-50,-36},{-50,-44}},
+            39.4},{-72,-36},{-50,-36},{-50,-60}},
                                             color={255,0,255}));
-    connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
-            {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
+    connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,
+            39.4},{-72,-36},{50,-36},{50,-60}},
+                                          color={255,0,255}));
     connect(sigBus.N, nConGain.u) annotation (Line(
         points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
         color={255,204,51},
@@ -501,9 +515,21 @@ package PerformanceData "Different models used for a black box heat pump model"
             46,32},{0,32},{0,29.6}},
                                   color={0,0,127}));
     connect(switchPel.y, feedbackHeatFlowEvaporator.u2)
-      annotation (Line(points={{50,-71},{50,-82},{75.2,-82}}, color={0,0,127}));
-    connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-50,-67},
-            {-50,-74},{80,-74},{80,-77.2}},            color={0,0,127}));
+      annotation (Line(points={{50,-83},{50,-92},{75.2,-92}}, color={0,0,127}));
+    connect(switchQCon.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={{-50,-83},
+            {-50,-86},{80,-86},{80,-87.2}},            color={0,0,127}));
+    connect(realCorr.y, nTimesSFcondensor.u1) annotation (Line(points={{15,
+            -26.5},{-2.5,-26.5},{-2.5,-40.6},{-18.8,-40.6}}, color={0,0,127}));
+    connect(realCorr.y, nTimesSFelectric.u2) annotation (Line(points={{15,-26.5},
+            {15,-32.25},{20.8,-32.25},{20.8,-40.6}}, color={0,0,127}));
+    connect(nDTablePel.y, nTimesSFelectric.u1) annotation (Line(points={{50,
+            -23.2},{39,-23.2},{39,-40.6},{29.2,-40.6}}, color={0,0,127}));
+    connect(nDTableQCon.y, nTimesSFcondensor.u2) annotation (Line(points={{-42,
+            -23.2},{-36,-23.2},{-36,-40.6},{-27.2,-40.6}}, color={0,0,127}));
+    connect(nTimesSFcondensor.y, switchQCon.u1) annotation (Line(points={{-23,
+            -56.7},{-32.5,-56.7},{-32.5,-60},{-42,-60}}, color={0,0,127}));
+    connect(nTimesSFelectric.y, switchPel.u1) annotation (Line(points={{25,
+            -56.7},{58,-56.7},{58,-60}}, color={0,0,127}));
     annotation (Icon(graphics={
       Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
       Line(points={{0.0,40.0},{0.0,-40.0}}),
