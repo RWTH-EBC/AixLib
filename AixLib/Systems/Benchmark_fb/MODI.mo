@@ -1456,15 +1456,34 @@ package MODI
   model Feldebene "Auswahl der Aktoren basierend auf den ausgewählten Aktorsätzen"
     import Benchmark_fb;
     AixLib.Systems.Benchmark.Controller.CtrHTSSystem ctrHTSSystem1 annotation(
-      Placement(visible = true, transformation(origin = {-86, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus1 annotation(
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput u[70] annotation(
       Placement(visible = true, transformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
-  Modelica.Blocks.Math.RealToBoolean realToBoolean1(threshold = 0.5)  annotation(
-      Placement(visible = true, transformation(origin = {-16, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  Modelica.Blocks.Math.RealToBoolean realToBoolean1[2](threshold = 0.5)  annotation(
+      Placement(visible = true, transformation(origin = {-20, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  Modelica.Blocks.Logical.Or or1 annotation(
+      Placement(visible = true, transformation(origin = {-60, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  EONERC_MainBuilding.Controller.CtrGTFSimple ctrGTFSimple1 annotation(
+      Placement(visible = true, transformation(origin = {-52, -12}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  EONERC_MainBuilding.Controller.CtrSWU ctrSWU1 annotation(
+      Placement(visible = true, transformation(origin = {-66, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.EONERC_MainBuilding.Controller.EonERCModeControl.CtrHP ctrHP1 annotation(
+      Placement(visible = true, transformation(origin = {-34, 24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  ModularAHU.Controller.CtrVentilationUnitTsetRoom ctrVentilationUnitTsetRoom1 annotation(
+      Placement(visible = true, transformation(origin = {-8, -38}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-
+    connect(or1.y, htsBus.onOffChpSet) annotation(
+      Line(points = {{-72, 70}, {-80, 70}, {-80, 70}, {-80, 70}}, color = {255, 0, 255}));
+    connect(realToBoolean1[2].y, or1.u1) annotation(
+      Line(points = {{-32, 70}, {-40, 70}, {-40, 68}, {-46, 68}, {-46, 70}, {-48, 70}}, color = {255, 0, 255}));
+    connect(realToBoolean1[1].y, or1.u2) annotation(
+      Line(points = {{-32, 70}, {-40, 70}, {-40, 78}, {-46, 78}, {-46, 78}, {-48, 78}}, color = {255, 0, 255}));
+    connect(u[66], realToBoolean1[2].u) annotation(
+      Line(points = {{0, 114}, {0, 114}, {0, 70}, {-8, 70}, {-8, 70}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(u[65], realToBoolean1[1].u) annotation(
+      Line(points = {{0, 114}, {0, 114}, {0, 70}, {-8, 70}, {-8, 70}}, color = {0, 0, 127}, thickness = 0.5));
     annotation(
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-74, 24}, {64, -10}}, textString = "Feldebene")}),
       Diagram(coordinateSystem(preserveAspectRatio = false)));
@@ -1643,6 +1662,85 @@ package MODI
   Modelica.Blocks.Interfaces.RealOutput y[70] annotation(
       Placement(visible = true, transformation(origin = {0, -160}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -160}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   equation
+  y[1]=RLT_Heating_Off[1].t;
+  y[2]=RLT_Heating_I[1].t;
+  y[3]=RLT_Heating_II[1].t;
+  y[4]=RLT_Cooling_Off[1].t;
+  y[5]=RLT_Cooling_I[1].t;
+  y[6]=RLT_Cooling_II[1].t;
+  y[7]=BKT_Heating_Off[1].t;
+  y[8]=BKT_Heating_I[1].t;
+  y[9]=BKT_Heating_II[1].t;
+  y[10]=BKT_Cooling_I[1].t;
+  y[11]=BKT_Cooling_II[1].t;
+  
+  y[12]=RLT_Heating_Off[2].t;
+  y[13]=RLT_Heating_I[2].t;
+  y[14]=RLT_Heating_II[2].t;
+  y[15]=RLT_Cooling_Off[2].t;
+  y[16]=RLT_Cooling_I[2].t;
+  y[17]=RLT_Cooling_II[2].t;
+  y[18]=BKT_Heating_Off[2].t;
+  y[18]=BKT_Heating_I[2].t;
+  y[20]=BKT_Heating_II[2].t;
+  y[21]=BKT_Cooling_I[2].t;
+  y[22]=BKT_Cooling_II[2].t;
+  
+  y[23]=RLT_Heating_Off[3].t;
+  y[24]=RLT_Heating_I[3].t;
+  y[25]=RLT_Heating_II[3].t;
+  y[26]=RLT_Cooling_Off[3].t;
+  y[27]=RLT_Cooling_I[3].t;
+  y[28]=RLT_Cooling_II[3].t;
+  y[29]=BKT_Heating_Off[3].t;
+  y[30]=BKT_Heating_I[3].t;
+  y[31]=BKT_Heating_II[3].t;
+  y[32]=BKT_Cooling_I[3].t;
+  y[33]=BKT_Cooling_II[3].t;
+  
+  y[34]=RLT_Heating_Off[4].t;
+  y[35]=RLT_Heating_I[4].t;
+  y[36]=RLT_Heating_II[4].t;
+  y[37]=RLT_Cooling_Off[4].t;
+  y[38]=RLT_Cooling_I[4].t;
+  y[39]=RLT_Cooling_II[4].t;
+  y[40]=BKT_Heating_Off[4].t;
+  y[41]=BKT_Heating_I[4].t;
+  y[42]=BKT_Heating_II[4].t;
+  y[43]=BKT_Cooling_I[4].t;
+  y[44]=BKT_Cooling_II[4].t;
+  
+  y[45]=RLT_Heating_Off[5].t;
+  y[46]=RLT_Heating_I[5].t;
+  y[47]=RLT_Heating_II[5].t;
+  y[48]=RLT_Cooling_Off[5].t;
+  y[49]=RLT_Cooling_I[5].t;
+  y[50]=RLT_Cooling_II[5].t;
+  y[51]=BKT_Heating_Off[5].t;
+  y[52]=BKT_Heating_I[5].t;
+  y[53]=BKT_Heating_II[5].t;
+  y[54]=BKT_Cooling_I[5].t;
+  y[55]=BKT_Cooling_II[5].t;
+  
+  y[56]=RLT_Heating_Off[6].t;
+  y[57]=RLT_Heating_I[6].t;
+  y[58]=RLT_Heating_II[6].t;
+  y[59]=RLT_Cooling_Off[6].t;
+  y[60]=RLT_Cooling_I[6].t;
+  y[61]=RLT_Cooling_II[6].t;
+  
+  y[62]=Generation_Hot_Off.t;
+  y[63]=Generation_Hot_I.t;
+  y[64]=Generation_Hot_II.t;
+  
+  y[65]=Generation_Warm_Off.t;
+  y[66]=Generation_Warm_I.t;
+  y[67]=Generation_Warm_II.t;
+  
+  y[68]=Generation_Cold_Off.t;
+  y[69]=Generation_Cold_I.t;
+  y[70]=Generation_Cold_II.t;
+  
     connect(T1153.outPlaces[1], Generation_Warm_Off.inTransition[1]) annotation(
       Line(points = {{191.2, 84}, {184.9, 84}, {184.9, 82}, {178.6, 82}, {178.6, 82}, {166, 82}, {166, 78.8}, {166, 78.8}, {166, 80.8}, {166, 80.8}}, thickness = 0.5));
     connect(Generation_Warm_On.outTransition[1], T1153.inPlaces[1]) annotation(
