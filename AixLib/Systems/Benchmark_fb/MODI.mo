@@ -2464,4 +2464,22 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Documentation(info = "<html><head></head><body>Struktur des MODI_Temperature-Output-Vektors (Einträge von oben nach unten):<div><br></div><div>Workshop_Off</div><div>Canteen_Off</div><div>ConferenceRoom_Off</div><div>MultipersonOffice_Off</div><div>OpenplanOffice_Off</div><div><div>Workshop_Heating</div><div>Canteen_Heating</div><div>ConferenceRoom_Heating</div><div>MultipersonOffice_Heating</div><div>OpenplanOffice_Heating</div></div><div><div>Workshop_Cooling</div><div>Canteen_Cooling</div><div>ConferenceRoom_Cooling</div><div>MultipersonOffice_Cooling</div><div>OpenplanOffice_Cooling</div></div><div><br></div><div>Struktur des MODI_Humidity-Output-Vektors (Einträge von oben nach unten):<div><br></div><div>Workshop_Off</div><div>Canteen_Off</div><div>ConferenceRoom_Off</div><div>MultipersonOffice_Off</div><div>OpenplanOffice_Off</div><div><div>Workshop_Humidifying</div><div>Canteen_Humidifying</div><div>ConferenceRoom_Humidifying</div><div>MultipersonOffice_Humidifying</div><div>OpenplanOffice_Humidifying</div></div><div><div>Workshop_Dehumidifying</div><div>Canteen_Dehumidifying</div><div>ConferenceRoom_Dehumidifying</div><div>MultipersonOffice_Dehumidifying</div><div>OpenplanOffice_Dehumidifying</div></div></div></body></html>"),
       __OpenModelica_commandLineOptions = "");
   end ManagementEbene_Temp;
+
+  model Automatisierungsebene_V3
+  Modelica.Blocks.Interfaces.RealInput u annotation(
+      Placement(visible = true, transformation(origin = {-8.88178e-16, 116}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {-8.88178e-16, 116}, extent = {{-16, -16}, {16, 16}}, rotation = -90)));
+  PNlib.Components.T T1 annotation(
+      Placement(visible = true, transformation(origin = {-64, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PNlib.Components.PD P1 annotation(
+      Placement(visible = true, transformation(origin = {-38, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PNlib.Components.PD P11 annotation(
+      Placement(visible = true, transformation(origin = {-88, 54}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PNlib.Components.PD P12 annotation(
+      Placement(visible = true, transformation(origin = {-64, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PNlib.Components.T T11 annotation(
+      Placement(visible = true, transformation(origin = {-64, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  equation
+
+  annotation(
+      Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-8, 9}, extent = {{-50, 17}, {50, -17}}, textString = "Automatisierungsebene")}));end Automatisierungsebene_V3;
 end MODI;

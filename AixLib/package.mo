@@ -6,7 +6,7 @@ package AixLib
     Modelica_Synchronous(version="0.92.2"),
     NcDataReader2(version="2.5.0"),
     SDF(version="0.4.1"),
-    Modelica_DeviceDrivers(version="1.7.0")),
+    Modelica_DeviceDrivers(version="1.7.0"), PNlib(version = "2.2")),
   version = "0.9.1",
   
   conversion(from(
