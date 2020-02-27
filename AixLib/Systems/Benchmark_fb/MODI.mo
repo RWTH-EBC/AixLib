@@ -14,7 +14,7 @@ package MODI
       Placement(visible = true, transformation(origin = {-182, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     PNlib.Components.T enableCooling[5](each nIn = 1, each nOut = 1, firingCon = {TRoomMea[1] > 273.15 + 17, TRoomMea[2] > 273.15 + 22, TRoomMea[3] > 273.15 + 22, TRoomMea[4] > 273.15 + 22, TRoomMea[5] > 273.15 + 22}) annotation(
       Placement(visible = true, transformation(origin = {-144, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-    PNlib.Components.T disableCooling[5](each nIn = 1, each nOut = 1, firingCon = {TRoomMea[1] < 273.15 + 15, TRoomMea[2] < 273.15 + 20, TRoomMea[3]< 273.15 + 20, TRoomMea[4] < 273.15 + 20, TRoomMea[5] < 273.15 + 20}) annotation(
+    PNlib.Components.T disableCooling[5](each nIn = 1, each nOut = 1, firingCon = {TRoomMea[1] < 273.15 + 15, TRoomMea[2] < 273.15 + 20, TRoomMea[3] < 273.15 + 20, TRoomMea[4] < 273.15 + 20, TRoomMea[5] < 273.15 + 20}) annotation(
       Placement(visible = true, transformation(extent = {{-154, 20}, {-134, 40}}, rotation = 0)));
     PNlib.Components.PD Dehumidifying[5](each nIn = 1, each nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
@@ -22,119 +22,113 @@ package MODI
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.PD Humidifying[5](each nIn = 1, each nOut = 1, each reStartTokens = 1, each startTokens = 1) annotation(
       Placement(visible = true, transformation(origin = {184, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-    PNlib.Components.T enableHumidifying[5](each nIn = 1, each nOut = 1, firingCon={HumRoomMea[1]<=0.4,HumRoomMea[2]<=0.4,HumRoomMea[3]<=0.4,HumRoomMea[4]<=0.4,HumRoomMea[5]<=0.4}) annotation(
+    PNlib.Components.T enableHumidifying[5](each nIn = 1, each nOut = 1, firingCon = {HumRoomMea[1] <= 0.4, HumRoomMea[2] <= 0.4, HumRoomMea[3] <= 0.4, HumRoomMea[4] <= 0.4, HumRoomMea[5] <= 0.4}) annotation(
       Placement(visible = true, transformation(origin = {146, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PNlib.Components.T enableDehumidifying[5](each nIn = 1, each nOut = 1, firingCon={HumRoomMea[1]>0.6,HumRoomMea[2]>0.6,HumRoomMea[3]>0.6,HumRoomMea[4]>0.6,HumRoomMea[5]>0.6}) annotation(
+    PNlib.Components.T enableDehumidifying[5](each nIn = 1, each nOut = 1, firingCon = {HumRoomMea[1] > 0.6, HumRoomMea[2] > 0.6, HumRoomMea[3] > 0.6, HumRoomMea[4] > 0.6, HumRoomMea[5] > 0.6}) annotation(
       Placement(visible = true, transformation(origin = {58, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-    PNlib.Components.T disableDehumidifying[5](each nIn = 1, each nOut = 1, firingCon={HumRoomMea[1]<=0.6,HumRoomMea[2]<=0.6,HumRoomMea[3]<=0.6,HumRoomMea[4]<=0.6,HumRoomMea[5]<=0.6}) annotation(
+    PNlib.Components.T disableDehumidifying[5](each nIn = 1, each nOut = 1, firingCon = {HumRoomMea[1] <= 0.6, HumRoomMea[2] <= 0.6, HumRoomMea[3] <= 0.6, HumRoomMea[4] <= 0.6, HumRoomMea[5] <= 0.6}) annotation(
       Placement(visible = true, transformation(origin = {56, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PNlib.Components.T disableHumidifying[5](each nIn = 1, each nOut = 1, firingCon={HumRoomMea[1]>0.4,HumRoomMea[2]>0.4,HumRoomMea[3]>0.4,HumRoomMea[4]>0.4,HumRoomMea[5]>0.4}) annotation(
+    PNlib.Components.T disableHumidifying[5](each nIn = 1, each nOut = 1, firingCon = {HumRoomMea[1] > 0.4, HumRoomMea[2] > 0.4, HumRoomMea[3] > 0.4, HumRoomMea[4] > 0.4, HumRoomMea[5] > 0.4}) annotation(
       Placement(visible = true, transformation(origin = {144, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  Modelica.Blocks.Math.RealToBoolean realToBoolean1[30](each threshold = 0.5)  annotation(
+    Modelica.Blocks.Math.RealToBoolean realToBoolean1[30](each threshold = 0.5) annotation(
       Placement(visible = true, transformation(origin = {0, -72}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
-  Modelica.Blocks.Interfaces.BooleanOutput y[30] annotation(
+    Modelica.Blocks.Interfaces.BooleanOutput y[30] annotation(
       Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Interfaces.RealInput TRoomMea[5] annotation(
+    Modelica.Blocks.Interfaces.RealInput TRoomMea[5] annotation(
       Placement(visible = true, transformation(origin = {-100, 116}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {-100, 116}, extent = {{-16, -16}, {16, 16}}, rotation = -90)));
-  Modelica.Blocks.Interfaces.RealInput HumRoomMea[5] annotation(
+    Modelica.Blocks.Interfaces.RealInput HumRoomMea[5] annotation(
       Placement(visible = true, transformation(origin = {100, 116}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {100, 116}, extent = {{-16, -16}, {16, 16}}, rotation = -90)));
   equation
     connect(realToBoolean1[1].y, y[1]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[2].y, y[2]) annotation(
+    connect(realToBoolean1[2].y, y[2]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[3].y, y[3]) annotation(
+    connect(realToBoolean1[3].y, y[3]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[4].y, y[4]) annotation(
+    connect(realToBoolean1[4].y, y[4]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[5].y, y[5]) annotation(
+    connect(realToBoolean1[5].y, y[5]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[6].y, y[6]) annotation(
+    connect(realToBoolean1[6].y, y[6]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[7].y, y[7]) annotation(
+    connect(realToBoolean1[7].y, y[7]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[8].y, y[8]) annotation(
+    connect(realToBoolean1[8].y, y[8]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[9].y, y[9]) annotation(
+    connect(realToBoolean1[9].y, y[9]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[10].y, y[10]) annotation(
+    connect(realToBoolean1[10].y, y[10]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[11].y, y[11]) annotation(
+    connect(realToBoolean1[11].y, y[11]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[12].y, y[12]) annotation(
+    connect(realToBoolean1[12].y, y[12]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[13].y, y[13]) annotation(
+    connect(realToBoolean1[13].y, y[13]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[14].y, y[14]) annotation(
+    connect(realToBoolean1[14].y, y[14]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[15].y, y[15]) annotation(
+    connect(realToBoolean1[15].y, y[15]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[16].y, y[16]) annotation(
+    connect(realToBoolean1[16].y, y[16]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[17].y, y[17]) annotation(
+    connect(realToBoolean1[17].y, y[17]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[18].y, y[18]) annotation(
+    connect(realToBoolean1[18].y, y[18]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[19].y, y[19]) annotation(
+    connect(realToBoolean1[19].y, y[19]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[20].y, y[20]) annotation(
+    connect(realToBoolean1[20].y, y[20]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[21].y, y[21]) annotation(
+    connect(realToBoolean1[21].y, y[21]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[22].y, y[22]) annotation(
+    connect(realToBoolean1[22].y, y[22]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[23].y, y[23]) annotation(
+    connect(realToBoolean1[23].y, y[23]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[24].y, y[24]) annotation(
+    connect(realToBoolean1[24].y, y[24]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[25].y, y[25]) annotation(
+    connect(realToBoolean1[25].y, y[25]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[26].y, y[26]) annotation(
+    connect(realToBoolean1[26].y, y[26]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[27].y, y[27]) annotation(
+    connect(realToBoolean1[27].y, y[27]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[28].y, y[28]) annotation(
+    connect(realToBoolean1[28].y, y[28]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[29].y, y[29]) annotation(
+    connect(realToBoolean1[29].y, y[29]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[30].y, y[30]) annotation(
+    connect(realToBoolean1[30].y, y[30]) annotation(
       Line(points = {{0, -80}, {0, -80}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  
-  
-  
-  realToBoolean1[1].u=Off_Temperature[1].t;
-  realToBoolean1[2].u=Heating[1].t;
-  realToBoolean1[3].u=Cooling[1].t;
-  realToBoolean1[4].u=Off_Temperature[2].t;
-  realToBoolean1[5].u=Heating[2].t;
-  realToBoolean1[6].u=Cooling[2].t;
-  realToBoolean1[7].u=Off_Temperature[3].t;
-  realToBoolean1[8].u=Heating[3].t;
-  realToBoolean1[9].u=Cooling[3].t;
-  realToBoolean1[10].u=Off_Temperature[4].t;
-  realToBoolean1[11].u=Heating[4].t;
-  realToBoolean1[12].u=Cooling[4].t;
-  realToBoolean1[13].u=Off_Temperature[5].t;
-  realToBoolean1[14].u=Heating[5].t;
-  realToBoolean1[15].u=Cooling[5].t;
-  
-  realToBoolean1[16].u=Off_Humidity[1].t;
-  realToBoolean1[17].u=Humidifying[1].t;
-  realToBoolean1[18].u=Dehumidifying[1].t;
-  realToBoolean1[19].u=Off_Humidity[2].t;
-  realToBoolean1[20].u=Humidifying[2].t;
-  realToBoolean1[21].u=Dehumidifying[2].t;
-  realToBoolean1[22].u=Off_Humidity[3].t;
-  realToBoolean1[23].u=Humidifying[3].t;
-  realToBoolean1[24].u=Dehumidifying[3].t;
-  realToBoolean1[25].u=Off_Humidity[4].t;
-  realToBoolean1[26].u=Humidifying[4].t;
-  realToBoolean1[27].u=Dehumidifying[4].t;
-  realToBoolean1[28].u=Off_Humidity[5].t;
-  realToBoolean1[29].u=Humidifying[5].t;
-  realToBoolean1[30].u=Dehumidifying[5].t;
-  
-  
+    realToBoolean1[1].u = Off_Temperature[1].t;
+    realToBoolean1[2].u = Heating[1].t;
+    realToBoolean1[3].u = Cooling[1].t;
+    realToBoolean1[4].u = Off_Temperature[2].t;
+    realToBoolean1[5].u = Heating[2].t;
+    realToBoolean1[6].u = Cooling[2].t;
+    realToBoolean1[7].u = Off_Temperature[3].t;
+    realToBoolean1[8].u = Heating[3].t;
+    realToBoolean1[9].u = Cooling[3].t;
+    realToBoolean1[10].u = Off_Temperature[4].t;
+    realToBoolean1[11].u = Heating[4].t;
+    realToBoolean1[12].u = Cooling[4].t;
+    realToBoolean1[13].u = Off_Temperature[5].t;
+    realToBoolean1[14].u = Heating[5].t;
+    realToBoolean1[15].u = Cooling[5].t;
+    realToBoolean1[16].u = Off_Humidity[1].t;
+    realToBoolean1[17].u = Humidifying[1].t;
+    realToBoolean1[18].u = Dehumidifying[1].t;
+    realToBoolean1[19].u = Off_Humidity[2].t;
+    realToBoolean1[20].u = Humidifying[2].t;
+    realToBoolean1[21].u = Dehumidifying[2].t;
+    realToBoolean1[22].u = Off_Humidity[3].t;
+    realToBoolean1[23].u = Humidifying[3].t;
+    realToBoolean1[24].u = Dehumidifying[3].t;
+    realToBoolean1[25].u = Off_Humidity[4].t;
+    realToBoolean1[26].u = Humidifying[4].t;
+    realToBoolean1[27].u = Dehumidifying[4].t;
+    realToBoolean1[28].u = Off_Humidity[5].t;
+    realToBoolean1[29].u = Humidifying[5].t;
+    realToBoolean1[30].u = Dehumidifying[5].t;
     connect(Cooling[1].outTransition[1], disableCooling[1].inPlaces[1]) annotation(
       Line(points = {{-182, 10.8}, {-182, 29.8}, {-165.5, 29.8}, {-165.5, 30}, {-148.8, 30}}));
     connect(disableDehumidifying[1].outPlaces[1], Off_Humidity[1].inTransition[2]) annotation(
@@ -307,25 +301,25 @@ package MODI
 
   model Feldebene "Auswahl der Aktoren basierend auf den ausgewählten Aktorsätzen"
     import Benchmark_fb;
-  AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus1 annotation(
+    AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus1 annotation(
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {198, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.EONERC_MainBuilding.Controller.CtrGTFSimple ctrGTFSimple1 annotation(
+    AixLib.Systems.EONERC_MainBuilding.Controller.CtrGTFSimple ctrGTFSimple1 annotation(
       Placement(visible = true, transformation(origin = {-110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.EONERC_MainBuilding.Controller.CtrSWU ctrSWU1 annotation(
+    AixLib.Systems.EONERC_MainBuilding.Controller.CtrSWU ctrSWU1 annotation(
       Placement(visible = true, transformation(origin = {-110, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.EONERC_MainBuilding.Controller.EonERCModeControl.CtrHP ctrHP1 annotation(
+    AixLib.Systems.EONERC_MainBuilding.Controller.EonERCModeControl.CtrHP ctrHP1 annotation(
       Placement(visible = true, transformation(origin = {-108, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.ModularAHU.Controller.CtrVentilationUnitTsetRoom ctrVentilationUnitTsetRoom1 annotation(
+    AixLib.Systems.ModularAHU.Controller.CtrVentilationUnitTsetRoom ctrVentilationUnitTsetRoom1 annotation(
       Placement(visible = true, transformation(origin = {-110, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.BooleanInput u[29] annotation(
+    Modelica.Blocks.Interfaces.BooleanInput u[29] annotation(
       Placement(visible = true, transformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
-  AixLib.Systems.Benchmark.Controller.CtrTabs2 ctrTabs21 annotation(
+    AixLib.Systems.Benchmark.Controller.CtrTabs2 ctrTabs21 annotation(
       Placement(visible = true, transformation(origin = {-110, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.Benchmark_fb.MODI.Controller_HTSSystem controller_HTSSystem1(T_boi_set = 273.15 + 80, T_chp_set = 333.15)  annotation(
+    AixLib.Systems.Benchmark_fb.MODI.Controller_HTSSystem controller_HTSSystem1(T_boi_set = 273.15 + 80, T_chp_set = 333.15) annotation(
       Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.Benchmark.Controller.CtrHTSSystem ctrHTSSystem1 annotation(
+    AixLib.Systems.Benchmark.Controller.CtrHTSSystem ctrHTSSystem1 annotation(
       Placement(visible = true, transformation(origin = {-110, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_GTFSystem controller_GTFSystem1 annotation(
+    AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_GTFSystem controller_GTFSystem1 annotation(
       Placement(visible = true, transformation(origin = {-70, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(gtfBus, mainBus1.gtfBus) annotation(
@@ -339,134 +333,125 @@ package MODI
     connect(or1.y, htsBus.onOffChpSet) annotation(
       Line(points = {{-72, 70}, {-80, 70}, {-80, 70}, {-80, 70}}, color = {255, 0, 255}));
     annotation(
-      Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-34, 16},fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-74, 24}, {150, -48}}, textString = "Feldebene")}),
+      Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-34, 16}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-74, 24}, {150, -48}}, textString = "Feldebene")}),
       Diagram(coordinateSystem(preserveAspectRatio = false)));
   end Feldebene;
 
-model Controlling_MODI
-  import Benchmark_fb;
-  AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation(
-    Placement(visible = true, transformation(extent = {{90, 48}, {110, 68}}, rotation = 0), iconTransformation(extent = {{90, 48}, {110, 68}}, rotation = 0)));
-AixLib.Systems.Benchmark_fb.MODI.ManagementEbene_Temp managementEbene_Temp1 annotation(
-    Placement(visible = true, transformation(origin = {-40, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-AixLib.Systems.Benchmark_fb.MODI.Feldebene feldebene1 annotation(
-    Placement(visible = true, transformation(origin = {-40, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealInput TAirOutside annotation(
+  model Controlling_MODI
+    import Benchmark_fb;
+    AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation(
+      Placement(visible = true, transformation(extent = {{90, 48}, {110, 68}}, rotation = 0), iconTransformation(extent = {{90, 48}, {110, 68}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput TAirOutside annotation(
       Placement(visible = true, transformation(origin = {104, 0}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {104, 0}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
-  AixLib.Systems.Benchmark_fb.MODI.AutomationLevel_MODImethod automationLevel_MODImethod2 annotation(
+  AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_MODImethod automationLevel_MODImethod1 annotation(
       Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
-
-equation
-    connect(automationLevel_MODImethod2.y[1], feldebene1.u[1]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-     connect(automationLevel_MODImethod2.y[2], feldebene1.u[2]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[3], feldebene1.u[3]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[4], feldebene1.u[4]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[5], feldebene1.u[5]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[6], feldebene1.u[6]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[7], feldebene1.u[7]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[8], feldebene1.u[8]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[9], feldebene1.u[9]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[10], feldebene1.u[10]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[11], feldebene1.u[11]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));      connect(automationLevel_MODImethod2.y[12], feldebene1.u[12]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));      connect(automationLevel_MODImethod2.y[13], feldebene1.u[13]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[14], feldebene1.u[14]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[15], feldebene1.u[15]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[16], feldebene1.u[16]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[17], feldebene1.u[17]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[18], feldebene1.u[18]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[19], feldebene1.u[19]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[20], feldebene1.u[20]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[21], feldebene1.u[21]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[22], feldebene1.u[22]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[23], feldebene1.u[23]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[24], feldebene1.u[24]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[25], feldebene1.u[25]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[26], feldebene1.u[26]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[27], feldebene1.u[27]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[28], feldebene1.u[28]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(automationLevel_MODImethod2.y[29], feldebene1.u[29]) annotation(
-      Line(points = {{-40, -10}, {-40, -10}, {-40, -58}, {-40, -58}}, color = {255, 0, 255}, thickness = 0.5));
-       
+  AixLib.Systems.Benchmark_fb.MODI.Level.Feldebene feldebene2 annotation(
+      Placement(visible = true, transformation(origin = {-40, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.MODI.Level.ManagementEbene_Temp managementEbene_Temp2 annotation(
+      Placement(visible = true, transformation(origin = {-40, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(automationLevel_MODImethod1.y[1], feldebene2.u[1]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+     connect(automationLevel_MODImethod1.y[2], feldebene2.u[2]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[3], feldebene2.u[3]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[4], feldebene2.u[4]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[5], feldebene2.u[5]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[6], feldebene2.u[6]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[7], feldebene2.u[7]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[8], feldebene2.u[8]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[9], feldebene2.u[9]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));        connect(automationLevel_MODImethod1.y[10], feldebene2.u[10]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[11], feldebene2.u[11]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    
+      connect(automationLevel_MODImethod1.y[12], feldebene2.u[12]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[13], feldebene2.u[13]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[14], feldebene2.u[14]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[15], feldebene2.u[15]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(automationLevel_MODImethod1.y[16], feldebene2.u[16]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[17], feldebene2.u[17]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[18], feldebene2.u[18]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[19], feldebene2.u[19]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));    connect(automationLevel_MODImethod1.y[20], feldebene2.u[20]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));     
+      connect(automationLevel_MODImethod1.y[21], feldebene2.u[21]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[22], feldebene2.u[22]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[23], feldebene2.u[23]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[24], feldebene2.u[24]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[25], feldebene2.u[25]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[26], feldebene2.u[26]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[27], feldebene2.u[27]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[28], feldebene2.u[28]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+      connect(automationLevel_MODImethod1.y[29], feldebene2.u[29]) annotation(
+      Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));   
+        
       
       
       
       
+    connect(managementEbene_Temp2.y[1], automationLevel_MODImethod1.u[1]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[2], automationLevel_MODImethod1.u[2]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[3], automationLevel_MODImethod1.u[3]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[4], automationLevel_MODImethod1.u[4]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[5], automationLevel_MODImethod1.u[5]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[6], automationLevel_MODImethod1.u[6]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[7], automationLevel_MODImethod1.u[7]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[8], automationLevel_MODImethod1.u[8]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[9], automationLevel_MODImethod1.u[9]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[10], automationLevel_MODImethod1.u[10]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[11], automationLevel_MODImethod1.u[11]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[12], automationLevel_MODImethod1.u[12]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[13], automationLevel_MODImethod1.u[13]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[14], automationLevel_MODImethod1.u[14]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementEbene_Temp2.y[15], automationLevel_MODImethod1.u[15]) annotation(
+      Line(points = {{-40, 38}, {-40, 38}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
       
-    connect(managementEbene_Temp1.y[1], automationLevel_MODImethod2.u[1]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[2], automationLevel_MODImethod2.u[2]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[3], automationLevel_MODImethod2.u[3]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[4], automationLevel_MODImethod2.u[4]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[5], automationLevel_MODImethod2.u[5]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));      
-      connect(managementEbene_Temp1.y[6], automationLevel_MODImethod2.u[6]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));      
-      connect(managementEbene_Temp1.y[7], automationLevel_MODImethod2.u[7]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[8], automationLevel_MODImethod2.u[8]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[9], automationLevel_MODImethod2.u[9]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[10], automationLevel_MODImethod2.u[10]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[11], automationLevel_MODImethod2.u[11]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[12], automationLevel_MODImethod2.u[12]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[13], automationLevel_MODImethod2.u[13]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[14], automationLevel_MODImethod2.u[14]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[15], automationLevel_MODImethod2.u[15]) annotation(
-      Line(points = {{-40, 60}, {-40, 60}, {-40, 12}, {-40, 12}}, color = {255, 0, 255}, thickness = 0.5));
       
       
-    connect(automationLevel_MODImethod2.TAirOutside, TAirOutside) annotation(
-      Line(points = {{-18, 0}, {96, 0}, {96, 0}, {104, 0}}, color = {0, 0, 127}));
-    connect(mainBus.TRoom5Mea, managementEbene_Temp1.TRoomMea[5]) annotation(
-      Line(points = {{100, 58}, {100, 58}, {100, 100}, {-40, 100}, {-40, 82}, {-40, 82}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(mainBus.TRoom4Mea, managementEbene_Temp1.TRoomMea[4]) annotation(
-      Line(points = {{100, 58}, {100, 58}, {100, 100}, {-40, 100}, {-40, 82}, {-40, 82}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(mainBus.TRoom3Mea, managementEbene_Temp1.TRoomMea[3]) annotation(
-      Line(points = {{100, 58}, {100, 58}, {100, 100}, {-40, 100}, {-40, 82}, {-40, 82}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(mainBus.TRoom2Mea, managementEbene_Temp1.TRoomMea[2]) annotation(
-      Line(points = {{100, 58}, {100, 58}, {100, 100}, {-40, 100}, {-40, 82}, {-40, 82}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(mainBus.TRoom1Mea, managementEbene_Temp1.TRoomMea[1]) annotation(
-      Line(points = {{100, 58}, {100, 58}, {100, 100}, {-40, 100}, {-40, 82}, {-40, 82}}, color = {255, 204, 51}, thickness = 0.5));  
+    connect(mainBus.TRoom5Mea, managementEbene_Temp2.TRoomMea[5]) annotation(
+      Line(points = {{100, 58}, {100, 58}, {100, 80}, {-40, 80}, {-40, 62}, {-40, 62}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.TRoom4Mea, managementEbene_Temp2.TRoomMea[4]) annotation(
+      Line(points = {{100, 58}, {100, 58}, {100, 80}, {-40, 80}, {-40, 62}, {-40, 62}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.TRoom3Mea, managementEbene_Temp2.TRoomMea[3]) annotation(
+      Line(points = {{100, 58}, {100, 58}, {100, 80}, {-40, 80}, {-40, 62}, {-40, 62}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.TRoom2Mea, managementEbene_Temp2.TRoomMea[2]) annotation(
+      Line(points = {{100, 58}, {100, 58}, {100, 80}, {-40, 80}, {-40, 62}, {-40, 62}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.TRoom1Mea, managementEbene_Temp2.TRoomMea[1]) annotation(
+      Line(points = {{100, 58}, {100, 58}, {100, 80}, {-40, 80}, {-40, 62}, {-40, 62}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(TAirOutside, automationLevel_MODImethod1.TAirOutside) annotation(
+      Line(points = {{104, 0}, {-18, 0}, {-18, 0}, {-18, 0}}, color = {0, 0, 127}));
     annotation(
-    Icon(coordinateSystem(preserveAspectRatio = false), graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{-66, 28}, {58, -30}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, textString = "MODI")}),
-    Diagram(coordinateSystem(preserveAspectRatio = false)));
-end Controlling_MODI;
+      Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-66, 28}, {58, -30}}, textString = "MODI")}),
+      Diagram(coordinateSystem(preserveAspectRatio = false)));
+  end Controlling_MODI;
 
   model AutomatisierungsebeneV2
     PNlib.Components.PD RLT_Heating_I[6](each nIn = 2, each nOut = 2, each maxTokens = 1) annotation(
@@ -506,7 +491,7 @@ end Controlling_MODI;
     PNlib.Components.T T111[6](each nIn = 1, each nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {-202, 88}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     PNlib.Components.T T113[5](each nIn = 1, each nOut = 1, each arcWeightIn = {1}, each arcWeightOut = {1}) annotation(
-      Placement(visible = true, transformation(origin = {-172,-42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-172, -42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     PNlib.Components.T T114[5](each nIn = 1, each nOut = 1, each arcWeightIn = {1}, each arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {-172, -22}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.T T115[5](each nIn = 1, each nOut = 1, each arcWeightIn = {1}, each arcWeightOut = {1}) annotation(
@@ -522,7 +507,7 @@ end Controlling_MODI;
     PNlib.Components.T T119[5](each nIn = 1, each nOut = 1, each arcWeightIn = {1}, each arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {-30, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     PNlib.Components.PD BKT_Off[5](each nIn = 4, each nOut = 4, each startTokens = 1, each maxTokens = 1) annotation(
-      Placement(visible = true, transformation( origin = {-126, -12},extent = {{-10, -10}, {10, 10}}, rotation = 90)));
+      Placement(visible = true, transformation(origin = {-126, -12}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     PNlib.Components.T T120[5](each nIn = 1, each nOut = 1, each arcWeightIn = {1}, each arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {-172, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.T T121[5](each nIn = 1, each nOut = 1, each arcWeightIn = {1}, each arcWeightOut = {1}) annotation(
@@ -558,7 +543,7 @@ end Controlling_MODI;
     PNlib.Components.PD Generation_Hot_I(nIn = 2, nOut = 2, maxTokens = 1) annotation(
       Placement(visible = true, transformation(origin = {104, 96}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.PD Generation_Warm_Off(nIn = 1, nOut = 1, maxTokens = 1, reStart = true, reStartTokens = 1, startTokens = 1) annotation(
-      Placement(visible = true, transformation( origin = {166, 70},extent = {{-10, -10}, {10, 10}}, rotation = 270)));
+      Placement(visible = true, transformation(origin = {166, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
     PNlib.Components.T T1151(nIn = 1, nOut = 1, arcWeightIn = {1}, arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {196, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     PNlib.Components.PD Generation_Warm_On(nIn = 1, nOut = 1) annotation(
@@ -566,7 +551,7 @@ end Controlling_MODI;
     PNlib.Components.T T1153(nIn = 1, nOut = 1, arcWeightIn = {1}, arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {196, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.PD Generation_Cold_Off(nIn = 3, nOut = 3, maxTokens = 1, reStart = true, reStartTokens = 1, startTokens = 1) annotation(
-      Placement(visible = true, transformation( origin = {44, -76},extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {44, -76}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     PNlib.Components.T T2(nIn = 1, nOut = 1, arcWeightIn = {1}, arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {74, -82}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     PNlib.Components.PD Generation_Cold_II(nIn = 3, nOut = 3, maxTokens = 1) annotation(
@@ -597,90 +582,81 @@ end Controlling_MODI;
       Placement(visible = true, transformation(origin = {148, -76}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     PNlib.Components.T T24(nIn = 1, nOut = 1, arcWeightIn = {1}, arcWeightOut = {1}) annotation(
       Placement(visible = true, transformation(origin = {168, -76}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
-  Modelica.Blocks.Interfaces.RealInput u[15] annotation(
+    Modelica.Blocks.Interfaces.RealInput u[15] annotation(
       Placement(visible = true, transformation(origin = {-2.22045e-16, 164}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {-2.22045e-16, 164}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
-  Modelica.Blocks.Interfaces.RealOutput y[70] annotation(
+    Modelica.Blocks.Interfaces.RealOutput y[70] annotation(
       Placement(visible = true, transformation(origin = {0, -160}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -160}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   equation
-  y[1]=RLT_Heating_Off[1].t;
-  y[2]=RLT_Heating_I[1].t;
-  y[3]=RLT_Heating_II[1].t;
-  y[4]=RLT_Cooling_Off[1].t;
-  y[5]=RLT_Cooling_I[1].t;
-  y[6]=RLT_Cooling_II[1].t;
-  y[7]=BKT_Heating_Off[1].t;
-  y[8]=BKT_Heating_I[1].t;
-  y[9]=BKT_Heating_II[1].t;
-  y[10]=BKT_Cooling_I[1].t;
-  y[11]=BKT_Cooling_II[1].t;
-  
-  y[12]=RLT_Heating_Off[2].t;
-  y[13]=RLT_Heating_I[2].t;
-  y[14]=RLT_Heating_II[2].t;
-  y[15]=RLT_Cooling_Off[2].t;
-  y[16]=RLT_Cooling_I[2].t;
-  y[17]=RLT_Cooling_II[2].t;
-  y[18]=BKT_Heating_Off[2].t;
-  y[18]=BKT_Heating_I[2].t;
-  y[20]=BKT_Heating_II[2].t;
-  y[21]=BKT_Cooling_I[2].t;
-  y[22]=BKT_Cooling_II[2].t;
-  
-  y[23]=RLT_Heating_Off[3].t;
-  y[24]=RLT_Heating_I[3].t;
-  y[25]=RLT_Heating_II[3].t;
-  y[26]=RLT_Cooling_Off[3].t;
-  y[27]=RLT_Cooling_I[3].t;
-  y[28]=RLT_Cooling_II[3].t;
-  y[29]=BKT_Heating_Off[3].t;
-  y[30]=BKT_Heating_I[3].t;
-  y[31]=BKT_Heating_II[3].t;
-  y[32]=BKT_Cooling_I[3].t;
-  y[33]=BKT_Cooling_II[3].t;
-  
-  y[34]=RLT_Heating_Off[4].t;
-  y[35]=RLT_Heating_I[4].t;
-  y[36]=RLT_Heating_II[4].t;
-  y[37]=RLT_Cooling_Off[4].t;
-  y[38]=RLT_Cooling_I[4].t;
-  y[39]=RLT_Cooling_II[4].t;
-  y[40]=BKT_Heating_Off[4].t;
-  y[41]=BKT_Heating_I[4].t;
-  y[42]=BKT_Heating_II[4].t;
-  y[43]=BKT_Cooling_I[4].t;
-  y[44]=BKT_Cooling_II[4].t;
-  
-  y[45]=RLT_Heating_Off[5].t;
-  y[46]=RLT_Heating_I[5].t;
-  y[47]=RLT_Heating_II[5].t;
-  y[48]=RLT_Cooling_Off[5].t;
-  y[49]=RLT_Cooling_I[5].t;
-  y[50]=RLT_Cooling_II[5].t;
-  y[51]=BKT_Heating_Off[5].t;
-  y[52]=BKT_Heating_I[5].t;
-  y[53]=BKT_Heating_II[5].t;
-  y[54]=BKT_Cooling_I[5].t;
-  y[55]=BKT_Cooling_II[5].t;
-  
-  y[56]=RLT_Heating_Off[6].t;
-  y[57]=RLT_Heating_I[6].t;
-  y[58]=RLT_Heating_II[6].t;
-  y[59]=RLT_Cooling_Off[6].t;
-  y[60]=RLT_Cooling_I[6].t;
-  y[61]=RLT_Cooling_II[6].t;
-  
-  y[62]=Generation_Hot_Off.t;
-  y[63]=Generation_Hot_I.t;
-  y[64]=Generation_Hot_II.t;
-  
-  y[65]=Generation_Warm_Off.t;
-  y[66]=Generation_Warm_I.t;
-  y[67]=Generation_Warm_II.t;
-  
-  y[68]=Generation_Cold_Off.t;
-  y[69]=Generation_Cold_I.t;
-  y[70]=Generation_Cold_II.t;
-  
+    y[1] = RLT_Heating_Off[1].t;
+    y[2] = RLT_Heating_I[1].t;
+    y[3] = RLT_Heating_II[1].t;
+    y[4] = RLT_Cooling_Off[1].t;
+    y[5] = RLT_Cooling_I[1].t;
+    y[6] = RLT_Cooling_II[1].t;
+    y[7] = BKT_Heating_Off[1].t;
+    y[8] = BKT_Heating_I[1].t;
+    y[9] = BKT_Heating_II[1].t;
+    y[10] = BKT_Cooling_I[1].t;
+    y[11] = BKT_Cooling_II[1].t;
+    y[12] = RLT_Heating_Off[2].t;
+    y[13] = RLT_Heating_I[2].t;
+    y[14] = RLT_Heating_II[2].t;
+    y[15] = RLT_Cooling_Off[2].t;
+    y[16] = RLT_Cooling_I[2].t;
+    y[17] = RLT_Cooling_II[2].t;
+    y[18] = BKT_Heating_Off[2].t;
+    y[18] = BKT_Heating_I[2].t;
+    y[20] = BKT_Heating_II[2].t;
+    y[21] = BKT_Cooling_I[2].t;
+    y[22] = BKT_Cooling_II[2].t;
+    y[23] = RLT_Heating_Off[3].t;
+    y[24] = RLT_Heating_I[3].t;
+    y[25] = RLT_Heating_II[3].t;
+    y[26] = RLT_Cooling_Off[3].t;
+    y[27] = RLT_Cooling_I[3].t;
+    y[28] = RLT_Cooling_II[3].t;
+    y[29] = BKT_Heating_Off[3].t;
+    y[30] = BKT_Heating_I[3].t;
+    y[31] = BKT_Heating_II[3].t;
+    y[32] = BKT_Cooling_I[3].t;
+    y[33] = BKT_Cooling_II[3].t;
+    y[34] = RLT_Heating_Off[4].t;
+    y[35] = RLT_Heating_I[4].t;
+    y[36] = RLT_Heating_II[4].t;
+    y[37] = RLT_Cooling_Off[4].t;
+    y[38] = RLT_Cooling_I[4].t;
+    y[39] = RLT_Cooling_II[4].t;
+    y[40] = BKT_Heating_Off[4].t;
+    y[41] = BKT_Heating_I[4].t;
+    y[42] = BKT_Heating_II[4].t;
+    y[43] = BKT_Cooling_I[4].t;
+    y[44] = BKT_Cooling_II[4].t;
+    y[45] = RLT_Heating_Off[5].t;
+    y[46] = RLT_Heating_I[5].t;
+    y[47] = RLT_Heating_II[5].t;
+    y[48] = RLT_Cooling_Off[5].t;
+    y[49] = RLT_Cooling_I[5].t;
+    y[50] = RLT_Cooling_II[5].t;
+    y[51] = BKT_Heating_Off[5].t;
+    y[52] = BKT_Heating_I[5].t;
+    y[53] = BKT_Heating_II[5].t;
+    y[54] = BKT_Cooling_I[5].t;
+    y[55] = BKT_Cooling_II[5].t;
+    y[56] = RLT_Heating_Off[6].t;
+    y[57] = RLT_Heating_I[6].t;
+    y[58] = RLT_Heating_II[6].t;
+    y[59] = RLT_Cooling_Off[6].t;
+    y[60] = RLT_Cooling_I[6].t;
+    y[61] = RLT_Cooling_II[6].t;
+    y[62] = Generation_Hot_Off.t;
+    y[63] = Generation_Hot_I.t;
+    y[64] = Generation_Hot_II.t;
+    y[65] = Generation_Warm_Off.t;
+    y[66] = Generation_Warm_I.t;
+    y[67] = Generation_Warm_II.t;
+    y[68] = Generation_Cold_Off.t;
+    y[69] = Generation_Cold_I.t;
+    y[70] = Generation_Cold_II.t;
     connect(T1153.outPlaces[1], Generation_Warm_Off.inTransition[1]) annotation(
       Line(points = {{191.2, 84}, {184.9, 84}, {184.9, 82}, {178.6, 82}, {178.6, 82}, {166, 82}, {166, 78.8}, {166, 78.8}, {166, 80.8}, {166, 80.8}}, thickness = 0.5));
     connect(Generation_Warm_On.outTransition[1], T1153.inPlaces[1]) annotation(
@@ -1274,7 +1250,7 @@ end Controlling_MODI;
     connect(RLT_Heating_I[1].outTransition[1], T11[1].inPlaces[1]) annotation(
       Line(points = {{-54.8, 110}, {-64, 110}, {-64, 117.5}, {-75.2, 117.5}}, thickness = 0.5));
     annotation(
-      Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-250, 150}, {250, -150}}), Text(origin = {-52, 6},fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-68, 30}, {170, -46}}, textString = "Automatisierungs-
+      Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-250, 150}, {250, -150}}), Text(origin = {-52, 6}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-68, 30}, {170, -46}}, textString = "Automatisierungs-
 Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Diagram(graphics = {Text(origin = {-177, 139}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_RLT_cooling"), Text(origin = {-77, 139}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_RLT_heating"), Text(origin = {-131, 31}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_BKT"), Text(origin = {69, 133}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_HTSsystem"), Text(origin = {195, 129}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_HPsystem_warm")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       __OpenModelica_commandLineOptions = "");
@@ -1288,68 +1264,65 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
     PNlib.Components.PD Heating[5](each maxTokens = 1, each minTokens = 0, each nIn = 1, each nOut = 1, each startTokens = 0) annotation(
       Placement(visible = true, transformation(origin = {84, -2}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     PNlib.Components.PD Off_Temperature[5](each nIn = 2, each nOut = 2, each startTokens = 1, each maxTokens = 1, each reStart = true, each reStartTokens = 1) annotation(
-      Placement(visible = true, transformation(origin = { 0, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {0, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     PNlib.Components.PD Cooling[5](each nIn = 1, each nOut = 1, each maxTokens = 1) annotation(
       Placement(visible = true, transformation(origin = {-82, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
     PNlib.Components.T enableCooling[5](each nIn = 1, each nOut = 1, firingCon = {TRoomMea[1] > 273.15 + 17, TRoomMea[2] > 273.15 + 22, TRoomMea[3] > 273.15 + 22, TRoomMea[4] > 273.15 + 22, TRoomMea[5] > 273.15 + 22}) annotation(
       Placement(visible = true, transformation(origin = {-44, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-    PNlib.Components.T disableCooling[5]( firingCon = {TRoomMea[1] < 273.15 + 15, TRoomMea[2] < 273.15 + 20, TRoomMea[3] < 273.15 + 20, TRoomMea[4] < 273.15 + 20, TRoomMea[5] < 273.15 + 20}, each nIn = 1, each nOut = 1) annotation(
+    PNlib.Components.T disableCooling[5](firingCon = {TRoomMea[1] < 273.15 + 15, TRoomMea[2] < 273.15 + 20, TRoomMea[3] < 273.15 + 20, TRoomMea[4] < 273.15 + 20, TRoomMea[5] < 273.15 + 20}, each nIn = 1, each nOut = 1) annotation(
       Placement(visible = true, transformation(extent = {{-54, 20}, {-34, 40}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.BooleanOutput y[15] annotation(
+    Modelica.Blocks.Interfaces.BooleanOutput y[15] annotation(
       Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Math.RealToBoolean realToBoolean1[15](each threshold = 0.5)  annotation(
+    Modelica.Blocks.Math.RealToBoolean realToBoolean1[15](each threshold = 0.5) annotation(
       Placement(visible = true, transformation(origin = {0, -74}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Interfaces.RealInput TRoomMea[5] annotation(
+    Modelica.Blocks.Interfaces.RealInput TRoomMea[5] annotation(
       Placement(visible = true, transformation(origin = {-2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {-2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
   equation
     connect(realToBoolean1[1].y, y[1]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[2].y, y[2]) annotation(
+    connect(realToBoolean1[2].y, y[2]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[3].y, y[3]) annotation(
+    connect(realToBoolean1[3].y, y[3]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[4].y, y[4]) annotation(
+    connect(realToBoolean1[4].y, y[4]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[5].y, y[5]) annotation(
+    connect(realToBoolean1[5].y, y[5]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[6].y, y[6]) annotation(
+    connect(realToBoolean1[6].y, y[6]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[7].y, y[7]) annotation(
+    connect(realToBoolean1[7].y, y[7]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[8].y, y[8]) annotation(
+    connect(realToBoolean1[8].y, y[8]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[9].y, y[9]) annotation(
+    connect(realToBoolean1[9].y, y[9]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[10].y, y[10]) annotation(
+    connect(realToBoolean1[10].y, y[10]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[11].y, y[11]) annotation(
+    connect(realToBoolean1[11].y, y[11]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[12].y, y[12]) annotation(
+    connect(realToBoolean1[12].y, y[12]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[13].y, y[13]) annotation(
+    connect(realToBoolean1[13].y, y[13]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[14].y, y[14]) annotation(
+    connect(realToBoolean1[14].y, y[14]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  connect(realToBoolean1[15].y, y[15]) annotation(
+    connect(realToBoolean1[15].y, y[15]) annotation(
       Line(points = {{0, -86}, {0, -86}, {0, -110}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
-  
-  realToBoolean1[1].u=Off_Temperature[1].t;
-  realToBoolean1[2].u=Heating[1].t;
-  realToBoolean1[3].u=Cooling[1].t;
-  realToBoolean1[4].u=Off_Temperature[2].t;
-  realToBoolean1[5].u=Heating[2].t;
-  realToBoolean1[6].u=Cooling[2].t;
-  realToBoolean1[7].u=Off_Temperature[3].t;
-  realToBoolean1[8].u=Heating[3].t;
-  realToBoolean1[9].u=Cooling[3].t;
-  realToBoolean1[10].u=Off_Temperature[4].t;
-  realToBoolean1[11].u=Heating[4].t;
-  realToBoolean1[12].u=Cooling[4].t;
-  realToBoolean1[13].u=Off_Temperature[5].t;
-  realToBoolean1[14].u=Heating[5].t;
-  realToBoolean1[15].u=Cooling[5].t;
-  
-  
+    realToBoolean1[1].u = Off_Temperature[1].t;
+    realToBoolean1[2].u = Heating[1].t;
+    realToBoolean1[3].u = Cooling[1].t;
+    realToBoolean1[4].u = Off_Temperature[2].t;
+    realToBoolean1[5].u = Heating[2].t;
+    realToBoolean1[6].u = Cooling[2].t;
+    realToBoolean1[7].u = Off_Temperature[3].t;
+    realToBoolean1[8].u = Heating[3].t;
+    realToBoolean1[9].u = Cooling[3].t;
+    realToBoolean1[10].u = Off_Temperature[4].t;
+    realToBoolean1[11].u = Heating[4].t;
+    realToBoolean1[12].u = Cooling[4].t;
+    realToBoolean1[13].u = Off_Temperature[5].t;
+    realToBoolean1[14].u = Heating[5].t;
+    realToBoolean1[15].u = Cooling[5].t;
     connect(enableCooling[1].outPlaces[1], Cooling[1].inTransition[1]) annotation(
       Line(points = {{-49, -30}, {-81.8, -30}, {-81.8, -12.8}, {-82, -12.8}}));
     connect(enableCooling[2].outPlaces[1], Cooling[2].inTransition[1]) annotation(
@@ -1447,15 +1420,15 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Placement(visible = true, transformation(origin = {-54, 72}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
     PNlib.Components.PD HTS_Off(nIn = 2, nOut = 2, startTokens = 1) annotation(
       Placement(visible = true, transformation(origin = {-88, 58}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
-    PNlib.Components.T T11(nIn = 1, nOut = 1, firingCon = u[2] or u[5] or u[8] or u[11] or u[14] and TAirOutside>283.15 "and weaBus.DryBulbTemp>283.15") annotation(
+    PNlib.Components.T T11(nIn = 1, nOut = 1, firingCon = u[2] or u[5] or u[8] or u[11] or u[14] and TAirOutside > 283.15 "and weaBus.DryBulbTemp>283.15") annotation(
       Placement(visible = true, transformation(origin = {-73, 65}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
-    PNlib.Components.T T12(nIn = 1, nOut = 1, firingCon = u[2] or u[5] or u[8] or u[11] or u[14] and TAirOutside<=283.15  "and weaBus.DryBulbTemp<=283.15") annotation(
+    PNlib.Components.T T12(nIn = 1, nOut = 1, firingCon = u[2] or u[5] or u[8] or u[11] or u[14] and TAirOutside <= 283.15 "and weaBus.DryBulbTemp<=283.15") annotation(
       Placement(visible = true, transformation(origin = {-73, 51}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     PNlib.Components.T T13(nIn = 1, nOut = 1, firingCon = u[1] and u[4] and u[7] and u[10] and u[13]) annotation(
       Placement(visible = true, transformation(origin = {-73, 37}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
-    PNlib.Components.T T14(nIn = 1, nOut = 1, firingCon=TAirOutside<=283.15", firingCon= weaBus.DryBulbTemp<=283.15") annotation(
+    PNlib.Components.T T14(nIn = 1, nOut = 1, firingCon = TAirOutside <= 283.15 ", firingCon= weaBus.DryBulbTemp<=283.15") annotation(
       Placement(visible = true, transformation(origin = {-47, 57}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
-    PNlib.Components.T T15(nIn = 1, nOut = 1 ,firingCon=TAirOutside>283.15", firingCon=weaBus.DryBulbTemp>283.15") annotation(
+    PNlib.Components.T T15(nIn = 1, nOut = 1, firingCon = TAirOutside > 283.15 ", firingCon=weaBus.DryBulbTemp>283.15") annotation(
       Placement(visible = true, transformation(origin = {-61, 57}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
     PNlib.Components.T T16(nIn = 1, nOut = 1, firingCon = u[1] and u[4] and u[7] and u[10] and u[13]) annotation(
       Placement(visible = true, transformation(origin = {59, 39}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
@@ -1463,9 +1436,9 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Placement(visible = true, transformation(origin = {78, 46}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
     PNlib.Components.T T17(nIn = 1, nOut = 1, firingCon = u[2] or u[5] or u[8] or u[11] or u[14] "and weaBus.DryBulbTemp>283.15") annotation(
       Placement(visible = true, transformation(origin = {59, 53}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
-    PNlib.Components.T T18(nIn = 1, nOut = 1, firingCon=TAirOutside<=283.15 ", firingCon=weaBus.DryBulbTemp<=283.15") annotation(
+    PNlib.Components.T T18(nIn = 1, nOut = 1, firingCon = TAirOutside <= 283.15 ", firingCon=weaBus.DryBulbTemp<=283.15") annotation(
       Placement(visible = true, transformation(origin = {71, 59}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
-    PNlib.Components.T T19(nIn = 1, nOut = 1 ,firingCon=TAirOutside>283.15 ", firingCon=weaBus.DryBulbTemp>283.15") annotation(
+    PNlib.Components.T T19(nIn = 1, nOut = 1, firingCon = TAirOutside > 283.15 ", firingCon=weaBus.DryBulbTemp>283.15") annotation(
       Placement(visible = true, transformation(origin = {85, 59}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
     PNlib.Components.PD HP_Off(nIn = 3, nOut = 3, startTokens = 1) annotation(
       Placement(visible = true, transformation(origin = {44, 60}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
@@ -1475,7 +1448,7 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Placement(visible = true, transformation(origin = {78, 74}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
     PNlib.Components.T T111(nIn = 1, nOut = 1, firingCon = u[1] and u[4] and u[7] and u[10] and u[13]) annotation(
       Placement(visible = true, transformation(origin = {59, 81}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
-    PNlib.Components.T T112(nIn = 1, nOut = 1,  firingCon = u[3] or u[6] or u[9] or u[12] or u[15]) annotation(
+    PNlib.Components.T T112(nIn = 1, nOut = 1, firingCon = u[3] or u[6] or u[9] or u[12] or u[15]) annotation(
       Placement(visible = true, transformation(origin = {29, 67}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
     PNlib.Components.T T113(nIn = 1, nOut = 1, firingCon = u[1] and u[4] and u[7] and u[10] and u[13]) annotation(
       Placement(visible = true, transformation(origin = {29, 53}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
@@ -1483,7 +1456,7 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Placement(visible = true, transformation(origin = {14, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
     PNlib.Components.PD GTF_On(nIn = 1, nOut = 1) annotation(
       Placement(visible = true, transformation(origin = {-82, -32}, extent = {{-6, -6}, {6, 6}}, rotation = 180)));
-    PNlib.Components.T T114(nIn = 1, nOut = 1, firingCon = u[3] or u[6] or u[9] or u[12] or u[15] or HP_Heating_II.t>0.5 or HP_Heating_I.t>0.5) annotation(
+    PNlib.Components.T T114(nIn = 1, nOut = 1, firingCon = u[3] or u[6] or u[9] or u[12] or u[15] or HP_Heating_II.t > 0.5 or HP_Heating_I.t > 0.5) annotation(
       Placement(visible = true, transformation(origin = {-75, -15}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
     PNlib.Components.T T115(nIn = 1, nOut = 1, firingCon = u[1] and u[4] and u[7] and u[10] and u[13]) annotation(
       Placement(visible = true, transformation(origin = {-89, -15}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
@@ -1517,7 +1490,7 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     Modelica.Blocks.Math.RealToBoolean realToBoolean[29](each threshold = 0.5) annotation(
       Placement(visible = true, transformation(origin = {-1, -85}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
-  Modelica.Blocks.Interfaces.RealInput TAirOutside "Outside Air Temperature" annotation(
+    Modelica.Blocks.Interfaces.RealInput TAirOutside "Outside Air Temperature" annotation(
       Placement(visible = true, transformation(origin = {214, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 180), iconTransformation(origin = {214, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 180)));
   equation
     connect(realToBoolean[29].y, y[29]) annotation(
@@ -1579,8 +1552,8 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
     connect(realToBoolean[1].y, y[1]) annotation(
       Line(points = {{-1, -93}, {-1, -101}, {0, -101}, {0, -110}}, color = {255, 0, 255}, thickness = 0.5));
     realToBoolean[1].u = HTS_Off.t;
-  realToBoolean[2].u = HTS_Heating_I.t;
-  realToBoolean[3].u = HTS_Heating_II.t;
+    realToBoolean[2].u = HTS_Heating_I.t;
+    realToBoolean[3].u = HTS_Heating_II.t;
     realToBoolean[4].u = HP_Off.t;
     realToBoolean[5].u = HP_Heating_I.t;
     realToBoolean[6].u = HP_Heating_II.t;
@@ -1703,21 +1676,21 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Line(points = {{52, -14}, {38, -14}, {38, -14}, {38, -14}}, thickness = 0.5));
     connect(Off[1].outTransition[1], T121[1].inPlaces[1]) annotation(
       Line(points = {{38, -2}, {52, -2}, {52, 0}, {52, 0}}, thickness = 0.5));
-  connect(HTS_Heating_I.outTransition[2], T14.inPlaces[1]) annotation(
+    connect(HTS_Heating_I.outTransition[2], T14.inPlaces[1]) annotation(
       Line(points = {{-54, 78}, {-46, 78}, {-46, 60}, {-46, 60}, {-46, 60}}, thickness = 0.5));
-  connect(T15.outPlaces[1], HTS_Heating_I.inTransition[2]) annotation(
+    connect(T15.outPlaces[1], HTS_Heating_I.inTransition[2]) annotation(
       Line(points = {{-60, 60}, {-62, 60}, {-62, 66}, {-54, 66}, {-54, 66}}, thickness = 0.5));
-  connect(HTS_Heating_I.outTransition[1], T1.inPlaces[1]) annotation(
+    connect(HTS_Heating_I.outTransition[1], T1.inPlaces[1]) annotation(
       Line(points = {{-54, 78}, {-70, 78}, {-70, 80}, {-70, 80}}, thickness = 0.5));
-  connect(T11.outPlaces[1], HTS_Heating_I.inTransition[2]) annotation(
+    connect(T11.outPlaces[1], HTS_Heating_I.inTransition[2]) annotation(
       Line(points = {{-70, 66}, {-54, 66}, {-54, 66}, {-54, 66}}, thickness = 0.5));
-  connect(T15.inPlaces[1], HTS_Heating_II.outTransition[2]) annotation(
+    connect(T15.inPlaces[1], HTS_Heating_II.outTransition[2]) annotation(
       Line(points = {{-60, 54}, {-62, 54}, {-62, 38}, {-54, 38}, {-54, 38}}, thickness = 0.5));
-  connect(T14.outPlaces[1], HTS_Heating_II.inTransition[2]) annotation(
+    connect(T14.outPlaces[1], HTS_Heating_II.inTransition[2]) annotation(
       Line(points = {{-46, 54}, {-48, 54}, {-48, 52}, {-54, 52}, {-54, 52}, {-54, 52}, {-54, 50}}, thickness = 0.5));
-  connect(T13.inPlaces[1], HTS_Heating_II.outTransition[1]) annotation(
+    connect(T13.inPlaces[1], HTS_Heating_II.outTransition[1]) annotation(
       Line(points = {{-70, 38}, {-54, 38}, {-54, 38}, {-54, 38}}, thickness = 0.5));
-  connect(T12.outPlaces[1], HTS_Heating_II.inTransition[1]) annotation(
+    connect(T12.outPlaces[1], HTS_Heating_II.inTransition[1]) annotation(
       Line(points = {{-70, 52}, {-54, 52}, {-54, 50}, {-54, 50}}, thickness = 0.5));
     connect(HTS_Off.inTransition[2], T13.outPlaces[1]) annotation(
       Line(points = {{-94, 58}, {-94, 58}, {-94, 36}, {-76, 36}, {-76, 38}}, thickness = 0.5));
@@ -1778,92 +1751,83 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
     annotation(
       uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),
       Diagram(graphics = {Text(origin = {-69, 93}, extent = {{-21, 5}, {13, -3}}, textString = "HTS_System"), Text(origin = {59, 93}, extent = {{-21, 5}, {13, -3}}, textString = "HP_System"), Text(origin = {-75, 15}, extent = {{-21, 5}, {13, -3}}, textString = "GTF_System"), Text(origin = {-39, 15}, extent = {{-21, 5}, {13, -3}}, textString = "HX"), Text(origin = {45, 17}, extent = {{-21, 5}, {13, -3}}, textString = "Senken")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
-  Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-110, 34}, extent = {{-42, 12}, {250, -78}}, textString = "Automatisierungsebene")}, coordinateSystem(extent = {{-200, -100}, {200, 100}}, initialScale = 0.1)),
+      Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-110, 34}, extent = {{-42, 12}, {250, -78}}, textString = "Automatisierungsebene")}, coordinateSystem(extent = {{-200, -100}, {200, 100}}, initialScale = 0.1)),
       __OpenModelica_commandLineOptions = "",
-  Documentation(info = "<html><head></head><body>Struktur Output-Vektor<div><br></div><div>HTS_Off</div><div>HTS_Heating_I</div><div>HTS_Heating_II</div><div><br></div><div>HP_Off</div><div>HP_Heating_I</div><div>HP_Heating_II</div><div>HP_Cooling</div><div><br></div><div>GTF_Off</div><div>GTF_On</div><div><br></div><div>HX_Off</div><div>HX_On</div><div><br></div><div>Off[1]</div><div>Heating[1]</div><div>Cooling[1]</div><div><br></div><div><div>Off[2]</div><div>Heating[2]</div><div>Cooling[2]</div></div><div><br></div><div><div>Off[3]</div><div>Heating[3]</div><div>Cooling[3]</div></div><div><br></div><div><div>Off[4]</div><div>Heating[4]</div><div>Cooling[4]</div></div><div><br></div><div><div>Off[5]</div><div>Heating[5]</div><div>Cooling[5]</div></div><div><br></div><div><div>Off[6]</div><div>Heating[6]</div><div>Cooling[6]</div></div><div><br></div><div>(Off/Heating/Cooling 1-5 bestimmen den Betriebsmodus der VU/Tabs Module der Räume</div><div>Off/Heating/Cooling 6 bestimmt den Betriebsmodus der zentralen AHU unit)</div></body></html>"));
+      Documentation(info = "<html><head></head><body>Struktur Output-Vektor<div><br></div><div>HTS_Off</div><div>HTS_Heating_I</div><div>HTS_Heating_II</div><div><br></div><div>HP_Off</div><div>HP_Heating_I</div><div>HP_Heating_II</div><div>HP_Cooling</div><div><br></div><div>GTF_Off</div><div>GTF_On</div><div><br></div><div>HX_Off</div><div>HX_On</div><div><br></div><div>Off[1]</div><div>Heating[1]</div><div>Cooling[1]</div><div><br></div><div><div>Off[2]</div><div>Heating[2]</div><div>Cooling[2]</div></div><div><br></div><div><div>Off[3]</div><div>Heating[3]</div><div>Cooling[3]</div></div><div><br></div><div><div>Off[4]</div><div>Heating[4]</div><div>Cooling[4]</div></div><div><br></div><div><div>Off[5]</div><div>Heating[5]</div><div>Cooling[5]</div></div><div><br></div><div><div>Off[6]</div><div>Heating[6]</div><div>Cooling[6]</div></div><div><br></div><div>(Off/Heating/Cooling 1-5 bestimmen den Betriebsmodus der VU/Tabs Module der Räume</div><div>Off/Heating/Cooling 6 bestimmt den Betriebsmodus der zentralen AHU unit)</div></body></html>"));
   end AutomationLevel_MODImethod;
 
   model Test
-  AixLib.Systems.Benchmark_fb.MODI.ManagementEbene_Temp managementEbene_Temp1 annotation(
+    AixLib.Systems.Benchmark_fb.MODI.ManagementEbene_Temp managementEbene_Temp1 annotation(
       Placement(visible = true, transformation(origin = {-20, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Sine sine1(amplitude = 5, freqHz = 1 / 86400, offset = 293.15, startTime = 21600)  annotation(
+    Modelica.Blocks.Sources.Sine sine1(amplitude = 5, freqHz = 1 / 86400, offset = 293.15, startTime = 21600) annotation(
       Placement(visible = true, transformation(origin = {30, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  AixLib.Systems.Benchmark_fb.MODI.AutomationLevel_MODImethod automationLevel_MODImethod1 annotation(
-      Placement(visible = true, transformation(origin = {-20,-10}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Sine sine2(amplitude = 10, freqHz = 1 / 86400, offset = 288.15, startTime = 21600) annotation(
+    AixLib.Systems.Benchmark_fb.MODI.AutomationLevel_MODImethod automationLevel_MODImethod1 annotation(
+      Placement(visible = true, transformation(origin = {-20, -10}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.Sine sine2(amplitude = 10, freqHz = 1 / 86400, offset = 288.15, startTime = 21600) annotation(
       Placement(visible = true, transformation(origin = {30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   equation
     connect(managementEbene_Temp1.y[1], automationLevel_MODImethod1.u[1]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[2], automationLevel_MODImethod1.u[2]) annotation(
+    connect(managementEbene_Temp1.y[2], automationLevel_MODImethod1.u[2]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[3], automationLevel_MODImethod1.u[3]) annotation(
+    connect(managementEbene_Temp1.y[3], automationLevel_MODImethod1.u[3]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[4], automationLevel_MODImethod1.u[4]) annotation(
+    connect(managementEbene_Temp1.y[4], automationLevel_MODImethod1.u[4]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[5], automationLevel_MODImethod1.u[5]) annotation(
+    connect(managementEbene_Temp1.y[5], automationLevel_MODImethod1.u[5]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[6], automationLevel_MODImethod1.u[6]) annotation(
+    connect(managementEbene_Temp1.y[6], automationLevel_MODImethod1.u[6]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[7], automationLevel_MODImethod1.u[7]) annotation(
+    connect(managementEbene_Temp1.y[7], automationLevel_MODImethod1.u[7]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[8], automationLevel_MODImethod1.u[8]) annotation(
+    connect(managementEbene_Temp1.y[8], automationLevel_MODImethod1.u[8]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[9], automationLevel_MODImethod1.u[9]) annotation(
+    connect(managementEbene_Temp1.y[9], automationLevel_MODImethod1.u[9]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[10], automationLevel_MODImethod1.u[10]) annotation(
+    connect(managementEbene_Temp1.y[10], automationLevel_MODImethod1.u[10]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[11], automationLevel_MODImethod1.u[12]) annotation(
+    connect(managementEbene_Temp1.y[11], automationLevel_MODImethod1.u[12]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[12], automationLevel_MODImethod1.u[12]) annotation(
+    connect(managementEbene_Temp1.y[12], automationLevel_MODImethod1.u[12]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[13], automationLevel_MODImethod1.u[13]) annotation(
+    connect(managementEbene_Temp1.y[13], automationLevel_MODImethod1.u[13]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[14], automationLevel_MODImethod1.u[14]) annotation(
+    connect(managementEbene_Temp1.y[14], automationLevel_MODImethod1.u[14]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-      connect(managementEbene_Temp1.y[15], automationLevel_MODImethod1.u[15]) annotation(
+    connect(managementEbene_Temp1.y[15], automationLevel_MODImethod1.u[15]) annotation(
       Line(points = {{-20, 20}, {-20, 20}, {-20, 2}, {-20, 2}}, color = {255, 0, 255}, thickness = 0.5));
-     
-      
-      
     connect(sine2.y, automationLevel_MODImethod1.TAirOutside) annotation(
       Line(points = {{20, -10}, {2, -10}, {2, -10}, {2, -10}}, color = {0, 0, 127}));
-  connect(sine1.y, managementEbene_Temp1.TRoomMea[5]) annotation(
+    connect(sine1.y, managementEbene_Temp1.TRoomMea[5]) annotation(
       Line(points = {{19, 50}, {-20, 50}, {-20, 42}}, color = {0, 0, 127}));
-  connect(sine1.y, managementEbene_Temp1.TRoomMea[4]) annotation(
+    connect(sine1.y, managementEbene_Temp1.TRoomMea[4]) annotation(
       Line(points = {{19, 50}, {-20, 50}, {-20, 42}}, color = {0, 0, 127}));
-  connect(sine1.y, managementEbene_Temp1.TRoomMea[3]) annotation(
+    connect(sine1.y, managementEbene_Temp1.TRoomMea[3]) annotation(
       Line(points = {{19, 50}, {-20, 50}, {-20, 42}}, color = {0, 0, 127}));
-  connect(sine1.y, managementEbene_Temp1.TRoomMea[2]) annotation(
+    connect(sine1.y, managementEbene_Temp1.TRoomMea[2]) annotation(
       Line(points = {{19, 50}, {-20, 50}, {-20, 42}}, color = {0, 0, 127}));
-  connect(sine1.y, managementEbene_Temp1.TRoomMea[1]) annotation(
+    connect(sine1.y, managementEbene_Temp1.TRoomMea[1]) annotation(
       Line(points = {{19, 50}, {-20, 50}, {-20, 42}}, color = {0, 0, 127}));
   end Test;
 
   model Controller_HTSSystem
-    Modelica.Blocks.Sources.Constant rpmPumps(k=3000)
-      annotation (Placement(visible = true, transformation(extent = {{20, 30}, {40, 50}}, rotation = 0)));
-    Modelica.Blocks.Sources.Constant TChpSet(final k=T_chp_set)
-      annotation (Placement(visible = true, transformation(extent = {{18, -50}, {38, -30}}, rotation = 0)));
-    AixLib.Controls.Continuous.LimPID PIDBoiler(
-      final yMax=1,
-      final yMin=0,
-      final controllerType=Modelica.Blocks.Types.SimpleController.PID,
-      k=0.01,
-      Ti=60,
-      Td=0,
-      final reverseAction=false) annotation (Placement(visible = true, transformation(extent = {{20, -10}, {40, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Constant TBoilerSet_out(final k=T_boi_set)
-      annotation (Placement(visible = true, transformation(extent = {{-20, -10}, {0, 10}}, rotation = 0)));
-    parameter Real T_boi_set=273.15 + 80 "Set point temperature of boiler";
-    parameter Real T_chp_set=333.15 "Set point temperature of chp";
-  AixLib.Systems.Benchmark.BaseClasses.HighTempSystemBus highTempSystemBus1 annotation(
+    Modelica.Blocks.Sources.Constant rpmPumps(k = 3000) annotation(
+      Placement(visible = true, transformation(extent = {{20, 30}, {40, 50}}, rotation = 0)));
+    Modelica.Blocks.Sources.Constant TChpSet(final k = T_chp_set) annotation(
+      Placement(visible = true, transformation(extent = {{18, -50}, {38, -30}}, rotation = 0)));
+    AixLib.Controls.Continuous.LimPID PIDBoiler(final yMax = 1, final yMin = 0, final controllerType = Modelica.Blocks.Types.SimpleController.PID, k = 0.01, Ti = 60, Td = 0, final reverseAction = false) annotation(
+      Placement(visible = true, transformation(extent = {{20, -10}, {40, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.Constant TBoilerSet_out(final k = T_boi_set) annotation(
+      Placement(visible = true, transformation(extent = {{-20, -10}, {0, 10}}, rotation = 0)));
+    parameter Real T_boi_set = 273.15 + 80 "Set point temperature of boiler";
+    parameter Real T_chp_set = 333.15 "Set point temperature of chp";
+    AixLib.Systems.Benchmark.BaseClasses.HighTempSystemBus highTempSystemBus1 annotation(
       Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_I annotation(
+    Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_I annotation(
       Placement(visible = true, transformation(origin = {114, 60}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {114, 60}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
-  Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_II annotation(
+    Modelica.Blocks.Interfaces.BooleanInput HTS_Heating_II annotation(
       Placement(visible = true, transformation(origin = {114, -60}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {114, -60}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
-  Modelica.Blocks.Logical.Or or1 annotation(
+    Modelica.Blocks.Logical.Or or1 annotation(
       Placement(visible = true, transformation(origin = {-70, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(HTS_Heating_II, highTempSystemBus1.pumpBoilerBus.pumpBus.onSet) annotation(
@@ -1888,17 +1852,12 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       Line(points = {{41, 40}, {100, 40}, {100, 0}}, color = {0, 0, 127}));
     connect(rpmPumps.y, highTempSystemBus1.pumpBoilerBus.pumpBus.rpmSet) annotation(
       Line(points = {{41, 40}, {100, 40}, {100, 0}}, color = {0, 0, 127}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={
-                                           Line(
-            points={{20,80},{80,0},{40,-80}},
-            color={95,95,95},
-            thickness=0.5),
-Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-80, 20}, {66, -20}}, textString = "Control"), Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-30, 0},lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {98, -16}}, textString = "Controller HTS_System")}),
-                              Diagram(coordinateSystem(preserveAspectRatio=false)));
-
+    annotation(
+      Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Line(points = {{20, 80}, {80, 0}, {40, -80}}, color = {95, 95, 95}, thickness = 0.5), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-80, 20}, {66, -20}}, textString = "Control"), Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-30, 0}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {98, -16}}, textString = "Controller HTS_System")}),
+      Diagram(coordinateSystem(preserveAspectRatio = false)));
   end Controller_HTSSystem;
 
-  package Ebenen
+  package Level
     model AutomationLevel_MODImethod
       PNlib.Components.PD HTS_Heating_II(nIn = 2, nOut = 2) annotation(
         Placement(visible = true, transformation(origin = {-54, 44}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
@@ -2239,7 +2198,7 @@ Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPa
       annotation(
         uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),
         Diagram(graphics = {Text(origin = {-69, 93}, extent = {{-21, 5}, {13, -3}}, textString = "HTS_System"), Text(origin = {59, 93}, extent = {{-21, 5}, {13, -3}}, textString = "HP_System"), Text(origin = {-75, 15}, extent = {{-21, 5}, {13, -3}}, textString = "GTF_System"), Text(origin = {-39, 15}, extent = {{-21, 5}, {13, -3}}, textString = "HX"), Text(origin = {45, 17}, extent = {{-21, 5}, {13, -3}}, textString = "Senken")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-110, 34}, extent = {{-42, 12}, {250, -78}}, textString = "Automatisierungsebene")}, coordinateSystem(extent = {{-200, -100}, {200, 100}}, initialScale = 0.1)),
+        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-110, 34}, lineColor = {95, 95, 95}, extent = {{-42, 12}, {250, -78}}, textString = "Automation- \n Level")}, coordinateSystem(extent = {{-200, -100}, {200, 100}}, initialScale = 0.1)),
         __OpenModelica_commandLineOptions = "",
         Documentation(info = "<html><head></head><body>Struktur Output-Vektor<div><br></div><div>HTS_Off</div><div>HTS_Heating_I</div><div>HTS_Heating_II</div><div><br></div><div>HP_Off</div><div>HP_Heating_I</div><div>HP_Heating_II</div><div>HP_Cooling</div><div><br></div><div>GTF_Off</div><div>GTF_On</div><div><br></div><div>HX_Off</div><div>HX_On</div><div><br></div><div>Off[1]</div><div>Heating[1]</div><div>Cooling[1]</div><div><br></div><div><div>Off[2]</div><div>Heating[2]</div><div>Cooling[2]</div></div><div><br></div><div><div>Off[3]</div><div>Heating[3]</div><div>Cooling[3]</div></div><div><br></div><div><div>Off[4]</div><div>Heating[4]</div><div>Cooling[4]</div></div><div><br></div><div><div>Off[5]</div><div>Heating[5]</div><div>Cooling[5]</div></div><div><br></div><div><div>Off[6]</div><div>Heating[6]</div><div>Cooling[6]</div></div><div><br></div><div>(Off/Heating/Cooling 1-5 bestimmen den Betriebsmodus der VU/Tabs Module der Räume</div><div>Off/Heating/Cooling 6 bestimmt den Betriebsmodus der zentralen AHU unit)</div></body></html>"));
     end AutomationLevel_MODImethod;
@@ -3041,8 +3000,7 @@ Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPa
       connect(RLT_Heating_I[1].outTransition[1], T11[1].inPlaces[1]) annotation(
         Line(points = {{-54.8, 110}, {-64, 110}, {-64, 117.5}, {-75.2, 117.5}}, thickness = 0.5));
       annotation(
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-250, 150}, {250, -150}}), Text(origin = {-52, 6}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-68, 30}, {170, -46}}, textString = "Automatisierungs-
-Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
+        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-250, 150}, {250, -150}}), Text(origin = {-52, 6}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-68, 30}, {170, -46}}, textString = "Automation- \n Level")}, coordinateSystem(extent = {{-250, -150}, {250, 150}}, initialScale = 0.1)),
         Diagram(graphics = {Text(origin = {-177, 139}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_RLT_cooling"), Text(origin = {-77, 139}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_RLT_heating"), Text(origin = {-131, 31}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_BKT"), Text(origin = {69, 133}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_HTSsystem"), Text(origin = {195, 129}, extent = {{-27, 5}, {27, -5}}, textString = "MODI_selection_HPsystem_warm")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
         __OpenModelica_commandLineOptions = "");
     end AutomatisierungsebeneV2;
@@ -3339,7 +3297,7 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
         Line(points = {{184, -10.8}, {184, -30}, {148.8, -30}}, color = {0, 0, 0}));
       annotation(
         Line(points = {{-60, -106}, {-60, -106}}, color = {255, 127, 0}),
-        Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}}), graphics = {Rectangle(extent = {{-200, 100}, {200, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{-162, 34}, {152, -28}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, textString = "Management-Ebene")}),
+        Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}}, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-162, 34}, {152, -28}}, textString = "Management- \n Level \n Temperature \n and Humidity")}),
         Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}})),
         Documentation(info = "<html><head></head><body><div>Struktur des Output-Vektors (oben nach unten)</div><div><br></div><div>Workshop_Off</div><div>Workshop_Heating</div><div>Workshop_Cooling</div><div>Canteen_Off</div><div>Canteen_Heating</div><div>Canteen_Cooling</div><div>ConferenceRoom_Off</div><div>ConferenceRoom_Heating</div><div>ConferenceRoom_Cooling</div><div>MultipersonOffice_Off</div><div>MultipersonOffice_Heating</div><div>MultipersonOffice_Cooling</div><div>OpenplanOffice_Off</div><div><div style=\"font-size: 12px;\"><div>OpenplanOffice_Heating</div><div></div></div><div style=\"font-size: 12px;\">OpenplanOffice_Cooling</div></div><div><div>Workshop_Off</div><div>Workshop_Humidifying</div><div>Workshop_Dehumidifying</div><div>Canteen_Off</div><div>Canteen_Humidifying</div><div>Canteen_Dehumidifying</div><div>ConferenceRoom_Off</div><div>ConferenceRoom_Humidifying</div><div>ConferenceRoom_Dehumidifying</div><div>MultipersonOffice_Off</div><div>MultipersonOffice_Humidifying</div><div>MultipersonOffice_Dehumidifying</div><div>OpenplanOffice_Off</div><div><div style=\"font-size: 12px;\"><div>OpenplanOffice_<span style=\"font-size: medium;\">Humidifying</span></div><div></div></div><div style=\"font-size: 12px;\">OpenplanOffice_Dehumidifying</div></div></div></body></html>"),
         __OpenModelica_commandLineOptions = "");
@@ -3494,7 +3452,7 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
         Line(points = {{-82, 8.8}, {-82, 27.8}, {-65.5, 27.8}, {-65.5, 30}, {-49, 30}}));
       annotation(
         Line(points = {{-60, -106}, {-60, -106}}, color = {255, 127, 0}),
-        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-162, 34}, {152, -28}}, textString = "Managementebene")}),
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(lineColor = {95, 95, 95},fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-162, 34}, {152, -28}}, textString = "Management- \n Level")}),
         Diagram(coordinateSystem(preserveAspectRatio = false)),
         Documentation(info = "<html><head></head><body>Struktur des MODI_Temperature-Output-Vektors (Einträge von oben nach unten):<div><br></div><div>Workshop_Off</div><div>Workshop_Heating</div><div>Workshop_Cooling</div><div>Canteen_Off</div><div>Canteen_Heating</div><div>Canteen_Cooling</div><div>ConferenceRoom_Off</div><div>ConferenceRoom_Heating</div><div>ConferenceRoom_Cooling</div><div>MultipersonOffice_Off</div><div>MultipersonOffice_Heating</div><div>MultipersonOffice_Cooling</div><div>OpenplanOffice_Off</div><div><div><div>OpenplanOffice_Heating</div><div></div></div><div>OpenplanOffice_Cooling</div><div><br></div><div><br></div><div><br></div></div><div><div><br></div><div><br></div><div><br></div><div><br></div></div><div><br></div></body></html>"),
         __OpenModelica_commandLineOptions = "");
@@ -3516,15 +3474,28 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
         Placement(visible = true, transformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
       AixLib.Systems.Benchmark.Controller.CtrTabs2 ctrTabs21 annotation(
         Placement(visible = true, transformation(origin = {-110, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller_HTSSystem controller_HTSSystem1(T_boi_set = 273.15 + 80, T_chp_set = 333.15) annotation(
-        Placement(visible = true, transformation(origin = {-70, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       AixLib.Systems.Benchmark.Controller.CtrHTSSystem ctrHTSSystem1 annotation(
         Placement(visible = true, transformation(origin = {-110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_GTFSystem controller_GTFSystem1 annotation(
         Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_HPSystem controller_HPSystem1 annotation(
+      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_HPSystem controller_HPSystem1 annotation(
         Placement(visible = true, transformation(origin = {-70, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_SwitchingUnit controller_SwitchingUnit1 annotation(
+        Placement(visible = true, transformation(origin = {-70, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_HTSSystem controller_HTSSystem1 annotation(
+        Placement(visible = true, transformation(origin = {-70, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_VU controller_VU_Room11 annotation(
+        Placement(visible = true, transformation(origin = {30, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    
     equation
+      connect(u[14], controller_VU_Room11.Cooling) annotation(
+        Line(points = {{0, 114}, {0, 114}, {0, 40}, {60, 40}, {60, 2}, {40, 2}, {40, 2}}, color = {255, 0, 255}));
+      connect(u[13], controller_VU_Room11.Heating) annotation(
+        Line(points = {{0, 114}, {0, 114}, {0, 40}, {60, 40}, {60, 6}, {40, 6}, {40, 6}}, color = {255, 0, 255}));
+      connect(u[3], controller_HTSSystem1.HTS_Heating_II) annotation(
+        Line(points = {{0, 114}, {0, 114}, {0, 84}, {-58, 84}, {-58, 84}}, color = {255, 0, 255}));
+      connect(u[2], controller_HTSSystem1.HTS_Heating_I) annotation(
+        Line(points = {{0, 114}, {0, 114}, {0, 96}, {-58, 96}, {-58, 96}}, color = {255, 0, 255}));
       connect(u[7], controller_HPSystem1.HP_Cooling) annotation(
         Line(points = {{0, 114}, {0, 44}, {-60, 44}}, color = {255, 0, 255}));
       connect(u[6], controller_HPSystem1.HP_Heating_II) annotation(
@@ -3539,19 +3510,15 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
         Line(points = {{-60, 64}, {100, 64}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
       connect(highTempSystemBus1, mainBus1.htsBus) annotation(
         Line(points = {{-60, 90}, {100, 90}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
-      connect(u[2], controller_HTSSystem1.HTS_Heating_I) annotation(
-        Line(points = {{0, 114}, {0, 96}, {-59, 96}}, color = {255, 0, 255}));
-      connect(u[3], controller_HTSSystem1.HTS_Heating_II) annotation(
-        Line(points = {{0, 114}, {0, 84}, {-59, 84}}, color = {255, 0, 255}));
       connect(mainBus1.htsBus, highTempSystemBus1) annotation(
         Line(points = {{100, 0}, {100, 0}, {100, 70}, {-60, 70}, {-60, 70}}, color = {255, 204, 51}, thickness = 0.5));
       connect(or1.y, htsBus.onOffChpSet) annotation(
         Line(points = {{-72, 70}, {-80, 70}, {-80, 70}, {-80, 70}}, color = {255, 0, 255}));
       annotation(
-        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-34, 16}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-74, 24}, {150, -48}}, textString = "Feldebene")}),
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-200, 100}, {200, -100}}), Text(origin = {-34, 16}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-74, 24}, {150, -48}}, textString = "Field- \n Level")}),
         Diagram(coordinateSystem(preserveAspectRatio = false)));
     end Feldebene;
-  end Ebenen;
+  end Level;
 
   package Controller
     model Controller_HTSSystem
@@ -3597,21 +3564,19 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
       connect(rpmPumps.y, highTempSystemBus1.pumpBoilerBus.pumpBus.rpmSet) annotation(
         Line(points = {{41, 40}, {100, 40}, {100, 0}}, color = {0, 0, 127}));
       annotation(
-        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Line(points = {{20, 80}, {80, 0}, {40, -80}}, color = {95, 95, 95}, thickness = 0.5), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-80, 20}, {66, -20}}, textString = "Control"), Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-30, 0}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {98, -16}}, textString = "Controller HTS_System")}),
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Line(points = {{20, 80}, {80, 0}, {40, -80}}, color = {95, 95, 95}, thickness = 0.5), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-80, 20}, {66, -20}}, textString = "Control"), Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-52, 22}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {152, -64}}, textString = "Controller \n HTSSystem")}),
         Diagram(coordinateSystem(preserveAspectRatio = false)));
     end Controller_HTSSystem;
 
     model Controller_GTFSystem
-     Modelica.Blocks.Math.BooleanToReal booleanToReal
-        annotation (Placement(visible = true, transformation(origin = {50, 10},extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-      Modelica.Blocks.Interfaces.BooleanInput GTF_On
-                                       "Connector of Boolean input signal"
-        annotation (Placement(visible = true,transformation(origin = {108, 60}, extent = {{-12, -12}, {12, 12}}, rotation = 180),
-            iconTransformation(origin = {108, 60}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
-      Modelica.Blocks.Sources.Constant rpm(k=rpmPump)
-        annotation (Placement(visible = true, transformation(extent = {{0, -70}, {20, -50}}, rotation = 0)));
-      parameter Real rpmPump(min=0, unit="1") = 2100 "Rpm of the pump";
-  AixLib.Systems.EONERC_MainBuilding.BaseClasses.TwoCircuitBus gtfBus annotation(
+      Modelica.Blocks.Math.BooleanToReal booleanToReal annotation(
+        Placement(visible = true, transformation(origin = {50, 10}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Blocks.Interfaces.BooleanInput GTF_On "Connector of Boolean input signal" annotation(
+        Placement(visible = true, transformation(origin = {108, 60}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {108, 60}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
+      Modelica.Blocks.Sources.Constant rpm(k = rpmPump) annotation(
+        Placement(visible = true, transformation(extent = {{0, -70}, {20, -50}}, rotation = 0)));
+      parameter Real rpmPump(min = 0, unit = "1") = 2100 "Rpm of the pump";
+      AixLib.Systems.EONERC_MainBuilding.BaseClasses.TwoCircuitBus gtfBus annotation(
         Placement(visible = true, transformation(origin = {100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       connect(rpm.y, gtfBus.primBus.pumpBus.rpmSet) annotation(
@@ -3622,47 +3587,176 @@ Ebene")}, coordinateSystem(extent = {{-250, -150}, {250, 150}})),
         Line(points = {{50, -1}, {50, -60}, {100, -60}}, color = {0, 0, 127}));
       connect(booleanToReal.u, GTF_On) annotation(
         Line(points = {{50, 22}, {50, 60}, {108, 60}}, color = {255, 0, 255}));
-      annotation (Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={
-                                             Line(
-              points={{20,80},{80,0},{40,-80}},
-              color={95,95,95},
-              thickness=0.5),
-Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-80, 20}, {66, -20}}, textString = "Control"), Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-26, 2},lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 22}, {98, -18}}, textString = "Controller_GTFSystem")}),
-                                    Diagram(coordinateSystem(preserveAspectRatio=
-                false)),
-        Documentation(revisions="<html>
+      annotation(
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Line(points = {{20, 80}, {80, 0}, {40, -80}}, color = {95, 95, 95}, thickness = 0.5), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-80, 20}, {66, -20}}, textString = "Control"), Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-56, 36}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-44, 22}, {152, -92}}, textString = "Controller \n GTFSystem")}),
+        Diagram(coordinateSystem(preserveAspectRatio = false)),
+        Documentation(revisions = "<html>
     <ul>
     <li>January 22, 2019, by Alexander K&uuml;mpel:<br/>External T_set added.</li>
     <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
     </ul>
-    </html>", info="<html>
+    </html>", info = "<html>
     <p>Simple controller for admix and injection circuit. The controlled variable is the outflow temperature T_fwrd_out.</p>
     </html>"));
-
     end Controller_GTFSystem;
 
     model Controller_HPSystem
-    Modelica.Blocks.Interfaces.BooleanInput HP_Heating_II annotation(
+      Modelica.Blocks.Interfaces.BooleanInput HP_Heating_II annotation(
         Placement(visible = true, transformation(origin = {106, 40}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, 40}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
-  Modelica.Blocks.Interfaces.BooleanInput HP_Heating_I annotation(
+      Modelica.Blocks.Interfaces.BooleanInput HP_Heating_I annotation(
         Placement(visible = true, transformation(origin = {106, 80}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, 80}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
-  Modelica.Blocks.Interfaces.BooleanInput HP_Cooling annotation(
+      Modelica.Blocks.Interfaces.BooleanInput HP_Cooling annotation(
         Placement(visible = true, transformation(origin = {104, -60}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {104, -60}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
-  AixLib.Systems.EONERC_MainBuilding.BaseClasses.HeatPumpSystemBus heatPumpSystemBus1 annotation(
+      AixLib.Systems.EONERC_MainBuilding.BaseClasses.HeatPumpSystemBus heatPumpSystemBus1 annotation(
         Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
-annotation (Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-24, -2},lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {98, -16}}, textString = "Controller_HPSystem")}),                               Diagram(
-            coordinateSystem(preserveAspectRatio=false)));
+
+      annotation(
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-50, 26}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {150, -72}}, textString = "Controller \n HPSystem")}),
+        Diagram(coordinateSystem(preserveAspectRatio = false)));
     end Controller_HPSystem;
 
     model Controller_SwitchingUnit
-    AixLib.Systems.EONERC_MainBuilding.BaseClasses.SwitchingUnitBus switchingUnitBus1 annotation(
+      AixLib.Systems.EONERC_MainBuilding.BaseClasses.SwitchingUnitBus switchingUnitBus1 annotation(
         Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.BooleanInput u annotation(
+      Modelica.Blocks.Interfaces.BooleanInput u annotation(
         Placement(visible = true, transformation(origin = {105, 61}, extent = {{-11, -11}, {11, 11}}, rotation = 180), iconTransformation(origin = {105, 61}, extent = {{-11, -11}, {11, 11}}, rotation = 180)));
     equation
-annotation (Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-24, -2},lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {98, -16}}, textString = "Controller_SwitchingUnit")}),                               Diagram(
-            coordinateSystem(preserveAspectRatio=false)));
+
+      annotation(
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-52, 28}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-48, 24}, {150, -76}}, textString = "Controller \n Switching\nUnit")}),
+        Diagram(coordinateSystem(preserveAspectRatio = false)));
     end Controller_SwitchingUnit;
+
+    model Controller_VU
+      parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
+     parameter Modelica.SIunits.Temperature TRoomSet=293.15
+        "Flow temperature set point of room"
+        annotation (Dialog(enable=useExternalTset == false));
+      parameter Real k=0.2 "Gain of controller";
+      parameter Modelica.SIunits.Time Ti=300 "Time constant of Integrator block";
+      parameter Real yMax=298.15 "Upper limit of output";
+      parameter Real yMin=289.15 "Lower limit of output";
+    Modelica.Blocks.Interfaces.RealInput TRoomMea annotation(
+        Placement(visible = true, transformation(origin = {108, 80}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {108, 80}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
+  Modelica.Blocks.Interfaces.BooleanInput Cooling annotation(
+        Placement(visible = true, transformation(origin = {106, -80}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {106, -80}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
+  Modelica.Blocks.Sources.Constant constTflowSet (k=TRoomSet) annotation(
+        Placement(visible = true, transformation(origin = {-90, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.LimPID PID (
+        controllerType=Modelica.Blocks.Types.SimpleController.PI,
+        k=k,
+        Ti=Ti,
+        yMax=yMax,
+        yMin=yMin) annotation(
+        Placement(visible = true, transformation(origin = {-60, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.BooleanInput Heating annotation(
+        Placement(visible = true, transformation(origin = {106, -40}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {106, -40}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
+  ModularAHU.BaseClasses.GenericAHUBus genericAHUBus1 annotation(
+        Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant constRpmPump(k = rpm_pump) annotation(
+        Placement(visible = true, transformation(origin = {50, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.Switch switch1 annotation(
+        Placement(visible = true, transformation(origin = {12, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const(k = 0) annotation(
+        Placement(visible = true, transformation(origin = {-50, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.LimPID PID1 annotation(
+        Placement(visible = true, transformation(origin = {-30, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.LimPID PID2 annotation(
+        Placement(visible = true, transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const1(k = 0) annotation(
+        Placement(visible = true, transformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Continuous.LimPID PID3 annotation(
+        Placement(visible = true, transformation(origin = {-10, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.Switch switch11 annotation(
+        Placement(visible = true, transformation(origin = {30, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const2(k = 0) annotation(
+        Placement(visible = true, transformation(origin = {-10, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const3(k = rpm_pump) annotation(
+        Placement(visible = true, transformation(origin = {62, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    equation
+      connect(PID.y, PID3.u_s) annotation(
+        Line(points = {{-48, 80}, {-46, 80}, {-46, 100}, {-100, 100}, {-100, -100}, {-40, -100}, {-40, -80}, {-22, -80}}, color = {0, 0, 127}));
+      connect(TRoomMea, PID3.u_m) annotation(
+        Line(points = {{108, 80}, {80, 80}, {80, 100}, {-100, 100}, {-100, -100}, {-10, -100}, {-10, -92}, {-10, -92}, {-10, -92}}, color = {0, 0, 127}));
+      connect(switch11.y, genericAHUBus1.coolerBus.hydraulicBus.valveSet) annotation(
+        Line(points = {{42, -50}, {46, -50}, {46, 0}, {100, 0}, {100, 0}, {100, 0}}, color = {0, 0, 127}));
+      connect(const3.y, genericAHUBus1.coolerBus.hydraulicBus.pumpBus.rpmSet) annotation(
+        Line(points = {{74, -50}, {80, -50}, {80, 0}, {100, 0}}, color = {0, 0, 127}));
+      connect(PID3.y, switch11.u1) annotation(
+        Line(points = {{2, -80}, {8, -80}, {8, -42}, {18, -42}, {18, -42}, {18, -42}}, color = {0, 0, 127}));
+      connect(const2.y, switch11.u3) annotation(
+        Line(points = {{2, -50}, {8, -50}, {8, -58}, {16, -58}, {16, -58}, {18, -58}}, color = {0, 0, 127}));
+      connect(Cooling, switch11.u2) annotation(
+        Line(points = {{106, -80}, {8, -80}, {8, -50}, {18, -50}, {18, -50}, {18, -50}}, color = {255, 0, 255}));
+      connect(Cooling, genericAHUBus1.coolerBus.hydraulicBus.pumpBus.onSet) annotation(
+        Line(points = {{106, -80}, {80, -80}, {80, 0}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 0, 255}));
+ connect(PID1.y, switch1.u1) annotation(
+        Line(points = {{-19, 80}, {-10, 80}, {-10, 38}, {0, 38}}, color = {0, 0, 127}));
+ connect(TRoomMea, PID1.u_m) annotation(
+        Line(points = {{108, 80}, {80, 80}, {80, 60}, {-30, 60}, {-30, 68}}, color = {0, 0, 127}));
+ connect(PID.y, PID1.u_s) annotation(
+        Line(points = {{-49, 80}, {-42, 80}}, color = {0, 0, 127}));
+      connect(constTflowSet.y, PID.u_s) annotation(
+        Line(points = {{-79, 80}, {-72, 80}}, color = {0, 0, 127}));
+      connect(TRoomMea, PID.u_m) annotation(
+        Line(points = {{108, 80}, {80, 80}, {80, 60}, {-60, 60}, {-60, 68}}, color = {0, 0, 127}));
+      connect(PID2.y, genericAHUBus1.flapSupSet) annotation(
+        Line(points = {{-38, 0}, {98, 0}, {98, 0}, {100, 0}}, color = {0, 0, 127}));
+      connect(const.y, switch1.u3) annotation(
+        Line(points = {{-39, 30}, {-19.5, 30}, {-19.5, 22}, {0, 22}}, color = {0, 0, 127}));
+      connect(genericAHUBus1.heaterBus.VFlowAirMea, PID2.u_m) annotation(
+        Line(points = {{100, 0}, {-20, 0}, {-20, -20}, {-50, -20}, {-50, -14}, {-50, -14}, {-50, -12}, {-50, -12}}, color = {0, 0, 127}));
+      connect(const1.y, PID2.u_s) annotation(
+        Line(points = {{-78, 0}, {-64, 0}, {-64, 0}, {-62, 0}}, color = {0, 0, 127}));
+      connect(Heating, switch1.u2) annotation(
+        Line(points = {{106, -40}, {80, -40}, {80, 0}, {-20, 0}, {-20, 30}, {0, 30}}, color = {255, 0, 255}));
+      connect(switch1.y, genericAHUBus1.heaterBus.hydraulicBus.valveSet) annotation(
+        Line(points = {{24, 30}, {34, 30}, {34, 0}, {100, 0}, {100, 0}, {100, 0}}, color = {0, 0, 127}));
+      connect(constRpmPump.y, genericAHUBus1.heaterBus.hydraulicBus.pumpBus.rpmSet) annotation(
+        Line(points = {{61, 30}, {80.5, 30}, {80.5, 0}, {100, 0}}, color = {0, 0, 127}));
+      connect(Heating, genericAHUBus1.heaterBus.hydraulicBus.pumpBus.onSet) annotation(
+        Line(points = {{106, -40}, {80, -40}, {80, 0}, {98, 0}, {98, 0}, {100, 0}}, color = {255, 0, 255}));
+ annotation(
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-24, -12}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-76, 68}, {124, -40}}, textString = "Controller 
+ Ventilation\nUnit")}),
+        Diagram(coordinateSystem(preserveAspectRatio = false)));
+    end Controller_VU;
+
+    model Controller_Tabs
+    Benchmark.BaseClasses.TabsBus tabsBus1 annotation(
+        Placement(visible = true, transformation(origin = {102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.BooleanInput Heating annotation(
+        Placement(visible = true, transformation(origin = {106, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
+  Modelica.Blocks.Interfaces.RealInput TRoomMea annotation(
+        Placement(visible = true, transformation(origin = {106, 60}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, 60}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
+  Modelica.Blocks.Interfaces.BooleanInput Cooling annotation(
+        Placement(visible = true, transformation(origin = {104, -80}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {104, -80}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
+  Modelica.Blocks.Sources.Constant const annotation(
+        Placement(visible = true, transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Math.Add add1 annotation(
+        Placement(visible = true, transformation(origin = {-50, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const1 annotation(
+        Placement(visible = true, transformation(origin = {-90, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const2 annotation(
+        Placement(visible = true, transformation(origin = {10, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Logical.Or or1 annotation(
+        Placement(visible = true, transformation(origin = {50, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  Modelica.Blocks.Logical.Switch switch1 annotation(
+        Placement(visible = true, transformation(origin = {16, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    equation
+      connect(const1.y, add1.u2) annotation(
+        Line(points = {{-78, 60}, {-70, 60}, {-70, 64}, {-62, 64}}, color = {0, 0, 127}));
+      connect(const.y, add1.u1) annotation(
+        Line(points = {{-78, 90}, {-70, 90}, {-70, 76}, {-62, 76}}, color = {0, 0, 127}));
+      connect(Heating, or1.u2) annotation(
+        Line(points = {{106, -40}, {80, -40}, {80, -52}, {62, -52}}, color = {255, 0, 255}));
+      connect(Cooling, or1.u1) annotation(
+        Line(points = {{104, -80}, {80, -80}, {80, -60}, {62, -60}, {62, -60}, {62, -60}}, color = {255, 0, 255}));
+
+annotation(
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-34, 10}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-64, 36}, {132, -50}}, textString = "Controller\nConcrete Core\nActivation")}),
+        Diagram(coordinateSystem(preserveAspectRatio = false)));
+    end Controller_Tabs;
   end Controller;
 end MODI;
