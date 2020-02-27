@@ -10,6 +10,7 @@ record SharpNUU235F2
    I_sc0=8.6,
    V_mp0=30,
    I_mp0=7.84,
+   P_mp0=235,
    TCoeff_Isc=0.00053*8.6,
    TCoeff_Voc=-0.00351*37,
    gamma_Pmp=-0.000485,

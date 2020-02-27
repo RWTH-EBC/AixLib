@@ -11,6 +11,7 @@ package SolarElectric
      I_sc0=9.46,
      V_mp0=31.99,
      I_mp0=8.91,
+     P_mp0=285,
      TCoeff_Isc=0.0004*I_sc0,
      TCoeff_Voc=-0.0029*V_oc0,
      gamma_Pmp=-0.004,

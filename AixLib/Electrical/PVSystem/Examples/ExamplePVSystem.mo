@@ -6,7 +6,7 @@ model ExamplePVSystem
  extends Modelica.Icons.Example;
 
   PVSystem pVSystemDC(
-    data=AixLib.DataBase.SolarElectric.QPlusBFRG41285(),
+    redeclare DataBase.SolarElectric.QPlusBFRG41285 data,
     n_mod=567,
     lat(displayUnit="deg") = 0.91664692314742,
     lon(displayUnit="deg") = 0.23387411976724,

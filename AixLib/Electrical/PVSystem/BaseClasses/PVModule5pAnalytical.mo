@@ -140,7 +140,7 @@ equation
 
  P_mod = V_mp*I_mp;
 
- DCOutputPower=P_mod*n_mod;
+ DCOutputPower=max(0, min(P_Max*n_mod, P_mod*n_mod));
 
 
    annotation (

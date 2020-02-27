@@ -23,6 +23,8 @@ record PVBaseRecord "Parameter record of a PV module"
     "MPP voltage under standard conditions";
  parameter Modelica.SIunits.ElectricCurrent I_mp0
     "MPP current under standard conditions";
+  parameter Modelica.SIunits.Power P_mp0
+    "MPP power of one PV module under standard conditions";
  parameter Real TCoeff_Isc(unit = "A/K")
     "Temperature coefficient for short circuit current, >0. If not found in data sheet, use TCoeff_Isc=alpha_Isc*I_sc0 and type in alpha_Isc manually";
  parameter Real TCoeff_Voc(unit = "V/K")

@@ -10,6 +10,7 @@ record ShellSP70
    I_sc0=4.7,
    V_mp0=16.5,
    I_mp0=4.25,
+   P_mp0=70,
    TCoeff_Isc=0.002,
    TCoeff_Voc=-0.076,
    gamma_Pmp=-0.00045,

@@ -2,8 +2,7 @@ within AixLib.Electrical.PVSystem;
 model PVSystem
   "Model that determines the DC performance of a Silicium-based PV array"
 
-replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecord data=
-      AixLib.DataBase.SolarElectric.QPlusBFRG41285()
+replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecord data
     "Choose a PV module record" annotation (choicesAllMatching);
 replaceable model IVCharacteristics =
     AixLib.Electrical.PVSystem.BaseClasses.PartialIVCharacteristics
@@ -188,10 +187,12 @@ equation
 </ol>
 <h4>Known limitations</h4>
 <p>Model does not include line losses and decreasing panel efficiency due to shading!</p>
+<p>Some parameter combinations result in high peaks for variables such as V_mp, I_mp and T_c. The output power is therefore limited to the reasonable values 0 and P_mp0*1.05.</p>
 <h4>References</h4>
 <p>A Method for the analytical extraction of the Single-Diode PV model parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.</p>
 <p>Improvement and validation of a model for photovoltaic array performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
 <p>Performance Data from the NIST Photovoltaic Arrays and Weather Station. by Boyd, M.</p>
-<p>SANDIA REPORT SAND 2004-3535 Unlimited Release Printed December 2004 Photovoltaic Array Performance Model. (2005). by King, D. L. et al. </p><p>Solar engineering of thermal processes. by Duffie, John A. ; Beckman, W. A. </p>
+<p>SANDIA REPORT SAND 2004-3535 Unlimited Release Printed December 2004 Photovoltaic Array Performance Model. (2005). by King, D. L. et al. </p>
+<p>Solar engineering of thermal processes. by Duffie, John A. ; Beckman, W. A. </p>
 </html>"));
 end PVSystem;
