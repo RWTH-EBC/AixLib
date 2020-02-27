@@ -187,7 +187,7 @@ equation
 </ol>
 <h4>Known limitations</h4>
 <p>Model does not include line losses and decreasing panel efficiency due to shading!</p>
-<p>Some parameter combinations result in high peaks for variables such as V_mp, I_mp and T_c. The output power is therefore limited to the reasonable values 0 and P_mp0*1.05.</p>
+<p>Some parameter combinations result in high peaks for variables such as V_mp, I_mp and T_c. The output power is therefore limited to the reasonable values 0 and P_mp0*1.05, with 5 &percnt; being a common tolerance for power at MPP.</p>
 <h4>References</h4>
 <p>A Method for the analytical extraction of the Single-Diode PV model parameters. by Batzelis, Efstratios I. ; Papathanassiou, Stavros A.</p>
 <p>Improvement and validation of a model for photovoltaic array performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
