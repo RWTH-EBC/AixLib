@@ -1,0 +1,11 @@
+prefix=F:/Projects/install/msvc100-64/tidy-5.6.0-vc10-64b
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: tidy
+Description: tidy - HTML syntax checker
+URL: http://www.html-tidy.org
+Version: 5.6.0
+Libs: -L${libdir} -ltidy
+Cflags: -I${includedir}
