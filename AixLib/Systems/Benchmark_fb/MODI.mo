@@ -531,15 +531,453 @@ Level")}, coordinateSystem(initialScale = 0.1)));
     end ManagementLevel_Temp;
 
     model ManagementLevel_Temp_Hum
+     inner PNlib.Components.Settings settings(showTokenFlow = true) annotation(
+        Placement(visible = true, transformation(origin = {-190, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      PNlib.Components.PD Cooling_Workshop(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-180, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.TD disableCooling_Workshop(delay = 1, firingCon = TRoomMea[1] < 289.15, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {-165, 47}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Off_Workshop(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {-150, 60}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+      PNlib.Components.PD Heating_Workshop(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-120, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.TD disableHeating_Workshop(delay = 1, firingCon = TRoomMea[1] > 287.15, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {-135, 47}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD enableHeating_Workshop(delay = 1, firingCon = TRoomMea[1] < 286.15, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {-135, 73}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.TD enableCooling_Workshop(delay = 1, firingCon = TRoomMea[1] > 290.15, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {-165, 73}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD disableHeating_MultipersonOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[4] > 292.15) annotation(
+        Placement(visible = true, transformation(origin = {-45, 49}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD disableCooling_MultipersonOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[4] < 294.15) annotation(
+        Placement(visible = true, transformation(origin = {-75, 49}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Heating_MultipersonOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-30, 62}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.PD Off_MultipersonOffice(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {-60, 62}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+      PNlib.Components.TD enableCooling_MultipersonOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[4] > 295.15) annotation(
+        Placement(visible = true, transformation(origin = {-75, 75}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD enableHeating_MultipersonOffice(delay = 1, firingCon = TRoomMea[4] < 291.15,nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {-45, 75}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Cooling_MultipersonOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-90, 62}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.TD disableHeating_Canteen(nIn = 1, nOut = 1, firingCon = TRoomMea[2] > 292.15) annotation(
+        Placement(visible = true, transformation(origin = {-133, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD disableCooling_Canteen(nIn = 1, nOut = 1, firingCon = TRoomMea[2] < 294.15) annotation(
+        Placement(visible = true, transformation(origin = {-163, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Heating_Canteen(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-118, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.PD Off_Canteen(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {-148, 0}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+      PNlib.Components.TD enableCooling_Canteen(nIn = 1, nOut = 1, firingCon = TRoomMea[2] > 295.15) annotation(
+        Placement(visible = true, transformation(origin = {-163, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD enableHeating_Canteen(nIn = 1, nOut = 1, firingCon = TRoomMea[2] < 291.15) annotation(
+        Placement(visible = true, transformation(origin = {-133, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Cooling_Canteen(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-178, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.TD disableHeating_OpenplanOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[5] > 292.15) annotation(
+        Placement(visible = true, transformation(origin = {-43, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD disableCooling_OpenplanOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[5] < 294.15) annotation(
+        Placement(visible = true, transformation(origin = {-73, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Heating_OpenplanOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-28, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.PD Off_OpenplanOffice(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {-58, 0}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+      PNlib.Components.TD enableCooling_OpenplanOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[5] > 295.15) annotation(
+        Placement(visible = true, transformation(origin = {-73, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD enableHeating_OpenplanOffice(nIn = 1, nOut = 1, firingCon = TRoomMea[5] < 291.15) annotation(
+        Placement(visible = true, transformation(origin = {-43, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Cooling_OpenplanOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-88, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.TD disableHeating_ConferenceRoom(nIn = 1, nOut = 1, firingCon = TRoomMea[3] > 292.15) annotation(
+        Placement(visible = true, transformation(origin = {-133, -73}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD disableCooling_ConferenceRoom(nIn = 1, nOut = 1, firingCon = TRoomMea[3] < 294.15) annotation(
+        Placement(visible = true, transformation(origin = {-163, -73}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Heating_ConferenceRoom(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-118, -60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      PNlib.Components.PD Off_ConferenceRoom(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {-148, -60}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+      PNlib.Components.TD enableCooling_ConferenceRoom(nIn = 1, nOut = 1, firingCon = TRoomMea[3] > 295.15) annotation(
+        Placement(visible = true, transformation(origin = {-163, -47}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+      PNlib.Components.TD enableHeating_ConferenceRoom(nIn = 1, nOut = 1, firingCon = TRoomMea[3] < 291.15) annotation(
+        Placement(visible = true, transformation(origin = {-133, -47}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.PD Cooling_ConferenceRoom(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {-178, -60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+      Modelica.Blocks.Interfaces.RealInput TRoomMea[5] annotation(
+        Placement(visible = true, transformation(origin = {-100, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {-100, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Blocks.Interfaces.BooleanOutput Temp[15] annotation(
+        Placement(visible = true, transformation(origin = {-100, -108}, extent = {{-8, -8}, {8, 8}}, rotation = -90), iconTransformation(origin = {-100, -108}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
+      Modelica.Blocks.Math.IntegerToBoolean integerToBoolean1[15](each threshold = 1) annotation(
+        Placement(visible = true, transformation(origin = {-100, -84}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.PD Dehumidifying_Workshop(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {20, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD disableDehumidifying_Workshop(delay = 1, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {35, 47}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+    
+      PNlib.Components.PD Off_Hum_Workshop(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {50, 60}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+  PNlib.Components.PD Humidifying_Workshop(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {80, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD enableHumidifying_Workshop(delay = 1, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {65, 73}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealInput HumRoomMea[5] annotation(
+        Placement(visible = true, transformation(origin = {100, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {100, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  PNlib.Components.TD enableDehumidifying_Workshop(delay = 1,firingCon = HumRoomMea[1] > 0.6, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {35, 73}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  Modelica.Blocks.Interfaces.BooleanOutput Hum[15] annotation(
+        Placement(visible = true, transformation(origin = {100, -108}, extent = {{-8, -8}, {8, 8}}, rotation = -90), iconTransformation(origin = {100, -108}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
+  Modelica.Blocks.Math.IntegerToBoolean integerToBoolean2[15](each threshold = 1)  annotation(
+        Placement(visible = true, transformation(origin = {100, -86}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD disableHumidifying_Canteen(delay = 1, firingCon = HumRoomMea[2] > 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {65, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD enableDehumidifying_Canteen(delay = 1, firingCon = HumRoomMea[2] > 0.6, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {35, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD enableHumidifying_Canteen(delay = 1, firingCon = HumRoomMea[2] < 0.4, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {65, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.PD Humidifying_Canteen(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {80, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.PD Off_Hum_Canteen(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {50, 0}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+  PNlib.Components.TD disableDehumidifying_Canteen(delay = 1, firingCon = HumRoomMea[2] < 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {35, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.PD Dehumidifying_Canteen(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {20, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD disableDehumidifying_ConferenceRoom(delay = 1, firingCon = HumRoomMea[3] < 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {35, -73}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.PD Off_Hum_ConferenceRoom(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {50, -60}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+  PNlib.Components.PD Humidifying_ConferenceRoom(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {80, -60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD enableHumidifying_ConferenceRoom(delay = 1, firingCon = HumRoomMea[3] < 0.4, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {65, -47}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.TD enableDehumidifying_ConferenceRoom(delay = 1, firingCon = HumRoomMea[3] > 0.6, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {35, -47}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD disableHumidifying_ConferenceRoom(delay = 1, firingCon =  HumRoomMea[3] > 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {65, -73}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.PD Dehumidifying_ConferenceRoom(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {20, -60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD disableHumidifying_MultipersonOffice(delay = 1, firingCon = HumRoomMea[4] > 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {165, 47}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD disableDehumidifying_MultipersonOffice(delay = 1, firingCon = HumRoomMea[4] < 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {135, 47}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.TD enableDehumidifying_MultipersonOffice(delay = 1, firingCon = HumRoomMea[4] > 0.6, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {135, 73}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD enableHumidifying_MultipersonOffice(delay = 1, firingCon = HumRoomMea[4] < 0.4, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {165, 73}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.PD Humidifying_MultipersonOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {180, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.PD Off_Hum_MultipersonOffice(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {150, 60}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+  PNlib.Components.PD Dehumidifying_MultipersonOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {120, 60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.PD Dehumidifying_OpenplanOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {120, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.PD Off_Hum_OpenplanOffice(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation(
+        Placement(visible = true, transformation(origin = {150, 0}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+  PNlib.Components.PD Humidifying_OpenplanOffice(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation(
+        Placement(visible = true, transformation(origin = {180, 0}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+  PNlib.Components.TD disableDehumidifying_OpenplanOffice(delay = 1, firingCon = HumRoomMea[5] < 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {135, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.TD disableHumidifying_OpenplanOffice(delay = 1, firingCon = HumRoomMea[5] > 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {165, -13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD enableHumidifying_OpenplanOffice(delay = 1, firingCon = HumRoomMea[5] < 0.4, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {165, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+  PNlib.Components.TD enableDehumidifying_OpenplanOffice(delay = 1, firingCon = HumRoomMea[5] > 0.6, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {135, 13}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+  PNlib.Components.TD disableHumidifying_Workshop(delay = 1, firingCon = HumRoomMea[1] > 0.5, nIn = 1, nOut = 1) annotation(
+        Placement(visible = true, transformation(origin = {65, 47}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
+    
     equation
+      connect(Dehumidifying_ConferenceRoom.inTransition[1], enableDehumidifying_ConferenceRoom.outPlaces[1]) annotation(
+        Line(points = {{20, -54}, {20, -54}, {20, -46}, {32, -46}, {32, -46}}, thickness = 0.5));
+      connect(Dehumidifying_ConferenceRoom.outTransition[1], disableDehumidifying_ConferenceRoom.inPlaces[1]) annotation(
+        Line(points = {{20, -66}, {20, -66}, {20, -74}, {32, -74}, {32, -72}}, thickness = 0.5));
+      connect(disableHumidifying_ConferenceRoom.inPlaces[1], Humidifying_ConferenceRoom.outTransition[1]) annotation(
+        Line(points = {{68, -72}, {80, -72}, {80, -66}, {80, -66}, {80, -66}, {80, -66}}, thickness = 0.5));
+      connect(enableHumidifying_ConferenceRoom.outPlaces[1], Humidifying_ConferenceRoom.inTransition[1]) annotation(
+        Line(points = {{68, -46}, {80, -46}, {80, -54}, {80, -54}, {80, -54}}, thickness = 0.5));
+      connect(disableHumidifying_ConferenceRoom.outPlaces[1], Off_Hum_ConferenceRoom.inTransition[1]) annotation(
+        Line(points = {{62, -72}, {50, -72}, {50, -66}, {50, -66}, {50, -66}}, thickness = 0.5));
+      connect(disableDehumidifying_ConferenceRoom.outPlaces[1], Off_Hum_ConferenceRoom.inTransition[2]) annotation(
+        Line(points = {{38, -72}, {50, -72}, {50, -66}, {50, -66}, {50, -66}}, thickness = 0.5));
+      connect(Off_Hum_ConferenceRoom.outTransition[2], enableDehumidifying_ConferenceRoom.inPlaces[1]) annotation(
+        Line(points = {{50, -54}, {50, -54}, {50, -46}, {38, -46}, {38, -46}}, thickness = 0.5));
+      connect(Off_Hum_ConferenceRoom.outTransition[1], enableHumidifying_ConferenceRoom.inPlaces[1]) annotation(
+        Line(points = {{50, -54}, {50, -54}, {50, -46}, {62, -46}, {62, -46}}, thickness = 0.5));
+      connect(Dehumidifying_OpenplanOffice.outTransition[1], disableDehumidifying_OpenplanOffice.inPlaces[1]) annotation(
+        Line(points = {{120, -6}, {120, -6}, {120, -14}, {132, -14}, {132, -12}}, thickness = 0.5));
+      connect(Dehumidifying_OpenplanOffice.inTransition[1], enableDehumidifying_OpenplanOffice.outPlaces[1]) annotation(
+        Line(points = {{120, 6}, {120, 6}, {120, 14}, {132, 14}, {132, 14}}, thickness = 0.5));
+      connect(enableHumidifying_OpenplanOffice.outPlaces[1], Humidifying_OpenplanOffice.inTransition[1]) annotation(
+        Line(points = {{168, 14}, {180, 14}, {180, 6}, {180, 6}, {180, 6}}, thickness = 0.5));
+      connect(Off_Hum_OpenplanOffice.outTransition[1], enableHumidifying_OpenplanOffice.inPlaces[1]) annotation(
+        Line(points = {{150, 6}, {150, 6}, {150, 14}, {162, 14}, {162, 14}}, thickness = 0.5));
+      connect(disableHumidifying_OpenplanOffice.inPlaces[1], Humidifying_OpenplanOffice.outTransition[1]) annotation(
+        Line(points = {{168, -12}, {180, -12}, {180, -6}, {180, -6}, {180, -6}}, thickness = 0.5));
+      connect(disableHumidifying_OpenplanOffice.outPlaces[1], Off_Hum_OpenplanOffice.inTransition[1]) annotation(
+        Line(points = {{162, -12}, {150, -12}, {150, -6}, {150, -6}, {150, -6}}, thickness = 0.5));
+      connect(disableDehumidifying_OpenplanOffice.outPlaces[1], Off_Hum_OpenplanOffice.inTransition[2]) annotation(
+        Line(points = {{138, -12}, {150, -12}, {150, -6}, {150, -6}, {150, -6}}, thickness = 0.5));
+      connect(Off_Hum_OpenplanOffice.outTransition[2], enableDehumidifying_OpenplanOffice.inPlaces[1]) annotation(
+        Line(points = {{150, 6}, {150, 6}, {150, 14}, {138, 14}, {138, 14}}, thickness = 0.5));
+      connect(Dehumidifying_MultipersonOffice.outTransition[1], disableDehumidifying_MultipersonOffice.inPlaces[1]) annotation(
+        Line(points = {{120, 54}, {120, 54}, {120, 46}, {132, 46}, {132, 48}}, thickness = 0.5));
+      connect(Dehumidifying_MultipersonOffice.inTransition[1], enableDehumidifying_MultipersonOffice.outPlaces[1]) annotation(
+        Line(points = {{120, 66}, {120, 66}, {120, 74}, {132, 74}, {132, 74}}, thickness = 0.5));
+      connect(disableHumidifying_MultipersonOffice.inPlaces[1], Humidifying_MultipersonOffice.outTransition[1]) annotation(
+        Line(points = {{168, 48}, {180, 48}, {180, 54}, {180, 54}, {180, 54}}, thickness = 0.5));
+      connect(enableHumidifying_MultipersonOffice.outPlaces[1], Humidifying_MultipersonOffice.inTransition[1]) annotation(
+        Line(points = {{168, 74}, {180, 74}, {180, 66}, {180, 66}, {180, 66}}, thickness = 0.5));
+      connect(Off_Hum_MultipersonOffice.outTransition[1], enableHumidifying_MultipersonOffice.inPlaces[1]) annotation(
+        Line(points = {{150, 66}, {150, 66}, {150, 74}, {162, 74}, {162, 74}}, thickness = 0.5));
+      connect(disableHumidifying_MultipersonOffice.outPlaces[1], Off_Hum_MultipersonOffice.inTransition[1]) annotation(
+        Line(points = {{162, 48}, {150, 48}, {150, 54}, {150, 54}, {150, 54}}, thickness = 0.5));
+      connect(disableDehumidifying_MultipersonOffice.outPlaces[1], Off_Hum_MultipersonOffice.inTransition[2]) annotation(
+        Line(points = {{138, 48}, {150, 48}, {150, 54}}, thickness = 0.5));
+      connect(Off_Hum_MultipersonOffice.outTransition[2], enableDehumidifying_MultipersonOffice.inPlaces[1]) annotation(
+        Line(points = {{150, 66}, {150, 66}, {150, 74}, {138, 74}, {138, 74}}, thickness = 0.5));
+      connect(enableHumidifying_Canteen.outPlaces[1], Humidifying_Canteen.inTransition[1]) annotation(
+        Line(points = {{68, 14}, {80, 14}, {80, 6}, {80, 6}, {80, 6}}, thickness = 0.5));
+      connect(Humidifying_Canteen.outTransition[1], disableHumidifying_Canteen.inPlaces[1]) annotation(
+        Line(points = {{80, -6}, {80, -12}, {68, -12}}, thickness = 0.5));
+      connect(disableHumidifying_Canteen.outPlaces[1], Off_Hum_Canteen.inTransition[1]) annotation(
+        Line(points = {{62, -12}, {50, -12}, {50, -6}, {50, -6}, {50, -6}}, thickness = 0.5));
+      connect(Dehumidifying_Canteen.outTransition[1], disableDehumidifying_Canteen.inPlaces[1]) annotation(
+        Line(points = {{20, -6}, {20, -6}, {20, -12}, {32, -12}, {32, -12}}, thickness = 0.5));
+      connect(Dehumidifying_Canteen.inTransition[1], enableDehumidifying_Canteen.outPlaces[1]) annotation(
+        Line(points = {{20, 6}, {20, 6}, {20, 14}, {32, 14}, {32, 14}}, thickness = 0.5));
+      connect(disableDehumidifying_Canteen.outPlaces[1], Off_Hum_Canteen.inTransition[2]) annotation(
+        Line(points = {{38, -12}, {50, -12}, {50, -6}, {50, -6}, {50, -6}}, thickness = 0.5));
+      connect(Off_Hum_Canteen.outTransition[2], enableDehumidifying_Canteen.inPlaces[1]) annotation(
+        Line(points = {{50, 6}, {50, 6}, {50, 14}, {38, 14}, {38, 14}, {38, 14}}, thickness = 0.5));
+      connect(Off_Hum_Canteen.outTransition[1], enableHumidifying_Canteen.inPlaces[1]) annotation(
+        Line(points = {{50, 6}, {50, 6}, {50, 14}, {62, 14}, {62, 14}}, thickness = 0.5));
+      connect(disableDehumidifying_Workshop.outPlaces[1], Off_Hum_Workshop.inTransition[2]) annotation(
+        Line(points = {{38, 48}, {50, 48}, {50, 54}, {50, 54}, {50, 54}}, thickness = 0.5));
+      connect(enableDehumidifying_Workshop.inPlaces[1], Off_Hum_Workshop.outTransition[2]) annotation(
+        Line(points = {{38, 74}, {50, 74}, {50, 66}, {50, 66}, {50, 66}}, thickness = 0.5));
+      connect(Dehumidifying_Workshop.outTransition[1], disableDehumidifying_Workshop.inPlaces[1]) annotation(
+        Line(points = {{20, 54}, {20, 54}, {20, 48}, {32, 48}, {32, 48}}, thickness = 0.5));
+      connect(Dehumidifying_Workshop.inTransition[1], enableDehumidifying_Workshop.outPlaces[1]) annotation(
+        Line(points = {{20, 66}, {20, 66}, {20, 74}, {32, 74}, {32, 74}}, thickness = 0.5));
+      connect(disableHumidifying_Workshop.outPlaces[1], Off_Hum_Workshop.inTransition[1]) annotation(
+        Line(points = {{62, 48}, {50, 48}, {50, 54}, {50, 54}, {50, 54}}, thickness = 0.5));
+      connect(disableHumidifying_Workshop.inPlaces[1], Humidifying_Workshop.outTransition[1]) annotation(
+        Line(points = {{68, 48}, {80, 48}, {80, 54}, {80, 54}, {80, 54}}, thickness = 0.5));
+      connect(enableHumidifying_Workshop.outPlaces[1], Humidifying_Workshop.inTransition[1]) annotation(
+        Line(points = {{68, 74}, {80, 74}, {80, 66}, {80, 66}, {80, 66}, {80, 66}}, thickness = 0.5));
+      connect(Off_Hum_Workshop.outTransition[1], enableHumidifying_Workshop.inPlaces[1]) annotation(
+        Line(points = {{50, 66}, {50, 66}, {50, 74}, {62, 74}, {62, 74}}, thickness = 0.5));
+       
+    
+      connect(Off_Hum_Workshop.pd_t, integerToBoolean2[1].u) annotation(
+        Line(points = {{44, 60}, {44, 30}, {100, 30}, {100, -78}}, color = {255, 127, 0}));
+      connect(Off_Hum_MultipersonOffice.pd_t, integerToBoolean2[4].u) annotation(
+        Line(points = {{144, 60}, {144, 30}, {100, 30}, {100, -78}}, color = {255, 127, 0}));
+  connect(Humidifying_OpenplanOffice.pd_t, integerToBoolean2[11].u) annotation(
+        Line(points = {{186, 0}, {186, 0}, {186, -32}, {100, -32}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+      connect(Dehumidifying_OpenplanOffice.pd_t, integerToBoolean2[12].u) annotation(
+        Line(points = {{126, 0}, {128, 0}, {128, -32}, {100, -32}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+      connect(Dehumidifying_ConferenceRoom.pd_t, integerToBoolean2[15].u) annotation(
+        Line(points = {{26, -60}, {26, -60}, {26, -32}, {100, -32}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+  connect(Humidifying_ConferenceRoom.pd_t, integerToBoolean2[14].u) annotation(
+        Line(points = {{86, -60}, {100, -60}, {100, -78}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+      connect(Dehumidifying_Canteen.pd_t, integerToBoolean2[9].u) annotation(
+        Line(points = {{26, 0}, {26, 0}, {26, -32}, {100, -32}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+  connect(Humidifying_Canteen.pd_t, integerToBoolean2[8].u) annotation(
+        Line(points = {{86, 0}, {100, 0}, {100, -78}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+      connect(Dehumidifying_MultipersonOffice.pd_t, integerToBoolean2[6].u) annotation(
+        Line(points = {{126, 60}, {128, 60}, {128, 30}, {100, 30}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+  connect(Humidifying_MultipersonOffice.pd_t, integerToBoolean2[5].u) annotation(
+        Line(points = {{186, 60}, {186, 60}, {186, 30}, {100, 30}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+      connect(Dehumidifying_Workshop.pd_t, integerToBoolean2[3].u) annotation(
+        Line(points = {{26, 60}, {28, 60}, {28, 30}, {100, 30}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+  connect(Humidifying_Workshop.pd_t, integerToBoolean2[2].u) annotation(
+        Line(points = {{86, 60}, {100, 60}, {100, -78}, {100, -78}, {100, -78}}, color = {255, 127, 0}));
+      connect(integerToBoolean2[1].y, Hum[1]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[2].y, Hum[2]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[3].y, Hum[3]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[4].y, Hum[4]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[5].y, Hum[5]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[6].y, Hum[6]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[7].y, Hum[7]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[8].y, Hum[8]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[9].y, Hum[9]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[10].y, Hum[10]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[11].y, Hum[11]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[12].y, Hum[12]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[13].y, Hum[13]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[14].y, Hum[14]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+         connect(integerToBoolean2[15].y, Hum[15]) annotation(
+        Line(points = {{100, -92}, {100, -92}, {100, -108}, {100, -108}}, color = {255, 0, 255}, thickness = 0.5));
+        
+      connect(integerToBoolean1[15].y, Temp[15]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[14].y, Temp[14]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[13].y, Temp[13]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[12].y, Temp[12]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[11].y, Temp[11]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[10].y, Temp[10]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[9].y, Temp[9]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[8].y, Temp[8]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[7].y, Temp[7]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[6].y, Temp[6]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[5].y, Temp[5]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[4].y, Temp[4]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[3].y, Temp[3]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[2].y, Temp[2]) annotation(
+        Line(points = {{-100, -90.6}, {-101, -90.6}, {-101, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(integerToBoolean1[1].y, Temp[1]) annotation(
+        Line(points = {{-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -90.6}, {-100, -108.6}, {-100, -108.6}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(Off_Canteen.pd_t, integerToBoolean1[4].u) annotation(
+        Line(points = {{-154.36, 0}, {-155.36, 0}, {-155.36, 0}, {-154.36, 0}, {-154.36, -30}, {-100.36, -30}, {-100.36, -76}, {-104.36, -76}, {-104.36, -76}, {-100.36, -76}}, color = {255, 127, 0}));
+      connect(Off_Workshop.pd_t, integerToBoolean1[1].u) annotation(
+        Line(points = {{-156.36, 60}, {-156.36, 60}, {-156.36, 28}, {-100.36, 28}, {-100.36, -76}, {-104.36, -76}, {-104.36, -76}, {-100.36, -76}}, color = {255, 127, 0}));
+      connect(Heating_Workshop.pd_t, integerToBoolean1[2].u) annotation(
+        Line(points = {{-113.64, 60}, {-99.64, 60}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Cooling_Workshop.pd_t, integerToBoolean1[3].u) annotation(
+        Line(points = {{-173.64, 60}, {-175.64, 60}, {-175.64, 28}, {-99.64, 28}, {-99.64, -76}, {-103.64, -76}, {-103.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Heating_Canteen.pd_t, integerToBoolean1[5].u) annotation(
+        Line(points = {{-111.64, 0}, {-99.64, 0}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Cooling_Canteen.pd_t, integerToBoolean1[6].u) annotation(
+        Line(points = {{-171.64, 0}, {-171.64, 0}, {-171.64, -30}, {-99.64, -30}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Off_ConferenceRoom.pd_t, integerToBoolean1[7].u) annotation(
+        Line(points = {{-154.36, -60}, {-153.36, -60}, {-153.36, -60}, {-154.36, -60}, {-154.36, -30}, {-100.36, -30}, {-100.36, -76}, {-101.36, -76}, {-101.36, -76}, {-100.36, -76}}, color = {255, 127, 0}));
+      connect(Heating_ConferenceRoom.pd_t, integerToBoolean1[8].u) annotation(
+        Line(points = {{-111.64, -60}, {-105.64, -60}, {-105.64, -60}, {-99.64, -60}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Cooling_ConferenceRoom.pd_t, integerToBoolean1[9].u) annotation(
+        Line(points = {{-171.64, -60}, {-171.64, -60}, {-171.64, -30}, {-99.64, -30}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Off_MultipersonOffice.pd_t, integerToBoolean1[10].u) annotation(
+        Line(points = {{-66.36, 62}, {-71.36, 62}, {-71.36, 62}, {-68.36, 62}, {-68.36, 28}, {-100.36, 28}, {-100.36, -76}, {-104.36, -76}, {-104.36, -76}, {-100.36, -76}}, color = {255, 127, 0}));
+      connect(Heating_MultipersonOffice.pd_t, integerToBoolean1[11].u) annotation(
+        Line(points = {{-23.64, 62}, {-19.64, 62}, {-19.64, 28}, {-99.64, 28}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Cooling_MultipersonOffice.pd_t, integerToBoolean1[12].u) annotation(
+        Line(points = {{-83.64, 62}, {-81.64, 62}, {-81.64, 28}, {-99.64, 28}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Off_OpenplanOffice.pd_t, integerToBoolean1[13].u) annotation(
+        Line(points = {{-64.36, 0}, {-64.36, 0}, {-64.36, -30}, {-100.36, -30}, {-100.36, -76}, {-100.36, -76}}, color = {255, 127, 0}));
+      connect(Heating_OpenplanOffice.pd_t, integerToBoolean1[14].u) annotation(
+        Line(points = {{-21.64, 0}, {-17.64, 0}, {-17.64, -30}, {-99.64, -30}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Cooling_OpenplanOffice.pd_t, integerToBoolean1[15].u) annotation(
+        Line(points = {{-81.64, 0}, {-81.64, 0}, {-81.64, -30}, {-99.64, -30}, {-99.64, -76}, {-99.64, -76}}, color = {255, 127, 0}));
+      connect(Cooling_ConferenceRoom.inTransition[1], enableCooling_ConferenceRoom.outPlaces[1]) annotation(
+        Line(points = {{-178, -53.52}, {-178, -53.52}, {-178, -53.52}, {-178, -53.52}, {-178, -45.52}, {-166, -45.52}, {-166, -45.52}}, thickness = 0.5));
+      connect(Cooling_ConferenceRoom.outTransition[1], disableCooling_ConferenceRoom.inPlaces[1]) annotation(
+        Line(points = {{-178, -66.48}, {-178, -66.48}, {-178, -66.48}, {-178, -66.48}, {-178, -74.48}, {-166, -74.48}, {-166, -72.48}}, thickness = 0.5));
+      connect(Off_ConferenceRoom.outTransition[1], enableHeating_ConferenceRoom.inPlaces[1]) annotation(
+        Line(points = {{-148, -53.52}, {-148, -53.52}, {-148, -53.52}, {-148, -53.52}, {-148, -47.52}, {-136, -47.52}, {-136, -46.52}, {-136, -46.52}, {-136, -45.52}}, thickness = 0.5));
+      connect(enableHeating_ConferenceRoom.outPlaces[1], Heating_ConferenceRoom.inTransition[1]) annotation(
+        Line(points = {{-129.64, -47}, {-123.64, -47}, {-123.64, -45}, {-117.64, -45}, {-117.64, -53}, {-117.64, -53}, {-117.64, -54}, {-117.64, -54}, {-117.64, -55}}, thickness = 0.5));
+      connect(Off_ConferenceRoom.outTransition[2], enableCooling_ConferenceRoom.inPlaces[1]) annotation(
+        Line(points = {{-148, -53.52}, {-150, -53.52}, {-150, -53.52}, {-148, -53.52}, {-148, -47.52}, {-160, -47.52}, {-160, -46.52}, {-160, -46.52}, {-160, -45.52}}, thickness = 0.5));
+      connect(Off_ConferenceRoom.inTransition[1], disableHeating_ConferenceRoom.outPlaces[1]) annotation(
+        Line(points = {{-148, -66.48}, {-148, -66.48}, {-148, -66.48}, {-148, -66.48}, {-148, -74.48}, {-136, -74.48}, {-136, -73.48}, {-136, -73.48}, {-136, -72.48}}, thickness = 0.5));
+      connect(disableCooling_ConferenceRoom.outPlaces[1], Off_ConferenceRoom.inTransition[2]) annotation(
+        Line(points = {{-159.64, -73}, {-153.64, -73}, {-153.64, -71}, {-147.64, -71}, {-147.64, -65}, {-147.64, -65}, {-147.64, -66}, {-147.64, -66}, {-147.64, -67}}, thickness = 0.5));
+      connect(disableHeating_ConferenceRoom.inPlaces[1], Heating_ConferenceRoom.outTransition[1]) annotation(
+        Line(points = {{-129.64, -73}, {-124.64, -73}, {-124.64, -71}, {-117.64, -71}, {-117.64, -65}, {-117.64, -65}, {-117.64, -67}, {-117.64, -67}, {-117.64, -67}}, thickness = 0.5));
+      connect(Cooling_OpenplanOffice.inTransition[1], enableCooling_OpenplanOffice.outPlaces[1]) annotation(
+        Line(points = {{-88, 6.48}, {-88, 6.48}, {-88, 6.48}, {-88, 6.48}, {-88, 12.48}, {-76, 12.48}, {-76, 14.48}}, thickness = 0.5));
+      connect(Cooling_OpenplanOffice.outTransition[1], disableCooling_OpenplanOffice.inPlaces[1]) annotation(
+        Line(points = {{-88, -6.48}, {-88, -6.48}, {-88, -6.48}, {-88, -6.48}, {-88, -12.48}, {-76, -12.48}, {-76, -12.48}, {-76, -12.48}, {-76, -12.48}, {-76, -12.48}}, thickness = 0.5));
+      connect(enableHeating_OpenplanOffice.outPlaces[1], Heating_OpenplanOffice.inTransition[1]) annotation(
+        Line(points = {{-39.64, 13}, {-34.64, 13}, {-34.64, 15}, {-27.64, 15}, {-27.64, 7}, {-27.64, 7}, {-27.64, 5}, {-27.64, 5}, {-27.64, 5}}, thickness = 0.5));
+      connect(Off_OpenplanOffice.outTransition[1], enableHeating_OpenplanOffice.inPlaces[1]) annotation(
+        Line(points = {{-58, 6.48}, {-58, 6.48}, {-58, 6.48}, {-58, 6.48}, {-58, 14.48}, {-46, 14.48}, {-46, 14.48}}, thickness = 0.5));
+      connect(enableCooling_OpenplanOffice.inPlaces[1], Off_OpenplanOffice.outTransition[2]) annotation(
+        Line(points = {{-69.64, 13}, {-63.64, 13}, {-63.64, 15}, {-57.64, 15}, {-57.64, 7}, {-57.64, 7}, {-57.64, 5}, {-57.64, 5}, {-57.64, 5}}, thickness = 0.5));
+      connect(Off_OpenplanOffice.inTransition[1], disableHeating_OpenplanOffice.outPlaces[1]) annotation(
+        Line(points = {{-58, -6.48}, {-58, -6.48}, {-58, -6.48}, {-58, -6.48}, {-58, -12.48}, {-46, -12.48}, {-46, -12.48}, {-46, -12.48}, {-46, -12.48}}, thickness = 0.5));
+      connect(disableCooling_OpenplanOffice.outPlaces[1], Off_OpenplanOffice.inTransition[2]) annotation(
+        Line(points = {{-69.64, -13}, {-64.64, -13}, {-64.64, -11}, {-57.64, -11}, {-57.64, -5}, {-57.64, -5}, {-57.64, -6}, {-57.64, -6}, {-57.64, -7}}, thickness = 0.5));
+      connect(disableHeating_OpenplanOffice.inPlaces[1], Heating_OpenplanOffice.outTransition[1]) annotation(
+        Line(points = {{-39.64, -13}, {-34.64, -13}, {-34.64, -11}, {-27.64, -11}, {-27.64, -5}, {-27.64, -5}, {-27.64, -7}, {-27.64, -7}, {-27.64, -7}}, thickness = 0.5));
+      connect(Cooling_Canteen.inTransition[1], enableCooling_Canteen.outPlaces[1]) annotation(
+        Line(points = {{-178, 6.48}, {-177, 6.48}, {-177, 6.48}, {-176, 6.48}, {-176, 12.48}, {-166, 12.48}, {-166, 14.48}}, thickness = 0.5));
+      connect(Cooling_Canteen.outTransition[1], disableCooling_Canteen.inPlaces[1]) annotation(
+        Line(points = {{-178, -6.48}, {-178, -6.48}, {-178, -6.48}, {-178, -6.48}, {-178, -12.48}, {-166, -12.48}, {-166, -12.48}}, thickness = 0.5));
+      connect(enableHeating_Canteen.outPlaces[1], Heating_Canteen.inTransition[1]) annotation(
+        Line(points = {{-129.64, 13}, {-124.64, 13}, {-124.64, 15}, {-117.64, 15}, {-117.64, 7}, {-117.64, 7}, {-117.64, 5}, {-117.64, 5}, {-117.64, 5}}, thickness = 0.5));
+      connect(Off_Canteen.outTransition[1], enableHeating_Canteen.inPlaces[1]) annotation(
+        Line(points = {{-148, 6.48}, {-152, 6.48}, {-152, 6.48}, {-148, 6.48}, {-148, 14.48}, {-136, 14.48}, {-136, 14.48}, {-136, 14.48}, {-136, 14.48}}, thickness = 0.5));
+      connect(Off_Canteen.outTransition[2], enableCooling_Canteen.inPlaces[1]) annotation(
+        Line(points = {{-148, 6.48}, {-152, 6.48}, {-152, 6.48}, {-148, 6.48}, {-148, 12.48}, {-160, 12.48}, {-160, 13.48}, {-160, 13.48}, {-160, 14.48}}, thickness = 0.5));
+      connect(Off_Canteen.inTransition[1], disableHeating_Canteen.outPlaces[1]) annotation(
+        Line(points = {{-148, -6.48}, {-149, -6.48}, {-149, -6.48}, {-148, -6.48}, {-148, -12.48}, {-136, -12.48}, {-136, -12.48}, {-136, -12.48}, {-136, -12.48}}, thickness = 0.5));
+      connect(disableCooling_Canteen.outPlaces[1], Off_Canteen.inTransition[2]) annotation(
+        Line(points = {{-159.64, -13}, {-154.64, -13}, {-154.64, -11}, {-147.64, -11}, {-147.64, -5}, {-147.64, -5}, {-147.64, -7}, {-147.64, -7}, {-147.64, -7}}, thickness = 0.5));
+      connect(disableHeating_Canteen.inPlaces[1], Heating_Canteen.outTransition[1]) annotation(
+        Line(points = {{-129.64, -13}, {-124.64, -13}, {-124.64, -11}, {-117.64, -11}, {-117.64, -7}, {-117.64, -7}, {-117.64, -5}, {-118.64, -5}, {-118.64, -7}, {-117.64, -7}}, thickness = 0.5));
+      connect(Cooling_MultipersonOffice.inTransition[1], enableCooling_MultipersonOffice.outPlaces[1]) annotation(
+        Line(points = {{-90, 68.48}, {-94, 68.48}, {-94, 68.48}, {-90, 68.48}, {-90, 74.48}, {-78, 74.48}, {-78, 76.48}}, thickness = 0.5));
+      connect(Cooling_MultipersonOffice.outTransition[1], disableCooling_MultipersonOffice.inPlaces[1]) annotation(
+        Line(points = {{-90, 55.52}, {-90, 55.52}, {-90, 55.52}, {-90, 55.52}, {-90, 47.52}, {-78, 47.52}, {-78, 48.52}, {-78, 48.52}, {-78, 49.52}}, thickness = 0.5));
+      connect(enableHeating_MultipersonOffice.outPlaces[1], Heating_MultipersonOffice.inTransition[1]) annotation(
+        Line(points = {{-41.64, 75}, {-35.64, 75}, {-35.64, 77}, {-27.64, 77}, {-27.64, 69}, {-29.64, 69}, {-29.64, 68}, {-29.64, 68}, {-29.64, 67}}, thickness = 0.5));
+      connect(Off_MultipersonOffice.outTransition[1], enableHeating_MultipersonOffice.inPlaces[1]) annotation(
+        Line(points = {{-60, 68.48}, {-64, 68.48}, {-64, 68.48}, {-60, 68.48}, {-60, 76.48}, {-48, 76.48}, {-48, 76.48}, {-48, 76.48}, {-48, 76.48}}, thickness = 0.5));
+      connect(enableCooling_MultipersonOffice.inPlaces[1], Off_MultipersonOffice.outTransition[2]) annotation(
+        Line(points = {{-71.64, 75}, {-65.64, 75}, {-65.64, 77}, {-59.64, 77}, {-59.64, 69}, {-59.64, 69}, {-59.64, 68}, {-59.64, 68}, {-59.64, 67}}, thickness = 0.5));
+      connect(Off_MultipersonOffice.inTransition[1], disableHeating_MultipersonOffice.outPlaces[1]) annotation(
+        Line(points = {{-60, 55.52}, {-62, 55.52}, {-62, 55.52}, {-60, 55.52}, {-60, 49.52}, {-48, 49.52}, {-48, 49.52}}, thickness = 0.5));
+      connect(disableCooling_MultipersonOffice.outPlaces[1], Off_MultipersonOffice.inTransition[2]) annotation(
+        Line(points = {{-71.64, 49}, {-66.64, 49}, {-66.64, 51}, {-59.64, 51}, {-59.64, 57}, {-59.64, 57}, {-59.64, 56}, {-59.64, 56}, {-59.64, 55}}, thickness = 0.5));
+      connect(disableHeating_MultipersonOffice.inPlaces[1], Heating_MultipersonOffice.outTransition[1]) annotation(
+        Line(points = {{-41.64, 49}, {-35.64, 49}, {-35.64, 51}, {-29.64, 51}, {-29.64, 57}, {-29.64, 57}, {-29.64, 56}, {-29.64, 56}, {-29.64, 55}}, thickness = 0.5));
+      connect(Off_Workshop.outTransition[2], enableCooling_Workshop.inPlaces[1]) annotation(
+        Line(points = {{-150, 66.48}, {-154, 66.48}, {-154, 66.48}, {-150, 66.48}, {-150, 74.48}, {-162, 74.48}, {-162, 74.48}, {-162, 74.48}, {-162, 74.48}}, thickness = 0.5));
+      connect(Cooling_Workshop.inTransition[1], enableCooling_Workshop.outPlaces[1]) annotation(
+        Line(points = {{-180, 66.48}, {-180, 66.48}, {-180, 66.48}, {-180, 66.48}, {-180, 74.48}, {-168, 74.48}, {-168, 74.48}}, thickness = 0.5));
+      connect(Off_Workshop.outTransition[1], enableHeating_Workshop.inPlaces[1]) annotation(
+        Line(points = {{-150, 66.48}, {-150, 66.48}, {-150, 66.48}, {-150, 66.48}, {-150, 74.48}, {-138, 74.48}, {-138, 74.48}, {-138, 74.48}, {-138, 74.48}}, thickness = 0.5));
+      connect(enableHeating_Workshop.outPlaces[1], Heating_Workshop.inTransition[1]) annotation(
+        Line(points = {{-131.64, 73}, {-125.64, 73}, {-125.64, 75}, {-119.64, 75}, {-119.64, 67}, {-119.64, 67}, {-119.64, 65}, {-119.64, 65}, {-119.64, 65}}, thickness = 0.5));
+      connect(Off_Workshop.inTransition[1], disableHeating_Workshop.outPlaces[1]) annotation(
+        Line(points = {{-150, 53.52}, {-152, 53.52}, {-152, 53.52}, {-150, 53.52}, {-150, 47.52}, {-138, 47.52}, {-138, 47.52}}, thickness = 0.5));
+      connect(disableHeating_Workshop.inPlaces[1], Heating_Workshop.outTransition[1]) annotation(
+        Line(points = {{-131.64, 47}, {-126.64, 47}, {-126.64, 49}, {-119.64, 49}, {-119.64, 50}, {-119.64, 50}, {-119.64, 53}}, thickness = 0.5));
+      connect(disableCooling_Workshop.outPlaces[1], Off_Workshop.inTransition[2]) annotation(
+        Line(points = {{-161.64, 47}, {-156.64, 47}, {-156.64, 49}, {-149.64, 49}, {-149.64, 55}, {-149.64, 55}, {-149.64, 53}, {-149.64, 53}, {-149.64, 53}}, thickness = 0.5));
+      connect(Cooling_Workshop.outTransition[1], disableCooling_Workshop.inPlaces[1]) annotation(
+        Line(points = {{-180, 53.52}, {-180, 53.52}, {-180, 53.52}, {-180, 53.52}, {-180, 47.52}, {-168, 47.52}, {-168, 47.52}}, thickness = 0.5));
+      annotation(
+        
+        uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),Icon(graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-5, 14}, lineColor = {95, 95, 95}, extent = {{-83, 40}, {97, -56}}, textString = "Management
+    Level")}, coordinateSystem(initialScale = 0.1)));
+    
 
       annotation(
         Icon(graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-200, 100}, {200, -100}}), Text(origin = {-16, 21}, lineColor = {95, 95, 95}, extent = {{-68, 33}, {98, -71}}, textString = "Management
 Level
 Temperature
 and Humidity")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
-        Diagram(coordinateSystem(extent = {{-200, -100}, {200, 100}})),
-        __OpenModelica_commandLineOptions = "");
+  Diagram(coordinateSystem(extent = {{-200, -100}, {200, 100}})),
+  __OpenModelica_commandLineOptions = "");
     end ManagementLevel_Temp_Hum;
 
     model AutomationLevel_V1
@@ -2631,21 +3069,21 @@ and Humidity")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
         Placement(visible = true, transformation(origin = {-16, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   PNlib.Components.TD td6(delay = 1, nIn = 1, nOut = 1, firingCon=u[2] or u[5] or u[8] or u[11] or u[14])  annotation(
         Placement(visible = true, transformation(origin = {-16, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  PNlib.Components.PD Heating_III(maxTokens = 1, minTokens = 0, nIn = 5, nOut = 5, startTokens = 0)  annotation(
+  PNlib.Components.PD Heating_III(maxTokens = 1, minTokens = 0, nIn = 4, nOut = 4, startTokens = 0)  annotation(
         Placement(visible = true, transformation(origin = {16, -24}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   PNlib.Components.TD td7(delay = 1, nIn = 1, nOut = 1, firingCon=u[1] and u[4] and u[7] and u[10] and u[13])  annotation(
         Placement(visible = true, transformation(origin = {-16, -82}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  PNlib.Components.PD Heating_IV(maxTokens = 1, minTokens = 0, nIn = 5, nOut = 5, startTokens = 0)  annotation(
-        Placement(visible = true, transformation(origin = {16, -70}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  PNlib.Components.PD Heating_IV(maxTokens = 1, minTokens = 0, nIn = 4, nOut = 4, startTokens = 0)  annotation(
+        Placement(visible = true, transformation(origin = {16, -72}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   PNlib.Components.TD td8(delay = 1, nIn = 1, nOut = 1, firingCon=u[2] or u[5] or u[8] or u[11] or u[14])  annotation(
         Placement(visible = true, transformation(origin = {-16, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   PNlib.Components.TD td9(delay = 1, nIn = 1, nOut = 1, firingCon=u[2] or u[5] or u[8] or u[11] or u[14])  annotation(
         Placement(visible = true, transformation(origin = {-16, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   PNlib.Components.TD td10(delay = 1, nIn = 1, nOut = 1, firingCon=u[1] and u[4] and u[7] and u[10] and u[13])  annotation(
         Placement(visible = true, transformation(origin = {-16, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PNlib.Components.PD Heating_II(maxTokens = 1, minTokens = 0, nIn = 5, nOut = 5, startTokens = 0)  annotation(
+  PNlib.Components.PD Heating_II(maxTokens = 1, minTokens = 0, nIn = 4, nOut = 4, startTokens = 0)  annotation(
         Placement(visible = true, transformation(origin = {16, 22}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  PNlib.Components.PD Heating_I(maxTokens = 1, minTokens = 0, nIn = 5, nOut = 5, startTokens = 0)  annotation(
+  PNlib.Components.PD Heating_I(maxTokens = 1, minTokens = 0, nIn = 4, nOut = 4, startTokens = 0)  annotation(
         Placement(visible = true, transformation(origin = {16, 72}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   PNlib.Components.Settings settings1 annotation(
         Placement(visible = true, transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2680,12 +3118,100 @@ and Humidity")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
   Modelica.Blocks.Math.IntegerToBoolean integerToBoolean1[6](each threshold = 1)  annotation(
         Placement(visible = true, transformation(origin = {-60, -70}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     equation
+      connect(td5.outPlaces[1], Heating_IV.inTransition[4]) annotation(
+        Line(points = {{-12, -60}, {0, -60}, {0, -58}, {16, -58}, {16, -62}, {16, -62}}, thickness = 0.5));
+      connect(td15.outPlaces[1], Heating_IV.inTransition[3]) annotation(
+        Line(points = {{6, -52}, {6, -52}, {6, -58}, {16, -58}, {16, -62}, {16, -62}}, thickness = 0.5));
+    connect(td19.outPlaces[1], Heating_IV.inTransition[2]) annotation(
+        Line(points = {{54, -52}, {54, -58}, {16, -58}, {16, -61}}, thickness = 0.5));
+    connect(td21.outPlaces[1], Heating_IV.inTransition[1]) annotation(
+        Line(points = {{94, 10}, {100, 10}, {100, -58}, {16, -58}, {16, -61}}, thickness = 0.5));
+    connect(Heating_IV.outTransition[4], td7.inPlaces[1]) annotation(
+        Line(points = {{16, -83}, {16, -82}, {-12, -82}}, thickness = 0.5));
+    connect(Heating_IV.outTransition[3], td16.inPlaces[1]) annotation(
+        Line(points = {{16, -83}, {26, -83}, {26, -52}}, thickness = 0.5));
+    connect(Heating_IV.outTransition[2], td20.inPlaces[1]) annotation(
+        Line(points = {{16, -83}, {17, -83}, {17, -82}, {74, -82}, {74, -52}}, thickness = 0.5));
+    connect(Heating_IV.outTransition[1], td22.inPlaces[1]) annotation(
+        Line(points = {{16, -83}, {16, -82}, {100, -82}, {100, -10}, {94, -10}}, thickness = 0.5));
+    connect(Heating_IV.pd_t, integerToBoolean1[5].u) annotation(
+        Line(points = {{27, -72}, {100, -72}, {100, -100}, {-40, -100}, {-40, -40}, {-60, -40}, {-60, -58}}, color = {255, 127, 0}));
+      connect(td16.outPlaces[1], Heating_III.inTransition[4]) annotation(
+        Line(points = {{26, -44}, {26, -44}, {26, -12}, {16, -12}, {16, -14}}, thickness = 0.5));
+      connect(td4.outPlaces[1], Heating_III.inTransition[3]) annotation(
+        Line(points = {{-12, -12}, {16, -12}, {16, -14}, {16, -14}}, thickness = 0.5));
+      connect(td14.outPlaces[1], Heating_III.inTransition[2]) annotation(
+        Line(points = {{6, -4}, {6, -12}, {16, -12}, {16, -14}}, thickness = 0.5));
+      connect(td18.outPlaces[1], Heating_III.inTransition[1]) annotation(
+        Line(points = {{52, 44}, {54, 44}, {54, -12}, {16, -12}, {16, -14}}, thickness = 0.5));
+      connect(td20.outPlaces[1], Heating_II.inTransition[4]) annotation(
+        Line(points = {{74, -44}, {72, -44}, {72, 36}, {16, 36}, {16, 32}, {16, 32}}, thickness = 0.5));
+      connect(td13.outPlaces[1], Heating_II.inTransition[3]) annotation(
+        Line(points = {{26, 4}, {26, 36}, {16, 36}, {16, 32}}, thickness = 0.5));
+      connect(td11.outPlaces[1], Heating_II.inTransition[1]) annotation(
+        Line(points = {{6, 44}, {6, 36}, {16, 36}, {16, 32}}, thickness = 0.5));
+      connect(td10.outPlaces[1], Heating_II.inTransition[2]) annotation(
+        Line(points = {{-12, 36}, {16, 36}, {16, 32}, {16, 32}}, thickness = 0.5));
+      connect(td22.outPlaces[1], Heating_I.inTransition[4]) annotation(
+        Line(points = {{86, -10}, {80, -10}, {80, 22}, {100, 22}, {100, 84}, {16, 84}, {16, 82}, {16, 82}}, thickness = 0.5));
+      connect(td17.outPlaces[1], Heating_I.inTransition[3]) annotation(
+        Line(points = {{72, 52}, {68, 52}, {68, 84}, {16, 84}, {16, 82}}, thickness = 0.5));
+      connect(td12.outPlaces[1], Heating_I.inTransition[2]) annotation(
+        Line(points = {{26, 52}, {26, 52}, {26, 84}, {16, 84}, {16, 82}}, thickness = 0.5));
+      connect(td8.outPlaces[1], Heating_I.inTransition[1]) annotation(
+        Line(points = {{-12, 84}, {16, 84}, {16, 82}, {16, 82}}, thickness = 0.5));
+      connect(Heating_III.outTransition[4], td15.inPlaces[1]) annotation(
+        Line(points = {{16, -34}, {6, -34}, {6, -42}, {6, -42}, {6, -44}}, thickness = 0.5));
+      connect(Heating_III.outTransition[3], td6.inPlaces[1]) annotation(
+        Line(points = {{16, -34}, {-10, -34}, {-10, -36}, {-12, -36}}, thickness = 0.5));
+      connect(Heating_III.outTransition[2], td13.inPlaces[1]) annotation(
+        Line(points = {{16, -34}, {26, -34}, {26, -4}, {26, -4}, {26, -4}}, thickness = 0.5));
+      connect(Heating_III.outTransition[1], td17.inPlaces[1]) annotation(
+        Line(points = {{16, -34}, {72, -34}, {72, 44}, {72, 44}, {72, 44}}, thickness = 0.5));
+      connect(Heating_II.outTransition[4], td19.inPlaces[1]) annotation(
+        Line(points = {{16, 12}, {52, 12}, {52, -42}, {54, -42}, {54, -44}}, thickness = 0.5));
+      connect(Heating_II.outTransition[3], td14.inPlaces[1]) annotation(
+        Line(points = {{16, 12}, {6, 12}, {6, 6}, {6, 6}, {6, 4}}, thickness = 0.5));
+      connect(Heating_II.outTransition[2], td3.inPlaces[1]) annotation(
+        Line(points = {{16, 12}, {-12, 12}, {-12, 12}, {-12, 12}}, thickness = 0.5));
+      connect(Heating_II.outTransition[1], td12.inPlaces[1]) annotation(
+        Line(points = {{16, 12}, {26, 12}, {26, 42}, {26, 42}, {26, 44}}, thickness = 0.5));
+      connect(Heating_I.outTransition[4], td21.inPlaces[1]) annotation(
+        Line(points = {{16, 62}, {16, 62}, {16, 60}, {100, 60}, {100, 22}, {80, 22}, {80, 10}, {86, 10}, {86, 10}}, thickness = 0.5));
+      connect(Heating_I.outTransition[3], td18.inPlaces[1]) annotation(
+        Line(points = {{16, 62}, {16, 62}, {16, 60}, {52, 60}, {52, 52}, {52, 52}}, thickness = 0.5));
+      connect(Heating_I.outTransition[2], td11.inPlaces[1]) annotation(
+        Line(points = {{16, 62}, {16, 62}, {16, 60}, {6, 60}, {6, 52}, {6, 52}, {6, 52}}, thickness = 0.5));
+      connect(Heating_I.outTransition[1], td9.inPlaces[1]) annotation(
+        Line(points = {{16, 62}, {16, 62}, {16, 60}, {-12, 60}, {-12, 60}}, thickness = 0.5));
+      connect(td9.outPlaces[1], Off.inTransition[1]) annotation(
+        Line(points = {{-20, 60}, {-30, 60}, {-30, 12}, {-40, 12}, {-40, 10}, {-40, 10}}, thickness = 0.5));
+      connect(td3.outPlaces[1], Off.inTransition[2]) annotation(
+        Line(points = {{-20, 12}, {-40, 12}, {-40, 10}, {-40, 10}}, thickness = 0.5));
+      connect(td6.outPlaces[1], Off.inTransition[3]) annotation(
+        Line(points = {{-20, -36}, {-30, -36}, {-30, 12}, {-40, 12}, {-40, 10}, {-40, 10}}, thickness = 0.5));
+      connect(td7.outPlaces[1], Off.inTransition[4]) annotation(
+        Line(points = {{-20, -82}, {-30, -82}, {-30, 12}, {-40, 12}, {-40, 10}, {-40, 10}}, thickness = 0.5));
+      connect(Off.outTransition[4], td5.inPlaces[1]) annotation(
+        Line(points = {{-40, -10}, {-30, -10}, {-30, -60}, {-22, -60}, {-22, -60}, {-20, -60}}, thickness = 0.5));
+      connect(Off.outTransition[3], td4.inPlaces[1]) annotation(
+        Line(points = {{-40, -10}, {-30, -10}, {-30, -14}, {-22, -14}, {-22, -12}, {-20, -12}}, thickness = 0.5));
+      connect(Off.outTransition[2], td10.inPlaces[1]) annotation(
+        Line(points = {{-40, -10}, {-30, -10}, {-30, 36}, {-22, 36}, {-22, 36}, {-20, 36}, {-20, 36}}, thickness = 0.5));
+      connect(Off.outTransition[1], td8.inPlaces[1]) annotation(
+        Line(points = {{-40, -10}, {-30, -10}, {-30, 84}, {-20, 84}, {-20, 84}, {-20, 84}}, thickness = 0.5));
+      connect(td2.inPlaces[1], Off.outTransition[5]) annotation(
+        Line(points = {{-60, -12}, {-40, -12}, {-40, -10}, {-40, -10}}, thickness = 0.5));
+      connect(td1.outPlaces[1], Off.inTransition[5]) annotation(
+        Line(points = {{-60, 12}, {-40, 12}, {-40, 10}, {-40, 10}}, thickness = 0.5));
+      connect(Cooling.outTransition[1], td1.inPlaces[1]) annotation(
+        Line(points = {{-90, 10}, {-90, 10}, {-90, 12}, {-68, 12}, {-68, 12}}, thickness = 0.5));
+      connect(Heating_III.pd_t, integerToBoolean1[4].u) annotation(
+        Line(points = {{26, -24}, {100, -24}, {100, -100}, {-40, -100}, {-40, -40}, {-60, -40}, {-60, -58}}, color = {255, 127, 0}));
+      connect(Cooling.inTransition[1], td2.outPlaces[1]) annotation(
+        Line(points = {{-90, -10}, {-90, -10}, {-90, -12}, {-68, -12}, {-68, -12}}, thickness = 0.5));
       connect(Heating_I.pd_t, integerToBoolean1[2].u) annotation(
         Line(points = {{26, 72}, {100, 72}, {100, -100}, {-40, -100}, {-40, -40}, {-60, -40}, {-60, -58}}, color = {255, 127, 0}));
-      connect(Heating_IV.pd_t, integerToBoolean1[5].u) annotation(
-        Line(points = {{26, -70}, {100, -70}, {100, -100}, {-40, -100}, {-40, -40}, {-60, -40}, {-60, -58}}, color = {255, 127, 0}));
-      connect(Heating_III.pd_t, integerToBoolean1[4].u) annotation(
-        Line(points = {{26, -24}, {100, -24}, {100, -102}, {-40, -102}, {-40, -40}, {-60, -40}, {-60, -56}, {-60, -56}, {-60, -58}}, color = {255, 127, 0}));
       connect(Heating_II.pd_t, integerToBoolean1[3].u) annotation(
         Line(points = {{26, 22}, {100, 22}, {100, -100}, {-40, -100}, {-40, -40}, {-60, -40}, {-60, -58}, {-60, -58}, {-60, -58}}, color = {255, 127, 0}));
     y[22]=u[1] and u[4] and u[7] and u[10] and u[13];
