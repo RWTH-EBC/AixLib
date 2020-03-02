@@ -43,9 +43,9 @@ def _validate_html(path):
     n_msg = len(errMsg)
     for i in range(n_msg):
         if i == 0:
-            print "The following malformed html syntax has been found:\n%s" % errMsg[i]
+            print("The following malformed html syntax has been found:\n%s" % errMsg[i])
         else:
-            print errMsg[i]
+            print(errMsg[i])
 
     if n_msg == 0:
         return 0
