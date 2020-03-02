@@ -13,7 +13,7 @@ model SimpleHRS
 
 equation
 
-  Tinlet = Tzone - (Tair+pinchT*ones(nZones))/etaHRS + Tair
+  Tinlet =(Tzone - (Tair+pinchT*ones(nZones)))*etaHRS + Tair
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 
