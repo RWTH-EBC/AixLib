@@ -7,13 +7,15 @@ package MODI
       Placement(visible = true, transformation(extent = {{90, 48}, {110, 68}}, rotation = 0), iconTransformation(extent = {{90, 48}, {110, 68}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput TAirOutside annotation(
       Placement(visible = true, transformation(origin = {104, 0}, extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin = {104, 0}, extent = {{-14, -14}, {14, 14}}, rotation = 180)));
-    AixLib.Systems.Benchmark_fb.MODI.Level.ManagementLevel_Temp_V2 managementLevel_Temp_V21 annotation(
+    AixLib.Systems.Benchmark_fb.MODI.Level.ManagementLevel_Temp managementLevel_Temp_V21 annotation(
       Placement(visible = true, transformation(origin = {-40, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.MODI.Level.FieldLevel fieldLevel1 annotation(
       Placement(visible = true, transformation(origin = {-40, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V3 automationLevel_V31 annotation(
+    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V1 automationLevel_V31 annotation(
       Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
   equation
+    connect(mainBus1, mainBus) annotation(
+      Line(points = {{-30, -50}, {100, -50}, {100, 58}, {100, 58}, {100, 58}}, color = {255, 204, 51}, thickness = 0.5));
     connect(automationLevel_V31.y[1], fieldLevel1.u[1]) annotation(
       Line(points = {{-40, -10}, {-40, -10}, {-40, -38}, {-40, -38}}, color = {255, 0, 255}, thickness = 0.5));
     connect(automationLevel_V31.y[2], fieldLevel1.u[2]) annotation(
@@ -126,20 +128,8 @@ package MODI
       import Benchmark_fb;
       AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus1 annotation(
         Placement(visible = true, transformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.EONERC_MainBuilding.Controller.CtrGTFSimple ctrGTFSimple1 annotation(
-        Placement(visible = true, transformation(origin = {-110, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.EONERC_MainBuilding.Controller.CtrSWU ctrSWU1 annotation(
-        Placement(visible = true, transformation(origin = {-110, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.EONERC_MainBuilding.Controller.EonERCModeControl.CtrHP ctrHP1 annotation(
-        Placement(visible = true, transformation(origin = {-110, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.ModularAHU.Controller.CtrVentilationUnitTsetRoom ctrVentilationUnitTsetRoom1 annotation(
-        Placement(visible = true, transformation(origin = {-110, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.BooleanInput u[29] annotation(
         Placement(visible = true, transformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {2.22045e-16, 114}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
-      AixLib.Systems.Benchmark.Controller.CtrTabs2 ctrTabs21 annotation(
-        Placement(visible = true, transformation(origin = {-110, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark.Controller.CtrHTSSystem ctrHTSSystem1 annotation(
-        Placement(visible = true, transformation(origin = {-110, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_GTFSystem controller_GTFSystem1 annotation(
         Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_HPSystem controller_HPSystem1 annotation(
@@ -171,6 +161,26 @@ package MODI
       Controller.Controller_Tabs controller_Tabs4 annotation(
         Placement(transformation(extent = {{-80, -100}, {-60, -80}})));
     equation
+      connect(tabsBus21, mainBus1.tabs5Bus) annotation(
+        Line(points = {{-60, -90}, {0, -90}, {0, -100}, {100, -100}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(tabsBus21, mainBus1.tabs4Bus) annotation(
+        Line(points = {{-60, -70}, {0, -70}, {0, -100}, {100, -100}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(tabsBus21, mainBus1.tabs3Bus) annotation(
+        Line(points = {{-60, -50}, {0, -50}, {0, -100}, {100, -100}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(tabsBus21, mainBus1.tabs2Bus) annotation(
+        Line(points = {{-60, -30}, {0, -30}, {0, -100}, {100, -100}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(tabsBus21, mainBus1.tabs1Bus) annotation(
+        Line(points = {{-60, -10}, {0, -10}, {0, -100}, {100, -100}, {100, -2}, {100, -2}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(controller_SwitchingUnit1.u, u[29]) annotation(
+        Line(points = {{-60, 36}, {0, 36}, {0, 114}, {0, 114}, {0, 114}}, color = {255, 0, 255}));
+      connect(switchingUnitBus1, mainBus1.swuBus) annotation(
+        Line(points = {{-60, 30}, {100, 30}, {100, -2}, {100, -2}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(heatPumpSystemBus1, mainBus1.hpSystemBus) annotation(
+        Line(points = {{-60, 50}, {100, 50}, {100, -2}, {100, -2}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(gtfBus, mainBus1.gtfBus) annotation(
+        Line(points = {{-60, 64}, {100, 64}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
+      connect(highTempSystemBus1, mainBus1.htsBus) annotation(
+        Line(points = {{-60, 90}, {100, 90}, {100, 0}, {100, 0}, {100, 0}}, color = {255, 204, 51}, thickness = 0.5));
       connect(u[14], controller_VU_Room11.Cooling) annotation(
         Line(points = {{0, 114.966}, {0, 114.966}, {0, 40}, {60, 40}, {60, 2}, {40.6, 2}, {40.6, 2}}, color = {255, 0, 255}));
       connect(u[13], controller_VU_Room11.Heating) annotation(
@@ -967,17 +977,17 @@ Level")}, coordinateSystem(initialScale = 0.1)));
         Line(points = {{-180, 53.52}, {-180, 53.52}, {-180, 53.52}, {-180, 53.52}, {-180, 47.52}, {-168, 47.52}, {-168, 47.52}}, thickness = 0.5));
       annotation(
         
-        uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),Icon(graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-5, 14}, lineColor = {95, 95, 95}, extent = {{-83, 40}, {97, -56}}, textString = "Management
-    Level")}, coordinateSystem(initialScale = 0.1)));
-    
-
-      annotation(
         Icon(graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-200, 100}, {200, -100}}), Text(origin = {-16, 21}, lineColor = {95, 95, 95}, extent = {{-68, 33}, {98, -71}}, textString = "Management
 Level
 Temperature
 and Humidity")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
   Diagram(coordinateSystem(extent = {{-200, -100}, {200, 100}})),
   __OpenModelica_commandLineOptions = "");
+    
+
+      annotation(
+        uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),Icon(graphics = {Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(origin = {-5, 14}, lineColor = {95, 95, 95}, extent = {{-83, 40}, {97, -56}}, textString = "Management
+    Level")}, coordinateSystem(initialScale = 0.1)));
     end ManagementLevel_Temp_Hum;
 
     model AutomationLevel_V1
@@ -3632,7 +3642,7 @@ and Humidity")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
   end Controller;
 
   model TestingPN
-    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V3 automationLevel_V31 annotation(
+    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V1 automationLevel_V31 annotation(
       Placement(visible = true, transformation(origin = {20, -12}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Pulse pulse1(amplitude = 1, offset = 0, period = 7200, startTime = 0, width = 50) annotation(
       Placement(visible = true, transformation(origin = {-80, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -3690,58 +3700,61 @@ and Humidity")}, coordinateSystem(extent = {{-200, -100}, {200, 100}})),
   end TestingPN;
 
   model testingPN2
-    Level.ManagementLevel_Temp_V2 managementLevel_Temp_V21 annotation(
+    Level.ManagementLevel_Temp managementLevel_Temp annotation(
       Placement(visible = true, transformation(origin = {-26, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Sine sine1(amplitude = 5, freqHz = 1 / 7200, offset = 288.15, startTime = 0) annotation(
       Placement(visible = true, transformation(origin = {-88, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Sine sine2(amplitude = 5, freqHz = 1 / 7200, offset = 293.15, startTime = 0) annotation(
       Placement(visible = true, transformation(origin = {-20, 56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V3 automationLevel_V31 annotation(
+    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V1 automationLevel_V31 annotation(
       Placement(visible = true, transformation(origin = {-20, -38}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Sine sine3(amplitude = 10, freqHz = 1 / 3600, offset = 288.15, startTime = 0) annotation(
       Placement(visible = true, transformation(origin = {32, 12}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  constant Real const1=295.15;
+  constant Real const2=291.15;
   equation
-    connect(managementLevel_Temp_V21.y[1], automationLevel_V31.u[1]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[2], automationLevel_V31.u[2]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[3], automationLevel_V31.u[3]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[4], automationLevel_V31.u[4]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[5], automationLevel_V31.u[5]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[6], automationLevel_V31.u[6]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[7], automationLevel_V31.u[7]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[8], automationLevel_V31.u[8]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[9], automationLevel_V31.u[9]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[10], automationLevel_V31.u[10]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[11], automationLevel_V31.u[11]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[12], automationLevel_V31.u[12]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[13], automationLevel_V31.u[13]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[14], automationLevel_V31.u[14]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
-    connect(managementLevel_Temp_V21.y[15], automationLevel_V31.u[15]) annotation(
-      Line(points = {{-26, -10}, {-20, -10}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+    connect(managementLevel_Temp.y[1], automationLevel_V31.u[1]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[2], automationLevel_V31.u[2]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[3], automationLevel_V31.u[3]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[4], automationLevel_V31.u[4]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[5], automationLevel_V31.u[5]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[6], automationLevel_V31.u[6]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[7], automationLevel_V31.u[7]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[8], automationLevel_V31.u[8]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[9], automationLevel_V31.u[9]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[10], automationLevel_V31.u[10]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[11], automationLevel_V31.u[11]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[12], automationLevel_V31.u[12]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[13], automationLevel_V31.u[13]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[14], automationLevel_V31.u[14]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+      connect(managementLevel_Temp.y[15], automationLevel_V31.u[15]) annotation(
+      Line(points = {{-26, -10}, {-26, -10}, {-26, -20}, {-20, -20}, {-20, -26}, {-20, -26}}, color = {255, 0, 255}, thickness = 0.5));
+     
     connect(sine3.y, automationLevel_V31.TAirOutside) annotation(
       Line(points = {{44, 12}, {66, 12}, {66, -40}, {1, -40}, {1, -38}}, color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp_V21.TRoomMea[5]) annotation(
+    connect(sine2.y, managementLevel_Temp.TRoomMea[5]) annotation(
       Line(points = {{-8, 56}, {-26, 56}, {-26, 12}, {-26, 12}}, color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp_V21.TRoomMea[4]) annotation(
+    connect(sine2.y, managementLevel_Temp.TRoomMea[4]) annotation(
       Line(points = {{-8, 56}, {-26, 56}, {-26, 12}, {-26, 12}}, color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp_V21.TRoomMea[3]) annotation(
+    connect(sine2.y, managementLevel_Temp.TRoomMea[3]) annotation(
       Line(points = {{-8, 56}, {-26, 56}, {-26, 12}, {-26, 12}}, color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp_V21.TRoomMea[2]) annotation(
+    connect(sine2.y, managementLevel_Temp.TRoomMea[2]) annotation(
       Line(points = {{-8, 56}, {-26, 56}, {-26, 10}, {-26, 10}, {-26, 12}, {-26, 12}}, color = {0, 0, 127}));
-    connect(sine1.y, managementLevel_Temp_V21.TRoomMea[1]) annotation(
+    connect(sine1.y, managementLevel_Temp.TRoomMea[1]) annotation(
       Line(points = {{-76, 36}, {-26, 36}, {-26, 12}, {-26, 12}}, color = {0, 0, 127}));
   end testingPN2;
 end MODI;
