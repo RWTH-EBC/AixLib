@@ -15,7 +15,7 @@ Modelica.Blocks.Interfaces.RealInput Tair[nZones]
     annotation (Placement(transformation(extent={{-116,-86},{-86,-56}})));
 equation
 
-  if Tair[1] > (273.15+26+pinchT) then
+  if Tair[1] > (mixedTemp) then
     Tinlet = (mixedTemp*ones(nZones) - (Tair-pinchT*ones(nZones)))*etaHRS + Tair;
   else
     Tinlet = (mixedTemp*ones(nZones) - (Tair+pinchT*ones(nZones)))*etaHRS + Tair;
