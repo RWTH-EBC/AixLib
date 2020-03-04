@@ -15,11 +15,14 @@ Modelica.Blocks.Interfaces.RealInput Tair[nZones]
     annotation (Placement(transformation(extent={{-116,-86},{-86,-56}})));
 equation
 
-  if Tair[1] > (mixedTemp) then
-    Tinlet = (mixedTemp*ones(nZones) - (Tair-pinchT*ones(nZones)))*etaHRS + Tair;
-  else
-    Tinlet = (mixedTemp*ones(nZones) - (Tair+pinchT*ones(nZones)))*etaHRS + Tair;
-  end if;
+//   if noEvent(Tair[1] > (273.15+26)) then
+//     Tinlet = (mixedTemp*ones(nZones) - (Tair-pinchT*ones(nZones)))*etaHRS + Tair;
+//   else
+//     Tinlet = (mixedTemp*ones(nZones) - (Tair+pinchT*ones(nZones)))*etaHRS + Tair;
+//   end if;
+  Tinlet = (mixedTemp*ones(nZones) - Tair)*etaHRS + Tair;
+
+
 
 annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
       coordinateSystem(preserveAspectRatio=false)));
