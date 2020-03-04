@@ -21,14 +21,14 @@ model MultizoneSimpleHRS "Multizone model"
   Modelica.Blocks.Interfaces.RealInput ventRate[numZones](final
     quantity="VolumeFlowRate", final unit="1/h")
     "Ventilation and infiltration rate"
-    annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
+    annotation (Placement(transformation(extent={{-122,-40},{-82,0}}),
         iconTransformation(extent={{-100,-36},{-80,-16}})));
 
   BaseClasses.SimpleHRS simpleHRS(
     pinchT=pinchT,
     etaHRS=etaHRS,
     nZones=numZones,
-    shareVolume=shareVolume,) if ASurTot > 0 or VAir > 0
+    shareVolume=shareVolume) if  ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-56,46},{-36,66}})));
   Utilities.Psychrometrics.MixedTemperature mixedTemperature[numZones] if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-8,38},{12,58}})));
@@ -53,18 +53,21 @@ equation
          {0,0,127}));
   connect(ventTemp, mixedTemperature.temperature_flow2) annotation (Line(points={{-100,8},
           {-26,8},{-26,46},{-7.6,46}},          color={0,0,127}));
-  connect(zone.TAir, simpleHRS.Tzone) annotation (Line(points={{82.1,81.8},{90,81.8},
-          {90,98},{-78,98},{-78,55},{-56,55}}, color={0,0,127}));
-  connect(ventRate, mixedTemperature.flowRate_flow2) annotation (Line(points={{-100,
+  connect(zone.TAir, simpleHRS.Tzone) annotation (Line(points={{82.1,81.8},{90,
+          81.8},{90,98},{-78,98},{-78,54.8},{-56,54.8}},
+                                               color={0,0,127}));
+  connect(ventRate, mixedTemperature.flowRate_flow2) annotation (Line(points={{-102,
           -20},{-20,-20},{-20,41},{-7.6,41}}, color={0,0,127}));
   connect(mixedTemperature.flowRate_flow1, ventHRS) annotation (Line(points={{-7.6,
           51},{-28.8,51},{-28.8,40},{-100,40}}, color={0,0,127}));
   connect(ventRate, addVent.u2)
-    annotation (Line(points={{-100,-20},{50,-20},{50,8}}, color={0,0,127}));
+    annotation (Line(points={{-102,-20},{50,-20},{50,8}}, color={0,0,127}));
   connect(ventHRS, addVent.u1) annotation (Line(points={{-100,40},{-28,40},{-28,
           -12},{38,-12},{38,8}}, color={0,0,127}));
   connect(addVent.y, zone.ventRate) annotation (Line(points={{44,31},{44,42},{44,
           52.28},{44.3,52.28}}, color={0,0,127}));
+  connect(simpleHRS.ventHRS, ventRate) annotation (Line(points={{-56.1,48.9},{
+          -56.1,12.45},{-102,12.45},{-102,-20}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
