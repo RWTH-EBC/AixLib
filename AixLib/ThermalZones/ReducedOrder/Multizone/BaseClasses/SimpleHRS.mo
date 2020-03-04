@@ -16,7 +16,7 @@ Modelica.Blocks.Interfaces.RealInput Tair[nZones]
     annotation (Placement(transformation(extent={{-116,-86},{-86,-56}})));
 equation
 
-Tinlet = (mixedTemp*ones(nZones) - (Tair+pinchT*ones(nZones)))*etaHRS + Tair;
+Tinlet = (mixedTemp*ones(nZones) - (Tair-pinchT*ones(nZones)))*etaHRS + Tair;
 
 
 annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
