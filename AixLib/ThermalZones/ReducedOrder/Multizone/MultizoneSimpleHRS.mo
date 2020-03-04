@@ -6,6 +6,7 @@ model MultizoneSimpleHRS "Multizone model"
   parameter Real pinchT=2;
   parameter Real etaHRS= 0.8;
   parameter Real shareVolume[numZones];
+  parameter Real totalVolume[numZones];
 
   Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
     final quantity="ThermodynamicTemperature",
@@ -28,7 +29,8 @@ model MultizoneSimpleHRS "Multizone model"
     pinchT=pinchT,
     etaHRS=etaHRS,
     nZones=numZones,
-    shareVolume=shareVolume) if  ASurTot > 0 or VAir > 0
+    shareVolume=shareVolume,
+    totalVolume=totalVolume) if  ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-56,46},{-36,66}})));
   Utilities.Psychrometrics.MixedTemperature mixedTemperature[numZones] if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-8,38},{12,58}})));
