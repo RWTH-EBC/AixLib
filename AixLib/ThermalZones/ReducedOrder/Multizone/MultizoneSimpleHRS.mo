@@ -31,7 +31,7 @@ model MultizoneSimpleHRS "Multizone model"
     nZones=numZones,
     shareVolume=shareVolume,
     totalVolume=totalVolume) if  ASurTot > 0 or VAir > 0
-    annotation (Placement(transformation(extent={{-56,46},{-36,66}})));
+    annotation (Placement(transformation(extent={{-24,74},{-4,94}})));
   Utilities.Psychrometrics.MixedTemperature mixedTemperature[numZones] if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-8,38},{12,58}})));
   Modelica.Blocks.Interfaces.RealInput ventHRS[numZones](final quantity="VolumeFlowRate",
@@ -43,21 +43,22 @@ model MultizoneSimpleHRS "Multizone model"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={44,20})));
+  BaseClasses.testMix testMix(nZones=numZones,
+    shareVolume=shareVolume,
+    totalVolume=totalVolume)
+    annotation (Placement(transformation(extent={{-62,48},{-42,68}})));
 equation
 
   connect(ventTemp, simpleHRS.Tair) annotation (Line(points={{-100,8},{-70,8},{-70,
-          63},{-56,63}}, color={0,0,127}));
+          91},{-24,91}}, color={0,0,127}));
   connect(mixedTemperature.mixedTemperatureOut, zone.ventTemp) annotation (Line(
         points={{12,48},{16,48},{16,50},{20,50},{20,61.505},{35.27,61.505}},
         color={0,0,127}));
   connect(simpleHRS.Tinlet, mixedTemperature.temperature_flow1) annotation (
-      Line(points={{-34.5,55.9},{-15.25,55.9},{-15.25,55.8},{-7.6,55.8}}, color=
+      Line(points={{-2.5,83.9},{-15.25,83.9},{-15.25,55.8},{-7.6,55.8}},  color=
          {0,0,127}));
   connect(ventTemp, mixedTemperature.temperature_flow2) annotation (Line(points={{-100,8},
           {-26,8},{-26,46},{-7.6,46}},          color={0,0,127}));
-  connect(zone.TAir, simpleHRS.Tzone) annotation (Line(points={{82.1,81.8},{90,
-          81.8},{90,98},{-78,98},{-78,54.8},{-56,54.8}},
-                                               color={0,0,127}));
   connect(ventRate, mixedTemperature.flowRate_flow2) annotation (Line(points={{-102,
           -20},{-20,-20},{-20,41},{-7.6,41}}, color={0,0,127}));
   connect(mixedTemperature.flowRate_flow1, ventHRS) annotation (Line(points={{-7.6,
@@ -68,8 +69,12 @@ equation
           -12},{38,-12},{38,8}}, color={0,0,127}));
   connect(addVent.y, zone.ventRate) annotation (Line(points={{44,31},{44,42},{44,
           52.28},{44.3,52.28}}, color={0,0,127}));
-  connect(simpleHRS.ventHRS, ventRate) annotation (Line(points={{-56.1,48.9},{
-          -56.1,12.45},{-102,12.45},{-102,-20}}, color={0,0,127}));
+  connect(testMix.Tfromzone, simpleHRS.mixedTemp) annotation (Line(points={{-40.5,
+          57.9},{-40.5,75.95},{-24.1,75.95},{-24.1,76.9}}, color={0,0,127}));
+  connect(ventHRS, testMix.ventHRS) annotation (Line(points={{-100,40},{-66,40},
+          {-66,50.9},{-62.1,50.9}}, color={0,0,127}));
+  connect(TAir, testMix.Tzone) annotation (Line(points={{110,81},{110,98},{-62,
+          98},{-62,56.8}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
