@@ -72,165 +72,154 @@ package CCCS
     parameter Real cConDisHeatFix = 1690 "fixed costs for district heating connection [€]";
     parameter Real cConDisCoolFix = 1690 "fixed costs for district cooling connection [€]";
     Modelica.Blocks.Math.Gain CostFactorDistrictHeating(k = cDisHeat) annotation(
-      Placement(transformation(extent = {{-130, 102}, {-110, 122}})));
+      Placement(visible = true, transformation(extent = {{-40, 80}, {-20, 100}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant Constant(k = -30) annotation(
-      Placement(visible = true, transformation(origin = {-114, 75}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90.9091, 30}, extent = {{-9.09091, -10}, {9.09091, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant FixedCostsConnectionDistrictHeating(k = cConDisHeatFix) annotation(
-      Placement(visible = true, transformation(extent = {{-18, 94}, {2, 114}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-10, 30}, {10, 50}}, rotation = 0)));
     Modelica.Blocks.Math.Gain CostFactorConnectionDistrictHeating(k = cConDisHeat) annotation(
-      Placement(transformation(extent = {{-48, 62}, {-28, 82}})));
+      Placement(visible = true, transformation(extent = {{-40, 50}, {-20, 70}}, rotation = 0)));
     Modelica.Blocks.Math.Gain CostFactorDistrictCooling(k = cDisCool) annotation(
-      Placement(visible = true, transformation(extent = {{-130, 32}, {-110, 52}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-40, -50}, {-20, -30}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant FixedCostsConnection_DistrictCooling(k = cConDisCoolFix) annotation(
-      Placement(visible = true, transformation(extent = {{-46, -14}, {-26, 6}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-10, 0}, {10, 20}}, rotation = 0)));
     Modelica.Blocks.Math.Gain CostFactorConnection_DistrictCooling(k = cConDisCool) annotation(
-      Placement(visible = true, transformation(extent = {{-42, 16}, {-22, 36}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-40, -20}, {-20, 0}}, rotation = 0)));
     Modelica.Blocks.Math.Gain CostFactorElectricity(k = cEl) annotation(
-      Placement(visible = true, transformation(extent = {{12, -46}, {32, -26}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-4, -70}, {16, -50}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealOutput EnergyCost annotation(
-      Placement(transformation(extent = {{92, -10}, {112, 10}})));
+      Placement(visible = true, transformation(extent = {{100, -10}, {120, 10}}, rotation = 0), iconTransformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum Sum_EnergyCost(nu = 4) annotation(
-      Placement(visible = true, transformation(extent = {{68, -6}, {80, 6}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{80, -6}, {92, 6}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum Cost_DistrictCooling(nu = 2) annotation(
-      Placement(visible = true, transformation(extent = {{28, 36}, {40, 48}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{54, -46}, {66, -34}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum PowerConnection_DistrictCooling(nu = 2) annotation(
-      Placement(visible = true, transformation(extent = {{-74, 20}, {-62, 32}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-66, -16}, {-54, -4}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum CostConnection_DistrictCooling(nu = 2) annotation(
-      Placement(visible = true, transformation(extent = {{0, 20}, {12, 32}}, rotation = 0)));
-    Modelica.Blocks.Math.MultiSum PowerConnection_DistrictHeating(nu = 2) annotation(
-      Placement(transformation(extent = {{-76, 66}, {-64, 78}})));
+      Placement(visible = true, transformation(extent = {{28, -16}, {40, -4}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum CostConnectio_DistrictHeating(nu = 2) annotation(
-      Placement(transformation(extent = {{-6, 68}, {6, 80}})));
+      Placement(visible = true, transformation(extent = {{28, 54}, {40, 66}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum Cost_DistrictHeating(nu = 2) annotation(
-      Placement(transformation(extent = {{52, 70}, {64, 82}})));
+      Placement(visible = true, transformation(extent = {{54, 84}, {66, 96}}, rotation = 0)));
     Modelica.Blocks.Math.Gain CostFactor_Fuel(k = cFuel) annotation(
-      Placement(visible = true, transformation(extent = {{14, -86}, {34, -66}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{0, -100}, {20, -80}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant EnergyDemandOfDistrictCooling(k = 0) "Auxiliary Constant - to be replaced by corresponding connection measure bus - CostFactorDistrictCooling in case district cooling is used in model" annotation(
-      Placement(visible = true, transformation(origin = {-154, 43}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90.9091, -40}, extent = {{-9.09091, -10}, {9.09091, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant EnergyDemandForDistrictHeating(k = 0) "auxiliary constant - to be replaced by corresponding connection measure bus - CostFactorDistrictHeating in case district heating is used in model" annotation(
-      Placement(visible = true, transformation(origin = {-152, 111}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90.9091, 90}, extent = {{-9.09091, -10}, {9.09091, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant NominalPowerOfDistrictHeating(k = NomPowDisHeat) annotation(
-      Placement(visible = true, transformation(origin = {-152, 77}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90.9091, 60}, extent = {{-9.09091, -10}, {9.09091, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant NominalPowerOfDistrictCooling(k = NomPowDisCool) annotation(
-      Placement(visible = true, transformation(origin = {-124, 9}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90.9091, -10}, extent = {{-9.09091, -10}, {9.09091, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput WelTotal annotation(
-      Placement(visible = true, transformation(origin = {-102, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-102, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput FuelTotal annotation(
-      Placement(visible = true, transformation(origin = {-100, -78}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-100, -78}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -90}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Modelica.Blocks.Math.MultiSum PowerConnection_DistrictHeating(nu = 2) annotation(
+      Placement(visible = true, transformation(extent = {{-64, 54}, {-52, 66}}, rotation = 0)));
   equation
-    connect(FuelTotal, CostFactor_Fuel.u) annotation(
-      Line(points = {{-100, -78}, {12, -78}, {12, -76}, {12, -76}}, color = {0, 0, 127}));
-    connect(WelTotal, CostFactorElectricity.u) annotation(
-      Line(points = {{-102, -30}, {8, -30}, {8, -36}, {10, -36}}, color = {0, 0, 127}));
-    connect(Cost_DistrictHeating.y, Sum_EnergyCost.u[3]) annotation(
-      Line(points = {{65.02, 76}, {66, 76}, {66, -1.05}, {68, -1.05}}, color = {0, 0, 127}));
-    connect(Cost_DistrictCooling.y, Sum_EnergyCost.u[2]) annotation(
-      Line(points = {{41.02, 42}, {54.51, 42}, {54.51, 1.05}, {68, 1.05}}, color = {0, 0, 127}));
-    connect(CostFactorElectricity.y, Sum_EnergyCost.u[1]) annotation(
-      Line(points = {{33, -36}, {68, -36}, {68, 3.15}}, color = {0, 0, 127}));
-    connect(Sum_EnergyCost.y, EnergyCost) annotation(
-      Line(points = {{81.02, 0}, {102, 0}}, color = {0, 0, 127}));
+    connect(Constant.y, PowerConnection_DistrictHeating.u[2]) annotation(
+      Line(points = {{-80, 30}, {-74, 30}, {-74, 60}, {-64, 60}, {-64, 60}}, color = {0, 0, 127}));
+    connect(NominalPowerOfDistrictHeating.y, PowerConnection_DistrictHeating.u[1]) annotation(
+      Line(points = {{-80, 60}, {-64, 60}, {-64, 60}, {-64, 60}}, color = {0, 0, 127}));
     connect(Constant.y, PowerConnection_DistrictCooling.u[1]) annotation(
-      Line(points = {{-103, 75}, {-103, 25.5}, {-74, 25.5}, {-74, 28.1}}, color = {0, 0, 127}));
-    connect(PowerConnection_DistrictCooling.y, CostFactorConnection_DistrictCooling.u) annotation(
-      Line(points = {{-60.98, 26}, {-44, 26}}, color = {0, 0, 127}));
-    connect(CostFactorConnection_DistrictCooling.y, CostConnection_DistrictCooling.u[1]) annotation(
-      Line(points = {{-21, 26}, {-10, 26}, {-10, 28.1}, {0, 28.1}}, color = {0, 0, 127}));
-    connect(CostFactorDistrictCooling.y, Cost_DistrictCooling.u[1]) annotation(
-      Line(points = {{-109, 42}, {-40, 42}, {-40, 44.1}, {28, 44.1}}, color = {0, 0, 127}));
-    connect(FixedCostsConnectionDistrictHeating.y, CostConnectio_DistrictHeating.u[2]) annotation(
-      Line(points = {{3, 104}, {-16, 104}, {-16, 71.9}, {-6, 71.9}}, color = {0, 0, 127}));
-    connect(Constant.y, PowerConnection_DistrictHeating.u[1]) annotation(
-      Line(points = {{-103, 75}, {-103, 74.5}, {-76, 74.5}, {-76, 74.1}}, color = {0, 0, 127}));
-    connect(PowerConnection_DistrictHeating.y, CostFactorConnectionDistrictHeating.u) annotation(
-      Line(points = {{-62.98, 72}, {-50, 72}}, color = {0, 0, 127}));
-    connect(CostFactorConnectionDistrictHeating.y, CostConnectio_DistrictHeating.u[1]) annotation(
-      Line(points = {{-27, 72}, {-18, 72}, {-18, 76.1}, {-6, 76.1}}, color = {0, 0, 127}));
-    connect(CostConnectio_DistrictHeating.y, Cost_DistrictHeating.u[1]) annotation(
-      Line(points = {{7.02, 74}, {30, 74}, {30, 78.1}, {52, 78.1}}, color = {0, 0, 127}));
-    connect(CostFactorDistrictHeating.y, Cost_DistrictHeating.u[2]) annotation(
-      Line(points = {{-109, 112}, {-28, 112}, {-28, 73.9}, {52, 73.9}}, color = {0, 0, 127}));
-    connect(CostFactor_Fuel.y, Sum_EnergyCost.u[4]) annotation(
-      Line(points = {{35, -76}, {68, -76}, {68, -3.15}}, color = {0, 0, 127}));
-    connect(CostConnection_DistrictCooling.y, Cost_DistrictCooling.u[2]) annotation(
-      Line(points = {{13.02, 26}, {16, 26}, {16, 24}, {28, 24}, {28, 39.9}}, color = {0, 0, 127}));
-    connect(FixedCostsConnection_DistrictCooling.y, CostConnection_DistrictCooling.u[2]) annotation(
-      Line(points = {{-25, -4}, {-4, -4}, {-4, 23.9}, {4.44089e-16, 23.9}}, color = {0, 0, 127}));
-    connect(EnergyDemandOfDistrictCooling.y, CostFactorDistrictCooling.u) annotation(
-      Line(points = {{-143, 43}, {-132, 43}, {-132, 42}}, color = {0, 0, 127}));
-    connect(EnergyDemandForDistrictHeating.y, CostFactorDistrictHeating.u) annotation(
-      Line(points = {{-141, 111}, {-137.5, 111}, {-137.5, 112}, {-132, 112}}, color = {0, 0, 127}));
-    connect(NominalPowerOfDistrictHeating.y, PowerConnection_DistrictHeating.u[2]) annotation(
-      Line(points = {{-141, 77}, {-132, 77}, {-132, 56}, {-84, 56}, {-84, 69.9}, {-76, 69.9}}, color = {0, 0, 127}));
+      Line(points = {{-81, 30}, {-81, 29.25}, {-73, 29.25}, {-73, 29.5}, {-74, 29.5}, {-74, -9.625}, {-66, -9.625}, {-66, -10}}, color = {0, 0, 127}));
     connect(NominalPowerOfDistrictCooling.y, PowerConnection_DistrictCooling.u[2]) annotation(
-      Line(points = {{-113, 9}, {-78, 9}, {-78, 23.9}, {-74, 23.9}}, color = {0, 0, 127}));
+      Line(points = {{-81, -10}, {-66, -10}}, color = {0, 0, 127}));
+    connect(PowerConnection_DistrictHeating.y, CostFactorConnectionDistrictHeating.u) annotation(
+      Line(points = {{-50, 60}, {-44, 60}, {-44, 60}, {-42, 60}}, color = {0, 0, 127}));
+    connect(FixedCostsConnectionDistrictHeating.y, CostConnectio_DistrictHeating.u[2]) annotation(
+      Line(points = {{11, 40}, {20, 40}, {20, 60}, {28, 60}}, color = {0, 0, 127}));
+    connect(EnergyDemandForDistrictHeating.y, CostFactorDistrictHeating.u) annotation(
+      Line(points = {{-81, 90}, {-42, 90}}, color = {0, 0, 127}));
+    connect(CostFactorConnectionDistrictHeating.y, CostConnectio_DistrictHeating.u[1]) annotation(
+      Line(points = {{-19, 60}, {28, 60}}, color = {0, 0, 127}));
+    connect(CostConnectio_DistrictHeating.y, Cost_DistrictHeating.u[1]) annotation(
+      Line(points = {{42, 60}, {48, 60}, {48, 90}, {54, 90}, {54, 90}, {54, 90}}, color = {0, 0, 127}));
+    connect(FixedCostsConnection_DistrictCooling.y, CostConnection_DistrictCooling.u[2]) annotation(
+      Line(points = {{11, 10}, {20, 10}, {20, -10}, {28, -10}}, color = {0, 0, 127}));
+    connect(CostConnection_DistrictCooling.y, Cost_DistrictCooling.u[2]) annotation(
+      Line(points = {{41, -10}, {54, -10}, {54, -40}}, color = {0, 0, 127}));
+    connect(CostFactorConnection_DistrictCooling.y, CostConnection_DistrictCooling.u[1]) annotation(
+      Line(points = {{-19, -10}, {28, -10}}, color = {0, 0, 127}));
+    connect(PowerConnection_DistrictCooling.y, CostFactorConnection_DistrictCooling.u) annotation(
+      Line(points = {{-53, -10}, {-42, -10}}, color = {0, 0, 127}));
+    connect(EnergyDemandOfDistrictCooling.y, CostFactorDistrictCooling.u) annotation(
+      Line(points = {{-81, -40}, {-42, -40}}, color = {0, 0, 127}));
+    connect(CostFactorDistrictHeating.y, Cost_DistrictHeating.u[2]) annotation(
+      Line(points = {{-19, 90}, {54, 90}}, color = {0, 0, 127}));
+    connect(Cost_DistrictHeating.y, Sum_EnergyCost.u[3]) annotation(
+      Line(points = {{67, 90}, {72, 90}, {72, 0}, {80, 0}}, color = {0, 0, 127}));
+    connect(CostFactorDistrictCooling.y, Cost_DistrictCooling.u[1]) annotation(
+      Line(points = {{-19, -40}, {54, -40}}, color = {0, 0, 127}));
+    connect(Cost_DistrictCooling.y, Sum_EnergyCost.u[2]) annotation(
+      Line(points = {{67, -40}, {71.5, -40}, {71.5, 0}, {80, 0}}, color = {0, 0, 127}));
+    connect(WelTotal, CostFactorElectricity.u) annotation(
+      Line(points = {{-120, -60}, {-6, -60}}, color = {0, 0, 127}));
+    connect(CostFactorElectricity.y, Sum_EnergyCost.u[1]) annotation(
+      Line(points = {{17, -60}, {80, -60}, {80, 0}}, color = {0, 0, 127}));
+    connect(FuelTotal, CostFactor_Fuel.u) annotation(
+      Line(points = {{-120, -90}, {-2, -90}}, color = {0, 0, 127}));
+    connect(CostFactor_Fuel.y, Sum_EnergyCost.u[4]) annotation(
+      Line(points = {{21, -90}, {80, -90}, {80, 0}}, color = {0, 0, 127}));
+    connect(Sum_EnergyCost.y, EnergyCost) annotation(
+      Line(points = {{93, 0}, {110, 0}}, color = {0, 0, 127}));
     annotation(
-      Diagram(graphics = {Text(extent = {{-106, 12}, {-1, 52}}, lineColor = {0, 0, 255}, textString = ""), Text(extent = {{-106, -18}, {-1, -58}}, lineColor = {0, 0, 255}, textString = "")}),
-      Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {100, 100}}, initialScale = 0.1), graphics = {Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(lineColor = {0, 0, 255}, extent = {{-38, -34}, {38, 34}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-150, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-118, 32}, {60, -34}}, textString = "Energy-
-Costs")}));
+      Diagram(graphics = {Text(lineColor = {0, 0, 255}, extent = {{-106, -18}, {-1, -58}}, textString = "")}),
+      Icon(graphics = {Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(lineColor = {0, 0, 255}, extent = {{-38, -34}, {38, 34}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {22, 8},lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-118, 32}, {76, -40}}, textString = "Energy-
+Costs")}),
+      __OpenModelica_commandLineOptions = "");
   end EnergyCosts;
 
   model EmissionsCosts "calculating the costs for emissions as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
     Modelica.Blocks.Math.Gain EmissionsFactorDistrictHeating(k = eDisHeat) annotation(
-      Placement(transformation(extent = {{-38, 24}, {-18, 44}})));
+      Placement(visible = true, transformation(extent = {{-40, 60}, {-20, 80}}, rotation = 0)));
     Modelica.Blocks.Math.Gain EmissionsFactorDistrictCooling(k = eDisCool) annotation(
-      Placement(transformation(extent = {{-40, -10}, {-20, 10}})));
+      Placement(visible = true, transformation(extent = {{-40, 18}, {-20, 38}}, rotation = 0)));
     Modelica.Blocks.Math.Gain EmissionsFactorElectricity(k = eEl) annotation(
-      Placement(transformation(extent = {{-38, -44}, {-18, -24}})));
+      Placement(visible = true, transformation(extent = {{-40, -40}, {-20, -20}}, rotation = 0)));
     Modelica.Blocks.Math.Gain CostFactorEmissions(k = cEm) annotation(
-      Placement(visible = true, transformation(extent = {{40, -10}, {60, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{60, -10}, {80, 10}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealOutput Emission_Cost annotation(
-      Placement(transformation(extent = {{94, -10}, {114, 10}})));
+      Placement(visible = true, transformation(extent = {{100, -10}, {120, 10}}, rotation = 0), iconTransformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
     Modelica.Blocks.Math.Gain EmissionsFactorFuel(k = eFuel) annotation(
-      Placement(visible = true, transformation(extent = {{-38, -80}, {-18, -60}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-40, -80}, {-20, -60}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant EnergyDemandForDistrictHeating(k = 0) "auxiliary constabt - to be replaced by corresponding connection measure bus - EmissionsFactorDistrictHeating in case district heating is used in model" annotation(
-      Placement(visible = true, transformation(origin = {-68, 35}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90, 71}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant EnergyDemandForDistrictCooling(k = 0) "auxiliary constant - to be replaced by corresponding connection measure bus - EmissionsFactorDistrictCooling in case district cooling is used in model" annotation(
-      Placement(visible = true, transformation(origin = {-68, 1}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90, 29}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
     parameter Real eFuel = 0.2001 "emissions factor fuel [kg/kWh]";
     parameter Real eEl = 0.474 "emissions factor electricity [kg/kWh]";
     parameter Real eDisHeat = 0.2 "emissions factor district heating [kg/kWh]";
     parameter Real eDisCool = 0.527 "emissions factor district cooling [kg/kWh]";
     parameter Real cEm = 0.0242 "cost factor emissions [€/kg]";
-  Modelica.Blocks.Math.Add add1(k1 = 1, k2 = 1)  annotation(
-      Placement(visible = true, transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add3 add31(k1 = 1, k2 = 1, k3 = 1)  annotation(
-      Placement(visible = true, transformation(origin = {26, -42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Routing.RealPassThrough realPassThrough1 annotation(
-      Placement(visible = true, transformation(origin = {-70, -32}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Routing.RealPassThrough realPassThrough2 annotation(
-      Placement(visible = true, transformation(origin = {-70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput WelTotal annotation(
-      Placement(visible = true, transformation(origin = {-112, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-112, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput FuelTotal annotation(
-      Placement(visible = true, transformation(origin = {-108, -52}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-108, -52}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-120, -70}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -70}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Modelica.Blocks.Math.MultiSum multiSum1(nu = 4)  annotation(
+      Placement(visible = true, transformation(origin = {30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-    connect(FuelTotal, realPassThrough2.u) annotation(
-      Line(points = {{-108, -52}, {-88, -52}, {-88, -70}, {-82, -70}, {-82, -70}}, color = {0, 0, 127}));
-    connect(WelTotal, realPassThrough1.u) annotation(
-      Line(points = {{-112, 0}, {-88, 0}, {-88, -32}, {-82, -32}, {-82, -32}}, color = {0, 0, 127}));
+    connect(EmissionsFactorFuel.y, multiSum1.u[4]) annotation(
+      Line(points = {{-18, -70}, {0, -70}, {0, 0}, {20, 0}, {20, 0}, {20, 0}}, color = {0, 0, 127}));
+    connect(FuelTotal, EmissionsFactorFuel.u) annotation(
+      Line(points = {{-120, -70}, {-42, -70}, {-42, -70}, {-42, -70}}, color = {0, 0, 127}));
+    connect(EmissionsFactorElectricity.y, multiSum1.u[3]) annotation(
+      Line(points = {{-18, -30}, {0, -30}, {0, 0}, {20, 0}}, color = {0, 0, 127}));
+    connect(WelTotal, EmissionsFactorElectricity.u) annotation(
+      Line(points = {{-120, -30}, {-44, -30}, {-44, -30}, {-42, -30}}, color = {0, 0, 127}));
+    connect(EmissionsFactorDistrictCooling.y, multiSum1.u[2]) annotation(
+      Line(points = {{-18, 28}, {0, 28}, {0, 0}, {20, 0}, {20, 0}, {20, 0}}, color = {0, 0, 127}));
+    connect(EmissionsFactorDistrictHeating.y, multiSum1.u[1]) annotation(
+      Line(points = {{-18, 70}, {0, 70}, {0, 0}, {20, 0}}, color = {0, 0, 127}));
+    connect(multiSum1.y, CostFactorEmissions.u) annotation(
+      Line(points = {{42, 0}, {56, 0}, {56, 0}, {58, 0}}, color = {0, 0, 127}));
     connect(EnergyDemandForDistrictCooling.y, EmissionsFactorDistrictCooling.u) annotation(
-      Line(points = {{-57, 1}, {-54, 1}, {-54, 0}, {-42, 0}}, color = {0, 0, 127}));
-    connect(realPassThrough2.y, EmissionsFactorFuel.u) annotation(
-      Line(points = {{-58, -70}, {-40, -70}, {-40, -70}, {-40, -70}}, color = {0, 0, 127}));
-    connect(realPassThrough1.y, EmissionsFactorElectricity.u) annotation(
-      Line(points = {{-58, -32}, {-40, -32}, {-40, -34}, {-40, -34}}, color = {0, 0, 127}));
-    connect(add1.y, CostFactorEmissions.u) annotation(
-      Line(points = {{42, 30}, {38, 30}, {38, 0}, {38, 0}}, color = {0, 0, 127}));
-    connect(EmissionsFactorDistrictHeating.y, add1.u1) annotation(
-      Line(points = {{-16, 34}, {18, 34}, {18, 36}, {18, 36}}, color = {0, 0, 127}));
-    connect(add31.y, add1.u2) annotation(
-      Line(points = {{38, -42}, {16, -42}, {16, 24}, {18, 24}}, color = {0, 0, 127}));
-    connect(EmissionsFactorDistrictCooling.y, add31.u1) annotation(
-      Line(points = {{-18, 0}, {14, 0}, {14, -34}, {14, -34}}, color = {0, 0, 127}));
-    connect(EmissionsFactorElectricity.y, add31.u2) annotation(
-      Line(points = {{-16, -34}, {12, -34}, {12, -42}, {14, -42}}, color = {0, 0, 127}));
-    connect(EmissionsFactorFuel.y, add31.u3) annotation(
-      Line(points = {{-16, -70}, {12, -70}, {12, -50}, {14, -50}}, color = {0, 0, 127}));
-    connect(CostFactorEmissions.y, Emission_Cost) annotation(
-      Line(points = {{61, 0}, {104, 0}}, color = {0, 0, 127}));
+      Line(points = {{-79, 29}, {-54, 29}, {-54, 28}, {-42, 28}}, color = {0, 0, 127}));
     connect(EnergyDemandForDistrictHeating.y, EmissionsFactorDistrictHeating.u) annotation(
-      Line(points = {{-57, 35}, {-40, 35}, {-40, 34}}, color = {0, 0, 127}));
+      Line(points = {{-79, 71}, {-42, 71}, {-42, 70}}, color = {0, 0, 127}));
+    connect(CostFactorEmissions.y, Emission_Cost) annotation(
+      Line(points = {{81, 0}, {110, 0}}, color = {0, 0, 127}));
     annotation(
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -102}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-62, 26}, {54, -32}}, textString = "Emission-
 Costs")}),
@@ -243,31 +232,31 @@ Costs")}),
     Modelica.Blocks.Sources.Constant Tset_workshop(k = TSetWorkshop) annotation(
       Placement(visible = true, transformation(origin = {-90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum multiSum1(k = {1, 1, 1, 1, 1}, nu = 5) annotation(
-      Placement(visible = true, transformation(origin = {0, -84}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Placement(visible = true, transformation(origin = {0, -90}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     Modelica.Blocks.Interfaces.RealOutput PRC annotation(
-      Placement(visible = true, transformation(origin = {108, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {108, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.Feedback feedback1[15] annotation(
-      Placement(visible = true, transformation(origin = {0, 56}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {0, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Sources.Constant const(k = 1) annotation(
       Placement(visible = true, transformation(origin = {90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Math.Feedback feedback2[5] annotation(
-      Placement(visible = true, transformation(origin = {0, 6}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Sources.Constant salary_per_annum(k = sal) annotation(
-      Placement(visible = true, transformation(origin = {90, 52}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Sources.Constant productivity_factor(k = prodFac) annotation(
-      Placement(visible = true, transformation(origin = {90, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Sources.Constant const1(k = 1 / (233 * 8 * 60)) annotation(
-      Placement(visible = true, transformation(origin = {90, -32}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+      Placement(visible = true, transformation(origin = {90, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Continuous.Integrator integrator1[5](k = {1, 1, 1, 1, 1}, each use_reset = true) annotation(
-      Placement(visible = true, transformation(origin = {0, -26}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Placement(visible = true, transformation(origin = {0, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
     parameter Real prodFac = 1.2 "productivity factor [-]";
     parameter Real sal = 50000 "average salary of employee per annum [€]";
     parameter Real TSet = 293.14 "set room temperature [K]";
     parameter Real TSetWorkshop = 288.15 "set room temperature for workshop [K]";
     Modelica.Blocks.Sources.BooleanExpression booleanExpression[5](each y = true) annotation(
-      Placement(visible = true, transformation(extent = {{-84, -42}, {-64, -22}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-100, -50}, {-80, -30}}, rotation = 0)));
     Modelica.Blocks.Math.MultiProduct multiProduct[5](each nu = 4) annotation(
-      Placement(transformation(extent = {{-6, -6}, {6, 6}}, rotation = 270, origin = {0, -56})));
+      Placement(visible = true, transformation(origin = {0, -66}, extent = {{-6, -6}, {6, 6}}, rotation = 270)));
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_Temp lRM_Temp[5] annotation(
       Placement(visible = true, transformation(extent = {{-40, 60}, {-20, 80}}, rotation = 0)));
     Benchmark.BaseClasses.MainBus mainBus annotation(
@@ -277,72 +266,190 @@ Costs")}),
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.LRM_CO2 lrm_co21[5] annotation(
       Placement(visible = true, transformation(origin = {30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
     Modelica.Blocks.Math.MultiProduct multiProduct1[5](each nu = 3) annotation(
-      Placement(visible = true, transformation(origin = {0, 32}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
+      Placement(visible = true, transformation(origin = {0, 28}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
   equation
-    connect(feedback1[6].y, multiProduct1[2].u[3]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 40}, {0, 40}, {-3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[5].y, multiProduct1[2].u[2]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 42}, {0, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[4].y, multiProduct1[2].u[1]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 40}, {3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[9].y, multiProduct1[3].u[3]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 40}, {0, 40}, {-3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[8].y, multiProduct1[3].u[2]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 42}, {0, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[7].y, multiProduct1[3].u[1]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 40}, {3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[12].y, multiProduct1[4].u[3]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 40}, {0, 40}, {-3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[11].y, multiProduct1[4].u[2]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 42}, {0, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[10].y, multiProduct1[4].u[1]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 40}, {3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[15].y, multiProduct1[5].u[3]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 40}, {0, 40}, {-3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[14].y, multiProduct1[5].u[2]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 42}, {0, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[13].y, multiProduct1[5].u[1]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 40}, {3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[3].y, multiProduct1[1].u[3]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 40}, {0, 40}, {-3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[2].y, multiProduct1[1].u[2]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 42}, {0, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(feedback1[1].y, multiProduct1[1].u[1]) annotation(
-      Line(points = {{-9, 56}, {-20, 56}, {-20, 44}, {0, 44}, {0, 42}, {0, 40}, {3.73333, 40}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(multiProduct1[5].y, feedback2[5].u2) annotation(
-      Line(points = {{0, 22.64}, {0, 22.64}, {0, 14}, {0, 14}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(multiProduct1[4].y, feedback2[4].u2) annotation(
-      Line(points = {{0, 22.64}, {0, 22.64}, {0, 14}, {0, 14}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(multiProduct1[3].y, feedback2[3].u2) annotation(
-      Line(points = {{0, 22.64}, {0, 22.64}, {0, 14}, {0, 14}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(multiProduct1[2].y, feedback2[2].u2) annotation(
-      Line(points = {{0, 22.64}, {0, 22.64}, {0, 14}, {0, 14}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(booleanExpression[1].y, integrator1[1].reset) annotation(
+      Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
+    connect(booleanExpression[2].y, integrator1[2].reset) annotation(
+      Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
+    connect(booleanExpression[3].y, integrator1[3].reset) annotation(
+      Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
+    connect(booleanExpression[4].y, integrator1[4].reset) annotation(
+      Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
+    connect(booleanExpression[5].y, integrator1[5].reset) annotation(
+      Line(points = {{-79, -40}, {-40.5, -40}, {-40.5, -36}, {-12, -36}}, color = {255, 0, 255}));
     connect(multiProduct1[1].y, feedback2[1].u2) annotation(
-      Line(points = {{0, 22.64}, {0, 22.64}, {0, 14}, {0, 14}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_co21[2].y, feedback1[6].u2) annotation(
-      Line(points = {{19.8, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_voc1[2].y, feedback1[5].u2) annotation(
-      Line(points = {{0, 77.4}, {0, 77.4}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lRM_Temp[2].y, feedback1[4].u2) annotation(
-      Line(points = {{-19.2, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_co21[3].y, feedback1[9].u2) annotation(
-      Line(points = {{19.8, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_voc1[3].y, feedback1[8].u2) annotation(
-      Line(points = {{0, 77.4}, {0, 77.4}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lRM_Temp[3].y, feedback1[7].u2) annotation(
-      Line(points = {{-19.2, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_co21[4].y, feedback1[12].u2) annotation(
-      Line(points = {{19.8, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_voc1[4].y, feedback1[11].u2) annotation(
-      Line(points = {{0, 77.4}, {0, 77.4}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lRM_Temp[4].y, feedback1[10].u2) annotation(
-      Line(points = {{-19.2, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_co21[5].y, feedback1[15].u2) annotation(
-      Line(points = {{19.8, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_voc1[5].y, feedback1[14].u2) annotation(
-      Line(points = {{0, 77.4}, {0, 77.4}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
+      Line(points = {{0, 19}, {0, 8}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(multiProduct1[2].y, feedback2[2].u2) annotation(
+      Line(points = {{0, 19}, {0, 8}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(multiProduct1[3].y, feedback2[3].u2) annotation(
+      Line(points = {{0, 19}, {0, 8}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(multiProduct1[4].y, feedback2[4].u2) annotation(
+      Line(points = {{0, 19}, {0, 8}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(multiProduct1[5].y, feedback2[5].u2) annotation(
+      Line(points = {{0, 19}, {0, 8}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[1].y, multiProduct1[1].u[1]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[2].y, multiProduct1[1].u[2]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[3].y, multiProduct1[1].u[3]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[13].y, multiProduct1[5].u[1]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[14].y, multiProduct1[5].u[2]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[15].y, multiProduct1[5].u[3]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[10].y, multiProduct1[4].u[1]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[11].y, multiProduct1[4].u[2]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[12].y, multiProduct1[4].u[3]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[7].y, multiProduct1[3].u[1]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[8].y, multiProduct1[3].u[2]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[9].y, multiProduct1[3].u[3]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[4].y, multiProduct1[2].u[1]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[5].y, multiProduct1[2].u[2]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(feedback1[6].y, multiProduct1[2].u[3]) annotation(
+      Line(points = {{-9, 50}, {-20, 50}, {-20, 44}, {0, 44}, {0, 36}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(const.y, feedback1[1].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[2].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[3].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[4].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[5].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[6].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[7].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[8].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[9].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[10].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[11].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[12].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[13].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[14].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(const.y, feedback1[15].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 50}, {8, 50}}, color = {0, 0, 127}));
+    connect(lRM_Temp[1].y, feedback1[1].u2) annotation(
+      Line(points = {{-19.2, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_voc1[1].y, feedback1[2].u2) annotation(
+      Line(points = {{0, 77}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_co21[1].y, feedback1[3].u2) annotation(
+      Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
     connect(lRM_Temp[5].y, feedback1[13].u2) annotation(
-      Line(points = {{-19.2, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
+      Line(points = {{-19.2, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_voc1[5].y, feedback1[14].u2) annotation(
+      Line(points = {{0, 77}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_co21[5].y, feedback1[15].u2) annotation(
+      Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lRM_Temp[4].y, feedback1[10].u2) annotation(
+      Line(points = {{-19.2, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_voc1[4].y, feedback1[11].u2) annotation(
+      Line(points = {{0, 77}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_co21[4].y, feedback1[12].u2) annotation(
+      Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lRM_Temp[3].y, feedback1[7].u2) annotation(
+      Line(points = {{-19.2, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_voc1[3].y, feedback1[8].u2) annotation(
+      Line(points = {{0, 77}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_co21[3].y, feedback1[9].u2) annotation(
+      Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lRM_Temp[2].y, feedback1[4].u2) annotation(
+      Line(points = {{-19.2, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_voc1[2].y, feedback1[5].u2) annotation(
+      Line(points = {{0, 77}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(lrm_co21[2].y, feedback1[6].u2) annotation(
+      Line(points = {{19.8, 70}, {0, 70}, {0, 58}}, color = {0, 0, 127}, thickness = 0.5));
+    connect(productivity_factor.y, multiProduct[5].u[3]) annotation(
+      Line(points = {{79, 0}, {60, 0}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(productivity_factor.y, multiProduct[4].u[3]) annotation(
+      Line(points = {{79, 0}, {60, 0}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(productivity_factor.y, multiProduct[3].u[3]) annotation(
+      Line(points = {{79, 0}, {60, 0}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(productivity_factor.y, multiProduct[2].u[3]) annotation(
+      Line(points = {{79, 0}, {60, 0}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(productivity_factor.y, multiProduct[1].u[3]) annotation(
+      Line(points = {{79, 0}, {60, 0}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(const1.y, multiProduct[5].u[4]) annotation(
+      Line(points = {{79, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(const1.y, multiProduct[4].u[4]) annotation(
+      Line(points = {{79, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(const1.y, multiProduct[3].u[4]) annotation(
+      Line(points = {{79, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(const1.y, multiProduct[2].u[4]) annotation(
+      Line(points = {{79, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(const1.y, multiProduct[1].u[4]) annotation(
+      Line);
+    connect(feedback2[1].y, integrator1[1].u) annotation(
+      Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
+    connect(feedback2[2].y, integrator1[2].u) annotation(
+      Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
+    connect(feedback2[3].y, integrator1[3].u) annotation(
+      Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
+    connect(feedback2[4].y, integrator1[4].u) annotation(
+      Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
+    connect(feedback2[5].y, integrator1[5].u) annotation(
+      Line(points = {{-9, 0}, {-26, 0}, {-26, -18}, {0, -18}}, color = {0, 0, 127}));
+    connect(const.y, feedback2[1].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
+    connect(const.y, feedback2[2].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
+    connect(const.y, feedback2[3].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
+    connect(const.y, feedback2[4].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
+    connect(const.y, feedback2[5].u1) annotation(
+      Line(points = {{79, 90}, {60, 90}, {60, 0}, {8, 0}}, color = {0, 0, 127}));
+    connect(integrator1[1].y, multiProduct[1].u[1]) annotation(
+      Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(integrator1[2].y, multiProduct[2].u[1]) annotation(
+      Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(integrator1[3].y, multiProduct[3].u[1]) annotation(
+      Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(integrator1[4].y, multiProduct[4].u[1]) annotation(
+      Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(integrator1[5].y, multiProduct[5].u[1]) annotation(
+      Line(points = {{0, -41}, {0, -48}, {-4, -48}, {-4, -60}, {0, -60}}, color = {0, 0, 127}));
+  connect(multiProduct[5].y, multiSum1.u[5]) annotation(
+      Line(points = {{0, -73}, {0, -80}}, color = {0, 0, 127}));
+  connect(multiProduct[4].y, multiSum1.u[4]) annotation(
+      Line(points = {{0, -73}, {0, -80}}, color = {0, 0, 127}));
+  connect(multiProduct[3].y, multiSum1.u[3]) annotation(
+      Line(points = {{0, -73}, {0, -80}}, color = {0, 0, 127}));
+  connect(multiProduct[2].y, multiSum1.u[2]) annotation(
+      Line(points = {{0, -73}, {0, -80}}, color = {0, 0, 127}));
+  connect(multiProduct[1].y, multiSum1.u[1]) annotation(
+      Line(points = {{0, -73}, {0, -80}}, color = {0, 0, 127}));
+  connect(salary_per_annum.y, multiProduct[5].u[2]) annotation(
+      Line(points = {{79, 50}, {60, 50}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+  connect(salary_per_annum.y, multiProduct[4].u[2]) annotation(
+      Line(points = {{79, 50}, {60, 50}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+  connect(salary_per_annum.y, multiProduct[3].u[2]) annotation(
+      Line(points = {{79, 50}, {60, 50}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+  connect(salary_per_annum.y, multiProduct[2].u[2]) annotation(
+      Line(points = {{79, 50}, {60, 50}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+  connect(salary_per_annum.y, multiProduct[1].u[2]) annotation(
+      Line(points = {{79, 50}, {60, 50}, {60, -60}, {0, -60}}, color = {0, 0, 127}));
+    connect(multiSum1.y, PRC) annotation(
+      Line(points = {{0, -102}, {-0.5, -102}, {-0.5, -100}, {60, -100}, {60, -80}, {110, -80}}, color = {0, 0, 127}));
     connect(mainBus, lrm_co21[1].mainBus1) annotation(
       Line(points = {{-102, 0}, {-50, 0}, {-50, 100}, {42, 100}, {42, 70}, {40, 70}, {40, 70}, {40, 70}}, color = {255, 204, 51}, thickness = 0.5));
     connect(mainBus, lrm_co21[2].mainBus1) annotation(
@@ -363,12 +470,6 @@ Costs")}),
       Line(points = {{-79, 90}, {-70, 90}, {-70, 64}, {-40, 64}, {-40, 65.2}}, color = {0, 0, 127}));
     connect(Tset_workshop.y, lRM_Temp[1].Tset) annotation(
       Line(points = {{-79, 50}, {-70, 50}, {-70, 64}, {-40, 64}, {-40, 65.2}}, color = {0, 0, 127}));
-    connect(lrm_co21[1].y, feedback1[3].u2) annotation(
-      Line(points = {{19.8, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lrm_voc1[1].y, feedback1[2].u2) annotation(
-      Line(points = {{0, 77.4}, {0, 77.4}, {0, 64}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
-    connect(lRM_Temp[1].y, feedback1[1].u2) annotation(
-      Line(points = {{-19.2, 70}, {0, 70}, {0, 66}, {0, 66}, {0, 64}}, color = {0, 0, 127}, thickness = 0.5));
     connect(mainBus, lrm_voc1[1].mainBus1) annotation(
       Line(points = {{-102, 0}, {-50, 0}, {-50, 100}, {0, 100}, {0, 98}, {0, 98.2}, {0, 98.2}}, color = {255, 204, 51}, thickness = 0.5));
     connect(mainBus, lrm_voc1[2].mainBus1) annotation(
@@ -389,117 +490,6 @@ Costs")}),
       Line(points = {{-101.95, 0.05}, {-70, 0.05}, {-70, 0}, {-50, 0}, {-50, 76.5}, {-40, 76.5}, {-40, 76.8}}, color = {255, 204, 51}, thickness = 0.5));
     connect(mainBus.TRoom5Mea, lRM_Temp[5].T) annotation(
       Line(points = {{-101.95, 0.05}, {-96, 0.05}, {-96, 0}, {-50, 0}, {-50, 76.5}, {-40, 76.5}, {-40, 76.8}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(const.y, feedback2[5].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 6}, {8, 6}}, color = {0, 0, 127}));
-    connect(const.y, feedback2[4].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 6}, {8, 6}}, color = {0, 0, 127}));
-    connect(const.y, feedback2[3].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 6}, {8, 6}}, color = {0, 0, 127}));
-    connect(const.y, feedback2[2].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 6}, {8, 6}}, color = {0, 0, 127}));
-    connect(const.y, feedback2[1].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 6}, {8, 6}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[15].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[14].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[13].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[12].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[11].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[10].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[9].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[8].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[7].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[6].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[5].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[4].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[3].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[2].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(const.y, feedback1[1].u1) annotation(
-      Line(points = {{79, 90}, {60, 90}, {60, 56}, {8, 56}}, color = {0, 0, 127}));
-    connect(feedback2[5].y, integrator1[5].u) annotation(
-      Line(points = {{-9, 6}, {-26, 6}, {-26, -14}, {0, -14}}, color = {0, 0, 127}));
-    connect(feedback2[4].y, integrator1[4].u) annotation(
-      Line(points = {{-9, 6}, {-26, 6}, {-26, -14}, {0, -14}}, color = {0, 0, 127}));
-    connect(feedback2[3].y, integrator1[3].u) annotation(
-      Line(points = {{-9, 6}, {-26, 6}, {-26, -14}, {0, -14}}, color = {0, 0, 127}));
-    connect(feedback2[2].y, integrator1[2].u) annotation(
-      Line(points = {{-9, 6}, {-26, 6}, {-26, -14}, {0, -14}}, color = {0, 0, 127}));
-    connect(feedback2[1].y, integrator1[1].u) annotation(
-      Line(points = {{-9, 6}, {-26, 6}, {-26, -14}, {0, -14}}, color = {0, 0, 127}));
-    connect(booleanExpression[5].y, integrator1[5].reset) annotation(
-      Line(points = {{-63, -32}, {-12, -32}}, color = {255, 0, 255}));
-    connect(booleanExpression[4].y, integrator1[4].reset) annotation(
-      Line(points = {{-63, -32}, {-12, -32}}, color = {255, 0, 255}));
-    connect(booleanExpression[3].y, integrator1[3].reset) annotation(
-      Line(points = {{-63, -32}, {-12, -32}}, color = {255, 0, 255}));
-    connect(booleanExpression[2].y, integrator1[2].reset) annotation(
-      Line(points = {{-63, -32}, {-12, -32}}, color = {255, 0, 255}));
-    connect(booleanExpression[1].y, integrator1[1].reset) annotation(
-      Line(points = {{-63, -32}, {-12, -32}}, color = {255, 0, 255}));
-    connect(integrator1[5].y, multiProduct[5].u[1]) annotation(
-      Line(points = {{0, -37}, {0, -48}, {-4, -48}, {-4, -50}, {3.15, -50}}, color = {0, 0, 127}));
-    connect(integrator1[4].y, multiProduct[4].u[1]) annotation(
-      Line(points = {{0, -37}, {0, -48}, {-4, -48}, {-4, -50}, {3.15, -50}}, color = {0, 0, 127}));
-    connect(integrator1[3].y, multiProduct[3].u[1]) annotation(
-      Line(points = {{0, -37}, {0, -48}, {-4, -48}, {-4, -50}, {3.15, -50}}, color = {0, 0, 127}));
-    connect(integrator1[2].y, multiProduct[2].u[1]) annotation(
-      Line(points = {{0, -37}, {0, -48}, {-4, -48}, {-4, -50}, {3.15, -50}}, color = {0, 0, 127}));
-    connect(integrator1[1].y, multiProduct[1].u[1]) annotation(
-      Line(points = {{0, -37}, {0, -48}, {-4, -48}, {-4, -50}, {3.15, -50}}, color = {0, 0, 127}));
-    connect(multiSum1.y, PRC) annotation(
-      Line(points = {{0, -95.7}, {54, -95.7}, {54, -70}, {108, -70}}, color = {0, 0, 127}));
-    connect(salary_per_annum.y, multiProduct[1].u[2]) annotation(
-      Line(points = {{79, 52}, {60, 52}, {60, -52}, {1.05, -52}, {1.05, -50}}, color = {0, 0, 127}));
-    connect(productivity_factor.y, multiProduct[1].u[3]) annotation(
-      Line(points = {{79, 10}, {60, 10}, {60, -52}, {-3.5, -52}, {-3.5, -50}, {-1.05, -50}}, color = {0, 0, 127}));
-    connect(const1.y, multiProduct[1].u[4]);
-    connect(salary_per_annum.y, multiProduct[2].u[2]) annotation(
-      Line(points = {{79, 52}, {60, 52}, {60, -52}, {1.05, -52}, {1.05, -50}}, color = {0, 0, 127}));
-    connect(productivity_factor.y, multiProduct[2].u[3]) annotation(
-      Line(points = {{79, 10}, {60, 10}, {60, -52}, {-3.5, -52}, {-3.5, -50}, {-1.05, -50}}, color = {0, 0, 127}));
-    connect(const1.y, multiProduct[2].u[4]) annotation(
-      Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {-3.15, -50}}, color = {0, 0, 127}));
-    connect(salary_per_annum.y, multiProduct[3].u[2]) annotation(
-      Line(points = {{79, 52}, {60, 52}, {60, -52}, {1.05, -52}, {1.05, -50}}, color = {0, 0, 127}));
-    connect(productivity_factor.y, multiProduct[3].u[3]) annotation(
-      Line(points = {{79, 10}, {60, 10}, {60, -52}, {-3.5, -52}, {-3.5, -50}, {-1.05, -50}}, color = {0, 0, 127}));
-    connect(const1.y, multiProduct[3].u[4]) annotation(
-      Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {-3.15, -50}}, color = {0, 0, 127}));
-    connect(salary_per_annum.y, multiProduct[4].u[2]) annotation(
-      Line(points = {{79, 52}, {60, 52}, {60, -52}, {1.05, -52}, {1.05, -50}}, color = {0, 0, 127}));
-    connect(productivity_factor.y, multiProduct[4].u[3]) annotation(
-      Line(points = {{79, 10}, {60, 10}, {60, -52}, {-3.5, -52}, {-3.5, -50}, {-1.05, -50}}, color = {0, 0, 127}));
-    connect(const1.y, multiProduct[4].u[4]) annotation(
-      Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {-3.15, -50}}, color = {0, 0, 127}));
-    connect(salary_per_annum.y, multiProduct[5].u[2]) annotation(
-      Line(points = {{79, 52}, {60, 52}, {60, -52}, {1.05, -52}, {1.05, -50}}, color = {0, 0, 127}));
-    connect(productivity_factor.y, multiProduct[5].u[3]) annotation(
-      Line(points = {{79, 10}, {60, 10}, {60, -52}, {-3.5, -52}, {-3.5, -50}, {-1.05, -50}}, color = {0, 0, 127}));
-    connect(const1.y, multiProduct[5].u[4]) annotation(
-      Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {-3.15, -50}}, color = {0, 0, 127}));
-    connect(multiProduct[1].y, multiSum1.u[1]) annotation(
-      Line(points = {{0, -63.02}, {0, -68}, {0, -74}, {5.6, -74}}, color = {0, 0, 127}));
-    connect(multiProduct[2].y, multiSum1.u[2]) annotation(
-      Line(points = {{0, -63.02}, {0, -68}, {0, -74}, {2.8, -74}}, color = {0, 0, 127}));
-    connect(multiProduct[3].y, multiSum1.u[3]) annotation(
-      Line(points = {{0, -63.02}, {0, -68}, {0, -74}, {1.77636e-15, -74}}, color = {0, 0, 127}));
-    connect(multiProduct[4].y, multiSum1.u[4]) annotation(
-      Line(points = {{0, -63.02}, {0, -68}, {0, -74}, {-2.8, -74}}, color = {0, 0, 127}));
-    connect(multiProduct[5].y, multiSum1.u[5]) annotation(
-      Line(points = {{0, -63.02}, {0, -68}, {0, -74}, {-5.6, -74}}, color = {0, 0, 127}));
     annotation(
       Line(points = {{79, -32}, {74, -32}, {74, -34}, {60, -34}, {60, -52}, {-2.4, -52}, {-2.4, -50}, {0.525, -50}}, color = {0, 0, 127}),
       Icon(coordinateSystem(initialScale = 0.1), graphics = {Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(extent = {{-100, 52}, {5, 92}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-68, 36}, {62, -40}}, textString = "Performance-
@@ -525,28 +515,25 @@ Costs")}));
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-50, 32}, {52, -30}}, textString = "Investment-
 Costs for
 Strategy")}),
-      Diagram(coordinateSystem(preserveAspectRatio = false)));
+      Diagram(coordinateSystem(preserveAspectRatio = false)),
+  Documentation(info = "<html><head></head><body><h4>calculating the investement for implementing a new control strategy as part of the investment costs to evaluate the performance of control strategies according to CCCS evaluation method</h4></body></html>"));
   end InvestmentCostsStrategy;
 
   model Evaluation_CCCS
     Modelica.Blocks.Math.Product product1 annotation(
-      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {38, 36})));
-    CCCS.EmissionsCosts EmissionsCosts annotation(
-      Placement(transformation(extent = {{-80, 48}, {-60, 68}})));
+      Placement(visible = true, transformation(origin = {20,30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.RBF RBF(i = 0.05, t = 1) annotation(
-      Placement(visible = true, transformation(origin = {8, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-10, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.MultiSum OperationalCosts(k = {1, 1, 1, 1}, nu = 4) annotation(
-      Placement(visible = true, transformation(extent = {{-20, 26}, {-8, 38}}, rotation = 0)));
+      Placement(visible = true, transformation(extent = {{-24, 18}, {-12, 30}}, rotation = 0)));
     Modelica.Blocks.Math.Add OverallCost annotation(
-      Placement(transformation(extent = {{58, -10}, {78, 10}})));
+      Placement(visible = true, transformation(extent = {{60, -10}, {80, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.PerformanceReductionCosts performanceReductionCosts1 annotation(
-      Placement(visible = true, transformation(origin = {-70, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-70, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Math.Add InvestmentCosts annotation(
-      Placement(visible = true, transformation(origin = {-8, -66}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {20, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.InvestmentCostsStrategy investmentCostsStrategy1 annotation(
       Placement(visible = true, transformation(origin = {-70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    CCCS.EnergyCosts energyCosts annotation(
-      Placement(transformation(extent = {{-80, 80}, {-60, 100}})));
     Modelica.Blocks.Interfaces.RealOutput OverallCosts_Output annotation(
       Placement(transformation(extent = {{98, -10}, {118, 10}})));
     Benchmark.BaseClasses.MainBus mainBus annotation(
@@ -554,41 +541,54 @@ Strategy")}),
     InvestmentCostsComponents investmentCostsComponents(k_Investment = 0) annotation(
       Placement(transformation(extent = {{-80, -100}, {-60, -80}})));
     AixLib.Systems.Benchmark_fb.CCCS.LifespanReductionCosts lifespanReductionCosts_2_1 annotation(
-      Placement(transformation(extent = {{-84, -30}, {-58, 0}})));
+      Placement(visible = true, transformation(extent = {{-84, -26}, {-58, 4}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.CCCS.EnergyCosts energyCosts1 annotation(
+      Placement(visible = true, transformation(origin = {-70, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  AixLib.Systems.Benchmark_fb.CCCS.EmissionsCosts emissionsCosts1 annotation(
+      Placement(visible = true, transformation(origin = {-70, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-    connect(investmentCostsStrategy1.kStrat, InvestmentCosts.u1) annotation(
-      Line(points = {{-59.8, -50}, {-30, -50}, {-30, -60}, {-20, -60}}, color = {0, 0, 127}));
-    connect(energyCosts.EnergyCost, OperationalCosts.u[3]) annotation(
-      Line(points = {{-59.84, 90}, {-34, 90}, {-34, 32}, {-20, 32}, {-20, 30.95}}, color = {0, 0, 127}));
-    connect(RBF.RBF, product1.u1) annotation(
-      Line(points = {{18.6, 64.4}, {18.6, 38.5}, {26, 38.5}, {26, 42}}, color = {0, 0, 127}));
-    connect(InvestmentCosts.y, OverallCost.u2) annotation(
-      Line(points = {{3, -66}, {42, -66}, {42, -6}, {56, -6}}, color = {0, 0, 127}));
-    connect(OperationalCosts.y, product1.u2) annotation(
-      Line(points = {{-6.98, 32}, {18, 32}, {18, 30}, {26, 30}}, color = {0, 0, 127}));
-    connect(EmissionsCosts.Emission_Cost, OperationalCosts.u[1]) annotation(
-      Line(points = {{-59.6, 58}, {-34, 58}, {-34, 34}, {-24, 34}, {-24, 35.15}, {-20, 35.15}}, color = {0, 0, 127}));
+    connect(mainBus.evaBus.QbrTotalMea, emissionsCosts1.FuelTotal) annotation(
+      Line(points = {{-100, 0}, {-100, 0}, {-100, 52}, {-82, 52}, {-82, 52}}, color = {0, 0, 127}));
+    connect(mainBus.evaBus.WelTotalMea, emissionsCosts1.WelTotal) annotation(
+      Line(points = {{-100, 0}, {-100, 0}, {-100, 58}, {-82, 58}, {-82, 56}}, color = {0, 0, 127}));
+    connect(mainBus, lifespanReductionCosts_2_1.mainBus) annotation(
+      Line(points = {{-100, 0}, {-100, -10}, {-84, -10}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(mainBus.evaBus.QbrTotalMea, energyCosts1.FuelTotal) annotation(
+      Line(points = {{-100, 0}, {-100, 82}, {-82, 82}}, color = {0, 0, 127}));
+    connect(mainBus.evaBus.WelTotalMea, energyCosts1.WelTotal) annotation(
+      Line(points = {{-100, 0}, {-100, 0}, {-100, 84}, {-82, 84}, {-82, 84}}, color = {0, 0, 127}));
+    connect(energyCosts1.EnergyCost, OperationalCosts.u[1]) annotation(
+      Line(points = {{-58, 90}, {-40, 90}, {-40, 24}, {-24, 24}, {-24, 24}, {-24, 24}}, color = {0, 0, 127}));
+    connect(emissionsCosts1.Emission_Cost, OperationalCosts.u[3]) annotation(
+      Line(points = {{-58, 60}, {-40, 60}, {-40, 24}, {-24, 24}}, color = {0, 0, 127}));
+    connect(lifespanReductionCosts_2_1.y, OperationalCosts.u[4]) annotation(
+      Line(points = {{-58, -11}, {-40, -11}, {-40, 24}, {-24, 24}}, color = {0, 0, 127}));
     connect(performanceReductionCosts1.PRC, OperationalCosts.u[2]) annotation(
-      Line(points = {{-59.2, 15}, {-46, 15}, {-46, 14}, {-34, 14}, {-34, 34}, {-28, 34}, {-28, 33.05}, {-20, 33.05}}, color = {0, 0, 127}));
-    connect(product1.y, OverallCost.u1) annotation(
-      Line(points = {{49, 36}, {56, 36}, {56, 6}}, color = {0, 0, 127}));
-    connect(OverallCost.y, OverallCosts_Output) annotation(
-      Line(points = {{79, 0}, {108, 0}}, color = {0, 0, 127}));
+      Line(points = {{-59, 23}, {-46, 23}, {-46, 24}, {-24, 24}}, color = {0, 0, 127}));
     connect(mainBus, performanceReductionCosts1.mainBus) annotation(
-      Line(points = {{-100, 0}, {-100, 22}, {-80.2, 22}}, color = {255, 204, 51}, thickness = 0.5));
+      Line(points = {{-100, 0}, {-100, 30}, {-80, 30}}, color = {255, 204, 51}, thickness = 0.5));
+    connect(OperationalCosts.y, product1.u2) annotation(
+      Line(points = {{-11, 24}, {8, 24}}, color = {0, 0, 127}));
+    connect(RBF.RBF, product1.u1) annotation(
+      Line(points = {{1, 84}, {1, 83.625}, {3, 83.625}, {3, 36.5}, {8, 36.5}, {8, 36}}, color = {0, 0, 127}));
+    connect(product1.y, OverallCost.u1) annotation(
+      Line(points = {{31, 30}, {40.5, 30}, {40.5, 6}, {56, 6}, {56, 7}, {58, 7}, {58, 6}}, color = {0, 0, 127}));
+    connect(InvestmentCosts.y, OverallCost.u2) annotation(
+      Line(points = {{31, -70}, {40, -70}, {40, -6}, {58, -6}}, color = {0, 0, 127}));
+    connect(investmentCostsComponents.y, InvestmentCosts.u2) annotation(
+      Line(points = {{-59.4, -90}, {-30, -90}, {-30, -76}, {8, -76}}, color = {0, 0, 127}));
+    connect(investmentCostsStrategy1.kStrat, InvestmentCosts.u1) annotation(
+      Line(points = {{-59.8, -50}, {-30, -50}, {-30, -64}, {8, -64}}, color = {0, 0, 127}));
+    connect(OverallCost.y, OverallCosts_Output) annotation(
+      Line(points = {{81, 0}, {108, 0}}, color = {0, 0, 127}));
     connect(mainBus, EmissionsCosts.mainBus) annotation(
       Line(points = {{-100, 0}, {-100, 58}, {-80, 58}}, color = {255, 204, 51}, thickness = 0.5));
     connect(mainBus, energyCosts.mainBus) annotation(
       Line(points = {{-100, 0}, {-100, 90}, {-79.84, 90}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(investmentCostsComponents.y, InvestmentCosts.u2) annotation(
-      Line(points = {{-59.4, -90}, {-30, -90}, {-30, -72}, {-20, -72}}, color = {0, 0, 127}));
-    connect(mainBus, lifespanReductionCosts_2_1.mainBus) annotation(
-      Line(points = {{-100, 0}, {-100, -16}, {-84, -16}, {-84, -14.4}}, color = {255, 204, 51}, thickness = 0.5));
-    connect(lifespanReductionCosts_2_1.y, OperationalCosts.u[4]) annotation(
-      Line(points = {{-57.792, -15}, {-34, -15}, {-34, 28}, {-28, 28}, {-28, 28.85}, {-20, 28.85}}, color = {0, 0, 127}));
     annotation(
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-72, 34}, {78, -30}}, textString = "CCCS")}),
-      Diagram(coordinateSystem(preserveAspectRatio = false)));
+      Diagram(coordinateSystem(preserveAspectRatio = false)),
+  Documentation(info = "<html><head></head><body>Evaluation method Cost Coefficient for Control Strategies (CCCS) to evaluate performance of control strategies</body></html>"));
   end Evaluation_CCCS;
 
   model LifespanReductionCosts
@@ -1103,7 +1103,8 @@ Costs")}),
       Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 150}}, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 150}, {150, -152}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-38, 36}, {90, -34}}, textString = "Lifespan
 Reduction
 Costs")}),
-      Diagram(coordinateSystem(preserveAspectRatio = false)));
+      Diagram(coordinateSystem(preserveAspectRatio = false)),
+  Documentation(info = "<html><head></head><body>calculation costs as part of the operational costs of the CCCS evaulation method caused by reduced lifespan of components due to wear during operation</body></html>"));
   end LifespanReductionCosts;
 
   model InvestmentCostsComponents
@@ -1119,59 +1120,61 @@ Costs")}),
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-64, 38}, {58, -34}}, textString = "Investment-
 Costs for
 Components")}),
-      Diagram(coordinateSystem(preserveAspectRatio = false)));
+      Diagram(coordinateSystem(preserveAspectRatio = false)),
+  Documentation(info = "<html><head></head><body>calculating investment for new components &nbsp;as part of the CCCS evaulation method</body></html>"));
   end InvestmentCostsComponents;
 
   package BaseClasses
     model RBF
       Modelica.Blocks.Sources.Constant Constant2(k = 1) annotation(
-        Placement(visible = true, transformation(origin = {-90, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-90, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.Product product annotation(
-        Placement(visible = true, transformation(origin = {36, -66}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {38, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Sources.Constant Constant3(k = -1) annotation(
-        Placement(visible = true, transformation(origin = {-4, 46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {0, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.Add add annotation(
-        Placement(visible = true, transformation(origin = {44, -34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {40, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.Division Prod annotation(
-        Placement(visible = true, transformation(origin = {78, -56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.Add q annotation(
-        Placement(visible = true, transformation(origin = {-48, 46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-42, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealOutput RBF annotation(
-        Placement(visible = true, transformation(extent = {{96, -66}, {116, -46}}, rotation = 0), iconTransformation(extent = {{96, -66}, {116, -46}}, rotation = 0)));
+        Placement(visible = true, transformation(extent = {{100, -10}, {120, 10}}, rotation = 0), iconTransformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.discountingFactor discountingFactor1 annotation(
-        Placement(visible = true, transformation(origin = {-10, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Sources.Constant Rate(k = i) annotation(
-        Placement(visible = true, transformation(origin = {-88, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Sources.Constant Duration(k = t) annotation(
-        Placement(visible = true, transformation(origin = {-90, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-90, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       parameter Real t = 1 "duration in years";
       parameter Real i = 0.05 "interest rate";
     equation
-      connect(Rate.y, product.u2) annotation(
-        Line(points = {{-77, 40}, {-68, 40}, {-68, -72}, {24, -72}}, color = {0, 0, 127}));
-      connect(product.y, Prod.u2) annotation(
-        Line(points = {{47, -66}, {60.5, -66}, {60.5, -62}, {66, -62}}, color = {0, 0, 127}));
-      connect(discountingFactor1.y, product.u1) annotation(
-        Line(points = {{0.6, -40}, {24, -40}, {24, -60}}, color = {0, 0, 127}));
-      connect(add.y, Prod.u1) annotation(
-        Line(points = {{55, -34}, {55, -42.25}, {57, -42.25}, {57, -42.5}, {66, -42.5}, {66, -50}}, color = {0, 0, 127}));
       connect(Duration.y, discountingFactor1.duration) annotation(
-        Line(points = {{-79, -44}, {-20, -44}, {-20, -45}, {-20, -45}}, color = {0, 0, 127}));
-      connect(Rate.y, q.u2) annotation(
-        Line(points = {{-77, 40}, {-60, 40}, {-60, 40}, {-60, 40}}, color = {0, 0, 127}));
-      connect(discountingFactor1.y, add.u2) annotation(
-        Line(points = {{0.6, -40}, {32, -40}, {32, -40}, {32, -40}}, color = {0, 0, 127}));
-      connect(q.y, discountingFactor1.discountingfactor) annotation(
-        Line(points = {{-37, 46}, {-26, 46}, {-26, -35}, {-20, -35}}, color = {0, 0, 127}));
+        Line(points = {{-79, -60}, {-10, -60}, {-10, -5}}, color = {0, 0, 127}));
       connect(Constant3.y, add.u1) annotation(
-        Line(points = {{7, 46}, {12, 46}, {12, -28}, {32, -28}}, color = {0, 0, 127}));
-      connect(Prod.y, RBF) annotation(
-        Line(points = {{89, -56}, {106, -56}}, color = {0, 0, 127}));
+        Line(points = {{11, 60}, {12, 60}, {12, 26}, {28, 26}}, color = {0, 0, 127}));
       connect(Constant2.y, q.u1) annotation(
-        Line(points = {{-79, 90}, {-71.5, 90}, {-71.5, 52}, {-60, 52}}, color = {0, 0, 127}));
+        Line(points = {{-79, 60}, {-71.5, 60}, {-71.5, 36}, {-54, 36}}, color = {0, 0, 127}));
+      connect(Rate.y, q.u2) annotation(
+        Line(points = {{-79, 0}, {-68.5, 0}, {-68.5, 24}, {-54, 24}}, color = {0, 0, 127}));
+      connect(Rate.y, product.u2) annotation(
+        Line(points = {{-79, 0}, {-68, 0}, {-68, -26}, {26, -26}}, color = {0, 0, 127}));
+      connect(q.y, discountingFactor1.discountingfactor) annotation(
+        Line(points = {{-31, 30}, {-26, 30}, {-26, 5}, {-10, 5}}, color = {0, 0, 127}));
+      connect(discountingFactor1.y, add.u2) annotation(
+        Line(points = {{11, 0}, {18.3, 0}, {18.3, 14}, {28, 14}}, color = {0, 0, 127}));
+      connect(discountingFactor1.y, product.u1) annotation(
+        Line(points = {{11, 0}, {18, 0}, {18, -13}, {26, -13}, {26, -14}}, color = {0, 0, 127}));
+      connect(product.y, Prod.u2) annotation(
+        Line(points = {{49, -20}, {60.5, -20}, {60.5, -6}, {68, -6}}, color = {0, 0, 127}));
+      connect(add.y, Prod.u1) annotation(
+        Line(points = {{51, 20}, {51, 20.75}, {59, 20.75}, {59, 5.5}, {68, 5.5}, {68, 6}}, color = {0, 0, 127}));
+      connect(Prod.y, RBF) annotation(
+        Line(points = {{91, 0}, {110, 0}}, color = {0, 0, 127}));
       annotation(
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-54, 28}, {56, -26}}, textString = "RBF")}),
-        Diagram(coordinateSystem(preserveAspectRatio = false)));
+        Diagram(coordinateSystem(preserveAspectRatio = false)),
+  Documentation(info = "<html><head></head><body>calculating annuity factor</body></html>"));
     end RBF;
 
     model LRM_TempAndHum "performance reduction due to room temperature and humidity"
@@ -1739,7 +1742,8 @@ Components")}),
       annotation(
         Diagram(coordinateSystem(extent = {{-400, -180}, {400, 180}})),
         Icon(coordinateSystem(extent = {{-400, -180}, {400, 180}}, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-398, 180}, {402, -180}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-154, 48}, {142, -32}}, textString = "LRM_Temp_Hum")}),
-        __OpenModelica_commandLineOptions = "");
+        __OpenModelica_commandLineOptions = "",
+  Documentation(info = "<html><head></head><body><h4>calaculating costs as part of the operational costs of the CCCS evaluation method caused by performance reduction due to deviation in room temperature and humidity from setpoints</h4></body></html>"));
     end LRM_TempAndHum;
 
     block discountingFactor "u1 is the discounting factor, u2 is the duration in years"
@@ -1842,7 +1846,8 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
         Line(points = {{21, 90}, {74, 90}, {74, 80}, {66, 80}}, color = {0, 0, 127}));
       annotation(
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-64, 36}, {64, -28}}, textString = "LRM_Temp")}),
-        Diagram(coordinateSystem(preserveAspectRatio = false)));
+        Diagram(coordinateSystem(preserveAspectRatio = false)),
+  Documentation(info = "<html><head></head><body><h4>calculating costs as part of the operational costs of the CCCS evaluation mtheod caused by performance reduction due to devation of room temperature from setpoint</h4></body></html>"));
     end LRM_Temp;
 
     model LRM_VOC
@@ -1918,7 +1923,8 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(const2.y, switch11.u3) annotation(
         Line(points = {{-79, -90}, {-74.75, -90}, {-74.75, -98}, {-74.5, -98}, {-74.5, -100}, {-30, -100}, {-30, -88}, {-22, -88}}, color = {0, 0, 127}));
       annotation(
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 3}, lineColor = {95, 95, 95}, extent = {{-55, 21}, {55, -21}}, textString = "LRM_VOC")}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 3}, lineColor = {95, 95, 95}, extent = {{-55, 21}, {55, -21}}, textString = "LRM_VOC")}, coordinateSystem(initialScale = 0.1)),
+        Documentation(info = "<html><head></head><body>calculating costs as part of the operational costs of the CCCS evaluation method due to performance reduction caused by concentration of volatile organic compounds &nbsp;in air</body></html>"));
     end LRM_VOC;
 
     model LRM_CO2
@@ -1948,7 +1954,8 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(const1.y, product1.u1) annotation(
         Line(points = {{-59, 30}, {-56, 30}, {-56, 6}, {-52, 6}, {-52, 6}}, color = {0, 0, 127}));
       annotation(
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 1}, lineColor = {95, 95, 95}, extent = {{-53, 21}, {53, -21}}, textString = "LRM_CO2")}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 1}, lineColor = {95, 95, 95}, extent = {{-53, 21}, {53, -21}}, textString = "LRM_CO2")}, coordinateSystem(initialScale = 0.1)),
+        Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">calculating costs as part of the operational costs of the CCCS evaluation method due to performance reduction caused by concentration of CO2 in air</span></body></html>"));
     end LRM_CO2;
 
     model Lifespan_Reduction_Cost_Component
@@ -2036,7 +2043,8 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(u, derivative1.u) annotation(
         Line(points = {{-104, 0}, {-92, 0}, {-92, 60}, {-82, 60}}, color = {0, 0, 127}));
       annotation(
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {1, 2}, lineColor = {95, 95, 95}, extent = {{-63, 30}, {63, -30}}, textString = "LifespanReductionCost \n One Component")}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {1, 2}, lineColor = {95, 95, 95}, extent = {{-63, 30}, {63, -30}}, textString = "LifespanReductionCost \n One Component")}, coordinateSystem(initialScale = 0.1)),
+        Documentation(info = "<html><head></head><body>calculation costs as part of the operational costs of the CCCS evaluation method caused by reduced lifespan of a single component due to wear during opration</body></html>"));
     end Lifespan_Reduction_Cost_Component;
   end BaseClasses;
 end CCCS;
