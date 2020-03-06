@@ -78,7 +78,7 @@ replaceable model CellTemperature =
   final unit="W")
   "DC output power of the PV array" annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
-  BaseClasses.PVRadiationHorizontalTRY pVRadiationHorizontalTRY(
+  BaseClasses.PVRadiationHorizontal    pVRadiationHorizontalTRY(
    final lat = lat,
    final lon = lon,
    final alt = alt,
@@ -90,22 +90,20 @@ replaceable model CellTemperature =
     glaThi=glaThi,
     refInd=refInd)
    "Radiation and absorptance model for PV simulations"
-    annotation (Placement(transformation(extent={{-32,-50},{-12,-30}})));
+    annotation (Placement(transformation(extent={{-84,-30},{-64,-10}})));
 
   BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
         transformation(extent={{-122,-4},{-82,36}}),  iconTransformation(extent={{-128,-4},
             {-108,16}})));
-  Modelica.Blocks.Math.Add add(k2=-1)
-    annotation (Placement(transformation(extent={{-78,-94},{-58,-74}})));
 equation
 
   connect(pVRadiationHorizontalTRY.radTil, iVCharacteristics.radTil)
-    annotation (Line(points={{-11,-46},{-24,-46},{-24,-40},{8,-40}},
+    annotation (Line(points={{-63,-26},{-24,-26},{-24,-40},{8,-40}},
                                                                  color={0,0,127}));
   connect(pVRadiationHorizontalTRY.absRadRat, iVCharacteristics.absRadRat)
-    annotation (Line(points={{-11,-34},{-2,-34},{-2,-36},{8,-36}}, color={0,0,127}));
+    annotation (Line(points={{-63,-14},{-2,-14},{-2,-36},{8,-36}}, color={0,0,127}));
   connect(pVRadiationHorizontalTRY.radTil, cellTemperature.radTil)
-    annotation (Line(points={{-11,-46},{-54,-46},{-54,57.8},{-42,57.8}},
+    annotation (Line(points={{-63,-26},{-54,-26},{-54,57.8},{-42,57.8}},
                                                                      color={0,0,127}));
   connect(iVCharacteristics.eta, cellTemperature.eta)
     annotation (Line(points={{31,-38},{76,-38},{76,-60},{-50,-60},{-50,61.8},{
@@ -130,26 +128,14 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(pVRadiationHorizontalTRY.radHorDif, weaBus.HDifHor) annotation (Line(
-        points={{-34,-46},{-94,-46},{-94,16},{-102,16}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
+  connect(weaBus.HGloHor, pVRadiationHorizontalTRY.radHor) annotation (Line(
+      points={{-102,16},{-96,16},{-96,-14},{-86,-14}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add.u1, weaBus.HGloHor) annotation (Line(points={{-80,-78},{-80,16},{-102,
-          16}},                color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(add.u2, weaBus.HDifHor) annotation (Line(points={{-80,-90},{-84,-90},{
-          -84,16},{-102,16}},  color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(add.y, pVRadiationHorizontalTRY.radHorBea) annotation (Line(points={{-57,
-          -84},{-46,-84},{-46,-34},{-34,-34}}, color={0,0,127}));
   annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},

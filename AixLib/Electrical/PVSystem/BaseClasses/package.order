@@ -3,5 +3,5 @@ PVModule5pAnalytical
 PartialCellTemperature
 CellTemperatureOpenRack
 CellTemperatureMountingCloseToGround
-PVRadiationHorizontalTRY
 Wsimple
+PVRadiationHorizontal

@@ -5,7 +5,7 @@ model ExamplePVSystem
 
  extends Modelica.Icons.Example;
 
-  PVSystem pVSystemDC(
+  PVSystem pVSystem(
     redeclare DataBase.SolarElectric.QPlusBFRG41285 data,
     n_mod=567,
     lat(displayUnit="deg") = 0.91664692314742,
@@ -33,10 +33,10 @@ model ExamplePVSystem
 
 equation
 
-  connect(pVSystemDC.DCOutputPower, DCOutputPower) annotation (Line(points={{13,0},{
-          110,0}},                                                                          color={0,0,127}));
+  connect(pVSystem.DCOutputPower, DCOutputPower)
+    annotation (Line(points={{13,0},{110,0}}, color={0,0,127}));
 
-  connect(weaDat.weaBus, pVSystemDC.weaBus) annotation (Line(
+  connect(weaDat.weaBus, pVSystem.weaBus) annotation (Line(
       points={{-80,0},{-34,0},{-34,0.6},{-9.8,0.6}},
       color={255,204,51},
       thickness=0.5));
