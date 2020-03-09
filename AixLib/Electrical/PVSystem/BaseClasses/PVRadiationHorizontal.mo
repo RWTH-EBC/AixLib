@@ -269,7 +269,7 @@ equation
 
   radHor = radHorBea + radHorDif;
 
-  radTil = if radHor <= 0.1 then 0 else radHorBea*R_b + radHorDif*(0.5*(1 + cos(
+  radTil = if noEvent(radHor <= 0.1) then 0 else radHorBea*R_b + radHorDif*(0.5*(1 + cos(
   til)*(1 + (1 - (radHorDif/radHor)^2)*sin(til/2)^3)*(1 + (1 - (radHorDif/
   radHor)^2)*(cos(incAng.incAng)^2)*(cos(til)^3)))) + radHor*groRef*(1 - cos(
   til))/2;
@@ -295,7 +295,7 @@ equation
 
 
 
-  absRadRat = if (radHor <=0.1) then 0
+  absRadRat = if noEvent(radHor <=0.1) then 0
   else
   airMasMod*(radHorBea/radTil0*R_b*incAngMod
   +radHorDif/radTil0*incAngModDif*(0.5*(1+cos(til)*(1+(1-(radHorDif/radHor)^2)*sin(til/2)^3)*(1+(1-(radHorDif/radHor)^2)*(cos(incAng.incAng)^2)*(cos(til)^3))))

@@ -102,14 +102,14 @@ equation
  else
   0;
 
- R_sh/R_sh0 = if absRadRat > 0.001 then 1/absRadRat
+ R_sh/R_sh0 = if noEvent(absRadRat > 0.001) then 1/absRadRat
  else
   0;
 
 
 //Simplified Power correlations at MPP using lambert W function (Batzelis et al., 2016)
 
- I_mp = if (absRadRat <= 0.0011 or w<=0.001) then 0
+ I_mp = if noEvent(absRadRat <= 0.0011 or w<=0.001) then 0
  else
  I_ph*(1-1/w)-a*(w-1)/R_sh;
 
@@ -134,7 +134,7 @@ equation
 
 // Efficiency and Performance
 
- eta= if radTil <= 0.01 then 0
+ eta= if noEvent(radTil <= 0.01) then 0
  else
  P_mod/(radTil*A_pan);
 

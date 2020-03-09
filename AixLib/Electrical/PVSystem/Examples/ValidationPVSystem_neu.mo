@@ -36,17 +36,18 @@ model ValidationPVSystem_neu
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(
     tableOnFile=true,
     tableName="Ground2016",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/NIST_onemin_Ground_2016.txt"),
+    fileName=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://AixLib/Resources/weatherdata/NIST_onemin_Ground_2016.txt"),
     columns={5,8,3,6},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC
-    annotation (Placement(transformation(extent={{-62,-2},{-56,4}})));
+    annotation (Placement(transformation(extent={{-58,-2},{-52,4}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable1(
     tableOnFile=true,
     tableName="Ground2016",
-    fileName=Modelica.Utilities.Files.loadResource(
+    fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/NIST_onemin_Ground_2016.txt"),
     columns={1,2,3,4,5,6,7,8,9},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
@@ -54,9 +55,9 @@ model ValidationPVSystem_neu
 
   Modelica.Blocks.Interfaces.RealOutput DCOutputPower_measured
     "DC output power of the PV array"
-    annotation (Placement(transformation(extent={{90,-46},{110,-26}})));
+    annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
   Modelica.Blocks.Math.Gain gain(k=1000)
-    annotation (Placement(transformation(extent={{0,-46},{20,-26}})));
+    annotation (Placement(transformation(extent={{-8,-50},{12,-30}})));
 equation
   connect(pVSystem.DCOutputPower, DCOutputPower)
     annotation (Line(points={{11,0},{100,0}}, color={0,0,127}));
@@ -65,22 +66,22 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(combiTimeTable.y[2], weaBus1.winSpe) annotation (Line(points={{-79,0},
-          {-74,0},{-74,2},{-68,2},{-68,-22},{-24,-22},{-24,0}},
-                                                color={0,0,127}));
+          {-68,0},{-68,-22},{-24,-22},{-24,0}}, color={0,0,127}));
   connect(combiTimeTable.y[3], weaBus1.HGloHor) annotation (Line(points={{-79,0},
-          {-79,28},{-24,28},{-24,0}}, color={0,0,127}));
-  connect(combiTimeTable.y[1], from_degC.u) annotation (Line(points={{-79,0},{-50,
-          0},{-50,1},{-62.6,1}},     color={0,0,127}));
-  connect(from_degC.y, weaBus1.TDryBul) annotation (Line(points={{-55.7,1},{-31.85,
-          1},{-31.85,0},{-24,0}},        color={0,0,127}), Text(
+          {-68,0},{-68,28},{-24,28},{-24,0}},
+                                      color={0,0,127}));
+  connect(combiTimeTable.y[1], from_degC.u) annotation (Line(points={{-79,0},{
+          -62,0},{-62,1},{-58.6,1}}, color={0,0,127}));
+  connect(from_degC.y, weaBus1.TDryBul) annotation (Line(points={{-51.7,1},{
+          -31.85,1},{-31.85,0},{-24,0}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(combiTimeTable.y[4], gain.u) annotation (Line(points={{-79,0},{-78,0},
-          {-78,-36},{-2,-36}},          color={0,0,127}));
+  connect(combiTimeTable.y[4], gain.u) annotation (Line(points={{-79,0},{-68,0},
+          {-68,-40},{-10,-40}},         color={0,0,127}));
   connect(gain.y, DCOutputPower_measured)
-    annotation (Line(points={{21,-36},{100,-36}}, color={0,0,127}));
+    annotation (Line(points={{13,-40},{100,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=31536000, Interval=900));
