@@ -21,15 +21,13 @@ model SubstationHeating
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=m_flow_nominal)
-             annotation (Placement(transformation(extent={{-90,6},{-70,26}})));
+    m_flow_nominal=m_flow_nominal,
+    tau=60)  annotation (Placement(transformation(extent={{-90,6},{-70,26}})));
   AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=m_flow_nominal)
-             annotation (Placement(transformation(extent={{70,6},{90,26}})));
+    m_flow_nominal=m_flow_nominal,
+    tau=60)  annotation (Placement(transformation(extent={{70,6},{90,26}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(redeclare package
       Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,

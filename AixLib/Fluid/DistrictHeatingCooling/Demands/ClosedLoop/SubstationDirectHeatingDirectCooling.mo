@@ -27,15 +27,13 @@ model SubstationDirectHeatingDirectCooling "Substation model for bidirctional lo
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=m_flow_nominal)
-             annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
+    m_flow_nominal=m_flow_nominal,
+    tau=60)  annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
   AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=m_flow_nominal)
-             annotation (Placement(transformation(extent={{188,8},{208,28}})));
+    m_flow_nominal=m_flow_nominal,
+    tau=60)  annotation (Placement(transformation(extent={{188,8},{208,28}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(redeclare package
       Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
@@ -77,7 +75,7 @@ public
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering,
     m_flow_nominal=m_flow_nominal*{1,1,1})
     annotation (Placement(transformation(extent={{136,-10},{116,10}})));
-  MixingVolumes.MixingVolume        vol2(nPorts=2,
+  Delays.DelayFirstOrder            del( nPorts=2,
     redeclare package Medium = Medium,
     V=1,
     m_flow_nominal=m_flow_nominal)
@@ -120,7 +118,7 @@ public
   Sensors.TemperatureTwoPort senTem1(redeclare package Medium = Medium,
       m_flow_nominal=2)
     annotation (Placement(transformation(extent={{-46,-34},{-26,-14}})));
-  MixingVolumes.MixingVolume        vol3(
+  Delays.DelayFirstOrder            del1(
     nPorts=2,
     redeclare package Medium = Medium,
     V=1,
@@ -168,25 +166,25 @@ equation
     annotation (Line(points={{58,24},{48,24}}, color={0,127,255}));
   connect(port_a, port_a)
     annotation (Line(points={{-260,0},{-260,0}}, color={0,127,255}));
-  connect(vol2.ports[1], pumpCooling.port_b)
+  connect(del.ports[1], pumpCooling.port_b)
     annotation (Line(points={{-16,24},{28,24}}, color={0,127,255}));
-  connect(jun.port_3, vol2.ports[2]) annotation (Line(points={{-146,10},{-148,10},
+  connect(jun.port_3, del.ports[2]) annotation (Line(points={{-146,10},{-148,10},
           {-148,24},{-12,24}}, color={0,127,255}));
   connect(coolingDemand, division2.u1) annotation (Line(points={{228,62},{122,62},
           {122,111.2},{49.4,111.2}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, vol2.heatPort) annotation (Line(points={{-40,78},
-          {-40,34},{-24,34}},              color={191,0,0}));
+  connect(prescribedHeatFlow.port, del.heatPort)
+    annotation (Line(points={{-40,78},{-40,34},{-24,34}}, color={191,0,0}));
   connect(prescribedHeatFlow.Q_flow, coolingDemand) annotation (Line(points={{-40,
           98},{-40,138},{156,138},{156,62},{228,62}}, color={0,0,127}));
   connect(pumpHeating.port_b, senTem1.port_a)
     annotation (Line(points={{-60,-24},{-46,-24}}, color={0,127,255}));
   connect(senTem.port_b, jun1.port_3) annotation (Line(points={{42,-24},{126,
           -24},{126,-10}}, color={0,127,255}));
-  connect(senTem1.port_b, vol3.ports[1])
+  connect(senTem1.port_b,del1. ports[1])
     annotation (Line(points={{-26,-24},{-2,-24}}, color={0,127,255}));
-  connect(senTem.port_a, vol3.ports[2])
+  connect(senTem.port_a,del1. ports[2])
     annotation (Line(points={{22,-24},{2,-24}}, color={0,127,255}));
-  connect(prescribedHeatFlow1.port, vol3.heatPort) annotation (Line(points={{-40,
+  connect(prescribedHeatFlow1.port,del1. heatPort) annotation (Line(points={{-40,
           -74},{-40,-52},{-18,-52},{-18,-34},{-10,-34}}, color={191,0,0}));
   connect(heatDemand, division1.u1) annotation (Line(points={{-274,-60},{-124,-60},
           {-124,-65.2},{-97.6,-65.2}}, color={0,0,127}));

@@ -22,15 +22,13 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=2)
-             annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
+    m_flow_nominal=2,
+    tau=60)  annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
   AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
-    tau=600,
-    m_flow_nominal=2)
-             annotation (Placement(transformation(extent={{188,8},{208,28}})));
+    m_flow_nominal=2,
+    tau=60)  annotation (Placement(transformation(extent={{188,8},{208,28}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(redeclare package
       Medium = Medium, m_flow_nominal=2,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
