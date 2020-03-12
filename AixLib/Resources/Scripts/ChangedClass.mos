@@ -1,3 +1,3 @@
-﻿convertClass("AixLib.Fluid.HeatPumps.BaseClasses","AixLib.Obsolete");
+﻿convertClass("AixLib.Fluid.HeatPumps.BaseClasses.CycleHP","AixLib.Obsolete.CycleHP");
 
 
