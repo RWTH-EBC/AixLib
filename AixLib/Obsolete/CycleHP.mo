@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+within AixLib.Obsolete;
 model CycleHP
   import SI = Modelica.SIunits;
   parameter Boolean HPctrlType =  true "Capacity control type"
