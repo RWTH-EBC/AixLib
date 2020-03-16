@@ -53,7 +53,7 @@ model HeatPump
         rotation=270,
         origin={36,38})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1)
-    "Fixed value for icing factor"                   annotation (Placement(
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)"                   annotation (Placement(
         transformation(
         extent={{5,5},{-5,-5}},
         rotation=180,

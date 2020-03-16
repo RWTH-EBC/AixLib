@@ -32,7 +32,7 @@ Modelica.SIunits.ThermodynamicTemperature T_amb_eva
 Modelica.SIunits.ThermodynamicTemperature T_amb_con
   "Ambient temperature on condenser side";
 Real iceFac
-  "Factor(0..1) to estimate efficiency losses through icing of evaporator"
+  "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."
 annotation (
   defaultComponentName = "sigBusHP",
   Icon(coordinateSystem(preserveAspectRatio=false)),

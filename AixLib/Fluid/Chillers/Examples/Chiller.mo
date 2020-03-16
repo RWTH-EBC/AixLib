@@ -130,7 +130,8 @@ model Chiller "Example for the reversible chiller model."
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={88,-38})));
-  Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
+  Modelica.Blocks.Sources.Constant iceFac(final k=1)
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)" annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,

@@ -153,7 +153,8 @@ model HeatPump "Example for the reversible heat pump model."
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={88,-64})));
-  Modelica.Blocks.Sources.Constant iceFac(final k=1) annotation (Placement(
+  Modelica.Blocks.Sources.Constant iceFac(final k=1)
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)" annotation (Placement(
         transformation(
         extent={{8,8},{-8,-8}},
         rotation=180,

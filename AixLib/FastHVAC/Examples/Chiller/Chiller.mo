@@ -54,7 +54,7 @@ model Chiller
         rotation=180,
         origin={73,77})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1)
-    "Fixed value for icing factor"                   annotation (Placement(
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)"                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=180,

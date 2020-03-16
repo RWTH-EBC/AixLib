@@ -27,7 +27,7 @@ package PerformanceData "Different models used for a black box heat pump model"
     Modelica.Blocks.Interfaces.RealInput m_flow_ev(unit="kg/s") "Mass flow rate at evaporator"
       annotation (Placement(transformation(extent={{-128,-80},{-100,-52}}),
           iconTransformation(extent={{-116,-68},{-100,-52}})));
-    Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Output of current icing factor"
+    Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."
       annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
