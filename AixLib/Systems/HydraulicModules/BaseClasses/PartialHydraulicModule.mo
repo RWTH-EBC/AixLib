@@ -22,6 +22,8 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
+  parameter Modelica.SIunits.Time tauHeaTra=1200
+    "Time constant for heat transfer of temperature sensors" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Length dIns
     "Thickness of insulation of all pipes (can be overwritten in each pipe) "
     annotation (Dialog(group="Pipes"));
@@ -49,6 +51,7 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   // -------------------------------------------------
   // Sensors
   // -------------------------------------------------
+
 protected
   Fluid.Sensors.VolumeFlowRate VFSen_out(
     redeclare package Medium = Medium,
@@ -71,36 +74,44 @@ protected
         origin={100,42})));
 
   Fluid.Sensors.TemperatureTwoPort senT_a1(
+    tau=0.01,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{-100,14},{-88,26}})));
   Fluid.Sensors.TemperatureTwoPort senT_a2(
     redeclare package Medium = Medium,
+    tau=0.01,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{84,-66},{72,-54}})));
   Fluid.Sensors.TemperatureTwoPort senT_b1(
     final m_flow_nominal=m_flow_nominal,
+    tau=0.01,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Fluid.Sensors.TemperatureTwoPort senT_b2(
+    tau=0.01,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    tauHeaTra=tauHeaTra)
     annotation (Placement(transformation(extent={{-78,-66},{-90,-54}})));
 
   Modelica.Blocks.Continuous.FirstOrder PT1_b2(
@@ -141,7 +152,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(VFSen_in.V_flow, hydraulicBus.VflowOutMea) annotation (Line(
+  connect(VFSen_in.V_flow,hydraulicBus.VFlowOutMea)  annotation (Line(
       points={{111,42},{116,42},{116,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
@@ -197,7 +208,7 @@ equation
 <h4>Characteristics</h4>
 <p>There is a connecting pipe between distributer and collector of manifold so that the pressure difference between them becomes insignificant. The main pump only works against the resistance in the main circuit.</p>
 <p>The mass flow in primary and secondary circuits stay constant.</p>
-<p>The scondary circuits do not affect each other when switching operational modes.</p>
+<p>The secondary circuits do not affect each other when switching operational modes.</p>
 </html>", revisions="<html>
 <ul>
 <li>August, 2018, by Alexander K&uuml;mpel:<br/>First implementation</li>

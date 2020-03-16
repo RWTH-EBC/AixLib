@@ -164,7 +164,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedSimple.hydraulicBus, unmixed.hydraulicBus) annotation (Line(
-      points={{-116.32,70.24},{-21,70.24},{-21,4}},
+      points={{-116.32,70.24},{-19,70.24},{-19,4}},
       color={255,204,51},
       thickness=0.5));
   connect(ctrUnmixedThrottle.hydraulicBus, unmixedThrottle.hydraulicBus) annotation (Line(

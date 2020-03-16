@@ -1,6 +1,8 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 partial model PartialHeaterCoolerPI
   extends AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCooler;
+  parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
+  parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
   parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real KR_heater = 1000 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
@@ -17,7 +19,9 @@ partial model PartialHeaterCoolerPI
         "Seperate",choice = true "Record",radioButtons = true));
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling if ((
+    recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
+                                                                   annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
   Controls.Continuous.PITemp
                  pITempCool(
@@ -25,10 +29,13 @@ partial model PartialHeaterCoolerPI
     h=if not recOrSep then h_cooler else zoneParam.hCool,
     l=if not recOrSep then l_cooler else zoneParam.lCool,
     KR=if not recOrSep then KR_cooler else zoneParam.KRCool,
-    TN=if not recOrSep then TN_cooler else zoneParam.TNCool)
+    TN=if not recOrSep then TN_cooler else zoneParam.TNCool) if ((recOrSep and
+    zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "PI control for cooler"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating if ((
+    recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+                                                                   annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
   Controls.Continuous.PITemp
                  pITempHeat(
@@ -36,16 +43,19 @@ partial model PartialHeaterCoolerPI
     h=if not recOrSep then h_heater else zoneParam.hHeat,
     l=if not recOrSep then l_heater else zoneParam.lHeat,
     KR=if not recOrSep then KR_heater else zoneParam.KRHeat,
-    TN=if not recOrSep then TN_heater else zoneParam.TNHeat)
+    TN=if not recOrSep then TN_heater else zoneParam.TNHeat) if ((recOrSep and
+    zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower(
    final quantity="HeatFlowRate",
-   final unit="W") "Power for heating"
+   final unit="W") if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and
+    Heater_on))    "Power for heating"
     annotation (Placement(transformation(extent={{80,20},{120,60}}),
         iconTransformation(extent={{80,20},{120,60}})));
   Modelica.Blocks.Interfaces.RealOutput coolingPower(
    final quantity="HeatFlowRate",
-   final unit="W") "Power for cooling"
+   final unit="W") if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and
+    Cooler_on))    "Power for cooling"
     annotation (Placement(transformation(extent={{80,-26},{120,14}}),
         iconTransformation(extent={{80,-26},{120,14}})));
 equation

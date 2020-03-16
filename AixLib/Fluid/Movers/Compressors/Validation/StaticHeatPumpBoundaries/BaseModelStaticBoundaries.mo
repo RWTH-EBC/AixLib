@@ -148,7 +148,6 @@ model BaseModelStaticBoundaries
   Real inpTime = time
     "Simulation time";
 
-
 equation
   // Connection of main components
   //
@@ -187,7 +186,6 @@ equation
   connect(inpTemSin.y, sin.T_in)
     annotation (Line(points={{-69,-24},{-62,-24},{-56,
           -24},{-56,-16},{-42,-16}}, color={0,0,127}));
-
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
       Ellipse(

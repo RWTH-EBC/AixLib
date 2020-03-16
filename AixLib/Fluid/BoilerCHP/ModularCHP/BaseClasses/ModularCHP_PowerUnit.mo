@@ -115,10 +115,10 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
        > 0.0001 then gasolineEngineChp.cHPCombustionEngine.m_flow_Fue else 0.0001
     "Fuel consumption rate of CHP unit";
   type SpecificEmission=Real(final unit="g/(kW.h)", min=0.0001);
-  SpecificEmission b_CO2=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000*
+  SpecificEmission b_CO2=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000.0 *
       m_flow_CO2/(Q_Therm + P_El) else 0
     "Specific CO2 emissions per kWh (heat and power)";
-  SpecificEmission b_e=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000*
+  SpecificEmission b_e=if noEvent(abs(Q_Therm + P_El) > 0) then 3600000000.0 *
       m_flow_Fue/(Q_Therm + P_El) else 0
     "Specific fuel consumption per kWh (heat and power)";
   Real FueUtiRate=(Q_Therm + P_El)/(m_flow_Fue*Medium_Fuel.H_U)

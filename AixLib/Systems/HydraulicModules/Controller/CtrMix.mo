@@ -113,6 +113,6 @@ equation
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for admix and injection circuit. The controlled variable is the outflow temperature T_fwrd_out.</p>
+<p>Simple controller for admix and injection circuit. The controlled variable is the outflow temperature T_fwrd_out and controlled by a PID controller. The pump is always on and has a constant frequency.</p>
 </html>"));
 end CtrMix;
