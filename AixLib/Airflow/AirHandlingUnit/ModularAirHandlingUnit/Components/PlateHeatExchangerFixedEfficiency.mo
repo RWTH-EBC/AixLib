@@ -13,7 +13,7 @@ model PlateHeatExchangerFixedEfficiency
   Modelica.SIunits.SpecificEnthalpy h_airInEta "specific enthalpy of incoming exhaust air";
   Modelica.SIunits.SpecificEnthalpy h_airOutEta "specific enthalpy of outgoing exhaust air";
 
-  Modelica.SIunits.Temperature T_airOutOda_max "maximum temperature ot oudoor air outlet";
+  Modelica.SIunits.Temperature T_airOutOda_max "maximum temperature of outdoor air outlet";
 
   Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
 
@@ -116,7 +116,7 @@ protected
     annotation (Placement(transformation(extent={{-4,2},{16,22}})));
   Modelica.Blocks.Sources.RealExpression maxTairOut(y=T_airOutOda_max)
     annotation (Placement(transformation(extent={{-56,-8},{-36,12}})));
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=2,
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=6,
       pre_y_start=true)
     annotation (Placement(transformation(extent={{-8,-42},{12,-22}})));
   Modelica.Blocks.Logical.Switch switch1
