@@ -15,7 +15,7 @@ model WorkingFluid
     "Enthalpie input port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
-   C=m_fluid*medium.c, T(start=T0, fixed=true))
+   C=m_fluid*medium.c, T(start=T0))
     annotation (Placement(transformation(extent={{-24,42},{16,82}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
   "Heat transfer into the working fluid"

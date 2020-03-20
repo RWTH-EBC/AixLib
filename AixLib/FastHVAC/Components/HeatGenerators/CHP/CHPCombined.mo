@@ -102,8 +102,8 @@ protected
   paramIFC.tauP_el elseif EfficiencyByDatatable and CHPType==2 then paramPEM.tauP_el else tauP_el_prescribed
     "time constant electrical power start behavior (unit=sec)";
 
-  parameter Real LimiterPelPos = if CHPType == 1 then 760 elseif CHPType==2 then 0.61 else 0;
-  parameter Real LimiterPelNeg = if CHPType == 1 then 760 elseif CHPType==2 then 0.60 else 0;
+//   parameter Real LimiterPelPos = if CHPType == 1 then 760 elseif CHPType==2 then 0.61 else 0;
+//   parameter Real LimiterPelNeg = if CHPType == 1 then 760 elseif CHPType==2 then 0.60 else 0;
   parameter Real LHV(unit="J/kg")= if CHPType == 1 then 47300000 else 119972000 "Lower heating value [J/kg]";
 
 public
@@ -191,9 +191,6 @@ public
     T0=T0,
     m_fluid=V_water*medium.rho)
     annotation (Placement(transformation(extent={{-8,-98},{12,-78}})));
-  Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterPel(Rising=
-        LimiterPelPos, Falling=-LimiterPelNeg) annotation (Placement(
-        transformation(extent={{-16,84},{-4,96}})));
   input
   Modelica.Blocks.Interfaces.BooleanInput StartIn if not withController
     annotation (Placement(transformation(
@@ -215,8 +212,6 @@ public
   Modelica.Blocks.Continuous.FirstOrder firstOrderPel(T=tauP_el)
     annotation (Placement(transformation(extent={{-46,74},{-34,86}})));
 
-  Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2)
-    annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderEFuel(T=5)
     annotation (Placement(transformation(extent={{-46,54},{-34,66}})));
   Modelica.Blocks.Math.Gain PelDemand(k=P_elRated)
@@ -360,7 +355,7 @@ equation
   Proton Exchange Membran Fuel Cell (PEMFC)
   ******************************************************************* */
   elseif CHPType == 2 then
-    P_elDC = LimiterPel.y;
+    P_elDC = firstOrderPel.y;
      if OnOff then
          //Startvorgang
          if Start then
@@ -400,7 +395,7 @@ equation
      end if;
   else
     //dummys following
-    P_elDC = LimiterPel.y;
+    P_elDC = firstOrderPel.y;
     firstOrderPel.u = P_elStart; // !!! P_elStart noch nicht angepasst für PEM
     firstOrderQ_start.u = 0;
     firstOrderQ_stop.u = 0;
@@ -425,13 +420,6 @@ equation
   connect(integrator.y, Energy) annotation (Line(points={{151,30},{160,30},{160,
           28},{168,28}},
                      color={0,0,127}));
-  connect(firstOrderPel.y, LimiterPel.u)
-    annotation (Line(points={{-33.4,80},{-28.7,80},{-28.7,90},{-17.2,90}},
-                        color={0,0,127}));
-  connect(firstOrderEFuel.y, LimiterEFuel.u) annotation (Line(points={{-33.4,60},
-          {-17.2,60}},                                                                 color={0,0,127}));
-  connect(LimiterEFuel.y, integrator[3].u) annotation (Line(points={{-3.4,60},{62,
-          60},{62,30},{128,30}},                                                                      color={0,0,127}));
   connect(Gain_LHV.y, dotmFuel)
     annotation (Line(points={{148.8,60},{158,60},{158,62},{168,62}},
                                                   color={0,0,127}));
@@ -447,8 +435,6 @@ equation
   connect(Qth.y, integrator[2].u) annotation (Line(points={{28.8,26},{57.5,26},{
           57.5,45},{62,45},{62,30},{128,30}},
                     color={0,0,127}));
-  connect(LimiterEFuel.y, Gain_LHV.u) annotation (Line(points={{-3.4,60},{130.4,
-          60}},                                                                                    color={0,0,127}));
   connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{28.8,26},{57,26},
           {57,-51},{2,-51},{2,-56}},
                    color={0,0,127}));
@@ -476,9 +462,6 @@ equation
   connect(StopIn, Stop)
     annotation (Line(points={{-112,108},{-112,68},{-96,68}},
                                                            color={255,0,255}));
-  connect(LimiterEFuel.y, Capacity[3])
-    annotation (Line(points={{-3.4,60},{46.5,60},{46.5,98},{168,98}},
-                     color={0,0,127}));
   connect(sub.y, Capacity[1]) annotation (Line(
         points={{107.7,76},{113.65,76},{113.65,82},{168,82}},
                 color={0,0,127}));
@@ -488,14 +471,19 @@ equation
   connect(EfficiencyPCU.y, product.u2) annotation (Line(points={{-3.4,74},{1.3,74},
           {1.3,82.4},{12.8,82.4}},
                                  color={0,0,127}));
-  connect(LimiterPel.y, product.u1) annotation (Line(points={{-3.4,90},{-0.7,90},
-          {-0.7,89.6},{12.8,89.6}},
-                              color={0,0,127}));
   connect(product.y, sub.u1) annotation (Line(points={{26.6,86},{36.4,86},{36.4,
           80.2},{91.6,80.2}},
                         color={0,0,127}));
   connect(AncillaryConsumption.y, sub.u2) annotation (Line(points={{78.8,70},{80,
           70},{80,71.8},{91.6,71.8}}, color={0,0,127}));
+  connect(firstOrderEFuel.y, Capacity[3]) annotation (Line(points={{-33.4,60},{46,
+          60},{46,98},{168,98}}, color={0,0,127}));
+  connect(firstOrderEFuel.y, Gain_LHV.u)
+    annotation (Line(points={{-33.4,60},{130.4,60}}, color={0,0,127}));
+  connect(firstOrderEFuel.y, integrator[3].u) annotation (Line(points={{-33.4,60},
+          {48,60},{48,30},{128,30}}, color={0,0,127}));
+  connect(firstOrderPel.y, product.u1) annotation (Line(points={{-33.4,80},{-12,
+          80},{-12,89.6},{12.8,89.6}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(initialScale=0.2, extent={
             {-160,-100},{160,100}}),         graphics={

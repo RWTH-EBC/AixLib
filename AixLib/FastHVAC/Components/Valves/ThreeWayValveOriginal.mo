@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components.Valves;
-model ThreeWayValve
+model ThreeWayValveOriginal
 
   /* *******************************************************************
       Components
@@ -23,19 +23,9 @@ model ThreeWayValve
         rotation=270,
         origin={0,90})));
 
-  Fluid.Actuators.Valves.MixingValve.MinLimiter
-             minLimiter(uMin=1e-3)
-    annotation (Placement(transformation(extent={{6,64},{20,78}})));
-  Modelica.Blocks.Continuous.Filter filter(order=2, f_cut=5/(2*Modelica.Constants.pi
-        *1))
-         annotation (Placement(transformation(extent={{28,64},{42,78}})));
-  Modelica.Blocks.Interfaces.RealOutput opening_filtzered
-    "Filtered valve position in the range 0..1"
-    annotation (Placement(transformation(extent={{60,60},{80,80}}),
-        iconTransformation(extent={{72,58},{92,78}})));
 equation
   // mass balance
-  enthalpyPort_a.m_flow = enthalpyPort_ab.m_flow*opening_filtzered;
+  enthalpyPort_a.m_flow = enthalpyPort_ab.m_flow*opening;
   - enthalpyPort_ab.m_flow + enthalpyPort_a.m_flow + enthalpyPort_b.m_flow =
     0;
   // constant values
@@ -46,13 +36,6 @@ equation
   enthalpyPort_ab.h = enthalpyPort_b.h;
   enthalpyPort_a.h = enthalpyPort_ab.h;
 
-  connect(minLimiter.y,filter. u) annotation (Line(
-      points={{20.7,71},{26.6,71}},
-      color={0,0,127}));
-  connect(opening, minLimiter.u)
-    annotation (Line(points={{0,104},{0,71},{4.6,71}}, color={0,0,127}));
-  connect(filter.y, opening_filtzered) annotation (Line(points={{42.7,71},{51.35,
-          71},{51.35,70},{70,70}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(graphics={Polygon(
                   points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},
@@ -107,4 +90,4 @@ revisions="<html><ul>
   </li>
 </ul>
 </html>"));
-end ThreeWayValve;
+end ThreeWayValveOriginal;

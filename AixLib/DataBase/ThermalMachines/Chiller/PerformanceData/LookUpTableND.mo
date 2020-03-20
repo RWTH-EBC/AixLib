@@ -55,7 +55,7 @@ model LookUpTableND "N-dimensional table with data for heat pump"
       Placement(transformation(
         extent={{-6,6},{6,-6}},
         rotation=-90,
-        origin={-80,-90})));
+        origin={-80,-92})));
   Utilities.Logical.SmoothSwitch switchPel
     "If HP is off, no heat will be exchanged"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -186,13 +186,11 @@ equation
   connect(t_Co_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
           32},{0,32},{0,29.6}}, color={0,0,127}));
   connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{50,-77},{50,
-          -80},{-76.4,-80},{-76.4,-82.8}}, color={0,0,127}));
+          -80},{-76.4,-80},{-76.4,-84.8}}, color={0,0,127}));
   connect(switchQEva.y, calcRedQCon.u1) annotation (Line(points={{-50,-75},{-50,
-          -80},{-83.6,-80},{-83.6,-82.8}},     color={0,0,127}));
+          -80},{-83.6,-80},{-83.6,-84.8}},     color={0,0,127}));
   connect(calcRedQCon.y, QCon)
-    annotation (Line(points={{-80,-96.6},{-80,-110}}, color={0,0,127}));
-  connect(switchQEva.y, QEva) annotation (Line(points={{-50,-75},{-50,-94},{80,
-          -94},{80,-110}},    color={0,0,127}));
+    annotation (Line(points={{-80,-98.6},{-80,-110}}, color={0,0,127}));
   connect(realCorr.y, nTimesSFeva.u1) annotation (Line(points={{19,-16.5},{-0.5,
           -16.5},{-0.5,-32.6},{-24.8,-32.6}}, color={0,0,127}));
   connect(realCorr.y,nTimesSFelectric. u2) annotation (Line(points={{19,-16.5},
@@ -205,6 +203,8 @@ equation
           -38,-23.2},{-38,-32.6},{-33.2,-32.6}}, color={0,0,127}));
   connect(nTimesSFeva.y, switchQEva.u1) annotation (Line(points={{-29,-48.7},{
           -34.5,-48.7},{-34.5,-52},{-42,-52}}, color={0,0,127}));
+  connect(switchQEva.y, QEva) annotation (Line(points={{-50,-75},{-50,-80},{80,
+          -80},{80,-110}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),
