@@ -1,10 +1,5 @@
-within AixLib.DataBase.ThermalZones.OfficePassiveHouse;
-record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal heater cooler"
-  final parameter Real eps = Modelica.Constants.eps;
-  final parameter Real inf = Modelica.Constants.inf;
-  final parameter Integer smallInt = 1;
-  final parameter Integer bigInt = 99;
-
+within AixLib.DataBase.ThermalZones;
+record ZoneRecordDummy "This is a dummy record with non-physical parameter values."
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start=eps,
     VAir=inf,
@@ -90,26 +85,4 @@ record OPH_1_OfficeNoHeaterCooler "Office zone of office building without ideal 
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false);
-  annotation (Documentation(revisions="<html>
- <ul>
-  <li>
-  November 27, 2019, by David Jansen:<br/>
-  Integrate threshold for heater and cooler.
-  </li>
-  <li>
-  February 28, 2019, by Niklas Huelsenbeck, dja, mre:<br/>
-  Adapting nrPeople and nrPeopleMachines to area specific approach 
-  </li>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation.
-  </li>
-  <li>
-  June, 2015, by Moritz Lauster:<br/>
-  Implemented.
-  </li>
- </ul>
- </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
-</html>"));
-end OPH_1_OfficeNoHeaterCooler;
+end ZoneRecordDummy;
