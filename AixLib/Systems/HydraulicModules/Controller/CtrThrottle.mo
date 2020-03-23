@@ -108,7 +108,7 @@ equation
 <li>January 22, 2019, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for Throttle and ThrottlePump circuit. The controlled variable needs to be connected to Tact.</p>
-<p>If the valve is fully closed, the pump will switch off.</p>
+<p>Simple controller for Throttle and ThrottlePump circuit that is based on a PID controller. The controlled variable needs to be connected to Tact.</p>
+<p>If the valve is fully closed, the pump will switch off. The pump frequency is constant, if pump is on</p>
 </html>"));
 end CtrThrottle;
