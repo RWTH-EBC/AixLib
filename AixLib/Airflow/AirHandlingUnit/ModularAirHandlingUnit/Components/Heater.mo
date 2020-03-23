@@ -6,7 +6,7 @@ model Heater
   parameter Modelica.SIunits.Length s=0.003 "distance of parallel heat exchanger plates (fins)" annotation (HideResult = (use_T_set));
 
   parameter Boolean use_constant_heatTransferCoefficient=false "if true then a constant heat transfer coefficient is used";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer k=60 "constant heat transfer coefficient (only used if use_constan_heatTransferCoefficient is true)" annotation (HideResult = (not use_constant_heatTransferCoefficient));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer k=60 "constant heat transfer coefficient (only used if use_constant_heatTransferCoefficient is true)" annotation (HideResult = (not use_constant_heatTransferCoefficient));
 
   BaseClasses.HeatTransfer.ConvectiveHeatTransferCoefficient heatTransfer(
     m_flow=m_flow_airIn,

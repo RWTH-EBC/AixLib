@@ -10,3 +10,6 @@ Test_FlowControlled_dp
 Test_SpeedControlledFan_Nrpm
 Test_ExampleAHU
 Test_SetConditionsHeaterCooler
+Test_ExampleAHU2
+Test_ExampleAHU3
+Test_ExampleAHU4
