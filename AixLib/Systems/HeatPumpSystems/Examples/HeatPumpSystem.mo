@@ -105,8 +105,7 @@ model HeatPumpSystem "Example for a heat pump system"
     QCon_nominal=10000,
     P_el_nominal=2500,
     redeclare model PerDataHea =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=
             AixLib.DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113(

@@ -3,8 +3,7 @@ model SubmodelCooling
 
   replaceable package Medium_Coolant =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                 property_T=356, X_a=0.50) constrainedby
-    Modelica.Media.Interfaces.PartialMedium
+                                 property_T=356, X_a=0.50) constrainedby Modelica.Media.Interfaces.PartialMedium
     "Coolant medium model used in the CHP plant" annotation (choicesAllMatching=true);
   parameter
     DataBase.CHP.ModularCHPEngineData.CHPEngDataBaseRecord
