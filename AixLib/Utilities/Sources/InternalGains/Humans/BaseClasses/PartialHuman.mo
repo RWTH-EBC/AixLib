@@ -71,8 +71,8 @@ equation
   connect(gain1.y,radiativeHeat. Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
   connect(limiter.y, surfaceAreaPeople.u)
     annotation (Line(points={{3,-48},{14.8,-48}}, color={0,0,127}));
-  connect(surfaceAreaPeople.y, radiationConvertor.A_in) annotation (Line(points
-        ={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}}, color={0,0,127}));
+  connect(surfaceAreaPeople.y, radiationConvertor.A_in) annotation (Line(points=
+         {{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}}, color={0,0,127}));
   connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,-20},
           {-54,-20},{-54,4},{-40,4},{-40,4}}, color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(points={{-18.3,4},{-8,

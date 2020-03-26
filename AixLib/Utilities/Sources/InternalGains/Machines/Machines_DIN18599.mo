@@ -1,6 +1,6 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model Machines_DIN18599
-  extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
 
   parameter Integer ActivityType=2 "Machine activity"
     annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
@@ -32,17 +32,17 @@ equation
   connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(
       points={{-47.4,-40},{-32,-40},{-32,-3.5},{-24,-3.5}},
       color={0,0,127}));
-  connect(Schedule, Nr_People.u) annotation (Line(
+  connect(schedule, Nr_People.u) annotation (Line(
       points={{-100,0},{-85.6,0},{-85.6,-40},{-61.2,-40}},
       color={0,0,127}));
   connect(Activity.y, HeatOutput.u[1]) annotation (Line(
       points={{-69,50},{-62,50}},
       color={0,0,127}));
-  connect(RadiationConvertor.Star, RadHeat) annotation (Line(
+  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
       points={{67.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{48,-10},{48,-60},{48.8,-60}},
       color={191,0,0}));
   connect(productHeatOutput.y, gain.u) annotation (Line(

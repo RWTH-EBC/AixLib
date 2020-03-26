@@ -1,6 +1,7 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
 model LightsAreaSpecific "light heat source model"
-  extends BaseClasses.PartialInternalGain(ratioConv=0.5, RadiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(radiativeHeat(               T_ref=T0),
+                                          ratioConv=0.5);
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room"    annotation(Dialog( descriptionLabel = true));
   parameter Real LightingPower = 10 "Heating power of lighting in W/m2" annotation(Dialog( descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
@@ -16,13 +17,13 @@ equation
   connect(MaxLighting.y,productHeatOutput. u[2])
                                           annotation (Line(
       points={{-69,50},{-48,50},{-48,-3.5},{-40,-3.5}}));
-  connect(Schedule,productHeatOutput. u[1]) annotation (Line(
+  connect(schedule,productHeatOutput. u[1]) annotation (Line(
       points={{-100,0},{-76,0},{-76,-20},{-48,-20},{-48,-4},{-40,-4},{-40,3.5}},
       color={0,0,127}));
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{46,-10},{46,-60},{50.8,-60}},
       color={191,0,0}));
-  connect(RadiationConvertor.Star, RadHeat) annotation (Line(
+  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

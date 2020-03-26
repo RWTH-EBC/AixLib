@@ -16,41 +16,41 @@ model Machines "Simulation to check the machine models"
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=293.15)
     annotation (Placement(transformation(extent={{80,-8},{60,12}})));
 equation
-  connect(combiTimeTable.y[1], machines_sensibleHeat_DIN18599.Schedule)
+  connect(combiTimeTable.y[1],machines_sensibleHeat_DIN18599.schedule)
     annotation (Line(
       points={{-49,0},{-9,0}},
       color={0,0,127}));
-  connect(combiTimeTable.y[1], machines_sensibleHeat_simple.Schedule)
+  connect(combiTimeTable.y[1],machines_sensibleHeat_simple.schedule)
     annotation (Line(
       points={{-49,0},{-28,0},{-28,42},{-9,42}},
       color={0,0,127}));
-  connect(combiTimeTable.y[1], machines_sensibleHeat_Avar.Schedule)
+  connect(combiTimeTable.y[1],machines_sensibleHeat_Avar.schedule)
     annotation (Line(
       points={{-49,0},{-28,0},{-28,-42},{-9,-42}},
       color={0,0,127}));
-  connect(machines_sensibleHeat_simple.ConvHeat, fixedTemp.port)
+  connect(machines_sensibleHeat_simple.convHeat, fixedTemp.port)
     annotation (Line(
       points={{9,48},{38,48},{38,2},{60,2}},
       color={191,0,0}));
-  connect(machines_sensibleHeat_DIN18599.ConvHeat, fixedTemp.port)
+  connect(machines_sensibleHeat_DIN18599.convHeat, fixedTemp.port)
     annotation (Line(
       points={{9,6},{38,6},{38,2},{60,2}},
       color={191,0,0}));
-  connect(machines_sensibleHeat_DIN18599.RadHeat, fixedTemp.port)
+  connect(machines_sensibleHeat_DIN18599.radHeat, fixedTemp.port)
     annotation (Line(
       points={{9,-5.8},{34.5,-5.8},{34.5,2},{60,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(machines_sensibleHeat_Avar.ConvHeat, fixedTemp.port) annotation (
+  connect(machines_sensibleHeat_Avar.convHeat, fixedTemp.port) annotation (
       Line(
       points={{9,-36},{38,-36},{38,2},{60,2}},
       color={191,0,0}));
-  connect(machines_sensibleHeat_Avar.RadHeat, fixedTemp.port) annotation (
+  connect(machines_sensibleHeat_Avar.radHeat, fixedTemp.port) annotation (
       Line(
       points={{9,-47.8},{34.5,-47.8},{34.5,2},{60,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(machines_sensibleHeat_simple.RadHeat, fixedTemp.port) annotation (
+  connect(machines_sensibleHeat_simple.radHeat, fixedTemp.port) annotation (
      Line(
       points={{9,36.2},{34.5,36.2},{34.5,2},{60,2}},
       color={95,95,95},

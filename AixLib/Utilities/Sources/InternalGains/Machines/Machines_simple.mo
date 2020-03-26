@@ -1,7 +1,7 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model Machines_simple
   "Heat source with convective and radiative component and connector for power input signal."
-  extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
     "surface area of radiative heat source";
   parameter Real Emissivity_Machines = 0.98;
@@ -10,17 +10,17 @@ model Machines_simple
         1e-4, SurfaceArea_Machines))
     annotation (Placement(transformation(extent={{52,-70},{72,-50}})));
 equation
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{40,-60},{52.8,-60}},
       color={191,0,0}));
-  connect(RadiationConvertor.Star, RadHeat) annotation (Line(
+  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Schedule, gain.u) annotation (Line(
+  connect(schedule, gain.u) annotation (Line(
       points={{-100,0},{-60,0},{-60,30},{3.2,30}},
       color={0,0,127}));
-  connect(Schedule, gain1.u) annotation (Line(
+  connect(schedule, gain1.u) annotation (Line(
       points={{-100,0},{-60,0},{-60,-10},{3.2,-10}},
       color={0,0,127}));
   annotation (Icon(graphics={

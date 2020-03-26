@@ -1,6 +1,6 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model MachinesAreaSpecific
-  extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
 
   parameter Modelica.SIunits.HeatFlux InternalGainsMachinesSpecific=1.0 "Specific Heat Flow from machines to the environment"  annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
@@ -23,13 +23,13 @@ public
   Modelica.Blocks.Sources.Constant Area(k=RoomArea)
     annotation (Placement(transformation(extent={{-92,38},{-72,58}})));
 equation
-  connect(Schedule, internalGainsMachinesSpecific.u) annotation (Line(points={{-100,
+  connect(schedule, internalGainsMachinesSpecific.u) annotation (Line(points={{-100,
           0},{-85.6,0},{-85.6,-40},{-61.2,-40}}, color={0,0,127}));
-  connect(RadiationConvertor.Star, RadHeat) annotation (Line(
+  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
       points={{67.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{48,-10},{48,-60},{48.8,-60}},
       color={191,0,0}));
   connect(productHeatOutput.y, gain.u) annotation (Line(

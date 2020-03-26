@@ -1,6 +1,6 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
 model Lights_simple "simple light heat source model"
-  extends BaseClasses.PartialInternalGain(RadiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
   parameter Real Emissivity_Lighting = 0.98;
 
@@ -8,17 +8,17 @@ model Lights_simple "simple light heat source model"
         1e-4, SurfaceArea_Lighting))
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{46,-10},{46,-60},{50.8,-60}},
       color={191,0,0}));
-  connect(RadiationConvertor.Star, RadHeat) annotation (Line(
+  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Schedule, gain.u) annotation (Line(
+  connect(schedule, gain.u) annotation (Line(
       points={{-100,0},{-20,0},{-20,30},{3.2,30}},
       color={0,0,127}));
-  connect(Schedule, gain1.u) annotation (Line(
+  connect(schedule, gain1.u) annotation (Line(
       points={{-100,0},{-20,0},{-20,-10},{3.2,-10}},
       color={0,0,127}));
   annotation (Icon(graphics={
