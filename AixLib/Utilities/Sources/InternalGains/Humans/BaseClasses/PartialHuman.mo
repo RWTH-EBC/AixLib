@@ -13,7 +13,7 @@ partial model PartialHuman "Partial model for internal gains of humans"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat
     "Convective heat output"
    annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar radiationConvertor(eps=emissivityHuman)
+  Utilities.HeatTransfer.HeatToStar radiationConvertor(eps=emissivityHuman, use_A_in=true)
     "Converter for HeatPort to RadPort"
     annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   Interfaces.RadPort radHeat "Radiative heat output"
@@ -63,7 +63,7 @@ protected
     "Radiative heat output"
    annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
-  connect(radiativeHeat.port,radiationConvertor. Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(radiativeHeat.port,radiationConvertor. Therm) annotation(Line(points={{42,-8},{44,-8},{44,-10},{48.96,-10}},                                color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(radiationConvertor.Star,radHeat)  annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(schedule, nrPeople.u)
     annotation (Line(points={{-100,-20},{-71.2,-20}}, color={0,0,127}));
@@ -71,8 +71,8 @@ equation
   connect(gain1.y,radiativeHeat. Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
   connect(limiter.y, surfaceAreaPeople.u)
     annotation (Line(points={{3,-48},{14.8,-48}}, color={0,0,127}));
-  connect(surfaceAreaPeople.y, radiationConvertor.A_in) annotation (Line(points=
-         {{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}}, color={0,0,127}));
+  connect(surfaceAreaPeople.y, radiationConvertor.A_in) annotation (Line(points={{28.6,-48},{32,-48},{32,18},{60,18},{60,0.8}},
+                                                         color={0,0,127}));
   connect(nrPeople.y, productHeatOutput.u[1]) annotation (Line(points={{-57.4,-20},
           {-54,-20},{-54,4},{-40,4},{-40,4}}, color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(points={{-18.3,4},{-8,
