@@ -1,7 +1,7 @@
 within AixLib.Utilities.Sources.InternalGains.BaseClasses;
 partial model PartialInternalGain
   "Partial model to build a heat source with convective and radiative component"
-  parameter Real ratioConv(min=0, max=1) = 0.6
+  parameter Real ratioConv(final min=0, final max=1) = 0.6
     "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Emissivity emissivity(min=0, max=1) = 0.95
     "Emissivity of radiative heat source surface";
@@ -22,7 +22,7 @@ partial model PartialInternalGain
     "Radiative heat flow connector"
     annotation (Placement(transformation(extent={{80,-70},{100,-50}})));
 protected
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(each u(unit="W/m2"))
+  Modelica.Blocks.Math.MultiProduct productHeatOutput(each u(final quantity="HeatFlux", final unit="W/m2"))
     annotation (Placement(transformation(extent={{-20,-6},{-8,6}})));
   Modelica.Blocks.Math.Gain gainConv(final k=ratioConv) annotation (Placement(transformation(extent={{8,16},{16,24}})));
   Modelica.Blocks.Math.Gain gainRad(final k=1 - ratioConv) annotation (Placement(transformation(extent={{8,-24},{16,-16}})));
