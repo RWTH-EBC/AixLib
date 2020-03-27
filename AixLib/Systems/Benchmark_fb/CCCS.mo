@@ -29,8 +29,8 @@ package CCCS
       Placement(transformation(extent = {{98, -10}, {118, 10}})));
     Benchmark.BaseClasses.MainBus mainBus annotation (
       Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
-    Components.InvestmentCostsComponents investmentCostsComponents(k_Investment
-        =0)
+    Components.InvestmentCostsComponents investmentCostsComponents(k_Investment=
+         0)
       annotation (Placement(transformation(extent={{-80,-100},{-60,-80}})));
     AixLib.Systems.Benchmark_fb.CCCS.Components.LifespanReductionCosts
       lifespanReductionCosts_2_1 annotation (Placement(visible=true,
