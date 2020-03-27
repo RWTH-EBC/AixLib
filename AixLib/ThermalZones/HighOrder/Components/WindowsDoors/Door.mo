@@ -8,7 +8,7 @@ model Door "Simple door"
   parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material" annotation(Dialog(group = "Properties"));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{80, -10}, {100, 10}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+  Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx(
     Therm(T(start=T0)),
     Star(T(start=T0)),
     A=door_area,
@@ -16,7 +16,7 @@ model Door "Simple door"
   Utilities.Interfaces.RadPort
                             Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = door_area * U) annotation(Placement(transformation(extent = {{-10, -8}, {10, 12}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx1(
+  Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx1(
     Therm(T(start=T0)),
     Star(T(start=T0)),
     A=door_area,

@@ -50,7 +50,7 @@ model ConvNLayerClearanceStar
   Utilities.Interfaces.RadPort
                             Star annotation(Placement(transformation(extent={{90,52},
             {110,72}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+  Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx(
     A=A,
     eps=eps,
     Therm(T(start=T0)),

@@ -47,7 +47,7 @@ model Window_ASHRAE140
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+  Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx(
     Therm(T(start=T0)),
     Star(T(start=T0)),
     eps=WindowType.Emissivity,
