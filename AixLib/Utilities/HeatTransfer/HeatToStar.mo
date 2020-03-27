@@ -7,13 +7,13 @@ model HeatToStar
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Modelica.SIunits.Area A=-1 "Fixed value of prescribed area"
                                    annotation (Dialog(enable=not use_A_in));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv  annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv "Heat port for convective or conductive heat flow" annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
         origin={0,90},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  AixLib.Utilities.Interfaces.RadPort rad                   annotation (Placement(transformation(extent={{81,-10},{101,10}})));
+  AixLib.Utilities.Interfaces.RadPort rad "Heat port for longwave radiative heat flow" annotation (Placement(transformation(extent={{81,-10},{101,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";
