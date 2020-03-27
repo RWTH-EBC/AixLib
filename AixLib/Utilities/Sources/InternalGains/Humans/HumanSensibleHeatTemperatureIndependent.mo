@@ -8,8 +8,7 @@ model HumanSensibleHeatTemperatureIndependent
     "Specific heat output per person"
     annotation (Placement(transformation(extent={{-88,22},{-68,42}})));
 equation
-  connect(specificHeatOutput.y, productHeatOutput.u[2]) annotation (Line(points={{-67,32},
-          {-50,32},{-50,4},{-40,4}},              color={0,0,127}));
+  connect(specificHeatOutput.y, productHeatOutput.u[2]) annotation (Line(points={{-67,32},{-60,32},{-60,0},{-20,0}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Model for heat output of a person. The model only considers sensible heat. The heat output is not dependent on the room temperature.</p>

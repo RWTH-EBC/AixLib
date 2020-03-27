@@ -12,9 +12,7 @@ equation
   connect(temperatureSensor.T,to_degC. u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
   connect(to_degC.y, temperatureDependentHeatOutputSIA2024_1.T) annotation (
       Line(points={{-71.5,51},{-66.75,51},{-66.75,50},{-62,50}}, color={0,0,127}));
-  connect(temperatureDependentHeatOutputSIA2024_1.heatOutput, productHeatOutput.u[
-    2]) annotation (Line(points={{-39,50},{-28,50},{-28,30},{-54,30},{-54,4},{-40,
-          4}}, color={0,0,127}));
+  connect(temperatureDependentHeatOutputSIA2024_1.heatOutput, productHeatOutput.u[2]) annotation (Line(points={{-39,50},{-34,50},{-34,0},{-20,0}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Model for heat output of a person. The model only considers sensible heat. The heat output is dependent on the room temperature.</p>

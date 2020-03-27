@@ -19254,7 +19254,7 @@ convertElement(
 convertElement(
 "AixLib.Obsolete.Year2019.Utilities.Sources.InternalGains.Humans.HumanTotalHeat_VDI2078",
 "RadiationConvertor.Star",
-"RadiationConvertor.rad")
+"RadiationConvertor.rad");
 
 
 
@@ -20055,4 +20055,23 @@ convertElement(
 convertElement(
 "AixLib.Utilities.Sources.InternalGains.BaseClasses.PartialInternalGain",
 "RadiationConvertor",
-"radConvertor")
+"radConvertor");
+
+
+
+convertElement(
+"AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses.PartialHuman",
+"emissivityHuman",
+"emissivity");
+convertElement(
+"AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent",
+"emissivityHuman",
+"emissivity");
+convertElement(
+"AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent",
+"emissivityHuman",
+"emissivity");
+convertElement(
+"AixLib.Utilities.Sources.InternalGains.Humans.HumanTotalHeatTemperatureDependent",
+"emissivityHuman",
+"emissivity");
