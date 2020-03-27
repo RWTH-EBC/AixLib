@@ -5,8 +5,10 @@ partial model PartialInternalGain
     "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
   parameter Real emissivity = 0.95
     "Emissivity of radiative heat source surface";
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convectiveHeat(T_ref=T0)   annotation (Placement(transformation(extent={{20,20},{40,40}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radiativeHeat(T_ref=ratioConv)   annotation (Placement(transformation(extent={{20,-20},{40,0}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convectiveHeat(final T_ref=293.15, final alpha=0)
+                                                                            annotation (Placement(transformation(extent={{20,20},{40,40}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radiativeHeat(final T_ref=293.15, final alpha=0)
+                                                                           annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat "Convective heat connector"
     annotation (Placement(transformation(extent={{80,50},{100,70}})));
   AixLib.Utilities.Interfaces.RadPort radHeat "radiative heat connector"
