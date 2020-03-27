@@ -5,22 +5,27 @@ partial model PartialInternalGain
     "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Emissivity emissivity(min=0, max=1) = 0.95
     "Emissivity of radiative heat source surface";
-  Modelica.Blocks.Interfaces.RealInput schedule annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
+  Modelica.Blocks.Interfaces.RealInput schedule(min=0, max=1)
+    "Relative input related to max. value (might be number of people [-] or area [m2] or area specific heat flow [W/m2]"
+     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convectiveHeat(final T_ref=293.15, final alpha=0)
-                                                                            annotation (Placement(transformation(extent={{24,10},{44,30}})));
+     annotation (Placement(transformation(extent={{24,10},{44,30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radiativeHeat(final T_ref=293.15, final alpha=0)
-                                                                           annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
+     annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
   AixLib.Utilities.HeatTransfer.HeatToRad radConvertor(final eps=emissivity)
+    "Adaptor for approximative longwave radiation exchange with surface area"
     annotation (Placement(transformation(extent={{52,-70},{72,-50}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat "Convective heat connector"
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat
+    "Convective heat flow connector"
     annotation (Placement(transformation(extent={{80,50},{100,70}})));
-  AixLib.Utilities.Interfaces.RadPort radHeat "radiative heat connector"
+  AixLib.Utilities.Interfaces.RadPort radHeat
+    "Radiative heat flow connector"
     annotation (Placement(transformation(extent={{80,-70},{100,-50}})));
 protected
+  Modelica.Blocks.Math.MultiProduct productHeatOutput(each u(unit="W/m2"))
+    annotation (Placement(transformation(extent={{-20,-6},{-8,6}})));
   Modelica.Blocks.Math.Gain gainConv(final k=ratioConv) annotation (Placement(transformation(extent={{8,16},{16,24}})));
   Modelica.Blocks.Math.Gain gainRad(final k=1 - ratioConv) annotation (Placement(transformation(extent={{8,-24},{16,-16}})));
-  Modelica.Blocks.Math.MultiProduct productHeatOutput
-    annotation (Placement(transformation(extent={{-20,-6},{-8,6}})));
 equation
   connect(convectiveHeat.port,convHeat)  annotation(Line(points={{44,20},{48,20},{48,60},{90,60}},          color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(gainConv.y, convectiveHeat.Q_flow) annotation (Line(points={{16.4,20},{24,20}}, color={0,0,127}));
