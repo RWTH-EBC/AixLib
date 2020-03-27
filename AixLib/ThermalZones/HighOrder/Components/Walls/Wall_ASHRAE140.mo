@@ -111,7 +111,7 @@ public
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
-    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
+    heatConv(calcMethod=2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
@@ -307,7 +307,7 @@ end if;
 //******************************************************************
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
- connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
+ connect(absSolarRadWin.port, Wall.heatConv.port_b);
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
   connect(solarRadWin, solarDistrFraction.u) annotation (Line(
       points={{101,80},{69.2,80}},

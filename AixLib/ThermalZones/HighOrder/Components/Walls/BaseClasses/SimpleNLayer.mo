@@ -10,13 +10,17 @@ model SimpleNLayer "Wall consisting of n layers"
     "Specific heat capacity"                                                                    annotation(Dialog(group = "Structure of wall layers"));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
+  parameter Boolean T0Fixed = true
+    "Initial temperature is fixed" annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent={{30,-10},
-            {50,10}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent={{-52,-10},
-            {-32,10}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond_b[n](G=A .*
+        lambda ./ (d/2))
+    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond_a[n](G=A .*
+        lambda ./ (d/2))
+    annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
   // n Loads
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent={{-10,-42},
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor load[n](each T(start = T0, fixed = T0Fixed), C = c .* rho .* A .* d) annotation(Placement(transformation(extent={{-10,-42},
             {10,-22}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent={{-110,
             -10},{-90,10}}),                                                                                                        iconTransformation(extent={{-110,
@@ -27,29 +31,28 @@ model SimpleNLayer "Wall consisting of n layers"
 equation
   // connecting inner elements HeatCondb[i]--Load[i]--HeatConda[i] to n groups
   for i in 1:n loop
-    connect(HeatConda[i].port_b, Load[i].port) annotation (Line(
-      points={{-32,0},{-18,0},{-18,-42},{0,-42}},
-      color={191,0,0},
-      pattern=LinePattern.DashDotDot));
-    connect(Load[i].port, HeatCondb[i].port_a) annotation (Line(
-      points={{0,-42},{18,-42},{18,0},{30,0}},
-      color={191,0,0},
-      pattern=LinePattern.DashDotDot));
+    connect(heatCond_a[i].port_b, load[i].port) annotation (Line(
+        points={{-32,0},{-18,0},{-18,-42},{0,-42}},
+        color={191,0,0},
+        pattern=LinePattern.DashDotDot));
+    connect(load[i].port, heatCond_b[i].port_a) annotation (Line(
+        points={{0,-42},{18,-42},{18,0},{30,0}},
+        color={191,0,0},
+        pattern=LinePattern.DashDotDot));
   end for;
   // establishing n-1 connections of HeatCondb--Load--HeatConda groups
   for i in 1:n - 1 loop
-    connect(HeatCondb[i].port_b, HeatConda[i + 1].port_a) annotation (Line(
-      points={{50,0},{58,0},{58,24},{-58,24},{-58,0},{-52,0}},
-      color={191,0,0},
-      pattern=LinePattern.DashDotDot));
+    connect(heatCond_b[i].port_b, heatCond_a[i + 1].port_a) annotation (Line(
+        points={{50,0},{58,0},{58,24},{-58,24},{-58,0},{-52,0}},
+        color={191,0,0},
+        pattern=LinePattern.DashDotDot));
   end for;
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--port_b
-  connect(HeatConda[1].port_a, port_a) annotation (Line(
+  connect(heatCond_a[1].port_a, port_a) annotation (Line(
       points={{-52,0},{-100,0}},
       color={191,0,0},
       pattern=LinePattern.DashDotDot));
-  connect(HeatCondb[n].port_b, port_b)
-                                      annotation (Line(
+  connect(heatCond_b[n].port_b, port_b) annotation (Line(
       points={{50,0},{100,0}},
       color={191,0,0},
       pattern=LinePattern.DashDotDot));
