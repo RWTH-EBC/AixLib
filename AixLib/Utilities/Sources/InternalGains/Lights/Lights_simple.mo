@@ -8,10 +8,8 @@ model Lights_simple "simple light heat source model"
         1e-4, SurfaceArea_Lighting))
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
-  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
-      points={{40,-10},{46,-10},{46,-60},{50.8,-60}},
-      color={191,0,0}));
-  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{46,-10},{46,-60},{50.8,-60}}, color={191,0,0}));
+  connect(RadiationConvertor.rad, radHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

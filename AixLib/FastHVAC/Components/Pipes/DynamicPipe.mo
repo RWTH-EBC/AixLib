@@ -152,7 +152,7 @@ equation
          end if;
           //only radiation (doesn't work)
           if (withRadiationParam and not withInsulation and not withConvection) then
-            connect(pipeWall.port_b, twoStar_RadEx.Therm);
+    connect(pipeWall.port_b, twoStar_RadEx.conv);
             connect(pipeWall.port_b,heatPort_outside);
 
           end if;
@@ -172,7 +172,7 @@ equation
          if (withConvection and withRadiationParam and not withInsulation) then
              connect(pipeWall.port_b,heatConv.port_b);
              connect(heatConv.port_a, heatPort_outside);
-             connect(pipeWall.port_b, twoStar_RadEx.Therm);
+    connect(pipeWall.port_b, twoStar_RadEx.conv);
 
          end if;
          //convection and insulation
@@ -185,7 +185,7 @@ equation
          // radiation and insulation (doesn't work)
           if (withRadiationParam and withInsulation and not withConvection) then
               connect(pipeWall.port_b,insulation.port_a);
-              connect(insulation.port_b, twoStar_RadEx.Therm);
+    connect(insulation.port_b, twoStar_RadEx.conv);
               connect(insulation.port_b,heatPort_outside);
 
           end if;
@@ -194,7 +194,7 @@ equation
              connect(pipeWall.port_b,insulation.port_a);
              connect(insulation.port_b,  heatConv.port_b);
              connect(heatConv.port_a, heatPort_outside);
-             connect(insulation.port_b, twoStar_RadEx.Therm);
+    connect(insulation.port_b, twoStar_RadEx.conv);
 
          end if;
 
@@ -207,7 +207,7 @@ equation
       color={176,0,0},
       smooth=Smooth.None));
 
-  connect(twoStar_RadEx.Star, star) annotation (Line(points={{55.1,52},{88,52}}, color={95,95,95}));
+  connect(twoStar_RadEx.rad, star) annotation (Line(points={{55.1,52},{88,52}}, color={95,95,95}));
      annotation (choicesAllMatching,
               Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,

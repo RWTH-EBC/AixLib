@@ -20,10 +20,8 @@ equation
   connect(schedule,productHeatOutput. u[1]) annotation (Line(
       points={{-100,0},{-76,0},{-76,-20},{-48,-20},{-48,-4},{-40,-4},{-40,3.5}},
       color={0,0,127}));
-  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
-      points={{40,-10},{46,-10},{46,-60},{50.8,-60}},
-      color={191,0,0}));
-  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{46,-10},{46,-60},{50.8,-60}}, color={191,0,0}));
+  connect(RadiationConvertor.rad, radHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

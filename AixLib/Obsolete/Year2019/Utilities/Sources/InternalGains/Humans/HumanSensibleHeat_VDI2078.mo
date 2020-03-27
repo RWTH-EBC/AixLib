@@ -38,8 +38,14 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
   Modelica.Blocks.Tables.CombiTable1D HeatOutput(table = [10, 100, 125, 155; 18, 100, 125, 155; 20, 95, 115, 140; 22, 90, 105, 120; 23, 85, 100, 115; 24, 75, 95, 110; 25, 75, 85, 105; 26, 70, 85, 95; 35, 70, 85, 95], smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, tableOnFile = false, columns = {ActivityType}) annotation(Placement(transformation(extent = {{-60, 40}, {-40, 60}})));
 equation
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(RadiationConvertor.Star, RadHeat) annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(RadiativeHeat.port, RadiationConvertor.conv) annotation (Line(
+      points={{42,-8},{44,-8},{44,-12},{48,-12},{48,-10},{48.96,-10}},
+      color={191,0,0},
+      pattern=LinePattern.Solid));
+  connect(RadiationConvertor.rad, RadHeat) annotation (Line(
+      points={{70.92,-10},{90,-10}},
+      color={95,95,95},
+      pattern=LinePattern.Solid));
   connect(TRoom, temperatureSensor.port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T, to_degC.u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
   connect(to_degC.y, HeatOutput.u[1]) annotation(Line(points = {{-71.5, 51}, {-67.75, 51}, {-67.75, 50}, {-62, 50}}, color = {0, 0, 127}, pattern = LinePattern.Solid));

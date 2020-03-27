@@ -7,13 +7,13 @@ model HeatToStar
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Modelica.SIunits.Area A=-1 "Fixed value of prescribed area"
                                    annotation (Dialog(enable=not use_A_in));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv  annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
         origin={0,90},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  AixLib.Utilities.Interfaces.RadPort Star annotation (Placement(transformation(extent={{81,-10},{101,10}})));
+  AixLib.Utilities.Interfaces.RadPort rad                   annotation (Placement(transformation(extent={{81,-10},{101,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";
@@ -22,12 +22,10 @@ initial equation
     assert(A > 0, "The area for heattransfer must be positive");
   end if;
 equation
-  Therm.Q_flow + Star.Q_flow = 0;
+  conv.Q_flow + rad.Q_flow = 0;
   // To prevent negative solutions for T, the max() expression is used.
   // Negative solutions also occur when using max(T,0), therefore, 1 K is used.
-  Therm.Q_flow =Modelica.Constants.sigma*eps*A_in_internal*(max(Therm.T, 1)*max(Therm.T,
-    1)*max(Therm.T, 1)*max(Therm.T, 1) - max(Star.T, 1)*max(Star.T, 1)*max(Star.T,
-    1)*max(Star.T, 1));
+  conv.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(conv.T, 1)*max(conv.T, 1)*max(conv.T, 1)*max(conv.T, 1) - max(rad.T, 1)*max(rad.T, 1)*max(rad.T, 1)*max(rad.T, 1));
   if not use_A_in then
     A_in_internal =A;
   end if;

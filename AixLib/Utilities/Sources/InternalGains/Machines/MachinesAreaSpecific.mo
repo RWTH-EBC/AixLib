@@ -25,13 +25,11 @@ public
 equation
   connect(schedule, internalGainsMachinesSpecific.u) annotation (Line(points={{-100,
           0},{-85.6,0},{-85.6,-40},{-61.2,-40}}, color={0,0,127}));
-  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
+  connect(RadiationConvertor.rad, radHeat) annotation (Line(
       points={{67.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
-      points={{40,-10},{48,-10},{48,-60},{48.8,-60}},
-      color={191,0,0}));
+  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{48,-10},{48,-60},{48.8,-60}}, color={191,0,0}));
   connect(productHeatOutput.y, gain.u) annotation (Line(
       points={{-2.3,0},{0,0},{0,30},{3.2,30}},
       color={0,0,127}));

@@ -63,8 +63,14 @@ protected
     "Radiative heat output"
    annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
-  connect(radiativeHeat.port,radiationConvertor. Therm) annotation(Line(points={{42,-8},{44,-8},{44,-10},{48.96,-10}},                                color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(radiationConvertor.Star,radHeat)  annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(radiativeHeat.port, radiationConvertor.conv) annotation (Line(
+      points={{42,-8},{44,-8},{44,-10},{48.96,-10}},
+      color={191,0,0},
+      pattern=LinePattern.Solid));
+  connect(radiationConvertor.rad, radHeat) annotation (Line(
+      points={{70.92,-10},{90,-10}},
+      color={95,95,95},
+      pattern=LinePattern.Solid));
   connect(schedule, nrPeople.u)
     annotation (Line(points={{-100,-20},{-71.2,-20}}, color={0,0,127}));
   connect(gain.y,convectiveHeat. Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));

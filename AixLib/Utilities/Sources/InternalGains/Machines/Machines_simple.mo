@@ -10,10 +10,8 @@ model Machines_simple
         1e-4, SurfaceArea_Machines))
     annotation (Placement(transformation(extent={{52,-70},{72,-50}})));
 equation
-  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
-      points={{40,-10},{40,-60},{52.8,-60}},
-      color={191,0,0}));
-  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
+  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{40,-60},{52.8,-60}}, color={191,0,0}));
+  connect(RadiationConvertor.rad, radHeat) annotation (Line(
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

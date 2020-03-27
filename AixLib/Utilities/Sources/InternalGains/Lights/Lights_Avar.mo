@@ -9,13 +9,11 @@ model Lights_Avar
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
     RadiationConvertor.A_in = max(1e-4,schedule / specificPower);
-  connect(RadiationConvertor.Star,radHeat)  annotation (Line(
+  connect(RadiationConvertor.rad, radHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
-      points={{40,-10},{48,-10},{48,-60},{50.8,-60}},
-      color={191,0,0}));
+  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{48,-10},{48,-60},{50.8,-60}}, color={191,0,0}));
   connect(schedule, gain.u) annotation (Line(
       points={{-100,0},{-20,0},{-20,30},{3.2,30}},
       color={0,0,127}));
