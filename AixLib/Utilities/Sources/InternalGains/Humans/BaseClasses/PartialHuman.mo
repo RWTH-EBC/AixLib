@@ -5,8 +5,6 @@ partial model PartialHuman "Partial model for internal gains of humans"
   parameter Real ratioConvectiveHeat=0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area roomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
-    "Initial temperature";
   parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70
     "Specific heat output per person";
 
