@@ -1,42 +1,27 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model MachinesAreaSpecific
-  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(
+    radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Machines*InternalGainsMachinesSpecific*(1/HeatPerMachine)*RoomArea)),
+    emissivity=0.98,
+    productHeatOutput(nu=2));
 
   parameter Modelica.SIunits.HeatFlux InternalGainsMachinesSpecific=1.0 "Specific Heat Flow from machines to the environment"  annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
     "surface area of radiative heat source";
-  parameter Modelica.SIunits.Area RoomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
-  parameter Real Emissivity_Machines=0.98;
+  parameter Modelica.SIunits.Area RoomArea    "Area of room" annotation(Dialog(descriptionLabel = true));
+
 protected
   parameter Modelica.SIunits.HeatFlowRate HeatPerMachine = 100 "Average Heat Flow per machine taken from DIN V 18599-10" annotation(Dialog(descriptionLabel = true));
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
-    annotation (Placement(transformation(extent={{-24,-10},{-4,10}})));
 public
-  Modelica.Blocks.Math.Gain internalGainsMachinesSpecific(k=
-        InternalGainsMachinesSpecific)
+  Modelica.Blocks.Math.Gain internalGainsMachinesSpecific(final k=InternalGainsMachinesSpecific)
     annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
-  HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Machines, A=max(1e-4, SurfaceArea_Machines*InternalGainsMachinesSpecific*(1/HeatPerMachine)*RoomArea)) "Surface Area of a machine multiplied with the number of machines" annotation (Placement(transformation(extent={{48,-70},{68,-50}})));
-  Modelica.Blocks.Sources.Constant Area(k=RoomArea)
+  Modelica.Blocks.Sources.Constant Area(final k=RoomArea)
     annotation (Placement(transformation(extent={{-92,38},{-72,58}})));
 equation
   connect(schedule, internalGainsMachinesSpecific.u) annotation (Line(points={{-100,
           0},{-85.6,0},{-85.6,-40},{-61.2,-40}}, color={0,0,127}));
-  connect(RadiationConvertor.rad, radHeat) annotation (Line(
-      points={{67.1,-60},{90,-60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{48,-10},{48,-60},{48.8,-60}}, color={191,0,0}));
-  connect(productHeatOutput.y, gain.u) annotation (Line(
-      points={{-2.3,0},{0,0},{0,30},{3.2,30}},
-      color={0,0,127}));
-  connect(productHeatOutput.y, gain1.u) annotation (Line(
-      points={{-2.3,0},{0,0},{0,-10},{3.2,-10}},
-      color={0,0,127}));
-  connect(internalGainsMachinesSpecific.y, productHeatOutput.u[1]) annotation (
-      Line(points={{-47.4,-40},{-36,-40},{-36,0},{-26,0},{-26,3.5},{-24,3.5}},
-        color={0,0,127}));
-  connect(Area.y, productHeatOutput.u[2]) annotation (Line(points={{-71,48},
-          {-36,48},{-36,0},{-24,0},{-24,-3.5}}, color={0,0,127}));
+  connect(Area.y, productHeatOutput.u[1]) annotation (Line(points={{-71,48},{-34,48},{-34,0},{-20,0}}, color={0,0,127}));
+  connect(internalGainsMachinesSpecific.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,-40},{-34,-40},{-34,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},

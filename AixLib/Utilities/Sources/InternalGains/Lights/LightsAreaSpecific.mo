@@ -1,34 +1,18 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
 model LightsAreaSpecific "light heat source model"
-  extends BaseClasses.PartialInternalGain(radiativeHeat(               T_ref=T0),
-                                          ratioConv=0.5);
-  parameter Modelica.SIunits.Area RoomArea=20 "Area of room"    annotation(Dialog( descriptionLabel = true));
+  extends BaseClasses.PartialInternalGain(emissivity=0.98,
+                                          ratioConv=0.5,
+    productHeatOutput(nu=2),
+    radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Lighting)));
+  parameter Modelica.SIunits.Area RoomArea "Area of room"    annotation(Dialog( descriptionLabel = true));
   parameter Real LightingPower = 10 "Heating power of lighting in W/m2" annotation(Dialog( descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
-  parameter Real Emissivity_Lighting = 0.98;
+
   Modelica.Blocks.Sources.Constant MaxLighting(k=RoomArea*LightingPower)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Lighting, A=max(1e-4, SurfaceArea_Lighting)) annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
-  connect(MaxLighting.y,productHeatOutput. u[2])
-                                          annotation (Line(
-      points={{-69,50},{-48,50},{-48,-3.5},{-40,-3.5}}));
-  connect(schedule,productHeatOutput. u[1]) annotation (Line(
-      points={{-100,0},{-76,0},{-76,-20},{-48,-20},{-48,-4},{-40,-4},{-40,3.5}},
-      color={0,0,127}));
-  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{46,-10},{46,-60},{50.8,-60}}, color={191,0,0}));
-  connect(RadiationConvertor.rad, radHeat) annotation (Line(
-      points={{69.1,-60},{90,-60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(productHeatOutput.y, gain.u) annotation (Line(
-      points={{-18.3,0},{-8,0},{-8,30},{3.2,30}},
-      color={0,0,127}));
-  connect(productHeatOutput.y, gain1.u) annotation (Line(
-      points={{-18.3,0},{-8,0},{-8,-10},{3.2,-10}},
-      color={0,0,127}));
+  connect(MaxLighting.y, productHeatOutput.u[1]) annotation (Line(points={{-69,50},{-44,50},{-44,0},{-20,0}}, color={0,0,127}));
+  connect(schedule, productHeatOutput.u[2]) annotation (Line(points={{-100,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Ellipse(
           extent={{-52,72},{50,-40}},

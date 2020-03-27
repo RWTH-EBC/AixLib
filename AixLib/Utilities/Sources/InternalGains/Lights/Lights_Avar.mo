@@ -1,24 +1,25 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
 model Lights_Avar
-  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
-  parameter Real Emissivity_Lighting = 0.98;
+  extends BaseClasses.PartialInternalGain(emissivity=0.98,
+    productHeatOutput(nu=1),
+    radConvertor(final use_A_in=true));
+
   parameter Modelica.SIunits.RadiantEnergyFluenceRate specificPower=100
     "radiative power per m2";
 
-  HeatTransfer.HeatToRad RadiationConvertor(use_A_in=true) annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
+  Modelica.Blocks.Math.Gain gain(final k=1/specificPower) annotation (Placement(transformation(extent={{-26,-46},{-14,-34}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-6,-46},{6,-34}})));
 equation
-    RadiationConvertor.A_in = max(1e-4,schedule / specificPower);
-  connect(RadiationConvertor.rad, radHeat) annotation (Line(
-      points={{69.1,-60},{90,-60}},
+
+  connect(radConvertor.rad, radHeat) annotation (Line(
+      points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{48,-10},{48,-60},{50.8,-60}}, color={191,0,0}));
-  connect(schedule, gain.u) annotation (Line(
-      points={{-100,0},{-20,0},{-20,30},{3.2,30}},
-      color={0,0,127}));
-  connect(schedule, gain1.u) annotation (Line(
-      points={{-100,0},{-20,0},{-20,-10},{3.2,-10}},
-      color={0,0,127}));
+  connect(radiativeHeat.port, radConvertor.conv) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
+  connect(schedule, productHeatOutput.u[1]) annotation (Line(points={{-100,0},{-20,0}}, color={0,0,127}));
+  connect(gain.y,limiter. u) annotation (Line(points={{-13.4,-40},{-7.2,-40}}, color={0,0,127}));
+  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{6.6,-40},{62,-40},{62,-51}}, color={0,0,127}));
+  connect(gain.u, schedule) annotation (Line(points={{-27.2,-40},{-60,-40},{-60,0},{-100,0}}, color={0,0,127}));
   annotation ( Icon(graphics={
         Ellipse(
           extent={{-52,72},{50,-40}},

@@ -1,22 +1,12 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
 model Lights_simple "simple light heat source model"
-  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(emissivity=0.98,
+    radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Lighting)),
+    productHeatOutput(nu=1));
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
-  parameter Real Emissivity_Lighting = 0.98;
 
-  HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Lighting, A=max(1e-4, SurfaceArea_Lighting)) annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
-  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{46,-10},{46,-60},{50.8,-60}}, color={191,0,0}));
-  connect(RadiationConvertor.rad, radHeat) annotation (Line(
-      points={{69.1,-60},{90,-60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(schedule, gain.u) annotation (Line(
-      points={{-100,0},{-20,0},{-20,30},{3.2,30}},
-      color={0,0,127}));
-  connect(schedule, gain1.u) annotation (Line(
-      points={{-100,0},{-20,0},{-20,-10},{3.2,-10}},
-      color={0,0,127}));
+  connect(schedule, productHeatOutput.u[1]) annotation (Line(points={{-100,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Ellipse(
           extent={{-52,72},{50,-40}},

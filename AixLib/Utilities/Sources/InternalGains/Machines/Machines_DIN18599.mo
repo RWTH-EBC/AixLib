@@ -1,13 +1,16 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model Machines_DIN18599
-  extends BaseClasses.PartialInternalGain(radiativeHeat(T_ref=T0));
+  extends BaseClasses.PartialInternalGain(
+    radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Machines*NrPeople)),
+    emissivity=0.98,
+    productHeatOutput(nu=2));
 
   parameter Integer ActivityType=2 "Machine activity"
     annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
   parameter Real NrPeople=1.0 "Number of people with machines"  annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
     "surface area of radiative heat source";
-  parameter Real Emissivity_Machines=0.98;
+
 protected
   Modelica.Blocks.Tables.CombiTable1D HeatOutput(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
@@ -15,38 +18,20 @@ protected
     table=[1,50; 2,100; 3,150],
     columns={2})
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
-    annotation (Placement(transformation(extent={{-24,-10},{-4,10}})));
 public
   Modelica.Blocks.Math.Gain Nr_People(k=NrPeople)
     annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
   Modelica.Blocks.Sources.Constant Activity(k=ActivityType)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
-  HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Machines, A=max(1e-4, SurfaceArea_Machines*NrPeople)) annotation (Placement(transformation(extent={{48,-70},{68,-50}})));
 equation
-  connect(HeatOutput.y[1], productHeatOutput.u[1]) annotation (Line(
-      points={{-39,50},{-32,50},{-32,3.5},{-24,3.5}},
-      color={0,0,127}));
-  connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(
-      points={{-47.4,-40},{-32,-40},{-32,-3.5},{-24,-3.5}},
-      color={0,0,127}));
   connect(schedule, Nr_People.u) annotation (Line(
       points={{-100,0},{-85.6,0},{-85.6,-40},{-61.2,-40}},
       color={0,0,127}));
   connect(Activity.y, HeatOutput.u[1]) annotation (Line(
       points={{-69,50},{-62,50}},
       color={0,0,127}));
-  connect(RadiationConvertor.rad, radHeat) annotation (Line(
-      points={{67.1,-60},{90,-60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(radiativeHeat.port, RadiationConvertor.conv) annotation (Line(points={{40,-10},{48,-10},{48,-60},{48.8,-60}}, color={191,0,0}));
-  connect(productHeatOutput.y, gain.u) annotation (Line(
-      points={{-2.3,0},{0,0},{0,30},{3.2,30}},
-      color={0,0,127}));
-  connect(productHeatOutput.y, gain1.u) annotation (Line(
-      points={{-2.3,0},{0,0},{0,-10},{3.2,-10}},
-      color={0,0,127}));
+  connect(HeatOutput.y, productHeatOutput.u[1:1]) annotation (Line(points={{-39,50},{-30,50},{-30,0},{-20,0}}, color={0,0,127}));
+  connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,-40},{-30,-40},{-30,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},
