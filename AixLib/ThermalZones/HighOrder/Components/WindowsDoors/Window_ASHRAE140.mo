@@ -48,8 +48,8 @@ model Window_ASHRAE140
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
   Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx(
-    Therm(T(start=T0)),
-    Star(T(start=T0)),
+    port_a(T(start=T0)),
+    radPort(T(start=T0)),
     eps=WindowType.Emissivity,
     A=windowarea)
     annotation (Placement(transformation(extent={{36,22},{56,42}})));
@@ -78,7 +78,7 @@ equation
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.Therm, pane2.port_b) annotation (Line(
+  connect(twoStar_RadEx.port_a, pane2.port_b) annotation (Line(
   points={{36.8,32},{36,32},{36,-8},{38,-8}},
   color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
@@ -99,7 +99,7 @@ equation
   connect(heatConv_inside.port_a, port_inside) annotation (Line(
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
-  connect(twoStar_RadEx.Star, Star) annotation (Line(
+  connect(twoStar_RadEx.radPort, radPort) annotation (Line(
       points={{55.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

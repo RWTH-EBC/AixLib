@@ -48,13 +48,13 @@ model ConvNLayerClearanceStar
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Utilities.Interfaces.RadPort
-                            Star annotation(Placement(transformation(extent={{90,52},
+                            radPort annotation(Placement(transformation(extent={{90,52},
             {110,72}})));
   Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx(
     A=A,
     eps=eps,
-    Therm(T(start=T0)),
-    Star(T(start=T0)))
+    port_a(T(start=T0)),
+    radPort(T(start=T0)))
     annotation (Placement(transformation(extent={{54,28},{74,48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent={{-110,
             -10},{-90,10}}),                                                                                                        iconTransformation(extent={{-110,
@@ -75,7 +75,7 @@ model ConvNLayerClearanceStar
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyport_a
     "This really helps to solve initialisation problems in huge equation systems ..."                   annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
 
 equation
@@ -85,11 +85,11 @@ equation
           52,0}},                               color={191,0,0}));
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(HeatConv1.port_a, port_b) annotation(Line(points={{72,0},{100,0}},                             color = {200, 100, 0}));
-  connect(HeatConv1.port_b, twoStar_RadEx.Therm) annotation(Line(points={{52,0},{
+  connect(HeatConv1.port_b, twoStar_RadEx.port_a) annotation(Line(points={{52,0},{
           50,0},{50,38},{54.8,38}},                                                                                   color = {200, 100, 0}));
-  connect(twoStar_RadEx.Star, Star) annotation(Line(points={{73.1,38},{100,38},
+  connect(twoStar_RadEx.radPort, radPort) annotation(Line(points={{73.1,38},{100,38},
           {100,62}},                                                                           color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points={{52,0},{51.5,0},
+  connect(HeatConv1.port_b, dummyport_a) annotation(Line(points={{52,0},{51.5,0},
           {51.5,-38.5}},                                                                                color = {200, 100, 0}));
   // computing approximated longwave radiation exchange
 
