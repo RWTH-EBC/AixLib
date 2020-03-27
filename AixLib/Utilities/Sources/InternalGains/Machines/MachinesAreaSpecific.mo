@@ -12,18 +12,20 @@ model MachinesAreaSpecific
   parameter Modelica.SIunits.Area RoomArea "Area of room" annotation(Dialog(descriptionLabel = true));
 
   Modelica.Blocks.Math.Gain internalGainsMachinesSpecific(final k=InternalGainsMachinesSpecific)
-    annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
+    annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
   Modelica.Blocks.Sources.Constant Area(final k=RoomArea)
     annotation (Placement(transformation(extent={{-92,38},{-72,58}})));
 public
   Modelica.Blocks.Math.Gain gainMachinesSurfaces(k=areaSurfaceMachinesTotal) annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
 equation
-  connect(schedule, internalGainsMachinesSpecific.u) annotation (Line(points={{-100,
-          0},{-85.6,0},{-85.6,-40},{-61.2,-40}}, color={0,0,127}));
+  connect(schedule, internalGainsMachinesSpecific.u) annotation (Line(points={{-100,0},{-61.2,0}},
+                                                 color={0,0,127}));
   connect(Area.y, productHeatOutput.u[1]) annotation (Line(points={{-71,48},{-34,48},{-34,0},{-20,0}}, color={0,0,127}));
-  connect(internalGainsMachinesSpecific.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,-40},{-34,-40},{-34,0},{-20,0}}, color={0,0,127}));
+  connect(internalGainsMachinesSpecific.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,0},{-20,0}},                     color={0,0,127}));
   connect(schedule, gainMachinesSurfaces.u) annotation (Line(points={{-100,0},{-86,0},{-86,-60},{-61.2,-60}}, color={0,0,127}));
-  connect(gainMachinesSurfaces.y, radConvertor.A_in) annotation (Line(points={{-47.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
+  connect(gainMachinesSurfaces.y, limiter.u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
+  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},

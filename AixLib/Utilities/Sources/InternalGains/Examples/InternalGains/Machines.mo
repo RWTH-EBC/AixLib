@@ -4,9 +4,7 @@ model Machines "Simulation to check the machine models"
   Utilities.Sources.InternalGains.Machines.Machines_DIN18599
     machines_sensibleHeat_DIN18599
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Utilities.Sources.InternalGains.Machines.Machines_Avar
-    machines_sensibleHeat_Avar
-    annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesRelToMaxValue machines_sensibleHeat_Avar annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0;
         28800,1; 64800,1; 64860,0; 86400,0])
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));

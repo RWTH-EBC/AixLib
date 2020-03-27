@@ -1,23 +1,26 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
-model Machines_Avar
+model MachinesRelToMaxValue "Multiplies relative input with max value (heat flow due to machines in W)"
   extends BaseClasses.PartialInternalGain(
     radConvertor(final use_A_in=true),
     emissivity=0.98,
     productHeatOutput(nu=1));
-  parameter Integer ActivityType=2 "Machine activity (unused)"
-    annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
-  parameter Real NrPeople=1.0 "Number of people with machines (unused)"  annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
+  Modelica.Blocks.Math.Gain gainMachinesSurfaces(final k=areaSurfaceMachinesTotal)
+                                                                             annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
+  parameter Modelica.SIunits.HeatFlowRate maxHeatFlowAbsolute "Maximal absolute heat flow of machines";
 
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate specificPower=10
-    "Radiative power per m2";
-  Modelica.Blocks.Math.Gain gain(final k=1/specificPower) annotation (Placement(transformation(extent={{-26,-46},{-14,-34}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-6,-46},{6,-34}})));
+protected
+  Modelica.Blocks.Math.Gain gainMaxHeatFlowAbsolute(final k=maxHeatFlowAbsolute)
+                                                                           annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
+
 equation
 
-  connect(gain.y, limiter.u) annotation (Line(points={{-13.4,-40},{-7.2,-40}}, color={0,0,127}));
-  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{6.6,-40},{62,-40},{62,-51}}, color={0,0,127}));
-  connect(schedule, gain.u) annotation (Line(points={{-100,0},{-40,0},{-40,-40},{-27.2,-40}}, color={0,0,127}));
-  connect(schedule, productHeatOutput.u[1]) annotation (Line(points={{-100,0},{-20,0}}, color={0,0,127}));
+  connect(schedule,gainMachinesSurfaces. u) annotation (Line(points={{-100,0},{-86,0},{-86,-60},{-61.2,-60}}, color={0,0,127}));
+  connect(gainMachinesSurfaces.y, limiter.u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
+  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
+  connect(schedule, gainMaxHeatFlowAbsolute.u) annotation (Line(points={{-100,0},{-61.2,0}}, color={0,0,127}));
+  connect(gainMaxHeatFlowAbsolute.y, productHeatOutput.u[1]) annotation (Line(points={{-47.4,0},{-20,0}}, color={0,0,127}));
   annotation ( Icon(graphics={
         Rectangle(
           extent={{-60,60},{60,-38}},
@@ -261,4 +264,4 @@ zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>"));
-end Machines_Avar;
+end MachinesRelToMaxValue;
