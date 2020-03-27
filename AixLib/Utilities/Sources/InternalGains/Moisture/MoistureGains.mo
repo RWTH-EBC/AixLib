@@ -5,8 +5,6 @@ model MoistureGains
   parameter Real specificMoistureProduction(unit="g/(h.m.m)") = 0.5
     "Specific moisture production without persons in the room due to plants, cooking, showering, etc.";
   parameter Modelica.SIunits.Area roomArea=20 "Area of room";
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
-    "Initial temperature";
 
   Modelica.Blocks.Interfaces.RealOutput QLat_flow
     "Latent heat of moisture gain"
@@ -26,11 +24,6 @@ model MoistureGains
   "Specific latent heat of moisture"
     annotation (Placement(transformation(extent={{56,-44},{36,-24}})));
 protected
-  constant Modelica.SIunits.SpecificHeatCapacity cp_steam=
-    AixLib.Utilities.Psychrometrics.Constants.cpSte
-    "Specific heat capacity of steam";
-  constant Modelica.SIunits.SpecificEnthalpy EnthalpyOfEvaporation=AixLib.Utilities.Psychrometrics.Constants.h_fg
-    "Enthalpy of vaporization";
   constant Modelica.SIunits.SpecificEnergy h_fg=
     Media.Air.enthalpyOfCondensingGas(273.15+37) "Latent heat of water vapor";
 equation
