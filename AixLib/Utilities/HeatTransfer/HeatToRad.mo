@@ -40,11 +40,12 @@ equation
  <p>Since exact calculation of longwave radiation exchange inside a room demands for the computation of view factors, it may be very complex to achieve for non-rectangular room layouts. Therefore, an approximated calculation of radiation exchange basing on the proportions of the affected surfaces is an alternative. The underlying concept of this approach is known as the &quot;two star&quot; room model. </p>
  </html>", revisions="<html>
  <ul>
- <li><i>November 5, 2019&nbsp;</i> by David Jansen:<br/>Make area a conditional paramter <a href=\"https://github.com/RWTH-EBC/AixLib/issues/689\">#issue689</a></li>
- <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Moved and Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
- <li><i>June 21, 2007&nbsp;</i> by Peter Mattes:<br/>Extended model based on TwoStar_RadEx.</li>
+  <li><i>November 5, 2019&nbsp;</i> by David Jansen:<br/>Make area a conditional paramter <a href=\"https://github.com/RWTH-EBC/AixLib/issues/689\">#issue689</a></li>
+  <li><i>February 16, 2018&nbsp;</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/535\">#535</a>: Add max functions to prevent negative solutions.</li>
+  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
+  <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Moved and Renamed</li>
+  <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
+  <li><i>June 21, 2007&nbsp;</i> by Peter Mattes:<br/>Extended model based on TwoStar_RadEx.</li>
  </ul>
- </html>"));
+</html>"));
 end HeatToRad;
