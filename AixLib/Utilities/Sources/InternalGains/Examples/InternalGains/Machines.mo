@@ -1,9 +1,6 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model Machines "Simulation to check the machine models"
   extends Modelica.Icons.Example;
-  Utilities.Sources.InternalGains.Machines.Machines_simple
-    machines_sensibleHeat_simple
-    annotation (Placement(transformation(extent={{-10,32},{10,52}})));
   Utilities.Sources.InternalGains.Machines.Machines_DIN18599
     machines_sensibleHeat_DIN18599
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
