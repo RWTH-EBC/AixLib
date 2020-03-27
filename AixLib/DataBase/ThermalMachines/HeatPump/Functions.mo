@@ -5,8 +5,7 @@ extends Modelica.Icons.Package;
     extends Modelica.Icons.Package;
 
     function ConstantCoP "Constant CoP and constant electric power"
-      extends
-        AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct(
+      extends AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct(
         N,
         T_con,
         T_eva,
@@ -31,8 +30,7 @@ extends Modelica.Icons.Package;
 
     function ConstantQualityGrade
       "Carnot CoP multiplied with constant quality grade and constant electric power"
-      extends
-        AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct(
+      extends AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct(
         N,
         T_con,
         T_eva,
@@ -154,8 +152,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
      extends Modelica.Icons.Package;
 
     function NoModel "No model"
-      extends
-        AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct(
+      extends AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct(
           T_eva);
 
     algorithm
@@ -188,8 +185,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
     function WetterAfjei1996
       "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
-      extends
-        AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct(
+      extends AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct(
           T_eva);
 
     parameter Real A=0.03;
@@ -263,8 +259,7 @@ First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/iss
 
     function WetterAfjei1996
       "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
-      extends
-        AixLib.DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.PartialBaseFct;
+      extends AixLib.DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.PartialBaseFct;
 
     parameter Real A=0.03;
     parameter Real B=-0.004;

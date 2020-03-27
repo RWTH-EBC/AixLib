@@ -1,6 +1,5 @@
 within AixLib.Utilities.HeatTransfer;
-model HeatToStar
-  "Adaptor for approximative longwave radiation exchange with variable surface Area"
+model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
   parameter Boolean use_A_in = false
     "Get the area from the input connector"
@@ -48,4 +47,4 @@ equation
  <li><i>June 21, 2007&nbsp;</i> by Peter Mattes:<br/>Extended model based on TwoStar_RadEx.</li>
  </ul>
  </html>"));
-end HeatToStar;
+end HeatToRad;

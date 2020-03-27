@@ -13,9 +13,7 @@ partial model PartialHuman "Partial model for internal gains of humans"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat
     "Convective heat output"
    annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  Utilities.HeatTransfer.HeatToStar radiationConvertor(eps=emissivityHuman, use_A_in=true)
-    "Converter for HeatPort to RadPort"
-    annotation (Placement(transformation(extent={{48,-22},{72,2}})));
+  HeatTransfer.HeatToRad radiationConvertor(eps=emissivityHuman, use_A_in=true) "Converter for HeatPort to RadPort" annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   Interfaces.RadPort radHeat "Radiative heat output"
    annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Interfaces.RealInput schedule "Occupancy schedule"

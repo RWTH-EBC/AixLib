@@ -1,8 +1,7 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.Validation.BaseClasses;
 record SmallScale_Filling
   "Filling data record for the Cimmino and Bernier (2015) experiment"
-  extends
-    AixLib.Fluid.Geothermal.Borefields.Data.Filling.Template(
+  extends AixLib.Fluid.Geothermal.Borefields.Data.Filling.Template(
       kFil=0.262,
       dFil=1750,
       cFil=745);

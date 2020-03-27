@@ -10,9 +10,7 @@ model LightsAreaSpecific "light heat source model"
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Lighting, A=max(
-        1e-4, SurfaceArea_Lighting))
-    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
+  HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Lighting, A=max(1e-4, SurfaceArea_Lighting)) annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
   connect(MaxLighting.y,productHeatOutput. u[2])
                                           annotation (Line(

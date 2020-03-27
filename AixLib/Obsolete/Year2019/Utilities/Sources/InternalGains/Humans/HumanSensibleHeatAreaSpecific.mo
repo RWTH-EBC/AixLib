@@ -9,7 +9,7 @@ model HumanSensibleHeatAreaSpecific "Model for sensible heat output area specifi
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
     "Initial temperature";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  AixLib.Utilities.HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Human, use_A_in=true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
+  AixLib.Utilities.HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Human, use_A_in=true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   AixLib.Utilities.Interfaces.RadPort RadHeat annotation (Placement(transformation(extent={{80,-20},{100,0}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -40}, {-80, 0}}), iconTransformation(extent = {{-102, -22}, {-80, 0}})));
   Modelica.Blocks.Math.Gain internalGainsPeopleSpecific(k=

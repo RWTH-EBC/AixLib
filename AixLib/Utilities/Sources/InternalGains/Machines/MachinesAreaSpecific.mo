@@ -15,11 +15,7 @@ public
   Modelica.Blocks.Math.Gain internalGainsMachinesSpecific(k=
         InternalGainsMachinesSpecific)
     annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
-  HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Machines, A=max(
-        1e-4, SurfaceArea_Machines*InternalGainsMachinesSpecific*(1/
-        HeatPerMachine)*RoomArea))
-    "Surface Area of a machine multiplied with the number of machines"
-    annotation (Placement(transformation(extent={{48,-70},{68,-50}})));
+  HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Machines, A=max(1e-4, SurfaceArea_Machines*InternalGainsMachinesSpecific*(1/HeatPerMachine)*RoomArea)) "Surface Area of a machine multiplied with the number of machines" annotation (Placement(transformation(extent={{48,-70},{68,-50}})));
   Modelica.Blocks.Sources.Constant Area(k=RoomArea)
     annotation (Placement(transformation(extent={{-92,38},{-72,58}})));
 equation

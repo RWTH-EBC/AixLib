@@ -5,8 +5,7 @@ model Lights_Avar
   parameter Modelica.SIunits.RadiantEnergyFluenceRate specificPower=100
     "radiative power per m2";
 
-  HeatTransfer.HeatToStar RadiationConvertor(use_A_in=true)
-    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
+  HeatTransfer.HeatToRad RadiationConvertor(use_A_in=true) annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
 equation
     RadiationConvertor.A_in = max(1e-4,schedule / specificPower);
   connect(RadiationConvertor.rad, radHeat) annotation (Line(

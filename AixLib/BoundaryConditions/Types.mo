@@ -17,7 +17,6 @@ First implementation.
 </li>
 </ul>
 </html>"));
-
   type RadiationDataSource = enumeration(
       File "Use data from file",
       Input_HGloHor_HDifHor
@@ -57,7 +56,6 @@ First implementation.
 </li>
 </ul>
 </html>"));
-
 annotation (preferredView="info", Documentation(info="<html>
 This package contains type definitions.
 </html>"));

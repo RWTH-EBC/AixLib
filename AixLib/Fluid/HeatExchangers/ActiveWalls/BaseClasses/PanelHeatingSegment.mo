@@ -53,8 +53,7 @@ parameter HeatCapacityPerArea cDown;
     annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConvWall
     annotation (Placement(transformation(extent={{-22,-110},{-2,-90}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=A, eps=eps) annotation (
-      Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(A=A, eps=eps) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));

@@ -1,8 +1,7 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  extends
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
+  extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
 //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Real windowarea=2 "Total fenestration area";
@@ -47,7 +46,7 @@ model Window_ASHRAE140
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
     rad(T(start=T0)),
     conv(T(start=T0)),
     eps=WindowType.Emissivity,

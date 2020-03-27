@@ -186,10 +186,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,26})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps, nNodes),
-      A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
-                                     Heat_Loss_To_Ambient and not isEmbedded
-    "Radiation" annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
+                                     Heat_Loss_To_Ambient and not isEmbedded "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-58,28})));

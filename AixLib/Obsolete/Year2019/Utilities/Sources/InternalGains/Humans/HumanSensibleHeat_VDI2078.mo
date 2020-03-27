@@ -8,7 +8,7 @@ model HumanSensibleHeat_VDI2078 "Model for sensible heat output after VDI 2078"
   parameter Real RatioConvectiveHeat = 0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
-  AixLib.Utilities.HeatTransfer.HeatToStar RadiationConvertor(eps=Emissivity_Human, use_A_in=true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
+  AixLib.Utilities.HeatTransfer.HeatToRad RadiationConvertor(eps=Emissivity_Human, use_A_in=true) annotation (Placement(transformation(extent={{48,-22},{72,2}})));
   AixLib.Utilities.Interfaces.RadPort RadHeat annotation (Placement(transformation(extent={{80,-20},{100,0}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=2)   annotation(Placement(transformation(extent = {{-24, 10}, {-4, 30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom

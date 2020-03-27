@@ -1,7 +1,6 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
 record Stucco
-  extends
-    DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
+  extends DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
     D=11.58,
     E=5.894,
     F=0.0);

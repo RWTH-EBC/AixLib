@@ -66,8 +66,7 @@ package PerformanceData "Different models used for a black box heat pump model"
   end IcingBlock;
 
   model LookUpTable2D "Performance data coming from manufacturer"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    extends AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
@@ -320,8 +319,7 @@ package PerformanceData "Different models used for a black box heat pump model"
   end LookUpTable2D;
 
   model LookUpTableND "N-dimensional table with data for heat pump"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    extends AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
     parameter Real nConv=100
       "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
     parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -592,8 +590,7 @@ package PerformanceData "Different models used for a black box heat pump model"
 
   model PolynomalApproach
     "Calculating heat pump data based on a polynomal approach"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    extends AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
     replaceable function PolyData =
         AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
