@@ -1,7 +1,8 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model Machines_DIN18599
   extends BaseClasses.PartialInternalGain(
-    radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Machines*NrPeople)),
+    radConvertor(final use_A_in=false,
+                 final A=max(Modelica.Constants.eps, SurfaceArea_Machines*NrPeople)),
     emissivity=0.98,
     productHeatOutput(nu=2));
 

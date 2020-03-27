@@ -2,7 +2,8 @@ within AixLib.Utilities.Sources.InternalGains.Machines;
 model Machines_simple
   "Heat source with convective and radiative component and connector for power input signal."
   extends BaseClasses.PartialInternalGain(
-    radConvertor(final A=max(1e-4, SurfaceArea_Machines)),
+    radConvertor(final use_A_in=false,
+                 final A=max(Modelica.Constants.eps, SurfaceArea_Machines)),
     final emissivity=0.98,
     productHeatOutput(nu=1));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
