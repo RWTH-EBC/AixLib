@@ -1,9 +1,6 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model Lights "Simulation to check the light models"
   extends Modelica.Icons.Example;
-  Utilities.Sources.InternalGains.Lights.Lights_simple
-    lights_sensibleHeat_simple
-    annotation (Placement(transformation(extent={{-10,48},{10,68}})));
   AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Utilities.Sources.InternalGains.Lights.Lights_Avar lights_sensibleHeat_Avar
@@ -15,22 +12,14 @@ model Lights "Simulation to check the light models"
     annotation (Placement(transformation(extent={{78,-8},{58,12}})));
 equation
   connect(combiTimeTable.y[1],lights.schedule)  annotation (Line(
-      points={{-55,0},{-9,0}},
-      color={0,0,127}));
-  connect(combiTimeTable.y[1],lights_sensibleHeat_simple.schedule)
-    annotation (Line(
-      points={{-55,0},{-32,0},{-32,58},{-9,58}},
+      points={{-55,0},{-10,0}},
       color={0,0,127}));
   connect(combiTimeTable.y[1],lights_sensibleHeat_Avar.schedule)  annotation (
      Line(
-      points={{-55,0},{-32,0},{-32,-52},{-9,-52}},
+      points={{-55,0},{-32,0},{-32,-52},{-10,-52}},
       color={0,0,127}));
   connect(lights.convHeat, fixedTemp.port) annotation (Line(
       points={{9,6},{34,6},{34,2},{58,2}},
-      color={191,0,0}));
-  connect(lights_sensibleHeat_simple.convHeat, fixedTemp.port) annotation (
-      Line(
-      points={{9,64},{34,64},{34,2},{58,2}},
       color={191,0,0}));
   connect(lights_sensibleHeat_Avar.convHeat, fixedTemp.port) annotation (
       Line(
@@ -38,16 +27,11 @@ equation
       color={191,0,0}));
   connect(lights_sensibleHeat_Avar.radHeat, fixedTemp.port) annotation (
       Line(
-      points={{9,-57.8},{46,-57.8},{46,2},{58,2}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(lights_sensibleHeat_simple.radHeat, fixedTemp.port) annotation (
-      Line(
-      points={{9,52.2},{46,52.2},{46,2},{58,2}},
+      points={{9,-58},{46,-58},{46,2},{58,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(lights.radHeat, fixedTemp.port) annotation (Line(
-      points={{9,-5.8},{46,-5.8},{46,2},{58,2}},
+      points={{9,-6},{46,-6},{46,2},{58,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   annotation (

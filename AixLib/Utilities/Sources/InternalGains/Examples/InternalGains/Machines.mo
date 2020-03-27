@@ -12,30 +12,23 @@ model Machines "Simulation to check the machine models"
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=293.15)
     annotation (Placement(transformation(extent={{80,-8},{60,12}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific machinesAreaSpecific annotation (Placement(transformation(extent={{-10,32},{10,52}})));
 equation
   connect(combiTimeTable.y[1],machines_sensibleHeat_DIN18599.schedule)
     annotation (Line(
-      points={{-49,0},{-9,0}},
-      color={0,0,127}));
-  connect(combiTimeTable.y[1],machines_sensibleHeat_simple.schedule)
-    annotation (Line(
-      points={{-49,0},{-28,0},{-28,42},{-9,42}},
+      points={{-49,0},{-10,0}},
       color={0,0,127}));
   connect(combiTimeTable.y[1],machines_sensibleHeat_Avar.schedule)
     annotation (Line(
-      points={{-49,0},{-28,0},{-28,-42},{-9,-42}},
+      points={{-49,0},{-28,0},{-28,-42},{-10,-42}},
       color={0,0,127}));
-  connect(machines_sensibleHeat_simple.convHeat, fixedTemp.port)
-    annotation (Line(
-      points={{9,48},{38,48},{38,2},{60,2}},
-      color={191,0,0}));
   connect(machines_sensibleHeat_DIN18599.convHeat, fixedTemp.port)
     annotation (Line(
       points={{9,6},{38,6},{38,2},{60,2}},
       color={191,0,0}));
   connect(machines_sensibleHeat_DIN18599.radHeat, fixedTemp.port)
     annotation (Line(
-      points={{9,-5.8},{34.5,-5.8},{34.5,2},{60,2}},
+      points={{9,-6},{34.5,-6},{34.5,2},{60,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(machines_sensibleHeat_Avar.convHeat, fixedTemp.port) annotation (
@@ -44,14 +37,12 @@ equation
       color={191,0,0}));
   connect(machines_sensibleHeat_Avar.radHeat, fixedTemp.port) annotation (
       Line(
-      points={{9,-47.8},{34.5,-47.8},{34.5,2},{60,2}},
+      points={{9,-48},{34.5,-48},{34.5,2},{60,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(machines_sensibleHeat_simple.radHeat, fixedTemp.port) annotation (
-     Line(
-      points={{9,36.2},{34.5,36.2},{34.5,2},{60,2}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
+  connect(combiTimeTable.y[1], machinesAreaSpecific.schedule) annotation (Line(points={{-49,0},{-28,0},{-28,42},{-10,42}}, color={0,0,127}));
+  connect(machinesAreaSpecific.convHeat, fixedTemp.port) annotation (Line(points={{9,48},{44,48},{44,2},{60,2}}, color={191,0,0}));
+  connect(machinesAreaSpecific.radHeat, fixedTemp.port) annotation (Line(points={{9,36},{42,36},{42,2},{60,2}}, color={95,95,95}));
   annotation (
     experiment(StopTime=86400, Interval=60),
 Documentation(info="<html>
