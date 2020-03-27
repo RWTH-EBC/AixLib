@@ -37,7 +37,7 @@ model WindowSimple "Window with radiation and U-Value"
     final n=1)
     annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
   Utilities.Interfaces.RadPort
-                            Star
+                            radPort
     annotation (Placement(transformation(extent={{80,50},{100,70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside
     annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
@@ -63,7 +63,7 @@ equation
     annotation (Line(points={{-31,60},{-17.2,60}}, color={0,0,127}));
   connect(Ag.y, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{-3.4,60},{2,60}}, color={0,0,127}));
-  connect(Star, prescribedHeatFlow.port)
+  connect(radPort, prescribedHeatFlow.port)
     annotation (Line(points={{90,60},{22,60}}, color={95,95,95}));
   annotation (
     Icon(coordinateSystem(

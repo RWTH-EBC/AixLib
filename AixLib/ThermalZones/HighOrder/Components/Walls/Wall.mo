@@ -134,7 +134,7 @@ equation
   //******************************************************************
   // **********************standard connection************************
   //******************************************************************
-  connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
+  connect(Wall.radPort, heatStarToComb.portRad) annotation (Line(
       points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
       color={95,95,95},
       pattern=LinePattern.Solid));
@@ -166,7 +166,7 @@ equation
   if withDoor then
     connect(Door.port_a, port_outside) annotation(Line(points = {{-19.4, -86}, {-56, -86}, {-56, 24}, {-24, 24}, {-24, 4}, {-98, 4}}, color = {191, 0, 0}));
     connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
-    connect(Door.Star, heatStarToComb.portRad) annotation (Line(
+    connect(Door.radPort, heatStarToComb.portRad) annotation (Line(
         points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
         color={95,95,95},
         pattern=LinePattern.Solid));
@@ -175,7 +175,7 @@ equation
   // ****standard connections for outside wall with window***********
   //******************************************************************
   if outside and withWindow then
-    connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
+    connect(windowSimple.radPort, heatStarToComb.portRad) annotation (Line(
         points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
         color={95,95,95},
         pattern=LinePattern.Solid));
