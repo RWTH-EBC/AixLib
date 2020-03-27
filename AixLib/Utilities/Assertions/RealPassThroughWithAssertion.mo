@@ -47,7 +47,7 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>
-March 26, 2018 by Philipp Mehrfeld:<br/>
+March 26, 2020 by Philipp Mehrfeld:<br/>
 First implementation.
 See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/884\">#884</a>.
 </li>
