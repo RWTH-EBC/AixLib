@@ -53,8 +53,10 @@ equation
 <li><i>April 30, 2012</i> by Peter Matthes:<br/>implemented partial model for heat sources to work with Ana&apos;s models. </li>
 <li><i>August 10, 2011</i> by Ana Constantin:<br/>implemented </li>
 </ul>
-</html>",  info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Partial model to build a heat source with convective and radiative components. The parameter <code>ratioConv</code> determines the percentage of convective heat.</p>
- </html>"));
+</html>",  info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Partial model to build a heat source with <i>convective</i> and <i>radiative</i> components. The parameter <span style=\"font-family: Courier New;\">ratioConv</span> determines the share of convective heat. The <i>input</i> is always a relativ input between 0..1.</p>
+<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
+<p>The surface for radiation exchange is computed from the area of the emitting component. </p><p>An input of 0 leads to a surface area of zero and, thus, to division by zero. For this reason a limitiation for the surface has been intoduced. </p>
+</html>"));
 end PartialInternalGain;

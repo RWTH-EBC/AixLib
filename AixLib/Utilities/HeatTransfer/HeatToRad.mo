@@ -1,4 +1,4 @@
-within AixLib.Utilities.HeatTransfer;
+﻿within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
   parameter Boolean use_A_in = false
@@ -38,8 +38,15 @@ equation
 <p>The model cobines the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> and the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector. To model longwave radiation exchange of surfaces, just connect the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> connector to the heat port of a surface and connect the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector to the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connectors of an unlimited number of corresponding surfaces. </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>Since exact calculation of longwave radiation exchange inside a room demands for the computation of view factors, it may be very complex to achieve for non-rectangular room layouts. Therefore, an approximated calculation of radiation exchange basing on the proportions of the affected surfaces is an alternative. The underlying concept of this approach is known as the &quot;two star&quot; room model. </p>
-<p><b><span style=\"color: #008000;\">Limitations / Assumptions</span></b>
+<p><b><span style=\"color: #008000;\">Limitations / Assumptions</span></b> </p>
+<p>According to [1]:</p>
+
+<p><span class=\"fraction\" style=\"font-size: 16pt;\">Q&#775;<sub>1&#8652;2</sub> &#61; A<sub>1</sub> &#8901; &#x3C3; &#8901; &#40; T<sub>1</sub><sup>4</sup> - T<sub>2</sub><sup>4</sup>&#41; / &#40; 1/&#949;<sub>1</sub> + A<sub>1</sub> / A<sub>2</sub> &#8901; &#40; 1/&#949;<sub>2</sub> - 1 &#41;  &#41;</span></p>
+
 <p>The closer eps is to 1, the smaller is the loss of information due to the simplification that only one surface area and no view factors are known.</p>
+
+<p><b><span style=\"color: #008000;\">References</span></b> </p>
+[1] Reinhold Kneer. Formelsammlung Wärme- Und Stoffübertragung WSÜ. RWTH Aachen University, Institut für Wärme- und Stoffübertragung (WSA) September 15, 2014.
 </html>",  revisions="<html>
  <ul>
   <li><i>November 5, 2019&nbsp;</i> by David Jansen:<br/>Make area a conditional paramter <a href=\"https://github.com/RWTH-EBC/AixLib/issues/689\">#issue689</a></li>

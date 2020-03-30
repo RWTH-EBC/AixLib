@@ -35,12 +35,10 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid, textString = "ERC"), Ellipse(extent = {{-24, 80}, {-14, 70}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color = {0, 0, 0}, thickness = 1)}), Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>Partial model for internal gains of a person. The model uses the specific value for <i>Persons/m<sup>2</sup></i> and the <i>RoomArea</i> to calculate the persons in the room considering the schedule. </p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>A schedule is used as constant presence of people in a room is not realistic. The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
-<p><b><font style=\"color: #008000; \">Assumptions</font></b> </p>
-<p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero.For this reason a limitiation for the surface has been intoduced: as a minimum the surface area of one human and as a maximum a value of 1e+23 m2 (only needed for a complete parametrization of the model). </p>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Partial model for internal gains of a person. The model uses the specific value for <i>Persons/(m<sup>2</sup> room area)</i> and the <i>roomArea</i> to calculate the persons in the room considering the schedule / input y. </p>
+<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
+<p>The schedule input y describes the presence of only one person, and can take values from 0 to 1. </p>
 </html>",  revisions="<html>
  <ul>
  <li>July 10, 2019, by Martin Kremer:<br/>Implemented based on old human model</li>
