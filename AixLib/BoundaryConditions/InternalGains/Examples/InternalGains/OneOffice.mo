@@ -21,7 +21,9 @@ equation
   connect(human_SensibleHeat_VDI2078.convHeat, fixedTemp.port) annotation (Line(points={{10.9,57.2},{26,57.2},{26,56},{42,56}},
                                                                                                             color={191,0,0}));
   connect(human_SensibleHeat_VDI2078.radHeat, fixedTemp.port) annotation (Line(points={{10.9,42.8},{27.45,42.8},{27.45,56},{42,56}}, color={95,95,95}));
-  annotation (experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation (experiment(StartTime = 0, StopTime = 86400, Tolerance=1e-6, Algorithm="dassl"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/InternalGains/Examples/OneOffice.mos"
+                      "Simulate and plot"), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simulation to test the functionalty of the internal gains in a modelled room. </p>
  </html>", revisions = "<html>
