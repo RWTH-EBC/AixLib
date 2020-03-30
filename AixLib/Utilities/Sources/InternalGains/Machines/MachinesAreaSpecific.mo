@@ -2,14 +2,12 @@ within AixLib.Utilities.Sources.InternalGains.Machines;
 model MachinesAreaSpecific
   extends BaseClasses.PartialInternalGain(
     emissivity=0.98,
-    gain(final k=InternalGainsMachinesSpecific*RoomArea),
+    gain(final k=intGainsMachinesRoomAreaSpecific*roomArea),
     gainSurfaces(final k=areaSurfaceMachinesTotal));
 
-  parameter Modelica.SIunits.HeatFlux InternalGainsMachinesSpecific=1.0
-    "Heat flow from machines per square meter room"
-    annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.HeatFlux intGainsMachinesRoomAreaSpecific=1.0 "Heat flow from machines per square meter room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
-  parameter Modelica.SIunits.Area RoomArea "Area of room" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.Area roomArea "Area of room" annotation(Dialog(descriptionLabel = true));
 
   annotation (Icon(graphics={
         Text(

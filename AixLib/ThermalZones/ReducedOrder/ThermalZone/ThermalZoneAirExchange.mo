@@ -24,12 +24,12 @@ model ThermalZoneAirExchange
 
   redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific machinesSenHea(
     final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from machines" annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
+    final intGainsMachinesRoomAreaSpecific=zoneParam.internalGainsMachinesSpecific,
+    final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from machines" annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
   redeclare Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    final LightingPower=zoneParam.lightingPowerSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light" annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
+    final lightingPower=zoneParam.lightingPowerSpecific,
+    final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light" annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
   Modelica.Blocks.Interfaces.RealInput ventTemp(
     final quantity="ThermodynamicTemperature",

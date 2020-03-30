@@ -4,11 +4,11 @@ model LightsAreaSpecific "light heat source model"
     emissivity=0.98,
     ratioConv=0.5,
     radConvertor(final A=max(Modelica.Constants.eps, areaSurfaceLightsTotal)),
-    gain(final k=RoomArea*LightingPower),
+    gain(final k=roomArea*lightingPower),
     gainSurfaces(final k=areaSurfaceLightsTotal));
-  parameter Modelica.SIunits.Area RoomArea "Area of room"    annotation(Dialog( descriptionLabel = true));
-  parameter Real LightingPower = 10 "Lighting power per square meter room" annotation(Dialog( descriptionLabel = true));
-  parameter Modelica.SIunits.Area areaSurfaceLightsTotal=0.01*RoomArea "Surface of all lights in the room";
+  parameter Modelica.SIunits.Area roomArea "Area of room"    annotation(Dialog( descriptionLabel = true));
+  parameter Real lightingPower=10 "Lighting power per square meter room"   annotation(Dialog( descriptionLabel = true));
+  parameter Modelica.SIunits.Area areaSurfaceLightsTotal=0.01*roomArea "Surface of all lights in the room";
 
   annotation (Icon(graphics={
         Ellipse(

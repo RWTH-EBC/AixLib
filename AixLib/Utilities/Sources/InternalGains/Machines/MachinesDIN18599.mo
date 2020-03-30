@@ -3,12 +3,11 @@ model MachinesDIN18599 "Heat flow due to machines based on DIN 18599 (number of 
   extends BaseClasses.PartialInternalGain(
     emissivity=0.98,
     productHeatOutput(nu=2),
-    gain(final k=NrPeople),
+    gain(final k=nrPeople),
     gainSurfaces(final k=areaSurfaceMachinesTotal));
 
-  parameter Integer ActivityType=2 "Machine activity"
-    annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
-  parameter Real NrPeople=1.0 "Number of people with machines"  annotation(Dialog(descriptionLabel = true));
+  parameter Integer activityType=2 "Machine activity" annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
+  parameter Real nrPeople=1.0 "Number of people with machines"  annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
 
 protected
@@ -18,7 +17,7 @@ protected
     table=[1,50; 2,100; 3,150],
     columns={2})
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-  Modelica.Blocks.Sources.Constant Activity(k=ActivityType)
+  Modelica.Blocks.Sources.Constant Activity(k=activityType)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
 equation
   connect(Activity.y, HeatOutput.u[1]) annotation (Line(

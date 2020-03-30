@@ -2,7 +2,7 @@ within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model OneOffice
   extends Modelica.Icons.Example;
   AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent human_SensibleHeat_VDI2078 annotation (Placement(transformation(extent={{-10,38},{12,62}})));
-  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_SensibleHeat_DIN18599(NrPeople=2) annotation (Placement(transformation(extent={{-10,-6},{14,24}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_SensibleHeat_DIN18599(nrPeople=2) annotation (Placement(transformation(extent={{-10,-6},{14,24}})));
   AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights
     annotation (Placement(transformation(extent={{-8,-46},{12,-22}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RoomTemp annotation(Placement(transformation(extent = {{-58, 40}, {-38, 60}})));
