@@ -1,8 +1,8 @@
 within AixLib.BoundaryConditions.InternalGains.Examples.InternalGains;
 model Machines "Simulation to check the machine models"
   extends Modelica.Icons.Example;
-  AixLib.BoundaryConditions.InternalGains.Machines.MachinesDIN18599 machines_sensibleHeat_DIN18599(areaSurfaceMachinesTotal=10) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  AixLib.BoundaryConditions.InternalGains.Machines.MachinesRelToMaxValue machines_sensibleHeat_Avar(areaSurfaceMachinesTotal=10, maxHeatFlowAbsolute=200) annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
+  AixLib.BoundaryConditions.InternalGains.Machines.MachinesDIN18599 machinesSensibleHeatDIN18599(areaSurfaceMachinesTotal=10) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  AixLib.BoundaryConditions.InternalGains.Machines.MachinesRelToMaxValue machinesSensibleHeatFromMaxValue(areaSurfaceMachinesTotal=10, maxHeatFlowAbsolute=200) annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0;
         28800,1; 64800,1; 64860,0; 86400,0])
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
@@ -10,31 +10,24 @@ model Machines "Simulation to check the machine models"
     annotation (Placement(transformation(extent={{80,-8},{60,12}})));
   AixLib.BoundaryConditions.InternalGains.Machines.MachinesAreaSpecific machinesAreaSpecific(areaSurfaceMachinesTotal=10, roomArea=20) annotation (Placement(transformation(extent={{-10,32},{10,52}})));
 equation
-  connect(combiTimeTable.y[1], machines_sensibleHeat_DIN18599.uRel) annotation (Line(points={{-49,0},{-10,0}}, color={0,0,127}));
-  connect(combiTimeTable.y[1], machines_sensibleHeat_Avar.uRel) annotation (Line(points={{-49,0},{-28,0},{-28,-42},{-10,-42}}, color={0,0,127}));
-  connect(machines_sensibleHeat_DIN18599.convHeat, fixedTemp.port)
-    annotation (Line(
-      points={{9,6},{38,6},{38,2},{60,2}},
-      color={191,0,0}));
-  connect(machines_sensibleHeat_DIN18599.radHeat, fixedTemp.port)
-    annotation (Line(
+  connect(combiTimeTable.y[1], machinesSensibleHeatDIN18599.uRel) annotation (Line(points={{-49,0},{-10,0}}, color={0,0,127}));
+  connect(combiTimeTable.y[1], machinesSensibleHeatFromMaxValue.uRel) annotation (Line(points={{-49,0},{-28,0},{-28,-42},{-10,-42}}, color={0,0,127}));
+  connect(machinesSensibleHeatDIN18599.convHeat, fixedTemp.port) annotation (Line(points={{9,6},{38,6},{38,2},{60,2}}, color={191,0,0}));
+  connect(machinesSensibleHeatDIN18599.radHeat, fixedTemp.port) annotation (Line(
       points={{9,-6},{34.5,-6},{34.5,2},{60,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(machines_sensibleHeat_Avar.convHeat, fixedTemp.port) annotation (
-      Line(
-      points={{9,-36},{38,-36},{38,2},{60,2}},
-      color={191,0,0}));
-  connect(machines_sensibleHeat_Avar.radHeat, fixedTemp.port) annotation (
-      Line(
+  connect(machinesSensibleHeatFromMaxValue.convHeat, fixedTemp.port) annotation (Line(points={{9,-36},{38,-36},{38,2},{60,2}}, color={191,0,0}));
+  connect(machinesSensibleHeatFromMaxValue.radHeat, fixedTemp.port) annotation (Line(
       points={{9,-48},{34.5,-48},{34.5,2},{60,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(combiTimeTable.y[1], machinesAreaSpecific.uRel) annotation (Line(points={{-49,0},{-28,0},{-28,42},{-10,42}}, color={0,0,127}));
   connect(machinesAreaSpecific.convHeat, fixedTemp.port) annotation (Line(points={{9,48},{44,48},{44,2},{60,2}}, color={191,0,0}));
   connect(machinesAreaSpecific.radHeat, fixedTemp.port) annotation (Line(points={{9,36},{42,36},{42,2},{60,2}}, color={95,95,95}));
-  annotation (
-    experiment(StopTime=86400, Interval=60),
+  annotation (experiment(StartTime = 0, StopTime = 86400, Tolerance=1e-6, Algorithm="dassl"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/InternalGains/Examples/Machines.mos"
+                      "Simulate and plot"),
 Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>This simulation is to check the functionality of the machine models described by the internal gains. </p>

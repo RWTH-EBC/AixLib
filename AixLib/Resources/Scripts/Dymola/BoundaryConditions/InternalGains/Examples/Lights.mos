@@ -1,0 +1,17 @@
+removePlots();
+simulateModel("AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Lights", startTime=0, stopTime=86400, tolerance=1e-6, method="dassl", resultFile="Lights");
+createPlot(
+ y = {"lightsAreaSpecific.uRel", "lightsFromMaxValue.uRel", "lightsFromMaxValue.uRel"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=2, 
+ y = {"lightsAreaSpecific.radHeat.Q_flow", "lightsFromMaxValue.radHeat.Q_flow", "lightsFromMaxValue.radHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=3, 
+ y = {"lightsAreaSpecific.convHeat.Q_flow", "lightsFromMaxValue.convHeat.Q_flow", "lightsFromMaxValue.convHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

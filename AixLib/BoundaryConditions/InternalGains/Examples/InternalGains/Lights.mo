@@ -1,37 +1,29 @@
 within AixLib.BoundaryConditions.InternalGains.Examples.InternalGains;
 model Lights "Simulation to check the light models"
   extends Modelica.Icons.Example;
-  AixLib.BoundaryConditions.InternalGains.Lights.LightsAreaSpecific lights(roomArea=20) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  AixLib.BoundaryConditions.InternalGains.Lights.LightsRelToMaxValue lights_sensibleHeat_Avar(maxHeatFlowAbsolute=100) annotation (Placement(transformation(extent={{-10,-62},{10,-42}})));
+  AixLib.BoundaryConditions.InternalGains.Lights.LightsAreaSpecific lightsAreaSpecific(roomArea=20) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  AixLib.BoundaryConditions.InternalGains.Lights.LightsRelToMaxValue lightsFromMaxValue(maxHeatFlowAbsolute=100) annotation (Placement(transformation(extent={{-10,-62},{10,-42}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0;
         28800,1; 64800,1; 64860,0; 86400,0])
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=293.15)
     annotation (Placement(transformation(extent={{78,-8},{58,12}})));
 equation
-  connect(combiTimeTable.y[1], lights.uRel) annotation (Line(points={{-55,0},{-10,0}}, color={0,0,127}));
-  connect(combiTimeTable.y[1], lights_sensibleHeat_Avar.uRel) annotation (Line(points={{-55,0},{-32,0},{-32,-52},{-10,-52}}, color={0,0,127}));
-  connect(lights.convHeat, fixedTemp.port) annotation (Line(
-      points={{9,6},{34,6},{34,2},{58,2}},
-      color={191,0,0}));
-  connect(lights_sensibleHeat_Avar.convHeat, fixedTemp.port) annotation (
-      Line(
-      points={{9,-46},{34,-46},{34,2},{58,2}},
-      color={191,0,0}));
-  connect(lights_sensibleHeat_Avar.radHeat, fixedTemp.port) annotation (
-      Line(
+  connect(combiTimeTable.y[1], lightsAreaSpecific.uRel) annotation (Line(points={{-55,0},{-10,0}}, color={0,0,127}));
+  connect(combiTimeTable.y[1], lightsFromMaxValue.uRel) annotation (Line(points={{-55,0},{-32,0},{-32,-52},{-10,-52}}, color={0,0,127}));
+  connect(lightsAreaSpecific.convHeat, fixedTemp.port) annotation (Line(points={{9,6},{34,6},{34,2},{58,2}}, color={191,0,0}));
+  connect(lightsFromMaxValue.convHeat, fixedTemp.port) annotation (Line(points={{9,-46},{34,-46},{34,2},{58,2}}, color={191,0,0}));
+  connect(lightsFromMaxValue.radHeat, fixedTemp.port) annotation (Line(
       points={{9,-58},{46,-58},{46,2},{58,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(lights.radHeat, fixedTemp.port) annotation (Line(
+  connect(lightsAreaSpecific.radHeat, fixedTemp.port) annotation (Line(
       points={{9,-6},{46,-6},{46,2},{58,2}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  annotation (
-    experiment(
-      StopTime=86400,
-      Interval=60,
-      __Dymola_Algorithm="Lsodar"),
+  annotation (experiment(StartTime = 0, StopTime = 86400, Tolerance=1e-6, Algorithm="dassl"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/InternalGains/Examples/Lights.mos"
+                      "Simulate and plot"),
 Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>This simulation is to check the functionality of the light models described by the internal gains. </p>
