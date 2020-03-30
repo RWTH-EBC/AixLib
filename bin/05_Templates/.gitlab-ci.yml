@@ -1,4 +1,4 @@
-
+#!/bin/bash
 image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
 stages:
@@ -17,9 +17,9 @@ variables:
     TARGET_BRANCH: master
     Newbranch: "Correct_HTML_$TARGET_BRANCH"
     StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen
+	
 
 include:
-	
     - project: 'EBC/EBC_all/gitlab_ci/templates'
     - file: 'ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
     - project: 'EBC/EBC_all/gitlab_ci/templates'
@@ -32,4 +32,4 @@ include:
     - file: 'ci-tests/UnitTests/regression_test.gitlac-ci.yml'
     - project: 'EBC/EBC_all/gitlab_ci/templates'
     - file: 'ci-tests/UnitTests/simulate_model.gitlab-ci.yml'
-  
+	

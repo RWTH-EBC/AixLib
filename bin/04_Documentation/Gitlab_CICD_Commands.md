@@ -4,7 +4,7 @@ GITLAB CI/CD
 In this documentation all keywords for a YAML file in Gitlab Ci should be listed and explained.
 
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/Keywords.png)
+![E.ON EBC RWTH Aachen University](Images/Keywords.png)
 
 ### Jobs
  
@@ -18,7 +18,7 @@ Each job must have a unique name, but there are keywords that cannot be used as 
 
  Defines an entry name from which a job will inherit. Supports multi-level inheritance, but it is not recommended to use more than three levels. Max: 10 levels of interconnection. 
  
- ![E.ON EBC RWTH Aachen University](04_Documentation/Images/extends.png)
+ ![E.ON EBC RWTH Aachen University](Images/extends.png)
 
 ### Pages
 
@@ -63,7 +63,7 @@ Two side cases:
 
 Stage  is defined per job and is based on levels that are defined globally. It allows the grouping of jobs in different phases and jobs of the same phases are executed in parallel.
 
- ![E.ON EBC RWTH Aachen University](04_Documentation/Images/Stages.png)
+ ![E.ON EBC RWTH Aachen University](Images/Stages.png)
 
 ### Script
 
@@ -77,7 +77,7 @@ Only and except are two parameters that should be restricted to create jobs:
 
 Only and except allows you to use the following keywords:
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/only.png)
+![E.ON EBC RWTH Aachen University](Images/only.png)
 
 ### only:refs and except:refs
 

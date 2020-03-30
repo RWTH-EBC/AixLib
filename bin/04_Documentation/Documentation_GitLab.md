@@ -26,7 +26,7 @@ The mirror function translates the AixLib-GitHub repository into a GitLab reposi
 This is possible for both directions. 
 
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
+![E.ON EBC RWTH Aachen University](Images/GITLABCI.png)
 
 
 This repository contains the Aixlib, CI scripts and the Yaml file. The Yaml file controls the Gitlab-CI, the call of the Docker-Registry as well as the activation of the Runner which creates the containers and executes the scripts. 
@@ -39,7 +39,7 @@ Dymola is a license required program. The required licenses are read out via the
 
 The Gitlab CI workflow runs over three pipelines (Project, Continious Integration and Continious Delivery). 
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/GitLabCIWorkflow.png)
+![E.ON EBC RWTH Aachen University](Images/GitLabCIWorkflow.png)
 
 Under the project pipeline is the code to be analyzed, here the AixLib. 
 
@@ -56,7 +56,7 @@ These are performed in individual stages.
 ### Docker-Registry
 
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/Workflow.png)
+![E.ON EBC RWTH Aachen University](Images/Workflow.png)
 
 
 
@@ -102,7 +102,7 @@ In this repository "Dymola-Docker" the registry is provided.  This is done using
  
  
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/Registry.png)
+![E.ON EBC RWTH Aachen University](Images/Registry.png)
 
  
  
@@ -162,7 +162,7 @@ can also be taken over.
 
 
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/DockerRegistry.png)
+![E.ON EBC RWTH Aachen University](Images/DockerRegistry.png)
 
 
 

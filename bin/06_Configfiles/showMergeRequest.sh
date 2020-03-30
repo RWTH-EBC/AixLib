@@ -7,6 +7,8 @@ if [ -z "$GL_TOKEN" ]; then
   exit 1
 fi
 
+echo "GL_TOKEN is set"
+  
 # Extract the host where the server is running, and add the URL to the APIs
 [[ $CI_PROJECT_URL =~ ^https?://[^/]+ ]] && HOST="${BASH_REMATCH[0]}/api/v4/projects/"
 
@@ -19,29 +21,26 @@ fi
 # been closed
 BODY="{
     \"id\": ${CI_PROJECT_ID},
-    \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
+    \"source_branch\": \"${Newbranch}\",
     \"target_branch\": \"${TARGET_BRANCH}\",
     \"remove_source_branch\": true,
     \"title\": \"WIP: ${CI_COMMIT_REF_NAME}\",
-    \"assignee_id\":\"${GITLAB_USER_ID}\",
-	\"labels\": [\"fix HTML code\" , \"CI\" 	]
-	
+    \"assignee_id\":\"${GITLAB_USER_ID}\"
 }";
-
+echo "$BODY"
+echo 
 # Require a list of all the merge request and take a look if there is already
 # one with the same source branch
 LISTMR=`curl --silent "${HOST}${CI_PROJECT_ID}/merge_requests?state=opened" --header "PRIVATE-TOKEN:${GL_TOKEN}"`;
-COUNTBRANCHES=`echo ${LISTMR} | grep -o "\"source_branch\":\"${CI_COMMIT_REF_NAME}\"" | wc -l`;
+echo "$LISTMR"
+COUNTBRANCHES=`echo ${LISTMR} | grep -o "\"${Newbranch}\":\"${CI_COMMIT_REF_NAME}\"" | wc -l`;
+#COUNTBRANCHES=`echo ${LISTMR} | grep -o "\"source_branch\":\"${CI_COMMIT_REF_NAME}\"" | wc -l`;
 
+echo "$COUNTBRANCHES"
 # No MR found, let's create a new one
 if [ ${COUNTBRANCHES} -eq "0" ]; then
-    curl -X POST "${HOST}${CI_PROJECT_ID}/merge_requests" \
-        --header "PRIVATE-TOKEN:${GL_TOKEN}" \
-        --header "Content-Type: application/json" \
-        --data "${BODY}";
-	
-    echo "Opened a new merge request: WIP: ${CI_COMMIT_REF_NAME} and assigned to you";
-    exit;
+    echo "No merge request is open";
+    exit 0;
 fi
 
 echo "Merge Request ist already open. No new merge request opened";

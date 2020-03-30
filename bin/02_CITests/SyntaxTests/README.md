@@ -58,6 +58,10 @@ This tag will correct font Warning. By Default this tag is false and will not fa
 	
 Create a new WhiteList with all models in Library. These models will not be checked.
 
+	8. --correct-view
+	
+Reads the html code and returns if html is correct. Does not change the html code
+
 Add the following command to your .gitlab-ci.yml. 
 
     - python bin/02_CITests/SyntaxTests/html_tidy_errors.py -p "AixLib" --correct-overwrite --log  --align --font

@@ -1,9 +1,9 @@
 #!/bin/bash
-
 image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
 stages:
     - StyleCheck
-
+    
 Style_Check_AixLib:
     stage: StyleCheck
     services:
@@ -15,7 +15,8 @@ Style_Check_AixLib:
         - python -V               # Print out python version for debugging
         - export PYTHONIOENCODING=utf-8 # just in case
     script:
-        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s "AixLib" -p AixLib/package.mo
+        - git diff --raw HEAD^1
+        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s "$StyleModel" -p AixLib/package.mo
     artifacts:
         when: on_failure
         paths:
@@ -23,7 +24,9 @@ Style_Check_AixLib:
             - AixLib/AixLib_StyleErrorLog.html
         expire_in: 2 day 
     allow_failure: true 
-    only: 
-        # ${Current_Branch}
-        # $CI_BUILD_REF_NAME
-        - master
+    
+    only:
+        variables:
+            - $CI_COMMIT_BRANCH == $TARGET_BRANCH 
+
+     

@@ -1,12 +1,13 @@
 ## What is it?
 The folder contains the following templates:
 
-	- check_model.gitlab-ci.yml: Checkt die Modelle 
-	- check_simulate.gitlab-ci.yml: Simuliert die Modelle 
-	- regression_test.gitlab-ci.yml Regression Test der Modelle
-	- html_check.gitlab-ci.yml: HTML und Korrektur des Modelica Code der AixLib
-	- style_check.gitlab-ci.yml: Check des Style der AixLib
+	- check_model.gitlab-ci.yml: Check models 
+	- check_simulate.gitlab-ci.yml: simulate models 
+	- regression_test.gitlab-ci.yml Regression test 
+	- html_check.gitlab-ci.yml: html check and correct the html code
+	- style_check.gitlab-ci.yml: check style of modelica models
 
+The templates are in this [Repository](https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates) implemented.
 ## What is implemented? 
 Add the following lines to your gitlab.ci.yml:
  
@@ -26,15 +27,17 @@ Add the following lines to your gitlab.ci.yml:
 
 	include:
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/check_model.gitlab-ci.yml'
+		- file: 'ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/check_simulate.gitlab-ci.yml'
+		- file: 'ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/regression_test.gitlab-ci.yml'
+		- file: 'ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/html_check.gitlab-ci.yml'
+		- file: 'ci-tests/UnitTests/check_model.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/style_check.gitlab-ci.yml'
+		- file: 'ci-tests/UnitTests/regression_test.gitlac-ci.yml'
+		- project: 'EBC/EBC_all/gitlab_ci/templates'
+		- file: 'ci-tests/UnitTests/simulate_model.gitlab-ci.yml'
 
 ## What is done?
 - Simulate and check models

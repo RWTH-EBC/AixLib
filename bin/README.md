@@ -11,9 +11,9 @@ The whole process is automatically triggered by checking into the version contro
 In our case we mirror a github repository in GitLab. This way the repository can be tested and corrected with the CI in Gitlab. 
 We also use the Docker service to create an image containing Dymola and thus be able to simulate models in Dymola.
 
-For more information read the [General Documentation](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/blob/master/bin/04_Documentation/Documentation_GitLab.md)
+For more information read the [General Documentation](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/blob/master/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
 ![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
-and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
+
 
 ## What CI Tests are implement?
 #### Check, Simulate and Regressiontest: [UnitTests](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/02_CITests/UnitTests)
@@ -51,6 +51,7 @@ This folder contains [documentation](https://git.rwth-aachen.de/sven.hinrichs/Gi
 This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/05_Templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
 
 
+
 	#!/bin/bash
 	image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
@@ -66,16 +67,18 @@ This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLab
 
 	include:
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/check_model.gitlab-ci.yml'
+		- file: 'ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/check_simulate.gitlab-ci.yml'
+		- file: 'ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/regression_test.gitlab-ci.yml'
+		- file: 'ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/html_check.gitlab-ci.yml'
+		- file: 'ci-tests/UnitTests/check_model.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/style_check.gitlab-ci.yml'
-
+		- file: 'ci-tests/UnitTests/regression_test.gitlac-ci.yml'
+		- project: 'EBC/EBC_all/gitlab_ci/templates'
+		- file: 'ci-tests/UnitTests/simulate_model.gitlab-ci.yml'	
+		
 
 The templates are also implemented under the following repository [Templates](https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates)
 
@@ -85,9 +88,41 @@ This folder contains [Config files](https://git.rwth-aachen.de/sven.hinrichs/Git
 
 For question ask [Sven Hinrichs](https://git.rwth-aachen.de/sven.hinrichs)
 
+# How Configure the CI Tests
+
+## Configure Variables
+
+### Protected Branches: 
+Wildcards "issue *": Will push all Branches to Github with the Namespace issue* . This is necessaryto push the corrected code to the Github 
+Repository.
 
 
-# What is done?
+### TARGET-Branches: 
+Please paste your Branch. It is necessary for the push the corrected code to your branch and will later create a new HTML_Correct-branch 
+where the code will corrected and merge in the TARGET-BRANCHES.
+
+### StyleModel:
+
+This variable is necessary for the StyleCheck und will check the Style of a modelica model (e.g. "StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen")
+
+
+### Push - Mirroring
+All protected branches in gitlab will push to github. This included all branches with wildcard *issue and will after a merge push the corrected html code to your current branch.
+
+### Pull - Mirroring 
+Pull all branches from github to gitlab. 
+
+## Test CI Setting
+To test if all necessary variables are set push your Code with the commit "Check Settings". 
 
 
 
+
+# To Do
+
+- Add Gitlab Page
+- Slack Notification in case of merge request in gitlab
+- Add a gitlab bot
+- Add $GL_Token
+- Add label CI and fix HTML code
+- Add Wildcard for protected branches with issue*

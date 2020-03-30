@@ -1,5 +1,6 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+within AixLib.Obsolete.Year2019.Fluid.HeatPumps.BaseClasses;
 model CycleHP
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   import SI = Modelica.SIunits;
   parameter Boolean HPctrlType =  true "Capacity control type"
     annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true), choices(choice=true
@@ -20,14 +21,12 @@ protected
 public
   replaceable function data_poly =
   AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.ConstantQualityGrade
-    constrainedby
-    AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
+    constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby
-    AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+  AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
@@ -427,7 +426,9 @@ end if;
       points={{67,62},{70,62},{70,46},{78,46}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
+  annotation (
+    obsolete = "Obsolete model - This heat pump model is deprecated. Please use AixLib.Fluid.HeatPumps.HeatPump instead.",
+    Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
             {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
         Rectangle(

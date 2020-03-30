@@ -61,9 +61,9 @@ For the implementation of the html_tidy errors.py the following step must be don
 
 
 
-$NEWBRANCH: Branch you want create
+$Newbranch: Branch you want create
 
-$REFBRANCH: Branch in that you work
+$TARGET_BRANCH: Branch in that you work
 
 
 ![E.ON EBC RWTH Aachen University](../04_Documentation/Images/CreateNewBranch.png)

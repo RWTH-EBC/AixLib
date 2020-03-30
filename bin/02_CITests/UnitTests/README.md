@@ -16,10 +16,7 @@ Add the following lines to your .gitlab-ci.yml:
 		- file: 'bin/05_Templates/check_simulate.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
 		- file: 'bin/05_Templates/regression_test.gitlab-ci.yml'
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/html_check.gitlab-ci.yml'
-		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/style_check.gitlab-ci.yml'
+	
 
 ### runUnitTests
 

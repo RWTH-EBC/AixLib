@@ -42,7 +42,7 @@ which the scripts and tests are executed.
 Here the integrated Docker Registry of Gitlab is 
 referenced:
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/RegistryIntegrate.png)
+![E.ON EBC RWTH Aachen University](Images/RegistryIntegrate.png)
 
 The stage to be processed and the service docker 
 are then specified. 
@@ -74,7 +74,7 @@ are described in more detail in the documentation Gitlab CI/CD commands.
 In the following the current YAML file for the Aixlib is shown. 
 Here several packages of the Aixlib are tested with a UnitTest, i.e. the models are compared with reference data to avoid possible unwanted changes.
 
-![E.ON EBC RWTH Aachen University](04_Documentation/Images/Aixliblib.png)
+![E.ON EBC RWTH Aachen University](Images/Aixliblib.png)
 
 
 In this test the packages "Airflow", "FastHVAC", "Fluid", "Media", "Systems", "ThermalZones", "Electrical" and "BoundaryConditions" are tested in their own stages.
