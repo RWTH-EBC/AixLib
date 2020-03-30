@@ -6,7 +6,7 @@ model MachinesAreaSpecific "Heat flow due to machines relative to room area and 
     gainSurfaces(final k=areaSurfaceMachinesTotal));
 
   parameter Modelica.SIunits.HeatFlux intGainsMachinesRoomAreaSpecific=1.0 "Heat flow from machines per square meter room" annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
+  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal=2 "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
   parameter Modelica.SIunits.Area roomArea "Area of room" annotation(Dialog(descriptionLabel = true));
 
   annotation (Icon(graphics={
