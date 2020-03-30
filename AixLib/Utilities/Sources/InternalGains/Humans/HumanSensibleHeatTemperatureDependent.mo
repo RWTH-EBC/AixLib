@@ -27,5 +27,7 @@ equation
  <ul>
  <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Implemented</li>
  </ul>
-</html>"));
+</html>"), Icon(graphics={                                                                                                                                                  Text(extent={{-40,-48},{44,-90}},     lineColor={255,255,255},     fillColor={255,0,0},
+            fillPattern=FillPattern.Solid,
+          textString="=f(T)")}));
 end HumanSensibleHeatTemperatureDependent;

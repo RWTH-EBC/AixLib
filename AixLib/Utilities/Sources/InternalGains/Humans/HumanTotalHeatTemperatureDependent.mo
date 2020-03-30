@@ -62,5 +62,10 @@ equation
  <li><i>July 10, 2019&nbsp;</i> by Martin Kremer:<br/>Revised due to changes on human model</li>
  <li><i>March, 2019&nbsp;</i> by Martin Kremer:<br/>First implementation on issue #695.</li>
  </ul>
-</html>"));
+</html>"), Icon(graphics={Polygon(
+          points={{40,-40},{44,-40},{44,-48},{52,-48},{52,-52},{44,-52},{44,-60},{40,-60},{40,-52},{32,-52},{32,-48},{40,-48},{40,-40}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None)}));
 end HumanTotalHeatTemperatureDependent;

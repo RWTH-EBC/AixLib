@@ -25,5 +25,7 @@ equation
   Implemented
   </li>
  </ul>
-</html>"));
+</html>"), Icon(graphics={                                                                                                                                                  Text(extent={{-40,-48},{44,-90}},     lineColor={255,255,255},     fillColor={255,0,0},
+            fillPattern=FillPattern.Solid,
+          textString="not f(T)")}));
 end HumanSensibleHeatTemperatureIndependent;
