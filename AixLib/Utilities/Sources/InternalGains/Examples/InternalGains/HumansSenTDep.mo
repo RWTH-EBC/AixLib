@@ -1,6 +1,6 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model HumansSenTDep "Simulation to check the human models"
-  extends AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.BaseClasses.Humans(redeclare Humans.HumanSensibleHeatTemperatureDependent partialHuman);
+  extends AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.BaseClasses.Humans(redeclare Humans.HumanSensibleHeatTemperatureDependent humanIntGains);
 equation
 
   annotation (experiment(StopTime = 86400),Documentation(info = "<html>

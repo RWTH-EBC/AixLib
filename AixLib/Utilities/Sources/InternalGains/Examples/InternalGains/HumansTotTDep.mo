@@ -1,9 +1,9 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model HumansTotTDep "Simulation to check the human models"
-  extends AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.BaseClasses.Humans(redeclare Humans.HumanTotalHeatTemperatureDependent partialHuman, sumQ_flows(nu=3));
+  extends AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.BaseClasses.Humans(redeclare Humans.HumanTotalHeatTemperatureDependent humanIntGains, sumQ_flows(nu=3));
 equation
 
-  connect(partialHuman.QLat_flow, sumQ_flows.u[3]) annotation (Line(points={{9.48,11.4},{14,11.4},{14,-64},{34,-64}}, color={0,0,127}));
+  connect(humanIntGains.QLat_flow, sumQ_flows.u[3]) annotation (Line(points={{9.48,11.4},{14,11.4},{14,-64},{34,-64}}, color={0,0,127}));
   annotation (experiment(StopTime = 86400),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to check the functionality of the human heat sources. It only consists of one human (VDI 2078). </p>

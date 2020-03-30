@@ -7,7 +7,7 @@ model HumanTotalHeatTemperatureDependent
     temperatureDependentMoistuerOutputSIA2024_1(activityDegree=activityDegree)
     "Temperature dependent moisture output per person"
     annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
-  Modelica.Blocks.Interfaces.RealOutput QLat_flow
+  Modelica.Blocks.Interfaces.RealOutput QLat_flow(final quantity="Power", final unit="W")
     "latent heat of moisture gains"
     annotation (Placement(transformation(extent={{86,70},{106,90}})));
   Modelica.Blocks.Math.Gain toKgPerSecond(k=1/(3600*1000))
@@ -40,8 +40,8 @@ equation
           80},{44,64},{-18,64},{-18,58},{-12,58}}, color={0,0,127}));
   connect(specificLatentHeat.y, latentHeat.u2) annotation (Line(points={{-67,24},
           {-20,24},{-20,46},{-12,46}}, color={0,0,127}));
-  connect(latentHeat.y, QLat_flow) annotation (Line(points={{11,52},{56,52},{56,
-          80},{96,80}}, color={0,0,127}));
+  connect(latentHeat.y, QLat_flow) annotation (Line(points={{11,52},{46,52},{46,80},{96,80}},
+                        color={0,0,127}));
   connect(temperatureDependentMoistuerOutputSIA2024_1.moistOutput, productMoistureOutput.u[1]) annotation (Line(points={{-39,76},{-34,76},{-34,83.5},{-28,83.5}}, color={0,0,127}));
   connect(gain.y, productMoistureOutput.u[2]) annotation (Line(points={{-47.4,0},{-32,0},{-32,76.5},{-28,76.5}}, color={0,0,127}));
   annotation (Documentation(info="<html>
