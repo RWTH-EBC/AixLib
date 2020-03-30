@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.BaseClasses;
-model Humans "Base class with bounday conditions for humans' examples"
+partial model Humans "Base class with bounday conditions for humans' examples"
   extends Modelica.Icons.Example;
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempRoom annotation(Placement(transformation(extent={{-84,42},{-64,62}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0; 28800,1; 43200,1; 43260,0; 46800,0; 46860,1; 64800,1; 64860,0; 86400,0])             annotation(Placement(transformation(extent = {{-82, -26}, {-62, -6}})));
