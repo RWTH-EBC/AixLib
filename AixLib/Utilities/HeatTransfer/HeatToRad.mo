@@ -46,7 +46,7 @@ equation
 <li>Body 2 encloses body 1 (A<sub>2</sub> > A<sub>1</sub>)</li>
 <li>Body 1 is convex (view factor &#934;<sub>11</sub> = 0)</li>
 </ul>
-<p><span style=\"font-size: 16pt;\">Q&#775;<sub>1&#8652;2</sub> = A<sub>1</sub> &sdot; &sigma; &sdot; ( T<sub>1</sub><sup>4</sup> - T<sub>2</sub></sup>4</sup>) / ( 1/&epsilon;<sub>1</sub> + A<sub>1</sub> / A<sub>2</sub> &sdot; ( 1/&epsilon;<sub>2</sub> - 1 ) )</span> </p>
+<p><span style=\"font-size: 16pt;\">Q&#775;<sub>1&#8652;2</sub> = A<sub>1</sub> &sdot; &sigma; &sdot; ( T<sub>1</sub><sup>4</sup> - T<sub>2</sub><sup>4</sup>) / ( 1/&epsilon;<sub>1</sub> + A<sub>1</sub> / A<sub>2</sub> &sdot; ( 1/&epsilon;<sub>2</sub> - 1 ) )</span> </p>
 <ul>
 <li>The closer &epsilon; is to 1, the smaller is the loss of information due to the simplification that only one surface area and no view factors are known.</li>
 <li>The greater A<sub>2</sub> compared to A<sub>1</sub> the smaller the simplification.</li>

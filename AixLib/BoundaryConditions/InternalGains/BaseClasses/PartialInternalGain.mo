@@ -56,7 +56,7 @@ equation
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>Partial model to build a heat source with <i>convective</i> and <i>radiative</i> components. The parameter <span style=\"font-family: Courier New;\">ratioConv</span> determines the share of convective heat. The <i>input</i> is always a relativ input between 0..1.</p>
 <p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
-<p>The surface for radiation exchange is computed from the area of the emitting component. For more information see <span style=\"font-family: Courier New;\"><a href=\"modelica://AixLib.Utilities.HeatTransfer.HeatToRad\">AixLib.Utilities.HeatTransfer.HeatToRad</a></p></span>
+<p>The surface for radiation exchange is computed from the area of the emitting component. For more information see <span style=\"font-family: Courier New;\"><a href=\"modelica://AixLib.Utilities.HeatTransfer.HeatToRad\">AixLib.Utilities.HeatTransfer.HeatToRad</a></span></p>
 <p>An input of 0 leads to a surface area of zero and, thus, to division by zero. For this reason a limitiation for the surface has been intoduced. </p>
 </html>"));
 end PartialInternalGain;

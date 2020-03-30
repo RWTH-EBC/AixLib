@@ -255,9 +255,9 @@ equation
 <p>The schedule sets the times when the machines are used. They tend to be used more when people are present in the room, and go on stand-by when people are absent from the room. </p>
 <p>The schedule describes the machines corresponding to only one person, and can take values from 0 to 1. For more people, a factor, <b>nrPeople</b>, is provided as parameter.</p>
 <p>The type of activity determines the load for machines in the room for one person according to DIN 18599-10. The following values are used:</p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td style=\"background-color: #dcdcdc\"><p>Activity Type</p></td>
-<td style=\"background-color: #dcdcdc\"><p>Heat Load [W]</p></td>
+<table summary=\"DIN 18599-10 activity level and produces heat output\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<td style=\"background-color: #dcdcdc\">Activity Type</td>
+<td style=\"background-color: #dcdcdc\">Heat Load [W]</td>
 </tr>
 <tr>
 <td><p>1</p></td>
@@ -272,7 +272,7 @@ equation
 <td><p>150</p></td>
 </tr>
 </table>
-<p><br><br><h4><span style=\"color: #008000\">References</span></h4></p>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>DIN 18599-10 </p>
 </html>",
     revisions="<html>
