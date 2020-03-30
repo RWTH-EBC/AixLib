@@ -12,7 +12,7 @@ partial model PartialInternalGain
      annotation (Placement(transformation(extent={{24,10},{44,30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radiativeHeat(final T_ref=293.15, final alpha=0)
      annotation (Placement(transformation(extent={{24,-30},{44,-10}})));
-  AixLib.Utilities.HeatTransfer.HeatToRad radConvertor(final eps=emissivity)
+  AixLib.Utilities.HeatTransfer.HeatToRad radConvertor(final eps=emissivity, final use_A_in=true)
     "Adaptor for approximative longwave radiation exchange with surface area"
     annotation (Placement(transformation(extent={{52,-70},{72,-50}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convHeat
@@ -21,8 +21,11 @@ partial model PartialInternalGain
   AixLib.Utilities.Interfaces.RadPort radHeat
     "Radiative heat flow connector"
     annotation (Placement(transformation(extent={{80,-70},{100,-50}})));
+  Modelica.Blocks.Math.Gain gain annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
+  Modelica.Blocks.Math.Gain gainSurfaces annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
 protected
-  Modelica.Blocks.Math.MultiProduct productHeatOutput(each u(final quantity="HeatFlux", final unit="W/m2"))
+  Modelica.Blocks.Math.MultiProduct productHeatOutput(nu=1, y(final quantity="Power", final unit="W"))
     annotation (Placement(transformation(extent={{-20,-6},{-8,6}})));
   Modelica.Blocks.Math.Gain gainConv(final k=ratioConv) annotation (Placement(transformation(extent={{8,16},{16,24}})));
   Modelica.Blocks.Math.Gain gainRad(final k=1 - ratioConv) annotation (Placement(transformation(extent={{8,-24},{16,-16}})));
@@ -37,6 +40,11 @@ equation
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
+  connect(schedule, gain.u) annotation (Line(points={{-100,0},{-61.2,0}}, color={0,0,127}));
+  connect(gain.y, productHeatOutput.u[1]) annotation (Line(points={{-47.4,0},{-20,0}}, color={0,0,127}));
+  connect(gainSurfaces.y,limiter. u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
+  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
+  connect(schedule, gainSurfaces.u) annotation (Line(points={{-100,0},{-80,0},{-80,-60},{-61.2,-60}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li><i>March 26, 202020&nbsp;</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a> refactor input schedule and other components.</li>

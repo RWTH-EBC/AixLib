@@ -1,9 +1,10 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model MachinesDIN18599 "Heat flow due to machines based on DIN 18599 (number of people and activity type of machines)"
   extends BaseClasses.PartialInternalGain(
-    radConvertor(final use_A_in=true),
     emissivity=0.98,
-    productHeatOutput(nu=2));
+    productHeatOutput(nu=2),
+    gain(final k=NrPeople),
+    gainSurfaces(final k=areaSurfaceMachinesTotal));
 
   parameter Integer ActivityType=2 "Machine activity"
     annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
@@ -17,22 +18,13 @@ protected
     table=[1,50; 2,100; 3,150],
     columns={2})
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-  Modelica.Blocks.Math.Gain gainNrPeople(k=NrPeople) annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
   Modelica.Blocks.Sources.Constant Activity(k=ActivityType)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
-  Modelica.Blocks.Math.Gain gainMachinesSurfaces(final k=areaSurfaceMachinesTotal)
-                                                                             annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
 equation
-  connect(schedule, gainNrPeople.u) annotation (Line(points={{-100,0},{-61.2,0}}, color={0,0,127}));
   connect(Activity.y, HeatOutput.u[1]) annotation (Line(
       points={{-69,50},{-62,50}},
       color={0,0,127}));
-  connect(HeatOutput.y, productHeatOutput.u[1:1]) annotation (Line(points={{-39,50},{-30,50},{-30,0},{-20,0}}, color={0,0,127}));
-  connect(gainNrPeople.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,0},{-20,0}}, color={0,0,127}));
-  connect(schedule,gainMachinesSurfaces. u) annotation (Line(points={{-100,0},{-86,0},{-86,-60},{-61.2,-60}}, color={0,0,127}));
-  connect(gainMachinesSurfaces.y,limiter. u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
-  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
+  connect(HeatOutput.y[1], productHeatOutput.u[2]) annotation (Line(points={{-39,50},{-30,50},{-30,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},

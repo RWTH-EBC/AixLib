@@ -1,25 +1,14 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
 model MachinesRelToMaxValue "Multiplies relative input with max value (heat flow due to machines in W)"
   extends BaseClasses.PartialInternalGain(
-    radConvertor(final use_A_in=true),
     emissivity=0.98,
-    productHeatOutput(nu=1));
+    gainSurfaces(final k=areaSurfaceMachinesTotal),
+    gain(final k=maxHeatFlowAbsolute));
   parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
   parameter Modelica.SIunits.HeatFlowRate maxHeatFlowAbsolute "Maximal absolute heat flow of machines";
 
-protected
-  Modelica.Blocks.Math.Gain gainMaxHeatFlowAbsolute(final k=maxHeatFlowAbsolute)
-                                                                           annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
-  Modelica.Blocks.Math.Gain gainMachinesSurfaces(final k=areaSurfaceMachinesTotal)
-                                                                             annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
 equation
 
-  connect(schedule,gainMachinesSurfaces. u) annotation (Line(points={{-100,0},{-86,0},{-86,-60},{-61.2,-60}}, color={0,0,127}));
-  connect(gainMachinesSurfaces.y, limiter.u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
-  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
-  connect(schedule, gainMaxHeatFlowAbsolute.u) annotation (Line(points={{-100,0},{-61.2,0}}, color={0,0,127}));
-  connect(gainMaxHeatFlowAbsolute.y, productHeatOutput.u[1]) annotation (Line(points={{-47.4,0},{-20,0}}, color={0,0,127}));
   annotation ( Icon(graphics={
         Rectangle(
           extent={{-60,60},{60,-38}},

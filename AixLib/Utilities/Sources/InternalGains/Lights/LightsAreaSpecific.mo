@@ -5,8 +5,8 @@ model LightsAreaSpecific "light heat source model"
     productHeatOutput(nu=2),
     radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Lighting)));
   parameter Modelica.SIunits.Area RoomArea "Area of room"    annotation(Dialog( descriptionLabel = true));
-  parameter Real LightingPower = 10 "Heating power of lighting in W/m2" annotation(Dialog( descriptionLabel = true));
-  parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
+  parameter Real LightingPower = 10 "Lighting power per square meter room" annotation(Dialog( descriptionLabel = true));
+  parameter Modelica.SIunits.Area SurfaceArea_Lighting=0.01*RoomArea "Surface of all lights in the room";
 
   Modelica.Blocks.Sources.Constant MaxLighting(k=RoomArea*LightingPower)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
