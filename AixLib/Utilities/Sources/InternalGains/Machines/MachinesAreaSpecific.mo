@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
-model MachinesAreaSpecific
+model MachinesAreaSpecific "Heat flow due to machines relative to room area and specific power"
   extends BaseClasses.PartialInternalGain(
     emissivity=0.98,
     gain(final k=intGainsMachinesRoomAreaSpecific*roomArea),

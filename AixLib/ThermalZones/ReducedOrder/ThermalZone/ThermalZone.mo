@@ -60,7 +60,7 @@ model ThermalZone
     final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from machines" annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
   replaceable AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    final lightingPower=zoneParam.lightingPowerSpecific,
+    final lightingPowerRoomAreaSpecific=zoneParam.lightingPowerSpecific,
     final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light" annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   corG corGMod(
     final n=zoneParam.nOrientations,

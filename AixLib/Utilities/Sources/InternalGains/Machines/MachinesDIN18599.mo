@@ -11,19 +11,17 @@ model MachinesDIN18599 "Heat flow due to machines based on DIN 18599 (number of 
   parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
 
 protected
-  Modelica.Blocks.Tables.CombiTable1D HeatOutput(
+  Modelica.Blocks.Tables.CombiTable1D tableHeatOutput(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     tableOnFile=false,
     table=[1,50; 2,100; 3,150],
     columns={2})
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-  Modelica.Blocks.Sources.Constant Activity(k=activityType)
+  Modelica.Blocks.Sources.Constant activity(k=activityType)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
 equation
-  connect(Activity.y, HeatOutput.u[1]) annotation (Line(
-      points={{-69,50},{-62,50}},
-      color={0,0,127}));
-  connect(HeatOutput.y[1], productHeatOutput.u[2]) annotation (Line(points={{-39,50},{-30,50},{-30,0},{-20,0}}, color={0,0,127}));
+  connect(activity.y, tableHeatOutput.u[1]) annotation (Line(points={{-69,50},{-62,50}}, color={0,0,127}));
+  connect(tableHeatOutput.y[1], productHeatOutput.u[2]) annotation (Line(points={{-39,50},{-30,50},{-30,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},

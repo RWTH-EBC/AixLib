@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
-model Lights_Avar
+model LightsRelToMaxValue "Multiplies relative input with max value (heat flow due to lighting in W)"
   extends BaseClasses.PartialInternalGain(emissivity=0.98, gainSurfaces(final k=areaSurfaceLightsTotal),
     gain(final k=maxHeatFlowAbsolute));
 
@@ -15,25 +15,33 @@ equation
   connect(radiativeHeat.port, radConvertor.conv) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
   annotation ( Icon(graphics={
         Ellipse(
-          extent={{-52,72},{50,-40}},
+          extent={{-50,72},{50,-40}},
           lineColor={255,255,0},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid),
         Line(
-          points={{-26,-48},{22,-48}},
+          points={{-26,-48},{26,-48}},
           thickness=1),
         Line(
-          points={{-24,-56},{22,-56}},
+          points={{-24,-56},{24,-56}},
           thickness=1),
         Line(
-          points={{-24,-64},{22,-64}},
+          points={{-22,-64},{22,-64}},
           thickness=1),
         Line(
-          points={{-24,-72},{22,-72}},
+          points={{-20,-72},{20,-72}},
           thickness=1),
         Line(
-          points={{-28,-42},{-28,-80},{26,-80},{26,-42}},
-          thickness=1)}),
+          points={{-28,-42},{-28,-80},{28,-80},{28,-42}},
+          thickness=1),
+        Text(
+          extent={{-44,20},{44,-8}},
+          lineColor={0,0,0},
+          textString="Power"),
+        Text(
+          extent={{-44,48},{44,20}},
+          lineColor={0,0,0},
+          textString="Max")}),
     Documentation(revisions="<html>
 <ul>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
@@ -52,4 +60,4 @@ equation
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Lights\">AixLib.Building.Examples.Sources.InternalGains.Lights</a> </p>
 </html>"));
-end Lights_Avar;
+end LightsRelToMaxValue;
