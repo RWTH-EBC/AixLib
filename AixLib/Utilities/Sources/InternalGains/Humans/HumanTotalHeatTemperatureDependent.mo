@@ -34,12 +34,6 @@ equation
   connect(to_degC.y, temperatureDependentMoistuerOutputSIA2024_1.T) annotation (
      Line(points={{-71.5,51},{-71.5,52},{-68,52},{-68,76},{-62,76}}, color={0,0,
           127}));
-  connect(temperatureDependentMoistuerOutputSIA2024_1.moistOutput,
-    productMoistureOutput.u[1]) annotation (Line(points={{-39,76},{-36,76},{-36,
-          83.5},{-28,83.5}}, color={0,0,127}));
-  connect(nrPeople.y, productMoistureOutput.u[2]) annotation (Line(points={{-57.4,
-          -20},{-54,-20},{-54,30},{-28,30},{-28,68},{-34,68},{-34,76.5},{-28,76.5}},
-        color={0,0,127}));
   connect(productMoistureOutput.y, toKgPerSecond.u)
     annotation (Line(points={{-6.3,80},{12,80}}, color={0,0,127}));
   connect(toKgPerSecond.y, latentHeat.u1) annotation (Line(points={{35,80},{44,
@@ -48,6 +42,8 @@ equation
           {-20,24},{-20,46},{-12,46}}, color={0,0,127}));
   connect(latentHeat.y, QLat_flow) annotation (Line(points={{11,52},{56,52},{56,
           80},{96,80}}, color={0,0,127}));
+  connect(temperatureDependentMoistuerOutputSIA2024_1.moistOutput, productMoistureOutput.u[1]) annotation (Line(points={{-39,76},{-34,76},{-34,83.5},{-28,83.5}}, color={0,0,127}));
+  connect(gain.y, productMoistureOutput.u[2]) annotation (Line(points={{-47.4,0},{-32,0},{-32,76.5},{-28,76.5}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>This model enhances the existing human model by moisture release and latent heat release. It is based on the SIA 2024 and uses the same temperature dependent heat output. </p>

@@ -2,26 +2,16 @@ within AixLib.Utilities.Sources.InternalGains.Humans.BaseClasses;
 partial model PartialHuman "Partial model for internal gains of humans"
   extends AixLib.Utilities.Sources.InternalGains.BaseClasses.PartialInternalGain(
     emissivity=0.98,
-    productHeatOutput(nu=1),
-    radConvertor(final use_A_in=true));
+    gain(final k=specificPersons*roomArea),
+    gainSurfaces(final k=specificPersons*roomArea*surfaceAreaOnePersion));
   //Internal Gains People
-  parameter Real specificPersons(unit="1/(m.m)") = 1.0 "Specific persons per square metre" annotation(Dialog(descriptionLabel = true));
+  parameter Real specificPersons(unit="1/(m.m)") = 0.05 "Specific persons per square metre room area" annotation(Dialog(descriptionLabel = true));
   parameter Real ratioConvectiveHeat=0.5
     "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area roomArea=20 "Area of room" annotation(Dialog(descriptionLabel = true));
+  parameter Modelica.SIunits.Area roomArea "Area of room" annotation(Dialog(descriptionLabel = true));
   parameter Modelica.SIunits.HeatFlowRate specificHeatPerPerson = 70
     "Specific heat output per person";
 
-  Modelica.Blocks.Math.Gain nrPeople(k=specificPersons*roomArea)
-    "Number of people"
-   annotation (Placement(transformation(extent={{-70,-26},{-58,-14}})));
-  Modelica.Blocks.Math.Gain surfaceAreaPeople(k=surfaceArea_Human)
-    "Human surface"
-   annotation (Placement(transformation(extent={{16,-54},{28,-42}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMax=Modelica.Constants.inf, uMin=Modelica.Constants.eps)
-    "Limiter for number of people"
-   annotation(Placement(transformation(extent={{-18,-58},
-            {2,-38}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     "Room temperature sensor"
    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, 64})));
@@ -32,20 +22,13 @@ partial model PartialHuman "Partial model for internal gains of humans"
     "Air temperature in room"
      annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
 protected
-  parameter Modelica.SIunits.Area surfaceArea_Human=2 "Human Surface";
+  parameter Modelica.SIunits.Area surfaceAreaOnePersion=2 "Human Surface (per person)";
   parameter Modelica.SIunits.HeatFlowRate heatPerPerson=70
     "Average Heat Flow per person taken from DIN V 18599-10"
    annotation(Dialog(descriptionLabel = true));
 equation
-  connect(limiter.y, surfaceAreaPeople.u)
-    annotation (Line(points={{3,-48},{14.8,-48}}, color={0,0,127}));
-  connect(nrPeople.y, limiter.u) annotation (Line(points={{-57.4,-20},{-52,-20},
-          {-52,-48},{-20,-48}}, color={0,0,127}));
   connect(TRoom,temperatureSensor. port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(temperatureSensor.T,to_degC. u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
-  connect(schedule, nrPeople.u) annotation (Line(points={{-100,0},{-76,0},{-76,-20},{-71.2,-20}}, color={0,0,127}));
-  connect(schedule, productHeatOutput.u[1]) annotation (Line(points={{-100,0},{-20,0}}, color={0,0,127}));
-  connect(surfaceAreaPeople.y, radConvertor.A_in) annotation (Line(points={{28.6,-48},{62,-48},{62,-51}}, color={0,0,127}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},

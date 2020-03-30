@@ -1,14 +1,17 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model Machines "Simulation to check the machine models"
   extends Modelica.Icons.Example;
-  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_sensibleHeat_DIN18599 annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  AixLib.Utilities.Sources.InternalGains.Machines.MachinesRelToMaxValue machines_sensibleHeat_Avar annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_sensibleHeat_DIN18599(areaSurfaceMachinesTotal=10)
+                                                                                                  annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesRelToMaxValue machines_sensibleHeat_Avar(areaSurfaceMachinesTotal=10, maxHeatFlowAbsolute=200)
+                                                                                                   annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0;
         28800,1; 64800,1; 64860,0; 86400,0])
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=293.15)
     annotation (Placement(transformation(extent={{80,-8},{60,12}})));
-  AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific machinesAreaSpecific annotation (Placement(transformation(extent={{-10,32},{10,52}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific machinesAreaSpecific(areaSurfaceMachinesTotal=10, roomArea=20)
+                                                                                            annotation (Placement(transformation(extent={{-10,32},{10,52}})));
 equation
   connect(combiTimeTable.y[1],machines_sensibleHeat_DIN18599.schedule)
     annotation (Line(

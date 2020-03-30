@@ -1,9 +1,11 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model OneOffice
   extends Modelica.Icons.Example;
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent human_SensibleHeat_VDI2078 annotation (Placement(transformation(extent={{-10,38},{12,62}})));
-  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_SensibleHeat_DIN18599(nrPeople=2) annotation (Placement(transformation(extent={{-10,-6},{14,24}})));
-  AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights
+  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent human_SensibleHeat_VDI2078(roomArea=20)
+                                                                                                                 annotation (Placement(transformation(extent={{-10,38},{12,62}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_SensibleHeat_DIN18599(nrPeople=2, areaSurfaceMachinesTotal=10)
+                                                                                                              annotation (Placement(transformation(extent={{-10,-6},{14,24}})));
+  AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(roomArea=20)
     annotation (Placement(transformation(extent={{-8,-46},{12,-22}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RoomTemp annotation(Placement(transformation(extent = {{-58, 40}, {-38, 60}})));
   Modelica.Blocks.Sources.Ramp Evolution_RoomTemp(duration = 36000, offset = 293.15, startTime = 4000, height = 0) annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));
@@ -18,9 +20,10 @@ equation
   connect(machines_SensibleHeat_DIN18599.radHeat, fixedTemp.port) annotation(Line(points={{12.8,0},{38,0},{38,56},{42,56}},              color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(lights.convHeat, fixedTemp.port) annotation(Line(points = {{11, -26.8}, {38, -26.8}, {38, 56}, {42, 56}}, color = {191, 0, 0}));
   connect(lights.radHeat, fixedTemp.port) annotation(Line(points={{11,-41.2},{38,-41.2},{38,56},{42,56}},            color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(combiTimeTable.y[1], human_SensibleHeat_VDI2078.schedule) annotation (Line(points={{-59,-10},{-28,-10},{-28,48.68},{-9.01,48.68}}, color={0,0,127}));
-  connect(human_SensibleHeat_VDI2078.convHeat, fixedTemp.port) annotation (Line(points={{10.9,56},{42,56}}, color={191,0,0}));
-  connect(human_SensibleHeat_VDI2078.radHeat, fixedTemp.port) annotation (Line(points={{10.9,48.8},{27.45,48.8},{27.45,56},{42,56}}, color={95,95,95}));
+  connect(combiTimeTable.y[1], human_SensibleHeat_VDI2078.schedule) annotation (Line(points={{-59,-10},{-28,-10},{-28,50},{-10,50}},         color={0,0,127}));
+  connect(human_SensibleHeat_VDI2078.convHeat, fixedTemp.port) annotation (Line(points={{10.9,57.2},{26,57.2},{26,56},{42,56}},
+                                                                                                            color={191,0,0}));
+  connect(human_SensibleHeat_VDI2078.radHeat, fixedTemp.port) annotation (Line(points={{10.9,42.8},{27.45,42.8},{27.45,56},{42,56}}, color={95,95,95}));
   annotation (experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simulation to test the functionalty of the internal gains in a modelled room. </p>
