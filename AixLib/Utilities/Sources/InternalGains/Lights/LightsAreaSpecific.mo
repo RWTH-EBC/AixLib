@@ -1,18 +1,15 @@
 within AixLib.Utilities.Sources.InternalGains.Lights;
 model LightsAreaSpecific "light heat source model"
-  extends BaseClasses.PartialInternalGain(emissivity=0.98,
-                                          ratioConv=0.5,
-    productHeatOutput(nu=2),
-    radConvertor(final A=max(Modelica.Constants.eps, SurfaceArea_Lighting)));
+  extends BaseClasses.PartialInternalGain(
+    emissivity=0.98,
+    ratioConv=0.5,
+    radConvertor(final A=max(Modelica.Constants.eps, areaSurfaceLightsTotal)),
+    gain(final k=RoomArea*LightingPower),
+    gainSurfaces(final k=areaSurfaceLightsTotal));
   parameter Modelica.SIunits.Area RoomArea "Area of room"    annotation(Dialog( descriptionLabel = true));
   parameter Real LightingPower = 10 "Lighting power per square meter room" annotation(Dialog( descriptionLabel = true));
-  parameter Modelica.SIunits.Area SurfaceArea_Lighting=0.01*RoomArea "Surface of all lights in the room";
+  parameter Modelica.SIunits.Area areaSurfaceLightsTotal=0.01*RoomArea "Surface of all lights in the room";
 
-  Modelica.Blocks.Sources.Constant MaxLighting(k=RoomArea*LightingPower)
-    annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
-equation
-  connect(MaxLighting.y, productHeatOutput.u[1]) annotation (Line(points={{-69,50},{-44,50},{-44,0},{-20,0}}, color={0,0,127}));
-  connect(schedule, productHeatOutput.u[2]) annotation (Line(points={{-100,0},{-20,0}}, color={0,0,127}));
   annotation (Icon(graphics={
         Ellipse(
           extent={{-52,72},{50,-40}},

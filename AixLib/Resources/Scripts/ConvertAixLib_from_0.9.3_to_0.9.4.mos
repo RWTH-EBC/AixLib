@@ -20326,28 +20326,34 @@ convertClass("AixLib.Utilities.Sources.InternalGains.Machines.Machines_Avar", "A
 
 
 
-itemconvertElement(
+convertElement(
 "AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599",
 "Nr_People",
 "gainNrPeople");
-itemconvertElement(
+convertElement(
 "AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.Machines",
 "machines_sensibleHeat_DIN18599.Nr_People",
 "machines_sensibleHeat_DIN18599.gainNrPeople");
-itemconvertElement(
+convertElement(
 "AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.OneOffice",
 "machines_SensibleHeat_DIN18599.Nr_People",
 "machines_SensibleHeat_DIN18599.gainNrPeople");
-itemconvertElement(
+convertElement(
 "AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599",
 "SurfaceArea_Machines",
 "areaSurfaceMachinesTotal");
-itemconvertElement(
+convertElement(
 "AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.Machines",
 "machines_sensibleHeat_DIN18599.SurfaceArea_Machines",
 "machines_sensibleHeat_DIN18599.areaSurfaceMachinesTotal");
-itemconvertElement(
+convertElement(
 "AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.OneOffice",
 "machines_SensibleHeat_DIN18599.SurfaceArea_Machines",
 "machines_SensibleHeat_DIN18599.areaSurfaceMachinesTotal");
-itemconvertClass("AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599", "AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599");
+convertClass("AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599", "AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599");
+
+
+convertElement(
+"AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific",
+"SurfaceArea_Lighting",
+"areaSurfaceLightsTotal");
