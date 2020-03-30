@@ -5,15 +5,14 @@ model MachinesRelToMaxValue "Multiplies relative input with max value (heat flow
     emissivity=0.98,
     productHeatOutput(nu=1));
   parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
-  Modelica.Blocks.Math.Gain gainMachinesSurfaces(final k=areaSurfaceMachinesTotal)
-                                                                             annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
   parameter Modelica.SIunits.HeatFlowRate maxHeatFlowAbsolute "Maximal absolute heat flow of machines";
 
 protected
   Modelica.Blocks.Math.Gain gainMaxHeatFlowAbsolute(final k=maxHeatFlowAbsolute)
                                                                            annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
-
+  Modelica.Blocks.Math.Gain gainMachinesSurfaces(final k=areaSurfaceMachinesTotal)
+                                                                             annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
 equation
 
   connect(schedule,gainMachinesSurfaces. u) annotation (Line(points={{-100,0},{-86,0},{-86,-60},{-61.2,-60}}, color={0,0,127}));
@@ -237,11 +236,11 @@ equation
           fillPattern=FillPattern.Solid,
           lineColor={0,0,0}),
         Text(
-          extent={{-54,30},{58,-8}},
+          extent={{-58,30},{58,-10}},
           lineColor={255,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Avar")}),
+          textString="relMax")}),
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Heat source with convective and radiative component. The load is determined by a power input signal. </p>

@@ -1,16 +1,14 @@
 within AixLib.Utilities.Sources.InternalGains.Machines;
-model Machines_DIN18599
+model MachinesDIN18599 "Heat flow due to machines based on DIN 18599 (number of people and activity type of machines)"
   extends BaseClasses.PartialInternalGain(
-    radConvertor(final use_A_in=false,
-                 final A=max(Modelica.Constants.eps, SurfaceArea_Machines*NrPeople)),
+    radConvertor(final use_A_in=true),
     emissivity=0.98,
     productHeatOutput(nu=2));
 
   parameter Integer ActivityType=2 "Machine activity"
     annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));
   parameter Real NrPeople=1.0 "Number of people with machines"  annotation(Dialog(descriptionLabel = true));
-  parameter Modelica.SIunits.Area SurfaceArea_Machines=2
-    "surface area of radiative heat source";
+  parameter Modelica.SIunits.Area areaSurfaceMachinesTotal "Total surface area of all machines (radiative heat source) (for a room in a single-family hous e.g. 2 m2)";
 
 protected
   Modelica.Blocks.Tables.CombiTable1D HeatOutput(
@@ -19,20 +17,22 @@ protected
     table=[1,50; 2,100; 3,150],
     columns={2})
     annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
-public
-  Modelica.Blocks.Math.Gain Nr_People(k=NrPeople)
-    annotation (Placement(transformation(extent={{-60,-46},{-48,-34}})));
+  Modelica.Blocks.Math.Gain gainNrPeople(k=NrPeople) annotation (Placement(transformation(extent={{-60,-6},{-48,6}})));
   Modelica.Blocks.Sources.Constant Activity(k=ActivityType)
     annotation (Placement(transformation(extent={{-90,40},{-70,60}})));
+  Modelica.Blocks.Math.Gain gainMachinesSurfaces(final k=areaSurfaceMachinesTotal)
+                                                                             annotation (Placement(transformation(extent={{-60,-66},{-48,-54}})));
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=Modelica.Constants.inf, final uMin=Modelica.Constants.eps) annotation (Placement(transformation(extent={{-38,-66},{-26,-54}})));
 equation
-  connect(schedule, Nr_People.u) annotation (Line(
-      points={{-100,0},{-85.6,0},{-85.6,-40},{-61.2,-40}},
-      color={0,0,127}));
+  connect(schedule, gainNrPeople.u) annotation (Line(points={{-100,0},{-61.2,0}}, color={0,0,127}));
   connect(Activity.y, HeatOutput.u[1]) annotation (Line(
       points={{-69,50},{-62,50}},
       color={0,0,127}));
   connect(HeatOutput.y, productHeatOutput.u[1:1]) annotation (Line(points={{-39,50},{-30,50},{-30,0},{-20,0}}, color={0,0,127}));
-  connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,-40},{-30,-40},{-30,0},{-20,0}}, color={0,0,127}));
+  connect(gainNrPeople.y, productHeatOutput.u[2]) annotation (Line(points={{-47.4,0},{-20,0}}, color={0,0,127}));
+  connect(schedule,gainMachinesSurfaces. u) annotation (Line(points={{-100,0},{-86,0},{-86,-60},{-61.2,-60}}, color={0,0,127}));
+  connect(gainMachinesSurfaces.y,limiter. u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
+  connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},
@@ -255,11 +255,11 @@ equation
           fillPattern=FillPattern.Solid,
           lineColor={0,0,0}),
         Text(
-          extent={{-54,30},{58,-8}},
+          extent={{-58,30},{58,-10}},
           lineColor={255,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="ERC")}),    Documentation(info="<html>
+          textString="DIN")}),    Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Heat source with convective and radiative component. The load is determined
 by a schedule and the type of activity. </p>
@@ -307,4 +307,4 @@ limitation of 1e-4 m2 has been introduced.</p>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>"));
-end Machines_DIN18599;
+end MachinesDIN18599;

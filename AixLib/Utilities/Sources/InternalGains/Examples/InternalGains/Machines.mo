@@ -1,9 +1,7 @@
 within AixLib.Utilities.Sources.InternalGains.Examples.InternalGains;
 model Machines "Simulation to check the machine models"
   extends Modelica.Icons.Example;
-  Utilities.Sources.InternalGains.Machines.Machines_DIN18599
-    machines_sensibleHeat_DIN18599
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599 machines_sensibleHeat_DIN18599 annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.Utilities.Sources.InternalGains.Machines.MachinesRelToMaxValue machines_sensibleHeat_Avar annotation (Placement(transformation(extent={{-10,-52},{10,-32}})));
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[0,0; 28740,0;
         28800,1; 64800,1; 64860,0; 86400,0])

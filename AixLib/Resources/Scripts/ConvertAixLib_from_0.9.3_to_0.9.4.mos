@@ -20323,3 +20323,31 @@ convertElement(
 "machines_sensibleHeat_Avar.constMaxHeatFlowAbsolute",
 "machines_sensibleHeat_Avar.gainMaxHeatFlowAbsolute");
 convertClass("AixLib.Utilities.Sources.InternalGains.Machines.Machines_Avar", "AixLib.Utilities.Sources.InternalGains.Machines.MachinesRelToMaxValue");
+
+
+
+itemconvertElement(
+"AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599",
+"Nr_People",
+"gainNrPeople");
+itemconvertElement(
+"AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.Machines",
+"machines_sensibleHeat_DIN18599.Nr_People",
+"machines_sensibleHeat_DIN18599.gainNrPeople");
+itemconvertElement(
+"AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.OneOffice",
+"machines_SensibleHeat_DIN18599.Nr_People",
+"machines_SensibleHeat_DIN18599.gainNrPeople");
+itemconvertElement(
+"AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599",
+"SurfaceArea_Machines",
+"areaSurfaceMachinesTotal");
+itemconvertElement(
+"AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.Machines",
+"machines_sensibleHeat_DIN18599.SurfaceArea_Machines",
+"machines_sensibleHeat_DIN18599.areaSurfaceMachinesTotal");
+itemconvertElement(
+"AixLib.Utilities.Sources.InternalGains.Examples.InternalGains.OneOffice",
+"machines_SensibleHeat_DIN18599.SurfaceArea_Machines",
+"machines_SensibleHeat_DIN18599.areaSurfaceMachinesTotal");
+itemconvertClass("AixLib.Utilities.Sources.InternalGains.Machines.Machines_DIN18599", "AixLib.Utilities.Sources.InternalGains.Machines.MachinesDIN18599");
