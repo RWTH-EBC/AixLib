@@ -250,18 +250,12 @@ equation
           fillPattern=FillPattern.Solid,
           textString="DIN")}),    Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Heat source with convective and radiative component. The load is determined
-by a schedule and the type of activity. </p>
+<p>Heat source with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The schedule sets the times when the machines are used. They tend to be used
-more when people are present in the room, and go on stand-by when people are
-absent from the room. </p>
-<p>The schedule describes the machines corresponding to only one person, and can
-take values from 0 to 1. For more people, a factor, <b>NrPeople</b>, is provided
-as parameter.</p>
-<p>The type of activity determines the load for machines in the room for one
-person according to DIN 18599-10. The following values are used:</p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\" summary = \"Load according to type of activity\"><tr>
+<p>The schedule sets the times when the machines are used. They tend to be used more when people are present in the room, and go on stand-by when people are absent from the room. </p>
+<p>The schedule describes the machines corresponding to only one person, and can take values from 0 to 1. For more people, a factor, <b>nrPeople</b>, is provided as parameter.</p>
+<p>The type of activity determines the load for machines in the room for one person according to DIN 18599-10. The following values are used:</p>
+<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td style=\"background-color: #dcdcdc\"><p>Activity Type</p></td>
 <td style=\"background-color: #dcdcdc\"><p>Heat Load [W]</p></td>
 </tr>
@@ -278,18 +272,12 @@ person according to DIN 18599-10. The following values are used:</p>
 <td><p>150</p></td>
 </tr>
 </table>
-<p><br/><br/><br/><b><span style=\"color: #008000;\">Assumptions</span></b></p>
-<p>The surface for radiation exchange is constant throught the simulation, as
-the machines are always present in the room. For stability reasons a lower
-limitation of 1e-4 m2 has been introduced.</p>
-<h4><span style=\"color: #008000\">References</span></h4>
+<p><br><br><h4><span style=\"color: #008000\">References</span></h4></p>
 <p>DIN 18599-10 </p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Machines\">AixLib.Building.Examples.Sources.InternalGains.Machines </a></p>
-<p><a href=\"AixLib.Building.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Examples.Sources.InternalGains.OneOffice</a></p>
 </html>",
     revisions="<html>
 <ul>
+    <li><i>March 30, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>: Summarize models to partial model. Make all models dependant from a relative input 0..1. Many refactorings.</li>
 <li><i>October 19, 2016&nbsp;</i> by Ana Constantin:<br/>Corrected documentation to refer to machines directly</li>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

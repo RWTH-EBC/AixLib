@@ -41,21 +41,14 @@ model LightsAreaSpecific "Heat flow due to lighting relative to room area and sp
           points={{-28,-42},{-28,-80},{28,-80},{28,-42}},
           thickness=1)}), Documentation(revisions="<html>
 <ul>
+    <li><i>March 30, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>: Summarize models to partial model. Make all models dependant from a relative input 0..1. Many refactorings.</li>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>",
     info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Light heat source model. Maximum lighting can be given as input and be adjusted by a schedule input.</p>
-<h4><span style=\"color:#008000\">Known limitation</span></h4>
-<p>The parameter <b>A</b> cannot be set by default since other models must be able to implement their own equations for <b>A</b>. For a model with variable area <b>A</b> refer to <a href=\"Building.Components.Sources.InternalGains.Lights.Lights_Avar\">Lights_Avar</a>.</p>
-<p>The input signal can take values from 0 to 1, and is then multiplied with the maximum lighting power per square meter and the room area. </p>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>The surface for radiation exchange is computed from the schedule, which leads to a surface area of zero, when no activity takes place. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Lights\">AixLib.Building.Examples.Sources.InternalGains.Lights</a> </p>
-<p><a href=\"AixLib.Building.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Examples.Sources.InternalGains.OneOffice</a></p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Heat source with convective and radiative component. The load is determined by multiplying a schedule (input 0..1) and a specific thermal power and the room&apos;s area. </p>
 </html>"));
 end LightsAreaSpecific;
