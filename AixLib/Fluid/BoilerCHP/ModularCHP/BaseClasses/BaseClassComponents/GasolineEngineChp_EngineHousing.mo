@@ -4,8 +4,7 @@ class GasolineEngineChp_EngineHousing
 
   replaceable package Medium3 =
       DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus
-                                                           constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                                           constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   parameter Modelica.SIunits.Thickness dInn=0.005

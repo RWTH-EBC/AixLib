@@ -1,7 +1,6 @@
 ﻿within AixLib.DataBase.ThermalMachines.Chiller;
 record ChillerBaseDataDefinition "Basic chiller data"
-    extends
-    AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
+    extends AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
                                                                 tableQdot_con = tableQdot_eva);
 
   parameter Real tableQdot_eva[:,:] "Cooling power table; T in degC; Q_flow in W";

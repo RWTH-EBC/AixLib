@@ -1,0 +1,17 @@
+removePlots();
+simulateModel("AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.Machines", startTime=0, stopTime=86400, tolerance=1e-6, method="dassl", resultFile="Machines");
+createPlot(
+ y = {"machinesAreaSpecific.uRel", "machinesSensibleHeatDIN18599.uRel", "machinesSensibleHeatFromMaxValue.uRel"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=2, 
+ y = {"machinesAreaSpecific.radHeat.Q_flow", "machinesSensibleHeatDIN18599.radHeat.Q_flow", "machinesSensibleHeatFromMaxValue.radHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=3, 
+ y = {"machinesAreaSpecific.convHeat.Q_flow", "machinesSensibleHeatDIN18599.convHeat.Q_flow", "machinesSensibleHeatFromMaxValue.convHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
