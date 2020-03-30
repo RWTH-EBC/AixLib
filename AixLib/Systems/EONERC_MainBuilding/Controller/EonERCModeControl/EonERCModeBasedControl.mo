@@ -40,6 +40,10 @@ model EonERCModeBasedControl "Mode based control for HP system, and GTF"
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   CtrHighTemperatureSystem ctrHighTemperatureSystem
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+  Modelica.Blocks.Logical.Not not1
+    annotation (Placement(transformation(extent={{46,80},{60,94}})));
+  Modelica.Blocks.Math.BooleanToReal flapHPCS
+    annotation (Placement(transformation(extent={{68,80},{82,94}})));
 equation
   connect(rpmPumpCold.y, bus.hpSystemBus.busPumpCold.pumpBus.rpmSet) annotation (Line(
         points={{86.4,-18},{100.07,-18},{100.07,-0.935}}, color={0,0,127}),
@@ -145,13 +149,6 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(flapHP.y, bus.hpSystemBus.busThrottleCS.valveSet) annotation (Line(
-        points={{62.8,68},{100,68},{100,74},{100.07,74},{100.07,-0.935}}, color=
-         {0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(gcOn.u1, flapRecooler.u) annotation (Line(points={{44.6,5},{36,5},{36,
           6},{26,6},{26,48},{44.4,48}}, color={255,0,255}));
   connect(gcOn.y, bus.hpSystemBus.AirCoolerOnSet) annotation (Line(points={{
@@ -252,6 +249,16 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
+  connect(flapFreeCooler.u, not1.u) annotation (Line(points={{44.4,28},{30,28},
+          {30,87},{44.6,87}}, color={255,0,255}));
+  connect(not1.y, flapHPCS.u) annotation (Line(points={{60.7,87},{63.35,87},{
+          63.35,87},{66.6,87}}, color={255,0,255}));
+  connect(flapHPCS.y, bus.hpSystemBus.busThrottleCS.valveSet) annotation (Line(
+        points={{82.7,87},{100.07,87},{100.07,-0.935}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Line(
           points={{20,80},{80,0},{40,-80}},
