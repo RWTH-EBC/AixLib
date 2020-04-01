@@ -119,9 +119,10 @@ HTML_Check:
         - source activate python36  
         - python -V               # Print out python version for debugging
         - export PYTHONIOENCODING=utf-8 # just in case
-        - pip install anybadge
+        # pip install anybadge
          
     script:
+        - export
         - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
         - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
             python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-overwrite --align --font --log;
