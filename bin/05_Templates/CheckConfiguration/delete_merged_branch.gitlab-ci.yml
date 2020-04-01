@@ -2,12 +2,12 @@
 image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
 stages:
-    - CheckSettings
+    - deleteBranch
    
 
     
-Setting_Check:
-    stage: CheckSettings
+Delte_merge_Branches:
+    stage: deleteBranch
     only:
         - /^feature\/*/
     services:
@@ -15,14 +15,13 @@ Setting_Check:
     before_script:
         - sudo apt-get install jq -y
     script:
-       - export
-       - sudo chmod +x bin/06_Configfiles/checkVariables.sh
+       - Newbranch=${Newbranch#${Praefix_Branch}}
+       - TARGET_BRANCH=${TARGET_BRANCH#${Praefix_Branch}}
+       - sudo chmod +x bin/06_Configfiles/delete_merged_branches.sh
        - git config --global user.email "${GITLAB_USER_EMAIL}"
        - git config --global user.name  "${GITLAB_USER_NAME}" 
-       - bin/06_Configfiles/checkVariables.sh
-       # sudo chmod +x bin/06_Configfiles/list_remote_mirror.sh
-       # bin/06_Configfiles/list_remote_mirror.sh
+       - bin/06_Configfiles/delete_merged_branches.sh
+ 
     
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE =~ /Check Settings/
+        - merge_requests

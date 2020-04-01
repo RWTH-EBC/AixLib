@@ -1,5 +1,5 @@
 # What is it?
-This templates check, simulate and make a regression test of the AixLib models.
+This templates check, simulate or perform a regression test of AixLib models.
 
 # How to implement?
 Add the following lines to your .gitlab-ci.yml:
@@ -11,11 +11,12 @@ Add the following lines to your .gitlab-ci.yml:
 
 	include:
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/check_model.gitlab-ci.yml'
+		- file: 'ci-tests/UnitTests/check_model.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/check_simulate.gitlab-ci.yml'
+		- file: 'ci-tests/UnitTests/regression_test.gitlac-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/regression_test.gitlab-ci.yml'
+		- file: 'ci-tests/UnitTests/simulate_model.gitlab-ci.yml'	
+
 	
 
 ### runUnitTests

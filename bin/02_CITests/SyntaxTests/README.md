@@ -2,7 +2,7 @@
 This templates check, simulate and make a regression test of the AixLib models.
 
 # How to implement?
-To integrate the Tests in the GitLab-CI  include the templates.
+To integrate the tests in the GitLab-CI  include the templates.
 Add the following lines to your .gitlab-ci.yml:
 
 	#!/bin/bash
@@ -16,17 +16,18 @@ Add the following lines to your .gitlab-ci.yml:
 		- StyleCheck
 		
 	include:
-		- file: 'bin/05_Templates/regression_test.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/html_check.gitlab-ci.yml'
+		- file: 'ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
-		- file: 'bin/05_Templates/style_check.gitlab-ci.yml'
+		- file: 'ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
+'	
+
 
 ### html_tidy_errors	
 
-The Test html_tidy_errors.py check the HTML Code in a validate and correct the modelica models. If the Test failed, it will be
-create a new branch and the test repeat. After this the corrected Version is pushed to the new branch and will create a Merge-Request
-to the default branch. Then you can merge the corrected  Version to your default branch.  
+The Test html_tidy_errors.py validate and correct the HTML code. If the Test failed, it will be
+create a new branch and the test repeat. The corrected Version is pushed to the new branch and will create a Merge-Request to
+your working-branch.   
 
 You have following options:
 	
@@ -60,7 +61,7 @@ Create a new WhiteList with all models in Library. These models will not be chec
 
 	8. --correct-view
 	
-Reads the html code and returns if html is correct. Does not change the html code
+Reads and validate the html code. Does not change the html code
 
 Add the following command to your .gitlab-ci.yml. 
 
@@ -79,7 +80,7 @@ For more help type the command python bin/02_CITests/SyntaxTests/html_tidy_error
 
 ### StyleChecking
 
-The Script StyleChecking use the ModelManagement in Modelica. The Script tests the syntax of models or library
+The test StyleChecking use the ModelManagement library in modelica. The script tests the syntax of models or library.
 
 	- python bin/02_CITests/SyntaxTests/StyleChecking.py -s "AixLib" -p AixLib/package.mo
 

@@ -26,7 +26,7 @@ Check_AixLib_Airflow:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Check_AixLib_BoundaryConditions:
     stage: Check
@@ -49,7 +49,7 @@ Check_AixLib_BoundaryConditions:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
             
 Check_AixLib_Controls:
     stage: Check
@@ -72,7 +72,7 @@ Check_AixLib_Controls:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Check_AixLib_Electrical:
     stage: Check
@@ -95,7 +95,7 @@ Check_AixLib_Electrical:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
             
 Check_AixLib_FastHVAC:
     stage: Check
@@ -118,7 +118,7 @@ Check_AixLib_FastHVAC:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+           - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Check_AixLib_Fluid:
     stage: Check
@@ -141,7 +141,7 @@ Check_AixLib_Fluid:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Check_AixLib_Media:
     stage: Check
@@ -164,7 +164,7 @@ Check_AixLib_Media:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Check_AixLib_Systems:
     stage: Check
@@ -187,7 +187,7 @@ Check_AixLib_Systems:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
     
 Check_AixLib_ThermalZones:
@@ -211,5 +211,5 @@ Check_AixLib_ThermalZones:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
  

@@ -1,11 +1,11 @@
 ## What is it?
 The folder contains the following templates:
 
-	- check_model.gitlab-ci.yml: Check models 
+	- check_model.gitlab-ci.yml: ceck models 
 	- check_simulate.gitlab-ci.yml: simulate models 
-	- regression_test.gitlab-ci.yml Regression test 
-	- html_check.gitlab-ci.yml: html check and correct the html code
-	- style_check.gitlab-ci.yml: check style of modelica models
+	- regression_test.gitlab-ci.yml regression test 
+	- html_check.gitlab-ci.yml: html check and overwrite the corrected html code
+	- style_check.gitlab-ci.yml:  style check of modelica models
 
 The templates are in this [Repository](https://git.rwth-aachen.de/EBC/EBC_all/gitlab_ci/templates) implemented.
 ## What is implemented? 

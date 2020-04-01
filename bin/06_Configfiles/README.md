@@ -20,8 +20,10 @@ After the tests have been successfully completed, a Merge Request is automatical
 		   - bin/06_Configfiles/autoMergeRequest.sh
 		  
 		only: 
-			# $Newbranch   
-			- Correct_HTML 
+		   variables:
+			- $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code again/
+ 
 
 
 

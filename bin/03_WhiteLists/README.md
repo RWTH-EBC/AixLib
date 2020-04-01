@@ -4,8 +4,8 @@ In this folder are the Whitelist for the CI Tests.
 ## What is implemented? 
 
 #### HTML_IBPSA_Whitelist.txt
-This list contains all IBPSA models. These models are not corrected during the HTML check.
-In order to keep the white list up to date, it should be rewritten regularly. 
+This list contains all IBPSA models. These models will not test with HTML check.
+In order to keep the whitelist up to date, it should be rewritten regularly. 
 
 Use the following command:
 

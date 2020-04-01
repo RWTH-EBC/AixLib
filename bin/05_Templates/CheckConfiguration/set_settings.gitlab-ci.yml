@@ -1,0 +1,21 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - SetSettings
+
+
+Settings:
+    stage: SetSettings
+    services:
+        -  docker
+    before_script:
+        - sudo apt-get install jq -y
+    
+    script:
+        - sudo chmod +x bin/06_Configfiles/SetSettings.sh
+        - bin/06_Configfiles/SetSettings.sh
+       
+    
+    
+

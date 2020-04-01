@@ -39,7 +39,7 @@ The error message
 is ignored and will be implemented in the future
 	
    
-If the Test was not successfull, CI creates a new branch and push the corrected code to the new branch. 
+If the test was not successfull, CI creates a new branch and push the corrected code to the new branch. 
 For this process you have to create new variables in your repository.
 
 ![E.ON EBC RWTH Aachen University](../04_Documentation/Images/PipelineProcess.png)
@@ -61,9 +61,8 @@ For the implementation of the html_tidy errors.py the following step must be don
 
 
 
-$Newbranch: Branch you want create
 
-$TARGET_BRANCH: Branch in that you work
+$TARGET_BRANCH: Your current work branch.
 
 
 ![E.ON EBC RWTH Aachen University](../04_Documentation/Images/CreateNewBranch.png)
@@ -71,7 +70,7 @@ $TARGET_BRANCH: Branch in that you work
 ### StyleChecking.py
 
 
-This Script evaluated the Documentation of the AixLib Models in Dymola. The Script operated with the ModelManagement in Dymola. 
+This Script evaluated the documentation of the AixLib Models in dymola. The script operated with the ModelManagement in Dymola. 
 
 
 
@@ -88,23 +87,22 @@ If the Test failed, Gitlab export two log files with a errorlist.
 
 
 ## UnitTests
-This folder contains all scripts that test or simulate models using Dymola.	
+Scripts that simulate and validate modelica models using dymola	
 
 ### runUnitTests.py
 The regression test is implemented with the following command:	
 	-  cd AixLib && python ../bin/02_CITests/UnitTests/runUnitTests.py -n 2 --single-package AixLib.Airflow --tool dymola
-For further information please refer to the following link and explain among other things the creation of new UnitTests
-
+Further information can be found under the following [link](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/-/blob/master/bin/04_Documentation/How_to_integrate_new_tests.md) and explains among other things how to create new UnitTests.
 
 
 
 ### validatetest.py
-This test checks the models and simulates the examples and validations. 
+This test checks the models and simulates the packages "examples" and "validations". 
 
 The following command is used to check the models:
 	- python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s "AixLib.Airflow" -p AixLib/package.mo 
 
-A white list of IBPSA models was created. The list contains all models of the IBPSA library that have not passed the CheckTest. These models are ignored during the test and are therefore sorted out before the test. 
+A whitelist of IBPSA models was created. The list contains all models of the IBPSA library that have not passed the CheckTest. These models are ignored during the test and are therefore sorted out before the test. 
 To keep the white list up to date, it should be updated regularly. This is done using the tag --WhisteList
 
 ## Overall process

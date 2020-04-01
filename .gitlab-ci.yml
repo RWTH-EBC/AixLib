@@ -1,35 +1,44 @@
-
+#!/bin/bash
 image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
 
 stages:
+    - SetSettings
     - CheckSettings
     - build
     - HTMLCheck
     - deploy
     - openMR
     - post
+    - deleteBranch
     - StyleCheck
     - Check
     - Simulate
     - RegressionTest
 
-variables:
-    TARGET_BRANCH: master
-    Newbranch: "Correct_HTML_$TARGET_BRANCH"
-    StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen
 
+variables:
+    Praefix_Branch: "Correct_HTML_"
+    TARGET_BRANCH: $CI_COMMIT_REF_NAME
+    Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
+    #GitHub_Username: "SvenHinrichs"
+    StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen
+    Github_Repository : "SvenHinrichs/GitLabCI"
+    
 include:
-	
-    - project: 'EBC/EBC_all/gitlab_ci/templates'
-    - file: 'ci-tests/CheckConfiguration/check_settings.gitlab-ci.yml'
-    - project: 'EBC/EBC_all/gitlab_ci/templates'
-    - file: 'ci-tests/SyntaxTests/html_check.gitlab-ci.yml'
-    - project: 'EBC/EBC_all/gitlab_ci/templates'
-    - file: 'ci-tests/SyntaxTests/style_check.gitlab-ci.yml'
-    - project: 'EBC/EBC_all/gitlab_ci/templates'
-    - file: 'ci-tests/UnitTests/check_model.gitlab-ci.yml'
-    - project: 'EBC/EBC_all/gitlab_ci/templates'
-    - file: 'ci-tests/UnitTests/regression_test.gitlac-ci.yml'
-    - project: 'EBC/EBC_all/gitlab_ci/templates'
-    - file: 'ci-tests/UnitTests/simulate_model.gitlab-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file:  'bin/05_Templates/CheckConfiguration/check_settings.gitlab-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file:  'bin/05_Templates/SyntaxTests/html_check.gitlab-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file:  'bin/05_Templates/CheckConfiguration/delete_merged_branch.gitlab-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file:  'bin/05_Templates/SyntaxTests/style_check.gitlab-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file: 'bin/05_Templates/UnitTests/check_model.gitlab-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file: 'bin/05_Templates/UnitTests/regression_test.gitlac-ci.yml'
+  - project: 'sven.hinrichs/GitLabCI'
+    file: 'bin/05_Templates/UnitTests/simulate_model.gitlab-ci.yml'
+  
+  
   

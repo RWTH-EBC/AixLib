@@ -7,9 +7,6 @@ stages:
     - deploy
     - openMR
     - post
-    
-
- 
             
 trigger_branch:
     stage: build
@@ -41,7 +38,6 @@ trigger_branch:
         paths:
             - AixLib/HTML-logfile.txt
         expire_in: 1 day 
-    
     only:
         variables:
             - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
@@ -116,8 +112,6 @@ HTML_Check:
     stage: HTMLCheck
     services:
         -  docker
-  
-    
     before_script:
         - git config --global user.name "${GITLAB_USER_NAME}" 
         - git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -125,11 +119,8 @@ HTML_Check:
         - source activate python36  
         - python -V               # Print out python version for debugging
         - export PYTHONIOENCODING=utf-8 # just in case
-        - echo $Newbranch
-        - echo $CI_COMMIT_BRANCH
-        - echo $CI_COMMIT_REF_NAME
         - pip install anybadge
-        - export
+         
     script:
         - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
         - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
@@ -152,7 +143,7 @@ HTML_Check:
         expire_in: 2 day 
     only:
         variables:
-            - $CI_COMMIT_REF_NAME == $TARGET_BRANCH 
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 mrpost:
     stage: post
     before_script:
@@ -163,11 +154,11 @@ mrpost:
         - anybadge -l HTML-logfile -v 2.22. -f HTML-logfile.svg 2=red 4=orange 8=yellow 10=green
         - newline=$' \n '
         - msg1=$'## This is a CI-Post \n '
-        - msg2="Correct **HTML-Code** on your branch $CI_COMMIT_REF_NAME "
-        - msg3=" Do a merge request to push  your corrected **HTML code** on branch $CI_MERGE_REQUEST_TARGET_BRANCH_NAME   "
-        - msg4="To merge your corrected HTML code press the **Resolve WIP status** button and merge your **$CI_COMMIT_REF_NAME** into  **$CI_MERGE_REQUEST_TARGET_BRANCH_NAME** "
-        - msg5="The branch **$CI_MERGE_REQUEST_TARGET_BRANCH_NAME** will be deleted" 
-        - msg6="After merge request **pull** your Repository" 
+        - msg2="Correct **HTML-Code** on your branch **$CI_COMMIT_REF_NAME**. "
+        - msg3=" Do a merge request to push  your corrected **HTML code** on branch **$CI_MERGE_REQUEST_TARGET_BRANCH_NAME**   "
+        - msg4=" To merge your corrected HTML code press the **Resolve WIP status** button and merge your **$CI_COMMIT_REF_NAME** into  **$CI_MERGE_REQUEST_TARGET_BRANCH_NAME**. "
+        - msg5=" The branch **$CI_COMMIT_REF_NAME** will be deleted. " 
+        - msg6=" After merge request **pull** your Repository in Github. " 
         - msg=$msg1$msg2$newline$msg3$newline$msg4$newline$msg5$newline$msg6
         - curl --request GET --header "PRIVATE-TOKEN:$GL_TOKEN" https://git.rwth-aachen.de/api/v4/projects/$CI_PROJECT_ID/merge_requests/$CI_MERGE_REQUEST_IID/notes | tee notes.json
         - mapfile -t ids < <(jq '.[].id' notes.json)
@@ -190,6 +181,8 @@ Open_Merge_Request:
     before_script:
         - sudo apt-get install jq -y
     script:
+       - Newbranch=${Newbranch#${Praefix_Branch}}
+       - TARGET_BRANCH=${TARGET_BRANCH#${Praefix_Branch}}
        - sudo chmod +x bin/06_Configfiles/autoMergeRequest.sh
        - git config --global user.email "${GITLAB_USER_EMAIL}"
        - git config --global user.name  "${GITLAB_USER_NAME}" 
@@ -198,9 +191,36 @@ Open_Merge_Request:
         variables:
             - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
             - $CI_COMMIT_MESSAGE =~ /Correct HTML Code again/
-        
+            
+Open_Pull_Request:
+    stage: openMR
+    only:
+        - /^feature\/*/
+    services:
+        -  docker
+    before_script:
+        - sudo apt-get install jq -y
+        - pip install requests
+        - git config --global user.name "${GITLAB_USER_NAME}" 
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
   
-
-
-  
-     
+    script:
+       - Newbranch=${Newbranch#${Praefix_Branch}}
+       - TARGET_BRANCH=${TARGET_BRANCH#${Praefix_Branch}}
+       # git clone --single-branch --branch $Newbranch https://git.rwth-aachen.de/${GITLAB_USER_NAME}/GitLabCI.git
+       - GitHub_Username =  `python bin/02_CITests/SyntaxTests/api_github.py --GITHUB-REPOSITORY ${Github_Repository} --Working-Branch ${TARGET_BRANCH} --Correct-Branch ${Newbranch} --GITHUB-TOKEN ${GITHUB_API_TOKEN}`
+       - git clone --single-branch --branch $Newbranch http://${GITLAB_USER_LOGIN}:${GL_TOKEN}@${CI_SERVER_HOST}/${GITLAB_USER_LOGIN}/${CI_PROJECT_NAME}.git
+       - cd ${CI_PROJECT_TITLE}
+       # git remote add mine https://github.com/SvenHinrichs/GitLabCI.git
+       - git remote add mine http://${GitHub_Username}:${GITHUB_API_TOKEN}@github.com/${Github_Repository}.git
+       - git push -u mine; git push --tags -u mine
+       - sudo chmod +x bin/06_Configfiles/autoPullRequest.sh
+       - bin/06_Configfiles/autoPullRequest.sh
+       # python bin/02_CITests/SyntaxTests/api_github.py --GITHUB-REPOSITORY ${Github_Repository} --Working-Branch ${TARGET_BRANCH} --Correct-Branch ${Newbranch} --GITHUB-TOKEN ${GITHUB_API_TOKEN}
+       
+       
+       
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
+            - $CI_COMMIT_MESSAGE =~ /Correct HTML Code again/

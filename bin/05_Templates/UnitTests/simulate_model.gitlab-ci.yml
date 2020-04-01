@@ -26,7 +26,7 @@ Simulate_AixLib_Airflow:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_BoundaryConditions:
     stage: Simulate
@@ -49,7 +49,7 @@ Simulate_AixLib_BoundaryConditions:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_Controls:
     stage: Simulate
@@ -72,7 +72,7 @@ Simulate_AixLib_Controls:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_Electrical:
     stage: Simulate
@@ -95,7 +95,7 @@ Simulate_AixLib_Electrical:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_FastHVAC:
     stage: Simulate
@@ -118,7 +118,7 @@ Simulate_AixLib_FastHVAC:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_Fluid:
     stage: Simulate
@@ -141,7 +141,7 @@ Simulate_AixLib_Fluid:
     allow_failure: true 
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_Media:
     stage: Simulate
@@ -164,7 +164,7 @@ Simulate_AixLib_Media:
     allow_failure: true      
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_Systems:
     stage: Simulate
@@ -187,7 +187,7 @@ Simulate_AixLib_Systems:
     allow_failure: true      
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
 
 Simulate_AixLib_ThermalZones:
     stage: Simulate
@@ -210,4 +210,4 @@ Simulate_AixLib_ThermalZones:
     allow_failure: true      
     only:
         variables:
-            - $CI_COMMIT_BRANCH == $TARGET_BRANCH
+            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/

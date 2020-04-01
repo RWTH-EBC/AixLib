@@ -18,34 +18,33 @@ For more information read the [General Documentation](https://git.rwth-aachen.de
 ## What CI Tests are implement?
 #### Check, Simulate and Regressiontest: [UnitTests](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/02_CITests/UnitTests)
 
-With the help of these tests, models are validated or simulated and the models are compared and evaluated with stored values by means of a unit test. 
+With these tests, models are validated or simulated or models will  compared and evaluated with stored values by means of a unit test.
 
 #### Correct HTML and Style Check: [SyntaxTest](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/02_CITests/SyntaxTests)
 
-The documentation is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and corrected.  
+The html code (documentation) is tested and corrected if necessary. Thus the deposited HTML code is checked for correctness and correct
 
-With the ModelManagement Library in Dymola the style of the models is checked. 
+With the ModelManagement library in dymola the style of the models is checked. 
 
 #### Clean the Modelica [CleanUpSkripts](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/02_CITests/CleanUpSkripts)
-Removes any files that were created when running simulations in Dymola, such as *.mat or dymola.log
-
+Removes any files that were created when running simulations in Dymola, such as *.mat or dymola.log 
 
 ## Folder 
 The folder contains the subfolder 01_BaseFunction, 02_CITests, 03_Whitelists, 04_Documentation, 05_Templates and 06_Configfiles. 
 
 ### 1 BaseFunction
-This folder contains all important Scripts and Functions that are builded for the CI Tests. The Scripts are not in use, feel free to work with the functions and overwrite them. 
+This folder contains tests and functions that are builded for the CI Tests. 
 
 ### 2 CITests
-This folder contains all CI Tests for AixLib in GitLab within UnitTests, SyntaxTest and CleanUpScripts
+This folder contains all CI tests for AixLib in GitLab with unitTests, syntaxTest and cleanUpScripts
 For more information view this [CI Tests](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/02_CITests).
 
 ### 3 WhiteLists
-This folder contains [WhiteLists](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/03_WhiteLists), which are not included in the CITests.
+This folder contains models in [WhiteLists](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/03_WhiteLists), which will not test in the CITests.
 
 
 ### 4 Documentation
-This folder contains [documentation](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/04_Documentation) on the CI, e.g. how new tests can be integrated or relevant commands for the CI 
+This folder contains [documentation](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/04_Documentation) for CI, e.g. how new tests can be integrated or relevant commands for the CI 
 
 ### 5 Templates
 This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/tree/master/bin/05_Templates) for the CI tests implemented so far. The following example can be used to implement the tests in the CI. 
@@ -54,16 +53,26 @@ This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLab
 
 	#!/bin/bash
 	image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
-
+	
 	stages:
+		- CheckSettings
 		- build
 		- HTMLCheck
-		- openMR
 		- deploy
+		- openMR
+		- post
 		- StyleCheck
 		- Check
 		- Simulate
 		- RegressionTest
+
+	
+	variables:
+		TARGET_BRANCH: master
+		Newbranch: "Correct_HTML_$TARGET_BRANCH"
+		StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen
+	
+	
 
 	include:
 		- project: 'EBC/EBC_all/gitlab_ci/templates'
@@ -93,13 +102,11 @@ For question ask [Sven Hinrichs](https://git.rwth-aachen.de/sven.hinrichs)
 ## Configure Variables
 
 ### Protected Branches: 
-Wildcards "issue *": Will push all Branches to Github with the Namespace issue* . This is necessaryto push the corrected code to the Github 
-Repository.
-
+Wildcards "issue *": Will push all branches to Github with the namespace issue* . This is necessaryto push the corrected code to the Github 
+repository.
 
 ### TARGET-Branches: 
-Please paste your Branch. It is necessary for the push the corrected code to your branch and will later create a new HTML_Correct-branch 
-where the code will corrected and merge in the TARGET-BRANCHES.
+Your current working branch. 
 
 ### StyleModel:
 
@@ -107,10 +114,14 @@ This variable is necessary for the StyleCheck und will check the Style of a mode
 
 
 ### Push - Mirroring
-All protected branches in gitlab will push to github. This included all branches with wildcard *issue and will after a merge push the corrected html code to your current branch.
+All protected branches in gitlab will push to github. This included all branches with namespace *issue. 
 
 ### Pull - Mirroring 
 Pull all branches from github to gitlab. 
+
+### GITHUB_API_TOKEN
+
+### GL_TOKEN
 
 ## Test CI Setting
 To test if all necessary variables are set push your Code with the commit "Check Settings". 
