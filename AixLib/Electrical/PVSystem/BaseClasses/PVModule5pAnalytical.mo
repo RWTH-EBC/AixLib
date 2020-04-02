@@ -35,7 +35,7 @@ extends PartialIVCharacteristics;
  parameter Real C=0.0002677
     "Band gap temperature coefficient for Si";
 
- Modelica.SIunits.ElectricCurrent I_mp
+ Modelica.SIunits.ElectricCurrent I_mp( start = 0.5*I_mp0)
     "MPP current";
 
  Modelica.SIunits.Voltage V_mp
@@ -56,13 +56,13 @@ extends PartialIVCharacteristics;
  Modelica.SIunits.Resistance R_sh
     "Shunt resistance";
 
- Real a(final unit = "V")
+ Real a(final unit = "V", start = 1.3)
     "Modified diode ideality factor";
 
  Modelica.SIunits.Power P_mod
     "Output power of one PV module";
 
- Real w(final unit = "1")
+ Real w(final unit = "1", start = 0)
    "MPP auxiliary correlation coefficient";
 
  Modelica.SIunits.Voltage V_oc
