@@ -7,6 +7,6 @@ HeatConvInside
 HeatConvOutside
 HeatConvPipeInside
 HeatConvPipeInsideDynamic
-HeatToStar
+HeatToRad
 SolarRadToHeat
 HeatToLongRad

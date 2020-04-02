@@ -1,8 +1,7 @@
 within AixLib.DataBase.ThermalMachines.Chiller.PerformanceData;
 model PolynomalApproach
   "Calculating heat pump data based on a polynomal approach"
-  extends
-    AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
   replaceable function PolyData =
       AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct

@@ -9,9 +9,7 @@ package PerformanceData "Different models used for a black box heat pump model"
       "Enumeration for choosing how reference time (time = 0) should be defined";
     parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
     replaceable function iceFunc =
-        Functions.IcingFactor.BasicIcingApproach constrainedby
-      AixLib.DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.PartialBaseFct
-                                                                                                                                                        "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
+        Functions.IcingFactor.BasicIcingApproach constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.PartialBaseFct            "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
     Modelica.Blocks.Interfaces.RealInput T_flow_ev(unit="K", displayUnit="degC")
       "Temperature at evaporator inlet"
       annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
@@ -68,8 +66,7 @@ package PerformanceData "Different models used for a black box heat pump model"
   end IcingBlock;
 
   model LookUpTable2D "Performance data coming from manufacturer"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    extends AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "Smoothness of table interpolation";
@@ -322,8 +319,7 @@ package PerformanceData "Different models used for a black box heat pump model"
   end LookUpTable2D;
 
   model LookUpTableND "N-dimensional table with data for heat pump"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    extends AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
     parameter Real nConv=100
       "Gain value multiplied with relative compressor speed n to calculate matching value based on sdf tables";
     parameter SDF.Types.InterpolationMethod interpMethod=SDF.Types.InterpolationMethod.Linear
@@ -594,8 +590,7 @@ package PerformanceData "Different models used for a black box heat pump model"
 
   model PolynomalApproach
     "Calculating heat pump data based on a polynomal approach"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    extends AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
     replaceable function PolyData =
         AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct

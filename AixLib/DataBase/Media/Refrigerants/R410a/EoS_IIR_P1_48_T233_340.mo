@@ -2,8 +2,7 @@ within AixLib.DataBase.Media.Refrigerants.R410a;
 record EoS_IIR_P1_48_T233_340
   "Record with fitting coefficients calculated for first implementation"
 
-  extends
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
     name="Coefficients taken from Lemmon, Pseudo-Pure Fluid Equations of State
     for the Refrigerant Blends R-410A, R-404A, R-507A, and R-407C",
     f_IdgNl=1,

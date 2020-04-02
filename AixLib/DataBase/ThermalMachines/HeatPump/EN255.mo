@@ -2,8 +2,7 @@ within AixLib.DataBase.ThermalMachines.HeatPump;
 package EN255
 
   record AlphaInnotec_SW170I "Alpha Innotec SW 170 I"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
+    extends AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
       tableP_ele=[0,-5.0,0.0,5.0; 35,3700,3600,3600; 50,5100,5100,5100],
       tableQdot_con=[0,-5.0,0.0,5.0; 35,14800,17200,19100; 50,14400,16400,
           18300],
@@ -24,8 +23,7 @@ package EN255
   end AlphaInnotec_SW170I;
 
   record NibeFighter1140_15 "Nibe Fighter 1140-15"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
+    extends AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
       tableP_ele=[0,-5.0,0.0,2,5.0,10; 35,3360,3380,3380,3390,3400; 55,4830,
           4910,4940,4990,5050],
       tableQdot_con=[0,-5.0,0.0,2,5.0,10; 35,13260,15420,16350,17730,19930;
@@ -47,8 +45,7 @@ package EN255
   end NibeFighter1140_15;
 
   record Vitocal350AWI114 "Vitocal 350 AWI 114"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
+    extends AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
       tableP_ele=[0,-20,-15,-10,-5,0,5,10,15,20,25,30; 35,3295.500,3522.700,
           3750,3977.300,4034.100,4090.900,4204.500,4375,4488.600,4488.600,
           4545.500; 50,4659.100,4886.400,5113.600,5227.300,5511.400,
@@ -78,8 +75,7 @@ package EN255
   end Vitocal350AWI114;
 
   record Vitocal350BWH110 "Vitocal 350 BWH 110"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
+    extends AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
       tableP_ele=[0,-5.0,0.0,5.0,10.0,15.0; 35,2478,2522,2609,2696,2783; 45,
           3608,3652,3696,3739,3783; 55,4217,4261,4304,4348,4391; 65,5087,
           5130,5174,5217,5261],
@@ -103,8 +99,7 @@ package EN255
   end Vitocal350BWH110;
 
   record Vitocal350BWH113 "Vitocal 350 BWH 113"
-    extends
-      AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
+    extends AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition(
       tableP_ele=[0,-5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,
           4833,4917,4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,
           7125,7250,7417,7583],
