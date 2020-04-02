@@ -2,10 +2,6 @@ clear
 
 convertClear();
 
-, from(
-version="0.10.0",
-to="Intermediate",
-change(
 convertElement(
 "AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating",
 "thermalZone.humanSenHeaDependent.schedule",
