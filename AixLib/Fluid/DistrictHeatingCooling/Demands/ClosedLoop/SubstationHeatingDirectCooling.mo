@@ -104,7 +104,6 @@ public
     annotation (Placement(transformation(extent={{136,-10},{116,10}})));
   Delays.DelayFirstOrder            del( nPorts=2,
     redeclare package Medium = Medium,
-    V=1,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-24,24},{-4,44}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
@@ -115,7 +114,7 @@ public
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{48,14},{28,34}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
-  "Input for cooling demand profile of substation"
+    "Input for cooling demand profile of substation"
     annotation (Placement(
         transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-176,40},
             {-136,80}})));

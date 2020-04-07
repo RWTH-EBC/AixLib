@@ -56,8 +56,8 @@ model SubstationHeatingCoolingVarDeltaT
     nperiod=12,
     offset=5) annotation (Placement(transformation(extent={{56,18},{36,38}})));
 equation
-  connect(SourceTemperatureColdLine.y, SourceCold.T_in) annotation (Line(points
-        ={{97,28},{94,28},{94,-2},{86,-2}}, color={0,0,127}));
+  connect(SourceTemperatureColdLine.y, SourceCold.T_in) annotation (Line(points=
+         {{97,28},{94,28},{94,-2},{86,-2}}, color={0,0,127}));
   connect(substationHeatingCooling.T_supplyHeatingSet,
     SupplyTemperatureHeaingSet.y) annotation (Line(points={{7.5,20.4941},{14,
           20.4941},{14,90},{33,90}}, color={0,0,127}));

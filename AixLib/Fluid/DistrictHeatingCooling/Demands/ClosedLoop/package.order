@@ -10,3 +10,4 @@ ValveControlledHeatPump
 ValveControlledHX
 ValveControlledHeatPumpFixDeltaT
 PumpControlledHeatPumpFixDeltaT
+SubstationDirectHeatingCoolingDHW

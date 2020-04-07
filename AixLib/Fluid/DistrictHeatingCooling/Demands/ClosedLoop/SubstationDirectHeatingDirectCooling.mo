@@ -77,7 +77,6 @@ public
     annotation (Placement(transformation(extent={{136,-10},{116,10}})));
   Delays.DelayFirstOrder            del( nPorts=2,
     redeclare package Medium = Medium,
-    V=1,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-24,24},{-4,44}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
@@ -121,7 +120,6 @@ public
   Delays.DelayFirstOrder            del1(
     nPorts=2,
     redeclare package Medium = Medium,
-    V=1,
     m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-10,-24},{10,-44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1

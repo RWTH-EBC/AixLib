@@ -4,3 +4,4 @@ SubstationHeatingCoolingFixDeltaT
 SubstationHeatingCoolingVarDeltaT
 SubstationValveControlledHX
 SubstationHeatingDirectCooling
+SubstationHeatingDirectCoolingDHW

@@ -64,8 +64,8 @@ equation
     annotation (Line(points={{44,60},{44,12},{42,12}}, color={0,127,255}));
   connect(sine.y, substationCooling.coolingDemand) annotation (Line(points={{
           -77,46},{-40,46},{-40,8},{-16.6,8}}, color={0,0,127}));
-  connect(step.y, substationCooling.T_supplyCoolingSet) annotation (Line(points
-        ={{-77,14},{-52,14},{-52,3},{-16.6,3}}, color={0,0,127}));
+  connect(step.y, substationCooling.T_supplyCoolingSet) annotation (Line(points=
+         {{-77,14},{-52,14},{-52,3},{-16.6,3}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=86400, Interval=60));

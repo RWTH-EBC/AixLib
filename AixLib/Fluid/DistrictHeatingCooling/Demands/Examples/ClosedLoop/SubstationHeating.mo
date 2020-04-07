@@ -54,8 +54,8 @@ equation
           18,8},{18,10},{44,10},{44,60}},     color={0,127,255}));
   connect(sine.y, substationHeating.heatDemand) annotation (Line(points={{17,
           -30},{24,-30},{24,4.2},{7.78462,4.2}}, color={0,0,127}));
-  connect(substationHeating.T_supplyHeatingSet, step.y) annotation (Line(points
-        ={{7.78462,-0.2},{82,-0.2},{82,-32},{73,-32}}, color={0,0,127}));
+  connect(substationHeating.T_supplyHeatingSet, step.y) annotation (Line(points=
+         {{7.78462,-0.2},{82,-0.2},{82,-32},{73,-32}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=86400, Interval=60));
