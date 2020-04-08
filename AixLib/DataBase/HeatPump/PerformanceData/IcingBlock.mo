@@ -8,8 +8,7 @@ model IcingBlock
     "Enumeration for choosing how reference time (time = 0) should be defined";
   parameter Integer yearRef=2016 "Year when time = 0, used if zerTim=Custom";
   replaceable function iceFunc =
-      DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach       constrainedby
-    AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct                                                                                     "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
+      Functions.IcingFactor.BasicIcingApproach constrainedby AixLib.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct            "Replaceable function to calculate current icing factor" annotation(choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput T_flow_ev(unit="K", displayUnit="degC")
     "Temperature at evaporator inlet"
     annotation (Placement(transformation(extent={{-128,0},{-100,28}}),
@@ -25,7 +24,7 @@ model IcingBlock
   Modelica.Blocks.Interfaces.RealInput m_flow_ev(unit="kg/s") "Mass flow rate at evaporator"
     annotation (Placement(transformation(extent={{-128,-80},{-100,-52}}),
         iconTransformation(extent={{-116,-68},{-100,-52}})));
-  Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Output of current icing factor"
+  Modelica.Blocks.Interfaces.RealOutput iceFac(min=0, max=1) "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

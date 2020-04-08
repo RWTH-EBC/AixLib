@@ -3,7 +3,7 @@ model calcCOP
   "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
 
   parameter Modelica.SIunits.Power lowBouPel "If P_el falls below this value, COP will not be calculated";
-  parameter Real T=60 "Time span for average";
+  parameter Modelica.SIunits.Time aveTime=60 "Time span for average";
 
  Modelica.Blocks.Interfaces.RealInput Pel(final unit="W", final displayUnit=
         "kW")
@@ -18,7 +18,8 @@ model calcCOP
   Modelica.Blocks.Interfaces.RealOutput y_COP "Output for calculated COP value"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
-  AixLib.Utilities.Math.MovingAverage movAve(final T=T) "To calculate the moving average of the output values";
+  AixLib.Utilities.Math.MovingAverage movAve(final aveTime=aveTime)
+    "To calculate the moving average of the output values";
 equation
   //Check if any of the two sums are lower than the given threshold. If so, set COP to zero
   if Pel < lowBouPel or QHeat < Modelica.Constants.eps then
