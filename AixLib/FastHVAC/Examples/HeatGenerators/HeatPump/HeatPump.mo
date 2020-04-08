@@ -27,11 +27,11 @@ model HeatPump
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D
+        (dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
-         dataTable=AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     TAmbCon_nominal=288.15) annotation (Placement(transformation(

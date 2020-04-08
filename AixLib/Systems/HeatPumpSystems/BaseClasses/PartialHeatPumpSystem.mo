@@ -163,7 +163,7 @@ partial model PartialHeatPumpSystem
       group="Operational Envelope",
       enable=use_sec and use_opeEnv,
       descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
@@ -394,7 +394,8 @@ partial model PartialHeatPumpSystem
     final maxRunPerHou=maxRunPerHou,
     final cp_con=cpCon)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
-  Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
+  Modelica.Blocks.Interfaces.RealInput TAct(unit="K")
+    "Supply temperature for controls"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
 equation
   connect(pumSin.port_b, heatPump.port_a1) annotation (Line(

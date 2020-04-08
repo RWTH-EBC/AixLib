@@ -20,11 +20,11 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP";

@@ -4,17 +4,17 @@ model InnerCycle_HeatPump
   extends AixLib.Fluid.BaseClasses.PartialInnerCycle;
 
   replaceable model PerDataMainHP =
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
+    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a heat pump in main operation mode"
     annotation (choicesAllMatching=true);
 
   replaceable model PerDataRevHP =
-      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     constrainedby
-    AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData(
      final scalingFactor = scalingFactor)
     "Replaceable model for performance data of a heat pump in reversible operation mode"
     annotation (Dialog(enable=use_rev),choicesAllMatching=true);

@@ -101,7 +101,7 @@ model HPSystemController
       enable=use_sec, descriptionLabel = true),choices(checkBox=true));
   parameter Boolean use_opeEnvFroRec=true
     "Use a the operational envelope given in the datasheet" annotation(Dialog(tab="Security Control", group="Operational Envelope"),choices(checkBox=true));
-  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (choicesAllMatching=true, Dialog(
       tab="Security Control",
       group="Operational Envelope",
@@ -179,7 +179,7 @@ model HPSystemController
     final use_tableData=use_tableData,
     redeclare final function HeatingCurveFunction = HeatingCurveFunction)
              annotation (Placement(transformation(extent={{-68,-16},{-30,20}})));
-  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.calcCOP calcCOP(
+  AixLib.DataBase.HeatPump.PerformanceData.calcCOP calcCOP(
       final lowBouPel=200)
     annotation (Placement(transformation(extent={{-46,64},{-20,92}})));
   Utilities.HeatTransfer.CalcQFlow       calcQHeat(final cp=cp_con)
@@ -224,9 +224,9 @@ model HPSystemController
         origin={-60,-114})));
   Modelica.Blocks.Math.MultiSum multiSum(k={1}, nu=1)
     annotation (Placement(transformation(extent={{-78,64},{-66,76}})));
-  AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.IcingBlock
+  AixLib.DataBase.HeatPump.PerformanceData.IcingBlock
     icingBlock(redeclare final function iceFunc =
-        DataBase.ThermalMachines.HeatPump.Functions.IcingFactor.BasicIcingApproach)
+        DataBase.HeatPump.Functions.IcingFactor.BasicIcingApproach)
     if use_deFro
     annotation (Placement(transformation(extent={{44,76},{62,94}})));
   Modelica.Blocks.Sources.Constant const(final k=1) if not use_deFro
