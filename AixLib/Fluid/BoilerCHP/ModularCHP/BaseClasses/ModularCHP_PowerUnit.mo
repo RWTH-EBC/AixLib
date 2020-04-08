@@ -4,12 +4,10 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
 
   replaceable package Medium_Fuel =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.NaturalGasMixture_TypeAachen
-                                                                    constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+                                                                    constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Fuel medium model used in the CHP plant" annotation(choicesAllMatching=true);
   replaceable package Medium_Coolant =
-      Modelica.Media.Air.DryAirNasa     constrainedby
-    Modelica.Media.Interfaces.PartialMedium
+      Modelica.Media.Air.DryAirNasa     constrainedby Modelica.Media.Interfaces.PartialMedium
     "Coolant medium model used in the CHP plant" annotation (choicesAllMatching=true);
 
   parameter
@@ -232,13 +230,11 @@ model ModularCHP_PowerUnit "Model of modular CHP power unit"
 protected
   replaceable package Medium_Air =
       AixLib.DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
-                                                               constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
+                                                               constrainedby DataBase.CHP.ModularCHPEngineMedia.EngineCombustionAir
     "Air medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
   replaceable package Medium_Exhaust =
-      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby
-    DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
+      DataBase.CHP.ModularCHPEngineMedia.CHPFlueGasLambdaOnePlus  constrainedby DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa
     "Exhaust gas medium model used in the CHP plant" annotation(choicesAllMatching=true);
 
 equation

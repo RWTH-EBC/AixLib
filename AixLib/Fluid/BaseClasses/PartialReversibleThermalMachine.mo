@@ -19,6 +19,13 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
+                                                "Blackbox model of refrigerant cycle of a thermal machine"
+    annotation (Placement(transformation(
+        extent={{-27,-26},{27,26}},
+        rotation=90,
+        origin={0,-1})));
+
   parameter Boolean use_rev=true "Is the thermal machine reversible?"   annotation(choices(checkBox=true), Dialog(descriptionLabel=true));
   parameter Boolean use_autoCalc=false
     "Enable automatic estimation of volumes and mass flows?"

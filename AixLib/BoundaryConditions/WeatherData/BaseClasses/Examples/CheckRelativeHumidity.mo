@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckRelativeHumidity "Test model for CheckRelativeHumidity"
-  extends
-    AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples.ConvertRelativeHumidity;
+  extends AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples.ConvertRelativeHumidity;
 
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckRelativeHumidity cheRelHum
     "Block that constrains the relative humidity"
