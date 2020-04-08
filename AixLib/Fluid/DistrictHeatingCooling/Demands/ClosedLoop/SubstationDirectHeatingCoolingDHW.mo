@@ -13,19 +13,19 @@ model SubstationDirectHeatingCoolingDHW "Substation model for bidirctional low-t
 
     parameter Modelica.SIunits.TemperatureDifference deltaT_heatingSet "Set temperature difference for heating on the site of building";
 
-    parameter Modelica.SIunits.TemperatureDifference  deltaT_heatingGridSet "Set temperature difference for heating on the site of thermal network";
     parameter Modelica.SIunits.TemperatureDifference  deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
     parameter Modelica.SIunits.Temperature T_supplyDHWSet "Set supply temperature for space heating";
 
-    parameter Modelica.SIunits.Temperature T_returnSet "Set return temperature";
+    parameter Modelica.SIunits.Temperature T_returnSpaceHeatingSet "Set return temperature";
 
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal = m_flow_nominal
     "Nominal mass flow rate";
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
+    T_start=305.15,
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -85,8 +85,6 @@ public
     annotation (Placement(transformation(extent={{104,4},{84,-16}})));
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-196,104},{-180,120}})));
-  Modelica.Blocks.Sources.Constant const3(k=(cp_default*deltaT_heatingGridSet))
-    annotation (Placement(transformation(extent={{-224,94},{-212,106}})));
   Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
   "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{-288,128},{-248,168}}),
@@ -108,8 +106,8 @@ public
         transformation(extent={{-290,92},{-250,132}}),
                                                     iconTransformation(extent={{-180,22},
             {-140,62}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
   Modelica.Blocks.Sources.Constant const4(k=T_supplyDHWSet)
     annotation (Placement(transformation(extent={{192,-150},{172,-130}})));
@@ -128,7 +126,7 @@ public
     "Electrical power consumed by heat pump"
     annotation (Placement(transformation(extent={{216,-30},{236,-10}})));
   Modelica.Blocks.Math.Add add2(k1=-1, k2=1)
-    annotation (Placement(transformation(extent={{-196,132},{-176,152}})));
+    annotation (Placement(transformation(extent={{-140,132},{-120,152}})));
   Modelica.Blocks.Interfaces.RealInput dhwDemand(unit="W")
     "Input for domestic hot water demand profile of substation" annotation (
       Placement(transformation(extent={{-290,54},{-250,94}}),
@@ -144,8 +142,8 @@ public
   Sensors.TemperatureTwoPort senTemHPin(redeclare package Medium = Medium,
       m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{28,-10},{48,12}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=cp_default*(
-        senTemHPin.T - T_returnSet))
+  Modelica.Blocks.Sources.RealExpression realExpression(y=cp_default*(senTemIn.T
+         - 15 - 273.15))
     annotation (Placement(transformation(extent={{-214,0},{-194,20}})));
   Modelica.Blocks.Math.Max max
     annotation (Placement(transformation(extent={{-162,90},{-142,110}})));
@@ -156,6 +154,22 @@ public
   Modelica.Blocks.Sources.Constant const2(k=2*cp_default)
     "min temperatur difference for dhw"
     annotation (Placement(transformation(extent={{-204,28},{-192,40}})));
+  Sensors.TemperatureTwoPort senTemIn(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    T_start=305.15)
+    annotation (Placement(transformation(extent={{-138,-12},{-118,10}})));
+  Modelica.Blocks.Math.Feedback feedback
+    annotation (Placement(transformation(extent={{-152,-62},{-172,-42}})));
+  Modelica.Blocks.Sources.Constant const5(k=T_returnSpaceHeatingSet)
+    annotation (Placement(transformation(extent={{-142,-78},{-154,-66}})));
+  Modelica.Blocks.Math.Gain gain(k=cp_default)
+    annotation (Placement(transformation(extent={{-186,-62},{-206,-42}})));
+  Sensors.TemperatureTwoPort senTemOut(
+    redeclare package Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
+    T_start=305.15)
+    annotation (Placement(transformation(extent={{114,-12},{134,10}})));
 equation
 
   connect(port_a,vol. ports[1])
@@ -195,21 +209,15 @@ equation
           -52},{78,-12},{84,-12}},       color={0,127,255}));
   connect(pumpHeating.port_b, del.ports[1])
     annotation (Line(points={{-64,0},{-2,0}}, color={0,127,255}));
-  connect(vol.ports[2], pumpHeating.port_a)
-    annotation (Line(points={{-230,4},{-230,0},{-84,0}}, color={0,127,255}));
-  connect(heaPum.port_b2, senMasFlo_GridCool.port_a)
-    annotation (Line(points={{104,0},{152,0}}, color={0,127,255}));
   connect(heatDemand, add2.u1)
-    annotation (Line(points={{-268,148},{-198,148}}, color={0,0,127}));
+    annotation (Line(points={{-268,148},{-142,148}}, color={0,0,127}));
   connect(coolingDemand, add2.u2) annotation (Line(points={{-270,112},{-212,112},
-          {-212,136},{-198,136}}, color={0,0,127}));
+          {-212,136},{-142,136}}, color={0,0,127}));
   connect(add2.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-175,142},{-22,142},{-22,42}},
+    annotation (Line(points={{-119,142},{-22,142},{-22,42}},
                                                            color={0,0,127}));
   connect(heatDemand, division1.u1) annotation (Line(points={{-268,148},{-226,148},
           {-226,116.8},{-197.6,116.8}}, color={0,0,127}));
-  connect(const3.y, division1.u2) annotation (Line(points={{-211.4,100},{-206,100},
-          {-206,107.2},{-197.6,107.2}}, color={0,0,127}));
   connect(const1.y, division2.u2) annotation (Line(points={{-213.4,76},{-206,76},
           {-206,79.2},{-197.6,79.2}}, color={0,0,127}));
   connect(coolingDemand, division2.u1) annotation (Line(points={{-270,112},{-228,
@@ -250,6 +258,22 @@ equation
           200,-86},{194,-86}}, color={0,0,127}));
   connect(senTem2.port_b, sinkHeating.ports[1])
     annotation (Line(points={{46,-52},{34,-52}}, color={0,127,255}));
+  connect(vol.ports[2], senTemIn.port_a) annotation (Line(points={{-230,4},{-230,
+          -1},{-138,-1}}, color={0,127,255}));
+  connect(senTemIn.port_b, pumpHeating.port_a) annotation (Line(points={{-118,-1},
+          {-102,-1},{-102,0},{-84,0}}, color={0,127,255}));
+  connect(senTemIn.T, feedback.u1) annotation (Line(points={{-128,11.1},{-128,18},
+          {-142,18},{-142,-52},{-154,-52}}, color={0,0,127}));
+  connect(gain.u, feedback.y)
+    annotation (Line(points={{-184,-52},{-171,-52}}, color={0,0,127}));
+  connect(gain.y, division1.u2) annotation (Line(points={{-207,-52},{-248,-52},{
+          -248,108},{-197.6,108},{-197.6,107.2}}, color={0,0,127}));
+  connect(const5.y, feedback.u2) annotation (Line(points={{-154.6,-72},{-162,-72},
+          {-162,-60}}, color={0,0,127}));
+  connect(heaPum.port_b2, senTemOut.port_a) annotation (Line(points={{104,0},{110,
+          0},{110,-1},{114,-1}}, color={0,127,255}));
+  connect(senTemOut.port_b, senMasFlo_GridCool.port_a) annotation (Line(points={
+          {134,-1},{142,-1},{142,0},{152,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -160},{220,160}}),
                          graphics={
