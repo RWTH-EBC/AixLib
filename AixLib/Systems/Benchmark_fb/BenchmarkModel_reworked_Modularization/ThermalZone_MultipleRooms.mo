@@ -119,5 +119,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
     annotation (Line(points={{11,-16},{10,-16},{10,16.4}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=4838400, Interval=1800));
 end ThermalZone_MultipleRooms;

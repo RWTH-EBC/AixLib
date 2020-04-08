@@ -1,14 +1,17 @@
 ﻿within AixLib.Systems.Benchmark_fb;
-package MODI
-  model Controlling_MODI
+package Mode_based_ControlStrategy
+  model Mode_based_Controller
 
     AixLib.Systems.Benchmark.BaseClasses.MainBus mainBus annotation (
       Placement(visible = true, transformation(extent={{90,70},{110,90}},      rotation = 0), iconTransformation(extent={{90,70},
               {110,90}},                                                                                                                         rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput TAirOutside annotation (
       Placement(visible = true, transformation(origin={108,20},   extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin={108,20},   extent = {{-14, -14}, {14, 14}}, rotation = 180)));
-    AixLib.Systems.Benchmark_fb.MODI.Level.FieldLevel fieldLevel1 annotation (
-      Placement(visible = true, transformation(origin = {-40, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.FieldLevel fieldLevel1
+      annotation (Placement(visible=true, transformation(
+          origin={-40,-50},
+          extent={{-10,-10},{10,10}},
+          rotation=0)));
     Level.ManagementLevel_Temp_V2 managementLevel_Temp_V2_1
       annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
     Level.AutomationLevel_V1 automationLevel_V1_1
@@ -66,23 +69,23 @@ package MODI
     connect(TAirOutside, automationLevel_V1_1.TAirOutside)
       annotation (Line(points={{108,20},{-24,20},{-24,7}}, color={0,0,127}));
     connect(mainBus.TRoom1Mea, automationLevel_V1_1.TRoomMea[1]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-32,20},{-32,7.8}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,7.8}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom2Mea, automationLevel_V1_1.TRoomMea[2]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-32,20},{-32,7.4}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,7.4}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom3Mea, automationLevel_V1_1.TRoomMea[3]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-32,20},{-32,7}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,7}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom4Mea, automationLevel_V1_1.TRoomMea[4]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-32,20},{-32,6.6}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,6.6}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom5Mea, automationLevel_V1_1.TRoomMea[5]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-32,20},{-32,6.2}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,6.2}},
         color={255,204,51},
         thickness=0.5));
     connect(automationLevel_V1_1.y[1], fieldLevel1.u[1]) annotation (Line(points={{-40,
@@ -157,14 +160,34 @@ package MODI
             -15.9167},{-40,-40.4028}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[36], fieldLevel1.u[36]) annotation (Line(points={{-40,
             -15.9722},{-40,-40.4676}},      color={255,0,255}));
+    connect(automationLevel_V1_1.T_CS, mainBus.hpSystemBus.TBottomCSMea)
+      annotation (Line(points={{-35.9,7.1},{-35.9,20},{80,20},{80,80.05},{
+            100.05,80.05}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(automationLevel_V1_1.T_GEO, mainBus.gtfBus.primBus.TFwrdOutMea)
+      annotation (Line(points={{-32,7},{-32,20},{80,20},{80,80.05},{100.05,
+            80.05}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{-3,6},{-3,6}},
+        horizontalAlignment=TextAlignment.Right));
     annotation (
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
               fillPattern =                                                                                                                                              FillPattern.Solid,
-              lineThickness =                                                                                                                                                                               0.5, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-              fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-66, 28}, {58, -30}}, textString = "MODI")}),
+              lineThickness =                                                                                                                                                                               0.5, extent = {{-100, 100}, {100, -100}}), Text(lineColor=
+                {95,95,95},                                                                                                                                                                                                        fillColor=
+                {215,215,215},
+              fillPattern=FillPattern.Solid,                                                                                                                                                                                                        extent={{
+                -100,80},{100,-66}},
+            textString="Mode-
+based
+Controller")}),
       Diagram(coordinateSystem(preserveAspectRatio = false)),
       Documentation(info = "<html><head></head><body>MODI control strategy</body></html>"));
-  end Controlling_MODI;
+  end Mode_based_Controller;
 
   package Level
     model FieldLevel "Auswahl der Aktoren basierend auf den ausgewählten Aktorsätzen"
@@ -182,35 +205,77 @@ package MODI
             rotation=0)));
       Modelica.Blocks.Interfaces.BooleanInput u[36] annotation (
         Placement(visible = true, transformation(origin = {2.22045e-16, 128}, extent = {{-14, -14}, {14, 14}}, rotation = -90), iconTransformation(origin = {2.22045e-16, 128}, extent = {{-14, -14}, {14, 14}}, rotation = -90)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_GTFSystem controller_GTFSystem1 annotation (
-        Placement(visible = true, transformation(origin = {-70, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_HPSystem controller_HPSystem1 annotation (
-        Placement(visible = true, transformation(origin={-70,10},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_SwitchingUnit controller_SwitchingUnit1(rpmPump=
-            2000)                                                                                    annotation (
-        Placement(visible = true, transformation(origin = {-70, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_HTSSystem controller_HTSSystem1 annotation (
-        Placement(visible = true, transformation(origin = {-70, 110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_Tabs controller_Tabs_Workshop(TflowSet = 288.15) annotation (
-        Placement(visible = true, transformation(extent = {{-80, -40}, {-60, -20}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_VU controller_VU_Workshop(TRoomSet = 288.15, VFlowSet = 2700 / 3600) annotation (
-        Placement(visible = true, transformation(origin = {30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_VU controller_VU_Canteen(TRoomSet = 293.15, VFlowSet = 1800 / 3600) annotation (
-        Placement(visible = true, transformation(origin = {30, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_VU controller_VU_ConferenceRoom(TRoomSet = 293.15, VFlowSet = 150 / 3600) annotation (
-        Placement(visible = true, transformation(origin = {30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_VU controller_VU_MultipersonOffice(VFlowSet = 300 / 3600) annotation (
-        Placement(visible = true, transformation(origin = {30, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_VU controller_VU_OpenplanOffice(VFlowSet = 4050 / 3600) annotation (
-        Placement(visible = true, transformation(origin = {30, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_Tabs controller_Tabs_Canteen(TflowSet = 293.15) annotation (
-        Placement(visible = true, transformation(extent = {{-80, -60}, {-60, -40}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_Tabs controller_Tabs_ConferenceRoom(TflowSet = 293.15) annotation (
-        Placement(visible = true, transformation(extent = {{-80, -80}, {-60, -60}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_Tabs controller_Tabs_MultipersonOffice(TflowSet = 293.15) annotation (
-        Placement(visible = true, transformation(extent = {{-80, -100}, {-60, -80}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.MODI.Controller.Controller_Tabs controller_Tabs_OpenplanOffice(TflowSet = 293.15) annotation (
-        Placement(visible = true, transformation(extent = {{-80, -120}, {-60, -100}}, rotation = 0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_GTFSystem
+        controller_GTFSystem1 annotation (Placement(visible=true,
+            transformation(
+            origin={-70,90},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_HPSystem
+        controller_HPSystem1 annotation (Placement(visible=true, transformation(
+            origin={-70,10},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_SwitchingUnit
+        controller_SwitchingUnit1(rpmPump=2000) annotation (Placement(visible=
+              true, transformation(
+            origin={-70,70},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_HTSSystem
+        controller_HTSSystem1 annotation (Placement(visible=true,
+            transformation(
+            origin={-70,110},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
+        controller_Tabs_Workshop(TflowSet=288.15) annotation (Placement(visible
+            =true, transformation(extent={{-80,-40},{-60,-20}}, rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_VU
+        controller_VU_Workshop(TRoomSet=288.15, VFlowSet=2700/3600) annotation
+        (Placement(visible=true, transformation(
+            origin={30,-30},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_VU
+        controller_VU_Canteen(TRoomSet=293.15, VFlowSet=1800/3600) annotation (
+          Placement(visible=true, transformation(
+            origin={30,-50},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_VU
+        controller_VU_ConferenceRoom(TRoomSet=293.15, VFlowSet=150/3600)
+        annotation (Placement(visible=true, transformation(
+            origin={30,-70},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_VU
+        controller_VU_MultipersonOffice(VFlowSet=300/3600) annotation (
+          Placement(visible=true, transformation(
+            origin={30,-90},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_VU
+        controller_VU_OpenplanOffice(VFlowSet=4050/3600) annotation (Placement(
+            visible=true, transformation(
+            origin={30,-110},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
+        controller_Tabs_Canteen(TflowSet=293.15) annotation (Placement(visible=
+              true, transformation(extent={{-80,-60},{-60,-40}}, rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
+        controller_Tabs_ConferenceRoom(TflowSet=293.15) annotation (Placement(
+            visible=true, transformation(extent={{-80,-80},{-60,-60}}, rotation
+              =0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
+        controller_Tabs_MultipersonOffice(TflowSet=293.15) annotation (
+          Placement(visible=true, transformation(extent={{-80,-100},{-60,-80}},
+              rotation=0)));
+      AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
+        controller_Tabs_OpenplanOffice(TflowSet=293.15) annotation (Placement(
+            visible=true, transformation(extent={{-80,-120},{-60,-100}},
+              rotation=0)));
       Controller.Controller_HX controller_HX(TflowSet=293.15, rpmPumpPrim=130)
         annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
       ModularAHU.Controller.CtrAHUBasic
@@ -515,6 +580,7 @@ package MODI
       PNlib.Components.TD T1(
         nIn=1,
         nOut=1,
+        delay=180,
         firingCon=Superior_Mode[1])                        annotation (Placement(
             visible=true, transformation(
             origin={-169,63},
@@ -527,6 +593,7 @@ package MODI
       PNlib.Components.TD T11(
         nIn=1,
         nOut=1,
+        delay=180,
         firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside > 283.15)
                                            annotation (Placement(visible=true,
             transformation(
@@ -536,6 +603,7 @@ package MODI
       PNlib.Components.TD T12(
         nIn=1,
         nOut=1,
+        delay=180,
         firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside <= 283.15)
                                             annotation (Placement(visible=true,
             transformation(
@@ -545,67 +613,88 @@ package MODI
       PNlib.Components.TD T13(
         nIn=1,
         nOut=1,
+        delay=180,
         firingCon=Superior_Mode[1])                        annotation (Placement(
             visible=true, transformation(
             origin={-169,21},
             extent={{-7,-7},{7,7}},
             rotation=180)));
       PNlib.Components.TD T14(nIn = 1, nOut = 1,
+        delay=180,
         firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside <= 283.15)                                               annotation (
         Placement(visible = true, transformation(origin = {-143, 41}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T15(nIn = 1, nOut = 1,
+        delay=180,
         firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside > 283.15)                                             annotation (
         Placement(visible = true, transformation(origin = {-157, 41}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T16(
+        delay=180,
         firingCon=Superior_Mode[3],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-107,59},
             extent={{-7,-7},{7,7}},
             rotation=0)));
-      PNlib.Components.PD HP_Heating_II(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0, nIn = 3, nOut = 3, startTokens = 0) annotation (
-        Placement(visible = true, transformation(origin = {-32, 38}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
+      PNlib.Components.PD HP_Heating(
+        enablingType=PNlib.Types.EnablingType.Priority,
+        maxTokens=1,
+        minTokens=0,
+        nIn=2,
+        nOut=2,
+        startTokens=0) annotation (Placement(visible=true, transformation(
+            origin={-32,52},
+            extent={{-6,-6},{6,6}},
+            rotation=90)));
       PNlib.Components.TD T17(
-        delay=1,
-        firingCon=Superior_Mode[4],
+        delay=180,
+        firingCon=Superior_Mode[4] or Superior_Mode[2] and TAirOutside <=
+            283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-107,45},
             extent={{-7,-7},{7,7}},
             rotation=180)));
       PNlib.Components.TD T18(
+        delay=180,
         firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-73,23},
+            origin={-73,33},
             extent={{-7,-7},{7,7}},
             rotation=90)));
       PNlib.Components.TD T19(
-        firingCon=Superior_Mode[4],
+        delay=180,
+        firingCon=Superior_Mode[4] or Superior_Mode[2] and TAirOutside <=
+            283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-59,23},
+            origin={-59,33},
             extent={{-7,-7},{7,7}},
             rotation=-90)));
-      PNlib.Components.PD HP_Off(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0, nIn = 4, nOut = 4, reStart = true, reStartTokens = 1, startTokens = 1) annotation (
+      PNlib.Components.PD HP_Off(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0,
+        nIn=3,
+        nOut=3,                                                                                                                     reStart = true, reStartTokens = 1, startTokens = 1) annotation (
         Placement(visible = true, transformation(origin = {-64, 52}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
       PNlib.Components.TD T110(
+        delay=180,
         firingCon=Superior_Mode[2] and TAirOutside > 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-49,33},
+            origin={-49,45},
             extent={{-7,-7},{7,7}},
             rotation=0)));
       PNlib.Components.TD T111(
+        delay=180,
         firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-49,47},
+            origin={-49,59},
             extent={{-7,-7},{7,7}},
             rotation=180)));
       PNlib.Components.TD T113(
         nIn=1,
         nOut=1,
+        delay=180,
         firingCon=Superior_Mode[1])                       annotation (Placement(
             visible=true, transformation(
             origin={-81,45},
@@ -618,8 +707,9 @@ package MODI
       PNlib.Components.TD T114(
         nIn=1,
         nOut=1,
-        firingCon=Superior_Mode[3] or HP_Heating_II.t > 0.5 or
-            HP_Heating_I.t > 0.5) annotation (Placement(visible=true,
+        delay=180,
+        firingCon=Superior_Mode[3] or HP_Heating.t > 0.5 or HP_Combi.t > 0.5)
+                                  annotation (Placement(visible=true,
             transformation(
             origin={-173,-41},
             extent={{-7,-7},{7,7}},
@@ -627,6 +717,7 @@ package MODI
       PNlib.Components.TD T115(
         nIn=1,
         nOut=1,
+        delay=180,
         firingCon=Superior_Mode[1])                       annotation (Placement(
             visible=true, transformation(
             origin={-187,-41},
@@ -637,9 +728,11 @@ package MODI
       PNlib.Components.PD HX_On(nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-150, -58}, extent = {{-6, -6}, {6, 6}}, rotation = 180)));
       PNlib.Components.TD T116(
+        delay=180,
         firingCon=Superior_Mode[1],               nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-157, -41}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
-      PNlib.Components.TD T117(firingCon = false, nIn = 1, nOut = 1) annotation (
+      PNlib.Components.TD T117(
+        delay=180,             firingCon = false, nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-143, -41}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.PD HX_Off(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, reStartTokens = 0, startTokens = 1) annotation (
         Placement(visible = true, transformation(origin = {-150, -26}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
@@ -656,10 +749,11 @@ package MODI
             rotation=-90)));
       Modelica.Blocks.Interfaces.BooleanOutput y[36] annotation (
         Placement(visible = true, transformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, -110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-      Modelica.Blocks.Interfaces.RealInput TAirOutside "Outside Air Temperature" annotation (
+      Modelica.Blocks.Interfaces.RealInput TAirOutside
+        "Outside Air Temperature"                                                annotation (
         Placement(visible = true, transformation(origin = {160, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {160, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
       inner PNlib.Components.Settings settings annotation (
-        Placement(visible = true, transformation(extent = {{180, 80}, {200, 100}}, rotation = 0)));
+        Placement(visible = true, transformation(extent={{180,80},{200,100}},      rotation = 0)));
       Modelica.Blocks.Math.IntegerToBoolean integerToBoolean1[36] annotation (
         Placement(visible = true, transformation(origin = {-8.88178e-16, -80}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
       PNlib.Components.PD P1(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
@@ -669,7 +763,7 @@ package MODI
       PNlib.Components.PD P12(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {92, 50}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
       PNlib.Components.TD T118(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[1] < 289.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -677,7 +771,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T119(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[1] > 290.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -685,7 +779,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T120(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[1] > 287.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -693,7 +787,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T121(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[1] < 286.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -701,7 +795,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T122(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[4] > 292.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -709,7 +803,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T123(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[4] < 294.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -717,7 +811,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T124(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[4] < 291.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -725,7 +819,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T125(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[4] > 295.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -739,7 +833,7 @@ package MODI
       PNlib.Components.PD P15(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {132, 50}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
       PNlib.Components.TD T126(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[2] > 292.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -747,7 +841,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T127(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[2] < 294.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -759,7 +853,7 @@ package MODI
       PNlib.Components.PD P17(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 1) annotation (
         Placement(visible = true, transformation(origin = {62, -10}, extent = {{-8, -8}, {8, 8}}, rotation = 90)));
       PNlib.Components.TD T128(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[2] < 291.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -767,7 +861,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T129(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[2] > 295.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -783,7 +877,7 @@ package MODI
       PNlib.Components.PD P111(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {192, -10}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
       PNlib.Components.TD T130(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[5] < 294.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -791,7 +885,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T131(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[5] > 292.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -799,18 +893,19 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T132(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[5] > 295.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={148,8},
             extent={{-8,-8},{8,8}},
             rotation=180)));
-      PNlib.Components.TD T133(delay = 1, nIn = 1, nOut = 1,
+      PNlib.Components.TD T133(
+        delay=180,                        nIn = 1, nOut = 1,
         firingCon=TRoomMea[5] < 291.15)                      annotation (
         Placement(visible = true, transformation(origin = {176, 8}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
       PNlib.Components.TD T134(
-        delay=1,
+        delay=180,
         firingCon=false,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -818,7 +913,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T135(
-        delay=1,
+        delay=180,
         firingCon=false,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -832,7 +927,7 @@ package MODI
       PNlib.Components.PD P114(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {132, -70}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
       PNlib.Components.TD T136(
-        delay=1,
+        delay=180,
         firingCon=false,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -840,7 +935,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T137(
-        delay=1,
+        delay=180,
         firingCon=false,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -852,7 +947,7 @@ package MODI
       PNlib.Components.PD P116(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {92, -70}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
       PNlib.Components.TD T138(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[3] < 294.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -860,7 +955,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=0)));
       PNlib.Components.TD T139(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[3] > 292.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -868,7 +963,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T140(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[3] > 295.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -876,7 +971,7 @@ package MODI
             extent={{-8,-8},{8,8}},
             rotation=180)));
       PNlib.Components.TD T141(
-        delay=1,
+        delay=180,
         firingCon=TRoomMea[3] < 291.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
@@ -885,93 +980,76 @@ package MODI
             rotation=0)));
       PNlib.Components.PD P117(maxTokens = 1, minTokens = 0, nIn = 1, nOut = 1, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {32, -70}, extent = {{-8, -8}, {8, 8}}, rotation = -90)));
-      PNlib.Components.PD HP_Heating_I(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0, nIn = 3, nOut = 3, startTokens = 0) annotation (
-        Placement(visible = true, transformation(origin = {-32, 68}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
-      PNlib.Components.PD HP_Combi(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0, nIn = 4, nOut = 4, startTokens = 0) annotation (
-        Placement(visible = true, transformation(origin = {-66, 10}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
-      PNlib.Components.TD T142(
-        firingCon=Superior_Mode[2] and TAirOutside <= 283.15,
-        nIn=1,
-        nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-15,75},
-            extent={{-7,-7},{7,7}},
-            rotation=180)));
-      PNlib.Components.TD T143(
-        firingCon=Superior_Mode[4],
-        nIn=1,
-        nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-15,61},
-            extent={{-7,-7},{7,7}},
-            rotation=0)));
-      PNlib.Components.TD T144(
-        firingCon=Superior_Mode[1],
-        nIn=1,
-        nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-49,61},
-            extent={{-7,-7},{7,7}},
-            rotation=180)));
-      PNlib.Components.TD T145(
-        firingCon=Superior_Mode[2] and TAirOutside <= 283.15,
-        nIn=1,
-        nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-49,75},
-            extent={{-7,-7},{7,7}},
-            rotation=0)));
+      PNlib.Components.PD HP_Combi(enablingType = PNlib.Types.EnablingType.Priority, maxTokens = 1, minTokens = 0,
+        nIn=3,
+        nOut=3,                                                                                                                       startTokens = 0) annotation (
+        Placement(visible = true, transformation(origin={-66,18},    extent = {{-6, -6}, {6, 6}}, rotation = -90)));
       PNlib.Components.TD T146(
+        delay=180,
         firingCon=Superior_Mode[2] and TAirOutside > 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-15,33},
+            origin={-15,45},
             extent={{-7,-7},{7,7}},
             rotation=180)));
       PNlib.Components.TD T147(
-        firingCon=Superior_Mode[4],
+        delay=180,
+        firingCon=Superior_Mode[4] or Superior_Mode[2] and TAirOutside <=
+            283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
-            origin={-15,47},
+            origin={-15,59},
             extent={{-7,-7},{7,7}},
             rotation=0)));
       PNlib.Components.TD T112(
+        delay=180,
         firingCon=Superior_Mode[3],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-81,59},
             extent={{-7,-7},{7,7}},
             rotation=180)));
-      PNlib.Components.TD T148(firingCon = TAirOutside > 283.15, nIn = 1, nOut = 1) annotation (
-        Placement(visible = true, transformation(origin = {-25, 53}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
-      PNlib.Components.TD T149(firingCon = TAirOutside <= 283.15, nIn = 1, nOut = 1) annotation (
-        Placement(visible = true, transformation(origin = {-39, 53}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.PD SU_Cooling_GTF(maxTokens = 1, minTokens = 0, nIn = 3, nOut = 3, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {-106, -18}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
       PNlib.Components.TD T150(
-        delay=1,
-        firingCon=false,
+        delay=180,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-89,-11},
             extent={{-7,-7},{7,7}},
             rotation=0)));
       PNlib.Components.TD T151(
-        firingCon=false,                                 nIn = 1, nOut = 1) annotation (
+        delay=180,
+        firingCon=Superior_Mode[3] and T_GEO < 285.15,   nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-89, -25}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
-      PNlib.Components.TD T152(delay = 1, nIn = 1, nOut = 1,
-        firingCon=false)                                     annotation (
+      PNlib.Components.TD T152(
+        delay=180,                        nIn = 1, nOut = 1,
+        firingCon=Superior_Mode[3] and T_GEO < 285.15)       annotation (
         Placement(visible = true, transformation(origin = {-99, -31}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
-      PNlib.Components.TD T153(delay = 1, nIn = 1, nOut = 1,
-        firingCon=false)                                     annotation (
+      PNlib.Components.TD T153(
+        delay=180,                        nIn = 1, nOut = 1,
+        firingCon=Superior_Mode[3] and T_GEO >= 290.15 or Superior_Mode[4])
+                                                             annotation (
         Placement(visible = true, transformation(origin = {-113, -31}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T154(nIn = 1, nOut = 1,
-        firingCon=false)                          annotation (
+        delay=180,
+        firingCon=Superior_Mode[4] or Superior_Mode[3] and T_GEO >= 290.15)
+                                                  annotation (
         Placement(visible = true, transformation(origin = {-99, -59}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T155(
-        firingCon=false,                                 nIn = 1, nOut = 1) annotation (
+        delay=180,
+        firingCon=Superior_Mode[3] and T_GEO >= 290.15 or Superior_Mode[4],
+                                                         nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-89, -53}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
-      PNlib.Components.TD T156(delay = 1, nIn = 1, nOut = 1,
-        firingCon=false)                                     annotation (
+      PNlib.Components.TD T156(
+        delay=180,                        nIn = 1, nOut = 1,
+        firingCon=Superior_Mode[3] and T_GEO >= 285.15 and T_GEO < 290.15)
+                                                             annotation (
         Placement(visible = true, transformation(origin = {-113, -59}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T157(
-        firingCon=false,
+        delay=180,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-89,-39},
@@ -980,18 +1058,25 @@ package MODI
       PNlib.Components.PD SU_Cooling_HP(maxTokens = 1, minTokens = 0, nIn = 3, nOut = 3, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {-106, -46}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
       PNlib.Components.TD T158(
-        firingCon=false,                                 nIn = 1, nOut = 1) annotation (
+        delay=180,
+        firingCon=Superior_Mode[3] and T_GEO < 290.15 and T_GEO >= 285.15,
+                                                         nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-89, -81}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.TD T159(nIn = 1, nOut = 1,
-        firingCon=false)                          annotation (
+        delay=180,
+        firingCon=Superior_Mode[3] and T_GEO < 285.15)
+                                                  annotation (
         Placement(visible = true, transformation(origin = {-123, -67}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.PD SU_Cooling_GTFandHP(maxTokens = 1, minTokens = 0, nIn = 3, nOut = 3, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {-106, -74}, extent = {{-6, -6}, {6, 6}}, rotation = 90)));
       PNlib.Components.TD T160(nIn = 1, nOut = 1,
-        firingCon=false)                          annotation (
+        delay=180,
+        firingCon=Superior_Mode[3] and T_GEO < 290.15 and T_GEO >= 285.15)
+                                                  annotation (
         Placement(visible = true, transformation(origin = {-123, -81}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
       PNlib.Components.TD T161(
-        firingCon=false,
+        delay=180,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-89,-67},
@@ -1000,37 +1085,52 @@ package MODI
       PNlib.Components.PD SU_Off(maxTokens = 1, minTokens = 0, nIn = 5, nOut = 5, reStartTokens = 1, startTokens = 1) annotation (
         Placement(visible = true, transformation(origin = {-74, -48}, extent = {{-6, -6}, {6, 6}}, rotation = 0)));
       PNlib.Components.TD T162(nIn = 1, nOut = 1,
-        firingCon=false)                          annotation (
+        delay=180,
+        firingCon=T_CS > 285.15)                  annotation (
         Placement(visible = true, transformation(origin = {-37, -45}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.PD SU_Heating_GTF(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {-44, -32}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
       PNlib.Components.TD T164(nIn = 1, nOut = 1,
-        firingCon=false)                          annotation (
+        delay=180,
+        firingCon=T_CS <= 285.15)                 annotation (
         Placement(visible = true, transformation(origin = {-51, -45}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T166(
-        delay=1,
-        firingCon=false,
+        delay=180,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-61,-67},
             extent={{-7,-7},{7,7}},
             rotation=180)));
       PNlib.Components.TD T167(
-        firingCon=false,                                 nIn = 1, nOut = 1) annotation (
+        delay=180,
+        firingCon=Superior_Mode[2] and T_CS <= 285.15,   nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-61, -53}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
       PNlib.Components.TD T168(
-        firingCon=false,
+        delay=180,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-61,-39},
             extent={{-7,-7},{7,7}},
             rotation=180)));
-      PNlib.Components.TD T169(
-        firingCon=false,                                 nIn = 1, nOut = 1) annotation (
-        Placement(visible = true, transformation(origin = {-61, -25}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      PNlib.Components.TD T169(                          nIn = 1, nOut = 1,
+        delay=180,
+        firingCon=Superior_Mode[2] and T_CS > 285.15)                       annotation (
+        Placement(visible = true, transformation(origin={-61,-25},    extent = {{-7, -7}, {7, 7}}, rotation = 0)));
       PNlib.Components.PD SU_Heating_GTFandCON(maxTokens = 1, minTokens = 0, nIn = 2, nOut = 2, startTokens = 0) annotation (
         Placement(visible = true, transformation(origin = {-44, -60}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
       Modelica.Blocks.Interfaces.RealInput TRoomMea[5] annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={120,110})));
+      Modelica.Blocks.Interfaces.RealInput T_CS annotation (Placement(
+            transformation(
+            extent={{-11,-11},{11,11}},
+            rotation=270,
+            origin={41,111})));
+      Modelica.Blocks.Interfaces.RealInput T_GEO annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1198,15 +1298,10 @@ package MODI
       connect(GTF_On.inTransition[1], T114.outPlaces[1]) annotation (
         Line(points={{-173.52,-58},{-175.52,-58},{-175.52,-60},{-173.52,-60},{
               -173.52,-46.36},{-174.02,-46.36},{-174.02,-44.36},{-173,-44.36}},                                                                                     thickness = 0.5));
-      connect(T149.outPlaces[1], HP_Heating_I.inTransition[2]) annotation (
-        Line(points={{-39,56.36},{-41,56.36},{-41,74.48},{-32,74.48}},          thickness = 0.5));
-      connect(HP_Heating_II.pd_t, integerToBoolean1[6].u) annotation (
-        Line(points={{-38.36,38},{-40,38},{-40,0},{0,0},{0,-68},{0,-70.4},{0,
-              -70.4}},                                                                        color = {255, 127, 0}));
-      connect(HP_Heating_I.pd_t, integerToBoolean1[5].u) annotation (
-        Line(points={{-25.64,68},{-24,68},{-24,88},{0,88},{0,-70.4},{0,-70.4}},       color = {255, 127, 0}));
+      connect(HP_Heating.pd_t, integerToBoolean1[6].u) annotation (Line(points=
+              {{-38.36,52},{-40,52},{-40,0},{0,0},{0,-70.4}}, color={255,127,0}));
       connect(HP_Combi.pd_t, integerToBoolean1[8].u) annotation (
-        Line(points={{-59.64,10},{-58,10},{-58,0},{0,0},{0,-70.4},{0,-70.4}},       color = {255, 127, 0}));
+        Line(points={{-59.64,18},{-58,18},{-58,0},{0,0},{0,-70.4}},                 color = {255, 127, 0}));
       connect(HP_Cooling.pd_t, integerToBoolean1[7].u) annotation (
         Line(points={{-87.64,52},{-90,52},{-90,80},{-128,80},{-128,0},{0,0},{0,
               -70.4},{0,-70.4}},                                                                            color = {255, 127, 0}));
@@ -1216,95 +1311,30 @@ package MODI
       connect(HP_Off.pd_t, integerToBoolean1[4].u) annotation (
         Line(points={{-64,58.36},{-66,58.36},{-66,80},{-128,80},{-128,0},{0,0},
               {0,-70.4},{0,-70.4}},                                                                         color = {255, 127, 0}));
-      connect(HP_Heating_II.outTransition[2], T149.inPlaces[1]) annotation (
-        Line(points={{-32,44.48},{-35,44.48},{-35,42.48},{-39,42.48},{-39,49.64}},            thickness = 0.5));
-      connect(T148.outPlaces[1], HP_Heating_II.inTransition[2]) annotation (
-        Line(points={{-25,49.64},{-25,49.64},{-25,49.64},{-25,49.64},{-25,31.64},
-              {-33,31.64},{-33,31.64},{-33,31.52},{-32,31.52}},                                                                                       thickness = 0.5));
-      connect(HP_Heating_I.outTransition[2], T148.inPlaces[1]) annotation (
-        Line(points={{-32,61.52},{-29,61.52},{-29,61.52},{-26,61.52},{-26,55.52},
-              {-24,55.52},{-24,55.52},{-24,56.36},{-25,56.36}},                                                                                       thickness = 0.5));
       connect(T112.outPlaces[1], HP_Cooling.inTransition[1]) annotation (
         Line(points={{-84.36,59},{-94.36,59},{-94.36,58.5},{-94.36,58.48},{
               -94.3,58.48}},                                                                      thickness = 0.5));
       connect(HP_Off.outTransition[3], T112.inPlaces[1]) annotation (
-        Line(points={{-57.52,52.15},{-56.52,52.15},{-56.52,52},{-55.52,52},{
+        Line(points={{-57.52,52.4},{-56.52,52.4},{-56.52,52},{-55.52,52},{
               -55.52,62},{-73.52,62},{-73.52,60},{-77.52,60},{-77.52,58},{
               -77.52,58},{-77.52,59},{-77.52,59},{-77.64,59}},                                                                                                                                                thickness = 0.5));
-      connect(HP_Heating_II.outTransition[3], T147.inPlaces[1]) annotation (
-        Line(points={{-32.4,44.48},{-25,44.48},{-25,42.48},{-18.36,42.48},{
-              -18.36,47}},                                                                    thickness = 0.5));
-      connect(T147.outPlaces[1], HP_Combi.inTransition[3]) annotation (
-        Line(points={{-11.64,47},{-7.64,47},{-7.64,16.48},{-65.85,16.48}},    thickness = 0.5));
-      connect(HP_Heating_II.inTransition[3], T146.outPlaces[1]) annotation (
-        Line(points={{-32.4,31.52},{-25,31.52},{-25,31.52},{-18,31.52},{-18,
-              31.52},{-18,33},{-18.36,33}},                                                                               thickness = 0.5));
-      connect(HP_Combi.outTransition[3], T146.inPlaces[1]) annotation (
-        Line(points={{-65.85,3.52},{-8,3.52},{-8,31.52},{-11.64,31.52},{-11.64,
-              33}},                                                                       thickness = 0.5));
-      connect(T145.outPlaces[1], HP_Heating_I.inTransition[1]) annotation (
-        Line(points={{-45.64,75},{-38.64,75},{-38.64,75},{-31.64,75},{-31.64,73},
-              {-31.64,73},{-31.64,74.48},{-32.4,74.48}},                                                                                thickness = 0.5));
-      connect(HP_Off.outTransition[1], T145.inPlaces[1]) annotation (
-        Line(points={{-57.52,51.55},{-56.52,51.55},{-56.52,52},{-55.52,52},{
-              -55.52,76},{-51.52,76},{-51.52,76},{-51.52,75},{-52.36,75}},                                                                            thickness = 0.5));
-      connect(HP_Heating_I.outTransition[1], T144.inPlaces[1]) annotation (
-        Line(points={{-32.4,61.52},{-39,61.52},{-39,61.52},{-46,61.52},{-46,
-              61.52},{-46,61.52},{-46,61},{-45.64,61}},                                                                                 thickness = 0.5));
-      connect(T144.outPlaces[1], HP_Off.inTransition[1]) annotation (
-        Line(points={{-52.36,61},{-63.36,61},{-63.36,61},{-74.36,61},{-74.36,51},
-              {-72.36,51},{-72.36,51.55},{-70.48,51.55}},                                                                               thickness = 0.5));
-      connect(HP_Heating_I.outTransition[3], T143.inPlaces[1]) annotation (
-        Line(points={{-31.6,61.52},{-25,61.52},{-25,61.52},{-18,61.52},{-18,
-              61.52},{-18,61.52},{-18,61},{-18.36,61}},                                                                                 thickness = 0.5));
-      connect(T143.outPlaces[1], HP_Combi.inTransition[2]) annotation (
-        Line(points={{-11.64,61},{-7.64,61},{-7.64,15},{-65.64,15},{-65.64,15},
-              {-65.64,15},{-65.64,16.48},{-66.15,16.48}},                                                                             thickness = 0.5));
-      connect(T142.outPlaces[1], HP_Heating_I.inTransition[3]) annotation (
-        Line(points={{-18.36,75},{-25.36,75},{-25.36,75},{-32.36,75},{-32.36,73},
-              {-32.36,73},{-32.36,73},{-32.36,74.48},{-31.6,74.48}},                                                                                  thickness = 0.5));
-      connect(HP_Combi.outTransition[2], T142.inPlaces[1]) annotation (
-        Line(points={{-66.15,3.52},{-8,3.52},{-8,75.52},{-12,75.52},{-12,75},{
-              -11.64,75}},                                                                              thickness = 0.5));
-      connect(HP_Combi.outTransition[4], T16.inPlaces[1]) annotation (
-        Line(points={{-65.55,3.52},{-116,3.52},{-116,59.52},{-113,59.52},{-113,
-              59},{-110.36,59}},                                                                               thickness = 0.5));
-      connect(T17.outPlaces[1], HP_Combi.inTransition[4]) annotation (
-        Line(points={{-110.36,45},{-113.36,45},{-113.36,45},{-116.36,45},{
-              -116.36,15},{-66.36,15},{-66.36,15},{-66.36,15},{-66.36,16.48},{
-              -65.55,16.48}},                                                                                                                                            thickness = 0.5));
       connect(HP_Combi.outTransition[1], T18.inPlaces[1]) annotation (
-        Line(points={{-66.45,3.52},{-74,3.52},{-74,19.52},{-73,19.52},{-73,
-              19.64}},                                                                      thickness = 0.5));
+        Line(points={{-66.4,11.52},{-74,11.52},{-74,19.52},{-73,19.52},{-73,
+              29.64}},                                                                      thickness = 0.5));
       connect(HP_Combi.inTransition[1], T19.outPlaces[1]) annotation (
-        Line(points={{-66.45,16.48},{-62,16.48},{-62,14.48},{-58,14.48},{-58,
-              18.48},{-58,19.64},{-59,19.64}},                                                                            thickness = 0.5));
+        Line(points={{-66.4,24.48},{-58,24.48},{-58,29.64},{-59,29.64}},                                                  thickness = 0.5));
       connect(HP_Cooling.outTransition[1], T113.inPlaces[1]) annotation (
         Line(points={{-94.3,45.52},{-89,45.52},{-89,45.52},{-84,45.52},{-84,
               45.52},{-84,45.52},{-84,45},{-84.36,45}},                                                                                 thickness = 0.5));
       connect(T113.outPlaces[1], HP_Off.inTransition[3]) annotation (
         Line(points={{-77.64,45},{-76.64,45},{-76.64,45},{-73.64,45},{-73.64,51},
-              {-69.64,51},{-69.64,51},{-69.64,51},{-69.64,52.15},{-70.48,52.15}},                                                                                   thickness = 0.5));
-      connect(HP_Heating_II.outTransition[1], T111.inPlaces[1]) annotation (
-        Line(points={{-31.6,44.48},{-39,44.48},{-39,42.48},{-45.64,42.48},{
-              -45.64,47}},                                                                    thickness = 0.5));
-      connect(T111.outPlaces[1], HP_Off.inTransition[2]) annotation (
-        Line(points={{-52.36,47},{-54.36,47},{-54.36,47},{-56.36,47},{-56.36,43},
-              {-74.36,43},{-74.36,51},{-72.36,51},{-72.36,51.85},{-70.48,51.85}},                                                                                   thickness = 0.5));
-      connect(T110.outPlaces[1], HP_Heating_II.inTransition[1]) annotation (
-        Line(points={{-45.64,33},{-42.14,33},{-42.14,33},{-38.64,33},{-38.64,31},
-              {-35.14,31},{-35.14,31.52},{-31.6,31.52}},                                                                                thickness = 0.5));
-      connect(HP_Off.outTransition[2], T110.inPlaces[1]) annotation (
-        Line(points={{-57.52,51.85},{-56.52,51.85},{-56.52,52},{-55.52,52},{
-              -55.52,34},{-53.52,34},{-53.52,34},{-52.52,34},{-52.52,33},{
-              -52.36,33}},                                                                                                                                          thickness = 0.5));
-      connect(HP_Off.outTransition[4], T19.inPlaces[1]) annotation (
-        Line(points={{-57.52,52.45},{-56.52,52.45},{-56.52,52},{-55.52,52},{
-              -55.52,34},{-59.52,34},{-59.52,26},{-57.52,26},{-57.52,26},{
-              -57.52,26.36},{-59,26.36}},                                                                                                                                         thickness = 0.5));
-      connect(T18.outPlaces[1], HP_Off.inTransition[4]) annotation (
-        Line(points={{-73,26.36},{-74,26.36},{-74,26.36},{-75,26.36},{-75,52.36},
-              {-71,52.36},{-71,52.36},{-71,52.45},{-70.48,52.45}},                                                                                    thickness = 0.5));
+              {-69.64,51},{-69.64,51},{-69.64,51},{-69.64,52.4},{-70.48,52.4}},                                                                                     thickness = 0.5));
+      connect(HP_Heating.outTransition[1], T111.inPlaces[1]) annotation (Line(
+            points={{-31.7,58.48},{-39,58.48},{-39,58},{-45.64,58},{-45.64,59}},
+            thickness=0.5));
+      connect(T110.outPlaces[1], HP_Heating.inTransition[1]) annotation (Line(
+            points={{-45.64,45},{-38.64,45},{-38.64,46},{-32,46},{-32,45.52},{
+              -31.7,45.52}}, thickness=0.5));
       connect(HTS_Heating_II.pd_t, integerToBoolean1[3].u) annotation (
         Line(points={{-143.64,28},{-127,28},{-127,30},{-128,30},{-128,0},{0,0},
               {0,-70.4}},                                                                            color = {255, 127, 0}));
@@ -1631,6 +1661,34 @@ package MODI
                                                                   color = {255, 0, 255}, thickness = 0.5));
       connect(P13.pd_t, integerToBoolean1[29].u) annotation (Line(points={{
               200.48,50},{200,50},{200,20},{0,20},{0,-70.4}}, color={255,127,0}));
+      connect(HP_Combi.pd_t, integerToBoolean1[5].u) annotation (Line(points={{
+              -59.64,18},{-58,18},{-58,0},{0,0},{0,-70.4}}, color={255,127,0}));
+      connect(HP_Combi.outTransition[3], T16.inPlaces[1]) annotation (Line(
+            points={{-65.6,11.52},{-68,11.52},{-68,10},{-120,10},{-120,60},{
+              -110.36,60},{-110.36,59}}, color={0,0,0}));
+      connect(T17.outPlaces[1], HP_Combi.inTransition[3]) annotation (Line(
+            points={{-110.36,45},{-120,45},{-120,24.48},{-65.6,24.48}}, color={
+              0,0,0}));
+      connect(HP_Off.outTransition[2], T19.inPlaces[1]) annotation (Line(points
+            ={{-57.52,52},{-59,52},{-59,36.36}}, color={0,0,0}));
+      connect(T18.outPlaces[1], HP_Off.inTransition[2]) annotation (Line(points
+            ={{-73,36.36},{-73,52},{-70.48,52}}, color={0,0,0}));
+      connect(HP_Heating.outTransition[2], T147.inPlaces[1]) annotation (Line(
+            points={{-32.3,58.48},{-30,58.48},{-30,59},{-18.36,59}}, color={0,0,
+              0}));
+      connect(HP_Heating.inTransition[2], T146.outPlaces[1]) annotation (Line(
+            points={{-32.3,45.52},{-30,45.52},{-30,45},{-18.36,45}}, color={0,0,
+              0}));
+      connect(T110.inPlaces[1], HP_Off.outTransition[1]) annotation (Line(
+            points={{-52.36,45},{-57.52,45},{-57.52,51.6}}, color={0,0,0}));
+      connect(HP_Off.inTransition[1], T111.outPlaces[1]) annotation (Line(
+            points={{-70.48,51.6},{-70,51.6},{-70,59},{-52.36,59}}, color={0,0,
+              0}));
+      connect(T146.inPlaces[1], HP_Combi.outTransition[2]) annotation (Line(
+            points={{-11.64,45},{-4,45},{-4,11.52},{-66,11.52}}, color={0,0,0}));
+      connect(T147.outPlaces[1], HP_Combi.inTransition[2]) annotation (Line(
+            points={{-11.64,59},{-11.64,58},{-4,58},{-4,24.48},{-66,24.48}},
+            color={0,0,0}));
       annotation (
         uses(PNlib(version = "2.2"), Modelica(version = "3.2.3")),
         Diagram(graphics={  Text(origin = {-163, 87}, extent = {{-21, 5}, {13, -3}}, textString = "HTS_System"), Text(origin = {-47, 91}, extent = {{-21, 5}, {13, -3}}, textString = "HP_System"), Text(origin = {-175, -11}, extent = {{-21, 5}, {13, -3}}, textString = "GTF_System"), Text(origin = {-147, -11}, extent = {{-21, 5}, {13, -3}}, textString = "HX"), Text(origin = {113, 89}, extent = {{-21, 5}, {13, -3}}, textString = "Senken")}, coordinateSystem(extent = {{-200, -100}, {200, 100}}, initialScale = 0.1)),
@@ -5503,8 +5561,11 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
   end Controller;
 
   model testing_automation
-    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V1 automationLevel_V31 annotation (
-      Placement(visible = true, transformation(origin = {20, -12}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
+    AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.AutomationLevel_V1
+      automationLevel_V31 annotation (Placement(visible=true, transformation(
+          origin={20,-12},
+          extent={{-20,-10},{20,10}},
+          rotation=0)));
     Modelica.Blocks.Sources.Pulse pulse1(amplitude = 1, offset = 0, period = 7200, startTime = 0, width = 50) annotation (
       Placement(visible = true, transformation(origin = {-80, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Pulse pulse2(amplitude = 1, offset = 0, period = 14400, startTime = 3600, width = 25) annotation (
@@ -5585,8 +5646,11 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
       Placement(visible = true, transformation(origin = {-88, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Sine sine2(amplitude = 5, freqHz = 1 / 7200, offset = 293.15, startTime = 0) annotation (
       Placement(visible = true, transformation(origin = {-20, 56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    AixLib.Systems.Benchmark_fb.MODI.Level.AutomationLevel_V1 automationLevel_V31 annotation (
-      Placement(visible = true, transformation(origin = {-20, -38}, extent = {{-20, -10}, {20, 10}}, rotation = 0)));
+    AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.AutomationLevel_V1
+      automationLevel_V31 annotation (Placement(visible=true, transformation(
+          origin={-20,-38},
+          extent={{-20,-10},{20,10}},
+          rotation=0)));
     Modelica.Blocks.Sources.Sine sine3(amplitude = 10, freqHz = 1 / 3600, offset = 288.15, startTime = 0) annotation (
       Placement(visible = true, transformation(origin = {32, 12}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     constant Real const1 = 295.15;
@@ -5594,96 +5658,28 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
   equation
     connect(managementLevel_Temp.y[1], automationLevel_V31.Superior_Mode[1])
       annotation (Line(
-        points={{-26,-10.0533},{-26,-10.0533},{-26,-20},{-20,-20},{-20,-26.0667},
-            {-20,-26.0667}},
+        points={{-26,-10.0533},{-26,-10.0533},{-26,-20},{-20,-20},{-20,-26.25},
+            {-20,-26.25}},
         color={255,0,255},
         thickness=0.5));
     connect(managementLevel_Temp.y[2], automationLevel_V31.Superior_Mode[2])
       annotation (Line(
-        points={{-26,-10.16},{-26,-10.16},{-26,-20},{-20,-20},{-20,-26.2},{-20,
-            -26.2}},
+        points={{-26,-10.16},{-26,-10.16},{-26,-20},{-20,-20},{-20,-26.75},{-20,-26.75}},
         color={255,0,255},
         thickness=0.5));
     connect(managementLevel_Temp.y[3], automationLevel_V31.Superior_Mode[3])
       annotation (Line(
-        points={{-26,-10.2667},{-26,-10.2667},{-26,-20},{-20,-20},{-20,-26.3333},
-            {-20,-26.3333}},
+        points={{-26,-10.2667},{-26,-10.2667},{-26,-20},{-20,-20},{-20,-27.25},
+            {-20,-27.25}},
         color={255,0,255},
         thickness=0.5));
     connect(managementLevel_Temp.y[4], automationLevel_V31.Superior_Mode[4])
       annotation (Line(
-        points={{-26,-10.3733},{-26,-10.3733},{-26,-20},{-20,-20},{-20,-26.4667},
-            {-20,-26.4667}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[5], automationLevel_V31.Superior_Mode[5])
-      annotation (Line(
-        points={{-26,-10.48},{-26,-10.48},{-26,-20},{-20,-20},{-20,-26.6},{-20,
-            -26.6}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[6], automationLevel_V31.Superior_Mode[6])
-      annotation (Line(
-        points={{-26,-10.5867},{-26,-10.5867},{-26,-20},{-20,-20},{-20,-26.7333},
-            {-20,-26.7333}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[7], automationLevel_V31.Superior_Mode[7])
-      annotation (Line(
-        points={{-26,-10.6933},{-26,-10.6933},{-26,-20},{-20,-20},{-20,-26.8667},
-            {-20,-26.8667}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[8], automationLevel_V31.Superior_Mode[8])
-      annotation (Line(
-        points={{-26,-10.8},{-26,-10.8},{-26,-20},{-20,-20},{-20,-27},{-20,-27}},
+        points={{-26,-10.3733},{-26,-10.3733},{-26,-20},{-20,-20},{-20,-27.75},
+            {-20,-27.75}},
         color={255,0,255},
         thickness=0.5));
 
-    connect(managementLevel_Temp.y[9], automationLevel_V31.Superior_Mode[9])
-      annotation (Line(
-        points={{-26,-10.9067},{-26,-10.9067},{-26,-20},{-20,-20},{-20,-27.1333},
-            {-20,-27.1333}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[10], automationLevel_V31.Superior_Mode[10])
-      annotation (Line(
-        points={{-26,-11.0133},{-26,-11.0133},{-26,-20},{-20,-20},{-20,-27.2667},
-            {-20,-27.2667}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[11], automationLevel_V31.Superior_Mode[11])
-      annotation (Line(
-        points={{-26,-11.12},{-26,-11.12},{-26,-20},{-20,-20},{-20,-27.4},{-20,
-            -27.4}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[12], automationLevel_V31.Superior_Mode[12])
-      annotation (Line(
-        points={{-26,-11.2267},{-26,-11.2267},{-26,-20},{-20,-20},{-20,-27.5333},
-            {-20,-27.5333}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[13], automationLevel_V31.Superior_Mode[13])
-      annotation (Line(
-        points={{-26,-11.3333},{-26,-11.3333},{-26,-20},{-20,-20},{-20,-27.6667},
-            {-20,-27.6667}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[14], automationLevel_V31.Superior_Mode[14])
-      annotation (Line(
-        points={{-26,-11.44},{-26,-11.44},{-26,-20},{-20,-20},{-20,-27.8},{-20,
-            -27.8}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[15], automationLevel_V31.Superior_Mode[15])
-      annotation (Line(
-        points={{-26,-11.5467},{-26,-11.5467},{-26,-20},{-20,-20},{-20,-27.9333},
-            {-20,-27.9333}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(sine3.y, automationLevel_V31.TAirOutside) annotation (
-      Line(points={{43,12},{66,12},{66,-40},{-4,-40},{-4,-27}},          color = {0, 0, 127}));
     connect(sine2.y, managementLevel_Temp.TRoomMea[5]) annotation (
       Line(points={{-9,56},{-26,56},{-26,10.2},{-26,10.2}},      color = {0, 0, 127}));
     connect(sine2.y, managementLevel_Temp.TRoomMea[4]) annotation (
@@ -5694,10 +5690,25 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
       Line(points={{-9,56},{-26,56},{-26,10},{-26,10},{-26,11.4},{-26,11.4}},          color = {0, 0, 127}));
     connect(sine1.y, managementLevel_Temp.TRoomMea[1]) annotation (
       Line(points={{-77,36},{-26,36},{-26,11.8},{-26,11.8}},      color = {0, 0, 127}));
+    connect(sine3.y, automationLevel_V31.T_CS) annotation (Line(points={{43,12},{48,
+            12},{48,6},{-15.9,6},{-15.9,-26.9}}, color={0,0,127}));
+    connect(sine1.y, automationLevel_V31.TRoomMea[1])
+      annotation (Line(points={{-77,36},{-10,36},{-10,-26.2}}, color={0,0,127}));
+    connect(sine2.y, automationLevel_V31.TRoomMea[2])
+      annotation (Line(points={{-9,56},{-10,56},{-10,-26.6}}, color={0,0,127}));
+    connect(sine2.y, automationLevel_V31.TRoomMea[3]) annotation (Line(points={{-9,
+            56},{-6,56},{-6,-27},{-10,-27}}, color={0,0,127}));
+    connect(sine2.y, automationLevel_V31.TRoomMea[4])
+      annotation (Line(points={{-9,56},{-10,56},{-10,-27.4}}, color={0,0,127}));
+    connect(sine2.y, automationLevel_V31.TRoomMea[5]) annotation (Line(points={{-9,
+            56},{-6,56},{-6,54},{-10,54},{-10,-27.8}}, color={0,0,127}));
+    connect(sine3.y, automationLevel_V31.TAirOutside) annotation (Line(points={
+            {43,12},{46,12},{46,10},{-4,10},{-4,-27}}, color={0,0,127}));
+    annotation (experiment(StopTime=86400, Interval=30));
   end testing_management_automation;
 
   model testing_field
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
   end testing_field;
-end MODI;
+end Mode_based_ControlStrategy;

@@ -5,7 +5,7 @@ model Benchmark_MODI
     annotation (Placement(transformation(extent={{-40,-40},{40,14}})));
   CCCS.Evaluation_CCCS evaluation_CCCS
     annotation (Placement(transformation(extent={{16,30},{36,50}})));
-  MODI.Controlling_MODI controlling_MODI
+  Mode_based_ControlStrategy.Mode_based_Controller controlling_MODI
     annotation (Placement(transformation(extent={{-64,22},{-44,42}})));
 equation
   connect(benchmarkBuilding.mainBus, evaluation_CCCS.mainBus) annotation (Line(

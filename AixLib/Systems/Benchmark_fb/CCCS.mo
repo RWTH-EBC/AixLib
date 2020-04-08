@@ -3,6 +3,7 @@ package CCCS
   extends Modelica.Icons.Package;
 
   model Evaluation_CCCS
+    parameter Real simulation_time=4838400;
     Modelica.Blocks.Math.Product product1 annotation (
       Placement(visible = true, transformation(origin = {20, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.RBF RBF(i = 0.05, t = 1) annotation (
@@ -33,7 +34,8 @@ package CCCS
          0)
       annotation (Placement(transformation(extent={{-80,-100},{-60,-80}})));
     AixLib.Systems.Benchmark_fb.CCCS.Components.LifespanReductionCosts
-      lifespanReductionCosts_2_1 annotation (Placement(visible=true,
+      lifespanReductionCosts_2_1( simTime=simulation_time)
+                                                          annotation (Placement(visible=true,
           transformation(extent={{-84,-26},{-58,4}}, rotation=0)));
     AixLib.Systems.Benchmark_fb.CCCS.Components.EnergyCosts energyCosts1
       annotation (Placement(visible=true, transformation(
@@ -109,6 +111,7 @@ Components")}),
     end InvestmentCostsComponents;
 
     model LifespanReductionCosts
+      parameter Real simTime= 4838400;
       Modelica.Blocks.Interfaces.RealOutput y annotation (
         Placement(visible = true, transformation(origin = {152, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {152, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Routing.RealPassThrough HP_ThrottleHS_rpmSet annotation (
@@ -137,11 +140,11 @@ Components")}),
         Placement(transformation(extent = {{-88, -122}, {-72, -106}})));
       Modelica.Blocks.Routing.RealPassThrough HP_ThrottleCS_valveSet annotation (
         Placement(transformation(extent = {{-88, -100}, {-72, -84}})));
-      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Pumps[46](each cost_component = 3000, each sim_time = 4838400) annotation (
+      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Pumps[46](each cost_component = 3000, each sim_time = simTime) annotation (
         Placement(visible = true, transformation(origin = {90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.MultiSum multiSum1(nu = 97) annotation (
         Placement(visible = true, transformation(origin = {122, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Valves[51](each cost_component = 1000, each sim_time = 4838400) annotation (
+      AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Valves[51](each cost_component = 1000, each sim_time = simTime) annotation (
         Placement(visible = true, transformation(origin = {90, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Routing.RealPassThrough gtf_sec_rpmSet annotation (
         Placement(transformation(extent = {{-60, -46}, {-46, -32}})));
@@ -618,7 +621,7 @@ Components")}),
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid, textString = "Lifespan
 Reduction
 Costs")}),
-        Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 150}}), graphics = {Text(extent = {{-104, 154}, {-70, 144}}, lineColor = {28, 108, 200}, fontSize = 12, textString = "hpSystem"), Text(extent = {{-70, 142}, {-36, 132}}, lineColor = {28, 108, 200}, fontSize = 12, textString = "htsSystem"), Text(extent = {{-68, 32}, {-34, 22}}, lineColor = {28, 108, 200}, fontSize = 14, textString = "gtfSystem"), Text(extent = {{-8, 34}, {26, 24}}, lineColor = {28, 108, 200}, fontSize = 12, textString = "swuSystem"), Text(extent = {{-40, 152}, {-6, 142}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "tabsSystems"), Text(extent = {{22, 152}, {56, 142}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "ahuSystem"), Text(extent = {{-8, 140}, {26, 130}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "hxSystem"), Text(extent = {{-40, 0}, {-6, -10}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "vuSystems")}),
+        Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 150}}), graphics={  Text(extent = {{-104, 154}, {-70, 144}}, lineColor = {28, 108, 200}, fontSize = 12, textString = "hpSystem"), Text(extent = {{-70, 142}, {-36, 132}}, lineColor = {28, 108, 200}, fontSize = 12, textString = "htsSystem"), Text(extent = {{-68, 32}, {-34, 22}}, lineColor = {28, 108, 200}, fontSize = 14, textString = "gtfSystem"), Text(extent = {{-8, 34}, {26, 24}}, lineColor = {28, 108, 200}, fontSize = 12, textString = "swuSystem"), Text(extent = {{-40, 152}, {-6, 142}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "tabsSystems"), Text(extent = {{22, 152}, {56, 142}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "ahuSystem"), Text(extent = {{-8, 140}, {26, 130}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "hxSystem"), Text(extent = {{-40, 0}, {-6, -10}}, lineColor = {28, 108, 200}, fontSize = 11, textString = "vuSystems")}),
         Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 150}}, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 150}, {150, -152}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-38, 36}, {90, -34}}, textString = "Lifespan
 Reduction
 Costs")}),
@@ -943,11 +946,11 @@ Costs")}));
         Placement(visible = true, transformation(origin = {-90, 71}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
       Modelica.Blocks.Sources.Constant EnergyDemandForDistrictCooling(k = 0) "auxiliary constant - to be replaced by corresponding connection measure bus - EmissionsFactorDistrictCooling in case district cooling is used in model" annotation (
         Placement(visible = true, transformation(origin = {-90, 29}, extent = {{-10, -11}, {10, 11}}, rotation = 0)));
-      parameter Real eFuel = 0.2001 "emissions factor fuel [kg/kWh]";
+      parameter Real eFuel = 0.201 "emissions factor fuel [kg/kWh]";
       parameter Real eEl = 0.474 "emissions factor electricity [kg/kWh]";
       parameter Real eDisHeat = 0.2 "emissions factor district heating [kg/kWh]";
       parameter Real eDisCool = 0.527 "emissions factor district cooling [kg/kWh]";
-      parameter Real cEm = 0.0242 "cost factor emissions [€/kg]";
+      parameter Real cEm = 0.0258 "cost factor emissions [€/kg]";
       Modelica.Blocks.Interfaces.RealInput WelTotal annotation (
         Placement(visible = true, transformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, -30}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealInput FuelTotal annotation (
@@ -980,13 +983,14 @@ Costs")}));
                 fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -102}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-62, 26}, {54, -32}}, textString = "Emission-
 Costs")}),
-        Diagram(coordinateSystem(preserveAspectRatio = false), graphics = {Rectangle(extent = {{308, -308}, {788, 354}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid)}));
+        Diagram(coordinateSystem(preserveAspectRatio = false), graphics={  Rectangle(extent = {{308, -308}, {788, 354}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255},
+                fillPattern =                                                                                                                                                                FillPattern.Solid)}));
     end EmissionsCosts;
 
     model EnergyCosts
       "calculating the energy costs as part of the operational costs to evaluate the performance of a control strategy according to CCCS evaluation method"
-      parameter Real cFuel = 0.00657 "cost factor fuel [€/kWh]";
-      parameter Real cEl = 0.235 "cost factor electricity [€/kWh]";
+      parameter Real cFuel = 0.0455 "cost factor fuel [€/kWh]";
+      parameter Real cEl = 0.222 "cost factor electricity [€/kWh]";
       parameter Real cDisCool = 0.081 "cost factor district cooling [€/kWh]";
       parameter Real cDisHeat = 0.0494 "cost factor district heating [€/kWh]";
       parameter Real NomPowDisCool = 0 "Nominal power dsitrict cooling [kW]";
@@ -1089,7 +1093,7 @@ Costs")}),
       connect(Sum_EnergyCost.y, EnergyCost) annotation (
         Line(points = {{93.02, 0}, {110, 0}}, color = {0, 0, 127}));
       annotation (
-        Diagram(graphics = {Text(lineColor = {0, 0, 255}, extent = {{-106, -18}, {-1, -58}}, textString = "")}),
+        Diagram(graphics={  Text(lineColor = {0, 0, 255}, extent = {{-106, -18}, {-1, -58}}, textString = "")}),
         Icon(graphics={  Text(lineColor = {0, 0, 255}, extent = {{-150, 110}, {150, 150}}, textString = ""), Text(lineColor = {0, 0, 255}, extent = {{-38, -34}, {38, 34}}, textString = ""), Text(extent = {{-100, -92}, {5, -52}}, textString = ""), Rectangle(fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {22, 8}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-118, 32}, {76, -40}}, textString = "Energy-
@@ -1146,7 +1150,9 @@ Costs")}),
       connect(Prod.y, RBF) annotation (
         Line(points = {{91, 0}, {110, 0}}, color = {0, 0, 127}));
       annotation (
-        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-54, 28}, {56, -26}}, textString = "RBF")}),
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
+                fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-54, 28}, {56, -26}}, textString = "RBF")}),
         Diagram(coordinateSystem(preserveAspectRatio = false)),
         Documentation(info = "<html><head></head><body>calculating annuity factor</body></html>"));
     end RBF;
@@ -1819,7 +1825,9 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(abs1.y, add.u2) annotation (
         Line(points = {{21, 90}, {74, 90}, {74, 80}, {66, 80}}, color = {0, 0, 127}));
       annotation (
-        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-64, 36}, {64, -28}}, textString = "LRM_Temp")}),
+        Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(fillColor = {215, 215, 215},
+                fillPattern =                                                                                                                    FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+                fillPattern =                                                                                                                                                                                                        FillPattern.Solid, extent = {{-64, 36}, {64, -28}}, textString = "LRM_Temp")}),
         Diagram(coordinateSystem(preserveAspectRatio = false)),
         Documentation(info = "<html><head></head><body><h4>calculating costs as part of the operational costs of the CCCS evaluation mtheod caused by performance reduction due to devation of room temperature from setpoint</h4></body></html>"));
     end LRM_Temp;
@@ -1897,7 +1905,7 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(const2.y, switch11.u3) annotation (
         Line(points = {{-79, -90}, {-74.75, -90}, {-74.75, -98}, {-74.5, -98}, {-74.5, -100}, {-30, -100}, {-30, -88}, {-22, -88}}, color = {0, 0, 127}));
       annotation (
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 3}, lineColor = {95, 95, 95}, extent = {{-55, 21}, {55, -21}}, textString = "LRM_VOC")}, coordinateSystem(initialScale = 0.1)),
+        Icon(graphics={  Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 3}, lineColor = {95, 95, 95}, extent = {{-55, 21}, {55, -21}}, textString = "LRM_VOC")}, coordinateSystem(initialScale = 0.1)),
         Documentation(info = "<html><head></head><body>calculating costs as part of the operational costs of the CCCS evaluation method due to performance reduction caused by concentration of volatile organic compounds &nbsp;in air</body></html>"));
     end LRM_VOC;
 
@@ -1928,7 +1936,7 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(const1.y, product1.u1) annotation (
         Line(points = {{-59, 30}, {-56, 30}, {-56, 6}, {-52, 6}, {-52, 6}}, color = {0, 0, 127}));
       annotation (
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 1}, lineColor = {95, 95, 95}, extent = {{-53, 21}, {53, -21}}, textString = "LRM_CO2")}, coordinateSystem(initialScale = 0.1)),
+        Icon(graphics={  Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-1, 1}, lineColor = {95, 95, 95}, extent = {{-53, 21}, {53, -21}}, textString = "LRM_CO2")}, coordinateSystem(initialScale = 0.1)),
         Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">calculating costs as part of the operational costs of the CCCS evaluation method due to performance reduction caused by concentration of CO2 in air</span></body></html>"));
     end LRM_CO2;
 
@@ -2017,7 +2025,7 @@ Factor")}, coordinateSystem(initialScale = 0.1)));
       connect(u, derivative1.u) annotation (
         Line(points = {{-104, 0}, {-92, 0}, {-92, 60}, {-82, 60}}, color = {0, 0, 127}));
       annotation (
-        Icon(graphics = {Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {1, 2}, lineColor = {95, 95, 95}, extent = {{-63, 30}, {63, -30}}, textString = "LifespanReductionCost \n One Component")}, coordinateSystem(initialScale = 0.1)),
+        Icon(graphics={  Rectangle(fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {1, 2}, lineColor = {95, 95, 95}, extent = {{-63, 30}, {63, -30}}, textString = "LifespanReductionCost \n One Component")}, coordinateSystem(initialScale = 0.1)),
         Documentation(info = "<html><head></head><body>calculation costs as part of the operational costs of the CCCS evaluation method caused by reduced lifespan of a single component due to wear during opration</body></html>"));
     end Lifespan_Reduction_Cost_Component;
   end BaseClasses;
