@@ -14,7 +14,7 @@ model SimpleExternalShading
   Modelica.Blocks.Sources.Constant thresholdShading[nOrientations](k=maxIrrs)
     "Irradiation threshold at that shading is applied."
     annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
-  Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=0)
+  Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=1)
     "Constant zero for that no shading is applied."
     annotation (Placement(transformation(extent={{-40,-28},{-28,-16}})));
   Modelica.Blocks.Sources.Constant gValueShading[nOrientations](k=gValues)
@@ -34,6 +34,12 @@ model SimpleExternalShading
   Modelica.Blocks.Interfaces.RealOutput shadingFactor[nOrientations]
                                  "Shading factors with external shading."
     annotation (Placement(transformation(extent={{92,-90},{112,-70}})));
+  Modelica.Blocks.Math.Add add[nOrientations](k1=-1)
+    annotation (Placement(transformation(extent={{62,-54},{82,-34}})));
+  Modelica.Blocks.Sources.Constant noShading1
+                                            [nOrientations](each k=1)
+    "Constant zero for that no shading is applied."
+    annotation (Placement(transformation(extent={{30,-22},{42,-10}})));
 equation
   connect(greater.y, switchShading.u2)
     annotation (Line(points={{-27,2},{-14,2}}, color={255,0,255}));
@@ -51,8 +57,12 @@ equation
     annotation (Line(points={{-50,2},{-102,2}}, color={0,0,127}));
   connect(product.u1, solRadWin) annotation (Line(points={{32,14},{28,14},{28,16},{20,16},
           {20,64},{-104,64}}, color={0,0,127}));
-  connect(switchShading.y, shadingFactor) annotation (Line(points={{9,2},{22,2},{22,-80},{102,
-          -80}}, color={0,0,127}));
+  connect(noShading1.y, add.u1) annotation (Line(points={{42.6,-16},{50,-16},{50,
+          -38},{60,-38}}, color={0,0,127}));
+  connect(switchShading.y, add.u2) annotation (Line(points={{9,2},{32,2},{32,-50},
+          {60,-50}}, color={0,0,127}));
+  connect(add.y, shadingFactor) annotation (Line(points={{83,-44},{90,-44},{90,-80},
+          {102,-80}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SimpleExternalShading;
