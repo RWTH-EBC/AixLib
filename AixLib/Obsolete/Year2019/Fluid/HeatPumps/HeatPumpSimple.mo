@@ -44,7 +44,8 @@ model HeatPumpSimple
         origin={80,50})));
   Modelica.Blocks.Interfaces.BooleanInput OnOff
                     "On Off input signal of the heat pump"      annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSourceIn(redeclare package Medium =
+  AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSourceIn(redeclare package
+                                                                                Medium =
                Medium, m_flow_nominal=0.01)
     "Temperature sensor at inlet on the source side" annotation (Placement(
         transformation(
