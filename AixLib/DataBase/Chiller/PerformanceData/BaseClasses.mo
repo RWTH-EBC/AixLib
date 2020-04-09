@@ -20,13 +20,13 @@ package BaseClasses "Package with partial classes of Performance Data"
           rotation=0,
           origin={1,104})));
     Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final displayUnit="kW")
-                                                                           "Heat flow rate through Condenser"  annotation (Placement(
+                                                                           "Heat flow rate through Evaporator"  annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={80,-110})));
   protected
-    parameter Real scalingFactor=1 "Scaling factor of heat pump";
+    parameter Real scalingFactor=1 "Scaling factor of chiller";
 
   end PartialPerformanceData;
 annotation (Icon(graphics={

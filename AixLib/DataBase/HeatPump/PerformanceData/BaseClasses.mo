@@ -21,7 +21,7 @@ package BaseClasses "Package with partial classes of Performance Data"
           rotation=0,
           origin={1,104})));
     Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final displayUnit="kW")
-                                                                           "Heat flow rate through Condenser"  annotation (Placement(
+                                                                           "Heat flow rate through Evaporator"  annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,

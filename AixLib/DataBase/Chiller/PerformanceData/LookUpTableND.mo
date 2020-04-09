@@ -1,5 +1,5 @@
 within AixLib.DataBase.Chiller.PerformanceData;
-model LookUpTableND "N-dimensional table with data for heat pump"
+model LookUpTableND "N-dimensional table with data for chiller"
   extends
     AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
   parameter Real nConv=100

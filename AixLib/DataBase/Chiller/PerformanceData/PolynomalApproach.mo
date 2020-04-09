@@ -1,6 +1,6 @@
 within AixLib.DataBase.Chiller.PerformanceData;
 model PolynomalApproach
-  "Calculating heat pump data based on a polynomal approach"
+  "Calculating chiller data based on a polynomal approach"
   extends
     AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
