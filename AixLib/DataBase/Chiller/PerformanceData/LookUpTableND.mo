@@ -40,16 +40,16 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
-        origin={0,68})));
+        origin={0,86})));
  Modelica.Blocks.Math.UnitConversions.To_degC t_Co_in
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-6,-6},
             {6,6}},
         rotation=-90,
-        origin={46,44})));
+        origin={46,62})));
   Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_ou annotation (extent=[-88,38;
         -76,50], Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={-40,46})));
+        origin={-40,64})));
   Modelica.Blocks.Math.Add calcRedQCon
     "Calculates condenser heat flow with total energy balance" annotation (
       Placement(transformation(
@@ -70,7 +70,7 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     "Power if HP is turned off"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
-        origin={-4,-18})));
+        origin={0,-26})));
   SDF.NDTable nDTableQEva(
     final nin=3,
     final readFromFile=true,
@@ -83,7 +83,7 @@ model LookUpTableND "N-dimensional table with data for heat pump"
     "SDF-Table data for evaporator heat flow"
     annotation (Placement(transformation(extent={{-12,-12},{12,12}},
         rotation=-90,
-        origin={-42,-10})));
+        origin={-42,20})));
   SDF.NDTable nDTablePel(
     final nin=3,
     final readFromFile=true,
@@ -96,71 +96,82 @@ model LookUpTableND "N-dimensional table with data for heat pump"
                                      annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=-90,
-        origin={50,-10})));
+        origin={50,20})));
   Modelica.Blocks.Routing.Multiplex3 multiplex3_1(
     final n1=1,
     final n2=1,
     final n3=1) "Concat all inputs into an array"
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
-        origin={0,20})));
+        origin={0,50})));
 
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(final threshold=
         Modelica.Constants.eps) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
-        origin={-72,46})));
+        origin={-72,64})));
+  Modelica.Blocks.Math.Product scalingFacTimesQEva annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=-90,
+        origin={-35,-9})));
+  Modelica.Blocks.Math.Product scalingFacTimesPel annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=-90,
+        origin={53,-11})));
+protected
+  Modelica.Blocks.Sources.Constant realCorr(final k=scalingFactor)
+    "Calculates correction of table output based on scaling factor"
+    annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=270,
+        origin={3,17})));
 equation
   connect(switchPel.y, Pel) annotation (Line(points={{50,-71},{50,-82},{0,-82},
           {0,-110}},
                color={0,0,127}));
 
-  connect(constZero.y,switchQEva. u3) annotation (Line(points={{-4,-24.6},{-4,
-          -24},{-4,-24},{-4,-28},{-4,-30},{-58,-30},{-58,-42},{-58,-42},{-58,
-          -44},{-58,-44}},     color={0,0,127}));
-  connect(constZero.y, switchPel.u3) annotation (Line(points={{-4,-24.6},{-4,
-          -30},{42,-30},{42,-48}},
+  connect(constZero.y,switchQEva. u3) annotation (Line(points={{0,-32.6},{0,-38},
+          {-58,-38},{-58,-44}},color={0,0,127}));
+  connect(constZero.y, switchPel.u3) annotation (Line(points={{0,-32.6},{0,-38},
+          {42,-38},{42,-48}},
                           color={0,0,127}));
-  connect(nDTableQEva.y,switchQEva. u1)
-    annotation (Line(points={{-42,-23.2},{-42,-44}},
-                                                color={0,0,127}));
-  connect(nDTablePel.y, switchPel.u1)
-    annotation (Line(points={{50,-23.2},{50,-34},{58,-34},{58,-48}},
-                                                  color={0,0,127}));
   connect(multiplex3_1.y,nDTableQEva. u) annotation (Line(points={{-1.55431e-15,
-          11.2},{-1.55431e-15,4.4},{-42,4.4}},
+          41.2},{-1.55431e-15,34.4},{-42,34.4}},
                                           color={0,0,127}));
-  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,11.2},
-          {-1.77636e-15,4.4},{50,4.4}},      color={0,0,127}));
+  connect(multiplex3_1.y, nDTablePel.u) annotation (Line(points={{-1.77636e-15,
+          41.2},{-1.77636e-15,34.4},{50,34.4}},
+                                             color={0,0,127}));
   connect(sigBus.T_flow_co,t_Co_in. u) annotation (Line(
-      points={{1.075,104.07},{46,104.07},{46,51.2}},
+      points={{1.075,104.07},{46,104.07},{46,69.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBus.T_ret_ev,t_Ev_ou. u) annotation (Line(
-      points={{1.075,104.07},{-40,104.07},{-40,53.2}},
+      points={{1.075,104.07},{-40,104.07},{-40,71.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBus.n, greaterThreshold.u) annotation (Line(
-      points={{1.075,104.07},{-72,104.07},{-72,53.2}},
+      points={{1.075,104.07},{-72,104.07},{-72,71.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(greaterThreshold.y,switchQEva. u2) annotation (Line(points={{-72,
-          39.4},{-72,-36},{-50,-36},{-50,-44}},
-                                          color={255,0,255}));
-  connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,39.4},
-          {-72,-36},{50,-36},{50,-48}}, color={255,0,255}));
+  connect(greaterThreshold.y,switchQEva. u2) annotation (Line(points={{-72,57.4},
+          {-72,-16},{-50,-16},{-50,-44}}, color={255,0,255}));
+  connect(greaterThreshold.y, switchPel.u2) annotation (Line(points={{-72,57.4},
+          {-72,-18},{38,-18},{38,-34},{50,-34},{50,-48}},
+                                        color={255,0,255}));
   connect(sigBus.n, nConGain.u) annotation (Line(
-      points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,77.6}},
+      points={{1.075,104.07},{1.77636e-15,104.07},{1.77636e-15,95.6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -168,11 +179,11 @@ equation
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(nConGain.y, multiplex3_1.u3[1]) annotation (Line(points={{
-          -1.55431e-15,59.2},{-6,59.2},{-6,29.6},{-5.6,29.6}}, color={0,0,127}));
-  connect(t_Ev_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,39.4},{
-          -40,36},{5.6,36},{5.6,29.6}}, color={0,0,127}));
-  connect(t_Co_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,37.4},{46,
-          32},{0,32},{0,29.6}}, color={0,0,127}));
+          -1.55431e-15,77.2},{-6,77.2},{-6,59.6},{-5.6,59.6}}, color={0,0,127}));
+  connect(t_Ev_ou.y, multiplex3_1.u1[1]) annotation (Line(points={{-40,57.4},{
+          -40,54},{5.6,54},{5.6,59.6}}, color={0,0,127}));
+  connect(t_Co_in.y, multiplex3_1.u2[1]) annotation (Line(points={{46,55.4},{46,
+          50},{0,50},{0,59.6}}, color={0,0,127}));
   connect(switchPel.y, calcRedQCon.u2) annotation (Line(points={{50,-71},{50,
           -76},{-76.4,-76},{-76.4,-78.8}}, color={0,0,127}));
   connect(switchQEva.y, calcRedQCon.u1) annotation (Line(points={{-50,-67},{
@@ -181,6 +192,18 @@ equation
     annotation (Line(points={{-80,-92.6},{-80,-110}}, color={0,0,127}));
   connect(switchQEva.y, QEva) annotation (Line(points={{-50,-67},{-50,-88},{
           80,-88},{80,-110}}, color={0,0,127}));
+  connect(realCorr.y, scalingFacTimesPel.u2)
+    annotation (Line(points={{3,11.5},{3,2},{50,2},{50,-5}}, color={0,0,127}));
+  connect(realCorr.y, scalingFacTimesQEva.u1) annotation (Line(points={{3,11.5},
+          {3,2},{-32,2},{-32,-3}}, color={0,0,127}));
+  connect(nDTablePel.y, scalingFacTimesPel.u1) annotation (Line(points={{50,6.8},
+          {54,6.8},{54,-5},{56,-5}}, color={0,0,127}));
+  connect(nDTableQEva.y, scalingFacTimesQEva.u2)
+    annotation (Line(points={{-42,6.8},{-42,-3},{-38,-3}}, color={0,0,127}));
+  connect(scalingFacTimesQEva.y, switchQEva.u1) annotation (Line(points={{-35,
+          -14.5},{-35,-28.25},{-42,-28.25},{-42,-44}}, color={0,0,127}));
+  connect(scalingFacTimesPel.y, switchPel.u1) annotation (Line(points={{53,
+          -16.5},{53,-32.25},{58,-32.25},{58,-48}}, color={0,0,127}));
   annotation (Icon(graphics={
     Line(points={{-60.0,40.0},{-60.0,-40.0},{60.0,-40.0},{60.0,40.0},{30.0,40.0},{30.0,-40.0},{-30.0,-40.0},{-30.0,40.0},{-60.0,40.0},{-60.0,20.0},{60.0,20.0},{60.0,0.0},{-60.0,0.0},{-60.0,-20.0},{60.0,-20.0},{60.0,-40.0},{-60.0,-40.0},{-60.0,40.0},{60.0,40.0},{60.0,-40.0}}),
     Line(points={{0.0,40.0},{0.0,-40.0}}),
