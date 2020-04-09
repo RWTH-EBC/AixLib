@@ -2,8 +2,31 @@ within AixLib.DataBase.Chiller.PerformanceData;
 package BaseClasses "Package with partial classes of Performance Data"
   partial model PartialPerformanceData
     "Model with a replaceable for different methods of data aggregation"
-    extends
-      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
+    Modelica.Blocks.Interfaces.RealOutput Pel(final unit="W", final displayUnit="kW")
+                                                        "Electrical Power consumed by HP" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,-110})));
+    Modelica.Blocks.Interfaces.RealOutput QCon(final unit="W", final displayUnit="kW")
+      "Heat flow rate through Condenser" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-80,-110})));
+    AixLib.Controls.Interfaces.ThermalMachineControlBus sigBus
+      "Bus-connector used in a thermal machine" annotation (Placement(
+          transformation(
+          extent={{-15,-14},{15,14}},
+          rotation=0,
+          origin={1,104})));
+    Modelica.Blocks.Interfaces.RealOutput QEva(final unit="W", final displayUnit="kW")
+                                                                           "Heat flow rate through Condenser"  annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={80,-110})));
+  protected
+    parameter Real scalingFactor=1 "Scaling factor of heat pump";
 
   end PartialPerformanceData;
 annotation (Icon(graphics={

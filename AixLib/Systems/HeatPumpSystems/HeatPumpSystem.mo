@@ -63,8 +63,8 @@ model HeatPumpSystem
     annotation (Dialog(tab="Heat Pump"),choicesAllMatching=true);
 
   replaceable model PerDataChi =
-      AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D              constrainedby
-    AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D              constrainedby
+    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
   "Performance data of HP in chilling mode"
     annotation (Dialog(tab="Heat Pump",enable=use_revHP), choicesAllMatching=true);
 
