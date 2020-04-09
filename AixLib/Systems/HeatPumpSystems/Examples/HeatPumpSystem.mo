@@ -74,7 +74,7 @@ model HeatPumpSystem "Example for a heat pump system"
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     refIneFre_constant=0.01,
     dpEva_nominal=0,
     deltaM_con=0.1,
