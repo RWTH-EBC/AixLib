@@ -1,7 +1,6 @@
 within AixLib.DataBase.Chiller.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
-  extends
-    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation";

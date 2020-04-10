@@ -49,8 +49,8 @@ model Chiller "Example for the reversible chiller model."
           dataTable=
             AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D
-        (smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
             AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     use_rev=true,
     use_autoCalc=false,

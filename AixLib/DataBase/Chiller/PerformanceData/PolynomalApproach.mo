@@ -1,8 +1,7 @@
 within AixLib.DataBase.Chiller.PerformanceData;
 model PolynomalApproach
   "Calculating chiller data based on a polynomal approach"
-  extends
-    AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
+  extends AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData;
 
   replaceable function PolyData =
       AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct    "Function to calculate peformance Data" annotation(choicesAllMatching=true);
