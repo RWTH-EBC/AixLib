@@ -1,12 +1,12 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model SimpleNLayer "Wall consisting of n layers"
-  parameter Modelica.SIunits.Area A = 12 "Area" annotation(Dialog(group = "Geometry"));
-  parameter Integer n(min = 1) = 8 "Number of layers" annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.Thickness d[n] = fill(0.1, n) "Thickness" annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.Density rho[n] = fill(1600, n) "Density" annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n] = fill(2.4, n)
+  parameter Modelica.SIunits.Area A "Area" annotation(Dialog(group = "Geometry"));
+  parameter Integer n(min = 1) "Number of layers" annotation(Dialog(group = "Structure of wall layers"));
+  parameter Modelica.SIunits.Thickness d[n] "Thickness" annotation(Dialog(group = "Structure of wall layers"));
+  parameter Modelica.SIunits.Density rho[n] "Density" annotation(Dialog(group = "Structure of wall layers"));
+  parameter Modelica.SIunits.ThermalConductivity lambda[n]
     "Thermal conductivity"                                                                       annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n] = fill(1000, n)
+  parameter Modelica.SIunits.SpecificHeatCapacity c[n]
     "Specific heat capacity"                                                                    annotation(Dialog(group = "Structure of wall layers"));
   parameter Modelica.SIunits.Temperature T_start[n]=fill(Modelica.SIunits.Conversions.from_degC(16), n) "Initial temperature"
                                                                                                                annotation(Dialog(group="Thermal"));
