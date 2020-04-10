@@ -3,4 +3,6 @@ clear
 convertClear();
 
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "T0", "T_start");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "HeatConda", "heatCond_a");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "HeatCondb", "heatCond_b");
 convertModifiers("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", fill("",0), {"A=12", "n=8", "=fill(0.1, n)", "rho=fill(1600, n)", "lambda=fill(2.4, n)", "c=fill(1000, n)"});
