@@ -284,16 +284,14 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
     NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
-    floor_FH(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
     A=room_width*room_length,
     n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
     lambda=Type_FL.lambda,
     c=Type_FL.c,
-    T0=T0_FL) if withFloorHeating "floor component if using Floor heating"
-    annotation (Placement(transformation(
+    each final T_start=T0_FL) if withFloorHeating "floor component if using Floor heating" annotation (Placement(transformation(
         origin={-30,-87},
         extent={{3.00007,16},{-3,-16}},
         rotation=90)));
@@ -430,8 +428,7 @@ equation
           {-18.7,-35.8}},                                                                                                                                      color={191,0,0}));
   connect(inside_wall2a.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{58,23},{40,23},{40,-40},{-18.7,-40},
           {-18.7,-35.8}},                                                                                                                                    color={191,0,0}));
-  connect(inside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{23,54},{23,54},{23,40},{-40,40},{
-          -40,-40},{-18.7,-40},{-18.7,-35.8}},                                                                                                                                color={191,0,0}));
+  connect(inside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{23,54},{23,54},{23,40},{-40,40},{-40,-40},{-18.7,-40},{-18.7,-35.8}}, color={191,0,0}));
   connect(inside_wall3.port_outside, thermInsideWall3) annotation (Line(points={{25,-64.25},{25,-77.375},{44,-77.375},{44,-94}},
                                                             color={191,0,0}));
   connect(inside_wall2b.port_outside, thermInsideWall2b) annotation (Line(

@@ -8,16 +8,15 @@ model SimpleNLayer "Wall consisting of n layers"
     "Thermal conductivity"                                                                       annotation(Dialog(group = "Structure of wall layers"));
   parameter Modelica.SIunits.SpecificHeatCapacity c[n] = fill(1000, n)
     "Specific heat capacity"                                                                    annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
-    "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
+  parameter Modelica.SIunits.Temperature T_start[n]=fill(Modelica.SIunits.Conversions.from_degC(16), n) "Initial temperature"
+                                                                                                               annotation(Dialog(group="Thermal"));
   // 2n HeatConds
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent={{30,-10},
             {50,10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent={{-52,-10},
             {-32,10}})));
   // n Loads
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent={{-10,-42},
-            {10,-22}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start=fill(T_start, n)), C=c .* rho .* A .* d) annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent={{-110,
             -10},{-90,10}}),                                                                                                        iconTransformation(extent={{-110,
             -10},{-90,10}})));

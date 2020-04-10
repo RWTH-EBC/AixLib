@@ -68,8 +68,7 @@ model ConvNLayerClearanceStar
     final rho=rho,
     final lambda=lambda,
     final c=c,
-    final T0=T0)
-    annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
+    each final T_start=T0) annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;

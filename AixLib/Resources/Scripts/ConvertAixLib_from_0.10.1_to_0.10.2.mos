@@ -1,0 +1,5 @@
+clear
+
+convertClear();
+
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer", "T0", "T_start");
