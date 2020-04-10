@@ -28,7 +28,10 @@ model SimpleNLayer "Wall consisting of n layers"
       each stateSelect=StateSelect.always,
       each fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.FixedInitial),
       start=T_start),
-    final der_T(each fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial), each start=0))
+    final der_T(
+      each fixed=(energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyStateInitial),
+      each start=0)) if
+       not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
     annotation (Placement(transformation(extent={{-10,-42},{10,-22}})));
   // n HeatConds
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatCond_b[n](final G=A .* lambda ./ (d/2)) "Heat conduction element (side b)"
