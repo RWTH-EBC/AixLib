@@ -1,5 +1,6 @@
 ﻿within AixLib.Electrical.PVSystem.Validation;
-model ValidationPVSystem "Model with weather data from NIST for the date of 14.06.2020"
+model ValidationPVSystem
+  "Validation with empirical data from NIST for the date of 14.06.2020"
   extends Modelica.Icons.Example;
 
   PVSystem pVSystem(
@@ -14,7 +15,9 @@ model ValidationPVSystem "Model with weather data from NIST for the date of 14.0
     alt=0.67,
     timZon=-18000)
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
-  Modelica.Blocks.Interfaces.RealOutput DCOutputPower
+  Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
+  final quantity="Power",
+  final unit="W")
     "DC output power of the PV array"
     annotation (Placement(transformation(extent={{96,-10},{116,10}})));
   BoundaryConditions.WeatherData.Bus weaBus
@@ -31,7 +34,9 @@ model ValidationPVSystem "Model with weather data from NIST for the date of 14.0
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC
     annotation (Placement(transformation(extent={{-22,-4},{-16,2}})));
 
-  Modelica.Blocks.Interfaces.RealOutput DCOutputPower_Measured
+  Modelica.Blocks.Interfaces.RealOutput DCOutputPower_Measured(
+  final quantity="Power",
+  final unit="W")
     "Measured DC output power of the PV array"
     annotation (Placement(transformation(extent={{96,-50},{116,-30}})));
   Modelica.Blocks.Math.Gain gain(k=1000)
@@ -74,7 +79,7 @@ equation
       StopTime=14342400,
       Interval=60),
     Documentation(info="<html>
-<p>Validation data is from: <a href=\"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a> </p>
+<p>The PVSystem model is validaded with empirical data from: <a href=\"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a> </p>
 <p>The date 14.06.2020 was chosen as an example for the PVSystem model.</p>
 </html>"));
 end ValidationPVSystem;

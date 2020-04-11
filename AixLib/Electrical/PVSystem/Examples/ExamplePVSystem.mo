@@ -1,6 +1,7 @@
 within AixLib.Electrical.PVSystem.Examples;
 model ExamplePVSystem
-  "Example of a model for determining the DC output Power of a PV array; Modules mounted close to the ground"
+  "Example of a model for determining the DC output Power of a PV array; 
+  Modules mounted close to the ground"
   import ModelicaServices;
 
  extends Modelica.Icons.Example;
@@ -16,13 +17,15 @@ model ExamplePVSystem
     redeclare model CellTemperature = BaseClasses.CellTemperatureOpenRack,
     redeclare model IVCharacteristics = BaseClasses.PVModule5pAnalytical,
     timZon(displayUnit="s") = weaDat.timZon)
-    "Model for determining the DC output Power of a PV array; Modules mounted close to the ground (adjust to different mounting via cellTemp)"
+    "Model for determining the DC output Power of a PV array; Modules mounted 
+    close to the ground (adjust to different mounting via cellTemp)"
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
         ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/Weather_TRY_Berlin_winter.mos"),
-      calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation)
+      calTSky=AixLib.BoundaryConditions.Types.
+      SkyTemperatureCalculation.HorizontalRadiation)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 
   Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
@@ -40,5 +43,7 @@ equation
       points={{-80,0},{-34,0},{-34,0.6},{-9.8,0.6}},
       color={255,204,51},
       thickness=0.5));
-  annotation (experiment(StopTime=31536000, Interval=900));
+  annotation (experiment(StopTime=31536000, Interval=900), Documentation(info="<html>
+<p>Simulation to test the <a href=\"AixLib.Electrical.PVSystem.PVSystem\"> PVSystem</a> model.</p>
+</html>"));
 end ExamplePVSystem;

@@ -1,6 +1,6 @@
 within AixLib.Obsolete.Electrical;
 package PVSystem
-  
+
 annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},
