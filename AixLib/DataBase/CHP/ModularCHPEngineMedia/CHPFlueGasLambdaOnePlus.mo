@@ -1,8 +1,7 @@
 within AixLib.DataBase.CHP.ModularCHPEngineMedia;
 package CHPFlueGasLambdaOnePlus
   "Simple flue gas for overstoichiometric O2-fuel ratios"
-  extends
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
+  extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
     mediumName="FlueGasLambdaPlus",
     data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.O2,
         Modelica.Media.IdealGases.Common.SingleGasesData.H2O,Modelica.Media.IdealGases.Common.SingleGasesData.CO2},

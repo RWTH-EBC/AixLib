@@ -1,7 +1,6 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
 record ClearPine
-  extends
-    DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
+  extends DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
     D=8.23,
     E=4.0,
     F=-0.057);

@@ -29,8 +29,7 @@ package R290_IIR_P05_30_T263_343_Formula
     are the refrigerant name as well as the valid refrigerant limits in terms
     of specific enthalpy, density, absolute pressure and temperature.
   */
-  extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
+  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
     mediumName="Propane",
     substanceNames={"Propane"},
     singleState=false,
@@ -1174,7 +1173,6 @@ package R290_IIR_P05_30_T263_343_Formula
   algorithm
     sigma := 1e-3*55.817*(1-sat.Tsat/369.85)^1.266;
   end surfaceTension;
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

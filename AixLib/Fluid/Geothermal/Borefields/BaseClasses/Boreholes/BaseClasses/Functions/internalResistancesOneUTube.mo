@@ -1,8 +1,7 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions;
 function internalResistancesOneUTube
   "Thermal resistances for single U-tube, according to Bauer et al. (2011)"
-  extends
-    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.partialInternalResistances;
+  extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.partialInternalResistances;
 
   // Outputs
   output Modelica.SIunits.ThermalResistance Rgb
