@@ -122,7 +122,7 @@ equation
  else
  0;
 
- w = if V_oc >= 0.001 then
+ w = if noEvent(V_oc >= 0.001) then
  AixLib.Electrical.PVSystem.BaseClasses.Wsimple(exp(1/(a/V_oc)+1))
  else
  0;

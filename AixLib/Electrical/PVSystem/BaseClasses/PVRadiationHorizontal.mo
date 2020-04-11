@@ -207,31 +207,31 @@ equation
 
 
 
-  refAng = if (incAng.incAng >= 0.0001 and incAng.incAng <= Modelica.Constants.pi
+  refAng = if noEvent(incAng.incAng >= 0.0001 and incAng.incAng <= Modelica.Constants.pi
   /2*0.999) then asin(sin(incAng.incAng)/refInd) else
   0;
 
-  refAngGro = if (incAngGro >= 0.0001 and incAngGro <= Modelica.Constants.pi/2*
+  refAngGro = if noEvent(incAngGro >= 0.0001 and incAngGro <= Modelica.Constants.pi/2*
   0.999) then asin(sin(incAngGro)/refInd) else
   0;
 
-  refAngDif = if (incAngDif >= 0.0001 and incAngDif <= Modelica.Constants.pi/2*
+  refAngDif = if noEvent(incAngDif >= 0.0001 and incAngDif <= Modelica.Constants.pi/2*
   0.999) then asin(sin(incAngDif)/refInd) else
   0;
 
-  tau = if (incAng.incAng >= 0.0001 and incAng.incAng <= Modelica.Constants.pi/
+  tau = if noEvent(incAng.incAng >= 0.0001 and incAng.incAng <= Modelica.Constants.pi/
   2*0.999 and refAng >= 0.0001) then exp(-(glaExtCoe*glaThi/cos(refAng)))*(1
   - 0.5*((sin(refAng - incAng.incAng)^2)/(sin(refAng + incAng.incAng)^2) + (
   tan(refAng - incAng.incAng)^2)/(tan(refAng + incAng.incAng)^2))) else
   0;
 
-  tau_ground = if (incAngGro >= 0.0001 and refAngGro >= 0.0001) then exp(-(
+  tau_ground = if noEvent(incAngGro >= 0.0001 and refAngGro >= 0.0001) then exp(-(
   glaExtCoe*glaThi/cos(refAngGro)))*(1 - 0.5*((sin(refAngGro - incAngGro)^2)/
   (sin(refAngGro + incAngGro)^2) + (tan(refAngGro - incAngGro)^2)/(tan(
   refAngGro + incAngGro)^2))) else
   0;
 
-  tau_diff = if (incAngDif >= 0.0001 and refAngDif >= 0.0001) then exp(-(
+  tau_diff = if noEvent(incAngDif >= 0.0001 and refAngDif >= 0.0001) then exp(-(
   glaExtCoe*glaThi/cos(refAngDif)))*(1 - 0.5*((sin(refAngDif - incAngDif)^2)/
   (sin(refAngDif + incAngDif)^2) + (tan(refAngDif - incAngDif)^2)/(tan(
   refAngDif + incAngDif)^2))) else
@@ -263,7 +263,7 @@ equation
 
 
 
-  R_b = if ((zen >= Modelica.Constants.pi/2*0.999) or (cos(incAng.incAng)
+  R_b = if noEvent((zen >= Modelica.Constants.pi/2*0.999) or (cos(incAng.incAng)
   > cos(zen)*4)) then 4 else (cos(incAng.incAng)/cos(zen));
 
 
@@ -274,7 +274,7 @@ equation
   radHor)^2)*(cos(incAng.incAng)^2)*(cos(til)^3)))) + radHor*groRef*(1 - cos(
   til))/2;
 
-  k_t = if radHor <=0.001 then 0
+  k_t = if noEvent(radHor <=0.001) then 0
   else
   min(1,max(0,(radHor)/(G_sc*(1.00011+0.034221*cos(2*Modelica.Constants.pi*nDay/24/60/60/365)+0.00128*sin(2*Modelica.Constants.pi*nDay/24/60/60/365)
   +0.000719*cos(2*2*Modelica.Constants.pi*nDay/24/60/60/365)+0.000077*sin(2*2*Modelica.Constants.pi*nDay/24/60/60/365))*cos(zenAng.zen)))) "after (Iqbal,1983)";

@@ -6,7 +6,7 @@ model CellTemperatureOpenRack
 
 equation
 
- T_c = if radTil >= 0.01 then
+ T_c = if noEvent(radTil >= 0.01) then
  (T_a)+(T_NOCT-293.15)*radTil/radNOCT*9.5/(5.7+3.8*winVel)*(1-eta/0.9)
  else
  (T_a);

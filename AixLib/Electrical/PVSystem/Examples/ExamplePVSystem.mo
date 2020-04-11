@@ -14,7 +14,8 @@ model ExamplePVSystem
     alt=10,
     til(displayUnit="deg") = 0.26179938779915,
     azi(displayUnit="deg") = 0,
-    redeclare model CellTemperature = BaseClasses.CellTemperatureOpenRack,
+    redeclare model CellTemperature =
+        BaseClasses.CellTemperatureMountingCloseToGround,
     redeclare model IVCharacteristics = BaseClasses.PVModule5pAnalytical,
     timZon(displayUnit="s") = weaDat.timZon)
     "Model for determining the DC output Power of a PV array; Modules mounted 
