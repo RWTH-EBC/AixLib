@@ -1,12 +1,12 @@
 #1
 double tab1(8760,30)
-#LOCATION,Berlin,State,Country,TMY3,Something,52.5170365,13.3888599,1.0,Something
-#DESIGN CONDITIONS,BlaBla
-#TYPICAL/EXTREME PERIODS,BlabBla
-#GROUND TEMPERATURES, BlaBla
-#HOLIDAYS/DAYLIGHT SAVINGS,BlaBla
-#COMMENTS BlaBla
-#DATA PERIODS,BlaBla
+#LOCATION,Berlin,State,Country,TMY3,Something,52.5170365,13.3888599,1.0,<Height of site>
+#DESIGN CONDITIONS,
+#TYPICAL/EXTREME PERIODS,
+#GROUND TEMPERATURES,
+#HOLIDAYS/DAYLIGHT SAVINGS,
+#COMMENTS
+#DATA PERIODS,
 #C1 Time in seconds. Beginning of a year is 0s.
 #C2 Dry bulb temperature in Celsius at indicated time
 #C3 Dew point temperature in Celsius at indicated time
