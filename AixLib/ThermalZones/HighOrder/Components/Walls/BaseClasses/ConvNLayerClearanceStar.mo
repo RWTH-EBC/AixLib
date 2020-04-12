@@ -102,7 +102,8 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{8, 100}, {16, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, -30}, {80, -42}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, -32}, {80, -39}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent = {{-44, -40}, {52, -114}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info="<html>
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent={{-78,-60},{22,-100}},      lineColor={0,0,0},
+          textString="(a) 1 .. n (b)")}),                                                                                                                                                                                                        Documentation(info="<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>ConvNLayerClearanceStar</b> model represents a wall, consisting of n different layers with natural convection on one side and (window) clearance.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
