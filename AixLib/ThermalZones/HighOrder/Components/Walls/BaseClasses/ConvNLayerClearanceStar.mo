@@ -63,12 +63,12 @@ model ConvNLayerClearanceStar
             {110,10}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
     final A=A,
-    final n=n,
     final d=d,
     final rho=rho,
     final lambda=lambda,
     final c=c,
-    each final T_start=T0) annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
+    each final T_start=fill(T0, n),
+    n=n) annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;

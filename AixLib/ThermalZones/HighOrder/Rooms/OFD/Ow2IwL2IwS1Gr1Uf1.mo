@@ -327,12 +327,12 @@ model Ow2IwL2IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{-68,-42},{-48,-22}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
     A=room_width*room_length,
-    n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
     lambda=Type_FL.lambda,
     c=Type_FL.c,
-    each final T_start=T0_FL) if withFloorHeating "floor component if using Floor heating" annotation (Placement(transformation(
+    each final T_start=fill(T0_FL, Type_FL.n),
+    n=Type_FL.n) if withFloorHeating "floor component if using Floor heating" annotation (Placement(transformation(
         origin={-30,-87},
         extent={{3.00007,16},{-3,-16}},
         rotation=90)));
