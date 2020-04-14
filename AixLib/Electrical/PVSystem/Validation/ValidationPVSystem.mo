@@ -27,7 +27,7 @@ model ValidationPVSystem
     tableName="Ground2016",
     fileName=ModelicaServices.ExternalReferences.loadResource(
         "modelica://AixLib/Resources/weatherdata/NIST_onemin_Ground_2016.txt"),
-    columns={5,8,3,6},
+    columns={3,5,2,4},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 

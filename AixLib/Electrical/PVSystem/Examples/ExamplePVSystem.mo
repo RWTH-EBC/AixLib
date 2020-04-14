@@ -8,7 +8,7 @@ model ExamplePVSystem
 
   PVSystem pVSystem(
     redeclare DataBase.SolarElectric.QPlusBFRG41285 data,
-    n_mod=567,
+    n_mod=20,
     lat(displayUnit="deg") = 0.91664692314742,
     lon(displayUnit="deg") = 0.23387411976724,
     alt=10,
