@@ -67,13 +67,13 @@ equation
     annotation (Line(points={{61,-40},{106,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-98,40},{-40,6}},
+          extent={{-98,46},{-40,12}},
           lineColor={28,108,200},
+          horizontalAlignment=TextAlignment.Left,
           textString="1 - Air temperature in °C
 2 - Wind speed in m/s
 3 - Global horizontal irradiance in W/m2
-4 - Ouput power in kW",
-          horizontalAlignment=TextAlignment.Left)}),
+4 - Ouput power in kW")}),
     experiment(
       StartTime=14256000,
       StopTime=14342400,
