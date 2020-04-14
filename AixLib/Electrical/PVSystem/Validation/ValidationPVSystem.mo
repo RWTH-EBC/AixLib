@@ -1,6 +1,6 @@
 ﻿within AixLib.Electrical.PVSystem.Validation;
 model ValidationPVSystem
-  "Validation with empirical data from NIST for the date of 14.06.2020"
+  "Validation with empirical data from NIST for the date of 14.06.2016"
   extends Modelica.Icons.Example;
 
   PVSystem pVSystem(
@@ -80,6 +80,6 @@ equation
       Interval=60),
     Documentation(info="<html>
 <p>The PVSystem model is validaded with empirical data from: <a href=\"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a> </p>
-<p>The date 14.06.2020 was chosen as an example for the PVSystem model.</p>
+<p>The date 14.06.2016 was chosen as an example for the PVSystem model.</p>
 </html>"));
 end ValidationPVSystem;
