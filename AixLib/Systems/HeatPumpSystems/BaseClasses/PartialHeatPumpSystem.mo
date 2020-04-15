@@ -66,7 +66,7 @@ partial model PartialHeatPumpSystem
 
 //HeatPump Control
   replaceable model TSetToNSet = Controls.HeatPump.BaseClasses.OnOffHP
-    constrainedby Controls.HeatPump.BaseClasses.OnOffHP annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
+    constrainedby Controls.HeatPump.BaseClasses.PartialTSetToNSet annotation (Dialog(tab="Heat Pump Control"),choicesAllMatching=true);
   parameter Boolean use_tableData=true
     "Choose between tables or function to calculate TSet"
     annotation (Dialog(tab="Heat Pump Control", group="Heating Curve"),choices(
@@ -163,7 +163,7 @@ partial model PartialHeatPumpSystem
       group="Operational Envelope",
       enable=use_sec and use_opeEnv,
       descriptionLabel=true),choices(checkBox=true));
-  parameter DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
+  parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
     dataTable "Data Table of HP" annotation (Dialog(
       tab="Security Control",
       group="Operational Envelope",
@@ -235,10 +235,10 @@ partial model PartialHeatPumpSystem
 
 //Dynamics
   parameter Modelica.Fluid.Types.Dynamics massDynamics
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    "Type of mass balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    "Type of energy balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
 //Assumptions
   parameter Modelica.SIunits.Time tauSenT=1
@@ -275,8 +275,8 @@ partial model PartialHeatPumpSystem
     "Fixed ambient temperature for heat transfer of sensors at the condenser side"
     annotation (Dialog(tab="Assumptions", group="Temperature sensors",enable=transferHeat));
 
-  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby
-    Fluid.Interfaces.PartialFourPortInterface annotation (Placement(
+  replaceable Fluid.Interfaces.PartialFourPortInterface heatPump constrainedby Fluid.Interfaces.PartialFourPortInterface
+                                              annotation (Placement(
         transformation(extent={{-26,-24},{18,20}})),
       __Dymola_choicesAllMatching=true);
   Fluid.Movers.SpeedControlled_y           pumSin(
@@ -394,7 +394,8 @@ partial model PartialHeatPumpSystem
     final maxRunPerHou=maxRunPerHou,
     final cp_con=cpCon)
     annotation (Placement(transformation(extent={{-50,98},{48,168}})));
-  Modelica.Blocks.Interfaces.RealInput TAct(unit="K") "Outdoor air temperature"
+  Modelica.Blocks.Interfaces.RealInput TAct(unit="K")
+    "Supply temperature for controls"
     annotation (Placement(transformation(extent={{-130,146},{-100,176}})));
 equation
   connect(pumSin.port_b, heatPump.port_a1) annotation (Line(
@@ -444,12 +445,13 @@ connect(pumSou.port_a, port_a2) annotation (Line(
           {100,60}}, color={0,127,255}));
   connect(T_oda, hPSystemController.T_oda) annotation (Line(points={{-115,119},{
           -90,119},{-90,133},{-56.86,133}}, color={0,0,127}));
-  connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-40.2,93.1},
-          {-40.2,66},{-70,66},{-70,49.6}}, color={0,0,127}));
-  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{18.6,
-          93.1},{18.6,66.4},{30.4,66.4}},      color={0,0,127}));
-  connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{38.2,93.1},
-          {38.2,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
+  connect(hPSystemController.y_sou, pumSin.y) annotation (Line(points={{-30.4,
+          93.1},{-30.4,66},{-70,66},{-70,49.6}},
+                                           color={0,0,127}));
+  connect(hPSystemController.ySecHeaGen, secHeaGen.u) annotation (Line(points={{-1,93.1},
+          {-1,66.4},{30.4,66.4}},              color={0,0,127}));
+  connect(hPSystemController.y_sin, pumSou.y) annotation (Line(points={{28.4,
+          93.1},{28.4,76},{58,76},{58,-2},{36,-2},{36,-66},{60,-66},{60,-51.6}},
         color={0,0,127}));
   connect(secHeaGen.port_b, port_b1) annotation (Line(
       points={{48,61},{82,61},{82,60},{100,60}},

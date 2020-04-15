@@ -1,8 +1,7 @@
 within AixLib.Utilities.Psychrometrics;
 block X_pTphi
   "Return steam mass fraction as a function of relative humidity phi and temperature T"
-  extends
-    AixLib.Utilities.Psychrometrics.BaseClasses.HumidityRatioVaporPressure;
+  extends AixLib.Utilities.Psychrometrics.BaseClasses.HumidityRatioVaporPressure;
 
   package Medium = AixLib.Media.Air "Medium model";
   Modelica.Blocks.Interfaces.RealInput T(final unit="K",
@@ -17,7 +16,7 @@ block X_pTphi
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
   Modelica.SIunits.AbsolutePressure pSat "Saturation pressure";
-  parameter Integer i_w =
+  parameter Integer i_w=
    sum({(
      if Modelica.Utilities.Strings.isEqual(
        string1=Medium.substanceNames[i],

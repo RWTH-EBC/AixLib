@@ -16,8 +16,8 @@ model MassFlowSource_WeatherData
   AixLib.Fluid.Sources.Outside bou(redeclare package Medium = Medium, nPorts=1)
     "Model with outside conditions"
     annotation (Placement(transformation(extent={{-64,-10},{-44,10}})));
-  AixLib.Fluid.Sensors.RelativeHumidityTwoPort senRelHum(redeclare package
-      Medium = Medium, m_flow_nominal=1,
+  AixLib.Fluid.Sensors.RelativeHumidityTwoPort senRelHum(redeclare package Medium =
+               Medium, m_flow_nominal=1,
     tau=0)                               "Sensor for relative humidity"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   AixLib.Fluid.Sensors.MassFractionTwoPort senMasFra(redeclare package Medium =
