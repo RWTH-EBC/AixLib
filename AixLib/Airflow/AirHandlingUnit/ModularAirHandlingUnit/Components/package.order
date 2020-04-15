@@ -7,6 +7,7 @@ SprayHumidifier
 SteamHumidifier
 PlateHeatExchanger
 PlateHeatExchangerFixedEfficiency
+FanSimple
 RecircFlap
 BaseClasses
 PressureDrop

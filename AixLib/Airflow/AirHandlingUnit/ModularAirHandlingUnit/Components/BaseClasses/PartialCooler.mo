@@ -126,6 +126,8 @@ partial model PartialCooler
 
   Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
+  Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
+    annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
 protected
   Modelica.SIunits.MassFlowRate mb_flow "mass flow over boundary";
   Modelica.Blocks.Interfaces.RealInput Q_in_internal "internal heat flow rate";
@@ -145,6 +147,7 @@ equation
 
   // heat flows
   Q_flow = -(m_flow_airIn * h_airIn - m_flow_airOut * h_airOut);
+  Q = Q_flow;
 
   if not use_T_set then
     Q_in_internal = Q_in;

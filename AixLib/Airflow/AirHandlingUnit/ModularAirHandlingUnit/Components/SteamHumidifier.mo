@@ -16,6 +16,8 @@ model SteamHumidifier
         rotation=-90,
         origin={-30,-94})));
 
+  Modelica.Blocks.Interfaces.RealOutput Q "heat flow rate"
+    annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
 equation
 
   //mass balances
@@ -30,6 +32,7 @@ equation
 
   //heat flows
   Q_flow = m_wat_flow_intern * h_steam;
+  Q = Q_flow;
 
   // specific enthalpies
    assert(T_steamIn >= 373.15, "Steam temperature T has to be higher than 100 degC");
