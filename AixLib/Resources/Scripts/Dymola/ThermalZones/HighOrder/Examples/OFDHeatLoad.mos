@@ -6,16 +6,7 @@ createPlot(
  autoerase = true,
  autoreplot = true);
 createPlot(subPlot=2, 
- y = {
-   "roomHeatLoads[1]", 
-   "roomHeatLoads[2]", 
-   "roomHeatLoads[3]", 
-   "roomHeatLoads[4]", 
-   "roomHeatLoads[5]", 
-   "roomHeatLoads[6]", 
-   "roomHeatLoads[7]", 
-   "roomHeatLoads[8]", 
-   "roomHeatLoads[9]"},
+ y = {"roomHeatLoads[1]", "roomHeatLoads[2]", "roomHeatLoads[3]", "roomHeatLoads[4]", "roomHeatLoads[5]", "roomHeatLoads[6]", "roomHeatLoads[7]", "roomHeatLoads[8]", "roomHeatLoads[9]"},
  autoscale = true,
  autoerase = true,
  autoreplot = true);
