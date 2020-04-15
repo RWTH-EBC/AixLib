@@ -7,10 +7,10 @@ partial model PartialCellTemperature "Partial model for determining the cell tem
  "PV Panel data definition"
                            annotation (choicesAllMatching);
 
- parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
+ final parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
     "Efficiency under standard conditions";
 
- parameter Modelica.SIunits.Temp_K T_NOCT=data.T_NOCT
+ final parameter Modelica.SIunits.Temp_K T_NOCT=data.T_NOCT
     "Cell temperature under NOCT conditions";
 
  final parameter Real radNOCT(final quantity="Irradiance",

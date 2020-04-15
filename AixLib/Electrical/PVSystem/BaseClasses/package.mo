@@ -35,46 +35,46 @@ package BaseClasses
    "PV Panel data definition"
                              annotation (choicesAllMatching);
 
-   parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
+   final parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
       "Efficiency under standard conditions";
 
-   parameter Real n_ser=data.n_ser
+   final parameter Real n_ser=data.n_ser
       "Number of cells connected in series on the PV panel";
 
-   parameter Modelica.SIunits.Area A_pan = data.A_pan
+   final parameter Modelica.SIunits.Area A_pan = data.A_pan
       "Area of one Panel, must not be confused with area of the whole module";
 
-   parameter Modelica.SIunits.Area A_mod = data.A_mod
+   final parameter Modelica.SIunits.Area A_mod = data.A_mod
       "Area of one module (housing)";
 
-   parameter Modelica.SIunits.Voltage V_oc0=data.V_oc0
+   final parameter Modelica.SIunits.Voltage V_oc0=data.V_oc0
       "Open circuit voltage under standard conditions";
 
-   parameter Modelica.SIunits.ElectricCurrent I_sc0=data.I_sc0
+   final parameter Modelica.SIunits.ElectricCurrent I_sc0=data.I_sc0
       "Short circuit current under standard conditions";
 
-   parameter Modelica.SIunits.Voltage V_mp0=data.V_mp0
+   final parameter Modelica.SIunits.Voltage V_mp0=data.V_mp0
       "MPP voltage under standard conditions";
 
-   parameter Modelica.SIunits.ElectricCurrent I_mp0=data.I_mp0
+   final parameter Modelica.SIunits.ElectricCurrent I_mp0=data.I_mp0
       "MPP current under standard conditions";
 
-   parameter Modelica.SIunits.Power P_Max = data.P_mp0*1.05
+   final parameter Modelica.SIunits.Power P_Max = data.P_mp0*1.05
       "Maximal power of one PV module under standard conditions. P_MPP with 5 % tolerance. This is used to limit DCOutputPower.";
 
-   parameter Real TCoeff_Isc(unit = "A/K")=data.TCoeff_Isc
+   final parameter Real TCoeff_Isc(unit = "A/K")=data.TCoeff_Isc
       "Temperature coefficient for short circuit current, >0";
 
-   parameter Real TCoeff_Voc(unit = "V/K")=data.TCoeff_Voc
+   final parameter Real TCoeff_Voc(unit = "V/K")=data.TCoeff_Voc
       "Temperature coefficient for open circuit voltage, <0";
 
-   parameter Modelica.SIunits.LinearTemperatureCoefficient alpha_Isc= data.alpha_Isc
+   final parameter Modelica.SIunits.LinearTemperatureCoefficient alpha_Isc= data.alpha_Isc
       "Normalized temperature coefficient for short circuit current, >0";
 
-   parameter Modelica.SIunits.LinearTemperatureCoefficient beta_Voc = data.beta_Voc
+   final parameter Modelica.SIunits.LinearTemperatureCoefficient beta_Voc = data.beta_Voc
       "Normalized temperature coefficient for open circuit voltage, <0";
 
-   parameter Modelica.SIunits.LinearTemperatureCoefficient gamma_Pmp=data.gamma_Pmp
+   final parameter Modelica.SIunits.LinearTemperatureCoefficient gamma_Pmp=data.gamma_Pmp
       "Normalized temperature coefficient for power at MPP";
 
    final parameter Modelica.SIunits.Temp_K T_c0=25+273.15

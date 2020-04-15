@@ -19,7 +19,7 @@ model ExamplePVSystem
     redeclare model IVCharacteristics = BaseClasses.PVModule5pAnalytical,
     timZon(displayUnit="s") = weaDat.timZon)
     "Model for determining the DC output Power of a PV array; Modules mounted close to the ground (adjust to different mounting via cellTemp)"
-    annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
+    annotation (Placement(transformation(extent={{-8,-12},{16,12}})));
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
         ModelicaServices.ExternalReferences.loadResource(
@@ -37,10 +37,11 @@ model ExamplePVSystem
 equation
 
   connect(pVSystem.DCOutputPower, DCOutputPower)
-    annotation (Line(points={{13,0},{110,0}}, color={0,0,127}));
+    annotation (Line(points={{17.2,0},{110,0}},
+                                              color={0,0,127}));
 
   connect(weaDat.weaBus, pVSystem.weaBus) annotation (Line(
-      points={{-80,0},{-34,0},{-34,0.6},{-9.8,0.6}},
+      points={{-80,0},{-34,0},{-34,0.72},{-10.16,0.72}},
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(StopTime=31536000, Interval=900), Documentation(info="<html>
