@@ -186,7 +186,7 @@ model EONERC_AHU2
         origin={48,-40})));
   Controller.CtrAHUBasic ctrAHUBasic(
     TFlowSet=293.15,
-    useTwoFanCont=true,                               ctrRh(k=0.01))
+    useTwoFanCtr=true,                               ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
   connect(boundaryReturnAir.ports[1], genericAHU.port_a2)
@@ -218,5 +218,7 @@ equation
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>This example includes the GenericAHU model that is parameterized according to an existing air-handling unit of the EON.ERC test hall.</p>
 </html>"));
 end EONERC_AHU2;

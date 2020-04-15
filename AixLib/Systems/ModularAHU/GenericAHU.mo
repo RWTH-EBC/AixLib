@@ -209,7 +209,8 @@ replaceable package Medium2 =
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
     energyDynamics=energyDynamics,
-    steamHumidifier=false) if useHumidifierRet
+    final steamHumidifier=false) if
+                              useHumidifierRet
     "Adiabatic humidifier in retrun canal: cools inlet air of heat recovery system"
     annotation (Dialog(enable=useHumidifierRet, group="Humidifiers"), Placement(
         transformation(extent={{60,70},{40,90}})));
@@ -667,5 +668,7 @@ equation
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>The GenericAHU is a air-handling unit model with detailed hydraulic system of the preheater, heater and cooler. The ahu includes a heat exchanger for heat recovery and a humidifier for the supply air. The humidifier can be insert steam or water that evaporates completely (adiabatic). Further, the ahu includes an adiabatic humidifier in the return air chanal in order to cool the return air and use the heat recovery heat excahnger to cool the supply air. The preheater, steam humdifier and adiabatic humidifier are conditional and can be deactivated.</p>
 </html>"));
 end GenericAHU;

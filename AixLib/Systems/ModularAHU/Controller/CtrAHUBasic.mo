@@ -238,5 +238,9 @@ equation
 <li>useTwoFanCtr = True: The supply air fan and the return air fan are controlled separately. Each controller aims to reach the volume flow set point for the supply or return air chanal. This option is recommended for open systems.</li>
 </ul>
 <p><br>The maximal volume flow can be limited by the maximal pressure difference of the fans <i>dpMax</i>.</p>
+</html>", revisions="<html>
+<ul>
+<li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
+</ul>
 </html>"));
 end CtrAHUBasic;

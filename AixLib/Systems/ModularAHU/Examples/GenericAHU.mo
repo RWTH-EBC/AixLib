@@ -146,7 +146,7 @@ model GenericAHU "Example of generic ahu model"
         origin={48,-40})));
   Controller.CtrAHUBasic ctrAHUBasic(
     TFlowSet=293.15,
-    useTwoFanCont=true,
+    useTwoFanCtr=true,
     VFlowSet=3000/3600,                               ctrRh(k=0.01))
     annotation (Placement(transformation(extent={{-40,62},{-20,82}})));
 equation
@@ -179,5 +179,7 @@ equation
 <ul>
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
+</html>", info="<html>
+<p>This example demonstrates the GenericAHU model with a simple control. The supply air temperature set point is 20&deg;C.</p>
 </html>"));
 end GenericAHU;
