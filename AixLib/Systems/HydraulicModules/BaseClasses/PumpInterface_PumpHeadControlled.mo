@@ -1,16 +1,14 @@
 ﻿within AixLib.Systems.HydraulicModules.BaseClasses;
 model PumpInterface_PumpHeadControlled
   "Head controlled polynomial based pump with controller"
-  extends BasicPumpInterface;
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    annotation (__Dymola_choicesAllMatching=true);
+  extends AixLib.Systems.HydraulicModules.BaseClasses.BasicPumpInterface;
+
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam
     "pump parameter record" annotation (choicesAllMatching=true);
 
   replaceable
     AixLib.Fluid.Movers.PumpsPolynomialBased.Controls.CtrlDpVarH
-    pumpController(pumpParam=pumpParam) constrainedby
-    Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
+    pumpController(pumpParam=pumpParam) constrainedby Fluid.Movers.PumpsPolynomialBased.Controls.BaseClasses.PumpController
     annotation (
     Dialog(enable=true, tab="Control Strategy"),
     Placement(transformation(extent={{-20,40},{20,80}})),
@@ -185,21 +183,6 @@ equation
 <li>2017-11-22 by Peter Matthes:<br />Initial implementation.</li>
 </ul>
 </html>", info="<html>
-<h4>Main equations</h4>
-<p>xxx </p>
-<h4>Assumption and limitations</h4>
-<p>Note assumptions such as a specific definition ranges for the model, possible medium models, allowed combinations with other models etc. There might be limitations of the model such as reduced accuracy under specific circumstances. Please note all those limitations you know of so a potential user won&apos;t make too serious mistakes </p>
-<h4>Typical use and important parameters</h4>
-<p>xxx </p>
-<h4>Options</h4>
-<p>xxx </p>
-<h4>Dynamics</h4>
-<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
-<h4>Validation</h4>
-<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
-<h4>Implementation</h4>
-<p>xxx </p>
-<h4>References</h4>
-<p>xxx </p>
+<p>Pump container for the AixLib.Fluid.Movers.PumpsPolynomialBased.PumpHeadControlled</p>
 </html>"));
 end PumpInterface_PumpHeadControlled;

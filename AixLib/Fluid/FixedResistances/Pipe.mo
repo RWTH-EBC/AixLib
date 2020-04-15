@@ -1,4 +1,4 @@
-within AixLib.Fluid.FixedResistances;
+﻿within AixLib.Fluid.FixedResistances;
 model Pipe "Discretized DynamicPipe with heat loss to ambient"
   extends Interfaces.PartialTwoPort;
   import Modelica.Fluid.Types.ModelStructure;
@@ -26,8 +26,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
    replaceable model FlowModel =
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow
-    constrainedby
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+    constrainedby Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
 
@@ -51,8 +50,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     "= true to use the convective HeatTransfer model"                                                      annotation(Dialog(tab="Heat transfer"));
     replaceable model HeatTransferConvective =
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (alpha0 = alpha_i)
-    constrainedby
-    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
+    constrainedby Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer
     "Wall heat transfer"
       annotation (Dialog(tab="Heat transfer",enable=use_HeatTransfer),choicesAllMatching=true);
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_i=1000 "Heat tranfer coefficient from fluid to pipe wall";
@@ -117,8 +115,7 @@ model Pipe "Discretized DynamicPipe with heat loss to ambient"
     useLumpedPressure=useLumpedPressure,
     useInnerPortProperties=useInnerPortProperties,
     redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
-        (                                                                                                  alpha0=hCon_i))
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer (                           alpha0=hCon_i))
     annotation (Placement(transformation(extent={{-20,-46},{0,-26}})));
 
     // Parameter Tab "Initialisation"
@@ -175,22 +172,22 @@ protected
         iconTransformation(extent={{-46,20},{40,38}})));
 
 public
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](hCon=fill(hCon, nNodes), A=
+        Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
        Heat_Loss_To_Ambient and not withInsulation and not isEmbedded "Convection from pipe wall"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={24,26})));
-  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=Modelica.Constants.pi*Insulation.d_out*
-        length/nNodes) if (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
+  AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](hCon=fill(hCon, nNodes), A=
+        Modelica.Constants.pi*Insulation.d_out*length/nNodes*nParallel) if
+                          (Heat_Loss_To_Ambient and withInsulation and not isEmbedded) "Convection from insulation"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,26})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps, nNodes),
-      A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
-                                     Heat_Loss_To_Ambient and not isEmbedded
-    "Radiation" annotation (Placement(transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx[nNodes](eps=fill(eps, nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes*nParallel) if
+                                     Heat_Loss_To_Ambient and not isEmbedded "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-58,28})));
@@ -253,8 +250,8 @@ equation
         connect(heatConv_withInsulation.port_a, heatPorts);
         connect(heatPorts,thermalCollector.port_a);
         connect(thermalCollector.port_b,heatPort_outside);
-        connect(Insulation.port_b, twoStar_RadEx.Therm);
-        connect(twoStar_RadEx.Star, heatPorts_Star);
+    connect(Insulation.port_b, twoStar_RadEx.conv);
+    connect(twoStar_RadEx.rad, heatPorts_Star);
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
@@ -265,8 +262,8 @@ equation
         connect(heatConv.port_a, heatPorts);
         connect(heatPorts,thermalCollector.port_a);
         connect(thermalCollector.port_b,heatPort_outside);
-        connect(PipeWall.port_b, twoStar_RadEx.Therm);
-        connect(twoStar_RadEx.Star, heatPorts_Star);
+    connect(PipeWall.port_b, twoStar_RadEx.conv);
+    connect(twoStar_RadEx.rad, heatPorts_Star);
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
@@ -317,6 +314,8 @@ equation
 </html>",
         revisions="<html>
 <ul>
+<li><i>February 03, 2020 </i>by Alexander Kümpel:<br/>
+Multiplication with nParallel in heatConv</li>
 <li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
 Parameter isEmbedded added and correction of connections for different applications</li>
 <li><i>April 25, 2017 </i>by Tobias Blacha:<br/>

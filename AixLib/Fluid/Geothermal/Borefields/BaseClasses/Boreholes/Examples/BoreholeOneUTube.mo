@@ -1,8 +1,7 @@
 within AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples;
 model BoreholeOneUTube "Test for the single U-tube borehole model"
   extends Modelica.Icons.Example;
-  extends
-    AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole(
+  extends AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.Examples.BaseClasses.PartialBorehole(
       redeclare
       AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.OneUTube
       borHol(

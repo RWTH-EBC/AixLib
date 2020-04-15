@@ -1,8 +1,7 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MoistureMixingConservationDynamicBalance
   "This test checks if mass and energy is conserved when mixing fluid streams using dynamic balances"
-  extends
-    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation(
+  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation(
     mWatFloSol(k={vol.X_start[1],vol1.X_start[1],vol2.X_start[1]}*m_start),
     vol(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, massDynamics=
          Modelica.Fluid.Types.Dynamics.FixedInitial),

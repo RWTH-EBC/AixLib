@@ -190,7 +190,7 @@ For the mass balance, the following configurations can be selected:
 </tr>
 <tr>
   <td>SteadyStateInitial</td>
-  <td><i>dp(0)/dt</i></td>
+  <td><i>dp(0)/dt=0</i></td>
   <td>Unspecified</td>
   <td><i>dm(t)/dt = &sum; m&#775;(t)</i></td>
 </tr>
@@ -403,7 +403,6 @@ flow resistance.
 </html>"));
 
 end UsersGuide;
-
 
 annotation (
 preferredView="info", Documentation(info="<html>

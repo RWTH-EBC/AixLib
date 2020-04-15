@@ -41,8 +41,8 @@ model PanelHeatingSingle
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={72,64})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort temperature(redeclare package
-      Medium = Medium)
+  Modelica.Fluid.Sensors.TemperatureTwoPort temperature(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{40,8},{60,28}})));
   Modelica.Blocks.Sources.Step     const(
     height=-6,

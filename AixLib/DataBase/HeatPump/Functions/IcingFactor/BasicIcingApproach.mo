@@ -4,6 +4,7 @@ function BasicIcingApproach
   extends PartialBaseFct;
 algorithm
   //Just a placeholder for a future icing function
+  //Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen); 1 means no icing/frosting.
   iceFac :=1;
 
   annotation (Documentation(revisions="<html>

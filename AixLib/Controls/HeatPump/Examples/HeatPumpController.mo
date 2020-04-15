@@ -11,10 +11,9 @@ model HeatPumpController "Example for usage of heat pump controller"
   Modelica.Blocks.Interaction.Show.BooleanValue showOnOff
     "Shows the current value of the on/off signal"
     annotation (Placement(transformation(extent={{66,40},{86,60}})));
-  Interfaces.HeatPumpControlBus heatPumpControlBus
-    "Required to make the signals on the bus accessible"
-                                                   annotation (
-      Placement(transformation(
+  Interfaces.ThermalMachineControlBus heatPumpControlBus
+    "Required to make the signals on the bus accessible" annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,0})));
@@ -62,7 +61,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus.N, showN.numberPort) annotation (Line(
+  connect(heatPumpControlBus.n, showN.numberPort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,70},{58.5,70}},
       color={255,204,51},
       thickness=0.5), Text(
