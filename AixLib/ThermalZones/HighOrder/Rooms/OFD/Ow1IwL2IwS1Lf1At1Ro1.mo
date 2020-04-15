@@ -128,25 +128,23 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=room_height_short,
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     windowarea=0,
     withDoor=false,
     door_height=0,
     door_width=0,
-    WallType=Type_OW)
-    annotation (Placement(transformation(extent={{-64,-12},{-54,46}})));
+    wallPar=Type_OW) annotation (Placement(transformation(extent={{-64,-12},{-54,46}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inner_wall1(
     T0=T0_IW1,
     outside=false,
-    WallType=Type_IWsimple,
+    wallPar=Type_IWsimple,
     wall_length=room_width_long,
-    wall_height=0.5*(room_height_long + room_height_short + room_width_short/
-        room_width_long*(room_height_long - room_height_short)),
+    wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
@@ -156,12 +154,12 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
     T0=T0_IW2a,
     outside=false,
-    WallType=Type_IWload,
+    wallPar=Type_IWload,
     wall_length=room_length - room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
@@ -171,13 +169,12 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     T0=T0_IW3,
     outside=false,
-    WallType=Type_IWsimple,
+    wallPar=Type_IWsimple,
     wall_length=room_width_long,
-    wall_height=0.5*(room_height_long + room_height_short + room_width_short/
-        room_width_long*(room_height_long - room_height_short)),
+    wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
@@ -191,12 +188,12 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
-    WallType=Type_CE,
+    wallPar=Type_CE,
     wall_length=room_length,
     wall_height=room_width_short,
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false,
@@ -207,17 +204,16 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
-    WallType=Type_FL,
+    wallPar=Type_FL,
     wall_length=room_length,
     wall_height=room_width_long,
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false,
-    ISOrientation=2) if withFloorHeating == false annotation (Placement(
-        transformation(
+    ISOrientation=2) if withFloorHeating == false annotation (Placement(transformation(
         origin={-24,-60},
         extent={{-1.99999,-10},{1.99999,10}},
         rotation=90)));
@@ -254,10 +250,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=roof_width,
     withWindow=withWindow3,
     windowarea=windowarea_RO,
-    WallType=Type_RO,
+    wallPar=Type_RO,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=1) annotation (Placement(transformation(
@@ -272,12 +268,12 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
     T0=T0_IW2b,
     outside=false,
-    WallType=Type_IWload,
+    wallPar=Type_IWload,
     wall_length=room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(

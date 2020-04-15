@@ -228,7 +228,7 @@ if (outside) then
   //heat convection on the outside
     if calcMethod == 1 or calcMethod == 2 then
     connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation (Line(
-      points={{-103,64},{-68,64},{-68,50.8},{-46.2,50.8}},
+      points={{-103,64},{-68,64},{-68,51},{-46,51}},
       color={0,0,127}));
   end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation (Line(
@@ -296,10 +296,10 @@ end if;
 
 if outside and withWindow and withSunblind then
     connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation (Line(
-      points={{-22.15,-7.7},{-19,-7.7},{-19,-27.2},{-13.7,-27.2}},
+      points={{-19.5625,-7.375},{-19,-7.375},{-19,-27.2},{-13.7,-27.2}},
       color={255,128,0}));
     connect(SolarRadiationPort, Sunblind.Rad_In[1]) annotation (Line(
-      points={{-106,89},{-56,89},{-56,-7.7},{-42.85,-7.7}},
+      points={{-106,89},{-56,89},{-56,-7.375},{-45.4375,-7.375}},
       color={255,128,0}));
 end if;
 
@@ -317,8 +317,8 @@ end if;
 
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},
           {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
-  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
-          -14},{-54,-14},{-54,-14.2},{-45.84,-14.2}}, color={0,0,127}));
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,-14},{-54,-14},{-54,-13.875},{-45.4375,-13.875}},
+                                                      color={0,0,127}));
 
   annotation (
     Diagram(coordinateSystem(

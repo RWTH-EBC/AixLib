@@ -7,10 +7,9 @@ model Wall
         "Outside Wall",                                                                                                    choice = false
         "Inside Wall",                                                                                                    radioButtons = true));
   // general wall parameters
-  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
-    WallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
-    "Type of wall"
-    annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{2,76},{22,96}})));
+  replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
+    annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
+    Placement(transformation(extent={{2,76},{22,96}})));
 
 
   parameter Modelica.SIunits.Length wall_length = 2 "Length of wall" annotation(Dialog(group = "Room Geometry"));
@@ -91,8 +90,8 @@ model Wall
     l=wall_length,
     T0=T0,
     clearance=clearance,
-    eps=WallType.eps,
-    wallType=WallType,
+    eps=wallPar.eps,
+    wallType=wallPar,
     surfaceOrientation=ISOrientation,
     calcMethod=calcMethodIn,
     hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
@@ -152,7 +151,7 @@ equation
   if outside then
     connect(SolarRadiationPort, SolarAbsorption.solarRad_in) annotation(Line(points={{-106,89},{-48,89},{-48,88.4},{-48.105,88.4}},    color = {255, 128, 0}));
     if calcMethodOut == 1 or calcMethodOut == 2 then
-      connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-103, 64}, {-68, 64}, {-68, 50.8}, {-46.2, 50.8}}, color = {0, 0, 127}));
+      connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points={{-103,64},{-68,64},{-68,51},{-46,51}},                color = {0, 0, 127}));
     end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation(Line(points = {{-47, 58}, {-56, 58}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
     connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points={{-27,58},{-24,58},{-24,25},{4,25}},              color = {191, 0, 0}));
