@@ -1,80 +1,14 @@
 ﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SprayHumidifier "Idealized model of a spray humidifier"
-
-  // parameters
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wat = 4180 "specific heat capacity of water";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_air = 1005 "specific heat capacity of dry air";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_steam = 1860 "specific heat capacity of steam";
-  parameter Modelica.SIunits.Density rho_air = 1.2 "Density of air";
+  extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
   parameter Boolean simplify_m_wat_flow = false "If set to true, mass flow rate and enthalpy of water are not considered in the mass and energy balance";
-  parameter Boolean use_X_set = false "if true, a set humidity is used to calculate the necessary mass flow rate";
   parameter Real k = 500 "exponent for humidification degree";
 
-  // constants
-  constant Modelica.SIunits.SpecificEnthalpy r0 = 2500E3 "specific heat of vaporization at 0°C";
-
   // Variables
-  Modelica.SIunits.SpecificEnthalpy h_airIn "specific enthalpy of incoming air";
-  Modelica.SIunits.SpecificEnthalpy h_airOut "specific enthalpy of outgoing air";
   Modelica.SIunits.SpecificEnthalpy h_watIn "specific enthalpy of incoming water";
 
-  Modelica.SIunits.HeatFlowRate Q_flow "heat flow";
   Real eta_B "humidification degree";
-
-
-  replaceable model PartialPressureDrop =
-      Components.PressureDrop.BaseClasses.partialPressureDrop annotation(choicesAllMatching=true);
-
-      PartialPressureDrop partialPressureDrop(m_flow = m_flow_airIn,
-      rho = rho_air);
-
-  Modelica.Blocks.Interfaces.RealInput m_flow_airIn(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s")
-    "mass flow rate of incoming air"
-    annotation (Placement(transformation(extent={{-140,50},{-100,90}}),
-        iconTransformation(extent={{-120,70},{-100,90}})));
-  Modelica.Blocks.Interfaces.RealInput T_airIn(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC")
-    "temperature of incoming air"
-    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
-        iconTransformation(extent={{-120,40},{-100,60}})));
-  Modelica.Blocks.Interfaces.RealInput X_airIn(
-    final quantity = "MassFraction",
-    final unit = "kg/kg")
-    "absolute humidity of incoming air"
-    annotation (Placement(transformation(extent={{-140,-10},{-100,30}}),
-        iconTransformation(extent={{-120,10},{-100,30}})));
-  Modelica.Blocks.Interfaces.RealOutput m_flow_airOut(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s")
-    "mass flow rate of outgoing air"
-    annotation (Placement(transformation(extent={{100,70},{120,90}})));
-  Modelica.Blocks.Interfaces.RealOutput T_airOut(
-    final quantity="ThermodynamicTemperature",
-    final unit="K",
-    displayUnit="degC")
-    "temperature of outgoing air"
-    annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  Modelica.Blocks.Interfaces.RealOutput X_airOut(
-    final quantity = "MassFraction",
-    final unit = "kg/kg")
-    "absolute humidity of outgoing air"
-    annotation (Placement(transformation(extent={{100,10},{120,30}})));
-  Modelica.Blocks.Interfaces.RealInput m_flow_watIn(
-    final quantity = "MassFlowRate",
-    final unit = "kg/s") if not use_X_set
-    "mass flow rate of water"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={-60,-120}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-60,-110})));
 
   Modelica.Blocks.Interfaces.RealInput T_watIn(
     final quantity="ThermodynamicTemperature",
@@ -84,78 +18,42 @@ model SprayHumidifier "Idealized model of a spray humidifier"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-20,-120}), iconTransformation(
+        origin={-20,-104}), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-30,-110})));
-  Modelica.Blocks.Interfaces.RealOutput dp "pressure difference"
-    annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
-  Modelica.Blocks.Interfaces.RealInput X_set if use_X_set annotation (Placement(
-        transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=-90,
-        origin={0,110})));
+        origin={-30,-94})));
+
+
 protected
-  Modelica.Blocks.Math.Max max
-    annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Real WLN "water to air ratio";
-  Modelica.Blocks.Interfaces.RealInput X_intern "internal mass fraction";
-  Modelica.Blocks.Interfaces.RealInput m_flow_watIntern "internal mass flow rate of water";
 equation
 
   // mass balance
   if simplify_m_wat_flow then
     m_flow_airIn - m_flow_airOut = 0;
   else
-    m_flow_airIn + m_flow_watIntern * eta_B - m_flow_airOut = 0;
+    m_flow_airIn + m_wat_flow_intern * eta_B - m_flow_airOut = 0;
   end if;
 
   if not use_X_set then
-  m_flow_airIn * X_airIn + m_flow_watIntern * eta_B - m_flow_airOut * X_intern = 0;
+  m_flow_airIn * X_airIn + m_wat_flow_intern * eta_B - m_flow_airOut * X_intern = 0;
   else
-  m_flow_watIntern = m_flow_airIn / (1+X_airIn) * (X_intern-X_airIn);
+  m_wat_flow_intern = m_flow_airIn / (1+X_airIn) * (X_intern-X_airIn);
   end if;
 
   // energy balance
-  if simplify_m_wat_flow then
-    h_airIn - h_airOut = 0;
-  else
-    m_flow_airIn * h_airIn + m_flow_watIntern * eta_B * h_watIn - m_flow_airOut * h_airOut = 0;
-  end if;
+  m_flow_airIn * h_airIn + m_wat_flow_intern * eta_B * h_watIn - m_flow_airOut * h_airOut = 0;
 
   // specific enthalpies
-  h_airIn = cp_air * (T_airIn - 273.15) + X_airIn * (cp_steam * (T_airIn - 273.15) + r0);
-  h_airOut = cp_air * (T_airOut - 273.15) + X_intern * (cp_steam * (T_airOut - 273.15) + r0);
-  h_watIn = c_wat * (T_watIn - 273.15);
-
-  // heat flow
-  Q_flow = m_flow_airOut * h_airOut - m_flow_airIn * h_airIn;
+  h_watIn = cp_water * (T_watIn - 273.15);
 
   // water to air ratio
-  WLN = m_flow_watIntern/m_flow_airIn;
+  WLN = m_wat_flow_intern/m_flow_airIn;
 
   // humidification degree
   eta_B = 1 - exp(-k * WLN);
 
-  X_airOut = X_intern;
-
-  partialPressureDrop.dp = dp;
-
-  // conditional connectors
-  connect(max.y,X_intern);
-  connect(m_flow_watIn,m_flow_watIntern);
-
-  connect(X_set, max.u1) annotation (Line(points={{0,110},{0,88},{-50,88},{-50,76},
-          {-42,76}}, color={0,0,127}));
-  connect(X_airIn, max.u2) annotation (Line(points={{-120,10},{-80,10},{-80,64},
-          {-42,64}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Rectangle(
-          extent={{-100,94},{100,-94}},
-          lineColor={0,0,0},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid,
-          lineThickness=0.5),
         Text(
           extent={{-90,84},{-14,66}},
           lineColor={0,0,0},
@@ -216,6 +114,7 @@ equation
 </html>", revisions="<html>
 <ul>
 <li>April, 2019, by Martin Kremer:<br>First Implementation.</li>
+<li>April 2020, by Martin Kremer:<br>Extended from PartialHumidifier. </li>
 </ul>
 </html>"));
 end SprayHumidifier;
