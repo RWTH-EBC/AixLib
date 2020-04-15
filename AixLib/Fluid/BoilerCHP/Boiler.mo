@@ -59,8 +59,7 @@ model Boiler "Boiler with internal and external control"
      50}})));
   replaceable model ExtControl =
     AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC
-     constrainedby
-    AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
+     constrainedby AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
       "External control"
       annotation (Dialog(tab="External Control"),choicesAllMatching=true);
   BaseClasses.Controllers.InternalControl internalControl(

@@ -22,20 +22,14 @@ model ThermalZoneAirExchange
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
 
-  redeclare Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
-    machinesSenHea(
+  redeclare BoundaryConditions.InternalGains.Machines.MachinesAreaSpecific machinesSenHea(
     final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-    final T0=zoneParam.T_start,
-    final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0
-    "Internal gains from machines"
-    annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  redeclare Utilities.Sources.InternalGains.Lights.LightsAreaSpecific lights(
+    final intGainsMachinesRoomAreaSpecific=zoneParam.internalGainsMachinesSpecific,
+    final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from machines" annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
+  redeclare BoundaryConditions.InternalGains.Lights.LightsAreaSpecific lights(
     final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    final T0=zoneParam.T_start,
-    final LightingPower=zoneParam.lightingPowerSpecific,
-    final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
-    annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
+    final lightingPowerRoomAreaSpecific=zoneParam.lightingPowerSpecific,
+    final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light" annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
 
   Modelica.Blocks.Interfaces.RealInput ventTemp(
     final quantity="ThermodynamicTemperature",
@@ -79,8 +73,8 @@ equation
       points={{-51,-62},{-37.6,-62},{-37.6,-45.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{0,-78},{-70,-78},{-70,-68}}, color=
+  connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{0,-78},{-70,-78},{-70,-68}},
+                                                                         color=
           {0,0,127}));
   connect(ventRate, addInfVen.u2) annotation (Line(points={{-40,-100},{-40,-76},
           {-30.4,-76},{-30.4,-45.2}}, color={0,0,127}));

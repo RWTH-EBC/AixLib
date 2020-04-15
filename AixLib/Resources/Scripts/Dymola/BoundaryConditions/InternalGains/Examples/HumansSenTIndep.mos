@@ -1,0 +1,12 @@
+removePlots();
+simulateModel("AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.HumansSenTIndep", startTime=0, stopTime=86400, tolerance=1e-6, method="dassl", resultFile="HumansSenTIndep");
+createPlot(
+ y = {"humanIntGains.uRel"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=2, 
+ y = {"humanIntGains.radHeat.Q_flow", "humanIntGains.convHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

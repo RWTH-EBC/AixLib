@@ -27,11 +27,11 @@ model HeatPump
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
-         dataTable=AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
@@ -53,7 +53,7 @@ model HeatPump
         rotation=270,
         origin={36,38})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1)
-    "Fixed value for icing factor"                   annotation (Placement(
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)"                   annotation (Placement(
         transformation(
         extent={{5,5},{-5,-5}},
         rotation=180,

@@ -1,8 +1,7 @@
 within AixLib.Fluid.Geothermal.Borefields.Data.Configuration;
 record Example
   "Example definition of a configuration data record"
-  extends
-    AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
+  extends AixLib.Fluid.Geothermal.Borefields.Data.Configuration.Template(
       borCon = Types.BoreholeConfiguration.SingleUTube,
       cooBor={{0,0},{0,6},{6,0},{6,6}},
       mBor_flow_nominal=0.3,

@@ -33,8 +33,7 @@ package LiquidFuel_Petrol "Simple petrol fuel for CHP-engine combustion"
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;
 
   record PetrolFuel "Data record for simple petrol fuel"
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
+    extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
     fuelType = "Simple petrol fuel",
     isGasoline = false,
     H_U = 42000000,
