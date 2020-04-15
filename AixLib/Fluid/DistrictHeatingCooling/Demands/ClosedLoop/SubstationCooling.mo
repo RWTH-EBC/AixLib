@@ -15,7 +15,8 @@ model SubstationCooling
     parameter Modelica.SIunits.Temperature deltaT_coolingGridSet "Set temperature difference for cooling on the side of the thermal network";
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = coolingDemand_max / (cp_default * deltaT_coolingGridSet)
+
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = -coolingDemand_max / (cp_default * deltaT_coolingGridSet)
     "Nominal mass flow rate based on max. cooling demand and set temperature difference";
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
@@ -52,15 +53,13 @@ model SubstationCooling
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     allowFlowReversal2=false,
-    dTEva_nominal=-5,
-    dTCon_nominal=6,
-    etaCarnot_nominal=0.3,
+    etaCarnot_nominal=0.45,
     QEva_flow_nominal=coolingDemand_max,
     QEva_flow_min=coolingDemand_max)
                       annotation (Placement(transformation(
-        extent={{-15,10},{15,-10}},
+        extent={{-9,9},{9,-9}},
         rotation=180,
-        origin={9,-6})));
+        origin={3,-5})));
   AixLib.Fluid.Sources.MassFlowSource_T coolingReturnBuilding(
     use_m_flow_in=true,
     use_T_in=true,
@@ -82,31 +81,37 @@ model SubstationCooling
   Modelica.Blocks.Sources.Constant const1(k=-(cp_default*deltaT_coolingGridSet))
     annotation (Placement(transformation(extent={{-24,50},{-12,62}})));
   Modelica.Blocks.Math.Division division1
-    "calculation of mass flow rate needed from dhc grid for cooling"
+    "Calculation of mass flow rate needed from dhc grid for cooling"
     annotation (Placement(transformation(extent={{-2,64},{12,78}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W")
     "Input for cooling demand profile of substation (negative values for cooling)"
-    annotation (Placement(transformation(extent={{-166,60},{-126,100}})));
+    annotation (Placement(transformation(extent={{-166,74},{-126,114}}),
+        iconTransformation(extent={{-166,74},{-126,114}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTemChiOut(redeclare package Medium =
         Medium, m_flow_nominal=m_flow_nominal)
-    annotation (Placement(transformation(extent={{-82,-10},{-62,12}})));
+    annotation (Placement(transformation(extent={{-82,-6},{-66,8}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
   "Supply temperature of the cooling circuit in the building"
-    annotation (Placement(transformation(extent={{-166,16},{-126,56}})));
+    annotation (Placement(transformation(extent={{-166,28},{-126,68}}),
+        iconTransformation(extent={{-166,28},{-126,68}})));
   Modelica.Blocks.Math.Add add(k2=+1)
     annotation (Placement(transformation(extent={{-92,-80},{-72,-60}})));
   Modelica.Blocks.Math.Add add1(k2=-1)
     annotation (Placement(transformation(extent={{-44,64},{-24,84}})));
   Modelica.Blocks.Interfaces.RealOutput powerDemandChiller(unit="W")
   "Power demand of chiller"
-    annotation (Placement(transformation(extent={{100,86},{120,106}})));
+    annotation (Placement(transformation(extent={{96,90},{116,110}}),
+        iconTransformation(extent={{96,90},{116,110}})));
   Modelica.Blocks.Interfaces.RealOutput powerDemandPump(unit="W")
   "Power demand of distribution pump"
-    annotation (Placement(transformation(extent={{100,66},{120,86}})));
+    annotation (Placement(transformation(extent={{96,66},{116,86}}),
+        iconTransformation(extent={{96,66},{116,86}})));
   Modelica.Blocks.Interfaces.RealOutput powerDemandSubstation(unit="W")
-    annotation (Placement(transformation(extent={{100,36},{120,56}})));
+  "Power demand of substation (sum of chiller and distribution pump)"
+    annotation (Placement(transformation(extent={{96,42},{116,62}}),
+        iconTransformation(extent={{96,42},{116,62}})));
   Modelica.Blocks.Math.Sum sum1(nin=1)
-    "adds power demand for chiller and distribution pump"
+    "Adds power demand for chiller and distribution pump"
     annotation (Placement(transformation(extent={{68,36},{88,56}})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     "switches cooling demand profile from positiv to negativ values"
@@ -123,48 +128,52 @@ equation
           -10,66},{-3.4,66},{-3.4,66.8}},
                                    color={0,0,127}));
   connect(chiller.port_b2, coolingSupplyBuilding.ports[1]) annotation (Line(
-        points={{24,-12},{40,-12},{40,-54},{44,-54}}, color={0,127,255}));
-  connect(pumpCooling.port_b, chiller.port_a1)
-    annotation (Line(points={{48,0},{24,0},{24,-3.55271e-15}},
+        points={{12,-10.4},{40,-10.4},{40,-54},{44,-54}},
                                                       color={0,127,255}));
-  connect(chiller.port_b1, senTemChiOut.port_b) annotation (Line(points={{-6,0},
-          {-10,0},{-10,1},{-62,1}}, color={0,0,127}));
-  connect(senTemChiOut.port_a, vol.ports[2])
-    annotation (Line(points={{-82,1},{-118,1},{-118,6}}, color={0,127,255}));
+  connect(pumpCooling.port_b, chiller.port_a1)
+    annotation (Line(points={{48,0},{12,0},{12,0.4}}, color={0,127,255}));
   connect(add.y, coolingReturnBuilding.T_in) annotation (Line(points={{-71,-70},
           {-58,-70},{-58,-50},{-48,-50}}, color={0,0,127}));
   connect(deltaT_coolingBuildingSite.y, add.u2) annotation (Line(points={{-105,-84},
           {-100,-84},{-100,-76},{-94,-76}},      color={0,0,127}));
-  connect(T_supplyCoolingSet, add.u1) annotation (Line(points={{-146,36},{-102,36},
+  connect(T_supplyCoolingSet, add.u1) annotation (Line(points={{-146,48},{-102,48},
           {-102,-64},{-94,-64}}, color={0,0,127}));
   connect(add1.y, division1.u1) annotation (Line(points={{-23,74},{-16,74},{-16,
           75.2},{-3.4,75.2}}, color={0,0,127}));
-  connect(chiller.P, add1.u2) annotation (Line(points={{-7.5,-6},{-54,-6},{-54,68},
+  connect(chiller.P, add1.u2) annotation (Line(points={{-6.9,-5},{-54,-5},{-54,68},
           {-46,68}},     color={0,0,127}));
   connect(division1.y, pumpCooling.m_flow_in)
     annotation (Line(points={{12.7,71},{58,71},{58,12}},color={0,0,127}));
-  connect(chiller.P, powerDemandChiller) annotation (Line(points={{-7.5,-6},{-54,
-          -6},{-54,96},{110,96}},                            color={0,0,127}));
+  connect(chiller.P, powerDemandChiller) annotation (Line(points={{-6.9,-5},{-54,
+          -5},{-54,100},{106,100}},                          color={0,0,127}));
   connect(pumpCooling.P, powerDemandPump) annotation (Line(points={{47,9},{46,9},
-          {46,76},{110,76}},        color={0,0,127}));
+          {46,76},{106,76}},        color={0,0,127}));
   connect(sum1.y, powerDemandSubstation)
-    annotation (Line(points={{89,46},{110,46}}, color={0,0,127}));
-  connect(chiller.P, sum1.u[1]) annotation (Line(points={{-7.5,-6},{-54,-6},{-54,
+    annotation (Line(points={{89,46},{98,46},{98,52},{106,52}},
+                                                color={0,0,127}));
+  connect(chiller.P, sum1.u[1]) annotation (Line(points={{-6.9,-5},{-54,-5},{-54,
           46},{66,46}},      color={0,0,127}));
   connect(coolingDemand, gain.u)
-    annotation (Line(points={{-146,80},{-120,80}}, color={0,0,127}));
+    annotation (Line(points={{-146,94},{-134,94},{-134,80},{-120,80}},
+                                                   color={0,0,127}));
   connect(gain.y, add1.u1)
     annotation (Line(points={{-97,80},{-46,80}}, color={0,0,127}));
   connect(gain.y, division.u1) annotation (Line(points={{-97,80},{-90,80},{-90,-26.8},
           {-73.4,-26.8}},            color={0,0,127}));
-  connect(T_supplyCoolingSet, chiller.TSet) annotation (Line(points={{-146,36},{
-          36,36},{36,3},{27,3}}, color={0,0,127}));
+  connect(T_supplyCoolingSet, chiller.TSet) annotation (Line(points={{-146,48},{
+          36,48},{36,3.1},{13.8,3.1}},
+                                 color={0,0,127}));
   connect(const.y, division.u2) annotation (Line(points={{-83.4,-40},{-80,-40},{
           -80,-35.2},{-73.4,-35.2}}, color={0,0,127}));
   connect(division.y, coolingReturnBuilding.m_flow_in) annotation (Line(points={
           {-57.3,-31},{-54,-31},{-54,-46},{-48,-46}}, color={0,0,127}));
   connect(chiller.port_a2, coolingReturnBuilding.ports[1]) annotation (Line(
-        points={{-6,-12},{-22,-12},{-22,-54},{-26,-54}}, color={0,127,255}));
+        points={{-6,-10.4},{-22,-10.4},{-22,-54},{-26,-54}},
+                                                         color={0,127,255}));
+  connect(senTemChiOut.port_b, chiller.port_b1) annotation (Line(points={{-66,1},
+          {-34,1},{-34,0.4},{-6,0.4}}, color={0,127,255}));
+  connect(vol.ports[2], senTemChiOut.port_a) annotation (Line(points={{-118,6},{
+          -118,6},{-118,1},{-82,1}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {100,120}}), graphics={
         Rectangle(
@@ -207,6 +216,8 @@ Add documentaion </li>
 Implemented </li>
 </ul>
 </html>", info="<html>
-<p>Substation model for bidirectional low-temperature networks with chiller and fixed temperature difference (parameter) on network side. This model uses the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>. </p>
+<p>Substation model for bidirectional low-temperature networks with chiller and fixed temperature difference (parameter) on network side. 
+This model uses the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
+The supply temperature of buildings cooling system must be set be using the input T_supplyCoolingSet.  </p>
 </html>"));
 end SubstationCooling;
