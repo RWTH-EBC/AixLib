@@ -95,8 +95,8 @@ model Wall
     wallType=WallType,
     surfaceOrientation=ISOrientation,
     calcMethod=calcMethodIn,
-    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
-  Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
+    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{6,36}})));
+  Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == 1 or calcMethodOut == 2)
@@ -136,30 +136,27 @@ equation
   // **********************standard connection************************
   //******************************************************************
   connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
-      points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
+      points={{6,31.82},{48,31.82},{48,4.8},{58.6,4.8}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{6,25},{48,25},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
   //******************************************************************
   // **********************standard connection for inside wall********
   //******************************************************************
   if not outside then
-    connect(Wall.port_a, port_outside) annotation(Line(points={{-20,24},{-56.45,
-            24},{-56.45,4},{-98,4}},                                                                                color = {191, 0, 0}));
+    connect(Wall.port_a, port_outside) annotation(Line(points={{-20,25},{-56.45,25},{-56.45,4},{-98,4}},            color = {191, 0, 0}));
   end if;
   //******************************************************************
   // ********************standard connection for outside wall*********
   //******************************************************************
   if outside then
-    connect(SolarRadiationPort, SolarAbsorption.solarRad_in) annotation(Line(points = {{-106, 89}, {-77, 89}, {-77, 87}, {-49.1, 87}}, color = {255, 128, 0}));
+    connect(SolarRadiationPort, SolarAbsorption.solarRad_in) annotation(Line(points={{-106,89},{-48,89},{-48,88.4},{-48.105,88.4}},    color = {255, 128, 0}));
     if calcMethodOut == 1 or calcMethodOut == 2 then
       connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-103, 64}, {-68, 64}, {-68, 50.8}, {-46.2, 50.8}}, color = {0, 0, 127}));
     end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation(Line(points = {{-47, 58}, {-56, 58}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
-    connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points={{-27,58},
-            {-24,58},{-24,24},{-20,24}},                                                                                       color = {191, 0, 0}));
-    connect(SolarAbsorption.heatPort, Wall.port_a) annotation(Line(points={{-30,87},
-            {-26,87},{-26,84},{-20,84},{-20,24}},                                                                                        color = {191, 0, 0}));
+    connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points={{-27,58},{-24,58},{-24,25},{-20,25}},            color = {191, 0, 0}));
+    connect(SolarAbsorption.heatPort, Wall.port_a) annotation(Line(points={{-28.05,88.4},{-28,88.4},{-28,88},{-20,88},{-20,25}},         color = {191, 0, 0}));
   end if;
   //******************************************************************
   // *******standard connections for wall with door************
