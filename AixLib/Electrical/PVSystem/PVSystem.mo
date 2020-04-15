@@ -2,6 +2,11 @@ within AixLib.Electrical.PVSystem;
 model PVSystem
   "Model that determines the DC performance of a Silicium-based PV array"
 
+ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
+ constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
+ "PV Panel data definition"
+                           annotation (choicesAllMatching);
+
  replaceable model IVCharacteristics =
     AixLib.Electrical.PVSystem.BaseClasses.PartialIVCharacteristics
     "Model for determining the I-V characteristics of a PV array" annotation (choicesAllMatching=
@@ -10,32 +15,27 @@ model PVSystem
  replaceable model CellTemperature =
     AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature
     "Model for determining the cell temperature of a PV array" annotation (choicesAllMatching=
-    true);
-
- replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
- constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
- "PV Panel data definition"
-                           annotation (choicesAllMatching);
+    true, Dialog(tab="Mounting"));
 
  parameter Real n_mod
     "Number of connected PV modules";
  parameter Modelica.SIunits.Angle til
  "Surface's tilt angle (0:flat)"
-  annotation (Dialog(group="Geometry"));
+  annotation (Dialog(tab="Mounting"));
  parameter Modelica.SIunits.Angle azi
    "Surface's azimut angle (0:South)"
-   annotation (Dialog(group="Geometry"));
+   annotation (Dialog(tab="Mounting"));
  parameter Modelica.SIunits.Angle lat
  "Location's Latitude"
-   annotation (Dialog(group="Location"));
+   annotation (Dialog(tab="Location"));
  parameter Modelica.SIunits.Angle lon
  "Location's Longitude"
-   annotation (Dialog(group="Location"));
+   annotation (Dialog(tab="Location"));
  parameter Real alt(final quantity="Length", final unit="m")
    "Site altitude in Meters, default= 1"
-   annotation (Dialog(group="Location"));
+   annotation (Dialog(tab="Location"));
  parameter Modelica.SIunits.Time timZon(displayUnit="h")
-    "Time zone. Should be equal with timZon in ReaderTMY3, if PVSystem and ReaderTMY3 are used together." annotation (Dialog(group="Location"));
+    "Time zone. Should be equal with timZon in ReaderTMY3, if PVSystem and ReaderTMY3 are used together." annotation (Dialog(tab="Location"));
  parameter Real groRef(final unit="1") = 0.2
   "Ground reflectance (default=0.2)
   Urban environment: 0.14 - 0.22
@@ -51,22 +51,22 @@ model PVSystem
   Copper: 0.74
   New galvanized steel: 0.35
   Very dirty galvanized steel: 0.08"
-  annotation (Dialog(group="Location"));
+  annotation (Dialog(tab="Location"));
 
   parameter Boolean use_ParametersGlaz=false
-    "= false if standard values for glazing can be used" annotation(choices(checkBox=true));
+    "= false if standard values for glazing can be used" annotation(choices(checkBox=true),Dialog(tab="Glazing"));
 
   parameter Real glaExtCoe(final unit="1/m") = 4
   "Glazing extinction coefficient (for glass = 4)" annotation(Dialog(enable=
-          use_ParametersGlaz));
+          use_ParametersGlaz, tab="Glazing"));
 
   parameter Real glaThi(final unit="m") = 0.002
   "Glazing thickness (for most cells = 0.002 m)" annotation(Dialog(enable=
-          use_ParametersGlaz));
+          use_ParametersGlaz, tab="Glazing"));
 
   parameter Real refInd(final unit="1", min=0) = 1.526
   "Effective index of refraction of the cell cover (glass = 1.526)" annotation(Dialog(enable=
-          use_ParametersGlaz));
+          use_ParametersGlaz, tab="Glazing"));
 
   IVCharacteristics iVCharacteristics(n_mod=n_mod, data=data)
     "Model for determining the I-V characteristics of a PV array" annotation (
