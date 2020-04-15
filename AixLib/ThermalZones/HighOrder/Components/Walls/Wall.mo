@@ -95,7 +95,7 @@ model Wall
     wallType=WallType,
     surfaceOrientation=ISOrientation,
     calcMethod=calcMethodIn,
-    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{-20,14},{6,36}})));
+    hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -107,7 +107,7 @@ model Wall
     final Imax=LimitSolIrr,
     final TOutAirLimit=TOutAirLimit) if
                          outside and withWindow and withSunblind
-    annotation (Placement(transformation(extent={{-44,-21},{-21,5}})));
+    annotation (Placement(transformation(extent={{-46,-47},{-23,-21}})));
   WindowsDoors.Door Door(
     T0=T0,
     door_area=door_height*door_width,
@@ -127,7 +127,7 @@ model Wall
   AixLib.Utilities.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor if outside and withWindow and withSunblind
     "Outdoor air (dry bulb) temperature sensor"
-    annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
+    annotation (Placement(transformation(extent={{-70,-44},{-62,-36}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -136,15 +136,15 @@ equation
   // **********************standard connection************************
   //******************************************************************
   connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
-      points={{6,31.82},{48,31.82},{48,4.8},{58.6,4.8}},
+      points={{30,31.82},{48,31.82},{48,4.8},{58.6,4.8}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{6,25},{48,25},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{30,25},{48,25},{48,-6.1},{58.9,-6.1}},color={191,0,0}));
   //******************************************************************
   // **********************standard connection for inside wall********
   //******************************************************************
   if not outside then
-    connect(Wall.port_a, port_outside) annotation(Line(points={{-20,25},{-56.45,25},{-56.45,4},{-98,4}},            color = {191, 0, 0}));
+    connect(Wall.port_a, port_outside) annotation(Line(points={{4,25},{-56.45,25},{-56.45,4},{-98,4}},              color = {191, 0, 0}));
   end if;
   //******************************************************************
   // ********************standard connection for outside wall*********
@@ -155,8 +155,9 @@ equation
       connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-103, 64}, {-68, 64}, {-68, 50.8}, {-46.2, 50.8}}, color = {0, 0, 127}));
     end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation(Line(points = {{-47, 58}, {-56, 58}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
-    connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points={{-27,58},{-24,58},{-24,25},{-20,25}},            color = {191, 0, 0}));
-    connect(SolarAbsorption.heatPort, Wall.port_a) annotation(Line(points={{-28.05,88.4},{-28,88.4},{-28,88},{-20,88},{-20,25}},         color = {191, 0, 0}));
+    connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points={{-27,58},{-24,58},{-24,25},{4,25}},              color = {191, 0, 0}));
+    connect(SolarAbsorption.heatPort, Wall.port_a) annotation(Line(points={{-28.05,88.4},{-28,88.4},{-28,88},{-16,88},{-16,26},{4,26},{4,25}},
+                                                                                                                                         color = {191, 0, 0}));
   end if;
   //******************************************************************
   // *******standard connections for wall with door************
@@ -178,28 +179,29 @@ equation
         color={95,95,95},
         pattern=LinePattern.Solid));
     connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
-    connect(windowSimple.port_outside, port_outside) annotation(Line(points = {{-13.7, -36.3}, {-56, -36.3}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
+    connect(windowSimple.port_outside, port_outside) annotation(Line(points={{-13.7,-36.3},{-16,-36.3},{-16,-54},{-92,-54},{-92,4},{-98,4}},
+                                                                                                                                  color = {191, 0, 0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window without sunblind****
   //******************************************************************
   if outside and withWindow and not withSunblind then
-    connect(windowSimple.solarRad_in, SolarRadiationPort) annotation(Line(points = {{-13.7, -27.2}, {-81, -27.2}, {-81, 89}, {-106, 89}}, color = {255, 128, 0}));
+    connect(windowSimple.solarRad_in, SolarRadiationPort) annotation(Line(points={{-13.7,-27.2},{-16,-27.2},{-16,-16},{-80,-16},{-80,89},{-106,89}},
+                                                                                                                                          color = {255, 128, 0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window and sunblind****
   //******************************************************************
   if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points={{-22.15,
-            -6.7},{-18,-6.7},{-18,-27.2},{-13.7,-27.2}},                                                                                         color = {255, 128, 0}));
-    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-42.85,
-            -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}));
+    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points={{-21.5625,-32.375},{-20,-32.375},{-20,-27.2},{-13.7,-27.2}},  color = {255, 128, 0}));
+    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-47.4375,-32.375},{-50,-32.375},{-50,-16},{-80,-16},{-80,89},{-106,89}},
+                                                                                                                                   color = {255, 128, 0}));
   end if;
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
-  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
-          -14},{-54,-14},{-54,-13.2},{-45.84,-13.2}}, color={0,0,127}));
-  connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},
-          {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-62,-40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
+                                                      color={0,0,127}));
+  connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},
+                                        color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
