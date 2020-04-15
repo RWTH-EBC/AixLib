@@ -3,5 +3,6 @@ IVCharacteristics5pAnalytical
 PartialCellTemperature
 CellTemperatureOpenRack
 CellTemperatureMountingCloseToGround
+CellTemperatureMountingContactToGround
 Wsimple
 PVRadiationHorizontal

@@ -175,6 +175,8 @@ equation
 <p>Module is installed on open rack based on Duffie et al.. Here, the resulting cell temperature is usually lower compared to the cell temperature model <i>CellTemperatureMountingCloseToGround </i>resulting in higher efficiencies. </p>
 <p>CellTemperatureMountingCloseToGround: </p>
 <p>Module is installed close to ground (e.g. on roof) based on King et al.</p>
+<p>CellTemperatureMountingContactToGround:</p>
+<p>Module is installed in contact to ground (e.g. integrated in roof) based on King et al.</p>
 <p>If line losses are not known, the model CellTemperatureMountingCloseToGround can be used for a more conservative estimation of PV DC power output. This is due to the fact that line losses are not included in the calculation process.</p>
 <h4>Known limitations</h4>
 <ul>
