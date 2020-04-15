@@ -75,7 +75,9 @@ replaceable package Medium2 =
     m2_flow_nominal=m2_flow_nominal,
     T_start=T_start,
     tau=tau,
-    T_amb=T_amb) if usePreheater
+    T_amb=T_amb,
+    energyDynamics=energyDynamics) if
+                    usePreheater
     annotation (Dialog(enable=usePreheater, group="Preheater"),Placement(transformation(extent={{-154,-46},{-110,14}})));
   RegisterModule cooler(
     redeclare package Medium1 = Medium1,
@@ -86,7 +88,8 @@ replaceable package Medium2 =
     m2_flow_nominal=m2_flow_nominal,
     T_start=T_start,
     tau=tau,
-    T_amb=T_amb)
+    T_amb=T_amb,
+    energyDynamics=energyDynamics)
     annotation (Dialog(enable=true, group="Cooler"),Placement(transformation(extent={{2,-46},{46,14}})));
   RegisterModule heater(
     redeclare package Medium1 = Medium1,
@@ -97,7 +100,8 @@ replaceable package Medium2 =
     m2_flow_nominal=m2_flow_nominal,
     T_start=T_start,
     tau=tau,
-    T_amb=T_amb)
+    T_amb=T_amb,
+    energyDynamics=energyDynamics)
     annotation (Dialog(enable=true, group="Heater"),Placement(transformation(extent={{76,-46},{120,14}})));
   Fluid.HeatExchangers.DynamicHX dynamicHX(
     redeclare package Medium1 = Medium1,
@@ -106,6 +110,7 @@ replaceable package Medium2 =
     final allowFlowReversal2=allowFlowReversal1,
     final m1_flow_nominal=m1_flow_nominal,
     final m2_flow_nominal=m1_flow_nominal,
+    energyDynamics=energyDynamics,
     final T1_start=T_start,
     final T2_start=T_start)
     annotation (Dialog(enable=true, group="Heat recovery heat exchanger"),Placement(transformation(extent={{-20,-10},{-62,42}})));
@@ -165,6 +170,7 @@ replaceable package Medium2 =
         iconTransformation(extent={{108,-110},{128,-90}})));
   Fluid.Movers.FlowControlled_dp fanSup(
     redeclare package Medium = Medium1,
+    energyDynamics=energyDynamics,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
@@ -176,6 +182,7 @@ replaceable package Medium2 =
     annotation (Placement(transformation(extent={{156,-10},{176,10}})));
   Fluid.Movers.FlowControlled_dp fanRet(
     redeclare package Medium = Medium1,
+    energyDynamics=energyDynamics,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
@@ -193,6 +200,7 @@ replaceable package Medium2 =
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
+    energyDynamics=energyDynamics,
     T_start=T_start) if
                        useHumidifier "Steam or adiabatic humdifier in supply canal"
     annotation (Dialog(enable=useHumidifier, group="Humidifiers"), Placement(transformation(extent={{130,-10},{150,10}})));
@@ -200,6 +208,7 @@ replaceable package Medium2 =
     redeclare package Medium = Medium1,
     final allowFlowReversal=allowFlowReversal1,
     final m_flow_nominal=m1_flow_nominal,
+    energyDynamics=energyDynamics,
     steamHumidifier=false) if useHumidifierRet
     "Adiabatic humidifier in retrun canal: cools inlet air of heat recovery system"
     annotation (Dialog(enable=useHumidifierRet, group="Humidifiers"), Placement(

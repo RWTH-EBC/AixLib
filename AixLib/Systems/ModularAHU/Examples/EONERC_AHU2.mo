@@ -1,5 +1,5 @@
 within AixLib.Systems.ModularAHU.Examples;
-model GenericAHU_AHU2
+model EONERC_AHU2
   "GenericAHU model with parameters of air-handling unit 2 of the E.ON ERC test hall"
   extends Modelica.Icons.Example;
   AixLib.Systems.ModularAHU.GenericAHU genericAHU(
@@ -219,4 +219,4 @@ equation
 <li>October 29, 2019, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"));
-end GenericAHU_AHU2;
+end EONERC_AHU2;

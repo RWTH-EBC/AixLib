@@ -11,7 +11,7 @@ model CtrAHUBasic "Simple controller for AHU"
     annotation (dialog(group="Fan Controller"));
   parameter Real dpMax=5000 "Maximal pressure difference of the fans [Pa]"
     annotation (dialog(group="Fan Controller"));
-  parameter Boolean useTwoFanCont=false
+  parameter Boolean useTwoFanCtr=false
     "If True, a PID for each of the two fans is used. Use two PID controllers for open systems (if the air canal is not closed)."
     annotation (dialog(group="Fan Controller"));
   parameter Real k=50 "Gain of controller"
@@ -69,7 +69,7 @@ model CtrAHUBasic "Simple controller for AHU"
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
     y_start=y_start,
     final reverseAction=false,
-    final reset=AixLib.Types.Reset.Disabled) if useTwoFanCont
+    final reset=AixLib.Types.Reset.Disabled) if useTwoFanCtr
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
   Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet)
     annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
@@ -196,7 +196,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  if not useTwoFanCont then
+  if not useTwoFanCtr then
     connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points=
             {{21,-50},{100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
         string="%second",
@@ -229,5 +229,14 @@ equation
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Control")}), Diagram(coordinateSystem(preserveAspectRatio=
-           false)));
+           false)),
+    Documentation(info="<html>
+<p>This control uses the heating and cooling register to regulate the supply air temperature. The set point of the supply air can be given either by the parameter <i>TFlowSet </i>or by the external input variable <i>Tset.</i> The preheater use used for frost protection and has a fixed set point of 5&deg;C. The heat recovery system is always used and the bypass closed. The supply and return air flaps are always open. </p>
+<p>The volume flow is controlled by PID controllers with two options: </p>
+<ul>
+<li>useTwoFanCtr = False: the supply and return air fans are controlled by only one PID controller. Both fans get the same pressure setpoint. This option is recommended for closed systems where the supply air volume flow is equal to the return air volume flow. Without this option, only one fan could be active to provide volume flow.</li>
+<li>useTwoFanCtr = True: The supply air fan and the return air fan are controlled separately. Each controller aims to reach the volume flow set point for the supply or return air chanal. This option is recommended for open systems.</li>
+</ul>
+<p><br>The maximal volume flow can be limited by the maximal pressure difference of the fans <i>dpMax</i>.</p>
+</html>"));
 end CtrAHUBasic;
