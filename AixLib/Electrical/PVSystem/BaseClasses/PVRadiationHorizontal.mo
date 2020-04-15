@@ -1,10 +1,6 @@
 ﻿within AixLib.Electrical.PVSystem.BaseClasses;
 model PVRadiationHorizontal "PV radiation and absorptance model - input: total irradiance on horizontal plane"
 
-
- Real nDay(final quantity="Time",final unit="s")
-    "Day number with units of seconds";
-
  parameter Real lat(final quantity = "Angle",
    final unit = "rad",
    displayUnit = "deg") "Latitude"
@@ -31,146 +27,138 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
    "Module surface azimuth. azi=-90 degree if normal of surface outward unit points towards east; azi=0 if it points towards south"
    annotation ();
 
-  Real cloTim(final quantity="Time",
-   final unit="s", displayUnit="h")
-   "Local clock time";
-
  parameter Real timZon(final quantity="Time",
    final unit="s", displayUnit="h")
    "Time zone in seconds relative to GMT"
    annotation ();
 
- parameter Real groRef(final unit="1")
-   "Ground refelctance"
+ parameter Real groRef(final unit="1") "Ground refelctance"
    annotation ();
 
- Real radHorBea(final quantity="Irradiance",
-   final unit= "W/m2")
-   "Beam solar radiation on the horizontal surface";
-
- Real radHorDif(final quantity="Irradiance",
-   final unit= "W/m2")
-   "Diffuse solar radiation on the horizontal surface";
-
-
-// Air mass parameters for mono-SI
+ // Air mass parameters for mono-SI
   parameter Real b_0=0.935823;
   parameter Real b_1=0.054289;
   parameter Real b_2=-0.008677;
   parameter Real b_3=0.000527;
   parameter Real b_4=-0.000011;
 
+  parameter Real radTil0(final quantity="Irradiance",
+  final unit= "W/m2") = 1000 "total solar radiation on the horizontal surface 
+  under standard conditions";
 
- parameter Real radTil0(final quantity="Irradiance",
-  final unit= "W/m2") = 1000 "total solar radiation on the horizontal surface under standard conditions";
 
-
- parameter Real G_sc(final quantity="Irradiance",
+  parameter Real G_sc(final quantity="Irradiance",
   final unit = "W/m2") = 1376 "Solar constant";
 
- Real k_t(final unit="1", start=0.5)
-  "Clearness index";
+  parameter Real glaExtCoe(final unit="1/m") = 4
+  "Glazing extinction coefficient for glass";
 
- Real airMas(final unit="1", min=0)
-  "Air mass";
+  parameter Real glaThi(final unit="m") = 0.002
+  "Glazing thickness for most PV cell panels";
 
- Real airMasMod(final unit="1", min=0)
-  "Air mass modifier";
+  parameter Real refInd(final unit="1", min=0) = 1.526
+  "Effective index of refraction of the cell cover (glass)";
 
- Modelica.SIunits.Angle incAngGro
-  "Incidence angle for ground reflection";
-
- Modelica.SIunits.Angle incAngDif
-  "Incidence angle for diffuse radiation";
-
- Real incAngMod(final unit="1", min=0)
-  "Incidence angle modifier";
-
- Real incAngModGro(final unit="1", min=0)
-  "Incidence angle modifier for ground refelction";
-
- Real incAngModDif(final unit="1", min=0)
-  "Incidence angle modifier for diffuse radiation";
-
- Modelica.SIunits.Angle refAng
-  "Angle of refraction";
-
- Modelica.SIunits.Angle refAngGro
-  "Angle of refraction for ground reflection";
-
- Modelica.SIunits.Angle refAngDif
-  "Angle of refraction for diffuse irradiation";
-
- parameter Real tau_0(final unit="1", min=0)=
+  parameter Real tau_0(final unit="1", min=0)=
    exp(-(glaExtCoe*glaThi))*(1 - ((refInd - 1)/(refInd + 1))
   ^2) "Transmittance at standard conditions (incAng=refAng=0)";
 
- Real tau(final unit="1", min=0)
+  Real cloTim(final quantity="Time",
+   final unit="s", displayUnit="h")
+   "Local clock time";
+
+  Real nDay(final quantity="Time",final unit="s")
+    "Day number with units of seconds";
+
+  Real radHorBea(final quantity="Irradiance",
+   final unit= "W/m2")
+   "Beam solar radiation on the horizontal surface";
+
+  Real radHorDif(final quantity="Irradiance",
+   final unit= "W/m2")
+   "Diffuse solar radiation on the horizontal surface";
+
+  Real k_t(final unit="1", start=0.5) "Clearness index";
+
+  Real airMas(final unit="1", min=0) "Air mass";
+
+  Real airMasMod(final unit="1", min=0) "Air mass modifier";
+
+  Modelica.SIunits.Angle incAngGro "Incidence angle for ground reflection";
+
+  Modelica.SIunits.Angle incAngDif "Incidence angle for diffuse radiation";
+
+  Real incAngMod(final unit="1", min=0) "Incidence angle modifier";
+
+  Real incAngModGro(final unit="1", min=0) "Incidence angle modifier for ground refelction";
+
+  Real incAngModDif(final unit="1", min=0)
+  "Incidence angle modifier for diffuse radiation";
+
+  Modelica.SIunits.Angle refAng "Angle of refraction";
+
+  Modelica.SIunits.Angle refAngGro "Angle of refraction for ground reflection";
+
+  Modelica.SIunits.Angle refAngDif "Angle of refraction for diffuse irradiation";
+
+  Real tau(final unit="1", min=0)
   "Transmittance of the cover system";
 
- Real tau_ground(final unit="1", min=0)
+  Real tau_ground(final unit="1", min=0)
   "Transmittance of the cover system for ground reflection";
 
- Real tau_diff(final unit="1", min=0)
+  Real tau_diff(final unit="1", min=0)
   "Transmittance of the cover system for diffuse radiation";
 
- parameter Real glaExtCoe(final unit="1/m") = 4
-  "Glazing extinction coefficient for glass";
-
- parameter Real glaThi(final unit="m") = 0.002
-  "Glazing thickness for most PV cell panels";
-
- parameter Real refInd(final unit="1", min=0) = 1.526
-  "Effective index of refraction of the cell cover (glass)";
-
- Real R_b(final unit="1", min=0)
+  Real R_b(final unit="1", min=0)
    "Ratio of irradiance on tilted surface to horizontal surface";
 
- Modelica.Blocks.Interfaces.RealInput radHor(final quantity="Irradiance",
-   final unit= "W/m2")
-   "Total solar irradiance on the horizontal surface"
-   annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 
- Modelica.SIunits.Angle zen
+  Modelica.SIunits.Angle zen
   "Zenith angle";
 
- AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle
     solHouAng
     "Solar hour angle";
 
- AixLib.BoundaryConditions.WeatherData.BaseClasses.LocalCivilTime locTim(
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.LocalCivilTime locTim(
     timZon=timZon,
     lon=lon)
     "Block that computes the local civil time";
 
- AixLib.BoundaryConditions.WeatherData.BaseClasses.SolarTime solTim
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.SolarTime solTim
     "Block that computes the solar time";
 
- AixLib.BoundaryConditions.WeatherData.BaseClasses.EquationOfTime eqnTim
+  AixLib.BoundaryConditions.WeatherData.BaseClasses.EquationOfTime eqnTim
     "Block that computes the equation of time";
 
- AixLib.BoundaryConditions.SolarGeometry.BaseClasses.DeclinationSpencer decAng
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.DeclinationSpencer decAng
     "Declination angle";
 
- AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngleDuffie incAng(
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngleDuffie incAng(
    azi=azi,
    til=til,
    lat=lat) "Incidence angle";
 
- AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zenAng(
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zenAng(
    lat=lat) "Zenith angle";
 
- Utilities.Time.ModelTime modTim "Block that outputs simulation time";
+  Utilities.Time.ModelTime modTim "Block that outputs simulation time";
 
 
- Modelica.Blocks.Interfaces.RealOutput radTil(final quantity="Irradiance",
+  Modelica.Blocks.Interfaces.RealOutput radTil(final quantity="Irradiance",
    final unit= "W/m2")
    "Total solar radiation on the tilted surface"
    annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
 
- Modelica.Blocks.Interfaces.RealOutput absRadRat(final unit= "1", min=0)
+  Modelica.Blocks.Interfaces.RealOutput absRadRat(final unit= "1", min=0)
    "Ratio of absorbed radiation under operating conditions to standard conditions"
    annotation (Placement(transformation(extent={{100,50},{120,70}})));
+
+  Modelica.Blocks.Interfaces.RealInput radHor(final quantity="Irradiance",
+   final unit= "W/m2")
+   "Total solar irradiance on the horizontal surface"
+   annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 
 equation
 
@@ -206,7 +194,6 @@ equation
  "Restriction for zenith angle";
 
 
-
   refAng = if noEvent(incAng.incAng >= 0.0001 and incAng.incAng <= Modelica.Constants.pi
   /2*0.999) then asin(sin(incAng.incAng)/refInd) else
   0;
@@ -237,7 +224,6 @@ equation
   refAngDif + incAngDif)^2))) else
   0;
 
-
   incAngMod = tau/tau_0;
 
   incAngModGro = tau_ground/tau_0;
@@ -249,7 +235,6 @@ equation
   airMas^3) + b_4*(airMas^4)) <= 0 then
   0 else
   b_0 + b_1*(airMas^1) + b_2*(airMas^2) + b_3*(airMas^3) + b_4*(airMas^4);
-
 
 
   airMas = exp(-0.0001184*alt)/(cos(zen) + 0.5057*(96.080 - zen*
@@ -280,7 +265,6 @@ equation
   +0.000719*cos(2*2*Modelica.Constants.pi*nDay/24/60/60/365)+0.000077*sin(2*2*Modelica.Constants.pi*nDay/24/60/60/365))*cos(zenAng.zen)))) "after (Iqbal,1983)";
 
 
-
 // Erb´s diffuse fraction relation
   radHorDif = if radHor <=0.001 then 0
   elseif
@@ -291,8 +275,6 @@ equation
   (radHor)*0.165
    else
   (radHor)*(0.9511-0.1604*k_t+4.388*k_t^2-16.638*k_t^3+12.336*k_t^4);
-
-
 
 
   absRadRat = if noEvent(radHor <=0.1) then 0

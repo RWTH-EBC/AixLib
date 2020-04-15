@@ -20,7 +20,7 @@ extends PartialIVCharacteristics;
  Real w_0(final unit = "1")
     "MPP auxiliary correlation coefficient under standard conditions";
 
-// Other parameters and constants
+// Additional parameters and constants
 
  constant Real e=Modelica.Math.exp(1.0)
    "Euler's constant";

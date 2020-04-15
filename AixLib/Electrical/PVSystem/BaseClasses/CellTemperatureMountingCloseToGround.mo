@@ -12,8 +12,6 @@ equation
  else
  (T_a);
 
-
-
  annotation (
   Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>

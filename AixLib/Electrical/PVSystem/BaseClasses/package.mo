@@ -17,19 +17,6 @@ package BaseClasses
       "NumberOfModules", final unit="1") "Number of connected PV modules"
       annotation ();
 
-   Modelica.Blocks.Interfaces.RealInput T_c(final quantity=
-      "ThermodynamicTemperature", final unit="K")
-      "Cell temperature"
-      annotation (Placement(transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent={{-140,20},{-100,60}})));
-
-   Modelica.Blocks.Interfaces.RealInput absRadRat(final unit= "1")
-      "Ratio of absorbed radiation under operating conditions to standard conditions"
-      annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}), iconTransformation(extent={{-140,-60},{-100,-20}})));
-
-   Modelica.Blocks.Interfaces.RealInput radTil(final unit="W/m2")
-      "Total solar irradiance on the tilted surface"
-      annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}), iconTransformation(extent={{-140,-100},{-100,
-              -60}})));
 
   // Parameters from module data sheet
 
@@ -96,6 +83,20 @@ package BaseClasses
     annotation(Placement(
     transformation(extent={{100,-70},{120,-50}}),
     iconTransformation(extent={{100,-70},{120,-50}})));
+
+    Modelica.Blocks.Interfaces.RealInput T_c(final quantity=
+      "ThermodynamicTemperature", final unit="K")
+      "Cell temperature"
+      annotation (Placement(transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent={{-140,20},{-100,60}})));
+
+   Modelica.Blocks.Interfaces.RealInput absRadRat(final unit= "1")
+      "Ratio of absorbed radiation under operating conditions to standard conditions"
+      annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}), iconTransformation(extent={{-140,-60},{-100,-20}})));
+
+   Modelica.Blocks.Interfaces.RealInput radTil(final unit="W/m2")
+      "Total solar irradiance on the tilted surface"
+      annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}), iconTransformation(extent={{-140,-100},{-100,
+              -60}})));
 
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
