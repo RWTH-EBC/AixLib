@@ -53,7 +53,7 @@ model SubstationCooling
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     allowFlowReversal2=false,
-    etaCarnot_nominal=0.45,
+    etaCarnot_nominal=0.4,
     QEva_flow_nominal=coolingDemand_max,
     QEva_flow_min=coolingDemand_max)
                       annotation (Placement(transformation(

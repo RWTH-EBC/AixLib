@@ -19,18 +19,22 @@ model SubstationHeatingCoolingFixDeltaT "Substation model for bidirctional low-t
 
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = max((heatDemand_max/(cp_default*deltaT_heatingGridSet)),-coolingDemand_max/(cp_default*deltaT_coolingGridSet))
+    "Nominal mass flow rate based on max. demand and set temperature difference";
+
   AixLib.Fluid.Delays.DelayFirstOrder vol(
     nPorts=2,
     redeclare package Medium = Medium,
-    m_flow_nominal=2,
-    tau=60)  annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
+    m_flow_nominal=m_flow_nominal)
+             annotation (Placement(transformation(extent={{-242,4},{-222,24}})));
   AixLib.Fluid.Delays.DelayFirstOrder vol1(
     nPorts=2,
     redeclare package Medium = Medium,
-    m_flow_nominal=2,
-    tau=60)  annotation (Placement(transformation(extent={{188,8},{208,28}})));
+    m_flow_nominal=m_flow_nominal)
+             annotation (Placement(transformation(extent={{188,8},{208,28}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpHeating(redeclare package
-      Medium = Medium, m_flow_nominal=2,
+      Medium = Medium,
+    m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     use_inputFilter=false)
@@ -61,6 +65,8 @@ public
         iconTransformation(extent={{210,-10},{230,10}})));
   AixLib.Fluid.HeatPumps.Carnot_TCon heaPum(redeclare package Medium1 = Medium,
       redeclare package Medium2 = Medium,
+    allowFlowReversal1=false,
+    allowFlowReversal2=false,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
@@ -75,14 +81,14 @@ public
   Modelica.Blocks.Interfaces.RealInput heatDemand(unit = "W")
   "Input for heat demand profile of substation"
     annotation (Placement(transformation(extent={{-294,-80},{-254,-40}}),
-        iconTransformation(extent={{152,68},{112,108}})));
+        iconTransformation(extent={{240,70},{200,110}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyHeatingSet(unit = "K")
   "Supply temperature of the heating circuit in the building"
     annotation (
       Placement(transformation(
         extent={{20,20},{-20,-20}},
         rotation=180,
-        origin={-270,-138}), iconTransformation(extent={{152,114},{112,154}})));
+        origin={-270,-138}), iconTransformation(extent={{240,114},{200,154}})));
 
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{92,-88},{72,-68}})));
@@ -90,8 +96,9 @@ public
     annotation (Placement(transformation(extent={{-134,-76},{-114,-56}})));
   AixLib.Fluid.FixedResistances.Junction jun(
     redeclare package Medium = Medium,
+    tau=60,
     dp_nominal={0,dp_nominal,dp_nominal},
-    m_flow_nominal={2,2,2},
+    m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1},
     portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
     portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering)
@@ -99,24 +106,27 @@ public
 
   AixLib.Fluid.FixedResistances.Junction jun1(
     redeclare package Medium = Medium,
+    tau=60,
     dp_nominal={0,dp_nominal,dp_nominal},
-    m_flow_nominal={2,2,2},
+    m_flow_nominal=max(m_flow_nominal, 1)*{1,1,1},
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Entering)
-    annotation (Placement(transformation(extent={{136,-10},{116,10}})));
+    annotation (Placement(transformation(extent={{134,-10},{114,10}})));
   AixLib.Fluid.Chillers.Carnot_TEva chi(
     redeclare package Medium1 = Medium,
     redeclare package Medium2 = Medium,
-    allowFlowReversal1=true,
-    allowFlowReversal2=true,
+    allowFlowReversal1=false,
+    allowFlowReversal2=false,
+    dTEva_nominal=-6,
+    dTCon_nominal=5,
     use_eta_Carnot_nominal=true,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
-    etaCarnot_nominal=0.3,
+    etaCarnot_nominal=0.4,
     QEva_flow_nominal=coolingDemand_max)
     annotation (Placement(transformation(extent={{-4,40},{-24,20}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpCooling(
     redeclare package Medium = Medium,
-    m_flow_nominal=2,
+    m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     addPowerToMedium=false,
     use_inputFilter=false)
@@ -124,13 +134,13 @@ public
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit = "W")
   "Input for cooling demand profile of substation"
     annotation (Placement(
-        transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-176,40},
-            {-136,80}})));
+        transformation(extent={{248,42},{208,82}}), iconTransformation(extent={{-280,66},
+            {-240,106}})));
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit = "K")
   "Supply temperature of cooling circuit in the building"
     annotation (
       Placement(transformation(extent={{248,82},{208,122}}),
-        iconTransformation(extent={{-176,110},{-136,150}})));
+        iconTransformation(extent={{-280,112},{-240,152}})));
   AixLib.Fluid.Sources.MassFlowSource_T sourceCooling(
     use_m_flow_in=true,
     use_T_in=true,
@@ -167,6 +177,8 @@ public
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium =
                Medium)
     annotation (Placement(transformation(extent={{78,14},{58,34}})));
+  Modelica.Blocks.Math.Gain gain(k=-1)
+    annotation (Placement(transformation(extent={{188,52},{168,72}})));
 equation
   connect(port_a,vol. ports[1])
     annotation (Line(points={{-260,0},{-234,0},{-234,4}},
@@ -177,7 +189,7 @@ equation
   connect(chi.port_b1, jun.port_3) annotation (Line(points={{-24,24},{-146,24},
           {-146,10}},color={0,127,255}));
   connect(heaPum.port_b2, jun1.port_3)
-    annotation (Line(points={{10,-24},{126,-24},{126,-10}},
+    annotation (Line(points={{10,-24},{124,-24},{124,-10}},
                                                           color={0,127,255}));
   connect(pumpHeating.port_b, heaPum.port_a2)
     annotation (Line(points={{-60,-24},{-10,-24}}, color={0,127,255}));
@@ -221,9 +233,6 @@ equation
           0,36},{0,56},{10,56}}, color={0,127,255}));
   connect(chi.P, add2.u2) annotation (Line(points={{-25,30},{-130,30},{-130,80},
           {88,80},{88,106},{84,106}}, color={0,0,127}));
-  connect(coolingDemand, add2.u1) annotation (Line(points={{228,62},{94,62},{
-          94,118},{84,118}},
-                          color={0,0,127}));
   connect(division2.u1, add2.y) annotation (Line(points={{49.4,111.2},{55.7,
           111.2},{55.7,112},{61,112}}, color={0,0,127}));
   connect(division2.u2, const1.y) annotation (Line(points={{49.4,102.8},{57.7,
@@ -237,9 +246,6 @@ equation
                  color={0,0,127}));
   connect(add3.y, sourceCooling.T_in) annotation (Line(points={{-99,110},{-94,
           110},{-94,58},{-72,58}}, color={0,0,127}));
-  connect(coolingDemand, division3.u1) annotation (Line(points={{228,62},{94,
-          62},{94,131.2},{-56.6,131.2}},
-                                     color={0,0,127}));
   connect(const2.y, division3.u2) annotation (Line(points={{-44.6,100},{-50,100},
           {-50,122.8},{-56.6,122.8}}, color={0,0,127}));
   connect(division3.y, sourceCooling.m_flow_in) annotation (Line(points={{-72.7,
@@ -254,48 +260,54 @@ equation
   connect(senMasFlo_GridCool.port_b, vol1.ports[2])
     annotation (Line(points={{172,0},{200,0},{200,8}}, color={0,127,255}));
   connect(senMasFlo_GridCool.port_a, jun1.port_1)
-    annotation (Line(points={{152,0},{136,0}}, color={0,127,255}));
+    annotation (Line(points={{152,0},{134,0}}, color={0,127,255}));
   connect(jun.port_2, senMasFlo_HeatPump.port_a) annotation (Line(points={{
           -136,0},{-118,0},{-118,-24},{-114,-24}}, color={0,127,255}));
   connect(senMasFlo_HeatPump.port_b, pumpHeating.port_a)
     annotation (Line(points={{-94,-24},{-80,-24}}, color={0,127,255}));
-  connect(senMasFlo_chiller.port_a, jun1.port_2) annotation (Line(points={{78,
-          24},{100,24},{100,0},{116,0}}, color={0,127,255}));
+  connect(senMasFlo_chiller.port_a, jun1.port_2) annotation (Line(points={{78,24},
+          {100,24},{100,0},{114,0}},     color={0,127,255}));
   connect(senMasFlo_chiller.port_b, pumpCooling.port_a)
     annotation (Line(points={{58,24},{48,24}}, color={0,127,255}));
   connect(port_a, port_a)
     annotation (Line(points={{-260,0},{-260,0}}, color={0,127,255}));
+  connect(coolingDemand, gain.u)
+    annotation (Line(points={{228,62},{190,62}}, color={0,0,127}));
+  connect(gain.y, add2.u1) annotation (Line(points={{167,62},{98,62},{98,118},{
+          84,118}}, color={0,0,127}));
+  connect(gain.y, division3.u1) annotation (Line(points={{167,62},{98,62},{98,
+          131.2},{-56.6,131.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,
             -160},{220,160}}),
                          graphics={
         Rectangle(
-          extent={{-160,160},{140,-160}},
+          extent={{-260,160},{222,-180}},
           lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-90,30},{94,-146}},
-          lineColor={0,0,0},
-          fillColor={28,108,200},
-          fillPattern=FillPattern.HorizontalCylinder),
         Polygon(
-          points={{-106,30},{-6,140},{112,30},{-106,30}},
+          points={{-154,32},{-30,142},{118,32},{-154,32}},
           lineColor={0,0,0},
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-48,6},{-12,-36}},
-          lineColor={28,108,200},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-22,-72},{18,-146}},
+          extent={{-154,32},{118,-174}},
           lineColor={0,0,0},
+          fillColor={28,108,200},
+          fillPattern=FillPattern.HorizontalCylinder),
+        Rectangle(
+          extent={{-102,4},{-56,-50}},
+          lineColor={28,108,200},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{18,6},{54,-36}},
+          extent={{10,2},{58,-54}},
           lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-36,-100},{4,-174}},
+          lineColor={0,0,0},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-260,-160},{220,
@@ -307,8 +319,9 @@ Implemented </li>
 </ul>
 </html>", info="<html>
 Substation model for bidirectional low-temperature networks with heat pump and chiller and fixed temperature difference (parameter) on network side.
+In the case of simultaneous cooling and heating demands,the return flows are used as supply flows for the other application. The mass flows are controlled equation-based.
 This model uses the heat pump <a href=\"modelica://AixLib.Fluid.HeatPumps.Carnot_TCon\">AixLib.Fluid.HeatPumps.Carnot_TCon</a> 
-and the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>
+and the chiller <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_TEva\">AixLib.Fluid.Chillers.Carnot_TEva</a>.
 In case of simultanious heating and coolling operation the return flows are used as supply flows for the other application.
 </html>"));
 end SubstationHeatingCoolingFixDeltaT;

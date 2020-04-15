@@ -68,7 +68,7 @@ public
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
     show_T=true,
-    etaCarnot_nominal=0.45,
+    etaCarnot_nominal=0.4,
     QCon_flow_nominal=heatDemand_max)
     annotation (Placement(transformation(extent={{48,4},{28,-16}})));
   Modelica.Blocks.Math.Division division1
