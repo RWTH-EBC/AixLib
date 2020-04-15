@@ -52,6 +52,9 @@ equation
         points={{0,-42},{18,-42},{18,0},{30,0}},
         color={191,0,0},
         pattern=LinePattern.DashDotDot));
+    if energyDynamics==Modelica.Fluid.Types.Dynamics.SteadyState then
+        connect(heatCond_a[i].port_b, heatCond_b[i].port_a) annotation (Line(points={{-32,0},{-20,0},{-20,6},{20,6},{20,0},{30,0}}, color={191,0,0}, pattern=LinePattern.Dash));
+    end if;
   end for;
   // establishing n-1 connections of HeatCondb--Load--HeatConda groups
   for i in 1:n - 1 loop
@@ -69,6 +72,7 @@ equation
       points={{50,0},{100,0}},
       color={191,0,0},
       pattern=LinePattern.DashDotDot));
+
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-80,80},{80,-80}},       lineColor = {0, 0, 0}), Rectangle(extent={{-32,80},{32,-80}},       lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid),                                                                           Rectangle(extent={{-48,80},{-32,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent={{-64,80},{-48,-80}},       lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
