@@ -5,6 +5,7 @@ SubstationHeatingCoolingVarDeltaT
 SubstationHeatingDirectCooling
 SubstationDirectHeatingDirectCooling
 SubstationDirectHeatingCoolingDHW
+SubstationHeatingCooling_DC_CH_HP_HeatStorage
 ValveControlled
 ValveControlledByPass
 ValveControlledHeatPump
