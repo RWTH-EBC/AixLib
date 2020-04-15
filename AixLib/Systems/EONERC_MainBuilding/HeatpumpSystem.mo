@@ -23,10 +23,14 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     dIns=0.01,
     kIns=0.001,
     length=3,
-    redeclare replaceable HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(energyDynamics=pump_hot.energyDynamics, redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
-          per)),
+    redeclare replaceable
+      HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(
+        energyDynamics=pump_hot.energyDynamics,
+        redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
+
+        addPowerToMedium=false)),
     d=0.125,
     T_amb=T_amb,
     pipe3(length=6))
@@ -42,10 +46,14 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     T_start=T_start_cold,
     dIns=0.01,
     kIns=0.001,
-    redeclare replaceable HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(energyDynamics=pump_hot.energyDynamics, redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2
-          per)),
+    redeclare replaceable
+      HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(
+        energyDynamics=pump_hot.energyDynamics,
+        redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
+
+        addPowerToMedium=false)),
     d=0.100,
     length=4,
     pipe3(length=8),

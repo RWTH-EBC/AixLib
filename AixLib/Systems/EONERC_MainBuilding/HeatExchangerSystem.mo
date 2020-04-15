@@ -22,7 +22,8 @@ model HeatExchangerSystem
     Kv=63,
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)),
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
+          addPowerToMedium=false)),
     valve(order=1),
     pipe4(length=15))
     annotation (Placement(transformation(extent={{-100,20},{-60,-20}})));
@@ -64,7 +65,8 @@ model HeatExchangerSystem
     pipe4(length=15),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       PumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per)))
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
+          addPowerToMedium=false)))
     annotation (Placement(transformation(extent={{40,-20},{80,20}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare package Medium =
         Medium)

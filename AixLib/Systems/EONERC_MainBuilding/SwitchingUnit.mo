@@ -87,7 +87,8 @@ model SwitchingUnit
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     pump(redeclare
-        AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per))
+        AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
+        addPowerToMedium=false))
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=90,

@@ -47,9 +47,12 @@ model MainBuildingEnergySystem
   HydraulicModules.Admix admixHTC(
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(pump(
+        redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admixHTC.energyDynamics)),
+          per,
+        energyDynamics=admixHTC.energyDynamics,
+        addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -115,9 +118,12 @@ model MainBuildingEnergySystem
   HydraulicModules.Admix admixLTC(
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(pump(
+        redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admixLTC.energyDynamics)),
+          per,
+        energyDynamics=admixLTC.energyDynamics,
+        addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=298.15,
@@ -139,9 +145,12 @@ model MainBuildingEnergySystem
   HydraulicModules.Admix admixCold1(
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(pump(
+        redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2
-          per, energyDynamics=admixCold1.energyDynamics)),
+          per,
+        energyDynamics=admixCold1.energyDynamics,
+        addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=5,
     T_amb=298.15,
@@ -182,9 +191,12 @@ model MainBuildingEnergySystem
   HydraulicModules.Admix admixCold2(
     valve(order=1),
     redeclare HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      PumpInterface(pump(redeclare
+      PumpInterface(pump(
+        redeclare
           Fluid.Movers.Data.Pumps.Wilo.VeroLine80slash115dash2comma2slash2 per,
-          energyDynamics=admixCold2.energyDynamics)),
+
+        energyDynamics=admixCold2.energyDynamics,
+        addPowerToMedium=false)),
     redeclare package Medium = Medium,
     m_flow_nominal=5,
     T_amb=298.15,
