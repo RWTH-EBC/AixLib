@@ -20,7 +20,9 @@ record WallBaseDataDefinition "Wall base data definition"
   parameter Modelica.SIunits.Emissivity eps = 0.95
     "Emissivity of inner wall surface"
     annotation(Dialog(tab = "Wall", group = "Wall parameters"));
-  annotation(Documentation(info = "<html>
+  annotation (
+    defaultComponentPrefixes="parameter",
+    Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Wall BaseDataDefinition actually doesn&apos;t need predefined values and that is desirable to get errors thrown when using an unparameterised wall in a model. </p>
  <h4><font color=\"#008000\">Concept</font></h4>
