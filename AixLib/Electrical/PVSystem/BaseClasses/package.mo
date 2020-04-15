@@ -4,7 +4,12 @@ package BaseClasses
 
 
   partial model PartialIVCharacteristics
+    "Partial model for IV Characteristic of a PV module"
 
+  replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
+   constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
+   "PV Panel data definition"
+                             annotation (choicesAllMatching);
 
   // Adjustable input parameters
 
@@ -26,14 +31,7 @@ package BaseClasses
       annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}), iconTransformation(extent={{-140,-100},{-100,
               -60}})));
 
-
-
   // Parameters from module data sheet
-
-   replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
-   constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
-   "PV Panel data definition"
-                             annotation (choicesAllMatching);
 
    final parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
       "Efficiency under standard conditions";
@@ -79,8 +77,6 @@ package BaseClasses
 
    final parameter Modelica.SIunits.Temp_K T_c0=25+273.15
       "Thermodynamic cell temperature under standard conditions";
-
-
 
 
    Modelica.Blocks.Interfaces.RealOutput DCOutputPower(

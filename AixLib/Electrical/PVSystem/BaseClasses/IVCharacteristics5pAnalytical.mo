@@ -1,6 +1,6 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
-model PVModule5pAnalytical
-  "Analytical 5-p model for PV I-V characteristics (Batzelis et al.,2016) with temp. dependency of the 5 parameters after (DeSoto et al.,2006)"
+model IVCharacteristics5pAnalytical "Analytical 5-p model for PV I-V characteristics (Batzelis et al.,2016) with 
+  temp. dependency of the 5 parameters after (DeSoto et al.,2006)"
 
 extends PartialIVCharacteristics;
 
@@ -18,7 +18,6 @@ extends PartialIVCharacteristics;
     "Modified diode ideality factor under standard conditions";
  Real w_0(final unit = "1")
     "MPP auxiliary correlation coefficient under standard conditions";
-
 
 // Other parameters and constants
 
@@ -68,9 +67,7 @@ extends PartialIVCharacteristics;
  Modelica.SIunits.Voltage V_oc
     "Open circuit voltage under operating conditions";
 
-
 equation
-
 
 // Analytical parameter extraction equations under standard conditions (Batzelis et al., 2016)
 
@@ -85,8 +82,6 @@ equation
  I_ph0 = (1+R_s0/R_sh0)*I_sc0;
 
  I_s0 = I_ph0*exp(-1/(a_0/V_oc0));
-
-
 
 // Parameter extrapolation equations to operating conditions (DeSoto et al.,2006)
 
@@ -105,7 +100,6 @@ equation
  R_sh/R_sh0 = if noEvent(absRadRat > 0.001) then 1/absRadRat
  else
   0;
-
 
 //Simplified Power correlations at MPP using lambert W function (Batzelis et al., 2016)
 
@@ -130,8 +124,6 @@ equation
 //I-V curve equation - use if P at a given V is needed (e.g. battery loading scenarios without MPP tracker)
 //I = I_ph - I_s*(exp((V+I*R_s)/(a))-1) - (V + I*R_s)/(R_sh);
 
-
-
 // Efficiency and Performance
 
  eta= if noEvent(radTil <= 0.01) then 0
@@ -141,7 +133,6 @@ equation
  P_mod = V_mp*I_mp;
 
  DCOutputPower=max(0, min(P_Max*n_mod, P_mod*n_mod));
-
 
    annotation (
    Icon(
@@ -156,4 +147,4 @@ equation
 <p>Improvement and validation of a model for photovoltaic array performance. by De Soto, W. ; Klein, S. A. ; Beckman, W. A.</p>
 <p>Performance Data from the NIST Photovoltaic Arrays and Weather Station. by Boyd, M.: </p>
 </html>"));
-end PVModule5pAnalytical;
+end IVCharacteristics5pAnalytical;

@@ -16,7 +16,8 @@ model ExamplePVSystem
     azi(displayUnit="deg") = 0,
     redeclare model CellTemperature =
         BaseClasses.CellTemperatureMountingCloseToGround,
-    redeclare model IVCharacteristics = BaseClasses.PVModule5pAnalytical,
+    redeclare model IVCharacteristics =
+        BaseClasses.IVCharacteristics5pAnalytical,
     timZon(displayUnit="s") = weaDat.timZon)
     "Model for determining the DC output Power of a PV array; Modules mounted close to the ground (adjust to different mounting via cellTemp)"
     annotation (Placement(transformation(extent={{-8,-12},{16,12}})));

@@ -1,5 +1,7 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
-partial model PartialCellTemperature "Partial model for determining the cell temperature of a PV moduleConnector for PV record data"
+partial model PartialCellTemperature
+  "Partial model for determining the cell temperature of a PV moduleConnector 
+  for PV record data"
 
 // Parameters from module data sheet
  replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
