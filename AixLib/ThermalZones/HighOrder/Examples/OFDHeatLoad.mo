@@ -114,13 +114,16 @@ equation
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
     annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.24},{39.2,34.24}},
         color={255,128,0}));
-  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-14.6,-16.1},{-6,-16.1},{-6,-8},{-11.2,-8},{-11.2,7.92}}, color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-14.2,-14.7},{-6,-14.7},{-6,-8},{-11.2,-8},{-11.2,7.92}}, color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
      Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
   connect(prescribedHeatFlowRad.port, heatStarToComb.portRad) annotation (Line(points={{-48,-18},{-44,-18},{-44,-10.2},{-34.4,-10.2}}, color={191,0,0}));
   connect(adiabaticRadRooms.y, prescribedHeatFlowRad.Q_flow)
     annotation (Line(points={{-73.2,-18},{-60,-18}}, color={0,0,127}));
-  annotation (Diagram(graphics={
+  annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos"
+                      "Simulate and plot"),
+    Diagram(graphics={
         Text(
           extent={{-112,-40},{-74,-62}},
           lineColor={28,108,200},
@@ -141,7 +144,7 @@ Calculation example: Chapter 6.1.3.4"),
           extent={{-112,90},{-74,68}},
           lineColor={28,108,200},
           textString="DIN EN 12831 Beiblatt 1
-Table 1")}), experiment(StopTime=25920000, Interval=3600),
+Table 1")}),
     Documentation(revisions="<html>
 <ul>
 <li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Implement example</li>
