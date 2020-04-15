@@ -9,16 +9,16 @@ package Mode_based_ControlStrategy
       Placement(visible = true, transformation(origin={108,20},   extent = {{-14, -14}, {14, 14}}, rotation = 180), iconTransformation(origin={108,20},   extent = {{-14, -14}, {14, 14}}, rotation = 180)));
     AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.FieldLevel fieldLevel1
       annotation (Placement(visible=true, transformation(
-          origin={-40,-50},
+          origin={-40,-70},
           extent={{-10,-10},{10,10}},
           rotation=0)));
     Level.ManagementLevel_Temp_V2 managementLevel_Temp_V2_1
       annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
     Level.AutomationLevel_V1 automationLevel_V1_1
-      annotation (Placement(transformation(extent={{-60,-14},{-20,6}})));
+      annotation (Placement(transformation(extent={{-60,-20},{-20,0}})));
   equation
     connect(fieldLevel1.mainBus, mainBus) annotation (Line(
-        points={{-30,-50},{80,-50},{80,80},{100,80}},
+        points={{-30,-70},{80,-70},{80,80},{100,80}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom1Mea, managementLevel_Temp_V2_1.RoomTempMea[1])
@@ -59,116 +59,116 @@ package Mode_based_ControlStrategy
         color={255,204,51},
         thickness=0.5));
     connect(managementLevel_Temp_V2_1.Superior_Mode[1], automationLevel_V1_1.Superior_Mode[
-      1]) annotation (Line(points={{-40,40.35},{-40,7.75}}, color={255,0,255}));
+      1]) annotation (Line(points={{-40,40.35},{-40,1.75}}, color={255,0,255}));
     connect(managementLevel_Temp_V2_1.Superior_Mode[2], automationLevel_V1_1.Superior_Mode[
-      2]) annotation (Line(points={{-40,39.85},{-40,7.25}}, color={255,0,255}));
+      2]) annotation (Line(points={{-40,39.85},{-40,1.25}}, color={255,0,255}));
     connect(managementLevel_Temp_V2_1.Superior_Mode[3], automationLevel_V1_1.Superior_Mode[
-      3]) annotation (Line(points={{-40,39.35},{-40,6.75}}, color={255,0,255}));
+      3]) annotation (Line(points={{-40,39.35},{-40,0.75}}, color={255,0,255}));
     connect(managementLevel_Temp_V2_1.Superior_Mode[4], automationLevel_V1_1.Superior_Mode[
-      4]) annotation (Line(points={{-40,38.85},{-40,6.25}}, color={255,0,255}));
+      4]) annotation (Line(points={{-40,38.85},{-40,0.25}}, color={255,0,255}));
     connect(TAirOutside, automationLevel_V1_1.TAirOutside)
-      annotation (Line(points={{108,20},{-24,20},{-24,7}}, color={0,0,127}));
+      annotation (Line(points={{108,20},{-24,20},{-24,1}}, color={0,0,127}));
     connect(mainBus.TRoom1Mea, automationLevel_V1_1.TRoomMea[1]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,7.8}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,1.8}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom2Mea, automationLevel_V1_1.TRoomMea[2]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,7.4}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,1.4}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom3Mea, automationLevel_V1_1.TRoomMea[3]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,7}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,1}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom4Mea, automationLevel_V1_1.TRoomMea[4]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,6.6}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,0.6}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus.TRoom5Mea, automationLevel_V1_1.TRoomMea[5]) annotation (Line(
-        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,6.2}},
+        points={{100.05,80.05},{80,80.05},{80,20},{-28,20},{-28,0.2}},
         color={255,204,51},
         thickness=0.5));
     connect(automationLevel_V1_1.y[1], fieldLevel1.u[1]) annotation (Line(points={{-40,
-            -14.0278},{-40,-38.1991}},      color={255,0,255}));
+            -20.0278},{-40,-58.1991}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[2], fieldLevel1.u[2]) annotation (Line(points={{-40,
-            -14.0833},{-40,-38.2639}},      color={255,0,255}));
+            -20.0833},{-40,-58.2639}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[3], fieldLevel1.u[3]) annotation (Line(points={{-40,
-            -14.1389},{-40,-38.3287}},      color={255,0,255}));
+            -20.1389},{-40,-58.3287}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[4], fieldLevel1.u[4]) annotation (Line(points={{-40,
-            -14.1944},{-40,-38.3935}},      color={255,0,255}));
+            -20.1944},{-40,-58.3935}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[5], fieldLevel1.u[5]) annotation (Line(points={{-40,
-            -14.25},{-40,-38.4583}},        color={255,0,255}));
+            -20.25},{-40,-58.4583}},        color={255,0,255}));
              connect(automationLevel_V1_1.y[6], fieldLevel1.u[6]) annotation (Line(points={{-40,
-            -14.3056},{-40,-38.5231}},      color={255,0,255}));
+            -20.3056},{-40,-58.5231}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[7], fieldLevel1.u[7]) annotation (Line(points={{-40,
-            -14.3611},{-40,-38.588}},       color={255,0,255}));
+            -20.3611},{-40,-58.588}},       color={255,0,255}));
              connect(automationLevel_V1_1.y[8], fieldLevel1.u[8]) annotation (Line(points={{-40,
-            -14.4167},{-40,-38.6528}},      color={255,0,255}));
+            -20.4167},{-40,-58.6528}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[9], fieldLevel1.u[9]) annotation (Line(points={{-40,
-            -14.4722},{-40,-38.7176}},      color={255,0,255}));
+            -20.4722},{-40,-58.7176}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[10], fieldLevel1.u[10]) annotation (Line(points={{-40,
-            -14.5278},{-40,-38.7824}},      color={255,0,255}));
+            -20.5278},{-40,-58.7824}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[11], fieldLevel1.u[11]) annotation (Line(points={{-40,
-            -14.5833},{-40,-38.8472}},      color={255,0,255}));
+            -20.5833},{-40,-58.8472}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[12], fieldLevel1.u[12]) annotation (Line(points={{-40,
-            -14.6389},{-40,-38.912}},       color={255,0,255}));
+            -20.6389},{-40,-58.912}},       color={255,0,255}));
              connect(automationLevel_V1_1.y[13], fieldLevel1.u[13]) annotation (Line(points={{-40,
-            -14.6944},{-40,-38.9769}},      color={255,0,255}));
+            -20.6944},{-40,-58.9769}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[14], fieldLevel1.u[14]) annotation (Line(points={{-40,
-            -14.75},{-40,-39.0417}},        color={255,0,255}));
+            -20.75},{-40,-59.0417}},        color={255,0,255}));
              connect(automationLevel_V1_1.y[15], fieldLevel1.u[15]) annotation (Line(points={{-40,
-            -14.8056},{-40,-39.1065}},      color={255,0,255}));
+            -20.8056},{-40,-59.1065}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[16], fieldLevel1.u[16]) annotation (Line(points={{-40,
-            -14.8611},{-40,-39.1713}},      color={255,0,255}));
+            -20.8611},{-40,-59.1713}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[17], fieldLevel1.u[17]) annotation (Line(points={{-40,
-            -14.9167},{-40,-39.2361}},      color={255,0,255}));
+            -20.9167},{-40,-59.2361}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[18], fieldLevel1.u[18]) annotation (Line(points={{-40,
-            -14.9722},{-40,-39.3009}},      color={255,0,255}));
+            -20.9722},{-40,-59.3009}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[19], fieldLevel1.u[19]) annotation (Line(points={{-40,
-            -15.0278},{-40,-39.3657}},      color={255,0,255}));
+            -21.0278},{-40,-59.3657}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[20], fieldLevel1.u[20]) annotation (Line(points={{-40,
-            -15.0833},{-40,-39.4306}},      color={255,0,255}));
+            -21.0833},{-40,-59.4306}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[21], fieldLevel1.u[21]) annotation (Line(points={{-40,
-            -15.1389},{-40,-39.4954}},      color={255,0,255}));
+            -21.1389},{-40,-59.4954}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[22], fieldLevel1.u[22]) annotation (Line(points={{-40,
-            -15.1944},{-40,-39.5602}},      color={255,0,255}));
+            -21.1944},{-40,-59.5602}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[23], fieldLevel1.u[23]) annotation (Line(points={{-40,
-            -15.25},{-40,-39.625}},         color={255,0,255}));
+            -21.25},{-40,-59.625}},         color={255,0,255}));
              connect(automationLevel_V1_1.y[24], fieldLevel1.u[24]) annotation (Line(points={{-40,
-            -15.3056},{-40,-39.6898}},      color={255,0,255}));
+            -21.3056},{-40,-59.6898}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[25], fieldLevel1.u[25]) annotation (Line(points={{-40,
-            -15.3611},{-40,-39.7546}},      color={255,0,255}));
+            -21.3611},{-40,-59.7546}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[26], fieldLevel1.u[26]) annotation (Line(points={{-40,
-            -15.4167},{-40,-39.8194}},      color={255,0,255}));
+            -21.4167},{-40,-59.8194}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[27], fieldLevel1.u[27]) annotation (Line(points={{-40,
-            -15.4722},{-40,-39.8843}},      color={255,0,255}));
+            -21.4722},{-40,-59.8843}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[28], fieldLevel1.u[28]) annotation (Line(points={{-40,
-            -15.5278},{-40,-39.9491}},      color={255,0,255}));
+            -21.5278},{-40,-59.9491}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[29], fieldLevel1.u[29]) annotation (Line(points={{-40,
-            -15.5833},{-40,-40.0139}},      color={255,0,255}));
+            -21.5833},{-40,-60.0139}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[30], fieldLevel1.u[30]) annotation (Line(points={{-40,
-            -15.6389},{-40,-40.0787}},      color={255,0,255}));
+            -21.6389},{-40,-60.0787}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[31], fieldLevel1.u[31]) annotation (Line(points={{-40,
-            -15.6944},{-40,-40.1435}},      color={255,0,255}));
+            -21.6944},{-40,-60.1435}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[32], fieldLevel1.u[32]) annotation (Line(points={{-40,
-            -15.75},{-40,-40.2083}},        color={255,0,255}));
+            -21.75},{-40,-60.2083}},        color={255,0,255}));
              connect(automationLevel_V1_1.y[33], fieldLevel1.u[33]) annotation (Line(points={{-40,
-            -15.8056},{-40,-40.2731}},      color={255,0,255}));
+            -21.8056},{-40,-60.2731}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[34], fieldLevel1.u[34]) annotation (Line(points={{-40,
-            -15.8611},{-40,-40.338}},       color={255,0,255}));
+            -21.8611},{-40,-60.338}},       color={255,0,255}));
              connect(automationLevel_V1_1.y[35], fieldLevel1.u[35]) annotation (Line(points={{-40,
-            -15.9167},{-40,-40.4028}},      color={255,0,255}));
+            -21.9167},{-40,-60.4028}},      color={255,0,255}));
              connect(automationLevel_V1_1.y[36], fieldLevel1.u[36]) annotation (Line(points={{-40,
-            -15.9722},{-40,-40.4676}},      color={255,0,255}));
+            -21.9722},{-40,-60.4676}},      color={255,0,255}));
     connect(automationLevel_V1_1.T_CS, mainBus.hpSystemBus.TBottomCSMea)
-      annotation (Line(points={{-35.9,7.1},{-35.9,20},{80,20},{80,80.05},{
+      annotation (Line(points={{-35.9,1.1},{-35.9,20},{80,20},{80,80.05},{
             100.05,80.05}}, color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{-3,6},{-3,6}},
         horizontalAlignment=TextAlignment.Right));
     connect(automationLevel_V1_1.T_GEO, mainBus.gtfBus.primBus.TFwrdOutMea)
-      annotation (Line(points={{-32,7},{-32,20},{80,20},{80,80.05},{100.05,
+      annotation (Line(points={{-32,1},{-32,20},{80,20},{80,80.05},{100.05,
             80.05}}, color={0,0,127}), Text(
         string="%second",
         index=1,
@@ -229,11 +229,11 @@ Controller")}),
             extent={{-10,-10},{10,10}},
             rotation=0)));
       AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
-        controller_Tabs_Workshop(TflowSet=288.15) annotation (Placement(visible
-            =true, transformation(extent={{-80,-40},{-60,-20}}, rotation=0)));
+        controller_Tabs_Workshop(TflowSet=288.15) annotation (Placement(visible=
+             true, transformation(extent={{-80,-40},{-60,-20}}, rotation=0)));
       AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_VU
-        controller_VU_Workshop(TRoomSet=288.15, VFlowSet=2700/3600) annotation
-        (Placement(visible=true, transformation(
+        controller_VU_Workshop(TRoomSet=288.15, VFlowSet=2700/3600) annotation (
+         Placement(visible=true, transformation(
             origin={30,-30},
             extent={{-10,-10},{10,10}},
             rotation=0)));
@@ -266,8 +266,8 @@ Controller")}),
               true, transformation(extent={{-80,-60},{-60,-40}}, rotation=0)));
       AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
         controller_Tabs_ConferenceRoom(TflowSet=293.15) annotation (Placement(
-            visible=true, transformation(extent={{-80,-80},{-60,-60}}, rotation
-              =0)));
+            visible=true, transformation(extent={{-80,-80},{-60,-60}}, rotation=
+               0)));
       AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Controller.Controller_Tabs
         controller_Tabs_MultipersonOffice(TflowSet=293.15) annotation (
           Placement(visible=true, transformation(extent={{-80,-100},{-60,-80}},
@@ -1669,10 +1669,10 @@ Controller")}),
       connect(T17.outPlaces[1], HP_Combi.inTransition[3]) annotation (Line(
             points={{-110.36,45},{-120,45},{-120,24.48},{-65.6,24.48}}, color={
               0,0,0}));
-      connect(HP_Off.outTransition[2], T19.inPlaces[1]) annotation (Line(points
-            ={{-57.52,52},{-59,52},{-59,36.36}}, color={0,0,0}));
-      connect(T18.outPlaces[1], HP_Off.inTransition[2]) annotation (Line(points
-            ={{-73,36.36},{-73,52},{-70.48,52}}, color={0,0,0}));
+      connect(HP_Off.outTransition[2], T19.inPlaces[1]) annotation (Line(points=
+             {{-57.52,52},{-59,52},{-59,36.36}}, color={0,0,0}));
+      connect(T18.outPlaces[1], HP_Off.inTransition[2]) annotation (Line(points=
+             {{-73,36.36},{-73,52},{-70.48,52}}, color={0,0,0}));
       connect(HP_Heating.outTransition[2], T147.inPlaces[1]) annotation (Line(
             points={{-32.3,58.48},{-30,58.48},{-30,59},{-18.36,59}}, color={0,0,
               0}));
@@ -5560,155 +5560,148 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
     end Controller_HX;
   end Controller;
 
-  model testing_automation
-    AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.AutomationLevel_V1
-      automationLevel_V31 annotation (Placement(visible=true, transformation(
-          origin={20,-12},
-          extent={{-20,-10},{20,10}},
-          rotation=0)));
-    Modelica.Blocks.Sources.Pulse pulse1(amplitude = 1, offset = 0, period = 7200, startTime = 0, width = 50) annotation (
-      Placement(visible = true, transformation(origin = {-80, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Pulse pulse2(amplitude = 1, offset = 0, period = 14400, startTime = 3600, width = 25) annotation (
-      Placement(visible = true, transformation(origin = {-82, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Pulse pulse3(amplitude = 1, offset = 0, period = 14400, startTime = 10800, width = 25) annotation (
-      Placement(visible = true, transformation(origin = {-82, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Math.RealToBoolean realToBoolean1(threshold = 0.5) annotation (
-      Placement(visible = true, transformation(origin = {-42, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Math.RealToBoolean realToBoolean2(threshold = 0.5) annotation (
-      Placement(visible = true, transformation(origin = {-44, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Math.RealToBoolean realToBoolean3(threshold = 0.5) annotation (
-      Placement(visible = true, transformation(origin = {-44, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Sine sine1(amplitude = 10, freqHz = 1 / 3600, offset = 288.15, startTime = 0) annotation (
-      Placement(visible = true, transformation(origin = {48, 38}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  equation
-    connect(sine1.y, automationLevel_V31.TAirOutside) annotation (
-      Line(points={{59,38},{42,38},{42,-1},{36,-1}},            color = {0, 0, 127}));
-    connect(realToBoolean3.y, automationLevel_V31.Superior_Mode[15])
-      annotation (Line(points={{-33,-50},{-12,-50},{-12,12},{20,12},{20,0},{20,
-            -1.93333},{20,-1.93333}}, color={255,0,255}));
-    connect(realToBoolean3.y, automationLevel_V31.Superior_Mode[12])
-      annotation (Line(points={{-33,-50},{-12,-50},{-12,12},{20,12},{20,0},{20,
-            -1.53333},{20,-1.53333}}, color={255,0,255}));
-    connect(realToBoolean3.y, automationLevel_V31.Superior_Mode[9]) annotation (
-       Line(points={{-33,-50},{-12,-50},{-12,12},{20,12},{20,-1.13333}}, color=
-            {255,0,255}));
-    connect(realToBoolean3.y, automationLevel_V31.Superior_Mode[3]) annotation (
-       Line(points={{-33,-50},{-12,-50},{-12,12},{20,12},{20,-0.333333}}, color=
-           {255,0,255}));
-    connect(realToBoolean3.y, automationLevel_V31.Superior_Mode[6]) annotation (
-       Line(points={{-33,-50},{-12,-50},{-12,12},{20,12},{20,0},{20,-0.733333},
-            {20,-0.733333}}, color={255,0,255}));
-    connect(realToBoolean1.y, automationLevel_V31.Superior_Mode[1]) annotation (
-       Line(points={{-31,22},{20,22},{20,-0.0666667}}, color={255,0,255}));
-    connect(realToBoolean2.y, automationLevel_V31.Superior_Mode[8]) annotation (
-       Line(points={{-33,-14},{-12,-14},{-12,12},{20,12},{20,-1}}, color={255,0,
-            255}));
-    connect(realToBoolean2.y, automationLevel_V31.Superior_Mode[14])
-      annotation (Line(points={{-33,-14},{-12,-14},{-12,12},{20,12},{20,0},{20,
-            -1.8},{20,-1.8}}, color={255,0,255}));
-    connect(realToBoolean2.y, automationLevel_V31.Superior_Mode[11])
-      annotation (Line(points={{-33,-14},{-12,-14},{-12,12},{20,12},{20,0},{20,
-            -1.4},{20,-1.4}}, color={255,0,255}));
-    connect(realToBoolean2.y, automationLevel_V31.Superior_Mode[5]) annotation (
-       Line(points={{-33,-14},{-12,-14},{-12,12},{20,12},{20,0},{20,-0.6},{20,-0.6}},
-          color={255,0,255}));
-    connect(realToBoolean2.y, automationLevel_V31.Superior_Mode[2]) annotation (
-       Line(points={{-33,-14},{-12,-14},{-12,12},{20,12},{20,-2},{20,-0.2},{20,
-            -0.2}}, color={255,0,255}));
-    connect(realToBoolean1.y, automationLevel_V31.Superior_Mode[13])
-      annotation (Line(points={{-31,22},{20,22},{20,-1.66667},{20,-1.66667}},
-          color={255,0,255}));
-    connect(realToBoolean1.y, automationLevel_V31.Superior_Mode[10])
-      annotation (Line(points={{-31,22},{20,22},{20,-1.26667},{20,-1.26667}},
-          color={255,0,255}));
-    connect(realToBoolean1.y, automationLevel_V31.Superior_Mode[7]) annotation (
-       Line(points={{-31,22},{20,22},{20,-0.866667},{20,-0.866667}}, color={255,
-            0,255}));
-    connect(realToBoolean1.y, automationLevel_V31.Superior_Mode[4]) annotation (
-       Line(points={{-31,22},{20,22},{20,0},{20,-0.466667},{20,-0.466667}},
-          color={255,0,255}));
-    connect(pulse1.y, realToBoolean1.u) annotation (
-      Line(points={{-69,22},{-56,22},{-56,22},{-54,22}},          color = {0, 0, 127}));
-    connect(pulse2.y, realToBoolean2.u) annotation (
-      Line(points={{-71,-14},{-58,-14},{-58,-14},{-56,-14}},          color = {0, 0, 127}));
-    connect(pulse3.y, realToBoolean3.u) annotation (
-      Line(points={{-71,-44},{-56,-44},{-56,-50},{-56,-50}},          color = {0, 0, 127}));
-    annotation (experiment(StopTime=86400, Interval=60));
-  end testing_automation;
-
   model testing_management_automation
-    Level.old.ManagementLevel_Temp managementLevel_Temp annotation (Placement(
-          visible=true, transformation(
-          origin={-26,0},
-          extent={{-10,-10},{10,10}},
-          rotation=0)));
     Modelica.Blocks.Sources.Sine sine1(amplitude = 5, freqHz = 1 / 7200, offset = 288.15, startTime = 0) annotation (
-      Placement(visible = true, transformation(origin = {-88, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={90,90},     extent = {{-10, -10}, {10, 10}}, rotation=180)));
     Modelica.Blocks.Sources.Sine sine2(amplitude = 5, freqHz = 1 / 7200, offset = 293.15, startTime = 0) annotation (
-      Placement(visible = true, transformation(origin = {-20, 56}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={90,50},     extent = {{-10, -10}, {10, 10}}, rotation=180)));
     AixLib.Systems.Benchmark_fb.Mode_based_ControlStrategy.Level.AutomationLevel_V1
       automationLevel_V31 annotation (Placement(visible=true, transformation(
-          origin={-20,-38},
+          origin={-20,-10},
           extent={{-20,-10},{20,10}},
           rotation=0)));
     Modelica.Blocks.Sources.Sine sine3(amplitude = 10, freqHz = 1 / 3600, offset = 288.15, startTime = 0) annotation (
-      Placement(visible = true, transformation(origin = {32, 12}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin={92,10},    extent = {{-10, -10}, {10, 10}}, rotation=180)));
     constant Real const1 = 295.15;
     constant Real const2 = 291.15;
+    Level.ManagementLevel_Temp_V2 managementLevel_Temp_V2_1
+      annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
+    Level.FieldLevel fieldLevel
+      annotation (Placement(transformation(extent={{-30,-60},{-10,-36}})));
+    Benchmark.BaseClasses.MainBus mainBus
+      annotation (Placement(transformation(extent={{84,-58},{104,-38}})));
   equation
-    connect(managementLevel_Temp.y[1], automationLevel_V31.Superior_Mode[1])
-      annotation (Line(
-        points={{-26,-10.0533},{-26,-10.0533},{-26,-20},{-20,-20},{-20,-26.25},
-            {-20,-26.25}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[2], automationLevel_V31.Superior_Mode[2])
-      annotation (Line(
-        points={{-26,-10.16},{-26,-10.16},{-26,-20},{-20,-20},{-20,-26.75},{-20,-26.75}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[3], automationLevel_V31.Superior_Mode[3])
-      annotation (Line(
-        points={{-26,-10.2667},{-26,-10.2667},{-26,-20},{-20,-20},{-20,-27.25},
-            {-20,-27.25}},
-        color={255,0,255},
-        thickness=0.5));
-    connect(managementLevel_Temp.y[4], automationLevel_V31.Superior_Mode[4])
-      annotation (Line(
-        points={{-26,-10.3733},{-26,-10.3733},{-26,-20},{-20,-20},{-20,-27.75},
-            {-20,-27.75}},
-        color={255,0,255},
-        thickness=0.5));
 
-    connect(sine2.y, managementLevel_Temp.TRoomMea[5]) annotation (
-      Line(points={{-9,56},{-26,56},{-26,10.2},{-26,10.2}},      color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp.TRoomMea[4]) annotation (
-      Line(points={{-9,56},{-26,56},{-26,10.6},{-26,10.6}},      color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp.TRoomMea[3]) annotation (
-      Line(points={{-9,56},{-26,56},{-26,11},{-26,11}},          color = {0, 0, 127}));
-    connect(sine2.y, managementLevel_Temp.TRoomMea[2]) annotation (
-      Line(points={{-9,56},{-26,56},{-26,10},{-26,10},{-26,11.4},{-26,11.4}},          color = {0, 0, 127}));
-    connect(sine1.y, managementLevel_Temp.TRoomMea[1]) annotation (
-      Line(points={{-77,36},{-26,36},{-26,11.8},{-26,11.8}},      color = {0, 0, 127}));
-    connect(sine3.y, automationLevel_V31.T_CS) annotation (Line(points={{43,12},{48,
-            12},{48,6},{-15.9,6},{-15.9,-26.9}}, color={0,0,127}));
+    connect(sine3.y, automationLevel_V31.T_CS) annotation (Line(points={{81,10},{-15.9,
+            10},{-15.9,1.1}},                    color={0,0,127}));
     connect(sine1.y, automationLevel_V31.TRoomMea[1])
-      annotation (Line(points={{-77,36},{-10,36},{-10,-26.2}}, color={0,0,127}));
+      annotation (Line(points={{79,90},{0,90},{0,20},{-8,20},{-8,1.8}},
+                                                               color={0,0,127}));
     connect(sine2.y, automationLevel_V31.TRoomMea[2])
-      annotation (Line(points={{-9,56},{-10,56},{-10,-26.6}}, color={0,0,127}));
-    connect(sine2.y, automationLevel_V31.TRoomMea[3]) annotation (Line(points={{-9,
-            56},{-6,56},{-6,-27},{-10,-27}}, color={0,0,127}));
+      annotation (Line(points={{79,50},{0,50},{0,20},{-8,20},{-8,1.4}},
+                                                              color={0,0,127}));
+    connect(sine2.y, automationLevel_V31.TRoomMea[3]) annotation (Line(points={{79,50},
+            {0,50},{0,20},{-8,20},{-8,1}},   color={0,0,127}));
     connect(sine2.y, automationLevel_V31.TRoomMea[4])
-      annotation (Line(points={{-9,56},{-10,56},{-10,-27.4}}, color={0,0,127}));
-    connect(sine2.y, automationLevel_V31.TRoomMea[5]) annotation (Line(points={{-9,
-            56},{-6,56},{-6,54},{-10,54},{-10,-27.8}}, color={0,0,127}));
-    connect(sine3.y, automationLevel_V31.TAirOutside) annotation (Line(points={
-            {43,12},{46,12},{46,10},{-4,10},{-4,-27}}, color={0,0,127}));
+      annotation (Line(points={{79,50},{0,50},{0,20},{-8,20},{-8,0.6}},
+                                                              color={0,0,127}));
+    connect(sine2.y, automationLevel_V31.TRoomMea[5]) annotation (Line(points={{79,50},
+            {0,50},{0,20},{-8,20},{-8,0.2}},           color={0,0,127}));
+    connect(sine3.y, automationLevel_V31.TAirOutside) annotation (Line(points={{81,10},
+            {-4,10},{-4,1}},                           color={0,0,127}));
+    connect(sine3.y, automationLevel_V31.T_GEO)
+      annotation (Line(points={{81,10},{-12,10},{-12,1}}, color={0,0,127}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[1], automationLevel_V31.Superior_Mode[
+      1]) annotation (Line(points={{-20,40.35},{-20,1.75}}, color={255,0,255}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[2], automationLevel_V31.Superior_Mode[
+      2]) annotation (Line(points={{-20,39.85},{-20,1.25}}, color={255,0,255}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[3], automationLevel_V31.Superior_Mode[
+      3]) annotation (Line(points={{-20,39.35},{-20,0.75}}, color={255,0,255}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[4], automationLevel_V31.Superior_Mode[
+      4]) annotation (Line(points={{-20,38.85},{-20,0.25}}, color={255,0,255}));
+    connect(sine1.y, managementLevel_Temp_V2_1.RoomTempMea[1])
+      annotation (Line(points={{79,90},{-20,90},{-20,61.88}}, color={0,0,127}));
+    connect(sine2.y, managementLevel_Temp_V2_1.RoomTempMea[2]) annotation (Line(
+          points={{79,50},{0,50},{0,90},{-20,90},{-20,61.24}}, color={0,0,127}));
+    connect(sine2.y, managementLevel_Temp_V2_1.RoomTempMea[3]) annotation (Line(
+          points={{79,50},{0,50},{0,90},{-20,90},{-20,60.6}}, color={0,0,127}));
+    connect(sine2.y, managementLevel_Temp_V2_1.RoomTempMea[4]) annotation (Line(
+          points={{79,50},{0,50},{0,90},{-20,90},{-20,59.96}}, color={0,0,127}));
+    connect(sine2.y, managementLevel_Temp_V2_1.RoomTempMea[5]) annotation (Line(
+          points={{79,50},{0,50},{0,90},{-20,90},{-20,59.32}}, color={0,0,127}));
+    connect(automationLevel_V31.y[1], fieldLevel.u[1]) annotation (Line(points={{-20,
+            -20.0278},{-20,-33.8389}}, color={255,0,255}));
+     connect(automationLevel_V31.y[2], fieldLevel.u[2]) annotation (Line(points={{-20,
+            -20.0833},{-20,-33.9167}}, color={255,0,255}));
+             connect(automationLevel_V31.y[3], fieldLevel.u[3]) annotation (Line(points={{-20,
+            -20.1389},{-20,-33.9944}}, color={255,0,255}));
+             connect(automationLevel_V31.y[4], fieldLevel.u[4]) annotation (Line(points={{-20,
+            -20.1944},{-20,-34.0722}}, color={255,0,255}));
+             connect(automationLevel_V31.y[5], fieldLevel.u[5]) annotation (Line(points={{-20,
+            -20.25},{-20,-34.15}},     color={255,0,255}));
+             connect(automationLevel_V31.y[6], fieldLevel.u[6]) annotation (Line(points={{-20,
+            -20.3056},{-20,-34.2278}}, color={255,0,255}));
+             connect(automationLevel_V31.y[7], fieldLevel.u[7]) annotation (Line(points={{-20,
+            -20.3611},{-20,-34.3056}}, color={255,0,255}));
+             connect(automationLevel_V31.y[8], fieldLevel.u[8]) annotation (Line(points={{-20,
+            -20.4167},{-20,-34.3833}}, color={255,0,255}));
+             connect(automationLevel_V31.y[9], fieldLevel.u[9]) annotation (Line(points={{-20,
+            -20.4722},{-20,-34.4611}}, color={255,0,255}));
+             connect(automationLevel_V31.y[10], fieldLevel.u[10]) annotation (Line(points={{-20,
+            -20.5278},{-20,-34.5389}}, color={255,0,255}));
+             connect(automationLevel_V31.y[11], fieldLevel.u[11]) annotation (Line(points={{-20,
+            -20.5833},{-20,-34.6167}}, color={255,0,255}));
+             connect(automationLevel_V31.y[12], fieldLevel.u[12]) annotation (Line(points={{-20,
+            -20.6389},{-20,-34.6944}}, color={255,0,255}));
+             connect(automationLevel_V31.y[13], fieldLevel.u[13]) annotation (Line(points={{-20,
+            -20.6944},{-20,-34.7722}}, color={255,0,255}));
+             connect(automationLevel_V31.y[14], fieldLevel.u[14]) annotation (Line(points={{-20,
+            -20.75},{-20,-34.85}},     color={255,0,255}));
+             connect(automationLevel_V31.y[15], fieldLevel.u[15]) annotation (Line(points={{-20,
+            -20.8056},{-20,-34.9278}}, color={255,0,255}));
+             connect(automationLevel_V31.y[16], fieldLevel.u[16]) annotation (Line(points={{-20,
+            -20.8611},{-20,-35.0056}}, color={255,0,255}));
+             connect(automationLevel_V31.y[17], fieldLevel.u[17]) annotation (Line(points={{-20,
+            -20.9167},{-20,-35.0833}}, color={255,0,255}));
+             connect(automationLevel_V31.y[18], fieldLevel.u[18]) annotation (Line(points={{-20,
+            -20.9722},{-20,-35.1611}}, color={255,0,255}));
+             connect(automationLevel_V31.y[19], fieldLevel.u[19]) annotation (Line(points={{-20,
+            -21.0278},{-20,-35.2389}}, color={255,0,255}));
+             connect(automationLevel_V31.y[20], fieldLevel.u[20]) annotation (Line(points={{-20,
+            -21.0833},{-20,-35.3167}}, color={255,0,255}));
+             connect(automationLevel_V31.y[21], fieldLevel.u[21]) annotation (Line(points={{-20,
+            -21.1389},{-20,-35.3944}}, color={255,0,255}));
+             connect(automationLevel_V31.y[22], fieldLevel.u[22]) annotation (Line(points={{-20,
+            -21.1944},{-20,-35.4722}}, color={255,0,255}));
+             connect(automationLevel_V31.y[23], fieldLevel.u[23]) annotation (Line(points={{-20,
+            -21.25},{-20,-35.55}},     color={255,0,255}));
+             connect(automationLevel_V31.y[24], fieldLevel.u[24]) annotation (Line(points={{-20,
+            -21.3056},{-20,-35.6278}}, color={255,0,255}));
+             connect(automationLevel_V31.y[25], fieldLevel.u[25]) annotation (Line(points={{-20,
+            -21.3611},{-20,-35.7056}}, color={255,0,255}));
+             connect(automationLevel_V31.y[26], fieldLevel.u[26]) annotation (Line(points={{-20,
+            -21.4167},{-20,-35.7833}}, color={255,0,255}));
+             connect(automationLevel_V31.y[27], fieldLevel.u[27]) annotation (Line(points={{-20,
+            -21.4722},{-20,-35.8611}}, color={255,0,255}));
+             connect(automationLevel_V31.y[28], fieldLevel.u[28]) annotation (Line(points={{-20,
+            -21.5278},{-20,-35.9389}}, color={255,0,255}));
+                   connect(automationLevel_V31.y[29], fieldLevel.u[29]) annotation (Line(points={{-20,
+            -21.5833},{-20,-36.0167}}, color={255,0,255}));
+             connect(automationLevel_V31.y[30], fieldLevel.u[30]) annotation (Line(points={{-20,
+            -21.6389},{-20,-36.0944}}, color={255,0,255}));
+             connect(automationLevel_V31.y[31], fieldLevel.u[31]) annotation (Line(points={{-20,
+            -21.6944},{-20,-36.1722}}, color={255,0,255}));
+             connect(automationLevel_V31.y[32], fieldLevel.u[32]) annotation (Line(points={{-20,
+            -21.75},{-20,-36.25}},     color={255,0,255}));
+             connect(automationLevel_V31.y[33], fieldLevel.u[33]) annotation (Line(points={{-20,
+            -21.8056},{-20,-36.3278}}, color={255,0,255}));
+             connect(automationLevel_V31.y[34], fieldLevel.u[34]) annotation (Line(points={{-20,
+            -21.8611},{-20,-36.4056}}, color={255,0,255}));
+             connect(automationLevel_V31.y[35], fieldLevel.u[35]) annotation (Line(points={{-20,
+            -21.9167},{-20,-36.4833}}, color={255,0,255}));
+             connect(automationLevel_V31.y[36], fieldLevel.u[36]) annotation (Line(points={{-20,
+            -21.9722},{-20,-36.5611}}, color={255,0,255}));
+
+
+
+
+
+
+    connect(mainBus, fieldLevel.mainBus) annotation (Line(
+        points={{94,-48},{-10,-48}},
+        color={255,204,51},
+        thickness=0.5));
     annotation (experiment(StopTime=86400, Interval=30));
   end testing_management_automation;
 
-  model testing_field
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
-  end testing_field;
 end Mode_based_ControlStrategy;
