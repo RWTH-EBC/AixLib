@@ -15,6 +15,7 @@ model ValidationPVSystem
     lon=-1.3476402739642,
     alt=0.67,
     timZon=-18000)
+    "PV System according to measurements taken from https://pvdata.nist.gov/  "
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
   final quantity="Power",
@@ -31,7 +32,7 @@ model ValidationPVSystem
 
     columns={3,5,2,4},
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
-    "The PVSystem model is validaded with empirical data from: https://pvdata.nist.gov/ "
+    "The PVSystem model is validaded with measurement data from: https://pvdata.nist.gov/ "
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
 
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC
@@ -83,5 +84,6 @@ equation
     Documentation(info="<html>
 <p>The PVSystem model is validaded with empirical data from: <a href=\"https://pvdata.nist.gov/\">https://pvdata.nist.gov/</a> </p>
 <p>The date 14.06.2016 was chosen as an example for the PVSystem model.</p>
+<p>The PV mounting is an open rack system based on the ground.</p>
 </html>"));
 end ValidationPVSystem;

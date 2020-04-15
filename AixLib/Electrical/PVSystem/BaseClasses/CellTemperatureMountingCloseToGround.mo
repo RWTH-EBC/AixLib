@@ -1,6 +1,7 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
 model CellTemperatureMountingCloseToGround
-  "Model for determining the cell temperature of a PV module mounted with the module backsite close to the ground"
+  "Model for determining the cell temperature of a PV module mounted with the 
+  module backsite close to the ground"
 
  extends AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature;
 

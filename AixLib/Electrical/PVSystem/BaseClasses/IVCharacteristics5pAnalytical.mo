@@ -1,6 +1,7 @@
 within AixLib.Electrical.PVSystem.BaseClasses;
-model IVCharacteristics5pAnalytical "Analytical 5-p model for PV I-V characteristics (Batzelis et al.,2016) with 
-  temp. dependency of the 5 parameters after (DeSoto et al.,2006)"
+model IVCharacteristics5pAnalytical "Analytical 5-p model for PV I-V 
+  characteristics (Batzelis et al.,2016) with temp. dependency of the 
+  5 parameters based on (DeSoto et al.,2006)"
 
 extends PartialIVCharacteristics;
 
