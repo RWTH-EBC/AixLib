@@ -41,7 +41,6 @@ model SubstationHeatingDirectCoolingDHW
     deltaT_heatingSet(displayUnit="K") = 10,
     deltaT_coolingGridSet(displayUnit="K") = 6,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     T_supplyDHWSet=333.15,
     T_returnSet=288.15,
     m_flow_nominal=0.1,
@@ -61,16 +60,16 @@ equation
     annotation (Line(points={{-56,-34},{-56,-8}}, color={0,127,255}));
   connect(const.y, coo1.T_in) annotation (Line(points={{-31,82},{4,82},{4,82},{
           40,82}}, color={0,0,127}));
-  connect(substationDirectHeatingCoolingDHW.port_b, senTem1.port_a) annotation
-    (Line(points={{14,14},{18,14},{18,12},{22,12}}, color={0,127,255}));
+  connect(substationDirectHeatingCoolingDHW.port_b, senTem1.port_a) annotation (
+     Line(points={{14,14},{18,14},{18,12},{22,12}}, color={0,127,255}));
   connect(senTem.port_b, substationDirectHeatingCoolingDHW.port_a)
     annotation (Line(points={{-36,-8},{-36,14},{-34,14}}, color={0,127,255}));
   connect(timeTable1.y, substationDirectHeatingCoolingDHW.coolingDemand)
     annotation (Line(points={{-77,12},{-52,12},{-52,18.2},{-24,18.2}}, color={0,
           0,127}));
   connect(substationDirectHeatingCoolingDHW.heatDemand, timeTable.y)
-    annotation (Line(points={{-24,27.6},{30.6,27.6},{30.6,-20},{55,-20}}, color
-        ={0,0,127}));
+    annotation (Line(points={{-24,27.6},{30.6,27.6},{30.6,-20},{55,-20}}, color=
+         {0,0,127}));
   connect(timeTable2.y, substationDirectHeatingCoolingDHW.dhwDemand)
     annotation (Line(points={{-77,48},{-48,48},{-48,23},{-24,23}}, color={0,0,
           127}));
