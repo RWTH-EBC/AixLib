@@ -2,7 +2,10 @@ within AixLib.Electrical.PVSystem.BaseClasses;
 partial model PartialCellTemperature "Partial model for determining the cell temperature of a PV moduleConnector for PV record data"
 
 // Parameters from module data sheet
- parameter AixLib.DataBase.SolarElectric.PVBaseRecord data = AixLib.DataBase.SolarElectric.QPlusBFRG41285() "PV Panel data definition";
+ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
+ constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
+ "PV Panel data definition"
+                           annotation (choicesAllMatching);
 
  parameter Modelica.SIunits.Efficiency eta_0=data.eta_0
     "Efficiency under standard conditions";

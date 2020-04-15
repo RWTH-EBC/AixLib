@@ -18,8 +18,7 @@ model ExamplePVSystem
         BaseClasses.CellTemperatureMountingCloseToGround,
     redeclare model IVCharacteristics = BaseClasses.PVModule5pAnalytical,
     timZon(displayUnit="s") = weaDat.timZon)
-    "Model for determining the DC output Power of a PV array; Modules mounted 
-    close to the ground (adjust to different mounting via cellTemp)"
+    "Model for determining the DC output Power of a PV array; Modules mounted close to the ground (adjust to different mounting via cellTemp)"
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=

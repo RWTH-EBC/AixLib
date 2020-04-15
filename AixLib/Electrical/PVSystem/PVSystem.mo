@@ -2,17 +2,20 @@ within AixLib.Electrical.PVSystem;
 model PVSystem
   "Model that determines the DC performance of a Silicium-based PV array"
 
-replaceable parameter AixLib.DataBase.SolarElectric.PVBaseRecord data
-    "Choose a PV module record" annotation (choicesAllMatching);
-replaceable model IVCharacteristics =
+ replaceable model IVCharacteristics =
     AixLib.Electrical.PVSystem.BaseClasses.PartialIVCharacteristics
     "Model for determining the I-V characteristics of a PV array" annotation (choicesAllMatching=
     true);
 
-replaceable model CellTemperature =
+ replaceable model CellTemperature =
     AixLib.Electrical.PVSystem.BaseClasses.PartialCellTemperature
     "Model for determining the cell temperature of a PV array" annotation (choicesAllMatching=
     true);
+
+ replaceable parameter AixLib.DataBase.SolarElectric.PVBaseDataDefinition data
+ constrainedby AixLib.DataBase.SolarElectric.PVBaseDataDefinition
+ "PV Panel data definition"
+                           annotation (choicesAllMatching);
 
  parameter Real n_mod
     "Number of connected PV modules";
