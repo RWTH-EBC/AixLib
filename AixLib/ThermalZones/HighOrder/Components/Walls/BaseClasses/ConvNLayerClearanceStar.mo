@@ -69,9 +69,6 @@ model ConvNLayerClearanceStar
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
-    "This really helps to solve initialisation problems in huge equation systems ..."                   annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
-
 equation
   connect(port_a, simpleNLayer.port_a) annotation (Line(points={{-100,0},{-14,0}},
                                     color={191,0,0}));
@@ -84,8 +81,6 @@ equation
       points={{73.1,38},{100,38},{100,62}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points={{52,0},{51.5,0},
-          {51.5,-38.5}},                                                                                color = {200, 100, 0}));
   // computing approximated longwave radiation exchange
 
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
