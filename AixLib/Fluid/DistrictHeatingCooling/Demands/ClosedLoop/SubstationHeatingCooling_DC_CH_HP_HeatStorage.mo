@@ -8,9 +8,9 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
     final parameter Real cp_default = 4180 "Cp-value of Water";
     final parameter Modelica.SIunits.Density rho = 1000 "Density of Water";
 
-    final parameter Modelica.SIunits.MassFlowRate m_flow_nominal_heating = HeatDemand_max/(cp_default*deltaT_heatingSet)
+    final parameter Modelica.SIunits.MassFlowRate m_flow_nominal_heating = heatDemand_max/(cp_default*deltaT_heatingSet)
     "Nominal mass flow rate";
-    final parameter Modelica.SIunits.MassFlowRate m_flow_nominal_cooling = -CoolingDemand_max/(cp_default*deltaT_coolingSet)
+    final parameter Modelica.SIunits.MassFlowRate m_flow_nominal_cooling = -coolingDemand_max/(cp_default*deltaT_coolingSet)
     "Nominal mass flow rate";
 
     parameter Modelica.SIunits.Power heatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
@@ -21,11 +21,11 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
     parameter Modelica.SIunits.Temperature T_coolingSupplySet "Supply Temperature of buildings cooling system, limit mvalue for direct cooling system";
     parameter Modelica.SIunits.TemperatureDifference deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
-    parameter Modelica.SIunits.Volume VTan=HeatDemand_max/(cp_default * rho * deltaT_heatingSet)*(3600) "Tank volume (default: discharge 1 h with max heat demand)";
+    parameter Modelica.SIunits.Volume VTan=heatDemand_max/(cp_default * rho * deltaT_heatingSet)*(3600) "Tank volume (default: discharge 1 h with max heat demand)";
     parameter Modelica.SIunits.Temperature T_storage_max "Max. Storage Temperatur for charging";
     parameter Modelica.SIunits.Temperature T_storage_min "Min. Storage Temperatur for discharging";
 
-    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = max(heatDemand_max(cp_default*deltaT_heatingSet),-coolingDemand_max(cp_default*deltaT_coolingSet))
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal = max(heatDemand_max/(cp_default*deltaT_heatingSet),-coolingDemand_max/(cp_default*deltaT_coolingSet))
     "Nominal mass flow rate";
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
@@ -85,14 +85,14 @@ public
     annotation (Placement(transformation(extent={{580,-68},{560,-48}})));
   AixLib.Fluid.Chillers.Carnot_TEva chi(
     redeclare package Medium1 = Medium,
-    QEva_flow_nominal=CoolingDemand_max,
+    QEva_flow_nominal=coolingDemand_max,
     use_eta_Carnot_nominal=true,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     dTEva_nominal=-5,
     dTCon_nominal=6,
     etaCarnot_nominal=0.3,
-    QEva_flow_min=CoolingDemand_max,
+    QEva_flow_min=coolingDemand_max,
     tau1=300,
     tau2=300,
     allowFlowReversal1=true,
@@ -161,10 +161,10 @@ public
     portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Entering,
     portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Leaving,
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    m_flow_nominal=m_flow_nominal_heating*{1,1,1},
+    m_flow_nominal=max(m_flow_nominal_heating)*{1,1,1},
     dp_nominal={0,dp_nominal,dp_nominal},
     verifyFlowReversal=false,
-    T_start=318.15,
+    T_start=328.15,
     redeclare package Medium = Medium,
     tau=10)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
@@ -221,7 +221,7 @@ public
     tau=1,
     T_start(displayUnit="degC") = T_heatingSupplySet - deltaT_heatingSet)
     annotation (Placement(transformation(extent={{276,-604},{256,-584}})));
-  InterFlexModels.EctoGrid.Components.Utilities.SubstationStorageHeating substationStorageHeating(
+  BaseClasses.SubstationStorageHeating                                   substationStorageHeating(
     T_min(displayUnit="K") = T_storage_min,
     T_max(displayUnit="K") = T_storage_max,
     redeclare package Medium = Medium,
@@ -306,7 +306,7 @@ public
         transformation(extent={{-260,114},{-278,132}}), iconTransformation(
           extent={{-260,56},{-294,90}})));
 public
-  InterFlexModels.HeatPump.heatPump_simple heatPump(
+  BaseClasses.heatPump_simple              heatPump(
     redeclare package Medium2 = Medium,
     allowFlowReversal1=true,
     allowFlowReversal2=true,
@@ -314,7 +314,7 @@ public
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     eta_car=0.55,
-    Capacity=HeatDemand_max,
+    Capacity=2*heatDemand_max,
     T_max_storage=T_storage_max)
     annotation (Placement(transformation(extent={{80,-176},{144,-110}})));
 public
@@ -339,7 +339,7 @@ public
         T_heatingSupplySet)
     annotation (Placement(transformation(extent={{340,-226},{320,-206}})));
 protected
-  Modelica.Blocks.Sources.RealExpression PEle1(y=HeatDemand_max/4)
+  Modelica.Blocks.Sources.RealExpression PEle1(y=heatDemand_max/4)
     "Maximum electrical power consumption"
     annotation (Placement(transformation(extent={{-168,90},{-188,110}})));
 protected
@@ -374,7 +374,7 @@ protected
         mass_flow_heatExchangerHeating.y) "Inlet temperature of heat pump"
     annotation (Placement(transformation(extent={{-94,-456},{-74,-436}})));
 public
-  InterFlexModels.EctoGrid.Components.Utilities.MassFlowControllerHeating massFlowControllerHeating(
+  BaseClasses.MassFlowControllerHeating                                   massFlowControllerHeating(
     deltaT_he=deltaT_heatingSet,
     T_storage_min=T_storage_min,
     T_storage_max=T_storage_max,
@@ -382,7 +382,7 @@ public
     m_flow_nominal=m_flow_nominal,
     capacity=heatPump.Capacity)
     annotation (Placement(transformation(extent={{-12,-430},{70,-358}})));
-  InterFlexModels.EctoGrid.Components.Utilities.MassFlowControllerCooling
+  BaseClasses.MassFlowControllerCooling
     massFlowControllerCooling(
     T_max_directCooling=T_coolingSupplySet,
     deltaT_coolingSet=deltaT_coolingSet,              m_flow_nominal=
@@ -494,7 +494,7 @@ public
     portFlowDirection_1=Modelica.Fluid.Types.PortFlowDirection.Entering,
     portFlowDirection_2=Modelica.Fluid.Types.PortFlowDirection.Leaving,
     portFlowDirection_3=Modelica.Fluid.Types.PortFlowDirection.Bidirectional,
-    m_flow_nominal=m_flow_nominal_heating*{1,1,1},
+    m_flow_nominal=max(m_flow_nominal_heating)*{1,1,1},
     dp_nominal={0,dp_nominal,dp_nominal},
     verifyFlowReversal=false,
     T_start=Medium.T_default,
