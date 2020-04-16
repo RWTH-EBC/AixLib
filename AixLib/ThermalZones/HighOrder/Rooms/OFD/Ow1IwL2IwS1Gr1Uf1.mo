@@ -89,7 +89,7 @@ model Ow1IwL2IwS1Gr1Uf1
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
-    eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-64,-14},{-54,42}})));
+    eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     T0=T0_IW1,
     outside=false,
@@ -318,10 +318,10 @@ equation
                                                             color={191,0,0}));
   connect(Ceiling.port_outside, thermCeiling)
     annotation (Line(points={{-31,62.1},{-31,70},{90,70}}, color={191,0,0}));
-  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-64.25,34.5333},{-80,34.5333},{-80,-60},{-99.5,-60}},
+  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,34.5333},{-80,34.5333},{-80,-60},{-99.5,-60}},
                                                                  color={0,0,127}));
   connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
-     Line(points={{-99.5,60},{-80,60},{-80,39.6667},{-65.5,39.6667}}, color={
+     Line(points={{-99.5,60},{-80,60},{-80,39.6667},{-61.5,39.6667}}, color={
           255,128,0}));
   connect(thermCeiling, thermCeiling) annotation (Line(points={{90,70},{85,70},
           {85,70},{90,70}}, color={191,0,0}));
@@ -329,6 +329,14 @@ equation
       points={{-6,-94},{-6,-74},{-24,-74},{-24,-62.1},{-27,-62.1}},
       color={191,0,0},
       pattern=LinePattern.Dash));
+  connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-27,-58},{-26,-58},{-26,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(inside_wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{25,-54},{24,-54},{24,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(inside_wall2b.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{58,-17},{56,-17},{56,-16},{50,-16},{50,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(inside_wall2a.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{58,23},{56,23},{56,22},{50,22},{50,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(inside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{23,54},{24,54},{24,44},{50,44},{50,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-31,58},{-30,58},{-30,44},{50,44},{50,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(outside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-50,14},{-44,14},{-44,44},{50,44},{50,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(outside_wall1.port_outside, thermOutside) annotation (Line(points={{-60.25,14},{-78,14},{-78,100},{-100,100}}, color={191,0,0}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{6,65},{-6,-65}},

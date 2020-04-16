@@ -97,7 +97,8 @@ model Ow2IwL2IwS1Lf1At1Ro1
       descriptionLabel=true,
       enable=withDoor2));
 
-
+  parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
+    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
@@ -410,6 +411,9 @@ equation
   connect(WindSpeedPort, roof.WindSpeedPort) annotation (Line(points={{-112.75,53},{-96,53},{-96,70},{71.4667,70},{71.4667,62.15}}, color={0,0,127}));
   connect(WindSpeedPort, outside_wall2.WindSpeedPort) annotation (Line(points={{-112.75,53},{-96,53},{-96,70},{-0.8,70},{-0.8,64.3}}, color={0,0,127}));
   connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-24,-58},{-24,-48},{-6.1875,-48},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(outside_wall1.port_outside, thermOutside) annotation (Line(points={{-88.25,4},{-94,4},{-94,100},{-100,100}}, color={191,0,0}));
+  connect(outside_wall2.port_outside, thermOutside) annotation (Line(points={{-25,64.3},{-25,100},{-100,100}}, color={191,0,0}));
+  connect(roof.port_outside, thermOutside) annotation (Line(points={{59,62.15},{59,76},{-25,76},{-25,100},{-100,100}}, color={191,0,0}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-80,80},{80,60}},
