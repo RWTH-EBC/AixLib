@@ -2,7 +2,7 @@ within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL1IwS1Gr1Uf1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
 
-  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom;
+  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(final room_V=room_length*room_width*room_height);
 
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
@@ -24,8 +24,7 @@ model Ow2IwL1IwS1Gr1Uf1
       radioButtons=true));
 
   //Initial temperatures
-  parameter Modelica.SIunits.Temperature T0_air=295.15 "Air"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
+
   parameter Modelica.SIunits.Temperature T0_OW1=295.15 "OW1"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   parameter Modelica.SIunits.Temperature T0_OW2=295.15 "OW2"
@@ -45,17 +44,7 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Height room_height=2 "height"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  // Outer wall properties
-  parameter Real solar_absorptance_OW=0.25 "Solar absoptance outer walls "
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
-  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
-      group="Outer wall properties",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "DIN 6946",
-      choice=2 "ASHRAE Fundamentals",
-      choice=3 "Custom hCon (constant)",
-      radioButtons=true));
+
   // Windows and Doors
   parameter Boolean withWindow1=true "Window 1" annotation (Dialog(
       group="Windows and Doors",
@@ -106,41 +95,6 @@ model Ow2IwL1IwS1Gr1Uf1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
-  // Sunblind
-  parameter Boolean use_sunblind = false
-    "Will sunblind become active automatically?"
-    annotation(Dialog(group = "Sunblind"));
-  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
-    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
-    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
-    "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  // Dynamic Ventilation
-  parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
-    annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
-      choices(checkBox=true));
-  parameter Modelica.SIunits.Temperature HeatingLimit=288.15
-    "Outside temperature at which the heating activates" annotation (Dialog(
-      group="Dynamic ventilation",
-      descriptionLabel=true,
-      enable=if withDynamicVentilation then true else false));
-  parameter Real Max_VR=10 "Maximal ventilation rate" annotation (Dialog(
-      group="Dynamic ventilation",
-      descriptionLabel=true,
-      enable=if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset=2
-    "Difference to set temperature" annotation (Dialog(
-      group="Dynamic ventilation",
-      descriptionLabel=true,
-      enable=if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.Temperature Tset=295.15 "Tset" annotation (Dialog(
-      group="Dynamic ventilation",
-      descriptionLabel=true,
-      enable=if withDynamicVentilation then true else false));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
@@ -213,10 +167,6 @@ model Ow2IwL1IwS1Gr1Uf1
         origin={16,-60},
         extent={{-4,-24},{4,24}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,
-    final V=room_V)
-    annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
@@ -245,7 +195,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final TOutAirLimit=TOutAirLimit,
     outside=false,
     withDoor=false,
-    ISOrientation=2) if withFloorHeating == false annotation (Placement(transformation(
+    ISOrientation=2)                              annotation (Placement(transformation(
         origin={-29,-65},
         extent={{-3.00001,-15},{2.99998,15}},
         rotation=90)));
@@ -253,8 +203,6 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
-    annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-109.5,-50},{-89.5,-30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
@@ -266,57 +214,8 @@ model Ow2IwL1IwS1Gr1Uf1
         rotation=270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation (
-      Placement(transformation(extent={{-32,10},{-12,30}}), iconTransformation(
-          extent={{-32,10},{-12,30}})));
-  Modelica.Blocks.Interfaces.RealInput AirExchangePort annotation (Placement(
-        transformation(
-        extent={{-13,-13},{13,13}},
-        rotation=270,
-        origin={-20,100}), iconTransformation(
-        extent={{-10.5,-10.5},{10.5,10.5}},
-        rotation=270,
-        origin={-20.5,98.5})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair
-    annotation (Placement(transformation(extent={{24,-20},{38,-6}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.InfiltrationRate_DIN12831
-    infiltrationRate(
-    room_V=room_V,
-    n50=n50,
-    e=e,
-    eps=eps) annotation (Placement(transformation(extent={{-70,50},{-52,58}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.DynamicVentilation
-    dynamicVentilation(
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    Tset=Tset) if withDynamicVentilation
-    annotation (Placement(transformation(extent={{-70,-60},{-48,-48}})));
-  AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
-        extent={{-10,8},{10,-8}},
-        rotation=90,
-        origin={-20,-26})));
-  AixLib.Utilities.Interfaces.RadPort starRoom annotation (Placement(transformation(
-          extent={{10,10},{30,30}}), iconTransformation(extent={{10,10},{30,30}})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.VarAirExchange
-    NaturalVentilation(V=room_V)
-    annotation (Placement(transformation(extent={{-70,-44},{-50,-24}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer
-    floor_FH(
-    final A=room_width*room_length,
-    final wallRec=Type_FL,
-    final T0=T0_FL) if withFloorHeating "floor component if using Floor heating"
-    annotation (Placement(transformation(
-        origin={-30,-87},
-        extent={{3.00007,16},{-3,-16}},
-        rotation=90)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
-    thermFloorHeatingDownHeatFlow if                                withFloorHeating
-    "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling"
-    annotation (Placement(transformation(extent={{-84,-86},{-70,-72}}),
-        iconTransformation(extent={{-56,-92},{-36,-72}})));
 protected
   parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
      Dialog(
@@ -338,14 +237,7 @@ protected
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
-  // Infiltration rate
-  parameter Real n50(unit="h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR ==
-    3 then 4 else 6 "Air exchange rate at 50 Pa pressure difference"
-    annotation (Dialog(tab="Infiltration"));
-  parameter Real e=0.03 "Coefficient of windshield"
-    annotation (Dialog(tab="Infiltration"));
-  parameter Real eps=1.0 "Coefficient of height"
-    annotation (Dialog(tab="Infiltration"));
+
   // Outer wall type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_OW=if TIR == 1
        then if TMC == 1 then AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
@@ -402,8 +294,7 @@ protected
     annotation (Dialog(tab="Types"));
   // Floor to ground type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
-   if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating4Layers()
-  else if TIR == 1
+  if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else
       if TIR == 2 then
       AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR ==
@@ -412,8 +303,7 @@ protected
     annotation (Dialog(tab="Types"));
   // Ceiling to upper floor type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
-  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers()
-  else if TIR == 1
+  if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf()
        else
@@ -441,7 +331,7 @@ protected
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984()
     annotation (Dialog(tab="Types"));
-  parameter Modelica.SIunits.Volume room_V=room_length*room_width*room_height;
+
 equation
   connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-66.25,33.4667},{-80,33.4667},{-80,-40},{-99.5,-40}},
                                                                 color={0,0,127}));
@@ -451,72 +341,18 @@ equation
     annotation (Line(points={{64.3,5},{90,5},{90,10}}, color={191,0,0}));
   connect(outside_wall2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{40.2667,62.2502},{40.2667,68},{40.2667,70},{-80,70},{-80,-40},{-99.5,-40}},
         color={0,0,127}));
-  connect(infiltrationRate.port_a, thermOutside) annotation (Line(points={{-70,54},
-          {-80,54},{-80,80},{-90,80},{-90,90}}, color={191,0,0}));
-  connect(outside_wall1.port_outside, thermOutside) annotation (Line(points={{-66.25,
-          10},{-80,10},{-80,80},{-90,80},{-90,90}}, color={191,0,0}));
-  connect(thermRoom, thermRoom)
-    annotation (Line(points={{-22,20},{-22,20}}, color={191,0,0}));
-  connect(starRoom, thermStar_Demux.portRad) annotation (Line(
-      points={{20,20},{20,4},{-14.2,4},{-14.2,-15.6}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(outside_wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{19,52},{19,52},{19,40},{-40,40},{-40,-40},{-18.7,-40},{-18.7,-35.8}}, color={191,0,0}));
   connect(outside_wall2.SolarRadiationPort, SolarRadiationPort_OW2) annotation (
      Line(points={{45.5833,63.5002},{45.5833,80.7501},{50.5,80.7501},{50.5,99}},
         color={255,128,0}));
   connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
      Line(points={{-99.5,30},{-80,30},{-80,39.3333},{-67.5,39.3333}}, color={255,
           128,0}));
-  connect(thermOutside, thermOutside)
-    annotation (Line(points={{-90,90},{-90,90}}, color={191,0,0}));
   connect(inside_wall2.port_outside, thermInsideWall2) annotation (Line(points={
           {16,-64.2},{16,-75.45},{30,-75.45},{30,-90}}, color={191,0,0}));
-  connect(inside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{52,5},{50,5},{40,5},{40,-40},{-18.7,
-          -40},{-18.7,-35.8}},                                                                                                                                   color={191,0,0}));
   connect(Ceiling.port_outside, thermCeiling)
     annotation (Line(points={{-30,62.15},{-30,70},{90,70}}, color={191,0,0}));
-  connect(thermStar_Demux.portConv, thermRoom) annotation (Line(points={{-25.1,-15.9},{-25.1,1.05},{-22,1.05},{-22,20}}, color={191,0,0}));
-  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-25.1,-15.9},{-25.1,-20},{10,-20}},color={191,0,0}));
-  connect(outside_wall2.port_outside, thermOutside) annotation (Line(points={{19,62.2502},{19,70},{-80,70},{-80,80},{-90,80},{-90,90}},
-                                                                 color={191,0,0}));
-  connect(infiltrationRate.port_b, airload.port) annotation (Line(points={{-52,54},{-40,54},{-40,-40},{-6,-40},{-6,-20},{10,-20}},
-                                                         color={191,0,0}));
-  connect(Tair.port, airload.port) annotation (Line(points={{24,-13},{24,-40},{-6,-40},{-6,-20},{10,-20}},
-                                  color={191,0,0}));
-  connect(Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-30,56},{-30,40},{-40,40},{-40,-40},{-18.7,-40},{-18.7,-35.8}}, color={191,0,0}));
-  connect(inside_wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{16,-56},{16,-40},{-18.7,-40},{-18.7,
-          -35.8}},                                                                                                                                   color={191,0,0}));
-  connect(outside_wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-56,10},{-40,10},{-40,-40},{-18.7,-40},
-          {-18.7,-35.8}},                                                                                                                                       color={191,0,0}));
-  connect(AirExchangePort, NaturalVentilation.InPort1) annotation (Line(points={
-          {-20,100},{-20,70},{-80,70},{-80,-40.4},{-69,-40.4}}, color={0,0,127}));
-  connect(thermOutside, NaturalVentilation.port_a) annotation (Line(points={{-90,
-          90},{-80,90},{-80,-34},{-70,-34}}, color={191,0,0}));
-  connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-50,-34},{-40,-34},{-40,-40},{-6,-40},{-6,-20},{10,-20}},
-                                                               color={191,0,0}));
-  connect(ground, floor_FH.port_b) annotation (Line(
-      points={{-6,-94},{-32,-94},{-32,-90},{-30,-90}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
-      points={{-77,-79},{-77,-80},{-30,-80},{-30,-83.9999}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
   connect(ground, floor.port_outside) annotation (Line(
       points={{-6,-94},{-6,-74},{-24,-74},{-24,-68.15},{-29,-68.15}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(
-      points={{-29,-62},{-29,-40},{-18.7,-40},{-18.7,-35.8}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(dynamicVentilation.port_inside, airload.port) annotation (Line(
-      points={{-48.66,-54.6},{-2,-54.6},{-2,-48},{-2,-48},{-2,-20},{10,-20}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
-  connect(dynamicVentilation.port_outside, thermOutside) annotation (Line(
-      points={{-69.56,-54.6},{-78,-54.6},{-78,92},{-84,92},{-84,90},{-90,90}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
