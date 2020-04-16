@@ -55,11 +55,12 @@ model Wall_ASHRAE140
    parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                     annotation(Dialog( tab="Window", enable = outside));
 
-   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
-                                                          WindowType=
-           AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
-    "Choose a window type from the database"
-                           annotation(Dialog( tab="Window", enable = withWindow and outside),choicesAllMatching= true);
+    replaceable model Window =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
+    constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    "Model for window"
+                     annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
    parameter Modelica.SIunits.Area windowarea=2 "Area of window" annotation(Dialog( tab="Window",  enable = withWindow and outside));
 
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
