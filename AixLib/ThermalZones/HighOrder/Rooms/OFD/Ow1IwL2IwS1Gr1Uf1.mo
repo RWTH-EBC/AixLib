@@ -22,9 +22,7 @@ model Ow1IwL2IwS1Gr1Uf1
       choice=3 "WSchV_1995",
       choice=4 "WSchV_1984",
       radioButtons=true));
-  parameter Boolean withFloorHeating=false
-    "If true, that floor has different connectors" annotation (Dialog(group=
-          "Construction parameters"), choices(checkBox=true));
+
   parameter Modelica.SIunits.Temperature T0_air=295.15 "Air"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   parameter Modelica.SIunits.Temperature T0_OW1=295.15 "OW1"
