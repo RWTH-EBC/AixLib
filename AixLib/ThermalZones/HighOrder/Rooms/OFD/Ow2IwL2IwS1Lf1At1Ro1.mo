@@ -60,19 +60,7 @@ model Ow2IwL2IwS1Lf1At1Ro1
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Length roof_width=2 "wRO"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  // Outer walls properties
-  parameter Real solar_absorptance_OW=0.25 "Solar absoptance outer walls "
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
-  parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
-  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
-      group="Outer wall properties",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "DIN 6946",
-      choice=2 "ASHRAE Fundamentals",
-      choice=3 "Custom hCon (constant)",
-      radioButtons=true));
+
   // Windows and Doors
   parameter Boolean withWindow2=true "Window 2" annotation (Dialog(
       group="Windows and Doors",
@@ -108,21 +96,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
-  // Sunblind
-  parameter Boolean use_sunblind = false
-    "Will sunblind become active automatically?"
-    annotation(Dialog(group = "Sunblind"));
-  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
-    "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
-    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
-    "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
 
-  //Door properties
+
+
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
     T0=T0_OW1,
@@ -140,6 +116,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wallPar=Type_OW) annotation (Placement(transformation(extent={{-88,-24},{-78,32}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
     solar_absorptance=solar_absorptance_OW,
+    calcMethodOut=1,
+    hConOut_const=hConOut_const,
+    surfaceType=surfaceType,
     windowarea=windowarea_OW2,
     T0=T0_OW2,
     door_height=door_height_OD2,
