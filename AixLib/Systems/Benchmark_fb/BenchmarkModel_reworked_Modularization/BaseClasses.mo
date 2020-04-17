@@ -16,7 +16,8 @@ package BaseClasses
 
     replaceable AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent
       humanSenHea(
-      final T0=zoneParam.T_start) if     ATot > 0
+      final T0=zoneParam.T_start, radiationConvertor(
+                                  A =                  1)) if    ATot > 0
       "Internal gains from persons" annotation (choicesAllMatching=true,
         Placement(transformation(extent={{64,-36},{84,-16}})));
     replaceable AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
@@ -159,26 +160,15 @@ package BaseClasses
       "Prescribed temperature for windows outdoor surface temperature"
       annotation (Placement(transformation(extent={{4,23},{16,35}})));
 
+    Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin1 if
+      sum(zoneParam.AWin) > 0
+      "Prescribed temperature for windows outdoor surface temperature"
+      annotation (Placement(transformation(extent={{20,-47},{32,-35}})));
   equation
-    connect(intGains[1],humanSenHea. Schedule) annotation (Line(points={{80,
-            -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
-          color={0,0,127}));
     connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-100},
             {80,-100},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
     connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},
             {80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
-    connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
-            {92,-60.8},{92,-60},{92,-60},{92,50},{86,50},{86,50}},
-                                         color={191,0,0}));
-    connect(machinesSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
-            -40.8},{92,-40.8},{92,-40},{92,-40},{92,50},{86,50},{86,50}},
-                                                   color={191,0,0}));
-    connect(humanSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
-            {94,-27},{94,54},{86,54}},   color={95,95,95}));
-    connect(machinesSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,
-            -52.01},{94,-52.01},{94,54},{86,54}},   color={95,95,95}));
-    connect(lights.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.01},
-            {94,-72.01},{94,54},{86,54}},   color={95,95,95}));
     connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,
             11.8},{-12,11.8},{-12,24},{-2,24},{-2,28},{-2,29},{0,29},{2.8,29}},
                                                   color={0,0,127}));
@@ -291,15 +281,31 @@ package BaseClasses
             -9.6},{25,8}},                                                                color={0,0,127}));
     connect(hConWin.y, theConWin.Gc) annotation (Line(points={{16,-22.4},{16,34},
             {25,34}},                                                                   color={0,0,127}));
-    connect(humanSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
-            -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
-          color={191,0,0}));
           connect(HDifTill.HSkyDifTil, corGMod.HSkyDifTil) annotation (Line(points={{-91,14},
               {-64,14},{-64,44.2},{-13.2,44.2}},             color={0,0,127}));
 
   connect(HDifTill.HGroDifTil, corGMod.HGroDifTil) annotation (Line(points={{-91,2},
             {-64,2},{-64,41.8},{-13.2,41.8}},                color={0,0,127}));
 
+    connect(intGains[1], humanSenHea.schedule) annotation (Line(points={{80,
+            -113.333},{70,-113.333},{70,-88},{56,-88},{56,-27.1},{64.9,-27.1}},
+                                                                      color={0,0,127}));
+    connect(humanSenHea.convHeat, intGainsConv) annotation (Line(points={{83,-21},
+            {90,-21},{90,50},{92,50},{92,-2},{104,-2}}, color={191,0,0}));
+    connect(humanSenHea.radHeat, ROM.intGainsRad)
+      annotation (Line(points={{83,-27},{86,-27},{86,54}}, color={95,95,95}));
+    connect(preTemWin1.port, humanSenHea.TRoom)
+      annotation (Line(points={{32,-41},{65,-41},{65,-17}}, color={191,0,0}));
+    connect(TAir, preTemWin1.T)
+      annotation (Line(points={{110,56},{18.8,56},{18.8,-41}}, color={0,0,127}));
+    connect(machinesSenHea.ConvHeat, ROM.intGainsConv)
+      annotation (Line(points={{83,-40.8},{86,-40.8},{86,50}}, color={191,0,0}));
+    connect(machinesSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,
+            -52.01},{86,-52.01},{86,54}}, color={95,95,95}));
+    connect(lights.ConvHeat, ROM.intGainsConv)
+      annotation (Line(points={{83,-60.8},{86,-60.8},{86,50}}, color={191,0,0}));
+    connect(lights.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.01},
+            {86,-72.01},{86,54}}, color={95,95,95}));
     annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
@@ -594,6 +600,8 @@ package BaseClasses
       Modelica.Blocks.Interfaces.RealInput AER "Air exchange rate "
         annotation (Placement(transformation(extent={{-122,-62},{-100,-40}}),
             iconTransformation(extent={{-120,-60},{-100,-40}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_inside
+      annotation (Placement(transformation(extent={{-110,74},{-98,86}})));
   equation
     connect(thermStar_Demux.portRad, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
@@ -608,9 +616,6 @@ package BaseClasses
           color={191,0,0}));
       connect(floor.port_outside, Therm_ground) annotation (Line(
           points={{-32,-66.1003},{-32,-96}},
-          color={191,0,0}));
-      connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
-          points={{26,-68.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
           color={191,0,0}));
       connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
           points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
@@ -706,6 +711,8 @@ package BaseClasses
     connect(outerWall_North.solarRadWinTrans, outerWall_South.solarRadWin)
       annotation (Line(points={{58.25,-16.6667},{-61.3,-16.6667},{-61.3,33.3333}},
           color={0,0,127}));
+    connect(outerWall_East.port_outside, Therm_inside) annotation (Line(points={{26,
+            -68.2},{26,-80},{-86,-80},{-86,80},{-104,80}},      color={191,0,0}));
       annotation ( Icon(coordinateSystem(extent={{-100,-100},
                 {100,100}}, preserveAspectRatio=false),
                                           graphics={
@@ -836,12 +843,12 @@ package BaseClasses
       windowarea=60,
       withDoor=false,
       T0=T0_IW,
-      outside=false,
+      outside=true,
       final withSunblind=use_sunblind,
       final Blinding=1 - ratioSunblind,
       final LimitSolIrr=solIrrThreshold,
       final TOutAirLimit=TOutAirLimit,
-      WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
+      WallType=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
       calcMethod=2) annotation (Placement(transformation(
@@ -854,19 +861,19 @@ package BaseClasses
       withWindow=false,
       windowarea=60,
       T0=T0_IW,
-      outside=false,
+      outside=true,
       final withSunblind=use_sunblind,
       final Blinding=1 - ratioSunblind,
       final LimitSolIrr=solIrrThreshold,
       final TOutAirLimit=TOutAirLimit,
-      WallType=DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half(),
+      WallType=DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
       solar_absorptance=solar_absorptance_OW,
       surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
       calcMethod=2)
       annotation (Placement(transformation(
           extent={{-4.00001,-24},{4.00001,24}},
           rotation=90,
-          origin={26,-64})));
+          origin={26,-66})));
     AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_North(
       wall_height=Room_Height,
       withWindow=true,
@@ -932,7 +939,7 @@ package BaseClasses
           rotation=90,
           origin={-32,-32})));
       Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
-        annotation (Placement(transformation(extent={{32,-34},{42,-24}})));
+        annotation (Placement(transformation(extent={{24,-34},{34,-24}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
         annotation (Placement(transformation(extent={{-36,-100},{-28,-92}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_outside
@@ -943,7 +950,7 @@ package BaseClasses
   public
       AixLib.Utilities.Interfaces.RadPort
                               starRoom
-        annotation (Placement(transformation(extent={{0,18},{18,34}})));
+        annotation (Placement(transformation(extent={{0,20},{18,36}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom
         annotation (Placement(transformation(extent={{-36,16},{-22,30}})));
       Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
@@ -958,7 +965,7 @@ package BaseClasses
             iconTransformation(extent={{-120,-60},{-100,-40}})));
   equation
     connect(thermStar_Demux.portRad, starRoom) annotation (Line(
-        points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
+        points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,28}},
         color={95,95,95},
         pattern=LinePattern.Solid));
     connect(thermStar_Demux.portConv, thermRoom) annotation (Line(points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}}, color={191,0,0}));
@@ -971,14 +978,8 @@ package BaseClasses
       connect(floor.port_outside, Therm_ground) annotation (Line(
           points={{-32,-66.1003},{-32,-96}},
           color={191,0,0}));
-      connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
-          points={{26,-68.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
       connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
           points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
-      connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
-          points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
           color={191,0,0}));
       connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
           points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
@@ -986,8 +987,8 @@ package BaseClasses
     connect(outerWall_South.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,4},{-54,4},{-54,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
     connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-32,-62},
             {-32,-41.8},{-30.7,-41.8}},                                                                                                 color={191,0,0}));
-    connect(outerWall_East.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,-60},
-            {28,-60},{28,-56},{-30.7,-56},{-30.7,-41.8}},                                                                                                         color={191,0,0}));
+    connect(outerWall_East.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,-62},
+            {28,-62},{28,-56},{-30.7,-56},{-30.7,-41.8}},                                                                                                         color={191,0,0}));
     connect(outerWall_North.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{60,4},{46,4},{46,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
     connect(outerWall_West.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,74},{26,60},{46,60},{46,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
     connect(ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-32,76},{-32,60},{46,60},{46,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
@@ -995,7 +996,7 @@ package BaseClasses
           points={{-32,80.1},{-32,88},{-86,88},{-86,97},{-105,97}},
           color={191,0,0}));
       connect(outerWall_East.WindSpeedPort, WindSpeedPort) annotation (Line(
-          points={{8.4,-68.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},
+          points={{8.4,-70.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},
           color={0,0,127}));
       connect(ceiling.WindSpeedPort, WindSpeedPort) annotation (Line(
           points={{-23.2,80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}},
@@ -1003,10 +1004,6 @@ package BaseClasses
       connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(
           points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{
             -112,28}},
-          color={0,0,127}));
-
-      connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(
-          points={{43.6,82.2},{43.6,88},{-86,88},{-86,28},{-112,28}},
           color={0,0,127}));
 
       connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
@@ -1017,33 +1014,22 @@ package BaseClasses
           Line(
           points={{-21,80.6},{-21,88},{-86,88},{-86,68},{-110,68}},
           color={255,128,0}));
-      connect(outerWall_West.SolarRadiationPort, SolarRadiationPort[4]) annotation (
-         Line(
-          points={{48,83.2},{48,88},{-86,88},{-86,64},{-110,64}},
-          color={255,128,0}));
       connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
         annotation (Line(
           points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,
             52}},
           color={255,128,0}));
 
-      connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
-         Line(
-          points={{4,-69.2},{4,-80},{-86,-80},{-86,56},{-110,56}},
-          color={255,128,0}));
       connect(varAirExchange.port_a, Therm_outside) annotation (Line(
           points={{-82,-56},{-86,-56},{-86,97},{-105,97}},
           color={191,0,0}));
     connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}}, color={191,0,0}));
       connect(airload.port, temperatureSensor.port) annotation (Line(
-          points={{10.9,-10.8},{4,-10.8},{4,-29},{32,-29}},
+          points={{10.9,-10.8},{4,-10.8},{4,-29},{24,-29}},
           color={191,0,0}));
       connect(varAirExchange.port_b, airload.port) annotation (Line(
           points={{-62,-56},{4,-56},{4,-10.8},{10.9,-10.8}},
           color={191,0,0}));
-    connect(outerWall_East.WindSpeedPort, outerWall_South.WindSpeedPort)
-      annotation (Line(points={{8.4,-68.2},{8.4,-80},{-86,-80},{-86,33.3333},{
-            -76.35,33.3333},{-76.35,33.3333}}, color={0,0,127}));
     connect(WindSpeedPort, floor.WindSpeedPort) annotation (Line(points={{-112,28},
             {-108,28},{-108,20},{-40.8,20},{-40.8,-66.1003}},     color={0,0,
             127}));
@@ -1061,13 +1047,26 @@ package BaseClasses
           color={0,0,127}));
     connect(outerWall_South.solarRadWinTrans, outerWall_East.solarRadWin)
       annotation (Line(points={{-60.25,-16.6667},{-26.125,-16.6667},{-26.125,
-            -59.6},{8.4,-59.6}}, color={0,0,127}));
+            -61.6},{8.4,-61.6}}, color={0,0,127}));
     connect(outerWall_South.solarRadWinTrans, floor.solarRadWin) annotation (
         Line(points={{-60.25,-16.6667},{-60.25,-61.8},{-40.8,-61.8}}, color={0,
             0,127}));
     connect(outerWall_North.solarRadWinTrans, outerWall_South.solarRadWin)
       annotation (Line(points={{58.25,-16.6667},{-61.3,-16.6667},{-61.3,33.3333}},
           color={0,0,127}));
+    connect(outerWall_West.port_outside, Therm_outside)
+      annotation (Line(points={{26,82.2},{26,97},{-105,97}}, color={191,0,0}));
+    connect(outerWall_East.port_outside, Therm_outside) annotation (Line(points
+          ={{26,-70.2},{26,-72},{-130,-72},{-130,97},{-105,97}}, color={191,0,0}));
+    connect(SolarRadiationPort[4], outerWall_West.SolarRadiationPort)
+      annotation (Line(points={{-110,64},{-96,64},{-96,58},{60,58},{60,92},{48,
+            92},{48,83.2}}, color={255,128,0}));
+    connect(WindSpeedPort, outerWall_West.WindSpeedPort) annotation (Line(
+          points={{-112,28},{-104,28},{-104,32},{43.6,32},{43.6,82.2}}, color={
+            0,0,127}));
+    connect(SolarRadiationPort[2], outerWall_East.SolarRadiationPort)
+      annotation (Line(points={{-110,56},{-104,56},{-104,38},{4,38},{4,-71.2}},
+          color={255,128,0}));
       annotation ( Icon(coordinateSystem(extent={{-100,-100},
                 {100,100}}, preserveAspectRatio=false),
                                           graphics={
@@ -1322,6 +1321,8 @@ package BaseClasses
             iconTransformation(extent={{-120,-60},{-100,-40}})));
     Modelica.Blocks.Sources.Constant const(k=0)
       annotation (Placement(transformation(extent={{74,58},{94,78}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_inside
+      annotation (Placement(transformation(extent={{-112,74},{-98,88}})));
   equation
     connect(thermStar_Demux.portRad, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
@@ -1331,20 +1332,11 @@ package BaseClasses
       connect(varAirExchange.InPort1, AER) annotation (Line(
           points={{-81,-62.4},{-111,-62.4},{-111,-51}},
           color={0,0,127}));
-      connect(outerWall_South.port_outside, Therm_outside) annotation (Line(
-          points={{-78.35,4},{-86,4},{-86,97},{-105,97}},
-          color={191,0,0}));
       connect(floor.port_outside, Therm_ground) annotation (Line(
           points={{-32,-66.1003},{-32,-96}},
           color={191,0,0}));
-      connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
-          points={{26,-68.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
       connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
           points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
-      connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
-          points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
           color={191,0,0}));
     connect(outerWall_South.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-64,4},
             {-54,4},{-54,-56},{-30.7,-56},{-30.7,-41.8}},                                                                                                         color={191,0,0}));
@@ -1409,14 +1401,21 @@ package BaseClasses
     connect(outerWall_North.solarRadWinTrans, outerWall_West.solarRadWin)
       annotation (Line(points={{58.25,-16.6667},{58.25,73.6},{43.6,73.6}},
           color={0,0,127}));
-    connect(const.y, outerWall_North.solarRadWin) annotation (Line(points={{95,
-            68},{98,68},{98,64},{59.3,64},{59.3,33.3333}}, color={0,0,127}));
+    connect(const.y, outerWall_North.solarRadWin) annotation (Line(points={{95,68},
+            {98,68},{98,64},{59.3,64},{59.3,33.3333}},     color={0,0,127}));
     connect(WindSpeedPort, outerWall_North.WindSpeedPort) annotation (Line(
           points={{-112,28},{-42,28},{-42,24},{74.35,24},{74.35,33.3333}},
           color={0,0,127}));
     connect(outerWall_North.solarRadWinTrans, ceiling.solarRadWin) annotation (
         Line(points={{58.25,-16.6667},{58.25,75.8},{-23.2,75.8}}, color={0,0,
             127}));
+    connect(outerWall_West.port_outside, Therm_inside) annotation (Line(points=
+            {{26,82.2},{26,88},{-86,88},{-86,81},{-105,81}}, color={191,0,0}));
+    connect(outerWall_South.port_outside, Therm_inside) annotation (Line(points=
+           {{-78.35,4},{-86,4},{-86,80},{-105,80},{-105,81}}, color={191,0,0}));
+    connect(outerWall_East.port_outside, Therm_inside) annotation (Line(points=
+            {{26,-68.2},{26,-80},{-86,-80},{-86,80},{-96,80},{-96,81},{-105,81}},
+          color={191,0,0}));
       annotation ( Icon(coordinateSystem(extent={{-100,-100},
                 {100,100}}, preserveAspectRatio=false),
                                           graphics={
@@ -1671,6 +1670,8 @@ package BaseClasses
             iconTransformation(extent={{-120,-60},{-100,-40}})));
     Modelica.Blocks.Sources.Constant const(k=0)
       annotation (Placement(transformation(extent={{-24,34},{-4,54}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_inside
+      annotation (Placement(transformation(extent={{-112,74},{-98,88}})));
   equation
     connect(thermStar_Demux.portRad, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
@@ -1685,15 +1686,6 @@ package BaseClasses
           color={191,0,0}));
       connect(floor.port_outside, Therm_ground) annotation (Line(
           points={{-32,-66.1003},{-32,-96}},
-          color={191,0,0}));
-      connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
-          points={{26,-68.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
-      connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
-          points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
-      connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
-          points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
           color={191,0,0}));
       connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
           points={{-76.35,35.3333},{-86,35.3333},{-86,28},{-112,28}},
@@ -1754,8 +1746,17 @@ package BaseClasses
     connect(outerWall_South.solarRadWinTrans, floor.solarRadWin) annotation (
         Line(points={{-60.25,-14.6667},{-60.25,-61.8},{-40.8,-61.8}}, color={0,
             0,127}));
-    connect(const.y, outerWall_South.solarRadWin) annotation (Line(points={{-3,
-            44},{-12,44},{-12,38},{-61.3,38},{-61.3,35.3333}}, color={0,0,127}));
+    connect(const.y, outerWall_South.solarRadWin) annotation (Line(points={{-3,44},
+            {-12,44},{-12,38},{-61.3,38},{-61.3,35.3333}},     color={0,0,127}));
+    connect(outerWall_West.port_outside, Therm_inside) annotation (Line(points=
+            {{26,82.2},{28,82.2},{28,88},{-86,88},{-86,80},{-105,80},{-105,81}},
+          color={191,0,0}));
+    connect(outerWall_East.port_outside, Therm_inside) annotation (Line(points={{26,
+            -68.2},{26,-80},{-86,-80},{-86,80},{-104,80},{-104,81},{-105,81}},
+                  color={191,0,0}));
+    connect(outerWall_North.port_outside, Therm_inside) annotation (Line(points=
+           {{74.35,4},{80,4},{80,-80},{-86,-80},{-86,80},{-105,80},{-105,81}},
+          color={191,0,0}));
       annotation ( Icon(coordinateSystem(extent={{-100,-100},
                 {100,100}}, preserveAspectRatio=false),
                                           graphics={
@@ -2011,6 +2012,8 @@ package BaseClasses
       Modelica.Blocks.Interfaces.RealInput AER "Air exchange rate "
         annotation (Placement(transformation(extent={{-122,-62},{-100,-40}}),
             iconTransformation(extent={{-120,-60},{-100,-40}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_inside
+      annotation (Placement(transformation(extent={{-112,72},{-98,86}})));
   equation
     connect(thermStar_Demux.portRad, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
@@ -2031,9 +2034,6 @@ package BaseClasses
           color={191,0,0}));
       connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
           points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
-          color={191,0,0}));
-      connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
-          points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
           color={191,0,0}));
       connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
           points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
@@ -2115,6 +2115,8 @@ package BaseClasses
     connect(outerWall_North.solarRadWinTrans, outerWall_South.solarRadWin)
       annotation (Line(points={{58.25,-16.6667},{-61.3,-16.6667},{-61.3,33.3333}},
           color={0,0,127}));
+    connect(outerWall_West.port_outside, Therm_inside) annotation (Line(points=
+            {{26,82.2},{26,88},{-86,88},{-86,79},{-105,79}}, color={191,0,0}));
       annotation ( Icon(coordinateSystem(extent={{-100,-100},
                 {100,100}}, preserveAspectRatio=false),
                                           graphics={
@@ -2183,11 +2185,616 @@ package BaseClasses
 
     SolarRadiation.I_diff = DiffRad;
     SolarRadiation.I_dir = DirRad;
-    SolarRadiation.I_gr=Dummy;
+    SolarRadiation.I_gr=0;
     SolarRadiation.AOI = Dummy;
     SolarRadiation.I = DiffRad+DirRad;
 
   end ConvRealtoRad;
+
+  model FourElements "Thermal Zone with four elements for exterior walls,
+  interior walls, floor plate and roof"
+    extends ThermalZones.ReducedOrder.RC.ThreeElements(AArray={ATotExt,ATotWin,
+          AInt,AFloor,ARoof});
+
+    parameter Modelica.SIunits.Area ARoof "Area of roof"
+      annotation(Dialog(group="Roof"));
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer hConRoof
+      "Convective coefficient of heat transfer of roof (indoor)"
+      annotation(Dialog(group="Roof"));
+    parameter Integer nRoof(min = 1) "Number of RC-elements of roof"
+      annotation(Dialog(group="Roof"));
+    parameter Modelica.SIunits.ThermalResistance RRoof[nRoof](
+      each min=Modelica.Constants.small)
+      "Vector of resistances of roof, from inside to outside"
+      annotation(Dialog(group="Roof"));
+    parameter Modelica.SIunits.ThermalResistance RRoofRem(
+      min=Modelica.Constants.small)
+      "Resistance of remaining resistor RRoofRem between capacity n and outside"
+      annotation(Dialog(group="Roof"));
+    parameter Modelica.SIunits.HeatCapacity CRoof[nRoof](
+      each min=Modelica.Constants.small)
+      "Vector of heat capacities of roof, from inside to outside"
+      annotation(Dialog(group="Roof"));
+    parameter Boolean indoorPortRoof = false
+      "Additional heat port at indoor surface of roof"
+      annotation(Dialog(group="Roof"),choices(checkBox = true));
+
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roof if ARoof > 0
+      "Ambient port for roof"
+        annotation (Placement(transformation(extent={{-21,170},{-1,190}}),
+                         iconTransformation(extent={{-21,170},{-1,190}})));
+    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roofIndoorSurface if
+       indoorPortRoof "Auxiliary port at indoor surface of roof"
+        annotation (Placement(
+        transformation(extent={{-50,-190},{-30,-170}}), iconTransformation(
+        extent={{-50,-190},{-30,-170}})));
+    ThermalZones.ReducedOrder.RC.BaseClasses.ExteriorWall roofRC(
+      final RExt=RRoof,
+      final RExtRem=RRoofRem,
+      final CExt=CRoof,
+      final n=nRoof,
+      final T_start=T_start) if ARoof > 0 "RC-element for roof" annotation (
+        Placement(transformation(
+          extent={{-10,-11},{10,11}},
+          rotation=90,
+          origin={-12,155})));
+
+  protected
+    Modelica.Thermal.HeatTransfer.Components.Convection convRoof if
+       ARoof > 0 "Convective heat transfer of roof"
+      annotation (Placement(transformation(
+      extent={{10,10},{-10,-10}},
+      rotation=90,
+      origin={-12,120})));
+    Modelica.Blocks.Sources.Constant hConRoof_const(
+    final k=ARoof*hConRoof) if
+         ARoof > 0 "Coefficient of convective heat transfer for roof"
+       annotation (Placement(transformation(
+         extent={{-5,-5},{5,5}},
+         rotation=180,
+         origin={22,120})));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntRoof(
+      final G=min(AInt, ARoof)*hRad) if
+         AInt > 0 and ARoof > 0 "Resistor between interior walls and roof"
+      annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={186,10})));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofWin(
+      final G=min(ARoof, ATotWin)*hRad) if
+         ARoof > 0 and ATotWin > 0 "Resistor between roof and windows"
+      annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        origin={-154,100})));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofFloor(
+      final G=min(ARoof, AFloor)*hRad) if
+         ARoof > 0 and AFloor > 0 "Resistor between floor plate and roof"
+      annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-56,-112})));
+    Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallRoof(
+      final G=min(ATotExt, ARoof)*hRad) if
+        ATotExt > 0 and ARoof > 0 "Resistor between exterior walls and roof"
+      annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        origin={-108,6})));
+
+  equation
+    connect(convRoof.solid, roofRC.port_a)
+      annotation (Line(points={{-12,130},{-12,138},{-12,145},{-11,145}},
+                                                       color={191,0,0}));
+    connect(roofRC.port_b, roof)
+      annotation (Line(points={{-11,165},{-11,168},{-11,180}},
+                                                       color={191,0,0}));
+    connect(resRoofWin.port_a, convWin.solid)
+      annotation (Line(points={{-164,100},{-174,100},{-174,82},{-146,82},{-146,40},
+            {-116,40}},                                         color={191,
+      0,0}));
+    connect(resRoofWin.port_b, convRoof.solid)
+      annotation (Line(points={{-144,100},
+      {-114,100},{-82,100},{-82,132},{-12,132},{-12,130}}, color={191,0,0}));
+    connect(resRoofFloor.port_a, convRoof.solid)
+      annotation (Line(points={{-56,-102},
+      {-54,-102},{-54,132},{-12,132},{-12,130}}, color={191,0,0}));
+    connect(resRoofFloor.port_b, resExtWallFloor.port_b)
+      annotation (Line(
+      points={{-56,-122},{-56,-132},{-144,-132},{-144,-121}}, color={191,0,0}));
+    connect(resIntRoof.port_b, intWallRC.port_a)
+      annotation (Line(points={{186,0},{186,-10},{168,-10},{168,-40},{182,-40}},
+                                                 color={191,0,0}));
+    connect(resIntRoof.port_a, convRoof.solid)
+      annotation (Line(points={{186,20},
+      {186,20},{186,132},{-12,132},{-12,130}}, color={191,0,0}));
+    connect(resExtWallRoof.port_a, convExtWall.solid)
+      annotation (Line(points={{-118,6},{-130,6},{-130,-12},{-144,-12},{-144,-40},
+            {-114,-40}},                                        color={191,
+      0,0}));
+    connect(resExtWallRoof.port_b, convRoof.solid)
+      annotation (Line(points={{-98,
+      6},{-54,6},{-54,132},{-12,132},{-12,130}}, color={191,0,0}));
+    if not ATotExt > 0 and not ATotWin > 0 and not AInt > 0 and not AFloor > 0
+      and ARoof > 0 then
+      connect(thermSplitterIntGains.portOut[1], roofRC.port_a);
+      connect(roofRC.port_a, thermSplitterSolRad.portOut[1]);
+    elseif ATotExt > 0 and not ATotWin > 0 and not AInt > 0 and not AFloor > 0
+      and ARoof > 0
+       or not ATotExt > 0 and ATotWin > 0 and not AInt > 0 and not AFloor > 0
+       and ARoof > 0
+       or not ATotExt > 0 and not ATotWin > 0 and AInt > 0 and not AFloor > 0
+       and ARoof > 0
+       or not ATotExt > 0 and not ATotWin > 0 and not AInt > 0 and AFloor > 0
+       and ARoof > 0 then
+      connect(thermSplitterIntGains.portOut[2], roofRC.port_a);
+      connect(roofRC.port_a, thermSplitterSolRad.portOut[2]);
+    elseif ATotExt > 0 and ATotWin > 0 and not AInt > 0 and not AFloor > 0 and ARoof > 0
+       or ATotExt > 0 and not ATotWin > 0 and AInt > 0 and not AFloor > 0 and ARoof > 0
+       or ATotExt > 0 and not ATotWin > 0 and not AInt > 0 and AFloor > 0 and ARoof > 0
+       or not ATotExt > 0 and ATotWin > 0 and AInt > 0 and not AFloor > 0 and ARoof > 0
+       or not ATotExt > 0 and ATotWin > 0 and not AInt > 0 and AFloor > 0 and ARoof > 0
+       or not ATotExt > 0 and not ATotWin > 0 and AInt > 0 and AFloor > 0
+       and ARoof > 0 then
+      connect(thermSplitterIntGains.portOut[3], roofRC.port_a);
+      connect(roofRC.port_a, thermSplitterSolRad.portOut[3]);
+    elseif not ATotExt > 0 and ATotWin > 0 and AInt > 0 and AFloor > 0 and ARoof > 0
+       or ATotExt > 0 and not ATotWin > 0 and AInt > 0 and AFloor > 0 and ARoof > 0
+       or ATotExt > 0 and ATotWin > 0 and not AInt > 0 and AFloor > 0 and ARoof > 0
+       or ATotExt > 0 and ATotWin > 0 and AInt > 0 and not AFloor > 0 and ARoof > 0 then
+      connect(thermSplitterIntGains.portOut[4], roofRC.port_a);
+      connect(roofRC.port_a, thermSplitterSolRad.portOut[4]);
+    elseif ATotExt > 0 and ATotWin > 0 and AInt > 0 and AFloor > 0 and ARoof > 0 then
+      connect(thermSplitterSolRad.portOut[5], roofRC.port_a)
+      annotation (Line(
+      points={{-122,146},{-122,146},{-38,146},{-38,142},{-11,142},{-11,145}},
+      color={191,0,0}));
+      connect(thermSplitterIntGains.portOut[5], roofRC.port_a)
+      annotation (Line(points={{190,86},{190,86},{190,138},{-11,138},{-11,145}},
+      color={191,0,0}));
+    end if;
+    connect(hConRoof_const.y, convRoof.Gc)
+      annotation (Line(points={{16.5,120},{-2,120},{-2,120}},color={0,0,127}));
+    connect(convRoof.fluid, senTAir.port)
+      annotation (Line(points={{-12,110},{-12,110},{-12,96},{66,96},{66,0},{80,0}},
+                                                   color={191,0,0}));
+    connect(roofRC.port_a, roofIndoorSurface)
+      annotation (Line(points={{-11,145},{-11,136},{-112,136},{-112,112},{-216,
+            112},{-216,-140},{-40,-140},{-40,-180}},
+      color={191,0,0}));
+    annotation (defaultComponentName="theZon",
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-240,
+    -180},{240,180}}), graphics={
+    Rectangle(
+      extent={{-36,170},{46,104}},
+      lineColor={0,0,255},
+      fillColor={215,215,215},
+      fillPattern=FillPattern.Solid),
+    Text(
+      extent={{16,168},{46,156}},
+      lineColor={0,0,255},
+      fillColor={215,215,215},
+      fillPattern=FillPattern.Solid,
+      textString="Roof")}),
+      Icon(coordinateSystem(preserveAspectRatio=false,
+      extent={{-240,-180},{240,180}}),
+    graphics={Rectangle(
+    extent={{-40,50},{28,-44}},
+    pattern=LinePattern.None,
+    fillColor={230,230,230},
+    fillPattern=FillPattern.Solid), Text(
+    extent={{-60,60},{64,-64}},
+    lineColor={0,0,0},
+    textString="4")}),
+    Documentation(revisions="<html>
+  <ul>
+  <li>
+  December 9, 2019, by Moritz Lauster:<br/>
+  Changes <code>nExt</code> to <code>nRoof</code> for
+  <code>RRoof</code> and <code>CRoof</code>
+  </li>
+  <li>
+  July 11, 2019, by Katharina Brinkmann:<br/>
+  Renamed <code>alphaRoof</code> to <code>hConRoof</code>,
+  <code>alphaRoofConst</code> to <code>hConRoof_const</code>
+  </li>
+  <li>
+  August 31, 2018 by Moritz Lauster:<br/>
+  Updated schema in documentation and fixes
+  orientation and connections of roofRC for
+  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/997\">
+  issue 997</a>.
+  </li>
+  <li>
+  September 11, 2015 by Moritz Lauster:<br/>
+  First Implementation.
+  </li>
+  </ul>
+</html>",     info="<html>
+  <p>
+  This model adds another element for the roof. Roofs commonly
+  exhibit the same excitations as exterior walls but have different coefficients
+  of heat transfer due to their orientation. Adding an extra element for the roof
+  might lead to a finer resolution of the dynamic behaviour but increases
+  calculation times. The roof is parameterized via the length of the RC-chain
+  <code>nRoof</code>,
+  the vector of capacities <code>CRoof[nRoof]</code>, the vector of resistances
+  <code>RRoof[nRoof]</code> and remaining resistances <code>RRoofRem</code>.
+  </p>
+  <p>
+  The image below shows the RC-network of this model.
+  </p>
+  <p align=\"center\">
+  <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/FourElements.png\" alt=\"image\"/>
+  </p>
+  </html>"));
+  end FourElements;
+
+  model EastWestFacingWindows "windows facing south and west"
+
+      parameter Modelica.SIunits.Length Room_Lenght=6 "length" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+      parameter Modelica.SIunits.Height Room_Height=2.7 "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+      parameter Modelica.SIunits.Length Room_Width=8 "width"
+                                                            annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+
+      parameter Modelica.SIunits.Area Win_Area= 12 "Window area " annotation (Dialog(group = "Windows", descriptionLabel = true, enable = withWindow1));
+      // Sunblind
+      parameter Boolean use_sunblind = false
+        "Will sunblind become active automatically?"
+        annotation(Dialog(group = "Sunblind"));
+      parameter Real ratioSunblind(min=0.0, max=1.0)
+        "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
+        annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+      parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+        "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+        annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+      parameter Modelica.SIunits.Temperature TOutAirLimit
+        "Temperature at which sunblind closes (see also solIrrThreshold)"
+        annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+
+      parameter Modelica.SIunits.Temperature T0=295.15 "Outside"
+                                                                annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
+      parameter Modelica.SIunits.Temperature T0_IW=295.15 "IW"  annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
+      parameter Modelica.SIunits.Temperature T0_OW=295.15 "OW"  annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
+      parameter Modelica.SIunits.Temperature T0_CE=295.15 "Ceiling"
+                                                                annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
+      parameter Modelica.SIunits.Temperature T0_FL=295.15 "Floor"
+                                                                annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
+      parameter Modelica.SIunits.Temperature T0_Air=295.15 "Air"
+                                                                annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
+
+      parameter Real solar_absorptance_OW = 0.6 "Solar absoptance outer walls " annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
+      parameter Real eps_out=0.9 "emissivity of the outer surface"
+                                           annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
+
+      parameter AixLib.DataBase.Walls.WallBaseDataDefinition TypOW=
+          AixLib.DataBase.Walls.ASHRAE140.OW_Case600()
+        "choose an external wall type "
+        annotation (Dialog(group="Wall Types"), choicesAllMatching=true);
+      parameter AixLib.DataBase.Walls.WallBaseDataDefinition TypCE=
+          AixLib.DataBase.Walls.ASHRAE140.RO_Case600() "choose a ceiling type "
+        annotation (Dialog(group="Wall Types"), choicesAllMatching=true);
+      parameter DataBase.Walls.WallBaseDataDefinition TypFL=
+         AixLib.DataBase.Walls.ASHRAE140.FL_Case600() "choose a floor type "
+        annotation (Dialog(group="Wall Types"), choicesAllMatching=true);
+
+      parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Win=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
+        "choose a Window type" annotation(Dialog(group="Windows"),choicesAllMatching= true);
+
+  protected
+      parameter Modelica.SIunits.Volume Room_V=Room_Lenght*Room_Height*Room_Width;
+
+  public
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_South(
+      withDoor=false,
+      WallType=TypOW,
+      T0=T0_OW,
+      wall_length=Room_Width,
+      solar_absorptance=solar_absorptance_OW,
+      calcMethod=2,
+      outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1 - ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
+      windowarea=Win_Area,
+      wall_height=Room_Height,
+      surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
+      WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140(),
+      withWindow=false) annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
+      wall_length=Room_Lenght,
+      wall_height=Room_Height,
+      withDoor=false,
+      T0=T0_IW,
+      outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1 - ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
+      WallType=TypOW,
+      solar_absorptance=solar_absorptance_OW,
+      surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
+      calcMethod=2,
+      withWindow=true,
+      WindowType=Win,
+      windowarea=Win_Area*0.5)
+      annotation (Placement(transformation(
+          extent={{-4,-24},{4,24}},
+          rotation=-90,
+          origin={26,78})));
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
+      wall_length=Room_Lenght,
+      wall_height=Room_Height,
+      T0=T0_IW,
+      outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1 - ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
+      WallType=TypOW,
+      solar_absorptance=solar_absorptance_OW,
+      surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
+      calcMethod=2,
+      withWindow=true,
+      WindowType=Win,
+      windowarea=Win_Area*0.5)
+      annotation (Placement(transformation(
+          extent={{-4.00001,-24},{4.00001,24}},
+          rotation=90,
+          origin={26,-68})));
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_North(
+      wall_height=Room_Height,
+      U_door=5.25,
+      door_height=1,
+      door_width=2,
+      withDoor=false,
+      T0=T0_IW,
+      wall_length=Room_Width,
+      outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1 - ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
+      WallType=TypOW,
+      solar_absorptance=solar_absorptance_OW,
+      surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
+      calcMethod=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
+      wall_length=Room_Lenght,
+      wall_height=Room_Width,
+      ISOrientation=3,
+      withDoor=false,
+      T0=T0_CE,
+      WallType=TypCE,
+      outside=true,
+      final withSunblind=use_sunblind,
+      final Blinding=1 - ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
+      solar_absorptance=solar_absorptance_OW,
+      surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
+      calcMethod=2) annotation (Placement(transformation(
+          extent={{-2,-12},{2,12}},
+          rotation=270,
+          origin={-32,78})));
+    AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 floor(
+      wall_length=Room_Lenght,
+      wall_height=Room_Width,
+      withDoor=false,
+      ISOrientation=2,
+      T0=T0_FL,
+      WallType=TypFL,
+      solar_absorptance=solar_absorptance_OW,
+      outside=false,
+      final withSunblind=use_sunblind,
+      final Blinding=1 - ratioSunblind,
+      final LimitSolIrr=solIrrThreshold,
+      final TOutAirLimit=TOutAirLimit,
+      calcMethod=2)
+      annotation (Placement(transformation(
+          extent={{-2.00031,-12},{2.00003,12}},
+          rotation=90,
+          origin={-32,-64})));
+      ThermalZones.HighOrder.Components.DryAir.Airload airload(V=Room_V, c=1005)
+      annotation (Placement(transformation(extent={{10,-18},{28,0}})));
+    Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
+          extent={{-10,8},{10,-8}},
+          rotation=90,
+          origin={-32,-32})));
+      Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+        annotation (Placement(transformation(extent={{32,-34},{42,-24}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
+        annotation (Placement(transformation(extent={{-36,-100},{-28,-92}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_outside
+        annotation (Placement(transformation(extent={{-110,92},{-100,102}})));
+      Modelica.Blocks.Interfaces.RealInput WindSpeedPort
+        annotation (Placement(transformation(extent={{-120,20},{-104,36}}),
+            iconTransformation(extent={{-120,20},{-100,40}})));
+  public
+      AixLib.Utilities.Interfaces.RadPort
+                              starRoom
+        annotation (Placement(transformation(extent={{0,18},{18,34}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom
+        annotation (Placement(transformation(extent={{-36,16},{-22,30}})));
+      Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
+        annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
+      ThermalZones.HighOrder.Components.DryAir.VarAirExchange varAirExchange(
+      V=Room_V,
+      c=airload.c,
+      rho=airload.rho)
+      annotation (Placement(transformation(extent={{-82,-66},{-62,-46}})));
+      Modelica.Blocks.Interfaces.RealInput AER "Air exchange rate "
+        annotation (Placement(transformation(extent={{-122,-62},{-100,-40}}),
+            iconTransformation(extent={{-120,-60},{-100,-40}})));
+      Modelica.Blocks.Math.MultiSum multiSum(nu=2)        annotation (Placement(
+            transformation(
+            extent={{-6,-6},{6,6}},
+            rotation=180,
+            origin={34,26})));
+  equation
+    connect(thermStar_Demux.portRad, starRoom) annotation (Line(
+        points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
+        color={95,95,95},
+        pattern=LinePattern.Solid));
+    connect(thermStar_Demux.portConv, thermRoom) annotation (Line(points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}}, color={191,0,0}));
+      connect(varAirExchange.InPort1, AER) annotation (Line(
+          points={{-81,-62.4},{-111,-62.4},{-111,-51}},
+          color={0,0,127}));
+      connect(outerWall_South.port_outside, Therm_outside) annotation (Line(
+          points={{-76.35,4},{-86,4},{-86,97},{-105,97}},
+          color={191,0,0}));
+      connect(floor.port_outside, Therm_ground) annotation (Line(
+          points={{-32,-66.1003},{-32,-96}},
+          color={191,0,0}));
+      connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
+          points={{26,-72.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
+          color={191,0,0}));
+      connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
+          points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
+          color={191,0,0}));
+      connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
+          points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
+          color={191,0,0}));
+      connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
+          points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
+          color={0,0,127}));
+    connect(outerWall_South.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-62,4},{-54,4},{-54,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
+    connect(floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-32,-62},
+            {-32,-41.8},{-30.7,-41.8}},                                                                                                 color={191,0,0}));
+    connect(outerWall_East.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,-64},
+            {28,-64},{28,-56},{-30.7,-56},{-30.7,-41.8}},                                                                                                         color={191,0,0}));
+    connect(outerWall_North.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{60,4},{46,4},{46,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
+    connect(outerWall_West.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{26,74},{26,60},{46,60},{46,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
+    connect(ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-32,76},{-32,60},{46,60},{46,-56},{-30.7,-56},{-30.7,-41.8}}, color={191,0,0}));
+      connect(ceiling.port_outside, Therm_outside) annotation (Line(
+          points={{-32,80.1},{-32,88},{-86,88},{-86,97},{-105,97}},
+          color={191,0,0}));
+      connect(outerWall_East.WindSpeedPort, WindSpeedPort) annotation (Line(
+          points={{8.4,-72.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},
+          color={0,0,127}));
+      connect(ceiling.WindSpeedPort, WindSpeedPort) annotation (Line(
+          points={{-23.2,80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}},
+          color={0,0,127}));
+      connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(
+          points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{
+            -112,28}},
+          color={0,0,127}));
+
+      connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(
+          points={{43.6,82.2},{43.6,88},{-86,88},{-86,28},{-112,28}},
+          color={0,0,127}));
+
+      connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
+        annotation (Line(
+          points={{-110,60},{-86,60},{-86,40.6667},{-78.1,40.6667}},
+          color={255,128,0}));
+      connect(ceiling.SolarRadiationPort, SolarRadiationPort[5]) annotation (
+          Line(
+          points={{-21,80.6},{-21,88},{-86,88},{-86,68},{-110,68}},
+          color={255,128,0}));
+      connect(outerWall_West.SolarRadiationPort, SolarRadiationPort[4]) annotation (
+         Line(
+          points={{48,83.2},{48,88},{-86,88},{-86,64},{-110,64}},
+          color={255,128,0}));
+      connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
+        annotation (Line(
+          points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,
+            52}},
+          color={255,128,0}));
+
+      connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
+         Line(
+          points={{4,-73.2},{4,-80},{-86,-80},{-86,56},{-110,56}},
+          color={255,128,0}));
+      connect(varAirExchange.port_a, Therm_outside) annotation (Line(
+          points={{-82,-56},{-86,-56},{-86,97},{-105,97}},
+          color={191,0,0}));
+    connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}}, color={191,0,0}));
+      connect(airload.port, temperatureSensor.port) annotation (Line(
+          points={{10.9,-10.8},{4,-10.8},{4,-29},{32,-29}},
+          color={191,0,0}));
+      connect(varAirExchange.port_b, airload.port) annotation (Line(
+          points={{-62,-56},{4,-56},{4,-10.8},{10.9,-10.8}},
+          color={191,0,0}));
+      connect(multiSum.y, outerWall_West.solarRadWin) annotation (Line(
+          points={{26.98,26},{28,26},{28,60},{43.6,60},{43.6,73.6}},
+          color={0,0,127}));
+      connect(multiSum.y, ceiling.solarRadWin) annotation (Line(
+          points={{26.98,26},{28,26},{28,60},{-22,60},{-22,75.8},{-23.2,75.8}},
+          color={0,0,127}));
+      connect(multiSum.y, outerWall_South.solarRadWin) annotation (Line(
+          points={{26.98,26},{28,26},{28,60},{-54,60},{-54,33.3333},{-61.3,
+            33.3333}},
+          color={0,0,127}));
+      connect(multiSum.y, floor.solarRadWin) annotation (Line(
+          points={{26.98,26},{28,26},{28,60},{-54,60},{-54,-56},{-40.8,-56},{
+            -40.8,-61.8}},
+          color={0,0,127}));
+      connect(multiSum.y, outerWall_East.solarRadWin) annotation (Line(
+          points={{26.98,26},{28,26},{28,60},{46,60},{46,-56},{8,-56},{8,-58},{
+            8.4,-58},{8.4,-63.6}},
+          color={0,0,127}));
+      connect(multiSum.y, outerWall_North.solarRadWin) annotation (Line(
+          points={{26.98,26},{28,26},{28,60},{46,60},{46,33.3333},{59.3,33.3333}},
+          color={0,0,127}));
+
+      connect(outerWall_West.solarRadWinTrans, multiSum.u[1]) annotation (Line(
+          points={{13.6,73},{13.6,60},{46,60},{46,23.9},{40,23.9}},
+          color={0,0,127}));
+      connect(outerWall_East.solarRadWinTrans, multiSum.u[2]) annotation (Line(
+          points={{38.4,-63},{38.4,-56},{46,-56},{46,30},{38,30},{38,28.1},{40,
+            28.1}},
+          color={0,0,127}));
+      annotation ( Icon(coordinateSystem(extent={{-100,-100},
+                {100,100}}, preserveAspectRatio=false),
+                                          graphics={
+            Rectangle(
+              extent={{-100,92},{94,-92}},
+              lineColor={215,215,215},
+              fillColor={0,127,0},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-86,76},{80,-80}},
+              lineColor={135,135,135},
+              fillColor={135,135,135},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-100,26},{-86,-34}},
+              lineColor={170,213,255},
+              fillColor={170,213,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-22,12},{22,-12}},
+              lineColor={0,0,0},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Solid,
+              textString="Window",
+              textStyle={TextStyle.Bold},
+              origin={-94,-2},
+              rotation=90),
+            Text(
+              extent={{-54,-54},{54,-76}},
+              lineColor={0,0,0},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Solid,
+              textString="Length"),
+            Text(
+              extent={{-22,11},{22,-11}},
+              lineColor={0,0,0},
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Solid,
+              textString="width",
+              origin={65,0},
+              rotation=90)}),
+        Documentation(revisions="<html>
+ <ul>
+ <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
+ </ul>
+ </html>",    info="<html>
+</html>"));
+  end EastWestFacingWindows;
 
   package DataBase_ThermalZone
     record thermalZone_Benchmark_Workshop
@@ -2243,9 +2850,9 @@ package BaseClasses
         hRadRoof=5,
         tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949},
         aziExtWalls={0,3.1415926535898,4.7123889803847},
-        wfWall={0.33,0.33,0.33},
+        wfWall={0.25,0.25,0.25},
         wfWin={0.33,0.33,0.33},
-        wfGro=0.01,
+        wfGro=0.25,
             specificPeople=1/14,
         activityDegree=1.2,
         fixedHeatFlowRatePersons=70,
@@ -2306,25 +2913,25 @@ package BaseClasses
         AZone=600,
         hRad=5,
         lat=0.83864990429999,
-        nOrientations=2,
-        AWin={40,40},
-        ATransparent={32,32},
+        nOrientations=4,
+        AWin={40,0,40,0},
+        ATransparent={32,0,32,0},
         hConWin=2,
         RWin=0.0096154,
         gWin=0.6,
         UWin=1.3,
         ratioWinConRad=0.5,
-        AExt={20,20},
+        AExt={20,90,20,90},
         hConExt=25,
         nExt=4,
         RExt={0.0007353,0.012,0.0714286,0.00125},
         RExtRem=0.00000010,
         CExt={720000,9600000,494400,3600000},
-        AInt=180,
+        AInt=0,
         hConInt=25,
-        nInt=2,
-        RInt={0.0001634,0.0009722},
-        CInt={3240000,15750000},
+        nInt=4,
+        RInt={0.000326797,0.0053333,0.031746032,0.00055556},
+        CInt={1620000,21600000,1112400,8100000},
         AFloor=600,
         hConFloor=25,
         nFloor=4,
@@ -2349,10 +2956,10 @@ package BaseClasses
         hConWinOut=25.0,
         hConRoofOut=25,
         hRadRoof=5,
-        tiltExtWalls={1.5707963267949,1.5707963267949},
-        aziExtWalls={0,3.1415926535898},
-        wfWall={0.49,0.49},
-        wfWin={0.49,0.49},
+        tiltExtWalls={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949},
+        aziExtWalls={0,1.5707963267949,3.1415926535898,4.712388980},
+        wfWall={0.25,0.25,0.25,0.25},
+        wfWin={0.49,0,0.49,0},
         wfGro=0.01,
         specificPeople=1/14,
         activityDegree=1.2,
