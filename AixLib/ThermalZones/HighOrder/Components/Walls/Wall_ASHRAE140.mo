@@ -54,6 +54,12 @@ model Wall_ASHRAE140
     // window parameters
    parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                     annotation(Dialog( tab="Window", enable = outside));
+   replaceable model Window =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
+   constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    "Model for window"
+                     annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
 
    parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
                                                           WindowType=
