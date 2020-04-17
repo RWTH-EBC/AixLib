@@ -7,3 +7,12 @@ convertModifier("AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClass
 convertModifier("AixLib.Utilities.HeatTransfer.HeatConv", fill("",0), {hCon=2});
 convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", {"WallType"}, {"wallPar"});
 convertElement("AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5", {"ThermAttic"}, {"thermRoom"});
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Gr1Uf1", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Gr1Uf1", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.UpperFloorBuildingEnvelope", {"withFloorHeating"}, fill("",0));
+convertModifier("AixLib_dev_copy.ThermalZones.HighOrder.Rooms.OFD.WholeHouseBuildingEnvelope", {"withFloorHeating"}, fill("",0));

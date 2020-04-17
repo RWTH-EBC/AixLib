@@ -39,7 +39,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
 
   //// Outer / Exterior wall parameters
   // Solar absorptance
-  parameter Real solar_absorptance_OW(min=0, max=1)=0.25 "Solar absoptance outer walls "
+  parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
   // Heat convection
   parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
