@@ -29,10 +29,10 @@ model Cellar "Cellar completly under ground"
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
     annotation(Dialog(group = "Sunblind"));
-  parameter Real ratioSunblind(min=0.0, max=1.0)
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
     annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   parameter Modelica.SIunits.Temperature TOutAirLimit
@@ -41,7 +41,7 @@ model Cellar "Cellar completly under ground"
   AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
         start=T0_air))
     annotation (Placement(transformation(extent={{-18,-4},{-38,16}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall_Ceiling(
     T0=T0_Ceiling,
     outside=false,
     final withSunblind=use_sunblind,
@@ -57,7 +57,7 @@ model Cellar "Cellar completly under ground"
         origin={110,62},
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=270)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall_Floor(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -80,7 +80,7 @@ model Cellar "Cellar completly under ground"
     e=e,
     eps=eps)
     annotation (Placement(transformation(extent={{-44,-100},{-18,-74}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall1(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -96,7 +96,7 @@ model Cellar "Cellar completly under ground"
         extent={{-9,-50},{9,50}},
         rotation=270,
         origin={2,65})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall3(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall3(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -110,7 +110,7 @@ model Cellar "Cellar completly under ground"
         extent={{-9,-50},{9,50}},
         rotation=90,
         origin={2,-45})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall2(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall2(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -124,7 +124,7 @@ model Cellar "Cellar completly under ground"
         extent={{-9,-50},{9,50}},
         rotation=180,
         origin={68,13})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall4(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall4(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -143,6 +143,8 @@ model Cellar "Cellar completly under ground"
         extent={{-10,8},{10,-8}},
         rotation=90,
         origin={4,-6})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=0)
+    annotation (Placement(transformation(extent={{-78,72},{-58,92}})));
 protected
   parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
     "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
@@ -156,10 +158,12 @@ protected
 equation
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-44, -87}, {-42, -87}, {-42, -90}, {-90, -90}}, color = {191, 0, 0}));
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-18, -87}, {-2, -87}, {-2, -64}, {-54, -64}, {-54, -24}, {-12, -24}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}));
-  connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,64.1},{110,90}},      color = {191, 0, 0}));
+  connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,
+          64.1},{110,90}},                                                                           color = {191, 0, 0}));
   connect(TGround.port, Wall3.port_outside) annotation(Line(points = {{138, -70}, {2, -70}, {2, -54.45}}, color = {191, 0, 0}));
   connect(Wall2.port_outside, TGround.port) annotation(Line(points = {{77.45, 13}, {100, 13}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
-  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,29.9},{110,8},{100,8},{100,-70},{138,-70}},            color = {191, 0, 0}));
+  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,
+          29.9},{110,8},{100,8},{100,-70},{138,-70}},                                                                                color = {191, 0, 0}));
   connect(Wall1.port_outside, TGround.port) annotation(Line(points = {{2, 74.45}, {2, 88}, {100, 88}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
   connect(Wall4.port_outside, TGround.port) annotation(Line(points = {{-79.45, 13}, {-86, 13}, {-86, -64}, {-2, -64}, {-2, -70}, {138, -70}}, color = {191, 0, 0}));
   connect(Wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{59,13},{46,13},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
@@ -167,12 +171,25 @@ equation
   connect(Wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,56},{2,44},{46,44},{46,-24},{5.3,-24},{5.3,
           -15.8}},                                                                                                                                     color={191,0,0}));
   connect(Wall4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-61,13},{-48,13},{-48,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,
-          -24},{5.3,-24},{5.3,-15.8}},                                                                                                                                   color={191,0,0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{
-          5.3,-24},{5.3,-15.8}},                                                                                                                                  color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},
+          {110,34},{110,44},{46,44},{46,-24},{5.3,-24},{5.3,-15.8}},                                                                                                     color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},
+          {110,44},{46,44},{46,-24},{5.3,-24},{5.3,-15.8}},                                                                                                       color={191,0,0}));
   connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,4},{-19,4}}, color={191,0,0}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+  connect(realExpression.y, Wall4.solarRadWin) annotation (Line(points={{-57,82},
+          {-50,82},{-50,49.6667},{-60.1,49.6667}}, color={0,0,127}));
+  connect(realExpression.y, Wall1.solarRadWin) annotation (Line(points={{-57,82},
+          {-50,82},{-50,44},{38.6667,44},{38.6667,55.1}}, color={0,0,127}));
+  connect(realExpression.y, Wall_Ceiling.solarRadWin) annotation (Line(points={{-57,82},
+          {-50,82},{-50,44},{117.333,44},{117.333,59.8}},         color={0,0,127}));
+  connect(realExpression.y, Wall_Floor.solarRadWin) annotation (Line(points={{-57,82},
+          {-50,82},{-50,44},{102.667,44},{102.667,34.2}},     color={0,0,127}));
+  connect(realExpression.y, Wall2.solarRadWin) annotation (Line(points={{-57,82},
+          {-50,82},{-50,44},{46,44},{46,-23.6667},{58.1,-23.6667}}, color={0,0,127}));
+  connect(realExpression.y, Wall3.solarRadWin) annotation (Line(points={{-57,82},
+          {-50,82},{-50,44},{46,44},{46,-24},{-34.6667,-24},{-34.6667,-35.1}},
+        color={0,0,127}));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>
  <ul>
