@@ -33,7 +33,7 @@ model HighOrderModel_MultipleRooms
     annotation (Placement(
     transformation(extent={{-85,2},{-51,34}}),   iconTransformation(
     extent={{-110,-10},{-90,10}})));
-  AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.HighOrderModel_Benchmark_Workshop
+  AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasse_HighOrderModel.HighOrderModel_Benchmark_Workshop
     highOrderModel_Benchmark_Workshop(
     Room_Lenght=30,
     Room_Height=3,
@@ -51,7 +51,7 @@ model HighOrderModel_MultipleRooms
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{70,70},{102,102}})));
 
-  AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.ConvRealtoRad
+  AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasse_HighOrderModel.ConvRealtoRad
     convRealtoRad[25]
     annotation (Placement(transformation(extent={{-22,6},{-2,26}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
@@ -103,7 +103,7 @@ model HighOrderModel_MultipleRooms
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=0,
         origin={-52,-92})));
-  BaseClasses.HighOrderModel_Benchmark_OpenplanOffice
+  BaseClasses.BaseClasse_HighOrderModel.HighOrderModel_Benchmark_OpenplanOffice
     highOrderModel_Benchmark_OpenplanOffice(
     Room_Lenght=30,
     Room_Height=3,
@@ -119,7 +119,8 @@ model HighOrderModel_MultipleRooms
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{68,-74},{100,-44}})));
-  BaseClasses.HighOrderModel_Benchmark_Canteen highOrderModel_Benchmark_Canteen(
+  BaseClasses.BaseClasse_HighOrderModel.HighOrderModel_Benchmark_Canteen
+    highOrderModel_Benchmark_Canteen(
     Room_Lenght=30,
     Room_Height=3,
     Room_Width=20,
@@ -135,7 +136,7 @@ model HighOrderModel_MultipleRooms
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{70,32},{102,62}})));
-  BaseClasses.HighOrderModel_Benchmark_ConferenceRoom
+  BaseClasses.BaseClasse_HighOrderModel.HighOrderModel_Benchmark_ConferenceRoom
     highOrderModel_Benchmark_ConferenceRoom(
     Room_Lenght=5,
     Room_Height=3,
@@ -152,7 +153,7 @@ model HighOrderModel_MultipleRooms
     TypFL=DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML(),
     Win=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009())
     annotation (Placement(transformation(extent={{68,-2},{100,28}})));
-  BaseClasses.HighOrderModel_Benchmark_MultipersonOffice
+  BaseClasses.BaseClasse_HighOrderModel.HighOrderModel_Benchmark_MultipersonOffice
     highOrderModel_Benchmark_MultipersonOffice(
     Room_Lenght=5,
     Room_Height=3,
