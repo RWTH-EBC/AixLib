@@ -91,7 +91,7 @@ model GroundFloorBuildingEnvelope
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_kitchen"
+  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_corridor"
     annotation (Dialog(
       tab="Dynamic ventilation",
       descriptionLabel=true,

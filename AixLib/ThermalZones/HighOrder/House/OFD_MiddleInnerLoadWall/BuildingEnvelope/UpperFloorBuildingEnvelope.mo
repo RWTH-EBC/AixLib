@@ -79,23 +79,23 @@ model UpperFloorBuildingEnvelope
 
   parameter Modelica.SIunits.Temperature Tset_Bedroom=295.15 "Tset_bedroom"
     annotation (Dialog(
-      group="Dynamic ventilation",
+      tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
   parameter Modelica.SIunits.Temperature Tset_Children1=295.15 "Tset_children1"
     annotation (Dialog(
-      group="Dynamic ventilation",
+      tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
-  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_children1"
+  parameter Modelica.SIunits.Temperature Tset_Corridor=291.15 "Tset_corridor"
     annotation (Dialog(
-      group="Dynamic ventilation",
+      tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
   parameter Modelica.SIunits.Temperature Tset_Bath=297.15 "Tset_Bath"
     annotation (Dialog(
-      group="Dynamic ventilation",
+      tab="Dynamic ventilation",
       descriptionLabel=true,
       joinNext=true,
       enable=withDynamicVentilation));
