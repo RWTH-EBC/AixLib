@@ -195,7 +195,7 @@ model Attic_Ro2Lf5
         rotation=90)));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation (Placement(
         transformation(extent={{-109.5,-10},{-89.5,10}}), iconTransformation(
-          extent={{-109.5,-10},{-89.5,10}})));
+          extent={{-119.5,10},{-99.5,30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RO1 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -281,15 +281,15 @@ model Attic_Ro2Lf5
         extent={{-1.99998,-13},{1.99998,13}},
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom1
-    annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
+    annotation (Placement(transformation(extent={{-100,-100},{-80,-80}}), iconTransformation(extent={{-90,-100},{-70,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom2
-    annotation (Placement(transformation(extent={{-60,-100},{-40,-80}})));
+    annotation (Placement(transformation(extent={{-60,-100},{-40,-80}}), iconTransformation(extent={{-50,-100},{-30,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom3
-    annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
+    annotation (Placement(transformation(extent={{-20,-100},{0,-80}}), iconTransformation(extent={{-10,-100},{10,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom4
-    annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
+    annotation (Placement(transformation(extent={{20,-100},{40,-80}}), iconTransformation(extent={{30,-100},{50,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom5
-    annotation (Placement(transformation(extent={{60,-100},{80,-80}})));
+    annotation (Placement(transformation(extent={{60,-100},{80,-80}}), iconTransformation(extent={{70,-100},{90,-80}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW1(
     withDoor=false,
     door_height=0,
@@ -308,7 +308,7 @@ model Attic_Ro2Lf5
     withWindow=false,
     T0=T0_OW1) annotation (Placement(transformation(extent={{-4,-21},{4,21}}, origin={-75,-22})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
-    annotation (Placement(transformation(extent={{-116,-30},{-96,-10}})));
+    annotation (Placement(transformation(extent={{-116,-30},{-96,-10}}), iconTransformation(extent={{-120,-30},{-100,-10}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW2(
     withDoor=false,
     door_height=0,
@@ -333,7 +333,10 @@ model Attic_Ro2Lf5
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={110,-18})));
+        origin={110,-18}), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={110,-20})));
 
 protected
   parameter Modelica.SIunits.Length p=(width + roof_width2 + roof_width1)*0.5;
@@ -427,7 +430,7 @@ equation
   connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{47,54},{48,54},{48,46},{-58,46},{-58,-22},{-56,-22},{-56,-40},{-6.1875,-40},{-6.1875,-7.88}}, color={191,0,0}));
   annotation (Icon(graphics={
         Polygon(
-          points={{-58,-20},{16,54},{90,-20},{76,-20},{16,40},{-44,-20},{-58,-20}},
+          points={{-96,-60},{0,80},{96,-60},{82,-60},{0,60},{-82,-60},{-96,-60}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={175,175,175}),
@@ -458,42 +461,42 @@ equation
           textString="Win2",
           visible=withWindow2),
         Text(
-          extent={{-44,-14},{74,-26}},
+          extent={{-28,-54},{30,-66}},
           lineColor={0,0,0},
           fillColor={255,170,170},
           fillPattern=FillPattern.Solid,
           textString="width"),
-        Line(points={{48,-20},{76,-20}}, color={0,0,0}),
-        Line(points={{-44,-20},{-20,-20}}, color={0,0,0}),
-        Line(points={{-62,-16},{12,58}}, color={0,0,0}),
-        Line(points={{16,54},{10,60}}, color={0,0,0}),
-        Line(points={{-58,-20},{-64,-14}}, color={0,0,0}),
+        Line(points={{30,-60},{82,-60}}, color={0,0,0}),
+        Line(points={{-82,-60},{-30,-60}}, color={0,0,0}),
+        Line(points={{-100,-56},{-4,84}},color={0,0,0}),
+        Line(points={{0,80},{-6,86}},  color={0,0,0}),
+        Line(points={{-96,-60},{-102,-54}},color={0,0,0}),
         Text(
-          extent={{-40,52},{16,42}},
+          extent={{-82,46},{-26,36}},
           lineColor={0,0,0},
           textString="wRO1"),
         Line(
           points={{3,-3},{-3,3}},
           color={0,0,0},
-          origin={93,-17},
+          origin={99,-57},
           rotation=90),
         Line(
-          points={{-37,-37},{37,37}},
+          points={{-103,-59},{37,37}},
           color={0,0,0},
-          origin={57,21},
+          origin={41,47},
           rotation=90),
         Line(
           points={{3,-3},{-3,3}},
           color={0,0,0},
-          origin={19,57},
+          origin={3,83},
           rotation=90),
         Text(
           extent={{-28,5},{28,-5}},
           lineColor={0,0,0},
-          origin={44,47},
+          origin={52,41},
           textString="wRO2"),
-        Line(points={{-44,-20},{-44,-24}}, color={0,0,0}),
-        Line(points={{76,-20},{76,-24}}, color={0,0,0})}), Documentation(
+        Line(points={{-82,-60},{-82,-68}}, color={0,0,0}),
+        Line(points={{82,-60},{82,-68}}, color={0,0,0})}), Documentation(
         revisions="<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
@@ -507,5 +510,6 @@ equation
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png\"
     alt=\"Room layout\"/></p>
  <p>We also tested a model where the attic has just one floor, over the whole building and each room connects to this component through the ceiling. However the model didn&apos;t lead to the expected lower simulation times, on the contrary. This model is also more correct, as it is not realistic to think that every layer of the attic&apos;s floor has a single temperature.</p>
- </html>"));
+ </html>"),
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}})));
 end Attic_Ro2Lf5;
