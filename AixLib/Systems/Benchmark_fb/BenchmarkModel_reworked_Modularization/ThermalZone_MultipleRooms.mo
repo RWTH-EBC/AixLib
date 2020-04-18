@@ -31,7 +31,12 @@ model ThermalZone_MultipleRooms
     annotation (Placement(transformation(extent={{-76,-16},{-42,16}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
   BaseClasses.BaseClasses_ThermalZone.thermalZone_Benchmark
-    thermalZone_Benchmark[5](redeclare package Medium = Media.Air)
+    thermalZone_Benchmark[5](redeclare package Medium = Media.Air, zoneParam={
+        AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Workshop(),
+        AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_Canteen(),
+        AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_ConferenceRoom(),
+        AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_MultipersonOffice(),
+        AixLib.Systems.Benchmark_fb.BenchmarkModel_reworked_Modularization.BaseClasses.BaseClasses_ThermalZone.Records_ThermalZone.thermalZone_Benchmark_OpenplanOffice()})
     annotation (Placement(transformation(extent={{-36,-32},{40,32}})));
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -42,46 +47,67 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
+
   connect(weaBus, thermalZone_Benchmark[1].weaBus) annotation (Line(
-      points={{-59,0},{-36,0}},
+      points={{-59,0},{-36,0},{-36,0}},
       color={255,204,51},
       thickness=0.5));
   connect(weaBus, thermalZone_Benchmark[2].weaBus) annotation (Line(
-      points={{-59,0},{-36,0}},
+      points={{-59,0},{-50,0},{-50,0},{-36,0}},
       color={255,204,51},
       thickness=0.5));
+  connect(IntGains.y, thermalZone_Benchmark[1].intGains[1]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-29.44},{32.4,-29.44}}, color={0,0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[1].intGains[2]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-54},{32.4,-54},{32.4,-26.88}}, color={0,
+          0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[1].intGains[3]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-52},{32.4,-52},{32.4,-24.32}}, color={0,
+          0,127}));
+          connect(IntGains.y, thermalZone_Benchmark[2].intGains[1]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-29.44},{32.4,-29.44}}, color={0,0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[2].intGains[2]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-54},{32.4,-54},{32.4,-26.88}}, color={0,
+          0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[2].intGains[3]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-52},{32.4,-52},{32.4,-24.32}}, color={0,
+          0,127}));
   connect(weaBus, thermalZone_Benchmark[3].weaBus) annotation (Line(
       points={{-59,0},{-36,0}},
       color={255,204,51},
       thickness=0.5));
+       connect(IntGains.y, thermalZone_Benchmark[3].intGains[1]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-29.44},{32.4,-29.44}}, color={0,0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[3].intGains[2]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-54},{32.4,-54},{32.4,-26.88}}, color={0,
+          0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[3].intGains[3]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-52},{32.4,-52},{32.4,-24.32}}, color={0,
+          0,127}));
   connect(weaBus, thermalZone_Benchmark[4].weaBus) annotation (Line(
       points={{-59,0},{-36,0}},
       color={255,204,51},
       thickness=0.5));
   connect(weaBus, thermalZone_Benchmark[5].weaBus) annotation (Line(
-      points={{-59,0},{-36,0}},
+      points={{-59,0},{-54,0},{-54,-2},{-36,-2},{-36,0}},
       color={255,204,51},
       thickness=0.5));
-  connect(IntGains.y, thermalZone_Benchmark[1].intGains[1]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-29.44},{32.4,-29.44}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[1].intGains[2]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-26.88},{32.4,-26.88}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[1].intGains[3]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-24.32},{32.4,-24.32}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[2].intGains[1]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-29.44},{32.4,-29.44}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[2].intGains[2]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-26.88},{32.4,-26.88}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[2].intGains[3]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-24.32},{32.4,-24.32}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[3].intGains[1]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-29.44},{32.4,-29.44}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[3].intGains[2]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-26.88},{32.4,-26.88}}, color={0,0,127}));
-         connect(IntGains.y, thermalZone_Benchmark[3].intGains[3]) annotation (Line(
-        points={{-79,-80},{34,-80},{34,-24.32},{32.4,-24.32}}, color={0,0,127}));
-
-
+      connect(IntGains.y, thermalZone_Benchmark[4].intGains[1]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-29.44},{32.4,-29.44}}, color={0,0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[4].intGains[2]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-54},{32.4,-54},{32.4,-26.88}}, color={0,
+          0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[4].intGains[3]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-52},{32.4,-52},{32.4,-24.32}}, color={0,
+          0,127}));
+          connect(IntGains.y, thermalZone_Benchmark[5].intGains[1]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-29.44},{32.4,-29.44}}, color={0,0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[5].intGains[2]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-54},{32.4,-54},{32.4,-26.88}}, color={0,
+          0,127}));
+  connect(IntGains.y, thermalZone_Benchmark[5].intGains[3]) annotation (Line(
+        points={{-79,-80},{32,-80},{32,-52},{32.4,-52},{32.4,-24.32}}, color={0,
+          0,127}));
     annotation (Line(points={{11,-16},{10,-16},{10,16.4}}, color={0,0,127}),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
