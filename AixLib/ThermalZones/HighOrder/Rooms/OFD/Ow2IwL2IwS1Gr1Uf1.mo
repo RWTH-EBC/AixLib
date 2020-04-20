@@ -170,10 +170,6 @@ model Ow2IwL2IwS1Gr1Uf1
         origin={22,-60},
         extent={{-4.00002,-26},{4.00001,26}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
-    final T0=T0_air,
-    final V=room_V)
-    annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,

@@ -451,8 +451,8 @@ equation
   connect(Bedroom.SolarRadiationPort_OW1, South) annotation (Line(points={{-81.9,
           55.6},{-90,55.6},{-90,86},{90,86},{90,-54},{110,-54}}, color={255,128,
           0}));
-  connect(Bedroom.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-81.9,
-          30},{-90,30},{-90,25},{-115,25}}, color={0,0,127}));
+  connect(Bedroom.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-81.9,30},{-90,30},{-90,25},{-115,25}},
+                                            color={0,0,127}));
   connect(Children2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-83.9,
           -36},{-90,-36},{-90,25},{-115,25}}, color={0,0,127}));
   connect(Bath.WindSpeedPort, WindSpeedPort) annotation (Line(points={{83.905,-50.4},
