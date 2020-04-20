@@ -49,6 +49,7 @@ model Wall_ASHRAE140
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters",  group = "Inside surface", compact = true, descriptionLabel = true), choices(choice=1
         "vertical wall",                                                                                                    choice = 2 "floor",
                  choice = 3 "ceiling",radioButtons =  true));
+  parameter Real solar_distribution = 0.038;
 //  parameter Real solFractCoeff = 0.65 "solar fraction coefficient. Ex: floor = 0.65, ceiling = 0.15, vertical walls = 0.04" annotation(Dialog(tab = "Surface Parameters",  group = "Inside surface" ));
 
     // window parameters
@@ -169,8 +170,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={22,88})));
-  Modelica.Blocks.Math.Gain solarDistrFraction(k=if ISOrientation == 1 then
-        0.038 else if ISOrientation == 2 then 0.642 else 0.168)
+  Modelica.Blocks.Math.Gain solarDistrFraction(k=solar_distribution)
     "interior solar distribution factors" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
