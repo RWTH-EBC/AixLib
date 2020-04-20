@@ -155,7 +155,7 @@ equation
           {-56,-96},{22,-96},{22,-84},{26.8,-84}}, color={255,0,255}));
   connect(notIsOn.y, andIsOff.u2) annotation (Line(points={{-57.6,-18},{-56,-18},
           {-56,33.2},{14.8,33.2}}, color={255,0,255}));
-  connect(sigBusHP.N,nIsGreaterZero. u) annotation (Line(
+  connect(sigBusHP.n,nIsGreaterZero. u) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-42},{-109.6,-42}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -163,7 +163,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBusHP.N, swinOutnSet.u3) annotation (Line(
+  connect(sigBusHP.n, swinOutnSet.u3) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-104},{78,-104},{78,-8},{88,-8}},
       color={255,204,51},
       thickness=0.5), Text(
