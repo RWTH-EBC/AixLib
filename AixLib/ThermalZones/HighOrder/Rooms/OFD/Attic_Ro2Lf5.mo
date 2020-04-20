@@ -5,28 +5,6 @@ model Attic_Ro2Lf5
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
     final room_V=roof_width1*roof_width2*sin(alfa)*0.5*length);
 
-  ///////// construction parameters
-  parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "Heavy",
-      choice=2 "Medium",
-      choice=3 "Light",
-      radioButtons=true));
-  parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true,
-      groupImage=
-          "modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png"),
-      choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
-
   parameter Modelica.SIunits.Temperature T0_RO1=282.15 "RO1"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   parameter Modelica.SIunits.Temperature T0_RO2=282.15 "RO2"
@@ -339,48 +317,7 @@ protected
   parameter Modelica.SIunits.Area VerticalWall_Area=sqrt(p*(p - width)*(p -
       roof_width2)*(p - roof_width1));
   // Heron's formula
-  // Outer wall type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_OW=if TIR == 1
-       then if TMC == 1 then AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
-       else if TMC == 2 then AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_M()
-       else AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_L() else if TIR == 2
-       then if TMC == 1 then AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_S()
-       else if TMC == 2 then AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_M()
-       else AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_L() else if TIR == 3
-       then if TMC == 1 then AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_S()
-       else if TMC == 2 then AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_M()
-       else AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_L() else if TMC ==
-      1 then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S() else if TMC
-       == 2 then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_M() else
-      AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_L()
-    annotation (Dialog(tab="Types"));
-  // Floor to lower floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
-       then AixLib.DataBase.Walls.EnEV2009.Floor.FLattic_EnEV2009_SML_upHalf()
-       else if TIR == 2 then
-      AixLib.DataBase.Walls.EnEV2002.Floor.FLattic_EnEV2002_SML_upHalf() else
-      if TIR == 3 then
-      AixLib.DataBase.Walls.WSchV1995.Floor.FLattic_WSchV1995_SML_upHalf()
-       else AixLib.DataBase.Walls.WSchV1984.Floor.FLattic_WSchV1984_SML_upHalf()
-    annotation (Dialog(tab="Types"));
-  // Saddle roof type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_RO=if TIR == 1
-       then AixLib.DataBase.Walls.EnEV2009.Ceiling.ROsaddleAttic_EnEV2009_SML()
-       else if TIR == 2 then
-      AixLib.DataBase.Walls.EnEV2002.Ceiling.ROsaddleAttic_EnEV2002_SML() else
-      if TIR == 3 then
-      AixLib.DataBase.Walls.WSchV1995.Ceiling.ROsaddleAttic_WSchV1995_SML()
-       else AixLib.DataBase.Walls.WSchV1984.Ceiling.ROsaddleAttic_WSchV1984_SML()
-    annotation (Dialog(tab="Types"));
-  //Window type
-  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
-    Type_Win=if TIR == 1 then
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR
-       == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002()
-       else if TIR == 3 then
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984()
-    annotation (Dialog(tab="Types"));
+
 equation
   connect(SolarRadiationPort_RO1, roof1.SolarRadiationPort) annotation (Line(
         points={{-45.5,100},{-45.5,80},{-14.4167,80},{-14.4167,65.5}}, color={

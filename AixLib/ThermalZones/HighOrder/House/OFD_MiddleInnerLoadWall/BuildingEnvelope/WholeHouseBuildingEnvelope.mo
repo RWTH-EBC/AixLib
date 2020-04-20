@@ -3,26 +3,6 @@ model WholeHouseBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
-  ///////// construction parameters
-  parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "Heavy",
-      choice=2 "Medium",
-      choice=3 "Light",
-      radioButtons=true));
-  parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
-      groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.png",
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
-
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
   parameter Real AirExchangeAttic=0 "Air exchange attic in 1/h "
@@ -49,8 +29,6 @@ model WholeHouseBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
@@ -79,8 +57,6 @@ model WholeHouseBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
@@ -123,8 +99,6 @@ model WholeHouseBuildingEnvelope
     roof_width2=3.36,
     solar_absorptance_RO=0.1,
     width=4.75,
-    TMC=TMC,
-    TIR=TIR,
     final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,

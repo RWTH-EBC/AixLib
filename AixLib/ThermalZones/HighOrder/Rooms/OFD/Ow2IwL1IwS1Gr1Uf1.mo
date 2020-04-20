@@ -5,24 +5,6 @@ model Ow2IwL1IwS1Gr1Uf1
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
                                                                           final room_V=room_length*room_width*room_height);
 
-  ///////// construction parameters
-  parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "Heavy",
-      choice=2 "Medium",
-      choice=3 "Light",
-      radioButtons=true));
-  parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
 
   //Initial temperatures
 
@@ -239,100 +221,6 @@ protected
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
-
-  // Outer wall type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_OW=if TIR == 1
-       then if TMC == 1 then AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
-       else if TMC == 2 then AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_M()
-       else AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_L() else if TIR == 2
-       then if TMC == 1 then AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_S()
-       else if TMC == 2 then AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_M()
-       else AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_L() else if TIR == 3
-       then if TMC == 1 then AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_S()
-       else if TMC == 2 then AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_M()
-       else AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_L() else if TMC == 1
-       then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S() else if TMC == 2
-       then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_M() else
-      AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_L()
-    annotation (Dialog(tab="Types"));
-  //Inner wall Types
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWsimple=if TIR ==
-      1 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_S_half() else if TMC ==
-      2 then AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half() else
-      AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_L_half() else if TIR ==
-      2 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_S_half() else if TMC ==
-      2 then AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_M_half() else
-      AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_L_half() else if TIR ==
-      3 then if TMC == 1 then
-      AixLib.DataBase.Walls.WSchV1995.IW.IWsimple_WSchV1995_S_half() else if
-      TMC == 2 then
-      AixLib.DataBase.Walls.WSchV1995.IW.IWsimple_WSchV1995_M_half() else
-      AixLib.DataBase.Walls.WSchV1995.IW.IWsimple_WSchV1995_L_half() else if
-      TMC == 1 then
-      AixLib.DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_S_half() else if
-      TMC == 2 then
-      AixLib.DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_M_half() else
-      AixLib.DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half()
-    annotation (Dialog(tab="Types"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWload=if TIR == 1
-       then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half() else if TMC ==
-      2 then AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_M_half() else
-      AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_L_half() else if TIR ==
-      2 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_S_half() else if TMC ==
-      2 then AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_M_half() else
-      AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_L_half() else if TIR ==
-      3 then if TMC == 1 then
-      AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_S_half() else if TMC ==
-      2 then AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_M_half() else
-      AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_L_half() else if TMC ==
-      1 then AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_S_half() else
-      if TMC == 2 then
-      AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_M_half() else
-      AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
-    annotation (Dialog(tab="Types"));
-  // Floor to ground type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
-  if TIR == 1
-       then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else
-      if TIR == 2 then
-      AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR ==
-      3 then AixLib.DataBase.Walls.WSchV1995.Floor.FLground_WSchV1995_SML()
-       else AixLib.DataBase.Walls.WSchV1984.Floor.FLground_WSchV1984_SML()
-    annotation (Dialog(tab="Types"));
-  // Ceiling to upper floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
-  if TIR == 1
-       then if TMC == 1 or TMC == 2 then
-      AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf()
-       else
-      AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_L_loHalf()
-       else if TIR == 2 then if TMC == 1 or TMC == 2 then
-      AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_SM_loHalf()
-       else
-      AixLib.DataBase.Walls.EnEV2002.Ceiling.CEpartition_EnEV2002_L_loHalf()
-       else if TIR == 3 then if TMC == 1 or TMC == 2 then
-      AixLib.DataBase.Walls.WSchV1995.Ceiling.CEpartition_WSchV1995_SM_loHalf()
-       else
-      AixLib.DataBase.Walls.WSchV1995.Ceiling.CEpartition_WSchV1995_L_loHalf()
-       else if TMC == 1 or TMC == 2 then
-      AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_SM_loHalf()
-       else
-      AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_L_loHalf()
-    annotation (Dialog(tab="Types"));
-
-  //Window type
-  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
-    Type_Win=if TIR == 1 then
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR ==
-      2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else
-      if TIR == 3 then
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984()
-    annotation (Dialog(tab="Types"));
 
 equation
   connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,33.4667},{-80,33.4667},{-80,-40},{-99.5,-40}},

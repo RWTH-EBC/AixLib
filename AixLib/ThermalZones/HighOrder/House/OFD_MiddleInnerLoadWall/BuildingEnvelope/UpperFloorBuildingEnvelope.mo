@@ -3,28 +3,6 @@ model UpperFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
-  ///////// construction parameters
-  parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "Heavy",
-      choice=2 "Medium",
-      choice=3 "Light",
-      radioButtons=true));
-  parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
-      groupImage=
-          "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_5Rooms.png",
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
-
-
   //////////room geometry
   parameter Modelica.SIunits.Length room_width_long=if TIR == 1 then 3.86 else
       3.97 "w1 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
@@ -138,8 +116,6 @@ model UpperFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     final solar_absorptance_OW=solar_absorptance_OW,
     withWindow2=true,
     room_length=length5 + length6 + thickness_IWsimple,
@@ -189,8 +165,6 @@ model UpperFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     final solar_absorptance_OW=solar_absorptance_OW,
     withWindow2=true,
     room_length=length5,
@@ -238,8 +212,6 @@ model UpperFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     final solar_absorptance_OW=solar_absorptance_OW,
     room_length=length8,
     room_width_long=room_width_long,
@@ -288,8 +260,6 @@ model UpperFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     final solar_absorptance_OW=solar_absorptance_OW,
     withWindow2=true,
     room_length=length7 + length8 + thickness_IWsimple,
@@ -344,8 +314,6 @@ model UpperFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Corridor,
-    TMC=TMC,
-    TIR=TIR,
     final solar_absorptance_OW=solar_absorptance_OW,
     room_length=length6 + length7 + thickness_IWsimple,
     room_lengthb=length7,

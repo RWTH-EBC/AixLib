@@ -3,26 +3,6 @@ model GroundFloorBuildingEnvelope
 
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
-  ///////// construction parameters
-  parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "Heavy",
-      choice=2 "Medium",
-      choice=3 "Light",
-      radioButtons=true));
-  parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
-      groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_5Rooms.png",
-      group="Construction parameters",
-      compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
-
   //////////room geometry
   parameter Modelica.SIunits.Length room_width=if TIR == 1 then 3.86 else 3.97
     "width" annotation (Dialog(group="Dimensions", descriptionLabel=true));
@@ -126,8 +106,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     room_lengthb=length2,
     room_width=room_width,
     room_height=room_height,
@@ -173,8 +151,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     room_length=length1,
     room_width=room_width,
     room_height=room_height,
@@ -217,8 +193,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     room_length=length4,
     room_width=room_width,
     room_height=room_height,
@@ -263,8 +237,6 @@ model GroundFloorBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    TMC=TMC,
-    TIR=TIR,
     room_length=length3 + length4 + thickness_IWsimple,
     room_width=room_width,
     room_height=room_height,
@@ -315,8 +287,6 @@ model GroundFloorBuildingEnvelope
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
     final Tset=Tset_Corridor,
-    TMC=TMC,
-    TIR=TIR,
     room_length=length2 + length3 + thickness_IWsimple,
     room_width=room_width,
     room_height=room_height,

@@ -10,6 +10,9 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 
+  //Window type
+  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win;
+
   parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
