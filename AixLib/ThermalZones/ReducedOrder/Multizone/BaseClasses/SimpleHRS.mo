@@ -23,13 +23,13 @@ Modelica.Blocks.Interfaces.RealInput Tair[nZones]
         *etaHRS + Tair[1])
     annotation (Placement(transformation(extent={{-60,-64},{-40,-44}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis(
-    uLow=273.15 + 12,
+    uLow=273.15 + 8,
     uHigh=273.15 + 21,
     pre_y_start=false)
     annotation (Placement(transformation(extent={{-68,22},{-48,42}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis1(
     uLow=273.15 + 19,
-    uHigh=273.15 + 25,
+    uHigh=273.15 + 22,
     pre_y_start=false)
     annotation (Placement(transformation(extent={{-52,-22},{-32,-2}})));
   Modelica.Blocks.Logical.And and2
