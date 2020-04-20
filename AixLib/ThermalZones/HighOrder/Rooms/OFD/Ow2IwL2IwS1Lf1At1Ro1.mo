@@ -2,7 +2,7 @@ within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL2IwS1Lf1At1Ro1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
 
-  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(
+  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
     final room_V=room_length*room_width_long*
       room_height_long - room_length*(room_width_long - room_width_short)*(
       room_height_long - room_height_short)*0.5);
@@ -39,7 +39,7 @@ model Ow2IwL2IwS1Lf1At1Ro1
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   parameter Modelica.SIunits.Temperature T0_IW2=295.15 "IW2"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_CE=295.10 "Ceiling"
+  parameter Modelica.SIunits.Temperature T0_CE=295.1  "Ceiling"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   parameter Modelica.SIunits.Temperature T0_RO=295.15 "Roof"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));

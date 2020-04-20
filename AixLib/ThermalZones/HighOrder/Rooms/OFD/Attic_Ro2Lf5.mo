@@ -2,7 +2,7 @@ within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Attic_Ro2Lf5
   "Attic with 2 saddle roofs and a floor toward 5 rooms on the lower floor, with all other walls towards the outside"
 
-  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(
+  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
     final room_V=roof_width1*roof_width2*sin(alfa)*0.5*length);
 
   ///////// construction parameters
@@ -155,7 +155,7 @@ model Attic_Ro2Lf5
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
-    wallPar=Type_RO,
+    final wallPar=wallTypes.roofAttic,
     WindowType=Type_Win,
     ISOrientation=1) annotation (Placement(transformation(
         extent={{-5.00001,-29},{5.00001,29}},
@@ -163,7 +163,7 @@ model Attic_Ro2Lf5
         origin={-41,59})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom2(
     T0=T0_FL2,
-    wallPar=Type_FL,
+    final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room2_length,
     wall_height=room2_width,
     withWindow=false,
@@ -172,14 +172,13 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
-    outside=false,
-    withDoor=false) annotation (Placement(transformation(
+    outside=false)  annotation (Placement(transformation(
         origin={-29,-44},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom1(
     T0=T0_FL1,
-    wallPar=Type_FL,
+    final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room1_length,
     wall_height=room1_width,
     withWindow=false,
@@ -188,8 +187,7 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
-    outside=false,
-    withDoor=false) annotation (Placement(transformation(
+    outside=false)  annotation (Placement(transformation(
         origin={-60,-44},
         extent={{-2,-12},{2,12}},
         rotation=90)));
@@ -218,7 +216,7 @@ model Attic_Ro2Lf5
     final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO2,
     wall_length=length,
-    wallPar=Type_RO,
+    final wallPar=wallTypes.roofAttic,
     WindowType=Type_Win,
     ISOrientation=1) annotation (Placement(transformation(
         origin={47,59},
@@ -234,7 +232,7 @@ model Attic_Ro2Lf5
         origin={50,90})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom3(
     T0=T0_FL3,
-    wallPar=Type_FL,
+    final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room3_length,
     wall_height=room3_width,
     withWindow=false,
@@ -243,14 +241,13 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
-    outside=false,
-    withDoor=false) annotation (Placement(transformation(
+    outside=false)  annotation (Placement(transformation(
         origin={3,-44},
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom4(
     T0=T0_FL4,
-    wallPar=Type_FL,
+    final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room4_length,
     wall_height=room4_width,
     withWindow=false,
@@ -259,14 +256,13 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
-    outside=false,
-    withDoor=false) annotation (Placement(transformation(
+    outside=false)  annotation (Placement(transformation(
         origin={35,-44},
         extent={{-1.99998,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom5(
     T0=T0_FL5,
-    wallPar=Type_FL,
+    final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room5_length,
     wall_height=room5_width,
     withWindow=false,
@@ -275,8 +271,7 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
-    outside=false,
-    withDoor=false) annotation (Placement(transformation(
+    outside=false)  annotation (Placement(transformation(
         origin={69,-44},
         extent={{-1.99998,-13},{1.99998,13}},
         rotation=90)));
@@ -301,7 +296,7 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=1,
-    wallPar=Type_OW,
+    final wallPar=wallTypes.OW,
     wall_length=sqrt(VerticalWall_Area),
     wall_height=sqrt(VerticalWall_Area),
     solar_absorptance=solar_absorptance_OW,
@@ -320,7 +315,7 @@ model Attic_Ro2Lf5
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=1,
-    wallPar=Type_OW,
+    final wallPar=wallTypes.OW,
     wall_length=sqrt(VerticalWall_Area),
     wall_height=sqrt(VerticalWall_Area),
     solar_absorptance=solar_absorptance_OW,
