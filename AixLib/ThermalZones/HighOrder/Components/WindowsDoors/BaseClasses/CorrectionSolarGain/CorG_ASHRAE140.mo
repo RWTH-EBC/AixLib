@@ -44,6 +44,7 @@ equation
     Tabs[i] = exp(p*(-L[i]*K));
     T[i] = Trn[i]*Tabs[i];
 
+    //Solar radiation transmitted through window
     solarRadWinTrans[i]= SR_input[i].I*T[i];
 
   end for;
