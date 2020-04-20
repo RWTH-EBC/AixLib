@@ -22,8 +22,13 @@ model Window_ASHRAE140
   parameter Real g= if selectable then WindowType.g else 0.60
     "Coefficient of solar energy transmission"                                                            annotation (Dialog(group="Window type", enable = not selectable));
 
-  BaseClasses.CorrectionSolarGain.CorG_VDI6007
-    RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
+  replaceable model correctionSolarGain =
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
+    BaseClasses.CorrectionSolarGain.PartialCorG
+    "Model for correction of solar gain factor" annotation (Dialog(
+        descriptionLabel=true), choicesAllMatching=true);
+
+  correctionSolarGain RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
             -30,72}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
@@ -62,8 +67,8 @@ annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     T0=T0,
     A=windowarea)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
-  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
-    "multiplication with area and solar gain factor"
+  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea)
+    "multiplication with area"
     annotation (Placement(transformation(extent={{-4,54},{8,66}})));
   Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans
     "Output signal connector"
