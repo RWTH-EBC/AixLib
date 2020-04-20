@@ -4,9 +4,13 @@ model CorG_ASHRAE140
   extends PartialCorG;
 
   import Modelica.SIunits.Conversions.to_deg;
+  import Modelica.Math.asin;
+  import Modelica.Math.sin;
+  import Modelica.Math.tan;
+  import Modelica.Math.cos;
 
   parameter Real INDRG=1.526; // Index of refraction of Glass, in this case INDRG= 1.526
-  parameter Real p = 2; // number of panes of glass, in this case n = 2
+  parameter Real p = 2; // number of panes of glass, in this case p = 2
   parameter Real TH = 3.175; // Thickness of glass, in this case TH = 3.175 mm
   parameter Real K = 0.0196; // Extintion coefficient, in this case K = 0.0196/mm
 
@@ -23,12 +27,13 @@ model CorG_ASHRAE140
 equation
   for i in 1:n loop
     // Snell's Law
-    AOI[i] = SR_input[i].AOI; // in rad
-    AOR[i] = asin(sin(to_deg(AOI[i])/INDRG)); //  Angle of refraction in deg
+    AOI[i] = to_deg(SR_input[i].AOI); // in rad
+
+    AOR[i] = asin(sin((AOI[i])/INDRG)); //  Angle of refraction in deg
 
     //Fresnel Equations(Reflectance at 1 air to glass interface)
-    RPERP[i] = (sin(AOR[i]-to_deg(AOI[i])))^2/ (sin(AOR[i]+to_deg(AOI[i]))^2);
-    RPAR[i] = (tan(AOR[i]- to_deg(AOI[i]))^2) / (tan(AOR[i]+to_deg(AOI[i]))^2);
+    RPERP[i]*(sin(AOR[i]+(AOI[i])))^2 = (sin(AOR[i]-(AOI[i])))^2;
+    RPAR[i]*(tan(AOR[i]+(AOI[i])))^2 = (tan(AOR[i]- (AOI[i])))^2;
     R[i] = (RPERP[i]+RPAR[i])/2;
 
     //Fresnel Equations(Transmittance due to reflectance with several panes)
