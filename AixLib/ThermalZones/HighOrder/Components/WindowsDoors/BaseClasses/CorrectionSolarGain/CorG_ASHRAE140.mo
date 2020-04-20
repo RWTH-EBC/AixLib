@@ -50,4 +50,14 @@ equation
   end for;
 
 
+  annotation (Documentation(info="<html>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>This model computes the transmission correction factors for solar radiation through a double pane window depoending on the incidence angle, based on the ASHRAE140.</p>
+<h4><span style=\"color: #008000\">Known Limitations</span></h4>
+<p>The model is directly paramtrized for a double pane window.</p>
+<h4><span style=\"color: #008000\">References</span></h4>
+<ul>
+<li>ASHRAE140 Informative Annex B6</li>
+</ul>
+</html>"));
 end CorG_ASHRAE140;
