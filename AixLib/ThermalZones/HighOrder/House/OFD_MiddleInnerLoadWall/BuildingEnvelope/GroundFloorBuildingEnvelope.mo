@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
-  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
+  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(

@@ -90,11 +90,12 @@ model Ow1IwL2IwS1Lf1At1Ro1
     withDoor=false,
     door_height=0,
     door_width=0,
-    wallPar=Type_OW) annotation (Placement(transformation(extent={{-60,-12},{-50,46}})));
+    wallPar=wallTypes.OW)
+                     annotation (Placement(transformation(extent={{-60,-12},{-50,46}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inner_wall1(
     T0=T0_IW1,
     outside=false,
-    wallPar=Type_IWsimple,
+    wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
@@ -109,7 +110,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
     T0=T0_IW2a,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_length - room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
@@ -124,7 +125,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     T0=T0_IW3,
     outside=false,
-    wallPar=Type_IWsimple,
+    wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
@@ -139,7 +140,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
-    wallPar=Type_CE,
+    wallPar=wallTypes.IW_hori_att_low_half,
     wall_length=room_length,
     wall_height=room_width_short,
     withWindow=false,
@@ -155,7 +156,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
-    wallPar=Type_FL,
+    wallPar=wallTypes.IW_hori_upp_half,
     wall_length=room_length,
     wall_height=room_width_long,
     withWindow=false,
@@ -192,7 +193,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=roof_width,
     withWindow=withWindow3,
     windowarea=windowarea_RO,
-    wallPar=Type_RO,
+    wallPar=wallTypes.roof,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -210,7 +211,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
     T0=T0_IW2b,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_lengthb,
     wall_height=room_height_long,
     withWindow=false,

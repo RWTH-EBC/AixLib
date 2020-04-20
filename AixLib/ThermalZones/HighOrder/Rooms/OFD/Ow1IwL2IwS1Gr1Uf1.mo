@@ -83,7 +83,7 @@ model Ow1IwL2IwS1Gr1Uf1
     wall_height=room_height,
     withWindow=withWindow1,
     withDoor=withDoor1,
-    wallPar=Type_OW,
+    wallPar=wallTypes.OW,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -94,7 +94,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     T0=T0_IW1,
     outside=false,
-    wallPar=Type_IWsimple,
+    wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
@@ -109,7 +109,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
     T0=T0_IW2a,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
@@ -124,7 +124,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     T0=T0_IW3,
     outside=false,
-    wallPar=Type_IWsimple,
+    wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
@@ -139,7 +139,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
-    wallPar=Type_CE,
+    wallPar=wallTypes.IW_hori_low_half,
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
@@ -155,7 +155,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
-    wallPar=Type_FL,
+    wallPar=wallTypes.groundPlate_upp_half,
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
@@ -184,7 +184,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
     T0=T0_IW2b,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,

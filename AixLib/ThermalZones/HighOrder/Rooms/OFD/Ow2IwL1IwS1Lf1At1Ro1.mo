@@ -107,7 +107,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withDoor=false,
     door_height=0,
     door_width=0,
-    wallPar=Type_OW) annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
+    wallPar=wallTypes.OW)
+                     annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW2,
@@ -123,7 +124,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    wallPar=Type_OW,
+    wallPar=wallTypes.OW,
     ISOrientation=1,
     U_door=U_door_OD2,
     eps_door=eps_door_OD2) annotation (Placement(transformation(
@@ -133,7 +134,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     T0=T0_IW1,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_length,
     wall_height=room_height_long,
     withWindow=false,
@@ -148,7 +149,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
     T0=T0_IW2,
     outside=false,
-    wallPar=Type_IWsimple,
+    wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
@@ -163,7 +164,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
-    wallPar=Type_CE,
+    wallPar=wallTypes.IW_hori_att_low_half,
     wall_length=room_length,
     wall_height=room_width_short,
     withWindow=false,
@@ -179,7 +180,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
-    wallPar=Type_FL,
+    wallPar=wallTypes.IW_hori_upp_half,
     wall_length=room_length,
     wall_height=room_width_long,
     withWindow=false,
@@ -221,7 +222,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO,
-    wallPar=Type_RO,
+    wallPar=wallTypes.roof,
     WindowType=Type_Win) annotation (Placement(transformation(
         origin={55,59},
         extent={{-2.99995,-17},{2.99997,17}},

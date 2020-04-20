@@ -111,7 +111,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_height,
     withWindow=withWindow1,
     withDoor=withDoor1,
-    wallPar=Type_OW,
+    wallPar=wallTypes.OW,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -130,7 +130,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_height=room_height,
     withWindow=withWindow2,
     withDoor=withDoor2,
-    wallPar=Type_OW,
+    wallPar=wallTypes.OW,
     WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -144,7 +144,7 @@ model Ow2IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1a(
     T0=T0_IW1a,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
@@ -159,7 +159,7 @@ model Ow2IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
     T0=T0_IW2,
     outside=false,
-    wallPar=Type_IWsimple,
+    wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
@@ -174,7 +174,7 @@ model Ow2IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     T0=T0_CE,
     outside=false,
-    wallPar=Type_CE,
+    wallPar=wallTypes.IW_hori_low_half,
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
@@ -190,7 +190,7 @@ model Ow2IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     T0=T0_FL,
     outside=false,
-    wallPar=Type_FL,
+    wallPar=wallTypes.groundPlate_upp_half,
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
@@ -224,7 +224,7 @@ model Ow2IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1b(
     T0=T0_IW1b,
     outside=false,
-    wallPar=Type_IWload,
+    wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,
