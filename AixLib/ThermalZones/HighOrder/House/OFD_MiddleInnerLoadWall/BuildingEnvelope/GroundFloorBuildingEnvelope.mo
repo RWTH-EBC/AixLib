@@ -97,8 +97,6 @@ model GroundFloorBuildingEnvelope
       descriptionLabel=true,
       enable=withDynamicVentilation));
 
-  Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k=0) "Storage"
-    annotation (Placement(transformation(extent={{-116,-68},{-100,-52}})));
   Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Livingroom(
     final denAir=denAir,
     final cAir=cAir,
@@ -147,7 +145,7 @@ model GroundFloorBuildingEnvelope
     T0_FL=295.13,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors)
-    annotation (Placement(transformation(extent={{-86,12},{-42,76}})));
+    annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
   Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 Hobby(
     final denAir=denAir,
     final cAir=cAir,
@@ -241,7 +239,7 @@ model GroundFloorBuildingEnvelope
     T0_FL=291.13,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors)
-    annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
+    annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Kitchen(
     final denAir=denAir,
     final cAir=cAir,
@@ -354,8 +352,7 @@ model GroundFloorBuildingEnvelope
         origin={110,-16})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-130,12},{-100,42}})));
-  Modelica.Blocks.Interfaces.RealInput AirExchangePort[4]
-    "1: LivingRoom_GF, 2: Hobby_GF, 3: WC_Storage_GF, 4: Kitchen_GF"
+  Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
     annotation (Placement(transformation(extent={{-130,-18},{-100,12}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Livingroom
@@ -370,37 +367,14 @@ model GroundFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{62,100},{80,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCorridor
     annotation (Placement(transformation(extent={{100,100},{120,120}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermLivingroom
-    annotation (Placement(transformation(extent={{-26,54},{-14,66}}),
-        iconTransformation(extent={{-28,56},{-14,66}})));
-  AixLib.Utilities.Interfaces.RadPort StarLivingroom
-    annotation (Placement(transformation(extent={{-28,32},{-12,48}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermHobby
-    annotation (Placement(transformation(extent={{14,54},{26,66}})));
-  AixLib.Utilities.Interfaces.RadPort StarHobby
-    annotation (Placement(transformation(extent={{12,32},{28,48}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermCorridor annotation (
-     Placement(transformation(extent={{8,-2},{20,10}}), iconTransformation(
-          extent={{8,-2},{20,10}})));
-  AixLib.Utilities.Interfaces.RadPort StarCorridor annotation (Placement(transformation(
-          extent={{6,-24},{22,-8}}), iconTransformation(extent={{6,-24},{22,-8}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermWC_Storage
-    annotation (Placement(transformation(extent={{16,-56},{28,-44}}),
-        iconTransformation(extent={{16,-56},{28,-44}})));
-  AixLib.Utilities.Interfaces.RadPort StarWC_Storage annotation (Placement(transformation(
-          extent={{14,-78},{30,-62}}), iconTransformation(extent={{14,-78},{30,
-            -62}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermKitchen annotation (
-      Placement(transformation(extent={{-24,-56},{-12,-44}}),
-        iconTransformation(extent={{-24,-56},{-12,-44}})));
-  AixLib.Utilities.Interfaces.RadPort StarKitchen annotation (Placement(transformation(
-          extent={{-26,-78},{-10,-62}}), iconTransformation(extent={{-26,-78},{
-            -10,-62}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
     "HeatPort to force a ground temperature for the ground level's floor."
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort        heatStarToCombHeaters[9] annotation (Placement(transformation(extent={{9,-7},{-9,7}},
+        rotation=90,
+        origin={1,-21})));
 equation
-  connect(Livingroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-52.89,75.68},{-52.89,86},{90,86},{90,-16},{110,-16}},
+  connect(Livingroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-50.89,75.68},{-50.89,86},{90,86},{90,-16},{110,-16}},
                                                           color={255,128,0}));
   connect(Hobby.SolarRadiationPort_OW2, West) annotation (Line(points={{55.405,
           75.76},{55.405,86},{90,86},{90,-16},{110,-16}}, color={255,128,0}));
@@ -408,22 +382,20 @@ equation
           59.2},{90,59.2},{90,88},{110,88}}, color={255,128,0}));
   connect(Corridor.SolarRadiationPort_OW1, North) annotation (Line(points={{
           81.9,2.4},{90,2.4},{90,88},{110,88}}, color={255,128,0}));
-  connect(WC_Storage.SolarRadiationPort_OW1, North) annotation (Line(points={{
-          83.905,-67.2},{90,-67.2},{90,88},{110,88}}, color={255,128,0}));
-  connect(WC_Storage.SolarRadiationPort_OW2, East) annotation (Line(points={{
-          55.405,-83.76},{55.405,-92},{-90,-92},{-90,86},{90,86},{90,60},{110,
-          60}}, color={255,128,0}));
+  connect(WC_Storage.SolarRadiationPort_OW1, North) annotation (Line(points={{81.905,-67.2},{90,-67.2},{90,88},{110,88}},
+                                                      color={255,128,0}));
+  connect(WC_Storage.SolarRadiationPort_OW2, East) annotation (Line(points={{53.405,-83.76},{53.405,-92},{-90,-92},{-90,86},{90,86},{90,60},{110,60}},
+                color={255,128,0}));
   connect(Kitchen.SolarRadiationPort_OW2, East) annotation (Line(points={{-53.9,
           -83.68},{-53.9,-92},{-90,-92},{-90,86},{90,86},{90,60},{110,60}},
         color={255,128,0}));
-  connect(Livingroom.SolarRadiationPort_OW1, South) annotation (Line(points={{-85.89,53.6},{-90,53.6},{-90,86},{90,86},{90,26},{110,26}},
+  connect(Livingroom.SolarRadiationPort_OW1, South) annotation (Line(points={{-83.89,53.6},{-90,53.6},{-90,86},{90,86},{90,26},{110,26}},
                                                                color={255,128,0}));
-  connect(Livingroom.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-85.89,31.2},{-90,31.2},{-90,27},{-115,27}},
+  connect(Livingroom.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-83.89,31.2},{-90,31.2},{-90,27},{-115,27}},
                                                 color={0,0,127}));
   connect(Kitchen.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-83.9,
           -39.2},{-90,-39.2},{-90,27},{-115,27}}, color={0,0,127}));
-  connect(WC_Storage.WindSpeedPort, WindSpeedPort) annotation (Line(points={{
-          83.905,-50.4},{90,-50.4},{90,-92},{-90,-92},{-90,27},{-115,27}},
+  connect(WC_Storage.WindSpeedPort, WindSpeedPort) annotation (Line(points={{81.905,-50.4},{90,-50.4},{90,-92},{-90,-92},{-90,27},{-115,27}},
         color={0,0,127}));
   connect(Corridor.WindSpeedPort, WindSpeedPort) annotation (Line(points={{81.9,
           -20.4},{90,-20.4},{90,-92},{-90,-92},{-90,27},{-115,27}}, color={0,0,
@@ -431,11 +403,11 @@ equation
   connect(Hobby.WindSpeedPort, WindSpeedPort) annotation (Line(points={{83.905,
           42.4},{90,42.4},{90,-92},{-90,-92},{-90,27},{-115,27}}, color={0,0,
           127}));
-  connect(Livingroom.thermOutside, thermOutside) annotation (Line(points={{-86,75.36},{-90,75.36},{-90,100},{-100,100}},
+  connect(Livingroom.thermOutside, thermOutside) annotation (Line(points={{-84,75.36},{-90,75.36},{-90,100},{-100,100}},
                                                 color={191,0,0}));
   connect(Kitchen.thermOutside, thermOutside) annotation (Line(points={{-84,-83.36},{-90,-83.36},{-90,100},{-100,100}},
                                            color={191,0,0}));
-  connect(WC_Storage.thermOutside, thermOutside) annotation (Line(points={{84,-83.52},{84,-92},{-90,-92},{-90,100},{-100,100}},
+  connect(WC_Storage.thermOutside, thermOutside) annotation (Line(points={{82,-83.52},{82,-92},{-90,-92},{-90,100},{-100,100}},
                                                            color={191,0,0}));
   connect(Corridor.thermOutside, thermOutside) annotation (Line(points={{82,9.62},{86,9.62},{86,8},{90,8},{90,-92},{-90,-92},{-90,100},{-100,100}},
                                                                          color=
@@ -443,10 +415,10 @@ equation
   connect(Hobby.thermOutside, thermOutside) annotation (Line(points={{84,75.52},{90,75.52},{90,86},{-90,86},{-90,100},{-100,100}},
                                                           color={191,0,0}));
   connect(Livingroom.thermCeiling, thermCeiling_Livingroom) annotation (Line(
-        points={{-44.2,66.4},{-32,66.4},{-32,86},{-92,86},{-92,109}}, color={
+        points={{-42.2,66.4},{-32,66.4},{-32,86},{-92,86},{-92,109}}, color={
           191,0,0}));
   connect(Livingroom.thermInsideWall1a, Hobby.thermInsideWall1) annotation (
-      Line(points={{-44.2,53.6},{-32,53.6},{-32,86},{36,86},{36,54.4},{47.9,54.4}},
+      Line(points={{-42.2,53.6},{-32,53.6},{-32,86},{36,86},{36,54.4},{47.9,54.4}},
                   color={191,0,0}));
   connect(Hobby.thermCeiling, thermCeiling_Hobby) annotation (Line(points={{
           47.9,68.8},{36,68.8},{36,86},{-50,86},{-50,109},{-49,109}}, color={
@@ -455,46 +427,32 @@ equation
          {{44,4.3},{36,4.3},{36,86},{-10,86},{-10,109},{-11,109}}, color={191,0,
           0}));
   connect(WC_Storage.thermCeiling, thermCeiling_WCStorage) annotation (Line(
-        points={{47.9,-76.8},{36,-76.8},{36,-92},{90,-92},{90,86},{29,86},{29,
-          109}}, color={191,0,0}));
+        points={{45.9,-76.8},{36,-76.8},{36,-92},{90,-92},{90,86},{29,86},{29,109}},
+                 color={191,0,0}));
   connect(Kitchen.thermCeiling, thermCeiling_Kitchen) annotation (Line(points={
           {-46,-74.4},{-34,-74.4},{-34,-92},{90,-92},{90,86},{71,86},{71,109}},
         color={191,0,0}));
   connect(Kitchen.thermInsideWall1a, WC_Storage.thermInsideWall1) annotation (
-      Line(points={{-46,-61.6},{-34,-61.6},{-34,-92},{36,-92},{36,-62},{47.9,-62},
-          {47.9,-62.4}}, color={191,0,0}));
+      Line(points={{-46,-61.6},{-34,-61.6},{-34,-92},{36,-92},{36,-62},{45.9,-62},{45.9,-62.4}},
+                         color={191,0,0}));
   connect(Livingroom.thermInsideWall1b, Corridor.thermInsideWall2a) annotation (
-     Line(points={{-44.2,40.8},{-32,40.8},{-32,86},{36,86},{36,-3.3},{44,-3.3}},
+     Line(points={{-42.2,40.8},{-32,40.8},{-32,86},{36,86},{36,-3.3},{44,-3.3}},
         color={191,0,0}));
   connect(Kitchen.thermInsideWall2, Livingroom.thermInsideWall2) annotation (
-      Line(points={{-58,-23.2},{-58,-14},{-90,-14},{-90,6},{-57.4,6},{-57.4,15.2}},
+      Line(points={{-58,-23.2},{-58,-14},{-90,-14},{-90,6},{-55.4,6},{-55.4,15.2}},
                   color={191,0,0}));
   connect(Corridor.thermInsideWall3, WC_Storage.thermInsideWall2) annotation (
-      Line(points={{53.2,-26.86},{53.2,-32},{59.3,-32},{59.3,-38.4}}, color={
+      Line(points={{53.2,-26.86},{53.2,-32},{57.3,-32},{57.3,-38.4}}, color={
           191,0,0}));
   connect(Hobby.thermInsideWall2, Corridor.thermInsideWall1) annotation (Line(
         points={{59.3,30.4},{59.3,22},{90,22},{90,14},{56,14},{56,8.1}}, color=
           {191,0,0}));
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{64.8,-9},{64.8,-32},{90,-32},{90,100},{110,100},{110,110}},
                                                            color={191,0,0}));
-  connect(Hobby.starRoom, StarHobby) annotation (Line(
-      points={{61.96,52},{61.96,44},{36,44},{36,40},{20,40}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(Corridor.starRoom, StarCorridor) annotation (Line(
-      points={{58.8,-9},{58.8,-16},{14,-16}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(Corridor.thermRoom, ThermCorridor) annotation (Line(points={{64.8,-9},{64.8,14},{36,14},{36,4},{14,4}},
-                                          color={191,0,0}));
-  connect(Hobby.thermRoom, ThermHobby) annotation (Line(points={{67.66,52},{67.66,44},{36,44},{36,60},{20,60}},
-                                              color={191,0,0}));
-  connect(ThermLivingroom, Livingroom.thermRoom) annotation (Line(points={{-20,60},{-32,60},{-32,48},{-67.08,48},{-67.08,44}},
-                                                          color={191,0,0}));
   connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-        points={{-88.2,66.24},{-88.2,86},{-90,86},{-90,-14.25},{-115,-14.25}},
+        points={{-86.2,66.24},{-86.2,66},{-92,66},{-92,-15},{-115,-15}},
         color={0,0,127}));
-  connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,68.68},{85.9,86},{-90,86},{-90,-6.75},{-115,-6.75}},
+  connect(Hobby.AirExchangePort, AirExchangePort[2]) annotation (Line(points={{85.9,68.68},{85.9,78},{86,78},{86,88},{-92,88},{-92,-9},{-115,-9}},
                                                                         color={
           0,0,127}));
   connect(Kitchen.SolarRadiationPort_OW1, South) annotation (Line(points={{-83.9,
@@ -503,42 +461,20 @@ equation
   connect(Corridor.thermInsideWall2b, Kitchen.thermInsideWall1b) annotation (
       Line(points={{44,-10.9},{36,-10.9},{36,-92},{-34,-92},{-34,-48.8},{-46,-48.8}},
         color={191,0,0}));
-  connect(WC_Storage.starRoom, StarWC_Storage) annotation (Line(
-      points={{61.96,-60},{61.96,-70},{36,-70},{36,-70},{22,-70}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(WC_Storage.thermRoom, ThermWC_Storage) annotation (Line(points={{67.66,-60},{67.66,-70},{36,-70},{36,-50},{22,-50}},
-                                                                color={191,0,0}));
-  connect(WC_Storage.AirExchangePort, AirExchangePort[3]) annotation (Line(
-        points={{85.9,-76.68},{85.9,-92},{-90,-92},{-90,0.75},{-115,0.75}},
-        color={0,0,127}));
-  connect(Kitchen.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{-86,-74.24},{-86,-92},{-90,-92},{-90,8.25},{-115,8.25}},
-                                                                         color=
-          {0,0,127}));
-  connect(Kitchen.starRoom, StarKitchen) annotation (Line(
-      points={{-60.8,-52},{-60.8,-54},{-34,-54},{-34,-70},{-18,-70}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(Kitchen.thermRoom, ThermKitchen) annotation (Line(points={{-66.8,-52},{-66.8,-54},{-34,-54},{-34,-50},{-18,-50}},
-                                                    color={191,0,0}));
-  connect(Corridor.AirExchangePort, AirExchangePort_doorSt.y) annotation (Line(
-        points={{84,4.205},{90,4.205},{90,-92},{-90,-92},{-90,-60},{-99.2,-60}},
-        color={0,0,127}));
-  connect(Livingroom.starRoom, StarLivingroom) annotation (Line(
-      points={{-60.48,44},{-60.48,48},{-32,48},{-32,40},{-20,40}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
 
-  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-65.32,13.92},{-65.32,-4},{0,-4},{0,-108}},
+  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-63.32,13.92},{-63.32,-8},{-32,-8},{-32,-88},{0,-88},{0,-108}},
                                                color={191,0,0}));
-  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{
-          66.14,26},{0,26},{0,-104},{0,-104}}, color={191,0,0}));
-  connect(Corridor.ground, groundTemp[3]) annotation (Line(points={{63.2,-26.86},
-          {63.2,-34},{0,-34},{0,-100}}, color={191,0,0}));
-  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{66.14,-37.44},
-          {66.14,-34},{0,-34},{0,-96},{0,-96}}, color={191,0,0}));
-  connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
-          {-65.2,-4},{0,-4},{0,-92}},         color={191,0,0}));
+  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{66.14,26},{34,26},{34,-88},{0,-88},{0,-104}},
+                                               color={191,0,0}));
+  connect(Corridor.ground, groundTemp[3]) annotation (Line(points={{63.2,-26.86},{63.2,-34},{34,-34},{34,-88},{0,-88},{0,-100}},
+                                        color={191,0,0}));
+  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{64.14,-37.44},{64.14,-34},{34,-34},{34,-88},{0,-88},{0,-96}},
+                                                color={191,0,0}));
+  connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},{-65.2,-14},{-32,-14},{-32,-88},{0,-88},{0,-92}},
+                                              color={191,0,0}));
+  connect(Corridor.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{84,4.205},{86,4.205},{86,4},{88,4},{88,-90},{-92,-90},{-92,-3},{-115,-3}}, color={0,0,127}));
+  connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,-76.68},{88,-76.68},{88,-90},{-92,-90},{-92,3},{-115,3}}, color={0,0,127}));
+  connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,-74.24},{-92,-74.24},{-92,9},{-115,9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=
