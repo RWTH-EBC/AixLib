@@ -12,7 +12,7 @@ model HeatPumpDetailed
     capCalcType=2,
     CorrFlowCo=false,
     CorrFlowEv=false,
-    dataTable=DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113(),
+    dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(),
     PT1_cycle=true,
     timeConstantCycle=1,
     mFlow_conNominal=1,
