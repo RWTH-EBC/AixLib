@@ -69,6 +69,16 @@ model Ow2IwL1IwS1Lf1At1Ro1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
+  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
+      group="Windows and Doors",
+      joinNext=true,
+      descriptionLabel=true,
+      enable=withDoor2));
+  parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(
+      group="Windows and Doors",
+      descriptionLabel=true,
+      enable=withDoor2));
 
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
@@ -214,17 +224,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation (
       Placement(transformation(extent={{-16,-104},{4,-84}}), iconTransformation(
           extent={{-16,-104},{4,-84}})));
-protected
-  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
-     Dialog(
-      group="Windows and Doors",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor2));
-  parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(
-      group="Windows and Doors",
-      descriptionLabel=true,
-      enable=withDoor2));
+
 
 equation
   connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-62.25,30.2667},{-80,30.2667},{-80,-40},{-99.5,-40}},

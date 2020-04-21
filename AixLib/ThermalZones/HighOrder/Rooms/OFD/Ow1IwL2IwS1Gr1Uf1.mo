@@ -29,6 +29,7 @@ model Ow1IwL2IwS1Gr1Uf1
   parameter Modelica.SIunits.Height room_height=2 "height "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
+  // Windows and Doors
   parameter Boolean withWindow1=true "Window 1" annotation (Dialog(
       group="Windows and Doors",
       joinNext=true,
@@ -53,6 +54,17 @@ model Ow1IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor1));
+  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
+      group="Windows and Doors",
+      joinNext=true,
+      descriptionLabel=true,
+      enable=withDoor1));
+  parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(
+      group="Windows and Doors",
+      descriptionLabel=true,
+      enable=withDoor1));
+
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
@@ -181,18 +193,6 @@ model Ow1IwL2IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{20,80},{40,100}})));
-  //Door properties
-protected
-  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
-     Dialog(
-      group="Windows and Doors",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor1));
-  parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(
-      group="Windows and Doors",
-      descriptionLabel=true,
-      enable=withDoor1));
 
 equation
   connect(thermInsideWall3, thermInsideWall3)

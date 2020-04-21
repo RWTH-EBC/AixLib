@@ -8,7 +8,14 @@ model WholeHouseBuildingEnvelope
   parameter Real AirExchangeAttic=0 "Air exchange attic in 1/h "
     annotation (Dialog(group="Air Exchange Attic", descriptionLabel=true));
 
-
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
+     Dialog(
+      tab="Outer walls",
+      group="Doors"));
+  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
+     Dialog(
+      tab="Outer walls",
+      group="Doors"));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope
     groundFloor_Building(
@@ -36,7 +43,9 @@ model WholeHouseBuildingEnvelope
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset)
+    Diff_toTempset=Diff_toTempset,
+    final UValOutDoors=UValOutDoors,
+    final epsOutDoors=epsOutDoors)
     annotation (Placement(transformation(extent={{-24,-94},{24,-42}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope
     upperFloor_Building(
@@ -64,7 +73,9 @@ model WholeHouseBuildingEnvelope
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
-    withDynamicVentilation=withDynamicVentilation)
+    withDynamicVentilation=withDynamicVentilation,
+    final UValOutDoors=UValOutDoors,
+    final epsOutDoors=epsOutDoors)
     annotation (Placement(transformation(extent={{-24,-18},{24,34}})));
   AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(
     final denAir=denAir,

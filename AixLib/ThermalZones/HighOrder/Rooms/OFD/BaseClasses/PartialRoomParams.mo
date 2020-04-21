@@ -10,9 +10,6 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
     "Types of walls (contains multiple records)"
     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
 
-  //Window type
-  parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win;
-
   parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics"));
@@ -23,7 +20,7 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Modelica.SIunits.Temperature TWalls_start=Modelica.SIunits.Conversions.from_degC(16) "Initial temperature of all walls"
     annotation(Dialog(tab="Initialization", group="Walls"));
 
-  //// Outer / Exterior wall parameters
+  //// Inner / Interior wall parameters
   // Heat convection
   parameter Integer calcMethodIn=1
     "Calculation method of convective heat transfer coefficient at inside surface"
@@ -41,6 +38,8 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
     annotation(Dialog(tab="Inner walls", group="Heat convection", enable=(calcMethodIn==3)));
 
   //// Outer / Exterior wall parameters
+  //Window type
+  replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
   // Solar absorptance
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));

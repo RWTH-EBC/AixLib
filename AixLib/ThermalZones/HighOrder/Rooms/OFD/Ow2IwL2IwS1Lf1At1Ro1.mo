@@ -40,6 +40,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
   parameter Modelica.SIunits.Length roof_width=2 "wRO"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
 
+
+  parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
+    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+
   // Windows and Doors
   parameter Boolean withWindow2=true "Window 2" annotation (Dialog(
       group="Windows and Doors",
@@ -75,9 +79,16 @@ model Ow2IwL2IwS1Lf1At1Ro1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
-
-  parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+  parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(
+      group="Windows and Doors",
+      descriptionLabel=true,
+      enable=withDoor2));
+  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
+      group="Windows and Doors",
+      joinNext=true,
+      descriptionLabel=true,
+      enable=withDoor2));
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
@@ -241,17 +252,8 @@ model Ow2IwL2IwS1Lf1At1Ro1
           extent={{-16,-104},{4,-84}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-126,40},{-99.5,66}}), iconTransformation(extent={{-109.5,-60},{-89.5,-40}})));
-protected
-  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
-     Dialog(
-      group="Windows and Doors",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor2));
-  parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(
-      group="Windows and Doors",
-      descriptionLabel=true,
-      enable=withDoor2));
+
+
 
 
 equation

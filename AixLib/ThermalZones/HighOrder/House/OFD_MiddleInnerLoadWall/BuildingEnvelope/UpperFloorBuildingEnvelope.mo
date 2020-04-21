@@ -4,8 +4,8 @@ model UpperFloorBuildingEnvelope
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
   //////////room geometry
-  parameter Modelica.SIunits.Length room_width_long=if TIR == 1 then 3.86 else
-      3.97 "w1 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
+  parameter Modelica.SIunits.Length room_width_long=3.92 "w1 "
+    annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Length room_width_short=2.28 "w2 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Height room_height_long=2.60 "h1 "
@@ -14,13 +14,13 @@ model UpperFloorBuildingEnvelope
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Length roof_width=2.21 "wRO"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length5=if TIR == 1 then 3.23 else 3.34
+  parameter Modelica.SIunits.Length length5=3.3
     "l5 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Length length6=2.44 "l6 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Length length7=1.33 "l7 "
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
-  parameter Modelica.SIunits.Length length8=if TIR == 1 then 3.23 else 3.34
+  parameter Modelica.SIunits.Length length8=3.3
     "l8 " annotation (Dialog(group="Dimensions", descriptionLabel=true));
   parameter Modelica.SIunits.Length thickness_IWsimple=0.145
     "thickness IWsimple "
@@ -82,6 +82,16 @@ model UpperFloorBuildingEnvelope
       group="Dynamic ventilation",
       descriptionLabel=true,
       enable=withDynamicVentilation));
+
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
+     Dialog(
+      tab="Outer walls",
+      group="Doors"));
+  parameter Modelica.SIunits.Emissivity epsOutDoors(min=0, max=1)=0.95 "Emissivity of inside surface of outer doors" annotation (
+     Dialog(
+      tab="Outer walls",
+      group="Doors"));
+
   Utilities.Interfaces.SolarRad_in RoofS annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -119,6 +129,8 @@ model UpperFloorBuildingEnvelope
     final solar_absorptance_OW=solar_absorptance_OW,
     withWindow2=true,
     room_length=length5 + length6 + thickness_IWsimple,
+    final eps_door_OD2=epsOutDoors,
+    final U_door_OD2=UValOutDoors,
     room_lengthb=length6,
     room_width_long=room_width_long,
     room_width_short=room_width_short,
@@ -190,6 +202,8 @@ model UpperFloorBuildingEnvelope
     T0_air=295.11,
     T0_OW1=295.15,
     T0_OW2=295.15,
+    final eps_door_OD2=epsOutDoors,
+    final U_door_OD2=UValOutDoors,
     T0_IW1=295.15,
     T0_IW2=295.15,
     T0_CE=295.1,
@@ -238,6 +252,8 @@ model UpperFloorBuildingEnvelope
     T0_air=297.11,
     T0_OW1=297.15,
     T0_OW2=297.15,
+    final eps_door_OD2=epsOutDoors,
+    final U_door_OD2=UValOutDoors,
     T0_IW1=297.15,
     T0_IW2=297.15,
     T0_CE=297.1,
@@ -272,6 +288,8 @@ model UpperFloorBuildingEnvelope
     windowarea_OW2=windowarea_102,
     withWindow3=true,
     windowarea_RO=windowarea_103,
+    final eps_door_OD2=epsOutDoors,
+    final U_door_OD2=UValOutDoors,
     room_lengthb=length7,
     withDoor2=false,
     final use_sunblind=use_sunblind,

@@ -78,6 +78,28 @@ model Ow2IwL1IwS1Gr1Uf1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
+  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
+      group="Windows and Doors",
+      joinNext=true,
+      descriptionLabel=true,
+      enable=withDoor1));
+  parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(
+      group="Windows and Doors",
+      descriptionLabel=true,
+      enable=withDoor1));
+  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
+      group="Windows and Doors",
+      joinNext=true,
+      descriptionLabel=true,
+      enable=withDoor2));
+  parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(
+      group="Windows and Doors",
+      descriptionLabel=true,
+      enable=withDoor2));
+
+
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
@@ -200,27 +222,6 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
-protected
-  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
-     Dialog(
-      group="Windows and Doors",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor1));
-  parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(
-      group="Windows and Doors",
-      descriptionLabel=true,
-      enable=withDoor1));
-  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
-     Dialog(
-      group="Windows and Doors",
-      joinNext=true,
-      descriptionLabel=true,
-      enable=withDoor2));
-  parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(
-      group="Windows and Doors",
-      descriptionLabel=true,
-      enable=withDoor2));
 
 equation
   connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,33.4667},{-80,33.4667},{-80,-40},{-99.5,-40}},

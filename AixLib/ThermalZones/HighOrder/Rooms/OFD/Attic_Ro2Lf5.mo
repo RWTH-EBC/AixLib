@@ -95,26 +95,32 @@ model Attic_Ro2Lf5
       90) "alfa" annotation (Dialog(group="Dimensions", descriptionLabel=true));
   // Outer walls properties
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+    annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
 
   // Windows and Doors
-  parameter Boolean withWindow1=false "Window 1 " annotation (Dialog(
-      group="Windows and Doors",
+  parameter Boolean withWindow1=false "Window 1 " annotation (
+      Dialog(
+      tab="Outer walls",
+      group="Windows",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
   parameter Modelica.SIunits.Area windowarea_RO1=0 "Window area" annotation (
       Dialog(
-      group="Windows and Doors",
+      tab="Outer walls",
+      group="Windows",
       naturalWidth=10,
       descriptionLabel=true,
       enable=withWindow1));
-  parameter Boolean withWindow2=false "Window 2 " annotation (Dialog(
-      group="Windows and Doors",
+  parameter Boolean withWindow2=false "Window 2 " annotation (
+      Dialog(
+      tab="Outer walls",
+      group="Windows",
       joinNext=true,
       descriptionLabel=true), choices(checkBox=true));
   parameter Modelica.SIunits.Area windowarea_RO2=0 "Window area" annotation (
       Dialog(
-      group="Windows and Doors",
+      tab="Outer walls",
+      group="Windows",
       naturalWidth=10,
       descriptionLabel=true,
       enable=withWindow2));
