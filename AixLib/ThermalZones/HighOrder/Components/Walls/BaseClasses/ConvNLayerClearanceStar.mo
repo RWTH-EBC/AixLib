@@ -85,6 +85,10 @@ model ConvNLayerClearanceStar
     final T0Fixed=T0Fixed)
     annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b1
+                                                             annotation (
+      Placement(transformation(extent={{-12,88},{8,108}}),  iconTransformation(
+          extent={{-12,88},{8,108}})));
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;
 
@@ -104,6 +108,8 @@ equation
       pattern=LinePattern.Solid));
   // computing approximated longwave radiation exchange
 
+  connect(port_b1, heatConv.port_b) annotation (Line(points={{-2,98},{0,98},{0,
+          52},{34,52},{34,0},{52,0},{52,7.21645e-16}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-56, 100}, {0, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-64, 100}, {-56, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
