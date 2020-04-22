@@ -23,19 +23,19 @@ Modelica.Blocks.Interfaces.RealInput Tair[nZones]
         *etaHRS + Tair[1])
     annotation (Placement(transformation(extent={{-60,-64},{-40,-44}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis(
-    uLow=273.15 + 8,
+    uLow=273.15 + 12,
     uHigh=273.15 + 21,
     pre_y_start=false)
     annotation (Placement(transformation(extent={{-68,22},{-48,42}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis1(
     uLow=273.15 + 19,
-    uHigh=273.15 + 22,
+    uHigh=273.15 + 25,
     pre_y_start=false)
     annotation (Placement(transformation(extent={{-52,-22},{-32,-2}})));
   Modelica.Blocks.Logical.And and2
     annotation (Placement(transformation(extent={{-36,22},{-16,42}})));
   Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=273.15 + 26)
-    annotation (Placement(transformation(extent={{-56,60},{-36,80}})));
+    annotation (Placement(transformation(extent={{-62,66},{-42,86}})));
   Modelica.Blocks.Interfaces.BooleanOutput y1
                                     "Connector of Boolean output signal"
     annotation (Placement(transformation(extent={{2,-112},{22,-92}})));
@@ -73,10 +73,10 @@ equation
   connect(and2.y, and1.u1) annotation (Line(points={{-15,32},{-12,32},{-12,-10},
           {-8,-10}},
                 color={255,0,255}));
-  connect(lessThreshold.y, and2.u1) annotation (Line(points={{-35,70},{-42,70},
+  connect(lessThreshold.y, and2.u1) annotation (Line(points={{-41,76},{-42,76},
           {-42,32},{-38,32}}, color={255,0,255}));
   connect(Tair[1], lessThreshold.u) annotation (Line(points={{-100,60},{-80,60},
-          {-80,70},{-58,70}}, color={0,0,127}));
+          {-80,76},{-64,76}}, color={0,0,127}));
   connect(and1.y, y1)
     annotation (Line(points={{15,-10},{12,-10},{12,-102}}, color={255,0,255}));
 annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
