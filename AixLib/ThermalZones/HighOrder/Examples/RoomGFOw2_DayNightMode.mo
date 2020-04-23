@@ -1,12 +1,19 @@
 within AixLib.ThermalZones.HighOrder.Examples;
 model RoomGFOw2_DayNightMode
   "Room on groudn floor with 2 outer walls with day and night"
-  import AixLib;
+
   extends Modelica.Icons.Example;
+
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(choicesAllMatching = true);
-  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73, withFloorHeating = false, TIR = 1, T0_air = 294.15, T0_IW1 = 291.15, T0_IW2 = 291.15, T0_FL = 289.15) annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
+  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
+    use_infiltEN12831=true,
+    n50=3,                                withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73,
+    T0_air=294.15,
+    T0_IW1=291.15,
+    T0_IW2=291.15,
+    T0_FL=289.15)                                                                                                                                                                                                         annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather combinedWeather(
     Latitude=49.5,
     Longitude=8.5,
