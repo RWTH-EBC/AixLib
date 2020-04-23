@@ -198,10 +198,10 @@ equation
 // **********************standard connection************************
 //******************************************************************
   connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
-      points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
+      points={{2,30.2},{48,30.2},{48,4},{59,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6},{59,-6}},       color={191,0,0}));
 //******************************************************************
 // **********************standard connection for inside wall********
 //******************************************************************
@@ -249,9 +249,9 @@ if withDoor then
     connect(Door.port_a, port_outside) annotation (Line(
         points={{-19.4,-86},{-56,-86},{-56,23},{-24,23},{-24,4},{-98,4}},
         color={191,0,0}));
-    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6},{59,-6}},       color={191,0,0}));
     connect(Door.Star, heatStarToComb.portRad) annotation (Line(
-        points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
+        points={{9.4,-76.4},{48,-76.4},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
 
@@ -262,9 +262,9 @@ end if;
 //******************************************************************
 
 if outside and withWindow then
-    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}},       color={191,0,0}));
     connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
-        points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
+        points={{9.7,-27.2},{48,-27.2},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
     connect(windowSimple.port_outside, port_outside) annotation (Line(
@@ -307,7 +307,7 @@ end if;
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
  connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
-  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{79,-1},{79,-1.05},{102,-1.05},{102,0}},       color={191,0,0}));
   connect(solarRadWin, solarDistrFraction.u) annotation (Line(
       points={{101,80},{69.2,80}},
       color={0,0,127}));

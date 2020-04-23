@@ -3,6 +3,14 @@ model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
+  replaceable parameter AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default
+    winPaneRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition "Record containing parameters of window pane(s)"
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{-8,82},{8,98}})));
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   parameter Boolean selectable = true "Select window type" annotation (Dialog(group="Window type", descriptionLabel = true));
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Window type"
@@ -33,14 +41,11 @@ model Window_ASHRAE140
     hCon_const=2,
     A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
-    n=1,
-    lambda={1.06},
-    c={750},
-    d={0.003175},
-    rho={2500},
-    A=windowarea,
-    redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default wallRec,
-    T0=T0) annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
+    final wallRec=winPaneRec,
+    final T_start=fill(T0, winPaneRec.n),
+    final energyDynamics=energyDynamics,
+    final A=windowarea)
+           annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
@@ -50,9 +55,10 @@ annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     eps=WindowType.Emissivity,
     A=windowarea) annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
-    redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default wallRec,
-    T0=T0,
-    A=windowarea)
+    final wallRec=winPaneRec,
+    final T_start=fill(T0, winPaneRec.n),
+    final A=windowarea,
+    final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
   Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
     "multiplication with area and solar gain factor"
@@ -62,7 +68,7 @@ annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     annotation (Placement(transformation(extent={{82,70},{102,90}})));
 equation
   connect(heatConv_outside.WindSpeedPort, WindSpeedPort) annotation (Line(
-  points={{-65.2,-17.2},{-80,-17.2},{-80,-59},{-99,-59}},
+  points={{-65,-17},{-72,-17},{-72,-16},{-78,-16},{-78,-59},{-99,-59}},
   color={0,0,127}));
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
   points={{-46,-10},{-46,-8},{-38,-8}},
@@ -70,7 +76,7 @@ equation
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.conv, pane2.port_b) annotation (Line(points={{36.8,32},{36,32},{36,-8},{38,-8}}, color={191,0,0}));
+  connect(twoStar_RadEx.conv, pane2.port_b) annotation (Line(points={{36,32},{36,32},{36,-8},{38,-8}},   color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
       color={0,0,127}));
@@ -90,7 +96,7 @@ equation
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
   connect(twoStar_RadEx.rad, Star) annotation (Line(
-      points={{55.1,32},{80,32},{80,60},{90,60}},
+      points={{56.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
