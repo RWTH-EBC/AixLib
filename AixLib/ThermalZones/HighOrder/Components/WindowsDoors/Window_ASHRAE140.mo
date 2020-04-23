@@ -33,6 +33,11 @@ model Window_ASHRAE140
     hCon_const=2,
     A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1(
+    n=1,
+    lambda={1.06},
+    c={750},
+    d={0.003175},
+    rho={2500},
     A=windowarea,
     redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default wallRec,
     T0=T0) annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
