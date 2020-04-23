@@ -6,7 +6,7 @@ model WholeHouseBuildingEnvelope
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors=2.5 "U-value (thermal transmittance) of doors in outer walls" annotation (
      Dialog(
       tab="Outer walls",
       group="Doors"));
