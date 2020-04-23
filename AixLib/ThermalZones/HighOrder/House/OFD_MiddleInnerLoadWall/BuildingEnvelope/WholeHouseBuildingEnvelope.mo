@@ -179,7 +179,7 @@ model WholeHouseBuildingEnvelope
   Modelica.Blocks.Sources.Constant AirExchangeCorridor_Source(final k=AirExchangeCorridor)
     annotation (Placement(transformation(extent={{56,-16},{50,-10}})));
   AixLib.Utilities.Interfaces.ConvRadComb heatingToRooms[11] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic"
-                                                                                                                                                                                                        annotation (Placement(transformation(extent={{-112,-30},{-92,-10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
+                                                                                                                                                                                                        annotation (Placement(transformation(extent={{-112,-30},{-92,-10}}), iconTransformation(extent={{-110,-38},{-90,-18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5] "HeatPorts to force ground temperature(s) for the ground floor."
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
@@ -195,10 +195,10 @@ model WholeHouseBuildingEnvelope
         extent={{6,-5},{-6,5}},
         rotation=180,
         origin={-36,51})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a uppFloDown[5] "Heat port floor of upper floor" annotation (Placement(transformation(extent={{-110,18},{-90,38}}), iconTransformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloUp[5] "Heat port ceiling of ground floor" annotation (Placement(transformation(extent={{-110,-4},{-90,16}}), iconTransformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloDown[5] "Heat port floor of ground floor (towards ground plate)" annotation (Placement(transformation(extent={{-112,-78},{-92,-58}}), iconTransformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groPlateUp[5] "Heat port ground plate towards ground floor" annotation (Placement(transformation(extent={{-112,-100},{-92,-80}}), iconTransformation(extent={{-10,-110},{10,-90}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a uppFloDown[5] "Heat port floor of upper floor" annotation (Placement(transformation(extent={{-110,18},{-90,38}}), iconTransformation(extent={{-110,14},{-90,34}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloUp[5] "Heat port ceiling of ground floor" annotation (Placement(transformation(extent={{-110,-4},{-90,16}}), iconTransformation(extent={{-110,-10},{-90,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groFloDown[5] "Heat port floor of ground floor (towards ground plate)" annotation (Placement(transformation(extent={{-112,-78},{-92,-58}}), iconTransformation(extent={{-110,-66},{-90,-46}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groPlateUp[5] "Heat port ground plate towards ground floor" annotation (Placement(transformation(extent={{-112,-100},{-92,-80}}), iconTransformation(extent={{-110,-90},{-90,-70}})));
 equation
   connect(upperFloor_Building.thermOutside, thermOutside) annotation (Line(
         points={{-24,33.54},{-74,33.54},{-74,100},{-100,100}}, color={191,0,0}));
