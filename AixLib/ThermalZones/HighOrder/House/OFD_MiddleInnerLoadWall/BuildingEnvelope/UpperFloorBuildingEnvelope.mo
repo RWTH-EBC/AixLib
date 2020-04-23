@@ -374,9 +374,8 @@ model UpperFloorBuildingEnvelope
         origin={110,-84})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-130,10},{-100,40}})));
-  Modelica.Blocks.Interfaces.RealInput AirExchangePort[4]
-    "1(5): Bedroom_UF, 2 (6): Child1_UF, 3(7): Bath_UF, 4(8): Child2_UF"
-    annotation (Placement(transformation(extent={{-130,-26},{-100,4}})));
+  Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] "1(6): Bedroom_UF, 2(7): Child1_UF, 3(8): Corridor_UF, 4(9): Bath_UF, 5(10): Child2_UF"
+    annotation (Placement(transformation(extent={{-130,-26},{-100,4}}), iconTransformation(extent={{-130,-26},{-100,4}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling_Bedroom
     annotation (Placement(transformation(extent={{-98,100},{-82,118}})));
@@ -390,29 +389,10 @@ model UpperFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{60,100},{78,118}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCorridor
     annotation (Placement(transformation(extent={{100,-120},{120,-100}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermBedroom
-    annotation (Placement(transformation(extent={{-26,54},{-14,66}})));
-  AixLib.Utilities.Interfaces.RadPort StarBedroom
-    annotation (Placement(transformation(extent={{-28,32},{-12,48}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren1
-    annotation (Placement(transformation(extent={{14,54},{26,66}})));
-  AixLib.Utilities.Interfaces.RadPort StarChildren1
-    annotation (Placement(transformation(extent={{12,32},{28,48}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermBath
-    annotation (Placement(transformation(extent={{14,-46},{26,-34}})));
-  AixLib.Utilities.Interfaces.RadPort StarBath
-    annotation (Placement(transformation(extent={{12,-68},{28,-52}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren2
-    annotation (Placement(transformation(extent={{-26,-46},{-14,-34}})));
-  AixLib.Utilities.Interfaces.RadPort StarChildren2
-    annotation (Placement(transformation(extent={{-28,-68},{-12,-52}})));
-  Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k=0) "Storage"
-    annotation (Placement(transformation(extent={{-116,-68},{-100,-52}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermCorridor annotation (
-     Placement(transformation(extent={{8,-2},{20,10}}), iconTransformation(
-          extent={{8,-2},{20,10}})));
-  Utilities.Interfaces.RadPort        StarCorridor annotation (Placement(transformation(
-          extent={{6,-24},{22,-8}}), iconTransformation(extent={{6,-24},{22,-8}})));
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort        heatStarToCombHeaters[5] annotation (Placement(transformation(extent={{10,-8},{-10,8}},
+        rotation=90,
+        origin={0,-28})));
+  Utilities.Interfaces.ConvRadComb portConvRadRooms[5] "1(6): Bedroom_UF, 2(7): Child1_UF, 3(8): Corridor_UF, 4(9): Bath_UF, 5(10): Child2_UF" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   connect(Bedroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-53.1,
           78.32},{-53.1,86},{90,86},{90,-84},{110,-84}}, color={255,128,0}));
@@ -511,54 +491,30 @@ equation
         color={191,0,0}));
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{64.8,-9},{64.8,-14},{90,-14},{90,-110},{110,-110}},
                                                    color={191,0,0}));
-  connect(Bedroom.AirExchangePort, AirExchangePort[1]) annotation (Line(points={{-84,68.24},{-84,86},{-90,86},{-90,-22.25},{-115,-22.25}},
-                                                                          color=
-         {0,0,127}));
-  connect(Children1.AirExchangePort, AirExchangePort[2]) annotation (Line(
-        points={{83.9,68.68},{83.9,86},{-90,86},{-90,-14.75},{-115,-14.75}},
-        color={0,0,127}));
-  connect(Bath.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{85.9,-76.68},{85.9,-92},{-90,-92},{-90,-7.25},{-115,-7.25}},
-        color={0,0,127}));
-  connect(Children2.AirExchangePort, AirExchangePort[4]) annotation (Line(
-        points={{-86,-74.24},{-86,-92},{-90,-92},{-90,0.25},{-115,0.25}},
-        color={0,0,127}));
-  connect(Children1.starRoom, StarChildren1) annotation (Line(
-      points={{59.96,52},{59.96,46},{36,46},{36,40},{20,40}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(Children1.thermRoom, ThermChildren1) annotation (Line(points={{65.66,52},{65.66,46},{36,46},{36,60},{20,60}},
-                                                    color={191,0,0}));
   connect(Bedroom.thermInsideWall1a, Children1.thermInsideWall1) annotation (
       Line(points={{-44,49.2},{-32,49.2},{-32,86},{36,86},{36,54.4},{45.9,54.4}},
         color={191,0,0}));
-  connect(Bedroom.thermRoom, ThermBedroom) annotation (Line(points={{-64.8,46},{-64.8,28},{-32,28},{-32,60},{-20,60}},
-                                                color={191,0,0}));
-  connect(Bedroom.starRoom, StarBedroom) annotation (Line(
-      points={{-58.8,46},{-58.8,28},{-32,28},{-32,40},{-20,40}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
   connect(Bedroom.thermInsideWall1b, Corridor.thermInsideWall2a) annotation (
       Line(points={{-44,36.4},{-32,36.4},{-32,86},{36,86},{36,-7.1},{44,-7.1}},
         color={191,0,0}));
-  connect(Children2.starRoom, StarChildren2) annotation (Line(
-      points={{-60.8,-52},{-60.8,-34},{-34,-34},{-34,-60},{-20,-60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(Children2.thermRoom, ThermChildren2) annotation (Line(points={{-66.8,-52},{-66.8,-34},{-34,-34},{-34,-40},{-20,-40}},
-                                                    color={191,0,0}));
-  connect(Bath.starRoom, StarBath) annotation (Line(
-      points={{61.96,-60},{61.96,-52},{36,-52},{36,-60},{20,-60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
-  connect(Bath.thermRoom, ThermBath) annotation (Line(points={{67.66,-60},{67.66,-52},{36,-52},{36,-40},{20,-40}},
-                                                 color={191,0,0}));
   connect(Children2.SolarRadiationPort_Roof, RoofS) annotation (Line(points={{-49.2,
           -84},{-50,-84},{-50,-92},{90,-92},{90,44},{110,44}}, color={255,128,0}));
-  connect(Corridor.AirExchangePort, AirExchangePort_doorSt.y) annotation (Line(
-        points={{84,4.205},{90,4.205},{90,-92},{-90,-92},{-90,-60},{-99.2,-60}},
-        color={0,0,127}));
-  connect(Corridor.thermRoom, ThermCorridor) annotation (Line(points={{64.8,-9},{64.8,-4},{34,-4},{34,4},{14,4}}, color={191,0,0}));
-  connect(Corridor.starRoom, StarCorridor) annotation (Line(points={{58.8,-9},{58.8,-4},{34,-4},{34,-16},{14,-16}}, color={0,0,0}));
+  connect(heatStarToCombHeaters.portConvRadComb, portConvRadRooms) annotation (Line(points={{0,-18},{0,0}}, color={191,0,0}));
+  connect(Bedroom.starRoom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-58.8,46},{-58,46},{-58,30},{-14,30},{-14,-38},{-5,-38}}, color={0,0,0}));
+  connect(Bedroom.thermRoom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-64.8,46},{-66,46},{-66,28},{-16,28},{-16,-42},{5,-42},{5,-38}}, color={191,0,0}));
+  connect(Children1.starRoom, heatStarToCombHeaters[2].portRad) annotation (Line(points={{59.96,52},{60,52},{60,44},{12,44},{12,-44},{-5,-44},{-5,-38}}, color={0,0,0}));
+  connect(Children1.thermRoom, heatStarToCombHeaters[2].portConv) annotation (Line(points={{65.66,52},{65.66,48},{66,48},{66,42},{14,42},{14,-38},{5,-38}}, color={191,0,0}));
+  connect(Corridor.starRoom, heatStarToCombHeaters[3].portRad) annotation (Line(points={{58.8,-9},{58.8,-20},{16,-20},{16,-44},{-5,-44},{-5,-38}}, color={0,0,0}));
+  connect(Corridor.thermRoom, heatStarToCombHeaters[3].portConv) annotation (Line(points={{64.8,-9},{64.8,-22},{18,-22},{18,-38},{5,-38}}, color={191,0,0}));
+  connect(Bath.starRoom, heatStarToCombHeaters[4].portRad) annotation (Line(points={{61.96,-60},{62,-60},{62,-44},{-5,-44},{-5,-38}}, color={0,0,0}));
+  connect(Bath.thermRoom, heatStarToCombHeaters[4].portConv) annotation (Line(points={{67.66,-60},{68,-60},{68,-42},{20,-42},{20,-38},{5,-38}}, color={191,0,0}));
+  connect(Children2.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60.8,-38},{-5,-38}}, color={0,0,0}));
+  connect(Children2.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-36},{-18,-36},{-18,-42},{5,-42},{5,-38}}, color={191,0,0}));
+  connect(AirExchangePort[1], Bedroom.AirExchangePort) annotation (Line(points={{-115,-23},{-92,-23},{-92,68.24},{-84,68.24}}, color={0,0,127}));
+  connect(AirExchangePort[2], Children1.AirExchangePort) annotation (Line(points={{-115,-17},{-92,-17},{-92,88},{92,88},{92,68.68},{83.9,68.68}}, color={0,0,127}));
+  connect(AirExchangePort[3], Corridor.AirExchangePort) annotation (Line(points={{-115,-11},{-92,-11},{-92,88},{92,88},{92,4.205},{84,4.205}}, color={0,0,127}));
+  connect(AirExchangePort[4], Bath.AirExchangePort) annotation (Line(points={{-115,-5},{-92,-5},{-92,88},{92,88},{92,-76.68},{85.9,-76.68}}, color={0,0,127}));
+  connect(AirExchangePort[5], Children2.AirExchangePort) annotation (Line(points={{-115,1},{-92,1},{-92,-74.24},{-86,-74.24}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

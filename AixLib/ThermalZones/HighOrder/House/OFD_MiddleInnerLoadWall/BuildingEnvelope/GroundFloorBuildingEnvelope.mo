@@ -370,9 +370,10 @@ model GroundFloorBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
     "HeatPort to force a ground temperature for the ground level's floor."
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-  Utilities.Interfaces.Adaptors.ConvRadToCombPort        heatStarToCombHeaters[9] annotation (Placement(transformation(extent={{9,-7},{-9,7}},
+  Utilities.Interfaces.Adaptors.ConvRadToCombPort        heatStarToCombHeaters[5] annotation (Placement(transformation(extent={{10,-8},{-10,8}},
         rotation=90,
-        origin={1,-21})));
+        origin={0,-28})));
+  Utilities.Interfaces.ConvRadComb portConvRadRooms[5] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   connect(Livingroom.SolarRadiationPort_OW2, West) annotation (Line(points={{-50.89,75.68},{-50.89,86},{90,86},{90,-16},{110,-16}},
                                                           color={255,128,0}));
@@ -475,6 +476,17 @@ equation
   connect(Corridor.AirExchangePort, AirExchangePort[3]) annotation (Line(points={{84,4.205},{86,4.205},{86,4},{88,4},{88,-90},{-92,-90},{-92,-3},{-115,-3}}, color={0,0,127}));
   connect(WC_Storage.AirExchangePort, AirExchangePort[4]) annotation (Line(points={{83.9,-76.68},{88,-76.68},{88,-90},{-92,-90},{-92,3},{-115,3}}, color={0,0,127}));
   connect(Kitchen.AirExchangePort, AirExchangePort[5]) annotation (Line(points={{-86,-74.24},{-92,-74.24},{-92,9},{-115,9}}, color={0,0,127}));
+  connect(heatStarToCombHeaters.portConvRadComb, portConvRadRooms) annotation (Line(points={{0,-18},{0,0}}, color={191,0,0}));
+  connect(Livingroom.starRoom, heatStarToCombHeaters[1].portRad) annotation (Line(points={{-58.48,44},{-58,44},{-58,30},{-16,30},{-16,-38},{-5,-38}}, color={0,0,0}));
+  connect(Livingroom.thermRoom, heatStarToCombHeaters[1].portConv) annotation (Line(points={{-65.08,44},{-66,44},{-66,26},{-20,26},{-20,-44},{5,-44},{5,-38}}, color={191,0,0}));
+  connect(Hobby.starRoom, heatStarToCombHeaters[2].portRad) annotation (Line(points={{61.96,52},{62,52},{62,46},{14,46},{14,-48},{-5,-48},{-5,-38}}, color={0,0,0}));
+  connect(Hobby.thermRoom, heatStarToCombHeaters[2].portConv) annotation (Line(points={{67.66,52},{68,52},{68,42},{18,42},{18,-38},{5,-38}}, color={191,0,0}));
+  connect(Corridor.starRoom, heatStarToCombHeaters[3].portRad) annotation (Line(points={{58.8,-9},{58.8,-18},{14,-18},{14,-48},{-5,-48},{-5,-38}}, color={0,0,0}));
+  connect(Corridor.thermRoom, heatStarToCombHeaters[3].portConv) annotation (Line(points={{64.8,-9},{64.8,-22},{18,-22},{18,-38},{5,-38}}, color={191,0,0}));
+  connect(WC_Storage.starRoom, heatStarToCombHeaters[4].portRad) annotation (Line(points={{59.96,-60},{59.96,-48},{-5,-48},{-5,-38}}, color={0,0,0}));
+  connect(WC_Storage.thermRoom, heatStarToCombHeaters[4].portConv) annotation (Line(points={{65.66,-60},{66,-60},{66,-44},{5,-44},{5,-38}}, color={191,0,0}));
+  connect(Kitchen.starRoom, heatStarToCombHeaters[5].portRad) annotation (Line(points={{-60.8,-52},{-60,-52},{-60,-38},{-5,-38}}, color={0,0,0}));
+  connect(Kitchen.thermRoom, heatStarToCombHeaters[5].portConv) annotation (Line(points={{-66.8,-52},{-66,-52},{-66,-44},{5,-44},{5,-38}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

@@ -15,4 +15,4 @@ convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Gr1Uf1", {"w
 convertModifier("AixLib.ThermalZones.HighOrder.Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
 convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
 convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
-convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope", {"withFloorHeating", "TIR", "TMC"}, fill("",0));
+convertModifier("AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope", {"withFloorHeating", "TIR", "TMC", "AirExchangeAttic"}, fill("",0));
