@@ -54,7 +54,7 @@ model Ow1IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor1));
-  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+  parameter Real U_door_OD1=2.5 "U-value" annotation (
      Dialog(
       group="Windows and Doors",
       joinNext=true,
