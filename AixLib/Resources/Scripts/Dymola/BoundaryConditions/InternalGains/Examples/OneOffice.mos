@@ -1,0 +1,17 @@
+removePlots();
+simulateModel("AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.OneOffice", startTime=0, stopTime=86400, tolerance=1e-6, method="dassl", resultFile="OneOffice");
+createPlot(
+ y = {"humanSensibleHeat.uRel", "machinesSensibleHeatDIN18599.uRel", "lightsAreaSpecific.uRel"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=2, 
+ y = {"humanSensibleHeat.radHeat.Q_flow", "machinesSensibleHeatDIN18599.radHeat.Q_flow", "lightsAreaSpecific.radHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=3, 
+ y = {"humanSensibleHeat.convHeat.Q_flow", "machinesSensibleHeatDIN18599.convHeat.Q_flow", "lightsAreaSpecific.convHeat.Q_flow"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);

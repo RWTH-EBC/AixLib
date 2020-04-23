@@ -20,12 +20,10 @@ package TemperatureDependentDensity
     each casRegistryNumber="7732-18-5",
     each iupacName="oxidane",
     each molarMass=MM_const);
-
   redeclare record extends ThermodynamicState "Thermodynamic state variables"
     Temperature T(start=T_default) "Temperature of medium";
     AbsolutePressure p(start=p_default) "Pressure of medium";
   end ThermodynamicState;
-
   constant Modelica.SIunits.SpecificHeatCapacity cp_const = 4184
     "Specific heat capacity at constant pressure";
 
@@ -662,7 +660,6 @@ First implementation.
 </ul>
 </html>"));
 end setState_psX;
-
 //////////////////////////////////////////////////////////////////////
 // Protected classes.
 // These classes are only of use within this medium model.
@@ -786,7 +783,6 @@ but converted from Celsius to Kelvin.
 </ul>
 </html>"));
 end kinematicViscosity;
-
 annotation(preferredView="info", Documentation(info="<html>
 <p>
 This medium package models liquid water.

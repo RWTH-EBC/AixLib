@@ -9,12 +9,12 @@ model Chiller
   Components.Chiller.Chiller chiller(
     use_revChi=true,
     redeclare model PerDataMainChi =
-        AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
-          dataTable=AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
+          dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+           AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     refIneFre_constant=1,
@@ -54,7 +54,7 @@ model Chiller
         rotation=180,
         origin={73,77})));
   Modelica.Blocks.Sources.Constant iceFac(final k=1)
-    "Fixed value for icing factor"                   annotation (Placement(
+    "Fixed value for icing factor. 1 means no icing/frosting (full heat transfer in heat exchanger)"                   annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=180,

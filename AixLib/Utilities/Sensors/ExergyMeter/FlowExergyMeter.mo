@@ -25,12 +25,12 @@ model FlowExergyMeter
     "Mass flow rate of the medium flow used in exergy calculations"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
   Modelica.Fluid.Sensors.SpecificEntropy specificEntropy(
-  redeclare package
-      Medium = Medium)
+  redeclare package Medium =
+               Medium)
     "Specific entropy of the medium flow used in exergy calculations"
     annotation (Placement(transformation(extent={{70,0},{50,20}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy(redeclare package
-      Medium = Medium)
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpy(redeclare package Medium =
+               Medium)
     "Specific enthalpy of the medium flow used in exergy calculations"
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
 
@@ -45,11 +45,11 @@ model FlowExergyMeter
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-100})));
-  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef(redeclare package
-      Medium = Medium) "Specific enthalpy of the reference environment"
+  Modelica.Fluid.Sensors.SpecificEnthalpy specificEnthalpyRef(redeclare package Medium =
+               Medium) "Specific enthalpy of the reference environment"
     annotation (Placement(transformation(extent={{-12,-62},{-32,-42}})));
-  Modelica.Fluid.Sensors.SpecificEntropy specificEntropy_ref(redeclare package
-      Medium = Medium) "Specific entropy of the reference environment"
+  Modelica.Fluid.Sensors.SpecificEntropy specificEntropy_ref(redeclare package Medium =
+               Medium) "Specific entropy of the reference environment"
     annotation (Placement(transformation(extent={{18,-64},{38,-42}})));
   Modelica.Blocks.Interfaces.RealOutput exergyFlow(final quantity="Power",
       final unit="W") "Exergy content of the medium flow" annotation (Placement(
