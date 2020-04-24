@@ -37,7 +37,7 @@ model EastWestFacingWindows "windows facing south and west"
     parameter Real solarDistributionFloor(min=0.0, max=1.0) = 0.642 "Solar distribution fraction of the transmitted radiation through the window on the Floor";
     parameter Real solarDistributionCeiling(min=0.0, max=1.0) = 0.168 "Solar distribution fraction of the transmitted radiation through the window on the Ceiling";
     parameter Real solarDistributionNorth(min=0.0, max=1.0) = 0.0525 "Solar distribution fraction of the transmitted radiation through the window on the OWNorth";
-    parameter Real solarDistributionEas(min=0.0, max=1.0) = 0.025 "Solar distribution fraction of the transmitted radiation through the window on the OWEast";
+    parameter Real solarDistributionEast(min=0.0, max=1.0) = 0.025 "Solar distribution fraction of the transmitted radiation through the window on the OWEast";
     parameter Real solarDistributionWest(min=0.0, max=1.0) = 0.025 "Solar distribution fraction of the transmitted radiation through the window on the OWWest";
     parameter Real solarDistributionSouth(min=0.0, max=1.0) = 0.0525 "Solar distribution fraction of the transmitted radiation through the window on the OWSouth";
 
