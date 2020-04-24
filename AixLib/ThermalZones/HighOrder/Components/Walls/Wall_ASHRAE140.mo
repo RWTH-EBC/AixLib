@@ -313,7 +313,6 @@ end if;
 //******************************************************************
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
- connect(absSolarRadWin.port, Wall.heatConv.port_b);
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
   connect(solarRadWin, solarDistrFraction.u) annotation (Line(
       points={{101,80},{69.2,80}},
@@ -326,13 +325,13 @@ end if;
           {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
           -14},{-54,-14},{-54,-14.2},{-45.84,-14.2}}, color={0,0,127}));
+  connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{29,80},{7,
+          80},{7,57},{-9.22,57},{-9.22,33.8}}, color={191,0,0}));
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={Line(
-          points={{27,80},{-3,80},{-3,38}},
-          color={127,0,0})}),
+        grid={1,1})),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-20,-120},{20,120}},
