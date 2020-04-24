@@ -1,6 +1,5 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls;
-model PanelHeating
-  "A panel heating for e.g. floor heating with discretization"
+model PanelHeating "A panel heating for e.g. floor heating with discretization"
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
