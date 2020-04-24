@@ -95,7 +95,7 @@ model StaticPipe
     "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
 
-  BaseClassesStatic.StaticCore staticCore(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore staticCore(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,

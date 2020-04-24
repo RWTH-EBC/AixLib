@@ -119,7 +119,7 @@ model PlugFlowPipeEmbedded
 
   Modelica.SIunits.Velocity v_water;
 
-  PlugFlowPipeZeta plugFlowPipe(
+  AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
