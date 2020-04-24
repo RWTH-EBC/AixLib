@@ -125,7 +125,10 @@ equation
   connect(wholeHouseBuildingEnvelope.groFloDown, wholeHouseBuildingEnvelope.groPlateUp) annotation (Line(points={{-14,2.32},{-22,2.32},{-22,-4.4},{-14,-4.4}}, color={191,0,0}));
   connect(prescribedTemperature[1:10].port, heatStarToComb[1:10].portConv) annotation (Line(points={{-24,-52},{-20,-52},{-20,-30},{-44,-30},{-44,-23.75}}, color={191,0,0}));
   connect(fixedHeatFlowAttic[1].port, heatStarToComb[1].portConv) annotation (Line(points={{-52,-29},{-50,-29},{-50,-23.75},{-44,-23.75}}, color={191,0,0}));
-  annotation (Diagram(graphics={
+  annotation (experiment(StartTime = 0, StopTime = 25920000, Interval=3600, Tolerance=1e-6, Algorithm="dassl"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/HighOrder/Examples/OFDHeatLoad.mos"
+                      "Simulate and plot"),
+    Diagram(graphics={
         Text(
           extent={{-112,-40},{-74,-62}},
           lineColor={28,108,200},
@@ -146,7 +149,7 @@ Calculation example: Chapter 6.1.3.4"),
           extent={{-112,90},{-74,68}},
           lineColor={28,108,200},
           textString="DIN EN 12831 Beiblatt 1
-Table 1")}), experiment(StopTime=25920000, Interval=3600),
+Table 1")}),
     Documentation(revisions="<html>
 <ul>
 <li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Implement example</li>
