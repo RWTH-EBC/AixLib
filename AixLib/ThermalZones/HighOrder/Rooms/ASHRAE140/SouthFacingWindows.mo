@@ -33,12 +33,13 @@ model SouthFacingWindows "windows facing south"
                                                               annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
 
     parameter Real solar_absorptance_OW = 0.6 "Solar absoptance outer walls " annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
-    parameter Real solar_distribution_floor = 0.642;
-    parameter Real solar_distribution_ceeling = 0.168;
-    parameter Real solar_distribution_OWnorth = 0.053;
-    parameter Real solar_distribution_OWeast = 0.038;
-    parameter Real solar_distribution_OWwest = 0.038;
-    parameter Real solar_distribution_OWsouth = 0.026;
+
+    parameter Real solarDistributionFloor(min=0.0, max=1.0) = 0.642 "Solar distribution fraction of the transmitted radiation through the window on the Floor";
+    parameter Real solarDistributionCeiling(min=0.0, max=1.0) = 0.168 "Solar distribution fraction of the transmitted radiation through the window on the Ceiling";
+    parameter Real solarDistributionNorth(min=0.0, max=1.0) = 0.053 "Solar distribution fraction of the transmitted radiation through the window on the OWNorth";
+    parameter Real solarDistributionEast(min=0.0, max=1.0)= 0.038 "Solar distribution fraction of the transmitted radiation through the window on the OWEast";
+    parameter Real solarDistributionWest(min=0.0, max=1.0) = 0.038 "Solar distribution fraction of the transmitted radiation through the window on the OWWest";
+    parameter Real solarDistributionSouth(min=0.0, max=1.0) = 0.026 "Solar distribution fraction of the transmitted radiation through the window on the OWSouth";
 
     parameter Real eps_out=0.9 "emissivity of the outer surface"
                                          annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
@@ -65,8 +66,7 @@ public
     withDoor=false,
     WallType=TypOW,
     T0=T0_OW,
-    ISOrientation=7,
-    solar_distribution = solar_distribution_OWsouth,
+    solarDistribution = solarDistributionSouth,
     wall_length=Room_Width,
     solar_absorptance=solar_absorptance_OW,
     calcMethod=2,
@@ -84,8 +84,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
-    ISOrientation=6,
-    solar_distribution= solar_distribution_OWwest,
+    solarDistribution= solarDistributionWest,
     withDoor=false,
     T0=T0_IW,
     outside=true,
@@ -103,8 +102,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
-    ISOrientation=5,
-    solar_distribution = solar_distribution_OWeast,
+    solarDistribution = solarDistributionEast,
     T0=T0_IW,
     outside=true,
     final withSunblind=use_sunblind,
@@ -121,8 +119,7 @@ public
         origin={26,-64})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_North(
     wall_height=Room_Height,
-    ISOrientation=4,
-    solar_distribution= solar_distribution_OWnorth,
+    solarDistribution= solarDistributionNorth,
     U_door=5.25,
     door_height=1,
     door_width=2,
@@ -141,8 +138,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
-    ISOrientation=3,
-    solar_distribution = solar_distribution_ceeling,
+    solarDistribution = solarDistributionCeiling,
     withDoor=false,
     T0=T0_CE,
     WallType=TypCE,
@@ -161,8 +157,7 @@ public
     wall_length=Room_Lenght,
     wall_height=Room_Width,
     withDoor=false,
-    ISOrientation=2,
-    solar_distribution = solar_distribution_floor,
+    solarDistribution = solarDistributionFloor,
     T0=T0_FL,
     WallType=TypFL,
     solar_absorptance=solar_absorptance_OW,
