@@ -21,9 +21,6 @@ model WindowSimple "Window with radiation and U-Value"
       WindowType.Uw else 1.50
     "Thermal transmission coefficient of whole window"
     annotation (Dialog(group="Window type", enable=not selectable));
-  parameter Real g=if selectable then WindowType.g else 0.60
-    "Coefficient of solar energy transmission"
-    annotation (Dialog(group="Window type", enable=not selectable));
 
   replaceable model correctionSolarGain =
       BaseClasses.CorrectionSolarGain.NoCorG constrainedby
@@ -46,8 +43,9 @@ model WindowSimple "Window with radiation and U-Value"
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_inside
     annotation (Placement(transformation(extent={{80,-20},{100,0}})));
-  Modelica.Blocks.Math.Gain Ag(
-    final k(unit="m2", min=0.0) = (1 - frameFraction)*windowarea*g)
+  Modelica.Blocks.Math.Gain Ag(final k(
+      unit="m2",
+      min=0.0) = (1 - frameFraction)*windowarea)
     annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{2,50},{22,70}})));

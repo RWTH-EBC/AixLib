@@ -19,8 +19,6 @@ model Window_ASHRAE140
   parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw=if selectable then WindowType.Uw else 1.50
     "Thermal transmission coefficient of whole window"                                                                                                 annotation (Dialog(group="Window type", enable = not selectable));
 
-  parameter Real g= if selectable then WindowType.g else 0.60
-    "Coefficient of solar energy transmission"                                                            annotation (Dialog(group="Window type", enable = not selectable));
 
   replaceable model correctionSolarGain =
       BaseClasses.CorrectionSolarGain.NoCorG constrainedby
