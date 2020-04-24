@@ -56,8 +56,7 @@ model GroundFloorBuildingEnvelope
       descriptionLabel=true));
   parameter Modelica.SIunits.Length door_height_42=2.25 "Height Door42  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
-    annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
+
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors "U-value (thermal transmittance) of doors in outer walls" annotation (
      Dialog(
       tab="Outer walls",
@@ -135,14 +134,7 @@ model GroundFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Livingroom,
-    T0_air=295.15,
-    T0_OW1=295.15,
-    T0_OW2=295.15,
-    T0_IW1a=295.15,
-    T0_IW1b=295.15,
-    T0_IW2=295.15,
-    T0_CE=295.13,
-    T0_FL=295.13,
+    final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors)
     annotation (Placement(transformation(extent={{-84,12},{-40,76}})));
@@ -182,13 +174,7 @@ model GroundFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Hobby,
-    T0_air=295.15,
-    T0_OW1=295.15,
-    T0_OW2=295.15,
-    T0_IW1=295.15,
-    T0_IW2=295.15,
-    T0_CE=295.13,
-    T0_FL=295.13,
+    final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors)
     annotation (Placement(transformation(extent={{84,28},{46,76}})));
@@ -230,13 +216,7 @@ model GroundFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_WC,
-    T0_air=291.15,
-    T0_OW1=291.15,
-    T0_OW2=291.15,
-    T0_IW1=291.15,
-    T0_IW2=291.15,
-    T0_CE=291.13,
-    T0_FL=291.13,
+    final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors)
     annotation (Placement(transformation(extent={{82,-36},{44,-84}})));
@@ -278,14 +258,7 @@ model GroundFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Kitchen,
-    T0_air=295.15,
-    T0_OW1=295.15,
-    T0_OW2=295.15,
-    T0_IW1a=295.15,
-    T0_IW1b=295.15,
-    T0_IW2=295.15,
-    T0_CE=295.13,
-    T0_FL=295.13,
+    final T0_air=T0_air,
     final U_door_OD2=UValOutDoors,
     final eps_door_OD2=epsOutDoors)
     annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
@@ -325,14 +298,7 @@ model GroundFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    T0_air=291.15,
-    T0_OW1=291.15,
-    T0_IW1=291.15,
-    T0_IW2a=291.15,
-    T0_IW2b=291.15,
-    T0_IW3=291.15,
-    T0_CE=291.13,
-    T0_FL=291.13)
+    final T0_air=T0_air)
     annotation (Placement(transformation(extent={{82,-28},{42,10}})));
   Utilities.Interfaces.SolarRad_in North annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

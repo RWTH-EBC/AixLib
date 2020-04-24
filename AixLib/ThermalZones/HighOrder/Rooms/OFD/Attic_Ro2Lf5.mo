@@ -5,24 +5,6 @@ model Attic_Ro2Lf5
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
     final room_V=roof_width1*roof_width2*sin(alfa)*0.5*length);
 
-  parameter Modelica.SIunits.Temperature T0_RO1=282.15 "RO1"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_RO2=282.15 "RO2"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_OW1=282.15 "OW1"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_OW2=282.15 "OW2"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_FL1=284.15 "FL1"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_FL2=284.15 "FL2"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_FL3=284.15 "FL3"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_FL4=284.15 "FL4"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_FL5=284.15 "FL5"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   //////////room geometry
   parameter Modelica.SIunits.Length length=2 "length " annotation (Dialog(
       group="Dimensions",
@@ -129,7 +111,7 @@ model Attic_Ro2Lf5
     withDoor=false,
     door_height=0,
     door_width=0,
-    T0=T0_RO1,
+    final T0=TWalls_start,
     solar_absorptance=solar_absorptance_RO,
     withWindow=withWindow1,
     final withSunblind=use_sunblind,
@@ -146,7 +128,7 @@ model Attic_Ro2Lf5
         rotation=270,
         origin={-41,59})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom2(
-    T0=T0_FL2,
+    final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room2_length,
     wall_height=room2_width,
@@ -161,7 +143,7 @@ model Attic_Ro2Lf5
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom1(
-    T0=T0_FL1,
+    final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room1_length,
     wall_height=room1_width,
@@ -191,7 +173,7 @@ model Attic_Ro2Lf5
     withDoor=false,
     door_height=0,
     door_width=0,
-    T0=T0_RO2,
+    final T0=TWalls_start,
     wall_height=roof_width2,
     withWindow=withWindow2,
     final withSunblind=use_sunblind,
@@ -215,7 +197,7 @@ model Attic_Ro2Lf5
         rotation=270,
         origin={50,90})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom3(
-    T0=T0_FL3,
+    final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room3_length,
     wall_height=room3_width,
@@ -230,7 +212,7 @@ model Attic_Ro2Lf5
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom4(
-    T0=T0_FL4,
+    final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room4_length,
     wall_height=room4_width,
@@ -245,7 +227,7 @@ model Attic_Ro2Lf5
         extent={{-1.99998,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom5(
-    T0=T0_FL5,
+    final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room5_length,
     wall_height=room5_width,
@@ -285,7 +267,8 @@ model Attic_Ro2Lf5
     wall_height=sqrt(VerticalWall_Area),
     solar_absorptance=solar_absorptance_OW,
     withWindow=false,
-    T0=T0_OW1) annotation (Placement(transformation(extent={{-4,-21},{4,21}}, origin={-75,-22})));
+    final T0=TWalls_start)
+               annotation (Placement(transformation(extent={{-4,-21},{4,21}}, origin={-75,-22})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-116,-30},{-96,-10}}), iconTransformation(extent={{-120,-30},{-100,-10}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall OW2(
@@ -304,7 +287,8 @@ model Attic_Ro2Lf5
     wall_height=sqrt(VerticalWall_Area),
     solar_absorptance=solar_absorptance_OW,
     withWindow=false,
-    T0=T0_OW2) annotation (Placement(transformation(
+    final T0=TWalls_start)
+               annotation (Placement(transformation(
         extent={{-4,21},{4,-21}},
         rotation=180,
         origin={85,-16})));
@@ -358,14 +342,14 @@ equation
   connect(thermOutside, roof1.port_outside) annotation (Line(points={{-100,100},{-88,100},{-88,74},{-41,74},{-41,64.25}}, color={191,0,0}));
 
   connect(thermOutside, OW1.port_outside) annotation (Line(points={{-100,100},{-84,100},{-84,-22},{-79.2,-22}}, color={191,0,0}));
-  connect(floorRoom1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-60,-42},{-60,-40},{-6.1875,-40},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(floorRoom2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-29,-42},{-6.1875,-42},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(floorRoom3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{3,-42},{4,-42},{4,-38},{-6.1875,-38},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(floorRoom4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{35,-42},{36,-42},{36,-38},{-6.1875,-38},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(floorRoom5.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{69,-42},{68,-42},{68,-38},{-6.1875,-38},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(OW1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-71,-22},{-56,-22},{-56,-40},{-6.1875,-40},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-41,54},{-41,48},{-58,48},{-58,-22},{-56,-22},{-56,-40},{-6.1875,-40},{-6.1875,-7.88}}, color={191,0,0}));
-  connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{47,54},{48,54},{48,46},{-58,46},{-58,-22},{-56,-22},{-56,-40},{-6.1875,-40},{-6.1875,-7.88}}, color={191,0,0}));
+  connect(floorRoom1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-60,-42},{-60,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
+  connect(floorRoom2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-29,-42},{-7,-42},{-7,-8}},              color={191,0,0}));
+  connect(floorRoom3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{3,-42},{4,-42},{4,-38},{-7,-38},{-7,-8}},              color={191,0,0}));
+  connect(floorRoom4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{35,-42},{36,-42},{36,-38},{-7,-38},{-7,-8}},              color={191,0,0}));
+  connect(floorRoom5.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{69,-42},{68,-42},{68,-38},{-7,-38},{-7,-8}},              color={191,0,0}));
+  connect(OW1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-71,-22},{-56,-22},{-56,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
+  connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-41,54},{-41,48},{-58,48},{-58,-22},{-56,-22},{-56,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
+  connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{47,54},{48,54},{48,46},{-58,46},{-58,-22},{-56,-22},{-56,-40},{-7,-40},{-7,-8}},              color={191,0,0}));
   annotation (Icon(graphics={
         Polygon(
           points={{-96,-60},{0,80},{96,-60},{82,-60},{0,60},{-82,-60},{-96,-60}},

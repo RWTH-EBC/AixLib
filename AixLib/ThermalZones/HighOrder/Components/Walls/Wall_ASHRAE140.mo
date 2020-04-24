@@ -97,7 +97,7 @@ model Wall_ASHRAE140
 // Initial temperature
 
  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature"                                                   annotation(Dialog(tab="Advanced Parameters"));
+    "Initial temperature"                                                   annotation(Dialog(tab="Initialization"));
 
 // COMPONENT PART
 

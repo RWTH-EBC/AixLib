@@ -52,8 +52,6 @@ model UpperFloorBuildingEnvelope
       joinNext=true));
   parameter Modelica.SIunits.Area windowarea_103=1.73 " Area Window103  "
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
-  parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
-    annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
 
   parameter Modelica.SIunits.Temperature Tset_Bedroom=295.15 "Tset_bedroom"
     annotation (Dialog(
@@ -151,15 +149,7 @@ model UpperFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Bedroom,
-    T0_air=295.11,
-    T0_OW1=295.15,
-    T0_OW2=295.15,
-    T0_IW1a=295.15,
-    T0_IW1b=295.15,
-    T0_IW2=295.15,
-    T0_CE=295.1,
-    T0_RO=295.15,
-    T0_FL=295.12)
+    final T0_air=T0_air)
     annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Children1(
     final denAir=denAir,
@@ -199,16 +189,9 @@ model UpperFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Children1,
-    T0_air=295.11,
-    T0_OW1=295.15,
-    T0_OW2=295.15,
+    final T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
-    final U_door_OD2=UValOutDoors,
-    T0_IW1=295.15,
-    T0_IW2=295.15,
-    T0_CE=295.1,
-    T0_RO=295.15,
-    T0_FL=295.12)
+    final U_door_OD2=UValOutDoors)
     annotation (Placement(transformation(extent={{82,28},{44,76}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Bath(
     final denAir=denAir,
@@ -249,16 +232,9 @@ model UpperFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Bath,
-    T0_air=297.11,
-    T0_OW1=297.15,
-    T0_OW2=297.15,
+    final T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
-    final U_door_OD2=UValOutDoors,
-    T0_IW1=297.15,
-    T0_IW2=297.15,
-    T0_CE=297.1,
-    T0_RO=297.15,
-    T0_FL=297.12)
+    final U_door_OD2=UValOutDoors)
     annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Children2(
     final denAir=denAir,
@@ -301,15 +277,7 @@ model UpperFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Children2,
-    T0_air=295.11,
-    T0_OW1=295.15,
-    T0_OW2=295.15,
-    T0_IW1a=295.15,
-    T0_IW1b=295.15,
-    T0_IW2=295.15,
-    T0_CE=295.1,
-    T0_RO=295.15,
-    T0_FL=295.12)
+    final T0_air=T0_air)
     annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1 Corridor(
     final denAir=denAir,
@@ -346,15 +314,7 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    T0_air=291.11,
-    T0_OW1=291.15,
-    T0_IW1=291.15,
-    T0_IW2a=291.15,
-    T0_IW2b=291.15,
-    T0_IW3=291.15,
-    T0_CE=291.1,
-    T0_RO=291.15,
-    T0_FL=291.12)
+    final T0_air=T0_air)
     annotation (Placement(transformation(extent={{82,-28},{42,10}})));
   Utilities.Interfaces.SolarRad_in North annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

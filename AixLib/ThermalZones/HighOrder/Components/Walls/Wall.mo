@@ -83,7 +83,7 @@ model Wall
     "Wall clearance";
   // Initial temperature
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature"                                                                                      annotation(Dialog(tab = "Advanced Parameters"));
+    "Initial temperature"                                                                                      annotation(Dialog(tab = "Initialization"));
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(
     h=wall_height,
@@ -135,10 +135,10 @@ equation
   // **********************standard connection************************
   //******************************************************************
   connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
-      points={{30,31.82},{48,31.82},{48,4.8},{58.6,4.8}},
+      points={{30,31.82},{48,31.82},{48,4},{59,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{30,25},{48,25},{48,-6.1},{58.9,-6.1}},color={191,0,0}));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{30,25},{48,25},{48,-6},{59,-6}},      color={191,0,0}));
   //******************************************************************
   // **********************standard connection for inside wall********
   //******************************************************************
@@ -163,9 +163,9 @@ equation
   //******************************************************************
   if withDoor then
     connect(Door.port_a, port_outside) annotation(Line(points = {{-19.4, -86}, {-56, -86}, {-56, 24}, {-24, 24}, {-24, 4}, {-98, 4}}, color = {191, 0, 0}));
-    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6},{59,-6}},       color={191,0,0}));
     connect(Door.Star, heatStarToComb.portRad) annotation (Line(
-        points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
+        points={{9.4,-76.4},{48,-76.4},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
   end if;
@@ -174,10 +174,10 @@ equation
   //******************************************************************
   if outside and withWindow then
     connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
-        points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
+        points={{9.7,-27.2},{48,-27.2},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
-    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}},       color={191,0,0}));
     connect(windowSimple.port_outside, port_outside) annotation(Line(points={{-13.7,-36.3},{-16,-36.3},{-16,-54},{-92,-54},{-92,4},{-98,4}},
                                                                                                                                   color = {191, 0, 0}));
   end if;
@@ -196,7 +196,7 @@ equation
     connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-47.4375,-32.375},{-50,-32.375},{-50,-16},{-80,-16},{-80,89},{-106,89}},
                                                                                                                                    color = {255, 128, 0}));
   end if;
-  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{78.8,0.3},{78.8,-1.05},{102,-1.05},{102,0}},  color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{79,-1},{79,-1.05},{102,-1.05},{102,0}},       color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-62,-40},{-54,-40},{-54,-38.875},{-47.4375,-38.875}},
                                                       color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},

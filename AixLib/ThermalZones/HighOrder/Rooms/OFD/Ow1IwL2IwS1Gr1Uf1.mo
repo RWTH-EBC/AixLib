@@ -5,20 +5,6 @@ model Ow1IwL2IwS1Gr1Uf1
   extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoom(redeclare DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes,
                                                                           final room_V=room_length*room_width*room_height);
 
-  parameter Modelica.SIunits.Temperature T0_OW1=295.15 "OW1"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_IW1=295.15 "IW1"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_IW2a=295.15 "IW2a"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_IW2b=295.15 "IW2b"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_IW3=295.15 "IW3"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_CE=295.13 "Ceiling"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
-  parameter Modelica.SIunits.Temperature T0_FL=295.13 "Floor"
-    annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   //////////room geometry
   parameter Modelica.SIunits.Length room_length=2 "length"
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
@@ -69,7 +55,7 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW1,
-    T0=T0_OW1,
+    final T0=TWalls_start,
     door_height=door_height_OD1,
     door_width=door_width_OD1,
     wall_length=room_length,
@@ -85,7 +71,7 @@ model Ow1IwL2IwS1Gr1Uf1
     U_door=U_door_OD1,
     eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
-    T0=T0_IW1,
+    final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width,
@@ -100,7 +86,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
-    T0=T0_IW2a,
+    final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_length - room_lengthb,
@@ -115,7 +101,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-3,-15},{3,15}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
-    T0=T0_IW3,
+    final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_vert_half_a,
     wall_length=room_width,
@@ -130,7 +116,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
-    T0=T0_CE,
+    final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_hori_low_half,
     wall_length=room_length,
@@ -146,7 +132,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{2,-9},{-2,9}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
-    T0=T0_FL,
+    final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.groundPlate_upp_half,
     wall_length=room_length,
@@ -175,7 +161,7 @@ model Ow1IwL2IwS1Gr1Uf1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
-    T0=T0_IW2b,
+    final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW2_vert_half_a,
     wall_length=room_lengthb,

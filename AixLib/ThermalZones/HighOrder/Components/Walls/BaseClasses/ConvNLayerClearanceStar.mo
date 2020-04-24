@@ -76,9 +76,9 @@ equation
           52,0}},                               color={191,0,0}));
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(HeatConv1.port_a, port_b) annotation(Line(points={{72,0},{100,0}},                             color = {200, 100, 0}));
-  connect(HeatConv1.port_b, twoStar_RadEx.conv) annotation (Line(points={{52,0},{50,0},{50,38},{54.8,38}}, color={200,100,0}));
+  connect(HeatConv1.port_b, twoStar_RadEx.conv) annotation (Line(points={{52,0},{50,0},{50,38},{54,38}},   color={200,100,0}));
   connect(twoStar_RadEx.rad, Star) annotation (Line(
-      points={{73.1,38},{100,38},{100,62}},
+      points={{74.1,38},{100,38},{100,62}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   // computing approximated longwave radiation exchange
