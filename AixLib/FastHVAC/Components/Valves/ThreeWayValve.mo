@@ -23,19 +23,23 @@ model ThreeWayValve
         rotation=270,
         origin={0,90})));
 
-  Fluid.Actuators.Valves.MixingValve.MinLimiter
-             minLimiter(uMin=1e-3)
-    annotation (Placement(transformation(extent={{6,64},{20,78}})));
-  Modelica.Blocks.Continuous.Filter filter(order=2, f_cut=5/(2*Modelica.Constants.pi
-        *1))
-         annotation (Placement(transformation(extent={{28,64},{42,78}})));
-  Modelica.Blocks.Interfaces.RealOutput opening_filtzered
-    "Filtered valve position in the range 0..1"
-    annotation (Placement(transformation(extent={{60,60},{80,80}}),
+Modelica.Blocks.Continuous.Filter filter(order=2, f_cut=5/(2*Modelica.Constants.pi
+      *1))
+      annotation (Placement(transformation(extent={{56,60},{70,74}})));
+Modelica.Blocks.Interfaces.RealOutput opening_filtzered
+  "Filtered valve position in the range 0..1"
+  annotation (Placement(transformation(extent={{88,56},{108,76}}),
         iconTransformation(extent={{72,58},{92,78}})));
+
+  Modelica.Blocks.Nonlinear.VariableLimiter variableLimiter
+    annotation (Placement(transformation(extent={{34,58},{50,74}})));
+  Modelica.Blocks.Sources.Constant const(k=1e-3)
+    annotation (Placement(transformation(extent={{0,38},{20,58}})));
+  Modelica.Blocks.Sources.Constant const1(k=Modelica.Constants.inf)
+    annotation (Placement(transformation(extent={{8,78},{28,98}})));
 equation
   // mass balance
-  enthalpyPort_a.m_flow = enthalpyPort_ab.m_flow*opening_filtzered;
+  enthalpyPort_a.m_flow = enthalpyPort_ab.m_flow*opening;
   - enthalpyPort_ab.m_flow + enthalpyPort_a.m_flow + enthalpyPort_b.m_flow =
     0;
   // constant values
@@ -46,13 +50,17 @@ equation
   enthalpyPort_ab.h = enthalpyPort_b.h;
   enthalpyPort_a.h = enthalpyPort_ab.h;
 
-  connect(minLimiter.y,filter. u) annotation (Line(
-      points={{20.7,71},{26.6,71}},
-      color={0,0,127}));
-  connect(opening, minLimiter.u)
-    annotation (Line(points={{0,104},{0,71},{4.6,71}}, color={0,0,127}));
-  connect(filter.y, opening_filtzered) annotation (Line(points={{42.7,71},{51.35,
-          71},{51.35,70},{70,70}}, color={0,0,127}));
+   connect(filter.y, opening_filtzered) annotation (Line(points={{70.7,67},{
+          79.35,67},{79.35,66},{98,66}},
+                                    color={0,0,127}));
+  connect(const1.y, variableLimiter.limit1) annotation (Line(points={{29,88},{
+          32,88},{32,72.4},{32.4,72.4}}, color={0,0,127}));
+  connect(const.y, variableLimiter.limit2) annotation (Line(points={{21,48},{26,
+          48},{26,59.6},{32.4,59.6}}, color={0,0,127}));
+  connect(variableLimiter.y, filter.u) annotation (Line(points={{50.8,66},{52,
+          66},{52,67},{54.6,67}}, color={0,0,127}));
+  connect(opening, variableLimiter.u) annotation (Line(points={{0,104},{2,104},
+          {2,66},{32.4,66}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(graphics={Polygon(
                   points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},
