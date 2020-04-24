@@ -18,6 +18,7 @@ model PlugFlowPipeEmbedded "Simple example of PlugFlowPipeEmbedded"
   AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeEmbedded
                                              pip(
     redeclare package Medium = Medium,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     nPorts=1,
     dh=0.1,
     length=100,

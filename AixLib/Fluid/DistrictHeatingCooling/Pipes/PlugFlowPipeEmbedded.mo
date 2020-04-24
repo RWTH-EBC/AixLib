@@ -4,6 +4,10 @@ model PlugFlowPipeEmbedded
 
   extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics", group="Equations"));
+
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
     annotation(Dialog(group="Additional pressurelosses"));
@@ -141,6 +145,7 @@ model PlugFlowPipeEmbedded
         iconTransformation(extent={{-10,94},{10,114}})));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_1(
+    final energyDynamics=energyDynamics,
     final rho=rho,
     final c=c,
     final d_in=dh + 2*thickness,
@@ -150,6 +155,7 @@ model PlugFlowPipeEmbedded
     T0=283.15) annotation (Placement(transformation(extent={{-10,20},{10,40}})));
 
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_2(
+    final energyDynamics=energyDynamics,
     final rho=rho,
     final c=c,
     final d_in=dh + 2*thickness + thickness_ground/3,
@@ -158,6 +164,7 @@ model PlugFlowPipeEmbedded
     final lambda=lambda,
     T0=283.15) annotation (Placement(transformation(extent={{-10,46},{10,66}})));
   AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_3(
+    final energyDynamics=energyDynamics,
     final rho=rho,
     final c=c,
     final d_in=dh + 2*thickness + 2*thickness_ground/3,
@@ -165,6 +172,7 @@ model PlugFlowPipeEmbedded
     final length=length,
     final lambda=lambda,
     T0=283.15) annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+
 
 protected
   parameter Modelica.SIunits.HeatCapacity CPip=
