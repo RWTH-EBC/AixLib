@@ -66,9 +66,8 @@ equation
   connect(senTemIn.port_b, pip.port_a)
     annotation (Line(points={{-10,0},{0,0}}, color={0,127,255}));
   annotation (
-    __Dymola_Commands(file=
-          "Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/PlugFlowPipe.mos"
-        "Simulate and Plot"),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Pipes/Examples/StaticPipe.mos"
+                      "Simulate and plot"),
     experiment(StopTime=1000, Tolerance=1e-006),
     Documentation(info="<html>
 <p>Basic test of model
