@@ -349,6 +349,7 @@ equation
           rotation=90,
           visible=withWindow3)}), Documentation(revisions="<html>
  <ul>
+  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly. Extend from new partial room model. Delete TIR and TMC. Tidy up.</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
  </ul>

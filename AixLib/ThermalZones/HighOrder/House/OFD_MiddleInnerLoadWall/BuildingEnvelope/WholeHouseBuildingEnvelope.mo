@@ -349,6 +349,7 @@ equation
 </html>",  revisions="<html>
 
  <ul>
+  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly (not geometry). Vectorize thermal ports. Delete TIR and TMC.</li>
  <li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Add heat-star-combi to connect heaters in a more clever way</li>
  <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Corrected connection of gabled vertical walls with solar radiation (E and W)</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>

@@ -87,7 +87,7 @@ equation
  </html>
  ", revisions="<html>
  <ul>
-  <li><i>April 23, 2020</i> by Philipp Mehrfeld:<br/> <a href=\"https://github.com/RWTH-EBC/AixLib/issues/891\">#891</a>: Add energyDynamics. Apply T_start as vector. <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Use only records.</li>
+  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/891\">#891</a>: Add energyDynamics. Apply T_start as vector. <a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Use only records.</li>
   <li><i>Mai 19, 2014</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
   <li><i>May 02, 2013</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
   <li><i>March 14, 2005</i> by Timo Haase:<br/>Implemented.</li>

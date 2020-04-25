@@ -353,6 +353,7 @@ equation
         Line(points={{-46,60},{-46,30}}, color={255,255,255})}), Documentation(
         revisions="<html>
  <ul>
+  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly. Extend from new partial room model. Delete TIR and TMC. Tidy up.</li>
  <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Grount temperature depends on TRY</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>

@@ -485,6 +485,7 @@ equation
           lineColor={0,0,0},
           textString="Kitchen")}), Documentation(revisions="<html>
  <ul>
+  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Propagate all parameters correctly (not geometry). Vectorize thermal ports. Delete TIR and TMC.</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
