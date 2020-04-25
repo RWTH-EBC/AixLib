@@ -1,7 +1,9 @@
 within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model UpperFloorBuildingEnvelope
 
-  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
+  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(
+    final Tset=372.15,
+    withDynamicVentilation=false,                                               redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
   //////////room geometry
   parameter Modelica.SIunits.Length room_width_long=3.92 "w1 "
@@ -27,7 +29,7 @@ model UpperFloorBuildingEnvelope
     annotation (Dialog(group="Dimensions", descriptionLabel=true));
   // Outer walls properties
   parameter Real solar_absorptance_RO=0.1 "Solar absoptance roof "
-    annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
+    annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
   //Windows and Doors
   parameter Modelica.SIunits.Area windowarea_62=1.73 " Area Window62"
     annotation (Dialog(

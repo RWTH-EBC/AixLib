@@ -6,6 +6,9 @@ model WholeHouseBuildingEnvelope
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
 
+  parameter Real solar_absorptance_RO=0.1 "Solar absoptance roof "
+    annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
+
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UValOutDoors=2.5 "U-value (thermal transmittance) of doors in outer walls" annotation (
      Dialog(
       tab="Outer walls",
@@ -14,6 +17,30 @@ model WholeHouseBuildingEnvelope
      Dialog(
       tab="Outer walls",
       group="Doors"));
+
+  // Dynamic ventilation (individual temperatures)
+  parameter Modelica.SIunits.Temperature TDynVentLivingroom_set = 295.15 "Livingroom set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentHobby_set = 295.15 "Hobby set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentCorridorGF_set = 291.15 "Corridor (GF) set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentWCStorage_set = 291.15 "WC / Storage room set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentKitchen_set = 295.15 "Kitchen set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentBedroom_set = 295.15 "Bedroom set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentChildren1_set = 295.15 "Children 1 room set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentCorridorUF_set = 291.15 "Corridor (UF) set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentBath_set = 297.15 "Bathroom set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentChildren2_set = 295.15 "Children 2 room set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
+  parameter Modelica.SIunits.Temperature TDynVentAttic_set = 288.15 "Attic set temperature for dyn. vent."
+    annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
 
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope
     groundFloor_Building(
@@ -39,12 +66,17 @@ model WholeHouseBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    withDynamicVentilation=withDynamicVentilation,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
+    final withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
     final UValOutDoors=UValOutDoors,
-    final epsOutDoors=epsOutDoors)
+    final epsOutDoors=epsOutDoors,
+    final Tset_Livingroom=TDynVentLivingroom_set,
+    final Tset_Hobby=TDynVentHobby_set,
+    final Tset_Corridor=TDynVentCorridorGF_set,
+    final Tset_WC=TDynVentWCStorage_set,
+    final Tset_Kitchen=TDynVentKitchen_set)
     annotation (Placement(transformation(extent={{-20,-74},{20,-26}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope
     upperFloor_Building(
@@ -70,10 +102,16 @@ model WholeHouseBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    HeatingLimit=HeatingLimit,
-    Max_VR=Max_VR,
-    Diff_toTempset=Diff_toTempset,
-    withDynamicVentilation=withDynamicVentilation,
+    final HeatingLimit=HeatingLimit,
+    final Max_VR=Max_VR,
+    final Diff_toTempset=Diff_toTempset,
+    final withDynamicVentilation=withDynamicVentilation,
+    final solar_absorptance_RO=solar_absorptance_RO,
+    final Tset_Bedroom=TDynVentBedroom_set,
+    final Tset_Children1=TDynVentChildren1_set,
+    final Tset_Corridor=TDynVentCorridorUF_set,
+    final Tset_Bath=TDynVentBath_set,
+    final Tset_Children2=TDynVentChildren2_set,
     final UValOutDoors=UValOutDoors,
     final epsOutDoors=epsOutDoors)
     annotation (Placement(transformation(extent={{-24,-12},{22,34}})));
@@ -96,25 +134,25 @@ model WholeHouseBuildingEnvelope
     final n50=n50,
     final e=e,
     final eps=eps,
-    withDynamicVentilation=withDynamicVentilation,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
+    final withDynamicVentilation=withDynamicVentilation,
     final HeatingLimit=HeatingLimit,
     final Max_VR=Max_VR,
     final Diff_toTempset=Diff_toTempset,
-    final Tset=Tset,
+    final Tset=TDynVentAttic_set,
+    final solar_absorptance_RO=solar_absorptance_RO,
     length=10.64,
+    width=4.75,
+    roof_width1=3.36,
+    roof_width2=3.36,
     room1_length=5.875,
     room2_length=3.215,
     room3_length=3.92,
     room4_length=3.215,
     room5_length=4.62,
-    roof_width1=3.36,
-    roof_width2=3.36,
-    solar_absorptance_RO=0.1,
-    width=4.75,
-    final use_sunblind=use_sunblind,
-    final ratioSunblind=ratioSunblind,
-    final solIrrThreshold=solIrrThreshold,
-    final TOutAirLimit=TOutAirLimit,
     room1_width=2.28,
     room2_width=2.28,
     room3_width=2.28,
