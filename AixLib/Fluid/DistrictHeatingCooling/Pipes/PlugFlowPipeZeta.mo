@@ -200,7 +200,6 @@ equation
                                                 color={0,127,255}));
   end if;
     annotation (Dialog(group="Additional pressurelosses"),
-    Line(points={{70,20},{72,20},{72,0},{100,0}}, color={0,127,255}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

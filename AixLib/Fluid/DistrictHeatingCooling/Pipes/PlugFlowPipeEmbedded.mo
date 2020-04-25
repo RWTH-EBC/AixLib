@@ -119,7 +119,7 @@ model PlugFlowPipeEmbedded
 
   Modelica.SIunits.Velocity v_water;
 
-  AixLib.Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(
+  AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta plugFlowPipeZeta(
     redeclare final package Medium = Medium,
     final dh=dh,
     final v_nominal=v_nominal,
@@ -205,7 +205,7 @@ equation
  //calculation of the flow velocity of water in the pipes
  v_water = (4 * port_a.m_flow) / (Modelica.Constants.pi * rho_default * dh * dh);
 
-  connect(plugFlowPipe.heatPort, cylindricHeatTransfer_1.port_a)
+  connect(plugFlowPipeZeta.heatPort, cylindricHeatTransfer_1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0}));
   connect(cylindricHeatTransfer_1.port_b, cylindricHeatTransfer_2.port_a)
     annotation (Line(points={{0,38.8},{0,56}}, color={191,0,0}));
@@ -213,10 +213,10 @@ equation
     annotation (Line(points={{0,64.8},{0,82}}, color={191,0,0}));
   connect(cylindricHeatTransfer_3.port_b, heatPort)
     annotation (Line(points={{0,90.8},{0,104}}, color={191,0,0}));
-  connect(port_a, plugFlowPipe.port_a)
+  connect(port_a, plugFlowPipeZeta.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
-  connect(plugFlowPipe.ports_b, ports_b) annotation (Line(points={{10,0},{56,0},
-          {56,0},{100,0}}, color={0,127,255}));
+  connect(plugFlowPipeZeta.ports_b, ports_b) annotation (Line(points={{10,0},{56,
+          0},{56,0},{100,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,32},{100,-48}},
