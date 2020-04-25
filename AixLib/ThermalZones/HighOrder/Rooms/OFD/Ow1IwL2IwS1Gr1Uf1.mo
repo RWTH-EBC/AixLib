@@ -63,7 +63,7 @@ model Ow1IwL2IwS1Gr1Uf1
     withWindow=withWindow1,
     withDoor=withDoor1,
     wallPar=wallTypes.OW,
-    WindowType=Type_Win,
+    final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
@@ -71,6 +71,7 @@ model Ow1IwL2IwS1Gr1Uf1
     U_door=U_door_OD1,
     eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_vert_half_a,
@@ -86,6 +87,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW2_vert_half_a,
@@ -101,6 +103,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-3,-15},{3,15}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_vert_half_a,
@@ -116,6 +119,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_hori_low_half,
@@ -132,6 +136,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{2,-9},{-2,9}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.groundPlate_upp_half,
@@ -161,6 +166,7 @@ model Ow1IwL2IwS1Gr1Uf1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW2_vert_half_a,

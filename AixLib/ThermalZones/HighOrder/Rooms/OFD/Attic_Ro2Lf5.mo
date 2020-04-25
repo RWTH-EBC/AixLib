@@ -122,12 +122,13 @@ model Attic_Ro2Lf5
     wall_length=length,
     wall_height=roof_width1,
     final wallPar=wallTypes.roofAttic,
-    WindowType=Type_Win,
+    final WindowType=Type_Win,
     ISOrientation=1) annotation (Placement(transformation(
         extent={{-5.00001,-29},{5.00001,29}},
         rotation=270,
         origin={-41,59})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom2(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room2_length,
@@ -143,6 +144,7 @@ model Attic_Ro2Lf5
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom1(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room1_length,
@@ -183,7 +185,7 @@ model Attic_Ro2Lf5
     windowarea=windowarea_RO2,
     wall_length=length,
     final wallPar=wallTypes.roofAttic,
-    WindowType=Type_Win,
+    final WindowType=Type_Win,
     ISOrientation=1) annotation (Placement(transformation(
         origin={47,59},
         extent={{-5,-27},{5,27}},
@@ -197,6 +199,7 @@ model Attic_Ro2Lf5
         rotation=270,
         origin={50,90})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom3(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room3_length,
@@ -212,6 +215,7 @@ model Attic_Ro2Lf5
         extent={{-1.99999,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom4(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room4_length,
@@ -227,6 +231,7 @@ model Attic_Ro2Lf5
         extent={{-1.99998,-13},{1.99999,13}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floorRoom5(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     final wallPar=wallTypes.IW_hori_att_upp_half,
     wall_length=room5_length,
@@ -256,7 +261,7 @@ model Attic_Ro2Lf5
     door_height=0,
     door_width=0,
     windowarea=windowarea_RO1,
-    WindowType=Type_Win,
+    final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
@@ -276,7 +281,7 @@ model Attic_Ro2Lf5
     door_height=0,
     door_width=0,
     windowarea=windowarea_RO1,
-    WindowType=Type_Win,
+    final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,

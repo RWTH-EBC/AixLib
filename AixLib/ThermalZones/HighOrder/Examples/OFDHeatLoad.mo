@@ -45,7 +45,8 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   Modelica.Blocks.Interfaces.RealOutput roomHeatLoads[nHeatedRooms]
     annotation (Placement(transformation(extent={{88,-92},{108,-72}})));
   House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
-    wholeHouseBuildingEnvelope(redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes, use_infiltEN12831=true,
+    wholeHouseBuildingEnvelope(redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009 Type_Win,                       use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
     UValOutDoors=if TIR == 1 then 1.8 else 2.9)
     annotation (Placement(transformation(extent={{-14,-10},{42,46}})));

@@ -70,6 +70,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     solar_absorptance=solar_absorptance_OW,
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     wall_length=room_length,
     wall_height=room_height_short,
@@ -94,7 +95,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withDoor=withDoor2,
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
-    WindowType=Type_Win,
+    final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
@@ -107,6 +108,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-5.00001,-29},{5.00001,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW2_vert_half_a,
@@ -122,6 +124,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-4.99999,-30},{5,30}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_vert_half_a,
@@ -137,6 +140,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_hori_att_low_half,
@@ -153,6 +157,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
     wallPar=wallTypes.IW_hori_upp_half,
@@ -198,7 +203,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO,
     wallPar=wallTypes.roof,
-    WindowType=Type_Win) annotation (Placement(transformation(
+    final WindowType=Type_Win)
+                         annotation (Placement(transformation(
         origin={55,59},
         extent={{-2.99995,-17},{2.99997,17}},
         rotation=270)));
