@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses;
+within AixLib.ThermalZones.HighOrder.Rooms.BaseClasses;
 partial model PartialRoomParams "Partial model with base parameters that are necessary for all HOM rooms and for building propagation"
 
   // Air volume of room

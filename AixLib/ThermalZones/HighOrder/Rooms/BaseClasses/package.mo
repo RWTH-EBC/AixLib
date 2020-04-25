@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Rooms.OFD;
+within AixLib.ThermalZones.HighOrder.Rooms;
 package BaseClasses
 extends Modelica.Icons.BasesPackage;
 end BaseClasses;

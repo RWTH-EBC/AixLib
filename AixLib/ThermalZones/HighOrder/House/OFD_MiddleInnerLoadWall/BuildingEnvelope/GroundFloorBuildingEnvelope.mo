@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
 
-  extends AixLib.ThermalZones.HighOrder.Rooms.OFD.BaseClasses.PartialRoomParams(
+  extends AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams(
     final Tset=372.15,
     withDynamicVentilation=false,                                               redeclare replaceable parameter DataBase.Walls.Collections.OFD.BaseDataMultiInnerWalls wallTypes);
 
