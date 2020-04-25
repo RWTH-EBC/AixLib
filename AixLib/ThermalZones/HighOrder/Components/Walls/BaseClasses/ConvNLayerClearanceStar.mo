@@ -1,6 +1,11 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   parameter Modelica.SIunits.Height h "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l "Length" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
@@ -63,7 +68,8 @@ model ConvNLayerClearanceStar
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
     final A=A,
     each final T_start=fill(T0, n),
-    final wallRec=wallType)
+    final wallRec=wallType,
+    final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
 protected

@@ -53,6 +53,7 @@ model Ow1IwL2IwS1Gr1Uf1
 
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
+    final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW1,
     final T0=TWalls_start,
@@ -71,6 +72,7 @@ model Ow1IwL2IwS1Gr1Uf1
     U_door=U_door_OD1,
     eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -87,6 +89,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -103,6 +106,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-3,-15},{3,15}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -119,6 +123,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -136,6 +141,7 @@ model Ow1IwL2IwS1Gr1Uf1
         extent={{2,-9},{-2,9}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -166,6 +172,7 @@ model Ow1IwL2IwS1Gr1Uf1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2b(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,

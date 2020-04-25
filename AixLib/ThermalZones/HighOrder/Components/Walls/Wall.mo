@@ -1,11 +1,17 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
+
   //Type parameter
   parameter Boolean outside = true
     "Choose if the wall is an outside or an inside wall"                                annotation(Dialog(group = "General Wall Type Parameter", compact = true), choices(choice = true
         "Outside Wall",                                                                                                    choice = false
         "Inside Wall",                                                                                                    radioButtons = true));
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   // general wall parameters
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
     annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
@@ -86,6 +92,7 @@ model Wall
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Initialization"));
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(
+    final energyDynamics=energyDynamics,
     h=wall_height,
     l=wall_length,
     T0=T0,

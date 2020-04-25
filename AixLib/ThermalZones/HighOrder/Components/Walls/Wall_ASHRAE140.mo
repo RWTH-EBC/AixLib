@@ -8,6 +8,10 @@ model Wall_ASHRAE140
     "Choose if the wall is an outside or an inside wall"                                  annotation(Dialog(group="General Wall Type Parameter",compact = true),choices(choice=true
         "Outside Wall",choice=false "Inside Wall",        radioButtons = true));
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   // general wall parameters
 
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
@@ -103,6 +107,7 @@ model Wall_ASHRAE140
 
 public
   BaseClasses.ConvNLayerClearanceStar                           Wall(
+    final energyDynamics=energyDynamics,
     h=wall_height,
     l=wall_length,
     T0=T0,

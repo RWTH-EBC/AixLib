@@ -42,6 +42,11 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     OFD(
     redeclare DataBase.Walls.Collections.OFD.WSchV1995Heavy wallTypes,
+    energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    initDynamicsAir=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T0_air=294.15,
+    TWalls_start=292.15,
+    redeclare DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995 Type_Win,
     use_infiltEN12831=true,
     n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
                withDynamicVentilation=true,

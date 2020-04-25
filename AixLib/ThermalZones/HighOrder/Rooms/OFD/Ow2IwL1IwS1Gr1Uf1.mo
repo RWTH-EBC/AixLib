@@ -88,6 +88,7 @@ model Ow2IwL1IwS1Gr1Uf1
 
 
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
+    final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW1,
     final T0=TWalls_start,
@@ -107,6 +108,7 @@ model Ow2IwL1IwS1Gr1Uf1
     U_door=U_door_OD1,
     eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-22},{-50,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
+    final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW2,
     final T0=TWalls_start,
@@ -129,6 +131,7 @@ model Ow2IwL1IwS1Gr1Uf1
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -146,6 +149,7 @@ model Ow2IwL1IwS1Gr1Uf1
         extent={{-6,-35},{6,35}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -162,6 +166,7 @@ model Ow2IwL1IwS1Gr1Uf1
         extent={{-4,-24},{4,24}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -179,6 +184,7 @@ model Ow2IwL1IwS1Gr1Uf1
         extent={{2.99997,-16},{-3.00002,16}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     wallPar=wallTypes.groundPlate_upp_half,

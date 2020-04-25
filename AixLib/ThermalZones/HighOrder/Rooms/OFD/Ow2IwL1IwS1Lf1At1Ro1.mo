@@ -69,6 +69,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   parameter Real solar_absorptance_RO=0.25 "Solar absoptance roof "
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
+    final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
     final WindowType=Type_Win,
     final T0=TWalls_start,
@@ -86,6 +87,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     wallPar=wallTypes.OW)
                      annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
+    final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
     windowarea=windowarea_OW2,
     final T0=TWalls_start,
@@ -108,6 +110,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-5.00001,-29},{5.00001,29}},
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -124,6 +127,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-4.99999,-30},{5,30}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -140,6 +144,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -157,6 +162,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
         extent={{1.99999,-10},{-1.99998,10}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
+    final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
     final T0=TWalls_start,
     outside=false,
@@ -189,6 +195,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof(
+    final energyDynamics=energyDynamicsWalls,
     final T0=TWalls_start,
     solar_absorptance=solar_absorptance_RO,
     wall_length=room_length,
