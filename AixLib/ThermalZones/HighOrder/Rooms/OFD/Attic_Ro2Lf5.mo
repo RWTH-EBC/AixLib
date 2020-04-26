@@ -162,8 +162,9 @@ model Attic_Ro2Lf5
         origin={-60,-44},
         extent={{-2,-12},{2,12}},
         rotation=90)));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation (Placement(
-        transformation(extent={{-109.5,-10},{-89.5,10}}), iconTransformation(
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+                                                     annotation (Placement(
+        transformation(extent={{-119.5,-10},{-99.5,10}}), iconTransformation(
           extent={{-119.5,10},{-99.5,30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RO1 annotation (Placement(
         transformation(
@@ -328,11 +329,11 @@ equation
           255,128,0}));
   connect(SolarRadiationPort_RO2, roof2.SolarRadiationPort) annotation (Line(
         points={{48,100},{48,80},{71.75,80},{71.75,65.5}}, color={255,128,0}));
-  connect(roof1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-19.7333,64.25},{-19.7333,80},{-80,80},{-80,0},{-99.5,0}},
+  connect(roof1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-19.7333,64.25},{-19.7333,80},{-80,80},{-80,0},{-109.5,0}},
                                                                      color={0,0,
           127}));
-  connect(roof2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{66.8,
-          64.25},{66.8,80},{-80,80},{-80,0},{-99.5,0}}, color={0,0,127}));
+  connect(roof2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{66.8,64.25},{66.8,80},{-80,80},{-80,0},{-109.5,0}},
+                                                        color={0,0,127}));
   connect(floorRoom1.port_outside, thermRoom1) annotation (Line(points={{-60,-46.1},{-60,-90},{-90,-90}},
                                 color={191,0,0}));
   connect(floorRoom2.port_outside, thermRoom2) annotation (Line(points={{-29,-46.1},{-29,-90},{-50,-90}},
@@ -343,13 +344,13 @@ equation
                                                   color={191,0,0}));
   connect(floorRoom5.port_outside, thermRoom5) annotation (Line(points={{69,-46.1},{69,-84},{72,-84},{72,-88},{70,-88},{70,-90}},
                                                                 color={191,0,0}));
-  connect(OW1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-81.2,-6.6},{-86,-6.6},{-86,0},{-99.5,0}},
+  connect(OW1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-81.2,-6.6},{-86,-6.6},{-86,0},{-109.5,0}},
                                          color={0,0,127}));
   connect(OW1.SolarRadiationPort, SolarRadiationPort_OW1) annotation (Line(
         points={{-82.2,-2.75},{-86,-2.75},{-86,-20},{-106,-20}}, color={255,128,
           0}));
-  connect(OW2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{89.2,-0.6},
-          {96,-0.6},{96,-48},{-88,-48},{-88,0},{-99.5,0}}, color={0,0,127}));
+  connect(OW2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{89.2,-0.6},{96,-0.6},{96,-48},{-88,-48},{-88,0},{-109.5,0}},
+                                                           color={0,0,127}));
   connect(OW2.SolarRadiationPort, SolarRadiationPort_OW2) annotation (Line(
         points={{90.2,3.25},{100,3.25},{100,-18},{110,-18}}, color={255,128,0}));
   connect(thermOutside, roof2.port_outside) annotation (Line(points={{-100,100},{-98,100},{-98,98},{-88,98},{-88,74},{47,74},{47,64.25}}, color={191,0,0}));

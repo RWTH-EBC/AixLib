@@ -149,8 +149,8 @@ model Ow1IwL2IwS1Lf1At1Ro1
         iconTransformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall2a
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
-    annotation (Placement(transformation(extent={{-109.5,-60},{-89.5,-40}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+    annotation (Placement(transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(extent={{-109.5,-60},{-89.5,-40}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
@@ -208,7 +208,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
         iconTransformation(extent={{-20,80},{0,100}})));
 
 equation
-  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,38.2667},{-80,38.2667},{-80,-50},{-99.5,-50}},
+  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,38.2667},{-80,38.2667},{-80,-60},{-109.5,-60}},
                                                                  color={0,0,127}));
   connect(outside_wall1.SolarRadiationPort, SolarRadiationPort_OW1) annotation (
      Line(points={{-61.5,43.5833},{-80,43.5833},{-80,30},{-99.5,30}}, color={0,
@@ -227,7 +227,7 @@ equation
     annotation (Line(points={{-14,62.2},{-14,90},{-10,90}}, color={191,0,0}));
   connect(roof.SolarRadiationPort, SolarRadiationPort_Roof) annotation (Line(
         points={{72.6667,62.9},{72.6667,72},{74,72},{74,100}}, color={255,128,0}));
-  connect(roof.WindSpeedPort, WindSpeedPort) annotation (Line(points={{69.7333,62.15},{69.7333,72},{-80,72},{-80,-50},{-99.5,-50}},
+  connect(roof.WindSpeedPort, WindSpeedPort) annotation (Line(points={{69.7333,62.15},{69.7333,72},{-80,72},{-80,-60},{-109.5,-60}},
                                                                color={0,0,127}));
   connect(thermFloor, floor.port_outside) annotation (Line(
       points={{-6,-94},{-8,-94},{-8,-66},{-22,-66},{-22,-62.1},{-24,-62.1}},

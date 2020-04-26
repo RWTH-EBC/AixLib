@@ -339,7 +339,7 @@ model UpperFloorBuildingEnvelope
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-84})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
     annotation (Placement(transformation(extent={{-130,10},{-100,40}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] "1(6): Bedroom_UF, 2(7): Child1_UF, 3(8): Corridor_UF, 4(9): Bath_UF, 5(10): Child2_UF"
     annotation (Placement(transformation(extent={{-130,-26},{-100,4}}), iconTransformation(extent={{-130,-26},{-100,4}})));

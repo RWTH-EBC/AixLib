@@ -323,7 +323,7 @@ model GroundFloorBuildingEnvelope
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-16})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
     annotation (Placement(transformation(extent={{-130,12},{-100,42}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor, 4: WC_Storage_GF, 5: Kitchen_GF"
     annotation (Placement(transformation(extent={{-130,-18},{-100,12}})));

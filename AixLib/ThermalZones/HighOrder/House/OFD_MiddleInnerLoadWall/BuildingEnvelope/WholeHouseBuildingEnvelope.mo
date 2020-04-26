@@ -161,7 +161,8 @@ model WholeHouseBuildingEnvelope
     alfa=1.5707963267949)
     annotation (Placement(transformation(extent={{-22,44},{22,82}})));
 
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+                                                     annotation (Placement(
         transformation(extent={{-128,66},{-100,94}}),iconTransformation(extent={{-120,60},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[11] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic"
                                                                                                                                                                                                         annotation (Placement(transformation(extent={{-128,42},{-100,70}}), iconTransformation(extent={{-120,40},{-100,60}})));

@@ -183,8 +183,8 @@ model Ow2IwL1IwS1Lf1At1Ro1
     annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
-    annotation (Placement(transformation(extent={{-109.5,-50},{-89.5,-30}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+    annotation (Placement(transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(extent={{-109.5,-50},{-89.5,-30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW2 annotation (Placement(
@@ -226,7 +226,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
 
 
 equation
-  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-62.25,30.2667},{-80,30.2667},{-80,-40},{-99.5,-40}},
+  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-62.25,30.2667},{-80,30.2667},{-80,-60},{-109.5,-60}},
                                                                 color={0,0,127}));
   connect(inside_wall2.port_outside, thermInsideWall2) annotation (Line(points={{32,-64.25},{32,-72},{30,-72},{30,-90}},
                                                    color={191,0,0}));
@@ -236,7 +236,7 @@ equation
                                                  color={191,0,0}));
   connect(Ceiling.port_outside, thermCeiling)
     annotation (Line(points={{22,62.1},{22,70},{90,70}}, color={191,0,0}));
-  connect(outside_wall2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.73333,64.25},{-7.73333,64.25},{-7.73333,70},{-80,70},{-80,-40},{-99.5,-40}},
+  connect(outside_wall2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.73333,64.25},{-7.73333,70},{-80,70},{-80,-60},{-109.5,-60}},
                  color={0,0,127}));
   connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
      Line(points={{-99.5,30},{-63.5,30},{-63.5,35.5833}}, color={255,128,0}));
@@ -246,7 +246,7 @@ equation
   connect(roof.SolarRadiationPort, SolarRadiationPort_Roof) annotation (Line(
         points={{70.5833,62.8999},{70.5833,70},{74,70},{74,100}}, color={255,128,
           0}));
-  connect(roof.WindSpeedPort, WindSpeedPort) annotation (Line(points={{67.4667,62.1499},{67.4667,70},{-80,70},{-80,-40},{-99.5,-40}},
+  connect(roof.WindSpeedPort, WindSpeedPort) annotation (Line(points={{67.4667,62.1499},{67.4667,70},{-80,70},{-80,-60},{-109.5,-60}},
                                                         color={0,0,127}));
   connect(thermFloor, floor.port_outside) annotation (Line(
       points={{-6,-94},{-8,-94},{-8,-66},{-22,-66},{-22,-62.1},{-27,-62.1}},

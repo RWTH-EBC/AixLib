@@ -205,8 +205,8 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
-    annotation (Placement(transformation(extent={{-109.5,-50},{-89.5,-30}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+    annotation (Placement(transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(extent={{-109.5,-50},{-89.5,-30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW2 annotation (Placement(
@@ -220,13 +220,13 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
 
 equation
-  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,33.4667},{-80,33.4667},{-80,-40},{-99.5,-40}},
+  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,33.4667},{-80,33.4667},{-80,-60},{-109.5,-60}},
                                                                 color={0,0,127}));
   connect(thermInsideWall2, thermInsideWall2)
     annotation (Line(points={{30,-90},{30,-90}}, color={191,0,0}));
   connect(inside_wall1.port_outside, thermInsideWall1)
     annotation (Line(points={{64.3,5},{90,5},{90,10}}, color={191,0,0}));
-  connect(outside_wall2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{40.2667,62.2502},{40.2667,68},{40.2667,70},{-80,70},{-80,-40},{-99.5,-40}},
+  connect(outside_wall2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{40.2667,62.2502},{40.2667,70},{-80,70},{-80,-60},{-109.5,-60}},
         color={0,0,127}));
   connect(outside_wall2.SolarRadiationPort, SolarRadiationPort_OW2) annotation (
      Line(points={{45.5833,63.5002},{45.5833,80.7501},{50.5,80.7501},{50.5,99}},
