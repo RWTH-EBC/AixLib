@@ -69,7 +69,7 @@ public
     solarDistribution = solarDistributionSouth,
     wall_length=Room_Width,
     solar_absorptance=solar_absorptance_OW,
-    calcMethod=2,
+    calcMethodOut=2,
     outside=true,
     withWindow=true,
     final withSunblind=use_sunblind,
@@ -95,7 +95,7 @@ public
     WallType=TypOW,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethod=2) annotation (Placement(transformation(
+    calcMethodOut=2) annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
         origin={26,78})));
@@ -112,7 +112,7 @@ public
     WallType=TypOW,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethod=2)
+    calcMethodOut=2)
     annotation (Placement(transformation(
         extent={{-4.00001,-24},{4.00001,24}},
         rotation=90,
@@ -134,7 +134,7 @@ public
     final TOutAirLimit=TOutAirLimit,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethod=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
+    calcMethodOut=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
@@ -149,7 +149,7 @@ public
     final TOutAirLimit=TOutAirLimit,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethod=2) annotation (Placement(transformation(
+    calcMethodOut=2) annotation (Placement(transformation(
         extent={{-2,-12},{2,12}},
         rotation=270,
         origin={-32,78})));
@@ -166,7 +166,7 @@ public
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    calcMethod=2)
+    calcMethodOut=2)
     annotation (Placement(transformation(
         extent={{-2.00031,-12},{2.00003,12}},
         rotation=90,
