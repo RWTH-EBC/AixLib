@@ -56,7 +56,7 @@ model Wall_ASHRAE140
    parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                     annotation(Dialog( tab="Window", enable = outside));
    replaceable model Window =
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
    constrainedby
     AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
@@ -144,12 +144,6 @@ public
     U=U_door*2,
     eps=eps_door) if withDoor
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
-  AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
-                                                windowSimple(
-    T0=T0,
-    windowarea=windowarea,
-    WindowType=WindowType) if          withWindow and outside
-    annotation (Placement(transformation(extent={{-15,-48},{11,-22}})));
   Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
     calcMethod=calcMethod,
@@ -199,6 +193,11 @@ public
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
+  Window window(
+    T0=T0,
+    windowarea=windowarea,
+    WindowType=WindowType) if          withWindow and outside
+    annotation (Placement(transformation(extent={{-7,-39},{13,-19}})));
 equation
 
 //******************************************************************
@@ -269,20 +268,6 @@ end if;
 //******************************************************************
 
 if outside and withWindow then
-    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
-    connect(windowSimple.radPort, heatStarToComb.portRad) annotation (Line(
-        points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
-        color={95,95,95},
-        pattern=LinePattern.Solid));
-    connect(windowSimple.port_outside, port_outside) annotation (Line(
-        points={{-13.7,-36.3},{-56,-36.3},{-56,4},{-98,4}},
-        color={191,0,0}));
-    connect(windowSimple.solarRadWinTrans, solarRadWinTrans) annotation (Line(
-      points={{9.96,-24.6},{48,-24.6},{48,-60},{110,-60}},
-      color={0,0,127}));
-    connect(windowSimple.WindSpeedPort, WindSpeedPort) annotation (Line(
-      points={{-13.7,-41.5},{-56,-41.5},{-56,64},{-103,64}},
-      color={0,0,127}));
 
 end if;
 
@@ -291,9 +276,6 @@ end if;
 //******************************************************************
 
 if outside and withWindow and not (withSunblind) then
-   connect(SolarRadiationPort, windowSimple.solarRad_in) annotation (Line(
-      points={{-106,89},{-56,89},{-56,-27.2},{-13.7,-27.2}},
-      color={255,128,0}));
 
 end if;
 
@@ -302,9 +284,6 @@ end if;
 //******************************************************************
 
 if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation (Line(
-      points={{-22.15,-7.7},{-19,-7.7},{-19,-27.2},{-13.7,-27.2}},
-      color={255,128,0}));
     connect(SolarRadiationPort, Sunblind.Rad_In[1]) annotation (Line(
       points={{-106,89},{-56,89},{-56,-7.7},{-42.85,-7.7}},
       color={255,128,0}));
@@ -327,6 +306,20 @@ end if;
           -14},{-54,-14},{-54,-14.2},{-45.84,-14.2}}, color={0,0,127}));
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{29,80},{7,
           80},{7,57},{-9.22,57},{-9.22,33.8}}, color={191,0,0}));
+  connect(WindSpeedPort, window.WindSpeedPort) annotation (Line(points={{-103,
+          64},{-68,64},{-68,51},{-56,51},{-56,-34},{-6,-34}}, color={0,0,127}));
+  connect(port_outside, window.port_outside) annotation (Line(points={{-98,4},{
+          -56,4},{-56,-30},{-6,-30}}, color={191,0,0}));
+  connect(Sunblind.Rad_Out[1], window.solarRad_in) annotation (Line(points={{
+          -22.15,-7.7},{-20,-7.7},{-20,-23},{-6,-23}}, color={255,128,0}));
+  connect(SolarRadiationPort, window.solarRad_in) annotation (Line(points={{
+          -106,89},{-56,89},{-56,-23},{-6,-23}}, color={255,128,0}));
+  connect(window.radPort, heatStarToComb.portRad) annotation (Line(points={{12,
+          -23},{48,-23},{48,4.8},{58.6,4.8}}, color={95,95,95}));
+  connect(window.port_inside, heatStarToComb.portConv) annotation (Line(points=
+          {{12,-30},{48,-30},{48,-6},{58.9,-6},{58.9,-6.1}}, color={191,0,0}));
+  connect(window.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{
+          12.2,-21},{48,-21},{48,-60},{110,-60}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
