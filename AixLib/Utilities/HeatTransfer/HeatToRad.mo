@@ -1,18 +1,32 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16) "Initial temperature";
   parameter Boolean use_A_in = false
     "Get the area from the input connector"
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Modelica.SIunits.Area A=-1 "Fixed value of prescribed area"
                                    annotation (Dialog(enable=not use_A_in));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a conv "Heat port for convective or conductive heat flow" annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
+                                   parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
+    Evaluate=true,
+    Dialog(group = "Radiation exchange equation", compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx wall temp",
+      choice=3 "Linear approx rad temp",
+      choice=4 "Linear approx T0",
+      radioButtons=true));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
+    "Heat port for convective or conductive heat flow"
+    annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
         origin={0,90},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  AixLib.Utilities.Interfaces.RadPort rad "Heat port for longwave radiative heat flow" annotation (Placement(transformation(extent={{81,-10},{101,10}})));
+  AixLib.Utilities.Interfaces.RadPort radPort
+    "Heat port for longwave radiative heat flow"
+    annotation (Placement(transformation(extent={{81,-10},{101,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";
@@ -21,10 +35,18 @@ initial equation
     assert(A > 0, "The area for heattransfer must be positive");
   end if;
 equation
-  conv.Q_flow + rad.Q_flow = 0;
+ port_a.Q_flow + radPort.Q_flow = 0;
   // To prevent negative solutions for T, the max() expression is used.
   // Negative solutions also occur when using max(T,0), therefore, 1 K is used.
-  conv.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(conv.T, 1)*max(conv.T, 1)*max(conv.T, 1)*max(conv.T, 1) - max(rad.T, 1)*max(rad.T, 1)*max(rad.T, 1)*max(rad.T, 1));
+  if radCalcMethod == 1 then
+    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(port_a.T, 1)*max(port_a.T, 1)*max(port_a.T, 1)*max(port_a.T, 1) - max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1));
+  elseif radCalcMethod == 2 then
+    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*port_a.T*port_a.T*port_a.T*(port_a.T - radPort.T);
+  elseif radCalcMethod == 3 then
+    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*radPort.T*radPort.T*radPort.T*(port_a.T - radPort.T);
+  else
+    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*T0*T0*T0*(port_a.T - radPort.T);
+  end if;
   if not use_A_in then
     A_in_internal =A;
   end if;

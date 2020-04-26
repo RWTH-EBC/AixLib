@@ -130,11 +130,11 @@ dT_R=TOut - TAir;
       points={{-11,27.52},{-11,32},{-17,32},{-17,41.1}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(radiator_wall.port_b, twoStar_RadEx.conv) annotation (Line(
+  connect(radiator_wall.port_b, twoStar_RadEx.port_a) annotation (Line(
       points={{-11,27.52},{-11,32},{41,32},{41,40.88}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(twoStar_RadEx.rad, radiative) annotation (Line(
+  connect(twoStar_RadEx.radPort, radiative) annotation (Line(
       points={{41,61.01},{41,68.505},{31,68.505},{31,81}},
       color={95,95,95},
       pattern=LinePattern.None,

@@ -61,7 +61,7 @@ model ConvNLayerClearanceStar
         rotation=180)));
   AixLib.Utilities.Interfaces.RadPort radPort
     annotation (Placement(transformation(extent={{90,52},{110,72}})));
-  AixLib.Utilities.HeatTransfer.HeatToLongRad twoStar_RadEx(
+  AixLib.Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
     A=A,
     eps=eps,
     radCalcMethod=radCalcMethod,
