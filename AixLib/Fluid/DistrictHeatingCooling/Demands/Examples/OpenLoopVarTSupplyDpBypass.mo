@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
 model OpenLoopVarTSupplyDpBypass
   "A small open loop example with a Substation with variable dT for fixed return temperature"
   extends Modelica.Icons.Example;
@@ -7,13 +7,13 @@ model OpenLoopVarTSupplyDpBypass
     "Ambient temperature around pipes";
 
   package Medium = AixLib.Media.Specialized.Water.ConstantProperties_pT (
-    T_nominal=273.15+15,
+    T_nominal=273.15+60,
     p_nominal=600000.0,
-    T_default=273.15+15);
+    T_default=273.15+60);
 
   Supplies.OpenLoop.SourceIdeal sourceIdeal(
     redeclare package Medium = Medium,
-    TReturn=273.15 + 10,
+    TReturn=273.15 + 60,
     pReturn=200000)      "Simple suppy model"
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
   AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDpBypass
@@ -21,7 +21,7 @@ model OpenLoopVarTSupplyDpBypass
     redeclare package Medium = Medium,
     dp_nominal=50000,
     Q_flow_nominal=78239.1,
-    dTDesign=10,
+    dTDesign=15,
     TReturn=283.15,
     m_flo_bypass=0.00)      "Simple demand model" annotation (Placement(
         transformation(
@@ -50,7 +50,7 @@ model OpenLoopVarTSupplyDpBypass
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-60,0})));
-  Modelica.Blocks.Sources.Constant TSet(k=20 + 273.15)
+  Modelica.Blocks.Sources.Constant TSet(k=75 + 273.15)
                                                       "Set supply temperature"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -110,9 +110,12 @@ equation
           -68},{-20,-40},{0,-40},{0,30},{-18,30}}, color={0,0,127}));
   connect(pControl.y, sourceIdeal.dpIn)
     annotation (Line(points={{-30,41},{-30,53},{-10.6,53}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=10000, __Dymola_Algorithm="Cvode"),
+  annotation (
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDpBypass.mos"
+                      "Simulate and plot"),
+    Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+    coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=10000, Tolerance=1e-006, __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html>
 <ul>
 <li>
