@@ -2,8 +2,7 @@ within AixLib.Fluid.HeatExchangers.Examples;
 model DryCoilEffectivenessNTUMassFlow
   "Model of epsilon-NTU dry coil that tests variable mass flow rates"
   extends Modelica.Icons.Example;
-  extends
-    AixLib.Fluid.HeatExchangers.Examples.BaseClasses.EffectivenessNTUMassFlow(
+  extends AixLib.Fluid.HeatExchangers.Examples.BaseClasses.EffectivenessNTUMassFlow(
     sou_1(nPorts=1),
     sin_1(nPorts=1),
     sou_2(nPorts=1),
