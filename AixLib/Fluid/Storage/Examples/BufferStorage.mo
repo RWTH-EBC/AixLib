@@ -20,7 +20,8 @@ model BufferStorage
     upToDownHC1=false,
     upToDownHC2=false,
     useHeatingRod=false,
-    redeclare model HeatTransfer = AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
+    redeclare model HeatTransfer =
+        AixLib.Fluid.Storage.BaseClasses.HeatTransferBuoyancyWetter,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
     TStart=303.15) annotation (Placement(transformation(extent={{0,0},{-20,24}})));

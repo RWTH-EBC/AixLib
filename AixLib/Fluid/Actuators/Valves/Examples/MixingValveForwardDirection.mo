@@ -41,7 +41,8 @@ model MixingValveForwardDirection
   Modelica.Blocks.Sources.Step step(startTime=100, height=0.7)
     annotation (Placement(transformation(extent={{38,-54},{18,-34}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureSensorMixed(redeclare package Medium =
+                                        temperatureSensorMixed(redeclare
+      package                                                                    Medium =
                        Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-2,-10},{18,10}})));
   AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorMixed(redeclare package Medium =

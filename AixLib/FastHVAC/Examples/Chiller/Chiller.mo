@@ -12,8 +12,8 @@ model Chiller
         AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (
           dataTable=AixLib.DataBase.ThermalMachines.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D (
-          smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        ( smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
            AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,

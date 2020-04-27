@@ -47,8 +47,8 @@ model HeatPump "Example for the reversible heat pump model."
     use_refIne=false,
     use_rev=true,
     redeclare model PerDataMainHP =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D (
-         dataTable=
+        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
+        (dataTable=
             AixLib.DataBase.ThermalMachines.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevHP =
         AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.LookUpTable2D (

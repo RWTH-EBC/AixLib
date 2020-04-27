@@ -40,7 +40,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
     prescribedTemperature, 1)]
     annotation (Placement(transformation(extent={{88,-92},{108,-72}})));
   House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
-    wholeHouseBuildingEnvelope
+    wholeHouseBuildingEnvelope(withFloorHeating=false)
     annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow    prescribedHeatFlowRad[9]
     annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
@@ -114,7 +114,8 @@ equation
   connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
     annotation (Line(points={{51,70.8333},{48,70.8333},{48,34.24},{39.2,34.24}},
         color={255,128,0}));
-  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-14.6,-16.1},{-6,-16.1},{-6,-8},{-11.2,-8},{-11.2,7.92}}, color={191,0,0}));
+  connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-14.2,
+          -14.7},{-6,-14.7},{-6,-8},{-11.2,-8},{-11.2,7.92}},                                                                                                            color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
      Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
   connect(prescribedHeatFlowRad.port, heatStarToComb.portRad) annotation (Line(points={{-48,-18},{-44,-18},{-44,-10.2},{-34.4,-10.2}}, color={191,0,0}));

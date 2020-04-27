@@ -59,9 +59,9 @@ parameter HeatCapacityPerArea cDown;
         origin={-30,74})));
   Utilities.HeatTransfer.HeatConvInside HeatConv(
     final A=A,
-    final calcMethod=calcMethod,
     final hCon_const=hCon_const,
-    surfaceOrientation=if isFloor then 2 else 1)
+    final calcMethod=2,
+    surfaceOrientation=1)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

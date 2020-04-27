@@ -21,12 +21,14 @@ protected
 public
   replaceable function data_poly =
   AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.ConstantQualityGrade
-    constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
+    constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+  AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby
+    AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));

@@ -250,7 +250,8 @@ equation
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO2, SolarRadiationPort_RoofN)
     annotation (Line(points={{8.5,84},{10,84},{10,90},{90,90}}, color={255,128,
           0}));
-  connect(heatStarToCombHeaters.portConvRadComb, heatingToRooms) annotation (Line(points={{-67.4,-18.1},{-90,-18.1},{-90,-36}}, color={191,0,0}));
+  connect(heatStarToCombHeaters.portConvRadComb, heatingToRooms) annotation (Line(points={{-67.8,
+          -16.7},{-90,-16.7},{-90,-36}},                                                                                        color={191,0,0}));
   connect(heatStarToCombHeaters[1].portConv, groundFloor_Building.ThermLivingroom) annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-52.14},{-7.04,-52.14}}, color={191,0,0}));
   connect(heatStarToCombHeaters[1].portRad, groundFloor_Building.StarLivingroom) annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,-57.6},{-6.8,-57.6}}, color={95,95,95}));
   connect(heatStarToCombHeaters[2].portConv, groundFloor_Building.ThermHobby) annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-52},{2,-52},{2,-52},{2,-52.4},{2.8,-52.4}}, color={191,0,0}));

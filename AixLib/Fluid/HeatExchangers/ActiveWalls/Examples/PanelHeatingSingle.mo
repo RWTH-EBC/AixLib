@@ -9,6 +9,7 @@ model PanelHeatingSingle
     dis=2,
     A=2,
     isFloor=true,
+    calcMethod=1,
     T0=292.15) annotation (Placement(transformation(extent={{-34,8},{30,28}})));
   Modelica.Fluid.Sources.MassFlowSource_T Source(
     nPorts=1,
