@@ -1,6 +1,10 @@
 within AixLib.DataBase.Walls.Collections;
 partial record BaseDataMultiWalls "Base class of record containing multiple wall type records"
   extends Modelica.Icons.Record;
+
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition roof
+    "Type of Roof"
+    annotation (Dialog(group="Wall data"), choicesAllMatching=true);
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition OW
     "Wall type for outside wall"
     annotation (Dialog(group="Wall data"), choicesAllMatching=true);
@@ -28,8 +32,7 @@ partial record BaseDataMultiWalls "Base class of record containing multiple wall
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition groundPlate_low_half
     "Type of groundplate (lower half)"
     annotation (Dialog(group="Wall data"), choicesAllMatching=true);
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition roof "Type of Roof"
-    annotation (Dialog(group="Wall data"), choicesAllMatching=true);
+
   annotation (
   preferredView="info",
   Dialog(tab="Wall types"),
