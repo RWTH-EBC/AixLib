@@ -11,10 +11,10 @@ model SouthFacingWindows "windows facing south"
     parameter Boolean use_sunblind = false
       "Will sunblind become active automatically?"
       annotation(Dialog(group = "Sunblind"));
-    parameter Real ratioSunblind(min=0.0, max=1.0)
+    parameter Real ratioSunblind(min=0.0, max=1.0)=0.8
       "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind"
       annotation(Dialog(group = "Sunblind", enable=use_sunblind));
-    parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)
+    parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0)=350
       "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
       annotation(Dialog(group = "Sunblind", enable=use_sunblind));
     parameter Modelica.SIunits.Temperature TOutAirLimit
@@ -33,13 +33,6 @@ model SouthFacingWindows "windows facing south"
                                                               annotation(Dialog(tab="Initial temperatures", descriptionLabel = true));
 
     parameter Real solar_absorptance_OW = 0.6 "Solar absoptance outer walls " annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
-
-    parameter Real solarDistributionFloor(min=0.0, max=1.0) = 0.642 "Solar distribution fraction of the transmitted radiation through the window on the Floor";
-    parameter Real solarDistributionCeiling(min=0.0, max=1.0) = 0.168 "Solar distribution fraction of the transmitted radiation through the window on the Ceiling";
-    parameter Real solarDistributionNorth(min=0.0, max=1.0) = 0.053 "Solar distribution fraction of the transmitted radiation through the window on the OWNorth";
-    parameter Real solarDistributionEast(min=0.0, max=1.0)= 0.038 "Solar distribution fraction of the transmitted radiation through the window on the OWEast";
-    parameter Real solarDistributionWest(min=0.0, max=1.0) = 0.038 "Solar distribution fraction of the transmitted radiation through the window on the OWWest";
-    parameter Real solarDistributionSouth(min=0.0, max=1.0) = 0.026 "Solar distribution fraction of the transmitted radiation through the window on the OWSouth";
 
     parameter Real eps_out=0.9 "emissivity of the outer surface"
                                          annotation (Dialog(group = "Outer wall properties", descriptionLabel = true));
@@ -66,7 +59,7 @@ public
     withDoor=false,
     WallType=TypOW,
     T0=T0_OW,
-    solarDistribution = solarDistributionSouth,
+    solarDistribution = partialCoeffTable.coeffOWSouth,
     wall_length=Room_Width,
     solar_absorptance=solar_absorptance_OW,
     calcMethodOut=2,
@@ -84,7 +77,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_West(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
-    solarDistribution= solarDistributionWest,
+    solarDistribution=partialCoeffTable.coeffOWWest,
     withDoor=false,
     T0=T0_IW,
     outside=true,
@@ -102,7 +95,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_East(
     wall_length=Room_Lenght,
     wall_height=Room_Height,
-    solarDistribution = solarDistributionEast,
+    solarDistribution = partialCoeffTable.coeffOWEast,
     T0=T0_IW,
     outside=true,
     final withSunblind=use_sunblind,
@@ -119,7 +112,7 @@ public
         origin={26,-64})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall_North(
     wall_height=Room_Height,
-    solarDistribution= solarDistributionNorth,
+    solarDistribution= partialCoeffTable.coeffOWNorth,
     U_door=5.25,
     door_height=1,
     door_width=2,
@@ -138,7 +131,7 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 ceiling(
     wall_length=Room_Lenght,
     wall_height=Room_Width,
-    solarDistribution = solarDistributionCeiling,
+    solarDistribution = partialCoeffTable.coeffCeiling,
     withDoor=false,
     T0=T0_CE,
     WallType=TypCE,
@@ -157,7 +150,7 @@ public
     wall_length=Room_Lenght,
     wall_height=Room_Width,
     withDoor=false,
-    solarDistribution = solarDistributionFloor,
+    solarDistribution = partialCoeffTable.coeffFloor,
     T0=T0_FL,
     WallType=TypFL,
     solar_absorptance=solar_absorptance_OW,
@@ -204,6 +197,15 @@ public
     Modelica.Blocks.Interfaces.RealInput AER "Air exchange rate "
       annotation (Placement(transformation(extent={{-122,-62},{-100,-40}}),
           iconTransformation(extent={{-120,-60},{-100,-40}})));
+
+  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
+    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
+
+  replaceable parameter Components.Types.CoeffTableSouthWindow partialCoeffTable constrainedby
+    Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+    annotation (Placement(transformation(extent={{-72,64},{-52,84}})),
+     choicesAllMatching=true);
+
 equation
   connect(thermStar_Demux.portRad, starRoom) annotation (Line(
       points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
