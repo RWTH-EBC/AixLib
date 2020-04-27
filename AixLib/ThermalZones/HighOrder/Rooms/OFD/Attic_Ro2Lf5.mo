@@ -122,7 +122,7 @@ model Attic_Ro2Lf5
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
-    final wallPar=wallTypes.roofAttic,
+    final wallPar=wallTypes.roof,
     final WindowType=Type_Win,
     ISOrientation=1) annotation (Placement(transformation(
         extent={{-5.00001,-29},{5.00001,29}},
@@ -189,7 +189,7 @@ model Attic_Ro2Lf5
     final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO2,
     wall_length=length,
-    final wallPar=wallTypes.roofAttic,
+    final wallPar=wallTypes.roof,
     final WindowType=Type_Win,
     ISOrientation=1) annotation (Placement(transformation(
         origin={47,59},

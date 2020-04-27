@@ -216,7 +216,7 @@ model Ow2IwL2IwS1Lf1At1Ro1
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO,
-    wallPar=wallTypes.roof,
+    wallPar=wallTypes.roofRoomUpFloor,
     final WindowType=Type_Win)
                          annotation (Placement(transformation(
         origin={59,59},

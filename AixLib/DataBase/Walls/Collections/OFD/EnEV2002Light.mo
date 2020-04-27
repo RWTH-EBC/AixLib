@@ -9,8 +9,8 @@ record EnEV2002Light "Light building mass, insulation according to regulation En
     IW_hori_att_low_half=AixLib.DataBase.Walls.EnEV2002.Ceiling.CEattic_EnEV2002_SML_loHalf(),
     groundPlate_upp_half=AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML_upHalf(),
     groundPlate_low_half=AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML_loHalf(),
-    roof=AixLib.DataBase.Walls.EnEV2002.Ceiling.ROsaddleRoom_EnEV2002_SML(),
+    roof=AixLib.DataBase.Walls.EnEV2002.Ceiling.ROsaddleAttic_EnEV2002_SML(),
     IW2_vert_half_a=AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_L_half(),
     IW2_vert_half_b=AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_L_half(),
-    roofAttic=AixLib.DataBase.Walls.EnEV2002.Ceiling.ROsaddleAttic_EnEV2002_SML());
+    roofRoomUpFloor=AixLib.DataBase.Walls.EnEV2002.Ceiling.ROsaddleRoom_EnEV2002_SML());
 end EnEV2002Light;

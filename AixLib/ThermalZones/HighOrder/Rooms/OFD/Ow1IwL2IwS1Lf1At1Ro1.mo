@@ -169,7 +169,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=roof_width,
     withWindow=withWindow3,
     windowarea=windowarea_RO,
-    wallPar=wallTypes.roof,
+    wallPar=wallTypes.roofRoomUpFloor,
     final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,

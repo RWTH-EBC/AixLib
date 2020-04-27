@@ -9,8 +9,8 @@ record WSchV1995Light "Light building mass, insulation according to regulation W
     IW_hori_att_low_half=AixLib.DataBase.Walls.WSchV1995.Ceiling.CEattic_WSchV1995_SML_loHalf(),
     groundPlate_upp_half=AixLib.DataBase.Walls.WSchV1995.Floor.FLground_WSchV1995_SML_upHalf(),
     groundPlate_low_half=AixLib.DataBase.Walls.WSchV1995.Floor.FLground_WSchV1995_SML_loHalf(),
-    roof=AixLib.DataBase.Walls.WSchV1995.Ceiling.ROsaddleRoom_WSchV1995_SML(),
+    roof=AixLib.DataBase.Walls.WSchV1995.Ceiling.ROsaddleAttic_WSchV1995_SML(),
     IW2_vert_half_a=AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_L_half(),
     IW2_vert_half_b=AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_L_half(),
-    roofAttic=AixLib.DataBase.Walls.WSchV1995.Ceiling.ROsaddleAttic_WSchV1995_SML());
+    roofRoomUpFloor=AixLib.DataBase.Walls.WSchV1995.Ceiling.ROsaddleRoom_WSchV1995_SML());
 end WSchV1995Light;
