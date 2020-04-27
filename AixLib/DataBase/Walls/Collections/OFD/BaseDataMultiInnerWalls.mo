@@ -1,6 +1,6 @@
 within AixLib.DataBase.Walls.Collections.OFD;
 record BaseDataMultiInnerWalls
-  "Additional inner walls"
+  "Wall record with additional inner walls"
   extends BaseDataMultiWalls;
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition IW2_vert_half_a
     "Wall type for inside wall type 2 (first half)"
