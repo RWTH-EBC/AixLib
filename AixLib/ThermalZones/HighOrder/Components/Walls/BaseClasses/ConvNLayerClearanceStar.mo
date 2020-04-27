@@ -1,23 +1,27 @@
 within AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
+
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   parameter Modelica.SIunits.Height h "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l "Length" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area clearance = 0 "Area of clearance" annotation(Dialog(group = "Geometry"));
-  parameter Boolean selectable = false
-    "Determines if wall type is set manually (false) or by definitions (true)"                                    annotation(Dialog(group = "Structure of wall layers"));
-  parameter DataBase.Walls.WallBaseDataDefinition wallType = DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
-    "Type of wall"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = selectable), choicesAllMatching = true);
-  parameter Integer n(min = 1) = if selectable then wallType.n else 8
-    "Number of layers"                                                                   annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.Thickness d[n] = if selectable then wallType.d else fill(0.1, n)
-    "Thickness"                                                                                           annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.Density rho[n] = if selectable then wallType.rho else fill(1600, n)
-    "Density"                                                                                              annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n] = if selectable then wallType.lambda else fill(2.4, n)
-    "Thermal conductivity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n] = if selectable then wallType.c else fill(1000, n)
-    "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers", enable = not selectable));
+    replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    wallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
+    "Type of wall"                                                                                                     annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{48,-98},{68,-78}})));
+  final parameter Integer n(min = 1) = wallType.n
+    "Number of layers"                                                                   annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.Thickness d[n] = wallType.d
+    "Thickness"                                                                                           annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.Density rho[n] = wallType.rho
+    "Density"                                                                                              annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.ThermalConductivity lambda[n] = wallType.lambda
+    "Thermal conductivity"                                                                                                     annotation(Dialog(group = "Structure of wall layers"));
+  final parameter Modelica.SIunits.SpecificHeatCapacity c[n] = wallType.c
+    "Specific heat capacity"                                                                                                     annotation(Dialog(group = "Structure of wall layers"));
   // which orientation of surface?
   parameter Integer surfaceOrientation "Surface orientation" annotation(Dialog(descriptionLabel = true, enable = if IsHConvConstant == true then false else true), choices(choice = 1
         "vertical",                                                                                                    choice = 2
@@ -31,7 +35,7 @@ model ConvNLayerClearanceStar
       radioButtons=true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer hCon_const=2 "Constant convective heat transfer coefficient"     annotation(Dialog(group="Convection",   enable=
           calcMethod == 1));
-  parameter Modelica.SIunits.Emissivity eps = if selectable then wallType.eps else 0.95
+  parameter Modelica.SIunits.Emissivity eps = wallType.eps
     "Longwave emission coefficient"                                                                                     annotation(Dialog(group = "Radiation"));
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
@@ -63,18 +67,13 @@ model ConvNLayerClearanceStar
             {110,10}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
     final A=A,
-    final d=d,
-    final rho=rho,
-    final lambda=lambda,
-    final c=c,
     each final T_start=fill(T0, n),
-    n=n) annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
+    final wallRec=wallType,
+    final energyDynamics=energyDynamics)
+    annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
 
 protected
   parameter Modelica.SIunits.Area A = h * l - clearance;
-
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
-    "This really helps to solve initialisation problems in huge equation systems ..."                   annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
 
 equation
   connect(port_a, simpleNLayer.port_a) annotation (Line(points={{-100,0},{-14,0}},
@@ -83,13 +82,11 @@ equation
           52,0}},                               color={191,0,0}));
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(HeatConv1.port_a, port_b) annotation(Line(points={{72,0},{100,0}},                             color = {200, 100, 0}));
-  connect(HeatConv1.port_b, twoStar_RadEx.conv) annotation (Line(points={{52,0},{50,0},{50,38},{54.8,38}}, color={200,100,0}));
+  connect(HeatConv1.port_b, twoStar_RadEx.conv) annotation (Line(points={{52,0},{50,0},{50,38},{54,38}},   color={200,100,0}));
   connect(twoStar_RadEx.rad, Star) annotation (Line(
-      points={{73.1,38},{100,38},{100,62}},
+      points={{74.1,38},{100,38},{100,62}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points={{52,0},{51.5,0},
-          {51.5,-38.5}},                                                                                color = {200, 100, 0}));
   // computing approximated longwave radiation exchange
 
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
@@ -114,6 +111,7 @@ equation
  <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a>  therefore also part of the corresponding examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
  </html>", revisions="<html>
  <ul>
+  <li><i>April 23, 2020 </i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/752\">#752</a>: Mainly add wallType, propagate energyDynamics, change icon.</li>
 <li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

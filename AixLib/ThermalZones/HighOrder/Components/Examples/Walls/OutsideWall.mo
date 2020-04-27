@@ -8,7 +8,7 @@ model OutsideWall
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     withSunblind=true,
     outside=true,
-    WallType=AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S(),
+    wallPar=AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S(),
     calcMethodOut=2,
     Blinding=0.2,
     LimitSolIrr=100,

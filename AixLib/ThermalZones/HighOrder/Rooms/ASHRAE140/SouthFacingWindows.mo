@@ -161,6 +161,7 @@ public
         origin={-32,-64})));
     Components.DryAir.Airload
                          airload(
+    final T0=T0_Air,
       V=Room_V,
       c=1005) annotation (Placement(transformation(extent={{10,-18},{28,0}})));
   Utilities.Interfaces.Adaptors.ConvRadToCombPort thermStar_Demux annotation (Placement(transformation(
@@ -293,12 +294,12 @@ equation
     connect(varAirExchange.port_a, Therm_outside) annotation (Line(
         points={{-82,-56},{-86,-56},{-86,97},{-105,97}},
         color={191,0,0}));
-  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}}, color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-37.1,-21.9},{-37.1,-18},{19,-18}},       color={191,0,0}));
     connect(airload.port, temperatureSensor.port) annotation (Line(
-        points={{10.9,-10.8},{4,-10.8},{4,-29},{32,-29}},
+        points={{19,-18},{4,-18},{4,-29},{32,-29}},
         color={191,0,0}));
     connect(varAirExchange.port_b, airload.port) annotation (Line(
-        points={{-62,-56},{4,-56},{4,-10.8},{10.9,-10.8}},
+        points={{-62,-56},{4,-56},{4,-18},{19,-18}},
         color={191,0,0}));
     annotation ( Icon(coordinateSystem(extent={{-100,-100},
               {100,100}}, preserveAspectRatio=false),

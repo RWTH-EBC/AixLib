@@ -1,0 +1,12 @@
+removePlots();
+simulateModel("AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad", startTime=0, stopTime=25920000, outputInterval=3600, tolerance=1e-6, method="dassl", resultFile="OFDHeatLoad");
+createPlot(
+ y = {"totalHeatLoad"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
+createPlot(subPlot=2, 
+ y = {"roomHeatLoads[1]", "roomHeatLoads[2]", "roomHeatLoads[3]", "roomHeatLoads[4]", "roomHeatLoads[5]", "roomHeatLoads[6]", "roomHeatLoads[7]", "roomHeatLoads[8]", "roomHeatLoads[9]"},
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true);
