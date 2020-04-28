@@ -110,6 +110,7 @@ public
         m_flo_bypass)
     annotation (Placement(transformation(extent={{28,66},{48,86}})));
   MixingVolumes.MixingVolume vol(
+    energyDynamics=energyDynamics,
     nPorts=2,
     redeclare package Medium = Medium,
     m_flow_nominal=1,

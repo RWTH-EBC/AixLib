@@ -22,6 +22,7 @@ model OpenLoopVarTSupplyDpFixedTempDifferenceBypass
     dp_nominal=50000,
     Q_flow_nominal=78239.1,
     dTDesign=15,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     m_flo_bypass=0.003)     "Simple demand model" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
