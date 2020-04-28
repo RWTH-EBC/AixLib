@@ -16,17 +16,17 @@ model HeatToRad "Adaptor for approximative longwave radiation exchange with vari
       choice=3 "Linear approx rad temp",
       choice=4 "Linear approx T0",
       radioButtons=true));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
-    "Heat port for convective or conductive heat flow"
-    annotation (Placement(transformation(extent={{-102,-10},{-82,10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort 
+    "Heat port for convective or conductive heat flow" 
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
-        origin={0,90},
+        origin={0,110},
         extent={{-10,-10},{10,10}},
         rotation=270)));
   AixLib.Utilities.Interfaces.RadPort radPort
     "Heat port for longwave radiative heat flow"
-    annotation (Placement(transformation(extent={{81,-10},{101,10}})));
+    annotation (Placement(transformation(extent={{91,-10},{111,10}}), iconTransformation(extent={{91,-10},{111,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2")
     "Needed to connect to conditional connector";
@@ -51,10 +51,8 @@ equation
     A_in_internal =A;
   end if;
   connect(A_in, A_in_internal);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                            Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent={{-100,100},{100,-100}},  lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {135, 150, 177},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent={{-78,80},{82,-80}},      lineColor = {0, 0, 0},  pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "2*")}), Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>The model cobines the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> and the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector. To model longwave radiation exchange of surfaces, just connect the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> connector to the heat port of a surface and connect the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connector to the <b><a href=\"AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b> connectors of an unlimited number of corresponding surfaces. </p>

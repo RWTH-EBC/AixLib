@@ -8,12 +8,16 @@ model Wall_ASHRAE140
     "Choose if the wall is an outside or an inside wall"                                  annotation(Dialog(group="General Wall Type Parameter",compact = true),choices(choice=true
         "Outside Wall",choice=false "Inside Wall",        radioButtons = true));
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
+
   // general wall parameters
 
-   parameter AixLib.DataBase.Walls.WallBaseDataDefinition WallType=
-      AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
-    "Choose an outside wall type from the database"
-    annotation (Dialog(group="Room Geometry"), choicesAllMatching=true);
+  replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition
+    WallType constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition
+    "Type of wall"
+    annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{2,76},{22,96}})));
 
    parameter Modelica.SIunits.Length wall_length=2 "Length of wall"
                       annotation(Dialog(group="Room Geometry"));
@@ -104,17 +108,17 @@ model Wall_ASHRAE140
 // Initial temperature
 
  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature"                                                   annotation(Dialog(tab="Advanced Parameters"));
+    "Initial temperature"                                                   annotation(Dialog(tab="Initialization"));
 
 // COMPONENT PART
 
 public
   BaseClasses.ConvNLayerClearanceStar                           Wall(
+    final energyDynamics=energyDynamics,
     h=wall_height,
     l=wall_length,
     T0=T0,
     clearance=clearance,
-    selectable=true,
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
@@ -207,7 +211,7 @@ equation
       points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
       color={95,95,95},
       pattern=LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+  connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{2,24},{48,24},{48,-6},{59,-6}},       color={191,0,0}));
 //******************************************************************
 // **********************standard connection for inside wall********
 //******************************************************************
@@ -223,18 +227,18 @@ end if;
 
 if (outside) then
   //absorbtion of solar radition in wall
-  connect(SolarRadTotal.y, AbscoeffA.u);
+  connect(SolarRadTotal.y, AbscoeffA.u) annotation (Line(points={{-59,96},{-54,96},{-54,88},{-50.2,88}}, color={0,0,127}));
   connect(AbscoeffA.y, absSolarRadWall.Q_flow) annotation (Line(
       points={{-36.4,88},{-30,88}},
       color={0,0,127}));
   connect(Wall.port_a, absSolarRadWall.port) annotation (Line(
-      points={{-20,24},{-24,24},{-24,66},{-3,66},{-3,88},{-10,88}},
+      points={{-20,24},{-24,24},{-24,66},{-5,66},{-5,88},{-10,88}},
       color={191,0,0}));
 
   //heat convection on the outside
     if calcMethodOut == 1 or calcMethodOut == 2 then
     connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation (Line(
-      points={{-103,64},{-68,64},{-68,50.8},{-46.2,50.8}},
+      points={{-103,64},{-68,64},{-68,51},{-46,51}},
       color={0,0,127}));
   end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation (Line(
@@ -263,21 +267,6 @@ if withDoor then
 
 end if;
 
-//******************************************************************
-// ****standard connections for outside wall with window***********
-//******************************************************************
-
-if outside and withWindow then
-
-end if;
-
-//******************************************************************
-// **** connections for outside wall with window without sunblind****
-//******************************************************************
-
-if outside and withWindow and not (withSunblind) then
-
-end if;
 
 //******************************************************************
 // **** connections for outside wall with window and sunblind****
@@ -285,7 +274,7 @@ end if;
 
 if outside and withWindow and withSunblind then
     connect(SolarRadiationPort, Sunblind.Rad_In[1]) annotation (Line(
-      points={{-106,89},{-56,89},{-56,-7.7},{-42.85,-7.7}},
+      points={{-106,89},{-56,89},{-56,-7.375},{-45.4375,-7.375}},
       color={255,128,0}));
 end if;
 

@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Attic_Ro2Lf1
   "Attic with two saddle roofs and on floor towards the rooms on the lower floors"
-  import AixLib;
   ///////// construction parameters
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/MFD_Attic.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
@@ -56,16 +55,17 @@ model Attic_Ro2Lf1
     wall_length=room_width,
     withWindow=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    WallType=Type_RO,
+    wallPar=Type_RO,
     ISOrientation=1) annotation (Placement(transformation(
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=270,
         origin={-42,63})));
-  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(V=room_V, T(
-        start=T0_air))
+  AixLib.ThermalZones.HighOrder.Components.DryAir.Airload airload(
+    final T0=T0_air,
+    final V=room_V)
     annotation (Placement(transformation(extent={{0,-20},{20,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-109.5, -10}, {-89.5, 10}}), iconTransformation(extent = {{-109.5, -10}, {-89.5, 10}})));
@@ -79,10 +79,10 @@ model Attic_Ro2Lf1
     wall_height=roof_width2,
     wall_length=room_width,
     withWindow=false,
-    WallType=Type_RO,
+    wallPar=Type_RO,
     outside=true,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     ISOrientation=1) annotation (Placement(transformation(
@@ -94,10 +94,10 @@ model Attic_Ro2Lf1
     T0=T0_FL,
     outside=false,
     final withSunblind=use_sunblind,
-    final Blinding=1-ratioSunblind,
+    final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    WallType=Type_FL,
+    wallPar=Type_FL,
     wall_length=room_length,
     wall_height=room_width,
     ISOrientation=2,
@@ -149,22 +149,16 @@ equation
   connect(roof2.WindSpeedPort, WindSpeedPort) annotation(Line(points={{70.5333,
           68.25},{70.5333,80},{-80,80},{-80,0},{-99.5,0}},                                                                                 color = {0, 0, 127}));
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-64, -20}, {-80, -20}, {-80, 90}, {-90, 90}}, color = {191, 0, 0}));
-  connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-46, -20}, {-28, -20}, {-28, -28}, {-10, -28}, {-10, -12}, {1, -12}}, color = {191, 0, 0}));
-  connect(Floor.port_outside, thermFloor) annotation(Line(points={{1,-48.1},{1,
-          -65.55},{0,-65.55},{0,-76}},                                                                               color = {191, 0, 0}));
-  connect(Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{1,-44},
-          {1,-28},{-26.7,-28},{-26.7,-3.8}},                                                                                               color={191,0,0}));
-  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-33.1,16.1},{-33.1,26},{-10,26},{-10,-12},{1,-12}}, color={191,0,0}));
-  connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{50,58},
-          {50,50},{-42,50},{-42,-3.8},{-26.7,-3.8}},                                                                                               color={191,0,0}));
-  connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-42,58},
-          {-42,-3.8},{-26.7,-3.8}},                                                                                                color={191,0,0}));
-  connect(roof1.port_outside, thermOutside) annotation(Line(points={{-42,68.25},
-          {-42,80},{-90,80},{-90,90}},                                                                                color = {191, 0, 0}));
-  connect(roof2.port_outside, thermOutside) annotation(Line(points={{50,68.25},
-          {50,80},{-90,80},{-90,90}},                                                                               color = {191, 0, 0}));
+  connect(infiltrationRate.port_b, airload.port) annotation(Line(points={{-46,-20},{-28,-20},{-28,-28},{-10,-28},{-10,-20},{10,-20}},             color = {191, 0, 0}));
+  connect(Floor.port_outside, thermFloor) annotation(Line(points={{1,-48.1},{1,-65.55},{0,-65.55},{0,-76}},          color = {191, 0, 0}));
+  connect(Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{1,-44},{1,-28},{-26.7,-28},{-26.7,-3.8}}, color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-33.1,16.1},{-33.1,26},{-10,26},{-10,-20},{10,-20}},color={191,0,0}));
+  connect(roof2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{50,58},{50,50},{-42,50},{-42,-3.8},{-26.7,-3.8}}, color={191,0,0}));
+  connect(roof1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-42,58},{-42,-3.8},{-26.7,-3.8}}, color={191,0,0}));
+  connect(roof1.port_outside, thermOutside) annotation(Line(points={{-42,68.25},{-42,80},{-90,80},{-90,90}},          color = {191, 0, 0}));
+  connect(roof2.port_outside, thermOutside) annotation(Line(points={{50,68.25},{50,80},{-90,80},{-90,90}},          color = {191, 0, 0}));
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-70, -46}, {-80, -46}, {-80, 90}, {-90, 90}}, color = {191, 0, 0}));
-  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-50, -46}, {-28, -46}, {-28, -28}, {-10, -28}, {-10, -12}, {1, -12}}, color = {191, 0, 0}));
+  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-50,-46},{-28,-46},{-28,-28},{-10,-28},{-10,-20},{10,-20}},             color = {191, 0, 0}));
   connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-69, -52.4}, {-80, -52.4}, {-80, 25}, {-100, 25}}, color = {0, 0, 127}));
   connect(realExpression.y, roof2.solarRadWin) annotation (Line(points={{-55,38},
           {70.5333,38},{70.5333,57.5}}, color={0,0,127}));

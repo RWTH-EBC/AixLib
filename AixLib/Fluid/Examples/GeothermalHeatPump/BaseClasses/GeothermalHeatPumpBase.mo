@@ -16,16 +16,12 @@ partial model GeothermalHeatPumpBase
     "Initial temperature of high temperature components";
 
 
-  HeatPumps.HeatPumpSimple heatPumpTab(volumeEvaporator(
-      T_start = T_start_cold[1]),
-      volumeCondenser(T_start = T_start_warm[5]),
-      redeclare package Medium = Medium,
-    tablePower=[0,266.15,275.15,280.15,283.15,293.15; 308.15,3300,3400,
-        3500,3700,3800; 323.15,4500,4400,4600,5000,5100],
-    tableHeatFlowCondenser=[0,266.16,275.15,280.15,283.15,293.15; 308.15,
-        9700,11600,13000,14800,16300; 323.15,10000,11200,12900,16700,
-        17500]) "Base load energy conversion unit"
-    annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
+  AixLib.Obsolete.Year2019.Fluid.HeatPumps.HeatPumpSimple heatPumpTab(
+    volumeEvaporator(T_start=T_start_cold[1]),
+    volumeCondenser(T_start=T_start_warm[5]),
+    redeclare package Medium = Medium,
+    tablePower=[0,266.15,275.15,280.15,283.15,293.15; 308.15,3300,3400,3500,3700,3800; 323.15,4500,4400,4600,5000,5100],
+    tableHeatFlowCondenser=[0,266.16,275.15,280.15,283.15,293.15; 308.15,9700,11600,13000,14800,16300; 323.15,10000,11200,12900,16700,17500]) "Base load energy conversion unit" annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
       redeclare package Medium = Medium)                                       constrainedby AixLib.Fluid.Interfaces.PartialTwoPort

@@ -2,8 +2,6 @@
 model WindowSimple "Window with radiation and U-Value"
   parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0=293.15 "Initial temperature";
-  parameter Boolean selectable=true "Select window type"
-    annotation (Dialog(group="Window type", descriptionLabel=true));
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType=
      DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Window type"
     annotation (Dialog(
@@ -12,13 +10,12 @@ model WindowSimple "Window with radiation and U-Value"
       descriptionLabel=true), choicesAllMatching=true);
   parameter Real frameFraction(
     min=0.0,
-    max=1.0) = if selectable then WindowType.frameFraction else 0.2
+    max=1.0) = WindowType.frameFraction
     "Frame fraction" annotation (Dialog(
       group="Window type",
       enable=not selectable,
       descriptionLabel=true));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw=if selectable then
-      WindowType.Uw else 1.50
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = WindowType.Uw
     "Thermal transmission coefficient of whole window"
     annotation (Dialog(group="Window type", enable=not selectable));
 

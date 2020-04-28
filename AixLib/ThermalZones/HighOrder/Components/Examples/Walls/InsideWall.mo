@@ -10,7 +10,7 @@ model InsideWall
     wall_length=5,
     wall_height=2,
     withDoor=true,
-    WallType=DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half(),
+    wallPar=DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half(),
     T0=289.15,
     withSunblind=false,
     Blinding=0.2,
@@ -21,12 +21,12 @@ model InsideWall
     wall_length=5,
     wall_height=2,
     withDoor=true,
-    WallType=DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half(),
+    wallPar=DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half(),
     T0=287.15,
     withSunblind=false,
     Blinding=0.2,
     LimitSolIrr=350,
-    TOutAirLimit=273.15+17) annotation (Placement(transformation(
+    TOutAirLimit=273.15 + 17) annotation (Placement(transformation(
         extent={{-6,36},{6,-36}},
         rotation=180,
         origin={-30,30})));

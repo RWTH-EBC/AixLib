@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses;
 partial model PartialWindow "Partial model for windows"
 
-  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
+  parameter Modelica.SIunits.Area windowarea "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0= 293.15 "Initial temperature";
 
   Utilities.Interfaces.SolarRad_in
