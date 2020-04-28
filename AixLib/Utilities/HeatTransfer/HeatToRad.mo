@@ -16,8 +16,8 @@ model HeatToRad "Adaptor for approximative longwave radiation exchange with vari
       choice=3 "Linear approx rad temp",
       choice=4 "Linear approx T0",
       radioButtons=true));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort 
-    "Heat port for convective or conductive heat flow" 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort
+    "Heat port for convective or conductive heat flow"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
   Modelica.Blocks.Interfaces.RealInput A_in(final unit="m2") if use_A_in
     "Area of radiation exchange connector" annotation (Placement(transformation(
@@ -35,17 +35,17 @@ initial equation
     assert(A > 0, "The area for heattransfer must be positive");
   end if;
 equation
- port_a.Q_flow + radPort.Q_flow = 0;
+ convPort.Q_flow + radPort.Q_flow = 0;
   // To prevent negative solutions for T, the max() expression is used.
   // Negative solutions also occur when using max(T,0), therefore, 1 K is used.
   if radCalcMethod == 1 then
-    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(port_a.T, 1)*max(port_a.T, 1)*max(port_a.T, 1)*max(port_a.T, 1) - max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1));
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(convPort.T, 1)*max(convPort.T, 1)*max(convPort.T, 1)*max(convPort.T, 1) - max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1));
   elseif radCalcMethod == 2 then
-    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*port_a.T*port_a.T*port_a.T*(port_a.T - radPort.T);
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*convPort.T*convPort.T*convPort.T*(convPort.T - radPort.T);
   elseif radCalcMethod == 3 then
-    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*radPort.T*radPort.T*radPort.T*(port_a.T - radPort.T);
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*radPort.T*radPort.T*radPort.T*(convPort.T - radPort.T);
   else
-    port_a.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*T0*T0*T0*(port_a.T - radPort.T);
+    convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*T0*T0*T0*(convPort.T - radPort.T);
   end if;
   if not use_A_in then
     A_in_internal =A;

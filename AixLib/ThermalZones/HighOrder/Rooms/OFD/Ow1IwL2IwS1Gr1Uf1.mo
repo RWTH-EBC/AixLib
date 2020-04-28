@@ -51,8 +51,6 @@ model Ow1IwL2IwS1Gr1Uf1
       descriptionLabel=true,
       enable=withDoor1));
 
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outside_wall1(
-
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
@@ -71,8 +69,8 @@ model Ow1IwL2IwS1Gr1Uf1
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 inside_wall1(
-    eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
+    eps_door=eps_door_OD1)                 annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
+
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
@@ -90,7 +88,6 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={23,59},
         extent={{-5.00018,-29},{5.00003,29}},
         rotation=270)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 inside_wall2a(
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2a(
     final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
@@ -108,7 +105,6 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={61,23},
         extent={{-3,-15},{3,15}},
         rotation=180)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 inside_wall3(
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall3(
     final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
@@ -126,7 +122,6 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={25,-59},
         extent={{-5.00002,-29},{5.00001,29}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Ceiling(
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
@@ -145,7 +140,6 @@ model Ow1IwL2IwS1Gr1Uf1
         origin={-31,60},
         extent={{2,-9},{-2,9}},
         rotation=90)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 floor(
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,
@@ -209,8 +203,8 @@ equation
         points={{64.15,-17},{77.225,-17},{77.225,-10},{90,-10}}, color={191,0,0}));
   connect(inside_wall2a.port_outside, thermInsideWall2a) annotation (Line(
         points={{64.15,23},{78.225,23},{78.225,30},{90,30}}, color={191,0,0}));
-  connect(inside_wall1.port_outside, thermInsideWall1) annotation (Line(points={{23,
-          64.2502},{23,76.3751},{30,76.3751},{30,90}},      color={191,0,0}));
+  connect(inside_wall1.port_outside, thermInsideWall1) annotation (Line(points={{23,64.2502},{23,76.3751},{30,76.3751},{30,90}},
+                                                            color={191,0,0}));
   connect(Ceiling.port_outside, thermCeiling)
     annotation (Line(points={{-31,62.1},{-31,70},{90,70}}, color={191,0,0}));
   connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-60.25,34.5333},{-80,34.5333},{-80,-60},{-109.5,-60}},

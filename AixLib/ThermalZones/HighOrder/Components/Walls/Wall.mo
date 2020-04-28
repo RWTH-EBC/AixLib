@@ -61,8 +61,7 @@ model Wall
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
   replaceable model Window =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
-  constrainedby
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
@@ -143,7 +142,7 @@ equation
   // **********************standard connection************************
   //******************************************************************
   connect(Wall.radPort, heatStarToComb.portRad) annotation (Line(
-      points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
+      points={{30,31.82},{48,31.82},{48,4},{59,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(Wall.port_b, heatStarToComb.portConv) annotation (Line(points={{30,25},{48,25},{48,-6},{59,-6}},      color={191,0,0}));
@@ -171,9 +170,9 @@ equation
   //******************************************************************
   if withDoor then
     connect(Door.port_a, port_outside) annotation(Line(points = {{-19.4, -86}, {-56, -86}, {-56, 24}, {-24, 24}, {-24, 4}, {-98, 4}}, color = {191, 0, 0}));
-    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}}, color={191,0,0}));
+    connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6},{59,-6}},       color={191,0,0}));
     connect(Door.radPort, heatStarToComb.portRad) annotation (Line(
-        points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
+        points={{9.4,-76.4},{48,-76.4},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
   end if;
@@ -182,7 +181,7 @@ equation
   //******************************************************************
   if outside and withWindow then
     connect(windowSimple.radPort, heatStarToComb.portRad) annotation (Line(
-        points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
+        points={{9.7,-27.2},{48,-27.2},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
     connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}},       color={191,0,0}));

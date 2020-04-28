@@ -7,10 +7,10 @@ model InsideWall
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside3(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-84, 22})));
   ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 wall_simple_new(
     outside=false,
+    redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half WallType,
     wall_length=5,
     wall_height=2,
     withDoor=true,
-    wallPar=DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half(),
     T0=289.15,
     withSunblind=false,
     Blinding=0.2,
@@ -18,10 +18,10 @@ model InsideWall
     TOutAirLimit=273.15+17) annotation (Placement(transformation(extent={{28,-4},{40,68}})));
   ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 wall_simple1_new(
     outside=false,
+    redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half WallType,
     wall_length=5,
     wall_height=2,
     withDoor=true,
-    wallPar=DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half(),
     T0=287.15,
     withSunblind=false,
     Blinding=0.2,
@@ -37,14 +37,12 @@ model InsideWall
     annotation (Placement(transformation(extent={{-74,78},{-54,98}})));
 equation
   connect(wall_simple1_new.port_outside, wall_simple_new.port_outside) annotation(Line(points = {{-23.7, 30}, {-23.7, 32}, {27.7, 32}}, color = {191, 0, 0}));
-  connect(thermStar_Demux.portConvRadComb, wall_simple1_new.thermStarComb_inside) annotation (Line(points={{-56.16,
-          -43.025},{-39.24,-43.025},{-39.24,30},{-36,30}},                                                                                                          color={191,0,0}));
-  connect(thermStar_Demux1.portConvRadComb, wall_simple_new.thermStarComb_inside) annotation (Line(points={{56.14,
-          -45.025},{49.21,-45.025},{49.21,32},{40,32}},                                                                                                         color={191,0,0}));
-  connect(Tinside2.port, thermStar_Demux.portRad) annotation (Line(points={{-74,62},{-56,62},{-56,-22},{-88,-22},{-88,-39.65},{-72.32,-39.65}}, color={191,0,0}));
-  connect(Tinside3.port, thermStar_Demux.portConv) annotation (Line(points={{-74,22},{-60,22},{-60,-18},{-92,-18},{-92,-47.825},{-72.08,-47.825}}, color={191,0,0}));
-  connect(Tinside1.port, thermStar_Demux1.portRad) annotation (Line(points={{72,60},{56,60},{56,-22},{88,-22},{88,-41.65},{70.28,-41.65}}, color={191,0,0}));
-  connect(Tinside.port, thermStar_Demux1.portConv) annotation (Line(points={{72,20},{60,20},{60,-18},{94,-18},{94,-50},{82,-50},{82,-49.825},{70.07,-49.825}}, color={191,0,0}));
+  connect(thermStar_Demux.portConvRadComb, wall_simple1_new.thermStarComb_inside) annotation (Line(points={{-56,-44},{-39.24,-44},{-39.24,30},{-36,30}},            color={191,0,0}));
+  connect(thermStar_Demux1.portConvRadComb, wall_simple_new.thermStarComb_inside) annotation (Line(points={{56,-46},{49.21,-46},{49.21,32},{40,32}},            color={191,0,0}));
+  connect(Tinside2.port, thermStar_Demux.portRad) annotation (Line(points={{-74,62},{-56,62},{-56,-22},{-88,-22},{-88,-40.25},{-72,-40.25}},    color={191,0,0}));
+  connect(Tinside3.port, thermStar_Demux.portConv) annotation (Line(points={{-74,22},{-60,22},{-60,-18},{-92,-18},{-92,-47.75},{-72,-47.75}},      color={191,0,0}));
+  connect(Tinside1.port, thermStar_Demux1.portRad) annotation (Line(points={{72,60},{56,60},{56,-22},{88,-22},{88,-42.25},{70,-42.25}},    color={191,0,0}));
+  connect(Tinside.port, thermStar_Demux1.portConv) annotation (Line(points={{72,20},{60,20},{60,-18},{94,-18},{94,-50},{82,-50},{82,-49.75},{70,-49.75}},      color={191,0,0}));
   connect(realExpression.y, wall_simple1_new.solarRadWin) annotation (Line(
         points={{-53,88},{-44,88},{-44,56.4},{-36.6,56.4}}, color={0,0,127}));
   connect(realExpression.y, wall_simple_new.solarRadWin) annotation (Line(

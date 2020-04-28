@@ -26,8 +26,7 @@ model Window_ASHRAE140
 
 
   replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
-    BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(
         descriptionLabel=true), choicesAllMatching=true);
 
@@ -54,11 +53,9 @@ model Window_ASHRAE140
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
-    port_a(T(start=T0)),
-    radPort(T(start=T0)),
     eps=WindowType.Emissivity,
     A=windowarea)
-    annotation (Placement(transformation(extent={{36,22},{56,42}})));
+    annotation (Placement(transformation(extent={{44,22},{64,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     final wallRec=winPaneRec,
     final T_start=fill(T0, winPaneRec.n),
@@ -81,9 +78,6 @@ equation
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.port_a, pane2.port_b) annotation (Line(
-  points={{36.8,32},{36,32},{36,-8},{38,-8}},
-  color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
       color={0,0,127}));
@@ -103,12 +97,13 @@ equation
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
   connect(twoStar_RadEx.radPort, radPort) annotation (Line(
-      points={{55.1,32},{80,32},{80,60},{90,60}},
+      points={{64.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
       points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
       color={255,128,0}));
+  connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
