@@ -1,7 +1,8 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
+  extends
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
   replaceable parameter AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default
     winPaneRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition "Record containing parameters of window pane(s)"
@@ -23,11 +24,13 @@ model Window_ASHRAE140
   parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = WindowType.Uw
     "Thermal transmission coefficient of whole window"                                                                                                 annotation (Dialog(group="Window type", enable = not selectable));
 
-  parameter Real g = WindowType.g
-    "Coefficient of solar energy transmission"                                                            annotation (Dialog(group="Window type", enable = not selectable));
 
-  BaseClasses.CorrectionSolarGain.CorG_VDI6007
-    RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
+  replaceable model correctionSolarGain =
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
+    "Model for correction of solar gain factor" annotation (Dialog(
+        descriptionLabel=true), choicesAllMatching=true);
+
+  correctionSolarGain RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
             -30,72}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
@@ -50,18 +53,17 @@ model Window_ASHRAE140
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
-    rad(T(start=T0)),
-    conv(T(start=T0)),
     eps=WindowType.Emissivity,
-    A=windowarea) annotation (Placement(transformation(extent={{36,22},{56,42}})));
+    A=windowarea)
+    annotation (Placement(transformation(extent={{44,22},{64,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     final wallRec=winPaneRec,
     final T_start=fill(T0, winPaneRec.n),
     final A=windowarea,
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
-  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
-    "multiplication with area and solar gain factor"
+  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea)
+    "multiplication with area"
     annotation (Placement(transformation(extent={{-4,54},{8,66}})));
   Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans
     "Output signal connector"
@@ -76,7 +78,6 @@ equation
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.conv, pane2.port_b) annotation (Line(points={{36,32},{36,32},{36,-8},{38,-8}},   color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
       color={0,0,127}));
@@ -95,13 +96,14 @@ equation
   connect(heatConv_inside.port_a, port_inside) annotation (Line(
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
-  connect(twoStar_RadEx.rad, Star) annotation (Line(
-      points={{56.1,32},{80,32},{80,60},{90,60}},
+  connect(twoStar_RadEx.radPort, radPort) annotation (Line(
+      points={{64.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
       points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
       color={255,128,0}));
+  connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

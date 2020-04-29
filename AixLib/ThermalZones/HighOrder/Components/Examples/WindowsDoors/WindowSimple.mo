@@ -13,7 +13,6 @@ model WindowSimple
 equation
   connect(Toutside.port, windowSimple.port_outside) annotation(Line(points = {{-42, 10}, {-34, 10}, {-34, 10.4}, {-22.2, 10.4}}, color = {191, 0, 0}));
   connect(windowSimple.port_inside, Tinside.port) annotation(Line(points = {{10.2, 10.4}, {24, 10.4}, {24, 10}, {38, 10}}, color = {191, 0, 0}));
-  connect(windowSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(varRad.solarRad_out[1], windowSimple.solarRad_in) annotation(Line(points = {{-47, 50}, {-32, 50}, {-32, 21.6}, {-22.2, 21.6}}, color = {255, 128, 0}));
   connect(SolarRadiation.y, varRad.I[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,58.9},{-64.9,58.9}},
@@ -30,6 +29,7 @@ equation
   connect(SolarRadiation.y, varRad.AOI[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,43},{-65,43}},
       color={0,0,127}));
+  connect(Tinside1.port, windowSimple.radPort) annotation (Line(points={{38,42},{26,42},{26,21.6},{10.2,21.6}}, color={191,0,0}));
   annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a> model.</p>

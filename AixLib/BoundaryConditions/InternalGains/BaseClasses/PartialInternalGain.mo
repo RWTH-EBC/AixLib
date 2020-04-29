@@ -34,8 +34,9 @@ equation
   connect(gainRad.y, radiativeHeat.Q_flow) annotation (Line(points={{16.4,-20},{24,-20}}, color={0,0,127}));
   connect(productHeatOutput.y, gainConv.u) annotation (Line(points={{-6.98,0},{0,0},{0,20},{7.2,20}}, color={0,0,127}));
   connect(productHeatOutput.y, gainRad.u) annotation (Line(points={{-6.98,0},{0,0},{0,-20},{7.2,-20}}, color={0,0,127}));
-  connect(radiativeHeat.port, radConvertor.conv) annotation (Line(points={{44,-20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
-  connect(radConvertor.rad, radHeat) annotation (Line(
+  connect(radiativeHeat.port, radConvertor.port_a) annotation (Line(points={{44,
+          -20},{48,-20},{48,-60},{52.8,-60}}, color={191,0,0}));
+  connect(radConvertor.radPort, radHeat) annotation (Line(
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

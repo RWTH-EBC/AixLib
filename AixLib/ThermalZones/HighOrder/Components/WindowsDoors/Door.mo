@@ -9,30 +9,23 @@ model Door "Simple door"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{80, -10}, {100, 10}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
-    rad(T(start=T0)),
-    conv(T(start=T0)),
     A=door_area,
     eps=eps) annotation (Placement(transformation(extent={{30,50},{50,70}})));
   Utilities.Interfaces.RadPort
-                            Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = door_area * U) annotation(Placement(transformation(extent = {{-10, -8}, {10, 12}})));
+                            radPort annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = door_area * U) annotation(Placement(transformation(extent={{-10,-10},{10,10}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx1(
-    rad(T(start=T0)),
-    conv(T(start=T0)),
     A=door_area,
     eps=eps) annotation (Placement(transformation(extent={{-32,50},{-52,70}})));
   Utilities.Interfaces.RadPort
-                            Star1 annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}})));
+                            radPort1 annotation(Placement(transformation(extent = {{-100, 50}, {-80, 70}})));
 equation
-  connect(twoStar_RadEx.rad, Star) annotation (Line(points={{49.1,60},{90,60}}, pattern=LinePattern.Solid));
-  connect(port_a, HeatTrans.port_a) annotation(Line(points = {{-90, 0}, {-49.5, 0}, {-49.5, 2}, {-10, 2}}));
-  connect(HeatTrans.port_b, port_b) annotation(Line(points = {{10, 2}, {49.5, 2}, {49.5, 0}, {90, 0}}));
-  connect(twoStar_RadEx.conv, HeatTrans.port_b) annotation (Line(points={{30.8,60},{20,60},{20,2},{10,2}}, color={191,0,0}));
-  connect(twoStar_RadEx1.conv, HeatTrans.port_a) annotation (Line(points={{-32.8,60},{-20,60},{-20,2},{-10,2}}, color={191,0,0}));
-  connect(twoStar_RadEx1.rad, Star1) annotation (Line(
-      points={{-51.1,60},{-90,60}},
-      color={95,95,95},
-      pattern=LinePattern.Solid));
+  connect(twoStar_RadEx.radPort, radPort) annotation(Line(points={{50.1,60},{90,60}},      pattern = LinePattern.Solid));
+  connect(twoStar_RadEx1.radPort, radPort1) annotation(Line(points={{-52.1,60},{-90,60}},      color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(HeatTrans.port_b, twoStar_RadEx.convPort) annotation (Line(points={{10,0},{20,0},{20,60},{30,60}}, color={191,0,0}));
+  connect(HeatTrans.port_a, twoStar_RadEx1.convPort) annotation (Line(points={{-10,0},{-20,0},{-20,60},{-32,60}}, color={191,0,0}));
+  connect(HeatTrans.port_b, port_b) annotation (Line(points={{10,0},{90,0}}, color={191,0,0}));
+  connect(HeatTrans.port_a, port_a) annotation (Line(points={{-10,0},{-90,0}}, color={191,0,0}));
   annotation(Dialog(group = "Air exchange"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points = {{-40, 18}, {-36, 18}}, color = {255, 255, 0}), Rectangle(extent = {{-52, 82}, {48, -78}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-46, 76}, {40, -68}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, fillColor = {127, 0, 0}), Rectangle(extent = {{28, 12}, {36, 0}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},

@@ -1,7 +1,7 @@
-within AixLib.ThermalZones.HighOrder.Components.Walls;
-model Wall_ASHRAE140
-  "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
+within AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Components.Walls;
+model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   //Type parameter
 
    parameter Boolean outside = true
@@ -28,7 +28,7 @@ model Wall_ASHRAE140
   parameter Real solar_absorptance=0.25
     "Solar absorptance coefficient of outside wall surface"  annotation(Dialog(tab="Surface Parameters", group = "Outside surface", enable = outside));
 
-  parameter Integer calcMethod=1 "Calculation method for convectice heat transfer coeffient at outside surface"    annotation (Dialog(
+  parameter Integer calcMethodOut=1 "Calculation method for convectice heat transfer coeffient at outside surface"    annotation (Dialog(
       tab="Surface Parameters",
       group="Outside surface",
       enable=outside,
@@ -42,22 +42,28 @@ model Wall_ASHRAE140
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
                                                                                annotation(Dialog(tab="Surface Parameters", group=
           "Outside surface",                                                                                                                          enable=
-          calcMethod == 3 and outside));
+          calcMethodOut == 3 and outside));
     parameter
     AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
     surfaceType =    AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type of outside wall"
-    annotation(Dialog(tab="Surface Parameters",group = "Outside surface",  enable=calcMethod == 2 and outside),
+    annotation(Dialog(tab="Surface Parameters",group = "Outside surface",  enable=calcMethodOut == 2 and outside),
                                                                                                             choicesAllMatching = true);
 
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters",  group = "Inside surface", compact = true, descriptionLabel = true), choices(choice=1
         "vertical wall",                                                                                                    choice = 2 "floor",
                  choice = 3 "ceiling",radioButtons =  true));
+  parameter Real solarDistribution(min=0.0, max=1.0) = 0.038 "Solar distribution fraction of the transmitted radiation through the window on the surface";
 //  parameter Real solFractCoeff = 0.65 "solar fraction coefficient. Ex: floor = 0.65, ceiling = 0.15, vertical walls = 0.04" annotation(Dialog(tab = "Surface Parameters",  group = "Inside surface" ));
 
     // window parameters
    parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                     annotation(Dialog( tab="Window", enable = outside));
+   replaceable model Window =
+      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
+   constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+    "Model for window"
+                     annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
 
    parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
                                                           WindowType=
@@ -106,7 +112,7 @@ model Wall_ASHRAE140
 // COMPONENT PART
 
 public
-  BaseClasses.ConvNLayerClearanceStar                           Wall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar Wall(
     final energyDynamics=energyDynamics,
     h=wall_height,
     l=wall_length,
@@ -115,8 +121,7 @@ public
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
-    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
-        transformation(extent={{-20,14},{2,34}})));
+    heatConv(calcMethod=2)) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
                                  SolarRadiationPort if  outside annotation (
@@ -125,7 +130,7 @@ public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside
     annotation (Placement(transformation(extent={{-108,-6},{-88,14}}), iconTransformation(extent={{-31,-10},{-11,10}})));
 
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == 1 or calcMethodOut == 2)
     annotation (Placement(transformation(extent={{-113,54},{-93,74}}), iconTransformation(extent={{-31,78},{-11,98}})));
 
   AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind Sunblind(
@@ -135,21 +140,14 @@ public
     final TOutAirLimit=TOutAirLimit) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
-  WindowsDoors.Door                     Door(
+  AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door Door(
     T0=T0,
     door_area=door_height*door_width,
     U=U_door*2,
-    eps=eps_door) if withDoor
-    annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
-  AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140
-                                                windowSimple(
-    T0=T0,
-    windowarea=windowarea,
-    WindowType=WindowType) if          withWindow and outside
-    annotation (Placement(transformation(extent={{-15,-48},{11,-22}})));
+    eps=eps_door) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
-    calcMethod=calcMethod,
+    calcMethod=calcMethodOut,
     surfaceType=surfaceType,
     hCon_const=hCon_const) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
 
@@ -167,8 +165,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={22,88})));
-  Modelica.Blocks.Math.Gain solarDistrFraction(k=if ISOrientation == 1 then
-        0.038 else if ISOrientation == 2 then 0.642 else 0.168)
+  Modelica.Blocks.Math.Gain solarDistrFraction(k=solarDistribution)
     "interior solar distribution factors" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
@@ -197,12 +194,17 @@ public
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
+  Window window(
+    T0=T0,
+    windowarea=windowarea,
+    WindowType=WindowType) if          withWindow and outside
+    annotation (Placement(transformation(extent={{-9,-42},{11,-22}})));
 equation
 
 //******************************************************************
 // **********************standard connection************************
 //******************************************************************
-  connect(Wall.Star, heatStarToComb.portRad) annotation (Line(
+  connect(Wall.radPort, heatStarToComb.portRad) annotation (Line(
       points={{2,30.2},{48,30.2},{48,4},{59,4}},
       color={95,95,95},
       pattern=LinePattern.Solid));
@@ -219,7 +221,6 @@ end if;
 //******************************************************************
 // ********************standard connection for outside wall*********
 //******************************************************************
-
 if (outside) then
   //absorbtion of solar radition in wall
   connect(SolarRadTotal.y, AbscoeffA.u) annotation (Line(points={{-59,96},{-54,96},{-54,88},{-50.2,88}}, color={0,0,127}));
@@ -231,7 +232,7 @@ if (outside) then
       color={191,0,0}));
 
   //heat convection on the outside
-    if calcMethod == 1 or calcMethod == 2 then
+    if calcMethodOut == 1 or calcMethodOut == 2 then
     connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation (Line(
       points={{-103,64},{-68,64},{-68,51},{-46,51}},
       color={0,0,127}));
@@ -255,43 +256,10 @@ if withDoor then
         points={{-19.4,-86},{-56,-86},{-56,23},{-24,23},{-24,4},{-98,4}},
         color={191,0,0}));
     connect(Door.port_b, heatStarToComb.portConv) annotation (Line(points={{9.4,-86},{48,-86},{48,-6},{59,-6}},       color={191,0,0}));
-    connect(Door.Star, heatStarToComb.portRad) annotation (Line(
+    connect(Door.radPort, heatStarToComb.portRad) annotation (Line(
         points={{9.4,-76.4},{48,-76.4},{48,4},{59,4}},
         color={95,95,95},
         pattern=LinePattern.Solid));
-
-end if;
-
-//******************************************************************
-// ****standard connections for outside wall with window***********
-//******************************************************************
-
-if outside and withWindow then
-    connect(windowSimple.port_inside, heatStarToComb.portConv) annotation (Line(points={{9.7,-36.3},{48,-36.3},{48,-6},{59,-6}},       color={191,0,0}));
-    connect(windowSimple.Star, heatStarToComb.portRad) annotation (Line(
-        points={{9.7,-27.2},{48,-27.2},{48,4},{59,4}},
-        color={95,95,95},
-        pattern=LinePattern.Solid));
-    connect(windowSimple.port_outside, port_outside) annotation (Line(
-        points={{-13.7,-36.3},{-56,-36.3},{-56,4},{-98,4}},
-        color={191,0,0}));
-    connect(windowSimple.solarRadWinTrans, solarRadWinTrans) annotation (Line(
-      points={{9.96,-24.6},{48,-24.6},{48,-60},{110,-60}},
-      color={0,0,127}));
-    connect(windowSimple.WindSpeedPort, WindSpeedPort) annotation (Line(
-      points={{-13.7,-41.5},{-56,-41.5},{-56,64},{-103,64}},
-      color={0,0,127}));
-
-end if;
-
-//******************************************************************
-// **** connections for outside wall with window without sunblind****
-//******************************************************************
-
-if outside and withWindow and not (withSunblind) then
-   connect(SolarRadiationPort, windowSimple.solarRad_in) annotation (Line(
-      points={{-106,89},{-56,89},{-56,-27.2},{-13.7,-27.2}},
-      color={255,128,0}));
 
 end if;
 
@@ -300,18 +268,21 @@ end if;
 //******************************************************************
 
 if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation (Line(
-      points={{-19.5625,-7.375},{-19,-7.375},{-19,-27.2},{-13.7,-27.2}},
-      color={255,128,0}));
     connect(SolarRadiationPort, Sunblind.Rad_In[1]) annotation (Line(
       points={{-106,89},{-56,89},{-56,-7.375},{-45.4375,-7.375}},
       color={255,128,0}));
 end if;
 
 //******************************************************************
+// **** connections for outside wall with window without sunblind****
+//******************************************************************
+  if outside and withWindow and not withSunblind then
+    connect(window.solarRad_in, SolarRadiationPort) annotation(Line(points={{-8,-26},{-80,-26},{-80,89},{-106,89}},                       color = {255, 128, 0}));
+  end if;
+
+//******************************************************************
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
- connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
   connect(heatStarToComb.portConvRadComb, thermStarComb_inside) annotation (Line(points={{79,-1},{79,-1.05},{102,-1.05},{102,0}},       color={191,0,0}));
   connect(solarRadWin, solarDistrFraction.u) annotation (Line(
       points={{101,80},{69.2,80}},
@@ -324,14 +295,26 @@ end if;
           {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
   connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,-14},{-54,-14},{-54,-13.875},{-45.4375,-13.875}},
                                                       color={0,0,127}));
-
+  connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{29,80},{7,
+          80},{7,57},{-9.22,57},{-9.22,33.8}}, color={191,0,0}));
+  connect(WindSpeedPort, window.WindSpeedPort) annotation (Line(points={{-103,64},{-68,64},{-68,51},{-56,51},{-56,-37},{-8,-37}},
+                                                              color={0,0,127}));
+  connect(port_outside, window.port_outside) annotation (Line(points={{-98,4},{-56,4},{-56,-33},{-8,-33}},
+                                      color={191,0,0}));
+  connect(Sunblind.Rad_Out[1], window.solarRad_in) annotation (Line(points={{-19.5625,-7.375},{-20,-7.375},{-20,-26},{-8,-26}},
+                                                       color={255,128,0}));
+  connect(window.radPort, heatStarToComb.portRad) annotation (Line(points={{10,-26},{48,-26},{48,4},{59,4}},
+                                              color={95,95,95}));
+  connect(window.port_inside, heatStarToComb.portConv) annotation (Line(points={{10,-33},{48,-33},{48,-6},{59,-6}},
+                                                             color={191,0,0}));
+  connect(window.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{10.2,-24},{48,-24},{48,-60},{110,-60}},
+                                                  color={0,0,127}));
   annotation (
+  obsolete = "Obsolete model - Please use AixLib.ThermalZones.HighOrder.Components.Walls.Wall instead.",
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={Line(
-          points={{27,80},{-3,80},{-3,38}},
-          color={127,0,0})}),
+        grid={1,1})),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-20,-120},{20,120}},

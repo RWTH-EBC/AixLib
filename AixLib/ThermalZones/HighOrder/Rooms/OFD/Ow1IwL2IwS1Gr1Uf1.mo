@@ -51,7 +51,6 @@ model Ow1IwL2IwS1Gr1Uf1
       descriptionLabel=true,
       enable=withDoor1));
 
-
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     final energyDynamics=energyDynamicsWalls,
     solar_absorptance=solar_absorptance_OW,
@@ -70,7 +69,8 @@ model Ow1IwL2IwS1Gr1Uf1
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
-    eps_door=eps_door_OD1) annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
+    eps_door=eps_door_OD1)                 annotation (Placement(transformation(extent={{-60,-14},{-50,42}})));
+
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     final energyDynamics=energyDynamicsWalls,
     final WindowType=Type_Win,

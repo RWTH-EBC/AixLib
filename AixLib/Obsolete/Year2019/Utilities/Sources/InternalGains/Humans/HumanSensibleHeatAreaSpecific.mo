@@ -36,11 +36,11 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
 equation
   connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{42, 32}, {42, 50}, {90, 50}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(RadiativeHeat.port, RadiationConvertor.conv) annotation (Line(
+  connect(RadiativeHeat.port, RadiationConvertor.port_a) annotation (Line(
       points={{42,-8},{44,-8},{44,-12},{48,-12},{48,-10},{48.96,-10}},
       color={191,0,0},
       pattern=LinePattern.Solid));
-  connect(RadiationConvertor.rad, RadHeat) annotation (Line(
+  connect(RadiationConvertor.radPort, RadHeat) annotation (Line(
       points={{70.92,-10},{90,-10}},
       color={95,95,95},
       pattern=LinePattern.Solid));

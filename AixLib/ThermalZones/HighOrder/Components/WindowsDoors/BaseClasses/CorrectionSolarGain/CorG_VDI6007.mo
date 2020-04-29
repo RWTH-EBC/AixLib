@@ -84,6 +84,16 @@ annotation (
 </ul>
 </html>",
     revisions="<html>
+<ul>
+<li>
+April 24, 2020, by Konstantina Xanthopoulou:<br/>
+Removed parameter
+<code>g</code>.
+</li>
+This is for
+<a href=\"https://github.com/RWTH-EBC/AixLib/issues/899\">
+issue 899</a>.
+<li>
 <p><i>February 24, 2014</i> by Reza Tavakoli:</p>
 <p>implemented </p>
 </html>"));
