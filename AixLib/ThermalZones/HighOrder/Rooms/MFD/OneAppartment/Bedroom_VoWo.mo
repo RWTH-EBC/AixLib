@@ -224,26 +224,6 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{66, 85}, {44, 85}, {44, 90}, {-100, 90}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points={{20,-2},{44,-2},{44,66},{100,66},{100,85},{94,85}},            color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, -102.5}, {-4, -130}, {-80, -130}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
-  connect(outsideWall.solarRadWinTrans, outsideWall.solarRadWin) annotation (
-      Line(points={{27,-79.5},{27,-74},{-48,-74},{-48,-81}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Ceiling.solarRadWin) annotation (
-      Line(points={{27,-79.5},{27,-74},{102,-74},{102,-68},{104.8,-68},{104.8,
-          -64.2}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Floor.solarRadWin) annotation (
-      Line(points={{27,-79.5},{27,-74},{88,-74},{88,-86},{88.6667,-86},{88.6667,-97.8002}},
-                      color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Neighbour.solarRadWin) annotation (
-     Line(points={{27,-79.5},{27,-74},{-48,-74},{-48,9.6},{-59.3,9.6}}, color={
-          0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Bath.solarRadWin) annotation (Line(
-        points={{27,-79.5},{27,-74},{44,-74},{44,-60.5333},{55.5,-60.5333}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Corridor.solarRadWin) annotation (
-      Line(points={{27,-79.5},{27,-74},{44,-74},{44,4.26667},{55.7,4.26667}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Livingroom.solarRadWin)
-    annotation (Line(points={{27,-79.5},{27,-74},{44,-74},{44,20},{25.2,20},{25.2,33.2}},
-                       color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {98, -112}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-40, 2}, {84, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Bedroom"), Rectangle(extent = {{-42, -104}, {-20, -124}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},

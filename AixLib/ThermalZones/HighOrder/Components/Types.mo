@@ -1,7 +1,17 @@
 within AixLib.ThermalZones.HighOrder.Components;
 package Types "Types"
    extends Modelica.Icons.Package;
-  partial model PartialCoeffTable "Partial model to choose solar distribution fractions "
+  type selectorCoefficients = enumeration(
+      abs01
+          "0.1 solar absorption coefficient",
+      abs06
+          "0.6 solar absorption coefficient",
+      abs09
+          "0.9 solar absorption coefficient")
+     "Interior solar absorptance of wall surface";
+  partial record PartialCoeffTable "Partial model to choose solar distribution fractions "
+
+    extends Modelica.Icons.Record;
 
     parameter selectorCoefficients abs "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
 
@@ -34,7 +44,7 @@ package Types "Types"
 
   end PartialCoeffTable;
 
-  model CoeffTableSouthWindow
+  record CoeffTableSouthWindow
                              "Table of coefficients of solar Distribution fractions in SouthFacingWindows"
     extends PartialCoeffTable(
       final coeffFloor(min=0, max=1)=
@@ -76,15 +86,7 @@ package Types "Types"
 </html>"));
   end CoeffTableSouthWindow;
 
-  type selectorCoefficients = enumeration(
-      abs01
-          "0.1 solar absorption coefficient",
-      abs06
-          "0.6 solar absorption coefficient",
-      abs09
-          "0.9 solar absorption coefficient")
-     "Interior solar absorptance of wall surface";
-  model CoeffTableEastWestWindow
+  record CoeffTableEastWestWindow
     extends PartialCoeffTable(
       final coeffFloor(min=0, max=1)=
     if abs==selectorCoefficients.abs06 then 0.642

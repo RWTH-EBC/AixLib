@@ -1,8 +1,12 @@
 within AixLib.ThermalZones.HighOrder.Components.Examples.Walls;
 model OutsideWall
   extends Modelica.Icons.Example;
-  ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 outerWall(
-    redeclare AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S WallType,
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall(
+    use_shortWaveRadIn=true,
+    solarDistribution=0.038,
+    use_shortWaveRadOut=true,
+    redeclare model Window = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140,
+    redeclare AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S wallPar,
     wall_length=5,
     wall_height=2,
     withWindow=true,

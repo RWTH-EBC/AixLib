@@ -244,8 +244,7 @@ equation
       Line(points={{-41.2,57},{-41.2,48},{54,48},{54,-15.3333},{67.3,-15.3333}},
         color={0,0,127}));
   connect(outsideWall.solarRadWinTrans, Wall_Corridor.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{54,48},{54,-32},{-3.73333,-32},{
-          -3.73333,-37.5}},
+      Line(points={{-41.2,57},{-41.2,48},{54,48},{54,-32},{-3.73333,-32},{-3.73333,-37.5}},
                    color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent = {{-62, 60}, {112, -92}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Rectangle(extent = {{38, 72}, {60, 52}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},

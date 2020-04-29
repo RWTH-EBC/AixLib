@@ -5,9 +5,11 @@ model InsideWall
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside1(T = 293.15) annotation(Placement(transformation(extent = {{92, 50}, {72, 70}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside2(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-84, 62})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside3(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-84, 22})));
-  ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 wall_simple_new(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall wall_simple_new(
     outside=false,
-    redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half WallType,
+    use_shortWaveRadIn=true,
+    solarDistribution=0.038,
+    redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half wallPar,
     wall_length=5,
     wall_height=2,
     withDoor=true,
@@ -15,10 +17,12 @@ model InsideWall
     withSunblind=false,
     Blinding=0.2,
     LimitSolIrr=350,
-    TOutAirLimit=273.15+17) annotation (Placement(transformation(extent={{28,-4},{40,68}})));
-  ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 wall_simple1_new(
+    TOutAirLimit=273.15 + 17) annotation (Placement(transformation(extent={{28,-4},{40,68}})));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall wall_simple1_new(
     outside=false,
-    redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half WallType,
+    use_shortWaveRadIn=true,
+    solarDistribution=0.038,
+    redeclare DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half wallPar,
     wall_length=5,
     wall_height=2,
     withDoor=true,

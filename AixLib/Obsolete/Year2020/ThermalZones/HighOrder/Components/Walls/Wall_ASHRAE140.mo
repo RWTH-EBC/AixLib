@@ -1,7 +1,7 @@
-within AixLib.ThermalZones.HighOrder.Components.Walls;
-model Wall_ASHRAE140
-  "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
+within AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Components.Walls;
+model Wall_ASHRAE140 "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
   //Type parameter
 
    parameter Boolean outside = true
@@ -112,7 +112,7 @@ model Wall_ASHRAE140
 // COMPONENT PART
 
 public
-  BaseClasses.ConvNLayerClearanceStar                           Wall(
+  AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.ConvNLayerClearanceStar Wall(
     final energyDynamics=energyDynamics,
     h=wall_height,
     l=wall_length,
@@ -121,8 +121,7 @@ public
     eps=WallType.eps,
     wallType=WallType,
     surfaceOrientation=ISOrientation,
-    heatConv(calcMethod=2)) "Wall"          annotation (Placement(
-        transformation(extent={{-20,14},{2,34}})));
+    heatConv(calcMethod=2)) "Wall" annotation (Placement(transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
                                  SolarRadiationPort if  outside annotation (
@@ -141,12 +140,11 @@ public
     final TOutAirLimit=TOutAirLimit) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
-  WindowsDoors.Door                     Door(
+  AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door Door(
     T0=T0,
     door_area=door_height*door_width,
     U=U_door*2,
-    eps=eps_door) if withDoor
-    annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
+    eps=eps_door) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
   Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
     calcMethod=calcMethodOut,
@@ -265,7 +263,6 @@ if withDoor then
 
 end if;
 
-
 //******************************************************************
 // **** connections for outside wall with window and sunblind****
 //******************************************************************
@@ -313,6 +310,7 @@ end if;
   connect(window.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{10.2,-24},{48,-24},{48,-60},{110,-60}},
                                                   color={0,0,127}));
   annotation (
+  obsolete = "Obsolete model - Please use AixLib.ThermalZones.HighOrder.Components.Walls.Wall instead.",
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

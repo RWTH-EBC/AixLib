@@ -211,12 +211,6 @@ equation
                                                                                                                                                                    color={191,0,0}));
   connect(Wall_Kitchen1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{52,-22},{40,-22},{40,16},{-36,16},{-36,-84},{-6.66134e-16,-84},{-6.66134e-16,-78}},
                                                                                                                                                                                color={191,0,0}));
-  connect(Wall_Kitchen2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{77,-62},{77,-84},{-6.66134e-16,-84},{-6.66134e-16,-78}},
-                                                                                                                                                    color={191,0,0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{106,-82},{106,-92},{76,-92},{76,-84},{-6.66134e-16,-84},{-6.66134e-16,-78}},
-                                                                                                                                                                       color={191,0,0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{106,-114},{106,-92},{76,-92},{76,-84},{-6.66134e-16,-84},{-6.66134e-16,-78}},
-                                                                                                                                                                      color={191,0,0}));
   connect(thermStar_Demux.portConv, ThermRoom) annotation (Line(points={{-5,-58},{-5,-42},{-18,-42}},       color={191,0,0}));
   connect(thermStar_Demux.portRad, StarRoom) annotation (Line(
       points={{5,-58},{5,-44},{20,-44}},
@@ -227,25 +221,6 @@ equation
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-100, 90}, {-80, 90}, {-80, 60}, {4, 60}, {4, 81}, {16, 81}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points={{-2,-26},{-36,-26},{-36,16},{94,16},{94,60},{48,60},{48,81},{44,81}},                   color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{8, -116.55}, {8, -140}, {-80, -140}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
-  connect(outsideWall.solarRadWinTrans, outsideWall.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-84},{-40.4,-84},{-40.4,-92.9}}, color={0,
-          0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Kitchen1.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-48.4},{51.4,-48.4}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Corridor.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-28},{40,-28},{40,16},{35.6,16},{35.6,29.3}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Ceiling.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-84},{76,-84},{76,-92},{113.333,-92},{113.333,-82.2}},
-                   color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Floor.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-84},{76,-84},{76,-92},{98.6667,-92},{98.6667,-113.8}},
-                    color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Bedroom.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-88},{42,-88},{42,-84},{-36,-84},{-36,-3.2},
-          {-45.3,-3.2}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Kitchen2.solarRadWin) annotation (
-      Line(points={{42.1,-91.25},{42.1,-84},{88,-84},{88,-62.3}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-58, 62}, {-58, -118}, {104, -118}, {104, -58}, {42, -58}, {42, 62}, {-58, 62}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-44, -108}, {82, -58}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Bath"), Rectangle(extent = {{-30, -108}, {-8, -128}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},

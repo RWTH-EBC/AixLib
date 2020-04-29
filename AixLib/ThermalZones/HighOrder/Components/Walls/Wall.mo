@@ -12,14 +12,21 @@ model Wall
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
+  parameter Boolean use_shortWaveRadIn=false "Use input connector for shortwave radiation" annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Real solarDistribution(min=0.0, max=1.0) if use_shortWaveRadIn "Solar distribution fraction of the transmitted radiation through the window on the surface" annotation (Dialog(
+      tab="Surface Parameters",
+      group="Inside surface",
+      enable=use_shortWaveRadIn));
+  parameter Boolean use_shortWaveRadOut=false "Use input connector for shortwave radiation" annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
+
   // general wall parameters
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
     annotation(Dialog(group="Structure of wall layers"),   choicesAllMatching = true,
     Placement(transformation(extent={{2,76},{22,96}})));
 
 
-  parameter Modelica.SIunits.Length wall_length = 2 "Length of wall" annotation(Dialog(group = "Room Geometry"));
-  parameter Modelica.SIunits.Height wall_height = 2 "Height of wall" annotation(Dialog(group = "Room Geometry"));
+  parameter Modelica.SIunits.Length wall_length "Length of wall" annotation(Dialog(group = "Room Geometry"));
+  parameter Modelica.SIunits.Height wall_height "Height of wall" annotation(Dialog(group = "Room Geometry"));
   // Surface parameters
   parameter Real solar_absorptance = 0.25
     "Solar absorptance coefficient of outside wall surface"                                       annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = outside));
@@ -57,11 +64,9 @@ model Wall
           "Inside surface",                                                                                                                              enable=
           calcMethodIn == 3));
   // window parameters
-  parameter Boolean withWindow = false
+  parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable model Window =
-      AixLib.ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple
-  constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  replaceable model Window = WindowsDoors.WindowSimple constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
@@ -102,7 +107,7 @@ model Wall
     surfaceOrientation=ISOrientation,
     calcMethod=calcMethodIn,
     hCon_const=hConIn_const) "Wall" annotation (Placement(transformation(extent={{4,14},{30,36}})));
-  Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
+  Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A=ANet) if                                    outside annotation(Placement(transformation(origin={-37.5,90.5},extent={{-10.5,-10.5},{10.5,10.5}})));
   AixLib.Utilities.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == 1 or calcMethodOut == 2)
@@ -134,6 +139,31 @@ model Wall
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor if outside and withWindow and withSunblind
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-70,-44},{-62,-36}})));
+  Modelica.Blocks.Math.Gain solarDistrFraction(k=ANet*solarDistribution) if use_shortWaveRadIn
+    "interior solar distribution factors" annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=180,
+        origin={68,80})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow absSolarRadWin if use_shortWaveRadIn
+    "absorbed solar radiation through window" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={45,80})));
+  Modelica.Blocks.Interfaces.RealInput solarRadWin(final quantity="RadiantEnergyFluenceRate", final unit="W/m2") if use_shortWaveRadIn
+    "solar raditaion through window" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=180,
+        origin={101,80}),
+                       iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={22,88})));
+  final parameter Modelica.SIunits.Area ANet=wall_height*wall_length - clearance "Net area of wall (without windows and doors)";
+  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans(final quantity="RadiantEnergyFluenceRate", final unit="W/m2") if withWindow and use_shortWaveRadOut
+    "Output signal connector"
+    annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
+        iconTransformation(extent={{15,-72},{35,-52}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -208,6 +238,15 @@ equation
                                                       color={0,0,127}));
   connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},{-90,4},{-90,-40},{-70,-40}},
                                         color={191,0,0}));
+  connect(solarRadWin,solarDistrFraction. u) annotation (Line(
+      points={{101,80},{75.2,80}},
+      color={0,0,127}));
+  connect(solarDistrFraction.y,absSolarRadWin. Q_flow) annotation (Line(
+      points={{61.4,80},{55,80}},
+      color={0,0,127}));
+  connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
+  connect(windowSimple.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
+  connect(WindSpeedPort, windowSimple.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},

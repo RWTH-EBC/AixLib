@@ -42,7 +42,7 @@ model Cellar "Cellar completly under ground"
     final T0=T0_air,
     final V=room_V)
     annotation (Placement(transformation(extent={{-18,-4},{-38,16}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall_Ceiling(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Ceiling(
     T0=T0_Ceiling,
     outside=false,
     final withSunblind=use_sunblind,
@@ -58,7 +58,7 @@ model Cellar "Cellar completly under ground"
         origin={110,62},
         extent={{-1.99998,-10},{1.99998,10}},
         rotation=270)));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall_Floor(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall_Floor(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -81,7 +81,7 @@ model Cellar "Cellar completly under ground"
     e=e,
     eps=eps)
     annotation (Placement(transformation(extent={{-44,-100},{-18,-74}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall1(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall1(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -97,7 +97,7 @@ model Cellar "Cellar completly under ground"
         extent={{-9,-50},{9,50}},
         rotation=270,
         origin={2,65})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall3(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall3(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -111,7 +111,7 @@ model Cellar "Cellar completly under ground"
         extent={{-9,-50},{9,50}},
         rotation=90,
         origin={2,-45})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall2(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall2(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -125,7 +125,7 @@ model Cellar "Cellar completly under ground"
         extent={{-9,-50},{9,50}},
         rotation=180,
         origin={68,13})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall_ASHRAE140 Wall4(
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall Wall4(
     T0=T0_Walls,
     outside=false,
     final withSunblind=use_sunblind,
@@ -161,19 +161,16 @@ equation
   connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,64.1},{110,90}},      color = {191, 0, 0}));
   connect(TGround.port, Wall3.port_outside) annotation(Line(points = {{138, -70}, {2, -70}, {2, -54.45}}, color = {191, 0, 0}));
   connect(Wall2.port_outside, TGround.port) annotation(Line(points = {{77.45, 13}, {100, 13}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
-  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,
-          29.9},{110,8},{100,8},{100,-70},{138,-70}},                                                                                color = {191, 0, 0}));
+  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,29.9},{110,8},{100,8},{100,-70},{138,-70}},            color = {191, 0, 0}));
   connect(Wall1.port_outside, TGround.port) annotation(Line(points = {{2, 74.45}, {2, 88}, {100, 88}, {100, -70}, {138, -70}}, color = {191, 0, 0}));
   connect(Wall4.port_outside, TGround.port) annotation(Line(points = {{-79.45, 13}, {-86, 13}, {-86, -64}, {-2, -64}, {-2, -70}, {138, -70}}, color = {191, 0, 0}));
-  connect(Wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{59,13},{46,13},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
-  connect(Wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,-36},{2,-25.1125},{5.3,-25.1125},{5.3,-15.8}}, color={191,0,0}));
-  connect(Wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,56},{2,44},{46,44},{46,-24},{5.3,-24},{5.3,
-          -15.8}},                                                                                                                                     color={191,0,0}));
-  connect(Wall4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-61,13},{-48,13},{-48,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{5.3,-24},{5.3,-15.8}}, color={191,0,0}));
-  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,-4},{-28,-4}},
-                                                                                                                           color={191,0,0}));
+  connect(Wall2.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{59,13},{46,13},{46,-24},{4,-24},{4,-16}},       color={191,0,0}));
+  connect(Wall3.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,-36},{2,-25.1125},{4,-25.1125},{4,-16}},       color={191,0,0}));
+  connect(Wall1.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{2,56},{2,44},{46,44},{46,-24},{4,-24},{4,-16}},       color={191,0,0}));
+  connect(Wall4.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{-61,13},{-48,13},{-48,-24},{4,-24},{4,-16}},       color={191,0,0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,-24},{4,-24},{4,-16}},       color={191,0,0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{4,-24},{4,-16}},       color={191,0,0}));
+  connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1,4},{-1,12},{-12,12},{-12,-4},{-28,-4}},     color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>

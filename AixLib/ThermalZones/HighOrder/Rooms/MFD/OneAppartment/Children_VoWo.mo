@@ -231,27 +231,6 @@ equation
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-16,-81},{0,-81},{0,-36},{-32,-36},{-32,16},{-48,16}},              color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-12, 60.45}, {-12, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(thermOutside, thermOutside) annotation(Line(points = {{-60, 98}, {-86, 98}, {-86, 98}, {-60, 98}}, color = {191, 0, 0}));
-  connect(outsideWall.solarRadWinTrans, outsideWall.solarRadWin) annotation (
-      Line(points={{-39.9,39.75},{-39.9,30},{27.6,30},{27.6,41.1}}, color={0,0,
-          127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Neighbour.solarRadWin) annotation (
-     Line(points={{-39.9,39.75},{-39.9,30},{40,30},{40,-22.4},{49.4,-22.4}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Staircase.solarRadWin) annotation (
-     Line(points={{-39.9,39.75},{-39.9,30},{40,30},{40,-36},{19.8667,-36},{19.8667,-41.6}},
-                           color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Corridor.solarRadWin) annotation (
-      Line(points={{-39.9,39.75},{-39.9,30},{40,30},{40,-36},{-45.6,-36},{-45.6,
-          -43.6}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Livingroom.solarRadWin)
-    annotation (Line(points={{-39.9,39.75},{-39.9,30},{40,30},{40,-36},{-50,-36},
-          {-50,12},{-65.5,12}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Floor.solarRadWin) annotation (
-      Line(points={{-39.9,39.75},{-39.9,30},{40,30},{40,52},{104.667,52},{104.667,44.2}},
-                          color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Ceiling.solarRadWin) annotation (
-      Line(points={{-39.9,39.75},{-39.9,30},{40,30},{40,52},{119.333,52},{119.333,73.8}},
-                          color={0,0,127}));
   annotation(DDiagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {116, -108}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-36, -20}, {98, -54}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Children"), Rectangle(extent = {{-10, 80}, {12, 60}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
