@@ -229,20 +229,31 @@ equation
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(revisions="<html>
- <ul>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>",
-         info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 900:</p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>",
+         info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 900:
+</p>
 <ul>
-<li>From 1800 hours to 0700 hours, vent fan = ON</li>
-<li>From 0700 hours to 1800 hours, vent fan = OFF</li>
-<li>Heating = always OFF</li>
-<li>From 1800 hours to 0700 hours, cool = OFF</li>
-<li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27 degC; otherwise, cool = OFF</li>
+  <li>From 1800 hours to 0700 hours, vent fan = ON
+  </li>
+  <li>From 0700 hours to 1800 hours, vent fan = OFF
+  </li>
+  <li>Heating = always OFF
+  </li>
+  <li>From 1800 hours to 0700 hours, cool = OFF
+  </li>
+  <li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27
+  degC; otherwise, cool = OFF
+  </li>
 </ul>
 </html>"));
 end Case950;

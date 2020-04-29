@@ -333,46 +333,53 @@ equation
           lineColor={28,108,200},
           textString="%name")}),    Diagram(coordinateSystem(
           preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for simple compressor models that are used, for 
-example, in close-loop systems like heat pumps or chillers.
+  This is a base model for simple compressor models that are used, for
+  example, in close-loop systems like heat pumps or chillers.
 </p>
-<h4>Definitions needed for completion</h4>
+<h4>
+  Definitions needed for completion
+</h4>
 <p>
-Three definitions need to be added by an extending class using this 
-component:
+  Three definitions need to be added by an extending class using this
+  component:
 </p>
 <ul>
-<li>Redecleration of the model <code>parCom</code>.</li>
-<li>Connection of <code>parCom.heatPort</code> with 
-<code>heatPort</code>.</li>
-<li>Connection of <code>port_a</code> and <code>port_b</code> with 
-<code>parCom.port_a</code> and <code>parCom.port_b</code>.</li>
+  <li>Redecleration of the model <code>parCom</code>.
+  </li>
+  <li>Connection of <code>parCom.heatPort</code> with
+  <code>heatPort</code>.
+  </li>
+  <li>Connection of <code>port_a</code> and <code>port_b</code> with
+  <code>parCom.port_a</code> and <code>parCom.port_b</code>.
+  </li>
 </ul>
 <p>
-The latter provides the possibility to add further components (e.g. pressure
-losses or heat transfers) located at the compressor's inlet and outlet.
+  The latter provides the possibility to add further components (e.g.
+  pressure losses or heat transfers) located at the compressor's inlet
+  and outlet.
 </p>
-<h4>Modeling approaches</h4>
+<h4>
+  Modeling approaches
+</h4>
 <p>
-This base model mainly consists of one sub-models and, therefore, please 
-checkout this model for further information of underlying modeling
-approaches:
+  This base model mainly consists of one sub-models and, therefore,
+  please checkout this model for further information of underlying
+  modeling approaches:
 </p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+    AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
+  </li>
 </ul>
 </html>"));
 end PartialCompressor;

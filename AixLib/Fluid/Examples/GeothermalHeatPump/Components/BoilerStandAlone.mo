@@ -34,16 +34,16 @@ equation
     annotation (Line(points={{87.4,-34},{5,-34},{5,-9}}, color={255,0,255}));
   connect(chemicalEnergyFlowRateSource.y,chemicalEnergyFlowRate)  annotation (
       Line(points={{-39,-56},{0.5,-56},{0.5,-109.5}},     color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Model containing the simple boiler model
-<a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
-and dummy inputs.</p>
+<p>
+  Model containing the simple boiler model <a href=
+  \"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+  and dummy inputs.
+</p>
 </html>"));
 end BoilerStandAlone;

@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HeatPumpSystems;
+within AixLib.Systems.HeatPumpSystems;
 model HeatPumpSystem
   extends AixLib.Systems.HeatPumpSystems.BaseClasses.PartialHeatPumpSystem(
     addPowerToMediumEva=false,
@@ -171,9 +171,21 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-  <li><i>October 31, 2018&nbsp;</i> by Alexander K&uuml;mpel: <br/>Connection between controller and heat pump only via bus connector</li>
-  <li><i>May 22, 2019</i> by Julian Matthes:<br/>Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)</li>
-  <li><i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)</li>
+  <li>
+    <i>October 31, 2018&#160;</i> by Alexander Kümpel:<br/>
+    Connection between controller and heat pump only via bus connector
+  </li>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
 <p>

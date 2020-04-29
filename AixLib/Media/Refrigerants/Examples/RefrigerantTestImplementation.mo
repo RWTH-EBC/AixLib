@@ -13,21 +13,17 @@ model RefrigerantTestImplementation
     ambient(use_T_ambient=true));
 
     annotation (experiment(Tolerance=1e-006),
-      Documentation(info="<html>
-<p>
-This is a simple test for the refrigerant models. This model uses the test
-model described in
-<a href=\"modelica://Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium\">
-Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium
-</a>.
+      Documentation(info="<html><p>
+  This is a simple test for the refrigerant models. This model uses the
+  test model described in <a href=
+  \"modelica://Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium\">Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium</a>
+  .
 </p>
 </html>",
-revisions="<html>
-<ul>
-  <li>
-  June 14, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+revisions="<html><ul>
+  <li>June 14, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>"));

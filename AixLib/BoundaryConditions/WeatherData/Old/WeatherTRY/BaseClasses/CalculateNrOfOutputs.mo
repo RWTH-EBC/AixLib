@@ -40,12 +40,18 @@ algorithm
   if Ter_rad then
     m := m + 1;
   end if;
-  annotation(Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Calculates the number of outputs based on the given inputs. </p>
- </html>", revisions = "<html>
- <ul>
- <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, added descriptions for variables</li>
- </ul>
- </html>"));
+  annotation(Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Calculates the number of outputs based on the given inputs.
+</p>
+<ul>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately, added descriptions for
+    variables
+  </li>
+</ul>
+</html>"));
 end CalculateNrOfOutputs;

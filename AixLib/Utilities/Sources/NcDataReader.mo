@@ -124,25 +124,102 @@ equation
           textString="file reader")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     preferredView="info",
-    Documentation(revisions="<html>
-<ul>
-<li><i>November 12, 2018 by Philipp Mehrfeld:</i><br/>Enhance documentation for script to add binary paths to environment varialbe. Important for DDE simulations <a href=\"https://github.com/RWTH-EBC/AixLib/issues/658\">#658</a>.</li>
-<li><i>Feburary 6, 2017 by Philipp Mehrfeld:</i><br/>Revised documentation.</li>
-<li><i>December 14, 2016 by Fabian Wuellhorst:</i><br/>Implemented.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>November 12, 2018 by Philipp Mehrfeld:</i><br/>
+    Enhance documentation for script to add binary paths to environment
+    varialbe. Important for DDE simulations <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/658\">#658</a>.
+  </li>
+  <li>
+    <i>Feburary 6, 2017 by Philipp Mehrfeld:</i><br/>
+    Revised documentation.
+  </li>
+  <li>
+    <i>December 14, 2016 by Fabian Wuellhorst:</i><br/>
+    Implemented.
+  </li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>The model <b>NcDataReader</b> reads data from netCDF files (based on HDF) to Modelica. You can read attributes of type integer or double/float/Real as well as one dimensional vectors. Therefore, the NcDataReader represents an alternative for the <a href=\"Modelica.Blocks.Sources.CombiTimeTable\">CombiTimeTable</a>.</p>
-<p>You have to select the <span style=\"font-family: Courier New;\">*.nc file</span> your data is stored in and define the variable&apos;s names (<span style=\"font-family: Courier New;\">varName</span>). With the checkboxes, you can select what type of data/attributes should be read in by the model and define afterwards the names of the variables/attributes. </p>
-<p><b><span style=\"font-size: 12pt; color: #bf2427;\">IMPORTANT:</span></b> This model needs the external library <a href=\"https://github.com/modelica-3rdparty/netCDF-DataReader\">NcDataReader2</a>. Clone or download the repository and load the Modelica library package (<span style=\"font-family: Courier New;\">netCDF-DataReader/NcDataReader2/package.mo</span>). Alternatively, if dymosim crashes or simulation does not work, please test the <a href=\"https://github.com/RWTH-EBC/netCDF-DataReader\">EBC fork</a> of the repository, which uses different binaries.</p>
-<p><b><span style=\"font-size: 14pt;\">DDE:</span></b> DDE needs to find external binaries explicitly. This means either binaries from <span style=\"font-family: Courier New;\">modelica://NcDataReader2/Resources/Library</span> have to be copied into the current working directy, or the path has to be added to a certain environment variable of operating system. In the <a href=\"AixLib.Utilities.Examples.NcDataReader\">example of NcDataReader</a> scripts are added that can also be found in <span style=\"font-family: Courier New;\">modelica://AixLib\\Resources\\Scripts\\Dymola\\Utilities\\Examples</span>.</p>
-<p><b><span style=\"color: #008000;\">Further external information</span></b> </p>
-<p>For further information please consider <a href=\"https://github.com/tbeu/netCDF-DataReader\">netCDF-DataReader GitHub repository</a>. </p>
-<p>Have a look directly at the <a href=\"https://github.com/tbeu/netCDF-DataReader/blob/master/NcDataReader2/Resources/doc/ncDataReader2_Manual.pdf\">documentation</a> on how to create netCDF-files (<span style=\"font-family: Courier New;\">*.nc files</span>) and the different interpolation and extrapolation types. </p>
-<p>More information can be found <a href=\"https://www.j-raedler.de/projects/ncdatareader2/\">here</a>.</p>
-<p><b><span style=\"color: #008000;\">Outlook</span></b> </p>
-<p>If the function NcEasyGetScattered2D works in the future, an implementation to this model should follow. It would substitute <a href=\"Modelica.Blocks.Tables.CombiTable2D\">CombiTable2D</a>. Please have a look at the documentation on how to create netCDF-files and the different interpolation types. More information on that you find here.</p>
-<h4><span style=\"color: #008000\">Example Function</span></h4>
-<p><a href=\"AixLib.Utilities.Examples.NcDataReader\">AixLib.Utilities.Examples.NcDataReader</a></p>
+<h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  The model <b>NcDataReader</b> reads data from netCDF files (based on
+  HDF) to Modelica. You can read attributes of type integer or
+  double/float/Real as well as one dimensional vectors. Therefore, the
+  NcDataReader represents an alternative for the <a href=
+  \"Modelica.Blocks.Sources.CombiTimeTable\">CombiTimeTable</a>.
+</p>
+<p>
+  You have to select the <span style=\"font-family: Courier New;\">*.nc
+  file</span> your data is stored in and define the variable's names
+  (<span style=\"font-family: Courier New;\">varName</span>). With the
+  checkboxes, you can select what type of data/attributes should be
+  read in by the model and define afterwards the names of the
+  variables/attributes.
+</p>
+<p>
+  <b><span style=
+  \"font-size: 12pt; color: #bf2427;\">IMPORTANT:</span></b> This model
+  needs the external library <a href=
+  \"https://github.com/modelica-3rdparty/netCDF-DataReader\">NcDataReader2</a>.
+  Clone or download the repository and load the Modelica library
+  package (<span style=
+  \"font-family: Courier New;\">netCDF-DataReader/NcDataReader2/package.mo</span>).
+  Alternatively, if dymosim crashes or simulation does not work, please
+  test the <a href=\"https://github.com/RWTH-EBC/netCDF-DataReader\">EBC
+  fork</a> of the repository, which uses different binaries.
+</p>
+<p>
+  <b><span style=\"font-size: 14pt;\">DDE:</span></b> DDE needs to find
+  external binaries explicitly. This means either binaries from
+  <span style=
+  \"font-family: Courier New;\">modelica://NcDataReader2/Resources/Library</span>
+  have to be copied into the current working directy, or the path has
+  to be added to a certain environment variable of operating system. In
+  the <a href=\"AixLib.Utilities.Examples.NcDataReader\">example of
+  NcDataReader</a> scripts are added that can also be found in
+  <span style=
+  \"font-family: Courier New;\">modelica://AixLib\\Resources\\Scripts\\Dymola\\Utilities\\Examples</span>.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Further external
+  information</span></b>
+</p>
+<p>
+  For further information please consider <a href=
+  \"https://github.com/tbeu/netCDF-DataReader\">netCDF-DataReader GitHub
+  repository</a>.
+</p>
+<p>
+  Have a look directly at the <a href=
+  \"https://github.com/tbeu/netCDF-DataReader/blob/master/NcDataReader2/Resources/doc/ncDataReader2_Manual.pdf\">
+  documentation</a> on how to create netCDF-files (<span style=
+  \"font-family: Courier New;\">*.nc files</span>) and the different
+  interpolation and extrapolation types.
+</p>
+<p>
+  More information can be found <a href=
+  \"https://www.j-raedler.de/projects/ncdatareader2/\">here</a>.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Outlook</span></b>
+</p>
+<p>
+  If the function NcEasyGetScattered2D works in the future, an
+  implementation to this model should follow. It would substitute
+  <a href=\"Modelica.Blocks.Tables.CombiTable2D\">CombiTable2D</a>.
+  Please have a look at the documentation on how to create netCDF-files
+  and the different interpolation types. More information on that you
+  find here.
+</p>
+<h4>
+  <span style=\"color: #008000\">Example Function</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Utilities.Examples.NcDataReader\">AixLib.Utilities.Examples.NcDataReader</a>
+</p>
 </html>"));
 end NcDataReader;

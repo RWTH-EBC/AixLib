@@ -189,23 +189,27 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             200,100}})),
     experiment(StopTime=86400),
-    Documentation(revisions="<html>
-<ul>
-<li>
-July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
-First implementation.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model demonstrates the usage of the facade ventilation unit connected
-to the standard controller. The inputs are the room and the outdoor temperaure.
-Those temperatures and the room temperature set point are sine waves with a 
-period of one day, which all have a different phase. The simulation result 
-depicted in the following figure shows the behavior of the two-point controller
-that opens the heating valve fully for heating. For cooling, it closes the
-heating valve and bypasses the heat recovery unit so that the supply air
-temperature is equal to the outdoor temperature.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitExample.png\"
-alt=\"Example result of facade ventilation unit example\"/></p>
+<p>
+  This model demonstrates the usage of the facade ventilation unit
+  connected to the standard controller. The inputs are the room and the
+  outdoor temperaure. Those temperatures and the room temperature set
+  point are sine waves with a period of one day, which all have a
+  different phase. The simulation result depicted in the following
+  figure shows the behavior of the two-point controller that opens the
+  heating valve fully for heating. For cooling, it closes the heating
+  valve and bypasses the heat recovery unit so that the supply air
+  temperature is equal to the outdoor temperature.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitExample.png\"
+  alt=\"Example result of facade ventilation unit example\">
+</p>
 </html>"));
 end FacadeVentilationUnit;

@@ -30,14 +30,16 @@ equation
           fillColor={191,0,0},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model converts the direct irradiation on a horizontal surface to the
-direct irradiation on a normal surface. Therefore it needs the solar altitude
-angle.</p>
+    Documentation(info="<html><p>
+  This model converts the direct irradiation on a horizontal surface to
+  the direct irradiation on a normal surface. Therefore it needs the
+  solar altitude angle.
+</p>
 </html>",
-    revisions="<html>
-<ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+    revisions="<html><ul>
+  <li>June 30, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end to_HDirNor;

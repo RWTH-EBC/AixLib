@@ -185,7 +185,6 @@ equation
   The pressure level within the cooling circuit is assumed to be
   constant at about 3 bar.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April, 2019&#160;</i> by Julian Matthes:<br/>

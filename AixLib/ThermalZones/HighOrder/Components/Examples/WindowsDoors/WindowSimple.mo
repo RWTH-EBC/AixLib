@@ -30,21 +30,34 @@ equation
   connect(SolarRadiation.y, varRad.AOI[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,43},{-65,43}},
       color={0,0,127}));
-  annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a> model.</p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>Test case for calculation of U-value</p>
- <ul>
- <li>Area of component: 10 m2</li>
- <li>Temperature difference: 20 K</li>
- <li>Test time: 1 h</li>
- </ul>
- </html>", revisions = "<html>
- <ul>
-   <li><i>April 1, 2012&nbsp;</i>
-          by Ana Constantin and Corinna Leonhard:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+  annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the <a href=
+  \"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a>
+  model.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Test case for calculation of U-value
+</p>
+<ul>
+  <li>Area of component: 10 m2
+  </li>
+  <li>Temperature difference: 20 K
+  </li>
+  <li>Test time: 1 h
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>April 1, 2012&#160;</i> by Ana Constantin and Corinna
+    Leonhard:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end WindowSimple;

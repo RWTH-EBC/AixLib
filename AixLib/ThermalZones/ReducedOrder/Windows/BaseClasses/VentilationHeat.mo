@@ -84,18 +84,23 @@ equation
               "modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/VentilationHeat.png")}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-The model considers additional heat input in the event of window ventilation
- and simultaneously closed external solar protection based on VDI 6007 part 3.
-<br/>The closed external solar protection absorbs solar irradiation which is
- brought into the room by convection.
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - Modelling of solar radiation.</p>
-</html>", revisions="<html>
+    Documentation(info="<html>The model considers additional heat input in the event of window
+ventilation and simultaneously closed external solar protection based
+on VDI 6007 part 3.<br/>
+The closed external solar protection absorbs solar irradiation which is
+brought into the room by convection.
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 <ul>
-<li>May 5, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>May 5, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end VentilationHeat;

@@ -174,15 +174,29 @@ equation
   connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1.1,4.1},{-1.1,12},{-12,12},{-12,4},{-19,4}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 17, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a cellar for the whole building.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The model can extended, if one wants to consider each of the floors belongig to the upper rooms individually.</p>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 17, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a cellar for the whole building.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The model can extended, if one wants to consider each of the floors
+  belongig to the upper rooms individually.
+</p>
+</html>"));
 end Cellar;

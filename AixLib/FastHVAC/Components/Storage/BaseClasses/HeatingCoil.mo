@@ -141,14 +141,14 @@ equation
           smooth=Smooth.Bezier,
           visible = use_heatingCoil1)}),
     Documentation(info="<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model of a heating coil to heat a fluid (e.g. water) by a given input
   on the heat port.
 </p>
 <h4>
-  <font color=\"#008000\">Concept</font>
+  <span style=\"color:#008000\">Concept</span>
 </h4>
 <p>
   The heating coil is implemented as a pipe which is going through the

@@ -101,52 +101,51 @@ annotation (defaultComponentName="bou",
           extent={{-150,110},{150,150}},
           textString="%name",
           lineColor={0,0,255})}),
-    Documentation(info="<html>
-<p>
-This model defines constant values for boundary conditions:
+    Documentation(info="<html><p>
+  This model defines constant values for boundary conditions:
 </p>
 <ul>
-<li> Boundary pressure or boundary density.</li>
-<li> Boundary temperature or boundary specific enthalpy.</li>
-<li> Boundary composition (only for multi-substance or trace-substance flow).</li>
+  <li>Boundary pressure or boundary density.
+  </li>
+  <li>Boundary temperature or boundary specific enthalpy.
+  </li>
+  <li>Boundary composition (only for multi-substance or trace-substance
+  flow).
+  </li>
 </ul>
 <p>
-Note, that boundary temperature, density, specific enthalpy,
-mass fractions and trace substances have only an effect if the mass flow
-is from the Boundary into the port. If mass is flowing from
-the port into the boundary, the boundary definitions,
-with exception of boundary pressure, do not have an effect.
+  Note, that boundary temperature, density, specific enthalpy, mass
+  fractions and trace substances have only an effect if the mass flow
+  is from the Boundary into the port. If mass is flowing from the port
+  into the boundary, the boundary definitions, with exception of
+  boundary pressure, do not have an effect.
 </p>
 </html>",
-revisions="<html>
-<ul>
-<li>
-May 13, 2019 by Jianjun Hu:<br/>
-Moved from AixLib.Fluid.Sources.FixedBoundary to here. This is for  
-<a href=\"https://github.com/AixLib/modelica-AixLib/issues/1072\"> #1072</a>.
-</li>
-<li>
-January 14, 2019 by Jianjun Hu:<br/>
-Changed to extend <a href=\"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">
-AixLib.Fluid.Sources.BaseClasses.PartialSource</a>. This is for 
-<a href=\"https://github.com/AixLib/modelica-AixLib/issues/1050\"> #1050</a>.
-</li>
-<li>
-April 18, 2017, by Filip Jorissen:<br/>
-Changed <code>checkBoundary</code> implementation
-such that it is run as an initial equation
-since it depends on parameters only.
-See <a href=\"https://github.com/AixLib/modelica-AixLib/issues/728\">#728</a>.
-</li>
-<li>
-January 26, 2016, by Michael Wetter:<br/>
-Added <code>unit</code> and <code>quantity</code> attributes.
-</li>
-<li>
-September 29, 2009, by Michael Wetter:<br/>
-First implementation.
-Implementation is based on <code>Modelica.Fluid</code>.
-</li>
+revisions="<html><ul>
+  <li>May 13, 2019 by Jianjun Hu:<br/>
+    Moved from AixLib.Fluid.Sources.FixedBoundary to here. This is for
+    <a href=
+    \"https://github.com/AixLib/modelica-AixLib/issues/1072\">#1072</a>.
+  </li>
+  <li>January 14, 2019 by Jianjun Hu:<br/>
+    Changed to extend <a href=
+    \"modelica://AixLib.Fluid.Sources.BaseClasses.PartialSource\">AixLib.Fluid.Sources.BaseClasses.PartialSource</a>.
+    This is for <a href=
+    \"https://github.com/AixLib/modelica-AixLib/issues/1050\">#1050</a>.
+  </li>
+  <li>April 18, 2017, by Filip Jorissen:<br/>
+    Changed <code>checkBoundary</code> implementation such that it is
+    run as an initial equation since it depends on parameters only. See
+    <a href=
+    \"https://github.com/AixLib/modelica-AixLib/issues/728\">#728</a>.
+  </li>
+  <li>January 26, 2016, by Michael Wetter:<br/>
+    Added <code>unit</code> and <code>quantity</code> attributes.
+  </li>
+  <li>September 29, 2009, by Michael Wetter:<br/>
+    First implementation. Implementation is based on
+    <code>Modelica.Fluid</code>.
+  </li>
 </ul>
 </html>"));
 end FixedBoundary;

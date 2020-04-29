@@ -3,13 +3,12 @@ package SignalExchange "External Signal Exchange Package"
   extends Modelica.Icons.Package;
 
 
-  annotation (Documentation(info="<html>
-<p>
-Package with blocks that can be used
-to identify and activate control signal overwrites, and
-to identify and read sensor signals. This package is used
-by the Building Optimization Performance Test software
-<a href=\"https://github.com/ibpsa/project1-boptest\">BOPTEST</a>.
+  annotation (Documentation(info="<html><p>
+  Package with blocks that can be used to identify and activate control
+  signal overwrites, and to identify and read sensor signals. This
+  package is used by the Building Optimization Performance Test
+  software <a href=
+  \"https://github.com/ibpsa/project1-boptest\">BOPTEST</a>.
 </p>
 </html>", Icon(graphics={Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,
               0,0},

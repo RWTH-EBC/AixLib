@@ -238,124 +238,171 @@ equation
           thickness=0.5)}),
         Diagram(
           coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for simple expansion valves that are used, for example, 
-in close-loop systems like heat pumps or chillers.
+  This is a base model for simple expansion valves that are used, for
+  example, in close-loop systems like heat pumps or chillers.
 </p>
-<h4>Equations needed for completion</h4>
+<h4>
+  Equations needed for completion
+</h4>
 <p>
-Three equations need to be added by an extending class using this component:
+  Three equations need to be added by an extending class using this
+  component:
 </p>
 <ul>
-<li>The momentum balance specifying the relationship between the pressure 
-drop dp and the mass flow rate m_flow. Therefore, different modeling
-approaches are suggested that can be easily expanded.</li>
-<li><code>port_b.h_outflow</code> for flow in design direction.</li>
-<li><code>port_a.h_outflow</code> for flow in reverse direction.</li>
+  <li>The momentum balance specifying the relationship between the
+  pressure drop dp and the mass flow rate m_flow. Therefore, different
+  modeling approaches are suggested that can be easily expanded.
+  </li>
+  <li>
+    <code>port_b.h_outflow</code> for flow in design direction.
+  </li>
+  <li>
+    <code>port_a.h_outflow</code> for flow in reverse direction.
+  </li>
 </ul>
 <p>
-Moreover, appropriate values shall be assigned to the following parameters:
+  Moreover, appropriate values shall be assigned to the following
+  parameters:
 </p>
 <ul>
-<li><code>dp_start</code> for a guess of the pressure drop</li>
-<li><code>m_flow_small</code> for regularization of zero flow.</li>
-<li><code>dp_nominal</code> for nominal pressure drop.</li>
-<li><code>m_flow_nominal</code> for nominal mass flow rate.</li>
+  <li>
+    <code>dp_start</code> for a guess of the pressure drop
+  </li>
+  <li>
+    <code>m_flow_small</code> for regularization of zero flow.
+  </li>
+  <li>
+    <code>dp_nominal</code> for nominal pressure drop.
+  </li>
+  <li>
+    <code>m_flow_nominal</code> for nominal mass flow rate.
+  </li>
 </ul>
-<h4>Modeling approaches</h4>
+<h4>
+  Modeling approaches
+</h4>
 <p>
-Actually, three different modelling approaches are suggested and saved as
-enumeration in 
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc</a>.
-In the following, these modeling approaches are characterised shortly:<br />
+  Actually, three different modelling approaches are suggested and
+  saved as enumeration in <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc</a>.
+  In the following, these modeling approaches are characterised
+  shortly:<br/>
 </p>
-<table summary=\"Modelling approaches\" border=\"1\" cellspacing=\"0\" 
+<table summary=\"Modelling approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Approach</th>
-<th>Formula</th> 
-<th>Comment</th> 
-</tr> 
-<tr>
-<td><b>Linear</b></td> 
-<td><code>m&#775; = C A<sub>valve</sub> dp</code></td> 
-<td>Used for testing or initialisation</td> 
-</tr> 
-<tr>
-<td><b>Nominal</b></td> 
-<td><code>m&#775; = m&#775;<sub>nominal</sub> / dp<sub>nominal</sub> 
-A<sub>valve</sub> dp</code></td> 
-<td>Used mainly for initialisation</td> 
-</tr> 
-<tr>
-<td><b>Flow coefficient</b></td> 
-<td><code>m&#775; = C A<sub>valve</sub> sqrt(2 &rho;<sub>inlet</sub> 
-dp)</code></td> 
-<td>Chosen by default and follows from Bernoulli's law</td> 
-</tr> 
+  <tr>
+    <th>
+      Approach
+    </th>
+    <th>
+      Formula
+    </th>
+    <th>
+      Comment
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <b>Linear</b>
+    </td>
+    <td>
+      <code>ṁ = C A<sub>valve</sub> dp</code>
+    </td>
+    <td>
+      Used for testing or initialisation
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Nominal</b>
+    </td>
+    <td>
+      <code>ṁ = ṁ<sub>nominal</sub> / dp<sub>nominal</sub>
+      A<sub>valve</sub> dp</code>
+    </td>
+    <td>
+      Used mainly for initialisation
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Flow coefficient</b>
+    </td>
+    <td>
+      <code>ṁ = C A<sub>valve</sub> sqrt(2 ρ<sub>inlet</sub>
+      dp)</code>
+    </td>
+    <td>
+      Chosen by default and follows from Bernoulli's law
+    </td>
+  </tr>
 </table>
 <p>
-For the third approach (i.e. flow coefficient), different calculation
-models are stored in
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.FlowCoefficient</a>.
-Therefore, the calculation procedure of the flow coefficient C is introduced as
-replaceable model and must by defined by the User.
+  For the third approach (i.e. flow coefficient), different calculation
+  models are stored in <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.FlowCoefficient</a>.
+  Therefore, the calculation procedure of the flow coefficient C is
+  introduced as replaceable model and must by defined by the User.
 </p>
-<h4>Transient behaviour</h4>
+<h4>
+  Transient behaviour
+</h4>
 <p>
-The base model has a parameter <code>useInpFil</code> that is used to model
-the valve's transient behaviour while opening or closing. Generally, this 
-approach uses the same modeling attempt as the stat-up and shut-down
-transients introtuced for flow machines (see 
-<a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
-AixLib.Fluid.Movers.UsersGuide</a>). Therefore, just the parameter's affections 
-are presented here:
+  The base model has a parameter <code>useInpFil</code> that is used to
+  model the valve's transient behaviour while opening or closing.
+  Generally, this approach uses the same modeling attempt as the
+  stat-up and shut-down transients introtuced for flow machines (see
+  <a href=
+  \"modelica://AixLib.Fluid.Movers.UsersGuide\">AixLib.Fluid.Movers.UsersGuide</a>).
+  Therefore, just the parameter's affections are presented here:
 </p>
 <ol>
-<li>
-If <code>useInpFil=false</code>, then the input signal <code>opeSet.y</code> 
-is equal to the valve's opening degree. Thus, a step change in the input 
-signal causes a step change in the opening degree.
-</li>
-<li>
-If <code>useInpFil=true</code>, which is the default,
-then the opening degree is equal to the output of a filter. 
-This filter is implemented as a 2nd order differential equation. Thus, a step 
-change in the fan input signal will cause a gradual change in the opening
-degree. The filter has a parameter <code>risTim</code>, which by default is set to
-<i>1</i> second. The rise time is the time required to reach <i>99.6%</i> of 
-the full opening degree, or,if the ventil is closed, to reach a opening degree
-of <i>0.4%</i>.
-</li>
+  <li>If <code>useInpFil=false</code>, then the input signal
+  <code>opeSet.y</code> is equal to the valve's opening degree. Thus, a
+  step change in the input signal causes a step change in the opening
+  degree.
+  </li>
+  <li>If <code>useInpFil=true</code>, which is the default, then the
+  opening degree is equal to the output of a filter. This filter is
+  implemented as a 2nd order differential equation. Thus, a step change
+  in the fan input signal will cause a gradual change in the opening
+  degree. The filter has a parameter <code>risTim</code>, which by
+  default is set to <i>1</i> second. The rise time is the time required
+  to reach <i>99.6%</i> of the full opening degree, or,if the ventil is
+  closed, to reach a opening degree of <i>0.4%</i>.
+  </li>
 </ol>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-In the following, some general references are given for information about
-modelling expansion valves. The modelling approach presented here is alligned
-to the modelling approaches presented in the literature:
+  In the following, some general references are given for information
+  about modelling expansion valves. The modelling approach presented
+  here is alligned to the modelling approaches presented in the
+  literature:
 </p>
 <p>
-Li, W. (2013): <a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">
-Simplified modeling analysis ofmass flow characteristics in electronic expansion 
-valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8&ndash;12
+  Li, W. (2013): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">Simplified
+  modeling analysis ofmass flow characteristics in electronic expansion
+  valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8–12
 </p>
 <p>
-X. Cao, Z.-Y. Li, L.-L. Shao and C.-L. Zhang (2016): 
-<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2015.09.062\">
-Refrigerant flow through electronic expansion valve: Experiment and 
-neural network modeling</a>. In: <i>Applied Thermal Engineering 92</i>, 
-S. 210&ndash;218
+  X. Cao, Z.-Y. Li, L.-L. Shao and C.-L. Zhang (2016): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2015.09.062\">Refrigerant
+  flow through electronic expansion valve: Experiment and neural
+  network modeling</a>. In: <i>Applied Thermal Engineering 92</i>, S.
+  210–218
 </p>
 </html>"));
 end PartialExpansionValve;

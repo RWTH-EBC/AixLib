@@ -135,13 +135,19 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    Documentation(info="<html>
-<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. Parameter set is for an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show typical profiles for indoor air temperatures, but are not related to a specific building or measurement data.</p>
-</html>", revisions="<html>
-  <ul>
+    Documentation(info="<html><p>
+  This example illustrates the use of <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>.
+  Parameter set is for an office building build as passive house. All
+  boundary conditions are generic to show how to apply different kinds
+  of boundary conditions. The results should show typical profiles for
+  indoor air temperatures, but are not related to a specific building
+  or measurement data.
+</p>
+<ul>
   <li>September 29, 2016, by Moritz Lauster:<br/>
-  Implemented.
+    Implemented.
   </li>
-  </ul>
+</ul>
 </html>"));
 end Multizone;

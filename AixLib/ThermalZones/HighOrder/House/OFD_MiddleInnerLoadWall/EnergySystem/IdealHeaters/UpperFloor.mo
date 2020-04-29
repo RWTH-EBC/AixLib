@@ -95,12 +95,18 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-17, 22}, {-17, 44}}, color = {255, 0, 0}, thickness = 1), Line(points = {{-102, 21}, {101, 21}, {101, -7}}, color = {255, 0, 0}, thickness = 1), Line(points = {{-101, 12}, {92, 12}, {92, -7}}, color = {0, 0, 255}, thickness = 1), Line(points = {{-24, 12}, {-24, 34}}, color = {0, 0, 255}, thickness = 1), Text(extent = {{-79, 66}, {-37, 43}}, lineColor = {0, 0, 0}, textString = "1 - Bedroom
  2- Children1
  3 - Bath
- 4 - Children2")}), Documentation(revisions = "<html>
- <ul>
- <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the upper floor.</p>
- </html>"));
+ 4 - Children2")}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the upper floor.
+</p>
+</html>"));
 end UpperFloor;

@@ -271,24 +271,44 @@ equation
           lineColor={95,95,95},
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Reimplementation based on Annex60 and AixLib models.
+    Documentation(revisions="<html><ul>
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Reimplementation based on Annex60 and AixLib models.
   </li>
-  <li>
-  June 22, 2015, by Moritz Lauster:<br/>
-  Changed building physics to AixLib.
+  <li>June 22, 2015, by Moritz Lauster:<br/>
+    Changed building physics to AixLib.
   </li>
-  <li>
-  April 25, 2014, by Ole Odendahl:<br/>
-  Implemented.
+  <li>April 25, 2014, by Ole Odendahl:<br/>
+    Implemented.
   </li>
 </ul>
 </html>", info="<html>
-<p>Partial for <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone</a> models. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
-<h4>Typical use and important parameters</h4>
-<p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.</p>
+<p>
+  Partial for <a href=
+  \"AixLib.ThermalZones.ReducedOrder.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  models. It defines connectors and a replaceable vector of <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  models. Most connectors are conditional to allow conditional
+  modifications according to parameters or to pass-through conditional
+  removements in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>
+  and subsequently in <a href=
+  \"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.
+</p>
+<h4>
+  Typical use and important parameters
+</h4>
+<p>
+  The model needs parameters describing general properties of the
+  building (indoor air volume, net floor area, overall surface area)
+  and a vector with length of number of zones containing <a href=
+  \"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a>
+  records to define zone properties. The user can redeclare the thermal
+  zone model choosing from <a href=
+  \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
+  Further parameters for medium, initialization and dynamics originate
+  from <a href=
+  \"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+</p>
 </html>"));
 end PartialMultizone;

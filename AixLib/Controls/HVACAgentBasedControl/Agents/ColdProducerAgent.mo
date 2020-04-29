@@ -704,35 +704,85 @@ equation
           smooth=Smooth.None,
           origin={-16,-14},
           rotation=90)}),
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a producer agent which controls a cold producing device. </li>
-<li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
-<li>It is used together with a broker-agent and at least one producer-agent.</li>
-<li>It requires a CostFunction component to compute a proposal.</li>
+  <li>This model is a producer agent which controls a cold producing
+  device.
+  </li>
+  <li>It is based on communication via UDP and logic implemented with
+  the help of the StateGraph Modelica library.
+  </li>
+  <li>It is used together with a broker-agent and at least one
+  producer-agent.
+  </li>
+  <li>It requires a CostFunction component to compute a proposal.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The cold producer agent recives a call for proposal from the broker with a requested capacity adjustment. It makes a proposal with the help of a Cost function for the adjustment and sends it back to the broker. If the proposal is accepted, the agent confirms the adjustment and adjusts the capacity of the controlled device accordingly. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the consumer agent. For further information please refer to the first reference.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ProducerAgent.png\" alt=\"Producer agent\"/></p>
-<h4><span style=\"color: #008000\">References</span></h4>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The cold producer agent recives a call for proposal from the broker
+  with a requested capacity adjustment. It makes a proposal with the
+  help of a Cost function for the adjustment and sends it back to the
+  broker. If the proposal is accepted, the agent confirms the
+  adjustment and adjusts the capacity of the controlled device
+  accordingly. The logic is implemented with the help of the StateGraph
+  library. Communication is realized with the help of the DeviceDriver
+  library and follows the language standards for multi-agent-systems
+  set by the FIPA to the highest possible extend for Modelica models.
+  The following figure shows the behaviour of the consumer agent. For
+  further information please refer to the first reference.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ProducerAgent.png\"
+  alt=\"Producer agent\">
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
-<li>FIPA ACL Message Structure Specification</li>
-<li>FIPA Communicative Act Library Specification </li>
-<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
+  <li>Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic.
+  </li>
+  <li>FIPA ACL Message Structure Specification
+  </li>
+  <li>FIPA Communicative Act Library Specification
+  </li>
+  <li>Felix Bünning, Roozbeh Sangi, Dirk Müller. A Modelica library for
+  agent-based control of building HVAC systems. Applied Energy,
+  193:52-59, 2017.
+  </li>
 </ul>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></b></p>
+<p>
+  <b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example
+  Results</span></b>
+</p>
 <ul>
-<li><a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">Simple Heating System</a></li>
+  <li>
+    <a href=
+    \"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">
+    Simple Heating System</a>
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
-<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
-<li>November 2016, by Felix B&uuml;nning: Implemented variable minimum load</li>
-<li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
+      revisions="<html><ul>
+  <li>December 2016, by Roozbeh Sangi:<br/>
+    revised
+  </li>
+  <li>December 2016, by Felix Bünning: Changed some variables to
+  Integer type in order to avoid warnings caused by using the \"==\"
+  operator
+  </li>
+  <li>November 2016, by Felix Bünning: Implemented variable minimum
+  load
+  </li>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>"));
 end ColdProducerAgent;

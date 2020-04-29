@@ -98,35 +98,68 @@ equation
           lineColor={0,0,255},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid,
-          textString="Zeta=%zeta")}), Documentation(revisions="<html>
-  <ul>
-  <li><i>April 27, 2017&nbsp;</i>
-     by Philipp Mehrfeld:<br/>
-     Model acc. to IBPSA conventions. Take into account homotopyInit., linearization, from_dp.</li>
-  <li><i>April 2016&nbsp;</i>
-     by Peter Matthes:<br/>
-     Improved formulation of flow equation according to issue #232.</li>
-  <li><i>November 2014&nbsp;</i>
-     by Marcus Fuchs:<br/>
-     Changed model to use Annex 60 base class</li>
-  <li><i>November 1, 2013&nbsp;</i>
-     by Ana Constantin:<br/>
-     Implemented</li>
-  </ul>
- </html>", info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code> (&zeta;). </p>
-<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>Values for pressure loss factor zeta can be easily found in tables. </p>
-<p>The following equation represents the dependencies of<code> m_flow(_nominal), dp(_nominal), zeta </code>and the<code> diameter (D)</code>.</p>
-<p>&Delta;p = 0.5*&zeta;*&rho;*v*|v|</p>
-<p>= 8*&zeta;/(&pi;^2*D^4*&rho;) * m_flow*|m_flow| </p>
-<p><br/>
-Since this a simplified approach to calculate/generate a pressure drop, there exist no distinction between laminar and turbulent flow regarding &zeta;-values.</p>
-<p>The non-existance of a turbulent flow, the equation handling near zero as well as the different approach of being able to use tabled zeta values, 
-mainly distinguish this model from 
-<a href=\"AixLib.Fluid.FixedResistances.PressureDrop\">AixLib.Fluid.FixedResistances.PressureDrop</a>.</p>
-<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
-<p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
+          textString="Zeta=%zeta")}), Documentation(revisions="<html><ul>
+  <li>
+    <i>April 27, 2017&#160;</i> by Philipp Mehrfeld:<br/>
+    Model acc. to IBPSA conventions. Take into account homotopyInit.,
+    linearization, from_dp.
+  </li>
+  <li>
+    <i>April 2016&#160;</i> by Peter Matthes:<br/>
+    Improved formulation of flow equation according to issue #232.
+  </li>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>November 1, 2013&#160;</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Simple model for a hydraulic resistance with the pressureloss
+  modelled with the pressure loss factor <code>zeta</code> (ζ).
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  Values for pressure loss factor zeta can be easily found in tables.
+</p>
+<p>
+  The following equation represents the dependencies of
+  <code>m_flow(_nominal), dp(_nominal), zeta</code> and the
+  <code>diameter (D)</code>.
+</p>
+<p>
+  Δp = 0.5*ζ*ρ*v*|v|
+</p>
+<p>
+  = 8*ζ/(π^2*D^4*ρ) * m_flow*|m_flow|
+</p>
+<p>
+  <br/>
+  Since this a simplified approach to calculate/generate a pressure
+  drop, there exist no distinction between laminar and turbulent flow
+  regarding ζ-values.
+</p>
+<p>
+  The non-existance of a turbulent flow, the equation handling near
+  zero as well as the different approach of being able to use tabled
+  zeta values, mainly distinguish this model from <a href=
+  \"AixLib.Fluid.FixedResistances.PressureDrop\">AixLib.Fluid.FixedResistances.PressureDrop</a>.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Example Results</span></b>
+</p>
+<p>
+  <a href=
+  \"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a>
+</p>
 </html>"));
 end HydraulicResistance;

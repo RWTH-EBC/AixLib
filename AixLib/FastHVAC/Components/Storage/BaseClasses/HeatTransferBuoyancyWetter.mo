@@ -33,13 +33,13 @@ equation
   therm[n].Q_flow = -Q_flow[n-1];
 
   annotation (Diagram(graphics), Documentation(info="<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model for heat transfer between buffer storage layers.
 </p>
 <h4>
-  <font color=\"#008000\">Concept</font>
+  <span style=\"color:#008000\">Concept</span>
 </h4>
 <p>
   Models buoyancy according to

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpNdpVarControlTest
   "testing the pump dp-var algorithm with the new \"one record\" pump model with internal speed limitation (instead of pump head limitation)."
   extends Modelica.Icons.Example;
@@ -78,24 +78,59 @@ equation
       horizontalAlignment=TextAlignment.Left));
   annotation (
       experiment(StopTime=600),
-    Documentation(revisions="<html>
-<ul>
-<li>2019-09-18 by Alexander Kümpel:<br />Renaming and restructuring.</li>
-<li>2018-03-01 by Peter Matthes:<br />Adjusted parameter settings. From pump model removed Nstart (became Nnom in pump model) and m_flow_start (should be used as output from pump rather than a setting). Changed setting of system.m_flow_start to become pump.m_flow_start.</li>
-<li>2018-02-01 by Peter Matthes:<br />Switches pump off near end of simulation to check for handling of power and efficiency calculation. Improves plot script.</li>
-<li>2018-01-29 by Peter Matthes:<br />* Removes parameter useABCformula in pump model and changes pump record to Stratos_Pico_25_1_6.<br />* The selectable function for efficiency calculation could be removed from the parameter dialog.<br />* Changes Nnom parameter into Nstart as Nnom has been removed.</li>
-<li>2017-12-06 by Peter Matthes:<br />Implemented and added new plot script.</li>
+    Documentation(revisions="<html><ul>
+  <li>2019-09-18 by Alexander Kümpel:<br/>
+    Renaming and restructuring.
+  </li>
+  <li>2018-03-01 by Peter Matthes:<br/>
+    Adjusted parameter settings. From pump model removed Nstart (became
+    Nnom in pump model) and m_flow_start (should be used as output from
+    pump rather than a setting). Changed setting of system.m_flow_start
+    to become pump.m_flow_start.
+  </li>
+  <li>2018-02-01 by Peter Matthes:<br/>
+    Switches pump off near end of simulation to check for handling of
+    power and efficiency calculation. Improves plot script.
+  </li>
+  <li>2018-01-29 by Peter Matthes:<br/>
+    * Removes parameter useABCformula in pump model and changes pump
+    record to Stratos_Pico_25_1_6.<br/>
+    * The selectable function for efficiency calculation could be
+    removed from the parameter dialog.<br/>
+    * Changes Nnom parameter into Nstart as Nnom has been removed.
+  </li>
+  <li>2017-12-06 by Peter Matthes:<br/>
+    Implemented and added new plot script.
+  </li>
 </ul>
 </html>", info="<html>
-<h4>What the test does</h4>
+<h4>
+  What the test does
+</h4>
 <ul>
-<li>Tests PumpN model (speed controlled pump with controller block)</li>
-<li>Tests dp-var control (PumpN version, &quot;dynamic&quot; calculation)</li>
-<li>Tests system pressure drop change (ramp)</li>
-<li>Tests pump off-switch</li>
+  <li>Tests PumpN model (speed controlled pump with controller block)
+  </li>
+  <li>Tests dp-var control (PumpN version, \"dynamic\" calculation)
+  </li>
+  <li>Tests system pressure drop change (ramp)
+  </li>
+  <li>Tests pump off-switch
+  </li>
 </ul>
-<h4>Annotations</h4>
-<p>Always make sure that the pump data (coefficient matrices, table of maxMin pump speed, etc.) suite your pump. You can use the test cases in <a href=\"Zugabe.Zugabe_DB.Pump.Examples\">Zugabe.Zugabe_DB.Pump.Examples</a> to check that. Especially if you decide to use the simpler ABC coefficients c[2,0], c[1,1] and c[0,2] make sure that they yield similar results as the complete set of coefficients. Otherwise the result of pump head calculation will be (too) wrong and consequently, pump speed might be bound to its limits only. </p>
+<h4>
+  Annotations
+</h4>
+<p>
+  Always make sure that the pump data (coefficient matrices, table of
+  maxMin pump speed, etc.) suite your pump. You can use the test cases
+  in <a href=
+  \"Zugabe.Zugabe_DB.Pump.Examples\">Zugabe.Zugabe_DB.Pump.Examples</a>
+  to check that. Especially if you decide to use the simpler ABC
+  coefficients c[2,0], c[1,1] and c[0,2] make sure that they yield
+  similar results as the complete set of coefficients. Otherwise the
+  result of pump head calculation will be (too) wrong and consequently,
+  pump speed might be bound to its limits only.
+</p>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/Movers/PumpsPolynomialBased/Examples/PumpNdpVarControlTest.mos"

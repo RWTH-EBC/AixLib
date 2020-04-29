@@ -34,15 +34,32 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "ERC"), Ellipse(extent = {{-24, 80}, {-14, 70}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color = {0, 0, 0}, thickness = 1)}), Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Partial model for internal gains of a person. The model uses the specific value for <i>Persons/(m<sup>2</sup> room area)</i> and the <i>roomArea</i> to calculate the persons in the room considering the schedule / input y. </p>
-<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>The schedule input y describes the presence of only one person, and can take values from 0 to 1. </p>
-</html>",  revisions="<html>
- <ul>
-    <li><i>March 30, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>: Summarize models to partial model. Make all models dependant from a relative input 0..1. Many refactorings.</li>
- <li>July 10, 2019, by Martin Kremer:<br/>Implemented based on old human model</li>
- </ul>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color = {0, 0, 0}, thickness = 1)}), Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Partial model for internal gains of a person. The model uses the
+  specific value for <i>Persons/(m<sup>2</sup> room area)</i> and the
+  <i>roomArea</i> to calculate the persons in the room considering the
+  schedule / input y.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  The schedule input y describes the presence of only one person, and
+  can take values from 0 to 1.
+</p>
+<ul>
+  <li>
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
+    Summarize models to partial model. Make all models dependant from a
+    relative input 0..1. Many refactorings.
+  </li>
+  <li>July 10, 2019, by Martin Kremer:<br/>
+    Implemented based on old human model
+  </li>
+</ul>
+</html>"));
 end PartialHuman;

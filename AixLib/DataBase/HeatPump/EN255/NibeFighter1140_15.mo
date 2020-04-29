@@ -11,11 +11,14 @@ record NibeFighter1140_15 "Nibe Fighter 1140-15"
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
-    Documentation(info="<html>
-<p>According to manufacturer&apos;s data; EN 255. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  According to manufacturer's data; EN 255.
+</p>
 <ul>
- <li><i>Oct 14, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Transferred to AixLib.</li>
+  <li>
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    Transferred to AixLib.
+  </li>
 </ul>
 </html>"));
 end NibeFighter1140_15;

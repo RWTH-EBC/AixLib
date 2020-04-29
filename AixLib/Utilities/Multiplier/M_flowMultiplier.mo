@@ -77,24 +77,37 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
           -100},{100,100}}), graphics={
       Polygon(points={{-80,60},{80,0},{-80,-60},{-80,60}}, lineColor={0,0,
-            255})}),    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
+            255})}),    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
 <p>
-The model multiplies the mass flow rate and enthalpy of a medium at constant pressure and temperature.
+  The model multiplies the mass flow rate and enthalpy of a medium at
+  constant pressure and temperature.
 </p>
-<h4><font color=\"#008000\">Example Results</font></h4>
-<p><a href=\"BaseLib.Examples.Multiplier_test\">BaseLib.Examples.Multiplier_test </a></p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"BaseLib.Examples.Multiplier_test\">BaseLib.Examples.Multiplier_test</a>
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>April 01, 2014  </i>by Moritz Lauster:<br/>
-Renamed</li>
-<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>
-Formatted documentation appropriately</li>
-<li><i>November, 2011&nbsp;</i> by Peter Matthes:<br/>
-Model rewritten to work with MSL 3.2.</li>
-<li>by Alexander Hoh:<br/>
-Implemented.</li>
+      revisions="<html><ul>
+  <li>
+    <i>April 01, 2014</i> by Moritz Lauster:<br/>
+    Renamed
+  </li>
+  <li>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>November, 2011&#160;</i> by Peter Matthes:<br/>
+    Model rewritten to work with MSL 3.2.
+  </li>
+  <li>by Alexander Hoh:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end M_flowMultiplier;

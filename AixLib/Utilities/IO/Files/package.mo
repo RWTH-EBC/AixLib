@@ -2,9 +2,8 @@ within AixLib.Utilities.IO;
 package Files "Reports package"
   extends Modelica.Icons.Package;
 
-annotation (Documentation(info="<html>
-<p>
-Package with models for writing data to files.
+annotation (Documentation(info="<html><p>
+  Package with models for writing data to files.
 </p>
 </html>"), Icon(graphics={
         Polygon(

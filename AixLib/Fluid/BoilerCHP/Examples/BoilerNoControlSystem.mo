@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.Examples;
+within AixLib.Fluid.BoilerCHP.Examples;
 model BoilerNoControlSystem
   "Example that illustrates the use of the boiler model without control"
   extends Modelica.Icons.Example;
@@ -65,15 +65,21 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.BoilerNoControl\">AixLib.Fluid.BoilerCHP.BoilerNoControl</a>.
-The efficiency depends on the part load rate and the inflow temperature. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The simulation illustrates the behavior of <a href=
+  \"AixLib.Fluid.BoilerCHP.BoilerNoControl\">AixLib.Fluid.BoilerCHP.BoilerNoControl</a>.
+  The efficiency depends on the part load rate and the inflow
+  temperature.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>September 20, 2019&nbsp;</i> by Alexander Kümpel:<br/>First implementation</li>
-
+        revisions="<html><ul>
+  <li>
+    <i>September 20, 2019&#160;</i> by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=3600, __Dymola_Algorithm="Dassl"));

@@ -187,15 +187,22 @@ equation
           {-18.6667,-20.6667}},
                  color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),           Documentation(info="<html>
-<p>A simple example to test the models <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis\">panelheating_1D_Dis1</a> and <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Contributor\">contributor</a>.</p>
+            -100},{100,100}})),           Documentation(info="<html><p>
+  A simple example to test the models <a href=
+  \"AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis\">panelheating_1D_Dis1</a>
+  and <a href=
+  \"AixLib.Fluid.HeatExchangers.ActiveWalls.Contributor\">contributor</a>.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>November 28, 2014&nbsp;</i> by Xian Wu:<br/>
-Added to the HVAC library.</li>
+        revisions="<html><ul>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>November 28, 2014&#160;</i> by Xian Wu:<br/>
+    Added to the HVAC library.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=86400, Interval=60),

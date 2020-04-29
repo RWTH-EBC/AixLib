@@ -130,24 +130,46 @@ equation
           fillColor={175,175,175},
           fillPattern=FillPattern.CrossDiag,
           textString="%name")}),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Model of a sandwich wall construction for a cylindric mantle for heat storages.</p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>The cylindric heat transfer is implemented consisting of the insulation
-material and the tank material. Only the material data is used for the
-calculation of losses. No additional losses are included.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model of a sandwich wall construction for a cylindric mantle for heat
+  storages.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The cylindric heat transfer is implemented consisting of the
+  insulation material and the tank material. Only the material data is
+  used for the calculation of losses. No additional losses are
+  included.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li>
-January 24, 2020 by Philipp Mehrfeld:<br/>
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a> Switch to Dynamics enumerator to control init and energy conversion during simulation.
-</li>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+      revisions="<html><ul>
+  <li>January 24, 2020 by Philipp Mehrfeld:<br/>
+    <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a>
+    Switch to Dynamics enumerator to control init and energy conversion
+    during simulation.
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Added to AixLib
+  </li>
+  <li>
+    <i>March 25, 2015&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL
+  </li>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>
 "));

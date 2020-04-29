@@ -19,26 +19,43 @@ extends ActiveWallBaseDataDefinition(
       // k_top: Third attribute in logDT is T_surface according to GLUECK,
       // Bauteilaktivierung 1999, equation 7.91
       // (for heat flow up) from page 41
-annotation (Documentation(revisions="<html>
-<ul>
+annotation (Documentation(revisions="<html><ul>
   <li>
-<i>September 20, 2013&nbsp;</i>
-         by Mark Wesseling:<br/>
-         Implemented.</li>
+    <i>September 20, 2013&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>",
-        info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Record for Floor Heating Klima Boden TOP 2000. </p>
-<p>Defines heat exchange properties and storage capacity of the active part of the wall.</p>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Record is used with <a href=\"HVAC.Components.ActiveWalls_UC.Panelheating_1D_Dis\">HVAC.Components.ActiveWalls_UC.Panelheating_1D_Dis</a></p>
-<p>Source:</p>
+        info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Record for Floor Heating Klima Boden TOP 2000.
+</p>
+<p>
+  Defines heat exchange properties and storage capacity of the active
+  part of the wall.
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Record is used with <a href=
+  \"HVAC.Components.ActiveWalls_UC.Panelheating_1D_Dis\">HVAC.Components.ActiveWalls_UC.Panelheating_1D_Dis</a>
+</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>Product: Klima Boden TOP2000</li>
-<li>Manufacturer: Joco</li>
-<li>Borschure: JOCO KlimaBoden TOP 2000 / OEKOpor Technik Aufbauten; 2013/01</li>
-<li>Bibtexkey: JOCOKilmaBoden2013</li>
+  <li>Product: Klima Boden TOP2000
+  </li>
+  <li>Manufacturer: Joco
+  </li>
+  <li>Borschure: JOCO KlimaBoden TOP 2000 / OEKOpor Technik Aufbauten;
+  2013/01
+  </li>
+  <li>Bibtexkey: JOCOKilmaBoden2013
+  </li>
 </ul>
 </html>"));
 

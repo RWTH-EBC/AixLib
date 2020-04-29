@@ -10,14 +10,14 @@ function to_surfaceTiltVDI
 algorithm
   gamma_F:=Modelica.Constants.pi-til;
 
-  annotation (Documentation(info="<html>
-This function converts the inclination of a surface from the
- <a href=\"AixLib\">AixLib</a> definition to the definition of the VDI 6007
- part 3.
+  annotation (Documentation(info="<html>This function converts the inclination of a surface from the <a href=
+\"AixLib\">AixLib</a> definition to the definition of the VDI 6007 part
+3.
 </html>",
-        revisions="<html>
-<ul>
-<li>June 07, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+        revisions="<html><ul>
+  <li>June 07, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end to_surfaceTiltVDI;

@@ -570,54 +570,64 @@ equation
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid,
         rotation=45)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  December 16, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>December 16, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model prescribes inlet and outlet conditions of a simplified
-static heat pump model (i.e. boundary conditions of the secondary
-sides of the evaporator and condenser). Furhtermore, it prescribes 
-the rotational speed of the compressor. 
-The model is used to validate the compressor model in general
-as well as to identify effects of different static boundary 
-conditions (e.g. pinch temperature of the evaporator).
+  This model prescribes inlet and outlet conditions of a simplified
+  static heat pump model (i.e. boundary conditions of the secondary
+  sides of the evaporator and condenser). Furhtermore, it prescribes
+  the rotational speed of the compressor. The model is used to validate
+  the compressor model in general as well as to identify effects of
+  different static boundary conditions (e.g. pinch temperature of the
+  evaporator).
 </p>
-<h4>Required information</h4>
+<h4>
+  Required information
+</h4>
 <p>
-The User needs to define the following information in order to
-complete the model:
-</p>
-<ol>
-<li>Basic definitions of the compressor. For example, the
-displacement volume.</li>
-<li>Calculation approaches of the three efficiencies of the
-compressor.</li>
-<li>Static boundaries of the heat pump obtained, for example,
-by experimental data.</li>
-</ol>
-<p>
-To add static boundary conditions, a combi time table is included
-within the model. The columns are defined as follows:
+  The User needs to define the following information in order to
+  complete the model:
 </p>
 <ol>
-<li>Time steps (0,1,2,3,...).</li>
-<li>Rotational speed in <code>Hz</code>.</li>
-<li>Ambient temperature in <code>&#176;C</code>.</li>
-<li>Heat capacity in <code>W</code>.</li>
-<li>Temperature at inlet of condenser's secondary fluid in <code>&#176;C</code>.</li>
-<li>Power consumption in <code>kW</code>.</li>
-<li>COP.</li>
+  <li>Basic definitions of the compressor. For example, the
+  displacement volume.
+  </li>
+  <li>Calculation approaches of the three efficiencies of the
+  compressor.
+  </li>
+  <li>Static boundaries of the heat pump obtained, for example, by
+  experimental data.
+  </li>
 </ol>
 <p>
-Moreover, the User needs to define further parameters describing
-static condtions of the heat pump. These parameters are listed
-below.
+  To add static boundary conditions, a combi time table is included
+  within the model. The columns are defined as follows:
+</p>
+<ol>
+  <li>Time steps (0,1,2,3,...).
+  </li>
+  <li>Rotational speed in <code>Hz</code>.
+  </li>
+  <li>Ambient temperature in <code>°C</code>.
+  </li>
+  <li>Heat capacity in <code>W</code>.
+  </li>
+  <li>Temperature at inlet of condenser's secondary fluid in
+  <code>°C</code>.
+  </li>
+  <li>Power consumption in <code>kW</code>.
+  </li>
+  <li>COP.
+  </li>
+</ol>
+<p>
+  Moreover, the User needs to define further parameters describing
+  static condtions of the heat pump. These parameters are listed below.
 </p>
 </html>"),
     experiment(StopTime=16.999));

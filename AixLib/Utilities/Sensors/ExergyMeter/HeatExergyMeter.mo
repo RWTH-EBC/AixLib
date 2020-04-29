@@ -124,14 +124,18 @@ equation
     {-100,-100},{100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={
     {-100,-100},{100,100}})),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>The model calculates the exergy flow rate of a radiaitive or convective heat
-flux. The reference environment is variable.</p>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  The model calculates the exergy flow rate of a radiaitive or
+  convective heat flux. The reference environment is variable.
+</p>
 </html>
-",        revisions="<html>
- <ul>
- <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
- </ul>
+",        revisions="<html><ul>
+  <li>by Marc Baranski and Roozbeh Sangi:<br/>
+    implemented
+  </li>
+</ul>
 </html>"));
 end HeatExergyMeter;

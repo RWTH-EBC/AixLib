@@ -251,40 +251,108 @@ equation
           lineColor={255,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="DIN")}),    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Heat source with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The schedule sets the times when the machines are used. They tend to be used more when people are present in the room, and go on stand-by when people are absent from the room. </p>
-<p>The schedule describes the machines corresponding to only one person, and can take values from 0 to 1. For more people, a factor, <b>nrPeople</b>, is provided as parameter.</p>
-<p>The type of activity determines the load for machines in the room for one person according to DIN 18599-10. The following values are used:</p>
-<table summary=\"DIN 18599-10 activity level and produces heat output\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
-<td style=\"background-color: #dcdcdc\">Activity Type</td>
-<td style=\"background-color: #dcdcdc\">Heat Load [W]</td>
-</tr>
-<tr>
-<td><p>1</p></td>
-<td><p>50</p></td>
-</tr>
-<tr>
-<td><p>2</p></td>
-<td><p>100</p></td>
-</tr>
-<tr>
-<td><p>3</p></td>
-<td><p>150</p></td>
-</tr>
+          textString="DIN")}),    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Heat source with convective and radiative component. The load is
+  determined by a schedule and the type of activity.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The schedule sets the times when the machines are used. They tend to
+  be used more when people are present in the room, and go on stand-by
+  when people are absent from the room.
+</p>
+<p>
+  The schedule describes the machines corresponding to only one person,
+  and can take values from 0 to 1. For more people, a factor,
+  <b>nrPeople</b>, is provided as parameter.
+</p>
+<p>
+  The type of activity determines the load for machines in the room for
+  one person according to DIN 18599-10. The following values are used:
+</p>
+<table summary=\"DIN 18599-10 activity level and produces heat output\"
+cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+  <tr>
+    <td style=\"background-color: #dcdcdc\">
+      Activity Type
+    </td>
+    <td style=\"background-color: #dcdcdc\">
+      Heat Load [W]
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        1
+      </p>
+    </td>
+    <td>
+      <p>
+        50
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        2
+      </p>
+    </td>
+    <td>
+      <p>
+        100
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        3
+      </p>
+    </td>
+    <td>
+      <p>
+        150
+      </p>
+    </td>
+  </tr>
 </table>
-<h4><span style=\"color: #008000\">References</span></h4>
-<p>DIN 18599-10 </p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
+<p>
+  DIN 18599-10
+</p>
 </html>",
-    revisions="<html>
-<ul>
-    <li><i>March 30, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>: Summarize models to partial model. Make all models dependant from a relative input 0..1. Many refactorings.</li>
-<li><i>October 19, 2016&nbsp;</i> by Ana Constantin:<br/>Corrected documentation to refer to machines directly</li>
-<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
-<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
-<li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+    revisions="<html><ul>
+  <li>
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
+    Summarize models to partial model. Make all models dependant from a
+    relative input 0..1. Many refactorings.
+  </li>
+  <li>
+    <i>October 19, 2016&#160;</i> by Ana Constantin:<br/>
+    Corrected documentation to refer to machines directly
+  </li>
+  <li>
+    <i>October 21, 2014&#160;</i> by Ana Constantin:<br/>
+    Added a lower positive limit to the surface area, so it will not
+    lead to a division by zero
+  </li>
+  <li>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end MachinesDIN18599;

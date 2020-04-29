@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
+within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
 
@@ -395,40 +395,224 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
           fillColor={220,220,220})}),
-    Documentation(info="<html>
-<h4>Overview</h4>
-<p>Simple model for a pump that sets pump speed (headUnbound) and can compute pump power and efficiency from polynomial functions. Pump speed (n) will be calculated from volume flow rate and pump head n=f(Q,H). Pump head (pressure difference in meter water column) is limited by pumpParam.maxMinHeight. This is used in 2Dtable maxMinTable. Those curves are normally derived from an electronic power limitation of a pump.</p>
-<h4>On-/Off Switch</h4>
-<p>The pump can be switched on/off by a boolean input (pumpBus.onOff_Input, TRUE = On). The switch between on and off is not filtered.</p>
-<h4>Controlling the pump (pumpBus.dp_Input)</h4>
-<p>The pump must be controlled by setting the pump head (pumpBus.dp_Input). dp_Input must be given in meter water column. This is an idealized pump that can maintain the given pump pressure difference at all times. The hydraulic network&apos;s pressure difference will then determine the resulting volume flow. The idealized calculation in this model maybe advantegous in terms of speed in comparison to the red pump that will compute pressure head from volume flow rate and pump speed via polynomial functions. To make the two pumps exchangeable also the controllers must be exchangeable.</p>
-<h4>Power and Efficiency calculation</h4>
-<p>The power and the efficiency of the pump can be calculated, with the help of polynomial aproximations. Only use them if you have correct / complete data about the pump. The efficiency calculation depends on pump power. Pump power depends on correct pump speed. Therefore, in this model, the pump speed (n) will be approximated from volume flow rate (v_dot_m3_h) and pump head (head) using the inverse of the ABC formula. Only for this simple case of a quadratic polynomial the equation H=f(Q,N) can be inverted to the form N=f(Q,H). If you use more coefficients in the polynomial (cHQN) the inversion makes no sense and the calculated pump speed will probably be wrong leading to a useless power usage assumption. Therefore, an assertion will check if parameter&nbsp;&apos;calculatePower&apos;&nbsp;was&nbsp;set&nbsp;true&nbsp;but&nbsp;the&nbsp;corresponding&nbsp;coefficients in&nbsp;pumpParam.cHQN&nbsp;([3,1],&nbsp;[2,2]&nbsp;and&nbsp;[1,3])&nbsp;are&nbsp;all&nbsp;zero&nbsp;OR&nbsp;if there&nbsp;are&nbsp;more&nbsp;than&nbsp;those&nbsp;3&nbsp;coefficients&nbsp;defined&nbsp;in&nbsp;cHQN.&nbsp;</p>
-<p>See the examples under package &quot;Examples&quot;.</p>
-<h4>Hints</h4>
-<p>Qnom, the nominal or design volume flow rate of the pump, is given in m&sup3;/h and should be selected by the engineer. A good default value would be 67 % of Qmax .The default value, however, is set to <span style=\"font-family: Courier New;\">0.5*</span><span style=\"color: #ff0000;\">max</span>(pumpParam.maxMinSpeedCurves[:,&nbsp;1]). max(pumpParam.maxMinSpeedCurves[:, 1]) is the maximum value found in column 1 of table maxMinSpeedCurves. This however, is more than the real maximum volume flow rate of the pump as the the table is extended by additional rows for proper extrapolation of table values. In order to compensate for this excess value Qnom is by default only at 50 % of the maxMinSpeedCurves value. Please refer to the referenceDataQHPN matrix to find the real Qmax value. A simple alternative for the given assumption could be to introduce a parameter Qmax in the pump record that contains the exact value.</p>
-<h5>Nstart</h5>
-<p>The start speed of the pump will be determined from interpolation in the maxMinSpeedCurves table, providing the maximum speed possible at a given volume flow rate:</p>
-<p><span style=\"font-family: Courier New;\">Nstart =</span> <span style=\"color: #ff0000;\"> Modelica.Math.Vectors.interpolate</span>(x=pumpParam.maxMinSpeedCurves[:,1], y=pumpParam.maxMinSpeedCurves[:,2], xi=Qstart)</p>
-<h4>Assumption and limitations</h4>
-<p>Note assumptions such as a specific definition ranges for the model, possible medium models, allowed combinations with other models etc. There might be limitations of the model such as reduced accuracy under specific circumstances. Please note all those limitations you know of so a potential user won&apos;t make too serious mistakes </p>
-<h4>Dynamics</h4>
-<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
-<h4>Validation</h4>
-<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><h4>
+  Overview
+</h4>
+<p>
+  Simple model for a pump that sets pump speed (headUnbound) and can
+  compute pump power and efficiency from polynomial functions. Pump
+  speed (n) will be calculated from volume flow rate and pump head
+  n=f(Q,H). Pump head (pressure difference in meter water column) is
+  limited by pumpParam.maxMinHeight. This is used in 2Dtable
+  maxMinTable. Those curves are normally derived from an electronic
+  power limitation of a pump.
+</p>
+<h4>
+  On-/Off Switch
+</h4>
+<p>
+  The pump can be switched on/off by a boolean input
+  (pumpBus.onOff_Input, TRUE = On). The switch between on and off is
+  not filtered.
+</p>
+<h4>
+  Controlling the pump (pumpBus.dp_Input)
+</h4>
+<p>
+  The pump must be controlled by setting the pump head
+  (pumpBus.dp_Input). dp_Input must be given in meter water column.
+  This is an idealized pump that can maintain the given pump pressure
+  difference at all times. The hydraulic network's pressure difference
+  will then determine the resulting volume flow. The idealized
+  calculation in this model maybe advantegous in terms of speed in
+  comparison to the red pump that will compute pressure head from
+  volume flow rate and pump speed via polynomial functions. To make the
+  two pumps exchangeable also the controllers must be exchangeable.
+</p>
+<h4>
+  Power and Efficiency calculation
+</h4>
+<p>
+  The power and the efficiency of the pump can be calculated, with the
+  help of polynomial aproximations. Only use them if you have correct /
+  complete data about the pump. The efficiency calculation depends on
+  pump power. Pump power depends on correct pump speed. Therefore, in
+  this model, the pump speed (n) will be approximated from volume flow
+  rate (v_dot_m3_h) and pump head (head) using the inverse of the ABC
+  formula. Only for this simple case of a quadratic polynomial the
+  equation H=f(Q,N) can be inverted to the form N=f(Q,H). If you use
+  more coefficients in the polynomial (cHQN) the inversion makes no
+  sense and the calculated pump speed will probably be wrong leading to
+  a useless power usage assumption. Therefore, an assertion will check
+  if
+  parameter&#160;'calculatePower'&#160;was&#160;set&#160;true&#160;but&#160;the&#160;corresponding&#160;coefficients
+  in&#160;pumpParam.cHQN&#160;([3,1],&#160;[2,2]&#160;and&#160;[1,3])&#160;are&#160;all&#160;zero&#160;OR&#160;if
+  there&#160;are&#160;more&#160;than&#160;those&#160;3&#160;coefficients&#160;defined&#160;in&#160;cHQN.&#160;
+</p>
+<p>
+  See the examples under package \"Examples\".
+</p>
+<h4>
+  Hints
+</h4>
+<p>
+  Qnom, the nominal or design volume flow rate of the pump, is given in
+  m³/h and should be selected by the engineer. A good default value
+  would be 67 % of Qmax .The default value, however, is set to
+  <span style=\"font-family: Courier New;\">0.5*</span><span style=
+  \"color: #ff0000;\">max</span>(pumpParam.maxMinSpeedCurves[:,&#160;1]).
+  max(pumpParam.maxMinSpeedCurves[:, 1]) is the maximum value found in
+  column 1 of table maxMinSpeedCurves. This however, is more than the
+  real maximum volume flow rate of the pump as the the table is
+  extended by additional rows for proper extrapolation of table values.
+  In order to compensate for this excess value Qnom is by default only
+  at 50 % of the maxMinSpeedCurves value. Please refer to the
+  referenceDataQHPN matrix to find the real Qmax value. A simple
+  alternative for the given assumption could be to introduce a
+  parameter Qmax in the pump record that contains the exact value.
+</p>
+<h5>
+  Nstart
+</h5>
+<p>
+  The start speed of the pump will be determined from interpolation in
+  the maxMinSpeedCurves table, providing the maximum speed possible at
+  a given volume flow rate:
+</p>
+<p>
+  <span style=\"font-family: Courier New;\">Nstart =</span> <span style=
+  \"color: #ff0000;\">Modelica.Math.Vectors.interpolate</span>(x=pumpParam.maxMinSpeedCurves[:,1],
+  y=pumpParam.maxMinSpeedCurves[:,2], xi=Qstart)
+</p>
+<h4>
+  Assumption and limitations
+</h4>
+<p>
+  Note assumptions such as a specific definition ranges for the model,
+  possible medium models, allowed combinations with other models etc.
+  There might be limitations of the model such as reduced accuracy
+  under specific circumstances. Please note all those limitations you
+  know of so a potential user won't make too serious mistakes
+</p>
+<h4>
+  Dynamics
+</h4>
+<p>
+  Describe which states and dynamics are present in the model and which
+  parameters may be used to influence them. This need not be added in
+  partial classes.
+</p>
+<h4>
+  Validation
+</h4>
+<p>
+  Describe whether the validation was done using analytical validation,
+  comparative model validation or empirical validation.
+</p>
 <ul>
-<li>2019-09-18 by Alexander Kümpel:<br />Renaming, restructuring and bug fixes.</li>
-<li>2018-03-01 by Peter Matthes:<br />Improved parameter setup of pump model. Ordering in GUI, disabled some parameters that should be used not as input but rather as outputs (m_flow_start, p_a_start and p_b_start) and much more description in the parameter doc strings to help the user make better decisions.</li>
-<li>2018-02-01 by Peter Matthes:<br />* When pump is turned off the model will also turn pump speed (n) off as well. Be aware that the pump speed will only be calculated when calculatePower==true.<br />* n has been converted into a RealOutput instead of a normal Real.<br />* The pump speed n is mapped onto the bus as &quot;rpm_Act&quot;.<br />* RealOutput v_dot_m3h has been changed into a formula block with the signal now being Vflow_m3h.y. This change improves model checking, as the former RealOutput had not defining connection but rather an attached equation. Dymola was not able to correctly reckognize this and threw a warning. This would have reduced the ability to debug the code as futher checks by Dymola would be avoided at that point.<br />* Fixes calculation of power and efficiency. As power values near zero were possible, eta could get insanely high values. power and eta are now limited to more sensible values. However, there is no transition between the lowest possible value and zero any more. If that behaviour would be needed try implementing a transition function. </li>
-<li>2018-01-30 by Peter Matthes:<br />* Renamed delivery head controlled pump model (blue) from Pump into PumpH as well as PumpPhysics into PumpPhysicsH. &quot;H&quot; stands for pump delivery head.<br />* Moved efficiencyCharacteristic package directly into BaseClasses. This is due to moving the older pump model and depencencies into the Deprecated folder.</li>
-<li>2018-01-29 by Peter Matthes:<br />* Removes parameter useABCcurves as that is the default to calculate speed and is only needed in the blue pump (PumpH) to calculate power from speed and volume flow. Currently there is no other way to compute speed other than inverting function H = f(Q,N) . This can only be done with the quadratic ABC formula. Therefore, an assert statement has been implemented instead to give a warning when you want to compute power but you use more that the ABC coefficients in cHQN.<br />* Removes parameter Nnom and replaces it with Nstart. As discussed with Wilo Nnom is not very useful and it can be replaced with a start value. The default value has been lowered to a medium speed to avoid collision with the speed/power limitation. For most pumps the maximum speed is limited for increasing volume flows to avoid excess power consumption.<br />* Increases Qnom from 0.5*Qmax to 0.67*Qmax as this would be a more realistic value.</li>
-<li>2018-01-26 by Peter Matthes:<br />* Changes parameter name n_start into Nstart to be compatible/exchangeable with the speed controlled pump (red pump).<br />* Removes unused code and remarks from the model.<br />* Adds start parameters to the model and updates parameter equations (for Qnom for example).<br />* Removes old headUnbound calculation via function of Q and N. Now sets bus.dp_Input directly.</li>
-<li>2017-12-01 by Peter Matthes:<br />Changed pump due to removed parameters pumpParam.cABCeq and .cNQH. </li>
-<li>2017-11-22 by Peter Matthes:<br />Prepares new pump model for external controller<br />* Adds pumpBus connections for volume flow rate (vFRcur_m3h) and maximum/minimum pump head (maxMinHead).<br />* Adds graphical annotations for v_dot_m3_h and headUnbound<br />* Changes pump icon color to light blue to make a distinction to the other pumps.<br />* Fixes documentation.</li>
-<li>2017-11-21 by Peter Matthes:<br />Adds parameters n_start, Qnom and Hnom with defaults. Changes text in Icon view.</li>
-<li>2017-11-16 by Peter Matthes:<br />Updated assertion for pumpParam.cABCeq and adds a second for pumpParam.cHQN and pumpParam.cNQH.<br />* Removes all control strategies except n_set and fullFieldTable.<br />* Removes pumpControlBlockDay component.<br />* Adds instead (of pumpControlBlockDay.Head_calc).<br />* Removes all unused parameters in pump model.<br />* Adds new parameter useABCformulas.<br />* Adds new equations for headUnbound and pump speed and power.<br />* n_set becomes default control algorithm.<br />* Changes start pressure of pump volume from p_b_start to p_a_start.<br />(We normally know what the minimum pressure point before the pump<br />should be.)</li>
-<li>2017-11-13 by Peter Matthes:<br />Implemented. Non functional yet.</li>
+  <li>2019-09-18 by Alexander Kümpel:<br/>
+    Renaming, restructuring and bug fixes.
+  </li>
+  <li>2018-03-01 by Peter Matthes:<br/>
+    Improved parameter setup of pump model. Ordering in GUI, disabled
+    some parameters that should be used not as input but rather as
+    outputs (m_flow_start, p_a_start and p_b_start) and much more
+    description in the parameter doc strings to help the user make
+    better decisions.
+  </li>
+  <li>2018-02-01 by Peter Matthes:<br/>
+    * When pump is turned off the model will also turn pump speed (n)
+    off as well. Be aware that the pump speed will only be calculated
+    when calculatePower==true.<br/>
+    * n has been converted into a RealOutput instead of a normal
+    Real.<br/>
+    * The pump speed n is mapped onto the bus as \"rpm_Act\".<br/>
+    * RealOutput v_dot_m3h has been changed into a formula block with
+    the signal now being Vflow_m3h.y. This change improves model
+    checking, as the former RealOutput had not defining connection but
+    rather an attached equation. Dymola was not able to correctly
+    reckognize this and threw a warning. This would have reduced the
+    ability to debug the code as futher checks by Dymola would be
+    avoided at that point.<br/>
+    * Fixes calculation of power and efficiency. As power values near
+    zero were possible, eta could get insanely high values. power and
+    eta are now limited to more sensible values. However, there is no
+    transition between the lowest possible value and zero any more. If
+    that behaviour would be needed try implementing a transition
+    function.
+  </li>
+  <li>2018-01-30 by Peter Matthes:<br/>
+    * Renamed delivery head controlled pump model (blue) from Pump into
+    PumpH as well as PumpPhysics into PumpPhysicsH. \"H\" stands for pump
+    delivery head.<br/>
+    * Moved efficiencyCharacteristic package directly into BaseClasses.
+    This is due to moving the older pump model and depencencies into
+    the Deprecated folder.
+  </li>
+  <li>2018-01-29 by Peter Matthes:<br/>
+    * Removes parameter useABCcurves as that is the default to
+    calculate speed and is only needed in the blue pump (PumpH) to
+    calculate power from speed and volume flow. Currently there is no
+    other way to compute speed other than inverting function H = f(Q,N)
+    . This can only be done with the quadratic ABC formula. Therefore,
+    an assert statement has been implemented instead to give a warning
+    when you want to compute power but you use more that the ABC
+    coefficients in cHQN.<br/>
+    * Removes parameter Nnom and replaces it with Nstart. As discussed
+    with Wilo Nnom is not very useful and it can be replaced with a
+    start value. The default value has been lowered to a medium speed
+    to avoid collision with the speed/power limitation. For most pumps
+    the maximum speed is limited for increasing volume flows to avoid
+    excess power consumption.<br/>
+    * Increases Qnom from 0.5*Qmax to 0.67*Qmax as this would be a more
+    realistic value.
+  </li>
+  <li>2018-01-26 by Peter Matthes:<br/>
+    * Changes parameter name n_start into Nstart to be
+    compatible/exchangeable with the speed controlled pump (red
+    pump).<br/>
+    * Removes unused code and remarks from the model.<br/>
+    * Adds start parameters to the model and updates parameter
+    equations (for Qnom for example).<br/>
+    * Removes old headUnbound calculation via function of Q and N. Now
+    sets bus.dp_Input directly.
+  </li>
+  <li>2017-12-01 by Peter Matthes:<br/>
+    Changed pump due to removed parameters pumpParam.cABCeq and .cNQH.
+  </li>
+  <li>2017-11-22 by Peter Matthes:<br/>
+    Prepares new pump model for external controller<br/>
+    * Adds pumpBus connections for volume flow rate (vFRcur_m3h) and
+    maximum/minimum pump head (maxMinHead).<br/>
+    * Adds graphical annotations for v_dot_m3_h and headUnbound<br/>
+    * Changes pump icon color to light blue to make a distinction to
+    the other pumps.<br/>
+    * Fixes documentation.
+  </li>
+  <li>2017-11-21 by Peter Matthes:<br/>
+    Adds parameters n_start, Qnom and Hnom with defaults. Changes text
+    in Icon view.
+  </li>
+  <li>2017-11-16 by Peter Matthes:<br/>
+    Updated assertion for pumpParam.cABCeq and adds a second for
+    pumpParam.cHQN and pumpParam.cNQH.<br/>
+    * Removes all control strategies except n_set and
+    fullFieldTable.<br/>
+    * Removes pumpControlBlockDay component.<br/>
+    * Adds instead (of pumpControlBlockDay.Head_calc).<br/>
+    * Removes all unused parameters in pump model.<br/>
+    * Adds new parameter useABCformulas.<br/>
+    * Adds new equations for headUnbound and pump speed and power.<br/>
+    * n_set becomes default control algorithm.<br/>
+    * Changes start pressure of pump volume from p_b_start to
+    p_a_start.<br/>
+    (We normally know what the minimum pressure point before the
+    pump<br/>
+    should be.)
+  </li>
+  <li>2017-11-13 by Peter Matthes:<br/>
+    Implemented. Non functional yet.
+  </li>
 </ul>
 </html>"));
 end PumpHeadControlled;

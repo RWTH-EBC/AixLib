@@ -28,12 +28,27 @@ algorithm
   end if;
 
   annotation (
-    Documentation(info="<html>
-<p>The original variable Limiter Modelica.Blocks.Nonlinear.VariableLimiter showed problems with the pump model. The output variable y would often stay at the minimum (limit2) although u was larger than this value. The homotropy and smooth functions were not the problem as can be shown. Even removing both of them did not solve the problem that occured in special (?) hydraulic setups. See for example Zugabe.Fluid.Movers.Examples.test_nset.</p>
-<p>Dymola seemed to transform the equations in the wrong way. Changing the equation section into an algorithm, thus forcing the ordered calculation, brought a solution.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  The original variable Limiter
+  Modelica.Blocks.Nonlinear.VariableLimiter showed problems with the
+  pump model. The output variable y would often stay at the minimum
+  (limit2) although u was larger than this value. The homotropy and
+  smooth functions were not the problem as can be shown. Even removing
+  both of them did not solve the problem that occured in special (?)
+  hydraulic setups. See for example
+  Zugabe.Fluid.Movers.Examples.test_nset.
+</p>
+<p>
+  Dymola seemed to transform the equations in the wrong way. Changing
+  the equation section into an algorithm, thus forcing the ordered
+  calculation, brought a solution.
+</p>
 <ul>
-<li>2017-11-17 by Peter Matthes<br />Implemented. Changed equation block into an algorithm block. Otherwise y could end up staying at limit2 all the time even though u would be higher than limit2 (and smaller than limit1).</li>
+  <li>2017-11-17 by Peter Matthes<br/>
+    Implemented. Changed equation block into an algorithm block.
+    Otherwise y could end up staying at limit2 all the time even though
+    u would be higher than limit2 (and smaller than limit1).
+  </li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),

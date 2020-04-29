@@ -22,18 +22,16 @@ equation
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
   connect(boiler.port_b, port_b)
     annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>Base class containing the
-<a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
-to be used in the examples of
-<a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump\">AixLib.Fluid.Examples.GeothermalHeatPump</a>.
+  annotation (Documentation(info="<html><p>
+  Base class containing the <a href=
+  \"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+  to be used in the examples of <a href=
+  \"modelica://AixLib.Fluid.Examples.GeothermalHeatPump\">AixLib.Fluid.Examples.GeothermalHeatPump</a>.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end BoilerBase;

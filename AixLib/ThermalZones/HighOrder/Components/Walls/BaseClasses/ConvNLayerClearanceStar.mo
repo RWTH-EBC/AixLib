@@ -103,27 +103,68 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{8, 100}, {16, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, -30}, {80, -42}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, -32}, {80, -39}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent = {{-44, -40}, {52, -114}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info="<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>The <b>ConvNLayerClearanceStar</b> model represents a wall, consisting of n different layers with natural convection on one side and (window) clearance.</p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>There is one inner and one outer <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector to simulate one-dimensional heat transfer through the wall and heat storage within the wall.</p>
- <p>The <b>ConvNLayerClearanceStar</b> model extends the basic concept by adding the functionality of approximated longwave radiation exchange. Simply connect all radiation exchanging surfaces via their <b><a href=\"Modelica://AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b>-connectors. </p>
- <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>HeatPort_a</code>, the last element represents the layer connected to <code>HeatPort_b</code>. </p>
- <h4><font color=\"#008000\">Example Results</font></h4>
- <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a>  therefore also part of the corresponding examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
- </html>", revisions="<html>
- <ul>
-<li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters</li>
-<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
-<li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-<li><i>Aug. 08, 2006&nbsp;</i>
-          by Peter Matthes:<br/>
-          Fixed wrong connection with heatConv-Module and added connection graphics.</li>
-
-<li><i>June 19, 2006&nbsp;</i>
-          by Timo Haase:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent = {{-44, -40}, {52, -114}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>ConvNLayerClearanceStar</b> model represents a wall,
+  consisting of n different layers with natural convection on one side
+  and (window) clearance.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  There is one inner and one outer <b><a href=
+  \"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector
+  to simulate one-dimensional heat transfer through the wall and heat
+  storage within the wall.
+</p>
+<p>
+  The <b>ConvNLayerClearanceStar</b> model extends the basic concept by
+  adding the functionality of approximated longwave radiation exchange.
+  Simply connect all radiation exchanging surfaces via their
+  <b><a href=\"Modelica://AixLib.Utilities.Interfaces.RadPort\">RadPort</a></b>-connectors.
+</p>
+<p>
+  <b><span style=\"color: #ff0000\">Attention:</span></b> The first
+  element in each vector represents the layer connected to
+  <code>HeatPort_a</code>, the last element represents the layer
+  connected to <code>HeatPort_b</code>.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  This model is part of <a href=
+  \"AixLib.Building.Components.Walls.Wall\">Wall</a> therefore also part
+  of the corresponding examples <a href=
+  \"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a>
+  and <a href=
+  \"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>.
+</p>
+<ul>
+  <li>
+    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br/>
+    Algorithm for HeatConv_inside is now selectable via parameters
+  </li>
+  <li>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>Aug. 08, 2006&#160;</i> by Peter Matthes:<br/>
+    Fixed wrong connection with heatConv-Module and added connection
+    graphics.
+  </li>
+  <li>
+    <i>June 19, 2006&#160;</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end ConvNLayerClearanceStar;

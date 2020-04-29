@@ -401,35 +401,80 @@ end if;
         Line(
           points={{-16,-60},{15,-90}},
           visible=withDoor)}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Flexible Model for Inside Walls and Outside Walls. </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The<b> Wall</b> model models </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Flexible Model for Inside Walls and Outside Walls.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The <b>Wall</b> model models
+</p>
 <ul>
-<li>Conduction and convection for a wall (different on the inside surface depending on the surface orientation: vertical wall, floor or ceiling)</li>
-<li>Outside walls may have a window and/ or a door</li>
-<li>Inside walls may have a door</li>
+  <li>Conduction and convection for a wall (different on the inside
+  surface depending on the surface orientation: vertical wall, floor or
+  ceiling)
+  </li>
+  <li>Outside walls may have a window and/ or a door
+  </li>
+  <li>Inside walls may have a door
+  </li>
 </ul>
-<p>This model uses a <a href=\"AixLib.Utilities.Interfaces.HeatStarComb\">HeatStarComb</a> Connector for an easier connection of temperature and radiance inputs.</p>
-<p><b><font style=\"color: #008000; \">Assumputions</font></b> </p>
+<p>
+  This model uses a <a href=
+  \"AixLib.Utilities.Interfaces.HeatStarComb\">HeatStarComb</a> Connector
+  for an easier connection of temperature and radiance inputs.
+</p>
+<p>
+  <b><span style=\"color: #008000\">Assumputions</span></b>
+</p>
 <ul>
-<li>Outside walls are represented as complete walls</li>
-<li>Inside walls are modeled as a half of a wall, you need to connect a corresponding second half with the same values</li>
-<li>Door and window got a constant U-value</li>
-<li>No heat storage in doors or window </li>
+  <li>Outside walls are represented as complete walls
+  </li>
+  <li>Inside walls are modeled as a half of a wall, you need to connect
+  a corresponding second half with the same values
+  </li>
+  <li>Door and window got a constant U-value
+  </li>
+  <li>No heat storage in doors or window
+  </li>
 </ul>
-<p>Have a closer look at the used models to get more information about the assumptions. </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p>
+  Have a closer look at the used models to get more information about
+  the assumptions.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
 </html>",
-revisions="<html>
-<ul>
-<li><i>July 25, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected activation of door for an outside wall</li>
-<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
-<li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-<li><i>June 22, 2012&nbsp;</i> by Lukas Mencher:<br/>Outside wall may have a door now, icon adjusted</li>
-<li><i>Mai 24, 2012&nbsp;</i> by Ana Constantin:<br/>Added inside surface orientation</li>
-<li><i>April, 2012&nbsp;</i> by Mark Wesseling:<br/>Implemented.</li>
+revisions="<html><ul>
+  <li>
+    <i>July 25, 2014&#160;</i> by Ana Constantin:<br/>
+    Corrected activation of door for an outside wall
+  </li>
+  <li>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>June 22, 2012&#160;</i> by Lukas Mencher:<br/>
+    Outside wall may have a door now, icon adjusted
+  </li>
+  <li>
+    <i>Mai 24, 2012&#160;</i> by Ana Constantin:<br/>
+    Added inside surface orientation
+  </li>
+  <li>
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end Wall_ASHRAE140;

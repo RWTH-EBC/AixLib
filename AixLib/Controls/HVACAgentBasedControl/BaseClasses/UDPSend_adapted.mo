@@ -69,28 +69,56 @@ equation
   annotation (preferredView="info",
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics={Text(extent={{-150,136},{150,96}},
-            textString="%name")}), Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+            textString="%name")}), Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model implements sending data via UDP</li>
-<li>It is copied and extended from the Modelica_DeviceDrivers library</li>
-<li>It is used by all implemented agents</li>
+  <li>This model implements sending data via UDP
+  </li>
+  <li>It is copied and extended from the Modelica_DeviceDrivers library
+  </li>
+  <li>It is used by all implemented agents
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The model changes the model published in the Modelica_DeviceDrivers library by an input for the name of the receiver. The receiver is therefore no longer a parameter but now a variable of the model. This change is necessary as some agents need to communicate with a number of different recipents (the broker for example).</p>
-<h4><span style=\"color: #008000\">References</span></h4>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The model changes the model published in the Modelica_DeviceDrivers
+  library by an input for the name of the receiver. The receiver is
+  therefore no longer a parameter but now a variable of the model. This
+  change is necessary as some agents need to communicate with a number
+  of different recipents (the broker for example).
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
-<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
+  <li>Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic.
+  </li>
+  <li>Felix Bünning, Roozbeh Sangi, Dirk Müller. A Modelica library for
+  agent-based control of building HVAC systems. Applied Energy,
+  193:52-59, 2017.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
 <ul>
-<li><a href=\"HVACAgentBasedControl.Examples.HVACAgentsCommunications.SimpleCommunication\">ExampleAgentSystem</a></li>
+  <li>
+    <a href=
+    \"HVACAgentBasedControl.Examples.HVACAgentsCommunications.SimpleCommunication\">
+    ExampleAgentSystem</a>
+  </li>
 </ul>
-</html>", revisions="<html>
 <ul>
-<li>July 2017, by Roozbeh Sangi: Documentation revised</li>
-<li>October 2015, by Felix B&uuml;nning: Copied and adapted from the Modelica DeviceDrivers library</li>
+  <li>July 2017, by Roozbeh Sangi: Documentation revised
+  </li>
+  <li>October 2015, by Felix Bünning: Copied and adapted from the
+  Modelica DeviceDrivers library
+  </li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

@@ -254,16 +254,22 @@ equation
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(revisions="<html>
- <ul>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>",
-         info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 600: </p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>",
+         info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 600:
+</p>
 <ul>
-<li>high mass exterior vertical walls and floor  </li>
+  <li>high mass exterior vertical walls and floor
+  </li>
 </ul>
 </html>"));
 end Case900;

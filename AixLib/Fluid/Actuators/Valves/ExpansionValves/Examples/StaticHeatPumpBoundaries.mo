@@ -641,53 +641,63 @@ equation
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)),
                         Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  December 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>December 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model prescribes inlet and outlet conditions of a simplified
-static heat pump model (i.e. boundary conditions of the secondary
-sides of the evaporator and condenser). Furhtermore, it controlls
-the degrees of opening of the expension valves in such a way that
-the prescribed outlet condtions of the expansion valves are meet
-the calculated outlet condtions of the expansion valves.
-The model is used to validate the expansion valve model in general.
+  This model prescribes inlet and outlet conditions of a simplified
+  static heat pump model (i.e. boundary conditions of the secondary
+  sides of the evaporator and condenser). Furhtermore, it controlls the
+  degrees of opening of the expension valves in such a way that the
+  prescribed outlet condtions of the expansion valves are meet the
+  calculated outlet condtions of the expansion valves. The model is
+  used to validate the expansion valve model in general.
 </p>
-<h4>Required information</h4>
+<h4>
+  Required information
+</h4>
 <p>
-The User needs to define the following information in order to
-complete the model:
-</p>
-<ol>
-<li>Basic definitions of the expansion valve. For example, the
-cross-sectional area of the expansion valve.</li>
-<li>Calculation approache of the flow coefficient.</li>
-<li>Static boundaries of the heat pump obtained, for example,
-by experimental data.</li>
-</ol>
-<p>
-To add static boundary conditions, a combi time table is included
-within the model. The columns are defined as follows:
+  The User needs to define the following information in order to
+  complete the model:
 </p>
 <ol>
-<li>Time steps (0,1,2,3,...).</li>
-<li>Rotational speed in <code>Hz</code>.</li>
-<li>Ambient temperature in <code>&#176;C</code>.</li>
-<li>Heat capacity in <code>W</code>.</li>
-<li>Temperature at inlet of condenser's secondary fluid in <code>&#176;C</code>.</li>
-<li>Power consumption in <code>kW</code>.</li>
-<li>COP.</li>
+  <li>Basic definitions of the expansion valve. For example, the
+  cross-sectional area of the expansion valve.
+  </li>
+  <li>Calculation approache of the flow coefficient.
+  </li>
+  <li>Static boundaries of the heat pump obtained, for example, by
+  experimental data.
+  </li>
 </ol>
 <p>
-Moreover, the User needs to define further parameters describing
-static condtions of the heat pump. These parameters are listed
-below.
+  To add static boundary conditions, a combi time table is included
+  within the model. The columns are defined as follows:
+</p>
+<ol>
+  <li>Time steps (0,1,2,3,...).
+  </li>
+  <li>Rotational speed in <code>Hz</code>.
+  </li>
+  <li>Ambient temperature in <code>°C</code>.
+  </li>
+  <li>Heat capacity in <code>W</code>.
+  </li>
+  <li>Temperature at inlet of condenser's secondary fluid in
+  <code>°C</code>.
+  </li>
+  <li>Power consumption in <code>kW</code>.
+  </li>
+  <li>COP.
+  </li>
+</ol>
+<p>
+  Moreover, the User needs to define further parameters describing
+  static condtions of the heat pump. These parameters are listed below.
 </p>
 </html>"),
     experiment(StopTime=16.999));

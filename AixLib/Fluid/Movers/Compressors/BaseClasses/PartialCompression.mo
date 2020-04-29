@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.BaseClasses;
+within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompression
   "Partial model for compression that contains basic definitions used in 
   various compressor models"
@@ -392,142 +392,195 @@ equation
                   color={0,0,0},
                   thickness=0.5)}),
                 Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for compression processes that are used, for example, 
-in rotary or scroll compressors.
+  This is a base model for compression processes that are used, for
+  example, in rotary or scroll compressors.
 </p>
-<h4>Definition needed for completion</h4>
+<h4>
+  Definition needed for completion
+</h4>
 <p>
-Seven equations need to be added by an extending class using this component:
+  Seven equations need to be added by an extending class using this
+  component:
 </p>
 <ul>
-<li>Calculation of the mass flow rate <code>m&#775;</code>.</li>
-<li>Calculation of the power consumed by the refrigerant 
-Q&#775;<sub>ref</sub>.</li>
-<li>Calculation of the compressor's power consumption 
-<code>P<sub>el</sub></code>.</li>
-<li>Definition of input and output pressures <code>pInl and pOut</code>.</li>
-<li>Definition of input and output specific enthalpies <code>hInl and 
-hOut</code>.</li>
-<li><code>port_b.h_outflow</code> for flow in design direction.</li>
-<li><code>port_a.h_outflow</code> for flow in reverse direction.</li>
+  <li>Calculation of the mass flow rate <code>ṁ</code>.
+  </li>
+  <li>Calculation of the power consumed by the refrigerant
+  Q̇<sub>ref</sub>.
+  </li>
+  <li>Calculation of the compressor's power consumption
+  <code>P<sub>el</sub></code>.
+  </li>
+  <li>Definition of input and output pressures <code>pInl and
+  pOut</code>.
+  </li>
+  <li>Definition of input and output specific enthalpies <code>hInl and
+  hOut</code>.
+  </li>
+  <li>
+    <code>port_b.h_outflow</code> for flow in design direction.
+  </li>
+  <li>
+    <code>port_a.h_outflow</code> for flow in reverse direction.
+  </li>
 </ul>
 <p>
-Moreover, appropriate values shall be assigned to the following parameters:
+  Moreover, appropriate values shall be assigned to the following
+  parameters:
 </p>
 <ul>
-<li><code>dp_start</code> for a guess of the pressure drop</li>
-<li><code>m_flow_small</code> for regularization of zero flow.</li>
-<li><code>dp_nominal</code> for nominal pressure drop.</li>
-<li><code>m_flow_nominal</code> for nominal mass flow rate.</li>
+  <li>
+    <code>dp_start</code> for a guess of the pressure drop
+  </li>
+  <li>
+    <code>m_flow_small</code> for regularization of zero flow.
+  </li>
+  <li>
+    <code>dp_nominal</code> for nominal pressure drop.
+  </li>
+  <li>
+    <code>m_flow_nominal</code> for nominal mass flow rate.
+  </li>
 </ul>
-<h4>Efficiency modeling approaches</h4>
+<h4>
+  Efficiency modeling approaches
+</h4>
 <p>
-Actually, three different efficiency models are suggested and the modelling
-approaches of these efficiencies are shortly characterised below:<br />
+  Actually, three different efficiency models are suggested and the
+  modelling approaches of these efficiencies are shortly characterised
+  below:<br/>
 </p>
-<table summary=\"Efficiencies\" border=\"1\" cellspacing=\"0\" 
-cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Efficiency</th>
-<th>Formula</th> 
-<th>Comment</th> 
-</tr> 
-<tr>
-<td><b>Engine</b></td> 
-<td><code>&eta;<sub>eng</sub> = Q&#775;<sub>ref</sub> / 
-P<sub>el</sub></code></td> 
-<td>Used for calculation of compressor's power consumption</td> 
-</tr> 
-<tr>
-<td><b>Isentropic</b></td> 
-<td><code>&eta;<sub>ise</sub> = (h<sub>outIse</sub> - h<sub>inl</sub>) /
-(h<sub>out</sub> - h<sub>inl</sub>)</code></td> 
-<td>Used for calculation of thermodynamic change of state</td> 
-</tr> 
-<tr>
-<td><b>Volumetric</b></td>
-<td><code>&eta;<sub>vol</sub> = V&#775;<sub>ide</sub> / 
-V&#775;<sub>rea</sub></code></td> 
-<td>Used for calculation of mass flow rate</td> 
-</tr> 
+<table summary=\"Efficiencies\" border=\"1\" cellspacing=\"0\" cellpadding=
+\"2\" style=\"border-collapse:collapse;\">
+  <tr>
+    <th>
+      Efficiency
+    </th>
+    <th>
+      Formula
+    </th>
+    <th>
+      Comment
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <b>Engine</b>
+    </td>
+    <td>
+      <code>η<sub>eng</sub> = Q̇<sub>ref</sub> / P<sub>el</sub></code>
+    </td>
+    <td>
+      Used for calculation of compressor's power consumption
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Isentropic</b>
+    </td>
+    <td>
+      <code>η<sub>ise</sub> = (h<sub>outIse</sub> - h<sub>inl</sub>) /
+      (h<sub>out</sub> - h<sub>inl</sub>)</code>
+    </td>
+    <td>
+      Used for calculation of thermodynamic change of state
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Volumetric</b>
+    </td>
+    <td>
+      <code>η<sub>vol</sub> = V̇<sub>ide</sub> /
+      V̇<sub>rea</sub></code>
+    </td>
+    <td>
+      Used for calculation of mass flow rate
+    </td>
+  </tr>
 </table>
 <p>
-These efficiency models are stored in
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
-AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>, 
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
-AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a> and
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
-AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
-Therefore, the calculation procedure of the efficiencies are introduced as
-replaceable models and must be defined by the User.
+  These efficiency models are stored in <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
+  AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>,
+  <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
+  AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a>
+  and <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
+  AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>.
+  Therefore, the calculation procedure of the efficiencies are
+  introduced as replaceable models and must be defined by the User.
 </p>
-<h4>Transient behaviour</h4>
+<h4>
+  Transient behaviour
+</h4>
 <p>
-The base model has a parameter <code>useInpFil</code> that is used to model
-the compressors's transient behaviour while changing rotational speed. 
-Generally, this approach uses the same modeling attempt as the stat-up and 
-shut-down transients introtuced for flow machines (see 
-<a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
-AixLib.Fluid.Movers.UsersGuide</a>). Therefore, just the parameter's 
-affections are presented here:
+  The base model has a parameter <code>useInpFil</code> that is used to
+  model the compressors's transient behaviour while changing rotational
+  speed. Generally, this approach uses the same modeling attempt as the
+  stat-up and shut-down transients introtuced for flow machines (see
+  <a href=
+  \"modelica://AixLib.Fluid.Movers.UsersGuide\">AixLib.Fluid.Movers.UsersGuide</a>).
+  Therefore, just the parameter's affections are presented here:
 </p>
 <ol>
-<li>
-If <code>useInpFil=false</code>, then the input signal <code>opeSet.y</code> 
-is equal to the compressor's rotational speed. Thus, a step change in the 
-input signal causes a step change in the rotational speed.
-</li>
-<li>
-If <code>useInpFil=true</code>, which is the default, then the rotational 
-speed is equal to the output of a filter. This filter is implemented as a 
-2nd order differential equation. Thus, a step change in the compressor's 
-input signal will cause a gradual change in the rotational speed. The filter 
-has a parameter <code>risTim</code>, which by default is set to <i>1</i> second. 
-The rise time is the time required to reach <i>99.6%</i> of the full rotational 
-speed, or, if the compressor is shut-down, to reach a rotational speed
-of <i>0.4%</i>.
-</li>
+  <li>If <code>useInpFil=false</code>, then the input signal
+  <code>opeSet.y</code> is equal to the compressor's rotational speed.
+  Thus, a step change in the input signal causes a step change in the
+  rotational speed.
+  </li>
+  <li>If <code>useInpFil=true</code>, which is the default, then the
+  rotational speed is equal to the output of a filter. This filter is
+  implemented as a 2nd order differential equation. Thus, a step change
+  in the compressor's input signal will cause a gradual change in the
+  rotational speed. The filter has a parameter <code>risTim</code>,
+  which by default is set to <i>1</i> second. The rise time is the time
+  required to reach <i>99.6%</i> of the full rotational speed, or, if
+  the compressor is shut-down, to reach a rotational speed of
+  <i>0.4%</i>.
+  </li>
 </ol>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-In the following, some general references are given for information about
-modelling compressors. The modelling approach presented here is alligned
-to the modelling approaches presented in the literature:
+  In the following, some general references are given for information
+  about modelling compressors. The modelling approach presented here is
+  alligned to the modelling approaches presented in the literature:
 </p>
 <p>
-W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): 
-<a href=\"http://dx.doi.org/10.1007/978-3-8348-9302-4\">
-Küttner Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter, Brennkraftmaschinen
-(in German)</a>. Publisher: <i>Vieweg + Teubner</i>
+  W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): <a href=
+  \"http://dx.doi.org/10.1007/978-3-8348-9302-4\">Küttner
+  Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter, Brennkraftmaschinen
+  (in German)</a>. Publisher: <i>Vieweg + Teubner</i>
 </p>
 <p>
-H. Qiao, R. Radermacher and V. Aute (2010): 
-<a href=\"http://docs.lib.purdue.edu/iracc/1090\"> A review for numerical simulation 
-of vapor compression systems</a>. In: <i>International 
-Refrigeration and Air Conditioning Conference</i>
+  H. Qiao, R. Radermacher and V. Aute (2010): <a href=
+  \"http://docs.lib.purdue.edu/iracc/1090\">A review for numerical
+  simulation of vapor compression systems</a>. In: <i>International
+  Refrigeration and Air Conditioning Conference</i>
 </p>
 <p>
-P.C. Hanlon (2011): 
-<a href=\"https://apvgn.pt/wp-content/uploads/compressor_handbook_hanlon.pdf\">
-Compressor Handbook</a>. Publisher: <i>McGraw-Hill</i>
+  P.C. Hanlon (2011): <a href=
+  \"https://apvgn.pt/wp-content/uploads/compressor_handbook_hanlon.pdf\">Compressor
+  Handbook</a>. Publisher: <i>McGraw-Hill</i>
 </p>
 <p>
-V. A. Cara Martin and R. Radermacher (2015): 
-<a href=\"http://www.ahrinet.org/App_Content/ahri/files/RESEARCH/Technical%20Results/AHRI-8013_Final_Report.pdf\">
-AHRI Project 8013: A Study of Methods to Represent Compressor Performance 
-Data over an Operating Envelope Based on a Finite Set of Test Data</a>. 
-Publisher: <i>Air-Conditioning, Heating, and Refrigeration Institute (AHRI)</i>
+  V. A. Cara Martin and R. Radermacher (2015): <a href=
+  \"http://www.ahrinet.org/App_Content/ahri/files/RESEARCH/Technical%20Results/AHRI-8013_Final_Report.pdf\">
+  AHRI Project 8013: A Study of Methods to Represent Compressor
+  Performance Data over an Operating Envelope Based on a Finite Set of
+  Test Data</a>. Publisher: <i>Air-Conditioning, Heating, and
+  Refrigeration Institute (AHRI)</i>
 </p>
 </html>"));
 end PartialCompression;

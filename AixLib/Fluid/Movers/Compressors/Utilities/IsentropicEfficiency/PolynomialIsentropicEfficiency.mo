@@ -105,84 +105,123 @@ equation
     sum(a[i]*p[i]^b[i] for i in 1:nT)^corFac[2])
     "Calculation procedure of general polynomial";
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model contains a calculation procedure for isentropic efficiency
-models (for more information, please check out 
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>). 
-The calculation procedures based on a polynomial approach are presented 
-below.
+  This model contains a calculation procedure for isentropic efficiency
+  models (for more information, please check out <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+  AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>).
+  The calculation procedures based on a polynomial approach are
+  presented below.
 </p>
-<h4>Implemented approaches</h4>
+<h4>
+  Implemented approaches
+</h4>
 <p>
-Actually, three polynomial approaches are implemented in this package.
-To add further calculation procedures, just add its name in
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">
-AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
-and expand the <code>if-structure</code>.<br />
+  Actually, three polynomial approaches are implemented in this
+  package. To add further calculation procedures, just add its name in
+  <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Utilities.Types\">AixLib.Fluid.Movers.Compressors.Utilities.Types</a>
+  and expand the <code>if-structure</code>.<br/>
 </p>
-<table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\" 
+<table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Reference</th>
-<th>Formula</th> 
-<th>Refrigerants</th> 
-<th>Validity <code>n<sub>compressor</sub></code></th> 
-<th>Validity <code>&Pi;<sub>pressure</sub></code></th> 
-</tr> 
-<tr>
-<td>DarrAndCrawford1992</td> 
-<td><code>&eta;<sub>ise</sub> = a1 + 
-a2*n + a3/&rho;<sub>inlet</sub></code></td> 
-<td>R134a</td> 
-<td><code>40 - 75</code></td> 
-<td><code>3 - 10</code></td> 
-</tr> 
-<tr>
-<td>Karlsson2007</td> 
-<td><code>&eta;<sub>ise</sub> = a1 + a2*&pi; + 
-a3*&pi;^2 + a4*n + a5*n^2</code></td> 
-<td>R407c</td> 
-<td><code>No information</code></td> 
-<td><code>No information</code></td> 
-</tr> 
-<tr>
-<td>Engelpracht2017</td> 
-<td><code>&eta;<sub>ise</sub> = a1 + a2*n + 
-a3*n^3 + a5*&pi;^2 </code></td> 
-<td>Generic model</td> 
-<td><code>0 - 120</code></td> 
-<td><code>1 - 10</code></td> 
-</tr> 
+  <tr>
+    <th>
+      Reference
+    </th>
+    <th>
+      Formula
+    </th>
+    <th>
+      Refrigerants
+    </th>
+    <th>
+      Validity <code>n<sub>compressor</sub></code>
+    </th>
+    <th>
+      Validity <code>Π<sub>pressure</sub></code>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      DarrAndCrawford1992
+    </td>
+    <td>
+      <code>η<sub>ise</sub> = a1 + a2*n + a3/ρ<sub>inlet</sub></code>
+    </td>
+    <td>
+      R134a
+    </td>
+    <td>
+      <code>40 - 75</code>
+    </td>
+    <td>
+      <code>3 - 10</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Karlsson2007
+    </td>
+    <td>
+      <code>η<sub>ise</sub> = a1 + a2*π + a3*π^2 + a4*n + a5*n^2</code>
+    </td>
+    <td>
+      R407c
+    </td>
+    <td>
+      <code>No information</code>
+    </td>
+    <td>
+      <code>No information</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Engelpracht2017
+    </td>
+    <td>
+      <code>η<sub>ise</sub> = a1 + a2*n + a3*n^3 + a5*π^2</code>
+    </td>
+    <td>
+      Generic model
+    </td>
+    <td>
+      <code>0 - 120</code>
+    </td>
+    <td>
+      <code>1 - 10</code>
+    </td>
+  </tr>
 </table>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-J.H. Darr and R.R. Crawford (1992): 
-<a href=\"https://www.researchgate.net/publication/288676460_Semi-empirical_method_for_representing_domestic_refrigeratorfreezer_compressor_calorimeter_test_data\">
-Modeling of an Automotive Air Conditioning Compressor 
-Based on Experimental Data: ACRC Technical Report 14</a>. 
-Publisher: <i>Air Conditioning and Refrigeration Center. 
-College of Engineering. University of Illinois at 
-Urbana-Champaign.</i>
+  J.H. Darr and R.R. Crawford (1992): <a href=
+  \"https://www.researchgate.net/publication/288676460_Semi-empirical_method_for_representing_domestic_refrigeratorfreezer_compressor_calorimeter_test_data\">
+  Modeling of an Automotive Air Conditioning Compressor Based on
+  Experimental Data: ACRC Technical Report 14</a>. Publisher: <i>Air
+  Conditioning and Refrigeration Center. College of Engineering.
+  University of Illinois at Urbana-Champaign.</i>
 </p>
 <p>
-F. Karlsson (2007): 
-<a href=\"https://www.sp.se/sv/units/risebuilt/energy/Documents/ETk/Karlsson_Capacity_control_residential_HP_heating_systems.pdf\">
-Capacity Control of Residential Heat Pump Heating Systems</a>. In: <i>PhD thesis</i>
+  F. Karlsson (2007): <a href=
+  \"https://www.sp.se/sv/units/risebuilt/energy/Documents/ETk/Karlsson_Capacity_control_residential_HP_heating_systems.pdf\">
+  Capacity Control of Residential Heat Pump Heating Systems</a>. In:
+  <i>PhD thesis</i>
 </p>
 <p>
-M. Engelpracht (2017): Development of modular and scalable simulation
-models for heat pumps and chillers considering various refrigerants.
-<i>Master Thesis</i>
+  M. Engelpracht (2017): Development of modular and scalable simulation
+  models for heat pumps and chillers considering various refrigerants.
+  <i>Master Thesis</i>
 </p>
 </html>"));
 end PolynomialIsentropicEfficiency;

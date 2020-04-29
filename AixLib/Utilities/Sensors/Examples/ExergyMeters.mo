@@ -382,30 +382,45 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=7200, Interval=10),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>This model shows the usage of all three ExergyMeters, namely</p>
-<p>- enthalpy flow: 
-<a href=\"modelica://AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter\">
-AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter</a></p>
-<p>- heat flow: 
-<a href=\"modelica://AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter\">
-AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter</a></p>
-<p>- stored energy: 
-<a href=\"modelica://AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter\">
-AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter</a></p>
-<p>The system is a simplified energy supply system. The supplied heat flow rate
-matches the extracted heat flow rate. Due to the irreversibilities, especially
-in the storage, the exergy output is smaller than the exergy input.</p>
- <p>Two different exergy balances can be compared. One is calculated using the
- enthalpy flows. The other is calculated using the heat flow rates. Due to the
- different system boundaries, the exergy destructions is a little different, as
- the following figure shows. </p>
-  <p> <img src=\"modelica://AixLib/Resources/Images/Utilities/Sensors/ExergyMeter/ExergyMeters.jpg\" 
-  alt=\"Result of exergy meter example\"/> </p>
-</html>", revisions="<html>
- <ul>
- <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
- </ul>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  This model shows the usage of all three ExergyMeters, namely
+</p>
+<p>
+  - enthalpy flow: <a href=
+  \"modelica://AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter\">AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter</a>
+</p>
+<p>
+  - heat flow: <a href=
+  \"modelica://AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter\">AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter</a>
+</p>
+<p>
+  - stored energy: <a href=
+  \"modelica://AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter\">AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter</a>
+</p>
+<p>
+  The system is a simplified energy supply system. The supplied heat
+  flow rate matches the extracted heat flow rate. Due to the
+  irreversibilities, especially in the storage, the exergy output is
+  smaller than the exergy input.
+</p>
+<p>
+  Two different exergy balances can be compared. One is calculated
+  using the enthalpy flows. The other is calculated using the heat flow
+  rates. Due to the different system boundaries, the exergy
+  destructions is a little different, as the following figure shows.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Utilities/Sensors/ExergyMeter/ExergyMeters.jpg\"
+  alt=\"Result of exergy meter example\">
+</p>
+<ul>
+  <li>by Marc Baranski and Roozbeh Sangi:<br/>
+    implemented
+  </li>
+</ul>
 </html>"));
 end ExergyMeters;

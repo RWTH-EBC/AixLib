@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SecurityControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   parameter Real minIceFac "Minimal value above which no defrost is necessary";
@@ -240,15 +240,21 @@ equation
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
-    Documentation(info="<html>
-<p>Basic model for a defrost control. The icing factor is calculated in the heat pump based on functions or other models.</p>
-<p>If a given lower boundary is surpassed, the mode of the heat pump will be set to false(eq. Chilling) and the compressor speed is set to 1 to make the defrost process as fast as possible.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Basic model for a defrost control. The icing factor is calculated in
+  the heat pump based on functions or other models.
+</p>
+<p>
+  If a given lower boundary is surpassed, the mode of the heat pump
+  will be set to false(eq. Chilling) and the compressor speed is set to
+  1 to make the defrost process as fast as possible.
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end DefrostControl;

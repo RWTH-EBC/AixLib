@@ -44,19 +44,54 @@ equation
   connect(gainSurfaces.y,limiter. u) annotation (Line(points={{-47.4,-60},{-39.2,-60}}, color={0,0,127}));
   connect(limiter.y, radConvertor.A_in) annotation (Line(points={{-25.4,-60},{20,-60},{20,-40},{62,-40},{62,-51}}, color={0,0,127}));
   connect(uRel, gainSurfaces.u) annotation (Line(points={{-100,0},{-80,0},{-80,-60},{-61.2,-60}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li><i>March 26, 202020&nbsp;</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a> refactor input schedule and other components.</li>
-<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions </li>
-<li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
-<li><i>April 30, 2012</i> by Peter Matthes:<br/>implemented partial model for heat sources to work with Ana&apos;s models. </li>
-<li><i>August 10, 2011</i> by Ana Constantin:<br/>implemented </li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>March 26, 202020&#160;</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>
+    refactor input schedule and other components.
+  </li>
+  <li>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>April 30, 2012</i> by Peter Matthes:<br/>
+    implemented partial model for heat sources to work with Ana's
+    models.
+  </li>
+  <li>
+    <i>August 10, 2011</i> by Ana Constantin:<br/>
+    implemented
+  </li>
 </ul>
 </html>",  info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Partial model to build a heat source with <i>convective</i> and <i>radiative</i> components. The parameter <span style=\"font-family: Courier New;\">ratioConv</span> determines the share of convective heat. The <i>input</i> is always a relativ input between 0..1.</p>
-<p><b><span style=\"color: #008000;\">Assumptions</span></b> </p>
-<p>The surface for radiation exchange is computed from the area of the emitting component. For more information see <span style=\"font-family: Courier New;\"><a href=\"modelica://AixLib.Utilities.HeatTransfer.HeatToRad\">AixLib.Utilities.HeatTransfer.HeatToRad</a></span></p>
-<p>An input of 0 leads to a surface area of zero and, thus, to division by zero. For this reason a limitiation for the surface has been intoduced. </p>
+<p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Partial model to build a heat source with <i>convective</i> and
+  <i>radiative</i> components. The parameter <span style=
+  \"font-family: Courier New;\">ratioConv</span> determines the share of
+  convective heat. The <i>input</i> is always a relativ input between
+  0..1.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Assumptions</span></b>
+</p>
+<p>
+  The surface for radiation exchange is computed from the area of the
+  emitting component. For more information see <span style=
+  \"font-family: Courier New;\"><a href=
+  \"modelica://AixLib.Utilities.HeatTransfer.HeatToRad\">AixLib.Utilities.HeatTransfer.HeatToRad</a></span>
+</p>
+<p>
+  An input of 0 leads to a surface area of zero and, thus, to division
+  by zero. For this reason a limitiation for the surface has been
+  intoduced.
+</p>
 </html>"));
 end PartialInternalGain;

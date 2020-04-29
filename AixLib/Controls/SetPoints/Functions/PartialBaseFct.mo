@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.SetPoints.Functions;
+within AixLib.Controls.SetPoints.Functions;
 partial function PartialBaseFct "Base function of a heating curve"
   extends Modelica.Icons.Function;
 
@@ -7,15 +7,22 @@ partial function PartialBaseFct "Base function of a heating curve"
   input Boolean isDay "Boolean to evaulate if it is day or night";
   output Modelica.SIunits.ThermodynamicTemperature TSet "Set temperature for the heat generator";
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Calculate a set temperature based on the outdoor air and room temperature. The boolean isDay enables day/night dependent set temperatures.</p>
-<p>Used in model <a href=\"modelica://AixLib.Controls.SetPoints.HeatingCurve\">HeatingCurve</a>.</p>
+<p>
+  Calculate a set temperature based on the outdoor air and room
+  temperature. The boolean isDay enables day/night dependent set
+  temperatures.
+</p>
+<p>
+  Used in model <a href=
+  \"modelica://AixLib.Controls.SetPoints.HeatingCurve\">HeatingCurve</a>.
+</p>
 </html>"));
 end PartialBaseFct;

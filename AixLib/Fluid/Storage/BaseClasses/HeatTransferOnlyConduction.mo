@@ -26,22 +26,41 @@ equation
   therm[n].Q_flow = -qFlow[n-1];
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
-                      graphics), Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Model for heat transfer between buffer storage layers. Models conductance of
-water. An effective heat conductivity is therefore calculated. Used in
-BufferStorage model.</p>
-<h4><font color=\"#008000\">Sources</font></h4>
-<p>R. Viskanta, A. KaraIds: Interferometric observations of the temperature
-structure in water cooled or heated from above. <i>Advances in Water
-Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977]</p>
+                      graphics), Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for heat transfer between buffer storage layers. Models
+  conductance of water. An effective heat conductivity is therefore
+  calculated. Used in BufferStorage model.
+</p>
+<h4>
+  <span style=\"color:#008000\">Sources</span>
+</h4>
+<p>
+  R. Viskanta, A. KaraIds: Interferometric observations of the
+  temperature structure in water cooled or heated from above.
+  <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69.
+  Bibtex-Key [R.VISKANTA1977]
+</p>
 </html>",
-   revisions="<html>
-<ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>New implementation in source code. Documentation.</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately </li>
+   revisions="<html><ul>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Added to AixLib
+  </li>
+  <li>
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
+    New implementation in source code. Documentation.
+  </li>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"),
     Icon(graphics={Text(

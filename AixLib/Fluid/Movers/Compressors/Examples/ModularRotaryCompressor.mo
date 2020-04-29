@@ -150,28 +150,27 @@ equation
     annotation (Line(points={{-29,-30},{-24,-30},{-20,-30},{-20,-0.1},
                 {0.1,-0.1}}, color={0,0,127}));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a example model to test different modular rotary compressor 
-presented in
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors\">
-AixLib.Fluid.Movers.Compressors.ModularCompressors</a>, whereby the 
-thermodynamic states at inlet and outlet of the compressor are 
-prescribed in terms of pressure and temperature.
-Therefore, the User can select both different modular modelling approaches (e.g.
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressors\">
-AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressors</a> or
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressorsSensors\">
-AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressorsSensors</a>)
-and various efficiency models byusing the dialog menu.
+  This is a example model to test different modular rotary compressor
+  presented in <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors\">AixLib.Fluid.Movers.Compressors.ModularCompressors</a>,
+  whereby the thermodynamic states at inlet and outlet of the
+  compressor are prescribed in terms of pressure and temperature.
+  Therefore, the User can select both different modular modelling
+  approaches (e.g. <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressors\">
+  AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressors</a>
+  or <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressorsSensors\">
+  AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressorsSensors</a>)
+  and various efficiency models byusing the dialog menu.
 </p>
 </html>"),
 experiment(StopTime=1),

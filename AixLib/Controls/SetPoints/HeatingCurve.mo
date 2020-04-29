@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.SetPoints;
+within AixLib.Controls.SetPoints;
 model HeatingCurve "Model of a heating curve"
   //General
   parameter Boolean use_tableData=true "Choose between tables or function to calculate TSet" annotation (
@@ -156,19 +156,26 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="- TOda",
-          visible = use_tableData)}), Documentation(revisions="<html>
-<ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+          visible = use_tableData)}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
-<p>Model of a heating curve. Either based on table input data or with a function, the set temperature for the heating system is calculated.</p>
-<p>This model is capable of:</p>
+<p>
+  Model of a heating curve. Either based on table input data or with a
+  function, the set temperature for the heating system is calculated.
+</p>
+<p>
+  This model is capable of:
+</p>
 <ul>
-<li>Day-Night Control</li>
-<li>Control based on dynamic room temperatures</li>
+  <li>Day-Night Control
+  </li>
+  <li>Control based on dynamic room temperatures
+  </li>
 </ul>
 </html>"));
 end HeatingCurve;
