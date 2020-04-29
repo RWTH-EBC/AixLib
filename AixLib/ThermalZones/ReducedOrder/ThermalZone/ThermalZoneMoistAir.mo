@@ -7,14 +7,8 @@ model ThermalZoneMoistAir "Thermal zone containing moisture balance"
   Modelica.Blocks.Math.MultiSum SumQLat_flow(nu=2) if ATot > 0 or
     zoneParam.VAir > 0
     annotation (Placement(transformation(extent={{16,-28},{28,-16}})));
-  Utilities.Sources.InternalGains.Moisture.MoistureGains moistureGains(
-     final T0=zoneParam.T_start,
-     final roomArea=zoneParam.AZone,
-     final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
-          ATot > 0
-    "Internal moisture gains by plants, etc."
-    annotation (Dialog(enable=true,tab="Moisture"),Placement(transformation(extent={{0,-56},
-            {20,-36}})));
+  BoundaryConditions.InternalGains.Moisture.MoistureGains moistureGains(final roomArea=zoneParam.AZone, final specificMoistureProduction=zoneParam.internalGainsMoistureNoPeople) if
+                                                                                                                                                                                    ATot > 0 "Internal moisture gains by plants, etc." annotation (Dialog(enable=true, tab="Moisture"), Placement(transformation(extent={{0,-56},{20,-36}})));
   Modelica.Blocks.Sources.Constant noMoisturePerson(k=0) if internalGainsMode <> 3
     annotation (Placement(transformation(extent={{0,-28},{8,-20}})));
   Modelica.Blocks.Interfaces.RealOutput X_w if ATot > 0 or zoneParam.VAir > 0

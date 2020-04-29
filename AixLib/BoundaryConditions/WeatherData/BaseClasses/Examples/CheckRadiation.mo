@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckRadiation "Test model for CheckRadiation"
-  extends
-    AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples.ConvertRadiation;
+  extends AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples.ConvertRadiation;
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckRadiation cheGloRad
     "Check global horizontal radiation"
     annotation (Placement(transformation(extent={{60,20},{80,40}})));

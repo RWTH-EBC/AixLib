@@ -732,7 +732,7 @@ if __name__ == '__main__':
 		print("please use -h or --help for help")
 	if args.WhiteList is True:
 		print("Create a Whitelist of IBPSA Library")
-		HTML_Tidy.create_IBPSA_WhiteList()
+		HTML_Check.create_IBPSA_WhiteList()
 	elif args.correct_backup is True:
 		print("Create a Backup")
 		HTML_Check.run_files()

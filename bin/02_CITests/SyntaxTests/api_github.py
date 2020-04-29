@@ -28,7 +28,6 @@ class GET_API_GITHUB(object):
 
 	def get_GitHub_Username(self):
 		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/branches/"+self.Working_Branch
-		print(url)
 		payload = {}
 		headers= {}
 
@@ -50,17 +49,19 @@ class PULL_REQUEST_GITHUB(object):
 	
 	def post_pull_request(self):
 		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/pulls"
-
-		payload = "{\n    \"title\": \"Correct HTML master\",\n    \"body\": \"Merge the Corrected HTML Code\",\n    \"head\": \"SvenHinrichs:issue802_CleanCI_Infrastructure\",\n    \"base\": \"master\"\n}"
-		headers = {'Authorization': 'Bearer '+self.GITHUB_TOKEN,'Content-Type': 'application/json'}
+		payload = '{\n    \"title\": \"Corrected HTML Code in branch '+self.Working_Branch+'\",\n    \"body\": \"Merge the corrected HTML Code. After confirm the pull request, **pull** your branch to your local repository.\n **Delete** the Branch ' +self.Correct_Branch+ '\",\n    \"head\": \"'+self.GITHUB_USERNAME+":"+self.Correct_Branch+'\",\n    \"base\": \"'+self.Working_Branch+'\"\n  \n}'
+		
+		headers = {
+			'Authorization': 'Bearer '+self.GITHUB_TOKEN,
+			'Content-Type': 'application/json'
+		}
 		response = requests.request("POST", url, headers=headers, data = payload)
 		print(response.text.encode('utf8'))
 
 
 
 	
-	
-	
+
 
 if  __name__ == '__main__':
 	#GITHUB_REPOSITORY
@@ -80,10 +81,12 @@ if  __name__ == '__main__':
 	
 	GET_API_DATA = GET_API_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch)
 	Username = GET_API_DATA.get_GitHub_Username()
-	print("USERNAME is "+ Username)
-	sys.stdout.write(Username)
-	sys.exit(0)					
+	#print("USERNAME is "+ Username)
+	#sys.stdout.write(Username)
+	#sys.exit(0)					
 	
-	#PULL_REQUEST = PULL_REQUEST_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch, GITHUB_TOKEN = args.GITHUB_TOKEN, GITHUB_USERNAME = Username)
-	#PULL_REQUEST.post_pull_request()
+	PULL_REQUEST = PULL_REQUEST_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch, GITHUB_TOKEN = args.GITHUB_TOKEN, GITHUB_USERNAME = Username)
+	PULL_REQUEST.post_pull_request()
+	print("Pull Request")
+	exit(0)
 	

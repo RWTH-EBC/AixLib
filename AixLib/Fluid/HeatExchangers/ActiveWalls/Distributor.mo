@@ -18,12 +18,12 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
-  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package
-      Medium = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a mainFlow(redeclare final package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-70,22},{-50,42}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package
-      Medium = Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,
+  Modelica.Fluid.Interfaces.FluidPort_b mainReturn(redeclare final package Medium =
+               Medium) annotation (Placement(transformation(extent={{-70,-40},{-50,
             -20}}), iconTransformation(extent={{-70,-40},{-50,-20}})));
   MixingVolumes.MixingVolume vol_flow(
     final nPorts=n + 1,
@@ -58,8 +58,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
     each final C_nominal=C_nominal,
     final allowFlowReversal=allowFlowReversal) annotation (Placement(
         transformation(extent={{-10,-20},{10,0}}, rotation=0)));
-  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final
-      package Medium = Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_b flowPorts[n](redeclare each final package Medium =
+                       Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,60},
@@ -69,8 +69,8 @@ model Distributor "Heating circuit distributor for underfloor heating systems"
         origin={0,60},
         extent={{-6,-24},{6,24}},
         rotation=90)));
-  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final
-      package Medium = Medium) annotation (Placement(
+  Modelica.Fluid.Interfaces.FluidPorts_a returnPorts[n](redeclare each final package Medium =
+                       Medium) annotation (Placement(
       visible=true,
       transformation(
         origin={0,-60},

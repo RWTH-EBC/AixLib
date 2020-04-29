@@ -1,8 +1,7 @@
 within AixLib.Fluid.MixingVolumes.Validation;
 model MoistureMixingConservationSteadyState
   "This test checks if mass and energy is conserved when mixing fluid streams using steady state balances"
-  extends
-    AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation(
+  extends AixLib.Fluid.MixingVolumes.Validation.BaseClasses.MoistureMixingConservation(
     mWatFloSol(k=0),
     mFloSol(k=sou1.m_flow + sou2.m_flow),
     hSol(k=Medium.h_default*(sou1.m_flow + sou2.m_flow)));

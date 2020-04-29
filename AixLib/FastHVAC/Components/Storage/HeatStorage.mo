@@ -198,8 +198,7 @@ public
         transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
   replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction  constrainedby
-    BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 
 protected

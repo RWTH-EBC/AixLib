@@ -19,8 +19,8 @@ partial model PartialReversibleThermalMachine
   replaceable package Medium_eva =
     Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (Dialog(tab = "Evaporator"),choicesAllMatching=true);
-  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby
-    AixLib.Fluid.BaseClasses.PartialInnerCycle  "Blackbox model of refrigerant cycle of a thermal machine"
+  replaceable AixLib.Fluid.BaseClasses.PartialInnerCycle innerCycle constrainedby AixLib.Fluid.BaseClasses.PartialInnerCycle
+                                                "Blackbox model of refrigerant cycle of a thermal machine"
     annotation (Placement(transformation(
         extent={{-27,-26},{27,26}},
         rotation=90,
@@ -68,11 +68,11 @@ partial model PartialReversibleThermalMachine
     annotation (Dialog(group="Heat Losses", tab="Condenser"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CCon
-    "Heat capacity of Condenser (= cp*m)" annotation (Evaluate=true,Dialog(group="Heat Losses",
+    "Heat capacity of Condenser (= cp*m). If you want to neglace the dry mass of the condenser, you can set this value to zero" annotation (Evaluate=true,Dialog(group="Heat Losses",
         tab="Condenser",
       enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GConOut
-    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a condenser with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Condenser",
       enable=use_conCap));
   parameter Modelica.SIunits.ThermalConductance GConIns
@@ -99,11 +99,11 @@ partial model PartialReversibleThermalMachine
     annotation (Dialog(group="Heat Losses", tab="Evaporator"),
                                           choices(checkBox=true));
   parameter Modelica.SIunits.HeatCapacity CEva
-    "Heat capacity of Evaporator (= cp*m)"
+    "Heat capacity of Evaporator (= cp*m). If you want to neglace the dry mass of the evaporator, you can set this value to zero"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaOut
-    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection"
+    "Constant parameter for heat transfer to the ambient. Represents a sum of thermal resistances such as conductance, insulation and natural convection. If you want to simulate a evaporator with additional dry mass but without external heat losses, set the value to zero"
     annotation (Evaluate=true,Dialog(group="Heat Losses", tab="Evaporator",
       enable=use_evaCap));
   parameter Modelica.SIunits.ThermalConductance GEvaIns
@@ -146,9 +146,9 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TCon_start=Medium_con.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Condenser"));
-  parameter Boolean fixed_TCon_start
-    "true if T_start of non-fluid capacity in condenser should be fixed at initialization"
-    annotation (Evaluate=true,Dialog(tab="Condenser", group="Heat Losses",
+  parameter Modelica.SIunits.Temperature TConCap_start=Medium_con.T_default
+    "Initial temperature of heat capacity of condenser"
+    annotation (Dialog(tab="Initialization", group="Condenser",
       enable=use_conCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XCon_start[Medium_con.nX]=
      Medium_con.X_default "Start value of mass fractions m_i/m"
@@ -159,9 +159,9 @@ partial model PartialReversibleThermalMachine
   parameter Modelica.Media.Interfaces.Types.Temperature TEva_start=Medium_eva.T_default
     "Start value of temperature"
     annotation (Evaluate=true,Dialog(tab="Initialization", group="Evaporator"));
-  parameter Boolean fixed_TEva_start
-    "true if T_start of non-fluid capacity in evaporator should be fixed at initialization"
-    annotation (Evaluate=true,Dialog(tab="Evaporator",     group="Heat Losses",
+  parameter Modelica.SIunits.Temperature TEvaCap_start=Medium_eva.T_default
+    "Initial temperature of heat capacity at evaporator"
+    annotation (Dialog(tab="Initialization", group="Evaporator",
       enable=use_evaCap));
   parameter Modelica.Media.Interfaces.Types.MassFraction XEva_start[Medium_eva.nX]=
      Medium_eva.X_default "Start value of mass fractions m_i/m"
@@ -174,10 +174,10 @@ partial model PartialReversibleThermalMachine
           Init.InitialOutput and use_refIne));
 //Dynamics
   parameter Modelica.Fluid.Types.Dynamics massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of mass balance: dynamic (3 initialization options) or steady state"
+    "Type of mass balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    "Type of energy balance: dynamic (3 initialization options) or steady state (only affects fluid-models)"
     annotation (Dialog(tab="Dynamics", group="Equation"));
 //Advanced
   parameter Boolean machineType "=true if heat pump; =false if chiller"
@@ -211,12 +211,11 @@ partial model PartialReversibleThermalMachine
     final is_con=true,
     final V=VCon_final*scalingFactor,
     final C=CCon*scalingFactor,
+    final TCap_start=TConCap_start,
     final GOut=GConOut*scalingFactor,
     final m_flow_nominal=mFlow_conNominal_final*scalingFactor,
     final dp_nominal=dpCon_nominal*scalingFactor,
-    final GInn=GConIns*scalingFactor,
-    final fixed_T_start=fixed_TCon_start)
-    "Heat exchanger model for the condenser"
+    final GInn=GConIns*scalingFactor) "Heat exchanger model for the condenser"
     annotation (Placement(transformation(extent={{-16,78},{16,110}})));
   AixLib.Fluid.HeatExchangers.EvaporatorCondenserWithCapacity eva(
     redeclare final package Medium = Medium_eva,
@@ -237,10 +236,9 @@ partial model PartialReversibleThermalMachine
     final C=CEva*scalingFactor,
     final m_flow_nominal=mFlow_evaNominal_final*scalingFactor,
     final dp_nominal=dpEva_nominal*scalingFactor,
+    final TCap_start=TEvaCap_start,
     final GOut=GEvaOut*scalingFactor,
-    GInn=GEvaIns*scalingFactor,
-    final fixed_T_start=fixed_TEva_start)
-    "Heat exchanger model for the evaporator"
+    final GInn=GEvaIns*scalingFactor) "Heat exchanger model for the evaporator"
     annotation (Placement(transformation(extent={{16,-70},{-16,-102}})));
   Modelica.Blocks.Continuous.CriticalDamping heatFlowIneEva(
     final initType=initType,
@@ -318,6 +316,7 @@ partial model PartialReversibleThermalMachine
         origin={110,100})));
 
   Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly
+     and use_rev
     "Set value of operation mode"
     annotation (Placement(transformation(extent={{-132,-36},{-100,-4}})));
 
@@ -395,6 +394,7 @@ partial model PartialReversibleThermalMachine
         rotation=0)));
 
   //Automatic calculation of mass flow rates and volumes of the evaporator and condenser using linear regressions from data sheets of heat pumps and chillers (water to water)
+
 protected
   parameter Modelica.SIunits.MassFlowRate autoCalc_mFlow_min = 0.3 "Realistic mass flow minimum for simulation plausibility";
   parameter Modelica.SIunits.Volume autoCalc_Vmin = 0.003 "Realistic volume minimum for simulation plausibility";
@@ -495,7 +495,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(nSet, sigBus.N) annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
+  connect(nSet,sigBus.n)  annotation (Line(points={{-116,20},{-76,20},{-76,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,

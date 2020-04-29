@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
-  extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   parameter Boolean heatAHU
     "Status of heating of AHU"

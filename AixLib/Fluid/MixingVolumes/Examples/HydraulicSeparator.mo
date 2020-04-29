@@ -46,8 +46,8 @@ model HydraulicSeparator
     m_flow_nominal=0.1,
     dp_nominal=200) "Hydraulic resistance in primary circuit"
     annotation (Placement(transformation(extent={{-50,-26},{-70,-6}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorPrim(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorPrim(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-54,-2},{-34,18}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow(
     Q_flow=1.6e3,
@@ -65,8 +65,8 @@ model HydraulicSeparator
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{66,0},{86,20}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureMixedTop(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+                                        temperatureMixedTop(redeclare package Medium =
+               Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{38,0},{58,20}})));
   FixedResistances.PressureDrop       res2(
     redeclare package Medium = Medium,
@@ -80,12 +80,12 @@ model HydraulicSeparator
                                  simpleValve(redeclare package Medium = Medium,
       m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1Sec(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1Sec(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{2,-66},{-18,-46}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureBottom(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+                                        temperatureBottom(redeclare package Medium =
+               Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{10,-46},{30,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(
       T=273.15+20)
@@ -109,8 +109,8 @@ model HydraulicSeparator
     offset=0.2)
     annotation (Placement(transformation(extent={{48,-42},{68,-22}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
-                                        temperatureMixedBottom(redeclare
-      package Medium = Medium, m_flow_nominal=1)
+                                        temperatureMixedBottom(redeclare package Medium =
+                       Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-8,-26},{-28,-6}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                         temperatureTop(redeclare package Medium =

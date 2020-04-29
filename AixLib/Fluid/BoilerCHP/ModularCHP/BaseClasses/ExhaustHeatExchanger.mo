@@ -18,8 +18,7 @@ model ExhaustHeatExchanger
       __Dymola_choicesAllMatching=true);
   replaceable package Medium4 =
       DataBase.CHP.ModularCHPEngineMedia.CHPCoolantPropyleneGlycolWater (
-                                      property_T=356, X_a=0.50) constrainedby
-    Modelica.Media.Interfaces.PartialMedium
+                                      property_T=356, X_a=0.50) constrainedby Modelica.Media.Interfaces.PartialMedium
     "Coolant medium model used in the CHP plant" annotation (
       __Dymola_choicesAllMatching=true);
 
@@ -210,8 +209,8 @@ model ExhaustHeatExchanger
     final m_flow_small=m2_flow_small)
     "Temperature sensor of coolant hot side of exhaust heat exchanger"
     annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFloCool(redeclare final package
-      Medium = Medium2, final allowFlowReversal=allowFlowReversal2)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFloCool(redeclare final package Medium =
+               Medium2, final allowFlowReversal=allowFlowReversal2)
     "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
   AixLib.Fluid.FixedResistances.Pipe pipeCoolant(

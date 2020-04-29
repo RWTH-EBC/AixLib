@@ -2,8 +2,7 @@ within AixLib.DataBase.Media.Refrigerants.R410a;
 record BDSP_IIR_P1_48_T233_340
   "Record with fitting coefficients calculated for first implementation"
 
-  extends
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition(
     name="Coefficients taken from Engelpracht",
     psat_Nt=6,
     psat_N={-5.42493213611446, 4.55984223535243,

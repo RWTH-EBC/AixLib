@@ -32,8 +32,8 @@ model InletToAirMoistAir
   Modelica.Blocks.Sources.Constant C[Medium.nC](each k=0.01) if
      Medium.nC > 0 "Trace substances for forward flow"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
-  AixLib.Fluid.FMI.Conversion.InletToAir conAirRevFlo(redeclare package
-      Medium = Medium, allowFlowReversal=true)
+  AixLib.Fluid.FMI.Conversion.InletToAir conAirRevFlo(redeclare package Medium =
+               Medium, allowFlowReversal=true)
     "Converter for air with reverse flow"
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   Source_T souRev(

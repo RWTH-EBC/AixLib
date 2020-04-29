@@ -11,6 +11,7 @@ import buildingspy.development.regressiontest as u
 from pathlib import Path
 from git import Repo
 
+
 class Git_Repository_Clone(object):
 	"""work with Repository in Git"""
 	def __init__(self, Repository):
@@ -67,7 +68,22 @@ class ValidateTest(object):
                 "Value of 'tool' of constructor 'Tester' must be 'dymola', 'omc' or 'jmodelica'. Received '{}'.".format(tool))
 		
 
+	def dym_check_lic(self):
+		from dymola.dymola_interface import DymolaInterface
+		from dymola.dymola_exception import DymolaException
 		
+		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		if not dym_sta_lic_available:
+			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
+			print("No Dymola License is available")
+			dymola.close()
+			exit(1)
+		else:
+			print("Dymola License is available")
+	
+	
+	
+	
 	''' Write a new Whitelist with all models in IBPSA Library of those models who have not passed the Check Test'''
 	def _WriteWhiteList(self):
 		#_listAllModel
@@ -107,6 +123,15 @@ class ValidateTest(object):
 		#dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		Library = "IBPSA"+os.sep+"IBPSA"+os.sep+"package.mo"
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		if not dym_sta_lic_available:
+			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
+			print("No Dymola License is available")
+			dymola.close()
+			exit(1)
+		else:
+			print("Dymola License is available")
+	
 		PackageCheck = dymola.openModel(Library)
 		
 		if PackageCheck == True:
@@ -283,6 +308,15 @@ class ValidateTest(object):
 			dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		if not dym_sta_lic_available:
+			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
+			print("No Dymola License is available")
+			dymola.close()
+			exit(1)
+		else:
+			print("Dymola License is available")
+	
 		PackageCheck = dymola.openModel(self.Library)
 		if PackageCheck == True:
 			print("Found AixLib Library and start Checkmodel Tests \n Check Package " + self.Package+" \n")
@@ -340,6 +374,16 @@ class ValidateTest(object):
 			dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		if not dym_sta_lic_available:
+			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
+			print("No Dymola License is available")
+			dymola.close()
+			exit(1)
+		else:
+			print("Dymola License is available")
+	
+		
 		PackageCheck = dymola.openModel(self.Library)
 		if PackageCheck == True:
 			print("Found AixLib Library and start Checkmodel Tests \n Check Package " + self.Package+" \n")
@@ -402,6 +446,16 @@ class ValidateTest(object):
 		dymola = DymolaInterface(dymolapath="/usr/local/bin/dymola")
 		### Writes all information in the log file, not only the last entries
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
+		if not dym_sta_lic_available:
+			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
+			print("No Dymola License is available")
+			dymola.close()
+			exit(1)
+		else:
+			print("Dymola License is available")
+	
+		
 		PackageCheck = dymola.openModel(Library)
 		if PackageCheck == True:
 			print("Found AixLib Library and start Checkmodel Tests \n Check Package " + self.Package+" \n")

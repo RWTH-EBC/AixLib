@@ -61,7 +61,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus.N, showN.numberPort) annotation (Line(
+  connect(heatPumpControlBus.n, showN.numberPort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,70},{58.5,70}},
       color={255,204,51},
       thickness=0.5), Text(

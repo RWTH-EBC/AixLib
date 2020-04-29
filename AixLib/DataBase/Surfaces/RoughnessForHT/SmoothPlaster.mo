@@ -1,7 +1,6 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
 record SmoothPlaster
-  extends
-    DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
+  extends DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
     D=10.22,
     E=3.1,
     F=0.0);

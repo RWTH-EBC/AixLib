@@ -349,8 +349,6 @@ IBPSA.Fluid.Actuators.Dampers.MixingBox.mo
 
 IBPSA.Fluid.Actuators.Dampers.PressureIndependent.mo
 
-IBPSA.Fluid.Actuators.Dampers.VAVBoxExponential.mo
-
 IBPSA.Fluid.Actuators.Dampers.Examples.Damper.mo
 
 IBPSA.Fluid.Actuators.Dampers.Examples.MixingBox.mo
@@ -996,8 +994,6 @@ IBPSA.Fluid.HeatExchangers.BaseClasses.HACoilInside.mo
 IBPSA.Fluid.HeatExchangers.BaseClasses.HADryCoil.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder.mo
-
-IBPSA.Fluid.HeatExchangers.BaseClasses.Internal.mo
 
 IBPSA.Fluid.HeatExchangers.BaseClasses.isobaricExpansionCoefficientWater.mo
 
@@ -1657,6 +1653,8 @@ IBPSA.Fluid.Storage.Validation.StratifiedNonUniformInitial.mo
 
 IBPSA.Media.Air.mo
 
+IBPSA.Media.Steam.mo
+
 IBPSA.Media.Water.mo
 
 IBPSA.Media.Antifreeze.PropyleneGlycolWater.mo
@@ -1681,6 +1679,14 @@ IBPSA.Media.Examples.PropyleneGlycolWaterProperties.mo
 
 IBPSA.Media.Examples.PropyleneGlycolWaterTemperatureEnthalpyInversion.mo
 
+IBPSA.Media.Examples.SteamDerivativeCheck.mo
+
+IBPSA.Media.Examples.SteamProperties.mo
+
+IBPSA.Media.Examples.SteamSaturatedProperties.mo
+
+IBPSA.Media.Examples.SteamTemperatureEnthalpyInversion.mo
+
 IBPSA.Media.Examples.WaterDerivativeCheck.mo
 
 IBPSA.Media.Examples.WaterProperties.mo
@@ -1688,6 +1694,8 @@ IBPSA.Media.Examples.WaterProperties.mo
 IBPSA.Media.Examples.WaterTemperatureEnthalpyInversion.mo
 
 IBPSA.Media.Examples.BaseClasses.FluidProperties.mo
+
+IBPSA.Media.Examples.BaseClasses.PartialProperties.mo
 
 IBPSA.Media.Examples.BaseClasses.TestTemperatureEnthalpyInversion.mo
 
@@ -2140,8 +2148,6 @@ IBPSA.Utilities.Psychrometrics.Examples.TWetBul_TDryBulPhi.mo
 IBPSA.Utilities.Psychrometrics.Examples.TWetBul_TDryBulXi.mo
 
 IBPSA.Utilities.Psychrometrics.Functions.density_pTX.mo
-
-IBPSA.Utilities.Psychrometrics.Functions.Internal.mo
 
 IBPSA.Utilities.Psychrometrics.Functions.phi_pTX.mo
 

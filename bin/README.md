@@ -53,8 +53,10 @@ This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLab
 
 	#!/bin/bash
 	image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
-	
+
 	stages:
+		- deleteBranch
+		- SetSettings
 		- CheckSettings
 		- build
 		- HTMLCheck
@@ -65,12 +67,13 @@ This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLab
 		- Check
 		- Simulate
 		- RegressionTest
-
-	
+	 
 	variables:
-		TARGET_BRANCH: master
-		Newbranch: "Correct_HTML_$TARGET_BRANCH"
+		Praefix_Branch: "Correct_HTML_"
+		TARGET_BRANCH: $CI_COMMIT_REF_NAME
+		Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
 		StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen
+		Github_Repository : SvenHinrichs/GitLabCI
 	
 	
 
@@ -101,39 +104,113 @@ For question ask [Sven Hinrichs](https://git.rwth-aachen.de/sven.hinrichs)
 
 ## Configure Variables
 
-### Protected Branches: 
-Wildcards "issue *": Will push all branches to Github with the namespace issue* . This is necessaryto push the corrected code to the Github 
-repository.
-
-### TARGET-Branches: 
-Your current working branch. 
+### Github_Repository : 
+This variable consists of owner/repo (e.g. RWTH-EBC/AixLib) and is used for code that was changed by the CI. (git@github.com:RWTH-EBC/AixLib.git)
 
 ### StyleModel:
 
 This variable is necessary for the StyleCheck und will check the Style of a modelica model (e.g. "StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen")
 
+## Mirroring
+Repository mirroring allows for mirroring of repositories to and from external sources. It can be used to mirror branches, tags, and commits between repositories.
 
-### Push - Mirroring
-All protected branches in gitlab will push to github. This included all branches with namespace *issue. 
+### Pull - [Mirroring](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) 
+Pull: for mirroring a repository from another location to GitLab. . 
 
-### Pull - Mirroring 
-Pull all branches from github to gitlab. 
+##### SSH authentication
 
-### GITHUB_API_TOKEN
+If you’re mirroring over SSH (that is, using an ssh:// URL), you can authenticate using:
 
-### GL_TOKEN
+- Password-based authentication, just as over HTTPS.
+- Public key authentication. This is often more secure than password authentication, especially when the other repository supports Deploy Keys.
+
+To get started:
+
+1. Navigate to your project’s Settings > Repository and expand the Mirroring repositories section.
+2. Enter an ssh :// - URL for mirroring (e.g ssh://github.com/"owner"/"repo".git. )
+
+![E.ON EBC RWTH Aachen University](04_Documentation/Images/Mirroring_ssh.PNG)
+
+Now GitLab should recognize Host Keys and you can mirror your repository.
+After this copy the ssh public key and add the key as de deploy key to your gitlab and github repository.
+
+In GitLab:  General -> CI/CD -> Deploy Keys (Activate Write access allowed button)
+In Github: Settings -> Deploy keys (Allow write access)
+
+![E.ON EBC RWTH Aachen University](04_Documentation/Images/public_key.PNG)
+
+### [GITHUB_API_TOKEN](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) 
+Creating a personal access token for the command line
+
+	1. Verify your email address, if it hasn't been verified yet.
+	2. In the upper-right corner of any page, click your profile photo, then click Settings. 
+	3. In the left sidebar, click Developer settings. 
+	4. In the left sidebar, click Personal access tokens. 
+	5. Click Generate new token. 
+	6. Give your token a descriptive name. 
+	7. Select the scopes, or permissions, you'd like to grant this token. To use your token to access repositories from the command line, select repo. 
+	8. Click Generate token. 
+	9. Click to copy the token to your clipboard. For security reasons, after you navigate off the page, you will not be able to see the token again. 
+	10. Add to your Variable GITHUB_API_TOKEN
+
+### [GL_TOKEN](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+Creating a personal access token
+
+You can create as many personal access tokens as you like from your GitLab profile.
+
+    1. Log in to GitLab.
+    2. In the upper-right corner, click your avatar and select Settings.
+    3. On the User Settings menu, select Access Tokens.
+    4. Choose a name and optional expiry date for the token.
+    5. Choose the desired scopes.
+    6. Click the Create personal access token button.
+    7. Save the personal access token somewhere safe. Once you leave or refresh the page, you won’t be able to access it again.
 
 ## Test CI Setting
 To test if all necessary variables are set push your Code with the commit "Check Settings". 
 
 
+## Add a Deploy keys
+You can launch projects from a GitHub repository to your server by using a deploy key, which is an SSH key that grants access to a single repository. 
+GitHub attaches the public part of the key directly to your repository instead of a personal user account, and the private part of the key remains on your server. 
+For more information, see ["Delivering deployments"](https://developer.github.com/v3/guides/delivering-deployments/)
+
+	1. Run the ssh-keygen procedure on your server, and remember where you save the generated public/private rsa key pair.
+	2. In the upper-right corner of any GitHub page, click your profile photo, then click Your profile. 
+	3. On your profile page, click Repositories, then click the name of your repository.
+	4. From your repository, click Settings. 
+	5. In the sidebar, click Deploy Keys, then click Add deploy key. 
+	6. Provide a title, paste in your public key. 
+	7. Select Allow write access if you want this key to have write access to the repository. A deploy key with write access lets a deployment push to the repository.
+	8. Click Add key.
+
+[Setup Deploy keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys)
+
+## [SSH-Agent](https://help.github.com/en/enterprise/2.15/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)/ [Use Deploy Keys in Docker](https://www.webfactory.de/blog/use-ssh-key-for-private-repositories-in-github-actions) 
+##### Install ssh-agent client:
+
+	- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+##### Ensure the ssh-agent is running:
+ 	
+	- eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+	
+##### ssh-keyscan detect GitHub´s SSH host keys	
+
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+    
+##### start the ssh-agent , binding it to a predictable socket location, and finally import the SSH private key into the agent.
+	- ssh-agent -a /tmp/ssh_agent.sock > /dev/null
+    - echo "${GITHUB_PRIVATE_KEY}" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+        
+## [Setup SSH-Key for GitHub Repository](https://www.heise.de/tipps-tricks/SSH-Key-fuer-GitHub-Repositories-einrichten-4627459.html)
+Add your public key to your Github Account or add as a deploy Key to your Repository.
 
 
 # To Do
 
-- Add Gitlab Page
 - Slack Notification in case of merge request in gitlab
-- Add a gitlab bot
-- Add $GL_Token
 - Add label CI and fix HTML code
-- Add Wildcard for protected branches with issue*
+- Image with Private key

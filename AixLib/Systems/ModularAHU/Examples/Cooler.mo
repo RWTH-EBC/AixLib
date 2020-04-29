@@ -41,8 +41,8 @@ model Cooler "Cooler register example"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-60,-60})));
-  Fluid.Sources.Boundary_pT boundaryWaterSink(nPorts=1, redeclare package
-      Medium = MediumWater) annotation (Placement(transformation(
+  Fluid.Sources.Boundary_pT boundaryWaterSink(nPorts=1, redeclare package Medium =
+               MediumWater) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={40,-60})));
