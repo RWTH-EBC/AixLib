@@ -202,8 +202,8 @@ public
   parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
     "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
 
-  replaceable parameter Components.Types.CoeffTableSouthWindow partialCoeffTable constrainedby
-    Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
+  replaceable parameter Components.Types.CoeffTableSouthWindow partialCoeffTable constrainedby Components.Types.PartialCoeffTable(
+                                       final abs=absInnerWallSurf)
     annotation (Placement(transformation(extent={{-72,64},{-52,84}})),
      choicesAllMatching=true);
 

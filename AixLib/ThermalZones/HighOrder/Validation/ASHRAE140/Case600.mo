@@ -38,9 +38,9 @@ model Case600
     solIrrThreshold=350,
     TOutAirLimit=273.15+17,
     absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-
     redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
+
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));
   Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"

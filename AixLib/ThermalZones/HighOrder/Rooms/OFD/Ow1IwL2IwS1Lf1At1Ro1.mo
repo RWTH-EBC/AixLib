@@ -217,8 +217,8 @@ equation
           {{20,-64.2},{20,-74},{30,-74},{30,-90}}, color={191,0,0}));
   connect(thermInsideWall3, thermInsideWall3)
     annotation (Line(points={{30,-90},{30,-90}}, color={191,0,0}));
-  connect(Ceiling.port_outside, thermCeiling) annotation (Line(points={{28,62.1},
-          {28,72},{92,72},{92,50},{90,50}}, color={191,0,0}));
+  connect(Ceiling.port_outside, thermCeiling) annotation (Line(points={{28,62.1},{28,72},{92,72},{92,50},{90,50}},
+                                            color={191,0,0}));
   connect(inside_wall2b.port_outside, thermInsideWall2b)
     annotation (Line(points={{64.15,-20},{90,-20},{90,-30}}, color={191,0,0}));
   connect(inside_wall2a.port_outside, thermInsideWall2a) annotation (Line(
