@@ -139,7 +139,7 @@ model Wall
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor if outside and withWindow and withSunblind
     "Outdoor air (dry bulb) temperature sensor"
     annotation (Placement(transformation(extent={{-70,-44},{-62,-36}})));
-  Modelica.Blocks.Math.Gain solarDistrFraction(k=ANet*solarDistribution) if use_shortWaveRadIn
+  Modelica.Blocks.Math.Gain solarDistrFraction(k=solarDistribution) if      use_shortWaveRadIn
     "interior solar distribution factors" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
@@ -150,7 +150,7 @@ model Wall
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={45,80})));
-  Modelica.Blocks.Interfaces.RealInput solarRadWin(final quantity="RadiantEnergyFluenceRate", final unit="W/m2") if use_shortWaveRadIn
+  Modelica.Blocks.Interfaces.RealInput solarRadWin(final quantity="Power", final unit="W") if                       use_shortWaveRadIn
     "solar raditaion through window" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=180,
@@ -160,7 +160,7 @@ model Wall
         rotation=180,
         origin={22,88})));
   final parameter Modelica.SIunits.Area ANet=wall_height*wall_length - clearance "Net area of wall (without windows and doors)";
-  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans(final quantity="RadiantEnergyFluenceRate", final unit="W/m2") if withWindow and use_shortWaveRadOut
+  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans(final quantity="Power", final unit="W") if                       withWindow and use_shortWaveRadOut
     "Output signal connector"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
         iconTransformation(extent={{15,-72},{35,-52}})));
