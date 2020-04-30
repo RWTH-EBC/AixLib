@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Examples.Chiller;
+within AixLib.FastHVAC.Examples.Chiller;
 model Chiller
   extends Modelica.Icons.Example;
   FastHVAC.Components.Sensors.TemperatureSensor temperatureSensor
@@ -185,23 +185,25 @@ equation
           textString="FastHVAC Chiller")}),
     experiment(StopTime=30000, Interval=60),
     __Dymola_experimentSetupOutput,
-  Documentation(info="<html>
-  <h4><span style=\"color: #008000\">Overview</span></h4>
-  <p>
-  Example Setup is based on fluid example of
-  <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Chiller\">
-  AixLib.Fluid.Chillers.Examples.Chiller</a>
-  </p>
-  </html>",
+  Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Example Setup is based on fluid example of <a href=
+  \"modelica://AixLib.Fluid.Chillers.Examples.Chiller\">AixLib.Fluid.Chillers.Examples.Chiller</a>
+</p>
+</html>",
   revisions="<html><ul>
-    <li>
-    <i>May 22, 2019</i>  by Julian Matthes: <br/>
-    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
-    </li>
-    <li>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib 
-    </li>
-  </ul>
-  </html>"));
+    Moved into AixLib
+  </li>
+</ul>
+</html>"));
 end Chiller;

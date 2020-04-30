@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Humidifiers.Examples;
+within AixLib.Fluid.Humidifiers.Examples;
 model GenericHumidifier_u
   "Model that demonstrates the steam and adiabtic humidifier"
   extends Modelica.Icons.Example;
@@ -104,14 +104,19 @@ equation
     __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/Humidifiers/Examples/GenericHumidifier_u.mos"
         "Simulate and plot"),
-    Documentation(info="<html>
-<p>Model that demonstrates the use of the GenericHumidifier. The first humidifier adds steam with a temperature of 100&deg;C to the air volume flow. The second calculates the vaporization temperature depending on the pressure. Due to the fact that the pressure is slightly higher than standard pressure in the sink, the results are slightly different. The third humidifier adds liquid water that evaporates. Thus, the temperature decreases in this case.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Model that demonstrates the use of the GenericHumidifier. The first
+  humidifier adds steam with a temperature of 100°C to the air volume
+  flow. The second calculates the vaporization temperature depending on
+  the pressure. Due to the fact that the pressure is slightly higher
+  than standard pressure in the sink, the results are slightly
+  different. The third humidifier adds liquid water that evaporates.
+  Thus, the temperature decreases in this case.
+</p>
 <ul>
-<li>
-October 22, 2019, by Alexander Kümpel:<br/>
-First implementation.
-</li>
+  <li>October 22, 2019, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=1400, Tolerance=1e-06));

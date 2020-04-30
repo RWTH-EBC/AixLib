@@ -37,7 +37,8 @@ Thermodynamic properties of DuPont Suva 410A:
 https://www.chemours.com/Refrigerants/en_US/assets/downloads/h64423_Suva410A_thermo_prop_si.pdf
 </a>
 </p>
-</html>", revisions="<html>
+
+
 <ul>
 <li>
 October 17, 2016, by Massimo Cimmino:<br/>

@@ -14,7 +14,7 @@ record WorkLoadBaseDataDefinition "Efficiency depending on workload"
   <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\">
 </p>
 <h4>
   <span style=\"color:#008000\">References</span>
@@ -23,7 +23,6 @@ record WorkLoadBaseDataDefinition "Efficiency depending on workload"
   Base data definition for record which at this time is not used in any
   model
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>

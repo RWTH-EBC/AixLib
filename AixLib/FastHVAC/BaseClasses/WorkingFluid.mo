@@ -60,7 +60,6 @@ equation
   The heat transfer through the heatPort is ideal. It is used for
   FastHVAC fluid energy balances.
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April 25, 2017</i>, by Michael Mans:<br/>

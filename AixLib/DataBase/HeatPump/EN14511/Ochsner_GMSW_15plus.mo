@@ -10,11 +10,15 @@ record Ochsner_GMSW_15plus "Ochsner GMSW 15 plus"
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
-    Documentation(revisions="<html>
-<ul>
- <li><i>Oct 14, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Transferred to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    Transferred to AixLib.
+  </li>
 </ul>
 </html>", info="<html>
-<p>According to data from WPZ Buchs, Swiss; EN14511 </p>
+<p>
+  According to data from WPZ Buchs, Swiss; EN14511
+</p>
 </html>"));
 end Ochsner_GMSW_15plus;

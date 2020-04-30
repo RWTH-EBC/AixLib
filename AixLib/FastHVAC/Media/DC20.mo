@@ -12,7 +12,6 @@ extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
 <p>
   http://www.wagnersolarshop.com/files//db3431d4-a9ac-4f0b-99ed-a11700e12772/EN-XX_DC20_TI-091110-11207500[1].pdf
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April 25, 2017</i>, by Michael Mans:<br/>

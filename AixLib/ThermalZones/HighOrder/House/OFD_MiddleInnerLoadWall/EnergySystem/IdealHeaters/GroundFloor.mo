@@ -108,12 +108,18 @@ equation
  2- Hobby
  3 - Corridor
  4 - WC/Storage
- 5 - Kitchen")}), Documentation(revisions = "<html>
- <ul>
- <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for the ground floor.</p>
- </html>"));
+ 5 - Kitchen")}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>June 19, 2014</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for the ground floor.
+</p>
+</html>"));
 end GroundFloor;

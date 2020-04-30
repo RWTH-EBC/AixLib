@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
+within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
 model MixingValveAndHEX_ExergyDestruction
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real T_0 = 298.15 "Exergy reference temperature";
@@ -57,24 +57,55 @@ equation
           fillPattern=FillPattern.Solid,
           textString="HEX")}),              Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
-    Documentation(info="<html>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></h4>
+    Documentation(info="<html><h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span>
+</h4>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">This model determines the exergy destruction of a mixing valve and a heat exchanger based on the inputs of the component.</span></li>
-<li><span style=\"font-family: MS Shell Dlg 2;\">It is used together with an IntermediateAgent.</span></li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">This model determines
+    the exergy destruction of a mixing valve and a heat exchanger based
+    on the inputs of the component.</span>
+  </li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">It is used together with
+    an IntermediateAgent.</span>
+  </li>
 </ul>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HEX.png\" alt=\"Heat exchanger\"/></span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the control volume for the mixing valve and heat exchanger. Based on this volume the following function for exergy destruction has been developed. Details can be found in the reference.</span></p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HEXCostfkt2.PNG\" alt=\"Heat excahnger cost function\"/></p>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">References</span></h4>
+<h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span>
+</h4>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\"><img src=
+  \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HEX.png\"
+  alt=\"Heat exchanger\"></span>
+</p>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the
+  control volume for the mixing valve and heat exchanger. Based on this
+  volume the following function for exergy destruction has been
+  developed. Details can be found in the reference.</span>
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HEXCostfkt2.PNG\"
+  alt=\"Heat excahnger cost function\">
+</p>
+<h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">References</span>
+</h4>
 <ul>
-<li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
+  <li>Felix Bünning. Development of a Modelica-library for agent-based
+  control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen
+  University, Aachen, Germany.
+  </li>
 </ul>
 </html>",
-    revisions="<html>
-<ul>
-<li>October 2015, by Felix Bünning: Developed and implemented</li>
+    revisions="<html><ul>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>"));
 end MixingValveAndHEX_ExergyDestruction;

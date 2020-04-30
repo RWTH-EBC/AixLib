@@ -161,13 +161,21 @@ equation
               -74,-50},{0,-62}},                                                                                                                                                                                  lineColor = {0, 0, 0}, textString = "Bedroom"), Rectangle(extent = {{-8, -28}, {12, -70}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid,  pattern=LinePattern.None), Text(extent={{
               -32,-46},{42,-58}},                                                                                                                                                                                 lineColor = {0, 0, 0}, textString = "Bath"), Rectangle(extent = {{16, -28}, {52, -68}}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid,  pattern=LinePattern.None), Text(extent = {{0, -54}, {74, -66}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Complete model appartment</p>
- </html>", revisions = "<html>
- <ul>
- <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
- <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid,  pattern=LinePattern.None), Text(extent = {{0, -54}, {74, -66}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Complete model appartment
+</p>
+<ul>
+  <li>
+    <i>April 18, 2014</i> by Ana Constantin:<br/>
+    Added documentation
+  </li>
+  <li>
+    <i>August 16, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>"));
 end OneAppartment_VoWo;

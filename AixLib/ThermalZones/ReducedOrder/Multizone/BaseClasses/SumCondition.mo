@@ -28,38 +28,42 @@ algorithm
     end if;
   end for;
 
-  annotation (Documentation(info="<html>
-<p>Returns the sum of entries of a vector and their share if a condition is true.</p>
-<p>Inputs: </p>
+  annotation (Documentation(info="<html><p>
+  Returns the sum of entries of a vector and their share if a condition
+  is true.
+</p>
+<p>
+  Inputs:
+</p>
 <ol>
-<li>Vector</li>
-<li>Condition (vector with boolean values)</li>
-<li>Dimension (dimension of vectors)</li>
+  <li>Vector
+  </li>
+  <li>Condition (vector with boolean values)
+  </li>
+  <li>Dimension (dimension of vectors)
+  </li>
 </ol>
-<p>Output:</p>
+<p>
+  Output:
+</p>
 <ol>
-<li>Sum of vector elements where condition is true</li>
-<li>Share of vector elements where condition is true</li>
+  <li>Sum of vector elements where condition is true
+  </li>
+  <li>Share of vector elements where condition is true
+  </li>
 </ol>
-</html>", revisions="<html>
 <ul>
-  <li>
-  September 27, 2016, by Moritz Lauster:<br/>
-  Moved to fit to new Annex60 structure.
+  <li>September 27, 2016, by Moritz Lauster:<br/>
+    Moved to fit to new Annex60 structure.
   </li>
-  <li>
-  February 26, 2016, by Moritz Lauster:<br/>
-  Added share of volume
-  for each zone as output.
+  <li>February 26, 2016, by Moritz Lauster:<br/>
+    Added share of volume for each zone as output.
   </li>
-  <li>
-  October 30, 2015, by Moritz Lauster:<br/>
-  Moved and adapted to AixLib.
+  <li>October 30, 2015, by Moritz Lauster:<br/>
+    Moved and adapted to AixLib.
   </li>
-  <li>
-  March 7, 2014, by Ole Odendahl:<br/>
-  Added documentation and
-  formatted appropriately
+  <li>March 7, 2014, by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
   </li>
 </ul>
 </html>"));

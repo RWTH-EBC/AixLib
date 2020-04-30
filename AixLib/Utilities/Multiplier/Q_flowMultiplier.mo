@@ -42,20 +42,32 @@ Therm1.Q_flow*f=-Therm2.Q_flow;
       y=0.41,
       width=0.6,
       height=0.6),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>The model multiplies the heat flow rate at constant temperature. </p>
-<h4><font color=\"#008000\">Example Results</font></h4>
-<p><a href=\"BaseLib.Examples.Multiplier_test\">BaseLib.Examples.Multiplier_test </a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The model multiplies the heat flow rate at constant temperature.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"BaseLib.Examples.Multiplier_test\">BaseLib.Examples.Multiplier_test</a>
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>April 01, 2014  </i>by Moritz Lauster:<br/>
-Renamed</li>
-<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>
-Formatted documentation appropriately </li>
-<li>by Alexander Hoh:<br/>
-Implemented.</li>
+      revisions="<html><ul>
+  <li>
+    <i>April 01, 2014</i> by Moritz Lauster:<br/>
+    Renamed
+  </li>
+  <li>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>by Alexander Hoh:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"),
     DymolaStoredErrors);

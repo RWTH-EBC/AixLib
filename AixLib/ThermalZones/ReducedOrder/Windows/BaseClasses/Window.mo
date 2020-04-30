@@ -237,19 +237,25 @@ equation
 ")}),                                                            Diagram(
         coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-100},{100,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+    Documentation(revisions="<html><ul>
+  <li>June 30, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model calculates the input of heat and visible light into the room due
- to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.
-   It considers  the correction values for non-vertical and non-parallel
-   radiation incidence.</p>
-
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - Modelling of solar radiation.</p>
+<p>
+  This model calculates the input of heat and visible light into the
+  room due to solar irradiation. Therefore it uses the calculations of
+  VDI 6007 part 3. It considers the correction values for non-vertical
+  and non-parallel radiation incidence.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 </html>"));
 end Window;

@@ -17,13 +17,18 @@ algorithm
   end when;
 
   annotation (
-  Documentation(info="<html>
-<h4>Description of the Switch Counter: </h4>
-<p> This model counts the number of times that the logical input <b>u</b> switches from 0 to 1 during the simulation time.</p><br/> 
-</html>", revisions="<html>
+  Documentation(info="<html><h4>
+  Description of the Switch Counter:
+</h4>
+<p>
+  This model counts the number of times that the logical input <b>u</b>
+  switches from 0 to 1 during the simulation time.
+</p><br/>
 <ul>
-<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>
-Moved into AixLib</li>
+  <li>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
 </ul>
 </html>"),
 Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

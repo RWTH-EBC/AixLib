@@ -40,18 +40,16 @@ package HeatTransfer "Package that contains models to compute heat transfers"
         origin = {13.758,27.517},
         points = {{-41,-17},{-9,-17}},
         color = {191,0,0},
-        thickness = 0.5)}), Documentation(revisions="<html>
-<ul>
-  <li>
-  October 28, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+        thickness = 0.5)}), Documentation(revisions="<html><ul>
+  <li>October 28, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This package contains models to compute heat transfers such as at the
-inlet and outlet of a compressor.
+  This package contains models to compute heat transfers such as at the
+  inlet and outlet of a compressor.
 </p>
 </html>"));
 end HeatTransfer;

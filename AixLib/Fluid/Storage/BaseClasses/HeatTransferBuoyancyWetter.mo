@@ -27,20 +27,39 @@ equation
   end for;
   therm[n].Q_flow = -qFlow[n-1];
 
-  annotation (Diagram(graphics), Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Model for heat transfer between buffer storage layers. </p>
-<h4><font color=\"#008000\">Concept</font></h4>
-<p>Models buoyancy according to Buildings.Fluid.Storage.BaseClasses.Buoyancy
-model of Buildings library, cf. https://simulationresearch.lbl.gov/modelica. No
-conduction is implemented apart from when buoyancy occurs.</p>
+  annotation (Diagram(graphics), Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for heat transfer between buffer storage layers.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Models buoyancy according to
+  Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings
+  library, cf. https://simulationresearch.lbl.gov/modelica. No
+  conduction is implemented apart from when buoyancy occurs.
+</p>
 </html>",
-   revisions="<html>
-<ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>Added Documentation.</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately </li>
+   revisions="<html><ul>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Added to AixLib
+  </li>
+  <li>
+    <i>December 10, 2013</i> by Kristian Huchtemann:<br/>
+    Added Documentation.
+  </li>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end HeatTransferBuoyancyWetter;

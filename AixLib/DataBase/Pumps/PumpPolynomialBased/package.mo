@@ -6,9 +6,10 @@ package PumpPolynomialBased "Configuration data for pump model in Fluid.Movers.P
 
 
 
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>2018-05-14 by Peter Matthes:<br/>Transfered package from internal &quot;Zugabe&quot; library into AixLib.</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>2018-05-14 by Peter Matthes:<br/>
+    Transfered package from internal \"Zugabe\" library into AixLib.
+  </li>
 </ul>
 </html>"));
 end PumpPolynomialBased;

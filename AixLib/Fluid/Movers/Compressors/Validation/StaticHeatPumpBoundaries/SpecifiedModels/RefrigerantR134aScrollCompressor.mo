@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedModels;
+within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedModels;
 model RefrigerantR134aScrollCompressor
   "Static boundaries of a scroll-compressor using R134a"
   extends BaseModelStaticBoundaries(
@@ -44,33 +44,33 @@ protected
       1.037e-05*rotSpe^2*piPre^2 - 0.0001854*rotSpe*piPre^3-0.01102*piPre^4)*1.05;
   end IsentropicEfficiency;
 
-  annotation (experiment(StopTime=46.9999), Documentation(revisions="<html>
-<ul>
-  <li>
-  December 16, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  annotation (experiment(StopTime=46.9999), Documentation(revisions="<html><ul>
+  <li>December 16, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model specifies the base model
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.BaseModelStaticBoundaries\">
-BaseModelStaticBoundaries</a>. Therefore, an experimental data
-set is used presented by Cuevas and Lebrun. The authors investigate
-a scroll-compressor using R134a as refrigerant and varying the inlet
-and outlet conditions as well as the rotational speed.
-<br /><br />
-Moreover, fitted formulas are used for the three efficiencies of the
-compressor in order to improve the quality of the mass flow rate and
-power consumption calculated by the model.
+  This model specifies the base model <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.BaseModelStaticBoundaries\">
+  BaseModelStaticBoundaries</a>. Therefore, an experimental data set is
+  used presented by Cuevas and Lebrun. The authors investigate a
+  scroll-compressor using R134a as refrigerant and varying the inlet
+  and outlet conditions as well as the rotational speed.<br/>
+  <br/>
+  Moreover, fitted formulas are used for the three efficiencies of the
+  compressor in order to improve the quality of the mass flow rate and
+  power consumption calculated by the model.
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-C. Cuevas und J. Lebrun. (2009): 
-<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2008.03.016\">
-Testing and modelling of a variable speed scroll compressor.</a>. 
-In: <i>Applied Thermal Engineering</i>, 29(2):469–478
+  C. Cuevas und J. Lebrun. (2009): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2008.03.016\">Testing and
+  modelling of a variable speed scroll compressor.</a>. In: <i>Applied
+  Thermal Engineering</i>, 29(2):469–478
 </p>
 </html>"),
     Diagram(graphics={

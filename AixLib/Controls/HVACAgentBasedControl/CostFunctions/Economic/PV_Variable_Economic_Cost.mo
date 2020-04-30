@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
+within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
 model PV_Variable_Economic_Cost
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real p = 0.30 "Price per kWh of fuel";
@@ -85,15 +85,21 @@ equation
           textString="Heating Rod
 (with PV)")}),                              Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
-    Documentation(revisions="<html>
-<ul>
-<li>December 2015, by Felix Bünning: Developed and implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>December 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>",
-    info="<html>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b></p>
+    info="<html><p>
+  <b><span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b>
+</p>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">This model </span>calculates the economic cost for PV systems based on the capacity and the variable solar radiation input.</li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">This model</span>
+    calculates the economic cost for PV systems based on the capacity
+    and the variable solar radiation input.
+  </li>
 </ul>
 </html>"));
 end PV_Variable_Economic_Cost;

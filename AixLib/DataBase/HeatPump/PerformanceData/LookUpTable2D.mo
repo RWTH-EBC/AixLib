@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.HeatPump.PerformanceData;
+within AixLib.DataBase.HeatPump.PerformanceData;
 model LookUpTable2D "Performance data coming from manufacturer"
   extends AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
@@ -209,31 +209,31 @@ equation
   Furthermore, the design of a heat pump is modeled via a scaling
   factor. As a result, the equations follow below:
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>QCon,n = n * scalingFactor * TableQCon.y</i>
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>P_el = n * scalingFactor * TablePel.y</i>
 </p>
-<p align=\"justify\">
+<p style=\"text-align:justify;\">
   To simulate possible icing of the evaporator on air-source heat
   pumps, the icing factor is used to influence the output as well. As
   the factor resembles the reduction of heat transfer between
   refrigerant and source, the factor is implemented as follows:
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>QEva = iceFac * (QCon,n-P_el,n)</i>
 </p>
 <p>
   With <i>iceFac</i> as a relative value between 0 and 1:
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>iceFac = kA/kA_noIce</i>
 </p>
 <p>
   Finally, to follow the first law of thermodynamics:
 </p>
-<p align=\"center\">
+<p style=\"text-align:center;\">
   <i>QCon = P_el,n + QEva</i>
 </p>
 <h4>

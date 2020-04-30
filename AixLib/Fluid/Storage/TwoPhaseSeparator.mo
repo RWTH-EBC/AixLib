@@ -568,72 +568,82 @@ equation
           origin={-96,0},
           rotation=270)}),
           Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 18, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 18, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>",
-        info="<html>
-<p>This is a model of a ideally working two-phase separator. 
-The separator separates a vapor mixture into its liquid and 
-vapour parts until the tank is either empty or full.
+        info="<html><p>
+  This is a model of a ideally working two-phase separator. The
+  separator separates a vapor mixture into its liquid and vapour parts
+  until the tank is either empty or full.
 </p>
-<h4>Assumptions</h4>
+<h4>
+  Assumptions
+</h4>
 <p>
-Several assumptions are made and presented below:
+  Several assumptions are made and presented below:
 </p>
 <ul>
-<li>Dynamic mass and energy balances.</li>
-<li>Thermodynamic equilibrium at all times.</li>
-<li>Upright position of the separator with circular 
-cross-sectional area.</li>
-<li>Inlet at the top.</li>
-<li>Outlet at the bottom.</li>
-<li>Heat losses can be computed optionally. However, time 
-independent heat transfer coefficients are assumed that 
-must be given a priori.</li>
+  <li>Dynamic mass and energy balances.
+  </li>
+  <li>Thermodynamic equilibrium at all times.
+  </li>
+  <li>Upright position of the separator with circular cross-sectional
+  area.
+  </li>
+  <li>Inlet at the top.
+  </li>
+  <li>Outlet at the bottom.
+  </li>
+  <li>Heat losses can be computed optionally. However, time independent
+  heat transfer coefficients are assumed that must be given a priori.
+  </li>
 </ul>
 <p>
-Moreover, the thermodynamic model is generally based on the 
-tank model presented by Quoilin et al. (2014) in their
-ThermoCycle library.
+  Moreover, the thermodynamic model is generally based on the tank
+  model presented by Quoilin et al. (2014) in their ThermoCycle
+  library.
 </p>
-<h4>Calculation of specific enthalpies</h4>
+<h4>
+  Calculation of specific enthalpies
+</h4>
 <p>
-The specific enthalpies at the tank's inlet and outlet depend
-on the relative tank level. The calculation procedures
-are presented below:
+  The specific enthalpies at the tank's inlet and outlet depend on the
+  relative tank level. The calculation procedures are presented below:
 </p>
-<p align=\"left\">
-<img src=\"modelica://AixLib/Resources/Images/Fluid/Storage/separatorSpecificEnthalpyInlet.png\"
-alt=\"Calculation procedure of specific enthalpy at inlet\"/>
+<p style=\"text-align:left;\">
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/Storage/separatorSpecificEnthalpyInlet.png\"
+  alt=\"Calculation procedure of specific enthalpy at inlet\">
 </p>
-<p align=\"left\">
-<img src=\"modelica://AixLib/Resources/Images/Fluid/Storage/separatorSpecificEnthalpyOutlet.png\"
-alt=\"Calculation procedure of specific enthalpy at outlet\"/>
+<p style=\"text-align:left;\">
+  <img src=
+  \"modelica://AixLib/Resources/Images/Fluid/Storage/separatorSpecificEnthalpyOutlet.png\"
+  alt=\"Calculation procedure of specific enthalpy at outlet\">
 </p>
-<h4>Implementation</h4>
+<h4>
+  Implementation
+</h4>
 <p>
-If the two-phase separator is connected with respect
-to design direction, it will behave like a liquid receiver.
-If the two-phase separator is connected aggainst design
-direction or flow reversal occurs, it will behave like a
-mist eliminator.
+  If the two-phase separator is connected with respect to design
+  direction, it will behave like a liquid receiver. If the two-phase
+  separator is connected aggainst design direction or flow reversal
+  occurs, it will behave like a mist eliminator.
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Quoilin, Sylvain; Desideri, Adriano; Wronski, Jorrit;
-Bell, Ian and Lemort, Vincent (2014):
-<a href=\"http://www.ep.liu.se/ecp/096/072/ecp14096072.pdf\">
-ThermoCycle: A Modelica library for the simulation of
-thermodynamic systems</a>. In: <i>Proceedings of the 10th 
-International Modelica Conference</i>; March 10-15; 2014; 
-Lund; Sweden. Link&ouml;ping University Electronic Press, 
-S. 683&ndash;692.
+  Quoilin, Sylvain; Desideri, Adriano; Wronski, Jorrit; Bell, Ian and
+  Lemort, Vincent (2014): <a href=
+  \"http://www.ep.liu.se/ecp/096/072/ecp14096072.pdf\">ThermoCycle: A
+  Modelica library for the simulation of thermodynamic systems</a>. In:
+  <i>Proceedings of the 10th International Modelica Conference</i>;
+  March 10-15; 2014; Lund; Sweden. Linköping University Electronic
+  Press, S. 683–692.
 </p>
 </html>"));
 end TwoPhaseSeparator;

@@ -57,19 +57,23 @@ equation
           color={0,0,255},
           thickness=0.5,
           smooth=Smooth.None)}),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
 <p>
-This model represents the convective heat transfer from a radiator to the
-environment.
+  This model represents the convective heat transfer from a radiator to
+  the environment.
 </p>
-
 </html>",
-      revisions="<html>
-<ul>
-<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+      revisions="<html><ul>
+  <li>
+    <i>October, 2016&#160;</i> by Peter Remmen:<br/>
+    Transfer to AixLib.
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>
 "));

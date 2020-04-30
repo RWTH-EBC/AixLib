@@ -35,19 +35,17 @@ expandable connector ModularCompressorControlBus
     "Array of compressors' current manipulated variables (rotational speeds)"
     annotation(Dialog(tab="Compressors",group="Manipulated signals"));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 25, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 25, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/479\">issue 479</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This connector is a base connector used for modular compressors and 
-contains typical variables that may be needed in the modular 
-compressor models.
+  This connector is a base connector used for modular compressors and
+  contains typical variables that may be needed in the modular
+  compressor models.
 </p>
 </html>"));
 end ModularCompressorControlBus;

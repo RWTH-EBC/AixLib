@@ -28,13 +28,22 @@ equation
   connect(humanSensibleHeat.radHeat, fixedTemp.port) annotation (Line(points={{10.9,42.8},{27.45,42.8},{27.45,56},{42,56}}, color={95,95,95}));
   annotation (experiment(StartTime = 0, StopTime = 86400, Tolerance=1e-6, Algorithm="dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/InternalGains/Examples/OneOffice.mos"
-                      "Simulate and plot"), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Simulation to test the functionalty of the internal gains in a modelled room. </p>
- </html>", revisions = "<html>
- <ul>
- <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- <li><i>August 12, 2011</i> by Ana Constantin:<br/>implemented</li>
- </ul>
- </html>"));
+                      "Simulate and plot"), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the functionalty of the internal gains in a
+  modelled room.
+</p>
+<ul>
+  <li>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>August 12, 2011</i> by Ana Constantin:<br/>
+    implemented
+  </li>
+</ul>
+</html>"));
 end OneOffice;

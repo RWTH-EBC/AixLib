@@ -445,47 +445,56 @@ equation
         Line(
           points={{30,-66},{0,-66}},
           color={244,125,35},
-          thickness=0.5)}), Documentation(revisions="<html>
-<ul>
-  <li>
-  October 17, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+          thickness=0.5)}), Documentation(revisions="<html><ul>
+  <li>October 17, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for modular expansion valves that are used, for example, 
-in close-loop systems like heat pumps or chillers.
+  This is a base model for modular expansion valves that are used, for
+  example, in close-loop systems like heat pumps or chillers.
 </p>
-<h4>Definitions needed for completion</h4>
+<h4>
+  Definitions needed for completion
+</h4>
 <p>
-Three definitions need to be added by an extending class using this component:
+  Three definitions need to be added by an extending class using this
+  component:
 </p>
 <ul>
-<li>Redecleration of the model <code>SimpleExpansionValve</code>.</li>
-<li>Redecleration of the model <code>ModularController</code>.</li>
-<li>Connection of <code>expansionValves[i]</code> with <code>ports_b[i]</code>.</li>
+  <li>Redecleration of the model <code>SimpleExpansionValve</code>.
+  </li>
+  <li>Redecleration of the model <code>ModularController</code>.
+  </li>
+  <li>Connection of <code>expansionValves[i]</code> with
+  <code>ports_b[i]</code>.
+  </li>
 </ul>
 <p>
-The latter provides the possibility to add further components (e.g. sensors or
-pipes) located at the expansion valves' outlets.
+  The latter provides the possibility to add further components (e.g.
+  sensors or pipes) located at the expansion valves' outlets.
 </p>
-<h4>Modeling approaches</h4>
+<h4>
+  Modeling approaches
+</h4>
 <p>
-This base model mainly consists of two sub-models and, therefore, please 
-checkout these models for further information of underlying modeling
-approaches:
+  This base model mainly consists of two sub-models and, therefore,
+  please checkout these models for further information of underlying
+  modeling approaches:
 </p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>.
-</li>
-<li>
-<a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController\">
-AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController</a>.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
+    AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController\">
+    AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController</a>.
+  </li>
 </ul>
 </html>"));
 end PartialModularExpansionVavles;

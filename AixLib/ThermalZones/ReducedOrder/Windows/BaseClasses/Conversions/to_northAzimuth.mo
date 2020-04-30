@@ -11,13 +11,15 @@ function to_northAzimuth
 algorithm
   alpha:=Modelica.Constants.pi+azi;
 
-  annotation (Documentation(info="<html>
-<p>This Function converts the azimuth based on <a href=\"AixLib\">AixLib</a> to
- the north based definition.</p>
+  annotation (Documentation(info="<html><p>
+  This Function converts the azimuth based on <a href=
+  \"AixLib\">AixLib</a> to the north based definition.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li>June 07, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+        revisions="<html><ul>
+  <li>June 07, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end to_northAzimuth;

@@ -131,27 +131,78 @@ equation
           lineColor={0,127,0},
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model represents a sunblind to reduce the vectorial radiance on facades, windows. etc. </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model represents a sunblind to reduce the vectorial radiance on
+  facades, windows. etc.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
 <ul>
-<li>You can define the amount of radiance hitting the facade with gsunblind, which states how much radiance goes through the closed sunblind</li>
-<li>At which amount of radiance the sunblind will be closed is defined by Imax. Each directon is independent from all other directions and closes/opens seperately due to the radiance hitting the direction.</li>
-<li>The output sunblindonoff can be used to transfer the state of the shading to another model component. It contains 1-gsunblind, which is the amount of radiances, detained by the shading.</li>
+  <li>You can define the amount of radiance hitting the facade with
+  gsunblind, which states how much radiance goes through the closed
+  sunblind
+  </li>
+  <li>At which amount of radiance the sunblind will be closed is
+  defined by Imax. Each directon is independent from all other
+  directions and closes/opens seperately due to the radiance hitting
+  the direction.
+  </li>
+  <li>The output sunblindonoff can be used to transfer the state of the
+  shading to another model component. It contains 1-gsunblind, which is
+  the amount of radiances, detained by the shading.
+  </li>
 </ul>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>Each direction closes seperatly, which means that in reality each direction has to have his own sensor. It seems, that if a building uses automatic shading, the sensor is on the roof and computes the radiance on each facade. This is quite similar to the concept of different sensors for different directions, as both systems close the sunblinds seperately for each direction.</p>
-<p>All three components of the solar radiation of the tilted surface (direct, diffuse and reflected from ground) are reduced by the same factor.</p>
-<p>There is no possibilty to disable the sunblind in a specific direction. This isn&apos;t necessary, as you can set gsunblind in this direction to 1, which means, that the whole radiance is passing through the closed sunblind.</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> and checked in the Examples <a href=\"AixLib.Building.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
+<h4>
+  <span style=\"color:#008000\">Assumptions</span>
+</h4>
+<p>
+  Each direction closes seperatly, which means that in reality each
+  direction has to have his own sensor. It seems, that if a building
+  uses automatic shading, the sensor is on the roof and computes the
+  radiance on each facade. This is quite similar to the concept of
+  different sensors for different directions, as both systems close the
+  sunblinds seperately for each direction.
+</p>
+<p>
+  All three components of the solar radiation of the tilted surface
+  (direct, diffuse and reflected from ground) are reduced by the same
+  factor.
+</p>
+<p>
+  There is no possibilty to disable the sunblind in a specific
+  direction. This isn't necessary, as you can set gsunblind in this
+  direction to 1, which means, that the whole radiance is passing
+  through the closed sunblind.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  This model is part of <a href=
+  \"AixLib.Building.Components.Walls.Wall\">Wall</a> and checked in the
+  Examples <a href=
+  \"AixLib.Building.Examples.Walls.InsideWall\">InsideWall</a> and
+  <a href=\"AixLib.Building.Examples.Walls.OutsideWall\">OutsideWall</a>.
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>January 16, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented as extending from PartialSunblind and using the new solar radiation connectors</li>
-<li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-<li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+        revisions="<html><ul>
+  <li>
+    <i>January 16, 2015&#160;</i> by Ana Constantin:<br/>
+    Implemented as extending from PartialSunblind and using the new
+    solar radiation connectors
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>January 2012,&#160;</i> by Moritz Lauster:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end Sunblind;

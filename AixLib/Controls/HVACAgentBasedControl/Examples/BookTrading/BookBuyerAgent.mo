@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookBuyerAgent
   extends BaseClasses.PartialAgent;
   parameter Real[:,1] knownSellers = [30001; 30002; 30003]
@@ -405,31 +405,69 @@ equation
       smooth=Smooth.None));
   connect(getMessageID.y[1], integerChange.u) annotation (Line(points={{-179,-40},
           {-168,-40},{-168,82},{-160,82}}, color={0,0,127}));
-  annotation (Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a an agent that tries to buy a pre-set book from one or more BookSellerAgents.</li>
-<li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
-<li>It is used together with at least one BookSellerAgent.</li>
+  <li>This model is a an agent that tries to buy a pre-set book from
+  one or more BookSellerAgents.
+  </li>
+  <li>It is based on communication via UDP and logic implemented with
+  the help of the StateGraph Modelica library.
+  </li>
+  <li>It is used together with at least one BookSellerAgent.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The BookBuyerAgent calls for proposals from all known BookSellerAgents to buy a book, which is set before simulation. The agent then compares all offers from the seller agent and choses the book with the lowest price. Afterwards the book is bought from the seller agent. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The presented agent has the purpose of demonstrating the possibility of agent implementation in Modelica by implementing the behaviour of the BookBuyer agent presented in Caire, 2009, JADE PROGRAMMING FOR BEGINNERS. </p>
-<h4><span style=\"color: #008000;\">References</span></h4>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The BookBuyerAgent calls for proposals from all known
+  BookSellerAgents to buy a book, which is set before simulation. The
+  agent then compares all offers from the seller agent and choses the
+  book with the lowest price. Afterwards the book is bought from the
+  seller agent. The logic is implemented with the help of the
+  StateGraph library. Communication is realized with the help of the
+  DeviceDriver library and follows the language standards for
+  multi-agent-systems set by the FIPA to the highest possible extend
+  for Modelica models. The presented agent has the purpose of
+  demonstrating the possibility of agent implementation in Modelica by
+  implementing the behaviour of the BookBuyer agent presented in Caire,
+  2009, JADE PROGRAMMING FOR BEGINNERS.
+</p>
+<h4>
+  <span style=\"color: #008000;\">References</span>
+</h4>
 <ul>
-<li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
-<li>FIPA ACL Message Structure Specification</li>
-<li>FIPA Communicative Act Library Specification </li>
-<li>Caire, 2009, JADE PROGRAMMING FOR BEGINNERS</li>
+  <li>Felix Bünning. Development of a Modelica-library for agent-based
+  control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen
+  University, Aachen, Germany.
+  </li>
+  <li>FIPA ACL Message Structure Specification
+  </li>
+  <li>FIPA Communicative Act Library Specification
+  </li>
+  <li>Caire, 2009, JADE PROGRAMMING FOR BEGINNERS
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
 <ul>
-<li><a href=\"HVACAgentLibraryRealValues.BookTradingExample.ExampleBookTrading\">ExampleBookTrading</a></li>
-<li><a href=\"HVACAgentLibraryRealValues.BookTradingExample.ExampleNetworkCommunication2\">ExampleNetworkCommunication2</a></li>
+  <li>
+    <a href=
+    \"HVACAgentLibraryRealValues.BookTradingExample.ExampleBookTrading\">ExampleBookTrading</a>
+  </li>
+  <li>
+    <a href=
+    \"HVACAgentLibraryRealValues.BookTradingExample.ExampleNetworkCommunication2\">
+    ExampleNetworkCommunication2</a>
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li>October 2015, by Felix Bünning: Developed and implemented</li>
+      revisions="<html><ul>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},
             {200,200}}),       graphics={

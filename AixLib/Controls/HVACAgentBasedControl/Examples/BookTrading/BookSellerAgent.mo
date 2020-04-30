@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookSellerAgent
   extends BaseClasses.PartialAgent;
   Real[:,2] bookList( start= [3551551677.0,30; 3551551679.0,20; 3551551616.0, 20]);
@@ -259,31 +259,71 @@ equation
       points={{-153,-40},{-146,-40},{-146,-124},{-134,-124},{-134,-122},{-134,-122}},
       color={255,0,255},
       smooth=Smooth.None));
-  annotation (Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a an agent that offers and sells books to calling BookBuyerAgents.</li>
-<li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
-<li>It is used together with at least one BookSellerAgent.</li>
+  <li>This model is a an agent that offers and sells books to calling
+  BookBuyerAgents.
+  </li>
+  <li>It is based on communication via UDP and logic implemented with
+  the help of the StateGraph Modelica library.
+  </li>
+  <li>It is used together with at least one BookSellerAgent.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The BookSellerAgent responds to calls from a BookBuyerAgent. This can be a call for proposals or a request to buy a book. When a call for proposals comes in, the BookSellerAgent checks whether the required book is in stock or not. If yes, it reponds with the corresponding price, if no, it refuses the call. When a request to buy a book comes in, the agent looks for the book in stock, sells it and afterwards removes it from the stock list. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The presented agent has the purpose of demonstrating the possibility of agent implementation in Modelica by implementing the behaviour of the BookSeller agent presented in Caire, 2009, JADE PROGRAMMING FOR BEGINNERS. </p>
-<h4><span style=\"color: #008000;\">References</span></h4>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The BookSellerAgent responds to calls from a BookBuyerAgent. This can
+  be a call for proposals or a request to buy a book. When a call for
+  proposals comes in, the BookSellerAgent checks whether the required
+  book is in stock or not. If yes, it reponds with the corresponding
+  price, if no, it refuses the call. When a request to buy a book comes
+  in, the agent looks for the book in stock, sells it and afterwards
+  removes it from the stock list. The logic is implemented with the
+  help of the StateGraph library. Communication is realized with the
+  help of the DeviceDriver library and follows the language standards
+  for multi-agent-systems set by the FIPA to the highest possible
+  extend for Modelica models. The presented agent has the purpose of
+  demonstrating the possibility of agent implementation in Modelica by
+  implementing the behaviour of the BookSeller agent presented in
+  Caire, 2009, JADE PROGRAMMING FOR BEGINNERS.
+</p>
+<h4>
+  <span style=\"color: #008000;\">References</span>
+</h4>
 <ul>
-<li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
-<li>FIPA ACL Message Structure Specification</li>
-<li>FIPA Communicative Act Library Specification </li>
-<li>Caire, 2009, JADE PROGRAMMING FOR BEGINNERS</li>
+  <li>Felix Bünning. Development of a Modelica-library for agent-based
+  control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen
+  University, Aachen, Germany.
+  </li>
+  <li>FIPA ACL Message Structure Specification
+  </li>
+  <li>FIPA Communicative Act Library Specification
+  </li>
+  <li>Caire, 2009, JADE PROGRAMMING FOR BEGINNERS
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
 <ul>
-<li><a href=\"HVACAgentLibraryRealValues.BookTradingExample.ExampleBookTrading\">ExampleBookTrading</a></li>
-<li><a href=\"HVACAgentLibraryRealValues.BookTradingExample.ExampleNetworkCommunication1\">ExampleNetworkCommunication1</a></li>
+  <li>
+    <a href=
+    \"HVACAgentLibraryRealValues.BookTradingExample.ExampleBookTrading\">ExampleBookTrading</a>
+  </li>
+  <li>
+    <a href=
+    \"HVACAgentLibraryRealValues.BookTradingExample.ExampleNetworkCommunication1\">
+    ExampleNetworkCommunication1</a>
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li>October 2015, by Felix Bünning: Developed and implemented</li>
+      revisions="<html><ul>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>"),Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={

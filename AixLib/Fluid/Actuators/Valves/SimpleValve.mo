@@ -20,21 +20,36 @@ equation
             fillPattern=FillPattern.Solid,
             pattern = LinePattern.None,
             lineColor = {0, 0, 0})}),
-Documentation(revisions="<html>
-<ul>
-<li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>November 13, 2013&nbsp;</i>
-    by Ana Constantin:<br/>
-    Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a simple valve. </p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Simple valve model which describes the relationship between mass flow and pressure drop acoordinh to the Kvs Value.</p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorValve</a></p>
- </html>"));
+Documentation(revisions="<html><ul>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a simple valve.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Simple valve model which describes the relationship between mass flow
+  and pressure drop acoordinh to the Kvs Value.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.HVAC.Radiators.Examples.PumpRadiatorValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorValve</a>
+</p>
+</html>"));
 end SimpleValve;

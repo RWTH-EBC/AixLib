@@ -302,11 +302,11 @@ dT_R=Tout - Tair;
 </html>
 ", info=
     "<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Model of the multi layers of heat exchanger. From the water flow is
   the convective and radiative heat output calculated.
-</p>
+</p>l l
 </html>"));
 end ML_thermal_delta;

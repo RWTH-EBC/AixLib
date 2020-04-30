@@ -80,15 +80,16 @@ equation
   connect(temperatureSensor2.port_a, boundary_ph2.ports[1]) annotation (Line(
       points={{-54,-70},{-80,-70}},
       color={0,127,255}));
-  annotation (Documentation(info="<html>
-<p>
-This model shows the usage of a MixingValve in its design-direction. The results
-are consistent with ones expectation of the function of a mixing valve. A step on
-the opening of the valve is applied after some time, which changes the the ratio
-between the two inflowing streams.
+  annotation (Documentation(info="<html><p>
+  This model shows the usage of a MixingValve in its design-direction.
+  The results are consistent with ones expectation of the function of a
+  mixing valve. A step on the opening of the valve is applied after
+  some time, which changes the the ratio between the two inflowing
+  streams.
 </p>
 </html>",
-        revisions="<html>
-<p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
+        revisions="<html><p>
+  26.11.2014, by <i>Roozbeh Sangi</i>: implemented
+</p>
 </html>"),    experiment(StopTime=1000));
 end MixingValveForwardDirection;

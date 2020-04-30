@@ -37,25 +37,44 @@ equation
   end if;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
             lineThickness =                                                                                                   1, fillColor = {0, 0, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Documentation(revisions="<html>
- <ul>
- <li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>November 13, 2013&nbsp;</i>
-    by Ana Constantin:<br/>
-    Implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for a simple thermostatic valve.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Development of SimpleValve by incorporating the behaviour of a thermostatic head as a P controller with a maximum deviation of <i>P</i> and an influence of the pressure drop on the sensed temperature.</p>
- <p>It is possible to not close the valve completely by allowing for some
+            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for a simple thermostatic valve.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Development of SimpleValve by incorporating the behaviour of a
+  thermostatic head as a P controller with a maximum deviation of
+  <i>P</i> and an influence of the pressure drop on the sensed
+  temperature.
+</p>
+<p>
+  It is possible to not close the valve completely by allowing for some
   minimal leakage. Use this option carefully and always
-  check&nbsp;the&nbsp;influence&nbsp;it&nbsp;might have
-  on&nbsp;your&nbsp;results. </p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve</a></p>
- </html>"));
+  check&#160;the&#160;influence&#160;it&#160;might have
+  on&#160;your&#160;results.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve</a>
+</p>
+</html>"));
 end ThermostaticValve;

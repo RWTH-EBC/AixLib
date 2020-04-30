@@ -56,15 +56,26 @@ partial model PartialHeatTransferLayers "Partial for storage heat transfer model
           smooth=Smooth.None,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Partial model for different heat transfer layer models.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Partial model for different heat transfer layer models.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+      revisions="<html><ul>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Added to AixLib
+  </li>
+  <li>
+    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>
 "));

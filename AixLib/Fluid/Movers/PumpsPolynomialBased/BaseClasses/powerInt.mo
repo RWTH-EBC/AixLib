@@ -29,13 +29,24 @@ algorithm
       z := z*z;
     end if;
   end while;
-  annotation (Documentation(info="<html>
-<p>&quot;A simple implementation of <i>Algorithm A</i> from section <i>4.6.3</i> of TAOCP&quot; as taken from:</p>
-<p><a href=\"http://alvaro-videla.com/2014/03/the-power-algorithm.html\">http://alvaro-videla.com/2014/03/the-power-algorithm.html</a></p>
-<p>&quot;There&rsquo;s a very well known algorithm for calculation powers, that is <i>x to the power of n</i> or simply: <code>x^n</code>. Donald Knuth presents the algorithm in section 4.6.3 <i>Evaluation of Powers</i> of TAOCP.&quot;</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  \"A simple implementation of <i>Algorithm A</i> from section
+  <i>4.6.3</i> of TAOCP\" as taken from:
+</p>
+<p>
+  <a href=
+  \"http://alvaro-videla.com/2014/03/the-power-algorithm.html\">http://alvaro-videla.com/2014/03/the-power-algorithm.html</a>
+</p>
+<p>
+  \"There’s a very well known algorithm for calculation powers, that is
+  <i>x to the power of n</i> or simply: <code>x^n</code>. Donald Knuth
+  presents the algorithm in section 4.6.3 <i>Evaluation of Powers</i>
+  of TAOCP.\"
+</p>
 <ul>
-<li>2017-11-14 by Peter Matthes:<br />Implemented</li>
+  <li>2017-11-14 by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end powerInt;

@@ -145,38 +145,43 @@ package Refrigerants "Package that provides records describing properties of dif
           extent={{8,-38},{28,-58}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={120,120,120})}), Documentation(info="<html>
-<p>
-This package provides records describing properties of different refrigerant
-media. In this case, properties are, for example, fitting coefficients obtained
-for the Helmholtz equation of state or the saturation pressure. These fitting
-coefficients are used for models stored in
-<a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>.
+          fillColor={120,120,120})}), Documentation(info="<html><p>
+  This package provides records describing properties of different
+  refrigerant media. In this case, properties are, for example, fitting
+  coefficients obtained for the Helmholtz equation of state or the
+  saturation pressure. These fitting coefficients are used for models
+  stored in <a href=
+  \"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>.
 </p>
 <p>
-For reasons of simplicity, this package is structured as follows:
+  For reasons of simplicity, this package is structured as follows:
 </p>
 <ol>
-<li><i>Base data definitions: </i>All base data definitions are saved as
-separate records.</li>
-<li><i>Refrigerant packages:</i> For the different refrigerant media, records
-inherited from the base data definitions are saved within one refrigerant
-package.</li>
-</ol>
-<h4>Assumptions and limitations</h4>
-<p>
-Currently, there is implemented just one approach (i.e. the hybrid approach) to
-model refrigerant media (for detailed information, please see
-<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
-AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>).
-Hence, the base data definitions support just the hybrid approach.
-</p>
-</html>", revisions="<html>
-<ul>
   <li>
-  June 9, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+    <i>Base data definitions:</i> All base data definitions are saved
+    as separate records.
+  </li>
+  <li>
+    <i>Refrigerant packages:</i> For the different refrigerant media,
+    records inherited from the base data definitions are saved within
+    one refrigerant package.
+  </li>
+</ol>
+<h4>
+  Assumptions and limitations
+</h4>
+<p>
+  Currently, there is implemented just one approach (i.e. the hybrid
+  approach) to model refrigerant media (for detailed information,
+  please see <a href=
+  \"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
+  AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>).
+  Hence, the base data definitions support just the hybrid approach.
+</p>
+<ul>
+  <li>June 9, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>"));

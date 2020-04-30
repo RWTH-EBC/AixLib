@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.InternalGains.Moisture;
+within AixLib.BoundaryConditions.InternalGains.Moisture;
 model MoistureGains
   "Model for moisture gains that are produced by plants, cooking, etc."
 
@@ -37,20 +37,34 @@ equation
           {22,-34},{22,-30},{6,-30}}, color={0,0,127}));
   connect(toLatentHeat.y, QLat_flow) annotation (Line(points={{-17,-24},{-26,-24},
           {-26,-54},{68,-54},{68,0},{110,0}},  color={0,0,127}));
-  annotation (Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>This model gives the output for latent heat release by plants, cooking, showering, etc. (except from persons). The moisture output has to be set in g/(h m²). </p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>The moisture output is defined in some norms as an average output per hour and squaremetre. This output will be considered by this model. </p>
-<p>The latent heat output depends on the air temperature in the room where the moisture sources are located. </p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  <b><span style=\"color: #008000\">Overview</span></b>
+</p>
+<p>
+  This model gives the output for latent heat release by plants,
+  cooking, showering, etc. (except from persons). The moisture output
+  has to be set in g/(h m²).
+</p>
+<p>
+  <b><span style=\"color: #008000\">Concept</span></b>
+</p>
+<p>
+  The moisture output is defined in some norms as an average output per
+  hour and squaremetre. This output will be considered by this model.
+</p>
+<p>
+  The latent heat output depends on the air temperature in the room
+  where the moisture sources are located.
+</p>
 <ul>
-  <li> Oktober 14, 2019, by Martin Kremer:<br/>Adapted model to latest changes in IBPSA. Providing latent heat of moisture at 37 degree Celsius.</li>
-  <li>
-  July, 2019, by Martin Kremer:<br/>
-  First implementation.
+  <li>Oktober 14, 2019, by Martin Kremer:<br/>
+    Adapted model to latest changes in IBPSA. Providing latent heat of
+    moisture at 37 degree Celsius.
   </li>
- </ul>
+  <li>July, 2019, by Martin Kremer:<br/>
+    First implementation.
+  </li>
+</ul>
 </html>"), Icon(graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

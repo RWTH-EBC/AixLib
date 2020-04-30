@@ -3,11 +3,9 @@ package Controls "Package with models for controls"
   extends Modelica.Icons.Package;
 
 annotation (
-preferredView="info", Documentation(info="<html>
-This package contains component models for controls.
-For additional models, see also
-<a href=\"modelica://Modelica.Blocks\">
-Modelica.Blocks</a>.
+preferredView="info", Documentation(info="<html>This package contains component models for controls. For additional
+models, see also <a href=
+\"modelica://Modelica.Blocks\">Modelica.Blocks</a>.
 </html>"),
 Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100.0,-100.0},{100.0,100.0}}), graphics={
       Rectangle(

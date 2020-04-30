@@ -146,33 +146,75 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString="A")}),
-    Documentation(revisions="<html>
-<ul>
-<li>July 2017, by Roozbeh Sangi: Documentation revised</li>
-<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
-<li>November 2016, by Felix B&uuml;nning: Added feature to use internal inbox refresh (better performance), updated Info window</li>
-<li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>July 2017, by Roozbeh Sangi: Documentation revised
+  </li>
+  <li>December 2016, by Felix Bünning: Changed some variables to
+  Integer type in order to avoid warnings caused by using the \"==\"
+  operator
+  </li>
+  <li>November 2016, by Felix Bünning: Added feature to use internal
+  inbox refresh (better performance), updated Info window
+  </li>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>",
-      info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+      info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model implements the communication system of the agent library as a partial model</li>
-<li>It is based on communication via UDP</li>
-<li>It is used by all implemented agents</li>
+  <li>This model implements the communication system of the agent
+  library as a partial model
+  </li>
+  <li>It is based on communication via UDP
+  </li>
+  <li>It is used by all implemented agents
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The communication takes place via UDP network communication and is implemented with the help of elements from the DeviceDriver library. The inbox is refreshed based on a sample time, the outbox is triggered by an external boolean input. </p>
-<p>Since sampling creates time events, the simulation performance will be bad for models with a high number of equations. For this reason, an alternative refresh mechanism can be used with &quot;usePoke=true&quot;. In order to use this mechanism the component &quot;MessageNotification&quot; needs to be added to the system. </p>
-<p>The partial agent implements the message parameters performative, sender, receiver, reply to, content, ontology and message ID. The parameters are described in the reference.</p>
-<h4><span style=\"color: #008000\">References</span></h4>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The communication takes place via UDP network communication and is
+  implemented with the help of elements from the DeviceDriver library.
+  The inbox is refreshed based on a sample time, the outbox is
+  triggered by an external boolean input.
+</p>
+<p>
+  Since sampling creates time events, the simulation performance will
+  be bad for models with a high number of equations. For this reason,
+  an alternative refresh mechanism can be used with \"usePoke=true\". In
+  order to use this mechanism the component \"MessageNotification\" needs
+  to be added to the system.
+</p>
+<p>
+  The partial agent implements the message parameters performative,
+  sender, receiver, reply to, content, ontology and message ID. The
+  parameters are described in the reference.
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
-<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
+  <li>Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic.
+  </li>
+  <li>Felix Bünning, Roozbeh Sangi, Dirk Müller. A Modelica library for
+  agent-based control of building HVAC systems. Applied Energy,
+  193:52-59, 2017.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
 <ul>
-<li><a href=\"HVACAgentBasedControl.Examples.HVACAgentsCommunications.SimpleCommunication\">ExampleAgentSystem</a></li>
+  <li>
+    <a href=
+    \"HVACAgentBasedControl.Examples.HVACAgentsCommunications.SimpleCommunication\">
+    ExampleAgentSystem</a>
+  </li>
 </ul>
 </html>"));
 end PartialAgent;

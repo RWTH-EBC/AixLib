@@ -209,19 +209,21 @@ equation
           0,-22},{-4,-22},{-4,-12}}, color={0,0,127}));
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})), Documentation(info="<html>
-            <p><span style=\"font-family: MS Shell Dlg 2;\">The model calculates 
-            the exergy content and its rate of change of a stratefied storage 
-            i. e. with multiple layers) filled with a medium consisting of 
-            multiple substances. The reference environment is variable and is 
-            modeled using a boundary with temperature, pressure and composition
-            as input. The medium model is replaceable. The physical enthalpy and
-            entropy are determined using the respective sensors from MSL. The 
-            rate of change of the exergy content is calculated using the 
-            approximate derivative block from MSL.</span></p>
-</html>", revisions="<html>
- <ul>
- <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
- </ul>
+            -100},{100,100}})), Documentation(info="<html><p>
+  <span style=\"font-family: MS Shell Dlg 2;\">The model calculates the
+  exergy content and its rate of change of a stratefied storage i. e.
+  with multiple layers) filled with a medium consisting of multiple
+  substances. The reference environment is variable and is modeled
+  using a boundary with temperature, pressure and composition as input.
+  The medium model is replaceable. The physical enthalpy and entropy
+  are determined using the respective sensors from MSL. The rate of
+  change of the exergy content is calculated using the approximate
+  derivative block from MSL.</span>
+</p>
+<ul>
+  <li>by Marc Baranski and Roozbeh Sangi:<br/>
+    implemented
+  </li>
+</ul>
 </html>"));
 end StoredExergyMeter;

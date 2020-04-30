@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model AntiLegionella "Control to avoid Legionella in the DHW"
 
   parameter Modelica.SIunits.ThermodynamicTemperature TLegMin=333.15
@@ -153,14 +153,19 @@ Hour of Day: %trigHour",
           fillPattern=FillPattern.Solid,
           textString="%name")}),                                                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model represents the anti legionella control of a real heat pump. Based on a daily or weekly approach, the given supply temperature is raised above the minimal temperature required for the thermal desinfection (at least 60 &deg;C) for a given duration minTimeAntLeg.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model represents the anti legionella control of a real heat
+  pump. Based on a daily or weekly approach, the given supply
+  temperature is raised above the minimal temperature required for the
+  thermal desinfection (at least 60 °C) for a given duration
+  minTimeAntLeg.
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end AntiLegionella;

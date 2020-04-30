@@ -19,15 +19,23 @@ equation
   connect(Windspeed.y, heatTransfer_Outside.WindSpeedPort) annotation (Line(
       points={{-39,-16},{-36,-16},{-36,1.64},{-22.96,1.64}},
       color={0,0,127}));
-  annotation (Documentation(revisions = "<html>
- <ul>
-   <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-   <li><i>October 14, 2012&nbsp;</i>
-          by Ana Constantin:<br/>
-          Implemented.</li>
- </ul>
- </html>", info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Plot HeatFlow for the different ways of calcutating the heat transfer to see the difference. </p>
- </html>"), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"));
+  annotation (Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>October 14, 2012&#160;</i> by Ana Constantin:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Plot HeatFlow for the different ways of calcutating the heat transfer
+  to see the difference.
+</p>
+</html>"), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"));
 end HeatConv_outside;

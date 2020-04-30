@@ -16,15 +16,31 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-28, 14}, {32, -52}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Documentation(revisions = "<html>
- <ul>
- <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- </ul>
- </html>", info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>The <b>Airload</b> model represents a heat capacity consisting of air. It is described by its volume, density and specific heat capacity. </p>
- <h4><font color=\"#008000\">Example Results</font></h4>
- <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
- </html>"));
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), Documentation(revisions = "<html><ul>
+  <li>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>Airload</b> model represents a heat capacity consisting of
+  air. It is described by its volume, density and specific heat
+  capacity.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a>
+</p>
+</html>"));
 end Airload;

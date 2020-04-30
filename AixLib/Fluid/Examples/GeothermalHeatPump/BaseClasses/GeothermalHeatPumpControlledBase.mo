@@ -59,14 +59,17 @@ equation
   connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
           {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
-<p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source. A replaceable model is connected in the flow line of the heating circuit. A peak load device can be added here.  This model also includes basic controllers.</p>
-</html>", revisions="<html>
+  annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html><p>
+  Base class of an example demonstrating the use of a heat pump
+  connected to two storages and a geothermal source. A replaceable
+  model is connected in the flow line of the heating circuit. A peak
+  load device can be added here. This model also includes basic
+  controllers.
+</p>
 <ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end GeothermalHeatPumpControlledBase;

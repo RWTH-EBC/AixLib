@@ -397,26 +397,31 @@ equation
             fillPattern = FillPattern.Solid), Text(extent={{2,48},{122,-4}},                                                                                                                                                          lineColor = {175, 175, 175}, textString = "%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             220,160}})),
-    Documentation(revisions="<html>
-<ul>
-  <li><i>Septmeber, 2014&nbsp;</i>
-    by by Roozbeh Sangi and Marc Baranski:<br/>
-    Model implemented</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Septmeber, 2014&#160;</i> by by Roozbeh Sangi and Marc
+    Baranski:<br/>
+    Model implemented
+  </li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model is the controller of the facade ventilation unit. It makes use of
-six two-point controllers that determine heating, cooling and ventilation 
-demand. It further indicates if free cooling, heat recovery or cold recovery is
-possible. As these are decentralized controllers and as the fresh air
-temperature is measured inside the unit, we require an additional measurement
-mode. This mode is activated every two hours if there is no ventilation demand 
-and the unit consequently circulates air. In order to measure the correct fresh
-air temperature, the circulation damper is closed for twenty minutes.
-Furthermore, the exhaust air fan is switched on and the fresh air damper is 
-opened. This allows ambient air to flow inside the unit. The temperature set 
-point in cooling mode is increased by adding the value deltaTemp to the set 
-point in heating mode.
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This model is the controller of the facade ventilation unit. It makes
+  use of six two-point controllers that determine heating, cooling and
+  ventilation demand. It further indicates if free cooling, heat
+  recovery or cold recovery is possible. As these are decentralized
+  controllers and as the fresh air temperature is measured inside the
+  unit, we require an additional measurement mode. This mode is
+  activated every two hours if there is no ventilation demand and the
+  unit consequently circulates air. In order to measure the correct
+  fresh air temperature, the circulation damper is closed for twenty
+  minutes. Furthermore, the exhaust air fan is switched on and the
+  fresh air damper is opened. This allows ambient air to flow inside
+  the unit. The temperature set point in cooling mode is increased by
+  adding the value deltaTemp to the set point in heating mode.
 </p>
 </html>"));
 end FVUController;

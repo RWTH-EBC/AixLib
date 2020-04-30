@@ -155,28 +155,47 @@ equation
               "modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SelfShadowing.png")}),
                                                                     Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model considers self-shadowing of windows due to projections for direct
- radiation based on VDI 6007 part 3. It calculates what part of the windowarea
-  is effective. </p>
-<p><img alt=\"SelfShadowing\" src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SelfShadowing.png\" height=\"400\"/></p>
-<p>The image above shows how the parameters should be set and is based on
-VDI 6007 part 3. Parameters with Index 2 are alligned on the other side</p>
-<p>(i.e.: dRig is the distance between the projection and the window on the
-right handside, dBel is the distance between the projection below and the
-window). eh and ev are calculated within the model and are shown for
-demonstration.</p>
-<p>The connectors are all solar geometry dimensions and can be calculated by
-the SolarGeometry package of AixLib. </p>
-<p>An Example on how to use this model is the SelfShadowingExample in the
-Example package. </p>
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - Modelling of solar radiation.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model considers self-shadowing of windows due to projections for
+  direct radiation based on VDI 6007 part 3. It calculates what part of
+  the windowarea is effective.
+</p>
+<p>
+  <img alt=\"SelfShadowing\" src=
+  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SelfShadowing.png\"
+  height=\"400\">
+</p>
+<p>
+  The image above shows how the parameters should be set and is based
+  on VDI 6007 part 3. Parameters with Index 2 are alligned on the other
+  side
+</p>
+<p>
+  (i.e.: dRig is the distance between the projection and the window on
+  the right handside, dBel is the distance between the projection below
+  and the window). eh and ev are calculated within the model and are
+  shown for demonstration.
+</p>
+<p>
+  The connectors are all solar geometry dimensions and can be
+  calculated by the SolarGeometry package of AixLib.
+</p>
+<p>
+  An Example on how to use this model is the SelfShadowingExample in
+  the Example package.
+</p>
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 <ul>
-<li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>May 23, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end SelfShadowing;

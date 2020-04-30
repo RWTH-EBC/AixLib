@@ -624,47 +624,56 @@ equation
           lineColor={28,108,200},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+    Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for modular compressors that are used, 
-for example, in close-loop systems like heat pumps or chillers.
+  This is a base model for modular compressors that are used, for
+  example, in close-loop systems like heat pumps or chillers.
 </p>
-<h4>Definitions needed for completion</h4>
+<h4>
+  Definitions needed for completion
+</h4>
 <p>
-Three definitions need to be added by an extending class using this component:
+  Three definitions need to be added by an extending class using this
+  component:
 </p>
 <ul>
-<li>Redecleration of the model <code>modCom</code>.</li>
-<li>Redecleration of the model <code>modCon</code>.</li>
-<li>Connection of <code>modCom[i].port_b</code> with <code>port_b</code>.</li>
+  <li>Redecleration of the model <code>modCom</code>.
+  </li>
+  <li>Redecleration of the model <code>modCon</code>.
+  </li>
+  <li>Connection of <code>modCom[i].port_b</code> with
+  <code>port_b</code>.
+  </li>
 </ul>
 <p>
-The latter provides the possibility to add further components (e.g. sensors or
-pipes) located at the compressors' outlets.
+  The latter provides the possibility to add further components (e.g.
+  sensors or pipes) located at the compressors' outlets.
 </p>
-<h4>Modeling approaches</h4>
+<h4>
+  Modeling approaches
+</h4>
 <p>
-This base model mainly consists of two sub-models and, therefore, please 
-checkout these models for further information of underlying modeling
-approaches:
+  This base model mainly consists of two sub-models and, therefore,
+  please checkout these models for further information of underlying
+  modeling approaches:
 </p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
-</li>
-<li>
-<a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController\">
-AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController</a>.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
+    AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController\">
+    AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController</a>.
+  </li>
 </ul>
 </html>"));
 end PartialModularCompressors;

@@ -58,12 +58,18 @@ public
           extent={{9,-9},{-9,9}},
           rotation=180,
           origin={-79,-21})));
-  annotation ( Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Partial model for <b>RadOnTiltedSurf</b> modely, which calculate the total solar radiance on a tilted surface. </p>
-</html>", revisions="<html>
+  annotation ( Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Partial model for <b>RadOnTiltedSurf</b> modely, which calculate the
+  total solar radiance on a tilted surface.
+</p>
 <ul>
-<li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented. </li>
+  <li>
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end PartialRadOnTiltedSurf;

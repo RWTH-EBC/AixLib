@@ -4,19 +4,26 @@ record Buderus_GB202_75_60
   extends WorkLoadBaseDataDefinition(
 eta=[0.2,1.097; 0.4,1.070; 0.6,1.036; 0.8,1.003; 1,0.970],
 operatingRange={0.2,1});
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Record for Buderus Logano Plus GB202 condensing boiler. Temperature range:
-75/60&deg;C </p>
-<p>Source:</p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Record for Buderus Logano Plus GB202 condensing boiler. Temperature
+  range: 75/60°C
+</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>Buderus Planungsunterlage Logano plus GB202 p. 20</li>
+  <li>Buderus Planungsunterlage Logano plus GB202 p. 20
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li><i>June 27, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately, reference added</li>
+      revisions="<html><ul>
+  <li>
+    <i>June 27, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately, reference added
+  </li>
 </ul>
 </html>"));
 end Buderus_GB202_75_60;

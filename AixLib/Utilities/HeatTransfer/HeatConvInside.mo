@@ -267,49 +267,133 @@ equation
           color={0,0,255},
           thickness=0.5),
         Rectangle(extent={{-80,80},{80,-80}},  lineColor={0,0,0})}),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>The <b>HeatConvInside</b> model represents the phenomenon of heat convection at inside surfaces of walls, with different choice for surface orientation. </p>
-<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>In this model the surface orientation can be chosen from a menu for an easier adoption to new situations. Following methods to calculate the<b> heat convection coefficient </b><code>hCon</code> can be chosen:</p>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  The <b>HeatConvInside</b> model represents the phenomenon of heat
+  convection at inside surfaces of walls, with different choice for
+  surface orientation.
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  In this model the surface orientation can be chosen from a menu for
+  an easier adoption to new situations. Following methods to calculate
+  the <b>heat convection coefficient</b> <code>hCon</code> can be
+  chosen:
+</p>
 <ol>
-<li>EN ISO 6946: <code>hCon</code> depends on the direction of heat transfer (horizontal: <code>hCon</code>= 2.5 m^2 K/W, upwards: <code>hCon</code>= 5 m^2 K/W, downwards: <code>hCon</code>=0.7 m^2 K/W, EN ISO 6946 table C.1). Switching the heat convection coefficient due to a chance of direction of heat transfer would lead to a state event. This would force the solver to solve a totally changed equation system and extend the calculation time. Therefore the <code>regStep</code> function is used to get a continous and differenciable expression. If the temperature difference between<code> port_b</code> and <code>port_a</code> is between -<code>dT_small</code> and <code>dT_small</code> a 2nd order polynomial is used for a smooth transition from 5 to 0.7 (facing up) or from 0.7 to 5 (facing down).</li>
-<li>B. Glueck (default): The following equations are used to calculate the heat convection coefficient depending on the direction of heat transfer (p. 26):<br/>horizontal: <code>hCon = 1.6 * |port_b.T - port_a.T|^0.3</code><br/>upwards: <code>hCon = 2 * |port_b.T - port_a.T|^0.31</code><br/>downwards: <code>hCon = 0.54 * |port_b.T - port_a.T|^0.31</code><br/>The smooth function is used in case of changing direction of heat transfer.</li>
-<li>Constant heat convection coefficient: There is also the possibility of setting a constant<code> hCon</code> value (<code>hCon_const</code>).</li>
+  <li>EN ISO 6946: <code>hCon</code> depends on the direction of heat
+  transfer (horizontal: <code>hCon</code>= 2.5 m^2 K/W, upwards: <code>
+    hCon</code>= 5 m^2 K/W, downwards: <code>hCon</code>=0.7 m^2 K/W,
+    EN ISO 6946 table C.1). Switching the heat convection coefficient
+    due to a chance of direction of heat transfer would lead to a state
+    event. This would force the solver to solve a totally changed
+    equation system and extend the calculation time. Therefore the
+    <code>regStep</code> function is used to get a continous and
+    differenciable expression. If the temperature difference between
+    <code>port_b</code> and <code>port_a</code> is between
+    -<code>dT_small</code> and <code>dT_small</code> a 2nd order
+    polynomial is used for a smooth transition from 5 to 0.7 (facing
+    up) or from 0.7 to 5 (facing down).
+  </li>
+  <li>B. Glueck (default): The following equations are used to
+  calculate the heat convection coefficient depending on the direction
+  of heat transfer (p. 26):<br/>
+    horizontal: <code>hCon = 1.6 * |port_b.T - port_a.T|^0.3</code><br/>
+    upwards: <code>hCon = 2 * |port_b.T - port_a.T|^0.31</code><br/>
+    downwards: <code>hCon = 0.54 * |port_b.T -
+    port_a.T|^0.31</code><br/>
+    The smooth function is used in case of changing direction of heat
+    transfer.
+  </li>
+  <li>Constant heat convection coefficient: There is also the
+  possibility of setting a constant <code>hCon</code> value
+  (<code>hCon_const</code>).
+  </li>
 </ol>
-<h4><span style=\"color: #008000\">Limitations</span></h4>
-<p>... of the approaches calculating <code>hCon</code>:</p>
+<h4>
+  <span style=\"color: #008000\">Limitations</span>
+</h4>
+<p>
+  ... of the approaches calculating <code>hCon</code>:
+</p>
 <ul>
-<li><b>EN ISO 6946</b> table C.1 specifies heat convection coefficients <b><span style=\"color: #ee2e2f;\">valid for internal or external surfaces next to highly ventilated air layers</span></b>. An air layer is considered as highly ventilated if the openings between air layer and the environment are at least 1.5 m^2 per m length for vertical air layers and 1.5 m^2 per m^2 surface for horizontal air layers (EN ISO 6946, 6.9.4). Thus, we recommend using the approach according to Glueck.</li>
-<li>The <b>approach according to Glueck combines free with forced convection</b>. Considering Figures 1.14, 1.15 and 1.16 from the cited reference the<b> approach is suitable for TSurface-TAir from -10 K to +30 K</b>.The surface length varies from 1 m to 3 m.</li>
+  <li>
+    <b>EN ISO 6946</b> table C.1 specifies heat convection coefficients
+    <b><span style=\"color: #ee2e2f;\">valid for internal or external
+    surfaces next to highly ventilated air layers</span></b>. An air
+    layer is considered as highly ventilated if the openings between
+    air layer and the environment are at least 1.5 m^2 per m length for
+    vertical air layers and 1.5 m^2 per m^2 surface for horizontal air
+    layers (EN ISO 6946, 6.9.4). Thus, we recommend using the approach
+    according to Glueck.
+  </li>
+  <li>The <b>approach according to Glueck combines free with forced
+  convection</b>. Considering Figures 1.14, 1.15 and 1.16 from the
+  cited reference the <b>approach is suitable for TSurface-TAir from
+  -10 K to +30 K</b>.The surface length varies from 1 m to 3 m.
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">References</span></b> </p>
+<p>
+  <b><span style=\"color: #008000;\">References</span></b>
+</p>
 <ul>
-<li>EN ISO 6946:2017 (D), appendix C. <i>Building components and building elements - Thermal resistance and thermal transmittance.</i></li>
-<li>Bernd Glueck:<i> Heizen und K&uuml;hlen mit Niedrigexergie - Innovative W&auml;rme&uuml;bertragung und W&auml;rmespeicherung (LowEx) 2008.</i> </li>
+  <li>EN ISO 6946:2017 (D), appendix C. <i>Building components and
+  building elements - Thermal resistance and thermal transmittance.</i>
+  </li>
+  <li>Bernd Glueck: <i>Heizen und Kühlen mit Niedrigexergie -
+  Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008.</i>
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
-<p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
-</html>",  revisions="<html>
+<p>
+  <b><span style=\"color: #008000;\">Example Results</span></b>
+</p>
+<p>
+  <a href=
+  \"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a>
+</p>
 <ul>
-<li><i>May 30, 2019</i>  by Katharina Brinkmann / Philipp Mehrfeld:<br/>
-<a href=\"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br/>
-- add smooth + noEvent functions<br/>
-- ISO approach now linearized when heat flow reverses (depending on newly introduced <code>dT_small</code>)<br/>
-- Approach acc. to Glueck can change heat flow during simulation.<br/>
-- Standard Calculation Method now &quot;Glueck&quot; due to faster simulation speed</li>
-<li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br />
-Algorithm for HeatConv_inside is now selectable via parameters</li>
-<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>
-Added EN ISO 6946 equations and corrected usage of constant hCon_const </li>
-<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>
-Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
-<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>
-Uses components from MSL and respects the naming conventions </li>
-<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>
-Formatted documentation according to standards </li>
-<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>
-Implemented. </li>
+  <li>
+    <i>May 30, 2019</i> by Katharina Brinkmann / Philipp Mehrfeld:<br/>
+    <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/711\">#711</a>:<br/>
+    - add smooth + noEvent functions<br/>
+    - ISO approach now linearized when heat flow reverses (depending on
+    newly introduced <code>dT_small</code>)<br/>
+    - Approach acc. to Glueck can change heat flow during
+    simulation.<br/>
+    - Standard Calculation Method now \"Glueck\" due to faster simulation
+    speed
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Tobias Blacha:<br/>
+    Algorithm for HeatConv_inside is now selectable via parameters
+  </li>
+  <li>
+    <i>June 17, 2015&#160;</i> by Philipp Mehrfeld:<br/>
+    Added EN ISO 6946 equations and corrected usage of constant
+    hCon_const
+  </li>
+  <li>
+    <i>March 26, 2015&#160;</i> by Ana Constantin:<br/>
+    Changed equations for differnet surface orientations according to
+    newer work from Glück
+  </li>
+  <li>
+    <i>April 1, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>April 10, 2013&#160;</i> by Ole Odendahl<br/>
+    Formatted documentation according to standards
+  </li>
+  <li>
+    <i>December 15, 2005&#160;</i> by Peter Matthes:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end HeatConvInside;

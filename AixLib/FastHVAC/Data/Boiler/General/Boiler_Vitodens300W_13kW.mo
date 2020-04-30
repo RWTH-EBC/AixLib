@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Data.Boiler.General;
+within AixLib.FastHVAC.Data.Boiler.General;
 record Boiler_Vitodens300W_13kW
   "Condesing boiler Viessmann Vitodens 300W 13kW, for Tv/Tr = 50/30 °C"
   extends BoilerTwoPointBaseDataDefinition(
@@ -16,13 +16,13 @@ record Boiler_Vitodens300W_13kW
 </ul>
 </html>", info="<html>
 <h4>
-  <font color=\"#008000\">Level of Development</font>
+  <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\">
 </p>
 <h4>
-  <font color=\"#008000\">References</font>
+  <span style=\"color:#008000\">References</span>
 </h4>
 <p>
   Record is used with <a href=

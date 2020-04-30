@@ -74,30 +74,48 @@ equation
   annotation (
     experiment(StopTime=82600, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>This test demonstrates the solar thermal collector model. Different types of collectors can be tested at fixed boundary conditions.</p>
-</html>",  revisions="<html>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  This test demonstrates the solar thermal collector model. Different
+  types of collectors can be tested at fixed boundary conditions.
+</p>
 <ul>
-<li><i>January 7, 2018</i>  by Peter Matthes:<br />
-Removes m_flow_nominal parameter.<br />
-Add Modelica.Fluid.System to example.<br />
-Set proper volume flow rate (3 l/min).<br />
-Calculate source pressure depending on volume flow rate and pipe pressure loss.<br />
-Set start values in most components.<br />
-Add plot script and simulation command.</li>
-<li><i>October 25, 2017</i> by Philipp Mehrfeld:<br />
-Use <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a> </li>
-<li><i>December 15, 2016</i> by Moritz Lauster:<br />
-Moved </li>
-<li><i>October 11, 2016</i> by Marcus Fuchs:<br />
-Replace pipe </li>
-<li><i>April 2016&nbsp;</i> by Peter Remmen:<br />
-Replace TempAndRad model</li>
-<li><i>November 2014&nbsp;</i> by Marcus Fuchs:<br />
-Changed model to use Annex 60 base class </li>
-<li><i>November 2013&nbsp;</i> by Marcus Fuchs:<br />
-Implemented </li>
+  <li>
+    <i>January 7, 2018</i> by Peter Matthes:<br/>
+    Removes m_flow_nominal parameter.<br/>
+    Add Modelica.Fluid.System to example.<br/>
+    Set proper volume flow rate (3 l/min).<br/>
+    Calculate source pressure depending on volume flow rate and pipe
+    pressure loss.<br/>
+    Set start values in most components.<br/>
+    Add plot script and simulation command.
+  </li>
+  <li>
+    <i>October 25, 2017</i> by Philipp Mehrfeld:<br/>
+    Use <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>
+  </li>
+  <li>
+    <i>December 15, 2016</i> by Moritz Lauster:<br/>
+    Moved
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
+  <li>
+    <i>April 2016&#160;</i> by Peter Remmen:<br/>
+    Replace TempAndRad model
+  </li>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>November 2013&#160;</i> by Marcus Fuchs:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"),
     __Dymola_Commands(file(ensureSimulated=true)=

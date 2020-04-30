@@ -77,29 +77,51 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="%name")}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This is a controller model, modelled after the <a href=\"DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10\">Vitotronic 200</a>. </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The following control decisions are implemented:</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is a controller model, modelled after the <a href=
+  \"DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10\">
+  Vitotronic 200</a>.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The following control decisions are implemented:
+</p>
 <ul>
-<li>Switch on/off when the fluid temperature is under/over the set fluid
-temperature </li>
-<li>Heating curve: fluid temperature depending on the outside temperature</li>
-<li>Average outside temperature</li>
-<li>Increase the set fluid temperature when going to day mode in order to
-shorten the heating up period </li>
+  <li>Switch on/off when the fluid temperature is under/over the set
+  fluid temperature
+  </li>
+  <li>Heating curve: fluid temperature depending on the outside
+  temperature
+  </li>
+  <li>Average outside temperature
+  </li>
+  <li>Increase the set fluid temperature when going to day mode in
+  order to shorten the heating up period
+  </li>
 </ul>
 </html>",
-revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
-appropriately</li>
-<li><i>October 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>October 12, 2011</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end PartialExternalControl;

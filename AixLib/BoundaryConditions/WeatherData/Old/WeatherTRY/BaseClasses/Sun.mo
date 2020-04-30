@@ -89,25 +89,60 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
           lineThickness=0.5,
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid)}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The model <b>Sun</b> will mainly be used as part of the model <b><a href=\"Modelica://Building.Components.Weather.SunIrradiation\">SunIrradiation</a></b> and in this case as part of the model <b>Weather</b>. The ouput data of the <b>Sun</b> model is yet not very useful itself, but it is most commonly used as input data for e.g. <b><a href=\"RadOnTiltedSurf\">RadOnTiltedSurf</a></b> models to compute the solar radiance according to the azimut of a surface. </p>
-<p>Output: The <b>Sun</b> model computes the day angle, hour angle and the declination of the sun for a given set of geographic position and local solar time.</p>
-<p>Input: The model needs information on the difference between the local time zone (corresponding to the time basis of the simulation) and UTC (universal time coordinated) in hours.</p>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<p>Be aware that the outputs of this model are only values that are calculated in the middle of the simulation interval and that they are no mean value. The parameter timeCorrection is for setting the calculation time of the outputs to the middle of the simulationi nterval. The variable that depends on the solar time are better approximated when the solar time is calculated for the middle of the hour, for which the horizontal solar radiation is given. For weather data in TRY format it is 0.5 h because the solar radiation values are the average measured values for the previous hours. Set according to the specifications of each weather file format. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The model <b>Sun</b> will mainly be used as part of the model
+  <b><a href=
+  \"Modelica://Building.Components.Weather.SunIrradiation\">SunIrradiation</a></b>
+  and in this case as part of the model <b>Weather</b>. The ouput data
+  of the <b>Sun</b> model is yet not very useful itself, but it is most
+  commonly used as input data for e.g. <b><a href=
+  \"RadOnTiltedSurf\">RadOnTiltedSurf</a></b> models to compute the solar
+  radiance according to the azimut of a surface.
+</p>
+<p>
+  Output: The <b>Sun</b> model computes the day angle, hour angle and
+  the declination of the sun for a given set of geographic position and
+  local solar time.
+</p>
+<p>
+  Input: The model needs information on the difference between the
+  local time zone (corresponding to the time basis of the simulation)
+  and UTC (universal time coordinated) in hours.
+</p>
+<h4>
+  <span style=\"color:#008000\">Known Limitations</span>
+</h4>
+<p>
+  Be aware that the outputs of this model are only values that are
+  calculated in the middle of the simulation interval and that they are
+  no mean value. The parameter timeCorrection is for setting the
+  calculation time of the outputs to the middle of the simulationi
+  nterval. The variable that depends on the solar time are better
+  approximated when the solar time is calculated for the middle of the
+  hour, for which the horizontal solar radiation is given. For weather
+  data in TRY format it is 0.5 h because the solar radiation values are
+  the average measured values for the previous hours. Set according to
+  the specifications of each weather file format.
+</p>
 </html>",
-    revisions="<html>
-<ul>
-  <li><i>December 20, 2012&nbsp;</i>
-         by Jerome Feldhaus:<br/>
-         new Output variable OutHourAngleSun and renaming from Sun to SunAltitude.</li>
-  <li><i>September 29, 2006&nbsp;</i>
-         by Peter Matthes:<br/>
-         Included ArgACOS variable to protect acos function from arguments &gt; 1. Added protection for some variables.</li>
-  <li><i>March 14, 2005&nbsp;</i>
-         by Timo Haase:<br/>
-         Implemented.</li>
+    revisions="<html><ul>
+  <li>
+    <i>December 20, 2012&#160;</i> by Jerome Feldhaus:<br/>
+    new Output variable OutHourAngleSun and renaming from Sun to
+    SunAltitude.
+  </li>
+  <li>
+    <i>September 29, 2006&#160;</i> by Peter Matthes:<br/>
+    Included ArgACOS variable to protect acos function from arguments
+    &gt; 1. Added protection for some variables.
+  </li>
+  <li>
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end Sun;

@@ -47,11 +47,19 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  annotation (Documentation(info="<html>
-<p>This model represents a simple controller for a heat pump. It is based on the <a href=\"modelica://Modelica.Blocks.Logical.OnOffController\">Modelica.Blocks.Logical.OnOffController</a> 
-but includes further constant sources so that the <a href=\"modelica://AixLib.Controls.Interfaces.HeatPumpControlBus\">AixLib.Controls.Interfaces.HeatPumpControlBus</a> can be used.</p>
-</html>", revisions="<html>
-<p>March 31, 2017, by Marc Baranski:</p>
-<p>First implementation. </p>
+  annotation (Documentation(info="<html><p>
+  This model represents a simple controller for a heat pump. It is
+  based on the <a href=
+  \"modelica://Modelica.Blocks.Logical.OnOffController\">Modelica.Blocks.Logical.OnOffController</a>
+  but includes further constant sources so that the <a href=
+  \"modelica://AixLib.Controls.Interfaces.HeatPumpControlBus\">AixLib.Controls.Interfaces.HeatPumpControlBus</a>
+  can be used.
+</p>
+<p>
+  March 31, 2017, by Marc Baranski:
+</p>
+<p>
+  First implementation.
+</p>
 </html>"));
 end HPControllerOnOff;

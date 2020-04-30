@@ -51,22 +51,34 @@ equation
   connect(heatTrans.port_b, TempInside.port) annotation(Line(points = {{10, -46}, {46, -46}, {46, 10}, {60, 10}}, color = {191, 0, 0}));
   connect(heatTransfer_Outside.port_a, TempOutside.port) annotation(Line(points = {{-10, -28}, {-40, -28}, {-40, 10}, {-60, 10}}, color = {191, 0, 0}));
   connect(heatTransfer_Outside.port_b, TempInside.port) annotation(Line(points = {{10, -28}, {46, -28}, {46, 10}, {60, 10}}, color = {191, 0, 0}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{14, 46}, {26, 36}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{14, 30}, {26, 20}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{14, 10}, {26, 0}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{14, -10}, {26, -20}}, lineColor = {0, 0, 255}, textString = "4"), Text(extent = {{14, -30}, {26, -40}}, lineColor = {0, 0, 255}, textString = "5"), Text(extent = {{14, -48}, {26, -58}}, lineColor = {0, 0, 255}, textString = "6")}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Test routine to check simple heat transfer models with a maximum of 2 temperature connectors.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Simple test to calculate the heat flux through the different conduction and convection models.</p>
- <p>Boundary conditions can be given by 2 different temperatur values on each side of the model. Models with additional inputs (e.g. variable thermal conductivity, wind speed, ...) will be given preferably alternating input values, for example customized sine values.</p>
- </html>", revisions="<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{14, 46}, {26, 36}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{14, 30}, {26, 20}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{14, 10}, {26, 0}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{14, -10}, {26, -20}}, lineColor = {0, 0, 255}, textString = "4"), Text(extent = {{14, -30}, {26, -40}}, lineColor = {0, 0, 255}, textString = "5"), Text(extent = {{14, -48}, {26, -58}}, lineColor = {0, 0, 255}, textString = "6")}), Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Test routine to check simple heat transfer models with a maximum of 2
+  temperature connectors.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Simple test to calculate the heat flux through the different
+  conduction and convection models.
+</p>
+<p>
+  Boundary conditions can be given by 2 different temperatur values on
+  each side of the model. Models with additional inputs (e.g. variable
+  thermal conductivity, wind speed, ...) will be given preferably
+  alternating input values, for example customized sine values.
+</p>
 <ul>
-<li>
-September 25, 2015 by Marcus Fuchs:<br/>
-Fixed unknown variable problem for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/115\">#115</a>
-</li>
-<li>
-April 16, 2013, by Ole Odendahl:<br/>
-Implemented, added documentation and formatted appropriately
-</li>
+  <li>September 25, 2015 by Marcus Fuchs:<br/>
+    Fixed unknown variable problem for <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/115\">#115</a>
+  </li>
+  <li>April 16, 2013, by Ole Odendahl:<br/>
+    Implemented, added documentation and formatted appropriately
+  </li>
 </ul>
 </html>
  "), experiment(

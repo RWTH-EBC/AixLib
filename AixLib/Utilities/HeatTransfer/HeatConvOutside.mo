@@ -57,36 +57,75 @@ equation
               -54,36},{-64,24}},                                                                                                                                                                                                        color = {255, 255, 255}, thickness = 0.5), Line(points={{
               -38,36},{-38,-44}},                                                                                                                                                                                                        color = {255, 255, 255}, thickness = 0.5), Line(points={{
               -54,36},{-54,-44}},                                                                                                                                                                                                        color = {255, 255, 255}, thickness = 0.5),
-                                                                                                                                                Rectangle(extent={{-80,80},{80,-80}},      lineColor = {0, 0, 0})}),                                                                                                                                                                                                        Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>The <b>HeatTransferOutside </b>is a model for the convective heat transfer at outside walls </p>
-<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
-<p>It allows the choice between three different models: </p>
+                                                                                                                                                Rectangle(extent={{-80,80},{80,-80}},      lineColor = {0, 0, 0})}),                                                                                                                                                                                                        Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  The <b>HeatTransferOutside</b> is a model for the convective heat
+  transfer at outside walls
+</p>
+<p>
+  <b><span style=\"color: #008000;\">Concept</span></b>
+</p>
+<p>
+  It allows the choice between three different models:
+</p>
 <ul>
-<li>after DIN 6946:<code> <i>h</i> = 4+4<i>v</i> </code>, where <i><code>h</code></i> <b>(hCon)</b> is the heat transfer coefficent and <i><b><code>v</code></b></i> is the wind speed </li>
-<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in EnergyPlus Engineering reference from 2011:<i><code> h = D+Ev+Fv^2</code></i> , where <i><code>h</code></i> <b>(hCon)</b> and <i><b><code>v</code></b></i> are as above and the coefficients <i><b><code>D, E, F</code></b></i>  depend on the surface of the outer wall.<br />
-<b><span style=\"color: #ff0000;\">Attention:</span></b> This is a combined coefficient for convective and radiative heat exchange.</li>
-<li>with a custom constant<i><code> h</code></i> <b>(hCon)</b> value </li>
+  <li>after DIN 6946: <code><i>h</i> = 4+4<i>v</i></code> , where
+  <i><code>h</code></i> <b>(hCon)</b> is the heat transfer coefficent
+  and <i><b><code>v</code></b></i> is the wind speed
+  </li>
+  <li>after the ASHRAE Fundamentals Handbook from 1989, the way it is
+  presented in EnergyPlus Engineering reference from 2011: <i><code>h =
+  D+Ev+Fv^2</code></i> , where <i><code>h</code></i> <b>(hCon)</b> and
+  <i><b><code>v</code></b></i> are as above and the coefficients <i><b>
+    <code>D, E, F</code></b></i> depend on the surface of the outer
+    wall.<br/>
+    <b><span style=\"color: #ff0000;\">Attention:</span></b> This is a
+    combined coefficient for convective and radiative heat exchange.
+  </li>
+  <li>with a custom constant <i><code>h</code></i> <b>(hCon)</b> value
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">References</span></b> </p>
+<p>
+  <b><span style=\"color: #008000;\">References</span></b>
+</p>
 <ul>
-<li>DIN 6946 p.20 </li>
-<li>ASHRAEHandbook1989, as cited in EnergyPlus Engineering Reference. : EnergyPlus Engineering Reference, 2011 p.56 </li>
+  <li>DIN 6946 p.20
+  </li>
+  <li>ASHRAEHandbook1989, as cited in EnergyPlus Engineering Reference.
+  : EnergyPlus Engineering Reference, 2011 p.56
+  </li>
 </ul>
-<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
-<p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a> </p>
-<p><a href=\"AixLib.Utilities.Examples.HeatConv_outside\">AixLib.Utilities.Examples.HeatConv_outside</a> </p>
-</html>",  revisions="<html>
- <ul>
- <li><i>November 16, 2016&nbsp;</i> by Ana Constantin:<br/>Conditioned input WindSpeedPort and introduced protected input WindSpeed_internal</li>
- </ul>
- <ul>
- <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- </ul>
- <ul>
-   <li><i>March 30, 2012&nbsp;</i>
-          by Ana Constantin:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+<p>
+  <b><span style=\"color: #008000;\">Example Results</span></b>
+</p>
+<p>
+  <a href=
+  \"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a>
+</p>
+<p>
+  <a href=
+  \"AixLib.Utilities.Examples.HeatConv_outside\">AixLib.Utilities.Examples.HeatConv_outside</a>
+</p>
+<ul>
+  <li>
+    <i>November 16, 2016&#160;</i> by Ana Constantin:<br/>
+    Conditioned input WindSpeedPort and introduced protected input
+    WindSpeed_internal
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>April 1, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>March 30, 2012&#160;</i> by Ana Constantin:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end HeatConvOutside;

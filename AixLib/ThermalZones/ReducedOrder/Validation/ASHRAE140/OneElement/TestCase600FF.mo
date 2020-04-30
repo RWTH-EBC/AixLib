@@ -398,21 +398,26 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Thermal Zone")}),
     Icon(coordinateSystem(extent={{-140,-100},{160,100}})),
-    Documentation(revisions="<html>
-  <ul>
-  <li>
-  March 17, 2017, by Moritz Lauster:<br/>
-  Implemented.
+    Documentation(revisions="<html><ul>
+  <li>March 17, 2017, by Moritz Lauster:<br/>
+    Implemented.
   </li>
-  </ul>
-  </html>", info="<html>
-<p>Test Case 600FF of the ASHRAE 140-2007: Calculation of free float indoor air
-temperature for room version light excited by internal and external gains. </p>
-<h4>Boundary conditions</h4>
+</ul>
+</html>", info="<html>
+<p>
+  Test Case 600FF of the ASHRAE 140-2007: Calculation of free float
+  indoor air temperature for room version light excited by internal and
+  external gains.
+</p>
+<h4>
+  Boundary conditions
+</h4>
 <ul>
-<li>yearly profile for outdoor air temperature and solar radiation in hourly
-steps </li>
-<li>constant internal gains and infiltration rate </li>
+  <li>yearly profile for outdoor air temperature and solar radiation in
+  hourly steps
+  </li>
+  <li>constant internal gains and infiltration rate
+  </li>
 </ul>
 </html>"));
 end TestCase600FF;
