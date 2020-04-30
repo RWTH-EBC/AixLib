@@ -1,6 +1,7 @@
-within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
+within AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Cellar "Cellar completly under ground"
-  import AixLib;
+  extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
   ///////// construction parameters
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
@@ -171,7 +172,9 @@ equation
   connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,34},{110,34},{110,44},{46,44},{46,-24},{4,-24},{4,-16}},       color={191,0,0}));
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.portConvRadComb) annotation (Line(points={{110,60},{110,44},{46,44},{46,-24},{4,-24},{4,-16}},       color={191,0,0}));
   connect(thermStar_Demux.portConv, airload.port) annotation (Line(points={{-1,4},{-1,12},{-12,12},{-12,-4},{-28,-4}},     color={191,0,0}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+  annotation (
+  obsolete = "Obsolete model - Model will be deleted in a future version.",
+  Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>
  <ul>
