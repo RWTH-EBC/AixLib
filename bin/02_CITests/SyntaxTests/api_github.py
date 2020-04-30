@@ -38,33 +38,45 @@ class GET_API_GITHUB(object):
 		login = author["login"]
 		return login
 
+	def return_owner(self):
+		owner = self.GITHUB_REPOSITORY
+		owner = owner.split("/")
+		print(owner[0])
+		return owner[0]	
+		
 class PULL_REQUEST_GITHUB(object):
 	
-	def  __init__(self,Correct_Branch,GITHUB_REPOSITORY, Working_Branch, GITHUB_USERNAME, GITHUB_TOKEN):
+	def  __init__(self,Correct_Branch,GITHUB_REPOSITORY, Working_Branch, OWNER,  GITHUB_TOKEN):
 		self.GITHUB_REPOSITORY = GITHUB_REPOSITORY
 		self.Correct_Branch = Correct_Branch
 		self.Working_Branch = Working_Branch
-		self.GITHUB_USERNAME = GITHUB_USERNAME
+		#self.GITHUB_USERNAME = GITHUB_USERNAME
 		self.GITHUB_TOKEN = GITHUB_TOKEN
+		self.OWNER = OWNER
 	
 	def post_pull_request(self):
-		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/pulls"
-		payload = '{\n    \"title\": \"Corrected HTML Code in branch '+self.Working_Branch+'\",\n    \"body\": \"Merge the corrected HTML Code. After confirm the pull request, **pull** your branch to your local repository.\n **Delete** the Branch ' +self.Correct_Branch+ '\",\n    \"head\": \"'+self.GITHUB_USERNAME+":"+self.Correct_Branch+'\",\n    \"base\": \"'+self.Working_Branch+'\"\n  \n}'
+		#print(self.GITHUB_USERNAME)
+		#print(self.Correct_Branch)
+		#print(self.Working_Branch)
+		#print(self.OWNER)
 		
+		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/pulls"
+		payload = '{\n    \"title\": \"Corrected HTML Code in branch '+self.Working_Branch+'\",\n    \"body\": \"Merge the corrected HTML Code. After confirm the pull request, **pull** your branch to your local repository. **Delete** the Branch ' +self.Correct_Branch+ '\",\n    \"head\": \"'+self.OWNER+':'+self.Correct_Branch+'\",\n    \"base\": \"'+self.Working_Branch+'\"\n  \n}'
+		#payload = '{\n    \"title\": \"Correct HTML master in branch '+self.Working_Branch+'\",\n    \"body\": \"Merge the corrected HTML Code. After confirm the pull request, **pull** your branch to your local repository. **Delete** the Branch ' +self.Correct_Branch+'\",\n    \"head\": \"SvenHinrichs:issue802_CleanCI_Infrastructure\",\n    \"base\": \"master\"\n}'
 		headers = {
 			'Authorization': 'Bearer '+self.GITHUB_TOKEN,
 			'Content-Type': 'application/json'
 		}
 		response = requests.request("POST", url, headers=headers, data = payload)
 		print(response.text.encode('utf8'))
-
-
+		
+	
 
 	
 
 
 if  __name__ == '__main__':
-	#GITHUB_REPOSITORY
+	# GITHUB_REPOSITORY
 	# python api.py --GITHUB-REPOSITORY SvenHinrichs/GitLabCI --Working-Branch master
 	"""Parser"""
 	# Configure the argument parser
@@ -80,13 +92,14 @@ if  __name__ == '__main__':
 	
 	
 	GET_API_DATA = GET_API_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch)
-	Username = GET_API_DATA.get_GitHub_Username()
+	owner = GET_API_DATA.return_owner()
 	#print("USERNAME is "+ Username)
 	#sys.stdout.write(Username)
 	#sys.exit(0)					
 	
-	PULL_REQUEST = PULL_REQUEST_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch, GITHUB_TOKEN = args.GITHUB_TOKEN, GITHUB_USERNAME = Username)
+	PULL_REQUEST = PULL_REQUEST_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch, GITHUB_TOKEN = args.GITHUB_TOKEN, OWNER = owner)
 	PULL_REQUEST.post_pull_request()
+	
 	print("Pull Request")
 	exit(0)
 	
