@@ -2,7 +2,7 @@
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
   extends
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow(final use_solarRadWinTrans=true, final use_windSpeedPort=true);
 
   replaceable parameter AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default
     winPaneRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition "Record containing parameters of window pane(s)"
@@ -49,9 +49,6 @@ model Window_ASHRAE140
     final energyDynamics=energyDynamics,
     final A=windowarea)
            annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort
-annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
-    iconTransformation(extent={{-100,-60},{-80,-40}})));
   Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
     eps=WindowType.Emissivity,
     A=windowarea)
@@ -65,22 +62,13 @@ annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
   Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea)
     "multiplication with area"
     annotation (Placement(transformation(extent={{-4,54},{8,66}})));
-  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans
-    "Output signal connector"
-    annotation (Placement(transformation(extent={{82,70},{102,90}})));
 equation
-  connect(heatConv_outside.WindSpeedPort, WindSpeedPort) annotation (Line(
-  points={{-65,-17},{-72,-17},{-72,-16},{-78,-16},{-78,-59},{-99,-59}},
-  color={0,0,127}));
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
   points={{-46,-10},{-46,-8},{-38,-8}},
   color={191,0,0}));
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(Ag.y, solarRadWinTrans) annotation (Line(
-      points={{8.6,60},{50,60},{50,80},{92,80}},
-      color={0,0,127}));
   connect(RadCondAdapt.solarRadWinTrans[1], Ag.u) annotation (Line(
       points={{-31.1,60},{-5.2,60}},
       color={0,0,127}));
@@ -104,6 +92,8 @@ equation
       points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
       color={255,128,0}));
   connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
+  connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
+  connect(Ag.y, solarRadWinTrans) annotation (Line(points={{8.6,60},{58,60},{58,80},{92,80}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
