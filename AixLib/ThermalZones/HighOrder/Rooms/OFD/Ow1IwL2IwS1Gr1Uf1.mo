@@ -162,7 +162,7 @@ model Ow1IwL2IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{34,-104},{54,-84}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall2a
     annotation (Placement(transformation(extent={{80,20},{100,40}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
                                                      annotation (Placement(
         transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(
           extent={{-109.5,-70},{-89.5,-50}})));

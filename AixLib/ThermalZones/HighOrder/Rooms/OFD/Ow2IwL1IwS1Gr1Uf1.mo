@@ -99,7 +99,7 @@ model Ow2IwL1IwS1Gr1Uf1
     withWindow=withWindow1,
     withDoor=withDoor1,
     wallPar=wallTypes.OW,
-    calcMethodOut=calcMethod,
+    calcMethodOut=calcMethodOut,
     final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -119,7 +119,7 @@ model Ow2IwL1IwS1Gr1Uf1
     withWindow=withWindow2,
     withDoor=withDoor2,
     wallPar=wallTypes.OW,
-    calcMethodOut=calcMethod,
+    calcMethodOut=calcMethodOut,
     final WindowType=Type_Win,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
@@ -205,7 +205,7 @@ model Ow2IwL1IwS1Gr1Uf1
     annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
     annotation (Placement(transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(extent={{-109.5,-50},{-89.5,-30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));

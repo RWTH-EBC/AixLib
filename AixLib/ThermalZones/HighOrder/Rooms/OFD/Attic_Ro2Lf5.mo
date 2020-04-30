@@ -162,7 +162,7 @@ model Attic_Ro2Lf5
         origin={-60,-44},
         extent={{-2,-12},{2,12}},
         rotation=90)));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
                                                      annotation (Placement(
         transformation(extent={{-119.5,-10},{-99.5,10}}), iconTransformation(
           extent={{-119.5,10},{-99.5,30}})));
@@ -325,7 +325,7 @@ protected
 
 equation
   connect(SolarRadiationPort_RO1, roof1.SolarRadiationPort) annotation (Line(
-        points={{-45.5,100},{-45.5,80},{-12.4167,80},{-12.4167,65.5}}, color={
+        points={{-45.5,100},{-45.5,80},{-14.4167,80},{-14.4167,65.5}}, color={
           255,128,0}));
   connect(SolarRadiationPort_RO2, roof2.SolarRadiationPort) annotation (Line(
         points={{48,100},{48,80},{71.75,80},{71.75,65.5}}, color={255,128,0}));
