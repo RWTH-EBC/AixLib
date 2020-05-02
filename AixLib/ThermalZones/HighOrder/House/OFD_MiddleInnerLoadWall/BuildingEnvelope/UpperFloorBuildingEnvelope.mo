@@ -120,7 +120,7 @@ model UpperFloorBuildingEnvelope
     calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethod=calcMethod,
+    calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -152,8 +152,7 @@ model UpperFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Bedroom,
-    final T0_air=T0_air)
-    annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
+    final T0_air=T0_air) annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Children1(
     final denAir=denAir,
     final cAir=cAir,
@@ -164,7 +163,7 @@ model UpperFloorBuildingEnvelope
     calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethod=calcMethod,
+    calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -195,8 +194,7 @@ model UpperFloorBuildingEnvelope
     Tset=Tset_Children1,
     final T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
-    final U_door_OD2=UValOutDoors)
-    annotation (Placement(transformation(extent={{82,28},{44,76}})));
+    final U_door_OD2=UValOutDoors) annotation (Placement(transformation(extent={{82,28},{44,76}})));
   Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1 Bath(
     final denAir=denAir,
     final cAir=cAir,
@@ -207,7 +205,7 @@ model UpperFloorBuildingEnvelope
     calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethod=calcMethod,
+    calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -239,8 +237,7 @@ model UpperFloorBuildingEnvelope
     Tset=Tset_Bath,
     final T0_air=T0_air,
     final eps_door_OD2=epsOutDoors,
-    final U_door_OD2=UValOutDoors)
-    annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
+    final U_door_OD2=UValOutDoors) annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Children2(
     final denAir=denAir,
     final cAir=cAir,
@@ -251,7 +248,7 @@ model UpperFloorBuildingEnvelope
     calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethod=calcMethod,
+    calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -283,8 +280,7 @@ model UpperFloorBuildingEnvelope
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
     Tset=Tset_Children2,
-    final T0_air=T0_air)
-    annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
+    final T0_air=T0_air) annotation (Placement(transformation(extent={{-84,-20},{-44,-84}})));
   Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1 Corridor(
     final denAir=denAir,
     final cAir=cAir,
@@ -295,7 +291,7 @@ model UpperFloorBuildingEnvelope
     calcMethodIn=calcMethodIn,
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
-    calcMethod=calcMethod,
+    calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -321,8 +317,7 @@ model UpperFloorBuildingEnvelope
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
-    final T0_air=T0_air)
-    annotation (Placement(transformation(extent={{82,-28},{42,10}})));
+    final T0_air=T0_air) annotation (Placement(transformation(extent={{82,-28},{42,10}})));
   Utilities.Interfaces.SolarRad_in North annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -339,7 +334,7 @@ model UpperFloorBuildingEnvelope
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={110,-84})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
     annotation (Placement(transformation(extent={{-130,10},{-100,40}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[5] "1(6): Bedroom_UF, 2(7): Child1_UF, 3(8): Corridor_UF, 4(9): Bath_UF, 5(10): Child2_UF"
     annotation (Placement(transformation(extent={{-130,-26},{-100,4}}), iconTransformation(extent={{-130,-26},{-100,4}})));

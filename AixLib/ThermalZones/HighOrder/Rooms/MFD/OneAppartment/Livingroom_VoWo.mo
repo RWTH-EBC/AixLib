@@ -130,7 +130,7 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     wallPar=Type_CE,
     wall_length=4.2,
     wall_height=4.645,
-    calcMethod=1,
+    calcMethodOut=1,
     ISOrientation=3,
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(
@@ -226,26 +226,6 @@ equation
   connect(airload.port, ThermRoom) annotation(Line(points={{-38,0},{-20,0},{-20,14},{-2,14}},          color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-46,-99},{-20,-99},{-20,0},{-38,0}},          color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, 84.6}, {-4, 100}, {-86, 100}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
-  connect(Wall_Neighbour.solarRadWin, outsideWall.solarRadWinTrans) annotation (
-     Line(points={{-67.4,43.6},{-56,43.6},{-56,48},{-41.2,48},{-41.2,57}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, outsideWall.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{48.8,48},{48.8,58.8}}, color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Floor.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{54,48},{54,58},{96.6667,58},{96.6667,34.2}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Ceiling.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{54,48},{54,58},{111.333,58},{111.333,67.8}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Bedroom.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{-56,48},{-56,-34},{-63.3333,-34},{-63.3333,-39.6}},
-                   color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Children.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{54,48},{54,-15.3333},{67.3,-15.3333}},
-        color={0,0,127}));
-  connect(outsideWall.solarRadWinTrans, Wall_Corridor.solarRadWin) annotation (
-      Line(points={{-41.2,57},{-41.2,48},{54,48},{54,-32},{-3.73333,-32},{-3.73333,-37.5}},
-                   color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}})),           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent = {{-62, 60}, {112, -92}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Rectangle(extent = {{38, 72}, {60, 52}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{40, 70}, {58, 54}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},

@@ -12,12 +12,12 @@ model Wall
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab="Dynamics", group="Equations"));
 
-  parameter Boolean use_shortWaveRadIn=false "Use input connector for shortwave radiation" annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadIn=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
   parameter Real solarDistribution(min=0.0, max=1.0) if use_shortWaveRadIn "Solar distribution fraction of the transmitted radiation through the window on the surface" annotation (Dialog(
       tab="Surface Parameters",
       group="Inside surface",
       enable=use_shortWaveRadIn));
-  parameter Boolean use_shortWaveRadOut=false "Use input connector for shortwave radiation" annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
+  parameter Boolean use_shortWaveRadOut=false "Use input connector for shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
 
   // general wall parameters
   replaceable parameter DataBase.Walls.WallBaseDataDefinition wallPar "Wall parameters / type of wall"
@@ -69,6 +69,7 @@ model Wall
   replaceable model Window = WindowsDoors.WindowSimple constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
+  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
@@ -125,7 +126,7 @@ model Wall
     eps=eps_door,
     U=if outside then U_door else U_door*2) if withDoor
     annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
-  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
+
   AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside(
     A=wall_length*wall_height - clearance,
     calcMethod=calcMethodOut,
@@ -245,9 +246,13 @@ equation
       points={{61.4,80},{55,80}},
       color={0,0,127}));
   connect(absSolarRadWin.port, Wall.port_b1) annotation (Line(points={{35,80},{30,80},{30,48},{16.74,48},{16.74,35.78}}, color={191,0,0}));
+
+
   connect(windowSimple.solarRadWinTrans, solarRadWinTrans) annotation (Line(points={{9.96,-24.6},{84,-24.6},{84,-60},{110,-60}}, color={0,0,127}));
   connect(WindSpeedPort, windowSimple.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
+
+
+    annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},

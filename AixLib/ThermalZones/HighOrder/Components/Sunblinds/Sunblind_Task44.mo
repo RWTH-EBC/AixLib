@@ -5,7 +5,6 @@ model Sunblind_Task44 "sunblinds modell after suggestions by IEA Task 44"
     Imax=300,
     gsunblind={0.25,0.25,0.25,0.25,0.25});
 
-  outer Modelica.SIunits.Temperature Tamb;
   Modelica.SIunits.RadiantEnergyFluenceRate Rad_horizontal;
 
   parameter Modelica.SIunits.Temperature Tmax=273.15+23.8
@@ -21,21 +20,23 @@ model Sunblind_Task44 "sunblinds modell after suggestions by IEA Task 44"
     annotation (Placement(transformation(extent={{-10,60},{10,80}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
     annotation (Placement(transformation(extent={{68,60},{48,80}})));
-  Modelica.Blocks.Sources.RealExpression realExpression[n](y=Rad_horizontal)
+  Modelica.Blocks.Sources.RealExpression realExpression[n](each y=Rad_horizontal)
     annotation (Placement(transformation(extent={{-100,26},{-80,46}})));
   Modelica.Blocks.Logical.Hysteresis hysteresis1[n](uLow=fill(Imin, n), uHigh=
         fill(Imax, n))
     annotation (Placement(transformation(extent={{-66,26},{-46,46}})));
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{20,32},{40,52}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=Tamb)
-    annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
      parameter Modelica.SIunits.RadiantEnergyFluenceRate Imin=200
     "Intensity at which the sunblind opens again";
   Utilities.Math.MovingAverage
                             movingAverage
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
 
+  Modelica.Blocks.Interfaces.RealInput TOda(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Outdoor air temperature" annotation (Placement(transformation(extent={{-120,50},{-80,90}}), iconTransformation(extent={{-118,50},{-78,90}})));
 equation
    for i in 1:n loop
        Rad_Out[i].I=smooth(1,noEvent(if (and1.y and hysteresis1[i].y) then Rad_In[i].I*gsunblind[i] else Rad_In[i].I));
@@ -47,9 +48,6 @@ equation
    end for;
 
    Rad_horizontal = Rad_In[5].I; /// !!!!!!!!!!!!!!!!
-  connect(realExpression1.y, movingAverage.u) annotation (Line(
-      points={{-79,70},{-62,70}},
-      color={0,0,127}));
   connect(movingAverage.y, greaterThreshold.u) annotation (Line(
       points={{-39,70},{-12,70}},
       color={0,0,127}));
@@ -68,6 +66,7 @@ equation
   connect(temperatureSensor1.port, RoomTempSensor) annotation (Line(
       points={{68,70},{90,70}},
       color={191,0,0}));
+  connect(movingAverage.u, TOda) annotation (Line(points={{-62,70},{-100,70}}, color={0,0,127}));
             annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                                 graphics={

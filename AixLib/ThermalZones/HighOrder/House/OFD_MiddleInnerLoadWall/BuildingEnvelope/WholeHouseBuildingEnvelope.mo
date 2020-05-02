@@ -42,8 +42,7 @@ model WholeHouseBuildingEnvelope
   parameter Modelica.SIunits.Temperature TDynVentAttic_set = 288.15 "Attic set temperature for dyn. vent."
     annotation (Dialog(tab="Dynamic ventilation", enable=withDynamicVentilation));
 
-  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope
-    groundFloor_Building(
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope groundFloor_Building(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
@@ -55,7 +54,7 @@ model WholeHouseBuildingEnvelope
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
     final solar_absorptance_OW=solar_absorptance_OW,
-    final calcMethod=calcMethod,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -76,10 +75,8 @@ model WholeHouseBuildingEnvelope
     final Tset_Hobby=TDynVentHobby_set,
     final Tset_Corridor=TDynVentCorridorGF_set,
     final Tset_WC=TDynVentWCStorage_set,
-    final Tset_Kitchen=TDynVentKitchen_set)
-    annotation (Placement(transformation(extent={{-20,-74},{20,-26}})));
-  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope
-    upperFloor_Building(
+    final Tset_Kitchen=TDynVentKitchen_set) annotation (Placement(transformation(extent={{-20,-74},{20,-26}})));
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope upperFloor_Building(
     final denAir=denAir,
     final cAir=cAir,
     final wallTypes=wallTypes,
@@ -91,7 +88,7 @@ model WholeHouseBuildingEnvelope
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
     final solar_absorptance_OW=solar_absorptance_OW,
-    final calcMethod=calcMethod,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -113,8 +110,7 @@ model WholeHouseBuildingEnvelope
     final Tset_Bath=TDynVentBath_set,
     final Tset_Children2=TDynVentChildren2_set,
     final UValOutDoors=UValOutDoors,
-    final epsOutDoors=epsOutDoors)
-    annotation (Placement(transformation(extent={{-24,-12},{22,34}})));
+    final epsOutDoors=epsOutDoors) annotation (Placement(transformation(extent={{-24,-12},{22,34}})));
   AixLib.ThermalZones.HighOrder.Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(
     final denAir=denAir,
     final cAir=cAir,
@@ -127,7 +123,7 @@ model WholeHouseBuildingEnvelope
     final hConIn_const=hConIn_const,
     final Type_Win=Type_Win,
     final solar_absorptance_OW=solar_absorptance_OW,
-    final calcMethod=calcMethod,
+    final calcMethodOut=calcMethodOut,
     final surfaceType=surfaceType,
     final hConOut_const=hConOut_const,
     final use_infiltEN12831=use_infiltEN12831,
@@ -158,10 +154,9 @@ model WholeHouseBuildingEnvelope
     room3_width=2.28,
     room4_width=2.28,
     room5_width=2.28,
-    alfa=1.5707963267949)
-    annotation (Placement(transformation(extent={{-22,44},{22,82}})));
+    alfa=1.5707963267949) annotation (Placement(transformation(extent={{-22,44},{22,82}})));
 
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
                                                      annotation (Placement(
         transformation(extent={{-128,66},{-100,94}}),iconTransformation(extent={{-120,60},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[11] "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic"

@@ -70,39 +70,48 @@ model Ow2IwL1IwS1Lf1At1Ro1
     annotation (Dialog(group="Outer wall properties", descriptionLabel=true));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall1(
     final energyDynamics=energyDynamicsWalls,
-    solar_absorptance=solar_absorptance_OW,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
     final T0=TWalls_start,
-    wall_length=room_length,
-    wall_height=room_height_short,
-    withWindow=false,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_OW,
+    final wallPar=wallTypes.OW,
+    wall_length=room_length,
+    wall_height=room_height_short,
+    withWindow=false,
     windowarea=0,
     withDoor=false,
     door_height=0,
-    door_width=0,
-    wallPar=wallTypes.OW)
-                     annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
+    door_width=0)    annotation (Placement(transformation(extent={{-62,-20},{-52,38}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outside_wall2(
     final energyDynamics=energyDynamicsWalls,
-    solar_absorptance=solar_absorptance_OW,
-    windowarea=windowarea_OW2,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
+    final WindowType=Type_Win,
     final T0=TWalls_start,
+    final withSunblind=use_sunblind,
+    final Blinding=1 - ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_OW,
+    final wallPar=wallTypes.OW,
+    windowarea=windowarea_OW2,
     door_height=door_height_OD2,
     door_width=door_width_OD2,
     withWindow=withWindow2,
     withDoor=withDoor2,
     wall_length=room_width_long,
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
-    final WindowType=Type_Win,
-    final withSunblind=use_sunblind,
-    final Blinding=1 - ratioSunblind,
-    final LimitSolIrr=solIrrThreshold,
-    final TOutAirLimit=TOutAirLimit,
-    wallPar=wallTypes.OW,
     ISOrientation=1,
     U_door=U_door_OD2,
     eps_door=eps_door_OD2) annotation (Placement(transformation(
@@ -111,51 +120,69 @@ model Ow2IwL1IwS1Lf1At1Ro1
         rotation=270)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall1(
     final energyDynamics=energyDynamicsWalls,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
     final T0=TWalls_start,
-    outside=false,
-    wallPar=wallTypes.IW2_vert_half_a,
-    wall_length=room_length,
-    wall_height=room_height_long,
-    withWindow=false,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_OW,
+    final wallPar=wallTypes.IW2_vert_half_a,
+    outside=false,
+    wall_length=room_length,
+    wall_height=room_height_long,
+    withWindow=false,
     withDoor=false) annotation (Placement(transformation(
         origin={61,4.00001},
         extent={{-4.99999,-30},{5,30}},
         rotation=180)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall inside_wall2(
     final energyDynamics=energyDynamicsWalls,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
     final T0=TWalls_start,
-    outside=false,
-    wallPar=wallTypes.IW_vert_half_a,
-    wall_length=room_width_long,
-    wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
-    withWindow=false,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_OW,
+    final wallPar=wallTypes.IW_vert_half_a,
+    outside=false,
+    wall_length=room_width_long,
+    wall_height=0.5*(room_height_long + room_height_short + room_width_short/room_width_long*(room_height_long - room_height_short)),
+    withWindow=false,
     withDoor=false) annotation (Placement(transformation(
         origin={32,-59},
         extent={{-4.99998,-28},{4.99998,28}},
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall Ceiling(
     final energyDynamics=energyDynamicsWalls,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
     final T0=TWalls_start,
-    outside=false,
-    wallPar=wallTypes.IW_hori_att_low_half,
-    wall_length=room_length,
-    wall_height=room_width_short,
-    withWindow=false,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_OW,
+    final wallPar=wallTypes.IW_hori_att_low_half,
+    outside=false,
+    wall_length=room_length,
+    wall_height=room_width_short,
+    withWindow=false,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={22,60},
@@ -163,27 +190,59 @@ model Ow2IwL1IwS1Lf1At1Ro1
         rotation=90)));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall floor(
     final energyDynamics=energyDynamicsWalls,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
     final WindowType=Type_Win,
     final T0=TWalls_start,
-    outside=false,
-    wallPar=wallTypes.IW_hori_upp_half,
-    wall_length=room_length,
-    wall_height=room_width_long,
-    withWindow=false,
     final withSunblind=use_sunblind,
     final Blinding=1 - ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_OW,
+    final wallPar=wallTypes.IW_hori_upp_half,
+    outside=false,
+    wall_length=room_length,
+    wall_height=room_width_long,
+    withWindow=false,
     withDoor=false,
     ISOrientation=2)                              annotation (Placement(transformation(
         origin={-27,-60},
         extent={{-2.00002,-11},{2.00001,11}},
         rotation=90)));
+  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof(
+    final energyDynamics=energyDynamicsWalls,
+    final calcMethodOut=calcMethodOut,
+    final hConOut_const=hConOut_const,
+    final surfaceType=surfaceType,
+    final calcMethodIn=calcMethodIn,
+    final hConIn_const=hConIn_const,
+    final WindowType=Type_Win,
+    final T0=TWalls_start,
+    final withSunblind=use_sunblind,
+    final Blinding=1 - ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
+    final solar_absorptance=solar_absorptance_RO,
+    final wallPar=wallTypes.roofRoomUpFloor,
+    wall_length=room_length,
+    withDoor=false,
+    door_height=0,
+    door_width=0,
+    wall_height=roof_width,
+    withWindow=withWindow3,
+    windowarea=windowarea_RO)
+                         annotation (Placement(transformation(
+        origin={55,59},
+        extent={{-2.99995,-17},{2.99997,17}},
+        rotation=270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall2
     annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethod == 1 or calcMethod == 2)
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if (calcMethodOut == 1 or calcMethodOut == 2)
     annotation (Placement(transformation(extent={{-119.5,-70},{-99.5,-50}}), iconTransformation(extent={{-109.5,-50},{-89.5,-30}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_OW1
     annotation (Placement(transformation(extent={{-109.5,20},{-89.5,40}})));
@@ -194,27 +253,6 @@ model Ow2IwL1IwS1Lf1At1Ro1
         rotation=270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
-  AixLib.ThermalZones.HighOrder.Components.Walls.Wall roof(
-    final energyDynamics=energyDynamicsWalls,
-    final T0=TWalls_start,
-    solar_absorptance=solar_absorptance_RO,
-    wall_length=room_length,
-    withDoor=false,
-    door_height=0,
-    door_width=0,
-    wall_height=roof_width,
-    withWindow=withWindow3,
-    final withSunblind=use_sunblind,
-    final Blinding=1 - ratioSunblind,
-    final LimitSolIrr=solIrrThreshold,
-    final TOutAirLimit=TOutAirLimit,
-    windowarea=windowarea_RO,
-    wallPar=wallTypes.roofRoomUpFloor,
-    final WindowType=Type_Win)
-                         annotation (Placement(transformation(
-        origin={55,59},
-        extent={{-2.99995,-17},{2.99997,17}},
-        rotation=270)));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_Roof annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -232,8 +270,8 @@ equation
                                                    color={191,0,0}));
   connect(thermInsideWall2, thermInsideWall2)
     annotation (Line(points={{30,-90},{30,-90}}, color={191,0,0}));
-  connect(inside_wall1.port_outside, thermInsideWall1) annotation (Line(points={{66.25,
-          4.00001},{90,4.00001},{90,10}},        color={191,0,0}));
+  connect(inside_wall1.port_outside, thermInsideWall1) annotation (Line(points={{66.25,4.00001},{90,4.00001},{90,10}},
+                                                 color={191,0,0}));
   connect(Ceiling.port_outside, thermCeiling)
     annotation (Line(points={{22,62.1},{22,70},{90,70}}, color={191,0,0}));
   connect(outside_wall2.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-7.73333,64.25},{-7.73333,70},{-80,70},{-80,-60},{-109.5,-60}},

@@ -1,0 +1,9 @@
+clear
+
+convertClear();
+
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Attic_Ro2Lf1");
+convertClass("AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar", "AixLib.Obsolete.Year2020.ThermalZones.HighOrder.Rooms.MFD.CellarAttic.Cellar");
+convertElement("AixLib.ThermalZones.HighOrder.Rooms.BaseClasses.PartialRoomParams", "calcMethod", "calcMethodOut");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Walls.Wall", "calcMethod", "calcMethodOut");
+

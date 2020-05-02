@@ -44,7 +44,8 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
   // Heat convection
-  parameter Integer calcMethod=1 "Calculation method for convective heat transfer coefficient" annotation (Dialog(
+  parameter Integer calcMethodOut=1 "Calculation method for convective heat transfer coefficient"
+                                                                                               annotation (Dialog(
       tab="Outer walls",
       group="Heat convection",
       compact=true,
@@ -53,8 +54,8 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       choice=2 "ASHRAE Fundamentals",
       choice=3 "Custom hCon (constant)",
       radioButtons=true));
-  replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethod==2)));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut_const=25 "Custom convective heat transfer coefficient (just for manual selection, not recommended)" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethod==3)));
+  replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == 2)));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer hConOut_const=25 "Custom convective heat transfer coefficient (just for manual selection, not recommended)" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == 3)));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
