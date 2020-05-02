@@ -130,7 +130,7 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
     wallPar=Type_CE,
     wall_length=4.2,
     wall_height=4.645,
-    calcMethod=1,
+    calcMethodOut=1,
     ISOrientation=3,
     withWindow=false,
     withDoor=false) annotation (Placement(transformation(
