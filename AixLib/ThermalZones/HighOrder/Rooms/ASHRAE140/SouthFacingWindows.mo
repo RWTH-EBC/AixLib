@@ -32,8 +32,6 @@ model SouthFacingWindows "windows facing south"
     parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Win=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()
       "choose a Window type" annotation(Dialog(group="Windows"),choicesAllMatching= true);
 
-protected
-    parameter Modelica.SIunits.Volume Room_V=room_length*room_height*room_width;
 
 public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_South(

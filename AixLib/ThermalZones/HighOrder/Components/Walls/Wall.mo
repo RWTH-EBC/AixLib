@@ -66,7 +66,8 @@ model Wall
   // window parameters
   parameter Boolean withWindow=false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
-  replaceable model Window = WindowsDoors.WindowSimple constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
+  replaceable model Window = WindowsDoors.WindowSimple constrainedby
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     "Model for window"
                      annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
@@ -103,7 +104,7 @@ model Wall
     l=wall_length,
     T0=T0,
     clearance=clearance,
-    eps=wallPar.eps,
+    eps=eps_in,
     wallType=wallPar,
     surfaceOrientation=ISOrientation,
     calcMethod=calcMethodIn,
@@ -165,6 +166,9 @@ model Wall
     "Output signal connector"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}}),
         iconTransformation(extent={{15,-72},{35,-52}})));
+  parameter Modelica.SIunits.Emissivity eps_in=wallPar.eps
+    "Longwave emission coefficient of the interior surface"
+    annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
