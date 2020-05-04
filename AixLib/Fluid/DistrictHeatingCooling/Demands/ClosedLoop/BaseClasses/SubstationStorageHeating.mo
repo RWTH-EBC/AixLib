@@ -40,11 +40,11 @@ model SubstationStorageHeating
     dIns=0.2)            annotation (Placement(transformation(extent={{40,-32},{
             108,36}})));
 
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_coldside(redeclare package Medium
-      = Medium, allowFlowReversal=true)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_coldside(redeclare package Medium =
+        Medium, allowFlowReversal=true)
     annotation (Placement(transformation(extent={{246,-10},{266,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_heatside(redeclare package Medium
-      = Medium, allowFlowReversal=true)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_heatside(redeclare package Medium =
+        Medium, allowFlowReversal=true)
     annotation (Placement(transformation(extent={{-288,-10},{-268,10}})));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =

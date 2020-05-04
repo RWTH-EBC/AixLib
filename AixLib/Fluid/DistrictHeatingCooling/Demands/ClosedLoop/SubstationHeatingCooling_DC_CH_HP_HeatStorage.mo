@@ -5,12 +5,12 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
     replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model for water"
       annotation (choicesAllMatching = true);
-    final parameter Real cp_default = 4180 "Cp-value of Water";
-    final parameter Modelica.SIunits.Density rho = 1000 "Density of Water";
+    parameter Modelica.SIunits.SpecificHeatCapacity cp_default = 4180 "Cp-value of Water";
+    parameter Modelica.SIunits.Density rho = 1000 "Density of Water";
 
-    final parameter Modelica.SIunits.MassFlowRate m_flow_nominal_heating = heatDemand_max/(cp_default*deltaT_heatingSet)
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal_heating = heatDemand_max/(cp_default*deltaT_heatingSet)
     "Nominal mass flow rate";
-    final parameter Modelica.SIunits.MassFlowRate m_flow_nominal_cooling = -coolingDemand_max/(cp_default*deltaT_coolingSet)
+    parameter Modelica.SIunits.MassFlowRate m_flow_nominal_cooling = -coolingDemand_max/(cp_default*deltaT_coolingSet)
     "Nominal mass flow rate";
 
     parameter Modelica.SIunits.Power heatDemand_max "Maximum heat demand for scaling of heatpump in Watt";
@@ -30,8 +30,8 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
     parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=30000 "Nominal pressure drop";
 
   AixLib.Fluid.Delays.DelayFirstOrder vol(
-    nPorts=2,
     redeclare package Medium = Medium,
+    nPorts=2,
     m_flow_nominal=m_flow_nominal,
     tau=60)  annotation (Placement(transformation(extent={{-238,-52},{-218,
             -32}})));
@@ -306,11 +306,7 @@ public
         transformation(extent={{-260,114},{-278,132}}), iconTransformation(
           extent={{-260,56},{-294,90}})));
 public
-  BaseClasses.heatPump_simple              heatPump(
-    redeclare package Medium2 = Medium,
-    allowFlowReversal1=true,
-    allowFlowReversal2=true,
-    redeclare package Medium1 = Medium,
+  BaseClasses.heatPump_simple heatPump(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     eta_car=0.55,
