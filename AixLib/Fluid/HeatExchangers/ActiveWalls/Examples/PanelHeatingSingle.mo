@@ -6,11 +6,10 @@ model PanelHeatingSingle
 
   AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panel_Dis1D(
     redeclare package Medium = Medium,
-    dis=2,
-    A=2,
     isFloor=true,
     calcMethod=1,
-    T0=292.15) annotation (Placement(transformation(extent={{-34,8},{30,28}})));
+    dis=1,
+    A=25)      annotation (Placement(transformation(extent={{-34,8},{30,28}})));
   Modelica.Fluid.Sources.MassFlowSource_T Source(
     nPorts=1,
     m_flow=0.01,
@@ -130,7 +129,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,
-            -100},{120,100}}), graphics),
+            -100},{120,100}})),
     Icon(coordinateSystem(extent={{-140,-100},{120,100}})),
     experiment(
       StopTime=86400,
