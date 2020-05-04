@@ -62,10 +62,14 @@ model heatPump_simple
     annotation (Placement(transformation(extent={{-36,78},{-24,90}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow2
     annotation (Placement(transformation(extent={{-52,-4},{-40,8}})));
-  Delays.DelayFirstOrder del(m_flow_nominal=m_flow_nominal,
+  Delays.DelayFirstOrder del(
+    redeclare package Medium = Medium,
+                             m_flow_nominal=m_flow_nominal,
                              nPorts=2)
     annotation (Placement(transformation(extent={{-10,60},{10,80}})));
-  Delays.DelayFirstOrder del1(m_flow_nominal=m_flow_nominal,
+  Delays.DelayFirstOrder del1(
+    redeclare package Medium = Medium,
+                              m_flow_nominal=m_flow_nominal,
                               nPorts=2)
     annotation (Placement(transformation(extent={{-6,-60},{14,-40}})));
   Sensors.TemperatureTwoPort T_source(redeclare package Medium = Medium,
