@@ -6,6 +6,7 @@ LosslessPipe
 Pipe
 PlugFlowPipe
 PressureDrop
+SimplePipe
 Examples
 Validation
 BaseClasses
