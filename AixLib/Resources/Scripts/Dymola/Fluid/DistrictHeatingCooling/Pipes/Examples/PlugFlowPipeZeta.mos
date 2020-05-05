@@ -1,0 +1,3 @@
+﻿removePlots();
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Pipes.Examples.PlugFlowPipeZeta", stopTime=1000, method="dassl", tolerance=1e-6, resultFile="PlugFlowPipeZeta");
+createPlot(id=1, y={"senTemIn.T", "senTemOut.T"});
