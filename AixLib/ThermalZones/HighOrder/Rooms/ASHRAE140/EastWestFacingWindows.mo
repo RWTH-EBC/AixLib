@@ -162,8 +162,6 @@ public
     Modelica.Blocks.Interfaces.RealInput WindSpeedPort
       annotation (Placement(transformation(extent={{-120,20},{-104,36}}),
           iconTransformation(extent={{-120,20},{-100,40}})));
-    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom
-      annotation (Placement(transformation(extent={{-36,16},{-22,30}})));
     Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
       annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
     Modelica.Blocks.Math.MultiSum multiSum(nu=2)        annotation (Placement(
@@ -261,8 +259,8 @@ equation
   connect(thermOutside, outerWall_North.port_outside) annotation (Line(points={
           {-100,100},{-68,100},{-68,88},{82,88},{82,4},{74.35,4}}, color={191,0,
           0}));
-  connect(thermOutside, outerWall_East.port_outside) annotation (Line(points={{
-          -100,100},{-68,100},{-68,88},{82,88},{82,-80},{26,-80},{26,-72.2}},
+  connect(thermOutside, outerWall_East.port_outside) annotation (Line(points={{-100,
+          100},{-68,100},{-68,88},{82,88},{82,-80},{26,-80},{26,-72.2}},
         color={191,0,0}));
   connect(thermOutside, outerWall_South.port_outside) annotation (Line(points={
           {-100,100},{-68,100},{-68,88},{82,88},{82,-80},{-86,-80},{-86,4},{
@@ -274,8 +272,8 @@ equation
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{-54,-56},{-54,4},{-62,4}},
         color={191,0,0}));
   connect(thermStar_Demux.portConvRadComb, outerWall_East.thermStarComb_inside)
-    annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{26,-56},{26,-64}}, color
-        ={191,0,0}));
+    annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{26,-56},{26,-64}}, color=
+         {191,0,0}));
   connect(thermStar_Demux.portConvRadComb, outerWall_North.thermStarComb_inside)
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{46,-56},{46,4},{60,4}},
         color={191,0,0}));

@@ -112,7 +112,7 @@ equation
         points={{26.35,-43.5},{18.2,-43.5},{18.2,-31.2}},
                                                       color={0,0,127}));
   connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
-      points={{5.91,42.215},{5.91,19},{30,19},{30,-28},{25,-28}},
+      points={{9.06,37.5},{9.06,19},{30,19},{30,-28},{25,-28}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-55,10},{5.28,10},{5.28,17.82}},
@@ -127,7 +127,7 @@ equation
       points={{-99.4,-52},{-92,-52}},
       color={0,0,127}));
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,42.215},{5.91,42.215}},
+      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,37.5},{9.06,37.5}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
       points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{15.36,-14},{15.36,
