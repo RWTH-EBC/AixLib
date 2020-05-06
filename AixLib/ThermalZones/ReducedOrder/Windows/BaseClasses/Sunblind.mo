@@ -25,15 +25,16 @@ equation
   end if;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model computes whether the sunscreen is active or not. Therefore it
- compares the irradiation on the window with a limit for the sunscreen to be
- active set as a parameter.</p>
-
+    Documentation(info="<html><p>
+  This model computes whether the sunscreen is active or not. Therefore
+  it compares the irradiation on the window with a limit for the
+  sunscreen to be active set as a parameter.
+</p>
 </html>",
-      revisions="<html>
-<ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+      revisions="<html><ul>
+  <li>June 30, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end Sunblind;

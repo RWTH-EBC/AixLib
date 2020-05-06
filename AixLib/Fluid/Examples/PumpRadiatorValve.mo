@@ -74,23 +74,32 @@ equation
   preserveAspectRatio=false)),
   Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})),
   experiment(StopTime = 86400, Interval = 60),
-  Documentation(info = "<html>
-  <p>
-  This model contains a simple model of a heating system, with a pump, ideal
-  heat source, pipes, simple valve and radiator. It serves as a
-  demonstration case of how components of the <code>AixLib</code> library can
-  be used.</p>
-</html>", revisions="<html>
+  Documentation(info = "<html><p>
+  This model contains a simple model of a heating system, with a pump,
+  ideal heat source, pipes, simple valve and radiator. It serves as a
+  demonstration case of how components of the <code>AixLib</code>
+  library can be used.
+</p>
 <ul>
-<li><i>April 25, 2017</i> by Peter Remmen:<br/>Move Example from
-<code>Fluid.HeatExchangers.Examples</code> to <code>Fluid.Examples</code></li>
+  <li>
+    <i>April 25, 2017</i> by Peter Remmen:<br/>
+    Move Example from <code>Fluid.HeatExchangers.Examples</code> to
+    <code>Fluid.Examples</code>
+  </li>
 </ul>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
-AixLib and replaced boiler with idealHeater</li>
-<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib and replaced boiler with idealHeater
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe
+  </li>
 </ul>
 </html>"));
 end PumpRadiatorValve;

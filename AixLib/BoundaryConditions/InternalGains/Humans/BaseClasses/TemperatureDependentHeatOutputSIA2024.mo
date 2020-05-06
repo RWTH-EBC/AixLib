@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
+within AixLib.BoundaryConditions.InternalGains.Humans.BaseClasses;
 model TemperatureDependentHeatOutputSIA2024
   "Model for temperature dependent heat output based on formulas of SIA 2024"
 
@@ -32,21 +32,44 @@ equation
           lineColor={0,0,0},
           lineThickness=0.5)}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>Model for heat output depending on temperature according to SIA 2024. This model calculates the heat output depending on the room temperature. </p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>This model calculates the heat output of a person depending on an acitivity degree and the room temperature. </p>
-<p>The activity degree <i>M</i> (in met) can be set to consider different types of acitivty of the person.</p>
-<p>The heat output <i>q<sub>Person</sub></i> is calculated by the following equation[1]:</p>
-<p align=\"center\"><i>q<sub>Person</sub> = (0.865 - (0.025 </i>1/K<i> &middot; &theta;<sub>room</sub>) &middot;(M &middot; 58 </i>W/m&sup2;<i> &middot; 1.8 </i>m&sup2;<i>) + 35 </i>W</p>
-<p><b><font style=\"color: #008000; \">References</font></b> </p>
-<p>[1]: SIA 2024: Space usage data for energy and building services engineering - 2015 </p>
-</html>", revisions="<html>
- <ul>
+    Documentation(info="<html><p>
+  <b><span style=\"color: #008000\">Overview</span></b>
+</p>
+<p>
+  Model for heat output depending on temperature according to SIA 2024.
+  This model calculates the heat output depending on the room
+  temperature.
+</p>
+<p>
+  <b><span style=\"color: #008000\">Concept</span></b>
+</p>
+<p>
+  This model calculates the heat output of a person depending on an
+  acitivity degree and the room temperature.
+</p>
+<p>
+  The activity degree <i>M</i> (in met) can be set to consider
+  different types of acitivty of the person.
+</p>
+<p>
+  The heat output <i>q<sub>Person</sub></i> is calculated by the
+  following equation[1]:
+</p>
+<p style=\"text-align:center;\">
+  <i>q<sub>Person</sub> = (0.865 - (0.025</i> 1/K <i>·
+  θ<sub>room</sub>) ·(M · 58</i> W/m² <i>· 1.8</i> m²<i>) + 35</i> W
+</p>
+<p>
+  <b><span style=\"color: #008000\">References</span></b>
+</p>
+<p>
+  [1]: SIA 2024: Space usage data for energy and building services
+  engineering - 2015
+</p>
+<ul>
   <li>July 10, 2019, by Martin Kremer:<br/>
-  Implemented
+    Implemented
   </li>
- </ul>
+</ul>
 </html>"));
 end TemperatureDependentHeatOutputSIA2024;

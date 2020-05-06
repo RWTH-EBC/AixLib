@@ -208,25 +208,58 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="ExergyOut")}),
-    Documentation(info="<html>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></h4>
+    Documentation(info="<html><h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span>
+</h4>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">This model determines the exergy destruction of a heat pump in cooling mode based on the inputs of the component.</span></li>
-<li><span style=\"font-family: MS Shell Dlg 2;\">It is used together with a HeatProducerAgent.</span></li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">This model determines
+    the exergy destruction of a heat pump in cooling mode based on the
+    inputs of the component.</span>
+  </li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">It is used together with
+    a HeatProducerAgent.</span>
+  </li>
 </ul>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HeatPump.png\" alt=\"Heat Pump\"/></span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the control volume for the heat pump. Based on this volume the following function for exergy destruction has been developed. Details can be found in the reference.</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HPcoolingCostfkt.PNG\" alt=\"Heat pump cooling cost function\"/></span></p>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">References</span></h4>
+<h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span>
+</h4>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\"><img src=
+  \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HeatPump.png\"
+  alt=\"Heat Pump\"></span>
+</p>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the
+  control volume for the heat pump. Based on this volume the following
+  function for exergy destruction has been developed. Details can be
+  found in the reference.</span>
+</p>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\"><img src=
+  \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HPcoolingCostfkt.PNG\"
+  alt=\"Heat pump cooling cost function\"></span>
+</p>
+<h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">References</span>
+</h4>
 <ul>
-<li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
+  <li>Felix Bünning. Development of a Modelica-library for agent-based
+  control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen
+  University, Aachen, Germany.
+  </li>
 </ul>
 </html>",
-    revisions="<html>
-<ul>
-<li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
+    revisions="<html><ul>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
+  <li>December 2016, by Roozbeh Sangi:<br/>
+    revised
+  </li>
 </ul>
 </html>"));
 end HeatPump_ExergyDestruction_Cooling;

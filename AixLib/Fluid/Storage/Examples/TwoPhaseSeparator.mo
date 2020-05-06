@@ -88,25 +88,25 @@ equation
   connect(fixedTemperature.port, twoPhaseSeperator.heatPort)
     annotation (Line(points={{70,0},{8.2,0}}, color={191,0,0}));
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 18, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 18, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a simple example model to test the two-phase separator model. 
-Therefore, the tank's temperature at inlet is a function of time as well 
-as the tank's pressure at outlet. The time dependencies of temperature and 
-pressure leads to changes of steam quality at inlet and outlet conditions as 
-well as the tank's mean steam quality.
+  This is a simple example model to test the two-phase separator model.
+  Therefore, the tank's temperature at inlet is a function of time as
+  well as the tank's pressure at outlet. The time dependencies of
+  temperature and pressure leads to changes of steam quality at inlet
+  and outlet conditions as well as the tank's mean steam quality.
 </p>
-<h4>Suggestions</h4>
-Although the two-phase separator works for water introduced as two-phase
-medium (e.g. <a href=\"modelica://Modelica.Media.Water.WaterIF97_ph\">
-WaterIF97_phy</a>), it is recommended to use refrigerants as working fluids.
+<h4>
+  Suggestions
+</h4>Although the two-phase separator works for water introduced as
+two-phase medium (e.g. <a href=
+\"modelica://Modelica.Media.Water.WaterIF97_ph\">WaterIF97_phy</a>), it
+is recommended to use refrigerants as working fluids.
 </html>"));
 end TwoPhaseSeparator;

@@ -135,23 +135,51 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Exergy Destruction
 ")}),
-    Documentation(revisions="<html>
-<ul>
-<li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
+    Documentation(revisions="<html><ul>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
+  <li>December 2016, by Roozbeh Sangi:<br/>
+    revised
+  </li>
 </ul>
 </html>",
-    info="<html>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></h4>
+    info="<html><h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span>
+</h4>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">This model determines the exergy destruction of a boiler based on the inputs of the component.</span></li>
-<li><span style=\"font-family: MS Shell Dlg 2;\">It is used together with a HeatProducerAgent.</span></li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">This model determines
+    the exergy destruction of a boiler based on the inputs of the
+    component.</span>
+  </li>
+  <li>
+    <span style=\"font-family: MS Shell Dlg 2;\">It is used together with
+    a HeatProducerAgent.</span>
+  </li>
 </ul>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Instead of a calculation with the help of inflowing and outflowing enthaplies, this cost function calculates the exergy product based on a heat flux. The estimation of the average temperature of the heat flux causes a small uncertainty compared to the other approach. However, this cost function leads to a more stable and reliable simulation. Details can be found in the reference.</span></p>
-<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">References</span></h4>
+<h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span>
+</h4>
+<p>
+  <span style=\"font-family: MS Shell Dlg 2;\">Instead of a calculation
+  with the help of inflowing and outflowing enthaplies, this cost
+  function calculates the exergy product based on a heat flux. The
+  estimation of the average temperature of the heat flux causes a small
+  uncertainty compared to the other approach. However, this cost
+  function leads to a more stable and reliable simulation. Details can
+  be found in the reference.</span>
+</p>
+<h4>
+  <span style=
+  \"font-family: MS Shell Dlg 2; color: #008000;\">References</span>
+</h4>
 <ul>
-<li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
+  <li>Felix Bünning. Development of a Modelica-library for agent-based
+  control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen
+  University, Aachen, Germany.
+  </li>
 </ul>
 </html>"));
 end Boiler_ExergyDestruction_Simplified;

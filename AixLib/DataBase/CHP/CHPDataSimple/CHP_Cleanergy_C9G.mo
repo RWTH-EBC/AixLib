@@ -33,92 +33,222 @@ record CHP_Cleanergy_C9G
     Here high grade natural gas (11 .. 12 kWh/m3) is used.
 
     */
-  annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Cleanergy mini-BHKW C9G (low caloric gas) </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The electrical and thermal powers are in kW. The &quot;fuel input&quot; is in
-kW. The fuel consumption is in m&sup3;/h.</p>
-<p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3;
-(10 - 12 kWh/m&sup3;). </p>
-<h4><span style=\"color:#008000\">Data Sheet (English, German)</span></h4>
-<table summary=\"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
-<td valign=\"top\"><p>Max. noise level dB(A)</p></td>
-<td valign=\"top\"><p>49</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Dimensions (L x W x H) cm</p></td>
-<td valign=\"top\"><p>14.5 x 70 x 100</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Floor area m<sup>2</sup></p></td>
-<td valign=\"top\"><p>0.70</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Weight kg</p></td>
-<td valign=\"top\"><p>470</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Service interval hours</p></td>
-<td valign=\"top\"><p>10,000</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Fuels: natural gas (all qualities), mainly designed for
-low caloric gas (bio gas) </p></td>
-<td valign=\"top\"><p>yes</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Electrical output (modulating) kW</p></td>
-<td valign=\"top\"><p>2 - 9</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Thermal output kW</p></td>
-<td valign=\"top\"><p>8 - 25</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Power consumption (gas) kW</p></td>
-<td valign=\"top\"><p>~36</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Electrical efficiency </p></td>
-<td valign=\"top\"><p>21 &#37; (24&#37; capacity), 24 &#37;
-(80&#37; capacity)</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Thermal efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>58 &#37; (24&#37; capacity), 70 &#37;
-(80&#37; capacity)</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Total efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>79 &#37; (24&#37; capacity), 94 &#37;
-(80&#37; capacity)</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Flow temperature (constant) &deg;C</p></td>
-<td valign=\"top\"><p>60 &ndash; 65 (optimal: 50 &deg;C)</p></td>
-</tr>
-<tr>
-<td valign=\"top\"><p>Max. return temperature (variable) &deg;C</p></td>
-<td valign=\"top\"><p>50 (TRmin = 30 &deg;C)</p></td>
-</tr>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Cleanergy mini-BHKW C9G (low caloric gas)
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The electrical and thermal powers are in kW. The \"fuel input\" is in
+  kW. The fuel consumption is in m³/h.
+</p>
+<p>
+  The calorific value of natural gas is assumed to be 11.5 kWh/m³ (10 -
+  12 kWh/m³).
+</p>
+<h4>
+  <span style=\"color:#008000\">Data Sheet (English, German)</span>
+</h4>
+<table summary=\"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\">
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Max. noise level dB(A)
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        49
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Dimensions (L x W x H) cm
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        14.5 x 70 x 100
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Floor area m<sup>2</sup>
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        0.70
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Weight kg
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        470
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Service interval hours
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        10,000
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Fuels: natural gas (all qualities), mainly designed for low
+        caloric gas (bio gas)
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        yes
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Electrical output (modulating) kW
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        2 - 9
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Thermal output kW
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        8 - 25
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Power consumption (gas) kW
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        ~36
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Electrical efficiency
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        21 % (24% capacity), 24 % (80% capacity)
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Thermal efficiency excluding optional condenser
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        58 % (24% capacity), 70 % (80% capacity)
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Total efficiency excluding optional condenser
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        79 % (24% capacity), 94 % (80% capacity)
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Flow temperature (constant) °C
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        60 – 65 (optimal: 50 °C)
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td valign=\"top\">
+      <p>
+        Max. return temperature (variable) °C
+      </p>
+    </td>
+    <td valign=\"top\">
+      <p>
+        50 (TRmin = 30 °C)
+      </p>
+    </td>
+  </tr>
 </table>
-<p><br/>
-<br/>
-<b>The CHP engine is not designed for continuous operation at more
-than 80&#37; load (7.2 kW).</b> Continuous use at higher load than 80&#37;
-decreases the time between services.</p>
-<p>For low methane applications, the C9G LowCal is capped to 120 bar engine
-pressure being equivalent to 7.2 kW.</p>
-<p>Source:</p>
+<p>
+  <br/>
+  <br/>
+  <b>The CHP engine is not designed for continuous operation at more
+  than 80% load (7.2 kW).</b> Continuous use at higher load than 80%
+  decreases the time between services.
+</p>
+<p>
+  For low methane applications, the C9G LowCal is capped to 120 bar
+  engine pressure being equivalent to 7.2 kW.
+</p>
+<p>
+  Source:
+</p>
 <ul>
-<li>URL: <a href=\"http://www.ecpower.eu/deutsch/xrgi/technische-daten/xrgir-9.html\">www.ecpower.eu/xrgir-9.html</a></li>
+  <li>URL: <a href=
+  \"http://www.ecpower.eu/deutsch/xrgi/technische-daten/xrgir-9.html\">www.ecpower.eu/xrgir-9.html</a>
+  </li>
 </ul>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>January 24, 2013</i> by Peter Matthes:<br/>
-implemented</li>
+        revisions="<html><ul>
+  <li>
+    <i>January 24, 2013</i> by Peter Matthes:<br/>
+    implemented
+  </li>
 </ul>
 </html>"));
 end CHP_Cleanergy_C9G;

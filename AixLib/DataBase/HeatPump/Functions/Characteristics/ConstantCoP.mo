@@ -12,12 +12,16 @@ function ConstantCoP "Constant CoP and constant electric power"
 algorithm
   Char:= {powerCompressor,powerCompressor*CoP};
 
-  annotation (Documentation(info="<html>
-<p>Carnot CoP and constant electric power, no dependency on speed or mass flow rates!</p>
+  annotation (Documentation(info="<html><p>
+  Carnot CoP and constant electric power, no dependency on speed or
+  mass flow rates!
+</p>
 </html>",
-    revisions="<html>
-<ul>
-<li><i>June 21, 2015&nbsp;</i> by Kristian Huchtemann:<br/>implemented</li>
+    revisions="<html><ul>
+  <li>
+    <i>June 21, 2015&#160;</i> by Kristian Huchtemann:<br/>
+    implemented
+  </li>
 </ul>
 </html>
 "));

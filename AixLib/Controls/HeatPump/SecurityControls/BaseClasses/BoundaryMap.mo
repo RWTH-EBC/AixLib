@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block BoundaryMap
   "Block which returns false if the input parameters are out of the given charasteristic map.
 For the boundaries of the y-input value, a dynamic hysteresis is used to ensure a used device will stay off a certain time after shutdown."
@@ -76,15 +76,21 @@ equation
           53},{-35.3,53}}, color={0,0,127}));
   annotation (Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
-    Documentation(info="<html>
-<p>Given an input of the x and y-Axis, the block returns true if the given point is outside of the given envelope.</p>
-<p>The maximal and minmal y-value depend on the x-Value and are defined by the upper and lower boundaries in form of 1Ds-Tables. The maximal and minimal x-values are obtained trough the table and are constant.</p>
-</html>",   revisions="<html>
+    Documentation(info="<html><p>
+  Given an input of the x and y-Axis, the block returns true if the
+  given point is outside of the given envelope.
+</p>
+<p>
+  The maximal and minmal y-value depend on the x-Value and are defined
+  by the upper and lower boundaries in form of 1Ds-Tables. The maximal
+  and minimal x-values are obtained trough the table and are constant.
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"),
       uses(AixLib(version="0.7.3"), Modelica(version="3.2.2")));

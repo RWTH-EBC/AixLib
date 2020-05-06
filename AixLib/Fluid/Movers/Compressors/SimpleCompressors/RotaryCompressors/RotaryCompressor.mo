@@ -38,35 +38,36 @@ equation
           extent={{-22,46},{-18,26}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>October 20, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model of a simple rotary compressor that is used, for example, 
-in close-loop systems like heat pumps or chillers. It inherits from
-PartialCompressor which inherits from PartialCompression. Therefore, please 
-checkout these sub-models for further information of underlying modeling 
-approaches and parameterisation:
+  This is a model of a simple rotary compressor that is used, for
+  example, in close-loop systems like heat pumps or chillers. It
+  inherits from PartialCompressor which inherits from
+  PartialCompression. Therefore, please checkout these sub-models for
+  further information of underlying modeling approaches and
+  parameterisation:
 </p>
 <ul>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
-</li>
-<li>
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
-AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
-</li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
+    AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
+  </li>
+  <li>
+    <a href=
+    \"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+    AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
+  </li>
 </ul>
 <p>
-For this model, no further losses are assumed at inlet and outlet of
-the compressor.
+  For this model, no further losses are assumed at inlet and outlet of
+  the compressor.
 </p>
 </html>"));
 end RotaryCompressor;

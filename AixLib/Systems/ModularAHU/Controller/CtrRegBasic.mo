@@ -112,12 +112,20 @@ equation
           textString="Control")}),
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
-    Documentation(revisions="<html>
-<ul>
-<li>August 1, 2019, by Alexander K&uuml;mpel:<br/>Improvement.</li>
-<li>October 18, 2018, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>August 1, 2019, by Alexander Kümpel:<br/>
+    Improvement.
+  </li>
+  <li>October 18, 2018, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for heating and cooling registers. The controlled variable is the air outflow temperature T_air_out. The pump (if existing in hydraulic circuit) operates at constant frequency and is always on.</p>
+<p>
+  Simple controller for heating and cooling registers. The controlled
+  variable is the air outflow temperature T_air_out. The pump (if
+  existing in hydraulic circuit) operates at constant frequency and is
+  always on.
+</p>
 </html>"));
 end CtrRegBasic;

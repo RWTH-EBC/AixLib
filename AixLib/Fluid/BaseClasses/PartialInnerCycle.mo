@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BaseClasses;
+within AixLib.Fluid.BaseClasses;
 partial model PartialInnerCycle
   "Blackbox model of refrigerant cycle of a thermal machine (heat pump or chiller)"
 

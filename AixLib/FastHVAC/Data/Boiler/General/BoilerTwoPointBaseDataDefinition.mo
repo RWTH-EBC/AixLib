@@ -15,26 +15,25 @@ record BoilerTwoPointBaseDataDefinition
     "minimal heat power / thermal load, refering to net (inferior) calorific value";
   parameter Real[:,2] eta "normal supply level";
   annotation (Documentation(info="<html><h4>
-  <font color=\"#008000\">Overview</font>
+  <span style=\"color:#008000\">Overview</span>
 </h4>
 <p>
   Data set definition for real boilers. The Boiler has a two point
   (on/off) characteristic.
 </p>
 <h4>
-  <font color=\"#008000\">Level of Development</font>
+  <span style=\"color:#008000\">Level of Development</span>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\" />
+  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\">
 </p>
 <h4>
-  <font color=\"#008000\">References</font>
+  <span style=\"color:#008000\">References</span>
 </h4>
 <p>
   Base data definition for record used with <a href=
   \"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a>
 </p>
-</html>", revisions="<html>
 <ul>
   <li>
     <i>June 19, 2013&#160;</i> by Ole Odendahl:<br/>

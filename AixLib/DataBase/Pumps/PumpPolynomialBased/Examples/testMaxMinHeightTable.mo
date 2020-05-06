@@ -41,12 +41,16 @@ equation
   connect(Q.y, maxMinTable.u[2])
     annotation (Line(points={{-39,0},{-13,0}}, color={0,0,127}));
   annotation (
-    Documentation(revisions="<html>
-<ul>
-<li><pre>2017-11-23 by Peter Matthes<br />Implemented.</pre></li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <pre>2017-11-23 by Peter Matthes<br/>Implemented.</pre>
+  </li>
 </ul>
 </html>", info="<html>
-<p>This test can be used to display the maximum and minimum pump curves as defined in the maxMinHeight parameter matrix.</p>
+<p>
+  This test can be used to display the maximum and minimum pump curves
+  as defined in the maxMinHeight parameter matrix.
+</p>
 </html>"),
     experiment,
     __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/DataBase/Pumps/ControlPump/Examples/testMaxMinHeightTable.mos"));

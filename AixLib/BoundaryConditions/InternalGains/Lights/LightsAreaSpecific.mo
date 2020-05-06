@@ -39,16 +39,35 @@ model LightsAreaSpecific "Heat flow due to lighting relative to room area and sp
           thickness=1),
         Line(
           points={{-28,-42},{-28,-80},{28,-80},{28,-42}},
-          thickness=1)}), Documentation(revisions="<html>
-<ul>
-    <li><i>March 30, 2020</i> by Philipp Mehrfeld:<br/><a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>: Summarize models to partial model. Make all models dependant from a relative input 0..1. Many refactorings.</li>
-<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
-<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
-<li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+          thickness=1)}), Documentation(revisions="<html><ul>
+  <li>
+    <i>March 30, 2020</i> by Philipp Mehrfeld:<br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/886\">#886</a>:
+    Summarize models to partial model. Make all models dependant from a
+    relative input 0..1. Many refactorings.
+  </li>
+  <li>
+    <i>October 21, 2014&#160;</i> by Ana Constantin:<br/>
+    Added a lower positive limit to the surface area, so it will not
+    lead to a division by zero
+  </li>
+  <li>
+    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+    Uses components from MSL and respects the naming conventions
+  </li>
+  <li>
+    <i>May 07, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>",
-    info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Heat source with convective and radiative component. The load is determined by multiplying a schedule (input 0..1) and a specific thermal power and the room&apos;s area. </p>
+    info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Heat source with convective and radiative component. The load is
+  determined by multiplying a schedule (input 0..1) and a specific
+  thermal power and the room's area.
+</p>
 </html>"));
 end LightsAreaSpecific;

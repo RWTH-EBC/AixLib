@@ -23,53 +23,48 @@ initial equation
           + "\n  dpDamOpe_nominal = " + String(dpDamOpe_nominal));
    annotation (
 defaultComponentName="vavDam",
-Documentation(info="<html>
-<p>
-Model of two resistances in series. One resistance has a fixed flow coefficient, the
-other resistance is an air damper whose flow coefficient is an exponential function of the opening angle.
+Documentation(info="<html><p>
+  Model of two resistances in series. One resistance has a fixed flow
+  coefficient, the other resistance is an air damper whose flow
+  coefficient is an exponential function of the opening angle.
 </p>
 <p>
-If <code>dp_nominalIncludesDamper=true</code>, then the parameter <code>dp_nominal</code>
-is equal to the pressure drop of the damper plus the fixed flow resistance at the nominal
-flow rate.
-If <code>dp_nominalIncludesDamper=false</code>, then <code>dp_nominal</code>
-does not include the flow resistance of the air damper.
+  If <code>dp_nominalIncludesDamper=true</code>, then the parameter
+  <code>dp_nominal</code> is equal to the pressure drop of the damper
+  plus the fixed flow resistance at the nominal flow rate. If
+  <code>dp_nominalIncludesDamper=false</code>, then
+  <code>dp_nominal</code> does not include the flow resistance of the
+  air damper.
 </p>
-</html>", revisions="<html>
 <ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-December 14, 2012 by Michael Wetter:<br/>
-Renamed protected parameters for consistency with the naming conventions.
-</li>
-<li>
-April 13, 2010 by Michael Wetter:<br/>
-Added <code>noEvent</code> to guard evaluation of the square root
-for negative numbers during the solver iterations.
-</li>
-<li>
-June 10, 2008 by Michael Wetter:<br/>
-Introduced new partial base class,
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
-PartialDamperExponential</a>.
-</li>
-<li>
-September 11, 2007 by Michael Wetter:<br/>
-Redefined <code>kRes</code>, now the pressure drop of the fully open damper is subtracted from the fixed resistance.
-</li>
-<li>
-February 24, 2010 by Michael Wetter:<br/>
-Added parameter <code>dp_nominalIncludesDamper</code>.
-</li>
-<li>
-July 27, 2007 by Michael Wetter:<br/>
-First implementation.
-</li>
+  <li>January 22, 2016, by Michael Wetter:<br/>
+    Corrected type declaration of pressure difference. This is for
+    <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+  </li>
+  <li>December 14, 2012 by Michael Wetter:<br/>
+    Renamed protected parameters for consistency with the naming
+    conventions.
+  </li>
+  <li>April 13, 2010 by Michael Wetter:<br/>
+    Added <code>noEvent</code> to guard evaluation of the square root
+    for negative numbers during the solver iterations.
+  </li>
+  <li>June 10, 2008 by Michael Wetter:<br/>
+    Introduced new partial base class, <a href=
+    \"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
+    PartialDamperExponential</a>.
+  </li>
+  <li>September 11, 2007 by Michael Wetter:<br/>
+    Redefined <code>kRes</code>, now the pressure drop of the fully
+    open damper is subtracted from the fixed resistance.
+  </li>
+  <li>February 24, 2010 by Michael Wetter:<br/>
+    Added parameter <code>dp_nominalIncludesDamper</code>.
+  </li>
+  <li>July 27, 2007 by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={

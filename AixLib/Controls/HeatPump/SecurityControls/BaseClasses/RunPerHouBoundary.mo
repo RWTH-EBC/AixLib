@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
+within AixLib.Controls.HeatPump.SecurityControls.BaseClasses;
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
   parameter Integer maxRunPer_h "Number of maximal on/off cycles per hour";
@@ -63,14 +63,20 @@ equation
           points={{0,0},{40,0}},
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>Everytime the boolean input signal has a rising edge, a counter is triggered and adds 1 to the total sum. This represents an on-turning of a certain device. With a delay this number is being substracted again, as this block counts the number of rising edges in a given amount of time(e.g. 1 hour). If this value is higher than a given maximal value, the output turns to false.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Everytime the boolean input signal has a rising edge, a counter is
+  triggered and adds 1 to the total sum. This represents an on-turning
+  of a certain device. With a delay this number is being substracted
+  again, as this block counts the number of rising edges in a given
+  amount of time(e.g. 1 hour). If this value is higher than a given
+  maximal value, the output turns to false.
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"));
 end RunPerHouBoundary;

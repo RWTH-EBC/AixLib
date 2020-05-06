@@ -41,26 +41,45 @@ equation
             fillPattern=FillPattern.Solid),
             Polygon(points = {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}},
             lineColor = {0, 0, 0}, fillColor = {175, 175, 175},
-            fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
- <ul>
- <li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>01.11.2013&nbsp;</i>
-    by Ana Constantin:<br/>
-    implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Simple table based pump model.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Simple table based pump model with the following features:</p>
- <ul>
- <li>Table for minimal and maximal characteristic</li>
- <li>Choice between two control strategies: 1. dp-const; 2. dp-var</li>
- <li>Input for switching to night mode. During night mode, the pump follows the minimal characteristic </li>
- </ul>
- <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
- <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
- </html>"));
+            fillPattern=FillPattern.Solid)}), Documentation(revisions="<html><ul>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>01.11.2013&#160;</i> by Ana Constantin:<br/>
+    implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simple table based pump model.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Simple table based pump model with the following features:
+</p>
+<ul>
+  <li>Table for minimal and maximal characteristic
+  </li>
+  <li>Choice between two control strategies: 1. dp-const; 2. dp-var
+  </li>
+  <li>Input for switching to night mode. During night mode, the pump
+  follows the minimal characteristic
+  </li>
+</ul>
+<p>
+  <br/>
+  <b><span style=\"color: #008000\">Example Results</span></b>
+</p>
+<p>
+  <a href=
+  \"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a>
+</p>
+</html>"));
 end Pump;

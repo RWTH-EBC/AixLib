@@ -141,29 +141,40 @@ equation
           extent={{-4,84},{94,40}},
           lineColor={0,0,255},
           textString="Top")}),
-    Documentation(info="<html>
-<p>Ventilation is determined from 4 effects:</p>
+    Documentation(info="<html><p>
+  Ventilation is determined from 4 effects:
+</p>
 <ol>
-<li>People acitivity: according to the occupancy profile more ventilation will happen, when more people are at home (active).</li>
-<li>Outside temperature: less ventilation at low temperatures and vice versa (people leave windows open in summer).</li>
-<li>Inside temperature: the higher the inside temperature, the more ventilation will occure (people preventing overheating).</li>
-<li>Leakage: due to leakage through cracks or openings there will be a constant air exchange.</li>
+  <li>People acitivity: according to the occupancy profile more
+  ventilation will happen, when more people are at home (active).
+  </li>
+  <li>Outside temperature: less ventilation at low temperatures and
+  vice versa (people leave windows open in summer).
+  </li>
+  <li>Inside temperature: the higher the inside temperature, the more
+  ventilation will occure (people preventing overheating).
+  </li>
+  <li>Leakage: due to leakage through cracks or openings there will be
+  a constant air exchange.
+  </li>
 </ol>
-</html>", revisions="<html>
 <ul>
-  <li><i>April, 2016&nbsp;</i>
-         by Peter Remmen:<br/>
-         Moved from Utilities to Controls</li>
+  <li>
+    <i>April, 2016&#160;</i> by Peter Remmen:<br/>
+    Moved from Utilities to Controls
+  </li>
 </ul>
 <ul>
-  <li><i>October, 2015&nbsp;</i>
-         by Moritz Lauster:<br/>
-         Adapted and moved to AixLib</li>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted and moved to AixLib
+  </li>
 </ul>
 <ul>
-  <li><i>May, 2008&nbsp;</i>
-         by Peter Matthes:<br/>
-         Implemented</li>
+  <li>
+    <i>May, 2008&#160;</i> by Peter Matthes:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end VentilationController;

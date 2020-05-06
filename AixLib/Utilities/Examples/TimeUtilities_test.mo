@@ -12,16 +12,29 @@ equation
   //Connection for night mode output
   boolNightMode = nightMode.IsNight.y;
   connect(boolNightMode, boolNightMode) annotation(Line(points = {{66, -20}, {66, -20}}, color = {255, 0, 255}));
-  annotation(experiment(StopTime = 604800, Interval = 600), Documentation(revisions = "<html>
- <ul>
- <li><i>April 25, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented model, added documentation and formatted appropriately</li>
- </ul>
- </html>
- ", info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Simulation to test the functionality of time concerning models.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>To check the calculations of models which are using the simulation time. There are no inputs required.</p>
- <p>Output values can be easily displayed via the provided output ports, one for each data type (real and boolean).</p>
- </html>"));
+  annotation(experiment(StopTime = 604800, Interval = 600), Documentation(revisions = "<html><ul>
+  <li>
+    <i>April 25, 2013&#160;</i> by Ole Odendahl:<br/>
+    Implemented model, added documentation and formatted appropriately
+  </li>
+</ul>
+</html>
+ ", info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the functionality of time concerning models.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  To check the calculations of models which are using the simulation
+  time. There are no inputs required.
+</p>
+<p>
+  Output values can be easily displayed via the provided output ports,
+  one for each data type (real and boolean).
+</p>
+</html>"));
 end TimeUtilities_test;

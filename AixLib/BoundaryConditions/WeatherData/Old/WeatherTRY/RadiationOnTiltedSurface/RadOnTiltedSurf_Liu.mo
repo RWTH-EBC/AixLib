@@ -160,22 +160,54 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
            pattern=LinePattern.None,
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={0,77,0})}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The <b>RadOnTiltedSurf</b> model calculates the total radiance on a tilted surface. </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=\"AixLib.Building.Components.Weather.BaseClasses.Sun\">Sun</a></b> model and weather data (beam and diffuse radiance on a horizontal surface for TRY format, or beam normal and global horizontal for TMY format) to compute total radiance on a tilted surface. It needs information on the tilt angle and the azimut angle of the surface, the latitude of the location and the ground reflection coefficient. </p>
-<p>The input InDayAngleSun is not explicitly used in the model, but it is part of the partial model and it doesn&apos;t interfere with the calculations. </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p>The model is checked within the <a href=\"AixLib.Building.Examples.Weather.WeatherModels\">weather</a> example as part of the <a href=\"AixLib.Building.Components.Weather.Weather\">weather</a> model. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <b>RadOnTiltedSurf</b> model calculates the total radiance on a
+  tilted surface.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=
+  \"AixLib.Building.Components.Weather.BaseClasses.Sun\">Sun</a></b>
+  model and weather data (beam and diffuse radiance on a horizontal
+  surface for TRY format, or beam normal and global horizontal for TMY
+  format) to compute total radiance on a tilted surface. It needs
+  information on the tilt angle and the azimut angle of the surface,
+  the latitude of the location and the ground reflection coefficient.
+</p>
+<p>
+  The input InDayAngleSun is not explicitly used in the model, but it
+  is part of the partial model and it doesn't interfere with the
+  calculations.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  The model is checked within the <a href=
+  \"AixLib.Building.Examples.Weather.WeatherModels\">weather</a> example
+  as part of the <a href=
+  \"AixLib.Building.Components.Weather.Weather\">weather</a> model.
+</p>
 </html>",
-    revisions="<html>
-<ul>
-  <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
-  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-  <li><i>March 14, 2005&nbsp;</i>
-         by Timo Haase:<br/>
-         Implemented.</li>
+    revisions="<html><ul>
+  <li>
+    <i>March 23, 2015&#160;</i> by Ana Constantin:<br/>
+    Adapted solar inputs so it cand work with both TRY and TMY weather
+    format
+  </li>
+  <li>
+    <i>May 02, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>
+    <i>March 14, 2005&#160;</i> by Timo Haase:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end RadOnTiltedSurf_Liu;

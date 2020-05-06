@@ -8,13 +8,18 @@ record CHP_FMB_410_GSMK "FMB-410-GSMK : Schmitt Enertec"
     maxTReturn=343.15,
     DPipe=0.13);
 
-  annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>Natural Gas CHP: Schmitt Enertec GmbH FMB-410-GSMK </p>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Natural Gas CHP: Schmitt Enertec GmbH FMB-410-GSMK
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>July 4, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>
+        revisions="<html><ul>
+  <li>
+    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added reference
+  </li>
 </ul>
 </html>"));
 end CHP_FMB_410_GSMK;

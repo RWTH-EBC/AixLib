@@ -103,21 +103,25 @@ equation
             -100},{100,100}})),
     experiment(StopTime=3600),
     __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Simple test set-up for the HeatPumpSimple model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. </p>
+    Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Simple test set-up for the HeatPumpSimple model. The heat pump is
+  turned on and off while the source temperature increases linearly.
+  Outputs are the electric power consumption of the heat pump and the
+  supply temperature.
+</p>
 </html>",
-      revisions="<html>
- <ul>
-  <li>
-  May 19, 2017, by Mirko Engelpracht:<br/>
-  Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
+      revisions="<html><ul>
+  <li>May 19, 2017, by Mirko Engelpracht:<br/>
+    Added missing documentation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
   </li>
-  <li>
-  December 10, 2013, by Ole Odendahl:<br/>
-  Formatted documentation appropriately.
+  <li>December 10, 2013, by Ole Odendahl:<br/>
+    Formatted documentation appropriately.
   </li>
- </ul>
+</ul>
 </html>
 "));
 end HeatPumpSimple;

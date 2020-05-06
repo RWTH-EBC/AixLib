@@ -3,8 +3,7 @@ package Fluid "Package with models for fluid flow systems"
   extends Modelica.Icons.Package;
 
 annotation (
-preferredView="info", Documentation(info="<html>
-This package contains obsolete models for fluid flow systems.
+preferredView="info", Documentation(info="<html>This package contains obsolete models for fluid flow systems.
 </html>"),
 Icon(graphics={
         Polygon(points={{-70,26},{68,-44},{68,26},{2,-10},{-70,-42},{-70,26}},

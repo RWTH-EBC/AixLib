@@ -81,26 +81,40 @@ equation
               "modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SkylineShadowing.png")}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+    Documentation(revisions="<html><ul>
+  <li>May 23, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>", info="<html>
-<p>This model considers third party shadowing due to horizon vertical
-exaggeration and/or obstruction for direct radiation based on VDI 6007 part 3.
-It calculates a limit elevation angle for the sun.</p>
-<p><img alt=\"SkylineShadowing\" src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SkylineShadowing.png\" height=\"400\"/></p>
-<p><img alt=\"SkylineShadowing\" src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SkylineShadowing(2).png\" height=\"400\"/></p>
-The figures show how the parameter should be set. For every considered
- cornerpoint of the skyline there should be an azimut, a heightdifference
-  between the cornerpoint and the middle of the window and a distance between
-   the window centre and the cornerpoint. The Boolean gap indicates if there is
-    a gap in the skyline and should be set for every cornerpointpair.
-In the example above it should be set {false,false,true,false,false} for the
- pairs {1+2,2+3,3+4,4+5,5+6}.
-<p><b>References</b> </p>
-<p>VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
- Calculation of transient thermal response of rooms and buildings -
- Modelling of solar radiation.</p>
+<p>
+  This model considers third party shadowing due to horizon vertical
+  exaggeration and/or obstruction for direct radiation based on VDI
+  6007 part 3. It calculates a limit elevation angle for the sun.
+</p>
+<p>
+  <img alt=\"SkylineShadowing\" src=
+  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SkylineShadowing.png\"
+  height=\"400\">
+</p>
+<p>
+  <img alt=\"SkylineShadowing\" src=
+  \"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/SkylineShadowing(2).png\"
+  height=\"400\">
+</p>The figures show how the parameter should be set. For every
+considered cornerpoint of the skyline there should be an azimut, a
+heightdifference between the cornerpoint and the middle of the window
+and a distance between the window centre and the cornerpoint. The
+Boolean gap indicates if there is a gap in the skyline and should be
+set for every cornerpointpair. In the example above it should be set
+{false,false,true,false,false} for the pairs {1+2,2+3,3+4,4+5,5+6}.
+<p>
+  <b>References</b>
+</p>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  Modelling of solar radiation.
+</p>
 </html>"));
 end SkylineShadowing;

@@ -5,13 +5,10 @@ package Airflow "Package to compute airflow and contaminant transport between ro
 
 annotation (
   preferredView="info",
-  Documentation(info="<html>
-This package provides
-models to compute the air flow between different rooms and between
-a room and the exterior environment.
-For models that compute airflow in duct networks, see
-<a href=\"modelica://AixLib.Fluid\">
-Buildings.Fluid</a>.
+  Documentation(info="<html>This package provides models to compute the air flow between different
+rooms and between a room and the exterior environment. For models that
+compute airflow in duct networks, see <a href=
+\"modelica://AixLib.Fluid\">Buildings.Fluid</a>.
 </html>"),
   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
       graphics={

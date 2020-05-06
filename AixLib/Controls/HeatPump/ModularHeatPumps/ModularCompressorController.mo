@@ -67,30 +67,32 @@ equation
                 Line(
                   points={{18,-32},{-14,-38}},
                   color={0,0,0},
-                  thickness=0.5)}), Documentation(revisions="<html>
-<ul>
-  <li>
-  October 29, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+                  thickness=0.5)}), Documentation(revisions="<html><ul>
+  <li>October 29, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This a controller block used for modular compressor models as presented in 
-<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors\">
-AixLib.Fluid.Movers.Compressors.ModularCompressors</a>. The controller block 
-consists of simple PID controllers for each compressor and no further control 
-strategy is implemented yet. However, these PID controller are only initialised a
-nd activated if no external controller is provided (i.g. if 
-<code>useExt = false</code>).
+  This a controller block used for modular compressor models as
+  presented in <a href=
+  \"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors\">AixLib.Fluid.Movers.Compressors.ModularCompressors</a>.
+  The controller block consists of simple PID controllers for each
+  compressor and no further control strategy is implemented yet.
+  However, these PID controller are only initialised a nd activated if
+  no external controller is provided (i.g. if <code>useExt =
+  false</code>).
 </p>
-<h4>Implementation</h4>
+<h4>
+  Implementation
+</h4>
 <p>
-If the controller block is implemented, appropriate values must be applied
-for all parameters describing the PID controller. Furthermore, a sensible 
-control strategy must be applied to determine the set signals of the compressors
-if more than one compressor is used.
+  If the controller block is implemented, appropriate values must be
+  applied for all parameters describing the PID controller.
+  Furthermore, a sensible control strategy must be applied to determine
+  the set signals of the compressors if more than one compressor is
+  used.
 </p>
 </html>"));
 end ModularCompressorController;

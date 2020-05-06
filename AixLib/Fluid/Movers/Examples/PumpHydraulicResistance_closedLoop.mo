@@ -45,21 +45,40 @@ equation
  a point of fixed pressure
  before a pump
  when building a closed loop")}), experiment(StopTime = 86400, Interval = 60),
- Documentation(revisions="<html>
- <ul>
- <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe and change medium</li>
- <li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>01.11.2013&nbsp;</i>
-       by Ana Constantin:<br/>
-      implemented</li>
- </ul>
- </html>", info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Simple example with a pump, a hydraulic resistance, two pipes in a loop.</p>
- <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
- <p>Always have a point of fixed pressure before the pump in order to be able to solve the equation for the closed loop.</p>
- <p>With different control strategies for the pump, you have different dependecies of the head from the volume flow. For visualisation plot the head as a function of the volume flow. </p>
- </html>"));
+ Documentation(revisions="<html><ul>
+  <li>
+    <i>October 11, 2016</i> by Marcus Fuchs:<br/>
+    Replace pipe and change medium
+  </li>
+  <li>
+    <i>November 2014&#160;</i> by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class
+  </li>
+  <li>
+    <i>01.11.2013&#160;</i> by Ana Constantin:<br/>
+    implemented
+  </li>
+</ul>
+</html>", info = "<html>
+<h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simple example with a pump, a hydraulic resistance, two pipes in a
+  loop.
+</p>
+<p>
+  <br/>
+  <b><span style=\"color: #008000\">Concept</span></b>
+</p>
+<p>
+  Always have a point of fixed pressure before the pump in order to be
+  able to solve the equation for the closed loop.
+</p>
+<p>
+  With different control strategies for the pump, you have different
+  dependecies of the head from the volume flow. For visualisation plot
+  the head as a function of the volume flow.
+</p>
+</html>"));
 end PumpHydraulicResistance_closedLoop;

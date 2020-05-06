@@ -277,52 +277,76 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-        Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>A table based combined heat and power (CHP) model. Depending on the user
-choice, this model can be both heat and electricity driven. </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>When controlled by heat demand, the CHP is controlled either by flow
-temperature or by return temperature. When electricity control is activated, an
-electricity profile needs to be connected to the model. During electricity
-controlled operation, heat controllers act as emergency systems.</p>
-<p>A complete On/Off controller is implemented which takes charge of the timing
-of each turning on and off command. For example it can be set that between each
-on and off command, the CHP needs 300 seconds (set in parameter SD_delay) to be
-able to execute the other command. During this time a PI controller controls the
-temperature continuously.</p>
-<p>Minimum possible capacity can be set to prevent the CHP working in lower
-capacities. If the timing does not allow a shut down at times lower capacities
-are required, the CHP works on minimum capacity until the shut down is
-permitted. This can result in the rise of water temperature higher than setpoint
-and may in some cases result in temperatures higher than boiling point of water.
+        Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  A table based combined heat and power (CHP) model. Depending on the
+  user choice, this model can be both heat and electricity driven.
 </p>
-<p>The dimension of thermal and electrical power outputs and fuel input as well
-as the electricity profile should be in kW. The dimension of fuel consumption
-depends on the user&apos;s data. </p>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>The combustion temperature T_sorce is at the moment set to a constant value
-of 1748 K. The value is relevant for exergy analysis.</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  When controlled by heat demand, the CHP is controlled either by flow
+  temperature or by return temperature. When electricity control is
+  activated, an electricity profile needs to be connected to the model.
+  During electricity controlled operation, heat controllers act as
+  emergency systems.
+</p>
+<p>
+  A complete On/Off controller is implemented which takes charge of the
+  timing of each turning on and off command. For example it can be set
+  that between each on and off command, the CHP needs 300 seconds (set
+  in parameter SD_delay) to be able to execute the other command.
+  During this time a PI controller controls the temperature
+  continuously.
+</p>
+<p>
+  Minimum possible capacity can be set to prevent the CHP working in
+  lower capacities. If the timing does not allow a shut down at times
+  lower capacities are required, the CHP works on minimum capacity
+  until the shut down is permitted. This can result in the rise of
+  water temperature higher than setpoint and may in some cases result
+  in temperatures higher than boiling point of water.
+</p>
+<p>
+  The dimension of thermal and electrical power outputs and fuel input
+  as well as the electricity profile should be in kW. The dimension of
+  fuel consumption depends on the user's data.
+</p>
+<h4>
+  <span style=\"color:#008000\">Assumptions</span>
+</h4>
+<p>
+  The combustion temperature T_sorce is at the moment set to a constant
+  value of 1748 K. The value is relevant for exergy analysis.
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>
-Adapted to AixLib
-conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>
-Merged with
-AixLib</li>
-<li><i>January 09, 2006&nbsp;</i> by Peter Matthes:<br/>
-V0.1: Initial
-configuration.</li>
-<li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br/>
-Output for source
-Temperature added.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>
-Formatted documentation
-appropriately</li>
-<li>by Pooyan Jahangiri:<br/>
-First implementation.</li>
+revisions="<html><ul>
+  <li>
+    <i>December 08, 2016&#160;</i> by Moritz Lauster:<br/>
+    Adapted to AixLib conventions
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Pooyan Jahangiri:<br/>
+    Merged with AixLib
+  </li>
+  <li>
+    <i>January 09, 2006&#160;</i> by Peter Matthes:<br/>
+    V0.1: Initial configuration.
+  </li>
+  <li>
+    <i>November 28, 2014&#160;</i> by Roozbeh Sangi:<br/>
+    Output for source Temperature added.
+  </li>
+  <li>
+    <i>October 7, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
+  <li>by Pooyan Jahangiri:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end CHP;

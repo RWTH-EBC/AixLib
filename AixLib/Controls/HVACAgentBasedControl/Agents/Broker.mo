@@ -950,34 +950,83 @@ equation
       color={255,0,0},
       pattern=LinePattern.Dot));
 
-  annotation (Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
+  annotation (Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
 <ul>
-<li>This model is a broker agent which collects requests from room-agent and buys heat for the lowest price from producer agents.</li>
-<li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
-<li>It is used together with at least one room or consumer agent and at least one producer agent.</li>
+  <li>This model is a broker agent which collects requests from
+  room-agent and buys heat for the lowest price from producer agents.
+  </li>
+  <li>It is based on communication via UDP and logic implemented with
+  the help of the StateGraph Modelica library.
+  </li>
+  <li>It is used together with at least one room or consumer agent and
+  at least one producer agent.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The broker agent gets cooling- or heating requests from one or more room-agents and collects them to one big request. The broker then calls for proposals from all producer agents and afterwards collects the proposals. The best-suited price and capcity is chosen and confirmed to the related producer agent. The other agents are rejected. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the broker agent. For further information please refer to the first reference.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Broker.png\" alt=\"Broker\"/></p>
-<h4><span style=\"color: #008000\">References</span></h4>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The broker agent gets cooling- or heating requests from one or more
+  room-agents and collects them to one big request. The broker then
+  calls for proposals from all producer agents and afterwards collects
+  the proposals. The best-suited price and capcity is chosen and
+  confirmed to the related producer agent. The other agents are
+  rejected. The logic is implemented with the help of the StateGraph
+  library. Communication is realized with the help of the DeviceDriver
+  library and follows the language standards for multi-agent-systems
+  set by the FIPA to the highest possible extend for Modelica models.
+  The following figure shows the behaviour of the broker agent. For
+  further information please refer to the first reference.
+</p>
+<p>
+  <img src=
+  \"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Broker.png\"
+  alt=\"Broker\">
+</p>
+<h4>
+  <span style=\"color: #008000\">References</span>
+</h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
-<li>FIPA ACL Message Structure Specification</li>
-<li>FIPA Communicative Act Library Specification </li>
-<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller<span style=\"font-family: TimesNewRoman,serif;\">. A</span> Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
+  <li>Roozbeh Sangi, Felix Bünning, Johannes Fütterer, Dirk Müller. A
+  Platform for the Agent-based Control of HVAC Systems. Modelica
+  Conference, 2017, Prague, Czech Republic.
+  </li>
+  <li>FIPA ACL Message Structure Specification
+  </li>
+  <li>FIPA Communicative Act Library Specification
+  </li>
+  <li>Felix Bünning, Roozbeh Sangi, Dirk Müller<span style=
+  \"font-family: TimesNewRoman,serif;\">. A</span> Modelica library for
+  agent-based control of building HVAC systems. Applied Energy,
+  193:52-59, 2017.
+  </li>
 </ul>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
 <ul>
-<li><a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">Simple Heating System</a></li>
+  <li>
+    <a href=
+    \"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">
+    Simple Heating System</a>
+  </li>
 </ul>
 </html>",
-      revisions="<html>
-<ul>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
-<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
-<li>November 2016, by Felix B&uuml;nning: Added handling of proposals in case demand exceeds supply</li>
-<li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
+      revisions="<html><ul>
+  <li>December 2016, by Roozbeh Sangi:<br/>
+    revised
+  </li>
+  <li>December 2016, by Felix Bünning: Changed some variables to
+  Integer type in order to avoid warnings caused by using the \"==\"
+  operator
+  </li>
+  <li>November 2016, by Felix Bünning: Added handling of proposals in
+  case demand exceeds supply
+  </li>
+  <li>October 2015, by Felix Bünning: Developed and implemented
+  </li>
 </ul>
 </html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
             -500},{200,200}}), graphics={

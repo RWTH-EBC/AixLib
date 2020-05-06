@@ -44,18 +44,27 @@ equation
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={255,255,255},
           textString="min = %minBound")}),             Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li>
-March 26, 2020 by Philipp Mehrfeld:<br/>
-First implementation.
-See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/884\">#884</a>.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>March 26, 2020 by Philipp Mehrfeld:<br/>
+    First implementation. See <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/884\">#884</a>.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Asserts Real input value while passing it through to Real output.</p>
-<p>Level of assertion message can be selected. Error will directly abort the simulation.</p>
-<p>As during a period after initialization one might not want to assert the Real value, the parameter startTime can be set. <br/>
-Use <span style=\"font-family: Courier New;\">startTime = Modelica.Constants.inf </span>to totally avoid assertion (functionality then is the same as in<span style=\"font-family: Courier New;\"> Modelica.Blocks.Routing.RealPassThrough</span>).</p>
+<p>
+  Asserts Real input value while passing it through to Real output.
+</p>
+<p>
+  Level of assertion message can be selected. Error will directly abort
+  the simulation.
+</p>
+<p>
+  As during a period after initialization one might not want to assert
+  the Real value, the parameter startTime can be set.<br/>
+  Use <span style=\"font-family: Courier New;\">startTime =
+  Modelica.Constants.inf</span> to totally avoid assertion
+  (functionality then is the same as in <span style=
+  \"font-family: Courier New;\">Modelica.Blocks.Routing.RealPassThrough</span>).
+</p>
 </html>"));
 end RealPassThroughWithAssertion;

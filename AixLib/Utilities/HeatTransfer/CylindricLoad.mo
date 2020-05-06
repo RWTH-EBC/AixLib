@@ -52,21 +52,34 @@ equation
       y=0.18,
       width=0.6,
       height=0.6),
-    Documentation(revisions="<html>
-<ul>
-<li>
-January 24, 2020 by Philipp Mehrfeld:<br/>
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a> Switch to MSL capacity model and to Dynamics enumerator to control init and energy conversion during simulation.
-</li>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Transferred to AixLib</li>
-<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+    Documentation(revisions="<html><ul>
+  <li>January 24, 2020 by Philipp Mehrfeld:<br/>
+    <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/793\">#793</a>
+    Switch to MSL capacity model and to Dynamics enumerator to control
+    init and energy conversion during simulation.
+  </li>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Transferred to AixLib
+  </li>
+  <li>
+    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
 </ul>
 </html>
-",  info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p> The <code>CylindricLoad</code> model represents a cylindric heat capacity, which
-is described by its area, density, thickness and material specific heat
-capacity. </p>
+",  info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  The <code>CylindricLoad</code> model represents a cylindric heat
+  capacity, which is described by its area, density, thickness and
+  material specific heat capacity.
+</p>
 </html>"));
 end CylindricLoad;

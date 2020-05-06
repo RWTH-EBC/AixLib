@@ -233,29 +233,44 @@ equation
   extent={{-52,24},{62,-16}},
   lineColor={0,0,0},
   textString="%name")}),
-  Documentation(info="<html>
-  <p>Partial model for correction factors for transmitted solar radiation
-  through a transparent element.</p>
-  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
-  uses this model to calculate the correction values for double pane windows.
-  This model can be used as a partial model to calculate the correction values
-  for single pane windows and triple pane windows according to the VDI
-  Guideline <\\p>
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI 6007-3
-  June 2015. Calculation of transient thermal response of rooms
-  and buildings - modelling of solar radiation.</p>
-  </html>", revisions="<html>
-<ul>
-<li>
-  <p><i>February 24, 2014</i> by Reza Tavakoli:</p>
-  <p>Implemented. </p>
-</li>
-<li>
-<p><i>May 25, 2016 </i>by Stanley Risch:</p>
-<p>Added the correction of the translucence factor according to VDI6007 Part 3
+  Documentation(info="<html><p>
+  Partial model for correction factors for transmitted solar radiation
+  through a transparent element.
 </p>
-</li>
+<p>
+  <a href=
+  \"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
+  uses this model to calculate the correction values for double pane
+  windows. This model can be used as a partial model to calculate the
+  correction values for single pane windows and triple pane windows
+  according to the VDI Guideline &lt;\\p&gt;
+</p>
+<h4>
+  References
+</h4>
+<p>
+  VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
+  Calculation of transient thermal response of rooms and buildings -
+  modelling of solar radiation.
+</p>
+<ul>
+  <li>
+    <p>
+      <i>February 24, 2014</i> by Reza Tavakoli:
+    </p>
+    <p>
+      Implemented.
+    </p>
+  </li>
+  <li>
+    <p>
+      <i>May 25, 2016</i> by Stanley Risch:
+    </p>
+    <p>
+      Added the correction of the translucence factor according to
+      VDI6007 Part 3
+    </p>
+  </li>
 </ul>
-  </html>"));
+</html>"));
 end PartialCorrectionGTaue;

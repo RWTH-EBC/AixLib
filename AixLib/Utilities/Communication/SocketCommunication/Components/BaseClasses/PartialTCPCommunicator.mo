@@ -22,12 +22,24 @@ equation
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
-            Documentation(info="<html>
-<p>This is a partial model for a model which handles TCP communication. It only establishes a connection to a server on a certain port and terminates it when the simulation ends. </p>
-<p>Check <a href=\"modelica://AixLib.Utilities.Communication.SocketCommunication.Components.TCPCommunicatorExample\">TCPCommunicatorExample
-</a> for an algorithm example for sending and receiving telegrams. </p>
-<p>Note a server needs to be accessible for communication. </p>
-<p>Higher Level protocols (&gt;OSI-Level 5) need to be added depending on the specific application. </p>
+            Documentation(info="<html><p>
+  This is a partial model for a model which handles TCP communication.
+  It only establishes a connection to a server on a certain port and
+  terminates it when the simulation ends.
+</p>
+<p>
+  Check <a href=
+  \"modelica://AixLib.Utilities.Communication.SocketCommunication.Components.TCPCommunicatorExample\">
+  TCPCommunicatorExample</a> for an algorithm example for sending and
+  receiving telegrams.
+</p>
+<p>
+  Note a server needs to be accessible for communication.
+</p>
+<p>
+  Higher Level protocols (&gt;OSI-Level 5) need to be added depending
+  on the specific application.
+</p>
 </html>",
 revisions="<HTML>
 <ul>

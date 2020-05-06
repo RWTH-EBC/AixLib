@@ -164,26 +164,29 @@ equation
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
           extent={{-7.0,-7.0},{7.0,7.0}})}),
-                                 Documentation(revisions="<html>
-<ul>
-  <li>
-  October 30, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+                                 Documentation(revisions="<html><ul>
+  <li>October 30, 2017, by Mirko Engelpracht:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This is a model of modular sensors that is used, for example, for components 
-of modular heat pumps like modular expansion valves or modular compressors.<br />
-It consists of four types of sensors that are introduced as vectors and that 
-are mainly used in heat pumps:
+  This is a model of modular sensors that is used, for example, for
+  components of modular heat pumps like modular expansion valves or
+  modular compressors.<br/>
+  It consists of four types of sensors that are introduced as vectors
+  and that are mainly used in heat pumps:
 </p>
 <ul>
-<li>Absolute pressure.</li>
-<li>Temperature.</li>
-<li>Mass flow rate.</li>
-<li>Steam quality.</li>
+  <li>Absolute pressure.
+  </li>
+  <li>Temperature.
+  </li>
+  <li>Mass flow rate.
+  </li>
+  <li>Steam quality.
+  </li>
 </ul>
 </html>"));
 end ModularSensors;

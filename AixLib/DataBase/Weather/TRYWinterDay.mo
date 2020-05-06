@@ -27,10 +27,12 @@ record TRYWinterDay
 82800,12,1,1,7,23,8,330,2,-3.8,1024.6,2.1,74,-1,0,0,9,282,-297,9;
 86400,12,1,1,7,24,8,330,2,-3.9,1024.8,2.1,74,-1,0,0,9,281,-297,9]);
 
-  annotation (Documentation(revisions="<html>
-<p>October 2014, Peter Remmen </p>
+  annotation (Documentation(revisions="<html><p>
+  October 2014, Peter Remmen
+</p>
 <ul>
-<li>implemented </li>
+  <li>implemented
+  </li>
 </ul>
 </html>"));
 end TRYWinterDay;

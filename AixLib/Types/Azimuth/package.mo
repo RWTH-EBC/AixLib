@@ -13,20 +13,17 @@ package Azimuth "List of possible constant values for surface azimuth"
 
 
   annotation(preferredView="info",
-Documentation(info="<html>
-<p>
-Possible constant values to define the azimuth of a surface.
-For example, if an exterior wall is South oriented, i.e., its outside-facing
-surface is towards South, use
- <code>AixLib.Types.Azimuth.S</code>.
+Documentation(info="<html><p>
+  Possible constant values to define the azimuth of a surface. For
+  example, if an exterior wall is South oriented, i.e., its
+  outside-facing surface is towards South, use
+  <code>AixLib.Types.Azimuth.S</code>.
 </p>
 </html>",
-  revisions="<html>
-<ul>
-<li>
-November 30 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
+  revisions="<html><ul>
+  <li>November 30 2010, by Michael Wetter:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>"));
 end Azimuth;

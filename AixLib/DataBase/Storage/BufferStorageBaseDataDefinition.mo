@@ -41,19 +41,35 @@ record BufferStorageBaseDataDefinition
   parameter Modelica.SIunits.Length lengthHC1 "Length of Pipe for HR1";
   parameter Modelica.SIunits.Length lengthHC2 "Length of Pipe for HR2";
 
-  annotation (Icon(graphics),               Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p> Base data definition for buffer storage records </p>
-<h4><font color=\"#008000\">References</font></h4>
-<p>Base data definition for record used with <a
-href=\"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and <a
-href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a> </p>
+  annotation (Icon(graphics),               Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Base data definition for buffer storage records
+</p>
+<h4>
+  <span style=\"color:#008000\">References</span>
+</h4>
+<p>
+  Base data definition for record used with <a href=
+  \"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and
+  <a href=
+  \"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a>
+</p>
 </html>",
-        revisions="<html>
-<ul>
-<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Transferred to AixLib</li>
-<li><i>July 4, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+        revisions="<html><ul>
+  <li>
+    <i>October 12, 2016&#160;</i> by Marcus Fuchs:<br/>
+    Add comments and fix documentation
+  </li>
+  <li>
+    <i>October 11, 2016&#160;</i> by Sebastian Stinner:<br/>
+    Transferred to AixLib
+  </li>
+  <li>
+    <i>July 4, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
 </ul>
 </html>"));
 end BufferStorageBaseDataDefinition;

@@ -84,18 +84,30 @@ equation
     annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));
   connect(Cooling.Q_flow,coolingPower)  annotation (Line(points={{26,-12.5},{56,
           -12.5},{56,-6},{100,-6}}, color={0,0,127}));
-  annotation (Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>This is the base class of an ideal heater and/or cooler. It is used in full ideal heater/cooler models as an extension. It extends another base class and adds some basic elements.</p>
- </html>", revisions="<html>
- <ul>
- <li>
-  <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
-  <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a> Assign dummy record as default parameter for zoneParam.
- </li>
- <li><i>October, 2015&nbsp;</i> by Moritz Lauster:<br/>Adapted to Annex60 and restructuring, implementing new functionalities</li>
- <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
- </ul>
+  annotation (Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is the base class of an ideal heater and/or cooler. It is used
+  in full ideal heater/cooler models as an extension. It extends
+  another base class and adds some basic elements.
+</p>
+<ul>
+  <li>
+    <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>
+    Assign dummy record as default parameter for zoneParam.
+  </li>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted to Annex60 and restructuring, implementing new
+    functionalities
+  </li>
+  <li>
+    <i>June, 2014&#160;</i> by Moritz Lauster:<br/>
+    Added some basic documentation
+  </li>
+</ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),

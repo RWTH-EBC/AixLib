@@ -43,11 +43,15 @@ equation
           textString="Control")}),
                                 Diagram(coordinateSystem(preserveAspectRatio=
             false)),
-    Documentation(revisions="<html>
-<ul>
-<li>October 25, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+    Documentation(revisions="<html><ul>
+  <li>October 25, by Alexander Kümpel:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Simple controller for unmixed circuit. Only the pump frequency has to be set. The pump is always on.</p>
+<p>
+  Simple controller for unmixed circuit. Only the pump frequency has to
+  be set. The pump is always on.
+</p>
 </html>"));
 end CtrPump;

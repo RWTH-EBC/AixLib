@@ -66,57 +66,90 @@ equation
       smooth=Smooth.None));
   annotation (preferredView="diagram",Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}), graphics),
-Documentation(revisions="<html>
-<ul>
-<li><i>August 25, 2018&nbsp;</i>
-         by Thomas Beutlich:<br/>
-         Changed data type of port from String to Integer. This is for:<a href=\"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a></li>
-  <li><i>September 03, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br />
-         Revised documented</li>
-           <li><i>June 01, 2013&nbsp;</i>
-  by Georg Ferdinand Schneider:<br />
-         Implemented</li>
+Documentation(revisions="<html><ul>
+  <li>
+    <i>August 25, 2018&#160;</i> by Thomas Beutlich:<br/>
+    Changed data type of port from String to Integer. This is
+    for:<a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/277\">#277</a>
+  </li>
+  <li>
+    <i>September 03, 2013&#160;</i> by Georg Ferdinand Schneider:<br/>
+    Revised documented
+  </li>
+  <li>
+    <i>June 01, 2013&#160;</i> by Georg Ferdinand Schneider:<br/>
+    Implemented
+  </li>
 </ul>
 </html>",
-info="<html>
-
-<p>This is a very simple example to show the TCP communication functionality.
-A feedback control is modeled where a gain controller controls a first
-order system. The signal is send to a server which returns the send message
-unaltered back to the client.</p>
-
-<h4>TCP/IP-server for testing</h4>
-
-<p>A server to test <code>ExampleClientLoop</code> is provided both as a source code <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.cpp\">*.cpp-file</a> and as an executable <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.exe\">*.exe-file</a>. The server simply echoes the received character message and sends it back
-to the sender (i.e. client). The code may be compiled and executed from the console. This code
-is taken from Microsoft's Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
-The server performs the following tasks:
+info="<html><p>
+  This is a very simple example to show the TCP communication
+  functionality. A feedback control is modeled where a gain controller
+  controls a first order system. The signal is send to a server which
+  returns the send message unaltered back to the client.
+</p>
+<h4>
+  TCP/IP-server for testing
+</h4>
+<p>
+  A server to test <code>ExampleClientLoop</code> is provided both as a
+  source code <a href=
+  \"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.cpp\">
+  *.cpp-file</a> and as an executable <a href=
+  \"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.exe\">
+  *.exe-file</a>. The server simply echoes the received character
+  message and sends it back to the sender (i.e. client). The code may
+  be compiled and executed from the console. This code is taken from
+  Microsoft's Winsock documentation pages: <a href=
+  \"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">
+  Link to MSDN</a>
+</p>The server performs the following tasks:
 <ul>
-<li>Initialise Winsock;</li>
-<li>Create a socket;</li>
-<li>Bind the socket;</li>
-<li>Wait and listen on the socket if a client connects;</li>
-<li>Accept incoming connection from client;</li>
-<li>Receive messages from client as long as it sends and return the received messages unaltered;</li>
-<li>Terminate connection and shut down.</li>
+  <li>Initialise Winsock;
+  </li>
+  <li>Create a socket;
+  </li>
+  <li>Bind the socket;
+  </li>
+  <li>Wait and listen on the socket if a client connects;
+  </li>
+  <li>Accept incoming connection from client;
+  </li>
+  <li>Receive messages from client as long as it sends and return the
+  received messages unaltered;
+  </li>
+  <li>Terminate connection and shut down.
+  </li>
 </ul>
-
-<h4>Usage</h4>
-<p>Open a console in Windows (Start -> Run -> insert: \"cmd\"), change folder
-to <code>.../AixLib/Resources/SocketCommunicationServer</code>,
-run <code>ExampleServer.exe</code>. The Server is now ready to operate.
-Now simulate <code>ExampleClientLoop</code>.</p>
-
-<h4>Verification of IP address</h4>
-
-<p>Note: Depending on your network settings it may be required to change
-the IP address in <code>ExampleClientLoop.tCPCommunicatorExample</code>.
-Set the IP address to the IP address of your local machine. (You may retrieve
-your local IP address in Windows from the console (Start -> Run -> insert: \"cmd\" -> ipconfig)).</p>
-
-<h4>Requirements</h4>
-<p>This example and the executable have been tested on Windows 7 64-bit using Dymola 2015 32-bit.</p>
+<h4>
+  Usage
+</h4>
+<p>
+  Open a console in Windows (Start -&gt; Run -&gt; insert: \"cmd\"),
+  change folder to
+  <code>.../AixLib/Resources/SocketCommunicationServer</code>, run
+  <code>ExampleServer.exe</code>. The Server is now ready to operate.
+  Now simulate <code>ExampleClientLoop</code>.
+</p>
+<h4>
+  Verification of IP address
+</h4>
+<p>
+  Note: Depending on your network settings it may be required to change
+  the IP address in
+  <code>ExampleClientLoop.tCPCommunicatorExample</code>. Set the IP
+  address to the IP address of your local machine. (You may retrieve
+  your local IP address in Windows from the console (Start -&gt; Run
+  -&gt; insert: \"cmd\" -&gt; ipconfig)).
+</p>
+<h4>
+  Requirements
+</h4>
+<p>
+  This example and the executable have been tested on Windows 7 64-bit
+  using Dymola 2015 32-bit.
+</p>
 </html>"),
  experiment(StopTime=10, __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,

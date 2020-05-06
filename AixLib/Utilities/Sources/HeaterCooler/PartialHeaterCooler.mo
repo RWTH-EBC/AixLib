@@ -23,15 +23,24 @@ partial model PartialHeaterCooler
           extent={{8,-20},{52,-30}},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None)}),                                                                                                    Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>This is the base class of an ideal heater and/or cooler. It is used in full ideal heater/cooler models as an extension.</p>
- </html>", revisions="<html>
- <ul>
- <li><i>October, 2015&nbsp;</i> by Moritz Lauster:<br/>Adapted to Annex60 and restructuring</li>
- </ul>
- <ul>
- <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
- </ul>
- </html>"));
+          pattern=LinePattern.None)}),                                                                                                    Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is the base class of an ideal heater and/or cooler. It is used
+  in full ideal heater/cooler models as an extension.
+</p>
+<ul>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted to Annex60 and restructuring
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>June, 2014&#160;</i> by Moritz Lauster:<br/>
+    Added some basic documentation
+  </li>
+</ul>
+</html>"));
 end PartialHeaterCooler;

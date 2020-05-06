@@ -10,12 +10,15 @@ record Vaillant_VWL_101 "Vaillant VWL10-1"
 
   annotation(preferedView="text", DymolaStoredErrors,
     Icon,
-    Documentation(revisions="<html>
-<ul>
- <li><i>Oct 14, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Transferred to AixLib.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>Oct 14, 2016&#160;</i> by Philipp Mehrfeld:<br/>
+    Transferred to AixLib.
+  </li>
 </ul>
 </html>",
-   info="<html>
-<p>According to data from Vaillant data sheets; EN14511 </p>
+   info="<html><p>
+  According to data from Vaillant data sheets; EN14511
+</p>
 </html>"));
 end Vaillant_VWL_101;

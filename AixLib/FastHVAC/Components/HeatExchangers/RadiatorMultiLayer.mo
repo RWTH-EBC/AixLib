@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatExchangers;
+within AixLib.FastHVAC.Components.HeatExchangers;
 model RadiatorMultiLayer "Simple radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
@@ -544,7 +544,7 @@ equation
   <br/>
   <img src=
   \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\"
-  alt=\"Multilayer Model of radiator \" />
+  alt=\"Multilayer Model of radiator \">
 </p>
 <p>
   Figure 1: Multilayer Model of radiator
@@ -559,7 +559,7 @@ equation
         <br/>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\"
-        alt=\"Equation for every layer\" />
+        alt=\"Equation for every layer\">
       </p>
     </td>
     <td>
@@ -584,7 +584,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_ab.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -599,7 +599,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K1.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -614,7 +614,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R1.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -632,12 +632,12 @@ equation
 <p>
   The convective heat emission is proportional to <img src=
   \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\"
-  alt=\"\" /> &#160;.
+  alt=\"\"> &#160;.
 </p>
 <p>
   The radiative heat emission is proportional to <img src=
   \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta.png\"
-  alt=\"\" /> &#160;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT:
+  alt=\"\"> &#160;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT:
   heater excess temperature, T_R: radiative temperature).
 </p>
 <table summary=\"\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\">
@@ -646,7 +646,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -661,7 +661,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -704,7 +704,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_ari.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -724,7 +724,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_log.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -744,7 +744,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -777,7 +777,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K1.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>
@@ -792,7 +792,7 @@ equation
       <p>
         <img src=
         \"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K2.png\"
-        alt=\"\" />
+        alt=\"\">
       </p>
     </td>
     <td>

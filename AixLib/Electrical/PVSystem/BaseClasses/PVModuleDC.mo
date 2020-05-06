@@ -56,17 +56,34 @@ equation
      Line(
       points={{-3,100},{100,0},{0,-100}},
       color={0,0,0})}),
-     Documentation(info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>The <b>PVmoduleDC_TMY3</b> model represents a simple PV cell. </p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>PV moduleDC has a temperature&nbsp;dependency&nbsp;for&nbsp;efficiency.</p>
+     Documentation(info="<html><h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  The <b>PVmoduleDC_TMY3</b> model represents a simple PV cell.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  PV moduleDC has a
+  temperature&#160;dependency&#160;for&#160;efficiency.
+</p>
 </html>",
-     revisions="<html>
-<ul>
-<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br/>Modification of Input to make the model compatible with diffent weather models</li>
-<li><i>October 11, 2016 </i>by Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>Februar 21, 2013 </i>by Corinna Leonhardt:<br/>Implemented</li>
+     revisions="<html><ul>
+  <li>
+    <i>October 20, 2017</i> by Larissa Kühn:<br/>
+    Modification of Input to make the model compatible with diffent
+    weather models
+  </li>
+  <li>
+    <i>October 11, 2016</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>Februar 21, 2013</i> by Corinna Leonhardt:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

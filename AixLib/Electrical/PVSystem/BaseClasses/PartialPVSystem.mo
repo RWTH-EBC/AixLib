@@ -44,9 +44,11 @@ equation
       extent={{-96,95},{97,-97}},
            textString="PV")}),                                   Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 20, 2017 </i> ,by Larissa Kuehn<br/>First implementation</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 20, 2017</i> ,by Larissa Kuehn<br/>
+    First implementation
+  </li>
 </ul>
 </html>"));
 end PartialPVSystem;

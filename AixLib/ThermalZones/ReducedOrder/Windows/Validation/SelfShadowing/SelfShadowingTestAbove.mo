@@ -87,11 +87,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}})),
-    Documentation(info="<html>
-<p>This model simulates a projection above the window.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model simulates a projection above the window.
+</p>
 <ul>
-<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end SelfShadowingTestAbove;

@@ -1144,13 +1144,16 @@ equation
   coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{120,120}})),
     Icon(coordinateSystem(extent={{-120,-100},{120,120}})),
-    Documentation(info="<html>
-<p>This model simulates parts of VDI2078 test case 1. The solar irradiation is
- treated as an input. To calculate the boundary conditions
- <a href=\"AixLib.BoundaryConditions\">AixLib</a> models are used. </p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  This model simulates parts of VDI2078 test case 1. The solar
+  irradiation is treated as an input. To calculate the boundary
+  conditions <a href=\"AixLib.BoundaryConditions\">AixLib</a> models are
+  used.
+</p>
 <ul>
-<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+  <li>July 17 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end TestCase1_Illumination;

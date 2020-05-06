@@ -130,21 +130,44 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.None,
           textString="[n] return")}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>January 11, 2019&nbsp;</i> by Fabian W&uuml;llhorst:<br/>
-Make model more dynamic (See <a href=\"https://github.com/RWTH-EBC/AixLib/issues/673\">#673</a>)</li>
-<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
-Added documentation.</li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>January 11, 2019&#160;</i> by Fabian Wüllhorst:<br/>
+    Make model more dynamic (See <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/673\">#673</a>)
+  </li>
+  <li>
+    <i>June 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>November 06, 2014&#160;</i> by Ana Constantin:<br/>
+    Added documentation.
+  </li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Model for a contributor for different floor heating circuits in a house.</p>
-<h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The contributor is built to connect <span style=\"font-family: Courier New;\">n</span> floor heating circuits together. The volume is used for nummerical reasons, to have a point where all the flows mix together. </p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a></p>
+<h4>
+  <span style=\"color: #008000\">Overview</span>
+</h4>
+<p>
+  Model for a contributor for different floor heating circuits in a
+  house.
+</p>
+<h4>
+  <span style=\"color: #008000\">Concept</span>
+</h4>
+<p>
+  The contributor is built to connect <span style=
+  \"font-family: Courier New;\">n</span> floor heating circuits together.
+  The volume is used for nummerical reasons, to have a point where all
+  the flows mix together.
+</p>
+<h4>
+  <span style=\"color: #008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a>
+</p>
 </html>"));
 end Distributor;

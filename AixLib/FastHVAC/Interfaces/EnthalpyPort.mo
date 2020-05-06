@@ -9,7 +9,6 @@ partial connector EnthalpyPort "Enthalpy port for 1-dim. enthalpy transfer"
 
   annotation (Documentation(info="<html>This is an interface model for a 1-dimensional enthalpy port to
 consider enthalpy transfer
-</html>", revisions="<html>
 <ul>
   <li>
     <i>April 25, 2017</i>, by Michael Mans:<br/>

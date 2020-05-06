@@ -203,15 +203,31 @@ equation
   connect(const.y, prescribedTemperature.T)
     annotation (Line(points={{55.2,-20},{49.6,-20}}, color={0,0,127}));
   annotation (
-    Documentation(info="<html>
-<p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
-<h4>Characteristics</h4>
-<p>There is a connecting pipe between distributer and collector of manifold so that the pressure difference between them becomes insignificant. The main pump only works against the resistance in the main circuit.</p>
-<p>The mass flow in primary and secondary circuits stay constant.</p>
-<p>The secondary circuits do not affect each other when switching operational modes.</p>
-</html>", revisions="<html>
+    Documentation(info="<html><p>
+  Admix circuit with a replaceable pump model for the distribution of
+  hot or cold water. All sensor and actor values are connected to the
+  hydraulic bus.
+</p>
+<h4>
+  Characteristics
+</h4>
+<p>
+  There is a connecting pipe between distributer and collector of
+  manifold so that the pressure difference between them becomes
+  insignificant. The main pump only works against the resistance in the
+  main circuit.
+</p>
+<p>
+  The mass flow in primary and secondary circuits stay constant.
+</p>
+<p>
+  The secondary circuits do not affect each other when switching
+  operational modes.
+</p>
 <ul>
-<li>August, 2018, by Alexander K&uuml;mpel:<br/>First implementation</li>
+  <li>August, 2018, by Alexander Kümpel:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"),
     experiment(StopTime=86400),
