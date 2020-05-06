@@ -36,6 +36,8 @@ trigger_branch:
         paths:
             - AixLib/HTML-logfile.txt
         expire_in: 1 h 
+    except:
+        - external_pull_requests 
     only:
         variables:
             - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
@@ -163,6 +165,8 @@ HTML_Check:
     script:
         - python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-view --log  --align --font
         - if cat bin/06_Configfiles/exit.sh | grep "exit 1"; then 
+            mkdir CorrectedVersion;
+            cd  CorrectedVersion;
             git clone --single-branch --branch $TARGET_BRANCH git@github.com:${Github_Repository}.git;
             cd ${CI_PROJECT_NAME};
             python bin/02_CITests/SyntaxTests/html_tidy_errors.py --s "AixLib" --correct-overwrite --align --font --log;
@@ -257,6 +261,9 @@ Open_Pull_Request:
        # sudo chmod +x bin/06_Configfiles/autoPullRequest.sh
        # bin/06_Configfiles/autoPullRequest.sh
       
+    except:
+        - external_pull_requests 
+    
     only:
         variables:
             - $CI_COMMIT_MESSAGE =~ /Correct HTML Code/
@@ -278,6 +285,7 @@ Delte_merge_Branches:
        - git config --global user.email "${GITLAB_USER_EMAIL}"
        - git config --global user.name  "${GITLAB_USER_NAME}" 
        - bin/06_Configfiles/delete_merged_branches.sh
+    
     
     only:
         variables:

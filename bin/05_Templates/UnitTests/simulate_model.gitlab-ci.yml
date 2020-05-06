@@ -25,8 +25,7 @@ Simulate_AixLib_Airflow:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_BoundaryConditions:
     stage: Simulate
@@ -48,8 +47,7 @@ Simulate_AixLib_BoundaryConditions:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_Controls:
     stage: Simulate
@@ -71,8 +69,7 @@ Simulate_AixLib_Controls:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_Electrical:
     stage: Simulate
@@ -94,8 +91,7 @@ Simulate_AixLib_Electrical:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_FastHVAC:
     stage: Simulate
@@ -117,8 +113,7 @@ Simulate_AixLib_FastHVAC:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_Fluid:
     stage: Simulate
@@ -140,8 +135,7 @@ Simulate_AixLib_Fluid:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_Media:
     stage: Simulate
@@ -163,8 +157,7 @@ Simulate_AixLib_Media:
         expire_in: 2 day 
     allow_failure: true      
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_Systems:
     stage: Simulate
@@ -186,8 +179,7 @@ Simulate_AixLib_Systems:
         expire_in: 2 day 
     allow_failure: true      
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    
 
 Simulate_AixLib_ThermalZones:
     stage: Simulate
@@ -209,5 +201,4 @@ Simulate_AixLib_ThermalZones:
         expire_in: 2 day 
     allow_failure: true      
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests    

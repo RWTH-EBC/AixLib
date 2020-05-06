@@ -29,8 +29,7 @@ Regression_overall_coverage:
         max: 2
         when: runner_system_failure
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
             
 Regressiontest_AixLib_Airflow:
     stage: RegressionTest
@@ -55,8 +54,7 @@ Regressiontest_AixLib_Airflow:
         max: 2
         when: runner_system_failure
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Regressiontest_AixLib_BoundaryConditions:
     stage: RegressionTest
@@ -80,8 +78,7 @@ Regressiontest_AixLib_BoundaryConditions:
         max: 2
         when: runner_system_failure
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Regressiontest_AixLib_Controls:
     stage: RegressionTest
@@ -106,8 +103,7 @@ Regressiontest_AixLib_Controls:
         max: 2
         when: runner_system_failure       
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/   
+        - external_pull_requests   
 
 #Regressiontest_AixLib_Electrical:
 #      stage: RegressionTest
@@ -173,8 +169,7 @@ Regressiontest_AixLib_Fluid:
         max: 2
         when: runner_system_failure  
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Regressiontest_AixLib_Media:
     stage: RegressionTest
@@ -198,8 +193,7 @@ Regressiontest_AixLib_Media:
         max: 2
         when: runner_system_failure  
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/        
+        - external_pull_requests     
 
 Regressiontest_AixLib_Systems:
     stage: RegressionTest
@@ -223,8 +217,7 @@ Regressiontest_AixLib_Systems:
         max: 2
         when: runner_system_failure          
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Regressiontest_AixLib_ThermalZones:
     stage: RegressionTest
@@ -248,5 +241,4 @@ Regressiontest_AixLib_ThermalZones:
         max: 2
         when: runner_system_failure        
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/       
+        - external_pull_requests       

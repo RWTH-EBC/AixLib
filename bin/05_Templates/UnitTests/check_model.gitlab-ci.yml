@@ -25,11 +25,14 @@ Check_AixLib_Airflow:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
+
+
+
 
 Check_AixLib_BoundaryConditions:
     stage: Check
+   
     services:
         -  docker
     before_script:
@@ -48,8 +51,7 @@ Check_AixLib_BoundaryConditions:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
             
 Check_AixLib_Controls:
     stage: Check
@@ -71,8 +73,7 @@ Check_AixLib_Controls:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Check_AixLib_Electrical:
     stage: Check
@@ -94,8 +95,7 @@ Check_AixLib_Electrical:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
             
 Check_AixLib_FastHVAC:
     stage: Check
@@ -117,8 +117,7 @@ Check_AixLib_FastHVAC:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-           - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Check_AixLib_Fluid:
     stage: Check
@@ -140,8 +139,7 @@ Check_AixLib_Fluid:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
 Check_AixLib_Media:
     stage: Check
@@ -163,9 +161,10 @@ Check_AixLib_Media:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
+        
+        
 Check_AixLib_Systems:
     stage: Check
     services:
@@ -186,8 +185,7 @@ Check_AixLib_Systems:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
 
     
 Check_AixLib_ThermalZones:
@@ -210,6 +208,5 @@ Check_AixLib_ThermalZones:
         expire_in: 2 day 
     allow_failure: true 
     only:
-        variables:
-            - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+        - external_pull_requests
  
