@@ -1,0 +1,3 @@
+translateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass");
+simulateModel("AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoopVarTSupplyDpFixedTempDifferenceBypass", stopTime=100000, method="dassl", tolerance=1e-006, resultFile="OpenLoopVarTSupplyDpFixedTempDifferenceBypass");
+createPlot(id=1, y={"demand.port_a.m_flow"}, filename="OpenLoopVarTSupplyDpFixedTempDifferenceBypass.mat");
