@@ -594,8 +594,8 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside > 283.15)
-                                           annotation (Placement(visible=true,
+        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside >
+            283.15)                        annotation (Placement(visible=true,
             transformation(
             origin={-169,49},
             extent={{-7,-7},{7,7}},
@@ -604,8 +604,8 @@ Controller")}),
         nIn=1,
         nOut=1,
         delay=180,
-        firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside <= 283.15)
-                                            annotation (Placement(visible=true,
+        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside <=
+            283.15)                         annotation (Placement(visible=true,
             transformation(
             origin={-169,35},
             extent={{-7,-7},{7,7}},
@@ -621,11 +621,13 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T14(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside <= 283.15)                                               annotation (
+        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside <=
+            283.15)                                                                                                             annotation (
         Placement(visible = true, transformation(origin = {-143, 41}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T15(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[2] or Superior_Mode[4] and TAirOutside > 283.15)                                             annotation (
+        firingCon=(Superior_Mode[2] or Superior_Mode[4]) and TAirOutside >
+            283.15)                                                                                                          annotation (
         Placement(visible = true, transformation(origin = {-157, 41}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T16(
         delay=180,
@@ -1029,17 +1031,17 @@ Controller")}),
         Placement(visible = true, transformation(origin = {-99, -31}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T153(
         delay=180,                        nIn = 1, nOut = 1,
-        firingCon=Superior_Mode[3] and T_GEO >= 290.15 or Superior_Mode[4])
+        firingCon=(Superior_Mode[3] and T_GEO >= 290.15) or Superior_Mode[4])
                                                              annotation (
         Placement(visible = true, transformation(origin = {-113, -31}, extent = {{-7, -7}, {7, 7}}, rotation = -90)));
       PNlib.Components.TD T154(nIn = 1, nOut = 1,
         delay=180,
-        firingCon=Superior_Mode[4] or Superior_Mode[3] and T_GEO >= 290.15)
+        firingCon=Superior_Mode[4] or (Superior_Mode[3] and T_GEO >= 290.15))
                                                   annotation (
         Placement(visible = true, transformation(origin = {-99, -59}, extent = {{-7, -7}, {7, 7}}, rotation = 90)));
       PNlib.Components.TD T155(
         delay=180,
-        firingCon=Superior_Mode[3] and T_GEO >= 290.15 or Superior_Mode[4],
+        firingCon=(Superior_Mode[3] and T_GEO >= 290.15) or Superior_Mode[4],
                                                          nIn = 1, nOut = 1) annotation (
         Placement(visible = true, transformation(origin = {-89, -53}, extent = {{-7, -7}, {7, 7}}, rotation = 180)));
       PNlib.Components.TD T156(
@@ -1661,8 +1663,9 @@ Controller")}),
                                                                   color = {255, 0, 255}, thickness = 0.5));
       connect(P13.pd_t, integerToBoolean1[29].u) annotation (Line(points={{
               200.48,50},{200,50},{200,20},{0,20},{0,-70.4}}, color={255,127,0}));
-      connect(HP_Combi.pd_t, integerToBoolean1[5].u) annotation (Line(points={{
-              -59.64,18},{-58,18},{-58,0},{0,0},{0,-70.4}}, color={255,127,0}));
+      connect(HP_Combi.pd_t, integerToBoolean1[5].u) annotation (Line(points={{-59.64,
+              18},{-60,18},{-60,0},{1.77636e-15,0},{1.77636e-15,-70.4}},
+                                                            color={255,127,0}));
       connect(HP_Combi.outTransition[3], T16.inPlaces[1]) annotation (Line(
             points={{-65.6,11.52},{-68,11.52},{-68,10},{-120,10},{-120,60},{
               -110.36,60},{-110.36,59}}, color={0,0,0}));
@@ -1711,25 +1714,37 @@ Controller")}),
         nOut=2,
         startTokens=0,
         minTokens=0,
-        maxTokens=1) annotation (Placement(transformation(
+        maxTokens=1,
+        reStart=true)
+                     annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-70,52})));
-      PNlib.Components.TD Off_Cooling(nIn=1, nOut=1,firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15) annotation (Placement(
+      PNlib.Components.TD Off_Cooling(nIn=1, nOut=1,
+        delay=30,
+        arcWeightIn={1},
+        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-44,72})));
-      PNlib.Components.TD Cooling_Off(nIn=1, nOut=1)
+
+      PNlib.Components.TD Cooling_Off(nIn=1, nOut=1,
+        delay=30,
+        arcWeightIn={1},
+        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15))
         annotation (Placement(transformation(extent={{-54,22},{-34,42}})));
       PNlib.Components.PD Heating(
         nIn=2,
         nOut=2,
         startTokens=0,
         minTokens=0,
-        maxTokens=1) annotation (Placement(transformation(
+        maxTokens=1,
+        reStart=true)
+                     annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={70,54})));
@@ -1738,17 +1753,25 @@ Controller")}),
         nOut=3,
         startTokens=1,
         minTokens=0,
-        maxTokens=1) annotation (Placement(transformation(
+        maxTokens=1,
+        reStart=true)
+                     annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={0,52})));
       PNlib.Components.TD Off_Heating(nIn=1, nOut=1,
-        firingCon=RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15 and not
-                                                                                     (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+        delay=30,
+        arcWeightIn={1},
+        arcWeightOut={1},
+        firingCon=(RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and not
+                                                                                      (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
             3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15))
         annotation (Placement(transformation(extent={{34,62},{54,82}})));
-      PNlib.Components.TD Heating_Off(nIn=1, nOut=1,firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+      PNlib.Components.TD Heating_Off(nIn=1, nOut=1,
+        delay=30,
+        arcWeightIn={1},
+        arcWeightOut={1},                           firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
             3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -1759,25 +1782,35 @@ Controller")}),
         nOut=3,
         startTokens=0,
         minTokens=0,
-        maxTokens=1) annotation (Placement(transformation(
+        maxTokens=1,
+        reStart=true)
+                     annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-38})));
-      PNlib.Components.T Combination_Cooling(nIn=1, nOut=1, firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15) annotation (Placement(
+      PNlib.Components.TD Combination_Cooling(nIn=1, nOut=1,
+        arcWeightIn={1},
+        arcWeightOut={1},                                   firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-90,-4})));
-      PNlib.Components.T Cooling_Combination(nIn=1, nOut=1, firingCon=RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15 and RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15) annotation (Placement(
+
+      PNlib.Components.TD Cooling_Combination(nIn=1, nOut=1,
+        arcWeightIn={1},
+        arcWeightOut={1},                                   firingCon=(RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-60,-4})));
-      PNlib.Components.T Combination_Off(nIn=1, nOut=1, firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+
+      PNlib.Components.TD Combination_Off(nIn=1, nOut=1,
+        arcWeightIn={1},
+        arcWeightOut={1},                               firingCon= not (RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
             3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and not
                                                                                       (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
             3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
@@ -1785,29 +1818,40 @@ Controller")}),
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-20,-4})));
-      PNlib.Components.T Off_Combination(nIn=1, nOut=1,firingCon=RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15 and RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15) annotation (Placement(
+
+      PNlib.Components.TD Off_Combination(nIn=1, nOut=1,
+        arcWeightIn={1},
+        arcWeightOut={1},                              firingCon=(RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={20,-4})));
-      PNlib.Components.T Heating_Combination(nIn=1, nOut=1, firingCon=RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15 and RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
-            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15) annotation (Placement(
+
+      PNlib.Components.TD Heating_Combination(nIn=1, nOut=1,
+        arcWeightIn={1},
+        arcWeightOut={1},                                   firingCon=(RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+            3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={60,-4})));
-      PNlib.Components.T Combination_Heating(nIn=1, nOut=1,  firingCon=RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
-            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15 and not
-                                                                                     (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
+
+      PNlib.Components.TD Combination_Heating(nIn=1, nOut=1,
+        arcWeightIn={1},
+        arcWeightOut={1},                                    firingCon=(RoomTempMea[1] < 286.15 or RoomTempMea[2] < 291.15 or RoomTempMea[
+            3] < 291.15 or RoomTempMea[4] < 291.15 or RoomTempMea[5] < 291.15) and not
+                                                                                      (RoomTempMea[1] > 290.15 or RoomTempMea[2] > 295.15 or RoomTempMea[
             3] > 295.15 or RoomTempMea[4] > 295.15 or RoomTempMea[5] > 295.15)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={90,-4})));
-      inner PNlib.Components.Settings settings
+
+
+      inner PNlib.Components.Settings settings(animateMarking=true, animatePlace=true)
         annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
       Modelica.Blocks.Interfaces.BooleanOutput Superior_Mode[4] annotation (
           Placement(transformation(
@@ -5701,7 +5745,77 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
         points={{94,-48},{-10,-48}},
         color={255,204,51},
         thickness=0.5));
-    annotation (experiment(StopTime=86400, Interval=30));
+    annotation (experiment(StopTime=86400, Interval=60));
   end testing_management_automation;
 
+  model testing_management_automation2
+    constant Real const1 = 295.15;
+    constant Real const2 = 291.15;
+    Level.ManagementLevel_Temp_V2 managementLevel_Temp_V2_1
+      annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
+    Modelica.Blocks.Sources.Sine sine(
+      amplitude=5,
+      freqHz=1/7200,
+      offset=288.15,
+      startTime=3600)
+      annotation (Placement(transformation(extent={{42,-18},{62,2}})));
+    Modelica.Blocks.Sources.Sine sine1(
+      amplitude=5,
+      freqHz=1/7200,
+      offset=293.15,
+      startTime=5400)
+      annotation (Placement(transformation(extent={{44,-52},{64,-32}})));
+    Level.AutomationLevel_V1 automationLevel_V1_1
+      annotation (Placement(transformation(extent={{-84,-18},{-44,2}})));
+    Modelica.Blocks.Sources.Sine sine2(
+      amplitude=10,
+      freqHz=1/86400,
+      offset=283.15,
+      startTime=8*3600)
+      annotation (Placement(transformation(extent={{0,-10},{20,10}})));
+    Modelica.Blocks.Sources.Constant const(k=283.15)
+      annotation (Placement(transformation(extent={{16,68},{36,88}})));
+  equation
+
+    connect(sine.y, managementLevel_Temp_V2_1.RoomTempMea[1]) annotation (Line(
+          points={{63,-8},{64,-8},{64,61.88},{-20,61.88}}, color={0,0,127}));
+
+    connect(sine1.y, managementLevel_Temp_V2_1.RoomTempMea[2]) annotation (Line(
+          points={{65,-42},{66,-42},{66,-38},{-20,-38},{-20,61.24}}, color={0,0,127}));
+    connect(sine1.y, managementLevel_Temp_V2_1.RoomTempMea[3]) annotation (Line(
+          points={{65,-42},{68,-42},{68,-40},{-20,-40},{-20,60.6}}, color={0,0,127}));
+    connect(sine1.y, managementLevel_Temp_V2_1.RoomTempMea[4]) annotation (Line(
+          points={{65,-42},{68,-42},{68,59.96},{-20,59.96}}, color={0,0,127}));
+    connect(sine1.y, managementLevel_Temp_V2_1.RoomTempMea[5]) annotation (Line(
+          points={{65,-42},{72,-42},{72,-46},{-20,-46},{-20,59.32}}, color={0,0,127}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[1], automationLevel_V1_1.Superior_Mode[
+      1]) annotation (Line(points={{-20,40.35},{-28,40.35},{-28,26},{-64,26},{
+            -64,3.75}}, color={255,0,255}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[2], automationLevel_V1_1.Superior_Mode[
+      2]) annotation (Line(points={{-20,39.85},{-22,39.85},{-22,34},{-64,34},{
+            -64,3.25}}, color={255,0,255}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[3], automationLevel_V1_1.Superior_Mode[
+      3]) annotation (Line(points={{-20,39.35},{-24,39.35},{-24,32},{-64,32},{
+            -64,2.75}}, color={255,0,255}));
+    connect(managementLevel_Temp_V2_1.Superior_Mode[4], automationLevel_V1_1.Superior_Mode[
+      4]) annotation (Line(points={{-20,38.85},{-22,38.85},{-22,36},{-64,36},{
+            -64,2.25}}, color={255,0,255}));
+    connect(sine.y, automationLevel_V1_1.TRoomMea[1]) annotation (Line(points={
+            {63,-8},{64,-8},{64,18},{-52,18},{-52,3.8}}, color={0,0,127}));
+    connect(sine1.y, automationLevel_V1_1.TRoomMea[2]) annotation (Line(points=
+            {{65,-42},{62,-42},{62,-52},{-52,-52},{-52,3.4}}, color={0,0,127}));
+    connect(sine1.y, automationLevel_V1_1.TRoomMea[3])
+      annotation (Line(points={{65,-42},{-52,-42},{-52,3}}, color={0,0,127}));
+    connect(sine1.y, automationLevel_V1_1.TRoomMea[4]) annotation (Line(points=
+            {{65,-42},{28,-42},{28,-40},{-52,-40},{-52,2.6}}, color={0,0,127}));
+    connect(sine1.y, automationLevel_V1_1.TRoomMea[5]) annotation (Line(points=
+            {{65,-42},{58,-42},{58,-44},{-52,-44},{-52,2.2}}, color={0,0,127}));
+    connect(automationLevel_V1_1.T_CS, const.y) annotation (Line(points={{-59.9,
+            3.1},{-59.9,22},{37,22},{37,78}}, color={0,0,127}));
+    connect(automationLevel_V1_1.T_GEO, const.y)
+      annotation (Line(points={{-56,3},{-56,78},{37,78}}, color={0,0,127}));
+    connect(automationLevel_V1_1.TAirOutside, sine2.y) annotation (Line(points=
+            {{-48,3},{-38,3},{-38,4},{21,4},{21,0}}, color={0,0,127}));
+    annotation (experiment(StopTime=86400, Interval=300));
+  end testing_management_automation2;
 end Mode_based_ControlStrategy;
