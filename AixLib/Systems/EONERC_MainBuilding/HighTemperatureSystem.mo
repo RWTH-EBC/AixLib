@@ -114,6 +114,18 @@ model HighTemperatureSystem
     m_flow_nominal=m_flow_nominal,
     V=0.1,
     nPorts=2) annotation (Placement(transformation(extent={{80,36},{100,56}})));
+  Modelica.Blocks.Math.Gain kWToW1(k=1000) annotation (Placement(transformation(
+        extent={{-3,-3},{3,3}},
+        rotation=180,
+        origin={-125,-45})));
+  Modelica.Blocks.Math.Gain kWToW2(k=1000) annotation (Placement(transformation(
+        extent={{-3,-3},{3,3}},
+        rotation=180,
+        origin={-125,-37})));
+  Modelica.Blocks.Math.Gain kWToW3(k=1000) annotation (Placement(transformation(
+        extent={{-3,-3},{3,3}},
+        rotation=180,
+        origin={-125,-29})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a(
     T_start=T_start,
@@ -143,7 +155,7 @@ equation
   connect(throttlePump.port_b1, cHP.port_a)
     annotation (Line(points={{-88,-20},{-88,-60}}, color={0,127,255}));
   connect(cHP.port_b, throttlePump.port_a2) annotation (Line(points={{-112,-60},
-          {-112,-50},{-116,-50},{-116,-20},{-112,-20}}, color={0,127,255}));
+          {-112,-20}},                                  color={0,127,255}));
   connect(admix1.hydraulicBus, hTCBus.admixBus1) annotation (Line(
       points={{80,0},{154,0},{154,99.085},{0.09,99.085}},
       color={255,204,51},
@@ -208,27 +220,6 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(cHP.electricalPower, hTCBus.electricalPowerChpMea) annotation (Line(
-        points={{-94,-49.2},{-94,-44},{-138,-44},{-138,99.085},{0.09,99.085}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(cHP.thermalPower, hTCBus.thermalPowerChpMea) annotation (Line(points={
-          {-97.6,-49.2},{-97.6,-44},{-138,-44},{-138,99.085},{0.09,99.085}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(cHP.fuelInput, hTCBus.fuelPowerChpMea) annotation (Line(points={{-102.4,
-          -49.2},{-102.4,-44},{-138,-44},{-138,100},{0.09,100},{0.09,99.085}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,-6},{-3,-6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(fixedTemperature.port, boiler2.T_amb) annotation (Line(points={{20,-90},
           {0,-90},{0,-66},{-28.16,-66}}, color={191,0,0}));
   connect(senT_a.T, hTCBus.T_out) annotation (Line(points={{106,66.6},{106,99.085},
@@ -265,6 +256,31 @@ equation
           {94,36},{88,36}}, color={0,127,255}));
   connect(vol.ports[2], senT_a.port_a) annotation (Line(points={{92,36},{96,36},
           {96,60},{100,60}}, color={0,127,255}));
+  connect(cHP.fuelInput, kWToW1.u) annotation (Line(points={{-102.4,-49.2},{
+          -102.4,-45},{-121.4,-45}}, color={0,0,127}));
+  connect(cHP.thermalPower, kWToW2.u) annotation (Line(points={{-97.6,-49.2},{
+          -97.6,-37},{-121.4,-37}}, color={0,0,127}));
+  connect(kWToW2.y, hTCBus.thermalPowerChpMea) annotation (Line(points={{-128.3,
+          -37},{-138,-37},{-138,99.085},{0.09,99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHP.electricalPower, kWToW3.u) annotation (Line(points={{-94,-49.2},{
+          -94,-29},{-121.4,-29}}, color={0,0,127}));
+  connect(kWToW3.y, hTCBus.electricalPowerChpMea) annotation (Line(points={{
+          -128.3,-29},{-138,-29},{-138,99.085},{0.09,99.085}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(kWToW1.y, hTCBus.fuelPowerChpMea) annotation (Line(points={{-128.3,
+          -45},{-138,-45},{-138,99.085},{0.09,99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},
             {120,100}}), graphics={
         Rectangle(
