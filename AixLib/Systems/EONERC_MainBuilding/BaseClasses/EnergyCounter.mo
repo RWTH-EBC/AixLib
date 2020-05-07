@@ -81,14 +81,14 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add.u2, mainBus.hpSystemBus.busPumpHot.pumpBus.power) annotation (
+  connect(add.u2, mainBus.hpSystemBus.busPumpHot.pumpBus.PelMea) annotation (
       Line(points={{-27,76},{-98.905,76},{-98.905,0.09}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add.u1, mainBus.hpSystemBus.busPumpCold.pumpBus.power) annotation (
+  connect(add.u1, mainBus.hpSystemBus.busPumpCold.pumpBus.PelMea) annotation (
       Line(points={{-27,82},{-90,82},{-90,84},{-98.905,84},{-98.905,0.09}},
         color={0,0,127}), Text(
       string="%second",
@@ -123,13 +123,13 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(add1.y, integrator3.u) annotation (Line(points={{-15.5,45},{-11,45}},
                                  color={0,0,127}));
-  connect(add1.u1, mainBus.hxBus.primBus.pumpBus.power) annotation (Line(points={{-27,48},
+  connect(add1.u1, mainBus.hxBus.primBus.pumpBus.PelMea) annotation (Line(points={{-27,48},
           {-98.905,48},{-98.905,0.09}},          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(add1.u2, mainBus.hxBus.secBus.pumpBus.power) annotation (Line(points={{-27,42},
+  connect(add1.u2, mainBus.hxBus.secBus.pumpBus.PelMea) annotation (Line(points={{-27,42},
           {-98.905,42},{-98.905,0.09}},          color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -153,7 +153,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(integrator5.u, mainBus.gtfBus.primBus.pumpBus.power) annotation (Line(
+  connect(integrator5.u, mainBus.gtfBus.primBus.pumpBus.PelMea) annotation (Line(
         points={{-11,9},{-98.905,9},{-98.905,0.09}},     color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -220,20 +220,20 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(sum1.u[1], mainBus.htsBus.admixBus1.pumpBus.power) annotation (Line(
+  connect(sum1.u[1], mainBus.htsBus.admixBus1.pumpBus.PelMea) annotation (Line(
         points={{-31,-17.6667},{-98.905,-17.6667},{-98.905,0.09}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sum1.u[2], mainBus.htsBus.admixBus2.pumpBus.power) annotation (Line(
+  connect(sum1.u[2], mainBus.htsBus.admixBus2.pumpBus.PelMea) annotation (Line(
         points={{-31,-17},{-98.905,-17},{-98.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sum1.u[3], mainBus.htsBus.throttlePumpBus.pumpBus.power) annotation (
+  connect(sum1.u[3], mainBus.htsBus.throttlePumpBus.pumpBus.PelMea) annotation (
       Line(points={{-31,-16.3333},{-98.905,-16.3333},{-98.905,0.09}}, color={0,
           0,127}), Text(
       string="%second",
