@@ -27,8 +27,12 @@ public
           extent={{-52,24},{62,-16}},
           lineColor={0,0,0},
           textString="%name")}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Partial model for correction cofficient for transmitted solar radiation through a window.</p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Partial model for correction cofficient for transmitted solar
+  radiation through a window.
+</p>
 </html>"));
 end PartialCorG;

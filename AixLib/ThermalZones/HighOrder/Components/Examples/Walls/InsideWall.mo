@@ -41,23 +41,39 @@ equation
   connect(Tinside3.port, thermStar_Demux.portConv) annotation (Line(points={{-74,22},{-60,22},{-60,-18},{-92,-18},{-92,-47.825},{-72.08,-47.825}}, color={191,0,0}));
   connect(Tinside1.port, thermStar_Demux1.portRad) annotation (Line(points={{72,60},{56,60},{56,-22},{88,-22},{88,-41.65},{70.28,-41.65}}, color={191,0,0}));
   connect(Tinside.port, thermStar_Demux1.portConv) annotation (Line(points={{72,20},{60,20},{60,-18},{94,-18},{94,-50},{82,-50},{82,-49.825},{70.07,-49.825}}, color={191,0,0}));
-  annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
- <h4><font color=\"#008000\">Overview</font></h4>
- <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an <b>inside wall</b> application.</p>
- <h4><font color=\"#008000\">Concept</font></h4>
- <p>Test case for calculation of U-value</p>
- <ul>
- <li>Area of Wall: 10 m&sup2;</li>
- <li>Area of Door: 2 m&sup2;</li>
- <li>Temperature difference: 10 K</li>
- <li>Test time: 25 h</li>
- </ul>
- <p>The u-values are calculated via calculation moduls and may be displayed easily. </p>
- </html>", revisions = "<html>
- <ul>
-   <li><i>April, 2012&nbsp;</i>
-          by Mark Wesseling:<br/>
-          Implemented.</li>
- </ul>
- </html>"));
+  annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Simulation to test the <a href=
+  \"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an
+  <b>inside wall</b> application.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Test case for calculation of U-value
+</p>
+<ul>
+  <li>Area of Wall: 10 m²
+  </li>
+  <li>Area of Door: 2 m²
+  </li>
+  <li>Temperature difference: 10 K
+  </li>
+  <li>Test time: 25 h
+  </li>
+</ul>
+<p>
+  The u-values are calculated via calculation moduls and may be
+  displayed easily.
+</p>
+<ul>
+  <li>
+    <i>April, 2012&#160;</i> by Mark Wesseling:<br/>
+    Implemented.
+  </li>
+</ul>
+</html>"));
 end InsideWall;

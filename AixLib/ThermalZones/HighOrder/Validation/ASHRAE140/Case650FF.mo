@@ -192,16 +192,22 @@ equation
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
-    Documentation(revisions="<html>
- <ul>
- <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul>
- </html>",
-         info="<html>
-<p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 650: </p>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>March 9, 2015</i> by Ana Constantin:<br/>
+    Implemented
+  </li>
+</ul>
+</html>",
+         info="<html><p>
+  As described in ASHRAE Standard 140.
+</p>
+<p>
+  Difference to case 650:
+</p>
 <ul>
-<li>no cooling or heating equipment</li>
+  <li>no cooling or heating equipment
+  </li>
 </ul>
 </html>"));
 end Case650FF;

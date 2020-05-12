@@ -4,12 +4,10 @@ package BoundaryConditions "Package with models for boundary conditions"
 
 
 annotation (preferredView="info",
-Documentation(info="<html>
-This package contains models to compute boundary conditions such as weather data.
-For models that set boundary conditions for fluid flow systems,
-see
-<a href=\"modelica://AixLib.Fluid.Sources\">
-AixLib.Fluid.Sources</a>.
+Documentation(info="<html>This package contains models to compute boundary conditions such as
+weather data. For models that set boundary conditions for fluid flow
+systems, see <a href=
+\"modelica://AixLib.Fluid.Sources\">AixLib.Fluid.Sources</a>.
 </html>"),
   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
       graphics={
