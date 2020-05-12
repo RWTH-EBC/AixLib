@@ -28,11 +28,14 @@ class GET_API_GITHUB(object):
 
 	def get_GitHub_Username(self):
 		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/branches/"+self.Working_Branch
+		print(url)
 		payload = {}
 		headers= {}
 
 		response = requests.request("GET", url, headers=headers, data = payload)
+		print(response)
 		branch = response.json()
+		print(branch)
 		commit = branch["commit"]
 		author = commit["author"]
 		login = author["login"]
@@ -69,7 +72,32 @@ class PULL_REQUEST_GITHUB(object):
 		}
 		response = requests.request("POST", url, headers=headers, data = payload)
 		print(response.text.encode('utf8'))
+		#pull_request_response = response.text.encode('utf8')
+		return response
+
 		
+	def get_pull_request_number(self, pull_request_response):
+		pull_request_number = pull_request_response.json()
+		pull_request_number = pull_request_number["number"]
+		print(pull_request_number)
+		return pull_request_number
+	
+	
+	def update_pull_request_assignees(self,pull_request_number,assignees_owner):
+		
+		url = "https://api.github.com/repos/"+self.GITHUB_REPOSITORY+"/issues/"+str(pull_request_number)
+
+		payload = '{ \"assignees\": [\r\n    \"'+assignees_owner+'\"\r\n  ],\r\n    \"labels\": [\r\n    \"CI\", \r\n    \"Correct HTML\"\r\n    \r\n  ]\r\n}'
+		
+		headers = {
+		  'Authorization': 'Bearer '+self.GITHUB_TOKEN,
+		  'Content-Type': 'application/json'
+		}
+
+		response = requests.request("PATCH", url, headers=headers, data = payload)
+
+		print("User "+assignees_owner+" assignee to pull request Number "+str(pull_request_number))
+
 	
 
 	
@@ -98,8 +126,11 @@ if  __name__ == '__main__':
 	#sys.exit(0)					
 	
 	PULL_REQUEST = PULL_REQUEST_GITHUB(GITHUB_REPOSITORY = args.GITHUB_REPOSITORY, Correct_Branch = args.Correct_Branch, Working_Branch = args.Working_Branch, GITHUB_TOKEN = args.GITHUB_TOKEN, OWNER = owner)
-	PULL_REQUEST.post_pull_request()
+	pull_request_response = PULL_REQUEST.post_pull_request()
+	pull_request_number = PULL_REQUEST.get_pull_request_number(pull_request_response)
 	
+	assignees_owner = GET_API_DATA.get_GitHub_Username()
+	PULL_REQUEST.update_pull_request_assignees(pull_request_number,assignees_owner)
 	print("Pull Request")
 	exit(0)
 	

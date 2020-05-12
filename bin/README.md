@@ -208,6 +208,10 @@ For more information, see ["Delivering deployments"](https://developer.github.co
 ## [Setup SSH-Key for GitHub Repository](https://www.heise.de/tipps-tricks/SSH-Key-fuer-GitHub-Repositories-einrichten-4627459.html)
 Add your public key to your Github Account or add as a deploy Key to your Repository.
 
+## GitHub Webhook
+To trigger the pipeline for every push and a pull_request u have to setup webhook. Activate the options "Pushes" and "Pull requests"
+![E.ON EBC RWTH Aachen University](04_Documentation/Images/Webhook_trigger.PNG)
+
 
 # To Do
 
