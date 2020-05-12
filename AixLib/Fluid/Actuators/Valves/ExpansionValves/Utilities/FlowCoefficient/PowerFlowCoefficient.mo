@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient;
 model PowerFlowCoefficient
   "Model describing flow coefficient based on power approach"
   extends BaseClasses.PartialFlowCoefficient;
@@ -137,94 +137,144 @@ equation
   C = corFact * a * product(abs(P[i])^b[i] for i in 1:nT)
     "Calculation procedure of generic power approach";
 
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>October 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This model contains calculation procedures for flow coefficients (for 
-more information, please check out 
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>). 
-The calculation procedures based on a power approach and are presented 
-below.
+  This model contains calculation procedures for flow coefficients (for
+  more information, please check out <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>).
+  The calculation procedures based on a power approach and are
+  presented below.
 </p>
-<h4>Implemented approaches</h4>
+<h4>
+  Implemented approaches
+</h4>
 <p>
-Actually, three power approaches are implemented in this package.
-To add further calculation procedures, just add its name in
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
-and expand the <code>if-structure</code>.<br />
+  Actually, three power approaches are implemented in this package. To
+  add further calculation procedures, just add its name in <a href=
+  \"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices\">
+  AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
+  and expand the <code>if-structure</code>.<br/>
 </p>
-<table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\" 
+<table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\"
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr>
-<th>Reference</th>
-<th>Formula</th> 
-<th>Refrigerants</th> 
-<th>Validity <code>T<sub>condensing</sub></code></th> 
-<th>Validity <code>T<sub>evaporating</sub></code></th> 
-<th>Validity <code>T<sub>subcooling</sub></code></th> 
-</tr> 
-<tr>
-<td>ShanweiEtAl2005</td> 
-<td><code>C = a * a * (A/d<sub>clearance</sub>^2)^b1 * 
-((p<sub>inlet</sub>-p<sub>outlet</sub>)/p<sub>crit</sub>)^b2 * 
-(T<sub>crit</sub>/T<sub>subcooling</sub>)^b3 * 
-(rho<sub>inlet</sub>/rho<sub>outlet</sub>)^b4 * 
-(quality)^b5</code></td> 
-<td><code>R22, R407C, R410A</code></td> 
-<td><code>40 - 50 &deg;C</code></td> 
-<td><code>0 - 10 &deg;C</code></td> 
-<td><code>1.5 - 10 &deg;C</code></td> 
-</tr> 
-<tr>
-<td>ZhifangAndOu2008</td> 
-<td><code>C = a * ((p<sub>inlet</sub>-p<sub>outlet</sub>) * 
-sqrt(A)/&sigma;<sub>inlet</sub>)^b1 * 
-(d<sub>inlet</sub>*sqrt(&rho;<sub>inlet</sub> * 
-p<sub>inlet</sub>)/&mu;<sub>inlet</sub>)^b2</code></td> 
-<td><code>R134a</code></td> 
-<td><code>31 - 67.17 &deg;C</code></td> 
-<td><code>no information</code></td> 
-<td><code>0 - 20 &deg;C</code></td> 
-</tr> 
-<tr>
-<td>Li2013</td> 
-<td><code>C = a * (opening)^b1 * 
-(T<sub>subcooling</sub>/T<sub>crit</sub>)^b2</code></td> 
-<td><code>R22, R407C, R410A</code></td> 
-<td><code>30 - 50 &deg;C</code></td> 
-<td><code>0 - 30 &deg;C</code></td> 
-<td><code>1.5 - 15 &deg;C</code></td> 
-</tr> 
+  <tr>
+    <th>
+      Reference
+    </th>
+    <th>
+      Formula
+    </th>
+    <th>
+      Refrigerants
+    </th>
+    <th>
+      Validity <code>T<sub>condensing</sub></code>
+    </th>
+    <th>
+      Validity <code>T<sub>evaporating</sub></code>
+    </th>
+    <th>
+      Validity <code>T<sub>subcooling</sub></code>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      ShanweiEtAl2005
+    </td>
+    <td>
+      <code>C = a * a * (A/d<sub>clearance</sub>^2)^b1 *
+      ((p<sub>inlet</sub>-p<sub>outlet</sub>)/p<sub>crit</sub>)^b2 *
+      (T<sub>crit</sub>/T<sub>subcooling</sub>)^b3 *
+      (rho<sub>inlet</sub>/rho<sub>outlet</sub>)^b4 *
+      (quality)^b5</code>
+    </td>
+    <td>
+      <code>R22, R407C, R410A</code>
+    </td>
+    <td>
+      <code>40 - 50 °C</code>
+    </td>
+    <td>
+      <code>0 - 10 °C</code>
+    </td>
+    <td>
+      <code>1.5 - 10 °C</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      ZhifangAndOu2008
+    </td>
+    <td>
+      <code>C = a * ((p<sub>inlet</sub>-p<sub>outlet</sub>) *
+      sqrt(A)/σ<sub>inlet</sub>)^b1 *
+      (d<sub>inlet</sub>*sqrt(ρ<sub>inlet</sub> *
+      p<sub>inlet</sub>)/μ<sub>inlet</sub>)^b2</code>
+    </td>
+    <td>
+      <code>R134a</code>
+    </td>
+    <td>
+      <code>31 - 67.17 °C</code>
+    </td>
+    <td>
+      <code>no information</code>
+    </td>
+    <td>
+      <code>0 - 20 °C</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Li2013
+    </td>
+    <td>
+      <code>C = a * (opening)^b1 *
+      (T<sub>subcooling</sub>/T<sub>crit</sub>)^b2</code>
+    </td>
+    <td>
+      <code>R22, R407C, R410A</code>
+    </td>
+    <td>
+      <code>30 - 50 °C</code>
+    </td>
+    <td>
+      <code>0 - 30 °C</code>
+    </td>
+    <td>
+      <code>1.5 - 15 °C</code>
+    </td>
+  </tr>
 </table>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-M. Shanwei, Z. Chuan, C. Jiangping and C. Zhiujiu. (2005): 
-<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2004.12.005\">
-Experimental research on refrigerant mass flow coefficient of electronic 
-expansion valve</a>. In: <i>Applied Thermal Engineering 25(14)</i>, 
-S. 2351&ndash;2366
+  M. Shanwei, Z. Chuan, C. Jiangping and C. Zhiujiu. (2005): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2004.12.005\">Experimental
+  research on refrigerant mass flow coefficient of electronic expansion
+  valve</a>. In: <i>Applied Thermal Engineering 25(14)</i>, S.
+  2351–2366
 </p>
 <p>
-X. Zhifang, S. Lin and O. Hongfei. (2008): 
-<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2007.03.023\">
-Refrigerant flow characteristics of electronic expansion
-valve based on thermodynamic analysis and experiment</a>. In: 
-<i>Applied Thermal Engineering 28(2)</i>, 
-S. 2381&ndash;243
+  X. Zhifang, S. Lin and O. Hongfei. (2008): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2007.03.023\">Refrigerant
+  flow characteristics of electronic expansion valve based on
+  thermodynamic analysis and experiment</a>. In: <i>Applied Thermal
+  Engineering 28(2)</i>, S. 2381–243
 </p>
 <p>
-Li, W. (2013): <a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">
-Simplified modeling analysis ofmass flow characteristics in electronic expansion 
-valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8&ndash;12
+  Li, W. (2013): <a href=
+  \"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">Simplified
+  modeling analysis ofmass flow characteristics in electronic expansion
+  valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8–12
 </p>
 </html>"));
 end PowerFlowCoefficient;
