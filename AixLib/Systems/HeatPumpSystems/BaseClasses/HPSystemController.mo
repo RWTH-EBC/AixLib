@@ -451,10 +451,16 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
           textString="Icing Factor")}),
-    Documentation(revisions="<html>
-<ul>
-<li><i>October 31, 2018&nbsp;</i> by Alexander K&uuml;mpel: <br/>Connection between controller and heat pump only via bus connector </li>
-<li><i>November 26, 2018&nbsp;</i> by Fabian W&uuml;llhorst: <br/>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>) </li>
+    Documentation(revisions="<html><ul>
+  <li>
+    <i>October 31, 2018&#160;</i> by Alexander Kümpel:<br/>
+    Connection between controller and heat pump only via bus connector
+  </li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>", info="<html>
 <p>

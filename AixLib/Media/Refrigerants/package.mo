@@ -11,7 +11,8 @@ compressor models contained in package
 <a href=\"modelica://AixLib.Fluid.HeatPumps.Compressors\">
 AixLib.Fluid.HeatPumps.Compressors</a>.
 </p>
-</html>", revisions="<html>
+
+
 <ul>
 <li>
 October 17, 2016, by Massimo Cimmino:<br/>
