@@ -1,4 +1,4 @@
-﻿within AixLib.Media.Refrigerants.R134a;
+within AixLib.Media.Refrigerants.R134a;
 package R134a_IIR_P1_395_T233_455_Horner
   "Refrigerant model for R134a using a hybrid approach with explicit
   Horner formulas"
@@ -1444,90 +1444,135 @@ package R134a_IIR_P1_395_T233_455_Horner
   algorithm
     sigma := 0.05801*(1-sat.Tsat/374.21)^1.241;
   end surfaceTension;
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-  September 06, 2017, by Mirko Engelpracht, Christian Vering:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  annotation (Documentation(revisions="<html><ul>
+  <li>September 06, 2017, by Mirko Engelpracht, Christian Vering:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
 <p>
-This package provides a refrigerant model for R134a using a hybrid approach
-developed by Sangi et al.. The hybrid approach is implemented in
-<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">
-AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula
-</a>
-and the refrigerant model is implemented by complete the template
-<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula\">
-AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula
-</a>.
+  This package provides a refrigerant model for R134a using a hybrid
+  approach developed by Sangi et al.. The hybrid approach is
+  implemented in <a href=
+  \"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">
+  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula</a>
+  and the refrigerant model is implemented by complete the template
+  <a href=
+  \"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula\">
+  AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula</a>
+  .
 </p>
-<h4>Assumptions and limitations</h4>
+<h4>
+  Assumptions and limitations
+</h4>
 <p>
-The implemented coefficients are fitted to external data by Engelpracht and
-are valid within the following range:<br />
+  The implemented coefficients are fitted to external data by
+  Engelpracht and are valid within the following range:<br/>
 </p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
 border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
-<tr>
-  <td><p>Parameter</p></td>
-  <td><p>Minimum Value</p></td>
-  <td><p>Maximum Value</p></td>
-</tr>
-<tr>
-  <td><p>Pressure (p) in bar</p></td>
-  <td><p>1</p></td>
-  <td><p>39.5</p></td>
-</tr>
-<tr>
-  <td><p>Temperature (T) in K</p></td>
-  <td><p>233.15</p></td>
-  <td><p>455.15</p></td>
-</tr>
+  <tr>
+    <td>
+      <p>
+        Parameter
+      </p>
+    </td>
+    <td>
+      <p>
+        Minimum Value
+      </p>
+    </td>
+    <td>
+      <p>
+        Maximum Value
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Pressure (p) in bar
+      </p>
+    </td>
+    <td>
+      <p>
+        1
+      </p>
+    </td>
+    <td>
+      <p>
+        39.5
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        Temperature (T) in K
+      </p>
+    </td>
+    <td>
+      <p>
+        233.15
+      </p>
+    </td>
+    <td>
+      <p>
+        455.15
+      </p>
+    </td>
+  </tr>
 </table>
 <p>
-The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for
-enthalpy and entropy for the saturated liquid at 273.15 K.
+  The reference point is defined as 200 kJ/kg and 1 kJ/kg/K,
+  respectively, for enthalpy and entropy for the saturated liquid at
+  273.15 K.
 </p>
-<h4>Validation</h4>
+<h4>
+  Validation
+</h4>
 <p>
-The model is validated by comparing results obtained from the example model
-<a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">
-AixLib.Media.Refrigerants.Examples.RefrigerantProperties
-</a>
-to external data (e.g. obtained from measurements or external media libraries).
+  The model is validated by comparing results obtained from the example
+  model <a href=
+  \"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">
+  AixLib.Media.Refrigerants.Examples.RefrigerantProperties</a> to
+  external data (e.g. obtained from measurements or external media
+  libraries).
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Tillner-Roth, R.; Baehr, H. D. (1994): An International Standard Formulation
-for the thermodynamic Properties of 1,1,1,2|Tetrafluoroethane (HFC|134a) for
-Temperatures from 170 K to 455 K and Pressures up to 70 MPa. In: <i>Journal of
-physical and chemical reference data (23)</i>, S. 657–729.
-DOI: 10.1063/1.555958.
-</p>
-<p>
-Huber, Marcia L.; Laesecke, Arno; Perkins, Richard A. (2003): Model for the
-Viscosity and Thermal Conductivity of Refrigerants, Including a New
-Correlation for the Viscosity of R134a. In: <i>Ind. Eng. Chem. Res. 42 (13)
-</i>, S. 3163–3178. DOI: 10.1021/ie0300880.
-</p>
-<p>
-Perkins, R. A.; Laesecke, A.; Howley, J.; Ramires, M. L. V.; Gurova, A. N.;
-Cusco, L. (2000): Experimental thermal conductivity values for the IUPAC
-round-robin sample of 1,1,1,2-tetrafluoroethane (R134a). Gaithersburg, MD:
-<i>National Institute of Standards and Technology.</i>
+  Tillner-Roth, R.; Baehr, H. D. (1994): An International Standard
+  Formulation for the thermodynamic Properties of
+  1,1,1,2|Tetrafluoroethane (HFC|134a) for Temperatures from 170 K to
+  455 K and Pressures up to 70 MPa. In: <i>Journal of physical and
+  chemical reference data (23)</i>, S. 657–729. DOI: 10.1063/1.555958.
 </p>
 <p>
-Mulero, A.; Cachadiña, I.; Parra, M. I. (2012): Recommended Correlations for
-the Surface Tension of Common Fluids. In: <i>Journal of physical and chemical
-reference data 41 (4)</i>, S. 43105. DOI: 10.1063/1.4768782.
+  Huber, Marcia L.; Laesecke, Arno; Perkins, Richard A. (2003): Model
+  for the Viscosity and Thermal Conductivity of Refrigerants, Including
+  a New Correlation for the Viscosity of R134a. In: <i>Ind. Eng. Chem.
+  Res. 42 (13)</i> , S. 3163–3178. DOI: 10.1021/ie0300880.
 </p>
 <p>
-Engelpracht, Mirko (2017): Development of modular and scalable simulation
-models for heat pumps and chillers considering various refrigerants.
-<i>Master Thesis</i>
+  Perkins, R. A.; Laesecke, A.; Howley, J.; Ramires, M. L. V.; Gurova,
+  A. N.; Cusco, L. (2000): Experimental thermal conductivity values for
+  the IUPAC round-robin sample of 1,1,1,2-tetrafluoroethane (R134a).
+  Gaithersburg, MD: <i>National Institute of Standards and
+  Technology.</i>
+</p>
+<p>
+  Mulero, A.; Cachadiña, I.; Parra, M. I. (2012): Recommended
+  Correlations for the Surface Tension of Common Fluids. In: <i>Journal
+  of physical and chemical reference data 41 (4)</i>, S. 43105. DOI:
+  10.1063/1.4768782.
+</p>
+<p>
+  Engelpracht, Mirko (2017): Development of modular and scalable
+  simulation models for heat pumps and chillers considering various
+  refrigerants. <i>Master Thesis</i>
 </p>
 </html>"));
 end R134a_IIR_P1_395_T233_455_Horner;

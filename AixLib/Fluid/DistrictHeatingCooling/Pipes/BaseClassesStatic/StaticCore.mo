@@ -183,21 +183,53 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={215,202,187})}),
-    Documentation(revisions="<html>
-<ul>
-<li>
-September 25, 2019, by Nils Neuland:<br/>
-Revised variable names and documentation to follow guidelines. Corrected malformed hyperlinks.
-</li>
+    Documentation(revisions="<html><ul>
+  <li>September 25, 2019, by Nils Neuland:<br/>
+    Revised variable names and documentation to follow guidelines.
+    Corrected malformed hyperlinks.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Pipe with heat loss using the time delay based heat losses for the transport delay of the fluid. </p>
-<h4>Implementation</h4>
-<p>This model is based on <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">FixedResistances.BaseClasses.PlugFlowCore</a> but does not contain the <span style=\"font-family: Courier New;\">spatialDistribution</span> operator.</p>
-<p>The <span style=\"font-family: Courier New;\">spatialDistribution</span> operator is used for the temperature wave propagation through the length of the pipe. This operator is contained in <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">BaseClasses.PlugFlow</a>. </p>
-<p>This model does not include thermal inertia of the pipe wall. The wall inertia is implemented in <a href=\"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe\">StaticPipe</a>. </p>
-<p>The removal of the thermal inertia with a mixing volume can be desirable in the case where mixing volumes are added manually at the pipe junctions. </p>
-<p>The model <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">PlugFlowHeatLoss</a> implements a heat loss in design direction, but leaves the enthalpy unchanged in opposite flow direction. Therefore it is used in front of and behind the time delay. </p>
-<p>The pressure drop is implemented using <a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.</p>
+<p>
+  Pipe with heat loss using the time delay based heat losses for the
+  transport delay of the fluid.
+</p>
+<h4>
+  Implementation
+</h4>
+<p>
+  This model is based on <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">FixedResistances.BaseClasses.PlugFlowCore</a>
+  but does not contain the <span style=
+  \"font-family: Courier New;\">spatialDistribution</span> operator.
+</p>
+<p>
+  The <span style=
+  \"font-family: Courier New;\">spatialDistribution</span> operator is
+  used for the temperature wave propagation through the length of the
+  pipe. This operator is contained in <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">BaseClasses.PlugFlow</a>.
+</p>
+<p>
+  This model does not include thermal inertia of the pipe wall. The
+  wall inertia is implemented in <a href=
+  \"modelica://AixLib.Fluid.DistrictHeatingCooling.Pipes.StaticPipe\">StaticPipe</a>.
+</p>
+<p>
+  The removal of the thermal inertia with a mixing volume can be
+  desirable in the case where mixing volumes are added manually at the
+  pipe junctions.
+</p>
+<p>
+  The model <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
+  PlugFlowHeatLoss</a> implements a heat loss in design direction, but
+  leaves the enthalpy unchanged in opposite flow direction. Therefore
+  it is used in front of and behind the time delay.
+</p>
+<p>
+  The pressure drop is implemented using <a href=
+  \"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
+</p>
 </html>"));
 end StaticCore;

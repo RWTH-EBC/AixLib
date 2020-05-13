@@ -5,11 +5,9 @@ extends Modelica.Icons.ExamplesPackage;
 
 
 
-  annotation (Documentation(info="<html>
-<p>
-This package contains models that validate the pipe models against measured data
-from real district heating networks.
-
+  annotation (Documentation(info="<html><p>
+  This package contains models that validate the pipe models against
+  measured data from real district heating networks.
 </p>
 </html>"));
 end PlugFlowPipes;
