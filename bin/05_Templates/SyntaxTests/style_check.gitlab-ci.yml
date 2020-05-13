@@ -1,0 +1,32 @@
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - StyleCheck
+    
+Style_Check_AixLib:
+    stage: StyleCheck
+    services:
+        -  docker
+    before_script:
+        - Xvfb :77 -extension RANDR -extension GLX & export DISPLAY=:77.0 &&
+        - export PIP_CACHE_DIR="/opt/cache/pip"
+        - source activate python36  
+        - python -V               # Print out python version for debugging
+        - export PYTHONIOENCODING=utf-8 # just in case
+    script:
+        - git diff --raw HEAD^1
+        - python bin/02_CITests/SyntaxTests/StyleChecking.py -s "$StyleModel" -p AixLib/package.mo
+    artifacts:
+        when: on_failure
+        paths:
+            - AixLib/AixLib_StyleCheckLog.html
+            - AixLib/AixLib_StyleErrorLog.html
+        expire_in: 2 day 
+    allow_failure: true 
+    
+    only:
+        variables:
+                - $CI_COMMIT_MESSAGE !~ /Correct HTML Code/
+
+     

@@ -1,0 +1,28 @@
+
+
+#!/bin/bash
+image: registry.git.rwth-aachen.de/ebc/ebc_intern/dymola-docker:miniconda-latest
+
+stages:
+    - CheckSettings
+    
+Setting_Check:
+    stage: CheckSettings
+    only:
+        - /^feature\/*/
+    services:
+        -  docker
+    before_script:
+        - sudo apt-get install jq -y
+    script:
+       - export
+       - sudo chmod +x bin/06_Configfiles/checkVariables.sh
+       - git config --global user.email "${GITLAB_USER_EMAIL}"
+       - git config --global user.name  "${GITLAB_USER_NAME}" 
+       - bin/06_Configfiles/checkVariables.sh
+       # sudo chmod +x bin/06_Configfiles/list_remote_mirror.sh
+       # bin/06_Configfiles/list_remote_mirror.sh
+    
+    only:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /Check Settings/
