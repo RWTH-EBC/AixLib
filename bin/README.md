@@ -12,6 +12,7 @@ In our case we mirror a github repository in GitLab. This way the repository can
 We also use the Docker service to create an image containing Dymola and thus be able to simulate models in Dymola.
 
 For more information read the [General Documentation](https://git.rwth-aachen.de/sven.hinrichs/GitLabCI/blob/master/bin/04_Documentation/Documentation_GitLab.md) and the Repository [Dymola-Docker](https://git.rwth-aachen.de/EBC/EBC_intern/dymola-docker)
+
 ![E.ON EBC RWTH Aachen University](04_Documentation/Images/GITLABCI.png)
 
 

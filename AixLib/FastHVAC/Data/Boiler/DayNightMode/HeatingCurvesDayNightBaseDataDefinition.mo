@@ -11,20 +11,20 @@ parameter Real varFlowTempNight[:, :]
     "Variable flow temperature during night time (reduced)";
 
 annotation (Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
+  <font color=\"#008000\">Overview</font>
 </h4>
 <p>
   Base data defintion for boilers: Heating curves - Tflow = f(Toutside)
   - for night and day modes.
 </p>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
+  <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\">
+  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\" />
 </p>
 <h4>
-  <span style=\"color:#008000\">References</span>
+  <font color=\"#008000\">References</font>
 </h4>
 <p>
   Base data definition for record used with <a href=
