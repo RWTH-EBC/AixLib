@@ -73,7 +73,7 @@ This folder contains [Templates](https://git.rwth-aachen.de/sven.hinrichs/GitLab
 		TARGET_BRANCH: $CI_COMMIT_REF_NAME
 		Newbranch: ${Praefix_Branch}${CI_COMMIT_REF_NAME}
 		StyleModel: AixLib.Airflow.Multizone.DoorDiscretizedOpen
-		Github_Repository : SvenHinrichs/GitLabCI
+		Github_Repository : RWTH-EBC/AixLib
 	
 	
 
@@ -105,7 +105,8 @@ For question ask [Sven Hinrichs](https://git.rwth-aachen.de/sven.hinrichs)
 ## Configure Variables
 
 ### Github_Repository : 
-This variable consists of owner/repo (e.g. RWTH-EBC/AixLib) and is used for code that was changed by the CI. (git@github.com:RWTH-EBC/AixLib.git)
+This variable consists of owner/repo (e.g. RWTH-EBC/AixLib).
+The variable is used for creating a pull request as well as create a new branch and push into that branch.
 
 ### StyleModel:
 
@@ -131,11 +132,11 @@ To get started:
 
 ![E.ON EBC RWTH Aachen University](04_Documentation/Images/Mirroring_ssh.PNG)
 
-Now GitLab should recognize Host Keys and you can mirror your repository.
-After this copy the ssh public key and add the key as de deploy key to your gitlab and github repository.
+Now GitLab should recognize a host key and you can mirror your repository.
+After this copy the ssh public key and add the key as a deploy key to your gitlab and github repository.
 
 In GitLab:  General -> CI/CD -> Deploy Keys (Activate Write access allowed button)
-In Github: Settings -> Deploy keys (Allow write access)
+In Github: Settings -> Deploy keys 
 
 ![E.ON EBC RWTH Aachen University](04_Documentation/Images/public_key.PNG)
 
@@ -166,8 +167,20 @@ You can create as many personal access tokens as you like from your GitLab profi
     6. Click the Create personal access token button.
     7. Save the personal access token somewhere safe. Once you leave or refresh the page, you won’t be able to access it again.
 
+## git-config
+
+Before you push to your branch, please be sure that your git configs are covered with your datas in your github account. 
+
+Set your username:
+	git config --global user.name "FIRST_NAME LAST_NAME"
+
+Set your email address:
+	git config --global user.email "MY_NAME@example.com"
+	
+It is important that these settings are correct, because the github_api.py script creates a pull request and declares you as Assigneed to this pull_request. 
+	
 ## Test CI Setting
-To test if all necessary variables are set push your Code with the commit "Check Settings". 
+To test if all necessary variables are set push your Code with the commit "Check Settings". This template will look for the Variables GL_TOKEN, GITHUB_API_TOKEN, Github_Repository and GITHUB_PRIVATE_KEY.
 
 
 ## Add a Deploy keys
@@ -185,6 +198,9 @@ For more information, see ["Delivering deployments"](https://developer.github.co
 	8. Click Add key.
 
 [Setup Deploy keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys)
+After the public key is configured and added as a deploy key, the private key must be added as a variable in Gitlab. 
+The name of the variable is GITHUB_PRIVATE_KEY.
+
 
 ## [SSH-Agent](https://help.github.com/en/enterprise/2.15/user/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)/ [Use Deploy Keys in Docker](https://www.webfactory.de/blog/use-ssh-key-for-private-repositories-in-github-actions) 
 ##### Install ssh-agent client:
@@ -209,12 +225,18 @@ For more information, see ["Delivering deployments"](https://developer.github.co
 Add your public key to your Github Account or add as a deploy Key to your Repository.
 
 ## GitHub Webhook
-To trigger the pipeline for every push and a pull_request u have to setup webhook. Activate the options "Pushes" and "Pull requests"
+To trigger the pipeline for every push and a pull_request u have to setup a webhook. Activate the options "Pushes" and "Pull requests".
+To setup webhook you have to follow these steps:
+	1. URL_ https://git.rwth-aachen.de/api/v4/projects/$RepositoryID/mirror/pull?private_token=&GL_Token	
+	2. Content Type: application/json
+	3. Enable SSL verification 
+	4. Select individual events
+
 ![E.ON EBC RWTH Aachen University](04_Documentation/Images/Webhook_trigger.PNG)
 
 
 # To Do
 
-- Slack Notification in case of merge request in gitlab
-- Add label CI and fix HTML code
+- Slack Notification in case of pull_request in github
 - Image with Private key
+- Create a new image in case Dymola is not necessary

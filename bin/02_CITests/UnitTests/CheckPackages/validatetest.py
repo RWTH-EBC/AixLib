@@ -123,6 +123,7 @@ class ValidateTest(object):
 		#dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
 		Library = "IBPSA"+os.sep+"IBPSA"+os.sep+"package.mo"
 		dymola.ExecuteCommand("Advanced.TranslationInCommandLog:=true;")
+		### Check dymola license
 		dym_sta_lic_available = dymola.ExecuteCommand('RequestOption("Standard");')
 		if not dym_sta_lic_available:
 			dymola.ExecuteCommand('DymolaCommands.System.savelog("Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt");')
@@ -131,7 +132,7 @@ class ValidateTest(object):
 			exit(1)
 		else:
 			print("Dymola License is available")
-	
+		
 		PackageCheck = dymola.openModel(Library)
 		
 		if PackageCheck == True:
@@ -175,7 +176,7 @@ class ValidateTest(object):
 			file.write(i+"\n"+str(List)+"\n"+"\n")
 		file.close()
 		print("Write Whitelist")
-
+		
 
 	''' Write a Error log with all models, that don´t pass the check '''
 	def _WriteErrorlog(self,logfile):

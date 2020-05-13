@@ -16,7 +16,7 @@ This list contains all IBPSA models that have not passed the check test. These a
 
 Use the following command:
 
-	- python bin/02_CITests/UnitTests/CheckPackages/validatetest.py -s  -p AixLib/package.mo --WhiteList
+	- python bin/02_CITests/UnitTests/CheckPackages/validatetest.py .s AixLib -p AixLib/package.mo --WhiteList
 
 ## What is done?
 - Clone the Repository and Write a Whitelist
