@@ -29,7 +29,6 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         energyDynamics=pump_hot.energyDynamics,
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
-
         addPowerToMedium=false)),
     d=0.125,
     T_amb=T_amb,
@@ -52,7 +51,6 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         energyDynamics=pump_hot.energyDynamics,
         redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.VeroLine50slash150dash4slash2 per,
-
         addPowerToMedium=false)),
     d=0.100,
     length=4,
@@ -61,6 +59,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         extent={{-20,20},{20,-20}},
         rotation=180,
         origin={60,0})));
+
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=T_amb)
                 annotation (Placement(transformation(extent={{88,-4},{96,4}})));
   Fluid.Storage.BufferStorage coldStorage(
@@ -107,13 +106,17 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=m_flow_nominal,
     T_start=T_start_hot,
+    tauHeaTra(displayUnit="h") = 21600,
     dIns=0.01,
     kIns=0.001,
     d=0.125,
-    length=6,
+    length=10,
     Kv=160,
-    valve(riseTime=240, order=1),
-    pipe3(length=12),
+    valve(
+      riseTime=240,
+      order=1,
+      l=0.0000001),
+    pipe3(length=20),
     T_amb=T_amb)  annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=0,
@@ -157,9 +160,9 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     T_start=T_start_cold,
     dIns=0.01,
     kIns=0.001,
-    length=6,
+    length=10,
     valve(riseTime=240, order=1),
-    pipe3(length=12),
+    pipe3(length=20),
     d=0.100,
     Kv=100,
     T_amb=T_amb)  annotation (Placement(transformation(
@@ -168,10 +171,10 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         origin={140,-100})));
   Fluid.MixingVolumes.MixingVolume volAirCoolerRecool(
     redeclare package Medium = Medium,
-    T_start=T_start_hot,
+    T_start=T_start_hot - 15,
     m_flow_nominal=m_flow_nominal,
     allowFlowReversal=allowFlowReversal,
-    V=0.04,
+    V=0.5,
     nPorts=2) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
@@ -181,7 +184,7 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     T_start=T_start_cold,
     m_flow_nominal=m_flow_nominal,
     allowFlowReversal=allowFlowReversal,
-    V=0.04,
+    V=0.4,
     nPorts=2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -243,8 +246,8 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
     transferHeat=true,
     allowFlowReversalEva=allowFlowReversal,
     allowFlowReversalCon=allowFlowReversal,
-    tauHeaTraEva(displayUnit="h") = 21600,
-    tauHeaTraCon(displayUnit="h") = 28800,
+    tauHeaTraEva(displayUnit="h") = 43200,
+    tauHeaTraCon(displayUnit="h") = 36000,
     TAmbCon_nominal=T_amb,
     TAmbEva_nominal=T_amb,
     TCon_start=T_start_hot,
@@ -260,12 +263,12 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={70,-108})));
-  Modelica.Blocks.Sources.Constant const1(k=8340)
+  Modelica.Blocks.Sources.Constant const1(k=8340/2)
     annotation (Placement(transformation(extent={{24,-68},{32,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_outside annotation (
       Placement(transformation(extent={{30,-118},{50,-98}}), iconTransformation(
           extent={{-8,-118},{8,-102}})));
-  Modelica.Blocks.Sources.Constant zero(k=0)
+  Modelica.Blocks.Sources.Constant zero(k=100)
     annotation (Placement(transformation(extent={{24,-84},{32,-76}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{42,-80},{54,-68}})));
@@ -283,6 +286,8 @@ model HeatpumpSystem "Heatpump system of the E.ON ERC main building"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={40,-132})));
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T=300)
+    annotation (Placement(transformation(extent={{60,-78},{68,-70}})));
 protected
   Fluid.Sensors.TemperatureTwoPort senT_a2(
     tau(displayUnit="s"),
@@ -448,9 +453,6 @@ equation
           {70,-90},{70,-98}},      color={0,0,127}));
   connect(T_outside, T_outside) annotation (Line(points={{40,-108},{40,-108}},
                      color={191,0,0}));
-  connect(switch1.y, convection1.Gc)
-    annotation (Line(points={{54.6,-74},{70,-74},{70,-98}},
-                                                          color={0,0,127}));
   connect(throttle_HS.hydraulicBus, heatPumpSystemBus.busThrottleHS)
     annotation (Line(
       points={{-120,20},{-120,60},{0.07,60},{0.07,60.07}},
@@ -642,6 +644,10 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(switch1.y, firstOrder.u)
+    annotation (Line(points={{54.6,-74},{59.2,-74}}, color={0,0,127}));
+  connect(firstOrder.y, convection1.Gc)
+    annotation (Line(points={{68.4,-74},{70,-74},{70,-98}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,
             -120},{220,60}}), graphics={
         Rectangle(
