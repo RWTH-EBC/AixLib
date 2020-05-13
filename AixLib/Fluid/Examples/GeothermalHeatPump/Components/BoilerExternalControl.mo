@@ -29,16 +29,16 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  annotation (Documentation(revisions="<html>
-<ul>
-<li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
-</li>
+  annotation (Documentation(revisions="<html><ul>
+  <li>May 19, 2017, by Marc Baranski:<br/>
+    First implementation.
+  </li>
 </ul>
 </html>", info="<html>
-<p>Model containing the simple boiler model
-<a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
-and interfaces for external control.</p>
+<p>
+  Model containing the simple boiler model <a href=
+  \"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+  and interfaces for external control.
+</p>
 </html>"));
 end BoilerExternalControl;

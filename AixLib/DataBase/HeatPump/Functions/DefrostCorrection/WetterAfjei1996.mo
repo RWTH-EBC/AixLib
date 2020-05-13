@@ -22,12 +22,15 @@ else
   factor:=gauss_curve;
 end if;
 f_CoPicing:=1-factor;
-  annotation (Documentation(info="<html>
-<p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996. </p>
+  annotation (Documentation(info="<html><p>
+  Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996.
+</p>
 </html>",
-  revisions="<html>
-<ul>
-<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+  revisions="<html><ul>
+  <li>
+    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br/>
+    Formatted documentation appropriately
+  </li>
 </ul>
 </html>"));
 end WetterAfjei1996;

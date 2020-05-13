@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.Chiller;
+within AixLib.FastHVAC.Components.Chiller;
 model Chiller "Base model of FastHVAC Chiller"
   import AixLib;
 
@@ -513,21 +513,29 @@ equation
           origin={0,-74},
           rotation=180)}),                Diagram(coordinateSystem(extent={{-100,
             -120},{100,120}})),
-  Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Chiller model adapted to FastHAVC library.</p>
-<p>  This model is based on the Fluid model <a href=\"modelica://AixLib.Fluid.Chiller.Chiller\">
-  AixLib.Fluid.Chiller.Chiller</a> created by Julian Matthes in 2019. </p>
+  Documentation(info="<html><p>
+  <b><span style=\"color: #008000;\">Overview</span></b>
+</p>
+<p>
+  Chiller model adapted to FastHAVC library.
+</p>
+<p>
+  This model is based on the Fluid model <a href=
+  \"modelica://AixLib.Fluid.Chiller.Chiller\">AixLib.Fluid.Chiller.Chiller</a>
+  created by Julian Matthes in 2019.
+</p>
 </html>",
   revisions="<html><ul>
-    <li>
-    <i>May 22, 2019</i>  by Julian Matthes: <br/>
-    Rebuild due to the introducion of the thermal machine partial model (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
-    </li>
-    <li>
+  <li>
+    <i>May 22, 2019</i> by Julian Matthes:<br/>
+    Rebuild due to the introducion of the thermal machine partial model
+    (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/715\">#715</a>)
+  </li>
+  <li>
     <i>January 22, 2019&#160;</i> Niklas Hülsenbeck:<br/>
-    Moved into AixLib 
-    </li>
-  </ul>
-  </html>"));
+    Moved into AixLib
+  </li>
+</ul>
+</html>"));
 end Chiller;

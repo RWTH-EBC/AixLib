@@ -58,17 +58,28 @@ equation
     annotation (Line(points={{-100,40},{-18,40},{-18,29}}, color={0,0,127}));
   connect(setPointCool, pITempCool.setPoint) annotation (Line(points={{-100,-40},
           {-58,-40},{-18,-40},{-18,-29}}, color={0,0,127}));
-  annotation (Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>This is just as simple heater and/or cooler with a PI-controller. It can be used as an quasi-ideal source for heating and cooling applications. </p>
- </html>", revisions="<html>
- <ul>
- <li><i>October, 2015&nbsp;</i> by Moritz Lauster:<br/>Adapted to Annex60 and restructuring, combined V1 and V2 as well as seperate parameter and record from EBC Libs</li>
- </ul>
- <ul>
- <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
- </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+  annotation (Documentation(info = "<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  This is just as simple heater and/or cooler with a PI-controller. It
+  can be used as an quasi-ideal source for heating and cooling
+  applications.
+</p>
+<ul>
+  <li>
+    <i>October, 2015&#160;</i> by Moritz Lauster:<br/>
+    Adapted to Annex60 and restructuring, combined V1 and V2 as well as
+    seperate parameter and record from EBC Libs
+  </li>
+</ul>
+<ul>
+  <li>
+    <i>June, 2014&#160;</i> by Moritz Lauster:<br/>
+    Added some basic documentation
+  </li>
+</ul>
+</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})));
