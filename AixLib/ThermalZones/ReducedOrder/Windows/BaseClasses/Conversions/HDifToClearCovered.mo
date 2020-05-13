@@ -55,13 +55,16 @@ equation
           fillColor={191,0,0},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<p>This model calculates the diffuse irradiation at clear and covered sky out
-of the total diffuse irradiation. Therefore it uses the total sky cover.</p>
+    Documentation(info="<html><p>
+  This model calculates the diffuse irradiation at clear and covered
+  sky out of the total diffuse irradiation. Therefore it uses the total
+  sky cover.
+</p>
 </html>",
-    revisions="<html>
-<ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+    revisions="<html><ul>
+  <li>June 30, 2016,&#160; by Stanley Risch:<br/>
+    Implemented.
+  </li>
 </ul>
 </html>"));
 end HDifToClearCovered;

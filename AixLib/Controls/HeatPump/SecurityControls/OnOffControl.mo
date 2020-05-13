@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.SecurityControls;
+within AixLib.Controls.HeatPump.SecurityControls;
 model OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
   parameter Boolean use_minRunTime
@@ -175,15 +175,21 @@ equation
       points={{-19.3,-37},{6,-37},{6,-60},{26.8,-60}},
       color={255,0,255},
       pattern=LinePattern.Dash));
-  annotation (Documentation(info="<html>
-<p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
-<p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>
-</html>", revisions="<html>
+  annotation (Documentation(info="<html><p>
+  Checks if the nSet value is legal by checking if the device can
+  either be turned on or off, depending on which state it was in.
+</p>
+<p>
+  E.g. If it is turned on, and the new nSet value is 0, it will only
+  turn off if current runtime is longer than the minimal runtime. Else
+  it will keep the current rotating speed.
+</p>
 <ul>
-<li>
-<i>November 26, 2018&nbsp;</i> by Fabian Wüllhorst: <br/>
-First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
-</li>
+  <li>
+    <i>November 26, 2018&#160;</i> by Fabian Wüllhorst:<br/>
+    First implementation (see issue <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/577\">#577</a>)
+  </li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-120,-120},{120,100}})),

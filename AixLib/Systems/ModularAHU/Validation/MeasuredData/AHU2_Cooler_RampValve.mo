@@ -1356,23 +1356,70 @@ record AHU2_Cooler_RampValve
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    Documentation(info="<html>
-<h4>Data of an step response experiment with the air handling unit 2 (AHU2) Cooler</h4>
-<p>This record contains the measured data of an step response. The investigated system is a cooler of an air handling unit (air handling unit 2 of the E.ON ERC test hall; Data:&apos;ZUGABE_20170808_121203_measurement&apos;).</p>
-<p>The heating register is supplied by a mixing circuit with a three-way-valve. </p>
-<p>During the experiment the three-way-valve is slowly openend.</p>
-<p>The record contains the following data points for each experiment (columns): </p>
-<p>[ 1: Timestep | 2: &apos;AHU2.Co.SenTempReFE.T&apos; | 3: &apos;AHU2.Co.SenTempFlFe.T&apos; | 4: &apos;AHU2.Co.SenTempFlHeBel.T&apos; | 5: &apos;AHU2.Co.SenTempReHeBel.T&apos; | 6: &apos;AHU2.Co.SenPTHEn.T&apos; | 7: &apos;AHU2.Co.SenPTHEx.T&apos; | 8: &apos;AHU2.Ac.SenVFSupA.VFout&apos; | 9: &apos;AHU2.Co.SenBelVFWa.VF&apos; | 10: &apos;AHU2.Co.SenMFM.VF&apos; | 11: &apos;AHU2.Co.TempF.T33&apos; | 12: &apos;AHU2.Co.TempF.T12&apos; | 13: &apos;AHU2.Co.Valve3W.ValvePosAct&apos; | 14: &apos;AHU2.Co.PumpComp.RevcAct&apos;]</p>
+    Documentation(info="<html><h4>
+  Data of an step response experiment with the air handling unit 2
+  (AHU2) Cooler
+</h4>
+<p>
+  This record contains the measured data of an step response. The
+  investigated system is a cooler of an air handling unit (air handling
+  unit 2 of the E.ON ERC test hall;
+  Data:'ZUGABE_20170808_121203_measurement').
+</p>
+<p>
+  The heating register is supplied by a mixing circuit with a
+  three-way-valve.
+</p>
+<p>
+  During the experiment the three-way-valve is slowly openend.
+</p>
+<p>
+  The record contains the following data points for each experiment
+  (columns):
+</p>
+<p>
+  [ 1: Timestep | 2: 'AHU2.Co.SenTempReFE.T' | 3:
+  'AHU2.Co.SenTempFlFe.T' | 4: 'AHU2.Co.SenTempFlHeBel.T' | 5:
+  'AHU2.Co.SenTempReHeBel.T' | 6: 'AHU2.Co.SenPTHEn.T' | 7:
+  'AHU2.Co.SenPTHEx.T' | 8: 'AHU2.Ac.SenVFSupA.VFout' | 9:
+  'AHU2.Co.SenBelVFWa.VF' | 10: 'AHU2.Co.SenMFM.VF' | 11:
+  'AHU2.Co.TempF.T33' | 12: 'AHU2.Co.TempF.T12' | 13:
+  'AHU2.Co.Valve3W.ValvePosAct' | 14: 'AHU2.Co.PumpComp.RevcAct']
+</p>
 </html>"));
 
 
-  annotation (Documentation(info="<html>
-<h4>Data of a ramp experiment with the air handling unit 2 (AHU2) Cooler</h4>
-<p>This record contains the measured data of a ramp of the three way valve. The investigated system is a cooler of an air handling unit (air handling unit 2 of the E.ON ERC test hall (Data: &apos;ZUGABE_20181212_115641_measurement&apos;)).</p>
-<p>The heating register is supplied by a mixing circuit with a three-way-valve. </p>
-<p>During the experiment the three-way-valve is slowly openend.</p>
-<p>The experiment is performed with an air volume flow of 3000m^3/h and a constant pump frequenzy (1500/min).</p>
-<p>The record contains the following data points (columns): </p>
-<p>[ 1: Timestep | 2: &apos;AHU2.Co.SenTempReFE.T&apos; | 3: &apos;AHU2.Co.SenTempFlFe.T&apos; | 4: &apos;AHU2.Co.SenTempFlHeBel.T&apos; | 5: &apos;AHU2.Co.SenTempReHeBel.T&apos; | 6: &apos;AHU2.Co.SenPTHEn.T&apos; | 7: &apos;AHU2.Co.SenPTHEx.T&apos; | 8: &apos;AHU2.Ac.SenVFSupA.VFout&apos; | 9: &apos;AHU2.Co.SenBelVFWa.VF&apos; | 10: &apos;AHU2.Co.SenMFM.VF&apos; | 11: &apos;AHU2.Co.TempF.T33&apos; | 12: &apos;AHU2.Co.TempF.T12&apos; | 13: &apos;AHU2.Co.Valve3W.ValvePosAct&apos; | 14: &apos;AHU2.Co.PumpComp.RevcAct&apos;]</p>
+  annotation (Documentation(info="<html><h4>
+  Data of a ramp experiment with the air handling unit 2 (AHU2) Cooler
+</h4>
+<p>
+  This record contains the measured data of a ramp of the three way
+  valve. The investigated system is a cooler of an air handling unit
+  (air handling unit 2 of the E.ON ERC test hall (Data:
+  'ZUGABE_20181212_115641_measurement')).
+</p>
+<p>
+  The heating register is supplied by a mixing circuit with a
+  three-way-valve.
+</p>
+<p>
+  During the experiment the three-way-valve is slowly openend.
+</p>
+<p>
+  The experiment is performed with an air volume flow of 3000m^3/h and
+  a constant pump frequenzy (1500/min).
+</p>
+<p>
+  The record contains the following data points (columns):
+</p>
+<p>
+  [ 1: Timestep | 2: 'AHU2.Co.SenTempReFE.T' | 3:
+  'AHU2.Co.SenTempFlFe.T' | 4: 'AHU2.Co.SenTempFlHeBel.T' | 5:
+  'AHU2.Co.SenTempReHeBel.T' | 6: 'AHU2.Co.SenPTHEn.T' | 7:
+  'AHU2.Co.SenPTHEx.T' | 8: 'AHU2.Ac.SenVFSupA.VFout' | 9:
+  'AHU2.Co.SenBelVFWa.VF' | 10: 'AHU2.Co.SenMFM.VF' | 11:
+  'AHU2.Co.TempF.T33' | 12: 'AHU2.Co.TempF.T12' | 13:
+  'AHU2.Co.Valve3W.ValvePosAct' | 14: 'AHU2.Co.PumpComp.RevcAct']
+</p>
 </html>"));
 end AHU2_Cooler_RampValve;
