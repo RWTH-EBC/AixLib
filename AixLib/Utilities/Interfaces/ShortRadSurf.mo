@@ -1,12 +1,12 @@
 within AixLib.Utilities.Interfaces;
 expandable connector ShortRadSurf
   "Expandable connector for short wave radiation for a surface"
-  Modelica.SIunits.Power QRad_out "Outuput short waved radiation heat flow rate";
-  Modelica.SIunits.Power QRad_in "Input short waved radiation heat flow rate";
+  Modelica.SIunits.Power QRad_out "Output short waved radiation from the room to the surface";
+  Modelica.SIunits.Power QRad_in "Input short waved radiation from the surface to the room";
 
   Modelica.SIunits.Length L "Length of surface" annotation(HideResult=false);
   Modelica.SIunits.Height H "Height of surface" annotation(HideResult=false);
-  Real eps "Emissivity of surface" annotation(HideResult=false);
+  //Real eps "Emissivity of surface" annotation(HideResult=false);
   Real rho "Reflectivity of surface" annotation(HideResult=false);
   Real tau "Transmissivity of surface" annotation(HideResult=false);
   Real alpha "Absorptivity of surface, equal to eps or 1-rho-tau" annotation(HideResult=false);

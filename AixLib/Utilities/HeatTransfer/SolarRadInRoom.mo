@@ -87,15 +87,15 @@ model SolarRadInRoom
 
   // Define second bounce values:
   Real bounce_2_floor_floor = 0;
-  Real bounce_2_floor_cei[nCei] = (1-alpha_flo_int) .* sight_fac_floor_cei .* ceilings.eps;
-  Real bounce_2_floor_wall[nWalls] = (1-alpha_flo_int) .* sight_fac_floor_wall .* walls.eps;
+  Real bounce_2_floor_cei[nCei] = (1-alpha_flo_int) .* sight_fac_floor_cei .* ceilings.alpha;
+  Real bounce_2_floor_wall[nWalls] = (1-alpha_flo_int) .* sight_fac_floor_wall .* walls.alpha;
   Real bounce_2_floor_win_lost = (1-alpha_flo_int) * sight_fac_floor_win * (1-(rho_win_int + alpha_win_int/2));
   Real bounce_2_floor_win_abs = (1-alpha_flo_int) * sight_fac_floor_win * alpha_win_int/2;
   Real sum_bounce_2 = sum(bounce_2_floor_cei) + sum(bounce_2_floor_wall) + bounce_2_floor_win_lost + bounce_2_floor_win_abs;
 
   // Define third bounce values. Info: rem means remaining, non absorbed heat:
-  Real bounce_3_rem_cei[nCei] = (1 - sum_bounce_1 - sum_bounce_2) .* A_ceil .* ceilings.eps / area_total;
-  Real bounce_3_rem_wall[nWalls] = (1 - sum_bounce_1 - sum_bounce_2) .* A_walls .* walls.eps / area_total;
+  Real bounce_3_rem_cei[nCei] = (1 - sum_bounce_1 - sum_bounce_2) .* A_ceil .* ceilings.alpha / area_total;
+  Real bounce_3_rem_wall[nWalls] = (1 - sum_bounce_1 - sum_bounce_2) .* A_walls .* walls.alpha / area_total;
   Real bounce_3_rem_floor = (1 - sum_bounce_1 - sum_bounce_2) *  A_floor / area_total * alpha_flo_int;
   Real bounce_3_rem_win_lost = (1 - sum_bounce_1 - sum_bounce_2) *  A_win / area_total * (1-(rho_win_int + alpha_win_int/2));
   Real bounce_3_rem_win_abs = (1 - sum_bounce_1 - sum_bounce_2) *  A_win / area_total * alpha_win_int;
