@@ -34,8 +34,6 @@ model Case400
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
-    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable,
     outerWall_South(
       use_shortWaveRadIn=false,
       use_shortWaveRadOut=false,

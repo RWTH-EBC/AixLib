@@ -38,9 +38,8 @@ model Case940
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(wallTypes(OW=
-        AixLib.DataBase.Walls.ASHRAE140.OW_Case900(),
-       groundPlate_upp_half = AixLib.DataBase.Walls.ASHRAE140.FL_Case900()), absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
+          AixLib.DataBase.Walls.ASHRAE140.OW_Case900(), groundPlate_upp_half=
+          AixLib.DataBase.Walls.ASHRAE140.FL_Case900()))
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));

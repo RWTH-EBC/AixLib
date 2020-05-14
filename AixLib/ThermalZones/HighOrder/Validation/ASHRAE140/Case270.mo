@@ -7,6 +7,5 @@ model Case270
       outerWall_West(use_shortWaveRadIn=true),
       outerWall_North(use_shortWaveRadIn=true),
       outerWall_East(use_shortWaveRadIn=true),
-      floor(use_shortWaveRadIn=true),
-      absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09));
+      floor(use_shortWaveRadIn=true)));
 end Case270;

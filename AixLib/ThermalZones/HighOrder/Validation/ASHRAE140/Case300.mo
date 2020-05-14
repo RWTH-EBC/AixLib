@@ -34,21 +34,21 @@ model Case300
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
   Rooms.ASHRAE140.EastWestFacingWindows Room(
-    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs09,
-    redeclare Components.Types.CoeffTableEastWestWindow partialCoeffTable,
     outerWall_South(
       use_shortWaveRadIn=true,
       use_shortWaveRadOut=false,
       solar_absorptance=0.1,
       withWindow=false),
-    ceiling(use_shortWaveRadIn=true,  solar_absorptance=0.1),
+    ceiling(use_shortWaveRadIn=true, solar_absorptance=0.1),
     outerWall_West(
       use_shortWaveRadIn=true,
-      use_shortWaveRadOut=true,              solar_absorptance=0.1),
-    outerWall_North(use_shortWaveRadIn=true,  solar_absorptance=0.1),
+      use_shortWaveRadOut=true,
+      solar_absorptance=0.1),
+    outerWall_North(use_shortWaveRadIn=true, solar_absorptance=0.1),
     outerWall_East(
       use_shortWaveRadIn=true,
-      use_shortWaveRadOut=true,              solar_absorptance=0.1,
+      use_shortWaveRadOut=true,
+      solar_absorptance=0.1,
       calcMethodIn=1),
     floor(use_shortWaveRadIn=true))
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));

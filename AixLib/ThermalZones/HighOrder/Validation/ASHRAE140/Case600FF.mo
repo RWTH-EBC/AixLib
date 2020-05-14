@@ -35,8 +35,7 @@ model Case600FF
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
-  Rooms.ASHRAE140.SouthFacingWindows Room(absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
+  Rooms.ASHRAE140.SouthFacingWindows Room
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));

@@ -41,7 +41,6 @@ public
     withDoor=false,
     wallPar=wallTypes.OW,
     T0=Tset,
-    solarDistribution=partialCoeffTable.coeffOWSouth,
     wall_length=room_width,
     solar_absorptance=solar_absorptance_OW,
     calcMethodOut=2,
@@ -54,12 +53,12 @@ public
     windowarea=Win_Area,
     wall_height=room_height,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140()) annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
+    WindowType=AixLib.DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140())
+    annotation (Placement(transformation(extent={{-76,-36},{-62,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_West(
     use_shortWaveRadIn=true,
     wall_length=room_length,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWWest,
     withDoor=false,
     T0=Tset,
     outside=true,
@@ -78,7 +77,6 @@ public
     use_shortWaveRadIn=true,
     wall_length=room_length,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWEast,
     T0=Tset,
     outside=true,
     final withSunblind=use_sunblind,
@@ -95,7 +93,6 @@ public
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall_North(
     use_shortWaveRadIn=true,
     wall_height=room_height,
-    solarDistribution=partialCoeffTable.coeffOWNorth,
     U_door=5.25,
     door_height=1,
     door_width=2,
@@ -110,12 +107,12 @@ public
     final TOutAirLimit=TOutAirLimit,
     solar_absorptance=solar_absorptance_OW,
     surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster(),
-    calcMethodOut=2) annotation (Placement(transformation(extent={{74,-36},{60,44}})));
+    calcMethodOut=2)
+    annotation (Placement(transformation(extent={{74,-36},{60,44}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.Wall ceiling(
     use_shortWaveRadIn=true,
     wall_length=room_length,
     wall_height=room_width,
-    solarDistribution=partialCoeffTable.coeffCeiling,
     withDoor=false,
     T0=Tset,
     wallPar=wallTypes.roof,
@@ -135,7 +132,6 @@ public
     wall_length=room_length,
     wall_height=room_width,
     withDoor=false,
-    solarDistribution=partialCoeffTable.coeffFloor,
     T0=Tset,
     wallPar=wallTypes.groundPlate_upp_half,
     solar_absorptance=solar_absorptance_OW,
@@ -156,19 +152,11 @@ public
     Utilities.Interfaces.SolarRad_in   SolarRadiationPort[5] "N,E,S,W,Hor"
       annotation (Placement(transformation(extent={{-120,50},{-100,70}})));
 
-  parameter Components.Types.selectorCoefficients absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06
-    "Coefficients for interior solar absorptance of wall surface abs={0.6, 0.9, 0.1}";
-
-  replaceable parameter Components.Types.CoeffTableSouthWindow partialCoeffTable constrainedby
-    Components.Types.PartialCoeffTable(final abs=absInnerWallSurf)
-    annotation (Placement(transformation(extent={{76,78},{96,98}})),
-     choicesAllMatching=true);
-
   Utilities.HeatTransfer.SolarRadInRoom solarRadInRoom(
     nWin=1,
     nWalls=4,
     nFloors=1,
-    nCei=1) annotation (Placement(transformation(extent={{-50,32},{-26,56}})));
+    nCei=1) annotation (Placement(transformation(extent={{-54,36},{-30,60}})));
 equation
     connect(floor.port_outside, Therm_ground) annotation (Line(
         points={{-32,-66.1003},{-32,-96}},
@@ -244,22 +232,24 @@ equation
     annotation (Line(points={{-7,-8},{-6,-8},{-6,-56},{-54,-56},{-54,4},{-62,4}},
         color={191,0,0}));
   connect(outerWall_South.shortRadWin, solarRadInRoom.win_in[1]) annotation (
-      Line(points={{-62.7,-16},{-51.2,-16},{-51.2,44}}, color={0,0,0}));
+      Line(points={{-59.9,-15.6667},{-55.2,-15.6667},{-55.2,48}},
+                                                        color={0,0,0}));
   connect(solarRadInRoom.walls[1], outerWall_West.shortRadWall) annotation (
-      Line(points={{-24.8,50.3},{41.6,50.3},{41.6,74.4}}, color={0,0,0}));
+      Line(points={{-28.8,54.3},{41.8,54.3},{41.8,57}},   color={0,0,0}));
   connect(solarRadInRoom.walls[2], outerWall_North.shortRadWall) annotation (
-      Line(points={{-24.8,50.9},{40,50.9},{40,30},{60.7,30}}, color={0,0,0}));
+      Line(points={{-28.8,54.9},{40,54.9},{40,30.3333},{30.25,30.3333}},
+                                                              color={0,0,0}));
   connect(solarRadInRoom.ceilings[1], ceiling.shortRadWall) annotation (Line(
-        points={{-24.8,41.6},{-14,41.6},{-14,68},{-24.2,68},{-24.2,76.2}},
+        points={{-28.8,45.6},{-14,45.6},{-14,68},{-24.1,68},{-24.1,67.5}},
         color={0,0,0}));
-  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points
-        ={{-24.8,46.4},{40,46.4},{40,-50},{-42,-50},{-42,-62.2},{-39.8,-62.2}},
+  connect(solarRadInRoom.floors[1], floor.shortRadWall) annotation (Line(points={{-28.8,
+          50.4},{40,50.4},{40,-50},{-42,-50},{-42,-53.4992},{-39.9,-53.4992}},
         color={0,0,0}));
   connect(solarRadInRoom.walls[3], outerWall_East.shortRadWall) annotation (
-      Line(points={{-24.8,51.5},{40,51.5},{40,-50},{10.4,-50},{10.4,-64.4}},
+      Line(points={{-28.8,55.5},{40,55.5},{40,-50},{10.2,-50},{10.2,-46.9999}},
         color={0,0,0}));
   connect(solarRadInRoom.walls[4], outerWall_South.shortRadWall) annotation (
-      Line(points={{-24.8,52.1},{-16,52.1},{-16,60},{-62.7,60},{-62.7,30}},
+      Line(points={{-28.8,56.1},{-16,56.1},{-16,60},{-32.25,60},{-32.25,30.3333}},
         color={0,0,0}));
     annotation ( Icon(coordinateSystem(extent={{-100,-100},
               {100,100}}, preserveAspectRatio=false),
