@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
-model Case900
+model Case220
   extends Modelica.Icons.Example;
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.BaseClasses.Sun sun(
     TimeCorrection=0,
@@ -22,24 +22,31 @@ model Case900
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=
-        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-114,0},{-94,20}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
     tableName="Table",
     columns={4,5,6,7},
-    fileName=
-        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-114,30},{-94,50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
-  Rooms.ASHRAE140.SouthFacingWindows Room(wallTypes(OW=
-        AixLib.DataBase.Walls.ASHRAE140.OW_Case900(),
-       groundPlate_upp_half = AixLib.DataBase.Walls.ASHRAE140.FL_Case900()), absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
-    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
+  Rooms.ASHRAE140.SouthFacingWindows Room(
+    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
+    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable,
+    outerWall_South(
+      use_shortWaveRadIn=false,
+      use_shortWaveRadOut=false,
+      solar_absorptance=0.1),
+    ceiling(use_shortWaveRadIn=false, solar_absorptance=0.1),
+    outerWall_West(use_shortWaveRadIn=false, solar_absorptance=0.1),
+    outerWall_North(use_shortWaveRadIn=false, solar_absorptance=0.1),
+    outerWall_East(use_shortWaveRadIn=false, solar_absorptance=0.1),
+    floor(use_shortWaveRadIn=false))
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
+
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));
   Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
@@ -48,28 +55,13 @@ model Case900
     annotation (Placement(transformation(extent={{90,22},{110,42}})));
   Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
     annotation (Placement(transformation(extent={{90,6},{110,26}})));
-  Utilities.Sensors.EnergyMeter      SolarMeter[6]
-    annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
-    annotation (Placement(transformation(extent={{73,-14},{93,6}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
-    annotation (Placement(transformation(extent={{95,-18},{115,2}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
-    annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
-    annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
-    annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
-  Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
-    "in kWh/m2"
-    annotation (Placement(transformation(extent={{73,-72},{93,-52}})));
-  Modelica.Blocks.Sources.Constant AirExchangeRate(k=0.41)
+  Modelica.Blocks.Sources.Constant AirExchangeRate(k=0)
     annotation (Placement(transformation(extent={{-40,-50},{-27,-37}})));
-  Modelica.Blocks.Sources.Constant Source_InternalGains_convective(k=0.4*200)
+  Modelica.Blocks.Sources.Constant Source_InternalGains_convective(k=0.4*0)
     annotation (Placement(transformation(extent={{-112,-31},{-99,-18}})));
-  Modelica.Blocks.Sources.Constant Source_InternalGains_radiative(k=0.6*200)
+  Modelica.Blocks.Sources.Constant Source_InternalGains_radiative(k=0.6*0)
     annotation (Placement(transformation(extent={{-112,-58},{-100,-46}})));
-  Modelica.Blocks.Sources.Constant Source_TsetC(k=273.15 + 27)
+  Modelica.Blocks.Sources.Constant Source_TsetC(k=273.15 + 20.1)
     annotation (Placement(transformation(extent={{-10,-50},{3,-37}})));
   Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 20)
     annotation (Placement(transformation(extent={{40,-50},{27,-37}})));
@@ -79,7 +71,8 @@ model Case900
     h_heater=1e6,
     KR_heater=1000,
     l_cooler=-1e6,
-    KR_cooler=1000)
+    KR_cooler=1000,
+    recOrSep=false)
     annotation (Placement(transformation(extent={{6,-34},{26,-14}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow Ground(Q_flow=0)
     "adiabatic boundary"
@@ -104,27 +97,10 @@ equation
     connect(Solar_Radiation.y[2], radOnTiltedSurf_Perez[i].solarInput2);
   end for;
 
-  //Connections for output solar model to meters
-  for i in 1:5 loop
-      SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
-  end for;
-    //Transmitted radiation through window
-  SolarMeter[6].p = Room.outerWall_South.solarRadWinTrans;
-
-  // Set outputs
-    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000*3600); //in MWh
-    integrator.u =idealHeaterCooler.coolingPower /(1000*1000*3600); //in MWh
-
-  //solar radiation
-  IncidentSolarRadiationN = SolarMeter[1].q_kWh;
-  IncidentSolarRadiationE = SolarMeter[2].q_kWh;
-  IncidentSolarRadiationS = SolarMeter[3].q_kWh;
-  IncidentSolarRadiationW = SolarMeter[4].q_kWh;
-  IncidentSolarRadiationHor = SolarMeter[5].q_kWh;
-
-  TransmittedSolarRadiation_room = SolarMeter[6].q_kWh / Room.Win_Area;
 
   PowerLoad =(idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower)/1000;
+  integrator1.u =idealHeaterCooler.heatingPower /(1000*1000*3600); //in MWh
+  integrator.u =idealHeaterCooler.coolingPower /(1000*1000*3600); //in MWh
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},
@@ -176,6 +152,12 @@ equation
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
         grid={1,1}), graphics={
+        Text(
+          extent={{-56,-2},{12,-10}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Building physics"),
         Rectangle(
           extent={{-48,90},{48,-10}},
           lineColor={0,0,255},
@@ -238,7 +220,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Internal gains"),
         Text(
-          extent={{-55,0},{13,-8}},
+          extent={{-55,-2},{13,-10}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
@@ -256,9 +238,5 @@ equation
  </html>",
          info="<html>
 <p>As described in ASHRAE Standard 140.</p>
-<p>Difference to case 600: </p>
-<ul>
-<li>high mass exterior vertical walls and floor  </li>
-</ul>
 </html>"));
-end Case900;
+end Case220;
