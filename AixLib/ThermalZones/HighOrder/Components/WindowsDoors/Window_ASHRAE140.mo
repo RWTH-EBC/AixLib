@@ -26,7 +26,8 @@ model Window_ASHRAE140
 
 
   replaceable model correctionSolarGain =
-      BaseClasses.CorrectionSolarGain.NoCorG constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG constrainedby
+    BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(
         descriptionLabel=true), choicesAllMatching=true);
 
@@ -93,7 +94,12 @@ equation
       color={255,128,0}));
   connect(pane2.port_b, twoStar_RadEx.convPort) annotation (Line(points={{38,-8},{42,-8},{42,32},{44,32}}, color={191,0,0}));
   connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
-  connect(Ag.y, solarRadWinTrans) annotation (Line(points={{8.6,60},{58,60},{58,80},{92,80}}, color={0,0,127}));
+  connect(Ag.y, shortRadWin.QRad_in) annotation (Line(points={{8.6,60},{50,60},
+          {50,88.05},{90.05,88.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,

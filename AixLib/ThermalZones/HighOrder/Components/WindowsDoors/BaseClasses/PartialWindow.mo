@@ -27,9 +27,8 @@ annotation (Placement(
       transformation(extent={{-116,-76},{-82,-42}}),
       iconTransformation(extent={{-100,-60},{-80,-40}}),
       visible=use_windSpeedPort));
-  Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans if use_solarRadWinTrans
-    "Output signal connector"
-    annotation (Placement(transformation(extent={{82,70},{102,90}}), visible=use_solarRadWinTrans));
+  Utilities.Interfaces.ShortRadSurf shortRadWin if use_solarRadWinTrans
+    annotation (Placement(transformation(extent={{80,78},{100,98}})));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics={
