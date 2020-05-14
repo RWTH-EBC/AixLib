@@ -63,6 +63,17 @@ model Window_ASHRAE140
   Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea)
     "multiplication with area"
     annotation (Placement(transformation(extent={{-4,54},{8,66}})));
+  Modelica.Blocks.Sources.Constant constAlp(k=1 - WindowType.g) if
+    use_solarRadWinTrans "Reflectivity assumed as 0, therefore alpha = 1-tau"
+    annotation (Placement(transformation(extent={{66,108},{74,116}})));
+  Modelica.Blocks.Sources.Constant constLength(k=windowarea) if
+    use_solarRadWinTrans
+    annotation (Placement(transformation(extent={{66,92},{74,100}})));
+  Modelica.Blocks.Sources.Constant constLength1(k=1) if use_solarRadWinTrans
+    annotation (Placement(transformation(extent={{66,122},{74,130}})));
+  Modelica.Blocks.Sources.Constant constRho(k=0) if use_solarRadWinTrans
+    "Reflectivity assumed as 0"
+    annotation (Placement(transformation(extent={{48,100},{56,108}})));
 equation
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
   points={{-46,-10},{-46,-8},{-38,-8}},
@@ -96,6 +107,30 @@ equation
   connect(WindSpeedPort, heatConv_outside.WindSpeedPort) annotation (Line(points={{-99,-59},{-70,-59},{-70,-17},{-65,-17}}, color={0,0,127}));
   connect(Ag.y, shortRadWin.QRad_in) annotation (Line(points={{8.6,60},{50,60},
           {50,88.05},{90.05,88.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constLength.y, shortRadWin.L) annotation (Line(points={{74.4,96},{82,
+          96},{82,88.05},{90.05,88.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constLength1.y, shortRadWin.H) annotation (Line(points={{74.4,126},{
+          90,126},{90,118},{90.05,118},{90.05,88.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constAlp.y, shortRadWin.alpha) annotation (Line(points={{74.4,112},{
+          90.05,112},{90.05,88.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(constRho.y, shortRadWin.rho) annotation (Line(points={{56.4,104},{
+          90.05,104},{90.05,88.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

@@ -152,11 +152,11 @@ model Wall
     "Longwave emission coefficient of the interior surface"
     annotation (Dialog(tab="Surface Parameters", group="Inside surface"));
   Utilities.Interfaces.ShortRadSurf shortRadWall if use_shortWaveRadIn
-    annotation (Placement(transformation(extent={{5,65},{31,91}}),
-        iconTransformation(extent={{5,65},{31,91}})));
+    annotation (Placement(transformation(extent={{6,66},{32,92}}),
+        iconTransformation(extent={{6,66},{32,92}})));
   Utilities.Interfaces.ShortRadSurf shortRadWin if withWindow and
-    use_shortWaveRadOut annotation (Placement(transformation(extent={{5,-73},{
-            31,-47}}), iconTransformation(extent={{5,-73},{31,-47}})));
+    use_shortWaveRadOut annotation (Placement(transformation(extent={{9,-74},{
+            35,-48}}), iconTransformation(extent={{9,-74},{35,-48}})));
   Modelica.Blocks.Sources.Constant constEps(k=wallPar.eps) if
     use_shortWaveRadIn
     annotation (Placement(transformation(extent={{68,92},{76,100}})));
@@ -246,33 +246,33 @@ equation
   connect(WindSpeedPort, windowSimple.WindSpeedPort) annotation (Line(points={{-103,64},{-72,64},{-72,-62},{-20,-62},{-20,-41.5},{-13.7,-41.5}}, color={0,0,127}));
 
 
-  connect(shortRadWin, windowSimple.shortRadWin) annotation (Line(points={{18,
-          -60},{60,-60},{60,-23.56},{9.7,-23.56}}, color={0,0,0}), Text(
+  connect(shortRadWin, windowSimple.shortRadWin) annotation (Line(points={{22,
+          -61},{60,-61},{60,-23.56},{9.7,-23.56}}, color={0,0,0}), Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(shortRadWall.QRad_out, absSolarRadWin.Q_flow) annotation (Line(points
-        ={{18.065,78.065},{79.5,78.065},{79.5,80},{55,80}}, color={0,0,0}),
+        ={{19.065,79.065},{79.5,79.065},{79.5,80},{55,80}}, color={0,0,0}),
       Text(
       string="%first",
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constHeight.y, shortRadWall.H) annotation (Line(points={{76.4,56},{
-          18.065,56},{18.065,78.065}}, color={0,0,127}), Text(
+          19.065,56},{19.065,79.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constLength.y, shortRadWall.L) annotation (Line(points={{76.4,70},{
-          18.065,70},{18.065,78.065}}, color={0,0,127}), Text(
+          19.065,70},{19.065,79.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(constEps.y, shortRadWall.alpha) annotation (Line(points={{76.4,96},{
-          18.065,96},{18.065,78.065}}, color={0,0,127}), Text(
+          19.065,96},{19.065,79.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
