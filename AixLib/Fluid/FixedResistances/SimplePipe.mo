@@ -48,12 +48,6 @@ model SimplePipe "Simple pipe model with n discrete elements"
     annotation (Dialog(tab="Initialization"));
 
 
-
-  parameter Modelica.SIunits.Velocity v_nominal
-    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
-    annotation (Dialog(group="Nominal condition"));
-
-
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
@@ -84,7 +78,6 @@ model SimplePipe "Simple pipe model with n discrete elements"
     final roughness=roughness,
     final fac=fac,
     final ReC=ReC,
-    final v_nominal=v_nominal,
     final allowFlowReversal=allowFlowReversal,
     final show_T=false,
     final homotopyInitialization=homotopyInitialization,
@@ -143,6 +136,7 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.HorizontalCylinder),
         Text(
+          visible=pipeModel=="SimplePipe",
           extent={{-40,14},{40,-12}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
@@ -164,7 +158,7 @@ equation
 <li>Mai 07, 2020, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>", info="<html>
-<p>This model represents a pipe using a simple approach and consists of a <a href=\"modelica://AixLib/Fluid/FixedResistances/HydraulicDiameter.mo\">HydraulicDiamete</a>r and n volume elements to approximate the thermal wave propagation. The heat transfer through the pipe wall is modeled with a <a href=\"modelica://AixLib/Utilities/HeatTransfer/CylindricHeatTransfer.mo\">CylindricHeatTransfer</a>. This model can be used if a heat flow or heat transfer to the pipe has to be modeled and the thermal mass of the fluid cannot be neglected. Since the pipe is discretized in n elements, this model should only be used, if the dead time of the thermal wive propagation can be neglected. With an increasing number of elements (nNodes) the wave propagation becomes more realistic. However, the simulation time will increase as well.</p>
+<p>This model represents a pipe using a simple approach and consists of a <a href=\"modelica://AixLib/Fluid/FixedResistances/HydraulicDiameter.mo\">HydraulicDiamete</a>r and n volume elements to approximate the thermal wave propagation. The heat transfer through the pipe wall is modeled with a <a href=\"modelica://AixLib/Utilities/HeatTransfer/CylindricHeatTransfer.mo\">CylindricHeatTransfer</a> and can be deactivated. This model can be used if a heat flow or heat transfer to the pipe has to be modeled and the thermal mass of the fluid cannot be neglected. Since the pipe is discretized in n elements, this model should only be used, if the dead time of the thermal wive propagation can be neglected. With an increasing number of elements (nNodes) the wave propagation becomes more realistic. However, the simulation time will increase as well.</p>
 <p>For long pipes, the model <a href=\"modelica://AixLib/Fluid/FixedResistances/PlugFlowPipe.mo\">PlugFlowPipe</a> can be used (the heat transfer in the PlugFlowPipe can cause problems for small volume flows ).</p>
 </html>"));
 end SimplePipe;
