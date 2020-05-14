@@ -3,8 +3,7 @@ model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
   replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby
-    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
+      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final use_secHeaGen=use_secHeaGen);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
@@ -16,8 +15,8 @@ model HPControl
       choice=false "Function",
       radioButtons=true));
   replaceable function HeatingCurveFunction =
-      SetPoints.Functions.HeatingCurveFunction constrainedby
-    SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
+      SetPoints.Functions.HeatingCurveFunction constrainedby SetPoints.Functions.PartialBaseFct
+                                       annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=

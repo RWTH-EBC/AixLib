@@ -93,18 +93,18 @@ model Radiator "Radiator multilayer model"
     annotation (Placement(transformation(extent={{-60,20},{-44,36}}, rotation=
            0), iconTransformation(extent={{-30,10},{-10,30}})));
   AixLib.Utilities.Interfaces.RadPort RadiativeHeat "Radiative heat port to room" annotation (Placement(transformation(extent={{30,12},{50,30}}, rotation=0), iconTransformation(extent={{30,10},{50,30}})));
-  Sensors.TemperatureTwoPort FlowTemperature(redeclare package
-    Medium = Medium,
+  Sensors.TemperatureTwoPort FlowTemperature(redeclare package Medium =
+             Medium,
     m_flow_nominal=m_flow_nominal)
     "Flow temperature"
     annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
-  Sensors.TemperatureTwoPort ReturnTemperature(redeclare package
-    Medium = Medium,
+  Sensors.TemperatureTwoPort ReturnTemperature(redeclare package Medium =
+             Medium,
     m_flow_nominal=m_flow_nominal)
     "Return temperature"
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
-  BaseClasses.PressureDropRadiator pressureDropRadiator(redeclare package
-    Medium = Medium, PD=PD,
+  BaseClasses.PressureDropRadiator pressureDropRadiator(redeclare package Medium =
+             Medium, PD=PD,
     m_flow_small=0.01)
     "Base class of radiator"
     annotation (Placement(transformation(extent={{26,-10},{46,10}})));

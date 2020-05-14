@@ -2,8 +2,7 @@ within AixLib.DataBase.CHP.ModularCHPEngineMedia;
 package NaturalGasMixture_TypeL
   "Simple natural gas mixture (type L) for CHP-engine combustion"
 
-  extends
-    AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
+  extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CHPCombustionMixtureGasNasa(
     mediumName="NaturalGasMixtureTypeL",
     data={Modelica.Media.IdealGases.Common.SingleGasesData.N2,Modelica.Media.IdealGases.Common.SingleGasesData.CH4,
         Modelica.Media.IdealGases.Common.SingleGasesData.C2H4,Modelica.Media.IdealGases.Common.SingleGasesData.C2H6,
@@ -35,8 +34,7 @@ package NaturalGasMixture_TypeL
   constant Real L_st = l_min*0.02885/MM "Stoichiometric air consumption";
 
   record NaturalGasTypeL
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
+    extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
         fuelType="TypeL",
         isGasoline = true,
         Xi_mole={0.126,0.82,0,0.033,0.006,0.003,0,0,

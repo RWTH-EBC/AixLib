@@ -3,10 +3,9 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
 
   extends Modelica.Icons.Example;
 
-  extends
-    AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
-  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare
-        package Medium = Medium));
+  extends AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
+  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare package Medium =
+                         Medium));
 
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
@@ -56,9 +55,9 @@ equation
   connect(resistanceColdConsumerFlow.port_b,coldConsumerFlow. ports[1])
     annotation (Line(points={{94,-20},{94,-20},{148,-20}},  color={0,127,255}));
   connect(pressureDifference.y, pumpColdConsumer.dp_in) annotation (Line(points={{147.4,6},
-          {147.4,6},{64.86,6},{64.86,-11.6}},        color={0,0,127}));
+          {147.4,6},{65,6},{65,-11.6}},              color={0,0,127}));
   connect(pressureDifference.y, pumpHeatConsumer.dp_in) annotation (Line(points={{147.4,6},
-          {147.4,6},{56,6},{56,-36},{64.86,-36},{64.86,-41.6}},        color={0,
+          {147.4,6},{56,6},{56,-36},{65,-36},{65,-41.6}},              color={0,
           0,127}));
   connect(resistanceColdConsumerReturn.port_a,coldConsumerReturn. ports[1])
     annotation (Line(points={{94,32},{114,32},{148,32}},
@@ -66,12 +65,12 @@ equation
   connect(resistanceHeatConsumerReturn.port_a,heatConsumerReturn. ports[1])
     annotation (Line(points={{94,-106},{94,-106},{148,-106}}, color={0,127,255}));
   connect(pressureDifference.y, pumpEvaporator.dp_in) annotation (Line(points={{147.4,6},
-          {147.4,6},{64,6},{64,54},{7.14,54},{7.14,44.4}},        color={0,0,
+          {147.4,6},{64,6},{64,54},{7,54},{7,44.4}},              color={0,0,
           127}));
   connect(pressureDifference.y, pumpCondenser.dp_in) annotation (Line(points={{147.4,6},
-          {56,6},{56,-36},{-0.86,-36},{-0.86,-89.6}},         color={0,0,127}));
+          {56,6},{56,-36},{-1,-36},{-1,-89.6}},               color={0,0,127}));
   connect(pumpGeothermalSource.dp_in,pressureDifference. y) annotation (Line(
-        points={{-89.14,-45.6},{-89.14,-36},{56,-36},{56,6},{147.4,6}},color={0,
+        points={{-89,-45.6},{-89,-36},{56,-36},{56,6},{147.4,6}},      color={0,
           0,127}));
   connect(PeakLoadDevice.port_b,heatConsumerFlow. ports[1]) annotation (Line(
         points={{120,-50},{120,-50},{148,-50}}, color={0,127,255}));

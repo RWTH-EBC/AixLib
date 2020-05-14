@@ -27,7 +27,7 @@ model HPControllerOnOff
     annotation (Placement(transformation(extent={{-115,-55},{-85,-25}})));
 equation
 
-  connect(N.y, heatPumpControlBus.N) annotation (Line(points={{9,40},{40,40},{40,
+  connect(N.y,heatPumpControlBus.n)  annotation (Line(points={{9,40},{40,40},{40,
           0.3525},{99.6475,0.3525}},
                                    color={0,0,127}), Text(
       string="%second",

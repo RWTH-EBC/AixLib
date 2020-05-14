@@ -6,7 +6,6 @@ package Internal "Solve f(x, data) for x with given f"
   algorithm
      y := pW_TDewPoi(x);
   end f_nonlinear;
-
 annotation (
 Documentation(
 info="<html>

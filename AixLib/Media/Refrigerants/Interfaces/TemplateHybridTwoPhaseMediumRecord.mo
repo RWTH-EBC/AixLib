@@ -29,8 +29,7 @@ partial package TemplateHybridTwoPhaseMediumRecord
     are the refrigerant name as well as the valid refrigerant limits in terms
     of specific enthalpy, density, absolute pressure and temperature.
   */
-  extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="Name",
     substanceNames={"Name"},
     singleState=false,
@@ -87,20 +86,17 @@ partial package TemplateHybridTwoPhaseMediumRecord
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
   end EoS;
 
   redeclare record BDSP "Record that contains fitting coefficients of the
     state properties at bubble and dew lines"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
   redeclare record TSP "Record that contains fitting coefficients of the
     state properties calculated with two independent state properties"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
   end TSP;
 
   redeclare record SmoothTransition

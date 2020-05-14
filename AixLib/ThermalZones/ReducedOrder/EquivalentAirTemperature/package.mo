@@ -93,9 +93,6 @@ http://www.ep.liu.se/ecp/096/013/ecp14096013.pdf</a></p>
 </html>"));
 end UsersGuide;
 
-
-
-
   annotation (Documentation(info="<html>
 <p>
 This package contains models to calculate an equivalent air temperature

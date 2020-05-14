@@ -54,8 +54,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(powerPassThrough.y, pumpControllerBus.PelMea) annotation (Line(points
-        ={{-88.7,-53},{-98,-53},{-98,100.1},{0.1,100.1}}, color={0,0,127}));
+  connect(powerPassThrough.y, pumpControllerBus.PelMea) annotation (Line(points=
+         {{-88.7,-53},{-98,-53},{-98,100.1},{0.1,100.1}}, color={0,0,127}));
   connect(pumpBus.efficiencyMea, efficiencyPassThrough.u) annotation (Line(
       points={{0.1,-99.9},{-62,-99.9},{-62,-71},{-72.6,-71}},
       color={255,204,51},
@@ -63,8 +63,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(efficiencyPassThrough.y, pumpControllerBus.efficiencyMea) annotation
-    (Line(points={{-88.7,-71},{-98,-71},{-98,100.1},{0.1,100.1}}, color={0,0,
+  connect(efficiencyPassThrough.y, pumpControllerBus.efficiencyMea) annotation (
+     Line(points={{-88.7,-71},{-98,-71},{-98,100.1},{0.1,100.1}}, color={0,0,
           127}));
   connect(pumpBus.vFRcur_m3h, Q.u) annotation (Line(
       points={{0,-100},{-2,-100},{-2,-76},{-13,-76},{-13,-37.4}},

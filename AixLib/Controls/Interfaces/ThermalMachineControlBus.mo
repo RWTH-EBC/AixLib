@@ -3,8 +3,9 @@ expandable connector ThermalMachineControlBus
   "Standard data bus with heat pump or chiller information"
 extends Modelica.Icons.SignalBus;
 
-Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm N "rotational speed compressor"
+Real n "relative rotational speed of compressor between 0 and 1"
   annotation (HideResult=false);
+
 Boolean onOff "true: on" annotation (HideResult=false);
 
 Boolean mode "true: main operation mode, false: reversible operation mode";
@@ -31,7 +32,7 @@ Modelica.SIunits.ThermodynamicTemperature T_amb_eva
 Modelica.SIunits.ThermodynamicTemperature T_amb_con
   "Ambient temperature on condenser side";
 Real iceFac
-  "Factor(0..1) to estimate efficiency losses through icing of evaporator"
+  "Efficiency factor (0..1) to estimate influence of icing. 0 means no heat is transferred through heat exchanger (fully frozen). 1 means no icing/frosting."
 annotation (
   defaultComponentName = "sigBusHP",
   Icon(coordinateSystem(preserveAspectRatio=false)),

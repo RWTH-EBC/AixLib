@@ -1,7 +1,6 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
 record Concrete
-  extends
-    DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
+  extends DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
     D=10.79,
     E=4.192,
     F=0.0);

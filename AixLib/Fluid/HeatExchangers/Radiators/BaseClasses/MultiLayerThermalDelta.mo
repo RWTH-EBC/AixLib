@@ -59,9 +59,7 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convective
     annotation (Placement(transformation(extent={{-48,74},{-32,88}},
           rotation=0)));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=(s_eff*Q_dot_nom_i)/((
-        delta_nom)*Modelica.Constants.sigma*eps), eps=1) annotation (Placement(
-        transformation(
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(A=(s_eff*Q_dot_nom_i)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1) annotation (Placement(transformation(
         origin={41,51},
         extent={{-11,-23},{11,23}},
         rotation=90)));
@@ -91,11 +89,11 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     nPorts=2,
     m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-16,-28},{6,-6}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureIn(redeclare package
-      Medium = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureIn(redeclare package Medium =
+               Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-70,-38},{-50,-18}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureOut(redeclare package
-      Medium = Medium, m_flow_nominal=m_flow_nominal)
+  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureOut(redeclare package Medium =
+               Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
 equation
  // Calculation of excess temperature
@@ -132,11 +130,11 @@ dT_R=TOut - TAir;
       points={{-11,27.52},{-11,32},{-17,32},{-17,41.1}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(radiator_wall.port_b, twoStar_RadEx.Therm) annotation (Line(
+  connect(radiator_wall.port_b, twoStar_RadEx.conv) annotation (Line(
       points={{-11,27.52},{-11,32},{41,32},{41,40.88}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(twoStar_RadEx.Star, radiative) annotation (Line(
+  connect(twoStar_RadEx.rad, radiative) annotation (Line(
       points={{41,61.01},{41,68.505},{31,68.505},{31,81}},
       color={95,95,95},
       pattern=LinePattern.None,

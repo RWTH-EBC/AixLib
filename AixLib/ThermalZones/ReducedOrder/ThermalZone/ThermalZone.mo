@@ -1,12 +1,10 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone
   "Thermal zone model with internal gains"
-  extends
-    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   replaceable model corG = SolarGain.CorrectionGDoublePane
-    constrainedby
-    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    constrainedby AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   parameter Integer internalGainsMode = 1
@@ -36,56 +34,34 @@ model ThermalZone
   parameter Modelica.SIunits.Time TN_cooler=1
     "Time constant of the cooling controller"
     annotation (Dialog(tab="IdealHeaterCooler", group="Cooler", enable=not recOrSep));
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureDependent
-    humanSenHeaDependent(
-    radiationConvertor(use_A_in=true),
-    final T0=zoneParam.T_start,
+  AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureDependent humanSenHeaDependent(
     final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
     final activityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-         ATot > 0 and internalGainsMode == 1
-    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 1 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent
-    humanSenHeaIndependent(
-    radiationConvertor(use_A_in=true),
-    final T0=zoneParam.T_start,
+  AixLib.BoundaryConditions.InternalGains.Humans.HumanSensibleHeatTemperatureIndependent humanSenHeaIndependent(
     final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-         ATot > 0 and internalGainsMode == 2
-    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 2 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  AixLib.Utilities.Sources.InternalGains.Humans.HumanTotalHeatTemperatureDependent
-    humanTotHeaDependent(
-    radiationConvertor(use_A_in=true),
-    final T0=zoneParam.T_start,
+  AixLib.BoundaryConditions.InternalGains.Humans.HumanTotalHeatTemperatureDependent humanTotHeaDependent(
     final ratioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople,
     final roomArea=zoneParam.AZone,
     final specificPersons=zoneParam.specificPeople,
     final activityDegree=zoneParam.activityDegree,
-    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if
-         ATot > 0 and internalGainsMode == 3
-    annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
+    final specificHeatPerPerson=zoneParam.fixedHeatFlowRatePersons) if ATot > 0 and internalGainsMode == 3 annotation (Placement(transformation(extent={{64,-36},{84,-16}})));
 
-  replaceable AixLib.Utilities.Sources.InternalGains.Machines.MachinesAreaSpecific
-    machinesSenHea(
-      final ratioConv=zoneParam.ratioConvectiveHeatMachines,
-      final T0=zoneParam.T_start,
-      final InternalGainsMachinesSpecific=zoneParam.internalGainsMachinesSpecific,
-      final RoomArea=zoneParam.AZone) if ATot > 0
-    "Internal gains from machines"
-    annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
-  replaceable AixLib.Utilities.Sources.InternalGains.Lights.LightsAreaSpecific
-    lights(
-      final ratioConv=zoneParam.ratioConvectiveHeatLighting,
-      final T0=zoneParam.T_start,
-      final LightingPower=zoneParam.lightingPowerSpecific,
-      final RoomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light"
-    annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
+  replaceable AixLib.BoundaryConditions.InternalGains.Machines.MachinesAreaSpecific machinesSenHea(
+    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+    final intGainsMachinesRoomAreaSpecific=zoneParam.internalGainsMachinesSpecific,
+    final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from machines" annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
+  replaceable AixLib.BoundaryConditions.InternalGains.Lights.LightsAreaSpecific lights(
+    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
+    final lightingPowerRoomAreaSpecific=zoneParam.lightingPowerSpecific,
+    final roomArea=zoneParam.AZone) if ATot > 0 "Internal gains from light" annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   corG corGMod(
     final n=zoneParam.nOrientations,
     final UWin=zoneParam.UWin) if
@@ -234,7 +210,8 @@ protected
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={62,18})));
   Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
-    zoneParam.AFloor > 0 "Outdoor surface temperature for floor plate"
+    zoneParam.AFloor > 0
+    "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={43,8})));
   Modelica.Blocks.Sources.Constant hConWall(final k=(zoneParam.hConWallOut + zoneParam.hRadWall)*sum(zoneParam.AExt))
@@ -263,7 +240,7 @@ protected
     sum(zoneParam.AWin) > 0
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{4,23},{16,35}})));
-
+  
   Modelica.Blocks.Sources.Constant shadingNoWin[zoneParam.nOrientations](each final
       k=0) if sum(zoneParam.ATransparent) <= 0
      "Dummy value for shaded g-value if no windows are in zone"
@@ -271,51 +248,41 @@ protected
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={-39,28})));
+
 equation
-  connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-100},
-          {80,-100},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
-  connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},
-          {80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
-  connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
+  connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{80,-100},{80,-78},{54,-78},{54,-46.5},{64,-46.5}}, color={0,0,127}));
+  connect(intGains[3], lights.uRel) annotation (Line(points={{80,-86.6667},{80,-86.6667},{80,-78},{54,-78},{54,-66.5},{64,-66.5}}, color={0,0,127}));
+  connect(lights.convHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
           {92,-60.8},{92,-60},{92,-60},{92,50},{86,50},{86,50}},
                                        color={191,0,0}));
-  connect(machinesSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
+  connect(machinesSenHea.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
           -40.8},{92,-40.8},{92,-40},{92,-40},{92,50},{86,50},{86,50}},
                                                  color={191,0,0}));
-  connect(intGains[1],humanSenHeaDependent.schedule)  annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
-        color={0,0,127}));
-  connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
-          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
+  connect(intGains[1], humanSenHeaDependent.uRel) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{54,-78},{54,-26},{64,-26}}, color={0,0,127}));
+  connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,-20},{84,-20},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
         color={191,0,0}));
   connect(ROM.intGainsConv, humanSenHeaDependent.TRoom) annotation (Line(points={{86,50},
           {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
-  connect(humanSenHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
-          {94,-27},{94,54},{86,54}},   color={95,95,95}));
-  connect(intGains[1],humanSenHeaIndependent.schedule)  annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
-        color={0,0,127}));
-  connect(humanSenHeaIndependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
-          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
+  connect(humanSenHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-32},{94,-32},{94,54},{86,54}},
+                                       color={95,95,95}));
+  connect(intGains[1], humanSenHeaIndependent.uRel) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{54,-78},{54,-26},{64,-26}}, color={0,0,127}));
+  connect(humanSenHeaIndependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,-20},{84,-20},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
         color={191,0,0}));
   connect(ROM.intGainsConv, humanSenHeaIndependent.TRoom) annotation (Line(points={{86,50},
           {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
-  connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
-          {94,-27},{94,54},{86,54}},   color={95,95,95}));
-  connect(intGains[1],humanTotHeaDependent.schedule)  annotation (Line(points={{80,
-          -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
-        color={0,0,127}));
-  connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,
-          -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
+  connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-32},{94,-32},{94,54},{86,54}},
+                                       color={95,95,95}));
+  connect(intGains[1], humanTotHeaDependent.uRel) annotation (Line(points={{80,-113.333},{80,-113.333},{80,-78},{54,-78},{54,-26},{64,-26}}, color={0,0,127}));
+  connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(points={{83,-20},{84,-20},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
         color={191,0,0}));
   connect(ROM.intGainsConv, humanTotHeaDependent.TRoom) annotation (Line(points={{86,50},
           {92,50},{92,-6},{65,-6},{65,-17}}, color={191,0,0}));
-  connect(humanTotHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-27},
-          {94,-27},{94,54},{86,54}},   color={95,95,95}));
-  connect(machinesSenHea.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,
-          -52.01},{94,-52.01},{94,54},{86,54}},   color={95,95,95}));
-  connect(lights.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.01},
-          {94,-72.01},{94,54},{86,54}},   color={95,95,95}));
+  connect(humanTotHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-32},{94,-32},{94,54},{86,54}},
+                                       color={95,95,95}));
+  connect(machinesSenHea.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-52.2},{94,-52.2},{94,54},{86,54}},
+                                                  color={95,95,95}));
+  connect(lights.radHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.2},{94,-72.2},{94,54},{86,54}},
+                                          color={95,95,95}));
   connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,
           11.8},{-12,11.8},{-12,24},{-2,24},{-2,28},{-2,29},{0,29},{2.8,29}},
                                                 color={0,0,127}));
@@ -452,7 +419,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(heaterCooler.heatCoolRoom, intGainsConv) annotation (Line(points={{40.7,
           -74.2},{68,-74.2},{68,-2},{104,-2}}, color={191,0,0}));
-
   connect(corGMod.solarRadWinTrans, simpleExternalShading.solRadWin)
     annotation (Line(points={{0.6,43},{6.3,43},{6.3,46.92},{13.88,46.92}},
         color={0,0,127}));

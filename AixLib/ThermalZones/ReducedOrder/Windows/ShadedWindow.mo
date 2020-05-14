@@ -223,8 +223,7 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(HDirTil.H, shadedWindow.HDirTil) annotation (Line(points={{-51.3,47},{
           -20.65,47},{-20.65,16.4},{8.3,16.4}}, color={0,0,127}));
-  for i in 1:n loop
-                    connect(weaBus,HDifTil [i].weaBus) annotation (Line(
+  for i in 1:n loop connect(weaBus,HDifTil [i].weaBus) annotation (Line(
       points={{-100,0},{-84,0},{-84,-72},{-38,-72}},
       color={255,204,51},
       thickness=0.5), Text(

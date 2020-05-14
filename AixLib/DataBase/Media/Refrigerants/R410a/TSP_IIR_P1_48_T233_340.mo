@@ -2,8 +2,7 @@ within AixLib.DataBase.Media.Refrigerants.R410a;
 record TSP_IIR_P1_48_T233_340
   "Record with fitting coefficients calculated for first implementation"
 
-  extends
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition(
     name="Coefficients taken from Engelpracht",
     T_phNt={4, 10,
             45, 5,

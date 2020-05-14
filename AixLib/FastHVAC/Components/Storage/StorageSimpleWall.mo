@@ -187,8 +187,7 @@ HeatTransfer heatTransfer(final Medium=medium,final data=data,
             {10,10}},  rotation=0)));
 
  replaceable model HeatTransfer =
-     BaseClasses.HeatTransferOnlyConduction constrainedby
-    BaseClasses.PartialHeatTransferLayers
+     BaseClasses.HeatTransferOnlyConduction constrainedby BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true);
 protected
   parameter Real k_zyl(final unit="W/K") = 2*Modelica.Constants.pi*data.hTank/n/(1/(hConIn*data.dTank/2) + 1/data.lambdaIns*log((data.dTank

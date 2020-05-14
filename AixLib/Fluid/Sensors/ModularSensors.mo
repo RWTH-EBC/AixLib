@@ -53,11 +53,11 @@ model ModularSensors
 
   // Definition of models
   //
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo[nPorts](redeclare each final
-      package Medium = Medium) "Mass flow sensors"
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo[nPorts](redeclare each final package Medium =
+                       Medium) "Mass flow sensors"
     annotation (Placement(transformation(extent={{-70,10},{-50,-10}})));
-  AixLib.Fluid.Sensors.Pressure senPre[nPorts](redeclare each final package
-      Medium = Medium) "Pressure sensors"
+  AixLib.Fluid.Sensors.Pressure senPre[nPorts](redeclare each final package Medium =
+               Medium) "Pressure sensors"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem[nPorts](
     redeclare each final package Medium = Medium,

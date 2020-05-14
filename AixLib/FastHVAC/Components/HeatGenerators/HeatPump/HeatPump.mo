@@ -20,11 +20,11 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     "Nominal usable heat flow of the thermal machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataHea =
-      AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in heating mode"
     annotation (choicesAllMatching=true);
   replaceable model PerDataChi =
-      AixLib.DataBase.ThermalMachines.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of HP in chilling mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of HP";
@@ -253,7 +253,8 @@ model HeatPump "Base model of FastHVAC Heat Pump"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
         rotation=180,
         origin={110,100})));
-  Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly "Set value of HP mode"
+  Modelica.Blocks.Interfaces.BooleanInput modeSet if not useBusConnectorOnly and use_revHP
+                                                                                          "Set value of HP mode"
     annotation (Placement(transformation(extent={{-132,-34},{-100,-2}})));
   Sensors.TemperatureSensor        senT_a2
     "Temperature at sink inlet"
@@ -379,7 +380,7 @@ equation
       index=1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
+  connect(nSet,sigBusHP.n)  annotation (Line(points={{-116,20},{-84,20},{-84,-42.915},
           {-104.925,-42.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,

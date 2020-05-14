@@ -71,10 +71,10 @@ model HeatPumpSystem "Example for a heat pump system"
   AixLib.Systems.HeatPumpSystems.HeatPumpSystem heatPumpSystem(
     redeclare package Medium_con = Medium_sin,
     redeclare package Medium_eva = Medium_sou,
-    dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113(),
+    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     use_deFro=false,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     refIneFre_constant=0.01,
     dpEva_nominal=0,
     deltaM_con=0.1,
@@ -105,11 +105,10 @@ model HeatPumpSystem "Example for a heat pump system"
     QCon_nominal=10000,
     P_el_nominal=2500,
     redeclare model PerDataHea =
-        AixLib.DataBase.ThermalMachines.HeatPump.PerformanceData.LookUpTable2D
-        (
+        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
         dataTable=
-            AixLib.DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113(
+            AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(
             tableP_ele=[0,-5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833;
             45,4833,4917,4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,
             7125,7250,7417,7583]),
@@ -121,8 +120,6 @@ model HeatPumpSystem "Example for a heat pump system"
     use_minLocTime=true,
     use_runPerHou=true,
     pre_n_start=true,
-    fixed_TCon_start=true,
-    fixed_TEva_start=true,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 perEva,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 perCon,
     TCon_nominal=313.15,

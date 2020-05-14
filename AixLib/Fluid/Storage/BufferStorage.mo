@@ -126,26 +126,22 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package Medium =
                 Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package
-              Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
           rotation=0), iconTransformation(extent={{-36,-112},{-18,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package
-      Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,92},{36,110}},rotation=0),

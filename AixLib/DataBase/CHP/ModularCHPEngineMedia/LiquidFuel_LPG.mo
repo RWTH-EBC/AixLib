@@ -33,8 +33,7 @@ package LiquidFuel_LPG "Simple LPG fuel for CHP-engine combustion"
   constant MoleFraction moleFractions_Gas[:] = Fuel.Xi_mole;
 
   record LPGFuel "Data record for simple LPG fuel"
-    extends
-      AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
+    extends AixLib.DataBase.CHP.ModularCHPEngineMedia.CombustionEngineFuelDataBaseRecord(
     fuelType = "Simple LPG fuel",
     isGasoline = false,
     H_U = 45330000,

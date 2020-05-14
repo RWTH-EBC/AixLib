@@ -9,22 +9,19 @@ partial package PartialHybridTwoPhaseMediumRecord
   */
   replaceable record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends
-      AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition;
+    extends AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition;
   end EoS;
 
   replaceable record BDSP
     "Record that contains fitting coefficients of the state properties at
     bubble and dew lines"
-    extends
-      AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition;
+    extends AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition;
   end BDSP;
 
   replaceable record TSP
     "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends
-      AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition;
+    extends AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition;
   end TSP;
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
     different refrigerants. However, the structure will not change and,

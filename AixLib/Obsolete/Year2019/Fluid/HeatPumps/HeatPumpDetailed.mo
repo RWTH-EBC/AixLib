@@ -44,15 +44,15 @@ model HeatPumpDetailed
   parameter SI.Volume volume_con=0.004
     "External medium volume in heat exchanger"
     annotation (Dialog(tab="Evaporator, Condenser", group="Condenser"));
-  parameter AixLib.DataBase.ThermalMachines.HeatPump.HeatPumpBaseDataDefinition
-    dataTable=AixLib.DataBase.ThermalMachines.HeatPump.EN255.Vitocal350BWH113()
+  parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition
+    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()
     "Look-up table data for on/off heat pump according to EN255 or EN14511"
     annotation (choicesAllMatching=true, Dialog(enable=HPctrlType and (
           capCalcType == 2), group="Capacity data"));
 
   replaceable function data_poly =
-      AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.ConstantQualityGrade
-    constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.Characteristics.PartialBaseFct
+      AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
+    constrainedby AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics for inverter heat pump" annotation (
       choicesAllMatching=true, Dialog(enable=(capCalcType == 1), group="Capacity data"));
 
@@ -67,8 +67,8 @@ model HeatPumpDetailed
       group="Initialization",
       enable=initCondenserVol));
   replaceable function Corr_icing =
-      AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.NoModel
-    constrainedby AixLib.DataBase.ThermalMachines.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+      AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel
+    constrainedby AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)" annotation (
       choicesAllMatching=true, Dialog(
       enable=(capCalcType == 1),

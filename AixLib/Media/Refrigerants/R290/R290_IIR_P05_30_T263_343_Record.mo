@@ -29,8 +29,7 @@ package R290_IIR_P05_30_T263_343_Record
     are the refrigerant name as well as the valid refrigerant limits in terms
     of specific enthalpy, density, absolute pressure and temperature.
   */
-  extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="Propane",
     substanceNames={"Propane"},
     singleState=false,
@@ -86,22 +85,19 @@ package R290_IIR_P05_30_T263_343_Record
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
   end EoS;
 
   redeclare record BDSP
     "Record that contains fitting coefficients of the state properties at
     bubble and dew lines"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
   redeclare record TSP
     "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
   end TSP;
 
   redeclare record SmoothTransition
@@ -243,7 +239,6 @@ package R290_IIR_P05_30_T263_343_Record
   algorithm
     sigma := 1e-3*55.817*(1-sat.Tsat/369.85)^1.266;
   end surfaceTension;
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

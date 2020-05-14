@@ -2,8 +2,7 @@ within AixLib.DataBase.Media.Refrigerants.R290;
 record TSP_IIR_P05_30_T263_343
   "Record with fitting coefficients taken from the Fast_Propane model"
 
-  extends
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition(
     name="Coefficients taken from Fast_Propane model developed by Sangi et al.",
     T_phNt={5, 5,
             21, 5,

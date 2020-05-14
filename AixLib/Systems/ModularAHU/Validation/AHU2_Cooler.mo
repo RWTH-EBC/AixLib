@@ -15,8 +15,8 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-20,-80})));
-  Fluid.Sources.Boundary_pT boundaryWaterSink(          redeclare package
-      Medium = MediumWater, nPorts=1)
+  Fluid.Sources.Boundary_pT boundaryWaterSink(          redeclare package Medium =
+               MediumWater, nPorts=1)
                             annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,

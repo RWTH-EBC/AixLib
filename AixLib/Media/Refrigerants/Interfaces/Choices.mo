@@ -10,7 +10,6 @@ package Choices
       ps "(p,s) as inputs")
      "Enumeration to define input choice of calculating thermodynamic state"
       annotation (Evaluate=true);
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

@@ -1,8 +1,7 @@
 ﻿within AixLib.DataBase.Media.Refrigerants.R134a;
 record EoS_IIR_P1_395_T233_370
   "Record with fitting coefficients calculated for first implementation"
-  extends
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
     name="Coefficients taken from Tillner-Roth and Baehr, An International
           Standard Formulation for the thermodynamic Properties of
           1,1,1,2‐Tetrafluoroethane (HFC‐134a) for Temperatures from 170 K to

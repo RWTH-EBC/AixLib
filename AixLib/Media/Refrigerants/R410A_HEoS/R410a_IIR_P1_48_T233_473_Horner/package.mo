@@ -28,8 +28,7 @@ package R410a_IIR_P1_48_T233_473_Horner "Refrigerant model for R410a using a hyb
     are the refrigerant name as well as the valid refrigerant limits in terms
     of specific enthalpy, density, absolute pressure and temperature.
   */
-  extends
-  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
+  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
     mediumName="R410a",
     substanceNames={"R410a"},
     singleState=false,

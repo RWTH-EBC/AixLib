@@ -1,8 +1,7 @@
 ﻿within AixLib.ThermalZones.HighOrder.Components.WindowsDoors;
 model Window_ASHRAE140
   "Window with transmission correction factor, modelling of window panes"
-  extends
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
+  extends AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow;
 
 //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Real windowarea=2 "Total fenestration area";
@@ -47,12 +46,11 @@ model Window_ASHRAE140
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
 annotation (Placement(transformation(extent={{-116,-76},{-82,-42}}),
     iconTransformation(extent={{-100,-60},{-80,-40}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
-    Therm(T(start=T0)),
-    Star(T(start=T0)),
+  Utilities.HeatTransfer.HeatToRad twoStar_RadEx(
+    rad(T(start=T0)),
+    conv(T(start=T0)),
     eps=WindowType.Emissivity,
-    A=windowarea)
-    annotation (Placement(transformation(extent={{36,22},{56,42}})));
+    A=windowarea) annotation (Placement(transformation(extent={{36,22},{56,42}})));
   AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2(
     n=1,
     lambda={1.06},
@@ -78,9 +76,7 @@ equation
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
-  connect(twoStar_RadEx.Therm, pane2.port_b) annotation (Line(
-  points={{36.8,32},{36,32},{36,-8},{38,-8}},
-  color={191,0,0}));
+  connect(twoStar_RadEx.conv, pane2.port_b) annotation (Line(points={{36.8,32},{36,32},{36,-8},{38,-8}}, color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
       color={0,0,127}));
@@ -99,7 +95,7 @@ equation
   connect(heatConv_inside.port_a, port_inside) annotation (Line(
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
       color={191,0,0}));
-  connect(twoStar_RadEx.Star, Star) annotation (Line(
+  connect(twoStar_RadEx.rad, Star) annotation (Line(
       points={{55.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
       pattern=LinePattern.Solid));

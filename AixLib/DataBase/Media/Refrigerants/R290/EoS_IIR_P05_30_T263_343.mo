@@ -2,8 +2,7 @@ within AixLib.DataBase.Media.Refrigerants.R290;
 record EoS_IIR_P05_30_T263_343
   "Record with fitting coefficients taken from the Fast_Propane model"
 
-  extends
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
     name="Coefficients taken from Fast_Propane model developed by Sangi et al.",
     f_IdgNl=1,
     f_IdgL1={3},

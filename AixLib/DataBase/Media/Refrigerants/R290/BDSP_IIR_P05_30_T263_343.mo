@@ -2,8 +2,7 @@ within AixLib.DataBase.Media.Refrigerants.R290;
 record BDSP_IIR_P05_30_T263_343
   "Record with fitting coefficients taken from the Fast_Propane model"
 
-  extends
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition(
+  extends AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition(
     name="Coefficients taken from Fast_Propane model developed by Sangi et al.",
     psat_Nt=5,
     psat_N={-6.7722, 1.6938,
