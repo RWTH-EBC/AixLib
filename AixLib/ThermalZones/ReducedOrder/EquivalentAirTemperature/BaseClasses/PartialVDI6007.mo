@@ -55,7 +55,7 @@ partial model PartialVDI6007
     each min=0,
     each max=1,
     each final unit="1")
-    "Opening factor of sunblinds for each direction (0 - open to 1 - closed)"
+    "Opening factor of sunblinds for each direction (1 - open(no shading) to 0 - closed(100% shaded))"
     annotation (Placement(
     transformation(
     extent={{-20,-20},{20,20}},
@@ -73,7 +73,7 @@ equation
   delTEqLW=(TBlaSky - TDryBul)*hRad/(hRad + hConWallOut);
   delTEqSW=HSol*aExt/(hRad + hConWallOut);
   if withLongwave then
-    TEqWin=TDryBul.+delTEqLWWin*(ones(n)-sunblind);
+    TEqWin=TDryBul.+delTEqLWWin*sunblind;
     TEqWall=TDryBul.+delTEqLW.+delTEqSW;
   else
     TEqWin=TDryBul*ones(n);
@@ -114,9 +114,8 @@ equation
   Line(points={{2,-78},{32,-48},{100,-48}}, color={0,0,0}),
   Line(points={{32,20},{32,-48}}, color={0,0,0})}),
   Documentation(info="<html>
-  <p><code>PartialVDI6007</code> is a partial model for <code>EquivalentAirTemperature</code>
-  models.</p>
-  </html>",
+<p><br><span style=\"font-family: Courier New;\">PartialVDI6007</span> is a partial model for <span style=\"font-family: Courier New;\">EquivalentAirTemperature</span> models. </p><p><br>Sunblinds are assumed to be external with ideal rear ventilation -&gt; no increase of window temperature if sunblinds block all irradiation. </p>
+</html>",
   revisions="<html>
   <ul>
   <li>

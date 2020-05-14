@@ -14,11 +14,11 @@ model SimpleExternalShading
   Modelica.Blocks.Sources.Constant thresholdShading[nOrientations](k=maxIrrs)
     "Irradiation threshold at that shading is applied."
     annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
-  Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=0)
-    "Constant zero for that no shading is applied."
+  Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=1)
+    "Constant 1 for that no shading is applied."
     annotation (Placement(transformation(extent={{-40,-28},{-28,-16}})));
   Modelica.Blocks.Sources.Constant gValueShading[nOrientations](k=gValues)
-    "Factor to that the solar irradiation of the window is reduced by external shading (0 means no shading - 1 means no solar gains)."
+    "Factor to that the solar irradiation of the window is reduced by external shading (1 means no shading - 0 means no solar gains)."
     annotation (Placement(transformation(extent={{-40,24},{-28,36}})));
   Modelica.Blocks.Math.Product product[nOrientations]
     annotation (Placement(transformation(extent={{34,-2},{54,18}})));
@@ -51,8 +51,8 @@ equation
     annotation (Line(points={{-50,2},{-102,2}}, color={0,0,127}));
   connect(product.u1, solRadWin) annotation (Line(points={{32,14},{28,14},{28,16},{20,16},
           {20,64},{-104,64}}, color={0,0,127}));
-  connect(switchShading.y, shadingFactor) annotation (Line(points={{9,2},{22,2},{22,-80},{102,
-          -80}}, color={0,0,127}));
+  connect(switchShading.y, shadingFactor) annotation (Line(points={{9,2},{20,2},
+          {20,-42},{28,-42},{28,-80},{102,-80}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end SimpleExternalShading;
