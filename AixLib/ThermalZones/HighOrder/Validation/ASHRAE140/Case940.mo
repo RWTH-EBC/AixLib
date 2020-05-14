@@ -37,12 +37,10 @@ model Case940
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature outsideTemp
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
-  Rooms.ASHRAE140.SouthFacingWindows Room(TypOW=
-        AixLib.DataBase.Walls.ASHRAE140.OW_Case900(), TypFL=
-        AixLib.DataBase.Walls.ASHRAE140.FL_Case900(),
-    ratioSunblind=0.8,
-    solIrrThreshold=350,
-    TOutAirLimit=273.15+17)
+  Rooms.ASHRAE140.SouthFacingWindows Room(wallTypes(OW=
+        AixLib.DataBase.Walls.ASHRAE140.OW_Case900(),
+       groundPlate_upp_half = AixLib.DataBase.Walls.ASHRAE140.FL_Case900()), absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
+    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));
@@ -98,10 +96,10 @@ equation
   end for;
 
   // Set outputs
-    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
-    integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
+    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000*3600); //in MWh
+    integrator.u =idealHeaterCooler.coolingPower /(1000*1000*3600); //in MWh
 
-    PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
+    PowerLoad =(idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower)/1000;
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},
@@ -110,21 +108,14 @@ equation
     annotation (Line(
       points={{-75.4,75.6},{-50,75.6},{-50,49.8},{-11.1,49.8}},
       color={255,128,0}));
-  connect(outsideTemp.port, Room.Therm_outside) annotation (Line(
-      points={{-59,46.5},{-55,46.5},{-55,47},{-50,47},{-50,57.385},{-10.05,
-          57.385}},
-      color={191,0,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
       points={{-93,40},{-11.1,40},{-11.1,43.65}},
       color={0,0,127}));
   connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
         points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
-  connect(AirExchangeRate.y, Room.AER) annotation (Line(
-      points={{-26.35,-43.5},{-20,-43.5},{-20,27.25},{-11.1,27.25}},
-      color={0,0,127}));
   connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
-      points={{5.91,42.215},{5.91,19},{30,19},{30,-28},{25,-28}},
+      points={{9.06,37.5},{9.06,19},{30,19},{30,-28},{25,-28}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-55,10},{5.28,10},{5.28,17.82}},
@@ -139,11 +130,11 @@ equation
       points={{-99.4,-52},{-92,-52}},
       color={0,0,127}));
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,42.215},{5.91,42.215}},
+      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,37.5},{9.06,37.5}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
-      points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{13.89,-14},{
-          13.89,42.83}},
+      points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{15.36,-14},{15.36,
+          37.5}},
       color={191,0,0}));
   connect(Source_TsetHeat.y[1], idealHeaterCooler.setPointHeat) annotation (
       Line(points={{25.35,-43.5},{18.2,-43.5},{18.2,-31.2}},
@@ -152,6 +143,10 @@ equation
     annotation (Line(points={{82.55,50},{100,50},{100,50}}, color={0,0,127}));
   connect(integrator.y, AnnualCoolingLoad)
     annotation (Line(points={{82.55,32},{100,32},{100,32}}, color={0,0,127}));
+  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-59,46.5},
+          {-34,46.5},{-34,57.59},{-9,57.59}}, color={191,0,0}));
+  connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{-11.1,
+          51.7475},{-21,51.7475},{-21,-43.5},{-26.35,-43.5}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,

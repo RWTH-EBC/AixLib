@@ -38,9 +38,8 @@ model Case650FF
     "ambient temperature"
     annotation (Placement(transformation(extent={{-70,41},{-59,52}})));
   Rooms.ASHRAE140.SouthFacingWindows Room(
-    ratioSunblind=0.8,
-    solIrrThreshold=350,
-    TOutAirLimit=273.15+17)
+    absInnerWallSurf=AixLib.ThermalZones.HighOrder.Components.Types.selectorCoefficients.abs06,
+    redeclare Components.Types.CoeffTableSouthWindow partialCoeffTable)
     annotation (Placement(transformation(extent={{-9,17},{33,58}})));
   Utilities.Sources.HourOfDay hourOfDay
     annotation (Placement(transformation(extent={{80,69},{100,89}})));
@@ -85,10 +84,6 @@ equation
     annotation (Line(
       points={{-75.4,75.6},{-50,75.6},{-50,49.8},{-11.1,49.8}},
       color={255,128,0}));
-  connect(outsideTemp.port, Room.Therm_outside) annotation (Line(
-      points={{-59,46.5},{-55,46.5},{-55,47},{-50,47},{-50,57.385},{-10.05,
-          57.385}},
-      color={191,0,0}));
 
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
       points={{-93,40},{-11.1,40},{-11.1,43.65}},
@@ -106,15 +101,16 @@ equation
       points={{-99.4,-52},{-92,-52}},
       color={0,0,127}));
   connect(InternalGains_convective.port, Room.thermRoom) annotation (Line(
-      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,42.215},{5.91,42.215}},
+      points={{-71,-24},{-50,-24},{-50,-14},{6,-14},{6,37.5},{9.06,37.5}},
       color={191,0,0}));
   connect(InternalGains_radiative.port, Room.starRoom) annotation (Line(
-      points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{13.89,-14},{
-          13.89,42.83}},
+      points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{15.36,-14},{15.36,
+          37.5}},
       color={191,0,0}));
-  connect(AirExchangeRate.y[1], Room.AER) annotation (Line(
-      points={{-25.35,-41.5},{-21,-41.5},{-21,27.25},{-11.1,27.25}},
-      color={0,0,127}));
+  connect(outsideTemp.port, Room.thermOutside) annotation (Line(points={{-59,46.5},
+          {-33,46.5},{-33,57.59},{-9,57.59}}, color={191,0,0}));
+  connect(Room.AirExchangePort, AirExchangeRate.y[1]) annotation (Line(points={{
+          -11.1,51.7475},{-19,51.7475},{-19,-41.5},{-25.35,-41.5}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
