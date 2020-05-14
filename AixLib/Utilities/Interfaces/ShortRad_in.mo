@@ -1,6 +1,7 @@
 within AixLib.Utilities.Interfaces;
 connector ShortRad_in "Input connector for short wave radiation"
-  extends ShortRadSurfPort;
+  extends ShortRadSurf;
+  input Modelica.SIunits.Power Q_flow_rad "Short waved radiation heat flow rate";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
     Polygon(
       lineColor={0,0,127},

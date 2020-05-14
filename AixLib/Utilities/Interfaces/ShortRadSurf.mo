@@ -1,7 +1,6 @@
 within AixLib.Utilities.Interfaces;
-partial connector ShortRadSurfPort
+partial connector ShortRadSurf
   "Input connector for short wave radiation for a surface"
-  Modelica.SIunits.Power Q_flow_rad "Short waved radiation heat flow rate";
 
   parameter Modelica.SIunits.Area A=0 "Area of surface";
   parameter Real eps=0 "Emissivity of surface";
@@ -9,8 +8,8 @@ partial connector ShortRadSurfPort
   parameter Real tau=0 "Transmissivity of surface";
   parameter Real alpha = eps "Absorptivity of surface, equal to eps or 1-rho-tau";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={                                                                       Polygon(points={{
-            -38,44},{-22,44},{-22,14},{6,20},{10,8},{-18,2},{0,-24},{-14,-32},{-30,
-            -6},{-46,-34},{-60,-26},{-44,0},{-72,10},{-66,24},{-38,14},{-38,44}},                                                                                                                                                                                                        lineColor=
+              -8,36},{8,36},{8,6},{36,12},{40,0},{12,-6},{30,-32},{16,-40},{0,-14},
+              {-16,-42},{-30,-34},{-14,-8},{-42,2},{-36,16},{-8,6},{-8,36}},                                                                                                                                                                                                        lineColor=
             {0,0,0},                                                                                                                                                                                                        fillColor=
             {0,255,0},
             fillPattern=FillPattern.Solid),
@@ -22,4 +21,4 @@ partial connector ShortRadSurfPort
         fillPattern=FillPattern.Solid,
         textString="%name%")}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end ShortRadSurfPort;
+end ShortRadSurf;
