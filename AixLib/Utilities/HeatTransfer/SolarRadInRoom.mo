@@ -26,6 +26,36 @@ model SolarRadInRoom
           extent={{100,-70},{120,-50}})));
 
 protected
+  function sight_fac_parallel "Calculate sight factor based on B7-2 in ASHRAE Appendix for parallel areas"
+    input Real x "Length of floor / ceiling";
+    input Real y "Depth of floor / ceiling";
+    input Real D "Height of wall";
+    output Real sight_factor;
+  protected
+    Real X = x / D;
+    Real Y = y / D;
+  algorithm
+    sight_factor := 2 / (Modelica.Constants.pi * Y * X) *(Modelica.Math.log((1 + Y*Y)*(
+      1 + X*X)/(1 + Y*Y + X*X))^0.5 + X*(1 + Y*Y)^0.5*Modelica.Math.atan(X/(1
+       + Y*Y)^0.5) + Y*(1 + X*X)^0.5*Modelica.Math.atan(Y/(1 + X*X)^0.5) - X*
+      Modelica.Math.atan(X) - Y*Modelica.Math.atan(Y));
+  end sight_fac_parallel;
+
+  function sight_fac_orthogonal "Calculate sight factor based on B7-1 in ASHRAE Appendix for orthogonal areas"
+    input Real x "Length of floor / wall";
+    input Real y "Depth of floor";
+    input Real z "Height of wall";
+    output Real sight_factor;
+  protected
+    Real Y = y / x;
+    Real Z = y / x;
+  algorithm
+    sight_factor := 1 / (Modelica.Constants.pi * Y) *( Y * Modelica.Math.atan(1 / Y) + Z * Modelica.Math.atan(1 / Z) - (Z*Z + Y*Y)^0.5*
+      Modelica.Math.atan(1/(Z*Z + Y*Y)^0.5) + 0.25*Modelica.Math.log((1 + Y*Y)*(
+      1 + Z*Z)/(1 + Y*Y + Z*Z)*((Y*Y((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(
+      Y^2))*((Z*Z((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(Z^2))));
+  end sight_fac_orthogonal;
+
   Real solar_frac_win_abs[nWin] = fill(solar_frac_win_abs_int/nWin, nWin) "Solar fractions for windows, absorbed";
   Real solar_frac_win_lost[nWin] = fill(solar_frac_win_lost_int/nWin, nWin) "Solar fractions for windows, lost cause of transmitvity";
   Real solar_frac_cei[nCei] = bounce_1_cei .+ bounce_2_floor_cei .+ bounce_3_rem_cei .+ bounce_R_rem_cei "Solar fractions for ceilings";
