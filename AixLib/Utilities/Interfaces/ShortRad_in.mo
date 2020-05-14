@@ -1,5 +1,6 @@
 within AixLib.Utilities.Interfaces;
-connector ShortRad_in = input Real(min=0, final unit="W") "Input connector for short wave radiation"
+connector ShortRad_in "Input connector for short wave radiation"
+  extends ShortRadSurfPort;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
     Polygon(
       lineColor={0,0,127},
@@ -12,3 +13,4 @@ connector ShortRad_in = input Real(min=0, final unit="W") "Input connector for s
             {0,255,0},
             fillPattern=FillPattern.Solid)}),                    Diagram(
         coordinateSystem(preserveAspectRatio=false)));
+end ShortRad_in;
