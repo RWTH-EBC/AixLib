@@ -25,7 +25,7 @@ model SolarRadInRoom
                                                            iconTransformation(
           extent={{100,-70},{120,-50}})));
 
-protected
+
   function sight_fac_parallel "Calculate sight factor based on B7-2 in ASHRAE Appendix for parallel areas"
     input Real x "Length of floor / ceiling";
     input Real y "Depth of floor / ceiling";
@@ -36,8 +36,8 @@ protected
     Real Y = y / D;
   algorithm
     sight_factor := 2 / (Modelica.Constants.pi * Y * X) *(Modelica.Math.log((1 + Y*Y)*(
-      1 + X*X)/(1 + Y*Y + X*X))^0.5 + X*(1 + Y*Y)^0.5*Modelica.Math.atan(X/(1
-       + Y*Y)^0.5) + Y*(1 + X*X)^0.5*Modelica.Math.atan(Y/(1 + X*X)^0.5) - X*
+      1 + X*X)/(1 + Y*Y + X*X))^0.5 + X*(1 + Y*Y)^0.5*Modelica.Math.atan(X/(1 +
+      Y*Y)^0.5) + Y*(1 + X*X)^0.5*Modelica.Math.atan(Y/(1 + X*X)^0.5) - X*
       Modelica.Math.atan(X) - Y*Modelica.Math.atan(Y));
   end sight_fac_parallel;
 
@@ -52,8 +52,8 @@ protected
   algorithm
     sight_factor := 1 / (Modelica.Constants.pi * Y) *( Y * Modelica.Math.atan(1 / Y) + Z * Modelica.Math.atan(1 / Z) - (Z*Z + Y*Y)^0.5*
       Modelica.Math.atan(1/(Z*Z + Y*Y)^0.5) + 0.25*Modelica.Math.log((1 + Y*Y)*(
-      1 + Z*Z)/(1 + Y*Y + Z*Z)*((Y*Y((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(
-      Y^2))*((Z*Z((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(Z^2))));
+      1 + Z*Z)/(1 + Y*Y + Z*Z)*((Y*Y*((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(
+      Y^2))*((Z*Z*((1 + Y*Y + Z*Z))/((1 + Y*Y)*(Y*Y + Z*Z)))^(Z^2))));
   end sight_fac_orthogonal;
 
   Real solar_frac_win_abs[nWin] = fill(solar_frac_win_abs_int/nWin, nWin) "Solar fractions for windows, absorbed";
@@ -109,9 +109,10 @@ protected
   Real bounce_R_rem_win_abs = (1 - sum_bounce_1 - sum_bounce_2 - sum_bounce_3) * (bounce_3_rem_win_abs / sum_bounce_3);
 
   // Define sight factors used in bounce 2:
-  Real sight_fac_floor_cei = 0;
-  Real sight_fac_floor_wall = 0;
-  Real sight_fac_floor_win = 0;
+  // Assumption: All walls have the same heigh +  ceiling and floor have the same area.
+  Real sight_fac_floor_cei[nCei] = fill(sight_fac_parallel(x=floors[1].L, y=floors[1].H,  D=walls[1].H)/nCei, nCei);
+  Real sight_fac_floor_wall[nWalls] = fill(sight_fac_orthogonal(x=floors[1].L, y=floors[1].H,  z=walls[1].H), nWalls);
+  Real sight_fac_floor_win = sight_fac_orthogonal(x=floors[1].L, y=floors[1].H,  z=walls[1].H);
 
 
   // Define connectors:
