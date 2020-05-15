@@ -302,12 +302,6 @@ package BaseClasses "Base class package"
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(integrator5.u, mainBus.gtfBus.primBus.pumpBus.power) annotation (Line(
-          points={{-11,9},{-98.905,9},{-98.905,0.09}},     color={0,0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
     connect(integrator5.y, mainBus.evaBus.WelPumpGTFMea) annotation (Line(points={{0.5,9},
             {32,9},{32,0.09},{-98.905,0.09}},             color={0,0,127}), Text(
         string="%second",
@@ -519,6 +513,19 @@ package BaseClasses "Base class package"
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(mainBus.gtfBus.primBus.pumpBus.PelMea, mainBus) annotation (
+      Line(
+        points={{-98.905,0.09},{-99,0.09},{-99,0}},
+        color={255,204,51},
+        thickness=0.5),
+      Text(
+        string="%first",
+        index=3,
+        extent={{3,0},{3,0}}),
+      Text(
+        string="%second",
+        index=-3,
+        extent={{-3,0},{-3,0}}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
             extent={{-86,80},{94,-20}},
