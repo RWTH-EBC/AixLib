@@ -243,14 +243,6 @@ protected
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{4,23},{16,35}})));
 
-  Modelica.Blocks.Sources.Constant shadingNoWin[zoneParam.nOrientations](each final
-      k=0) if sum(zoneParam.ATransparent) <= 0
-     "Dummy value for shaded g-value if no windows are in zone"
-    annotation (Placement(transformation(
-        extent={{4,-4},{-4,4}},
-        rotation=180,
-        origin={-39,28})));
-
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{80,-100},{80,-78},{54,-78},{54,-46.5},{64,-46.5}}, color={0,0,127}));
   connect(intGains[3], lights.uRel) annotation (Line(points={{80,-86.6667},{80,
@@ -436,8 +428,6 @@ equation
         color={0,0,127}));
   connect(simpleExternalShading.corrIrr, ROM.solRad) annotation (Line(points={{19.94,
           45.24},{24,45.24},{24,61},{37,61}}, color={0,0,127}));
-  connect(shadingNoWin.y, eqAirTempWall.sunblind)
-    annotation (Line(points={{-34.6,28},{-26,28},{-26,20}}, color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation and internal gains. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>

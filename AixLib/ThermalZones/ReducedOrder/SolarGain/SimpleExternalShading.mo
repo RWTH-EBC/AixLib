@@ -15,7 +15,7 @@ model SimpleExternalShading
     "Irradiation threshold at that shading is applied."
     annotation (Placement(transformation(extent={{-86,-26},{-74,-14}})));
   Modelica.Blocks.Sources.Constant noShading[nOrientations](each k=1)
-    "Constant 1 for that no shading is applied."
+    "Constant 1 for that no shading is applied. (Blinds fully opened)"
     annotation (Placement(transformation(extent={{-40,-28},{-28,-16}})));
   Modelica.Blocks.Sources.Constant gValueShading[nOrientations](k=gValues)
     "Factor to that the solar irradiation of the window is reduced by external shading (1 means no shading - 0 means no solar gains)."

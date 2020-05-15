@@ -54,7 +54,7 @@ partial model PartialVDI6007
   Modelica.Blocks.Interfaces.RealInput sunblind[n](
     each min=0,
     each max=1,
-    each final unit="1")
+    each final unit="1") = 0
     "Opening factor of sunblinds for each direction (1 - open(no shading) to 0 - closed(100% shaded))"
     annotation (Placement(
     transformation(
