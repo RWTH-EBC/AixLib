@@ -114,7 +114,7 @@ equation
   Line(points={{2,-78},{32,-48},{100,-48}}, color={0,0,0}),
   Line(points={{32,20},{32,-48}}, color={0,0,0})}),
   Documentation(info="<html>
-<p><br><span style=\"font-family: Courier New;\">PartialVDI6007</span> is a partial model for <span style=\"font-family: Courier New;\">EquivalentAirTemperature</span> models. </p><p><br>Sunblinds are assumed to be external with ideal rear ventilation -&gt; no increase of window temperature if sunblinds block all irradiation. </p>
+<p><span style=\"font-family: Courier New;\">PartialVDI6007</span> is a partial model for <span style=\"font-family: Courier New;\">EquivalentAirTemperature</span> models. </p><p>Sunblinds are assumed to be external with ideal rear ventilation -&gt; no increase of window temperature if sunblinds block all irradiation. </p>
 </html>",
   revisions="<html>
   <ul>
