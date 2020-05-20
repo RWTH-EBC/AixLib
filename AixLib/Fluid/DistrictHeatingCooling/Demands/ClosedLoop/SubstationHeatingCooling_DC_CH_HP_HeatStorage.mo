@@ -484,6 +484,13 @@ public
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={102,266})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={136,-652})));
+  Modelica.Blocks.Math.Gain gain(k=-1)
+    annotation (Placement(transformation(extent={{44,-662},{64,-642}})));
 protected
   Modelica.Blocks.Sources.RealExpression heatPump_COP(y=heatPump.COP)
     annotation (Placement(transformation(extent={{-94,-398},{-74,-378}})));
@@ -737,6 +744,12 @@ equation
         color={0,0,127}));
   connect(m_flow_gridPumpHeating.y, pumpHeatingGrid.m_flow_in) annotation (Line(
         points={{-59,-180},{-39,-180},{-39,-143.4}}, color={0,0,127}));
+  connect(prescribedHeatFlow1.port, heatExchanger_heating.heatPort) annotation
+    (Line(points={{146,-652},{208,-652},{208,-604},{218,-604}}, color={191,0,0}));
+  connect(heatDemand, gain.u)
+    annotation (Line(points={{-280,-652},{42,-652}}, color={0,0,127}));
+  connect(gain.y, prescribedHeatFlow1.Q_flow)
+    annotation (Line(points={{65,-652},{126,-652}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-260,-720},
             {660,300}}), graphics={
         Rectangle(
