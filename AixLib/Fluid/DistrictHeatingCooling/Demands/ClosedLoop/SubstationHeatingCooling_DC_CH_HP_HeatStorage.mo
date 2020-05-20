@@ -18,7 +18,7 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
 
     parameter Modelica.SIunits.Temperature T_heatingSupplySet "Supply Temperature of buildings heating system";
     parameter Modelica.SIunits.TemperatureDifference deltaT_heatingSet "Set temperature difference for cooling on the building site";
-    parameter Modelica.SIunits.Temperature T_coolingSupplySet "Supply Temperature of buildings cooling system, limit mvalue for direct cooling system";
+    parameter Modelica.SIunits.Temperature T_coolingSupplySet "Supply Temperature of buildings cooling system, limit value for direct cooling system";
     parameter Modelica.SIunits.TemperatureDifference deltaT_coolingSet "Set temperature difference for cooling on the building site";
 
     parameter Modelica.SIunits.Volume VTan=heatDemand_max/(cp_default * rho * deltaT_heatingSet)*(3600) "Tank volume (default: discharge 1 h with max heat demand)";
@@ -32,19 +32,18 @@ model SubstationHeatingCooling_DC_CH_HP_HeatStorage "Substation model for bidirc
   Modelica.Blocks.Interfaces.RealInput T_supplyCoolingSet(unit="K")
     "Supply temperatur of cooling circuit in the building" annotation (
       Placement(transformation(extent={{698,200},{658,240}}),
-        iconTransformation(extent={{-322,-194},{-260,-132}})));
+        iconTransformation(extent={{-322,-216},{-260,-154}})));
   Modelica.Blocks.Interfaces.RealInput coolingDemand(unit="W")
     "Input for cooling demand profile of substation" annotation (Placement(
         transformation(extent={{700,158},{660,198}}),
                                                     iconTransformation(extent={{-322,
-            -294},{-260,-232}})));
+            -316},{-260,-254}})));
   Modelica.Blocks.Interfaces.RealInput deltaT_coolingGridSet(unit="K")
     "Set temperature difference for cooling on the site of thermal network"                                                           annotation (
       Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=180,
-        origin={680,134}),   iconTransformation(extent={{-324,-390},{-258,
-            -324}})));
+        origin={680,134}),   iconTransformation(extent={{-324,-434},{-258,-368}})));
   Modelica.Blocks.Interfaces.RealInput FreeElectricity(unit="W")
     "Amount of available electricity in W"             annotation (Placement(
         transformation(
@@ -268,8 +267,8 @@ public
     m_flow_nominal=m_flow_nominal,
     allowFlowReversal=true)
     annotation (Placement(transformation(extent={{-54,-106},{-24,-140}})));
-  Sensors.MassFlowRate              senMasFlo_HeatPump(redeclare package Medium
-      = Medium, allowFlowReversal=true)
+  Sensors.MassFlowRate              senMasFlo_HeatPump(redeclare package Medium =
+        Medium, allowFlowReversal=true)
     annotation (Placement(transformation(extent={{-88,-132},{-68,-112}})));
   Delays.DelayFirstOrder              vol(
     redeclare package Medium = Medium,
@@ -288,8 +287,8 @@ public
     verifyFlowReversal=false,
     tau=5)
     annotation (Placement(transformation(extent={{-166,-50},{-146,-70}})));
-  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_GridHeat(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-204,-70},{-184,-50}})));
   Sensors.TemperatureTwoPort              senTem_DC_in1(
     redeclare package Medium = Medium,
@@ -333,8 +332,8 @@ public
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     tau=60)  annotation (Placement(transformation(extent={{632,-50},{652,-30}})));
-  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_GridCool(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{596,-68},{616,-48}})));
   FixedResistances.Junction              jun1(
     redeclare package Medium = Medium,
@@ -372,8 +371,8 @@ public
         extent={{10,10},{-10,-10}},
         rotation=0,
         origin={388,-10})));
-  Sensors.MassFlowRate              senMasFlo_chiller(redeclare package Medium
-      = Medium)
+  Sensors.MassFlowRate              senMasFlo_chiller(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{322,-20},{302,0}})));
   Movers.FlowControlled_m_flow              PumpCoolingDirect(
     redeclare package Medium = Medium,
@@ -451,25 +450,25 @@ public
   Modelica.Blocks.Interfaces.RealOutput powerConsumptionHP(unit="W")
   "Power consumption of heat pum in Watt"
     annotation (Placement(transformation(extent={{-258,220},{-278,240}}),
-        iconTransformation(extent={{-264,188},{-294,218}})));
+        iconTransformation(extent={{-260,142},{-296,178}})));
   Modelica.Blocks.Interfaces.RealOutput powerConsumptionChiller(unit="W")
   "Power consumption of chiller in Watt"
     annotation (Placement(transformation(extent={{-260,194},{-280,214}}),
-        iconTransformation(extent={{-260,146},{-290,176}})));
+        iconTransformation(extent={{-260,98},{-296,134}})));
   Modelica.Blocks.Interfaces.RealOutput powerConsumptionSubstation(unit="W")
     annotation (Placement(transformation(extent={{-262,248},{-282,268}}),
         iconTransformation(extent={{-260,222},{-294,256}})));
   Modelica.Blocks.Interfaces.RealOutput COP_HP
   "COP of heat pump" annotation (Placement(
         transformation(extent={{-260,154},{-280,174}}), iconTransformation(
-          extent={{-262,98},{-294,130}})));
+          extent={{-260,12},{-296,48}})));
   Modelica.Blocks.Interfaces.RealOutput P_max_HP annotation (Placement(
         transformation(extent={{-260,114},{-278,132}}), iconTransformation(
-          extent={{-260,56},{-294,90}})));
+          extent={{-260,56},{-296,92}})));
   Modelica.Blocks.Interfaces.RealOutput renewablePowerConsumptionSubstation(unit="W")
   "Renewable power consumption of chiller based on difference between total power use and available renewable power"
     annotation (Placement(transformation(extent={{-260,280},{-280,300}}),
-        iconTransformation(extent={{-260,222},{-294,256}})));
+        iconTransformation(extent={{-260,184},{-294,218}})));
 public
   Sensors.TemperatureTwoPort              senTem_HE_Cooling_out(
     redeclare package Medium = Medium,
