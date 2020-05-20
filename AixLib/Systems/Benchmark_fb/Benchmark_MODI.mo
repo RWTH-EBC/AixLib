@@ -14,13 +14,13 @@ equation
       points={{0.59,-0.622222},{0.59,30},{20,30}},
       color={255,204,51},
       thickness=0.5));
-  connect(benchmarkBuilding.mainBus, mode_based_Controller.mainBus) annotation
+  connect(mode_based_Controller.mainBus, benchmarkBuilding.mainBus) annotation
     (Line(
-      points={{0.59,-0.622222},{0.59,38},{-20,38}},
+      points={{-20,38},{0,38},{0,-0.622222},{0.59,-0.622222}},
       color={255,204,51},
       thickness=0.5));
   connect(benchmarkBuilding.y, mode_based_Controller.TAirOutside) annotation (
-      Line(points={{-34.26,1.45185},{-34.26,8},{-10,8},{-10,32},{-19.2,32}},
+      Line(points={{-34.26,1.45185},{-34.26,10},{-8,10},{-8,32},{-19.2,32}},
         color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));

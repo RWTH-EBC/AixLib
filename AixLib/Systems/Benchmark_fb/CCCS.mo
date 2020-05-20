@@ -53,7 +53,7 @@ package CCCS
     connect(emissionsCosts1.Emission_Cost, OperationalCosts.u[3]) annotation (
       Line(points={{-39,60},{-20,60},{-20,22.95},{8,22.95}},            color = {0, 0, 127}));
     connect(lifespanReductionCosts_2_1.y, OperationalCosts.u[4]) annotation (
-      Line(points={{-39.824,-1},{-20,-1},{-20,20.85},{8,20.85}},              color = {0, 0, 127}));
+      Line(points={{-39.4923,-1},{-20,-1},{-20,20.85},{8,20.85}},             color = {0, 0, 127}));
     connect(performanceReductionCosts1.PRC, OperationalCosts.u[2]) annotation (
       Line(points={{-39,22},{0,22},{0,24},{4,24},{4,25.05},{8,25.05}},  color = {0, 0, 127}));
     connect(OperationalCosts.y, product1.u2) annotation (
@@ -72,7 +72,7 @@ package CCCS
       Line(points={{91,0},{108,0}},      color = {0, 0, 127}));
 
     connect(mainBus, lifespanReductionCosts_2_1.mainBus) annotation (Line(
-        points={{-100,0},{-68,0},{-68,-0.56},{-62,-0.56}},
+        points={{-100,0},{-68,0},{-68,-0.5875},{-62,-0.5875}},
         color={255,204,51},
         thickness=0.5));
     connect(mainBus, performanceReductionCosts1.mainBus) annotation (Line(
@@ -149,37 +149,37 @@ Components")}),
       Modelica.Blocks.Routing.RealPassThrough HP_ThrottleCS_valveSet annotation (
         Placement(transformation(extent={{-90,12},{-74,28}})));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Pumps[36](each cost_component = 3000, each sim_time = simTime) annotation (
-        Placement(visible = true, transformation(origin = {90, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin={100,50},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Math.MultiSum multiSum1(nu = 72) annotation (
-        Placement(visible = true, transformation(origin={130,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin={140,0},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       AixLib.Systems.Benchmark_fb.CCCS.BaseClasses.Lifespan_Reduction_Cost_Component lifespan_Reduction_Cost_Valves[36](each cost_component = 1000, each sim_time = simTime) annotation (
-        Placement(visible = true, transformation(origin={80,-50},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin={102,-50},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Routing.RealPassThrough gtf_prim_rpmSet annotation (
-        Placement(transformation(extent={{-58,62},{-44,76}})));
+        Placement(transformation(extent={{-46,58},{-32,72}})));
       Modelica.Blocks.Routing.RealPassThrough hts_chp_rpmSet annotation (
-        Placement(transformation(extent={{-58,90},{-44,104}})));
+        Placement(transformation(extent={{-46,90},{-32,104}})));
       Modelica.Blocks.Routing.RealPassThrough hts_boiler_rpmSet annotation (
-        Placement(transformation(extent={{-58,120},{-44,134}})));
+        Placement(transformation(extent={{-46,120},{-32,134}})));
       Modelica.Blocks.Routing.RealPassThrough gtf_sec_valveSet annotation (
-        Placement(transformation(extent={{-58,28},{-44,42}})));
+        Placement(transformation(extent={{-46,30},{-32,44}})));
       Modelica.Blocks.Routing.RealPassThrough tabs_hotThrottle_rpmSet[5] annotation (
-        Placement(transformation(extent={{-28,104},{-14,118}})));
+        Placement(transformation(extent={{-6,104},{8,118}})));
       Modelica.Blocks.Routing.RealPassThrough tabs_pump_rpmSet[5] annotation (
-        Placement(transformation(extent={{-28,134},{-14,148}})));
+        Placement(transformation(extent={{-8,132},{6,146}})));
       Modelica.Blocks.Routing.RealPassThrough tabs_coldThrottle_valveSet[5] annotation (
-        Placement(transformation(extent={{-28,12},{-14,26}})));
+        Placement(transformation(extent={{-6,12},{8,26}})));
       Modelica.Blocks.Routing.RealPassThrough tabs_hotThrottle_valveSet[5] annotation (
-        Placement(transformation(extent={{-30,74},{-16,88}})));
+        Placement(transformation(extent={{-6,72},{8,86}})));
       Modelica.Blocks.Routing.RealPassThrough tabs_coldThrottle_rpmSet[5] annotation (
-        Placement(transformation(extent={{-28,44},{-14,58}})));
+        Placement(transformation(extent={{-6,42},{8,56}})));
       Modelica.Blocks.Routing.RealPassThrough vu_heater_rpmSet[5] annotation (
-        Placement(transformation(extent={{-28,-18},{-14,-4}})));
+        Placement(transformation(extent={{-8,-18},{6,-4}})));
       Modelica.Blocks.Routing.RealPassThrough vu_cooler_valveSet[5] annotation (
-        Placement(transformation(extent={{-28,-106},{-14,-92}})));
+        Placement(transformation(extent={{-8,-106},{6,-92}})));
       Modelica.Blocks.Routing.RealPassThrough vu_heater_valveSet[5] annotation (
-        Placement(transformation(extent={{-30,-48},{-16,-34}})));
+        Placement(transformation(extent={{-8,-48},{6,-34}})));
       Modelica.Blocks.Routing.RealPassThrough vu_cooler_rpmSet[5] annotation (
-        Placement(transformation(extent={{-28,-78},{-14,-64}})));
+        Placement(transformation(extent={{-8,-78},{6,-64}})));
       Modelica.Blocks.Routing.RealPassThrough hx_sec_rpmSet annotation (
         Placement(transformation(extent={{-90,-78},{-76,-64}})));
       Modelica.Blocks.Routing.RealPassThrough hx_prim_valveSet annotation (
@@ -189,31 +189,31 @@ Components")}),
       Modelica.Blocks.Routing.RealPassThrough hx_sec_valveSet annotation (
         Placement(transformation(extent={{-90,-106},{-76,-92}})));
       Modelica.Blocks.Routing.RealPassThrough swu_Y3valveSet annotation (
-        Placement(transformation(extent={{2,-40},{16,-26}})));
+        Placement(transformation(extent={{32,-34},{46,-20}})));
       Modelica.Blocks.Routing.RealPassThrough swu_Y2valveSet annotation (
-        Placement(transformation(extent={{2,-18},{16,-4}})));
+        Placement(transformation(extent={{34,2},{48,16}})));
       Modelica.Blocks.Routing.RealPassThrough swu_pump_rpmSet annotation (
-        Placement(transformation(extent={{2,4},{16,18}})));
+        Placement(transformation(extent={{32,28},{46,42}})));
       Modelica.Blocks.Routing.RealPassThrough swu_K1valveSet annotation (
-        Placement(transformation(extent={{2,-62},{16,-48}})));
+        Placement(transformation(extent={{32,-64},{46,-50}})));
       Modelica.Blocks.Routing.RealPassThrough swu_K3valveSet annotation (
-        Placement(transformation(extent={{2,-108},{16,-94}})));
+        Placement(transformation(extent={{32,-124},{46,-110}})));
       Modelica.Blocks.Routing.RealPassThrough swu_K2valveSet annotation (
-        Placement(transformation(extent={{2,-86},{16,-72}})));
+        Placement(transformation(extent={{30,-96},{44,-82}})));
       Modelica.Blocks.Routing.RealPassThrough swu_K4valveSet annotation (
-        Placement(transformation(extent={{2,-130},{16,-116}})));
+        Placement(transformation(extent={{32,-150},{46,-136}})));
       Modelica.Blocks.Routing.RealPassThrough ahu_heater_rpmSet annotation (
-        Placement(transformation(extent={{-60,-60},{-46,-46}})));
+        Placement(transformation(extent={{-46,-62},{-32,-48}})));
       Modelica.Blocks.Routing.RealPassThrough ahu_preheater_valveSet annotation (
-        Placement(transformation(extent={{-60,-32},{-46,-18}})));
+        Placement(transformation(extent={{-46,-32},{-32,-18}})));
       Modelica.Blocks.Routing.RealPassThrough ahu_preheater_rpmSet annotation (
-        Placement(transformation(extent={{-58,0},{-44,14}})));
+        Placement(transformation(extent={{-46,-2},{-32,12}})));
       Modelica.Blocks.Routing.RealPassThrough ahu_heater_valveSet annotation (
-        Placement(transformation(extent={{-60,-92},{-46,-78}})));
+        Placement(transformation(extent={{-46,-90},{-32,-76}})));
       Modelica.Blocks.Routing.RealPassThrough ahu_cooler_rpmSet annotation (
-        Placement(transformation(extent={{-62,-122},{-48,-108}})));
+        Placement(transformation(extent={{-48,-120},{-34,-106}})));
       Modelica.Blocks.Routing.RealPassThrough ahu_cooler_valveSet annotation (
-        Placement(transformation(extent={{-60,-148},{-46,-134}})));
+        Placement(transformation(extent={{-48,-148},{-34,-134}})));
       inner Modelica.Fluid.System system
         annotation (Placement(transformation(extent={{140,140},{160,160}})));
     equation
@@ -230,335 +230,350 @@ Components")}),
       connect(mainBus.hpSystemBus.busPumpCold.pumpBus.rpmSet, HP_PumpCold_rpmSet.u) annotation (
         Line(points={{-99.95,6.05},{-99.95,110},{-91.6,110}},      color = {255, 204, 51}, thickness = 0.5));
       connect(multiSum1.y, y) annotation (
-        Line(points={{141.7,0},{166,0}},      color = {0, 0, 127}));
+        Line(points={{151.7,0},{166,0}},      color = {0, 0, 127}));
       connect(mainBus.htsBus.pumpBoilerBus.pumpBus.rpmSet, hts_boiler_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,126},{-80,126},{-80,127},{-59.4,
-              127}},                                                                                     color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,126},{-80,126},{-80,127},{
+              -47.4,127}},                                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.htsBus.pumpChpBus.pumpBus.rpmSet, hts_chp_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,97},{-59.4,97}},        color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,97},{-47.4,97}},        color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.gtfBus.primBus.pumpBus.rpmSet, gtf_prim_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,70},{-60,70},{-60,68},{-59.4,68},
-              {-59.4,69}},                                                   color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,68},{-47.4,68},{-47.4,65}},
+                                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.gtfBus.secBus.valveSet, gtf_sec_valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,35},{-59.4,35}},          color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,37},{-47.4,37}},          color = {255, 204, 51}, thickness = 0.5));
       connect(HP_PumpHot_rpmSet.y, lifespan_Reduction_Cost_Pumps[1].u) annotation (
-        Line(points={{-71.2,140},{-68,140},{-68,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{-71.2,140},{-68,140},{-68,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(HP_PumpCold_rpmSet.y, lifespan_Reduction_Cost_Pumps[2].u) annotation (
-        Line(points={{-73.2,110},{-68,110},{-68,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{-73.2,110},{-68,110},{-68,160},{80,160},{80,50},{89.6,50}},            color = {0, 0, 127}));
       connect(HP_ThrottleHS_valveSet.y, lifespan_Reduction_Cost_Valves[1].u) annotation (
-        Line(points={{-73.2,80},{-68,80},{-68,-160},{60,-160},{60,-50},{69.6,
+        Line(points={{-73.2,80},{-60,80},{-60,-160},{80,-160},{80,-50},{91.6,
               -50}},                                                                             color = {0, 0, 127}));
       connect(HP_ThrottleRecool_valveSet.y, lifespan_Reduction_Cost_Valves[2].u) annotation (
-        Line(points={{-73.2,50},{-68,50},{-68,-160},{60,-160},{60,-50},{69.6,
+        Line(points={{-73.2,50},{-60,50},{-60,-160},{80,-160},{80,-50},{91.6,
               -50}},                                                                               color = {0, 0, 127}));
       connect(HP_ThrottleCS_valveSet.y, lifespan_Reduction_Cost_Valves[3].u) annotation (
-        Line(points={{-73.2,20},{-72,20},{-72,18},{-70,18},{-70,-160},{60,-160},
-              {60,-50},{69.6,-50}},                                                                color = {0, 0, 127}));
+        Line(points={{-73.2,20},{-60,20},{-60,-160},{80,-160},{80,-50},{91.6,
+              -50}},                                                                               color = {0, 0, 127}));
       connect(HP_ThrottleFreecool_valveSet.y, lifespan_Reduction_Cost_Valves[4].u) annotation (
-        Line(points={{-73.2,-10},{-68,-10},{-68,-160},{60,-160},{60,-50},{69.6,
+        Line(points={{-73.2,-10},{-60,-10},{-60,-160},{80,-160},{80,-50},{91.6,
               -50}},                                                                                 color = {0, 0, 127}));
       connect(hts_boiler_rpmSet.y, lifespan_Reduction_Cost_Pumps[3].u) annotation (
-        Line(points={{-43.3,127},{-40,127},{-40,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{-31.3,127},{-20,127},{-20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(hts_chp_rpmSet.y, lifespan_Reduction_Cost_Pumps[4].u) annotation (
-        Line(points={{-43.3,97},{-40,97},{-40,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{-31.3,97},{-20,97},{-20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(gtf_prim_rpmSet.y, lifespan_Reduction_Cost_Pumps[5].u) annotation (
-        Line(points={{-43.3,69},{-40,69},{-40,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{-31.3,65},{-20,65},{-20,160},{80,160},{80,50},{89.6,50}},            color = {0, 0, 127}));
       connect(gtf_sec_valveSet.y, lifespan_Reduction_Cost_Valves[5].u) annotation (
-        Line(points={{-43.3,35},{-40,35},{-40,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                               color = {0, 0, 127}));
+        Line(points={{-31.3,37},{-32,37},{-32,36},{-20,36},{-20,-160},{80,-160},
+              {80,-50},{91.6,-50}},                                                                color = {0, 0, 127}));
       connect(tabs_pump_rpmSet[1].y, lifespan_Reduction_Cost_Pumps[6].u) annotation (
-        Line(points={{-13.3,141},{-6,141},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,139},{20,139},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(tabs_hotThrottle_rpmSet[1].y, lifespan_Reduction_Cost_Pumps[7].u) annotation (
-        Line(points={{-13.3,111},{-6,111},{-6,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{8.7,111},{20,111},{20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(tabs_coldThrottle_rpmSet[1].y, lifespan_Reduction_Cost_Pumps[8].u) annotation (
-        Line(points={{-13.3,51},{-8,51},{-8,52},{-6,52},{-6,160},{70,160},{70,50},{79.6,
-              50}},                                                                                              color = {0, 0, 127}));
+        Line(points={{8.7,49},{20,49},{20,160},{80,160},{80,50},{89.6,50}},                                      color = {0, 0, 127}));
       connect(tabs_pump_rpmSet[2].y, lifespan_Reduction_Cost_Pumps[9].u) annotation (
-        Line(points={{-13.3,141},{-6,141},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,139},{20,139},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(tabs_hotThrottle_rpmSet[2].y, lifespan_Reduction_Cost_Pumps[10].u) annotation (
-        Line(points={{-13.3,111},{-6,111},{-6,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{8.7,111},{20,111},{20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(tabs_coldThrottle_rpmSet[2].y, lifespan_Reduction_Cost_Pumps[11].u) annotation (
-        Line(points={{-13.3,51},{-10,51},{-10,50},{-6,50},{-6,160},{70,160},{70,50},
-              {79.6,50}},                                                                                        color = {0, 0, 127}));
+        Line(points={{8.7,49},{18,49},{18,50},{20,50},{20,160},{80,160},{80,50},
+              {89.6,50}},                                                                                        color = {0, 0, 127}));
       connect(tabs_pump_rpmSet[3].y, lifespan_Reduction_Cost_Pumps[12].u) annotation (
-        Line(points={{-13.3,141},{-6,141},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,139},{20,139},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(tabs_hotThrottle_rpmSet[3].y, lifespan_Reduction_Cost_Pumps[13].u) annotation (
-        Line(points={{-13.3,111},{-6,111},{-6,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{8.7,111},{20,111},{20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(tabs_coldThrottle_rpmSet[3].y, lifespan_Reduction_Cost_Pumps[14].u) annotation (
-        Line(points={{-13.3,51},{-10,51},{-10,50},{-6,50},{-6,160},{70,160},{70,50},
-              {79.6,50}},                                                                                        color = {0, 0, 127}));
+        Line(points={{8.7,49},{18,49},{18,52},{20,52},{20,160},{80,160},{80,50},
+              {89.6,50}},                                                                                        color = {0, 0, 127}));
       connect(tabs_pump_rpmSet[4].y, lifespan_Reduction_Cost_Pumps[15].u) annotation (
-        Line(points={{-13.3,141},{-6,141},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,139},{20,139},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(tabs_hotThrottle_rpmSet[4].y, lifespan_Reduction_Cost_Pumps[16].u) annotation (
-        Line(points={{-13.3,111},{-6,111},{-6,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{8.7,111},{20,111},{20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(tabs_coldThrottle_rpmSet[4].y, lifespan_Reduction_Cost_Pumps[17].u) annotation (
-        Line(points={{-13.3,51},{-10,51},{-10,52},{-6,52},{-6,160},{70,160},{70,50},
-              {79.6,50}},                                                                                        color = {0, 0, 127}));
+        Line(points={{8.7,49},{18,49},{18,50},{20,50},{20,160},{80,160},{80,50},
+              {89.6,50}},                                                                                        color = {0, 0, 127}));
       connect(tabs_pump_rpmSet[5].y, lifespan_Reduction_Cost_Pumps[18].u) annotation (
-        Line(points={{-13.3,141},{-6,141},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,139},{20,139},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(tabs_hotThrottle_rpmSet[5].y, lifespan_Reduction_Cost_Pumps[19].u) annotation (
-        Line(points={{-13.3,111},{-6,111},{-6,160},{70,160},{70,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{8.7,111},{20,111},{20,160},{80,160},{80,50},{89.6,50}},              color = {0, 0, 127}));
       connect(tabs_coldThrottle_rpmSet[5].y, lifespan_Reduction_Cost_Pumps[20].u) annotation (
-        Line(points={{-13.3,51},{-10,51},{-10,50},{-6,50},{-6,160},{70,160},{70,50},
-              {79.6,50}},                                                                                        color = {0, 0, 127}));
+        Line(points={{8.7,49},{18,49},{18,50},{20,50},{20,160},{80,160},{80,50},
+              {89.6,50}},                                                                                        color = {0, 0, 127}));
       connect(tabs_hotThrottle_valveSet[1].y, lifespan_Reduction_Cost_Valves[6].u) annotation (
-        Line(points={{-15.3,81},{-6,81},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,79},{2,79},{2,82},{20,82},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_coldThrottle_valveSet[1].y, lifespan_Reduction_Cost_Valves[7].u) annotation (
-        Line(points={{-13.3,19},{-6,19},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,19},{4,19},{4,20},{20,20},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_hotThrottle_valveSet[2].y, lifespan_Reduction_Cost_Valves[8].u) annotation (
-        Line(points={{-15.3,81},{-6,81},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,79},{2,79},{2,82},{20,82},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_coldThrottle_valveSet[2].y, lifespan_Reduction_Cost_Valves[9].u) annotation (
-        Line(points={{-13.3,19},{-8,19},{-8,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,19},{4,19},{4,20},{20,20},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_hotThrottle_valveSet[3].y, lifespan_Reduction_Cost_Valves[10].u) annotation (
-        Line(points={{-15.3,81},{-6,81},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,79},{2,79},{2,82},{20,82},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_coldThrottle_valveSet[3].y, lifespan_Reduction_Cost_Valves[11].u) annotation (
-        Line(points={{-13.3,19},{-6,19},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,19},{4,19},{4,20},{20,20},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_hotThrottle_valveSet[4].y, lifespan_Reduction_Cost_Valves[12].u) annotation (
-        Line(points={{-15.3,81},{-6,81},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,79},{2,79},{2,82},{20,82},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_coldThrottle_valveSet[4].y, lifespan_Reduction_Cost_Valves[13].u) annotation (
-        Line(points={{-13.3,19},{-6,19},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,19},{4,19},{4,20},{20,20},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_hotThrottle_valveSet[5].y, lifespan_Reduction_Cost_Valves[14].u) annotation (
-        Line(points={{-15.3,81},{-8,81},{-8,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,79},{2,79},{2,82},{20,82},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(tabs_coldThrottle_valveSet[5].y, lifespan_Reduction_Cost_Valves[15].u) annotation (
-        Line(points={{-13.3,19},{-6,19},{-6,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{8.7,19},{4,19},{4,20},{20,20},{20,-160},{80,-160},{80,-50},
+              {91.6,-50}},                                                                     color = {0, 0, 127}));
       connect(vu_heater_rpmSet[1].y, lifespan_Reduction_Cost_Pumps[21].u) annotation (
-        Line(points={{-13.3,-11},{-6,-11},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,-11},{20,-11},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(vu_cooler_rpmSet[1].y, lifespan_Reduction_Cost_Pumps[22].u) annotation (
-        Line(points={{-13.3,-71},{-6,-71},{-6,160},{70,160},{70,50},{79.6,50}},                color = {0, 0, 127}));
+        Line(points={{6.7,-71},{20,-71},{20,160},{80,160},{80,50},{89.6,50}},                  color = {0, 0, 127}));
       connect(vu_heater_rpmSet[2].y, lifespan_Reduction_Cost_Pumps[23].u) annotation (
-        Line(points={{-13.3,-11},{-6,-11},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,-11},{20,-11},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(vu_cooler_rpmSet[2].y, lifespan_Reduction_Cost_Pumps[24].u) annotation (
-        Line(points={{-13.3,-71},{-6,-71},{-6,160},{70,160},{70,50},{79.6,50}},                color = {0, 0, 127}));
+        Line(points={{6.7,-71},{20,-71},{20,160},{80,160},{80,50},{89.6,50}},                  color = {0, 0, 127}));
       connect(vu_heater_rpmSet[3].y, lifespan_Reduction_Cost_Pumps[25].u) annotation (
-        Line(points={{-13.3,-11},{-6,-11},{-6,160},{70,160},{70,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,-11},{20,-11},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(vu_cooler_rpmSet[3].y, lifespan_Reduction_Cost_Pumps[26].u) annotation (
-        Line(points={{-13.3,-71},{-6,-71},{-6,160},{70,160},{70,50},{79.6,50}},                color = {0, 0, 127}));
+        Line(points={{6.7,-71},{20,-71},{20,160},{80,160},{80,50},{89.6,50}},                  color = {0, 0, 127}));
       connect(vu_heater_rpmSet[4].y, lifespan_Reduction_Cost_Pumps[27].u) annotation (
-        Line(points={{-13.3,-11},{-6,-11},{-6,160},{60,160},{60,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,-11},{20,-11},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(vu_cooler_rpmSet[4].y, lifespan_Reduction_Cost_Pumps[28].u) annotation (
-        Line(points={{-13.3,-71},{-6,-71},{-6,160},{60,160},{60,50},{79.6,50}},                color = {0, 0, 127}));
+        Line(points={{6.7,-71},{20,-71},{20,160},{80,160},{80,50},{89.6,50}},                  color = {0, 0, 127}));
       connect(vu_heater_rpmSet[5].y, lifespan_Reduction_Cost_Pumps[29].u) annotation (
-        Line(points={{-13.3,-11},{-6,-11},{-6,160},{60,160},{60,50},{79.6,50}},              color = {0, 0, 127}));
+        Line(points={{6.7,-11},{20,-11},{20,160},{80,160},{80,50},{89.6,50}},                color = {0, 0, 127}));
       connect(vu_cooler_rpmSet[5].y, lifespan_Reduction_Cost_Pumps[30].u) annotation (
-        Line(points={{-13.3,-71},{-6,-71},{-6,160},{60,160},{60,50},{79.6,50}},                color = {0, 0, 127}));
+        Line(points={{6.7,-71},{20,-71},{20,160},{80,160},{80,50},{89.6,50}},                  color = {0, 0, 127}));
       connect(vu_heater_valveSet[1].y, lifespan_Reduction_Cost_Valves[16].u) annotation (
-        Line(points={{-15.3,-41},{-8,-41},{-8,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                             color = {0, 0, 127}));
+        Line(points={{6.7,-41},{12,-41},{12,-42},{20,-42},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                               color = {0, 0, 127}));
       connect(vu_cooler_valveSet[1].y, lifespan_Reduction_Cost_Valves[17].u) annotation (
-        Line(points={{-13.3,-99},{-6,-99},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                               color = {0, 0, 127}));
+        Line(points={{6.7,-99},{4,-99},{4,-100},{20,-100},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                                 color = {0, 0, 127}));
       connect(vu_heater_valveSet[2].y, lifespan_Reduction_Cost_Valves[18].u) annotation (
-        Line(points={{-15.3,-41},{-6,-41},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                             color = {0, 0, 127}));
+        Line(points={{6.7,-41},{12,-41},{12,-42},{20,-42},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                               color = {0, 0, 127}));
       connect(vu_cooler_valveSet[2].y, lifespan_Reduction_Cost_Valves[19].u) annotation (
-        Line(points={{-13.3,-99},{-6,-99},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                               color = {0, 0, 127}));
+        Line(points={{6.7,-99},{4,-99},{4,-100},{20,-100},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                                 color = {0, 0, 127}));
       connect(vu_heater_valveSet[3].y, lifespan_Reduction_Cost_Valves[20].u) annotation (
-        Line(points={{-15.3,-41},{-6,-41},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                             color = {0, 0, 127}));
+        Line(points={{6.7,-41},{12,-41},{12,-40},{20,-40},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                               color = {0, 0, 127}));
       connect(vu_cooler_valveSet[3].y, lifespan_Reduction_Cost_Valves[21].u) annotation (
-        Line(points={{-13.3,-99},{-6,-99},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                               color = {0, 0, 127}));
+        Line(points={{6.7,-99},{4,-99},{4,-100},{20,-100},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                                 color = {0, 0, 127}));
       connect(vu_heater_valveSet[4].y, lifespan_Reduction_Cost_Valves[22].u) annotation (
-        Line(points={{-15.3,-41},{-6,-41},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                             color = {0, 0, 127}));
+        Line(points={{6.7,-41},{10,-41},{10,-42},{20,-42},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                               color = {0, 0, 127}));
       connect(vu_cooler_valveSet[4].y, lifespan_Reduction_Cost_Valves[23].u) annotation (
-        Line(points={{-13.3,-99},{-6,-99},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                               color = {0, 0, 127}));
+        Line(points={{6.7,-99},{4,-99},{4,-100},{20,-100},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                                 color = {0, 0, 127}));
       connect(vu_heater_valveSet[5].y, lifespan_Reduction_Cost_Valves[24].u) annotation (
-        Line(points={{-15.3,-41},{-6,-41},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                             color = {0, 0, 127}));
+        Line(points={{6.7,-41},{10,-41},{10,-40},{20,-40},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                               color = {0, 0, 127}));
       connect(vu_cooler_valveSet[5].y, lifespan_Reduction_Cost_Valves[25].u) annotation (
-        Line(points={{-13.3,-99},{-6,-99},{-6,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                               color = {0, 0, 127}));
+        Line(points={{6.7,-99},{4,-99},{4,-100},{20,-100},{20,-160},{80,-160},{
+              80,-50},{91.6,-50}},                                                                 color = {0, 0, 127}));
       connect(mainBus.hxBus.primBus.pumpBus.rpmSet, hx_prim_rpmSet.u) annotation (
         Line(points={{-99.95,6.05},{-100,6.05},{-100,-129},{-89.4,-129}},                            color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.ahuBus.preheaterBus.hydraulicBus.pumpBus.rpmSet, ahu_preheater_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,7},{-59.4,7}},             color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,5},{-47.4,5}},             color = {255, 204, 51}, thickness = 0.5));
       connect(ahu_preheater_rpmSet.y, lifespan_Reduction_Cost_Pumps[31].u) annotation (
-        Line(points={{-43.3,7},{-42,7},{-42,8},{-40,8},{-40,160},{60,160},{60,
-              50},{79.6,50}},                                         color = {0, 0, 127}));
+        Line(points={{-31.3,5},{-28,5},{-28,6},{-20,6},{-20,160},{80,160},{80,
+              50},{89.6,50}},                                         color = {0, 0, 127}));
       connect(ahu_heater_rpmSet.y, lifespan_Reduction_Cost_Pumps[32].u) annotation (
-        Line(points={{-45.3,-53},{-40,-53},{-40,160},{60,160},{60,50},{79.6,50}},
+        Line(points={{-31.3,-55},{-20,-55},{-20,160},{80,160},{80,50},{89.6,50}},
                                                                     color = {0, 0, 127}));
       connect(ahu_cooler_rpmSet.y, lifespan_Reduction_Cost_Pumps[33].u) annotation (
-        Line(points={{-47.3,-115},{-42,-115},{-42,-116},{-40,-116},{-40,160},{
-              60,160},{60,50},{79.6,50}},                           color = {0, 0, 127}));
+        Line(points={{-33.3,-113},{-34,-113},{-34,-114},{-20,-114},{-20,160},{
+              80,160},{80,50},{89.6,50}},                           color = {0, 0, 127}));
       connect(ahu_preheater_valveSet.y, lifespan_Reduction_Cost_Valves[26].u) annotation (
-        Line(points={{-45.3,-25},{-40,-25},{-40,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                          color = {0, 0, 127}));
+        Line(points={{-31.3,-25},{-32,-25},{-32,-26},{-20,-26},{-20,-160},{80,
+              -160},{80,-50},{91.6,-50}},                                                     color = {0, 0, 127}));
       connect(ahu_heater_valveSet.y, lifespan_Reduction_Cost_Valves[27].u) annotation (
-        Line(points={{-45.3,-85},{-40,-85},{-40,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                  color = {0, 0, 127}));
+        Line(points={{-31.3,-83},{-32,-83},{-32,-86},{-20,-86},{-20,-160},{80,
+              -160},{80,-50},{91.6,-50}},                             color = {0, 0, 127}));
       connect(ahu_cooler_valveSet.y, lifespan_Reduction_Cost_Valves[28].u) annotation (
-        Line(points={{-45.3,-141},{-40,-141},{-40,-160},{60,-160},{60,-50},{
-              69.6,-50}},                                                                 color = {0, 0, 127}));
+        Line(points={{-33.3,-141},{-32,-141},{-32,-142},{-20,-142},{-20,-160},{
+              80,-160},{80,-50},{91.6,-50}},                                              color = {0, 0, 127}));
       connect(hx_prim_rpmSet.y, lifespan_Reduction_Cost_Pumps[34].u) annotation (
-        Line(points={{-73.3,-129},{-70,-129},{-70,-130},{-68,-130},{-68,160},{
-              60,160},{60,50},{79.6,50}},                                                   color = {0, 0, 127}));
+        Line(points={{-73.3,-129},{-70,-129},{-70,-130},{-60,-130},{-60,160},{
+              80,160},{80,50},{89.6,50}},                                                   color = {0, 0, 127}));
       connect(hx_sec_rpmSet.y, lifespan_Reduction_Cost_Pumps[35].u) annotation (
-        Line(points={{-75.3,-71},{-68,-71},{-68,160},{60,160},{60,50},{79.6,50}},         color = {0, 0, 127}));
+        Line(points={{-75.3,-71},{-60,-71},{-60,160},{80,160},{80,50},{89.6,50}},         color = {0, 0, 127}));
       connect(hx_prim_valveSet.y, lifespan_Reduction_Cost_Valves[29].u) annotation (
-        Line(points={{-75.3,-39},{-70,-39},{-70,-40},{-68,-40},{-68,-160},{60,
-              -160},{60,-50},{69.6,-50}},                                                     color = {0, 0, 127}));
+        Line(points={{-75.3,-39},{-70,-39},{-70,-40},{-60,-40},{-60,-160},{80,
+              -160},{80,-50},{91.6,-50}},                                                     color = {0, 0, 127}));
       connect(hx_sec_valveSet.y, lifespan_Reduction_Cost_Valves[30].u) annotation (
-        Line(points={{-75.3,-99},{-68,-99},{-68,-160},{60,-160},{60,-50},{69.6,
+        Line(points={{-75.3,-99},{-60,-99},{-60,-160},{80,-160},{80,-50},{91.6,
               -50}},                                                                          color = {0, 0, 127}));
       connect(swu_pump_rpmSet.y, lifespan_Reduction_Cost_Pumps[36].u) annotation (
-        Line(points={{16.7,11},{24,11},{24,160},{60,160},{60,50},{79.6,50}},            color = {0, 0, 127}));
+        Line(points={{46.7,35},{48,35},{48,36},{60,36},{60,160},{80,160},{80,50},
+              {89.6,50}},                                                               color = {0, 0, 127}));
       connect(swu_Y2valveSet.y, lifespan_Reduction_Cost_Valves[31].u) annotation (
-        Line(points={{16.7,-11},{24,-11},{24,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{48.7,9},{58,9},{58,10},{60,10},{60,-160},{80,-160},{80,
+              -50},{91.6,-50}},                                                                 color = {0, 0, 127}));
       connect(swu_Y3valveSet.y, lifespan_Reduction_Cost_Valves[32].u) annotation (
-        Line(points={{16.7,-33},{24,-33},{24,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{46.7,-27},{46,-27},{46,-28},{60,-28},{60,-160},{80,-160},
+              {80,-50},{91.6,-50}},                                                             color = {0, 0, 127}));
       connect(swu_K1valveSet.y, lifespan_Reduction_Cost_Valves[33].u) annotation (
-        Line(points={{16.7,-55},{24,-55},{24,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{46.7,-57},{48,-57},{48,-52},{60,-52},{60,-158},{80,-158},
+              {80,-50},{91.6,-50}},                                                             color = {0, 0, 127}));
       connect(swu_K2valveSet.y, lifespan_Reduction_Cost_Valves[34].u) annotation (
-        Line(points={{16.7,-79},{24,-79},{24,-160},{60,-160},{60,-50},{69.6,-50}},              color = {0, 0, 127}));
+        Line(points={{44.7,-89},{54,-89},{54,-92},{60,-92},{60,-160},{80,-160},
+              {80,-50},{91.6,-50}},                                                             color = {0, 0, 127}));
       connect(swu_K3valveSet.y, lifespan_Reduction_Cost_Valves[35].u) annotation (
-        Line(points={{16.7,-101},{24,-101},{24,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                              color = {0, 0, 127}));
+        Line(points={{46.7,-117},{38,-117},{38,-114},{60,-114},{60,-160},{80,
+              -160},{80,-50},{91.6,-50}},                                                         color = {0, 0, 127}));
       connect(swu_K4valveSet.y, lifespan_Reduction_Cost_Valves[36].u) annotation (
-        Line(points={{16.7,-123},{24,-123},{24,-160},{60,-160},{60,-50},{69.6,
-              -50}},                                                                              color = {0, 0, 127}));
+        Line(points={{46.7,-143},{40,-143},{40,-144},{60,-144},{60,-160},{80,
+              -160},{80,-50},{91.6,-50}},                                                         color = {0, 0, 127}));
       connect(lifespan_Reduction_Cost_Pumps.y, multiSum1.u[1:36]) annotation (
-        Line(points={{100,50},{106,50},{106,0.0972222},{120,0.0972222}},      color = {0, 0, 127}));
+        Line(points={{110,50},{120,50},{120,0},{126,0},{126,0.0972222},{130,
+              0.0972222}},                                                    color = {0, 0, 127}));
       connect(lifespan_Reduction_Cost_Valves.y, multiSum1.u[37:72]) annotation (
-        Line(points={{90,-50},{100,-50},{100,-8},{120,-8},{120,-6.90278}},                         color = {0, 0, 127}));
+        Line(points={{112,-50},{120,-50},{120,-8},{130,-8},{130,-6.90278}},                        color = {0, 0, 127}));
       connect(mainBus.tabs1Bus.pumpBus.pumpBus.rpmSet, tabs_pump_rpmSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,141},
-              {-29.4,141}},                                                                  color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,140},{-14,140},{-14,139},{-9.4,139}},                                      color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs1Bus.hotThrottleBus.pumpBus.rpmSet, tabs_hotThrottle_rpmSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,111},
-              {-29.4,111}},                                                                color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,112},{-14,112},{-14,111},{-7.4,111}},                                    color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs1Bus.hotThrottleBus.valveSet, tabs_hotThrottle_valveSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,81},{-31.4,
-              81}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,80},{
+              -14,80},{-14,79},{-7.4,79}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs1Bus.coldThrottleBus.pumpBus.rpmSet, tabs_coldThrottle_rpmSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,51},{-29.4,
-              51}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,48},{
+              -14,48},{-14,49},{-7.4,49}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs1Bus.coldThrottleBus.valveSet, tabs_coldThrottle_valveSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,19},{-29.4,
-              19}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,18},{
+              -14,18},{-14,19},{-7.4,19}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs2Bus.pumpBus.pumpBus.rpmSet, tabs_pump_rpmSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,141},
-              {-29.4,141}},                                                                  color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,140},{-14,140},{-14,139},{-9.4,139}},                                      color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs2Bus.hotThrottleBus.pumpBus.rpmSet, tabs_hotThrottle_rpmSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,111},
-              {-29.4,111}},                                                                color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,112},{-14,112},{-14,111},{-7.4,111}},                                    color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs2Bus.hotThrottleBus.valveSet, tabs_hotThrottle_valveSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,81},{-31.4,
-              81}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,80},{
+              -14,80},{-14,79},{-7.4,79}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs2Bus.coldThrottleBus.pumpBus.rpmSet, tabs_coldThrottle_rpmSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,51},{-29.4,
-              51}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,50},{
+              -14,50},{-14,49},{-7.4,49}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs2Bus.coldThrottleBus.valveSet, tabs_coldThrottle_valveSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,19},{-29.4,
-              19}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,18},{
+              -14,18},{-14,19},{-7.4,19}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs3Bus.pumpBus.pumpBus.rpmSet, tabs_pump_rpmSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,141},
-              {-29.4,141}},                                                                  color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,140},{-14,140},{-14,139},{-9.4,139}},                                      color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs3Bus.hotThrottleBus.pumpBus.rpmSet, tabs_hotThrottle_rpmSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,111},
-              {-29.4,111}},                                                                color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,112},{-14,112},{-14,111},{-7.4,111}},                                    color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs3Bus.hotThrottleBus.valveSet, tabs_hotThrottle_valveSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,81},{-31.4,
-              81}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,80},{
+              -14,80},{-14,79},{-7.4,79}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs3Bus.coldThrottleBus.pumpBus.rpmSet, tabs_coldThrottle_rpmSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,51},{-29.4,
-              51}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,50},{
+              -14,50},{-14,49},{-7.4,49}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs3Bus.coldThrottleBus.valveSet, tabs_coldThrottle_valveSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,19},{-29.4,
-              19}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,18},{
+              -14,18},{-14,19},{-7.4,19}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs4Bus.pumpBus.pumpBus.rpmSet, tabs_pump_rpmSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,141},
-              {-29.4,141}},                                                                  color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,140},{-14,140},{-14,139},{-9.4,139}},                                      color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs4Bus.hotThrottleBus.pumpBus.rpmSet, tabs_hotThrottle_rpmSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,111},
-              {-29.4,111}},                                                                color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,112},{-14,112},{-14,111},{-7.4,111}},                                    color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs4Bus.hotThrottleBus.valveSet, tabs_hotThrottle_valveSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,81},{-31.4,
-              81}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,80},{
+              -14,80},{-14,79},{-7.4,79}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs4Bus.coldThrottleBus.pumpBus.rpmSet, tabs_coldThrottle_rpmSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,51},{-29.4,
-              51}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,50},{
+              -14,50},{-14,49},{-7.4,49}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs4Bus.coldThrottleBus.valveSet, tabs_coldThrottle_valveSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,19},{-29.4,
-              19}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,18},{
+              -14,18},{-14,19},{-7.4,19}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs5Bus.pumpBus.pumpBus.rpmSet, tabs_pump_rpmSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,141},
-              {-29.4,141}},                                                                  color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,140},{-14,140},{-14,139},{-9.4,139}},                                      color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs5Bus.hotThrottleBus.pumpBus.rpmSet, tabs_hotThrottle_rpmSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-40,160},{-40,111},
-              {-29.4,111}},                                                                color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,84},{-100,84},{-100,160},{-20,160},{
+              -20,112},{-14,112},{-14,111},{-7.4,111}},                                    color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs5Bus.hotThrottleBus.valveSet, tabs_hotThrottle_valveSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,81},{-31.4,
-              81}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,80},{
+              -14,80},{-14,79},{-7.4,79}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs5Bus.coldThrottleBus.pumpBus.rpmSet, tabs_coldThrottle_rpmSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,51},{-29.4,
-              51}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,48},{
+              -14,48},{-14,49},{-7.4,49}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.tabs5Bus.coldThrottleBus.valveSet, tabs_coldThrottle_valveSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-40,160},{-40,19},{-29.4,
-              19}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,160},{-20,160},{-20,18},{
+              -14,18},{-14,19},{-7.4,19}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu1Bus.heaterBus.hydraulicBus.pumpBus.rpmSet, vu_heater_rpmSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -11},{-29.4,-11}},                                                               color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-12},{-14,-12},{-14,-11},{-9.4,-11}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu1Bus.heaterBus.hydraulicBus.valveSet, vu_heater_valveSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-41},{-31.4,
-              -41}},                                                                                       color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-40},
+              {-14,-40},{-14,-41},{-9.4,-41}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu1Bus.coolerBus.hydraulicBus.pumpBus.rpmSet, vu_cooler_rpmSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-71},{-29.4,
-              -71}},                                                                                         color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-72},
+              {-14,-72},{-14,-71},{-9.4,-71}},                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu1Bus.coolerBus.hydraulicBus.valveSet, vu_cooler_valveSet[1].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -99},{-29.4,-99}},                                                                 color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-100},{-14,-100},{-14,-99},{-9.4,-99}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu2Bus.heaterBus.hydraulicBus.pumpBus.rpmSet, vu_heater_rpmSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -11},{-29.4,-11}},                                                               color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-78},{-100,-78},{-100,-160},{-20,
+              -160},{-20,-14},{-14,-14},{-14,-11},{-9.4,-11}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu2Bus.heaterBus.hydraulicBus.valveSet, vu_heater_valveSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-41},{-31.4,
-              -41}},                                                                                       color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-42},
+              {-14,-42},{-14,-41},{-9.4,-41}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu2Bus.coolerBus.hydraulicBus.pumpBus.rpmSet, vu_cooler_rpmSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-71},{-29.4,
-              -71}},                                                                                         color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-72},
+              {-24,-72},{-24,-71},{-9.4,-71}},                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu2Bus.coolerBus.hydraulicBus.valveSet, vu_cooler_valveSet[2].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -99},{-29.4,-99}},                                                                 color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-98},{-14,-98},{-14,-99},{-9.4,-99}},                                   color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu3Bus.heaterBus.hydraulicBus.pumpBus.rpmSet, vu_heater_rpmSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -11},{-29.4,-11}},                                                               color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-12},{-14,-12},{-14,-11},{-9.4,-11}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu3Bus.heaterBus.hydraulicBus.valveSet, vu_heater_valveSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-41},{-31.4,
-              -41}},                                                                                       color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-42},
+              {-14,-42},{-14,-41},{-9.4,-41}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu3Bus.coolerBus.hydraulicBus.pumpBus.rpmSet, vu_cooler_rpmSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-71},{-29.4,
-              -71}},                                                                                         color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-72},
+              {-14,-72},{-14,-71},{-9.4,-71}},                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu3Bus.coolerBus.hydraulicBus.valveSet, vu_cooler_valveSet[3].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -99},{-29.4,-99}},                                                                 color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-100},{-14,-100},{-14,-99},{-9.4,-99}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu4Bus.heaterBus.hydraulicBus.pumpBus.rpmSet, vu_heater_rpmSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -11},{-29.4,-11}},                                                               color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-12},{-14,-12},{-14,-11},{-9.4,-11}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu4Bus.heaterBus.hydraulicBus.valveSet, vu_heater_valveSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-41},{-31.4,
-              -41}},                                                                                       color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-42},
+              {-14,-42},{-14,-41},{-9.4,-41}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu4Bus.coolerBus.hydraulicBus.pumpBus.rpmSet, vu_cooler_rpmSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-71},{-29.4,
-              -71}},                                                                                         color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-72},
+              {-14,-72},{-14,-71},{-9.4,-71}},                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu4Bus.coolerBus.hydraulicBus.valveSet, vu_cooler_valveSet[4].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -99},{-29.4,-99}},                                                                 color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-98},{-14,-98},{-14,-99},{-9.4,-99}},                                   color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu5Bus.heaterBus.hydraulicBus.pumpBus.rpmSet, vu_heater_rpmSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -11},{-29.4,-11}},                                                               color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-12},{-14,-12},{-14,-11},{-9.4,-11}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu5Bus.heaterBus.hydraulicBus.valveSet, vu_heater_valveSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-41},{-31.4,
-              -41}},                                                                                       color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-42},
+              {-14,-42},{-14,-41},{-9.4,-41}},                                                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu5Bus.coolerBus.hydraulicBus.pumpBus.rpmSet, vu_cooler_rpmSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-40,-160},{-40,-71},{-29.4,
-              -71}},                                                                                         color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-20,-160},{-20,-72},
+              {-14,-72},{-14,-71},{-9.4,-71}},                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.vu5Bus.coolerBus.hydraulicBus.valveSet, vu_cooler_valveSet[5].u) annotation (
-        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-40,-160},{-40,
-              -100},{-34,-100},{-34,-99},{-29.4,-99}},                                           color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-99.95,-76},{-100,-76},{-100,-160},{-20,
+              -160},{-20,-100},{-14,-100},{-14,-99},{-9.4,-99}},                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.hxBus.primBus.valveSet, hx_prim_valveSet.u) annotation (
         Line(points={{-99.95,6.05},{-100,6.05},{-100,-40},{-96,-40},{-96,-39},{-91.4,
               -39}},                                                                               color = {255, 204, 51}, thickness = 0.5));
@@ -567,35 +582,46 @@ Components")}),
       connect(mainBus.hxBus.secBus.valveSet, hx_sec_valveSet.u) annotation (
         Line(points={{-99.95,6.05},{-100,6.05},{-100,-100},{-91.4,-100},{-91.4,-99}},                         color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.ahuBus.preheaterBus.hydraulicBus.valveSet, ahu_preheater_valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-26},{-82,-26},{-82,-25},{-61.4,
-              -25}},                                                                                  color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-26},{-82,-26},{-82,-25},{
+              -47.4,-25}},                                                                            color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.ahuBus.heaterBus.hydraulicBus.pumpBus.rpmSet, ahu_heater_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-52},{-61.4,-52},{-61.4,-53}},                             color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-52},{-47.4,-52},{-47.4,
+              -55}},                                                                                            color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.ahuBus.heaterBus.hydraulicBus.valveSet, ahu_heater_valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-85},{-61.4,-85}},                             color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-83},{-47.4,-83}},                             color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.ahuBus.coolerBus.hydraulicBus.pumpBus.rpmSet, ahu_cooler_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-114},{-86,-114},{-86,-115},{-63.4,
-              -115}},                                                                               color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-114},{-86,-114},{-86,-113},
+              {-49.4,-113}},                                                                        color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.ahuBus.coolerBus.hydraulicBus.valveSet, ahu_cooler_valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-140},{-80,-140},{-80,-141},{-61.4,
-              -141}},                                                                               color = {255, 204, 51}, thickness = 0.5));
-      connect(mainBus.swuBus.pumpBus.rpmSet, swu_pump_rpmSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,11},{0.6,11}},            color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-140},{-80,-140},{-80,-141},
+              {-49.4,-141}},                                                                        color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.swuBus.Y2valSet, swu_Y2valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,-11},{0.6,-11}},              color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{20,-160},{20,10},{
+              26,10},{26,9},{32.6,9}},                                                                 color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.swuBus.Y3valSet, swu_Y3valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,-33},{0.6,-33}},              color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{20,-160},{20,-28},{
+              28,-28},{28,-27},{30.6,-27}},                                                            color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.swuBus.K1valSet, swu_K1valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,-55},{0.6,-55}},              color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{20,-160},{20,-56},{
+              26,-56},{26,-57},{30.6,-57}},                                                            color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.swuBus.K2valSet, swu_K2valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,-82},{0.6,-82},
-              {0.6,-79}},                                                                                          color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{20,-160},{20,-90},{
+              28.6,-90},{28.6,-89}},                                                                               color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.swuBus.K3valSet, swu_K3valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,-101},{0.6,
-              -101}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{20,-160},{20,-116},
+              {22,-116},{22,-118},{26,-118},{26,-117},{30.6,-117}},                                      color = {255, 204, 51}, thickness = 0.5));
       connect(mainBus.swuBus.K4valSet, swu_K4valveSet.u) annotation (
-        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{-6,-160},{-6,-123},{0.6,
-              -123}},                                                                                    color = {255, 204, 51}, thickness = 0.5));
+        Line(points={{-99.95,6.05},{-100,6.05},{-100,-160},{20,-160},{20,-142},
+              {24,-142},{24,-143},{30.6,-143}},                                                          color = {255, 204, 51}, thickness = 0.5));
+      connect(mainBus.swuBus.pumpBus.rpmSet, swu_pump_rpmSet.u) annotation (
+          Line(
+          points={{-99.95,6.05},{-99.95,-160},{20,-160},{20,35},{30.6,35}},
+          color={255,204,51},
+          thickness=0.5), Text(
+          string="%first",
+          index=-1,
+          extent={{-6,3},{-6,3}},
+          horizontalAlignment=TextAlignment.Right));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, extent={{-100,-160},{160,
                 160}}),                                                                          graphics={  Rectangle(extent = {{-100, 150}, {150, -152}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
