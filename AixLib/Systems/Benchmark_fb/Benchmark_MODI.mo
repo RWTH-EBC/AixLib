@@ -7,21 +7,17 @@ model Benchmark_MODI
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   CCCS.Evaluation_CCCS evaluation_CCCS
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
-  Mode_based_ControlStrategy.Mode_based_Controller mode_based_Controller
-    annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+  Benchmark.Controller.BenchmarkBaseControl benchmarkBaseControl
+    annotation (Placement(transformation(extent={{-44,14},{-20,40}})));
 equation
   connect(benchmarkBuilding.mainBus, evaluation_CCCS.mainBus) annotation (Line(
       points={{0.59,-0.622222},{0.59,30},{20,30}},
       color={255,204,51},
       thickness=0.5));
-  connect(mode_based_Controller.mainBus, benchmarkBuilding.mainBus) annotation
-    (Line(
-      points={{-20,38},{0,38},{0,-0.622222},{0.59,-0.622222}},
+  connect(benchmarkBuilding.mainBus, benchmarkBaseControl.bus) annotation (Line(
+      points={{0.59,-0.622222},{0.59,30.1},{-19.2,30.1}},
       color={255,204,51},
       thickness=0.5));
-  connect(benchmarkBuilding.y, mode_based_Controller.TAirOutside) annotation (
-      Line(points={{-34.26,1.45185},{-34.26,10},{-8,10},{-8,32},{-19.2,32}},
-        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Benchmark_MODI;

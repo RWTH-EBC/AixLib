@@ -639,13 +639,16 @@ Controller")}),
       connect(controller_SwitchingUnit1.Cooling_GTF, u[15]) annotation (Line(points={{-69.4,
               68},{-40,68},{-40,135.027}},        color={255,0,255}));
       connect(controller_CentralAHU.CentralAHU_Heating, u[19])
-        annotation (Line(points={{-70,38},{-40,38},{-40,132}}, color={255,0,255}));
+        annotation (Line(points={{-69.6,38.5714},{-40,38.5714},{-40,132}},
+                                                               color={255,0,255}));
       connect(controller_CentralAHU.CentralAHU_Heating_Preheating, u[20])
-        annotation (Line(points={{-70.2,34},{-40,34},{-40,131.243}}, color={255,0,255}));
+        annotation (Line(points={{-70.2,35.7143},{-40,35.7143},{-40,131.243}},
+                                                                     color={255,0,255}));
       connect(controller_CentralAHU.CentralAHU_Cooling, u[21]) annotation (Line(
-            points={{-70,26},{-70,28},{-40,28},{-40,130.486}}, color={255,0,255}));
+            points={{-70,30},{-70,28},{-40,28},{-40,130.486}}, color={255,0,255}));
       connect(controller_CentralAHU.CentralAHU_Combi, u[22]) annotation (Line(
-            points={{-70,22},{-40,22},{-40,129.73}}, color={255,0,255}));
+            points={{-70,27.1429},{-40,27.1429},{-40,129.73}},
+                                                     color={255,0,255}));
       connect(controller_HPSystem1.HP_Heating, u[9]) annotation (Line(points={{-69.4,
               18},{-40,18},{-40,139.568}}, color={255,0,255}));
       connect(controller_HPSystem1.HP_Cooling, u[10]) annotation (Line(points={{-69.4,2},
@@ -653,6 +656,12 @@ Controller")}),
       connect(u[11], controller_HPSystem1.HP_Combi) annotation (Line(points={{-40,
               138.054},{-40,6},{-69.4,6}},
                                   color={255,0,255}));
+      connect(mainBus.ahuBus, controller_CentralAHU.genericAHUBus) annotation (
+          Line(
+          points={{38.05,120.05},{-20,120.05},{-20,32},{-70,32},{-70,32.9286}},
+
+          color={255,204,51},
+          thickness=0.5));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -120}, {100, 120}}), graphics={  Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                                               FillPattern.Solid,
@@ -1242,7 +1251,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T25(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-56},
@@ -1259,7 +1268,7 @@ Controller")}),
             rotation=-90)));
       PNlib.Components.TD T26(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[3],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-40},
@@ -1276,7 +1285,7 @@ Controller")}),
             rotation=-90)));
       PNlib.Components.TD T35(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-94},
@@ -1284,7 +1293,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T36(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[4],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-90,-78},
@@ -1292,7 +1301,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T41(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[4],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-104,-66},
@@ -1300,7 +1309,7 @@ Controller")}),
             rotation=270)));
       PNlib.Components.TD T42(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[3],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-122,-66},
@@ -1308,7 +1317,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T6(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[2] and TAirOutside < 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-78},
@@ -1316,7 +1325,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T7(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-94},
@@ -1342,7 +1351,7 @@ Controller")}),
             rotation=-90)));
       PNlib.Components.TD T8(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[2] and TAirOutside < 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-24,-66},
@@ -1350,7 +1359,7 @@ Controller")}),
             rotation=270)));
       PNlib.Components.TD T9(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[2] and TAirOutside >= 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-40,-66},
@@ -1358,7 +1367,7 @@ Controller")}),
             rotation=90)));
       PNlib.Components.TD T23(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[4],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-94},
@@ -1366,7 +1375,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T24(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[2] and TAirOutside < 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-78},
@@ -1374,7 +1383,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T27(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[2] and TAirOutside >= 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-40},
@@ -1382,7 +1391,7 @@ Controller")}),
             rotation=0)));
       PNlib.Components.TD T28(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[1],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-52,-56},
@@ -1390,7 +1399,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T29(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[2] and TAirOutside >= 283.15,
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-40},
@@ -1398,7 +1407,7 @@ Controller")}),
             rotation=180)));
       PNlib.Components.TD T30(
         delay=180,
-        firingCon=false,
+        firingCon=Superior_Mode[4],
         nIn=1,
         nOut=1) annotation (Placement(visible=true, transformation(
             origin={-12,-56},
@@ -1563,17 +1572,20 @@ Controller")}),
       connect(T138.inPlaces[1], P117.outTransition[1]) annotation (
         Line(points={{44.16,-28},{32.16,-28},{32.16,-18.64},{32,-18.64}},                     thickness = 0.5));
       connect(P115.outTransition[1], T141.inPlaces[1]) annotation (
-        Line(points={{62.4,-1.36},{62,-1.36},{62,8.64},{72,8.64},{72,8},{72.16,8}},                                       thickness = 0.5));
+        Line(points={{62.4,-1.36},{62,-1.36},{62,8.64},{72,8.64},{72,8},{72.16,
+              8}},                                                                                                        thickness = 0.5));
       connect(T141.outPlaces[1], P116.inTransition[1]) annotation (
         Line(points={{79.84,8},{93.84,8},{93.84,-1},{92,-1},{92,-1.36}},                                                  thickness = 0.5));
       connect(P115.outTransition[2], T140.inPlaces[1]) annotation (
-        Line(points={{61.6,-1.36},{62,-1.36},{62,8.64},{52,8.64},{52,8},{51.84,8}},                                       thickness = 0.5));
+        Line(points={{61.6,-1.36},{62,-1.36},{62,8.64},{52,8.64},{52,8},{51.84,
+              8}},                                                                                                        thickness = 0.5));
       connect(T139.outPlaces[1], P115.inTransition[1]) annotation (
         Line(points={{72.16,-28},{62.16,-28},{62.16,-18.64},{62.4,-18.64}},                                               thickness = 0.5));
       connect(T139.inPlaces[1], P116.outTransition[1]) annotation (
         Line(points={{79.84,-28},{93.84,-28},{93.84,-18},{92,-18},{92,-18.64}},                                           thickness = 0.5));
       connect(T138.outPlaces[1], P115.inTransition[2]) annotation (
-        Line(points={{51.84,-28},{63.84,-28},{63.84,-18},{61.6,-18},{61.6,-18.64}},                                       thickness = 0.5));
+        Line(points={{51.84,-28},{63.84,-28},{63.84,-18},{61.6,-18},{61.6,
+              -18.64}},                                                                                                   thickness = 0.5));
       connect(P110.outTransition[1], T133.inPlaces[1]) annotation (
         Line(points={{154.4,-71.36},{154,-71.36},{154,-61.36},{164,-61.36},{164,-62},
               {164.16,-62}},                                                                                         thickness = 0.5));
@@ -1613,18 +1625,21 @@ Controller")}),
       connect(T123.inPlaces[1], P15.outTransition[1]) annotation (
         Line(points={{136.16,-30},{124.16,-30},{124.16,-20.64},{124,-20.64}},                                             thickness = 0.5));
       connect(P14.outTransition[2], T125.inPlaces[1]) annotation (
-        Line(points={{153.6,-3.36},{154,-3.36},{154,6.64},{144,6.64},{144,6},{143.84,
-              6}},                                                                                                        thickness = 0.5));
+        Line(points={{153.6,-3.36},{154,-3.36},{154,6.64},{144,6.64},{144,6},{
+              143.84,6}},                                                                                                 thickness = 0.5));
       connect(P14.outTransition[1], T124.inPlaces[1]) annotation (
-        Line(points={{154.4,-3.36},{154,-3.36},{154,6.64},{164.16,6.64},{164.16,6}},          thickness = 0.5));
+        Line(points={{154.4,-3.36},{154,-3.36},{154,6.64},{164.16,6.64},{164.16,
+              6}},                                                                            thickness = 0.5));
       connect(T123.outPlaces[1], P14.inTransition[2]) annotation (
-        Line(points={{143.84,-30},{155.84,-30},{155.84,-20},{153.6,-20},{153.6,-20.64}},                                  thickness = 0.5));
+        Line(points={{143.84,-30},{155.84,-30},{155.84,-20},{153.6,-20},{153.6,
+              -20.64}},                                                                                                   thickness = 0.5));
       connect(T122.outPlaces[1], P14.inTransition[1]) annotation (
         Line(points={{164.16,-30},{154.16,-30},{154.16,-20.64},{154.4,-20.64}},                                           thickness = 0.5));
       connect(T124.outPlaces[1], P13.inTransition[1]) annotation (
         Line(points={{171.84,6},{185.84,6},{185.84,-4},{184,-4},{184,-3.36}},                                             thickness = 0.5));
       connect(T122.inPlaces[1], P13.outTransition[1]) annotation (
-        Line(points={{171.84,-30},{185.84,-30},{185.84,-21},{184,-21},{184,-20.64}},                                      thickness = 0.5));
+        Line(points={{171.84,-30},{185.84,-30},{185.84,-21},{184,-21},{184,
+              -20.64}},                                                                                                   thickness = 0.5));
       connect(P11.outTransition[1], T121.inPlaces[1]) annotation (
         Line(points={{50.4,62.64},{50,62.64},{50,72.64},{60,72.64},{60,72},{60.16,72}},               thickness = 0.5));
       connect(T121.outPlaces[1], P12.inTransition[1]) annotation (
@@ -1856,25 +1871,28 @@ Controller")}),
       connect(P18.pd_t, integerToBoolean1[28].u) annotation (Line(points={{122.48,54},
               {122,54},{122,20},{1.77636e-15,20},{1.77636e-15,-152.4}},
                         color={255,127,0}));
-      connect(P115.pd_t, integerToBoolean1[29].u) annotation (Line(points={{53.52,-10},
-              {53.52,-46},{0,-46},{0,-48},{1.77636e-15,-48},{1.77636e-15,-152.4}},
+      connect(P115.pd_t, integerToBoolean1[29].u) annotation (Line(points={{53.52,
+              -10},{53.52,-46},{0,-46},{0,-152.4},{1.77636e-15,-152.4}},
                                                                      color={255,127,
               0}));
-      connect(P116.pd_t, integerToBoolean1[30].u) annotation (Line(points={{100.48,-10},
-              {100,-10},{100,-46},{1.77636e-15,-46},{1.77636e-15,-152.4}},    color=
+      connect(P116.pd_t, integerToBoolean1[30].u) annotation (Line(points={{100.48,
+              -10},{100,-10},{100,-46},{1.77636e-15,-46},{1.77636e-15,-152.4}},
+                                                                              color=
              {255,127,0}));
-      connect(P117.pd_t, integerToBoolean1[31].u) annotation (Line(points={{40.48,-10},
-              {42,-10},{42,-46},{0,-46},{0,-152.4},{1.77636e-15,-152.4}},
+      connect(P117.pd_t, integerToBoolean1[31].u) annotation (Line(points={{40.48,
+              -10},{42,-10},{42,-46},{0,-46},{0,-152.4},{1.77636e-15,-152.4}},
                         color={255,127,0}));
-      connect(P14.pd_t, integerToBoolean1[32].u) annotation (Line(points={{145.52,-12},
-              {145.52,-46},{0,-46},{0,-48},{1.77636e-15,-48},{1.77636e-15,-152.4}},
+      connect(P14.pd_t, integerToBoolean1[32].u) annotation (Line(points={{145.52,
+              -12},{145.52,-46},{0,-46},{0,-152.4},{1.77636e-15,-152.4}},
                                                                       color={255,127,
               0}));
-      connect(P13.pd_t, integerToBoolean1[33].u) annotation (Line(points={{192.48,-12},
-              {192.48,-30},{192,-30},{192,-46},{0,-46},{0,-152.4}},   color={255,127,
+      connect(P13.pd_t, integerToBoolean1[33].u) annotation (Line(points={{192.48,
+              -12},{192.48,-30},{192,-30},{192,-46},{0,-46},{0,-152.4}},
+                                                                      color={255,127,
               0}));
-      connect(P15.pd_t, integerToBoolean1[34].u) annotation (Line(points={{132.48,-12},
-              {134,-12},{134,-46},{1.77636e-15,-46},{1.77636e-15,-152.4}},    color=
+      connect(P15.pd_t, integerToBoolean1[34].u) annotation (Line(points={{132.48,
+              -12},{134,-12},{134,-46},{1.77636e-15,-46},{1.77636e-15,-152.4}},
+                                                                              color=
              {255,127,0}));
       connect(P110.pd_t, integerToBoolean1[35].u) annotation (Line(points={{145.52,-80},
               {146,-80},{146,-112},{0,-112},{0,-152.4}}, color={255,127,0}));
@@ -2011,8 +2029,8 @@ Controller")}),
             points={{-80.48,-68},{-80,-68},{-80,-112},{0,-112},{0,-152.4}},
             color={255,127,0}));
       connect(CentraAHU_Heating.pd_t, integerToBoolean1[19].u) annotation (Line(
-            points={{-23.52,-48},{-24,-48},{-24,-22},{0,-22},{0,-152.4}}, color
-            ={255,127,0}));
+            points={{-23.52,-48},{-24,-48},{-24,-22},{0,-22},{0,-152.4}}, color=
+             {255,127,0}));
       connect(CentralAHU_Heating_Preheating.pd_t, integerToBoolean1[20].u)
         annotation (Line(points={{-23.52,-84},{-24,-84},{-24,-112},{0,-112},{0,
               -152.4}}, color={255,127,0}));
@@ -5396,7 +5414,7 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
       Modelica.Blocks.Interfaces.BooleanInput HP_Combi annotation (
         Placement(visible = true, transformation(origin = {106, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 180), iconTransformation(origin = {106, -40}, extent = {{-12, -12}, {12, 12}}, rotation = 180)));
       Modelica.Blocks.Logical.Or or11 annotation (
-        Placement(visible = true, transformation(origin={30,90},    extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+        Placement(visible = true, transformation(origin={50,90},    extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Interfaces.RealInput T_HotStorage annotation (
         Placement(visible = true, transformation(origin = {-80, -108}, extent = {{-14, -14}, {14, 14}}, rotation = 90), iconTransformation(origin = {-80, -108}, extent = {{-14, -14}, {14, 14}}, rotation = 90)));
       Modelica.Blocks.Interfaces.RealInput T_Condensator annotation (
@@ -5410,7 +5428,7 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
       Modelica.Blocks.Sources.Constant rpm_pump_cold(k = rpmPumpCold) annotation (
         Placement(visible = true, transformation(origin={20,-40},    extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Modelica.Blocks.Logical.Or or13 annotation (
-        Placement(visible = true, transformation(origin={2,50},      extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+        Placement(visible = true, transformation(origin={10,70},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
       Modelica.Blocks.Math.BooleanToReal Throttle_HotStorage
         annotation (Placement(transformation(extent={{-90,80},{-70,100}})));
       Modelica.Blocks.Math.BooleanToReal Throttle_Recool
@@ -5450,16 +5468,20 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
               127}));
       connect(HP_Cooling, Throttle_Recool.u) annotation (Line(points={{106,-80},{80,
               -80},{80,-20},{-100,-20},{-100,60},{-92,60}}, color={255,0,255}));
-      connect(HP_Combi, or11.u1) annotation (Line(points={{106,-40},{80,-40},{80,60},
-              {42,60},{42,90}}, color={255,0,255}));
-      connect(or11.y, Throttle_HotStorage.u) annotation (Line(points={{19,90},{-20,90},
-              {-20,-20},{-100,-20},{-100,90},{-92,90}}, color={255,0,255}));
-      connect(or11.y, or13.u2) annotation (Line(points={{19,90},{18,90},{18,58},{14,
-              58}}, color={255,0,255}));
-      connect(HP_Cooling, or13.u1) annotation (Line(points={{106,-80},{80,-80},{80,50},
-              {14,50}}, color={255,0,255}));
-      connect(or13.y, Throttle_ColdStorage.u) annotation (Line(points={{-9,50},{-20,
-              50},{-20,-20},{-100,-20},{-100,0},{-92,0}}, color={255,0,255}));
+      connect(HP_Combi, or11.u1) annotation (Line(points={{106,-40},{80,-40},{
+              80,90},{62,90}},  color={255,0,255}));
+      connect(or11.y, Throttle_HotStorage.u) annotation (Line(points={{39,90},{
+              -20,90},{-20,-20},{-100,-20},{-100,90},{-92,90}},
+                                                        color={255,0,255}));
+      connect(or11.y, or13.u2) annotation (Line(points={{39,90},{30,90},{30,78},
+              {22,78}},
+                    color={255,0,255}));
+      connect(HP_Cooling, or13.u1) annotation (Line(points={{106,-80},{80,-80},
+              {80,70},{22,70}},
+                        color={255,0,255}));
+      connect(or13.y, Throttle_ColdStorage.u) annotation (Line(points={{-1,70},
+              {-20,70},{-20,-20},{-100,-20},{-100,0},{-92,0}},
+                                                          color={255,0,255}));
       connect(booleanExpression.y, ctrHP.allowOperation) annotation (Line(points={{-79,
               -40},{-30,-40},{-30,-58}}, color={255,0,255}));
       connect(ctrHP.N_rel, heatPumpSystemBus1.busHP.N) annotation (Line(points={{-19,
@@ -5472,10 +5494,13 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
       connect(ctrHP.pumpsOn, heatPumpSystemBus1.busPumpCold.pumpBus.onSet)
         annotation (Line(points={{-19,-62},{0,-62},{0,0.05},{100.05,0.05}}, color={255,
               0,255}));
-      connect(or11.y, ctrHP.heatingModeActive) annotation (Line(points={{19,90},{-20,
-              90},{-20,-20},{-60,-20},{-60,-70},{-41.8,-70}}, color={255,0,255}));
-      connect(HP_Heating, or11.u2) annotation (Line(points={{106,80},{86,80},{
-              86,82},{42,82},{42,98}}, color={255,0,255}));
+      connect(or11.y, ctrHP.heatingModeActive) annotation (Line(points={{39,90},
+              {-20,90},{-20,-20},{-60,-20},{-60,-70},{-41.8,-70}},
+                                                              color={255,0,255}));
+      connect(HP_Heating, or11.u2) annotation (Line(points={{106,80},{80,80},{
+              80,98},{62,98}},         color={255,0,255}));
+      connect(HP_Heating, Throttle_Freecool.u) annotation (Line(points={{106,80},
+              {80,80},{80,-20},{-100,-20},{-100,30},{-92,30}}, color={255,0,255}));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics={  Rectangle(lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
                 fillPattern =                                                                                                                                              FillPattern.Solid,
@@ -5694,17 +5719,17 @@ and Humidity")},   coordinateSystem(extent = {{-200, -100}, {200, 100}})),
     equation
       connect(genericAHUBus1.heaterBus.hydraulicBus.TFwrdOutMea, PID_Hot.u_m) annotation (
         Line(points={{100.05,0.05},{60,0.05},{60,100},{-100,100},{-100,50},{-20,
-              50},{-20,68},{-20,68},{-20,68}},                                                                             color = {0, 0, 127}));
+              50},{-20,68}},                                                                                               color = {0, 0, 127}));
       connect(genericAHUBus1.coolerBus.hydraulicBus.TFwrdOutMea, PID_Cold.u_m) annotation (
         Line(points={{100.05,0.05},{40,0.05},{40,-40},{-20,-40},{-20,-32},{-20,
               -32},{-20,-32}},                                                                        color = {0, 0, 127}));
       connect(TRoomMea, PID_TSet.u_m) annotation (
-        Line(points = {{106, 80}, {106, 79.5}, {60, 79.5}, {60, 99}, {-100, 99}, {-100, 9.5}, {-52, 9.5}, {-52, 18}}, color = {0, 0, 127}));
+        Line(points={{106,80},{106,79.5},{60,79.5},{60,100},{-100,100},{-100,
+              9.5},{-52,9.5},{-52,18}},                                                                               color = {0, 0, 127}));
       connect(Heating, switch1.u2) annotation (
         Line(points = {{106, -40}, {-100, -40}, {-100, 50}, {-2, 50}}, color = {255, 0, 255}));
       connect(PID_Fan.y, genericAHUBus1.flapSupSet) annotation (
-        Line(points={{-29,-60},{12,-60},{12,-62},{40,-62},{40,0.05},{100.05,
-              0.05}},                                                                   color = {0, 0, 127}));
+        Line(points={{-29,-60},{40,-60},{40,0.05},{100.05,0.05}},                       color = {0, 0, 127}));
       connect(switch1.y, genericAHUBus1.heaterBus.hydraulicBus.valveSet) annotation (
         Line(points={{21,50},{40,50},{40,0},{100,0},{100,0.05},{100.05,0.05}},     color = {0, 0, 127}));
       connect(switch11.y, genericAHUBus1.coolerBus.hydraulicBus.valveSet) annotation (
@@ -5999,6 +6024,57 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
 
     model Controller_CentralAHU
 
+    parameter Real rpm_pump_preheating=2000 "rpm of preheating pump" annotation (dialog(group="Preheating"));
+    parameter Real k_preheating=0.025 "Gain of controller" annotation (dialog(group="Preheating"));
+    parameter Real Ti_preheating=130 "Time constant of Integrator block" annotation (dialog(group="Preheating"));
+    parameter Real Td_preheating=0 "Time constant of Derivative block" annotation (dialog(group="Preheating"));
+    parameter Real yMax_preheating=1 "Upper limit of output" annotation (dialog(group="Preheating"));
+    parameter Real yMin_preheating=0 "Lower limit of output" annotation (dialog(group="Preheating"));
+    parameter Real wp_preheating=1 "set-point weight for proportional block" annotation (dialog(group="Preheating"));
+    parameter Real wd_preheating=0 "set-point weight for derivative block" annotation (dialog(group="Preheating"));
+    parameter Real Ni_preheating=0.9 "Ni*Ti is time constant of anti-windup compensation" annotation (dialog(group="Preheating"));
+    parameter Real Nd_preheating=10 "the higher Nd, the more ideal the derivative block" annotation (dialog(group="Preheating"));
+    parameter Real xi_start_preheating=0 "initial value for state of integrator block" annotation (dialog(group="Preheating"));
+    parameter Real xd_start_preheating=0 "initial value for state of derivative block"
+                                                                                      annotation (dialog(group="Preheating"));
+    parameter Real y_start_preheating=0 "Initial value of output" annotation (dialog(group="Preheating"));
+    parameter Boolean reverseAction_preheating=false "allow reverse action" annotation(dialog(group="Preheating"));
+
+
+
+    parameter Real rpm_pump_heating=2000 "rpm of heating pump" annotation (dialog(group="Heating"));
+    parameter Real k_heating=0.025 "Gain of controller" annotation (dialog(group="Heating"));
+    parameter Real Ti_heating=130 "Time constant of Integrator block" annotation (dialog(group="Heating"));
+    parameter Real Td_heating=0 "Time constant of Derivative block" annotation (dialog(group="Heating"));
+    parameter Real yMax_heating=1 "Upper limit of output" annotation (dialog(group="Heating"));
+    parameter Real yMin_heating=0 "Lower limit of output"
+                                                         annotation (dialog(group="Heating"));
+    parameter Real wp_heating=1 "set-point weight for proportional block" annotation (dialog(group="Heating"));
+    parameter Real wd_heating=0 "set-point weight for derivative block" annotation (dialog(group="Heating"));
+    parameter Real Ni_heating=0.9  "Ni*Ti is time constant of anti-windup compensation" annotation (dialog(group="Heating"));
+    parameter Real Nd_heating=10 "the higher Nd, the more ideal the derivative block"  annotation (dialog(group="Heating"));
+    parameter Real xi_start_heating=0 "initial value for state of integrator block" annotation (dialog(group="Heating"));
+    parameter Real xd_start_heating=0   "initial value for state of derivative block" annotation (dialog(group="Heating"));
+    parameter Real y_start_heating=0 "Initial value of output" annotation (dialog(group="Heating"));
+    parameter Boolean reverseAction_heating=false "allow reverse action" annotation(dialog(group="Heating"));
+
+
+    parameter Real rpm_pump_cooling=2000 "rpm of cooling pump" annotation (dialog(group="Cooling"));
+    parameter Real k_cooling=0.025 "Gain of controller" annotation (dialog(group="Cooling"));
+    parameter Real Ti_cooling=130 "Time constant of Integrator block" annotation (dialog(group="Cooling"));
+    parameter Real Td_cooling=0 "Time constant of Derivative block" annotation (dialog(group="Cooling"));
+    parameter Real yMax_cooling=1 "Upper limit of output" annotation (dialog(group="Cooling"));
+    parameter Real yMin_cooling=0 "Lower limit of output" annotation (dialog(group="Cooling"));
+    parameter Real wp_cooling=1 "set-point weight for proportional block" annotation (dialog(group="Cooling"));
+    parameter Real wd_cooling=0 "set-point weight for derivative block" annotation (dialog(group="Cooling"));
+    parameter Real Ni_cooling=0.9  "Ni*Ti is time constant of anti-windup compensation" annotation (dialog(group="Cooling"));
+    parameter Real Nd_cooling=10 "the higher Nd, the more ideal the derivative block"  annotation (dialog(group="Cooling"));
+    parameter Real xi_start_cooling=0 "initial value for state of integrator block" annotation (dialog(group="Cooling"));
+    parameter Real xd_start_cooling=0  "initial value for state of derivative block" annotation (dialog(group="Cooling"));
+    parameter Real y_start_cooling=0 "Initial value of output" annotation (dialog(group="Cooling"));
+    parameter Boolean reverseAction_cooling=false "allow reverse action" annotation(dialog(group="Cooling"));
+
+
 
 
       parameter Modelica.SIunits.Temperature TFlowSet=289.15
@@ -6006,7 +6082,7 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
         annotation (Dialog(enable=useExternalTset == false));
       parameter Boolean useExternalTset=false
         "If True, set temperature can be given externally";
-      parameter Modelica.SIunits.VolumeFlowRate VFlowSet=3000/3600
+      parameter Modelica.SIunits.VolumeFlowRate VFlowSet=9000/3600
         "Set value of volume flow [m^3/s]"
         annotation (dialog(group="Fan Controller"));
       parameter Real dpMax=5000 "Maximal pressure difference of the fans [Pa]"
@@ -6026,27 +6102,9 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
       AixLib.Systems.ModularAHU.BaseClasses.GenericAHUBus genericAHUBus annotation (Placement(transformation(
               extent={{90,-10},{110,10}}), iconTransformation(extent={{84,-14},{116,
                 16}})));
-      AixLib.Systems.ModularAHU.Controller.CtrRegBasic ctrPh(final useExternalTset=true, Td=0) annotation (dialog(enable=
-             True), Placement(transformation(extent={{0,80},{20,100}})));
-     AixLib.Systems.ModularAHU.Controller.CtrRegBasic ctrCo(
-        final useExternalTset=true,
-        Td=0,
-        final reverseAction=true) annotation (dialog(enable=True), Placement(
-            transformation(extent={{0,40},{20,60}})));
-     AixLib.Systems.ModularAHU.Controller.CtrRegBasic ctrRh(
-        final useExternalTset=true,
-        final useExternalTMea=true,
-        Td=0) annotation (dialog(enable=True), Placement(transformation(extent={{0,0},
-                {20,20}})));
-      Modelica.Blocks.Sources.Constant constTflowSet(final k=TFlowSet) if not useExternalTset
-        annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-      Modelica.Blocks.Interfaces.RealInput Tset if useExternalTset
-        "Connector of second Real input signal" annotation (Placement(
-            transformation(extent={{-140,-20},{-100,20}}), iconTransformation(
-              extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Sources.Constant TFrostProtection(final k=273.15 + 5) if
                                                                           not useExternalTset
-        annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
+        annotation (Placement(transformation(extent={{-92,70},{-72,90}})));
       Controls.Continuous.LimPID PID_VflowSup(
         final yMax=dpMax,
         final yMin=0,
@@ -6058,7 +6116,7 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
         y_start=y_start,
         final reverseAction=false,
         final reset=AixLib.Types.Reset.Disabled)
-        annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
+        annotation (Placement(transformation(extent={{-50,-130},{-30,-110}})));
       Controls.Continuous.LimPID PID_VflowRet(
         final yMax=dpMax,
         final yMin=0,
@@ -6070,36 +6128,36 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
         y_start=y_start,
         final reverseAction=false,
         final reset=AixLib.Types.Reset.Disabled) if useTwoFanCont
-        annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
+        annotation (Placement(transformation(extent={{-50,-170},{-30,-150}})));
       Modelica.Blocks.Sources.Constant ConstVflow(final k=VFlowSet)
-        annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
+        annotation (Placement(transformation(extent={{-92,-170},{-72,-150}})));
 
       Modelica.Blocks.Sources.Constant ConstWRG(final k=0)
-        annotation (Placement(transformation(extent={{40,-32},{52,-20}})));
+        annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
       Modelica.Blocks.Sources.Constant ConstFlap(final k=1)
-        annotation (Placement(transformation(extent={{20,-20},{32,-8}})));
+        annotation (Placement(transformation(extent={{40,-80},{60,-60}})));
       Modelica.Blocks.Sources.Constant ConstFlap1(final k=0) annotation (Placement(
             transformation(
-            extent={{-6,-6},{6,6}},
+            extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={66,-36})));
+            origin={50,-132})));
 
       Modelica.Blocks.Interfaces.BooleanInput CentralAHU_Heating annotation (
           Placement(
           visible=true,
           transformation(
-            origin={100,80},
+            origin={104,80},
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
-            origin={100,80},
+            origin={104,80},
             extent={{-12,-12},{12,12}},
             rotation=180)));
       Modelica.Blocks.Interfaces.BooleanInput CentralAHU_Heating_Preheating
         annotation (Placement(
           visible=true,
           transformation(
-            origin={94,30},
+            origin={106,40},
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
@@ -6110,7 +6168,7 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
           Placement(
           visible=true,
           transformation(
-            origin={106,-62},
+            origin={106,-40},
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
@@ -6121,135 +6179,268 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
           Placement(
           visible=true,
           transformation(
-            origin={108,-84},
+            origin={104,-100},
             extent={{-12,-12},{12,12}},
             rotation=180),
           iconTransformation(
             origin={100,-80},
             extent={{-12,-12},{12,12}},
             rotation=180)));
+      Controls.Continuous.LimPID PID_Preheating(
+        final yMax=yMax_preheating,
+        final yMin=yMin_preheating,
+        final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+        final k=k_preheating,
+        final Ti=Ti_preheating,
+        final Td=Td_preheating,
+        wp=wp_preheating,
+        wd=wd_preheating,
+        Ni=Ni_preheating,
+        Nd=Nd_preheating,
+        final initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,
+        final xi_start=xi_start_preheating,
+        final xd_start=xd_start_preheating,
+        final y_start=y_start_preheating,
+        final reverseAction=reverseAction_preheating,
+        final reset=AixLib.Types.Reset.Disabled)
+        annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
+      Modelica.Blocks.Sources.Constant constRpmPump_Preheating(final k=
+            rpm_pump_preheating)
+        annotation (Placement(transformation(extent={{-20,70},{0,90}})));
+      Modelica.Blocks.Logical.Or or1 annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={58,80})));
+      Modelica.Blocks.Logical.Switch switch1
+        annotation (Placement(transformation(extent={{-20,40},{0,60}})));
+      Modelica.Blocks.Sources.Constant Const(final k=0)
+        annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
+      Modelica.Blocks.Logical.Or or2 annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={50,30})));
+      Modelica.Blocks.Logical.Or or3 annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={50,-160})));
+      Modelica.Blocks.Sources.Constant constTflowSet1(final k=TFlowSet) if
+                                                                          not useExternalTset
+        annotation (Placement(transformation(extent={{-94,-20},{-74,0}})));
+      Controls.Continuous.LimPID PID_Heating(
+        final yMax=yMax_heating,
+        final yMin=yMin_heating,
+        final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+        final k=k_heating,
+        final Ti=Ti_heating,
+        final Td=Td_heating,
+        wp=wp_heating,
+        wd=wd_heating,
+        Ni=Ni_heating,
+        Nd=Nd_heating,
+        final initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,
+        final xi_start=xi_start_heating,
+        final xd_start=xd_start_heating,
+        final y_start=y_start_heating,
+        final reverseAction=reverseAction_heating,
+        final reset=AixLib.Types.Reset.Disabled)
+        annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
+      Modelica.Blocks.Logical.Switch switch2
+        annotation (Placement(transformation(extent={{-20,0},{0,20}})));
+      Modelica.Blocks.Logical.Switch switch3
+        annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
+      Modelica.Blocks.Sources.Constant constRpmPump_Preheating1(final k=
+            rpm_pump_heating)
+        annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
+      Modelica.Blocks.Sources.Constant constRpmPump_Preheating2(final k=
+            rpm_pump_cooling)
+        annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
+      Controls.Continuous.LimPID PID_Cooling(
+        final yMax=yMax_cooling,
+        final yMin=yMin_cooling,
+        final controllerType=Modelica.Blocks.Types.SimpleController.PID,
+        final k=k_cooling,
+        final Ti=Ti_cooling,
+        final Td=Td_cooling,
+        wp=wp_cooling,
+        wd=wd_cooling,
+        Ni=Ni_cooling,
+        Nd=Nd_cooling,
+        final initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState,
+        final xi_start=xi_start_cooling,
+        final xd_start=xd_start_cooling,
+        final y_start=y_start_cooling,
+        final reverseAction=reverseAction_cooling,
+        final reset=AixLib.Types.Reset.Disabled)
+        annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
     equation
-      connect(ctrPh.registerBus, genericAHUBus.preheaterBus) annotation (Line(
-          points={{20.2,90},{54,90},{54,88},{100.05,88},{100.05,0.05}},
-          color={255,204,51},
-          thickness=0.5), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}},
-          horizontalAlignment=TextAlignment.Left));
-      connect(ctrCo.registerBus, genericAHUBus.coolerBus) annotation (Line(
-          points={{20.2,50},{100.05,50},{100.05,0.05}},
-          color={255,204,51},
-          thickness=0.5), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}},
-          horizontalAlignment=TextAlignment.Left));
-      connect(ctrRh.registerBus, genericAHUBus.heaterBus) annotation (Line(
-          points={{20.2,10},{100.05,10},{100.05,0.05}},
-          color={255,204,51},
-          thickness=0.5), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}},
-          horizontalAlignment=TextAlignment.Left));
-      connect(constTflowSet.y, ctrCo.Tset) annotation (Line(
-          points={{-79,50},{-2,50}},
-          color={0,0,127},
-          pattern=LinePattern.Dash));
-      connect(constTflowSet.y, ctrRh.Tset) annotation (Line(
-          points={{-79,50},{-28,50},{-28,10},{-2,10}},
-          color={0,0,127},
-          pattern=LinePattern.Dash));
-      connect(TFrostProtection.y, ctrPh.Tset)
-        annotation (Line(points={{-39,90},{-2,90}}, color={0,0,127}));
-      connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-59,-70},{-30,
-              -70},{-30,-50},{-2,-50}}, color={0,0,127}));
+      connect(ConstVflow.y, PID_VflowSup.u_s) annotation (Line(points={{-71,-160},{-60,
+              -160},{-60,-120},{-52,-120}},
+                                        color={0,0,127}));
       connect(PID_VflowSup.u_m, genericAHUBus.heaterBus.VFlowAirMea) annotation (
-          Line(points={{10,-62},{10,-98},{100.05,-98},{100.05,0.05}}, color={0,0,
+          Line(points={{-40,-132},{-40,-140},{-60,-140},{-60,-180},{100,-180},{100,-70},
+              {100.05,-70},{100.05,0.05}},                            color={0,0,
               127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
-      connect(Tset, ctrCo.Tset) annotation (Line(
-          points={{-120,0},{-28,0},{-28,50},{-2,50}},
-          color={0,0,127},
-          pattern=LinePattern.Dash));
-      connect(Tset, ctrRh.Tset) annotation (Line(
-          points={{-120,0},{-28,0},{-28,10},{-2,10}},
-          color={0,0,127},
-          pattern=LinePattern.Dash));
-      connect(ConstWRG.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{52.6,
-              -26},{100.05,-26},{100.05,0.05}}, color={0,0,127}), Text(
+      connect(ConstWRG.y, genericAHUBus.bypassHrsSet) annotation (Line(points={{61,-100},
+              {72,-100},{72,0},{100.05,0},{100.05,0.05}},
+                                                color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
-      connect(ConstFlap.y, genericAHUBus.flapRetSet) annotation (Line(points={{32.6,
-              -14},{100.05,-14},{100.05,0.05}}, color={0,0,127}), Text(
+      connect(ConstFlap.y, genericAHUBus.flapRetSet) annotation (Line(points={{61,-70},
+              {72,-70},{72,0},{100.05,0},{100.05,0.05}},
+                                                color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
-      connect(ConstFlap.y, genericAHUBus.flapSupSet) annotation (Line(points={{32.6,
-              -14},{100.05,-14},{100.05,0.05}}, color={0,0,127}), Text(
+      connect(ConstFlap.y, genericAHUBus.flapSupSet) annotation (Line(points={{61,-70},
+              {72,-70},{72,0},{100.05,0},{100.05,0.05}},
+                                                color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
-      connect(ConstFlap1.y, genericAHUBus.steamHumSet) annotation (Line(points={{72.6,
-              -36},{100,-36},{100,-2},{100.05,-2},{100.05,0.05}}, color={0,0,127}),
+      connect(ConstFlap1.y, genericAHUBus.steamHumSet) annotation (Line(points={{61,-132},
+              {72,-132},{72,0},{100.05,0},{100.05,0.05}},         color={0,0,127}),
           Text(
           string="%second",
           index=1,
           extent={{-6,3},{-6,3}},
           horizontalAlignment=TextAlignment.Right));
-      connect(ConstFlap1.y, genericAHUBus.adiabHumSet) annotation (Line(points={{72.6,
-              -36},{100,-36},{100,0},{100.05,0},{100.05,0.05}}, color={0,0,127}),
+      connect(ConstFlap1.y, genericAHUBus.adiabHumSet) annotation (Line(points={{61,-132},
+              {72,-132},{72,0},{100.05,0},{100.05,0.05}},       color={0,0,127}),
           Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
-      connect(ConstVflow.y, PID_VflowRet.u_s) annotation (Line(points={{-59,-70},{-42,
-              -70},{-42,-90},{-22,-90}}, color={0,0,127}));
-      connect(PID_VflowSup.y, genericAHUBus.dpFanSupSet) annotation (Line(points={{
-              21,-50},{100,-50},{100,-34},{100.05,-34},{100.05,0.05}}, color={0,0,
+      connect(ConstVflow.y, PID_VflowRet.u_s) annotation (Line(points={{-71,-160},{-52,
+              -160}},                    color={0,0,127}));
+      connect(PID_VflowSup.y, genericAHUBus.dpFanSupSet) annotation (Line(points={{-29,
+              -120},{20,-120},{20,0},{100.05,0},{100.05,0.05}},        color={0,0,
               127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
       connect(PID_VflowRet.u_m, genericAHUBus.V_flow_RetAirMea) annotation (Line(
-            points={{-10,-102},{-10,-112},{100.05,-112},{100.05,0.05}}, color={0,0,
+            points={{-40,-172},{-40,-180},{100,-180},{100,-50},{100.05,-50},{100.05,
+              0.05}},                                                   color={0,0,
               127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
-      connect(PID_VflowRet.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{
-              1,-90},{100.05,-90},{100.05,0.05}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}},
-          horizontalAlignment=TextAlignment.Left));
-      connect(ctrRh.TMea, genericAHUBus.TSupAirMea) annotation (Line(points={{10,-2},
-              {10,-6},{100.05,-6},{100.05,0.05}},         color={0,0,127}), Text(
+      connect(PID_VflowRet.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{-29,
+              -160},{20,-160},{20,0},{100.05,0},{100.05,0.05}},
+                                                  color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}},
           horizontalAlignment=TextAlignment.Left));
       if not useTwoFanCont then
-        connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points=
-                {{21,-50},{100.05,-50},{100.05,0.05}}, color={0,0,127}), Text(
+        connect(PID_VflowSup.y, genericAHUBus.dpFanRetSet) annotation (Line(points={{-29,
+                -120},{20,-120},{20,0},{100.05,0},{100.05,0.05}},
+                                                       color={0,0,127}), Text(
             string="%second",
             index=1,
             extent={{6,3},{6,3}},
             horizontalAlignment=TextAlignment.Left));
       end if;
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+      connect(TFrostProtection.y, PID_Preheating.u_s)
+        annotation (Line(points={{-71,80},{-62,80}}, color={0,0,127}));
+      connect(PID_Preheating.y, switch1.u1) annotation (Line(points={{-39,80},{-32,80},
+              {-32,58},{-22,58}}, color={0,0,127}));
+      connect(Const.y, switch1.u3) annotation (Line(points={{-71,30},{-32,30},{-32,40},
+              {-22,40},{-22,42}}, color={0,0,127}));
+      connect(CentralAHU_Heating_Preheating, switch1.u2) annotation (Line(points={{106,
+              40},{80,40},{80,100},{-100,100},{-100,50},{-22,50}}, color={255,0,255}));
+      connect(CentralAHU_Heating_Preheating, genericAHUBus.preheaterBus.hydraulicBus.pumpBus.onSet)
+        annotation (Line(points={{106,40},{80,40},{80,0.05},{100.05,0.05}}, color={255,
+              0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}},
+          horizontalAlignment=TextAlignment.Left));
+      connect(CentralAHU_Heating_Preheating, or1.u1) annotation (Line(points={{106,40},
+              {80,40},{80,80},{70,80}}, color={255,0,255}));
+      connect(CentralAHU_Heating, or1.u2) annotation (Line(points={{104,80},{80,80},
+              {80,88},{70,88}}, color={255,0,255}));
+      connect(CentralAHU_Combi, or3.u1) annotation (Line(points={{104,-100},{80,-100},
+              {80,-160},{62,-160}}, color={255,0,255}));
+      connect(CentralAHU_Cooling, or3.u2) annotation (Line(points={{106,-40},{
+              80,-40},{80,-152},{62,-152}},
+                                    color={255,0,255}));
+      connect(constRpmPump_Preheating.y, genericAHUBus.preheaterBus.hydraulicBus.pumpBus.rpmSet)
+        annotation (Line(points={{1,80},{20,80},{20,0},{100.05,0},{100.05,0.05}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}},
+          horizontalAlignment=TextAlignment.Left));
+      connect(CentralAHU_Combi, or2.u1) annotation (Line(points={{104,-100},{80,-100},
+              {80,30},{62,30}}, color={255,0,255}));
+      connect(or1.y, or2.u2) annotation (Line(points={{47,80},{40,80},{40,60},{80,60},
+              {80,38},{62,38}}, color={255,0,255}));
+      connect(genericAHUBus.preheaterBus.TAirOutMea, PID_Preheating.u_m)
+        annotation (Line(
+          points={{100.05,0.05},{100.05,100},{-100,100},{-100,60},{-50,60},{-50,68}},
+          color={255,204,51},
+          thickness=0.5));
+
+      connect(switch1.y, genericAHUBus.preheaterBus.hydraulicBus.valveSet)
+        annotation (Line(points={{1,50},{20,50},{20,0},{100.05,0},{100.05,0.05}},
+            color={0,0,127}));
+      connect(PID_Heating.y, switch2.u1) annotation (Line(points={{-39,-10},{-32,-10},
+              {-32,18},{-22,18}}, color={0,0,127}));
+      connect(Const.y, switch2.u3) annotation (Line(points={{-71,30},{-32,30},{-32,0},
+              {-22,0},{-22,2}}, color={0,0,127}));
+      connect(or2.y, switch2.u2) annotation (Line(points={{39,30},{20,30},{20,100},{
+              -100,100},{-100,10},{-22,10}}, color={255,0,255}));
+      connect(constTflowSet1.y, PID_Heating.u_s)
+        annotation (Line(points={{-73,-10},{-62,-10}}, color={0,0,127}));
+      connect(genericAHUBus.heaterBus.TAirOutMea, PID_Heating.u_m) annotation (Line(
+          points={{100.05,0.05},{102,0.05},{102,2},{100,2},{100,100},{-100,100},{-100,
+              -32},{-50,-32},{-50,-22}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(switch2.y, genericAHUBus.heaterBus.hydraulicBus.valveSet) annotation (
+         Line(points={{1,10},{20,10},{20,0.05},{100.05,0.05}}, color={0,0,127}));
+      connect(or2.y, genericAHUBus.heaterBus.hydraulicBus.pumpBus.onSet)
+        annotation (Line(points={{39,30},{20,30},{20,0},{100.05,0},{100.05,0.05}},
+            color={255,0,255}));
+      connect(or3.y, switch3.u2) annotation (Line(points={{39,-160},{28,-160},{28,-180},
+              {-100,-180},{-100,-72},{-32,-72},{-32,-50},{-22,-50}}, color={255,0,255}));
+      connect(Const.y, switch3.u3) annotation (Line(points={{-71,30},{-32,30},{-32,-58},
+              {-22,-58}}, color={0,0,127}));
+      connect(PID_Cooling.y, switch3.u1) annotation (Line(points={{-39,-50},{-32,-50},
+              {-32,-42},{-22,-42}}, color={0,0,127}));
+      connect(constTflowSet1.y, PID_Cooling.u_s) annotation (Line(points={{-73,-10},
+              {-68,-10},{-68,-50},{-62,-50}}, color={0,0,127}));
+      connect(constRpmPump_Preheating1.y, genericAHUBus.heaterBus.hydraulicBus.pumpBus.rpmSet)
+        annotation (Line(points={{1,-20},{20,-20},{20,0},{62,0},{62,0.05},{100.05,0.05}},
+            color={0,0,127}));
+      connect(switch3.y, genericAHUBus.coolerBus.hydraulicBus.valveSet) annotation (
+         Line(points={{1,-50},{20,-50},{20,0.05},{100.05,0.05}}, color={0,0,127}));
+      connect(constRpmPump_Preheating2.y, genericAHUBus.coolerBus.hydraulicBus.pumpBus.rpmSet)
+        annotation (Line(points={{1,-80},{20,-80},{20,0},{100.05,0},{100.05,0.05}},
+            color={0,0,127}));
+      connect(genericAHUBus.TSupAirMea, PID_Cooling.u_m) annotation (Line(
+          points={{100.05,0.05},{100.05,0},{100,0},{100,-180},{-100,-180},{-100,-72},
+              {-50,-72},{-50,-62}},
+          color={255,204,51},
+          thickness=0.5));
+      connect(CentralAHU_Cooling, genericAHUBus.coolerBus.hydraulicBus.pumpBus.onSet)
+        annotation (Line(points={{106,-40},{80,-40},{80,0},{100.05,0},{100.05,
+              0.05}}, color={255,0,255}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-180},
+                {100,100}}),                                        graphics={
             Text(
               extent={{-90,20},{56,-20}},
               lineColor={95,95,95},
@@ -6258,20 +6449,20 @@ Exchanger")}, coordinateSystem(initialScale = 0.1)));
               fillPattern=FillPattern.Solid,
               textString="HCMI"),
             Rectangle(
-              extent={{-100,100},{100,-100}},
+              extent={{-100,100},{100,-180}},
               lineColor={95,95,95},
               lineThickness=0.5,
               fillColor={215,215,215},
               fillPattern=FillPattern.Solid),
             Text(
-              extent={{-98,40},{96,-34}},
+              extent={{-92,0},{102,-74}},
               lineColor={95,95,95},
               lineThickness=0.5,
               fillColor={215,215,215},
               fillPattern=FillPattern.Solid,
               textString="Central
 AHU")}),                               Diagram(coordinateSystem(preserveAspectRatio=
-               false)),
+               false, extent={{-100,-180},{100,100}})),
                   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end Controller_CentralAHU;
