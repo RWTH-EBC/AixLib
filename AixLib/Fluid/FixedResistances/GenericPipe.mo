@@ -191,9 +191,9 @@ equation
         Line(points={{40,80},{48,70}}, color={238,46,47})}),     Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This is an easy to use pipe model with predefined parameter reocrds for the diameter, pipe material and insulaton thickness. The model includes different pipe models that can be selected for different use cases:</p>
-<p>&quot;SimplePipe&quot;: This pipe can be used for fast calculation (only for small number of elements nNodes) and if the thermal wave propagation can be neglected. Further, this pipe supports a phyiscal heat transfer, thus it can be used for prescribed heat flows or dynamic heat losses to the environment.</p>
-<p>&quot;PlugFlowPipe&quot;: This pipe can be used for large pipes where the delay of the thermal wave propagation is relevant. However, this pipe can lead to unphysical heat transfer (e.g. peaks that increase the temperature above or below the allowed range) for small volume flow rates. </p>
+<p>This is an easy-to-use pipe model with predefined parameter records for the diameter, pipe material and insulaton thickness. The model includes different pipe models that can be selected for different use cases:</p>
+<p><a href=\"modelica://AixLib/Fluid/FixedResistances/SimplePipe.mo\">SimplePipe</a>: This pipe can be used for fast calculation (only for small number of elements nNodes) and if the thermal wave propagation can be neglected. Further, this pipe supports a phyiscal heat transfer, thus it can be used for prescribed heat flows or dynamic heat losses to the environment.</p>
+<p><a href=\"modelica://AixLib/Fluid/FixedResistances/PlugFlowPipe.mo\">PlugFlowPipe</a>: This pipe can be used for large pipes where the delay of the thermal wave propagation is relevant. However, this pipe can lead to unphysical heat transfer (e.g. peaks that increase the temperature above or below the allowed range) for small volume flow rates. </p>
 </html>", revisions="<html>
 <ul>
 <li>Mai 14, 2020, by Alexander K&uuml;mpel:<br/>First implementation</li>
