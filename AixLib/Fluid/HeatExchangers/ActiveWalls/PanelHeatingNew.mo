@@ -8,7 +8,7 @@ package PanelHeatingNew
         extends Modelica.Icons.ExamplesPackage;
         replaceable package Medium =
             Modelica.Media.Water.ConstantPropertyLiquidWater;
-        final parameter Modelica.SIunits.Area A = floor.wall_length * floor.wall_length "Floor Area for Panel Heating";
+        final parameter Modelica.SIunits.Area A = floor.wall_length * floor.wall_height "Floor Area for Panel Heating";
         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermUp annotation (
             Placement(transformation(extent={{-82,30},{-62,50}}), iconTransformation(
                 extent={{-82,30},{-62,50}})));
@@ -24,8 +24,8 @@ package PanelHeatingNew
           nPorts=1,
           T=313.15)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false, WallType=
               DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
@@ -156,8 +156,8 @@ package PanelHeatingNew
           T=313.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false, WallType=
               DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
@@ -287,8 +287,8 @@ package PanelHeatingNew
           T=313.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{38,-10},{18,10}})));
         ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false, WallType=
               DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
@@ -417,8 +417,8 @@ package PanelHeatingNew
           nPorts=1,
           T=313.15)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false, WallType=
               DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
@@ -549,12 +549,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow[dis](redeclare package
@@ -646,12 +646,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package
@@ -737,12 +737,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow_1(redeclare package
@@ -847,12 +847,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package
@@ -924,12 +924,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow_1(redeclare package
@@ -1110,8 +1110,8 @@ package PanelHeatingNew
           T=313.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{38,-10},{18,10}})));
         ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false, WallType=
               DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
@@ -1249,8 +1249,8 @@ package PanelHeatingNew
           T=313.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{38,-10},{18,10}})));
         ThermalZones.HighOrder.Components.Walls.Wall floor(outside=false, WallType=
               DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
@@ -1369,23 +1369,23 @@ package PanelHeatingNew
           annotation (Line(points={{-134,0},{-100,0}}, color={0,127,255}));
         connect(floorHeating3xVolumefloordis.port_b, boundary.ports[1])
           annotation (Line(points={{-80,0},{18,0}}, color={0,127,255}));
-        connect(floorHeating3xVolumefloordis.thermUp1, thermFloor1) annotation
-          (Line(points={{-95.8,9.8},{-95.8,41},{-70,41}}, color={191,0,0}));
-        connect(floorHeating3xVolumefloordis.thermUp2, thermFloor2) annotation
-          (Line(points={{-90.4,9.8},{-90.4,30},{-34,30},{-34,41}}, color={191,0,
+        connect(floorHeating3xVolumefloordis.thermUp1, thermFloor1) annotation (
+           Line(points={{-95.8,9.8},{-95.8,41},{-70,41}}, color={191,0,0}));
+        connect(floorHeating3xVolumefloordis.thermUp2, thermFloor2) annotation (
+           Line(points={{-90.4,9.8},{-90.4,30},{-34,30},{-34,41}}, color={191,0,
                 0}));
-        connect(floorHeating3xVolumefloordis.thermUp3, thermFloor3) annotation
-          (Line(points={{-86.2,9.8},{-86.2,22},{0,22},{0,41}}, color={191,0,0}));
+        connect(floorHeating3xVolumefloordis.thermUp3, thermFloor3) annotation (
+           Line(points={{-86.2,9.8},{-86.2,22},{0,22},{0,41}}, color={191,0,0}));
         connect(floor2.port_outside, thermFloor1) annotation (Line(points={{-68,
                 59.9},{-68,50},{-68,41},{-70,41}}, color={191,0,0}));
         connect(floor1.port_outside, thermFloor2)
           annotation (Line(points={{-34,59.9},{-34,41}}, color={191,0,0}));
         connect(convRadToCombPort1.portConvRadComb, floor1.thermStarComb_inside)
-          annotation (Line(points={{36.14,72.975},{-34,72.975},{-34,64}}, color
-              ={191,0,0}));
+          annotation (Line(points={{36.14,72.975},{-34,72.975},{-34,64}}, color=
+               {191,0,0}));
         connect(convRadToCombPort1.portConvRadComb, floor2.thermStarComb_inside)
-          annotation (Line(points={{36.14,72.975},{-68,72.975},{-68,64}}, color
-              ={191,0,0}));
+          annotation (Line(points={{36.14,72.975},{-68,72.975},{-68,64}}, color=
+               {191,0,0}));
         connect(floorHeating3xVolumefloordis.thermDown1, thermCeiling1)
           annotation (Line(points={{-94.6,-10},{-96,-10},{-96,-39},{-90,-39}},
               color={191,0,0}));
@@ -1451,12 +1451,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow_1(redeclare package
@@ -1556,8 +1556,8 @@ package PanelHeatingNew
           T=313.15,
           nPorts=1)
           annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
-        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium
-            = Medium, nPorts=1)
+        Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+              Medium, nPorts=1)
           annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
           prescribedTemperature1
@@ -1634,12 +1634,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         FloorHeatingBasic floorHeatingBasic(redeclare package Medium = Medium,
@@ -1738,12 +1738,12 @@ package PanelHeatingNew
         parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
           "Initial temperature, in degrees Celsius";
 
-        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium
-            = Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+              Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
           "Fluid connector a (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium
-            = Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+              Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
           "Fluid connector b (positive design flow direction is from port_a to port_b)"
           annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
         Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package
@@ -2603,5 +2603,133 @@ Added documentation.</li>
   package AddParameters
     "Package to collect models for adding the parameters that are used in DIN 1946"
     extends Modelica.Icons.Package;
+    model FloorHeatingBasic
+
+      extends Modelica.Fluid.Interfaces.PartialTwoPort;
+      extends Fluid.Interfaces.LumpedVolumeDeclarations;
+
+      parameter Integer dis(min=1) = 3 "Number of Discreatisation Layers";
+
+      parameter Modelica.SIunits.Diameter D = 0.1 "Diameter of floor heating tube";
+
+      final parameter Real VWaterPerMeter = Modelica.Constants.pi * (D/2)^2 * 1 "Water Volume in tube per meter in m^3/m";
+
+      parameter Modelica.SIunits.Area floorArea "Floor area in m^2";
+
+      parameter Modelica.SIunits.Length Spacing = 0.1 "Spacing of floor heating in m";
+
+      final parameter Modelica.SIunits.Length tubeLength = floorArea / Spacing "calculation of tube length";
+
+      final parameter Modelica.SIunits.Volume VWater = VWaterPerMeter * tubeLength / dis "Volume of Water in m^3";
+
+      parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
+        "Initial temperature, in degrees Celsius";
+
+      Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+            Medium, m_flow(min=if allowFlowReversal then -Constants.inf else 0))
+        "Fluid connector a (positive design flow direction is from port_a to port_b)"
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+            Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
+        "Fluid connector b (positive design flow direction is from port_a to port_b)"
+        annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium
+          = Medium)
+        annotation (Placement(transformation(extent={{-70,-36},{-50,-16}})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package
+          Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
+      MixingVolumes.MixingVolume vol(
+        redeclare package Medium = Medium,
+        energyDynamics=system.energyDynamics,
+        T_start=T0,
+        V=VWater,
+        nPorts=2,
+        m_flow_nominal=system.m_flow_nominal)
+        annotation (Placement(transformation(extent={{0,0},{22,22}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermUp
+        annotation (Placement(transformation(extent={{-10,88},{10,108}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermDown
+        annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+    equation
+
+        // HEAT CONNECTIONS
+        connect(vol.heatPort, thermUp) annotation (Line(
+            points={{0,11},{0,98}},
+            color={191,0,0}));
+        connect(vol.heatPort, thermDown) annotation (Line(
+            points={{0,11},{0,-100}},
+            color={191,0,0}));
+
+      // FLOW CONNECTIONS
+
+      //OUTER CONNECTIONS
+
+      connect(TFlow.port_b, vol.ports[1]) annotation (Line(
+          points={{-50,-26},{8.8,-26},{8.8,0}},
+          color={0,127,255}));
+      connect(vol.ports[2], TReturn.port_a) annotation (Line(
+          points={{13.2,0},{14,0},{14,-26},{50,-26}},
+          color={0,127,255}));
+
+      //INNER CONNECTIONS
+
+      connect(port_a, TFlow.port_a) annotation (Line(points={{-100,0},{-94,0},{-94,-26},
+              {-70,-26}}, color={0,127,255}));
+      connect(port_b, TReturn.port_b) annotation (Line(points={{100,0},{94,0},{94,-26},
+              {70,-26}}, color={0,127,255}));
+
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
+    end FloorHeatingBasic;
+
+    model PanelHeatingParameters
+       replaceable package Medium =
+          Modelica.Media.Interfaces.PartialMedium "Medium in the component";
+          extends Modelica.Fluid.Interfaces.PartialTwoPort;
+
+      Modelica.SIunits.TemperatureDifference sigma = TFlow.T - TReturn.T "Temperatur Spread of Panel Heating";
+      final parameter Modelica.SIunits.Area A = floor.wall_length * floor.wall_length "Floor Area for Panel Heating";
+
+      FloorHeatingBasic floorHeatingBasic(redeclare package Medium = Medium,
+          floorArea=A)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+      ThermalZones.HighOrder.Components.Walls.Wall floor(
+        outside=false,
+        WallType=DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+        wall_length=5,
+        wall_height=5)                                           annotation (
+          Placement(transformation(
+            extent={{-2,-12},{2,12}},
+            rotation=90,
+            origin={0,62})));
+      ThermalZones.HighOrder.Components.Walls.Wall floor1(
+        outside=false,
+        WallType=DataBase.Walls.Dummys.FloorForFloorHeating2Layers(),
+        wall_length=5,
+        wall_height=5)                                           annotation (
+          Placement(transformation(
+            extent={{2,-12},{-2,12}},
+            rotation=90,
+            origin={0,-56})));
+    equation
+      connect(port_a, TFlow.port_a)
+        annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
+      connect(TFlow.port_b, floorHeatingBasic.port_a)
+        annotation (Line(points={{-38,0},{-10,0}}, color={0,127,255}));
+      connect(floorHeatingBasic.port_b, TReturn.port_a)
+        annotation (Line(points={{10,0},{30,0}}, color={0,127,255}));
+      connect(TReturn.port_b, port_b)
+        annotation (Line(points={{50,0},{100,0}}, color={0,127,255}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
+    end PanelHeatingParameters;
   end AddParameters;
 end PanelHeatingNew;
