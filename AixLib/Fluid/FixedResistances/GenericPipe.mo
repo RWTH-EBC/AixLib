@@ -34,7 +34,7 @@ model GenericPipe
   // Advanced
   parameter Real fac=1
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal" annotation (Dialog(tab="Advanced"));
-  parameter Real ReC=4000
+  parameter Real ReC=2300
     "Reynolds number where transition to turbulent starts"
                                                           annotation (Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Height roughness=2.5e-5
@@ -91,8 +91,8 @@ model GenericPipe
     final energyDynamics=energyDynamics,
     final massDynamics=massDynamics) if pipeModel == "SimplePipe"
     annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=nNodes)
-    if pipeModel == "SimplePipe"
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=nNodes) if
+       pipeModel == "SimplePipe"
                 annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,14})));

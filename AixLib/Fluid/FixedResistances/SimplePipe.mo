@@ -21,7 +21,7 @@ model SimplePipe "Simple pipe model with n discrete elements"
     "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
 
   // Material properties for resistance
-  parameter Real ReC=4000
+  parameter Real ReC=2300
     "Reynolds number where transition to turbulent starts"
     annotation (Dialog(group="Material"));
 
