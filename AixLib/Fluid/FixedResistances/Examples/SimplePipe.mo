@@ -81,7 +81,7 @@ equation
 <li>Mai 07, 2020, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"),
-    experiment(
+    experiment(Tolerance=1e-6,
       StopTime=10800,
       Interval=60,
       __Dymola_Algorithm="Lsodar"),

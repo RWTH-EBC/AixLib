@@ -81,12 +81,12 @@ equation
 <li>Mai 07, 2020, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"),
-    experiment(
+    experiment(Tolerance=1e-6,
       StopTime=10800,
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
     experimentSetupOutput(events=false),
-    __Dymola_Commands(file(ensureSimulated=true) =
+    __Dymola_Commands(file(ensureSimulated=true)=
         "Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/GenericPipe.mos"
         "Simulate and plot"));
 end GenericPipe;
