@@ -2633,8 +2633,8 @@ Added documentation.</li>
             Medium, m_flow(max=if allowFlowReversal then +Constants.inf else 0))
         "Fluid connector b (positive design flow direction is from port_a to port_b)"
         annotation (Placement(transformation(extent={{110,-10},{90,10}}), iconTransformation(extent={{110,-10},{90,10}})));
-      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium
-          = Medium)
+      Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
+            Medium)
         annotation (Placement(transformation(extent={{-70,-36},{-50,-16}})));
       Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package
           Medium =
@@ -2687,10 +2687,15 @@ Added documentation.</li>
     model PanelHeatingParameters
        replaceable package Medium =
           Modelica.Media.Interfaces.PartialMedium "Medium in the component";
+       function logDT =
+          AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses.logDT;
           extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
       Modelica.SIunits.TemperatureDifference sigma = TFlow.T - TReturn.T "Temperatur Spread of Panel Heating";
       final parameter Modelica.SIunits.Area A = floor.wall_length * floor.wall_length "Floor Area for Panel Heating";
+      Modelica.SIunits.TemperatureDifference dT_H = logDT(Temp_in) "Temperature Difference between heating medium and Room";
+      replaceable Modelica.SIunits.Temperature TRoom = 20+273.15 "Room Temperature";
+        Modelica.SIunits.Temperature Temp_in[3] = {TFlow.T, TReturn.T, TRoom};
 
       FloorHeatingBasic floorHeatingBasic(redeclare package Medium = Medium,
           floorArea=A)
@@ -2719,6 +2724,10 @@ Added documentation.</li>
             extent={{2,-12},{-2,12}},
             rotation=90,
             origin={0,-56})));
+      Utilities.Interfaces.ConvRadComb convRadComb_floor
+        annotation (Placement(transformation(extent={{-10,84},{10,104}})));
+      Utilities.Interfaces.ConvRadComb convRadComb_ceiling
+        annotation (Placement(transformation(extent={{-10,-104},{10,-84}})));
     equation
       connect(port_a, TFlow.port_a)
         annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
@@ -2728,8 +2737,103 @@ Added documentation.</li>
         annotation (Line(points={{10,0},{30,0}}, color={0,127,255}));
       connect(TReturn.port_b, port_b)
         annotation (Line(points={{50,0},{100,0}}, color={0,127,255}));
+      connect(floor.port_outside, floorHeatingBasic.thermUp)
+        annotation (Line(points={{0,59.9},{0,9.8}}, color={191,0,0}));
+      connect(floorHeatingBasic.thermDown, floor1.port_outside)
+        annotation (Line(points={{0,-10},{0,-53.9}}, color={191,0,0}));
+      connect(floor.thermStarComb_inside, convRadComb_floor)
+        annotation (Line(points={{0,64},{0,94}}, color={191,0,0}));
+      connect(floor1.thermStarComb_inside, convRadComb_ceiling)
+        annotation (Line(points={{0,-58},{0,-94},{0,-94}}, color={191,0,0}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
     end PanelHeatingParameters;
+
+    model TestingParameters
+      extends Modelica.Icons.ExamplesPackage;
+      replaceable package Medium =
+          Modelica.Media.Water.ConstantPropertyLiquidWater;
+
+      inner Modelica.Fluid.System system(allowFlowReversal=false)
+        annotation (Placement(transformation(extent={{-96,80},{-76,100}})));
+      Sources.MassFlowSource_T m_flow_specification(
+        redeclare package Medium = Medium,
+        m_flow=0.03,
+        use_m_flow_in=true,
+        use_T_in=true,
+        T=313.15,
+        nPorts=1)
+        annotation (Placement(transformation(extent={{-154,-10},{-134,10}})));
+      Modelica.Fluid.Sources.FixedBoundary boundary(redeclare package Medium =
+            Medium, nPorts=1)
+        annotation (Placement(transformation(extent={{38,-10},{18,10}})));
+      Utilities.Interfaces.Adaptors.ConvRadToCombPort SetRoom_down
+        annotation (Placement(transformation(extent={{38,-66},{52,-78}})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+        prescribedTemperature1
+        annotation (Placement(transformation(extent={{86,36},{66,56}})));
+      Utilities.Interfaces.Adaptors.ConvRadToCombPort SetRoom_up
+        annotation (Placement(transformation(extent={{36,66},{50,78}})));
+      Modelica.Blocks.Sources.Step TRoom_set(
+        height=-6,
+        offset=299.15,
+        startTime=43200)
+        annotation (Placement(transformation(extent={{118,36},{98,56}})));
+      Modelica.Blocks.Sources.Step T_VL_set(
+        height=24,
+        offset=289.15,
+        startTime=43200)
+        annotation (Placement(transformation(extent={{-192,-18},{-172,2}})));
+      Modelica.Blocks.Sources.Constant m_flow_Set(k=0.005)
+        annotation (Placement(transformation(extent={{-192,14},{-172,34}})));
+      PanelHeatingParameters panelHeatingParameters(redeclare package Medium =
+            Medium, redeclare Modelica.SIunits.Temperature TRoom = TRoom_set.y)
+        annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
+    equation
+
+
+      connect(TRoom_set.y, prescribedTemperature1.T)
+        annotation (Line(points={{97,46},{88,46}}, color={0,0,127}));
+      connect(SetRoom_up.portConv, prescribedTemperature1.port) annotation (Line(
+            points={{50.07,68.175},{50.07,46},{66,46}}, color={191,0,0}));
+      connect(prescribedTemperature1.port, SetRoom_up.portRad) annotation (Line(
+            points={{66,46},{66,76},{50.28,76},{50.28,76.35}}, color={191,0,0}));
+      connect(prescribedTemperature1.port, SetRoom_down.portRad) annotation (Line(
+            points={{66,46},{66,-76.35},{52.28,-76.35}}, color={191,0,0}));
+      connect(prescribedTemperature1.port, SetRoom_down.portConv) annotation (Line(
+            points={{66,46},{52.07,46},{52.07,-68.175}}, color={191,0,0}));
+      connect(m_flow_specification.T_in, T_VL_set.y) annotation (Line(points={{-156,
+              4},{-160,4},{-160,-6},{-171,-6},{-171,-8}}, color={0,0,127}));
+      connect(m_flow_Set.y, m_flow_specification.m_flow_in) annotation (Line(points=
+             {{-171,24},{-168,24},{-168,16},{-156,16},{-156,8}}, color={0,0,127}));
+      connect(m_flow_specification.ports[1], panelHeatingParameters.port_a)
+        annotation (Line(points={{-134,0},{-82,0}}, color={0,127,255}));
+      connect(panelHeatingParameters.port_b, boundary.ports[1])
+        annotation (Line(points={{-62,0},{18,0}}, color={0,127,255}));
+      connect(panelHeatingParameters.convRadComb_ceiling, SetRoom_down.portConvRadComb)
+        annotation (Line(points={{-72,-9.4},{-72,-72.975},{38.14,-72.975}}, color={191,
+              0,0}));
+      connect(panelHeatingParameters.convRadComb_floor, SetRoom_up.portConvRadComb)
+        annotation (Line(points={{-72,9.4},{-72,72},{36.14,72},{36.14,72.975}},
+            color={191,0,0}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false), graphics={
+            Rectangle(extent={{-72,100},{72,92}},lineColor={28,108,200}),
+            Text(
+              extent={{-14,98},{14,90}},
+              lineColor={28,108,200},
+              textString="Information aus Raum: Heizlast = benötigte Wärmemenge aus Fußbodenheizung
+"),         Line(points={{0,-66},{0,-92}},   color={28,108,200}),
+            Line(points={{0,-92},{4,-88}},   color={28,108,200}),
+            Line(points={{-4,-88},{0,-92}},  color={28,108,200}),
+            Rectangle(extent={{-42,-92},{56,-100}},lineColor={28,108,200}),
+            Text(
+              extent={{-40,-94},{56,-98}},
+              lineColor={28,108,200},
+              textString="Wärmeabgabe an Raum unter der Fußbodenheizung"),
+            Line(points={{0,92},{0,64}}, color={28,108,200}),
+            Line(points={{0,64},{4,68}}, color={28,108,200}),
+            Line(points={{-4,68},{0,64}}, color={28,108,200})}));
+    end TestingParameters;
   end AddParameters;
 end PanelHeatingNew;
